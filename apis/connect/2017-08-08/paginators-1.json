@@ -78,6 +78,12 @@
       "output_token": "NextToken",
       "result_key": "EvaluationFormSummaryList"
     },
+    "ListFlowAssociations": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "FlowAssociationSummaryList"
+    },
     "ListHoursOfOperations": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -132,6 +138,12 @@
       "output_token": "NextToken",
       "result_key": "ListPhoneNumbersSummaryList"
     },
+    "ListPredefinedAttributes": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "PredefinedAttributeSummaryList"
+    },
     "ListPrompts": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -141,6 +153,10 @@
     "ListQueueQuickConnects": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
+      "non_aggregate_keys": [
+        "LastModifiedRegion",
+        "LastModifiedTime"
+      ],
       "output_token": "NextToken",
       "result_key": "QuickConnectSummaryList"
     },
@@ -156,9 +172,18 @@
       "output_token": "NextToken",
       "result_key": "QuickConnectSummaryList"
     },
+    "ListRealtimeContactAnalysisSegmentsV2": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken"
+    },
     "ListRoutingProfileQueues": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
+      "non_aggregate_keys": [
+        "LastModifiedRegion",
+        "LastModifiedTime"
+      ],
       "output_token": "NextToken",
       "result_key": "RoutingProfileQueueConfigSummaryList"
     },
@@ -183,12 +208,20 @@
     "ListSecurityProfileApplications": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
+      "non_aggregate_keys": [
+        "LastModifiedRegion",
+        "LastModifiedTime"
+      ],
       "output_token": "NextToken",
       "result_key": "Applications"
     },
     "ListSecurityProfilePermissions": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
+      "non_aggregate_keys": [
+        "LastModifiedRegion",
+        "LastModifiedTime"
+      ],
       "output_token": "NextToken",
       "result_key": "Permissions"
     },
@@ -228,6 +261,16 @@
       "output_token": "NextToken",
       "result_key": "UserHierarchyGroupSummaryList"
     },
+    "ListUserProficiencies": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "non_aggregate_keys": [
+        "LastModifiedTime",
+        "LastModifiedRegion"
+      ],
+      "output_token": "NextToken",
+      "result_key": "UserProficiencyList"
+    },
     "ListUsers": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -252,6 +295,15 @@
       "output_token": "NextToken",
       "result_key": "AvailableNumbersList"
     },
+    "SearchContacts": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "non_aggregate_keys": [
+        "TotalCount"
+      ],
+      "output_token": "NextToken",
+      "result_key": "Contacts"
+    },
     "SearchHoursOfOperations": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -260,6 +312,15 @@
       ],
       "output_token": "NextToken",
       "result_key": "HoursOfOperations"
+    },
+    "SearchPredefinedAttributes": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "non_aggregate_keys": [
+        "ApproximateTotalCount"
+      ],
+      "output_token": "NextToken",
+      "result_key": "PredefinedAttributes"
     },
     "SearchPrompts": {
       "input_token": "NextToken",

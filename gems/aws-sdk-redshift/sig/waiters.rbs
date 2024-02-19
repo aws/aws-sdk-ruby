@@ -1,0 +1,82 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Redshift
+    module Waiters
+
+      class ClusterAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?cluster_identifier: ::String,
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?tag_keys: Array[::String],
+                    ?tag_values: Array[::String]
+                  ) -> Client::_DescribeClustersResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeClustersResponseSuccess
+      end
+
+      class ClusterDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?cluster_identifier: ::String,
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?tag_keys: Array[::String],
+                    ?tag_values: Array[::String]
+                  ) -> Client::_DescribeClustersResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeClustersResponseSuccess
+      end
+
+      class ClusterRestored
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?cluster_identifier: ::String,
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?tag_keys: Array[::String],
+                    ?tag_values: Array[::String]
+                  ) -> Client::_DescribeClustersResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeClustersResponseSuccess
+      end
+
+      class SnapshotAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?cluster_identifier: ::String,
+                    ?snapshot_identifier: ::String,
+                    ?snapshot_arn: ::String,
+                    ?snapshot_type: ::String,
+                    ?start_time: ::Time,
+                    ?end_time: ::Time,
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?owner_account: ::String,
+                    ?tag_keys: Array[::String],
+                    ?tag_values: Array[::String],
+                    ?cluster_exists: bool,
+                    ?sorting_entities: Array[
+                      {
+                        attribute: ("SOURCE_TYPE" | "TOTAL_SIZE" | "CREATE_TIME"),
+                        sort_order: ("ASC" | "DESC")?
+                      },
+                    ]
+                  ) -> Client::_DescribeClusterSnapshotsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeClusterSnapshotsResponseSuccess
+      end
+    end
+  end
+end

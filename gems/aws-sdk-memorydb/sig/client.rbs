@@ -1,0 +1,652 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MemoryDB
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchUpdateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdateClusterResponse]
+        def processed_clusters: () -> ::Array[Types::Cluster]
+        def unprocessed_clusters: () -> ::Array[Types::UnprocessedCluster]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#batch_update_cluster-instance_method
+      def batch_update_cluster: (
+                                  cluster_names: Array[::String],
+                                  ?service_update: {
+                                    service_update_name_to_apply: ::String?
+                                  }
+                                ) -> _BatchUpdateClusterResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateClusterResponseSuccess
+
+      interface _CopySnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopySnapshotResponse]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#copy_snapshot-instance_method
+      def copy_snapshot: (
+                           source_snapshot_name: ::String,
+                           target_snapshot_name: ::String,
+                           ?target_bucket: ::String,
+                           ?kms_key_id: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String?,
+                               value: ::String?
+                             },
+                           ]
+                         ) -> _CopySnapshotResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopySnapshotResponseSuccess
+
+      interface _CreateACLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateACLResponse]
+        def acl: () -> Types::ACL
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#create_acl-instance_method
+      def create_acl: (
+                        acl_name: ::String,
+                        ?user_names: Array[::String],
+                        ?tags: Array[
+                          {
+                            key: ::String?,
+                            value: ::String?
+                          },
+                        ]
+                      ) -> _CreateACLResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateACLResponseSuccess
+
+      interface _CreateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#create_cluster-instance_method
+      def create_cluster: (
+                            cluster_name: ::String,
+                            node_type: ::String,
+                            ?parameter_group_name: ::String,
+                            ?description: ::String,
+                            ?num_shards: ::Integer,
+                            ?num_replicas_per_shard: ::Integer,
+                            ?subnet_group_name: ::String,
+                            ?security_group_ids: Array[::String],
+                            ?maintenance_window: ::String,
+                            ?port: ::Integer,
+                            ?sns_topic_arn: ::String,
+                            ?tls_enabled: bool,
+                            ?kms_key_id: ::String,
+                            ?snapshot_arns: Array[::String],
+                            ?snapshot_name: ::String,
+                            ?snapshot_retention_limit: ::Integer,
+                            ?tags: Array[
+                              {
+                                key: ::String?,
+                                value: ::String?
+                              },
+                            ],
+                            ?snapshot_window: ::String,
+                            acl_name: ::String,
+                            ?engine_version: ::String,
+                            ?auto_minor_version_upgrade: bool,
+                            ?data_tiering: bool
+                          ) -> _CreateClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
+
+      interface _CreateParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateParameterGroupResponse]
+        def parameter_group: () -> Types::ParameterGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#create_parameter_group-instance_method
+      def create_parameter_group: (
+                                    parameter_group_name: ::String,
+                                    family: ::String,
+                                    ?description: ::String,
+                                    ?tags: Array[
+                                      {
+                                        key: ::String?,
+                                        value: ::String?
+                                      },
+                                    ]
+                                  ) -> _CreateParameterGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateParameterGroupResponseSuccess
+
+      interface _CreateSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSnapshotResponse]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#create_snapshot-instance_method
+      def create_snapshot: (
+                             cluster_name: ::String,
+                             snapshot_name: ::String,
+                             ?kms_key_id: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String?,
+                                 value: ::String?
+                               },
+                             ]
+                           ) -> _CreateSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotResponseSuccess
+
+      interface _CreateSubnetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubnetGroupResponse]
+        def subnet_group: () -> Types::SubnetGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#create_subnet_group-instance_method
+      def create_subnet_group: (
+                                 subnet_group_name: ::String,
+                                 ?description: ::String,
+                                 subnet_ids: Array[::String],
+                                 ?tags: Array[
+                                   {
+                                     key: ::String?,
+                                     value: ::String?
+                                   },
+                                 ]
+                               ) -> _CreateSubnetGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubnetGroupResponseSuccess
+
+      interface _CreateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserResponse]
+        def user: () -> Types::User
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#create_user-instance_method
+      def create_user: (
+                         user_name: ::String,
+                         authentication_mode: {
+                           type: ("password" | "iam")?,
+                           passwords: Array[::String]?
+                         },
+                         access_string: ::String,
+                         ?tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> _CreateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
+
+      interface _DeleteACLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteACLResponse]
+        def acl: () -> Types::ACL
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#delete_acl-instance_method
+      def delete_acl: (
+                        acl_name: ::String
+                      ) -> _DeleteACLResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteACLResponseSuccess
+
+      interface _DeleteClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#delete_cluster-instance_method
+      def delete_cluster: (
+                            cluster_name: ::String,
+                            ?final_snapshot_name: ::String
+                          ) -> _DeleteClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterResponseSuccess
+
+      interface _DeleteParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteParameterGroupResponse]
+        def parameter_group: () -> Types::ParameterGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#delete_parameter_group-instance_method
+      def delete_parameter_group: (
+                                    parameter_group_name: ::String
+                                  ) -> _DeleteParameterGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteParameterGroupResponseSuccess
+
+      interface _DeleteSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSnapshotResponse]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#delete_snapshot-instance_method
+      def delete_snapshot: (
+                             snapshot_name: ::String
+                           ) -> _DeleteSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSnapshotResponseSuccess
+
+      interface _DeleteSubnetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSubnetGroupResponse]
+        def subnet_group: () -> Types::SubnetGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#delete_subnet_group-instance_method
+      def delete_subnet_group: (
+                                 subnet_group_name: ::String
+                               ) -> _DeleteSubnetGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSubnetGroupResponseSuccess
+
+      interface _DeleteUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUserResponse]
+        def user: () -> Types::User
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#delete_user-instance_method
+      def delete_user: (
+                         user_name: ::String
+                       ) -> _DeleteUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUserResponseSuccess
+
+      interface _DescribeACLsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeACLsResponse]
+        def acls: () -> ::Array[Types::ACL]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#describe_acls-instance_method
+      def describe_acls: (
+                           ?acl_name: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _DescribeACLsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeACLsResponseSuccess
+
+      interface _DescribeClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClustersResponse]
+        def next_token: () -> ::String
+        def clusters: () -> ::Array[Types::Cluster]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#describe_clusters-instance_method
+      def describe_clusters: (
+                               ?cluster_name: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               ?show_shard_details: bool
+                             ) -> _DescribeClustersResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClustersResponseSuccess
+
+      interface _DescribeEngineVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEngineVersionsResponse]
+        def next_token: () -> ::String
+        def engine_versions: () -> ::Array[Types::EngineVersionInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#describe_engine_versions-instance_method
+      def describe_engine_versions: (
+                                      ?engine_version: ::String,
+                                      ?parameter_group_family: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      ?default_only: bool
+                                    ) -> _DescribeEngineVersionsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEngineVersionsResponseSuccess
+
+      interface _DescribeEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventsResponse]
+        def next_token: () -> ::String
+        def events: () -> ::Array[Types::Event]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#describe_events-instance_method
+      def describe_events: (
+                             ?source_name: ::String,
+                             ?source_type: ("node" | "parameter-group" | "subnet-group" | "cluster" | "user" | "acl"),
+                             ?start_time: ::Time,
+                             ?end_time: ::Time,
+                             ?duration: ::Integer,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _DescribeEventsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventsResponseSuccess
+
+      interface _DescribeParameterGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeParameterGroupsResponse]
+        def next_token: () -> ::String
+        def parameter_groups: () -> ::Array[Types::ParameterGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#describe_parameter_groups-instance_method
+      def describe_parameter_groups: (
+                                       ?parameter_group_name: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _DescribeParameterGroupsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeParameterGroupsResponseSuccess
+
+      interface _DescribeParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeParametersResponse]
+        def next_token: () -> ::String
+        def parameters: () -> ::Array[Types::Parameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#describe_parameters-instance_method
+      def describe_parameters: (
+                                 parameter_group_name: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _DescribeParametersResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeParametersResponseSuccess
+
+      interface _DescribeReservedNodesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReservedNodesResponse]
+        def next_token: () -> ::String
+        def reserved_nodes: () -> ::Array[Types::ReservedNode]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#describe_reserved_nodes-instance_method
+      def describe_reserved_nodes: (
+                                     ?reservation_id: ::String,
+                                     ?reserved_nodes_offering_id: ::String,
+                                     ?node_type: ::String,
+                                     ?duration: ::String,
+                                     ?offering_type: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _DescribeReservedNodesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReservedNodesResponseSuccess
+
+      interface _DescribeReservedNodesOfferingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReservedNodesOfferingsResponse]
+        def next_token: () -> ::String
+        def reserved_nodes_offerings: () -> ::Array[Types::ReservedNodesOffering]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#describe_reserved_nodes_offerings-instance_method
+      def describe_reserved_nodes_offerings: (
+                                               ?reserved_nodes_offering_id: ::String,
+                                               ?node_type: ::String,
+                                               ?duration: ::String,
+                                               ?offering_type: ::String,
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _DescribeReservedNodesOfferingsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReservedNodesOfferingsResponseSuccess
+
+      interface _DescribeServiceUpdatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServiceUpdatesResponse]
+        def next_token: () -> ::String
+        def service_updates: () -> ::Array[Types::ServiceUpdate]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#describe_service_updates-instance_method
+      def describe_service_updates: (
+                                      ?service_update_name: ::String,
+                                      ?cluster_names: Array[::String],
+                                      ?status: Array[("available" | "in-progress" | "complete" | "scheduled")],
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _DescribeServiceUpdatesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServiceUpdatesResponseSuccess
+
+      interface _DescribeSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSnapshotsResponse]
+        def next_token: () -> ::String
+        def snapshots: () -> ::Array[Types::Snapshot]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#describe_snapshots-instance_method
+      def describe_snapshots: (
+                                ?cluster_name: ::String,
+                                ?snapshot_name: ::String,
+                                ?source: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer,
+                                ?show_detail: bool
+                              ) -> _DescribeSnapshotsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSnapshotsResponseSuccess
+
+      interface _DescribeSubnetGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSubnetGroupsResponse]
+        def next_token: () -> ::String
+        def subnet_groups: () -> ::Array[Types::SubnetGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#describe_subnet_groups-instance_method
+      def describe_subnet_groups: (
+                                    ?subnet_group_name: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _DescribeSubnetGroupsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSubnetGroupsResponseSuccess
+
+      interface _DescribeUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUsersResponse]
+        def users: () -> ::Array[Types::User]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#describe_users-instance_method
+      def describe_users: (
+                            ?user_name: ::String,
+                            ?filters: Array[
+                              {
+                                name: ::String,
+                                values: Array[::String]
+                              },
+                            ],
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _DescribeUsersResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUsersResponseSuccess
+
+      interface _FailoverShardResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FailoverShardResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#failover_shard-instance_method
+      def failover_shard: (
+                            cluster_name: ::String,
+                            shard_name: ::String
+                          ) -> _FailoverShardResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _FailoverShardResponseSuccess
+
+      interface _ListAllowedNodeTypeUpdatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAllowedNodeTypeUpdatesResponse]
+        def scale_up_node_types: () -> ::Array[::String]
+        def scale_down_node_types: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#list_allowed_node_type_updates-instance_method
+      def list_allowed_node_type_updates: (
+                                            cluster_name: ::String
+                                          ) -> _ListAllowedNodeTypeUpdatesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAllowedNodeTypeUpdatesResponseSuccess
+
+      interface _ListTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsResponse]
+        def tag_list: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#list_tags-instance_method
+      def list_tags: (
+                       resource_arn: ::String
+                     ) -> _ListTagsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsResponseSuccess
+
+      interface _PurchaseReservedNodesOfferingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PurchaseReservedNodesOfferingResponse]
+        def reserved_node: () -> Types::ReservedNode
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#purchase_reserved_nodes_offering-instance_method
+      def purchase_reserved_nodes_offering: (
+                                              reserved_nodes_offering_id: ::String,
+                                              ?reservation_id: ::String,
+                                              ?node_count: ::Integer,
+                                              ?tags: Array[
+                                                {
+                                                  key: ::String?,
+                                                  value: ::String?
+                                                },
+                                              ]
+                                            ) -> _PurchaseReservedNodesOfferingResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PurchaseReservedNodesOfferingResponseSuccess
+
+      interface _ResetParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetParameterGroupResponse]
+        def parameter_group: () -> Types::ParameterGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#reset_parameter_group-instance_method
+      def reset_parameter_group: (
+                                   parameter_group_name: ::String,
+                                   ?all_parameters: bool,
+                                   ?parameter_names: Array[::String]
+                                 ) -> _ResetParameterGroupResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetParameterGroupResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+        def tag_list: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+        def tag_list: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateACLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateACLResponse]
+        def acl: () -> Types::ACL
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#update_acl-instance_method
+      def update_acl: (
+                        acl_name: ::String,
+                        ?user_names_to_add: Array[::String],
+                        ?user_names_to_remove: Array[::String]
+                      ) -> _UpdateACLResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateACLResponseSuccess
+
+      interface _UpdateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#update_cluster-instance_method
+      def update_cluster: (
+                            cluster_name: ::String,
+                            ?description: ::String,
+                            ?security_group_ids: Array[::String],
+                            ?maintenance_window: ::String,
+                            ?sns_topic_arn: ::String,
+                            ?sns_topic_status: ::String,
+                            ?parameter_group_name: ::String,
+                            ?snapshot_window: ::String,
+                            ?snapshot_retention_limit: ::Integer,
+                            ?node_type: ::String,
+                            ?engine_version: ::String,
+                            ?replica_configuration: {
+                              replica_count: ::Integer?
+                            },
+                            ?shard_configuration: {
+                              shard_count: ::Integer?
+                            },
+                            ?acl_name: ::String
+                          ) -> _UpdateClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterResponseSuccess
+
+      interface _UpdateParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateParameterGroupResponse]
+        def parameter_group: () -> Types::ParameterGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#update_parameter_group-instance_method
+      def update_parameter_group: (
+                                    parameter_group_name: ::String,
+                                    parameter_name_values: Array[
+                                      {
+                                        parameter_name: ::String?,
+                                        parameter_value: ::String?
+                                      },
+                                    ]
+                                  ) -> _UpdateParameterGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateParameterGroupResponseSuccess
+
+      interface _UpdateSubnetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSubnetGroupResponse]
+        def subnet_group: () -> Types::SubnetGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#update_subnet_group-instance_method
+      def update_subnet_group: (
+                                 subnet_group_name: ::String,
+                                 ?description: ::String,
+                                 ?subnet_ids: Array[::String]
+                               ) -> _UpdateSubnetGroupResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubnetGroupResponseSuccess
+
+      interface _UpdateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserResponse]
+        def user: () -> Types::User
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MemoryDB/Client.html#update_user-instance_method
+      def update_user: (
+                         user_name: ::String,
+                         ?authentication_mode: {
+                           type: ("password" | "iam")?,
+                           passwords: Array[::String]?
+                         },
+                         ?access_string: ::String
+                       ) -> _UpdateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserResponseSuccess
+    end
+  end
+end
+

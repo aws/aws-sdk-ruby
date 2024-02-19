@@ -44,6 +44,7 @@ module AwsSdkCodeGenerator
         'box' => false,
         'fault' => false,
         'error' => false,
+        'exception_event' => false, # internal, exceptions cannot be events
         'deprecated' => false,
         'deprecatedMessage' => false,
         'type' => false,
@@ -210,8 +211,8 @@ module AwsSdkCodeGenerator
               end
             end
 
-            if operation.key?('requestCompression')
-              o.request_compression = operation['requestCompression'].each_with_object([]) do | (k,v) , arr|
+            if operation.key?('requestcompression')
+              o.request_compression = operation['requestcompression'].each_with_object([]) do |(k, v), arr|
                 arr << { key: k.inspect, value: v.inspect }
               end
             end

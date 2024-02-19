@@ -1,0 +1,509 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DLM
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DLM/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateLifecyclePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLifecyclePolicyResponse]
+        def policy_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DLM/Client.html#create_lifecycle_policy-instance_method
+      def create_lifecycle_policy: (
+                                     execution_role_arn: ::String,
+                                     description: ::String,
+                                     state: ("ENABLED" | "DISABLED"),
+                                     ?policy_details: {
+                                       policy_type: ("EBS_SNAPSHOT_MANAGEMENT" | "IMAGE_MANAGEMENT" | "EVENT_BASED_POLICY")?,
+                                       resource_types: Array[("VOLUME" | "INSTANCE")]?,
+                                       resource_locations: Array[("CLOUD" | "OUTPOST")]?,
+                                       target_tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]?,
+                                       schedules: Array[
+                                         {
+                                           name: ::String?,
+                                           copy_tags: bool?,
+                                           tags_to_add: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           variable_tags: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           create_rule: {
+                                             location: ("CLOUD" | "OUTPOST_LOCAL")?,
+                                             interval: ::Integer?,
+                                             interval_unit: ("HOURS")?,
+                                             times: Array[::String]?,
+                                             cron_expression: ::String?,
+                                             scripts: Array[
+                                               {
+                                                 stages: Array[("PRE" | "POST")]?,
+                                                 execution_handler_service: ("AWS_SYSTEMS_MANAGER")?,
+                                                 execution_handler: ::String,
+                                                 execute_operation_on_script_failure: bool?,
+                                                 execution_timeout: ::Integer?,
+                                                 maximum_retry_count: ::Integer?
+                                               },
+                                             ]?
+                                           }?,
+                                           retain_rule: {
+                                             count: ::Integer?,
+                                             interval: ::Integer?,
+                                             interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?
+                                           }?,
+                                           fast_restore_rule: {
+                                             count: ::Integer?,
+                                             interval: ::Integer?,
+                                             interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?,
+                                             availability_zones: Array[::String]
+                                           }?,
+                                           cross_region_copy_rules: Array[
+                                             {
+                                               target_region: ::String?,
+                                               target: ::String?,
+                                               encrypted: bool,
+                                               cmk_arn: ::String?,
+                                               copy_tags: bool?,
+                                               retain_rule: {
+                                                 interval: ::Integer?,
+                                                 interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?
+                                               }?,
+                                               deprecate_rule: {
+                                                 interval: ::Integer?,
+                                                 interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?
+                                               }?
+                                             },
+                                           ]?,
+                                           share_rules: Array[
+                                             {
+                                               target_accounts: Array[::String],
+                                               unshare_interval: ::Integer?,
+                                               unshare_interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?
+                                             },
+                                           ]?,
+                                           deprecate_rule: {
+                                             count: ::Integer?,
+                                             interval: ::Integer?,
+                                             interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?
+                                           }?,
+                                           archive_rule: {
+                                             retain_rule: {
+                                               retention_archive_tier: {
+                                                 count: ::Integer?,
+                                                 interval: ::Integer?,
+                                                 interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?
+                                               }
+                                             }
+                                           }?
+                                         },
+                                       ]?,
+                                       parameters: {
+                                         exclude_boot_volume: bool?,
+                                         no_reboot: bool?,
+                                         exclude_data_volume_tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String
+                                           },
+                                         ]?
+                                       }?,
+                                       event_source: {
+                                         type: ("MANAGED_CWE"),
+                                         parameters: {
+                                           event_type: ("shareSnapshot"),
+                                           snapshot_owner: Array[::String],
+                                           description_regex: ::String
+                                         }?
+                                       }?,
+                                       actions: Array[
+                                         {
+                                           name: ::String,
+                                           cross_region_copy: Array[
+                                             {
+                                               target: ::String,
+                                               encryption_configuration: {
+                                                 encrypted: bool,
+                                                 cmk_arn: ::String?
+                                               },
+                                               retain_rule: {
+                                                 interval: ::Integer?,
+                                                 interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?
+                                               }?
+                                             },
+                                           ]
+                                         },
+                                       ]?,
+                                       policy_language: ("SIMPLIFIED" | "STANDARD")?,
+                                       resource_type: ("VOLUME" | "INSTANCE")?,
+                                       create_interval: ::Integer?,
+                                       retain_interval: ::Integer?,
+                                       copy_tags: bool?,
+                                       cross_region_copy_targets: Array[
+                                         {
+                                           target_region: ::String?
+                                         },
+                                       ]?,
+                                       extend_deletion: bool?,
+                                       exclusions: {
+                                         exclude_boot_volumes: bool?,
+                                         exclude_volume_types: Array[::String]?,
+                                         exclude_tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String
+                                           },
+                                         ]?
+                                       }?
+                                     },
+                                     ?tags: Hash[::String, ::String],
+                                     ?default_policy: ("VOLUME" | "INSTANCE"),
+                                     ?create_interval: ::Integer,
+                                     ?retain_interval: ::Integer,
+                                     ?copy_tags: bool,
+                                     ?extend_deletion: bool,
+                                     ?cross_region_copy_targets: Array[
+                                       {
+                                         target_region: ::String?
+                                       },
+                                     ],
+                                     ?exclusions: {
+                                       exclude_boot_volumes: bool?,
+                                       exclude_volume_types: Array[::String]?,
+                                       exclude_tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]?
+                                     }
+                                   ) -> _CreateLifecyclePolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLifecyclePolicyResponseSuccess
+
+      interface _DeleteLifecyclePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLifecyclePolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DLM/Client.html#delete_lifecycle_policy-instance_method
+      def delete_lifecycle_policy: (
+                                     policy_id: ::String
+                                   ) -> _DeleteLifecyclePolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLifecyclePolicyResponseSuccess
+
+      interface _GetLifecyclePoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLifecyclePoliciesResponse]
+        def policies: () -> ::Array[Types::LifecyclePolicySummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DLM/Client.html#get_lifecycle_policies-instance_method
+      def get_lifecycle_policies: (
+                                    ?policy_ids: Array[::String],
+                                    ?state: ("ENABLED" | "DISABLED" | "ERROR"),
+                                    ?resource_types: Array[("VOLUME" | "INSTANCE")],
+                                    ?target_tags: Array[::String],
+                                    ?tags_to_add: Array[::String],
+                                    ?default_policy_type: ("VOLUME" | "INSTANCE" | "ALL")
+                                  ) -> _GetLifecyclePoliciesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLifecyclePoliciesResponseSuccess
+
+      interface _GetLifecyclePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLifecyclePolicyResponse]
+        def policy: () -> Types::LifecyclePolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DLM/Client.html#get_lifecycle_policy-instance_method
+      def get_lifecycle_policy: (
+                                  policy_id: ::String
+                                ) -> _GetLifecyclePolicyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLifecyclePolicyResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DLM/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DLM/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DLM/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateLifecyclePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLifecyclePolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DLM/Client.html#update_lifecycle_policy-instance_method
+      def update_lifecycle_policy: (
+                                     policy_id: ::String,
+                                     ?execution_role_arn: ::String,
+                                     ?state: ("ENABLED" | "DISABLED"),
+                                     ?description: ::String,
+                                     ?policy_details: {
+                                       policy_type: ("EBS_SNAPSHOT_MANAGEMENT" | "IMAGE_MANAGEMENT" | "EVENT_BASED_POLICY")?,
+                                       resource_types: Array[("VOLUME" | "INSTANCE")]?,
+                                       resource_locations: Array[("CLOUD" | "OUTPOST")]?,
+                                       target_tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]?,
+                                       schedules: Array[
+                                         {
+                                           name: ::String?,
+                                           copy_tags: bool?,
+                                           tags_to_add: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           variable_tags: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           create_rule: {
+                                             location: ("CLOUD" | "OUTPOST_LOCAL")?,
+                                             interval: ::Integer?,
+                                             interval_unit: ("HOURS")?,
+                                             times: Array[::String]?,
+                                             cron_expression: ::String?,
+                                             scripts: Array[
+                                               {
+                                                 stages: Array[("PRE" | "POST")]?,
+                                                 execution_handler_service: ("AWS_SYSTEMS_MANAGER")?,
+                                                 execution_handler: ::String,
+                                                 execute_operation_on_script_failure: bool?,
+                                                 execution_timeout: ::Integer?,
+                                                 maximum_retry_count: ::Integer?
+                                               },
+                                             ]?
+                                           }?,
+                                           retain_rule: {
+                                             count: ::Integer?,
+                                             interval: ::Integer?,
+                                             interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?
+                                           }?,
+                                           fast_restore_rule: {
+                                             count: ::Integer?,
+                                             interval: ::Integer?,
+                                             interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?,
+                                             availability_zones: Array[::String]
+                                           }?,
+                                           cross_region_copy_rules: Array[
+                                             {
+                                               target_region: ::String?,
+                                               target: ::String?,
+                                               encrypted: bool,
+                                               cmk_arn: ::String?,
+                                               copy_tags: bool?,
+                                               retain_rule: {
+                                                 interval: ::Integer?,
+                                                 interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?
+                                               }?,
+                                               deprecate_rule: {
+                                                 interval: ::Integer?,
+                                                 interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?
+                                               }?
+                                             },
+                                           ]?,
+                                           share_rules: Array[
+                                             {
+                                               target_accounts: Array[::String],
+                                               unshare_interval: ::Integer?,
+                                               unshare_interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?
+                                             },
+                                           ]?,
+                                           deprecate_rule: {
+                                             count: ::Integer?,
+                                             interval: ::Integer?,
+                                             interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?
+                                           }?,
+                                           archive_rule: {
+                                             retain_rule: {
+                                               retention_archive_tier: {
+                                                 count: ::Integer?,
+                                                 interval: ::Integer?,
+                                                 interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?
+                                               }
+                                             }
+                                           }?
+                                         },
+                                       ]?,
+                                       parameters: {
+                                         exclude_boot_volume: bool?,
+                                         no_reboot: bool?,
+                                         exclude_data_volume_tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String
+                                           },
+                                         ]?
+                                       }?,
+                                       event_source: {
+                                         type: ("MANAGED_CWE"),
+                                         parameters: {
+                                           event_type: ("shareSnapshot"),
+                                           snapshot_owner: Array[::String],
+                                           description_regex: ::String
+                                         }?
+                                       }?,
+                                       actions: Array[
+                                         {
+                                           name: ::String,
+                                           cross_region_copy: Array[
+                                             {
+                                               target: ::String,
+                                               encryption_configuration: {
+                                                 encrypted: bool,
+                                                 cmk_arn: ::String?
+                                               },
+                                               retain_rule: {
+                                                 interval: ::Integer?,
+                                                 interval_unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?
+                                               }?
+                                             },
+                                           ]
+                                         },
+                                       ]?,
+                                       policy_language: ("SIMPLIFIED" | "STANDARD")?,
+                                       resource_type: ("VOLUME" | "INSTANCE")?,
+                                       create_interval: ::Integer?,
+                                       retain_interval: ::Integer?,
+                                       copy_tags: bool?,
+                                       cross_region_copy_targets: Array[
+                                         {
+                                           target_region: ::String?
+                                         },
+                                       ]?,
+                                       extend_deletion: bool?,
+                                       exclusions: {
+                                         exclude_boot_volumes: bool?,
+                                         exclude_volume_types: Array[::String]?,
+                                         exclude_tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String
+                                           },
+                                         ]?
+                                       }?
+                                     },
+                                     ?create_interval: ::Integer,
+                                     ?retain_interval: ::Integer,
+                                     ?copy_tags: bool,
+                                     ?extend_deletion: bool,
+                                     ?cross_region_copy_targets: Array[
+                                       {
+                                         target_region: ::String?
+                                       },
+                                     ],
+                                     ?exclusions: {
+                                       exclude_boot_volumes: bool?,
+                                       exclude_volume_types: Array[::String]?,
+                                       exclude_tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]?
+                                     }
+                                   ) -> _UpdateLifecyclePolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLifecyclePolicyResponseSuccess
+    end
+  end
+end
+

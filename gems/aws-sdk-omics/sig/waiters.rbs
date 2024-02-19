@@ -1,0 +1,195 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Omics
+    module Waiters
+
+      class AnnotationImportJobCreated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    job_id: ::String
+                  ) -> Client::_GetAnnotationImportJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetAnnotationImportJobResponseSuccess
+      end
+
+      class AnnotationStoreCreated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String
+                  ) -> Client::_GetAnnotationStoreResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetAnnotationStoreResponseSuccess
+      end
+
+      class AnnotationStoreDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String
+                  ) -> Client::_GetAnnotationStoreResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetAnnotationStoreResponseSuccess
+      end
+
+      class AnnotationStoreVersionCreated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String,
+                    version_name: ::String
+                  ) -> Client::_GetAnnotationStoreVersionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetAnnotationStoreVersionResponseSuccess
+      end
+
+      class AnnotationStoreVersionDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String,
+                    version_name: ::String
+                  ) -> Client::_GetAnnotationStoreVersionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetAnnotationStoreVersionResponseSuccess
+      end
+
+      class ReadSetActivationJobCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    id: ::String,
+                    sequence_store_id: ::String
+                  ) -> Client::_GetReadSetActivationJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetReadSetActivationJobResponseSuccess
+      end
+
+      class ReadSetExportJobCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    sequence_store_id: ::String,
+                    id: ::String
+                  ) -> Client::_GetReadSetExportJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetReadSetExportJobResponseSuccess
+      end
+
+      class ReadSetImportJobCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    id: ::String,
+                    sequence_store_id: ::String
+                  ) -> Client::_GetReadSetImportJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetReadSetImportJobResponseSuccess
+      end
+
+      class ReferenceImportJobCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    id: ::String,
+                    reference_store_id: ::String
+                  ) -> Client::_GetReferenceImportJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetReferenceImportJobResponseSuccess
+      end
+
+      class RunCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    id: ::String,
+                    ?export: Array[("DEFINITION")]
+                  ) -> Client::_GetRunResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetRunResponseSuccess
+      end
+
+      class RunRunning
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    id: ::String,
+                    ?export: Array[("DEFINITION")]
+                  ) -> Client::_GetRunResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetRunResponseSuccess
+      end
+
+      class TaskCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    id: ::String,
+                    task_id: ::String
+                  ) -> Client::_GetRunTaskResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetRunTaskResponseSuccess
+      end
+
+      class TaskRunning
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    id: ::String,
+                    task_id: ::String
+                  ) -> Client::_GetRunTaskResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetRunTaskResponseSuccess
+      end
+
+      class VariantImportJobCreated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    job_id: ::String
+                  ) -> Client::_GetVariantImportJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetVariantImportJobResponseSuccess
+      end
+
+      class VariantStoreCreated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String
+                  ) -> Client::_GetVariantStoreResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetVariantStoreResponseSuccess
+      end
+
+      class VariantStoreDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String
+                  ) -> Client::_GetVariantStoreResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetVariantStoreResponseSuccess
+      end
+
+      class WorkflowActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    id: ::String,
+                    ?type: ("PRIVATE" | "READY2RUN"),
+                    ?export: Array[("DEFINITION")]
+                  ) -> Client::_GetWorkflowResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetWorkflowResponseSuccess
+      end
+    end
+  end
+end

@@ -1,0 +1,1535 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::WellArchitected
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AdditionalResources
+      attr_accessor type: ("HELPFUL_RESOURCE" | "IMPROVEMENT_PLAN")
+      attr_accessor content: ::Array[Types::ChoiceContent]
+      SENSITIVE: []
+    end
+
+    class Answer
+      attr_accessor question_id: ::String
+      attr_accessor pillar_id: ::String
+      attr_accessor question_title: ::String
+      attr_accessor question_description: ::String
+      attr_accessor improvement_plan_url: ::String
+      attr_accessor helpful_resource_url: ::String
+      attr_accessor helpful_resource_display_text: ::String
+      attr_accessor choices: ::Array[Types::Choice]
+      attr_accessor selected_choices: ::Array[::String]
+      attr_accessor choice_answers: ::Array[Types::ChoiceAnswer]
+      attr_accessor is_applicable: bool
+      attr_accessor risk: ("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE")
+      attr_accessor notes: ::String
+      attr_accessor reason: ("OUT_OF_SCOPE" | "BUSINESS_PRIORITIES" | "ARCHITECTURE_CONSTRAINTS" | "OTHER" | "NONE")
+      SENSITIVE: []
+    end
+
+    class AnswerSummary
+      attr_accessor question_id: ::String
+      attr_accessor pillar_id: ::String
+      attr_accessor question_title: ::String
+      attr_accessor choices: ::Array[Types::Choice]
+      attr_accessor selected_choices: ::Array[::String]
+      attr_accessor choice_answer_summaries: ::Array[Types::ChoiceAnswerSummary]
+      attr_accessor is_applicable: bool
+      attr_accessor risk: ("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE")
+      attr_accessor reason: ("OUT_OF_SCOPE" | "BUSINESS_PRIORITIES" | "ARCHITECTURE_CONSTRAINTS" | "OTHER" | "NONE")
+      attr_accessor question_type: ("PRIORITIZED" | "NON_PRIORITIZED")
+      SENSITIVE: []
+    end
+
+    class AssociateLensesInput
+      attr_accessor workload_id: ::String
+      attr_accessor lens_aliases: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociateProfilesInput
+      attr_accessor workload_id: ::String
+      attr_accessor profile_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BestPractice
+      attr_accessor choice_id: ::String
+      attr_accessor choice_title: ::String
+      SENSITIVE: []
+    end
+
+    class CheckDetail
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor provider: ("TRUSTED_ADVISOR")
+      attr_accessor lens_arn: ::String
+      attr_accessor pillar_id: ::String
+      attr_accessor question_id: ::String
+      attr_accessor choice_id: ::String
+      attr_accessor status: ("OKAY" | "WARNING" | "ERROR" | "NOT_AVAILABLE" | "FETCH_FAILED")
+      attr_accessor account_id: ::String
+      attr_accessor flagged_resources: ::Integer
+      attr_accessor reason: ("ASSUME_ROLE_ERROR" | "ACCESS_DENIED" | "UNKNOWN_ERROR" | "PREMIUM_SUPPORT_REQUIRED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CheckSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor provider: ("TRUSTED_ADVISOR")
+      attr_accessor description: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor lens_arn: ::String
+      attr_accessor pillar_id: ::String
+      attr_accessor question_id: ::String
+      attr_accessor choice_id: ::String
+      attr_accessor status: ("OKAY" | "WARNING" | "ERROR" | "NOT_AVAILABLE" | "FETCH_FAILED")
+      attr_accessor account_summary: ::Hash[("OKAY" | "WARNING" | "ERROR" | "NOT_AVAILABLE" | "FETCH_FAILED"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class Choice
+      attr_accessor choice_id: ::String
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor helpful_resource: Types::ChoiceContent
+      attr_accessor improvement_plan: Types::ChoiceContent
+      attr_accessor additional_resources: ::Array[Types::AdditionalResources]
+      SENSITIVE: []
+    end
+
+    class ChoiceAnswer
+      attr_accessor choice_id: ::String
+      attr_accessor status: ("SELECTED" | "NOT_APPLICABLE" | "UNSELECTED")
+      attr_accessor reason: ("OUT_OF_SCOPE" | "BUSINESS_PRIORITIES" | "ARCHITECTURE_CONSTRAINTS" | "OTHER" | "NONE")
+      attr_accessor notes: ::String
+      SENSITIVE: []
+    end
+
+    class ChoiceAnswerSummary
+      attr_accessor choice_id: ::String
+      attr_accessor status: ("SELECTED" | "NOT_APPLICABLE" | "UNSELECTED")
+      attr_accessor reason: ("OUT_OF_SCOPE" | "BUSINESS_PRIORITIES" | "ARCHITECTURE_CONSTRAINTS" | "OTHER" | "NONE")
+      SENSITIVE: []
+    end
+
+    class ChoiceContent
+      attr_accessor display_text: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class ChoiceImprovementPlan
+      attr_accessor choice_id: ::String
+      attr_accessor display_text: ::String
+      attr_accessor improvement_plan_url: ::String
+      SENSITIVE: []
+    end
+
+    class ChoiceUpdate
+      attr_accessor status: ("SELECTED" | "NOT_APPLICABLE" | "UNSELECTED")
+      attr_accessor reason: ("OUT_OF_SCOPE" | "BUSINESS_PRIORITIES" | "ARCHITECTURE_CONSTRAINTS" | "OTHER" | "NONE")
+      attr_accessor notes: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ConsolidatedReportMetric
+      attr_accessor metric_type: ("WORKLOAD")
+      attr_accessor risk_counts: ::Hash[("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE"), ::Integer]
+      attr_accessor workload_id: ::String
+      attr_accessor workload_name: ::String
+      attr_accessor workload_arn: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor lenses: ::Array[Types::LensMetric]
+      attr_accessor lenses_applied_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateLensShareInput
+      attr_accessor lens_alias: ::String
+      attr_accessor shared_with: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLensShareOutput
+      attr_accessor share_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLensVersionInput
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_version: ::String
+      attr_accessor is_major_version: bool
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLensVersionOutput
+      attr_accessor lens_arn: ::String
+      attr_accessor lens_version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMilestoneInput
+      attr_accessor workload_id: ::String
+      attr_accessor milestone_name: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMilestoneOutput
+      attr_accessor workload_id: ::String
+      attr_accessor milestone_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateProfileInput
+      attr_accessor profile_name: ::String
+      attr_accessor profile_description: ::String
+      attr_accessor profile_questions: ::Array[Types::ProfileQuestionUpdate]
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateProfileOutput
+      attr_accessor profile_arn: ::String
+      attr_accessor profile_version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProfileShareInput
+      attr_accessor profile_arn: ::String
+      attr_accessor shared_with: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProfileShareOutput
+      attr_accessor share_id: ::String
+      attr_accessor profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateReviewTemplateInput
+      attr_accessor template_name: ::String
+      attr_accessor description: ::String
+      attr_accessor lenses: ::Array[::String]
+      attr_accessor notes: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateReviewTemplateOutput
+      attr_accessor template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTemplateShareInput
+      attr_accessor template_arn: ::String
+      attr_accessor shared_with: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTemplateShareOutput
+      attr_accessor template_arn: ::String
+      attr_accessor share_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkloadInput
+      attr_accessor workload_name: ::String
+      attr_accessor description: ::String
+      attr_accessor environment: ("PRODUCTION" | "PREPRODUCTION")
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor aws_regions: ::Array[::String]
+      attr_accessor non_aws_regions: ::Array[::String]
+      attr_accessor pillar_priorities: ::Array[::String]
+      attr_accessor architectural_design: ::String
+      attr_accessor review_owner: ::String
+      attr_accessor industry_type: ::String
+      attr_accessor industry: ::String
+      attr_accessor lenses: ::Array[::String]
+      attr_accessor notes: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor discovery_config: Types::WorkloadDiscoveryConfig
+      attr_accessor applications: ::Array[::String]
+      attr_accessor profile_arns: ::Array[::String]
+      attr_accessor review_template_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateWorkloadOutput
+      attr_accessor workload_id: ::String
+      attr_accessor workload_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkloadShareInput
+      attr_accessor workload_id: ::String
+      attr_accessor shared_with: ::String
+      attr_accessor permission_type: ("READONLY" | "CONTRIBUTOR")
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkloadShareOutput
+      attr_accessor workload_id: ::String
+      attr_accessor share_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLensInput
+      attr_accessor lens_alias: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor lens_status: ("ALL" | "DRAFT" | "PUBLISHED")
+      SENSITIVE: []
+    end
+
+    class DeleteLensShareInput
+      attr_accessor share_id: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProfileInput
+      attr_accessor profile_arn: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProfileShareInput
+      attr_accessor share_id: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReviewTemplateInput
+      attr_accessor template_arn: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTemplateShareInput
+      attr_accessor share_id: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkloadInput
+      attr_accessor workload_id: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkloadShareInput
+      attr_accessor share_id: ::String
+      attr_accessor workload_id: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateLensesInput
+      attr_accessor workload_id: ::String
+      attr_accessor lens_aliases: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateProfilesInput
+      attr_accessor workload_id: ::String
+      attr_accessor profile_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ExportLensInput
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_version: ::String
+      SENSITIVE: []
+    end
+
+    class ExportLensOutput
+      attr_accessor lens_json: ::String
+      SENSITIVE: []
+    end
+
+    class GetAnswerInput
+      attr_accessor workload_id: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor question_id: ::String
+      attr_accessor milestone_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAnswerOutput
+      attr_accessor workload_id: ::String
+      attr_accessor milestone_number: ::Integer
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_arn: ::String
+      attr_accessor answer: Types::Answer
+      SENSITIVE: []
+    end
+
+    class GetConsolidatedReportInput
+      attr_accessor format: ("PDF" | "JSON")
+      attr_accessor include_shared_resources: bool
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetConsolidatedReportOutput
+      attr_accessor metrics: ::Array[Types::ConsolidatedReportMetric]
+      attr_accessor next_token: ::String
+      attr_accessor base_64_string: ::String
+      SENSITIVE: []
+    end
+
+    class GetLensInput
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetLensOutput
+      attr_accessor lens: Types::Lens
+      SENSITIVE: []
+    end
+
+    class GetLensReviewInput
+      attr_accessor workload_id: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor milestone_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetLensReviewOutput
+      attr_accessor workload_id: ::String
+      attr_accessor milestone_number: ::Integer
+      attr_accessor lens_review: Types::LensReview
+      SENSITIVE: []
+    end
+
+    class GetLensReviewReportInput
+      attr_accessor workload_id: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor milestone_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetLensReviewReportOutput
+      attr_accessor workload_id: ::String
+      attr_accessor milestone_number: ::Integer
+      attr_accessor lens_review_report: Types::LensReviewReport
+      SENSITIVE: []
+    end
+
+    class GetLensVersionDifferenceInput
+      attr_accessor lens_alias: ::String
+      attr_accessor base_lens_version: ::String
+      attr_accessor target_lens_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetLensVersionDifferenceOutput
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_arn: ::String
+      attr_accessor base_lens_version: ::String
+      attr_accessor target_lens_version: ::String
+      attr_accessor latest_lens_version: ::String
+      attr_accessor version_differences: Types::VersionDifferences
+      SENSITIVE: []
+    end
+
+    class GetMilestoneInput
+      attr_accessor workload_id: ::String
+      attr_accessor milestone_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetMilestoneOutput
+      attr_accessor workload_id: ::String
+      attr_accessor milestone: Types::Milestone
+      SENSITIVE: []
+    end
+
+    class GetProfileInput
+      attr_accessor profile_arn: ::String
+      attr_accessor profile_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetProfileOutput
+      attr_accessor profile: Types::Profile
+      SENSITIVE: []
+    end
+
+    class GetProfileTemplateInput < Aws::EmptyStructure
+    end
+
+    class GetProfileTemplateOutput
+      attr_accessor profile_template: Types::ProfileTemplate
+      SENSITIVE: []
+    end
+
+    class GetReviewTemplateAnswerInput
+      attr_accessor template_arn: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor question_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetReviewTemplateAnswerOutput
+      attr_accessor template_arn: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor answer: Types::ReviewTemplateAnswer
+      SENSITIVE: []
+    end
+
+    class GetReviewTemplateInput
+      attr_accessor template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetReviewTemplateLensReviewInput
+      attr_accessor template_arn: ::String
+      attr_accessor lens_alias: ::String
+      SENSITIVE: []
+    end
+
+    class GetReviewTemplateLensReviewOutput
+      attr_accessor template_arn: ::String
+      attr_accessor lens_review: Types::ReviewTemplateLensReview
+      SENSITIVE: []
+    end
+
+    class GetReviewTemplateOutput
+      attr_accessor review_template: Types::ReviewTemplate
+      SENSITIVE: []
+    end
+
+    class GetWorkloadInput
+      attr_accessor workload_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkloadOutput
+      attr_accessor workload: Types::Workload
+      SENSITIVE: []
+    end
+
+    class ImportLensInput
+      attr_accessor lens_alias: ::String
+      attr_accessor json_string: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ImportLensOutput
+      attr_accessor lens_arn: ::String
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class ImprovementSummary
+      attr_accessor question_id: ::String
+      attr_accessor pillar_id: ::String
+      attr_accessor question_title: ::String
+      attr_accessor risk: ("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE")
+      attr_accessor improvement_plan_url: ::String
+      attr_accessor improvement_plans: ::Array[Types::ChoiceImprovementPlan]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Lens
+      attr_accessor lens_arn: ::String
+      attr_accessor lens_version: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor owner: ::String
+      attr_accessor share_invitation_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LensMetric
+      attr_accessor lens_arn: ::String
+      attr_accessor pillars: ::Array[Types::PillarMetric]
+      attr_accessor risk_counts: ::Hash[("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class LensReview
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_arn: ::String
+      attr_accessor lens_version: ::String
+      attr_accessor lens_name: ::String
+      attr_accessor lens_status: ("CURRENT" | "NOT_CURRENT" | "DEPRECATED" | "DELETED" | "UNSHARED")
+      attr_accessor pillar_review_summaries: ::Array[Types::PillarReviewSummary]
+      attr_accessor updated_at: ::Time
+      attr_accessor notes: ::String
+      attr_accessor risk_counts: ::Hash[("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE"), ::Integer]
+      attr_accessor next_token: ::String
+      attr_accessor profiles: ::Array[Types::WorkloadProfile]
+      attr_accessor prioritized_risk_counts: ::Hash[("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class LensReviewReport
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_arn: ::String
+      attr_accessor base_64_string: ::String
+      SENSITIVE: []
+    end
+
+    class LensReviewSummary
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_arn: ::String
+      attr_accessor lens_version: ::String
+      attr_accessor lens_name: ::String
+      attr_accessor lens_status: ("CURRENT" | "NOT_CURRENT" | "DEPRECATED" | "DELETED" | "UNSHARED")
+      attr_accessor updated_at: ::Time
+      attr_accessor risk_counts: ::Hash[("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE"), ::Integer]
+      attr_accessor profiles: ::Array[Types::WorkloadProfile]
+      attr_accessor prioritized_risk_counts: ::Hash[("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class LensShareSummary
+      attr_accessor share_id: ::String
+      attr_accessor shared_with: ::String
+      attr_accessor status: ("ACCEPTED" | "REJECTED" | "PENDING" | "REVOKED" | "EXPIRED" | "ASSOCIATING" | "ASSOCIATED" | "FAILED")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class LensSummary
+      attr_accessor lens_arn: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_name: ::String
+      attr_accessor lens_type: ("AWS_OFFICIAL" | "CUSTOM_SHARED" | "CUSTOM_SELF")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor lens_version: ::String
+      attr_accessor owner: ::String
+      attr_accessor lens_status: ("CURRENT" | "NOT_CURRENT" | "DEPRECATED" | "DELETED" | "UNSHARED")
+      SENSITIVE: []
+    end
+
+    class LensUpgradeSummary
+      attr_accessor workload_id: ::String
+      attr_accessor workload_name: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_arn: ::String
+      attr_accessor current_lens_version: ::String
+      attr_accessor latest_lens_version: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnswersInput
+      attr_accessor workload_id: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor pillar_id: ::String
+      attr_accessor milestone_number: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor question_priority: ("PRIORITIZED" | "NONE")
+      SENSITIVE: []
+    end
+
+    class ListAnswersOutput
+      attr_accessor workload_id: ::String
+      attr_accessor milestone_number: ::Integer
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_arn: ::String
+      attr_accessor answer_summaries: ::Array[Types::AnswerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCheckDetailsInput
+      attr_accessor workload_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor lens_arn: ::String
+      attr_accessor pillar_id: ::String
+      attr_accessor question_id: ::String
+      attr_accessor choice_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListCheckDetailsOutput
+      attr_accessor check_details: ::Array[Types::CheckDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCheckSummariesInput
+      attr_accessor workload_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor lens_arn: ::String
+      attr_accessor pillar_id: ::String
+      attr_accessor question_id: ::String
+      attr_accessor choice_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListCheckSummariesOutput
+      attr_accessor check_summaries: ::Array[Types::CheckSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLensReviewImprovementsInput
+      attr_accessor workload_id: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor pillar_id: ::String
+      attr_accessor milestone_number: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor question_priority: ("PRIORITIZED" | "NONE")
+      SENSITIVE: []
+    end
+
+    class ListLensReviewImprovementsOutput
+      attr_accessor workload_id: ::String
+      attr_accessor milestone_number: ::Integer
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_arn: ::String
+      attr_accessor improvement_summaries: ::Array[Types::ImprovementSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLensReviewsInput
+      attr_accessor workload_id: ::String
+      attr_accessor milestone_number: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLensReviewsOutput
+      attr_accessor workload_id: ::String
+      attr_accessor milestone_number: ::Integer
+      attr_accessor lens_review_summaries: ::Array[Types::LensReviewSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLensSharesInput
+      attr_accessor lens_alias: ::String
+      attr_accessor shared_with_prefix: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor status: ("ACCEPTED" | "REJECTED" | "PENDING" | "REVOKED" | "EXPIRED" | "ASSOCIATING" | "ASSOCIATED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ListLensSharesOutput
+      attr_accessor lens_share_summaries: ::Array[Types::LensShareSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLensesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor lens_type: ("AWS_OFFICIAL" | "CUSTOM_SHARED" | "CUSTOM_SELF")
+      attr_accessor lens_status: ("ALL" | "DRAFT" | "PUBLISHED")
+      attr_accessor lens_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListLensesOutput
+      attr_accessor lens_summaries: ::Array[Types::LensSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMilestonesInput
+      attr_accessor workload_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMilestonesOutput
+      attr_accessor workload_id: ::String
+      attr_accessor milestone_summaries: ::Array[Types::MilestoneSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotificationsInput
+      attr_accessor workload_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotificationsOutput
+      attr_accessor notification_summaries: ::Array[Types::NotificationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProfileNotificationsInput
+      attr_accessor workload_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProfileNotificationsOutput
+      attr_accessor notification_summaries: ::Array[Types::ProfileNotificationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProfileSharesInput
+      attr_accessor profile_arn: ::String
+      attr_accessor shared_with_prefix: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor status: ("ACCEPTED" | "REJECTED" | "PENDING" | "REVOKED" | "EXPIRED" | "ASSOCIATING" | "ASSOCIATED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ListProfileSharesOutput
+      attr_accessor profile_share_summaries: ::Array[Types::ProfileShareSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProfilesInput
+      attr_accessor profile_name_prefix: ::String
+      attr_accessor profile_owner_type: ("SELF" | "SHARED")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProfilesOutput
+      attr_accessor profile_summaries: ::Array[Types::ProfileSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReviewTemplateAnswersInput
+      attr_accessor template_arn: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor pillar_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReviewTemplateAnswersOutput
+      attr_accessor template_arn: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor answer_summaries: ::Array[Types::ReviewTemplateAnswerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReviewTemplatesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReviewTemplatesOutput
+      attr_accessor review_templates: ::Array[Types::ReviewTemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListShareInvitationsInput
+      attr_accessor workload_name_prefix: ::String
+      attr_accessor lens_name_prefix: ::String
+      attr_accessor share_resource_type: ("WORKLOAD" | "LENS" | "PROFILE" | "TEMPLATE")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor profile_name_prefix: ::String
+      attr_accessor template_name_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ListShareInvitationsOutput
+      attr_accessor share_invitation_summaries: ::Array[Types::ShareInvitationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor workload_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTemplateSharesInput
+      attr_accessor template_arn: ::String
+      attr_accessor shared_with_prefix: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor status: ("ACCEPTED" | "REJECTED" | "PENDING" | "REVOKED" | "EXPIRED" | "ASSOCIATING" | "ASSOCIATED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ListTemplateSharesOutput
+      attr_accessor template_arn: ::String
+      attr_accessor template_share_summaries: ::Array[Types::TemplateShareSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkloadSharesInput
+      attr_accessor workload_id: ::String
+      attr_accessor shared_with_prefix: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor status: ("ACCEPTED" | "REJECTED" | "PENDING" | "REVOKED" | "EXPIRED" | "ASSOCIATING" | "ASSOCIATED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ListWorkloadSharesOutput
+      attr_accessor workload_id: ::String
+      attr_accessor workload_share_summaries: ::Array[Types::WorkloadShareSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkloadsInput
+      attr_accessor workload_name_prefix: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWorkloadsOutput
+      attr_accessor workload_summaries: ::Array[Types::WorkloadSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Milestone
+      attr_accessor milestone_number: ::Integer
+      attr_accessor milestone_name: ::String
+      attr_accessor recorded_at: ::Time
+      attr_accessor workload: Types::Workload
+      SENSITIVE: []
+    end
+
+    class MilestoneSummary
+      attr_accessor milestone_number: ::Integer
+      attr_accessor milestone_name: ::String
+      attr_accessor recorded_at: ::Time
+      attr_accessor workload_summary: Types::WorkloadSummary
+      SENSITIVE: []
+    end
+
+    class NotificationSummary
+      attr_accessor type: ("LENS_VERSION_UPGRADED" | "LENS_VERSION_DEPRECATED")
+      attr_accessor lens_upgrade_summary: Types::LensUpgradeSummary
+      SENSITIVE: []
+    end
+
+    class PillarDifference
+      attr_accessor pillar_id: ::String
+      attr_accessor pillar_name: ::String
+      attr_accessor difference_status: ("UPDATED" | "NEW" | "DELETED")
+      attr_accessor question_differences: ::Array[Types::QuestionDifference]
+      SENSITIVE: []
+    end
+
+    class PillarMetric
+      attr_accessor pillar_id: ::String
+      attr_accessor risk_counts: ::Hash[("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE"), ::Integer]
+      attr_accessor questions: ::Array[Types::QuestionMetric]
+      SENSITIVE: []
+    end
+
+    class PillarReviewSummary
+      attr_accessor pillar_id: ::String
+      attr_accessor pillar_name: ::String
+      attr_accessor notes: ::String
+      attr_accessor risk_counts: ::Hash[("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE"), ::Integer]
+      attr_accessor prioritized_risk_counts: ::Hash[("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class Profile
+      attr_accessor profile_arn: ::String
+      attr_accessor profile_version: ::String
+      attr_accessor profile_name: ::String
+      attr_accessor profile_description: ::String
+      attr_accessor profile_questions: ::Array[Types::ProfileQuestion]
+      attr_accessor owner: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor share_invitation_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ProfileChoice
+      attr_accessor choice_id: ::String
+      attr_accessor choice_title: ::String
+      attr_accessor choice_description: ::String
+      SENSITIVE: []
+    end
+
+    class ProfileNotificationSummary
+      attr_accessor current_profile_version: ::String
+      attr_accessor latest_profile_version: ::String
+      attr_accessor type: ("PROFILE_ANSWERS_UPDATED" | "PROFILE_DELETED")
+      attr_accessor profile_arn: ::String
+      attr_accessor profile_name: ::String
+      attr_accessor workload_id: ::String
+      attr_accessor workload_name: ::String
+      SENSITIVE: []
+    end
+
+    class ProfileQuestion
+      attr_accessor question_id: ::String
+      attr_accessor question_title: ::String
+      attr_accessor question_description: ::String
+      attr_accessor question_choices: ::Array[Types::ProfileChoice]
+      attr_accessor selected_choice_ids: ::Array[::String]
+      attr_accessor min_selected_choices: ::Integer
+      attr_accessor max_selected_choices: ::Integer
+      SENSITIVE: []
+    end
+
+    class ProfileQuestionUpdate
+      attr_accessor question_id: ::String
+      attr_accessor selected_choice_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ProfileShareSummary
+      attr_accessor share_id: ::String
+      attr_accessor shared_with: ::String
+      attr_accessor status: ("ACCEPTED" | "REJECTED" | "PENDING" | "REVOKED" | "EXPIRED" | "ASSOCIATING" | "ASSOCIATED" | "FAILED")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class ProfileSummary
+      attr_accessor profile_arn: ::String
+      attr_accessor profile_version: ::String
+      attr_accessor profile_name: ::String
+      attr_accessor profile_description: ::String
+      attr_accessor owner: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ProfileTemplate
+      attr_accessor template_name: ::String
+      attr_accessor template_questions: ::Array[Types::ProfileTemplateQuestion]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ProfileTemplateChoice
+      attr_accessor choice_id: ::String
+      attr_accessor choice_title: ::String
+      attr_accessor choice_description: ::String
+      SENSITIVE: []
+    end
+
+    class ProfileTemplateQuestion
+      attr_accessor question_id: ::String
+      attr_accessor question_title: ::String
+      attr_accessor question_description: ::String
+      attr_accessor question_choices: ::Array[Types::ProfileTemplateChoice]
+      attr_accessor min_selected_choices: ::Integer
+      attr_accessor max_selected_choices: ::Integer
+      SENSITIVE: []
+    end
+
+    class QuestionDifference
+      attr_accessor question_id: ::String
+      attr_accessor question_title: ::String
+      attr_accessor difference_status: ("UPDATED" | "NEW" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class QuestionMetric
+      attr_accessor question_id: ::String
+      attr_accessor risk: ("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE")
+      attr_accessor best_practices: ::Array[Types::BestPractice]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ReviewTemplate
+      attr_accessor description: ::String
+      attr_accessor lenses: ::Array[::String]
+      attr_accessor notes: ::String
+      attr_accessor question_counts: ::Hash[("UNANSWERED" | "ANSWERED"), ::Integer]
+      attr_accessor owner: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor template_arn: ::String
+      attr_accessor template_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor update_status: ("CURRENT" | "LENS_NOT_CURRENT")
+      attr_accessor share_invitation_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReviewTemplateAnswer
+      attr_accessor question_id: ::String
+      attr_accessor pillar_id: ::String
+      attr_accessor question_title: ::String
+      attr_accessor question_description: ::String
+      attr_accessor improvement_plan_url: ::String
+      attr_accessor helpful_resource_url: ::String
+      attr_accessor helpful_resource_display_text: ::String
+      attr_accessor choices: ::Array[Types::Choice]
+      attr_accessor selected_choices: ::Array[::String]
+      attr_accessor choice_answers: ::Array[Types::ChoiceAnswer]
+      attr_accessor is_applicable: bool
+      attr_accessor answer_status: ("UNANSWERED" | "ANSWERED")
+      attr_accessor notes: ::String
+      attr_accessor reason: ("OUT_OF_SCOPE" | "BUSINESS_PRIORITIES" | "ARCHITECTURE_CONSTRAINTS" | "OTHER" | "NONE")
+      SENSITIVE: []
+    end
+
+    class ReviewTemplateAnswerSummary
+      attr_accessor question_id: ::String
+      attr_accessor pillar_id: ::String
+      attr_accessor question_title: ::String
+      attr_accessor choices: ::Array[Types::Choice]
+      attr_accessor selected_choices: ::Array[::String]
+      attr_accessor choice_answer_summaries: ::Array[Types::ChoiceAnswerSummary]
+      attr_accessor is_applicable: bool
+      attr_accessor answer_status: ("UNANSWERED" | "ANSWERED")
+      attr_accessor reason: ("OUT_OF_SCOPE" | "BUSINESS_PRIORITIES" | "ARCHITECTURE_CONSTRAINTS" | "OTHER" | "NONE")
+      attr_accessor question_type: ("PRIORITIZED" | "NON_PRIORITIZED")
+      SENSITIVE: []
+    end
+
+    class ReviewTemplateLensReview
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_arn: ::String
+      attr_accessor lens_version: ::String
+      attr_accessor lens_name: ::String
+      attr_accessor lens_status: ("CURRENT" | "NOT_CURRENT" | "DEPRECATED" | "DELETED" | "UNSHARED")
+      attr_accessor pillar_review_summaries: ::Array[Types::ReviewTemplatePillarReviewSummary]
+      attr_accessor updated_at: ::Time
+      attr_accessor notes: ::String
+      attr_accessor question_counts: ::Hash[("UNANSWERED" | "ANSWERED"), ::Integer]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ReviewTemplatePillarReviewSummary
+      attr_accessor pillar_id: ::String
+      attr_accessor pillar_name: ::String
+      attr_accessor notes: ::String
+      attr_accessor question_counts: ::Hash[("UNANSWERED" | "ANSWERED"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class ReviewTemplateSummary
+      attr_accessor description: ::String
+      attr_accessor lenses: ::Array[::String]
+      attr_accessor owner: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor template_arn: ::String
+      attr_accessor template_name: ::String
+      attr_accessor update_status: ("CURRENT" | "LENS_NOT_CURRENT")
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class ShareInvitation
+      attr_accessor share_invitation_id: ::String
+      attr_accessor share_resource_type: ("WORKLOAD" | "LENS" | "PROFILE" | "TEMPLATE")
+      attr_accessor workload_id: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_arn: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ShareInvitationSummary
+      attr_accessor share_invitation_id: ::String
+      attr_accessor shared_by: ::String
+      attr_accessor shared_with: ::String
+      attr_accessor permission_type: ("READONLY" | "CONTRIBUTOR")
+      attr_accessor share_resource_type: ("WORKLOAD" | "LENS" | "PROFILE" | "TEMPLATE")
+      attr_accessor workload_name: ::String
+      attr_accessor workload_id: ::String
+      attr_accessor lens_name: ::String
+      attr_accessor lens_arn: ::String
+      attr_accessor profile_name: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor workload_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class TemplateShareSummary
+      attr_accessor share_id: ::String
+      attr_accessor shared_with: ::String
+      attr_accessor status: ("ACCEPTED" | "REJECTED" | "PENDING" | "REVOKED" | "EXPIRED" | "ASSOCIATING" | "ASSOCIATED" | "FAILED")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor workload_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateAnswerInput
+      attr_accessor workload_id: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor question_id: ::String
+      attr_accessor selected_choices: ::Array[::String]
+      attr_accessor choice_updates: ::Hash[::String, Types::ChoiceUpdate]
+      attr_accessor notes: ::String
+      attr_accessor is_applicable: bool
+      attr_accessor reason: ("OUT_OF_SCOPE" | "BUSINESS_PRIORITIES" | "ARCHITECTURE_CONSTRAINTS" | "OTHER" | "NONE")
+      SENSITIVE: []
+    end
+
+    class UpdateAnswerOutput
+      attr_accessor workload_id: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_arn: ::String
+      attr_accessor answer: Types::Answer
+      SENSITIVE: []
+    end
+
+    class UpdateGlobalSettingsInput
+      attr_accessor organization_sharing_status: ("ENABLED" | "DISABLED")
+      attr_accessor discovery_integration_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateLensReviewInput
+      attr_accessor workload_id: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_notes: ::String
+      attr_accessor pillar_notes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateLensReviewOutput
+      attr_accessor workload_id: ::String
+      attr_accessor lens_review: Types::LensReview
+      SENSITIVE: []
+    end
+
+    class UpdateProfileInput
+      attr_accessor profile_arn: ::String
+      attr_accessor profile_description: ::String
+      attr_accessor profile_questions: ::Array[Types::ProfileQuestionUpdate]
+      SENSITIVE: []
+    end
+
+    class UpdateProfileOutput
+      attr_accessor profile: Types::Profile
+      SENSITIVE: []
+    end
+
+    class UpdateReviewTemplateAnswerInput
+      attr_accessor template_arn: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor question_id: ::String
+      attr_accessor selected_choices: ::Array[::String]
+      attr_accessor choice_updates: ::Hash[::String, Types::ChoiceUpdate]
+      attr_accessor notes: ::String
+      attr_accessor is_applicable: bool
+      attr_accessor reason: ("OUT_OF_SCOPE" | "BUSINESS_PRIORITIES" | "ARCHITECTURE_CONSTRAINTS" | "OTHER" | "NONE")
+      SENSITIVE: []
+    end
+
+    class UpdateReviewTemplateAnswerOutput
+      attr_accessor template_arn: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor answer: Types::ReviewTemplateAnswer
+      SENSITIVE: []
+    end
+
+    class UpdateReviewTemplateInput
+      attr_accessor template_arn: ::String
+      attr_accessor template_name: ::String
+      attr_accessor description: ::String
+      attr_accessor notes: ::String
+      attr_accessor lenses_to_associate: ::Array[::String]
+      attr_accessor lenses_to_disassociate: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateReviewTemplateLensReviewInput
+      attr_accessor template_arn: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor lens_notes: ::String
+      attr_accessor pillar_notes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateReviewTemplateLensReviewOutput
+      attr_accessor template_arn: ::String
+      attr_accessor lens_review: Types::ReviewTemplateLensReview
+      SENSITIVE: []
+    end
+
+    class UpdateReviewTemplateOutput
+      attr_accessor review_template: Types::ReviewTemplate
+      SENSITIVE: []
+    end
+
+    class UpdateShareInvitationInput
+      attr_accessor share_invitation_id: ::String
+      attr_accessor share_invitation_action: ("ACCEPT" | "REJECT")
+      SENSITIVE: []
+    end
+
+    class UpdateShareInvitationOutput
+      attr_accessor share_invitation: Types::ShareInvitation
+      SENSITIVE: []
+    end
+
+    class UpdateWorkloadInput
+      attr_accessor workload_id: ::String
+      attr_accessor workload_name: ::String
+      attr_accessor description: ::String
+      attr_accessor environment: ("PRODUCTION" | "PREPRODUCTION")
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor aws_regions: ::Array[::String]
+      attr_accessor non_aws_regions: ::Array[::String]
+      attr_accessor pillar_priorities: ::Array[::String]
+      attr_accessor architectural_design: ::String
+      attr_accessor review_owner: ::String
+      attr_accessor is_review_owner_update_acknowledged: bool
+      attr_accessor industry_type: ::String
+      attr_accessor industry: ::String
+      attr_accessor notes: ::String
+      attr_accessor improvement_status: ("NOT_APPLICABLE" | "NOT_STARTED" | "IN_PROGRESS" | "COMPLETE" | "RISK_ACKNOWLEDGED")
+      attr_accessor discovery_config: Types::WorkloadDiscoveryConfig
+      attr_accessor applications: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateWorkloadOutput
+      attr_accessor workload: Types::Workload
+      SENSITIVE: []
+    end
+
+    class UpdateWorkloadShareInput
+      attr_accessor share_id: ::String
+      attr_accessor workload_id: ::String
+      attr_accessor permission_type: ("READONLY" | "CONTRIBUTOR")
+      SENSITIVE: []
+    end
+
+    class UpdateWorkloadShareOutput
+      attr_accessor workload_id: ::String
+      attr_accessor workload_share: Types::WorkloadShare
+      SENSITIVE: []
+    end
+
+    class UpgradeLensReviewInput
+      attr_accessor workload_id: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor milestone_name: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpgradeProfileVersionInput
+      attr_accessor workload_id: ::String
+      attr_accessor profile_arn: ::String
+      attr_accessor milestone_name: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpgradeReviewTemplateLensReviewInput
+      attr_accessor template_arn: ::String
+      attr_accessor lens_alias: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("UNKNOWN_OPERATION" | "CANNOT_PARSE" | "FIELD_VALIDATION_FAILED" | "OTHER")
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VersionDifferences
+      attr_accessor pillar_differences: ::Array[Types::PillarDifference]
+      SENSITIVE: []
+    end
+
+    class Workload
+      attr_accessor workload_id: ::String
+      attr_accessor workload_arn: ::String
+      attr_accessor workload_name: ::String
+      attr_accessor description: ::String
+      attr_accessor environment: ("PRODUCTION" | "PREPRODUCTION")
+      attr_accessor updated_at: ::Time
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor aws_regions: ::Array[::String]
+      attr_accessor non_aws_regions: ::Array[::String]
+      attr_accessor architectural_design: ::String
+      attr_accessor review_owner: ::String
+      attr_accessor review_restriction_date: ::Time
+      attr_accessor is_review_owner_update_acknowledged: bool
+      attr_accessor industry_type: ::String
+      attr_accessor industry: ::String
+      attr_accessor notes: ::String
+      attr_accessor improvement_status: ("NOT_APPLICABLE" | "NOT_STARTED" | "IN_PROGRESS" | "COMPLETE" | "RISK_ACKNOWLEDGED")
+      attr_accessor risk_counts: ::Hash[("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE"), ::Integer]
+      attr_accessor pillar_priorities: ::Array[::String]
+      attr_accessor lenses: ::Array[::String]
+      attr_accessor owner: ::String
+      attr_accessor share_invitation_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor discovery_config: Types::WorkloadDiscoveryConfig
+      attr_accessor applications: ::Array[::String]
+      attr_accessor profiles: ::Array[Types::WorkloadProfile]
+      attr_accessor prioritized_risk_counts: ::Hash[("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class WorkloadDiscoveryConfig
+      attr_accessor trusted_advisor_integration_status: ("ENABLED" | "DISABLED")
+      attr_accessor workload_resource_definition: ::Array[("WORKLOAD_METADATA" | "APP_REGISTRY")]
+      SENSITIVE: []
+    end
+
+    class WorkloadProfile
+      attr_accessor profile_arn: ::String
+      attr_accessor profile_version: ::String
+      SENSITIVE: []
+    end
+
+    class WorkloadShare
+      attr_accessor share_id: ::String
+      attr_accessor shared_by: ::String
+      attr_accessor shared_with: ::String
+      attr_accessor permission_type: ("READONLY" | "CONTRIBUTOR")
+      attr_accessor status: ("ACCEPTED" | "REJECTED" | "PENDING" | "REVOKED" | "EXPIRED" | "ASSOCIATING" | "ASSOCIATED" | "FAILED")
+      attr_accessor workload_name: ::String
+      attr_accessor workload_id: ::String
+      SENSITIVE: []
+    end
+
+    class WorkloadShareSummary
+      attr_accessor share_id: ::String
+      attr_accessor shared_with: ::String
+      attr_accessor permission_type: ("READONLY" | "CONTRIBUTOR")
+      attr_accessor status: ("ACCEPTED" | "REJECTED" | "PENDING" | "REVOKED" | "EXPIRED" | "ASSOCIATING" | "ASSOCIATED" | "FAILED")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class WorkloadSummary
+      attr_accessor workload_id: ::String
+      attr_accessor workload_arn: ::String
+      attr_accessor workload_name: ::String
+      attr_accessor owner: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor lenses: ::Array[::String]
+      attr_accessor risk_counts: ::Hash[("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE"), ::Integer]
+      attr_accessor improvement_status: ("NOT_APPLICABLE" | "NOT_STARTED" | "IN_PROGRESS" | "COMPLETE" | "RISK_ACKNOWLEDGED")
+      attr_accessor profiles: ::Array[Types::WorkloadProfile]
+      attr_accessor prioritized_risk_counts: ::Hash[("UNANSWERED" | "HIGH" | "MEDIUM" | "NONE" | "NOT_APPLICABLE"), ::Integer]
+      SENSITIVE: []
+    end
+  end
+end

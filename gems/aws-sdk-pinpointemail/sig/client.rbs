@@ -1,0 +1,697 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PinpointEmail
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateConfigurationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfigurationSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#create_configuration_set-instance_method
+      def create_configuration_set: (
+                                      configuration_set_name: ::String,
+                                      ?tracking_options: {
+                                        custom_redirect_domain: ::String
+                                      },
+                                      ?delivery_options: {
+                                        tls_policy: ("REQUIRE" | "OPTIONAL")?,
+                                        sending_pool_name: ::String?
+                                      },
+                                      ?reputation_options: {
+                                        reputation_metrics_enabled: bool?,
+                                        last_fresh_start: ::Time?
+                                      },
+                                      ?sending_options: {
+                                        sending_enabled: bool?
+                                      },
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ]
+                                    ) -> _CreateConfigurationSetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationSetResponseSuccess
+
+      interface _CreateConfigurationSetEventDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfigurationSetEventDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#create_configuration_set_event_destination-instance_method
+      def create_configuration_set_event_destination: (
+                                                        configuration_set_name: ::String,
+                                                        event_destination_name: ::String,
+                                                        event_destination: {
+                                                          enabled: bool?,
+                                                          matching_event_types: Array[("SEND" | "REJECT" | "BOUNCE" | "COMPLAINT" | "DELIVERY" | "OPEN" | "CLICK" | "RENDERING_FAILURE")]?,
+                                                          kinesis_firehose_destination: {
+                                                            iam_role_arn: ::String,
+                                                            delivery_stream_arn: ::String
+                                                          }?,
+                                                          cloud_watch_destination: {
+                                                            dimension_configurations: Array[
+                                                              {
+                                                                dimension_name: ::String,
+                                                                dimension_value_source: ("MESSAGE_TAG" | "EMAIL_HEADER" | "LINK_TAG"),
+                                                                default_dimension_value: ::String
+                                                              },
+                                                            ]
+                                                          }?,
+                                                          sns_destination: {
+                                                            topic_arn: ::String
+                                                          }?,
+                                                          pinpoint_destination: {
+                                                            application_arn: ::String?
+                                                          }?
+                                                        }
+                                                      ) -> _CreateConfigurationSetEventDestinationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationSetEventDestinationResponseSuccess
+
+      interface _CreateDedicatedIpPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDedicatedIpPoolResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#create_dedicated_ip_pool-instance_method
+      def create_dedicated_ip_pool: (
+                                      pool_name: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ]
+                                    ) -> _CreateDedicatedIpPoolResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDedicatedIpPoolResponseSuccess
+
+      interface _CreateDeliverabilityTestReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeliverabilityTestReportResponse]
+        def report_id: () -> ::String
+        def deliverability_test_status: () -> ("IN_PROGRESS" | "COMPLETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#create_deliverability_test_report-instance_method
+      def create_deliverability_test_report: (
+                                               ?report_name: ::String,
+                                               from_email_address: ::String,
+                                               content: {
+                                                 simple: {
+                                                   subject: {
+                                                     data: ::String,
+                                                     charset: ::String?
+                                                   },
+                                                   body: {
+                                                     text: {
+                                                       data: ::String,
+                                                       charset: ::String?
+                                                     }?,
+                                                     html: {
+                                                       data: ::String,
+                                                       charset: ::String?
+                                                     }?
+                                                   }
+                                                 }?,
+                                                 raw: {
+                                                   data: ::String
+                                                 }?,
+                                                 template: {
+                                                   template_arn: ::String?,
+                                                   template_data: ::String?
+                                                 }?
+                                               },
+                                               ?tags: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String
+                                                 },
+                                               ]
+                                             ) -> _CreateDeliverabilityTestReportResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeliverabilityTestReportResponseSuccess
+
+      interface _CreateEmailIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEmailIdentityResponse]
+        def identity_type: () -> ("EMAIL_ADDRESS" | "DOMAIN" | "MANAGED_DOMAIN")
+        def verified_for_sending_status: () -> bool
+        def dkim_attributes: () -> Types::DkimAttributes
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#create_email_identity-instance_method
+      def create_email_identity: (
+                                   email_identity: ::String,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ]
+                                 ) -> _CreateEmailIdentityResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEmailIdentityResponseSuccess
+
+      interface _DeleteConfigurationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfigurationSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#delete_configuration_set-instance_method
+      def delete_configuration_set: (
+                                      configuration_set_name: ::String
+                                    ) -> _DeleteConfigurationSetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfigurationSetResponseSuccess
+
+      interface _DeleteConfigurationSetEventDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfigurationSetEventDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#delete_configuration_set_event_destination-instance_method
+      def delete_configuration_set_event_destination: (
+                                                        configuration_set_name: ::String,
+                                                        event_destination_name: ::String
+                                                      ) -> _DeleteConfigurationSetEventDestinationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfigurationSetEventDestinationResponseSuccess
+
+      interface _DeleteDedicatedIpPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDedicatedIpPoolResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#delete_dedicated_ip_pool-instance_method
+      def delete_dedicated_ip_pool: (
+                                      pool_name: ::String
+                                    ) -> _DeleteDedicatedIpPoolResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDedicatedIpPoolResponseSuccess
+
+      interface _DeleteEmailIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEmailIdentityResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#delete_email_identity-instance_method
+      def delete_email_identity: (
+                                   email_identity: ::String
+                                 ) -> _DeleteEmailIdentityResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEmailIdentityResponseSuccess
+
+      interface _GetAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountResponse]
+        def send_quota: () -> Types::SendQuota
+        def sending_enabled: () -> bool
+        def dedicated_ip_auto_warmup_enabled: () -> bool
+        def enforcement_status: () -> ::String
+        def production_access_enabled: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#get_account-instance_method
+      def get_account: (
+                       ) -> _GetAccountResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountResponseSuccess
+
+      interface _GetBlacklistReportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBlacklistReportsResponse]
+        def blacklist_report: () -> ::Hash[::String, ::Array[Types::BlacklistEntry]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#get_blacklist_reports-instance_method
+      def get_blacklist_reports: (
+                                   blacklist_item_names: Array[::String]
+                                 ) -> _GetBlacklistReportsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBlacklistReportsResponseSuccess
+
+      interface _GetConfigurationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfigurationSetResponse]
+        def configuration_set_name: () -> ::String
+        def tracking_options: () -> Types::TrackingOptions
+        def delivery_options: () -> Types::DeliveryOptions
+        def reputation_options: () -> Types::ReputationOptions
+        def sending_options: () -> Types::SendingOptions
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#get_configuration_set-instance_method
+      def get_configuration_set: (
+                                   configuration_set_name: ::String
+                                 ) -> _GetConfigurationSetResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigurationSetResponseSuccess
+
+      interface _GetConfigurationSetEventDestinationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfigurationSetEventDestinationsResponse]
+        def event_destinations: () -> ::Array[Types::EventDestination]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#get_configuration_set_event_destinations-instance_method
+      def get_configuration_set_event_destinations: (
+                                                      configuration_set_name: ::String
+                                                    ) -> _GetConfigurationSetEventDestinationsResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigurationSetEventDestinationsResponseSuccess
+
+      interface _GetDedicatedIpResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDedicatedIpResponse]
+        def dedicated_ip: () -> Types::DedicatedIp
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#get_dedicated_ip-instance_method
+      def get_dedicated_ip: (
+                              ip: ::String
+                            ) -> _GetDedicatedIpResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDedicatedIpResponseSuccess
+
+      interface _GetDedicatedIpsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDedicatedIpsResponse]
+        def dedicated_ips: () -> ::Array[Types::DedicatedIp]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#get_dedicated_ips-instance_method
+      def get_dedicated_ips: (
+                               ?pool_name: ::String,
+                               ?next_token: ::String,
+                               ?page_size: ::Integer
+                             ) -> _GetDedicatedIpsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDedicatedIpsResponseSuccess
+
+      interface _GetDeliverabilityDashboardOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeliverabilityDashboardOptionsResponse]
+        def dashboard_enabled: () -> bool
+        def subscription_expiry_date: () -> ::Time
+        def account_status: () -> ("ACTIVE" | "PENDING_EXPIRATION" | "DISABLED")
+        def active_subscribed_domains: () -> ::Array[Types::DomainDeliverabilityTrackingOption]
+        def pending_expiration_subscribed_domains: () -> ::Array[Types::DomainDeliverabilityTrackingOption]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#get_deliverability_dashboard_options-instance_method
+      def get_deliverability_dashboard_options: (
+                                                ) -> _GetDeliverabilityDashboardOptionsResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeliverabilityDashboardOptionsResponseSuccess
+
+      interface _GetDeliverabilityTestReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeliverabilityTestReportResponse]
+        def deliverability_test_report: () -> Types::DeliverabilityTestReport
+        def overall_placement: () -> Types::PlacementStatistics
+        def isp_placements: () -> ::Array[Types::IspPlacement]
+        def message: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#get_deliverability_test_report-instance_method
+      def get_deliverability_test_report: (
+                                            report_id: ::String
+                                          ) -> _GetDeliverabilityTestReportResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeliverabilityTestReportResponseSuccess
+
+      interface _GetDomainDeliverabilityCampaignResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainDeliverabilityCampaignResponse]
+        def domain_deliverability_campaign: () -> Types::DomainDeliverabilityCampaign
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#get_domain_deliverability_campaign-instance_method
+      def get_domain_deliverability_campaign: (
+                                                campaign_id: ::String
+                                              ) -> _GetDomainDeliverabilityCampaignResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainDeliverabilityCampaignResponseSuccess
+
+      interface _GetDomainStatisticsReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainStatisticsReportResponse]
+        def overall_volume: () -> Types::OverallVolume
+        def daily_volumes: () -> ::Array[Types::DailyVolume]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#get_domain_statistics_report-instance_method
+      def get_domain_statistics_report: (
+                                          domain: ::String,
+                                          start_date: ::Time,
+                                          end_date: ::Time
+                                        ) -> _GetDomainStatisticsReportResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainStatisticsReportResponseSuccess
+
+      interface _GetEmailIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEmailIdentityResponse]
+        def identity_type: () -> ("EMAIL_ADDRESS" | "DOMAIN" | "MANAGED_DOMAIN")
+        def feedback_forwarding_status: () -> bool
+        def verified_for_sending_status: () -> bool
+        def dkim_attributes: () -> Types::DkimAttributes
+        def mail_from_attributes: () -> Types::MailFromAttributes
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#get_email_identity-instance_method
+      def get_email_identity: (
+                                email_identity: ::String
+                              ) -> _GetEmailIdentityResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEmailIdentityResponseSuccess
+
+      interface _ListConfigurationSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfigurationSetsResponse]
+        def configuration_sets: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#list_configuration_sets-instance_method
+      def list_configuration_sets: (
+                                     ?next_token: ::String,
+                                     ?page_size: ::Integer
+                                   ) -> _ListConfigurationSetsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationSetsResponseSuccess
+
+      interface _ListDedicatedIpPoolsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDedicatedIpPoolsResponse]
+        def dedicated_ip_pools: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#list_dedicated_ip_pools-instance_method
+      def list_dedicated_ip_pools: (
+                                     ?next_token: ::String,
+                                     ?page_size: ::Integer
+                                   ) -> _ListDedicatedIpPoolsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDedicatedIpPoolsResponseSuccess
+
+      interface _ListDeliverabilityTestReportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeliverabilityTestReportsResponse]
+        def deliverability_test_reports: () -> ::Array[Types::DeliverabilityTestReport]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#list_deliverability_test_reports-instance_method
+      def list_deliverability_test_reports: (
+                                              ?next_token: ::String,
+                                              ?page_size: ::Integer
+                                            ) -> _ListDeliverabilityTestReportsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeliverabilityTestReportsResponseSuccess
+
+      interface _ListDomainDeliverabilityCampaignsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainDeliverabilityCampaignsResponse]
+        def domain_deliverability_campaigns: () -> ::Array[Types::DomainDeliverabilityCampaign]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#list_domain_deliverability_campaigns-instance_method
+      def list_domain_deliverability_campaigns: (
+                                                  start_date: ::Time,
+                                                  end_date: ::Time,
+                                                  subscribed_domain: ::String,
+                                                  ?next_token: ::String,
+                                                  ?page_size: ::Integer
+                                                ) -> _ListDomainDeliverabilityCampaignsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainDeliverabilityCampaignsResponseSuccess
+
+      interface _ListEmailIdentitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEmailIdentitiesResponse]
+        def email_identities: () -> ::Array[Types::IdentityInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#list_email_identities-instance_method
+      def list_email_identities: (
+                                   ?next_token: ::String,
+                                   ?page_size: ::Integer
+                                 ) -> _ListEmailIdentitiesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEmailIdentitiesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutAccountDedicatedIpWarmupAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountDedicatedIpWarmupAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#put_account_dedicated_ip_warmup_attributes-instance_method
+      def put_account_dedicated_ip_warmup_attributes: (
+                                                        ?auto_warmup_enabled: bool
+                                                      ) -> _PutAccountDedicatedIpWarmupAttributesResponseSuccess
+                                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountDedicatedIpWarmupAttributesResponseSuccess
+
+      interface _PutAccountSendingAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountSendingAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#put_account_sending_attributes-instance_method
+      def put_account_sending_attributes: (
+                                            ?sending_enabled: bool
+                                          ) -> _PutAccountSendingAttributesResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountSendingAttributesResponseSuccess
+
+      interface _PutConfigurationSetDeliveryOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutConfigurationSetDeliveryOptionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#put_configuration_set_delivery_options-instance_method
+      def put_configuration_set_delivery_options: (
+                                                    configuration_set_name: ::String,
+                                                    ?tls_policy: ("REQUIRE" | "OPTIONAL"),
+                                                    ?sending_pool_name: ::String
+                                                  ) -> _PutConfigurationSetDeliveryOptionsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetDeliveryOptionsResponseSuccess
+
+      interface _PutConfigurationSetReputationOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutConfigurationSetReputationOptionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#put_configuration_set_reputation_options-instance_method
+      def put_configuration_set_reputation_options: (
+                                                      configuration_set_name: ::String,
+                                                      ?reputation_metrics_enabled: bool
+                                                    ) -> _PutConfigurationSetReputationOptionsResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetReputationOptionsResponseSuccess
+
+      interface _PutConfigurationSetSendingOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutConfigurationSetSendingOptionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#put_configuration_set_sending_options-instance_method
+      def put_configuration_set_sending_options: (
+                                                   configuration_set_name: ::String,
+                                                   ?sending_enabled: bool
+                                                 ) -> _PutConfigurationSetSendingOptionsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetSendingOptionsResponseSuccess
+
+      interface _PutConfigurationSetTrackingOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutConfigurationSetTrackingOptionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#put_configuration_set_tracking_options-instance_method
+      def put_configuration_set_tracking_options: (
+                                                    configuration_set_name: ::String,
+                                                    ?custom_redirect_domain: ::String
+                                                  ) -> _PutConfigurationSetTrackingOptionsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetTrackingOptionsResponseSuccess
+
+      interface _PutDedicatedIpInPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDedicatedIpInPoolResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#put_dedicated_ip_in_pool-instance_method
+      def put_dedicated_ip_in_pool: (
+                                      ip: ::String,
+                                      destination_pool_name: ::String
+                                    ) -> _PutDedicatedIpInPoolResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDedicatedIpInPoolResponseSuccess
+
+      interface _PutDedicatedIpWarmupAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDedicatedIpWarmupAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#put_dedicated_ip_warmup_attributes-instance_method
+      def put_dedicated_ip_warmup_attributes: (
+                                                ip: ::String,
+                                                warmup_percentage: ::Integer
+                                              ) -> _PutDedicatedIpWarmupAttributesResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDedicatedIpWarmupAttributesResponseSuccess
+
+      interface _PutDeliverabilityDashboardOptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDeliverabilityDashboardOptionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#put_deliverability_dashboard_option-instance_method
+      def put_deliverability_dashboard_option: (
+                                                 dashboard_enabled: bool,
+                                                 ?subscribed_domains: Array[
+                                                   {
+                                                     domain: ::String?,
+                                                     subscription_start_date: ::Time?,
+                                                     inbox_placement_tracking_option: {
+                                                       global: bool?,
+                                                       tracked_isps: Array[::String]?
+                                                     }?
+                                                   },
+                                                 ]
+                                               ) -> _PutDeliverabilityDashboardOptionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDeliverabilityDashboardOptionResponseSuccess
+
+      interface _PutEmailIdentityDkimAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEmailIdentityDkimAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#put_email_identity_dkim_attributes-instance_method
+      def put_email_identity_dkim_attributes: (
+                                                email_identity: ::String,
+                                                ?signing_enabled: bool
+                                              ) -> _PutEmailIdentityDkimAttributesResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEmailIdentityDkimAttributesResponseSuccess
+
+      interface _PutEmailIdentityFeedbackAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEmailIdentityFeedbackAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#put_email_identity_feedback_attributes-instance_method
+      def put_email_identity_feedback_attributes: (
+                                                    email_identity: ::String,
+                                                    ?email_forwarding_enabled: bool
+                                                  ) -> _PutEmailIdentityFeedbackAttributesResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEmailIdentityFeedbackAttributesResponseSuccess
+
+      interface _PutEmailIdentityMailFromAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEmailIdentityMailFromAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#put_email_identity_mail_from_attributes-instance_method
+      def put_email_identity_mail_from_attributes: (
+                                                     email_identity: ::String,
+                                                     ?mail_from_domain: ::String,
+                                                     ?behavior_on_mx_failure: ("USE_DEFAULT_VALUE" | "REJECT_MESSAGE")
+                                                   ) -> _PutEmailIdentityMailFromAttributesResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEmailIdentityMailFromAttributesResponseSuccess
+
+      interface _SendEmailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendEmailResponse]
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#send_email-instance_method
+      def send_email: (
+                        ?from_email_address: ::String,
+                        destination: {
+                          to_addresses: Array[::String]?,
+                          cc_addresses: Array[::String]?,
+                          bcc_addresses: Array[::String]?
+                        },
+                        ?reply_to_addresses: Array[::String],
+                        ?feedback_forwarding_email_address: ::String,
+                        content: {
+                          simple: {
+                            subject: {
+                              data: ::String,
+                              charset: ::String?
+                            },
+                            body: {
+                              text: {
+                                data: ::String,
+                                charset: ::String?
+                              }?,
+                              html: {
+                                data: ::String,
+                                charset: ::String?
+                              }?
+                            }
+                          }?,
+                          raw: {
+                            data: ::String
+                          }?,
+                          template: {
+                            template_arn: ::String?,
+                            template_data: ::String?
+                          }?
+                        },
+                        ?email_tags: Array[
+                          {
+                            name: ::String,
+                            value: ::String
+                          },
+                        ],
+                        ?configuration_set_name: ::String
+                      ) -> _SendEmailResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendEmailResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateConfigurationSetEventDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfigurationSetEventDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointEmail/Client.html#update_configuration_set_event_destination-instance_method
+      def update_configuration_set_event_destination: (
+                                                        configuration_set_name: ::String,
+                                                        event_destination_name: ::String,
+                                                        event_destination: {
+                                                          enabled: bool?,
+                                                          matching_event_types: Array[("SEND" | "REJECT" | "BOUNCE" | "COMPLAINT" | "DELIVERY" | "OPEN" | "CLICK" | "RENDERING_FAILURE")]?,
+                                                          kinesis_firehose_destination: {
+                                                            iam_role_arn: ::String,
+                                                            delivery_stream_arn: ::String
+                                                          }?,
+                                                          cloud_watch_destination: {
+                                                            dimension_configurations: Array[
+                                                              {
+                                                                dimension_name: ::String,
+                                                                dimension_value_source: ("MESSAGE_TAG" | "EMAIL_HEADER" | "LINK_TAG"),
+                                                                default_dimension_value: ::String
+                                                              },
+                                                            ]
+                                                          }?,
+                                                          sns_destination: {
+                                                            topic_arn: ::String
+                                                          }?,
+                                                          pinpoint_destination: {
+                                                            application_arn: ::String?
+                                                          }?
+                                                        }
+                                                      ) -> _UpdateConfigurationSetEventDestinationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationSetEventDestinationResponseSuccess
+    end
+  end
+end
+

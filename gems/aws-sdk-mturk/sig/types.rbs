@@ -1,0 +1,681 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MTurk
+  module Types
+
+    class AcceptQualificationRequestRequest
+      attr_accessor qualification_request_id: ::String
+      attr_accessor integer_value: ::Integer
+      SENSITIVE: []
+    end
+
+    class AcceptQualificationRequestResponse < Aws::EmptyStructure
+    end
+
+    class ApproveAssignmentRequest
+      attr_accessor assignment_id: ::String
+      attr_accessor requester_feedback: ::String
+      attr_accessor override_rejection: bool
+      SENSITIVE: []
+    end
+
+    class ApproveAssignmentResponse < Aws::EmptyStructure
+    end
+
+    class Assignment
+      attr_accessor assignment_id: ::String
+      attr_accessor worker_id: ::String
+      attr_accessor hit_id: ::String
+      attr_accessor assignment_status: ("Submitted" | "Approved" | "Rejected")
+      attr_accessor auto_approval_time: ::Time
+      attr_accessor accept_time: ::Time
+      attr_accessor submit_time: ::Time
+      attr_accessor approval_time: ::Time
+      attr_accessor rejection_time: ::Time
+      attr_accessor deadline: ::Time
+      attr_accessor answer: ::String
+      attr_accessor requester_feedback: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateQualificationWithWorkerRequest
+      attr_accessor qualification_type_id: ::String
+      attr_accessor worker_id: ::String
+      attr_accessor integer_value: ::Integer
+      attr_accessor send_notification: bool
+      SENSITIVE: []
+    end
+
+    class AssociateQualificationWithWorkerResponse < Aws::EmptyStructure
+    end
+
+    class BonusPayment
+      attr_accessor worker_id: ::String
+      attr_accessor bonus_amount: ::String
+      attr_accessor assignment_id: ::String
+      attr_accessor reason: ::String
+      attr_accessor grant_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateAdditionalAssignmentsForHITRequest
+      attr_accessor hit_id: ::String
+      attr_accessor number_of_additional_assignments: ::Integer
+      attr_accessor unique_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAdditionalAssignmentsForHITResponse < Aws::EmptyStructure
+    end
+
+    class CreateHITRequest
+      attr_accessor max_assignments: ::Integer
+      attr_accessor auto_approval_delay_in_seconds: ::Integer
+      attr_accessor lifetime_in_seconds: ::Integer
+      attr_accessor assignment_duration_in_seconds: ::Integer
+      attr_accessor reward: ::String
+      attr_accessor title: ::String
+      attr_accessor keywords: ::String
+      attr_accessor description: ::String
+      attr_accessor question: ::String
+      attr_accessor requester_annotation: ::String
+      attr_accessor qualification_requirements: ::Array[Types::QualificationRequirement]
+      attr_accessor unique_request_token: ::String
+      attr_accessor assignment_review_policy: Types::ReviewPolicy
+      attr_accessor hit_review_policy: Types::ReviewPolicy
+      attr_accessor hit_layout_id: ::String
+      attr_accessor hit_layout_parameters: ::Array[Types::HITLayoutParameter]
+      SENSITIVE: []
+    end
+
+    class CreateHITResponse
+      attr_accessor hit: Types::HIT
+      SENSITIVE: []
+    end
+
+    class CreateHITTypeRequest
+      attr_accessor auto_approval_delay_in_seconds: ::Integer
+      attr_accessor assignment_duration_in_seconds: ::Integer
+      attr_accessor reward: ::String
+      attr_accessor title: ::String
+      attr_accessor keywords: ::String
+      attr_accessor description: ::String
+      attr_accessor qualification_requirements: ::Array[Types::QualificationRequirement]
+      SENSITIVE: []
+    end
+
+    class CreateHITTypeResponse
+      attr_accessor hit_type_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateHITWithHITTypeRequest
+      attr_accessor hit_type_id: ::String
+      attr_accessor max_assignments: ::Integer
+      attr_accessor lifetime_in_seconds: ::Integer
+      attr_accessor question: ::String
+      attr_accessor requester_annotation: ::String
+      attr_accessor unique_request_token: ::String
+      attr_accessor assignment_review_policy: Types::ReviewPolicy
+      attr_accessor hit_review_policy: Types::ReviewPolicy
+      attr_accessor hit_layout_id: ::String
+      attr_accessor hit_layout_parameters: ::Array[Types::HITLayoutParameter]
+      SENSITIVE: []
+    end
+
+    class CreateHITWithHITTypeResponse
+      attr_accessor hit: Types::HIT
+      SENSITIVE: []
+    end
+
+    class CreateQualificationTypeRequest
+      attr_accessor name: ::String
+      attr_accessor keywords: ::String
+      attr_accessor description: ::String
+      attr_accessor qualification_type_status: ("Active" | "Inactive")
+      attr_accessor retry_delay_in_seconds: ::Integer
+      attr_accessor test: ::String
+      attr_accessor answer_key: ::String
+      attr_accessor test_duration_in_seconds: ::Integer
+      attr_accessor auto_granted: bool
+      attr_accessor auto_granted_value: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateQualificationTypeResponse
+      attr_accessor qualification_type: Types::QualificationType
+      SENSITIVE: []
+    end
+
+    class CreateWorkerBlockRequest
+      attr_accessor worker_id: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkerBlockResponse < Aws::EmptyStructure
+    end
+
+    class DeleteHITRequest
+      attr_accessor hit_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHITResponse < Aws::EmptyStructure
+    end
+
+    class DeleteQualificationTypeRequest
+      attr_accessor qualification_type_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQualificationTypeResponse < Aws::EmptyStructure
+    end
+
+    class DeleteWorkerBlockRequest
+      attr_accessor worker_id: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkerBlockResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateQualificationFromWorkerRequest
+      attr_accessor worker_id: ::String
+      attr_accessor qualification_type_id: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateQualificationFromWorkerResponse < Aws::EmptyStructure
+    end
+
+    class GetAccountBalanceRequest < Aws::EmptyStructure
+    end
+
+    class GetAccountBalanceResponse
+      attr_accessor available_balance: ::String
+      attr_accessor on_hold_balance: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssignmentRequest
+      attr_accessor assignment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssignmentResponse
+      attr_accessor assignment: Types::Assignment
+      attr_accessor hit: Types::HIT
+      SENSITIVE: []
+    end
+
+    class GetFileUploadURLRequest
+      attr_accessor assignment_id: ::String
+      attr_accessor question_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetFileUploadURLResponse
+      attr_accessor file_upload_url: ::String
+      SENSITIVE: []
+    end
+
+    class GetHITRequest
+      attr_accessor hit_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetHITResponse
+      attr_accessor hit: Types::HIT
+      SENSITIVE: []
+    end
+
+    class GetQualificationScoreRequest
+      attr_accessor qualification_type_id: ::String
+      attr_accessor worker_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetQualificationScoreResponse
+      attr_accessor qualification: Types::Qualification
+      SENSITIVE: []
+    end
+
+    class GetQualificationTypeRequest
+      attr_accessor qualification_type_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetQualificationTypeResponse
+      attr_accessor qualification_type: Types::QualificationType
+      SENSITIVE: []
+    end
+
+    class HIT
+      attr_accessor hit_id: ::String
+      attr_accessor hit_type_id: ::String
+      attr_accessor hit_group_id: ::String
+      attr_accessor hit_layout_id: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor question: ::String
+      attr_accessor keywords: ::String
+      attr_accessor hit_status: ("Assignable" | "Unassignable" | "Reviewable" | "Reviewing" | "Disposed")
+      attr_accessor max_assignments: ::Integer
+      attr_accessor reward: ::String
+      attr_accessor auto_approval_delay_in_seconds: ::Integer
+      attr_accessor expiration: ::Time
+      attr_accessor assignment_duration_in_seconds: ::Integer
+      attr_accessor requester_annotation: ::String
+      attr_accessor qualification_requirements: ::Array[Types::QualificationRequirement]
+      attr_accessor hit_review_status: ("NotReviewed" | "MarkedForReview" | "ReviewedAppropriate" | "ReviewedInappropriate")
+      attr_accessor number_of_assignments_pending: ::Integer
+      attr_accessor number_of_assignments_available: ::Integer
+      attr_accessor number_of_assignments_completed: ::Integer
+      SENSITIVE: []
+    end
+
+    class HITLayoutParameter
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssignmentsForHITRequest
+      attr_accessor hit_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor assignment_statuses: ::Array[("Submitted" | "Approved" | "Rejected")]
+      SENSITIVE: []
+    end
+
+    class ListAssignmentsForHITResponse
+      attr_accessor next_token: ::String
+      attr_accessor num_results: ::Integer
+      attr_accessor assignments: ::Array[Types::Assignment]
+      SENSITIVE: []
+    end
+
+    class ListBonusPaymentsRequest
+      attr_accessor hit_id: ::String
+      attr_accessor assignment_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListBonusPaymentsResponse
+      attr_accessor num_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor bonus_payments: ::Array[Types::BonusPayment]
+      SENSITIVE: []
+    end
+
+    class ListHITsForQualificationTypeRequest
+      attr_accessor qualification_type_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListHITsForQualificationTypeResponse
+      attr_accessor next_token: ::String
+      attr_accessor num_results: ::Integer
+      attr_accessor hits: ::Array[Types::HIT]
+      SENSITIVE: []
+    end
+
+    class ListHITsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListHITsResponse
+      attr_accessor next_token: ::String
+      attr_accessor num_results: ::Integer
+      attr_accessor hits: ::Array[Types::HIT]
+      SENSITIVE: []
+    end
+
+    class ListQualificationRequestsRequest
+      attr_accessor qualification_type_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListQualificationRequestsResponse
+      attr_accessor num_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor qualification_requests: ::Array[Types::QualificationRequest]
+      SENSITIVE: []
+    end
+
+    class ListQualificationTypesRequest
+      attr_accessor query: ::String
+      attr_accessor must_be_requestable: bool
+      attr_accessor must_be_owned_by_caller: bool
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListQualificationTypesResponse
+      attr_accessor num_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor qualification_types: ::Array[Types::QualificationType]
+      SENSITIVE: []
+    end
+
+    class ListReviewPolicyResultsForHITRequest
+      attr_accessor hit_id: ::String
+      attr_accessor policy_levels: ::Array[("Assignment" | "HIT")]
+      attr_accessor retrieve_actions: bool
+      attr_accessor retrieve_results: bool
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReviewPolicyResultsForHITResponse
+      attr_accessor hit_id: ::String
+      attr_accessor assignment_review_policy: Types::ReviewPolicy
+      attr_accessor hit_review_policy: Types::ReviewPolicy
+      attr_accessor assignment_review_report: Types::ReviewReport
+      attr_accessor hit_review_report: Types::ReviewReport
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReviewableHITsRequest
+      attr_accessor hit_type_id: ::String
+      attr_accessor status: ("Reviewable" | "Reviewing")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReviewableHITsResponse
+      attr_accessor next_token: ::String
+      attr_accessor num_results: ::Integer
+      attr_accessor hits: ::Array[Types::HIT]
+      SENSITIVE: []
+    end
+
+    class ListWorkerBlocksRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWorkerBlocksResponse
+      attr_accessor next_token: ::String
+      attr_accessor num_results: ::Integer
+      attr_accessor worker_blocks: ::Array[Types::WorkerBlock]
+      SENSITIVE: []
+    end
+
+    class ListWorkersWithQualificationTypeRequest
+      attr_accessor qualification_type_id: ::String
+      attr_accessor status: ("Granted" | "Revoked")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWorkersWithQualificationTypeResponse
+      attr_accessor next_token: ::String
+      attr_accessor num_results: ::Integer
+      attr_accessor qualifications: ::Array[Types::Qualification]
+      SENSITIVE: []
+    end
+
+    class Locale
+      attr_accessor country: ::String
+      attr_accessor subdivision: ::String
+      SENSITIVE: []
+    end
+
+    class NotificationSpecification
+      attr_accessor destination: ::String
+      attr_accessor transport: ("Email" | "SQS" | "SNS")
+      attr_accessor version: ::String
+      attr_accessor event_types: ::Array[("AssignmentAccepted" | "AssignmentAbandoned" | "AssignmentReturned" | "AssignmentSubmitted" | "AssignmentRejected" | "AssignmentApproved" | "HITCreated" | "HITExpired" | "HITReviewable" | "HITExtended" | "HITDisposed" | "Ping")]
+      SENSITIVE: []
+    end
+
+    class NotifyWorkersFailureStatus
+      attr_accessor notify_workers_failure_code: ("SoftFailure" | "HardFailure")
+      attr_accessor notify_workers_failure_message: ::String
+      attr_accessor worker_id: ::String
+      SENSITIVE: []
+    end
+
+    class NotifyWorkersRequest
+      attr_accessor subject: ::String
+      attr_accessor message_text: ::String
+      attr_accessor worker_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class NotifyWorkersResponse
+      attr_accessor notify_workers_failure_statuses: ::Array[Types::NotifyWorkersFailureStatus]
+      SENSITIVE: []
+    end
+
+    class ParameterMapEntry
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PolicyParameter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor map_entries: ::Array[Types::ParameterMapEntry]
+      SENSITIVE: []
+    end
+
+    class Qualification
+      attr_accessor qualification_type_id: ::String
+      attr_accessor worker_id: ::String
+      attr_accessor grant_time: ::Time
+      attr_accessor integer_value: ::Integer
+      attr_accessor locale_value: Types::Locale
+      attr_accessor status: ("Granted" | "Revoked")
+      SENSITIVE: []
+    end
+
+    class QualificationRequest
+      attr_accessor qualification_request_id: ::String
+      attr_accessor qualification_type_id: ::String
+      attr_accessor worker_id: ::String
+      attr_accessor test: ::String
+      attr_accessor answer: ::String
+      attr_accessor submit_time: ::Time
+      SENSITIVE: []
+    end
+
+    class QualificationRequirement
+      attr_accessor qualification_type_id: ::String
+      attr_accessor comparator: ("LessThan" | "LessThanOrEqualTo" | "GreaterThan" | "GreaterThanOrEqualTo" | "EqualTo" | "NotEqualTo" | "Exists" | "DoesNotExist" | "In" | "NotIn")
+      attr_accessor integer_values: ::Array[::Integer]
+      attr_accessor locale_values: ::Array[Types::Locale]
+      attr_accessor required_to_preview: bool
+      attr_accessor actions_guarded: ("Accept" | "PreviewAndAccept" | "DiscoverPreviewAndAccept")
+      SENSITIVE: []
+    end
+
+    class QualificationType
+      attr_accessor qualification_type_id: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor keywords: ::String
+      attr_accessor qualification_type_status: ("Active" | "Inactive")
+      attr_accessor test: ::String
+      attr_accessor test_duration_in_seconds: ::Integer
+      attr_accessor answer_key: ::String
+      attr_accessor retry_delay_in_seconds: ::Integer
+      attr_accessor is_requestable: bool
+      attr_accessor auto_granted: bool
+      attr_accessor auto_granted_value: ::Integer
+      SENSITIVE: []
+    end
+
+    class RejectAssignmentRequest
+      attr_accessor assignment_id: ::String
+      attr_accessor requester_feedback: ::String
+      SENSITIVE: []
+    end
+
+    class RejectAssignmentResponse < Aws::EmptyStructure
+    end
+
+    class RejectQualificationRequestRequest
+      attr_accessor qualification_request_id: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class RejectQualificationRequestResponse < Aws::EmptyStructure
+    end
+
+    class RequestError
+      attr_accessor message: ::String
+      attr_accessor turk_error_code: ::String
+      SENSITIVE: []
+    end
+
+    class ReviewActionDetail
+      attr_accessor action_id: ::String
+      attr_accessor action_name: ::String
+      attr_accessor target_id: ::String
+      attr_accessor target_type: ::String
+      attr_accessor status: ("Intended" | "Succeeded" | "Failed" | "Cancelled")
+      attr_accessor complete_time: ::Time
+      attr_accessor result: ::String
+      attr_accessor error_code: ::String
+      SENSITIVE: []
+    end
+
+    class ReviewPolicy
+      attr_accessor policy_name: ::String
+      attr_accessor parameters: ::Array[Types::PolicyParameter]
+      SENSITIVE: []
+    end
+
+    class ReviewReport
+      attr_accessor review_results: ::Array[Types::ReviewResultDetail]
+      attr_accessor review_actions: ::Array[Types::ReviewActionDetail]
+      SENSITIVE: []
+    end
+
+    class ReviewResultDetail
+      attr_accessor action_id: ::String
+      attr_accessor subject_id: ::String
+      attr_accessor subject_type: ::String
+      attr_accessor question_id: ::String
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SendBonusRequest
+      attr_accessor worker_id: ::String
+      attr_accessor bonus_amount: ::String
+      attr_accessor assignment_id: ::String
+      attr_accessor reason: ::String
+      attr_accessor unique_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class SendBonusResponse < Aws::EmptyStructure
+    end
+
+    class SendTestEventNotificationRequest
+      attr_accessor notification: Types::NotificationSpecification
+      attr_accessor test_event_type: ("AssignmentAccepted" | "AssignmentAbandoned" | "AssignmentReturned" | "AssignmentSubmitted" | "AssignmentRejected" | "AssignmentApproved" | "HITCreated" | "HITExpired" | "HITReviewable" | "HITExtended" | "HITDisposed" | "Ping")
+      SENSITIVE: []
+    end
+
+    class SendTestEventNotificationResponse < Aws::EmptyStructure
+    end
+
+    class ServiceFault
+      attr_accessor message: ::String
+      attr_accessor turk_error_code: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateExpirationForHITRequest
+      attr_accessor hit_id: ::String
+      attr_accessor expire_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateExpirationForHITResponse < Aws::EmptyStructure
+    end
+
+    class UpdateHITReviewStatusRequest
+      attr_accessor hit_id: ::String
+      attr_accessor revert: bool
+      SENSITIVE: []
+    end
+
+    class UpdateHITReviewStatusResponse < Aws::EmptyStructure
+    end
+
+    class UpdateHITTypeOfHITRequest
+      attr_accessor hit_id: ::String
+      attr_accessor hit_type_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateHITTypeOfHITResponse < Aws::EmptyStructure
+    end
+
+    class UpdateNotificationSettingsRequest
+      attr_accessor hit_type_id: ::String
+      attr_accessor notification: Types::NotificationSpecification
+      attr_accessor active: bool
+      SENSITIVE: []
+    end
+
+    class UpdateNotificationSettingsResponse < Aws::EmptyStructure
+    end
+
+    class UpdateQualificationTypeRequest
+      attr_accessor qualification_type_id: ::String
+      attr_accessor description: ::String
+      attr_accessor qualification_type_status: ("Active" | "Inactive")
+      attr_accessor test: ::String
+      attr_accessor answer_key: ::String
+      attr_accessor test_duration_in_seconds: ::Integer
+      attr_accessor retry_delay_in_seconds: ::Integer
+      attr_accessor auto_granted: bool
+      attr_accessor auto_granted_value: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateQualificationTypeResponse
+      attr_accessor qualification_type: Types::QualificationType
+      SENSITIVE: []
+    end
+
+    class WorkerBlock
+      attr_accessor worker_id: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -427,7 +427,7 @@ module Aws::ConnectCases
     #   resp.fields[0].namespace #=> String, one of "System", "Custom"
     #   resp.fields[0].tags #=> Hash
     #   resp.fields[0].tags["String"] #=> String
-    #   resp.fields[0].type #=> String, one of "Text", "Number", "Boolean", "DateTime", "SingleSelect", "Url"
+    #   resp.fields[0].type #=> String, one of "Text", "Number", "Boolean", "DateTime", "SingleSelect", "Url", "User"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchGetField AWS API Documentation
     #
@@ -484,15 +484,17 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # Creates a case in the specified Cases domain. Case system and custom
-    # fields are taken as an array id/value pairs with a declared data
-    # types.
-    #
-    # <note markdown="1"> The following fields are required when creating a case:
-    #
-    #       <ul> <li> <p> <code>customer_id</code> - You must provide the full customer profile ARN in this format: <code>arn:aws:profile:your AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID</code> </p> </li> <li> <p> <code>title</code> </p> </li> </ul> </note>
+    # <note markdown="1"> If you provide a value for `PerformedBy.UserArn` you must also have
+    # [connect:DescribeUser][1] permission on the User ARN resource that you
+    # provide
     #
     #  </note>
+    #
+    #      <p>Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.</p> <p>The following fields are required when creating a case:</p> <ul> <li> <p> <code>customer_id</code> - You must provide the full customer profile ARN in this format: <code>arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID</code> </p> </li> <li> <p> <code>title</code> </p> </li> </ul>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -513,6 +515,9 @@ module Aws::ConnectCases
     # @option params [required, Array<Types::FieldValue>] :fields
     #   An array of objects with field ID (matching ListFields/DescribeField)
     #   and value union data.
+    #
+    # @option params [Types::UserUnion] :performed_by
+    #   Represents the identity of the person who performed the action.
     #
     # @option params [required, String] :template_id
     #   A unique identifier of a template.
@@ -536,9 +541,13 @@ module Aws::ConnectCases
     #           empty_value: {
     #           },
     #           string_value: "FieldValueUnionStringValueString",
+    #           user_arn_value: "String",
     #         },
     #       },
     #     ],
+    #     performed_by: {
+    #       user_arn: "UserArn",
+    #     },
     #     template_id: "TemplateId", # required
     #   })
     #
@@ -633,7 +642,7 @@ module Aws::ConnectCases
     #     description: "FieldDescription",
     #     domain_id: "DomainId", # required
     #     name: "FieldName", # required
-    #     type: "Text", # required, accepts Text, Number, Boolean, DateTime, SingleSelect, Url
+    #     type: "Text", # required, accepts Text, Number, Boolean, DateTime, SingleSelect, Url, User
     #   })
     #
     # @example Response structure
@@ -734,13 +743,23 @@ module Aws::ConnectCases
     # Creates a related item (comments, tasks, and contacts) and associates
     # it with a case.
     #
-    # <note markdown="1"> A Related Item is a resource that is associated with a case. It may or
-    # may not have an external identifier linking it to an external resource
-    # (for example, a `contactArn`). All Related Items have their own
-    # internal identifier, the `relatedItemArn`. Examples of related items
-    # include `comments` and `contacts`.
+    # <note markdown="1"> * A Related Item is a resource that is associated with a case. It may
+    #   or may not have an external identifier linking it to an external
+    #   resource (for example, a `contactArn`). All Related Items have their
+    #   own internal identifier, the `relatedItemArn`. Examples of related
+    #   items include `comments` and `contacts`.
+    #
+    # * If you provide a value for `performedBy.userArn` you must also have
+    #   [DescribeUser][1] permission on the ARN of the user that you
+    #   provide.
+    #
+    #       </note>
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
     #
     # @option params [required, String] :case_id
     #   A unique identifier of the case.
@@ -750,6 +769,9 @@ module Aws::ConnectCases
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
+    #
+    # @option params [Types::UserUnion] :performed_by
+    #   Represents the creator of the related item.
     #
     # @option params [required, String] :type
     #   The type of a related item.
@@ -773,6 +795,9 @@ module Aws::ConnectCases
     #       },
     #     },
     #     domain_id: "DomainId", # required
+    #     performed_by: {
+    #       user_arn: "UserArn",
+    #     },
     #     type: "Contact", # required, accepts Contact, Comment
     #   })
     #
@@ -923,6 +948,7 @@ module Aws::ConnectCases
     #   resp.fields[0].value.boolean_value #=> Boolean
     #   resp.fields[0].value.double_value #=> Float
     #   resp.fields[0].value.string_value #=> String
+    #   resp.fields[0].value.user_arn_value #=> String
     #   resp.next_token #=> String
     #   resp.tags #=> Hash
     #   resp.tags["String"] #=> String
@@ -934,6 +960,70 @@ module Aws::ConnectCases
     # @param [Hash] params ({})
     def get_case(params = {}, options = {})
       req = build_request(:get_case, params)
+      req.send_request(options)
+    end
+
+    # Returns the audit history about a specific case if it exists.
+    #
+    # @option params [required, String] :case_id
+    #   A unique identifier of the case.
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the Cases domain.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of audit events to return. The current maximum
+    #   supported value is 25. This is also the default when no other value is
+    #   provided.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::GetCaseAuditEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCaseAuditEventsResponse#audit_events #audit_events} => Array&lt;Types::AuditEvent&gt;
+    #   * {Types::GetCaseAuditEventsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_case_audit_events({
+    #     case_id: "CaseId", # required
+    #     domain_id: "DomainId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.audit_events #=> Array
+    #   resp.audit_events[0].event_id #=> String
+    #   resp.audit_events[0].fields #=> Array
+    #   resp.audit_events[0].fields[0].event_field_id #=> String
+    #   resp.audit_events[0].fields[0].new_value.boolean_value #=> Boolean
+    #   resp.audit_events[0].fields[0].new_value.double_value #=> Float
+    #   resp.audit_events[0].fields[0].new_value.string_value #=> String
+    #   resp.audit_events[0].fields[0].new_value.user_arn_value #=> String
+    #   resp.audit_events[0].fields[0].old_value.boolean_value #=> Boolean
+    #   resp.audit_events[0].fields[0].old_value.double_value #=> Float
+    #   resp.audit_events[0].fields[0].old_value.string_value #=> String
+    #   resp.audit_events[0].fields[0].old_value.user_arn_value #=> String
+    #   resp.audit_events[0].performed_by.iam_principal_arn #=> String
+    #   resp.audit_events[0].performed_by.user.user_arn #=> String
+    #   resp.audit_events[0].performed_time #=> Time
+    #   resp.audit_events[0].related_item_type #=> String, one of "Contact", "Comment"
+    #   resp.audit_events[0].type #=> String, one of "Case.Created", "Case.Updated", "RelatedItem.Created"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/GetCaseAuditEvents AWS API Documentation
+    #
+    # @overload get_case_audit_events(params = {})
+    # @param [Hash] params ({})
+    def get_case_audit_events(params = {}, options = {})
+      req = build_request(:get_case_audit_events, params)
       req.send_request(options)
     end
 
@@ -1281,7 +1371,7 @@ module Aws::ConnectCases
     #   resp.fields[0].field_id #=> String
     #   resp.fields[0].name #=> String
     #   resp.fields[0].namespace #=> String, one of "System", "Custom"
-    #   resp.fields[0].type #=> String, one of "Text", "Number", "Boolean", "DateTime", "SingleSelect", "Url"
+    #   resp.fields[0].type #=> String, one of "Text", "Number", "Boolean", "DateTime", "SingleSelect", "Url", "User"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/ListFields AWS API Documentation
@@ -1419,7 +1509,13 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # API for adding case event publishing configuration
+    # Adds case event publishing configuration. For a complete list of
+    # fields you can add to the event message, see [Create case fields][1]
+    # in the *Amazon Connect Administrator Guide*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/case-fields.html
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
@@ -1526,6 +1622,7 @@ module Aws::ConnectCases
     #             empty_value: {
     #             },
     #             string_value: "FieldValueUnionStringValueString",
+    #             user_arn_value: "String",
     #           },
     #         },
     #         equal_to: {
@@ -1536,6 +1633,7 @@ module Aws::ConnectCases
     #             empty_value: {
     #             },
     #             string_value: "FieldValueUnionStringValueString",
+    #             user_arn_value: "String",
     #           },
     #         },
     #         greater_than: {
@@ -1546,6 +1644,7 @@ module Aws::ConnectCases
     #             empty_value: {
     #             },
     #             string_value: "FieldValueUnionStringValueString",
+    #             user_arn_value: "String",
     #           },
     #         },
     #         greater_than_or_equal_to: {
@@ -1556,6 +1655,7 @@ module Aws::ConnectCases
     #             empty_value: {
     #             },
     #             string_value: "FieldValueUnionStringValueString",
+    #             user_arn_value: "String",
     #           },
     #         },
     #         less_than: {
@@ -1566,6 +1666,7 @@ module Aws::ConnectCases
     #             empty_value: {
     #             },
     #             string_value: "FieldValueUnionStringValueString",
+    #             user_arn_value: "String",
     #           },
     #         },
     #         less_than_or_equal_to: {
@@ -1576,6 +1677,7 @@ module Aws::ConnectCases
     #             empty_value: {
     #             },
     #             string_value: "FieldValueUnionStringValueString",
+    #             user_arn_value: "String",
     #           },
     #         },
     #       },
@@ -1608,6 +1710,7 @@ module Aws::ConnectCases
     #   resp.cases[0].fields[0].value.boolean_value #=> Boolean
     #   resp.cases[0].fields[0].value.double_value #=> Float
     #   resp.cases[0].fields[0].value.string_value #=> String
+    #   resp.cases[0].fields[0].value.user_arn_value #=> String
     #   resp.cases[0].tags #=> Hash
     #   resp.cases[0].tags["String"] #=> String
     #   resp.cases[0].template_id #=> String
@@ -1683,6 +1786,7 @@ module Aws::ConnectCases
     #   resp.related_items[0].content.contact.channel #=> String
     #   resp.related_items[0].content.contact.connected_to_system_time #=> Time
     #   resp.related_items[0].content.contact.contact_arn #=> String
+    #   resp.related_items[0].performed_by.user_arn #=> String
     #   resp.related_items[0].related_item_id #=> String
     #   resp.related_items[0].tags #=> Hash
     #   resp.related_items[0].tags["String"] #=> String
@@ -1752,12 +1856,17 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # Updates the values of fields on a case. Fields to be updated are
-    # received as an array of id/value pairs identical to the `CreateCase`
-    # input .
+    # <note markdown="1"> If you provide a value for `PerformedBy.UserArn` you must also have
+    # [connect:DescribeUser][1] permission on the User ARN resource that you
+    # provide
     #
-    # If the action is successful, the service sends back an HTTP 200
-    # response with an empty HTTP body.
+    #  </note>
+    #
+    #      <p>Updates the values of fields on a case. Fields to be updated are received as an array of id/value pairs identical to the <code>CreateCase</code> input .</p> <p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
     #
     # @option params [required, String] :case_id
     #   A unique identifier of the case.
@@ -1768,6 +1877,9 @@ module Aws::ConnectCases
     # @option params [required, Array<Types::FieldValue>] :fields
     #   An array of objects with `fieldId` (matching ListFields/DescribeField)
     #   and value union data, structured identical to `CreateCase`.
+    #
+    # @option params [Types::UserUnion] :performed_by
+    #   Represents the identity of the person who performed the action.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1785,9 +1897,13 @@ module Aws::ConnectCases
     #           empty_value: {
     #           },
     #           string_value: "FieldValueUnionStringValueString",
+    #           user_arn_value: "String",
     #         },
     #       },
     #     ],
+    #     performed_by: {
+    #       user_arn: "UserArn",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/UpdateCase AWS API Documentation
@@ -1848,7 +1964,7 @@ module Aws::ConnectCases
     #
     # @option params [Types::LayoutContent] :content
     #   Information about which fields will be present in the layout, the
-    #   order of the fields, and a read-only attribute of the field.
+    #   order of the fields.
     #
     # @option params [required, String] :domain_id
     #   The unique identifier of the Cases domain.
@@ -1981,7 +2097,7 @@ module Aws::ConnectCases
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -4452,7 +4452,8 @@
         "NONE",
         "AES256",
         "aws:kms",
-        "UNKNOWN"
+        "UNKNOWN",
+	"aws:kms:dsse"
       ]
     },
     "ErrorCode": {
@@ -5245,6 +5246,10 @@
         "configuration": {
           "shape": "RevealConfiguration",
           "locationName": "configuration"
+        },
+        "retrievalConfiguration": {
+          "shape": "RetrievalConfiguration",
+          "locationName": "retrievalConfiguration"
         }
       }
     },
@@ -6696,6 +6701,33 @@
         }
       }
     },
+    "RetrievalConfiguration": {
+      "type": "structure",
+      "members": {
+        "externalId": {
+          "shape": "__string",
+          "locationName": "externalId"
+        },
+        "retrievalMode": {
+          "shape": "RetrievalMode",
+          "locationName": "retrievalMode"
+        },
+        "roleName": {
+          "shape": "__stringMin1Max64PatternW",
+          "locationName": "roleName"
+        }
+      },
+      "required": [
+        "retrievalMode"
+      ]
+    },
+    "RetrievalMode": {
+      "type": "string",
+      "enum": [
+        "CALLER_CREDENTIALS",
+        "ASSUME_ROLE"
+      ]
+    },
     "RevealConfiguration": {
       "type": "structure",
       "members": {
@@ -7672,7 +7704,8 @@
       "enum": [
         "NONE",
         "AES256",
-        "aws:kms"
+        "aws:kms",
+	"aws:kms:dsse"
       ]
     },
     "UnavailabilityReasonCode": {
@@ -7682,7 +7715,13 @@
         "UNSUPPORTED_OBJECT_TYPE",
         "UNSUPPORTED_FINDING_TYPE",
         "INVALID_CLASSIFICATION_RESULT",
-        "OBJECT_UNAVAILABLE"
+        "OBJECT_UNAVAILABLE",
+        "ACCOUNT_NOT_IN_ORGANIZATION",
+        "MISSING_GET_MEMBER_PERMISSION",
+        "ROLE_TOO_PERMISSIVE",
+        "MEMBER_ROLE_TOO_PERMISSIVE",
+        "INVALID_RESULT_SIGNATURE",
+        "RESULT_NOT_SIGNED"
       ]
     },
     "Unit": {
@@ -7994,12 +8033,32 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateRetrievalConfiguration": {
+      "type": "structure",
+      "members": {
+        "retrievalMode": {
+          "shape": "RetrievalMode",
+          "locationName": "retrievalMode"
+        },
+        "roleName": {
+          "shape": "__stringMin1Max64PatternW",
+          "locationName": "roleName"
+        }
+      },
+      "required": [
+        "retrievalMode"
+      ]
+    },
     "UpdateRevealConfigurationRequest": {
       "type": "structure",
       "members": {
         "configuration": {
           "shape": "RevealConfiguration",
           "locationName": "configuration"
+        },
+        "retrievalConfiguration": {
+          "shape": "UpdateRetrievalConfiguration",
+          "locationName": "retrievalConfiguration"
         }
       },
       "required": [
@@ -8012,6 +8071,10 @@
         "configuration": {
           "shape": "RevealConfiguration",
           "locationName": "configuration"
+        },
+        "retrievalConfiguration": {
+          "shape": "RetrievalConfiguration",
+          "locationName": "retrievalConfiguration"
         }
       }
     },
@@ -8537,6 +8600,12 @@
       "min": 1,
       "max": 512,
       "pattern": "^[\\s\\S]+$"
+    },
+    "__stringMin1Max64PatternW": {
+      "type": "string",
+      "min": 1,
+      "max": 64,
+      "pattern": "^[\\w+=,.@-]*$"
     },
     "__stringMin22Max22PatternAZ0922": {
       "type": "string",

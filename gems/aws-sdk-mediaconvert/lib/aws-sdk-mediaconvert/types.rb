@@ -263,7 +263,7 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] sample_rate
-    #   Sample rate in hz.
+    #   Sample rate in Hz.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AiffSettings AWS API Documentation
@@ -364,25 +364,37 @@ module Aws::MediaConvert
     #
     class AssociateCertificateResponse < Aws::EmptyStructure; end
 
-    # When you mimic a multi-channel audio layout with multiple mono-channel
-    # tracks, you can tag each channel layout manually. For example, you
-    # would tag the tracks that contain your left, right, and center audio
-    # with Left (L), Right (R), and Center (C), respectively. When you
-    # don't specify a value, MediaConvert labels your track as Center (C)
-    # by default. To use audio layout tagging, your output must be in a
-    # QuickTime (.mov) container; your audio codec must be AAC, WAV, or
-    # AIFF; and you must set up your audio track to have only one channel.
+    # Specify the QuickTime audio channel layout tags for the audio channels
+    # in this audio track. When you don't specify a value, MediaConvert
+    # labels your track as Center (C) by default. To use Audio layout
+    # tagging, your output must be in a QuickTime (MOV) container and your
+    # audio codec must be AAC, WAV, or AIFF.
     #
     # @!attribute [rw] channel_tag
-    #   You can add a tag for this mono-channel audio track to mimic its
-    #   placement in a multi-channel layout. For example, if this track is
-    #   the left surround channel, choose Left surround (LS).
+    #   Specify the QuickTime audio channel layout tags for the audio
+    #   channels in this audio track. Enter channel layout tags in the same
+    #   order as your output's audio channel order. For example, if your
+    #   output audio track has a left and a right channel, enter Left (L)
+    #   for the first channel and Right (R) for the second. If your output
+    #   has multiple single-channel audio tracks, enter a single channel
+    #   layout tag for each track.
     #   @return [String]
+    #
+    # @!attribute [rw] channel_tags
+    #   Specify the QuickTime audio channel layout tags for the audio
+    #   channels in this audio track. Enter channel layout tags in the same
+    #   order as your output's audio channel order. For example, if your
+    #   output audio track has a left and a right channel, enter Left (L)
+    #   for the first channel and Right (R) for the second. If your output
+    #   has multiple single-channel audio tracks, enter a single channel
+    #   layout tag for each track.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AudioChannelTaggingSettings AWS API Documentation
     #
     class AudioChannelTaggingSettings < Struct.new(
-      :channel_tag)
+      :channel_tag,
+      :channel_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -484,15 +496,11 @@ module Aws::MediaConvert
     # correspond to a group of output audio tracks.
     #
     # @!attribute [rw] audio_channel_tagging_settings
-    #   When you mimic a multi-channel audio layout with multiple
-    #   mono-channel tracks, you can tag each channel layout manually. For
-    #   example, you would tag the tracks that contain your left, right, and
-    #   center audio with Left (L), Right (R), and Center (C), respectively.
-    #   When you don't specify a value, MediaConvert labels your track as
-    #   Center (C) by default. To use audio layout tagging, your output must
-    #   be in a QuickTime (.mov) container; your audio codec must be AAC,
-    #   WAV, or AIFF; and you must set up your audio track to have only one
-    #   channel.
+    #   Specify the QuickTime audio channel layout tags for the audio
+    #   channels in this audio track. When you don't specify a value,
+    #   MediaConvert labels your track as Center (C) by default. To use
+    #   Audio layout tagging, your output must be in a QuickTime (MOV)
+    #   container and your audio codec must be AAC, WAV, or AIFF.
     #   @return [Types::AudioChannelTaggingSettings]
     #
     # @!attribute [rw] audio_normalization_settings
@@ -2602,6 +2610,52 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Custom 3D lut settings
+    #
+    # @!attribute [rw] file_input
+    #   Specify the input file S3, HTTP, or HTTPS URL for your 3D LUT .cube
+    #   file. Note that MediaConvert accepts 3D LUT files up to 8MB in size.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_color_space
+    #   Specify which inputs use this 3D LUT, according to their color
+    #   space.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_mastering_luminance
+    #   Specify which inputs use this 3D LUT, according to their luminance.
+    #   To apply this 3D LUT to HDR10 or P3D65 (HDR) inputs with a specific
+    #   mastering luminance: Enter an integer from 0 to 2147483647,
+    #   corresponding to the input's Maximum luminance value. To apply this
+    #   3D LUT to any input regardless of its luminance: Leave blank, or
+    #   enter 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_color_space
+    #   Specify which outputs use this 3D LUT, according to their color
+    #   space.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_mastering_luminance
+    #   Specify which outputs use this 3D LUT, according to their luminance.
+    #   To apply this 3D LUT to HDR10 or P3D65 (HDR) outputs with a specific
+    #   luminance: Enter an integer from 0 to 2147483647, corresponding to
+    #   the output's luminance. To apply this 3D LUT to any output
+    #   regardless of its luminance: Leave blank, or enter 0.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ColorConversion3DLUTSetting AWS API Documentation
+    #
+    class ColorConversion3DLUTSetting < Struct.new(
+      :file_input,
+      :input_color_space,
+      :input_mastering_luminance,
+      :output_color_space,
+      :output_mastering_luminance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Settings for color correction.
     #
     # @!attribute [rw] brightness
@@ -2669,6 +2723,12 @@ module Aws::MediaConvert
     #   Hue in degrees.
     #   @return [Integer]
     #
+    # @!attribute [rw] max_luminance
+    #   Specify the maximum mastering display luminance. Enter an integer
+    #   from 0 to 2147483647, in units of 0.0001 nits. For example, enter
+    #   10000000 for 1000 nits.
+    #   @return [Integer]
+    #
     # @!attribute [rw] sample_range_conversion
     #   Specify how MediaConvert limits the color sample range for this
     #   output. To create a limited range output from a full range input:
@@ -2716,6 +2776,7 @@ module Aws::MediaConvert
       :hdr_10_metadata,
       :hdr_to_sdr_tone_mapper,
       :hue,
+      :max_luminance,
       :sample_range_conversion,
       :saturation,
       :sdr_reference_white_level)
@@ -4694,9 +4755,10 @@ module Aws::MediaConvert
     # Settings for F4v container
     #
     # @!attribute [rw] moov_placement
-    #   If set to PROGRESSIVE\_DOWNLOAD, the MOOV atom is relocated to the
-    #   beginning of the archive as required for progressive downloading.
-    #   Otherwise it is placed normally at the end.
+    #   To place the MOOV atom at the beginning of your output, which is
+    #   useful for progressive downloading: Leave blank or choose
+    #   Progressive download. To place the MOOV at the end of your output:
+    #   Choose Normal.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/F4vSettings AWS API Documentation
@@ -4822,7 +4884,7 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] sample_rate
-    #   Sample rate in hz.
+    #   Sample rate in Hz.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/FlacSettings AWS API Documentation
@@ -7859,6 +7921,12 @@ module Aws::MediaConvert
     #   with an image, and audio muted during SCTE-35 triggered ad avails.
     #   @return [Types::AvailBlanking]
     #
+    # @!attribute [rw] color_conversion_3_dlut_settings
+    #   Use 3D LUTs to specify custom color mapping behavior when you
+    #   convert from one color space into another. You can include up to 8
+    #   different 3D LUTs.
+    #   @return [Array<Types::ColorConversion3DLUTSetting>]
+    #
     # @!attribute [rw] esam
     #   Settings for Event Signaling And Messaging (ESAM). If you don't do
     #   ad insertion, you can ignore these settings.
@@ -7872,6 +7940,18 @@ module Aws::MediaConvert
     #   XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h Content
     #   Advisory.
     #   @return [Types::ExtendedDataServices]
+    #
+    # @!attribute [rw] follow_source
+    #   Specify the input that MediaConvert references for your default
+    #   output settings. MediaConvert uses this input's Resolution, Frame
+    #   rate, and Pixel aspect ratio for all outputs that you don't
+    #   manually specify different output settings for. Enabling this
+    #   setting will disable "Follow source" for all other inputs. If
+    #   MediaConvert cannot follow your source, for example if you specify
+    #   an audio-only input, MediaConvert uses the first followable input
+    #   instead. In your JSON job specification, enter an integer from 1 to
+    #   150 corresponding to the order of your inputs.
+    #   @return [Integer]
     #
     # @!attribute [rw] inputs
     #   Use Inputs to define source file used in the transcode job. There
@@ -7944,8 +8024,10 @@ module Aws::MediaConvert
     class JobSettings < Struct.new(
       :ad_avail_offset,
       :avail_blanking,
+      :color_conversion_3_dlut_settings,
       :esam,
       :extended_data_services,
+      :follow_source,
       :inputs,
       :kantar_watermark,
       :motion_image_inserter,
@@ -8057,6 +8139,12 @@ module Aws::MediaConvert
     #   with an image, and audio muted during SCTE-35 triggered ad avails.
     #   @return [Types::AvailBlanking]
     #
+    # @!attribute [rw] color_conversion_3_dlut_settings
+    #   Use 3D LUTs to specify custom color mapping behavior when you
+    #   convert from one color space into another. You can include up to 8
+    #   different 3D LUTs.
+    #   @return [Array<Types::ColorConversion3DLUTSetting>]
+    #
     # @!attribute [rw] esam
     #   Settings for Event Signaling And Messaging (ESAM). If you don't do
     #   ad insertion, you can ignore these settings.
@@ -8070,6 +8158,18 @@ module Aws::MediaConvert
     #   XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h Content
     #   Advisory.
     #   @return [Types::ExtendedDataServices]
+    #
+    # @!attribute [rw] follow_source
+    #   Specify the input that MediaConvert references for your default
+    #   output settings. MediaConvert uses this input's Resolution, Frame
+    #   rate, and Pixel aspect ratio for all outputs that you don't
+    #   manually specify different output settings for. Enabling this
+    #   setting will disable "Follow source" for all other inputs. If
+    #   MediaConvert cannot follow your source, for example if you specify
+    #   an audio-only input, MediaConvert uses the first followable input
+    #   instead. In your JSON job specification, enter an integer from 1 to
+    #   150 corresponding to the order of your inputs.
+    #   @return [Integer]
     #
     # @!attribute [rw] inputs
     #   Use Inputs to define the source file used in the transcode job.
@@ -8142,8 +8242,10 @@ module Aws::MediaConvert
     class JobTemplateSettings < Struct.new(
       :ad_avail_offset,
       :avail_blanking,
+      :color_conversion_3_dlut_settings,
       :esam,
       :extended_data_services,
+      :follow_source,
       :inputs,
       :kantar_watermark,
       :motion_image_inserter,
@@ -9315,7 +9417,7 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] sample_rate
-    #   Sample rate in hz.
+    #   Sample rate in Hz.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Mp2Settings AWS API Documentation
@@ -9347,7 +9449,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] sample_rate
-    #   Sample rate in hz.
+    #   Sample rate in Hz.
     #   @return [Integer]
     #
     # @!attribute [rw] vbr_quality
@@ -9413,9 +9515,10 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] moov_placement
-    #   If set to PROGRESSIVE\_DOWNLOAD, the MOOV atom is relocated to the
-    #   beginning of the archive as required for progressive downloading.
-    #   Otherwise it is placed normally at the end.
+    #   To place the MOOV atom at the beginning of your output, which is
+    #   useful for progressive downloading: Leave blank or choose
+    #   Progressive download. To place the MOOV at the end of your output:
+    #   Choose Normal.
     #   @return [String]
     #
     # @!attribute [rw] mp_4_major_brand
@@ -10445,7 +10548,7 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] sample_rate
-    #   Optional. Sample rate in hz. Valid values are 16000, 24000, and
+    #   Optional. Sample rate in Hz. Valid values are 16000, 24000, and
     #   48000. The default value is 48000.
     #   @return [Integer]
     #
@@ -11166,6 +11269,26 @@ module Aws::MediaConvert
     # output more or fewer audio channels than your input audio source
     # provides.
     #
+    # @!attribute [rw] audio_description_audio_channel
+    #   Optionally specify the channel in your input that contains your
+    #   audio description audio signal. MediaConvert mixes your audio signal
+    #   across all output channels, while reducing their volume according to
+    #   your data stream. When you specify an audio description audio
+    #   channel, you must also specify an audio description data channel.
+    #   For more information about audio description signals, see the BBC
+    #   WHP 198 and 051 white papers.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] audio_description_data_channel
+    #   Optionally specify the channel in your input that contains your
+    #   audio description data stream. MediaConvert mixes your audio signal
+    #   across all output channels, while reducing their volume according to
+    #   your data stream. When you specify an audio description data
+    #   channel, you must also specify an audio description audio channel.
+    #   For more information about audio description signals, see the BBC
+    #   WHP 198 and 051 white papers.
+    #   @return [Integer]
+    #
     # @!attribute [rw] channel_mapping
     #   Channel mapping contains the group of fields that hold the remixing
     #   value for each channel, in dB. Specify remix values to indicate how
@@ -11203,6 +11326,8 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/RemixSettings AWS API Documentation
     #
     class RemixSettings < Struct.new(
+      :audio_description_audio_channel,
+      :audio_description_data_channel,
       :channel_mapping,
       :channels_in,
       :channels_out)
@@ -11846,6 +11971,113 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Required when you set Codec, under VideoDescription>CodecSettings to
+    # the value UNCOMPRESSED.
+    #
+    # @!attribute [rw] fourcc
+    #   The four character code for the uncompressed video.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_control
+    #   Use the Framerate setting to specify the frame rate for this output.
+    #   If you want to keep the same frame rate as the input video, choose
+    #   Follow source. If you want to do frame rate conversion, choose a
+    #   frame rate from the dropdown list or choose Custom. The framerates
+    #   shown in the dropdown list are decimal approximations of fractions.
+    #   If you choose Custom, specify your frame rate as a fraction.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_conversion_algorithm
+    #   Choose the method that you want MediaConvert to use when increasing
+    #   or decreasing the frame rate. For numerically simple conversions,
+    #   such as 60 fps to 30 fps: We recommend that you keep the default
+    #   value, Drop duplicate. For numerically complex conversions, to avoid
+    #   stutter: Choose Interpolate. This results in a smooth picture, but
+    #   might introduce undesirable video artifacts. For complex frame rate
+    #   conversions, especially if your source video has already been
+    #   converted from its original cadence: Choose FrameFormer to do
+    #   motion-compensated interpolation. FrameFormer uses the best
+    #   conversion method frame by frame. Note that using FrameFormer
+    #   increases the transcoding time and incurs a significant add-on cost.
+    #   When you choose FrameFormer, your input video resolution must be at
+    #   least 128x96.
+    #   @return [String]
+    #
+    # @!attribute [rw] framerate_denominator
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateDenominator to specify the
+    #   denominator of this fraction. In this example, use 1001 for the
+    #   value of FramerateDenominator. When you use the console for
+    #   transcode jobs that use frame rate conversion, provide the value as
+    #   a decimal number for Framerate. In this example, specify 23.976.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate_numerator
+    #   When you use the API for transcode jobs that use frame rate
+    #   conversion, specify the frame rate as a fraction. For example, 24000
+    #   / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator
+    #   of this fraction. In this example, use 24000 for the value of
+    #   FramerateNumerator. When you use the console for transcode jobs that
+    #   use frame rate conversion, provide the value as a decimal number for
+    #   Framerate. In this example, specify 23.976.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interlace_mode
+    #   Optional. Choose the scan line type for this output. If you don't
+    #   specify a value, MediaConvert will create a progressive output.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_type_conversion_mode
+    #   Use this setting for interlaced outputs, when your output frame rate
+    #   is half of your input frame rate. In this situation, choose
+    #   Optimized interlacing to create a better quality interlaced output.
+    #   In this case, each progressive frame from the input corresponds to
+    #   an interlaced field in the output. Keep the default value, Basic
+    #   interlacing, for all other output frame rates. With basic
+    #   interlacing, MediaConvert performs any frame rate conversion first
+    #   and then interlaces the frames. When you choose Optimized
+    #   interlacing and you set your output frame rate to a value that
+    #   isn't suitable for optimized interlacing, MediaConvert
+    #   automatically falls back to basic interlacing. Required settings: To
+    #   use optimized interlacing, you must set Telecine to None or Soft.
+    #   You can't use optimized interlacing for hard telecine outputs. You
+    #   must also set Interlace mode to a value other than Progressive.
+    #   @return [String]
+    #
+    # @!attribute [rw] slow_pal
+    #   Ignore this setting unless your input frame rate is 23.976 or 24
+    #   frames per second (fps). Enable slow PAL to create a 25 fps output
+    #   by relabeling the video frames and resampling your audio. Note that
+    #   enabling this setting will slightly reduce the duration of your
+    #   video. Related settings: You must also set Framerate to 25.
+    #   @return [String]
+    #
+    # @!attribute [rw] telecine
+    #   When you do frame rate conversion from 23.976 frames per second
+    #   (fps) to 29.97 fps, and your output scan type is interlaced, you can
+    #   optionally enable hard telecine to create a smoother picture. When
+    #   you keep the default value, None, MediaConvert does a standard frame
+    #   rate conversion to 29.97 without doing anything with the field
+    #   polarity to create a smoother picture.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UncompressedSettings AWS API Documentation
+    #
+    class UncompressedSettings < Struct.new(
+      :fourcc,
+      :framerate_control,
+      :framerate_conversion_algorithm,
+      :framerate_denominator,
+      :framerate_numerator,
+      :interlace_mode,
+      :scan_type_conversion_mode,
+      :slow_pal,
+      :telecine)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # To remove tags from a resource, send a request with the Amazon
     # Resource Name (ARN) of the resource and the keys of the tags that you
     # want to remove.
@@ -12186,8 +12418,9 @@ module Aws::MediaConvert
     # codec enum, settings object pairs. * AV1, Av1Settings * AVC\_INTRA,
     # AvcIntraSettings * FRAME\_CAPTURE, FrameCaptureSettings * H\_264,
     # H264Settings * H\_265, H265Settings * MPEG2, Mpeg2Settings *
-    # PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9,
-    # Vp9Settings * XAVC, XavcSettings
+    # PRORES, ProresSettings * UNCOMPRESSED, UncompressedSettings * VC3,
+    # Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC,
+    # XavcSettings
     #
     # @!attribute [rw] av_1_settings
     #   Required when you set Codec, under VideoDescription>CodecSettings to
@@ -12233,6 +12466,11 @@ module Aws::MediaConvert
     #   Required when you set Codec to the value PRORES.
     #   @return [Types::ProresSettings]
     #
+    # @!attribute [rw] uncompressed_settings
+    #   Required when you set Codec, under VideoDescription>CodecSettings to
+    #   the value UNCOMPRESSED.
+    #   @return [Types::UncompressedSettings]
+    #
     # @!attribute [rw] vc_3_settings
     #   Required when you set Codec to the value VC3
     #   @return [Types::Vc3Settings]
@@ -12260,6 +12498,7 @@ module Aws::MediaConvert
       :h265_settings,
       :mpeg_2_settings,
       :prores_settings,
+      :uncompressed_settings,
       :vc_3_settings,
       :vp_8_settings,
       :vp_9_settings,
@@ -12295,8 +12534,9 @@ module Aws::MediaConvert
     #   lists the codec enum, settings object pairs. * AV1, Av1Settings *
     #   AVC\_INTRA, AvcIntraSettings * FRAME\_CAPTURE, FrameCaptureSettings
     #   * H\_264, H264Settings * H\_265, H265Settings * MPEG2,
-    #   Mpeg2Settings * PRORES, ProresSettings * VC3, Vc3Settings * VP8,
-    #   Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings
+    #   Mpeg2Settings * PRORES, ProresSettings * UNCOMPRESSED,
+    #   UncompressedSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9,
+    #   Vp9Settings * XAVC, XavcSettings
     #   @return [Types::VideoCodecSettings]
     #
     # @!attribute [rw] color_metadata
@@ -12352,12 +12592,9 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] scaling_behavior
-    #   Specify how the service handles outputs that have a different aspect
-    #   ratio from the input aspect ratio. Choose Stretch to output to have
-    #   the service stretch your video image to fit. Keep the setting
-    #   Default to have the service letterbox your video instead. This
-    #   setting overrides any value that you specify for the setting
-    #   Selection placement in this output.
+    #   Specify the video Scaling behavior when your output has a different
+    #   resolution than your input. For more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html
     #   @return [String]
     #
     # @!attribute [rw] sharpness
@@ -12440,7 +12677,9 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Overlay one or more videos on top of your input video.
+    # Overlay one or more videos on top of your input video. For more
+    # information, see
+    # https://docs.aws.amazon.com/mediaconvert/latest/ug/video-overlays.html
     #
     # @!attribute [rw] end_timecode
     #   Enter the end timecode in the underlying input video for this
@@ -12499,11 +12738,11 @@ module Aws::MediaConvert
     #   @return [Array<Types::VideoOverlayInputClipping>]
     #
     # @!attribute [rw] timecode_source
-    #   Specify the starting timecode for your video overlay. To use the
-    #   timecode present in your video overlay: Choose Embedded. To use a
-    #   zerobased timecode: Choose Start at 0. To choose a timecode: Choose
-    #   Specified start. When you do, enter the starting timecode in Start
-    #   timecode. If you don't specify a value for Timecode source,
+    #   Specify the timecode source for your video overlay input clips. To
+    #   use the timecode present in your video overlay: Choose Embedded. To
+    #   use a zerobased timecode: Choose Start at 0. To choose a timecode:
+    #   Choose Specified start. When you do, enter the starting timecode in
+    #   Start timecode. If you don't specify a value for Timecode source,
     #   MediaConvert uses Embedded by default.
     #   @return [String]
     #
@@ -12688,6 +12927,12 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/console/mediaconvert/hdr.
     #   @return [Types::Hdr10Metadata]
     #
+    # @!attribute [rw] max_luminance
+    #   Specify the maximum mastering display luminance. Enter an integer
+    #   from 0 to 2147483647, in units of 0.0001 nits. For example, enter
+    #   10000000 for 1000 nits.
+    #   @return [Integer]
+    #
     # @!attribute [rw] pad_video
     #   Use this setting if your input has video and audio durations that
     #   don't align, and your output or player has strict alignment
@@ -12747,6 +12992,7 @@ module Aws::MediaConvert
       :color_space_usage,
       :embedded_timecode_override,
       :hdr_10_metadata,
+      :max_luminance,
       :pad_video,
       :pid,
       :program_number,

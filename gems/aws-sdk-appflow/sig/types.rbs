@@ -1,0 +1,1491 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Appflow
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AggregationConfig
+      attr_accessor aggregation_type: ("None" | "SingleFile")
+      attr_accessor target_file_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class AmplitudeConnectorProfileCredentials
+      attr_accessor api_key: ::String
+      attr_accessor secret_key: ::String
+      SENSITIVE: [:api_key, :secret_key]
+    end
+
+    class AmplitudeConnectorProfileProperties < Aws::EmptyStructure
+    end
+
+    class AmplitudeMetadata < Aws::EmptyStructure
+    end
+
+    class AmplitudeSourceProperties
+      attr_accessor object: ::String
+      SENSITIVE: []
+    end
+
+    class ApiKeyCredentials
+      attr_accessor api_key: ::String
+      attr_accessor api_secret_key: ::String
+      SENSITIVE: [:api_key, :api_secret_key]
+    end
+
+    class AuthParameter
+      attr_accessor key: ::String
+      attr_accessor is_required: bool
+      attr_accessor label: ::String
+      attr_accessor description: ::String
+      attr_accessor is_sensitive_field: bool
+      attr_accessor connector_supplied_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AuthenticationConfig
+      attr_accessor is_basic_auth_supported: bool
+      attr_accessor is_api_key_auth_supported: bool
+      attr_accessor is_o_auth_2_supported: bool
+      attr_accessor is_custom_auth_supported: bool
+      attr_accessor o_auth_2_defaults: Types::OAuth2Defaults
+      attr_accessor custom_auth_configs: ::Array[Types::CustomAuthConfig]
+      SENSITIVE: []
+    end
+
+    class BasicAuthCredentials
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class CancelFlowExecutionsRequest
+      attr_accessor flow_name: ::String
+      attr_accessor execution_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CancelFlowExecutionsResponse
+      attr_accessor invalid_executions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectorAuthenticationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectorConfiguration
+      attr_accessor can_use_as_source: bool
+      attr_accessor can_use_as_destination: bool
+      attr_accessor supported_destination_connectors: ::Array[("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot")]
+      attr_accessor supported_scheduling_frequencies: ::Array[("BYMINUTE" | "HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "ONCE")]
+      attr_accessor is_private_link_enabled: bool
+      attr_accessor is_private_link_endpoint_url_required: bool
+      attr_accessor supported_trigger_types: ::Array[("Scheduled" | "Event" | "OnDemand")]
+      attr_accessor connector_metadata: Types::ConnectorMetadata
+      attr_accessor connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot")
+      attr_accessor connector_label: ::String
+      attr_accessor connector_description: ::String
+      attr_accessor connector_owner: ::String
+      attr_accessor connector_name: ::String
+      attr_accessor connector_version: ::String
+      attr_accessor connector_arn: ::String
+      attr_accessor connector_modes: ::Array[::String]
+      attr_accessor authentication_config: Types::AuthenticationConfig
+      attr_accessor connector_runtime_settings: ::Array[Types::ConnectorRuntimeSetting]
+      attr_accessor supported_api_versions: ::Array[::String]
+      attr_accessor supported_operators: ::Array[("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "CONTAINS" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")]
+      attr_accessor supported_write_operations: ::Array[("INSERT" | "UPSERT" | "UPDATE" | "DELETE")]
+      attr_accessor connector_provisioning_type: ("LAMBDA")
+      attr_accessor connector_provisioning_config: Types::ConnectorProvisioningConfig
+      attr_accessor logo_url: ::String
+      attr_accessor registered_at: ::Time
+      attr_accessor registered_by: ::String
+      attr_accessor supported_data_transfer_types: ::Array[("RECORD" | "FILE")]
+      attr_accessor supported_data_transfer_apis: ::Array[Types::DataTransferApi]
+      SENSITIVE: []
+    end
+
+    class ConnectorDetail
+      attr_accessor connector_description: ::String
+      attr_accessor connector_name: ::String
+      attr_accessor connector_owner: ::String
+      attr_accessor connector_version: ::String
+      attr_accessor application_type: ::String
+      attr_accessor connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot")
+      attr_accessor connector_label: ::String
+      attr_accessor registered_at: ::Time
+      attr_accessor registered_by: ::String
+      attr_accessor connector_provisioning_type: ("LAMBDA")
+      attr_accessor connector_modes: ::Array[::String]
+      attr_accessor supported_data_transfer_types: ::Array[("RECORD" | "FILE")]
+      SENSITIVE: []
+    end
+
+    class ConnectorEntity
+      attr_accessor name: ::String
+      attr_accessor label: ::String
+      attr_accessor has_nested_entities: bool
+      SENSITIVE: []
+    end
+
+    class ConnectorEntityField
+      attr_accessor identifier: ::String
+      attr_accessor parent_identifier: ::String
+      attr_accessor label: ::String
+      attr_accessor is_primary_key: bool
+      attr_accessor default_value: ::String
+      attr_accessor is_deprecated: bool
+      attr_accessor supported_field_type_details: Types::SupportedFieldTypeDetails
+      attr_accessor description: ::String
+      attr_accessor source_properties: Types::SourceFieldProperties
+      attr_accessor destination_properties: Types::DestinationFieldProperties
+      attr_accessor custom_properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ConnectorMetadata
+      attr_accessor amplitude: Types::AmplitudeMetadata
+      attr_accessor datadog: Types::DatadogMetadata
+      attr_accessor dynatrace: Types::DynatraceMetadata
+      attr_accessor google_analytics: Types::GoogleAnalyticsMetadata
+      attr_accessor infor_nexus: Types::InforNexusMetadata
+      attr_accessor marketo: Types::MarketoMetadata
+      attr_accessor redshift: Types::RedshiftMetadata
+      attr_accessor s3: Types::S3Metadata
+      attr_accessor salesforce: Types::SalesforceMetadata
+      attr_accessor service_now: Types::ServiceNowMetadata
+      attr_accessor singular: Types::SingularMetadata
+      attr_accessor slack: Types::SlackMetadata
+      attr_accessor snowflake: Types::SnowflakeMetadata
+      attr_accessor trendmicro: Types::TrendmicroMetadata
+      attr_accessor veeva: Types::VeevaMetadata
+      attr_accessor zendesk: Types::ZendeskMetadata
+      attr_accessor event_bridge: Types::EventBridgeMetadata
+      attr_accessor upsolver: Types::UpsolverMetadata
+      attr_accessor customer_profiles: Types::CustomerProfilesMetadata
+      attr_accessor honeycode: Types::HoneycodeMetadata
+      attr_accessor sapo_data: Types::SAPODataMetadata
+      attr_accessor pardot: Types::PardotMetadata
+      SENSITIVE: []
+    end
+
+    class ConnectorOAuthRequest
+      attr_accessor auth_code: ::String
+      attr_accessor redirect_uri: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectorOperator
+      attr_accessor amplitude: ("BETWEEN")
+      attr_accessor datadog: ("PROJECTION" | "BETWEEN" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor dynatrace: ("PROJECTION" | "BETWEEN" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor google_analytics: ("PROJECTION" | "BETWEEN")
+      attr_accessor infor_nexus: ("PROJECTION" | "BETWEEN" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor marketo: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor s3: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor salesforce: ("PROJECTION" | "LESS_THAN" | "CONTAINS" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor service_now: ("PROJECTION" | "CONTAINS" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor singular: ("PROJECTION" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor slack: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor trendmicro: ("PROJECTION" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor veeva: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "CONTAINS" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor zendesk: ("PROJECTION" | "GREATER_THAN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor sapo_data: ("PROJECTION" | "LESS_THAN" | "CONTAINS" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor custom_connector: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "CONTAINS" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor pardot: ("PROJECTION" | "EQUAL_TO" | "NO_OP" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC")
+      SENSITIVE: []
+    end
+
+    class ConnectorProfile
+      attr_accessor connector_profile_arn: ::String
+      attr_accessor connector_profile_name: ::String
+      attr_accessor connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot")
+      attr_accessor connector_label: ::String
+      attr_accessor connection_mode: ("Public" | "Private")
+      attr_accessor credentials_arn: ::String
+      attr_accessor connector_profile_properties: Types::ConnectorProfileProperties
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor private_connection_provisioning_state: Types::PrivateConnectionProvisioningState
+      SENSITIVE: []
+    end
+
+    class ConnectorProfileConfig
+      attr_accessor connector_profile_properties: Types::ConnectorProfileProperties
+      attr_accessor connector_profile_credentials: Types::ConnectorProfileCredentials
+      SENSITIVE: []
+    end
+
+    class ConnectorProfileCredentials
+      attr_accessor amplitude: Types::AmplitudeConnectorProfileCredentials
+      attr_accessor datadog: Types::DatadogConnectorProfileCredentials
+      attr_accessor dynatrace: Types::DynatraceConnectorProfileCredentials
+      attr_accessor google_analytics: Types::GoogleAnalyticsConnectorProfileCredentials
+      attr_accessor honeycode: Types::HoneycodeConnectorProfileCredentials
+      attr_accessor infor_nexus: Types::InforNexusConnectorProfileCredentials
+      attr_accessor marketo: Types::MarketoConnectorProfileCredentials
+      attr_accessor redshift: Types::RedshiftConnectorProfileCredentials
+      attr_accessor salesforce: Types::SalesforceConnectorProfileCredentials
+      attr_accessor service_now: Types::ServiceNowConnectorProfileCredentials
+      attr_accessor singular: Types::SingularConnectorProfileCredentials
+      attr_accessor slack: Types::SlackConnectorProfileCredentials
+      attr_accessor snowflake: Types::SnowflakeConnectorProfileCredentials
+      attr_accessor trendmicro: Types::TrendmicroConnectorProfileCredentials
+      attr_accessor veeva: Types::VeevaConnectorProfileCredentials
+      attr_accessor zendesk: Types::ZendeskConnectorProfileCredentials
+      attr_accessor sapo_data: Types::SAPODataConnectorProfileCredentials
+      attr_accessor custom_connector: Types::CustomConnectorProfileCredentials
+      attr_accessor pardot: Types::PardotConnectorProfileCredentials
+      SENSITIVE: []
+    end
+
+    class ConnectorProfileProperties
+      attr_accessor amplitude: Types::AmplitudeConnectorProfileProperties
+      attr_accessor datadog: Types::DatadogConnectorProfileProperties
+      attr_accessor dynatrace: Types::DynatraceConnectorProfileProperties
+      attr_accessor google_analytics: Types::GoogleAnalyticsConnectorProfileProperties
+      attr_accessor honeycode: Types::HoneycodeConnectorProfileProperties
+      attr_accessor infor_nexus: Types::InforNexusConnectorProfileProperties
+      attr_accessor marketo: Types::MarketoConnectorProfileProperties
+      attr_accessor redshift: Types::RedshiftConnectorProfileProperties
+      attr_accessor salesforce: Types::SalesforceConnectorProfileProperties
+      attr_accessor service_now: Types::ServiceNowConnectorProfileProperties
+      attr_accessor singular: Types::SingularConnectorProfileProperties
+      attr_accessor slack: Types::SlackConnectorProfileProperties
+      attr_accessor snowflake: Types::SnowflakeConnectorProfileProperties
+      attr_accessor trendmicro: Types::TrendmicroConnectorProfileProperties
+      attr_accessor veeva: Types::VeevaConnectorProfileProperties
+      attr_accessor zendesk: Types::ZendeskConnectorProfileProperties
+      attr_accessor sapo_data: Types::SAPODataConnectorProfileProperties
+      attr_accessor custom_connector: Types::CustomConnectorProfileProperties
+      attr_accessor pardot: Types::PardotConnectorProfileProperties
+      SENSITIVE: []
+    end
+
+    class ConnectorProvisioningConfig
+      attr_accessor lambda: Types::LambdaConnectorProvisioningConfig
+      SENSITIVE: []
+    end
+
+    class ConnectorRuntimeSetting
+      attr_accessor key: ::String
+      attr_accessor data_type: ::String
+      attr_accessor is_required: bool
+      attr_accessor label: ::String
+      attr_accessor description: ::String
+      attr_accessor scope: ::String
+      attr_accessor connector_supplied_value_options: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConnectorServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectorProfileRequest
+      attr_accessor connector_profile_name: ::String
+      attr_accessor kms_arn: ::String
+      attr_accessor connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot")
+      attr_accessor connector_label: ::String
+      attr_accessor connection_mode: ("Public" | "Private")
+      attr_accessor connector_profile_config: Types::ConnectorProfileConfig
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectorProfileResponse
+      attr_accessor connector_profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFlowRequest
+      attr_accessor flow_name: ::String
+      attr_accessor description: ::String
+      attr_accessor kms_arn: ::String
+      attr_accessor trigger_config: Types::TriggerConfig
+      attr_accessor source_flow_config: Types::SourceFlowConfig
+      attr_accessor destination_flow_config_list: ::Array[Types::DestinationFlowConfig]
+      attr_accessor tasks: ::Array[Types::Task]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor metadata_catalog_config: Types::MetadataCatalogConfig
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFlowResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor flow_status: ("Active" | "Deprecated" | "Deleted" | "Draft" | "Errored" | "Suspended")
+      SENSITIVE: []
+    end
+
+    class CustomAuthConfig
+      attr_accessor custom_authentication_type: ::String
+      attr_accessor auth_parameters: ::Array[Types::AuthParameter]
+      SENSITIVE: []
+    end
+
+    class CustomAuthCredentials
+      attr_accessor custom_authentication_type: ::String
+      attr_accessor credentials_map: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CustomConnectorDestinationProperties
+      attr_accessor entity_name: ::String
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig
+      attr_accessor write_operation_type: ("INSERT" | "UPSERT" | "UPDATE" | "DELETE")
+      attr_accessor id_field_names: ::Array[::String]
+      attr_accessor custom_properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CustomConnectorProfileCredentials
+      attr_accessor authentication_type: ("OAUTH2" | "APIKEY" | "BASIC" | "CUSTOM")
+      attr_accessor basic: Types::BasicAuthCredentials
+      attr_accessor oauth2: Types::OAuth2Credentials
+      attr_accessor api_key: Types::ApiKeyCredentials
+      attr_accessor custom: Types::CustomAuthCredentials
+      SENSITIVE: []
+    end
+
+    class CustomConnectorProfileProperties
+      attr_accessor profile_properties: ::Hash[::String, ::String]
+      attr_accessor o_auth_2_properties: Types::OAuth2Properties
+      SENSITIVE: []
+    end
+
+    class CustomConnectorSourceProperties
+      attr_accessor entity_name: ::String
+      attr_accessor custom_properties: ::Hash[::String, ::String]
+      attr_accessor data_transfer_api: Types::DataTransferApi
+      SENSITIVE: []
+    end
+
+    class CustomerProfilesDestinationProperties
+      attr_accessor domain_name: ::String
+      attr_accessor object_type_name: ::String
+      SENSITIVE: []
+    end
+
+    class CustomerProfilesMetadata < Aws::EmptyStructure
+    end
+
+    class DataTransferApi
+      attr_accessor name: ::String
+      attr_accessor type: ("SYNC" | "ASYNC" | "AUTOMATIC")
+      SENSITIVE: []
+    end
+
+    class DatadogConnectorProfileCredentials
+      attr_accessor api_key: ::String
+      attr_accessor application_key: ::String
+      SENSITIVE: [:api_key]
+    end
+
+    class DatadogConnectorProfileProperties
+      attr_accessor instance_url: ::String
+      SENSITIVE: []
+    end
+
+    class DatadogMetadata < Aws::EmptyStructure
+    end
+
+    class DatadogSourceProperties
+      attr_accessor object: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectorProfileRequest
+      attr_accessor connector_profile_name: ::String
+      attr_accessor force_delete: bool
+      SENSITIVE: []
+    end
+
+    class DeleteConnectorProfileResponse < Aws::EmptyStructure
+    end
+
+    class DeleteFlowRequest
+      attr_accessor flow_name: ::String
+      attr_accessor force_delete: bool
+      SENSITIVE: []
+    end
+
+    class DeleteFlowResponse < Aws::EmptyStructure
+    end
+
+    class DescribeConnectorEntityRequest
+      attr_accessor connector_entity_name: ::String
+      attr_accessor connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot")
+      attr_accessor connector_profile_name: ::String
+      attr_accessor api_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConnectorEntityResponse
+      attr_accessor connector_entity_fields: ::Array[Types::ConnectorEntityField]
+      SENSITIVE: []
+    end
+
+    class DescribeConnectorProfilesRequest
+      attr_accessor connector_profile_names: ::Array[::String]
+      attr_accessor connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot")
+      attr_accessor connector_label: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConnectorProfilesResponse
+      attr_accessor connector_profile_details: ::Array[Types::ConnectorProfile]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConnectorRequest
+      attr_accessor connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot")
+      attr_accessor connector_label: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConnectorResponse
+      attr_accessor connector_configuration: Types::ConnectorConfiguration
+      SENSITIVE: []
+    end
+
+    class DescribeConnectorsRequest
+      attr_accessor connector_types: ::Array[("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConnectorsResponse
+      attr_accessor connector_configurations: ::Hash[("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot"), Types::ConnectorConfiguration]
+      attr_accessor connectors: ::Array[Types::ConnectorDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFlowExecutionRecordsRequest
+      attr_accessor flow_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFlowExecutionRecordsResponse
+      attr_accessor flow_executions: ::Array[Types::ExecutionRecord]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFlowRequest
+      attr_accessor flow_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFlowResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor flow_name: ::String
+      attr_accessor kms_arn: ::String
+      attr_accessor flow_status: ("Active" | "Deprecated" | "Deleted" | "Draft" | "Errored" | "Suspended")
+      attr_accessor flow_status_message: ::String
+      attr_accessor source_flow_config: Types::SourceFlowConfig
+      attr_accessor destination_flow_config_list: ::Array[Types::DestinationFlowConfig]
+      attr_accessor last_run_execution_details: Types::ExecutionDetails
+      attr_accessor trigger_config: Types::TriggerConfig
+      attr_accessor tasks: ::Array[Types::Task]
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor last_updated_by: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor metadata_catalog_config: Types::MetadataCatalogConfig
+      attr_accessor last_run_metadata_catalog_details: ::Array[Types::MetadataCatalogDetail]
+      attr_accessor schema_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DestinationConnectorProperties
+      attr_accessor redshift: Types::RedshiftDestinationProperties
+      attr_accessor s3: Types::S3DestinationProperties
+      attr_accessor salesforce: Types::SalesforceDestinationProperties
+      attr_accessor snowflake: Types::SnowflakeDestinationProperties
+      attr_accessor event_bridge: Types::EventBridgeDestinationProperties
+      attr_accessor lookout_metrics: Types::LookoutMetricsDestinationProperties
+      attr_accessor upsolver: Types::UpsolverDestinationProperties
+      attr_accessor honeycode: Types::HoneycodeDestinationProperties
+      attr_accessor customer_profiles: Types::CustomerProfilesDestinationProperties
+      attr_accessor zendesk: Types::ZendeskDestinationProperties
+      attr_accessor marketo: Types::MarketoDestinationProperties
+      attr_accessor custom_connector: Types::CustomConnectorDestinationProperties
+      attr_accessor sapo_data: Types::SAPODataDestinationProperties
+      SENSITIVE: []
+    end
+
+    class DestinationFieldProperties
+      attr_accessor is_creatable: bool
+      attr_accessor is_nullable: bool
+      attr_accessor is_upsertable: bool
+      attr_accessor is_updatable: bool
+      attr_accessor is_defaulted_on_create: bool
+      attr_accessor supported_write_operations: ::Array[("INSERT" | "UPSERT" | "UPDATE" | "DELETE")]
+      SENSITIVE: []
+    end
+
+    class DestinationFlowConfig
+      attr_accessor connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot")
+      attr_accessor api_version: ::String
+      attr_accessor connector_profile_name: ::String
+      attr_accessor destination_connector_properties: Types::DestinationConnectorProperties
+      SENSITIVE: []
+    end
+
+    class DynatraceConnectorProfileCredentials
+      attr_accessor api_token: ::String
+      SENSITIVE: []
+    end
+
+    class DynatraceConnectorProfileProperties
+      attr_accessor instance_url: ::String
+      SENSITIVE: []
+    end
+
+    class DynatraceMetadata < Aws::EmptyStructure
+    end
+
+    class DynatraceSourceProperties
+      attr_accessor object: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorHandlingConfig
+      attr_accessor fail_on_first_destination_error: bool
+      attr_accessor bucket_prefix: ::String
+      attr_accessor bucket_name: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorInfo
+      attr_accessor put_failures_count: ::Integer
+      attr_accessor execution_message: ::String
+      SENSITIVE: []
+    end
+
+    class EventBridgeDestinationProperties
+      attr_accessor object: ::String
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig
+      SENSITIVE: []
+    end
+
+    class EventBridgeMetadata < Aws::EmptyStructure
+    end
+
+    class ExecutionDetails
+      attr_accessor most_recent_execution_message: ::String
+      attr_accessor most_recent_execution_time: ::Time
+      attr_accessor most_recent_execution_status: ("InProgress" | "Successful" | "Error" | "CancelStarted" | "Canceled")
+      SENSITIVE: []
+    end
+
+    class ExecutionRecord
+      attr_accessor execution_id: ::String
+      attr_accessor execution_status: ("InProgress" | "Successful" | "Error" | "CancelStarted" | "Canceled")
+      attr_accessor execution_result: Types::ExecutionResult
+      attr_accessor started_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor data_pull_start_time: ::Time
+      attr_accessor data_pull_end_time: ::Time
+      attr_accessor metadata_catalog_details: ::Array[Types::MetadataCatalogDetail]
+      SENSITIVE: []
+    end
+
+    class ExecutionResult
+      attr_accessor error_info: Types::ErrorInfo
+      attr_accessor bytes_processed: ::Integer
+      attr_accessor bytes_written: ::Integer
+      attr_accessor records_processed: ::Integer
+      attr_accessor num_parallel_processes: ::Integer
+      attr_accessor max_page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class FieldTypeDetails
+      attr_accessor field_type: ::String
+      attr_accessor filter_operators: ::Array[("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "CONTAINS" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")]
+      attr_accessor supported_values: ::Array[::String]
+      attr_accessor value_regex_pattern: ::String
+      attr_accessor supported_date_format: ::String
+      attr_accessor field_value_range: Types::Range
+      attr_accessor field_length_range: Types::Range
+      SENSITIVE: []
+    end
+
+    class FlowDefinition
+      attr_accessor flow_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor flow_name: ::String
+      attr_accessor flow_status: ("Active" | "Deprecated" | "Deleted" | "Draft" | "Errored" | "Suspended")
+      attr_accessor source_connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot")
+      attr_accessor source_connector_label: ::String
+      attr_accessor destination_connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot")
+      attr_accessor destination_connector_label: ::String
+      attr_accessor trigger_type: ("Scheduled" | "Event" | "OnDemand")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor last_updated_by: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor last_run_execution_details: Types::ExecutionDetails
+      SENSITIVE: []
+    end
+
+    class GlueDataCatalogConfig
+      attr_accessor role_arn: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class GoogleAnalyticsConnectorProfileCredentials
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor access_token: ::String
+      attr_accessor refresh_token: ::String
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest
+      SENSITIVE: [:client_secret, :access_token]
+    end
+
+    class GoogleAnalyticsConnectorProfileProperties < Aws::EmptyStructure
+    end
+
+    class GoogleAnalyticsMetadata
+      attr_accessor o_auth_scopes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GoogleAnalyticsSourceProperties
+      attr_accessor object: ::String
+      SENSITIVE: []
+    end
+
+    class HoneycodeConnectorProfileCredentials
+      attr_accessor access_token: ::String
+      attr_accessor refresh_token: ::String
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest
+      SENSITIVE: [:access_token]
+    end
+
+    class HoneycodeConnectorProfileProperties < Aws::EmptyStructure
+    end
+
+    class HoneycodeDestinationProperties
+      attr_accessor object: ::String
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig
+      SENSITIVE: []
+    end
+
+    class HoneycodeMetadata
+      attr_accessor o_auth_scopes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IncrementalPullConfig
+      attr_accessor datetime_type_field_name: ::String
+      SENSITIVE: []
+    end
+
+    class InforNexusConnectorProfileCredentials
+      attr_accessor access_key_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor secret_access_key: ::String
+      attr_accessor datakey: ::String
+      SENSITIVE: [:access_key_id]
+    end
+
+    class InforNexusConnectorProfileProperties
+      attr_accessor instance_url: ::String
+      SENSITIVE: []
+    end
+
+    class InforNexusMetadata < Aws::EmptyStructure
+    end
+
+    class InforNexusSourceProperties
+      attr_accessor object: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaConnectorProvisioningConfig
+      attr_accessor lambda_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectorEntitiesRequest
+      attr_accessor connector_profile_name: ::String
+      attr_accessor connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot")
+      attr_accessor entities_path: ::String
+      attr_accessor api_version: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectorEntitiesResponse
+      attr_accessor connector_entity_map: ::Hash[::String, ::Array[Types::ConnectorEntity]]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectorsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectorsResponse
+      attr_accessor connectors: ::Array[Types::ConnectorDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFlowsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFlowsResponse
+      attr_accessor flows: ::Array[Types::FlowDefinition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LookoutMetricsDestinationProperties < Aws::EmptyStructure
+    end
+
+    class MarketoConnectorProfileCredentials
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor access_token: ::String
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest
+      SENSITIVE: [:client_secret, :access_token]
+    end
+
+    class MarketoConnectorProfileProperties
+      attr_accessor instance_url: ::String
+      SENSITIVE: []
+    end
+
+    class MarketoDestinationProperties
+      attr_accessor object: ::String
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig
+      SENSITIVE: []
+    end
+
+    class MarketoMetadata < Aws::EmptyStructure
+    end
+
+    class MarketoSourceProperties
+      attr_accessor object: ::String
+      SENSITIVE: []
+    end
+
+    class MetadataCatalogConfig
+      attr_accessor glue_data_catalog: Types::GlueDataCatalogConfig
+      SENSITIVE: []
+    end
+
+    class MetadataCatalogDetail
+      attr_accessor catalog_type: ("GLUE")
+      attr_accessor table_name: ::String
+      attr_accessor table_registration_output: Types::RegistrationOutput
+      attr_accessor partition_registration_output: Types::RegistrationOutput
+      SENSITIVE: []
+    end
+
+    class OAuth2Credentials
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor access_token: ::String
+      attr_accessor refresh_token: ::String
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest
+      SENSITIVE: [:client_secret, :access_token]
+    end
+
+    class OAuth2CustomParameter
+      attr_accessor key: ::String
+      attr_accessor is_required: bool
+      attr_accessor label: ::String
+      attr_accessor description: ::String
+      attr_accessor is_sensitive_field: bool
+      attr_accessor connector_supplied_values: ::Array[::String]
+      attr_accessor type: ("TOKEN_URL" | "AUTH_URL")
+      SENSITIVE: []
+    end
+
+    class OAuth2Defaults
+      attr_accessor oauth_scopes: ::Array[::String]
+      attr_accessor token_urls: ::Array[::String]
+      attr_accessor auth_code_urls: ::Array[::String]
+      attr_accessor oauth2_grant_types_supported: ::Array[("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "JWT_BEARER")]
+      attr_accessor oauth2_custom_properties: ::Array[Types::OAuth2CustomParameter]
+      SENSITIVE: []
+    end
+
+    class OAuth2Properties
+      attr_accessor token_url: ::String
+      attr_accessor o_auth_2_grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "JWT_BEARER")
+      attr_accessor token_url_custom_properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class OAuthCredentials
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor access_token: ::String
+      attr_accessor refresh_token: ::String
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest
+      SENSITIVE: [:client_secret, :access_token]
+    end
+
+    class OAuthProperties
+      attr_accessor token_url: ::String
+      attr_accessor auth_code_url: ::String
+      attr_accessor o_auth_scopes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PardotConnectorProfileCredentials
+      attr_accessor access_token: ::String
+      attr_accessor refresh_token: ::String
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest
+      attr_accessor client_credentials_arn: ::String
+      SENSITIVE: [:access_token, :client_credentials_arn]
+    end
+
+    class PardotConnectorProfileProperties
+      attr_accessor instance_url: ::String
+      attr_accessor is_sandbox_environment: bool
+      attr_accessor business_unit_id: ::String
+      SENSITIVE: []
+    end
+
+    class PardotMetadata < Aws::EmptyStructure
+    end
+
+    class PardotSourceProperties
+      attr_accessor object: ::String
+      SENSITIVE: []
+    end
+
+    class PrefixConfig
+      attr_accessor prefix_type: ("FILENAME" | "PATH" | "PATH_AND_FILENAME")
+      attr_accessor prefix_format: ("YEAR" | "MONTH" | "DAY" | "HOUR" | "MINUTE")
+      attr_accessor path_prefix_hierarchy: ::Array[("EXECUTION_ID" | "SCHEMA_VERSION")]
+      SENSITIVE: []
+    end
+
+    class PrivateConnectionProvisioningState
+      attr_accessor status: ("FAILED" | "PENDING" | "CREATED")
+      attr_accessor failure_message: ::String
+      attr_accessor failure_cause: ("CONNECTOR_AUTHENTICATION" | "CONNECTOR_SERVER" | "INTERNAL_SERVER" | "ACCESS_DENIED" | "VALIDATION")
+      SENSITIVE: []
+    end
+
+    class Range
+      attr_accessor maximum: ::Float
+      attr_accessor minimum: ::Float
+      SENSITIVE: []
+    end
+
+    class RedshiftConnectorProfileCredentials
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class RedshiftConnectorProfileProperties
+      attr_accessor database_url: ::String
+      attr_accessor bucket_name: ::String
+      attr_accessor bucket_prefix: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor data_api_role_arn: ::String
+      attr_accessor is_redshift_serverless: bool
+      attr_accessor cluster_identifier: ::String
+      attr_accessor workgroup_name: ::String
+      attr_accessor database_name: ::String
+      SENSITIVE: []
+    end
+
+    class RedshiftDestinationProperties
+      attr_accessor object: ::String
+      attr_accessor intermediate_bucket_name: ::String
+      attr_accessor bucket_prefix: ::String
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig
+      SENSITIVE: []
+    end
+
+    class RedshiftMetadata < Aws::EmptyStructure
+    end
+
+    class RegisterConnectorRequest
+      attr_accessor connector_label: ::String
+      attr_accessor description: ::String
+      attr_accessor connector_provisioning_type: ("LAMBDA")
+      attr_accessor connector_provisioning_config: Types::ConnectorProvisioningConfig
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterConnectorResponse
+      attr_accessor connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RegistrationOutput
+      attr_accessor message: ::String
+      attr_accessor result: ::String
+      attr_accessor status: ("InProgress" | "Successful" | "Error" | "CancelStarted" | "Canceled")
+      SENSITIVE: []
+    end
+
+    class ResetConnectorMetadataCacheRequest
+      attr_accessor connector_profile_name: ::String
+      attr_accessor connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot")
+      attr_accessor connector_entity_name: ::String
+      attr_accessor entities_path: ::String
+      attr_accessor api_version: ::String
+      SENSITIVE: []
+    end
+
+    class ResetConnectorMetadataCacheResponse < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3DestinationProperties
+      attr_accessor bucket_name: ::String
+      attr_accessor bucket_prefix: ::String
+      attr_accessor s3_output_format_config: Types::S3OutputFormatConfig
+      SENSITIVE: []
+    end
+
+    class S3InputFormatConfig
+      attr_accessor s3_input_file_type: ("CSV" | "JSON")
+      SENSITIVE: []
+    end
+
+    class S3Metadata < Aws::EmptyStructure
+    end
+
+    class S3OutputFormatConfig
+      attr_accessor file_type: ("CSV" | "JSON" | "PARQUET")
+      attr_accessor prefix_config: Types::PrefixConfig
+      attr_accessor aggregation_config: Types::AggregationConfig
+      attr_accessor preserve_source_data_typing: bool
+      SENSITIVE: []
+    end
+
+    class S3SourceProperties
+      attr_accessor bucket_name: ::String
+      attr_accessor bucket_prefix: ::String
+      attr_accessor s3_input_format_config: Types::S3InputFormatConfig
+      SENSITIVE: []
+    end
+
+    class SAPODataConnectorProfileCredentials
+      attr_accessor basic_auth_credentials: Types::BasicAuthCredentials
+      attr_accessor o_auth_credentials: Types::OAuthCredentials
+      SENSITIVE: []
+    end
+
+    class SAPODataConnectorProfileProperties
+      attr_accessor application_host_url: ::String
+      attr_accessor application_service_path: ::String
+      attr_accessor port_number: ::Integer
+      attr_accessor client_number: ::String
+      attr_accessor logon_language: ::String
+      attr_accessor private_link_service_name: ::String
+      attr_accessor o_auth_properties: Types::OAuthProperties
+      attr_accessor disable_sso: bool
+      SENSITIVE: []
+    end
+
+    class SAPODataDestinationProperties
+      attr_accessor object_path: ::String
+      attr_accessor success_response_handling_config: Types::SuccessResponseHandlingConfig
+      attr_accessor id_field_names: ::Array[::String]
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig
+      attr_accessor write_operation_type: ("INSERT" | "UPSERT" | "UPDATE" | "DELETE")
+      SENSITIVE: []
+    end
+
+    class SAPODataMetadata < Aws::EmptyStructure
+    end
+
+    class SAPODataPaginationConfig
+      attr_accessor max_page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class SAPODataParallelismConfig
+      attr_accessor max_parallelism: ::Integer
+      SENSITIVE: []
+    end
+
+    class SAPODataSourceProperties
+      attr_accessor object_path: ::String
+      attr_accessor parallelism_config: Types::SAPODataParallelismConfig
+      attr_accessor pagination_config: Types::SAPODataPaginationConfig
+      SENSITIVE: []
+    end
+
+    class SalesforceConnectorProfileCredentials
+      attr_accessor access_token: ::String
+      attr_accessor refresh_token: ::String
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest
+      attr_accessor client_credentials_arn: ::String
+      attr_accessor o_auth_2_grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "JWT_BEARER")
+      attr_accessor jwt_token: ::String
+      SENSITIVE: [:access_token, :client_credentials_arn, :jwt_token]
+    end
+
+    class SalesforceConnectorProfileProperties
+      attr_accessor instance_url: ::String
+      attr_accessor is_sandbox_environment: bool
+      attr_accessor use_private_link_for_metadata_and_authorization: bool
+      SENSITIVE: []
+    end
+
+    class SalesforceDestinationProperties
+      attr_accessor object: ::String
+      attr_accessor id_field_names: ::Array[::String]
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig
+      attr_accessor write_operation_type: ("INSERT" | "UPSERT" | "UPDATE" | "DELETE")
+      attr_accessor data_transfer_api: ("AUTOMATIC" | "BULKV2" | "REST_SYNC")
+      SENSITIVE: []
+    end
+
+    class SalesforceMetadata
+      attr_accessor o_auth_scopes: ::Array[::String]
+      attr_accessor data_transfer_apis: ::Array[("AUTOMATIC" | "BULKV2" | "REST_SYNC")]
+      attr_accessor oauth2_grant_types_supported: ::Array[("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "JWT_BEARER")]
+      SENSITIVE: []
+    end
+
+    class SalesforceSourceProperties
+      attr_accessor object: ::String
+      attr_accessor enable_dynamic_field_update: bool
+      attr_accessor include_deleted_records: bool
+      attr_accessor data_transfer_api: ("AUTOMATIC" | "BULKV2" | "REST_SYNC")
+      SENSITIVE: []
+    end
+
+    class ScheduledTriggerProperties
+      attr_accessor schedule_expression: ::String
+      attr_accessor data_pull_mode: ("Incremental" | "Complete")
+      attr_accessor schedule_start_time: ::Time
+      attr_accessor schedule_end_time: ::Time
+      attr_accessor timezone: ::String
+      attr_accessor schedule_offset: ::Integer
+      attr_accessor first_execution_from: ::Time
+      attr_accessor flow_error_deactivation_threshold: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceNowConnectorProfileCredentials
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      attr_accessor o_auth_2_credentials: Types::OAuth2Credentials
+      SENSITIVE: [:password]
+    end
+
+    class ServiceNowConnectorProfileProperties
+      attr_accessor instance_url: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceNowMetadata < Aws::EmptyStructure
+    end
+
+    class ServiceNowSourceProperties
+      attr_accessor object: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SingularConnectorProfileCredentials
+      attr_accessor api_key: ::String
+      SENSITIVE: [:api_key]
+    end
+
+    class SingularConnectorProfileProperties < Aws::EmptyStructure
+    end
+
+    class SingularMetadata < Aws::EmptyStructure
+    end
+
+    class SingularSourceProperties
+      attr_accessor object: ::String
+      SENSITIVE: []
+    end
+
+    class SlackConnectorProfileCredentials
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor access_token: ::String
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest
+      SENSITIVE: [:client_secret, :access_token]
+    end
+
+    class SlackConnectorProfileProperties
+      attr_accessor instance_url: ::String
+      SENSITIVE: []
+    end
+
+    class SlackMetadata
+      attr_accessor o_auth_scopes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SlackSourceProperties
+      attr_accessor object: ::String
+      SENSITIVE: []
+    end
+
+    class SnowflakeConnectorProfileCredentials
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class SnowflakeConnectorProfileProperties
+      attr_accessor warehouse: ::String
+      attr_accessor stage: ::String
+      attr_accessor bucket_name: ::String
+      attr_accessor bucket_prefix: ::String
+      attr_accessor private_link_service_name: ::String
+      attr_accessor account_name: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class SnowflakeDestinationProperties
+      attr_accessor object: ::String
+      attr_accessor intermediate_bucket_name: ::String
+      attr_accessor bucket_prefix: ::String
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig
+      SENSITIVE: []
+    end
+
+    class SnowflakeMetadata
+      attr_accessor supported_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SourceConnectorProperties
+      attr_accessor amplitude: Types::AmplitudeSourceProperties
+      attr_accessor datadog: Types::DatadogSourceProperties
+      attr_accessor dynatrace: Types::DynatraceSourceProperties
+      attr_accessor google_analytics: Types::GoogleAnalyticsSourceProperties
+      attr_accessor infor_nexus: Types::InforNexusSourceProperties
+      attr_accessor marketo: Types::MarketoSourceProperties
+      attr_accessor s3: Types::S3SourceProperties
+      attr_accessor salesforce: Types::SalesforceSourceProperties
+      attr_accessor service_now: Types::ServiceNowSourceProperties
+      attr_accessor singular: Types::SingularSourceProperties
+      attr_accessor slack: Types::SlackSourceProperties
+      attr_accessor trendmicro: Types::TrendmicroSourceProperties
+      attr_accessor veeva: Types::VeevaSourceProperties
+      attr_accessor zendesk: Types::ZendeskSourceProperties
+      attr_accessor sapo_data: Types::SAPODataSourceProperties
+      attr_accessor custom_connector: Types::CustomConnectorSourceProperties
+      attr_accessor pardot: Types::PardotSourceProperties
+      SENSITIVE: []
+    end
+
+    class SourceFieldProperties
+      attr_accessor is_retrievable: bool
+      attr_accessor is_queryable: bool
+      attr_accessor is_timestamp_field_for_incremental_queries: bool
+      SENSITIVE: []
+    end
+
+    class SourceFlowConfig
+      attr_accessor connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot")
+      attr_accessor api_version: ::String
+      attr_accessor connector_profile_name: ::String
+      attr_accessor source_connector_properties: Types::SourceConnectorProperties
+      attr_accessor incremental_pull_config: Types::IncrementalPullConfig
+      SENSITIVE: []
+    end
+
+    class StartFlowRequest
+      attr_accessor flow_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartFlowResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor flow_status: ("Active" | "Deprecated" | "Deleted" | "Draft" | "Errored" | "Suspended")
+      attr_accessor execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopFlowRequest
+      attr_accessor flow_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopFlowResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor flow_status: ("Active" | "Deprecated" | "Deleted" | "Draft" | "Errored" | "Suspended")
+      SENSITIVE: []
+    end
+
+    class SuccessResponseHandlingConfig
+      attr_accessor bucket_prefix: ::String
+      attr_accessor bucket_name: ::String
+      SENSITIVE: []
+    end
+
+    class SupportedFieldTypeDetails
+      attr_accessor v1: Types::FieldTypeDetails
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Task
+      attr_accessor source_fields: ::Array[::String]
+      attr_accessor connector_operator: Types::ConnectorOperator
+      attr_accessor destination_field: ::String
+      attr_accessor task_type: ("Arithmetic" | "Filter" | "Map" | "Map_all" | "Mask" | "Merge" | "Passthrough" | "Truncate" | "Validate" | "Partition")
+      attr_accessor task_properties: ::Hash[("VALUE" | "VALUES" | "DATA_TYPE" | "UPPER_BOUND" | "LOWER_BOUND" | "SOURCE_DATA_TYPE" | "DESTINATION_DATA_TYPE" | "VALIDATION_ACTION" | "MASK_VALUE" | "MASK_LENGTH" | "TRUNCATE_LENGTH" | "MATH_OPERATION_FIELDS_ORDER" | "CONCAT_FORMAT" | "SUBFIELD_CATEGORY_MAP" | "EXCLUDE_SOURCE_FIELDS_LIST" | "INCLUDE_NEW_FIELDS" | "ORDERED_PARTITION_KEYS_LIST"), ::String]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrendmicroConnectorProfileCredentials
+      attr_accessor api_secret_key: ::String
+      SENSITIVE: [:api_secret_key]
+    end
+
+    class TrendmicroConnectorProfileProperties < Aws::EmptyStructure
+    end
+
+    class TrendmicroMetadata < Aws::EmptyStructure
+    end
+
+    class TrendmicroSourceProperties
+      attr_accessor object: ::String
+      SENSITIVE: []
+    end
+
+    class TriggerConfig
+      attr_accessor trigger_type: ("Scheduled" | "Event" | "OnDemand")
+      attr_accessor trigger_properties: Types::TriggerProperties
+      SENSITIVE: []
+    end
+
+    class TriggerProperties
+      attr_accessor scheduled: Types::ScheduledTriggerProperties
+      SENSITIVE: []
+    end
+
+    class UnregisterConnectorRequest
+      attr_accessor connector_label: ::String
+      attr_accessor force_delete: bool
+      SENSITIVE: []
+    end
+
+    class UnregisterConnectorResponse < Aws::EmptyStructure
+    end
+
+    class UnsupportedOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateConnectorProfileRequest
+      attr_accessor connector_profile_name: ::String
+      attr_accessor connection_mode: ("Public" | "Private")
+      attr_accessor connector_profile_config: Types::ConnectorProfileConfig
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorProfileResponse
+      attr_accessor connector_profile_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorRegistrationRequest
+      attr_accessor connector_label: ::String
+      attr_accessor description: ::String
+      attr_accessor connector_provisioning_config: Types::ConnectorProvisioningConfig
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorRegistrationResponse
+      attr_accessor connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFlowRequest
+      attr_accessor flow_name: ::String
+      attr_accessor description: ::String
+      attr_accessor trigger_config: Types::TriggerConfig
+      attr_accessor source_flow_config: Types::SourceFlowConfig
+      attr_accessor destination_flow_config_list: ::Array[Types::DestinationFlowConfig]
+      attr_accessor tasks: ::Array[Types::Task]
+      attr_accessor metadata_catalog_config: Types::MetadataCatalogConfig
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFlowResponse
+      attr_accessor flow_status: ("Active" | "Deprecated" | "Deleted" | "Draft" | "Errored" | "Suspended")
+      SENSITIVE: []
+    end
+
+    class UpsolverDestinationProperties
+      attr_accessor bucket_name: ::String
+      attr_accessor bucket_prefix: ::String
+      attr_accessor s3_output_format_config: Types::UpsolverS3OutputFormatConfig
+      SENSITIVE: []
+    end
+
+    class UpsolverMetadata < Aws::EmptyStructure
+    end
+
+    class UpsolverS3OutputFormatConfig
+      attr_accessor file_type: ("CSV" | "JSON" | "PARQUET")
+      attr_accessor prefix_config: Types::PrefixConfig
+      attr_accessor aggregation_config: Types::AggregationConfig
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VeevaConnectorProfileCredentials
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class VeevaConnectorProfileProperties
+      attr_accessor instance_url: ::String
+      SENSITIVE: []
+    end
+
+    class VeevaMetadata < Aws::EmptyStructure
+    end
+
+    class VeevaSourceProperties
+      attr_accessor object: ::String
+      attr_accessor document_type: ::String
+      attr_accessor include_source_files: bool
+      attr_accessor include_renditions: bool
+      attr_accessor include_all_versions: bool
+      SENSITIVE: []
+    end
+
+    class ZendeskConnectorProfileCredentials
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor access_token: ::String
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest
+      SENSITIVE: [:client_secret, :access_token]
+    end
+
+    class ZendeskConnectorProfileProperties
+      attr_accessor instance_url: ::String
+      SENSITIVE: []
+    end
+
+    class ZendeskDestinationProperties
+      attr_accessor object: ::String
+      attr_accessor id_field_names: ::Array[::String]
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig
+      attr_accessor write_operation_type: ("INSERT" | "UPSERT" | "UPDATE" | "DELETE")
+      SENSITIVE: []
+    end
+
+    class ZendeskMetadata
+      attr_accessor o_auth_scopes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ZendeskSourceProperties
+      attr_accessor object: ::String
+      SENSITIVE: []
+    end
+  end
+end

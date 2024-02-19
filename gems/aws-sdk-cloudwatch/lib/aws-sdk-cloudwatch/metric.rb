@@ -584,6 +584,9 @@ module Aws::CloudWatch
     #   You can also specify a unit when you create a custom metric. Units
     #   help provide conceptual meaning to your data. Metric data points that
     #   specify a unit of measure, such as Percent, are aggregated separately.
+    #   If you are creating an alarm based on a metric math expression, you
+    #   can specify the unit for each metric (if needed) within the objects in
+    #   the `Metrics` array.
     #
     #   If you don't specify `Unit`, CloudWatch retrieves all unit types that
     #   have been published for the metric and attempts to evaluate the alarm.
@@ -676,10 +679,10 @@ module Aws::CloudWatch
     #   [MetricDataQuery][1].
     #
     #   If you use the `Metrics` parameter, you cannot include the
-    #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or
-    #   `ExtendedStatistic` parameters of `PutMetricAlarm` in the same
-    #   operation. Instead, you retrieve the metrics you are using in your
-    #   math expression as part of the `Metrics` array.
+    #   `Namespace`, `MetricName`, `Dimensions`, `Period`, `Unit`,
+    #   `Statistic`, or `ExtendedStatistic` parameters of `PutMetricAlarm` in
+    #   the same operation. Instead, you retrieve the metrics you are using in
+    #   your math expression as part of the `Metrics` array.
     #
     #
     #

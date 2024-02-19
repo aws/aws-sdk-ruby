@@ -1,0 +1,196 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SupportApp
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportApp/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateSlackChannelConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSlackChannelConfigurationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportApp/Client.html#create_slack_channel_configuration-instance_method
+      def create_slack_channel_configuration: (
+                                                channel_id: ::String,
+                                                ?channel_name: ::String,
+                                                channel_role_arn: ::String,
+                                                ?notify_on_add_correspondence_to_case: bool,
+                                                notify_on_case_severity: ("none" | "all" | "high"),
+                                                ?notify_on_create_or_reopen_case: bool,
+                                                ?notify_on_resolve_case: bool,
+                                                team_id: ::String
+                                              ) -> _CreateSlackChannelConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSlackChannelConfigurationResponseSuccess
+
+      interface _DeleteAccountAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccountAliasResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportApp/Client.html#delete_account_alias-instance_method
+      def delete_account_alias: (
+                                ) -> _DeleteAccountAliasResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccountAliasResponseSuccess
+
+      interface _DeleteSlackChannelConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSlackChannelConfigurationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportApp/Client.html#delete_slack_channel_configuration-instance_method
+      def delete_slack_channel_configuration: (
+                                                channel_id: ::String,
+                                                team_id: ::String
+                                              ) -> _DeleteSlackChannelConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSlackChannelConfigurationResponseSuccess
+
+      interface _DeleteSlackWorkspaceConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSlackWorkspaceConfigurationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportApp/Client.html#delete_slack_workspace_configuration-instance_method
+      def delete_slack_workspace_configuration: (
+                                                  team_id: ::String
+                                                ) -> _DeleteSlackWorkspaceConfigurationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSlackWorkspaceConfigurationResponseSuccess
+
+      interface _GetAccountAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountAliasResult]
+        def account_alias: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportApp/Client.html#get_account_alias-instance_method
+      def get_account_alias: (
+                             ) -> _GetAccountAliasResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountAliasResponseSuccess
+
+      interface _ListSlackChannelConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSlackChannelConfigurationsResult]
+        def next_token: () -> ::String
+        def slack_channel_configurations: () -> ::Array[Types::SlackChannelConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportApp/Client.html#list_slack_channel_configurations-instance_method
+      def list_slack_channel_configurations: (
+                                               ?next_token: ::String
+                                             ) -> _ListSlackChannelConfigurationsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSlackChannelConfigurationsResponseSuccess
+
+      interface _ListSlackWorkspaceConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSlackWorkspaceConfigurationsResult]
+        def next_token: () -> ::String
+        def slack_workspace_configurations: () -> ::Array[Types::SlackWorkspaceConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportApp/Client.html#list_slack_workspace_configurations-instance_method
+      def list_slack_workspace_configurations: (
+                                                 ?next_token: ::String
+                                               ) -> _ListSlackWorkspaceConfigurationsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSlackWorkspaceConfigurationsResponseSuccess
+
+      interface _PutAccountAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountAliasResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportApp/Client.html#put_account_alias-instance_method
+      def put_account_alias: (
+                               account_alias: ::String
+                             ) -> _PutAccountAliasResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountAliasResponseSuccess
+
+      interface _RegisterSlackWorkspaceForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterSlackWorkspaceForOrganizationResult]
+        def account_type: () -> ("management" | "member")
+        def team_id: () -> ::String
+        def team_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportApp/Client.html#register_slack_workspace_for_organization-instance_method
+      def register_slack_workspace_for_organization: (
+                                                       team_id: ::String
+                                                     ) -> _RegisterSlackWorkspaceForOrganizationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterSlackWorkspaceForOrganizationResponseSuccess
+
+      interface _UpdateSlackChannelConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSlackChannelConfigurationResult]
+        def channel_id: () -> ::String
+        def channel_name: () -> ::String
+        def channel_role_arn: () -> ::String
+        def notify_on_add_correspondence_to_case: () -> bool
+        def notify_on_case_severity: () -> ("none" | "all" | "high")
+        def notify_on_create_or_reopen_case: () -> bool
+        def notify_on_resolve_case: () -> bool
+        def team_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SupportApp/Client.html#update_slack_channel_configuration-instance_method
+      def update_slack_channel_configuration: (
+                                                channel_id: ::String,
+                                                ?channel_name: ::String,
+                                                ?channel_role_arn: ::String,
+                                                ?notify_on_add_correspondence_to_case: bool,
+                                                ?notify_on_case_severity: ("none" | "all" | "high"),
+                                                ?notify_on_create_or_reopen_case: bool,
+                                                ?notify_on_resolve_case: bool,
+                                                team_id: ::String
+                                              ) -> _UpdateSlackChannelConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSlackChannelConfigurationResponseSuccess
+    end
+  end
+end
+

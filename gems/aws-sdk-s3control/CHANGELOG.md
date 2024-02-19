@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2024-02-14)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.77.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.76.0 (2024-01-12)
+------------------
+
+* Feature - S3 On Outposts team adds dualstack endpoints support for S3Control and S3Outposts API calls.
+
+1.75.0 (2023-12-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.74.0 (2023-11-28)
+------------------
+
+* Feature - Adds support for S3 Express One Zone, and InvocationSchemaVersion 2.0 for S3 Batch Operations.
+
+1.73.0 (2023-11-27)
+------------------
+
+* Feature - Introduce Amazon S3 Access Grants, a new S3 access control feature that maps identities in directories such as Active Directory, or AWS Identity and Access Management (IAM) Principals, to datasets in S3.
+
+1.72.0 (2023-11-22)
+------------------
+
+* Feature - Amazon S3 Batch Operations now manages buckets or prefixes in a single step.
+
+1.71.0 (2023-11-15)
+------------------
+
+* Feature - Add 5 APIs to create, update, get, list, delete S3 Storage Lens group(eg. CreateStorageLensGroup), 3 APIs for tagging(TagResource,UntagResource,ListTagsForResource), and update to StorageLensConfiguration to allow metrics to be aggregated on Storage Lens groups.
+
 1.70.0 (2023-09-27)
 ------------------
 

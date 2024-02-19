@@ -410,7 +410,23 @@ module Aws::ConnectWisdomService
     #   The name of the assistant.
     #
     # @option params [Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
-    #   The KMS key used for encryption.
+    #   The configuration information for the customer managed key used for
+    #   encryption.
+    #
+    #   The customer managed key must have a policy that allows
+    #   `kms:CreateGrant`, ` kms:DescribeKey`, and
+    #   `kms:Decrypt/kms:GenerateDataKey` permissions to the IAM identity
+    #   using the key to invoke Wisdom. To use Wisdom with chat, the key
+    #   policy must also allow `kms:Decrypt`, `kms:GenerateDataKey*`, and
+    #   `kms:DescribeKey` permissions to the `connect.amazonaws.com` service
+    #   principal.
+    #
+    #   For more information about setting up a customer managed key for
+    #   Wisdom, see [Enable Amazon Connect Wisdom for your instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -549,8 +565,10 @@ module Aws::ConnectWisdomService
     #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the ARN.
-    #   URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it. Can be either the ID or the ARN. URLs cannot contain
+    #   the ARN.
     #
     # @option params [Hash<String,String>] :metadata
     #   A key/value map to store attributes without affecting tagging or
@@ -691,7 +709,19 @@ module Aws::ConnectWisdomService
     #   Information about how to render the content.
     #
     # @option params [Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
-    #   The KMS key used for encryption.
+    #   The configuration information for the customer managed key used for
+    #   encryption.
+    #
+    #   This KMS key must have a policy that allows `kms:CreateGrant`,
+    #   `kms:DescribeKey`, and `kms:Decrypt/kms:GenerateDataKey` permissions
+    #   to the IAM identity using the key to invoke Wisdom.
+    #
+    #   For more information about setting up a customer managed key for
+    #   Wisdom, see [Enable Amazon Connect Wisdom for your instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-wisdom.html
     #
     # @option params [Types::SourceConfiguration] :source_configuration
     #   The source of the knowledge base content. Only set this argument for
@@ -709,7 +739,7 @@ module Aws::ConnectWisdomService
     #   resp = client.create_knowledge_base({
     #     client_token: "NonEmptyString",
     #     description: "Description",
-    #     knowledge_base_type: "EXTERNAL", # required, accepts EXTERNAL, CUSTOM
+    #     knowledge_base_type: "EXTERNAL", # required, accepts EXTERNAL, CUSTOM, QUICK_RESPONSES
     #     name: "Name", # required
     #     rendering_configuration: {
     #       template_uri: "Uri",
@@ -733,7 +763,7 @@ module Aws::ConnectWisdomService
     #   resp.knowledge_base.description #=> String
     #   resp.knowledge_base.knowledge_base_arn #=> String
     #   resp.knowledge_base.knowledge_base_id #=> String
-    #   resp.knowledge_base.knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM"
+    #   resp.knowledge_base.knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM", "QUICK_RESPONSES"
     #   resp.knowledge_base.last_content_modification_time #=> Time
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.rendering_configuration.template_uri #=> String
@@ -751,6 +781,131 @@ module Aws::ConnectWisdomService
     # @param [Hash] params ({})
     def create_knowledge_base(params = {}, options = {})
       req = build_request(:create_knowledge_base, params)
+      req.send_request(options)
+    end
+
+    # Creates a Wisdom quick response.
+    #
+    # @option params [Array<String>] :channels
+    #   The Amazon Connect channels this quick response applies to.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [required, Types::QuickResponseDataProvider] :content
+    #   The content of the quick response.
+    #
+    # @option params [String] :content_type
+    #   The media type of the quick response content.
+    #
+    #   * Use `application/x.quickresponse;format=plain` for a quick response
+    #     written in plain text.
+    #
+    #   * Use `application/x.quickresponse;format=markdown` for a quick
+    #     response written in richtext.
+    #
+    # @option params [String] :description
+    #   The description of the quick response.
+    #
+    # @option params [Types::GroupingConfiguration] :grouping_configuration
+    #   The configuration information of the user groups that the quick
+    #   response is accessible to.
+    #
+    # @option params [Boolean] :is_active
+    #   Whether the quick response is active.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it. Can be either the ID or the ARN. URLs cannot contain
+    #   the ARN.
+    #
+    # @option params [String] :language
+    #   The language code value for the language in which the quick response
+    #   is written. The supported language codes include `de_DE`, `en_US`,
+    #   `es_ES`, `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`,
+    #   `zh_CN`, `zh_TW`
+    #
+    # @option params [required, String] :name
+    #   The name of the quick response.
+    #
+    # @option params [String] :shortcut_key
+    #   The shortcut key of the quick response. The value should be unique
+    #   across the knowledge base.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @return [Types::CreateQuickResponseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateQuickResponseResponse#quick_response #quick_response} => Types::QuickResponseData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_quick_response({
+    #     channels: ["Channel"],
+    #     client_token: "NonEmptyString",
+    #     content: { # required
+    #       content: "QuickResponseContent",
+    #     },
+    #     content_type: "QuickResponseType",
+    #     description: "QuickResponseDescription",
+    #     grouping_configuration: {
+    #       criteria: "GroupingCriteria",
+    #       values: ["GroupingValue"],
+    #     },
+    #     is_active: false,
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     language: "LanguageCode",
+    #     name: "QuickResponseName", # required
+    #     shortcut_key: "ShortCutKey",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.quick_response.channels #=> Array
+    #   resp.quick_response.channels[0] #=> String
+    #   resp.quick_response.content_type #=> String
+    #   resp.quick_response.contents.markdown.content #=> String
+    #   resp.quick_response.contents.plain_text.content #=> String
+    #   resp.quick_response.created_time #=> Time
+    #   resp.quick_response.description #=> String
+    #   resp.quick_response.grouping_configuration.criteria #=> String
+    #   resp.quick_response.grouping_configuration.values #=> Array
+    #   resp.quick_response.grouping_configuration.values[0] #=> String
+    #   resp.quick_response.is_active #=> Boolean
+    #   resp.quick_response.knowledge_base_arn #=> String
+    #   resp.quick_response.knowledge_base_id #=> String
+    #   resp.quick_response.language #=> String
+    #   resp.quick_response.last_modified_by #=> String
+    #   resp.quick_response.last_modified_time #=> Time
+    #   resp.quick_response.name #=> String
+    #   resp.quick_response.quick_response_arn #=> String
+    #   resp.quick_response.quick_response_id #=> String
+    #   resp.quick_response.shortcut_key #=> String
+    #   resp.quick_response.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
+    #   resp.quick_response.tags #=> Hash
+    #   resp.quick_response.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/CreateQuickResponse AWS API Documentation
+    #
+    # @overload create_quick_response(params = {})
+    # @param [Hash] params ({})
+    def create_quick_response(params = {}, options = {})
+      req = build_request(:create_quick_response, params)
       req.send_request(options)
     end
 
@@ -877,8 +1032,10 @@ module Aws::ConnectWisdomService
     #   cannot contain the ARN.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the ARN.
-    #   URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it. Can be either the ID or the ARN. URLs cannot contain
+    #   the ARN.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -895,6 +1052,34 @@ module Aws::ConnectWisdomService
     # @param [Hash] params ({})
     def delete_content(params = {}, options = {})
       req = build_request(:delete_content, params)
+      req.send_request(options)
+    end
+
+    # Deletes the quick response import job.
+    #
+    # @option params [required, String] :import_job_id
+    #   The identifier of the import job to be deleted.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_import_job({
+    #     import_job_id: "Uuid", # required
+    #     knowledge_base_id: "UuidOrArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/DeleteImportJob AWS API Documentation
+    #
+    # @overload delete_import_job(params = {})
+    # @param [Hash] params ({})
+    def delete_import_job(params = {}, options = {})
+      req = build_request(:delete_import_job, params)
       req.send_request(options)
     end
 
@@ -934,6 +1119,35 @@ module Aws::ConnectWisdomService
     # @param [Hash] params ({})
     def delete_knowledge_base(params = {}, options = {})
       req = build_request(:delete_knowledge_base, params)
+      req.send_request(options)
+    end
+
+    # Deletes a quick response.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The knowledge base from which the quick response is deleted. The
+    #   identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it.
+    #
+    # @option params [required, String] :quick_response_id
+    #   The identifier of the quick response to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_quick_response({
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     quick_response_id: "UuidOrArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/DeleteQuickResponse AWS API Documentation
+    #
+    # @overload delete_quick_response(params = {})
+    # @param [Hash] params ({})
+    def delete_quick_response(params = {}, options = {})
+      req = build_request(:delete_quick_response, params)
       req.send_request(options)
     end
 
@@ -1024,8 +1238,10 @@ module Aws::ConnectWisdomService
     #   cannot contain the ARN.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the ARN.
-    #   URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it. Can be either the ID or the ARN. URLs cannot contain
+    #   the ARN.
     #
     # @return [Types::GetContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1073,8 +1289,10 @@ module Aws::ConnectWisdomService
     #   cannot contain the ARN.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the ARN.
-    #   URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it. Can be either the ID or the ARN. URLs cannot contain
+    #   the ARN.
     #
     # @return [Types::GetContentSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1112,11 +1330,59 @@ module Aws::ConnectWisdomService
       req.send_request(options)
     end
 
+    # Retrieves the started import job.
+    #
+    # @option params [required, String] :import_job_id
+    #   The identifier of the import job to retrieve.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base that the import job belongs to.
+    #
+    # @return [Types::GetImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetImportJobResponse#import_job #import_job} => Types::ImportJobData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_import_job({
+    #     import_job_id: "Uuid", # required
+    #     knowledge_base_id: "UuidOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_job.created_time #=> Time
+    #   resp.import_job.external_source_configuration.configuration.connect_configuration.instance_id #=> String
+    #   resp.import_job.external_source_configuration.source #=> String, one of "AMAZON_CONNECT"
+    #   resp.import_job.failed_record_report #=> String
+    #   resp.import_job.import_job_id #=> String
+    #   resp.import_job.import_job_type #=> String, one of "QUICK_RESPONSES"
+    #   resp.import_job.knowledge_base_arn #=> String
+    #   resp.import_job.knowledge_base_id #=> String
+    #   resp.import_job.last_modified_time #=> Time
+    #   resp.import_job.metadata #=> Hash
+    #   resp.import_job.metadata["NonEmptyString"] #=> String
+    #   resp.import_job.status #=> String, one of "START_IN_PROGRESS", "FAILED", "COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.import_job.upload_id #=> String
+    #   resp.import_job.url #=> String
+    #   resp.import_job.url_expiry #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/GetImportJob AWS API Documentation
+    #
+    # @overload get_import_job(params = {})
+    # @param [Hash] params ({})
+    def get_import_job(params = {}, options = {})
+      req = build_request(:get_import_job, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about the knowledge base.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the ARN.
-    #   URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it. Can be either the ID or the ARN. URLs cannot contain
+    #   the ARN.
     #
     # @return [Types::GetKnowledgeBaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1133,7 +1399,7 @@ module Aws::ConnectWisdomService
     #   resp.knowledge_base.description #=> String
     #   resp.knowledge_base.knowledge_base_arn #=> String
     #   resp.knowledge_base.knowledge_base_id #=> String
-    #   resp.knowledge_base.knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM"
+    #   resp.knowledge_base.knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM", "QUICK_RESPONSES"
     #   resp.knowledge_base.last_content_modification_time #=> Time
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.rendering_configuration.template_uri #=> String
@@ -1151,6 +1417,61 @@ module Aws::ConnectWisdomService
     # @param [Hash] params ({})
     def get_knowledge_base(params = {}, options = {})
       req = build_request(:get_knowledge_base, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the quick response.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. This should be a
+    #   QUICK\_RESPONSES type knowledge base.
+    #
+    # @option params [required, String] :quick_response_id
+    #   The identifier of the quick response.
+    #
+    # @return [Types::GetQuickResponseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQuickResponseResponse#quick_response #quick_response} => Types::QuickResponseData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_quick_response({
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     quick_response_id: "UuidOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.quick_response.channels #=> Array
+    #   resp.quick_response.channels[0] #=> String
+    #   resp.quick_response.content_type #=> String
+    #   resp.quick_response.contents.markdown.content #=> String
+    #   resp.quick_response.contents.plain_text.content #=> String
+    #   resp.quick_response.created_time #=> Time
+    #   resp.quick_response.description #=> String
+    #   resp.quick_response.grouping_configuration.criteria #=> String
+    #   resp.quick_response.grouping_configuration.values #=> Array
+    #   resp.quick_response.grouping_configuration.values[0] #=> String
+    #   resp.quick_response.is_active #=> Boolean
+    #   resp.quick_response.knowledge_base_arn #=> String
+    #   resp.quick_response.knowledge_base_id #=> String
+    #   resp.quick_response.language #=> String
+    #   resp.quick_response.last_modified_by #=> String
+    #   resp.quick_response.last_modified_time #=> Time
+    #   resp.quick_response.name #=> String
+    #   resp.quick_response.quick_response_arn #=> String
+    #   resp.quick_response.quick_response_id #=> String
+    #   resp.quick_response.shortcut_key #=> String
+    #   resp.quick_response.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
+    #   resp.quick_response.tags #=> Hash
+    #   resp.quick_response.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/GetQuickResponse AWS API Documentation
+    #
+    # @overload get_quick_response(params = {})
+    # @param [Hash] params ({})
+    def get_quick_response(params = {}, options = {})
+      req = build_request(:get_quick_response, params)
       req.send_request(options)
     end
 
@@ -1378,8 +1699,10 @@ module Aws::ConnectWisdomService
     # Lists the content.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the ARN.
-    #   URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it. Can be either the ID or the ARN. URLs cannot contain
+    #   the ARN.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -1431,6 +1754,63 @@ module Aws::ConnectWisdomService
       req.send_request(options)
     end
 
+    # Lists information about import jobs.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it. Can be either the ID or the ARN. URLs cannot contain
+    #   the ARN.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImportJobsResponse#import_job_summaries #import_job_summaries} => Array&lt;Types::ImportJobSummary&gt;
+    #   * {Types::ListImportJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_import_jobs({
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     max_results: 1,
+    #     next_token: "NonEmptyString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_job_summaries #=> Array
+    #   resp.import_job_summaries[0].created_time #=> Time
+    #   resp.import_job_summaries[0].external_source_configuration.configuration.connect_configuration.instance_id #=> String
+    #   resp.import_job_summaries[0].external_source_configuration.source #=> String, one of "AMAZON_CONNECT"
+    #   resp.import_job_summaries[0].import_job_id #=> String
+    #   resp.import_job_summaries[0].import_job_type #=> String, one of "QUICK_RESPONSES"
+    #   resp.import_job_summaries[0].knowledge_base_arn #=> String
+    #   resp.import_job_summaries[0].knowledge_base_id #=> String
+    #   resp.import_job_summaries[0].last_modified_time #=> Time
+    #   resp.import_job_summaries[0].metadata #=> Hash
+    #   resp.import_job_summaries[0].metadata["NonEmptyString"] #=> String
+    #   resp.import_job_summaries[0].status #=> String, one of "START_IN_PROGRESS", "FAILED", "COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.import_job_summaries[0].upload_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/ListImportJobs AWS API Documentation
+    #
+    # @overload list_import_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_import_jobs(params = {}, options = {})
+      req = build_request(:list_import_jobs, params)
+      req.send_request(options)
+    end
+
     # Lists the knowledge bases.
     #
     # @option params [Integer] :max_results
@@ -1461,7 +1841,7 @@ module Aws::ConnectWisdomService
     #   resp.knowledge_base_summaries[0].description #=> String
     #   resp.knowledge_base_summaries[0].knowledge_base_arn #=> String
     #   resp.knowledge_base_summaries[0].knowledge_base_id #=> String
-    #   resp.knowledge_base_summaries[0].knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM"
+    #   resp.knowledge_base_summaries[0].knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM", "QUICK_RESPONSES"
     #   resp.knowledge_base_summaries[0].name #=> String
     #   resp.knowledge_base_summaries[0].rendering_configuration.template_uri #=> String
     #   resp.knowledge_base_summaries[0].server_side_encryption_configuration.kms_key_id #=> String
@@ -1479,6 +1859,67 @@ module Aws::ConnectWisdomService
     # @param [Hash] params ({})
     def list_knowledge_bases(params = {}, options = {})
       req = build_request(:list_knowledge_bases, params)
+      req.send_request(options)
+    end
+
+    # Lists information about quick response.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it. Can be either the ID or the ARN. URLs cannot contain
+    #   the ARN.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListQuickResponsesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListQuickResponsesResponse#next_token #next_token} => String
+    #   * {Types::ListQuickResponsesResponse#quick_response_summaries #quick_response_summaries} => Array&lt;Types::QuickResponseSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_quick_responses({
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     max_results: 1,
+    #     next_token: "NonEmptyString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.quick_response_summaries #=> Array
+    #   resp.quick_response_summaries[0].channels #=> Array
+    #   resp.quick_response_summaries[0].channels[0] #=> String
+    #   resp.quick_response_summaries[0].content_type #=> String
+    #   resp.quick_response_summaries[0].created_time #=> Time
+    #   resp.quick_response_summaries[0].description #=> String
+    #   resp.quick_response_summaries[0].is_active #=> Boolean
+    #   resp.quick_response_summaries[0].knowledge_base_arn #=> String
+    #   resp.quick_response_summaries[0].knowledge_base_id #=> String
+    #   resp.quick_response_summaries[0].last_modified_by #=> String
+    #   resp.quick_response_summaries[0].last_modified_time #=> Time
+    #   resp.quick_response_summaries[0].name #=> String
+    #   resp.quick_response_summaries[0].quick_response_arn #=> String
+    #   resp.quick_response_summaries[0].quick_response_id #=> String
+    #   resp.quick_response_summaries[0].status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
+    #   resp.quick_response_summaries[0].tags #=> Hash
+    #   resp.quick_response_summaries[0].tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/ListQuickResponses AWS API Documentation
+    #
+    # @overload list_quick_responses(params = {})
+    # @param [Hash] params ({})
+    def list_quick_responses(params = {}, options = {})
+      req = build_request(:list_quick_responses, params)
       req.send_request(options)
     end
 
@@ -1630,8 +2071,10 @@ module Aws::ConnectWisdomService
     # Removes a URI template from a knowledge base.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the ARN.
-    #   URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it. Can be either the ID or the ARN. URLs cannot contain
+    #   the ARN.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1654,8 +2097,10 @@ module Aws::ConnectWisdomService
     # a specific content resource by its name.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the ARN.
-    #   URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it. Can be either the ID or the ARN. URLs cannot contain
+    #   the ARN.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -1716,6 +2161,114 @@ module Aws::ConnectWisdomService
     # @param [Hash] params ({})
     def search_content(params = {}, options = {})
       req = build_request(:search_content, params)
+      req.send_request(options)
+    end
+
+    # Searches existing Wisdom quick responses in a Wisdom knowledge base.
+    #
+    # @option params [Hash<String,String>] :attributes
+    #   The [user-defined Amazon Connect contact attributes][1] to be resolved
+    #   when search results are returned.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. This should be a
+    #   QUICK\_RESPONSES type knowledge base. Can be either the ID or the ARN.
+    #   URLs cannot contain the ARN.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [required, Types::QuickResponseSearchExpression] :search_expression
+    #   The search expression for querying the quick response.
+    #
+    # @return [Types::SearchQuickResponsesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchQuickResponsesResponse#next_token #next_token} => String
+    #   * {Types::SearchQuickResponsesResponse#results #results} => Array&lt;Types::QuickResponseSearchResultData&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_quick_responses({
+    #     attributes: {
+    #       "ContactAttributeKey" => "ContactAttributeValue",
+    #     },
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     max_results: 1,
+    #     next_token: "NonEmptyString",
+    #     search_expression: { # required
+    #       filters: [
+    #         {
+    #           include_no_existence: false,
+    #           name: "NonEmptyString", # required
+    #           operator: "EQUALS", # required, accepts EQUALS, PREFIX
+    #           values: ["QuickResponseFilterValue"],
+    #         },
+    #       ],
+    #       order_on_field: {
+    #         name: "NonEmptyString", # required
+    #         order: "ASC", # accepts ASC, DESC
+    #       },
+    #       queries: [
+    #         {
+    #           allow_fuzziness: false,
+    #           name: "NonEmptyString", # required
+    #           operator: "CONTAINS", # required, accepts CONTAINS, CONTAINS_AND_PREFIX
+    #           priority: "HIGH", # accepts HIGH, MEDIUM, LOW
+    #           values: ["QuickResponseQueryValue"], # required
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.results #=> Array
+    #   resp.results[0].attributes_interpolated #=> Array
+    #   resp.results[0].attributes_interpolated[0] #=> String
+    #   resp.results[0].attributes_not_interpolated #=> Array
+    #   resp.results[0].attributes_not_interpolated[0] #=> String
+    #   resp.results[0].channels #=> Array
+    #   resp.results[0].channels[0] #=> String
+    #   resp.results[0].content_type #=> String
+    #   resp.results[0].contents.markdown.content #=> String
+    #   resp.results[0].contents.plain_text.content #=> String
+    #   resp.results[0].created_time #=> Time
+    #   resp.results[0].description #=> String
+    #   resp.results[0].grouping_configuration.criteria #=> String
+    #   resp.results[0].grouping_configuration.values #=> Array
+    #   resp.results[0].grouping_configuration.values[0] #=> String
+    #   resp.results[0].is_active #=> Boolean
+    #   resp.results[0].knowledge_base_arn #=> String
+    #   resp.results[0].knowledge_base_id #=> String
+    #   resp.results[0].language #=> String
+    #   resp.results[0].last_modified_by #=> String
+    #   resp.results[0].last_modified_time #=> Time
+    #   resp.results[0].name #=> String
+    #   resp.results[0].quick_response_arn #=> String
+    #   resp.results[0].quick_response_id #=> String
+    #   resp.results[0].shortcut_key #=> String
+    #   resp.results[0].status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
+    #   resp.results[0].tags #=> Hash
+    #   resp.results[0].tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/SearchQuickResponses AWS API Documentation
+    #
+    # @overload search_quick_responses(params = {})
+    # @param [Hash] params ({})
+    def search_quick_responses(params = {}, options = {})
+      req = build_request(:search_quick_responses, params)
       req.send_request(options)
     end
 
@@ -1794,8 +2347,14 @@ module Aws::ConnectWisdomService
     #   The type of content to upload.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the ARN.
-    #   URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it. Can be either the ID or the ARN. URLs cannot contain
+    #   the ARN.
+    #
+    # @option params [Integer] :presigned_url_time_to_live
+    #   The expected expiration time of the generated presigned URL, specified
+    #   in minutes.
     #
     # @return [Types::StartContentUploadResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1809,6 +2368,7 @@ module Aws::ConnectWisdomService
     #   resp = client.start_content_upload({
     #     content_type: "ContentType", # required
     #     knowledge_base_id: "UuidOrArn", # required
+    #     presigned_url_time_to_live: 1,
     #   })
     #
     # @example Response structure
@@ -1825,6 +2385,113 @@ module Aws::ConnectWisdomService
     # @param [Hash] params ({})
     def start_content_upload(params = {}, options = {})
       req = build_request(:start_content_upload, params)
+      req.send_request(options)
+    end
+
+    # Start an asynchronous job to import Wisdom resources from an uploaded
+    # source file. Before calling this API, use [StartContentUpload][1] to
+    # upload an asset that contains the resource data.
+    #
+    # * For importing Wisdom quick responses, you need to upload a csv file
+    #   including the quick responses. For information about how to format
+    #   the csv file for importing quick responses, see [Import quick
+    #   responses][2].
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html
+    # [2]: https://docs.aws.amazon.com/console/connect/quick-responses/add-data
+    #
+    # @option params [String] :client_token
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Types::ExternalSourceConfiguration] :external_source_configuration
+    #   The configuration information of the external source that the resource
+    #   data are imported from.
+    #
+    # @option params [required, String] :import_job_type
+    #   The type of the import job.
+    #
+    #   * For importing quick response resource, set the value to
+    #     `QUICK_RESPONSES`.
+    #
+    #   ^
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it. Can be either the ID or the ARN. URLs cannot contain
+    #   the ARN.
+    #
+    #   * For importing Wisdom quick responses, this should be a
+    #     `QUICK_RESPONSES` type knowledge base.
+    #
+    #   ^
+    #
+    # @option params [Hash<String,String>] :metadata
+    #   The metadata fields of the imported Wisdom resources.
+    #
+    # @option params [required, String] :upload_id
+    #   A pointer to the uploaded asset. This value is returned by
+    #   [StartContentUpload][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html
+    #
+    # @return [Types::StartImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartImportJobResponse#import_job #import_job} => Types::ImportJobData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_import_job({
+    #     client_token: "NonEmptyString",
+    #     external_source_configuration: {
+    #       configuration: { # required
+    #         connect_configuration: {
+    #           instance_id: "NonEmptyString",
+    #         },
+    #       },
+    #       source: "AMAZON_CONNECT", # required, accepts AMAZON_CONNECT
+    #     },
+    #     import_job_type: "QUICK_RESPONSES", # required, accepts QUICK_RESPONSES
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     metadata: {
+    #       "NonEmptyString" => "NonEmptyString",
+    #     },
+    #     upload_id: "UploadId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.import_job.created_time #=> Time
+    #   resp.import_job.external_source_configuration.configuration.connect_configuration.instance_id #=> String
+    #   resp.import_job.external_source_configuration.source #=> String, one of "AMAZON_CONNECT"
+    #   resp.import_job.failed_record_report #=> String
+    #   resp.import_job.import_job_id #=> String
+    #   resp.import_job.import_job_type #=> String, one of "QUICK_RESPONSES"
+    #   resp.import_job.knowledge_base_arn #=> String
+    #   resp.import_job.knowledge_base_id #=> String
+    #   resp.import_job.last_modified_time #=> Time
+    #   resp.import_job.metadata #=> Hash
+    #   resp.import_job.metadata["NonEmptyString"] #=> String
+    #   resp.import_job.status #=> String, one of "START_IN_PROGRESS", "FAILED", "COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.import_job.upload_id #=> String
+    #   resp.import_job.url #=> String
+    #   resp.import_job.url_expiry #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/StartImportJob AWS API Documentation
+    #
+    # @overload start_import_job(params = {})
+    # @param [Hash] params ({})
+    def start_import_job(params = {}, options = {})
+      req = build_request(:start_import_job, params)
       req.send_request(options)
     end
 
@@ -1889,7 +2556,9 @@ module Aws::ConnectWisdomService
     #   cannot contain the ARN.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the ARN
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it. Can be either the ID or the ARN
     #
     # @option params [Hash<String,String>] :metadata
     #   A key/value map to store attributes without affecting tagging or
@@ -1979,8 +2648,10 @@ module Aws::ConnectWisdomService
     # `https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*$\{Id\}*/view`.
     #
     # @option params [required, String] :knowledge_base_id
-    #   The identifier of the knowledge base. Can be either the ID or the ARN.
-    #   URLs cannot contain the ARN.
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it. Can be either the ID or the ARN. URLs cannot contain
+    #   the ARN.
     #
     # @option params [required, String] :template_uri
     #   The template URI to update.
@@ -2001,7 +2672,7 @@ module Aws::ConnectWisdomService
     #   resp.knowledge_base.description #=> String
     #   resp.knowledge_base.knowledge_base_arn #=> String
     #   resp.knowledge_base.knowledge_base_id #=> String
-    #   resp.knowledge_base.knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM"
+    #   resp.knowledge_base.knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM", "QUICK_RESPONSES"
     #   resp.knowledge_base.last_content_modification_time #=> Time
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.rendering_configuration.template_uri #=> String
@@ -2022,6 +2693,127 @@ module Aws::ConnectWisdomService
       req.send_request(options)
     end
 
+    # Updates an existing Wisdom quick response.
+    #
+    # @option params [Array<String>] :channels
+    #   The Amazon Connect contact channels this quick response applies to.
+    #   The supported contact channel types include `Chat`.
+    #
+    # @option params [Types::QuickResponseDataProvider] :content
+    #   The updated content of the quick response.
+    #
+    # @option params [String] :content_type
+    #   The media type of the quick response content.
+    #
+    #   * Use `application/x.quickresponse;format=plain` for quick response
+    #     written in plain text.
+    #
+    #   * Use `application/x.quickresponse;format=markdown` for quick response
+    #     written in richtext.
+    #
+    # @option params [String] :description
+    #   The updated description of the quick response.
+    #
+    # @option params [Types::GroupingConfiguration] :grouping_configuration
+    #   The updated grouping configuration of the quick response.
+    #
+    # @option params [Boolean] :is_active
+    #   Whether the quick response is active.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base. This should not be a
+    #   QUICK\_RESPONSES type knowledge base if you're storing Wisdom Content
+    #   resource to it. Can be either the ID or the ARN. URLs cannot contain
+    #   the ARN.
+    #
+    # @option params [String] :language
+    #   The language code value for the language in which the quick response
+    #   is written. The supported language codes include `de_DE`, `en_US`,
+    #   `es_ES`, `fr_FR`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `pt_BR`,
+    #   `zh_CN`, `zh_TW`
+    #
+    # @option params [String] :name
+    #   The name of the quick response.
+    #
+    # @option params [required, String] :quick_response_id
+    #   The identifier of the quick response.
+    #
+    # @option params [Boolean] :remove_description
+    #   Whether to remove the description from the quick response.
+    #
+    # @option params [Boolean] :remove_grouping_configuration
+    #   Whether to remove the grouping configuration of the quick response.
+    #
+    # @option params [Boolean] :remove_shortcut_key
+    #   Whether to remove the shortcut key of the quick response.
+    #
+    # @option params [String] :shortcut_key
+    #   The shortcut key of the quick response. The value should be unique
+    #   across the knowledge base.
+    #
+    # @return [Types::UpdateQuickResponseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateQuickResponseResponse#quick_response #quick_response} => Types::QuickResponseData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_quick_response({
+    #     channels: ["Channel"],
+    #     content: {
+    #       content: "QuickResponseContent",
+    #     },
+    #     content_type: "QuickResponseType",
+    #     description: "QuickResponseDescription",
+    #     grouping_configuration: {
+    #       criteria: "GroupingCriteria",
+    #       values: ["GroupingValue"],
+    #     },
+    #     is_active: false,
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     language: "LanguageCode",
+    #     name: "QuickResponseName",
+    #     quick_response_id: "UuidOrArn", # required
+    #     remove_description: false,
+    #     remove_grouping_configuration: false,
+    #     remove_shortcut_key: false,
+    #     shortcut_key: "ShortCutKey",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.quick_response.channels #=> Array
+    #   resp.quick_response.channels[0] #=> String
+    #   resp.quick_response.content_type #=> String
+    #   resp.quick_response.contents.markdown.content #=> String
+    #   resp.quick_response.contents.plain_text.content #=> String
+    #   resp.quick_response.created_time #=> Time
+    #   resp.quick_response.description #=> String
+    #   resp.quick_response.grouping_configuration.criteria #=> String
+    #   resp.quick_response.grouping_configuration.values #=> Array
+    #   resp.quick_response.grouping_configuration.values[0] #=> String
+    #   resp.quick_response.is_active #=> Boolean
+    #   resp.quick_response.knowledge_base_arn #=> String
+    #   resp.quick_response.knowledge_base_id #=> String
+    #   resp.quick_response.language #=> String
+    #   resp.quick_response.last_modified_by #=> String
+    #   resp.quick_response.last_modified_time #=> Time
+    #   resp.quick_response.name #=> String
+    #   resp.quick_response.quick_response_arn #=> String
+    #   resp.quick_response.quick_response_id #=> String
+    #   resp.quick_response.shortcut_key #=> String
+    #   resp.quick_response.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
+    #   resp.quick_response.tags #=> Hash
+    #   resp.quick_response.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wisdom-2020-10-19/UpdateQuickResponse AWS API Documentation
+    #
+    # @overload update_quick_response(params = {})
+    # @param [Hash] params ({})
+    def update_quick_response(params = {}, options = {})
+      req = build_request(:update_quick_response, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2035,7 +2827,7 @@ module Aws::ConnectWisdomService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connectwisdomservice'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

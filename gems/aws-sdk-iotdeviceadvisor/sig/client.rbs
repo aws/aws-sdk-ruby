@@ -1,0 +1,297 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTDeviceAdvisor
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateSuiteDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSuiteDefinitionResponse]
+        def suite_definition_id: () -> ::String
+        def suite_definition_arn: () -> ::String
+        def suite_definition_name: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#create_suite_definition-instance_method
+      def create_suite_definition: (
+                                     suite_definition_configuration: {
+                                       suite_definition_name: ::String,
+                                       devices: Array[
+                                         {
+                                           thing_arn: ::String?,
+                                           certificate_arn: ::String?,
+                                           device_role_arn: ::String?
+                                         },
+                                       ]?,
+                                       intended_for_qualification: bool?,
+                                       is_long_duration_test: bool?,
+                                       root_group: ::String,
+                                       device_permission_role_arn: ::String,
+                                       protocol: ("MqttV3_1_1" | "MqttV5" | "MqttV3_1_1_OverWebSocket" | "MqttV5_OverWebSocket")?
+                                     },
+                                     ?tags: Hash[::String, ::String]
+                                   ) -> _CreateSuiteDefinitionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSuiteDefinitionResponseSuccess
+
+      interface _DeleteSuiteDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSuiteDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#delete_suite_definition-instance_method
+      def delete_suite_definition: (
+                                     suite_definition_id: ::String
+                                   ) -> _DeleteSuiteDefinitionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSuiteDefinitionResponseSuccess
+
+      interface _GetEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEndpointResponse]
+        def endpoint: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#get_endpoint-instance_method
+      def get_endpoint: (
+                          ?thing_arn: ::String,
+                          ?certificate_arn: ::String,
+                          ?device_role_arn: ::String,
+                          ?authentication_method: ("X509ClientCertificate" | "SignatureVersion4")
+                        ) -> _GetEndpointResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEndpointResponseSuccess
+
+      interface _GetSuiteDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSuiteDefinitionResponse]
+        def suite_definition_id: () -> ::String
+        def suite_definition_arn: () -> ::String
+        def suite_definition_version: () -> ::String
+        def latest_version: () -> ::String
+        def suite_definition_configuration: () -> Types::SuiteDefinitionConfiguration
+        def created_at: () -> ::Time
+        def last_modified_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#get_suite_definition-instance_method
+      def get_suite_definition: (
+                                  suite_definition_id: ::String,
+                                  ?suite_definition_version: ::String
+                                ) -> _GetSuiteDefinitionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSuiteDefinitionResponseSuccess
+
+      interface _GetSuiteRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSuiteRunResponse]
+        def suite_definition_id: () -> ::String
+        def suite_definition_version: () -> ::String
+        def suite_run_id: () -> ::String
+        def suite_run_arn: () -> ::String
+        def suite_run_configuration: () -> Types::SuiteRunConfiguration
+        def test_result: () -> Types::TestResult
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def status: () -> ("PASS" | "FAIL" | "CANCELED" | "PENDING" | "RUNNING" | "STOPPING" | "STOPPED" | "PASS_WITH_WARNINGS" | "ERROR")
+        def error_reason: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#get_suite_run-instance_method
+      def get_suite_run: (
+                           suite_definition_id: ::String,
+                           suite_run_id: ::String
+                         ) -> _GetSuiteRunResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSuiteRunResponseSuccess
+
+      interface _GetSuiteRunReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSuiteRunReportResponse]
+        def qualification_report_download_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#get_suite_run_report-instance_method
+      def get_suite_run_report: (
+                                  suite_definition_id: ::String,
+                                  suite_run_id: ::String
+                                ) -> _GetSuiteRunReportResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSuiteRunReportResponseSuccess
+
+      interface _ListSuiteDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSuiteDefinitionsResponse]
+        def suite_definition_information_list: () -> ::Array[Types::SuiteDefinitionInformation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#list_suite_definitions-instance_method
+      def list_suite_definitions: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListSuiteDefinitionsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSuiteDefinitionsResponseSuccess
+
+      interface _ListSuiteRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSuiteRunsResponse]
+        def suite_runs_list: () -> ::Array[Types::SuiteRunInformation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#list_suite_runs-instance_method
+      def list_suite_runs: (
+                             ?suite_definition_id: ::String,
+                             ?suite_definition_version: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListSuiteRunsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSuiteRunsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartSuiteRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSuiteRunResponse]
+        def suite_run_id: () -> ::String
+        def suite_run_arn: () -> ::String
+        def created_at: () -> ::Time
+        def endpoint: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#start_suite_run-instance_method
+      def start_suite_run: (
+                             suite_definition_id: ::String,
+                             ?suite_definition_version: ::String,
+                             suite_run_configuration: {
+                               primary_device: {
+                                 thing_arn: ::String?,
+                                 certificate_arn: ::String?,
+                                 device_role_arn: ::String?
+                               },
+                               selected_test_list: Array[::String]?,
+                               parallel_run: bool?
+                             },
+                             ?tags: Hash[::String, ::String]
+                           ) -> _StartSuiteRunResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSuiteRunResponseSuccess
+
+      interface _StopSuiteRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopSuiteRunResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#stop_suite_run-instance_method
+      def stop_suite_run: (
+                            suite_definition_id: ::String,
+                            suite_run_id: ::String
+                          ) -> _StopSuiteRunResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopSuiteRunResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateSuiteDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSuiteDefinitionResponse]
+        def suite_definition_id: () -> ::String
+        def suite_definition_arn: () -> ::String
+        def suite_definition_name: () -> ::String
+        def suite_definition_version: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#update_suite_definition-instance_method
+      def update_suite_definition: (
+                                     suite_definition_id: ::String,
+                                     suite_definition_configuration: {
+                                       suite_definition_name: ::String,
+                                       devices: Array[
+                                         {
+                                           thing_arn: ::String?,
+                                           certificate_arn: ::String?,
+                                           device_role_arn: ::String?
+                                         },
+                                       ]?,
+                                       intended_for_qualification: bool?,
+                                       is_long_duration_test: bool?,
+                                       root_group: ::String,
+                                       device_permission_role_arn: ::String,
+                                       protocol: ("MqttV3_1_1" | "MqttV5" | "MqttV3_1_1_OverWebSocket" | "MqttV5_OverWebSocket")?
+                                     }
+                                   ) -> _UpdateSuiteDefinitionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSuiteDefinitionResponseSuccess
+    end
+  end
+end
+

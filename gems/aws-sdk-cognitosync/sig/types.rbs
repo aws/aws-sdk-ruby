@@ -1,0 +1,351 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CognitoSync
+  module Types
+
+    class AlreadyStreamedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BulkPublishRequest
+      attr_accessor identity_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class BulkPublishResponse
+      attr_accessor identity_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class CognitoStreams
+      attr_accessor stream_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor streaming_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Dataset
+      attr_accessor identity_id: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor data_storage: ::Integer
+      attr_accessor num_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetRequest
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor dataset_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetResponse
+      attr_accessor dataset: Types::Dataset
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetRequest
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor dataset_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetResponse
+      attr_accessor dataset: Types::Dataset
+      SENSITIVE: []
+    end
+
+    class DescribeIdentityPoolUsageRequest
+      attr_accessor identity_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeIdentityPoolUsageResponse
+      attr_accessor identity_pool_usage: Types::IdentityPoolUsage
+      SENSITIVE: []
+    end
+
+    class DescribeIdentityUsageRequest
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeIdentityUsageResponse
+      attr_accessor identity_usage: Types::IdentityUsage
+      SENSITIVE: []
+    end
+
+    class DuplicateRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetBulkPublishDetailsRequest
+      attr_accessor identity_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBulkPublishDetailsResponse
+      attr_accessor identity_pool_id: ::String
+      attr_accessor bulk_publish_start_time: ::Time
+      attr_accessor bulk_publish_complete_time: ::Time
+      attr_accessor bulk_publish_status: ("NOT_STARTED" | "IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+      attr_accessor failure_message: ::String
+      SENSITIVE: []
+    end
+
+    class GetCognitoEventsRequest
+      attr_accessor identity_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCognitoEventsResponse
+      attr_accessor events: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetIdentityPoolConfigurationRequest
+      attr_accessor identity_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetIdentityPoolConfigurationResponse
+      attr_accessor identity_pool_id: ::String
+      attr_accessor push_sync: Types::PushSync
+      attr_accessor cognito_streams: Types::CognitoStreams
+      SENSITIVE: []
+    end
+
+    class IdentityPoolUsage
+      attr_accessor identity_pool_id: ::String
+      attr_accessor sync_sessions_count: ::Integer
+      attr_accessor data_storage: ::Integer
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class IdentityUsage
+      attr_accessor identity_id: ::String
+      attr_accessor identity_pool_id: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor dataset_count: ::Integer
+      attr_accessor data_storage: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidLambdaFunctionOutputException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaThrottledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetsRequest
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatasetsResponse
+      attr_accessor datasets: ::Array[Types::Dataset]
+      attr_accessor count: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentityPoolUsageRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIdentityPoolUsageResponse
+      attr_accessor identity_pool_usages: ::Array[Types::IdentityPoolUsage]
+      attr_accessor max_results: ::Integer
+      attr_accessor count: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecordsRequest
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor last_sync_count: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor sync_session_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecordsResponse
+      attr_accessor records: ::Array[Types::Record]
+      attr_accessor next_token: ::String
+      attr_accessor count: ::Integer
+      attr_accessor dataset_sync_count: ::Integer
+      attr_accessor last_modified_by: ::String
+      attr_accessor merged_dataset_names: ::Array[::String]
+      attr_accessor dataset_exists: bool
+      attr_accessor dataset_deleted_after_requested_sync_count: bool
+      attr_accessor sync_session_token: ::String
+      SENSITIVE: []
+    end
+
+    class NotAuthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PushSync
+      attr_accessor application_arns: ::Array[::String]
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Record
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor sync_count: ::Integer
+      attr_accessor last_modified_date: ::Time
+      attr_accessor last_modified_by: ::String
+      attr_accessor device_last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class RecordPatch
+      attr_accessor op: ("replace" | "remove")
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor sync_count: ::Integer
+      attr_accessor device_last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class RegisterDeviceRequest
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor platform: ("APNS" | "APNS_SANDBOX" | "GCM" | "ADM")
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterDeviceResponse
+      attr_accessor device_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SetCognitoEventsRequest
+      attr_accessor identity_pool_id: ::String
+      attr_accessor events: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SetIdentityPoolConfigurationRequest
+      attr_accessor identity_pool_id: ::String
+      attr_accessor push_sync: Types::PushSync
+      attr_accessor cognito_streams: Types::CognitoStreams
+      SENSITIVE: []
+    end
+
+    class SetIdentityPoolConfigurationResponse
+      attr_accessor identity_pool_id: ::String
+      attr_accessor push_sync: Types::PushSync
+      attr_accessor cognito_streams: Types::CognitoStreams
+      SENSITIVE: []
+    end
+
+    class SubscribeToDatasetRequest
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor device_id: ::String
+      SENSITIVE: []
+    end
+
+    class SubscribeToDatasetResponse < Aws::EmptyStructure
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsubscribeFromDatasetRequest
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor device_id: ::String
+      SENSITIVE: []
+    end
+
+    class UnsubscribeFromDatasetResponse < Aws::EmptyStructure
+    end
+
+    class UpdateRecordsRequest
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor device_id: ::String
+      attr_accessor record_patches: ::Array[Types::RecordPatch]
+      attr_accessor sync_session_token: ::String
+      attr_accessor client_context: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRecordsResponse
+      attr_accessor records: ::Array[Types::Record]
+      SENSITIVE: []
+    end
+  end
+end

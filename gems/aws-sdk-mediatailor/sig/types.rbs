@@ -1,0 +1,1038 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MediaTailor
+  module Types
+
+    class AccessConfiguration
+      attr_accessor access_type: ("S3_SIGV4" | "SECRETS_MANAGER_ACCESS_TOKEN" | "AUTODETECT_SIGV4")
+      attr_accessor secrets_manager_access_token_configuration: Types::SecretsManagerAccessTokenConfiguration
+      SENSITIVE: []
+    end
+
+    class AdBreak
+      attr_accessor ad_break_metadata: ::Array[Types::KeyValuePair]
+      attr_accessor message_type: ("SPLICE_INSERT" | "TIME_SIGNAL")
+      attr_accessor offset_millis: ::Integer
+      attr_accessor slate: Types::SlateSource
+      attr_accessor splice_insert_message: Types::SpliceInsertMessage
+      attr_accessor time_signal_message: Types::TimeSignalMessage
+      SENSITIVE: []
+    end
+
+    class AdBreakOpportunity
+      attr_accessor offset_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class AdMarkerPassthrough
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class Alert
+      attr_accessor alert_code: ::String
+      attr_accessor alert_message: ::String
+      attr_accessor category: ("SCHEDULING_ERROR" | "PLAYBACK_WARNING" | "INFO")
+      attr_accessor last_modified_time: ::Time
+      attr_accessor related_resource_arns: ::Array[::String]
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AvailMatchingCriteria
+      attr_accessor dynamic_variable: ::String
+      attr_accessor operator: ("EQUALS")
+      SENSITIVE: []
+    end
+
+    class AvailSuppression
+      attr_accessor fill_policy: ("FULL_AVAIL_ONLY" | "PARTIAL_AVAIL")
+      attr_accessor mode: ("OFF" | "BEHIND_LIVE_EDGE" | "AFTER_LIVE_EDGE")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Bumper
+      attr_accessor end_url: ::String
+      attr_accessor start_url: ::String
+      SENSITIVE: []
+    end
+
+    class CdnConfiguration
+      attr_accessor ad_segment_url_prefix: ::String
+      attr_accessor content_segment_url_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class Channel
+      attr_accessor arn: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor channel_state: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor filler_slate: Types::SlateSource
+      attr_accessor last_modified_time: ::Time
+      attr_accessor log_configuration: Types::LogConfigurationForChannel
+      attr_accessor outputs: ::Array[Types::ResponseOutputItem]
+      attr_accessor playback_mode: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor tier: ::String
+      SENSITIVE: []
+    end
+
+    class ClipRange
+      attr_accessor end_offset_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConfigureLogsForChannelRequest
+      attr_accessor channel_name: ::String
+      attr_accessor log_types: ::Array[("AS_RUN")]
+      SENSITIVE: []
+    end
+
+    class ConfigureLogsForChannelResponse
+      attr_accessor channel_name: ::String
+      attr_accessor log_types: ::Array[("AS_RUN")]
+      SENSITIVE: []
+    end
+
+    class ConfigureLogsForPlaybackConfigurationRequest
+      attr_accessor percent_enabled: ::Integer
+      attr_accessor playback_configuration_name: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigureLogsForPlaybackConfigurationResponse
+      attr_accessor percent_enabled: ::Integer
+      attr_accessor playback_configuration_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChannelRequest
+      attr_accessor channel_name: ::String
+      attr_accessor filler_slate: Types::SlateSource
+      attr_accessor outputs: ::Array[Types::RequestOutputItem]
+      attr_accessor playback_mode: ("LOOP" | "LINEAR")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor tier: ("BASIC" | "STANDARD")
+      attr_accessor time_shift_configuration: Types::TimeShiftConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateChannelResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor channel_state: ("RUNNING" | "STOPPED")
+      attr_accessor creation_time: ::Time
+      attr_accessor filler_slate: Types::SlateSource
+      attr_accessor last_modified_time: ::Time
+      attr_accessor outputs: ::Array[Types::ResponseOutputItem]
+      attr_accessor playback_mode: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor tier: ::String
+      attr_accessor time_shift_configuration: Types::TimeShiftConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateLiveSourceRequest
+      attr_accessor http_package_configurations: ::Array[Types::HttpPackageConfiguration]
+      attr_accessor live_source_name: ::String
+      attr_accessor source_location_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateLiveSourceResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor http_package_configurations: ::Array[Types::HttpPackageConfiguration]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor live_source_name: ::String
+      attr_accessor source_location_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePrefetchScheduleRequest
+      attr_accessor consumption: Types::PrefetchConsumption
+      attr_accessor name: ::String
+      attr_accessor playback_configuration_name: ::String
+      attr_accessor retrieval: Types::PrefetchRetrieval
+      attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePrefetchScheduleResponse
+      attr_accessor arn: ::String
+      attr_accessor consumption: Types::PrefetchConsumption
+      attr_accessor name: ::String
+      attr_accessor playback_configuration_name: ::String
+      attr_accessor retrieval: Types::PrefetchRetrieval
+      attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProgramRequest
+      attr_accessor ad_breaks: ::Array[Types::AdBreak]
+      attr_accessor channel_name: ::String
+      attr_accessor live_source_name: ::String
+      attr_accessor program_name: ::String
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration
+      attr_accessor source_location_name: ::String
+      attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProgramResponse
+      attr_accessor ad_breaks: ::Array[Types::AdBreak]
+      attr_accessor arn: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor clip_range: Types::ClipRange
+      attr_accessor creation_time: ::Time
+      attr_accessor duration_millis: ::Integer
+      attr_accessor live_source_name: ::String
+      attr_accessor program_name: ::String
+      attr_accessor scheduled_start_time: ::Time
+      attr_accessor source_location_name: ::String
+      attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSourceLocationRequest
+      attr_accessor access_configuration: Types::AccessConfiguration
+      attr_accessor default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration
+      attr_accessor http_configuration: Types::HttpConfiguration
+      attr_accessor segment_delivery_configurations: ::Array[Types::SegmentDeliveryConfiguration]
+      attr_accessor source_location_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSourceLocationResponse
+      attr_accessor access_configuration: Types::AccessConfiguration
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration
+      attr_accessor http_configuration: Types::HttpConfiguration
+      attr_accessor last_modified_time: ::Time
+      attr_accessor segment_delivery_configurations: ::Array[Types::SegmentDeliveryConfiguration]
+      attr_accessor source_location_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateVodSourceRequest
+      attr_accessor http_package_configurations: ::Array[Types::HttpPackageConfiguration]
+      attr_accessor source_location_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVodSourceResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor http_package_configurations: ::Array[Types::HttpPackageConfiguration]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor source_location_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class DashConfiguration
+      attr_accessor manifest_endpoint_prefix: ::String
+      attr_accessor mpd_location: ::String
+      attr_accessor origin_manifest_type: ("SINGLE_PERIOD" | "MULTI_PERIOD")
+      SENSITIVE: []
+    end
+
+    class DashConfigurationForPut
+      attr_accessor mpd_location: ::String
+      attr_accessor origin_manifest_type: ("SINGLE_PERIOD" | "MULTI_PERIOD")
+      SENSITIVE: []
+    end
+
+    class DashPlaylistSettings
+      attr_accessor manifest_window_seconds: ::Integer
+      attr_accessor min_buffer_time_seconds: ::Integer
+      attr_accessor min_update_period_seconds: ::Integer
+      attr_accessor suggested_presentation_delay_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class DefaultSegmentDeliveryConfiguration
+      attr_accessor base_url: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelPolicyRequest
+      attr_accessor channel_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteChannelRequest
+      attr_accessor channel_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelResponse < Aws::EmptyStructure
+    end
+
+    class DeleteLiveSourceRequest
+      attr_accessor live_source_name: ::String
+      attr_accessor source_location_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLiveSourceResponse < Aws::EmptyStructure
+    end
+
+    class DeletePlaybackConfigurationRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePlaybackConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeletePrefetchScheduleRequest
+      attr_accessor name: ::String
+      attr_accessor playback_configuration_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePrefetchScheduleResponse < Aws::EmptyStructure
+    end
+
+    class DeleteProgramRequest
+      attr_accessor channel_name: ::String
+      attr_accessor program_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProgramResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSourceLocationRequest
+      attr_accessor source_location_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSourceLocationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteVodSourceRequest
+      attr_accessor source_location_name: ::String
+      attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVodSourceResponse < Aws::EmptyStructure
+    end
+
+    class DescribeChannelRequest
+      attr_accessor channel_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor channel_state: ("RUNNING" | "STOPPED")
+      attr_accessor creation_time: ::Time
+      attr_accessor filler_slate: Types::SlateSource
+      attr_accessor last_modified_time: ::Time
+      attr_accessor log_configuration: Types::LogConfigurationForChannel
+      attr_accessor outputs: ::Array[Types::ResponseOutputItem]
+      attr_accessor playback_mode: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor tier: ::String
+      attr_accessor time_shift_configuration: Types::TimeShiftConfiguration
+      SENSITIVE: []
+    end
+
+    class DescribeLiveSourceRequest
+      attr_accessor live_source_name: ::String
+      attr_accessor source_location_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLiveSourceResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor http_package_configurations: ::Array[Types::HttpPackageConfiguration]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor live_source_name: ::String
+      attr_accessor source_location_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeProgramRequest
+      attr_accessor channel_name: ::String
+      attr_accessor program_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProgramResponse
+      attr_accessor ad_breaks: ::Array[Types::AdBreak]
+      attr_accessor arn: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor clip_range: Types::ClipRange
+      attr_accessor creation_time: ::Time
+      attr_accessor duration_millis: ::Integer
+      attr_accessor live_source_name: ::String
+      attr_accessor program_name: ::String
+      attr_accessor scheduled_start_time: ::Time
+      attr_accessor source_location_name: ::String
+      attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSourceLocationRequest
+      attr_accessor source_location_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSourceLocationResponse
+      attr_accessor access_configuration: Types::AccessConfiguration
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration
+      attr_accessor http_configuration: Types::HttpConfiguration
+      attr_accessor last_modified_time: ::Time
+      attr_accessor segment_delivery_configurations: ::Array[Types::SegmentDeliveryConfiguration]
+      attr_accessor source_location_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeVodSourceRequest
+      attr_accessor source_location_name: ::String
+      attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVodSourceResponse
+      attr_accessor ad_break_opportunities: ::Array[Types::AdBreakOpportunity]
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor http_package_configurations: ::Array[Types::HttpPackageConfiguration]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor source_location_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelPolicyRequest
+      attr_accessor channel_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelPolicyResponse
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelScheduleRequest
+      attr_accessor channel_name: ::String
+      attr_accessor duration_minutes: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelScheduleResponse
+      attr_accessor items: ::Array[Types::ScheduleEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetPlaybackConfigurationRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPlaybackConfigurationResponse
+      attr_accessor ad_decision_server_url: ::String
+      attr_accessor avail_suppression: Types::AvailSuppression
+      attr_accessor bumper: Types::Bumper
+      attr_accessor cdn_configuration: Types::CdnConfiguration
+      attr_accessor configuration_aliases: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor dash_configuration: Types::DashConfiguration
+      attr_accessor hls_configuration: Types::HlsConfiguration
+      attr_accessor live_pre_roll_configuration: Types::LivePreRollConfiguration
+      attr_accessor log_configuration: Types::LogConfiguration
+      attr_accessor manifest_processing_rules: Types::ManifestProcessingRules
+      attr_accessor name: ::String
+      attr_accessor personalization_threshold_seconds: ::Integer
+      attr_accessor playback_configuration_arn: ::String
+      attr_accessor playback_endpoint_prefix: ::String
+      attr_accessor session_initialization_endpoint_prefix: ::String
+      attr_accessor slate_ad_url: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor transcode_profile_name: ::String
+      attr_accessor video_content_source_url: ::String
+      SENSITIVE: []
+    end
+
+    class GetPrefetchScheduleRequest
+      attr_accessor name: ::String
+      attr_accessor playback_configuration_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPrefetchScheduleResponse
+      attr_accessor arn: ::String
+      attr_accessor consumption: Types::PrefetchConsumption
+      attr_accessor name: ::String
+      attr_accessor playback_configuration_name: ::String
+      attr_accessor retrieval: Types::PrefetchRetrieval
+      attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class HlsConfiguration
+      attr_accessor manifest_endpoint_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class HlsPlaylistSettings
+      attr_accessor ad_markup_type: ::Array[("DATERANGE" | "SCTE35_ENHANCED")]
+      attr_accessor manifest_window_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class HttpConfiguration
+      attr_accessor base_url: ::String
+      SENSITIVE: []
+    end
+
+    class HttpPackageConfiguration
+      attr_accessor path: ::String
+      attr_accessor source_group: ::String
+      attr_accessor type: ("DASH" | "HLS")
+      SENSITIVE: []
+    end
+
+    class KeyValuePair
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ListAlertsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListAlertsResponse
+      attr_accessor items: ::Array[Types::Alert]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelsResponse
+      attr_accessor items: ::Array[Types::Channel]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLiveSourcesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor source_location_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListLiveSourcesResponse
+      attr_accessor items: ::Array[Types::LiveSource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlaybackConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlaybackConfigurationsResponse
+      attr_accessor items: ::Array[Types::PlaybackConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPrefetchSchedulesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor playback_configuration_name: ::String
+      attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListPrefetchSchedulesResponse
+      attr_accessor items: ::Array[Types::PrefetchSchedule]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSourceLocationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSourceLocationsResponse
+      attr_accessor items: ::Array[Types::SourceLocation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListVodSourcesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor source_location_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListVodSourcesResponse
+      attr_accessor items: ::Array[Types::VodSource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LivePreRollConfiguration
+      attr_accessor ad_decision_server_url: ::String
+      attr_accessor max_duration_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class LiveSource
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor http_package_configurations: ::Array[Types::HttpPackageConfiguration]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor live_source_name: ::String
+      attr_accessor source_location_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LogConfiguration
+      attr_accessor percent_enabled: ::Integer
+      SENSITIVE: []
+    end
+
+    class LogConfigurationForChannel
+      attr_accessor log_types: ::Array[("AS_RUN")]
+      SENSITIVE: []
+    end
+
+    class ManifestProcessingRules
+      attr_accessor ad_marker_passthrough: Types::AdMarkerPassthrough
+      SENSITIVE: []
+    end
+
+    class PlaybackConfiguration
+      attr_accessor ad_decision_server_url: ::String
+      attr_accessor avail_suppression: Types::AvailSuppression
+      attr_accessor bumper: Types::Bumper
+      attr_accessor cdn_configuration: Types::CdnConfiguration
+      attr_accessor configuration_aliases: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor dash_configuration: Types::DashConfiguration
+      attr_accessor hls_configuration: Types::HlsConfiguration
+      attr_accessor live_pre_roll_configuration: Types::LivePreRollConfiguration
+      attr_accessor log_configuration: Types::LogConfiguration
+      attr_accessor manifest_processing_rules: Types::ManifestProcessingRules
+      attr_accessor name: ::String
+      attr_accessor personalization_threshold_seconds: ::Integer
+      attr_accessor playback_configuration_arn: ::String
+      attr_accessor playback_endpoint_prefix: ::String
+      attr_accessor session_initialization_endpoint_prefix: ::String
+      attr_accessor slate_ad_url: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor transcode_profile_name: ::String
+      attr_accessor video_content_source_url: ::String
+      SENSITIVE: []
+    end
+
+    class PrefetchConsumption
+      attr_accessor avail_matching_criteria: ::Array[Types::AvailMatchingCriteria]
+      attr_accessor end_time: ::Time
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class PrefetchRetrieval
+      attr_accessor dynamic_variables: ::Hash[::String, ::String]
+      attr_accessor end_time: ::Time
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class PrefetchSchedule
+      attr_accessor arn: ::String
+      attr_accessor consumption: Types::PrefetchConsumption
+      attr_accessor name: ::String
+      attr_accessor playback_configuration_name: ::String
+      attr_accessor retrieval: Types::PrefetchRetrieval
+      attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutChannelPolicyRequest
+      attr_accessor channel_name: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutChannelPolicyResponse < Aws::EmptyStructure
+    end
+
+    class PutPlaybackConfigurationRequest
+      attr_accessor ad_decision_server_url: ::String
+      attr_accessor avail_suppression: Types::AvailSuppression
+      attr_accessor bumper: Types::Bumper
+      attr_accessor cdn_configuration: Types::CdnConfiguration
+      attr_accessor configuration_aliases: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor dash_configuration: Types::DashConfigurationForPut
+      attr_accessor live_pre_roll_configuration: Types::LivePreRollConfiguration
+      attr_accessor manifest_processing_rules: Types::ManifestProcessingRules
+      attr_accessor name: ::String
+      attr_accessor personalization_threshold_seconds: ::Integer
+      attr_accessor slate_ad_url: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor transcode_profile_name: ::String
+      attr_accessor video_content_source_url: ::String
+      SENSITIVE: []
+    end
+
+    class PutPlaybackConfigurationResponse
+      attr_accessor ad_decision_server_url: ::String
+      attr_accessor avail_suppression: Types::AvailSuppression
+      attr_accessor bumper: Types::Bumper
+      attr_accessor cdn_configuration: Types::CdnConfiguration
+      attr_accessor configuration_aliases: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor dash_configuration: Types::DashConfiguration
+      attr_accessor hls_configuration: Types::HlsConfiguration
+      attr_accessor live_pre_roll_configuration: Types::LivePreRollConfiguration
+      attr_accessor log_configuration: Types::LogConfiguration
+      attr_accessor manifest_processing_rules: Types::ManifestProcessingRules
+      attr_accessor name: ::String
+      attr_accessor personalization_threshold_seconds: ::Integer
+      attr_accessor playback_configuration_arn: ::String
+      attr_accessor playback_endpoint_prefix: ::String
+      attr_accessor session_initialization_endpoint_prefix: ::String
+      attr_accessor slate_ad_url: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor transcode_profile_name: ::String
+      attr_accessor video_content_source_url: ::String
+      SENSITIVE: []
+    end
+
+    class RequestOutputItem
+      attr_accessor dash_playlist_settings: Types::DashPlaylistSettings
+      attr_accessor hls_playlist_settings: Types::HlsPlaylistSettings
+      attr_accessor manifest_name: ::String
+      attr_accessor source_group: ::String
+      SENSITIVE: []
+    end
+
+    class ResponseOutputItem
+      attr_accessor dash_playlist_settings: Types::DashPlaylistSettings
+      attr_accessor hls_playlist_settings: Types::HlsPlaylistSettings
+      attr_accessor manifest_name: ::String
+      attr_accessor playback_url: ::String
+      attr_accessor source_group: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduleAdBreak
+      attr_accessor approximate_duration_seconds: ::Integer
+      attr_accessor approximate_start_time: ::Time
+      attr_accessor source_location_name: ::String
+      attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduleConfiguration
+      attr_accessor clip_range: Types::ClipRange
+      attr_accessor transition: Types::Transition
+      SENSITIVE: []
+    end
+
+    class ScheduleEntry
+      attr_accessor approximate_duration_seconds: ::Integer
+      attr_accessor approximate_start_time: ::Time
+      attr_accessor arn: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor live_source_name: ::String
+      attr_accessor program_name: ::String
+      attr_accessor schedule_ad_breaks: ::Array[Types::ScheduleAdBreak]
+      attr_accessor schedule_entry_type: ("PROGRAM" | "FILLER_SLATE")
+      attr_accessor source_location_name: ::String
+      attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class SecretsManagerAccessTokenConfiguration
+      attr_accessor header_name: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor secret_string_key: ::String
+      SENSITIVE: []
+    end
+
+    class SegmentDeliveryConfiguration
+      attr_accessor base_url: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class SegmentationDescriptor
+      attr_accessor segment_num: ::Integer
+      attr_accessor segmentation_event_id: ::Integer
+      attr_accessor segmentation_type_id: ::Integer
+      attr_accessor segmentation_upid: ::String
+      attr_accessor segmentation_upid_type: ::Integer
+      attr_accessor segments_expected: ::Integer
+      attr_accessor sub_segment_num: ::Integer
+      attr_accessor sub_segments_expected: ::Integer
+      SENSITIVE: []
+    end
+
+    class SlateSource
+      attr_accessor source_location_name: ::String
+      attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class SourceLocation
+      attr_accessor access_configuration: Types::AccessConfiguration
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration
+      attr_accessor http_configuration: Types::HttpConfiguration
+      attr_accessor last_modified_time: ::Time
+      attr_accessor segment_delivery_configurations: ::Array[Types::SegmentDeliveryConfiguration]
+      attr_accessor source_location_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SpliceInsertMessage
+      attr_accessor avail_num: ::Integer
+      attr_accessor avails_expected: ::Integer
+      attr_accessor splice_event_id: ::Integer
+      attr_accessor unique_program_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartChannelRequest
+      attr_accessor channel_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartChannelResponse < Aws::EmptyStructure
+    end
+
+    class StopChannelRequest
+      attr_accessor channel_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopChannelResponse < Aws::EmptyStructure
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TimeShiftConfiguration
+      attr_accessor max_time_delay_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimeSignalMessage
+      attr_accessor segmentation_descriptors: ::Array[Types::SegmentationDescriptor]
+      SENSITIVE: []
+    end
+
+    class Transition
+      attr_accessor duration_millis: ::Integer
+      attr_accessor relative_position: ("BEFORE_PROGRAM" | "AFTER_PROGRAM")
+      attr_accessor relative_program: ::String
+      attr_accessor scheduled_start_time_millis: ::Integer
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateChannelRequest
+      attr_accessor channel_name: ::String
+      attr_accessor filler_slate: Types::SlateSource
+      attr_accessor outputs: ::Array[Types::RequestOutputItem]
+      attr_accessor time_shift_configuration: Types::TimeShiftConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateChannelResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor channel_state: ("RUNNING" | "STOPPED")
+      attr_accessor creation_time: ::Time
+      attr_accessor filler_slate: Types::SlateSource
+      attr_accessor last_modified_time: ::Time
+      attr_accessor outputs: ::Array[Types::ResponseOutputItem]
+      attr_accessor playback_mode: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor tier: ::String
+      attr_accessor time_shift_configuration: Types::TimeShiftConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateLiveSourceRequest
+      attr_accessor http_package_configurations: ::Array[Types::HttpPackageConfiguration]
+      attr_accessor live_source_name: ::String
+      attr_accessor source_location_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateLiveSourceResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor http_package_configurations: ::Array[Types::HttpPackageConfiguration]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor live_source_name: ::String
+      attr_accessor source_location_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateProgramRequest
+      attr_accessor ad_breaks: ::Array[Types::AdBreak]
+      attr_accessor channel_name: ::String
+      attr_accessor program_name: ::String
+      attr_accessor schedule_configuration: Types::UpdateProgramScheduleConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateProgramResponse
+      attr_accessor ad_breaks: ::Array[Types::AdBreak]
+      attr_accessor arn: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor clip_range: Types::ClipRange
+      attr_accessor creation_time: ::Time
+      attr_accessor duration_millis: ::Integer
+      attr_accessor live_source_name: ::String
+      attr_accessor program_name: ::String
+      attr_accessor scheduled_start_time: ::Time
+      attr_accessor source_location_name: ::String
+      attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProgramScheduleConfiguration
+      attr_accessor clip_range: Types::ClipRange
+      attr_accessor transition: Types::UpdateProgramTransition
+      SENSITIVE: []
+    end
+
+    class UpdateProgramTransition
+      attr_accessor duration_millis: ::Integer
+      attr_accessor scheduled_start_time_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateSourceLocationRequest
+      attr_accessor access_configuration: Types::AccessConfiguration
+      attr_accessor default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration
+      attr_accessor http_configuration: Types::HttpConfiguration
+      attr_accessor segment_delivery_configurations: ::Array[Types::SegmentDeliveryConfiguration]
+      attr_accessor source_location_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSourceLocationResponse
+      attr_accessor access_configuration: Types::AccessConfiguration
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor default_segment_delivery_configuration: Types::DefaultSegmentDeliveryConfiguration
+      attr_accessor http_configuration: Types::HttpConfiguration
+      attr_accessor last_modified_time: ::Time
+      attr_accessor segment_delivery_configurations: ::Array[Types::SegmentDeliveryConfiguration]
+      attr_accessor source_location_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateVodSourceRequest
+      attr_accessor http_package_configurations: ::Array[Types::HttpPackageConfiguration]
+      attr_accessor source_location_name: ::String
+      attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVodSourceResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor http_package_configurations: ::Array[Types::HttpPackageConfiguration]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor source_location_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+
+    class VodSource
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor http_package_configurations: ::Array[Types::HttpPackageConfiguration]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor source_location_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vod_source_name: ::String
+      SENSITIVE: []
+    end
+  end
+end

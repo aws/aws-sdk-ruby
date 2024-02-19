@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2024-02-08)
+------------------
+
+* Feature - General Interactions for Visuals; Waterfall Chart Color Configuration; Documentation Update
+
+1.103.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.102.0 (2023-12-29)
+------------------
+
+* Feature - Add LinkEntityArn support for different partitions; Add UnsupportedUserEditionException in UpdateDashboardLinks API; Add support for New Reader Experience Topics
+
+1.101.0 (2023-12-18)
+------------------
+
+* Feature - A docs-only release to add missing entities to the API reference.
+
+1.100.0 (2023-12-14)
+------------------
+
+* Feature - Update Dashboard Links support; SingleAxisOptions support; Scatterplot Query limit support.
+
+1.99.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.98.0 (2023-11-27)
+------------------
+
+* Feature - This release launches new APIs for trusted identity propagation setup and supports creating datasources using trusted identity propagation as authentication method for QuickSight accounts configured with IAM Identity Center.
+
+1.97.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.96.0 (2023-11-16)
+------------------
+
+* Feature - Custom permission support for QuickSight roles; Three new datasources STARBURST, TRINO, BIGQUERY; Lenient mode changes the default behavior to allow for exporting and importing with certain UI allowed errors, Support for permissions and tags export and import.
+
+1.95.0 (2023-11-02)
+------------------
+
+* Feature - This release introduces Float Decimal Type as SubType in QuickSight SPICE datasets and Custom week start and Custom timezone options in Analysis and Dashboard.
+
 1.94.0 (2023-10-19)
 ------------------
 

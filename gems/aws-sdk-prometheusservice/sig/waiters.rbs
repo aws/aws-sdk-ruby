@@ -1,0 +1,53 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PrometheusService
+    module Waiters
+
+      class ScraperActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    scraper_id: ::String
+                  ) -> Client::_DescribeScraperResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeScraperResponseSuccess
+      end
+
+      class ScraperDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    scraper_id: ::String
+                  ) -> Client::_DescribeScraperResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeScraperResponseSuccess
+      end
+
+      class WorkspaceActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    workspace_id: ::String
+                  ) -> Client::_DescribeWorkspaceResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeWorkspaceResponseSuccess
+      end
+
+      class WorkspaceDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    workspace_id: ::String
+                  ) -> Client::_DescribeWorkspaceResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeWorkspaceResponseSuccess
+      end
+    end
+  end
+end

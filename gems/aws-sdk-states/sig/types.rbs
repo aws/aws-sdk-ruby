@@ -1,0 +1,1076 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::States
+  module Types
+
+    class ActivityDoesNotExist
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActivityFailedEventDetails
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class ActivityLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActivityListItem
+      attr_accessor activity_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ActivityScheduleFailedEventDetails
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class ActivityScheduledEventDetails
+      attr_accessor resource: ::String
+      attr_accessor input: ::String
+      attr_accessor input_details: Types::HistoryEventExecutionDataDetails
+      attr_accessor timeout_in_seconds: ::Integer
+      attr_accessor heartbeat_in_seconds: ::Integer
+      SENSITIVE: [:input]
+    end
+
+    class ActivityStartedEventDetails
+      attr_accessor worker_name: ::String
+      SENSITIVE: []
+    end
+
+    class ActivitySucceededEventDetails
+      attr_accessor output: ::String
+      attr_accessor output_details: Types::HistoryEventExecutionDataDetails
+      SENSITIVE: [:output]
+    end
+
+    class ActivityTimedOutEventDetails
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class ActivityWorkerLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BillingDetails
+      attr_accessor billed_memory_used_in_mb: ::Integer
+      attr_accessor billed_duration_in_milliseconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class CloudWatchEventsExecutionDataDetails
+      attr_accessor included: bool
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogsLogGroup
+      attr_accessor log_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateActivityInput
+      attr_accessor name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateActivityOutput
+      attr_accessor activity_arn: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateStateMachineAliasInput
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor routing_configuration: ::Array[Types::RoutingConfigurationListItem]
+      SENSITIVE: [:description]
+    end
+
+    class CreateStateMachineAliasOutput
+      attr_accessor state_machine_alias_arn: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateStateMachineInput
+      attr_accessor name: ::String
+      attr_accessor definition: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor type: ("STANDARD" | "EXPRESS")
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor tracing_configuration: Types::TracingConfiguration
+      attr_accessor publish: bool
+      attr_accessor version_description: ::String
+      SENSITIVE: [:definition, :version_description]
+    end
+
+    class CreateStateMachineOutput
+      attr_accessor state_machine_arn: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor state_machine_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteActivityInput
+      attr_accessor activity_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteActivityOutput < Aws::EmptyStructure
+    end
+
+    class DeleteStateMachineAliasInput
+      attr_accessor state_machine_alias_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStateMachineAliasOutput < Aws::EmptyStructure
+    end
+
+    class DeleteStateMachineInput
+      attr_accessor state_machine_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStateMachineOutput < Aws::EmptyStructure
+    end
+
+    class DeleteStateMachineVersionInput
+      attr_accessor state_machine_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStateMachineVersionOutput < Aws::EmptyStructure
+    end
+
+    class DescribeActivityInput
+      attr_accessor activity_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeActivityOutput
+      attr_accessor activity_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeExecutionInput
+      attr_accessor execution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeExecutionOutput
+      attr_accessor execution_arn: ::String
+      attr_accessor state_machine_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "ABORTED" | "PENDING_REDRIVE")
+      attr_accessor start_date: ::Time
+      attr_accessor stop_date: ::Time
+      attr_accessor input: ::String
+      attr_accessor input_details: Types::CloudWatchEventsExecutionDataDetails
+      attr_accessor output: ::String
+      attr_accessor output_details: Types::CloudWatchEventsExecutionDataDetails
+      attr_accessor trace_header: ::String
+      attr_accessor map_run_arn: ::String
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      attr_accessor state_machine_version_arn: ::String
+      attr_accessor state_machine_alias_arn: ::String
+      attr_accessor redrive_count: ::Integer
+      attr_accessor redrive_date: ::Time
+      attr_accessor redrive_status: ("REDRIVABLE" | "NOT_REDRIVABLE" | "REDRIVABLE_BY_MAP_RUN")
+      attr_accessor redrive_status_reason: ::String
+      SENSITIVE: [:input, :output, :error, :cause, :redrive_status_reason]
+    end
+
+    class DescribeMapRunInput
+      attr_accessor map_run_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMapRunOutput
+      attr_accessor map_run_arn: ::String
+      attr_accessor execution_arn: ::String
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "ABORTED")
+      attr_accessor start_date: ::Time
+      attr_accessor stop_date: ::Time
+      attr_accessor max_concurrency: ::Integer
+      attr_accessor tolerated_failure_percentage: ::Float
+      attr_accessor tolerated_failure_count: ::Integer
+      attr_accessor item_counts: Types::MapRunItemCounts
+      attr_accessor execution_counts: Types::MapRunExecutionCounts
+      attr_accessor redrive_count: ::Integer
+      attr_accessor redrive_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeStateMachineAliasInput
+      attr_accessor state_machine_alias_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStateMachineAliasOutput
+      attr_accessor state_machine_alias_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor routing_configuration: ::Array[Types::RoutingConfigurationListItem]
+      attr_accessor creation_date: ::Time
+      attr_accessor update_date: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class DescribeStateMachineForExecutionInput
+      attr_accessor execution_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStateMachineForExecutionOutput
+      attr_accessor state_machine_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor definition: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor update_date: ::Time
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor tracing_configuration: Types::TracingConfiguration
+      attr_accessor map_run_arn: ::String
+      attr_accessor label: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: [:definition]
+    end
+
+    class DescribeStateMachineInput
+      attr_accessor state_machine_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStateMachineOutput
+      attr_accessor state_machine_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "DELETING")
+      attr_accessor definition: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor type: ("STANDARD" | "EXPRESS")
+      attr_accessor creation_date: ::Time
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor tracing_configuration: Types::TracingConfiguration
+      attr_accessor label: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: [:definition, :description]
+    end
+
+    class ExecutionAbortedEventDetails
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class ExecutionAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExecutionDoesNotExist
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExecutionFailedEventDetails
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class ExecutionLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExecutionListItem
+      attr_accessor execution_arn: ::String
+      attr_accessor state_machine_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "ABORTED" | "PENDING_REDRIVE")
+      attr_accessor start_date: ::Time
+      attr_accessor stop_date: ::Time
+      attr_accessor map_run_arn: ::String
+      attr_accessor item_count: ::Integer
+      attr_accessor state_machine_version_arn: ::String
+      attr_accessor state_machine_alias_arn: ::String
+      attr_accessor redrive_count: ::Integer
+      attr_accessor redrive_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ExecutionNotRedrivable
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExecutionRedrivenEventDetails
+      attr_accessor redrive_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExecutionStartedEventDetails
+      attr_accessor input: ::String
+      attr_accessor input_details: Types::HistoryEventExecutionDataDetails
+      attr_accessor role_arn: ::String
+      attr_accessor state_machine_alias_arn: ::String
+      attr_accessor state_machine_version_arn: ::String
+      SENSITIVE: [:input]
+    end
+
+    class ExecutionSucceededEventDetails
+      attr_accessor output: ::String
+      attr_accessor output_details: Types::HistoryEventExecutionDataDetails
+      SENSITIVE: [:output]
+    end
+
+    class ExecutionTimedOutEventDetails
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class GetActivityTaskInput
+      attr_accessor activity_arn: ::String
+      attr_accessor worker_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetActivityTaskOutput
+      attr_accessor task_token: ::String
+      attr_accessor input: ::String
+      SENSITIVE: [:input]
+    end
+
+    class GetExecutionHistoryInput
+      attr_accessor execution_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor reverse_order: bool
+      attr_accessor next_token: ::String
+      attr_accessor include_execution_data: bool
+      SENSITIVE: []
+    end
+
+    class GetExecutionHistoryOutput
+      attr_accessor events: ::Array[Types::HistoryEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class HistoryEvent
+      attr_accessor timestamp: ::Time
+      attr_accessor type: ("ActivityFailed" | "ActivityScheduled" | "ActivityScheduleFailed" | "ActivityStarted" | "ActivitySucceeded" | "ActivityTimedOut" | "ChoiceStateEntered" | "ChoiceStateExited" | "ExecutionAborted" | "ExecutionFailed" | "ExecutionStarted" | "ExecutionSucceeded" | "ExecutionTimedOut" | "FailStateEntered" | "LambdaFunctionFailed" | "LambdaFunctionScheduled" | "LambdaFunctionScheduleFailed" | "LambdaFunctionStarted" | "LambdaFunctionStartFailed" | "LambdaFunctionSucceeded" | "LambdaFunctionTimedOut" | "MapIterationAborted" | "MapIterationFailed" | "MapIterationStarted" | "MapIterationSucceeded" | "MapStateAborted" | "MapStateEntered" | "MapStateExited" | "MapStateFailed" | "MapStateStarted" | "MapStateSucceeded" | "ParallelStateAborted" | "ParallelStateEntered" | "ParallelStateExited" | "ParallelStateFailed" | "ParallelStateStarted" | "ParallelStateSucceeded" | "PassStateEntered" | "PassStateExited" | "SucceedStateEntered" | "SucceedStateExited" | "TaskFailed" | "TaskScheduled" | "TaskStarted" | "TaskStartFailed" | "TaskStateAborted" | "TaskStateEntered" | "TaskStateExited" | "TaskSubmitFailed" | "TaskSubmitted" | "TaskSucceeded" | "TaskTimedOut" | "WaitStateAborted" | "WaitStateEntered" | "WaitStateExited" | "MapRunAborted" | "MapRunFailed" | "MapRunStarted" | "MapRunSucceeded" | "ExecutionRedriven" | "MapRunRedriven")
+      attr_accessor id: ::Integer
+      attr_accessor previous_event_id: ::Integer
+      attr_accessor activity_failed_event_details: Types::ActivityFailedEventDetails
+      attr_accessor activity_schedule_failed_event_details: Types::ActivityScheduleFailedEventDetails
+      attr_accessor activity_scheduled_event_details: Types::ActivityScheduledEventDetails
+      attr_accessor activity_started_event_details: Types::ActivityStartedEventDetails
+      attr_accessor activity_succeeded_event_details: Types::ActivitySucceededEventDetails
+      attr_accessor activity_timed_out_event_details: Types::ActivityTimedOutEventDetails
+      attr_accessor task_failed_event_details: Types::TaskFailedEventDetails
+      attr_accessor task_scheduled_event_details: Types::TaskScheduledEventDetails
+      attr_accessor task_start_failed_event_details: Types::TaskStartFailedEventDetails
+      attr_accessor task_started_event_details: Types::TaskStartedEventDetails
+      attr_accessor task_submit_failed_event_details: Types::TaskSubmitFailedEventDetails
+      attr_accessor task_submitted_event_details: Types::TaskSubmittedEventDetails
+      attr_accessor task_succeeded_event_details: Types::TaskSucceededEventDetails
+      attr_accessor task_timed_out_event_details: Types::TaskTimedOutEventDetails
+      attr_accessor execution_failed_event_details: Types::ExecutionFailedEventDetails
+      attr_accessor execution_started_event_details: Types::ExecutionStartedEventDetails
+      attr_accessor execution_succeeded_event_details: Types::ExecutionSucceededEventDetails
+      attr_accessor execution_aborted_event_details: Types::ExecutionAbortedEventDetails
+      attr_accessor execution_timed_out_event_details: Types::ExecutionTimedOutEventDetails
+      attr_accessor execution_redriven_event_details: Types::ExecutionRedrivenEventDetails
+      attr_accessor map_state_started_event_details: Types::MapStateStartedEventDetails
+      attr_accessor map_iteration_started_event_details: Types::MapIterationEventDetails
+      attr_accessor map_iteration_succeeded_event_details: Types::MapIterationEventDetails
+      attr_accessor map_iteration_failed_event_details: Types::MapIterationEventDetails
+      attr_accessor map_iteration_aborted_event_details: Types::MapIterationEventDetails
+      attr_accessor lambda_function_failed_event_details: Types::LambdaFunctionFailedEventDetails
+      attr_accessor lambda_function_schedule_failed_event_details: Types::LambdaFunctionScheduleFailedEventDetails
+      attr_accessor lambda_function_scheduled_event_details: Types::LambdaFunctionScheduledEventDetails
+      attr_accessor lambda_function_start_failed_event_details: Types::LambdaFunctionStartFailedEventDetails
+      attr_accessor lambda_function_succeeded_event_details: Types::LambdaFunctionSucceededEventDetails
+      attr_accessor lambda_function_timed_out_event_details: Types::LambdaFunctionTimedOutEventDetails
+      attr_accessor state_entered_event_details: Types::StateEnteredEventDetails
+      attr_accessor state_exited_event_details: Types::StateExitedEventDetails
+      attr_accessor map_run_started_event_details: Types::MapRunStartedEventDetails
+      attr_accessor map_run_failed_event_details: Types::MapRunFailedEventDetails
+      attr_accessor map_run_redriven_event_details: Types::MapRunRedrivenEventDetails
+      SENSITIVE: []
+    end
+
+    class HistoryEventExecutionDataDetails
+      attr_accessor truncated: bool
+      SENSITIVE: []
+    end
+
+    class InspectionData
+      attr_accessor input: ::String
+      attr_accessor after_input_path: ::String
+      attr_accessor after_parameters: ::String
+      attr_accessor result: ::String
+      attr_accessor after_result_selector: ::String
+      attr_accessor after_result_path: ::String
+      attr_accessor request: Types::InspectionDataRequest
+      attr_accessor response: Types::InspectionDataResponse
+      SENSITIVE: [:input, :after_input_path, :after_parameters, :result, :after_result_selector, :after_result_path]
+    end
+
+    class InspectionDataRequest
+      attr_accessor protocol: ::String
+      attr_accessor method: ::String
+      attr_accessor url: ::String
+      attr_accessor headers: ::String
+      attr_accessor body: ::String
+      SENSITIVE: []
+    end
+
+    class InspectionDataResponse
+      attr_accessor protocol: ::String
+      attr_accessor status_code: ::String
+      attr_accessor status_message: ::String
+      attr_accessor headers: ::String
+      attr_accessor body: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidArn
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidDefinition
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidExecutionInput
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidLoggingConfiguration
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidName
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidOutput
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidToken
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTracingConfiguration
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaFunctionFailedEventDetails
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class LambdaFunctionScheduleFailedEventDetails
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class LambdaFunctionScheduledEventDetails
+      attr_accessor resource: ::String
+      attr_accessor input: ::String
+      attr_accessor input_details: Types::HistoryEventExecutionDataDetails
+      attr_accessor timeout_in_seconds: ::Integer
+      attr_accessor task_credentials: Types::TaskCredentials
+      SENSITIVE: [:input]
+    end
+
+    class LambdaFunctionStartFailedEventDetails
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class LambdaFunctionSucceededEventDetails
+      attr_accessor output: ::String
+      attr_accessor output_details: Types::HistoryEventExecutionDataDetails
+      SENSITIVE: [:output]
+    end
+
+    class LambdaFunctionTimedOutEventDetails
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class ListActivitiesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListActivitiesOutput
+      attr_accessor activities: ::Array[Types::ActivityListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExecutionsInput
+      attr_accessor state_machine_arn: ::String
+      attr_accessor status_filter: ("RUNNING" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "ABORTED" | "PENDING_REDRIVE")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor map_run_arn: ::String
+      attr_accessor redrive_filter: ("REDRIVEN" | "NOT_REDRIVEN")
+      SENSITIVE: []
+    end
+
+    class ListExecutionsOutput
+      attr_accessor executions: ::Array[Types::ExecutionListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMapRunsInput
+      attr_accessor execution_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMapRunsOutput
+      attr_accessor map_runs: ::Array[Types::MapRunListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStateMachineAliasesInput
+      attr_accessor state_machine_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListStateMachineAliasesOutput
+      attr_accessor state_machine_aliases: ::Array[Types::StateMachineAliasListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStateMachineVersionsInput
+      attr_accessor state_machine_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListStateMachineVersionsOutput
+      attr_accessor state_machine_versions: ::Array[Types::StateMachineVersionListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStateMachinesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStateMachinesOutput
+      attr_accessor state_machines: ::Array[Types::StateMachineListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class LogDestination
+      attr_accessor cloud_watch_logs_log_group: Types::CloudWatchLogsLogGroup
+      SENSITIVE: []
+    end
+
+    class LoggingConfiguration
+      attr_accessor level: ("ALL" | "ERROR" | "FATAL" | "OFF")
+      attr_accessor include_execution_data: bool
+      attr_accessor destinations: ::Array[Types::LogDestination]
+      SENSITIVE: []
+    end
+
+    class MapIterationEventDetails
+      attr_accessor name: ::String
+      attr_accessor index: ::Integer
+      SENSITIVE: []
+    end
+
+    class MapRunExecutionCounts
+      attr_accessor pending: ::Integer
+      attr_accessor running: ::Integer
+      attr_accessor succeeded: ::Integer
+      attr_accessor failed: ::Integer
+      attr_accessor timed_out: ::Integer
+      attr_accessor aborted: ::Integer
+      attr_accessor total: ::Integer
+      attr_accessor results_written: ::Integer
+      attr_accessor failures_not_redrivable: ::Integer
+      attr_accessor pending_redrive: ::Integer
+      SENSITIVE: []
+    end
+
+    class MapRunFailedEventDetails
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class MapRunItemCounts
+      attr_accessor pending: ::Integer
+      attr_accessor running: ::Integer
+      attr_accessor succeeded: ::Integer
+      attr_accessor failed: ::Integer
+      attr_accessor timed_out: ::Integer
+      attr_accessor aborted: ::Integer
+      attr_accessor total: ::Integer
+      attr_accessor results_written: ::Integer
+      attr_accessor failures_not_redrivable: ::Integer
+      attr_accessor pending_redrive: ::Integer
+      SENSITIVE: []
+    end
+
+    class MapRunListItem
+      attr_accessor execution_arn: ::String
+      attr_accessor map_run_arn: ::String
+      attr_accessor state_machine_arn: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor stop_date: ::Time
+      SENSITIVE: []
+    end
+
+    class MapRunRedrivenEventDetails
+      attr_accessor map_run_arn: ::String
+      attr_accessor redrive_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class MapRunStartedEventDetails
+      attr_accessor map_run_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MapStateStartedEventDetails
+      attr_accessor length: ::Integer
+      SENSITIVE: []
+    end
+
+    class MissingRequiredParameter
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PublishStateMachineVersionInput
+      attr_accessor state_machine_arn: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: [:description]
+    end
+
+    class PublishStateMachineVersionOutput
+      attr_accessor creation_date: ::Time
+      attr_accessor state_machine_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RedriveExecutionInput
+      attr_accessor execution_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class RedriveExecutionOutput
+      attr_accessor redrive_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceNotFound
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class RoutingConfigurationListItem
+      attr_accessor state_machine_version_arn: ::String
+      attr_accessor weight: ::Integer
+      SENSITIVE: []
+    end
+
+    class SendTaskFailureInput
+      attr_accessor task_token: ::String
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class SendTaskFailureOutput < Aws::EmptyStructure
+    end
+
+    class SendTaskHeartbeatInput
+      attr_accessor task_token: ::String
+      SENSITIVE: []
+    end
+
+    class SendTaskHeartbeatOutput < Aws::EmptyStructure
+    end
+
+    class SendTaskSuccessInput
+      attr_accessor task_token: ::String
+      attr_accessor output: ::String
+      SENSITIVE: [:output]
+    end
+
+    class SendTaskSuccessOutput < Aws::EmptyStructure
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartExecutionInput
+      attr_accessor state_machine_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor input: ::String
+      attr_accessor trace_header: ::String
+      SENSITIVE: [:input]
+    end
+
+    class StartExecutionOutput
+      attr_accessor execution_arn: ::String
+      attr_accessor start_date: ::Time
+      SENSITIVE: []
+    end
+
+    class StartSyncExecutionInput
+      attr_accessor state_machine_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor input: ::String
+      attr_accessor trace_header: ::String
+      SENSITIVE: [:input]
+    end
+
+    class StartSyncExecutionOutput
+      attr_accessor execution_arn: ::String
+      attr_accessor state_machine_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor stop_date: ::Time
+      attr_accessor status: ("SUCCEEDED" | "FAILED" | "TIMED_OUT")
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      attr_accessor input: ::String
+      attr_accessor input_details: Types::CloudWatchEventsExecutionDataDetails
+      attr_accessor output: ::String
+      attr_accessor output_details: Types::CloudWatchEventsExecutionDataDetails
+      attr_accessor trace_header: ::String
+      attr_accessor billing_details: Types::BillingDetails
+      SENSITIVE: [:error, :cause, :input, :output]
+    end
+
+    class StateEnteredEventDetails
+      attr_accessor name: ::String
+      attr_accessor input: ::String
+      attr_accessor input_details: Types::HistoryEventExecutionDataDetails
+      SENSITIVE: [:input]
+    end
+
+    class StateExitedEventDetails
+      attr_accessor name: ::String
+      attr_accessor output: ::String
+      attr_accessor output_details: Types::HistoryEventExecutionDataDetails
+      SENSITIVE: [:output]
+    end
+
+    class StateMachineAliasListItem
+      attr_accessor state_machine_alias_arn: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class StateMachineAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StateMachineDeleting
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StateMachineDoesNotExist
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StateMachineLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StateMachineListItem
+      attr_accessor state_machine_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("STANDARD" | "EXPRESS")
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class StateMachineTypeNotSupported
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StateMachineVersionListItem
+      attr_accessor state_machine_version_arn: ::String
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class StopExecutionInput
+      attr_accessor execution_arn: ::String
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class StopExecutionOutput
+      attr_accessor stop_date: ::Time
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class TaskCredentials
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TaskDoesNotExist
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TaskFailedEventDetails
+      attr_accessor resource_type: ::String
+      attr_accessor resource: ::String
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class TaskScheduledEventDetails
+      attr_accessor resource_type: ::String
+      attr_accessor resource: ::String
+      attr_accessor region: ::String
+      attr_accessor parameters: ::String
+      attr_accessor timeout_in_seconds: ::Integer
+      attr_accessor heartbeat_in_seconds: ::Integer
+      attr_accessor task_credentials: Types::TaskCredentials
+      SENSITIVE: [:parameters]
+    end
+
+    class TaskStartFailedEventDetails
+      attr_accessor resource_type: ::String
+      attr_accessor resource: ::String
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class TaskStartedEventDetails
+      attr_accessor resource_type: ::String
+      attr_accessor resource: ::String
+      SENSITIVE: []
+    end
+
+    class TaskSubmitFailedEventDetails
+      attr_accessor resource_type: ::String
+      attr_accessor resource: ::String
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class TaskSubmittedEventDetails
+      attr_accessor resource_type: ::String
+      attr_accessor resource: ::String
+      attr_accessor output: ::String
+      attr_accessor output_details: Types::HistoryEventExecutionDataDetails
+      SENSITIVE: [:output]
+    end
+
+    class TaskSucceededEventDetails
+      attr_accessor resource_type: ::String
+      attr_accessor resource: ::String
+      attr_accessor output: ::String
+      attr_accessor output_details: Types::HistoryEventExecutionDataDetails
+      SENSITIVE: [:output]
+    end
+
+    class TaskTimedOut
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TaskTimedOutEventDetails
+      attr_accessor resource_type: ::String
+      attr_accessor resource: ::String
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      SENSITIVE: [:error, :cause]
+    end
+
+    class TestStateInput
+      attr_accessor definition: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor input: ::String
+      attr_accessor inspection_level: ("INFO" | "DEBUG" | "TRACE")
+      attr_accessor reveal_secrets: bool
+      SENSITIVE: [:definition, :input]
+    end
+
+    class TestStateOutput
+      attr_accessor output: ::String
+      attr_accessor error: ::String
+      attr_accessor cause: ::String
+      attr_accessor inspection_data: Types::InspectionData
+      attr_accessor next_state: ::String
+      attr_accessor status: ("SUCCEEDED" | "FAILED" | "RETRIABLE" | "CAUGHT_ERROR")
+      SENSITIVE: [:output, :error, :cause, :inspection_data]
+    end
+
+    class TooManyTags
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class TracingConfiguration
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateMapRunInput
+      attr_accessor map_run_arn: ::String
+      attr_accessor max_concurrency: ::Integer
+      attr_accessor tolerated_failure_percentage: ::Float
+      attr_accessor tolerated_failure_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateMapRunOutput < Aws::EmptyStructure
+    end
+
+    class UpdateStateMachineAliasInput
+      attr_accessor state_machine_alias_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor routing_configuration: ::Array[Types::RoutingConfigurationListItem]
+      SENSITIVE: [:description]
+    end
+
+    class UpdateStateMachineAliasOutput
+      attr_accessor update_date: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateStateMachineInput
+      attr_accessor state_machine_arn: ::String
+      attr_accessor definition: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      attr_accessor tracing_configuration: Types::TracingConfiguration
+      attr_accessor publish: bool
+      attr_accessor version_description: ::String
+      SENSITIVE: [:definition, :version_description]
+    end
+
+    class UpdateStateMachineOutput
+      attr_accessor update_date: ::Time
+      attr_accessor revision_id: ::String
+      attr_accessor state_machine_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("API_DOES_NOT_SUPPORT_LABELED_ARNS" | "MISSING_REQUIRED_PARAMETER" | "CANNOT_UPDATE_COMPLETED_MAP_RUN" | "INVALID_ROUTING_CONFIGURATION")
+      SENSITIVE: []
+    end
+  end
+end

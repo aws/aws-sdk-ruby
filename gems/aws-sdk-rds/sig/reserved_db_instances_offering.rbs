@@ -1,0 +1,78 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstancesOffering.html
+    class ReservedDBInstancesOffering
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstancesOffering.html#initialize-instance_method
+      def initialize: (String id, Hash[Symbol, untyped] options) -> void
+                    | (id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstancesOffering.html#id-instance_method
+      def id: () -> String
+      alias reserved_db_instances_offering_id id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstancesOffering.html#db_instance_class-instance_method
+      def db_instance_class: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstancesOffering.html#duration-instance_method
+      def duration: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstancesOffering.html#fixed_price-instance_method
+      def fixed_price: () -> ::Float
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstancesOffering.html#usage_price-instance_method
+      def usage_price: () -> ::Float
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstancesOffering.html#currency_code-instance_method
+      def currency_code: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstancesOffering.html#product_description-instance_method
+      def product_description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstancesOffering.html#offering_type-instance_method
+      def offering_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstancesOffering.html#multi_az-instance_method
+      def multi_az: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstancesOffering.html#recurring_charges-instance_method
+      def recurring_charges: () -> ::Array[Types::RecurringCharge]
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstancesOffering.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstancesOffering.html#data-instance_method
+      def data: () -> Types::ReservedDBInstancesOffering
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstancesOffering.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/ReservedDBInstancesOffering.html#purchase-instance_method
+      def purchase: (
+                      ?reserved_db_instance_id: ::String,
+                      ?db_instance_count: ::Integer,
+                      ?tags: Array[
+                        {
+                          key: ::String?,
+                          value: ::String?
+                        },
+                      ]
+                    ) -> ReservedDBInstance
+                  | (?Hash[Symbol, untyped]) -> ReservedDBInstance
+
+      class Collection < ::Aws::Resources::Collection[ReservedDBInstancesOffering]
+      end
+    end
+  end
+end

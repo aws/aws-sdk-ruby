@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.75.0 (2023-12-20)
+------------------
+
+* Feature - Adds the ability to configure time shifting on MediaTailor channels using the TimeShiftConfiguration field
+
+1.74.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.72.0 (2023-11-14)
+------------------
+
+* Feature - Removed unnecessary default values.
+
 1.71.0 (2023-10-04)
 ------------------
 

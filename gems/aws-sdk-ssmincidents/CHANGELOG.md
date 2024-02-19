@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2023-11-16)
+------------------
+
+* Feature - Introduces new APIs ListIncidentFindings and BatchGetIncidentFindings to use findings related to an incident.
+
 1.29.0 (2023-09-27)
 ------------------
 

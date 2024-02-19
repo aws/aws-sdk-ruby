@@ -1,0 +1,1282 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ElasticsearchService
+  module Types
+
+    class AcceptInboundCrossClusterSearchConnectionRequest
+      attr_accessor cross_cluster_search_connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptInboundCrossClusterSearchConnectionResponse
+      attr_accessor cross_cluster_search_connection: Types::InboundCrossClusterSearchConnection
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException < Aws::EmptyStructure
+    end
+
+    class AccessPoliciesStatus
+      attr_accessor options: ::String
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class AddTagsRequest
+      attr_accessor arn: ::String
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AdditionalLimit
+      attr_accessor limit_name: ::String
+      attr_accessor limit_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AdvancedOptionsStatus
+      attr_accessor options: ::Hash[::String, ::String]
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class AdvancedSecurityOptions
+      attr_accessor enabled: bool
+      attr_accessor internal_user_database_enabled: bool
+      attr_accessor saml_options: Types::SAMLOptionsOutput
+      attr_accessor anonymous_auth_disable_date: ::Time
+      attr_accessor anonymous_auth_enabled: bool
+      SENSITIVE: []
+    end
+
+    class AdvancedSecurityOptionsInput
+      attr_accessor enabled: bool
+      attr_accessor internal_user_database_enabled: bool
+      attr_accessor master_user_options: Types::MasterUserOptions
+      attr_accessor saml_options: Types::SAMLOptionsInput
+      attr_accessor anonymous_auth_enabled: bool
+      SENSITIVE: []
+    end
+
+    class AdvancedSecurityOptionsStatus
+      attr_accessor options: Types::AdvancedSecurityOptions
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class AssociatePackageRequest
+      attr_accessor package_id: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatePackageResponse
+      attr_accessor domain_package_details: Types::DomainPackageDetails
+      SENSITIVE: []
+    end
+
+    class AuthorizeVpcEndpointAccessRequest
+      attr_accessor domain_name: ::String
+      attr_accessor account: ::String
+      SENSITIVE: []
+    end
+
+    class AuthorizeVpcEndpointAccessResponse
+      attr_accessor authorized_principal: Types::AuthorizedPrincipal
+      SENSITIVE: []
+    end
+
+    class AuthorizedPrincipal
+      attr_accessor principal_type: ("AWS_ACCOUNT" | "AWS_SERVICE")
+      attr_accessor principal: ::String
+      SENSITIVE: []
+    end
+
+    class AutoTune
+      attr_accessor auto_tune_type: ("SCHEDULED_ACTION")
+      attr_accessor auto_tune_details: Types::AutoTuneDetails
+      SENSITIVE: []
+    end
+
+    class AutoTuneDetails
+      attr_accessor scheduled_auto_tune_details: Types::ScheduledAutoTuneDetails
+      SENSITIVE: []
+    end
+
+    class AutoTuneMaintenanceSchedule
+      attr_accessor start_at: ::Time
+      attr_accessor duration: Types::Duration
+      attr_accessor cron_expression_for_recurrence: ::String
+      SENSITIVE: []
+    end
+
+    class AutoTuneOptions
+      attr_accessor desired_state: ("ENABLED" | "DISABLED")
+      attr_accessor rollback_on_disable: ("NO_ROLLBACK" | "DEFAULT_ROLLBACK")
+      attr_accessor maintenance_schedules: ::Array[Types::AutoTuneMaintenanceSchedule]
+      SENSITIVE: []
+    end
+
+    class AutoTuneOptionsInput
+      attr_accessor desired_state: ("ENABLED" | "DISABLED")
+      attr_accessor maintenance_schedules: ::Array[Types::AutoTuneMaintenanceSchedule]
+      SENSITIVE: []
+    end
+
+    class AutoTuneOptionsOutput
+      attr_accessor state: ("ENABLED" | "DISABLED" | "ENABLE_IN_PROGRESS" | "DISABLE_IN_PROGRESS" | "DISABLED_AND_ROLLBACK_SCHEDULED" | "DISABLED_AND_ROLLBACK_IN_PROGRESS" | "DISABLED_AND_ROLLBACK_COMPLETE" | "DISABLED_AND_ROLLBACK_ERROR" | "ERROR")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class AutoTuneOptionsStatus
+      attr_accessor options: Types::AutoTuneOptions
+      attr_accessor status: Types::AutoTuneStatus
+      SENSITIVE: []
+    end
+
+    class AutoTuneStatus
+      attr_accessor creation_date: ::Time
+      attr_accessor update_date: ::Time
+      attr_accessor update_version: ::Integer
+      attr_accessor state: ("ENABLED" | "DISABLED" | "ENABLE_IN_PROGRESS" | "DISABLE_IN_PROGRESS" | "DISABLED_AND_ROLLBACK_SCHEDULED" | "DISABLED_AND_ROLLBACK_IN_PROGRESS" | "DISABLED_AND_ROLLBACK_COMPLETE" | "DISABLED_AND_ROLLBACK_ERROR" | "ERROR")
+      attr_accessor error_message: ::String
+      attr_accessor pending_deletion: bool
+      SENSITIVE: []
+    end
+
+    class BaseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CancelDomainConfigChangeRequest
+      attr_accessor domain_name: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class CancelDomainConfigChangeResponse
+      attr_accessor dry_run: bool
+      attr_accessor cancelled_change_ids: ::Array[::String]
+      attr_accessor cancelled_change_properties: ::Array[Types::CancelledChangeProperty]
+      SENSITIVE: []
+    end
+
+    class CancelElasticsearchServiceSoftwareUpdateRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class CancelElasticsearchServiceSoftwareUpdateResponse
+      attr_accessor service_software_options: Types::ServiceSoftwareOptions
+      SENSITIVE: []
+    end
+
+    class CancelledChangeProperty
+      attr_accessor property_name: ::String
+      attr_accessor cancelled_value: ::String
+      attr_accessor active_value: ::String
+      SENSITIVE: []
+    end
+
+    class ChangeProgressDetails
+      attr_accessor change_id: ::String
+      attr_accessor message: ::String
+      attr_accessor config_change_status: ("Pending" | "Initializing" | "Validating" | "ValidationFailed" | "ApplyingChanges" | "Completed" | "PendingUserInput" | "Cancelled")
+      attr_accessor start_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor initiated_by: ("CUSTOMER" | "SERVICE")
+      SENSITIVE: []
+    end
+
+    class ChangeProgressStage
+      attr_accessor name: ::String
+      attr_accessor status: ::String
+      attr_accessor description: ::String
+      attr_accessor last_updated: ::Time
+      SENSITIVE: []
+    end
+
+    class ChangeProgressStatusDetails
+      attr_accessor change_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("PENDING" | "PROCESSING" | "COMPLETED" | "FAILED")
+      attr_accessor pending_properties: ::Array[::String]
+      attr_accessor completed_properties: ::Array[::String]
+      attr_accessor total_number_of_stages: ::Integer
+      attr_accessor change_progress_stages: ::Array[Types::ChangeProgressStage]
+      attr_accessor config_change_status: ("Pending" | "Initializing" | "Validating" | "ValidationFailed" | "ApplyingChanges" | "Completed" | "PendingUserInput" | "Cancelled")
+      attr_accessor last_updated_time: ::Time
+      attr_accessor initiated_by: ("CUSTOMER" | "SERVICE")
+      SENSITIVE: []
+    end
+
+    class CognitoOptions
+      attr_accessor enabled: bool
+      attr_accessor user_pool_id: ::String
+      attr_accessor identity_pool_id: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CognitoOptionsStatus
+      attr_accessor options: Types::CognitoOptions
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class ColdStorageOptions
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class CompatibleVersionsMap
+      attr_accessor source_version: ::String
+      attr_accessor target_versions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConflictException < Aws::EmptyStructure
+    end
+
+    class CreateElasticsearchDomainRequest
+      attr_accessor domain_name: ::String
+      attr_accessor elasticsearch_version: ::String
+      attr_accessor elasticsearch_cluster_config: Types::ElasticsearchClusterConfig
+      attr_accessor ebs_options: Types::EBSOptions
+      attr_accessor access_policies: ::String
+      attr_accessor snapshot_options: Types::SnapshotOptions
+      attr_accessor vpc_options: Types::VPCOptions
+      attr_accessor cognito_options: Types::CognitoOptions
+      attr_accessor encryption_at_rest_options: Types::EncryptionAtRestOptions
+      attr_accessor node_to_node_encryption_options: Types::NodeToNodeEncryptionOptions
+      attr_accessor advanced_options: ::Hash[::String, ::String]
+      attr_accessor log_publishing_options: ::Hash[("INDEX_SLOW_LOGS" | "SEARCH_SLOW_LOGS" | "ES_APPLICATION_LOGS" | "AUDIT_LOGS"), Types::LogPublishingOption]
+      attr_accessor domain_endpoint_options: Types::DomainEndpointOptions
+      attr_accessor advanced_security_options: Types::AdvancedSecurityOptionsInput
+      attr_accessor auto_tune_options: Types::AutoTuneOptionsInput
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateElasticsearchDomainResponse
+      attr_accessor domain_status: Types::ElasticsearchDomainStatus
+      SENSITIVE: []
+    end
+
+    class CreateOutboundCrossClusterSearchConnectionRequest
+      attr_accessor source_domain_info: Types::DomainInformation
+      attr_accessor destination_domain_info: Types::DomainInformation
+      attr_accessor connection_alias: ::String
+      SENSITIVE: []
+    end
+
+    class CreateOutboundCrossClusterSearchConnectionResponse
+      attr_accessor source_domain_info: Types::DomainInformation
+      attr_accessor destination_domain_info: Types::DomainInformation
+      attr_accessor connection_alias: ::String
+      attr_accessor connection_status: Types::OutboundCrossClusterSearchConnectionStatus
+      attr_accessor cross_cluster_search_connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePackageRequest
+      attr_accessor package_name: ::String
+      attr_accessor package_type: ("TXT-DICTIONARY")
+      attr_accessor package_description: ::String
+      attr_accessor package_source: Types::PackageSource
+      SENSITIVE: []
+    end
+
+    class CreatePackageResponse
+      attr_accessor package_details: Types::PackageDetails
+      SENSITIVE: []
+    end
+
+    class CreateVpcEndpointRequest
+      attr_accessor domain_arn: ::String
+      attr_accessor vpc_options: Types::VPCOptions
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVpcEndpointResponse
+      attr_accessor vpc_endpoint: Types::VpcEndpoint
+      SENSITIVE: []
+    end
+
+    class DeleteElasticsearchDomainRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteElasticsearchDomainResponse
+      attr_accessor domain_status: Types::ElasticsearchDomainStatus
+      SENSITIVE: []
+    end
+
+    class DeleteInboundCrossClusterSearchConnectionRequest
+      attr_accessor cross_cluster_search_connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInboundCrossClusterSearchConnectionResponse
+      attr_accessor cross_cluster_search_connection: Types::InboundCrossClusterSearchConnection
+      SENSITIVE: []
+    end
+
+    class DeleteOutboundCrossClusterSearchConnectionRequest
+      attr_accessor cross_cluster_search_connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOutboundCrossClusterSearchConnectionResponse
+      attr_accessor cross_cluster_search_connection: Types::OutboundCrossClusterSearchConnection
+      SENSITIVE: []
+    end
+
+    class DeletePackageRequest
+      attr_accessor package_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePackageResponse
+      attr_accessor package_details: Types::PackageDetails
+      SENSITIVE: []
+    end
+
+    class DeleteVpcEndpointRequest
+      attr_accessor vpc_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVpcEndpointResponse
+      attr_accessor vpc_endpoint_summary: Types::VpcEndpointSummary
+      SENSITIVE: []
+    end
+
+    class DescribeDomainAutoTunesRequest
+      attr_accessor domain_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDomainAutoTunesResponse
+      attr_accessor auto_tunes: ::Array[Types::AutoTune]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDomainChangeProgressRequest
+      attr_accessor domain_name: ::String
+      attr_accessor change_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDomainChangeProgressResponse
+      attr_accessor change_progress_status: Types::ChangeProgressStatusDetails
+      SENSITIVE: []
+    end
+
+    class DescribeElasticsearchDomainConfigRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeElasticsearchDomainConfigResponse
+      attr_accessor domain_config: Types::ElasticsearchDomainConfig
+      SENSITIVE: []
+    end
+
+    class DescribeElasticsearchDomainRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeElasticsearchDomainResponse
+      attr_accessor domain_status: Types::ElasticsearchDomainStatus
+      SENSITIVE: []
+    end
+
+    class DescribeElasticsearchDomainsRequest
+      attr_accessor domain_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeElasticsearchDomainsResponse
+      attr_accessor domain_status_list: ::Array[Types::ElasticsearchDomainStatus]
+      SENSITIVE: []
+    end
+
+    class DescribeElasticsearchInstanceTypeLimitsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor instance_type: ("m3.medium.elasticsearch" | "m3.large.elasticsearch" | "m3.xlarge.elasticsearch" | "m3.2xlarge.elasticsearch" | "m4.large.elasticsearch" | "m4.xlarge.elasticsearch" | "m4.2xlarge.elasticsearch" | "m4.4xlarge.elasticsearch" | "m4.10xlarge.elasticsearch" | "m5.large.elasticsearch" | "m5.xlarge.elasticsearch" | "m5.2xlarge.elasticsearch" | "m5.4xlarge.elasticsearch" | "m5.12xlarge.elasticsearch" | "r5.large.elasticsearch" | "r5.xlarge.elasticsearch" | "r5.2xlarge.elasticsearch" | "r5.4xlarge.elasticsearch" | "r5.12xlarge.elasticsearch" | "c5.large.elasticsearch" | "c5.xlarge.elasticsearch" | "c5.2xlarge.elasticsearch" | "c5.4xlarge.elasticsearch" | "c5.9xlarge.elasticsearch" | "c5.18xlarge.elasticsearch" | "ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch" | "t2.micro.elasticsearch" | "t2.small.elasticsearch" | "t2.medium.elasticsearch" | "r3.large.elasticsearch" | "r3.xlarge.elasticsearch" | "r3.2xlarge.elasticsearch" | "r3.4xlarge.elasticsearch" | "r3.8xlarge.elasticsearch" | "i2.xlarge.elasticsearch" | "i2.2xlarge.elasticsearch" | "d2.xlarge.elasticsearch" | "d2.2xlarge.elasticsearch" | "d2.4xlarge.elasticsearch" | "d2.8xlarge.elasticsearch" | "c4.large.elasticsearch" | "c4.xlarge.elasticsearch" | "c4.2xlarge.elasticsearch" | "c4.4xlarge.elasticsearch" | "c4.8xlarge.elasticsearch" | "r4.large.elasticsearch" | "r4.xlarge.elasticsearch" | "r4.2xlarge.elasticsearch" | "r4.4xlarge.elasticsearch" | "r4.8xlarge.elasticsearch" | "r4.16xlarge.elasticsearch" | "i3.large.elasticsearch" | "i3.xlarge.elasticsearch" | "i3.2xlarge.elasticsearch" | "i3.4xlarge.elasticsearch" | "i3.8xlarge.elasticsearch" | "i3.16xlarge.elasticsearch")
+      attr_accessor elasticsearch_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeElasticsearchInstanceTypeLimitsResponse
+      attr_accessor limits_by_role: ::Hash[::String, Types::Limits]
+      SENSITIVE: []
+    end
+
+    class DescribeInboundCrossClusterSearchConnectionsRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInboundCrossClusterSearchConnectionsResponse
+      attr_accessor cross_cluster_search_connections: ::Array[Types::InboundCrossClusterSearchConnection]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOutboundCrossClusterSearchConnectionsRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOutboundCrossClusterSearchConnectionsResponse
+      attr_accessor cross_cluster_search_connections: ::Array[Types::OutboundCrossClusterSearchConnection]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePackagesFilter
+      attr_accessor name: ("PackageID" | "PackageName" | "PackageStatus")
+      attr_accessor value: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribePackagesRequest
+      attr_accessor filters: ::Array[Types::DescribePackagesFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePackagesResponse
+      attr_accessor package_details_list: ::Array[Types::PackageDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReservedElasticsearchInstanceOfferingsRequest
+      attr_accessor reserved_elasticsearch_instance_offering_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReservedElasticsearchInstanceOfferingsResponse
+      attr_accessor next_token: ::String
+      attr_accessor reserved_elasticsearch_instance_offerings: ::Array[Types::ReservedElasticsearchInstanceOffering]
+      SENSITIVE: []
+    end
+
+    class DescribeReservedElasticsearchInstancesRequest
+      attr_accessor reserved_elasticsearch_instance_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReservedElasticsearchInstancesResponse
+      attr_accessor next_token: ::String
+      attr_accessor reserved_elasticsearch_instances: ::Array[Types::ReservedElasticsearchInstance]
+      SENSITIVE: []
+    end
+
+    class DescribeVpcEndpointsRequest
+      attr_accessor vpc_endpoint_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeVpcEndpointsResponse
+      attr_accessor vpc_endpoints: ::Array[Types::VpcEndpoint]
+      attr_accessor vpc_endpoint_errors: ::Array[Types::VpcEndpointError]
+      SENSITIVE: []
+    end
+
+    class DisabledOperationException < Aws::EmptyStructure
+    end
+
+    class DissociatePackageRequest
+      attr_accessor package_id: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DissociatePackageResponse
+      attr_accessor domain_package_details: Types::DomainPackageDetails
+      SENSITIVE: []
+    end
+
+    class DomainEndpointOptions
+      attr_accessor enforce_https: bool
+      attr_accessor tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10")
+      attr_accessor custom_endpoint_enabled: bool
+      attr_accessor custom_endpoint: ::String
+      attr_accessor custom_endpoint_certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DomainEndpointOptionsStatus
+      attr_accessor options: Types::DomainEndpointOptions
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class DomainInfo
+      attr_accessor domain_name: ::String
+      attr_accessor engine_type: ("OpenSearch" | "Elasticsearch")
+      SENSITIVE: []
+    end
+
+    class DomainInformation
+      attr_accessor owner_id: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class DomainPackageDetails
+      attr_accessor package_id: ::String
+      attr_accessor package_name: ::String
+      attr_accessor package_type: ("TXT-DICTIONARY")
+      attr_accessor last_updated: ::Time
+      attr_accessor domain_name: ::String
+      attr_accessor domain_package_status: ("ASSOCIATING" | "ASSOCIATION_FAILED" | "ACTIVE" | "DISSOCIATING" | "DISSOCIATION_FAILED")
+      attr_accessor package_version: ::String
+      attr_accessor reference_path: ::String
+      attr_accessor error_details: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class DryRunResults
+      attr_accessor deployment_type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Duration
+      attr_accessor value: ::Integer
+      attr_accessor unit: ("HOURS")
+      SENSITIVE: []
+    end
+
+    class EBSOptions
+      attr_accessor ebs_enabled: bool
+      attr_accessor volume_type: ("standard" | "gp2" | "io1" | "gp3")
+      attr_accessor volume_size: ::Integer
+      attr_accessor iops: ::Integer
+      attr_accessor throughput: ::Integer
+      SENSITIVE: []
+    end
+
+    class EBSOptionsStatus
+      attr_accessor options: Types::EBSOptions
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class ElasticsearchClusterConfig
+      attr_accessor instance_type: ("m3.medium.elasticsearch" | "m3.large.elasticsearch" | "m3.xlarge.elasticsearch" | "m3.2xlarge.elasticsearch" | "m4.large.elasticsearch" | "m4.xlarge.elasticsearch" | "m4.2xlarge.elasticsearch" | "m4.4xlarge.elasticsearch" | "m4.10xlarge.elasticsearch" | "m5.large.elasticsearch" | "m5.xlarge.elasticsearch" | "m5.2xlarge.elasticsearch" | "m5.4xlarge.elasticsearch" | "m5.12xlarge.elasticsearch" | "r5.large.elasticsearch" | "r5.xlarge.elasticsearch" | "r5.2xlarge.elasticsearch" | "r5.4xlarge.elasticsearch" | "r5.12xlarge.elasticsearch" | "c5.large.elasticsearch" | "c5.xlarge.elasticsearch" | "c5.2xlarge.elasticsearch" | "c5.4xlarge.elasticsearch" | "c5.9xlarge.elasticsearch" | "c5.18xlarge.elasticsearch" | "ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch" | "t2.micro.elasticsearch" | "t2.small.elasticsearch" | "t2.medium.elasticsearch" | "r3.large.elasticsearch" | "r3.xlarge.elasticsearch" | "r3.2xlarge.elasticsearch" | "r3.4xlarge.elasticsearch" | "r3.8xlarge.elasticsearch" | "i2.xlarge.elasticsearch" | "i2.2xlarge.elasticsearch" | "d2.xlarge.elasticsearch" | "d2.2xlarge.elasticsearch" | "d2.4xlarge.elasticsearch" | "d2.8xlarge.elasticsearch" | "c4.large.elasticsearch" | "c4.xlarge.elasticsearch" | "c4.2xlarge.elasticsearch" | "c4.4xlarge.elasticsearch" | "c4.8xlarge.elasticsearch" | "r4.large.elasticsearch" | "r4.xlarge.elasticsearch" | "r4.2xlarge.elasticsearch" | "r4.4xlarge.elasticsearch" | "r4.8xlarge.elasticsearch" | "r4.16xlarge.elasticsearch" | "i3.large.elasticsearch" | "i3.xlarge.elasticsearch" | "i3.2xlarge.elasticsearch" | "i3.4xlarge.elasticsearch" | "i3.8xlarge.elasticsearch" | "i3.16xlarge.elasticsearch")
+      attr_accessor instance_count: ::Integer
+      attr_accessor dedicated_master_enabled: bool
+      attr_accessor zone_awareness_enabled: bool
+      attr_accessor zone_awareness_config: Types::ZoneAwarenessConfig
+      attr_accessor dedicated_master_type: ("m3.medium.elasticsearch" | "m3.large.elasticsearch" | "m3.xlarge.elasticsearch" | "m3.2xlarge.elasticsearch" | "m4.large.elasticsearch" | "m4.xlarge.elasticsearch" | "m4.2xlarge.elasticsearch" | "m4.4xlarge.elasticsearch" | "m4.10xlarge.elasticsearch" | "m5.large.elasticsearch" | "m5.xlarge.elasticsearch" | "m5.2xlarge.elasticsearch" | "m5.4xlarge.elasticsearch" | "m5.12xlarge.elasticsearch" | "r5.large.elasticsearch" | "r5.xlarge.elasticsearch" | "r5.2xlarge.elasticsearch" | "r5.4xlarge.elasticsearch" | "r5.12xlarge.elasticsearch" | "c5.large.elasticsearch" | "c5.xlarge.elasticsearch" | "c5.2xlarge.elasticsearch" | "c5.4xlarge.elasticsearch" | "c5.9xlarge.elasticsearch" | "c5.18xlarge.elasticsearch" | "ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch" | "t2.micro.elasticsearch" | "t2.small.elasticsearch" | "t2.medium.elasticsearch" | "r3.large.elasticsearch" | "r3.xlarge.elasticsearch" | "r3.2xlarge.elasticsearch" | "r3.4xlarge.elasticsearch" | "r3.8xlarge.elasticsearch" | "i2.xlarge.elasticsearch" | "i2.2xlarge.elasticsearch" | "d2.xlarge.elasticsearch" | "d2.2xlarge.elasticsearch" | "d2.4xlarge.elasticsearch" | "d2.8xlarge.elasticsearch" | "c4.large.elasticsearch" | "c4.xlarge.elasticsearch" | "c4.2xlarge.elasticsearch" | "c4.4xlarge.elasticsearch" | "c4.8xlarge.elasticsearch" | "r4.large.elasticsearch" | "r4.xlarge.elasticsearch" | "r4.2xlarge.elasticsearch" | "r4.4xlarge.elasticsearch" | "r4.8xlarge.elasticsearch" | "r4.16xlarge.elasticsearch" | "i3.large.elasticsearch" | "i3.xlarge.elasticsearch" | "i3.2xlarge.elasticsearch" | "i3.4xlarge.elasticsearch" | "i3.8xlarge.elasticsearch" | "i3.16xlarge.elasticsearch")
+      attr_accessor dedicated_master_count: ::Integer
+      attr_accessor warm_enabled: bool
+      attr_accessor warm_type: ("ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch")
+      attr_accessor warm_count: ::Integer
+      attr_accessor cold_storage_options: Types::ColdStorageOptions
+      SENSITIVE: []
+    end
+
+    class ElasticsearchClusterConfigStatus
+      attr_accessor options: Types::ElasticsearchClusterConfig
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class ElasticsearchDomainConfig
+      attr_accessor elasticsearch_version: Types::ElasticsearchVersionStatus
+      attr_accessor elasticsearch_cluster_config: Types::ElasticsearchClusterConfigStatus
+      attr_accessor ebs_options: Types::EBSOptionsStatus
+      attr_accessor access_policies: Types::AccessPoliciesStatus
+      attr_accessor snapshot_options: Types::SnapshotOptionsStatus
+      attr_accessor vpc_options: Types::VPCDerivedInfoStatus
+      attr_accessor cognito_options: Types::CognitoOptionsStatus
+      attr_accessor encryption_at_rest_options: Types::EncryptionAtRestOptionsStatus
+      attr_accessor node_to_node_encryption_options: Types::NodeToNodeEncryptionOptionsStatus
+      attr_accessor advanced_options: Types::AdvancedOptionsStatus
+      attr_accessor log_publishing_options: Types::LogPublishingOptionsStatus
+      attr_accessor domain_endpoint_options: Types::DomainEndpointOptionsStatus
+      attr_accessor advanced_security_options: Types::AdvancedSecurityOptionsStatus
+      attr_accessor auto_tune_options: Types::AutoTuneOptionsStatus
+      attr_accessor change_progress_details: Types::ChangeProgressDetails
+      attr_accessor modifying_properties: ::Array[Types::ModifyingProperties]
+      SENSITIVE: []
+    end
+
+    class ElasticsearchDomainStatus
+      attr_accessor domain_id: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor created: bool
+      attr_accessor deleted: bool
+      attr_accessor endpoint: ::String
+      attr_accessor endpoints: ::Hash[::String, ::String]
+      attr_accessor processing: bool
+      attr_accessor upgrade_processing: bool
+      attr_accessor elasticsearch_version: ::String
+      attr_accessor elasticsearch_cluster_config: Types::ElasticsearchClusterConfig
+      attr_accessor ebs_options: Types::EBSOptions
+      attr_accessor access_policies: ::String
+      attr_accessor snapshot_options: Types::SnapshotOptions
+      attr_accessor vpc_options: Types::VPCDerivedInfo
+      attr_accessor cognito_options: Types::CognitoOptions
+      attr_accessor encryption_at_rest_options: Types::EncryptionAtRestOptions
+      attr_accessor node_to_node_encryption_options: Types::NodeToNodeEncryptionOptions
+      attr_accessor advanced_options: ::Hash[::String, ::String]
+      attr_accessor log_publishing_options: ::Hash[("INDEX_SLOW_LOGS" | "SEARCH_SLOW_LOGS" | "ES_APPLICATION_LOGS" | "AUDIT_LOGS"), Types::LogPublishingOption]
+      attr_accessor service_software_options: Types::ServiceSoftwareOptions
+      attr_accessor domain_endpoint_options: Types::DomainEndpointOptions
+      attr_accessor advanced_security_options: Types::AdvancedSecurityOptions
+      attr_accessor auto_tune_options: Types::AutoTuneOptionsOutput
+      attr_accessor change_progress_details: Types::ChangeProgressDetails
+      attr_accessor domain_processing_status: ("Creating" | "Active" | "Modifying" | "UpgradingEngineVersion" | "UpdatingServiceSoftware" | "Isolated" | "Deleting")
+      attr_accessor modifying_properties: ::Array[Types::ModifyingProperties]
+      SENSITIVE: []
+    end
+
+    class ElasticsearchVersionStatus
+      attr_accessor options: ::String
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class EncryptionAtRestOptions
+      attr_accessor enabled: bool
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionAtRestOptionsStatus
+      attr_accessor options: Types::EncryptionAtRestOptions
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class ErrorDetails
+      attr_accessor error_type: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetCompatibleElasticsearchVersionsRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCompatibleElasticsearchVersionsResponse
+      attr_accessor compatible_elasticsearch_versions: ::Array[Types::CompatibleVersionsMap]
+      SENSITIVE: []
+    end
+
+    class GetPackageVersionHistoryRequest
+      attr_accessor package_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetPackageVersionHistoryResponse
+      attr_accessor package_id: ::String
+      attr_accessor package_version_history_list: ::Array[Types::PackageVersionHistory]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetUpgradeHistoryRequest
+      attr_accessor domain_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetUpgradeHistoryResponse
+      attr_accessor upgrade_histories: ::Array[Types::UpgradeHistory]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetUpgradeStatusRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetUpgradeStatusResponse
+      attr_accessor upgrade_step: ("PRE_UPGRADE_CHECK" | "SNAPSHOT" | "UPGRADE")
+      attr_accessor step_status: ("IN_PROGRESS" | "SUCCEEDED" | "SUCCEEDED_WITH_ISSUES" | "FAILED")
+      attr_accessor upgrade_name: ::String
+      SENSITIVE: []
+    end
+
+    class InboundCrossClusterSearchConnection
+      attr_accessor source_domain_info: Types::DomainInformation
+      attr_accessor destination_domain_info: Types::DomainInformation
+      attr_accessor cross_cluster_search_connection_id: ::String
+      attr_accessor connection_status: Types::InboundCrossClusterSearchConnectionStatus
+      SENSITIVE: []
+    end
+
+    class InboundCrossClusterSearchConnectionStatus
+      attr_accessor status_code: ("PENDING_ACCEPTANCE" | "APPROVED" | "REJECTING" | "REJECTED" | "DELETING" | "DELETED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceCountLimits
+      attr_accessor minimum_instance_count: ::Integer
+      attr_accessor maximum_instance_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class InstanceLimits
+      attr_accessor instance_count_limits: Types::InstanceCountLimits
+      SENSITIVE: []
+    end
+
+    class InternalException < Aws::EmptyStructure
+    end
+
+    class InvalidPaginationTokenException < Aws::EmptyStructure
+    end
+
+    class InvalidTypeException < Aws::EmptyStructure
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class Limits
+      attr_accessor storage_types: ::Array[Types::StorageType]
+      attr_accessor instance_limits: Types::InstanceLimits
+      attr_accessor additional_limits: ::Array[Types::AdditionalLimit]
+      SENSITIVE: []
+    end
+
+    class ListDomainNamesRequest
+      attr_accessor engine_type: ("OpenSearch" | "Elasticsearch")
+      SENSITIVE: []
+    end
+
+    class ListDomainNamesResponse
+      attr_accessor domain_names: ::Array[Types::DomainInfo]
+      SENSITIVE: []
+    end
+
+    class ListDomainsForPackageRequest
+      attr_accessor package_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainsForPackageResponse
+      attr_accessor domain_package_details_list: ::Array[Types::DomainPackageDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListElasticsearchInstanceTypesRequest
+      attr_accessor elasticsearch_version: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListElasticsearchInstanceTypesResponse
+      attr_accessor elasticsearch_instance_types: ::Array[("m3.medium.elasticsearch" | "m3.large.elasticsearch" | "m3.xlarge.elasticsearch" | "m3.2xlarge.elasticsearch" | "m4.large.elasticsearch" | "m4.xlarge.elasticsearch" | "m4.2xlarge.elasticsearch" | "m4.4xlarge.elasticsearch" | "m4.10xlarge.elasticsearch" | "m5.large.elasticsearch" | "m5.xlarge.elasticsearch" | "m5.2xlarge.elasticsearch" | "m5.4xlarge.elasticsearch" | "m5.12xlarge.elasticsearch" | "r5.large.elasticsearch" | "r5.xlarge.elasticsearch" | "r5.2xlarge.elasticsearch" | "r5.4xlarge.elasticsearch" | "r5.12xlarge.elasticsearch" | "c5.large.elasticsearch" | "c5.xlarge.elasticsearch" | "c5.2xlarge.elasticsearch" | "c5.4xlarge.elasticsearch" | "c5.9xlarge.elasticsearch" | "c5.18xlarge.elasticsearch" | "ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch" | "t2.micro.elasticsearch" | "t2.small.elasticsearch" | "t2.medium.elasticsearch" | "r3.large.elasticsearch" | "r3.xlarge.elasticsearch" | "r3.2xlarge.elasticsearch" | "r3.4xlarge.elasticsearch" | "r3.8xlarge.elasticsearch" | "i2.xlarge.elasticsearch" | "i2.2xlarge.elasticsearch" | "d2.xlarge.elasticsearch" | "d2.2xlarge.elasticsearch" | "d2.4xlarge.elasticsearch" | "d2.8xlarge.elasticsearch" | "c4.large.elasticsearch" | "c4.xlarge.elasticsearch" | "c4.2xlarge.elasticsearch" | "c4.4xlarge.elasticsearch" | "c4.8xlarge.elasticsearch" | "r4.large.elasticsearch" | "r4.xlarge.elasticsearch" | "r4.2xlarge.elasticsearch" | "r4.4xlarge.elasticsearch" | "r4.8xlarge.elasticsearch" | "r4.16xlarge.elasticsearch" | "i3.large.elasticsearch" | "i3.xlarge.elasticsearch" | "i3.2xlarge.elasticsearch" | "i3.4xlarge.elasticsearch" | "i3.8xlarge.elasticsearch" | "i3.16xlarge.elasticsearch")]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListElasticsearchVersionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListElasticsearchVersionsResponse
+      attr_accessor elasticsearch_versions: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackagesForDomainRequest
+      attr_accessor domain_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackagesForDomainResponse
+      attr_accessor domain_package_details_list: ::Array[Types::DomainPackageDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsResponse
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListVpcEndpointAccessRequest
+      attr_accessor domain_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVpcEndpointAccessResponse
+      attr_accessor authorized_principal_list: ::Array[Types::AuthorizedPrincipal]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVpcEndpointsForDomainRequest
+      attr_accessor domain_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVpcEndpointsForDomainResponse
+      attr_accessor vpc_endpoint_summary_list: ::Array[Types::VpcEndpointSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVpcEndpointsRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVpcEndpointsResponse
+      attr_accessor vpc_endpoint_summary_list: ::Array[Types::VpcEndpointSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LogPublishingOption
+      attr_accessor cloud_watch_logs_log_group_arn: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class LogPublishingOptionsStatus
+      attr_accessor options: ::Hash[("INDEX_SLOW_LOGS" | "SEARCH_SLOW_LOGS" | "ES_APPLICATION_LOGS" | "AUDIT_LOGS"), Types::LogPublishingOption]
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class MasterUserOptions
+      attr_accessor master_user_arn: ::String
+      attr_accessor master_user_name: ::String
+      attr_accessor master_user_password: ::String
+      SENSITIVE: [:master_user_name, :master_user_password]
+    end
+
+    class ModifyingProperties
+      attr_accessor name: ::String
+      attr_accessor active_value: ::String
+      attr_accessor pending_value: ::String
+      attr_accessor value_type: ("PLAIN_TEXT" | "STRINGIFIED_JSON")
+      SENSITIVE: []
+    end
+
+    class NodeToNodeEncryptionOptions
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class NodeToNodeEncryptionOptionsStatus
+      attr_accessor options: Types::NodeToNodeEncryptionOptions
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class OptionStatus
+      attr_accessor creation_date: ::Time
+      attr_accessor update_date: ::Time
+      attr_accessor update_version: ::Integer
+      attr_accessor state: ("RequiresIndexDocuments" | "Processing" | "Active")
+      attr_accessor pending_deletion: bool
+      SENSITIVE: []
+    end
+
+    class OutboundCrossClusterSearchConnection
+      attr_accessor source_domain_info: Types::DomainInformation
+      attr_accessor destination_domain_info: Types::DomainInformation
+      attr_accessor cross_cluster_search_connection_id: ::String
+      attr_accessor connection_alias: ::String
+      attr_accessor connection_status: Types::OutboundCrossClusterSearchConnectionStatus
+      SENSITIVE: []
+    end
+
+    class OutboundCrossClusterSearchConnectionStatus
+      attr_accessor status_code: ("PENDING_ACCEPTANCE" | "VALIDATING" | "VALIDATION_FAILED" | "PROVISIONING" | "ACTIVE" | "REJECTED" | "DELETING" | "DELETED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PackageDetails
+      attr_accessor package_id: ::String
+      attr_accessor package_name: ::String
+      attr_accessor package_type: ("TXT-DICTIONARY")
+      attr_accessor package_description: ::String
+      attr_accessor package_status: ("COPYING" | "COPY_FAILED" | "VALIDATING" | "VALIDATION_FAILED" | "AVAILABLE" | "DELETING" | "DELETED" | "DELETE_FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor available_package_version: ::String
+      attr_accessor error_details: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class PackageSource
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_key: ::String
+      SENSITIVE: []
+    end
+
+    class PackageVersionHistory
+      attr_accessor package_version: ::String
+      attr_accessor commit_message: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PurchaseReservedElasticsearchInstanceOfferingRequest
+      attr_accessor reserved_elasticsearch_instance_offering_id: ::String
+      attr_accessor reservation_name: ::String
+      attr_accessor instance_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class PurchaseReservedElasticsearchInstanceOfferingResponse
+      attr_accessor reserved_elasticsearch_instance_id: ::String
+      attr_accessor reservation_name: ::String
+      SENSITIVE: []
+    end
+
+    class RecurringCharge
+      attr_accessor recurring_charge_amount: ::Float
+      attr_accessor recurring_charge_frequency: ::String
+      SENSITIVE: []
+    end
+
+    class RejectInboundCrossClusterSearchConnectionRequest
+      attr_accessor cross_cluster_search_connection_id: ::String
+      SENSITIVE: []
+    end
+
+    class RejectInboundCrossClusterSearchConnectionResponse
+      attr_accessor cross_cluster_search_connection: Types::InboundCrossClusterSearchConnection
+      SENSITIVE: []
+    end
+
+    class RemoveTagsRequest
+      attr_accessor arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ReservedElasticsearchInstance
+      attr_accessor reservation_name: ::String
+      attr_accessor reserved_elasticsearch_instance_id: ::String
+      attr_accessor reserved_elasticsearch_instance_offering_id: ::String
+      attr_accessor elasticsearch_instance_type: ("m3.medium.elasticsearch" | "m3.large.elasticsearch" | "m3.xlarge.elasticsearch" | "m3.2xlarge.elasticsearch" | "m4.large.elasticsearch" | "m4.xlarge.elasticsearch" | "m4.2xlarge.elasticsearch" | "m4.4xlarge.elasticsearch" | "m4.10xlarge.elasticsearch" | "m5.large.elasticsearch" | "m5.xlarge.elasticsearch" | "m5.2xlarge.elasticsearch" | "m5.4xlarge.elasticsearch" | "m5.12xlarge.elasticsearch" | "r5.large.elasticsearch" | "r5.xlarge.elasticsearch" | "r5.2xlarge.elasticsearch" | "r5.4xlarge.elasticsearch" | "r5.12xlarge.elasticsearch" | "c5.large.elasticsearch" | "c5.xlarge.elasticsearch" | "c5.2xlarge.elasticsearch" | "c5.4xlarge.elasticsearch" | "c5.9xlarge.elasticsearch" | "c5.18xlarge.elasticsearch" | "ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch" | "t2.micro.elasticsearch" | "t2.small.elasticsearch" | "t2.medium.elasticsearch" | "r3.large.elasticsearch" | "r3.xlarge.elasticsearch" | "r3.2xlarge.elasticsearch" | "r3.4xlarge.elasticsearch" | "r3.8xlarge.elasticsearch" | "i2.xlarge.elasticsearch" | "i2.2xlarge.elasticsearch" | "d2.xlarge.elasticsearch" | "d2.2xlarge.elasticsearch" | "d2.4xlarge.elasticsearch" | "d2.8xlarge.elasticsearch" | "c4.large.elasticsearch" | "c4.xlarge.elasticsearch" | "c4.2xlarge.elasticsearch" | "c4.4xlarge.elasticsearch" | "c4.8xlarge.elasticsearch" | "r4.large.elasticsearch" | "r4.xlarge.elasticsearch" | "r4.2xlarge.elasticsearch" | "r4.4xlarge.elasticsearch" | "r4.8xlarge.elasticsearch" | "r4.16xlarge.elasticsearch" | "i3.large.elasticsearch" | "i3.xlarge.elasticsearch" | "i3.2xlarge.elasticsearch" | "i3.4xlarge.elasticsearch" | "i3.8xlarge.elasticsearch" | "i3.16xlarge.elasticsearch")
+      attr_accessor start_time: ::Time
+      attr_accessor duration: ::Integer
+      attr_accessor fixed_price: ::Float
+      attr_accessor usage_price: ::Float
+      attr_accessor currency_code: ::String
+      attr_accessor elasticsearch_instance_count: ::Integer
+      attr_accessor state: ::String
+      attr_accessor payment_option: ("ALL_UPFRONT" | "PARTIAL_UPFRONT" | "NO_UPFRONT")
+      attr_accessor recurring_charges: ::Array[Types::RecurringCharge]
+      SENSITIVE: []
+    end
+
+    class ReservedElasticsearchInstanceOffering
+      attr_accessor reserved_elasticsearch_instance_offering_id: ::String
+      attr_accessor elasticsearch_instance_type: ("m3.medium.elasticsearch" | "m3.large.elasticsearch" | "m3.xlarge.elasticsearch" | "m3.2xlarge.elasticsearch" | "m4.large.elasticsearch" | "m4.xlarge.elasticsearch" | "m4.2xlarge.elasticsearch" | "m4.4xlarge.elasticsearch" | "m4.10xlarge.elasticsearch" | "m5.large.elasticsearch" | "m5.xlarge.elasticsearch" | "m5.2xlarge.elasticsearch" | "m5.4xlarge.elasticsearch" | "m5.12xlarge.elasticsearch" | "r5.large.elasticsearch" | "r5.xlarge.elasticsearch" | "r5.2xlarge.elasticsearch" | "r5.4xlarge.elasticsearch" | "r5.12xlarge.elasticsearch" | "c5.large.elasticsearch" | "c5.xlarge.elasticsearch" | "c5.2xlarge.elasticsearch" | "c5.4xlarge.elasticsearch" | "c5.9xlarge.elasticsearch" | "c5.18xlarge.elasticsearch" | "ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch" | "t2.micro.elasticsearch" | "t2.small.elasticsearch" | "t2.medium.elasticsearch" | "r3.large.elasticsearch" | "r3.xlarge.elasticsearch" | "r3.2xlarge.elasticsearch" | "r3.4xlarge.elasticsearch" | "r3.8xlarge.elasticsearch" | "i2.xlarge.elasticsearch" | "i2.2xlarge.elasticsearch" | "d2.xlarge.elasticsearch" | "d2.2xlarge.elasticsearch" | "d2.4xlarge.elasticsearch" | "d2.8xlarge.elasticsearch" | "c4.large.elasticsearch" | "c4.xlarge.elasticsearch" | "c4.2xlarge.elasticsearch" | "c4.4xlarge.elasticsearch" | "c4.8xlarge.elasticsearch" | "r4.large.elasticsearch" | "r4.xlarge.elasticsearch" | "r4.2xlarge.elasticsearch" | "r4.4xlarge.elasticsearch" | "r4.8xlarge.elasticsearch" | "r4.16xlarge.elasticsearch" | "i3.large.elasticsearch" | "i3.xlarge.elasticsearch" | "i3.2xlarge.elasticsearch" | "i3.4xlarge.elasticsearch" | "i3.8xlarge.elasticsearch" | "i3.16xlarge.elasticsearch")
+      attr_accessor duration: ::Integer
+      attr_accessor fixed_price: ::Float
+      attr_accessor usage_price: ::Float
+      attr_accessor currency_code: ::String
+      attr_accessor payment_option: ("ALL_UPFRONT" | "PARTIAL_UPFRONT" | "NO_UPFRONT")
+      attr_accessor recurring_charges: ::Array[Types::RecurringCharge]
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException < Aws::EmptyStructure
+    end
+
+    class RevokeVpcEndpointAccessRequest
+      attr_accessor domain_name: ::String
+      attr_accessor account: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeVpcEndpointAccessResponse < Aws::EmptyStructure
+    end
+
+    class SAMLIdp
+      attr_accessor metadata_content: ::String
+      attr_accessor entity_id: ::String
+      SENSITIVE: []
+    end
+
+    class SAMLOptionsInput
+      attr_accessor enabled: bool
+      attr_accessor idp: Types::SAMLIdp
+      attr_accessor master_user_name: ::String
+      attr_accessor master_backend_role: ::String
+      attr_accessor subject_key: ::String
+      attr_accessor roles_key: ::String
+      attr_accessor session_timeout_minutes: ::Integer
+      SENSITIVE: [:master_user_name]
+    end
+
+    class SAMLOptionsOutput
+      attr_accessor enabled: bool
+      attr_accessor idp: Types::SAMLIdp
+      attr_accessor subject_key: ::String
+      attr_accessor roles_key: ::String
+      attr_accessor session_timeout_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScheduledAutoTuneDetails
+      attr_accessor date: ::Time
+      attr_accessor action_type: ("JVM_HEAP_SIZE_TUNING" | "JVM_YOUNG_GEN_TUNING")
+      attr_accessor action: ::String
+      attr_accessor severity: ("LOW" | "MEDIUM" | "HIGH")
+      SENSITIVE: []
+    end
+
+    class ServiceSoftwareOptions
+      attr_accessor current_version: ::String
+      attr_accessor new_version: ::String
+      attr_accessor update_available: bool
+      attr_accessor cancellable: bool
+      attr_accessor update_status: ("PENDING_UPDATE" | "IN_PROGRESS" | "COMPLETED" | "NOT_ELIGIBLE" | "ELIGIBLE")
+      attr_accessor description: ::String
+      attr_accessor automated_update_date: ::Time
+      attr_accessor optional_deployment: bool
+      SENSITIVE: []
+    end
+
+    class SnapshotOptions
+      attr_accessor automated_snapshot_start_hour: ::Integer
+      SENSITIVE: []
+    end
+
+    class SnapshotOptionsStatus
+      attr_accessor options: Types::SnapshotOptions
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class StartElasticsearchServiceSoftwareUpdateRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartElasticsearchServiceSoftwareUpdateResponse
+      attr_accessor service_software_options: Types::ServiceSoftwareOptions
+      SENSITIVE: []
+    end
+
+    class StorageType
+      attr_accessor storage_type_name: ::String
+      attr_accessor storage_sub_type_name: ::String
+      attr_accessor storage_type_limits: ::Array[Types::StorageTypeLimit]
+      SENSITIVE: []
+    end
+
+    class StorageTypeLimit
+      attr_accessor limit_name: ::String
+      attr_accessor limit_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateElasticsearchDomainConfigRequest
+      attr_accessor domain_name: ::String
+      attr_accessor elasticsearch_cluster_config: Types::ElasticsearchClusterConfig
+      attr_accessor ebs_options: Types::EBSOptions
+      attr_accessor snapshot_options: Types::SnapshotOptions
+      attr_accessor vpc_options: Types::VPCOptions
+      attr_accessor cognito_options: Types::CognitoOptions
+      attr_accessor advanced_options: ::Hash[::String, ::String]
+      attr_accessor access_policies: ::String
+      attr_accessor log_publishing_options: ::Hash[("INDEX_SLOW_LOGS" | "SEARCH_SLOW_LOGS" | "ES_APPLICATION_LOGS" | "AUDIT_LOGS"), Types::LogPublishingOption]
+      attr_accessor domain_endpoint_options: Types::DomainEndpointOptions
+      attr_accessor advanced_security_options: Types::AdvancedSecurityOptionsInput
+      attr_accessor node_to_node_encryption_options: Types::NodeToNodeEncryptionOptions
+      attr_accessor encryption_at_rest_options: Types::EncryptionAtRestOptions
+      attr_accessor auto_tune_options: Types::AutoTuneOptions
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class UpdateElasticsearchDomainConfigResponse
+      attr_accessor domain_config: Types::ElasticsearchDomainConfig
+      attr_accessor dry_run_results: Types::DryRunResults
+      SENSITIVE: []
+    end
+
+    class UpdatePackageRequest
+      attr_accessor package_id: ::String
+      attr_accessor package_source: Types::PackageSource
+      attr_accessor package_description: ::String
+      attr_accessor commit_message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePackageResponse
+      attr_accessor package_details: Types::PackageDetails
+      SENSITIVE: []
+    end
+
+    class UpdateVpcEndpointRequest
+      attr_accessor vpc_endpoint_id: ::String
+      attr_accessor vpc_options: Types::VPCOptions
+      SENSITIVE: []
+    end
+
+    class UpdateVpcEndpointResponse
+      attr_accessor vpc_endpoint: Types::VpcEndpoint
+      SENSITIVE: []
+    end
+
+    class UpgradeElasticsearchDomainRequest
+      attr_accessor domain_name: ::String
+      attr_accessor target_version: ::String
+      attr_accessor perform_check_only: bool
+      SENSITIVE: []
+    end
+
+    class UpgradeElasticsearchDomainResponse
+      attr_accessor domain_name: ::String
+      attr_accessor target_version: ::String
+      attr_accessor perform_check_only: bool
+      attr_accessor change_progress_details: Types::ChangeProgressDetails
+      SENSITIVE: []
+    end
+
+    class UpgradeHistory
+      attr_accessor upgrade_name: ::String
+      attr_accessor start_timestamp: ::Time
+      attr_accessor upgrade_status: ("IN_PROGRESS" | "SUCCEEDED" | "SUCCEEDED_WITH_ISSUES" | "FAILED")
+      attr_accessor steps_list: ::Array[Types::UpgradeStepItem]
+      SENSITIVE: []
+    end
+
+    class UpgradeStepItem
+      attr_accessor upgrade_step: ("PRE_UPGRADE_CHECK" | "SNAPSHOT" | "UPGRADE")
+      attr_accessor upgrade_step_status: ("IN_PROGRESS" | "SUCCEEDED" | "SUCCEEDED_WITH_ISSUES" | "FAILED")
+      attr_accessor issues: ::Array[::String]
+      attr_accessor progress_percent: ::Float
+      SENSITIVE: []
+    end
+
+    class VPCDerivedInfo
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class VPCDerivedInfoStatus
+      attr_accessor options: Types::VPCDerivedInfo
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class VPCOptions
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ValidationException < Aws::EmptyStructure
+    end
+
+    class VpcEndpoint
+      attr_accessor vpc_endpoint_id: ::String
+      attr_accessor vpc_endpoint_owner: ::String
+      attr_accessor domain_arn: ::String
+      attr_accessor vpc_options: Types::VPCDerivedInfo
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+      attr_accessor endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class VpcEndpointError
+      attr_accessor vpc_endpoint_id: ::String
+      attr_accessor error_code: ("ENDPOINT_NOT_FOUND" | "SERVER_ERROR")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class VpcEndpointSummary
+      attr_accessor vpc_endpoint_id: ::String
+      attr_accessor vpc_endpoint_owner: ::String
+      attr_accessor domain_arn: ::String
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class ZoneAwarenessConfig
+      attr_accessor availability_zone_count: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

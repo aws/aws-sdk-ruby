@@ -675,9 +675,14 @@ module Aws::MainframeModernization
     #   account.
     #
     # @option params [String] :preferred_maintenance_window
-    #   Configures the maintenance window you want for the runtime
-    #   environment. If you do not provide a value, a random system-generated
-    #   value will be assigned.
+    #   Configures the maintenance window that you want for the runtime
+    #   environment. The maintenance window must have the format
+    #   `ddd:hh24:mi-ddd:hh24:mi` and must be less than 24 hours. The
+    #   following two examples are valid maintenance windows:
+    #   `sun:23:45-mon:00:15` or `sat:01:00-sat:03:00`.
+    #
+    #   If you do not provide a value, a random system-generated value will be
+    #   assigned.
     #
     # @option params [Boolean] :publicly_accessible
     #   Specifies whether the runtime environment is publicly accessible.
@@ -866,7 +871,7 @@ module Aws::MainframeModernization
     #   resp.application_id #=> String
     #   resp.creation_time #=> Time
     #   resp.deployed_version.application_version #=> Integer
-    #   resp.deployed_version.status #=> String, one of "Deploying", "Succeeded", "Failed"
+    #   resp.deployed_version.status #=> String, one of "Deploying", "Succeeded", "Failed", "Updating Deployment"
     #   resp.deployed_version.status_reason #=> String
     #   resp.description #=> String
     #   resp.engine_type #=> String, one of "microfocus", "bluage"
@@ -983,6 +988,10 @@ module Aws::MainframeModernization
     #   resp.application_id #=> String
     #   resp.batch_job_identifier.file_batch_job_identifier.file_name #=> String
     #   resp.batch_job_identifier.file_batch_job_identifier.folder_path #=> String
+    #   resp.batch_job_identifier.s3_batch_job_identifier.bucket #=> String
+    #   resp.batch_job_identifier.s3_batch_job_identifier.identifier.file_name #=> String
+    #   resp.batch_job_identifier.s3_batch_job_identifier.identifier.script_name #=> String
+    #   resp.batch_job_identifier.s3_batch_job_identifier.key_prefix #=> String
     #   resp.batch_job_identifier.script_batch_job_identifier.script_name #=> String
     #   resp.end_time #=> Time
     #   resp.execution_id #=> String
@@ -1019,6 +1028,7 @@ module Aws::MainframeModernization
     #   * {Types::GetDataSetDetailsResponse#creation_time #creation_time} => Time
     #   * {Types::GetDataSetDetailsResponse#data_set_name #data_set_name} => String
     #   * {Types::GetDataSetDetailsResponse#data_set_org #data_set_org} => Types::DatasetDetailOrgAttributes
+    #   * {Types::GetDataSetDetailsResponse#file_size #file_size} => Integer
     #   * {Types::GetDataSetDetailsResponse#last_referenced_time #last_referenced_time} => Time
     #   * {Types::GetDataSetDetailsResponse#last_updated_time #last_updated_time} => Time
     #   * {Types::GetDataSetDetailsResponse#location #location} => String
@@ -1054,6 +1064,7 @@ module Aws::MainframeModernization
     #   resp.data_set_org.vsam.primary_key.name #=> String
     #   resp.data_set_org.vsam.primary_key.offset #=> Integer
     #   resp.data_set_org.vsam.record_format #=> String
+    #   resp.file_size #=> Integer
     #   resp.last_referenced_time #=> Time
     #   resp.last_updated_time #=> Time
     #   resp.location #=> String
@@ -1092,7 +1103,7 @@ module Aws::MainframeModernization
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "Creating", "Running", "Completed"
+    #   resp.status #=> String, one of "Creating", "Running", "Completed", "Failed"
     #   resp.summary.failed #=> Integer
     #   resp.summary.in_progress #=> Integer
     #   resp.summary.pending #=> Integer
@@ -1142,7 +1153,7 @@ module Aws::MainframeModernization
     #   resp.creation_time #=> Time
     #   resp.deployment_id #=> String
     #   resp.environment_id #=> String
-    #   resp.status #=> String, one of "Deploying", "Succeeded", "Failed"
+    #   resp.status #=> String, one of "Deploying", "Succeeded", "Failed", "Updating Deployment"
     #   resp.status_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/m2-2021-04-28/GetDeployment AWS API Documentation
@@ -1467,6 +1478,10 @@ module Aws::MainframeModernization
     #   resp.batch_job_executions[0].application_id #=> String
     #   resp.batch_job_executions[0].batch_job_identifier.file_batch_job_identifier.file_name #=> String
     #   resp.batch_job_executions[0].batch_job_identifier.file_batch_job_identifier.folder_path #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.s3_batch_job_identifier.bucket #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.s3_batch_job_identifier.identifier.file_name #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.s3_batch_job_identifier.identifier.script_name #=> String
+    #   resp.batch_job_executions[0].batch_job_identifier.s3_batch_job_identifier.key_prefix #=> String
     #   resp.batch_job_executions[0].batch_job_identifier.script_batch_job_identifier.script_name #=> String
     #   resp.batch_job_executions[0].end_time #=> Time
     #   resp.batch_job_executions[0].execution_id #=> String
@@ -1518,7 +1533,8 @@ module Aws::MainframeModernization
     # @example Response structure
     #
     #   resp.data_set_import_tasks #=> Array
-    #   resp.data_set_import_tasks[0].status #=> String, one of "Creating", "Running", "Completed"
+    #   resp.data_set_import_tasks[0].status #=> String, one of "Creating", "Running", "Completed", "Failed"
+    #   resp.data_set_import_tasks[0].status_reason #=> String
     #   resp.data_set_import_tasks[0].summary.failed #=> Integer
     #   resp.data_set_import_tasks[0].summary.in_progress #=> Integer
     #   resp.data_set_import_tasks[0].summary.pending #=> Integer
@@ -1554,6 +1570,10 @@ module Aws::MainframeModernization
     # @option params [Integer] :max_results
     #   The maximum number of objects to return.
     #
+    # @option params [String] :name_filter
+    #   Filter dataset name matching the specified pattern. Can use * and %
+    #   as wild cards.
+    #
     # @option params [String] :next_token
     #   A pagination token returned from a previous call to this operation.
     #   This specifies the next item to return. To return to the beginning of
@@ -1575,6 +1595,7 @@ module Aws::MainframeModernization
     #   resp = client.list_data_sets({
     #     application_id: "Identifier", # required
     #     max_results: 1,
+    #     name_filter: "String200",
     #     next_token: "NextToken",
     #     prefix: "String200",
     #   })
@@ -1638,7 +1659,7 @@ module Aws::MainframeModernization
     #   resp.deployments[0].creation_time #=> Time
     #   resp.deployments[0].deployment_id #=> String
     #   resp.deployments[0].environment_id #=> String
-    #   resp.deployments[0].status #=> String, one of "Deploying", "Succeeded", "Failed"
+    #   resp.deployments[0].status #=> String, one of "Deploying", "Succeeded", "Failed", "Updating Deployment"
     #   resp.deployments[0].status_reason #=> String
     #   resp.next_token #=> String
     #
@@ -1832,6 +1853,14 @@ module Aws::MainframeModernization
     #         file_name: "String", # required
     #         folder_path: "String",
     #       },
+    #       s3_batch_job_identifier: {
+    #         bucket: "String", # required
+    #         identifier: { # required
+    #           file_name: "String",
+    #           script_name: "String",
+    #         },
+    #         key_prefix: "String",
+    #       },
     #       script_batch_job_identifier: {
     #         script_name: "String", # required
     #       },
@@ -2002,13 +2031,30 @@ module Aws::MainframeModernization
     #   The unique identifier of the runtime environment that you want to
     #   update.
     #
+    # @option params [Boolean] :force_update
+    #   Forces the updates on the environment. This option is needed if the
+    #   applications in the environment are not stopped or if there are
+    #   ongoing application-related activities in the environment.
+    #
+    #   If you use this option, be aware that it could lead to data corruption
+    #   in the applications, and that you might need to perform repair and
+    #   recovery procedures for the applications.
+    #
+    #   This option is not needed if the attribute being updated is
+    #   `preferredMaintenanceWindow`.
+    #
     # @option params [String] :instance_type
     #   The instance type for the runtime environment to update.
     #
     # @option params [String] :preferred_maintenance_window
-    #   Configures the maintenance window you want for the runtime
-    #   environment. If you do not provide a value, a random system-generated
-    #   value will be assigned.
+    #   Configures the maintenance window that you want for the runtime
+    #   environment. The maintenance window must have the format
+    #   `ddd:hh24:mi-ddd:hh24:mi` and must be less than 24 hours. The
+    #   following two examples are valid maintenance windows:
+    #   `sun:23:45-mon:00:15` or `sat:01:00-sat:03:00`.
+    #
+    #   If you do not provide a value, a random system-generated value will be
+    #   assigned.
     #
     # @return [Types::UpdateEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2021,6 +2067,7 @@ module Aws::MainframeModernization
     #     desired_capacity: 1,
     #     engine_version: "EngineVersion",
     #     environment_id: "Identifier", # required
+    #     force_update: false,
     #     instance_type: "String20",
     #     preferred_maintenance_window: "String",
     #   })
@@ -2051,7 +2098,7 @@ module Aws::MainframeModernization
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mainframemodernization'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

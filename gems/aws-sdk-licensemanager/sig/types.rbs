@@ -1,0 +1,1106 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::LicenseManager
+  module Types
+
+    class AcceptGrantRequest
+      attr_accessor grant_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptGrantResponse
+      attr_accessor grant_arn: ::String
+      attr_accessor status: ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AuthorizationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AutomatedDiscoveryInformation
+      attr_accessor last_run_time: ::Time
+      SENSITIVE: []
+    end
+
+    class BorrowConfiguration
+      attr_accessor allow_early_check_in: bool
+      attr_accessor max_time_to_live_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class CheckInLicenseRequest
+      attr_accessor license_consumption_token: ::String
+      attr_accessor beneficiary: ::String
+      SENSITIVE: []
+    end
+
+    class CheckInLicenseResponse < Aws::EmptyStructure
+    end
+
+    class CheckoutBorrowLicenseRequest
+      attr_accessor license_arn: ::String
+      attr_accessor entitlements: ::Array[Types::EntitlementData]
+      attr_accessor digital_signature_method: ("JWT_PS384")
+      attr_accessor node_id: ::String
+      attr_accessor checkout_metadata: ::Array[Types::Metadata]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CheckoutBorrowLicenseResponse
+      attr_accessor license_arn: ::String
+      attr_accessor license_consumption_token: ::String
+      attr_accessor entitlements_allowed: ::Array[Types::EntitlementData]
+      attr_accessor node_id: ::String
+      attr_accessor signed_token: ::String
+      attr_accessor issued_at: ::String
+      attr_accessor expiration: ::String
+      attr_accessor checkout_metadata: ::Array[Types::Metadata]
+      SENSITIVE: []
+    end
+
+    class CheckoutLicenseRequest
+      attr_accessor product_sku: ::String
+      attr_accessor checkout_type: ("PROVISIONAL" | "PERPETUAL")
+      attr_accessor key_fingerprint: ::String
+      attr_accessor entitlements: ::Array[Types::EntitlementData]
+      attr_accessor client_token: ::String
+      attr_accessor beneficiary: ::String
+      attr_accessor node_id: ::String
+      SENSITIVE: []
+    end
+
+    class CheckoutLicenseResponse
+      attr_accessor checkout_type: ("PROVISIONAL" | "PERPETUAL")
+      attr_accessor license_consumption_token: ::String
+      attr_accessor entitlements_allowed: ::Array[Types::EntitlementData]
+      attr_accessor signed_token: ::String
+      attr_accessor node_id: ::String
+      attr_accessor issued_at: ::String
+      attr_accessor expiration: ::String
+      attr_accessor license_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConsumedLicenseSummary
+      attr_accessor resource_type: ("EC2_INSTANCE" | "EC2_HOST" | "EC2_AMI" | "RDS" | "SYSTEMS_MANAGER_MANAGED_INSTANCE")
+      attr_accessor consumed_licenses: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConsumptionConfiguration
+      attr_accessor renew_type: ("None" | "Weekly" | "Monthly")
+      attr_accessor provisional_configuration: Types::ProvisionalConfiguration
+      attr_accessor borrow_configuration: Types::BorrowConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateGrantRequest
+      attr_accessor client_token: ::String
+      attr_accessor grant_name: ::String
+      attr_accessor license_arn: ::String
+      attr_accessor principals: ::Array[::String]
+      attr_accessor home_region: ::String
+      attr_accessor allowed_operations: ::Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken")]
+      SENSITIVE: []
+    end
+
+    class CreateGrantResponse
+      attr_accessor grant_arn: ::String
+      attr_accessor status: ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGrantVersionRequest
+      attr_accessor client_token: ::String
+      attr_accessor grant_arn: ::String
+      attr_accessor grant_name: ::String
+      attr_accessor allowed_operations: ::Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken")]
+      attr_accessor status: ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")
+      attr_accessor status_reason: ::String
+      attr_accessor source_version: ::String
+      attr_accessor options: Types::Options
+      SENSITIVE: []
+    end
+
+    class CreateGrantVersionResponse
+      attr_accessor grant_arn: ::String
+      attr_accessor status: ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLicenseConfigurationRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor license_counting_type: ("vCPU" | "Instance" | "Core" | "Socket")
+      attr_accessor license_count: ::Integer
+      attr_accessor license_count_hard_limit: bool
+      attr_accessor license_rules: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor disassociate_when_not_found: bool
+      attr_accessor product_information_list: ::Array[Types::ProductInformation]
+      SENSITIVE: []
+    end
+
+    class CreateLicenseConfigurationResponse
+      attr_accessor license_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLicenseConversionTaskForResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor source_license_context: Types::LicenseConversionContext
+      attr_accessor destination_license_context: Types::LicenseConversionContext
+      SENSITIVE: []
+    end
+
+    class CreateLicenseConversionTaskForResourceResponse
+      attr_accessor license_conversion_task_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLicenseManagerReportGeneratorRequest
+      attr_accessor report_generator_name: ::String
+      attr_accessor type: ::Array[("LicenseConfigurationSummaryReport" | "LicenseConfigurationUsageReport")]
+      attr_accessor report_context: Types::ReportContext
+      attr_accessor report_frequency: Types::ReportFrequency
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateLicenseManagerReportGeneratorResponse
+      attr_accessor license_manager_report_generator_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLicenseRequest
+      attr_accessor license_name: ::String
+      attr_accessor product_name: ::String
+      attr_accessor product_sku: ::String
+      attr_accessor issuer: Types::Issuer
+      attr_accessor home_region: ::String
+      attr_accessor validity: Types::DatetimeRange
+      attr_accessor entitlements: ::Array[Types::Entitlement]
+      attr_accessor beneficiary: ::String
+      attr_accessor consumption_configuration: Types::ConsumptionConfiguration
+      attr_accessor license_metadata: ::Array[Types::Metadata]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLicenseResponse
+      attr_accessor license_arn: ::String
+      attr_accessor status: ("AVAILABLE" | "PENDING_AVAILABLE" | "DEACTIVATED" | "SUSPENDED" | "EXPIRED" | "PENDING_DELETE" | "DELETED")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLicenseVersionRequest
+      attr_accessor license_arn: ::String
+      attr_accessor license_name: ::String
+      attr_accessor product_name: ::String
+      attr_accessor issuer: Types::Issuer
+      attr_accessor home_region: ::String
+      attr_accessor validity: Types::DatetimeRange
+      attr_accessor license_metadata: ::Array[Types::Metadata]
+      attr_accessor entitlements: ::Array[Types::Entitlement]
+      attr_accessor consumption_configuration: Types::ConsumptionConfiguration
+      attr_accessor status: ("AVAILABLE" | "PENDING_AVAILABLE" | "DEACTIVATED" | "SUSPENDED" | "EXPIRED" | "PENDING_DELETE" | "DELETED")
+      attr_accessor client_token: ::String
+      attr_accessor source_version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLicenseVersionResponse
+      attr_accessor license_arn: ::String
+      attr_accessor version: ::String
+      attr_accessor status: ("AVAILABLE" | "PENDING_AVAILABLE" | "DEACTIVATED" | "SUSPENDED" | "EXPIRED" | "PENDING_DELETE" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class CreateTokenRequest
+      attr_accessor license_arn: ::String
+      attr_accessor role_arns: ::Array[::String]
+      attr_accessor expiration_in_days: ::Integer
+      attr_accessor token_properties: ::Array[::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTokenResponse
+      attr_accessor token_id: ::String
+      attr_accessor token_type: ("REFRESH_TOKEN")
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class DatetimeRange
+      attr_accessor begin: ::String
+      attr_accessor end: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGrantRequest
+      attr_accessor grant_arn: ::String
+      attr_accessor status_reason: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGrantResponse
+      attr_accessor grant_arn: ::String
+      attr_accessor status: ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLicenseConfigurationRequest
+      attr_accessor license_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLicenseConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteLicenseManagerReportGeneratorRequest
+      attr_accessor license_manager_report_generator_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLicenseManagerReportGeneratorResponse < Aws::EmptyStructure
+    end
+
+    class DeleteLicenseRequest
+      attr_accessor license_arn: ::String
+      attr_accessor source_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLicenseResponse
+      attr_accessor status: ("PENDING_DELETE" | "DELETED")
+      attr_accessor deletion_date: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTokenRequest
+      attr_accessor token_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTokenResponse < Aws::EmptyStructure
+    end
+
+    class Entitlement
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor max_count: ::Integer
+      attr_accessor overage: bool
+      attr_accessor unit: ("Count" | "None" | "Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second")
+      attr_accessor allow_check_in: bool
+      SENSITIVE: []
+    end
+
+    class EntitlementData
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor unit: ("Count" | "None" | "Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second")
+      SENSITIVE: []
+    end
+
+    class EntitlementNotAllowedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EntitlementUsage
+      attr_accessor name: ::String
+      attr_accessor consumed_value: ::String
+      attr_accessor max_count: ::String
+      attr_accessor unit: ("Count" | "None" | "Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second")
+      SENSITIVE: []
+    end
+
+    class ExtendLicenseConsumptionRequest
+      attr_accessor license_consumption_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class ExtendLicenseConsumptionResponse
+      attr_accessor license_consumption_token: ::String
+      attr_accessor expiration: ::String
+      SENSITIVE: []
+    end
+
+    class FailedDependencyException
+      attr_accessor message: ::String
+      attr_accessor error_code: ::String
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FilterLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessTokenRequest
+      attr_accessor token: ::String
+      attr_accessor token_properties: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetAccessTokenResponse
+      attr_accessor access_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetGrantRequest
+      attr_accessor grant_arn: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetGrantResponse
+      attr_accessor grant: Types::Grant
+      SENSITIVE: []
+    end
+
+    class GetLicenseConfigurationRequest
+      attr_accessor license_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetLicenseConfigurationResponse
+      attr_accessor license_configuration_id: ::String
+      attr_accessor license_configuration_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor license_counting_type: ("vCPU" | "Instance" | "Core" | "Socket")
+      attr_accessor license_rules: ::Array[::String]
+      attr_accessor license_count: ::Integer
+      attr_accessor license_count_hard_limit: bool
+      attr_accessor consumed_licenses: ::Integer
+      attr_accessor status: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor consumed_license_summary_list: ::Array[Types::ConsumedLicenseSummary]
+      attr_accessor managed_resource_summary_list: ::Array[Types::ManagedResourceSummary]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor product_information_list: ::Array[Types::ProductInformation]
+      attr_accessor automated_discovery_information: Types::AutomatedDiscoveryInformation
+      attr_accessor disassociate_when_not_found: bool
+      SENSITIVE: []
+    end
+
+    class GetLicenseConversionTaskRequest
+      attr_accessor license_conversion_task_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLicenseConversionTaskResponse
+      attr_accessor license_conversion_task_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor source_license_context: Types::LicenseConversionContext
+      attr_accessor destination_license_context: Types::LicenseConversionContext
+      attr_accessor status_message: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor start_time: ::Time
+      attr_accessor license_conversion_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetLicenseManagerReportGeneratorRequest
+      attr_accessor license_manager_report_generator_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetLicenseManagerReportGeneratorResponse
+      attr_accessor report_generator: Types::ReportGenerator
+      SENSITIVE: []
+    end
+
+    class GetLicenseRequest
+      attr_accessor license_arn: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetLicenseResponse
+      attr_accessor license: Types::License
+      SENSITIVE: []
+    end
+
+    class GetLicenseUsageRequest
+      attr_accessor license_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetLicenseUsageResponse
+      attr_accessor license_usage: Types::LicenseUsage
+      SENSITIVE: []
+    end
+
+    class GetServiceSettingsRequest < Aws::EmptyStructure
+    end
+
+    class GetServiceSettingsResponse
+      attr_accessor s3_bucket_arn: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor organization_configuration: Types::OrganizationConfiguration
+      attr_accessor enable_cross_accounts_discovery: bool
+      attr_accessor license_manager_resource_share_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Grant
+      attr_accessor grant_arn: ::String
+      attr_accessor grant_name: ::String
+      attr_accessor parent_arn: ::String
+      attr_accessor license_arn: ::String
+      attr_accessor grantee_principal_arn: ::String
+      attr_accessor home_region: ::String
+      attr_accessor grant_status: ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")
+      attr_accessor status_reason: ::String
+      attr_accessor version: ::String
+      attr_accessor granted_operations: ::Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken")]
+      attr_accessor options: Types::Options
+      SENSITIVE: []
+    end
+
+    class GrantedLicense
+      attr_accessor license_arn: ::String
+      attr_accessor license_name: ::String
+      attr_accessor product_name: ::String
+      attr_accessor product_sku: ::String
+      attr_accessor issuer: Types::IssuerDetails
+      attr_accessor home_region: ::String
+      attr_accessor status: ("AVAILABLE" | "PENDING_AVAILABLE" | "DEACTIVATED" | "SUSPENDED" | "EXPIRED" | "PENDING_DELETE" | "DELETED")
+      attr_accessor validity: Types::DatetimeRange
+      attr_accessor beneficiary: ::String
+      attr_accessor entitlements: ::Array[Types::Entitlement]
+      attr_accessor consumption_configuration: Types::ConsumptionConfiguration
+      attr_accessor license_metadata: ::Array[Types::Metadata]
+      attr_accessor create_time: ::String
+      attr_accessor version: ::String
+      attr_accessor received_metadata: Types::ReceivedMetadata
+      SENSITIVE: []
+    end
+
+    class InvalidParameterValueException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidResourceStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InventoryFilter
+      attr_accessor name: ::String
+      attr_accessor condition: ("EQUALS" | "NOT_EQUALS" | "BEGINS_WITH" | "CONTAINS")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Issuer
+      attr_accessor name: ::String
+      attr_accessor sign_key: ::String
+      SENSITIVE: []
+    end
+
+    class IssuerDetails
+      attr_accessor name: ::String
+      attr_accessor sign_key: ::String
+      attr_accessor key_fingerprint: ::String
+      SENSITIVE: []
+    end
+
+    class License
+      attr_accessor license_arn: ::String
+      attr_accessor license_name: ::String
+      attr_accessor product_name: ::String
+      attr_accessor product_sku: ::String
+      attr_accessor issuer: Types::IssuerDetails
+      attr_accessor home_region: ::String
+      attr_accessor status: ("AVAILABLE" | "PENDING_AVAILABLE" | "DEACTIVATED" | "SUSPENDED" | "EXPIRED" | "PENDING_DELETE" | "DELETED")
+      attr_accessor validity: Types::DatetimeRange
+      attr_accessor beneficiary: ::String
+      attr_accessor entitlements: ::Array[Types::Entitlement]
+      attr_accessor consumption_configuration: Types::ConsumptionConfiguration
+      attr_accessor license_metadata: ::Array[Types::Metadata]
+      attr_accessor create_time: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class LicenseConfiguration
+      attr_accessor license_configuration_id: ::String
+      attr_accessor license_configuration_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor license_counting_type: ("vCPU" | "Instance" | "Core" | "Socket")
+      attr_accessor license_rules: ::Array[::String]
+      attr_accessor license_count: ::Integer
+      attr_accessor license_count_hard_limit: bool
+      attr_accessor disassociate_when_not_found: bool
+      attr_accessor consumed_licenses: ::Integer
+      attr_accessor status: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor consumed_license_summary_list: ::Array[Types::ConsumedLicenseSummary]
+      attr_accessor managed_resource_summary_list: ::Array[Types::ManagedResourceSummary]
+      attr_accessor product_information_list: ::Array[Types::ProductInformation]
+      attr_accessor automated_discovery_information: Types::AutomatedDiscoveryInformation
+      SENSITIVE: []
+    end
+
+    class LicenseConfigurationAssociation
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ("EC2_INSTANCE" | "EC2_HOST" | "EC2_AMI" | "RDS" | "SYSTEMS_MANAGER_MANAGED_INSTANCE")
+      attr_accessor resource_owner_id: ::String
+      attr_accessor association_time: ::Time
+      attr_accessor ami_association_scope: ::String
+      SENSITIVE: []
+    end
+
+    class LicenseConfigurationUsage
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ("EC2_INSTANCE" | "EC2_HOST" | "EC2_AMI" | "RDS" | "SYSTEMS_MANAGER_MANAGED_INSTANCE")
+      attr_accessor resource_status: ::String
+      attr_accessor resource_owner_id: ::String
+      attr_accessor association_time: ::Time
+      attr_accessor consumed_licenses: ::Integer
+      SENSITIVE: []
+    end
+
+    class LicenseConversionContext
+      attr_accessor usage_operation: ::String
+      SENSITIVE: []
+    end
+
+    class LicenseConversionTask
+      attr_accessor license_conversion_task_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor source_license_context: Types::LicenseConversionContext
+      attr_accessor destination_license_context: Types::LicenseConversionContext
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor license_conversion_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class LicenseOperationFailure
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_type: ("EC2_INSTANCE" | "EC2_HOST" | "EC2_AMI" | "RDS" | "SYSTEMS_MANAGER_MANAGED_INSTANCE")
+      attr_accessor error_message: ::String
+      attr_accessor failure_time: ::Time
+      attr_accessor operation_name: ::String
+      attr_accessor resource_owner_id: ::String
+      attr_accessor operation_requested_by: ::String
+      attr_accessor metadata_list: ::Array[Types::Metadata]
+      SENSITIVE: []
+    end
+
+    class LicenseSpecification
+      attr_accessor license_configuration_arn: ::String
+      attr_accessor ami_association_scope: ::String
+      SENSITIVE: []
+    end
+
+    class LicenseUsage
+      attr_accessor entitlement_usages: ::Array[Types::EntitlementUsage]
+      SENSITIVE: []
+    end
+
+    class LicenseUsageException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociationsForLicenseConfigurationRequest
+      attr_accessor license_configuration_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociationsForLicenseConfigurationResponse
+      attr_accessor license_configuration_associations: ::Array[Types::LicenseConfigurationAssociation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDistributedGrantsRequest
+      attr_accessor grant_arns: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDistributedGrantsResponse
+      attr_accessor grants: ::Array[Types::Grant]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFailuresForLicenseConfigurationOperationsRequest
+      attr_accessor license_configuration_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFailuresForLicenseConfigurationOperationsResponse
+      attr_accessor license_operation_failure_list: ::Array[Types::LicenseOperationFailure]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLicenseConfigurationsRequest
+      attr_accessor license_configuration_arns: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListLicenseConfigurationsResponse
+      attr_accessor license_configurations: ::Array[Types::LicenseConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLicenseConversionTasksRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListLicenseConversionTasksResponse
+      attr_accessor license_conversion_tasks: ::Array[Types::LicenseConversionTask]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLicenseManagerReportGeneratorsRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLicenseManagerReportGeneratorsResponse
+      attr_accessor report_generators: ::Array[Types::ReportGenerator]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLicenseSpecificationsForResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLicenseSpecificationsForResourceResponse
+      attr_accessor license_specifications: ::Array[Types::LicenseSpecification]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLicenseVersionsRequest
+      attr_accessor license_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLicenseVersionsResponse
+      attr_accessor licenses: ::Array[Types::License]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLicensesRequest
+      attr_accessor license_arns: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLicensesResponse
+      attr_accessor licenses: ::Array[Types::License]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReceivedGrantsForOrganizationRequest
+      attr_accessor license_arn: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReceivedGrantsForOrganizationResponse
+      attr_accessor grants: ::Array[Types::Grant]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReceivedGrantsRequest
+      attr_accessor grant_arns: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReceivedGrantsResponse
+      attr_accessor grants: ::Array[Types::Grant]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReceivedLicensesForOrganizationRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReceivedLicensesForOrganizationResponse
+      attr_accessor licenses: ::Array[Types::GrantedLicense]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReceivedLicensesRequest
+      attr_accessor license_arns: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReceivedLicensesResponse
+      attr_accessor licenses: ::Array[Types::GrantedLicense]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceInventoryRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::InventoryFilter]
+      SENSITIVE: []
+    end
+
+    class ListResourceInventoryResponse
+      attr_accessor resource_inventory_list: ::Array[Types::ResourceInventory]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTokensRequest
+      attr_accessor token_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTokensResponse
+      attr_accessor tokens: ::Array[Types::TokenData]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUsageForLicenseConfigurationRequest
+      attr_accessor license_configuration_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListUsageForLicenseConfigurationResponse
+      attr_accessor license_configuration_usage_list: ::Array[Types::LicenseConfigurationUsage]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedResourceSummary
+      attr_accessor resource_type: ("EC2_INSTANCE" | "EC2_HOST" | "EC2_AMI" | "RDS" | "SYSTEMS_MANAGER_MANAGED_INSTANCE")
+      attr_accessor association_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class Metadata
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class NoEntitlementsAllowedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Options
+      attr_accessor activation_override_behavior: ("DISTRIBUTED_GRANTS_ONLY" | "ALL_GRANTS_PERMITTED_BY_ISSUER")
+      SENSITIVE: []
+    end
+
+    class OrganizationConfiguration
+      attr_accessor enable_integration: bool
+      SENSITIVE: []
+    end
+
+    class ProductInformation
+      attr_accessor resource_type: ::String
+      attr_accessor product_information_filter_list: ::Array[Types::ProductInformationFilter]
+      SENSITIVE: []
+    end
+
+    class ProductInformationFilter
+      attr_accessor product_information_filter_name: ::String
+      attr_accessor product_information_filter_value: ::Array[::String]
+      attr_accessor product_information_filter_comparator: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisionalConfiguration
+      attr_accessor max_time_to_live_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class RateLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReceivedMetadata
+      attr_accessor received_status: ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "DISABLED" | "WORKFLOW_COMPLETED")
+      attr_accessor received_status_reason: ::String
+      attr_accessor allowed_operations: ::Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken")]
+      SENSITIVE: []
+    end
+
+    class RedirectException
+      attr_accessor location: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RejectGrantRequest
+      attr_accessor grant_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RejectGrantResponse
+      attr_accessor grant_arn: ::String
+      attr_accessor status: ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class ReportContext
+      attr_accessor license_configuration_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ReportFrequency
+      attr_accessor value: ::Integer
+      attr_accessor period: ("DAY" | "WEEK" | "MONTH")
+      SENSITIVE: []
+    end
+
+    class ReportGenerator
+      attr_accessor report_generator_name: ::String
+      attr_accessor report_type: ::Array[("LicenseConfigurationSummaryReport" | "LicenseConfigurationUsageReport")]
+      attr_accessor report_context: Types::ReportContext
+      attr_accessor report_frequency: Types::ReportFrequency
+      attr_accessor license_manager_report_generator_arn: ::String
+      attr_accessor last_run_status: ::String
+      attr_accessor last_run_failure_reason: ::String
+      attr_accessor last_report_generation_time: ::String
+      attr_accessor report_creator_account: ::String
+      attr_accessor description: ::String
+      attr_accessor s3_location: Types::S3Location
+      attr_accessor create_time: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ResourceInventory
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("EC2_INSTANCE" | "EC2_HOST" | "EC2_AMI" | "RDS" | "SYSTEMS_MANAGER_MANAGED_INSTANCE")
+      attr_accessor resource_arn: ::String
+      attr_accessor platform: ::String
+      attr_accessor platform_version: ::String
+      attr_accessor resource_owning_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor bucket: ::String
+      attr_accessor key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ServerInternalException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TokenData
+      attr_accessor token_id: ::String
+      attr_accessor token_type: ::String
+      attr_accessor license_arn: ::String
+      attr_accessor expiration_time: ::String
+      attr_accessor token_properties: ::Array[::String]
+      attr_accessor role_arns: ::Array[::String]
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedDigitalSignatureMethodException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLicenseConfigurationRequest
+      attr_accessor license_configuration_arn: ::String
+      attr_accessor license_configuration_status: ("AVAILABLE" | "DISABLED")
+      attr_accessor license_rules: ::Array[::String]
+      attr_accessor license_count: ::Integer
+      attr_accessor license_count_hard_limit: bool
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor product_information_list: ::Array[Types::ProductInformation]
+      attr_accessor disassociate_when_not_found: bool
+      SENSITIVE: []
+    end
+
+    class UpdateLicenseConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLicenseManagerReportGeneratorRequest
+      attr_accessor license_manager_report_generator_arn: ::String
+      attr_accessor report_generator_name: ::String
+      attr_accessor type: ::Array[("LicenseConfigurationSummaryReport" | "LicenseConfigurationUsageReport")]
+      attr_accessor report_context: Types::ReportContext
+      attr_accessor report_frequency: Types::ReportFrequency
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateLicenseManagerReportGeneratorResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLicenseSpecificationsForResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor add_license_specifications: ::Array[Types::LicenseSpecification]
+      attr_accessor remove_license_specifications: ::Array[Types::LicenseSpecification]
+      SENSITIVE: []
+    end
+
+    class UpdateLicenseSpecificationsForResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateServiceSettingsRequest
+      attr_accessor s3_bucket_arn: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor organization_configuration: Types::OrganizationConfiguration
+      attr_accessor enable_cross_accounts_discovery: bool
+      SENSITIVE: []
+    end
+
+    class UpdateServiceSettingsResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

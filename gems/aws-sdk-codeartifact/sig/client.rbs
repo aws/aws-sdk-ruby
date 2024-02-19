@@ -1,0 +1,688 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodeArtifact
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateExternalConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateExternalConnectionResult]
+        def repository: () -> Types::RepositoryDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#associate_external_connection-instance_method
+      def associate_external_connection: (
+                                           domain: ::String,
+                                           ?domain_owner: ::String,
+                                           repository: ::String,
+                                           external_connection: ::String
+                                         ) -> _AssociateExternalConnectionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateExternalConnectionResponseSuccess
+
+      interface _CopyPackageVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopyPackageVersionsResult]
+        def successful_versions: () -> ::Hash[::String, Types::SuccessfulPackageVersionInfo]
+        def failed_versions: () -> ::Hash[::String, Types::PackageVersionError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#copy_package_versions-instance_method
+      def copy_package_versions: (
+                                   domain: ::String,
+                                   ?domain_owner: ::String,
+                                   source_repository: ::String,
+                                   destination_repository: ::String,
+                                   format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift"),
+                                   ?namespace: ::String,
+                                   package: ::String,
+                                   ?versions: Array[::String],
+                                   ?version_revisions: Hash[::String, ::String],
+                                   ?allow_overwrite: bool,
+                                   ?include_from_upstream: bool
+                                 ) -> _CopyPackageVersionsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyPackageVersionsResponseSuccess
+
+      interface _CreateDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainResult]
+        def domain: () -> Types::DomainDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#create_domain-instance_method
+      def create_domain: (
+                           domain: ::String,
+                           ?encryption_key: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
+                           ]
+                         ) -> _CreateDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
+
+      interface _CreateRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRepositoryResult]
+        def repository: () -> Types::RepositoryDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#create_repository-instance_method
+      def create_repository: (
+                               domain: ::String,
+                               ?domain_owner: ::String,
+                               repository: ::String,
+                               ?description: ::String,
+                               ?upstreams: Array[
+                                 {
+                                   repository_name: ::String
+                                 },
+                               ],
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ]
+                             ) -> _CreateRepositoryResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRepositoryResponseSuccess
+
+      interface _DeleteDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainResult]
+        def domain: () -> Types::DomainDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#delete_domain-instance_method
+      def delete_domain: (
+                           domain: ::String,
+                           ?domain_owner: ::String
+                         ) -> _DeleteDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainResponseSuccess
+
+      interface _DeleteDomainPermissionsPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainPermissionsPolicyResult]
+        def policy: () -> Types::ResourcePolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#delete_domain_permissions_policy-instance_method
+      def delete_domain_permissions_policy: (
+                                              domain: ::String,
+                                              ?domain_owner: ::String,
+                                              ?policy_revision: ::String
+                                            ) -> _DeleteDomainPermissionsPolicyResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainPermissionsPolicyResponseSuccess
+
+      interface _DeletePackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePackageResult]
+        def deleted_package: () -> Types::PackageSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#delete_package-instance_method
+      def delete_package: (
+                            domain: ::String,
+                            ?domain_owner: ::String,
+                            repository: ::String,
+                            format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift"),
+                            ?namespace: ::String,
+                            package: ::String
+                          ) -> _DeletePackageResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePackageResponseSuccess
+
+      interface _DeletePackageVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePackageVersionsResult]
+        def successful_versions: () -> ::Hash[::String, Types::SuccessfulPackageVersionInfo]
+        def failed_versions: () -> ::Hash[::String, Types::PackageVersionError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#delete_package_versions-instance_method
+      def delete_package_versions: (
+                                     domain: ::String,
+                                     ?domain_owner: ::String,
+                                     repository: ::String,
+                                     format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift"),
+                                     ?namespace: ::String,
+                                     package: ::String,
+                                     versions: Array[::String],
+                                     ?expected_status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted")
+                                   ) -> _DeletePackageVersionsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePackageVersionsResponseSuccess
+
+      interface _DeleteRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRepositoryResult]
+        def repository: () -> Types::RepositoryDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#delete_repository-instance_method
+      def delete_repository: (
+                               domain: ::String,
+                               ?domain_owner: ::String,
+                               repository: ::String
+                             ) -> _DeleteRepositoryResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRepositoryResponseSuccess
+
+      interface _DeleteRepositoryPermissionsPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRepositoryPermissionsPolicyResult]
+        def policy: () -> Types::ResourcePolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#delete_repository_permissions_policy-instance_method
+      def delete_repository_permissions_policy: (
+                                                  domain: ::String,
+                                                  ?domain_owner: ::String,
+                                                  repository: ::String,
+                                                  ?policy_revision: ::String
+                                                ) -> _DeleteRepositoryPermissionsPolicyResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRepositoryPermissionsPolicyResponseSuccess
+
+      interface _DescribeDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainResult]
+        def domain: () -> Types::DomainDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#describe_domain-instance_method
+      def describe_domain: (
+                             domain: ::String,
+                             ?domain_owner: ::String
+                           ) -> _DescribeDomainResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainResponseSuccess
+
+      interface _DescribePackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePackageResult]
+        def package: () -> Types::PackageDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#describe_package-instance_method
+      def describe_package: (
+                              domain: ::String,
+                              ?domain_owner: ::String,
+                              repository: ::String,
+                              format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift"),
+                              ?namespace: ::String,
+                              package: ::String
+                            ) -> _DescribePackageResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePackageResponseSuccess
+
+      interface _DescribePackageVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePackageVersionResult]
+        def package_version: () -> Types::PackageVersionDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#describe_package_version-instance_method
+      def describe_package_version: (
+                                      domain: ::String,
+                                      ?domain_owner: ::String,
+                                      repository: ::String,
+                                      format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift"),
+                                      ?namespace: ::String,
+                                      package: ::String,
+                                      package_version: ::String
+                                    ) -> _DescribePackageVersionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePackageVersionResponseSuccess
+
+      interface _DescribeRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRepositoryResult]
+        def repository: () -> Types::RepositoryDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#describe_repository-instance_method
+      def describe_repository: (
+                                 domain: ::String,
+                                 ?domain_owner: ::String,
+                                 repository: ::String
+                               ) -> _DescribeRepositoryResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRepositoryResponseSuccess
+
+      interface _DisassociateExternalConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateExternalConnectionResult]
+        def repository: () -> Types::RepositoryDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#disassociate_external_connection-instance_method
+      def disassociate_external_connection: (
+                                              domain: ::String,
+                                              ?domain_owner: ::String,
+                                              repository: ::String,
+                                              external_connection: ::String
+                                            ) -> _DisassociateExternalConnectionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateExternalConnectionResponseSuccess
+
+      interface _DisposePackageVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisposePackageVersionsResult]
+        def successful_versions: () -> ::Hash[::String, Types::SuccessfulPackageVersionInfo]
+        def failed_versions: () -> ::Hash[::String, Types::PackageVersionError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#dispose_package_versions-instance_method
+      def dispose_package_versions: (
+                                      domain: ::String,
+                                      ?domain_owner: ::String,
+                                      repository: ::String,
+                                      format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift"),
+                                      ?namespace: ::String,
+                                      package: ::String,
+                                      versions: Array[::String],
+                                      ?version_revisions: Hash[::String, ::String],
+                                      ?expected_status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted")
+                                    ) -> _DisposePackageVersionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisposePackageVersionsResponseSuccess
+
+      interface _GetAuthorizationTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAuthorizationTokenResult]
+        def authorization_token: () -> ::String
+        def expiration: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#get_authorization_token-instance_method
+      def get_authorization_token: (
+                                     domain: ::String,
+                                     ?domain_owner: ::String,
+                                     ?duration_seconds: ::Integer
+                                   ) -> _GetAuthorizationTokenResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAuthorizationTokenResponseSuccess
+
+      interface _GetDomainPermissionsPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainPermissionsPolicyResult]
+        def policy: () -> Types::ResourcePolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#get_domain_permissions_policy-instance_method
+      def get_domain_permissions_policy: (
+                                           domain: ::String,
+                                           ?domain_owner: ::String
+                                         ) -> _GetDomainPermissionsPolicyResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainPermissionsPolicyResponseSuccess
+
+      interface _GetPackageVersionAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPackageVersionAssetResult]
+        def asset: () -> ::IO
+        def asset_name: () -> ::String
+        def package_version: () -> ::String
+        def package_version_revision: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#get_package_version_asset-instance_method
+      def get_package_version_asset: (
+                                       domain: ::String,
+                                       ?domain_owner: ::String,
+                                       repository: ::String,
+                                       format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift"),
+                                       ?namespace: ::String,
+                                       package: ::String,
+                                       package_version: ::String,
+                                       asset: ::String,
+                                       ?package_version_revision: ::String
+                                     ) ?{ (*untyped) -> void } -> _GetPackageVersionAssetResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetPackageVersionAssetResponseSuccess
+
+      interface _GetPackageVersionReadmeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPackageVersionReadmeResult]
+        def format: () -> ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+        def namespace: () -> ::String
+        def package: () -> ::String
+        def version: () -> ::String
+        def version_revision: () -> ::String
+        def readme: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#get_package_version_readme-instance_method
+      def get_package_version_readme: (
+                                        domain: ::String,
+                                        ?domain_owner: ::String,
+                                        repository: ::String,
+                                        format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift"),
+                                        ?namespace: ::String,
+                                        package: ::String,
+                                        package_version: ::String
+                                      ) -> _GetPackageVersionReadmeResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPackageVersionReadmeResponseSuccess
+
+      interface _GetRepositoryEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRepositoryEndpointResult]
+        def repository_endpoint: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#get_repository_endpoint-instance_method
+      def get_repository_endpoint: (
+                                     domain: ::String,
+                                     ?domain_owner: ::String,
+                                     repository: ::String,
+                                     format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+                                   ) -> _GetRepositoryEndpointResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRepositoryEndpointResponseSuccess
+
+      interface _GetRepositoryPermissionsPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRepositoryPermissionsPolicyResult]
+        def policy: () -> Types::ResourcePolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#get_repository_permissions_policy-instance_method
+      def get_repository_permissions_policy: (
+                                               domain: ::String,
+                                               ?domain_owner: ::String,
+                                               repository: ::String
+                                             ) -> _GetRepositoryPermissionsPolicyResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRepositoryPermissionsPolicyResponseSuccess
+
+      interface _ListDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsResult]
+        def domains: () -> ::Array[Types::DomainSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#list_domains-instance_method
+      def list_domains: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListDomainsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainsResponseSuccess
+
+      interface _ListPackageVersionAssetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPackageVersionAssetsResult]
+        def format: () -> ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+        def namespace: () -> ::String
+        def package: () -> ::String
+        def version: () -> ::String
+        def version_revision: () -> ::String
+        def next_token: () -> ::String
+        def assets: () -> ::Array[Types::AssetSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#list_package_version_assets-instance_method
+      def list_package_version_assets: (
+                                         domain: ::String,
+                                         ?domain_owner: ::String,
+                                         repository: ::String,
+                                         format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift"),
+                                         ?namespace: ::String,
+                                         package: ::String,
+                                         package_version: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListPackageVersionAssetsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPackageVersionAssetsResponseSuccess
+
+      interface _ListPackageVersionDependenciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPackageVersionDependenciesResult]
+        def format: () -> ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+        def namespace: () -> ::String
+        def package: () -> ::String
+        def version: () -> ::String
+        def version_revision: () -> ::String
+        def next_token: () -> ::String
+        def dependencies: () -> ::Array[Types::PackageDependency]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#list_package_version_dependencies-instance_method
+      def list_package_version_dependencies: (
+                                               domain: ::String,
+                                               ?domain_owner: ::String,
+                                               repository: ::String,
+                                               format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift"),
+                                               ?namespace: ::String,
+                                               package: ::String,
+                                               package_version: ::String,
+                                               ?next_token: ::String
+                                             ) -> _ListPackageVersionDependenciesResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPackageVersionDependenciesResponseSuccess
+
+      interface _ListPackageVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPackageVersionsResult]
+        def default_display_version: () -> ::String
+        def format: () -> ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+        def namespace: () -> ::String
+        def package: () -> ::String
+        def versions: () -> ::Array[Types::PackageVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#list_package_versions-instance_method
+      def list_package_versions: (
+                                   domain: ::String,
+                                   ?domain_owner: ::String,
+                                   repository: ::String,
+                                   format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift"),
+                                   ?namespace: ::String,
+                                   package: ::String,
+                                   ?status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted"),
+                                   ?sort_by: ("PUBLISHED_TIME"),
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   ?origin_type: ("INTERNAL" | "EXTERNAL" | "UNKNOWN")
+                                 ) -> _ListPackageVersionsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPackageVersionsResponseSuccess
+
+      interface _ListPackagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPackagesResult]
+        def packages: () -> ::Array[Types::PackageSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#list_packages-instance_method
+      def list_packages: (
+                           domain: ::String,
+                           ?domain_owner: ::String,
+                           repository: ::String,
+                           ?format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift"),
+                           ?namespace: ::String,
+                           ?package_prefix: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?publish: ("ALLOW" | "BLOCK"),
+                           ?upstream: ("ALLOW" | "BLOCK")
+                         ) -> _ListPackagesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPackagesResponseSuccess
+
+      interface _ListRepositoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRepositoriesResult]
+        def repositories: () -> ::Array[Types::RepositorySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#list_repositories-instance_method
+      def list_repositories: (
+                               ?repository_prefix: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListRepositoriesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRepositoriesResponseSuccess
+
+      interface _ListRepositoriesInDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRepositoriesInDomainResult]
+        def repositories: () -> ::Array[Types::RepositorySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#list_repositories_in_domain-instance_method
+      def list_repositories_in_domain: (
+                                         domain: ::String,
+                                         ?domain_owner: ::String,
+                                         ?administrator_account: ::String,
+                                         ?repository_prefix: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListRepositoriesInDomainResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRepositoriesInDomainResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResult]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PublishPackageVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PublishPackageVersionResult]
+        def format: () -> ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+        def namespace: () -> ::String
+        def package: () -> ::String
+        def version: () -> ::String
+        def version_revision: () -> ::String
+        def status: () -> ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted")
+        def asset: () -> Types::AssetSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#publish_package_version-instance_method
+      def publish_package_version: (
+                                     domain: ::String,
+                                     ?domain_owner: ::String,
+                                     repository: ::String,
+                                     format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift"),
+                                     ?namespace: ::String,
+                                     package: ::String,
+                                     package_version: ::String,
+                                     asset_content: ::String,
+                                     asset_name: ::String,
+                                     asset_sha256: ::String,
+                                     ?unfinished: bool
+                                   ) -> _PublishPackageVersionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishPackageVersionResponseSuccess
+
+      interface _PutDomainPermissionsPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDomainPermissionsPolicyResult]
+        def policy: () -> Types::ResourcePolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#put_domain_permissions_policy-instance_method
+      def put_domain_permissions_policy: (
+                                           domain: ::String,
+                                           ?domain_owner: ::String,
+                                           ?policy_revision: ::String,
+                                           policy_document: ::String
+                                         ) -> _PutDomainPermissionsPolicyResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDomainPermissionsPolicyResponseSuccess
+
+      interface _PutPackageOriginConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutPackageOriginConfigurationResult]
+        def origin_configuration: () -> Types::PackageOriginConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#put_package_origin_configuration-instance_method
+      def put_package_origin_configuration: (
+                                              domain: ::String,
+                                              ?domain_owner: ::String,
+                                              repository: ::String,
+                                              format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift"),
+                                              ?namespace: ::String,
+                                              package: ::String,
+                                              restrictions: {
+                                                publish: ("ALLOW" | "BLOCK"),
+                                                upstream: ("ALLOW" | "BLOCK")
+                                              }
+                                            ) -> _PutPackageOriginConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPackageOriginConfigurationResponseSuccess
+
+      interface _PutRepositoryPermissionsPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutRepositoryPermissionsPolicyResult]
+        def policy: () -> Types::ResourcePolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#put_repository_permissions_policy-instance_method
+      def put_repository_permissions_policy: (
+                                               domain: ::String,
+                                               ?domain_owner: ::String,
+                                               repository: ::String,
+                                               ?policy_revision: ::String,
+                                               policy_document: ::String
+                                             ) -> _PutRepositoryPermissionsPolicyResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRepositoryPermissionsPolicyResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdatePackageVersionsStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePackageVersionsStatusResult]
+        def successful_versions: () -> ::Hash[::String, Types::SuccessfulPackageVersionInfo]
+        def failed_versions: () -> ::Hash[::String, Types::PackageVersionError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#update_package_versions_status-instance_method
+      def update_package_versions_status: (
+                                            domain: ::String,
+                                            ?domain_owner: ::String,
+                                            repository: ::String,
+                                            format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift"),
+                                            ?namespace: ::String,
+                                            package: ::String,
+                                            versions: Array[::String],
+                                            ?version_revisions: Hash[::String, ::String],
+                                            ?expected_status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted"),
+                                            target_status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted")
+                                          ) -> _UpdatePackageVersionsStatusResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePackageVersionsStatusResponseSuccess
+
+      interface _UpdateRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRepositoryResult]
+        def repository: () -> Types::RepositoryDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#update_repository-instance_method
+      def update_repository: (
+                               domain: ::String,
+                               ?domain_owner: ::String,
+                               repository: ::String,
+                               ?description: ::String,
+                               ?upstreams: Array[
+                                 {
+                                   repository_name: ::String
+                                 },
+                               ]
+                             ) -> _UpdateRepositoryResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRepositoryResponseSuccess
+    end
+  end
+end
+

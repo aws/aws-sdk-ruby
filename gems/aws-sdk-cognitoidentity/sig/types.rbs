@@ -1,0 +1,373 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CognitoIdentity
+  module Types
+
+    class CognitoIdentityProvider
+      attr_accessor provider_name: ::String
+      attr_accessor client_id: ::String
+      attr_accessor server_side_token_check: bool
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIdentityPoolInput
+      attr_accessor identity_pool_name: ::String
+      attr_accessor allow_unauthenticated_identities: bool
+      attr_accessor allow_classic_flow: bool
+      attr_accessor supported_login_providers: ::Hash[::String, ::String]
+      attr_accessor developer_provider_name: ::String
+      attr_accessor open_id_connect_provider_arns: ::Array[::String]
+      attr_accessor cognito_identity_providers: ::Array[Types::CognitoIdentityProvider]
+      attr_accessor saml_provider_arns: ::Array[::String]
+      attr_accessor identity_pool_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Credentials
+      attr_accessor access_key_id: ::String
+      attr_accessor secret_key: ::String
+      attr_accessor session_token: ::String
+      attr_accessor expiration: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteIdentitiesInput
+      attr_accessor identity_ids_to_delete: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteIdentitiesResponse
+      attr_accessor unprocessed_identity_ids: ::Array[Types::UnprocessedIdentityId]
+      SENSITIVE: []
+    end
+
+    class DeleteIdentityPoolInput
+      attr_accessor identity_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeIdentityInput
+      attr_accessor identity_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeIdentityPoolInput
+      attr_accessor identity_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeveloperUserAlreadyRegisteredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetCredentialsForIdentityInput
+      attr_accessor identity_id: ::String
+      attr_accessor logins: ::Hash[::String, ::String]
+      attr_accessor custom_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetCredentialsForIdentityResponse
+      attr_accessor identity_id: ::String
+      attr_accessor credentials: Types::Credentials
+      SENSITIVE: []
+    end
+
+    class GetIdInput
+      attr_accessor account_id: ::String
+      attr_accessor identity_pool_id: ::String
+      attr_accessor logins: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetIdResponse
+      attr_accessor identity_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetIdentityPoolRolesInput
+      attr_accessor identity_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetIdentityPoolRolesResponse
+      attr_accessor identity_pool_id: ::String
+      attr_accessor roles: ::Hash[::String, ::String]
+      attr_accessor role_mappings: ::Hash[::String, Types::RoleMapping]
+      SENSITIVE: []
+    end
+
+    class GetOpenIdTokenForDeveloperIdentityInput
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor logins: ::Hash[::String, ::String]
+      attr_accessor principal_tags: ::Hash[::String, ::String]
+      attr_accessor token_duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetOpenIdTokenForDeveloperIdentityResponse
+      attr_accessor identity_id: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class GetOpenIdTokenInput
+      attr_accessor identity_id: ::String
+      attr_accessor logins: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetOpenIdTokenResponse
+      attr_accessor identity_id: ::String
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class GetPrincipalTagAttributeMapInput
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_provider_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPrincipalTagAttributeMapResponse
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_provider_name: ::String
+      attr_accessor use_defaults: bool
+      attr_accessor principal_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class IdentityDescription
+      attr_accessor identity_id: ::String
+      attr_accessor logins: ::Array[::String]
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class IdentityPool
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_pool_name: ::String
+      attr_accessor allow_unauthenticated_identities: bool
+      attr_accessor allow_classic_flow: bool
+      attr_accessor supported_login_providers: ::Hash[::String, ::String]
+      attr_accessor developer_provider_name: ::String
+      attr_accessor open_id_connect_provider_arns: ::Array[::String]
+      attr_accessor cognito_identity_providers: ::Array[Types::CognitoIdentityProvider]
+      attr_accessor saml_provider_arns: ::Array[::String]
+      attr_accessor identity_pool_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class IdentityPoolShortDescription
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_pool_name: ::String
+      SENSITIVE: []
+    end
+
+    class InternalErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidIdentityPoolConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentitiesInput
+      attr_accessor identity_pool_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor hide_disabled: bool
+      SENSITIVE: []
+    end
+
+    class ListIdentitiesResponse
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identities: ::Array[Types::IdentityDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentityPoolsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentityPoolsResponse
+      attr_accessor identity_pools: ::Array[Types::IdentityPoolShortDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LookupDeveloperIdentityInput
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_id: ::String
+      attr_accessor developer_user_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LookupDeveloperIdentityResponse
+      attr_accessor identity_id: ::String
+      attr_accessor developer_user_identifier_list: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MappingRule
+      attr_accessor claim: ::String
+      attr_accessor match_type: ("Equals" | "Contains" | "StartsWith" | "NotEqual")
+      attr_accessor value: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MergeDeveloperIdentitiesInput
+      attr_accessor source_user_identifier: ::String
+      attr_accessor destination_user_identifier: ::String
+      attr_accessor developer_provider_name: ::String
+      attr_accessor identity_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class MergeDeveloperIdentitiesResponse
+      attr_accessor identity_id: ::String
+      SENSITIVE: []
+    end
+
+    class NotAuthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RoleMapping
+      attr_accessor type: ("Token" | "Rules")
+      attr_accessor ambiguous_role_resolution: ("AuthenticatedRole" | "Deny")
+      attr_accessor rules_configuration: Types::RulesConfigurationType
+      SENSITIVE: []
+    end
+
+    class RulesConfigurationType
+      attr_accessor rules: ::Array[Types::MappingRule]
+      SENSITIVE: []
+    end
+
+    class SetIdentityPoolRolesInput
+      attr_accessor identity_pool_id: ::String
+      attr_accessor roles: ::Hash[::String, ::String]
+      attr_accessor role_mappings: ::Hash[::String, Types::RoleMapping]
+      SENSITIVE: []
+    end
+
+    class SetPrincipalTagAttributeMapInput
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_provider_name: ::String
+      attr_accessor use_defaults: bool
+      attr_accessor principal_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SetPrincipalTagAttributeMapResponse
+      attr_accessor identity_pool_id: ::String
+      attr_accessor identity_provider_name: ::String
+      attr_accessor use_defaults: bool
+      attr_accessor principal_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnlinkDeveloperIdentityInput
+      attr_accessor identity_id: ::String
+      attr_accessor identity_pool_id: ::String
+      attr_accessor developer_provider_name: ::String
+      attr_accessor developer_user_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UnlinkIdentityInput
+      attr_accessor identity_id: ::String
+      attr_accessor logins: ::Hash[::String, ::String]
+      attr_accessor logins_to_remove: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UnprocessedIdentityId
+      attr_accessor identity_id: ::String
+      attr_accessor error_code: ("AccessDenied" | "InternalServerError")
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+  end
+end

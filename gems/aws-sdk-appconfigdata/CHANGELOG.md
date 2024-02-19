@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.18.0 (2024-01-22)
+------------------
+
+* Feature - Fix FIPS Endpoints in aws-us-gov.
+
+1.17.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.15.0 (2023-09-27)
 ------------------
 

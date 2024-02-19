@@ -1,0 +1,34 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudTrailData
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ChannelInsufficientPermission < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ChannelNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ChannelUnsupportedSchema < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DuplicatedAuditEventId < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidChannelARN < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedOperationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

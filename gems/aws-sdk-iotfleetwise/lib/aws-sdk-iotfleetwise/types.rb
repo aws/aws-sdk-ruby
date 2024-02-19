@@ -73,6 +73,13 @@ module Aws::IoTFleetWise
     #   A comment in addition to the description.
     #   @return [String]
     #
+    # @!attribute [rw] struct_fully_qualified_name
+    #   The fully qualified name of the struct node for the actuator if the
+    #   data type of the actuator is `Struct` or `StructArray`. For example,
+    #   the struct fully qualified name of an actuator might be
+    #   `Vehicle.Door.LockStruct`.
+    #   @return [String]
+    #
     class Actuator < Struct.new(
       :fully_qualified_name,
       :data_type,
@@ -83,7 +90,8 @@ module Aws::IoTFleetWise
       :max,
       :assigned_value,
       :deprecation_message,
-      :comment)
+      :comment,
+      :struct_fully_qualified_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -331,7 +339,7 @@ module Aws::IoTFleetWise
     # @!attribute [rw] can_dbc_files
     #   A list of DBC files. You can upload only one DBC file for each
     #   network interface and specify up to five (inclusive) files in the
-    #   list.
+    #   list. The DBC file can be a maximum size of 200 MB.
     #   @return [Array<String>]
     #
     # @!attribute [rw] signals_map
@@ -476,7 +484,7 @@ module Aws::IoTFleetWise
     #
     # @!attribute [rw] expression
     #   The logical expression used to recognize what data to collect. For
-    #   example, `$variable.Vehicle.OutsideAirTemperature >= 105.0`.
+    #   example, `` $variable.`Vehicle.OutsideAirTemperature` >= 105.0 ``.
     #   @return [String]
     #
     # @!attribute [rw] minimum_trigger_interval_ms
@@ -1015,6 +1023,85 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
+    # Represents a member of the complex data structure. The data type of
+    # the property can be either primitive or another `struct`.
+    #
+    # @!attribute [rw] fully_qualified_name
+    #   The fully qualified name of the custom property. For example, the
+    #   fully qualified name of a custom property might be
+    #   `ComplexDataTypes.VehicleDataTypes.SVMCamera.FPS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type
+    #   The data type for the custom property.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_encoding
+    #   Indicates whether the property is binary data.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the custom property.
+    #   @return [String]
+    #
+    # @!attribute [rw] deprecation_message
+    #   The deprecation message for the node or the branch that was moved or
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   A comment in addition to the description.
+    #   @return [String]
+    #
+    # @!attribute [rw] struct_fully_qualified_name
+    #   The fully qualified name of the struct node for the custom property
+    #   if the data type of the custom property is `Struct` or
+    #   `StructArray`.
+    #   @return [String]
+    #
+    class CustomProperty < Struct.new(
+      :fully_qualified_name,
+      :data_type,
+      :data_encoding,
+      :description,
+      :deprecation_message,
+      :comment,
+      :struct_fully_qualified_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The custom structure represents a complex or higher-order data
+    # structure.
+    #
+    # @!attribute [rw] fully_qualified_name
+    #   The fully qualified name of the custom structure. For example, the
+    #   fully qualified name of a custom structure might be
+    #   `ComplexDataTypes.VehicleDataTypes.SVMCamera`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the custom structure.
+    #   @return [String]
+    #
+    # @!attribute [rw] deprecation_message
+    #   The deprecation message for the node or the branch that was moved or
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   A comment in addition to the description.
+    #   @return [String]
+    #
+    class CustomStruct < Struct.new(
+      :fully_qualified_name,
+      :description,
+      :deprecation_message,
+      :comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The destination where the Amazon Web Services IoT FleetWise campaign
     # sends data. You can send data to be stored in Amazon S3 or Amazon
     # Timestream.
@@ -1082,6 +1169,12 @@ module Aws::IoTFleetWise
     #   epoch (January 1, 1970 at midnight UTC time).
     #   @return [Time]
     #
+    # @!attribute [rw] message
+    #   The detailed message for the decoder manifest. When a decoder
+    #   manifest is in an `INVALID` status, the message contains detailed
+    #   reason and help information.
+    #   @return [String]
+    #
     class DecoderManifestSummary < Struct.new(
       :name,
       :arn,
@@ -1089,7 +1182,8 @@ module Aws::IoTFleetWise
       :description,
       :status,
       :creation_time,
-      :last_modification_time)
+      :last_modification_time,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1532,6 +1626,12 @@ module Aws::IoTFleetWise
     #   epoch (January 1, 1970 at midnight UTC time).
     #   @return [Time]
     #
+    # @!attribute [rw] message
+    #   The detailed message for the decoder manifest. When a decoder
+    #   manifest is in an `INVALID` status, the message contains detailed
+    #   reason and help information.
+    #   @return [String]
+    #
     class GetDecoderManifestResponse < Struct.new(
       :name,
       :arn,
@@ -1539,7 +1639,8 @@ module Aws::IoTFleetWise
       :model_manifest_arn,
       :status,
       :creation_time,
-      :last_modification_time)
+      :last_modification_time,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1557,7 +1658,7 @@ module Aws::IoTFleetWise
     #   @return [String]
     #
     # @!attribute [rw] encryption_type
-    #   The type of encryption. Set to `KMS_BASED_ENCRYPTION` to use an KMS
+    #   The type of encryption. Set to `KMS_BASED_ENCRYPTION` to use a KMS
     #   key that you own and manage. Set to `FLEETWISE_DEFAULT_ENCRYPTION`
     #   to use an Amazon Web Services managed key that is owned by the
     #   Amazon Web Services IoT FleetWise service account.
@@ -2107,9 +2208,14 @@ module Aws::IoTFleetWise
     #   A message about why the signal decoder isn't valid.
     #   @return [String]
     #
+    # @!attribute [rw] hint
+    #   The possible cause for the invalid signal decoder.
+    #   @return [String]
+    #
     class InvalidSignalDecoder < Struct.new(
       :name,
-      :reason)
+      :reason,
+      :hint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2505,10 +2611,15 @@ module Aws::IoTFleetWise
     #   The maximum number of items to return, between 1 and 100, inclusive.
     #   @return [Integer]
     #
+    # @!attribute [rw] signal_node_type
+    #   The type of node in the signal catalog.
+    #   @return [String]
+    #
     class ListSignalCatalogNodesRequest < Struct.new(
       :name,
       :next_token,
-      :max_results)
+      :max_results,
+      :signal_node_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2672,6 +2783,28 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
+    # The decoding information for a specific message which support higher
+    # order data types.
+    #
+    # @!attribute [rw] topic_name
+    #   The topic name for the message signal. It corresponds to topics in
+    #   ROS 2.
+    #   @return [String]
+    #
+    # @!attribute [rw] structured_message
+    #   The structured message for the message signal. It can be defined
+    #   with either a `primitiveMessageDefinition`,
+    #   `structuredMessageListDefinition`, or `structuredMessageDefinition`
+    #   recursively.
+    #   @return [Types::StructuredMessage]
+    #
+    class MessageSignal < Struct.new(
+      :topic_name,
+      :structured_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a vehicle model (model manifest). You can use the
     # API operation to return this information about multiple vehicle
     # models.
@@ -2768,11 +2901,17 @@ module Aws::IoTFleetWise
     #   diagnostic (OBD) II protocol.
     #   @return [Types::ObdInterface]
     #
+    # @!attribute [rw] vehicle_middleware
+    #   The vehicle middleware defined as a type of network interface.
+    #   Examples of vehicle middleware include `ROS2` and `SOME/IP`.
+    #   @return [Types::VehicleMiddleware]
+    #
     class NetworkInterface < Struct.new(
       :interface_id,
       :type,
       :can_interface,
-      :obd_interface)
+      :obd_interface,
+      :vehicle_middleware)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2818,11 +2957,22 @@ module Aws::IoTFleetWise
     #    </note>
     #   @return [Types::Attribute]
     #
+    # @!attribute [rw] struct
+    #   Represents a complex or higher-order data structure.
+    #   @return [Types::CustomStruct]
+    #
+    # @!attribute [rw] property
+    #   Represents a member of the complex data structure. The `datatype` of
+    #   the property can be either primitive or another `struct`.
+    #   @return [Types::CustomProperty]
+    #
     class Node < Struct.new(
       :branch,
       :sensor,
       :actuator,
       :attribute,
+      :struct,
+      :property,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -2832,6 +2982,8 @@ module Aws::IoTFleetWise
       class Sensor < Node; end
       class Actuator < Node; end
       class Attribute < Node; end
+      class Struct < Node; end
+      class Property < Node; end
       class Unknown < Node; end
     end
 
@@ -2862,12 +3014,22 @@ module Aws::IoTFleetWise
     #   actuators.
     #   @return [Integer]
     #
+    # @!attribute [rw] total_structs
+    #   The total structure for the node.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_properties
+    #   The total properties for the node.
+    #   @return [Integer]
+    #
     class NodeCounts < Struct.new(
       :total_nodes,
       :total_branches,
       :total_sensors,
       :total_attributes,
-      :total_actuators)
+      :total_actuators,
+      :total_structs,
+      :total_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2971,6 +3133,28 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
+    # Represents a primitive type node of the complex data structure.
+    #
+    # @note PrimitiveMessageDefinition is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note PrimitiveMessageDefinition is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PrimitiveMessageDefinition corresponding to the set member.
+    #
+    # @!attribute [rw] ros2_primitive_message_definition
+    #   Information about a `PrimitiveMessage` using a ROS 2 compliant
+    #   primitive type message of the complex data structure.
+    #   @return [Types::ROS2PrimitiveMessageDefinition]
+    #
+    class PrimitiveMessageDefinition < Struct.new(
+      :ros2_primitive_message_definition,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Ros2PrimitiveMessageDefinition < PrimitiveMessageDefinition; end
+      class Unknown < PrimitiveMessageDefinition; end
+    end
+
     # @!attribute [rw] kms_key_id
     #   The ID of the KMS key that is used for encryption.
     #   @return [String]
@@ -3023,6 +3207,37 @@ module Aws::IoTFleetWise
     end
 
     class PutLoggingOptionsResponse < Aws::EmptyStructure; end
+
+    # Represents a ROS 2 compliant primitive type message of the complex
+    # data structure.
+    #
+    # @!attribute [rw] primitive_type
+    #   The primitive type (integer, floating point, boolean, etc.) for the
+    #   ROS 2 primitive message definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] offset
+    #   The offset used to calculate the signal value. Combined with
+    #   scaling, the calculation is `value = raw_value * scaling + offset`.
+    #   @return [Float]
+    #
+    # @!attribute [rw] scaling
+    #   A multiplier used to decode the message.
+    #   @return [Float]
+    #
+    # @!attribute [rw] upper_bound
+    #   An optional attribute specifying the upper bound for `STRING` and
+    #   `WSTRING`.
+    #   @return [Integer]
+    #
+    class ROS2PrimitiveMessageDefinition < Struct.new(
+      :primitive_type,
+      :offset,
+      :scaling,
+      :upper_bound)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] timestream_resources
     #   The registered Amazon Timestream resources that Amazon Web Services
@@ -3202,6 +3417,13 @@ module Aws::IoTFleetWise
     #   A comment in addition to the description.
     #   @return [String]
     #
+    # @!attribute [rw] struct_fully_qualified_name
+    #   The fully qualified name of the struct node for a sensor if the data
+    #   type of the actuator is `Struct` or `StructArray`. For example, the
+    #   struct fully qualified name of a sensor might be
+    #   `Vehicle.ADAS.CameraStruct`.
+    #   @return [String]
+    #
     class Sensor < Struct.new(
       :fully_qualified_name,
       :data_type,
@@ -3211,7 +3433,8 @@ module Aws::IoTFleetWise
       :min,
       :max,
       :deprecation_message,
-      :comment)
+      :comment,
+      :struct_fully_qualified_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3275,12 +3498,18 @@ module Aws::IoTFleetWise
     #   II protocol.
     #   @return [Types::ObdSignal]
     #
+    # @!attribute [rw] message_signal
+    #   The decoding information for a specific message which supports
+    #   higher order data types.
+    #   @return [Types::MessageSignal]
+    #
     class SignalDecoder < Struct.new(
       :fully_qualified_name,
       :type,
       :interface_id,
       :can_signal,
-      :obd_signal)
+      :obd_signal,
+      :message_signal)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3309,6 +3538,88 @@ module Aws::IoTFleetWise
       :name,
       :max_sample_count,
       :minimum_sampling_interval_ms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structured message for the message signal. It can be defined with
+    # either a `primitiveMessageDefinition`,
+    # `structuredMessageListDefinition`, or `structuredMessageDefinition`
+    # recursively.
+    #
+    # @note StructuredMessage is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note StructuredMessage is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of StructuredMessage corresponding to the set member.
+    #
+    # @!attribute [rw] primitive_message_definition
+    #   Represents a primitive type node of the complex data structure.
+    #   @return [Types::PrimitiveMessageDefinition]
+    #
+    # @!attribute [rw] structured_message_list_definition
+    #   Represents a list type node of the complex data structure.
+    #   @return [Types::StructuredMessageListDefinition]
+    #
+    # @!attribute [rw] structured_message_definition
+    #   Represents a struct type node of the complex data structure.
+    #   @return [Array<Types::StructuredMessageFieldNameAndDataTypePair>]
+    #
+    class StructuredMessage < Struct.new(
+      :primitive_message_definition,
+      :structured_message_list_definition,
+      :structured_message_definition,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class PrimitiveMessageDefinition < StructuredMessage; end
+      class StructuredMessageListDefinition < StructuredMessage; end
+      class StructuredMessageDefinition < StructuredMessage; end
+      class Unknown < StructuredMessage; end
+    end
+
+    # Represents a `StructureMessageName` to `DataType` map element.
+    #
+    # @!attribute [rw] field_name
+    #   The field name of the structured message. It determines how a data
+    #   value is referenced in the target language.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type
+    #   The data type.
+    #   @return [Types::StructuredMessage]
+    #
+    class StructuredMessageFieldNameAndDataTypePair < Struct.new(
+      :field_name,
+      :data_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a list type node of the complex data structure.
+    #
+    # @!attribute [rw] name
+    #   The name of the structured message list definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] member_type
+    #   The member type of the structured message list definition.
+    #   @return [Types::StructuredMessage]
+    #
+    # @!attribute [rw] list_type
+    #   The type of list of the structured message list definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity
+    #   The capacity of the structured message list definition when the list
+    #   type is `FIXED_CAPACITY` or `DYNAMIC_BOUNDED_CAPACITY`.
+    #   @return [Integer]
+    #
+    class StructuredMessageListDefinition < Struct.new(
+      :name,
+      :member_type,
+      :list_type,
+      :capacity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3937,6 +4248,24 @@ module Aws::IoTFleetWise
       include Aws::Structure
     end
 
+    # The vehicle middleware defined as a type of network interface.
+    # Examples of vehicle middleware include `ROS2` and `SOME/IP`.
+    #
+    # @!attribute [rw] name
+    #   The name of the vehicle middleware.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol_name
+    #   The protocol name of the vehicle middleware.
+    #   @return [String]
+    #
+    class VehicleMiddleware < Struct.new(
+      :name,
+      :protocol_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the state of a vehicle and how it relates to the
     # status of a campaign.
     #
@@ -4005,13 +4334,20 @@ module Aws::IoTFleetWise
     #   (January 1, 1970 at midnight UTC time).
     #   @return [Time]
     #
+    # @!attribute [rw] attributes
+    #   Static information about a vehicle in a key-value pair. For example:
+    #
+    #   `"engineType"` : `"1.3 L R2"`
+    #   @return [Hash<String,String>]
+    #
     class VehicleSummary < Struct.new(
       :vehicle_name,
       :arn,
       :model_manifest_arn,
       :decoder_manifest_arn,
       :creation_time,
-      :last_modification_time)
+      :last_modification_time,
+      :attributes)
       SENSITIVE = []
       include Aws::Structure
     end

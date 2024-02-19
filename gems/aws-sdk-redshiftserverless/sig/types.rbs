@@ -1,0 +1,1014 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::RedshiftServerless
+  module Types
+
+    class AccessDeniedException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Association
+      attr_accessor custom_domain_certificate_arn: ::String
+      attr_accessor custom_domain_certificate_expiry_time: ::Time
+      attr_accessor custom_domain_name: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigParameter
+      attr_accessor parameter_key: ::String
+      attr_accessor parameter_value: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConvertRecoveryPointToSnapshotRequest
+      attr_accessor recovery_point_id: ::String
+      attr_accessor retention_period: ::Integer
+      attr_accessor snapshot_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ConvertRecoveryPointToSnapshotResponse
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class CreateCustomDomainAssociationRequest
+      attr_accessor custom_domain_certificate_arn: ::String
+      attr_accessor custom_domain_name: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomDomainAssociationResponse
+      attr_accessor custom_domain_certificate_arn: ::String
+      attr_accessor custom_domain_certificate_expiry_time: ::Time
+      attr_accessor custom_domain_name: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEndpointAccessRequest
+      attr_accessor endpoint_name: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEndpointAccessResponse
+      attr_accessor endpoint: Types::EndpointAccess
+      SENSITIVE: []
+    end
+
+    class CreateNamespaceRequest
+      attr_accessor admin_password_secret_kms_key_id: ::String
+      attr_accessor admin_user_password: ::String
+      attr_accessor admin_username: ::String
+      attr_accessor db_name: ::String
+      attr_accessor default_iam_role_arn: ::String
+      attr_accessor iam_roles: ::Array[::String]
+      attr_accessor kms_key_id: ::String
+      attr_accessor log_exports: ::Array[("useractivitylog" | "userlog" | "connectionlog")]
+      attr_accessor manage_admin_password: bool
+      attr_accessor namespace_name: ::String
+      attr_accessor redshift_idc_application_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:admin_user_password, :admin_username]
+    end
+
+    class CreateNamespaceResponse
+      attr_accessor namespace: Types::Namespace
+      SENSITIVE: []
+    end
+
+    class CreateScheduledActionRequest
+      attr_accessor enabled: bool
+      attr_accessor end_time: ::Time
+      attr_accessor namespace_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor schedule: Types::Schedule
+      attr_accessor scheduled_action_description: ::String
+      attr_accessor scheduled_action_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor target_action: Types::TargetAction
+      SENSITIVE: []
+    end
+
+    class CreateScheduledActionResponse
+      attr_accessor scheduled_action: Types::ScheduledActionResponse
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotCopyConfigurationRequest
+      attr_accessor destination_kms_key_id: ::String
+      attr_accessor destination_region: ::String
+      attr_accessor namespace_name: ::String
+      attr_accessor snapshot_retention_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotCopyConfigurationResponse
+      attr_accessor snapshot_copy_configuration: Types::SnapshotCopyConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotRequest
+      attr_accessor namespace_name: ::String
+      attr_accessor retention_period: ::Integer
+      attr_accessor snapshot_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotResponse
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class CreateSnapshotScheduleActionParameters
+      attr_accessor namespace_name: ::String
+      attr_accessor retention_period: ::Integer
+      attr_accessor snapshot_name_prefix: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateUsageLimitRequest
+      attr_accessor amount: ::Integer
+      attr_accessor breach_action: ("log" | "emit-metric" | "deactivate")
+      attr_accessor period: ("daily" | "weekly" | "monthly")
+      attr_accessor resource_arn: ::String
+      attr_accessor usage_type: ("serverless-compute" | "cross-region-datasharing")
+      SENSITIVE: []
+    end
+
+    class CreateUsageLimitResponse
+      attr_accessor usage_limit: Types::UsageLimit
+      SENSITIVE: []
+    end
+
+    class CreateWorkgroupRequest
+      attr_accessor base_capacity: ::Integer
+      attr_accessor config_parameters: ::Array[Types::ConfigParameter]
+      attr_accessor enhanced_vpc_routing: bool
+      attr_accessor max_capacity: ::Integer
+      attr_accessor namespace_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor publicly_accessible: bool
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkgroupResponse
+      attr_accessor workgroup: Types::Workgroup
+      SENSITIVE: []
+    end
+
+    class DeleteCustomDomainAssociationRequest
+      attr_accessor custom_domain_name: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomDomainAssociationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteEndpointAccessRequest
+      attr_accessor endpoint_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEndpointAccessResponse
+      attr_accessor endpoint: Types::EndpointAccess
+      SENSITIVE: []
+    end
+
+    class DeleteNamespaceRequest
+      attr_accessor final_snapshot_name: ::String
+      attr_accessor final_snapshot_retention_period: ::Integer
+      attr_accessor namespace_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNamespaceResponse
+      attr_accessor namespace: Types::Namespace
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteScheduledActionRequest
+      attr_accessor scheduled_action_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteScheduledActionResponse
+      attr_accessor scheduled_action: Types::ScheduledActionResponse
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotCopyConfigurationRequest
+      attr_accessor snapshot_copy_configuration_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotCopyConfigurationResponse
+      attr_accessor snapshot_copy_configuration: Types::SnapshotCopyConfiguration
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotRequest
+      attr_accessor snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSnapshotResponse
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class DeleteUsageLimitRequest
+      attr_accessor usage_limit_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUsageLimitResponse
+      attr_accessor usage_limit: Types::UsageLimit
+      SENSITIVE: []
+    end
+
+    class DeleteWorkgroupRequest
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkgroupResponse
+      attr_accessor workgroup: Types::Workgroup
+      SENSITIVE: []
+    end
+
+    class Endpoint
+      attr_accessor address: ::String
+      attr_accessor port: ::Integer
+      attr_accessor vpc_endpoints: ::Array[Types::VpcEndpoint]
+      SENSITIVE: []
+    end
+
+    class EndpointAccess
+      attr_accessor address: ::String
+      attr_accessor endpoint_arn: ::String
+      attr_accessor endpoint_create_time: ::Time
+      attr_accessor endpoint_name: ::String
+      attr_accessor endpoint_status: ::String
+      attr_accessor port: ::Integer
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor vpc_endpoint: Types::VpcEndpoint
+      attr_accessor vpc_security_groups: ::Array[Types::VpcSecurityGroupMembership]
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCredentialsRequest
+      attr_accessor custom_domain_name: ::String
+      attr_accessor db_name: ::String
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCredentialsResponse
+      attr_accessor db_password: ::String
+      attr_accessor db_user: ::String
+      attr_accessor expiration: ::Time
+      attr_accessor next_refresh_time: ::Time
+      SENSITIVE: [:db_password, :db_user]
+    end
+
+    class GetCustomDomainAssociationRequest
+      attr_accessor custom_domain_name: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCustomDomainAssociationResponse
+      attr_accessor custom_domain_certificate_arn: ::String
+      attr_accessor custom_domain_certificate_expiry_time: ::Time
+      attr_accessor custom_domain_name: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetEndpointAccessRequest
+      attr_accessor endpoint_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetEndpointAccessResponse
+      attr_accessor endpoint: Types::EndpointAccess
+      SENSITIVE: []
+    end
+
+    class GetNamespaceRequest
+      attr_accessor namespace_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetNamespaceResponse
+      attr_accessor namespace: Types::Namespace
+      SENSITIVE: []
+    end
+
+    class GetRecoveryPointRequest
+      attr_accessor recovery_point_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecoveryPointResponse
+      attr_accessor recovery_point: Types::RecoveryPoint
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResponse
+      attr_accessor resource_policy: Types::ResourcePolicy
+      SENSITIVE: []
+    end
+
+    class GetScheduledActionRequest
+      attr_accessor scheduled_action_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetScheduledActionResponse
+      attr_accessor scheduled_action: Types::ScheduledActionResponse
+      SENSITIVE: []
+    end
+
+    class GetSnapshotRequest
+      attr_accessor owner_account: ::String
+      attr_accessor snapshot_arn: ::String
+      attr_accessor snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetSnapshotResponse
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class GetTableRestoreStatusRequest
+      attr_accessor table_restore_request_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTableRestoreStatusResponse
+      attr_accessor table_restore_status: Types::TableRestoreStatus
+      SENSITIVE: []
+    end
+
+    class GetUsageLimitRequest
+      attr_accessor usage_limit_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetUsageLimitResponse
+      attr_accessor usage_limit: Types::UsageLimit
+      SENSITIVE: []
+    end
+
+    class GetWorkgroupRequest
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkgroupResponse
+      attr_accessor workgroup: Types::Workgroup
+      SENSITIVE: []
+    end
+
+    class InsufficientCapacityException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPaginationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomDomainAssociationsRequest
+      attr_accessor custom_domain_certificate_arn: ::String
+      attr_accessor custom_domain_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomDomainAssociationsResponse
+      attr_accessor associations: ::Array[Types::Association]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEndpointAccessRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListEndpointAccessResponse
+      attr_accessor endpoints: ::Array[Types::EndpointAccess]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNamespacesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNamespacesResponse
+      attr_accessor namespaces: ::Array[Types::Namespace]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPointsRequest
+      attr_accessor end_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor namespace_arn: ::String
+      attr_accessor namespace_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListRecoveryPointsResponse
+      attr_accessor next_token: ::String
+      attr_accessor recovery_points: ::Array[Types::RecoveryPoint]
+      SENSITIVE: []
+    end
+
+    class ListScheduledActionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor namespace_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListScheduledActionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor scheduled_actions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListSnapshotCopyConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor namespace_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSnapshotCopyConfigurationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor snapshot_copy_configurations: ::Array[Types::SnapshotCopyConfiguration]
+      SENSITIVE: []
+    end
+
+    class ListSnapshotsRequest
+      attr_accessor end_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor namespace_arn: ::String
+      attr_accessor namespace_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListSnapshotsResponse
+      attr_accessor next_token: ::String
+      attr_accessor snapshots: ::Array[Types::Snapshot]
+      SENSITIVE: []
+    end
+
+    class ListTableRestoreStatusRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor namespace_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListTableRestoreStatusResponse
+      attr_accessor next_token: ::String
+      attr_accessor table_restore_statuses: ::Array[Types::TableRestoreStatus]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListUsageLimitsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor usage_type: ("serverless-compute" | "cross-region-datasharing")
+      SENSITIVE: []
+    end
+
+    class ListUsageLimitsResponse
+      attr_accessor next_token: ::String
+      attr_accessor usage_limits: ::Array[Types::UsageLimit]
+      SENSITIVE: []
+    end
+
+    class ListWorkgroupsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor owner_account: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkgroupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor workgroups: ::Array[Types::Workgroup]
+      SENSITIVE: []
+    end
+
+    class Namespace
+      attr_accessor admin_password_secret_arn: ::String
+      attr_accessor admin_password_secret_kms_key_id: ::String
+      attr_accessor admin_username: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor db_name: ::String
+      attr_accessor default_iam_role_arn: ::String
+      attr_accessor iam_roles: ::Array[::String]
+      attr_accessor kms_key_id: ::String
+      attr_accessor log_exports: ::Array[("useractivitylog" | "userlog" | "connectionlog")]
+      attr_accessor namespace_arn: ::String
+      attr_accessor namespace_id: ::String
+      attr_accessor namespace_name: ::String
+      attr_accessor status: ("AVAILABLE" | "MODIFYING" | "DELETING")
+      SENSITIVE: [:admin_username]
+    end
+
+    class NetworkInterface
+      attr_accessor availability_zone: ::String
+      attr_accessor network_interface_id: ::String
+      attr_accessor private_ip_address: ::String
+      attr_accessor subnet_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor policy: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse
+      attr_accessor resource_policy: Types::ResourcePolicy
+      SENSITIVE: []
+    end
+
+    class RecoveryPoint
+      attr_accessor namespace_arn: ::String
+      attr_accessor namespace_name: ::String
+      attr_accessor recovery_point_create_time: ::Time
+      attr_accessor recovery_point_id: ::String
+      attr_accessor total_size_in_mega_bytes: ::Float
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcePolicy
+      attr_accessor policy: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreFromRecoveryPointRequest
+      attr_accessor namespace_name: ::String
+      attr_accessor recovery_point_id: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreFromRecoveryPointResponse
+      attr_accessor namespace: Types::Namespace
+      attr_accessor recovery_point_id: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreFromSnapshotRequest
+      attr_accessor admin_password_secret_kms_key_id: ::String
+      attr_accessor manage_admin_password: bool
+      attr_accessor namespace_name: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor snapshot_arn: ::String
+      attr_accessor snapshot_name: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreFromSnapshotResponse
+      attr_accessor namespace: Types::Namespace
+      attr_accessor owner_account: ::String
+      attr_accessor snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreTableFromRecoveryPointRequest
+      attr_accessor activate_case_sensitive_identifier: bool
+      attr_accessor namespace_name: ::String
+      attr_accessor new_table_name: ::String
+      attr_accessor recovery_point_id: ::String
+      attr_accessor source_database_name: ::String
+      attr_accessor source_schema_name: ::String
+      attr_accessor source_table_name: ::String
+      attr_accessor target_database_name: ::String
+      attr_accessor target_schema_name: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreTableFromRecoveryPointResponse
+      attr_accessor table_restore_status: Types::TableRestoreStatus
+      SENSITIVE: []
+    end
+
+    class RestoreTableFromSnapshotRequest
+      attr_accessor activate_case_sensitive_identifier: bool
+      attr_accessor namespace_name: ::String
+      attr_accessor new_table_name: ::String
+      attr_accessor snapshot_name: ::String
+      attr_accessor source_database_name: ::String
+      attr_accessor source_schema_name: ::String
+      attr_accessor source_table_name: ::String
+      attr_accessor target_database_name: ::String
+      attr_accessor target_schema_name: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreTableFromSnapshotResponse
+      attr_accessor table_restore_status: Types::TableRestoreStatus
+      SENSITIVE: []
+    end
+
+    class Schedule
+      attr_accessor at: ::Time
+      attr_accessor cron: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class At < Schedule
+      end
+      class Cron < Schedule
+      end
+      class Unknown < Schedule
+      end
+    end
+
+    class ScheduledActionResponse
+      attr_accessor end_time: ::Time
+      attr_accessor namespace_name: ::String
+      attr_accessor next_invocations: ::Array[::Time]
+      attr_accessor role_arn: ::String
+      attr_accessor schedule: Types::Schedule
+      attr_accessor scheduled_action_description: ::String
+      attr_accessor scheduled_action_name: ::String
+      attr_accessor scheduled_action_uuid: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor state: ("ACTIVE" | "DISABLED")
+      attr_accessor target_action: Types::TargetAction
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Snapshot
+      attr_accessor accounts_with_provisioned_restore_access: ::Array[::String]
+      attr_accessor accounts_with_restore_access: ::Array[::String]
+      attr_accessor actual_incremental_backup_size_in_mega_bytes: ::Float
+      attr_accessor admin_password_secret_arn: ::String
+      attr_accessor admin_password_secret_kms_key_id: ::String
+      attr_accessor admin_username: ::String
+      attr_accessor backup_progress_in_mega_bytes: ::Float
+      attr_accessor current_backup_rate_in_mega_bytes_per_second: ::Float
+      attr_accessor elapsed_time_in_seconds: ::Integer
+      attr_accessor estimated_seconds_to_completion: ::Integer
+      attr_accessor kms_key_id: ::String
+      attr_accessor namespace_arn: ::String
+      attr_accessor namespace_name: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor snapshot_arn: ::String
+      attr_accessor snapshot_create_time: ::Time
+      attr_accessor snapshot_name: ::String
+      attr_accessor snapshot_remaining_days: ::Integer
+      attr_accessor snapshot_retention_period: ::Integer
+      attr_accessor snapshot_retention_start_time: ::Time
+      attr_accessor status: ("AVAILABLE" | "CREATING" | "DELETED" | "CANCELLED" | "FAILED" | "COPYING")
+      attr_accessor total_backup_size_in_mega_bytes: ::Float
+      SENSITIVE: []
+    end
+
+    class SnapshotCopyConfiguration
+      attr_accessor destination_kms_key_id: ::String
+      attr_accessor destination_region: ::String
+      attr_accessor namespace_name: ::String
+      attr_accessor snapshot_copy_configuration_arn: ::String
+      attr_accessor snapshot_copy_configuration_id: ::String
+      attr_accessor snapshot_retention_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class TableRestoreStatus
+      attr_accessor message: ::String
+      attr_accessor namespace_name: ::String
+      attr_accessor new_table_name: ::String
+      attr_accessor progress_in_mega_bytes: ::Integer
+      attr_accessor recovery_point_id: ::String
+      attr_accessor request_time: ::Time
+      attr_accessor snapshot_name: ::String
+      attr_accessor source_database_name: ::String
+      attr_accessor source_schema_name: ::String
+      attr_accessor source_table_name: ::String
+      attr_accessor status: ::String
+      attr_accessor table_restore_request_id: ::String
+      attr_accessor target_database_name: ::String
+      attr_accessor target_schema_name: ::String
+      attr_accessor total_data_in_mega_bytes: ::Integer
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TargetAction
+      attr_accessor create_snapshot: Types::CreateSnapshotScheduleActionParameters
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CreateSnapshot < TargetAction
+      end
+      class Unknown < TargetAction
+      end
+    end
+
+    class ThrottlingException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCustomDomainAssociationRequest
+      attr_accessor custom_domain_certificate_arn: ::String
+      attr_accessor custom_domain_name: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCustomDomainAssociationResponse
+      attr_accessor custom_domain_certificate_arn: ::String
+      attr_accessor custom_domain_certificate_expiry_time: ::Time
+      attr_accessor custom_domain_name: ::String
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEndpointAccessRequest
+      attr_accessor endpoint_name: ::String
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateEndpointAccessResponse
+      attr_accessor endpoint: Types::EndpointAccess
+      SENSITIVE: []
+    end
+
+    class UpdateNamespaceRequest
+      attr_accessor admin_password_secret_kms_key_id: ::String
+      attr_accessor admin_user_password: ::String
+      attr_accessor admin_username: ::String
+      attr_accessor default_iam_role_arn: ::String
+      attr_accessor iam_roles: ::Array[::String]
+      attr_accessor kms_key_id: ::String
+      attr_accessor log_exports: ::Array[("useractivitylog" | "userlog" | "connectionlog")]
+      attr_accessor manage_admin_password: bool
+      attr_accessor namespace_name: ::String
+      SENSITIVE: [:admin_user_password, :admin_username]
+    end
+
+    class UpdateNamespaceResponse
+      attr_accessor namespace: Types::Namespace
+      SENSITIVE: []
+    end
+
+    class UpdateScheduledActionRequest
+      attr_accessor enabled: bool
+      attr_accessor end_time: ::Time
+      attr_accessor role_arn: ::String
+      attr_accessor schedule: Types::Schedule
+      attr_accessor scheduled_action_description: ::String
+      attr_accessor scheduled_action_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor target_action: Types::TargetAction
+      SENSITIVE: []
+    end
+
+    class UpdateScheduledActionResponse
+      attr_accessor scheduled_action: Types::ScheduledActionResponse
+      SENSITIVE: []
+    end
+
+    class UpdateSnapshotCopyConfigurationRequest
+      attr_accessor snapshot_copy_configuration_id: ::String
+      attr_accessor snapshot_retention_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateSnapshotCopyConfigurationResponse
+      attr_accessor snapshot_copy_configuration: Types::SnapshotCopyConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateSnapshotRequest
+      attr_accessor retention_period: ::Integer
+      attr_accessor snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSnapshotResponse
+      attr_accessor snapshot: Types::Snapshot
+      SENSITIVE: []
+    end
+
+    class UpdateUsageLimitRequest
+      attr_accessor amount: ::Integer
+      attr_accessor breach_action: ("log" | "emit-metric" | "deactivate")
+      attr_accessor usage_limit_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUsageLimitResponse
+      attr_accessor usage_limit: Types::UsageLimit
+      SENSITIVE: []
+    end
+
+    class UpdateWorkgroupRequest
+      attr_accessor base_capacity: ::Integer
+      attr_accessor config_parameters: ::Array[Types::ConfigParameter]
+      attr_accessor enhanced_vpc_routing: bool
+      attr_accessor max_capacity: ::Integer
+      attr_accessor port: ::Integer
+      attr_accessor publicly_accessible: bool
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor workgroup_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateWorkgroupResponse
+      attr_accessor workgroup: Types::Workgroup
+      SENSITIVE: []
+    end
+
+    class UsageLimit
+      attr_accessor amount: ::Integer
+      attr_accessor breach_action: ("log" | "emit-metric" | "deactivate")
+      attr_accessor period: ("daily" | "weekly" | "monthly")
+      attr_accessor resource_arn: ::String
+      attr_accessor usage_limit_arn: ::String
+      attr_accessor usage_limit_id: ::String
+      attr_accessor usage_type: ("serverless-compute" | "cross-region-datasharing")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VpcEndpoint
+      attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
+      attr_accessor vpc_endpoint_id: ::String
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class VpcSecurityGroupMembership
+      attr_accessor status: ::String
+      attr_accessor vpc_security_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class Workgroup
+      attr_accessor base_capacity: ::Integer
+      attr_accessor config_parameters: ::Array[Types::ConfigParameter]
+      attr_accessor creation_date: ::Time
+      attr_accessor cross_account_vpcs: ::Array[::String]
+      attr_accessor custom_domain_certificate_arn: ::String
+      attr_accessor custom_domain_certificate_expiry_time: ::Time
+      attr_accessor custom_domain_name: ::String
+      attr_accessor endpoint: Types::Endpoint
+      attr_accessor enhanced_vpc_routing: bool
+      attr_accessor max_capacity: ::Integer
+      attr_accessor namespace_name: ::String
+      attr_accessor patch_version: ::String
+      attr_accessor port: ::Integer
+      attr_accessor publicly_accessible: bool
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor status: ("CREATING" | "AVAILABLE" | "MODIFYING" | "DELETING")
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor workgroup_arn: ::String
+      attr_accessor workgroup_id: ::String
+      attr_accessor workgroup_name: ::String
+      attr_accessor workgroup_version: ::String
+      SENSITIVE: []
+    end
+  end
+end

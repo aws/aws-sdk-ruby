@@ -462,6 +462,9 @@ module Aws::Braket
     #   container image the job uses and information about the Python scripts
     #   used for entry and training.
     #
+    # @option params [Array<Types::Association>] :associations
+    #   The list of Amazon Braket resources associated with the hybrid job.
+    #
     # @option params [Types::JobCheckpointConfig] :checkpoint_config
     #   Information about the output locations for job checkpoint data.
     #
@@ -527,6 +530,12 @@ module Aws::Braket
     #         s3_uri: "S3Path", # required
     #       },
     #     },
+    #     associations: [
+    #       {
+    #         arn: "BraketResourceArn", # required
+    #         type: "RESERVATION_TIME_WINDOW_ARN", # required, accepts RESERVATION_TIME_WINDOW_ARN
+    #       },
+    #     ],
     #     checkpoint_config: {
     #       local_path: "String4096",
     #       s3_uri: "S3Path", # required
@@ -590,6 +599,9 @@ module Aws::Braket
     #   when the required value (Hash, Array, etc.) is provided according to
     #   the description.**
     #
+    # @option params [Array<Types::Association>] :associations
+    #   The list of Amazon Braket resources associated with the quantum task.
+    #
     # @option params [required, String] :client_token
     #   The client token associated with the request.
     #
@@ -631,6 +643,12 @@ module Aws::Braket
     #
     #   resp = client.create_quantum_task({
     #     action: "JsonValue", # required
+    #     associations: [
+    #       {
+    #         arn: "BraketResourceArn", # required
+    #         type: "RESERVATION_TIME_WINDOW_ARN", # required, accepts RESERVATION_TIME_WINDOW_ARN
+    #       },
+    #     ],
     #     client_token: "String64", # required
     #     device_arn: "DeviceArn", # required
     #     device_parameters: "CreateQuantumTaskRequestDeviceParametersString",
@@ -722,6 +740,7 @@ module Aws::Braket
     # @return [Types::GetJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetJobResponse#algorithm_specification #algorithm_specification} => Types::AlgorithmSpecification
+    #   * {Types::GetJobResponse#associations #associations} => Array&lt;Types::Association&gt;
     #   * {Types::GetJobResponse#billable_duration #billable_duration} => Integer
     #   * {Types::GetJobResponse#checkpoint_config #checkpoint_config} => Types::JobCheckpointConfig
     #   * {Types::GetJobResponse#created_at #created_at} => Time
@@ -755,6 +774,9 @@ module Aws::Braket
     #   resp.algorithm_specification.script_mode_config.compression_type #=> String, one of "NONE", "GZIP"
     #   resp.algorithm_specification.script_mode_config.entry_point #=> String
     #   resp.algorithm_specification.script_mode_config.s3_uri #=> String
+    #   resp.associations #=> Array
+    #   resp.associations[0].arn #=> String
+    #   resp.associations[0].type #=> String, one of "RESERVATION_TIME_WINDOW_ARN"
     #   resp.billable_duration #=> Integer
     #   resp.checkpoint_config.local_path #=> String
     #   resp.checkpoint_config.s3_uri #=> String
@@ -804,10 +826,11 @@ module Aws::Braket
     #   A list of attributes to return information for.
     #
     # @option params [required, String] :quantum_task_arn
-    #   the ARN of the task to retrieve.
+    #   The ARN of the task to retrieve.
     #
     # @return [Types::GetQuantumTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetQuantumTaskResponse#associations #associations} => Array&lt;Types::Association&gt;
     #   * {Types::GetQuantumTaskResponse#created_at #created_at} => Time
     #   * {Types::GetQuantumTaskResponse#device_arn #device_arn} => String
     #   * {Types::GetQuantumTaskResponse#device_parameters #device_parameters} => String
@@ -831,6 +854,9 @@ module Aws::Braket
     #
     # @example Response structure
     #
+    #   resp.associations #=> Array
+    #   resp.associations[0].arn #=> String
+    #   resp.associations[0].type #=> String, one of "RESERVATION_TIME_WINDOW_ARN"
     #   resp.created_at #=> Time
     #   resp.device_arn #=> String
     #   resp.device_parameters #=> String
@@ -1124,7 +1150,7 @@ module Aws::Braket
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-braket'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,0 +1,134 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IoTJobsDataPlane
+  module Types
+
+    class CertificateValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobExecutionRequest
+      attr_accessor job_id: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor include_job_document: bool
+      attr_accessor execution_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeJobExecutionResponse
+      attr_accessor execution: Types::JobExecution
+      SENSITIVE: []
+    end
+
+    class GetPendingJobExecutionsRequest
+      attr_accessor thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPendingJobExecutionsResponse
+      attr_accessor in_progress_jobs: ::Array[Types::JobExecutionSummary]
+      attr_accessor queued_jobs: ::Array[Types::JobExecutionSummary]
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidStateTransitionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobExecution
+      attr_accessor job_id: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "REJECTED" | "REMOVED" | "CANCELED")
+      attr_accessor status_details: ::Hash[::String, ::String]
+      attr_accessor queued_at: ::Integer
+      attr_accessor started_at: ::Integer
+      attr_accessor last_updated_at: ::Integer
+      attr_accessor approximate_seconds_before_timed_out: ::Integer
+      attr_accessor version_number: ::Integer
+      attr_accessor execution_number: ::Integer
+      attr_accessor job_document: ::String
+      SENSITIVE: []
+    end
+
+    class JobExecutionState
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "REJECTED" | "REMOVED" | "CANCELED")
+      attr_accessor status_details: ::Hash[::String, ::String]
+      attr_accessor version_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class JobExecutionSummary
+      attr_accessor job_id: ::String
+      attr_accessor queued_at: ::Integer
+      attr_accessor started_at: ::Integer
+      attr_accessor last_updated_at: ::Integer
+      attr_accessor version_number: ::Integer
+      attr_accessor execution_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartNextPendingJobExecutionRequest
+      attr_accessor thing_name: ::String
+      attr_accessor status_details: ::Hash[::String, ::String]
+      attr_accessor step_timeout_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartNextPendingJobExecutionResponse
+      attr_accessor execution: Types::JobExecution
+      SENSITIVE: []
+    end
+
+    class TerminalStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor payload: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateJobExecutionRequest
+      attr_accessor job_id: ::String
+      attr_accessor thing_name: ::String
+      attr_accessor status: ("QUEUED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "TIMED_OUT" | "REJECTED" | "REMOVED" | "CANCELED")
+      attr_accessor status_details: ::Hash[::String, ::String]
+      attr_accessor step_timeout_in_minutes: ::Integer
+      attr_accessor expected_version: ::Integer
+      attr_accessor include_job_execution_state: bool
+      attr_accessor include_job_document: bool
+      attr_accessor execution_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateJobExecutionResponse
+      attr_accessor execution_state: Types::JobExecutionState
+      attr_accessor job_document: ::String
+      SENSITIVE: []
+    end
+  end
+end

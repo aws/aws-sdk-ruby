@@ -1,0 +1,118 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IAM
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html
+    class Group
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#name-instance_method
+      def name: () -> String
+      alias group_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#path-instance_method
+      def path: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#group_id-instance_method
+      def group_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#arn-instance_method
+      def arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#create_date-instance_method
+      def create_date: () -> ::Time
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#data-instance_method
+      def data: () -> Types::Group
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#add_user-instance_method
+      def add_user: (
+                      user_name: ::String
+                    ) -> ::Aws::EmptyStructure
+                  | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#attach_policy-instance_method
+      def attach_policy: (
+                           policy_arn: ::String
+                         ) -> ::Aws::EmptyStructure
+                       | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#create-instance_method
+      def create: (
+                    ?path: ::String
+                  ) -> Group
+                | (?Hash[Symbol, untyped]) -> Group
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#create_policy-instance_method
+      def create_policy: (
+                           policy_name: ::String,
+                           policy_document: ::String
+                         ) -> GroupPolicy
+                       | (?Hash[Symbol, untyped]) -> GroupPolicy
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#detach_policy-instance_method
+      def detach_policy: (
+                           policy_arn: ::String
+                         ) -> ::Aws::EmptyStructure
+                       | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#remove_user-instance_method
+      def remove_user: (
+                         user_name: ::String
+                       ) -> ::Aws::EmptyStructure
+                     | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#update-instance_method
+      def update: (
+                    ?new_path: ::String,
+                    ?new_group_name: ::String
+                  ) -> Group
+                | (?Hash[Symbol, untyped]) -> Group
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#attached_policies-instance_method
+      def attached_policies: (
+                               ?path_prefix: ::String
+                             ) -> Policy::Collection
+                           | (?Hash[Symbol, untyped]) -> Policy::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#policies-instance_method
+      def policies: (
+                    ) -> GroupPolicy::Collection
+                  | (?Hash[Symbol, untyped]) -> GroupPolicy::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#policy-instance_method
+      def policy: (String name) -> GroupPolicy
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/Group.html#users-instance_method
+      def users: (
+                 ) -> User::Collection
+               | (?Hash[Symbol, untyped]) -> User::Collection
+
+      class Collection < ::Aws::Resources::Collection[Group]
+      end
+    end
+  end
+end

@@ -14,6 +14,7 @@ module Aws::S3Control
       option(
         :endpoint_provider,
         doc_type: 'Aws::S3Control::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::S3Control
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -56,6 +58,14 @@ module Aws::S3Control
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :associate_access_grants_identity_center
+            Aws::S3Control::Endpoints::AssociateAccessGrantsIdentityCenter.build(context)
+          when :create_access_grant
+            Aws::S3Control::Endpoints::CreateAccessGrant.build(context)
+          when :create_access_grants_instance
+            Aws::S3Control::Endpoints::CreateAccessGrantsInstance.build(context)
+          when :create_access_grants_location
+            Aws::S3Control::Endpoints::CreateAccessGrantsLocation.build(context)
           when :create_access_point
             Aws::S3Control::Endpoints::CreateAccessPoint.build(context)
           when :create_access_point_for_object_lambda
@@ -66,6 +76,16 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::CreateJob.build(context)
           when :create_multi_region_access_point
             Aws::S3Control::Endpoints::CreateMultiRegionAccessPoint.build(context)
+          when :create_storage_lens_group
+            Aws::S3Control::Endpoints::CreateStorageLensGroup.build(context)
+          when :delete_access_grant
+            Aws::S3Control::Endpoints::DeleteAccessGrant.build(context)
+          when :delete_access_grants_instance
+            Aws::S3Control::Endpoints::DeleteAccessGrantsInstance.build(context)
+          when :delete_access_grants_instance_resource_policy
+            Aws::S3Control::Endpoints::DeleteAccessGrantsInstanceResourcePolicy.build(context)
+          when :delete_access_grants_location
+            Aws::S3Control::Endpoints::DeleteAccessGrantsLocation.build(context)
           when :delete_access_point
             Aws::S3Control::Endpoints::DeleteAccessPoint.build(context)
           when :delete_access_point_for_object_lambda
@@ -94,10 +114,24 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::DeleteStorageLensConfiguration.build(context)
           when :delete_storage_lens_configuration_tagging
             Aws::S3Control::Endpoints::DeleteStorageLensConfigurationTagging.build(context)
+          when :delete_storage_lens_group
+            Aws::S3Control::Endpoints::DeleteStorageLensGroup.build(context)
           when :describe_job
             Aws::S3Control::Endpoints::DescribeJob.build(context)
           when :describe_multi_region_access_point_operation
             Aws::S3Control::Endpoints::DescribeMultiRegionAccessPointOperation.build(context)
+          when :dissociate_access_grants_identity_center
+            Aws::S3Control::Endpoints::DissociateAccessGrantsIdentityCenter.build(context)
+          when :get_access_grant
+            Aws::S3Control::Endpoints::GetAccessGrant.build(context)
+          when :get_access_grants_instance
+            Aws::S3Control::Endpoints::GetAccessGrantsInstance.build(context)
+          when :get_access_grants_instance_for_prefix
+            Aws::S3Control::Endpoints::GetAccessGrantsInstanceForPrefix.build(context)
+          when :get_access_grants_instance_resource_policy
+            Aws::S3Control::Endpoints::GetAccessGrantsInstanceResourcePolicy.build(context)
+          when :get_access_grants_location
+            Aws::S3Control::Endpoints::GetAccessGrantsLocation.build(context)
           when :get_access_point
             Aws::S3Control::Endpoints::GetAccessPoint.build(context)
           when :get_access_point_configuration_for_object_lambda
@@ -124,6 +158,8 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::GetBucketTagging.build(context)
           when :get_bucket_versioning
             Aws::S3Control::Endpoints::GetBucketVersioning.build(context)
+          when :get_data_access
+            Aws::S3Control::Endpoints::GetDataAccess.build(context)
           when :get_job_tagging
             Aws::S3Control::Endpoints::GetJobTagging.build(context)
           when :get_multi_region_access_point
@@ -140,6 +176,14 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::GetStorageLensConfiguration.build(context)
           when :get_storage_lens_configuration_tagging
             Aws::S3Control::Endpoints::GetStorageLensConfigurationTagging.build(context)
+          when :get_storage_lens_group
+            Aws::S3Control::Endpoints::GetStorageLensGroup.build(context)
+          when :list_access_grants
+            Aws::S3Control::Endpoints::ListAccessGrants.build(context)
+          when :list_access_grants_instances
+            Aws::S3Control::Endpoints::ListAccessGrantsInstances.build(context)
+          when :list_access_grants_locations
+            Aws::S3Control::Endpoints::ListAccessGrantsLocations.build(context)
           when :list_access_points
             Aws::S3Control::Endpoints::ListAccessPoints.build(context)
           when :list_access_points_for_object_lambda
@@ -152,6 +196,12 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::ListRegionalBuckets.build(context)
           when :list_storage_lens_configurations
             Aws::S3Control::Endpoints::ListStorageLensConfigurations.build(context)
+          when :list_storage_lens_groups
+            Aws::S3Control::Endpoints::ListStorageLensGroups.build(context)
+          when :list_tags_for_resource
+            Aws::S3Control::Endpoints::ListTagsForResource.build(context)
+          when :put_access_grants_instance_resource_policy
+            Aws::S3Control::Endpoints::PutAccessGrantsInstanceResourcePolicy.build(context)
           when :put_access_point_configuration_for_object_lambda
             Aws::S3Control::Endpoints::PutAccessPointConfigurationForObjectLambda.build(context)
           when :put_access_point_policy
@@ -180,10 +230,18 @@ module Aws::S3Control
             Aws::S3Control::Endpoints::PutStorageLensConfigurationTagging.build(context)
           when :submit_multi_region_access_point_routes
             Aws::S3Control::Endpoints::SubmitMultiRegionAccessPointRoutes.build(context)
+          when :tag_resource
+            Aws::S3Control::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::S3Control::Endpoints::UntagResource.build(context)
+          when :update_access_grants_location
+            Aws::S3Control::Endpoints::UpdateAccessGrantsLocation.build(context)
           when :update_job_priority
             Aws::S3Control::Endpoints::UpdateJobPriority.build(context)
           when :update_job_status
             Aws::S3Control::Endpoints::UpdateJobStatus.build(context)
+          when :update_storage_lens_group
+            Aws::S3Control::Endpoints::UpdateStorageLensGroup.build(context)
           end
         end
       end

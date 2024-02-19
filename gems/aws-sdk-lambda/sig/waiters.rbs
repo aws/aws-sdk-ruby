@@ -1,0 +1,79 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Lambda
+    module Waiters
+
+      class FunctionActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionConfigurationResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionConfigurationResponseSuccess
+      end
+
+      class FunctionActiveV2
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionResponseSuccess
+      end
+
+      class FunctionExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionResponseSuccess
+      end
+
+      class FunctionUpdated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionConfigurationResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionConfigurationResponseSuccess
+      end
+
+      class FunctionUpdatedV2
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionResponseSuccess
+      end
+
+      class PublishedVersionActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionConfigurationResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetFunctionConfigurationResponseSuccess
+      end
+    end
+  end
+end

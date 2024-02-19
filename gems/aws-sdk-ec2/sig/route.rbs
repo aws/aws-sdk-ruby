@@ -1,0 +1,113 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EC2
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html
+    class Route
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#initialize-instance_method
+      def initialize: (String route_table_id, String destination_cidr_block, Hash[Symbol, untyped] options) -> void
+                    | (route_table_id: String, destination_cidr_block: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#route_table_id-instance_method
+      def route_table_id: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#destination_cidr_block-instance_method
+      def destination_cidr_block: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#destination_ipv_6_cidr_block-instance_method
+      def destination_ipv_6_cidr_block: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#destination_prefix_list_id-instance_method
+      def destination_prefix_list_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#egress_only_internet_gateway_id-instance_method
+      def egress_only_internet_gateway_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#gateway_id-instance_method
+      def gateway_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#instance_id-instance_method
+      def instance_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#instance_owner_id-instance_method
+      def instance_owner_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#nat_gateway_id-instance_method
+      def nat_gateway_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#transit_gateway_id-instance_method
+      def transit_gateway_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#local_gateway_id-instance_method
+      def local_gateway_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#carrier_gateway_id-instance_method
+      def carrier_gateway_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#network_interface_id-instance_method
+      def network_interface_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#origin-instance_method
+      def origin: () -> ("CreateRouteTable" | "CreateRoute" | "EnableVgwRoutePropagation")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#state-instance_method
+      def state: () -> ("active" | "blackhole")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#vpc_peering_connection_id-instance_method
+      def vpc_peering_connection_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#core_network_arn-instance_method
+      def core_network_arn: () -> ::String
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#data-instance_method
+      def data: () -> Types::Route
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#delete-instance_method
+      def delete: (
+                    ?destination_ipv_6_cidr_block: ::String,
+                    ?destination_prefix_list_id: ::String,
+                    ?dry_run: bool
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#replace-instance_method
+      def replace: (
+                     ?destination_ipv_6_cidr_block: ::String,
+                     ?destination_prefix_list_id: ::String,
+                     ?dry_run: bool,
+                     ?vpc_endpoint_id: ::String,
+                     ?egress_only_internet_gateway_id: ::String,
+                     ?gateway_id: ::String,
+                     ?instance_id: ::String,
+                     ?local_target: bool,
+                     ?nat_gateway_id: ::String,
+                     ?transit_gateway_id: ::String,
+                     ?local_gateway_id: ::String,
+                     ?carrier_gateway_id: ::String,
+                     ?network_interface_id: ::String,
+                     ?vpc_peering_connection_id: ::String,
+                     ?core_network_arn: ::String
+                   ) -> ::Aws::EmptyStructure
+                 | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Route.html#route_table-instance_method
+      def route_table: () -> RouteTable
+
+      class Collection < ::Aws::Resources::Collection[Route]
+      end
+    end
+  end
+end

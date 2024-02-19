@@ -1,0 +1,187 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::KendraRanking
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CapacityUnitsConfiguration
+      attr_accessor rescore_capacity_units: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRescoreExecutionPlanRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor capacity_units: Types::CapacityUnitsConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRescoreExecutionPlanResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRescoreExecutionPlanRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRescoreExecutionPlanRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRescoreExecutionPlanResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor capacity_units: Types::CapacityUnitsConfiguration
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class Document
+      attr_accessor id: ::String
+      attr_accessor group_id: ::String
+      attr_accessor title: ::String
+      attr_accessor body: ::String
+      attr_accessor tokenized_title: ::Array[::String]
+      attr_accessor tokenized_body: ::Array[::String]
+      attr_accessor original_score: ::Float
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListRescoreExecutionPlansRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRescoreExecutionPlansResponse
+      attr_accessor summary_items: ::Array[Types::RescoreExecutionPlanSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class RescoreExecutionPlanSummary
+      attr_accessor name: ::String
+      attr_accessor id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "ACTIVE" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class RescoreRequest
+      attr_accessor rescore_execution_plan_id: ::String
+      attr_accessor search_query: ::String
+      attr_accessor documents: ::Array[Types::Document]
+      SENSITIVE: []
+    end
+
+    class RescoreResult
+      attr_accessor rescore_id: ::String
+      attr_accessor result_items: ::Array[Types::RescoreResultItem]
+      SENSITIVE: []
+    end
+
+    class RescoreResultItem
+      attr_accessor document_id: ::String
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateRescoreExecutionPlanRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor capacity_units: Types::CapacityUnitsConfiguration
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

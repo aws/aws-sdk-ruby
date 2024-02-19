@@ -99,6 +99,8 @@ module Aws::LocationService
     CreateRouteCalculatorResponse = Shapes::StructureShape.new(name: 'CreateRouteCalculatorResponse')
     CreateTrackerRequest = Shapes::StructureShape.new(name: 'CreateTrackerRequest')
     CreateTrackerResponse = Shapes::StructureShape.new(name: 'CreateTrackerResponse')
+    CustomLayer = Shapes::StringShape.new(name: 'CustomLayer')
+    CustomLayerList = Shapes::ListShape.new(name: 'CustomLayerList')
     DataSourceConfiguration = Shapes::StructureShape.new(name: 'DataSourceConfiguration')
     DeleteGeofenceCollectionRequest = Shapes::StructureShape.new(name: 'DeleteGeofenceCollectionRequest')
     DeleteGeofenceCollectionResponse = Shapes::StructureShape.new(name: 'DeleteGeofenceCollectionResponse')
@@ -220,6 +222,7 @@ module Aws::LocationService
     MapConfiguration = Shapes::StructureShape.new(name: 'MapConfiguration')
     MapConfigurationUpdate = Shapes::StructureShape.new(name: 'MapConfigurationUpdate')
     MapStyle = Shapes::StringShape.new(name: 'MapStyle')
+    OptimizationMode = Shapes::StringShape.new(name: 'OptimizationMode')
     Place = Shapes::StructureShape.new(name: 'Place')
     PlaceCategory = Shapes::StringShape.new(name: 'PlaceCategory')
     PlaceCategoryList = Shapes::ListShape.new(name: 'PlaceCategoryList')
@@ -490,6 +493,7 @@ module Aws::LocationService
     CalculateRouteMatrixSummary.add_member(:route_count, Shapes::ShapeRef.new(shape: CalculateRouteMatrixSummaryRouteCountInteger, required: true, location_name: "RouteCount"))
     CalculateRouteMatrixSummary.struct_class = Types::CalculateRouteMatrixSummary
 
+    CalculateRouteRequest.add_member(:arrival_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ArrivalTime"))
     CalculateRouteRequest.add_member(:calculator_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "CalculatorName"))
     CalculateRouteRequest.add_member(:car_mode_options, Shapes::ShapeRef.new(shape: CalculateRouteCarModeOptions, location_name: "CarModeOptions"))
     CalculateRouteRequest.add_member(:depart_now, Shapes::ShapeRef.new(shape: Boolean, location_name: "DepartNow"))
@@ -499,6 +503,7 @@ module Aws::LocationService
     CalculateRouteRequest.add_member(:distance_unit, Shapes::ShapeRef.new(shape: DistanceUnit, location_name: "DistanceUnit"))
     CalculateRouteRequest.add_member(:include_leg_geometry, Shapes::ShapeRef.new(shape: Boolean, location_name: "IncludeLegGeometry"))
     CalculateRouteRequest.add_member(:key, Shapes::ShapeRef.new(shape: ApiKey, location: "querystring", location_name: "key"))
+    CalculateRouteRequest.add_member(:optimize_for, Shapes::ShapeRef.new(shape: OptimizationMode, location_name: "OptimizeFor"))
     CalculateRouteRequest.add_member(:travel_mode, Shapes::ShapeRef.new(shape: TravelMode, location_name: "TravelMode"))
     CalculateRouteRequest.add_member(:truck_mode_options, Shapes::ShapeRef.new(shape: CalculateRouteTruckModeOptions, location_name: "TruckModeOptions"))
     CalculateRouteRequest.add_member(:waypoint_positions, Shapes::ShapeRef.new(shape: CalculateRouteRequestWaypointPositionsList, location_name: "WaypointPositions"))
@@ -612,6 +617,8 @@ module Aws::LocationService
     CreateTrackerResponse.add_member(:tracker_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "TrackerName"))
     CreateTrackerResponse.struct_class = Types::CreateTrackerResponse
 
+    CustomLayerList.member = Shapes::ShapeRef.new(shape: CustomLayer)
+
     DataSourceConfiguration.add_member(:intended_use, Shapes::ShapeRef.new(shape: IntendedUse, location_name: "IntendedUse"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
@@ -620,6 +627,7 @@ module Aws::LocationService
 
     DeleteGeofenceCollectionResponse.struct_class = Types::DeleteGeofenceCollectionResponse
 
+    DeleteKeyRequest.add_member(:force_delete, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "forceDelete"))
     DeleteKeyRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "KeyName"))
     DeleteKeyRequest.struct_class = Types::DeleteKeyRequest
 
@@ -1040,10 +1048,12 @@ module Aws::LocationService
 
     ListTrackersResponseEntryList.member = Shapes::ShapeRef.new(shape: ListTrackersResponseEntry)
 
+    MapConfiguration.add_member(:custom_layers, Shapes::ShapeRef.new(shape: CustomLayerList, location_name: "CustomLayers"))
     MapConfiguration.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode3, location_name: "PoliticalView"))
     MapConfiguration.add_member(:style, Shapes::ShapeRef.new(shape: MapStyle, required: true, location_name: "Style"))
     MapConfiguration.struct_class = Types::MapConfiguration
 
+    MapConfigurationUpdate.add_member(:custom_layers, Shapes::ShapeRef.new(shape: CustomLayerList, location_name: "CustomLayers"))
     MapConfigurationUpdate.add_member(:political_view, Shapes::ShapeRef.new(shape: CountryCode3OrEmpty, location_name: "PoliticalView"))
     MapConfigurationUpdate.struct_class = Types::MapConfigurationUpdate
 
@@ -1058,6 +1068,7 @@ module Aws::LocationService
     Place.add_member(:postal_code, Shapes::ShapeRef.new(shape: String, location_name: "PostalCode"))
     Place.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "Region"))
     Place.add_member(:street, Shapes::ShapeRef.new(shape: String, location_name: "Street"))
+    Place.add_member(:sub_municipality, Shapes::ShapeRef.new(shape: String, location_name: "SubMunicipality"))
     Place.add_member(:sub_region, Shapes::ShapeRef.new(shape: String, location_name: "SubRegion"))
     Place.add_member(:supplemental_categories, Shapes::ShapeRef.new(shape: PlaceSupplementalCategoryList, location_name: "SupplementalCategories"))
     Place.add_member(:time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "TimeZone"))

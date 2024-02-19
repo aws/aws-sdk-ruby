@@ -1,0 +1,1444 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ElastiCache
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddTagsToResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagListMessage]
+        def tag_list: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#add_tags_to_resource-instance_method
+      def add_tags_to_resource: (
+                                  resource_name: ::String,
+                                  tags: Array[
+                                    {
+                                      key: ::String?,
+                                      value: ::String?
+                                    },
+                                  ]
+                                ) -> _AddTagsToResourceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsToResourceResponseSuccess
+
+      interface _AuthorizeCacheSecurityGroupIngressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AuthorizeCacheSecurityGroupIngressResult]
+        def cache_security_group: () -> Types::CacheSecurityGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#authorize_cache_security_group_ingress-instance_method
+      def authorize_cache_security_group_ingress: (
+                                                    cache_security_group_name: ::String,
+                                                    ec2_security_group_name: ::String,
+                                                    ec2_security_group_owner_id: ::String
+                                                  ) -> _AuthorizeCacheSecurityGroupIngressResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AuthorizeCacheSecurityGroupIngressResponseSuccess
+
+      interface _BatchApplyUpdateActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateActionResultsMessage]
+        def processed_update_actions: () -> ::Array[Types::ProcessedUpdateAction]
+        def unprocessed_update_actions: () -> ::Array[Types::UnprocessedUpdateAction]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#batch_apply_update_action-instance_method
+      def batch_apply_update_action: (
+                                       ?replication_group_ids: Array[::String],
+                                       ?cache_cluster_ids: Array[::String],
+                                       service_update_name: ::String
+                                     ) -> _BatchApplyUpdateActionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchApplyUpdateActionResponseSuccess
+
+      interface _BatchStopUpdateActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateActionResultsMessage]
+        def processed_update_actions: () -> ::Array[Types::ProcessedUpdateAction]
+        def unprocessed_update_actions: () -> ::Array[Types::UnprocessedUpdateAction]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#batch_stop_update_action-instance_method
+      def batch_stop_update_action: (
+                                      ?replication_group_ids: Array[::String],
+                                      ?cache_cluster_ids: Array[::String],
+                                      service_update_name: ::String
+                                    ) -> _BatchStopUpdateActionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchStopUpdateActionResponseSuccess
+
+      interface _CompleteMigrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CompleteMigrationResponse]
+        def replication_group: () -> Types::ReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#complete_migration-instance_method
+      def complete_migration: (
+                                replication_group_id: ::String,
+                                ?force: bool
+                              ) -> _CompleteMigrationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CompleteMigrationResponseSuccess
+
+      interface _CopyServerlessCacheSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopyServerlessCacheSnapshotResponse]
+        def serverless_cache_snapshot: () -> Types::ServerlessCacheSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#copy_serverless_cache_snapshot-instance_method
+      def copy_serverless_cache_snapshot: (
+                                            source_serverless_cache_snapshot_name: ::String,
+                                            target_serverless_cache_snapshot_name: ::String,
+                                            ?kms_key_id: ::String,
+                                            ?tags: Array[
+                                              {
+                                                key: ::String?,
+                                                value: ::String?
+                                              },
+                                            ]
+                                          ) -> _CopyServerlessCacheSnapshotResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyServerlessCacheSnapshotResponseSuccess
+
+      interface _CopySnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopySnapshotResult]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#copy_snapshot-instance_method
+      def copy_snapshot: (
+                           source_snapshot_name: ::String,
+                           target_snapshot_name: ::String,
+                           ?target_bucket: ::String,
+                           ?kms_key_id: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String?,
+                               value: ::String?
+                             },
+                           ]
+                         ) -> _CopySnapshotResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopySnapshotResponseSuccess
+
+      interface _CreateCacheClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCacheClusterResult]
+        def cache_cluster: () -> Types::CacheCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#create_cache_cluster-instance_method
+      def create_cache_cluster: (
+                                  cache_cluster_id: ::String,
+                                  ?replication_group_id: ::String,
+                                  ?az_mode: ("single-az" | "cross-az"),
+                                  ?preferred_availability_zone: ::String,
+                                  ?preferred_availability_zones: Array[::String],
+                                  ?num_cache_nodes: ::Integer,
+                                  ?cache_node_type: ::String,
+                                  ?engine: ::String,
+                                  ?engine_version: ::String,
+                                  ?cache_parameter_group_name: ::String,
+                                  ?cache_subnet_group_name: ::String,
+                                  ?cache_security_group_names: Array[::String],
+                                  ?security_group_ids: Array[::String],
+                                  ?tags: Array[
+                                    {
+                                      key: ::String?,
+                                      value: ::String?
+                                    },
+                                  ],
+                                  ?snapshot_arns: Array[::String],
+                                  ?snapshot_name: ::String,
+                                  ?preferred_maintenance_window: ::String,
+                                  ?port: ::Integer,
+                                  ?notification_topic_arn: ::String,
+                                  ?auto_minor_version_upgrade: bool,
+                                  ?snapshot_retention_limit: ::Integer,
+                                  ?snapshot_window: ::String,
+                                  ?auth_token: ::String,
+                                  ?outpost_mode: ("single-outpost" | "cross-outpost"),
+                                  ?preferred_outpost_arn: ::String,
+                                  ?preferred_outpost_arns: Array[::String],
+                                  ?log_delivery_configurations: Array[
+                                    {
+                                      log_type: ("slow-log" | "engine-log")?,
+                                      destination_type: ("cloudwatch-logs" | "kinesis-firehose")?,
+                                      destination_details: {
+                                        cloud_watch_logs_details: {
+                                          log_group: ::String?
+                                        }?,
+                                        kinesis_firehose_details: {
+                                          delivery_stream: ::String?
+                                        }?
+                                      }?,
+                                      log_format: ("text" | "json")?,
+                                      enabled: bool?
+                                    },
+                                  ],
+                                  ?transit_encryption_enabled: bool,
+                                  ?network_type: ("ipv4" | "ipv6" | "dual_stack"),
+                                  ?ip_discovery: ("ipv4" | "ipv6")
+                                ) -> _CreateCacheClusterResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCacheClusterResponseSuccess
+
+      interface _CreateCacheParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCacheParameterGroupResult]
+        def cache_parameter_group: () -> Types::CacheParameterGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#create_cache_parameter_group-instance_method
+      def create_cache_parameter_group: (
+                                          cache_parameter_group_name: ::String,
+                                          cache_parameter_group_family: ::String,
+                                          description: ::String,
+                                          ?tags: Array[
+                                            {
+                                              key: ::String?,
+                                              value: ::String?
+                                            },
+                                          ]
+                                        ) -> _CreateCacheParameterGroupResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCacheParameterGroupResponseSuccess
+
+      interface _CreateCacheSecurityGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCacheSecurityGroupResult]
+        def cache_security_group: () -> Types::CacheSecurityGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#create_cache_security_group-instance_method
+      def create_cache_security_group: (
+                                         cache_security_group_name: ::String,
+                                         description: ::String,
+                                         ?tags: Array[
+                                           {
+                                             key: ::String?,
+                                             value: ::String?
+                                           },
+                                         ]
+                                       ) -> _CreateCacheSecurityGroupResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCacheSecurityGroupResponseSuccess
+
+      interface _CreateCacheSubnetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCacheSubnetGroupResult]
+        def cache_subnet_group: () -> Types::CacheSubnetGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#create_cache_subnet_group-instance_method
+      def create_cache_subnet_group: (
+                                       cache_subnet_group_name: ::String,
+                                       cache_subnet_group_description: ::String,
+                                       subnet_ids: Array[::String],
+                                       ?tags: Array[
+                                         {
+                                           key: ::String?,
+                                           value: ::String?
+                                         },
+                                       ]
+                                     ) -> _CreateCacheSubnetGroupResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCacheSubnetGroupResponseSuccess
+
+      interface _CreateGlobalReplicationGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGlobalReplicationGroupResult]
+        def global_replication_group: () -> Types::GlobalReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#create_global_replication_group-instance_method
+      def create_global_replication_group: (
+                                             global_replication_group_id_suffix: ::String,
+                                             ?global_replication_group_description: ::String,
+                                             primary_replication_group_id: ::String
+                                           ) -> _CreateGlobalReplicationGroupResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlobalReplicationGroupResponseSuccess
+
+      interface _CreateReplicationGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReplicationGroupResult]
+        def replication_group: () -> Types::ReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#create_replication_group-instance_method
+      def create_replication_group: (
+                                      replication_group_id: ::String,
+                                      replication_group_description: ::String,
+                                      ?global_replication_group_id: ::String,
+                                      ?primary_cluster_id: ::String,
+                                      ?automatic_failover_enabled: bool,
+                                      ?multi_az_enabled: bool,
+                                      ?num_cache_clusters: ::Integer,
+                                      ?preferred_cache_cluster_a_zs: Array[::String],
+                                      ?num_node_groups: ::Integer,
+                                      ?replicas_per_node_group: ::Integer,
+                                      ?node_group_configuration: Array[
+                                        {
+                                          node_group_id: ::String?,
+                                          slots: ::String?,
+                                          replica_count: ::Integer?,
+                                          primary_availability_zone: ::String?,
+                                          replica_availability_zones: Array[::String]?,
+                                          primary_outpost_arn: ::String?,
+                                          replica_outpost_arns: Array[::String]?
+                                        },
+                                      ],
+                                      ?cache_node_type: ::String,
+                                      ?engine: ::String,
+                                      ?engine_version: ::String,
+                                      ?cache_parameter_group_name: ::String,
+                                      ?cache_subnet_group_name: ::String,
+                                      ?cache_security_group_names: Array[::String],
+                                      ?security_group_ids: Array[::String],
+                                      ?tags: Array[
+                                        {
+                                          key: ::String?,
+                                          value: ::String?
+                                        },
+                                      ],
+                                      ?snapshot_arns: Array[::String],
+                                      ?snapshot_name: ::String,
+                                      ?preferred_maintenance_window: ::String,
+                                      ?port: ::Integer,
+                                      ?notification_topic_arn: ::String,
+                                      ?auto_minor_version_upgrade: bool,
+                                      ?snapshot_retention_limit: ::Integer,
+                                      ?snapshot_window: ::String,
+                                      ?auth_token: ::String,
+                                      ?transit_encryption_enabled: bool,
+                                      ?at_rest_encryption_enabled: bool,
+                                      ?kms_key_id: ::String,
+                                      ?user_group_ids: Array[::String],
+                                      ?log_delivery_configurations: Array[
+                                        {
+                                          log_type: ("slow-log" | "engine-log")?,
+                                          destination_type: ("cloudwatch-logs" | "kinesis-firehose")?,
+                                          destination_details: {
+                                            cloud_watch_logs_details: {
+                                              log_group: ::String?
+                                            }?,
+                                            kinesis_firehose_details: {
+                                              delivery_stream: ::String?
+                                            }?
+                                          }?,
+                                          log_format: ("text" | "json")?,
+                                          enabled: bool?
+                                        },
+                                      ],
+                                      ?data_tiering_enabled: bool,
+                                      ?network_type: ("ipv4" | "ipv6" | "dual_stack"),
+                                      ?ip_discovery: ("ipv4" | "ipv6"),
+                                      ?transit_encryption_mode: ("preferred" | "required"),
+                                      ?cluster_mode: ("enabled" | "disabled" | "compatible"),
+                                      ?serverless_cache_snapshot_name: ::String
+                                    ) -> _CreateReplicationGroupResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReplicationGroupResponseSuccess
+
+      interface _CreateServerlessCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServerlessCacheResponse]
+        def serverless_cache: () -> Types::ServerlessCache
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#create_serverless_cache-instance_method
+      def create_serverless_cache: (
+                                     serverless_cache_name: ::String,
+                                     ?description: ::String,
+                                     engine: ::String,
+                                     ?major_engine_version: ::String,
+                                     ?cache_usage_limits: {
+                                       data_storage: {
+                                         maximum: ::Integer,
+                                         unit: ("GB")
+                                       }?,
+                                       ecpu_per_second: {
+                                         maximum: ::Integer
+                                       }?
+                                     },
+                                     ?kms_key_id: ::String,
+                                     ?security_group_ids: Array[::String],
+                                     ?snapshot_arns_to_restore: Array[::String],
+                                     ?tags: Array[
+                                       {
+                                         key: ::String?,
+                                         value: ::String?
+                                       },
+                                     ],
+                                     ?user_group_id: ::String,
+                                     ?subnet_ids: Array[::String],
+                                     ?snapshot_retention_limit: ::Integer,
+                                     ?daily_snapshot_time: ::String
+                                   ) -> _CreateServerlessCacheResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServerlessCacheResponseSuccess
+
+      interface _CreateServerlessCacheSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServerlessCacheSnapshotResponse]
+        def serverless_cache_snapshot: () -> Types::ServerlessCacheSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#create_serverless_cache_snapshot-instance_method
+      def create_serverless_cache_snapshot: (
+                                              serverless_cache_snapshot_name: ::String,
+                                              serverless_cache_name: ::String,
+                                              ?kms_key_id: ::String,
+                                              ?tags: Array[
+                                                {
+                                                  key: ::String?,
+                                                  value: ::String?
+                                                },
+                                              ]
+                                            ) -> _CreateServerlessCacheSnapshotResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServerlessCacheSnapshotResponseSuccess
+
+      interface _CreateSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSnapshotResult]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#create_snapshot-instance_method
+      def create_snapshot: (
+                             ?replication_group_id: ::String,
+                             ?cache_cluster_id: ::String,
+                             snapshot_name: ::String,
+                             ?kms_key_id: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String?,
+                                 value: ::String?
+                               },
+                             ]
+                           ) -> _CreateSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotResponseSuccess
+
+      interface _CreateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::User]
+        def user_id: () -> ::String
+        def user_name: () -> ::String
+        def status: () -> ::String
+        def engine: () -> ::String
+        def minimum_engine_version: () -> ::String
+        def access_string: () -> ::String
+        def user_group_ids: () -> ::Array[::String]
+        def authentication: () -> Types::Authentication
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#create_user-instance_method
+      def create_user: (
+                         user_id: ::String,
+                         user_name: ::String,
+                         engine: ::String,
+                         ?passwords: Array[::String],
+                         access_string: ::String,
+                         ?no_password_required: bool,
+                         ?tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ],
+                         ?authentication_mode: {
+                           type: ("password" | "no-password-required" | "iam")?,
+                           passwords: Array[::String]?
+                         }
+                       ) -> _CreateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
+
+      interface _CreateUserGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UserGroup]
+        def user_group_id: () -> ::String
+        def status: () -> ::String
+        def engine: () -> ::String
+        def user_ids: () -> ::Array[::String]
+        def minimum_engine_version: () -> ::String
+        def pending_changes: () -> Types::UserGroupPendingChanges
+        def replication_groups: () -> ::Array[::String]
+        def serverless_caches: () -> ::Array[::String]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#create_user_group-instance_method
+      def create_user_group: (
+                               user_group_id: ::String,
+                               engine: ::String,
+                               ?user_ids: Array[::String],
+                               ?tags: Array[
+                                 {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                               ]
+                             ) -> _CreateUserGroupResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserGroupResponseSuccess
+
+      interface _DecreaseNodeGroupsInGlobalReplicationGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DecreaseNodeGroupsInGlobalReplicationGroupResult]
+        def global_replication_group: () -> Types::GlobalReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#decrease_node_groups_in_global_replication_group-instance_method
+      def decrease_node_groups_in_global_replication_group: (
+                                                              global_replication_group_id: ::String,
+                                                              node_group_count: ::Integer,
+                                                              ?global_node_groups_to_remove: Array[::String],
+                                                              ?global_node_groups_to_retain: Array[::String],
+                                                              apply_immediately: bool
+                                                            ) -> _DecreaseNodeGroupsInGlobalReplicationGroupResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DecreaseNodeGroupsInGlobalReplicationGroupResponseSuccess
+
+      interface _DecreaseReplicaCountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DecreaseReplicaCountResult]
+        def replication_group: () -> Types::ReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#decrease_replica_count-instance_method
+      def decrease_replica_count: (
+                                    replication_group_id: ::String,
+                                    ?new_replica_count: ::Integer,
+                                    ?replica_configuration: Array[
+                                      {
+                                        node_group_id: ::String,
+                                        new_replica_count: ::Integer,
+                                        preferred_availability_zones: Array[::String]?,
+                                        preferred_outpost_arns: Array[::String]?
+                                      },
+                                    ],
+                                    ?replicas_to_remove: Array[::String],
+                                    apply_immediately: bool
+                                  ) -> _DecreaseReplicaCountResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DecreaseReplicaCountResponseSuccess
+
+      interface _DeleteCacheClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCacheClusterResult]
+        def cache_cluster: () -> Types::CacheCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#delete_cache_cluster-instance_method
+      def delete_cache_cluster: (
+                                  cache_cluster_id: ::String,
+                                  ?final_snapshot_identifier: ::String
+                                ) -> _DeleteCacheClusterResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCacheClusterResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#delete_cache_parameter_group-instance_method
+      def delete_cache_parameter_group: (
+                                          cache_parameter_group_name: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#delete_cache_security_group-instance_method
+      def delete_cache_security_group: (
+                                         cache_security_group_name: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#delete_cache_subnet_group-instance_method
+      def delete_cache_subnet_group: (
+                                       cache_subnet_group_name: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteGlobalReplicationGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGlobalReplicationGroupResult]
+        def global_replication_group: () -> Types::GlobalReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#delete_global_replication_group-instance_method
+      def delete_global_replication_group: (
+                                             global_replication_group_id: ::String,
+                                             retain_primary_replication_group: bool
+                                           ) -> _DeleteGlobalReplicationGroupResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGlobalReplicationGroupResponseSuccess
+
+      interface _DeleteReplicationGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReplicationGroupResult]
+        def replication_group: () -> Types::ReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#delete_replication_group-instance_method
+      def delete_replication_group: (
+                                      replication_group_id: ::String,
+                                      ?retain_primary_cluster: bool,
+                                      ?final_snapshot_identifier: ::String
+                                    ) -> _DeleteReplicationGroupResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReplicationGroupResponseSuccess
+
+      interface _DeleteServerlessCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServerlessCacheResponse]
+        def serverless_cache: () -> Types::ServerlessCache
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#delete_serverless_cache-instance_method
+      def delete_serverless_cache: (
+                                     serverless_cache_name: ::String,
+                                     ?final_snapshot_name: ::String
+                                   ) -> _DeleteServerlessCacheResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServerlessCacheResponseSuccess
+
+      interface _DeleteServerlessCacheSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServerlessCacheSnapshotResponse]
+        def serverless_cache_snapshot: () -> Types::ServerlessCacheSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#delete_serverless_cache_snapshot-instance_method
+      def delete_serverless_cache_snapshot: (
+                                              serverless_cache_snapshot_name: ::String
+                                            ) -> _DeleteServerlessCacheSnapshotResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServerlessCacheSnapshotResponseSuccess
+
+      interface _DeleteSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSnapshotResult]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#delete_snapshot-instance_method
+      def delete_snapshot: (
+                             snapshot_name: ::String
+                           ) -> _DeleteSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSnapshotResponseSuccess
+
+      interface _DeleteUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::User]
+        def user_id: () -> ::String
+        def user_name: () -> ::String
+        def status: () -> ::String
+        def engine: () -> ::String
+        def minimum_engine_version: () -> ::String
+        def access_string: () -> ::String
+        def user_group_ids: () -> ::Array[::String]
+        def authentication: () -> Types::Authentication
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#delete_user-instance_method
+      def delete_user: (
+                         user_id: ::String
+                       ) -> _DeleteUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUserResponseSuccess
+
+      interface _DeleteUserGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UserGroup]
+        def user_group_id: () -> ::String
+        def status: () -> ::String
+        def engine: () -> ::String
+        def user_ids: () -> ::Array[::String]
+        def minimum_engine_version: () -> ::String
+        def pending_changes: () -> Types::UserGroupPendingChanges
+        def replication_groups: () -> ::Array[::String]
+        def serverless_caches: () -> ::Array[::String]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#delete_user_group-instance_method
+      def delete_user_group: (
+                               user_group_id: ::String
+                             ) -> _DeleteUserGroupResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUserGroupResponseSuccess
+
+      interface _DescribeCacheClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CacheClusterMessage]
+        def marker: () -> ::String
+        def cache_clusters: () -> ::Array[Types::CacheCluster]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_cache_clusters-instance_method
+      def describe_cache_clusters: (
+                                     ?cache_cluster_id: ::String,
+                                     ?max_records: ::Integer,
+                                     ?marker: ::String,
+                                     ?show_cache_node_info: bool,
+                                     ?show_cache_clusters_not_in_replication_groups: bool
+                                   ) -> _DescribeCacheClustersResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCacheClustersResponseSuccess
+
+      interface _DescribeCacheEngineVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CacheEngineVersionMessage]
+        def marker: () -> ::String
+        def cache_engine_versions: () -> ::Array[Types::CacheEngineVersion]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_cache_engine_versions-instance_method
+      def describe_cache_engine_versions: (
+                                            ?engine: ::String,
+                                            ?engine_version: ::String,
+                                            ?cache_parameter_group_family: ::String,
+                                            ?max_records: ::Integer,
+                                            ?marker: ::String,
+                                            ?default_only: bool
+                                          ) -> _DescribeCacheEngineVersionsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCacheEngineVersionsResponseSuccess
+
+      interface _DescribeCacheParameterGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CacheParameterGroupsMessage]
+        def marker: () -> ::String
+        def cache_parameter_groups: () -> ::Array[Types::CacheParameterGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_cache_parameter_groups-instance_method
+      def describe_cache_parameter_groups: (
+                                             ?cache_parameter_group_name: ::String,
+                                             ?max_records: ::Integer,
+                                             ?marker: ::String
+                                           ) -> _DescribeCacheParameterGroupsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCacheParameterGroupsResponseSuccess
+
+      interface _DescribeCacheParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CacheParameterGroupDetails]
+        def marker: () -> ::String
+        def parameters: () -> ::Array[Types::Parameter]
+        def cache_node_type_specific_parameters: () -> ::Array[Types::CacheNodeTypeSpecificParameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_cache_parameters-instance_method
+      def describe_cache_parameters: (
+                                       cache_parameter_group_name: ::String,
+                                       ?source: ::String,
+                                       ?max_records: ::Integer,
+                                       ?marker: ::String
+                                     ) -> _DescribeCacheParametersResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCacheParametersResponseSuccess
+
+      interface _DescribeCacheSecurityGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CacheSecurityGroupMessage]
+        def marker: () -> ::String
+        def cache_security_groups: () -> ::Array[Types::CacheSecurityGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_cache_security_groups-instance_method
+      def describe_cache_security_groups: (
+                                            ?cache_security_group_name: ::String,
+                                            ?max_records: ::Integer,
+                                            ?marker: ::String
+                                          ) -> _DescribeCacheSecurityGroupsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCacheSecurityGroupsResponseSuccess
+
+      interface _DescribeCacheSubnetGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CacheSubnetGroupMessage]
+        def marker: () -> ::String
+        def cache_subnet_groups: () -> ::Array[Types::CacheSubnetGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_cache_subnet_groups-instance_method
+      def describe_cache_subnet_groups: (
+                                          ?cache_subnet_group_name: ::String,
+                                          ?max_records: ::Integer,
+                                          ?marker: ::String
+                                        ) -> _DescribeCacheSubnetGroupsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCacheSubnetGroupsResponseSuccess
+
+      interface _DescribeEngineDefaultParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEngineDefaultParametersResult]
+        def engine_defaults: () -> Types::EngineDefaults
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_engine_default_parameters-instance_method
+      def describe_engine_default_parameters: (
+                                                cache_parameter_group_family: ::String,
+                                                ?max_records: ::Integer,
+                                                ?marker: ::String
+                                              ) -> _DescribeEngineDefaultParametersResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEngineDefaultParametersResponseSuccess
+
+      interface _DescribeEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EventsMessage]
+        def marker: () -> ::String
+        def events: () -> ::Array[Types::Event]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_events-instance_method
+      def describe_events: (
+                             ?source_identifier: ::String,
+                             ?source_type: ("cache-cluster" | "cache-parameter-group" | "cache-security-group" | "cache-subnet-group" | "replication-group" | "serverless-cache" | "serverless-cache-snapshot" | "user" | "user-group"),
+                             ?start_time: ::Time,
+                             ?end_time: ::Time,
+                             ?duration: ::Integer,
+                             ?max_records: ::Integer,
+                             ?marker: ::String
+                           ) -> _DescribeEventsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventsResponseSuccess
+
+      interface _DescribeGlobalReplicationGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGlobalReplicationGroupsResult]
+        def marker: () -> ::String
+        def global_replication_groups: () -> ::Array[Types::GlobalReplicationGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_global_replication_groups-instance_method
+      def describe_global_replication_groups: (
+                                                ?global_replication_group_id: ::String,
+                                                ?max_records: ::Integer,
+                                                ?marker: ::String,
+                                                ?show_member_info: bool
+                                              ) -> _DescribeGlobalReplicationGroupsResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGlobalReplicationGroupsResponseSuccess
+
+      interface _DescribeReplicationGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReplicationGroupMessage]
+        def marker: () -> ::String
+        def replication_groups: () -> ::Array[Types::ReplicationGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_replication_groups-instance_method
+      def describe_replication_groups: (
+                                         ?replication_group_id: ::String,
+                                         ?max_records: ::Integer,
+                                         ?marker: ::String
+                                       ) -> _DescribeReplicationGroupsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReplicationGroupsResponseSuccess
+
+      interface _DescribeReservedCacheNodesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReservedCacheNodeMessage]
+        def marker: () -> ::String
+        def reserved_cache_nodes: () -> ::Array[Types::ReservedCacheNode]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_reserved_cache_nodes-instance_method
+      def describe_reserved_cache_nodes: (
+                                           ?reserved_cache_node_id: ::String,
+                                           ?reserved_cache_nodes_offering_id: ::String,
+                                           ?cache_node_type: ::String,
+                                           ?duration: ::String,
+                                           ?product_description: ::String,
+                                           ?offering_type: ::String,
+                                           ?max_records: ::Integer,
+                                           ?marker: ::String
+                                         ) -> _DescribeReservedCacheNodesResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReservedCacheNodesResponseSuccess
+
+      interface _DescribeReservedCacheNodesOfferingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReservedCacheNodesOfferingMessage]
+        def marker: () -> ::String
+        def reserved_cache_nodes_offerings: () -> ::Array[Types::ReservedCacheNodesOffering]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_reserved_cache_nodes_offerings-instance_method
+      def describe_reserved_cache_nodes_offerings: (
+                                                     ?reserved_cache_nodes_offering_id: ::String,
+                                                     ?cache_node_type: ::String,
+                                                     ?duration: ::String,
+                                                     ?product_description: ::String,
+                                                     ?offering_type: ::String,
+                                                     ?max_records: ::Integer,
+                                                     ?marker: ::String
+                                                   ) -> _DescribeReservedCacheNodesOfferingsResponseSuccess
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReservedCacheNodesOfferingsResponseSuccess
+
+      interface _DescribeServerlessCacheSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServerlessCacheSnapshotsResponse]
+        def next_token: () -> ::String
+        def serverless_cache_snapshots: () -> ::Array[Types::ServerlessCacheSnapshot]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_serverless_cache_snapshots-instance_method
+      def describe_serverless_cache_snapshots: (
+                                                 ?serverless_cache_name: ::String,
+                                                 ?serverless_cache_snapshot_name: ::String,
+                                                 ?snapshot_type: ::String,
+                                                 ?next_token: ::String,
+                                                 ?max_results: ::Integer
+                                               ) -> _DescribeServerlessCacheSnapshotsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServerlessCacheSnapshotsResponseSuccess
+
+      interface _DescribeServerlessCachesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServerlessCachesResponse]
+        def next_token: () -> ::String
+        def serverless_caches: () -> ::Array[Types::ServerlessCache]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_serverless_caches-instance_method
+      def describe_serverless_caches: (
+                                        ?serverless_cache_name: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _DescribeServerlessCachesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServerlessCachesResponseSuccess
+
+      interface _DescribeServiceUpdatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ServiceUpdatesMessage]
+        def marker: () -> ::String
+        def service_updates: () -> ::Array[Types::ServiceUpdate]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_service_updates-instance_method
+      def describe_service_updates: (
+                                      ?service_update_name: ::String,
+                                      ?service_update_status: Array[("available" | "cancelled" | "expired")],
+                                      ?max_records: ::Integer,
+                                      ?marker: ::String
+                                    ) -> _DescribeServiceUpdatesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServiceUpdatesResponseSuccess
+
+      interface _DescribeSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSnapshotsListMessage]
+        def marker: () -> ::String
+        def snapshots: () -> ::Array[Types::Snapshot]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_snapshots-instance_method
+      def describe_snapshots: (
+                                ?replication_group_id: ::String,
+                                ?cache_cluster_id: ::String,
+                                ?snapshot_name: ::String,
+                                ?snapshot_source: ::String,
+                                ?marker: ::String,
+                                ?max_records: ::Integer,
+                                ?show_node_group_config: bool
+                              ) -> _DescribeSnapshotsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSnapshotsResponseSuccess
+
+      interface _DescribeUpdateActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateActionsMessage]
+        def marker: () -> ::String
+        def update_actions: () -> ::Array[Types::UpdateAction]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_update_actions-instance_method
+      def describe_update_actions: (
+                                     ?service_update_name: ::String,
+                                     ?replication_group_ids: Array[::String],
+                                     ?cache_cluster_ids: Array[::String],
+                                     ?engine: ::String,
+                                     ?service_update_status: Array[("available" | "cancelled" | "expired")],
+                                     ?service_update_time_range: {
+                                       start_time: ::Time?,
+                                       end_time: ::Time?
+                                     },
+                                     ?update_action_status: Array[("not-applied" | "waiting-to-start" | "in-progress" | "stopping" | "stopped" | "complete" | "scheduling" | "scheduled" | "not-applicable")],
+                                     ?show_node_level_update_status: bool,
+                                     ?max_records: ::Integer,
+                                     ?marker: ::String
+                                   ) -> _DescribeUpdateActionsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUpdateActionsResponseSuccess
+
+      interface _DescribeUserGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUserGroupsResult]
+        def user_groups: () -> ::Array[Types::UserGroup]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_user_groups-instance_method
+      def describe_user_groups: (
+                                  ?user_group_id: ::String,
+                                  ?max_records: ::Integer,
+                                  ?marker: ::String
+                                ) -> _DescribeUserGroupsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUserGroupsResponseSuccess
+
+      interface _DescribeUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUsersResult]
+        def users: () -> ::Array[Types::User]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#describe_users-instance_method
+      def describe_users: (
+                            ?engine: ::String,
+                            ?user_id: ::String,
+                            ?filters: Array[
+                              {
+                                name: ::String,
+                                values: Array[::String]
+                              },
+                            ],
+                            ?max_records: ::Integer,
+                            ?marker: ::String
+                          ) -> _DescribeUsersResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUsersResponseSuccess
+
+      interface _DisassociateGlobalReplicationGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateGlobalReplicationGroupResult]
+        def global_replication_group: () -> Types::GlobalReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#disassociate_global_replication_group-instance_method
+      def disassociate_global_replication_group: (
+                                                   global_replication_group_id: ::String,
+                                                   replication_group_id: ::String,
+                                                   replication_group_region: ::String
+                                                 ) -> _DisassociateGlobalReplicationGroupResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateGlobalReplicationGroupResponseSuccess
+
+      interface _ExportServerlessCacheSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportServerlessCacheSnapshotResponse]
+        def serverless_cache_snapshot: () -> Types::ServerlessCacheSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#export_serverless_cache_snapshot-instance_method
+      def export_serverless_cache_snapshot: (
+                                              serverless_cache_snapshot_name: ::String,
+                                              s3_bucket_name: ::String
+                                            ) -> _ExportServerlessCacheSnapshotResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportServerlessCacheSnapshotResponseSuccess
+
+      interface _FailoverGlobalReplicationGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FailoverGlobalReplicationGroupResult]
+        def global_replication_group: () -> Types::GlobalReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#failover_global_replication_group-instance_method
+      def failover_global_replication_group: (
+                                               global_replication_group_id: ::String,
+                                               primary_region: ::String,
+                                               primary_replication_group_id: ::String
+                                             ) -> _FailoverGlobalReplicationGroupResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _FailoverGlobalReplicationGroupResponseSuccess
+
+      interface _IncreaseNodeGroupsInGlobalReplicationGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IncreaseNodeGroupsInGlobalReplicationGroupResult]
+        def global_replication_group: () -> Types::GlobalReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#increase_node_groups_in_global_replication_group-instance_method
+      def increase_node_groups_in_global_replication_group: (
+                                                              global_replication_group_id: ::String,
+                                                              node_group_count: ::Integer,
+                                                              ?regional_configurations: Array[
+                                                                {
+                                                                  replication_group_id: ::String,
+                                                                  replication_group_region: ::String,
+                                                                  resharding_configuration: Array[
+                                                                    {
+                                                                      node_group_id: ::String?,
+                                                                      preferred_availability_zones: Array[::String]?
+                                                                    },
+                                                                  ]
+                                                                },
+                                                              ],
+                                                              apply_immediately: bool
+                                                            ) -> _IncreaseNodeGroupsInGlobalReplicationGroupResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _IncreaseNodeGroupsInGlobalReplicationGroupResponseSuccess
+
+      interface _IncreaseReplicaCountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IncreaseReplicaCountResult]
+        def replication_group: () -> Types::ReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#increase_replica_count-instance_method
+      def increase_replica_count: (
+                                    replication_group_id: ::String,
+                                    ?new_replica_count: ::Integer,
+                                    ?replica_configuration: Array[
+                                      {
+                                        node_group_id: ::String,
+                                        new_replica_count: ::Integer,
+                                        preferred_availability_zones: Array[::String]?,
+                                        preferred_outpost_arns: Array[::String]?
+                                      },
+                                    ],
+                                    apply_immediately: bool
+                                  ) -> _IncreaseReplicaCountResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _IncreaseReplicaCountResponseSuccess
+
+      interface _ListAllowedNodeTypeModificationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AllowedNodeTypeModificationsMessage]
+        def scale_up_modifications: () -> ::Array[::String]
+        def scale_down_modifications: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#list_allowed_node_type_modifications-instance_method
+      def list_allowed_node_type_modifications: (
+                                                  ?cache_cluster_id: ::String,
+                                                  ?replication_group_id: ::String
+                                                ) -> _ListAllowedNodeTypeModificationsResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAllowedNodeTypeModificationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagListMessage]
+        def tag_list: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_name: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ModifyCacheClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyCacheClusterResult]
+        def cache_cluster: () -> Types::CacheCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#modify_cache_cluster-instance_method
+      def modify_cache_cluster: (
+                                  cache_cluster_id: ::String,
+                                  ?num_cache_nodes: ::Integer,
+                                  ?cache_node_ids_to_remove: Array[::String],
+                                  ?az_mode: ("single-az" | "cross-az"),
+                                  ?new_availability_zones: Array[::String],
+                                  ?cache_security_group_names: Array[::String],
+                                  ?security_group_ids: Array[::String],
+                                  ?preferred_maintenance_window: ::String,
+                                  ?notification_topic_arn: ::String,
+                                  ?cache_parameter_group_name: ::String,
+                                  ?notification_topic_status: ::String,
+                                  ?apply_immediately: bool,
+                                  ?engine_version: ::String,
+                                  ?auto_minor_version_upgrade: bool,
+                                  ?snapshot_retention_limit: ::Integer,
+                                  ?snapshot_window: ::String,
+                                  ?cache_node_type: ::String,
+                                  ?auth_token: ::String,
+                                  ?auth_token_update_strategy: ("SET" | "ROTATE" | "DELETE"),
+                                  ?log_delivery_configurations: Array[
+                                    {
+                                      log_type: ("slow-log" | "engine-log")?,
+                                      destination_type: ("cloudwatch-logs" | "kinesis-firehose")?,
+                                      destination_details: {
+                                        cloud_watch_logs_details: {
+                                          log_group: ::String?
+                                        }?,
+                                        kinesis_firehose_details: {
+                                          delivery_stream: ::String?
+                                        }?
+                                      }?,
+                                      log_format: ("text" | "json")?,
+                                      enabled: bool?
+                                    },
+                                  ],
+                                  ?ip_discovery: ("ipv4" | "ipv6")
+                                ) -> _ModifyCacheClusterResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyCacheClusterResponseSuccess
+
+      interface _ModifyCacheParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CacheParameterGroupNameMessage]
+        def cache_parameter_group_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#modify_cache_parameter_group-instance_method
+      def modify_cache_parameter_group: (
+                                          cache_parameter_group_name: ::String,
+                                          parameter_name_values: Array[
+                                            {
+                                              parameter_name: ::String?,
+                                              parameter_value: ::String?
+                                            },
+                                          ]
+                                        ) -> _ModifyCacheParameterGroupResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyCacheParameterGroupResponseSuccess
+
+      interface _ModifyCacheSubnetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyCacheSubnetGroupResult]
+        def cache_subnet_group: () -> Types::CacheSubnetGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#modify_cache_subnet_group-instance_method
+      def modify_cache_subnet_group: (
+                                       cache_subnet_group_name: ::String,
+                                       ?cache_subnet_group_description: ::String,
+                                       ?subnet_ids: Array[::String]
+                                     ) -> _ModifyCacheSubnetGroupResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyCacheSubnetGroupResponseSuccess
+
+      interface _ModifyGlobalReplicationGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyGlobalReplicationGroupResult]
+        def global_replication_group: () -> Types::GlobalReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#modify_global_replication_group-instance_method
+      def modify_global_replication_group: (
+                                             global_replication_group_id: ::String,
+                                             apply_immediately: bool,
+                                             ?cache_node_type: ::String,
+                                             ?engine_version: ::String,
+                                             ?cache_parameter_group_name: ::String,
+                                             ?global_replication_group_description: ::String,
+                                             ?automatic_failover_enabled: bool
+                                           ) -> _ModifyGlobalReplicationGroupResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyGlobalReplicationGroupResponseSuccess
+
+      interface _ModifyReplicationGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyReplicationGroupResult]
+        def replication_group: () -> Types::ReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#modify_replication_group-instance_method
+      def modify_replication_group: (
+                                      replication_group_id: ::String,
+                                      ?replication_group_description: ::String,
+                                      ?primary_cluster_id: ::String,
+                                      ?snapshotting_cluster_id: ::String,
+                                      ?automatic_failover_enabled: bool,
+                                      ?multi_az_enabled: bool,
+                                      ?node_group_id: ::String,
+                                      ?cache_security_group_names: Array[::String],
+                                      ?security_group_ids: Array[::String],
+                                      ?preferred_maintenance_window: ::String,
+                                      ?notification_topic_arn: ::String,
+                                      ?cache_parameter_group_name: ::String,
+                                      ?notification_topic_status: ::String,
+                                      ?apply_immediately: bool,
+                                      ?engine_version: ::String,
+                                      ?auto_minor_version_upgrade: bool,
+                                      ?snapshot_retention_limit: ::Integer,
+                                      ?snapshot_window: ::String,
+                                      ?cache_node_type: ::String,
+                                      ?auth_token: ::String,
+                                      ?auth_token_update_strategy: ("SET" | "ROTATE" | "DELETE"),
+                                      ?user_group_ids_to_add: Array[::String],
+                                      ?user_group_ids_to_remove: Array[::String],
+                                      ?remove_user_groups: bool,
+                                      ?log_delivery_configurations: Array[
+                                        {
+                                          log_type: ("slow-log" | "engine-log")?,
+                                          destination_type: ("cloudwatch-logs" | "kinesis-firehose")?,
+                                          destination_details: {
+                                            cloud_watch_logs_details: {
+                                              log_group: ::String?
+                                            }?,
+                                            kinesis_firehose_details: {
+                                              delivery_stream: ::String?
+                                            }?
+                                          }?,
+                                          log_format: ("text" | "json")?,
+                                          enabled: bool?
+                                        },
+                                      ],
+                                      ?ip_discovery: ("ipv4" | "ipv6"),
+                                      ?transit_encryption_enabled: bool,
+                                      ?transit_encryption_mode: ("preferred" | "required"),
+                                      ?cluster_mode: ("enabled" | "disabled" | "compatible")
+                                    ) -> _ModifyReplicationGroupResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyReplicationGroupResponseSuccess
+
+      interface _ModifyReplicationGroupShardConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyReplicationGroupShardConfigurationResult]
+        def replication_group: () -> Types::ReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#modify_replication_group_shard_configuration-instance_method
+      def modify_replication_group_shard_configuration: (
+                                                          replication_group_id: ::String,
+                                                          node_group_count: ::Integer,
+                                                          apply_immediately: bool,
+                                                          ?resharding_configuration: Array[
+                                                            {
+                                                              node_group_id: ::String?,
+                                                              preferred_availability_zones: Array[::String]?
+                                                            },
+                                                          ],
+                                                          ?node_groups_to_remove: Array[::String],
+                                                          ?node_groups_to_retain: Array[::String]
+                                                        ) -> _ModifyReplicationGroupShardConfigurationResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyReplicationGroupShardConfigurationResponseSuccess
+
+      interface _ModifyServerlessCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyServerlessCacheResponse]
+        def serverless_cache: () -> Types::ServerlessCache
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#modify_serverless_cache-instance_method
+      def modify_serverless_cache: (
+                                     serverless_cache_name: ::String,
+                                     ?description: ::String,
+                                     ?cache_usage_limits: {
+                                       data_storage: {
+                                         maximum: ::Integer,
+                                         unit: ("GB")
+                                       }?,
+                                       ecpu_per_second: {
+                                         maximum: ::Integer
+                                       }?
+                                     },
+                                     ?remove_user_group: bool,
+                                     ?user_group_id: ::String,
+                                     ?security_group_ids: Array[::String],
+                                     ?snapshot_retention_limit: ::Integer,
+                                     ?daily_snapshot_time: ::String
+                                   ) -> _ModifyServerlessCacheResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyServerlessCacheResponseSuccess
+
+      interface _ModifyUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::User]
+        def user_id: () -> ::String
+        def user_name: () -> ::String
+        def status: () -> ::String
+        def engine: () -> ::String
+        def minimum_engine_version: () -> ::String
+        def access_string: () -> ::String
+        def user_group_ids: () -> ::Array[::String]
+        def authentication: () -> Types::Authentication
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#modify_user-instance_method
+      def modify_user: (
+                         user_id: ::String,
+                         ?access_string: ::String,
+                         ?append_access_string: ::String,
+                         ?passwords: Array[::String],
+                         ?no_password_required: bool,
+                         ?authentication_mode: {
+                           type: ("password" | "no-password-required" | "iam")?,
+                           passwords: Array[::String]?
+                         }
+                       ) -> _ModifyUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyUserResponseSuccess
+
+      interface _ModifyUserGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UserGroup]
+        def user_group_id: () -> ::String
+        def status: () -> ::String
+        def engine: () -> ::String
+        def user_ids: () -> ::Array[::String]
+        def minimum_engine_version: () -> ::String
+        def pending_changes: () -> Types::UserGroupPendingChanges
+        def replication_groups: () -> ::Array[::String]
+        def serverless_caches: () -> ::Array[::String]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#modify_user_group-instance_method
+      def modify_user_group: (
+                               user_group_id: ::String,
+                               ?user_ids_to_add: Array[::String],
+                               ?user_ids_to_remove: Array[::String]
+                             ) -> _ModifyUserGroupResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyUserGroupResponseSuccess
+
+      interface _PurchaseReservedCacheNodesOfferingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PurchaseReservedCacheNodesOfferingResult]
+        def reserved_cache_node: () -> Types::ReservedCacheNode
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#purchase_reserved_cache_nodes_offering-instance_method
+      def purchase_reserved_cache_nodes_offering: (
+                                                    reserved_cache_nodes_offering_id: ::String,
+                                                    ?reserved_cache_node_id: ::String,
+                                                    ?cache_node_count: ::Integer,
+                                                    ?tags: Array[
+                                                      {
+                                                        key: ::String?,
+                                                        value: ::String?
+                                                      },
+                                                    ]
+                                                  ) -> _PurchaseReservedCacheNodesOfferingResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PurchaseReservedCacheNodesOfferingResponseSuccess
+
+      interface _RebalanceSlotsInGlobalReplicationGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RebalanceSlotsInGlobalReplicationGroupResult]
+        def global_replication_group: () -> Types::GlobalReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#rebalance_slots_in_global_replication_group-instance_method
+      def rebalance_slots_in_global_replication_group: (
+                                                         global_replication_group_id: ::String,
+                                                         apply_immediately: bool
+                                                       ) -> _RebalanceSlotsInGlobalReplicationGroupResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebalanceSlotsInGlobalReplicationGroupResponseSuccess
+
+      interface _RebootCacheClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RebootCacheClusterResult]
+        def cache_cluster: () -> Types::CacheCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#reboot_cache_cluster-instance_method
+      def reboot_cache_cluster: (
+                                  cache_cluster_id: ::String,
+                                  cache_node_ids_to_reboot: Array[::String]
+                                ) -> _RebootCacheClusterResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebootCacheClusterResponseSuccess
+
+      interface _RemoveTagsFromResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagListMessage]
+        def tag_list: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#remove_tags_from_resource-instance_method
+      def remove_tags_from_resource: (
+                                       resource_name: ::String,
+                                       tag_keys: Array[::String]
+                                     ) -> _RemoveTagsFromResourceResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveTagsFromResourceResponseSuccess
+
+      interface _ResetCacheParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CacheParameterGroupNameMessage]
+        def cache_parameter_group_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#reset_cache_parameter_group-instance_method
+      def reset_cache_parameter_group: (
+                                         cache_parameter_group_name: ::String,
+                                         ?reset_all_parameters: bool,
+                                         ?parameter_name_values: Array[
+                                           {
+                                             parameter_name: ::String?,
+                                             parameter_value: ::String?
+                                           },
+                                         ]
+                                       ) -> _ResetCacheParameterGroupResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetCacheParameterGroupResponseSuccess
+
+      interface _RevokeCacheSecurityGroupIngressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokeCacheSecurityGroupIngressResult]
+        def cache_security_group: () -> Types::CacheSecurityGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#revoke_cache_security_group_ingress-instance_method
+      def revoke_cache_security_group_ingress: (
+                                                 cache_security_group_name: ::String,
+                                                 ec2_security_group_name: ::String,
+                                                 ec2_security_group_owner_id: ::String
+                                               ) -> _RevokeCacheSecurityGroupIngressResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeCacheSecurityGroupIngressResponseSuccess
+
+      interface _StartMigrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMigrationResponse]
+        def replication_group: () -> Types::ReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#start_migration-instance_method
+      def start_migration: (
+                             replication_group_id: ::String,
+                             customer_node_endpoint_list: Array[
+                               {
+                                 address: ::String?,
+                                 port: ::Integer?
+                               },
+                             ]
+                           ) -> _StartMigrationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMigrationResponseSuccess
+
+      interface _TestFailoverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestFailoverResult]
+        def replication_group: () -> Types::ReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#test_failover-instance_method
+      def test_failover: (
+                           replication_group_id: ::String,
+                           node_group_id: ::String
+                         ) -> _TestFailoverResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestFailoverResponseSuccess
+
+      interface _TestMigrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestMigrationResponse]
+        def replication_group: () -> Types::ReplicationGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#test_migration-instance_method
+      def test_migration: (
+                            replication_group_id: ::String,
+                            customer_node_endpoint_list: Array[
+                              {
+                                address: ::String?,
+                                port: ::Integer?
+                              },
+                            ]
+                          ) -> _TestMigrationResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestMigrationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElastiCache/Client.html#wait_until-instance_method
+      def wait_until: (:cache_cluster_available waiter_name, 
+                    ?cache_cluster_id: ::String,
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?show_cache_node_info: bool,
+                    ?show_cache_clusters_not_in_replication_groups: bool
+                  ) -> Client::_DescribeCacheClustersResponseSuccess
+                    | (:cache_cluster_available waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeCacheClustersResponseSuccess
+                    | (:cache_cluster_deleted waiter_name, 
+                    ?cache_cluster_id: ::String,
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?show_cache_node_info: bool,
+                    ?show_cache_clusters_not_in_replication_groups: bool
+                  ) -> Client::_DescribeCacheClustersResponseSuccess
+                    | (:cache_cluster_deleted waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeCacheClustersResponseSuccess
+                    | (:replication_group_available waiter_name, 
+                    ?replication_group_id: ::String,
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeReplicationGroupsResponseSuccess
+                    | (:replication_group_available waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeReplicationGroupsResponseSuccess
+                    | (:replication_group_deleted waiter_name, 
+                    ?replication_group_id: ::String,
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeReplicationGroupsResponseSuccess
+                    | (:replication_group_deleted waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeReplicationGroupsResponseSuccess
+    end
+  end
+end
+

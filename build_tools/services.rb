@@ -10,10 +10,10 @@ module BuildTools
     MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
 
     # Minimum `aws-sdk-core` version for new gem builds
-    MINIMUM_CORE_VERSION = "3.186.0"
+    MINIMUM_CORE_VERSION = "3.192.0"
 
     # Minimum `aws-sdk-core` version for new S3 gem builds
-    MINIMUM_CORE_VERSION_S3 = "3.186.0"
+    MINIMUM_CORE_VERSION_S3 = "3.192.0"
 
     EVENTSTREAM_PLUGIN = "Aws::Plugins::EventStreamConfiguration"
 
@@ -31,6 +31,12 @@ module BuildTools
       end
     end
     alias service []
+
+    def for_service_id(service_id)
+      services.values.find do |service|
+        service.service_id == service_id
+      end
+    end
 
     def each(&block)
       services.values.each(&block)
@@ -73,7 +79,7 @@ module BuildTools
         gem_dependencies: gem_dependencies(api, config['dependencies'] || {}),
         add_plugins: add_plugins(api, config['addPlugins'] || []),
         remove_plugins: config['removePlugins'] || [],
-        deprecated: config['deprecated']
+        deprecated: config['deprecated'],
       )
     end
 
@@ -101,7 +107,7 @@ module BuildTools
     end
 
     def load_smoke(svc_name, models_dir)
-      path = model_path('smoke.json', models_dir)
+      path = model_path('smoke-2.json', models_dir)
       if path
         smoke = JSON.load(File.read(path))
         BuildTools::Customizations.apply_smoke_customizations(svc_name, smoke)
@@ -170,7 +176,6 @@ module BuildTools
       end
       false
     end
-
   end
 
   Services = ServiceEnumerator.new

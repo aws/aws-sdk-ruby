@@ -1,0 +1,1694 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module S3Control
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?s3_use_arn_region: bool,
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#associate_access_grants_identity_center-instance_method
+      def associate_access_grants_identity_center: (
+                                                     ?account_id: ::String,
+                                                     identity_center_arn: ::String
+                                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateAccessGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessGrantResult]
+        def created_at: () -> ::Time
+        def access_grant_id: () -> ::String
+        def access_grant_arn: () -> ::String
+        def grantee: () -> Types::Grantee
+        def access_grants_location_id: () -> ::String
+        def access_grants_location_configuration: () -> Types::AccessGrantsLocationConfiguration
+        def permission: () -> ("READ" | "WRITE" | "READWRITE")
+        def application_arn: () -> ::String
+        def grant_scope: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#create_access_grant-instance_method
+      def create_access_grant: (
+                                 ?account_id: ::String,
+                                 access_grants_location_id: ::String,
+                                 ?access_grants_location_configuration: {
+                                   s3_sub_prefix: ::String?
+                                 },
+                                 grantee: {
+                                   grantee_type: ("DIRECTORY_USER" | "DIRECTORY_GROUP" | "IAM")?,
+                                   grantee_identifier: ::String?
+                                 },
+                                 permission: ("READ" | "WRITE" | "READWRITE"),
+                                 ?application_arn: ::String,
+                                 ?s3_prefix_type: ("Object"),
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ]
+                               ) -> _CreateAccessGrantResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessGrantResponseSuccess
+
+      interface _CreateAccessGrantsInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessGrantsInstanceResult]
+        def created_at: () -> ::Time
+        def access_grants_instance_id: () -> ::String
+        def access_grants_instance_arn: () -> ::String
+        def identity_center_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#create_access_grants_instance-instance_method
+      def create_access_grants_instance: (
+                                           ?account_id: ::String,
+                                           ?identity_center_arn: ::String,
+                                           ?tags: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String
+                                             },
+                                           ]
+                                         ) -> _CreateAccessGrantsInstanceResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessGrantsInstanceResponseSuccess
+
+      interface _CreateAccessGrantsLocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessGrantsLocationResult]
+        def created_at: () -> ::Time
+        def access_grants_location_id: () -> ::String
+        def access_grants_location_arn: () -> ::String
+        def location_scope: () -> ::String
+        def iam_role_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#create_access_grants_location-instance_method
+      def create_access_grants_location: (
+                                           ?account_id: ::String,
+                                           location_scope: ::String,
+                                           iam_role_arn: ::String,
+                                           ?tags: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String
+                                             },
+                                           ]
+                                         ) -> _CreateAccessGrantsLocationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessGrantsLocationResponseSuccess
+
+      interface _CreateAccessPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessPointResult]
+        def access_point_arn: () -> ::String
+        def alias: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#create_access_point-instance_method
+      def create_access_point: (
+                                 ?account_id: ::String,
+                                 name: ::String,
+                                 bucket: ::String,
+                                 ?vpc_configuration: {
+                                   vpc_id: ::String
+                                 },
+                                 ?public_access_block_configuration: {
+                                   block_public_acls: bool?,
+                                   ignore_public_acls: bool?,
+                                   block_public_policy: bool?,
+                                   restrict_public_buckets: bool?
+                                 },
+                                 ?bucket_account_id: ::String
+                               ) -> _CreateAccessPointResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessPointResponseSuccess
+
+      interface _CreateAccessPointForObjectLambdaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessPointForObjectLambdaResult]
+        def object_lambda_access_point_arn: () -> ::String
+        def alias: () -> Types::ObjectLambdaAccessPointAlias
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#create_access_point_for_object_lambda-instance_method
+      def create_access_point_for_object_lambda: (
+                                                   ?account_id: ::String,
+                                                   name: ::String,
+                                                   configuration: {
+                                                     supporting_access_point: ::String,
+                                                     cloud_watch_metrics_enabled: bool?,
+                                                     allowed_features: Array[("GetObject-Range" | "GetObject-PartNumber" | "HeadObject-Range" | "HeadObject-PartNumber")]?,
+                                                     transformation_configurations: Array[
+                                                       {
+                                                         actions: Array[("GetObject" | "HeadObject" | "ListObjects" | "ListObjectsV2")],
+                                                         content_transformation: {
+                                                           aws_lambda: {
+                                                             function_arn: ::String,
+                                                             function_payload: ::String?
+                                                           }?
+                                                         }
+                                                       },
+                                                     ]
+                                                   }
+                                                 ) -> _CreateAccessPointForObjectLambdaResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessPointForObjectLambdaResponseSuccess
+
+      interface _CreateBucketResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBucketResult]
+        def location: () -> ::String
+        def bucket_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#create_bucket-instance_method
+      def create_bucket: (
+                           ?acl: ("private" | "public-read" | "public-read-write" | "authenticated-read"),
+                           bucket: ::String,
+                           ?create_bucket_configuration: {
+                             location_constraint: ("EU" | "eu-west-1" | "us-west-1" | "us-west-2" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "sa-east-1" | "cn-north-1" | "eu-central-1")?
+                           },
+                           ?grant_full_control: ::String,
+                           ?grant_read: ::String,
+                           ?grant_read_acp: ::String,
+                           ?grant_write: ::String,
+                           ?grant_write_acp: ::String,
+                           ?object_lock_enabled_for_bucket: bool,
+                           ?outpost_id: ::String
+                         ) -> _CreateBucketResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBucketResponseSuccess
+
+      interface _CreateJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateJobResult]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#create_job-instance_method
+      def create_job: (
+                        ?account_id: ::String,
+                        ?confirmation_required: bool,
+                        operation: {
+                          lambda_invoke: {
+                            function_arn: ::String?,
+                            invocation_schema_version: ::String?,
+                            user_arguments: Hash[::String, ::String]?
+                          }?,
+                          s3_put_object_copy: {
+                            target_resource: ::String?,
+                            canned_access_control_list: ("private" | "public-read" | "public-read-write" | "aws-exec-read" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control")?,
+                            access_control_grants: Array[
+                              {
+                                grantee: {
+                                  type_identifier: ("id" | "emailAddress" | "uri")?,
+                                  identifier: ::String?,
+                                  display_name: ::String?
+                                }?,
+                                permission: ("FULL_CONTROL" | "READ" | "WRITE" | "READ_ACP" | "WRITE_ACP")?
+                              },
+                            ]?,
+                            metadata_directive: ("COPY" | "REPLACE")?,
+                            modified_since_constraint: ::Time?,
+                            new_object_metadata: {
+                              cache_control: ::String?,
+                              content_disposition: ::String?,
+                              content_encoding: ::String?,
+                              content_language: ::String?,
+                              user_metadata: Hash[::String, ::String]?,
+                              content_length: ::Integer?,
+                              content_md5: ::String?,
+                              content_type: ::String?,
+                              http_expires_date: ::Time?,
+                              requester_charged: bool?,
+                              sse_algorithm: ("AES256" | "KMS")?
+                            }?,
+                            new_object_tagging: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]?,
+                            redirect_location: ::String?,
+                            requester_pays: bool?,
+                            storage_class: ("STANDARD" | "STANDARD_IA" | "ONEZONE_IA" | "GLACIER" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "GLACIER_IR")?,
+                            un_modified_since_constraint: ::Time?,
+                            sse_aws_kms_key_id: ::String?,
+                            target_key_prefix: ::String?,
+                            object_lock_legal_hold_status: ("OFF" | "ON")?,
+                            object_lock_mode: ("COMPLIANCE" | "GOVERNANCE")?,
+                            object_lock_retain_until_date: ::Time?,
+                            bucket_key_enabled: bool?,
+                            checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")?
+                          }?,
+                          s3_put_object_acl: {
+                            access_control_policy: {
+                              access_control_list: {
+                                owner: {
+                                  id: ::String?,
+                                  display_name: ::String?
+                                },
+                                grants: Array[
+                                  {
+                                    grantee: {
+                                      type_identifier: ("id" | "emailAddress" | "uri")?,
+                                      identifier: ::String?,
+                                      display_name: ::String?
+                                    }?,
+                                    permission: ("FULL_CONTROL" | "READ" | "WRITE" | "READ_ACP" | "WRITE_ACP")?
+                                  },
+                                ]?
+                              }?,
+                              canned_access_control_list: ("private" | "public-read" | "public-read-write" | "aws-exec-read" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control")?
+                            }?
+                          }?,
+                          s3_put_object_tagging: {
+                            tag_set: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]?
+                          }?,
+                          s3_delete_object_tagging: {
+                          }?,
+                          s3_initiate_restore_object: {
+                            expiration_in_days: ::Integer?,
+                            glacier_job_tier: ("BULK" | "STANDARD")?
+                          }?,
+                          s3_put_object_legal_hold: {
+                            legal_hold: {
+                              status: ("OFF" | "ON")
+                            }
+                          }?,
+                          s3_put_object_retention: {
+                            bypass_governance_retention: bool?,
+                            retention: {
+                              retain_until_date: ::Time?,
+                              mode: ("COMPLIANCE" | "GOVERNANCE")?
+                            }
+                          }?,
+                          s3_replicate_object: {
+                          }?
+                        },
+                        report: {
+                          bucket: ::String?,
+                          format: ("Report_CSV_20180820")?,
+                          enabled: bool,
+                          prefix: ::String?,
+                          report_scope: ("AllTasks" | "FailedTasksOnly")?
+                        },
+                        client_request_token: ::String,
+                        ?manifest: {
+                          spec: {
+                            format: ("S3BatchOperations_CSV_20180820" | "S3InventoryReport_CSV_20161130"),
+                            fields: Array[("Ignore" | "Bucket" | "Key" | "VersionId")]?
+                          },
+                          location: {
+                            object_arn: ::String,
+                            object_version_id: ::String?,
+                            etag: ::String
+                          }
+                        },
+                        ?description: ::String,
+                        priority: ::Integer,
+                        role_arn: ::String,
+                        ?tags: Array[
+                          {
+                            key: ::String,
+                            value: ::String
+                          },
+                        ],
+                        ?manifest_generator: {
+                          s3_job_manifest_generator: {
+                            expected_bucket_owner: ::String?,
+                            source_bucket: ::String,
+                            manifest_output_location: {
+                              expected_manifest_bucket_owner: ::String?,
+                              bucket: ::String,
+                              manifest_prefix: ::String?,
+                              manifest_encryption: {
+                                sses3: {
+                                }?,
+                                ssekms: {
+                                  key_id: ::String
+                                }?
+                              }?,
+                              manifest_format: ("S3InventoryReport_CSV_20211130")
+                            }?,
+                            filter: {
+                              eligible_for_replication: bool?,
+                              created_after: ::Time?,
+                              created_before: ::Time?,
+                              object_replication_statuses: Array[("COMPLETED" | "FAILED" | "REPLICA" | "NONE")]?,
+                              key_name_constraint: {
+                                match_any_prefix: Array[::String]?,
+                                match_any_suffix: Array[::String]?,
+                                match_any_substring: Array[::String]?
+                              }?,
+                              object_size_greater_than_bytes: ::Integer?,
+                              object_size_less_than_bytes: ::Integer?,
+                              match_any_storage_class: Array[("STANDARD" | "STANDARD_IA" | "ONEZONE_IA" | "GLACIER" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "GLACIER_IR")]?
+                            }?,
+                            enable_manifest_output: bool
+                          }?
+                        }
+                      ) -> _CreateJobResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobResponseSuccess
+
+      interface _CreateMultiRegionAccessPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMultiRegionAccessPointResult]
+        def request_token_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#create_multi_region_access_point-instance_method
+      def create_multi_region_access_point: (
+                                              ?account_id: ::String,
+                                              client_token: ::String,
+                                              details: {
+                                                name: ::String,
+                                                public_access_block: {
+                                                  block_public_acls: bool?,
+                                                  ignore_public_acls: bool?,
+                                                  block_public_policy: bool?,
+                                                  restrict_public_buckets: bool?
+                                                }?,
+                                                regions: Array[
+                                                  {
+                                                    bucket: ::String,
+                                                    bucket_account_id: ::String?
+                                                  },
+                                                ]
+                                              }
+                                            ) -> _CreateMultiRegionAccessPointResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMultiRegionAccessPointResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#create_storage_lens_group-instance_method
+      def create_storage_lens_group: (
+                                       ?account_id: ::String,
+                                       storage_lens_group: {
+                                         name: ::String,
+                                         filter: {
+                                           match_any_prefix: Array[::String]?,
+                                           match_any_suffix: Array[::String]?,
+                                           match_any_tag: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           match_object_age: {
+                                             days_greater_than: ::Integer?,
+                                             days_less_than: ::Integer?
+                                           }?,
+                                           match_object_size: {
+                                             bytes_greater_than: ::Integer?,
+                                             bytes_less_than: ::Integer?
+                                           }?,
+                                           and: {
+                                             match_any_prefix: Array[::String]?,
+                                             match_any_suffix: Array[::String]?,
+                                             match_any_tag: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String
+                                               },
+                                             ]?,
+                                             match_object_age: {
+                                               days_greater_than: ::Integer?,
+                                               days_less_than: ::Integer?
+                                             }?,
+                                             match_object_size: {
+                                               bytes_greater_than: ::Integer?,
+                                               bytes_less_than: ::Integer?
+                                             }?
+                                           }?,
+                                           or: {
+                                             match_any_prefix: Array[::String]?,
+                                             match_any_suffix: Array[::String]?,
+                                             match_any_tag: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String
+                                               },
+                                             ]?,
+                                             match_object_age: {
+                                               days_greater_than: ::Integer?,
+                                               days_less_than: ::Integer?
+                                             }?,
+                                             match_object_size: {
+                                               bytes_greater_than: ::Integer?,
+                                               bytes_less_than: ::Integer?
+                                             }?
+                                           }?
+                                         },
+                                         storage_lens_group_arn: ::String?
+                                       },
+                                       ?tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_access_grant-instance_method
+      def delete_access_grant: (
+                                 ?account_id: ::String,
+                                 access_grant_id: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_access_grants_instance-instance_method
+      def delete_access_grants_instance: (
+                                           ?account_id: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_access_grants_instance_resource_policy-instance_method
+      def delete_access_grants_instance_resource_policy: (
+                                                           ?account_id: ::String
+                                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_access_grants_location-instance_method
+      def delete_access_grants_location: (
+                                           ?account_id: ::String,
+                                           access_grants_location_id: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_access_point-instance_method
+      def delete_access_point: (
+                                 ?account_id: ::String,
+                                 name: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_access_point_for_object_lambda-instance_method
+      def delete_access_point_for_object_lambda: (
+                                                   ?account_id: ::String,
+                                                   name: ::String
+                                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_access_point_policy-instance_method
+      def delete_access_point_policy: (
+                                        ?account_id: ::String,
+                                        name: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_access_point_policy_for_object_lambda-instance_method
+      def delete_access_point_policy_for_object_lambda: (
+                                                          ?account_id: ::String,
+                                                          name: ::String
+                                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_bucket-instance_method
+      def delete_bucket: (
+                           ?account_id: ::String,
+                           bucket: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_bucket_lifecycle_configuration-instance_method
+      def delete_bucket_lifecycle_configuration: (
+                                                   ?account_id: ::String,
+                                                   bucket: ::String
+                                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_bucket_policy-instance_method
+      def delete_bucket_policy: (
+                                  ?account_id: ::String,
+                                  bucket: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_bucket_replication-instance_method
+      def delete_bucket_replication: (
+                                       ?account_id: ::String,
+                                       bucket: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_bucket_tagging-instance_method
+      def delete_bucket_tagging: (
+                                   ?account_id: ::String,
+                                   bucket: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteJobTaggingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteJobTaggingResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_job_tagging-instance_method
+      def delete_job_tagging: (
+                                ?account_id: ::String,
+                                job_id: ::String
+                              ) -> _DeleteJobTaggingResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteJobTaggingResponseSuccess
+
+      interface _DeleteMultiRegionAccessPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMultiRegionAccessPointResult]
+        def request_token_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_multi_region_access_point-instance_method
+      def delete_multi_region_access_point: (
+                                              ?account_id: ::String,
+                                              client_token: ::String,
+                                              details: {
+                                                name: ::String
+                                              }
+                                            ) -> _DeleteMultiRegionAccessPointResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMultiRegionAccessPointResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_public_access_block-instance_method
+      def delete_public_access_block: (
+                                        ?account_id: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_storage_lens_configuration-instance_method
+      def delete_storage_lens_configuration: (
+                                               config_id: ::String,
+                                               ?account_id: ::String
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteStorageLensConfigurationTaggingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStorageLensConfigurationTaggingResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_storage_lens_configuration_tagging-instance_method
+      def delete_storage_lens_configuration_tagging: (
+                                                       config_id: ::String,
+                                                       ?account_id: ::String
+                                                     ) -> _DeleteStorageLensConfigurationTaggingResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStorageLensConfigurationTaggingResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#delete_storage_lens_group-instance_method
+      def delete_storage_lens_group: (
+                                       name: ::String,
+                                       ?account_id: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeJobResult]
+        def job: () -> Types::JobDescriptor
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#describe_job-instance_method
+      def describe_job: (
+                          ?account_id: ::String,
+                          job_id: ::String
+                        ) -> _DescribeJobResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobResponseSuccess
+
+      interface _DescribeMultiRegionAccessPointOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMultiRegionAccessPointOperationResult]
+        def async_operation: () -> Types::AsyncOperation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#describe_multi_region_access_point_operation-instance_method
+      def describe_multi_region_access_point_operation: (
+                                                          ?account_id: ::String,
+                                                          request_token_arn: ::String
+                                                        ) -> _DescribeMultiRegionAccessPointOperationResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMultiRegionAccessPointOperationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#dissociate_access_grants_identity_center-instance_method
+      def dissociate_access_grants_identity_center: (
+                                                      ?account_id: ::String
+                                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetAccessGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessGrantResult]
+        def created_at: () -> ::Time
+        def access_grant_id: () -> ::String
+        def access_grant_arn: () -> ::String
+        def grantee: () -> Types::Grantee
+        def permission: () -> ("READ" | "WRITE" | "READWRITE")
+        def access_grants_location_id: () -> ::String
+        def access_grants_location_configuration: () -> Types::AccessGrantsLocationConfiguration
+        def grant_scope: () -> ::String
+        def application_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_access_grant-instance_method
+      def get_access_grant: (
+                              ?account_id: ::String,
+                              access_grant_id: ::String
+                            ) -> _GetAccessGrantResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessGrantResponseSuccess
+
+      interface _GetAccessGrantsInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessGrantsInstanceResult]
+        def access_grants_instance_arn: () -> ::String
+        def access_grants_instance_id: () -> ::String
+        def identity_center_arn: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_access_grants_instance-instance_method
+      def get_access_grants_instance: (
+                                        ?account_id: ::String
+                                      ) -> _GetAccessGrantsInstanceResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessGrantsInstanceResponseSuccess
+
+      interface _GetAccessGrantsInstanceForPrefixResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessGrantsInstanceForPrefixResult]
+        def access_grants_instance_arn: () -> ::String
+        def access_grants_instance_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_access_grants_instance_for_prefix-instance_method
+      def get_access_grants_instance_for_prefix: (
+                                                   ?account_id: ::String,
+                                                   s3_prefix: ::String
+                                                 ) -> _GetAccessGrantsInstanceForPrefixResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessGrantsInstanceForPrefixResponseSuccess
+
+      interface _GetAccessGrantsInstanceResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessGrantsInstanceResourcePolicyResult]
+        def policy: () -> ::String
+        def organization: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_access_grants_instance_resource_policy-instance_method
+      def get_access_grants_instance_resource_policy: (
+                                                        ?account_id: ::String
+                                                      ) -> _GetAccessGrantsInstanceResourcePolicyResponseSuccess
+                                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessGrantsInstanceResourcePolicyResponseSuccess
+
+      interface _GetAccessGrantsLocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessGrantsLocationResult]
+        def created_at: () -> ::Time
+        def access_grants_location_id: () -> ::String
+        def access_grants_location_arn: () -> ::String
+        def location_scope: () -> ::String
+        def iam_role_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_access_grants_location-instance_method
+      def get_access_grants_location: (
+                                        ?account_id: ::String,
+                                        access_grants_location_id: ::String
+                                      ) -> _GetAccessGrantsLocationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessGrantsLocationResponseSuccess
+
+      interface _GetAccessPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessPointResult]
+        def name: () -> ::String
+        def bucket: () -> ::String
+        def network_origin: () -> ("Internet" | "VPC")
+        def vpc_configuration: () -> Types::VpcConfiguration
+        def public_access_block_configuration: () -> Types::PublicAccessBlockConfiguration
+        def creation_date: () -> ::Time
+        def alias: () -> ::String
+        def access_point_arn: () -> ::String
+        def endpoints: () -> ::Hash[::String, ::String]
+        def bucket_account_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_access_point-instance_method
+      def get_access_point: (
+                              ?account_id: ::String,
+                              name: ::String
+                            ) -> _GetAccessPointResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessPointResponseSuccess
+
+      interface _GetAccessPointConfigurationForObjectLambdaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessPointConfigurationForObjectLambdaResult]
+        def configuration: () -> Types::ObjectLambdaConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_access_point_configuration_for_object_lambda-instance_method
+      def get_access_point_configuration_for_object_lambda: (
+                                                              ?account_id: ::String,
+                                                              name: ::String
+                                                            ) -> _GetAccessPointConfigurationForObjectLambdaResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessPointConfigurationForObjectLambdaResponseSuccess
+
+      interface _GetAccessPointForObjectLambdaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessPointForObjectLambdaResult]
+        def name: () -> ::String
+        def public_access_block_configuration: () -> Types::PublicAccessBlockConfiguration
+        def creation_date: () -> ::Time
+        def alias: () -> Types::ObjectLambdaAccessPointAlias
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_access_point_for_object_lambda-instance_method
+      def get_access_point_for_object_lambda: (
+                                                ?account_id: ::String,
+                                                name: ::String
+                                              ) -> _GetAccessPointForObjectLambdaResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessPointForObjectLambdaResponseSuccess
+
+      interface _GetAccessPointPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessPointPolicyResult]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_access_point_policy-instance_method
+      def get_access_point_policy: (
+                                     ?account_id: ::String,
+                                     name: ::String
+                                   ) -> _GetAccessPointPolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessPointPolicyResponseSuccess
+
+      interface _GetAccessPointPolicyForObjectLambdaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessPointPolicyForObjectLambdaResult]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_access_point_policy_for_object_lambda-instance_method
+      def get_access_point_policy_for_object_lambda: (
+                                                       ?account_id: ::String,
+                                                       name: ::String
+                                                     ) -> _GetAccessPointPolicyForObjectLambdaResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessPointPolicyForObjectLambdaResponseSuccess
+
+      interface _GetAccessPointPolicyStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessPointPolicyStatusResult]
+        def policy_status: () -> Types::PolicyStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_access_point_policy_status-instance_method
+      def get_access_point_policy_status: (
+                                            ?account_id: ::String,
+                                            name: ::String
+                                          ) -> _GetAccessPointPolicyStatusResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessPointPolicyStatusResponseSuccess
+
+      interface _GetAccessPointPolicyStatusForObjectLambdaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessPointPolicyStatusForObjectLambdaResult]
+        def policy_status: () -> Types::PolicyStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_access_point_policy_status_for_object_lambda-instance_method
+      def get_access_point_policy_status_for_object_lambda: (
+                                                              ?account_id: ::String,
+                                                              name: ::String
+                                                            ) -> _GetAccessPointPolicyStatusForObjectLambdaResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessPointPolicyStatusForObjectLambdaResponseSuccess
+
+      interface _GetBucketResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBucketResult]
+        def bucket: () -> ::String
+        def public_access_block_enabled: () -> bool
+        def creation_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_bucket-instance_method
+      def get_bucket: (
+                        ?account_id: ::String,
+                        bucket: ::String
+                      ) -> _GetBucketResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBucketResponseSuccess
+
+      interface _GetBucketLifecycleConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBucketLifecycleConfigurationResult]
+        def rules: () -> ::Array[Types::LifecycleRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_bucket_lifecycle_configuration-instance_method
+      def get_bucket_lifecycle_configuration: (
+                                                ?account_id: ::String,
+                                                bucket: ::String
+                                              ) -> _GetBucketLifecycleConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBucketLifecycleConfigurationResponseSuccess
+
+      interface _GetBucketPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBucketPolicyResult]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_bucket_policy-instance_method
+      def get_bucket_policy: (
+                               ?account_id: ::String,
+                               bucket: ::String
+                             ) -> _GetBucketPolicyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBucketPolicyResponseSuccess
+
+      interface _GetBucketReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBucketReplicationResult]
+        def replication_configuration: () -> Types::ReplicationConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_bucket_replication-instance_method
+      def get_bucket_replication: (
+                                    ?account_id: ::String,
+                                    bucket: ::String
+                                  ) -> _GetBucketReplicationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBucketReplicationResponseSuccess
+
+      interface _GetBucketTaggingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBucketTaggingResult]
+        def tag_set: () -> ::Array[Types::S3Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_bucket_tagging-instance_method
+      def get_bucket_tagging: (
+                                ?account_id: ::String,
+                                bucket: ::String
+                              ) -> _GetBucketTaggingResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBucketTaggingResponseSuccess
+
+      interface _GetBucketVersioningResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBucketVersioningResult]
+        def status: () -> ("Enabled" | "Suspended")
+        def mfa_delete: () -> ("Enabled" | "Disabled")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_bucket_versioning-instance_method
+      def get_bucket_versioning: (
+                                   ?account_id: ::String,
+                                   bucket: ::String
+                                 ) -> _GetBucketVersioningResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBucketVersioningResponseSuccess
+
+      interface _GetDataAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataAccessResult]
+        def credentials: () -> Types::Credentials
+        def matched_grant_target: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_data_access-instance_method
+      def get_data_access: (
+                             ?account_id: ::String,
+                             target: ::String,
+                             permission: ("READ" | "WRITE" | "READWRITE"),
+                             ?duration_seconds: ::Integer,
+                             ?privilege: ("Minimal" | "Default"),
+                             ?target_type: ("Object")
+                           ) -> _GetDataAccessResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataAccessResponseSuccess
+
+      interface _GetJobTaggingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetJobTaggingResult]
+        def tags: () -> ::Array[Types::S3Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_job_tagging-instance_method
+      def get_job_tagging: (
+                             ?account_id: ::String,
+                             job_id: ::String
+                           ) -> _GetJobTaggingResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobTaggingResponseSuccess
+
+      interface _GetMultiRegionAccessPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMultiRegionAccessPointResult]
+        def access_point: () -> Types::MultiRegionAccessPointReport
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_multi_region_access_point-instance_method
+      def get_multi_region_access_point: (
+                                           ?account_id: ::String,
+                                           name: ::String
+                                         ) -> _GetMultiRegionAccessPointResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMultiRegionAccessPointResponseSuccess
+
+      interface _GetMultiRegionAccessPointPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMultiRegionAccessPointPolicyResult]
+        def policy: () -> Types::MultiRegionAccessPointPolicyDocument
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_multi_region_access_point_policy-instance_method
+      def get_multi_region_access_point_policy: (
+                                                  ?account_id: ::String,
+                                                  name: ::String
+                                                ) -> _GetMultiRegionAccessPointPolicyResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMultiRegionAccessPointPolicyResponseSuccess
+
+      interface _GetMultiRegionAccessPointPolicyStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMultiRegionAccessPointPolicyStatusResult]
+        def established: () -> Types::PolicyStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_multi_region_access_point_policy_status-instance_method
+      def get_multi_region_access_point_policy_status: (
+                                                         ?account_id: ::String,
+                                                         name: ::String
+                                                       ) -> _GetMultiRegionAccessPointPolicyStatusResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMultiRegionAccessPointPolicyStatusResponseSuccess
+
+      interface _GetMultiRegionAccessPointRoutesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMultiRegionAccessPointRoutesResult]
+        def mrap: () -> ::String
+        def routes: () -> ::Array[Types::MultiRegionAccessPointRoute]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_multi_region_access_point_routes-instance_method
+      def get_multi_region_access_point_routes: (
+                                                  ?account_id: ::String,
+                                                  mrap: ::String
+                                                ) -> _GetMultiRegionAccessPointRoutesResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMultiRegionAccessPointRoutesResponseSuccess
+
+      interface _GetPublicAccessBlockResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPublicAccessBlockOutput]
+        def public_access_block_configuration: () -> Types::PublicAccessBlockConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_public_access_block-instance_method
+      def get_public_access_block: (
+                                     ?account_id: ::String
+                                   ) -> _GetPublicAccessBlockResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPublicAccessBlockResponseSuccess
+
+      interface _GetStorageLensConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStorageLensConfigurationResult]
+        def storage_lens_configuration: () -> Types::StorageLensConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_storage_lens_configuration-instance_method
+      def get_storage_lens_configuration: (
+                                            config_id: ::String,
+                                            ?account_id: ::String
+                                          ) -> _GetStorageLensConfigurationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStorageLensConfigurationResponseSuccess
+
+      interface _GetStorageLensConfigurationTaggingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStorageLensConfigurationTaggingResult]
+        def tags: () -> ::Array[Types::StorageLensTag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_storage_lens_configuration_tagging-instance_method
+      def get_storage_lens_configuration_tagging: (
+                                                    config_id: ::String,
+                                                    ?account_id: ::String
+                                                  ) -> _GetStorageLensConfigurationTaggingResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStorageLensConfigurationTaggingResponseSuccess
+
+      interface _GetStorageLensGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStorageLensGroupResult]
+        def storage_lens_group: () -> Types::StorageLensGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#get_storage_lens_group-instance_method
+      def get_storage_lens_group: (
+                                    name: ::String,
+                                    ?account_id: ::String
+                                  ) -> _GetStorageLensGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStorageLensGroupResponseSuccess
+
+      interface _ListAccessGrantsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessGrantsResult]
+        def next_token: () -> ::String
+        def access_grants_list: () -> ::Array[Types::ListAccessGrantEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#list_access_grants-instance_method
+      def list_access_grants: (
+                                ?account_id: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer,
+                                ?grantee_type: ("DIRECTORY_USER" | "DIRECTORY_GROUP" | "IAM"),
+                                ?grantee_identifier: ::String,
+                                ?permission: ("READ" | "WRITE" | "READWRITE"),
+                                ?grant_scope: ::String,
+                                ?application_arn: ::String
+                              ) -> _ListAccessGrantsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessGrantsResponseSuccess
+
+      interface _ListAccessGrantsInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessGrantsInstancesResult]
+        def next_token: () -> ::String
+        def access_grants_instances_list: () -> ::Array[Types::ListAccessGrantsInstanceEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#list_access_grants_instances-instance_method
+      def list_access_grants_instances: (
+                                          ?account_id: ::String,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListAccessGrantsInstancesResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessGrantsInstancesResponseSuccess
+
+      interface _ListAccessGrantsLocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessGrantsLocationsResult]
+        def next_token: () -> ::String
+        def access_grants_locations_list: () -> ::Array[Types::ListAccessGrantsLocationsEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#list_access_grants_locations-instance_method
+      def list_access_grants_locations: (
+                                          ?account_id: ::String,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer,
+                                          ?location_scope: ::String
+                                        ) -> _ListAccessGrantsLocationsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessGrantsLocationsResponseSuccess
+
+      interface _ListAccessPointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessPointsResult]
+        def access_point_list: () -> ::Array[Types::AccessPoint]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#list_access_points-instance_method
+      def list_access_points: (
+                                ?account_id: ::String,
+                                ?bucket: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListAccessPointsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessPointsResponseSuccess
+
+      interface _ListAccessPointsForObjectLambdaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessPointsForObjectLambdaResult]
+        def object_lambda_access_point_list: () -> ::Array[Types::ObjectLambdaAccessPoint]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#list_access_points_for_object_lambda-instance_method
+      def list_access_points_for_object_lambda: (
+                                                  ?account_id: ::String,
+                                                  ?next_token: ::String,
+                                                  ?max_results: ::Integer
+                                                ) -> _ListAccessPointsForObjectLambdaResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessPointsForObjectLambdaResponseSuccess
+
+      interface _ListJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobsResult]
+        def next_token: () -> ::String
+        def jobs: () -> ::Array[Types::JobListDescriptor]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#list_jobs-instance_method
+      def list_jobs: (
+                       ?account_id: ::String,
+                       ?job_statuses: Array[("Active" | "Cancelled" | "Cancelling" | "Complete" | "Completing" | "Failed" | "Failing" | "New" | "Paused" | "Pausing" | "Preparing" | "Ready" | "Suspended")],
+                       ?next_token: ::String,
+                       ?max_results: ::Integer
+                     ) -> _ListJobsResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobsResponseSuccess
+
+      interface _ListMultiRegionAccessPointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMultiRegionAccessPointsResult]
+        def access_points: () -> ::Array[Types::MultiRegionAccessPointReport]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#list_multi_region_access_points-instance_method
+      def list_multi_region_access_points: (
+                                             ?account_id: ::String,
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
+                                           ) -> _ListMultiRegionAccessPointsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMultiRegionAccessPointsResponseSuccess
+
+      interface _ListRegionalBucketsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRegionalBucketsResult]
+        def regional_bucket_list: () -> ::Array[Types::RegionalBucket]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#list_regional_buckets-instance_method
+      def list_regional_buckets: (
+                                   ?account_id: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
+                                   ?outpost_id: ::String
+                                 ) -> _ListRegionalBucketsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRegionalBucketsResponseSuccess
+
+      interface _ListStorageLensConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStorageLensConfigurationsResult]
+        def next_token: () -> ::String
+        def storage_lens_configuration_list: () -> ::Array[Types::ListStorageLensConfigurationEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#list_storage_lens_configurations-instance_method
+      def list_storage_lens_configurations: (
+                                              ?account_id: ::String,
+                                              ?next_token: ::String
+                                            ) -> _ListStorageLensConfigurationsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStorageLensConfigurationsResponseSuccess
+
+      interface _ListStorageLensGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStorageLensGroupsResult]
+        def next_token: () -> ::String
+        def storage_lens_group_list: () -> ::Array[Types::ListStorageLensGroupEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#list_storage_lens_groups-instance_method
+      def list_storage_lens_groups: (
+                                      ?account_id: ::String,
+                                      ?next_token: ::String
+                                    ) -> _ListStorageLensGroupsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStorageLensGroupsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResult]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    ?account_id: ::String,
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutAccessGrantsInstanceResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccessGrantsInstanceResourcePolicyResult]
+        def policy: () -> ::String
+        def organization: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#put_access_grants_instance_resource_policy-instance_method
+      def put_access_grants_instance_resource_policy: (
+                                                        ?account_id: ::String,
+                                                        policy: ::String,
+                                                        ?organization: ::String
+                                                      ) -> _PutAccessGrantsInstanceResourcePolicyResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccessGrantsInstanceResourcePolicyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#put_access_point_configuration_for_object_lambda-instance_method
+      def put_access_point_configuration_for_object_lambda: (
+                                                              ?account_id: ::String,
+                                                              name: ::String,
+                                                              configuration: {
+                                                                supporting_access_point: ::String,
+                                                                cloud_watch_metrics_enabled: bool?,
+                                                                allowed_features: Array[("GetObject-Range" | "GetObject-PartNumber" | "HeadObject-Range" | "HeadObject-PartNumber")]?,
+                                                                transformation_configurations: Array[
+                                                                  {
+                                                                    actions: Array[("GetObject" | "HeadObject" | "ListObjects" | "ListObjectsV2")],
+                                                                    content_transformation: {
+                                                                      aws_lambda: {
+                                                                        function_arn: ::String,
+                                                                        function_payload: ::String?
+                                                                      }?
+                                                                    }
+                                                                  },
+                                                                ]
+                                                              }
+                                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#put_access_point_policy-instance_method
+      def put_access_point_policy: (
+                                     ?account_id: ::String,
+                                     name: ::String,
+                                     policy: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#put_access_point_policy_for_object_lambda-instance_method
+      def put_access_point_policy_for_object_lambda: (
+                                                       ?account_id: ::String,
+                                                       name: ::String,
+                                                       policy: ::String
+                                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#put_bucket_lifecycle_configuration-instance_method
+      def put_bucket_lifecycle_configuration: (
+                                                ?account_id: ::String,
+                                                bucket: ::String,
+                                                ?lifecycle_configuration: {
+                                                  rules: Array[
+                                                    {
+                                                      expiration: {
+                                                        date: ::Time?,
+                                                        days: ::Integer?,
+                                                        expired_object_delete_marker: bool?
+                                                      }?,
+                                                      id: ::String?,
+                                                      filter: {
+                                                        prefix: ::String?,
+                                                        tag: {
+                                                          key: ::String,
+                                                          value: ::String
+                                                        }?,
+                                                        and: {
+                                                          prefix: ::String?,
+                                                          tags: Array[
+                                                            {
+                                                              key: ::String,
+                                                              value: ::String
+                                                            },
+                                                          ]?,
+                                                          object_size_greater_than: ::Integer?,
+                                                          object_size_less_than: ::Integer?
+                                                        }?,
+                                                        object_size_greater_than: ::Integer?,
+                                                        object_size_less_than: ::Integer?
+                                                      }?,
+                                                      status: ("Enabled" | "Disabled"),
+                                                      transitions: Array[
+                                                        {
+                                                          date: ::Time?,
+                                                          days: ::Integer?,
+                                                          storage_class: ("GLACIER" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE")?
+                                                        },
+                                                      ]?,
+                                                      noncurrent_version_transitions: Array[
+                                                        {
+                                                          noncurrent_days: ::Integer?,
+                                                          storage_class: ("GLACIER" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE")?
+                                                        },
+                                                      ]?,
+                                                      noncurrent_version_expiration: {
+                                                        noncurrent_days: ::Integer?,
+                                                        newer_noncurrent_versions: ::Integer?
+                                                      }?,
+                                                      abort_incomplete_multipart_upload: {
+                                                        days_after_initiation: ::Integer?
+                                                      }?
+                                                    },
+                                                  ]?
+                                                }
+                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#put_bucket_policy-instance_method
+      def put_bucket_policy: (
+                               ?account_id: ::String,
+                               bucket: ::String,
+                               ?confirm_remove_self_bucket_access: bool,
+                               policy: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#put_bucket_replication-instance_method
+      def put_bucket_replication: (
+                                    ?account_id: ::String,
+                                    bucket: ::String,
+                                    replication_configuration: {
+                                      role: ::String,
+                                      rules: Array[
+                                        {
+                                          id: ::String?,
+                                          priority: ::Integer?,
+                                          prefix: ::String?,
+                                          filter: {
+                                            prefix: ::String?,
+                                            tag: {
+                                              key: ::String,
+                                              value: ::String
+                                            }?,
+                                            and: {
+                                              prefix: ::String?,
+                                              tags: Array[
+                                                {
+                                                  key: ::String,
+                                                  value: ::String
+                                                },
+                                              ]?
+                                            }?
+                                          }?,
+                                          status: ("Enabled" | "Disabled"),
+                                          source_selection_criteria: {
+                                            sse_kms_encrypted_objects: {
+                                              status: ("Enabled" | "Disabled")
+                                            }?,
+                                            replica_modifications: {
+                                              status: ("Enabled" | "Disabled")
+                                            }?
+                                          }?,
+                                          existing_object_replication: {
+                                            status: ("Enabled" | "Disabled")
+                                          }?,
+                                          destination: {
+                                            account: ::String?,
+                                            bucket: ::String,
+                                            replication_time: {
+                                              status: ("Enabled" | "Disabled"),
+                                              time: {
+                                                minutes: ::Integer?
+                                              }
+                                            }?,
+                                            access_control_translation: {
+                                              owner: ("Destination")
+                                            }?,
+                                            encryption_configuration: {
+                                              replica_kms_key_id: ::String?
+                                            }?,
+                                            metrics: {
+                                              status: ("Enabled" | "Disabled"),
+                                              event_threshold: {
+                                                minutes: ::Integer?
+                                              }?
+                                            }?,
+                                            storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR")?
+                                          },
+                                          delete_marker_replication: {
+                                            status: ("Enabled" | "Disabled")
+                                          }?,
+                                          bucket: ::String
+                                        },
+                                      ]
+                                    }
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#put_bucket_tagging-instance_method
+      def put_bucket_tagging: (
+                                ?account_id: ::String,
+                                bucket: ::String,
+                                tagging: {
+                                  tag_set: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                }
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#put_bucket_versioning-instance_method
+      def put_bucket_versioning: (
+                                   ?account_id: ::String,
+                                   bucket: ::String,
+                                   ?mfa: ::String,
+                                   versioning_configuration: {
+                                     mfa_delete: ("Enabled" | "Disabled")?,
+                                     status: ("Enabled" | "Suspended")?
+                                   }
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutJobTaggingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutJobTaggingResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#put_job_tagging-instance_method
+      def put_job_tagging: (
+                             ?account_id: ::String,
+                             job_id: ::String,
+                             tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _PutJobTaggingResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutJobTaggingResponseSuccess
+
+      interface _PutMultiRegionAccessPointPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutMultiRegionAccessPointPolicyResult]
+        def request_token_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#put_multi_region_access_point_policy-instance_method
+      def put_multi_region_access_point_policy: (
+                                                  ?account_id: ::String,
+                                                  client_token: ::String,
+                                                  details: {
+                                                    name: ::String,
+                                                    policy: ::String
+                                                  }
+                                                ) -> _PutMultiRegionAccessPointPolicyResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutMultiRegionAccessPointPolicyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#put_public_access_block-instance_method
+      def put_public_access_block: (
+                                     public_access_block_configuration: {
+                                       block_public_acls: bool?,
+                                       ignore_public_acls: bool?,
+                                       block_public_policy: bool?,
+                                       restrict_public_buckets: bool?
+                                     },
+                                     ?account_id: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#put_storage_lens_configuration-instance_method
+      def put_storage_lens_configuration: (
+                                            config_id: ::String,
+                                            ?account_id: ::String,
+                                            storage_lens_configuration: {
+                                              id: ::String,
+                                              account_level: {
+                                                activity_metrics: {
+                                                  is_enabled: bool?
+                                                }?,
+                                                bucket_level: {
+                                                  activity_metrics: {
+                                                    is_enabled: bool?
+                                                  }?,
+                                                  prefix_level: {
+                                                    storage_metrics: {
+                                                      is_enabled: bool?,
+                                                      selection_criteria: {
+                                                        delimiter: ::String?,
+                                                        max_depth: ::Integer?,
+                                                        min_storage_bytes_percentage: ::Float?
+                                                      }?
+                                                    }
+                                                  }?,
+                                                  advanced_cost_optimization_metrics: {
+                                                    is_enabled: bool?
+                                                  }?,
+                                                  advanced_data_protection_metrics: {
+                                                    is_enabled: bool?
+                                                  }?,
+                                                  detailed_status_codes_metrics: {
+                                                    is_enabled: bool?
+                                                  }?
+                                                },
+                                                advanced_cost_optimization_metrics: {
+                                                  is_enabled: bool?
+                                                }?,
+                                                advanced_data_protection_metrics: {
+                                                  is_enabled: bool?
+                                                }?,
+                                                detailed_status_codes_metrics: {
+                                                  is_enabled: bool?
+                                                }?,
+                                                storage_lens_group_level: {
+                                                  selection_criteria: {
+                                                    include: Array[::String]?,
+                                                    exclude: Array[::String]?
+                                                  }?
+                                                }?
+                                              },
+                                              include: {
+                                                buckets: Array[::String]?,
+                                                regions: Array[::String]?
+                                              }?,
+                                              exclude: {
+                                                buckets: Array[::String]?,
+                                                regions: Array[::String]?
+                                              }?,
+                                              data_export: {
+                                                s3_bucket_destination: {
+                                                  format: ("CSV" | "Parquet"),
+                                                  output_schema_version: ("V_1"),
+                                                  account_id: ::String,
+                                                  arn: ::String,
+                                                  prefix: ::String?,
+                                                  encryption: {
+                                                    sses3: {
+                                                    }?,
+                                                    ssekms: {
+                                                      key_id: ::String
+                                                    }?
+                                                  }?
+                                                }?,
+                                                cloud_watch_metrics: {
+                                                  is_enabled: bool
+                                                }?
+                                              }?,
+                                              is_enabled: bool,
+                                              aws_org: {
+                                                arn: ::String
+                                              }?,
+                                              storage_lens_arn: ::String?
+                                            },
+                                            ?tags: Array[
+                                              {
+                                                key: ::String,
+                                                value: ::String
+                                              },
+                                            ]
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutStorageLensConfigurationTaggingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutStorageLensConfigurationTaggingResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#put_storage_lens_configuration_tagging-instance_method
+      def put_storage_lens_configuration_tagging: (
+                                                    config_id: ::String,
+                                                    ?account_id: ::String,
+                                                    tags: Array[
+                                                      {
+                                                        key: ::String,
+                                                        value: ::String
+                                                      },
+                                                    ]
+                                                  ) -> _PutStorageLensConfigurationTaggingResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutStorageLensConfigurationTaggingResponseSuccess
+
+      interface _SubmitMultiRegionAccessPointRoutesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SubmitMultiRegionAccessPointRoutesResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#submit_multi_region_access_point_routes-instance_method
+      def submit_multi_region_access_point_routes: (
+                                                     ?account_id: ::String,
+                                                     mrap: ::String,
+                                                     route_updates: Array[
+                                                       {
+                                                         bucket: ::String?,
+                                                         region: ::String?,
+                                                         traffic_dial_percentage: ::Integer
+                                                       },
+                                                     ]
+                                                   ) -> _SubmitMultiRegionAccessPointRoutesResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SubmitMultiRegionAccessPointRoutesResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          ?account_id: ::String,
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            ?account_id: ::String,
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAccessGrantsLocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccessGrantsLocationResult]
+        def created_at: () -> ::Time
+        def access_grants_location_id: () -> ::String
+        def access_grants_location_arn: () -> ::String
+        def location_scope: () -> ::String
+        def iam_role_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#update_access_grants_location-instance_method
+      def update_access_grants_location: (
+                                           ?account_id: ::String,
+                                           access_grants_location_id: ::String,
+                                           iam_role_arn: ::String
+                                         ) -> _UpdateAccessGrantsLocationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccessGrantsLocationResponseSuccess
+
+      interface _UpdateJobPriorityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateJobPriorityResult]
+        def job_id: () -> ::String
+        def priority: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#update_job_priority-instance_method
+      def update_job_priority: (
+                                 ?account_id: ::String,
+                                 job_id: ::String,
+                                 priority: ::Integer
+                               ) -> _UpdateJobPriorityResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateJobPriorityResponseSuccess
+
+      interface _UpdateJobStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateJobStatusResult]
+        def job_id: () -> ::String
+        def status: () -> ("Active" | "Cancelled" | "Cancelling" | "Complete" | "Completing" | "Failed" | "Failing" | "New" | "Paused" | "Pausing" | "Preparing" | "Ready" | "Suspended")
+        def status_update_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#update_job_status-instance_method
+      def update_job_status: (
+                               ?account_id: ::String,
+                               job_id: ::String,
+                               requested_job_status: ("Cancelled" | "Ready"),
+                               ?status_update_reason: ::String
+                             ) -> _UpdateJobStatusResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateJobStatusResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Control/Client.html#update_storage_lens_group-instance_method
+      def update_storage_lens_group: (
+                                       name: ::String,
+                                       ?account_id: ::String,
+                                       storage_lens_group: {
+                                         name: ::String,
+                                         filter: {
+                                           match_any_prefix: Array[::String]?,
+                                           match_any_suffix: Array[::String]?,
+                                           match_any_tag: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           match_object_age: {
+                                             days_greater_than: ::Integer?,
+                                             days_less_than: ::Integer?
+                                           }?,
+                                           match_object_size: {
+                                             bytes_greater_than: ::Integer?,
+                                             bytes_less_than: ::Integer?
+                                           }?,
+                                           and: {
+                                             match_any_prefix: Array[::String]?,
+                                             match_any_suffix: Array[::String]?,
+                                             match_any_tag: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String
+                                               },
+                                             ]?,
+                                             match_object_age: {
+                                               days_greater_than: ::Integer?,
+                                               days_less_than: ::Integer?
+                                             }?,
+                                             match_object_size: {
+                                               bytes_greater_than: ::Integer?,
+                                               bytes_less_than: ::Integer?
+                                             }?
+                                           }?,
+                                           or: {
+                                             match_any_prefix: Array[::String]?,
+                                             match_any_suffix: Array[::String]?,
+                                             match_any_tag: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String
+                                               },
+                                             ]?,
+                                             match_object_age: {
+                                               days_greater_than: ::Integer?,
+                                               days_less_than: ::Integer?
+                                             }?,
+                                             match_object_size: {
+                                               bytes_greater_than: ::Integer?,
+                                               bytes_less_than: ::Integer?
+                                             }?
+                                           }?
+                                         },
+                                         storage_lens_group_arn: ::String?
+                                       }
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

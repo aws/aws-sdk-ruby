@@ -15,6 +15,7 @@ module Aws::SSOOIDC
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessToken = Shapes::StringShape.new(name: 'AccessToken')
+    Assertion = Shapes::StringShape.new(name: 'Assertion')
     AuthCode = Shapes::StringShape.new(name: 'AuthCode')
     AuthorizationPendingException = Shapes::StructureShape.new(name: 'AuthorizationPendingException')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
@@ -23,6 +24,8 @@ module Aws::SSOOIDC
     ClientType = Shapes::StringShape.new(name: 'ClientType')
     CreateTokenRequest = Shapes::StructureShape.new(name: 'CreateTokenRequest')
     CreateTokenResponse = Shapes::StructureShape.new(name: 'CreateTokenResponse')
+    CreateTokenWithIAMRequest = Shapes::StructureShape.new(name: 'CreateTokenWithIAMRequest')
+    CreateTokenWithIAMResponse = Shapes::StructureShape.new(name: 'CreateTokenWithIAMResponse')
     DeviceCode = Shapes::StringShape.new(name: 'DeviceCode')
     Error = Shapes::StringShape.new(name: 'Error')
     ErrorDescription = Shapes::StringShape.new(name: 'ErrorDescription')
@@ -36,9 +39,12 @@ module Aws::SSOOIDC
     InvalidClientMetadataException = Shapes::StructureShape.new(name: 'InvalidClientMetadataException')
     InvalidGrantException = Shapes::StructureShape.new(name: 'InvalidGrantException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    InvalidRequestRegionException = Shapes::StructureShape.new(name: 'InvalidRequestRegionException')
     InvalidScopeException = Shapes::StructureShape.new(name: 'InvalidScopeException')
+    Location = Shapes::StringShape.new(name: 'Location')
     LongTimeStampType = Shapes::IntegerShape.new(name: 'LongTimeStampType')
     RefreshToken = Shapes::StringShape.new(name: 'RefreshToken')
+    Region = Shapes::StringShape.new(name: 'Region')
     RegisterClientRequest = Shapes::StructureShape.new(name: 'RegisterClientRequest')
     RegisterClientResponse = Shapes::StructureShape.new(name: 'RegisterClientResponse')
     Scope = Shapes::StringShape.new(name: 'Scope')
@@ -46,7 +52,9 @@ module Aws::SSOOIDC
     SlowDownException = Shapes::StructureShape.new(name: 'SlowDownException')
     StartDeviceAuthorizationRequest = Shapes::StructureShape.new(name: 'StartDeviceAuthorizationRequest')
     StartDeviceAuthorizationResponse = Shapes::StructureShape.new(name: 'StartDeviceAuthorizationResponse')
+    SubjectToken = Shapes::StringShape.new(name: 'SubjectToken')
     TokenType = Shapes::StringShape.new(name: 'TokenType')
+    TokenTypeURI = Shapes::StringShape.new(name: 'TokenTypeURI')
     URI = Shapes::StringShape.new(name: 'URI')
     UnauthorizedClientException = Shapes::StructureShape.new(name: 'UnauthorizedClientException')
     UnsupportedGrantTypeException = Shapes::StructureShape.new(name: 'UnsupportedGrantTypeException')
@@ -77,6 +85,27 @@ module Aws::SSOOIDC
     CreateTokenResponse.add_member(:id_token, Shapes::ShapeRef.new(shape: IdToken, location_name: "idToken"))
     CreateTokenResponse.struct_class = Types::CreateTokenResponse
 
+    CreateTokenWithIAMRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, required: true, location_name: "clientId"))
+    CreateTokenWithIAMRequest.add_member(:grant_type, Shapes::ShapeRef.new(shape: GrantType, required: true, location_name: "grantType"))
+    CreateTokenWithIAMRequest.add_member(:code, Shapes::ShapeRef.new(shape: AuthCode, location_name: "code"))
+    CreateTokenWithIAMRequest.add_member(:refresh_token, Shapes::ShapeRef.new(shape: RefreshToken, location_name: "refreshToken"))
+    CreateTokenWithIAMRequest.add_member(:assertion, Shapes::ShapeRef.new(shape: Assertion, location_name: "assertion"))
+    CreateTokenWithIAMRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scopes, location_name: "scope"))
+    CreateTokenWithIAMRequest.add_member(:redirect_uri, Shapes::ShapeRef.new(shape: URI, location_name: "redirectUri"))
+    CreateTokenWithIAMRequest.add_member(:subject_token, Shapes::ShapeRef.new(shape: SubjectToken, location_name: "subjectToken"))
+    CreateTokenWithIAMRequest.add_member(:subject_token_type, Shapes::ShapeRef.new(shape: TokenTypeURI, location_name: "subjectTokenType"))
+    CreateTokenWithIAMRequest.add_member(:requested_token_type, Shapes::ShapeRef.new(shape: TokenTypeURI, location_name: "requestedTokenType"))
+    CreateTokenWithIAMRequest.struct_class = Types::CreateTokenWithIAMRequest
+
+    CreateTokenWithIAMResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: AccessToken, location_name: "accessToken"))
+    CreateTokenWithIAMResponse.add_member(:token_type, Shapes::ShapeRef.new(shape: TokenType, location_name: "tokenType"))
+    CreateTokenWithIAMResponse.add_member(:expires_in, Shapes::ShapeRef.new(shape: ExpirationInSeconds, location_name: "expiresIn"))
+    CreateTokenWithIAMResponse.add_member(:refresh_token, Shapes::ShapeRef.new(shape: RefreshToken, location_name: "refreshToken"))
+    CreateTokenWithIAMResponse.add_member(:id_token, Shapes::ShapeRef.new(shape: IdToken, location_name: "idToken"))
+    CreateTokenWithIAMResponse.add_member(:issued_token_type, Shapes::ShapeRef.new(shape: TokenTypeURI, location_name: "issuedTokenType"))
+    CreateTokenWithIAMResponse.add_member(:scope, Shapes::ShapeRef.new(shape: Scopes, location_name: "scope"))
+    CreateTokenWithIAMResponse.struct_class = Types::CreateTokenWithIAMResponse
+
     ExpiredTokenException.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
     ExpiredTokenException.add_member(:error_description, Shapes::ShapeRef.new(shape: ErrorDescription, location_name: "error_description"))
     ExpiredTokenException.struct_class = Types::ExpiredTokenException
@@ -100,6 +129,12 @@ module Aws::SSOOIDC
     InvalidRequestException.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
     InvalidRequestException.add_member(:error_description, Shapes::ShapeRef.new(shape: ErrorDescription, location_name: "error_description"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    InvalidRequestRegionException.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
+    InvalidRequestRegionException.add_member(:error_description, Shapes::ShapeRef.new(shape: ErrorDescription, location_name: "error_description"))
+    InvalidRequestRegionException.add_member(:endpoint, Shapes::ShapeRef.new(shape: Location, location_name: "endpoint"))
+    InvalidRequestRegionException.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
+    InvalidRequestRegionException.struct_class = Types::InvalidRequestRegionException
 
     InvalidScopeException.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
     InvalidScopeException.add_member(:error_description, Shapes::ShapeRef.new(shape: ErrorDescription, location_name: "error_description"))
@@ -160,7 +195,7 @@ module Aws::SSOOIDC
         "serviceFullName" => "AWS SSO OIDC",
         "serviceId" => "SSO OIDC",
         "signatureVersion" => "v4",
-        "signingName" => "awsssooidc",
+        "signingName" => "sso-oauth",
         "uid" => "sso-oidc-2019-06-10",
       }
 
@@ -182,6 +217,26 @@ module Aws::SSOOIDC
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_token_with_iam, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateTokenWithIAM"
+        o.http_method = "POST"
+        o.http_request_uri = "/token?aws_iam=t"
+        o.input = Shapes::ShapeRef.new(shape: CreateTokenWithIAMRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateTokenWithIAMResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClientException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGrantException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedGrantTypeException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidScopeException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationPendingException)
+        o.errors << Shapes::ShapeRef.new(shape: SlowDownException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ExpiredTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestRegionException)
       end)
 
       api.add_operation(:register_client, Seahorse::Model::Operation.new.tap do |o|

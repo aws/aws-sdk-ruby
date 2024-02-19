@@ -1,0 +1,671 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MediaPackage
+  module Types
+
+    class Authorization
+      attr_accessor cdn_identifier_secret: ::String
+      attr_accessor secrets_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Channel
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::String
+      attr_accessor description: ::String
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor hls_ingest: Types::HlsIngest
+      attr_accessor id: ::String
+      attr_accessor ingress_access_logs: Types::IngressAccessLogs
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ChannelCreateParameters
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ChannelList
+      attr_accessor channels: ::Array[Types::Channel]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelUpdateParameters
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CmafEncryption
+      attr_accessor constant_initialization_vector: ::String
+      attr_accessor encryption_method: ("SAMPLE_AES" | "AES_CTR")
+      attr_accessor key_rotation_interval_seconds: ::Integer
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider
+      SENSITIVE: []
+    end
+
+    class CmafPackage
+      attr_accessor encryption: Types::CmafEncryption
+      attr_accessor hls_manifests: ::Array[Types::HlsManifest]
+      attr_accessor segment_duration_seconds: ::Integer
+      attr_accessor segment_prefix: ::String
+      attr_accessor stream_selection: Types::StreamSelection
+      SENSITIVE: []
+    end
+
+    class CmafPackageCreateOrUpdateParameters
+      attr_accessor encryption: Types::CmafEncryption
+      attr_accessor hls_manifests: ::Array[Types::HlsManifestCreateOrUpdateParameters]
+      attr_accessor segment_duration_seconds: ::Integer
+      attr_accessor segment_prefix: ::String
+      attr_accessor stream_selection: Types::StreamSelection
+      SENSITIVE: []
+    end
+
+    class ConfigureLogsParameters
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor ingress_access_logs: Types::IngressAccessLogs
+      SENSITIVE: []
+    end
+
+    class ConfigureLogsRequest
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor id: ::String
+      attr_accessor ingress_access_logs: Types::IngressAccessLogs
+      SENSITIVE: []
+    end
+
+    class ConfigureLogsResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::String
+      attr_accessor description: ::String
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor hls_ingest: Types::HlsIngest
+      attr_accessor id: ::String
+      attr_accessor ingress_access_logs: Types::IngressAccessLogs
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateChannelRequest
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateChannelResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::String
+      attr_accessor description: ::String
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor hls_ingest: Types::HlsIngest
+      attr_accessor id: ::String
+      attr_accessor ingress_access_logs: Types::IngressAccessLogs
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateHarvestJobRequest
+      attr_accessor end_time: ::String
+      attr_accessor id: ::String
+      attr_accessor origin_endpoint_id: ::String
+      attr_accessor s3_destination: Types::S3Destination
+      attr_accessor start_time: ::String
+      SENSITIVE: []
+    end
+
+    class CreateHarvestJobResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_id: ::String
+      attr_accessor created_at: ::String
+      attr_accessor end_time: ::String
+      attr_accessor id: ::String
+      attr_accessor origin_endpoint_id: ::String
+      attr_accessor s3_destination: Types::S3Destination
+      attr_accessor start_time: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class CreateOriginEndpointRequest
+      attr_accessor authorization: Types::Authorization
+      attr_accessor channel_id: ::String
+      attr_accessor cmaf_package: Types::CmafPackageCreateOrUpdateParameters
+      attr_accessor dash_package: Types::DashPackage
+      attr_accessor description: ::String
+      attr_accessor hls_package: Types::HlsPackage
+      attr_accessor id: ::String
+      attr_accessor manifest_name: ::String
+      attr_accessor mss_package: Types::MssPackage
+      attr_accessor origination: ("ALLOW" | "DENY")
+      attr_accessor startover_window_seconds: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor time_delay_seconds: ::Integer
+      attr_accessor whitelist: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateOriginEndpointResponse
+      attr_accessor arn: ::String
+      attr_accessor authorization: Types::Authorization
+      attr_accessor channel_id: ::String
+      attr_accessor cmaf_package: Types::CmafPackage
+      attr_accessor created_at: ::String
+      attr_accessor dash_package: Types::DashPackage
+      attr_accessor description: ::String
+      attr_accessor hls_package: Types::HlsPackage
+      attr_accessor id: ::String
+      attr_accessor manifest_name: ::String
+      attr_accessor mss_package: Types::MssPackage
+      attr_accessor origination: ("ALLOW" | "DENY")
+      attr_accessor startover_window_seconds: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor time_delay_seconds: ::Integer
+      attr_accessor url: ::String
+      attr_accessor whitelist: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DashEncryption
+      attr_accessor key_rotation_interval_seconds: ::Integer
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider
+      SENSITIVE: []
+    end
+
+    class DashPackage
+      attr_accessor ad_triggers: ::Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY")]
+      attr_accessor ads_on_delivery_restrictions: ("NONE" | "RESTRICTED" | "UNRESTRICTED" | "BOTH")
+      attr_accessor encryption: Types::DashEncryption
+      attr_accessor include_iframe_only_stream: bool
+      attr_accessor manifest_layout: ("FULL" | "COMPACT" | "DRM_TOP_LEVEL_COMPACT")
+      attr_accessor manifest_window_seconds: ::Integer
+      attr_accessor min_buffer_time_seconds: ::Integer
+      attr_accessor min_update_period_seconds: ::Integer
+      attr_accessor period_triggers: ::Array[("ADS")]
+      attr_accessor profile: ("NONE" | "HBBTV_1_5" | "HYBRIDCAST" | "DVB_DASH_2014")
+      attr_accessor segment_duration_seconds: ::Integer
+      attr_accessor segment_template_format: ("NUMBER_WITH_TIMELINE" | "TIME_WITH_TIMELINE" | "NUMBER_WITH_DURATION")
+      attr_accessor stream_selection: Types::StreamSelection
+      attr_accessor suggested_presentation_delay_seconds: ::Integer
+      attr_accessor utc_timing: ("NONE" | "HTTP-HEAD" | "HTTP-ISO" | "HTTP-XSDATE")
+      attr_accessor utc_timing_uri: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelResponse < Aws::EmptyStructure
+    end
+
+    class DeleteOriginEndpointRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOriginEndpointResponse < Aws::EmptyStructure
+    end
+
+    class DescribeChannelRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::String
+      attr_accessor description: ::String
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor hls_ingest: Types::HlsIngest
+      attr_accessor id: ::String
+      attr_accessor ingress_access_logs: Types::IngressAccessLogs
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeHarvestJobRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeHarvestJobResponse
+      attr_accessor arn: ::String
+      attr_accessor channel_id: ::String
+      attr_accessor created_at: ::String
+      attr_accessor end_time: ::String
+      attr_accessor id: ::String
+      attr_accessor origin_endpoint_id: ::String
+      attr_accessor s3_destination: Types::S3Destination
+      attr_accessor start_time: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DescribeOriginEndpointRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOriginEndpointResponse
+      attr_accessor arn: ::String
+      attr_accessor authorization: Types::Authorization
+      attr_accessor channel_id: ::String
+      attr_accessor cmaf_package: Types::CmafPackage
+      attr_accessor created_at: ::String
+      attr_accessor dash_package: Types::DashPackage
+      attr_accessor description: ::String
+      attr_accessor hls_package: Types::HlsPackage
+      attr_accessor id: ::String
+      attr_accessor manifest_name: ::String
+      attr_accessor mss_package: Types::MssPackage
+      attr_accessor origination: ("ALLOW" | "DENY")
+      attr_accessor startover_window_seconds: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor time_delay_seconds: ::Integer
+      attr_accessor url: ::String
+      attr_accessor whitelist: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EgressAccessLogs
+      attr_accessor log_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionContractConfiguration
+      attr_accessor preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED")
+      attr_accessor preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HarvestJob
+      attr_accessor arn: ::String
+      attr_accessor channel_id: ::String
+      attr_accessor created_at: ::String
+      attr_accessor end_time: ::String
+      attr_accessor id: ::String
+      attr_accessor origin_endpoint_id: ::String
+      attr_accessor s3_destination: Types::S3Destination
+      attr_accessor start_time: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class HarvestJobCreateParameters
+      attr_accessor end_time: ::String
+      attr_accessor id: ::String
+      attr_accessor origin_endpoint_id: ::String
+      attr_accessor s3_destination: Types::S3Destination
+      attr_accessor start_time: ::String
+      SENSITIVE: []
+    end
+
+    class HarvestJobList
+      attr_accessor harvest_jobs: ::Array[Types::HarvestJob]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class HlsEncryption
+      attr_accessor constant_initialization_vector: ::String
+      attr_accessor encryption_method: ("AES_128" | "SAMPLE_AES")
+      attr_accessor key_rotation_interval_seconds: ::Integer
+      attr_accessor repeat_ext_x_key: bool
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider
+      SENSITIVE: []
+    end
+
+    class HlsIngest
+      attr_accessor ingest_endpoints: ::Array[Types::IngestEndpoint]
+      SENSITIVE: []
+    end
+
+    class HlsManifest
+      attr_accessor ad_markers: ("NONE" | "SCTE35_ENHANCED" | "PASSTHROUGH" | "DATERANGE")
+      attr_accessor id: ::String
+      attr_accessor include_iframe_only_stream: bool
+      attr_accessor manifest_name: ::String
+      attr_accessor playlist_type: ("NONE" | "EVENT" | "VOD")
+      attr_accessor playlist_window_seconds: ::Integer
+      attr_accessor program_date_time_interval_seconds: ::Integer
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class HlsManifestCreateOrUpdateParameters
+      attr_accessor ad_markers: ("NONE" | "SCTE35_ENHANCED" | "PASSTHROUGH" | "DATERANGE")
+      attr_accessor ad_triggers: ::Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY")]
+      attr_accessor ads_on_delivery_restrictions: ("NONE" | "RESTRICTED" | "UNRESTRICTED" | "BOTH")
+      attr_accessor id: ::String
+      attr_accessor include_iframe_only_stream: bool
+      attr_accessor manifest_name: ::String
+      attr_accessor playlist_type: ("NONE" | "EVENT" | "VOD")
+      attr_accessor playlist_window_seconds: ::Integer
+      attr_accessor program_date_time_interval_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class HlsPackage
+      attr_accessor ad_markers: ("NONE" | "SCTE35_ENHANCED" | "PASSTHROUGH" | "DATERANGE")
+      attr_accessor ad_triggers: ::Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY")]
+      attr_accessor ads_on_delivery_restrictions: ("NONE" | "RESTRICTED" | "UNRESTRICTED" | "BOTH")
+      attr_accessor encryption: Types::HlsEncryption
+      attr_accessor include_dvb_subtitles: bool
+      attr_accessor include_iframe_only_stream: bool
+      attr_accessor playlist_type: ("NONE" | "EVENT" | "VOD")
+      attr_accessor playlist_window_seconds: ::Integer
+      attr_accessor program_date_time_interval_seconds: ::Integer
+      attr_accessor segment_duration_seconds: ::Integer
+      attr_accessor stream_selection: Types::StreamSelection
+      attr_accessor use_audio_rendition_group: bool
+      SENSITIVE: []
+    end
+
+    class IngestEndpoint
+      attr_accessor id: ::String
+      attr_accessor password: ::String
+      attr_accessor url: ::String
+      attr_accessor username: ::String
+      SENSITIVE: [:password, :username]
+    end
+
+    class IngressAccessLogs
+      attr_accessor log_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelsResponse
+      attr_accessor channels: ::Array[Types::Channel]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHarvestJobsRequest
+      attr_accessor include_channel_id: ::String
+      attr_accessor include_status: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHarvestJobsResponse
+      attr_accessor harvest_jobs: ::Array[Types::HarvestJob]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOriginEndpointsRequest
+      attr_accessor channel_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOriginEndpointsResponse
+      attr_accessor next_token: ::String
+      attr_accessor origin_endpoints: ::Array[Types::OriginEndpoint]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MssEncryption
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider
+      SENSITIVE: []
+    end
+
+    class MssPackage
+      attr_accessor encryption: Types::MssEncryption
+      attr_accessor manifest_window_seconds: ::Integer
+      attr_accessor segment_duration_seconds: ::Integer
+      attr_accessor stream_selection: Types::StreamSelection
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OriginEndpoint
+      attr_accessor arn: ::String
+      attr_accessor authorization: Types::Authorization
+      attr_accessor channel_id: ::String
+      attr_accessor cmaf_package: Types::CmafPackage
+      attr_accessor created_at: ::String
+      attr_accessor dash_package: Types::DashPackage
+      attr_accessor description: ::String
+      attr_accessor hls_package: Types::HlsPackage
+      attr_accessor id: ::String
+      attr_accessor manifest_name: ::String
+      attr_accessor mss_package: Types::MssPackage
+      attr_accessor origination: ("ALLOW" | "DENY")
+      attr_accessor startover_window_seconds: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor time_delay_seconds: ::Integer
+      attr_accessor url: ::String
+      attr_accessor whitelist: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class OriginEndpointCreateParameters
+      attr_accessor authorization: Types::Authorization
+      attr_accessor channel_id: ::String
+      attr_accessor cmaf_package: Types::CmafPackageCreateOrUpdateParameters
+      attr_accessor dash_package: Types::DashPackage
+      attr_accessor description: ::String
+      attr_accessor hls_package: Types::HlsPackage
+      attr_accessor id: ::String
+      attr_accessor manifest_name: ::String
+      attr_accessor mss_package: Types::MssPackage
+      attr_accessor origination: ("ALLOW" | "DENY")
+      attr_accessor startover_window_seconds: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor time_delay_seconds: ::Integer
+      attr_accessor whitelist: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class OriginEndpointList
+      attr_accessor next_token: ::String
+      attr_accessor origin_endpoints: ::Array[Types::OriginEndpoint]
+      SENSITIVE: []
+    end
+
+    class OriginEndpointUpdateParameters
+      attr_accessor authorization: Types::Authorization
+      attr_accessor cmaf_package: Types::CmafPackageCreateOrUpdateParameters
+      attr_accessor dash_package: Types::DashPackage
+      attr_accessor description: ::String
+      attr_accessor hls_package: Types::HlsPackage
+      attr_accessor manifest_name: ::String
+      attr_accessor mss_package: Types::MssPackage
+      attr_accessor origination: ("ALLOW" | "DENY")
+      attr_accessor startover_window_seconds: ::Integer
+      attr_accessor time_delay_seconds: ::Integer
+      attr_accessor whitelist: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RotateChannelCredentialsRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class RotateChannelCredentialsResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::String
+      attr_accessor description: ::String
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor hls_ingest: Types::HlsIngest
+      attr_accessor id: ::String
+      attr_accessor ingress_access_logs: Types::IngressAccessLogs
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RotateIngestEndpointCredentialsRequest
+      attr_accessor id: ::String
+      attr_accessor ingest_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class RotateIngestEndpointCredentialsResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::String
+      attr_accessor description: ::String
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor hls_ingest: Types::HlsIngest
+      attr_accessor id: ::String
+      attr_accessor ingress_access_logs: Types::IngressAccessLogs
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class S3Destination
+      attr_accessor bucket_name: ::String
+      attr_accessor manifest_key: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SpekeKeyProvider
+      attr_accessor certificate_arn: ::String
+      attr_accessor encryption_contract_configuration: Types::EncryptionContractConfiguration
+      attr_accessor resource_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor system_ids: ::Array[::String]
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class StreamSelection
+      attr_accessor max_video_bits_per_second: ::Integer
+      attr_accessor min_video_bits_per_second: ::Integer
+      attr_accessor stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagsModel
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnprocessableEntityException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateChannelRequest
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChannelResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::String
+      attr_accessor description: ::String
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor hls_ingest: Types::HlsIngest
+      attr_accessor id: ::String
+      attr_accessor ingress_access_logs: Types::IngressAccessLogs
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateOriginEndpointRequest
+      attr_accessor authorization: Types::Authorization
+      attr_accessor cmaf_package: Types::CmafPackageCreateOrUpdateParameters
+      attr_accessor dash_package: Types::DashPackage
+      attr_accessor description: ::String
+      attr_accessor hls_package: Types::HlsPackage
+      attr_accessor id: ::String
+      attr_accessor manifest_name: ::String
+      attr_accessor mss_package: Types::MssPackage
+      attr_accessor origination: ("ALLOW" | "DENY")
+      attr_accessor startover_window_seconds: ::Integer
+      attr_accessor time_delay_seconds: ::Integer
+      attr_accessor whitelist: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateOriginEndpointResponse
+      attr_accessor arn: ::String
+      attr_accessor authorization: Types::Authorization
+      attr_accessor channel_id: ::String
+      attr_accessor cmaf_package: Types::CmafPackage
+      attr_accessor created_at: ::String
+      attr_accessor dash_package: Types::DashPackage
+      attr_accessor description: ::String
+      attr_accessor hls_package: Types::HlsPackage
+      attr_accessor id: ::String
+      attr_accessor manifest_name: ::String
+      attr_accessor mss_package: Types::MssPackage
+      attr_accessor origination: ("ALLOW" | "DENY")
+      attr_accessor startover_window_seconds: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor time_delay_seconds: ::Integer
+      attr_accessor url: ::String
+      attr_accessor whitelist: ::Array[::String]
+      SENSITIVE: []
+    end
+  end
+end

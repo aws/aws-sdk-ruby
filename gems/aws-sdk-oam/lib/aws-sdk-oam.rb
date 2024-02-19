@@ -52,6 +52,6 @@ require_relative 'aws-sdk-oam/customizations'
 # @!group service
 module Aws::OAM
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.12.0'
 
 end

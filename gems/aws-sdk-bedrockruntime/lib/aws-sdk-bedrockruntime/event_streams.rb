@@ -27,16 +27,16 @@ module Aws::BedrockRuntime
         @event_emitter.on(:model_stream_error_exception, block) if block_given?
       end
 
-      def on_model_timeout_exception_event(&block)
-        @event_emitter.on(:model_timeout_exception, block) if block_given?
+      def on_validation_exception_event(&block)
+        @event_emitter.on(:validation_exception, block) if block_given?
       end
 
       def on_throttling_exception_event(&block)
         @event_emitter.on(:throttling_exception, block) if block_given?
       end
 
-      def on_validation_exception_event(&block)
-        @event_emitter.on(:validation_exception, block) if block_given?
+      def on_model_timeout_exception_event(&block)
+        @event_emitter.on(:model_timeout_exception, block) if block_given?
       end
 
       def on_error_event(&block)
@@ -55,9 +55,9 @@ module Aws::BedrockRuntime
         on_chunk_event(&block)
         on_internal_server_exception_event(&block)
         on_model_stream_error_exception_event(&block)
-        on_model_timeout_exception_event(&block)
-        on_throttling_exception_event(&block)
         on_validation_exception_event(&block)
+        on_throttling_exception_event(&block)
+        on_model_timeout_exception_event(&block)
         on_error_event(&block)
         on_initial_response_event(&block)
         on_unknown_event(&block)

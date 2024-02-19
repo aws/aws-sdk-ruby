@@ -1,0 +1,1198 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudTrail
+  module Types
+
+    class AccessDeniedException < Aws::EmptyStructure
+    end
+
+    class AccountHasOngoingImportException < Aws::EmptyStructure
+    end
+
+    class AccountNotFoundException < Aws::EmptyStructure
+    end
+
+    class AccountNotRegisteredException < Aws::EmptyStructure
+    end
+
+    class AccountRegisteredException < Aws::EmptyStructure
+    end
+
+    class AddTagsRequest
+      attr_accessor resource_id: ::String
+      attr_accessor tags_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AddTagsResponse < Aws::EmptyStructure
+    end
+
+    class AdvancedEventSelector
+      attr_accessor name: ::String
+      attr_accessor field_selectors: ::Array[Types::AdvancedFieldSelector]
+      SENSITIVE: []
+    end
+
+    class AdvancedFieldSelector
+      attr_accessor field: ::String
+      attr_accessor equals: ::Array[::String]
+      attr_accessor starts_with: ::Array[::String]
+      attr_accessor ends_with: ::Array[::String]
+      attr_accessor not_equals: ::Array[::String]
+      attr_accessor not_starts_with: ::Array[::String]
+      attr_accessor not_ends_with: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CancelQueryRequest
+      attr_accessor event_data_store: ::String
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelQueryResponse
+      attr_accessor query_id: ::String
+      attr_accessor query_status: ("QUEUED" | "RUNNING" | "FINISHED" | "FAILED" | "CANCELLED" | "TIMED_OUT")
+      SENSITIVE: []
+    end
+
+    class CannotDelegateManagementAccountException < Aws::EmptyStructure
+    end
+
+    class Channel
+      attr_accessor channel_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelARNInvalidException < Aws::EmptyStructure
+    end
+
+    class ChannelAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class ChannelExistsForEDSException < Aws::EmptyStructure
+    end
+
+    class ChannelMaxLimitExceededException < Aws::EmptyStructure
+    end
+
+    class ChannelNotFoundException < Aws::EmptyStructure
+    end
+
+    class CloudTrailARNInvalidException < Aws::EmptyStructure
+    end
+
+    class CloudTrailAccessNotEnabledException < Aws::EmptyStructure
+    end
+
+    class CloudTrailInvalidClientTokenIdException < Aws::EmptyStructure
+    end
+
+    class CloudWatchLogsDeliveryUnavailableException < Aws::EmptyStructure
+    end
+
+    class ConcurrentModificationException < Aws::EmptyStructure
+    end
+
+    class ConflictException < Aws::EmptyStructure
+    end
+
+    class CreateChannelRequest
+      attr_accessor name: ::String
+      attr_accessor source: ::String
+      attr_accessor destinations: ::Array[Types::Destination]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateChannelResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor source: ::String
+      attr_accessor destinations: ::Array[Types::Destination]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateEventDataStoreRequest
+      attr_accessor name: ::String
+      attr_accessor advanced_event_selectors: ::Array[Types::AdvancedEventSelector]
+      attr_accessor multi_region_enabled: bool
+      attr_accessor organization_enabled: bool
+      attr_accessor retention_period: ::Integer
+      attr_accessor termination_protection_enabled: bool
+      attr_accessor tags_list: ::Array[Types::Tag]
+      attr_accessor kms_key_id: ::String
+      attr_accessor start_ingestion: bool
+      attr_accessor billing_mode: ("EXTENDABLE_RETENTION_PRICING" | "FIXED_RETENTION_PRICING")
+      SENSITIVE: []
+    end
+
+    class CreateEventDataStoreResponse
+      attr_accessor event_data_store_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATED" | "ENABLED" | "PENDING_DELETION" | "STARTING_INGESTION" | "STOPPING_INGESTION" | "STOPPED_INGESTION")
+      attr_accessor advanced_event_selectors: ::Array[Types::AdvancedEventSelector]
+      attr_accessor multi_region_enabled: bool
+      attr_accessor organization_enabled: bool
+      attr_accessor retention_period: ::Integer
+      attr_accessor termination_protection_enabled: bool
+      attr_accessor tags_list: ::Array[Types::Tag]
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      attr_accessor kms_key_id: ::String
+      attr_accessor billing_mode: ("EXTENDABLE_RETENTION_PRICING" | "FIXED_RETENTION_PRICING")
+      SENSITIVE: []
+    end
+
+    class CreateTrailRequest
+      attr_accessor name: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor sns_topic_name: ::String
+      attr_accessor include_global_service_events: bool
+      attr_accessor is_multi_region_trail: bool
+      attr_accessor enable_log_file_validation: bool
+      attr_accessor cloud_watch_logs_log_group_arn: ::String
+      attr_accessor cloud_watch_logs_role_arn: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor is_organization_trail: bool
+      attr_accessor tags_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateTrailResponse
+      attr_accessor name: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor sns_topic_name: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor include_global_service_events: bool
+      attr_accessor is_multi_region_trail: bool
+      attr_accessor trail_arn: ::String
+      attr_accessor log_file_validation_enabled: bool
+      attr_accessor cloud_watch_logs_log_group_arn: ::String
+      attr_accessor cloud_watch_logs_role_arn: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor is_organization_trail: bool
+      SENSITIVE: []
+    end
+
+    class DataResource
+      attr_accessor type: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DelegatedAdminAccountLimitExceededException < Aws::EmptyStructure
+    end
+
+    class DeleteChannelRequest
+      attr_accessor channel: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelResponse < Aws::EmptyStructure
+    end
+
+    class DeleteEventDataStoreRequest
+      attr_accessor event_data_store: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventDataStoreResponse < Aws::EmptyStructure
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTrailRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTrailResponse < Aws::EmptyStructure
+    end
+
+    class DeregisterOrganizationDelegatedAdminRequest
+      attr_accessor delegated_admin_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterOrganizationDelegatedAdminResponse < Aws::EmptyStructure
+    end
+
+    class DescribeQueryRequest
+      attr_accessor event_data_store: ::String
+      attr_accessor query_id: ::String
+      attr_accessor query_alias: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeQueryResponse
+      attr_accessor query_id: ::String
+      attr_accessor query_string: ::String
+      attr_accessor query_status: ("QUEUED" | "RUNNING" | "FINISHED" | "FAILED" | "CANCELLED" | "TIMED_OUT")
+      attr_accessor query_statistics: Types::QueryStatisticsForDescribeQuery
+      attr_accessor error_message: ::String
+      attr_accessor delivery_s3_uri: ::String
+      attr_accessor delivery_status: ("SUCCESS" | "FAILED" | "FAILED_SIGNING_FILE" | "PENDING" | "RESOURCE_NOT_FOUND" | "ACCESS_DENIED" | "ACCESS_DENIED_SIGNING_FILE" | "CANCELLED" | "UNKNOWN")
+      SENSITIVE: []
+    end
+
+    class DescribeTrailsRequest
+      attr_accessor trail_name_list: ::Array[::String]
+      attr_accessor include_shadow_trails: bool
+      SENSITIVE: []
+    end
+
+    class DescribeTrailsResponse
+      attr_accessor trail_list: ::Array[Types::Trail]
+      SENSITIVE: []
+    end
+
+    class Destination
+      attr_accessor type: ("EVENT_DATA_STORE" | "AWS_SERVICE")
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class DisableFederationRequest
+      attr_accessor event_data_store: ::String
+      SENSITIVE: []
+    end
+
+    class DisableFederationResponse
+      attr_accessor event_data_store_arn: ::String
+      attr_accessor federation_status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class EnableFederationRequest
+      attr_accessor event_data_store: ::String
+      attr_accessor federation_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EnableFederationResponse
+      attr_accessor event_data_store_arn: ::String
+      attr_accessor federation_status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED")
+      attr_accessor federation_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Event
+      attr_accessor event_id: ::String
+      attr_accessor event_name: ::String
+      attr_accessor read_only: ::String
+      attr_accessor access_key_id: ::String
+      attr_accessor event_time: ::Time
+      attr_accessor event_source: ::String
+      attr_accessor username: ::String
+      attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor cloud_trail_event: ::String
+      SENSITIVE: []
+    end
+
+    class EventDataStore
+      attr_accessor event_data_store_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor termination_protection_enabled: bool
+      attr_accessor status: ("CREATED" | "ENABLED" | "PENDING_DELETION" | "STARTING_INGESTION" | "STOPPING_INGESTION" | "STOPPED_INGESTION")
+      attr_accessor advanced_event_selectors: ::Array[Types::AdvancedEventSelector]
+      attr_accessor multi_region_enabled: bool
+      attr_accessor organization_enabled: bool
+      attr_accessor retention_period: ::Integer
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class EventDataStoreARNInvalidException < Aws::EmptyStructure
+    end
+
+    class EventDataStoreAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class EventDataStoreFederationEnabledException < Aws::EmptyStructure
+    end
+
+    class EventDataStoreHasOngoingImportException < Aws::EmptyStructure
+    end
+
+    class EventDataStoreMaxLimitExceededException < Aws::EmptyStructure
+    end
+
+    class EventDataStoreNotFoundException < Aws::EmptyStructure
+    end
+
+    class EventDataStoreTerminationProtectedException < Aws::EmptyStructure
+    end
+
+    class EventSelector
+      attr_accessor read_write_type: ("ReadOnly" | "WriteOnly" | "All")
+      attr_accessor include_management_events: bool
+      attr_accessor data_resources: ::Array[Types::DataResource]
+      attr_accessor exclude_management_event_sources: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetChannelRequest
+      attr_accessor channel: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor source: ::String
+      attr_accessor source_config: Types::SourceConfig
+      attr_accessor destinations: ::Array[Types::Destination]
+      attr_accessor ingestion_status: Types::IngestionStatus
+      SENSITIVE: []
+    end
+
+    class GetEventDataStoreRequest
+      attr_accessor event_data_store: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventDataStoreResponse
+      attr_accessor event_data_store_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATED" | "ENABLED" | "PENDING_DELETION" | "STARTING_INGESTION" | "STOPPING_INGESTION" | "STOPPED_INGESTION")
+      attr_accessor advanced_event_selectors: ::Array[Types::AdvancedEventSelector]
+      attr_accessor multi_region_enabled: bool
+      attr_accessor organization_enabled: bool
+      attr_accessor retention_period: ::Integer
+      attr_accessor termination_protection_enabled: bool
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      attr_accessor kms_key_id: ::String
+      attr_accessor billing_mode: ("EXTENDABLE_RETENTION_PRICING" | "FIXED_RETENTION_PRICING")
+      attr_accessor federation_status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED")
+      attr_accessor federation_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventSelectorsRequest
+      attr_accessor trail_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventSelectorsResponse
+      attr_accessor trail_arn: ::String
+      attr_accessor event_selectors: ::Array[Types::EventSelector]
+      attr_accessor advanced_event_selectors: ::Array[Types::AdvancedEventSelector]
+      SENSITIVE: []
+    end
+
+    class GetImportRequest
+      attr_accessor import_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetImportResponse
+      attr_accessor import_id: ::String
+      attr_accessor destinations: ::Array[::String]
+      attr_accessor import_source: Types::ImportSource
+      attr_accessor start_event_time: ::Time
+      attr_accessor end_event_time: ::Time
+      attr_accessor import_status: ("INITIALIZING" | "IN_PROGRESS" | "FAILED" | "STOPPED" | "COMPLETED")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      attr_accessor import_statistics: Types::ImportStatistics
+      SENSITIVE: []
+    end
+
+    class GetInsightSelectorsRequest
+      attr_accessor trail_name: ::String
+      attr_accessor event_data_store: ::String
+      SENSITIVE: []
+    end
+
+    class GetInsightSelectorsResponse
+      attr_accessor trail_arn: ::String
+      attr_accessor insight_selectors: ::Array[Types::InsightSelector]
+      attr_accessor event_data_store_arn: ::String
+      attr_accessor insights_destination: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueryResultsRequest
+      attr_accessor event_data_store: ::String
+      attr_accessor query_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_query_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetQueryResultsResponse
+      attr_accessor query_status: ("QUEUED" | "RUNNING" | "FINISHED" | "FAILED" | "CANCELLED" | "TIMED_OUT")
+      attr_accessor query_statistics: Types::QueryStatistics
+      attr_accessor query_result_rows: ::Array[::Array[::Hash[::String, ::String]]]
+      attr_accessor next_token: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrailRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrailResponse
+      attr_accessor trail: Types::Trail
+      SENSITIVE: []
+    end
+
+    class GetTrailStatusRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrailStatusResponse
+      attr_accessor is_logging: bool
+      attr_accessor latest_delivery_error: ::String
+      attr_accessor latest_notification_error: ::String
+      attr_accessor latest_delivery_time: ::Time
+      attr_accessor latest_notification_time: ::Time
+      attr_accessor start_logging_time: ::Time
+      attr_accessor stop_logging_time: ::Time
+      attr_accessor latest_cloud_watch_logs_delivery_error: ::String
+      attr_accessor latest_cloud_watch_logs_delivery_time: ::Time
+      attr_accessor latest_digest_delivery_time: ::Time
+      attr_accessor latest_digest_delivery_error: ::String
+      attr_accessor latest_delivery_attempt_time: ::String
+      attr_accessor latest_notification_attempt_time: ::String
+      attr_accessor latest_notification_attempt_succeeded: ::String
+      attr_accessor latest_delivery_attempt_succeeded: ::String
+      attr_accessor time_logging_started: ::String
+      attr_accessor time_logging_stopped: ::String
+      SENSITIVE: []
+    end
+
+    class ImportFailureListItem
+      attr_accessor location: ::String
+      attr_accessor status: ("FAILED" | "RETRY" | "SUCCEEDED")
+      attr_accessor error_type: ::String
+      attr_accessor error_message: ::String
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ImportNotFoundException < Aws::EmptyStructure
+    end
+
+    class ImportSource
+      attr_accessor s3: Types::S3ImportSource
+      SENSITIVE: []
+    end
+
+    class ImportStatistics
+      attr_accessor prefixes_found: ::Integer
+      attr_accessor prefixes_completed: ::Integer
+      attr_accessor files_completed: ::Integer
+      attr_accessor events_completed: ::Integer
+      attr_accessor failed_entries: ::Integer
+      SENSITIVE: []
+    end
+
+    class ImportsListItem
+      attr_accessor import_id: ::String
+      attr_accessor import_status: ("INITIALIZING" | "IN_PROGRESS" | "FAILED" | "STOPPED" | "COMPLETED")
+      attr_accessor destinations: ::Array[::String]
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class InactiveEventDataStoreException < Aws::EmptyStructure
+    end
+
+    class InactiveQueryException < Aws::EmptyStructure
+    end
+
+    class IngestionStatus
+      attr_accessor latest_ingestion_success_time: ::Time
+      attr_accessor latest_ingestion_success_event_id: ::String
+      attr_accessor latest_ingestion_error_code: ::String
+      attr_accessor latest_ingestion_attempt_time: ::Time
+      attr_accessor latest_ingestion_attempt_event_id: ::String
+      SENSITIVE: []
+    end
+
+    class InsightNotEnabledException < Aws::EmptyStructure
+    end
+
+    class InsightSelector
+      attr_accessor insight_type: ("ApiCallRateInsight" | "ApiErrorRateInsight")
+      SENSITIVE: []
+    end
+
+    class InsufficientDependencyServiceAccessPermissionException < Aws::EmptyStructure
+    end
+
+    class InsufficientEncryptionPolicyException < Aws::EmptyStructure
+    end
+
+    class InsufficientS3BucketPolicyException < Aws::EmptyStructure
+    end
+
+    class InsufficientSnsTopicPolicyException < Aws::EmptyStructure
+    end
+
+    class InvalidCloudWatchLogsLogGroupArnException < Aws::EmptyStructure
+    end
+
+    class InvalidCloudWatchLogsRoleArnException < Aws::EmptyStructure
+    end
+
+    class InvalidDateRangeException < Aws::EmptyStructure
+    end
+
+    class InvalidEventCategoryException < Aws::EmptyStructure
+    end
+
+    class InvalidEventDataStoreCategoryException < Aws::EmptyStructure
+    end
+
+    class InvalidEventDataStoreStatusException < Aws::EmptyStructure
+    end
+
+    class InvalidEventSelectorsException < Aws::EmptyStructure
+    end
+
+    class InvalidHomeRegionException < Aws::EmptyStructure
+    end
+
+    class InvalidImportSourceException < Aws::EmptyStructure
+    end
+
+    class InvalidInsightSelectorsException < Aws::EmptyStructure
+    end
+
+    class InvalidKmsKeyIdException < Aws::EmptyStructure
+    end
+
+    class InvalidLookupAttributesException < Aws::EmptyStructure
+    end
+
+    class InvalidMaxResultsException < Aws::EmptyStructure
+    end
+
+    class InvalidNextTokenException < Aws::EmptyStructure
+    end
+
+    class InvalidParameterCombinationException < Aws::EmptyStructure
+    end
+
+    class InvalidParameterException < Aws::EmptyStructure
+    end
+
+    class InvalidQueryStatementException < Aws::EmptyStructure
+    end
+
+    class InvalidQueryStatusException < Aws::EmptyStructure
+    end
+
+    class InvalidS3BucketNameException < Aws::EmptyStructure
+    end
+
+    class InvalidS3PrefixException < Aws::EmptyStructure
+    end
+
+    class InvalidSnsTopicNameException < Aws::EmptyStructure
+    end
+
+    class InvalidSourceException < Aws::EmptyStructure
+    end
+
+    class InvalidTagParameterException < Aws::EmptyStructure
+    end
+
+    class InvalidTimeRangeException < Aws::EmptyStructure
+    end
+
+    class InvalidTokenException < Aws::EmptyStructure
+    end
+
+    class InvalidTrailNameException < Aws::EmptyStructure
+    end
+
+    class KmsException < Aws::EmptyStructure
+    end
+
+    class KmsKeyDisabledException < Aws::EmptyStructure
+    end
+
+    class KmsKeyNotFoundException < Aws::EmptyStructure
+    end
+
+    class ListChannelsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelsResponse
+      attr_accessor channels: ::Array[Types::Channel]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventDataStoresRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEventDataStoresResponse
+      attr_accessor event_data_stores: ::Array[Types::EventDataStore]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportFailuresRequest
+      attr_accessor import_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportFailuresResponse
+      attr_accessor failures: ::Array[Types::ImportFailureListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor destination: ::String
+      attr_accessor import_status: ("INITIALIZING" | "IN_PROGRESS" | "FAILED" | "STOPPED" | "COMPLETED")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportsResponse
+      attr_accessor imports: ::Array[Types::ImportsListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInsightsMetricDataRequest
+      attr_accessor event_source: ::String
+      attr_accessor event_name: ::String
+      attr_accessor insight_type: ("ApiCallRateInsight" | "ApiErrorRateInsight")
+      attr_accessor error_code: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor period: ::Integer
+      attr_accessor data_type: ("FillWithZeros" | "NonZeroData")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInsightsMetricDataResponse
+      attr_accessor event_source: ::String
+      attr_accessor event_name: ::String
+      attr_accessor insight_type: ("ApiCallRateInsight" | "ApiErrorRateInsight")
+      attr_accessor error_code: ::String
+      attr_accessor timestamps: ::Array[::Time]
+      attr_accessor values: ::Array[::Float]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPublicKeysRequest
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPublicKeysResponse
+      attr_accessor public_key_list: ::Array[Types::PublicKey]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListQueriesRequest
+      attr_accessor event_data_store: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor query_status: ("QUEUED" | "RUNNING" | "FINISHED" | "FAILED" | "CANCELLED" | "TIMED_OUT")
+      SENSITIVE: []
+    end
+
+    class ListQueriesResponse
+      attr_accessor queries: ::Array[Types::Query]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsRequest
+      attr_accessor resource_id_list: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsResponse
+      attr_accessor resource_tag_list: ::Array[Types::ResourceTag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTrailsRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTrailsResponse
+      attr_accessor trails: ::Array[Types::TrailInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LookupAttribute
+      attr_accessor attribute_key: ("EventId" | "EventName" | "ReadOnly" | "Username" | "ResourceType" | "ResourceName" | "EventSource" | "AccessKeyId")
+      attr_accessor attribute_value: ::String
+      SENSITIVE: []
+    end
+
+    class LookupEventsRequest
+      attr_accessor lookup_attributes: ::Array[Types::LookupAttribute]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor event_category: ("insight")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LookupEventsResponse
+      attr_accessor events: ::Array[Types::Event]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MaxConcurrentQueriesException < Aws::EmptyStructure
+    end
+
+    class MaximumNumberOfTrailsExceededException < Aws::EmptyStructure
+    end
+
+    class NoManagementAccountSLRExistsException < Aws::EmptyStructure
+    end
+
+    class NotOrganizationManagementAccountException < Aws::EmptyStructure
+    end
+
+    class NotOrganizationMasterAccountException < Aws::EmptyStructure
+    end
+
+    class OperationNotPermittedException < Aws::EmptyStructure
+    end
+
+    class OrganizationNotInAllFeaturesModeException < Aws::EmptyStructure
+    end
+
+    class OrganizationsNotInUseException < Aws::EmptyStructure
+    end
+
+    class PublicKey
+      attr_accessor value: ::String
+      attr_accessor validity_start_time: ::Time
+      attr_accessor validity_end_time: ::Time
+      attr_accessor fingerprint: ::String
+      SENSITIVE: []
+    end
+
+    class PutEventSelectorsRequest
+      attr_accessor trail_name: ::String
+      attr_accessor event_selectors: ::Array[Types::EventSelector]
+      attr_accessor advanced_event_selectors: ::Array[Types::AdvancedEventSelector]
+      SENSITIVE: []
+    end
+
+    class PutEventSelectorsResponse
+      attr_accessor trail_arn: ::String
+      attr_accessor event_selectors: ::Array[Types::EventSelector]
+      attr_accessor advanced_event_selectors: ::Array[Types::AdvancedEventSelector]
+      SENSITIVE: []
+    end
+
+    class PutInsightSelectorsRequest
+      attr_accessor trail_name: ::String
+      attr_accessor insight_selectors: ::Array[Types::InsightSelector]
+      attr_accessor event_data_store: ::String
+      attr_accessor insights_destination: ::String
+      SENSITIVE: []
+    end
+
+    class PutInsightSelectorsResponse
+      attr_accessor trail_arn: ::String
+      attr_accessor insight_selectors: ::Array[Types::InsightSelector]
+      attr_accessor event_data_store_arn: ::String
+      attr_accessor insights_destination: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_policy: ::String
+      SENSITIVE: []
+    end
+
+    class Query
+      attr_accessor query_id: ::String
+      attr_accessor query_status: ("QUEUED" | "RUNNING" | "FINISHED" | "FAILED" | "CANCELLED" | "TIMED_OUT")
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class QueryIdNotFoundException < Aws::EmptyStructure
+    end
+
+    class QueryStatistics
+      attr_accessor results_count: ::Integer
+      attr_accessor total_results_count: ::Integer
+      attr_accessor bytes_scanned: ::Integer
+      SENSITIVE: []
+    end
+
+    class QueryStatisticsForDescribeQuery
+      attr_accessor events_matched: ::Integer
+      attr_accessor events_scanned: ::Integer
+      attr_accessor bytes_scanned: ::Integer
+      attr_accessor execution_time_in_millis: ::Integer
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class RegisterOrganizationDelegatedAdminRequest
+      attr_accessor member_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterOrganizationDelegatedAdminResponse < Aws::EmptyStructure
+    end
+
+    class RemoveTagsRequest
+      attr_accessor resource_id: ::String
+      attr_accessor tags_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class RemoveTagsResponse < Aws::EmptyStructure
+    end
+
+    class Resource
+      attr_accessor resource_type: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceARNNotValidException < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException < Aws::EmptyStructure
+    end
+
+    class ResourcePolicyNotFoundException < Aws::EmptyStructure
+    end
+
+    class ResourcePolicyNotValidException < Aws::EmptyStructure
+    end
+
+    class ResourceTag
+      attr_accessor resource_id: ::String
+      attr_accessor tags_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ResourceTypeNotSupportedException < Aws::EmptyStructure
+    end
+
+    class RestoreEventDataStoreRequest
+      attr_accessor event_data_store: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreEventDataStoreResponse
+      attr_accessor event_data_store_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATED" | "ENABLED" | "PENDING_DELETION" | "STARTING_INGESTION" | "STOPPING_INGESTION" | "STOPPED_INGESTION")
+      attr_accessor advanced_event_selectors: ::Array[Types::AdvancedEventSelector]
+      attr_accessor multi_region_enabled: bool
+      attr_accessor organization_enabled: bool
+      attr_accessor retention_period: ::Integer
+      attr_accessor termination_protection_enabled: bool
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      attr_accessor kms_key_id: ::String
+      attr_accessor billing_mode: ("EXTENDABLE_RETENTION_PRICING" | "FIXED_RETENTION_PRICING")
+      SENSITIVE: []
+    end
+
+    class S3BucketDoesNotExistException < Aws::EmptyStructure
+    end
+
+    class S3ImportSource
+      attr_accessor s3_location_uri: ::String
+      attr_accessor s3_bucket_region: ::String
+      attr_accessor s3_bucket_access_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SourceConfig
+      attr_accessor apply_to_all_regions: bool
+      attr_accessor advanced_event_selectors: ::Array[Types::AdvancedEventSelector]
+      SENSITIVE: []
+    end
+
+    class StartEventDataStoreIngestionRequest
+      attr_accessor event_data_store: ::String
+      SENSITIVE: []
+    end
+
+    class StartEventDataStoreIngestionResponse < Aws::EmptyStructure
+    end
+
+    class StartImportRequest
+      attr_accessor destinations: ::Array[::String]
+      attr_accessor import_source: Types::ImportSource
+      attr_accessor start_event_time: ::Time
+      attr_accessor end_event_time: ::Time
+      attr_accessor import_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartImportResponse
+      attr_accessor import_id: ::String
+      attr_accessor destinations: ::Array[::String]
+      attr_accessor import_source: Types::ImportSource
+      attr_accessor start_event_time: ::Time
+      attr_accessor end_event_time: ::Time
+      attr_accessor import_status: ("INITIALIZING" | "IN_PROGRESS" | "FAILED" | "STOPPED" | "COMPLETED")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class StartLoggingRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StartLoggingResponse < Aws::EmptyStructure
+    end
+
+    class StartQueryRequest
+      attr_accessor query_statement: ::String
+      attr_accessor delivery_s3_uri: ::String
+      attr_accessor query_alias: ::String
+      attr_accessor query_parameters: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StartQueryResponse
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopEventDataStoreIngestionRequest
+      attr_accessor event_data_store: ::String
+      SENSITIVE: []
+    end
+
+    class StopEventDataStoreIngestionResponse < Aws::EmptyStructure
+    end
+
+    class StopImportRequest
+      attr_accessor import_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopImportResponse
+      attr_accessor import_id: ::String
+      attr_accessor import_source: Types::ImportSource
+      attr_accessor destinations: ::Array[::String]
+      attr_accessor import_status: ("INITIALIZING" | "IN_PROGRESS" | "FAILED" | "STOPPED" | "COMPLETED")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      attr_accessor start_event_time: ::Time
+      attr_accessor end_event_time: ::Time
+      attr_accessor import_statistics: Types::ImportStatistics
+      SENSITIVE: []
+    end
+
+    class StopLoggingRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StopLoggingResponse < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagsLimitExceededException < Aws::EmptyStructure
+    end
+
+    class ThrottlingException < Aws::EmptyStructure
+    end
+
+    class Trail
+      attr_accessor name: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor sns_topic_name: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor include_global_service_events: bool
+      attr_accessor is_multi_region_trail: bool
+      attr_accessor home_region: ::String
+      attr_accessor trail_arn: ::String
+      attr_accessor log_file_validation_enabled: bool
+      attr_accessor cloud_watch_logs_log_group_arn: ::String
+      attr_accessor cloud_watch_logs_role_arn: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor has_custom_event_selectors: bool
+      attr_accessor has_insight_selectors: bool
+      attr_accessor is_organization_trail: bool
+      SENSITIVE: []
+    end
+
+    class TrailAlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class TrailInfo
+      attr_accessor trail_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor home_region: ::String
+      SENSITIVE: []
+    end
+
+    class TrailNotFoundException < Aws::EmptyStructure
+    end
+
+    class TrailNotProvidedException < Aws::EmptyStructure
+    end
+
+    class UnsupportedOperationException < Aws::EmptyStructure
+    end
+
+    class UpdateChannelRequest
+      attr_accessor channel: ::String
+      attr_accessor destinations: ::Array[Types::Destination]
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChannelResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor source: ::String
+      attr_accessor destinations: ::Array[Types::Destination]
+      SENSITIVE: []
+    end
+
+    class UpdateEventDataStoreRequest
+      attr_accessor event_data_store: ::String
+      attr_accessor name: ::String
+      attr_accessor advanced_event_selectors: ::Array[Types::AdvancedEventSelector]
+      attr_accessor multi_region_enabled: bool
+      attr_accessor organization_enabled: bool
+      attr_accessor retention_period: ::Integer
+      attr_accessor termination_protection_enabled: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor billing_mode: ("EXTENDABLE_RETENTION_PRICING" | "FIXED_RETENTION_PRICING")
+      SENSITIVE: []
+    end
+
+    class UpdateEventDataStoreResponse
+      attr_accessor event_data_store_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATED" | "ENABLED" | "PENDING_DELETION" | "STARTING_INGESTION" | "STOPPING_INGESTION" | "STOPPED_INGESTION")
+      attr_accessor advanced_event_selectors: ::Array[Types::AdvancedEventSelector]
+      attr_accessor multi_region_enabled: bool
+      attr_accessor organization_enabled: bool
+      attr_accessor retention_period: ::Integer
+      attr_accessor termination_protection_enabled: bool
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      attr_accessor kms_key_id: ::String
+      attr_accessor billing_mode: ("EXTENDABLE_RETENTION_PRICING" | "FIXED_RETENTION_PRICING")
+      attr_accessor federation_status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED")
+      attr_accessor federation_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTrailRequest
+      attr_accessor name: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor sns_topic_name: ::String
+      attr_accessor include_global_service_events: bool
+      attr_accessor is_multi_region_trail: bool
+      attr_accessor enable_log_file_validation: bool
+      attr_accessor cloud_watch_logs_log_group_arn: ::String
+      attr_accessor cloud_watch_logs_role_arn: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor is_organization_trail: bool
+      SENSITIVE: []
+    end
+
+    class UpdateTrailResponse
+      attr_accessor name: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor sns_topic_name: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor include_global_service_events: bool
+      attr_accessor is_multi_region_trail: bool
+      attr_accessor trail_arn: ::String
+      attr_accessor log_file_validation_enabled: bool
+      attr_accessor cloud_watch_logs_log_group_arn: ::String
+      attr_accessor cloud_watch_logs_role_arn: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor is_organization_trail: bool
+      SENSITIVE: []
+    end
+  end
+end

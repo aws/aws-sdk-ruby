@@ -14,6 +14,7 @@ module Aws::Kinesis
       option(
         :endpoint_provider,
         doc_type: 'Aws::Kinesis::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::Kinesis
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -62,6 +64,8 @@ module Aws::Kinesis
             Aws::Kinesis::Endpoints::CreateStream.build(context)
           when :decrease_stream_retention_period
             Aws::Kinesis::Endpoints::DecreaseStreamRetentionPeriod.build(context)
+          when :delete_resource_policy
+            Aws::Kinesis::Endpoints::DeleteResourcePolicy.build(context)
           when :delete_stream
             Aws::Kinesis::Endpoints::DeleteStream.build(context)
           when :deregister_stream_consumer
@@ -80,6 +84,8 @@ module Aws::Kinesis
             Aws::Kinesis::Endpoints::EnableEnhancedMonitoring.build(context)
           when :get_records
             Aws::Kinesis::Endpoints::GetRecords.build(context)
+          when :get_resource_policy
+            Aws::Kinesis::Endpoints::GetResourcePolicy.build(context)
           when :get_shard_iterator
             Aws::Kinesis::Endpoints::GetShardIterator.build(context)
           when :increase_stream_retention_period
@@ -98,6 +104,8 @@ module Aws::Kinesis
             Aws::Kinesis::Endpoints::PutRecord.build(context)
           when :put_records
             Aws::Kinesis::Endpoints::PutRecords.build(context)
+          when :put_resource_policy
+            Aws::Kinesis::Endpoints::PutResourcePolicy.build(context)
           when :register_stream_consumer
             Aws::Kinesis::Endpoints::RegisterStreamConsumer.build(context)
           when :remove_tags_from_stream

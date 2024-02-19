@@ -2535,7 +2535,8 @@ module Aws::Rekognition
     # `CustomLabel` object provides the label name (`Name`), the level of
     # confidence that the image contains the object (`Confidence`), and
     # object location information, if it exists, for the label on the image
-    # (`Geometry`).
+    # (`Geometry`). Note that for the `DetectCustomLabelsLabels` operation,
+    # `Polygons` are not returned in the `Geometry` section of the response.
     #
     # To filter labels that are returned, specify a value for
     # `MinConfidence`. `DetectCustomLabelsLabels` only returns labels with a
@@ -3226,6 +3227,7 @@ module Aws::Rekognition
     #   * {Types::DetectModerationLabelsResponse#moderation_model_version #moderation_model_version} => String
     #   * {Types::DetectModerationLabelsResponse#human_loop_activation_output #human_loop_activation_output} => Types::HumanLoopActivationOutput
     #   * {Types::DetectModerationLabelsResponse#project_version #project_version} => String
+    #   * {Types::DetectModerationLabelsResponse#content_types #content_types} => Array&lt;Types::ContentType&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3255,12 +3257,16 @@ module Aws::Rekognition
     #   resp.moderation_labels[0].confidence #=> Float
     #   resp.moderation_labels[0].name #=> String
     #   resp.moderation_labels[0].parent_name #=> String
+    #   resp.moderation_labels[0].taxonomy_level #=> Integer
     #   resp.moderation_model_version #=> String
     #   resp.human_loop_activation_output.human_loop_arn #=> String
     #   resp.human_loop_activation_output.human_loop_activation_reasons #=> Array
     #   resp.human_loop_activation_output.human_loop_activation_reasons[0] #=> String
     #   resp.human_loop_activation_output.human_loop_activation_conditions_evaluation_results #=> String
     #   resp.project_version #=> String
+    #   resp.content_types #=> Array
+    #   resp.content_types[0].confidence #=> Float
+    #   resp.content_types[0].name #=> String
     #
     # @overload detect_moderation_labels(params = {})
     # @param [Hash] params ({})
@@ -3989,6 +3995,7 @@ module Aws::Rekognition
     #   resp.moderation_labels[0].moderation_label.confidence #=> Float
     #   resp.moderation_labels[0].moderation_label.name #=> String
     #   resp.moderation_labels[0].moderation_label.parent_name #=> String
+    #   resp.moderation_labels[0].moderation_label.taxonomy_level #=> Integer
     #   resp.moderation_labels[0].start_timestamp_millis #=> Integer
     #   resp.moderation_labels[0].end_timestamp_millis #=> Integer
     #   resp.moderation_labels[0].duration_millis #=> Integer
@@ -4643,6 +4650,7 @@ module Aws::Rekognition
     #   resp.results.s3_object.bucket #=> String
     #   resp.results.s3_object.name #=> String
     #   resp.results.s3_object.version #=> String
+    #   resp.results.model_versions.moderation #=> String
     #   resp.manifest_summary.s3_object.bucket #=> String
     #   resp.manifest_summary.s3_object.name #=> String
     #   resp.manifest_summary.s3_object.version #=> String
@@ -5984,6 +5992,7 @@ module Aws::Rekognition
     #   resp.media_analysis_jobs[0].results.s3_object.bucket #=> String
     #   resp.media_analysis_jobs[0].results.s3_object.name #=> String
     #   resp.media_analysis_jobs[0].results.s3_object.version #=> String
+    #   resp.media_analysis_jobs[0].results.model_versions.moderation #=> String
     #   resp.media_analysis_jobs[0].manifest_summary.s3_object.bucket #=> String
     #   resp.media_analysis_jobs[0].manifest_summary.s3_object.name #=> String
     #   resp.media_analysis_jobs[0].manifest_summary.s3_object.version #=> String
@@ -8368,7 +8377,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

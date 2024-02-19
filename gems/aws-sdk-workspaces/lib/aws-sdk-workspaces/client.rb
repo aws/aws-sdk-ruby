@@ -795,6 +795,7 @@ module Aws::WorkSpaces
     #             value: "TagValue",
     #           },
     #         ],
+    #         data_replication: "NO_REPLICATION", # accepts NO_REPLICATION, PRIMARY_AS_SOURCE
     #       },
     #     ],
     #   })
@@ -808,6 +809,7 @@ module Aws::WorkSpaces
     #   resp.failed_standby_requests[0].standby_workspace_request.tags #=> Array
     #   resp.failed_standby_requests[0].standby_workspace_request.tags[0].key #=> String
     #   resp.failed_standby_requests[0].standby_workspace_request.tags[0].value #=> String
+    #   resp.failed_standby_requests[0].standby_workspace_request.data_replication #=> String, one of "NO_REPLICATION", "PRIMARY_AS_SOURCE"
     #   resp.failed_standby_requests[0].error_code #=> String
     #   resp.failed_standby_requests[0].error_message #=> String
     #   resp.pending_standby_requests #=> Array
@@ -1130,6 +1132,7 @@ module Aws::WorkSpaces
     #             value: "TagValue",
     #           },
     #         ],
+    #         workspace_name: "WorkspaceName",
     #       },
     #     ],
     #   })
@@ -1154,6 +1157,7 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_request.tags #=> Array
     #   resp.failed_requests[0].workspace_request.tags[0].key #=> String
     #   resp.failed_requests[0].workspace_request.tags[0].value #=> String
+    #   resp.failed_requests[0].workspace_request.workspace_name #=> String
     #   resp.failed_requests[0].error_code #=> String
     #   resp.failed_requests[0].error_message #=> String
     #   resp.pending_requests #=> Array
@@ -1170,6 +1174,7 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].volume_encryption_key #=> String
     #   resp.pending_requests[0].user_volume_encryption_enabled #=> Boolean
     #   resp.pending_requests[0].root_volume_encryption_enabled #=> Boolean
+    #   resp.pending_requests[0].workspace_name #=> String
     #   resp.pending_requests[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON", "MANUAL"
     #   resp.pending_requests[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.pending_requests[0].workspace_properties.root_volume_size_gib #=> Integer
@@ -1186,6 +1191,12 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].related_workspaces[0].region #=> String
     #   resp.pending_requests[0].related_workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "RESTORING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
     #   resp.pending_requests[0].related_workspaces[0].type #=> String, one of "PRIMARY", "STANDBY"
+    #   resp.pending_requests[0].data_replication_settings.data_replication #=> String, one of "NO_REPLICATION", "PRIMARY_AS_SOURCE"
+    #   resp.pending_requests[0].data_replication_settings.recovery_snapshot_time #=> Time
+    #   resp.pending_requests[0].standby_workspaces_properties #=> Array
+    #   resp.pending_requests[0].standby_workspaces_properties[0].standby_workspace_id #=> String
+    #   resp.pending_requests[0].standby_workspaces_properties[0].data_replication #=> String, one of "NO_REPLICATION", "PRIMARY_AS_SOURCE"
+    #   resp.pending_requests[0].standby_workspaces_properties[0].recovery_snapshot_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaces AWS API Documentation
     #
@@ -2455,6 +2466,9 @@ module Aws::WorkSpaces
     #   If you received a `NextToken` from a previous call that was paginated,
     #   provide this token to receive the next set of results.
     #
+    # @option params [String] :workspace_name
+    #   The name of the user-decoupled WorkSpace.
+    #
     # @return [Types::DescribeWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeWorkspacesResult#workspaces #workspaces} => Array&lt;Types::Workspace&gt;
@@ -2471,6 +2485,7 @@ module Aws::WorkSpaces
     #     bundle_id: "BundleId",
     #     limit: 1,
     #     next_token: "PaginationToken",
+    #     workspace_name: "WorkspaceName",
     #   })
     #
     # @example Response structure
@@ -2489,6 +2504,7 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].volume_encryption_key #=> String
     #   resp.workspaces[0].user_volume_encryption_enabled #=> Boolean
     #   resp.workspaces[0].root_volume_encryption_enabled #=> Boolean
+    #   resp.workspaces[0].workspace_name #=> String
     #   resp.workspaces[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON", "MANUAL"
     #   resp.workspaces[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.workspaces[0].workspace_properties.root_volume_size_gib #=> Integer
@@ -2505,6 +2521,12 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].related_workspaces[0].region #=> String
     #   resp.workspaces[0].related_workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "RESTORING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
     #   resp.workspaces[0].related_workspaces[0].type #=> String, one of "PRIMARY", "STANDBY"
+    #   resp.workspaces[0].data_replication_settings.data_replication #=> String, one of "NO_REPLICATION", "PRIMARY_AS_SOURCE"
+    #   resp.workspaces[0].data_replication_settings.recovery_snapshot_time #=> Time
+    #   resp.workspaces[0].standby_workspaces_properties #=> Array
+    #   resp.workspaces[0].standby_workspaces_properties[0].standby_workspace_id #=> String
+    #   resp.workspaces[0].standby_workspaces_properties[0].data_replication #=> String, one of "NO_REPLICATION", "PRIMARY_AS_SOURCE"
+    #   resp.workspaces[0].standby_workspaces_properties[0].recovery_snapshot_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaces AWS API Documentation
@@ -3295,8 +3317,11 @@ module Aws::WorkSpaces
     # @option params [required, String] :workspace_id
     #   The identifier of the WorkSpace.
     #
-    # @option params [required, Types::WorkspaceProperties] :workspace_properties
+    # @option params [Types::WorkspaceProperties] :workspace_properties
     #   The properties of the WorkSpace.
+    #
+    # @option params [String] :data_replication
+    #   Indicates the data replication status.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3304,7 +3329,7 @@ module Aws::WorkSpaces
     #
     #   resp = client.modify_workspace_properties({
     #     workspace_id: "WorkspaceId", # required
-    #     workspace_properties: { # required
+    #     workspace_properties: {
     #       running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON, MANUAL
     #       running_mode_auto_stop_timeout_in_minutes: 1,
     #       root_volume_size_gib: 1,
@@ -3313,6 +3338,7 @@ module Aws::WorkSpaces
     #       protocols: ["PCOIP"], # accepts PCOIP, WSP
     #       operating_system_name: "AMAZON_LINUX_2", # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022
     #     },
+    #     data_replication: "NO_REPLICATION", # accepts NO_REPLICATION, PRIMARY_AS_SOURCE
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceProperties AWS API Documentation
@@ -3969,7 +3995,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

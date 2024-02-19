@@ -1,0 +1,343 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Honeycode
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Honeycode/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchCreateTableRowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateTableRowsResult]
+        def workbook_cursor: () -> ::Integer
+        def created_rows: () -> ::Hash[::String, ::String]
+        def failed_batch_items: () -> ::Array[Types::FailedBatchItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Honeycode/Client.html#batch_create_table_rows-instance_method
+      def batch_create_table_rows: (
+                                     workbook_id: ::String,
+                                     table_id: ::String,
+                                     rows_to_create: Array[
+                                       {
+                                         batch_item_id: ::String,
+                                         cells_to_create: Hash[::String, {
+                                             fact: ::String?,
+                                             facts: Array[::String]?
+                                           }]
+                                       },
+                                     ],
+                                     ?client_request_token: ::String
+                                   ) -> _BatchCreateTableRowsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateTableRowsResponseSuccess
+
+      interface _BatchDeleteTableRowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteTableRowsResult]
+        def workbook_cursor: () -> ::Integer
+        def failed_batch_items: () -> ::Array[Types::FailedBatchItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Honeycode/Client.html#batch_delete_table_rows-instance_method
+      def batch_delete_table_rows: (
+                                     workbook_id: ::String,
+                                     table_id: ::String,
+                                     row_ids: Array[::String],
+                                     ?client_request_token: ::String
+                                   ) -> _BatchDeleteTableRowsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteTableRowsResponseSuccess
+
+      interface _BatchUpdateTableRowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdateTableRowsResult]
+        def workbook_cursor: () -> ::Integer
+        def failed_batch_items: () -> ::Array[Types::FailedBatchItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Honeycode/Client.html#batch_update_table_rows-instance_method
+      def batch_update_table_rows: (
+                                     workbook_id: ::String,
+                                     table_id: ::String,
+                                     rows_to_update: Array[
+                                       {
+                                         row_id: ::String,
+                                         cells_to_update: Hash[::String, {
+                                             fact: ::String?,
+                                             facts: Array[::String]?
+                                           }]
+                                       },
+                                     ],
+                                     ?client_request_token: ::String
+                                   ) -> _BatchUpdateTableRowsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateTableRowsResponseSuccess
+
+      interface _BatchUpsertTableRowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpsertTableRowsResult]
+        def rows: () -> ::Hash[::String, Types::UpsertRowsResult]
+        def workbook_cursor: () -> ::Integer
+        def failed_batch_items: () -> ::Array[Types::FailedBatchItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Honeycode/Client.html#batch_upsert_table_rows-instance_method
+      def batch_upsert_table_rows: (
+                                     workbook_id: ::String,
+                                     table_id: ::String,
+                                     rows_to_upsert: Array[
+                                       {
+                                         batch_item_id: ::String,
+                                         filter: {
+                                           formula: ::String,
+                                           context_row_id: ::String?
+                                         },
+                                         cells_to_update: Hash[::String, {
+                                             fact: ::String?,
+                                             facts: Array[::String]?
+                                           }]
+                                       },
+                                     ],
+                                     ?client_request_token: ::String
+                                   ) -> _BatchUpsertTableRowsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpsertTableRowsResponseSuccess
+
+      interface _DescribeTableDataImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTableDataImportJobResult]
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+        def message: () -> ::String
+        def job_metadata: () -> Types::TableDataImportJobMetadata
+        def error_code: () -> ("ACCESS_DENIED" | "INVALID_URL_ERROR" | "INVALID_IMPORT_OPTIONS_ERROR" | "INVALID_TABLE_ID_ERROR" | "INVALID_TABLE_COLUMN_ID_ERROR" | "TABLE_NOT_FOUND_ERROR" | "FILE_EMPTY_ERROR" | "INVALID_FILE_TYPE_ERROR" | "FILE_PARSING_ERROR" | "FILE_SIZE_LIMIT_ERROR" | "FILE_NOT_FOUND_ERROR" | "UNKNOWN_ERROR" | "RESOURCE_NOT_FOUND_ERROR" | "SYSTEM_LIMIT_ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Honeycode/Client.html#describe_table_data_import_job-instance_method
+      def describe_table_data_import_job: (
+                                            workbook_id: ::String,
+                                            table_id: ::String,
+                                            job_id: ::String
+                                          ) -> _DescribeTableDataImportJobResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTableDataImportJobResponseSuccess
+
+      interface _GetScreenDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetScreenDataResult]
+        def results: () -> ::Hash[::String, Types::ResultSet]
+        def workbook_cursor: () -> ::Integer
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Honeycode/Client.html#get_screen_data-instance_method
+      def get_screen_data: (
+                             workbook_id: ::String,
+                             app_id: ::String,
+                             screen_id: ::String,
+                             ?variables: Hash[::String, {
+                                 raw_value: ::String
+                               }],
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _GetScreenDataResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetScreenDataResponseSuccess
+
+      interface _InvokeScreenAutomationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeScreenAutomationResult]
+        def workbook_cursor: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Honeycode/Client.html#invoke_screen_automation-instance_method
+      def invoke_screen_automation: (
+                                      workbook_id: ::String,
+                                      app_id: ::String,
+                                      screen_id: ::String,
+                                      screen_automation_id: ::String,
+                                      ?variables: Hash[::String, {
+                                          raw_value: ::String
+                                        }],
+                                      ?row_id: ::String,
+                                      ?client_request_token: ::String
+                                    ) -> _InvokeScreenAutomationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeScreenAutomationResponseSuccess
+
+      interface _ListTableColumnsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTableColumnsResult]
+        def table_columns: () -> ::Array[Types::TableColumn]
+        def next_token: () -> ::String
+        def workbook_cursor: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Honeycode/Client.html#list_table_columns-instance_method
+      def list_table_columns: (
+                                workbook_id: ::String,
+                                table_id: ::String,
+                                ?next_token: ::String
+                              ) -> _ListTableColumnsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTableColumnsResponseSuccess
+
+      interface _ListTableRowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTableRowsResult]
+        def column_ids: () -> ::Array[::String]
+        def rows: () -> ::Array[Types::TableRow]
+        def row_ids_not_found: () -> ::Array[::String]
+        def next_token: () -> ::String
+        def workbook_cursor: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Honeycode/Client.html#list_table_rows-instance_method
+      def list_table_rows: (
+                             workbook_id: ::String,
+                             table_id: ::String,
+                             ?row_ids: Array[::String],
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListTableRowsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTableRowsResponseSuccess
+
+      interface _ListTablesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTablesResult]
+        def tables: () -> ::Array[Types::Table]
+        def next_token: () -> ::String
+        def workbook_cursor: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Honeycode/Client.html#list_tables-instance_method
+      def list_tables: (
+                         workbook_id: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListTablesResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTablesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResult]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Honeycode/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _QueryTableRowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::QueryTableRowsResult]
+        def column_ids: () -> ::Array[::String]
+        def rows: () -> ::Array[Types::TableRow]
+        def next_token: () -> ::String
+        def workbook_cursor: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Honeycode/Client.html#query_table_rows-instance_method
+      def query_table_rows: (
+                              workbook_id: ::String,
+                              table_id: ::String,
+                              filter_formula: {
+                                formula: ::String,
+                                context_row_id: ::String?
+                              },
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _QueryTableRowsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _QueryTableRowsResponseSuccess
+
+      interface _StartTableDataImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTableDataImportJobResult]
+        def job_id: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Honeycode/Client.html#start_table_data_import_job-instance_method
+      def start_table_data_import_job: (
+                                         workbook_id: ::String,
+                                         data_source: {
+                                           data_source_config: {
+                                             data_source_url: ::String?
+                                           }
+                                         },
+                                         data_format: ("DELIMITED_TEXT"),
+                                         destination_table_id: ::String,
+                                         import_options: {
+                                           destination_options: {
+                                             column_map: Hash[::String, {
+                                                 column_index: ::Integer?
+                                               }]?
+                                           }?,
+                                           delimited_text_options: {
+                                             delimiter: ::String,
+                                             has_header_row: bool?,
+                                             ignore_empty_rows: bool?,
+                                             data_character_encoding: ("UTF-8" | "US-ASCII" | "ISO-8859-1" | "UTF-16BE" | "UTF-16LE" | "UTF-16")?
+                                           }?
+                                         },
+                                         client_request_token: ::String
+                                       ) -> _StartTableDataImportJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTableDataImportJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Honeycode/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Honeycode/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+    end
+  end
+end
+

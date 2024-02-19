@@ -1,0 +1,62 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudFormation
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResourceSummary.html
+    class StackResourceSummary
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResourceSummary.html#initialize-instance_method
+      def initialize: (String stack_name, String logical_id, Hash[Symbol, untyped] options) -> void
+                    | (stack_name: String, logical_id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResourceSummary.html#stack_name-instance_method
+      def stack_name: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResourceSummary.html#logical_id-instance_method
+      def logical_id: () -> String
+      alias logical_resource_id logical_id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResourceSummary.html#physical_resource_id-instance_method
+      def physical_resource_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResourceSummary.html#resource_type-instance_method
+      def resource_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResourceSummary.html#last_updated_timestamp-instance_method
+      def last_updated_timestamp: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResourceSummary.html#resource_status-instance_method
+      def resource_status: () -> ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "DELETE_SKIPPED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "UPDATE_COMPLETE" | "IMPORT_FAILED" | "IMPORT_COMPLETE" | "IMPORT_IN_PROGRESS" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResourceSummary.html#resource_status_reason-instance_method
+      def resource_status_reason: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResourceSummary.html#drift_information-instance_method
+      def drift_information: () -> Types::StackResourceDriftInformationSummary
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResourceSummary.html#module_info-instance_method
+      def module_info: () -> Types::ModuleInfo
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResourceSummary.html#data-instance_method
+      def data: () -> Types::StackResourceSummary
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResourceSummary.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResourceSummary.html#resource-instance_method
+      def resource: () -> StackResource
+
+      class Collection < ::Aws::Resources::Collection[StackResourceSummary]
+      end
+    end
+  end
+end

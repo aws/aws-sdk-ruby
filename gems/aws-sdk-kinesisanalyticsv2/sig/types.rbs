@@ -1,0 +1,1254 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::KinesisAnalyticsV2
+  module Types
+
+    class AddApplicationCloudWatchLoggingOptionRequest
+      attr_accessor application_name: ::String
+      attr_accessor current_application_version_id: ::Integer
+      attr_accessor cloud_watch_logging_option: Types::CloudWatchLoggingOption
+      attr_accessor conditional_token: ::String
+      SENSITIVE: []
+    end
+
+    class AddApplicationCloudWatchLoggingOptionResponse
+      attr_accessor application_arn: ::String
+      attr_accessor application_version_id: ::Integer
+      attr_accessor cloud_watch_logging_option_descriptions: ::Array[Types::CloudWatchLoggingOptionDescription]
+      SENSITIVE: []
+    end
+
+    class AddApplicationInputProcessingConfigurationRequest
+      attr_accessor application_name: ::String
+      attr_accessor current_application_version_id: ::Integer
+      attr_accessor input_id: ::String
+      attr_accessor input_processing_configuration: Types::InputProcessingConfiguration
+      SENSITIVE: []
+    end
+
+    class AddApplicationInputProcessingConfigurationResponse
+      attr_accessor application_arn: ::String
+      attr_accessor application_version_id: ::Integer
+      attr_accessor input_id: ::String
+      attr_accessor input_processing_configuration_description: Types::InputProcessingConfigurationDescription
+      SENSITIVE: []
+    end
+
+    class AddApplicationInputRequest
+      attr_accessor application_name: ::String
+      attr_accessor current_application_version_id: ::Integer
+      attr_accessor input: Types::Input
+      SENSITIVE: []
+    end
+
+    class AddApplicationInputResponse
+      attr_accessor application_arn: ::String
+      attr_accessor application_version_id: ::Integer
+      attr_accessor input_descriptions: ::Array[Types::InputDescription]
+      SENSITIVE: []
+    end
+
+    class AddApplicationOutputRequest
+      attr_accessor application_name: ::String
+      attr_accessor current_application_version_id: ::Integer
+      attr_accessor output: Types::Output
+      SENSITIVE: []
+    end
+
+    class AddApplicationOutputResponse
+      attr_accessor application_arn: ::String
+      attr_accessor application_version_id: ::Integer
+      attr_accessor output_descriptions: ::Array[Types::OutputDescription]
+      SENSITIVE: []
+    end
+
+    class AddApplicationReferenceDataSourceRequest
+      attr_accessor application_name: ::String
+      attr_accessor current_application_version_id: ::Integer
+      attr_accessor reference_data_source: Types::ReferenceDataSource
+      SENSITIVE: []
+    end
+
+    class AddApplicationReferenceDataSourceResponse
+      attr_accessor application_arn: ::String
+      attr_accessor application_version_id: ::Integer
+      attr_accessor reference_data_source_descriptions: ::Array[Types::ReferenceDataSourceDescription]
+      SENSITIVE: []
+    end
+
+    class AddApplicationVpcConfigurationRequest
+      attr_accessor application_name: ::String
+      attr_accessor current_application_version_id: ::Integer
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor conditional_token: ::String
+      SENSITIVE: []
+    end
+
+    class AddApplicationVpcConfigurationResponse
+      attr_accessor application_arn: ::String
+      attr_accessor application_version_id: ::Integer
+      attr_accessor vpc_configuration_description: Types::VpcConfigurationDescription
+      SENSITIVE: []
+    end
+
+    class ApplicationCodeConfiguration
+      attr_accessor code_content: Types::CodeContent
+      attr_accessor code_content_type: ("PLAINTEXT" | "ZIPFILE")
+      SENSITIVE: []
+    end
+
+    class ApplicationCodeConfigurationDescription
+      attr_accessor code_content_type: ("PLAINTEXT" | "ZIPFILE")
+      attr_accessor code_content_description: Types::CodeContentDescription
+      SENSITIVE: []
+    end
+
+    class ApplicationCodeConfigurationUpdate
+      attr_accessor code_content_type_update: ("PLAINTEXT" | "ZIPFILE")
+      attr_accessor code_content_update: Types::CodeContentUpdate
+      SENSITIVE: []
+    end
+
+    class ApplicationConfiguration
+      attr_accessor sql_application_configuration: Types::SqlApplicationConfiguration
+      attr_accessor flink_application_configuration: Types::FlinkApplicationConfiguration
+      attr_accessor environment_properties: Types::EnvironmentProperties
+      attr_accessor application_code_configuration: Types::ApplicationCodeConfiguration
+      attr_accessor application_snapshot_configuration: Types::ApplicationSnapshotConfiguration
+      attr_accessor vpc_configurations: ::Array[Types::VpcConfiguration]
+      attr_accessor zeppelin_application_configuration: Types::ZeppelinApplicationConfiguration
+      SENSITIVE: []
+    end
+
+    class ApplicationConfigurationDescription
+      attr_accessor sql_application_configuration_description: Types::SqlApplicationConfigurationDescription
+      attr_accessor application_code_configuration_description: Types::ApplicationCodeConfigurationDescription
+      attr_accessor run_configuration_description: Types::RunConfigurationDescription
+      attr_accessor flink_application_configuration_description: Types::FlinkApplicationConfigurationDescription
+      attr_accessor environment_property_descriptions: Types::EnvironmentPropertyDescriptions
+      attr_accessor application_snapshot_configuration_description: Types::ApplicationSnapshotConfigurationDescription
+      attr_accessor vpc_configuration_descriptions: ::Array[Types::VpcConfigurationDescription]
+      attr_accessor zeppelin_application_configuration_description: Types::ZeppelinApplicationConfigurationDescription
+      SENSITIVE: []
+    end
+
+    class ApplicationConfigurationUpdate
+      attr_accessor sql_application_configuration_update: Types::SqlApplicationConfigurationUpdate
+      attr_accessor application_code_configuration_update: Types::ApplicationCodeConfigurationUpdate
+      attr_accessor flink_application_configuration_update: Types::FlinkApplicationConfigurationUpdate
+      attr_accessor environment_property_updates: Types::EnvironmentPropertyUpdates
+      attr_accessor application_snapshot_configuration_update: Types::ApplicationSnapshotConfigurationUpdate
+      attr_accessor vpc_configuration_updates: ::Array[Types::VpcConfigurationUpdate]
+      attr_accessor zeppelin_application_configuration_update: Types::ZeppelinApplicationConfigurationUpdate
+      SENSITIVE: []
+    end
+
+    class ApplicationDetail
+      attr_accessor application_arn: ::String
+      attr_accessor application_description: ::String
+      attr_accessor application_name: ::String
+      attr_accessor runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0")
+      attr_accessor service_execution_role: ::String
+      attr_accessor application_status: ("DELETING" | "STARTING" | "STOPPING" | "READY" | "RUNNING" | "UPDATING" | "AUTOSCALING" | "FORCE_STOPPING" | "ROLLING_BACK" | "MAINTENANCE" | "ROLLED_BACK")
+      attr_accessor application_version_id: ::Integer
+      attr_accessor create_timestamp: ::Time
+      attr_accessor last_update_timestamp: ::Time
+      attr_accessor application_configuration_description: Types::ApplicationConfigurationDescription
+      attr_accessor cloud_watch_logging_option_descriptions: ::Array[Types::CloudWatchLoggingOptionDescription]
+      attr_accessor application_maintenance_configuration_description: Types::ApplicationMaintenanceConfigurationDescription
+      attr_accessor application_version_updated_from: ::Integer
+      attr_accessor application_version_rolled_back_from: ::Integer
+      attr_accessor conditional_token: ::String
+      attr_accessor application_version_rolled_back_to: ::Integer
+      attr_accessor application_mode: ("STREAMING" | "INTERACTIVE")
+      SENSITIVE: []
+    end
+
+    class ApplicationMaintenanceConfigurationDescription
+      attr_accessor application_maintenance_window_start_time: ::String
+      attr_accessor application_maintenance_window_end_time: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationMaintenanceConfigurationUpdate
+      attr_accessor application_maintenance_window_start_time_update: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationRestoreConfiguration
+      attr_accessor application_restore_type: ("SKIP_RESTORE_FROM_SNAPSHOT" | "RESTORE_FROM_LATEST_SNAPSHOT" | "RESTORE_FROM_CUSTOM_SNAPSHOT")
+      attr_accessor snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationSnapshotConfiguration
+      attr_accessor snapshots_enabled: bool
+      SENSITIVE: []
+    end
+
+    class ApplicationSnapshotConfigurationDescription
+      attr_accessor snapshots_enabled: bool
+      SENSITIVE: []
+    end
+
+    class ApplicationSnapshotConfigurationUpdate
+      attr_accessor snapshots_enabled_update: bool
+      SENSITIVE: []
+    end
+
+    class ApplicationSummary
+      attr_accessor application_name: ::String
+      attr_accessor application_arn: ::String
+      attr_accessor application_status: ("DELETING" | "STARTING" | "STOPPING" | "READY" | "RUNNING" | "UPDATING" | "AUTOSCALING" | "FORCE_STOPPING" | "ROLLING_BACK" | "MAINTENANCE" | "ROLLED_BACK")
+      attr_accessor application_version_id: ::Integer
+      attr_accessor runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0")
+      attr_accessor application_mode: ("STREAMING" | "INTERACTIVE")
+      SENSITIVE: []
+    end
+
+    class ApplicationVersionSummary
+      attr_accessor application_version_id: ::Integer
+      attr_accessor application_status: ("DELETING" | "STARTING" | "STOPPING" | "READY" | "RUNNING" | "UPDATING" | "AUTOSCALING" | "FORCE_STOPPING" | "ROLLING_BACK" | "MAINTENANCE" | "ROLLED_BACK")
+      SENSITIVE: []
+    end
+
+    class CSVMappingParameters
+      attr_accessor record_row_delimiter: ::String
+      attr_accessor record_column_delimiter: ::String
+      SENSITIVE: []
+    end
+
+    class CatalogConfiguration
+      attr_accessor glue_data_catalog_configuration: Types::GlueDataCatalogConfiguration
+      SENSITIVE: []
+    end
+
+    class CatalogConfigurationDescription
+      attr_accessor glue_data_catalog_configuration_description: Types::GlueDataCatalogConfigurationDescription
+      SENSITIVE: []
+    end
+
+    class CatalogConfigurationUpdate
+      attr_accessor glue_data_catalog_configuration_update: Types::GlueDataCatalogConfigurationUpdate
+      SENSITIVE: []
+    end
+
+    class CheckpointConfiguration
+      attr_accessor configuration_type: ("DEFAULT" | "CUSTOM")
+      attr_accessor checkpointing_enabled: bool
+      attr_accessor checkpoint_interval: ::Integer
+      attr_accessor min_pause_between_checkpoints: ::Integer
+      SENSITIVE: []
+    end
+
+    class CheckpointConfigurationDescription
+      attr_accessor configuration_type: ("DEFAULT" | "CUSTOM")
+      attr_accessor checkpointing_enabled: bool
+      attr_accessor checkpoint_interval: ::Integer
+      attr_accessor min_pause_between_checkpoints: ::Integer
+      SENSITIVE: []
+    end
+
+    class CheckpointConfigurationUpdate
+      attr_accessor configuration_type_update: ("DEFAULT" | "CUSTOM")
+      attr_accessor checkpointing_enabled_update: bool
+      attr_accessor checkpoint_interval_update: ::Integer
+      attr_accessor min_pause_between_checkpoints_update: ::Integer
+      SENSITIVE: []
+    end
+
+    class CloudWatchLoggingOption
+      attr_accessor log_stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchLoggingOptionDescription
+      attr_accessor cloud_watch_logging_option_id: ::String
+      attr_accessor log_stream_arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchLoggingOptionUpdate
+      attr_accessor cloud_watch_logging_option_id: ::String
+      attr_accessor log_stream_arn_update: ::String
+      SENSITIVE: []
+    end
+
+    class CodeContent
+      attr_accessor text_content: ::String
+      attr_accessor zip_file_content: ::String
+      attr_accessor s3_content_location: Types::S3ContentLocation
+      SENSITIVE: []
+    end
+
+    class CodeContentDescription
+      attr_accessor text_content: ::String
+      attr_accessor code_md5: ::String
+      attr_accessor code_size: ::Integer
+      attr_accessor s3_application_code_location_description: Types::S3ApplicationCodeLocationDescription
+      SENSITIVE: []
+    end
+
+    class CodeContentUpdate
+      attr_accessor text_content_update: ::String
+      attr_accessor zip_file_content_update: ::String
+      attr_accessor s3_content_location_update: Types::S3ContentLocationUpdate
+      SENSITIVE: []
+    end
+
+    class CodeValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationPresignedUrlRequest
+      attr_accessor application_name: ::String
+      attr_accessor url_type: ("FLINK_DASHBOARD_URL" | "ZEPPELIN_UI_URL")
+      attr_accessor session_expiration_duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateApplicationPresignedUrlResponse
+      attr_accessor authorized_url: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationRequest
+      attr_accessor application_name: ::String
+      attr_accessor application_description: ::String
+      attr_accessor runtime_environment: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0")
+      attr_accessor service_execution_role: ::String
+      attr_accessor application_configuration: Types::ApplicationConfiguration
+      attr_accessor cloud_watch_logging_options: ::Array[Types::CloudWatchLoggingOption]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor application_mode: ("STREAMING" | "INTERACTIVE")
+      SENSITIVE: []
+    end
+
+    class CreateApplicationResponse
+      attr_accessor application_detail: Types::ApplicationDetail
+      SENSITIVE: []
+    end
+
+    class CreateApplicationSnapshotRequest
+      attr_accessor application_name: ::String
+      attr_accessor snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationSnapshotResponse < Aws::EmptyStructure
+    end
+
+    class CustomArtifactConfiguration
+      attr_accessor artifact_type: ("UDF" | "DEPENDENCY_JAR")
+      attr_accessor s3_content_location: Types::S3ContentLocation
+      attr_accessor maven_reference: Types::MavenReference
+      SENSITIVE: []
+    end
+
+    class CustomArtifactConfigurationDescription
+      attr_accessor artifact_type: ("UDF" | "DEPENDENCY_JAR")
+      attr_accessor s3_content_location_description: Types::S3ContentLocation
+      attr_accessor maven_reference_description: Types::MavenReference
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationCloudWatchLoggingOptionRequest
+      attr_accessor application_name: ::String
+      attr_accessor current_application_version_id: ::Integer
+      attr_accessor cloud_watch_logging_option_id: ::String
+      attr_accessor conditional_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationCloudWatchLoggingOptionResponse
+      attr_accessor application_arn: ::String
+      attr_accessor application_version_id: ::Integer
+      attr_accessor cloud_watch_logging_option_descriptions: ::Array[Types::CloudWatchLoggingOptionDescription]
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationInputProcessingConfigurationRequest
+      attr_accessor application_name: ::String
+      attr_accessor current_application_version_id: ::Integer
+      attr_accessor input_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationInputProcessingConfigurationResponse
+      attr_accessor application_arn: ::String
+      attr_accessor application_version_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationOutputRequest
+      attr_accessor application_name: ::String
+      attr_accessor current_application_version_id: ::Integer
+      attr_accessor output_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationOutputResponse
+      attr_accessor application_arn: ::String
+      attr_accessor application_version_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationReferenceDataSourceRequest
+      attr_accessor application_name: ::String
+      attr_accessor current_application_version_id: ::Integer
+      attr_accessor reference_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationReferenceDataSourceResponse
+      attr_accessor application_arn: ::String
+      attr_accessor application_version_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationRequest
+      attr_accessor application_name: ::String
+      attr_accessor create_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteApplicationSnapshotRequest
+      attr_accessor application_name: ::String
+      attr_accessor snapshot_name: ::String
+      attr_accessor snapshot_creation_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationSnapshotResponse < Aws::EmptyStructure
+    end
+
+    class DeleteApplicationVpcConfigurationRequest
+      attr_accessor application_name: ::String
+      attr_accessor current_application_version_id: ::Integer
+      attr_accessor vpc_configuration_id: ::String
+      attr_accessor conditional_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationVpcConfigurationResponse
+      attr_accessor application_arn: ::String
+      attr_accessor application_version_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeployAsApplicationConfiguration
+      attr_accessor s3_content_location: Types::S3ContentBaseLocation
+      SENSITIVE: []
+    end
+
+    class DeployAsApplicationConfigurationDescription
+      attr_accessor s3_content_location_description: Types::S3ContentBaseLocationDescription
+      SENSITIVE: []
+    end
+
+    class DeployAsApplicationConfigurationUpdate
+      attr_accessor s3_content_location_update: Types::S3ContentBaseLocationUpdate
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationRequest
+      attr_accessor application_name: ::String
+      attr_accessor include_additional_details: bool
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationResponse
+      attr_accessor application_detail: Types::ApplicationDetail
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationSnapshotRequest
+      attr_accessor application_name: ::String
+      attr_accessor snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationSnapshotResponse
+      attr_accessor snapshot_details: Types::SnapshotDetails
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationVersionRequest
+      attr_accessor application_name: ::String
+      attr_accessor application_version_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationVersionResponse
+      attr_accessor application_version_detail: Types::ApplicationDetail
+      SENSITIVE: []
+    end
+
+    class DestinationSchema
+      attr_accessor record_format_type: ("JSON" | "CSV")
+      SENSITIVE: []
+    end
+
+    class DiscoverInputSchemaRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor service_execution_role: ::String
+      attr_accessor input_starting_position_configuration: Types::InputStartingPositionConfiguration
+      attr_accessor s3_configuration: Types::S3Configuration
+      attr_accessor input_processing_configuration: Types::InputProcessingConfiguration
+      SENSITIVE: []
+    end
+
+    class DiscoverInputSchemaResponse
+      attr_accessor input_schema: Types::SourceSchema
+      attr_accessor parsed_input_records: ::Array[::Array[::String]]
+      attr_accessor processed_input_records: ::Array[::String]
+      attr_accessor raw_input_records: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EnvironmentProperties
+      attr_accessor property_groups: ::Array[Types::PropertyGroup]
+      SENSITIVE: []
+    end
+
+    class EnvironmentPropertyDescriptions
+      attr_accessor property_group_descriptions: ::Array[Types::PropertyGroup]
+      SENSITIVE: []
+    end
+
+    class EnvironmentPropertyUpdates
+      attr_accessor property_groups: ::Array[Types::PropertyGroup]
+      SENSITIVE: []
+    end
+
+    class FlinkApplicationConfiguration
+      attr_accessor checkpoint_configuration: Types::CheckpointConfiguration
+      attr_accessor monitoring_configuration: Types::MonitoringConfiguration
+      attr_accessor parallelism_configuration: Types::ParallelismConfiguration
+      SENSITIVE: []
+    end
+
+    class FlinkApplicationConfigurationDescription
+      attr_accessor checkpoint_configuration_description: Types::CheckpointConfigurationDescription
+      attr_accessor monitoring_configuration_description: Types::MonitoringConfigurationDescription
+      attr_accessor parallelism_configuration_description: Types::ParallelismConfigurationDescription
+      attr_accessor job_plan_description: ::String
+      SENSITIVE: []
+    end
+
+    class FlinkApplicationConfigurationUpdate
+      attr_accessor checkpoint_configuration_update: Types::CheckpointConfigurationUpdate
+      attr_accessor monitoring_configuration_update: Types::MonitoringConfigurationUpdate
+      attr_accessor parallelism_configuration_update: Types::ParallelismConfigurationUpdate
+      SENSITIVE: []
+    end
+
+    class FlinkRunConfiguration
+      attr_accessor allow_non_restored_state: bool
+      SENSITIVE: []
+    end
+
+    class GlueDataCatalogConfiguration
+      attr_accessor database_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GlueDataCatalogConfigurationDescription
+      attr_accessor database_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GlueDataCatalogConfigurationUpdate
+      attr_accessor database_arn_update: ::String
+      SENSITIVE: []
+    end
+
+    class Input
+      attr_accessor name_prefix: ::String
+      attr_accessor input_processing_configuration: Types::InputProcessingConfiguration
+      attr_accessor kinesis_streams_input: Types::KinesisStreamsInput
+      attr_accessor kinesis_firehose_input: Types::KinesisFirehoseInput
+      attr_accessor input_parallelism: Types::InputParallelism
+      attr_accessor input_schema: Types::SourceSchema
+      SENSITIVE: []
+    end
+
+    class InputDescription
+      attr_accessor input_id: ::String
+      attr_accessor name_prefix: ::String
+      attr_accessor in_app_stream_names: ::Array[::String]
+      attr_accessor input_processing_configuration_description: Types::InputProcessingConfigurationDescription
+      attr_accessor kinesis_streams_input_description: Types::KinesisStreamsInputDescription
+      attr_accessor kinesis_firehose_input_description: Types::KinesisFirehoseInputDescription
+      attr_accessor input_schema: Types::SourceSchema
+      attr_accessor input_parallelism: Types::InputParallelism
+      attr_accessor input_starting_position_configuration: Types::InputStartingPositionConfiguration
+      SENSITIVE: []
+    end
+
+    class InputLambdaProcessor
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InputLambdaProcessorDescription
+      attr_accessor resource_arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InputLambdaProcessorUpdate
+      attr_accessor resource_arn_update: ::String
+      SENSITIVE: []
+    end
+
+    class InputParallelism
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class InputParallelismUpdate
+      attr_accessor count_update: ::Integer
+      SENSITIVE: []
+    end
+
+    class InputProcessingConfiguration
+      attr_accessor input_lambda_processor: Types::InputLambdaProcessor
+      SENSITIVE: []
+    end
+
+    class InputProcessingConfigurationDescription
+      attr_accessor input_lambda_processor_description: Types::InputLambdaProcessorDescription
+      SENSITIVE: []
+    end
+
+    class InputProcessingConfigurationUpdate
+      attr_accessor input_lambda_processor_update: Types::InputLambdaProcessorUpdate
+      SENSITIVE: []
+    end
+
+    class InputSchemaUpdate
+      attr_accessor record_format_update: Types::RecordFormat
+      attr_accessor record_encoding_update: ::String
+      attr_accessor record_column_updates: ::Array[Types::RecordColumn]
+      SENSITIVE: []
+    end
+
+    class InputStartingPositionConfiguration
+      attr_accessor input_starting_position: ("NOW" | "TRIM_HORIZON" | "LAST_STOPPED_POINT")
+      SENSITIVE: []
+    end
+
+    class InputUpdate
+      attr_accessor input_id: ::String
+      attr_accessor name_prefix_update: ::String
+      attr_accessor input_processing_configuration_update: Types::InputProcessingConfigurationUpdate
+      attr_accessor kinesis_streams_input_update: Types::KinesisStreamsInputUpdate
+      attr_accessor kinesis_firehose_input_update: Types::KinesisFirehoseInputUpdate
+      attr_accessor input_schema_update: Types::InputSchemaUpdate
+      attr_accessor input_parallelism_update: Types::InputParallelismUpdate
+      SENSITIVE: []
+    end
+
+    class InvalidApplicationConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidArgumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JSONMappingParameters
+      attr_accessor record_row_path: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisFirehoseInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisFirehoseInputDescription
+      attr_accessor resource_arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisFirehoseInputUpdate
+      attr_accessor resource_arn_update: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisFirehoseOutput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisFirehoseOutputDescription
+      attr_accessor resource_arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisFirehoseOutputUpdate
+      attr_accessor resource_arn_update: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisStreamsInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisStreamsInputDescription
+      attr_accessor resource_arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisStreamsInputUpdate
+      attr_accessor resource_arn_update: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisStreamsOutput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisStreamsOutputDescription
+      attr_accessor resource_arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisStreamsOutputUpdate
+      attr_accessor resource_arn_update: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaOutput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaOutputDescription
+      attr_accessor resource_arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaOutputUpdate
+      attr_accessor resource_arn_update: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationSnapshotsRequest
+      attr_accessor application_name: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationSnapshotsResponse
+      attr_accessor snapshot_summaries: ::Array[Types::SnapshotDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationVersionsRequest
+      attr_accessor application_name: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationVersionsResponse
+      attr_accessor application_version_summaries: ::Array[Types::ApplicationVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsRequest
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsResponse
+      attr_accessor application_summaries: ::Array[Types::ApplicationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MappingParameters
+      attr_accessor json_mapping_parameters: Types::JSONMappingParameters
+      attr_accessor csv_mapping_parameters: Types::CSVMappingParameters
+      SENSITIVE: []
+    end
+
+    class MavenReference
+      attr_accessor group_id: ::String
+      attr_accessor artifact_id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class MonitoringConfiguration
+      attr_accessor configuration_type: ("DEFAULT" | "CUSTOM")
+      attr_accessor metrics_level: ("APPLICATION" | "TASK" | "OPERATOR" | "PARALLELISM")
+      attr_accessor log_level: ("INFO" | "WARN" | "ERROR" | "DEBUG")
+      SENSITIVE: []
+    end
+
+    class MonitoringConfigurationDescription
+      attr_accessor configuration_type: ("DEFAULT" | "CUSTOM")
+      attr_accessor metrics_level: ("APPLICATION" | "TASK" | "OPERATOR" | "PARALLELISM")
+      attr_accessor log_level: ("INFO" | "WARN" | "ERROR" | "DEBUG")
+      SENSITIVE: []
+    end
+
+    class MonitoringConfigurationUpdate
+      attr_accessor configuration_type_update: ("DEFAULT" | "CUSTOM")
+      attr_accessor metrics_level_update: ("APPLICATION" | "TASK" | "OPERATOR" | "PARALLELISM")
+      attr_accessor log_level_update: ("INFO" | "WARN" | "ERROR" | "DEBUG")
+      SENSITIVE: []
+    end
+
+    class Output
+      attr_accessor name: ::String
+      attr_accessor kinesis_streams_output: Types::KinesisStreamsOutput
+      attr_accessor kinesis_firehose_output: Types::KinesisFirehoseOutput
+      attr_accessor lambda_output: Types::LambdaOutput
+      attr_accessor destination_schema: Types::DestinationSchema
+      SENSITIVE: []
+    end
+
+    class OutputDescription
+      attr_accessor output_id: ::String
+      attr_accessor name: ::String
+      attr_accessor kinesis_streams_output_description: Types::KinesisStreamsOutputDescription
+      attr_accessor kinesis_firehose_output_description: Types::KinesisFirehoseOutputDescription
+      attr_accessor lambda_output_description: Types::LambdaOutputDescription
+      attr_accessor destination_schema: Types::DestinationSchema
+      SENSITIVE: []
+    end
+
+    class OutputUpdate
+      attr_accessor output_id: ::String
+      attr_accessor name_update: ::String
+      attr_accessor kinesis_streams_output_update: Types::KinesisStreamsOutputUpdate
+      attr_accessor kinesis_firehose_output_update: Types::KinesisFirehoseOutputUpdate
+      attr_accessor lambda_output_update: Types::LambdaOutputUpdate
+      attr_accessor destination_schema_update: Types::DestinationSchema
+      SENSITIVE: []
+    end
+
+    class ParallelismConfiguration
+      attr_accessor configuration_type: ("DEFAULT" | "CUSTOM")
+      attr_accessor parallelism: ::Integer
+      attr_accessor parallelism_per_kpu: ::Integer
+      attr_accessor auto_scaling_enabled: bool
+      SENSITIVE: []
+    end
+
+    class ParallelismConfigurationDescription
+      attr_accessor configuration_type: ("DEFAULT" | "CUSTOM")
+      attr_accessor parallelism: ::Integer
+      attr_accessor parallelism_per_kpu: ::Integer
+      attr_accessor current_parallelism: ::Integer
+      attr_accessor auto_scaling_enabled: bool
+      SENSITIVE: []
+    end
+
+    class ParallelismConfigurationUpdate
+      attr_accessor configuration_type_update: ("DEFAULT" | "CUSTOM")
+      attr_accessor parallelism_update: ::Integer
+      attr_accessor parallelism_per_kpu_update: ::Integer
+      attr_accessor auto_scaling_enabled_update: bool
+      SENSITIVE: []
+    end
+
+    class PropertyGroup
+      attr_accessor property_group_id: ::String
+      attr_accessor property_map: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RecordColumn
+      attr_accessor name: ::String
+      attr_accessor mapping: ::String
+      attr_accessor sql_type: ::String
+      SENSITIVE: []
+    end
+
+    class RecordFormat
+      attr_accessor record_format_type: ("JSON" | "CSV")
+      attr_accessor mapping_parameters: Types::MappingParameters
+      SENSITIVE: []
+    end
+
+    class ReferenceDataSource
+      attr_accessor table_name: ::String
+      attr_accessor s3_reference_data_source: Types::S3ReferenceDataSource
+      attr_accessor reference_schema: Types::SourceSchema
+      SENSITIVE: []
+    end
+
+    class ReferenceDataSourceDescription
+      attr_accessor reference_id: ::String
+      attr_accessor table_name: ::String
+      attr_accessor s3_reference_data_source_description: Types::S3ReferenceDataSourceDescription
+      attr_accessor reference_schema: Types::SourceSchema
+      SENSITIVE: []
+    end
+
+    class ReferenceDataSourceUpdate
+      attr_accessor reference_id: ::String
+      attr_accessor table_name_update: ::String
+      attr_accessor s3_reference_data_source_update: Types::S3ReferenceDataSourceUpdate
+      attr_accessor reference_schema_update: Types::SourceSchema
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceProvisionedThroughputExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RollbackApplicationRequest
+      attr_accessor application_name: ::String
+      attr_accessor current_application_version_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class RollbackApplicationResponse
+      attr_accessor application_detail: Types::ApplicationDetail
+      SENSITIVE: []
+    end
+
+    class RunConfiguration
+      attr_accessor flink_run_configuration: Types::FlinkRunConfiguration
+      attr_accessor sql_run_configurations: ::Array[Types::SqlRunConfiguration]
+      attr_accessor application_restore_configuration: Types::ApplicationRestoreConfiguration
+      SENSITIVE: []
+    end
+
+    class RunConfigurationDescription
+      attr_accessor application_restore_configuration_description: Types::ApplicationRestoreConfiguration
+      attr_accessor flink_run_configuration_description: Types::FlinkRunConfiguration
+      SENSITIVE: []
+    end
+
+    class RunConfigurationUpdate
+      attr_accessor flink_run_configuration: Types::FlinkRunConfiguration
+      attr_accessor application_restore_configuration: Types::ApplicationRestoreConfiguration
+      SENSITIVE: []
+    end
+
+    class S3ApplicationCodeLocationDescription
+      attr_accessor bucket_arn: ::String
+      attr_accessor file_key: ::String
+      attr_accessor object_version: ::String
+      SENSITIVE: []
+    end
+
+    class S3Configuration
+      attr_accessor bucket_arn: ::String
+      attr_accessor file_key: ::String
+      SENSITIVE: []
+    end
+
+    class S3ContentBaseLocation
+      attr_accessor bucket_arn: ::String
+      attr_accessor base_path: ::String
+      SENSITIVE: []
+    end
+
+    class S3ContentBaseLocationDescription
+      attr_accessor bucket_arn: ::String
+      attr_accessor base_path: ::String
+      SENSITIVE: []
+    end
+
+    class S3ContentBaseLocationUpdate
+      attr_accessor bucket_arn_update: ::String
+      attr_accessor base_path_update: ::String
+      SENSITIVE: []
+    end
+
+    class S3ContentLocation
+      attr_accessor bucket_arn: ::String
+      attr_accessor file_key: ::String
+      attr_accessor object_version: ::String
+      SENSITIVE: []
+    end
+
+    class S3ContentLocationUpdate
+      attr_accessor bucket_arn_update: ::String
+      attr_accessor file_key_update: ::String
+      attr_accessor object_version_update: ::String
+      SENSITIVE: []
+    end
+
+    class S3ReferenceDataSource
+      attr_accessor bucket_arn: ::String
+      attr_accessor file_key: ::String
+      SENSITIVE: []
+    end
+
+    class S3ReferenceDataSourceDescription
+      attr_accessor bucket_arn: ::String
+      attr_accessor file_key: ::String
+      attr_accessor reference_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class S3ReferenceDataSourceUpdate
+      attr_accessor bucket_arn_update: ::String
+      attr_accessor file_key_update: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SnapshotDetails
+      attr_accessor snapshot_name: ::String
+      attr_accessor snapshot_status: ("CREATING" | "READY" | "DELETING" | "FAILED")
+      attr_accessor application_version_id: ::Integer
+      attr_accessor snapshot_creation_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class SourceSchema
+      attr_accessor record_format: Types::RecordFormat
+      attr_accessor record_encoding: ::String
+      attr_accessor record_columns: ::Array[Types::RecordColumn]
+      SENSITIVE: []
+    end
+
+    class SqlApplicationConfiguration
+      attr_accessor inputs: ::Array[Types::Input]
+      attr_accessor outputs: ::Array[Types::Output]
+      attr_accessor reference_data_sources: ::Array[Types::ReferenceDataSource]
+      SENSITIVE: []
+    end
+
+    class SqlApplicationConfigurationDescription
+      attr_accessor input_descriptions: ::Array[Types::InputDescription]
+      attr_accessor output_descriptions: ::Array[Types::OutputDescription]
+      attr_accessor reference_data_source_descriptions: ::Array[Types::ReferenceDataSourceDescription]
+      SENSITIVE: []
+    end
+
+    class SqlApplicationConfigurationUpdate
+      attr_accessor input_updates: ::Array[Types::InputUpdate]
+      attr_accessor output_updates: ::Array[Types::OutputUpdate]
+      attr_accessor reference_data_source_updates: ::Array[Types::ReferenceDataSourceUpdate]
+      SENSITIVE: []
+    end
+
+    class SqlRunConfiguration
+      attr_accessor input_id: ::String
+      attr_accessor input_starting_position_configuration: Types::InputStartingPositionConfiguration
+      SENSITIVE: []
+    end
+
+    class StartApplicationRequest
+      attr_accessor application_name: ::String
+      attr_accessor run_configuration: Types::RunConfiguration
+      SENSITIVE: []
+    end
+
+    class StartApplicationResponse < Aws::EmptyStructure
+    end
+
+    class StopApplicationRequest
+      attr_accessor application_name: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class StopApplicationResponse < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnableToDetectSchemaException
+      attr_accessor message: ::String
+      attr_accessor raw_input_records: ::Array[::String]
+      attr_accessor processed_input_records: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UnsupportedOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateApplicationMaintenanceConfigurationRequest
+      attr_accessor application_name: ::String
+      attr_accessor application_maintenance_configuration_update: Types::ApplicationMaintenanceConfigurationUpdate
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationMaintenanceConfigurationResponse
+      attr_accessor application_arn: ::String
+      attr_accessor application_maintenance_configuration_description: Types::ApplicationMaintenanceConfigurationDescription
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationRequest
+      attr_accessor application_name: ::String
+      attr_accessor current_application_version_id: ::Integer
+      attr_accessor application_configuration_update: Types::ApplicationConfigurationUpdate
+      attr_accessor service_execution_role_update: ::String
+      attr_accessor run_configuration_update: Types::RunConfigurationUpdate
+      attr_accessor cloud_watch_logging_option_updates: ::Array[Types::CloudWatchLoggingOptionUpdate]
+      attr_accessor conditional_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationResponse
+      attr_accessor application_detail: Types::ApplicationDetail
+      SENSITIVE: []
+    end
+
+    class VpcConfiguration
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class VpcConfigurationDescription
+      attr_accessor vpc_configuration_id: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class VpcConfigurationUpdate
+      attr_accessor vpc_configuration_id: ::String
+      attr_accessor subnet_id_updates: ::Array[::String]
+      attr_accessor security_group_id_updates: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ZeppelinApplicationConfiguration
+      attr_accessor monitoring_configuration: Types::ZeppelinMonitoringConfiguration
+      attr_accessor catalog_configuration: Types::CatalogConfiguration
+      attr_accessor deploy_as_application_configuration: Types::DeployAsApplicationConfiguration
+      attr_accessor custom_artifacts_configuration: ::Array[Types::CustomArtifactConfiguration]
+      SENSITIVE: []
+    end
+
+    class ZeppelinApplicationConfigurationDescription
+      attr_accessor monitoring_configuration_description: Types::ZeppelinMonitoringConfigurationDescription
+      attr_accessor catalog_configuration_description: Types::CatalogConfigurationDescription
+      attr_accessor deploy_as_application_configuration_description: Types::DeployAsApplicationConfigurationDescription
+      attr_accessor custom_artifacts_configuration_description: ::Array[Types::CustomArtifactConfigurationDescription]
+      SENSITIVE: []
+    end
+
+    class ZeppelinApplicationConfigurationUpdate
+      attr_accessor monitoring_configuration_update: Types::ZeppelinMonitoringConfigurationUpdate
+      attr_accessor catalog_configuration_update: Types::CatalogConfigurationUpdate
+      attr_accessor deploy_as_application_configuration_update: Types::DeployAsApplicationConfigurationUpdate
+      attr_accessor custom_artifacts_configuration_update: ::Array[Types::CustomArtifactConfiguration]
+      SENSITIVE: []
+    end
+
+    class ZeppelinMonitoringConfiguration
+      attr_accessor log_level: ("INFO" | "WARN" | "ERROR" | "DEBUG")
+      SENSITIVE: []
+    end
+
+    class ZeppelinMonitoringConfigurationDescription
+      attr_accessor log_level: ("INFO" | "WARN" | "ERROR" | "DEBUG")
+      SENSITIVE: []
+    end
+
+    class ZeppelinMonitoringConfigurationUpdate
+      attr_accessor log_level_update: ("INFO" | "WARN" | "ERROR" | "DEBUG")
+      SENSITIVE: []
+    end
+  end
+end

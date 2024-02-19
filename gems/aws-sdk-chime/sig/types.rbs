@@ -1,0 +1,2895 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Chime
+  module Types
+
+    class AccessDeniedException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Account
+      attr_accessor aws_account_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      attr_accessor account_type: ("Team" | "EnterpriseDirectory" | "EnterpriseLWA" | "EnterpriseOIDC")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor default_license: ("Basic" | "Plus" | "Pro" | "ProTrial")
+      attr_accessor supported_licenses: ::Array[("Basic" | "Plus" | "Pro" | "ProTrial")]
+      attr_accessor account_status: ("Suspended" | "Active")
+      attr_accessor signin_delegate_groups: ::Array[Types::SigninDelegateGroup]
+      SENSITIVE: []
+    end
+
+    class AccountSettings
+      attr_accessor disable_remote_control: bool
+      attr_accessor enable_dial_out: bool
+      SENSITIVE: []
+    end
+
+    class Address
+      attr_accessor street_name: ::String
+      attr_accessor street_suffix: ::String
+      attr_accessor post_directional: ::String
+      attr_accessor pre_directional: ::String
+      attr_accessor street_number: ::String
+      attr_accessor city: ::String
+      attr_accessor state: ::String
+      attr_accessor postal_code: ::String
+      attr_accessor postal_code_plus_4: ::String
+      attr_accessor country: ::String
+      SENSITIVE: [:street_name, :street_suffix, :post_directional, :pre_directional, :street_number, :city, :state, :postal_code, :postal_code_plus_4, :country]
+    end
+
+    class AlexaForBusinessMetadata
+      attr_accessor is_alexa_for_business_enabled: bool
+      attr_accessor alexa_for_business_room_arn: ::String
+      SENSITIVE: [:alexa_for_business_room_arn]
+    end
+
+    class AppInstance
+      attr_accessor app_instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class AppInstanceAdmin
+      attr_accessor admin: Types::Identity
+      attr_accessor app_instance_arn: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class AppInstanceAdminSummary
+      attr_accessor admin: Types::Identity
+      SENSITIVE: []
+    end
+
+    class AppInstanceRetentionSettings
+      attr_accessor channel_retention_settings: Types::ChannelRetentionSettings
+      SENSITIVE: []
+    end
+
+    class AppInstanceStreamingConfiguration
+      attr_accessor app_instance_data_type: ("Channel" | "ChannelMessage")
+      attr_accessor resource_arn: ::String
+      SENSITIVE: [:resource_arn]
+    end
+
+    class AppInstanceSummary
+      attr_accessor app_instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class AppInstanceUser
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor metadata: ::String
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class AppInstanceUserMembershipSummary
+      attr_accessor type: ("DEFAULT" | "HIDDEN")
+      attr_accessor read_marker_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class AppInstanceUserSummary
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class ArtifactsConfiguration
+      attr_accessor audio: Types::AudioArtifactsConfiguration
+      attr_accessor video: Types::VideoArtifactsConfiguration
+      attr_accessor content: Types::ContentArtifactsConfiguration
+      SENSITIVE: []
+    end
+
+    class AssociatePhoneNumberWithUserRequest
+      attr_accessor account_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor e164_phone_number: ::String
+      SENSITIVE: [:e164_phone_number]
+    end
+
+    class AssociatePhoneNumberWithUserResponse < Aws::EmptyStructure
+    end
+
+    class AssociatePhoneNumbersWithVoiceConnectorGroupRequest
+      attr_accessor voice_connector_group_id: ::String
+      attr_accessor e164_phone_numbers: ::Array[::String]
+      attr_accessor force_associate: bool
+      SENSITIVE: []
+    end
+
+    class AssociatePhoneNumbersWithVoiceConnectorGroupResponse
+      attr_accessor phone_number_errors: ::Array[Types::PhoneNumberError]
+      SENSITIVE: []
+    end
+
+    class AssociatePhoneNumbersWithVoiceConnectorRequest
+      attr_accessor voice_connector_id: ::String
+      attr_accessor e164_phone_numbers: ::Array[::String]
+      attr_accessor force_associate: bool
+      SENSITIVE: []
+    end
+
+    class AssociatePhoneNumbersWithVoiceConnectorResponse
+      attr_accessor phone_number_errors: ::Array[Types::PhoneNumberError]
+      SENSITIVE: []
+    end
+
+    class AssociateSigninDelegateGroupsWithAccountRequest
+      attr_accessor account_id: ::String
+      attr_accessor signin_delegate_groups: ::Array[Types::SigninDelegateGroup]
+      SENSITIVE: []
+    end
+
+    class AssociateSigninDelegateGroupsWithAccountResponse < Aws::EmptyStructure
+    end
+
+    class Attendee
+      attr_accessor external_user_id: ::String
+      attr_accessor attendee_id: ::String
+      attr_accessor join_token: ::String
+      SENSITIVE: [:external_user_id, :join_token]
+    end
+
+    class AudioArtifactsConfiguration
+      attr_accessor mux_type: ("AudioOnly" | "AudioWithActiveSpeakerVideo")
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchChannelMemberships
+      attr_accessor invited_by: Types::Identity
+      attr_accessor type: ("DEFAULT" | "HIDDEN")
+      attr_accessor members: ::Array[Types::Identity]
+      attr_accessor channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateAttendeeRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor attendees: ::Array[Types::CreateAttendeeRequestItem]
+      SENSITIVE: []
+    end
+
+    class BatchCreateAttendeeResponse
+      attr_accessor attendees: ::Array[Types::Attendee]
+      attr_accessor errors: ::Array[Types::CreateAttendeeError]
+      SENSITIVE: []
+    end
+
+    class BatchCreateChannelMembershipError
+      attr_accessor member_arn: ::String
+      attr_accessor error_code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateChannelMembershipRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor type: ("DEFAULT" | "HIDDEN")
+      attr_accessor member_arns: ::Array[::String]
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateChannelMembershipResponse
+      attr_accessor batch_channel_memberships: Types::BatchChannelMemberships
+      attr_accessor errors: ::Array[Types::BatchCreateChannelMembershipError]
+      SENSITIVE: []
+    end
+
+    class BatchCreateRoomMembershipRequest
+      attr_accessor account_id: ::String
+      attr_accessor room_id: ::String
+      attr_accessor membership_item_list: ::Array[Types::MembershipItem]
+      SENSITIVE: []
+    end
+
+    class BatchCreateRoomMembershipResponse
+      attr_accessor errors: ::Array[Types::MemberError]
+      SENSITIVE: []
+    end
+
+    class BatchDeletePhoneNumberRequest
+      attr_accessor phone_number_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDeletePhoneNumberResponse
+      attr_accessor phone_number_errors: ::Array[Types::PhoneNumberError]
+      SENSITIVE: []
+    end
+
+    class BatchSuspendUserRequest
+      attr_accessor account_id: ::String
+      attr_accessor user_id_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchSuspendUserResponse
+      attr_accessor user_errors: ::Array[Types::UserError]
+      SENSITIVE: []
+    end
+
+    class BatchUnsuspendUserRequest
+      attr_accessor account_id: ::String
+      attr_accessor user_id_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchUnsuspendUserResponse
+      attr_accessor user_errors: ::Array[Types::UserError]
+      SENSITIVE: []
+    end
+
+    class BatchUpdatePhoneNumberRequest
+      attr_accessor update_phone_number_request_items: ::Array[Types::UpdatePhoneNumberRequestItem]
+      SENSITIVE: []
+    end
+
+    class BatchUpdatePhoneNumberResponse
+      attr_accessor phone_number_errors: ::Array[Types::PhoneNumberError]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateUserRequest
+      attr_accessor account_id: ::String
+      attr_accessor update_user_request_items: ::Array[Types::UpdateUserRequestItem]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateUserResponse
+      attr_accessor user_errors: ::Array[Types::UserError]
+      SENSITIVE: []
+    end
+
+    class Bot
+      attr_accessor bot_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor bot_type: ("ChatBot")
+      attr_accessor disabled: bool
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      attr_accessor bot_email: ::String
+      attr_accessor security_token: ::String
+      SENSITIVE: [:display_name, :bot_email, :security_token]
+    end
+
+    class BusinessCallingSettings
+      attr_accessor cdr_bucket: ::String
+      SENSITIVE: []
+    end
+
+    class CandidateAddress
+      attr_accessor street_info: ::String
+      attr_accessor street_number: ::String
+      attr_accessor city: ::String
+      attr_accessor state: ::String
+      attr_accessor postal_code: ::String
+      attr_accessor postal_code_plus_4: ::String
+      attr_accessor country: ::String
+      SENSITIVE: [:street_info, :street_number, :city, :state, :postal_code, :postal_code_plus_4, :country]
+    end
+
+    class Channel
+      attr_accessor name: ::String
+      attr_accessor channel_arn: ::String
+      attr_accessor mode: ("UNRESTRICTED" | "RESTRICTED")
+      attr_accessor privacy: ("PUBLIC" | "PRIVATE")
+      attr_accessor metadata: ::String
+      attr_accessor created_by: Types::Identity
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_message_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class ChannelBan
+      attr_accessor member: Types::Identity
+      attr_accessor channel_arn: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor created_by: Types::Identity
+      SENSITIVE: []
+    end
+
+    class ChannelBanSummary
+      attr_accessor member: Types::Identity
+      SENSITIVE: []
+    end
+
+    class ChannelMembership
+      attr_accessor invited_by: Types::Identity
+      attr_accessor type: ("DEFAULT" | "HIDDEN")
+      attr_accessor member: Types::Identity
+      attr_accessor channel_arn: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ChannelMembershipForAppInstanceUserSummary
+      attr_accessor channel_summary: Types::ChannelSummary
+      attr_accessor app_instance_user_membership_summary: Types::AppInstanceUserMembershipSummary
+      SENSITIVE: []
+    end
+
+    class ChannelMembershipSummary
+      attr_accessor member: Types::Identity
+      SENSITIVE: []
+    end
+
+    class ChannelMessage
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      attr_accessor content: ::String
+      attr_accessor metadata: ::String
+      attr_accessor type: ("STANDARD" | "CONTROL")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_edited_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor sender: Types::Identity
+      attr_accessor redacted: bool
+      attr_accessor persistence: ("PERSISTENT" | "NON_PERSISTENT")
+      SENSITIVE: [:content, :metadata]
+    end
+
+    class ChannelMessageSummary
+      attr_accessor message_id: ::String
+      attr_accessor content: ::String
+      attr_accessor metadata: ::String
+      attr_accessor type: ("STANDARD" | "CONTROL")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor last_edited_timestamp: ::Time
+      attr_accessor sender: Types::Identity
+      attr_accessor redacted: bool
+      SENSITIVE: [:content, :metadata]
+    end
+
+    class ChannelModeratedByAppInstanceUserSummary
+      attr_accessor channel_summary: Types::ChannelSummary
+      SENSITIVE: []
+    end
+
+    class ChannelModerator
+      attr_accessor moderator: Types::Identity
+      attr_accessor channel_arn: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor created_by: Types::Identity
+      SENSITIVE: []
+    end
+
+    class ChannelModeratorSummary
+      attr_accessor moderator: Types::Identity
+      SENSITIVE: []
+    end
+
+    class ChannelRetentionSettings
+      attr_accessor retention_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class ChannelSummary
+      attr_accessor name: ::String
+      attr_accessor channel_arn: ::String
+      attr_accessor mode: ("UNRESTRICTED" | "RESTRICTED")
+      attr_accessor privacy: ("PUBLIC" | "PRIVATE")
+      attr_accessor metadata: ::String
+      attr_accessor last_message_timestamp: ::Time
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class ChimeSdkMeetingConfiguration
+      attr_accessor source_configuration: Types::SourceConfiguration
+      attr_accessor artifacts_configuration: Types::ArtifactsConfiguration
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContentArtifactsConfiguration
+      attr_accessor state: ("Enabled" | "Disabled")
+      attr_accessor mux_type: ("ContentOnly")
+      SENSITIVE: []
+    end
+
+    class ConversationRetentionSettings
+      attr_accessor retention_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateAccountRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccountResponse
+      attr_accessor account: Types::Account
+      SENSITIVE: []
+    end
+
+    class CreateAppInstanceAdminRequest
+      attr_accessor app_instance_admin_arn: ::String
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppInstanceAdminResponse
+      attr_accessor app_instance_admin: Types::Identity
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppInstanceRequest
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:name, :metadata, :client_request_token]
+    end
+
+    class CreateAppInstanceResponse
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppInstanceUserRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor app_instance_user_id: ::String
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:app_instance_user_id, :name, :metadata, :client_request_token]
+    end
+
+    class CreateAppInstanceUserResponse
+      attr_accessor app_instance_user_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAttendeeError
+      attr_accessor external_user_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: [:external_user_id]
+    end
+
+    class CreateAttendeeRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor external_user_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:external_user_id]
+    end
+
+    class CreateAttendeeRequestItem
+      attr_accessor external_user_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:external_user_id]
+    end
+
+    class CreateAttendeeResponse
+      attr_accessor attendee: Types::Attendee
+      SENSITIVE: []
+    end
+
+    class CreateBotRequest
+      attr_accessor account_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor domain: ::String
+      SENSITIVE: [:display_name]
+    end
+
+    class CreateBotResponse
+      attr_accessor bot: Types::Bot
+      SENSITIVE: []
+    end
+
+    class CreateChannelBanRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor member_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChannelBanResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor member: Types::Identity
+      SENSITIVE: []
+    end
+
+    class CreateChannelMembershipRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor member_arn: ::String
+      attr_accessor type: ("DEFAULT" | "HIDDEN")
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChannelMembershipResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor member: Types::Identity
+      SENSITIVE: []
+    end
+
+    class CreateChannelModeratorRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor channel_moderator_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class CreateChannelModeratorResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor channel_moderator: Types::Identity
+      SENSITIVE: []
+    end
+
+    class CreateChannelRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor mode: ("UNRESTRICTED" | "RESTRICTED")
+      attr_accessor privacy: ("PUBLIC" | "PRIVATE")
+      attr_accessor metadata: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:name, :metadata, :client_request_token]
+    end
+
+    class CreateChannelResponse
+      attr_accessor channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMediaCapturePipelineRequest
+      attr_accessor source_type: ("ChimeSdkMeeting")
+      attr_accessor source_arn: ::String
+      attr_accessor sink_type: ("S3Bucket")
+      attr_accessor sink_arn: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor chime_sdk_meeting_configuration: Types::ChimeSdkMeetingConfiguration
+      SENSITIVE: [:source_arn, :sink_arn, :client_request_token]
+    end
+
+    class CreateMediaCapturePipelineResponse
+      attr_accessor media_capture_pipeline: Types::MediaCapturePipeline
+      SENSITIVE: []
+    end
+
+    class CreateMeetingDialOutRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor from_phone_number: ::String
+      attr_accessor to_phone_number: ::String
+      attr_accessor join_token: ::String
+      SENSITIVE: [:from_phone_number, :to_phone_number, :join_token]
+    end
+
+    class CreateMeetingDialOutResponse
+      attr_accessor transaction_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMeetingRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor external_meeting_id: ::String
+      attr_accessor meeting_host_id: ::String
+      attr_accessor media_region: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor notifications_configuration: Types::MeetingNotificationConfiguration
+      SENSITIVE: [:client_request_token, :external_meeting_id, :meeting_host_id]
+    end
+
+    class CreateMeetingResponse
+      attr_accessor meeting: Types::Meeting
+      SENSITIVE: []
+    end
+
+    class CreateMeetingWithAttendeesRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor external_meeting_id: ::String
+      attr_accessor meeting_host_id: ::String
+      attr_accessor media_region: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor notifications_configuration: Types::MeetingNotificationConfiguration
+      attr_accessor attendees: ::Array[Types::CreateAttendeeRequestItem]
+      SENSITIVE: [:client_request_token, :external_meeting_id, :meeting_host_id]
+    end
+
+    class CreateMeetingWithAttendeesResponse
+      attr_accessor meeting: Types::Meeting
+      attr_accessor attendees: ::Array[Types::Attendee]
+      attr_accessor errors: ::Array[Types::CreateAttendeeError]
+      SENSITIVE: []
+    end
+
+    class CreatePhoneNumberOrderRequest
+      attr_accessor product_type: ("BusinessCalling" | "VoiceConnector" | "SipMediaApplicationDialIn")
+      attr_accessor e164_phone_numbers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreatePhoneNumberOrderResponse
+      attr_accessor phone_number_order: Types::PhoneNumberOrder
+      SENSITIVE: []
+    end
+
+    class CreateProxySessionRequest
+      attr_accessor voice_connector_id: ::String
+      attr_accessor participant_phone_numbers: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor expiry_minutes: ::Integer
+      attr_accessor capabilities: ::Array[("Voice" | "SMS")]
+      attr_accessor number_selection_behavior: ("PreferSticky" | "AvoidSticky")
+      attr_accessor geo_match_level: ("Country" | "AreaCode")
+      attr_accessor geo_match_params: Types::GeoMatchParams
+      SENSITIVE: [:name]
+    end
+
+    class CreateProxySessionResponse
+      attr_accessor proxy_session: Types::ProxySession
+      SENSITIVE: []
+    end
+
+    class CreateRoomMembershipRequest
+      attr_accessor account_id: ::String
+      attr_accessor room_id: ::String
+      attr_accessor member_id: ::String
+      attr_accessor role: ("Administrator" | "Member")
+      SENSITIVE: []
+    end
+
+    class CreateRoomMembershipResponse
+      attr_accessor room_membership: Types::RoomMembership
+      SENSITIVE: []
+    end
+
+    class CreateRoomRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: [:name, :client_request_token]
+    end
+
+    class CreateRoomResponse
+      attr_accessor room: Types::Room
+      SENSITIVE: []
+    end
+
+    class CreateSipMediaApplicationCallRequest
+      attr_accessor from_phone_number: ::String
+      attr_accessor to_phone_number: ::String
+      attr_accessor sip_media_application_id: ::String
+      attr_accessor sip_headers: ::Hash[::String, ::String]
+      SENSITIVE: [:from_phone_number, :to_phone_number]
+    end
+
+    class CreateSipMediaApplicationCallResponse
+      attr_accessor sip_media_application_call: Types::SipMediaApplicationCall
+      SENSITIVE: []
+    end
+
+    class CreateSipMediaApplicationRequest
+      attr_accessor aws_region: ::String
+      attr_accessor name: ::String
+      attr_accessor endpoints: ::Array[Types::SipMediaApplicationEndpoint]
+      SENSITIVE: []
+    end
+
+    class CreateSipMediaApplicationResponse
+      attr_accessor sip_media_application: Types::SipMediaApplication
+      SENSITIVE: []
+    end
+
+    class CreateSipRuleRequest
+      attr_accessor name: ::String
+      attr_accessor trigger_type: ("ToPhoneNumber" | "RequestUriHostname")
+      attr_accessor trigger_value: ::String
+      attr_accessor disabled: bool
+      attr_accessor target_applications: ::Array[Types::SipRuleTargetApplication]
+      SENSITIVE: []
+    end
+
+    class CreateSipRuleResponse
+      attr_accessor sip_rule: Types::SipRule
+      SENSITIVE: []
+    end
+
+    class CreateUserRequest
+      attr_accessor account_id: ::String
+      attr_accessor username: ::String
+      attr_accessor email: ::String
+      attr_accessor user_type: ("PrivateUser" | "SharedDevice")
+      SENSITIVE: [:email]
+    end
+
+    class CreateUserResponse
+      attr_accessor user: Types::User
+      SENSITIVE: []
+    end
+
+    class CreateVoiceConnectorGroupRequest
+      attr_accessor name: ::String
+      attr_accessor voice_connector_items: ::Array[Types::VoiceConnectorItem]
+      SENSITIVE: []
+    end
+
+    class CreateVoiceConnectorGroupResponse
+      attr_accessor voice_connector_group: Types::VoiceConnectorGroup
+      SENSITIVE: []
+    end
+
+    class CreateVoiceConnectorRequest
+      attr_accessor name: ::String
+      attr_accessor aws_region: ("us-east-1" | "us-west-2")
+      attr_accessor require_encryption: bool
+      SENSITIVE: []
+    end
+
+    class CreateVoiceConnectorResponse
+      attr_accessor voice_connector: Types::VoiceConnector
+      SENSITIVE: []
+    end
+
+    class Credential
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:username, :password]
+    end
+
+    class DNISEmergencyCallingConfiguration
+      attr_accessor emergency_phone_number: ::String
+      attr_accessor test_phone_number: ::String
+      attr_accessor calling_country: ::String
+      SENSITIVE: [:emergency_phone_number, :test_phone_number]
+    end
+
+    class DeleteAccountRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccountResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAppInstanceAdminRequest
+      attr_accessor app_instance_admin_arn: ::String
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppInstanceRequest
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppInstanceStreamingConfigurationsRequest
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppInstanceUserRequest
+      attr_accessor app_instance_user_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAttendeeRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor attendee_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelBanRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor member_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelMembershipRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor member_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelMessageRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelModeratorRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor channel_moderator_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteChannelRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventsConfigurationRequest
+      attr_accessor account_id: ::String
+      attr_accessor bot_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMediaCapturePipelineRequest
+      attr_accessor media_pipeline_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMeetingRequest
+      attr_accessor meeting_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePhoneNumberRequest
+      attr_accessor phone_number_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProxySessionRequest
+      attr_accessor voice_connector_id: ::String
+      attr_accessor proxy_session_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRoomMembershipRequest
+      attr_accessor account_id: ::String
+      attr_accessor room_id: ::String
+      attr_accessor member_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRoomRequest
+      attr_accessor account_id: ::String
+      attr_accessor room_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSipMediaApplicationRequest
+      attr_accessor sip_media_application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSipRuleRequest
+      attr_accessor sip_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVoiceConnectorEmergencyCallingConfigurationRequest
+      attr_accessor voice_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVoiceConnectorGroupRequest
+      attr_accessor voice_connector_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVoiceConnectorOriginationRequest
+      attr_accessor voice_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVoiceConnectorProxyRequest
+      attr_accessor voice_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVoiceConnectorRequest
+      attr_accessor voice_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVoiceConnectorStreamingConfigurationRequest
+      attr_accessor voice_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVoiceConnectorTerminationCredentialsRequest
+      attr_accessor voice_connector_id: ::String
+      attr_accessor usernames: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteVoiceConnectorTerminationRequest
+      attr_accessor voice_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppInstanceAdminRequest
+      attr_accessor app_instance_admin_arn: ::String
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppInstanceAdminResponse
+      attr_accessor app_instance_admin: Types::AppInstanceAdmin
+      SENSITIVE: []
+    end
+
+    class DescribeAppInstanceRequest
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppInstanceResponse
+      attr_accessor app_instance: Types::AppInstance
+      SENSITIVE: []
+    end
+
+    class DescribeAppInstanceUserRequest
+      attr_accessor app_instance_user_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppInstanceUserResponse
+      attr_accessor app_instance_user: Types::AppInstanceUser
+      SENSITIVE: []
+    end
+
+    class DescribeChannelBanRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor member_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelBanResponse
+      attr_accessor channel_ban: Types::ChannelBan
+      SENSITIVE: []
+    end
+
+    class DescribeChannelMembershipForAppInstanceUserRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelMembershipForAppInstanceUserResponse
+      attr_accessor channel_membership: Types::ChannelMembershipForAppInstanceUserSummary
+      SENSITIVE: []
+    end
+
+    class DescribeChannelMembershipRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor member_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelMembershipResponse
+      attr_accessor channel_membership: Types::ChannelMembership
+      SENSITIVE: []
+    end
+
+    class DescribeChannelModeratedByAppInstanceUserRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelModeratedByAppInstanceUserResponse
+      attr_accessor channel: Types::ChannelModeratedByAppInstanceUserSummary
+      SENSITIVE: []
+    end
+
+    class DescribeChannelModeratorRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor channel_moderator_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelModeratorResponse
+      attr_accessor channel_moderator: Types::ChannelModerator
+      SENSITIVE: []
+    end
+
+    class DescribeChannelRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChannelResponse
+      attr_accessor channel: Types::Channel
+      SENSITIVE: []
+    end
+
+    class DisassociatePhoneNumberFromUserRequest
+      attr_accessor account_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociatePhoneNumberFromUserResponse < Aws::EmptyStructure
+    end
+
+    class DisassociatePhoneNumbersFromVoiceConnectorGroupRequest
+      attr_accessor voice_connector_group_id: ::String
+      attr_accessor e164_phone_numbers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociatePhoneNumbersFromVoiceConnectorGroupResponse
+      attr_accessor phone_number_errors: ::Array[Types::PhoneNumberError]
+      SENSITIVE: []
+    end
+
+    class DisassociatePhoneNumbersFromVoiceConnectorRequest
+      attr_accessor voice_connector_id: ::String
+      attr_accessor e164_phone_numbers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociatePhoneNumbersFromVoiceConnectorResponse
+      attr_accessor phone_number_errors: ::Array[Types::PhoneNumberError]
+      SENSITIVE: []
+    end
+
+    class DisassociateSigninDelegateGroupsFromAccountRequest
+      attr_accessor account_id: ::String
+      attr_accessor group_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateSigninDelegateGroupsFromAccountResponse < Aws::EmptyStructure
+    end
+
+    class EmergencyCallingConfiguration
+      attr_accessor dnis: ::Array[Types::DNISEmergencyCallingConfiguration]
+      SENSITIVE: []
+    end
+
+    class EngineTranscribeMedicalSettings
+      attr_accessor language_code: ("en-US")
+      attr_accessor specialty: ("PRIMARYCARE" | "CARDIOLOGY" | "NEUROLOGY" | "ONCOLOGY" | "RADIOLOGY" | "UROLOGY")
+      attr_accessor type: ("CONVERSATION" | "DICTATION")
+      attr_accessor vocabulary_name: ::String
+      attr_accessor region: ("us-east-1" | "us-east-2" | "us-west-2" | "ap-southeast-2" | "ca-central-1" | "eu-west-1" | "auto")
+      attr_accessor content_identification_type: ("PHI")
+      SENSITIVE: []
+    end
+
+    class EngineTranscribeSettings
+      attr_accessor language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "th-TH" | "hi-IN")
+      attr_accessor vocabulary_filter_method: ("remove" | "mask" | "tag")
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor vocabulary_name: ::String
+      attr_accessor region: ("us-east-2" | "us-east-1" | "us-west-2" | "ap-northeast-2" | "ap-southeast-2" | "ap-northeast-1" | "ca-central-1" | "eu-central-1" | "eu-west-1" | "eu-west-2" | "sa-east-1" | "auto")
+      attr_accessor enable_partial_results_stabilization: bool
+      attr_accessor partial_results_stability: ("low" | "medium" | "high")
+      attr_accessor content_identification_type: ("PII")
+      attr_accessor content_redaction_type: ("PII")
+      attr_accessor pii_entity_types: ::String
+      attr_accessor language_model_name: ::String
+      attr_accessor identify_language: bool
+      attr_accessor language_options: ::String
+      attr_accessor preferred_language: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "th-TH" | "hi-IN")
+      attr_accessor vocabulary_names: ::String
+      attr_accessor vocabulary_filter_names: ::String
+      SENSITIVE: []
+    end
+
+    class EventsConfiguration
+      attr_accessor bot_id: ::String
+      attr_accessor outbound_events_https_endpoint: ::String
+      attr_accessor lambda_function_arn: ::String
+      SENSITIVE: [:outbound_events_https_endpoint, :lambda_function_arn]
+    end
+
+    class ForbiddenException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GeoMatchParams
+      attr_accessor country: ::String
+      attr_accessor area_code: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountResponse
+      attr_accessor account: Types::Account
+      SENSITIVE: []
+    end
+
+    class GetAccountSettingsRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountSettingsResponse
+      attr_accessor account_settings: Types::AccountSettings
+      SENSITIVE: []
+    end
+
+    class GetAppInstanceRetentionSettingsRequest
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppInstanceRetentionSettingsResponse
+      attr_accessor app_instance_retention_settings: Types::AppInstanceRetentionSettings
+      attr_accessor initiate_deletion_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAppInstanceStreamingConfigurationsRequest
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppInstanceStreamingConfigurationsResponse
+      attr_accessor app_instance_streaming_configurations: ::Array[Types::AppInstanceStreamingConfiguration]
+      SENSITIVE: []
+    end
+
+    class GetAttendeeRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor attendee_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAttendeeResponse
+      attr_accessor attendee: Types::Attendee
+      SENSITIVE: []
+    end
+
+    class GetBotRequest
+      attr_accessor account_id: ::String
+      attr_accessor bot_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBotResponse
+      attr_accessor bot: Types::Bot
+      SENSITIVE: []
+    end
+
+    class GetChannelMessageRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class GetChannelMessageResponse
+      attr_accessor channel_message: Types::ChannelMessage
+      SENSITIVE: []
+    end
+
+    class GetEventsConfigurationRequest
+      attr_accessor account_id: ::String
+      attr_accessor bot_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventsConfigurationResponse
+      attr_accessor events_configuration: Types::EventsConfiguration
+      SENSITIVE: []
+    end
+
+    class GetGlobalSettingsResponse
+      attr_accessor business_calling: Types::BusinessCallingSettings
+      attr_accessor voice_connector: Types::VoiceConnectorSettings
+      SENSITIVE: []
+    end
+
+    class GetMediaCapturePipelineRequest
+      attr_accessor media_pipeline_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMediaCapturePipelineResponse
+      attr_accessor media_capture_pipeline: Types::MediaCapturePipeline
+      SENSITIVE: []
+    end
+
+    class GetMeetingRequest
+      attr_accessor meeting_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMeetingResponse
+      attr_accessor meeting: Types::Meeting
+      SENSITIVE: []
+    end
+
+    class GetMessagingSessionEndpointRequest < Aws::EmptyStructure
+    end
+
+    class GetMessagingSessionEndpointResponse
+      attr_accessor endpoint: Types::MessagingSessionEndpoint
+      SENSITIVE: []
+    end
+
+    class GetPhoneNumberOrderRequest
+      attr_accessor phone_number_order_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPhoneNumberOrderResponse
+      attr_accessor phone_number_order: Types::PhoneNumberOrder
+      SENSITIVE: []
+    end
+
+    class GetPhoneNumberRequest
+      attr_accessor phone_number_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPhoneNumberResponse
+      attr_accessor phone_number: Types::PhoneNumber
+      SENSITIVE: []
+    end
+
+    class GetPhoneNumberSettingsResponse
+      attr_accessor calling_name: ::String
+      attr_accessor calling_name_updated_timestamp: ::Time
+      SENSITIVE: [:calling_name]
+    end
+
+    class GetProxySessionRequest
+      attr_accessor voice_connector_id: ::String
+      attr_accessor proxy_session_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProxySessionResponse
+      attr_accessor proxy_session: Types::ProxySession
+      SENSITIVE: []
+    end
+
+    class GetRetentionSettingsRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRetentionSettingsResponse
+      attr_accessor retention_settings: Types::RetentionSettings
+      attr_accessor initiate_deletion_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class GetRoomRequest
+      attr_accessor account_id: ::String
+      attr_accessor room_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRoomResponse
+      attr_accessor room: Types::Room
+      SENSITIVE: []
+    end
+
+    class GetSipMediaApplicationLoggingConfigurationRequest
+      attr_accessor sip_media_application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSipMediaApplicationLoggingConfigurationResponse
+      attr_accessor sip_media_application_logging_configuration: Types::SipMediaApplicationLoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class GetSipMediaApplicationRequest
+      attr_accessor sip_media_application_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSipMediaApplicationResponse
+      attr_accessor sip_media_application: Types::SipMediaApplication
+      SENSITIVE: []
+    end
+
+    class GetSipRuleRequest
+      attr_accessor sip_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSipRuleResponse
+      attr_accessor sip_rule: Types::SipRule
+      SENSITIVE: []
+    end
+
+    class GetUserRequest
+      attr_accessor account_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetUserResponse
+      attr_accessor user: Types::User
+      SENSITIVE: []
+    end
+
+    class GetUserSettingsRequest
+      attr_accessor account_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetUserSettingsResponse
+      attr_accessor user_settings: Types::UserSettings
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorEmergencyCallingConfigurationRequest
+      attr_accessor voice_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorEmergencyCallingConfigurationResponse
+      attr_accessor emergency_calling_configuration: Types::EmergencyCallingConfiguration
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorGroupRequest
+      attr_accessor voice_connector_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorGroupResponse
+      attr_accessor voice_connector_group: Types::VoiceConnectorGroup
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorLoggingConfigurationRequest
+      attr_accessor voice_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorLoggingConfigurationResponse
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorOriginationRequest
+      attr_accessor voice_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorOriginationResponse
+      attr_accessor origination: Types::Origination
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorProxyRequest
+      attr_accessor voice_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorProxyResponse
+      attr_accessor proxy: Types::Proxy
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorRequest
+      attr_accessor voice_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorResponse
+      attr_accessor voice_connector: Types::VoiceConnector
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorStreamingConfigurationRequest
+      attr_accessor voice_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorStreamingConfigurationResponse
+      attr_accessor streaming_configuration: Types::StreamingConfiguration
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorTerminationHealthRequest
+      attr_accessor voice_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorTerminationHealthResponse
+      attr_accessor termination_health: Types::TerminationHealth
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorTerminationRequest
+      attr_accessor voice_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVoiceConnectorTerminationResponse
+      attr_accessor termination: Types::Termination
+      SENSITIVE: []
+    end
+
+    class Identity
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:name]
+    end
+
+    class Invite
+      attr_accessor invite_id: ::String
+      attr_accessor status: ("Pending" | "Accepted" | "Failed")
+      attr_accessor email_address: ::String
+      attr_accessor email_status: ("NotSent" | "Sent" | "Failed")
+      SENSITIVE: [:email_address]
+    end
+
+    class InviteUsersRequest
+      attr_accessor account_id: ::String
+      attr_accessor user_email_list: ::Array[::String]
+      attr_accessor user_type: ("PrivateUser" | "SharedDevice")
+      SENSITIVE: []
+    end
+
+    class InviteUsersResponse
+      attr_accessor invites: ::Array[Types::Invite]
+      SENSITIVE: []
+    end
+
+    class ListAccountsRequest
+      attr_accessor name: ::String
+      attr_accessor user_email: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: [:user_email]
+    end
+
+    class ListAccountsResponse
+      attr_accessor accounts: ::Array[Types::Account]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppInstanceAdminsRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListAppInstanceAdminsResponse
+      attr_accessor app_instance_arn: ::String
+      attr_accessor app_instance_admins: ::Array[Types::AppInstanceAdminSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListAppInstanceUsersRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListAppInstanceUsersResponse
+      attr_accessor app_instance_arn: ::String
+      attr_accessor app_instance_users: ::Array[Types::AppInstanceUserSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListAppInstancesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListAppInstancesResponse
+      attr_accessor app_instances: ::Array[Types::AppInstanceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListAttendeeTagsRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor attendee_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttendeeTagsResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListAttendeesRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAttendeesResponse
+      attr_accessor attendees: ::Array[Types::Attendee]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotsRequest
+      attr_accessor account_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBotsResponse
+      attr_accessor bots: ::Array[Types::Bot]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChannelBansRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelBansResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor channel_bans: ::Array[Types::ChannelBanSummary]
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelMembershipsForAppInstanceUserRequest
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelMembershipsForAppInstanceUserResponse
+      attr_accessor channel_memberships: ::Array[Types::ChannelMembershipForAppInstanceUserSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelMembershipsRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor type: ("DEFAULT" | "HIDDEN")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelMembershipsResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor channel_memberships: ::Array[Types::ChannelMembershipSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelMessagesRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor not_before: ::Time
+      attr_accessor not_after: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelMessagesResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor channel_messages: ::Array[Types::ChannelMessageSummary]
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelModeratorsRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelModeratorsResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor channel_moderators: ::Array[Types::ChannelModeratorSummary]
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelsModeratedByAppInstanceUserRequest
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelsModeratedByAppInstanceUserResponse
+      attr_accessor channels: ::Array[Types::ChannelModeratedByAppInstanceUserSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelsRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor privacy: ("PUBLIC" | "PRIVATE")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListChannelsResponse
+      attr_accessor channels: ::Array[Types::ChannelSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListMediaCapturePipelinesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMediaCapturePipelinesResponse
+      attr_accessor media_capture_pipelines: ::Array[Types::MediaCapturePipeline]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMeetingTagsRequest
+      attr_accessor meeting_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListMeetingTagsResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListMeetingsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMeetingsResponse
+      attr_accessor meetings: ::Array[Types::Meeting]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPhoneNumberOrdersRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPhoneNumberOrdersResponse
+      attr_accessor phone_number_orders: ::Array[Types::PhoneNumberOrder]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPhoneNumbersRequest
+      attr_accessor status: ("AcquireInProgress" | "AcquireFailed" | "Unassigned" | "Assigned" | "ReleaseInProgress" | "DeleteInProgress" | "ReleaseFailed" | "DeleteFailed")
+      attr_accessor product_type: ("BusinessCalling" | "VoiceConnector" | "SipMediaApplicationDialIn")
+      attr_accessor filter_name: ("AccountId" | "UserId" | "VoiceConnectorId" | "VoiceConnectorGroupId" | "SipRuleId")
+      attr_accessor filter_value: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPhoneNumbersResponse
+      attr_accessor phone_numbers: ::Array[Types::PhoneNumber]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProxySessionsRequest
+      attr_accessor voice_connector_id: ::String
+      attr_accessor status: ("Open" | "InProgress" | "Closed")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProxySessionsResponse
+      attr_accessor proxy_sessions: ::Array[Types::ProxySession]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoomMembershipsRequest
+      attr_accessor account_id: ::String
+      attr_accessor room_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoomMembershipsResponse
+      attr_accessor room_memberships: ::Array[Types::RoomMembership]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoomsRequest
+      attr_accessor account_id: ::String
+      attr_accessor member_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoomsResponse
+      attr_accessor rooms: ::Array[Types::Room]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSipMediaApplicationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSipMediaApplicationsResponse
+      attr_accessor sip_media_applications: ::Array[Types::SipMediaApplication]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSipRulesRequest
+      attr_accessor sip_media_application_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSipRulesResponse
+      attr_accessor sip_rules: ::Array[Types::SipRule]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSupportedPhoneNumberCountriesRequest
+      attr_accessor product_type: ("BusinessCalling" | "VoiceConnector" | "SipMediaApplicationDialIn")
+      SENSITIVE: []
+    end
+
+    class ListSupportedPhoneNumberCountriesResponse
+      attr_accessor phone_number_countries: ::Array[Types::PhoneNumberCountry]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: [:resource_arn]
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListUsersRequest
+      attr_accessor account_id: ::String
+      attr_accessor user_email: ::String
+      attr_accessor user_type: ("PrivateUser" | "SharedDevice")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:user_email]
+    end
+
+    class ListUsersResponse
+      attr_accessor users: ::Array[Types::User]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVoiceConnectorGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListVoiceConnectorGroupsResponse
+      attr_accessor voice_connector_groups: ::Array[Types::VoiceConnectorGroup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVoiceConnectorTerminationCredentialsRequest
+      attr_accessor voice_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListVoiceConnectorTerminationCredentialsResponse
+      attr_accessor usernames: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListVoiceConnectorsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListVoiceConnectorsResponse
+      attr_accessor voice_connectors: ::Array[Types::VoiceConnector]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LoggingConfiguration
+      attr_accessor enable_sip_logs: bool
+      attr_accessor enable_media_metric_logs: bool
+      SENSITIVE: []
+    end
+
+    class LogoutUserRequest
+      attr_accessor account_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class LogoutUserResponse < Aws::EmptyStructure
+    end
+
+    class MediaCapturePipeline
+      attr_accessor media_pipeline_id: ::String
+      attr_accessor source_type: ("ChimeSdkMeeting")
+      attr_accessor source_arn: ::String
+      attr_accessor status: ("Initializing" | "InProgress" | "Failed" | "Stopping" | "Stopped")
+      attr_accessor sink_type: ("S3Bucket")
+      attr_accessor sink_arn: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      attr_accessor chime_sdk_meeting_configuration: Types::ChimeSdkMeetingConfiguration
+      SENSITIVE: [:source_arn, :sink_arn]
+    end
+
+    class MediaPlacement
+      attr_accessor audio_host_url: ::String
+      attr_accessor audio_fallback_url: ::String
+      attr_accessor screen_data_url: ::String
+      attr_accessor screen_sharing_url: ::String
+      attr_accessor screen_viewing_url: ::String
+      attr_accessor signaling_url: ::String
+      attr_accessor turn_control_url: ::String
+      attr_accessor event_ingestion_url: ::String
+      SENSITIVE: []
+    end
+
+    class Meeting
+      attr_accessor meeting_id: ::String
+      attr_accessor external_meeting_id: ::String
+      attr_accessor media_placement: Types::MediaPlacement
+      attr_accessor media_region: ::String
+      SENSITIVE: [:external_meeting_id]
+    end
+
+    class MeetingNotificationConfiguration
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor sqs_queue_arn: ::String
+      SENSITIVE: [:sns_topic_arn, :sqs_queue_arn]
+    end
+
+    class Member
+      attr_accessor member_id: ::String
+      attr_accessor member_type: ("User" | "Bot" | "Webhook")
+      attr_accessor email: ::String
+      attr_accessor full_name: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: [:email, :full_name]
+    end
+
+    class MemberError
+      attr_accessor member_id: ::String
+      attr_accessor error_code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class MembershipItem
+      attr_accessor member_id: ::String
+      attr_accessor role: ("Administrator" | "Member")
+      SENSITIVE: []
+    end
+
+    class MessagingSessionEndpoint
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OrderedPhoneNumber
+      attr_accessor e164_phone_number: ::String
+      attr_accessor status: ("Processing" | "Acquired" | "Failed")
+      SENSITIVE: [:e164_phone_number]
+    end
+
+    class Origination
+      attr_accessor routes: ::Array[Types::OriginationRoute]
+      attr_accessor disabled: bool
+      SENSITIVE: []
+    end
+
+    class OriginationRoute
+      attr_accessor host: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("TCP" | "UDP")
+      attr_accessor priority: ::Integer
+      attr_accessor weight: ::Integer
+      SENSITIVE: []
+    end
+
+    class Participant
+      attr_accessor phone_number: ::String
+      attr_accessor proxy_phone_number: ::String
+      SENSITIVE: [:phone_number, :proxy_phone_number]
+    end
+
+    class PhoneNumber
+      attr_accessor phone_number_id: ::String
+      attr_accessor e164_phone_number: ::String
+      attr_accessor country: ::String
+      attr_accessor type: ("Local" | "TollFree")
+      attr_accessor product_type: ("BusinessCalling" | "VoiceConnector" | "SipMediaApplicationDialIn")
+      attr_accessor status: ("AcquireInProgress" | "AcquireFailed" | "Unassigned" | "Assigned" | "ReleaseInProgress" | "DeleteInProgress" | "ReleaseFailed" | "DeleteFailed")
+      attr_accessor capabilities: Types::PhoneNumberCapabilities
+      attr_accessor associations: ::Array[Types::PhoneNumberAssociation]
+      attr_accessor calling_name: ::String
+      attr_accessor calling_name_status: ("Unassigned" | "UpdateInProgress" | "UpdateSucceeded" | "UpdateFailed")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      attr_accessor deletion_timestamp: ::Time
+      SENSITIVE: [:e164_phone_number, :calling_name]
+    end
+
+    class PhoneNumberAssociation
+      attr_accessor value: ::String
+      attr_accessor name: ("AccountId" | "UserId" | "VoiceConnectorId" | "VoiceConnectorGroupId" | "SipRuleId")
+      attr_accessor associated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class PhoneNumberCapabilities
+      attr_accessor inbound_call: bool
+      attr_accessor outbound_call: bool
+      attr_accessor inbound_sms: bool
+      attr_accessor outbound_sms: bool
+      attr_accessor inbound_mms: bool
+      attr_accessor outbound_mms: bool
+      SENSITIVE: []
+    end
+
+    class PhoneNumberCountry
+      attr_accessor country_code: ::String
+      attr_accessor supported_phone_number_types: ::Array[("Local" | "TollFree")]
+      SENSITIVE: []
+    end
+
+    class PhoneNumberError
+      attr_accessor phone_number_id: ::String
+      attr_accessor error_code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class PhoneNumberOrder
+      attr_accessor phone_number_order_id: ::String
+      attr_accessor product_type: ("BusinessCalling" | "VoiceConnector" | "SipMediaApplicationDialIn")
+      attr_accessor status: ("Processing" | "Successful" | "Failed" | "Partial")
+      attr_accessor ordered_phone_numbers: ::Array[Types::OrderedPhoneNumber]
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class Proxy
+      attr_accessor default_session_expiry_minutes: ::Integer
+      attr_accessor disabled: bool
+      attr_accessor fall_back_phone_number: ::String
+      attr_accessor phone_number_countries: ::Array[::String]
+      SENSITIVE: [:fall_back_phone_number]
+    end
+
+    class ProxySession
+      attr_accessor voice_connector_id: ::String
+      attr_accessor proxy_session_id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("Open" | "InProgress" | "Closed")
+      attr_accessor expiry_minutes: ::Integer
+      attr_accessor capabilities: ::Array[("Voice" | "SMS")]
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      attr_accessor ended_timestamp: ::Time
+      attr_accessor participants: ::Array[Types::Participant]
+      attr_accessor number_selection_behavior: ("PreferSticky" | "AvoidSticky")
+      attr_accessor geo_match_level: ("Country" | "AreaCode")
+      attr_accessor geo_match_params: Types::GeoMatchParams
+      SENSITIVE: []
+    end
+
+    class PutAppInstanceRetentionSettingsRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor app_instance_retention_settings: Types::AppInstanceRetentionSettings
+      SENSITIVE: []
+    end
+
+    class PutAppInstanceRetentionSettingsResponse
+      attr_accessor app_instance_retention_settings: Types::AppInstanceRetentionSettings
+      attr_accessor initiate_deletion_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class PutAppInstanceStreamingConfigurationsRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor app_instance_streaming_configurations: ::Array[Types::AppInstanceStreamingConfiguration]
+      SENSITIVE: []
+    end
+
+    class PutAppInstanceStreamingConfigurationsResponse
+      attr_accessor app_instance_streaming_configurations: ::Array[Types::AppInstanceStreamingConfiguration]
+      SENSITIVE: []
+    end
+
+    class PutEventsConfigurationRequest
+      attr_accessor account_id: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor outbound_events_https_endpoint: ::String
+      attr_accessor lambda_function_arn: ::String
+      SENSITIVE: [:outbound_events_https_endpoint, :lambda_function_arn]
+    end
+
+    class PutEventsConfigurationResponse
+      attr_accessor events_configuration: Types::EventsConfiguration
+      SENSITIVE: []
+    end
+
+    class PutRetentionSettingsRequest
+      attr_accessor account_id: ::String
+      attr_accessor retention_settings: Types::RetentionSettings
+      SENSITIVE: []
+    end
+
+    class PutRetentionSettingsResponse
+      attr_accessor retention_settings: Types::RetentionSettings
+      attr_accessor initiate_deletion_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class PutSipMediaApplicationLoggingConfigurationRequest
+      attr_accessor sip_media_application_id: ::String
+      attr_accessor sip_media_application_logging_configuration: Types::SipMediaApplicationLoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class PutSipMediaApplicationLoggingConfigurationResponse
+      attr_accessor sip_media_application_logging_configuration: Types::SipMediaApplicationLoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class PutVoiceConnectorEmergencyCallingConfigurationRequest
+      attr_accessor voice_connector_id: ::String
+      attr_accessor emergency_calling_configuration: Types::EmergencyCallingConfiguration
+      SENSITIVE: []
+    end
+
+    class PutVoiceConnectorEmergencyCallingConfigurationResponse
+      attr_accessor emergency_calling_configuration: Types::EmergencyCallingConfiguration
+      SENSITIVE: []
+    end
+
+    class PutVoiceConnectorLoggingConfigurationRequest
+      attr_accessor voice_connector_id: ::String
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class PutVoiceConnectorLoggingConfigurationResponse
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class PutVoiceConnectorOriginationRequest
+      attr_accessor voice_connector_id: ::String
+      attr_accessor origination: Types::Origination
+      SENSITIVE: []
+    end
+
+    class PutVoiceConnectorOriginationResponse
+      attr_accessor origination: Types::Origination
+      SENSITIVE: []
+    end
+
+    class PutVoiceConnectorProxyRequest
+      attr_accessor voice_connector_id: ::String
+      attr_accessor default_session_expiry_minutes: ::Integer
+      attr_accessor phone_number_pool_countries: ::Array[::String]
+      attr_accessor fall_back_phone_number: ::String
+      attr_accessor disabled: bool
+      SENSITIVE: [:fall_back_phone_number]
+    end
+
+    class PutVoiceConnectorProxyResponse
+      attr_accessor proxy: Types::Proxy
+      SENSITIVE: []
+    end
+
+    class PutVoiceConnectorStreamingConfigurationRequest
+      attr_accessor voice_connector_id: ::String
+      attr_accessor streaming_configuration: Types::StreamingConfiguration
+      SENSITIVE: []
+    end
+
+    class PutVoiceConnectorStreamingConfigurationResponse
+      attr_accessor streaming_configuration: Types::StreamingConfiguration
+      SENSITIVE: []
+    end
+
+    class PutVoiceConnectorTerminationCredentialsRequest
+      attr_accessor voice_connector_id: ::String
+      attr_accessor credentials: ::Array[Types::Credential]
+      SENSITIVE: []
+    end
+
+    class PutVoiceConnectorTerminationRequest
+      attr_accessor voice_connector_id: ::String
+      attr_accessor termination: Types::Termination
+      SENSITIVE: []
+    end
+
+    class PutVoiceConnectorTerminationResponse
+      attr_accessor termination: Types::Termination
+      SENSITIVE: []
+    end
+
+    class RedactChannelMessageRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class RedactChannelMessageResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class RedactConversationMessageRequest
+      attr_accessor account_id: ::String
+      attr_accessor conversation_id: ::String
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class RedactConversationMessageResponse < Aws::EmptyStructure
+    end
+
+    class RedactRoomMessageRequest
+      attr_accessor account_id: ::String
+      attr_accessor room_id: ::String
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class RedactRoomMessageResponse < Aws::EmptyStructure
+    end
+
+    class RegenerateSecurityTokenRequest
+      attr_accessor account_id: ::String
+      attr_accessor bot_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegenerateSecurityTokenResponse
+      attr_accessor bot: Types::Bot
+      SENSITIVE: []
+    end
+
+    class ResetPersonalPINRequest
+      attr_accessor account_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResetPersonalPINResponse
+      attr_accessor user: Types::User
+      SENSITIVE: []
+    end
+
+    class ResourceLimitExceededException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RestorePhoneNumberRequest
+      attr_accessor phone_number_id: ::String
+      SENSITIVE: []
+    end
+
+    class RestorePhoneNumberResponse
+      attr_accessor phone_number: Types::PhoneNumber
+      SENSITIVE: []
+    end
+
+    class RetentionSettings
+      attr_accessor room_retention_settings: Types::RoomRetentionSettings
+      attr_accessor conversation_retention_settings: Types::ConversationRetentionSettings
+      SENSITIVE: []
+    end
+
+    class Room
+      attr_accessor room_id: ::String
+      attr_accessor name: ::String
+      attr_accessor account_id: ::String
+      attr_accessor created_by: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      SENSITIVE: [:name]
+    end
+
+    class RoomMembership
+      attr_accessor room_id: ::String
+      attr_accessor member: Types::Member
+      attr_accessor role: ("Administrator" | "Member")
+      attr_accessor invited_by: ::String
+      attr_accessor updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class RoomRetentionSettings
+      attr_accessor retention_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class SearchAvailablePhoneNumbersRequest
+      attr_accessor area_code: ::String
+      attr_accessor city: ::String
+      attr_accessor country: ::String
+      attr_accessor state: ::String
+      attr_accessor toll_free_prefix: ::String
+      attr_accessor phone_number_type: ("Local" | "TollFree")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchAvailablePhoneNumbersResponse
+      attr_accessor e164_phone_numbers: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SelectedVideoStreams
+      attr_accessor attendee_ids: ::Array[::String]
+      attr_accessor external_user_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SendChannelMessageRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor content: ::String
+      attr_accessor type: ("STANDARD" | "CONTROL")
+      attr_accessor persistence: ("PERSISTENT" | "NON_PERSISTENT")
+      attr_accessor metadata: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:content, :metadata, :client_request_token]
+    end
+
+    class SendChannelMessageResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceFailureException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SigninDelegateGroup
+      attr_accessor group_name: ::String
+      SENSITIVE: []
+    end
+
+    class SipMediaApplication
+      attr_accessor sip_media_application_id: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor name: ::String
+      attr_accessor endpoints: ::Array[Types::SipMediaApplicationEndpoint]
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class SipMediaApplicationCall
+      attr_accessor transaction_id: ::String
+      SENSITIVE: []
+    end
+
+    class SipMediaApplicationEndpoint
+      attr_accessor lambda_arn: ::String
+      SENSITIVE: [:lambda_arn]
+    end
+
+    class SipMediaApplicationLoggingConfiguration
+      attr_accessor enable_sip_media_application_message_logs: bool
+      SENSITIVE: []
+    end
+
+    class SipRule
+      attr_accessor sip_rule_id: ::String
+      attr_accessor name: ::String
+      attr_accessor disabled: bool
+      attr_accessor trigger_type: ("ToPhoneNumber" | "RequestUriHostname")
+      attr_accessor trigger_value: ::String
+      attr_accessor target_applications: ::Array[Types::SipRuleTargetApplication]
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class SipRuleTargetApplication
+      attr_accessor sip_media_application_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor aws_region: ::String
+      SENSITIVE: []
+    end
+
+    class SourceConfiguration
+      attr_accessor selected_video_streams: Types::SelectedVideoStreams
+      SENSITIVE: []
+    end
+
+    class StartMeetingTranscriptionRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor transcription_configuration: Types::TranscriptionConfiguration
+      SENSITIVE: []
+    end
+
+    class StartMeetingTranscriptionResponse < Aws::EmptyStructure
+    end
+
+    class StopMeetingTranscriptionRequest
+      attr_accessor meeting_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopMeetingTranscriptionResponse < Aws::EmptyStructure
+    end
+
+    class StreamingConfiguration
+      attr_accessor data_retention_in_hours: ::Integer
+      attr_accessor disabled: bool
+      attr_accessor streaming_notification_targets: ::Array[Types::StreamingNotificationTarget]
+      SENSITIVE: []
+    end
+
+    class StreamingNotificationTarget
+      attr_accessor notification_target: ("EventBridge" | "SNS" | "SQS")
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: [:key, :value]
+    end
+
+    class TagAttendeeRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor attendee_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagMeetingRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:resource_arn]
+    end
+
+    class TelephonySettings
+      attr_accessor inbound_calling: bool
+      attr_accessor outbound_calling: bool
+      attr_accessor sms: bool
+      SENSITIVE: []
+    end
+
+    class Termination
+      attr_accessor cps_limit: ::Integer
+      attr_accessor default_phone_number: ::String
+      attr_accessor calling_regions: ::Array[::String]
+      attr_accessor cidr_allowed_list: ::Array[::String]
+      attr_accessor disabled: bool
+      SENSITIVE: [:default_phone_number]
+    end
+
+    class TerminationHealth
+      attr_accessor timestamp: ::Time
+      attr_accessor source: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottledClientException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TranscriptionConfiguration
+      attr_accessor engine_transcribe_settings: Types::EngineTranscribeSettings
+      attr_accessor engine_transcribe_medical_settings: Types::EngineTranscribeMedicalSettings
+      SENSITIVE: []
+    end
+
+    class UnauthorizedClientException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnprocessableEntityException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagAttendeeRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor attendee_id: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagMeetingRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: [:resource_arn]
+    end
+
+    class UpdateAccountRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      attr_accessor default_license: ("Basic" | "Plus" | "Pro" | "ProTrial")
+      SENSITIVE: []
+    end
+
+    class UpdateAccountResponse
+      attr_accessor account: Types::Account
+      SENSITIVE: []
+    end
+
+    class UpdateAccountSettingsRequest
+      attr_accessor account_id: ::String
+      attr_accessor account_settings: Types::AccountSettings
+      SENSITIVE: []
+    end
+
+    class UpdateAccountSettingsResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAppInstanceRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class UpdateAppInstanceResponse
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAppInstanceUserRequest
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class UpdateAppInstanceUserResponse
+      attr_accessor app_instance_user_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBotRequest
+      attr_accessor account_id: ::String
+      attr_accessor bot_id: ::String
+      attr_accessor disabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateBotResponse
+      attr_accessor bot: Types::Bot
+      SENSITIVE: []
+    end
+
+    class UpdateChannelMessageRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      attr_accessor content: ::String
+      attr_accessor metadata: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:content, :metadata]
+    end
+
+    class UpdateChannelMessageResponse
+      attr_accessor channel_arn: ::String
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChannelReadMarkerRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChannelReadMarkerResponse
+      attr_accessor channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateChannelRequest
+      attr_accessor channel_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor mode: ("UNRESTRICTED" | "RESTRICTED")
+      attr_accessor metadata: ::String
+      attr_accessor chime_bearer: ::String
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class UpdateChannelResponse
+      attr_accessor channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGlobalSettingsRequest
+      attr_accessor business_calling: Types::BusinessCallingSettings
+      attr_accessor voice_connector: Types::VoiceConnectorSettings
+      SENSITIVE: []
+    end
+
+    class UpdatePhoneNumberRequest
+      attr_accessor phone_number_id: ::String
+      attr_accessor product_type: ("BusinessCalling" | "VoiceConnector" | "SipMediaApplicationDialIn")
+      attr_accessor calling_name: ::String
+      SENSITIVE: [:calling_name]
+    end
+
+    class UpdatePhoneNumberRequestItem
+      attr_accessor phone_number_id: ::String
+      attr_accessor product_type: ("BusinessCalling" | "VoiceConnector" | "SipMediaApplicationDialIn")
+      attr_accessor calling_name: ::String
+      SENSITIVE: [:calling_name]
+    end
+
+    class UpdatePhoneNumberResponse
+      attr_accessor phone_number: Types::PhoneNumber
+      SENSITIVE: []
+    end
+
+    class UpdatePhoneNumberSettingsRequest
+      attr_accessor calling_name: ::String
+      SENSITIVE: [:calling_name]
+    end
+
+    class UpdateProxySessionRequest
+      attr_accessor voice_connector_id: ::String
+      attr_accessor proxy_session_id: ::String
+      attr_accessor capabilities: ::Array[("Voice" | "SMS")]
+      attr_accessor expiry_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateProxySessionResponse
+      attr_accessor proxy_session: Types::ProxySession
+      SENSITIVE: []
+    end
+
+    class UpdateRoomMembershipRequest
+      attr_accessor account_id: ::String
+      attr_accessor room_id: ::String
+      attr_accessor member_id: ::String
+      attr_accessor role: ("Administrator" | "Member")
+      SENSITIVE: []
+    end
+
+    class UpdateRoomMembershipResponse
+      attr_accessor room_membership: Types::RoomMembership
+      SENSITIVE: []
+    end
+
+    class UpdateRoomRequest
+      attr_accessor account_id: ::String
+      attr_accessor room_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:name]
+    end
+
+    class UpdateRoomResponse
+      attr_accessor room: Types::Room
+      SENSITIVE: []
+    end
+
+    class UpdateSipMediaApplicationCallRequest
+      attr_accessor sip_media_application_id: ::String
+      attr_accessor transaction_id: ::String
+      attr_accessor arguments: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateSipMediaApplicationCallResponse
+      attr_accessor sip_media_application_call: Types::SipMediaApplicationCall
+      SENSITIVE: []
+    end
+
+    class UpdateSipMediaApplicationRequest
+      attr_accessor sip_media_application_id: ::String
+      attr_accessor name: ::String
+      attr_accessor endpoints: ::Array[Types::SipMediaApplicationEndpoint]
+      SENSITIVE: []
+    end
+
+    class UpdateSipMediaApplicationResponse
+      attr_accessor sip_media_application: Types::SipMediaApplication
+      SENSITIVE: []
+    end
+
+    class UpdateSipRuleRequest
+      attr_accessor sip_rule_id: ::String
+      attr_accessor name: ::String
+      attr_accessor disabled: bool
+      attr_accessor target_applications: ::Array[Types::SipRuleTargetApplication]
+      SENSITIVE: []
+    end
+
+    class UpdateSipRuleResponse
+      attr_accessor sip_rule: Types::SipRule
+      SENSITIVE: []
+    end
+
+    class UpdateUserRequest
+      attr_accessor account_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor license_type: ("Basic" | "Plus" | "Pro" | "ProTrial")
+      attr_accessor user_type: ("PrivateUser" | "SharedDevice")
+      attr_accessor alexa_for_business_metadata: Types::AlexaForBusinessMetadata
+      SENSITIVE: []
+    end
+
+    class UpdateUserRequestItem
+      attr_accessor user_id: ::String
+      attr_accessor license_type: ("Basic" | "Plus" | "Pro" | "ProTrial")
+      attr_accessor user_type: ("PrivateUser" | "SharedDevice")
+      attr_accessor alexa_for_business_metadata: Types::AlexaForBusinessMetadata
+      SENSITIVE: []
+    end
+
+    class UpdateUserResponse
+      attr_accessor user: Types::User
+      SENSITIVE: []
+    end
+
+    class UpdateUserSettingsRequest
+      attr_accessor account_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor user_settings: Types::UserSettings
+      SENSITIVE: []
+    end
+
+    class UpdateVoiceConnectorGroupRequest
+      attr_accessor voice_connector_group_id: ::String
+      attr_accessor name: ::String
+      attr_accessor voice_connector_items: ::Array[Types::VoiceConnectorItem]
+      SENSITIVE: []
+    end
+
+    class UpdateVoiceConnectorGroupResponse
+      attr_accessor voice_connector_group: Types::VoiceConnectorGroup
+      SENSITIVE: []
+    end
+
+    class UpdateVoiceConnectorRequest
+      attr_accessor voice_connector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor require_encryption: bool
+      SENSITIVE: []
+    end
+
+    class UpdateVoiceConnectorResponse
+      attr_accessor voice_connector: Types::VoiceConnector
+      SENSITIVE: []
+    end
+
+    class User
+      attr_accessor user_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor primary_email: ::String
+      attr_accessor primary_provisioned_number: ::String
+      attr_accessor display_name: ::String
+      attr_accessor license_type: ("Basic" | "Plus" | "Pro" | "ProTrial")
+      attr_accessor user_type: ("PrivateUser" | "SharedDevice")
+      attr_accessor user_registration_status: ("Unregistered" | "Registered" | "Suspended")
+      attr_accessor user_invitation_status: ("Pending" | "Accepted" | "Failed")
+      attr_accessor registered_on: ::Time
+      attr_accessor invited_on: ::Time
+      attr_accessor alexa_for_business_metadata: Types::AlexaForBusinessMetadata
+      attr_accessor personal_pin: ::String
+      SENSITIVE: [:primary_email, :primary_provisioned_number, :display_name]
+    end
+
+    class UserError
+      attr_accessor user_id: ::String
+      attr_accessor error_code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class UserSettings
+      attr_accessor telephony: Types::TelephonySettings
+      SENSITIVE: []
+    end
+
+    class ValidateE911AddressRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor street_number: ::String
+      attr_accessor street_info: ::String
+      attr_accessor city: ::String
+      attr_accessor state: ::String
+      attr_accessor country: ::String
+      attr_accessor postal_code: ::String
+      SENSITIVE: [:street_number, :street_info, :city, :state, :country, :postal_code]
+    end
+
+    class ValidateE911AddressResponse
+      attr_accessor validation_result: ::Integer
+      attr_accessor address_external_id: ::String
+      attr_accessor address: Types::Address
+      attr_accessor candidate_address_list: ::Array[Types::CandidateAddress]
+      SENSITIVE: []
+    end
+
+    class VideoArtifactsConfiguration
+      attr_accessor state: ("Enabled" | "Disabled")
+      attr_accessor mux_type: ("VideoOnly")
+      SENSITIVE: []
+    end
+
+    class VoiceConnector
+      attr_accessor voice_connector_id: ::String
+      attr_accessor aws_region: ("us-east-1" | "us-west-2")
+      attr_accessor name: ::String
+      attr_accessor outbound_host_name: ::String
+      attr_accessor require_encryption: bool
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      attr_accessor voice_connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class VoiceConnectorGroup
+      attr_accessor voice_connector_group_id: ::String
+      attr_accessor name: ::String
+      attr_accessor voice_connector_items: ::Array[Types::VoiceConnectorItem]
+      attr_accessor created_timestamp: ::Time
+      attr_accessor updated_timestamp: ::Time
+      attr_accessor voice_connector_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class VoiceConnectorItem
+      attr_accessor voice_connector_id: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class VoiceConnectorSettings
+      attr_accessor cdr_bucket: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2024-02-09)
+------------------
+
+* Feature - This feature allows Batch to support configuration of repository credentials for jobs running on ECS
+
+1.80.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.79.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.78.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.77.0 (2023-09-27)
 ------------------
 

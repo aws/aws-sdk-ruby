@@ -136,6 +136,24 @@
         {"shape":"InternalServerException"}
       ]
     },
+    "CreateBotReplica":{
+      "name":"CreateBotReplica",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/bots/{botId}/replicas/",
+        "responseCode":202
+      },
+      "input":{"shape":"CreateBotReplicaRequest"},
+      "output":{"shape":"CreateBotReplicaResponse"},
+      "errors":[
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ValidationException"},
+        {"shape":"PreconditionFailedException"},
+        {"shape":"ConflictException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
     "CreateBotVersion":{
       "name":"CreateBotVersion",
       "http":{
@@ -343,6 +361,24 @@
       },
       "input":{"shape":"DeleteBotLocaleRequest"},
       "output":{"shape":"DeleteBotLocaleResponse"},
+      "errors":[
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ValidationException"},
+        {"shape":"PreconditionFailedException"},
+        {"shape":"ConflictException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
+    "DeleteBotReplica":{
+      "name":"DeleteBotReplica",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/bots/{botId}/replicas/{replicaRegion}/",
+        "responseCode":202
+      },
+      "input":{"shape":"DeleteBotReplicaRequest"},
+      "output":{"shape":"DeleteBotReplicaResponse"},
       "errors":[
         {"shape":"ThrottlingException"},
         {"shape":"ServiceQuotaExceededException"},
@@ -605,6 +641,39 @@
         {"shape":"InternalServerException"}
       ]
     },
+    "DescribeBotReplica":{
+      "name":"DescribeBotReplica",
+      "http":{
+        "method":"GET",
+        "requestUri":"/bots/{botId}/replicas/{replicaRegion}/",
+        "responseCode":200
+      },
+      "input":{"shape":"DescribeBotReplicaRequest"},
+      "output":{"shape":"DescribeBotReplicaResponse"},
+      "errors":[
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
+    "DescribeBotResourceGeneration":{
+      "name":"DescribeBotResourceGeneration",
+      "http":{
+        "method":"GET",
+        "requestUri":"/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/generations/{generationId}",
+        "responseCode":200
+      },
+      "input":{"shape":"DescribeBotResourceGenerationRequest"},
+      "output":{"shape":"DescribeBotResourceGenerationResponse"},
+      "errors":[
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
     "DescribeBotVersion":{
       "name":"DescribeBotVersion",
       "http":{
@@ -805,6 +874,26 @@
         {"shape":"InternalServerException"}
       ]
     },
+    "GenerateBotElement":{
+      "name":"GenerateBotElement",
+      "http":{
+        "method":"POST",
+        "requestUri":"/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/generate",
+        "responseCode":202
+      },
+      "input":{"shape":"GenerateBotElementRequest"},
+      "output":{"shape":"GenerateBotElementResponse"},
+      "errors":[
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"PreconditionFailedException"},
+        {"shape":"ConflictException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
     "GetTestExecutionArtifactsUrl":{
       "name":"GetTestExecutionArtifactsUrl",
       "http":{
@@ -835,6 +924,22 @@
         {"shape":"ValidationException"},
         {"shape":"PreconditionFailedException"},
         {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
+    "ListBotAliasReplicas":{
+      "name":"ListBotAliasReplicas",
+      "http":{
+        "method":"POST",
+        "requestUri":"/bots/{botId}/replicas/{replicaRegion}/botaliases/",
+        "responseCode":200
+      },
+      "input":{"shape":"ListBotAliasReplicasRequest"},
+      "output":{"shape":"ListBotAliasReplicasResponse"},
+      "errors":[
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ValidationException"},
         {"shape":"InternalServerException"}
       ]
     },
@@ -884,6 +989,54 @@
         {"shape":"ValidationException"},
         {"shape":"InternalServerException"},
         {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "ListBotReplicas":{
+      "name":"ListBotReplicas",
+      "http":{
+        "method":"POST",
+        "requestUri":"/bots/{botId}/replicas/",
+        "responseCode":200
+      },
+      "input":{"shape":"ListBotReplicasRequest"},
+      "output":{"shape":"ListBotReplicasResponse"},
+      "errors":[
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
+    "ListBotResourceGenerations":{
+      "name":"ListBotResourceGenerations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/generations",
+        "responseCode":200
+      },
+      "input":{"shape":"ListBotResourceGenerationsRequest"},
+      "output":{"shape":"ListBotResourceGenerationsResponse"},
+      "errors":[
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "ListBotVersionReplicas":{
+      "name":"ListBotVersionReplicas",
+      "http":{
+        "method":"POST",
+        "requestUri":"/bots/{botId}/replicas/{replicaRegion}/botversions/",
+        "responseCode":200
+      },
+      "input":{"shape":"ListBotVersionReplicasRequest"},
+      "output":{"shape":"ListBotVersionReplicasResponse"},
+      "errors":[
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"}
       ]
     },
     "ListBotVersions":{
@@ -1299,6 +1452,25 @@
         {"shape":"ConflictException"},
         {"shape":"InternalServerException"}
       ]
+    },
+    "StartBotResourceGeneration":{
+      "name":"StartBotResourceGeneration",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/startgeneration",
+        "responseCode":202
+      },
+      "input":{"shape":"StartBotResourceGenerationRequest"},
+      "output":{"shape":"StartBotResourceGenerationResponse"},
+      "errors":[
+        {"shape":"ThrottlingException"},
+        {"shape":"ServiceQuotaExceededException"},
+        {"shape":"ValidationException"},
+        {"shape":"PreconditionFailedException"},
+        {"shape":"ConflictException"},
+        {"shape":"InternalServerException"}
+      ],
+      "idempotent":true
     },
     "StartImport":{
       "name":"StartImport",
@@ -2456,7 +2628,8 @@
       ],
       "members":{
         "enabled":{"shape":"Boolean"},
-        "destination":{"shape":"AudioLogDestination"}
+        "destination":{"shape":"AudioLogDestination"},
+        "selectiveLoggingEnabled":{"shape":"BoxedBoolean"}
       }
     },
     "AudioLogSettingsList":{
@@ -2591,6 +2764,17 @@
         "resources":{"shape":"CustomVocabularyItems"}
       }
     },
+    "BedrockModelArn":{
+      "type":"string",
+      "pattern":"^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model\\/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}$"
+    },
+    "BedrockModelSpecification":{
+      "type":"structure",
+      "required":["modelArn"],
+      "members":{
+        "modelArn":{"shape":"BedrockModelArn"}
+      }
+    },
     "Boolean":{"type":"boolean"},
     "BotAliasHistoryEvent":{
       "type":"structure",
@@ -2629,6 +2813,31 @@
       "max":100,
       "min":1,
       "pattern":"^(\\bAmazonLexTestAlias\\b|[0-9a-zA-Z][_-]?)+$"
+    },
+    "BotAliasReplicaSummary":{
+      "type":"structure",
+      "members":{
+        "botAliasId":{"shape":"BotAliasId"},
+        "botAliasReplicationStatus":{"shape":"BotAliasReplicationStatus"},
+        "botVersion":{"shape":"BotVersion"},
+        "creationDateTime":{"shape":"Timestamp"},
+        "lastUpdatedDateTime":{"shape":"Timestamp"},
+        "failureReasons":{"shape":"FailureReasons"}
+      }
+    },
+    "BotAliasReplicaSummaryList":{
+      "type":"list",
+      "member":{"shape":"BotAliasReplicaSummary"}
+    },
+    "BotAliasReplicationStatus":{
+      "type":"string",
+      "enum":[
+        "Creating",
+        "Updating",
+        "Available",
+        "Deleting",
+        "Failed"
+      ]
     },
     "BotAliasStatus":{
       "type":"string",
@@ -2916,6 +3125,28 @@
       "type":"list",
       "member":{"shape":"BotRecommendationSummary"}
     },
+    "BotReplicaStatus":{
+      "type":"string",
+      "enum":[
+        "Enabling",
+        "Enabled",
+        "Deleting",
+        "Failed"
+      ]
+    },
+    "BotReplicaSummary":{
+      "type":"structure",
+      "members":{
+        "replicaRegion":{"shape":"ReplicaRegion"},
+        "creationDateTime":{"shape":"Timestamp"},
+        "botReplicaStatus":{"shape":"BotReplicaStatus"},
+        "failureReasons":{"shape":"FailureReasons"}
+      }
+    },
+    "BotReplicaSummaryList":{
+      "type":"list",
+      "member":{"shape":"BotReplicaSummary"}
+    },
     "BotSortAttribute":{
       "type":"string",
       "enum":["BotName"]
@@ -2986,6 +3217,43 @@
       "value":{"shape":"BotVersionLocaleDetails"},
       "min":1
     },
+    "BotVersionReplicaSortAttribute":{
+      "type":"string",
+      "enum":["BotVersion"]
+    },
+    "BotVersionReplicaSortBy":{
+      "type":"structure",
+      "required":[
+        "attribute",
+        "order"
+      ],
+      "members":{
+        "attribute":{"shape":"BotVersionReplicaSortAttribute"},
+        "order":{"shape":"SortOrder"}
+      }
+    },
+    "BotVersionReplicaSummary":{
+      "type":"structure",
+      "members":{
+        "botVersion":{"shape":"BotVersion"},
+        "botVersionReplicationStatus":{"shape":"BotVersionReplicationStatus"},
+        "creationDateTime":{"shape":"Timestamp"},
+        "failureReasons":{"shape":"FailureReasons"}
+      }
+    },
+    "BotVersionReplicaSummaryList":{
+      "type":"list",
+      "member":{"shape":"BotVersionReplicaSummary"}
+    },
+    "BotVersionReplicationStatus":{
+      "type":"string",
+      "enum":[
+        "Creating",
+        "Available",
+        "Deleting",
+        "Failed"
+      ]
+    },
     "BotVersionSortAttribute":{
       "type":"string",
       "enum":["BotVersion"]
@@ -3052,6 +3320,13 @@
         "localeId":{"shape":"LocaleId"},
         "botLocaleStatus":{"shape":"BotLocaleStatus"},
         "lastBuildSubmittedDateTime":{"shape":"Timestamp"}
+      }
+    },
+    "BuildtimeSettings":{
+      "type":"structure",
+      "members":{
+        "descriptiveBotBuilder":{"shape":"DescriptiveBotBuilderSpecification"},
+        "sampleUtteranceGeneration":{"shape":"SampleUtteranceGenerationSpecification"}
       }
     },
     "BuiltInIntentSortAttribute":{
@@ -3460,7 +3735,8 @@
         "localeId":{"shape":"LocaleId"},
         "description":{"shape":"Description"},
         "nluIntentConfidenceThreshold":{"shape":"ConfidenceThreshold"},
-        "voiceSettings":{"shape":"VoiceSettings"}
+        "voiceSettings":{"shape":"VoiceSettings"},
+        "generativeAISettings":{"shape":"GenerativeAISettings"}
       }
     },
     "CreateBotLocaleResponse":{
@@ -3474,7 +3750,33 @@
         "nluIntentConfidenceThreshold":{"shape":"ConfidenceThreshold"},
         "voiceSettings":{"shape":"VoiceSettings"},
         "botLocaleStatus":{"shape":"BotLocaleStatus"},
-        "creationDateTime":{"shape":"Timestamp"}
+        "creationDateTime":{"shape":"Timestamp"},
+        "generativeAISettings":{"shape":"GenerativeAISettings"}
+      }
+    },
+    "CreateBotReplicaRequest":{
+      "type":"structure",
+      "required":[
+        "botId",
+        "replicaRegion"
+      ],
+      "members":{
+        "botId":{
+          "shape":"Id",
+          "location":"uri",
+          "locationName":"botId"
+        },
+        "replicaRegion":{"shape":"ReplicaRegion"}
+      }
+    },
+    "CreateBotReplicaResponse":{
+      "type":"structure",
+      "members":{
+        "botId":{"shape":"Id"},
+        "replicaRegion":{"shape":"ReplicaRegion"},
+        "sourceRegion":{"shape":"ReplicaRegion"},
+        "creationDateTime":{"shape":"Timestamp"},
+        "botReplicaStatus":{"shape":"BotReplicaStatus"}
       }
     },
     "CreateBotRequest":{
@@ -4011,6 +4313,33 @@
         "botLocaleStatus":{"shape":"BotLocaleStatus"}
       }
     },
+    "DeleteBotReplicaRequest":{
+      "type":"structure",
+      "required":[
+        "botId",
+        "replicaRegion"
+      ],
+      "members":{
+        "botId":{
+          "shape":"Id",
+          "location":"uri",
+          "locationName":"botId"
+        },
+        "replicaRegion":{
+          "shape":"ReplicaRegion",
+          "location":"uri",
+          "locationName":"replicaRegion"
+        }
+      }
+    },
+    "DeleteBotReplicaResponse":{
+      "type":"structure",
+      "members":{
+        "botId":{"shape":"Id"},
+        "replicaRegion":{"shape":"ReplicaRegion"},
+        "botReplicaStatus":{"shape":"BotReplicaStatus"}
+      }
+    },
     "DeleteBotRequest":{
       "type":"structure",
       "required":["botId"],
@@ -4417,7 +4746,8 @@
         "lastUpdatedDateTime":{"shape":"Timestamp"},
         "lastBuildSubmittedDateTime":{"shape":"Timestamp"},
         "botLocaleHistoryEvents":{"shape":"BotLocaleHistoryEventsList"},
-        "recommendedActions":{"shape":"RecommendedActions"}
+        "recommendedActions":{"shape":"RecommendedActions"},
+        "generativeAISettings":{"shape":"GenerativeAISettings"}
       }
     },
     "DescribeBotRecommendationRequest":{
@@ -4467,6 +4797,36 @@
         "botRecommendationResults":{"shape":"BotRecommendationResults"}
       }
     },
+    "DescribeBotReplicaRequest":{
+      "type":"structure",
+      "required":[
+        "botId",
+        "replicaRegion"
+      ],
+      "members":{
+        "botId":{
+          "shape":"Id",
+          "location":"uri",
+          "locationName":"botId"
+        },
+        "replicaRegion":{
+          "shape":"ReplicaRegion",
+          "location":"uri",
+          "locationName":"replicaRegion"
+        }
+      }
+    },
+    "DescribeBotReplicaResponse":{
+      "type":"structure",
+      "members":{
+        "botId":{"shape":"Id"},
+        "replicaRegion":{"shape":"ReplicaRegion"},
+        "sourceRegion":{"shape":"ReplicaRegion"},
+        "creationDateTime":{"shape":"Timestamp"},
+        "botReplicaStatus":{"shape":"BotReplicaStatus"},
+        "failureReasons":{"shape":"FailureReasons"}
+      }
+    },
     "DescribeBotRequest":{
       "type":"structure",
       "required":["botId"],
@@ -4476,6 +4836,53 @@
           "location":"uri",
           "locationName":"botId"
         }
+      }
+    },
+    "DescribeBotResourceGenerationRequest":{
+      "type":"structure",
+      "required":[
+        "botId",
+        "botVersion",
+        "localeId",
+        "generationId"
+      ],
+      "members":{
+        "botId":{
+          "shape":"Id",
+          "location":"uri",
+          "locationName":"botId"
+        },
+        "botVersion":{
+          "shape":"BotVersion",
+          "location":"uri",
+          "locationName":"botVersion"
+        },
+        "localeId":{
+          "shape":"LocaleId",
+          "location":"uri",
+          "locationName":"localeId"
+        },
+        "generationId":{
+          "shape":"Id",
+          "location":"uri",
+          "locationName":"generationId"
+        }
+      }
+    },
+    "DescribeBotResourceGenerationResponse":{
+      "type":"structure",
+      "members":{
+        "botId":{"shape":"Id"},
+        "botVersion":{"shape":"BotVersion"},
+        "localeId":{"shape":"LocaleId"},
+        "generationId":{"shape":"Id"},
+        "failureReasons":{"shape":"FailureReasons"},
+        "generationStatus":{"shape":"GenerationStatus"},
+        "generationInputPrompt":{"shape":"GenerationInput"},
+        "generatedBotLocaleUrl":{"shape":"PresignedS3Url"},
+        "creationDateTime":{"shape":"Timestamp"},
+        "modelArn":{"shape":"BedrockModelArn"},
+        "lastUpdatedDateTime":{"shape":"Timestamp"}
       }
     },
     "DescribeBotResponse":{
@@ -4905,6 +5312,14 @@
       "max":200,
       "min":0
     },
+    "DescriptiveBotBuilderSpecification":{
+      "type":"structure",
+      "required":["enabled"],
+      "members":{
+        "enabled":{"shape":"Boolean"},
+        "bedrockModelSpecification":{"shape":"BedrockModelSpecification"}
+      }
+    },
     "DialogAction":{
       "type":"structure",
       "required":["type"],
@@ -4978,6 +5393,7 @@
         "invocationLabel":{"shape":"Name"}
       }
     },
+    "Enabled":{"type":"boolean"},
     "EncryptionSetting":{
       "type":"structure",
       "members":{
@@ -5184,6 +5600,94 @@
         "startResponse":{"shape":"FulfillmentStartResponseSpecification"},
         "updateResponse":{"shape":"FulfillmentUpdateResponseSpecification"},
         "timeoutInSeconds":{"shape":"FulfillmentTimeout"}
+      }
+    },
+    "GenerateBotElementRequest":{
+      "type":"structure",
+      "required":[
+        "intentId",
+        "botId",
+        "botVersion",
+        "localeId"
+      ],
+      "members":{
+        "intentId":{"shape":"Id"},
+        "botId":{
+          "shape":"Id",
+          "location":"uri",
+          "locationName":"botId"
+        },
+        "botVersion":{
+          "shape":"BotVersion",
+          "location":"uri",
+          "locationName":"botVersion"
+        },
+        "localeId":{
+          "shape":"LocaleId",
+          "location":"uri",
+          "locationName":"localeId"
+        }
+      }
+    },
+    "GenerateBotElementResponse":{
+      "type":"structure",
+      "members":{
+        "botId":{"shape":"Id"},
+        "botVersion":{"shape":"DraftBotVersion"},
+        "localeId":{"shape":"LocaleId"},
+        "intentId":{"shape":"Id"},
+        "sampleUtterances":{"shape":"SampleUtterancesList"}
+      }
+    },
+    "GenerationInput":{
+      "type":"string",
+      "max":2000,
+      "min":100
+    },
+    "GenerationSortBy":{
+      "type":"structure",
+      "required":[
+        "attribute",
+        "order"
+      ],
+      "members":{
+        "attribute":{"shape":"GenerationSortByAttribute"},
+        "order":{"shape":"SortOrder"}
+      }
+    },
+    "GenerationSortByAttribute":{
+      "type":"string",
+      "enum":[
+        "creationStartTime",
+        "lastUpdatedTime"
+      ]
+    },
+    "GenerationStatus":{
+      "type":"string",
+      "enum":[
+        "Failed",
+        "Complete",
+        "InProgress"
+      ]
+    },
+    "GenerationSummary":{
+      "type":"structure",
+      "members":{
+        "generationId":{"shape":"Id"},
+        "generationStatus":{"shape":"GenerationStatus"},
+        "creationDateTime":{"shape":"Timestamp"},
+        "lastUpdatedDateTime":{"shape":"Timestamp"}
+      }
+    },
+    "GenerationSummaryList":{
+      "type":"list",
+      "member":{"shape":"GenerationSummary"}
+    },
+    "GenerativeAISettings":{
+      "type":"structure",
+      "members":{
+        "runtimeSettings":{"shape":"RuntimeSettings"},
+        "buildtimeSettings":{"shape":"BuildtimeSettings"}
       }
     },
     "GetTestExecutionArtifactsUrlRequest":{
@@ -5661,6 +6165,37 @@
         "nextToken":{"shape":"NextToken"}
       }
     },
+    "ListBotAliasReplicasRequest":{
+      "type":"structure",
+      "required":[
+        "botId",
+        "replicaRegion"
+      ],
+      "members":{
+        "botId":{
+          "shape":"Id",
+          "location":"uri",
+          "locationName":"botId"
+        },
+        "replicaRegion":{
+          "shape":"ReplicaRegion",
+          "location":"uri",
+          "locationName":"replicaRegion"
+        },
+        "maxResults":{"shape":"MaxResults"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListBotAliasReplicasResponse":{
+      "type":"structure",
+      "members":{
+        "botId":{"shape":"Id"},
+        "sourceRegion":{"shape":"ReplicaRegion"},
+        "replicaRegion":{"shape":"ReplicaRegion"},
+        "botAliasReplicaSummaries":{"shape":"BotAliasReplicaSummaryList"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
     "ListBotAliasesRequest":{
       "type":"structure",
       "required":["botId"],
@@ -5748,6 +6283,95 @@
         "botVersion":{"shape":"DraftBotVersion"},
         "localeId":{"shape":"LocaleId"},
         "botRecommendationSummaries":{"shape":"BotRecommendationSummaryList"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListBotReplicasRequest":{
+      "type":"structure",
+      "required":["botId"],
+      "members":{
+        "botId":{
+          "shape":"Id",
+          "location":"uri",
+          "locationName":"botId"
+        }
+      }
+    },
+    "ListBotReplicasResponse":{
+      "type":"structure",
+      "members":{
+        "botId":{"shape":"Id"},
+        "sourceRegion":{"shape":"ReplicaRegion"},
+        "botReplicaSummaries":{"shape":"BotReplicaSummaryList"}
+      }
+    },
+    "ListBotResourceGenerationsRequest":{
+      "type":"structure",
+      "required":[
+        "botId",
+        "botVersion",
+        "localeId"
+      ],
+      "members":{
+        "botId":{
+          "shape":"Id",
+          "location":"uri",
+          "locationName":"botId"
+        },
+        "botVersion":{
+          "shape":"BotVersion",
+          "location":"uri",
+          "locationName":"botVersion"
+        },
+        "localeId":{
+          "shape":"LocaleId",
+          "location":"uri",
+          "locationName":"localeId"
+        },
+        "sortBy":{"shape":"GenerationSortBy"},
+        "maxResults":{"shape":"MaxResults"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListBotResourceGenerationsResponse":{
+      "type":"structure",
+      "members":{
+        "botId":{"shape":"Id"},
+        "botVersion":{"shape":"BotVersion"},
+        "localeId":{"shape":"LocaleId"},
+        "generationSummaries":{"shape":"GenerationSummaryList"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListBotVersionReplicasRequest":{
+      "type":"structure",
+      "required":[
+        "botId",
+        "replicaRegion"
+      ],
+      "members":{
+        "botId":{
+          "shape":"Id",
+          "location":"uri",
+          "locationName":"botId"
+        },
+        "replicaRegion":{
+          "shape":"ReplicaRegion",
+          "location":"uri",
+          "locationName":"replicaRegion"
+        },
+        "maxResults":{"shape":"MaxResults"},
+        "nextToken":{"shape":"NextToken"},
+        "sortBy":{"shape":"BotVersionReplicaSortBy"}
+      }
+    },
+    "ListBotVersionReplicasResponse":{
+      "type":"structure",
+      "members":{
+        "botId":{"shape":"Id"},
+        "sourceRegion":{"shape":"ReplicaRegion"},
+        "replicaRegion":{"shape":"ReplicaRegion"},
+        "botVersionReplicaSummaries":{"shape":"BotVersionReplicaSummaryList"},
         "nextToken":{"shape":"NextToken"}
       }
     },
@@ -6760,6 +7384,11 @@
         "timeValue":{"shape":"TimeValue"}
       }
     },
+    "ReplicaRegion":{
+      "type":"string",
+      "max":25,
+      "min":2
+    },
     "ResourceCount":{"type":"integer"},
     "ResourceNotFoundException":{
       "type":"structure",
@@ -6819,6 +7448,12 @@
       "type":"structure",
       "members":{
         "slotHints":{"shape":"SlotHintsIntentMap"}
+      }
+    },
+    "RuntimeSettings":{
+      "type":"structure",
+      "members":{
+        "slotResolutionImprovement":{"shape":"SlotResolutionImprovementSpecification"}
       }
     },
     "S3BucketArn":{
@@ -6882,6 +7517,14 @@
       "required":["utterance"],
       "members":{
         "utterance":{"shape":"Utterance"}
+      }
+    },
+    "SampleUtteranceGenerationSpecification":{
+      "type":"structure",
+      "required":["enabled"],
+      "members":{
+        "enabled":{"shape":"Boolean"},
+        "bedrockModelSpecification":{"shape":"BedrockModelSpecification"}
       }
     },
     "SampleUtterancesCount":{"type":"integer"},
@@ -7117,6 +7760,28 @@
         "slotId":{"shape":"Id"}
       }
     },
+    "SlotResolutionImprovementSpecification":{
+      "type":"structure",
+      "required":["enabled"],
+      "members":{
+        "enabled":{"shape":"Enabled"},
+        "bedrockModelSpecification":{"shape":"BedrockModelSpecification"}
+      }
+    },
+    "SlotResolutionSetting":{
+      "type":"structure",
+      "required":["slotResolutionStrategy"],
+      "members":{
+        "slotResolutionStrategy":{"shape":"SlotResolutionStrategy"}
+      }
+    },
+    "SlotResolutionStrategy":{
+      "type":"string",
+      "enum":[
+        "EnhancedFallback",
+        "Default"
+      ]
+    },
     "SlotResolutionTestResultItem":{
       "type":"structure",
       "required":[
@@ -7295,7 +7960,8 @@
         "promptSpecification":{"shape":"PromptSpecification"},
         "sampleUtterances":{"shape":"SampleUtterancesList"},
         "waitAndContinueSpecification":{"shape":"WaitAndContinueSpecification"},
-        "slotCaptureSetting":{"shape":"SlotCaptureSetting"}
+        "slotCaptureSetting":{"shape":"SlotCaptureSetting"},
+        "slotResolutionSetting":{"shape":"SlotResolutionSetting"}
       }
     },
     "SlotValueOverride":{
@@ -7396,6 +8062,45 @@
         "creationDateTime":{"shape":"Timestamp"},
         "transcriptSourceSetting":{"shape":"TranscriptSourceSetting"},
         "encryptionSetting":{"shape":"EncryptionSetting"}
+      }
+    },
+    "StartBotResourceGenerationRequest":{
+      "type":"structure",
+      "required":[
+        "generationInputPrompt",
+        "botId",
+        "botVersion",
+        "localeId"
+      ],
+      "members":{
+        "generationInputPrompt":{"shape":"GenerationInput"},
+        "botId":{
+          "shape":"Id",
+          "location":"uri",
+          "locationName":"botId"
+        },
+        "botVersion":{
+          "shape":"BotVersion",
+          "location":"uri",
+          "locationName":"botVersion"
+        },
+        "localeId":{
+          "shape":"LocaleId",
+          "location":"uri",
+          "locationName":"localeId"
+        }
+      }
+    },
+    "StartBotResourceGenerationResponse":{
+      "type":"structure",
+      "members":{
+        "generationInputPrompt":{"shape":"GenerationInput"},
+        "generationId":{"shape":"Id"},
+        "botId":{"shape":"Id"},
+        "botVersion":{"shape":"BotVersion"},
+        "localeId":{"shape":"LocaleId"},
+        "generationStatus":{"shape":"GenerationStatus"},
+        "creationDateTime":{"shape":"Timestamp"}
       }
     },
     "StartImportRequest":{
@@ -8014,7 +8719,8 @@
       ],
       "members":{
         "enabled":{"shape":"Boolean"},
-        "destination":{"shape":"TextLogDestination"}
+        "destination":{"shape":"TextLogDestination"},
+        "selectiveLoggingEnabled":{"shape":"BoxedBoolean"}
       }
     },
     "TextLogSettingsList":{
@@ -8180,7 +8886,8 @@
         },
         "description":{"shape":"Description"},
         "nluIntentConfidenceThreshold":{"shape":"ConfidenceThreshold"},
-        "voiceSettings":{"shape":"VoiceSettings"}
+        "voiceSettings":{"shape":"VoiceSettings"},
+        "generativeAISettings":{"shape":"GenerativeAISettings"}
       }
     },
     "UpdateBotLocaleResponse":{
@@ -8197,7 +8904,8 @@
         "failureReasons":{"shape":"FailureReasons"},
         "creationDateTime":{"shape":"Timestamp"},
         "lastUpdatedDateTime":{"shape":"Timestamp"},
-        "recommendedActions":{"shape":"RecommendedActions"}
+        "recommendedActions":{"shape":"RecommendedActions"},
+        "generativeAISettings":{"shape":"GenerativeAISettings"}
       }
     },
     "UpdateBotRecommendationRequest":{

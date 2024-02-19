@@ -1467,7 +1467,7 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Details about the Amazon EC2 instances that Amazon Web Services
+    # Details about the Amazon EC2 reservations that Amazon Web Services
     # recommends that you purchase.
     #
     # @!attribute [rw] family
@@ -1638,8 +1638,8 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Details about the Amazon OpenSearch Service instances that Amazon Web
-    # Services recommends that you purchase.
+    # Details about the Amazon OpenSearch Service reservations that Amazon
+    # Web Services recommends that you purchase.
     #
     # @!attribute [rw] instance_class
     #   The class of instance that Amazon Web Services recommends.
@@ -1674,7 +1674,7 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Details about the Amazon ElastiCache instances that Amazon Web
+    # Details about the Amazon ElastiCache reservations that Amazon Web
     # Services recommends that you purchase.
     #
     # @!attribute [rw] family
@@ -4653,33 +4653,38 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Details about the instances that Amazon Web Services recommends that
-    # you purchase.
+    # Details about the reservations that Amazon Web Services recommends
+    # that you purchase.
     #
     # @!attribute [rw] ec2_instance_details
-    #   The Amazon EC2 instances that Amazon Web Services recommends that
+    #   The Amazon EC2 reservations that Amazon Web Services recommends that
     #   you purchase.
     #   @return [Types::EC2InstanceDetails]
     #
     # @!attribute [rw] rds_instance_details
-    #   The Amazon RDS instances that Amazon Web Services recommends that
+    #   The Amazon RDS reservations that Amazon Web Services recommends that
     #   you purchase.
     #   @return [Types::RDSInstanceDetails]
     #
     # @!attribute [rw] redshift_instance_details
-    #   The Amazon Redshift instances that Amazon Web Services recommends
+    #   The Amazon Redshift reservations that Amazon Web Services recommends
     #   that you purchase.
     #   @return [Types::RedshiftInstanceDetails]
     #
     # @!attribute [rw] elasticache_instance_details
-    #   The ElastiCache instances that Amazon Web Services recommends that
-    #   you purchase.
+    #   The ElastiCache reservations that Amazon Web Services recommends
+    #   that you purchase.
     #   @return [Types::ElastiCacheInstanceDetails]
     #
     # @!attribute [rw] es_instance_details
-    #   The Amazon OpenSearch Service instances that Amazon Web Services
+    #   The Amazon OpenSearch Service reservations that Amazon Web Services
     #   recommends that you purchase.
     #   @return [Types::ESInstanceDetails]
+    #
+    # @!attribute [rw] memory_db_instance_details
+    #   The MemoryDB reservations that Amazon Web Services recommends that
+    #   you purchase.
+    #   @return [Types::MemoryDBInstanceDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/InstanceDetails AWS API Documentation
     #
@@ -4688,7 +4693,8 @@ module Aws::CostExplorer
       :rds_instance_details,
       :redshift_instance_details,
       :elasticache_instance_details,
-      :es_instance_details)
+      :es_instance_details,
+      :memory_db_instance_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4898,6 +4904,42 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # Details about the MemoryDB reservations that Amazon Web Services
+    # recommends that you purchase.
+    #
+    # @!attribute [rw] family
+    #   The instance family of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_type
+    #   The node type of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_generation
+    #   Determines whether the recommendation is for a current generation
+    #   instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] size_flex_eligible
+    #   Determines whether the recommended reservation is size flexible.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/MemoryDBInstanceDetails AWS API Documentation
+    #
+    class MemoryDBInstanceDetails < Struct.new(
+      :family,
+      :node_type,
+      :region,
+      :current_generation,
+      :size_flex_eligible)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The aggregated value for a metric.
     #
     # @!attribute [rw] amount
@@ -4995,7 +5037,7 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Details about the Amazon RDS instances that Amazon Web Services
+    # Details about the Amazon RDS reservations that Amazon Web Services
     # recommends that you purchase.
     #
     # @!attribute [rw] family
@@ -5268,8 +5310,8 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Details about the Amazon Redshift instances that Amazon Web Services
-    # recommends that you purchase.
+    # Details about the Amazon Redshift reservations that Amazon Web
+    # Services recommends that you purchase.
     #
     # @!attribute [rw] family
     #   The instance family of the recommended reservation.
@@ -5504,8 +5546,8 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] instance_details
-    #   Details about the instances that Amazon Web Services recommends that
-    #   you purchase.
+    #   Details about the reservations that Amazon Web Services recommends
+    #   that you purchase.
     #   @return [Types::InstanceDetails]
     #
     # @!attribute [rw] recommended_number_of_instances_to_purchase

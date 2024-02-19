@@ -1,0 +1,423 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Honeycode
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AutomationExecutionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AutomationExecutionTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateTableRowsRequest
+      attr_accessor workbook_id: ::String
+      attr_accessor table_id: ::String
+      attr_accessor rows_to_create: ::Array[Types::CreateRowData]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateTableRowsResult
+      attr_accessor workbook_cursor: ::Integer
+      attr_accessor created_rows: ::Hash[::String, ::String]
+      attr_accessor failed_batch_items: ::Array[Types::FailedBatchItem]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteTableRowsRequest
+      attr_accessor workbook_id: ::String
+      attr_accessor table_id: ::String
+      attr_accessor row_ids: ::Array[::String]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteTableRowsResult
+      attr_accessor workbook_cursor: ::Integer
+      attr_accessor failed_batch_items: ::Array[Types::FailedBatchItem]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateTableRowsRequest
+      attr_accessor workbook_id: ::String
+      attr_accessor table_id: ::String
+      attr_accessor rows_to_update: ::Array[Types::UpdateRowData]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUpdateTableRowsResult
+      attr_accessor workbook_cursor: ::Integer
+      attr_accessor failed_batch_items: ::Array[Types::FailedBatchItem]
+      SENSITIVE: []
+    end
+
+    class BatchUpsertTableRowsRequest
+      attr_accessor workbook_id: ::String
+      attr_accessor table_id: ::String
+      attr_accessor rows_to_upsert: ::Array[Types::UpsertRowData]
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUpsertTableRowsResult
+      attr_accessor rows: ::Hash[::String, Types::UpsertRowsResult]
+      attr_accessor workbook_cursor: ::Integer
+      attr_accessor failed_batch_items: ::Array[Types::FailedBatchItem]
+      SENSITIVE: []
+    end
+
+    class Cell
+      attr_accessor formula: ::String
+      attr_accessor format: ("AUTO" | "NUMBER" | "CURRENCY" | "DATE" | "TIME" | "DATE_TIME" | "PERCENTAGE" | "TEXT" | "ACCOUNTING" | "CONTACT" | "ROWLINK" | "ROWSET")
+      attr_accessor raw_value: ::String
+      attr_accessor formatted_value: ::String
+      attr_accessor formatted_values: ::Array[::String]
+      SENSITIVE: [:formula]
+    end
+
+    class CellInput
+      attr_accessor fact: ::String
+      attr_accessor facts: ::Array[::String]
+      SENSITIVE: [:fact]
+    end
+
+    class ColumnMetadata
+      attr_accessor name: ::String
+      attr_accessor format: ("AUTO" | "NUMBER" | "CURRENCY" | "DATE" | "TIME" | "DATE_TIME" | "PERCENTAGE" | "TEXT" | "ACCOUNTING" | "CONTACT" | "ROWLINK" | "ROWSET")
+      SENSITIVE: [:name]
+    end
+
+    class CreateRowData
+      attr_accessor batch_item_id: ::String
+      attr_accessor cells_to_create: ::Hash[::String, Types::CellInput]
+      SENSITIVE: []
+    end
+
+    class DataItem
+      attr_accessor override_format: ("AUTO" | "NUMBER" | "CURRENCY" | "DATE" | "TIME" | "DATE_TIME" | "PERCENTAGE" | "TEXT" | "ACCOUNTING" | "CONTACT" | "ROWLINK" | "ROWSET")
+      attr_accessor raw_value: ::String
+      attr_accessor formatted_value: ::String
+      SENSITIVE: []
+    end
+
+    class DelimitedTextImportOptions
+      attr_accessor delimiter: ::String
+      attr_accessor has_header_row: bool
+      attr_accessor ignore_empty_rows: bool
+      attr_accessor data_character_encoding: ("UTF-8" | "US-ASCII" | "ISO-8859-1" | "UTF-16BE" | "UTF-16LE" | "UTF-16")
+      SENSITIVE: []
+    end
+
+    class DescribeTableDataImportJobRequest
+      attr_accessor workbook_id: ::String
+      attr_accessor table_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTableDataImportJobResult
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor message: ::String
+      attr_accessor job_metadata: Types::TableDataImportJobMetadata
+      attr_accessor error_code: ("ACCESS_DENIED" | "INVALID_URL_ERROR" | "INVALID_IMPORT_OPTIONS_ERROR" | "INVALID_TABLE_ID_ERROR" | "INVALID_TABLE_COLUMN_ID_ERROR" | "TABLE_NOT_FOUND_ERROR" | "FILE_EMPTY_ERROR" | "INVALID_FILE_TYPE_ERROR" | "FILE_PARSING_ERROR" | "FILE_SIZE_LIMIT_ERROR" | "FILE_NOT_FOUND_ERROR" | "UNKNOWN_ERROR" | "RESOURCE_NOT_FOUND_ERROR" | "SYSTEM_LIMIT_ERROR")
+      SENSITIVE: []
+    end
+
+    class DestinationOptions
+      attr_accessor column_map: ::Hash[::String, Types::SourceDataColumnProperties]
+      SENSITIVE: []
+    end
+
+    class FailedBatchItem
+      attr_accessor id: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor formula: ::String
+      attr_accessor context_row_id: ::String
+      SENSITIVE: [:formula]
+    end
+
+    class GetScreenDataRequest
+      attr_accessor workbook_id: ::String
+      attr_accessor app_id: ::String
+      attr_accessor screen_id: ::String
+      attr_accessor variables: ::Hash[::String, Types::VariableValue]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:variables]
+    end
+
+    class GetScreenDataResult
+      attr_accessor results: ::Hash[::String, Types::ResultSet]
+      attr_accessor workbook_cursor: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ImportDataSource
+      attr_accessor data_source_config: Types::ImportDataSourceConfig
+      SENSITIVE: []
+    end
+
+    class ImportDataSourceConfig
+      attr_accessor data_source_url: ::String
+      SENSITIVE: [:data_source_url]
+    end
+
+    class ImportJobSubmitter
+      attr_accessor email: ::String
+      attr_accessor user_arn: ::String
+      SENSITIVE: [:email]
+    end
+
+    class ImportOptions
+      attr_accessor destination_options: Types::DestinationOptions
+      attr_accessor delimited_text_options: Types::DelimitedTextImportOptions
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvokeScreenAutomationRequest
+      attr_accessor workbook_id: ::String
+      attr_accessor app_id: ::String
+      attr_accessor screen_id: ::String
+      attr_accessor screen_automation_id: ::String
+      attr_accessor variables: ::Hash[::String, Types::VariableValue]
+      attr_accessor row_id: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: [:variables]
+    end
+
+    class InvokeScreenAutomationResult
+      attr_accessor workbook_cursor: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTableColumnsRequest
+      attr_accessor workbook_id: ::String
+      attr_accessor table_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTableColumnsResult
+      attr_accessor table_columns: ::Array[Types::TableColumn]
+      attr_accessor next_token: ::String
+      attr_accessor workbook_cursor: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTableRowsRequest
+      attr_accessor workbook_id: ::String
+      attr_accessor table_id: ::String
+      attr_accessor row_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTableRowsResult
+      attr_accessor column_ids: ::Array[::String]
+      attr_accessor rows: ::Array[Types::TableRow]
+      attr_accessor row_ids_not_found: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor workbook_cursor: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTablesRequest
+      attr_accessor workbook_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTablesResult
+      attr_accessor tables: ::Array[Types::Table]
+      attr_accessor next_token: ::String
+      attr_accessor workbook_cursor: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResult
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class QueryTableRowsRequest
+      attr_accessor workbook_id: ::String
+      attr_accessor table_id: ::String
+      attr_accessor filter_formula: Types::Filter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class QueryTableRowsResult
+      attr_accessor column_ids: ::Array[::String]
+      attr_accessor rows: ::Array[Types::TableRow]
+      attr_accessor next_token: ::String
+      attr_accessor workbook_cursor: ::Integer
+      SENSITIVE: []
+    end
+
+    class RequestTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResultRow
+      attr_accessor row_id: ::String
+      attr_accessor data_items: ::Array[Types::DataItem]
+      SENSITIVE: []
+    end
+
+    class ResultSet
+      attr_accessor headers: ::Array[Types::ColumnMetadata]
+      attr_accessor rows: ::Array[Types::ResultRow]
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SourceDataColumnProperties
+      attr_accessor column_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartTableDataImportJobRequest
+      attr_accessor workbook_id: ::String
+      attr_accessor data_source: Types::ImportDataSource
+      attr_accessor data_format: ("DELIMITED_TEXT")
+      attr_accessor destination_table_id: ::String
+      attr_accessor import_options: Types::ImportOptions
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartTableDataImportJobResult
+      attr_accessor job_id: ::String
+      attr_accessor job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class Table
+      attr_accessor table_id: ::String
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class TableColumn
+      attr_accessor table_column_id: ::String
+      attr_accessor table_column_name: ::String
+      attr_accessor format: ("AUTO" | "NUMBER" | "CURRENCY" | "DATE" | "TIME" | "DATE_TIME" | "PERCENTAGE" | "TEXT" | "ACCOUNTING" | "CONTACT" | "ROWLINK" | "ROWSET")
+      SENSITIVE: []
+    end
+
+    class TableDataImportJobMetadata
+      attr_accessor submitter: Types::ImportJobSubmitter
+      attr_accessor submit_time: ::Time
+      attr_accessor import_options: Types::ImportOptions
+      attr_accessor data_source: Types::ImportDataSource
+      SENSITIVE: []
+    end
+
+    class TableRow
+      attr_accessor row_id: ::String
+      attr_accessor cells: ::Array[Types::Cell]
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResult < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResult < Aws::EmptyStructure
+    end
+
+    class UpdateRowData
+      attr_accessor row_id: ::String
+      attr_accessor cells_to_update: ::Hash[::String, Types::CellInput]
+      SENSITIVE: []
+    end
+
+    class UpsertRowData
+      attr_accessor batch_item_id: ::String
+      attr_accessor filter: Types::Filter
+      attr_accessor cells_to_update: ::Hash[::String, Types::CellInput]
+      SENSITIVE: []
+    end
+
+    class UpsertRowsResult
+      attr_accessor row_ids: ::Array[::String]
+      attr_accessor upsert_action: ("UPDATED" | "APPENDED")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VariableValue
+      attr_accessor raw_value: ::String
+      SENSITIVE: []
+    end
+  end
+end

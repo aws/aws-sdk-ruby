@@ -1,0 +1,40 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/EventCategoryMap.html
+    class EventCategoryMap
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/EventCategoryMap.html#initialize-instance_method
+      def initialize: (String source_type, Hash[Symbol, untyped] options) -> void
+                    | (source_type: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/EventCategoryMap.html#source_type-instance_method
+      def source_type: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/EventCategoryMap.html#event_categories-instance_method
+      def event_categories: () -> ::Array[::String]
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/EventCategoryMap.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/EventCategoryMap.html#data-instance_method
+      def data: () -> Types::EventCategoriesMap
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/EventCategoryMap.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      class Collection < ::Aws::Resources::Collection[EventCategoryMap]
+      end
+    end
+  end
+end

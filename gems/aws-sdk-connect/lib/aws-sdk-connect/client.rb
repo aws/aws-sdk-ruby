@@ -440,6 +440,61 @@ module Aws::Connect
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
+    # Associates the specified dataset for a Amazon Connect instance with
+    # the target account. You can associate only one dataset in a single
+    # call.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :data_set_id
+    #   The identifier of the dataset to associate with the target account.
+    #
+    # @option params [String] :target_account_id
+    #   The identifier of the target account. Use to associate a dataset to a
+    #   different account than the one containing the Amazon Connect instance.
+    #   If not specified, by default this value is the Amazon Web Services
+    #   account that has the Amazon Connect instance.
+    #
+    # @return [Types::AssociateAnalyticsDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateAnalyticsDataSetResponse#data_set_id #data_set_id} => String
+    #   * {Types::AssociateAnalyticsDataSetResponse#target_account_id #target_account_id} => String
+    #   * {Types::AssociateAnalyticsDataSetResponse#resource_share_id #resource_share_id} => String
+    #   * {Types::AssociateAnalyticsDataSetResponse#resource_share_arn #resource_share_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_analytics_data_set({
+    #     instance_id: "InstanceId", # required
+    #     data_set_id: "DataSetId", # required
+    #     target_account_id: "AWSAccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_set_id #=> String
+    #   resp.target_account_id #=> String
+    #   resp.resource_share_id #=> String
+    #   resp.resource_share_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateAnalyticsDataSet AWS API Documentation
+    #
+    # @overload associate_analytics_data_set(params = {})
+    # @param [Hash] params ({})
+    def associate_analytics_data_set(params = {}, options = {})
+      req = build_request(:associate_analytics_data_set, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Associates an approved origin to an Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
@@ -556,6 +611,45 @@ module Aws::Connect
     # @param [Hash] params ({})
     def associate_default_vocabulary(params = {}, options = {})
       req = build_request(:associate_default_vocabulary, params)
+      req.send_request(options)
+    end
+
+    # Associates a connect resource to a flow.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :resource_id
+    #   The identifier of the resource.
+    #
+    # @option params [required, String] :flow_id
+    #   The identifier of the flow.
+    #
+    # @option params [required, String] :resource_type
+    #   A valid resource type.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_flow({
+    #     instance_id: "InstanceId", # required
+    #     resource_id: "ARN", # required
+    #     flow_id: "ARN", # required
+    #     resource_type: "SMS_PHONE_NUMBER", # required, accepts SMS_PHONE_NUMBER
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateFlow AWS API Documentation
+    #
+    # @overload associate_flow(params = {})
+    # @param [Hash] params ({})
+    def associate_flow(params = {}, options = {})
+      req = build_request(:associate_flow, params)
       req.send_request(options)
     end
 
@@ -919,6 +1013,290 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # &gt;Associates a set of proficiencies with a user.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN of the instance).
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user account.
+    #
+    # @option params [required, Array<Types::UserProficiency>] :user_proficiencies
+    #   The proficiencies to associate with the user.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_user_proficiencies({
+    #     instance_id: "InstanceId", # required
+    #     user_id: "UserId", # required
+    #     user_proficiencies: [ # required
+    #       {
+    #         attribute_name: "PredefinedAttributeName", # required
+    #         attribute_value: "PredefinedAttributeStringValue", # required
+    #         level: 1.0, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateUserProficiencies AWS API Documentation
+    #
+    # @overload associate_user_proficiencies(params = {})
+    # @param [Hash] params ({})
+    def associate_user_proficiencies(params = {}, options = {})
+      req = build_request(:associate_user_proficiencies, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Associates a list of analytics datasets for a given Amazon Connect
+    # instance to a target account. You can associate multiple datasets in a
+    # single call.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, Array<String>] :data_set_ids
+    #   An array of dataset identifiers to associate.
+    #
+    # @option params [String] :target_account_id
+    #   The identifier of the target account. Use to associate a dataset to a
+    #   different account than the one containing the Amazon Connect instance.
+    #   If not specified, by default this value is the Amazon Web Services
+    #   account that has the Amazon Connect instance.
+    #
+    # @return [Types::BatchAssociateAnalyticsDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchAssociateAnalyticsDataSetResponse#created #created} => Array&lt;Types::AnalyticsDataAssociationResult&gt;
+    #   * {Types::BatchAssociateAnalyticsDataSetResponse#errors #errors} => Array&lt;Types::ErrorResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_associate_analytics_data_set({
+    #     instance_id: "InstanceId", # required
+    #     data_set_ids: ["DataSetId"], # required
+    #     target_account_id: "AWSAccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created #=> Array
+    #   resp.created[0].data_set_id #=> String
+    #   resp.created[0].target_account_id #=> String
+    #   resp.created[0].resource_share_id #=> String
+    #   resp.created[0].resource_share_arn #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchAssociateAnalyticsDataSet AWS API Documentation
+    #
+    # @overload batch_associate_analytics_data_set(params = {})
+    # @param [Hash] params ({})
+    def batch_associate_analytics_data_set(params = {}, options = {})
+      req = build_request(:batch_associate_analytics_data_set, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Removes a list of analytics datasets associated with a given Amazon
+    # Connect instance. You can disassociate multiple datasets in a single
+    # call.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, Array<String>] :data_set_ids
+    #   An array of associated dataset identifiers to remove.
+    #
+    # @option params [String] :target_account_id
+    #   The identifier of the target account. Use to disassociate a dataset
+    #   from a different account than the one containing the Amazon Connect
+    #   instance. If not specified, by default this value is the Amazon Web
+    #   Services account that has the Amazon Connect instance.
+    #
+    # @return [Types::BatchDisassociateAnalyticsDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDisassociateAnalyticsDataSetResponse#deleted #deleted} => Array&lt;String&gt;
+    #   * {Types::BatchDisassociateAnalyticsDataSetResponse#errors #errors} => Array&lt;Types::ErrorResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_disassociate_analytics_data_set({
+    #     instance_id: "InstanceId", # required
+    #     data_set_ids: ["DataSetId"], # required
+    #     target_account_id: "AWSAccountId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deleted #=> Array
+    #   resp.deleted[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchDisassociateAnalyticsDataSet AWS API Documentation
+    #
+    # @overload batch_disassociate_analytics_data_set(params = {})
+    # @param [Hash] params ({})
+    def batch_disassociate_analytics_data_set(params = {}, options = {})
+      req = build_request(:batch_disassociate_analytics_data_set, params)
+      req.send_request(options)
+    end
+
+    # Retrieve the flow associations for the given resources.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, Array<String>] :resource_ids
+    #   A list of resource identifiers to retrieve flow associations.
+    #
+    # @option params [String] :resource_type
+    #   The type of resource association.
+    #
+    # @return [Types::BatchGetFlowAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetFlowAssociationResponse#flow_association_summary_list #flow_association_summary_list} => Array&lt;Types::FlowAssociationSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_flow_association({
+    #     instance_id: "InstanceId", # required
+    #     resource_ids: ["ARN"], # required
+    #     resource_type: "VOICE_PHONE_NUMBER", # accepts VOICE_PHONE_NUMBER
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_association_summary_list #=> Array
+    #   resp.flow_association_summary_list[0].resource_id #=> String
+    #   resp.flow_association_summary_list[0].flow_id #=> String
+    #   resp.flow_association_summary_list[0].resource_type #=> String, one of "VOICE_PHONE_NUMBER"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchGetFlowAssociation AWS API Documentation
+    #
+    # @overload batch_get_flow_association(params = {})
+    # @param [Hash] params ({})
+    def batch_get_flow_association(params = {}, options = {})
+      req = build_request(:batch_get_flow_association, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> Only the Amazon Connect outbound campaigns service principal is
+    # allowed to assume a role in your account and call this API.
+    #
+    #  </note>
+    #
+    # Allows you to create a batch of contacts in Amazon Connect. The
+    # outbound campaigns capability ingests dial requests via the
+    # [PutDialRequestBatch][1] API. It then uses BatchPutContact to create
+    # contacts corresponding to those dial requests. If agents are
+    # available, the dial requests are dialed out, which results in a voice
+    # call. The resulting voice call uses the same contactId that was
+    # created by BatchPutContact.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect-outbound/latest/APIReference/API_PutDialRequestBatch.html
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, Array<Types::ContactDataRequest>] :contact_data_request_list
+    #   List of individual contact requests.
+    #
+    # @return [Types::BatchPutContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchPutContactResponse#successful_request_list #successful_request_list} => Array&lt;Types::SuccessfulRequest&gt;
+    #   * {Types::BatchPutContactResponse#failed_request_list #failed_request_list} => Array&lt;Types::FailedRequest&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_put_contact({
+    #     client_token: "ClientToken",
+    #     instance_id: "InstanceId", # required
+    #     contact_data_request_list: [ # required
+    #       {
+    #         system_endpoint: {
+    #           type: "TELEPHONE_NUMBER", # accepts TELEPHONE_NUMBER, VOIP, CONTACT_FLOW
+    #           address: "EndpointAddress",
+    #         },
+    #         customer_endpoint: {
+    #           type: "TELEPHONE_NUMBER", # accepts TELEPHONE_NUMBER, VOIP, CONTACT_FLOW
+    #           address: "EndpointAddress",
+    #         },
+    #         request_identifier: "RequestIdentifier",
+    #         queue_id: "QueueId",
+    #         attributes: {
+    #           "AttributeName" => "AttributeValue",
+    #         },
+    #         campaign: {
+    #           campaign_id: "CampaignId",
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful_request_list #=> Array
+    #   resp.successful_request_list[0].request_identifier #=> String
+    #   resp.successful_request_list[0].contact_id #=> String
+    #   resp.failed_request_list #=> Array
+    #   resp.failed_request_list[0].request_identifier #=> String
+    #   resp.failed_request_list[0].failure_reason_code #=> String, one of "INVALID_ATTRIBUTE_KEY", "INVALID_CUSTOMER_ENDPOINT", "INVALID_SYSTEM_ENDPOINT", "INVALID_QUEUE", "MISSING_CAMPAIGN", "MISSING_CUSTOMER_ENDPOINT", "MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT", "REQUEST_THROTTLED", "IDEMPOTENCY_EXCEPTION", "INTERNAL_ERROR"
+    #   resp.failed_request_list[0].failure_reason_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchPutContact AWS API Documentation
+    #
+    # @overload batch_put_contact(params = {})
+    # @param [Hash] params ({})
+    def batch_put_contact(params = {}, options = {})
+      req = build_request(:batch_put_contact, params)
+      req.send_request(options)
+    end
+
     # Claims an available phone number to your Amazon Connect instance or
     # traffic distribution group. You can call this API only in the same
     # Amazon Web Services Region where the Amazon Connect instance or
@@ -959,9 +1337,20 @@ module Aws::Connect
     # [4]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
     # [5]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html
     #
-    # @option params [required, String] :target_arn
+    # @option params [String] :target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
-    #   distribution groups that phone numbers are claimed to.
+    #   distribution groups that phone number inbound traffic is routed
+    #   through. You must enter `InstanceId` or `TargetArn`.
+    #
+    # @option params [String] :instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   `TargetArn`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :phone_number
     #   The phone number you want to claim. Phone numbers are formatted `[+]
@@ -972,7 +1361,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @option params [String] :client_token
@@ -999,7 +1388,8 @@ module Aws::Connect
     # @example Request syntax with placeholder values
     #
     #   resp = client.claim_phone_number({
-    #     target_arn: "ARN", # required
+    #     target_arn: "ARN",
+    #     instance_id: "InstanceId",
     #     phone_number: "PhoneNumber", # required
     #     phone_number_description: "PhoneNumberDescription",
     #     tags: {
@@ -1049,7 +1439,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateAgentStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1122,7 +1512,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateContactFlowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1183,7 +1573,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @option params [String] :client_token
@@ -1394,7 +1784,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateHoursOfOperationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1474,6 +1864,10 @@ module Aws::Connect
     # @option params [required, Boolean] :outbound_calls_enabled
     #   Your contact center allows outbound calls.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, `\{ "tags": \{"key1":"value1", "key2":"value2"\} \}`.
+    #
     # @return [Types::CreateInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateInstanceResponse#id #id} => String
@@ -1488,6 +1882,9 @@ module Aws::Connect
     #     directory_id: "DirectoryId",
     #     inbound_calls_enabled: false, # required
     #     outbound_calls_enabled: false, # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1540,7 +1937,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateIntegrationAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1552,11 +1949,11 @@ module Aws::Connect
     #
     #   resp = client.create_integration_association({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN, APPLICATION
+    #     integration_type: "EVENT", # required, accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, WISDOM_QUICK_RESPONSES, CASES_DOMAIN, APPLICATION, FILE_SCANNER
     #     integration_arn: "ARN", # required
     #     source_application_url: "URI",
     #     source_application_name: "SourceApplicationName",
-    #     source_type: "SALESFORCE", # accepts SALESFORCE, ZENDESK
+    #     source_type: "SALESFORCE", # accepts SALESFORCE, ZENDESK, CASES
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1628,7 +2025,7 @@ module Aws::Connect
     #     contact_id: "ContactId", # required
     #     client_token: "ClientToken",
     #     participant_details: { # required
-    #       participant_role: "AGENT", # accepts AGENT, CUSTOMER, SYSTEM, CUSTOM_BOT
+    #       participant_role: "AGENT", # accepts AGENT, CUSTOMER, SYSTEM, CUSTOM_BOT, SUPERVISOR
     #       display_name: "DisplayName",
     #     },
     #   })
@@ -1645,6 +2042,165 @@ module Aws::Connect
     # @param [Hash] params ({})
     def create_participant(params = {}, options = {})
       req = build_request(:create_participant, params)
+      req.send_request(options)
+    end
+
+    # Enables rehydration of chats for the lifespan of a contact. For more
+    # information about chat rehydration, see [Enable persistent chat][1] in
+    # the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :initial_contact_id
+    #   This is the contactId of the current contact that the
+    #   `CreatePersistentContactAssociation` API is being called from.
+    #
+    # @option params [required, String] :rehydration_type
+    #   The contactId chosen for rehydration depends on the type chosen.
+    #
+    #   * `ENTIRE_PAST_SESSION`: Rehydrates a chat from the most recently
+    #     terminated past chat contact of the specified past ended chat
+    #     session. To use this type, provide the `initialContactId` of the
+    #     past ended chat session in the `sourceContactId` field. In this
+    #     type, Amazon Connect determines what the most recent chat contact on
+    #     the past ended chat session and uses it to start a persistent chat.
+    #
+    #   * `FROM_SEGMENT`: Rehydrates a chat from the specified past chat
+    #     contact provided in the `sourceContactId` field.
+    #
+    #   The actual contactId used for rehydration is provided in the response
+    #   of this API.
+    #
+    #   To illustrate how to use rehydration type, consider the following
+    #   example: A customer starts a chat session. Agent a1 accepts the chat
+    #   and a conversation starts between the customer and Agent a1. This
+    #   first contact creates a contact ID **C1**. Agent a1 then transfers the
+    #   chat to Agent a2. This creates another contact ID **C2**. At this
+    #   point Agent a2 ends the chat. The customer is forwarded to the
+    #   disconnect flow for a post chat survey that creates another contact ID
+    #   **C3**. After the chat survey, the chat session ends. Later, the
+    #   customer returns and wants to resume their past chat session. At this
+    #   point, the customer can have following use cases:
+    #
+    #   * **Use Case 1**: The customer wants to continue the past chat session
+    #     but they want to hide the post chat survey. For this they will use
+    #     the following configuration:
+    #
+    #     * **Configuration**
+    #
+    #       * SourceContactId = "C2"
+    #
+    #       * RehydrationType = "FROM\_SEGMENT"
+    #
+    #     * **Expected behavior**
+    #
+    #       * This starts a persistent chat session from the specified past
+    #         ended contact (C2). Transcripts of past chat sessions C2 and C1
+    #         are accessible in the current persistent chat session. Note that
+    #         chat segment C3 is dropped from the persistent chat session.
+    #
+    #       ^
+    #
+    #   * **Use Case 2**: The customer wants to continue the past chat session
+    #     and see the transcript of the entire past engagement, including the
+    #     post chat survey. For this they will use the following
+    #     configuration:
+    #
+    #     * **Configuration**
+    #
+    #       * SourceContactId = "C1"
+    #
+    #       * RehydrationType = "ENTIRE\_PAST\_SESSION"
+    #
+    #     * **Expected behavior**
+    #
+    #       * This starts a persistent chat session from the most recently
+    #         ended chat contact (C3). Transcripts of past chat sessions C3,
+    #         C2 and C1 are accessible in the current persistent chat session.
+    #
+    #       ^
+    #
+    # @option params [required, String] :source_contact_id
+    #   The contactId from which a persistent chat session must be started.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Types::CreatePersistentContactAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePersistentContactAssociationResponse#continued_from_contact_id #continued_from_contact_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_persistent_contact_association({
+    #     instance_id: "InstanceId", # required
+    #     initial_contact_id: "ContactId", # required
+    #     rehydration_type: "ENTIRE_PAST_SESSION", # required, accepts ENTIRE_PAST_SESSION, FROM_SEGMENT
+    #     source_contact_id: "ContactId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.continued_from_contact_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePersistentContactAssociation AWS API Documentation
+    #
+    # @overload create_persistent_contact_association(params = {})
+    # @param [Hash] params ({})
+    def create_persistent_contact_association(params = {}, options = {})
+      req = build_request(:create_persistent_contact_association, params)
+      req.send_request(options)
+    end
+
+    # Creates a new predefined attribute for the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the predefined attribute.
+    #
+    # @option params [required, Types::PredefinedAttributeValues] :values
+    #   The values of the predefined attribute.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_predefined_attribute({
+    #     instance_id: "InstanceId", # required
+    #     name: "PredefinedAttributeName", # required
+    #     values: { # required
+    #       string_list: ["PredefinedAttributeStringValue"],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePredefinedAttribute AWS API Documentation
+    #
+    # @overload create_predefined_attribute(params = {})
+    # @param [Hash] params ({})
+    def create_predefined_attribute(params = {}, options = {})
+      req = build_request(:create_predefined_attribute, params)
       req.send_request(options)
     end
 
@@ -1671,11 +2227,17 @@ module Aws::Connect
     #   The description of the prompt.
     #
     # @option params [required, String] :s3_uri
-    #   The URI for the S3 bucket where the prompt is stored.
+    #   The URI for the S3 bucket where the prompt is stored. You can provide
+    #   S3 pre-signed URLs returned by the [GetPromptFile][1] API instead of
+    #   providing S3 URIs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreatePromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1770,7 +2332,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1832,7 +2394,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateQuickConnectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1919,7 +2481,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @option params [String] :agent_availability_timer
@@ -2033,13 +2595,13 @@ module Aws::Connect
     #     instance_id: "InstanceId", # required
     #     name: "RuleName", # required
     #     trigger_event_source: { # required
-    #       event_source_name: "OnPostCallAnalysisAvailable", # required, accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate, OnContactEvaluationSubmit, OnMetricDataUpdate
+    #       event_source_name: "OnPostCallAnalysisAvailable", # required, accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnRealTimeChatAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate, OnContactEvaluationSubmit, OnMetricDataUpdate, OnCaseCreate, OnCaseUpdate
     #       integration_association_id: "IntegrationAssociationId",
     #     },
     #     function: "RuleFunction", # required
     #     actions: [ # required
     #       {
-    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION
+    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, END_ASSOCIATED_TASKS
     #         task_action: {
     #           name: "TaskNameExpression", # required
     #           description: "TaskDescriptionExpression",
@@ -2067,6 +2629,37 @@ module Aws::Connect
     #             },
     #             user_ids: ["UserId"],
     #           },
+    #         },
+    #         create_case_action: {
+    #           fields: [ # required
+    #             {
+    #               id: "FieldValueId", # required
+    #               value: { # required
+    #                 boolean_value: false,
+    #                 double_value: 1.0,
+    #                 empty_value: {
+    #                 },
+    #                 string_value: "FieldStringValue",
+    #               },
+    #             },
+    #           ],
+    #           template_id: "TemplateId", # required
+    #         },
+    #         update_case_action: {
+    #           fields: [ # required
+    #             {
+    #               id: "FieldValueId", # required
+    #               value: { # required
+    #                 boolean_value: false,
+    #                 double_value: 1.0,
+    #                 empty_value: {
+    #                 },
+    #                 string_value: "FieldStringValue",
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         end_associated_tasks_action: {
     #         },
     #       },
     #     ],
@@ -2114,7 +2707,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @option params [Hash<String,String>] :allowed_access_control_tags
@@ -2130,7 +2723,7 @@ module Aws::Connect
     #   This API is in preview release for Amazon Connect and is subject to
     #   change.
     #
-    #   A list of third party applications that the security profile will give
+    #   A list of third-party applications that the security profile will give
     #   access to.
     #
     # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2342,7 +2935,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateTrafficDistributionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2395,7 +2988,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateUseCaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2435,9 +3028,9 @@ module Aws::Connect
     # identity management. `FirstName` and `LastName` are required if you
     # are using Amazon Connect or SAML for identity management.
     #
-    # For information about how to create user accounts using the Amazon
-    # Connect console, see [Add Users][2] in the *Amazon Connect
-    # Administrator Guide*.
+    # For information about how to create users using the Amazon Connect
+    # admin website, see [Add Users][2] in the *Amazon Connect Administrator
+    # Guide*.
     #
     #
     #
@@ -2493,7 +3086,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2563,7 +3156,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateUserHierarchyGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2805,7 +3398,7 @@ module Aws::Connect
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Types::CreateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3125,6 +3718,34 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_integration_association(params = {}, options = {})
       req = build_request(:delete_integration_association, params)
+      req.send_request(options)
+    end
+
+    # Deletes a predefined attribute from the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the predefined attribute.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_predefined_attribute({
+    #     instance_id: "InstanceId", # required
+    #     name: "PredefinedAttributeName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeletePredefinedAttribute AWS API Documentation
+    #
+    # @overload delete_predefined_attribute(params = {})
+    # @param [Hash] params ({})
+    def delete_predefined_attribute(params = {}, options = {})
+      req = build_request(:delete_predefined_attribute, params)
       req.send_request(options)
     end
 
@@ -3623,6 +4244,8 @@ module Aws::Connect
     #   resp.agent_status.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.agent_status.tags #=> Hash
     #   resp.agent_status.tags["TagKey"] #=> String
+    #   resp.agent_status.last_modified_time #=> Time
+    #   resp.agent_status.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeAgentStatus AWS API Documentation
     #
@@ -3679,12 +4302,21 @@ module Aws::Connect
     #   resp.contact.queue_info.enqueue_timestamp #=> Time
     #   resp.contact.agent_info.id #=> String
     #   resp.contact.agent_info.connected_to_agent_timestamp #=> Time
+    #   resp.contact.agent_info.agent_pause_duration_in_seconds #=> Integer
     #   resp.contact.initiation_timestamp #=> Time
     #   resp.contact.disconnect_timestamp #=> Time
     #   resp.contact.last_update_timestamp #=> Time
+    #   resp.contact.last_paused_timestamp #=> Time
+    #   resp.contact.last_resumed_timestamp #=> Time
+    #   resp.contact.total_pause_count #=> Integer
+    #   resp.contact.total_pause_duration_in_seconds #=> Integer
     #   resp.contact.scheduled_timestamp #=> Time
     #   resp.contact.related_contact_id #=> String
     #   resp.contact.wisdom_info.session_arn #=> String
+    #   resp.contact.queue_time_adjustment_seconds #=> Integer
+    #   resp.contact.queue_priority #=> Integer
+    #   resp.contact.tags #=> Hash
+    #   resp.contact.tags["ContactTagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeContact AWS API Documentation
     #
@@ -4019,6 +4651,8 @@ module Aws::Connect
     #   resp.hours_of_operation.config[0].end_time.minutes #=> Integer
     #   resp.hours_of_operation.tags #=> Hash
     #   resp.hours_of_operation.tags["TagKey"] #=> String
+    #   resp.hours_of_operation.last_modified_time #=> Time
+    #   resp.hours_of_operation.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeHoursOfOperation AWS API Documentation
     #
@@ -4072,6 +4706,8 @@ module Aws::Connect
     #   resp.instance.inbound_calls_enabled #=> Boolean
     #   resp.instance.outbound_calls_enabled #=> Boolean
     #   resp.instance.instance_access_url #=> String
+    #   resp.instance.tags #=> Hash
+    #   resp.instance.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstance AWS API Documentation
     #
@@ -4106,12 +4742,12 @@ module Aws::Connect
     #
     #   resp = client.describe_instance_attribute({
     #     instance_id: "InstanceId", # required
-    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING
+    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING, ENHANCED_CHAT_MONITORING
     #   })
     #
     # @example Response structure
     #
-    #   resp.attribute.attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "HIGH_VOLUME_OUTBOUND", "ENHANCED_CONTACT_MONITORING"
+    #   resp.attribute.attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "HIGH_VOLUME_OUTBOUND", "ENHANCED_CONTACT_MONITORING", "ENHANCED_CHAT_MONITORING"
     #   resp.attribute.value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeInstanceAttribute AWS API Documentation
@@ -4212,13 +4848,15 @@ module Aws::Connect
     #   resp.claimed_phone_number_summary.phone_number_arn #=> String
     #   resp.claimed_phone_number_summary.phone_number #=> String
     #   resp.claimed_phone_number_summary.phone_number_country_code #=> String, one of "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BR", "IO", "VG", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CK", "CR", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "TL", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "PF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "CI", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "KP", "MP", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "CG", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "KR", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "VI", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "WF", "EH", "YE", "ZM", "ZW"
-    #   resp.claimed_phone_number_summary.phone_number_type #=> String, one of "TOLL_FREE", "DID", "UIFN", "SHARED", "THIRD_PARTY_TF", "THIRD_PARTY_DID"
+    #   resp.claimed_phone_number_summary.phone_number_type #=> String, one of "TOLL_FREE", "DID", "UIFN", "SHARED", "THIRD_PARTY_TF", "THIRD_PARTY_DID", "SHORT_CODE"
     #   resp.claimed_phone_number_summary.phone_number_description #=> String
     #   resp.claimed_phone_number_summary.target_arn #=> String
+    #   resp.claimed_phone_number_summary.instance_id #=> String
     #   resp.claimed_phone_number_summary.tags #=> Hash
     #   resp.claimed_phone_number_summary.tags["TagKey"] #=> String
     #   resp.claimed_phone_number_summary.phone_number_status.status #=> String, one of "CLAIMED", "IN_PROGRESS", "FAILED"
     #   resp.claimed_phone_number_summary.phone_number_status.message #=> String
+    #   resp.claimed_phone_number_summary.source_phone_number_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePhoneNumber AWS API Documentation
     #
@@ -4226,6 +4864,44 @@ module Aws::Connect
     # @param [Hash] params ({})
     def describe_phone_number(params = {}, options = {})
       req = build_request(:describe_phone_number, params)
+      req.send_request(options)
+    end
+
+    # Describes a predefined attribute for the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the predefined attribute.
+    #
+    # @return [Types::DescribePredefinedAttributeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePredefinedAttributeResponse#predefined_attribute #predefined_attribute} => Types::PredefinedAttribute
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_predefined_attribute({
+    #     instance_id: "InstanceId", # required
+    #     name: "PredefinedAttributeName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.predefined_attribute.name #=> String
+    #   resp.predefined_attribute.values.string_list #=> Array
+    #   resp.predefined_attribute.values.string_list[0] #=> String
+    #   resp.predefined_attribute.last_modified_time #=> Time
+    #   resp.predefined_attribute.last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePredefinedAttribute AWS API Documentation
+    #
+    # @overload describe_predefined_attribute(params = {})
+    # @param [Hash] params ({})
+    def describe_predefined_attribute(params = {}, options = {})
+      req = build_request(:describe_predefined_attribute, params)
       req.send_request(options)
     end
 
@@ -4261,6 +4937,8 @@ module Aws::Connect
     #   resp.prompt.description #=> String
     #   resp.prompt.tags #=> Hash
     #   resp.prompt.tags["TagKey"] #=> String
+    #   resp.prompt.last_modified_time #=> Time
+    #   resp.prompt.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePrompt AWS API Documentation
     #
@@ -4312,6 +4990,8 @@ module Aws::Connect
     #   resp.queue.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.queue.tags #=> Hash
     #   resp.queue.tags["TagKey"] #=> String
+    #   resp.queue.last_modified_time #=> Time
+    #   resp.queue.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeQueue AWS API Documentation
     #
@@ -4360,6 +5040,8 @@ module Aws::Connect
     #   resp.quick_connect.quick_connect_config.phone_config.phone_number #=> String
     #   resp.quick_connect.tags #=> Hash
     #   resp.quick_connect.tags["TagKey"] #=> String
+    #   resp.quick_connect.last_modified_time #=> Time
+    #   resp.quick_connect.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeQuickConnect AWS API Documentation
     #
@@ -4411,6 +5093,9 @@ module Aws::Connect
     #   resp.routing_profile.number_of_associated_queues #=> Integer
     #   resp.routing_profile.number_of_associated_users #=> Integer
     #   resp.routing_profile.agent_availability_timer #=> String, one of "TIME_SINCE_LAST_ACTIVITY", "TIME_SINCE_LAST_INBOUND"
+    #   resp.routing_profile.last_modified_time #=> Time
+    #   resp.routing_profile.last_modified_region #=> String
+    #   resp.routing_profile.is_default #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeRoutingProfile AWS API Documentation
     #
@@ -4450,11 +5135,11 @@ module Aws::Connect
     #   resp.rule.name #=> String
     #   resp.rule.rule_id #=> String
     #   resp.rule.rule_arn #=> String
-    #   resp.rule.trigger_event_source.event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate"
+    #   resp.rule.trigger_event_source.event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnRealTimeChatAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate", "OnCaseCreate", "OnCaseUpdate"
     #   resp.rule.trigger_event_source.integration_association_id #=> String
     #   resp.rule.function #=> String
     #   resp.rule.actions #=> Array
-    #   resp.rule.actions[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION"
+    #   resp.rule.actions[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "END_ASSOCIATED_TASKS"
     #   resp.rule.actions[0].task_action.name #=> String
     #   resp.rule.actions[0].task_action.description #=> String
     #   resp.rule.actions[0].task_action.contact_flow_id #=> String
@@ -4470,6 +5155,17 @@ module Aws::Connect
     #   resp.rule.actions[0].send_notification_action.recipient.user_tags["String"] #=> String
     #   resp.rule.actions[0].send_notification_action.recipient.user_ids #=> Array
     #   resp.rule.actions[0].send_notification_action.recipient.user_ids[0] #=> String
+    #   resp.rule.actions[0].create_case_action.fields #=> Array
+    #   resp.rule.actions[0].create_case_action.fields[0].id #=> String
+    #   resp.rule.actions[0].create_case_action.fields[0].value.boolean_value #=> Boolean
+    #   resp.rule.actions[0].create_case_action.fields[0].value.double_value #=> Float
+    #   resp.rule.actions[0].create_case_action.fields[0].value.string_value #=> String
+    #   resp.rule.actions[0].create_case_action.template_id #=> String
+    #   resp.rule.actions[0].update_case_action.fields #=> Array
+    #   resp.rule.actions[0].update_case_action.fields[0].id #=> String
+    #   resp.rule.actions[0].update_case_action.fields[0].value.boolean_value #=> Boolean
+    #   resp.rule.actions[0].update_case_action.fields[0].value.double_value #=> Float
+    #   resp.rule.actions[0].update_case_action.fields[0].value.string_value #=> String
     #   resp.rule.publish_status #=> String, one of "DRAFT", "PUBLISHED"
     #   resp.rule.created_time #=> Time
     #   resp.rule.last_updated_time #=> Time
@@ -4523,6 +5219,8 @@ module Aws::Connect
     #   resp.security_profile.allowed_access_control_tags["SecurityProfilePolicyKey"] #=> String
     #   resp.security_profile.tag_restricted_resources #=> Array
     #   resp.security_profile.tag_restricted_resources[0] #=> String
+    #   resp.security_profile.last_modified_time #=> Time
+    #   resp.security_profile.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeSecurityProfile AWS API Documentation
     #
@@ -4572,8 +5270,8 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Describes the specified user account. You can [find the instance ID in
-    # the Amazon Connect console][1] (it’s the final part of the ARN). The
+    # Describes the specified user. You can [find the instance ID in the
+    # Amazon Connect console][1] (it’s the final part of the ARN). The
     # console does not display the user IDs. Instead, list the users and
     # note the IDs provided in the output.
     #
@@ -4624,6 +5322,8 @@ module Aws::Connect
     #   resp.user.hierarchy_group_id #=> String
     #   resp.user.tags #=> Hash
     #   resp.user.tags["TagKey"] #=> String
+    #   resp.user.last_modified_time #=> Time
+    #   resp.user.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUser AWS API Documentation
     #
@@ -4667,20 +5367,32 @@ module Aws::Connect
     #   resp.hierarchy_group.hierarchy_path.level_one.id #=> String
     #   resp.hierarchy_group.hierarchy_path.level_one.arn #=> String
     #   resp.hierarchy_group.hierarchy_path.level_one.name #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_one.last_modified_time #=> Time
+    #   resp.hierarchy_group.hierarchy_path.level_one.last_modified_region #=> String
     #   resp.hierarchy_group.hierarchy_path.level_two.id #=> String
     #   resp.hierarchy_group.hierarchy_path.level_two.arn #=> String
     #   resp.hierarchy_group.hierarchy_path.level_two.name #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_two.last_modified_time #=> Time
+    #   resp.hierarchy_group.hierarchy_path.level_two.last_modified_region #=> String
     #   resp.hierarchy_group.hierarchy_path.level_three.id #=> String
     #   resp.hierarchy_group.hierarchy_path.level_three.arn #=> String
     #   resp.hierarchy_group.hierarchy_path.level_three.name #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_three.last_modified_time #=> Time
+    #   resp.hierarchy_group.hierarchy_path.level_three.last_modified_region #=> String
     #   resp.hierarchy_group.hierarchy_path.level_four.id #=> String
     #   resp.hierarchy_group.hierarchy_path.level_four.arn #=> String
     #   resp.hierarchy_group.hierarchy_path.level_four.name #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_four.last_modified_time #=> Time
+    #   resp.hierarchy_group.hierarchy_path.level_four.last_modified_region #=> String
     #   resp.hierarchy_group.hierarchy_path.level_five.id #=> String
     #   resp.hierarchy_group.hierarchy_path.level_five.arn #=> String
     #   resp.hierarchy_group.hierarchy_path.level_five.name #=> String
+    #   resp.hierarchy_group.hierarchy_path.level_five.last_modified_time #=> Time
+    #   resp.hierarchy_group.hierarchy_path.level_five.last_modified_region #=> String
     #   resp.hierarchy_group.tags #=> Hash
     #   resp.hierarchy_group.tags["TagKey"] #=> String
+    #   resp.hierarchy_group.last_modified_time #=> Time
+    #   resp.hierarchy_group.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyGroup AWS API Documentation
     #
@@ -4717,18 +5429,28 @@ module Aws::Connect
     #   resp.hierarchy_structure.level_one.id #=> String
     #   resp.hierarchy_structure.level_one.arn #=> String
     #   resp.hierarchy_structure.level_one.name #=> String
+    #   resp.hierarchy_structure.level_one.last_modified_time #=> Time
+    #   resp.hierarchy_structure.level_one.last_modified_region #=> String
     #   resp.hierarchy_structure.level_two.id #=> String
     #   resp.hierarchy_structure.level_two.arn #=> String
     #   resp.hierarchy_structure.level_two.name #=> String
+    #   resp.hierarchy_structure.level_two.last_modified_time #=> Time
+    #   resp.hierarchy_structure.level_two.last_modified_region #=> String
     #   resp.hierarchy_structure.level_three.id #=> String
     #   resp.hierarchy_structure.level_three.arn #=> String
     #   resp.hierarchy_structure.level_three.name #=> String
+    #   resp.hierarchy_structure.level_three.last_modified_time #=> Time
+    #   resp.hierarchy_structure.level_three.last_modified_region #=> String
     #   resp.hierarchy_structure.level_four.id #=> String
     #   resp.hierarchy_structure.level_four.arn #=> String
     #   resp.hierarchy_structure.level_four.name #=> String
+    #   resp.hierarchy_structure.level_four.last_modified_time #=> Time
+    #   resp.hierarchy_structure.level_four.last_modified_region #=> String
     #   resp.hierarchy_structure.level_five.id #=> String
     #   resp.hierarchy_structure.level_five.arn #=> String
     #   resp.hierarchy_structure.level_five.name #=> String
+    #   resp.hierarchy_structure.level_five.last_modified_time #=> Time
+    #   resp.hierarchy_structure.level_five.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyStructure AWS API Documentation
     #
@@ -4850,6 +5572,48 @@ module Aws::Connect
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
+    # Removes the dataset ID associated with a given Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :data_set_id
+    #   The identifier of the dataset to remove.
+    #
+    # @option params [String] :target_account_id
+    #   The identifier of the target account. Use to associate a dataset to a
+    #   different account than the one containing the Amazon Connect instance.
+    #   If not specified, by default this value is the Amazon Web Services
+    #   account that has the Amazon Connect instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_analytics_data_set({
+    #     instance_id: "InstanceId", # required
+    #     data_set_id: "DataSetId", # required
+    #     target_account_id: "AWSAccountId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateAnalyticsDataSet AWS API Documentation
+    #
+    # @overload disassociate_analytics_data_set(params = {})
+    # @param [Hash] params ({})
+    def disassociate_analytics_data_set(params = {}, options = {})
+      req = build_request(:disassociate_analytics_data_set, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
     # Revokes access to integrated applications from Amazon Connect.
     #
     # @option params [required, String] :instance_id
@@ -4922,6 +5686,41 @@ module Aws::Connect
     # @param [Hash] params ({})
     def disassociate_bot(params = {}, options = {})
       req = build_request(:disassociate_bot, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a connect resource from a flow.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :resource_id
+    #   The identifier of the resource.
+    #
+    # @option params [required, String] :resource_type
+    #   A valid resource type.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_flow({
+    #     instance_id: "InstanceId", # required
+    #     resource_id: "ARN", # required
+    #     resource_type: "SMS_PHONE_NUMBER", # required, accepts SMS_PHONE_NUMBER
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateFlow AWS API Documentation
+    #
+    # @overload disassociate_flow(params = {})
+    # @param [Hash] params ({})
+    def disassociate_flow(params = {}, options = {})
+      req = build_request(:disassociate_flow, params)
       req.send_request(options)
     end
 
@@ -5236,6 +6035,42 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Disassociates a set of proficiencies from a user.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user account.
+    #
+    # @option params [required, Array<Types::UserProficiencyDisassociate>] :user_proficiencies
+    #   The proficiencies to disassociate from the user.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_user_proficiencies({
+    #     instance_id: "InstanceId", # required
+    #     user_id: "UserId", # required
+    #     user_proficiencies: [ # required
+    #       {
+    #         attribute_name: "PredefinedAttributeName", # required
+    #         attribute_value: "PredefinedAttributeStringValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateUserProficiencies AWS API Documentation
+    #
+    # @overload disassociate_user_proficiencies(params = {})
+    # @param [Hash] params ({})
+    def disassociate_user_proficiencies(params = {}, options = {})
+      req = build_request(:disassociate_user_proficiencies, params)
+      req.send_request(options)
+    end
+
     # Dismisses contacts from an agent’s CCP and returns the agent to an
     # available state, which allows the agent to receive a new routed
     # contact. Contacts can only be dismissed if they are in a `MISSED`,
@@ -5335,10 +6170,17 @@ module Aws::Connect
     #
     #   * Channels: 3 (VOICE, CHAT, and TASK channels are supported.)
     #
+    #   * RoutingStepExpressions: 50
+    #
     #   Metric data is retrieved only for the resources associated with the
     #   queues or routing profiles, and by any channels included in the
     #   filter. (You cannot filter by both queue AND routing profile.) You can
     #   include both resource IDs and resource ARNs in the same request.
+    #
+    #   When using the `RoutingStepExpression` filter, you need to pass
+    #   exactly one `QueueId`. The filter is also case sensitive so when using
+    #   the `RoutingStepExpression` filter, grouping by
+    #   `ROUTING_STEP_EXPRESSION` is required.
     #
     #   Currently tagging is only supported on the resources that are passed
     #   in the filter.
@@ -5358,6 +6200,9 @@ module Aws::Connect
     #
     #   * If no `Grouping` is included in the request, a summary of metrics is
     #     returned.
+    #
+    #   * When using the `RoutingStepExpression` filter, group by
+    #     `ROUTING_STEP_EXPRESSION` is required.
     #
     # @option params [required, Array<Types::CurrentMetric>] :current_metrics
     #   The metrics to retrieve. Specify the name and unit for each metric.
@@ -5441,6 +6286,12 @@ module Aws::Connect
     #
     #     The actual OLDEST\_CONTACT\_AGE is 24 seconds.
     #
+    #     When the filter `RoutingStepExpression` is used, this metric is
+    #     still calculated from enqueue time. For example, if a contact that
+    #     has been queued under `<Expression 1>` for 10 seconds has expired
+    #     and `<Expression 2>` becomes active, then `OLDEST_CONTACT_AGE` for
+    #     this queue will be counted starting from 10, not 0.
+    #
     #     Name in real-time metrics report: [Oldest][11]
     #
     #   SLOTS\_ACTIVE
@@ -5512,8 +6363,9 @@ module Aws::Connect
     #       queues: ["QueueId"],
     #       channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #       routing_profiles: ["RoutingProfileId"],
+    #       routing_step_expressions: ["RoutingExpression"],
     #     },
-    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE
+    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, ROUTING_STEP_EXPRESSION
     #     current_metrics: [ # required
     #       {
     #         name: "AGENTS_ONLINE", # accepts AGENTS_ONLINE, AGENTS_AVAILABLE, AGENTS_ON_CALL, AGENTS_NON_PRODUCTIVE, AGENTS_AFTER_CONTACT_WORK, AGENTS_ERROR, AGENTS_STAFFED, CONTACTS_IN_QUEUE, OLDEST_CONTACT_AGE, CONTACTS_SCHEDULED, AGENTS_ON_CONTACT, SLOTS_ACTIVE, SLOTS_AVAILABLE
@@ -5539,6 +6391,7 @@ module Aws::Connect
     #   resp.metric_results[0].dimensions.channel #=> String, one of "VOICE", "CHAT", "TASK"
     #   resp.metric_results[0].dimensions.routing_profile.id #=> String
     #   resp.metric_results[0].dimensions.routing_profile.arn #=> String
+    #   resp.metric_results[0].dimensions.routing_step_expression #=> String
     #   resp.metric_results[0].collections #=> Array
     #   resp.metric_results[0].collections[0].metric.name #=> String, one of "AGENTS_ONLINE", "AGENTS_AVAILABLE", "AGENTS_ON_CALL", "AGENTS_NON_PRODUCTIVE", "AGENTS_AFTER_CONTACT_WORK", "AGENTS_ERROR", "AGENTS_STAFFED", "CONTACTS_IN_QUEUE", "OLDEST_CONTACT_AGE", "CONTACTS_SCHEDULED", "AGENTS_ON_CONTACT", "SLOTS_ACTIVE", "SLOTS_AVAILABLE"
     #   resp.metric_results[0].collections[0].metric.unit #=> String, one of "SECONDS", "COUNT", "PERCENT"
@@ -5729,6 +6582,51 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Retrieves the flow associated for a given resource.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :resource_id
+    #   The identifier of the resource.
+    #
+    # @option params [required, String] :resource_type
+    #   A valid resource type.
+    #
+    # @return [Types::GetFlowAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFlowAssociationResponse#resource_id #resource_id} => String
+    #   * {Types::GetFlowAssociationResponse#flow_id #flow_id} => String
+    #   * {Types::GetFlowAssociationResponse#resource_type #resource_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_flow_association({
+    #     instance_id: "InstanceId", # required
+    #     resource_id: "ARN", # required
+    #     resource_type: "SMS_PHONE_NUMBER", # required, accepts SMS_PHONE_NUMBER
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_id #=> String
+    #   resp.flow_id #=> String
+    #   resp.resource_type #=> String, one of "SMS_PHONE_NUMBER"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetFlowAssociation AWS API Documentation
+    #
+    # @overload get_flow_association(params = {})
+    # @param [Hash] params ({})
+    def get_flow_association(params = {}, options = {})
+      req = build_request(:get_flow_association, params)
+      req.send_request(options)
+    end
+
     # Gets historical metric data from the specified Amazon Connect
     # instance.
     #
@@ -5784,6 +6682,9 @@ module Aws::Connect
     #   both queue IDs and queue ARNs in the same request. VOICE, CHAT, and
     #   TASK channels are supported.
     #
+    #   RoutingStepExpression is not a valid filter for GetMetricData and we
+    #   recommend switching to GetMetricDataV2 for more up-to-date features.
+    #
     #   <note markdown="1"> To filter by `Queues`, enter the queue ID/ARN, not the name of the
     #   queue.
     #
@@ -5797,6 +6698,9 @@ module Aws::Connect
     #
     #   If no grouping is specified, a summary of metrics for all queues is
     #   returned.
+    #
+    #   RoutingStepExpression is not a valid filter for GetMetricData and we
+    #   recommend switching to GetMetricDataV2 for more up-to-date features.
     #
     # @option params [required, Array<Types::HistoricalMetric>] :historical_metrics
     #   The metrics to retrieve. Specify the name, unit, and statistic for
@@ -5994,8 +6898,9 @@ module Aws::Connect
     #       queues: ["QueueId"],
     #       channels: ["VOICE"], # accepts VOICE, CHAT, TASK
     #       routing_profiles: ["RoutingProfileId"],
+    #       routing_step_expressions: ["RoutingExpression"],
     #     },
-    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE
+    #     groupings: ["QUEUE"], # accepts QUEUE, CHANNEL, ROUTING_PROFILE, ROUTING_STEP_EXPRESSION
     #     historical_metrics: [ # required
     #       {
     #         name: "CONTACTS_QUEUED", # accepts CONTACTS_QUEUED, CONTACTS_HANDLED, CONTACTS_ABANDONED, CONTACTS_CONSULTED, CONTACTS_AGENT_HUNG_UP_FIRST, CONTACTS_HANDLED_INCOMING, CONTACTS_HANDLED_OUTBOUND, CONTACTS_HOLD_ABANDONS, CONTACTS_TRANSFERRED_IN, CONTACTS_TRANSFERRED_OUT, CONTACTS_TRANSFERRED_IN_FROM_QUEUE, CONTACTS_TRANSFERRED_OUT_FROM_QUEUE, CONTACTS_MISSED, CALLBACK_CONTACTS_HANDLED, API_CONTACTS_HANDLED, OCCUPANCY, HANDLE_TIME, AFTER_CONTACT_WORK_TIME, QUEUED_TIME, ABANDON_TIME, QUEUE_ANSWER_TIME, HOLD_TIME, INTERACTION_TIME, INTERACTION_AND_HOLD_TIME, SERVICE_LEVEL
@@ -6020,6 +6925,7 @@ module Aws::Connect
     #   resp.metric_results[0].dimensions.channel #=> String, one of "VOICE", "CHAT", "TASK"
     #   resp.metric_results[0].dimensions.routing_profile.id #=> String
     #   resp.metric_results[0].dimensions.routing_profile.arn #=> String
+    #   resp.metric_results[0].dimensions.routing_step_expression #=> String
     #   resp.metric_results[0].collections #=> Array
     #   resp.metric_results[0].collections[0].metric.name #=> String, one of "CONTACTS_QUEUED", "CONTACTS_HANDLED", "CONTACTS_ABANDONED", "CONTACTS_CONSULTED", "CONTACTS_AGENT_HUNG_UP_FIRST", "CONTACTS_HANDLED_INCOMING", "CONTACTS_HANDLED_OUTBOUND", "CONTACTS_HOLD_ABANDONS", "CONTACTS_TRANSFERRED_IN", "CONTACTS_TRANSFERRED_OUT", "CONTACTS_TRANSFERRED_IN_FROM_QUEUE", "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE", "CONTACTS_MISSED", "CALLBACK_CONTACTS_HANDLED", "API_CONTACTS_HANDLED", "OCCUPANCY", "HANDLE_TIME", "AFTER_CONTACT_WORK_TIME", "QUEUED_TIME", "ABANDON_TIME", "QUEUE_ANSWER_TIME", "HOLD_TIME", "INTERACTION_TIME", "INTERACTION_AND_HOLD_TIME", "SERVICE_LEVEL"
     #   resp.metric_results[0].collections[0].metric.threshold.comparison #=> String, one of "LT"
@@ -6125,6 +7031,8 @@ module Aws::Connect
     #
     #   * Feature
     #
+    #   * Routing step expression
+    #
     #   At least one filter must be passed from queues, routing profiles,
     #   agents, or user hierarchy groups.
     #
@@ -6138,7 +7046,8 @@ module Aws::Connect
     #     `AGENT` \| `CHANNEL` \| `AGENT_HIERARCHY_LEVEL_ONE` \|
     #     `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
     #     `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE` \|
-    #     `FEATURE`
+    #     `FEATURE` \| `contact/segmentAttributes/connect:Subtype` \|
+    #     `ROUTING_STEP_EXPRESSION`
     #
     #   * **Filter values**: A maximum of 100 filter values are supported in a
     #     single request. VOICE, CHAT, and TASK are valid `filterValue` for
@@ -6150,6 +7059,15 @@ module Aws::Connect
     #     `contact_lens_conversational_analytics` is a valid filterValue for
     #     the `FEATURE` filter key. It is available only to contacts analyzed
     #     by Contact Lens conversational analytics.
+    #
+    #     `connect:Chat`, `connect:SMS`, `connect:Telephony`, and
+    #     `connect:WebRTC` are valid `filterValue` examples (not exhaustive)
+    #     for the `contact/segmentAttributes/connect:Subtype filter` key.
+    #
+    #     `ROUTING_STEP_EXPRESSION` is a valid filter key with a filter value
+    #     up to 3000 length. This filter is case and order sensitive. JSON
+    #     string fields must be sorted in ascending order and JSON array order
+    #     should be kept as is.
     #
     #
     #
@@ -6166,7 +7084,9 @@ module Aws::Connect
     #   Valid grouping keys: `QUEUE` \| `ROUTING_PROFILE` \| `AGENT` \|
     #   `CHANNEL` \| `AGENT_HIERARCHY_LEVEL_ONE` \|
     #   `AGENT_HIERARCHY_LEVEL_TWO` \| `AGENT_HIERARCHY_LEVEL_THREE` \|
-    #   `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE`
+    #   `AGENT_HIERARCHY_LEVEL_FOUR` \| `AGENT_HIERARCHY_LEVEL_FIVE`,
+    #   `contact/segmentAttributes/connect:Subtype` \|
+    #   `ROUTING_STEP_EXPRESSION`
     #
     # @option params [required, Array<Types::MetricV2>] :metrics
     #   The metrics to retrieve. Specify the name, groupings, and filters for
@@ -6179,7 +7099,7 @@ module Aws::Connect
     #   : Unit: Percent
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
     #
     #   AGENT\_ADHERENT\_TIME
     #
@@ -6187,6 +7107,20 @@ module Aws::Connect
     #     [Forecasting, capacity planning, and scheduling][2] is available.
     #
     #     Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AGENT\_ANSWER\_RATE
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   AGENT\_NON\_ADHERENT\_TIME
+    #
+    #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
@@ -6239,14 +7173,23 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+    #
+    #   AVG\_ACTIVE\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
     #
     #   AVG\_AFTER\_CONTACT\_WORK\_TIME
     #
     #   : Unit: Seconds
     #
+    #     Valid metric filter key: `INITIATION_METHOD`
+    #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy, Feature
+    #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6268,12 +7211,19 @@ module Aws::Connect
     #
     #      </note>
     #
+    #   AVG\_AGENT\_PAUSE\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
     #   AVG\_CONTACT\_DURATION
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy, Feature
+    #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6284,7 +7234,7 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_GREETING\_TIME\_AGENT
     #
@@ -6294,14 +7244,15 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_HANDLE\_TIME
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy, Feature
+    #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
+    #     RoutingStepExpression
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6312,7 +7263,7 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy, Feature
+    #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6323,14 +7274,14 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_HOLDS
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy, Feature
+    #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6341,14 +7292,16 @@ module Aws::Connect
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_INTERACTION\_TIME
     #
     #   : Unit: Seconds
     #
+    #     Valid metric filter key: `INITIATION_METHOD`
+    #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Feature
+    #     Feature, contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6362,7 +7315,7 @@ module Aws::Connect
     #     Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_INTERRUPTION\_TIME\_AGENT
     #
@@ -6372,7 +7325,7 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_NON\_TALK\_TIME
     #
@@ -6382,14 +7335,14 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_QUEUE\_ANSWER\_TIME
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Feature
+    #     Feature, contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6399,7 +7352,8 @@ module Aws::Connect
     #
     #   : Unit: Seconds
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_TALK\_TIME
     #
@@ -6409,7 +7363,7 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_TALK\_TIME\_AGENT
     #
@@ -6419,7 +7373,7 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   AVG\_TALK\_TIME\_CUSTOMER
     #
@@ -6429,14 +7383,15 @@ module Aws::Connect
     #     Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   CONTACTS\_ABANDONED
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype,
+    #     RoutingStepExpression
     #
     #   CONTACTS\_CREATED
     #
@@ -6445,7 +7400,7 @@ module Aws::Connect
     #     Valid metric filter key: `INITIATION_METHOD`
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile,
-    #     Feature
+    #     Feature, contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6458,15 +7413,60 @@ module Aws::Connect
     #     Valid metric filter key: `INITIATION_METHOD`, `DISCONNECT_REASON`
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy, Feature
+    #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
+    #     RoutingStepExpression
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
     #      </note>
     #
+    #   CONTACTS\_HANDLED\_BY\_CONNECTED\_TO\_AGENT
+    #
+    #   : Unit: Count
+    #
+    #     Valid metric filter key: `INITIATION_METHOD`
+    #
+    #     Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
+    #     contact/segmentAttributes/connect:Subtype
+    #
     #   CONTACTS\_HOLD\_ABANDONS
     #
     #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #   CONTACTS\_ON\_HOLD\_AGENT\_DISCONNECT
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   CONTACTS\_ON\_HOLD\_CUSTOMER\_DISCONNECT
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   CONTACTS\_PUT\_ON\_HOLD
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   CONTACTS\_TRANSFERRED\_OUT\_EXTERNAL
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   CONTACTS\_TRANSFERRED\_OUT\_INTERNAL
+    #
+    #   : Unit: Percent
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
     #     Agent Hierarchy
@@ -6476,13 +7476,21 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #   CONTACTS\_QUEUED\_BY\_ENQUEUE
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #   CONTACTS\_RESOLVED\_IN\_X
     #
     #   : Unit: Count
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #     Threshold: For `ThresholdValue` enter any whole number from 1 to
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
@@ -6493,7 +7501,7 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy, Feature
+    #     Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
     #
     #     <note markdown="1"> Feature is a valid filter but not a valid grouping.
     #
@@ -6504,21 +7512,73 @@ module Aws::Connect
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   CONTACTS\_TRANSFERRED\_OUT\_FROM\_QUEUE
     #
     #   : Unit: Count
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   MAX\_QUEUED\_TIME
     #
     #   : Unit: Seconds
     #
     #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-    #     Agent Hierarchy
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #   PERCENT\_CONTACTS\_STEP\_EXPIRED
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: Queue, RoutingStepExpression
+    #
+    #   PERCENT\_CONTACTS\_STEP\_JOINED
+    #
+    #   : Unit: Percent
+    #
+    #     Valid groupings and filters: Queue, RoutingStepExpression
+    #
+    #   PERCENT\_NON\_TALK\_TIME
+    #
+    #   : This metric is available only for contacts analyzed by Contact Lens
+    #     conversational analytics.
+    #
+    #     Unit: Percentage
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #   PERCENT\_TALK\_TIME
+    #
+    #   : This metric is available only for contacts analyzed by Contact Lens
+    #     conversational analytics.
+    #
+    #     Unit: Percentage
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #   PERCENT\_TALK\_TIME\_AGENT
+    #
+    #   : This metric is available only for contacts analyzed by Contact Lens
+    #     conversational analytics.
+    #
+    #     Unit: Percentage
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #   PERCENT\_TALK\_TIME\_CUSTOMER
+    #
+    #   : This metric is available only for contacts analyzed by Contact Lens
+    #     conversational analytics.
+    #
+    #     Unit: Percentage
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
     #
     #   SERVICE\_LEVEL
     #
@@ -6532,11 +7592,55 @@ module Aws::Connect
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
     #     `LT` (for "Less than").
     #
+    #   STEP\_CONTACTS\_QUEUED
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, RoutingStepExpression
+    #
+    #   SUM\_AFTER\_CONTACT\_WORK\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   SUM\_CONNECTING\_TIME\_AGENT
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid metric filter key: `INITIATION_METHOD`. This metric only
+    #     supports the following filter keys as `INITIATION_METHOD`: `INBOUND`
+    #     \| `OUTBOUND` \| `CALLBACK` \| `API`
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #     <note markdown="1"> The `Negate` key in Metric Level Filters is not applicable for this
+    #     metric.
+    #
+    #      </note>
+    #
+    #   SUM\_CONTACT\_FLOW\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   SUM\_CONTACT\_TIME\_AGENT
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
     #   SUM\_CONTACTS\_ANSWERED\_IN\_X
     #
     #   : Unit: Count
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
@@ -6546,7 +7650,8 @@ module Aws::Connect
     #
     #   : Unit: Count
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #     Threshold: For `ThresholdValue`, enter any whole number from 1 to
     #     604800 (inclusive), in seconds. For `Comparison`, you must enter
@@ -6558,13 +7663,68 @@ module Aws::Connect
     #
     #     Unit: Count
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+    #
+    #   SUM\_ERROR\_STATUS\_TIME\_AGENT
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   SUM\_HANDLE\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   SUM\_HOLD\_TIME
+    #
+    #   : Unit: Count
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   SUM\_IDLE\_TIME\_AGENT
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
+    #
+    #   SUM\_INTERACTION\_AND\_HOLD\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   SUM\_INTERACTION\_TIME
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+    #     Agent Hierarchy
+    #
+    #   SUM\_NON\_PRODUCTIVE\_TIME\_AGENT
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
+    #
+    #   SUM\_ONLINE\_TIME\_AGENT
+    #
+    #   : Unit: Seconds
+    #
+    #     Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
     #
     #   SUM\_RETRY\_CALLBACK\_ATTEMPTS
     #
     #   : Unit: Count
     #
-    #     Valid groupings and filters: Queue, Channel, Routing Profile
+    #     Valid groupings and filters: Queue, Channel, Routing Profile,
+    #     contact/segmentAttributes/connect:Subtype
     #
     #
     #
@@ -6671,6 +7831,8 @@ module Aws::Connect
     # @return [Types::GetPromptFileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPromptFileResponse#prompt_presigned_url #prompt_presigned_url} => String
+    #   * {Types::GetPromptFileResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetPromptFileResponse#last_modified_region #last_modified_region} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6682,6 +7844,8 @@ module Aws::Connect
     # @example Response structure
     #
     #   resp.prompt_presigned_url #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetPromptFile AWS API Documentation
     #
@@ -6776,7 +7940,10 @@ module Aws::Connect
     # distribution group.
     #
     # @option params [required, String] :id
-    #   The identifier of the traffic distribution group.
+    #   The identifier of the traffic distribution group. This can be the ID
+    #   or the ARN if the API is being called in the Region where the traffic
+    #   distribution group was created. The ARN must be provided if the call
+    #   is from the replicated Region.
     #
     # @return [Types::GetTrafficDistributionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6812,6 +7979,76 @@ module Aws::Connect
     # @param [Hash] params ({})
     def get_traffic_distribution(params = {}, options = {})
       req = build_request(:get_traffic_distribution, params)
+      req.send_request(options)
+    end
+
+    # Imports a claimed phone number from an external service, such as
+    # Amazon Pinpoint, into an Amazon Connect instance. You can call this
+    # API only in the same Amazon Web Services Region where the Amazon
+    # Connect instance was created.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :source_phone_number_arn
+    #   The claimed phone number ARN being imported from the external service,
+    #   such as Amazon Pinpoint. If it is from Amazon Pinpoint, it looks like
+    #   the ARN of the phone number to import from Amazon Pinpoint.
+    #
+    # @option params [String] :phone_number_description
+    #   The description of the phone number.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
+    #   "key2":"value2"\\} \\}.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Types::ImportPhoneNumberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportPhoneNumberResponse#phone_number_id #phone_number_id} => String
+    #   * {Types::ImportPhoneNumberResponse#phone_number_arn #phone_number_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_phone_number({
+    #     instance_id: "InstanceId", # required
+    #     source_phone_number_arn: "ARN", # required
+    #     phone_number_description: "PhoneNumberDescription",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.phone_number_id #=> String
+    #   resp.phone_number_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ImportPhoneNumber AWS API Documentation
+    #
+    # @overload import_phone_number(params = {})
+    # @param [Hash] params ({})
+    def import_phone_number(params = {}, options = {})
+      req = build_request(:import_phone_number, params)
       req.send_request(options)
     end
 
@@ -6863,6 +8100,8 @@ module Aws::Connect
     #   resp.agent_status_summary_list[0].arn #=> String
     #   resp.agent_status_summary_list[0].name #=> String
     #   resp.agent_status_summary_list[0].type #=> String, one of "ROUTABLE", "CUSTOM", "OFFLINE"
+    #   resp.agent_status_summary_list[0].last_modified_time #=> Time
+    #   resp.agent_status_summary_list[0].last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListAgentStatuses AWS API Documentation
     #
@@ -6870,6 +8109,63 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_agent_statuses(params = {}, options = {})
       req = build_request(:list_agent_statuses, params)
+      req.send_request(options)
+    end
+
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Lists the association status of requested dataset ID for a given
+    # Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :data_set_id
+    #   The identifier of the dataset to get the association status.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListAnalyticsDataAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAnalyticsDataAssociationsResponse#results #results} => Array&lt;Types::AnalyticsDataAssociationResult&gt;
+    #   * {Types::ListAnalyticsDataAssociationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_analytics_data_associations({
+    #     instance_id: "InstanceId", # required
+    #     data_set_id: "DataSetId",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].data_set_id #=> String
+    #   resp.results[0].target_account_id #=> String
+    #   resp.results[0].resource_share_id #=> String
+    #   resp.results[0].resource_share_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListAnalyticsDataAssociations AWS API Documentation
+    #
+    # @overload list_analytics_data_associations(params = {})
+    # @param [Hash] params ({})
+    def list_analytics_data_associations(params = {}, options = {})
+      req = build_request(:list_analytics_data_associations, params)
       req.send_request(options)
     end
 
@@ -7422,6 +8718,60 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # List the flow association based on the filters.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :resource_type
+    #   A valid resource type.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListFlowAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFlowAssociationsResponse#flow_association_summary_list #flow_association_summary_list} => Array&lt;Types::FlowAssociationSummary&gt;
+    #   * {Types::ListFlowAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_flow_associations({
+    #     instance_id: "InstanceId", # required
+    #     resource_type: "VOICE_PHONE_NUMBER", # accepts VOICE_PHONE_NUMBER
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_association_summary_list #=> Array
+    #   resp.flow_association_summary_list[0].resource_id #=> String
+    #   resp.flow_association_summary_list[0].flow_id #=> String
+    #   resp.flow_association_summary_list[0].resource_type #=> String, one of "VOICE_PHONE_NUMBER"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListFlowAssociations AWS API Documentation
+    #
+    # @overload list_flow_associations(params = {})
+    # @param [Hash] params ({})
+    def list_flow_associations(params = {}, options = {})
+      req = build_request(:list_flow_associations, params)
+      req.send_request(options)
+    end
+
     # Provides information about the hours of operation for the specified
     # Amazon Connect instance.
     #
@@ -7470,6 +8820,8 @@ module Aws::Connect
     #   resp.hours_of_operation_summary_list[0].id #=> String
     #   resp.hours_of_operation_summary_list[0].arn #=> String
     #   resp.hours_of_operation_summary_list[0].name #=> String
+    #   resp.hours_of_operation_summary_list[0].last_modified_time #=> Time
+    #   resp.hours_of_operation_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListHoursOfOperations AWS API Documentation
@@ -7521,7 +8873,7 @@ module Aws::Connect
     # @example Response structure
     #
     #   resp.attributes #=> Array
-    #   resp.attributes[0].attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "HIGH_VOLUME_OUTBOUND", "ENHANCED_CONTACT_MONITORING"
+    #   resp.attributes[0].attribute_type #=> String, one of "INBOUND_CALLS", "OUTBOUND_CALLS", "CONTACTFLOW_LOGS", "CONTACT_LENS", "AUTO_RESOLVE_BEST_VOICES", "USE_CUSTOM_TTS_VOICES", "EARLY_MEDIA", "MULTI_PARTY_CONFERENCE", "HIGH_VOLUME_OUTBOUND", "ENHANCED_CONTACT_MONITORING", "ENHANCED_CHAT_MONITORING"
     #   resp.attributes[0].value #=> String
     #   resp.next_token #=> String
     #
@@ -7677,6 +9029,9 @@ module Aws::Connect
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
     #
+    # @option params [String] :integration_arn
+    #   The Amazon Resource Name (ARN) of the integration.
+    #
     # @return [Types::ListIntegrationAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListIntegrationAssociationsResponse#integration_association_summary_list #integration_association_summary_list} => Array&lt;Types::IntegrationAssociationSummary&gt;
@@ -7688,9 +9043,10 @@ module Aws::Connect
     #
     #   resp = client.list_integration_associations({
     #     instance_id: "InstanceId", # required
-    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, CASES_DOMAIN, APPLICATION
+    #     integration_type: "EVENT", # accepts EVENT, VOICE_ID, PINPOINT_APP, WISDOM_ASSISTANT, WISDOM_KNOWLEDGE_BASE, WISDOM_QUICK_RESPONSES, CASES_DOMAIN, APPLICATION, FILE_SCANNER
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     integration_arn: "ARN",
     #   })
     #
     # @example Response structure
@@ -7699,11 +9055,11 @@ module Aws::Connect
     #   resp.integration_association_summary_list[0].integration_association_id #=> String
     #   resp.integration_association_summary_list[0].integration_association_arn #=> String
     #   resp.integration_association_summary_list[0].instance_id #=> String
-    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "CASES_DOMAIN", "APPLICATION"
+    #   resp.integration_association_summary_list[0].integration_type #=> String, one of "EVENT", "VOICE_ID", "PINPOINT_APP", "WISDOM_ASSISTANT", "WISDOM_KNOWLEDGE_BASE", "WISDOM_QUICK_RESPONSES", "CASES_DOMAIN", "APPLICATION", "FILE_SCANNER"
     #   resp.integration_association_summary_list[0].integration_arn #=> String
     #   resp.integration_association_summary_list[0].source_application_url #=> String
     #   resp.integration_association_summary_list[0].source_application_name #=> String
-    #   resp.integration_association_summary_list[0].source_type #=> String, one of "SALESFORCE", "ZENDESK"
+    #   resp.integration_association_summary_list[0].source_type #=> String, one of "SALESFORCE", "ZENDESK", "CASES"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListIntegrationAssociations AWS API Documentation
@@ -7896,7 +9252,7 @@ module Aws::Connect
     #
     #   resp = client.list_phone_numbers({
     #     instance_id: "InstanceId", # required
-    #     phone_number_types: ["TOLL_FREE"], # accepts TOLL_FREE, DID, UIFN, SHARED, THIRD_PARTY_TF, THIRD_PARTY_DID
+    #     phone_number_types: ["TOLL_FREE"], # accepts TOLL_FREE, DID, UIFN, SHARED, THIRD_PARTY_TF, THIRD_PARTY_DID, SHORT_CODE
     #     phone_number_country_codes: ["AF"], # accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -7908,7 +9264,7 @@ module Aws::Connect
     #   resp.phone_number_summary_list[0].id #=> String
     #   resp.phone_number_summary_list[0].arn #=> String
     #   resp.phone_number_summary_list[0].phone_number #=> String
-    #   resp.phone_number_summary_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID", "UIFN", "SHARED", "THIRD_PARTY_TF", "THIRD_PARTY_DID"
+    #   resp.phone_number_summary_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID", "UIFN", "SHARED", "THIRD_PARTY_TF", "THIRD_PARTY_DID", "SHORT_CODE"
     #   resp.phone_number_summary_list[0].phone_number_country_code #=> String, one of "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BR", "IO", "VG", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CK", "CR", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "TL", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "PF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "CI", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "KP", "MP", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "CG", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "KR", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "VI", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "WF", "EH", "YE", "ZM", "ZW"
     #   resp.next_token #=> String
     #
@@ -7945,10 +9301,23 @@ module Aws::Connect
     #
     # @option params [String] :target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
-    #   distribution groups that phone numbers are claimed to. If `TargetArn`
-    #   input is not provided, this API lists numbers claimed to all the
-    #   Amazon Connect instances belonging to your account in the same Amazon
-    #   Web Services Region as the request.
+    #   distribution groups that phone number inbound traffic is routed
+    #   through. If both `TargetArn` and `InstanceId` input are not provided,
+    #   this API lists numbers claimed to all the Amazon Connect instances
+    #   belonging to your account in the same Amazon Web Services Region as
+    #   the request.
+    #
+    # @option params [String] :instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. If both `TargetArn` and `InstanceId` are
+    #   not provided, this API lists numbers claimed to all the Amazon Connect
+    #   instances belonging to your account in the same AWS Region as the
+    #   request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -7979,10 +9348,11 @@ module Aws::Connect
     #
     #   resp = client.list_phone_numbers_v2({
     #     target_arn: "ARN",
+    #     instance_id: "InstanceId",
     #     max_results: 1,
     #     next_token: "LargeNextToken",
     #     phone_number_country_codes: ["AF"], # accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
-    #     phone_number_types: ["TOLL_FREE"], # accepts TOLL_FREE, DID, UIFN, SHARED, THIRD_PARTY_TF, THIRD_PARTY_DID
+    #     phone_number_types: ["TOLL_FREE"], # accepts TOLL_FREE, DID, UIFN, SHARED, THIRD_PARTY_TF, THIRD_PARTY_DID, SHORT_CODE
     #     phone_number_prefix: "PhoneNumberPrefix",
     #   })
     #
@@ -7994,8 +9364,11 @@ module Aws::Connect
     #   resp.list_phone_numbers_summary_list[0].phone_number_arn #=> String
     #   resp.list_phone_numbers_summary_list[0].phone_number #=> String
     #   resp.list_phone_numbers_summary_list[0].phone_number_country_code #=> String, one of "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BR", "IO", "VG", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CK", "CR", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "TL", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "PF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "CI", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "KP", "MP", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "CG", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "KR", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "VI", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "WF", "EH", "YE", "ZM", "ZW"
-    #   resp.list_phone_numbers_summary_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID", "UIFN", "SHARED", "THIRD_PARTY_TF", "THIRD_PARTY_DID"
+    #   resp.list_phone_numbers_summary_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID", "UIFN", "SHARED", "THIRD_PARTY_TF", "THIRD_PARTY_DID", "SHORT_CODE"
     #   resp.list_phone_numbers_summary_list[0].target_arn #=> String
+    #   resp.list_phone_numbers_summary_list[0].instance_id #=> String
+    #   resp.list_phone_numbers_summary_list[0].phone_number_description #=> String
+    #   resp.list_phone_numbers_summary_list[0].source_phone_number_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersV2 AWS API Documentation
     #
@@ -8003,6 +9376,52 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_phone_numbers_v2(params = {}, options = {})
       req = build_request(:list_phone_numbers_v2, params)
+      req.send_request(options)
+    end
+
+    # Lists predefined attributes for the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListPredefinedAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPredefinedAttributesResponse#next_token #next_token} => String
+    #   * {Types::ListPredefinedAttributesResponse#predefined_attribute_summary_list #predefined_attribute_summary_list} => Array&lt;Types::PredefinedAttributeSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_predefined_attributes({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.predefined_attribute_summary_list #=> Array
+    #   resp.predefined_attribute_summary_list[0].name #=> String
+    #   resp.predefined_attribute_summary_list[0].last_modified_time #=> Time
+    #   resp.predefined_attribute_summary_list[0].last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPredefinedAttributes AWS API Documentation
+    #
+    # @overload list_predefined_attributes(params = {})
+    # @param [Hash] params ({})
+    def list_predefined_attributes(params = {}, options = {})
+      req = build_request(:list_predefined_attributes, params)
       req.send_request(options)
     end
 
@@ -8042,6 +9461,8 @@ module Aws::Connect
     #   resp.prompt_summary_list[0].id #=> String
     #   resp.prompt_summary_list[0].arn #=> String
     #   resp.prompt_summary_list[0].name #=> String
+    #   resp.prompt_summary_list[0].last_modified_time #=> Time
+    #   resp.prompt_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPrompts AWS API Documentation
@@ -8082,6 +9503,8 @@ module Aws::Connect
     #
     #   * {Types::ListQueueQuickConnectsResponse#next_token #next_token} => String
     #   * {Types::ListQueueQuickConnectsResponse#quick_connect_summary_list #quick_connect_summary_list} => Array&lt;Types::QuickConnectSummary&gt;
+    #   * {Types::ListQueueQuickConnectsResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::ListQueueQuickConnectsResponse#last_modified_region #last_modified_region} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -8102,6 +9525,10 @@ module Aws::Connect
     #   resp.quick_connect_summary_list[0].arn #=> String
     #   resp.quick_connect_summary_list[0].name #=> String
     #   resp.quick_connect_summary_list[0].quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER"
+    #   resp.quick_connect_summary_list[0].last_modified_time #=> Time
+    #   resp.quick_connect_summary_list[0].last_modified_region #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQueueQuickConnects AWS API Documentation
     #
@@ -8170,6 +9597,8 @@ module Aws::Connect
     #   resp.queue_summary_list[0].arn #=> String
     #   resp.queue_summary_list[0].name #=> String
     #   resp.queue_summary_list[0].queue_type #=> String, one of "STANDARD", "AGENT"
+    #   resp.queue_summary_list[0].last_modified_time #=> Time
+    #   resp.queue_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQueues AWS API Documentation
@@ -8202,8 +9631,8 @@ module Aws::Connect
     #   MaxResult size is 100.
     #
     # @option params [Array<String>] :quick_connect_types
-    #   The type of quick connect. In the Amazon Connect console, when you
-    #   create a quick connect, you are prompted to assign one of the
+    #   The type of quick connect. In the Amazon Connect admin website, when
+    #   you create a quick connect, you are prompted to assign one of the
     #   following types: Agent (USER), External (PHONE\_NUMBER), or Queue
     #   (QUEUE).
     #
@@ -8230,6 +9659,8 @@ module Aws::Connect
     #   resp.quick_connect_summary_list[0].arn #=> String
     #   resp.quick_connect_summary_list[0].name #=> String
     #   resp.quick_connect_summary_list[0].quick_connect_type #=> String, one of "USER", "QUEUE", "PHONE_NUMBER"
+    #   resp.quick_connect_summary_list[0].last_modified_time #=> Time
+    #   resp.quick_connect_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQuickConnects AWS API Documentation
@@ -8238,6 +9669,111 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_quick_connects(params = {}, options = {})
       req = build_request(:list_quick_connects, params)
+      req.send_request(options)
+    end
+
+    # Provides a list of analysis segments for a real-time analysis session.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [required, String] :output_type
+    #   The Contact Lens output type to be returned.
+    #
+    # @option params [required, Array<String>] :segment_types
+    #   Enum with segment types . Each value corresponds to a segment type
+    #   returned in the segments list of the API. Each segment type has its
+    #   own structure. Different channels may have different sets of supported
+    #   segment types.
+    #
+    # @return [Types::ListRealtimeContactAnalysisSegmentsV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRealtimeContactAnalysisSegmentsV2Response#channel #channel} => String
+    #   * {Types::ListRealtimeContactAnalysisSegmentsV2Response#status #status} => String
+    #   * {Types::ListRealtimeContactAnalysisSegmentsV2Response#segments #segments} => Array&lt;Types::RealtimeContactAnalysisSegment&gt;
+    #   * {Types::ListRealtimeContactAnalysisSegmentsV2Response#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_realtime_contact_analysis_segments_v2({
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #     max_results: 1,
+    #     next_token: "LargeNextToken",
+    #     output_type: "Raw", # required, accepts Raw, Redacted
+    #     segment_types: ["Transcript"], # required, accepts Transcript, Categories, Issues, Event, Attachments
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel #=> String, one of "VOICE", "CHAT"
+    #   resp.status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.segments #=> Array
+    #   resp.segments[0].transcript.id #=> String
+    #   resp.segments[0].transcript.participant_id #=> String
+    #   resp.segments[0].transcript.participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM", "CUSTOM_BOT", "SUPERVISOR"
+    #   resp.segments[0].transcript.display_name #=> String
+    #   resp.segments[0].transcript.content #=> String
+    #   resp.segments[0].transcript.content_type #=> String
+    #   resp.segments[0].transcript.time.absolute_time #=> Time
+    #   resp.segments[0].transcript.redaction.character_offsets #=> Array
+    #   resp.segments[0].transcript.redaction.character_offsets[0].begin_offset_char #=> Integer
+    #   resp.segments[0].transcript.redaction.character_offsets[0].end_offset_char #=> Integer
+    #   resp.segments[0].transcript.sentiment #=> String, one of "POSITIVE", "NEGATIVE", "NEUTRAL"
+    #   resp.segments[0].categories.matched_details #=> Hash
+    #   resp.segments[0].categories.matched_details["RealTimeContactAnalysisCategoryName"].points_of_interest #=> Array
+    #   resp.segments[0].categories.matched_details["RealTimeContactAnalysisCategoryName"].points_of_interest[0].transcript_items #=> Array
+    #   resp.segments[0].categories.matched_details["RealTimeContactAnalysisCategoryName"].points_of_interest[0].transcript_items[0].id #=> String
+    #   resp.segments[0].categories.matched_details["RealTimeContactAnalysisCategoryName"].points_of_interest[0].transcript_items[0].character_offsets.begin_offset_char #=> Integer
+    #   resp.segments[0].categories.matched_details["RealTimeContactAnalysisCategoryName"].points_of_interest[0].transcript_items[0].character_offsets.end_offset_char #=> Integer
+    #   resp.segments[0].issues.issues_detected #=> Array
+    #   resp.segments[0].issues.issues_detected[0].transcript_items #=> Array
+    #   resp.segments[0].issues.issues_detected[0].transcript_items[0].content #=> String
+    #   resp.segments[0].issues.issues_detected[0].transcript_items[0].id #=> String
+    #   resp.segments[0].issues.issues_detected[0].transcript_items[0].character_offsets.begin_offset_char #=> Integer
+    #   resp.segments[0].issues.issues_detected[0].transcript_items[0].character_offsets.end_offset_char #=> Integer
+    #   resp.segments[0].event.id #=> String
+    #   resp.segments[0].event.participant_id #=> String
+    #   resp.segments[0].event.participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM", "CUSTOM_BOT", "SUPERVISOR"
+    #   resp.segments[0].event.display_name #=> String
+    #   resp.segments[0].event.event_type #=> String
+    #   resp.segments[0].event.time.absolute_time #=> Time
+    #   resp.segments[0].attachments.id #=> String
+    #   resp.segments[0].attachments.participant_id #=> String
+    #   resp.segments[0].attachments.participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM", "CUSTOM_BOT", "SUPERVISOR"
+    #   resp.segments[0].attachments.display_name #=> String
+    #   resp.segments[0].attachments.attachments #=> Array
+    #   resp.segments[0].attachments.attachments[0].attachment_name #=> String
+    #   resp.segments[0].attachments.attachments[0].content_type #=> String
+    #   resp.segments[0].attachments.attachments[0].attachment_id #=> String
+    #   resp.segments[0].attachments.attachments[0].status #=> String, one of "APPROVED", "REJECTED", "IN_PROGRESS"
+    #   resp.segments[0].attachments.time.absolute_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRealtimeContactAnalysisSegmentsV2 AWS API Documentation
+    #
+    # @overload list_realtime_contact_analysis_segments_v2(params = {})
+    # @param [Hash] params ({})
+    def list_realtime_contact_analysis_segments_v2(params = {}, options = {})
+      req = build_request(:list_realtime_contact_analysis_segments_v2, params)
       req.send_request(options)
     end
 
@@ -8267,6 +9803,8 @@ module Aws::Connect
     #
     #   * {Types::ListRoutingProfileQueuesResponse#next_token #next_token} => String
     #   * {Types::ListRoutingProfileQueuesResponse#routing_profile_queue_config_summary_list #routing_profile_queue_config_summary_list} => Array&lt;Types::RoutingProfileQueueConfigSummary&gt;
+    #   * {Types::ListRoutingProfileQueuesResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::ListRoutingProfileQueuesResponse#last_modified_region #last_modified_region} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -8289,6 +9827,8 @@ module Aws::Connect
     #   resp.routing_profile_queue_config_summary_list[0].priority #=> Integer
     #   resp.routing_profile_queue_config_summary_list[0].delay #=> Integer
     #   resp.routing_profile_queue_config_summary_list[0].channel #=> String, one of "VOICE", "CHAT", "TASK"
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfileQueues AWS API Documentation
     #
@@ -8349,6 +9889,8 @@ module Aws::Connect
     #   resp.routing_profile_summary_list[0].id #=> String
     #   resp.routing_profile_summary_list[0].arn #=> String
     #   resp.routing_profile_summary_list[0].name #=> String
+    #   resp.routing_profile_summary_list[0].last_modified_time #=> Time
+    #   resp.routing_profile_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfiles AWS API Documentation
@@ -8396,7 +9938,7 @@ module Aws::Connect
     #   resp = client.list_rules({
     #     instance_id: "InstanceId", # required
     #     publish_status: "DRAFT", # accepts DRAFT, PUBLISHED
-    #     event_source_name: "OnPostCallAnalysisAvailable", # accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate, OnContactEvaluationSubmit, OnMetricDataUpdate
+    #     event_source_name: "OnPostCallAnalysisAvailable", # accepts OnPostCallAnalysisAvailable, OnRealTimeCallAnalysisAvailable, OnRealTimeChatAnalysisAvailable, OnPostChatAnalysisAvailable, OnZendeskTicketCreate, OnZendeskTicketStatusUpdate, OnSalesforceCaseCreate, OnContactEvaluationSubmit, OnMetricDataUpdate, OnCaseCreate, OnCaseUpdate
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -8407,10 +9949,10 @@ module Aws::Connect
     #   resp.rule_summary_list[0].name #=> String
     #   resp.rule_summary_list[0].rule_id #=> String
     #   resp.rule_summary_list[0].rule_arn #=> String
-    #   resp.rule_summary_list[0].event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate"
+    #   resp.rule_summary_list[0].event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnRealTimeChatAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate", "OnCaseCreate", "OnCaseUpdate"
     #   resp.rule_summary_list[0].publish_status #=> String, one of "DRAFT", "PUBLISHED"
     #   resp.rule_summary_list[0].action_summaries #=> Array
-    #   resp.rule_summary_list[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION"
+    #   resp.rule_summary_list[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "END_ASSOCIATED_TASKS"
     #   resp.rule_summary_list[0].created_time #=> Time
     #   resp.rule_summary_list[0].last_updated_time #=> Time
     #   resp.next_token #=> String
@@ -8478,19 +10020,24 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Returns a list of third party applications in a specific security
+    # Returns a list of third-party applications in a specific security
     # profile.
     #
     # @option params [required, String] :security_profile_id
-    #   The security profile identifier.
+    #   The identifier for the security profle.
     #
     # @option params [required, String] :instance_id
-    #   The instance identifier.
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :next_token
-    #   The token for the next set of results. The next set of results can be
-    #   retrieved by using the token value returned in the previous response
-    #   when making the next request.
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -8499,6 +10046,8 @@ module Aws::Connect
     #
     #   * {Types::ListSecurityProfileApplicationsResponse#applications #applications} => Array&lt;Types::Application&gt;
     #   * {Types::ListSecurityProfileApplicationsResponse#next_token #next_token} => String
+    #   * {Types::ListSecurityProfileApplicationsResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::ListSecurityProfileApplicationsResponse#last_modified_region #last_modified_region} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -8518,6 +10067,8 @@ module Aws::Connect
     #   resp.applications[0].application_permissions #=> Array
     #   resp.applications[0].application_permissions[0] #=> String
     #   resp.next_token #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileApplications AWS API Documentation
     #
@@ -8553,6 +10104,8 @@ module Aws::Connect
     #
     #   * {Types::ListSecurityProfilePermissionsResponse#permissions #permissions} => Array&lt;String&gt;
     #   * {Types::ListSecurityProfilePermissionsResponse#next_token #next_token} => String
+    #   * {Types::ListSecurityProfilePermissionsResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::ListSecurityProfilePermissionsResponse#last_modified_region #last_modified_region} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -8570,6 +10123,8 @@ module Aws::Connect
     #   resp.permissions #=> Array
     #   resp.permissions[0] #=> String
     #   resp.next_token #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfilePermissions AWS API Documentation
     #
@@ -8628,6 +10183,8 @@ module Aws::Connect
     #   resp.security_profile_summary_list[0].id #=> String
     #   resp.security_profile_summary_list[0].arn #=> String
     #   resp.security_profile_summary_list[0].name #=> String
+    #   resp.security_profile_summary_list[0].last_modified_time #=> Time
+    #   resp.security_profile_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfiles AWS API Documentation
@@ -8953,6 +10510,8 @@ module Aws::Connect
     #   resp.user_hierarchy_group_summary_list[0].id #=> String
     #   resp.user_hierarchy_group_summary_list[0].arn #=> String
     #   resp.user_hierarchy_group_summary_list[0].name #=> String
+    #   resp.user_hierarchy_group_summary_list[0].last_modified_time #=> Time
+    #   resp.user_hierarchy_group_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserHierarchyGroups AWS API Documentation
@@ -8961,6 +10520,60 @@ module Aws::Connect
     # @param [Hash] params ({})
     def list_user_hierarchy_groups(params = {}, options = {})
       req = build_request(:list_user_hierarchy_groups, params)
+      req.send_request(options)
+    end
+
+    # Lists proficiencies associated with a user.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user account.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListUserProficienciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUserProficienciesResponse#next_token #next_token} => String
+    #   * {Types::ListUserProficienciesResponse#user_proficiency_list #user_proficiency_list} => Array&lt;Types::UserProficiency&gt;
+    #   * {Types::ListUserProficienciesResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::ListUserProficienciesResponse#last_modified_region #last_modified_region} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_user_proficiencies({
+    #     instance_id: "InstanceId", # required
+    #     user_id: "UserId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.user_proficiency_list #=> Array
+    #   resp.user_proficiency_list[0].attribute_name #=> String
+    #   resp.user_proficiency_list[0].attribute_value #=> String
+    #   resp.user_proficiency_list[0].level #=> Float
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserProficiencies AWS API Documentation
+    #
+    # @overload list_user_proficiencies(params = {})
+    # @param [Hash] params ({})
+    def list_user_proficiencies(params = {}, options = {})
+      req = build_request(:list_user_proficiencies, params)
       req.send_request(options)
     end
 
@@ -9005,6 +10618,8 @@ module Aws::Connect
     #   resp.user_summary_list[0].id #=> String
     #   resp.user_summary_list[0].arn #=> String
     #   resp.user_summary_list[0].username #=> String
+    #   resp.user_summary_list[0].last_modified_time #=> Time
+    #   resp.user_summary_list[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUsers AWS API Documentation
@@ -9147,7 +10762,8 @@ module Aws::Connect
     # @option params [Array<String>] :allowed_monitor_capabilities
     #   Specify which monitoring actions the user is allowed to take. For
     #   example, whether the user is allowed to escalate from silent
-    #   monitoring to barge.
+    #   monitoring to barge. AllowedMonitorCapabilities is required if barge
+    #   is enabled.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -9188,6 +10804,37 @@ module Aws::Connect
     # @param [Hash] params ({})
     def monitor_contact(params = {}, options = {})
       req = build_request(:monitor_contact, params)
+      req.send_request(options)
+    end
+
+    # Allows pausing an ongoing task contact.
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   `instanceId` in the ARN of the instance.
+    #
+    # @option params [String] :contact_flow_id
+    #   The identifier of the flow.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.pause_contact({
+    #     contact_id: "ContactId", # required
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_id: "ContactFlowId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PauseContact AWS API Documentation
+    #
+    # @overload pause_contact(params = {})
+    # @param [Hash] params ({})
+    def pause_contact(params = {}, options = {})
+      req = build_request(:pause_contact, params)
       req.send_request(options)
     end
 
@@ -9241,7 +10888,7 @@ module Aws::Connect
     # the Amazon Web Services Region where the number was claimed.
     #
     # To release phone numbers from a traffic distribution group, use the
-    # `ReleasePhoneNumber` API, not the Amazon Connect console.
+    # `ReleasePhoneNumber` API, not the Amazon Connect admin website.
     #
     #  After releasing a phone number, the phone number enters into a
     # cooldown period of 30 days. It cannot be searched for or claimed again
@@ -9301,7 +10948,8 @@ module Aws::Connect
     end
 
     # Replicates an Amazon Connect instance in the specified Amazon Web
-    # Services Region.
+    # Services Region and copies configuration information for Amazon
+    # Connect resources across Amazon Web Services Regions.
     #
     # For more information about replicating an Amazon Connect instance, see
     # [Create a replica of your existing Amazon Connect instance][1] in the
@@ -9369,9 +11017,42 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Allows resuming a task contact in a paused state.
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   `instanceId` in the ARN of the instance.
+    #
+    # @option params [String] :contact_flow_id
+    #   The identifier of the flow.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.resume_contact({
+    #     contact_id: "ContactId", # required
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_id: "ContactFlowId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ResumeContact AWS API Documentation
+    #
+    # @overload resume_contact(params = {})
+    # @param [Hash] params ({})
+    def resume_contact(params = {}, options = {})
+      req = build_request(:resume_contact, params)
+      req.send_request(options)
+    end
+
     # When a contact is being recorded, and the recording has been suspended
-    # using SuspendContactRecording, this API resumes recording the call or
-    # screen.
+    # using SuspendContactRecording, this API resumes recording whatever
+    # recording is selected in the flow configuration: call, screen, or
+    # both. If only call recording or only screen recording is enabled, then
+    # it would resume.
     #
     # Voice and screen recordings are supported.
     #
@@ -9415,9 +11096,20 @@ module Aws::Connect
     # both Amazon Web Services Regions associated with the traffic
     # distribution group.
     #
-    # @option params [required, String] :target_arn
+    # @option params [String] :target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
-    #   distribution groups that phone numbers are claimed to.
+    #   distribution groups that phone number inbound traffic is routed
+    #   through. You must enter `InstanceId` or `TargetArn`.
+    #
+    # @option params [String] :instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   `TargetArn`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :phone_number_country_code
     #   The ISO country code.
@@ -9447,9 +11139,10 @@ module Aws::Connect
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_available_phone_numbers({
-    #     target_arn: "ARN", # required
+    #     target_arn: "ARN",
+    #     instance_id: "InstanceId",
     #     phone_number_country_code: "AF", # required, accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
-    #     phone_number_type: "TOLL_FREE", # required, accepts TOLL_FREE, DID, UIFN, SHARED, THIRD_PARTY_TF, THIRD_PARTY_DID
+    #     phone_number_type: "TOLL_FREE", # required, accepts TOLL_FREE, DID, UIFN, SHARED, THIRD_PARTY_TF, THIRD_PARTY_DID, SHORT_CODE
     #     phone_number_prefix: "PhoneNumberPrefix",
     #     max_results: 1,
     #     next_token: "LargeNextToken",
@@ -9461,7 +11154,7 @@ module Aws::Connect
     #   resp.available_numbers_list #=> Array
     #   resp.available_numbers_list[0].phone_number #=> String
     #   resp.available_numbers_list[0].phone_number_country_code #=> String, one of "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BR", "IO", "VG", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CK", "CR", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "TL", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "PF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "CI", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "KP", "MP", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "CG", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "KR", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "VI", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "WF", "EH", "YE", "ZM", "ZW"
-    #   resp.available_numbers_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID", "UIFN", "SHARED", "THIRD_PARTY_TF", "THIRD_PARTY_DID"
+    #   resp.available_numbers_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID", "UIFN", "SHARED", "THIRD_PARTY_TF", "THIRD_PARTY_DID", "SHORT_CODE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchAvailablePhoneNumbers AWS API Documentation
     #
@@ -9469,6 +11162,116 @@ module Aws::Connect
     # @param [Hash] params ({})
     def search_available_phone_numbers(params = {}, options = {})
       req = build_request(:search_available_phone_numbers, params)
+      req.send_request(options)
+    end
+
+    # Searches contacts in an Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of Amazon Connect instance. You can find the instance
+    #   ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, Types::SearchContactsTimeRange] :time_range
+    #   Time range that you want to search results.
+    #
+    # @option params [Types::SearchCriteria] :search_criteria
+    #   The search criteria to be used to return contacts.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Types::Sort] :sort
+    #   Specifies a field to sort by and a sort order.
+    #
+    # @return [Types::SearchContactsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchContactsResponse#contacts #contacts} => Array&lt;Types::ContactSearchSummary&gt;
+    #   * {Types::SearchContactsResponse#next_token #next_token} => String
+    #   * {Types::SearchContactsResponse#total_count #total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_contacts({
+    #     instance_id: "InstanceId", # required
+    #     time_range: { # required
+    #       type: "INITIATION_TIMESTAMP", # required, accepts INITIATION_TIMESTAMP, SCHEDULED_TIMESTAMP, CONNECTED_TO_AGENT_TIMESTAMP, DISCONNECT_TIMESTAMP
+    #       start_time: Time.now, # required
+    #       end_time: Time.now, # required
+    #     },
+    #     search_criteria: {
+    #       agent_ids: ["AgentResourceId"],
+    #       agent_hierarchy_groups: {
+    #         l1_ids: ["HierarchyGroupId"],
+    #         l2_ids: ["HierarchyGroupId"],
+    #         l3_ids: ["HierarchyGroupId"],
+    #         l4_ids: ["HierarchyGroupId"],
+    #         l5_ids: ["HierarchyGroupId"],
+    #       },
+    #       channels: ["VOICE"], # accepts VOICE, CHAT, TASK
+    #       contact_analysis: {
+    #         transcript: {
+    #           criteria: [ # required
+    #             {
+    #               participant_role: "AGENT", # required, accepts AGENT, CUSTOMER, SYSTEM, CUSTOM_BOT, SUPERVISOR
+    #               search_text: ["SearchText"], # required
+    #               match_type: "MATCH_ALL", # required, accepts MATCH_ALL, MATCH_ANY
+    #             },
+    #           ],
+    #           match_type: "MATCH_ALL", # accepts MATCH_ALL, MATCH_ANY
+    #         },
+    #       },
+    #       initiation_methods: ["INBOUND"], # accepts INBOUND, OUTBOUND, TRANSFER, QUEUE_TRANSFER, CALLBACK, API, DISCONNECT, MONITOR, EXTERNAL_OUTBOUND
+    #       queue_ids: ["QueueId"],
+    #       searchable_contact_attributes: {
+    #         criteria: [ # required
+    #           {
+    #             key: "SearchableContactAttributeKey", # required
+    #             values: ["SearchableContactAttributeValue"], # required
+    #           },
+    #         ],
+    #         match_type: "MATCH_ALL", # accepts MATCH_ALL, MATCH_ANY
+    #       },
+    #     },
+    #     max_results: 1,
+    #     next_token: "LargeNextToken",
+    #     sort: {
+    #       field_name: "INITIATION_TIMESTAMP", # required, accepts INITIATION_TIMESTAMP, SCHEDULED_TIMESTAMP, CONNECTED_TO_AGENT_TIMESTAMP, DISCONNECT_TIMESTAMP, INITIATION_METHOD, CHANNEL
+    #       order: "ASCENDING", # required, accepts ASCENDING, DESCENDING
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contacts #=> Array
+    #   resp.contacts[0].arn #=> String
+    #   resp.contacts[0].id #=> String
+    #   resp.contacts[0].initial_contact_id #=> String
+    #   resp.contacts[0].previous_contact_id #=> String
+    #   resp.contacts[0].initiation_method #=> String, one of "INBOUND", "OUTBOUND", "TRANSFER", "QUEUE_TRANSFER", "CALLBACK", "API", "DISCONNECT", "MONITOR", "EXTERNAL_OUTBOUND"
+    #   resp.contacts[0].channel #=> String, one of "VOICE", "CHAT", "TASK"
+    #   resp.contacts[0].queue_info.id #=> String
+    #   resp.contacts[0].queue_info.enqueue_timestamp #=> Time
+    #   resp.contacts[0].agent_info.id #=> String
+    #   resp.contacts[0].agent_info.connected_to_agent_timestamp #=> Time
+    #   resp.contacts[0].initiation_timestamp #=> Time
+    #   resp.contacts[0].disconnect_timestamp #=> Time
+    #   resp.contacts[0].scheduled_timestamp #=> Time
+    #   resp.next_token #=> String
+    #   resp.total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchContacts AWS API Documentation
+    #
+    # @overload search_contacts(params = {})
+    # @param [Hash] params ({})
+    def search_contacts(params = {}, options = {})
+      req = build_request(:search_contacts, params)
       req.send_request(options)
     end
 
@@ -9568,6 +11371,8 @@ module Aws::Connect
     #   resp.hours_of_operations[0].config[0].end_time.minutes #=> Integer
     #   resp.hours_of_operations[0].tags #=> Hash
     #   resp.hours_of_operations[0].tags["TagKey"] #=> String
+    #   resp.hours_of_operations[0].last_modified_time #=> Time
+    #   resp.hours_of_operations[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -9577,6 +11382,76 @@ module Aws::Connect
     # @param [Hash] params ({})
     def search_hours_of_operations(params = {}, options = {})
       req = build_request(:search_hours_of_operations, params)
+      req.send_request(options)
+    end
+
+    # Predefined attributes that meet certain criteria.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::PredefinedAttributeSearchCriteria] :search_criteria
+    #   The search criteria to be used to return predefined attributes.
+    #
+    # @return [Types::SearchPredefinedAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchPredefinedAttributesResponse#predefined_attributes #predefined_attributes} => Array&lt;Types::PredefinedAttribute&gt;
+    #   * {Types::SearchPredefinedAttributesResponse#next_token #next_token} => String
+    #   * {Types::SearchPredefinedAttributesResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_predefined_attributes({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive PredefinedAttributeSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive PredefinedAttributeSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.predefined_attributes #=> Array
+    #   resp.predefined_attributes[0].name #=> String
+    #   resp.predefined_attributes[0].values.string_list #=> Array
+    #   resp.predefined_attributes[0].values.string_list[0] #=> String
+    #   resp.predefined_attributes[0].last_modified_time #=> Time
+    #   resp.predefined_attributes[0].last_modified_region #=> String
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchPredefinedAttributes AWS API Documentation
+    #
+    # @overload search_predefined_attributes(params = {})
+    # @param [Hash] params ({})
+    def search_predefined_attributes(params = {}, options = {})
+      req = build_request(:search_predefined_attributes, params)
       req.send_request(options)
     end
 
@@ -9669,6 +11544,8 @@ module Aws::Connect
     #   resp.prompts[0].description #=> String
     #   resp.prompts[0].tags #=> Hash
     #   resp.prompts[0].tags["TagKey"] #=> String
+    #   resp.prompts[0].last_modified_time #=> Time
+    #   resp.prompts[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -9784,6 +11661,8 @@ module Aws::Connect
     #   resp.queues[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.queues[0].tags #=> Hash
     #   resp.queues[0].tags["TagKey"] #=> String
+    #   resp.queues[0].last_modified_time #=> Time
+    #   resp.queues[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -9891,6 +11770,8 @@ module Aws::Connect
     #   resp.quick_connects[0].quick_connect_config.phone_config.phone_number #=> String
     #   resp.quick_connects[0].tags #=> Hash
     #   resp.quick_connects[0].tags["TagKey"] #=> String
+    #   resp.quick_connects[0].last_modified_time #=> Time
+    #   resp.quick_connects[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -10071,6 +11952,9 @@ module Aws::Connect
     #   resp.routing_profiles[0].number_of_associated_queues #=> Integer
     #   resp.routing_profiles[0].number_of_associated_users #=> Integer
     #   resp.routing_profiles[0].agent_availability_timer #=> String, one of "TIME_SINCE_LAST_ACTIVITY", "TIME_SINCE_LAST_INBOUND"
+    #   resp.routing_profiles[0].last_modified_time #=> Time
+    #   resp.routing_profiles[0].last_modified_region #=> String
+    #   resp.routing_profiles[0].is_default #=> Boolean
     #   resp.next_token #=> String
     #   resp.approximate_total_count #=> Integer
     #
@@ -10201,7 +12085,7 @@ module Aws::Connect
     #
     #  </note>
     #
-    # @option params [String] :instance_id
+    # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
@@ -10246,7 +12130,7 @@ module Aws::Connect
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_users({
-    #     instance_id: "InstanceId",
+    #     instance_id: "InstanceId", # required
     #     next_token: "NextToken2500",
     #     max_results: 1,
     #     search_filter: {
@@ -10398,6 +12282,90 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Processes chat integration events from Amazon Web Services or external
+    # integrations to Amazon Connect. A chat integration event includes:
+    #
+    # * SourceId, DestinationId, and Subtype: a set of identifiers, uniquely
+    #   representing a chat
+    #
+    # * ChatEvent: details of the chat action to perform such as sending a
+    #   message, event, or disconnecting from a chat
+    #
+    # When a chat integration event is sent with chat identifiers that do
+    # not map to an active chat contact, a new chat contact is also created
+    # before handling chat action.
+    #
+    # Access to this API is currently restricted to Amazon Pinpoint for
+    # supporting SMS integration.
+    #
+    # @option params [required, String] :source_id
+    #   External identifier of chat customer participant, used in part to
+    #   uniquely identify a chat. For SMS, this is the E164 phone number of
+    #   the chat customer participant.
+    #
+    # @option params [required, String] :destination_id
+    #   Chat system identifier, used in part to uniquely identify chat. This
+    #   is associated with the Amazon Connect instance and flow to be used to
+    #   start chats. For SMS, this is the phone number destination of inbound
+    #   SMS messages represented by an Amazon Pinpoint phone number ARN.
+    #
+    # @option params [String] :subtype
+    #   Classification of a channel. This is used in part to uniquely identify
+    #   chat.
+    #
+    #   Valid value: `["connect:sms"]`
+    #
+    # @option params [required, Types::ChatEvent] :event
+    #   Chat integration event payload
+    #
+    # @option params [Types::NewSessionDetails] :new_session_details
+    #   Contact properties to apply when starting a new chat. If the
+    #   integration event is handled with an existing chat, this is ignored.
+    #
+    # @return [Types::SendChatIntegrationEventResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendChatIntegrationEventResponse#initial_contact_id #initial_contact_id} => String
+    #   * {Types::SendChatIntegrationEventResponse#new_chat_created #new_chat_created} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_chat_integration_event({
+    #     source_id: "SourceId", # required
+    #     destination_id: "DestinationId", # required
+    #     subtype: "Subtype",
+    #     event: { # required
+    #       type: "DISCONNECT", # required, accepts DISCONNECT, MESSAGE, EVENT
+    #       content_type: "ChatContentType",
+    #       content: "ChatContent",
+    #     },
+    #     new_session_details: {
+    #       supported_messaging_content_types: ["SupportedMessagingContentType"],
+    #       participant_details: {
+    #         display_name: "DisplayName", # required
+    #       },
+    #       attributes: {
+    #         "AttributeName" => "AttributeValue",
+    #       },
+    #       streaming_configuration: {
+    #         streaming_endpoint_arn: "ChatStreamingEndpointARN", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.initial_contact_id #=> String
+    #   resp.new_chat_created #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SendChatIntegrationEvent AWS API Documentation
+    #
+    # @overload send_chat_integration_event(params = {})
+    # @param [Hash] params ({})
+    def send_chat_integration_event(params = {}, options = {})
+      req = build_request(:send_chat_integration_event, params)
+      req.send_request(options)
+    end
+
     # Initiates a flow to start a new chat for the customer. Response of
     # this API provides a token required to obtain credentials from the
     # [CreateParticipantConnection][1] API in the Amazon Connect Participant
@@ -10441,11 +12409,11 @@ module Aws::Connect
     #
     # @option params [required, String] :contact_flow_id
     #   The identifier of the flow for initiating the chat. To see the
-    #   ContactFlowId in the Amazon Connect console user interface, on the
-    #   navigation menu go to **Routing**, **Contact Flows**. Choose the flow.
-    #   On the flow page, under the name of the flow, choose **Show additional
-    #   flow information**. The ContactFlowId is the last part of the ARN,
-    #   shown here in bold:
+    #   ContactFlowId in the Amazon Connect admin website, on the navigation
+    #   menu go to **Routing**, **Contact Flows**. Choose the flow. On the
+    #   flow page, under the name of the flow, choose **Show additional flow
+    #   information**. The ContactFlowId is the last part of the ARN, shown
+    #   here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #
@@ -10522,6 +12490,24 @@ module Aws::Connect
     #
     #    </note>
     #
+    # @option params [Hash<String,Types::SegmentAttributeValue>] :segment_attributes
+    #   A set of system defined key-value pairs stored on individual contact
+    #   segments using an attribute map. The attributes are standard Amazon
+    #   Connect attributes. They can be accessed in flows.
+    #
+    #   Attribute keys can include only alphanumeric, -, and \_.
+    #
+    #   This field can be used to show channel subtype, such as
+    #   `connect:Guide`.
+    #
+    #   <note markdown="1"> The types `application/vnd.amazonaws.connect.message.interactive` and
+    #   `application/vnd.amazonaws.connect.message.interactive.response` must
+    #   be present in the SupportedMessagingContentTypes field of this API in
+    #   order to set `SegmentAttributes` as \\\{` "connect:Subtype":
+    #   \{"valueString" : "connect:Guide" \}\}`.
+    #
+    #    </note>
+    #
     # @return [Types::StartChatContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartChatContactResponse#contact_id #contact_id} => String
@@ -10552,6 +12538,11 @@ module Aws::Connect
     #       source_contact_id: "ContactId",
     #     },
     #     related_contact_id: "ContactId",
+    #     segment_attributes: {
+    #       "SegmentAttributeName" => {
+    #         value_string: "SegmentAttributeValueString",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -10797,16 +12788,39 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
     # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#outbound-communications-quotas
     #
+    # @option params [String] :name
+    #   The name of a voice contact that is shown to an agent in the Contact
+    #   Control Panel (CCP).
+    #
+    # @option params [String] :description
+    #   A description of the voice contact that is shown to an agent in the
+    #   Contact Control Panel (CCP).
+    #
+    # @option params [Hash<String,Types::Reference>] :references
+    #   A formatted URL that is shown to an agent in the Contact Control Panel
+    #   (CCP). Contacts can have the following reference types at the time of
+    #   creation: `URL` \| `NUMBER` \| `STRING` \| `DATE` \| `EMAIL`.
+    #   `ATTACHMENT` is not a supported reference type during voice contact
+    #   creation.
+    #
+    # @option params [String] :related_contact_id
+    #   The `contactId` that is related to this contact. Linking voice, task,
+    #   or chat by using `RelatedContactID` copies over contact attributes
+    #   from the related contact to the new contact. All updates to
+    #   user-defined attributes in the new contact are limited to the
+    #   individual contact ID. There are no limits to the number of contacts
+    #   that can be linked by using `RelatedContactId`.
+    #
     # @option params [required, String] :destination_phone_number
     #   The phone number of the customer, in E.164 format.
     #
     # @option params [required, String] :contact_flow_id
     #   The identifier of the flow for the outbound call. To see the
-    #   ContactFlowId in the Amazon Connect console user interface, on the
-    #   navigation menu go to **Routing**, **Contact Flows**. Choose the flow.
-    #   On the flow page, under the name of the flow, choose **Show additional
-    #   flow information**. The ContactFlowId is the last part of the ARN,
-    #   shown here in bold:
+    #   ContactFlowId in the Amazon Connect admin website, on the navigation
+    #   menu go to **Routing**, **Contact Flows**. Choose the flow. On the
+    #   flow page, under the name of the flow, choose **Show additional flow
+    #   information**. The ContactFlowId is the last part of the ARN, shown
+    #   here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #
@@ -10873,6 +12887,15 @@ module Aws::Connect
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_outbound_voice_contact({
+    #     name: "Name",
+    #     description: "Description",
+    #     references: {
+    #       "ReferenceKey" => {
+    #         value: "ReferenceValue", # required
+    #         type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
+    #       },
+    #     },
+    #     related_contact_id: "ContactId",
     #     destination_phone_number: "PhoneNumber", # required
     #     contact_flow_id: "ContactFlowId", # required
     #     instance_id: "InstanceId", # required
@@ -10966,11 +12989,11 @@ module Aws::Connect
     #
     # @option params [String] :contact_flow_id
     #   The identifier of the flow for initiating the tasks. To see the
-    #   ContactFlowId in the Amazon Connect console user interface, on the
-    #   navigation menu go to **Routing**, **Contact Flows**. Choose the flow.
-    #   On the flow page, under the name of the flow, choose **Show additional
-    #   flow information**. The ContactFlowId is the last part of the ARN,
-    #   shown here in bold:
+    #   ContactFlowId in the Amazon Connect admin website, on the navigation
+    #   menu go to **Routing**, **Contact Flows**. Choose the flow. On the
+    #   flow page, under the name of the flow, choose **Show additional flow
+    #   information**. The ContactFlowId is the last part of the ARN, shown
+    #   here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #
@@ -11088,6 +13111,137 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Places an inbound in-app, web, or video call to a contact, and then
+    # initiates the flow. It performs the actions in the flow that are
+    # specified (in ContactFlowId) and present in the Amazon Connect
+    # instance (specified as InstanceId).
+    #
+    # @option params [Hash<String,String>] :attributes
+    #   A custom key-value pair using an attribute map. The attributes are
+    #   standard Amazon Connect attributes, and can be accessed in flows just
+    #   like any other contact attributes.
+    #
+    #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
+    #   contact. Attribute keys can include only alphanumeric, -, and \_
+    #   characters.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   The token is valid for 7 days after creation. If a contact is already
+    #   started, the contact ID is returned.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [required, String] :contact_flow_id
+    #   The identifier of the flow for the call. To see the ContactFlowId in
+    #   the Amazon Connect admin website, on the navigation menu go to
+    #   **Routing**, **Contact Flows**. Choose the flow. On the flow page,
+    #   under the name of the flow, choose **Show additional flow
+    #   information**. The ContactFlowId is the last part of the ARN, shown
+    #   here in bold:
+    #
+    #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [Types::AllowedCapabilities] :allowed_capabilities
+    #   Information about the video sharing capabilities of the participants
+    #   (customer, agent).
+    #
+    # @option params [required, Types::ParticipantDetails] :participant_details
+    #   The customer's details.
+    #
+    # @option params [String] :related_contact_id
+    #   The unique identifier for an Amazon Connect contact. This identifier
+    #   is related to the contact starting.
+    #
+    # @option params [Hash<String,Types::Reference>] :references
+    #   A formatted URL that is shown to an agent in the Contact Control Panel
+    #   (CCP). Tasks can have the following reference types at the time of
+    #   creation: `URL` \| `NUMBER` \| `STRING` \| `DATE` \| `EMAIL`.
+    #   `ATTACHMENT` is not a supported reference type during task creation.
+    #
+    # @option params [String] :description
+    #   A description of the task that is shown to an agent in the Contact
+    #   Control Panel (CCP).
+    #
+    # @return [Types::StartWebRTCContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartWebRTCContactResponse#connection_data #connection_data} => Types::ConnectionData
+    #   * {Types::StartWebRTCContactResponse#contact_id #contact_id} => String
+    #   * {Types::StartWebRTCContactResponse#participant_id #participant_id} => String
+    #   * {Types::StartWebRTCContactResponse#participant_token #participant_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_web_rtc_contact({
+    #     attributes: {
+    #       "AttributeName" => "AttributeValue",
+    #     },
+    #     client_token: "ClientToken",
+    #     contact_flow_id: "ContactFlowId", # required
+    #     instance_id: "InstanceId", # required
+    #     allowed_capabilities: {
+    #       customer: {
+    #         video: "SEND", # accepts SEND
+    #       },
+    #       agent: {
+    #         video: "SEND", # accepts SEND
+    #       },
+    #     },
+    #     participant_details: { # required
+    #       display_name: "DisplayName", # required
+    #     },
+    #     related_contact_id: "ContactId",
+    #     references: {
+    #       "ReferenceKey" => {
+    #         value: "ReferenceValue", # required
+    #         type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
+    #       },
+    #     },
+    #     description: "Description",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_data.attendee.attendee_id #=> String
+    #   resp.connection_data.attendee.join_token #=> String
+    #   resp.connection_data.meeting.media_region #=> String
+    #   resp.connection_data.meeting.media_placement.audio_host_url #=> String
+    #   resp.connection_data.meeting.media_placement.audio_fallback_url #=> String
+    #   resp.connection_data.meeting.media_placement.signaling_url #=> String
+    #   resp.connection_data.meeting.media_placement.turn_control_url #=> String
+    #   resp.connection_data.meeting.media_placement.event_ingestion_url #=> String
+    #   resp.connection_data.meeting.meeting_features.audio.echo_reduction #=> String, one of "AVAILABLE", "UNAVAILABLE"
+    #   resp.connection_data.meeting.meeting_id #=> String
+    #   resp.contact_id #=> String
+    #   resp.participant_id #=> String
+    #   resp.participant_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartWebRTCContact AWS API Documentation
+    #
+    # @overload start_web_rtc_contact(params = {})
+    # @param [Hash] params ({})
+    def start_web_rtc_contact(params = {}, options = {})
+      req = build_request(:start_web_rtc_contact, params)
+      req.send_request(options)
+    end
+
     # Ends the specified contact. This call does not work for voice contacts
     # that use the following initiation methods:
     #
@@ -11111,6 +13265,10 @@ module Aws::Connect
     #
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
+    # @option params [Types::DisconnectReason] :disconnect_reason
+    #   The reason a contact can be disconnected. Only Amazon Connect outbound
+    #   campaigns can provide this field.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -11118,6 +13276,9 @@ module Aws::Connect
     #   resp = client.stop_contact({
     #     contact_id: "ContactId", # required
     #     instance_id: "InstanceId", # required
+    #     disconnect_reason: {
+    #       code: "DisconnectReasonCode",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StopContact AWS API Documentation
@@ -11281,10 +13442,12 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # When a contact is being recorded, this API suspends recording the call
-    # or screen. For example, you might suspend the call or screen recording
-    # while collecting sensitive information, such as a credit card number.
-    # Then use ResumeContactRecording to restart recording.
+    # When a contact is being recorded, this API suspends recording whatever
+    # is selected in the flow configuration: call, screen, or both. If only
+    # call recording or only screen recording is enabled, then it would be
+    # suspended. For example, you might suspend the screen recording while
+    # collecting sensitive information, such as a credit card number. Then
+    # use ResumeContactRecording to restart recording the screen.
     #
     # The period of time that the recording is suspended is filled with
     # silence in the final recording.
@@ -11325,6 +13488,54 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Adds the specified tags to the contact resource. For more information
+    # about this API is used, see [Set up granular billing for a detailed
+    # view of your Amazon Connect usage][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/granular-billing.html
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags to be assigned to the contact resource. For example, \\\{
+    #   "Tags": \\\{"key1":"value1", "key2":"value2"\\} \\}.
+    #
+    #   <note markdown="1"> Authorization is not supported by this tag.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_contact({
+    #     contact_id: "ContactId", # required
+    #     instance_id: "InstanceId", # required
+    #     tags: { # required
+    #       "ContactTagKey" => "ContactTagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TagContact AWS API Documentation
+    #
+    # @overload tag_contact(params = {})
+    # @param [Hash] params ({})
+    def tag_contact(params = {}, options = {})
+      req = build_request(:tag_contact, params)
+      req.send_request(options)
+    end
+
     # Adds the specified tags to the specified resource.
     #
     # Some of the supported resource types are agents, routing profiles,
@@ -11345,7 +13556,7 @@ module Aws::Connect
     #
     # @option params [required, Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
-    #   For example, \\\{ "tags": \\\{"key1":"value1",
+    #   For example, \\\{ "Tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -11449,6 +13660,48 @@ module Aws::Connect
     # @param [Hash] params ({})
     def transfer_contact(params = {}, options = {})
       req = build_request(:transfer_contact, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified tags from the contact resource. For more
+    # information about this API is used, see [Set up granular billing for a
+    # detailed view of your Amazon Connect usage][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/granular-billing.html
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of tag keys. Existing tags on the contact whose keys are
+    #   members of this list will be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_contact({
+    #     contact_id: "ContactId", # required
+    #     instance_id: "InstanceId", # required
+    #     tag_keys: ["ContactTagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UntagContact AWS API Documentation
+    #
+    # @overload untag_contact(params = {})
+    # @param [Hash] params ({})
+    def untag_contact(params = {}, options = {})
+      req = build_request(:untag_contact, params)
       req.send_request(options)
     end
 
@@ -11929,6 +14182,68 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # This API is in preview release for Amazon Connect and is subject to
+    # change.
+    #
+    # Updates routing priority and age on the contact (**QueuePriority** and
+    # **QueueTimeAdjustmentInSeconds**). These properties can be used to
+    # change a customer's position in the queue. For example, you can move
+    # a contact to the back of the queue by setting a lower routing priority
+    # relative to other contacts in queue; or you can move a contact to the
+    # front of the queue by increasing the routing age which will make the
+    # contact look artificially older and therefore higher up in the
+    # first-in-first-out routing order. Note that adjusting the routing age
+    # of a contact affects only its position in queue, and not its actual
+    # queue wait time as reported through metrics. These properties can also
+    # be updated by using [the Set routing priority / age flow block][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/change-routing-priority.html
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #
+    # @option params [Integer] :queue_time_adjustment_seconds
+    #   The number of seconds to add or subtract from the contact's routing
+    #   age. Contacts are routed to agents on a first-come, first-serve basis.
+    #   This means that changing their amount of time in queue compared to
+    #   others also changes their position in queue.
+    #
+    # @option params [Integer] :queue_priority
+    #   Priority of the contact in the queue. The default priority for new
+    #   contacts is 5. You can raise the priority of a contact compared to
+    #   other contacts in the queue by assigning them a higher priority, such
+    #   as 1 or 2.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_contact_routing_data({
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #     queue_time_adjustment_seconds: 1,
+    #     queue_priority: 1,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactRoutingData AWS API Documentation
+    #
+    # @overload update_contact_routing_data(params = {})
+    # @param [Hash] params ({})
+    def update_contact_routing_data(params = {}, options = {})
+      req = build_request(:update_contact_routing_data, params)
+      req.send_request(options)
+    end
+
     # Updates the scheduled time of a task contact that is already
     # scheduled.
     #
@@ -12211,7 +14526,7 @@ module Aws::Connect
     #
     #   resp = client.update_instance_attribute({
     #     instance_id: "InstanceId", # required
-    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING
+    #     attribute_type: "INBOUND_CALLS", # required, accepts INBOUND_CALLS, OUTBOUND_CALLS, CONTACTFLOW_LOGS, CONTACT_LENS, AUTO_RESOLVE_BEST_VOICES, USE_CUSTOM_TTS_VOICES, EARLY_MEDIA, MULTI_PARTY_CONFERENCE, HIGH_VOLUME_OUTBOUND, ENHANCED_CONTACT_MONITORING, ENHANCED_CHAT_MONITORING
     #     value: "InstanceAttributeValue", # required
     #   })
     #
@@ -12380,9 +14695,20 @@ module Aws::Connect
     # @option params [required, String] :phone_number_id
     #   A unique identifier for the phone number.
     #
-    # @option params [required, String] :target_arn
+    # @option params [String] :target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
-    #   distribution groups that phone numbers are claimed to.
+    #   distribution groups that phone number inbound traffic is routed
+    #   through. You must enter `InstanceId` or `TargetArn`.
+    #
+    # @option params [String] :instance_id
+    #   The identifier of the Amazon Connect instance that phone numbers are
+    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
+    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   `TargetArn`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -12406,7 +14732,8 @@ module Aws::Connect
     #
     #   resp = client.update_phone_number({
     #     phone_number_id: "PhoneNumberId", # required
-    #     target_arn: "ARN", # required
+    #     target_arn: "ARN",
+    #     instance_id: "InstanceId",
     #     client_token: "ClientToken",
     #   })
     #
@@ -12471,6 +14798,40 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates a predefined attribute for the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the predefined attribute.
+    #
+    # @option params [Types::PredefinedAttributeValues] :values
+    #   The values of the predefined attribute.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_predefined_attribute({
+    #     instance_id: "InstanceId", # required
+    #     name: "PredefinedAttributeName", # required
+    #     values: {
+    #       string_list: ["PredefinedAttributeStringValue"],
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePredefinedAttribute AWS API Documentation
+    #
+    # @overload update_predefined_attribute(params = {})
+    # @param [Hash] params ({})
+    def update_predefined_attribute(params = {}, options = {})
+      req = build_request(:update_predefined_attribute, params)
+      req.send_request(options)
+    end
+
     # Updates a prompt.
     #
     # @option params [required, String] :instance_id
@@ -12491,7 +14852,13 @@ module Aws::Connect
     #   A description of the prompt.
     #
     # @option params [String] :s3_uri
-    #   The URI for the S3 bucket where the prompt is stored.
+    #   The URI for the S3 bucket where the prompt is stored. You can provide
+    #   S3 pre-signed URLs returned by the [GetPromptFile][1] API instead of
+    #   providing S3 URIs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html
     #
     # @return [Types::UpdatePromptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13093,7 +15460,7 @@ module Aws::Connect
     #     function: "RuleFunction", # required
     #     actions: [ # required
     #       {
-    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION
+    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, END_ASSOCIATED_TASKS
     #         task_action: {
     #           name: "TaskNameExpression", # required
     #           description: "TaskDescriptionExpression",
@@ -13121,6 +15488,37 @@ module Aws::Connect
     #             },
     #             user_ids: ["UserId"],
     #           },
+    #         },
+    #         create_case_action: {
+    #           fields: [ # required
+    #             {
+    #               id: "FieldValueId", # required
+    #               value: { # required
+    #                 boolean_value: false,
+    #                 double_value: 1.0,
+    #                 empty_value: {
+    #                 },
+    #                 string_value: "FieldStringValue",
+    #               },
+    #             },
+    #           ],
+    #           template_id: "TemplateId", # required
+    #         },
+    #         update_case_action: {
+    #           fields: [ # required
+    #             {
+    #               id: "FieldValueId", # required
+    #               value: { # required
+    #                 boolean_value: false,
+    #                 double_value: 1.0,
+    #                 empty_value: {
+    #                 },
+    #                 string_value: "FieldStringValue",
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         end_associated_tasks_action: {
     #         },
     #       },
     #     ],
@@ -13172,7 +15570,7 @@ module Aws::Connect
     #   This API is in preview release for Amazon Connect and is subject to
     #   change.
     #
-    #   A list of the third party application's metadata.
+    #   A list of the third-party application's metadata.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -13640,6 +16038,45 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates the properties associated with the proficiencies of a user.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user account.
+    #
+    # @option params [required, Array<Types::UserProficiency>] :user_proficiencies
+    #   The proficiencies to be updated for the user. Proficiencies must first
+    #   be associated to the user. You can do this using
+    #   AssociateUserProficiencies API.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_user_proficiencies({
+    #     instance_id: "InstanceId", # required
+    #     user_id: "UserId", # required
+    #     user_proficiencies: [ # required
+    #       {
+    #         attribute_name: "PredefinedAttributeName", # required
+    #         attribute_value: "PredefinedAttributeStringValue", # required
+    #         level: 1.0, # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserProficiencies AWS API Documentation
+    #
+    # @overload update_user_proficiencies(params = {})
+    # @param [Hash] params ({})
+    def update_user_proficiencies(params = {}, options = {})
+      req = build_request(:update_user_proficiencies, params)
+      req.send_request(options)
+    end
+
     # Assigns the specified routing profile to the specified user.
     #
     # @option params [required, String] :routing_profile_id
@@ -13830,7 +16267,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.150.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

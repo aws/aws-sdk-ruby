@@ -1276,6 +1276,13 @@
       },
       "exception":true
     },
+    "IpAddressType":{
+      "type":"string",
+      "enum":[
+        "IPV4",
+        "DUAL_STACK"
+      ]
+    },
     "IsDefault":{"type":"boolean"},
     "KmsKeyArn":{
       "type":"string",
@@ -1456,7 +1463,8 @@
       "type":"structure",
       "members":{
         "EgressConfiguration":{"shape":"EgressConfiguration"},
-        "IngressConfiguration":{"shape":"IngressConfiguration"}
+        "IngressConfiguration":{"shape":"IngressConfiguration"},
+        "IpAddressType":{"shape":"IpAddressType"}
       }
     },
     "NextToken":{
@@ -1605,7 +1613,9 @@
         "GO_1",
         "DOTNET_6",
         "PHP_81",
-        "RUBY_31"
+        "RUBY_31",
+        "PYTHON_311",
+        "NODEJS_18"
       ]
     },
     "RuntimeEnvironmentSecrets":{

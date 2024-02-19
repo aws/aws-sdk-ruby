@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2023-12-22)
+------------------
+
+* Feature - Provides minor corrections and an updated description of APIs.
+
+1.21.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2023-11-09)
+------------------
+
+* Feature - Support UBAM filetype for Omics Storage and make referenceArn optional
+
+1.18.0 (2023-11-08)
+------------------
+
+* Feature - Adding Run UUID and Run Output URI: GetRun and StartRun API response has two new fields "uuid" and "runOutputUri".
+
 1.17.0 (2023-10-19)
 ------------------
 

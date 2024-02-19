@@ -1,0 +1,203 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EC2
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html
+    class Volume
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#initialize-instance_method
+      def initialize: (String id, Hash[Symbol, untyped] options) -> void
+                    | (id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#id-instance_method
+      def id: () -> String
+      alias volume_id id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#attachments-instance_method
+      def attachments: () -> ::Array[Types::VolumeAttachment]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#availability_zone-instance_method
+      def availability_zone: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#create_time-instance_method
+      def create_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#encrypted-instance_method
+      def encrypted: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#kms_key_id-instance_method
+      def kms_key_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#outpost_arn-instance_method
+      def outpost_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#size-instance_method
+      def size: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#snapshot_id-instance_method
+      def snapshot_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#state-instance_method
+      def state: () -> ("creating" | "available" | "in-use" | "deleting" | "deleted" | "error")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#iops-instance_method
+      def iops: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#tags-instance_method
+      def tags: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#volume_type-instance_method
+      def volume_type: () -> ("standard" | "io1" | "io2" | "gp2" | "sc1" | "st1" | "gp3")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#fast_restored-instance_method
+      def fast_restored: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#multi_attach_enabled-instance_method
+      def multi_attach_enabled: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#throughput-instance_method
+      def throughput: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#sse_type-instance_method
+      def sse_type: () -> ("sse-ebs" | "sse-kms" | "none")
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#data-instance_method
+      def data: () -> Types::Volume
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#attach_to_instance-instance_method
+      def attach_to_instance: (
+                                device: ::String,
+                                instance_id: ::String,
+                                ?dry_run: bool
+                              ) -> Types::VolumeAttachment
+                            | (?Hash[Symbol, untyped]) -> Types::VolumeAttachment
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#create_snapshot-instance_method
+      def create_snapshot: (
+                             ?description: ::String,
+                             ?outpost_arn: ::String,
+                             ?tag_specifications: Array[
+                               {
+                                 resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                                 tags: Array[
+                                   {
+                                     key: ::String?,
+                                     value: ::String?
+                                   },
+                                 ]?
+                               },
+                             ],
+                             ?dry_run: bool
+                           ) -> Snapshot
+                         | (?Hash[Symbol, untyped]) -> Snapshot
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#create_tags-instance_method
+      def create_tags: (
+                         ?dry_run: bool,
+                         tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> Tag::Collection
+                     | (?Hash[Symbol, untyped]) -> Tag::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#delete_tags-instance_method
+      def delete_tags: (
+                         ?dry_run: bool,
+                         ?tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> Tag::Collection
+                     | (?Hash[Symbol, untyped]) -> Tag::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#delete-instance_method
+      def delete: (
+                    ?dry_run: bool
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#describe_attribute-instance_method
+      def describe_attribute: (
+                                attribute: ("autoEnableIO" | "productCodes"),
+                                ?dry_run: bool
+                              ) -> Types::DescribeVolumeAttributeResult
+                            | (?Hash[Symbol, untyped]) -> Types::DescribeVolumeAttributeResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#describe_status-instance_method
+      def describe_status: (
+                             ?filters: Array[
+                               {
+                                 name: ::String?,
+                                 values: Array[::String]?
+                               },
+                             ],
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?dry_run: bool
+                           ) -> Types::DescribeVolumeStatusResult
+                         | (?Hash[Symbol, untyped]) -> Types::DescribeVolumeStatusResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#detach_from_instance-instance_method
+      def detach_from_instance: (
+                                  ?device: ::String,
+                                  ?force: bool,
+                                  ?instance_id: ::String,
+                                  ?dry_run: bool
+                                ) -> Types::VolumeAttachment
+                              | (?Hash[Symbol, untyped]) -> Types::VolumeAttachment
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#enable_io-instance_method
+      def enable_io: (
+                       ?dry_run: bool
+                     ) -> ::Aws::EmptyStructure
+                   | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#modify_attribute-instance_method
+      def modify_attribute: (
+                              ?auto_enable_io: {
+                                value: bool?
+                              },
+                              ?dry_run: bool
+                            ) -> ::Aws::EmptyStructure
+                          | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#snapshots-instance_method
+      def snapshots: (
+                       ?filters: Array[
+                         {
+                           name: ::String?,
+                           values: Array[::String]?
+                         },
+                       ],
+                       ?owner_ids: Array[::String],
+                       ?restorable_by_user_ids: Array[::String],
+                       ?snapshot_ids: Array[::String],
+                       ?dry_run: bool
+                     ) -> Snapshot::Collection
+                   | (?Hash[Symbol, untyped]) -> Snapshot::Collection
+
+      class Collection < ::Aws::Resources::Collection[Volume]
+      end
+    end
+  end
+end

@@ -1,0 +1,994 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DocDB
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddSourceIdentifierToSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddSourceIdentifierToSubscriptionResult]
+        def event_subscription: () -> Types::EventSubscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#add_source_identifier_to_subscription-instance_method
+      def add_source_identifier_to_subscription: (
+                                                   subscription_name: ::String,
+                                                   source_identifier: ::String
+                                                 ) -> _AddSourceIdentifierToSubscriptionResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddSourceIdentifierToSubscriptionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#add_tags_to_resource-instance_method
+      def add_tags_to_resource: (
+                                  resource_name: ::String,
+                                  tags: Array[
+                                    {
+                                      key: ::String?,
+                                      value: ::String?
+                                    },
+                                  ]
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ApplyPendingMaintenanceActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApplyPendingMaintenanceActionResult]
+        def resource_pending_maintenance_actions: () -> Types::ResourcePendingMaintenanceActions
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#apply_pending_maintenance_action-instance_method
+      def apply_pending_maintenance_action: (
+                                              resource_identifier: ::String,
+                                              apply_action: ::String,
+                                              opt_in_type: ::String
+                                            ) -> _ApplyPendingMaintenanceActionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ApplyPendingMaintenanceActionResponseSuccess
+
+      interface _CopyDBClusterParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopyDBClusterParameterGroupResult]
+        def db_cluster_parameter_group: () -> Types::DBClusterParameterGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#copy_db_cluster_parameter_group-instance_method
+      def copy_db_cluster_parameter_group: (
+                                             source_db_cluster_parameter_group_identifier: ::String,
+                                             target_db_cluster_parameter_group_identifier: ::String,
+                                             target_db_cluster_parameter_group_description: ::String,
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String?,
+                                                 value: ::String?
+                                               },
+                                             ]
+                                           ) -> _CopyDBClusterParameterGroupResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyDBClusterParameterGroupResponseSuccess
+
+      interface _CopyDBClusterSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopyDBClusterSnapshotResult]
+        def db_cluster_snapshot: () -> Types::DBClusterSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#copy_db_cluster_snapshot-instance_method
+      def copy_db_cluster_snapshot: (
+                                      source_db_cluster_snapshot_identifier: ::String,
+                                      target_db_cluster_snapshot_identifier: ::String,
+                                      ?kms_key_id: ::String,
+                                      ?pre_signed_url: ::String,
+                                      ?copy_tags: bool,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String?,
+                                          value: ::String?
+                                        },
+                                      ],
+                                      ?source_region: ::String
+                                    ) -> _CopyDBClusterSnapshotResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyDBClusterSnapshotResponseSuccess
+
+      interface _CreateDBClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDBClusterResult]
+        def db_cluster: () -> Types::DBCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#create_db_cluster-instance_method
+      def create_db_cluster: (
+                               ?availability_zones: Array[::String],
+                               ?backup_retention_period: ::Integer,
+                               db_cluster_identifier: ::String,
+                               ?db_cluster_parameter_group_name: ::String,
+                               ?vpc_security_group_ids: Array[::String],
+                               ?db_subnet_group_name: ::String,
+                               engine: ::String,
+                               ?engine_version: ::String,
+                               ?port: ::Integer,
+                               ?master_username: ::String,
+                               ?master_user_password: ::String,
+                               ?preferred_backup_window: ::String,
+                               ?preferred_maintenance_window: ::String,
+                               ?tags: Array[
+                                 {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                               ],
+                               ?storage_encrypted: bool,
+                               ?kms_key_id: ::String,
+                               ?pre_signed_url: ::String,
+                               ?enable_cloudwatch_logs_exports: Array[::String],
+                               ?deletion_protection: bool,
+                               ?global_cluster_identifier: ::String,
+                               ?storage_type: ::String,
+                               ?source_region: ::String
+                             ) -> _CreateDBClusterResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBClusterResponseSuccess
+
+      interface _CreateDBClusterParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDBClusterParameterGroupResult]
+        def db_cluster_parameter_group: () -> Types::DBClusterParameterGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#create_db_cluster_parameter_group-instance_method
+      def create_db_cluster_parameter_group: (
+                                               db_cluster_parameter_group_name: ::String,
+                                               db_parameter_group_family: ::String,
+                                               description: ::String,
+                                               ?tags: Array[
+                                                 {
+                                                   key: ::String?,
+                                                   value: ::String?
+                                                 },
+                                               ]
+                                             ) -> _CreateDBClusterParameterGroupResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBClusterParameterGroupResponseSuccess
+
+      interface _CreateDBClusterSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDBClusterSnapshotResult]
+        def db_cluster_snapshot: () -> Types::DBClusterSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#create_db_cluster_snapshot-instance_method
+      def create_db_cluster_snapshot: (
+                                        db_cluster_snapshot_identifier: ::String,
+                                        db_cluster_identifier: ::String,
+                                        ?tags: Array[
+                                          {
+                                            key: ::String?,
+                                            value: ::String?
+                                          },
+                                        ]
+                                      ) -> _CreateDBClusterSnapshotResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBClusterSnapshotResponseSuccess
+
+      interface _CreateDBInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDBInstanceResult]
+        def db_instance: () -> Types::DBInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#create_db_instance-instance_method
+      def create_db_instance: (
+                                db_instance_identifier: ::String,
+                                db_instance_class: ::String,
+                                engine: ::String,
+                                ?availability_zone: ::String,
+                                ?preferred_maintenance_window: ::String,
+                                ?auto_minor_version_upgrade: bool,
+                                ?tags: Array[
+                                  {
+                                    key: ::String?,
+                                    value: ::String?
+                                  },
+                                ],
+                                db_cluster_identifier: ::String,
+                                ?copy_tags_to_snapshot: bool,
+                                ?promotion_tier: ::Integer,
+                                ?enable_performance_insights: bool,
+                                ?performance_insights_kms_key_id: ::String,
+                                ?ca_certificate_identifier: ::String
+                              ) -> _CreateDBInstanceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBInstanceResponseSuccess
+
+      interface _CreateDBSubnetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDBSubnetGroupResult]
+        def db_subnet_group: () -> Types::DBSubnetGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#create_db_subnet_group-instance_method
+      def create_db_subnet_group: (
+                                    db_subnet_group_name: ::String,
+                                    db_subnet_group_description: ::String,
+                                    subnet_ids: Array[::String],
+                                    ?tags: Array[
+                                      {
+                                        key: ::String?,
+                                        value: ::String?
+                                      },
+                                    ]
+                                  ) -> _CreateDBSubnetGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBSubnetGroupResponseSuccess
+
+      interface _CreateEventSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventSubscriptionResult]
+        def event_subscription: () -> Types::EventSubscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#create_event_subscription-instance_method
+      def create_event_subscription: (
+                                       subscription_name: ::String,
+                                       sns_topic_arn: ::String,
+                                       ?source_type: ::String,
+                                       ?event_categories: Array[::String],
+                                       ?source_ids: Array[::String],
+                                       ?enabled: bool,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String?,
+                                           value: ::String?
+                                         },
+                                       ]
+                                     ) -> _CreateEventSubscriptionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventSubscriptionResponseSuccess
+
+      interface _CreateGlobalClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGlobalClusterResult]
+        def global_cluster: () -> Types::GlobalCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#create_global_cluster-instance_method
+      def create_global_cluster: (
+                                   global_cluster_identifier: ::String,
+                                   ?source_db_cluster_identifier: ::String,
+                                   ?engine: ::String,
+                                   ?engine_version: ::String,
+                                   ?deletion_protection: bool,
+                                   ?database_name: ::String,
+                                   ?storage_encrypted: bool
+                                 ) -> _CreateGlobalClusterResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlobalClusterResponseSuccess
+
+      interface _DeleteDBClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDBClusterResult]
+        def db_cluster: () -> Types::DBCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#delete_db_cluster-instance_method
+      def delete_db_cluster: (
+                               db_cluster_identifier: ::String,
+                               ?skip_final_snapshot: bool,
+                               ?final_db_snapshot_identifier: ::String
+                             ) -> _DeleteDBClusterResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDBClusterResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#delete_db_cluster_parameter_group-instance_method
+      def delete_db_cluster_parameter_group: (
+                                               db_cluster_parameter_group_name: ::String
+                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteDBClusterSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDBClusterSnapshotResult]
+        def db_cluster_snapshot: () -> Types::DBClusterSnapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#delete_db_cluster_snapshot-instance_method
+      def delete_db_cluster_snapshot: (
+                                        db_cluster_snapshot_identifier: ::String
+                                      ) -> _DeleteDBClusterSnapshotResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDBClusterSnapshotResponseSuccess
+
+      interface _DeleteDBInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDBInstanceResult]
+        def db_instance: () -> Types::DBInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#delete_db_instance-instance_method
+      def delete_db_instance: (
+                                db_instance_identifier: ::String
+                              ) -> _DeleteDBInstanceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDBInstanceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#delete_db_subnet_group-instance_method
+      def delete_db_subnet_group: (
+                                    db_subnet_group_name: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteEventSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEventSubscriptionResult]
+        def event_subscription: () -> Types::EventSubscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#delete_event_subscription-instance_method
+      def delete_event_subscription: (
+                                       subscription_name: ::String
+                                     ) -> _DeleteEventSubscriptionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEventSubscriptionResponseSuccess
+
+      interface _DeleteGlobalClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGlobalClusterResult]
+        def global_cluster: () -> Types::GlobalCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#delete_global_cluster-instance_method
+      def delete_global_cluster: (
+                                   global_cluster_identifier: ::String
+                                 ) -> _DeleteGlobalClusterResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGlobalClusterResponseSuccess
+
+      interface _DescribeCertificatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CertificateMessage]
+        def certificates: () -> ::Array[Types::Certificate]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#describe_certificates-instance_method
+      def describe_certificates: (
+                                   ?certificate_identifier: ::String,
+                                   ?filters: Array[
+                                     {
+                                       name: ::String,
+                                       values: Array[::String]
+                                     },
+                                   ],
+                                   ?max_records: ::Integer,
+                                   ?marker: ::String
+                                 ) -> _DescribeCertificatesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCertificatesResponseSuccess
+
+      interface _DescribeDBClusterParameterGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DBClusterParameterGroupsMessage]
+        def marker: () -> ::String
+        def db_cluster_parameter_groups: () -> ::Array[Types::DBClusterParameterGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#describe_db_cluster_parameter_groups-instance_method
+      def describe_db_cluster_parameter_groups: (
+                                                  ?db_cluster_parameter_group_name: ::String,
+                                                  ?filters: Array[
+                                                    {
+                                                      name: ::String,
+                                                      values: Array[::String]
+                                                    },
+                                                  ],
+                                                  ?max_records: ::Integer,
+                                                  ?marker: ::String
+                                                ) -> _DescribeDBClusterParameterGroupsResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDBClusterParameterGroupsResponseSuccess
+
+      interface _DescribeDBClusterParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DBClusterParameterGroupDetails]
+        def parameters: () -> ::Array[Types::Parameter]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#describe_db_cluster_parameters-instance_method
+      def describe_db_cluster_parameters: (
+                                            db_cluster_parameter_group_name: ::String,
+                                            ?source: ::String,
+                                            ?filters: Array[
+                                              {
+                                                name: ::String,
+                                                values: Array[::String]
+                                              },
+                                            ],
+                                            ?max_records: ::Integer,
+                                            ?marker: ::String
+                                          ) -> _DescribeDBClusterParametersResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDBClusterParametersResponseSuccess
+
+      interface _DescribeDBClusterSnapshotAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDBClusterSnapshotAttributesResult]
+        def db_cluster_snapshot_attributes_result: () -> Types::DBClusterSnapshotAttributesResult
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#describe_db_cluster_snapshot_attributes-instance_method
+      def describe_db_cluster_snapshot_attributes: (
+                                                     db_cluster_snapshot_identifier: ::String
+                                                   ) -> _DescribeDBClusterSnapshotAttributesResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDBClusterSnapshotAttributesResponseSuccess
+
+      interface _DescribeDBClusterSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DBClusterSnapshotMessage]
+        def marker: () -> ::String
+        def db_cluster_snapshots: () -> ::Array[Types::DBClusterSnapshot]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#describe_db_cluster_snapshots-instance_method
+      def describe_db_cluster_snapshots: (
+                                           ?db_cluster_identifier: ::String,
+                                           ?db_cluster_snapshot_identifier: ::String,
+                                           ?snapshot_type: ::String,
+                                           ?filters: Array[
+                                             {
+                                               name: ::String,
+                                               values: Array[::String]
+                                             },
+                                           ],
+                                           ?max_records: ::Integer,
+                                           ?marker: ::String,
+                                           ?include_shared: bool,
+                                           ?include_public: bool
+                                         ) -> _DescribeDBClusterSnapshotsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDBClusterSnapshotsResponseSuccess
+
+      interface _DescribeDBClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DBClusterMessage]
+        def marker: () -> ::String
+        def db_clusters: () -> ::Array[Types::DBCluster]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#describe_db_clusters-instance_method
+      def describe_db_clusters: (
+                                  ?db_cluster_identifier: ::String,
+                                  ?filters: Array[
+                                    {
+                                      name: ::String,
+                                      values: Array[::String]
+                                    },
+                                  ],
+                                  ?max_records: ::Integer,
+                                  ?marker: ::String
+                                ) -> _DescribeDBClustersResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDBClustersResponseSuccess
+
+      interface _DescribeDBEngineVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DBEngineVersionMessage]
+        def marker: () -> ::String
+        def db_engine_versions: () -> ::Array[Types::DBEngineVersion]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#describe_db_engine_versions-instance_method
+      def describe_db_engine_versions: (
+                                         ?engine: ::String,
+                                         ?engine_version: ::String,
+                                         ?db_parameter_group_family: ::String,
+                                         ?filters: Array[
+                                           {
+                                             name: ::String,
+                                             values: Array[::String]
+                                           },
+                                         ],
+                                         ?max_records: ::Integer,
+                                         ?marker: ::String,
+                                         ?default_only: bool,
+                                         ?list_supported_character_sets: bool,
+                                         ?list_supported_timezones: bool
+                                       ) -> _DescribeDBEngineVersionsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDBEngineVersionsResponseSuccess
+
+      interface _DescribeDBInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DBInstanceMessage]
+        def marker: () -> ::String
+        def db_instances: () -> ::Array[Types::DBInstance]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#describe_db_instances-instance_method
+      def describe_db_instances: (
+                                   ?db_instance_identifier: ::String,
+                                   ?filters: Array[
+                                     {
+                                       name: ::String,
+                                       values: Array[::String]
+                                     },
+                                   ],
+                                   ?max_records: ::Integer,
+                                   ?marker: ::String
+                                 ) -> _DescribeDBInstancesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDBInstancesResponseSuccess
+
+      interface _DescribeDBSubnetGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DBSubnetGroupMessage]
+        def marker: () -> ::String
+        def db_subnet_groups: () -> ::Array[Types::DBSubnetGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#describe_db_subnet_groups-instance_method
+      def describe_db_subnet_groups: (
+                                       ?db_subnet_group_name: ::String,
+                                       ?filters: Array[
+                                         {
+                                           name: ::String,
+                                           values: Array[::String]
+                                         },
+                                       ],
+                                       ?max_records: ::Integer,
+                                       ?marker: ::String
+                                     ) -> _DescribeDBSubnetGroupsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDBSubnetGroupsResponseSuccess
+
+      interface _DescribeEngineDefaultClusterParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEngineDefaultClusterParametersResult]
+        def engine_defaults: () -> Types::EngineDefaults
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#describe_engine_default_cluster_parameters-instance_method
+      def describe_engine_default_cluster_parameters: (
+                                                        db_parameter_group_family: ::String,
+                                                        ?filters: Array[
+                                                          {
+                                                            name: ::String,
+                                                            values: Array[::String]
+                                                          },
+                                                        ],
+                                                        ?max_records: ::Integer,
+                                                        ?marker: ::String
+                                                      ) -> _DescribeEngineDefaultClusterParametersResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEngineDefaultClusterParametersResponseSuccess
+
+      interface _DescribeEventCategoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EventCategoriesMessage]
+        def event_categories_map_list: () -> ::Array[Types::EventCategoriesMap]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#describe_event_categories-instance_method
+      def describe_event_categories: (
+                                       ?source_type: ::String,
+                                       ?filters: Array[
+                                         {
+                                           name: ::String,
+                                           values: Array[::String]
+                                         },
+                                       ]
+                                     ) -> _DescribeEventCategoriesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventCategoriesResponseSuccess
+
+      interface _DescribeEventSubscriptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EventSubscriptionsMessage]
+        def marker: () -> ::String
+        def event_subscriptions_list: () -> ::Array[Types::EventSubscription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#describe_event_subscriptions-instance_method
+      def describe_event_subscriptions: (
+                                          ?subscription_name: ::String,
+                                          ?filters: Array[
+                                            {
+                                              name: ::String,
+                                              values: Array[::String]
+                                            },
+                                          ],
+                                          ?max_records: ::Integer,
+                                          ?marker: ::String
+                                        ) -> _DescribeEventSubscriptionsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventSubscriptionsResponseSuccess
+
+      interface _DescribeEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EventsMessage]
+        def marker: () -> ::String
+        def events: () -> ::Array[Types::Event]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#describe_events-instance_method
+      def describe_events: (
+                             ?source_identifier: ::String,
+                             ?source_type: ("db-instance" | "db-parameter-group" | "db-security-group" | "db-snapshot" | "db-cluster" | "db-cluster-snapshot"),
+                             ?start_time: ::Time,
+                             ?end_time: ::Time,
+                             ?duration: ::Integer,
+                             ?event_categories: Array[::String],
+                             ?filters: Array[
+                               {
+                                 name: ::String,
+                                 values: Array[::String]
+                               },
+                             ],
+                             ?max_records: ::Integer,
+                             ?marker: ::String
+                           ) -> _DescribeEventsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventsResponseSuccess
+
+      interface _DescribeGlobalClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GlobalClustersMessage]
+        def marker: () -> ::String
+        def global_clusters: () -> ::Array[Types::GlobalCluster]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#describe_global_clusters-instance_method
+      def describe_global_clusters: (
+                                      ?global_cluster_identifier: ::String,
+                                      ?filters: Array[
+                                        {
+                                          name: ::String,
+                                          values: Array[::String]
+                                        },
+                                      ],
+                                      ?max_records: ::Integer,
+                                      ?marker: ::String
+                                    ) -> _DescribeGlobalClustersResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGlobalClustersResponseSuccess
+
+      interface _DescribeOrderableDBInstanceOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::OrderableDBInstanceOptionsMessage]
+        def orderable_db_instance_options: () -> ::Array[Types::OrderableDBInstanceOption]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#describe_orderable_db_instance_options-instance_method
+      def describe_orderable_db_instance_options: (
+                                                    engine: ::String,
+                                                    ?engine_version: ::String,
+                                                    ?db_instance_class: ::String,
+                                                    ?license_model: ::String,
+                                                    ?vpc: bool,
+                                                    ?filters: Array[
+                                                      {
+                                                        name: ::String,
+                                                        values: Array[::String]
+                                                      },
+                                                    ],
+                                                    ?max_records: ::Integer,
+                                                    ?marker: ::String
+                                                  ) -> _DescribeOrderableDBInstanceOptionsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOrderableDBInstanceOptionsResponseSuccess
+
+      interface _DescribePendingMaintenanceActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PendingMaintenanceActionsMessage]
+        def pending_maintenance_actions: () -> ::Array[Types::ResourcePendingMaintenanceActions]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#describe_pending_maintenance_actions-instance_method
+      def describe_pending_maintenance_actions: (
+                                                  ?resource_identifier: ::String,
+                                                  ?filters: Array[
+                                                    {
+                                                      name: ::String,
+                                                      values: Array[::String]
+                                                    },
+                                                  ],
+                                                  ?marker: ::String,
+                                                  ?max_records: ::Integer
+                                                ) -> _DescribePendingMaintenanceActionsResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePendingMaintenanceActionsResponseSuccess
+
+      interface _FailoverDBClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FailoverDBClusterResult]
+        def db_cluster: () -> Types::DBCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#failover_db_cluster-instance_method
+      def failover_db_cluster: (
+                                 ?db_cluster_identifier: ::String,
+                                 ?target_db_instance_identifier: ::String
+                               ) -> _FailoverDBClusterResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _FailoverDBClusterResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagListMessage]
+        def tag_list: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_name: ::String,
+                                    ?filters: Array[
+                                      {
+                                        name: ::String,
+                                        values: Array[::String]
+                                      },
+                                    ]
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ModifyDBClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyDBClusterResult]
+        def db_cluster: () -> Types::DBCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#modify_db_cluster-instance_method
+      def modify_db_cluster: (
+                               db_cluster_identifier: ::String,
+                               ?new_db_cluster_identifier: ::String,
+                               ?apply_immediately: bool,
+                               ?backup_retention_period: ::Integer,
+                               ?db_cluster_parameter_group_name: ::String,
+                               ?vpc_security_group_ids: Array[::String],
+                               ?port: ::Integer,
+                               ?master_user_password: ::String,
+                               ?preferred_backup_window: ::String,
+                               ?preferred_maintenance_window: ::String,
+                               ?cloudwatch_logs_export_configuration: {
+                                 enable_log_types: Array[::String]?,
+                                 disable_log_types: Array[::String]?
+                               },
+                               ?engine_version: ::String,
+                               ?allow_major_version_upgrade: bool,
+                               ?deletion_protection: bool,
+                               ?storage_type: ::String
+                             ) -> _ModifyDBClusterResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBClusterResponseSuccess
+
+      interface _ModifyDBClusterParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DBClusterParameterGroupNameMessage]
+        def db_cluster_parameter_group_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#modify_db_cluster_parameter_group-instance_method
+      def modify_db_cluster_parameter_group: (
+                                               db_cluster_parameter_group_name: ::String,
+                                               parameters: Array[
+                                                 {
+                                                   parameter_name: ::String?,
+                                                   parameter_value: ::String?,
+                                                   description: ::String?,
+                                                   source: ::String?,
+                                                   apply_type: ::String?,
+                                                   data_type: ::String?,
+                                                   allowed_values: ::String?,
+                                                   is_modifiable: bool?,
+                                                   minimum_engine_version: ::String?,
+                                                   apply_method: ("immediate" | "pending-reboot")?
+                                                 },
+                                               ]
+                                             ) -> _ModifyDBClusterParameterGroupResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBClusterParameterGroupResponseSuccess
+
+      interface _ModifyDBClusterSnapshotAttributeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyDBClusterSnapshotAttributeResult]
+        def db_cluster_snapshot_attributes_result: () -> Types::DBClusterSnapshotAttributesResult
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#modify_db_cluster_snapshot_attribute-instance_method
+      def modify_db_cluster_snapshot_attribute: (
+                                                  db_cluster_snapshot_identifier: ::String,
+                                                  attribute_name: ::String,
+                                                  ?values_to_add: Array[::String],
+                                                  ?values_to_remove: Array[::String]
+                                                ) -> _ModifyDBClusterSnapshotAttributeResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBClusterSnapshotAttributeResponseSuccess
+
+      interface _ModifyDBInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyDBInstanceResult]
+        def db_instance: () -> Types::DBInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#modify_db_instance-instance_method
+      def modify_db_instance: (
+                                db_instance_identifier: ::String,
+                                ?db_instance_class: ::String,
+                                ?apply_immediately: bool,
+                                ?preferred_maintenance_window: ::String,
+                                ?auto_minor_version_upgrade: bool,
+                                ?new_db_instance_identifier: ::String,
+                                ?ca_certificate_identifier: ::String,
+                                ?copy_tags_to_snapshot: bool,
+                                ?promotion_tier: ::Integer,
+                                ?enable_performance_insights: bool,
+                                ?performance_insights_kms_key_id: ::String,
+                                ?certificate_rotation_restart: bool
+                              ) -> _ModifyDBInstanceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBInstanceResponseSuccess
+
+      interface _ModifyDBSubnetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyDBSubnetGroupResult]
+        def db_subnet_group: () -> Types::DBSubnetGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#modify_db_subnet_group-instance_method
+      def modify_db_subnet_group: (
+                                    db_subnet_group_name: ::String,
+                                    ?db_subnet_group_description: ::String,
+                                    subnet_ids: Array[::String]
+                                  ) -> _ModifyDBSubnetGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBSubnetGroupResponseSuccess
+
+      interface _ModifyEventSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyEventSubscriptionResult]
+        def event_subscription: () -> Types::EventSubscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#modify_event_subscription-instance_method
+      def modify_event_subscription: (
+                                       subscription_name: ::String,
+                                       ?sns_topic_arn: ::String,
+                                       ?source_type: ::String,
+                                       ?event_categories: Array[::String],
+                                       ?enabled: bool
+                                     ) -> _ModifyEventSubscriptionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyEventSubscriptionResponseSuccess
+
+      interface _ModifyGlobalClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyGlobalClusterResult]
+        def global_cluster: () -> Types::GlobalCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#modify_global_cluster-instance_method
+      def modify_global_cluster: (
+                                   global_cluster_identifier: ::String,
+                                   ?new_global_cluster_identifier: ::String,
+                                   ?deletion_protection: bool
+                                 ) -> _ModifyGlobalClusterResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyGlobalClusterResponseSuccess
+
+      interface _RebootDBInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RebootDBInstanceResult]
+        def db_instance: () -> Types::DBInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#reboot_db_instance-instance_method
+      def reboot_db_instance: (
+                                db_instance_identifier: ::String,
+                                ?force_failover: bool
+                              ) -> _RebootDBInstanceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebootDBInstanceResponseSuccess
+
+      interface _RemoveFromGlobalClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveFromGlobalClusterResult]
+        def global_cluster: () -> Types::GlobalCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#remove_from_global_cluster-instance_method
+      def remove_from_global_cluster: (
+                                        global_cluster_identifier: ::String,
+                                        db_cluster_identifier: ::String
+                                      ) -> _RemoveFromGlobalClusterResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveFromGlobalClusterResponseSuccess
+
+      interface _RemoveSourceIdentifierFromSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveSourceIdentifierFromSubscriptionResult]
+        def event_subscription: () -> Types::EventSubscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#remove_source_identifier_from_subscription-instance_method
+      def remove_source_identifier_from_subscription: (
+                                                        subscription_name: ::String,
+                                                        source_identifier: ::String
+                                                      ) -> _RemoveSourceIdentifierFromSubscriptionResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveSourceIdentifierFromSubscriptionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#remove_tags_from_resource-instance_method
+      def remove_tags_from_resource: (
+                                       resource_name: ::String,
+                                       tag_keys: Array[::String]
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ResetDBClusterParameterGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DBClusterParameterGroupNameMessage]
+        def db_cluster_parameter_group_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#reset_db_cluster_parameter_group-instance_method
+      def reset_db_cluster_parameter_group: (
+                                              db_cluster_parameter_group_name: ::String,
+                                              ?reset_all_parameters: bool,
+                                              ?parameters: Array[
+                                                {
+                                                  parameter_name: ::String?,
+                                                  parameter_value: ::String?,
+                                                  description: ::String?,
+                                                  source: ::String?,
+                                                  apply_type: ::String?,
+                                                  data_type: ::String?,
+                                                  allowed_values: ::String?,
+                                                  is_modifiable: bool?,
+                                                  minimum_engine_version: ::String?,
+                                                  apply_method: ("immediate" | "pending-reboot")?
+                                                },
+                                              ]
+                                            ) -> _ResetDBClusterParameterGroupResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetDBClusterParameterGroupResponseSuccess
+
+      interface _RestoreDBClusterFromSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreDBClusterFromSnapshotResult]
+        def db_cluster: () -> Types::DBCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#restore_db_cluster_from_snapshot-instance_method
+      def restore_db_cluster_from_snapshot: (
+                                              ?availability_zones: Array[::String],
+                                              db_cluster_identifier: ::String,
+                                              snapshot_identifier: ::String,
+                                              engine: ::String,
+                                              ?engine_version: ::String,
+                                              ?port: ::Integer,
+                                              ?db_subnet_group_name: ::String,
+                                              ?vpc_security_group_ids: Array[::String],
+                                              ?tags: Array[
+                                                {
+                                                  key: ::String?,
+                                                  value: ::String?
+                                                },
+                                              ],
+                                              ?kms_key_id: ::String,
+                                              ?enable_cloudwatch_logs_exports: Array[::String],
+                                              ?deletion_protection: bool,
+                                              ?db_cluster_parameter_group_name: ::String,
+                                              ?storage_type: ::String
+                                            ) -> _RestoreDBClusterFromSnapshotResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterFromSnapshotResponseSuccess
+
+      interface _RestoreDBClusterToPointInTimeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreDBClusterToPointInTimeResult]
+        def db_cluster: () -> Types::DBCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#restore_db_cluster_to_point_in_time-instance_method
+      def restore_db_cluster_to_point_in_time: (
+                                                 db_cluster_identifier: ::String,
+                                                 ?restore_type: ::String,
+                                                 source_db_cluster_identifier: ::String,
+                                                 ?restore_to_time: ::Time,
+                                                 ?use_latest_restorable_time: bool,
+                                                 ?port: ::Integer,
+                                                 ?db_subnet_group_name: ::String,
+                                                 ?vpc_security_group_ids: Array[::String],
+                                                 ?tags: Array[
+                                                   {
+                                                     key: ::String?,
+                                                     value: ::String?
+                                                   },
+                                                 ],
+                                                 ?kms_key_id: ::String,
+                                                 ?enable_cloudwatch_logs_exports: Array[::String],
+                                                 ?deletion_protection: bool,
+                                                 ?storage_type: ::String
+                                               ) -> _RestoreDBClusterToPointInTimeResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterToPointInTimeResponseSuccess
+
+      interface _StartDBClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDBClusterResult]
+        def db_cluster: () -> Types::DBCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#start_db_cluster-instance_method
+      def start_db_cluster: (
+                              db_cluster_identifier: ::String
+                            ) -> _StartDBClusterResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDBClusterResponseSuccess
+
+      interface _StopDBClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopDBClusterResult]
+        def db_cluster: () -> Types::DBCluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#stop_db_cluster-instance_method
+      def stop_db_cluster: (
+                             db_cluster_identifier: ::String
+                           ) -> _StopDBClusterResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDBClusterResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DocDB/Client.html#wait_until-instance_method
+      def wait_until: (:db_instance_available waiter_name, 
+                    ?db_instance_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeDBInstancesResponseSuccess
+                    | (:db_instance_available waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeDBInstancesResponseSuccess
+                    | (:db_instance_deleted waiter_name, 
+                    ?db_instance_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeDBInstancesResponseSuccess
+                    | (:db_instance_deleted waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeDBInstancesResponseSuccess
+    end
+  end
+end
+

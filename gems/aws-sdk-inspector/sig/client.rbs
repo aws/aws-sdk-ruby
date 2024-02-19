@@ -1,0 +1,551 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Inspector
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddAttributesToFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddAttributesToFindingsResponse]
+        def failed_items: () -> ::Hash[::String, Types::FailedItemDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#add_attributes_to_findings-instance_method
+      def add_attributes_to_findings: (
+                                        finding_arns: Array[::String],
+                                        attributes: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String?
+                                          },
+                                        ]
+                                      ) -> _AddAttributesToFindingsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddAttributesToFindingsResponseSuccess
+
+      interface _CreateAssessmentTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssessmentTargetResponse]
+        def assessment_target_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#create_assessment_target-instance_method
+      def create_assessment_target: (
+                                      assessment_target_name: ::String,
+                                      ?resource_group_arn: ::String
+                                    ) -> _CreateAssessmentTargetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssessmentTargetResponseSuccess
+
+      interface _CreateAssessmentTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssessmentTemplateResponse]
+        def assessment_template_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#create_assessment_template-instance_method
+      def create_assessment_template: (
+                                        assessment_target_arn: ::String,
+                                        assessment_template_name: ::String,
+                                        duration_in_seconds: ::Integer,
+                                        rules_package_arns: Array[::String],
+                                        ?user_attributes_for_findings: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String?
+                                          },
+                                        ]
+                                      ) -> _CreateAssessmentTemplateResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssessmentTemplateResponseSuccess
+
+      interface _CreateExclusionsPreviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateExclusionsPreviewResponse]
+        def preview_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#create_exclusions_preview-instance_method
+      def create_exclusions_preview: (
+                                       assessment_template_arn: ::String
+                                     ) -> _CreateExclusionsPreviewResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExclusionsPreviewResponseSuccess
+
+      interface _CreateResourceGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResourceGroupResponse]
+        def resource_group_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#create_resource_group-instance_method
+      def create_resource_group: (
+                                   resource_group_tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String?
+                                     },
+                                   ]
+                                 ) -> _CreateResourceGroupResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceGroupResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#delete_assessment_run-instance_method
+      def delete_assessment_run: (
+                                   assessment_run_arn: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#delete_assessment_target-instance_method
+      def delete_assessment_target: (
+                                      assessment_target_arn: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#delete_assessment_template-instance_method
+      def delete_assessment_template: (
+                                        assessment_template_arn: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeAssessmentRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssessmentRunsResponse]
+        def assessment_runs: () -> ::Array[Types::AssessmentRun]
+        def failed_items: () -> ::Hash[::String, Types::FailedItemDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#describe_assessment_runs-instance_method
+      def describe_assessment_runs: (
+                                      assessment_run_arns: Array[::String]
+                                    ) -> _DescribeAssessmentRunsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssessmentRunsResponseSuccess
+
+      interface _DescribeAssessmentTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssessmentTargetsResponse]
+        def assessment_targets: () -> ::Array[Types::AssessmentTarget]
+        def failed_items: () -> ::Hash[::String, Types::FailedItemDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#describe_assessment_targets-instance_method
+      def describe_assessment_targets: (
+                                         assessment_target_arns: Array[::String]
+                                       ) -> _DescribeAssessmentTargetsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssessmentTargetsResponseSuccess
+
+      interface _DescribeAssessmentTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssessmentTemplatesResponse]
+        def assessment_templates: () -> ::Array[Types::AssessmentTemplate]
+        def failed_items: () -> ::Hash[::String, Types::FailedItemDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#describe_assessment_templates-instance_method
+      def describe_assessment_templates: (
+                                           assessment_template_arns: Array[::String]
+                                         ) -> _DescribeAssessmentTemplatesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssessmentTemplatesResponseSuccess
+
+      interface _DescribeCrossAccountAccessRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCrossAccountAccessRoleResponse]
+        def role_arn: () -> ::String
+        def valid: () -> bool
+        def registered_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#describe_cross_account_access_role-instance_method
+      def describe_cross_account_access_role: () -> _DescribeCrossAccountAccessRoleResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCrossAccountAccessRoleResponseSuccess
+
+      interface _DescribeExclusionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeExclusionsResponse]
+        def exclusions: () -> ::Hash[::String, Types::Exclusion]
+        def failed_items: () -> ::Hash[::String, Types::FailedItemDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#describe_exclusions-instance_method
+      def describe_exclusions: (
+                                 exclusion_arns: Array[::String],
+                                 ?locale: ("EN_US")
+                               ) -> _DescribeExclusionsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeExclusionsResponseSuccess
+
+      interface _DescribeFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFindingsResponse]
+        def findings: () -> ::Array[Types::Finding]
+        def failed_items: () -> ::Hash[::String, Types::FailedItemDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#describe_findings-instance_method
+      def describe_findings: (
+                               finding_arns: Array[::String],
+                               ?locale: ("EN_US")
+                             ) -> _DescribeFindingsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFindingsResponseSuccess
+
+      interface _DescribeResourceGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourceGroupsResponse]
+        def resource_groups: () -> ::Array[Types::ResourceGroup]
+        def failed_items: () -> ::Hash[::String, Types::FailedItemDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#describe_resource_groups-instance_method
+      def describe_resource_groups: (
+                                      resource_group_arns: Array[::String]
+                                    ) -> _DescribeResourceGroupsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourceGroupsResponseSuccess
+
+      interface _DescribeRulesPackagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRulesPackagesResponse]
+        def rules_packages: () -> ::Array[Types::RulesPackage]
+        def failed_items: () -> ::Hash[::String, Types::FailedItemDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#describe_rules_packages-instance_method
+      def describe_rules_packages: (
+                                     rules_package_arns: Array[::String],
+                                     ?locale: ("EN_US")
+                                   ) -> _DescribeRulesPackagesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRulesPackagesResponseSuccess
+
+      interface _GetAssessmentReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssessmentReportResponse]
+        def status: () -> ("WORK_IN_PROGRESS" | "FAILED" | "COMPLETED")
+        def url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#get_assessment_report-instance_method
+      def get_assessment_report: (
+                                   assessment_run_arn: ::String,
+                                   report_file_format: ("HTML" | "PDF"),
+                                   report_type: ("FINDING" | "FULL")
+                                 ) -> _GetAssessmentReportResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssessmentReportResponseSuccess
+
+      interface _GetExclusionsPreviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetExclusionsPreviewResponse]
+        def preview_status: () -> ("WORK_IN_PROGRESS" | "COMPLETED")
+        def exclusion_previews: () -> ::Array[Types::ExclusionPreview]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#get_exclusions_preview-instance_method
+      def get_exclusions_preview: (
+                                    assessment_template_arn: ::String,
+                                    preview_token: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer,
+                                    ?locale: ("EN_US")
+                                  ) -> _GetExclusionsPreviewResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExclusionsPreviewResponseSuccess
+
+      interface _GetTelemetryMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTelemetryMetadataResponse]
+        def telemetry_metadata: () -> ::Array[Types::TelemetryMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#get_telemetry_metadata-instance_method
+      def get_telemetry_metadata: (
+                                    assessment_run_arn: ::String
+                                  ) -> _GetTelemetryMetadataResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTelemetryMetadataResponseSuccess
+
+      interface _ListAssessmentRunAgentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssessmentRunAgentsResponse]
+        def assessment_run_agents: () -> ::Array[Types::AssessmentRunAgent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#list_assessment_run_agents-instance_method
+      def list_assessment_run_agents: (
+                                        assessment_run_arn: ::String,
+                                        ?filter: {
+                                          agent_healths: Array[("HEALTHY" | "UNHEALTHY" | "UNKNOWN")],
+                                          agent_health_codes: Array[("IDLE" | "RUNNING" | "SHUTDOWN" | "UNHEALTHY" | "THROTTLED" | "UNKNOWN")]
+                                        },
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListAssessmentRunAgentsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssessmentRunAgentsResponseSuccess
+
+      interface _ListAssessmentRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssessmentRunsResponse]
+        def assessment_run_arns: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#list_assessment_runs-instance_method
+      def list_assessment_runs: (
+                                  ?assessment_template_arns: Array[::String],
+                                  ?filter: {
+                                    name_pattern: ::String?,
+                                    states: Array[("CREATED" | "START_DATA_COLLECTION_PENDING" | "START_DATA_COLLECTION_IN_PROGRESS" | "COLLECTING_DATA" | "STOP_DATA_COLLECTION_PENDING" | "DATA_COLLECTED" | "START_EVALUATING_RULES_PENDING" | "EVALUATING_RULES" | "FAILED" | "ERROR" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "CANCELED")]?,
+                                    duration_range: {
+                                      min_seconds: ::Integer?,
+                                      max_seconds: ::Integer?
+                                    }?,
+                                    rules_package_arns: Array[::String]?,
+                                    start_time_range: {
+                                      begin_date: ::Time?,
+                                      end_date: ::Time?
+                                    }?,
+                                    completion_time_range: {
+                                      begin_date: ::Time?,
+                                      end_date: ::Time?
+                                    }?,
+                                    state_change_time_range: {
+                                      begin_date: ::Time?,
+                                      end_date: ::Time?
+                                    }?
+                                  },
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListAssessmentRunsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssessmentRunsResponseSuccess
+
+      interface _ListAssessmentTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssessmentTargetsResponse]
+        def assessment_target_arns: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#list_assessment_targets-instance_method
+      def list_assessment_targets: (
+                                     ?filter: {
+                                       assessment_target_name_pattern: ::String?
+                                     },
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListAssessmentTargetsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssessmentTargetsResponseSuccess
+
+      interface _ListAssessmentTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssessmentTemplatesResponse]
+        def assessment_template_arns: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#list_assessment_templates-instance_method
+      def list_assessment_templates: (
+                                       ?assessment_target_arns: Array[::String],
+                                       ?filter: {
+                                         name_pattern: ::String?,
+                                         duration_range: {
+                                           min_seconds: ::Integer?,
+                                           max_seconds: ::Integer?
+                                         }?,
+                                         rules_package_arns: Array[::String]?
+                                       },
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListAssessmentTemplatesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssessmentTemplatesResponseSuccess
+
+      interface _ListEventSubscriptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventSubscriptionsResponse]
+        def subscriptions: () -> ::Array[Types::Subscription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#list_event_subscriptions-instance_method
+      def list_event_subscriptions: (
+                                      ?resource_arn: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListEventSubscriptionsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventSubscriptionsResponseSuccess
+
+      interface _ListExclusionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExclusionsResponse]
+        def exclusion_arns: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#list_exclusions-instance_method
+      def list_exclusions: (
+                             assessment_run_arn: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListExclusionsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExclusionsResponseSuccess
+
+      interface _ListFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFindingsResponse]
+        def finding_arns: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#list_findings-instance_method
+      def list_findings: (
+                           ?assessment_run_arns: Array[::String],
+                           ?filter: {
+                             agent_ids: Array[::String]?,
+                             auto_scaling_groups: Array[::String]?,
+                             rule_names: Array[::String]?,
+                             severities: Array[("Low" | "Medium" | "High" | "Informational" | "Undefined")]?,
+                             rules_package_arns: Array[::String]?,
+                             attributes: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String?
+                               },
+                             ]?,
+                             user_attributes: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String?
+                               },
+                             ]?,
+                             creation_time_range: {
+                               begin_date: ::Time?,
+                               end_date: ::Time?
+                             }?
+                           },
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListFindingsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFindingsResponseSuccess
+
+      interface _ListRulesPackagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRulesPackagesResponse]
+        def rules_package_arns: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#list_rules_packages-instance_method
+      def list_rules_packages: (
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListRulesPackagesResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRulesPackagesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PreviewAgentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PreviewAgentsResponse]
+        def agent_previews: () -> ::Array[Types::AgentPreview]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#preview_agents-instance_method
+      def preview_agents: (
+                            preview_agents_arn: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _PreviewAgentsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PreviewAgentsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#register_cross_account_access_role-instance_method
+      def register_cross_account_access_role: (
+                                                role_arn: ::String
+                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _RemoveAttributesFromFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveAttributesFromFindingsResponse]
+        def failed_items: () -> ::Hash[::String, Types::FailedItemDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#remove_attributes_from_findings-instance_method
+      def remove_attributes_from_findings: (
+                                             finding_arns: Array[::String],
+                                             attribute_keys: Array[::String]
+                                           ) -> _RemoveAttributesFromFindingsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveAttributesFromFindingsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#set_tags_for_resource-instance_method
+      def set_tags_for_resource: (
+                                   resource_arn: ::String,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String?
+                                     },
+                                   ]
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StartAssessmentRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAssessmentRunResponse]
+        def assessment_run_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#start_assessment_run-instance_method
+      def start_assessment_run: (
+                                  assessment_template_arn: ::String,
+                                  ?assessment_run_name: ::String
+                                ) -> _StartAssessmentRunResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAssessmentRunResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#stop_assessment_run-instance_method
+      def stop_assessment_run: (
+                                 assessment_run_arn: ::String,
+                                 ?stop_action: ("START_EVALUATION" | "SKIP_EVALUATION")
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#subscribe_to_event-instance_method
+      def subscribe_to_event: (
+                                resource_arn: ::String,
+                                event: ("ASSESSMENT_RUN_STARTED" | "ASSESSMENT_RUN_COMPLETED" | "ASSESSMENT_RUN_STATE_CHANGED" | "FINDING_REPORTED" | "OTHER"),
+                                topic_arn: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#unsubscribe_from_event-instance_method
+      def unsubscribe_from_event: (
+                                    resource_arn: ::String,
+                                    event: ("ASSESSMENT_RUN_STARTED" | "ASSESSMENT_RUN_COMPLETED" | "ASSESSMENT_RUN_STATE_CHANGED" | "FINDING_REPORTED" | "OTHER"),
+                                    topic_arn: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector/Client.html#update_assessment_target-instance_method
+      def update_assessment_target: (
+                                      assessment_target_arn: ::String,
+                                      assessment_target_name: ::String,
+                                      ?resource_group_arn: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

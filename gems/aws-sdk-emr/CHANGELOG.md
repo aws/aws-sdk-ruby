@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2024-02-16)
+------------------
+
+* Feature - adds fine grained control over Unhealthy Node Replacement to Amazon ElasticMapReduce
+
+1.83.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.82.0 (2023-12-27)
+------------------
+
+* Feature - Add support for customers to modify cluster attribute auto-terminate post cluster launch
+
+1.81.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.80.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.79.0 (2023-11-17)
+------------------
+
+* Feature - Launch support for IAM Identity Center Trusted Identity Propagation and workspace storage encryption using AWS KMS in EMR Studio
+
+1.78.0 (2023-11-13)
+------------------
+
+* Feature - Updated GetClusterSessionCredentials API  to allow Amazon SageMaker Studio to connect to EMR on EC2 clusters to support IdentityCenter/PEZ integration.
+
+1.77.0 (2023-10-27)
+------------------
+
+* Feature - Updated CreateCluster API request and DescribeCluster API responses to include EbsRootVolumeIops, and EbsRootVolumeThroughput attributes that specify the user configured root volume IOPS and throughput for Amazon EBS root device volume. This feature will be available from Amazon EMR releases 6.15.0
+
 1.76.0 (2023-09-27)
 ------------------
 

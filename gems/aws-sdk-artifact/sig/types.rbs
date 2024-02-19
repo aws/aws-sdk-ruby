@@ -1,0 +1,178 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Artifact
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountSettings
+      attr_accessor notification_subscription_status: ("SUBSCRIBED" | "NOT_SUBSCRIBED")
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountSettingsRequest < Aws::EmptyStructure
+    end
+
+    class GetAccountSettingsResponse
+      attr_accessor account_settings: Types::AccountSettings
+      SENSITIVE: []
+    end
+
+    class GetReportMetadataRequest
+      attr_accessor report_id: ::String
+      attr_accessor report_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetReportMetadataResponse
+      attr_accessor report_details: Types::ReportDetail
+      SENSITIVE: []
+    end
+
+    class GetReportRequest
+      attr_accessor report_id: ::String
+      attr_accessor report_version: ::Integer
+      attr_accessor term_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetReportResponse
+      attr_accessor document_presigned_url: ::String
+      SENSITIVE: []
+    end
+
+    class GetTermForReportRequest
+      attr_accessor report_id: ::String
+      attr_accessor report_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetTermForReportResponse
+      attr_accessor document_presigned_url: ::String
+      attr_accessor term_token: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReportsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReportsResponse
+      attr_accessor next_token: ::String
+      attr_accessor reports: ::Array[Types::ReportSummary]
+      SENSITIVE: []
+    end
+
+    class PutAccountSettingsRequest
+      attr_accessor notification_subscription_status: ("SUBSCRIBED" | "NOT_SUBSCRIBED")
+      SENSITIVE: []
+    end
+
+    class PutAccountSettingsResponse
+      attr_accessor account_settings: Types::AccountSettings
+      SENSITIVE: []
+    end
+
+    class ReportDetail
+      attr_accessor acceptance_type: ("PASSTHROUGH" | "EXPLICIT")
+      attr_accessor arn: ::String
+      attr_accessor category: ::String
+      attr_accessor company_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor deleted_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor last_modified_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor period_end: ::Time
+      attr_accessor period_start: ::Time
+      attr_accessor product_name: ::String
+      attr_accessor sequence_number: ::Integer
+      attr_accessor series: ::String
+      attr_accessor state: ("PUBLISHED" | "UNPUBLISHED")
+      attr_accessor status_message: ::String
+      attr_accessor term_arn: ::String
+      attr_accessor upload_state: ("PROCESSING" | "COMPLETE" | "FAILED" | "FAULT")
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ReportSummary
+      attr_accessor arn: ::String
+      attr_accessor category: ::String
+      attr_accessor company_name: ::String
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor period_end: ::Time
+      attr_accessor period_start: ::Time
+      attr_accessor product_name: ::String
+      attr_accessor series: ::String
+      attr_accessor state: ("PUBLISHED" | "UNPUBLISHED")
+      attr_accessor status_message: ::String
+      attr_accessor upload_state: ("PROCESSING" | "COMPLETE" | "FAILED" | "FAULT")
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "invalidToken" | "other")
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+  end
+end

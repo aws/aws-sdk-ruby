@@ -1,0 +1,97 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AutoScaling
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html
+    class LifecycleHook
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#initialize-instance_method
+      def initialize: (String group_name, String name, Hash[Symbol, untyped] options) -> void
+                    | (group_name: String, name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#group_name-instance_method
+      def group_name: () -> String
+      alias auto_scaling_group_name group_name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#name-instance_method
+      def name: () -> String
+      alias lifecycle_hook_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#lifecycle_transition-instance_method
+      def lifecycle_transition: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#notification_target_arn-instance_method
+      def notification_target_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#role_arn-instance_method
+      def role_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#notification_metadata-instance_method
+      def notification_metadata: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#heartbeat_timeout-instance_method
+      def heartbeat_timeout: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#global_timeout-instance_method
+      def global_timeout: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#default_result-instance_method
+      def default_result: () -> ::String
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#data-instance_method
+      def data: () -> Types::LifecycleHook
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#complete-instance_method
+      def complete: (
+                      ?lifecycle_action_token: ::String,
+                      lifecycle_action_result: ::String,
+                      ?instance_id: ::String
+                    ) -> Types::CompleteLifecycleActionAnswer
+                  | (?Hash[Symbol, untyped]) -> Types::CompleteLifecycleActionAnswer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#delete-instance_method
+      def delete: (
+                  ) -> Types::DeleteLifecycleHookAnswer
+                | (?Hash[Symbol, untyped]) -> Types::DeleteLifecycleHookAnswer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#put-instance_method
+      def put: (
+                 ?lifecycle_transition: ::String,
+                 ?role_arn: ::String,
+                 ?notification_target_arn: ::String,
+                 ?notification_metadata: ::String,
+                 ?heartbeat_timeout: ::Integer,
+                 ?default_result: ::String
+               ) -> Types::PutLifecycleHookAnswer
+             | (?Hash[Symbol, untyped]) -> Types::PutLifecycleHookAnswer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#record_heartbeat-instance_method
+      def record_heartbeat: (
+                              ?lifecycle_action_token: ::String,
+                              ?instance_id: ::String
+                            ) -> Types::RecordLifecycleActionHeartbeatAnswer
+                          | (?Hash[Symbol, untyped]) -> Types::RecordLifecycleActionHeartbeatAnswer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/LifecycleHook.html#group-instance_method
+      def group: () -> AutoScalingGroup
+
+      class Collection < ::Aws::Resources::Collection[LifecycleHook]
+      end
+    end
+  end
+end

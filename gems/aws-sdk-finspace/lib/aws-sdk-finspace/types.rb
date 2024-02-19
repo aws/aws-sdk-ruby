@@ -292,31 +292,52 @@ module Aws::Finspace
     #
     # @!attribute [rw] change_requests
     #   A list of change request objects that are run in order. A change
-    #   request object consists of changeType , s3Path, and a dbPath. A
+    #   request object consists of `changeType` , `s3Path`, and `dbPath`. A
     #   changeType can has the following values:
     #
     #   * PUT – Adds or updates files in a database.
     #
     #   * DELETE – Deletes files in a database.
     #
-    #   All the change requests require a mandatory *dbPath* attribute that
-    #   defines the path within the database directory. The *s3Path*
+    #   All the change requests require a mandatory `dbPath` attribute that
+    #   defines the path within the database directory. All database paths
+    #   must start with a leading / and end with a trailing /. The `s3Path`
     #   attribute defines the s3 source file path and is required for a PUT
-    #   change type.
+    #   change type. The `s3path` must end with a trailing / if it is a
+    #   directory and must end without a trailing / if it is a file.
     #
-    #   Here is an example of how you can use the change request object:
+    #   Here are few examples of how you can use the change request object:
     #
-    #   `[ \{ "changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/",
-    #   "dbPath":"/2020.01.02/"\}, \{ "changeType": "PUT",
-    #   "s3Path":"s3://bucket/db/sym", "dbPath":"/"\}, \{ "changeType":
-    #   "DELETE", "dbPath": "/2020.01.01/"\} ]`
+    #   1.  This request adds a single sym file at database root location.
     #
-    #   In this example, the first request with *PUT* change type allows you
-    #   to add files in the given s3Path under the *2020.01.02* partition of
-    #   the database. The second request with *PUT* change type allows you
-    #   to add a single sym file at database root location. The last request
-    #   with *DELETE* change type allows you to delete the files under the
-    #   *2020.01.01* partition of the database.
+    #       `\{ "changeType": "PUT", "s3Path":"s3://bucket/db/sym",
+    #       "dbPath":"/"\}`
+    #
+    #   2.  This request adds files in the given `s3Path` under the
+    #       2020.01.02 partition of the database.
+    #
+    #       `\{ "changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/",
+    #       "dbPath":"/2020.01.02/"\}`
+    #
+    #   3.  This request adds files in the given `s3Path` under the *taq*
+    #       table partition of the database.
+    #
+    #       `[ \{ "changeType": "PUT",
+    #       "s3Path":"s3://bucket/db/2020.01.02/taq/",
+    #       "dbPath":"/2020.01.02/taq/"\}]`
+    #
+    #   4.  This request deletes the 2020.01.02 partition of the database.
+    #
+    #       `[\{ "changeType": "DELETE", "dbPath": "/2020.01.02/"\} ]`
+    #
+    #   5.  The *DELETE* request allows you to delete the existing files
+    #       under the 2020.01.02 partition of the database, and the *PUT*
+    #       request adds a new taq table under it.
+    #
+    #       `[ \{"changeType": "DELETE", "dbPath":"/2020.01.02/"\},
+    #       \{"changeType": "PUT",
+    #       "s3Path":"s3://bucket/db/2020.01.02/taq/",
+    #       "dbPath":"/2020.01.02/taq/"\}]`
     #   @return [Array<Types::ChangeRequest>]
     #
     # @!attribute [rw] client_token
@@ -434,7 +455,28 @@ module Aws::Finspace
     #     processes in kdb systems. It allows you to create your own routing
     #     logic using the initialization scripts and custom code. This type
     #     of cluster does not require a writable local storage.
+    #
+    #   * GP – A general purpose cluster allows you to quickly iterate on
+    #     code during development by granting greater access to system
+    #     commands and enabling a fast reload of custom code. This cluster
+    #     type can optionally mount databases including cache and savedown
+    #     storage. For this cluster type, the node count is fixed at 1. It
+    #     does not support autoscaling and supports only `SINGLE` AZ mode.
+    #
+    #   * Tickerplant – A tickerplant cluster allows you to subscribe to
+    #     feed handlers based on IAM permissions. It can publish to RDBs,
+    #     other Tickerplants, and real-time subscribers (RTS). Tickerplants
+    #     can persist messages to log, which is readable by any RDB
+    #     environment. It supports only single-node that is only one kdb
+    #     process.
     #   @return [String]
+    #
+    # @!attribute [rw] tickerplant_log_configuration
+    #   A configuration to store Tickerplant logs. It consists of a list of
+    #   volumes that will be mounted to your cluster. For the cluster type
+    #   `Tickerplant`, the location of the TP volume on the cluster will be
+    #   available by using the global variable `.aws.tp_log_path`.
+    #   @return [Types::TickerplantLogConfiguration]
     #
     # @!attribute [rw] databases
     #   A list of databases that will be available for querying.
@@ -519,6 +561,11 @@ module Aws::Finspace
     #   tags to a cluster.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] scaling_group_configuration
+    #   The structure that stores the configuration details of a scaling
+    #   group.
+    #   @return [Types::KxScalingGroupConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxClusterRequest AWS API Documentation
     #
     class CreateKxClusterRequest < Struct.new(
@@ -526,6 +573,7 @@ module Aws::Finspace
       :environment_id,
       :cluster_name,
       :cluster_type,
+      :tickerplant_log_configuration,
       :databases,
       :cache_storage_configurations,
       :auto_scaling_configuration,
@@ -540,7 +588,8 @@ module Aws::Finspace
       :savedown_storage_configuration,
       :az_mode,
       :availability_zone_id,
-      :tags)
+      :tags,
+      :scaling_group_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -597,7 +646,32 @@ module Aws::Finspace
     #     processes in kdb systems. It allows you to create your own routing
     #     logic using the initialization scripts and custom code. This type
     #     of cluster does not require a writable local storage.
+    #
+    #   * GP – A general purpose cluster allows you to quickly iterate on
+    #     code during development by granting greater access to system
+    #     commands and enabling a fast reload of custom code. This cluster
+    #     type can optionally mount databases including cache and savedown
+    #     storage. For this cluster type, the node count is fixed at 1. It
+    #     does not support autoscaling and supports only `SINGLE` AZ mode.
+    #
+    #   * Tickerplant – A tickerplant cluster allows you to subscribe to
+    #     feed handlers based on IAM permissions. It can publish to RDBs,
+    #     other Tickerplants, and real-time subscribers (RTS). Tickerplants
+    #     can persist messages to log, which is readable by any RDB
+    #     environment. It supports only single-node that is only one kdb
+    #     process.
     #   @return [String]
+    #
+    # @!attribute [rw] tickerplant_log_configuration
+    #   A configuration to store the Tickerplant logs. It consists of a list
+    #   of volumes that will be mounted to your cluster. For the cluster
+    #   type `Tickerplant`, the location of the TP volume on the cluster
+    #   will be available by using the global variable `.aws.tp_log_path`.
+    #   @return [Types::TickerplantLogConfiguration]
+    #
+    # @!attribute [rw] volumes
+    #   A list of volumes mounted on the cluster.
+    #   @return [Array<Types::Volume>]
     #
     # @!attribute [rw] databases
     #   A list of databases that will be available for querying.
@@ -690,6 +764,11 @@ module Aws::Finspace
     #   1635768000000.
     #   @return [Time]
     #
+    # @!attribute [rw] scaling_group_configuration
+    #   The structure that stores the configuration details of a scaling
+    #   group.
+    #   @return [Types::KxScalingGroupConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxClusterResponse AWS API Documentation
     #
     class CreateKxClusterResponse < Struct.new(
@@ -698,6 +777,8 @@ module Aws::Finspace
       :status_reason,
       :cluster_name,
       :cluster_type,
+      :tickerplant_log_configuration,
+      :volumes,
       :databases,
       :cache_storage_configurations,
       :auto_scaling_configuration,
@@ -713,7 +794,8 @@ module Aws::Finspace
       :savedown_storage_configuration,
       :az_mode,
       :availability_zone_id,
-      :created_timestamp)
+      :created_timestamp,
+      :scaling_group_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -797,6 +879,176 @@ module Aws::Finspace
       include Aws::Structure
     end
 
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, where you want to
+    #   create the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database where you want to create a dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataview_name
+    #   A unique identifier for the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] az_mode
+    #   The number of availability zones you want to assign per cluster.
+    #   This can be one of the following
+    #
+    #   * `SINGLE` – Assigns one availability zone per cluster.
+    #
+    #   * `MULTI` – Assigns all the availability zones per cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The identifier of the availability zones.
+    #   @return [String]
+    #
+    # @!attribute [rw] changeset_id
+    #   A unique identifier of the changeset that you want to use to ingest
+    #   data.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_configurations
+    #   The configuration that contains the database path of the data that
+    #   you want to place on each selected volume. Each segment must have a
+    #   unique database path for each volume. If you do not explicitly
+    #   specify any database path for a volume, they are accessible from the
+    #   cluster through the default S3/object store segment.
+    #   @return [Array<Types::KxDataviewSegmentConfiguration>]
+    #
+    # @!attribute [rw] auto_update
+    #   The option to specify whether you want to apply all the future
+    #   additions and corrections automatically to the dataview, when you
+    #   ingest new changesets. The default value is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   A description of the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs to label the dataview. You can add up to
+    #   50 tags to a dataview.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxDataviewRequest AWS API Documentation
+    #
+    class CreateKxDataviewRequest < Struct.new(
+      :environment_id,
+      :database_name,
+      :dataview_name,
+      :az_mode,
+      :availability_zone_id,
+      :changeset_id,
+      :segment_configurations,
+      :auto_update,
+      :description,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dataview_name
+    #   A unique identifier for the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database where you want to create a dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, where you want to
+    #   create the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] az_mode
+    #   The number of availability zones you want to assign per cluster.
+    #   This can be one of the following
+    #
+    #   * `SINGLE` – Assigns one availability zone per cluster.
+    #
+    #   * `MULTI` – Assigns all the availability zones per cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The identifier of the availability zones.
+    #   @return [String]
+    #
+    # @!attribute [rw] changeset_id
+    #   A unique identifier for the changeset.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_configurations
+    #   The configuration that contains the database path of the data that
+    #   you want to place on each selected volume. Each segment must have a
+    #   unique database path for each volume. If you do not explicitly
+    #   specify any database path for a volume, they are accessible from the
+    #   cluster through the default S3/object store segment.
+    #   @return [Array<Types::KxDataviewSegmentConfiguration>]
+    #
+    # @!attribute [rw] description
+    #   A description of the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_update
+    #   The option to select whether you want to apply all the future
+    #   additions and corrections automatically to the dataview when you
+    #   ingest new changesets. The default value is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp at which the dataview was created in FinSpace. The
+    #   value is determined as epoch time in milliseconds. For example, the
+    #   value for Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_timestamp
+    #   The last time that the dataview was updated in FinSpace. The value
+    #   is determined as epoch time in milliseconds. For example, the value
+    #   for Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of dataview creation.
+    #
+    #   * `CREATING` – The dataview creation is in progress.
+    #
+    #   * `UPDATING` – The dataview is in the process of being updated.
+    #
+    #   * `ACTIVE` – The dataview is active.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxDataviewResponse AWS API Documentation
+    #
+    class CreateKxDataviewResponse < Struct.new(
+      :dataview_name,
+      :database_name,
+      :environment_id,
+      :az_mode,
+      :availability_zone_id,
+      :changeset_id,
+      :segment_configurations,
+      :description,
+      :auto_update,
+      :created_timestamp,
+      :last_modified_timestamp,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the kdb environment that you want to create.
     #   @return [String]
@@ -816,6 +1068,9 @@ module Aws::Finspace
     #
     # @!attribute [rw] client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxEnvironmentRequest AWS API Documentation
@@ -872,6 +1127,115 @@ module Aws::Finspace
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, where you want to
+    #   create the scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_group_name
+    #   A unique identifier for the kdb scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_type
+    #   The memory and CPU capabilities of the scaling group host on which
+    #   FinSpace Managed kdb clusters will be placed.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The identifier of the availability zones.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs to label the scaling group. You can add up
+    #   to 50 tags to a scaling group.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxScalingGroupRequest AWS API Documentation
+    #
+    class CreateKxScalingGroupRequest < Struct.new(
+      :client_token,
+      :environment_id,
+      :scaling_group_name,
+      :host_type,
+      :availability_zone_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, where you create the
+    #   scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_group_name
+    #   A unique identifier for the kdb scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_type
+    #   The memory and CPU capabilities of the scaling group host on which
+    #   FinSpace Managed kdb clusters will be placed.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The identifier of the availability zones.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of scaling group.
+    #
+    #   * CREATING – The scaling group creation is in progress.
+    #
+    #   * CREATE\_FAILED – The scaling group creation has failed.
+    #
+    #   * ACTIVE – The scaling group is active.
+    #
+    #   * UPDATING – The scaling group is in the process of being updated.
+    #
+    #   * UPDATE\_FAILED – The update action failed.
+    #
+    #   * DELETING – The scaling group is in the process of being deleted.
+    #
+    #   * DELETE\_FAILED – The system failed to delete the scaling group.
+    #
+    #   * DELETED – The scaling group is successfully deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_timestamp
+    #   The last time that the scaling group was updated in FinSpace. The
+    #   value is determined as epoch time in milliseconds. For example, the
+    #   value for Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp at which the scaling group was created in FinSpace.
+    #   The value is determined as epoch time in milliseconds. For example,
+    #   the value for Monday, November 1, 2021 12:00:00 PM UTC is specified
+    #   as 1635768000000.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxScalingGroupResponse AWS API Documentation
+    #
+    class CreateKxScalingGroupResponse < Struct.new(
+      :environment_id,
+      :scaling_group_name,
+      :host_type,
+      :availability_zone_id,
+      :status,
+      :last_modified_timestamp,
+      :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] environment_id
     #   A unique identifier for the kdb environment where you want to create
     #   a user.
@@ -892,6 +1256,9 @@ module Aws::Finspace
     #
     # @!attribute [rw] client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxUserRequest AWS API Documentation
@@ -935,6 +1302,155 @@ module Aws::Finspace
       :user_arn,
       :environment_id,
       :iam_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, whose clusters can
+    #   attach to the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_type
+    #   The type of file system volume. Currently, FinSpace only supports
+    #   `NAS_1` volume type. When you select `NAS_1` volume type, you must
+    #   also provide `nas1Configuration`.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_name
+    #   A unique identifier for the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] nas1_configuration
+    #   Specifies the configuration for the Network attached storage
+    #   (NAS\_1) file system volume. This parameter is required when you
+    #   choose `volumeType` as *NAS\_1*.
+    #   @return [Types::KxNAS1Configuration]
+    #
+    # @!attribute [rw] az_mode
+    #   The number of availability zones you want to assign per cluster.
+    #   Currently, FinSpace only support `SINGLE` for volumes.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_ids
+    #   The identifier of the availability zones.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs to label the volume. You can add up to 50
+    #   tags to a volume.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxVolumeRequest AWS API Documentation
+    #
+    class CreateKxVolumeRequest < Struct.new(
+      :client_token,
+      :environment_id,
+      :volume_type,
+      :volume_name,
+      :description,
+      :nas1_configuration,
+      :az_mode,
+      :availability_zone_ids,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, whose clusters can
+    #   attach to the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_name
+    #   A unique identifier for the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_type
+    #   The type of file system volume. Currently, FinSpace only supports
+    #   `NAS_1` volume type.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_arn
+    #   The ARN identifier of the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] nas1_configuration
+    #   Specifies the configuration for the Network attached storage
+    #   (NAS\_1) file system volume.
+    #   @return [Types::KxNAS1Configuration]
+    #
+    # @!attribute [rw] status
+    #   The status of volume creation.
+    #
+    #   * CREATING – The volume creation is in progress.
+    #
+    #   * CREATE\_FAILED – The volume creation has failed.
+    #
+    #   * ACTIVE – The volume is active.
+    #
+    #   * UPDATING – The volume is in the process of being updated.
+    #
+    #   * UPDATE\_FAILED – The update action failed.
+    #
+    #   * UPDATED – The volume is successfully updated.
+    #
+    #   * DELETING – The volume is in the process of being deleted.
+    #
+    #   * DELETE\_FAILED – The system failed to delete the volume.
+    #
+    #   * DELETED – The volume is successfully deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The error message when a failed state occurs.
+    #   @return [String]
+    #
+    # @!attribute [rw] az_mode
+    #   The number of availability zones you want to assign per cluster.
+    #   Currently, FinSpace only support `SINGLE` for volumes.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_ids
+    #   The identifier of the availability zones.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp at which the volume was created in FinSpace. The value
+    #   is determined as epoch time in milliseconds. For example, the value
+    #   for Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateKxVolumeResponse AWS API Documentation
+    #
+    class CreateKxVolumeResponse < Struct.new(
+      :environment_id,
+      :volume_name,
+      :volume_type,
+      :volume_arn,
+      :nas1_configuration,
+      :status,
+      :status_reason,
+      :az_mode,
+      :description,
+      :availability_zone_ids,
+      :created_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1034,13 +1550,56 @@ module Aws::Finspace
     class DeleteKxDatabaseResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, from where you want to
+    #   delete the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database whose dataview you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataview_name
+    #   The name of the dataview that you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxDataviewRequest AWS API Documentation
+    #
+    class DeleteKxDataviewRequest < Struct.new(
+      :environment_id,
+      :database_name,
+      :dataview_name,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxDataviewResponse AWS API Documentation
+    #
+    class DeleteKxDataviewResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] environment_id
     #   A unique identifier for the kdb environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxEnvironmentRequest AWS API Documentation
     #
     class DeleteKxEnvironmentRequest < Struct.new(
-      :environment_id)
+      :environment_id,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1048,6 +1607,36 @@ module Aws::Finspace
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxEnvironmentResponse AWS API Documentation
     #
     class DeleteKxEnvironmentResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, from where you want to
+    #   delete the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_group_name
+    #   A unique identifier for the kdb scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxScalingGroupRequest AWS API Documentation
+    #
+    class DeleteKxScalingGroupRequest < Struct.new(
+      :environment_id,
+      :scaling_group_name,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxScalingGroupResponse AWS API Documentation
+    #
+    class DeleteKxScalingGroupResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] user_name
     #   A unique identifier for the user that you want to delete.
@@ -1057,11 +1646,19 @@ module Aws::Finspace
     #   A unique identifier for the kdb environment.
     #   @return [String]
     #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxUserRequest AWS API Documentation
     #
     class DeleteKxUserRequest < Struct.new(
       :user_name,
-      :environment_id)
+      :environment_id,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1069,6 +1666,36 @@ module Aws::Finspace
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxUserResponse AWS API Documentation
     #
     class DeleteKxUserResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, whose clusters can
+    #   attach to the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_name
+    #   The name of the volume that you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxVolumeRequest AWS API Documentation
+    #
+    class DeleteKxVolumeRequest < Struct.new(
+      :environment_id,
+      :volume_name,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxVolumeResponse AWS API Documentation
+    #
+    class DeleteKxVolumeResponse < Aws::EmptyStructure; end
 
     # Represents an FinSpace environment.
     #
@@ -1392,7 +2019,32 @@ module Aws::Finspace
     #     processes in kdb systems. It allows you to create your own routing
     #     logic using the initialization scripts and custom code. This type
     #     of cluster does not require a writable local storage.
+    #
+    #   * GP – A general purpose cluster allows you to quickly iterate on
+    #     code during development by granting greater access to system
+    #     commands and enabling a fast reload of custom code. This cluster
+    #     type can optionally mount databases including cache and savedown
+    #     storage. For this cluster type, the node count is fixed at 1. It
+    #     does not support autoscaling and supports only `SINGLE` AZ mode.
+    #
+    #   * Tickerplant – A tickerplant cluster allows you to subscribe to
+    #     feed handlers based on IAM permissions. It can publish to RDBs,
+    #     other Tickerplants, and real-time subscribers (RTS). Tickerplants
+    #     can persist messages to log, which is readable by any RDB
+    #     environment. It supports only single-node that is only one kdb
+    #     process.
     #   @return [String]
+    #
+    # @!attribute [rw] tickerplant_log_configuration
+    #   A configuration to store the Tickerplant logs. It consists of a list
+    #   of volumes that will be mounted to your cluster. For the cluster
+    #   type `Tickerplant`, the location of the TP volume on the cluster
+    #   will be available by using the global variable `.aws.tp_log_path`.
+    #   @return [Types::TickerplantLogConfiguration]
+    #
+    # @!attribute [rw] volumes
+    #   A list of volumes attached to the cluster.
+    #   @return [Array<Types::Volume>]
     #
     # @!attribute [rw] databases
     #   A list of databases mounted on the cluster.
@@ -1484,6 +2136,11 @@ module Aws::Finspace
     #   1635768000000.
     #   @return [Time]
     #
+    # @!attribute [rw] scaling_group_configuration
+    #   The structure that stores the capacity configuration details of a
+    #   scaling group.
+    #   @return [Types::KxScalingGroupConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxClusterResponse AWS API Documentation
     #
     class GetKxClusterResponse < Struct.new(
@@ -1491,6 +2148,8 @@ module Aws::Finspace
       :status_reason,
       :cluster_name,
       :cluster_type,
+      :tickerplant_log_configuration,
+      :volumes,
       :databases,
       :cache_storage_configurations,
       :auto_scaling_configuration,
@@ -1506,7 +2165,8 @@ module Aws::Finspace
       :savedown_storage_configuration,
       :az_mode,
       :availability_zone_id,
-      :created_timestamp)
+      :created_timestamp,
+      :scaling_group_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1633,6 +2293,132 @@ module Aws::Finspace
     end
 
     # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, from where you want to
+    #   retrieve the dataview details.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database where you created the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataview_name
+    #   A unique identifier for the dataview.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxDataviewRequest AWS API Documentation
+    #
+    class GetKxDataviewRequest < Struct.new(
+      :environment_id,
+      :database_name,
+      :dataview_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] database_name
+    #   The name of the database where you created the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataview_name
+    #   A unique identifier for the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] az_mode
+    #   The number of availability zones you want to assign per cluster.
+    #   This can be one of the following
+    #
+    #   * `SINGLE` – Assigns one availability zone per cluster.
+    #
+    #   * `MULTI` – Assigns all the availability zones per cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The identifier of the availability zones.
+    #   @return [String]
+    #
+    # @!attribute [rw] changeset_id
+    #   A unique identifier of the changeset that you want to use to ingest
+    #   data.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_configurations
+    #   The configuration that contains the database path of the data that
+    #   you want to place on each selected volume. Each segment must have a
+    #   unique database path for each volume. If you do not explicitly
+    #   specify any database path for a volume, they are accessible from the
+    #   cluster through the default S3/object store segment.
+    #   @return [Array<Types::KxDataviewSegmentConfiguration>]
+    #
+    # @!attribute [rw] active_versions
+    #   The current active changeset versions of the database on the given
+    #   dataview.
+    #   @return [Array<Types::KxDataviewActiveVersion>]
+    #
+    # @!attribute [rw] description
+    #   A description of the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_update
+    #   The option to specify whether you want to apply all the future
+    #   additions and corrections automatically to the dataview when new
+    #   changesets are ingested. The default value is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, from where you want to
+    #   retrieve the dataview details.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp at which the dataview was created in FinSpace. The
+    #   value is determined as epoch time in milliseconds. For example, the
+    #   value for Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_timestamp
+    #   The last time that the dataview was updated in FinSpace. The value
+    #   is determined as epoch time in milliseconds. For example, the value
+    #   for Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of dataview creation.
+    #
+    #   * `CREATING` – The dataview creation is in progress.
+    #
+    #   * `UPDATING` – The dataview is in the process of being updated.
+    #
+    #   * `ACTIVE` – The dataview is active.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The error message when a failed state occurs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxDataviewResponse AWS API Documentation
+    #
+    class GetKxDataviewResponse < Struct.new(
+      :database_name,
+      :dataview_name,
+      :az_mode,
+      :availability_zone_id,
+      :changeset_id,
+      :segment_configurations,
+      :active_versions,
+      :description,
+      :auto_update,
+      :environment_id,
+      :created_timestamp,
+      :last_modified_timestamp,
+      :status,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] environment_id
     #   A unique identifier for the kdb environment.
     #   @return [String]
     #
@@ -1741,6 +2527,99 @@ module Aws::Finspace
       include Aws::Structure
     end
 
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_group_name
+    #   A unique identifier for the kdb scaling group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxScalingGroupRequest AWS API Documentation
+    #
+    class GetKxScalingGroupRequest < Struct.new(
+      :environment_id,
+      :scaling_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scaling_group_name
+    #   A unique identifier for the kdb scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_group_arn
+    #   The ARN identifier for the scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_type
+    #   The memory and CPU capabilities of the scaling group host on which
+    #   FinSpace Managed kdb clusters will be placed.
+    #   @return [String]
+    #
+    # @!attribute [rw] clusters
+    #   The list of Managed kdb clusters that are currently active in the
+    #   given scaling group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The identifier of the availability zones.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of scaling group.
+    #
+    #   * CREATING – The scaling group creation is in progress.
+    #
+    #   * CREATE\_FAILED – The scaling group creation has failed.
+    #
+    #   * ACTIVE – The scaling group is active.
+    #
+    #   * UPDATING – The scaling group is in the process of being updated.
+    #
+    #   * UPDATE\_FAILED – The update action failed.
+    #
+    #   * DELETING – The scaling group is in the process of being deleted.
+    #
+    #   * DELETE\_FAILED – The system failed to delete the scaling group.
+    #
+    #   * DELETED – The scaling group is successfully deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The error message when a failed state occurs.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_timestamp
+    #   The last time that the scaling group was updated in FinSpace. The
+    #   value is determined as epoch time in milliseconds. For example, the
+    #   value for Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp at which the scaling group was created in FinSpace.
+    #   The value is determined as epoch time in milliseconds. For example,
+    #   the value for Monday, November 1, 2021 12:00:00 PM UTC is specified
+    #   as 1635768000000.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxScalingGroupResponse AWS API Documentation
+    #
+    class GetKxScalingGroupResponse < Struct.new(
+      :scaling_group_name,
+      :scaling_group_arn,
+      :host_type,
+      :clusters,
+      :availability_zone_id,
+      :status,
+      :status_reason,
+      :last_modified_timestamp,
+      :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] user_name
     #   A unique identifier for the user.
     #   @return [String]
@@ -1787,6 +2666,124 @@ module Aws::Finspace
       :user_arn,
       :environment_id,
       :iam_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, whose clusters can
+    #   attach to the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_name
+    #   A unique identifier for the volume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxVolumeRequest AWS API Documentation
+    #
+    class GetKxVolumeRequest < Struct.new(
+      :environment_id,
+      :volume_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, whose clusters can
+    #   attach to the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_name
+    #   A unique identifier for the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_type
+    #   The type of file system volume. Currently, FinSpace only supports
+    #   `NAS_1` volume type.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_arn
+    #   The ARN identifier of the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] nas1_configuration
+    #   Specifies the configuration for the Network attached storage
+    #   (NAS\_1) file system volume.
+    #   @return [Types::KxNAS1Configuration]
+    #
+    # @!attribute [rw] status
+    #   The status of volume creation.
+    #
+    #   * CREATING – The volume creation is in progress.
+    #
+    #   * CREATE\_FAILED – The volume creation has failed.
+    #
+    #   * ACTIVE – The volume is active.
+    #
+    #   * UPDATING – The volume is in the process of being updated.
+    #
+    #   * UPDATE\_FAILED – The update action failed.
+    #
+    #   * UPDATED – The volume is successfully updated.
+    #
+    #   * DELETING – The volume is in the process of being deleted.
+    #
+    #   * DELETE\_FAILED – The system failed to delete the volume.
+    #
+    #   * DELETED – The volume is successfully deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The error message when a failed state occurs.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp at which the volume was created in FinSpace. The value
+    #   is determined as epoch time in milliseconds. For example, the value
+    #   for Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A description of the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] az_mode
+    #   The number of availability zones you want to assign per cluster.
+    #   Currently, FinSpace only support `SINGLE` for volumes.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_ids
+    #   The identifier of the availability zones.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_modified_timestamp
+    #   The last time that the volume was updated in FinSpace. The value is
+    #   determined as epoch time in milliseconds. For example, the value for
+    #   Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @!attribute [rw] attached_clusters
+    #   A list of cluster identifiers that a volume is attached to.
+    #   @return [Array<Types::KxAttachedCluster>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetKxVolumeResponse AWS API Documentation
+    #
+    class GetKxVolumeResponse < Struct.new(
+      :environment_id,
+      :volume_name,
+      :volume_type,
+      :volume_arn,
+      :nas1_configuration,
+      :status,
+      :status_reason,
+      :created_timestamp,
+      :description,
+      :az_mode,
+      :availability_zone_ids,
+      :last_modified_timestamp,
+      :attached_clusters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1839,15 +2836,64 @@ module Aws::Finspace
       include Aws::Structure
     end
 
+    # The structure containing the metadata of the attached clusters.
+    #
+    # @!attribute [rw] cluster_name
+    #   A unique name for the attached cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_type
+    #   Specifies the type of cluster. The volume for TP and RDB cluster
+    #   types will be used for TP logs.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_status
+    #   The status of the attached cluster.
+    #
+    #   * PENDING – The cluster is pending creation.
+    #
+    #   * CREATING – The cluster creation process is in progress.
+    #
+    #   * CREATE\_FAILED – The cluster creation process has failed.
+    #
+    #   * RUNNING – The cluster creation process is running.
+    #
+    #   * UPDATING – The cluster is in the process of being updated.
+    #
+    #   * DELETING – The cluster is in the process of being deleted.
+    #
+    #   * DELETED – The cluster has been deleted.
+    #
+    #   * DELETE\_FAILED – The cluster failed to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxAttachedCluster AWS API Documentation
+    #
+    class KxAttachedCluster < Struct.new(
+      :cluster_name,
+      :cluster_type,
+      :cluster_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for read only disk cache associated with a cluster.
     #
     # @!attribute [rw] type
-    #   The type of cache storage . The valid values are:
+    #   The type of cache storage. The valid values are:
     #
     #   * CACHE\_1000 – This type provides at least 1000 MB/s disk access
     #     throughput.
     #
-    #   ^
+    #   * CACHE\_250 – This type provides at least 250 MB/s disk access
+    #     throughput.
+    #
+    #   * CACHE\_12 – This type provides at least 12 MB/s disk access
+    #     throughput.
+    #
+    #   For cache type `CACHE_1000` and `CACHE_250` you can select cache
+    #   size as 1200 GB or increments of 2400 GB. For cache type `CACHE_12`
+    #   you can select the cache size in increments of 6000 GB.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -1964,6 +3010,20 @@ module Aws::Finspace
     #     processes in kdb systems. It allows you to create your own routing
     #     logic using the initialization scripts and custom code. This type
     #     of cluster does not require a writable local storage.
+    #
+    #   * GP – A general purpose cluster allows you to quickly iterate on
+    #     code during development by granting greater access to system
+    #     commands and enabling a fast reload of custom code. This cluster
+    #     type can optionally mount databases including cache and savedown
+    #     storage. For this cluster type, the node count is fixed at 1. It
+    #     does not support autoscaling and supports only `SINGLE` AZ mode.
+    #
+    #   * Tickerplant – A tickerplant cluster allows you to subscribe to
+    #     feed handlers based on IAM permissions. It can publish to RDBs,
+    #     other Tickerplants, and real-time subscribers (RTS). Tickerplants
+    #     can persist messages to log, which is readable by any RDB
+    #     environment. It supports only single-node that is only one kdb
+    #     process.
     #   @return [String]
     #
     # @!attribute [rw] cluster_description
@@ -1973,6 +3033,10 @@ module Aws::Finspace
     # @!attribute [rw] release_label
     #   A version of the FinSpace managed kdb to run.
     #   @return [String]
+    #
+    # @!attribute [rw] volumes
+    #   A list of volumes attached to the cluster.
+    #   @return [Array<Types::Volume>]
     #
     # @!attribute [rw] initialization_script
     #   Specifies a Q program that will be run at launch of a cluster. It is
@@ -2022,12 +3086,44 @@ module Aws::Finspace
       :cluster_type,
       :cluster_description,
       :release_label,
+      :volumes,
       :initialization_script,
       :execution_role,
       :az_mode,
       :availability_zone_id,
       :last_modified_timestamp,
       :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration that allows you to choose how you want to update
+    # code on a cluster. Depending on the option you choose, you can reduce
+    # the time it takes to update the cluster.
+    #
+    # @!attribute [rw] deployment_strategy
+    #   The type of deployment that you want on a cluster.
+    #
+    #   * ROLLING – This options updates the cluster by stopping the exiting
+    #     q process and starting a new q process with updated configuration.
+    #
+    #   * NO\_RESTART – This option updates the cluster without stopping the
+    #     running q process. It is only available for `GP` type cluster.
+    #     This option is quicker as it reduces the turn around time to
+    #     update configuration on a cluster.
+    #
+    #     With this deployment mode, you cannot update the
+    #     `initializationScript` and `commandLineArguments` parameters.
+    #
+    #   * FORCE – This option updates the cluster by immediately stopping
+    #     all the running processes before starting up new ones with the
+    #     updated configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxClusterCodeDeploymentConfiguration AWS API Documentation
+    #
+    class KxClusterCodeDeploymentConfiguration < Struct.new(
+      :deployment_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2069,11 +3165,17 @@ module Aws::Finspace
     #   cache for access.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] dataview_name
+    #   The name of the dataview to be used for caching historical data on
+    #   disk.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxDatabaseCacheConfiguration AWS API Documentation
     #
     class KxDatabaseCacheConfiguration < Struct.new(
       :cache_type,
-      :db_paths)
+      :db_paths,
+      :dataview_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2096,12 +3198,23 @@ module Aws::Finspace
     #   cluster.
     #   @return [String]
     #
+    # @!attribute [rw] dataview_name
+    #   The name of the dataview to be used for caching historical data on
+    #   disk.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataview_configuration
+    #   The configuration of the dataview to be used with specified cluster.
+    #   @return [Types::KxDataviewConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxDatabaseConfiguration AWS API Documentation
     #
     class KxDatabaseConfiguration < Struct.new(
       :database_name,
       :cache_configurations,
-      :changeset_id)
+      :changeset_id,
+      :dataview_name,
+      :dataview_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2136,22 +3249,215 @@ module Aws::Finspace
       include Aws::Structure
     end
 
+    # The active version of the dataview that is currently in use by this
+    # cluster.
+    #
+    # @!attribute [rw] changeset_id
+    #   A unique identifier for the changeset.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_configurations
+    #   The configuration that contains the database path of the data that
+    #   you want to place on each selected volume. Each segment must have a
+    #   unique database path for each volume. If you do not explicitly
+    #   specify any database path for a volume, they are accessible from the
+    #   cluster through the default S3/object store segment.
+    #   @return [Array<Types::KxDataviewSegmentConfiguration>]
+    #
+    # @!attribute [rw] attached_clusters
+    #   The list of clusters that are currently using this dataview.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp at which the dataview version was active. The value is
+    #   determined as epoch time in milliseconds. For example, the value for
+    #   Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @!attribute [rw] version_id
+    #   A unique identifier of the active version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxDataviewActiveVersion AWS API Documentation
+    #
+    class KxDataviewActiveVersion < Struct.new(
+      :changeset_id,
+      :segment_configurations,
+      :attached_clusters,
+      :created_timestamp,
+      :version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure that stores the configuration details of a dataview.
+    #
+    # @!attribute [rw] dataview_name
+    #   The unique identifier of the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataview_version_id
+    #   The version of the dataview corresponding to a given changeset.
+    #   @return [String]
+    #
+    # @!attribute [rw] changeset_id
+    #   A unique identifier for the changeset.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_configurations
+    #   The db path and volume configuration for the segmented database.
+    #   @return [Array<Types::KxDataviewSegmentConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxDataviewConfiguration AWS API Documentation
+    #
+    class KxDataviewConfiguration < Struct.new(
+      :dataview_name,
+      :dataview_version_id,
+      :changeset_id,
+      :segment_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collection of kdb dataview entries.
+    #
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   A unique identifier of the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataview_name
+    #   A unique identifier of the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] az_mode
+    #   The number of availability zones you want to assign per cluster.
+    #   This can be one of the following
+    #
+    #   * `SINGLE` – Assigns one availability zone per cluster.
+    #
+    #   * `MULTI` – Assigns all the availability zones per cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The identifier of the availability zones.
+    #   @return [String]
+    #
+    # @!attribute [rw] changeset_id
+    #   A unique identifier for the changeset.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_configurations
+    #   The configuration that contains the database path of the data that
+    #   you want to place on each selected volume. Each segment must have a
+    #   unique database path for each volume. If you do not explicitly
+    #   specify any database path for a volume, they are accessible from the
+    #   cluster through the default S3/object store segment.
+    #   @return [Array<Types::KxDataviewSegmentConfiguration>]
+    #
+    # @!attribute [rw] active_versions
+    #   The active changeset versions for the given dataview entry.
+    #   @return [Array<Types::KxDataviewActiveVersion>]
+    #
+    # @!attribute [rw] status
+    #   The status of a given dataview entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description for the dataview list entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_update
+    #   The option to specify whether you want to apply all the future
+    #   additions and corrections automatically to the dataview when you
+    #   ingest new changesets. The default value is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp at which the dataview list entry was created in
+    #   FinSpace. The value is determined as epoch time in milliseconds. For
+    #   example, the value for Monday, November 1, 2021 12:00:00 PM UTC is
+    #   specified as 1635768000000.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_timestamp
+    #   The last time that the dataview list was updated in FinSpace. The
+    #   value is determined as epoch time in milliseconds. For example, the
+    #   value for Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_reason
+    #   The error message when a failed state occurs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxDataviewListEntry AWS API Documentation
+    #
+    class KxDataviewListEntry < Struct.new(
+      :environment_id,
+      :database_name,
+      :dataview_name,
+      :az_mode,
+      :availability_zone_id,
+      :changeset_id,
+      :segment_configurations,
+      :active_versions,
+      :status,
+      :description,
+      :auto_update,
+      :created_timestamp,
+      :last_modified_timestamp,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration that contains the database path of the data that you
+    # want to place on each selected volume. Each segment must have a unique
+    # database path for each volume. If you do not explicitly specify any
+    # database path for a volume, they are accessible from the cluster
+    # through the default S3/object store segment.
+    #
+    # @!attribute [rw] db_paths
+    #   The database path of the data that you want to place on each
+    #   selected volume for the segment. Each segment must have a unique
+    #   database path for each volume.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] volume_name
+    #   The name of the volume where you want to add data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxDataviewSegmentConfiguration AWS API Documentation
+    #
+    class KxDataviewSegmentConfiguration < Struct.new(
+      :db_paths,
+      :volume_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration that allows you to choose how you want to update the
     # databases on a cluster. Depending on the option you choose, you can
-    # reduce the time it takes to update the database changesets on to a
-    # cluster.
+    # reduce the time it takes to update the cluster.
     #
     # @!attribute [rw] deployment_strategy
     #   The type of deployment that you want on a cluster.
     #
-    #   * ROLLING – This options loads the updated database by stopping the
-    #     exiting q process and starting a new q process with updated
-    #     configuration.
+    #   * ROLLING – This options updates the cluster by stopping the exiting
+    #     q process and starting a new q process with updated configuration.
     #
-    #   * NO\_RESTART – This option loads the updated database on the
-    #     running q process without stopping it. This option is quicker as
-    #     it reduces the turn around time to update a kdb database changeset
-    #     configuration on a cluster.
+    #   * NO\_RESTART – This option updates the cluster without stopping the
+    #     running q process. It is only available for `HDB` type cluster.
+    #     This option is quicker as it reduces the turn around time to
+    #     update configuration on a cluster.
+    #
+    #     With this deployment mode, you cannot update the
+    #     `initializationScript` and `commandLineArguments` parameters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxDeploymentConfiguration AWS API Documentation
@@ -2286,6 +3592,26 @@ module Aws::Finspace
       include Aws::Structure
     end
 
+    # The structure containing the size and type of the network attached
+    # storage (NAS\_1) file system volume.
+    #
+    # @!attribute [rw] type
+    #   The type of the network attached storage.
+    #   @return [String]
+    #
+    # @!attribute [rw] size
+    #   The size of the network attached storage.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxNAS1Configuration AWS API Documentation
+    #
+    class KxNAS1Configuration < Struct.new(
+      :type,
+      :size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that stores metadata for a kdb node.
     #
     # @!attribute [rw] node_id
@@ -2330,11 +3656,112 @@ module Aws::Finspace
     #   The size of temporary storage in gibibytes.
     #   @return [Integer]
     #
+    # @!attribute [rw] volume_name
+    #   The name of the kdb volume that you want to use as writeable
+    #   save-down storage for clusters.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxSavedownStorageConfiguration AWS API Documentation
     #
     class KxSavedownStorageConfiguration < Struct.new(
       :type,
-      :size)
+      :size,
+      :volume_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure for storing metadata of scaling group.
+    #
+    # @!attribute [rw] scaling_group_name
+    #   A unique identifier for the kdb scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_type
+    #   The memory and CPU capabilities of the scaling group host on which
+    #   FinSpace Managed kdb clusters will be placed.
+    #   @return [String]
+    #
+    # @!attribute [rw] clusters
+    #   The list of clusters currently active in a given scaling group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The identifier of the availability zones.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of scaling groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The error message when a failed state occurs.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_timestamp
+    #   The last time that the scaling group was updated in FinSpace. The
+    #   value is determined as epoch time in milliseconds. For example, the
+    #   value for Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp at which the scaling group was created in FinSpace.
+    #   The value is determined as epoch time in milliseconds. For example,
+    #   the value for Monday, November 1, 2021 12:00:00 PM UTC is specified
+    #   as 1635768000000.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxScalingGroup AWS API Documentation
+    #
+    class KxScalingGroup < Struct.new(
+      :scaling_group_name,
+      :host_type,
+      :clusters,
+      :availability_zone_id,
+      :status,
+      :status_reason,
+      :last_modified_timestamp,
+      :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure that stores the capacity configuration details of a
+    # scaling group.
+    #
+    # @!attribute [rw] scaling_group_name
+    #   A unique identifier for the kdb scaling group.
+    #   @return [String]
+    #
+    # @!attribute [rw] memory_limit
+    #   An optional hard limit on the amount of memory a kdb cluster can
+    #   use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] memory_reservation
+    #   A reservation of the minimum amount of memory that should be
+    #   available on the scaling group for a kdb cluster to be successfully
+    #   placed in a scaling group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] node_count
+    #   The number of kdb cluster nodes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cpu
+    #   The number of vCPUs that you want to reserve for each node of this
+    #   kdb cluster on the scaling group host.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxScalingGroupConfiguration AWS API Documentation
+    #
+    class KxScalingGroupConfiguration < Struct.new(
+      :scaling_group_name,
+      :memory_limit,
+      :memory_reservation,
+      :node_count,
+      :cpu)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2375,6 +3802,86 @@ module Aws::Finspace
       :iam_role,
       :create_timestamp,
       :update_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure that contains the metadata of the volume.
+    #
+    # @!attribute [rw] volume_name
+    #   A unique identifier for the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_type
+    #   The type of file system volume. Currently, FinSpace only supports
+    #   `NAS_1` volume type.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of volume.
+    #
+    #   * CREATING – The volume creation is in progress.
+    #
+    #   * CREATE\_FAILED – The volume creation has failed.
+    #
+    #   * ACTIVE – The volume is active.
+    #
+    #   * UPDATING – The volume is in the process of being updated.
+    #
+    #   * UPDATE\_FAILED – The update action failed.
+    #
+    #   * UPDATED – The volume is successfully updated.
+    #
+    #   * DELETING – The volume is in the process of being deleted.
+    #
+    #   * DELETE\_FAILED – The system failed to delete the volume.
+    #
+    #   * DELETED – The volume is successfully deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The error message when a failed state occurs.
+    #   @return [String]
+    #
+    # @!attribute [rw] az_mode
+    #   The number of availability zones assigned to the volume. Currently,
+    #   only `SINGLE` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_ids
+    #   The identifier of the availability zones.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp at which the volume was created in FinSpace. The value
+    #   is determined as epoch time in milliseconds. For example, the value
+    #   for Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_timestamp
+    #   The last time that the volume was updated in FinSpace. The value is
+    #   determined as epoch time in milliseconds. For example, the value for
+    #   Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxVolume AWS API Documentation
+    #
+    class KxVolume < Struct.new(
+      :volume_name,
+      :volume_type,
+      :status,
+      :description,
+      :status_reason,
+      :az_mode,
+      :availability_zone_ids,
+      :created_timestamp,
+      :last_modified_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2542,6 +4049,20 @@ module Aws::Finspace
     #     processes in kdb systems. It allows you to create your own routing
     #     logic using the initialization scripts and custom code. This type
     #     of cluster does not require a writable local storage.
+    #
+    #   * GP – A general purpose cluster allows you to quickly iterate on
+    #     code during development by granting greater access to system
+    #     commands and enabling a fast reload of custom code. This cluster
+    #     type can optionally mount databases including cache and savedown
+    #     storage. For this cluster type, the node count is fixed at 1. It
+    #     does not support autoscaling and supports only `SINGLE` AZ mode.
+    #
+    #   * Tickerplant – A tickerplant cluster allows you to subscribe to
+    #     feed handlers based on IAM permissions. It can publish to RDBs,
+    #     other Tickerplants, and real-time subscribers (RTS). Tickerplants
+    #     can persist messages to log, which is readable by any RDB
+    #     environment. It supports only single-node that is only one kdb
+    #     process.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2619,6 +4140,52 @@ module Aws::Finspace
       include Aws::Structure
     end
 
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, for which you want to
+    #   retrieve a list of dataviews.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database where the dataviews were created.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where a results page should begin.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxDataviewsRequest AWS API Documentation
+    #
+    class ListKxDataviewsRequest < Struct.new(
+      :environment_id,
+      :database_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kx_dataviews
+    #   The list of kdb dataviews that are currently active for the given
+    #   database.
+    #   @return [Array<Types::KxDataviewListEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where a results page should begin.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxDataviewsResponse AWS API Documentation
+    #
+    class ListKxDataviewsResponse < Struct.new(
+      :kx_dataviews,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   A token that indicates where a results page should begin.
     #   @return [String]
@@ -2648,6 +4215,46 @@ module Aws::Finspace
     #
     class ListKxEnvironmentsResponse < Struct.new(
       :environments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, for which you want to
+    #   retrieve a list of scaling groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where a results page should begin.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxScalingGroupsRequest AWS API Documentation
+    #
+    class ListKxScalingGroupsRequest < Struct.new(
+      :environment_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scaling_groups
+    #   A list of scaling groups available in a kdb environment.
+    #   @return [Array<Types::KxScalingGroup>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where a results page should begin.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxScalingGroupsResponse AWS API Documentation
+    #
+    class ListKxScalingGroupsResponse < Struct.new(
+      :scaling_groups,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2687,6 +4294,52 @@ module Aws::Finspace
     #
     class ListKxUsersResponse < Struct.new(
       :users,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, whose clusters can
+    #   attach to the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where a results page should begin.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_type
+    #   The type of file system volume. Currently, FinSpace only supports
+    #   `NAS_1` volume type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxVolumesRequest AWS API Documentation
+    #
+    class ListKxVolumesRequest < Struct.new(
+      :environment_id,
+      :max_results,
+      :next_token,
+      :volume_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] kx_volume_summaries
+    #   A summary of volumes.
+    #   @return [Array<Types::KxVolume>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where a results page should begin.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxVolumesResponse AWS API Documentation
+    #
+    class ListKxVolumesResponse < Struct.new(
+      :kx_volume_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2883,6 +4536,23 @@ module Aws::Finspace
       include Aws::Structure
     end
 
+    # A configuration to store the Tickerplant logs. It consists of a list
+    # of volumes that will be mounted to your cluster. For the cluster type
+    # `Tickerplant`, the location of the TP volume on the cluster will be
+    # available by using the global variable `.aws.tp_log_path`.
+    #
+    # @!attribute [rw] tickerplant_log_volumes
+    #   The name of the volumes for tickerplant logs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/TickerplantLogConfiguration AWS API Documentation
+    #
+    class TickerplantLogConfiguration < Struct.new(
+      :tickerplant_log_volumes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The structure of the transit gateway and network configuration that is
     # used to connect the kdb environment to an internal network.
     #
@@ -2986,6 +4656,65 @@ module Aws::Finspace
     end
 
     # @!attribute [rw] environment_id
+    #   A unique identifier of the kdb environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The structure of the customer code available within the running
+    #   cluster.
+    #   @return [Types::CodeConfiguration]
+    #
+    # @!attribute [rw] initialization_script
+    #   Specifies a Q program that will be run at launch of a cluster. It is
+    #   a relative path within *.zip* file that contains the custom code,
+    #   which will be loaded on the cluster. It must include the file name
+    #   itself. For example, `somedir/init.q`.
+    #
+    #   You cannot update this parameter for a `NO_RESTART` deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] command_line_arguments
+    #   Specifies the key-value pairs to make them available inside the
+    #   cluster.
+    #
+    #   You cannot update this parameter for a `NO_RESTART` deployment.
+    #   @return [Array<Types::KxCommandLineArgument>]
+    #
+    # @!attribute [rw] deployment_configuration
+    #   The configuration that allows you to choose how you want to update
+    #   the code on a cluster.
+    #   @return [Types::KxClusterCodeDeploymentConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxClusterCodeConfigurationRequest AWS API Documentation
+    #
+    class UpdateKxClusterCodeConfigurationRequest < Struct.new(
+      :environment_id,
+      :cluster_name,
+      :client_token,
+      :code,
+      :initialization_script,
+      :command_line_arguments,
+      :deployment_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxClusterCodeConfigurationResponse AWS API Documentation
+    #
+    class UpdateKxClusterCodeConfigurationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] environment_id
     #   The unique identifier of a kdb environment.
     #   @return [String]
     #
@@ -3086,6 +4815,153 @@ module Aws::Finspace
     end
 
     # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, where you want to
+    #   update the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataview_name
+    #   The name of the dataview that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for a dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] changeset_id
+    #   A unique identifier for the changeset.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_configurations
+    #   The configuration that contains the database path of the data that
+    #   you want to place on each selected volume. Each segment must have a
+    #   unique database path for each volume. If you do not explicitly
+    #   specify any database path for a volume, they are accessible from the
+    #   cluster through the default S3/object store segment.
+    #   @return [Array<Types::KxDataviewSegmentConfiguration>]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxDataviewRequest AWS API Documentation
+    #
+    class UpdateKxDataviewRequest < Struct.new(
+      :environment_id,
+      :database_name,
+      :dataview_name,
+      :description,
+      :changeset_id,
+      :segment_configurations,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment, where you want to
+    #   update the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] dataview_name
+    #   The name of the database under which the dataview was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] az_mode
+    #   The number of availability zones you want to assign per cluster.
+    #   This can be one of the following
+    #
+    #   * `SINGLE` – Assigns one availability zone per cluster.
+    #
+    #   * `MULTI` – Assigns all the availability zones per cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The identifier of the availability zones.
+    #   @return [String]
+    #
+    # @!attribute [rw] changeset_id
+    #   A unique identifier for the changeset.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_configurations
+    #   The configuration that contains the database path of the data that
+    #   you want to place on each selected volume. Each segment must have a
+    #   unique database path for each volume. If you do not explicitly
+    #   specify any database path for a volume, they are accessible from the
+    #   cluster through the default S3/object store segment.
+    #   @return [Array<Types::KxDataviewSegmentConfiguration>]
+    #
+    # @!attribute [rw] active_versions
+    #   The current active changeset versions of the database on the given
+    #   dataview.
+    #   @return [Array<Types::KxDataviewActiveVersion>]
+    #
+    # @!attribute [rw] status
+    #   The status of dataview creation.
+    #
+    #   * `CREATING` – The dataview creation is in progress.
+    #
+    #   * `UPDATING` – The dataview is in the process of being updated.
+    #
+    #   * `ACTIVE` – The dataview is active.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_update
+    #   The option to specify whether you want to apply all the future
+    #   additions and corrections automatically to the dataview when new
+    #   changesets are ingested. The default value is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   A description of the dataview.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp at which the dataview was created in FinSpace. The
+    #   value is determined as epoch time in milliseconds. For example, the
+    #   value for Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_timestamp
+    #   The last time that the dataview was updated in FinSpace. The value
+    #   is determined as epoch time in milliseconds. For example, the value
+    #   for Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxDataviewResponse AWS API Documentation
+    #
+    class UpdateKxDataviewResponse < Struct.new(
+      :environment_id,
+      :database_name,
+      :dataview_name,
+      :az_mode,
+      :availability_zone_id,
+      :changeset_id,
+      :segment_configurations,
+      :active_versions,
+      :status,
+      :auto_update,
+      :description,
+      :created_timestamp,
+      :last_modified_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] environment_id
     #   A unique identifier for the kdb environment.
     #   @return [String]
     #
@@ -3101,6 +4977,9 @@ module Aws::Finspace
     #
     # @!attribute [rw] client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxEnvironmentNetworkRequest AWS API Documentation
@@ -3219,6 +5098,9 @@ module Aws::Finspace
     #
     # @!attribute [rw] client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxEnvironmentRequest AWS API Documentation
@@ -3337,6 +5219,9 @@ module Aws::Finspace
     #
     # @!attribute [rw] client_token
     #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxUserRequest AWS API Documentation
@@ -3383,6 +5268,143 @@ module Aws::Finspace
       include Aws::Structure
     end
 
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment where you created the
+    #   storage volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_name
+    #   A unique identifier for the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] nas1_configuration
+    #   Specifies the configuration for the Network attached storage
+    #   (NAS\_1) file system volume.
+    #   @return [Types::KxNAS1Configuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxVolumeRequest AWS API Documentation
+    #
+    class UpdateKxVolumeRequest < Struct.new(
+      :environment_id,
+      :volume_name,
+      :description,
+      :client_token,
+      :nas1_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment where you want to update
+    #   the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_name
+    #   A unique identifier for the volume that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_type
+    #   The type of file system volume. Currently, FinSpace only supports
+    #   `NAS_1` volume type.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_arn
+    #   The ARN identifier of the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] nas1_configuration
+    #   Specifies the configuration for the Network attached storage
+    #   (NAS\_1) file system volume.
+    #   @return [Types::KxNAS1Configuration]
+    #
+    # @!attribute [rw] status
+    #   The status of the volume.
+    #
+    #   * CREATING – The volume creation is in progress.
+    #
+    #   * CREATE\_FAILED – The volume creation has failed.
+    #
+    #   * ACTIVE – The volume is active.
+    #
+    #   * UPDATING – The volume is in the process of being updated.
+    #
+    #   * UPDATE\_FAILED – The update action failed.
+    #
+    #   * UPDATED – The volume is successfully updated.
+    #
+    #   * DELETING – The volume is in the process of being deleted.
+    #
+    #   * DELETE\_FAILED – The system failed to delete the volume.
+    #
+    #   * DELETED – The volume is successfully deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The error message when a failed state occurs.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp at which the volume was created in FinSpace. The value
+    #   is determined as epoch time in milliseconds. For example, the value
+    #   for Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @!attribute [rw] az_mode
+    #   The number of availability zones you want to assign per cluster.
+    #   Currently, FinSpace only support `SINGLE` for volumes.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_ids
+    #   The identifier of the availability zones.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] last_modified_timestamp
+    #   The last time that the volume was updated in FinSpace. The value is
+    #   determined as epoch time in milliseconds. For example, the value for
+    #   Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
+    #   @return [Time]
+    #
+    # @!attribute [rw] attached_clusters
+    #   Specifies the clusters that a volume is attached to.
+    #   @return [Array<Types::KxAttachedCluster>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateKxVolumeResponse AWS API Documentation
+    #
+    class UpdateKxVolumeResponse < Struct.new(
+      :environment_id,
+      :volume_name,
+      :volume_type,
+      :volume_arn,
+      :nas1_configuration,
+      :status,
+      :description,
+      :status_reason,
+      :created_timestamp,
+      :az_mode,
+      :availability_zone_ids,
+      :last_modified_timestamp,
+      :attached_clusters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input fails to satisfy the constraints specified by an AWS
     # service.
     #
@@ -3393,6 +5415,26 @@ module Aws::Finspace
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure that consists of name and type of volume.
+    #
+    # @!attribute [rw] volume_name
+    #   A unique identifier for the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_type
+    #   The type of file system volume. Currently, FinSpace only supports
+    #   `NAS_1` volume type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/Volume AWS API Documentation
+    #
+    class Volume < Struct.new(
+      :volume_name,
+      :volume_type)
       SENSITIVE = []
       include Aws::Structure
     end

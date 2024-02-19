@@ -388,6 +388,94 @@ module Aws::PersonalizeRuntime
 
     # @!group API Operations
 
+    # Returns a list of recommended actions in sorted in descending order by
+    # prediction score. Use the `GetActionRecommendations` API if you have a
+    # custom campaign that deploys a solution version trained with a
+    # PERSONALIZED\_ACTIONS recipe.
+    #
+    # For more information about PERSONALIZED\_ACTIONS recipes, see
+    # [PERSONALIZED\_ACTIONS recipes][1]. For more information about getting
+    # action recommendations, see [Getting action recommendations][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/nexts-best-action-recipes.html
+    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/get-action-recommendations.html
+    #
+    # @option params [String] :campaign_arn
+    #   The Amazon Resource Name (ARN) of the campaign to use for getting
+    #   action recommendations. This campaign must deploy a solution version
+    #   trained with a PERSONALIZED\_ACTIONS recipe.
+    #
+    # @option params [String] :user_id
+    #   The user ID of the user to provide action recommendations for.
+    #
+    # @option params [Integer] :num_results
+    #   The number of results to return. The default is 5. The maximum is 100.
+    #
+    # @option params [String] :filter_arn
+    #   The ARN of the filter to apply to the returned recommendations. For
+    #   more information, see [Filtering Recommendations][1].
+    #
+    #   When using this parameter, be sure the filter resource is `ACTIVE`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
+    #
+    # @option params [Hash<String,String>] :filter_values
+    #   The values to use when filtering recommendations. For each placeholder
+    #   parameter in your filter expression, provide the parameter name (in
+    #   matching case) as a key and the filter value(s) as the corresponding
+    #   value. Separate multiple values for one parameter with a comma.
+    #
+    #   For filter expressions that use an `INCLUDE` element to include
+    #   actions, you must provide values for all parameters that are defined
+    #   in the expression. For filters with expressions that use an `EXCLUDE`
+    #   element to exclude actions, you can omit the `filter-values`. In this
+    #   case, Amazon Personalize doesn't use that portion of the expression
+    #   to filter recommendations.
+    #
+    #   For more information, see [Filtering recommendations and user
+    #   segments][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
+    #
+    # @return [Types::GetActionRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetActionRecommendationsResponse#action_list #action_list} => Array&lt;Types::PredictedAction&gt;
+    #   * {Types::GetActionRecommendationsResponse#recommendation_id #recommendation_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_action_recommendations({
+    #     campaign_arn: "Arn",
+    #     user_id: "UserID",
+    #     num_results: 1,
+    #     filter_arn: "Arn",
+    #     filter_values: {
+    #       "FilterAttributeName" => "FilterAttributeValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_list #=> Array
+    #   resp.action_list[0].action_id #=> String
+    #   resp.action_list[0].score #=> Float
+    #   resp.recommendation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetActionRecommendations AWS API Documentation
+    #
+    # @overload get_action_recommendations(params = {})
+    # @param [Hash] params ({})
+    def get_action_recommendations(params = {}, options = {})
+      req = build_request(:get_action_recommendations, params)
+      req.send_request(options)
+    end
+
     # Re-ranks a list of recommended items for the given user. The first
     # item in the list is deemed the most likely item to be of interest to
     # the user.
@@ -404,7 +492,8 @@ module Aws::PersonalizeRuntime
     # @option params [required, Array<String>] :input_list
     #   A list of items (by `itemId`) to rank. If an item was not included in
     #   the training dataset, the item is appended to the end of the reranked
-    #   list. The maximum is 500.
+    #   list. If you are including metadata in recommendations, the maximum is
+    #   50. Otherwise, the maximum is 500.
     #
     # @option params [required, String] :user_id
     #   The user for which you want the campaign to provide a personalized
@@ -444,6 +533,20 @@ module Aws::PersonalizeRuntime
     #
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
     #
+    # @option params [Hash<String,Array>] :metadata_columns
+    #   If you enabled metadata in recommendations when you created or updated
+    #   the campaign, specify metadata columns from your Items dataset to
+    #   include in the personalized ranking. The map key is `ITEMS` and the
+    #   value is a list of column names from your Items dataset. The maximum
+    #   number of columns you can provide is 10.
+    #
+    #   For information about enabling metadata for a campaign, see [Enabling
+    #   metadata in recommendations for a campaign][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata
+    #
     # @return [Types::GetPersonalizedRankingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPersonalizedRankingResponse#personalized_ranking #personalized_ranking} => Array&lt;Types::PredictedItem&gt;
@@ -462,6 +565,9 @@ module Aws::PersonalizeRuntime
     #     filter_values: {
     #       "FilterAttributeName" => "FilterAttributeValue",
     #     },
+    #     metadata_columns: {
+    #       "DatasetType" => ["ColumnName"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -470,6 +576,8 @@ module Aws::PersonalizeRuntime
     #   resp.personalized_ranking[0].item_id #=> String
     #   resp.personalized_ranking[0].score #=> Float
     #   resp.personalized_ranking[0].promotion_name #=> String
+    #   resp.personalized_ranking[0].metadata #=> Hash
+    #   resp.personalized_ranking[0].metadata["ColumnName"] #=> String
     #   resp.recommendation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetPersonalizedRanking AWS API Documentation
@@ -519,8 +627,9 @@ module Aws::PersonalizeRuntime
     #   Required for `USER_PERSONALIZATION` recipe type.
     #
     # @option params [Integer] :num_results
-    #   The number of results to return. The default is 25. The maximum is
-    #   500.
+    #   The number of results to return. The default is 25. If you are
+    #   including metadata in recommendations, the maximum is 50. Otherwise,
+    #   the maximum is 500.
     #
     # @option params [Hash<String,String>] :context
     #   The contextual metadata to use when getting recommendations.
@@ -568,6 +677,23 @@ module Aws::PersonalizeRuntime
     #   defines additional business rules that apply to a configurable subset
     #   of recommended items.
     #
+    # @option params [Hash<String,Array>] :metadata_columns
+    #   If you enabled metadata in recommendations when you created or updated
+    #   the campaign or recommender, specify the metadata columns from your
+    #   Items dataset to include in item recommendations. The map key is
+    #   `ITEMS` and the value is a list of column names from your Items
+    #   dataset. The maximum number of columns you can provide is 10.
+    #
+    #   For information about enabling metadata for a campaign, see [Enabling
+    #   metadata in recommendations for a campaign][1]. For information about
+    #   enabling metadata for a recommender, see [Enabling metadata in
+    #   recommendations for a recommender][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/creating-recommenders.html#create-recommender-return-metadata
+    #
     # @return [Types::GetRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRecommendationsResponse#item_list #item_list} => Array&lt;Types::PredictedItem&gt;
@@ -598,6 +724,9 @@ module Aws::PersonalizeRuntime
     #         },
     #       },
     #     ],
+    #     metadata_columns: {
+    #       "DatasetType" => ["ColumnName"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -606,6 +735,8 @@ module Aws::PersonalizeRuntime
     #   resp.item_list[0].item_id #=> String
     #   resp.item_list[0].score #=> Float
     #   resp.item_list[0].promotion_name #=> String
+    #   resp.item_list[0].metadata #=> Hash
+    #   resp.item_list[0].metadata["ColumnName"] #=> String
     #   resp.recommendation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendations AWS API Documentation
@@ -630,7 +761,7 @@ module Aws::PersonalizeRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalizeruntime'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

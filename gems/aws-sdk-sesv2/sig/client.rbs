@@ -1,0 +1,1478 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SESV2
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchGetMetricDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetMetricDataResponse]
+        def results: () -> ::Array[Types::MetricDataResult]
+        def errors: () -> ::Array[Types::MetricDataError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#batch_get_metric_data-instance_method
+      def batch_get_metric_data: (
+                                   queries: Array[
+                                     {
+                                       id: ::String,
+                                       namespace: ("VDM"),
+                                       metric: ("SEND" | "COMPLAINT" | "PERMANENT_BOUNCE" | "TRANSIENT_BOUNCE" | "OPEN" | "CLICK" | "DELIVERY" | "DELIVERY_OPEN" | "DELIVERY_CLICK" | "DELIVERY_COMPLAINT"),
+                                       dimensions: Hash[("EMAIL_IDENTITY" | "CONFIGURATION_SET" | "ISP"), ::String]?,
+                                       start_date: ::Time,
+                                       end_date: ::Time
+                                     },
+                                   ]
+                                 ) -> _BatchGetMetricDataResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetMetricDataResponseSuccess
+
+      interface _CancelExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelExportJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#cancel_export_job-instance_method
+      def cancel_export_job: (
+                               job_id: ::String
+                             ) -> _CancelExportJobResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelExportJobResponseSuccess
+
+      interface _CreateConfigurationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfigurationSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#create_configuration_set-instance_method
+      def create_configuration_set: (
+                                      configuration_set_name: ::String,
+                                      ?tracking_options: {
+                                        custom_redirect_domain: ::String
+                                      },
+                                      ?delivery_options: {
+                                        tls_policy: ("REQUIRE" | "OPTIONAL")?,
+                                        sending_pool_name: ::String?
+                                      },
+                                      ?reputation_options: {
+                                        reputation_metrics_enabled: bool?,
+                                        last_fresh_start: ::Time?
+                                      },
+                                      ?sending_options: {
+                                        sending_enabled: bool?
+                                      },
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ],
+                                      ?suppression_options: {
+                                        suppressed_reasons: Array[("BOUNCE" | "COMPLAINT")]?
+                                      },
+                                      ?vdm_options: {
+                                        dashboard_options: {
+                                          engagement_metrics: ("ENABLED" | "DISABLED")?
+                                        }?,
+                                        guardian_options: {
+                                          optimized_shared_delivery: ("ENABLED" | "DISABLED")?
+                                        }?
+                                      }
+                                    ) -> _CreateConfigurationSetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationSetResponseSuccess
+
+      interface _CreateConfigurationSetEventDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfigurationSetEventDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#create_configuration_set_event_destination-instance_method
+      def create_configuration_set_event_destination: (
+                                                        configuration_set_name: ::String,
+                                                        event_destination_name: ::String,
+                                                        event_destination: {
+                                                          enabled: bool?,
+                                                          matching_event_types: Array[("SEND" | "REJECT" | "BOUNCE" | "COMPLAINT" | "DELIVERY" | "OPEN" | "CLICK" | "RENDERING_FAILURE" | "DELIVERY_DELAY" | "SUBSCRIPTION")]?,
+                                                          kinesis_firehose_destination: {
+                                                            iam_role_arn: ::String,
+                                                            delivery_stream_arn: ::String
+                                                          }?,
+                                                          cloud_watch_destination: {
+                                                            dimension_configurations: Array[
+                                                              {
+                                                                dimension_name: ::String,
+                                                                dimension_value_source: ("MESSAGE_TAG" | "EMAIL_HEADER" | "LINK_TAG"),
+                                                                default_dimension_value: ::String
+                                                              },
+                                                            ]
+                                                          }?,
+                                                          sns_destination: {
+                                                            topic_arn: ::String
+                                                          }?,
+                                                          pinpoint_destination: {
+                                                            application_arn: ::String?
+                                                          }?
+                                                        }
+                                                      ) -> _CreateConfigurationSetEventDestinationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationSetEventDestinationResponseSuccess
+
+      interface _CreateContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContactResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#create_contact-instance_method
+      def create_contact: (
+                            contact_list_name: ::String,
+                            email_address: ::String,
+                            ?topic_preferences: Array[
+                              {
+                                topic_name: ::String,
+                                subscription_status: ("OPT_IN" | "OPT_OUT")
+                              },
+                            ],
+                            ?unsubscribe_all: bool,
+                            ?attributes_data: ::String
+                          ) -> _CreateContactResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactResponseSuccess
+
+      interface _CreateContactListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContactListResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#create_contact_list-instance_method
+      def create_contact_list: (
+                                 contact_list_name: ::String,
+                                 ?topics: Array[
+                                   {
+                                     topic_name: ::String,
+                                     display_name: ::String,
+                                     description: ::String?,
+                                     default_subscription_status: ("OPT_IN" | "OPT_OUT")
+                                   },
+                                 ],
+                                 ?description: ::String,
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ]
+                               ) -> _CreateContactListResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactListResponseSuccess
+
+      interface _CreateCustomVerificationEmailTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomVerificationEmailTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#create_custom_verification_email_template-instance_method
+      def create_custom_verification_email_template: (
+                                                       template_name: ::String,
+                                                       from_email_address: ::String,
+                                                       template_subject: ::String,
+                                                       template_content: ::String,
+                                                       success_redirection_url: ::String,
+                                                       failure_redirection_url: ::String
+                                                     ) -> _CreateCustomVerificationEmailTemplateResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomVerificationEmailTemplateResponseSuccess
+
+      interface _CreateDedicatedIpPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDedicatedIpPoolResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#create_dedicated_ip_pool-instance_method
+      def create_dedicated_ip_pool: (
+                                      pool_name: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ],
+                                      ?scaling_mode: ("STANDARD" | "MANAGED")
+                                    ) -> _CreateDedicatedIpPoolResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDedicatedIpPoolResponseSuccess
+
+      interface _CreateDeliverabilityTestReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDeliverabilityTestReportResponse]
+        def report_id: () -> ::String
+        def deliverability_test_status: () -> ("IN_PROGRESS" | "COMPLETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#create_deliverability_test_report-instance_method
+      def create_deliverability_test_report: (
+                                               ?report_name: ::String,
+                                               from_email_address: ::String,
+                                               content: {
+                                                 simple: {
+                                                   subject: {
+                                                     data: ::String,
+                                                     charset: ::String?
+                                                   },
+                                                   body: {
+                                                     text: {
+                                                       data: ::String,
+                                                       charset: ::String?
+                                                     }?,
+                                                     html: {
+                                                       data: ::String,
+                                                       charset: ::String?
+                                                     }?
+                                                   }
+                                                 }?,
+                                                 raw: {
+                                                   data: ::String
+                                                 }?,
+                                                 template: {
+                                                   template_name: ::String?,
+                                                   template_arn: ::String?,
+                                                   template_data: ::String?
+                                                 }?
+                                               },
+                                               ?tags: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String
+                                                 },
+                                               ]
+                                             ) -> _CreateDeliverabilityTestReportResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeliverabilityTestReportResponseSuccess
+
+      interface _CreateEmailIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEmailIdentityResponse]
+        def identity_type: () -> ("EMAIL_ADDRESS" | "DOMAIN" | "MANAGED_DOMAIN")
+        def verified_for_sending_status: () -> bool
+        def dkim_attributes: () -> Types::DkimAttributes
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#create_email_identity-instance_method
+      def create_email_identity: (
+                                   email_identity: ::String,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ],
+                                   ?dkim_signing_attributes: {
+                                     domain_signing_selector: ::String?,
+                                     domain_signing_private_key: ::String?,
+                                     next_signing_key_length: ("RSA_1024_BIT" | "RSA_2048_BIT")?
+                                   },
+                                   ?configuration_set_name: ::String
+                                 ) -> _CreateEmailIdentityResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEmailIdentityResponseSuccess
+
+      interface _CreateEmailIdentityPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEmailIdentityPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#create_email_identity_policy-instance_method
+      def create_email_identity_policy: (
+                                          email_identity: ::String,
+                                          policy_name: ::String,
+                                          policy: ::String
+                                        ) -> _CreateEmailIdentityPolicyResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEmailIdentityPolicyResponseSuccess
+
+      interface _CreateEmailTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEmailTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#create_email_template-instance_method
+      def create_email_template: (
+                                   template_name: ::String,
+                                   template_content: {
+                                     subject: ::String?,
+                                     text: ::String?,
+                                     html: ::String?
+                                   }
+                                 ) -> _CreateEmailTemplateResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEmailTemplateResponseSuccess
+
+      interface _CreateExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateExportJobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#create_export_job-instance_method
+      def create_export_job: (
+                               export_data_source: {
+                                 metrics_data_source: {
+                                   dimensions: Hash[("EMAIL_IDENTITY" | "CONFIGURATION_SET" | "ISP"), Array[::String]],
+                                   namespace: ("VDM"),
+                                   metrics: Array[
+                                     {
+                                       name: ("SEND" | "COMPLAINT" | "PERMANENT_BOUNCE" | "TRANSIENT_BOUNCE" | "OPEN" | "CLICK" | "DELIVERY" | "DELIVERY_OPEN" | "DELIVERY_CLICK" | "DELIVERY_COMPLAINT")?,
+                                       aggregation: ("RATE" | "VOLUME")?
+                                     },
+                                   ],
+                                   start_date: ::Time,
+                                   end_date: ::Time
+                                 }?,
+                                 message_insights_data_source: {
+                                   start_date: ::Time,
+                                   end_date: ::Time,
+                                   include: {
+                                     from_email_address: Array[::String]?,
+                                     destination: Array[::String]?,
+                                     subject: Array[::String]?,
+                                     isp: Array[::String]?,
+                                     last_delivery_event: Array[("SEND" | "DELIVERY" | "TRANSIENT_BOUNCE" | "PERMANENT_BOUNCE" | "UNDETERMINED_BOUNCE" | "COMPLAINT")]?,
+                                     last_engagement_event: Array[("OPEN" | "CLICK")]?
+                                   }?,
+                                   exclude: {
+                                     from_email_address: Array[::String]?,
+                                     destination: Array[::String]?,
+                                     subject: Array[::String]?,
+                                     isp: Array[::String]?,
+                                     last_delivery_event: Array[("SEND" | "DELIVERY" | "TRANSIENT_BOUNCE" | "PERMANENT_BOUNCE" | "UNDETERMINED_BOUNCE" | "COMPLAINT")]?,
+                                     last_engagement_event: Array[("OPEN" | "CLICK")]?
+                                   }?,
+                                   max_results: ::Integer?
+                                 }?
+                               },
+                               export_destination: {
+                                 data_format: ("CSV" | "JSON"),
+                                 s3_url: ::String?
+                               }
+                             ) -> _CreateExportJobResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExportJobResponseSuccess
+
+      interface _CreateImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateImportJobResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#create_import_job-instance_method
+      def create_import_job: (
+                               import_destination: {
+                                 suppression_list_destination: {
+                                   suppression_list_import_action: ("DELETE" | "PUT")
+                                 }?,
+                                 contact_list_destination: {
+                                   contact_list_name: ::String,
+                                   contact_list_import_action: ("DELETE" | "PUT")
+                                 }?
+                               },
+                               import_data_source: {
+                                 s3_url: ::String,
+                                 data_format: ("CSV" | "JSON")
+                               }
+                             ) -> _CreateImportJobResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImportJobResponseSuccess
+
+      interface _DeleteConfigurationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfigurationSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#delete_configuration_set-instance_method
+      def delete_configuration_set: (
+                                      configuration_set_name: ::String
+                                    ) -> _DeleteConfigurationSetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfigurationSetResponseSuccess
+
+      interface _DeleteConfigurationSetEventDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfigurationSetEventDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#delete_configuration_set_event_destination-instance_method
+      def delete_configuration_set_event_destination: (
+                                                        configuration_set_name: ::String,
+                                                        event_destination_name: ::String
+                                                      ) -> _DeleteConfigurationSetEventDestinationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfigurationSetEventDestinationResponseSuccess
+
+      interface _DeleteContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContactResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#delete_contact-instance_method
+      def delete_contact: (
+                            contact_list_name: ::String,
+                            email_address: ::String
+                          ) -> _DeleteContactResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContactResponseSuccess
+
+      interface _DeleteContactListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContactListResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#delete_contact_list-instance_method
+      def delete_contact_list: (
+                                 contact_list_name: ::String
+                               ) -> _DeleteContactListResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContactListResponseSuccess
+
+      interface _DeleteCustomVerificationEmailTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCustomVerificationEmailTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#delete_custom_verification_email_template-instance_method
+      def delete_custom_verification_email_template: (
+                                                       template_name: ::String
+                                                     ) -> _DeleteCustomVerificationEmailTemplateResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomVerificationEmailTemplateResponseSuccess
+
+      interface _DeleteDedicatedIpPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDedicatedIpPoolResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#delete_dedicated_ip_pool-instance_method
+      def delete_dedicated_ip_pool: (
+                                      pool_name: ::String
+                                    ) -> _DeleteDedicatedIpPoolResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDedicatedIpPoolResponseSuccess
+
+      interface _DeleteEmailIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEmailIdentityResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#delete_email_identity-instance_method
+      def delete_email_identity: (
+                                   email_identity: ::String
+                                 ) -> _DeleteEmailIdentityResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEmailIdentityResponseSuccess
+
+      interface _DeleteEmailIdentityPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEmailIdentityPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#delete_email_identity_policy-instance_method
+      def delete_email_identity_policy: (
+                                          email_identity: ::String,
+                                          policy_name: ::String
+                                        ) -> _DeleteEmailIdentityPolicyResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEmailIdentityPolicyResponseSuccess
+
+      interface _DeleteEmailTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEmailTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#delete_email_template-instance_method
+      def delete_email_template: (
+                                   template_name: ::String
+                                 ) -> _DeleteEmailTemplateResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEmailTemplateResponseSuccess
+
+      interface _DeleteSuppressedDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSuppressedDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#delete_suppressed_destination-instance_method
+      def delete_suppressed_destination: (
+                                           email_address: ::String
+                                         ) -> _DeleteSuppressedDestinationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSuppressedDestinationResponseSuccess
+
+      interface _GetAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountResponse]
+        def dedicated_ip_auto_warmup_enabled: () -> bool
+        def enforcement_status: () -> ::String
+        def production_access_enabled: () -> bool
+        def send_quota: () -> Types::SendQuota
+        def sending_enabled: () -> bool
+        def suppression_attributes: () -> Types::SuppressionAttributes
+        def details: () -> Types::AccountDetails
+        def vdm_attributes: () -> Types::VdmAttributes
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_account-instance_method
+      def get_account: (
+                       ) -> _GetAccountResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountResponseSuccess
+
+      interface _GetBlacklistReportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBlacklistReportsResponse]
+        def blacklist_report: () -> ::Hash[::String, ::Array[Types::BlacklistEntry]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_blacklist_reports-instance_method
+      def get_blacklist_reports: (
+                                   blacklist_item_names: Array[::String]
+                                 ) -> _GetBlacklistReportsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBlacklistReportsResponseSuccess
+
+      interface _GetConfigurationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfigurationSetResponse]
+        def configuration_set_name: () -> ::String
+        def tracking_options: () -> Types::TrackingOptions
+        def delivery_options: () -> Types::DeliveryOptions
+        def reputation_options: () -> Types::ReputationOptions
+        def sending_options: () -> Types::SendingOptions
+        def tags: () -> ::Array[Types::Tag]
+        def suppression_options: () -> Types::SuppressionOptions
+        def vdm_options: () -> Types::VdmOptions
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_configuration_set-instance_method
+      def get_configuration_set: (
+                                   configuration_set_name: ::String
+                                 ) -> _GetConfigurationSetResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigurationSetResponseSuccess
+
+      interface _GetConfigurationSetEventDestinationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfigurationSetEventDestinationsResponse]
+        def event_destinations: () -> ::Array[Types::EventDestination]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_configuration_set_event_destinations-instance_method
+      def get_configuration_set_event_destinations: (
+                                                      configuration_set_name: ::String
+                                                    ) -> _GetConfigurationSetEventDestinationsResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigurationSetEventDestinationsResponseSuccess
+
+      interface _GetContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContactResponse]
+        def contact_list_name: () -> ::String
+        def email_address: () -> ::String
+        def topic_preferences: () -> ::Array[Types::TopicPreference]
+        def topic_default_preferences: () -> ::Array[Types::TopicPreference]
+        def unsubscribe_all: () -> bool
+        def attributes_data: () -> ::String
+        def created_timestamp: () -> ::Time
+        def last_updated_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_contact-instance_method
+      def get_contact: (
+                         contact_list_name: ::String,
+                         email_address: ::String
+                       ) -> _GetContactResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContactResponseSuccess
+
+      interface _GetContactListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContactListResponse]
+        def contact_list_name: () -> ::String
+        def topics: () -> ::Array[Types::Topic]
+        def description: () -> ::String
+        def created_timestamp: () -> ::Time
+        def last_updated_timestamp: () -> ::Time
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_contact_list-instance_method
+      def get_contact_list: (
+                              contact_list_name: ::String
+                            ) -> _GetContactListResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContactListResponseSuccess
+
+      interface _GetCustomVerificationEmailTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCustomVerificationEmailTemplateResponse]
+        def template_name: () -> ::String
+        def from_email_address: () -> ::String
+        def template_subject: () -> ::String
+        def template_content: () -> ::String
+        def success_redirection_url: () -> ::String
+        def failure_redirection_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_custom_verification_email_template-instance_method
+      def get_custom_verification_email_template: (
+                                                    template_name: ::String
+                                                  ) -> _GetCustomVerificationEmailTemplateResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCustomVerificationEmailTemplateResponseSuccess
+
+      interface _GetDedicatedIpResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDedicatedIpResponse]
+        def dedicated_ip: () -> Types::DedicatedIp
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_dedicated_ip-instance_method
+      def get_dedicated_ip: (
+                              ip: ::String
+                            ) -> _GetDedicatedIpResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDedicatedIpResponseSuccess
+
+      interface _GetDedicatedIpPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDedicatedIpPoolResponse]
+        def dedicated_ip_pool: () -> Types::DedicatedIpPool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_dedicated_ip_pool-instance_method
+      def get_dedicated_ip_pool: (
+                                   pool_name: ::String
+                                 ) -> _GetDedicatedIpPoolResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDedicatedIpPoolResponseSuccess
+
+      interface _GetDedicatedIpsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDedicatedIpsResponse]
+        def dedicated_ips: () -> ::Array[Types::DedicatedIp]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_dedicated_ips-instance_method
+      def get_dedicated_ips: (
+                               ?pool_name: ::String,
+                               ?next_token: ::String,
+                               ?page_size: ::Integer
+                             ) -> _GetDedicatedIpsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDedicatedIpsResponseSuccess
+
+      interface _GetDeliverabilityDashboardOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeliverabilityDashboardOptionsResponse]
+        def dashboard_enabled: () -> bool
+        def subscription_expiry_date: () -> ::Time
+        def account_status: () -> ("ACTIVE" | "PENDING_EXPIRATION" | "DISABLED")
+        def active_subscribed_domains: () -> ::Array[Types::DomainDeliverabilityTrackingOption]
+        def pending_expiration_subscribed_domains: () -> ::Array[Types::DomainDeliverabilityTrackingOption]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_deliverability_dashboard_options-instance_method
+      def get_deliverability_dashboard_options: (
+                                                ) -> _GetDeliverabilityDashboardOptionsResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeliverabilityDashboardOptionsResponseSuccess
+
+      interface _GetDeliverabilityTestReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeliverabilityTestReportResponse]
+        def deliverability_test_report: () -> Types::DeliverabilityTestReport
+        def overall_placement: () -> Types::PlacementStatistics
+        def isp_placements: () -> ::Array[Types::IspPlacement]
+        def message: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_deliverability_test_report-instance_method
+      def get_deliverability_test_report: (
+                                            report_id: ::String
+                                          ) -> _GetDeliverabilityTestReportResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeliverabilityTestReportResponseSuccess
+
+      interface _GetDomainDeliverabilityCampaignResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainDeliverabilityCampaignResponse]
+        def domain_deliverability_campaign: () -> Types::DomainDeliverabilityCampaign
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_domain_deliverability_campaign-instance_method
+      def get_domain_deliverability_campaign: (
+                                                campaign_id: ::String
+                                              ) -> _GetDomainDeliverabilityCampaignResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainDeliverabilityCampaignResponseSuccess
+
+      interface _GetDomainStatisticsReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainStatisticsReportResponse]
+        def overall_volume: () -> Types::OverallVolume
+        def daily_volumes: () -> ::Array[Types::DailyVolume]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_domain_statistics_report-instance_method
+      def get_domain_statistics_report: (
+                                          domain: ::String,
+                                          start_date: ::Time,
+                                          end_date: ::Time
+                                        ) -> _GetDomainStatisticsReportResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainStatisticsReportResponseSuccess
+
+      interface _GetEmailIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEmailIdentityResponse]
+        def identity_type: () -> ("EMAIL_ADDRESS" | "DOMAIN" | "MANAGED_DOMAIN")
+        def feedback_forwarding_status: () -> bool
+        def verified_for_sending_status: () -> bool
+        def dkim_attributes: () -> Types::DkimAttributes
+        def mail_from_attributes: () -> Types::MailFromAttributes
+        def policies: () -> ::Hash[::String, ::String]
+        def tags: () -> ::Array[Types::Tag]
+        def configuration_set_name: () -> ::String
+        def verification_status: () -> ("PENDING" | "SUCCESS" | "FAILED" | "TEMPORARY_FAILURE" | "NOT_STARTED")
+        def verification_info: () -> Types::VerificationInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_email_identity-instance_method
+      def get_email_identity: (
+                                email_identity: ::String
+                              ) -> _GetEmailIdentityResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEmailIdentityResponseSuccess
+
+      interface _GetEmailIdentityPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEmailIdentityPoliciesResponse]
+        def policies: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_email_identity_policies-instance_method
+      def get_email_identity_policies: (
+                                         email_identity: ::String
+                                       ) -> _GetEmailIdentityPoliciesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEmailIdentityPoliciesResponseSuccess
+
+      interface _GetEmailTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEmailTemplateResponse]
+        def template_name: () -> ::String
+        def template_content: () -> Types::EmailTemplateContent
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_email_template-instance_method
+      def get_email_template: (
+                                template_name: ::String
+                              ) -> _GetEmailTemplateResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEmailTemplateResponseSuccess
+
+      interface _GetExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetExportJobResponse]
+        def job_id: () -> ::String
+        def export_source_type: () -> ("METRICS_DATA" | "MESSAGE_INSIGHTS")
+        def job_status: () -> ("CREATED" | "PROCESSING" | "COMPLETED" | "FAILED" | "CANCELLED")
+        def export_destination: () -> Types::ExportDestination
+        def export_data_source: () -> Types::ExportDataSource
+        def created_timestamp: () -> ::Time
+        def completed_timestamp: () -> ::Time
+        def failure_info: () -> Types::FailureInfo
+        def statistics: () -> Types::ExportStatistics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_export_job-instance_method
+      def get_export_job: (
+                            job_id: ::String
+                          ) -> _GetExportJobResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExportJobResponseSuccess
+
+      interface _GetImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImportJobResponse]
+        def job_id: () -> ::String
+        def import_destination: () -> Types::ImportDestination
+        def import_data_source: () -> Types::ImportDataSource
+        def failure_info: () -> Types::FailureInfo
+        def job_status: () -> ("CREATED" | "PROCESSING" | "COMPLETED" | "FAILED" | "CANCELLED")
+        def created_timestamp: () -> ::Time
+        def completed_timestamp: () -> ::Time
+        def processed_records_count: () -> ::Integer
+        def failed_records_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_import_job-instance_method
+      def get_import_job: (
+                            job_id: ::String
+                          ) -> _GetImportJobResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImportJobResponseSuccess
+
+      interface _GetMessageInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMessageInsightsResponse]
+        def message_id: () -> ::String
+        def from_email_address: () -> ::String
+        def subject: () -> ::String
+        def email_tags: () -> ::Array[Types::MessageTag]
+        def insights: () -> ::Array[Types::EmailInsights]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_message_insights-instance_method
+      def get_message_insights: (
+                                  message_id: ::String
+                                ) -> _GetMessageInsightsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMessageInsightsResponseSuccess
+
+      interface _GetSuppressedDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSuppressedDestinationResponse]
+        def suppressed_destination: () -> Types::SuppressedDestination
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#get_suppressed_destination-instance_method
+      def get_suppressed_destination: (
+                                        email_address: ::String
+                                      ) -> _GetSuppressedDestinationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSuppressedDestinationResponseSuccess
+
+      interface _ListConfigurationSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfigurationSetsResponse]
+        def configuration_sets: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_configuration_sets-instance_method
+      def list_configuration_sets: (
+                                     ?next_token: ::String,
+                                     ?page_size: ::Integer
+                                   ) -> _ListConfigurationSetsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationSetsResponseSuccess
+
+      interface _ListContactListsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContactListsResponse]
+        def contact_lists: () -> ::Array[Types::ContactList]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_contact_lists-instance_method
+      def list_contact_lists: (
+                                ?page_size: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListContactListsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContactListsResponseSuccess
+
+      interface _ListContactsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContactsResponse]
+        def contacts: () -> ::Array[Types::Contact]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_contacts-instance_method
+      def list_contacts: (
+                           contact_list_name: ::String,
+                           ?filter: {
+                             filtered_status: ("OPT_IN" | "OPT_OUT")?,
+                             topic_filter: {
+                               topic_name: ::String?,
+                               use_default_if_preference_unavailable: bool?
+                             }?
+                           },
+                           ?page_size: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListContactsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContactsResponseSuccess
+
+      interface _ListCustomVerificationEmailTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomVerificationEmailTemplatesResponse]
+        def custom_verification_email_templates: () -> ::Array[Types::CustomVerificationEmailTemplateMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_custom_verification_email_templates-instance_method
+      def list_custom_verification_email_templates: (
+                                                      ?next_token: ::String,
+                                                      ?page_size: ::Integer
+                                                    ) -> _ListCustomVerificationEmailTemplatesResponseSuccess
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomVerificationEmailTemplatesResponseSuccess
+
+      interface _ListDedicatedIpPoolsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDedicatedIpPoolsResponse]
+        def dedicated_ip_pools: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_dedicated_ip_pools-instance_method
+      def list_dedicated_ip_pools: (
+                                     ?next_token: ::String,
+                                     ?page_size: ::Integer
+                                   ) -> _ListDedicatedIpPoolsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDedicatedIpPoolsResponseSuccess
+
+      interface _ListDeliverabilityTestReportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeliverabilityTestReportsResponse]
+        def deliverability_test_reports: () -> ::Array[Types::DeliverabilityTestReport]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_deliverability_test_reports-instance_method
+      def list_deliverability_test_reports: (
+                                              ?next_token: ::String,
+                                              ?page_size: ::Integer
+                                            ) -> _ListDeliverabilityTestReportsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeliverabilityTestReportsResponseSuccess
+
+      interface _ListDomainDeliverabilityCampaignsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainDeliverabilityCampaignsResponse]
+        def domain_deliverability_campaigns: () -> ::Array[Types::DomainDeliverabilityCampaign]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_domain_deliverability_campaigns-instance_method
+      def list_domain_deliverability_campaigns: (
+                                                  start_date: ::Time,
+                                                  end_date: ::Time,
+                                                  subscribed_domain: ::String,
+                                                  ?next_token: ::String,
+                                                  ?page_size: ::Integer
+                                                ) -> _ListDomainDeliverabilityCampaignsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainDeliverabilityCampaignsResponseSuccess
+
+      interface _ListEmailIdentitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEmailIdentitiesResponse]
+        def email_identities: () -> ::Array[Types::IdentityInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_email_identities-instance_method
+      def list_email_identities: (
+                                   ?next_token: ::String,
+                                   ?page_size: ::Integer
+                                 ) -> _ListEmailIdentitiesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEmailIdentitiesResponseSuccess
+
+      interface _ListEmailTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEmailTemplatesResponse]
+        def templates_metadata: () -> ::Array[Types::EmailTemplateMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_email_templates-instance_method
+      def list_email_templates: (
+                                  ?next_token: ::String,
+                                  ?page_size: ::Integer
+                                ) -> _ListEmailTemplatesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEmailTemplatesResponseSuccess
+
+      interface _ListExportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExportJobsResponse]
+        def export_jobs: () -> ::Array[Types::ExportJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_export_jobs-instance_method
+      def list_export_jobs: (
+                              ?next_token: ::String,
+                              ?page_size: ::Integer,
+                              ?export_source_type: ("METRICS_DATA" | "MESSAGE_INSIGHTS"),
+                              ?job_status: ("CREATED" | "PROCESSING" | "COMPLETED" | "FAILED" | "CANCELLED")
+                            ) -> _ListExportJobsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExportJobsResponseSuccess
+
+      interface _ListImportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImportJobsResponse]
+        def import_jobs: () -> ::Array[Types::ImportJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_import_jobs-instance_method
+      def list_import_jobs: (
+                              ?import_destination_type: ("SUPPRESSION_LIST" | "CONTACT_LIST"),
+                              ?next_token: ::String,
+                              ?page_size: ::Integer
+                            ) -> _ListImportJobsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImportJobsResponseSuccess
+
+      interface _ListRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendationsResponse]
+        def recommendations: () -> ::Array[Types::Recommendation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_recommendations-instance_method
+      def list_recommendations: (
+                                  ?filter: Hash[("TYPE" | "IMPACT" | "STATUS" | "RESOURCE_ARN"), ::String],
+                                  ?next_token: ::String,
+                                  ?page_size: ::Integer
+                                ) -> _ListRecommendationsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendationsResponseSuccess
+
+      interface _ListSuppressedDestinationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSuppressedDestinationsResponse]
+        def suppressed_destination_summaries: () -> ::Array[Types::SuppressedDestinationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_suppressed_destinations-instance_method
+      def list_suppressed_destinations: (
+                                          ?reasons: Array[("BOUNCE" | "COMPLAINT")],
+                                          ?start_date: ::Time,
+                                          ?end_date: ::Time,
+                                          ?next_token: ::String,
+                                          ?page_size: ::Integer
+                                        ) -> _ListSuppressedDestinationsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSuppressedDestinationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutAccountDedicatedIpWarmupAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountDedicatedIpWarmupAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_account_dedicated_ip_warmup_attributes-instance_method
+      def put_account_dedicated_ip_warmup_attributes: (
+                                                        ?auto_warmup_enabled: bool
+                                                      ) -> _PutAccountDedicatedIpWarmupAttributesResponseSuccess
+                                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountDedicatedIpWarmupAttributesResponseSuccess
+
+      interface _PutAccountDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountDetailsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_account_details-instance_method
+      def put_account_details: (
+                                 mail_type: ("MARKETING" | "TRANSACTIONAL"),
+                                 website_url: ::String,
+                                 ?contact_language: ("EN" | "JA"),
+                                 use_case_description: ::String,
+                                 ?additional_contact_email_addresses: Array[::String],
+                                 ?production_access_enabled: bool
+                               ) -> _PutAccountDetailsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountDetailsResponseSuccess
+
+      interface _PutAccountSendingAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountSendingAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_account_sending_attributes-instance_method
+      def put_account_sending_attributes: (
+                                            ?sending_enabled: bool
+                                          ) -> _PutAccountSendingAttributesResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountSendingAttributesResponseSuccess
+
+      interface _PutAccountSuppressionAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountSuppressionAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_account_suppression_attributes-instance_method
+      def put_account_suppression_attributes: (
+                                                ?suppressed_reasons: Array[("BOUNCE" | "COMPLAINT")]
+                                              ) -> _PutAccountSuppressionAttributesResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountSuppressionAttributesResponseSuccess
+
+      interface _PutAccountVdmAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountVdmAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_account_vdm_attributes-instance_method
+      def put_account_vdm_attributes: (
+                                        vdm_attributes: {
+                                          vdm_enabled: ("ENABLED" | "DISABLED"),
+                                          dashboard_attributes: {
+                                            engagement_metrics: ("ENABLED" | "DISABLED")?
+                                          }?,
+                                          guardian_attributes: {
+                                            optimized_shared_delivery: ("ENABLED" | "DISABLED")?
+                                          }?
+                                        }
+                                      ) -> _PutAccountVdmAttributesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountVdmAttributesResponseSuccess
+
+      interface _PutConfigurationSetDeliveryOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutConfigurationSetDeliveryOptionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_configuration_set_delivery_options-instance_method
+      def put_configuration_set_delivery_options: (
+                                                    configuration_set_name: ::String,
+                                                    ?tls_policy: ("REQUIRE" | "OPTIONAL"),
+                                                    ?sending_pool_name: ::String
+                                                  ) -> _PutConfigurationSetDeliveryOptionsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetDeliveryOptionsResponseSuccess
+
+      interface _PutConfigurationSetReputationOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutConfigurationSetReputationOptionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_configuration_set_reputation_options-instance_method
+      def put_configuration_set_reputation_options: (
+                                                      configuration_set_name: ::String,
+                                                      ?reputation_metrics_enabled: bool
+                                                    ) -> _PutConfigurationSetReputationOptionsResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetReputationOptionsResponseSuccess
+
+      interface _PutConfigurationSetSendingOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutConfigurationSetSendingOptionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_configuration_set_sending_options-instance_method
+      def put_configuration_set_sending_options: (
+                                                   configuration_set_name: ::String,
+                                                   ?sending_enabled: bool
+                                                 ) -> _PutConfigurationSetSendingOptionsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetSendingOptionsResponseSuccess
+
+      interface _PutConfigurationSetSuppressionOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutConfigurationSetSuppressionOptionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_configuration_set_suppression_options-instance_method
+      def put_configuration_set_suppression_options: (
+                                                       configuration_set_name: ::String,
+                                                       ?suppressed_reasons: Array[("BOUNCE" | "COMPLAINT")]
+                                                     ) -> _PutConfigurationSetSuppressionOptionsResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetSuppressionOptionsResponseSuccess
+
+      interface _PutConfigurationSetTrackingOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutConfigurationSetTrackingOptionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_configuration_set_tracking_options-instance_method
+      def put_configuration_set_tracking_options: (
+                                                    configuration_set_name: ::String,
+                                                    ?custom_redirect_domain: ::String
+                                                  ) -> _PutConfigurationSetTrackingOptionsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetTrackingOptionsResponseSuccess
+
+      interface _PutConfigurationSetVdmOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutConfigurationSetVdmOptionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_configuration_set_vdm_options-instance_method
+      def put_configuration_set_vdm_options: (
+                                               configuration_set_name: ::String,
+                                               ?vdm_options: {
+                                                 dashboard_options: {
+                                                   engagement_metrics: ("ENABLED" | "DISABLED")?
+                                                 }?,
+                                                 guardian_options: {
+                                                   optimized_shared_delivery: ("ENABLED" | "DISABLED")?
+                                                 }?
+                                               }
+                                             ) -> _PutConfigurationSetVdmOptionsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetVdmOptionsResponseSuccess
+
+      interface _PutDedicatedIpInPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDedicatedIpInPoolResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_dedicated_ip_in_pool-instance_method
+      def put_dedicated_ip_in_pool: (
+                                      ip: ::String,
+                                      destination_pool_name: ::String
+                                    ) -> _PutDedicatedIpInPoolResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDedicatedIpInPoolResponseSuccess
+
+      interface _PutDedicatedIpPoolScalingAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDedicatedIpPoolScalingAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_dedicated_ip_pool_scaling_attributes-instance_method
+      def put_dedicated_ip_pool_scaling_attributes: (
+                                                      pool_name: ::String,
+                                                      scaling_mode: ("STANDARD" | "MANAGED")
+                                                    ) -> _PutDedicatedIpPoolScalingAttributesResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDedicatedIpPoolScalingAttributesResponseSuccess
+
+      interface _PutDedicatedIpWarmupAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDedicatedIpWarmupAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_dedicated_ip_warmup_attributes-instance_method
+      def put_dedicated_ip_warmup_attributes: (
+                                                ip: ::String,
+                                                warmup_percentage: ::Integer
+                                              ) -> _PutDedicatedIpWarmupAttributesResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDedicatedIpWarmupAttributesResponseSuccess
+
+      interface _PutDeliverabilityDashboardOptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDeliverabilityDashboardOptionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_deliverability_dashboard_option-instance_method
+      def put_deliverability_dashboard_option: (
+                                                 dashboard_enabled: bool,
+                                                 ?subscribed_domains: Array[
+                                                   {
+                                                     domain: ::String?,
+                                                     subscription_start_date: ::Time?,
+                                                     inbox_placement_tracking_option: {
+                                                       global: bool?,
+                                                       tracked_isps: Array[::String]?
+                                                     }?
+                                                   },
+                                                 ]
+                                               ) -> _PutDeliverabilityDashboardOptionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDeliverabilityDashboardOptionResponseSuccess
+
+      interface _PutEmailIdentityConfigurationSetAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEmailIdentityConfigurationSetAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_email_identity_configuration_set_attributes-instance_method
+      def put_email_identity_configuration_set_attributes: (
+                                                             email_identity: ::String,
+                                                             ?configuration_set_name: ::String
+                                                           ) -> _PutEmailIdentityConfigurationSetAttributesResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEmailIdentityConfigurationSetAttributesResponseSuccess
+
+      interface _PutEmailIdentityDkimAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEmailIdentityDkimAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_email_identity_dkim_attributes-instance_method
+      def put_email_identity_dkim_attributes: (
+                                                email_identity: ::String,
+                                                ?signing_enabled: bool
+                                              ) -> _PutEmailIdentityDkimAttributesResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEmailIdentityDkimAttributesResponseSuccess
+
+      interface _PutEmailIdentityDkimSigningAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEmailIdentityDkimSigningAttributesResponse]
+        def dkim_status: () -> ("PENDING" | "SUCCESS" | "FAILED" | "TEMPORARY_FAILURE" | "NOT_STARTED")
+        def dkim_tokens: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_email_identity_dkim_signing_attributes-instance_method
+      def put_email_identity_dkim_signing_attributes: (
+                                                        email_identity: ::String,
+                                                        signing_attributes_origin: ("AWS_SES" | "EXTERNAL"),
+                                                        ?signing_attributes: {
+                                                          domain_signing_selector: ::String?,
+                                                          domain_signing_private_key: ::String?,
+                                                          next_signing_key_length: ("RSA_1024_BIT" | "RSA_2048_BIT")?
+                                                        }
+                                                      ) -> _PutEmailIdentityDkimSigningAttributesResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEmailIdentityDkimSigningAttributesResponseSuccess
+
+      interface _PutEmailIdentityFeedbackAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEmailIdentityFeedbackAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_email_identity_feedback_attributes-instance_method
+      def put_email_identity_feedback_attributes: (
+                                                    email_identity: ::String,
+                                                    ?email_forwarding_enabled: bool
+                                                  ) -> _PutEmailIdentityFeedbackAttributesResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEmailIdentityFeedbackAttributesResponseSuccess
+
+      interface _PutEmailIdentityMailFromAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEmailIdentityMailFromAttributesResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_email_identity_mail_from_attributes-instance_method
+      def put_email_identity_mail_from_attributes: (
+                                                     email_identity: ::String,
+                                                     ?mail_from_domain: ::String,
+                                                     ?behavior_on_mx_failure: ("USE_DEFAULT_VALUE" | "REJECT_MESSAGE")
+                                                   ) -> _PutEmailIdentityMailFromAttributesResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEmailIdentityMailFromAttributesResponseSuccess
+
+      interface _PutSuppressedDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutSuppressedDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_suppressed_destination-instance_method
+      def put_suppressed_destination: (
+                                        email_address: ::String,
+                                        reason: ("BOUNCE" | "COMPLAINT")
+                                      ) -> _PutSuppressedDestinationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSuppressedDestinationResponseSuccess
+
+      interface _SendBulkEmailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendBulkEmailResponse]
+        def bulk_email_entry_results: () -> ::Array[Types::BulkEmailEntryResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#send_bulk_email-instance_method
+      def send_bulk_email: (
+                             ?from_email_address: ::String,
+                             ?from_email_address_identity_arn: ::String,
+                             ?reply_to_addresses: Array[::String],
+                             ?feedback_forwarding_email_address: ::String,
+                             ?feedback_forwarding_email_address_identity_arn: ::String,
+                             ?default_email_tags: Array[
+                               {
+                                 name: ::String,
+                                 value: ::String
+                               },
+                             ],
+                             default_content: {
+                               template: {
+                                 template_name: ::String?,
+                                 template_arn: ::String?,
+                                 template_data: ::String?
+                               }?
+                             },
+                             bulk_email_entries: Array[
+                               {
+                                 destination: {
+                                   to_addresses: Array[::String]?,
+                                   cc_addresses: Array[::String]?,
+                                   bcc_addresses: Array[::String]?
+                                 },
+                                 replacement_tags: Array[
+                                   {
+                                     name: ::String,
+                                     value: ::String
+                                   },
+                                 ]?,
+                                 replacement_email_content: {
+                                   replacement_template: {
+                                     replacement_template_data: ::String?
+                                   }?
+                                 }?
+                               },
+                             ],
+                             ?configuration_set_name: ::String
+                           ) -> _SendBulkEmailResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendBulkEmailResponseSuccess
+
+      interface _SendCustomVerificationEmailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendCustomVerificationEmailResponse]
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#send_custom_verification_email-instance_method
+      def send_custom_verification_email: (
+                                            email_address: ::String,
+                                            template_name: ::String,
+                                            ?configuration_set_name: ::String
+                                          ) -> _SendCustomVerificationEmailResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendCustomVerificationEmailResponseSuccess
+
+      interface _SendEmailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendEmailResponse]
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#send_email-instance_method
+      def send_email: (
+                        ?from_email_address: ::String,
+                        ?from_email_address_identity_arn: ::String,
+                        ?destination: {
+                          to_addresses: Array[::String]?,
+                          cc_addresses: Array[::String]?,
+                          bcc_addresses: Array[::String]?
+                        },
+                        ?reply_to_addresses: Array[::String],
+                        ?feedback_forwarding_email_address: ::String,
+                        ?feedback_forwarding_email_address_identity_arn: ::String,
+                        content: {
+                          simple: {
+                            subject: {
+                              data: ::String,
+                              charset: ::String?
+                            },
+                            body: {
+                              text: {
+                                data: ::String,
+                                charset: ::String?
+                              }?,
+                              html: {
+                                data: ::String,
+                                charset: ::String?
+                              }?
+                            }
+                          }?,
+                          raw: {
+                            data: ::String
+                          }?,
+                          template: {
+                            template_name: ::String?,
+                            template_arn: ::String?,
+                            template_data: ::String?
+                          }?
+                        },
+                        ?email_tags: Array[
+                          {
+                            name: ::String,
+                            value: ::String
+                          },
+                        ],
+                        ?configuration_set_name: ::String,
+                        ?list_management_options: {
+                          contact_list_name: ::String,
+                          topic_name: ::String?
+                        }
+                      ) -> _SendEmailResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendEmailResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _TestRenderEmailTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestRenderEmailTemplateResponse]
+        def rendered_template: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#test_render_email_template-instance_method
+      def test_render_email_template: (
+                                        template_name: ::String,
+                                        template_data: ::String
+                                      ) -> _TestRenderEmailTemplateResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestRenderEmailTemplateResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateConfigurationSetEventDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfigurationSetEventDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#update_configuration_set_event_destination-instance_method
+      def update_configuration_set_event_destination: (
+                                                        configuration_set_name: ::String,
+                                                        event_destination_name: ::String,
+                                                        event_destination: {
+                                                          enabled: bool?,
+                                                          matching_event_types: Array[("SEND" | "REJECT" | "BOUNCE" | "COMPLAINT" | "DELIVERY" | "OPEN" | "CLICK" | "RENDERING_FAILURE" | "DELIVERY_DELAY" | "SUBSCRIPTION")]?,
+                                                          kinesis_firehose_destination: {
+                                                            iam_role_arn: ::String,
+                                                            delivery_stream_arn: ::String
+                                                          }?,
+                                                          cloud_watch_destination: {
+                                                            dimension_configurations: Array[
+                                                              {
+                                                                dimension_name: ::String,
+                                                                dimension_value_source: ("MESSAGE_TAG" | "EMAIL_HEADER" | "LINK_TAG"),
+                                                                default_dimension_value: ::String
+                                                              },
+                                                            ]
+                                                          }?,
+                                                          sns_destination: {
+                                                            topic_arn: ::String
+                                                          }?,
+                                                          pinpoint_destination: {
+                                                            application_arn: ::String?
+                                                          }?
+                                                        }
+                                                      ) -> _UpdateConfigurationSetEventDestinationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationSetEventDestinationResponseSuccess
+
+      interface _UpdateContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContactResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#update_contact-instance_method
+      def update_contact: (
+                            contact_list_name: ::String,
+                            email_address: ::String,
+                            ?topic_preferences: Array[
+                              {
+                                topic_name: ::String,
+                                subscription_status: ("OPT_IN" | "OPT_OUT")
+                              },
+                            ],
+                            ?unsubscribe_all: bool,
+                            ?attributes_data: ::String
+                          ) -> _UpdateContactResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactResponseSuccess
+
+      interface _UpdateContactListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContactListResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#update_contact_list-instance_method
+      def update_contact_list: (
+                                 contact_list_name: ::String,
+                                 ?topics: Array[
+                                   {
+                                     topic_name: ::String,
+                                     display_name: ::String,
+                                     description: ::String?,
+                                     default_subscription_status: ("OPT_IN" | "OPT_OUT")
+                                   },
+                                 ],
+                                 ?description: ::String
+                               ) -> _UpdateContactListResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactListResponseSuccess
+
+      interface _UpdateCustomVerificationEmailTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCustomVerificationEmailTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#update_custom_verification_email_template-instance_method
+      def update_custom_verification_email_template: (
+                                                       template_name: ::String,
+                                                       from_email_address: ::String,
+                                                       template_subject: ::String,
+                                                       template_content: ::String,
+                                                       success_redirection_url: ::String,
+                                                       failure_redirection_url: ::String
+                                                     ) -> _UpdateCustomVerificationEmailTemplateResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomVerificationEmailTemplateResponseSuccess
+
+      interface _UpdateEmailIdentityPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEmailIdentityPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#update_email_identity_policy-instance_method
+      def update_email_identity_policy: (
+                                          email_identity: ::String,
+                                          policy_name: ::String,
+                                          policy: ::String
+                                        ) -> _UpdateEmailIdentityPolicyResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEmailIdentityPolicyResponseSuccess
+
+      interface _UpdateEmailTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEmailTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#update_email_template-instance_method
+      def update_email_template: (
+                                   template_name: ::String,
+                                   template_content: {
+                                     subject: ::String?,
+                                     text: ::String?,
+                                     html: ::String?
+                                   }
+                                 ) -> _UpdateEmailTemplateResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEmailTemplateResponseSuccess
+    end
+  end
+end
+

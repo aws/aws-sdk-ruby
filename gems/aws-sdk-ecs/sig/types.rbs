@@ -1,0 +1,1804 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ECS
+  module Types
+
+    class AccessDeniedException < Aws::EmptyStructure
+    end
+
+    class Attachment
+      attr_accessor id: ::String
+      attr_accessor type: ::String
+      attr_accessor status: ::String
+      attr_accessor details: ::Array[Types::KeyValuePair]
+      SENSITIVE: []
+    end
+
+    class AttachmentStateChange
+      attr_accessor attachment_arn: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class Attribute
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor target_type: ("container-instance")
+      attr_accessor target_id: ::String
+      SENSITIVE: []
+    end
+
+    class AttributeLimitExceededException < Aws::EmptyStructure
+    end
+
+    class AutoScalingGroupProvider
+      attr_accessor auto_scaling_group_arn: ::String
+      attr_accessor managed_scaling: Types::ManagedScaling
+      attr_accessor managed_termination_protection: ("ENABLED" | "DISABLED")
+      attr_accessor managed_draining: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class AutoScalingGroupProviderUpdate
+      attr_accessor managed_scaling: Types::ManagedScaling
+      attr_accessor managed_termination_protection: ("ENABLED" | "DISABLED")
+      attr_accessor managed_draining: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class AwsVpcConfiguration
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor assign_public_ip: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class BlockedException < Aws::EmptyStructure
+    end
+
+    class CapacityProvider
+      attr_accessor capacity_provider_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor auto_scaling_group_provider: Types::AutoScalingGroupProvider
+      attr_accessor update_status: ("DELETE_IN_PROGRESS" | "DELETE_COMPLETE" | "DELETE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED")
+      attr_accessor update_status_reason: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CapacityProviderStrategyItem
+      attr_accessor capacity_provider: ::String
+      attr_accessor weight: ::Integer
+      attr_accessor base: ::Integer
+      SENSITIVE: []
+    end
+
+    class ClientException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Cluster
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor configuration: Types::ClusterConfiguration
+      attr_accessor status: ::String
+      attr_accessor registered_container_instances_count: ::Integer
+      attr_accessor running_tasks_count: ::Integer
+      attr_accessor pending_tasks_count: ::Integer
+      attr_accessor active_services_count: ::Integer
+      attr_accessor statistics: ::Array[Types::KeyValuePair]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor settings: ::Array[Types::ClusterSetting]
+      attr_accessor capacity_providers: ::Array[::String]
+      attr_accessor default_capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
+      attr_accessor attachments: ::Array[Types::Attachment]
+      attr_accessor attachments_status: ::String
+      attr_accessor service_connect_defaults: Types::ClusterServiceConnectDefaults
+      SENSITIVE: []
+    end
+
+    class ClusterConfiguration
+      attr_accessor execute_command_configuration: Types::ExecuteCommandConfiguration
+      SENSITIVE: []
+    end
+
+    class ClusterContainsContainerInstancesException < Aws::EmptyStructure
+    end
+
+    class ClusterContainsServicesException < Aws::EmptyStructure
+    end
+
+    class ClusterContainsTasksException < Aws::EmptyStructure
+    end
+
+    class ClusterNotFoundException < Aws::EmptyStructure
+    end
+
+    class ClusterServiceConnectDefaults
+      attr_accessor namespace: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterServiceConnectDefaultsRequest
+      attr_accessor namespace: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterSetting
+      attr_accessor name: ("containerInsights")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor resource_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Container
+      attr_accessor container_arn: ::String
+      attr_accessor task_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor image: ::String
+      attr_accessor image_digest: ::String
+      attr_accessor runtime_id: ::String
+      attr_accessor last_status: ::String
+      attr_accessor exit_code: ::Integer
+      attr_accessor reason: ::String
+      attr_accessor network_bindings: ::Array[Types::NetworkBinding]
+      attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
+      attr_accessor health_status: ("HEALTHY" | "UNHEALTHY" | "UNKNOWN")
+      attr_accessor managed_agents: ::Array[Types::ManagedAgent]
+      attr_accessor cpu: ::String
+      attr_accessor memory: ::String
+      attr_accessor memory_reservation: ::String
+      attr_accessor gpu_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ContainerDefinition
+      attr_accessor name: ::String
+      attr_accessor image: ::String
+      attr_accessor repository_credentials: Types::RepositoryCredentials
+      attr_accessor cpu: ::Integer
+      attr_accessor memory: ::Integer
+      attr_accessor memory_reservation: ::Integer
+      attr_accessor links: ::Array[::String]
+      attr_accessor port_mappings: ::Array[Types::PortMapping]
+      attr_accessor essential: bool
+      attr_accessor entry_point: ::Array[::String]
+      attr_accessor command: ::Array[::String]
+      attr_accessor environment: ::Array[Types::KeyValuePair]
+      attr_accessor environment_files: ::Array[Types::EnvironmentFile]
+      attr_accessor mount_points: ::Array[Types::MountPoint]
+      attr_accessor volumes_from: ::Array[Types::VolumeFrom]
+      attr_accessor linux_parameters: Types::LinuxParameters
+      attr_accessor secrets: ::Array[Types::Secret]
+      attr_accessor depends_on: ::Array[Types::ContainerDependency]
+      attr_accessor start_timeout: ::Integer
+      attr_accessor stop_timeout: ::Integer
+      attr_accessor hostname: ::String
+      attr_accessor user: ::String
+      attr_accessor working_directory: ::String
+      attr_accessor disable_networking: bool
+      attr_accessor privileged: bool
+      attr_accessor readonly_root_filesystem: bool
+      attr_accessor dns_servers: ::Array[::String]
+      attr_accessor dns_search_domains: ::Array[::String]
+      attr_accessor extra_hosts: ::Array[Types::HostEntry]
+      attr_accessor docker_security_options: ::Array[::String]
+      attr_accessor interactive: bool
+      attr_accessor pseudo_terminal: bool
+      attr_accessor docker_labels: ::Hash[::String, ::String]
+      attr_accessor ulimits: ::Array[Types::Ulimit]
+      attr_accessor log_configuration: Types::LogConfiguration
+      attr_accessor health_check: Types::HealthCheck
+      attr_accessor system_controls: ::Array[Types::SystemControl]
+      attr_accessor resource_requirements: ::Array[Types::ResourceRequirement]
+      attr_accessor firelens_configuration: Types::FirelensConfiguration
+      attr_accessor credential_specs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ContainerDependency
+      attr_accessor container_name: ::String
+      attr_accessor condition: ("START" | "COMPLETE" | "SUCCESS" | "HEALTHY")
+      SENSITIVE: []
+    end
+
+    class ContainerInstance
+      attr_accessor container_instance_arn: ::String
+      attr_accessor ec2_instance_id: ::String
+      attr_accessor capacity_provider_name: ::String
+      attr_accessor version: ::Integer
+      attr_accessor version_info: Types::VersionInfo
+      attr_accessor remaining_resources: ::Array[Types::Resource]
+      attr_accessor registered_resources: ::Array[Types::Resource]
+      attr_accessor status: ::String
+      attr_accessor status_reason: ::String
+      attr_accessor agent_connected: bool
+      attr_accessor running_tasks_count: ::Integer
+      attr_accessor pending_tasks_count: ::Integer
+      attr_accessor agent_update_status: ("PENDING" | "STAGING" | "STAGED" | "UPDATING" | "UPDATED" | "FAILED")
+      attr_accessor attributes: ::Array[Types::Attribute]
+      attr_accessor registered_at: ::Time
+      attr_accessor attachments: ::Array[Types::Attachment]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor health_status: Types::ContainerInstanceHealthStatus
+      SENSITIVE: []
+    end
+
+    class ContainerInstanceHealthStatus
+      attr_accessor overall_status: ("OK" | "IMPAIRED" | "INSUFFICIENT_DATA" | "INITIALIZING")
+      attr_accessor details: ::Array[Types::InstanceHealthCheckResult]
+      SENSITIVE: []
+    end
+
+    class ContainerOverride
+      attr_accessor name: ::String
+      attr_accessor command: ::Array[::String]
+      attr_accessor environment: ::Array[Types::KeyValuePair]
+      attr_accessor environment_files: ::Array[Types::EnvironmentFile]
+      attr_accessor cpu: ::Integer
+      attr_accessor memory: ::Integer
+      attr_accessor memory_reservation: ::Integer
+      attr_accessor resource_requirements: ::Array[Types::ResourceRequirement]
+      SENSITIVE: []
+    end
+
+    class ContainerStateChange
+      attr_accessor container_name: ::String
+      attr_accessor image_digest: ::String
+      attr_accessor runtime_id: ::String
+      attr_accessor exit_code: ::Integer
+      attr_accessor network_bindings: ::Array[Types::NetworkBinding]
+      attr_accessor reason: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCapacityProviderRequest
+      attr_accessor name: ::String
+      attr_accessor auto_scaling_group_provider: Types::AutoScalingGroupProvider
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateCapacityProviderResponse
+      attr_accessor capacity_provider: Types::CapacityProvider
+      SENSITIVE: []
+    end
+
+    class CreateClusterRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor settings: ::Array[Types::ClusterSetting]
+      attr_accessor configuration: Types::ClusterConfiguration
+      attr_accessor capacity_providers: ::Array[::String]
+      attr_accessor default_capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
+      attr_accessor service_connect_defaults: Types::ClusterServiceConnectDefaultsRequest
+      SENSITIVE: []
+    end
+
+    class CreateClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class CreateServiceRequest
+      attr_accessor cluster: ::String
+      attr_accessor service_name: ::String
+      attr_accessor task_definition: ::String
+      attr_accessor load_balancers: ::Array[Types::LoadBalancer]
+      attr_accessor service_registries: ::Array[Types::ServiceRegistry]
+      attr_accessor desired_count: ::Integer
+      attr_accessor client_token: ::String
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
+      attr_accessor platform_version: ::String
+      attr_accessor role: ::String
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration
+      attr_accessor placement_constraints: ::Array[Types::PlacementConstraint]
+      attr_accessor placement_strategy: ::Array[Types::PlacementStrategy]
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor health_check_grace_period_seconds: ::Integer
+      attr_accessor scheduling_strategy: ("REPLICA" | "DAEMON")
+      attr_accessor deployment_controller: Types::DeploymentController
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor enable_ecs_managed_tags: bool
+      attr_accessor propagate_tags: ("TASK_DEFINITION" | "SERVICE" | "NONE")
+      attr_accessor enable_execute_command: bool
+      attr_accessor service_connect_configuration: Types::ServiceConnectConfiguration
+      attr_accessor volume_configurations: ::Array[Types::ServiceVolumeConfiguration]
+      SENSITIVE: []
+    end
+
+    class CreateServiceResponse
+      attr_accessor service: Types::Service
+      SENSITIVE: []
+    end
+
+    class CreateTaskSetRequest
+      attr_accessor service: ::String
+      attr_accessor cluster: ::String
+      attr_accessor external_id: ::String
+      attr_accessor task_definition: ::String
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor load_balancers: ::Array[Types::LoadBalancer]
+      attr_accessor service_registries: ::Array[Types::ServiceRegistry]
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
+      attr_accessor platform_version: ::String
+      attr_accessor scale: Types::Scale
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateTaskSetResponse
+      attr_accessor task_set: Types::TaskSet
+      SENSITIVE: []
+    end
+
+    class DeleteAccountSettingRequest
+      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate")
+      attr_accessor principal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccountSettingResponse
+      attr_accessor setting: Types::Setting
+      SENSITIVE: []
+    end
+
+    class DeleteAttributesRequest
+      attr_accessor cluster: ::String
+      attr_accessor attributes: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class DeleteAttributesResponse
+      attr_accessor attributes: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class DeleteCapacityProviderRequest
+      attr_accessor capacity_provider: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCapacityProviderResponse
+      attr_accessor capacity_provider: Types::CapacityProvider
+      SENSITIVE: []
+    end
+
+    class DeleteClusterRequest
+      attr_accessor cluster: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class DeleteServiceRequest
+      attr_accessor cluster: ::String
+      attr_accessor service: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class DeleteServiceResponse
+      attr_accessor service: Types::Service
+      SENSITIVE: []
+    end
+
+    class DeleteTaskDefinitionsRequest
+      attr_accessor task_definitions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteTaskDefinitionsResponse
+      attr_accessor task_definitions: ::Array[Types::TaskDefinition]
+      attr_accessor failures: ::Array[Types::Failure]
+      SENSITIVE: []
+    end
+
+    class DeleteTaskSetRequest
+      attr_accessor cluster: ::String
+      attr_accessor service: ::String
+      attr_accessor task_set: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class DeleteTaskSetResponse
+      attr_accessor task_set: Types::TaskSet
+      SENSITIVE: []
+    end
+
+    class Deployment
+      attr_accessor id: ::String
+      attr_accessor status: ::String
+      attr_accessor task_definition: ::String
+      attr_accessor desired_count: ::Integer
+      attr_accessor pending_count: ::Integer
+      attr_accessor running_count: ::Integer
+      attr_accessor failed_tasks: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor platform_version: ::String
+      attr_accessor platform_family: ::String
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor rollout_state: ("COMPLETED" | "FAILED" | "IN_PROGRESS")
+      attr_accessor rollout_state_reason: ::String
+      attr_accessor service_connect_configuration: Types::ServiceConnectConfiguration
+      attr_accessor service_connect_resources: ::Array[Types::ServiceConnectServiceResource]
+      attr_accessor volume_configurations: ::Array[Types::ServiceVolumeConfiguration]
+      SENSITIVE: []
+    end
+
+    class DeploymentAlarms
+      attr_accessor alarm_names: ::Array[::String]
+      attr_accessor enable: bool
+      attr_accessor rollback: bool
+      SENSITIVE: []
+    end
+
+    class DeploymentCircuitBreaker
+      attr_accessor enable: bool
+      attr_accessor rollback: bool
+      SENSITIVE: []
+    end
+
+    class DeploymentConfiguration
+      attr_accessor deployment_circuit_breaker: Types::DeploymentCircuitBreaker
+      attr_accessor maximum_percent: ::Integer
+      attr_accessor minimum_healthy_percent: ::Integer
+      attr_accessor alarms: Types::DeploymentAlarms
+      SENSITIVE: []
+    end
+
+    class DeploymentController
+      attr_accessor type: ("ECS" | "CODE_DEPLOY" | "EXTERNAL")
+      SENSITIVE: []
+    end
+
+    class DeregisterContainerInstanceRequest
+      attr_accessor cluster: ::String
+      attr_accessor container_instance: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class DeregisterContainerInstanceResponse
+      attr_accessor container_instance: Types::ContainerInstance
+      SENSITIVE: []
+    end
+
+    class DeregisterTaskDefinitionRequest
+      attr_accessor task_definition: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterTaskDefinitionResponse
+      attr_accessor task_definition: Types::TaskDefinition
+      SENSITIVE: []
+    end
+
+    class DescribeCapacityProvidersRequest
+      attr_accessor capacity_providers: ::Array[::String]
+      attr_accessor include: ::Array[("TAGS")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCapacityProvidersResponse
+      attr_accessor capacity_providers: ::Array[Types::CapacityProvider]
+      attr_accessor failures: ::Array[Types::Failure]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClustersRequest
+      attr_accessor clusters: ::Array[::String]
+      attr_accessor include: ::Array[("ATTACHMENTS" | "CONFIGURATIONS" | "SETTINGS" | "STATISTICS" | "TAGS")]
+      SENSITIVE: []
+    end
+
+    class DescribeClustersResponse
+      attr_accessor clusters: ::Array[Types::Cluster]
+      attr_accessor failures: ::Array[Types::Failure]
+      SENSITIVE: []
+    end
+
+    class DescribeContainerInstancesRequest
+      attr_accessor cluster: ::String
+      attr_accessor container_instances: ::Array[::String]
+      attr_accessor include: ::Array[("TAGS" | "CONTAINER_INSTANCE_HEALTH")]
+      SENSITIVE: []
+    end
+
+    class DescribeContainerInstancesResponse
+      attr_accessor container_instances: ::Array[Types::ContainerInstance]
+      attr_accessor failures: ::Array[Types::Failure]
+      SENSITIVE: []
+    end
+
+    class DescribeServicesRequest
+      attr_accessor cluster: ::String
+      attr_accessor services: ::Array[::String]
+      attr_accessor include: ::Array[("TAGS")]
+      SENSITIVE: []
+    end
+
+    class DescribeServicesResponse
+      attr_accessor services: ::Array[Types::Service]
+      attr_accessor failures: ::Array[Types::Failure]
+      SENSITIVE: []
+    end
+
+    class DescribeTaskDefinitionRequest
+      attr_accessor task_definition: ::String
+      attr_accessor include: ::Array[("TAGS")]
+      SENSITIVE: []
+    end
+
+    class DescribeTaskDefinitionResponse
+      attr_accessor task_definition: Types::TaskDefinition
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DescribeTaskSetsRequest
+      attr_accessor cluster: ::String
+      attr_accessor service: ::String
+      attr_accessor task_sets: ::Array[::String]
+      attr_accessor include: ::Array[("TAGS")]
+      SENSITIVE: []
+    end
+
+    class DescribeTaskSetsResponse
+      attr_accessor task_sets: ::Array[Types::TaskSet]
+      attr_accessor failures: ::Array[Types::Failure]
+      SENSITIVE: []
+    end
+
+    class DescribeTasksRequest
+      attr_accessor cluster: ::String
+      attr_accessor tasks: ::Array[::String]
+      attr_accessor include: ::Array[("TAGS")]
+      SENSITIVE: []
+    end
+
+    class DescribeTasksResponse
+      attr_accessor tasks: ::Array[Types::Task]
+      attr_accessor failures: ::Array[Types::Failure]
+      SENSITIVE: []
+    end
+
+    class Device
+      attr_accessor host_path: ::String
+      attr_accessor container_path: ::String
+      attr_accessor permissions: ::Array[("read" | "write" | "mknod")]
+      SENSITIVE: []
+    end
+
+    class DiscoverPollEndpointRequest
+      attr_accessor container_instance: ::String
+      attr_accessor cluster: ::String
+      SENSITIVE: []
+    end
+
+    class DiscoverPollEndpointResponse
+      attr_accessor endpoint: ::String
+      attr_accessor telemetry_endpoint: ::String
+      attr_accessor service_connect_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class DockerVolumeConfiguration
+      attr_accessor scope: ("task" | "shared")
+      attr_accessor autoprovision: bool
+      attr_accessor driver: ::String
+      attr_accessor driver_opts: ::Hash[::String, ::String]
+      attr_accessor labels: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class EBSTagSpecification
+      attr_accessor resource_type: ("volume")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor propagate_tags: ("TASK_DEFINITION" | "SERVICE" | "NONE")
+      SENSITIVE: []
+    end
+
+    class EFSAuthorizationConfig
+      attr_accessor access_point_id: ::String
+      attr_accessor iam: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class EFSVolumeConfiguration
+      attr_accessor file_system_id: ::String
+      attr_accessor root_directory: ::String
+      attr_accessor transit_encryption: ("ENABLED" | "DISABLED")
+      attr_accessor transit_encryption_port: ::Integer
+      attr_accessor authorization_config: Types::EFSAuthorizationConfig
+      SENSITIVE: []
+    end
+
+    class EnvironmentFile
+      attr_accessor value: ::String
+      attr_accessor type: ("s3")
+      SENSITIVE: []
+    end
+
+    class EphemeralStorage
+      attr_accessor size_in_gi_b: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExecuteCommandConfiguration
+      attr_accessor kms_key_id: ::String
+      attr_accessor logging: ("NONE" | "DEFAULT" | "OVERRIDE")
+      attr_accessor log_configuration: Types::ExecuteCommandLogConfiguration
+      SENSITIVE: []
+    end
+
+    class ExecuteCommandLogConfiguration
+      attr_accessor cloud_watch_log_group_name: ::String
+      attr_accessor cloud_watch_encryption_enabled: bool
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_encryption_enabled: bool
+      attr_accessor s3_key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteCommandRequest
+      attr_accessor cluster: ::String
+      attr_accessor container: ::String
+      attr_accessor command: ::String
+      attr_accessor interactive: bool
+      attr_accessor task: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteCommandResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor container_arn: ::String
+      attr_accessor container_name: ::String
+      attr_accessor interactive: bool
+      attr_accessor session: Types::Session
+      attr_accessor task_arn: ::String
+      SENSITIVE: []
+    end
+
+    class FSxWindowsFileServerAuthorizationConfig
+      attr_accessor credentials_parameter: ::String
+      attr_accessor domain: ::String
+      SENSITIVE: []
+    end
+
+    class FSxWindowsFileServerVolumeConfiguration
+      attr_accessor file_system_id: ::String
+      attr_accessor root_directory: ::String
+      attr_accessor authorization_config: Types::FSxWindowsFileServerAuthorizationConfig
+      SENSITIVE: []
+    end
+
+    class Failure
+      attr_accessor arn: ::String
+      attr_accessor reason: ::String
+      attr_accessor detail: ::String
+      SENSITIVE: []
+    end
+
+    class FirelensConfiguration
+      attr_accessor type: ("fluentd" | "fluentbit")
+      attr_accessor options: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetTaskProtectionRequest
+      attr_accessor cluster: ::String
+      attr_accessor tasks: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetTaskProtectionResponse
+      attr_accessor protected_tasks: ::Array[Types::ProtectedTask]
+      attr_accessor failures: ::Array[Types::Failure]
+      SENSITIVE: []
+    end
+
+    class HealthCheck
+      attr_accessor command: ::Array[::String]
+      attr_accessor interval: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor retries: ::Integer
+      attr_accessor start_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class HostEntry
+      attr_accessor hostname: ::String
+      attr_accessor ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class HostVolumeProperties
+      attr_accessor source_path: ::String
+      SENSITIVE: []
+    end
+
+    class InferenceAccelerator
+      attr_accessor device_name: ::String
+      attr_accessor device_type: ::String
+      SENSITIVE: []
+    end
+
+    class InferenceAcceleratorOverride
+      attr_accessor device_name: ::String
+      attr_accessor device_type: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceHealthCheckResult
+      attr_accessor type: ("CONTAINER_RUNTIME")
+      attr_accessor status: ("OK" | "IMPAIRED" | "INSUFFICIENT_DATA" | "INITIALIZING")
+      attr_accessor last_updated: ::Time
+      attr_accessor last_status_change: ::Time
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException < Aws::EmptyStructure
+    end
+
+    class KernelCapabilities
+      attr_accessor add: ::Array[::String]
+      attr_accessor drop: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class KeyValuePair
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class LinuxParameters
+      attr_accessor capabilities: Types::KernelCapabilities
+      attr_accessor devices: ::Array[Types::Device]
+      attr_accessor init_process_enabled: bool
+      attr_accessor shared_memory_size: ::Integer
+      attr_accessor tmpfs: ::Array[Types::Tmpfs]
+      attr_accessor max_swap: ::Integer
+      attr_accessor swappiness: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccountSettingsRequest
+      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate")
+      attr_accessor value: ::String
+      attr_accessor principal_arn: ::String
+      attr_accessor effective_settings: bool
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccountSettingsResponse
+      attr_accessor settings: ::Array[Types::Setting]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttributesRequest
+      attr_accessor cluster: ::String
+      attr_accessor target_type: ("container-instance")
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_value: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAttributesResponse
+      attr_accessor attributes: ::Array[Types::Attribute]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClustersRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListClustersResponse
+      attr_accessor cluster_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContainerInstancesRequest
+      attr_accessor cluster: ::String
+      attr_accessor filter: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor status: ("ACTIVE" | "DRAINING" | "REGISTERING" | "DEREGISTERING" | "REGISTRATION_FAILED")
+      SENSITIVE: []
+    end
+
+    class ListContainerInstancesResponse
+      attr_accessor container_instance_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicesByNamespaceRequest
+      attr_accessor namespace: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListServicesByNamespaceResponse
+      attr_accessor service_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicesRequest
+      attr_accessor cluster: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor scheduling_strategy: ("REPLICA" | "DAEMON")
+      SENSITIVE: []
+    end
+
+    class ListServicesResponse
+      attr_accessor service_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTaskDefinitionFamiliesRequest
+      attr_accessor family_prefix: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "ALL")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTaskDefinitionFamiliesResponse
+      attr_accessor families: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTaskDefinitionsRequest
+      attr_accessor family_prefix: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETE_IN_PROGRESS")
+      attr_accessor sort: ("ASC" | "DESC")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTaskDefinitionsResponse
+      attr_accessor task_definition_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTasksRequest
+      attr_accessor cluster: ::String
+      attr_accessor container_instance: ::String
+      attr_accessor family: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor started_by: ::String
+      attr_accessor service_name: ::String
+      attr_accessor desired_status: ("RUNNING" | "PENDING" | "STOPPED")
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      SENSITIVE: []
+    end
+
+    class ListTasksResponse
+      attr_accessor task_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LoadBalancer
+      attr_accessor target_group_arn: ::String
+      attr_accessor load_balancer_name: ::String
+      attr_accessor container_name: ::String
+      attr_accessor container_port: ::Integer
+      SENSITIVE: []
+    end
+
+    class LogConfiguration
+      attr_accessor log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk" | "awsfirelens")
+      attr_accessor options: ::Hash[::String, ::String]
+      attr_accessor secret_options: ::Array[Types::Secret]
+      SENSITIVE: []
+    end
+
+    class ManagedAgent
+      attr_accessor last_started_at: ::Time
+      attr_accessor name: ("ExecuteCommandAgent")
+      attr_accessor reason: ::String
+      attr_accessor last_status: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedAgentStateChange
+      attr_accessor container_name: ::String
+      attr_accessor managed_agent_name: ("ExecuteCommandAgent")
+      attr_accessor status: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedScaling
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor target_capacity: ::Integer
+      attr_accessor minimum_scaling_step_size: ::Integer
+      attr_accessor maximum_scaling_step_size: ::Integer
+      attr_accessor instance_warmup_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class MissingVersionException < Aws::EmptyStructure
+    end
+
+    class MountPoint
+      attr_accessor source_volume: ::String
+      attr_accessor container_path: ::String
+      attr_accessor read_only: bool
+      SENSITIVE: []
+    end
+
+    class NamespaceNotFoundException < Aws::EmptyStructure
+    end
+
+    class NetworkBinding
+      attr_accessor bind_ip: ::String
+      attr_accessor container_port: ::Integer
+      attr_accessor host_port: ::Integer
+      attr_accessor protocol: ("tcp" | "udp")
+      attr_accessor container_port_range: ::String
+      attr_accessor host_port_range: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkConfiguration
+      attr_accessor awsvpc_configuration: Types::AwsVpcConfiguration
+      SENSITIVE: []
+    end
+
+    class NetworkInterface
+      attr_accessor attachment_id: ::String
+      attr_accessor private_ipv_4_address: ::String
+      attr_accessor ipv6_address: ::String
+      SENSITIVE: []
+    end
+
+    class NoUpdateAvailableException < Aws::EmptyStructure
+    end
+
+    class PlacementConstraint
+      attr_accessor type: ("distinctInstance" | "memberOf")
+      attr_accessor expression: ::String
+      SENSITIVE: []
+    end
+
+    class PlacementStrategy
+      attr_accessor type: ("random" | "spread" | "binpack")
+      attr_accessor field: ::String
+      SENSITIVE: []
+    end
+
+    class PlatformDevice
+      attr_accessor id: ::String
+      attr_accessor type: ("GPU")
+      SENSITIVE: []
+    end
+
+    class PlatformTaskDefinitionIncompatibilityException < Aws::EmptyStructure
+    end
+
+    class PlatformUnknownException < Aws::EmptyStructure
+    end
+
+    class PortMapping
+      attr_accessor container_port: ::Integer
+      attr_accessor host_port: ::Integer
+      attr_accessor protocol: ("tcp" | "udp")
+      attr_accessor name: ::String
+      attr_accessor app_protocol: ("http" | "http2" | "grpc")
+      attr_accessor container_port_range: ::String
+      SENSITIVE: []
+    end
+
+    class ProtectedTask
+      attr_accessor task_arn: ::String
+      attr_accessor protection_enabled: bool
+      attr_accessor expiration_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ProxyConfiguration
+      attr_accessor type: ("APPMESH")
+      attr_accessor container_name: ::String
+      attr_accessor properties: ::Array[Types::KeyValuePair]
+      SENSITIVE: []
+    end
+
+    class PutAccountSettingDefaultRequest
+      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class PutAccountSettingDefaultResponse
+      attr_accessor setting: Types::Setting
+      SENSITIVE: []
+    end
+
+    class PutAccountSettingRequest
+      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate")
+      attr_accessor value: ::String
+      attr_accessor principal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutAccountSettingResponse
+      attr_accessor setting: Types::Setting
+      SENSITIVE: []
+    end
+
+    class PutAttributesRequest
+      attr_accessor cluster: ::String
+      attr_accessor attributes: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class PutAttributesResponse
+      attr_accessor attributes: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class PutClusterCapacityProvidersRequest
+      attr_accessor cluster: ::String
+      attr_accessor capacity_providers: ::Array[::String]
+      attr_accessor default_capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
+      SENSITIVE: []
+    end
+
+    class PutClusterCapacityProvidersResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class RegisterContainerInstanceRequest
+      attr_accessor cluster: ::String
+      attr_accessor instance_identity_document: ::String
+      attr_accessor instance_identity_document_signature: ::String
+      attr_accessor total_resources: ::Array[Types::Resource]
+      attr_accessor version_info: Types::VersionInfo
+      attr_accessor container_instance_arn: ::String
+      attr_accessor attributes: ::Array[Types::Attribute]
+      attr_accessor platform_devices: ::Array[Types::PlatformDevice]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class RegisterContainerInstanceResponse
+      attr_accessor container_instance: Types::ContainerInstance
+      SENSITIVE: []
+    end
+
+    class RegisterTaskDefinitionRequest
+      attr_accessor family: ::String
+      attr_accessor task_role_arn: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor network_mode: ("bridge" | "host" | "awsvpc" | "none")
+      attr_accessor container_definitions: ::Array[Types::ContainerDefinition]
+      attr_accessor volumes: ::Array[Types::Volume]
+      attr_accessor placement_constraints: ::Array[Types::TaskDefinitionPlacementConstraint]
+      attr_accessor requires_compatibilities: ::Array[("EC2" | "FARGATE" | "EXTERNAL")]
+      attr_accessor cpu: ::String
+      attr_accessor memory: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor pid_mode: ("host" | "task")
+      attr_accessor ipc_mode: ("host" | "task" | "none")
+      attr_accessor proxy_configuration: Types::ProxyConfiguration
+      attr_accessor inference_accelerators: ::Array[Types::InferenceAccelerator]
+      attr_accessor ephemeral_storage: Types::EphemeralStorage
+      attr_accessor runtime_platform: Types::RuntimePlatform
+      SENSITIVE: []
+    end
+
+    class RegisterTaskDefinitionResponse
+      attr_accessor task_definition: Types::TaskDefinition
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class RepositoryCredentials
+      attr_accessor credentials_parameter: ::String
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor double_value: ::Float
+      attr_accessor long_value: ::Integer
+      attr_accessor integer_value: ::Integer
+      attr_accessor string_set_value: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException < Aws::EmptyStructure
+    end
+
+    class ResourceRequirement
+      attr_accessor value: ::String
+      attr_accessor type: ("GPU" | "InferenceAccelerator")
+      SENSITIVE: []
+    end
+
+    class RunTaskRequest
+      attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
+      attr_accessor cluster: ::String
+      attr_accessor count: ::Integer
+      attr_accessor enable_ecs_managed_tags: bool
+      attr_accessor enable_execute_command: bool
+      attr_accessor group: ::String
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor overrides: Types::TaskOverride
+      attr_accessor placement_constraints: ::Array[Types::PlacementConstraint]
+      attr_accessor placement_strategy: ::Array[Types::PlacementStrategy]
+      attr_accessor platform_version: ::String
+      attr_accessor propagate_tags: ("TASK_DEFINITION" | "SERVICE" | "NONE")
+      attr_accessor reference_id: ::String
+      attr_accessor started_by: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor task_definition: ::String
+      attr_accessor client_token: ::String
+      attr_accessor volume_configurations: ::Array[Types::TaskVolumeConfiguration]
+      SENSITIVE: []
+    end
+
+    class RunTaskResponse
+      attr_accessor tasks: ::Array[Types::Task]
+      attr_accessor failures: ::Array[Types::Failure]
+      SENSITIVE: []
+    end
+
+    class RuntimePlatform
+      attr_accessor cpu_architecture: ("X86_64" | "ARM64")
+      attr_accessor operating_system_family: ("WINDOWS_SERVER_2019_FULL" | "WINDOWS_SERVER_2019_CORE" | "WINDOWS_SERVER_2016_FULL" | "WINDOWS_SERVER_2004_CORE" | "WINDOWS_SERVER_2022_CORE" | "WINDOWS_SERVER_2022_FULL" | "WINDOWS_SERVER_20H2_CORE" | "LINUX")
+      SENSITIVE: []
+    end
+
+    class Scale
+      attr_accessor value: ::Float
+      attr_accessor unit: ("PERCENT")
+      SENSITIVE: []
+    end
+
+    class Secret
+      attr_accessor name: ::String
+      attr_accessor value_from: ::String
+      SENSITIVE: []
+    end
+
+    class ServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Service
+      attr_accessor service_arn: ::String
+      attr_accessor service_name: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor load_balancers: ::Array[Types::LoadBalancer]
+      attr_accessor service_registries: ::Array[Types::ServiceRegistry]
+      attr_accessor status: ::String
+      attr_accessor desired_count: ::Integer
+      attr_accessor running_count: ::Integer
+      attr_accessor pending_count: ::Integer
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
+      attr_accessor platform_version: ::String
+      attr_accessor platform_family: ::String
+      attr_accessor task_definition: ::String
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration
+      attr_accessor task_sets: ::Array[Types::TaskSet]
+      attr_accessor deployments: ::Array[Types::Deployment]
+      attr_accessor role_arn: ::String
+      attr_accessor events: ::Array[Types::ServiceEvent]
+      attr_accessor created_at: ::Time
+      attr_accessor placement_constraints: ::Array[Types::PlacementConstraint]
+      attr_accessor placement_strategy: ::Array[Types::PlacementStrategy]
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor health_check_grace_period_seconds: ::Integer
+      attr_accessor scheduling_strategy: ("REPLICA" | "DAEMON")
+      attr_accessor deployment_controller: Types::DeploymentController
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_by: ::String
+      attr_accessor enable_ecs_managed_tags: bool
+      attr_accessor propagate_tags: ("TASK_DEFINITION" | "SERVICE" | "NONE")
+      attr_accessor enable_execute_command: bool
+      SENSITIVE: []
+    end
+
+    class ServiceConnectClientAlias
+      attr_accessor port: ::Integer
+      attr_accessor dns_name: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceConnectConfiguration
+      attr_accessor enabled: bool
+      attr_accessor namespace: ::String
+      attr_accessor services: ::Array[Types::ServiceConnectService]
+      attr_accessor log_configuration: Types::LogConfiguration
+      SENSITIVE: []
+    end
+
+    class ServiceConnectService
+      attr_accessor port_name: ::String
+      attr_accessor discovery_name: ::String
+      attr_accessor client_aliases: ::Array[Types::ServiceConnectClientAlias]
+      attr_accessor ingress_port_override: ::Integer
+      attr_accessor timeout: Types::TimeoutConfiguration
+      attr_accessor tls: Types::ServiceConnectTlsConfiguration
+      SENSITIVE: []
+    end
+
+    class ServiceConnectServiceResource
+      attr_accessor discovery_name: ::String
+      attr_accessor discovery_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceConnectTlsCertificateAuthority
+      attr_accessor aws_pca_authority_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceConnectTlsConfiguration
+      attr_accessor issuer_certificate_authority: Types::ServiceConnectTlsCertificateAuthority
+      attr_accessor kms_key: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceEvent
+      attr_accessor id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceManagedEBSVolumeConfiguration
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor volume_type: ::String
+      attr_accessor size_in_gi_b: ::Integer
+      attr_accessor snapshot_id: ::String
+      attr_accessor iops: ::Integer
+      attr_accessor throughput: ::Integer
+      attr_accessor tag_specifications: ::Array[Types::EBSTagSpecification]
+      attr_accessor role_arn: ::String
+      attr_accessor filesystem_type: ("ext3" | "ext4" | "xfs")
+      SENSITIVE: []
+    end
+
+    class ServiceNotActiveException < Aws::EmptyStructure
+    end
+
+    class ServiceNotFoundException < Aws::EmptyStructure
+    end
+
+    class ServiceRegistry
+      attr_accessor registry_arn: ::String
+      attr_accessor port: ::Integer
+      attr_accessor container_name: ::String
+      attr_accessor container_port: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceVolumeConfiguration
+      attr_accessor name: ::String
+      attr_accessor managed_ebs_volume: Types::ServiceManagedEBSVolumeConfiguration
+      SENSITIVE: []
+    end
+
+    class Session
+      attr_accessor session_id: ::String
+      attr_accessor stream_url: ::String
+      attr_accessor token_value: ::String
+      SENSITIVE: [:token_value]
+    end
+
+    class Setting
+      attr_accessor name: ("serviceLongArnFormat" | "taskLongArnFormat" | "containerInstanceLongArnFormat" | "awsvpcTrunking" | "containerInsights" | "fargateFIPSMode" | "tagResourceAuthorization" | "fargateTaskRetirementWaitPeriod" | "guardDutyActivate")
+      attr_accessor value: ::String
+      attr_accessor principal_arn: ::String
+      attr_accessor type: ("user" | "aws_managed")
+      SENSITIVE: []
+    end
+
+    class StartTaskRequest
+      attr_accessor cluster: ::String
+      attr_accessor container_instances: ::Array[::String]
+      attr_accessor enable_ecs_managed_tags: bool
+      attr_accessor enable_execute_command: bool
+      attr_accessor group: ::String
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor overrides: Types::TaskOverride
+      attr_accessor propagate_tags: ("TASK_DEFINITION" | "SERVICE" | "NONE")
+      attr_accessor reference_id: ::String
+      attr_accessor started_by: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor task_definition: ::String
+      attr_accessor volume_configurations: ::Array[Types::TaskVolumeConfiguration]
+      SENSITIVE: []
+    end
+
+    class StartTaskResponse
+      attr_accessor tasks: ::Array[Types::Task]
+      attr_accessor failures: ::Array[Types::Failure]
+      SENSITIVE: []
+    end
+
+    class StopTaskRequest
+      attr_accessor cluster: ::String
+      attr_accessor task: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class StopTaskResponse
+      attr_accessor task: Types::Task
+      SENSITIVE: []
+    end
+
+    class SubmitAttachmentStateChangesRequest
+      attr_accessor cluster: ::String
+      attr_accessor attachments: ::Array[Types::AttachmentStateChange]
+      SENSITIVE: []
+    end
+
+    class SubmitAttachmentStateChangesResponse
+      attr_accessor acknowledgment: ::String
+      SENSITIVE: []
+    end
+
+    class SubmitContainerStateChangeRequest
+      attr_accessor cluster: ::String
+      attr_accessor task: ::String
+      attr_accessor container_name: ::String
+      attr_accessor runtime_id: ::String
+      attr_accessor status: ::String
+      attr_accessor exit_code: ::Integer
+      attr_accessor reason: ::String
+      attr_accessor network_bindings: ::Array[Types::NetworkBinding]
+      SENSITIVE: []
+    end
+
+    class SubmitContainerStateChangeResponse
+      attr_accessor acknowledgment: ::String
+      SENSITIVE: []
+    end
+
+    class SubmitTaskStateChangeRequest
+      attr_accessor cluster: ::String
+      attr_accessor task: ::String
+      attr_accessor status: ::String
+      attr_accessor reason: ::String
+      attr_accessor containers: ::Array[Types::ContainerStateChange]
+      attr_accessor attachments: ::Array[Types::AttachmentStateChange]
+      attr_accessor managed_agents: ::Array[Types::ManagedAgentStateChange]
+      attr_accessor pull_started_at: ::Time
+      attr_accessor pull_stopped_at: ::Time
+      attr_accessor execution_stopped_at: ::Time
+      SENSITIVE: []
+    end
+
+    class SubmitTaskStateChangeResponse
+      attr_accessor acknowledgment: ::String
+      SENSITIVE: []
+    end
+
+    class SystemControl
+      attr_accessor namespace: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TargetNotConnectedException < Aws::EmptyStructure
+    end
+
+    class TargetNotFoundException < Aws::EmptyStructure
+    end
+
+    class Task
+      attr_accessor attachments: ::Array[Types::Attachment]
+      attr_accessor attributes: ::Array[Types::Attribute]
+      attr_accessor availability_zone: ::String
+      attr_accessor capacity_provider_name: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor connectivity: ("CONNECTED" | "DISCONNECTED")
+      attr_accessor connectivity_at: ::Time
+      attr_accessor container_instance_arn: ::String
+      attr_accessor containers: ::Array[Types::Container]
+      attr_accessor cpu: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor desired_status: ::String
+      attr_accessor enable_execute_command: bool
+      attr_accessor execution_stopped_at: ::Time
+      attr_accessor group: ::String
+      attr_accessor health_status: ("HEALTHY" | "UNHEALTHY" | "UNKNOWN")
+      attr_accessor inference_accelerators: ::Array[Types::InferenceAccelerator]
+      attr_accessor last_status: ::String
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor memory: ::String
+      attr_accessor overrides: Types::TaskOverride
+      attr_accessor platform_version: ::String
+      attr_accessor platform_family: ::String
+      attr_accessor pull_started_at: ::Time
+      attr_accessor pull_stopped_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor started_by: ::String
+      attr_accessor stop_code: ("TaskFailedToStart" | "EssentialContainerExited" | "UserInitiated" | "ServiceSchedulerInitiated" | "SpotInterruption" | "TerminationNotice")
+      attr_accessor stopped_at: ::Time
+      attr_accessor stopped_reason: ::String
+      attr_accessor stopping_at: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor task_arn: ::String
+      attr_accessor task_definition_arn: ::String
+      attr_accessor version: ::Integer
+      attr_accessor ephemeral_storage: Types::EphemeralStorage
+      SENSITIVE: []
+    end
+
+    class TaskDefinition
+      attr_accessor task_definition_arn: ::String
+      attr_accessor container_definitions: ::Array[Types::ContainerDefinition]
+      attr_accessor family: ::String
+      attr_accessor task_role_arn: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor network_mode: ("bridge" | "host" | "awsvpc" | "none")
+      attr_accessor revision: ::Integer
+      attr_accessor volumes: ::Array[Types::Volume]
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETE_IN_PROGRESS")
+      attr_accessor requires_attributes: ::Array[Types::Attribute]
+      attr_accessor placement_constraints: ::Array[Types::TaskDefinitionPlacementConstraint]
+      attr_accessor compatibilities: ::Array[("EC2" | "FARGATE" | "EXTERNAL")]
+      attr_accessor runtime_platform: Types::RuntimePlatform
+      attr_accessor requires_compatibilities: ::Array[("EC2" | "FARGATE" | "EXTERNAL")]
+      attr_accessor cpu: ::String
+      attr_accessor memory: ::String
+      attr_accessor inference_accelerators: ::Array[Types::InferenceAccelerator]
+      attr_accessor pid_mode: ("host" | "task")
+      attr_accessor ipc_mode: ("host" | "task" | "none")
+      attr_accessor proxy_configuration: Types::ProxyConfiguration
+      attr_accessor registered_at: ::Time
+      attr_accessor deregistered_at: ::Time
+      attr_accessor registered_by: ::String
+      attr_accessor ephemeral_storage: Types::EphemeralStorage
+      SENSITIVE: []
+    end
+
+    class TaskDefinitionPlacementConstraint
+      attr_accessor type: ("memberOf")
+      attr_accessor expression: ::String
+      SENSITIVE: []
+    end
+
+    class TaskManagedEBSVolumeConfiguration
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor volume_type: ::String
+      attr_accessor size_in_gi_b: ::Integer
+      attr_accessor snapshot_id: ::String
+      attr_accessor iops: ::Integer
+      attr_accessor throughput: ::Integer
+      attr_accessor tag_specifications: ::Array[Types::EBSTagSpecification]
+      attr_accessor role_arn: ::String
+      attr_accessor termination_policy: Types::TaskManagedEBSVolumeTerminationPolicy
+      attr_accessor filesystem_type: ("ext3" | "ext4" | "xfs")
+      SENSITIVE: []
+    end
+
+    class TaskManagedEBSVolumeTerminationPolicy
+      attr_accessor delete_on_termination: bool
+      SENSITIVE: []
+    end
+
+    class TaskOverride
+      attr_accessor container_overrides: ::Array[Types::ContainerOverride]
+      attr_accessor cpu: ::String
+      attr_accessor inference_accelerator_overrides: ::Array[Types::InferenceAcceleratorOverride]
+      attr_accessor execution_role_arn: ::String
+      attr_accessor memory: ::String
+      attr_accessor task_role_arn: ::String
+      attr_accessor ephemeral_storage: Types::EphemeralStorage
+      SENSITIVE: []
+    end
+
+    class TaskSet
+      attr_accessor id: ::String
+      attr_accessor task_set_arn: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor started_by: ::String
+      attr_accessor external_id: ::String
+      attr_accessor status: ::String
+      attr_accessor task_definition: ::String
+      attr_accessor computed_desired_count: ::Integer
+      attr_accessor pending_count: ::Integer
+      attr_accessor running_count: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
+      attr_accessor platform_version: ::String
+      attr_accessor platform_family: ::String
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor load_balancers: ::Array[Types::LoadBalancer]
+      attr_accessor service_registries: ::Array[Types::ServiceRegistry]
+      attr_accessor scale: Types::Scale
+      attr_accessor stability_status: ("STEADY_STATE" | "STABILIZING")
+      attr_accessor stability_status_at: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TaskSetNotFoundException < Aws::EmptyStructure
+    end
+
+    class TaskVolumeConfiguration
+      attr_accessor name: ::String
+      attr_accessor managed_ebs_volume: Types::TaskManagedEBSVolumeConfiguration
+      SENSITIVE: []
+    end
+
+    class TimeoutConfiguration
+      attr_accessor idle_timeout_seconds: ::Integer
+      attr_accessor per_request_timeout_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class Tmpfs
+      attr_accessor container_path: ::String
+      attr_accessor size: ::Integer
+      attr_accessor mount_options: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Ulimit
+      attr_accessor name: ("core" | "cpu" | "data" | "fsize" | "locks" | "memlock" | "msgqueue" | "nice" | "nofile" | "nproc" | "rss" | "rtprio" | "rttime" | "sigpending" | "stack")
+      attr_accessor soft_limit: ::Integer
+      attr_accessor hard_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class UnsupportedFeatureException < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCapacityProviderRequest
+      attr_accessor name: ::String
+      attr_accessor auto_scaling_group_provider: Types::AutoScalingGroupProviderUpdate
+      SENSITIVE: []
+    end
+
+    class UpdateCapacityProviderResponse
+      attr_accessor capacity_provider: Types::CapacityProvider
+      SENSITIVE: []
+    end
+
+    class UpdateClusterRequest
+      attr_accessor cluster: ::String
+      attr_accessor settings: ::Array[Types::ClusterSetting]
+      attr_accessor configuration: Types::ClusterConfiguration
+      attr_accessor service_connect_defaults: Types::ClusterServiceConnectDefaultsRequest
+      SENSITIVE: []
+    end
+
+    class UpdateClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class UpdateClusterSettingsRequest
+      attr_accessor cluster: ::String
+      attr_accessor settings: ::Array[Types::ClusterSetting]
+      SENSITIVE: []
+    end
+
+    class UpdateClusterSettingsResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class UpdateContainerAgentRequest
+      attr_accessor cluster: ::String
+      attr_accessor container_instance: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateContainerAgentResponse
+      attr_accessor container_instance: Types::ContainerInstance
+      SENSITIVE: []
+    end
+
+    class UpdateContainerInstancesStateRequest
+      attr_accessor cluster: ::String
+      attr_accessor container_instances: ::Array[::String]
+      attr_accessor status: ("ACTIVE" | "DRAINING" | "REGISTERING" | "DEREGISTERING" | "REGISTRATION_FAILED")
+      SENSITIVE: []
+    end
+
+    class UpdateContainerInstancesStateResponse
+      attr_accessor container_instances: ::Array[Types::ContainerInstance]
+      attr_accessor failures: ::Array[Types::Failure]
+      SENSITIVE: []
+    end
+
+    class UpdateInProgressException < Aws::EmptyStructure
+    end
+
+    class UpdateServicePrimaryTaskSetRequest
+      attr_accessor cluster: ::String
+      attr_accessor service: ::String
+      attr_accessor primary_task_set: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServicePrimaryTaskSetResponse
+      attr_accessor task_set: Types::TaskSet
+      SENSITIVE: []
+    end
+
+    class UpdateServiceRequest
+      attr_accessor cluster: ::String
+      attr_accessor service: ::String
+      attr_accessor desired_count: ::Integer
+      attr_accessor task_definition: ::String
+      attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor placement_constraints: ::Array[Types::PlacementConstraint]
+      attr_accessor placement_strategy: ::Array[Types::PlacementStrategy]
+      attr_accessor platform_version: ::String
+      attr_accessor force_new_deployment: bool
+      attr_accessor health_check_grace_period_seconds: ::Integer
+      attr_accessor enable_execute_command: bool
+      attr_accessor enable_ecs_managed_tags: bool
+      attr_accessor load_balancers: ::Array[Types::LoadBalancer]
+      attr_accessor propagate_tags: ("TASK_DEFINITION" | "SERVICE" | "NONE")
+      attr_accessor service_registries: ::Array[Types::ServiceRegistry]
+      attr_accessor service_connect_configuration: Types::ServiceConnectConfiguration
+      attr_accessor volume_configurations: ::Array[Types::ServiceVolumeConfiguration]
+      SENSITIVE: []
+    end
+
+    class UpdateServiceResponse
+      attr_accessor service: Types::Service
+      SENSITIVE: []
+    end
+
+    class UpdateTaskProtectionRequest
+      attr_accessor cluster: ::String
+      attr_accessor tasks: ::Array[::String]
+      attr_accessor protection_enabled: bool
+      attr_accessor expires_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateTaskProtectionResponse
+      attr_accessor protected_tasks: ::Array[Types::ProtectedTask]
+      attr_accessor failures: ::Array[Types::Failure]
+      SENSITIVE: []
+    end
+
+    class UpdateTaskSetRequest
+      attr_accessor cluster: ::String
+      attr_accessor service: ::String
+      attr_accessor task_set: ::String
+      attr_accessor scale: Types::Scale
+      SENSITIVE: []
+    end
+
+    class UpdateTaskSetResponse
+      attr_accessor task_set: Types::TaskSet
+      SENSITIVE: []
+    end
+
+    class VersionInfo
+      attr_accessor agent_version: ::String
+      attr_accessor agent_hash: ::String
+      attr_accessor docker_version: ::String
+      SENSITIVE: []
+    end
+
+    class Volume
+      attr_accessor name: ::String
+      attr_accessor host: Types::HostVolumeProperties
+      attr_accessor docker_volume_configuration: Types::DockerVolumeConfiguration
+      attr_accessor efs_volume_configuration: Types::EFSVolumeConfiguration
+      attr_accessor fsx_windows_file_server_volume_configuration: Types::FSxWindowsFileServerVolumeConfiguration
+      attr_accessor configured_at_launch: bool
+      SENSITIVE: []
+    end
+
+    class VolumeFrom
+      attr_accessor source_container: ::String
+      attr_accessor read_only: bool
+      SENSITIVE: []
+    end
+  end
+end

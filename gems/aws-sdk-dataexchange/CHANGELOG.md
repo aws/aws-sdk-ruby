@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.45.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2023-11-13)
+------------------
+
+* Feature - Removed Required trait for DataSet.OriginDetails.ProductId.
+
+1.42.0 (2023-11-07)
+------------------
+
+* Feature - Updated SendDataSetNotificationRequest Comment to be maximum length 4096.
+
+1.41.0 (2023-10-30)
+------------------
+
+* Feature - We added a new API action: SendDataSetNotification.
+
 1.40.0 (2023-09-27)
 ------------------
 

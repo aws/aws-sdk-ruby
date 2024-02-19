@@ -21,6 +21,7 @@ require_relative 'aws-sdk-cloudwatchlogs/endpoint_parameters'
 require_relative 'aws-sdk-cloudwatchlogs/endpoint_provider'
 require_relative 'aws-sdk-cloudwatchlogs/endpoints'
 require_relative 'aws-sdk-cloudwatchlogs/customizations'
+require_relative 'aws-sdk-cloudwatchlogs/event_streams'
 
 # This module provides support for Amazon CloudWatch Logs. This module is available in the
 # `aws-sdk-cloudwatchlogs` gem.
@@ -52,6 +53,6 @@ require_relative 'aws-sdk-cloudwatchlogs/customizations'
 # @!group service
 module Aws::CloudWatchLogs
 
-  GEM_VERSION = '1.71.0'
+  GEM_VERSION = '1.79.0'
 
 end

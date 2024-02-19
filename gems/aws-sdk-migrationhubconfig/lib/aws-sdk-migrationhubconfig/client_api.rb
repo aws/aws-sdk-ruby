@@ -17,6 +17,8 @@ module Aws::MigrationHubConfig
     ControlId = Shapes::StringShape.new(name: 'ControlId')
     CreateHomeRegionControlRequest = Shapes::StructureShape.new(name: 'CreateHomeRegionControlRequest')
     CreateHomeRegionControlResult = Shapes::StructureShape.new(name: 'CreateHomeRegionControlResult')
+    DeleteHomeRegionControlRequest = Shapes::StructureShape.new(name: 'DeleteHomeRegionControlRequest')
+    DeleteHomeRegionControlResult = Shapes::StructureShape.new(name: 'DeleteHomeRegionControlResult')
     DescribeHomeRegionControlsMaxResults = Shapes::IntegerShape.new(name: 'DescribeHomeRegionControlsMaxResults')
     DescribeHomeRegionControlsRequest = Shapes::StructureShape.new(name: 'DescribeHomeRegionControlsRequest')
     DescribeHomeRegionControlsResult = Shapes::StructureShape.new(name: 'DescribeHomeRegionControlsResult')
@@ -49,6 +51,11 @@ module Aws::MigrationHubConfig
 
     CreateHomeRegionControlResult.add_member(:home_region_control, Shapes::ShapeRef.new(shape: HomeRegionControl, location_name: "HomeRegionControl"))
     CreateHomeRegionControlResult.struct_class = Types::CreateHomeRegionControlResult
+
+    DeleteHomeRegionControlRequest.add_member(:control_id, Shapes::ShapeRef.new(shape: ControlId, required: true, location_name: "ControlId"))
+    DeleteHomeRegionControlRequest.struct_class = Types::DeleteHomeRegionControlRequest
+
+    DeleteHomeRegionControlResult.struct_class = Types::DeleteHomeRegionControlResult
 
     DescribeHomeRegionControlsRequest.add_member(:control_id, Shapes::ShapeRef.new(shape: ControlId, location_name: "ControlId"))
     DescribeHomeRegionControlsRequest.add_member(:home_region, Shapes::ShapeRef.new(shape: HomeRegion, location_name: "HomeRegion"))
@@ -124,6 +131,19 @@ module Aws::MigrationHubConfig
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: DryRunOperation)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:delete_home_region_control, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteHomeRegionControl"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteHomeRegionControlRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteHomeRegionControlResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 

@@ -1,0 +1,715 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ConnectCases
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchGetFieldResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetFieldResponse]
+        def errors: () -> ::Array[Types::FieldError]
+        def fields: () -> ::Array[Types::GetFieldResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#batch_get_field-instance_method
+      def batch_get_field: (
+                             domain_id: ::String,
+                             fields: Array[
+                               {
+                                 id: ::String
+                               },
+                             ]
+                           ) -> _BatchGetFieldResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetFieldResponseSuccess
+
+      interface _BatchPutFieldOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchPutFieldOptionsResponse]
+        def errors: () -> ::Array[Types::FieldOptionError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#batch_put_field_options-instance_method
+      def batch_put_field_options: (
+                                     domain_id: ::String,
+                                     field_id: ::String,
+                                     options: Array[
+                                       {
+                                         active: bool,
+                                         name: ::String,
+                                         value: ::String
+                                       },
+                                     ]
+                                   ) -> _BatchPutFieldOptionsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutFieldOptionsResponseSuccess
+
+      interface _CreateCaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCaseResponse]
+        def case_arn: () -> ::String
+        def case_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#create_case-instance_method
+      def create_case: (
+                         ?client_token: ::String,
+                         domain_id: ::String,
+                         fields: Array[
+                           {
+                             id: ::String,
+                             value: {
+                               boolean_value: bool?,
+                               double_value: ::Float?,
+                               empty_value: {
+                               }?,
+                               string_value: ::String?,
+                               user_arn_value: ::String?
+                             }
+                           },
+                         ],
+                         ?performed_by: {
+                           user_arn: ::String?
+                         },
+                         template_id: ::String
+                       ) -> _CreateCaseResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCaseResponseSuccess
+
+      interface _CreateDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainResponse]
+        def domain_arn: () -> ::String
+        def domain_id: () -> ::String
+        def domain_status: () -> ("Active" | "CreationInProgress" | "CreationFailed")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#create_domain-instance_method
+      def create_domain: (
+                           name: ::String
+                         ) -> _CreateDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
+
+      interface _CreateFieldResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFieldResponse]
+        def field_arn: () -> ::String
+        def field_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#create_field-instance_method
+      def create_field: (
+                          ?description: ::String,
+                          domain_id: ::String,
+                          name: ::String,
+                          type: ("Text" | "Number" | "Boolean" | "DateTime" | "SingleSelect" | "Url" | "User")
+                        ) -> _CreateFieldResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFieldResponseSuccess
+
+      interface _CreateLayoutResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLayoutResponse]
+        def layout_arn: () -> ::String
+        def layout_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#create_layout-instance_method
+      def create_layout: (
+                           content: {
+                             basic: {
+                               more_info: {
+                                 sections: Array[
+                                   {
+                                     field_group: {
+                                       fields: Array[
+                                         {
+                                           id: ::String
+                                         },
+                                       ],
+                                       name: ::String?
+                                     }?
+                                   },
+                                 ]?
+                               }?,
+                               top_panel: {
+                                 sections: Array[
+                                   {
+                                     field_group: {
+                                       fields: Array[
+                                         {
+                                           id: ::String
+                                         },
+                                       ],
+                                       name: ::String?
+                                     }?
+                                   },
+                                 ]?
+                               }?
+                             }?
+                           },
+                           domain_id: ::String,
+                           name: ::String
+                         ) -> _CreateLayoutResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLayoutResponseSuccess
+
+      interface _CreateRelatedItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRelatedItemResponse]
+        def related_item_arn: () -> ::String
+        def related_item_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#create_related_item-instance_method
+      def create_related_item: (
+                                 case_id: ::String,
+                                 content: {
+                                   comment: {
+                                     body: ::String,
+                                     content_type: ("Text/Plain")
+                                   }?,
+                                   contact: {
+                                     contact_arn: ::String
+                                   }?
+                                 },
+                                 domain_id: ::String,
+                                 ?performed_by: {
+                                   user_arn: ::String?
+                                 },
+                                 type: ("Contact" | "Comment")
+                               ) -> _CreateRelatedItemResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRelatedItemResponseSuccess
+
+      interface _CreateTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTemplateResponse]
+        def template_arn: () -> ::String
+        def template_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#create_template-instance_method
+      def create_template: (
+                             ?description: ::String,
+                             domain_id: ::String,
+                             ?layout_configuration: {
+                               default_layout: ::String?
+                             },
+                             name: ::String,
+                             ?required_fields: Array[
+                               {
+                                 field_id: ::String
+                               },
+                             ],
+                             ?status: ("Active" | "Inactive")
+                           ) -> _CreateTemplateResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTemplateResponseSuccess
+
+      interface _DeleteDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#delete_domain-instance_method
+      def delete_domain: (
+                           domain_id: ::String
+                         ) -> _DeleteDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainResponseSuccess
+
+      interface _GetCaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCaseResponse]
+        def fields: () -> ::Array[Types::FieldValue]
+        def next_token: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def template_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#get_case-instance_method
+      def get_case: (
+                      case_id: ::String,
+                      domain_id: ::String,
+                      fields: Array[
+                        {
+                          id: ::String
+                        },
+                      ],
+                      ?next_token: ::String
+                    ) -> _GetCaseResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCaseResponseSuccess
+
+      interface _GetCaseAuditEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCaseAuditEventsResponse]
+        def audit_events: () -> ::Array[Types::AuditEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#get_case_audit_events-instance_method
+      def get_case_audit_events: (
+                                   case_id: ::String,
+                                   domain_id: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _GetCaseAuditEventsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCaseAuditEventsResponseSuccess
+
+      interface _GetCaseEventConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCaseEventConfigurationResponse]
+        def event_bridge: () -> Types::EventBridgeConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#get_case_event_configuration-instance_method
+      def get_case_event_configuration: (
+                                          domain_id: ::String
+                                        ) -> _GetCaseEventConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCaseEventConfigurationResponseSuccess
+
+      interface _GetDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainResponse]
+        def created_time: () -> ::Time
+        def domain_arn: () -> ::String
+        def domain_id: () -> ::String
+        def domain_status: () -> ("Active" | "CreationInProgress" | "CreationFailed")
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#get_domain-instance_method
+      def get_domain: (
+                        domain_id: ::String
+                      ) -> _GetDomainResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainResponseSuccess
+
+      interface _GetLayoutResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLayoutResponse]
+        def content: () -> Types::LayoutContent
+        def layout_arn: () -> ::String
+        def layout_id: () -> ::String
+        def name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#get_layout-instance_method
+      def get_layout: (
+                        domain_id: ::String,
+                        layout_id: ::String
+                      ) -> _GetLayoutResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLayoutResponseSuccess
+
+      interface _GetTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTemplateResponse]
+        def description: () -> ::String
+        def layout_configuration: () -> Types::LayoutConfiguration
+        def name: () -> ::String
+        def required_fields: () -> ::Array[Types::RequiredField]
+        def status: () -> ("Active" | "Inactive")
+        def tags: () -> ::Hash[::String, ::String]
+        def template_arn: () -> ::String
+        def template_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#get_template-instance_method
+      def get_template: (
+                          domain_id: ::String,
+                          template_id: ::String
+                        ) -> _GetTemplateResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemplateResponseSuccess
+
+      interface _ListCasesForContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCasesForContactResponse]
+        def cases: () -> ::Array[Types::CaseSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#list_cases_for_contact-instance_method
+      def list_cases_for_contact: (
+                                    contact_arn: ::String,
+                                    domain_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListCasesForContactResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCasesForContactResponseSuccess
+
+      interface _ListDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsResponse]
+        def domains: () -> ::Array[Types::DomainSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#list_domains-instance_method
+      def list_domains: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListDomainsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainsResponseSuccess
+
+      interface _ListFieldOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFieldOptionsResponse]
+        def next_token: () -> ::String
+        def options: () -> ::Array[Types::FieldOption]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#list_field_options-instance_method
+      def list_field_options: (
+                                domain_id: ::String,
+                                field_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                ?values: Array[::String]
+                              ) -> _ListFieldOptionsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFieldOptionsResponseSuccess
+
+      interface _ListFieldsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFieldsResponse]
+        def fields: () -> ::Array[Types::FieldSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#list_fields-instance_method
+      def list_fields: (
+                         domain_id: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListFieldsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFieldsResponseSuccess
+
+      interface _ListLayoutsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLayoutsResponse]
+        def layouts: () -> ::Array[Types::LayoutSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#list_layouts-instance_method
+      def list_layouts: (
+                          domain_id: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListLayoutsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLayoutsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTemplatesResponse]
+        def next_token: () -> ::String
+        def templates: () -> ::Array[Types::TemplateSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#list_templates-instance_method
+      def list_templates: (
+                            domain_id: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?status: Array[("Active" | "Inactive")]
+                          ) -> _ListTemplatesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTemplatesResponseSuccess
+
+      interface _PutCaseEventConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutCaseEventConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#put_case_event_configuration-instance_method
+      def put_case_event_configuration: (
+                                          domain_id: ::String,
+                                          event_bridge: {
+                                            enabled: bool,
+                                            included_data: {
+                                              case_data: {
+                                                fields: Array[
+                                                  {
+                                                    id: ::String
+                                                  },
+                                                ]
+                                              }?,
+                                              related_item_data: {
+                                                include_content: bool
+                                              }?
+                                            }?
+                                          }
+                                        ) -> _PutCaseEventConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutCaseEventConfigurationResponseSuccess
+
+      interface _SearchCasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchCasesResponse]
+        def cases: () -> ::Array[Types::SearchCasesResponseItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#search_cases-instance_method
+      def search_cases: (
+                          domain_id: ::String,
+                          ?fields: Array[
+                            {
+                              id: ::String
+                            },
+                          ],
+                          ?filter: {
+                            and_all: Array[
+                              untyped,
+                            ]?,
+                            field: {
+                              contains: {
+                                id: ::String,
+                                value: {
+                                  boolean_value: bool?,
+                                  double_value: ::Float?,
+                                  empty_value: {
+                                  }?,
+                                  string_value: ::String?,
+                                  user_arn_value: ::String?
+                                }
+                              }?,
+                              equal_to: {
+                                id: ::String,
+                                value: {
+                                  boolean_value: bool?,
+                                  double_value: ::Float?,
+                                  empty_value: {
+                                  }?,
+                                  string_value: ::String?,
+                                  user_arn_value: ::String?
+                                }
+                              }?,
+                              greater_than: {
+                                id: ::String,
+                                value: {
+                                  boolean_value: bool?,
+                                  double_value: ::Float?,
+                                  empty_value: {
+                                  }?,
+                                  string_value: ::String?,
+                                  user_arn_value: ::String?
+                                }
+                              }?,
+                              greater_than_or_equal_to: {
+                                id: ::String,
+                                value: {
+                                  boolean_value: bool?,
+                                  double_value: ::Float?,
+                                  empty_value: {
+                                  }?,
+                                  string_value: ::String?,
+                                  user_arn_value: ::String?
+                                }
+                              }?,
+                              less_than: {
+                                id: ::String,
+                                value: {
+                                  boolean_value: bool?,
+                                  double_value: ::Float?,
+                                  empty_value: {
+                                  }?,
+                                  string_value: ::String?,
+                                  user_arn_value: ::String?
+                                }
+                              }?,
+                              less_than_or_equal_to: {
+                                id: ::String,
+                                value: {
+                                  boolean_value: bool?,
+                                  double_value: ::Float?,
+                                  empty_value: {
+                                  }?,
+                                  string_value: ::String?,
+                                  user_arn_value: ::String?
+                                }
+                              }?
+                            }?,
+                            not: untyped?,
+                            or_all: Array[
+                              untyped,
+                            ]?
+                          },
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?search_term: ::String,
+                          ?sorts: Array[
+                            {
+                              field_id: ::String,
+                              sort_order: ("Asc" | "Desc")
+                            },
+                          ]
+                        ) -> _SearchCasesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchCasesResponseSuccess
+
+      interface _SearchRelatedItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchRelatedItemsResponse]
+        def next_token: () -> ::String
+        def related_items: () -> ::Array[Types::SearchRelatedItemsResponseItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#search_related_items-instance_method
+      def search_related_items: (
+                                  case_id: ::String,
+                                  domain_id: ::String,
+                                  ?filters: Array[
+                                    {
+                                      comment: {
+                                      }?,
+                                      contact: {
+                                        channel: Array[::String]?,
+                                        contact_arn: ::String?
+                                      }?
+                                    },
+                                  ],
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _SearchRelatedItemsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchRelatedItemsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateCaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCaseResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#update_case-instance_method
+      def update_case: (
+                         case_id: ::String,
+                         domain_id: ::String,
+                         fields: Array[
+                           {
+                             id: ::String,
+                             value: {
+                               boolean_value: bool?,
+                               double_value: ::Float?,
+                               empty_value: {
+                               }?,
+                               string_value: ::String?,
+                               user_arn_value: ::String?
+                             }
+                           },
+                         ],
+                         ?performed_by: {
+                           user_arn: ::String?
+                         }
+                       ) -> _UpdateCaseResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCaseResponseSuccess
+
+      interface _UpdateFieldResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFieldResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#update_field-instance_method
+      def update_field: (
+                          ?description: ::String,
+                          domain_id: ::String,
+                          field_id: ::String,
+                          ?name: ::String
+                        ) -> _UpdateFieldResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFieldResponseSuccess
+
+      interface _UpdateLayoutResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLayoutResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#update_layout-instance_method
+      def update_layout: (
+                           ?content: {
+                             basic: {
+                               more_info: {
+                                 sections: Array[
+                                   {
+                                     field_group: {
+                                       fields: Array[
+                                         {
+                                           id: ::String
+                                         },
+                                       ],
+                                       name: ::String?
+                                     }?
+                                   },
+                                 ]?
+                               }?,
+                               top_panel: {
+                                 sections: Array[
+                                   {
+                                     field_group: {
+                                       fields: Array[
+                                         {
+                                           id: ::String
+                                         },
+                                       ],
+                                       name: ::String?
+                                     }?
+                                   },
+                                 ]?
+                               }?
+                             }?
+                           },
+                           domain_id: ::String,
+                           layout_id: ::String,
+                           ?name: ::String
+                         ) -> _UpdateLayoutResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLayoutResponseSuccess
+
+      interface _UpdateTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#update_template-instance_method
+      def update_template: (
+                             ?description: ::String,
+                             domain_id: ::String,
+                             ?layout_configuration: {
+                               default_layout: ::String?
+                             },
+                             ?name: ::String,
+                             ?required_fields: Array[
+                               {
+                                 field_id: ::String
+                               },
+                             ],
+                             ?status: ("Active" | "Inactive"),
+                             template_id: ::String
+                           ) -> _UpdateTemplateResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTemplateResponseSuccess
+    end
+  end
+end
+

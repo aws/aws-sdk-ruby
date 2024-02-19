@@ -26,11 +26,15 @@ module Aws::ManagedBlockchainQuery
     BlockHash = Shapes::StringShape.new(name: 'BlockHash')
     BlockchainInstant = Shapes::StructureShape.new(name: 'BlockchainInstant')
     ChainAddress = Shapes::StringShape.new(name: 'ChainAddress')
+    ConfirmationStatus = Shapes::StringShape.new(name: 'ConfirmationStatus')
+    ConfirmationStatusFilter = Shapes::StructureShape.new(name: 'ConfirmationStatusFilter')
+    ConfirmationStatusIncludeList = Shapes::ListShape.new(name: 'ConfirmationStatusIncludeList')
     ContractFilter = Shapes::StructureShape.new(name: 'ContractFilter')
     ContractIdentifier = Shapes::StructureShape.new(name: 'ContractIdentifier')
     ContractMetadata = Shapes::StructureShape.new(name: 'ContractMetadata')
     ErrorType = Shapes::StringShape.new(name: 'ErrorType')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
+    ExecutionStatus = Shapes::StringShape.new(name: 'ExecutionStatus')
     GetAssetContractInput = Shapes::StructureShape.new(name: 'GetAssetContractInput')
     GetAssetContractOutput = Shapes::StructureShape.new(name: 'GetAssetContractOutput')
     GetTokenBalanceInput = Shapes::StructureShape.new(name: 'GetTokenBalanceInput')
@@ -63,7 +67,6 @@ module Aws::ManagedBlockchainQuery
     QueryTokenStandard = Shapes::StringShape.new(name: 'QueryTokenStandard')
     QueryTransactionEventType = Shapes::StringShape.new(name: 'QueryTransactionEventType')
     QueryTransactionHash = Shapes::StringShape.new(name: 'QueryTransactionHash')
-    QueryTransactionStatus = Shapes::StringShape.new(name: 'QueryTransactionStatus')
     QuotaCode = Shapes::StringShape.new(name: 'QuotaCode')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -131,6 +134,11 @@ module Aws::ManagedBlockchainQuery
 
     BlockchainInstant.add_member(:time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "time"))
     BlockchainInstant.struct_class = Types::BlockchainInstant
+
+    ConfirmationStatusFilter.add_member(:include, Shapes::ShapeRef.new(shape: ConfirmationStatusIncludeList, required: true, location_name: "include"))
+    ConfirmationStatusFilter.struct_class = Types::ConfirmationStatusFilter
+
+    ConfirmationStatusIncludeList.member = Shapes::ShapeRef.new(shape: ConfirmationStatus)
 
     ContractFilter.add_member(:network, Shapes::ShapeRef.new(shape: QueryNetwork, required: true, location_name: "network"))
     ContractFilter.add_member(:token_standard, Shapes::ShapeRef.new(shape: QueryTokenStandard, required: true, location_name: "tokenStandard"))
@@ -216,6 +224,7 @@ module Aws::ManagedBlockchainQuery
     ListTransactionsInput.add_member(:sort, Shapes::ShapeRef.new(shape: ListTransactionsSort, location_name: "sort"))
     ListTransactionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListTransactionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListTransactionsInputMaxResultsInteger, location_name: "maxResults"))
+    ListTransactionsInput.add_member(:confirmation_status_filter, Shapes::ShapeRef.new(shape: ConfirmationStatusFilter, location_name: "confirmationStatusFilter"))
     ListTransactionsInput.struct_class = Types::ListTransactionsInput
 
     ListTransactionsOutput.add_member(:transactions, Shapes::ShapeRef.new(shape: TransactionOutputList, required: true, location_name: "transactions"))
@@ -276,7 +285,6 @@ module Aws::ManagedBlockchainQuery
     Transaction.add_member(:transaction_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "transactionTimestamp"))
     Transaction.add_member(:transaction_index, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "transactionIndex"))
     Transaction.add_member(:number_of_transactions, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "numberOfTransactions"))
-    Transaction.add_member(:status, Shapes::ShapeRef.new(shape: QueryTransactionStatus, required: true, location_name: "status"))
     Transaction.add_member(:to, Shapes::ShapeRef.new(shape: ChainAddress, required: true, location_name: "to"))
     Transaction.add_member(:from, Shapes::ShapeRef.new(shape: ChainAddress, location_name: "from"))
     Transaction.add_member(:contract_address, Shapes::ShapeRef.new(shape: ChainAddress, location_name: "contractAddress"))
@@ -288,6 +296,8 @@ module Aws::ManagedBlockchainQuery
     Transaction.add_member(:signature_s, Shapes::ShapeRef.new(shape: String, location_name: "signatureS"))
     Transaction.add_member(:transaction_fee, Shapes::ShapeRef.new(shape: String, location_name: "transactionFee"))
     Transaction.add_member(:transaction_id, Shapes::ShapeRef.new(shape: String, location_name: "transactionId"))
+    Transaction.add_member(:confirmation_status, Shapes::ShapeRef.new(shape: ConfirmationStatus, location_name: "confirmationStatus"))
+    Transaction.add_member(:execution_status, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "executionStatus"))
     Transaction.struct_class = Types::Transaction
 
     TransactionEvent.add_member(:network, Shapes::ShapeRef.new(shape: QueryNetwork, required: true, location_name: "network"))
@@ -307,6 +317,7 @@ module Aws::ManagedBlockchainQuery
     TransactionOutputItem.add_member(:transaction_hash, Shapes::ShapeRef.new(shape: QueryTransactionHash, required: true, location_name: "transactionHash"))
     TransactionOutputItem.add_member(:network, Shapes::ShapeRef.new(shape: QueryNetwork, required: true, location_name: "network"))
     TransactionOutputItem.add_member(:transaction_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "transactionTimestamp"))
+    TransactionOutputItem.add_member(:confirmation_status, Shapes::ShapeRef.new(shape: ConfirmationStatus, location_name: "confirmationStatus"))
     TransactionOutputItem.struct_class = Types::TransactionOutputItem
 
     TransactionOutputList.member = Shapes::ShapeRef.new(shape: TransactionOutputItem)

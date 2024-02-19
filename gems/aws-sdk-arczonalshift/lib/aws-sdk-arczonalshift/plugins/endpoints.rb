@@ -14,6 +14,7 @@ module Aws::ARCZonalShift
       option(
         :endpoint_provider,
         doc_type: 'Aws::ARCZonalShift::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::ARCZonalShift
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -58,14 +60,24 @@ module Aws::ARCZonalShift
           case context.operation_name
           when :cancel_zonal_shift
             Aws::ARCZonalShift::Endpoints::CancelZonalShift.build(context)
+          when :create_practice_run_configuration
+            Aws::ARCZonalShift::Endpoints::CreatePracticeRunConfiguration.build(context)
+          when :delete_practice_run_configuration
+            Aws::ARCZonalShift::Endpoints::DeletePracticeRunConfiguration.build(context)
           when :get_managed_resource
             Aws::ARCZonalShift::Endpoints::GetManagedResource.build(context)
+          when :list_autoshifts
+            Aws::ARCZonalShift::Endpoints::ListAutoshifts.build(context)
           when :list_managed_resources
             Aws::ARCZonalShift::Endpoints::ListManagedResources.build(context)
           when :list_zonal_shifts
             Aws::ARCZonalShift::Endpoints::ListZonalShifts.build(context)
           when :start_zonal_shift
             Aws::ARCZonalShift::Endpoints::StartZonalShift.build(context)
+          when :update_practice_run_configuration
+            Aws::ARCZonalShift::Endpoints::UpdatePracticeRunConfiguration.build(context)
+          when :update_zonal_autoshift_configuration
+            Aws::ARCZonalShift::Endpoints::UpdateZonalAutoshiftConfiguration.build(context)
           when :update_zonal_shift
             Aws::ARCZonalShift::Endpoints::UpdateZonalShift.build(context)
           end

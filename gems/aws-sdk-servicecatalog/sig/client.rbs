@@ -1,0 +1,1494 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ServiceCatalog
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptPortfolioShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptPortfolioShareOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#accept_portfolio_share-instance_method
+      def accept_portfolio_share: (
+                                    ?accept_language: ::String,
+                                    portfolio_id: ::String,
+                                    ?portfolio_share_type: ("IMPORTED" | "AWS_SERVICECATALOG" | "AWS_ORGANIZATIONS")
+                                  ) -> _AcceptPortfolioShareResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptPortfolioShareResponseSuccess
+
+      interface _AssociateBudgetWithResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateBudgetWithResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#associate_budget_with_resource-instance_method
+      def associate_budget_with_resource: (
+                                            budget_name: ::String,
+                                            resource_id: ::String
+                                          ) -> _AssociateBudgetWithResourceResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateBudgetWithResourceResponseSuccess
+
+      interface _AssociatePrincipalWithPortfolioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociatePrincipalWithPortfolioOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#associate_principal_with_portfolio-instance_method
+      def associate_principal_with_portfolio: (
+                                                ?accept_language: ::String,
+                                                portfolio_id: ::String,
+                                                principal_arn: ::String,
+                                                principal_type: ("IAM" | "IAM_PATTERN")
+                                              ) -> _AssociatePrincipalWithPortfolioResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociatePrincipalWithPortfolioResponseSuccess
+
+      interface _AssociateProductWithPortfolioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateProductWithPortfolioOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#associate_product_with_portfolio-instance_method
+      def associate_product_with_portfolio: (
+                                              ?accept_language: ::String,
+                                              product_id: ::String,
+                                              portfolio_id: ::String,
+                                              ?source_portfolio_id: ::String
+                                            ) -> _AssociateProductWithPortfolioResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateProductWithPortfolioResponseSuccess
+
+      interface _AssociateServiceActionWithProvisioningArtifactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateServiceActionWithProvisioningArtifactOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#associate_service_action_with_provisioning_artifact-instance_method
+      def associate_service_action_with_provisioning_artifact: (
+                                                                 product_id: ::String,
+                                                                 provisioning_artifact_id: ::String,
+                                                                 service_action_id: ::String,
+                                                                 ?accept_language: ::String,
+                                                                 ?idempotency_token: ::String
+                                                               ) -> _AssociateServiceActionWithProvisioningArtifactResponseSuccess
+                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateServiceActionWithProvisioningArtifactResponseSuccess
+
+      interface _AssociateTagOptionWithResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateTagOptionWithResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#associate_tag_option_with_resource-instance_method
+      def associate_tag_option_with_resource: (
+                                                resource_id: ::String,
+                                                tag_option_id: ::String
+                                              ) -> _AssociateTagOptionWithResourceResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateTagOptionWithResourceResponseSuccess
+
+      interface _BatchAssociateServiceActionWithProvisioningArtifactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchAssociateServiceActionWithProvisioningArtifactOutput]
+        def failed_service_action_associations: () -> ::Array[Types::FailedServiceActionAssociation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#batch_associate_service_action_with_provisioning_artifact-instance_method
+      def batch_associate_service_action_with_provisioning_artifact: (
+                                                                       service_action_associations: Array[
+                                                                         {
+                                                                           service_action_id: ::String,
+                                                                           product_id: ::String,
+                                                                           provisioning_artifact_id: ::String
+                                                                         },
+                                                                       ],
+                                                                       ?accept_language: ::String
+                                                                     ) -> _BatchAssociateServiceActionWithProvisioningArtifactResponseSuccess
+                                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAssociateServiceActionWithProvisioningArtifactResponseSuccess
+
+      interface _BatchDisassociateServiceActionFromProvisioningArtifactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDisassociateServiceActionFromProvisioningArtifactOutput]
+        def failed_service_action_associations: () -> ::Array[Types::FailedServiceActionAssociation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#batch_disassociate_service_action_from_provisioning_artifact-instance_method
+      def batch_disassociate_service_action_from_provisioning_artifact: (
+                                                                          service_action_associations: Array[
+                                                                            {
+                                                                              service_action_id: ::String,
+                                                                              product_id: ::String,
+                                                                              provisioning_artifact_id: ::String
+                                                                            },
+                                                                          ],
+                                                                          ?accept_language: ::String
+                                                                        ) -> _BatchDisassociateServiceActionFromProvisioningArtifactResponseSuccess
+                                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisassociateServiceActionFromProvisioningArtifactResponseSuccess
+
+      interface _CopyProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopyProductOutput]
+        def copy_product_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#copy_product-instance_method
+      def copy_product: (
+                          ?accept_language: ::String,
+                          source_product_arn: ::String,
+                          ?target_product_id: ::String,
+                          ?target_product_name: ::String,
+                          ?source_provisioning_artifact_identifiers: Array[
+                            Hash[("Id"), ::String],
+                          ],
+                          ?copy_options: Array[("CopyTags")],
+                          idempotency_token: ::String
+                        ) -> _CopyProductResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyProductResponseSuccess
+
+      interface _CreateConstraintResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConstraintOutput]
+        def constraint_detail: () -> Types::ConstraintDetail
+        def constraint_parameters: () -> ::String
+        def status: () -> ("AVAILABLE" | "CREATING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#create_constraint-instance_method
+      def create_constraint: (
+                               ?accept_language: ::String,
+                               portfolio_id: ::String,
+                               product_id: ::String,
+                               parameters: ::String,
+                               type: ::String,
+                               ?description: ::String,
+                               idempotency_token: ::String
+                             ) -> _CreateConstraintResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConstraintResponseSuccess
+
+      interface _CreatePortfolioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePortfolioOutput]
+        def portfolio_detail: () -> Types::PortfolioDetail
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#create_portfolio-instance_method
+      def create_portfolio: (
+                              ?accept_language: ::String,
+                              display_name: ::String,
+                              ?description: ::String,
+                              provider_name: ::String,
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ],
+                              idempotency_token: ::String
+                            ) -> _CreatePortfolioResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePortfolioResponseSuccess
+
+      interface _CreatePortfolioShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePortfolioShareOutput]
+        def portfolio_share_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#create_portfolio_share-instance_method
+      def create_portfolio_share: (
+                                    ?accept_language: ::String,
+                                    portfolio_id: ::String,
+                                    ?account_id: ::String,
+                                    ?organization_node: {
+                                      type: ("ORGANIZATION" | "ORGANIZATIONAL_UNIT" | "ACCOUNT")?,
+                                      value: ::String?
+                                    },
+                                    ?share_tag_options: bool,
+                                    ?share_principals: bool
+                                  ) -> _CreatePortfolioShareResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePortfolioShareResponseSuccess
+
+      interface _CreateProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProductOutput]
+        def product_view_detail: () -> Types::ProductViewDetail
+        def provisioning_artifact_detail: () -> Types::ProvisioningArtifactDetail
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#create_product-instance_method
+      def create_product: (
+                            ?accept_language: ::String,
+                            name: ::String,
+                            owner: ::String,
+                            ?description: ::String,
+                            ?distributor: ::String,
+                            ?support_description: ::String,
+                            ?support_email: ::String,
+                            ?support_url: ::String,
+                            product_type: ("CLOUD_FORMATION_TEMPLATE" | "MARKETPLACE" | "TERRAFORM_OPEN_SOURCE" | "TERRAFORM_CLOUD" | "EXTERNAL"),
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ],
+                            ?provisioning_artifact_parameters: {
+                              name: ::String?,
+                              description: ::String?,
+                              info: Hash[::String, ::String]?,
+                              type: ("CLOUD_FORMATION_TEMPLATE" | "MARKETPLACE_AMI" | "MARKETPLACE_CAR" | "TERRAFORM_OPEN_SOURCE" | "TERRAFORM_CLOUD" | "EXTERNAL")?,
+                              disable_template_validation: bool?
+                            },
+                            idempotency_token: ::String,
+                            ?source_connection: {
+                              type: ("CODESTAR")?,
+                              connection_parameters: {
+                                code_star: {
+                                  connection_arn: ::String,
+                                  repository: ::String,
+                                  branch: ::String,
+                                  artifact_path: ::String
+                                }?
+                              }
+                            }
+                          ) -> _CreateProductResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProductResponseSuccess
+
+      interface _CreateProvisionedProductPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProvisionedProductPlanOutput]
+        def plan_name: () -> ::String
+        def plan_id: () -> ::String
+        def provision_product_id: () -> ::String
+        def provisioned_product_name: () -> ::String
+        def provisioning_artifact_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#create_provisioned_product_plan-instance_method
+      def create_provisioned_product_plan: (
+                                             ?accept_language: ::String,
+                                             plan_name: ::String,
+                                             plan_type: ("CLOUDFORMATION"),
+                                             ?notification_arns: Array[::String],
+                                             ?path_id: ::String,
+                                             product_id: ::String,
+                                             provisioned_product_name: ::String,
+                                             provisioning_artifact_id: ::String,
+                                             ?provisioning_parameters: Array[
+                                               {
+                                                 key: ::String?,
+                                                 value: ::String?,
+                                                 use_previous_value: bool?
+                                               },
+                                             ],
+                                             idempotency_token: ::String,
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String
+                                               },
+                                             ]
+                                           ) -> _CreateProvisionedProductPlanResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProvisionedProductPlanResponseSuccess
+
+      interface _CreateProvisioningArtifactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProvisioningArtifactOutput]
+        def provisioning_artifact_detail: () -> Types::ProvisioningArtifactDetail
+        def info: () -> ::Hash[::String, ::String]
+        def status: () -> ("AVAILABLE" | "CREATING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#create_provisioning_artifact-instance_method
+      def create_provisioning_artifact: (
+                                          ?accept_language: ::String,
+                                          product_id: ::String,
+                                          parameters: {
+                                            name: ::String?,
+                                            description: ::String?,
+                                            info: Hash[::String, ::String]?,
+                                            type: ("CLOUD_FORMATION_TEMPLATE" | "MARKETPLACE_AMI" | "MARKETPLACE_CAR" | "TERRAFORM_OPEN_SOURCE" | "TERRAFORM_CLOUD" | "EXTERNAL")?,
+                                            disable_template_validation: bool?
+                                          },
+                                          idempotency_token: ::String
+                                        ) -> _CreateProvisioningArtifactResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProvisioningArtifactResponseSuccess
+
+      interface _CreateServiceActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceActionOutput]
+        def service_action_detail: () -> Types::ServiceActionDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#create_service_action-instance_method
+      def create_service_action: (
+                                   name: ::String,
+                                   definition_type: ("SSM_AUTOMATION"),
+                                   definition: Hash[("Name" | "Version" | "AssumeRole" | "Parameters"), ::String],
+                                   ?description: ::String,
+                                   ?accept_language: ::String,
+                                   idempotency_token: ::String
+                                 ) -> _CreateServiceActionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceActionResponseSuccess
+
+      interface _CreateTagOptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTagOptionOutput]
+        def tag_option_detail: () -> Types::TagOptionDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#create_tag_option-instance_method
+      def create_tag_option: (
+                               key: ::String,
+                               value: ::String
+                             ) -> _CreateTagOptionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTagOptionResponseSuccess
+
+      interface _DeleteConstraintResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConstraintOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#delete_constraint-instance_method
+      def delete_constraint: (
+                               ?accept_language: ::String,
+                               id: ::String
+                             ) -> _DeleteConstraintResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConstraintResponseSuccess
+
+      interface _DeletePortfolioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePortfolioOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#delete_portfolio-instance_method
+      def delete_portfolio: (
+                              ?accept_language: ::String,
+                              id: ::String
+                            ) -> _DeletePortfolioResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePortfolioResponseSuccess
+
+      interface _DeletePortfolioShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePortfolioShareOutput]
+        def portfolio_share_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#delete_portfolio_share-instance_method
+      def delete_portfolio_share: (
+                                    ?accept_language: ::String,
+                                    portfolio_id: ::String,
+                                    ?account_id: ::String,
+                                    ?organization_node: {
+                                      type: ("ORGANIZATION" | "ORGANIZATIONAL_UNIT" | "ACCOUNT")?,
+                                      value: ::String?
+                                    }
+                                  ) -> _DeletePortfolioShareResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePortfolioShareResponseSuccess
+
+      interface _DeleteProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProductOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#delete_product-instance_method
+      def delete_product: (
+                            ?accept_language: ::String,
+                            id: ::String
+                          ) -> _DeleteProductResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProductResponseSuccess
+
+      interface _DeleteProvisionedProductPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProvisionedProductPlanOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#delete_provisioned_product_plan-instance_method
+      def delete_provisioned_product_plan: (
+                                             ?accept_language: ::String,
+                                             plan_id: ::String,
+                                             ?ignore_errors: bool
+                                           ) -> _DeleteProvisionedProductPlanResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProvisionedProductPlanResponseSuccess
+
+      interface _DeleteProvisioningArtifactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProvisioningArtifactOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#delete_provisioning_artifact-instance_method
+      def delete_provisioning_artifact: (
+                                          ?accept_language: ::String,
+                                          product_id: ::String,
+                                          provisioning_artifact_id: ::String
+                                        ) -> _DeleteProvisioningArtifactResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProvisioningArtifactResponseSuccess
+
+      interface _DeleteServiceActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceActionOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#delete_service_action-instance_method
+      def delete_service_action: (
+                                   id: ::String,
+                                   ?accept_language: ::String,
+                                   ?idempotency_token: ::String
+                                 ) -> _DeleteServiceActionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceActionResponseSuccess
+
+      interface _DeleteTagOptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTagOptionOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#delete_tag_option-instance_method
+      def delete_tag_option: (
+                               id: ::String
+                             ) -> _DeleteTagOptionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTagOptionResponseSuccess
+
+      interface _DescribeConstraintResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConstraintOutput]
+        def constraint_detail: () -> Types::ConstraintDetail
+        def constraint_parameters: () -> ::String
+        def status: () -> ("AVAILABLE" | "CREATING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#describe_constraint-instance_method
+      def describe_constraint: (
+                                 ?accept_language: ::String,
+                                 id: ::String
+                               ) -> _DescribeConstraintResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConstraintResponseSuccess
+
+      interface _DescribeCopyProductStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCopyProductStatusOutput]
+        def copy_product_status: () -> ("SUCCEEDED" | "IN_PROGRESS" | "FAILED")
+        def target_product_id: () -> ::String
+        def status_detail: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#describe_copy_product_status-instance_method
+      def describe_copy_product_status: (
+                                          ?accept_language: ::String,
+                                          copy_product_token: ::String
+                                        ) -> _DescribeCopyProductStatusResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCopyProductStatusResponseSuccess
+
+      interface _DescribePortfolioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePortfolioOutput]
+        def portfolio_detail: () -> Types::PortfolioDetail
+        def tags: () -> ::Array[Types::Tag]
+        def tag_options: () -> ::Array[Types::TagOptionDetail]
+        def budgets: () -> ::Array[Types::BudgetDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#describe_portfolio-instance_method
+      def describe_portfolio: (
+                                ?accept_language: ::String,
+                                id: ::String
+                              ) -> _DescribePortfolioResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePortfolioResponseSuccess
+
+      interface _DescribePortfolioShareStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePortfolioShareStatusOutput]
+        def portfolio_share_token: () -> ::String
+        def portfolio_id: () -> ::String
+        def organization_node_value: () -> ::String
+        def status: () -> ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "ERROR")
+        def share_details: () -> Types::ShareDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#describe_portfolio_share_status-instance_method
+      def describe_portfolio_share_status: (
+                                             portfolio_share_token: ::String
+                                           ) -> _DescribePortfolioShareStatusResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePortfolioShareStatusResponseSuccess
+
+      interface _DescribePortfolioSharesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePortfolioSharesOutput]
+        def next_page_token: () -> ::String
+        def portfolio_share_details: () -> ::Array[Types::PortfolioShareDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#describe_portfolio_shares-instance_method
+      def describe_portfolio_shares: (
+                                       portfolio_id: ::String,
+                                       type: ("ACCOUNT" | "ORGANIZATION" | "ORGANIZATIONAL_UNIT" | "ORGANIZATION_MEMBER_ACCOUNT"),
+                                       ?page_token: ::String,
+                                       ?page_size: ::Integer
+                                     ) -> _DescribePortfolioSharesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePortfolioSharesResponseSuccess
+
+      interface _DescribeProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProductOutput]
+        def product_view_summary: () -> Types::ProductViewSummary
+        def provisioning_artifacts: () -> ::Array[Types::ProvisioningArtifact]
+        def budgets: () -> ::Array[Types::BudgetDetail]
+        def launch_paths: () -> ::Array[Types::LaunchPath]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#describe_product-instance_method
+      def describe_product: (
+                              ?accept_language: ::String,
+                              ?id: ::String,
+                              ?name: ::String
+                            ) -> _DescribeProductResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProductResponseSuccess
+
+      interface _DescribeProductAsAdminResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProductAsAdminOutput]
+        def product_view_detail: () -> Types::ProductViewDetail
+        def provisioning_artifact_summaries: () -> ::Array[Types::ProvisioningArtifactSummary]
+        def tags: () -> ::Array[Types::Tag]
+        def tag_options: () -> ::Array[Types::TagOptionDetail]
+        def budgets: () -> ::Array[Types::BudgetDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#describe_product_as_admin-instance_method
+      def describe_product_as_admin: (
+                                       ?accept_language: ::String,
+                                       ?id: ::String,
+                                       ?name: ::String,
+                                       ?source_portfolio_id: ::String
+                                     ) -> _DescribeProductAsAdminResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProductAsAdminResponseSuccess
+
+      interface _DescribeProductViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProductViewOutput]
+        def product_view_summary: () -> Types::ProductViewSummary
+        def provisioning_artifacts: () -> ::Array[Types::ProvisioningArtifact]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#describe_product_view-instance_method
+      def describe_product_view: (
+                                   ?accept_language: ::String,
+                                   id: ::String
+                                 ) -> _DescribeProductViewResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProductViewResponseSuccess
+
+      interface _DescribeProvisionedProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProvisionedProductOutput]
+        def provisioned_product_detail: () -> Types::ProvisionedProductDetail
+        def cloud_watch_dashboards: () -> ::Array[Types::CloudWatchDashboard]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#describe_provisioned_product-instance_method
+      def describe_provisioned_product: (
+                                          ?accept_language: ::String,
+                                          ?id: ::String,
+                                          ?name: ::String
+                                        ) -> _DescribeProvisionedProductResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProvisionedProductResponseSuccess
+
+      interface _DescribeProvisionedProductPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProvisionedProductPlanOutput]
+        def provisioned_product_plan_details: () -> Types::ProvisionedProductPlanDetails
+        def resource_changes: () -> ::Array[Types::ResourceChange]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#describe_provisioned_product_plan-instance_method
+      def describe_provisioned_product_plan: (
+                                               ?accept_language: ::String,
+                                               plan_id: ::String,
+                                               ?page_size: ::Integer,
+                                               ?page_token: ::String
+                                             ) -> _DescribeProvisionedProductPlanResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProvisionedProductPlanResponseSuccess
+
+      interface _DescribeProvisioningArtifactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProvisioningArtifactOutput]
+        def provisioning_artifact_detail: () -> Types::ProvisioningArtifactDetail
+        def info: () -> ::Hash[::String, ::String]
+        def status: () -> ("AVAILABLE" | "CREATING" | "FAILED")
+        def provisioning_artifact_parameters: () -> ::Array[Types::ProvisioningArtifactParameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#describe_provisioning_artifact-instance_method
+      def describe_provisioning_artifact: (
+                                            ?accept_language: ::String,
+                                            ?provisioning_artifact_id: ::String,
+                                            ?product_id: ::String,
+                                            ?provisioning_artifact_name: ::String,
+                                            ?product_name: ::String,
+                                            ?verbose: bool,
+                                            ?include_provisioning_artifact_parameters: bool
+                                          ) -> _DescribeProvisioningArtifactResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProvisioningArtifactResponseSuccess
+
+      interface _DescribeProvisioningParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProvisioningParametersOutput]
+        def provisioning_artifact_parameters: () -> ::Array[Types::ProvisioningArtifactParameter]
+        def constraint_summaries: () -> ::Array[Types::ConstraintSummary]
+        def usage_instructions: () -> ::Array[Types::UsageInstruction]
+        def tag_options: () -> ::Array[Types::TagOptionSummary]
+        def provisioning_artifact_preferences: () -> Types::ProvisioningArtifactPreferences
+        def provisioning_artifact_outputs: () -> ::Array[Types::ProvisioningArtifactOutput]
+        def provisioning_artifact_output_keys: () -> ::Array[Types::ProvisioningArtifactOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#describe_provisioning_parameters-instance_method
+      def describe_provisioning_parameters: (
+                                              ?accept_language: ::String,
+                                              ?product_id: ::String,
+                                              ?product_name: ::String,
+                                              ?provisioning_artifact_id: ::String,
+                                              ?provisioning_artifact_name: ::String,
+                                              ?path_id: ::String,
+                                              ?path_name: ::String
+                                            ) -> _DescribeProvisioningParametersResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProvisioningParametersResponseSuccess
+
+      interface _DescribeRecordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRecordOutput]
+        def record_detail: () -> Types::RecordDetail
+        def record_outputs: () -> ::Array[Types::RecordOutput]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#describe_record-instance_method
+      def describe_record: (
+                             ?accept_language: ::String,
+                             id: ::String,
+                             ?page_token: ::String,
+                             ?page_size: ::Integer
+                           ) -> _DescribeRecordResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRecordResponseSuccess
+
+      interface _DescribeServiceActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServiceActionOutput]
+        def service_action_detail: () -> Types::ServiceActionDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#describe_service_action-instance_method
+      def describe_service_action: (
+                                     id: ::String,
+                                     ?accept_language: ::String
+                                   ) -> _DescribeServiceActionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServiceActionResponseSuccess
+
+      interface _DescribeServiceActionExecutionParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServiceActionExecutionParametersOutput]
+        def service_action_parameters: () -> ::Array[Types::ExecutionParameter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#describe_service_action_execution_parameters-instance_method
+      def describe_service_action_execution_parameters: (
+                                                          provisioned_product_id: ::String,
+                                                          service_action_id: ::String,
+                                                          ?accept_language: ::String
+                                                        ) -> _DescribeServiceActionExecutionParametersResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServiceActionExecutionParametersResponseSuccess
+
+      interface _DescribeTagOptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTagOptionOutput]
+        def tag_option_detail: () -> Types::TagOptionDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#describe_tag_option-instance_method
+      def describe_tag_option: (
+                                 id: ::String
+                               ) -> _DescribeTagOptionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTagOptionResponseSuccess
+
+      interface _DisableAWSOrganizationsAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableAWSOrganizationsAccessOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#disable_aws_organizations_access-instance_method
+      def disable_aws_organizations_access: (
+                                            ) -> _DisableAWSOrganizationsAccessResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableAWSOrganizationsAccessResponseSuccess
+
+      interface _DisassociateBudgetFromResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateBudgetFromResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#disassociate_budget_from_resource-instance_method
+      def disassociate_budget_from_resource: (
+                                               budget_name: ::String,
+                                               resource_id: ::String
+                                             ) -> _DisassociateBudgetFromResourceResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateBudgetFromResourceResponseSuccess
+
+      interface _DisassociatePrincipalFromPortfolioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociatePrincipalFromPortfolioOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#disassociate_principal_from_portfolio-instance_method
+      def disassociate_principal_from_portfolio: (
+                                                   ?accept_language: ::String,
+                                                   portfolio_id: ::String,
+                                                   principal_arn: ::String,
+                                                   ?principal_type: ("IAM" | "IAM_PATTERN")
+                                                 ) -> _DisassociatePrincipalFromPortfolioResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociatePrincipalFromPortfolioResponseSuccess
+
+      interface _DisassociateProductFromPortfolioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateProductFromPortfolioOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#disassociate_product_from_portfolio-instance_method
+      def disassociate_product_from_portfolio: (
+                                                 ?accept_language: ::String,
+                                                 product_id: ::String,
+                                                 portfolio_id: ::String
+                                               ) -> _DisassociateProductFromPortfolioResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateProductFromPortfolioResponseSuccess
+
+      interface _DisassociateServiceActionFromProvisioningArtifactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateServiceActionFromProvisioningArtifactOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#disassociate_service_action_from_provisioning_artifact-instance_method
+      def disassociate_service_action_from_provisioning_artifact: (
+                                                                    product_id: ::String,
+                                                                    provisioning_artifact_id: ::String,
+                                                                    service_action_id: ::String,
+                                                                    ?accept_language: ::String,
+                                                                    ?idempotency_token: ::String
+                                                                  ) -> _DisassociateServiceActionFromProvisioningArtifactResponseSuccess
+                                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateServiceActionFromProvisioningArtifactResponseSuccess
+
+      interface _DisassociateTagOptionFromResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateTagOptionFromResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#disassociate_tag_option_from_resource-instance_method
+      def disassociate_tag_option_from_resource: (
+                                                   resource_id: ::String,
+                                                   tag_option_id: ::String
+                                                 ) -> _DisassociateTagOptionFromResourceResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateTagOptionFromResourceResponseSuccess
+
+      interface _EnableAWSOrganizationsAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableAWSOrganizationsAccessOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#enable_aws_organizations_access-instance_method
+      def enable_aws_organizations_access: (
+                                           ) -> _EnableAWSOrganizationsAccessResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableAWSOrganizationsAccessResponseSuccess
+
+      interface _ExecuteProvisionedProductPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteProvisionedProductPlanOutput]
+        def record_detail: () -> Types::RecordDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#execute_provisioned_product_plan-instance_method
+      def execute_provisioned_product_plan: (
+                                              ?accept_language: ::String,
+                                              plan_id: ::String,
+                                              idempotency_token: ::String
+                                            ) -> _ExecuteProvisionedProductPlanResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteProvisionedProductPlanResponseSuccess
+
+      interface _ExecuteProvisionedProductServiceActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteProvisionedProductServiceActionOutput]
+        def record_detail: () -> Types::RecordDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#execute_provisioned_product_service_action-instance_method
+      def execute_provisioned_product_service_action: (
+                                                        provisioned_product_id: ::String,
+                                                        service_action_id: ::String,
+                                                        execute_token: ::String,
+                                                        ?accept_language: ::String,
+                                                        ?parameters: Hash[::String, Array[::String]]
+                                                      ) -> _ExecuteProvisionedProductServiceActionResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteProvisionedProductServiceActionResponseSuccess
+
+      interface _GetAWSOrganizationsAccessStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAWSOrganizationsAccessStatusOutput]
+        def access_status: () -> ("ENABLED" | "UNDER_CHANGE" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#get_aws_organizations_access_status-instance_method
+      def get_aws_organizations_access_status: (
+                                               ) -> _GetAWSOrganizationsAccessStatusResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAWSOrganizationsAccessStatusResponseSuccess
+
+      interface _GetProvisionedProductOutputsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProvisionedProductOutputsOutput]
+        def outputs: () -> ::Array[Types::RecordOutput]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#get_provisioned_product_outputs-instance_method
+      def get_provisioned_product_outputs: (
+                                             ?accept_language: ::String,
+                                             ?provisioned_product_id: ::String,
+                                             ?provisioned_product_name: ::String,
+                                             ?output_keys: Array[::String],
+                                             ?page_size: ::Integer,
+                                             ?page_token: ::String
+                                           ) -> _GetProvisionedProductOutputsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProvisionedProductOutputsResponseSuccess
+
+      interface _ImportAsProvisionedProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportAsProvisionedProductOutput]
+        def record_detail: () -> Types::RecordDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#import_as_provisioned_product-instance_method
+      def import_as_provisioned_product: (
+                                           ?accept_language: ::String,
+                                           product_id: ::String,
+                                           provisioning_artifact_id: ::String,
+                                           provisioned_product_name: ::String,
+                                           physical_id: ::String,
+                                           idempotency_token: ::String
+                                         ) -> _ImportAsProvisionedProductResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportAsProvisionedProductResponseSuccess
+
+      interface _ListAcceptedPortfolioSharesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAcceptedPortfolioSharesOutput]
+        def portfolio_details: () -> ::Array[Types::PortfolioDetail]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_accepted_portfolio_shares-instance_method
+      def list_accepted_portfolio_shares: (
+                                            ?accept_language: ::String,
+                                            ?page_token: ::String,
+                                            ?page_size: ::Integer,
+                                            ?portfolio_share_type: ("IMPORTED" | "AWS_SERVICECATALOG" | "AWS_ORGANIZATIONS")
+                                          ) -> _ListAcceptedPortfolioSharesResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAcceptedPortfolioSharesResponseSuccess
+
+      interface _ListBudgetsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBudgetsForResourceOutput]
+        def budgets: () -> ::Array[Types::BudgetDetail]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_budgets_for_resource-instance_method
+      def list_budgets_for_resource: (
+                                       ?accept_language: ::String,
+                                       resource_id: ::String,
+                                       ?page_size: ::Integer,
+                                       ?page_token: ::String
+                                     ) -> _ListBudgetsForResourceResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBudgetsForResourceResponseSuccess
+
+      interface _ListConstraintsForPortfolioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConstraintsForPortfolioOutput]
+        def constraint_details: () -> ::Array[Types::ConstraintDetail]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_constraints_for_portfolio-instance_method
+      def list_constraints_for_portfolio: (
+                                            ?accept_language: ::String,
+                                            portfolio_id: ::String,
+                                            ?product_id: ::String,
+                                            ?page_size: ::Integer,
+                                            ?page_token: ::String
+                                          ) -> _ListConstraintsForPortfolioResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConstraintsForPortfolioResponseSuccess
+
+      interface _ListLaunchPathsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLaunchPathsOutput]
+        def launch_path_summaries: () -> ::Array[Types::LaunchPathSummary]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_launch_paths-instance_method
+      def list_launch_paths: (
+                               ?accept_language: ::String,
+                               product_id: ::String,
+                               ?page_size: ::Integer,
+                               ?page_token: ::String
+                             ) -> _ListLaunchPathsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLaunchPathsResponseSuccess
+
+      interface _ListOrganizationPortfolioAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOrganizationPortfolioAccessOutput]
+        def organization_nodes: () -> ::Array[Types::OrganizationNode]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_organization_portfolio_access-instance_method
+      def list_organization_portfolio_access: (
+                                                ?accept_language: ::String,
+                                                portfolio_id: ::String,
+                                                organization_node_type: ("ORGANIZATION" | "ORGANIZATIONAL_UNIT" | "ACCOUNT"),
+                                                ?page_token: ::String,
+                                                ?page_size: ::Integer
+                                              ) -> _ListOrganizationPortfolioAccessResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrganizationPortfolioAccessResponseSuccess
+
+      interface _ListPortfolioAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPortfolioAccessOutput]
+        def account_ids: () -> ::Array[::String]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_portfolio_access-instance_method
+      def list_portfolio_access: (
+                                   ?accept_language: ::String,
+                                   portfolio_id: ::String,
+                                   ?organization_parent_id: ::String,
+                                   ?page_token: ::String,
+                                   ?page_size: ::Integer
+                                 ) -> _ListPortfolioAccessResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPortfolioAccessResponseSuccess
+
+      interface _ListPortfoliosResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPortfoliosOutput]
+        def portfolio_details: () -> ::Array[Types::PortfolioDetail]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_portfolios-instance_method
+      def list_portfolios: (
+                             ?accept_language: ::String,
+                             ?page_token: ::String,
+                             ?page_size: ::Integer
+                           ) -> _ListPortfoliosResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPortfoliosResponseSuccess
+
+      interface _ListPortfoliosForProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPortfoliosForProductOutput]
+        def portfolio_details: () -> ::Array[Types::PortfolioDetail]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_portfolios_for_product-instance_method
+      def list_portfolios_for_product: (
+                                         ?accept_language: ::String,
+                                         product_id: ::String,
+                                         ?page_token: ::String,
+                                         ?page_size: ::Integer
+                                       ) -> _ListPortfoliosForProductResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPortfoliosForProductResponseSuccess
+
+      interface _ListPrincipalsForPortfolioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPrincipalsForPortfolioOutput]
+        def principals: () -> ::Array[Types::Principal]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_principals_for_portfolio-instance_method
+      def list_principals_for_portfolio: (
+                                           ?accept_language: ::String,
+                                           portfolio_id: ::String,
+                                           ?page_size: ::Integer,
+                                           ?page_token: ::String
+                                         ) -> _ListPrincipalsForPortfolioResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPrincipalsForPortfolioResponseSuccess
+
+      interface _ListProvisionedProductPlansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProvisionedProductPlansOutput]
+        def provisioned_product_plans: () -> ::Array[Types::ProvisionedProductPlanSummary]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_provisioned_product_plans-instance_method
+      def list_provisioned_product_plans: (
+                                            ?accept_language: ::String,
+                                            ?provision_product_id: ::String,
+                                            ?page_size: ::Integer,
+                                            ?page_token: ::String,
+                                            ?access_level_filter: {
+                                              key: ("Account" | "Role" | "User")?,
+                                              value: ::String?
+                                            }
+                                          ) -> _ListProvisionedProductPlansResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProvisionedProductPlansResponseSuccess
+
+      interface _ListProvisioningArtifactsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProvisioningArtifactsOutput]
+        def provisioning_artifact_details: () -> ::Array[Types::ProvisioningArtifactDetail]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_provisioning_artifacts-instance_method
+      def list_provisioning_artifacts: (
+                                         ?accept_language: ::String,
+                                         product_id: ::String
+                                       ) -> _ListProvisioningArtifactsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProvisioningArtifactsResponseSuccess
+
+      interface _ListProvisioningArtifactsForServiceActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProvisioningArtifactsForServiceActionOutput]
+        def provisioning_artifact_views: () -> ::Array[Types::ProvisioningArtifactView]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_provisioning_artifacts_for_service_action-instance_method
+      def list_provisioning_artifacts_for_service_action: (
+                                                            service_action_id: ::String,
+                                                            ?page_size: ::Integer,
+                                                            ?page_token: ::String,
+                                                            ?accept_language: ::String
+                                                          ) -> _ListProvisioningArtifactsForServiceActionResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProvisioningArtifactsForServiceActionResponseSuccess
+
+      interface _ListRecordHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecordHistoryOutput]
+        def record_details: () -> ::Array[Types::RecordDetail]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_record_history-instance_method
+      def list_record_history: (
+                                 ?accept_language: ::String,
+                                 ?access_level_filter: {
+                                   key: ("Account" | "Role" | "User")?,
+                                   value: ::String?
+                                 },
+                                 ?search_filter: {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                                 ?page_size: ::Integer,
+                                 ?page_token: ::String
+                               ) -> _ListRecordHistoryResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecordHistoryResponseSuccess
+
+      interface _ListResourcesForTagOptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcesForTagOptionOutput]
+        def resource_details: () -> ::Array[Types::ResourceDetail]
+        def page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_resources_for_tag_option-instance_method
+      def list_resources_for_tag_option: (
+                                           tag_option_id: ::String,
+                                           ?resource_type: ::String,
+                                           ?page_size: ::Integer,
+                                           ?page_token: ::String
+                                         ) -> _ListResourcesForTagOptionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcesForTagOptionResponseSuccess
+
+      interface _ListServiceActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceActionsOutput]
+        def service_action_summaries: () -> ::Array[Types::ServiceActionSummary]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_service_actions-instance_method
+      def list_service_actions: (
+                                  ?accept_language: ::String,
+                                  ?page_size: ::Integer,
+                                  ?page_token: ::String
+                                ) -> _ListServiceActionsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceActionsResponseSuccess
+
+      interface _ListServiceActionsForProvisioningArtifactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceActionsForProvisioningArtifactOutput]
+        def service_action_summaries: () -> ::Array[Types::ServiceActionSummary]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_service_actions_for_provisioning_artifact-instance_method
+      def list_service_actions_for_provisioning_artifact: (
+                                                            product_id: ::String,
+                                                            provisioning_artifact_id: ::String,
+                                                            ?page_size: ::Integer,
+                                                            ?page_token: ::String,
+                                                            ?accept_language: ::String
+                                                          ) -> _ListServiceActionsForProvisioningArtifactResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceActionsForProvisioningArtifactResponseSuccess
+
+      interface _ListStackInstancesForProvisionedProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStackInstancesForProvisionedProductOutput]
+        def stack_instances: () -> ::Array[Types::StackInstance]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_stack_instances_for_provisioned_product-instance_method
+      def list_stack_instances_for_provisioned_product: (
+                                                          ?accept_language: ::String,
+                                                          provisioned_product_id: ::String,
+                                                          ?page_token: ::String,
+                                                          ?page_size: ::Integer
+                                                        ) -> _ListStackInstancesForProvisionedProductResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStackInstancesForProvisionedProductResponseSuccess
+
+      interface _ListTagOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagOptionsOutput]
+        def tag_option_details: () -> ::Array[Types::TagOptionDetail]
+        def page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#list_tag_options-instance_method
+      def list_tag_options: (
+                              ?filters: {
+                                key: ::String?,
+                                value: ::String?,
+                                active: bool?
+                              },
+                              ?page_size: ::Integer,
+                              ?page_token: ::String
+                            ) -> _ListTagOptionsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagOptionsResponseSuccess
+
+      interface _NotifyProvisionProductEngineWorkflowResultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::NotifyProvisionProductEngineWorkflowResultOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#notify_provision_product_engine_workflow_result-instance_method
+      def notify_provision_product_engine_workflow_result: (
+                                                             workflow_token: ::String,
+                                                             record_id: ::String,
+                                                             status: ("SUCCEEDED" | "FAILED"),
+                                                             ?failure_reason: ::String,
+                                                             ?resource_identifier: {
+                                                               unique_tag: {
+                                                                 key: ::String?,
+                                                                 value: ::String?
+                                                               }?
+                                                             },
+                                                             ?outputs: Array[
+                                                               {
+                                                                 output_key: ::String?,
+                                                                 output_value: ::String?,
+                                                                 description: ::String?
+                                                               },
+                                                             ],
+                                                             idempotency_token: ::String
+                                                           ) -> _NotifyProvisionProductEngineWorkflowResultResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _NotifyProvisionProductEngineWorkflowResultResponseSuccess
+
+      interface _NotifyTerminateProvisionedProductEngineWorkflowResultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::NotifyTerminateProvisionedProductEngineWorkflowResultOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#notify_terminate_provisioned_product_engine_workflow_result-instance_method
+      def notify_terminate_provisioned_product_engine_workflow_result: (
+                                                                         workflow_token: ::String,
+                                                                         record_id: ::String,
+                                                                         status: ("SUCCEEDED" | "FAILED"),
+                                                                         ?failure_reason: ::String,
+                                                                         idempotency_token: ::String
+                                                                       ) -> _NotifyTerminateProvisionedProductEngineWorkflowResultResponseSuccess
+                                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _NotifyTerminateProvisionedProductEngineWorkflowResultResponseSuccess
+
+      interface _NotifyUpdateProvisionedProductEngineWorkflowResultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::NotifyUpdateProvisionedProductEngineWorkflowResultOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#notify_update_provisioned_product_engine_workflow_result-instance_method
+      def notify_update_provisioned_product_engine_workflow_result: (
+                                                                      workflow_token: ::String,
+                                                                      record_id: ::String,
+                                                                      status: ("SUCCEEDED" | "FAILED"),
+                                                                      ?failure_reason: ::String,
+                                                                      ?outputs: Array[
+                                                                        {
+                                                                          output_key: ::String?,
+                                                                          output_value: ::String?,
+                                                                          description: ::String?
+                                                                        },
+                                                                      ],
+                                                                      idempotency_token: ::String
+                                                                    ) -> _NotifyUpdateProvisionedProductEngineWorkflowResultResponseSuccess
+                                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _NotifyUpdateProvisionedProductEngineWorkflowResultResponseSuccess
+
+      interface _ProvisionProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ProvisionProductOutput]
+        def record_detail: () -> Types::RecordDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#provision_product-instance_method
+      def provision_product: (
+                               ?accept_language: ::String,
+                               ?product_id: ::String,
+                               ?product_name: ::String,
+                               ?provisioning_artifact_id: ::String,
+                               ?provisioning_artifact_name: ::String,
+                               ?path_id: ::String,
+                               ?path_name: ::String,
+                               provisioned_product_name: ::String,
+                               ?provisioning_parameters: Array[
+                                 {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                               ],
+                               ?provisioning_preferences: {
+                                 stack_set_accounts: Array[::String]?,
+                                 stack_set_regions: Array[::String]?,
+                                 stack_set_failure_tolerance_count: ::Integer?,
+                                 stack_set_failure_tolerance_percentage: ::Integer?,
+                                 stack_set_max_concurrency_count: ::Integer?,
+                                 stack_set_max_concurrency_percentage: ::Integer?
+                               },
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ],
+                               ?notification_arns: Array[::String],
+                               provision_token: ::String
+                             ) -> _ProvisionProductResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ProvisionProductResponseSuccess
+
+      interface _RejectPortfolioShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectPortfolioShareOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#reject_portfolio_share-instance_method
+      def reject_portfolio_share: (
+                                    ?accept_language: ::String,
+                                    portfolio_id: ::String,
+                                    ?portfolio_share_type: ("IMPORTED" | "AWS_SERVICECATALOG" | "AWS_ORGANIZATIONS")
+                                  ) -> _RejectPortfolioShareResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectPortfolioShareResponseSuccess
+
+      interface _ScanProvisionedProductsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ScanProvisionedProductsOutput]
+        def provisioned_products: () -> ::Array[Types::ProvisionedProductDetail]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#scan_provisioned_products-instance_method
+      def scan_provisioned_products: (
+                                       ?accept_language: ::String,
+                                       ?access_level_filter: {
+                                         key: ("Account" | "Role" | "User")?,
+                                         value: ::String?
+                                       },
+                                       ?page_size: ::Integer,
+                                       ?page_token: ::String
+                                     ) -> _ScanProvisionedProductsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ScanProvisionedProductsResponseSuccess
+
+      interface _SearchProductsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchProductsOutput]
+        def product_view_summaries: () -> ::Array[Types::ProductViewSummary]
+        def product_view_aggregations: () -> ::Hash[::String, ::Array[Types::ProductViewAggregationValue]]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#search_products-instance_method
+      def search_products: (
+                             ?accept_language: ::String,
+                             ?filters: Hash[("FullTextSearch" | "Owner" | "ProductType" | "SourceProductId"), Array[::String]],
+                             ?page_size: ::Integer,
+                             ?sort_by: ("Title" | "VersionCount" | "CreationDate"),
+                             ?sort_order: ("ASCENDING" | "DESCENDING"),
+                             ?page_token: ::String
+                           ) -> _SearchProductsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchProductsResponseSuccess
+
+      interface _SearchProductsAsAdminResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchProductsAsAdminOutput]
+        def product_view_details: () -> ::Array[Types::ProductViewDetail]
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#search_products_as_admin-instance_method
+      def search_products_as_admin: (
+                                      ?accept_language: ::String,
+                                      ?portfolio_id: ::String,
+                                      ?filters: Hash[("FullTextSearch" | "Owner" | "ProductType" | "SourceProductId"), Array[::String]],
+                                      ?sort_by: ("Title" | "VersionCount" | "CreationDate"),
+                                      ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                      ?page_token: ::String,
+                                      ?page_size: ::Integer,
+                                      ?product_source: ("ACCOUNT")
+                                    ) -> _SearchProductsAsAdminResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchProductsAsAdminResponseSuccess
+
+      interface _SearchProvisionedProductsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchProvisionedProductsOutput]
+        def provisioned_products: () -> ::Array[Types::ProvisionedProductAttribute]
+        def total_results_count: () -> ::Integer
+        def next_page_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#search_provisioned_products-instance_method
+      def search_provisioned_products: (
+                                         ?accept_language: ::String,
+                                         ?access_level_filter: {
+                                           key: ("Account" | "Role" | "User")?,
+                                           value: ::String?
+                                         },
+                                         ?filters: Hash[("SearchQuery"), Array[::String]],
+                                         ?sort_by: ::String,
+                                         ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                         ?page_size: ::Integer,
+                                         ?page_token: ::String
+                                       ) -> _SearchProvisionedProductsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchProvisionedProductsResponseSuccess
+
+      interface _TerminateProvisionedProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TerminateProvisionedProductOutput]
+        def record_detail: () -> Types::RecordDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#terminate_provisioned_product-instance_method
+      def terminate_provisioned_product: (
+                                           ?provisioned_product_name: ::String,
+                                           ?provisioned_product_id: ::String,
+                                           terminate_token: ::String,
+                                           ?ignore_errors: bool,
+                                           ?accept_language: ::String,
+                                           ?retain_physical_resources: bool
+                                         ) -> _TerminateProvisionedProductResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateProvisionedProductResponseSuccess
+
+      interface _UpdateConstraintResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConstraintOutput]
+        def constraint_detail: () -> Types::ConstraintDetail
+        def constraint_parameters: () -> ::String
+        def status: () -> ("AVAILABLE" | "CREATING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#update_constraint-instance_method
+      def update_constraint: (
+                               ?accept_language: ::String,
+                               id: ::String,
+                               ?description: ::String,
+                               ?parameters: ::String
+                             ) -> _UpdateConstraintResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConstraintResponseSuccess
+
+      interface _UpdatePortfolioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePortfolioOutput]
+        def portfolio_detail: () -> Types::PortfolioDetail
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#update_portfolio-instance_method
+      def update_portfolio: (
+                              ?accept_language: ::String,
+                              id: ::String,
+                              ?display_name: ::String,
+                              ?description: ::String,
+                              ?provider_name: ::String,
+                              ?add_tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ],
+                              ?remove_tags: Array[::String]
+                            ) -> _UpdatePortfolioResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePortfolioResponseSuccess
+
+      interface _UpdatePortfolioShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePortfolioShareOutput]
+        def portfolio_share_token: () -> ::String
+        def status: () -> ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#update_portfolio_share-instance_method
+      def update_portfolio_share: (
+                                    ?accept_language: ::String,
+                                    portfolio_id: ::String,
+                                    ?account_id: ::String,
+                                    ?organization_node: {
+                                      type: ("ORGANIZATION" | "ORGANIZATIONAL_UNIT" | "ACCOUNT")?,
+                                      value: ::String?
+                                    },
+                                    ?share_tag_options: bool,
+                                    ?share_principals: bool
+                                  ) -> _UpdatePortfolioShareResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePortfolioShareResponseSuccess
+
+      interface _UpdateProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProductOutput]
+        def product_view_detail: () -> Types::ProductViewDetail
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#update_product-instance_method
+      def update_product: (
+                            ?accept_language: ::String,
+                            id: ::String,
+                            ?name: ::String,
+                            ?owner: ::String,
+                            ?description: ::String,
+                            ?distributor: ::String,
+                            ?support_description: ::String,
+                            ?support_email: ::String,
+                            ?support_url: ::String,
+                            ?add_tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ],
+                            ?remove_tags: Array[::String],
+                            ?source_connection: {
+                              type: ("CODESTAR")?,
+                              connection_parameters: {
+                                code_star: {
+                                  connection_arn: ::String,
+                                  repository: ::String,
+                                  branch: ::String,
+                                  artifact_path: ::String
+                                }?
+                              }
+                            }
+                          ) -> _UpdateProductResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProductResponseSuccess
+
+      interface _UpdateProvisionedProductResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProvisionedProductOutput]
+        def record_detail: () -> Types::RecordDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#update_provisioned_product-instance_method
+      def update_provisioned_product: (
+                                        ?accept_language: ::String,
+                                        ?provisioned_product_name: ::String,
+                                        ?provisioned_product_id: ::String,
+                                        ?product_id: ::String,
+                                        ?product_name: ::String,
+                                        ?provisioning_artifact_id: ::String,
+                                        ?provisioning_artifact_name: ::String,
+                                        ?path_id: ::String,
+                                        ?path_name: ::String,
+                                        ?provisioning_parameters: Array[
+                                          {
+                                            key: ::String?,
+                                            value: ::String?,
+                                            use_previous_value: bool?
+                                          },
+                                        ],
+                                        ?provisioning_preferences: {
+                                          stack_set_accounts: Array[::String]?,
+                                          stack_set_regions: Array[::String]?,
+                                          stack_set_failure_tolerance_count: ::Integer?,
+                                          stack_set_failure_tolerance_percentage: ::Integer?,
+                                          stack_set_max_concurrency_count: ::Integer?,
+                                          stack_set_max_concurrency_percentage: ::Integer?,
+                                          stack_set_operation_type: ("CREATE" | "UPDATE" | "DELETE")?
+                                        },
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String
+                                          },
+                                        ],
+                                        update_token: ::String
+                                      ) -> _UpdateProvisionedProductResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProvisionedProductResponseSuccess
+
+      interface _UpdateProvisionedProductPropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProvisionedProductPropertiesOutput]
+        def provisioned_product_id: () -> ::String
+        def provisioned_product_properties: () -> ::Hash[("OWNER" | "LAUNCH_ROLE"), ::String]
+        def record_id: () -> ::String
+        def status: () -> ("CREATED" | "IN_PROGRESS" | "IN_PROGRESS_IN_ERROR" | "SUCCEEDED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#update_provisioned_product_properties-instance_method
+      def update_provisioned_product_properties: (
+                                                   ?accept_language: ::String,
+                                                   provisioned_product_id: ::String,
+                                                   provisioned_product_properties: Hash[("OWNER" | "LAUNCH_ROLE"), ::String],
+                                                   idempotency_token: ::String
+                                                 ) -> _UpdateProvisionedProductPropertiesResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProvisionedProductPropertiesResponseSuccess
+
+      interface _UpdateProvisioningArtifactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProvisioningArtifactOutput]
+        def provisioning_artifact_detail: () -> Types::ProvisioningArtifactDetail
+        def info: () -> ::Hash[::String, ::String]
+        def status: () -> ("AVAILABLE" | "CREATING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#update_provisioning_artifact-instance_method
+      def update_provisioning_artifact: (
+                                          ?accept_language: ::String,
+                                          product_id: ::String,
+                                          provisioning_artifact_id: ::String,
+                                          ?name: ::String,
+                                          ?description: ::String,
+                                          ?active: bool,
+                                          ?guidance: ("DEFAULT" | "DEPRECATED")
+                                        ) -> _UpdateProvisioningArtifactResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProvisioningArtifactResponseSuccess
+
+      interface _UpdateServiceActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceActionOutput]
+        def service_action_detail: () -> Types::ServiceActionDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#update_service_action-instance_method
+      def update_service_action: (
+                                   id: ::String,
+                                   ?name: ::String,
+                                   ?definition: Hash[("Name" | "Version" | "AssumeRole" | "Parameters"), ::String],
+                                   ?description: ::String,
+                                   ?accept_language: ::String
+                                 ) -> _UpdateServiceActionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceActionResponseSuccess
+
+      interface _UpdateTagOptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTagOptionOutput]
+        def tag_option_detail: () -> Types::TagOptionDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceCatalog/Client.html#update_tag_option-instance_method
+      def update_tag_option: (
+                               id: ::String,
+                               ?value: ::String,
+                               ?active: bool
+                             ) -> _UpdateTagOptionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTagOptionResponseSuccess
+    end
+  end
+end
+

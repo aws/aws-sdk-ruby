@@ -1,6 +1,45 @@
 Unreleased Changes
 ------------------
 
+1.143.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.142.0 (2023-12-22)
+------------------
+
+* Feature - Added additional examples for some operations.
+
+1.141.0 (2023-11-28)
+------------------
+
+* Feature - Adds support for S3 Express One Zone.
+
+* Feature - Support S3 Express authentication and endpoints. Express session auth can be disabled with the `disable_s3_express_session_auth` Client option, the `AWS_S3_DISABLE_EXPRESS_SESSION_AUTH` environment variable, and the `s3_disable_express_session_auth` shared config option. A custom `express_credentials_provider` can be configured onto the Client.
+
+1.140.0 (2023-11-27)
+------------------
+
+* Feature - Adding new params - Key and Prefix, to S3 API operations for supporting S3 Access Grants. Note - These updates will not change any of the existing S3 API functionality.
+
+* Issue - Fix thread interruptions in multipart `download_file`, `file_uploader` and `stream_uploader` (#2944).
+
+1.139.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.138.0 (2023-11-21)
+------------------
+
+* Feature - Add support for automatic date based partitioning in S3 Server Access Logs.
+
+1.137.0 (2023-11-17)
+------------------
+
+* Feature - Removes all default 0 values for numbers and false values for booleans
+
 1.136.0 (2023-09-26)
 ------------------
 
@@ -46,6 +85,7 @@ Unreleased Changes
 * Feature - S3 Inventory now supports Object Access Control List and Object Owner as available object metadata fields in inventory reports.
 
 * Feature - Allow Object multipart copy API to work when requiring a checksum algorithm.
+
 * Feature - Allow Object multipart copy API to optionally copy parts as they exist on the source object if it has parts, instead of generating new part ranges, when specifying `use_source_parts: true`.
 
 1.129.0 (2023-07-11)

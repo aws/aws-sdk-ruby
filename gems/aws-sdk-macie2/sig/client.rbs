@@ -1,0 +1,1333 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Macie2
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptInvitationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#accept_invitation-instance_method
+      def accept_invitation: (
+                               ?administrator_account_id: ::String,
+                               invitation_id: ::String,
+                               ?master_account: ::String
+                             ) -> _AcceptInvitationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptInvitationResponseSuccess
+
+      interface _BatchGetCustomDataIdentifiersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetCustomDataIdentifiersResponse]
+        def custom_data_identifiers: () -> ::Array[Types::BatchGetCustomDataIdentifierSummary]
+        def not_found_identifier_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#batch_get_custom_data_identifiers-instance_method
+      def batch_get_custom_data_identifiers: (
+                                               ?ids: Array[::String]
+                                             ) -> _BatchGetCustomDataIdentifiersResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetCustomDataIdentifiersResponseSuccess
+
+      interface _CreateAllowListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAllowListResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#create_allow_list-instance_method
+      def create_allow_list: (
+                               client_token: ::String,
+                               criteria: {
+                                 regex: ::String?,
+                                 s3_words_list: {
+                                   bucket_name: ::String,
+                                   object_key: ::String
+                                 }?
+                               },
+                               ?description: ::String,
+                               name: ::String,
+                               ?tags: Hash[::String, ::String]
+                             ) -> _CreateAllowListResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAllowListResponseSuccess
+
+      interface _CreateClassificationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClassificationJobResponse]
+        def job_arn: () -> ::String
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#create_classification_job-instance_method
+      def create_classification_job: (
+                                       ?allow_list_ids: Array[::String],
+                                       client_token: ::String,
+                                       ?custom_data_identifier_ids: Array[::String],
+                                       ?description: ::String,
+                                       ?initial_run: bool,
+                                       job_type: ("ONE_TIME" | "SCHEDULED"),
+                                       ?managed_data_identifier_ids: Array[::String],
+                                       ?managed_data_identifier_selector: ("ALL" | "EXCLUDE" | "INCLUDE" | "NONE" | "RECOMMENDED"),
+                                       name: ::String,
+                                       s3_job_definition: {
+                                         bucket_criteria: {
+                                           excludes: {
+                                             and: Array[
+                                               {
+                                                 simple_criterion: {
+                                                   comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")?,
+                                                   key: ("ACCOUNT_ID" | "S3_BUCKET_NAME" | "S3_BUCKET_EFFECTIVE_PERMISSION" | "S3_BUCKET_SHARED_ACCESS")?,
+                                                   values: Array[::String]?
+                                                 }?,
+                                                 tag_criterion: {
+                                                   comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")?,
+                                                   tag_values: Array[
+                                                     {
+                                                       key: ::String?,
+                                                       value: ::String?
+                                                     },
+                                                   ]?
+                                                 }?
+                                               },
+                                             ]?
+                                           }?,
+                                           includes: {
+                                             and: Array[
+                                               {
+                                                 simple_criterion: {
+                                                   comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")?,
+                                                   key: ("ACCOUNT_ID" | "S3_BUCKET_NAME" | "S3_BUCKET_EFFECTIVE_PERMISSION" | "S3_BUCKET_SHARED_ACCESS")?,
+                                                   values: Array[::String]?
+                                                 }?,
+                                                 tag_criterion: {
+                                                   comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")?,
+                                                   tag_values: Array[
+                                                     {
+                                                       key: ::String?,
+                                                       value: ::String?
+                                                     },
+                                                   ]?
+                                                 }?
+                                               },
+                                             ]?
+                                           }?
+                                         }?,
+                                         bucket_definitions: Array[
+                                           {
+                                             account_id: ::String,
+                                             buckets: Array[::String]
+                                           },
+                                         ]?,
+                                         scoping: {
+                                           excludes: {
+                                             and: Array[
+                                               {
+                                                 simple_scope_term: {
+                                                   comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")?,
+                                                   key: ("OBJECT_EXTENSION" | "OBJECT_LAST_MODIFIED_DATE" | "OBJECT_SIZE" | "OBJECT_KEY")?,
+                                                   values: Array[::String]?
+                                                 }?,
+                                                 tag_scope_term: {
+                                                   comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")?,
+                                                   key: ::String?,
+                                                   tag_values: Array[
+                                                     {
+                                                       key: ::String?,
+                                                       value: ::String?
+                                                     },
+                                                   ]?,
+                                                   target: ("S3_OBJECT")?
+                                                 }?
+                                               },
+                                             ]?
+                                           }?,
+                                           includes: {
+                                             and: Array[
+                                               {
+                                                 simple_scope_term: {
+                                                   comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")?,
+                                                   key: ("OBJECT_EXTENSION" | "OBJECT_LAST_MODIFIED_DATE" | "OBJECT_SIZE" | "OBJECT_KEY")?,
+                                                   values: Array[::String]?
+                                                 }?,
+                                                 tag_scope_term: {
+                                                   comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")?,
+                                                   key: ::String?,
+                                                   tag_values: Array[
+                                                     {
+                                                       key: ::String?,
+                                                       value: ::String?
+                                                     },
+                                                   ]?,
+                                                   target: ("S3_OBJECT")?
+                                                 }?
+                                               },
+                                             ]?
+                                           }?
+                                         }?
+                                       },
+                                       ?sampling_percentage: ::Integer,
+                                       ?schedule_frequency: {
+                                         daily_schedule: {
+                                         }?,
+                                         monthly_schedule: {
+                                           day_of_month: ::Integer?
+                                         }?,
+                                         weekly_schedule: {
+                                           day_of_week: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?
+                                         }?
+                                       },
+                                       ?tags: Hash[::String, ::String]
+                                     ) -> _CreateClassificationJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClassificationJobResponseSuccess
+
+      interface _CreateCustomDataIdentifierResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomDataIdentifierResponse]
+        def custom_data_identifier_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#create_custom_data_identifier-instance_method
+      def create_custom_data_identifier: (
+                                           ?client_token: ::String,
+                                           ?description: ::String,
+                                           ?ignore_words: Array[::String],
+                                           ?keywords: Array[::String],
+                                           ?maximum_match_distance: ::Integer,
+                                           name: ::String,
+                                           regex: ::String,
+                                           ?severity_levels: Array[
+                                             {
+                                               occurrences_threshold: ::Integer,
+                                               severity: ("LOW" | "MEDIUM" | "HIGH")
+                                             },
+                                           ],
+                                           ?tags: Hash[::String, ::String]
+                                         ) -> _CreateCustomDataIdentifierResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomDataIdentifierResponseSuccess
+
+      interface _CreateFindingsFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFindingsFilterResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#create_findings_filter-instance_method
+      def create_findings_filter: (
+                                    action: ("ARCHIVE" | "NOOP"),
+                                    ?client_token: ::String,
+                                    ?description: ::String,
+                                    finding_criteria: {
+                                      criterion: Hash[::String, {
+                                          eq: Array[::String]?,
+                                          eq_exact_match: Array[::String]?,
+                                          gt: ::Integer?,
+                                          gte: ::Integer?,
+                                          lt: ::Integer?,
+                                          lte: ::Integer?,
+                                          neq: Array[::String]?
+                                        }]?
+                                    },
+                                    name: ::String,
+                                    ?position: ::Integer,
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreateFindingsFilterResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFindingsFilterResponseSuccess
+
+      interface _CreateInvitationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInvitationsResponse]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#create_invitations-instance_method
+      def create_invitations: (
+                                account_ids: Array[::String],
+                                ?disable_email_notification: bool,
+                                ?message: ::String
+                              ) -> _CreateInvitationsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInvitationsResponseSuccess
+
+      interface _CreateMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMemberResponse]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#create_member-instance_method
+      def create_member: (
+                           account: {
+                             account_id: ::String,
+                             email: ::String
+                           },
+                           ?tags: Hash[::String, ::String]
+                         ) -> _CreateMemberResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMemberResponseSuccess
+
+      interface _CreateSampleFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSampleFindingsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#create_sample_findings-instance_method
+      def create_sample_findings: (
+                                    ?finding_types: Array[("SensitiveData:S3Object/Multiple" | "SensitiveData:S3Object/Financial" | "SensitiveData:S3Object/Personal" | "SensitiveData:S3Object/Credentials" | "SensitiveData:S3Object/CustomIdentifier" | "Policy:IAMUser/S3BucketPublic" | "Policy:IAMUser/S3BucketSharedExternally" | "Policy:IAMUser/S3BucketReplicatedExternally" | "Policy:IAMUser/S3BucketEncryptionDisabled" | "Policy:IAMUser/S3BlockPublicAccessDisabled" | "Policy:IAMUser/S3BucketSharedWithCloudFront")]
+                                  ) -> _CreateSampleFindingsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSampleFindingsResponseSuccess
+
+      interface _DeclineInvitationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeclineInvitationsResponse]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#decline_invitations-instance_method
+      def decline_invitations: (
+                                 account_ids: Array[::String]
+                               ) -> _DeclineInvitationsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeclineInvitationsResponseSuccess
+
+      interface _DeleteAllowListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAllowListResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#delete_allow_list-instance_method
+      def delete_allow_list: (
+                               id: ::String,
+                               ?ignore_job_checks: ::String
+                             ) -> _DeleteAllowListResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAllowListResponseSuccess
+
+      interface _DeleteCustomDataIdentifierResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCustomDataIdentifierResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#delete_custom_data_identifier-instance_method
+      def delete_custom_data_identifier: (
+                                           id: ::String
+                                         ) -> _DeleteCustomDataIdentifierResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomDataIdentifierResponseSuccess
+
+      interface _DeleteFindingsFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFindingsFilterResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#delete_findings_filter-instance_method
+      def delete_findings_filter: (
+                                    id: ::String
+                                  ) -> _DeleteFindingsFilterResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFindingsFilterResponseSuccess
+
+      interface _DeleteInvitationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInvitationsResponse]
+        def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#delete_invitations-instance_method
+      def delete_invitations: (
+                                account_ids: Array[::String]
+                              ) -> _DeleteInvitationsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInvitationsResponseSuccess
+
+      interface _DeleteMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMemberResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#delete_member-instance_method
+      def delete_member: (
+                           id: ::String
+                         ) -> _DeleteMemberResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMemberResponseSuccess
+
+      interface _DescribeBucketsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBucketsResponse]
+        def buckets: () -> ::Array[Types::BucketMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#describe_buckets-instance_method
+      def describe_buckets: (
+                              ?criteria: Hash[::String, {
+                                  eq: Array[::String]?,
+                                  gt: ::Integer?,
+                                  gte: ::Integer?,
+                                  lt: ::Integer?,
+                                  lte: ::Integer?,
+                                  neq: Array[::String]?,
+                                  prefix: ::String?
+                                }],
+                              ?max_results: ::Integer,
+                              ?next_token: ::String,
+                              ?sort_criteria: {
+                                attribute_name: ::String?,
+                                order_by: ("ASC" | "DESC")?
+                              }
+                            ) -> _DescribeBucketsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBucketsResponseSuccess
+
+      interface _DescribeClassificationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClassificationJobResponse]
+        def allow_list_ids: () -> ::Array[::String]
+        def client_token: () -> ::String
+        def created_at: () -> ::Time
+        def custom_data_identifier_ids: () -> ::Array[::String]
+        def description: () -> ::String
+        def initial_run: () -> bool
+        def job_arn: () -> ::String
+        def job_id: () -> ::String
+        def job_status: () -> ("RUNNING" | "PAUSED" | "CANCELLED" | "COMPLETE" | "IDLE" | "USER_PAUSED")
+        def job_type: () -> ("ONE_TIME" | "SCHEDULED")
+        def last_run_error_status: () -> Types::LastRunErrorStatus
+        def last_run_time: () -> ::Time
+        def managed_data_identifier_ids: () -> ::Array[::String]
+        def managed_data_identifier_selector: () -> ("ALL" | "EXCLUDE" | "INCLUDE" | "NONE" | "RECOMMENDED")
+        def name: () -> ::String
+        def s3_job_definition: () -> Types::S3JobDefinition
+        def sampling_percentage: () -> ::Integer
+        def schedule_frequency: () -> Types::JobScheduleFrequency
+        def statistics: () -> Types::Statistics
+        def tags: () -> ::Hash[::String, ::String]
+        def user_paused_details: () -> Types::UserPausedDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#describe_classification_job-instance_method
+      def describe_classification_job: (
+                                         job_id: ::String
+                                       ) -> _DescribeClassificationJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClassificationJobResponseSuccess
+
+      interface _DescribeOrganizationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOrganizationConfigurationResponse]
+        def auto_enable: () -> bool
+        def max_account_limit_reached: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#describe_organization_configuration-instance_method
+      def describe_organization_configuration: (
+                                               ) -> _DescribeOrganizationConfigurationResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOrganizationConfigurationResponseSuccess
+
+      interface _DisableMacieResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableMacieResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#disable_macie-instance_method
+      def disable_macie: (
+                         ) -> _DisableMacieResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableMacieResponseSuccess
+
+      interface _DisableOrganizationAdminAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableOrganizationAdminAccountResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#disable_organization_admin_account-instance_method
+      def disable_organization_admin_account: (
+                                                admin_account_id: ::String
+                                              ) -> _DisableOrganizationAdminAccountResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableOrganizationAdminAccountResponseSuccess
+
+      interface _DisassociateFromAdministratorAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateFromAdministratorAccountResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#disassociate_from_administrator_account-instance_method
+      def disassociate_from_administrator_account: (
+                                                   ) -> _DisassociateFromAdministratorAccountResponseSuccess
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateFromAdministratorAccountResponseSuccess
+
+      interface _DisassociateFromMasterAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateFromMasterAccountResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#disassociate_from_master_account-instance_method
+      def disassociate_from_master_account: (
+                                            ) -> _DisassociateFromMasterAccountResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateFromMasterAccountResponseSuccess
+
+      interface _DisassociateMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateMemberResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#disassociate_member-instance_method
+      def disassociate_member: (
+                                 id: ::String
+                               ) -> _DisassociateMemberResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateMemberResponseSuccess
+
+      interface _EnableMacieResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableMacieResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#enable_macie-instance_method
+      def enable_macie: (
+                          ?client_token: ::String,
+                          ?finding_publishing_frequency: ("FIFTEEN_MINUTES" | "ONE_HOUR" | "SIX_HOURS"),
+                          ?status: ("PAUSED" | "ENABLED")
+                        ) -> _EnableMacieResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableMacieResponseSuccess
+
+      interface _EnableOrganizationAdminAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableOrganizationAdminAccountResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#enable_organization_admin_account-instance_method
+      def enable_organization_admin_account: (
+                                               admin_account_id: ::String,
+                                               ?client_token: ::String
+                                             ) -> _EnableOrganizationAdminAccountResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableOrganizationAdminAccountResponseSuccess
+
+      interface _GetAdministratorAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAdministratorAccountResponse]
+        def administrator: () -> Types::Invitation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_administrator_account-instance_method
+      def get_administrator_account: (
+                                     ) -> _GetAdministratorAccountResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAdministratorAccountResponseSuccess
+
+      interface _GetAllowListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAllowListResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def criteria: () -> Types::AllowListCriteria
+        def description: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> Types::AllowListStatus
+        def tags: () -> ::Hash[::String, ::String]
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_allow_list-instance_method
+      def get_allow_list: (
+                            id: ::String
+                          ) -> _GetAllowListResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAllowListResponseSuccess
+
+      interface _GetAutomatedDiscoveryConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAutomatedDiscoveryConfigurationResponse]
+        def classification_scope_id: () -> ::String
+        def disabled_at: () -> ::Time
+        def first_enabled_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def sensitivity_inspection_template_id: () -> ::String
+        def status: () -> ("ENABLED" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_automated_discovery_configuration-instance_method
+      def get_automated_discovery_configuration: (
+                                                 ) -> _GetAutomatedDiscoveryConfigurationResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAutomatedDiscoveryConfigurationResponseSuccess
+
+      interface _GetBucketStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBucketStatisticsResponse]
+        def bucket_count: () -> ::Integer
+        def bucket_count_by_effective_permission: () -> Types::BucketCountByEffectivePermission
+        def bucket_count_by_encryption_type: () -> Types::BucketCountByEncryptionType
+        def bucket_count_by_object_encryption_requirement: () -> Types::BucketCountPolicyAllowsUnencryptedObjectUploads
+        def bucket_count_by_shared_access_type: () -> Types::BucketCountBySharedAccessType
+        def bucket_statistics_by_sensitivity: () -> Types::BucketStatisticsBySensitivity
+        def classifiable_object_count: () -> ::Integer
+        def classifiable_size_in_bytes: () -> ::Integer
+        def last_updated: () -> ::Time
+        def object_count: () -> ::Integer
+        def size_in_bytes: () -> ::Integer
+        def size_in_bytes_compressed: () -> ::Integer
+        def unclassifiable_object_count: () -> Types::ObjectLevelStatistics
+        def unclassifiable_object_size_in_bytes: () -> Types::ObjectLevelStatistics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_bucket_statistics-instance_method
+      def get_bucket_statistics: (
+                                   ?account_id: ::String
+                                 ) -> _GetBucketStatisticsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBucketStatisticsResponseSuccess
+
+      interface _GetClassificationExportConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetClassificationExportConfigurationResponse]
+        def configuration: () -> Types::ClassificationExportConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_classification_export_configuration-instance_method
+      def get_classification_export_configuration: (
+                                                   ) -> _GetClassificationExportConfigurationResponseSuccess
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClassificationExportConfigurationResponseSuccess
+
+      interface _GetClassificationScopeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetClassificationScopeResponse]
+        def id: () -> ::String
+        def name: () -> ::String
+        def s3: () -> Types::S3ClassificationScope
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_classification_scope-instance_method
+      def get_classification_scope: (
+                                      id: ::String
+                                    ) -> _GetClassificationScopeResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClassificationScopeResponseSuccess
+
+      interface _GetCustomDataIdentifierResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCustomDataIdentifierResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::Time
+        def deleted: () -> bool
+        def description: () -> ::String
+        def id: () -> ::String
+        def ignore_words: () -> ::Array[::String]
+        def keywords: () -> ::Array[::String]
+        def maximum_match_distance: () -> ::Integer
+        def name: () -> ::String
+        def regex: () -> ::String
+        def severity_levels: () -> ::Array[Types::SeverityLevel]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_custom_data_identifier-instance_method
+      def get_custom_data_identifier: (
+                                        id: ::String
+                                      ) -> _GetCustomDataIdentifierResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCustomDataIdentifierResponseSuccess
+
+      interface _GetFindingStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingStatisticsResponse]
+        def counts_by_group: () -> ::Array[Types::GroupCount]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_finding_statistics-instance_method
+      def get_finding_statistics: (
+                                    ?finding_criteria: {
+                                      criterion: Hash[::String, {
+                                          eq: Array[::String]?,
+                                          eq_exact_match: Array[::String]?,
+                                          gt: ::Integer?,
+                                          gte: ::Integer?,
+                                          lt: ::Integer?,
+                                          lte: ::Integer?,
+                                          neq: Array[::String]?
+                                        }]?
+                                    },
+                                    group_by: ("resourcesAffected.s3Bucket.name" | "type" | "classificationDetails.jobId" | "severity.description"),
+                                    ?size: ::Integer,
+                                    ?sort_criteria: {
+                                      attribute_name: ("groupKey" | "count")?,
+                                      order_by: ("ASC" | "DESC")?
+                                    }
+                                  ) -> _GetFindingStatisticsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingStatisticsResponseSuccess
+
+      interface _GetFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingsResponse]
+        def findings: () -> ::Array[Types::Finding]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_findings-instance_method
+      def get_findings: (
+                          finding_ids: Array[::String],
+                          ?sort_criteria: {
+                            attribute_name: ::String?,
+                            order_by: ("ASC" | "DESC")?
+                          }
+                        ) -> _GetFindingsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingsResponseSuccess
+
+      interface _GetFindingsFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingsFilterResponse]
+        def action: () -> ("ARCHIVE" | "NOOP")
+        def arn: () -> ::String
+        def description: () -> ::String
+        def finding_criteria: () -> Types::FindingCriteria
+        def id: () -> ::String
+        def name: () -> ::String
+        def position: () -> ::Integer
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_findings_filter-instance_method
+      def get_findings_filter: (
+                                 id: ::String
+                               ) -> _GetFindingsFilterResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingsFilterResponseSuccess
+
+      interface _GetFindingsPublicationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingsPublicationConfigurationResponse]
+        def security_hub_configuration: () -> Types::SecurityHubConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_findings_publication_configuration-instance_method
+      def get_findings_publication_configuration: (
+                                                  ) -> _GetFindingsPublicationConfigurationResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingsPublicationConfigurationResponseSuccess
+
+      interface _GetInvitationsCountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInvitationsCountResponse]
+        def invitations_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_invitations_count-instance_method
+      def get_invitations_count: (
+                                 ) -> _GetInvitationsCountResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInvitationsCountResponseSuccess
+
+      interface _GetMacieSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMacieSessionResponse]
+        def created_at: () -> ::Time
+        def finding_publishing_frequency: () -> ("FIFTEEN_MINUTES" | "ONE_HOUR" | "SIX_HOURS")
+        def service_role: () -> ::String
+        def status: () -> ("PAUSED" | "ENABLED")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_macie_session-instance_method
+      def get_macie_session: (
+                             ) -> _GetMacieSessionResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMacieSessionResponseSuccess
+
+      interface _GetMasterAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMasterAccountResponse]
+        def master: () -> Types::Invitation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_master_account-instance_method
+      def get_master_account: (
+                              ) -> _GetMasterAccountResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMasterAccountResponseSuccess
+
+      interface _GetMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMemberResponse]
+        def account_id: () -> ::String
+        def administrator_account_id: () -> ::String
+        def arn: () -> ::String
+        def email: () -> ::String
+        def invited_at: () -> ::Time
+        def master_account_id: () -> ::String
+        def relationship_status: () -> ("Enabled" | "Paused" | "Invited" | "Created" | "Removed" | "Resigned" | "EmailVerificationInProgress" | "EmailVerificationFailed" | "RegionDisabled" | "AccountSuspended")
+        def tags: () -> ::Hash[::String, ::String]
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_member-instance_method
+      def get_member: (
+                        id: ::String
+                      ) -> _GetMemberResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMemberResponseSuccess
+
+      interface _GetResourceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceProfileResponse]
+        def profile_updated_at: () -> ::Time
+        def sensitivity_score: () -> ::Integer
+        def sensitivity_score_overridden: () -> bool
+        def statistics: () -> Types::ResourceStatistics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_resource_profile-instance_method
+      def get_resource_profile: (
+                                  resource_arn: ::String
+                                ) -> _GetResourceProfileResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceProfileResponseSuccess
+
+      interface _GetRevealConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRevealConfigurationResponse]
+        def configuration: () -> Types::RevealConfiguration
+        def retrieval_configuration: () -> Types::RetrievalConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_reveal_configuration-instance_method
+      def get_reveal_configuration: (
+                                    ) -> _GetRevealConfigurationResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRevealConfigurationResponseSuccess
+
+      interface _GetSensitiveDataOccurrencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSensitiveDataOccurrencesResponse]
+        def sensitive_data_occurrences: () -> ::Hash[::String, ::Array[Types::DetectedDataDetails]]
+        def status: () -> ("SUCCESS" | "PROCESSING" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_sensitive_data_occurrences-instance_method
+      def get_sensitive_data_occurrences: (
+                                            finding_id: ::String
+                                          ) -> _GetSensitiveDataOccurrencesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSensitiveDataOccurrencesResponseSuccess
+
+      interface _GetSensitiveDataOccurrencesAvailabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSensitiveDataOccurrencesAvailabilityResponse]
+        def code: () -> ("AVAILABLE" | "UNAVAILABLE")
+        def reasons: () -> ::Array[("OBJECT_EXCEEDS_SIZE_QUOTA" | "UNSUPPORTED_OBJECT_TYPE" | "UNSUPPORTED_FINDING_TYPE" | "INVALID_CLASSIFICATION_RESULT" | "OBJECT_UNAVAILABLE" | "ACCOUNT_NOT_IN_ORGANIZATION" | "MISSING_GET_MEMBER_PERMISSION" | "ROLE_TOO_PERMISSIVE" | "MEMBER_ROLE_TOO_PERMISSIVE" | "INVALID_RESULT_SIGNATURE" | "RESULT_NOT_SIGNED")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_sensitive_data_occurrences_availability-instance_method
+      def get_sensitive_data_occurrences_availability: (
+                                                         finding_id: ::String
+                                                       ) -> _GetSensitiveDataOccurrencesAvailabilityResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSensitiveDataOccurrencesAvailabilityResponseSuccess
+
+      interface _GetSensitivityInspectionTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSensitivityInspectionTemplateResponse]
+        def description: () -> ::String
+        def excludes: () -> Types::SensitivityInspectionTemplateExcludes
+        def includes: () -> Types::SensitivityInspectionTemplateIncludes
+        def name: () -> ::String
+        def sensitivity_inspection_template_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_sensitivity_inspection_template-instance_method
+      def get_sensitivity_inspection_template: (
+                                                 id: ::String
+                                               ) -> _GetSensitivityInspectionTemplateResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSensitivityInspectionTemplateResponseSuccess
+
+      interface _GetUsageStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUsageStatisticsResponse]
+        def next_token: () -> ::String
+        def records: () -> ::Array[Types::UsageRecord]
+        def time_range: () -> ("MONTH_TO_DATE" | "PAST_30_DAYS")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_usage_statistics-instance_method
+      def get_usage_statistics: (
+                                  ?filter_by: Array[
+                                    {
+                                      comparator: ("GT" | "GTE" | "LT" | "LTE" | "EQ" | "NE" | "CONTAINS")?,
+                                      key: ("accountId" | "serviceLimit" | "freeTrialStartDate" | "total")?,
+                                      values: Array[::String]?
+                                    },
+                                  ],
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?sort_by: {
+                                    key: ("accountId" | "total" | "serviceLimitValue" | "freeTrialStartDate")?,
+                                    order_by: ("ASC" | "DESC")?
+                                  },
+                                  ?time_range: ("MONTH_TO_DATE" | "PAST_30_DAYS")
+                                ) -> _GetUsageStatisticsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUsageStatisticsResponseSuccess
+
+      interface _GetUsageTotalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUsageTotalsResponse]
+        def time_range: () -> ("MONTH_TO_DATE" | "PAST_30_DAYS")
+        def usage_totals: () -> ::Array[Types::UsageTotal]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#get_usage_totals-instance_method
+      def get_usage_totals: (
+                              ?time_range: ::String
+                            ) -> _GetUsageTotalsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUsageTotalsResponseSuccess
+
+      interface _ListAllowListsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAllowListsResponse]
+        def allow_lists: () -> ::Array[Types::AllowListSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#list_allow_lists-instance_method
+      def list_allow_lists: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListAllowListsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAllowListsResponseSuccess
+
+      interface _ListClassificationJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClassificationJobsResponse]
+        def items: () -> ::Array[Types::JobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#list_classification_jobs-instance_method
+      def list_classification_jobs: (
+                                      ?filter_criteria: {
+                                        excludes: Array[
+                                          {
+                                            comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")?,
+                                            key: ("jobType" | "jobStatus" | "createdAt" | "name")?,
+                                            values: Array[::String]?
+                                          },
+                                        ]?,
+                                        includes: Array[
+                                          {
+                                            comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")?,
+                                            key: ("jobType" | "jobStatus" | "createdAt" | "name")?,
+                                            values: Array[::String]?
+                                          },
+                                        ]?
+                                      },
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      ?sort_criteria: {
+                                        attribute_name: ("createdAt" | "jobStatus" | "name" | "jobType")?,
+                                        order_by: ("ASC" | "DESC")?
+                                      }
+                                    ) -> _ListClassificationJobsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClassificationJobsResponseSuccess
+
+      interface _ListClassificationScopesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClassificationScopesResponse]
+        def classification_scopes: () -> ::Array[Types::ClassificationScopeSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#list_classification_scopes-instance_method
+      def list_classification_scopes: (
+                                        ?name: ::String,
+                                        ?next_token: ::String
+                                      ) -> _ListClassificationScopesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClassificationScopesResponseSuccess
+
+      interface _ListCustomDataIdentifiersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomDataIdentifiersResponse]
+        def items: () -> ::Array[Types::CustomDataIdentifierSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#list_custom_data_identifiers-instance_method
+      def list_custom_data_identifiers: (
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListCustomDataIdentifiersResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomDataIdentifiersResponseSuccess
+
+      interface _ListFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFindingsResponse]
+        def finding_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#list_findings-instance_method
+      def list_findings: (
+                           ?finding_criteria: {
+                             criterion: Hash[::String, {
+                                 eq: Array[::String]?,
+                                 eq_exact_match: Array[::String]?,
+                                 gt: ::Integer?,
+                                 gte: ::Integer?,
+                                 lt: ::Integer?,
+                                 lte: ::Integer?,
+                                 neq: Array[::String]?
+                               }]?
+                           },
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?sort_criteria: {
+                             attribute_name: ::String?,
+                             order_by: ("ASC" | "DESC")?
+                           }
+                         ) -> _ListFindingsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFindingsResponseSuccess
+
+      interface _ListFindingsFiltersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFindingsFiltersResponse]
+        def findings_filter_list_items: () -> ::Array[Types::FindingsFilterListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#list_findings_filters-instance_method
+      def list_findings_filters: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListFindingsFiltersResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFindingsFiltersResponseSuccess
+
+      interface _ListInvitationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInvitationsResponse]
+        def invitations: () -> ::Array[Types::Invitation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#list_invitations-instance_method
+      def list_invitations: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListInvitationsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvitationsResponseSuccess
+
+      interface _ListManagedDataIdentifiersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListManagedDataIdentifiersResponse]
+        def items: () -> ::Array[Types::ManagedDataIdentifierSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#list_managed_data_identifiers-instance_method
+      def list_managed_data_identifiers: (
+                                           ?next_token: ::String
+                                         ) -> _ListManagedDataIdentifiersResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedDataIdentifiersResponseSuccess
+
+      interface _ListMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMembersResponse]
+        def members: () -> ::Array[Types::Member]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#list_members-instance_method
+      def list_members: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?only_associated: ::String
+                        ) -> _ListMembersResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMembersResponseSuccess
+
+      interface _ListOrganizationAdminAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOrganizationAdminAccountsResponse]
+        def admin_accounts: () -> ::Array[Types::AdminAccount]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#list_organization_admin_accounts-instance_method
+      def list_organization_admin_accounts: (
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListOrganizationAdminAccountsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrganizationAdminAccountsResponseSuccess
+
+      interface _ListResourceProfileArtifactsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceProfileArtifactsResponse]
+        def artifacts: () -> ::Array[Types::ResourceProfileArtifact]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#list_resource_profile_artifacts-instance_method
+      def list_resource_profile_artifacts: (
+                                             ?next_token: ::String,
+                                             resource_arn: ::String
+                                           ) -> _ListResourceProfileArtifactsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceProfileArtifactsResponseSuccess
+
+      interface _ListResourceProfileDetectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceProfileDetectionsResponse]
+        def detections: () -> ::Array[Types::Detection]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#list_resource_profile_detections-instance_method
+      def list_resource_profile_detections: (
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String,
+                                              resource_arn: ::String
+                                            ) -> _ListResourceProfileDetectionsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceProfileDetectionsResponseSuccess
+
+      interface _ListSensitivityInspectionTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSensitivityInspectionTemplatesResponse]
+        def next_token: () -> ::String
+        def sensitivity_inspection_templates: () -> ::Array[Types::SensitivityInspectionTemplatesEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#list_sensitivity_inspection_templates-instance_method
+      def list_sensitivity_inspection_templates: (
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _ListSensitivityInspectionTemplatesResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSensitivityInspectionTemplatesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutClassificationExportConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutClassificationExportConfigurationResponse]
+        def configuration: () -> Types::ClassificationExportConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#put_classification_export_configuration-instance_method
+      def put_classification_export_configuration: (
+                                                     configuration: {
+                                                       s3_destination: {
+                                                         bucket_name: ::String,
+                                                         key_prefix: ::String?,
+                                                         kms_key_arn: ::String
+                                                       }?
+                                                     }
+                                                   ) -> _PutClassificationExportConfigurationResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutClassificationExportConfigurationResponseSuccess
+
+      interface _PutFindingsPublicationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutFindingsPublicationConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#put_findings_publication_configuration-instance_method
+      def put_findings_publication_configuration: (
+                                                    ?client_token: ::String,
+                                                    ?security_hub_configuration: {
+                                                      publish_classification_findings: bool,
+                                                      publish_policy_findings: bool
+                                                    }
+                                                  ) -> _PutFindingsPublicationConfigurationResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFindingsPublicationConfigurationResponseSuccess
+
+      interface _SearchResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchResourcesResponse]
+        def matching_resources: () -> ::Array[Types::MatchingResource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#search_resources-instance_method
+      def search_resources: (
+                              ?bucket_criteria: {
+                                excludes: {
+                                  and: Array[
+                                    {
+                                      simple_criterion: {
+                                        comparator: ("EQ" | "NE")?,
+                                        key: ("ACCOUNT_ID" | "S3_BUCKET_NAME" | "S3_BUCKET_EFFECTIVE_PERMISSION" | "S3_BUCKET_SHARED_ACCESS")?,
+                                        values: Array[::String]?
+                                      }?,
+                                      tag_criterion: {
+                                        comparator: ("EQ" | "NE")?,
+                                        tag_values: Array[
+                                          {
+                                            key: ::String?,
+                                            value: ::String?
+                                          },
+                                        ]?
+                                      }?
+                                    },
+                                  ]?
+                                }?,
+                                includes: {
+                                  and: Array[
+                                    {
+                                      simple_criterion: {
+                                        comparator: ("EQ" | "NE")?,
+                                        key: ("ACCOUNT_ID" | "S3_BUCKET_NAME" | "S3_BUCKET_EFFECTIVE_PERMISSION" | "S3_BUCKET_SHARED_ACCESS")?,
+                                        values: Array[::String]?
+                                      }?,
+                                      tag_criterion: {
+                                        comparator: ("EQ" | "NE")?,
+                                        tag_values: Array[
+                                          {
+                                            key: ::String?,
+                                            value: ::String?
+                                          },
+                                        ]?
+                                      }?
+                                    },
+                                  ]?
+                                }?
+                              },
+                              ?max_results: ::Integer,
+                              ?next_token: ::String,
+                              ?sort_criteria: {
+                                attribute_name: ("ACCOUNT_ID" | "RESOURCE_NAME" | "S3_CLASSIFIABLE_OBJECT_COUNT" | "S3_CLASSIFIABLE_SIZE_IN_BYTES")?,
+                                order_by: ("ASC" | "DESC")?
+                              }
+                            ) -> _SearchResourcesResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchResourcesResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _TestCustomDataIdentifierResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestCustomDataIdentifierResponse]
+        def match_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#test_custom_data_identifier-instance_method
+      def test_custom_data_identifier: (
+                                         ?ignore_words: Array[::String],
+                                         ?keywords: Array[::String],
+                                         ?maximum_match_distance: ::Integer,
+                                         regex: ::String,
+                                         sample_text: ::String
+                                       ) -> _TestCustomDataIdentifierResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestCustomDataIdentifierResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAllowListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAllowListResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#update_allow_list-instance_method
+      def update_allow_list: (
+                               criteria: {
+                                 regex: ::String?,
+                                 s3_words_list: {
+                                   bucket_name: ::String,
+                                   object_key: ::String
+                                 }?
+                               },
+                               ?description: ::String,
+                               id: ::String,
+                               name: ::String
+                             ) -> _UpdateAllowListResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAllowListResponseSuccess
+
+      interface _UpdateAutomatedDiscoveryConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAutomatedDiscoveryConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#update_automated_discovery_configuration-instance_method
+      def update_automated_discovery_configuration: (
+                                                      status: ("ENABLED" | "DISABLED")
+                                                    ) -> _UpdateAutomatedDiscoveryConfigurationResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAutomatedDiscoveryConfigurationResponseSuccess
+
+      interface _UpdateClassificationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClassificationJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#update_classification_job-instance_method
+      def update_classification_job: (
+                                       job_id: ::String,
+                                       job_status: ("RUNNING" | "PAUSED" | "CANCELLED" | "COMPLETE" | "IDLE" | "USER_PAUSED")
+                                     ) -> _UpdateClassificationJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClassificationJobResponseSuccess
+
+      interface _UpdateClassificationScopeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClassificationScopeResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#update_classification_scope-instance_method
+      def update_classification_scope: (
+                                         id: ::String,
+                                         ?s3: {
+                                           excludes: {
+                                             bucket_names: Array[::String],
+                                             operation: ("ADD" | "REPLACE" | "REMOVE")
+                                           }
+                                         }
+                                       ) -> _UpdateClassificationScopeResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClassificationScopeResponseSuccess
+
+      interface _UpdateFindingsFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFindingsFilterResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#update_findings_filter-instance_method
+      def update_findings_filter: (
+                                    ?action: ("ARCHIVE" | "NOOP"),
+                                    ?client_token: ::String,
+                                    ?description: ::String,
+                                    ?finding_criteria: {
+                                      criterion: Hash[::String, {
+                                          eq: Array[::String]?,
+                                          eq_exact_match: Array[::String]?,
+                                          gt: ::Integer?,
+                                          gte: ::Integer?,
+                                          lt: ::Integer?,
+                                          lte: ::Integer?,
+                                          neq: Array[::String]?
+                                        }]?
+                                    },
+                                    id: ::String,
+                                    ?name: ::String,
+                                    ?position: ::Integer
+                                  ) -> _UpdateFindingsFilterResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFindingsFilterResponseSuccess
+
+      interface _UpdateMacieSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMacieSessionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#update_macie_session-instance_method
+      def update_macie_session: (
+                                  ?finding_publishing_frequency: ("FIFTEEN_MINUTES" | "ONE_HOUR" | "SIX_HOURS"),
+                                  ?status: ("PAUSED" | "ENABLED")
+                                ) -> _UpdateMacieSessionResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMacieSessionResponseSuccess
+
+      interface _UpdateMemberSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMemberSessionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#update_member_session-instance_method
+      def update_member_session: (
+                                   id: ::String,
+                                   status: ("PAUSED" | "ENABLED")
+                                 ) -> _UpdateMemberSessionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMemberSessionResponseSuccess
+
+      interface _UpdateOrganizationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOrganizationConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#update_organization_configuration-instance_method
+      def update_organization_configuration: (
+                                               auto_enable: bool
+                                             ) -> _UpdateOrganizationConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOrganizationConfigurationResponseSuccess
+
+      interface _UpdateResourceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourceProfileResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#update_resource_profile-instance_method
+      def update_resource_profile: (
+                                     resource_arn: ::String,
+                                     ?sensitivity_score_override: ::Integer
+                                   ) -> _UpdateResourceProfileResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceProfileResponseSuccess
+
+      interface _UpdateResourceProfileDetectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourceProfileDetectionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#update_resource_profile_detections-instance_method
+      def update_resource_profile_detections: (
+                                                resource_arn: ::String,
+                                                ?suppress_data_identifiers: Array[
+                                                  {
+                                                    id: ::String?,
+                                                    type: ("CUSTOM" | "MANAGED")?
+                                                  },
+                                                ]
+                                              ) -> _UpdateResourceProfileDetectionsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceProfileDetectionsResponseSuccess
+
+      interface _UpdateRevealConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRevealConfigurationResponse]
+        def configuration: () -> Types::RevealConfiguration
+        def retrieval_configuration: () -> Types::RetrievalConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#update_reveal_configuration-instance_method
+      def update_reveal_configuration: (
+                                         configuration: {
+                                           kms_key_id: ::String?,
+                                           status: ("ENABLED" | "DISABLED")
+                                         },
+                                         ?retrieval_configuration: {
+                                           retrieval_mode: ("CALLER_CREDENTIALS" | "ASSUME_ROLE"),
+                                           role_name: ::String?
+                                         }
+                                       ) -> _UpdateRevealConfigurationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRevealConfigurationResponseSuccess
+
+      interface _UpdateSensitivityInspectionTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSensitivityInspectionTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#update_sensitivity_inspection_template-instance_method
+      def update_sensitivity_inspection_template: (
+                                                    ?description: ::String,
+                                                    ?excludes: {
+                                                      managed_data_identifier_ids: Array[::String]?
+                                                    },
+                                                    id: ::String,
+                                                    ?includes: {
+                                                      allow_list_ids: Array[::String]?,
+                                                      custom_data_identifier_ids: Array[::String]?,
+                                                      managed_data_identifier_ids: Array[::String]?
+                                                    }
+                                                  ) -> _UpdateSensitivityInspectionTemplateResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSensitivityInspectionTemplateResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#wait_until-instance_method
+      def wait_until: (:finding_revealed waiter_name, 
+                    finding_id: ::String
+                  ) -> Client::_GetSensitiveDataOccurrencesResponseSuccess
+                    | (:finding_revealed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetSensitiveDataOccurrencesResponseSuccess
+    end
+  end
+end
+

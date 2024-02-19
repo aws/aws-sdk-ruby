@@ -1,0 +1,1275 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MediaConnect
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddBridgeOutputsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddBridgeOutputsResponse]
+        def bridge_arn: () -> ::String
+        def outputs: () -> ::Array[Types::BridgeOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#add_bridge_outputs-instance_method
+      def add_bridge_outputs: (
+                                bridge_arn: ::String,
+                                outputs: Array[
+                                  {
+                                    network_output: {
+                                      ip_address: ::String,
+                                      name: ::String,
+                                      network_name: ::String,
+                                      port: ::Integer,
+                                      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp"),
+                                      ttl: ::Integer
+                                    }?
+                                  },
+                                ]
+                              ) -> _AddBridgeOutputsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddBridgeOutputsResponseSuccess
+
+      interface _AddBridgeSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddBridgeSourcesResponse]
+        def bridge_arn: () -> ::String
+        def sources: () -> ::Array[Types::BridgeSource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#add_bridge_sources-instance_method
+      def add_bridge_sources: (
+                                bridge_arn: ::String,
+                                sources: Array[
+                                  {
+                                    flow_source: {
+                                      flow_arn: ::String,
+                                      flow_vpc_interface_attachment: {
+                                        vpc_interface_name: ::String?
+                                      }?,
+                                      name: ::String
+                                    }?,
+                                    network_source: {
+                                      multicast_ip: ::String,
+                                      name: ::String,
+                                      network_name: ::String,
+                                      port: ::Integer,
+                                      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+                                    }?
+                                  },
+                                ]
+                              ) -> _AddBridgeSourcesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddBridgeSourcesResponseSuccess
+
+      interface _AddFlowMediaStreamsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddFlowMediaStreamsResponse]
+        def flow_arn: () -> ::String
+        def media_streams: () -> ::Array[Types::MediaStream]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#add_flow_media_streams-instance_method
+      def add_flow_media_streams: (
+                                    flow_arn: ::String,
+                                    media_streams: Array[
+                                      {
+                                        attributes: {
+                                          fmtp: {
+                                            channel_order: ::String?,
+                                            colorimetry: ("BT601" | "BT709" | "BT2020" | "BT2100" | "ST2065-1" | "ST2065-3" | "XYZ")?,
+                                            exact_framerate: ::String?,
+                                            par: ::String?,
+                                            range: ("NARROW" | "FULL" | "FULLPROTECT")?,
+                                            scan_mode: ("progressive" | "interlace" | "progressive-segmented-frame")?,
+                                            tcs: ("SDR" | "PQ" | "HLG" | "LINEAR" | "BT2100LINPQ" | "BT2100LINHLG" | "ST2065-1" | "ST428-1" | "DENSITY")?
+                                          }?,
+                                          lang: ::String?
+                                        }?,
+                                        clock_rate: ::Integer?,
+                                        description: ::String?,
+                                        media_stream_id: ::Integer,
+                                        media_stream_name: ::String,
+                                        media_stream_type: ("video" | "audio" | "ancillary-data"),
+                                        video_format: ::String?
+                                      },
+                                    ]
+                                  ) -> _AddFlowMediaStreamsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddFlowMediaStreamsResponseSuccess
+
+      interface _AddFlowOutputsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddFlowOutputsResponse]
+        def flow_arn: () -> ::String
+        def outputs: () -> ::Array[Types::Output]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#add_flow_outputs-instance_method
+      def add_flow_outputs: (
+                              flow_arn: ::String,
+                              outputs: Array[
+                                {
+                                  cidr_allow_list: Array[::String]?,
+                                  description: ::String?,
+                                  destination: ::String?,
+                                  encryption: {
+                                    algorithm: ("aes128" | "aes192" | "aes256")?,
+                                    constant_initialization_vector: ::String?,
+                                    device_id: ::String?,
+                                    key_type: ("speke" | "static-key" | "srt-password")?,
+                                    region: ::String?,
+                                    resource_id: ::String?,
+                                    role_arn: ::String,
+                                    secret_arn: ::String?,
+                                    url: ::String?
+                                  }?,
+                                  max_latency: ::Integer?,
+                                  media_stream_output_configurations: Array[
+                                    {
+                                      destination_configurations: Array[
+                                        {
+                                          destination_ip: ::String,
+                                          destination_port: ::Integer,
+                                          interface: {
+                                            name: ::String
+                                          }
+                                        },
+                                      ]?,
+                                      encoding_name: ("jxsv" | "raw" | "smpte291" | "pcm"),
+                                      encoding_parameters: {
+                                        compression_factor: ::Float,
+                                        encoder_profile: ("main" | "high")
+                                      }?,
+                                      media_stream_name: ::String
+                                    },
+                                  ]?,
+                                  min_latency: ::Integer?,
+                                  name: ::String?,
+                                  port: ::Integer?,
+                                  protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp"),
+                                  remote_id: ::String?,
+                                  sender_control_port: ::Integer?,
+                                  smoothing_latency: ::Integer?,
+                                  stream_id: ::String?,
+                                  vpc_interface_attachment: {
+                                    vpc_interface_name: ::String?
+                                  }?
+                                },
+                              ]
+                            ) -> _AddFlowOutputsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddFlowOutputsResponseSuccess
+
+      interface _AddFlowSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddFlowSourcesResponse]
+        def flow_arn: () -> ::String
+        def sources: () -> ::Array[Types::Source]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#add_flow_sources-instance_method
+      def add_flow_sources: (
+                              flow_arn: ::String,
+                              sources: Array[
+                                {
+                                  decryption: {
+                                    algorithm: ("aes128" | "aes192" | "aes256")?,
+                                    constant_initialization_vector: ::String?,
+                                    device_id: ::String?,
+                                    key_type: ("speke" | "static-key" | "srt-password")?,
+                                    region: ::String?,
+                                    resource_id: ::String?,
+                                    role_arn: ::String,
+                                    secret_arn: ::String?,
+                                    url: ::String?
+                                  }?,
+                                  description: ::String?,
+                                  entitlement_arn: ::String?,
+                                  ingest_port: ::Integer?,
+                                  max_bitrate: ::Integer?,
+                                  max_latency: ::Integer?,
+                                  max_sync_buffer: ::Integer?,
+                                  media_stream_source_configurations: Array[
+                                    {
+                                      encoding_name: ("jxsv" | "raw" | "smpte291" | "pcm"),
+                                      input_configurations: Array[
+                                        {
+                                          input_port: ::Integer,
+                                          interface: {
+                                            name: ::String
+                                          }
+                                        },
+                                      ]?,
+                                      media_stream_name: ::String
+                                    },
+                                  ]?,
+                                  min_latency: ::Integer?,
+                                  name: ::String?,
+                                  protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")?,
+                                  sender_control_port: ::Integer?,
+                                  sender_ip_address: ::String?,
+                                  source_listener_address: ::String?,
+                                  source_listener_port: ::Integer?,
+                                  stream_id: ::String?,
+                                  vpc_interface_name: ::String?,
+                                  whitelist_cidr: ::String?,
+                                  gateway_bridge_source: {
+                                    bridge_arn: ::String,
+                                    vpc_interface_attachment: {
+                                      vpc_interface_name: ::String?
+                                    }?
+                                  }?
+                                },
+                              ]
+                            ) -> _AddFlowSourcesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddFlowSourcesResponseSuccess
+
+      interface _AddFlowVpcInterfacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddFlowVpcInterfacesResponse]
+        def flow_arn: () -> ::String
+        def vpc_interfaces: () -> ::Array[Types::VpcInterface]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#add_flow_vpc_interfaces-instance_method
+      def add_flow_vpc_interfaces: (
+                                     flow_arn: ::String,
+                                     vpc_interfaces: Array[
+                                       {
+                                         name: ::String,
+                                         network_interface_type: ("ena" | "efa")?,
+                                         role_arn: ::String,
+                                         security_group_ids: Array[::String],
+                                         subnet_id: ::String
+                                       },
+                                     ]
+                                   ) -> _AddFlowVpcInterfacesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddFlowVpcInterfacesResponseSuccess
+
+      interface _CreateBridgeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBridgeResponse]
+        def bridge: () -> Types::Bridge
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#create_bridge-instance_method
+      def create_bridge: (
+                           ?egress_gateway_bridge: {
+                             max_bitrate: ::Integer
+                           },
+                           ?ingress_gateway_bridge: {
+                             max_bitrate: ::Integer,
+                             max_outputs: ::Integer
+                           },
+                           name: ::String,
+                           ?outputs: Array[
+                             {
+                               network_output: {
+                                 ip_address: ::String,
+                                 name: ::String,
+                                 network_name: ::String,
+                                 port: ::Integer,
+                                 protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp"),
+                                 ttl: ::Integer
+                               }?
+                             },
+                           ],
+                           placement_arn: ::String,
+                           ?source_failover_config: {
+                             failover_mode: ("MERGE" | "FAILOVER")?,
+                             recovery_window: ::Integer?,
+                             source_priority: {
+                               primary_source: ::String?
+                             }?,
+                             state: ("ENABLED" | "DISABLED")?
+                           },
+                           sources: Array[
+                             {
+                               flow_source: {
+                                 flow_arn: ::String,
+                                 flow_vpc_interface_attachment: {
+                                   vpc_interface_name: ::String?
+                                 }?,
+                                 name: ::String
+                               }?,
+                               network_source: {
+                                 multicast_ip: ::String,
+                                 name: ::String,
+                                 network_name: ::String,
+                                 port: ::Integer,
+                                 protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+                               }?
+                             },
+                           ]
+                         ) -> _CreateBridgeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBridgeResponseSuccess
+
+      interface _CreateFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFlowResponse]
+        def flow: () -> Types::Flow
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#create_flow-instance_method
+      def create_flow: (
+                         ?availability_zone: ::String,
+                         ?entitlements: Array[
+                           {
+                             data_transfer_subscriber_fee_percent: ::Integer?,
+                             description: ::String?,
+                             encryption: {
+                               algorithm: ("aes128" | "aes192" | "aes256")?,
+                               constant_initialization_vector: ::String?,
+                               device_id: ::String?,
+                               key_type: ("speke" | "static-key" | "srt-password")?,
+                               region: ::String?,
+                               resource_id: ::String?,
+                               role_arn: ::String,
+                               secret_arn: ::String?,
+                               url: ::String?
+                             }?,
+                             entitlement_status: ("ENABLED" | "DISABLED")?,
+                             name: ::String?,
+                             subscribers: Array[::String]
+                           },
+                         ],
+                         ?media_streams: Array[
+                           {
+                             attributes: {
+                               fmtp: {
+                                 channel_order: ::String?,
+                                 colorimetry: ("BT601" | "BT709" | "BT2020" | "BT2100" | "ST2065-1" | "ST2065-3" | "XYZ")?,
+                                 exact_framerate: ::String?,
+                                 par: ::String?,
+                                 range: ("NARROW" | "FULL" | "FULLPROTECT")?,
+                                 scan_mode: ("progressive" | "interlace" | "progressive-segmented-frame")?,
+                                 tcs: ("SDR" | "PQ" | "HLG" | "LINEAR" | "BT2100LINPQ" | "BT2100LINHLG" | "ST2065-1" | "ST428-1" | "DENSITY")?
+                               }?,
+                               lang: ::String?
+                             }?,
+                             clock_rate: ::Integer?,
+                             description: ::String?,
+                             media_stream_id: ::Integer,
+                             media_stream_name: ::String,
+                             media_stream_type: ("video" | "audio" | "ancillary-data"),
+                             video_format: ::String?
+                           },
+                         ],
+                         name: ::String,
+                         ?outputs: Array[
+                           {
+                             cidr_allow_list: Array[::String]?,
+                             description: ::String?,
+                             destination: ::String?,
+                             encryption: {
+                               algorithm: ("aes128" | "aes192" | "aes256")?,
+                               constant_initialization_vector: ::String?,
+                               device_id: ::String?,
+                               key_type: ("speke" | "static-key" | "srt-password")?,
+                               region: ::String?,
+                               resource_id: ::String?,
+                               role_arn: ::String,
+                               secret_arn: ::String?,
+                               url: ::String?
+                             }?,
+                             max_latency: ::Integer?,
+                             media_stream_output_configurations: Array[
+                               {
+                                 destination_configurations: Array[
+                                   {
+                                     destination_ip: ::String,
+                                     destination_port: ::Integer,
+                                     interface: {
+                                       name: ::String
+                                     }
+                                   },
+                                 ]?,
+                                 encoding_name: ("jxsv" | "raw" | "smpte291" | "pcm"),
+                                 encoding_parameters: {
+                                   compression_factor: ::Float,
+                                   encoder_profile: ("main" | "high")
+                                 }?,
+                                 media_stream_name: ::String
+                               },
+                             ]?,
+                             min_latency: ::Integer?,
+                             name: ::String?,
+                             port: ::Integer?,
+                             protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp"),
+                             remote_id: ::String?,
+                             sender_control_port: ::Integer?,
+                             smoothing_latency: ::Integer?,
+                             stream_id: ::String?,
+                             vpc_interface_attachment: {
+                               vpc_interface_name: ::String?
+                             }?
+                           },
+                         ],
+                         ?source: {
+                           decryption: {
+                             algorithm: ("aes128" | "aes192" | "aes256")?,
+                             constant_initialization_vector: ::String?,
+                             device_id: ::String?,
+                             key_type: ("speke" | "static-key" | "srt-password")?,
+                             region: ::String?,
+                             resource_id: ::String?,
+                             role_arn: ::String,
+                             secret_arn: ::String?,
+                             url: ::String?
+                           }?,
+                           description: ::String?,
+                           entitlement_arn: ::String?,
+                           ingest_port: ::Integer?,
+                           max_bitrate: ::Integer?,
+                           max_latency: ::Integer?,
+                           max_sync_buffer: ::Integer?,
+                           media_stream_source_configurations: Array[
+                             {
+                               encoding_name: ("jxsv" | "raw" | "smpte291" | "pcm"),
+                               input_configurations: Array[
+                                 {
+                                   input_port: ::Integer,
+                                   interface: {
+                                     name: ::String
+                                   }
+                                 },
+                               ]?,
+                               media_stream_name: ::String
+                             },
+                           ]?,
+                           min_latency: ::Integer?,
+                           name: ::String?,
+                           protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")?,
+                           sender_control_port: ::Integer?,
+                           sender_ip_address: ::String?,
+                           source_listener_address: ::String?,
+                           source_listener_port: ::Integer?,
+                           stream_id: ::String?,
+                           vpc_interface_name: ::String?,
+                           whitelist_cidr: ::String?,
+                           gateway_bridge_source: {
+                             bridge_arn: ::String,
+                             vpc_interface_attachment: {
+                               vpc_interface_name: ::String?
+                             }?
+                           }?
+                         },
+                         ?source_failover_config: {
+                           failover_mode: ("MERGE" | "FAILOVER")?,
+                           recovery_window: ::Integer?,
+                           source_priority: {
+                             primary_source: ::String?
+                           }?,
+                           state: ("ENABLED" | "DISABLED")?
+                         },
+                         ?sources: Array[
+                           {
+                             decryption: {
+                               algorithm: ("aes128" | "aes192" | "aes256")?,
+                               constant_initialization_vector: ::String?,
+                               device_id: ::String?,
+                               key_type: ("speke" | "static-key" | "srt-password")?,
+                               region: ::String?,
+                               resource_id: ::String?,
+                               role_arn: ::String,
+                               secret_arn: ::String?,
+                               url: ::String?
+                             }?,
+                             description: ::String?,
+                             entitlement_arn: ::String?,
+                             ingest_port: ::Integer?,
+                             max_bitrate: ::Integer?,
+                             max_latency: ::Integer?,
+                             max_sync_buffer: ::Integer?,
+                             media_stream_source_configurations: Array[
+                               {
+                                 encoding_name: ("jxsv" | "raw" | "smpte291" | "pcm"),
+                                 input_configurations: Array[
+                                   {
+                                     input_port: ::Integer,
+                                     interface: {
+                                       name: ::String
+                                     }
+                                   },
+                                 ]?,
+                                 media_stream_name: ::String
+                               },
+                             ]?,
+                             min_latency: ::Integer?,
+                             name: ::String?,
+                             protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")?,
+                             sender_control_port: ::Integer?,
+                             sender_ip_address: ::String?,
+                             source_listener_address: ::String?,
+                             source_listener_port: ::Integer?,
+                             stream_id: ::String?,
+                             vpc_interface_name: ::String?,
+                             whitelist_cidr: ::String?,
+                             gateway_bridge_source: {
+                               bridge_arn: ::String,
+                               vpc_interface_attachment: {
+                                 vpc_interface_name: ::String?
+                               }?
+                             }?
+                           },
+                         ],
+                         ?vpc_interfaces: Array[
+                           {
+                             name: ::String,
+                             network_interface_type: ("ena" | "efa")?,
+                             role_arn: ::String,
+                             security_group_ids: Array[::String],
+                             subnet_id: ::String
+                           },
+                         ],
+                         ?maintenance: {
+                           maintenance_day: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"),
+                           maintenance_start_hour: ::String
+                         }
+                       ) -> _CreateFlowResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFlowResponseSuccess
+
+      interface _CreateGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGatewayResponse]
+        def gateway: () -> Types::Gateway
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#create_gateway-instance_method
+      def create_gateway: (
+                            egress_cidr_blocks: Array[::String],
+                            name: ::String,
+                            networks: Array[
+                              {
+                                cidr_block: ::String,
+                                name: ::String
+                              },
+                            ]
+                          ) -> _CreateGatewayResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGatewayResponseSuccess
+
+      interface _DeleteBridgeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBridgeResponse]
+        def bridge_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#delete_bridge-instance_method
+      def delete_bridge: (
+                           bridge_arn: ::String
+                         ) -> _DeleteBridgeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBridgeResponseSuccess
+
+      interface _DeleteFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFlowResponse]
+        def flow_arn: () -> ::String
+        def status: () -> ("STANDBY" | "ACTIVE" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#delete_flow-instance_method
+      def delete_flow: (
+                         flow_arn: ::String
+                       ) -> _DeleteFlowResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFlowResponseSuccess
+
+      interface _DeleteGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGatewayResponse]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#delete_gateway-instance_method
+      def delete_gateway: (
+                            gateway_arn: ::String
+                          ) -> _DeleteGatewayResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGatewayResponseSuccess
+
+      interface _DeregisterGatewayInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterGatewayInstanceResponse]
+        def gateway_instance_arn: () -> ::String
+        def instance_state: () -> ("REGISTERING" | "ACTIVE" | "DEREGISTERING" | "DEREGISTERED" | "REGISTRATION_ERROR" | "DEREGISTRATION_ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#deregister_gateway_instance-instance_method
+      def deregister_gateway_instance: (
+                                         ?force: bool,
+                                         gateway_instance_arn: ::String
+                                       ) -> _DeregisterGatewayInstanceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterGatewayInstanceResponseSuccess
+
+      interface _DescribeBridgeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBridgeResponse]
+        def bridge: () -> Types::Bridge
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#describe_bridge-instance_method
+      def describe_bridge: (
+                             bridge_arn: ::String
+                           ) -> _DescribeBridgeResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBridgeResponseSuccess
+
+      interface _DescribeFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFlowResponse]
+        def flow: () -> Types::Flow
+        def messages: () -> Types::Messages
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#describe_flow-instance_method
+      def describe_flow: (
+                           flow_arn: ::String
+                         ) -> _DescribeFlowResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFlowResponseSuccess
+
+      interface _DescribeFlowSourceMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFlowSourceMetadataResponse]
+        def flow_arn: () -> ::String
+        def messages: () -> ::Array[Types::MessageDetail]
+        def timestamp: () -> ::Time
+        def transport_media_info: () -> Types::TransportMediaInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#describe_flow_source_metadata-instance_method
+      def describe_flow_source_metadata: (
+                                           flow_arn: ::String
+                                         ) -> _DescribeFlowSourceMetadataResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFlowSourceMetadataResponseSuccess
+
+      interface _DescribeGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGatewayResponse]
+        def gateway: () -> Types::Gateway
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#describe_gateway-instance_method
+      def describe_gateway: (
+                              gateway_arn: ::String
+                            ) -> _DescribeGatewayResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGatewayResponseSuccess
+
+      interface _DescribeGatewayInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGatewayInstanceResponse]
+        def gateway_instance: () -> Types::GatewayInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#describe_gateway_instance-instance_method
+      def describe_gateway_instance: (
+                                       gateway_instance_arn: ::String
+                                     ) -> _DescribeGatewayInstanceResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGatewayInstanceResponseSuccess
+
+      interface _DescribeOfferingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOfferingResponse]
+        def offering: () -> Types::Offering
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#describe_offering-instance_method
+      def describe_offering: (
+                               offering_arn: ::String
+                             ) -> _DescribeOfferingResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOfferingResponseSuccess
+
+      interface _DescribeReservationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReservationResponse]
+        def reservation: () -> Types::Reservation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#describe_reservation-instance_method
+      def describe_reservation: (
+                                  reservation_arn: ::String
+                                ) -> _DescribeReservationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReservationResponseSuccess
+
+      interface _GrantFlowEntitlementsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GrantFlowEntitlementsResponse]
+        def entitlements: () -> ::Array[Types::Entitlement]
+        def flow_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#grant_flow_entitlements-instance_method
+      def grant_flow_entitlements: (
+                                     entitlements: Array[
+                                       {
+                                         data_transfer_subscriber_fee_percent: ::Integer?,
+                                         description: ::String?,
+                                         encryption: {
+                                           algorithm: ("aes128" | "aes192" | "aes256")?,
+                                           constant_initialization_vector: ::String?,
+                                           device_id: ::String?,
+                                           key_type: ("speke" | "static-key" | "srt-password")?,
+                                           region: ::String?,
+                                           resource_id: ::String?,
+                                           role_arn: ::String,
+                                           secret_arn: ::String?,
+                                           url: ::String?
+                                         }?,
+                                         entitlement_status: ("ENABLED" | "DISABLED")?,
+                                         name: ::String?,
+                                         subscribers: Array[::String]
+                                       },
+                                     ],
+                                     flow_arn: ::String
+                                   ) -> _GrantFlowEntitlementsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GrantFlowEntitlementsResponseSuccess
+
+      interface _ListBridgesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBridgesResponse]
+        def bridges: () -> ::Array[Types::ListedBridge]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#list_bridges-instance_method
+      def list_bridges: (
+                          ?filter_arn: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListBridgesResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBridgesResponseSuccess
+
+      interface _ListEntitlementsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEntitlementsResponse]
+        def entitlements: () -> ::Array[Types::ListedEntitlement]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#list_entitlements-instance_method
+      def list_entitlements: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListEntitlementsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntitlementsResponseSuccess
+
+      interface _ListFlowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFlowsResponse]
+        def flows: () -> ::Array[Types::ListedFlow]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#list_flows-instance_method
+      def list_flows: (
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListFlowsResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowsResponseSuccess
+
+      interface _ListGatewayInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGatewayInstancesResponse]
+        def instances: () -> ::Array[Types::ListedGatewayInstance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#list_gateway_instances-instance_method
+      def list_gateway_instances: (
+                                    ?filter_arn: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListGatewayInstancesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGatewayInstancesResponseSuccess
+
+      interface _ListGatewaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGatewaysResponse]
+        def gateways: () -> ::Array[Types::ListedGateway]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#list_gateways-instance_method
+      def list_gateways: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListGatewaysResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGatewaysResponseSuccess
+
+      interface _ListOfferingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOfferingsResponse]
+        def next_token: () -> ::String
+        def offerings: () -> ::Array[Types::Offering]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#list_offerings-instance_method
+      def list_offerings: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListOfferingsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOfferingsResponseSuccess
+
+      interface _ListReservationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReservationsResponse]
+        def next_token: () -> ::String
+        def reservations: () -> ::Array[Types::Reservation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#list_reservations-instance_method
+      def list_reservations: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListReservationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReservationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PurchaseOfferingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PurchaseOfferingResponse]
+        def reservation: () -> Types::Reservation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#purchase_offering-instance_method
+      def purchase_offering: (
+                               offering_arn: ::String,
+                               reservation_name: ::String,
+                               start: ::String
+                             ) -> _PurchaseOfferingResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PurchaseOfferingResponseSuccess
+
+      interface _RemoveBridgeOutputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveBridgeOutputResponse]
+        def bridge_arn: () -> ::String
+        def output_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#remove_bridge_output-instance_method
+      def remove_bridge_output: (
+                                  bridge_arn: ::String,
+                                  output_name: ::String
+                                ) -> _RemoveBridgeOutputResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveBridgeOutputResponseSuccess
+
+      interface _RemoveBridgeSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveBridgeSourceResponse]
+        def bridge_arn: () -> ::String
+        def source_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#remove_bridge_source-instance_method
+      def remove_bridge_source: (
+                                  bridge_arn: ::String,
+                                  source_name: ::String
+                                ) -> _RemoveBridgeSourceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveBridgeSourceResponseSuccess
+
+      interface _RemoveFlowMediaStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveFlowMediaStreamResponse]
+        def flow_arn: () -> ::String
+        def media_stream_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#remove_flow_media_stream-instance_method
+      def remove_flow_media_stream: (
+                                      flow_arn: ::String,
+                                      media_stream_name: ::String
+                                    ) -> _RemoveFlowMediaStreamResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveFlowMediaStreamResponseSuccess
+
+      interface _RemoveFlowOutputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveFlowOutputResponse]
+        def flow_arn: () -> ::String
+        def output_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#remove_flow_output-instance_method
+      def remove_flow_output: (
+                                flow_arn: ::String,
+                                output_arn: ::String
+                              ) -> _RemoveFlowOutputResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveFlowOutputResponseSuccess
+
+      interface _RemoveFlowSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveFlowSourceResponse]
+        def flow_arn: () -> ::String
+        def source_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#remove_flow_source-instance_method
+      def remove_flow_source: (
+                                flow_arn: ::String,
+                                source_arn: ::String
+                              ) -> _RemoveFlowSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveFlowSourceResponseSuccess
+
+      interface _RemoveFlowVpcInterfaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveFlowVpcInterfaceResponse]
+        def flow_arn: () -> ::String
+        def non_deleted_network_interface_ids: () -> ::Array[::String]
+        def vpc_interface_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#remove_flow_vpc_interface-instance_method
+      def remove_flow_vpc_interface: (
+                                       flow_arn: ::String,
+                                       vpc_interface_name: ::String
+                                     ) -> _RemoveFlowVpcInterfaceResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveFlowVpcInterfaceResponseSuccess
+
+      interface _RevokeFlowEntitlementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RevokeFlowEntitlementResponse]
+        def entitlement_arn: () -> ::String
+        def flow_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#revoke_flow_entitlement-instance_method
+      def revoke_flow_entitlement: (
+                                     entitlement_arn: ::String,
+                                     flow_arn: ::String
+                                   ) -> _RevokeFlowEntitlementResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RevokeFlowEntitlementResponseSuccess
+
+      interface _StartFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartFlowResponse]
+        def flow_arn: () -> ::String
+        def status: () -> ("STANDBY" | "ACTIVE" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#start_flow-instance_method
+      def start_flow: (
+                        flow_arn: ::String
+                      ) -> _StartFlowResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFlowResponseSuccess
+
+      interface _StopFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopFlowResponse]
+        def flow_arn: () -> ::String
+        def status: () -> ("STANDBY" | "ACTIVE" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#stop_flow-instance_method
+      def stop_flow: (
+                       flow_arn: ::String
+                     ) -> _StopFlowResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopFlowResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateBridgeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBridgeResponse]
+        def bridge: () -> Types::Bridge
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#update_bridge-instance_method
+      def update_bridge: (
+                           bridge_arn: ::String,
+                           ?egress_gateway_bridge: {
+                             max_bitrate: ::Integer?
+                           },
+                           ?ingress_gateway_bridge: {
+                             max_bitrate: ::Integer?,
+                             max_outputs: ::Integer?
+                           },
+                           ?source_failover_config: {
+                             failover_mode: ("MERGE" | "FAILOVER")?,
+                             recovery_window: ::Integer?,
+                             source_priority: {
+                               primary_source: ::String?
+                             }?,
+                             state: ("ENABLED" | "DISABLED")?
+                           }
+                         ) -> _UpdateBridgeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBridgeResponseSuccess
+
+      interface _UpdateBridgeOutputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBridgeOutputResponse]
+        def bridge_arn: () -> ::String
+        def output: () -> Types::BridgeOutput
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#update_bridge_output-instance_method
+      def update_bridge_output: (
+                                  bridge_arn: ::String,
+                                  ?network_output: {
+                                    ip_address: ::String?,
+                                    network_name: ::String?,
+                                    port: ::Integer?,
+                                    protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")?,
+                                    ttl: ::Integer?
+                                  },
+                                  output_name: ::String
+                                ) -> _UpdateBridgeOutputResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBridgeOutputResponseSuccess
+
+      interface _UpdateBridgeSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBridgeSourceResponse]
+        def bridge_arn: () -> ::String
+        def source: () -> Types::BridgeSource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#update_bridge_source-instance_method
+      def update_bridge_source: (
+                                  bridge_arn: ::String,
+                                  ?flow_source: {
+                                    flow_arn: ::String?,
+                                    flow_vpc_interface_attachment: {
+                                      vpc_interface_name: ::String?
+                                    }?
+                                  },
+                                  ?network_source: {
+                                    multicast_ip: ::String?,
+                                    network_name: ::String?,
+                                    port: ::Integer?,
+                                    protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")?
+                                  },
+                                  source_name: ::String
+                                ) -> _UpdateBridgeSourceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBridgeSourceResponseSuccess
+
+      interface _UpdateBridgeStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBridgeStateResponse]
+        def bridge_arn: () -> ::String
+        def desired_state: () -> ("ACTIVE" | "STANDBY" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#update_bridge_state-instance_method
+      def update_bridge_state: (
+                                 bridge_arn: ::String,
+                                 desired_state: ("ACTIVE" | "STANDBY" | "DELETED")
+                               ) -> _UpdateBridgeStateResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBridgeStateResponseSuccess
+
+      interface _UpdateFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFlowResponse]
+        def flow: () -> Types::Flow
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#update_flow-instance_method
+      def update_flow: (
+                         flow_arn: ::String,
+                         ?source_failover_config: {
+                           failover_mode: ("MERGE" | "FAILOVER")?,
+                           recovery_window: ::Integer?,
+                           source_priority: {
+                             primary_source: ::String?
+                           }?,
+                           state: ("ENABLED" | "DISABLED")?
+                         },
+                         ?maintenance: {
+                           maintenance_day: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday")?,
+                           maintenance_scheduled_date: ::String?,
+                           maintenance_start_hour: ::String?
+                         }
+                       ) -> _UpdateFlowResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFlowResponseSuccess
+
+      interface _UpdateFlowEntitlementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFlowEntitlementResponse]
+        def entitlement: () -> Types::Entitlement
+        def flow_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#update_flow_entitlement-instance_method
+      def update_flow_entitlement: (
+                                     ?description: ::String,
+                                     ?encryption: {
+                                       algorithm: ("aes128" | "aes192" | "aes256")?,
+                                       constant_initialization_vector: ::String?,
+                                       device_id: ::String?,
+                                       key_type: ("speke" | "static-key" | "srt-password")?,
+                                       region: ::String?,
+                                       resource_id: ::String?,
+                                       role_arn: ::String?,
+                                       secret_arn: ::String?,
+                                       url: ::String?
+                                     },
+                                     entitlement_arn: ::String,
+                                     ?entitlement_status: ("ENABLED" | "DISABLED"),
+                                     flow_arn: ::String,
+                                     ?subscribers: Array[::String]
+                                   ) -> _UpdateFlowEntitlementResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFlowEntitlementResponseSuccess
+
+      interface _UpdateFlowMediaStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFlowMediaStreamResponse]
+        def flow_arn: () -> ::String
+        def media_stream: () -> Types::MediaStream
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#update_flow_media_stream-instance_method
+      def update_flow_media_stream: (
+                                      ?attributes: {
+                                        fmtp: {
+                                          channel_order: ::String?,
+                                          colorimetry: ("BT601" | "BT709" | "BT2020" | "BT2100" | "ST2065-1" | "ST2065-3" | "XYZ")?,
+                                          exact_framerate: ::String?,
+                                          par: ::String?,
+                                          range: ("NARROW" | "FULL" | "FULLPROTECT")?,
+                                          scan_mode: ("progressive" | "interlace" | "progressive-segmented-frame")?,
+                                          tcs: ("SDR" | "PQ" | "HLG" | "LINEAR" | "BT2100LINPQ" | "BT2100LINHLG" | "ST2065-1" | "ST428-1" | "DENSITY")?
+                                        }?,
+                                        lang: ::String?
+                                      },
+                                      ?clock_rate: ::Integer,
+                                      ?description: ::String,
+                                      flow_arn: ::String,
+                                      media_stream_name: ::String,
+                                      ?media_stream_type: ("video" | "audio" | "ancillary-data"),
+                                      ?video_format: ::String
+                                    ) -> _UpdateFlowMediaStreamResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFlowMediaStreamResponseSuccess
+
+      interface _UpdateFlowOutputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFlowOutputResponse]
+        def flow_arn: () -> ::String
+        def output: () -> Types::Output
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#update_flow_output-instance_method
+      def update_flow_output: (
+                                ?cidr_allow_list: Array[::String],
+                                ?description: ::String,
+                                ?destination: ::String,
+                                ?encryption: {
+                                  algorithm: ("aes128" | "aes192" | "aes256")?,
+                                  constant_initialization_vector: ::String?,
+                                  device_id: ::String?,
+                                  key_type: ("speke" | "static-key" | "srt-password")?,
+                                  region: ::String?,
+                                  resource_id: ::String?,
+                                  role_arn: ::String?,
+                                  secret_arn: ::String?,
+                                  url: ::String?
+                                },
+                                flow_arn: ::String,
+                                ?max_latency: ::Integer,
+                                ?media_stream_output_configurations: Array[
+                                  {
+                                    destination_configurations: Array[
+                                      {
+                                        destination_ip: ::String,
+                                        destination_port: ::Integer,
+                                        interface: {
+                                          name: ::String
+                                        }
+                                      },
+                                    ]?,
+                                    encoding_name: ("jxsv" | "raw" | "smpte291" | "pcm"),
+                                    encoding_parameters: {
+                                      compression_factor: ::Float,
+                                      encoder_profile: ("main" | "high")
+                                    }?,
+                                    media_stream_name: ::String
+                                  },
+                                ],
+                                ?min_latency: ::Integer,
+                                output_arn: ::String,
+                                ?port: ::Integer,
+                                ?protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp"),
+                                ?remote_id: ::String,
+                                ?sender_control_port: ::Integer,
+                                ?sender_ip_address: ::String,
+                                ?smoothing_latency: ::Integer,
+                                ?stream_id: ::String,
+                                ?vpc_interface_attachment: {
+                                  vpc_interface_name: ::String?
+                                }
+                              ) -> _UpdateFlowOutputResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFlowOutputResponseSuccess
+
+      interface _UpdateFlowSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFlowSourceResponse]
+        def flow_arn: () -> ::String
+        def source: () -> Types::Source
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#update_flow_source-instance_method
+      def update_flow_source: (
+                                ?decryption: {
+                                  algorithm: ("aes128" | "aes192" | "aes256")?,
+                                  constant_initialization_vector: ::String?,
+                                  device_id: ::String?,
+                                  key_type: ("speke" | "static-key" | "srt-password")?,
+                                  region: ::String?,
+                                  resource_id: ::String?,
+                                  role_arn: ::String?,
+                                  secret_arn: ::String?,
+                                  url: ::String?
+                                },
+                                ?description: ::String,
+                                ?entitlement_arn: ::String,
+                                flow_arn: ::String,
+                                ?ingest_port: ::Integer,
+                                ?max_bitrate: ::Integer,
+                                ?max_latency: ::Integer,
+                                ?max_sync_buffer: ::Integer,
+                                ?media_stream_source_configurations: Array[
+                                  {
+                                    encoding_name: ("jxsv" | "raw" | "smpte291" | "pcm"),
+                                    input_configurations: Array[
+                                      {
+                                        input_port: ::Integer,
+                                        interface: {
+                                          name: ::String
+                                        }
+                                      },
+                                    ]?,
+                                    media_stream_name: ::String
+                                  },
+                                ],
+                                ?min_latency: ::Integer,
+                                ?protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp"),
+                                ?sender_control_port: ::Integer,
+                                ?sender_ip_address: ::String,
+                                source_arn: ::String,
+                                ?source_listener_address: ::String,
+                                ?source_listener_port: ::Integer,
+                                ?stream_id: ::String,
+                                ?vpc_interface_name: ::String,
+                                ?whitelist_cidr: ::String,
+                                ?gateway_bridge_source: {
+                                  bridge_arn: ::String?,
+                                  vpc_interface_attachment: {
+                                    vpc_interface_name: ::String?
+                                  }?
+                                }
+                              ) -> _UpdateFlowSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFlowSourceResponseSuccess
+
+      interface _UpdateGatewayInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGatewayInstanceResponse]
+        def bridge_placement: () -> ("AVAILABLE" | "LOCKED")
+        def gateway_instance_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#update_gateway_instance-instance_method
+      def update_gateway_instance: (
+                                     ?bridge_placement: ("AVAILABLE" | "LOCKED"),
+                                     gateway_instance_arn: ::String
+                                   ) -> _UpdateGatewayInstanceResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayInstanceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#wait_until-instance_method
+      def wait_until: (:flow_active waiter_name, 
+                    flow_arn: ::String
+                  ) -> Client::_DescribeFlowResponseSuccess
+                    | (:flow_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeFlowResponseSuccess
+                    | (:flow_deleted waiter_name, 
+                    flow_arn: ::String
+                  ) -> Client::_DescribeFlowResponseSuccess
+                    | (:flow_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeFlowResponseSuccess
+                    | (:flow_standby waiter_name, 
+                    flow_arn: ::String
+                  ) -> Client::_DescribeFlowResponseSuccess
+                    | (:flow_standby waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeFlowResponseSuccess
+    end
+  end
+end
+

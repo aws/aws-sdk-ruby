@@ -1,0 +1,76 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ImportExport
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class BucketPermissionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CanceledJobIdException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CreateJobQuotaExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ExpiredJobIdException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidAccessKeyIdException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidAddressException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidCustomsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidFileSystemException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidJobIdException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidManifestFieldException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidVersionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MalformedManifestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MissingCustomsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MissingManifestFieldException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MissingParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MultipleRegionsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchBucketException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnableToCancelJobIdException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnableToUpdateJobIdException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

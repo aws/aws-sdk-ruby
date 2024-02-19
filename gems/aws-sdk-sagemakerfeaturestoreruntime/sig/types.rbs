@@ -1,0 +1,116 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SageMakerFeatureStoreRuntime
+  module Types
+
+    class AccessForbidden
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetRecordError
+      attr_accessor feature_group_name: ::String
+      attr_accessor record_identifier_value_as_string: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetRecordIdentifier
+      attr_accessor feature_group_name: ::String
+      attr_accessor record_identifiers_value_as_string: ::Array[::String]
+      attr_accessor feature_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetRecordRequest
+      attr_accessor identifiers: ::Array[Types::BatchGetRecordIdentifier]
+      attr_accessor expiration_time_response: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class BatchGetRecordResponse
+      attr_accessor records: ::Array[Types::BatchGetRecordResultDetail]
+      attr_accessor errors: ::Array[Types::BatchGetRecordError]
+      attr_accessor unprocessed_identifiers: ::Array[Types::BatchGetRecordIdentifier]
+      SENSITIVE: []
+    end
+
+    class BatchGetRecordResultDetail
+      attr_accessor feature_group_name: ::String
+      attr_accessor record_identifier_value_as_string: ::String
+      attr_accessor record: ::Array[Types::FeatureValue]
+      attr_accessor expires_at: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRecordRequest
+      attr_accessor feature_group_name: ::String
+      attr_accessor record_identifier_value_as_string: ::String
+      attr_accessor event_time: ::String
+      attr_accessor target_stores: ::Array[("OnlineStore" | "OfflineStore")]
+      attr_accessor deletion_mode: ("SoftDelete" | "HardDelete")
+      SENSITIVE: []
+    end
+
+    class FeatureValue
+      attr_accessor feature_name: ::String
+      attr_accessor value_as_string: ::String
+      attr_accessor value_as_string_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetRecordRequest
+      attr_accessor feature_group_name: ::String
+      attr_accessor record_identifier_value_as_string: ::String
+      attr_accessor feature_names: ::Array[::String]
+      attr_accessor expiration_time_response: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class GetRecordResponse
+      attr_accessor record: ::Array[Types::FeatureValue]
+      attr_accessor expires_at: ::String
+      SENSITIVE: []
+    end
+
+    class InternalFailure
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutRecordRequest
+      attr_accessor feature_group_name: ::String
+      attr_accessor record: ::Array[Types::FeatureValue]
+      attr_accessor target_stores: ::Array[("OnlineStore" | "OfflineStore")]
+      attr_accessor ttl_duration: Types::TtlDuration
+      SENSITIVE: []
+    end
+
+    class ResourceNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailable
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TtlDuration
+      attr_accessor unit: ("Seconds" | "Minutes" | "Hours" | "Days" | "Weeks")
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class ValidationError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

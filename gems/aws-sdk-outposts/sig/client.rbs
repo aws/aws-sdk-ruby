@@ -1,0 +1,454 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Outposts
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CancelOrderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelOrderOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#cancel_order-instance_method
+      def cancel_order: (
+                          order_id: ::String
+                        ) -> _CancelOrderResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelOrderResponseSuccess
+
+      interface _CreateOrderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOrderOutput]
+        def order: () -> Types::Order
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#create_order-instance_method
+      def create_order: (
+                          outpost_identifier: ::String,
+                          line_items: Array[
+                            {
+                              catalog_item_id: ::String?,
+                              quantity: ::Integer?
+                            },
+                          ],
+                          payment_option: ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT"),
+                          ?payment_term: ("THREE_YEARS" | "ONE_YEAR")
+                        ) -> _CreateOrderResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOrderResponseSuccess
+
+      interface _CreateOutpostResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOutpostOutput]
+        def outpost: () -> Types::Outpost
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#create_outpost-instance_method
+      def create_outpost: (
+                            name: ::String,
+                            ?description: ::String,
+                            site_id: ::String,
+                            ?availability_zone: ::String,
+                            ?availability_zone_id: ::String,
+                            ?tags: Hash[::String, ::String],
+                            ?supported_hardware_type: ("RACK" | "SERVER")
+                          ) -> _CreateOutpostResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOutpostResponseSuccess
+
+      interface _CreateSiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSiteOutput]
+        def site: () -> Types::Site
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#create_site-instance_method
+      def create_site: (
+                         name: ::String,
+                         ?description: ::String,
+                         ?notes: ::String,
+                         ?tags: Hash[::String, ::String],
+                         ?operating_address: {
+                           contact_name: ::String?,
+                           contact_phone_number: ::String?,
+                           address_line_1: ::String,
+                           address_line_2: ::String?,
+                           address_line_3: ::String?,
+                           city: ::String,
+                           state_or_region: ::String,
+                           district_or_county: ::String?,
+                           postal_code: ::String,
+                           country_code: ::String,
+                           municipality: ::String?
+                         },
+                         ?shipping_address: {
+                           contact_name: ::String?,
+                           contact_phone_number: ::String?,
+                           address_line_1: ::String,
+                           address_line_2: ::String?,
+                           address_line_3: ::String?,
+                           city: ::String,
+                           state_or_region: ::String,
+                           district_or_county: ::String?,
+                           postal_code: ::String,
+                           country_code: ::String,
+                           municipality: ::String?
+                         },
+                         ?rack_physical_properties: {
+                           power_draw_kva: ("POWER_5_KVA" | "POWER_10_KVA" | "POWER_15_KVA" | "POWER_30_KVA")?,
+                           power_phase: ("SINGLE_PHASE" | "THREE_PHASE")?,
+                           power_connector: ("L6_30P" | "IEC309" | "AH530P7W" | "AH532P6W")?,
+                           power_feed_drop: ("ABOVE_RACK" | "BELOW_RACK")?,
+                           uplink_gbps: ("UPLINK_1G" | "UPLINK_10G" | "UPLINK_40G" | "UPLINK_100G")?,
+                           uplink_count: ("UPLINK_COUNT_1" | "UPLINK_COUNT_2" | "UPLINK_COUNT_3" | "UPLINK_COUNT_4" | "UPLINK_COUNT_5" | "UPLINK_COUNT_6" | "UPLINK_COUNT_7" | "UPLINK_COUNT_8" | "UPLINK_COUNT_12" | "UPLINK_COUNT_16")?,
+                           fiber_optic_cable_type: ("SINGLE_MODE" | "MULTI_MODE")?,
+                           optical_standard: ("OPTIC_10GBASE_SR" | "OPTIC_10GBASE_IR" | "OPTIC_10GBASE_LR" | "OPTIC_40GBASE_SR" | "OPTIC_40GBASE_ESR" | "OPTIC_40GBASE_IR4_LR4L" | "OPTIC_40GBASE_LR4" | "OPTIC_100GBASE_SR4" | "OPTIC_100GBASE_CWDM4" | "OPTIC_100GBASE_LR4" | "OPTIC_100G_PSM4_MSA" | "OPTIC_1000BASE_LX" | "OPTIC_1000BASE_SX")?,
+                           maximum_supported_weight_lbs: ("NO_LIMIT" | "MAX_1400_LBS" | "MAX_1600_LBS" | "MAX_1800_LBS" | "MAX_2000_LBS")?
+                         }
+                       ) -> _CreateSiteResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSiteResponseSuccess
+
+      interface _DeleteOutpostResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOutpostOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#delete_outpost-instance_method
+      def delete_outpost: (
+                            outpost_id: ::String
+                          ) -> _DeleteOutpostResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOutpostResponseSuccess
+
+      interface _DeleteSiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSiteOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#delete_site-instance_method
+      def delete_site: (
+                         site_id: ::String
+                       ) -> _DeleteSiteResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSiteResponseSuccess
+
+      interface _GetCatalogItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCatalogItemOutput]
+        def catalog_item: () -> Types::CatalogItem
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#get_catalog_item-instance_method
+      def get_catalog_item: (
+                              catalog_item_id: ::String
+                            ) -> _GetCatalogItemResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCatalogItemResponseSuccess
+
+      interface _GetConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectionResponse]
+        def connection_id: () -> ::String
+        def connection_details: () -> Types::ConnectionDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#get_connection-instance_method
+      def get_connection: (
+                            connection_id: ::String
+                          ) -> _GetConnectionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectionResponseSuccess
+
+      interface _GetOrderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOrderOutput]
+        def order: () -> Types::Order
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#get_order-instance_method
+      def get_order: (
+                       order_id: ::String
+                     ) -> _GetOrderResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOrderResponseSuccess
+
+      interface _GetOutpostResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOutpostOutput]
+        def outpost: () -> Types::Outpost
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#get_outpost-instance_method
+      def get_outpost: (
+                         outpost_id: ::String
+                       ) -> _GetOutpostResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOutpostResponseSuccess
+
+      interface _GetOutpostInstanceTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOutpostInstanceTypesOutput]
+        def instance_types: () -> ::Array[Types::InstanceTypeItem]
+        def next_token: () -> ::String
+        def outpost_id: () -> ::String
+        def outpost_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#get_outpost_instance_types-instance_method
+      def get_outpost_instance_types: (
+                                        outpost_id: ::String,
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _GetOutpostInstanceTypesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOutpostInstanceTypesResponseSuccess
+
+      interface _GetSiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSiteOutput]
+        def site: () -> Types::Site
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#get_site-instance_method
+      def get_site: (
+                      site_id: ::String
+                    ) -> _GetSiteResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSiteResponseSuccess
+
+      interface _GetSiteAddressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSiteAddressOutput]
+        def site_id: () -> ::String
+        def address_type: () -> ("SHIPPING_ADDRESS" | "OPERATING_ADDRESS")
+        def address: () -> Types::Address
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#get_site_address-instance_method
+      def get_site_address: (
+                              site_id: ::String,
+                              address_type: ("SHIPPING_ADDRESS" | "OPERATING_ADDRESS")
+                            ) -> _GetSiteAddressResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSiteAddressResponseSuccess
+
+      interface _ListAssetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetsOutput]
+        def assets: () -> ::Array[Types::AssetInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#list_assets-instance_method
+      def list_assets: (
+                         outpost_identifier: ::String,
+                         ?host_id_filter: Array[::String],
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         ?status_filter: Array[("ACTIVE" | "RETIRING" | "ISOLATED")]
+                       ) -> _ListAssetsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetsResponseSuccess
+
+      interface _ListCatalogItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCatalogItemsOutput]
+        def catalog_items: () -> ::Array[Types::CatalogItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#list_catalog_items-instance_method
+      def list_catalog_items: (
+                                ?next_token: ::String,
+                                ?max_results: ::Integer,
+                                ?item_class_filter: Array[("RACK" | "SERVER")],
+                                ?supported_storage_filter: Array[("EBS" | "S3")],
+                                ?ec2_family_filter: Array[::String]
+                              ) -> _ListCatalogItemsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCatalogItemsResponseSuccess
+
+      interface _ListOrdersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOrdersOutput]
+        def orders: () -> ::Array[Types::OrderSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#list_orders-instance_method
+      def list_orders: (
+                         ?outpost_identifier_filter: ::String,
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListOrdersResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOrdersResponseSuccess
+
+      interface _ListOutpostsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOutpostsOutput]
+        def outposts: () -> ::Array[Types::Outpost]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#list_outposts-instance_method
+      def list_outposts: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer,
+                           ?life_cycle_status_filter: Array[::String],
+                           ?availability_zone_filter: Array[::String],
+                           ?availability_zone_id_filter: Array[::String]
+                         ) -> _ListOutpostsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOutpostsResponseSuccess
+
+      interface _ListSitesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSitesOutput]
+        def sites: () -> ::Array[Types::Site]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#list_sites-instance_method
+      def list_sites: (
+                        ?next_token: ::String,
+                        ?max_results: ::Integer,
+                        ?operating_address_country_code_filter: Array[::String],
+                        ?operating_address_state_or_region_filter: Array[::String],
+                        ?operating_address_city_filter: Array[::String]
+                      ) -> _ListSitesResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSitesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartConnectionResponse]
+        def connection_id: () -> ::String
+        def underlay_ip_address: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#start_connection-instance_method
+      def start_connection: (
+                              ?device_serial_number: ::String,
+                              asset_id: ::String,
+                              client_public_key: ::String,
+                              network_interface_device_index: ::Integer
+                            ) -> _StartConnectionResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartConnectionResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateOutpostResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOutpostOutput]
+        def outpost: () -> Types::Outpost
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#update_outpost-instance_method
+      def update_outpost: (
+                            outpost_id: ::String,
+                            ?name: ::String,
+                            ?description: ::String,
+                            ?supported_hardware_type: ("RACK" | "SERVER")
+                          ) -> _UpdateOutpostResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOutpostResponseSuccess
+
+      interface _UpdateSiteResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSiteOutput]
+        def site: () -> Types::Site
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#update_site-instance_method
+      def update_site: (
+                         site_id: ::String,
+                         ?name: ::String,
+                         ?description: ::String,
+                         ?notes: ::String
+                       ) -> _UpdateSiteResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSiteResponseSuccess
+
+      interface _UpdateSiteAddressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSiteAddressOutput]
+        def address_type: () -> ("SHIPPING_ADDRESS" | "OPERATING_ADDRESS")
+        def address: () -> Types::Address
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#update_site_address-instance_method
+      def update_site_address: (
+                                 site_id: ::String,
+                                 address_type: ("SHIPPING_ADDRESS" | "OPERATING_ADDRESS"),
+                                 address: {
+                                   contact_name: ::String?,
+                                   contact_phone_number: ::String?,
+                                   address_line_1: ::String,
+                                   address_line_2: ::String?,
+                                   address_line_3: ::String?,
+                                   city: ::String,
+                                   state_or_region: ::String,
+                                   district_or_county: ::String?,
+                                   postal_code: ::String,
+                                   country_code: ::String,
+                                   municipality: ::String?
+                                 }
+                               ) -> _UpdateSiteAddressResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSiteAddressResponseSuccess
+
+      interface _UpdateSiteRackPhysicalPropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSiteRackPhysicalPropertiesOutput]
+        def site: () -> Types::Site
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Outposts/Client.html#update_site_rack_physical_properties-instance_method
+      def update_site_rack_physical_properties: (
+                                                  site_id: ::String,
+                                                  ?power_draw_kva: ("POWER_5_KVA" | "POWER_10_KVA" | "POWER_15_KVA" | "POWER_30_KVA"),
+                                                  ?power_phase: ("SINGLE_PHASE" | "THREE_PHASE"),
+                                                  ?power_connector: ("L6_30P" | "IEC309" | "AH530P7W" | "AH532P6W"),
+                                                  ?power_feed_drop: ("ABOVE_RACK" | "BELOW_RACK"),
+                                                  ?uplink_gbps: ("UPLINK_1G" | "UPLINK_10G" | "UPLINK_40G" | "UPLINK_100G"),
+                                                  ?uplink_count: ("UPLINK_COUNT_1" | "UPLINK_COUNT_2" | "UPLINK_COUNT_3" | "UPLINK_COUNT_4" | "UPLINK_COUNT_5" | "UPLINK_COUNT_6" | "UPLINK_COUNT_7" | "UPLINK_COUNT_8" | "UPLINK_COUNT_12" | "UPLINK_COUNT_16"),
+                                                  ?fiber_optic_cable_type: ("SINGLE_MODE" | "MULTI_MODE"),
+                                                  ?optical_standard: ("OPTIC_10GBASE_SR" | "OPTIC_10GBASE_IR" | "OPTIC_10GBASE_LR" | "OPTIC_40GBASE_SR" | "OPTIC_40GBASE_ESR" | "OPTIC_40GBASE_IR4_LR4L" | "OPTIC_40GBASE_LR4" | "OPTIC_100GBASE_SR4" | "OPTIC_100GBASE_CWDM4" | "OPTIC_100GBASE_LR4" | "OPTIC_100G_PSM4_MSA" | "OPTIC_1000BASE_LX" | "OPTIC_1000BASE_SX"),
+                                                  ?maximum_supported_weight_lbs: ("NO_LIMIT" | "MAX_1400_LBS" | "MAX_1600_LBS" | "MAX_1800_LBS" | "MAX_2000_LBS")
+                                                ) -> _UpdateSiteRackPhysicalPropertiesResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSiteRackPhysicalPropertiesResponseSuccess
+    end
+  end
+end
+

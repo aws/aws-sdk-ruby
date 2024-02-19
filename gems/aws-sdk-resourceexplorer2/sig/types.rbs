@@ -1,0 +1,362 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ResourceExplorer2
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateDefaultViewInput
+      attr_accessor view_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateDefaultViewOutput
+      attr_accessor view_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetViewError
+      attr_accessor error_message: ::String
+      attr_accessor view_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetViewInput
+      attr_accessor view_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetViewOutput
+      attr_accessor errors: ::Array[Types::BatchGetViewError]
+      attr_accessor views: ::Array[Types::View]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIndexInput
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateIndexOutput
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "UPDATING")
+      SENSITIVE: []
+    end
+
+    class CreateViewInput
+      attr_accessor client_token: ::String
+      attr_accessor filters: Types::SearchFilter
+      attr_accessor included_properties: ::Array[Types::IncludedProperty]
+      attr_accessor scope: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor view_name: ::String
+      SENSITIVE: [:filters, :tags]
+    end
+
+    class CreateViewOutput
+      attr_accessor view: Types::View
+      SENSITIVE: []
+    end
+
+    class DeleteIndexInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIndexOutput
+      attr_accessor arn: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "UPDATING")
+      SENSITIVE: []
+    end
+
+    class DeleteViewInput
+      attr_accessor view_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteViewOutput
+      attr_accessor view_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccountLevelServiceConfigurationOutput
+      attr_accessor org_configuration: Types::OrgConfiguration
+      SENSITIVE: []
+    end
+
+    class GetDefaultViewOutput
+      attr_accessor view_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetIndexOutput
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor replicating_from: ::Array[::String]
+      attr_accessor replicating_to: ::Array[::String]
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "UPDATING")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("LOCAL" | "AGGREGATOR")
+      SENSITIVE: [:tags]
+    end
+
+    class GetViewInput
+      attr_accessor view_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetViewOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor view: Types::View
+      SENSITIVE: [:tags]
+    end
+
+    class IncludedProperty
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class Index
+      attr_accessor arn: ::String
+      attr_accessor region: ::String
+      attr_accessor type: ("LOCAL" | "AGGREGATOR")
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListIndexesForMembersInput
+      attr_accessor account_id_list: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIndexesForMembersOutput
+      attr_accessor indexes: ::Array[Types::MemberIndex]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIndexesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor regions: ::Array[::String]
+      attr_accessor type: ("LOCAL" | "AGGREGATOR")
+      SENSITIVE: []
+    end
+
+    class ListIndexesOutput
+      attr_accessor indexes: ::Array[Types::Index]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSupportedResourceTypesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSupportedResourceTypesOutput
+      attr_accessor next_token: ::String
+      attr_accessor resource_types: ::Array[Types::SupportedResourceType]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class ListViewsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListViewsOutput
+      attr_accessor next_token: ::String
+      attr_accessor views: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MemberIndex
+      attr_accessor account_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor region: ::String
+      attr_accessor type: ("LOCAL" | "AGGREGATOR")
+      SENSITIVE: []
+    end
+
+    class OrgConfiguration
+      attr_accessor aws_service_access_status: ("ENABLED" | "DISABLED")
+      attr_accessor service_linked_role: ::String
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor arn: ::String
+      attr_accessor last_reported_at: ::Time
+      attr_accessor owning_account_id: ::String
+      attr_accessor properties: ::Array[Types::ResourceProperty]
+      attr_accessor region: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceCount
+      attr_accessor complete: bool
+      attr_accessor total_resources: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceProperty
+      attr_accessor data: untyped
+      attr_accessor last_reported_at: ::Time
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class SearchFilter
+      attr_accessor filter_string: ::String
+      SENSITIVE: []
+    end
+
+    class SearchInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor query_string: ::String
+      attr_accessor view_arn: ::String
+      SENSITIVE: [:query_string]
+    end
+
+    class SearchOutput
+      attr_accessor count: Types::ResourceCount
+      attr_accessor next_token: ::String
+      attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor view_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SupportedResourceType
+      attr_accessor resource_type: ::String
+      attr_accessor service: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor resource_arn: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: [:tag_keys]
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateIndexTypeInput
+      attr_accessor arn: ::String
+      attr_accessor type: ("LOCAL" | "AGGREGATOR")
+      SENSITIVE: []
+    end
+
+    class UpdateIndexTypeOutput
+      attr_accessor arn: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor state: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "UPDATING")
+      attr_accessor type: ("LOCAL" | "AGGREGATOR")
+      SENSITIVE: []
+    end
+
+    class UpdateViewInput
+      attr_accessor filters: Types::SearchFilter
+      attr_accessor included_properties: ::Array[Types::IncludedProperty]
+      attr_accessor view_arn: ::String
+      SENSITIVE: [:filters]
+    end
+
+    class UpdateViewOutput
+      attr_accessor view: Types::View
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor validation_issue: ::String
+      SENSITIVE: []
+    end
+
+    class View
+      attr_accessor filters: Types::SearchFilter
+      attr_accessor included_properties: ::Array[Types::IncludedProperty]
+      attr_accessor last_updated_at: ::Time
+      attr_accessor owner: ::String
+      attr_accessor scope: ::String
+      attr_accessor view_arn: ::String
+      SENSITIVE: [:filters]
+    end
+  end
+end

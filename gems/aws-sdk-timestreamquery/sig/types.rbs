@@ -1,0 +1,407 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::TimestreamQuery
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CancelQueryRequest
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelQueryResponse
+      attr_accessor cancellation_message: ::String
+      SENSITIVE: []
+    end
+
+    class ColumnInfo
+      attr_accessor name: ::String
+      attr_accessor type: Types::Type
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateScheduledQueryRequest
+      attr_accessor name: ::String
+      attr_accessor query_string: ::String
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration
+      attr_accessor notification_configuration: Types::NotificationConfiguration
+      attr_accessor target_configuration: Types::TargetConfiguration
+      attr_accessor client_token: ::String
+      attr_accessor scheduled_query_execution_role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor kms_key_id: ::String
+      attr_accessor error_report_configuration: Types::ErrorReportConfiguration
+      SENSITIVE: [:query_string, :client_token]
+    end
+
+    class CreateScheduledQueryResponse
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class Datum
+      attr_accessor scalar_value: ::String
+      attr_accessor time_series_value: ::Array[Types::TimeSeriesDataPoint]
+      attr_accessor array_value: ::Array[Types::Datum]
+      attr_accessor row_value: Types::Row
+      attr_accessor null_value: bool
+      SENSITIVE: []
+    end
+
+    class DeleteScheduledQueryRequest
+      attr_accessor scheduled_query_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointsRequest < Aws::EmptyStructure
+    end
+
+    class DescribeEndpointsResponse
+      attr_accessor endpoints: ::Array[Types::Endpoint]
+      SENSITIVE: []
+    end
+
+    class DescribeScheduledQueryRequest
+      attr_accessor scheduled_query_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScheduledQueryResponse
+      attr_accessor scheduled_query: Types::ScheduledQueryDescription
+      SENSITIVE: []
+    end
+
+    class DimensionMapping
+      attr_accessor name: ::String
+      attr_accessor dimension_value_type: ("VARCHAR")
+      SENSITIVE: []
+    end
+
+    class Endpoint
+      attr_accessor address: ::String
+      attr_accessor cache_period_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class ErrorReportConfiguration
+      attr_accessor s3_configuration: Types::S3Configuration
+      SENSITIVE: []
+    end
+
+    class ErrorReportLocation
+      attr_accessor s3_report_location: Types::S3ReportLocation
+      SENSITIVE: []
+    end
+
+    class ExecuteScheduledQueryRequest
+      attr_accessor scheduled_query_arn: ::String
+      attr_accessor invocation_time: ::Time
+      attr_accessor client_token: ::String
+      SENSITIVE: [:client_token]
+    end
+
+    class ExecutionStats
+      attr_accessor execution_time_in_millis: ::Integer
+      attr_accessor data_writes: ::Integer
+      attr_accessor bytes_metered: ::Integer
+      attr_accessor records_ingested: ::Integer
+      attr_accessor query_result_rows: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidEndpointException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListScheduledQueriesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListScheduledQueriesResponse
+      attr_accessor scheduled_queries: ::Array[Types::ScheduledQuery]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MixedMeasureMapping
+      attr_accessor measure_name: ::String
+      attr_accessor source_column: ::String
+      attr_accessor target_measure_name: ::String
+      attr_accessor measure_value_type: ("BIGINT" | "BOOLEAN" | "DOUBLE" | "VARCHAR" | "MULTI")
+      attr_accessor multi_measure_attribute_mappings: ::Array[Types::MultiMeasureAttributeMapping]
+      SENSITIVE: []
+    end
+
+    class MultiMeasureAttributeMapping
+      attr_accessor source_column: ::String
+      attr_accessor target_multi_measure_attribute_name: ::String
+      attr_accessor measure_value_type: ("BIGINT" | "BOOLEAN" | "DOUBLE" | "VARCHAR" | "TIMESTAMP")
+      SENSITIVE: []
+    end
+
+    class MultiMeasureMappings
+      attr_accessor target_multi_measure_name: ::String
+      attr_accessor multi_measure_attribute_mappings: ::Array[Types::MultiMeasureAttributeMapping]
+      SENSITIVE: []
+    end
+
+    class NotificationConfiguration
+      attr_accessor sns_configuration: Types::SnsConfiguration
+      SENSITIVE: []
+    end
+
+    class ParameterMapping
+      attr_accessor name: ::String
+      attr_accessor type: Types::Type
+      SENSITIVE: []
+    end
+
+    class PrepareQueryRequest
+      attr_accessor query_string: ::String
+      attr_accessor validate_only: bool
+      SENSITIVE: [:query_string]
+    end
+
+    class PrepareQueryResponse
+      attr_accessor query_string: ::String
+      attr_accessor columns: ::Array[Types::SelectColumn]
+      attr_accessor parameters: ::Array[Types::ParameterMapping]
+      SENSITIVE: [:query_string]
+    end
+
+    class QueryExecutionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class QueryRequest
+      attr_accessor query_string: ::String
+      attr_accessor client_token: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_rows: ::Integer
+      SENSITIVE: [:query_string, :client_token]
+    end
+
+    class QueryResponse
+      attr_accessor query_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor rows: ::Array[Types::Row]
+      attr_accessor column_info: ::Array[Types::ColumnInfo]
+      attr_accessor query_status: Types::QueryStatus
+      SENSITIVE: []
+    end
+
+    class QueryStatus
+      attr_accessor progress_percentage: ::Float
+      attr_accessor cumulative_bytes_scanned: ::Integer
+      attr_accessor cumulative_bytes_metered: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor scheduled_query_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Row
+      attr_accessor data: ::Array[Types::Datum]
+      SENSITIVE: []
+    end
+
+    class S3Configuration
+      attr_accessor bucket_name: ::String
+      attr_accessor object_key_prefix: ::String
+      attr_accessor encryption_option: ("SSE_S3" | "SSE_KMS")
+      SENSITIVE: []
+    end
+
+    class S3ReportLocation
+      attr_accessor bucket_name: ::String
+      attr_accessor object_key: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduleConfiguration
+      attr_accessor schedule_expression: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduledQuery
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor previous_invocation_time: ::Time
+      attr_accessor next_invocation_time: ::Time
+      attr_accessor error_report_configuration: Types::ErrorReportConfiguration
+      attr_accessor target_destination: Types::TargetDestination
+      attr_accessor last_run_status: ("AUTO_TRIGGER_SUCCESS" | "AUTO_TRIGGER_FAILURE" | "MANUAL_TRIGGER_SUCCESS" | "MANUAL_TRIGGER_FAILURE")
+      SENSITIVE: []
+    end
+
+    class ScheduledQueryDescription
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor query_string: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor previous_invocation_time: ::Time
+      attr_accessor next_invocation_time: ::Time
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration
+      attr_accessor notification_configuration: Types::NotificationConfiguration
+      attr_accessor target_configuration: Types::TargetConfiguration
+      attr_accessor scheduled_query_execution_role_arn: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor error_report_configuration: Types::ErrorReportConfiguration
+      attr_accessor last_run_summary: Types::ScheduledQueryRunSummary
+      attr_accessor recently_failed_runs: ::Array[Types::ScheduledQueryRunSummary]
+      SENSITIVE: [:query_string]
+    end
+
+    class ScheduledQueryRunSummary
+      attr_accessor invocation_time: ::Time
+      attr_accessor trigger_time: ::Time
+      attr_accessor run_status: ("AUTO_TRIGGER_SUCCESS" | "AUTO_TRIGGER_FAILURE" | "MANUAL_TRIGGER_SUCCESS" | "MANUAL_TRIGGER_FAILURE")
+      attr_accessor execution_stats: Types::ExecutionStats
+      attr_accessor error_report_location: Types::ErrorReportLocation
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class SelectColumn
+      attr_accessor name: ::String
+      attr_accessor type: Types::Type
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor aliased: bool
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SnsConfiguration
+      attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TargetConfiguration
+      attr_accessor timestream_configuration: Types::TimestreamConfiguration
+      SENSITIVE: []
+    end
+
+    class TargetDestination
+      attr_accessor timestream_destination: Types::TimestreamDestination
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimeSeriesDataPoint
+      attr_accessor time: ::String
+      attr_accessor value: Types::Datum
+      SENSITIVE: []
+    end
+
+    class TimestreamConfiguration
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor time_column: ::String
+      attr_accessor dimension_mappings: ::Array[Types::DimensionMapping]
+      attr_accessor multi_measure_mappings: Types::MultiMeasureMappings
+      attr_accessor mixed_measure_mappings: ::Array[Types::MixedMeasureMapping]
+      attr_accessor measure_name_column: ::String
+      SENSITIVE: []
+    end
+
+    class TimestreamDestination
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class Type
+      attr_accessor scalar_type: ("VARCHAR" | "BOOLEAN" | "BIGINT" | "DOUBLE" | "TIMESTAMP" | "DATE" | "TIME" | "INTERVAL_DAY_TO_SECOND" | "INTERVAL_YEAR_TO_MONTH" | "UNKNOWN" | "INTEGER")
+      attr_accessor array_column_info: Types::ColumnInfo
+      attr_accessor time_series_measure_value_column_info: Types::ColumnInfo
+      attr_accessor row_column_info: ::Array[Types::ColumnInfo]
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateScheduledQueryRequest
+      attr_accessor scheduled_query_arn: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

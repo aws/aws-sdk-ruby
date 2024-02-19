@@ -1,0 +1,326 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::RDSDataService
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ArrayValue
+      attr_accessor boolean_values: ::Array[bool]
+      attr_accessor long_values: ::Array[::Integer]
+      attr_accessor double_values: ::Array[::Float]
+      attr_accessor string_values: ::Array[::String]
+      attr_accessor array_values: ::Array[Types::ArrayValue]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BooleanValues < ArrayValue
+      end
+      class LongValues < ArrayValue
+      end
+      class DoubleValues < ArrayValue
+      end
+      class StringValues < ArrayValue
+      end
+      class ArrayValues < ArrayValue
+      end
+      class Unknown < ArrayValue
+      end
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchExecuteStatementRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor sql: ::String
+      attr_accessor database: ::String
+      attr_accessor schema: ::String
+      attr_accessor parameter_sets: ::Array[::Array[Types::SqlParameter]]
+      attr_accessor transaction_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchExecuteStatementResponse
+      attr_accessor update_results: ::Array[Types::UpdateResult]
+      SENSITIVE: []
+    end
+
+    class BeginTransactionRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor database: ::String
+      attr_accessor schema: ::String
+      SENSITIVE: []
+    end
+
+    class BeginTransactionResponse
+      attr_accessor transaction_id: ::String
+      SENSITIVE: []
+    end
+
+    class ColumnMetadata
+      attr_accessor name: ::String
+      attr_accessor type: ::Integer
+      attr_accessor type_name: ::String
+      attr_accessor label: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor is_auto_increment: bool
+      attr_accessor is_signed: bool
+      attr_accessor is_currency: bool
+      attr_accessor is_case_sensitive: bool
+      attr_accessor nullable: ::Integer
+      attr_accessor precision: ::Integer
+      attr_accessor scale: ::Integer
+      attr_accessor array_base_column_type: ::Integer
+      SENSITIVE: []
+    end
+
+    class CommitTransactionRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor transaction_id: ::String
+      SENSITIVE: []
+    end
+
+    class CommitTransactionResponse
+      attr_accessor transaction_status: ::String
+      SENSITIVE: []
+    end
+
+    class DatabaseErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DatabaseNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DatabaseUnavailableException < Aws::EmptyStructure
+    end
+
+    class ExecuteSqlRequest
+      attr_accessor db_cluster_or_instance_arn: ::String
+      attr_accessor aws_secret_store_arn: ::String
+      attr_accessor sql_statements: ::String
+      attr_accessor database: ::String
+      attr_accessor schema: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteSqlResponse
+      attr_accessor sql_statement_results: ::Array[Types::SqlStatementResult]
+      SENSITIVE: []
+    end
+
+    class ExecuteStatementRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor sql: ::String
+      attr_accessor database: ::String
+      attr_accessor schema: ::String
+      attr_accessor parameters: ::Array[Types::SqlParameter]
+      attr_accessor transaction_id: ::String
+      attr_accessor include_result_metadata: bool
+      attr_accessor continue_after_timeout: bool
+      attr_accessor result_set_options: Types::ResultSetOptions
+      attr_accessor format_records_as: ("NONE" | "JSON")
+      SENSITIVE: []
+    end
+
+    class ExecuteStatementResponse
+      attr_accessor records: ::Array[::Array[Types::Field]]
+      attr_accessor column_metadata: ::Array[Types::ColumnMetadata]
+      attr_accessor number_of_records_updated: ::Integer
+      attr_accessor generated_fields: ::Array[Types::Field]
+      attr_accessor formatted_records: ::String
+      SENSITIVE: []
+    end
+
+    class Field
+      attr_accessor is_null: bool
+      attr_accessor boolean_value: bool
+      attr_accessor long_value: ::Integer
+      attr_accessor double_value: ::Float
+      attr_accessor string_value: ::String
+      attr_accessor blob_value: ::String
+      attr_accessor array_value: Types::ArrayValue
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IsNull < Field
+      end
+      class BooleanValue < Field
+      end
+      class LongValue < Field
+      end
+      class DoubleValue < Field
+      end
+      class StringValue < Field
+      end
+      class BlobValue < Field
+      end
+      class ArrayValue < Field
+      end
+      class Unknown < Field
+      end
+    end
+
+    class ForbiddenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HttpEndpointNotEnabledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException < Aws::EmptyStructure
+    end
+
+    class InvalidSecretException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Record
+      attr_accessor values: ::Array[Types::Value]
+      SENSITIVE: []
+    end
+
+    class ResultFrame
+      attr_accessor result_set_metadata: Types::ResultSetMetadata
+      attr_accessor records: ::Array[Types::Record]
+      SENSITIVE: []
+    end
+
+    class ResultSetMetadata
+      attr_accessor column_count: ::Integer
+      attr_accessor column_metadata: ::Array[Types::ColumnMetadata]
+      SENSITIVE: []
+    end
+
+    class ResultSetOptions
+      attr_accessor decimal_return_type: ("STRING" | "DOUBLE_OR_LONG")
+      attr_accessor long_return_type: ("STRING" | "LONG")
+      SENSITIVE: []
+    end
+
+    class RollbackTransactionRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor transaction_id: ::String
+      SENSITIVE: []
+    end
+
+    class RollbackTransactionResponse
+      attr_accessor transaction_status: ::String
+      SENSITIVE: []
+    end
+
+    class SecretsErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableError < Aws::EmptyStructure
+    end
+
+    class SqlParameter
+      attr_accessor name: ::String
+      attr_accessor value: Types::Field
+      attr_accessor type_hint: ("JSON" | "UUID" | "TIMESTAMP" | "DATE" | "TIME" | "DECIMAL")
+      SENSITIVE: []
+    end
+
+    class SqlStatementResult
+      attr_accessor result_frame: Types::ResultFrame
+      attr_accessor number_of_records_updated: ::Integer
+      SENSITIVE: []
+    end
+
+    class StatementTimeoutException
+      attr_accessor message: ::String
+      attr_accessor db_connection_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class StructValue
+      attr_accessor attributes: ::Array[Types::Value]
+      SENSITIVE: []
+    end
+
+    class TransactionNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedResultException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateResult
+      attr_accessor generated_fields: ::Array[Types::Field]
+      SENSITIVE: []
+    end
+
+    class Value
+      attr_accessor is_null: bool
+      attr_accessor bit_value: bool
+      attr_accessor big_int_value: ::Integer
+      attr_accessor int_value: ::Integer
+      attr_accessor double_value: ::Float
+      attr_accessor real_value: ::Float
+      attr_accessor string_value: ::String
+      attr_accessor blob_value: ::String
+      attr_accessor array_values: ::Array[Types::Value]
+      attr_accessor struct_value: Types::StructValue
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IsNull < Value
+      end
+      class BitValue < Value
+      end
+      class BigIntValue < Value
+      end
+      class IntValue < Value
+      end
+      class DoubleValue < Value
+      end
+      class RealValue < Value
+      end
+      class StringValue < Value
+      end
+      class BlobValue < Value
+      end
+      class ArrayValues < Value
+      end
+      class StructValue < Value
+      end
+      class Unknown < Value
+      end
+    end
+  end
+end

@@ -14,6 +14,7 @@ module Aws::Lightsail
       option(
         :endpoint_provider,
         doc_type: 'Aws::Lightsail::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::Lightsail
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -302,6 +304,8 @@ module Aws::Lightsail
             Aws::Lightsail::Endpoints::GetRelationalDatabaseSnapshots.build(context)
           when :get_relational_databases
             Aws::Lightsail::Endpoints::GetRelationalDatabases.build(context)
+          when :get_setup_history
+            Aws::Lightsail::Endpoints::GetSetupHistory.build(context)
           when :get_static_ip
             Aws::Lightsail::Endpoints::GetStaticIp.build(context)
           when :get_static_ips
@@ -334,6 +338,8 @@ module Aws::Lightsail
             Aws::Lightsail::Endpoints::SetIpAddressType.build(context)
           when :set_resource_access_for_bucket
             Aws::Lightsail::Endpoints::SetResourceAccessForBucket.build(context)
+          when :setup_instance_https
+            Aws::Lightsail::Endpoints::SetupInstanceHttps.build(context)
           when :start_gui_session
             Aws::Lightsail::Endpoints::StartGUISession.build(context)
           when :start_instance

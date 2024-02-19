@@ -391,13 +391,13 @@ module Aws::Amplify
     # Creates a new Amplify app.
     #
     # @option params [required, String] :name
-    #   The name for an Amplify app.
+    #   The name of the Amplify app.
     #
     # @option params [String] :description
-    #   The description for an Amplify app.
+    #   The description of the Amplify app.
     #
     # @option params [String] :repository
-    #   The repository for an Amplify app.
+    #   The Git repository for the Amplify app.
     #
     # @option params [String] :platform
     #   The platform for the Amplify app. For a static app, set the platform
@@ -430,7 +430,7 @@ module Aws::Amplify
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #
     # @option params [String] :access_token
     #   The personal access token for a GitHub repository for an Amplify app.
@@ -452,16 +452,24 @@ module Aws::Amplify
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #
     # @option params [Hash<String,String>] :environment_variables
     #   The environment variables map for an Amplify app.
+    #
+    #   For a list of the environment variables that are accessible to Amplify
+    #   by default, see [Amplify Environment variables][1] in the *Amplify
+    #   Hosting User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/amplify-console-environment-variables.html
     #
     # @option params [Boolean] :enable_branch_auto_build
     #   Enables the auto building of branches for an Amplify app.
     #
     # @option params [Boolean] :enable_branch_auto_deletion
-    #   Automatically disconnects a branch in the Amplify Console when you
+    #   Automatically disconnects a branch in the Amplify console when you
     #   delete a branch from your Git repository.
     #
     # @option params [Boolean] :enable_basic_auth
@@ -712,6 +720,10 @@ module Aws::Amplify
     #   The Amazon Resource Name (ARN) for a backend environment that is part
     #   of an Amplify app.
     #
+    # @option params [Types::Backend] :backend
+    #   The backend for a `Branch` of an Amplify app. Use for a backend
+    #   created from an CloudFormation stack.
+    #
     # @return [Types::CreateBranchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBranchResult#branch #branch} => Types::Branch
@@ -741,6 +753,9 @@ module Aws::Amplify
     #     enable_pull_request_preview: false,
     #     pull_request_environment_name: "PullRequestEnvironmentName",
     #     backend_environment_arn: "BackendEnvironmentArn",
+    #     backend: {
+    #       stack_arn: "StackArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -776,6 +791,7 @@ module Aws::Amplify
     #   resp.branch.destination_branch #=> String
     #   resp.branch.source_branch #=> String
     #   resp.branch.backend_environment_arn #=> String
+    #   resp.branch.backend.stack_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBranch AWS API Documentation
     #
@@ -789,11 +805,16 @@ module Aws::Amplify
     # Creates a deployment for a manually deployed Amplify app. Manually
     # deployed apps are not connected to a repository.
     #
+    # The maximum duration between the `CreateDeployment` call and the
+    # `StartDeployment` call cannot exceed 8 hours. If the duration exceeds
+    # 8 hours, the `StartDeployment` call and the associated `Job` will
+    # fail.
+    #
     # @option params [required, String] :app_id
     #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   The name for the branch, for the job.
+    #   The name of the branch to use for the job.
     #
     # @option params [Hash<String,String>] :file_map
     #   An optional file map that contains the file name as the key and the
@@ -855,6 +876,11 @@ module Aws::Amplify
     #   The required AWS Identity and Access Management (IAM) service role for
     #   the Amazon Resource Name (ARN) for automatically creating subdomains.
     #
+    # @option params [Types::CertificateSettings] :certificate_settings
+    #   The type of SSL/TLS certificate to use for your custom domain. If you
+    #   don't specify a certificate type, Amplify uses the default
+    #   certificate that it provisions and manages for you.
+    #
     # @return [Types::CreateDomainAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainAssociationResult#domain_association #domain_association} => Types::DomainAssociation
@@ -873,6 +899,10 @@ module Aws::Amplify
     #     ],
     #     auto_sub_domain_creation_patterns: ["AutoSubDomainCreationPattern"],
     #     auto_sub_domain_iam_role: "AutoSubDomainIAMRole",
+    #     certificate_settings: {
+    #       type: "AMPLIFY_MANAGED", # required, accepts AMPLIFY_MANAGED, CUSTOM
+    #       custom_certificate_arn: "CertificateArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -883,7 +913,8 @@ module Aws::Amplify
     #   resp.domain_association.auto_sub_domain_creation_patterns #=> Array
     #   resp.domain_association.auto_sub_domain_creation_patterns[0] #=> String
     #   resp.domain_association.auto_sub_domain_iam_role #=> String
-    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.update_status #=> String, one of "REQUESTING_CERTIFICATE", "PENDING_VERIFICATION", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
     #   resp.domain_association.sub_domains #=> Array
@@ -891,6 +922,9 @@ module Aws::Amplify
     #   resp.domain_association.sub_domains[0].sub_domain_setting.branch_name #=> String
     #   resp.domain_association.sub_domains[0].verified #=> Boolean
     #   resp.domain_association.sub_domains[0].dns_record #=> String
+    #   resp.domain_association.certificate.type #=> String, one of "AMPLIFY_MANAGED", "CUSTOM"
+    #   resp.domain_association.certificate.custom_certificate_arn #=> String
+    #   resp.domain_association.certificate.certificate_verification_dns_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateDomainAssociation AWS API Documentation
     #
@@ -1057,7 +1091,7 @@ module Aws::Amplify
     #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   The name for the branch.
+    #   The name of the branch.
     #
     # @return [Types::DeleteBranchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1103,6 +1137,7 @@ module Aws::Amplify
     #   resp.branch.destination_branch #=> String
     #   resp.branch.source_branch #=> String
     #   resp.branch.backend_environment_arn #=> String
+    #   resp.branch.backend.stack_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBranch AWS API Documentation
     #
@@ -1140,7 +1175,8 @@ module Aws::Amplify
     #   resp.domain_association.auto_sub_domain_creation_patterns #=> Array
     #   resp.domain_association.auto_sub_domain_creation_patterns[0] #=> String
     #   resp.domain_association.auto_sub_domain_iam_role #=> String
-    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.update_status #=> String, one of "REQUESTING_CERTIFICATE", "PENDING_VERIFICATION", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
     #   resp.domain_association.sub_domains #=> Array
@@ -1148,6 +1184,9 @@ module Aws::Amplify
     #   resp.domain_association.sub_domains[0].sub_domain_setting.branch_name #=> String
     #   resp.domain_association.sub_domains[0].verified #=> Boolean
     #   resp.domain_association.sub_domains[0].dns_record #=> String
+    #   resp.domain_association.certificate.type #=> String, one of "AMPLIFY_MANAGED", "CUSTOM"
+    #   resp.domain_association.certificate.custom_certificate_arn #=> String
+    #   resp.domain_association.certificate.certificate_verification_dns_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteDomainAssociation AWS API Documentation
     #
@@ -1164,7 +1203,7 @@ module Aws::Amplify
     #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   The name for the branch, for the job.
+    #   The name of the branch to use for the job.
     #
     # @option params [required, String] :job_id
     #   The unique ID for the job.
@@ -1279,7 +1318,7 @@ module Aws::Amplify
       req.send_request(options)
     end
 
-    # Returns an existing Amplify app by appID.
+    # Returns an existing Amplify app specified by an app ID.
     #
     # @option params [required, String] :app_id
     #   The unique ID for an Amplify app.
@@ -1423,7 +1462,7 @@ module Aws::Amplify
     #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   The name for the branch.
+    #   The name of the branch.
     #
     # @return [Types::GetBranchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1469,6 +1508,7 @@ module Aws::Amplify
     #   resp.branch.destination_branch #=> String
     #   resp.branch.source_branch #=> String
     #   resp.branch.backend_environment_arn #=> String
+    #   resp.branch.backend.stack_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBranch AWS API Documentation
     #
@@ -1506,7 +1546,8 @@ module Aws::Amplify
     #   resp.domain_association.auto_sub_domain_creation_patterns #=> Array
     #   resp.domain_association.auto_sub_domain_creation_patterns[0] #=> String
     #   resp.domain_association.auto_sub_domain_iam_role #=> String
-    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.update_status #=> String, one of "REQUESTING_CERTIFICATE", "PENDING_VERIFICATION", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
     #   resp.domain_association.sub_domains #=> Array
@@ -1514,6 +1555,9 @@ module Aws::Amplify
     #   resp.domain_association.sub_domains[0].sub_domain_setting.branch_name #=> String
     #   resp.domain_association.sub_domains[0].verified #=> Boolean
     #   resp.domain_association.sub_domains[0].dns_record #=> String
+    #   resp.domain_association.certificate.type #=> String, one of "AMPLIFY_MANAGED", "CUSTOM"
+    #   resp.domain_association.certificate.custom_certificate_arn #=> String
+    #   resp.domain_association.certificate.certificate_verification_dns_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetDomainAssociation AWS API Documentation
     #
@@ -1530,7 +1574,7 @@ module Aws::Amplify
     #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   The branch name for the job.
+    #   The name of the branch to use for the job.
     #
     # @option params [required, String] :job_id
     #   The unique ID for the job.
@@ -1629,6 +1673,8 @@ module Aws::Amplify
     #
     #   * {Types::ListAppsResult#apps #apps} => Array&lt;Types::App&gt;
     #   * {Types::ListAppsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1813,6 +1859,8 @@ module Aws::Amplify
     #   * {Types::ListBranchesResult#branches #branches} => Array&lt;Types::Branch&gt;
     #   * {Types::ListBranchesResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_branches({
@@ -1855,6 +1903,7 @@ module Aws::Amplify
     #   resp.branches[0].destination_branch #=> String
     #   resp.branches[0].source_branch #=> String
     #   resp.branches[0].backend_environment_arn #=> String
+    #   resp.branches[0].backend.stack_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListBranches AWS API Documentation
@@ -1884,6 +1933,8 @@ module Aws::Amplify
     #   * {Types::ListDomainAssociationsResult#domain_associations #domain_associations} => Array&lt;Types::DomainAssociation&gt;
     #   * {Types::ListDomainAssociationsResult#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_domain_associations({
@@ -1901,7 +1952,8 @@ module Aws::Amplify
     #   resp.domain_associations[0].auto_sub_domain_creation_patterns #=> Array
     #   resp.domain_associations[0].auto_sub_domain_creation_patterns[0] #=> String
     #   resp.domain_associations[0].auto_sub_domain_iam_role #=> String
-    #   resp.domain_associations[0].domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_associations[0].domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_associations[0].update_status #=> String, one of "REQUESTING_CERTIFICATE", "PENDING_VERIFICATION", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.domain_associations[0].status_reason #=> String
     #   resp.domain_associations[0].certificate_verification_dns_record #=> String
     #   resp.domain_associations[0].sub_domains #=> Array
@@ -1909,6 +1961,9 @@ module Aws::Amplify
     #   resp.domain_associations[0].sub_domains[0].sub_domain_setting.branch_name #=> String
     #   resp.domain_associations[0].sub_domains[0].verified #=> Boolean
     #   resp.domain_associations[0].sub_domains[0].dns_record #=> String
+    #   resp.domain_associations[0].certificate.type #=> String, one of "AMPLIFY_MANAGED", "CUSTOM"
+    #   resp.domain_associations[0].certificate.custom_certificate_arn #=> String
+    #   resp.domain_associations[0].certificate.certificate_verification_dns_record #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListDomainAssociations AWS API Documentation
@@ -1926,7 +1981,7 @@ module Aws::Amplify
     #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   The name for a branch.
+    #   The name of the branch to use for the request.
     #
     # @option params [String] :next_token
     #   A pagination token. Set to null to start listing steps from the start.
@@ -1940,6 +1995,8 @@ module Aws::Amplify
     #
     #   * {Types::ListJobsResult#job_summaries #job_summaries} => Array&lt;Types::JobSummary&gt;
     #   * {Types::ListJobsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -2052,11 +2109,16 @@ module Aws::Amplify
     # Starts a deployment for a manually deployed app. Manually deployed
     # apps are not connected to a repository.
     #
+    # The maximum duration between the `CreateDeployment` call and the
+    # `StartDeployment` call cannot exceed 8 hours. If the duration exceeds
+    # 8 hours, the `StartDeployment` call and the associated `Job` will
+    # fail.
+    #
     # @option params [required, String] :app_id
     #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   The name for the branch, for the job.
+    #   The name of the branch to use for the job.
     #
     # @option params [String] :job_id
     #   The job ID for this deployment, generated by the create deployment
@@ -2107,7 +2169,7 @@ module Aws::Amplify
     #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   The branch name for the job.
+    #   The name of the branch to use for the job.
     #
     # @option params [String] :job_id
     #   The unique ID for an existing job. This is required if the value of
@@ -2116,12 +2178,13 @@ module Aws::Amplify
     # @option params [required, String] :job_type
     #   Describes the type for the job. The job type `RELEASE` starts a new
     #   job with the latest change from the specified branch. This value is
-    #   available only for apps that are connected to a repository. The job
-    #   type `RETRY` retries an existing job. If the job type value is
+    #   available only for apps that are connected to a repository.
+    #
+    #   The job type `RETRY` retries an existing job. If the job type value is
     #   `RETRY`, the `jobId` is also required.
     #
     # @option params [String] :job_reason
-    #   A descriptive reason for starting this job.
+    #   A descriptive reason for starting the job.
     #
     # @option params [String] :commit_id
     #   The commit ID from a third-party repository provider for the job.
@@ -2176,7 +2239,7 @@ module Aws::Amplify
     #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   The name for the branch, for the job.
+    #   The name of the branch to use for the stop job request.
     #
     # @option params [required, String] :job_id
     #   The unique id for the job.
@@ -2297,7 +2360,7 @@ module Aws::Amplify
     #   Enables branch auto-building for an Amplify app.
     #
     # @option params [Boolean] :enable_branch_auto_deletion
-    #   Automatically disconnects a branch in the Amplify Console when you
+    #   Automatically disconnects a branch in the Amplify console when you
     #   delete a branch from your Git repository.
     #
     # @option params [Boolean] :enable_basic_auth
@@ -2328,7 +2391,7 @@ module Aws::Amplify
     #   The automated branch creation configuration for an Amplify app.
     #
     # @option params [String] :repository
-    #   The name of the repository for an Amplify app
+    #   The name of the Git repository for an Amplify app.
     #
     # @option params [String] :oauth_token
     #   The OAuth token for a third-party source control system for an Amplify
@@ -2352,7 +2415,7 @@ module Aws::Amplify
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #
     # @option params [String] :access_token
     #   The personal access token for a GitHub repository for an Amplify app.
@@ -2374,7 +2437,7 @@ module Aws::Amplify
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #
     # @return [Types::UpdateAppResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2488,7 +2551,7 @@ module Aws::Amplify
     #   The unique ID for an Amplify app.
     #
     # @option params [required, String] :branch_name
-    #   The name for the branch.
+    #   The name of the branch.
     #
     # @option params [String] :description
     #   The description for the branch.
@@ -2544,6 +2607,10 @@ module Aws::Amplify
     #   The Amazon Resource Name (ARN) for a backend environment that is part
     #   of an Amplify app.
     #
+    # @option params [Types::Backend] :backend
+    #   The backend for a `Branch` of an Amplify app. Use for a backend
+    #   created from an CloudFormation stack.
+    #
     # @return [Types::UpdateBranchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBranchResult#branch #branch} => Types::Branch
@@ -2570,6 +2637,9 @@ module Aws::Amplify
     #     enable_pull_request_preview: false,
     #     pull_request_environment_name: "PullRequestEnvironmentName",
     #     backend_environment_arn: "BackendEnvironmentArn",
+    #     backend: {
+    #       stack_arn: "StackArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2605,6 +2675,7 @@ module Aws::Amplify
     #   resp.branch.destination_branch #=> String
     #   resp.branch.source_branch #=> String
     #   resp.branch.backend_environment_arn #=> String
+    #   resp.branch.backend.stack_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateBranch AWS API Documentation
     #
@@ -2636,6 +2707,9 @@ module Aws::Amplify
     #   The required AWS Identity and Access Management (IAM) service role for
     #   the Amazon Resource Name (ARN) for automatically creating subdomains.
     #
+    # @option params [Types::CertificateSettings] :certificate_settings
+    #   The type of SSL/TLS certificate to use for your custom domain.
+    #
     # @return [Types::UpdateDomainAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainAssociationResult#domain_association #domain_association} => Types::DomainAssociation
@@ -2654,6 +2728,10 @@ module Aws::Amplify
     #     ],
     #     auto_sub_domain_creation_patterns: ["AutoSubDomainCreationPattern"],
     #     auto_sub_domain_iam_role: "AutoSubDomainIAMRole",
+    #     certificate_settings: {
+    #       type: "AMPLIFY_MANAGED", # required, accepts AMPLIFY_MANAGED, CUSTOM
+    #       custom_certificate_arn: "CertificateArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2664,7 +2742,8 @@ module Aws::Amplify
     #   resp.domain_association.auto_sub_domain_creation_patterns #=> Array
     #   resp.domain_association.auto_sub_domain_creation_patterns[0] #=> String
     #   resp.domain_association.auto_sub_domain_iam_role #=> String
-    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "PENDING_DEPLOYMENT", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.domain_status #=> String, one of "PENDING_VERIFICATION", "IN_PROGRESS", "AVAILABLE", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "FAILED", "CREATING", "REQUESTING_CERTIFICATE", "UPDATING"
+    #   resp.domain_association.update_status #=> String, one of "REQUESTING_CERTIFICATE", "PENDING_VERIFICATION", "IMPORTING_CUSTOM_CERTIFICATE", "PENDING_DEPLOYMENT", "AWAITING_APP_CNAME", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.domain_association.status_reason #=> String
     #   resp.domain_association.certificate_verification_dns_record #=> String
     #   resp.domain_association.sub_domains #=> Array
@@ -2672,6 +2751,9 @@ module Aws::Amplify
     #   resp.domain_association.sub_domains[0].sub_domain_setting.branch_name #=> String
     #   resp.domain_association.sub_domains[0].verified #=> Boolean
     #   resp.domain_association.sub_domains[0].dns_record #=> String
+    #   resp.domain_association.certificate.type #=> String, one of "AMPLIFY_MANAGED", "CUSTOM"
+    #   resp.domain_association.certificate.custom_certificate_arn #=> String
+    #   resp.domain_association.certificate.certificate_verification_dns_record #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateDomainAssociation AWS API Documentation
     #
@@ -2737,7 +2819,7 @@ module Aws::Amplify
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

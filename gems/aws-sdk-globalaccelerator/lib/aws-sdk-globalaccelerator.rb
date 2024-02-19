@@ -52,6 +52,6 @@ require_relative 'aws-sdk-globalaccelerator/customizations'
 # @!group service
 module Aws::GlobalAccelerator
 
-  GEM_VERSION = '1.52.0'
+  GEM_VERSION = '1.56.0'
 
 end

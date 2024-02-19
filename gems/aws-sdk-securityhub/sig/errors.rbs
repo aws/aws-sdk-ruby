@@ -1,0 +1,48 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SecurityHub
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class InternalException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class InvalidAccessException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class InvalidInputException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class ResourceConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class ResourceInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+    end
+  end
+end

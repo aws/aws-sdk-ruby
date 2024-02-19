@@ -1,0 +1,95 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module NeptuneGraph
+    module Waiters
+
+      class GraphAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    graph_identifier: ::String
+                  ) -> Client::_GetGraphResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetGraphResponseSuccess
+      end
+
+      class GraphDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    graph_identifier: ::String
+                  ) -> Client::_GetGraphResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetGraphResponseSuccess
+      end
+
+      class GraphSnapshotAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    snapshot_identifier: ::String
+                  ) -> Client::_GetGraphSnapshotResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetGraphSnapshotResponseSuccess
+      end
+
+      class GraphSnapshotDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    snapshot_identifier: ::String
+                  ) -> Client::_GetGraphSnapshotResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetGraphSnapshotResponseSuccess
+      end
+
+      class ImportTaskCancelled
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    task_identifier: ::String
+                  ) -> Client::_GetImportTaskResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetImportTaskResponseSuccess
+      end
+
+      class ImportTaskSuccessful
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    task_identifier: ::String
+                  ) -> Client::_GetImportTaskResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetImportTaskResponseSuccess
+      end
+
+      class PrivateGraphEndpointAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    graph_identifier: ::String,
+                    vpc_id: ::String
+                  ) -> Client::_GetPrivateGraphEndpointResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetPrivateGraphEndpointResponseSuccess
+      end
+
+      class PrivateGraphEndpointDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    graph_identifier: ::String,
+                    vpc_id: ::String
+                  ) -> Client::_GetPrivateGraphEndpointResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetPrivateGraphEndpointResponseSuccess
+      end
+    end
+  end
+end

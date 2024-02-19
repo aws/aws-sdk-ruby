@@ -1,0 +1,1481 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Lambda
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?event_stream_handler: Proc,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?input_event_stream_handler: Proc,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?output_event_stream_handler: Proc,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddLayerVersionPermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddLayerVersionPermissionResponse]
+        def statement: () -> ::String
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#add_layer_version_permission-instance_method
+      def add_layer_version_permission: (
+                                          layer_name: ::String,
+                                          version_number: ::Integer,
+                                          statement_id: ::String,
+                                          action: ::String,
+                                          principal: ::String,
+                                          ?organization_id: ::String,
+                                          ?revision_id: ::String
+                                        ) -> _AddLayerVersionPermissionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddLayerVersionPermissionResponseSuccess
+
+      interface _AddPermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddPermissionResponse]
+        def statement: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#add_permission-instance_method
+      def add_permission: (
+                            function_name: ::String,
+                            statement_id: ::String,
+                            action: ::String,
+                            principal: ::String,
+                            ?source_arn: ::String,
+                            ?source_account: ::String,
+                            ?event_source_token: ::String,
+                            ?qualifier: ::String,
+                            ?revision_id: ::String,
+                            ?principal_org_id: ::String,
+                            ?function_url_auth_type: ("NONE" | "AWS_IAM")
+                          ) -> _AddPermissionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddPermissionResponseSuccess
+
+      interface _CreateAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AliasConfiguration]
+        def alias_arn: () -> ::String
+        def name: () -> ::String
+        def function_version: () -> ::String
+        def description: () -> ::String
+        def routing_config: () -> Types::AliasRoutingConfiguration
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#create_alias-instance_method
+      def create_alias: (
+                          function_name: ::String,
+                          name: ::String,
+                          function_version: ::String,
+                          ?description: ::String,
+                          ?routing_config: {
+                            additional_version_weights: Hash[::String, ::Float]?
+                          }
+                        ) -> _CreateAliasResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAliasResponseSuccess
+
+      interface _CreateCodeSigningConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCodeSigningConfigResponse]
+        def code_signing_config: () -> Types::CodeSigningConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#create_code_signing_config-instance_method
+      def create_code_signing_config: (
+                                        ?description: ::String,
+                                        allowed_publishers: {
+                                          signing_profile_version_arns: Array[::String]
+                                        },
+                                        ?code_signing_policies: {
+                                          untrusted_artifact_on_deployment: ("Warn" | "Enforce")?
+                                        }
+                                      ) -> _CreateCodeSigningConfigResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCodeSigningConfigResponseSuccess
+
+      interface _CreateEventSourceMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EventSourceMappingConfiguration]
+        def uuid: () -> ::String
+        def starting_position: () -> ("TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP")
+        def starting_position_timestamp: () -> ::Time
+        def batch_size: () -> ::Integer
+        def maximum_batching_window_in_seconds: () -> ::Integer
+        def parallelization_factor: () -> ::Integer
+        def event_source_arn: () -> ::String
+        def filter_criteria: () -> Types::FilterCriteria
+        def function_arn: () -> ::String
+        def last_modified: () -> ::Time
+        def last_processing_result: () -> ::String
+        def state: () -> ::String
+        def state_transition_reason: () -> ::String
+        def destination_config: () -> Types::DestinationConfig
+        def topics: () -> ::Array[::String]
+        def queues: () -> ::Array[::String]
+        def source_access_configurations: () -> ::Array[Types::SourceAccessConfiguration]
+        def self_managed_event_source: () -> Types::SelfManagedEventSource
+        def maximum_record_age_in_seconds: () -> ::Integer
+        def bisect_batch_on_function_error: () -> bool
+        def maximum_retry_attempts: () -> ::Integer
+        def tumbling_window_in_seconds: () -> ::Integer
+        def function_response_types: () -> ::Array[("ReportBatchItemFailures")]
+        def amazon_managed_kafka_event_source_config: () -> Types::AmazonManagedKafkaEventSourceConfig
+        def self_managed_kafka_event_source_config: () -> Types::SelfManagedKafkaEventSourceConfig
+        def scaling_config: () -> Types::ScalingConfig
+        def document_db_event_source_config: () -> Types::DocumentDBEventSourceConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#create_event_source_mapping-instance_method
+      def create_event_source_mapping: (
+                                         ?event_source_arn: ::String,
+                                         function_name: ::String,
+                                         ?enabled: bool,
+                                         ?batch_size: ::Integer,
+                                         ?filter_criteria: {
+                                           filters: Array[
+                                             {
+                                               pattern: ::String?
+                                             },
+                                           ]?
+                                         },
+                                         ?maximum_batching_window_in_seconds: ::Integer,
+                                         ?parallelization_factor: ::Integer,
+                                         ?starting_position: ("TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP"),
+                                         ?starting_position_timestamp: ::Time,
+                                         ?destination_config: {
+                                           on_success: {
+                                             destination: ::String?
+                                           }?,
+                                           on_failure: {
+                                             destination: ::String?
+                                           }?
+                                         },
+                                         ?maximum_record_age_in_seconds: ::Integer,
+                                         ?bisect_batch_on_function_error: bool,
+                                         ?maximum_retry_attempts: ::Integer,
+                                         ?tumbling_window_in_seconds: ::Integer,
+                                         ?topics: Array[::String],
+                                         ?queues: Array[::String],
+                                         ?source_access_configurations: Array[
+                                           {
+                                             type: ("BASIC_AUTH" | "VPC_SUBNET" | "VPC_SECURITY_GROUP" | "SASL_SCRAM_512_AUTH" | "SASL_SCRAM_256_AUTH" | "VIRTUAL_HOST" | "CLIENT_CERTIFICATE_TLS_AUTH" | "SERVER_ROOT_CA_CERTIFICATE")?,
+                                             uri: ::String?
+                                           },
+                                         ],
+                                         ?self_managed_event_source: {
+                                           endpoints: Hash[("KAFKA_BOOTSTRAP_SERVERS"), Array[::String]]?
+                                         },
+                                         ?function_response_types: Array[("ReportBatchItemFailures")],
+                                         ?amazon_managed_kafka_event_source_config: {
+                                           consumer_group_id: ::String?
+                                         },
+                                         ?self_managed_kafka_event_source_config: {
+                                           consumer_group_id: ::String?
+                                         },
+                                         ?scaling_config: {
+                                           maximum_concurrency: ::Integer?
+                                         },
+                                         ?document_db_event_source_config: {
+                                           database_name: ::String?,
+                                           collection_name: ::String?,
+                                           full_document: ("UpdateLookup" | "Default")?
+                                         }
+                                       ) -> _CreateEventSourceMappingResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventSourceMappingResponseSuccess
+
+      interface _CreateFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
+        def function_name: () -> ::String
+        def function_arn: () -> ::String
+        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")
+        def role: () -> ::String
+        def handler: () -> ::String
+        def code_size: () -> ::Integer
+        def description: () -> ::String
+        def timeout: () -> ::Integer
+        def memory_size: () -> ::Integer
+        def last_modified: () -> ::Time
+        def code_sha_256: () -> ::String
+        def version: () -> ::String
+        def vpc_config: () -> Types::VpcConfigResponse
+        def dead_letter_config: () -> Types::DeadLetterConfig
+        def environment: () -> Types::EnvironmentResponse
+        def kms_key_arn: () -> ::String
+        def tracing_config: () -> Types::TracingConfigResponse
+        def master_arn: () -> ::String
+        def revision_id: () -> ::String
+        def layers: () -> ::Array[Types::Layer]
+        def state: () -> ("Pending" | "Active" | "Inactive" | "Failed")
+        def state_reason: () -> ::String
+        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
+        def last_update_status_reason: () -> ::String
+        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def file_system_configs: () -> ::Array[Types::FileSystemConfig]
+        def package_type: () -> ("Zip" | "Image")
+        def image_config_response: () -> Types::ImageConfigResponse
+        def signing_profile_version_arn: () -> ::String
+        def signing_job_arn: () -> ::String
+        def architectures: () -> ::Array[("x86_64" | "arm64")]
+        def ephemeral_storage: () -> Types::EphemeralStorage
+        def snap_start: () -> Types::SnapStartResponse
+        def runtime_version_config: () -> Types::RuntimeVersionConfig
+        def logging_config: () -> Types::LoggingConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#create_function-instance_method
+      def create_function: (
+                             function_name: ::String,
+                             ?runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21"),
+                             role: ::String,
+                             ?handler: ::String,
+                             code: {
+                               zip_file: ::String?,
+                               s3_bucket: ::String?,
+                               s3_key: ::String?,
+                               s3_object_version: ::String?,
+                               image_uri: ::String?
+                             },
+                             ?description: ::String,
+                             ?timeout: ::Integer,
+                             ?memory_size: ::Integer,
+                             ?publish: bool,
+                             ?vpc_config: {
+                               subnet_ids: Array[::String]?,
+                               security_group_ids: Array[::String]?,
+                               ipv_6_allowed_for_dual_stack: bool?
+                             },
+                             ?package_type: ("Zip" | "Image"),
+                             ?dead_letter_config: {
+                               target_arn: ::String?
+                             },
+                             ?environment: {
+                               variables: Hash[::String, ::String]?
+                             },
+                             ?kms_key_arn: ::String,
+                             ?tracing_config: {
+                               mode: ("Active" | "PassThrough")?
+                             },
+                             ?tags: Hash[::String, ::String],
+                             ?layers: Array[::String],
+                             ?file_system_configs: Array[
+                               {
+                                 arn: ::String,
+                                 local_mount_path: ::String
+                               },
+                             ],
+                             ?image_config: {
+                               entry_point: Array[::String]?,
+                               command: Array[::String]?,
+                               working_directory: ::String?
+                             },
+                             ?code_signing_config_arn: ::String,
+                             ?architectures: Array[("x86_64" | "arm64")],
+                             ?ephemeral_storage: {
+                               size: ::Integer
+                             },
+                             ?snap_start: {
+                               apply_on: ("PublishedVersions" | "None")?
+                             },
+                             ?logging_config: {
+                               log_format: ("JSON" | "Text")?,
+                               application_log_level: ("TRACE" | "DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL")?,
+                               system_log_level: ("DEBUG" | "INFO" | "WARN")?,
+                               log_group: ::String?
+                             }
+                           ) -> _CreateFunctionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFunctionResponseSuccess
+
+      interface _CreateFunctionUrlConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFunctionUrlConfigResponse]
+        def function_url: () -> ::String
+        def function_arn: () -> ::String
+        def auth_type: () -> ("NONE" | "AWS_IAM")
+        def cors: () -> Types::Cors
+        def creation_time: () -> ::Time
+        def invoke_mode: () -> ("BUFFERED" | "RESPONSE_STREAM")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#create_function_url_config-instance_method
+      def create_function_url_config: (
+                                        function_name: ::String,
+                                        ?qualifier: ::String,
+                                        auth_type: ("NONE" | "AWS_IAM"),
+                                        ?cors: {
+                                          allow_credentials: bool?,
+                                          allow_headers: Array[::String]?,
+                                          allow_methods: Array[::String]?,
+                                          allow_origins: Array[::String]?,
+                                          expose_headers: Array[::String]?,
+                                          max_age: ::Integer?
+                                        },
+                                        ?invoke_mode: ("BUFFERED" | "RESPONSE_STREAM")
+                                      ) -> _CreateFunctionUrlConfigResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFunctionUrlConfigResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#delete_alias-instance_method
+      def delete_alias: (
+                          function_name: ::String,
+                          name: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteCodeSigningConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCodeSigningConfigResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#delete_code_signing_config-instance_method
+      def delete_code_signing_config: (
+                                        code_signing_config_arn: ::String
+                                      ) -> _DeleteCodeSigningConfigResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCodeSigningConfigResponseSuccess
+
+      interface _DeleteEventSourceMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EventSourceMappingConfiguration]
+        def uuid: () -> ::String
+        def starting_position: () -> ("TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP")
+        def starting_position_timestamp: () -> ::Time
+        def batch_size: () -> ::Integer
+        def maximum_batching_window_in_seconds: () -> ::Integer
+        def parallelization_factor: () -> ::Integer
+        def event_source_arn: () -> ::String
+        def filter_criteria: () -> Types::FilterCriteria
+        def function_arn: () -> ::String
+        def last_modified: () -> ::Time
+        def last_processing_result: () -> ::String
+        def state: () -> ::String
+        def state_transition_reason: () -> ::String
+        def destination_config: () -> Types::DestinationConfig
+        def topics: () -> ::Array[::String]
+        def queues: () -> ::Array[::String]
+        def source_access_configurations: () -> ::Array[Types::SourceAccessConfiguration]
+        def self_managed_event_source: () -> Types::SelfManagedEventSource
+        def maximum_record_age_in_seconds: () -> ::Integer
+        def bisect_batch_on_function_error: () -> bool
+        def maximum_retry_attempts: () -> ::Integer
+        def tumbling_window_in_seconds: () -> ::Integer
+        def function_response_types: () -> ::Array[("ReportBatchItemFailures")]
+        def amazon_managed_kafka_event_source_config: () -> Types::AmazonManagedKafkaEventSourceConfig
+        def self_managed_kafka_event_source_config: () -> Types::SelfManagedKafkaEventSourceConfig
+        def scaling_config: () -> Types::ScalingConfig
+        def document_db_event_source_config: () -> Types::DocumentDBEventSourceConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#delete_event_source_mapping-instance_method
+      def delete_event_source_mapping: (
+                                         uuid: ::String
+                                       ) -> _DeleteEventSourceMappingResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEventSourceMappingResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#delete_function-instance_method
+      def delete_function: (
+                             function_name: ::String,
+                             ?qualifier: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#delete_function_code_signing_config-instance_method
+      def delete_function_code_signing_config: (
+                                                 function_name: ::String
+                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#delete_function_concurrency-instance_method
+      def delete_function_concurrency: (
+                                         function_name: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#delete_function_event_invoke_config-instance_method
+      def delete_function_event_invoke_config: (
+                                                 function_name: ::String,
+                                                 ?qualifier: ::String
+                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#delete_function_url_config-instance_method
+      def delete_function_url_config: (
+                                        function_name: ::String,
+                                        ?qualifier: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#delete_layer_version-instance_method
+      def delete_layer_version: (
+                                  layer_name: ::String,
+                                  version_number: ::Integer
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#delete_provisioned_concurrency_config-instance_method
+      def delete_provisioned_concurrency_config: (
+                                                   function_name: ::String,
+                                                   qualifier: ::String
+                                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountSettingsResponse]
+        def account_limit: () -> Types::AccountLimit
+        def account_usage: () -> Types::AccountUsage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_account_settings-instance_method
+      def get_account_settings: (
+                                ) -> _GetAccountSettingsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountSettingsResponseSuccess
+
+      interface _GetAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AliasConfiguration]
+        def alias_arn: () -> ::String
+        def name: () -> ::String
+        def function_version: () -> ::String
+        def description: () -> ::String
+        def routing_config: () -> Types::AliasRoutingConfiguration
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_alias-instance_method
+      def get_alias: (
+                       function_name: ::String,
+                       name: ::String
+                     ) -> _GetAliasResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAliasResponseSuccess
+
+      interface _GetCodeSigningConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCodeSigningConfigResponse]
+        def code_signing_config: () -> Types::CodeSigningConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_code_signing_config-instance_method
+      def get_code_signing_config: (
+                                     code_signing_config_arn: ::String
+                                   ) -> _GetCodeSigningConfigResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCodeSigningConfigResponseSuccess
+
+      interface _GetEventSourceMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EventSourceMappingConfiguration]
+        def uuid: () -> ::String
+        def starting_position: () -> ("TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP")
+        def starting_position_timestamp: () -> ::Time
+        def batch_size: () -> ::Integer
+        def maximum_batching_window_in_seconds: () -> ::Integer
+        def parallelization_factor: () -> ::Integer
+        def event_source_arn: () -> ::String
+        def filter_criteria: () -> Types::FilterCriteria
+        def function_arn: () -> ::String
+        def last_modified: () -> ::Time
+        def last_processing_result: () -> ::String
+        def state: () -> ::String
+        def state_transition_reason: () -> ::String
+        def destination_config: () -> Types::DestinationConfig
+        def topics: () -> ::Array[::String]
+        def queues: () -> ::Array[::String]
+        def source_access_configurations: () -> ::Array[Types::SourceAccessConfiguration]
+        def self_managed_event_source: () -> Types::SelfManagedEventSource
+        def maximum_record_age_in_seconds: () -> ::Integer
+        def bisect_batch_on_function_error: () -> bool
+        def maximum_retry_attempts: () -> ::Integer
+        def tumbling_window_in_seconds: () -> ::Integer
+        def function_response_types: () -> ::Array[("ReportBatchItemFailures")]
+        def amazon_managed_kafka_event_source_config: () -> Types::AmazonManagedKafkaEventSourceConfig
+        def self_managed_kafka_event_source_config: () -> Types::SelfManagedKafkaEventSourceConfig
+        def scaling_config: () -> Types::ScalingConfig
+        def document_db_event_source_config: () -> Types::DocumentDBEventSourceConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_event_source_mapping-instance_method
+      def get_event_source_mapping: (
+                                      uuid: ::String
+                                    ) -> _GetEventSourceMappingResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventSourceMappingResponseSuccess
+
+      interface _GetFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFunctionResponse]
+        def configuration: () -> Types::FunctionConfiguration
+        def code: () -> Types::FunctionCodeLocation
+        def tags: () -> ::Hash[::String, ::String]
+        def concurrency: () -> Types::Concurrency
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_function-instance_method
+      def get_function: (
+                          function_name: ::String,
+                          ?qualifier: ::String
+                        ) -> _GetFunctionResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionResponseSuccess
+
+      interface _GetFunctionCodeSigningConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFunctionCodeSigningConfigResponse]
+        def code_signing_config_arn: () -> ::String
+        def function_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_function_code_signing_config-instance_method
+      def get_function_code_signing_config: (
+                                              function_name: ::String
+                                            ) -> _GetFunctionCodeSigningConfigResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionCodeSigningConfigResponseSuccess
+
+      interface _GetFunctionConcurrencyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFunctionConcurrencyResponse]
+        def reserved_concurrent_executions: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_function_concurrency-instance_method
+      def get_function_concurrency: (
+                                      function_name: ::String
+                                    ) -> _GetFunctionConcurrencyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionConcurrencyResponseSuccess
+
+      interface _GetFunctionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
+        def function_name: () -> ::String
+        def function_arn: () -> ::String
+        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")
+        def role: () -> ::String
+        def handler: () -> ::String
+        def code_size: () -> ::Integer
+        def description: () -> ::String
+        def timeout: () -> ::Integer
+        def memory_size: () -> ::Integer
+        def last_modified: () -> ::Time
+        def code_sha_256: () -> ::String
+        def version: () -> ::String
+        def vpc_config: () -> Types::VpcConfigResponse
+        def dead_letter_config: () -> Types::DeadLetterConfig
+        def environment: () -> Types::EnvironmentResponse
+        def kms_key_arn: () -> ::String
+        def tracing_config: () -> Types::TracingConfigResponse
+        def master_arn: () -> ::String
+        def revision_id: () -> ::String
+        def layers: () -> ::Array[Types::Layer]
+        def state: () -> ("Pending" | "Active" | "Inactive" | "Failed")
+        def state_reason: () -> ::String
+        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
+        def last_update_status_reason: () -> ::String
+        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def file_system_configs: () -> ::Array[Types::FileSystemConfig]
+        def package_type: () -> ("Zip" | "Image")
+        def image_config_response: () -> Types::ImageConfigResponse
+        def signing_profile_version_arn: () -> ::String
+        def signing_job_arn: () -> ::String
+        def architectures: () -> ::Array[("x86_64" | "arm64")]
+        def ephemeral_storage: () -> Types::EphemeralStorage
+        def snap_start: () -> Types::SnapStartResponse
+        def runtime_version_config: () -> Types::RuntimeVersionConfig
+        def logging_config: () -> Types::LoggingConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_function_configuration-instance_method
+      def get_function_configuration: (
+                                        function_name: ::String,
+                                        ?qualifier: ::String
+                                      ) -> _GetFunctionConfigurationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionConfigurationResponseSuccess
+
+      interface _GetFunctionEventInvokeConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FunctionEventInvokeConfig]
+        def last_modified: () -> ::Time
+        def function_arn: () -> ::String
+        def maximum_retry_attempts: () -> ::Integer
+        def maximum_event_age_in_seconds: () -> ::Integer
+        def destination_config: () -> Types::DestinationConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_function_event_invoke_config-instance_method
+      def get_function_event_invoke_config: (
+                                              function_name: ::String,
+                                              ?qualifier: ::String
+                                            ) -> _GetFunctionEventInvokeConfigResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionEventInvokeConfigResponseSuccess
+
+      interface _GetFunctionUrlConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFunctionUrlConfigResponse]
+        def function_url: () -> ::String
+        def function_arn: () -> ::String
+        def auth_type: () -> ("NONE" | "AWS_IAM")
+        def cors: () -> Types::Cors
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def invoke_mode: () -> ("BUFFERED" | "RESPONSE_STREAM")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_function_url_config-instance_method
+      def get_function_url_config: (
+                                     function_name: ::String,
+                                     ?qualifier: ::String
+                                   ) -> _GetFunctionUrlConfigResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionUrlConfigResponseSuccess
+
+      interface _GetLayerVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLayerVersionResponse]
+        def content: () -> Types::LayerVersionContentOutput
+        def layer_arn: () -> ::String
+        def layer_version_arn: () -> ::String
+        def description: () -> ::String
+        def created_date: () -> ::Time
+        def version: () -> ::Integer
+        def compatible_runtimes: () -> ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")]
+        def license_info: () -> ::String
+        def compatible_architectures: () -> ::Array[("x86_64" | "arm64")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_layer_version-instance_method
+      def get_layer_version: (
+                               layer_name: ::String,
+                               version_number: ::Integer
+                             ) -> _GetLayerVersionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLayerVersionResponseSuccess
+
+      interface _GetLayerVersionByArnResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLayerVersionResponse]
+        def content: () -> Types::LayerVersionContentOutput
+        def layer_arn: () -> ::String
+        def layer_version_arn: () -> ::String
+        def description: () -> ::String
+        def created_date: () -> ::Time
+        def version: () -> ::Integer
+        def compatible_runtimes: () -> ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")]
+        def license_info: () -> ::String
+        def compatible_architectures: () -> ::Array[("x86_64" | "arm64")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_layer_version_by_arn-instance_method
+      def get_layer_version_by_arn: (
+                                      arn: ::String
+                                    ) -> _GetLayerVersionByArnResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLayerVersionByArnResponseSuccess
+
+      interface _GetLayerVersionPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLayerVersionPolicyResponse]
+        def policy: () -> ::String
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_layer_version_policy-instance_method
+      def get_layer_version_policy: (
+                                      layer_name: ::String,
+                                      version_number: ::Integer
+                                    ) -> _GetLayerVersionPolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLayerVersionPolicyResponseSuccess
+
+      interface _GetPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyResponse]
+        def policy: () -> ::String
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_policy-instance_method
+      def get_policy: (
+                        function_name: ::String,
+                        ?qualifier: ::String
+                      ) -> _GetPolicyResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyResponseSuccess
+
+      interface _GetProvisionedConcurrencyConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProvisionedConcurrencyConfigResponse]
+        def requested_provisioned_concurrent_executions: () -> ::Integer
+        def available_provisioned_concurrent_executions: () -> ::Integer
+        def allocated_provisioned_concurrent_executions: () -> ::Integer
+        def status: () -> ("IN_PROGRESS" | "READY" | "FAILED")
+        def status_reason: () -> ::String
+        def last_modified: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_provisioned_concurrency_config-instance_method
+      def get_provisioned_concurrency_config: (
+                                                function_name: ::String,
+                                                qualifier: ::String
+                                              ) -> _GetProvisionedConcurrencyConfigResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProvisionedConcurrencyConfigResponseSuccess
+
+      interface _GetRuntimeManagementConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRuntimeManagementConfigResponse]
+        def update_runtime_on: () -> ("Auto" | "Manual" | "FunctionUpdate")
+        def runtime_version_arn: () -> ::String
+        def function_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#get_runtime_management_config-instance_method
+      def get_runtime_management_config: (
+                                           function_name: ::String,
+                                           ?qualifier: ::String
+                                         ) -> _GetRuntimeManagementConfigResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRuntimeManagementConfigResponseSuccess
+
+      interface _InvokeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvocationResponse]
+        def status_code: () -> ::Integer
+        def function_error: () -> ::String
+        def log_result: () -> ::String
+        def payload: () -> ::String
+        def executed_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#invoke-instance_method
+      def invoke: (
+                    function_name: ::String,
+                    ?invocation_type: ("Event" | "RequestResponse" | "DryRun"),
+                    ?log_type: ("None" | "Tail"),
+                    ?client_context: ::String,
+                    ?payload: ::String,
+                    ?qualifier: ::String
+                  ) -> _InvokeResponseSuccess
+                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeResponseSuccess
+
+      interface _InvokeAsyncResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeAsyncResponse]
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#invoke_async-instance_method
+      def invoke_async: (
+                          function_name: ::String,
+                          invoke_args: ::String
+                        ) -> _InvokeAsyncResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeAsyncResponseSuccess
+
+      interface _InvokeWithResponseStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeWithResponseStreamResponse]
+        def status_code: () -> ::Integer
+        def executed_version: () -> ::String
+        def event_stream: () -> Types::InvokeWithResponseStreamResponseEvent
+        def response_stream_content_type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#invoke_with_response_stream-instance_method
+      def invoke_with_response_stream: (
+                                         function_name: ::String,
+                                         ?invocation_type: ("RequestResponse" | "DryRun"),
+                                         ?log_type: ("None" | "Tail"),
+                                         ?client_context: ::String,
+                                         ?qualifier: ::String,
+                                         ?payload: ::String
+                                       ) ?{ (*untyped) -> void } -> _InvokeWithResponseStreamResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeWithResponseStreamResponseSuccess
+
+      interface _ListAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAliasesResponse]
+        def next_marker: () -> ::String
+        def aliases: () -> ::Array[Types::AliasConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_aliases-instance_method
+      def list_aliases: (
+                          function_name: ::String,
+                          ?function_version: ::String,
+                          ?marker: ::String,
+                          ?max_items: ::Integer
+                        ) -> _ListAliasesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAliasesResponseSuccess
+
+      interface _ListCodeSigningConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCodeSigningConfigsResponse]
+        def next_marker: () -> ::String
+        def code_signing_configs: () -> ::Array[Types::CodeSigningConfig]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_code_signing_configs-instance_method
+      def list_code_signing_configs: (
+                                       ?marker: ::String,
+                                       ?max_items: ::Integer
+                                     ) -> _ListCodeSigningConfigsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeSigningConfigsResponseSuccess
+
+      interface _ListEventSourceMappingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventSourceMappingsResponse]
+        def next_marker: () -> ::String
+        def event_source_mappings: () -> ::Array[Types::EventSourceMappingConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_event_source_mappings-instance_method
+      def list_event_source_mappings: (
+                                        ?event_source_arn: ::String,
+                                        ?function_name: ::String,
+                                        ?marker: ::String,
+                                        ?max_items: ::Integer
+                                      ) -> _ListEventSourceMappingsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventSourceMappingsResponseSuccess
+
+      interface _ListFunctionEventInvokeConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFunctionEventInvokeConfigsResponse]
+        def function_event_invoke_configs: () -> ::Array[Types::FunctionEventInvokeConfig]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_function_event_invoke_configs-instance_method
+      def list_function_event_invoke_configs: (
+                                                function_name: ::String,
+                                                ?marker: ::String,
+                                                ?max_items: ::Integer
+                                              ) -> _ListFunctionEventInvokeConfigsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFunctionEventInvokeConfigsResponseSuccess
+
+      interface _ListFunctionUrlConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFunctionUrlConfigsResponse]
+        def function_url_configs: () -> ::Array[Types::FunctionUrlConfig]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_function_url_configs-instance_method
+      def list_function_url_configs: (
+                                       function_name: ::String,
+                                       ?marker: ::String,
+                                       ?max_items: ::Integer
+                                     ) -> _ListFunctionUrlConfigsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFunctionUrlConfigsResponseSuccess
+
+      interface _ListFunctionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFunctionsResponse]
+        def next_marker: () -> ::String
+        def functions: () -> ::Array[Types::FunctionConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_functions-instance_method
+      def list_functions: (
+                            ?master_region: ::String,
+                            ?function_version: ("ALL"),
+                            ?marker: ::String,
+                            ?max_items: ::Integer
+                          ) -> _ListFunctionsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFunctionsResponseSuccess
+
+      interface _ListFunctionsByCodeSigningConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFunctionsByCodeSigningConfigResponse]
+        def next_marker: () -> ::String
+        def function_arns: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_functions_by_code_signing_config-instance_method
+      def list_functions_by_code_signing_config: (
+                                                   code_signing_config_arn: ::String,
+                                                   ?marker: ::String,
+                                                   ?max_items: ::Integer
+                                                 ) -> _ListFunctionsByCodeSigningConfigResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFunctionsByCodeSigningConfigResponseSuccess
+
+      interface _ListLayerVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLayerVersionsResponse]
+        def next_marker: () -> ::String
+        def layer_versions: () -> ::Array[Types::LayerVersionsListItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_layer_versions-instance_method
+      def list_layer_versions: (
+                                 ?compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21"),
+                                 layer_name: ::String,
+                                 ?marker: ::String,
+                                 ?max_items: ::Integer,
+                                 ?compatible_architecture: ("x86_64" | "arm64")
+                               ) -> _ListLayerVersionsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLayerVersionsResponseSuccess
+
+      interface _ListLayersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLayersResponse]
+        def next_marker: () -> ::String
+        def layers: () -> ::Array[Types::LayersListItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_layers-instance_method
+      def list_layers: (
+                         ?compatible_runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21"),
+                         ?marker: ::String,
+                         ?max_items: ::Integer,
+                         ?compatible_architecture: ("x86_64" | "arm64")
+                       ) -> _ListLayersResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLayersResponseSuccess
+
+      interface _ListProvisionedConcurrencyConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProvisionedConcurrencyConfigsResponse]
+        def provisioned_concurrency_configs: () -> ::Array[Types::ProvisionedConcurrencyConfigListItem]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_provisioned_concurrency_configs-instance_method
+      def list_provisioned_concurrency_configs: (
+                                                  function_name: ::String,
+                                                  ?marker: ::String,
+                                                  ?max_items: ::Integer
+                                                ) -> _ListProvisionedConcurrencyConfigsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProvisionedConcurrencyConfigsResponseSuccess
+
+      interface _ListTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_tags-instance_method
+      def list_tags: (
+                       resource: ::String
+                     ) -> _ListTagsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsResponseSuccess
+
+      interface _ListVersionsByFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVersionsByFunctionResponse]
+        def next_marker: () -> ::String
+        def versions: () -> ::Array[Types::FunctionConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#list_versions_by_function-instance_method
+      def list_versions_by_function: (
+                                       function_name: ::String,
+                                       ?marker: ::String,
+                                       ?max_items: ::Integer
+                                     ) -> _ListVersionsByFunctionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVersionsByFunctionResponseSuccess
+
+      interface _PublishLayerVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PublishLayerVersionResponse]
+        def content: () -> Types::LayerVersionContentOutput
+        def layer_arn: () -> ::String
+        def layer_version_arn: () -> ::String
+        def description: () -> ::String
+        def created_date: () -> ::Time
+        def version: () -> ::Integer
+        def compatible_runtimes: () -> ::Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")]
+        def license_info: () -> ::String
+        def compatible_architectures: () -> ::Array[("x86_64" | "arm64")]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#publish_layer_version-instance_method
+      def publish_layer_version: (
+                                   layer_name: ::String,
+                                   ?description: ::String,
+                                   content: {
+                                     s3_bucket: ::String?,
+                                     s3_key: ::String?,
+                                     s3_object_version: ::String?,
+                                     zip_file: ::String?
+                                   },
+                                   ?compatible_runtimes: Array[("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")],
+                                   ?license_info: ::String,
+                                   ?compatible_architectures: Array[("x86_64" | "arm64")]
+                                 ) -> _PublishLayerVersionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishLayerVersionResponseSuccess
+
+      interface _PublishVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
+        def function_name: () -> ::String
+        def function_arn: () -> ::String
+        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")
+        def role: () -> ::String
+        def handler: () -> ::String
+        def code_size: () -> ::Integer
+        def description: () -> ::String
+        def timeout: () -> ::Integer
+        def memory_size: () -> ::Integer
+        def last_modified: () -> ::Time
+        def code_sha_256: () -> ::String
+        def version: () -> ::String
+        def vpc_config: () -> Types::VpcConfigResponse
+        def dead_letter_config: () -> Types::DeadLetterConfig
+        def environment: () -> Types::EnvironmentResponse
+        def kms_key_arn: () -> ::String
+        def tracing_config: () -> Types::TracingConfigResponse
+        def master_arn: () -> ::String
+        def revision_id: () -> ::String
+        def layers: () -> ::Array[Types::Layer]
+        def state: () -> ("Pending" | "Active" | "Inactive" | "Failed")
+        def state_reason: () -> ::String
+        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
+        def last_update_status_reason: () -> ::String
+        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def file_system_configs: () -> ::Array[Types::FileSystemConfig]
+        def package_type: () -> ("Zip" | "Image")
+        def image_config_response: () -> Types::ImageConfigResponse
+        def signing_profile_version_arn: () -> ::String
+        def signing_job_arn: () -> ::String
+        def architectures: () -> ::Array[("x86_64" | "arm64")]
+        def ephemeral_storage: () -> Types::EphemeralStorage
+        def snap_start: () -> Types::SnapStartResponse
+        def runtime_version_config: () -> Types::RuntimeVersionConfig
+        def logging_config: () -> Types::LoggingConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#publish_version-instance_method
+      def publish_version: (
+                             function_name: ::String,
+                             ?code_sha_256: ::String,
+                             ?description: ::String,
+                             ?revision_id: ::String
+                           ) -> _PublishVersionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishVersionResponseSuccess
+
+      interface _PutFunctionCodeSigningConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutFunctionCodeSigningConfigResponse]
+        def code_signing_config_arn: () -> ::String
+        def function_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#put_function_code_signing_config-instance_method
+      def put_function_code_signing_config: (
+                                              code_signing_config_arn: ::String,
+                                              function_name: ::String
+                                            ) -> _PutFunctionCodeSigningConfigResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFunctionCodeSigningConfigResponseSuccess
+
+      interface _PutFunctionConcurrencyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Concurrency]
+        def reserved_concurrent_executions: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#put_function_concurrency-instance_method
+      def put_function_concurrency: (
+                                      function_name: ::String,
+                                      reserved_concurrent_executions: ::Integer
+                                    ) -> _PutFunctionConcurrencyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFunctionConcurrencyResponseSuccess
+
+      interface _PutFunctionEventInvokeConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FunctionEventInvokeConfig]
+        def last_modified: () -> ::Time
+        def function_arn: () -> ::String
+        def maximum_retry_attempts: () -> ::Integer
+        def maximum_event_age_in_seconds: () -> ::Integer
+        def destination_config: () -> Types::DestinationConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#put_function_event_invoke_config-instance_method
+      def put_function_event_invoke_config: (
+                                              function_name: ::String,
+                                              ?qualifier: ::String,
+                                              ?maximum_retry_attempts: ::Integer,
+                                              ?maximum_event_age_in_seconds: ::Integer,
+                                              ?destination_config: {
+                                                on_success: {
+                                                  destination: ::String?
+                                                }?,
+                                                on_failure: {
+                                                  destination: ::String?
+                                                }?
+                                              }
+                                            ) -> _PutFunctionEventInvokeConfigResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFunctionEventInvokeConfigResponseSuccess
+
+      interface _PutProvisionedConcurrencyConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutProvisionedConcurrencyConfigResponse]
+        def requested_provisioned_concurrent_executions: () -> ::Integer
+        def available_provisioned_concurrent_executions: () -> ::Integer
+        def allocated_provisioned_concurrent_executions: () -> ::Integer
+        def status: () -> ("IN_PROGRESS" | "READY" | "FAILED")
+        def status_reason: () -> ::String
+        def last_modified: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#put_provisioned_concurrency_config-instance_method
+      def put_provisioned_concurrency_config: (
+                                                function_name: ::String,
+                                                qualifier: ::String,
+                                                provisioned_concurrent_executions: ::Integer
+                                              ) -> _PutProvisionedConcurrencyConfigResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutProvisionedConcurrencyConfigResponseSuccess
+
+      interface _PutRuntimeManagementConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutRuntimeManagementConfigResponse]
+        def update_runtime_on: () -> ("Auto" | "Manual" | "FunctionUpdate")
+        def function_arn: () -> ::String
+        def runtime_version_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#put_runtime_management_config-instance_method
+      def put_runtime_management_config: (
+                                           function_name: ::String,
+                                           ?qualifier: ::String,
+                                           update_runtime_on: ("Auto" | "Manual" | "FunctionUpdate"),
+                                           ?runtime_version_arn: ::String
+                                         ) -> _PutRuntimeManagementConfigResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRuntimeManagementConfigResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#remove_layer_version_permission-instance_method
+      def remove_layer_version_permission: (
+                                             layer_name: ::String,
+                                             version_number: ::Integer,
+                                             statement_id: ::String,
+                                             ?revision_id: ::String
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#remove_permission-instance_method
+      def remove_permission: (
+                               function_name: ::String,
+                               statement_id: ::String,
+                               ?qualifier: ::String,
+                               ?revision_id: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AliasConfiguration]
+        def alias_arn: () -> ::String
+        def name: () -> ::String
+        def function_version: () -> ::String
+        def description: () -> ::String
+        def routing_config: () -> Types::AliasRoutingConfiguration
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#update_alias-instance_method
+      def update_alias: (
+                          function_name: ::String,
+                          name: ::String,
+                          ?function_version: ::String,
+                          ?description: ::String,
+                          ?routing_config: {
+                            additional_version_weights: Hash[::String, ::Float]?
+                          },
+                          ?revision_id: ::String
+                        ) -> _UpdateAliasResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAliasResponseSuccess
+
+      interface _UpdateCodeSigningConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCodeSigningConfigResponse]
+        def code_signing_config: () -> Types::CodeSigningConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#update_code_signing_config-instance_method
+      def update_code_signing_config: (
+                                        code_signing_config_arn: ::String,
+                                        ?description: ::String,
+                                        ?allowed_publishers: {
+                                          signing_profile_version_arns: Array[::String]
+                                        },
+                                        ?code_signing_policies: {
+                                          untrusted_artifact_on_deployment: ("Warn" | "Enforce")?
+                                        }
+                                      ) -> _UpdateCodeSigningConfigResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCodeSigningConfigResponseSuccess
+
+      interface _UpdateEventSourceMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EventSourceMappingConfiguration]
+        def uuid: () -> ::String
+        def starting_position: () -> ("TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP")
+        def starting_position_timestamp: () -> ::Time
+        def batch_size: () -> ::Integer
+        def maximum_batching_window_in_seconds: () -> ::Integer
+        def parallelization_factor: () -> ::Integer
+        def event_source_arn: () -> ::String
+        def filter_criteria: () -> Types::FilterCriteria
+        def function_arn: () -> ::String
+        def last_modified: () -> ::Time
+        def last_processing_result: () -> ::String
+        def state: () -> ::String
+        def state_transition_reason: () -> ::String
+        def destination_config: () -> Types::DestinationConfig
+        def topics: () -> ::Array[::String]
+        def queues: () -> ::Array[::String]
+        def source_access_configurations: () -> ::Array[Types::SourceAccessConfiguration]
+        def self_managed_event_source: () -> Types::SelfManagedEventSource
+        def maximum_record_age_in_seconds: () -> ::Integer
+        def bisect_batch_on_function_error: () -> bool
+        def maximum_retry_attempts: () -> ::Integer
+        def tumbling_window_in_seconds: () -> ::Integer
+        def function_response_types: () -> ::Array[("ReportBatchItemFailures")]
+        def amazon_managed_kafka_event_source_config: () -> Types::AmazonManagedKafkaEventSourceConfig
+        def self_managed_kafka_event_source_config: () -> Types::SelfManagedKafkaEventSourceConfig
+        def scaling_config: () -> Types::ScalingConfig
+        def document_db_event_source_config: () -> Types::DocumentDBEventSourceConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#update_event_source_mapping-instance_method
+      def update_event_source_mapping: (
+                                         uuid: ::String,
+                                         ?function_name: ::String,
+                                         ?enabled: bool,
+                                         ?batch_size: ::Integer,
+                                         ?filter_criteria: {
+                                           filters: Array[
+                                             {
+                                               pattern: ::String?
+                                             },
+                                           ]?
+                                         },
+                                         ?maximum_batching_window_in_seconds: ::Integer,
+                                         ?destination_config: {
+                                           on_success: {
+                                             destination: ::String?
+                                           }?,
+                                           on_failure: {
+                                             destination: ::String?
+                                           }?
+                                         },
+                                         ?maximum_record_age_in_seconds: ::Integer,
+                                         ?bisect_batch_on_function_error: bool,
+                                         ?maximum_retry_attempts: ::Integer,
+                                         ?parallelization_factor: ::Integer,
+                                         ?source_access_configurations: Array[
+                                           {
+                                             type: ("BASIC_AUTH" | "VPC_SUBNET" | "VPC_SECURITY_GROUP" | "SASL_SCRAM_512_AUTH" | "SASL_SCRAM_256_AUTH" | "VIRTUAL_HOST" | "CLIENT_CERTIFICATE_TLS_AUTH" | "SERVER_ROOT_CA_CERTIFICATE")?,
+                                             uri: ::String?
+                                           },
+                                         ],
+                                         ?tumbling_window_in_seconds: ::Integer,
+                                         ?function_response_types: Array[("ReportBatchItemFailures")],
+                                         ?scaling_config: {
+                                           maximum_concurrency: ::Integer?
+                                         },
+                                         ?document_db_event_source_config: {
+                                           database_name: ::String?,
+                                           collection_name: ::String?,
+                                           full_document: ("UpdateLookup" | "Default")?
+                                         }
+                                       ) -> _UpdateEventSourceMappingResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventSourceMappingResponseSuccess
+
+      interface _UpdateFunctionCodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
+        def function_name: () -> ::String
+        def function_arn: () -> ::String
+        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")
+        def role: () -> ::String
+        def handler: () -> ::String
+        def code_size: () -> ::Integer
+        def description: () -> ::String
+        def timeout: () -> ::Integer
+        def memory_size: () -> ::Integer
+        def last_modified: () -> ::Time
+        def code_sha_256: () -> ::String
+        def version: () -> ::String
+        def vpc_config: () -> Types::VpcConfigResponse
+        def dead_letter_config: () -> Types::DeadLetterConfig
+        def environment: () -> Types::EnvironmentResponse
+        def kms_key_arn: () -> ::String
+        def tracing_config: () -> Types::TracingConfigResponse
+        def master_arn: () -> ::String
+        def revision_id: () -> ::String
+        def layers: () -> ::Array[Types::Layer]
+        def state: () -> ("Pending" | "Active" | "Inactive" | "Failed")
+        def state_reason: () -> ::String
+        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
+        def last_update_status_reason: () -> ::String
+        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def file_system_configs: () -> ::Array[Types::FileSystemConfig]
+        def package_type: () -> ("Zip" | "Image")
+        def image_config_response: () -> Types::ImageConfigResponse
+        def signing_profile_version_arn: () -> ::String
+        def signing_job_arn: () -> ::String
+        def architectures: () -> ::Array[("x86_64" | "arm64")]
+        def ephemeral_storage: () -> Types::EphemeralStorage
+        def snap_start: () -> Types::SnapStartResponse
+        def runtime_version_config: () -> Types::RuntimeVersionConfig
+        def logging_config: () -> Types::LoggingConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#update_function_code-instance_method
+      def update_function_code: (
+                                  function_name: ::String,
+                                  ?zip_file: ::String,
+                                  ?s3_bucket: ::String,
+                                  ?s3_key: ::String,
+                                  ?s3_object_version: ::String,
+                                  ?image_uri: ::String,
+                                  ?publish: bool,
+                                  ?dry_run: bool,
+                                  ?revision_id: ::String,
+                                  ?architectures: Array[("x86_64" | "arm64")]
+                                ) -> _UpdateFunctionCodeResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFunctionCodeResponseSuccess
+
+      interface _UpdateFunctionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FunctionConfiguration]
+        def function_name: () -> ::String
+        def function_arn: () -> ::String
+        def runtime: () -> ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21")
+        def role: () -> ::String
+        def handler: () -> ::String
+        def code_size: () -> ::Integer
+        def description: () -> ::String
+        def timeout: () -> ::Integer
+        def memory_size: () -> ::Integer
+        def last_modified: () -> ::Time
+        def code_sha_256: () -> ::String
+        def version: () -> ::String
+        def vpc_config: () -> Types::VpcConfigResponse
+        def dead_letter_config: () -> Types::DeadLetterConfig
+        def environment: () -> Types::EnvironmentResponse
+        def kms_key_arn: () -> ::String
+        def tracing_config: () -> Types::TracingConfigResponse
+        def master_arn: () -> ::String
+        def revision_id: () -> ::String
+        def layers: () -> ::Array[Types::Layer]
+        def state: () -> ("Pending" | "Active" | "Inactive" | "Failed")
+        def state_reason: () -> ::String
+        def state_reason_code: () -> ("Idle" | "Creating" | "Restoring" | "EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def last_update_status: () -> ("Successful" | "Failed" | "InProgress")
+        def last_update_status_reason: () -> ::String
+        def last_update_status_reason_code: () -> ("EniLimitExceeded" | "InsufficientRolePermissions" | "InvalidConfiguration" | "InternalError" | "SubnetOutOfIPAddresses" | "InvalidSubnet" | "InvalidSecurityGroup" | "ImageDeleted" | "ImageAccessDenied" | "InvalidImage" | "KMSKeyAccessDenied" | "KMSKeyNotFound" | "InvalidStateKMSKey" | "DisabledKMSKey" | "EFSIOError" | "EFSMountConnectivityError" | "EFSMountFailure" | "EFSMountTimeout" | "InvalidRuntime" | "InvalidZipFileException" | "FunctionError")
+        def file_system_configs: () -> ::Array[Types::FileSystemConfig]
+        def package_type: () -> ("Zip" | "Image")
+        def image_config_response: () -> Types::ImageConfigResponse
+        def signing_profile_version_arn: () -> ::String
+        def signing_job_arn: () -> ::String
+        def architectures: () -> ::Array[("x86_64" | "arm64")]
+        def ephemeral_storage: () -> Types::EphemeralStorage
+        def snap_start: () -> Types::SnapStartResponse
+        def runtime_version_config: () -> Types::RuntimeVersionConfig
+        def logging_config: () -> Types::LoggingConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#update_function_configuration-instance_method
+      def update_function_configuration: (
+                                           function_name: ::String,
+                                           ?role: ::String,
+                                           ?handler: ::String,
+                                           ?description: ::String,
+                                           ?timeout: ::Integer,
+                                           ?memory_size: ::Integer,
+                                           ?vpc_config: {
+                                             subnet_ids: Array[::String]?,
+                                             security_group_ids: Array[::String]?,
+                                             ipv_6_allowed_for_dual_stack: bool?
+                                           },
+                                           ?environment: {
+                                             variables: Hash[::String, ::String]?
+                                           },
+                                           ?runtime: ("nodejs" | "nodejs4.3" | "nodejs6.10" | "nodejs8.10" | "nodejs10.x" | "nodejs12.x" | "nodejs14.x" | "nodejs16.x" | "java8" | "java8.al2" | "java11" | "python2.7" | "python3.6" | "python3.7" | "python3.8" | "python3.9" | "dotnetcore1.0" | "dotnetcore2.0" | "dotnetcore2.1" | "dotnetcore3.1" | "dotnet6" | "nodejs4.3-edge" | "go1.x" | "ruby2.5" | "ruby2.7" | "provided" | "provided.al2" | "nodejs18.x" | "python3.10" | "java17" | "ruby3.2" | "python3.11" | "nodejs20.x" | "provided.al2023" | "python3.12" | "java21"),
+                                           ?dead_letter_config: {
+                                             target_arn: ::String?
+                                           },
+                                           ?kms_key_arn: ::String,
+                                           ?tracing_config: {
+                                             mode: ("Active" | "PassThrough")?
+                                           },
+                                           ?revision_id: ::String,
+                                           ?layers: Array[::String],
+                                           ?file_system_configs: Array[
+                                             {
+                                               arn: ::String,
+                                               local_mount_path: ::String
+                                             },
+                                           ],
+                                           ?image_config: {
+                                             entry_point: Array[::String]?,
+                                             command: Array[::String]?,
+                                             working_directory: ::String?
+                                           },
+                                           ?ephemeral_storage: {
+                                             size: ::Integer
+                                           },
+                                           ?snap_start: {
+                                             apply_on: ("PublishedVersions" | "None")?
+                                           },
+                                           ?logging_config: {
+                                             log_format: ("JSON" | "Text")?,
+                                             application_log_level: ("TRACE" | "DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL")?,
+                                             system_log_level: ("DEBUG" | "INFO" | "WARN")?,
+                                             log_group: ::String?
+                                           }
+                                         ) -> _UpdateFunctionConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFunctionConfigurationResponseSuccess
+
+      interface _UpdateFunctionEventInvokeConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FunctionEventInvokeConfig]
+        def last_modified: () -> ::Time
+        def function_arn: () -> ::String
+        def maximum_retry_attempts: () -> ::Integer
+        def maximum_event_age_in_seconds: () -> ::Integer
+        def destination_config: () -> Types::DestinationConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#update_function_event_invoke_config-instance_method
+      def update_function_event_invoke_config: (
+                                                 function_name: ::String,
+                                                 ?qualifier: ::String,
+                                                 ?maximum_retry_attempts: ::Integer,
+                                                 ?maximum_event_age_in_seconds: ::Integer,
+                                                 ?destination_config: {
+                                                   on_success: {
+                                                     destination: ::String?
+                                                   }?,
+                                                   on_failure: {
+                                                     destination: ::String?
+                                                   }?
+                                                 }
+                                               ) -> _UpdateFunctionEventInvokeConfigResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFunctionEventInvokeConfigResponseSuccess
+
+      interface _UpdateFunctionUrlConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFunctionUrlConfigResponse]
+        def function_url: () -> ::String
+        def function_arn: () -> ::String
+        def auth_type: () -> ("NONE" | "AWS_IAM")
+        def cors: () -> Types::Cors
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def invoke_mode: () -> ("BUFFERED" | "RESPONSE_STREAM")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#update_function_url_config-instance_method
+      def update_function_url_config: (
+                                        function_name: ::String,
+                                        ?qualifier: ::String,
+                                        ?auth_type: ("NONE" | "AWS_IAM"),
+                                        ?cors: {
+                                          allow_credentials: bool?,
+                                          allow_headers: Array[::String]?,
+                                          allow_methods: Array[::String]?,
+                                          allow_origins: Array[::String]?,
+                                          expose_headers: Array[::String]?,
+                                          max_age: ::Integer?
+                                        },
+                                        ?invoke_mode: ("BUFFERED" | "RESPONSE_STREAM")
+                                      ) -> _UpdateFunctionUrlConfigResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFunctionUrlConfigResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#wait_until-instance_method
+      def wait_until: (:function_active waiter_name, 
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionConfigurationResponseSuccess
+                    | (:function_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetFunctionConfigurationResponseSuccess
+                    | (:function_active_v2 waiter_name, 
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionResponseSuccess
+                    | (:function_active_v2 waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetFunctionResponseSuccess
+                    | (:function_exists waiter_name, 
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionResponseSuccess
+                    | (:function_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetFunctionResponseSuccess
+                    | (:function_updated waiter_name, 
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionConfigurationResponseSuccess
+                    | (:function_updated waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetFunctionConfigurationResponseSuccess
+                    | (:function_updated_v2 waiter_name, 
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionResponseSuccess
+                    | (:function_updated_v2 waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetFunctionResponseSuccess
+                    | (:published_version_active waiter_name, 
+                    function_name: ::String,
+                    ?qualifier: ::String
+                  ) -> Client::_GetFunctionConfigurationResponseSuccess
+                    | (:published_version_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetFunctionConfigurationResponseSuccess
+    end
+  end
+end
+

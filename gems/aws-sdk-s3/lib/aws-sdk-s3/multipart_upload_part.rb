@@ -91,10 +91,13 @@ module Aws::S3
     end
 
     # The base64-encoded, 32-bit CRC32C checksum of the object. This will
-    # only be present if it was uploaded with the object. With multipart
-    # uploads, this may not be a checksum value of the object. For more
-    # information about how checksums are calculated with multipart uploads,
-    # see [ Checking object integrity][1] in the *Amazon S3 User Guide*.
+    # only be present if it was uploaded with the object. When you use an
+    # API operation on an object that was uploaded using multipart uploads,
+    # this value may not be a direct checksum value of the full object.
+    # Instead, it's a calculation based on the checksum values of each
+    # individual part. For more information about how checksums are
+    # calculated with multipart uploads, see [ Checking object integrity][1]
+    # in the *Amazon S3 User Guide*.
     #
     #
     #
@@ -105,10 +108,13 @@ module Aws::S3
     end
 
     # The base64-encoded, 160-bit SHA-1 digest of the object. This will only
-    # be present if it was uploaded with the object. With multipart uploads,
-    # this may not be a checksum value of the object. For more information
-    # about how checksums are calculated with multipart uploads, see [
-    # Checking object integrity][1] in the *Amazon S3 User Guide*.
+    # be present if it was uploaded with the object. When you use the API
+    # operation on an object that was uploaded using multipart uploads, this
+    # value may not be a direct checksum value of the full object. Instead,
+    # it's a calculation based on the checksum values of each individual
+    # part. For more information about how checksums are calculated with
+    # multipart uploads, see [ Checking object integrity][1] in the *Amazon
+    # S3 User Guide*.
     #
     #
     #
@@ -305,9 +311,11 @@ module Aws::S3
     #     `arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf`.
     #     The value must be URL encoded.
     #
-    #     <note markdown="1"> Amazon S3 supports copy operations using access points only when the
-    #     source and destination buckets are in the same Amazon Web Services
-    #     Region.
+    #     <note markdown="1"> * Amazon S3 supports copy operations using Access points only when
+    #       the source and destination buckets are in the same Amazon Web
+    #       Services Region.
+    #
+    #     * Access points are not supported by directory buckets.
     #
     #      </note>
     #
@@ -320,25 +328,82 @@ module Aws::S3
     #     `arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf`.
     #     The value must be URL-encoded.
     #
-    #   To copy a specific version of an object, append
-    #   `?versionId=<version-id>` to the value (for example,
-    #   `awsexamplebucket/reports/january.pdf?versionId=QUpfdndhfd8438MNFDN93jdnJFkdmqnh893`).
-    #   If you don't specify a version ID, Amazon S3 copies the latest
-    #   version of the source object.
+    #   If your bucket has versioning enabled, you could have multiple
+    #   versions of the same object. By default, `x-amz-copy-source`
+    #   identifies the current version of the source object to copy. To copy a
+    #   specific version of the source object to copy, append
+    #   `?versionId=<version-id>` to the `x-amz-copy-source` request header
+    #   (for example, `x-amz-copy-source:
+    #   /awsexamplebucket/reports/january.pdf?versionId=QUpfdndhfd8438MNFDN93jdnJFkdmqnh893`).
+    #
+    #   If the current version is a delete marker and you don't specify a
+    #   versionId in the `x-amz-copy-source` request header, Amazon S3 returns
+    #   a `404 Not Found` error, because the object does not exist. If you
+    #   specify versionId in the `x-amz-copy-source` and the versionId is a
+    #   delete marker, Amazon S3 returns an HTTP `400 Bad Request` error,
+    #   because you are not allowed to specify a delete marker as a version
+    #   for the `x-amz-copy-source`.
+    #
+    #   <note markdown="1"> **Directory buckets** - S3 Versioning isn't enabled and supported for
+    #   directory buckets.
+    #
+    #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
     # @option options [String] :copy_source_if_match
     #   Copies the object if its entity tag (ETag) matches the specified tag.
+    #
+    #   If both of the `x-amz-copy-source-if-match` and
+    #   `x-amz-copy-source-if-unmodified-since` headers are present in the
+    #   request as follows:
+    #
+    #   `x-amz-copy-source-if-match` condition evaluates to `true`, and;
+    #
+    #   `x-amz-copy-source-if-unmodified-since` condition evaluates to
+    #   `false`;
+    #
+    #   Amazon S3 returns `200 OK` and copies the data.
     # @option options [Time,DateTime,Date,Integer,String] :copy_source_if_modified_since
     #   Copies the object if it has been modified since the specified time.
+    #
+    #   If both of the `x-amz-copy-source-if-none-match` and
+    #   `x-amz-copy-source-if-modified-since` headers are present in the
+    #   request as follows:
+    #
+    #   `x-amz-copy-source-if-none-match` condition evaluates to `false`, and;
+    #
+    #   `x-amz-copy-source-if-modified-since` condition evaluates to `true`;
+    #
+    #   Amazon S3 returns `412 Precondition Failed` response code.
     # @option options [String] :copy_source_if_none_match
     #   Copies the object if its entity tag (ETag) is different than the
     #   specified ETag.
+    #
+    #   If both of the `x-amz-copy-source-if-none-match` and
+    #   `x-amz-copy-source-if-modified-since` headers are present in the
+    #   request as follows:
+    #
+    #   `x-amz-copy-source-if-none-match` condition evaluates to `false`, and;
+    #
+    #   `x-amz-copy-source-if-modified-since` condition evaluates to `true`;
+    #
+    #   Amazon S3 returns `412 Precondition Failed` response code.
     # @option options [Time,DateTime,Date,Integer,String] :copy_source_if_unmodified_since
     #   Copies the object if it hasn't been modified since the specified
     #   time.
+    #
+    #   If both of the `x-amz-copy-source-if-match` and
+    #   `x-amz-copy-source-if-unmodified-since` headers are present in the
+    #   request as follows:
+    #
+    #   `x-amz-copy-source-if-match` condition evaluates to `true`, and;
+    #
+    #   `x-amz-copy-source-if-unmodified-since` condition evaluates to
+    #   `false`;
+    #
+    #   Amazon S3 returns `200 OK` and copies the data.
     # @option options [String] :copy_source_range
     #   The range of bytes to copy from the source object. The range value
     #   must use the form bytes=first-last, where the first and last are the
@@ -346,8 +411,13 @@ module Aws::S3
     #   you want to copy the first 10 bytes of the source. You can copy a
     #   range only if the source object is greater than 5 MB.
     # @option options [String] :sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (for
+    #   Specifies the algorithm to use when encrypting the object (for
     #   example, AES256).
+    #
+    #   <note markdown="1"> This functionality is not supported when the destination bucket is a
+    #   directory bucket.
+    #
+    #    </note>
     # @option options [String] :sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use in
     #   encrypting data. This value is used to store the object and then it is
@@ -356,41 +426,72 @@ module Aws::S3
     #   `x-amz-server-side-encryption-customer-algorithm` header. This must be
     #   the same encryption key specified in the initiate multipart upload
     #   request.
+    #
+    #   <note markdown="1"> This functionality is not supported when the destination bucket is a
+    #   directory bucket.
+    #
+    #    </note>
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
     #   ensure that the encryption key was transmitted without error.
+    #
+    #   <note markdown="1"> This functionality is not supported when the destination bucket is a
+    #   directory bucket.
+    #
+    #    </note>
     # @option options [String] :copy_source_sse_customer_algorithm
     #   Specifies the algorithm to use when decrypting the source object (for
-    #   example, AES256).
+    #   example, `AES256`).
+    #
+    #   <note markdown="1"> This functionality is not supported when the source object is in a
+    #   directory bucket.
+    #
+    #    </note>
     # @option options [String] :copy_source_sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use to
     #   decrypt the source object. The encryption key provided in this header
     #   must be one that was used when the source object was created.
+    #
+    #   <note markdown="1"> This functionality is not supported when the source object is in a
+    #   directory bucket.
+    #
+    #    </note>
     # @option options [String] :copy_source_sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
     #   ensure that the encryption key was transmitted without error.
+    #
+    #   <note markdown="1"> This functionality is not supported when the source object is in a
+    #   directory bucket.
+    #
+    #    </note>
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. If either the source or destination Amazon S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading objects
-    #   from Requester Pays buckets, see [Downloading Objects in Requester
-    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination S3 bucket has Requester
+    #   Pays enabled, the requester will pay for corresponding charges to copy
+    #   the object. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :expected_bucket_owner
     #   The account ID of the expected destination bucket owner. If the
-    #   destination bucket is owned by a different account, the request fails
-    #   with the HTTP status code `403 Forbidden` (access denied).
+    #   account ID that you provide does not match the actual owner of the
+    #   destination bucket, the request fails with the HTTP status code `403
+    #   Forbidden` (access denied).
     # @option options [String] :expected_source_bucket_owner
-    #   The account ID of the expected source bucket owner. If the source
-    #   bucket is owned by a different account, the request fails with the
-    #   HTTP status code `403 Forbidden` (access denied).
+    #   The account ID of the expected source bucket owner. If the account ID
+    #   that you provide does not match the actual owner of the source bucket,
+    #   the request fails with the HTTP status code `403 Forbidden` (access
+    #   denied).
     # @return [Types::UploadPartCopyOutput]
     def copy_from(options = {})
       options = options.merge(
@@ -432,14 +533,18 @@ module Aws::S3
     #   The base64-encoded 128-bit MD5 digest of the part data. This parameter
     #   is auto-populated when using the command from the CLI. This parameter
     #   is required if object lock parameters are specified.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
     # @option options [String] :checksum_algorithm
     #   Indicates the algorithm used to create the checksum for the object
-    #   when using the SDK. This header will not provide any additional
-    #   functionality if not using the SDK. When sending this header, there
-    #   must be a corresponding `x-amz-checksum` or `x-amz-trailer` header
-    #   sent. Otherwise, Amazon S3 fails the request with the HTTP status code
-    #   `400 Bad Request`. For more information, see [Checking object
-    #   integrity][1] in the *Amazon S3 User Guide*.
+    #   when you use the SDK. This header will not provide any additional
+    #   functionality if you don't use the SDK. When you send this header,
+    #   there must be a corresponding `x-amz-checksum` or `x-amz-trailer`
+    #   header sent. Otherwise, Amazon S3 fails the request with the HTTP
+    #   status code `400 Bad Request`. For more information, see [Checking
+    #   object integrity][1] in the *Amazon S3 User Guide*.
     #
     #   If you provide an individual checksum, Amazon S3 ignores any provided
     #   `ChecksumAlgorithm` parameter.
@@ -491,8 +596,12 @@ module Aws::S3
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
     # @option options [String] :sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (for
+    #   Specifies the algorithm to use when encrypting the object (for
     #   example, AES256).
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
     # @option options [String] :sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use in
     #   encrypting data. This value is used to store the object and then it is
@@ -501,26 +610,38 @@ module Aws::S3
     #   `x-amz-server-side-encryption-customer-algorithm header`. This must be
     #   the same encryption key specified in the initiate multipart upload
     #   request.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
     # @option options [String] :sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
     #   ensure that the encryption key was transmitted without error.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
     # @option options [String] :request_payer
     #   Confirms that the requester knows that they will be charged for the
     #   request. Bucket owners need not specify this parameter in their
-    #   requests. If either the source or destination Amazon S3 bucket has
-    #   Requester Pays enabled, the requester will pay for corresponding
-    #   charges to copy the object. For information about downloading objects
-    #   from Requester Pays buckets, see [Downloading Objects in Requester
-    #   Pays Buckets][1] in the *Amazon S3 User Guide*.
+    #   requests. If either the source or destination S3 bucket has Requester
+    #   Pays enabled, the requester will pay for corresponding charges to copy
+    #   the object. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requester Pays Buckets][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :expected_bucket_owner
-    #   The account ID of the expected bucket owner. If the bucket is owned by
-    #   a different account, the request fails with the HTTP status code `403
-    #   Forbidden` (access denied).
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the request
+    #   fails with the HTTP status code `403 Forbidden` (access denied).
     # @return [Types::UploadPartOutput]
     def upload(options = {})
       options = options.merge(

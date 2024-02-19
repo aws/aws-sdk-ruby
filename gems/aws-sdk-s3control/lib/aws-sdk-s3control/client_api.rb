@@ -15,6 +15,17 @@ module Aws::S3Control
 
     AbortIncompleteMultipartUpload = Shapes::StructureShape.new(name: 'AbortIncompleteMultipartUpload')
     AccessControlTranslation = Shapes::StructureShape.new(name: 'AccessControlTranslation')
+    AccessGrantArn = Shapes::StringShape.new(name: 'AccessGrantArn')
+    AccessGrantId = Shapes::StringShape.new(name: 'AccessGrantId')
+    AccessGrantsInstanceArn = Shapes::StringShape.new(name: 'AccessGrantsInstanceArn')
+    AccessGrantsInstanceId = Shapes::StringShape.new(name: 'AccessGrantsInstanceId')
+    AccessGrantsInstancesList = Shapes::ListShape.new(name: 'AccessGrantsInstancesList')
+    AccessGrantsList = Shapes::ListShape.new(name: 'AccessGrantsList')
+    AccessGrantsLocationArn = Shapes::StringShape.new(name: 'AccessGrantsLocationArn')
+    AccessGrantsLocationConfiguration = Shapes::StructureShape.new(name: 'AccessGrantsLocationConfiguration')
+    AccessGrantsLocationId = Shapes::StringShape.new(name: 'AccessGrantsLocationId')
+    AccessGrantsLocationsList = Shapes::ListShape.new(name: 'AccessGrantsLocationsList')
+    AccessKeyId = Shapes::StringShape.new(name: 'AccessKeyId')
     AccessPoint = Shapes::StructureShape.new(name: 'AccessPoint')
     AccessPointList = Shapes::ListShape.new(name: 'AccessPointList')
     AccessPointName = Shapes::StringShape.new(name: 'AccessPointName')
@@ -24,6 +35,7 @@ module Aws::S3Control
     AdvancedCostOptimizationMetrics = Shapes::StructureShape.new(name: 'AdvancedCostOptimizationMetrics')
     AdvancedDataProtectionMetrics = Shapes::StructureShape.new(name: 'AdvancedDataProtectionMetrics')
     Alias = Shapes::StringShape.new(name: 'Alias')
+    AssociateAccessGrantsIdentityCenterRequest = Shapes::StructureShape.new(name: 'AssociateAccessGrantsIdentityCenterRequest')
     AsyncCreationTimestamp = Shapes::TimestampShape.new(name: 'AsyncCreationTimestamp')
     AsyncErrorDetails = Shapes::StructureShape.new(name: 'AsyncErrorDetails')
     AsyncOperation = Shapes::StructureShape.new(name: 'AsyncOperation')
@@ -51,6 +63,12 @@ module Aws::S3Control
     ConfirmRemoveSelfBucketAccess = Shapes::BooleanShape.new(name: 'ConfirmRemoveSelfBucketAccess')
     ConfirmationRequired = Shapes::BooleanShape.new(name: 'ConfirmationRequired')
     ContinuationToken = Shapes::StringShape.new(name: 'ContinuationToken')
+    CreateAccessGrantRequest = Shapes::StructureShape.new(name: 'CreateAccessGrantRequest')
+    CreateAccessGrantResult = Shapes::StructureShape.new(name: 'CreateAccessGrantResult')
+    CreateAccessGrantsInstanceRequest = Shapes::StructureShape.new(name: 'CreateAccessGrantsInstanceRequest')
+    CreateAccessGrantsInstanceResult = Shapes::StructureShape.new(name: 'CreateAccessGrantsInstanceResult')
+    CreateAccessGrantsLocationRequest = Shapes::StructureShape.new(name: 'CreateAccessGrantsLocationRequest')
+    CreateAccessGrantsLocationResult = Shapes::StructureShape.new(name: 'CreateAccessGrantsLocationResult')
     CreateAccessPointForObjectLambdaRequest = Shapes::StructureShape.new(name: 'CreateAccessPointForObjectLambdaRequest')
     CreateAccessPointForObjectLambdaResult = Shapes::StructureShape.new(name: 'CreateAccessPointForObjectLambdaResult')
     CreateAccessPointRequest = Shapes::StructureShape.new(name: 'CreateAccessPointRequest')
@@ -63,11 +81,17 @@ module Aws::S3Control
     CreateMultiRegionAccessPointInput = Shapes::StructureShape.new(name: 'CreateMultiRegionAccessPointInput')
     CreateMultiRegionAccessPointRequest = Shapes::StructureShape.new(name: 'CreateMultiRegionAccessPointRequest')
     CreateMultiRegionAccessPointResult = Shapes::StructureShape.new(name: 'CreateMultiRegionAccessPointResult')
+    CreateStorageLensGroupRequest = Shapes::StructureShape.new(name: 'CreateStorageLensGroupRequest')
     CreationDate = Shapes::TimestampShape.new(name: 'CreationDate')
     CreationTimestamp = Shapes::TimestampShape.new(name: 'CreationTimestamp')
+    Credentials = Shapes::StructureShape.new(name: 'Credentials')
     Date = Shapes::TimestampShape.new(name: 'Date')
     Days = Shapes::IntegerShape.new(name: 'Days')
     DaysAfterInitiation = Shapes::IntegerShape.new(name: 'DaysAfterInitiation')
+    DeleteAccessGrantRequest = Shapes::StructureShape.new(name: 'DeleteAccessGrantRequest')
+    DeleteAccessGrantsInstanceRequest = Shapes::StructureShape.new(name: 'DeleteAccessGrantsInstanceRequest')
+    DeleteAccessGrantsInstanceResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteAccessGrantsInstanceResourcePolicyRequest')
+    DeleteAccessGrantsLocationRequest = Shapes::StructureShape.new(name: 'DeleteAccessGrantsLocationRequest')
     DeleteAccessPointForObjectLambdaRequest = Shapes::StructureShape.new(name: 'DeleteAccessPointForObjectLambdaRequest')
     DeleteAccessPointPolicyForObjectLambdaRequest = Shapes::StructureShape.new(name: 'DeleteAccessPointPolicyForObjectLambdaRequest')
     DeleteAccessPointPolicyRequest = Shapes::StructureShape.new(name: 'DeleteAccessPointPolicyRequest')
@@ -88,12 +112,15 @@ module Aws::S3Control
     DeleteStorageLensConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteStorageLensConfigurationRequest')
     DeleteStorageLensConfigurationTaggingRequest = Shapes::StructureShape.new(name: 'DeleteStorageLensConfigurationTaggingRequest')
     DeleteStorageLensConfigurationTaggingResult = Shapes::StructureShape.new(name: 'DeleteStorageLensConfigurationTaggingResult')
+    DeleteStorageLensGroupRequest = Shapes::StructureShape.new(name: 'DeleteStorageLensGroupRequest')
     DescribeJobRequest = Shapes::StructureShape.new(name: 'DescribeJobRequest')
     DescribeJobResult = Shapes::StructureShape.new(name: 'DescribeJobResult')
     DescribeMultiRegionAccessPointOperationRequest = Shapes::StructureShape.new(name: 'DescribeMultiRegionAccessPointOperationRequest')
     DescribeMultiRegionAccessPointOperationResult = Shapes::StructureShape.new(name: 'DescribeMultiRegionAccessPointOperationResult')
     Destination = Shapes::StructureShape.new(name: 'Destination')
     DetailedStatusCodesMetrics = Shapes::StructureShape.new(name: 'DetailedStatusCodesMetrics')
+    DissociateAccessGrantsIdentityCenterRequest = Shapes::StructureShape.new(name: 'DissociateAccessGrantsIdentityCenterRequest')
+    DurationSeconds = Shapes::IntegerShape.new(name: 'DurationSeconds')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     Endpoints = Shapes::MapShape.new(name: 'Endpoints')
     EstablishedMultiRegionAccessPointPolicy = Shapes::StructureShape.new(name: 'EstablishedMultiRegionAccessPointPolicy')
@@ -101,12 +128,23 @@ module Aws::S3Control
     Exclude = Shapes::StructureShape.new(name: 'Exclude')
     ExistingObjectReplication = Shapes::StructureShape.new(name: 'ExistingObjectReplication')
     ExistingObjectReplicationStatus = Shapes::StringShape.new(name: 'ExistingObjectReplicationStatus')
+    Expiration = Shapes::TimestampShape.new(name: 'Expiration')
     ExpirationStatus = Shapes::StringShape.new(name: 'ExpirationStatus')
     ExpiredObjectDeleteMarker = Shapes::BooleanShape.new(name: 'ExpiredObjectDeleteMarker')
     Format = Shapes::StringShape.new(name: 'Format')
     FunctionArnString = Shapes::StringShape.new(name: 'FunctionArnString')
     GeneratedManifestEncryption = Shapes::StructureShape.new(name: 'GeneratedManifestEncryption')
     GeneratedManifestFormat = Shapes::StringShape.new(name: 'GeneratedManifestFormat')
+    GetAccessGrantRequest = Shapes::StructureShape.new(name: 'GetAccessGrantRequest')
+    GetAccessGrantResult = Shapes::StructureShape.new(name: 'GetAccessGrantResult')
+    GetAccessGrantsInstanceForPrefixRequest = Shapes::StructureShape.new(name: 'GetAccessGrantsInstanceForPrefixRequest')
+    GetAccessGrantsInstanceForPrefixResult = Shapes::StructureShape.new(name: 'GetAccessGrantsInstanceForPrefixResult')
+    GetAccessGrantsInstanceRequest = Shapes::StructureShape.new(name: 'GetAccessGrantsInstanceRequest')
+    GetAccessGrantsInstanceResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetAccessGrantsInstanceResourcePolicyRequest')
+    GetAccessGrantsInstanceResourcePolicyResult = Shapes::StructureShape.new(name: 'GetAccessGrantsInstanceResourcePolicyResult')
+    GetAccessGrantsInstanceResult = Shapes::StructureShape.new(name: 'GetAccessGrantsInstanceResult')
+    GetAccessGrantsLocationRequest = Shapes::StructureShape.new(name: 'GetAccessGrantsLocationRequest')
+    GetAccessGrantsLocationResult = Shapes::StructureShape.new(name: 'GetAccessGrantsLocationResult')
     GetAccessPointConfigurationForObjectLambdaRequest = Shapes::StructureShape.new(name: 'GetAccessPointConfigurationForObjectLambdaRequest')
     GetAccessPointConfigurationForObjectLambdaResult = Shapes::StructureShape.new(name: 'GetAccessPointConfigurationForObjectLambdaResult')
     GetAccessPointForObjectLambdaRequest = Shapes::StructureShape.new(name: 'GetAccessPointForObjectLambdaRequest')
@@ -133,6 +171,8 @@ module Aws::S3Control
     GetBucketTaggingResult = Shapes::StructureShape.new(name: 'GetBucketTaggingResult')
     GetBucketVersioningRequest = Shapes::StructureShape.new(name: 'GetBucketVersioningRequest')
     GetBucketVersioningResult = Shapes::StructureShape.new(name: 'GetBucketVersioningResult')
+    GetDataAccessRequest = Shapes::StructureShape.new(name: 'GetDataAccessRequest')
+    GetDataAccessResult = Shapes::StructureShape.new(name: 'GetDataAccessResult')
     GetJobTaggingRequest = Shapes::StructureShape.new(name: 'GetJobTaggingRequest')
     GetJobTaggingResult = Shapes::StructureShape.new(name: 'GetJobTaggingResult')
     GetMultiRegionAccessPointPolicyRequest = Shapes::StructureShape.new(name: 'GetMultiRegionAccessPointPolicyRequest')
@@ -149,14 +189,21 @@ module Aws::S3Control
     GetStorageLensConfigurationResult = Shapes::StructureShape.new(name: 'GetStorageLensConfigurationResult')
     GetStorageLensConfigurationTaggingRequest = Shapes::StructureShape.new(name: 'GetStorageLensConfigurationTaggingRequest')
     GetStorageLensConfigurationTaggingResult = Shapes::StructureShape.new(name: 'GetStorageLensConfigurationTaggingResult')
+    GetStorageLensGroupRequest = Shapes::StructureShape.new(name: 'GetStorageLensGroupRequest')
+    GetStorageLensGroupResult = Shapes::StructureShape.new(name: 'GetStorageLensGroupResult')
     GrantFullControl = Shapes::StringShape.new(name: 'GrantFullControl')
     GrantRead = Shapes::StringShape.new(name: 'GrantRead')
     GrantReadACP = Shapes::StringShape.new(name: 'GrantReadACP')
     GrantWrite = Shapes::StringShape.new(name: 'GrantWrite')
     GrantWriteACP = Shapes::StringShape.new(name: 'GrantWriteACP')
+    Grantee = Shapes::StructureShape.new(name: 'Grantee')
+    GranteeIdentifier = Shapes::StringShape.new(name: 'GranteeIdentifier')
+    GranteeType = Shapes::StringShape.new(name: 'GranteeType')
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
     ID = Shapes::StringShape.new(name: 'ID')
     IdempotencyException = Shapes::StructureShape.new(name: 'IdempotencyException')
+    IdentityCenterApplicationArn = Shapes::StringShape.new(name: 'IdentityCenterApplicationArn')
+    IdentityCenterArn = Shapes::StringShape.new(name: 'IdentityCenterArn')
     Include = Shapes::StructureShape.new(name: 'Include')
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
@@ -197,6 +244,7 @@ module Aws::S3Control
     JobTimeInStateSeconds = Shapes::IntegerShape.new(name: 'JobTimeInStateSeconds')
     JobTimers = Shapes::StructureShape.new(name: 'JobTimers')
     JobTotalNumberOfTasks = Shapes::IntegerShape.new(name: 'JobTotalNumberOfTasks')
+    KeyNameConstraint = Shapes::StructureShape.new(name: 'KeyNameConstraint')
     KmsKeyArnString = Shapes::StringShape.new(name: 'KmsKeyArnString')
     LambdaInvokeOperation = Shapes::StructureShape.new(name: 'LambdaInvokeOperation')
     LifecycleConfiguration = Shapes::StructureShape.new(name: 'LifecycleConfiguration')
@@ -205,6 +253,15 @@ module Aws::S3Control
     LifecycleRuleAndOperator = Shapes::StructureShape.new(name: 'LifecycleRuleAndOperator')
     LifecycleRuleFilter = Shapes::StructureShape.new(name: 'LifecycleRuleFilter')
     LifecycleRules = Shapes::ListShape.new(name: 'LifecycleRules')
+    ListAccessGrantEntry = Shapes::StructureShape.new(name: 'ListAccessGrantEntry')
+    ListAccessGrantsInstanceEntry = Shapes::StructureShape.new(name: 'ListAccessGrantsInstanceEntry')
+    ListAccessGrantsInstancesRequest = Shapes::StructureShape.new(name: 'ListAccessGrantsInstancesRequest')
+    ListAccessGrantsInstancesResult = Shapes::StructureShape.new(name: 'ListAccessGrantsInstancesResult')
+    ListAccessGrantsLocationsEntry = Shapes::StructureShape.new(name: 'ListAccessGrantsLocationsEntry')
+    ListAccessGrantsLocationsRequest = Shapes::StructureShape.new(name: 'ListAccessGrantsLocationsRequest')
+    ListAccessGrantsLocationsResult = Shapes::StructureShape.new(name: 'ListAccessGrantsLocationsResult')
+    ListAccessGrantsRequest = Shapes::StructureShape.new(name: 'ListAccessGrantsRequest')
+    ListAccessGrantsResult = Shapes::StructureShape.new(name: 'ListAccessGrantsResult')
     ListAccessPointsForObjectLambdaRequest = Shapes::StructureShape.new(name: 'ListAccessPointsForObjectLambdaRequest')
     ListAccessPointsForObjectLambdaResult = Shapes::StructureShape.new(name: 'ListAccessPointsForObjectLambdaResult')
     ListAccessPointsRequest = Shapes::StructureShape.new(name: 'ListAccessPointsRequest')
@@ -218,11 +275,21 @@ module Aws::S3Control
     ListStorageLensConfigurationEntry = Shapes::StructureShape.new(name: 'ListStorageLensConfigurationEntry')
     ListStorageLensConfigurationsRequest = Shapes::StructureShape.new(name: 'ListStorageLensConfigurationsRequest')
     ListStorageLensConfigurationsResult = Shapes::StructureShape.new(name: 'ListStorageLensConfigurationsResult')
+    ListStorageLensGroupEntry = Shapes::StructureShape.new(name: 'ListStorageLensGroupEntry')
+    ListStorageLensGroupsRequest = Shapes::StructureShape.new(name: 'ListStorageLensGroupsRequest')
+    ListStorageLensGroupsResult = Shapes::StructureShape.new(name: 'ListStorageLensGroupsResult')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
     Location = Shapes::StringShape.new(name: 'Location')
     MFA = Shapes::StringShape.new(name: 'MFA')
     MFADelete = Shapes::StringShape.new(name: 'MFADelete')
     MFADeleteStatus = Shapes::StringShape.new(name: 'MFADeleteStatus')
     ManifestPrefixString = Shapes::StringShape.new(name: 'ManifestPrefixString')
+    MatchAnyPrefix = Shapes::ListShape.new(name: 'MatchAnyPrefix')
+    MatchAnySuffix = Shapes::ListShape.new(name: 'MatchAnySuffix')
+    MatchAnyTag = Shapes::ListShape.new(name: 'MatchAnyTag')
+    MatchObjectAge = Shapes::StructureShape.new(name: 'MatchObjectAge')
+    MatchObjectSize = Shapes::StructureShape.new(name: 'MatchObjectSize')
     MaxLength1024String = Shapes::StringShape.new(name: 'MaxLength1024String')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Metrics = Shapes::StructureShape.new(name: 'Metrics')
@@ -245,6 +312,7 @@ module Aws::S3Control
     NoSuchPublicAccessBlockConfiguration = Shapes::StructureShape.new(name: 'NoSuchPublicAccessBlockConfiguration')
     NoSuchPublicAccessBlockConfigurationMessage = Shapes::StringShape.new(name: 'NoSuchPublicAccessBlockConfigurationMessage')
     NonEmptyMaxLength1024String = Shapes::StringShape.new(name: 'NonEmptyMaxLength1024String')
+    NonEmptyMaxLength1024StringList = Shapes::ListShape.new(name: 'NonEmptyMaxLength1024StringList')
     NonEmptyMaxLength2048String = Shapes::StringShape.new(name: 'NonEmptyMaxLength2048String')
     NonEmptyMaxLength256String = Shapes::StringShape.new(name: 'NonEmptyMaxLength256String')
     NonEmptyMaxLength64String = Shapes::StringShape.new(name: 'NonEmptyMaxLength64String')
@@ -253,6 +321,7 @@ module Aws::S3Control
     NoncurrentVersionTransition = Shapes::StructureShape.new(name: 'NoncurrentVersionTransition')
     NoncurrentVersionTransitionList = Shapes::ListShape.new(name: 'NoncurrentVersionTransitionList')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    ObjectAgeValue = Shapes::IntegerShape.new(name: 'ObjectAgeValue')
     ObjectCreationTime = Shapes::TimestampShape.new(name: 'ObjectCreationTime')
     ObjectLambdaAccessPoint = Shapes::StructureShape.new(name: 'ObjectLambdaAccessPoint')
     ObjectLambdaAccessPointAlias = Shapes::StructureShape.new(name: 'ObjectLambdaAccessPointAlias')
@@ -274,18 +343,25 @@ module Aws::S3Control
     ObjectLockEnabledForBucket = Shapes::BooleanShape.new(name: 'ObjectLockEnabledForBucket')
     ObjectSizeGreaterThanBytes = Shapes::IntegerShape.new(name: 'ObjectSizeGreaterThanBytes')
     ObjectSizeLessThanBytes = Shapes::IntegerShape.new(name: 'ObjectSizeLessThanBytes')
+    ObjectSizeValue = Shapes::IntegerShape.new(name: 'ObjectSizeValue')
     OperationName = Shapes::StringShape.new(name: 'OperationName')
+    Organization = Shapes::StringShape.new(name: 'Organization')
     OutputSchemaVersion = Shapes::StringShape.new(name: 'OutputSchemaVersion')
     OwnerOverride = Shapes::StringShape.new(name: 'OwnerOverride')
+    Permission = Shapes::StringShape.new(name: 'Permission')
     Policy = Shapes::StringShape.new(name: 'Policy')
+    PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PolicyStatus = Shapes::StructureShape.new(name: 'PolicyStatus')
     Prefix = Shapes::StringShape.new(name: 'Prefix')
     PrefixLevel = Shapes::StructureShape.new(name: 'PrefixLevel')
     PrefixLevelStorageMetrics = Shapes::StructureShape.new(name: 'PrefixLevelStorageMetrics')
     Priority = Shapes::IntegerShape.new(name: 'Priority')
+    Privilege = Shapes::StringShape.new(name: 'Privilege')
     ProposedMultiRegionAccessPointPolicy = Shapes::StructureShape.new(name: 'ProposedMultiRegionAccessPointPolicy')
     PublicAccessBlockConfiguration = Shapes::StructureShape.new(name: 'PublicAccessBlockConfiguration')
     PublicAccessBlockEnabled = Shapes::BooleanShape.new(name: 'PublicAccessBlockEnabled')
+    PutAccessGrantsInstanceResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutAccessGrantsInstanceResourcePolicyRequest')
+    PutAccessGrantsInstanceResourcePolicyResult = Shapes::StructureShape.new(name: 'PutAccessGrantsInstanceResourcePolicyResult')
     PutAccessPointConfigurationForObjectLambdaRequest = Shapes::StructureShape.new(name: 'PutAccessPointConfigurationForObjectLambdaRequest')
     PutAccessPointPolicyForObjectLambdaRequest = Shapes::StructureShape.new(name: 'PutAccessPointPolicyForObjectLambdaRequest')
     PutAccessPointPolicyRequest = Shapes::StructureShape.new(name: 'PutAccessPointPolicyRequest')
@@ -361,8 +437,12 @@ module Aws::S3Control
     S3ObjectOwner = Shapes::StructureShape.new(name: 'S3ObjectOwner')
     S3ObjectVersionId = Shapes::StringShape.new(name: 'S3ObjectVersionId')
     S3Permission = Shapes::StringShape.new(name: 'S3Permission')
+    S3Prefix = Shapes::StringShape.new(name: 'S3Prefix')
+    S3PrefixType = Shapes::StringShape.new(name: 'S3PrefixType')
     S3RegionalBucketArn = Shapes::StringShape.new(name: 'S3RegionalBucketArn')
+    S3RegionalOrS3ExpressBucketArnString = Shapes::StringShape.new(name: 'S3RegionalOrS3ExpressBucketArnString')
     S3ReplicateObjectOperation = Shapes::StructureShape.new(name: 'S3ReplicateObjectOperation')
+    S3ResourceArn = Shapes::StringShape.new(name: 'S3ResourceArn')
     S3Retention = Shapes::StructureShape.new(name: 'S3Retention')
     S3SSEAlgorithm = Shapes::StringShape.new(name: 'S3SSEAlgorithm')
     S3SetObjectAclOperation = Shapes::StructureShape.new(name: 'S3SetObjectAclOperation')
@@ -378,17 +458,31 @@ module Aws::S3Control
     SSEKMSKeyId = Shapes::StringShape.new(name: 'SSEKMSKeyId')
     SSES3 = Shapes::StructureShape.new(name: 'SSES3')
     SSES3Encryption = Shapes::StructureShape.new(name: 'SSES3Encryption')
+    SecretAccessKey = Shapes::StringShape.new(name: 'SecretAccessKey')
     SelectionCriteria = Shapes::StructureShape.new(name: 'SelectionCriteria')
+    SessionToken = Shapes::StringShape.new(name: 'SessionToken')
     Setting = Shapes::BooleanShape.new(name: 'Setting')
     SourceSelectionCriteria = Shapes::StructureShape.new(name: 'SourceSelectionCriteria')
     SseKmsEncryptedObjects = Shapes::StructureShape.new(name: 'SseKmsEncryptedObjects')
     SseKmsEncryptedObjectsStatus = Shapes::StringShape.new(name: 'SseKmsEncryptedObjectsStatus')
+    StorageClassList = Shapes::ListShape.new(name: 'StorageClassList')
     StorageLensArn = Shapes::StringShape.new(name: 'StorageLensArn')
     StorageLensAwsOrg = Shapes::StructureShape.new(name: 'StorageLensAwsOrg')
     StorageLensConfiguration = Shapes::StructureShape.new(name: 'StorageLensConfiguration')
     StorageLensConfigurationList = Shapes::ListShape.new(name: 'StorageLensConfigurationList', flattened: true)
     StorageLensDataExport = Shapes::StructureShape.new(name: 'StorageLensDataExport')
     StorageLensDataExportEncryption = Shapes::StructureShape.new(name: 'StorageLensDataExportEncryption')
+    StorageLensGroup = Shapes::StructureShape.new(name: 'StorageLensGroup')
+    StorageLensGroupAndOperator = Shapes::StructureShape.new(name: 'StorageLensGroupAndOperator')
+    StorageLensGroupArn = Shapes::StringShape.new(name: 'StorageLensGroupArn')
+    StorageLensGroupFilter = Shapes::StructureShape.new(name: 'StorageLensGroupFilter')
+    StorageLensGroupLevel = Shapes::StructureShape.new(name: 'StorageLensGroupLevel')
+    StorageLensGroupLevelExclude = Shapes::ListShape.new(name: 'StorageLensGroupLevelExclude')
+    StorageLensGroupLevelInclude = Shapes::ListShape.new(name: 'StorageLensGroupLevelInclude')
+    StorageLensGroupLevelSelectionCriteria = Shapes::StructureShape.new(name: 'StorageLensGroupLevelSelectionCriteria')
+    StorageLensGroupList = Shapes::ListShape.new(name: 'StorageLensGroupList', flattened: true)
+    StorageLensGroupName = Shapes::StringShape.new(name: 'StorageLensGroupName')
+    StorageLensGroupOrOperator = Shapes::StructureShape.new(name: 'StorageLensGroupOrOperator')
     StorageLensPrefixLevelDelimiter = Shapes::StringShape.new(name: 'StorageLensPrefixLevelDelimiter')
     StorageLensPrefixLevelMaxDepth = Shapes::IntegerShape.new(name: 'StorageLensPrefixLevelMaxDepth')
     StorageLensTag = Shapes::StructureShape.new(name: 'StorageLensTag')
@@ -396,9 +490,15 @@ module Aws::S3Control
     StringForNextToken = Shapes::StringShape.new(name: 'StringForNextToken')
     SubmitMultiRegionAccessPointRoutesRequest = Shapes::StructureShape.new(name: 'SubmitMultiRegionAccessPointRoutesRequest')
     SubmitMultiRegionAccessPointRoutesResult = Shapes::StructureShape.new(name: 'SubmitMultiRegionAccessPointRoutesResult')
+    Suffix = Shapes::StringShape.new(name: 'Suffix')
     SuspendedCause = Shapes::StringShape.new(name: 'SuspendedCause')
     SuspendedDate = Shapes::TimestampShape.new(name: 'SuspendedDate')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagKeyString = Shapes::StringShape.new(name: 'TagKeyString')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResult = Shapes::StructureShape.new(name: 'TagResourceResult')
     TagValueString = Shapes::StringShape.new(name: 'TagValueString')
     Tagging = Shapes::StructureShape.new(name: 'Tagging')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
@@ -408,10 +508,16 @@ module Aws::S3Control
     Transition = Shapes::StructureShape.new(name: 'Transition')
     TransitionList = Shapes::ListShape.new(name: 'TransitionList')
     TransitionStorageClass = Shapes::StringShape.new(name: 'TransitionStorageClass')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResult = Shapes::StructureShape.new(name: 'UntagResourceResult')
+    UpdateAccessGrantsLocationRequest = Shapes::StructureShape.new(name: 'UpdateAccessGrantsLocationRequest')
+    UpdateAccessGrantsLocationResult = Shapes::StructureShape.new(name: 'UpdateAccessGrantsLocationResult')
     UpdateJobPriorityRequest = Shapes::StructureShape.new(name: 'UpdateJobPriorityRequest')
     UpdateJobPriorityResult = Shapes::StructureShape.new(name: 'UpdateJobPriorityResult')
     UpdateJobStatusRequest = Shapes::StructureShape.new(name: 'UpdateJobStatusRequest')
     UpdateJobStatusResult = Shapes::StructureShape.new(name: 'UpdateJobStatusResult')
+    UpdateStorageLensGroupRequest = Shapes::StructureShape.new(name: 'UpdateStorageLensGroupRequest')
+    UserArguments = Shapes::MapShape.new(name: 'UserArguments')
     VersioningConfiguration = Shapes::StructureShape.new(name: 'VersioningConfiguration')
     VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
@@ -421,6 +527,15 @@ module Aws::S3Control
 
     AccessControlTranslation.add_member(:owner, Shapes::ShapeRef.new(shape: OwnerOverride, required: true, location_name: "Owner"))
     AccessControlTranslation.struct_class = Types::AccessControlTranslation
+
+    AccessGrantsInstancesList.member = Shapes::ShapeRef.new(shape: ListAccessGrantsInstanceEntry, location_name: "AccessGrantsInstance")
+
+    AccessGrantsList.member = Shapes::ShapeRef.new(shape: ListAccessGrantEntry, location_name: "AccessGrant")
+
+    AccessGrantsLocationConfiguration.add_member(:s3_sub_prefix, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "S3SubPrefix"))
+    AccessGrantsLocationConfiguration.struct_class = Types::AccessGrantsLocationConfiguration
+
+    AccessGrantsLocationsList.member = Shapes::ShapeRef.new(shape: ListAccessGrantsLocationsEntry, location_name: "AccessGrantsLocation")
 
     AccessPoint.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location_name: "Name"))
     AccessPoint.add_member(:network_origin, Shapes::ShapeRef.new(shape: NetworkOrigin, required: true, location_name: "NetworkOrigin"))
@@ -438,6 +553,7 @@ module Aws::S3Control
     AccountLevel.add_member(:advanced_cost_optimization_metrics, Shapes::ShapeRef.new(shape: AdvancedCostOptimizationMetrics, location_name: "AdvancedCostOptimizationMetrics"))
     AccountLevel.add_member(:advanced_data_protection_metrics, Shapes::ShapeRef.new(shape: AdvancedDataProtectionMetrics, location_name: "AdvancedDataProtectionMetrics"))
     AccountLevel.add_member(:detailed_status_codes_metrics, Shapes::ShapeRef.new(shape: DetailedStatusCodesMetrics, location_name: "DetailedStatusCodesMetrics"))
+    AccountLevel.add_member(:storage_lens_group_level, Shapes::ShapeRef.new(shape: StorageLensGroupLevel, location_name: "StorageLensGroupLevel"))
     AccountLevel.struct_class = Types::AccountLevel
 
     ActivityMetrics.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, location_name: "IsEnabled"))
@@ -448,6 +564,10 @@ module Aws::S3Control
 
     AdvancedDataProtectionMetrics.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, location_name: "IsEnabled"))
     AdvancedDataProtectionMetrics.struct_class = Types::AdvancedDataProtectionMetrics
+
+    AssociateAccessGrantsIdentityCenterRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    AssociateAccessGrantsIdentityCenterRequest.add_member(:identity_center_arn, Shapes::ShapeRef.new(shape: IdentityCenterArn, required: true, location_name: "IdentityCenterArn"))
+    AssociateAccessGrantsIdentityCenterRequest.struct_class = Types::AssociateAccessGrantsIdentityCenterRequest
 
     AsyncErrorDetails.add_member(:code, Shapes::ShapeRef.new(shape: MaxLength1024String, location_name: "Code"))
     AsyncErrorDetails.add_member(:message, Shapes::ShapeRef.new(shape: MaxLength1024String, location_name: "Message"))
@@ -494,6 +614,51 @@ module Aws::S3Control
 
     CloudWatchMetrics.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, required: true, location_name: "IsEnabled"))
     CloudWatchMetrics.struct_class = Types::CloudWatchMetrics
+
+    CreateAccessGrantRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    CreateAccessGrantRequest.add_member(:access_grants_location_id, Shapes::ShapeRef.new(shape: AccessGrantsLocationId, required: true, location_name: "AccessGrantsLocationId"))
+    CreateAccessGrantRequest.add_member(:access_grants_location_configuration, Shapes::ShapeRef.new(shape: AccessGrantsLocationConfiguration, location_name: "AccessGrantsLocationConfiguration"))
+    CreateAccessGrantRequest.add_member(:grantee, Shapes::ShapeRef.new(shape: Grantee, required: true, location_name: "Grantee"))
+    CreateAccessGrantRequest.add_member(:permission, Shapes::ShapeRef.new(shape: Permission, required: true, location_name: "Permission"))
+    CreateAccessGrantRequest.add_member(:application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "ApplicationArn"))
+    CreateAccessGrantRequest.add_member(:s3_prefix_type, Shapes::ShapeRef.new(shape: S3PrefixType, location_name: "S3PrefixType"))
+    CreateAccessGrantRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAccessGrantRequest.struct_class = Types::CreateAccessGrantRequest
+
+    CreateAccessGrantResult.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "CreatedAt"))
+    CreateAccessGrantResult.add_member(:access_grant_id, Shapes::ShapeRef.new(shape: AccessGrantId, location_name: "AccessGrantId"))
+    CreateAccessGrantResult.add_member(:access_grant_arn, Shapes::ShapeRef.new(shape: AccessGrantArn, location_name: "AccessGrantArn"))
+    CreateAccessGrantResult.add_member(:grantee, Shapes::ShapeRef.new(shape: Grantee, location_name: "Grantee"))
+    CreateAccessGrantResult.add_member(:access_grants_location_id, Shapes::ShapeRef.new(shape: AccessGrantsLocationId, location_name: "AccessGrantsLocationId"))
+    CreateAccessGrantResult.add_member(:access_grants_location_configuration, Shapes::ShapeRef.new(shape: AccessGrantsLocationConfiguration, location_name: "AccessGrantsLocationConfiguration"))
+    CreateAccessGrantResult.add_member(:permission, Shapes::ShapeRef.new(shape: Permission, location_name: "Permission"))
+    CreateAccessGrantResult.add_member(:application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "ApplicationArn"))
+    CreateAccessGrantResult.add_member(:grant_scope, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "GrantScope"))
+    CreateAccessGrantResult.struct_class = Types::CreateAccessGrantResult
+
+    CreateAccessGrantsInstanceRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    CreateAccessGrantsInstanceRequest.add_member(:identity_center_arn, Shapes::ShapeRef.new(shape: IdentityCenterArn, location_name: "IdentityCenterArn"))
+    CreateAccessGrantsInstanceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAccessGrantsInstanceRequest.struct_class = Types::CreateAccessGrantsInstanceRequest
+
+    CreateAccessGrantsInstanceResult.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "CreatedAt"))
+    CreateAccessGrantsInstanceResult.add_member(:access_grants_instance_id, Shapes::ShapeRef.new(shape: AccessGrantsInstanceId, location_name: "AccessGrantsInstanceId"))
+    CreateAccessGrantsInstanceResult.add_member(:access_grants_instance_arn, Shapes::ShapeRef.new(shape: AccessGrantsInstanceArn, location_name: "AccessGrantsInstanceArn"))
+    CreateAccessGrantsInstanceResult.add_member(:identity_center_arn, Shapes::ShapeRef.new(shape: IdentityCenterArn, location_name: "IdentityCenterArn"))
+    CreateAccessGrantsInstanceResult.struct_class = Types::CreateAccessGrantsInstanceResult
+
+    CreateAccessGrantsLocationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    CreateAccessGrantsLocationRequest.add_member(:location_scope, Shapes::ShapeRef.new(shape: S3Prefix, required: true, location_name: "LocationScope"))
+    CreateAccessGrantsLocationRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "IAMRoleArn"))
+    CreateAccessGrantsLocationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateAccessGrantsLocationRequest.struct_class = Types::CreateAccessGrantsLocationRequest
+
+    CreateAccessGrantsLocationResult.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "CreatedAt"))
+    CreateAccessGrantsLocationResult.add_member(:access_grants_location_id, Shapes::ShapeRef.new(shape: AccessGrantsLocationId, location_name: "AccessGrantsLocationId"))
+    CreateAccessGrantsLocationResult.add_member(:access_grants_location_arn, Shapes::ShapeRef.new(shape: AccessGrantsLocationArn, location_name: "AccessGrantsLocationArn"))
+    CreateAccessGrantsLocationResult.add_member(:location_scope, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "LocationScope"))
+    CreateAccessGrantsLocationResult.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "IAMRoleArn"))
+    CreateAccessGrantsLocationResult.struct_class = Types::CreateAccessGrantsLocationResult
 
     CreateAccessPointForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
     CreateAccessPointForObjectLambdaRequest.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location: "uri", location_name: "name"))
@@ -566,6 +731,31 @@ module Aws::S3Control
     CreateMultiRegionAccessPointResult.add_member(:request_token_arn, Shapes::ShapeRef.new(shape: AsyncRequestTokenARN, location_name: "RequestTokenARN"))
     CreateMultiRegionAccessPointResult.struct_class = Types::CreateMultiRegionAccessPointResult
 
+    CreateStorageLensGroupRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    CreateStorageLensGroupRequest.add_member(:storage_lens_group, Shapes::ShapeRef.new(shape: StorageLensGroup, required: true, location_name: "StorageLensGroup"))
+    CreateStorageLensGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateStorageLensGroupRequest.struct_class = Types::CreateStorageLensGroupRequest
+
+    Credentials.add_member(:access_key_id, Shapes::ShapeRef.new(shape: AccessKeyId, location_name: "AccessKeyId"))
+    Credentials.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: SecretAccessKey, location_name: "SecretAccessKey"))
+    Credentials.add_member(:session_token, Shapes::ShapeRef.new(shape: SessionToken, location_name: "SessionToken"))
+    Credentials.add_member(:expiration, Shapes::ShapeRef.new(shape: Expiration, location_name: "Expiration"))
+    Credentials.struct_class = Types::Credentials
+
+    DeleteAccessGrantRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    DeleteAccessGrantRequest.add_member(:access_grant_id, Shapes::ShapeRef.new(shape: AccessGrantId, required: true, location: "uri", location_name: "id"))
+    DeleteAccessGrantRequest.struct_class = Types::DeleteAccessGrantRequest
+
+    DeleteAccessGrantsInstanceRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    DeleteAccessGrantsInstanceRequest.struct_class = Types::DeleteAccessGrantsInstanceRequest
+
+    DeleteAccessGrantsInstanceResourcePolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    DeleteAccessGrantsInstanceResourcePolicyRequest.struct_class = Types::DeleteAccessGrantsInstanceResourcePolicyRequest
+
+    DeleteAccessGrantsLocationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    DeleteAccessGrantsLocationRequest.add_member(:access_grants_location_id, Shapes::ShapeRef.new(shape: AccessGrantsLocationId, required: true, location: "uri", location_name: "id"))
+    DeleteAccessGrantsLocationRequest.struct_class = Types::DeleteAccessGrantsLocationRequest
+
     DeleteAccessPointForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
     DeleteAccessPointForObjectLambdaRequest.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location: "uri", location_name: "name"))
     DeleteAccessPointForObjectLambdaRequest.struct_class = Types::DeleteAccessPointForObjectLambdaRequest
@@ -635,6 +825,10 @@ module Aws::S3Control
 
     DeleteStorageLensConfigurationTaggingResult.struct_class = Types::DeleteStorageLensConfigurationTaggingResult
 
+    DeleteStorageLensGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: StorageLensGroupName, required: true, location: "uri", location_name: "name"))
+    DeleteStorageLensGroupRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    DeleteStorageLensGroupRequest.struct_class = Types::DeleteStorageLensGroupRequest
+
     DescribeJobRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
     DescribeJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
     DescribeJobRequest.struct_class = Types::DescribeJobRequest
@@ -661,6 +855,9 @@ module Aws::S3Control
     DetailedStatusCodesMetrics.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, location_name: "IsEnabled"))
     DetailedStatusCodesMetrics.struct_class = Types::DetailedStatusCodesMetrics
 
+    DissociateAccessGrantsIdentityCenterRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    DissociateAccessGrantsIdentityCenterRequest.struct_class = Types::DissociateAccessGrantsIdentityCenterRequest
+
     EncryptionConfiguration.add_member(:replica_kms_key_id, Shapes::ShapeRef.new(shape: ReplicaKmsKeyID, location_name: "ReplicaKmsKeyID", metadata: {"box"=>true}))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
@@ -680,6 +877,57 @@ module Aws::S3Control
     GeneratedManifestEncryption.add_member(:sses3, Shapes::ShapeRef.new(shape: SSES3Encryption, location_name: "SSE-S3"))
     GeneratedManifestEncryption.add_member(:ssekms, Shapes::ShapeRef.new(shape: SSEKMSEncryption, location_name: "SSE-KMS"))
     GeneratedManifestEncryption.struct_class = Types::GeneratedManifestEncryption
+
+    GetAccessGrantRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    GetAccessGrantRequest.add_member(:access_grant_id, Shapes::ShapeRef.new(shape: AccessGrantId, required: true, location: "uri", location_name: "id"))
+    GetAccessGrantRequest.struct_class = Types::GetAccessGrantRequest
+
+    GetAccessGrantResult.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "CreatedAt"))
+    GetAccessGrantResult.add_member(:access_grant_id, Shapes::ShapeRef.new(shape: AccessGrantId, location_name: "AccessGrantId"))
+    GetAccessGrantResult.add_member(:access_grant_arn, Shapes::ShapeRef.new(shape: AccessGrantArn, location_name: "AccessGrantArn"))
+    GetAccessGrantResult.add_member(:grantee, Shapes::ShapeRef.new(shape: Grantee, location_name: "Grantee"))
+    GetAccessGrantResult.add_member(:permission, Shapes::ShapeRef.new(shape: Permission, location_name: "Permission"))
+    GetAccessGrantResult.add_member(:access_grants_location_id, Shapes::ShapeRef.new(shape: AccessGrantsLocationId, location_name: "AccessGrantsLocationId"))
+    GetAccessGrantResult.add_member(:access_grants_location_configuration, Shapes::ShapeRef.new(shape: AccessGrantsLocationConfiguration, location_name: "AccessGrantsLocationConfiguration"))
+    GetAccessGrantResult.add_member(:grant_scope, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "GrantScope"))
+    GetAccessGrantResult.add_member(:application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "ApplicationArn"))
+    GetAccessGrantResult.struct_class = Types::GetAccessGrantResult
+
+    GetAccessGrantsInstanceForPrefixRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    GetAccessGrantsInstanceForPrefixRequest.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3Prefix, required: true, location: "querystring", location_name: "s3prefix"))
+    GetAccessGrantsInstanceForPrefixRequest.struct_class = Types::GetAccessGrantsInstanceForPrefixRequest
+
+    GetAccessGrantsInstanceForPrefixResult.add_member(:access_grants_instance_arn, Shapes::ShapeRef.new(shape: AccessGrantsInstanceArn, location_name: "AccessGrantsInstanceArn"))
+    GetAccessGrantsInstanceForPrefixResult.add_member(:access_grants_instance_id, Shapes::ShapeRef.new(shape: AccessGrantsInstanceId, location_name: "AccessGrantsInstanceId"))
+    GetAccessGrantsInstanceForPrefixResult.struct_class = Types::GetAccessGrantsInstanceForPrefixResult
+
+    GetAccessGrantsInstanceRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    GetAccessGrantsInstanceRequest.struct_class = Types::GetAccessGrantsInstanceRequest
+
+    GetAccessGrantsInstanceResourcePolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    GetAccessGrantsInstanceResourcePolicyRequest.struct_class = Types::GetAccessGrantsInstanceResourcePolicyRequest
+
+    GetAccessGrantsInstanceResourcePolicyResult.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "Policy"))
+    GetAccessGrantsInstanceResourcePolicyResult.add_member(:organization, Shapes::ShapeRef.new(shape: Organization, location_name: "Organization"))
+    GetAccessGrantsInstanceResourcePolicyResult.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "CreatedAt"))
+    GetAccessGrantsInstanceResourcePolicyResult.struct_class = Types::GetAccessGrantsInstanceResourcePolicyResult
+
+    GetAccessGrantsInstanceResult.add_member(:access_grants_instance_arn, Shapes::ShapeRef.new(shape: AccessGrantsInstanceArn, location_name: "AccessGrantsInstanceArn"))
+    GetAccessGrantsInstanceResult.add_member(:access_grants_instance_id, Shapes::ShapeRef.new(shape: AccessGrantsInstanceId, location_name: "AccessGrantsInstanceId"))
+    GetAccessGrantsInstanceResult.add_member(:identity_center_arn, Shapes::ShapeRef.new(shape: IdentityCenterArn, location_name: "IdentityCenterArn"))
+    GetAccessGrantsInstanceResult.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "CreatedAt"))
+    GetAccessGrantsInstanceResult.struct_class = Types::GetAccessGrantsInstanceResult
+
+    GetAccessGrantsLocationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    GetAccessGrantsLocationRequest.add_member(:access_grants_location_id, Shapes::ShapeRef.new(shape: AccessGrantsLocationId, required: true, location: "uri", location_name: "id"))
+    GetAccessGrantsLocationRequest.struct_class = Types::GetAccessGrantsLocationRequest
+
+    GetAccessGrantsLocationResult.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "CreatedAt"))
+    GetAccessGrantsLocationResult.add_member(:access_grants_location_id, Shapes::ShapeRef.new(shape: AccessGrantsLocationId, location_name: "AccessGrantsLocationId"))
+    GetAccessGrantsLocationResult.add_member(:access_grants_location_arn, Shapes::ShapeRef.new(shape: AccessGrantsLocationArn, location_name: "AccessGrantsLocationArn"))
+    GetAccessGrantsLocationResult.add_member(:location_scope, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "LocationScope"))
+    GetAccessGrantsLocationResult.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "IAMRoleArn"))
+    GetAccessGrantsLocationResult.struct_class = Types::GetAccessGrantsLocationResult
 
     GetAccessPointConfigurationForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
     GetAccessPointConfigurationForObjectLambdaRequest.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location: "uri", location_name: "name"))
@@ -787,6 +1035,18 @@ module Aws::S3Control
     GetBucketVersioningResult.add_member(:mfa_delete, Shapes::ShapeRef.new(shape: MFADeleteStatus, location_name: "MfaDelete"))
     GetBucketVersioningResult.struct_class = Types::GetBucketVersioningResult
 
+    GetDataAccessRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    GetDataAccessRequest.add_member(:target, Shapes::ShapeRef.new(shape: S3Prefix, required: true, location: "querystring", location_name: "target"))
+    GetDataAccessRequest.add_member(:permission, Shapes::ShapeRef.new(shape: Permission, required: true, location: "querystring", location_name: "permission"))
+    GetDataAccessRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: DurationSeconds, location: "querystring", location_name: "durationSeconds"))
+    GetDataAccessRequest.add_member(:privilege, Shapes::ShapeRef.new(shape: Privilege, location: "querystring", location_name: "privilege"))
+    GetDataAccessRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: S3PrefixType, location: "querystring", location_name: "targetType"))
+    GetDataAccessRequest.struct_class = Types::GetDataAccessRequest
+
+    GetDataAccessResult.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
+    GetDataAccessResult.add_member(:matched_grant_target, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "MatchedGrantTarget"))
+    GetDataAccessResult.struct_class = Types::GetDataAccessResult
+
     GetJobTaggingRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
     GetJobTaggingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
     GetJobTaggingRequest.struct_class = Types::GetJobTaggingRequest
@@ -846,6 +1106,19 @@ module Aws::S3Control
 
     GetStorageLensConfigurationTaggingResult.add_member(:tags, Shapes::ShapeRef.new(shape: StorageLensTags, location_name: "Tags"))
     GetStorageLensConfigurationTaggingResult.struct_class = Types::GetStorageLensConfigurationTaggingResult
+
+    GetStorageLensGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: StorageLensGroupName, required: true, location: "uri", location_name: "name"))
+    GetStorageLensGroupRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    GetStorageLensGroupRequest.struct_class = Types::GetStorageLensGroupRequest
+
+    GetStorageLensGroupResult.add_member(:storage_lens_group, Shapes::ShapeRef.new(shape: StorageLensGroup, location_name: "StorageLensGroup"))
+    GetStorageLensGroupResult.struct_class = Types::GetStorageLensGroupResult
+    GetStorageLensGroupResult[:payload] = :storage_lens_group
+    GetStorageLensGroupResult[:payload_member] = GetStorageLensGroupResult.member(:storage_lens_group)
+
+    Grantee.add_member(:grantee_type, Shapes::ShapeRef.new(shape: GranteeType, location_name: "GranteeType"))
+    Grantee.add_member(:grantee_identifier, Shapes::ShapeRef.new(shape: GranteeIdentifier, location_name: "GranteeIdentifier"))
+    Grantee.struct_class = Types::Grantee
 
     IdempotencyException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     IdempotencyException.struct_class = Types::IdempotencyException
@@ -918,6 +1191,10 @@ module Aws::S3Control
     JobManifestGeneratorFilter.add_member(:created_after, Shapes::ShapeRef.new(shape: ObjectCreationTime, location_name: "CreatedAfter"))
     JobManifestGeneratorFilter.add_member(:created_before, Shapes::ShapeRef.new(shape: ObjectCreationTime, location_name: "CreatedBefore"))
     JobManifestGeneratorFilter.add_member(:object_replication_statuses, Shapes::ShapeRef.new(shape: ReplicationStatusFilterList, location_name: "ObjectReplicationStatuses"))
+    JobManifestGeneratorFilter.add_member(:key_name_constraint, Shapes::ShapeRef.new(shape: KeyNameConstraint, location_name: "KeyNameConstraint"))
+    JobManifestGeneratorFilter.add_member(:object_size_greater_than_bytes, Shapes::ShapeRef.new(shape: ObjectSizeGreaterThanBytes, location_name: "ObjectSizeGreaterThanBytes", metadata: {"box"=>true}))
+    JobManifestGeneratorFilter.add_member(:object_size_less_than_bytes, Shapes::ShapeRef.new(shape: ObjectSizeLessThanBytes, location_name: "ObjectSizeLessThanBytes", metadata: {"box"=>true}))
+    JobManifestGeneratorFilter.add_member(:match_any_storage_class, Shapes::ShapeRef.new(shape: StorageClassList, location_name: "MatchAnyStorageClass"))
     JobManifestGeneratorFilter.struct_class = Types::JobManifestGeneratorFilter
 
     JobManifestLocation.add_member(:object_arn, Shapes::ShapeRef.new(shape: S3KeyArnString, required: true, location_name: "ObjectArn"))
@@ -961,7 +1238,14 @@ module Aws::S3Control
     JobTimers.add_member(:elapsed_time_in_active_seconds, Shapes::ShapeRef.new(shape: JobTimeInStateSeconds, location_name: "ElapsedTimeInActiveSeconds", metadata: {"box"=>true}))
     JobTimers.struct_class = Types::JobTimers
 
+    KeyNameConstraint.add_member(:match_any_prefix, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024StringList, location_name: "MatchAnyPrefix"))
+    KeyNameConstraint.add_member(:match_any_suffix, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024StringList, location_name: "MatchAnySuffix"))
+    KeyNameConstraint.add_member(:match_any_substring, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024StringList, location_name: "MatchAnySubstring"))
+    KeyNameConstraint.struct_class = Types::KeyNameConstraint
+
     LambdaInvokeOperation.add_member(:function_arn, Shapes::ShapeRef.new(shape: FunctionArnString, location_name: "FunctionArn"))
+    LambdaInvokeOperation.add_member(:invocation_schema_version, Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String, location_name: "InvocationSchemaVersion"))
+    LambdaInvokeOperation.add_member(:user_arguments, Shapes::ShapeRef.new(shape: UserArguments, location_name: "UserArguments"))
     LambdaInvokeOperation.struct_class = Types::LambdaInvokeOperation
 
     LifecycleConfiguration.add_member(:rules, Shapes::ShapeRef.new(shape: LifecycleRules, location_name: "Rules"))
@@ -996,6 +1280,63 @@ module Aws::S3Control
     LifecycleRuleFilter.struct_class = Types::LifecycleRuleFilter
 
     LifecycleRules.member = Shapes::ShapeRef.new(shape: LifecycleRule, location_name: "Rule")
+
+    ListAccessGrantEntry.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "CreatedAt"))
+    ListAccessGrantEntry.add_member(:access_grant_id, Shapes::ShapeRef.new(shape: AccessGrantId, location_name: "AccessGrantId"))
+    ListAccessGrantEntry.add_member(:access_grant_arn, Shapes::ShapeRef.new(shape: AccessGrantArn, location_name: "AccessGrantArn"))
+    ListAccessGrantEntry.add_member(:grantee, Shapes::ShapeRef.new(shape: Grantee, location_name: "Grantee"))
+    ListAccessGrantEntry.add_member(:permission, Shapes::ShapeRef.new(shape: Permission, location_name: "Permission"))
+    ListAccessGrantEntry.add_member(:access_grants_location_id, Shapes::ShapeRef.new(shape: AccessGrantsLocationId, location_name: "AccessGrantsLocationId"))
+    ListAccessGrantEntry.add_member(:access_grants_location_configuration, Shapes::ShapeRef.new(shape: AccessGrantsLocationConfiguration, location_name: "AccessGrantsLocationConfiguration"))
+    ListAccessGrantEntry.add_member(:grant_scope, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "GrantScope"))
+    ListAccessGrantEntry.add_member(:application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "ApplicationArn"))
+    ListAccessGrantEntry.struct_class = Types::ListAccessGrantEntry
+
+    ListAccessGrantsInstanceEntry.add_member(:access_grants_instance_id, Shapes::ShapeRef.new(shape: AccessGrantsInstanceId, location_name: "AccessGrantsInstanceId"))
+    ListAccessGrantsInstanceEntry.add_member(:access_grants_instance_arn, Shapes::ShapeRef.new(shape: AccessGrantsInstanceArn, location_name: "AccessGrantsInstanceArn"))
+    ListAccessGrantsInstanceEntry.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "CreatedAt"))
+    ListAccessGrantsInstanceEntry.add_member(:identity_center_arn, Shapes::ShapeRef.new(shape: IdentityCenterArn, location_name: "IdentityCenterArn"))
+    ListAccessGrantsInstanceEntry.struct_class = Types::ListAccessGrantsInstanceEntry
+
+    ListAccessGrantsInstancesRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    ListAccessGrantsInstancesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location: "querystring", location_name: "nextToken"))
+    ListAccessGrantsInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAccessGrantsInstancesRequest.struct_class = Types::ListAccessGrantsInstancesRequest
+
+    ListAccessGrantsInstancesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location_name: "NextToken"))
+    ListAccessGrantsInstancesResult.add_member(:access_grants_instances_list, Shapes::ShapeRef.new(shape: AccessGrantsInstancesList, location_name: "AccessGrantsInstancesList"))
+    ListAccessGrantsInstancesResult.struct_class = Types::ListAccessGrantsInstancesResult
+
+    ListAccessGrantsLocationsEntry.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "CreatedAt"))
+    ListAccessGrantsLocationsEntry.add_member(:access_grants_location_id, Shapes::ShapeRef.new(shape: AccessGrantsLocationId, location_name: "AccessGrantsLocationId"))
+    ListAccessGrantsLocationsEntry.add_member(:access_grants_location_arn, Shapes::ShapeRef.new(shape: AccessGrantsLocationArn, location_name: "AccessGrantsLocationArn"))
+    ListAccessGrantsLocationsEntry.add_member(:location_scope, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "LocationScope"))
+    ListAccessGrantsLocationsEntry.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "IAMRoleArn"))
+    ListAccessGrantsLocationsEntry.struct_class = Types::ListAccessGrantsLocationsEntry
+
+    ListAccessGrantsLocationsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    ListAccessGrantsLocationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location: "querystring", location_name: "nextToken"))
+    ListAccessGrantsLocationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAccessGrantsLocationsRequest.add_member(:location_scope, Shapes::ShapeRef.new(shape: S3Prefix, location: "querystring", location_name: "locationscope"))
+    ListAccessGrantsLocationsRequest.struct_class = Types::ListAccessGrantsLocationsRequest
+
+    ListAccessGrantsLocationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location_name: "NextToken"))
+    ListAccessGrantsLocationsResult.add_member(:access_grants_locations_list, Shapes::ShapeRef.new(shape: AccessGrantsLocationsList, location_name: "AccessGrantsLocationsList"))
+    ListAccessGrantsLocationsResult.struct_class = Types::ListAccessGrantsLocationsResult
+
+    ListAccessGrantsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    ListAccessGrantsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location: "querystring", location_name: "nextToken"))
+    ListAccessGrantsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAccessGrantsRequest.add_member(:grantee_type, Shapes::ShapeRef.new(shape: GranteeType, location: "querystring", location_name: "granteetype"))
+    ListAccessGrantsRequest.add_member(:grantee_identifier, Shapes::ShapeRef.new(shape: GranteeIdentifier, location: "querystring", location_name: "granteeidentifier"))
+    ListAccessGrantsRequest.add_member(:permission, Shapes::ShapeRef.new(shape: Permission, location: "querystring", location_name: "permission"))
+    ListAccessGrantsRequest.add_member(:grant_scope, Shapes::ShapeRef.new(shape: S3Prefix, location: "querystring", location_name: "grantscope"))
+    ListAccessGrantsRequest.add_member(:application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location: "querystring", location_name: "application_arn"))
+    ListAccessGrantsRequest.struct_class = Types::ListAccessGrantsRequest
+
+    ListAccessGrantsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location_name: "NextToken"))
+    ListAccessGrantsResult.add_member(:access_grants_list, Shapes::ShapeRef.new(shape: AccessGrantsList, location_name: "AccessGrantsList"))
+    ListAccessGrantsResult.struct_class = Types::ListAccessGrantsResult
 
     ListAccessPointsForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
     ListAccessPointsForObjectLambdaRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location: "querystring", location_name: "nextToken"))
@@ -1059,6 +1400,40 @@ module Aws::S3Control
     ListStorageLensConfigurationsResult.add_member(:storage_lens_configuration_list, Shapes::ShapeRef.new(shape: StorageLensConfigurationList, location_name: "StorageLensConfigurationList"))
     ListStorageLensConfigurationsResult.struct_class = Types::ListStorageLensConfigurationsResult
 
+    ListStorageLensGroupEntry.add_member(:name, Shapes::ShapeRef.new(shape: StorageLensGroupName, required: true, location_name: "Name"))
+    ListStorageLensGroupEntry.add_member(:storage_lens_group_arn, Shapes::ShapeRef.new(shape: StorageLensGroupArn, required: true, location_name: "StorageLensGroupArn"))
+    ListStorageLensGroupEntry.add_member(:home_region, Shapes::ShapeRef.new(shape: S3AWSRegion, required: true, location_name: "HomeRegion"))
+    ListStorageLensGroupEntry.struct_class = Types::ListStorageLensGroupEntry
+
+    ListStorageLensGroupsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    ListStorageLensGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location: "querystring", location_name: "nextToken"))
+    ListStorageLensGroupsRequest.struct_class = Types::ListStorageLensGroupsRequest
+
+    ListStorageLensGroupsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: ContinuationToken, location_name: "NextToken"))
+    ListStorageLensGroupsResult.add_member(:storage_lens_group_list, Shapes::ShapeRef.new(shape: StorageLensGroupList, location_name: "StorageLensGroupList"))
+    ListStorageLensGroupsResult.struct_class = Types::ListStorageLensGroupsResult
+
+    ListTagsForResourceRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: S3ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResult.struct_class = Types::ListTagsForResourceResult
+
+    MatchAnyPrefix.member = Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix")
+
+    MatchAnySuffix.member = Shapes::ShapeRef.new(shape: Suffix, location_name: "Suffix")
+
+    MatchAnyTag.member = Shapes::ShapeRef.new(shape: S3Tag, location_name: "Tag")
+
+    MatchObjectAge.add_member(:days_greater_than, Shapes::ShapeRef.new(shape: ObjectAgeValue, location_name: "DaysGreaterThan"))
+    MatchObjectAge.add_member(:days_less_than, Shapes::ShapeRef.new(shape: ObjectAgeValue, location_name: "DaysLessThan"))
+    MatchObjectAge.struct_class = Types::MatchObjectAge
+
+    MatchObjectSize.add_member(:bytes_greater_than, Shapes::ShapeRef.new(shape: ObjectSizeValue, location_name: "BytesGreaterThan"))
+    MatchObjectSize.add_member(:bytes_less_than, Shapes::ShapeRef.new(shape: ObjectSizeValue, location_name: "BytesLessThan"))
+    MatchObjectSize.struct_class = Types::MatchObjectSize
+
     Metrics.add_member(:status, Shapes::ShapeRef.new(shape: MetricsStatus, required: true, location_name: "Status"))
     Metrics.add_member(:event_threshold, Shapes::ShapeRef.new(shape: ReplicationTimeValue, location_name: "EventThreshold"))
     Metrics.struct_class = Types::Metrics
@@ -1093,6 +1468,8 @@ module Aws::S3Control
 
     NoSuchPublicAccessBlockConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: NoSuchPublicAccessBlockConfigurationMessage, location_name: "Message"))
     NoSuchPublicAccessBlockConfiguration.struct_class = Types::NoSuchPublicAccessBlockConfiguration
+
+    NonEmptyMaxLength1024StringList.member = Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String)
 
     NoncurrentVersionExpiration.add_member(:noncurrent_days, Shapes::ShapeRef.new(shape: Days, location_name: "NoncurrentDays"))
     NoncurrentVersionExpiration.add_member(:newer_noncurrent_versions, Shapes::ShapeRef.new(shape: NoncurrentVersionCount, location_name: "NewerNoncurrentVersions", metadata: {"box"=>true}))
@@ -1158,6 +1535,16 @@ module Aws::S3Control
     PublicAccessBlockConfiguration.add_member(:block_public_policy, Shapes::ShapeRef.new(shape: Setting, location_name: "BlockPublicPolicy"))
     PublicAccessBlockConfiguration.add_member(:restrict_public_buckets, Shapes::ShapeRef.new(shape: Setting, location_name: "RestrictPublicBuckets"))
     PublicAccessBlockConfiguration.struct_class = Types::PublicAccessBlockConfiguration
+
+    PutAccessGrantsInstanceResourcePolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    PutAccessGrantsInstanceResourcePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, required: true, location_name: "Policy"))
+    PutAccessGrantsInstanceResourcePolicyRequest.add_member(:organization, Shapes::ShapeRef.new(shape: Organization, location_name: "Organization"))
+    PutAccessGrantsInstanceResourcePolicyRequest.struct_class = Types::PutAccessGrantsInstanceResourcePolicyRequest
+
+    PutAccessGrantsInstanceResourcePolicyResult.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "Policy"))
+    PutAccessGrantsInstanceResourcePolicyResult.add_member(:organization, Shapes::ShapeRef.new(shape: Organization, location_name: "Organization"))
+    PutAccessGrantsInstanceResourcePolicyResult.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "CreatedAt"))
+    PutAccessGrantsInstanceResourcePolicyResult.struct_class = Types::PutAccessGrantsInstanceResourcePolicyResult
 
     PutAccessPointConfigurationForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
     PutAccessPointConfigurationForObjectLambdaRequest.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location: "uri", location_name: "name"))
@@ -1328,7 +1715,7 @@ module Aws::S3Control
     S3BucketDestination.add_member(:encryption, Shapes::ShapeRef.new(shape: StorageLensDataExportEncryption, location_name: "Encryption"))
     S3BucketDestination.struct_class = Types::S3BucketDestination
 
-    S3CopyObjectOperation.add_member(:target_resource, Shapes::ShapeRef.new(shape: S3BucketArnString, location_name: "TargetResource"))
+    S3CopyObjectOperation.add_member(:target_resource, Shapes::ShapeRef.new(shape: S3RegionalOrS3ExpressBucketArnString, location_name: "TargetResource"))
     S3CopyObjectOperation.add_member(:canned_access_control_list, Shapes::ShapeRef.new(shape: S3CannedAccessControlList, location_name: "CannedAccessControlList", metadata: {"box"=>true}))
     S3CopyObjectOperation.add_member(:access_control_grants, Shapes::ShapeRef.new(shape: S3GrantList, location_name: "AccessControlGrants", metadata: {"box"=>true}))
     S3CopyObjectOperation.add_member(:metadata_directive, Shapes::ShapeRef.new(shape: S3MetadataDirective, location_name: "MetadataDirective"))
@@ -1453,6 +1840,8 @@ module Aws::S3Control
     SseKmsEncryptedObjects.add_member(:status, Shapes::ShapeRef.new(shape: SseKmsEncryptedObjectsStatus, required: true, location_name: "Status"))
     SseKmsEncryptedObjects.struct_class = Types::SseKmsEncryptedObjects
 
+    StorageClassList.member = Shapes::ShapeRef.new(shape: S3StorageClass)
+
     StorageLensAwsOrg.add_member(:arn, Shapes::ShapeRef.new(shape: AwsOrgArn, required: true, location_name: "Arn"))
     StorageLensAwsOrg.struct_class = Types::StorageLensAwsOrg
 
@@ -1476,6 +1865,47 @@ module Aws::S3Control
     StorageLensDataExportEncryption.add_member(:ssekms, Shapes::ShapeRef.new(shape: SSEKMS, location_name: "SSE-KMS"))
     StorageLensDataExportEncryption.struct_class = Types::StorageLensDataExportEncryption
 
+    StorageLensGroup.add_member(:name, Shapes::ShapeRef.new(shape: StorageLensGroupName, required: true, location_name: "Name"))
+    StorageLensGroup.add_member(:filter, Shapes::ShapeRef.new(shape: StorageLensGroupFilter, required: true, location_name: "Filter"))
+    StorageLensGroup.add_member(:storage_lens_group_arn, Shapes::ShapeRef.new(shape: StorageLensGroupArn, location_name: "StorageLensGroupArn"))
+    StorageLensGroup.struct_class = Types::StorageLensGroup
+
+    StorageLensGroupAndOperator.add_member(:match_any_prefix, Shapes::ShapeRef.new(shape: MatchAnyPrefix, location_name: "MatchAnyPrefix"))
+    StorageLensGroupAndOperator.add_member(:match_any_suffix, Shapes::ShapeRef.new(shape: MatchAnySuffix, location_name: "MatchAnySuffix"))
+    StorageLensGroupAndOperator.add_member(:match_any_tag, Shapes::ShapeRef.new(shape: MatchAnyTag, location_name: "MatchAnyTag"))
+    StorageLensGroupAndOperator.add_member(:match_object_age, Shapes::ShapeRef.new(shape: MatchObjectAge, location_name: "MatchObjectAge"))
+    StorageLensGroupAndOperator.add_member(:match_object_size, Shapes::ShapeRef.new(shape: MatchObjectSize, location_name: "MatchObjectSize"))
+    StorageLensGroupAndOperator.struct_class = Types::StorageLensGroupAndOperator
+
+    StorageLensGroupFilter.add_member(:match_any_prefix, Shapes::ShapeRef.new(shape: MatchAnyPrefix, location_name: "MatchAnyPrefix"))
+    StorageLensGroupFilter.add_member(:match_any_suffix, Shapes::ShapeRef.new(shape: MatchAnySuffix, location_name: "MatchAnySuffix"))
+    StorageLensGroupFilter.add_member(:match_any_tag, Shapes::ShapeRef.new(shape: MatchAnyTag, location_name: "MatchAnyTag"))
+    StorageLensGroupFilter.add_member(:match_object_age, Shapes::ShapeRef.new(shape: MatchObjectAge, location_name: "MatchObjectAge"))
+    StorageLensGroupFilter.add_member(:match_object_size, Shapes::ShapeRef.new(shape: MatchObjectSize, location_name: "MatchObjectSize"))
+    StorageLensGroupFilter.add_member(:and, Shapes::ShapeRef.new(shape: StorageLensGroupAndOperator, location_name: "And"))
+    StorageLensGroupFilter.add_member(:or, Shapes::ShapeRef.new(shape: StorageLensGroupOrOperator, location_name: "Or"))
+    StorageLensGroupFilter.struct_class = Types::StorageLensGroupFilter
+
+    StorageLensGroupLevel.add_member(:selection_criteria, Shapes::ShapeRef.new(shape: StorageLensGroupLevelSelectionCriteria, location_name: "SelectionCriteria"))
+    StorageLensGroupLevel.struct_class = Types::StorageLensGroupLevel
+
+    StorageLensGroupLevelExclude.member = Shapes::ShapeRef.new(shape: StorageLensGroupArn, location_name: "Arn")
+
+    StorageLensGroupLevelInclude.member = Shapes::ShapeRef.new(shape: StorageLensGroupArn, location_name: "Arn")
+
+    StorageLensGroupLevelSelectionCriteria.add_member(:include, Shapes::ShapeRef.new(shape: StorageLensGroupLevelInclude, location_name: "Include"))
+    StorageLensGroupLevelSelectionCriteria.add_member(:exclude, Shapes::ShapeRef.new(shape: StorageLensGroupLevelExclude, location_name: "Exclude"))
+    StorageLensGroupLevelSelectionCriteria.struct_class = Types::StorageLensGroupLevelSelectionCriteria
+
+    StorageLensGroupList.member = Shapes::ShapeRef.new(shape: ListStorageLensGroupEntry, location_name: "StorageLensGroup")
+
+    StorageLensGroupOrOperator.add_member(:match_any_prefix, Shapes::ShapeRef.new(shape: MatchAnyPrefix, location_name: "MatchAnyPrefix"))
+    StorageLensGroupOrOperator.add_member(:match_any_suffix, Shapes::ShapeRef.new(shape: MatchAnySuffix, location_name: "MatchAnySuffix"))
+    StorageLensGroupOrOperator.add_member(:match_any_tag, Shapes::ShapeRef.new(shape: MatchAnyTag, location_name: "MatchAnyTag"))
+    StorageLensGroupOrOperator.add_member(:match_object_age, Shapes::ShapeRef.new(shape: MatchObjectAge, location_name: "MatchObjectAge"))
+    StorageLensGroupOrOperator.add_member(:match_object_size, Shapes::ShapeRef.new(shape: MatchObjectSize, location_name: "MatchObjectSize"))
+    StorageLensGroupOrOperator.struct_class = Types::StorageLensGroupOrOperator
+
     StorageLensTag.add_member(:key, Shapes::ShapeRef.new(shape: TagKeyString, required: true, location_name: "Key"))
     StorageLensTag.add_member(:value, Shapes::ShapeRef.new(shape: TagValueString, required: true, location_name: "Value"))
     StorageLensTag.struct_class = Types::StorageLensTag
@@ -1488,6 +1918,21 @@ module Aws::S3Control
     SubmitMultiRegionAccessPointRoutesRequest.struct_class = Types::SubmitMultiRegionAccessPointRoutesRequest
 
     SubmitMultiRegionAccessPointRoutesResult.struct_class = Types::SubmitMultiRegionAccessPointRoutesResult
+
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKeyString, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValueString, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKeyString)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag, location_name: "Tag")
+
+    TagResourceRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: S3ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResult.struct_class = Types::TagResourceResult
 
     Tagging.add_member(:tag_set, Shapes::ShapeRef.new(shape: S3TagSet, required: true, location_name: "TagSet"))
     Tagging.struct_class = Types::Tagging
@@ -1504,6 +1949,25 @@ module Aws::S3Control
     Transition.struct_class = Types::Transition
 
     TransitionList.member = Shapes::ShapeRef.new(shape: Transition, location_name: "Transition")
+
+    UntagResourceRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: S3ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResult.struct_class = Types::UntagResourceResult
+
+    UpdateAccessGrantsLocationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    UpdateAccessGrantsLocationRequest.add_member(:access_grants_location_id, Shapes::ShapeRef.new(shape: AccessGrantsLocationId, required: true, location: "uri", location_name: "id"))
+    UpdateAccessGrantsLocationRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "IAMRoleArn"))
+    UpdateAccessGrantsLocationRequest.struct_class = Types::UpdateAccessGrantsLocationRequest
+
+    UpdateAccessGrantsLocationResult.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "CreatedAt"))
+    UpdateAccessGrantsLocationResult.add_member(:access_grants_location_id, Shapes::ShapeRef.new(shape: AccessGrantsLocationId, location_name: "AccessGrantsLocationId"))
+    UpdateAccessGrantsLocationResult.add_member(:access_grants_location_arn, Shapes::ShapeRef.new(shape: AccessGrantsLocationArn, location_name: "AccessGrantsLocationArn"))
+    UpdateAccessGrantsLocationResult.add_member(:location_scope, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "LocationScope"))
+    UpdateAccessGrantsLocationResult.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "IAMRoleArn"))
+    UpdateAccessGrantsLocationResult.struct_class = Types::UpdateAccessGrantsLocationResult
 
     UpdateJobPriorityRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
     UpdateJobPriorityRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "id"))
@@ -1524,6 +1988,14 @@ module Aws::S3Control
     UpdateJobStatusResult.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "Status"))
     UpdateJobStatusResult.add_member(:status_update_reason, Shapes::ShapeRef.new(shape: JobStatusUpdateReason, location_name: "StatusUpdateReason"))
     UpdateJobStatusResult.struct_class = Types::UpdateJobStatusResult
+
+    UpdateStorageLensGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: StorageLensGroupName, required: true, location: "uri", location_name: "name"))
+    UpdateStorageLensGroupRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-account-id", metadata: {"contextParam"=>{"name"=>"AccountId"}}))
+    UpdateStorageLensGroupRequest.add_member(:storage_lens_group, Shapes::ShapeRef.new(shape: StorageLensGroup, required: true, location_name: "StorageLensGroup"))
+    UpdateStorageLensGroupRequest.struct_class = Types::UpdateStorageLensGroupRequest
+
+    UserArguments.key = Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String)
+    UserArguments.value = Shapes::ShapeRef.new(shape: MaxLength1024String)
 
     VersioningConfiguration.add_member(:mfa_delete, Shapes::ShapeRef.new(shape: MFADelete, location_name: "MfaDelete"))
     VersioningConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: BucketVersioningStatus, location_name: "Status"))
@@ -1548,6 +2020,70 @@ module Aws::S3Control
         "signingName" => "s3",
         "uid" => "s3control-2018-08-20",
       }
+
+      api.add_operation(:associate_access_grants_identity_center, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateAccessGrantsIdentityCenter"
+        o.http_method = "POST"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/identitycenter"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: AssociateAccessGrantsIdentityCenterRequest,
+          location_name: "AssociateAccessGrantsIdentityCenterRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:create_access_grant, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccessGrant"
+        o.http_method = "POST"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/grant"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateAccessGrantRequest,
+          location_name: "CreateAccessGrantRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: CreateAccessGrantResult)
+      end)
+
+      api.add_operation(:create_access_grants_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccessGrantsInstance"
+        o.http_method = "POST"
+        o.http_request_uri = "/v20180820/accessgrantsinstance"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateAccessGrantsInstanceRequest,
+          location_name: "CreateAccessGrantsInstanceRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: CreateAccessGrantsInstanceResult)
+      end)
+
+      api.add_operation(:create_access_grants_location, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccessGrantsLocation"
+        o.http_method = "POST"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/location"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateAccessGrantsLocationRequest,
+          location_name: "CreateAccessGrantsLocationRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: CreateAccessGrantsLocationResult)
+      end)
 
       api.add_operation(:create_access_point, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAccessPoint"
@@ -1623,6 +2159,65 @@ module Aws::S3Control
           }
         )
         o.output = Shapes::ShapeRef.new(shape: CreateMultiRegionAccessPointResult)
+      end)
+
+      api.add_operation(:create_storage_lens_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateStorageLensGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/v20180820/storagelensgroup"
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateStorageLensGroupRequest,
+          location_name: "CreateStorageLensGroupRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:delete_access_grant, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccessGrant"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/grant/{id}"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccessGrantRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:delete_access_grants_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccessGrantsInstance"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v20180820/accessgrantsinstance"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccessGrantsInstanceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:delete_access_grants_instance_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccessGrantsInstanceResourcePolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/resourcepolicy"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccessGrantsInstanceResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:delete_access_grants_location, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccessGrantsLocation"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/location/{id}"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccessGrantsLocationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
       api.add_operation(:delete_access_point, Seahorse::Model::Operation.new.tap do |o|
@@ -1774,6 +2369,16 @@ module Aws::S3Control
         o.output = Shapes::ShapeRef.new(shape: DeleteStorageLensConfigurationTaggingResult)
       end)
 
+      api.add_operation(:delete_storage_lens_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteStorageLensGroup"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v20180820/storagelensgroup/{name}"
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: DeleteStorageLensGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
       api.add_operation(:describe_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeJob"
         o.http_method = "GET"
@@ -1797,6 +2402,72 @@ module Aws::S3Control
         }
         o.input = Shapes::ShapeRef.new(shape: DescribeMultiRegionAccessPointOperationRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeMultiRegionAccessPointOperationResult)
+      end)
+
+      api.add_operation(:dissociate_access_grants_identity_center, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DissociateAccessGrantsIdentityCenter"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/identitycenter"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: DissociateAccessGrantsIdentityCenterRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:get_access_grant, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccessGrant"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/grant/{id}"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetAccessGrantRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccessGrantResult)
+      end)
+
+      api.add_operation(:get_access_grants_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccessGrantsInstance"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/accessgrantsinstance"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetAccessGrantsInstanceRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccessGrantsInstanceResult)
+      end)
+
+      api.add_operation(:get_access_grants_instance_for_prefix, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccessGrantsInstanceForPrefix"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/prefix"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetAccessGrantsInstanceForPrefixRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccessGrantsInstanceForPrefixResult)
+      end)
+
+      api.add_operation(:get_access_grants_instance_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccessGrantsInstanceResourcePolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/resourcepolicy"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetAccessGrantsInstanceResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccessGrantsInstanceResourcePolicyResult)
+      end)
+
+      api.add_operation(:get_access_grants_location, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccessGrantsLocation"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/location/{id}"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetAccessGrantsLocationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccessGrantsLocationResult)
       end)
 
       api.add_operation(:get_access_point, Seahorse::Model::Operation.new.tap do |o|
@@ -1929,6 +2600,17 @@ module Aws::S3Control
         o.output = Shapes::ShapeRef.new(shape: GetBucketVersioningResult)
       end)
 
+      api.add_operation(:get_data_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDataAccess"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/dataaccess"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetDataAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDataAccessResult)
+      end)
+
       api.add_operation(:get_job_tagging, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetJobTagging"
         o.http_method = "GET"
@@ -2015,6 +2697,67 @@ module Aws::S3Control
         }
         o.input = Shapes::ShapeRef.new(shape: GetStorageLensConfigurationTaggingRequest)
         o.output = Shapes::ShapeRef.new(shape: GetStorageLensConfigurationTaggingResult)
+      end)
+
+      api.add_operation(:get_storage_lens_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetStorageLensGroup"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/storagelensgroup/{name}"
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetStorageLensGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetStorageLensGroupResult)
+      end)
+
+      api.add_operation(:list_access_grants, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccessGrants"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/grants"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListAccessGrantsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAccessGrantsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_access_grants_instances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccessGrantsInstances"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/accessgrantsinstances"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListAccessGrantsInstancesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAccessGrantsInstancesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_access_grants_locations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccessGrantsLocations"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/locations"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListAccessGrantsLocationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAccessGrantsLocationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_access_points, Seahorse::Model::Operation.new.tap do |o|
@@ -2114,6 +2857,47 @@ module Aws::S3Control
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_storage_lens_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStorageLensGroups"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/storagelensgroup"
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListStorageLensGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListStorageLensGroupsResult)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/tags/{resourceArn+}"
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResult)
+      end)
+
+      api.add_operation(:put_access_grants_instance_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAccessGrantsInstanceResourcePolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/resourcepolicy"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: PutAccessGrantsInstanceResourcePolicyRequest,
+          location_name: "PutAccessGrantsInstanceResourcePolicyRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: PutAccessGrantsInstanceResourcePolicyResult)
       end)
 
       api.add_operation(:put_access_point_configuration_for_object_lambda, Seahorse::Model::Operation.new.tap do |o|
@@ -2312,6 +3096,47 @@ module Aws::S3Control
         o.output = Shapes::ShapeRef.new(shape: SubmitMultiRegionAccessPointRoutesResult)
       end)
 
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/v20180820/tags/{resourceArn+}"
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest,
+          location_name: "TagResourceRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResult)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v20180820/tags/{resourceArn+}"
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResult)
+      end)
+
+      api.add_operation(:update_access_grants_location, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAccessGrantsLocation"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v20180820/accessgrantsinstance/location/{id}"
+        o.http_checksum_required = true
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateAccessGrantsLocationRequest,
+          location_name: "UpdateAccessGrantsLocationRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: UpdateAccessGrantsLocationResult)
+      end)
+
       api.add_operation(:update_job_priority, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateJobPriority"
         o.http_method = "POST"
@@ -2339,6 +3164,21 @@ module Aws::S3Control
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: JobStatusException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_storage_lens_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateStorageLensGroup"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v20180820/storagelensgroup/{name}"
+        o.endpoint_pattern = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: UpdateStorageLensGroupRequest,
+          location_name: "UpdateStorageLensGroupRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
     end
 

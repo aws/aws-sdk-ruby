@@ -767,7 +767,15 @@ module Aws::STS
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html
     #
     # @option params [Array<Types::ProvidedContext>] :provided_contexts
-    #   Reserved for future use.
+    #   A list of previously acquired trusted context assertions in the format
+    #   of a JSON array. The trusted context assertion is signed and encrypted
+    #   by Amazon Web Services STS.
+    #
+    #   The following is an example of a `ProvidedContext` value that includes
+    #   a single trusted context assertion and the ARN of the context provider
+    #   from which the trusted context assertion was generated.
+    #
+    #   `[\{"ProviderArn":"arn:aws:iam::aws:contextProvider/IdentityCenter","ContextAssertion":"trusted-context-assertion"\}]`
     #
     # @return [Types::AssumeRoleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2344,7 +2352,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.185.1'
+      context[:gem_version] = '3.191.2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

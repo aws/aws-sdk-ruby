@@ -1,0 +1,982 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CleanRooms
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchGetCollaborationAnalysisTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetCollaborationAnalysisTemplateOutput]
+        def collaboration_analysis_templates: () -> ::Array[Types::CollaborationAnalysisTemplate]
+        def errors: () -> ::Array[Types::BatchGetCollaborationAnalysisTemplateError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#batch_get_collaboration_analysis_template-instance_method
+      def batch_get_collaboration_analysis_template: (
+                                                       collaboration_identifier: ::String,
+                                                       analysis_template_arns: Array[::String]
+                                                     ) -> _BatchGetCollaborationAnalysisTemplateResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetCollaborationAnalysisTemplateResponseSuccess
+
+      interface _BatchGetSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetSchemaOutput]
+        def schemas: () -> ::Array[Types::Schema]
+        def errors: () -> ::Array[Types::BatchGetSchemaError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#batch_get_schema-instance_method
+      def batch_get_schema: (
+                              collaboration_identifier: ::String,
+                              names: Array[::String]
+                            ) -> _BatchGetSchemaResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetSchemaResponseSuccess
+
+      interface _CreateAnalysisTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAnalysisTemplateOutput]
+        def analysis_template: () -> Types::AnalysisTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#create_analysis_template-instance_method
+      def create_analysis_template: (
+                                      ?description: ::String,
+                                      membership_identifier: ::String,
+                                      name: ::String,
+                                      format: ("SQL"),
+                                      source: {
+                                        text: ::String?
+                                      },
+                                      ?tags: Hash[::String, ::String],
+                                      ?analysis_parameters: Array[
+                                        {
+                                          name: ::String,
+                                          type: ("SMALLINT" | "INTEGER" | "BIGINT" | "DECIMAL" | "REAL" | "DOUBLE_PRECISION" | "BOOLEAN" | "CHAR" | "VARCHAR" | "DATE" | "TIMESTAMP" | "TIMESTAMPTZ" | "TIME" | "TIMETZ" | "VARBYTE"),
+                                          default_value: ::String?
+                                        },
+                                      ]
+                                    ) -> _CreateAnalysisTemplateResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAnalysisTemplateResponseSuccess
+
+      interface _CreateCollaborationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCollaborationOutput]
+        def collaboration: () -> Types::Collaboration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#create_collaboration-instance_method
+      def create_collaboration: (
+                                  members: Array[
+                                    {
+                                      account_id: ::String,
+                                      member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")],
+                                      display_name: ::String,
+                                      payment_configuration: {
+                                        query_compute: {
+                                          is_responsible: bool
+                                        }
+                                      }?
+                                    },
+                                  ],
+                                  name: ::String,
+                                  description: ::String,
+                                  creator_member_abilities: Array[("CAN_QUERY" | "CAN_RECEIVE_RESULTS")],
+                                  creator_display_name: ::String,
+                                  ?data_encryption_metadata: {
+                                    allow_cleartext: bool,
+                                    allow_duplicates: bool,
+                                    allow_joins_on_columns_with_different_names: bool,
+                                    preserve_nulls: bool
+                                  },
+                                  query_log_status: ("ENABLED" | "DISABLED"),
+                                  ?tags: Hash[::String, ::String],
+                                  ?creator_payment_configuration: {
+                                    query_compute: {
+                                      is_responsible: bool
+                                    }
+                                  }
+                                ) -> _CreateCollaborationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCollaborationResponseSuccess
+
+      interface _CreateConfiguredAudienceModelAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfiguredAudienceModelAssociationOutput]
+        def configured_audience_model_association: () -> Types::ConfiguredAudienceModelAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#create_configured_audience_model_association-instance_method
+      def create_configured_audience_model_association: (
+                                                          membership_identifier: ::String,
+                                                          configured_audience_model_arn: ::String,
+                                                          configured_audience_model_association_name: ::String,
+                                                          manage_resource_policies: bool,
+                                                          ?tags: Hash[::String, ::String],
+                                                          ?description: ::String
+                                                        ) -> _CreateConfiguredAudienceModelAssociationResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfiguredAudienceModelAssociationResponseSuccess
+
+      interface _CreateConfiguredTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfiguredTableOutput]
+        def configured_table: () -> Types::ConfiguredTable
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#create_configured_table-instance_method
+      def create_configured_table: (
+                                     name: ::String,
+                                     ?description: ::String,
+                                     table_reference: {
+                                       glue: {
+                                         table_name: ::String,
+                                         database_name: ::String
+                                       }?
+                                     },
+                                     allowed_columns: Array[::String],
+                                     analysis_method: ("DIRECT_QUERY"),
+                                     ?tags: Hash[::String, ::String]
+                                   ) -> _CreateConfiguredTableResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfiguredTableResponseSuccess
+
+      interface _CreateConfiguredTableAnalysisRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfiguredTableAnalysisRuleOutput]
+        def analysis_rule: () -> Types::ConfiguredTableAnalysisRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#create_configured_table_analysis_rule-instance_method
+      def create_configured_table_analysis_rule: (
+                                                   configured_table_identifier: ::String,
+                                                   analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM"),
+                                                   analysis_rule_policy: {
+                                                     v1: {
+                                                       list: {
+                                                         join_columns: Array[::String],
+                                                         allowed_join_operators: Array[("OR" | "AND")]?,
+                                                         list_columns: Array[::String]
+                                                       }?,
+                                                       aggregation: {
+                                                         aggregate_columns: Array[
+                                                           {
+                                                             column_names: Array[::String],
+                                                             function: ("SUM" | "SUM_DISTINCT" | "COUNT" | "COUNT_DISTINCT" | "AVG")
+                                                           },
+                                                         ],
+                                                         join_columns: Array[::String],
+                                                         join_required: ("QUERY_RUNNER")?,
+                                                         allowed_join_operators: Array[("OR" | "AND")]?,
+                                                         dimension_columns: Array[::String],
+                                                         scalar_functions: Array[("TRUNC" | "ABS" | "CEILING" | "FLOOR" | "LN" | "LOG" | "ROUND" | "SQRT" | "CAST" | "LOWER" | "RTRIM" | "UPPER" | "COALESCE")],
+                                                         output_constraints: Array[
+                                                           {
+                                                             column_name: ::String,
+                                                             minimum: ::Integer,
+                                                             type: ("COUNT_DISTINCT")
+                                                           },
+                                                         ]
+                                                       }?,
+                                                       custom: {
+                                                         allowed_analyses: Array[::String],
+                                                         allowed_analysis_providers: Array[::String]?,
+                                                         differential_privacy: {
+                                                           columns: Array[
+                                                             {
+                                                               name: ::String
+                                                             },
+                                                           ]
+                                                         }?
+                                                       }?
+                                                     }?
+                                                   }
+                                                 ) -> _CreateConfiguredTableAnalysisRuleResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfiguredTableAnalysisRuleResponseSuccess
+
+      interface _CreateConfiguredTableAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfiguredTableAssociationOutput]
+        def configured_table_association: () -> Types::ConfiguredTableAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#create_configured_table_association-instance_method
+      def create_configured_table_association: (
+                                                 name: ::String,
+                                                 ?description: ::String,
+                                                 membership_identifier: ::String,
+                                                 configured_table_identifier: ::String,
+                                                 role_arn: ::String,
+                                                 ?tags: Hash[::String, ::String]
+                                               ) -> _CreateConfiguredTableAssociationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfiguredTableAssociationResponseSuccess
+
+      interface _CreateMembershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMembershipOutput]
+        def membership: () -> Types::Membership
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#create_membership-instance_method
+      def create_membership: (
+                               collaboration_identifier: ::String,
+                               query_log_status: ("ENABLED" | "DISABLED"),
+                               ?tags: Hash[::String, ::String],
+                               ?default_result_configuration: {
+                                 output_configuration: {
+                                   s3: {
+                                     result_format: ("CSV" | "PARQUET"),
+                                     bucket: ::String,
+                                     key_prefix: ::String?
+                                   }?
+                                 },
+                                 role_arn: ::String?
+                               },
+                               ?payment_configuration: {
+                                 query_compute: {
+                                   is_responsible: bool
+                                 }
+                               }
+                             ) -> _CreateMembershipResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMembershipResponseSuccess
+
+      interface _CreatePrivacyBudgetTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePrivacyBudgetTemplateOutput]
+        def privacy_budget_template: () -> Types::PrivacyBudgetTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#create_privacy_budget_template-instance_method
+      def create_privacy_budget_template: (
+                                            membership_identifier: ::String,
+                                            auto_refresh: ("CALENDAR_MONTH" | "NONE"),
+                                            privacy_budget_type: ("DIFFERENTIAL_PRIVACY"),
+                                            parameters: {
+                                              differential_privacy: {
+                                                epsilon: ::Integer,
+                                                users_noise_per_query: ::Integer
+                                              }?
+                                            },
+                                            ?tags: Hash[::String, ::String]
+                                          ) -> _CreatePrivacyBudgetTemplateResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePrivacyBudgetTemplateResponseSuccess
+
+      interface _DeleteAnalysisTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAnalysisTemplateOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#delete_analysis_template-instance_method
+      def delete_analysis_template: (
+                                      membership_identifier: ::String,
+                                      analysis_template_identifier: ::String
+                                    ) -> _DeleteAnalysisTemplateResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAnalysisTemplateResponseSuccess
+
+      interface _DeleteCollaborationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCollaborationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#delete_collaboration-instance_method
+      def delete_collaboration: (
+                                  collaboration_identifier: ::String
+                                ) -> _DeleteCollaborationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCollaborationResponseSuccess
+
+      interface _DeleteConfiguredAudienceModelAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfiguredAudienceModelAssociationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#delete_configured_audience_model_association-instance_method
+      def delete_configured_audience_model_association: (
+                                                          configured_audience_model_association_identifier: ::String,
+                                                          membership_identifier: ::String
+                                                        ) -> _DeleteConfiguredAudienceModelAssociationResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfiguredAudienceModelAssociationResponseSuccess
+
+      interface _DeleteConfiguredTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfiguredTableOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#delete_configured_table-instance_method
+      def delete_configured_table: (
+                                     configured_table_identifier: ::String
+                                   ) -> _DeleteConfiguredTableResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfiguredTableResponseSuccess
+
+      interface _DeleteConfiguredTableAnalysisRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfiguredTableAnalysisRuleOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#delete_configured_table_analysis_rule-instance_method
+      def delete_configured_table_analysis_rule: (
+                                                   configured_table_identifier: ::String,
+                                                   analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM")
+                                                 ) -> _DeleteConfiguredTableAnalysisRuleResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfiguredTableAnalysisRuleResponseSuccess
+
+      interface _DeleteConfiguredTableAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfiguredTableAssociationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#delete_configured_table_association-instance_method
+      def delete_configured_table_association: (
+                                                 configured_table_association_identifier: ::String,
+                                                 membership_identifier: ::String
+                                               ) -> _DeleteConfiguredTableAssociationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfiguredTableAssociationResponseSuccess
+
+      interface _DeleteMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMemberOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#delete_member-instance_method
+      def delete_member: (
+                           collaboration_identifier: ::String,
+                           account_id: ::String
+                         ) -> _DeleteMemberResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMemberResponseSuccess
+
+      interface _DeleteMembershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMembershipOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#delete_membership-instance_method
+      def delete_membership: (
+                               membership_identifier: ::String
+                             ) -> _DeleteMembershipResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMembershipResponseSuccess
+
+      interface _DeletePrivacyBudgetTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePrivacyBudgetTemplateOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#delete_privacy_budget_template-instance_method
+      def delete_privacy_budget_template: (
+                                            membership_identifier: ::String,
+                                            privacy_budget_template_identifier: ::String
+                                          ) -> _DeletePrivacyBudgetTemplateResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePrivacyBudgetTemplateResponseSuccess
+
+      interface _GetAnalysisTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAnalysisTemplateOutput]
+        def analysis_template: () -> Types::AnalysisTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_analysis_template-instance_method
+      def get_analysis_template: (
+                                   membership_identifier: ::String,
+                                   analysis_template_identifier: ::String
+                                 ) -> _GetAnalysisTemplateResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAnalysisTemplateResponseSuccess
+
+      interface _GetCollaborationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCollaborationOutput]
+        def collaboration: () -> Types::Collaboration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_collaboration-instance_method
+      def get_collaboration: (
+                               collaboration_identifier: ::String
+                             ) -> _GetCollaborationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCollaborationResponseSuccess
+
+      interface _GetCollaborationAnalysisTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCollaborationAnalysisTemplateOutput]
+        def collaboration_analysis_template: () -> Types::CollaborationAnalysisTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_collaboration_analysis_template-instance_method
+      def get_collaboration_analysis_template: (
+                                                 collaboration_identifier: ::String,
+                                                 analysis_template_arn: ::String
+                                               ) -> _GetCollaborationAnalysisTemplateResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCollaborationAnalysisTemplateResponseSuccess
+
+      interface _GetCollaborationConfiguredAudienceModelAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCollaborationConfiguredAudienceModelAssociationOutput]
+        def collaboration_configured_audience_model_association: () -> Types::CollaborationConfiguredAudienceModelAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_collaboration_configured_audience_model_association-instance_method
+      def get_collaboration_configured_audience_model_association: (
+                                                                     collaboration_identifier: ::String,
+                                                                     configured_audience_model_association_identifier: ::String
+                                                                   ) -> _GetCollaborationConfiguredAudienceModelAssociationResponseSuccess
+                                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCollaborationConfiguredAudienceModelAssociationResponseSuccess
+
+      interface _GetCollaborationPrivacyBudgetTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCollaborationPrivacyBudgetTemplateOutput]
+        def collaboration_privacy_budget_template: () -> Types::CollaborationPrivacyBudgetTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_collaboration_privacy_budget_template-instance_method
+      def get_collaboration_privacy_budget_template: (
+                                                       collaboration_identifier: ::String,
+                                                       privacy_budget_template_identifier: ::String
+                                                     ) -> _GetCollaborationPrivacyBudgetTemplateResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCollaborationPrivacyBudgetTemplateResponseSuccess
+
+      interface _GetConfiguredAudienceModelAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfiguredAudienceModelAssociationOutput]
+        def configured_audience_model_association: () -> Types::ConfiguredAudienceModelAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_configured_audience_model_association-instance_method
+      def get_configured_audience_model_association: (
+                                                       configured_audience_model_association_identifier: ::String,
+                                                       membership_identifier: ::String
+                                                     ) -> _GetConfiguredAudienceModelAssociationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfiguredAudienceModelAssociationResponseSuccess
+
+      interface _GetConfiguredTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfiguredTableOutput]
+        def configured_table: () -> Types::ConfiguredTable
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_configured_table-instance_method
+      def get_configured_table: (
+                                  configured_table_identifier: ::String
+                                ) -> _GetConfiguredTableResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfiguredTableResponseSuccess
+
+      interface _GetConfiguredTableAnalysisRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfiguredTableAnalysisRuleOutput]
+        def analysis_rule: () -> Types::ConfiguredTableAnalysisRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_configured_table_analysis_rule-instance_method
+      def get_configured_table_analysis_rule: (
+                                                configured_table_identifier: ::String,
+                                                analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM")
+                                              ) -> _GetConfiguredTableAnalysisRuleResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfiguredTableAnalysisRuleResponseSuccess
+
+      interface _GetConfiguredTableAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConfiguredTableAssociationOutput]
+        def configured_table_association: () -> Types::ConfiguredTableAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_configured_table_association-instance_method
+      def get_configured_table_association: (
+                                              configured_table_association_identifier: ::String,
+                                              membership_identifier: ::String
+                                            ) -> _GetConfiguredTableAssociationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfiguredTableAssociationResponseSuccess
+
+      interface _GetMembershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMembershipOutput]
+        def membership: () -> Types::Membership
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_membership-instance_method
+      def get_membership: (
+                            membership_identifier: ::String
+                          ) -> _GetMembershipResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMembershipResponseSuccess
+
+      interface _GetPrivacyBudgetTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPrivacyBudgetTemplateOutput]
+        def privacy_budget_template: () -> Types::PrivacyBudgetTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_privacy_budget_template-instance_method
+      def get_privacy_budget_template: (
+                                         membership_identifier: ::String,
+                                         privacy_budget_template_identifier: ::String
+                                       ) -> _GetPrivacyBudgetTemplateResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPrivacyBudgetTemplateResponseSuccess
+
+      interface _GetProtectedQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProtectedQueryOutput]
+        def protected_query: () -> Types::ProtectedQuery
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_protected_query-instance_method
+      def get_protected_query: (
+                                 membership_identifier: ::String,
+                                 protected_query_identifier: ::String
+                               ) -> _GetProtectedQueryResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProtectedQueryResponseSuccess
+
+      interface _GetSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSchemaOutput]
+        def schema: () -> Types::Schema
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_schema-instance_method
+      def get_schema: (
+                        collaboration_identifier: ::String,
+                        name: ::String
+                      ) -> _GetSchemaResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSchemaResponseSuccess
+
+      interface _GetSchemaAnalysisRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSchemaAnalysisRuleOutput]
+        def analysis_rule: () -> Types::AnalysisRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#get_schema_analysis_rule-instance_method
+      def get_schema_analysis_rule: (
+                                      collaboration_identifier: ::String,
+                                      name: ::String,
+                                      type: ("AGGREGATION" | "LIST" | "CUSTOM")
+                                    ) -> _GetSchemaAnalysisRuleResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSchemaAnalysisRuleResponseSuccess
+
+      interface _ListAnalysisTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAnalysisTemplatesOutput]
+        def next_token: () -> ::String
+        def analysis_template_summaries: () -> ::Array[Types::AnalysisTemplateSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_analysis_templates-instance_method
+      def list_analysis_templates: (
+                                     membership_identifier: ::String,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListAnalysisTemplatesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnalysisTemplatesResponseSuccess
+
+      interface _ListCollaborationAnalysisTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCollaborationAnalysisTemplatesOutput]
+        def next_token: () -> ::String
+        def collaboration_analysis_template_summaries: () -> ::Array[Types::CollaborationAnalysisTemplateSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_collaboration_analysis_templates-instance_method
+      def list_collaboration_analysis_templates: (
+                                                   collaboration_identifier: ::String,
+                                                   ?next_token: ::String,
+                                                   ?max_results: ::Integer
+                                                 ) -> _ListCollaborationAnalysisTemplatesResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCollaborationAnalysisTemplatesResponseSuccess
+
+      interface _ListCollaborationConfiguredAudienceModelAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCollaborationConfiguredAudienceModelAssociationsOutput]
+        def collaboration_configured_audience_model_association_summaries: () -> ::Array[Types::CollaborationConfiguredAudienceModelAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_collaboration_configured_audience_model_associations-instance_method
+      def list_collaboration_configured_audience_model_associations: (
+                                                                       collaboration_identifier: ::String,
+                                                                       ?next_token: ::String,
+                                                                       ?max_results: ::Integer
+                                                                     ) -> _ListCollaborationConfiguredAudienceModelAssociationsResponseSuccess
+                                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCollaborationConfiguredAudienceModelAssociationsResponseSuccess
+
+      interface _ListCollaborationPrivacyBudgetTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCollaborationPrivacyBudgetTemplatesOutput]
+        def next_token: () -> ::String
+        def collaboration_privacy_budget_template_summaries: () -> ::Array[Types::CollaborationPrivacyBudgetTemplateSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_collaboration_privacy_budget_templates-instance_method
+      def list_collaboration_privacy_budget_templates: (
+                                                         collaboration_identifier: ::String,
+                                                         ?next_token: ::String,
+                                                         ?max_results: ::Integer
+                                                       ) -> _ListCollaborationPrivacyBudgetTemplatesResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCollaborationPrivacyBudgetTemplatesResponseSuccess
+
+      interface _ListCollaborationPrivacyBudgetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCollaborationPrivacyBudgetsOutput]
+        def collaboration_privacy_budget_summaries: () -> ::Array[Types::CollaborationPrivacyBudgetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_collaboration_privacy_budgets-instance_method
+      def list_collaboration_privacy_budgets: (
+                                                collaboration_identifier: ::String,
+                                                privacy_budget_type: ("DIFFERENTIAL_PRIVACY"),
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListCollaborationPrivacyBudgetsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCollaborationPrivacyBudgetsResponseSuccess
+
+      interface _ListCollaborationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCollaborationsOutput]
+        def next_token: () -> ::String
+        def collaboration_list: () -> ::Array[Types::CollaborationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_collaborations-instance_method
+      def list_collaborations: (
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer,
+                                 ?member_status: ("INVITED" | "ACTIVE")
+                               ) -> _ListCollaborationsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCollaborationsResponseSuccess
+
+      interface _ListConfiguredAudienceModelAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfiguredAudienceModelAssociationsOutput]
+        def configured_audience_model_association_summaries: () -> ::Array[Types::ConfiguredAudienceModelAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_configured_audience_model_associations-instance_method
+      def list_configured_audience_model_associations: (
+                                                         membership_identifier: ::String,
+                                                         ?next_token: ::String,
+                                                         ?max_results: ::Integer
+                                                       ) -> _ListConfiguredAudienceModelAssociationsResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfiguredAudienceModelAssociationsResponseSuccess
+
+      interface _ListConfiguredTableAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfiguredTableAssociationsOutput]
+        def configured_table_association_summaries: () -> ::Array[Types::ConfiguredTableAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_configured_table_associations-instance_method
+      def list_configured_table_associations: (
+                                                membership_identifier: ::String,
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _ListConfiguredTableAssociationsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfiguredTableAssociationsResponseSuccess
+
+      interface _ListConfiguredTablesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfiguredTablesOutput]
+        def configured_table_summaries: () -> ::Array[Types::ConfiguredTableSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_configured_tables-instance_method
+      def list_configured_tables: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListConfiguredTablesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfiguredTablesResponseSuccess
+
+      interface _ListMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMembersOutput]
+        def next_token: () -> ::String
+        def member_summaries: () -> ::Array[Types::MemberSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_members-instance_method
+      def list_members: (
+                          collaboration_identifier: ::String,
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListMembersResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMembersResponseSuccess
+
+      interface _ListMembershipsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMembershipsOutput]
+        def next_token: () -> ::String
+        def membership_summaries: () -> ::Array[Types::MembershipSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_memberships-instance_method
+      def list_memberships: (
+                              ?next_token: ::String,
+                              ?max_results: ::Integer,
+                              ?status: ("ACTIVE" | "REMOVED" | "COLLABORATION_DELETED")
+                            ) -> _ListMembershipsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMembershipsResponseSuccess
+
+      interface _ListPrivacyBudgetTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPrivacyBudgetTemplatesOutput]
+        def next_token: () -> ::String
+        def privacy_budget_template_summaries: () -> ::Array[Types::PrivacyBudgetTemplateSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_privacy_budget_templates-instance_method
+      def list_privacy_budget_templates: (
+                                           membership_identifier: ::String,
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _ListPrivacyBudgetTemplatesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPrivacyBudgetTemplatesResponseSuccess
+
+      interface _ListPrivacyBudgetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPrivacyBudgetsOutput]
+        def privacy_budget_summaries: () -> ::Array[Types::PrivacyBudgetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_privacy_budgets-instance_method
+      def list_privacy_budgets: (
+                                  membership_identifier: ::String,
+                                  privacy_budget_type: ("DIFFERENTIAL_PRIVACY"),
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListPrivacyBudgetsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPrivacyBudgetsResponseSuccess
+
+      interface _ListProtectedQueriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProtectedQueriesOutput]
+        def next_token: () -> ::String
+        def protected_queries: () -> ::Array[Types::ProtectedQuerySummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_protected_queries-instance_method
+      def list_protected_queries: (
+                                    membership_identifier: ::String,
+                                    ?status: ("SUBMITTED" | "STARTED" | "CANCELLED" | "CANCELLING" | "FAILED" | "SUCCESS" | "TIMED_OUT"),
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListProtectedQueriesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProtectedQueriesResponseSuccess
+
+      interface _ListSchemasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSchemasOutput]
+        def schema_summaries: () -> ::Array[Types::SchemaSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_schemas-instance_method
+      def list_schemas: (
+                          collaboration_identifier: ::String,
+                          ?schema_type: ("TABLE"),
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListSchemasResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSchemasResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PreviewPrivacyImpactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PreviewPrivacyImpactOutput]
+        def privacy_impact: () -> Types::PrivacyImpact
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#preview_privacy_impact-instance_method
+      def preview_privacy_impact: (
+                                    membership_identifier: ::String,
+                                    parameters: {
+                                      differential_privacy: {
+                                        epsilon: ::Integer,
+                                        users_noise_per_query: ::Integer
+                                      }?
+                                    }
+                                  ) -> _PreviewPrivacyImpactResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PreviewPrivacyImpactResponseSuccess
+
+      interface _StartProtectedQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartProtectedQueryOutput]
+        def protected_query: () -> Types::ProtectedQuery
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#start_protected_query-instance_method
+      def start_protected_query: (
+                                   type: ("SQL"),
+                                   membership_identifier: ::String,
+                                   sql_parameters: {
+                                     query_string: ::String?,
+                                     analysis_template_arn: ::String?,
+                                     parameters: Hash[::String, ::String]?
+                                   },
+                                   ?result_configuration: {
+                                     output_configuration: {
+                                       s3: {
+                                         result_format: ("CSV" | "PARQUET"),
+                                         bucket: ::String,
+                                         key_prefix: ::String?
+                                       }?
+                                     }
+                                   }
+                                 ) -> _StartProtectedQueryResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartProtectedQueryResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAnalysisTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAnalysisTemplateOutput]
+        def analysis_template: () -> Types::AnalysisTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#update_analysis_template-instance_method
+      def update_analysis_template: (
+                                      membership_identifier: ::String,
+                                      analysis_template_identifier: ::String,
+                                      ?description: ::String
+                                    ) -> _UpdateAnalysisTemplateResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAnalysisTemplateResponseSuccess
+
+      interface _UpdateCollaborationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCollaborationOutput]
+        def collaboration: () -> Types::Collaboration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#update_collaboration-instance_method
+      def update_collaboration: (
+                                  collaboration_identifier: ::String,
+                                  ?name: ::String,
+                                  ?description: ::String
+                                ) -> _UpdateCollaborationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCollaborationResponseSuccess
+
+      interface _UpdateConfiguredAudienceModelAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfiguredAudienceModelAssociationOutput]
+        def configured_audience_model_association: () -> Types::ConfiguredAudienceModelAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#update_configured_audience_model_association-instance_method
+      def update_configured_audience_model_association: (
+                                                          configured_audience_model_association_identifier: ::String,
+                                                          membership_identifier: ::String,
+                                                          ?description: ::String,
+                                                          ?name: ::String
+                                                        ) -> _UpdateConfiguredAudienceModelAssociationResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfiguredAudienceModelAssociationResponseSuccess
+
+      interface _UpdateConfiguredTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfiguredTableOutput]
+        def configured_table: () -> Types::ConfiguredTable
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#update_configured_table-instance_method
+      def update_configured_table: (
+                                     configured_table_identifier: ::String,
+                                     ?name: ::String,
+                                     ?description: ::String
+                                   ) -> _UpdateConfiguredTableResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfiguredTableResponseSuccess
+
+      interface _UpdateConfiguredTableAnalysisRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfiguredTableAnalysisRuleOutput]
+        def analysis_rule: () -> Types::ConfiguredTableAnalysisRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#update_configured_table_analysis_rule-instance_method
+      def update_configured_table_analysis_rule: (
+                                                   configured_table_identifier: ::String,
+                                                   analysis_rule_type: ("AGGREGATION" | "LIST" | "CUSTOM"),
+                                                   analysis_rule_policy: {
+                                                     v1: {
+                                                       list: {
+                                                         join_columns: Array[::String],
+                                                         allowed_join_operators: Array[("OR" | "AND")]?,
+                                                         list_columns: Array[::String]
+                                                       }?,
+                                                       aggregation: {
+                                                         aggregate_columns: Array[
+                                                           {
+                                                             column_names: Array[::String],
+                                                             function: ("SUM" | "SUM_DISTINCT" | "COUNT" | "COUNT_DISTINCT" | "AVG")
+                                                           },
+                                                         ],
+                                                         join_columns: Array[::String],
+                                                         join_required: ("QUERY_RUNNER")?,
+                                                         allowed_join_operators: Array[("OR" | "AND")]?,
+                                                         dimension_columns: Array[::String],
+                                                         scalar_functions: Array[("TRUNC" | "ABS" | "CEILING" | "FLOOR" | "LN" | "LOG" | "ROUND" | "SQRT" | "CAST" | "LOWER" | "RTRIM" | "UPPER" | "COALESCE")],
+                                                         output_constraints: Array[
+                                                           {
+                                                             column_name: ::String,
+                                                             minimum: ::Integer,
+                                                             type: ("COUNT_DISTINCT")
+                                                           },
+                                                         ]
+                                                       }?,
+                                                       custom: {
+                                                         allowed_analyses: Array[::String],
+                                                         allowed_analysis_providers: Array[::String]?,
+                                                         differential_privacy: {
+                                                           columns: Array[
+                                                             {
+                                                               name: ::String
+                                                             },
+                                                           ]
+                                                         }?
+                                                       }?
+                                                     }?
+                                                   }
+                                                 ) -> _UpdateConfiguredTableAnalysisRuleResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfiguredTableAnalysisRuleResponseSuccess
+
+      interface _UpdateConfiguredTableAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfiguredTableAssociationOutput]
+        def configured_table_association: () -> Types::ConfiguredTableAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#update_configured_table_association-instance_method
+      def update_configured_table_association: (
+                                                 configured_table_association_identifier: ::String,
+                                                 membership_identifier: ::String,
+                                                 ?description: ::String,
+                                                 ?role_arn: ::String
+                                               ) -> _UpdateConfiguredTableAssociationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfiguredTableAssociationResponseSuccess
+
+      interface _UpdateMembershipResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMembershipOutput]
+        def membership: () -> Types::Membership
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#update_membership-instance_method
+      def update_membership: (
+                               membership_identifier: ::String,
+                               ?query_log_status: ("ENABLED" | "DISABLED"),
+                               ?default_result_configuration: {
+                                 output_configuration: {
+                                   s3: {
+                                     result_format: ("CSV" | "PARQUET"),
+                                     bucket: ::String,
+                                     key_prefix: ::String?
+                                   }?
+                                 },
+                                 role_arn: ::String?
+                               }
+                             ) -> _UpdateMembershipResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMembershipResponseSuccess
+
+      interface _UpdatePrivacyBudgetTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePrivacyBudgetTemplateOutput]
+        def privacy_budget_template: () -> Types::PrivacyBudgetTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#update_privacy_budget_template-instance_method
+      def update_privacy_budget_template: (
+                                            membership_identifier: ::String,
+                                            privacy_budget_template_identifier: ::String,
+                                            privacy_budget_type: ("DIFFERENTIAL_PRIVACY"),
+                                            ?parameters: {
+                                              differential_privacy: {
+                                                epsilon: ::Integer?,
+                                                users_noise_per_query: ::Integer?
+                                              }?
+                                            }
+                                          ) -> _UpdatePrivacyBudgetTemplateResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePrivacyBudgetTemplateResponseSuccess
+
+      interface _UpdateProtectedQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProtectedQueryOutput]
+        def protected_query: () -> Types::ProtectedQuery
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRooms/Client.html#update_protected_query-instance_method
+      def update_protected_query: (
+                                    membership_identifier: ::String,
+                                    protected_query_identifier: ::String,
+                                    target_status: ("CANCELLED")
+                                  ) -> _UpdateProtectedQueryResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProtectedQueryResponseSuccess
+    end
+  end
+end
+

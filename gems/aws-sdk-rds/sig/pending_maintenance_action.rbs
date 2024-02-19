@@ -1,0 +1,68 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/PendingMaintenanceAction.html
+    class PendingMaintenanceAction
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/PendingMaintenanceAction.html#initialize-instance_method
+      def initialize: (String target_arn, String name, Hash[Symbol, untyped] options) -> void
+                    | (target_arn: String, name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/PendingMaintenanceAction.html#target_arn-instance_method
+      def target_arn: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/PendingMaintenanceAction.html#name-instance_method
+      def name: () -> String
+      alias action name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/PendingMaintenanceAction.html#auto_applied_after_date-instance_method
+      def auto_applied_after_date: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/PendingMaintenanceAction.html#forced_apply_date-instance_method
+      def forced_apply_date: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/PendingMaintenanceAction.html#opt_in_status-instance_method
+      def opt_in_status: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/PendingMaintenanceAction.html#current_apply_date-instance_method
+      def current_apply_date: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/PendingMaintenanceAction.html#description-instance_method
+      def description: () -> ::String
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/PendingMaintenanceAction.html#data-instance_method
+      def data: () -> Types::PendingMaintenanceAction
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/PendingMaintenanceAction.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/PendingMaintenanceAction.html#apply_immediately-instance_method
+      def apply_immediately: (
+                             ) -> ResourcePendingMaintenanceActionList
+                           | (?Hash[Symbol, untyped]) -> ResourcePendingMaintenanceActionList
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/PendingMaintenanceAction.html#undo_opt_in-instance_method
+      def undo_opt_in: (
+                       ) -> ResourcePendingMaintenanceActionList
+                     | (?Hash[Symbol, untyped]) -> ResourcePendingMaintenanceActionList
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/PendingMaintenanceAction.html#apply_on_next_maintenance-instance_method
+      def apply_on_next_maintenance: (
+                                     ) -> ResourcePendingMaintenanceActionList
+                                   | (?Hash[Symbol, untyped]) -> ResourcePendingMaintenanceActionList
+
+      class Collection < ::Aws::Resources::Collection[PendingMaintenanceAction]
+      end
+    end
+  end
+end

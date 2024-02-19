@@ -117,6 +117,69 @@ module Aws::SSMIncidents
       class Unknown < AutomationExecution; end
     end
 
+    # Details about an error returned for a BatchGetIncidentFindings
+    # operation.
+    #
+    # @!attribute [rw] code
+    #   The code associated with an error that was returned for a
+    #   `BatchGetIncidentFindings` operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_id
+    #   The ID of a specified finding for which an error was returned for a
+    #   `BatchGetIncidentFindings` operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The description for an error that was returned for a
+    #   `BatchGetIncidentFindings` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/BatchGetIncidentFindingsError AWS API Documentation
+    #
+    class BatchGetIncidentFindingsError < Struct.new(
+      :code,
+      :finding_id,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] finding_ids
+    #   A list of IDs of findings for which you want to view details.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] incident_record_arn
+    #   The Amazon Resource Name (ARN) of the incident for which you want to
+    #   view finding details.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/BatchGetIncidentFindingsInput AWS API Documentation
+    #
+    class BatchGetIncidentFindingsInput < Struct.new(
+      :finding_ids,
+      :incident_record_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   A list of errors encountered during the operation.
+    #   @return [Array<Types::BatchGetIncidentFindingsError>]
+    #
+    # @!attribute [rw] findings
+    #   Information about the requested findings.
+    #   @return [Array<Types::Finding>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/BatchGetIncidentFindingsOutput AWS API Documentation
+    #
+    class BatchGetIncidentFindingsOutput < Struct.new(
+      :errors,
+      :findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Chatbot chat channel used for collaboration during an incident.
     #
     # @note ChatChannel is a union - when making an API calls you must set exactly one of the members.
@@ -147,6 +210,67 @@ module Aws::SSMIncidents
       class ChatbotSns < ChatChannel; end
       class Empty < ChatChannel; end
       class Unknown < ChatChannel; end
+    end
+
+    # Information about an CloudFormation stack creation or update that
+    # occurred around the time of an incident and could be a potential cause
+    # of the incident.
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp for when the CloudFormation stack creation or update
+    #   ended. Not reported for deployments that are still in progress.
+    #   @return [Time]
+    #
+    # @!attribute [rw] stack_arn
+    #   The Amazon Resource Name (ARN) of the CloudFormation stack involved
+    #   in the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp for when the CloudFormation stack creation or update
+    #   began.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/CloudFormationStackUpdate AWS API Documentation
+    #
+    class CloudFormationStackUpdate < Struct.new(
+      :end_time,
+      :stack_arn,
+      :start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a CodeDeploy deployment that occurred around the
+    # time of an incident and could be a possible cause of the incident.
+    #
+    # @!attribute [rw] deployment_group_arn
+    #   The Amazon Resource Name (ARN) of the CodeDeploy deployment group
+    #   associated with the deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_id
+    #   The ID of the CodeDeploy deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp for when the CodeDeploy deployment ended. Not reported
+    #   for deployments that are still in progress.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp for when the CodeDeploy deployment began.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/CodeDeployDeployment AWS API Documentation
+    #
+    class CodeDeployDeployment < Struct.new(
+      :deployment_group_arn,
+      :deployment_id,
+      :end_time,
+      :start_time)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # A conditional statement with which to compare a value, after a
@@ -350,12 +474,17 @@ module Aws::SSMIncidents
     #   @return [Array<Types::EventReference>]
     #
     # @!attribute [rw] event_time
-    #   The time that the event occurred.
+    #   The timestamp for when the event occurred.
     #   @return [Time]
     #
     # @!attribute [rw] event_type
     #   The type of event. You can create timeline events of type `Custom
-    #   Event`.
+    #   Event` and `Note`.
+    #
+    #   To make a Note-type event appear on the *Incident notes* panel in
+    #   the console, specify `eventType` as `Note`and enter the Amazon
+    #   Resource Name (ARN) of the incident as the value for
+    #   `eventReference`.
     #   @return [String]
     #
     # @!attribute [rw] incident_record_arn
@@ -580,15 +709,16 @@ module Aws::SSMIncidents
     #   @return [Array<Types::EventReference>]
     #
     # @!attribute [rw] event_time
-    #   The time that the event occurred.
+    #   The timestamp for when the event occurred.
     #   @return [Time]
     #
     # @!attribute [rw] event_type
-    #   The type of event. The timeline event must be `Custom Event`.
+    #   The type of event. The timeline event must be `Custom Event` or
+    #   `Note`.
     #   @return [String]
     #
     # @!attribute [rw] event_updated_time
-    #   The time that the timeline event was last updated.
+    #   The timestamp for when the timeline event was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] incident_record_arn
@@ -625,6 +755,87 @@ module Aws::SSMIncidents
     class Filter < Struct.new(
       :condition,
       :key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a specific CodeDeploy deployment or CloudFormation
+    # stack creation or update that occurred around the time of a reported
+    # incident. These activities can be investigated as a potential cause of
+    # the incident.
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp for when a finding was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] details
+    #   Details about the finding.
+    #   @return [Types::FindingDetails]
+    #
+    # @!attribute [rw] id
+    #   The ID assigned to the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp for when the finding was most recently updated with
+    #   additional information.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/Finding AWS API Documentation
+    #
+    class Finding < Struct.new(
+      :creation_time,
+      :details,
+      :id,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Extended textual information about the finding.
+    #
+    # @note FindingDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FindingDetails corresponding to the set member.
+    #
+    # @!attribute [rw] cloud_formation_stack_update
+    #   Information about the CloudFormation stack creation or update
+    #   associated with the finding.
+    #   @return [Types::CloudFormationStackUpdate]
+    #
+    # @!attribute [rw] code_deploy_deployment
+    #   Information about the CodeDeploy deployment associated with the
+    #   finding.
+    #   @return [Types::CodeDeployDeployment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/FindingDetails AWS API Documentation
+    #
+    class FindingDetails < Struct.new(
+      :cloud_formation_stack_update,
+      :code_deploy_deployment,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CloudFormationStackUpdate < FindingDetails; end
+      class CodeDeployDeployment < FindingDetails; end
+      class Unknown < FindingDetails; end
+    end
+
+    # Identifying information about the finding.
+    #
+    # @!attribute [rw] id
+    #   The ID of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp for when the finding was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/FindingSummary AWS API Documentation
+    #
+    class FindingSummary < Struct.new(
+      :id,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -684,7 +895,8 @@ module Aws::SSMIncidents
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token for the next set of items to return. (You
+    #   received this token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -703,7 +915,8 @@ module Aws::SSMIncidents
     end
 
     # @!attribute [rw] next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token to use when requesting the next set of items.
+    #   If there are no additional items to return, the string is null.
     #   @return [String]
     #
     # @!attribute [rw] resource_policies
@@ -829,7 +1042,7 @@ module Aws::SSMIncidents
     #   @return [Types::ChatChannel]
     #
     # @!attribute [rw] creation_time
-    #   The time that Incident Manager created the incident record.
+    #   The timestamp for when Incident Manager created the incident record.
     #   @return [Time]
     #
     # @!attribute [rw] dedupe_string
@@ -839,6 +1052,18 @@ module Aws::SSMIncidents
     #
     # @!attribute [rw] impact
     #   The impact of the incident on customers and applications.
+    #
+    #   **Supported impact codes**
+    #
+    #   * `1` - Critical
+    #
+    #   * `2` - High
+    #
+    #   * `3` - Medium
+    #
+    #   * `4` - Low
+    #
+    #   * `5` - No Impact
     #   @return [Integer]
     #
     # @!attribute [rw] incident_record_source
@@ -850,7 +1075,7 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
-    #   The time at which the incident was most recently modified.
+    #   The timestamp for when the incident was most recently modified.
     #   @return [Time]
     #
     # @!attribute [rw] notification_targets
@@ -859,7 +1084,7 @@ module Aws::SSMIncidents
     #   @return [Array<Types::NotificationTargetItem>]
     #
     # @!attribute [rw] resolved_time
-    #   The time at which the incident was resolved. This appears as a
+    #   The timestamp for when the incident was resolved. This appears as a
     #   timeline event.
     #   @return [Time]
     #
@@ -938,7 +1163,7 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The time the incident was created.
+    #   The timestamp for when the incident was created.
     #   @return [Time]
     #
     # @!attribute [rw] impact
@@ -950,7 +1175,7 @@ module Aws::SSMIncidents
     #   @return [Types::IncidentRecordSource]
     #
     # @!attribute [rw] resolved_time
-    #   The time the incident was resolved.
+    #   The timestamp for when the incident was resolved.
     #   @return [Time]
     #
     # @!attribute [rw] status
@@ -980,12 +1205,38 @@ module Aws::SSMIncidents
     # then used to create an incident record.
     #
     # @!attribute [rw] dedupe_string
-    #   Used to stop Incident Manager from creating multiple incident
-    #   records for the same incident.
+    #   The string Incident Manager uses to prevent the same root cause from
+    #   creating multiple incidents in the same account.
+    #
+    #   A deduplication string is a term or phrase the system uses to check
+    #   for duplicate incidents. If you specify a deduplication string,
+    #   Incident Manager searches for open incidents that contain the same
+    #   string in the `dedupeString` field when it creates the incident. If
+    #   a duplicate is detected, Incident Manager deduplicates the newer
+    #   incident into the existing incident.
+    #
+    #   <note markdown="1"> By default, Incident Manager automatically deduplicates multiple
+    #   incidents created by the same Amazon CloudWatch alarm or Amazon
+    #   EventBridge event. You don't have to enter your own deduplication
+    #   string to prevent duplication for these resource types.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] impact
     #   The impact of the incident on your customers and applications.
+    #
+    #   **Supported impact codes**
+    #
+    #   * `1` - Critical
+    #
+    #   * `2` - High
+    #
+    #   * `3` - Medium
+    #
+    #   * `4` - Low
+    #
+    #   * `5` - No Impact
     #   @return [Integer]
     #
     # @!attribute [rw] incident_tags
@@ -1123,6 +1374,49 @@ module Aws::SSMIncidents
       class Unknown < ItemValue; end
     end
 
+    # @!attribute [rw] incident_record_arn
+    #   The Amazon Resource Name (ARN) of the incident for which you want to
+    #   view associated findings.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of findings to retrieve per call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the next set of items to return. (You
+    #   received this token from a previous call.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListIncidentFindingsInput AWS API Documentation
+    #
+    class ListIncidentFindingsInput < Struct.new(
+      :incident_record_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] findings
+    #   A list of findings that represent deployments that might be the
+    #   potential cause of the incident.
+    #   @return [Array<Types::FindingSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use when requesting the next set of items.
+    #   If there are no additional items to return, the string is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListIncidentFindingsOutput AWS API Documentation
+    #
+    class ListIncidentFindingsOutput < Struct.new(
+      :findings,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] filters
     #   Filters the list of incident records you want to search through. You
     #   can filter on the following keys:
@@ -1152,7 +1446,8 @@ module Aws::SSMIncidents
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token for the next set of items to return. (You
+    #   received this token from a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListIncidentRecordsInput AWS API Documentation
@@ -1170,7 +1465,8 @@ module Aws::SSMIncidents
     #   @return [Array<Types::IncidentRecordSummary>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token to use when requesting the next set of items.
+    #   If there are no additional items to return, the string is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListIncidentRecordsOutput AWS API Documentation
@@ -1192,7 +1488,8 @@ module Aws::SSMIncidents
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token for the next set of items to return. (You
+    #   received this token from a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListRelatedItemsInput AWS API Documentation
@@ -1206,7 +1503,8 @@ module Aws::SSMIncidents
     end
 
     # @!attribute [rw] next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token to use when requesting the next set of items.
+    #   If there are no additional items to return, the string is null.
     #   @return [String]
     #
     # @!attribute [rw] related_items
@@ -1227,7 +1525,8 @@ module Aws::SSMIncidents
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token for the next set of items to return. (You
+    #   received this token from a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListReplicationSetsInput AWS API Documentation
@@ -1240,7 +1539,8 @@ module Aws::SSMIncidents
     end
 
     # @!attribute [rw] next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token to use when requesting the next set of items.
+    #   If there are no additional items to return, the string is null.
     #   @return [String]
     #
     # @!attribute [rw] replication_set_arns
@@ -1261,7 +1561,8 @@ module Aws::SSMIncidents
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token for the next set of items to return. (You
+    #   received this token from a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListResponsePlansInput AWS API Documentation
@@ -1274,7 +1575,8 @@ module Aws::SSMIncidents
     end
 
     # @!attribute [rw] next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token to use when requesting the next set of items.
+    #   If there are no additional items to return, the string is null.
     #   @return [String]
     #
     # @!attribute [rw] response_plan_summaries
@@ -1291,7 +1593,7 @@ module Aws::SSMIncidents
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the response plan.
+    #   The Amazon Resource Name (ARN) of the response plan or incident.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListTagsForResourceRequest AWS API Documentation
@@ -1303,7 +1605,7 @@ module Aws::SSMIncidents
     end
 
     # @!attribute [rw] tags
-    #   A list of tags for the response plan.
+    #   A list of tags for the response plan or incident.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListTagsForResourceResponse AWS API Documentation
@@ -1317,6 +1619,8 @@ module Aws::SSMIncidents
     # @!attribute [rw] filters
     #   Filters the timeline events based on the provided conditional
     #   values. You can filter timeline events with the following keys:
+    #
+    #   * `eventReference`
     #
     #   * `eventTime`
     #
@@ -1344,7 +1648,8 @@ module Aws::SSMIncidents
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token for the next set of items to return. (You
+    #   received this token from a previous call.)
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -1374,7 +1679,8 @@ module Aws::SSMIncidents
     #   @return [Array<Types::EventSummary>]
     #
     # @!attribute [rw] next_token
-    #   The pagination token to continue to the next page of results.
+    #   The pagination token to use when requesting the next set of items.
+    #   If there are no additional items to return, the string is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListTimelineEventsOutput AWS API Documentation
@@ -1530,8 +1836,8 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] status_update_date_time
-    #   The most recent date and time that Incident Manager updated the
-    #   Amazon Web Services Region's status.
+    #   The timestamp for when Incident Manager updated the status of the
+    #   Amazon Web Services Region.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/RegionInfo AWS API Documentation
@@ -1831,22 +2137,17 @@ module Aws::SSMIncidents
     #   Defines the impact to the customers. Providing an impact overwrites
     #   the impact provided by a response plan.
     #
-    #   **Possible impacts:**
+    #   **Supported impact codes**
     #
-    #   * `1` - Critical impact, this typically relates to full application
-    #     failure that impacts many to all customers.
+    #   * `1` - Critical
     #
-    #   * `2` - High impact, partial application failure with impact to many
-    #     customers.
+    #   * `2` - High
     #
-    #   * `3` - Medium impact, the application is providing reduced service
-    #     to customers.
+    #   * `3` - Medium
     #
-    #   * `4` - Low impact, customer might aren't impacted by the problem
-    #     yet.
+    #   * `4` - Low
     #
-    #   * `5` - No impact, customers aren't currently impacted but urgent
-    #     action is needed to avoid impact.
+    #   * `5` - No Impact
     #   @return [Integer]
     #
     # @!attribute [rw] related_items
@@ -1955,16 +2256,16 @@ module Aws::SSMIncidents
     #   @return [Array<Types::EventReference>]
     #
     # @!attribute [rw] event_time
-    #   The time that the event occurred.
+    #   The timestamp for when the event occurred.
     #   @return [Time]
     #
     # @!attribute [rw] event_type
     #   The type of event that occurred. Currently Incident Manager supports
-    #   only the `Custom Event` type.
+    #   only the `Custom Event` and `Note` types.
     #   @return [String]
     #
     # @!attribute [rw] event_updated_time
-    #   The time that the timeline event was last updated.
+    #   The timestamp for when the timeline event was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] incident_record_arn
@@ -2003,7 +2304,7 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] timestamp
-    #   The time that the incident was detected.
+    #   The timestamp for when the incident was detected.
     #   @return [Time]
     #
     # @!attribute [rw] trigger_arn
@@ -2097,21 +2398,17 @@ module Aws::SSMIncidents
     #   you provide an impact for an incident, it overwrites the impact
     #   provided by the response plan.
     #
-    #   **Possible impacts:**
+    #   **Supported impact codes**
     #
-    #   * `1` - Critical impact, full application failure that impacts many
-    #     to all customers.
+    #   * `1` - Critical
     #
-    #   * `2` - High impact, partial application failure with impact to many
-    #     customers.
+    #   * `2` - High
     #
-    #   * `3` - Medium impact, the application is providing reduced service
-    #     to customers.
+    #   * `3` - Medium
     #
-    #   * `4` - Low impact, customer aren't impacted by the problem yet.
+    #   * `4` - Low
     #
-    #   * `5` - No impact, customers aren't currently impacted but urgent
-    #     action is needed to avoid impact.
+    #   * `5` - No Impact
     #   @return [Integer]
     #
     # @!attribute [rw] notification_targets
@@ -2289,17 +2586,17 @@ module Aws::SSMIncidents
     #   Defines the impact to the customers. Providing an impact overwrites
     #   the impact provided by a response plan.
     #
-    #   **Possible impacts:**
+    #   **Supported impact codes**
     #
-    #   * `5` - Severe impact
+    #   * `1` - Critical
     #
-    #   * `4` - High impact
+    #   * `2` - High
     #
-    #   * `3` - Medium impact
+    #   * `3` - Medium
     #
-    #   * `2` - Low impact
+    #   * `4` - Low
     #
-    #   * `1` - No impact
+    #   * `5` - No Impact
     #   @return [Integer]
     #
     # @!attribute [rw] incident_template_notification_targets
@@ -2388,11 +2685,12 @@ module Aws::SSMIncidents
     #   @return [Array<Types::EventReference>]
     #
     # @!attribute [rw] event_time
-    #   The time that the event occurred.
+    #   The timestamp for when the event occurred.
     #   @return [Time]
     #
     # @!attribute [rw] event_type
-    #   The type of event. You can update events of type `Custom Event`.
+    #   The type of event. You can update events of type `Custom Event` and
+    #   `Note`.
     #   @return [String]
     #
     # @!attribute [rw] incident_record_arn

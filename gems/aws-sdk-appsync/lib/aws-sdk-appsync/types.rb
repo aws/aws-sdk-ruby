@@ -173,6 +173,23 @@ module Aws::AppSync
     #   * **FAILED**: The instance has failed creation.
     #   @return [String]
     #
+    # @!attribute [rw] health_metrics_config
+    #   Controls how cache health metrics will be emitted to CloudWatch.
+    #   Cache health metrics include:
+    #
+    #   * NetworkBandwidthOutAllowanceExceeded: The network packets dropped
+    #     because the throughput exceeded the aggregated bandwidth limit.
+    #     This is useful for diagnosing bottlenecks in a cache
+    #     configuration.
+    #
+    #   * EngineCPUUtilization: The CPU utilization (percentage) allocated
+    #     to the Redis process. This is useful for diagnosing bottlenecks in
+    #     a cache configuration.
+    #
+    #   Metrics will be recorded by API ID. You can set the value to
+    #   `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ApiCache AWS API Documentation
     #
     class ApiCache < Struct.new(
@@ -181,7 +198,8 @@ module Aws::AppSync
       :transit_encryption_enabled,
       :at_rest_encryption_enabled,
       :type,
-      :status)
+      :status,
+      :health_metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -727,6 +745,20 @@ module Aws::AppSync
     #   * **R4\_8XLARGE**: A r4.8xlarge instance type.
     #   @return [String]
     #
+    # @!attribute [rw] health_metrics_config
+    #   Controls how cache health metrics will be emitted to CloudWatch.
+    #   Cache health metrics include:
+    #
+    #   * NetworkBandwidthOutAllowanceExceeded: The number of times a
+    #     specified GraphQL operation was called.
+    #
+    #   * EngineCPUUtilization: The number of GraphQL errors that occurred
+    #     during a specified GraphQL operation.
+    #
+    #   Metrics will be recorded by API ID. You can set the value to
+    #   `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiCacheRequest AWS API Documentation
     #
     class CreateApiCacheRequest < Struct.new(
@@ -735,7 +767,8 @@ module Aws::AppSync
       :transit_encryption_enabled,
       :at_rest_encryption_enabled,
       :api_caching_behavior,
-      :type)
+      :type,
+      :health_metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -846,6 +879,18 @@ module Aws::AppSync
     #   Amazon EventBridge settings.
     #   @return [Types::EventBridgeDataSourceConfig]
     #
+    # @!attribute [rw] metrics_config
+    #   Enables or disables enhanced data source metrics for specified data
+    #   sources. Note that `metricsConfig` won't be used unless the
+    #   `dataSourceLevelMetricsBehavior` value is set to
+    #   `PER_DATA_SOURCE_METRICS`. If the `dataSourceLevelMetricsBehavior`
+    #   is set to `FULL_REQUEST_DATA_SOURCE_METRICS` instead,
+    #   `metricsConfig` will be ignored. However, you can still set its
+    #   value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDataSourceRequest AWS API Documentation
     #
     class CreateDataSourceRequest < Struct.new(
@@ -860,7 +905,8 @@ module Aws::AppSync
       :open_search_service_config,
       :http_config,
       :relational_database_config,
-      :event_bridge_config)
+      :event_bridge_config,
+      :metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1063,6 +1109,46 @@ module Aws::AppSync
     #   characters.
     #   @return [String]
     #
+    # @!attribute [rw] introspection_config
+    #   Sets the value of the GraphQL API to enable (`ENABLED`) or disable
+    #   (`DISABLED`) introspection. If no value is provided, the
+    #   introspection configuration will be set to `ENABLED` by default.
+    #   This field will produce an error if the operation attempts to use
+    #   the introspection feature while this field is disabled.
+    #
+    #   For more information about introspection, see [GraphQL
+    #   introspection][1].
+    #
+    #
+    #
+    #   [1]: https://graphql.org/learn/introspection/
+    #   @return [String]
+    #
+    # @!attribute [rw] query_depth_limit
+    #   The maximum depth a query can have in a single request. Depth refers
+    #   to the amount of nested levels allowed in the body of query. The
+    #   default value is `0` (or unspecified), which indicates there's no
+    #   depth limit. If you set a limit, it can be between `1` and `75`
+    #   nested levels. This field will produce a limit error if the
+    #   operation falls out of bounds.
+    #
+    #   Note that fields can still be set to nullable or non-nullable. If a
+    #   non-nullable field produces an error, the error will be thrown
+    #   upwards to the first nullable field available.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resolver_count_limit
+    #   The maximum number of resolvers that can be invoked in a single
+    #   request. The default value is `0` (or unspecified), which will set
+    #   the limit to `10000`. When specified, the limit value can be between
+    #   `1` and `10000`. This field will produce a limit error if the
+    #   operation falls out of bounds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enhanced_metrics_config
+    #   The `enhancedMetricsConfig` object.
+    #   @return [Types::EnhancedMetricsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApiRequest AWS API Documentation
     #
     class CreateGraphqlApiRequest < Struct.new(
@@ -1078,7 +1164,11 @@ module Aws::AppSync
       :visibility,
       :api_type,
       :merged_api_execution_role_arn,
-      :owner_contact)
+      :owner_contact,
+      :introspection_config,
+      :query_depth_limit,
+      :resolver_count_limit,
+      :enhanced_metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1169,6 +1259,17 @@ module Aws::AppSync
     #   `runtime` value must be `APPSYNC_JS`.
     #   @return [String]
     #
+    # @!attribute [rw] metrics_config
+    #   Enables or disables enhanced resolver metrics for specified
+    #   resolvers. Note that `metricsConfig` won't be used unless the
+    #   `resolverLevelMetricsBehavior` value is set to
+    #   `PER_RESOLVER_METRICS`. If the `resolverLevelMetricsBehavior` is set
+    #   to `FULL_REQUEST_RESOLVER_METRICS` instead, `metricsConfig` will be
+    #   ignored. However, you can still set its value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolverRequest AWS API Documentation
     #
     class CreateResolverRequest < Struct.new(
@@ -1184,7 +1285,8 @@ module Aws::AppSync
       :caching_config,
       :max_batch_size,
       :runtime,
-      :code)
+      :code,
+      :metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1317,6 +1419,18 @@ module Aws::AppSync
     #   Amazon EventBridge settings.
     #   @return [Types::EventBridgeDataSourceConfig]
     #
+    # @!attribute [rw] metrics_config
+    #   Enables or disables enhanced data source metrics for specified data
+    #   sources. Note that `metricsConfig` won't be used unless the
+    #   `dataSourceLevelMetricsBehavior` value is set to
+    #   `PER_DATA_SOURCE_METRICS`. If the `dataSourceLevelMetricsBehavior`
+    #   is set to `FULL_REQUEST_DATA_SOURCE_METRICS` instead,
+    #   `metricsConfig` will be ignored. However, you can still set its
+    #   value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DataSource AWS API Documentation
     #
     class DataSource < Struct.new(
@@ -1331,7 +1445,162 @@ module Aws::AppSync
       :open_search_service_config,
       :http_config,
       :relational_database_config,
-      :event_bridge_config)
+      :event_bridge_config,
+      :metrics_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the introspected data that was retrieved from the data
+    # source.
+    #
+    # @!attribute [rw] name
+    #   The name of the model. For example, this could be the name of a
+    #   single table in a database.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   The `DataSourceIntrospectionModelField` object data.
+    #   @return [Array<Types::DataSourceIntrospectionModelField>]
+    #
+    # @!attribute [rw] primary_key
+    #   The primary key stored as a `DataSourceIntrospectionModelIndex`
+    #   object.
+    #   @return [Types::DataSourceIntrospectionModelIndex]
+    #
+    # @!attribute [rw] indexes
+    #   The array of `DataSourceIntrospectionModelIndex` objects.
+    #   @return [Array<Types::DataSourceIntrospectionModelIndex>]
+    #
+    # @!attribute [rw] sdl
+    #   Contains the output of the SDL that was generated from the
+    #   introspected types. This is controlled by the `includeModelsSDL`
+    #   parameter of the `GetDataSourceIntrospection` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DataSourceIntrospectionModel AWS API Documentation
+    #
+    class DataSourceIntrospectionModel < Struct.new(
+      :name,
+      :fields,
+      :primary_key,
+      :indexes,
+      :sdl)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the fields that were retrieved from the introspected data.
+    #
+    # @!attribute [rw] name
+    #   The name of the field that was retrieved from the introspected data.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The `DataSourceIntrospectionModelFieldType` object data.
+    #   @return [Types::DataSourceIntrospectionModelFieldType]
+    #
+    # @!attribute [rw] length
+    #   The length value of the introspected field.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DataSourceIntrospectionModelField AWS API Documentation
+    #
+    class DataSourceIntrospectionModelField < Struct.new(
+      :name,
+      :type,
+      :length)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the type data for each field retrieved from the
+    # introspection.
+    #
+    # @!attribute [rw] kind
+    #   Specifies the classification of data. For example, this could be set
+    #   to values like `Scalar` or `NonNull` to indicate a fundamental
+    #   property of the field.
+    #
+    #   Valid values include:
+    #
+    #   * `Scalar`: Indicates the value is a primitive type (scalar).
+    #
+    #   * `NonNull`: Indicates the field cannot be `null`.
+    #
+    #   * `List`: Indicates the field contains a list.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the data type that represents the field. For example,
+    #   `String` is a valid `name` value.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The `DataSourceIntrospectionModelFieldType` object data. The `type`
+    #   is only present if `DataSourceIntrospectionModelFieldType.kind` is
+    #   set to `NonNull` or `List`.
+    #
+    #   The `type` typically contains its own `kind` and `name` fields to
+    #   represent the actual type data. For instance, `type` could contain a
+    #   `kind` value of `Scalar` with a `name` value of `String`. The values
+    #   `Scalar` and `String` will be collectively stored in the `values`
+    #   field.
+    #   @return [Types::DataSourceIntrospectionModelFieldType]
+    #
+    # @!attribute [rw] values
+    #   The values of the `type` field. This field represents the AppSync
+    #   data type equivalent of the introspected field.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DataSourceIntrospectionModelFieldType AWS API Documentation
+    #
+    class DataSourceIntrospectionModelFieldType < Struct.new(
+      :kind,
+      :name,
+      :type,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The index that was retrieved from the introspected data.
+    #
+    # @!attribute [rw] name
+    #   The name of the index.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   The fields of the index.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DataSourceIntrospectionModelIndex AWS API Documentation
+    #
+    class DataSourceIntrospectionModelIndex < Struct.new(
+      :name,
+      :fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the output of a `DataSourceIntrospectionResult`. This is
+    # the populated result of a `GetDataSourceIntrospection` operation.
+    #
+    # @!attribute [rw] models
+    #   The array of `DataSourceIntrospectionModel` objects.
+    #   @return [Array<Types::DataSourceIntrospectionModel>]
+    #
+    # @!attribute [rw] next_token
+    #   Determines the number of types to be returned in a single response
+    #   before paginating. This value is typically taken from `nextToken`
+    #   value from the previous response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DataSourceIntrospectionResult AWS API Documentation
+    #
+    class DataSourceIntrospectionResult < Struct.new(
+      :models,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1702,6 +1971,150 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # Enables and controls the enhanced metrics feature. Enhanced metrics
+    # emit granular data on API usage and performance such as AppSync
+    # request and error counts, latency, and cache hits/misses. All enhanced
+    # metric data is sent to your CloudWatch account, and you can configure
+    # the types of data that will be sent.
+    #
+    # Enhanced metrics can be configured at the resolver, data source, and
+    # operation levels. `EnhancedMetricsConfig` contains three required
+    # parameters, each controlling one of these categories:
+    #
+    # 1.  `resolverLevelMetricsBehavior`: Controls how resolver metrics will
+    #     be emitted to CloudWatch. Resolver metrics include:
+    #
+    #     * GraphQL errors: The number of GraphQL errors that occurred.
+    #
+    #     * Requests: The number of invocations that occurred during a
+    #       request.
+    #
+    #     * Latency: The time to complete a resolver invocation.
+    #
+    #     * Cache hits: The number of cache hits during a request.
+    #
+    #     * Cache misses: The number of cache misses during a request.
+    #
+    #     These metrics can be emitted to CloudWatch per resolver or for all
+    #     resolvers in the request. Metrics will be recorded by API ID and
+    #     resolver name. `resolverLevelMetricsBehavior` accepts one of these
+    #     values at a time:
+    #
+    #     * `FULL_REQUEST_RESOLVER_METRICS`: Records and emits metric data
+    #       for all resolvers in the request.
+    #
+    #     * `PER_RESOLVER_METRICS`: Records and emits metric data for
+    #       resolvers that have the `metricConfig` value set to `ENABLED`.
+    #
+    # 2.  `dataSourceLevelMetricsBehavior`: Controls how data source metrics
+    #     will be emitted to CloudWatch. Data source metrics include:
+    #
+    #     * Requests: The number of invocations that occured during a
+    #       request.
+    #
+    #     * Latency: The time to complete a data source invocation.
+    #
+    #     * Errors: The number of errors that occurred during a data source
+    #       invocation.
+    #
+    #     These metrics can be emitted to CloudWatch per data source or for
+    #     all data sources in the request. Metrics will be recorded by API
+    #     ID and data source name. `dataSourceLevelMetricsBehavior` accepts
+    #     one of these values at a time:
+    #
+    #     * `FULL_REQUEST_DATA_SOURCE_METRICS`: Records and emits metric
+    #       data for all data sources in the request.
+    #
+    #     * `PER_DATA_SOURCE_METRICS`: Records and emits metric data for
+    #       data sources that have the `metricConfig` value set to
+    #       `ENABLED`.
+    #
+    # 3.  `operationLevelMetricsConfig`: Controls how operation metrics will
+    #     be emitted to CloudWatch. Operation metrics include:
+    #
+    #     * Requests: The number of times a specified GraphQL operation was
+    #       called.
+    #
+    #     * GraphQL errors: The number of GraphQL errors that occurred
+    #       during a specified GraphQL operation.
+    #
+    #     Metrics will be recorded by API ID and operation name. You can set
+    #     the value to `ENABLED` or `DISABLED`.
+    #
+    # @!attribute [rw] resolver_level_metrics_behavior
+    #   Controls how resolver metrics will be emitted to CloudWatch.
+    #   Resolver metrics include:
+    #
+    #   * GraphQL errors: The number of GraphQL errors that occurred.
+    #
+    #   * Requests: The number of invocations that occurred during a
+    #     request.
+    #
+    #   * Latency: The time to complete a resolver invocation.
+    #
+    #   * Cache hits: The number of cache hits during a request.
+    #
+    #   * Cache misses: The number of cache misses during a request.
+    #
+    #   These metrics can be emitted to CloudWatch per resolver or for all
+    #   resolvers in the request. Metrics will be recorded by API ID and
+    #   resolver name. `resolverLevelMetricsBehavior` accepts one of these
+    #   values at a time:
+    #
+    #   * `FULL_REQUEST_RESOLVER_METRICS`: Records and emits metric data for
+    #     all resolvers in the request.
+    #
+    #   * `PER_RESOLVER_METRICS`: Records and emits metric data for
+    #     resolvers that have the `metricConfig` value set to `ENABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_level_metrics_behavior
+    #   Controls how data source metrics will be emitted to CloudWatch. Data
+    #   source metrics include:
+    #
+    #   * Requests: The number of invocations that occured during a request.
+    #
+    #   * Latency: The time to complete a data source invocation.
+    #
+    #   * Errors: The number of errors that occurred during a data source
+    #     invocation.
+    #
+    #   These metrics can be emitted to CloudWatch per data source or for
+    #   all data sources in the request. Metrics will be recorded by API ID
+    #   and data source name. `dataSourceLevelMetricsBehavior` accepts one
+    #   of these values at a time:
+    #
+    #   * `FULL_REQUEST_DATA_SOURCE_METRICS`: Records and emits metric data
+    #     for all data sources in the request.
+    #
+    #   * `PER_DATA_SOURCE_METRICS`: Records and emits metric data for data
+    #     sources that have the `metricConfig` value set to `ENABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation_level_metrics_config
+    #   Controls how operation metrics will be emitted to CloudWatch.
+    #   Operation metrics include:
+    #
+    #   * Requests: The number of times a specified GraphQL operation was
+    #     called.
+    #
+    #   * GraphQL errors: The number of GraphQL errors that occurred during
+    #     a specified GraphQL operation.
+    #
+    #   Metrics will be recorded by API ID and operation name. You can set
+    #   the value to `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/EnhancedMetricsConfig AWS API Documentation
+    #
+    class EnhancedMetricsConfig < Struct.new(
+      :resolver_level_metrics_behavior,
+      :data_source_level_metrics_behavior,
+      :operation_level_metrics_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the list of errors generated. When using JavaScript, this
     # will apply to the request or response function evaluation.
     #
@@ -2004,6 +2417,75 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # @!attribute [rw] introspection_id
+    #   The introspection ID. Each introspection contains a unique ID that
+    #   can be used to reference the instrospection record.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_models_sdl
+    #   A boolean flag that determines whether SDL should be generated for
+    #   introspected types or not. If set to `true`, each model will contain
+    #   an `sdl` property that contains the SDL for that type. The SDL only
+    #   contains the type data and no additional metadata or directives.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_token
+    #   Determines the number of types to be returned in a single response
+    #   before paginating. This value is typically taken from `nextToken`
+    #   value from the previous response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of introspected types that will be returned in a
+    #   single response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDataSourceIntrospectionRequest AWS API Documentation
+    #
+    class GetDataSourceIntrospectionRequest < Struct.new(
+      :introspection_id,
+      :include_models_sdl,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] introspection_id
+    #   The introspection ID. Each introspection contains a unique ID that
+    #   can be used to reference the instrospection record.
+    #   @return [String]
+    #
+    # @!attribute [rw] introspection_status
+    #   The status of the introspection during retrieval. By default, when a
+    #   new instrospection is being retrieved, the status will be set to
+    #   `PROCESSING`. Once the operation has been completed, the status will
+    #   change to `SUCCESS` or `FAILED` depending on how the data was
+    #   parsed. A `FAILED` operation will return an error and its details as
+    #   an `introspectionStatusDetail`.
+    #   @return [String]
+    #
+    # @!attribute [rw] introspection_status_detail
+    #   The error detail field. When a `FAILED` `introspectionStatus` is
+    #   returned, the `introspectionStatusDetail` will also return the exact
+    #   error that was generated during the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] introspection_result
+    #   The `DataSourceIntrospectionResult` object data.
+    #   @return [Types::DataSourceIntrospectionResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDataSourceIntrospectionResponse AWS API Documentation
+    #
+    class GetDataSourceIntrospectionResponse < Struct.new(
+      :introspection_id,
+      :introspection_status,
+      :introspection_status_detail,
+      :introspection_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] api_id
     #   The API ID.
     #   @return [String]
@@ -2082,6 +2564,32 @@ module Aws::AppSync
     #
     class GetFunctionResponse < Struct.new(
       :function_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] api_id
+    #   The ID of the API from which the environmental variable list will be
+    #   retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApiEnvironmentVariablesRequest AWS API Documentation
+    #
+    class GetGraphqlApiEnvironmentVariablesRequest < Struct.new(
+      :api_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] environment_variables
+    #   The payload containing each environmental variable in the `"key" :
+    #   "value"` format.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApiEnvironmentVariablesResponse AWS API Documentation
+    #
+    class GetGraphqlApiEnvironmentVariablesResponse < Struct.new(
+      :environment_variables)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2390,6 +2898,46 @@ module Aws::AppSync
     #   characters.
     #   @return [String]
     #
+    # @!attribute [rw] introspection_config
+    #   Sets the value of the GraphQL API to enable (`ENABLED`) or disable
+    #   (`DISABLED`) introspection. If no value is provided, the
+    #   introspection configuration will be set to `ENABLED` by default.
+    #   This field will produce an error if the operation attempts to use
+    #   the introspection feature while this field is disabled.
+    #
+    #   For more information about introspection, see [GraphQL
+    #   introspection][1].
+    #
+    #
+    #
+    #   [1]: https://graphql.org/learn/introspection/
+    #   @return [String]
+    #
+    # @!attribute [rw] query_depth_limit
+    #   The maximum depth a query can have in a single request. Depth refers
+    #   to the amount of nested levels allowed in the body of query. The
+    #   default value is `0` (or unspecified), which indicates there's no
+    #   depth limit. If you set a limit, it can be between `1` and `75`
+    #   nested levels. This field will produce a limit error if the
+    #   operation falls out of bounds.
+    #
+    #   Note that fields can still be set to nullable or non-nullable. If a
+    #   non-nullable field produces an error, the error will be thrown
+    #   upwards to the first nullable field available.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resolver_count_limit
+    #   The maximum number of resolvers that can be invoked in a single
+    #   request. The default value is `0` (or unspecified), which will set
+    #   the limit to `10000`. When specified, the limit value can be between
+    #   `1` and `10000`. This field will produce a limit error if the
+    #   operation falls out of bounds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enhanced_metrics_config
+    #   The `enhancedMetricsConfig` object.
+    #   @return [Types::EnhancedMetricsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GraphqlApi AWS API Documentation
     #
     class GraphqlApi < Struct.new(
@@ -2411,7 +2959,11 @@ module Aws::AppSync
       :api_type,
       :merged_api_execution_role_arn,
       :owner,
-      :owner_contact)
+      :owner_contact,
+      :introspection_config,
+      :query_depth_limit,
+      :resolver_count_limit,
+      :enhanced_metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3147,6 +3699,89 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # @!attribute [rw] api_id
+    #   The ID of the API to which the environmental variable list will be
+    #   written.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_variables
+    #   The list of environmental variables to add to the API.
+    #
+    #   When creating an environmental variable key-value pair, it must
+    #   follow the additional constraints below:
+    #
+    #   * Keys must begin with a letter.
+    #
+    #   * Keys must be at least two characters long.
+    #
+    #   * Keys can only contain letters, numbers, and the underscore
+    #     character (\_).
+    #
+    #   * Values can be up to 512 characters long.
+    #
+    #   * You can configure up to 50 key-value pairs in a GraphQL API.
+    #
+    #   You can create a list of environmental variables by adding it to the
+    #   `environmentVariables` payload as a list in the format
+    #   `\{"key1":"value1","key2":"value2", …\}`. Note that each call of the
+    #   `PutGraphqlApiEnvironmentVariables` action will result in the
+    #   overwriting of the existing environmental variable list of that API.
+    #   This means the existing environmental variables will be lost. To
+    #   avoid this, you must include all existing and new environmental
+    #   variables in the list each time you call this action.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/PutGraphqlApiEnvironmentVariablesRequest AWS API Documentation
+    #
+    class PutGraphqlApiEnvironmentVariablesRequest < Struct.new(
+      :api_id,
+      :environment_variables)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] environment_variables
+    #   The payload containing each environmental variable in the `"key" :
+    #   "value"` format.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/PutGraphqlApiEnvironmentVariablesResponse AWS API Documentation
+    #
+    class PutGraphqlApiEnvironmentVariablesResponse < Struct.new(
+      :environment_variables)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the metadata required to introspect the RDS cluster.
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource ARN of the RDS cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The secret's ARN that was obtained from Secrets Manager. A secret
+    #   consists of secret information, the secret value, plus metadata
+    #   about the secret. A secret value can be a string or binary. It
+    #   typically includes the ARN, secret name and description, policies,
+    #   tags, encryption key from the Key Management Service, and key
+    #   rotation data.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database in the cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/RdsDataApiConfig AWS API Documentation
+    #
+    class RdsDataApiConfig < Struct.new(
+      :resource_arn,
+      :secret_arn,
+      :database_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon Relational Database Service (Amazon RDS) HTTP endpoint
     # configuration.
     #
@@ -3275,6 +3910,17 @@ module Aws::AppSync
     #   `runtime` value must be `APPSYNC_JS`.
     #   @return [String]
     #
+    # @!attribute [rw] metrics_config
+    #   Enables or disables enhanced resolver metrics for specified
+    #   resolvers. Note that `metricsConfig` won't be used unless the
+    #   `resolverLevelMetricsBehavior` value is set to
+    #   `PER_RESOLVER_METRICS`. If the `resolverLevelMetricsBehavior` is set
+    #   to `FULL_REQUEST_RESOLVER_METRICS` instead, `metricsConfig` will be
+    #   ignored. However, you can still set its value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/Resolver AWS API Documentation
     #
     class Resolver < Struct.new(
@@ -3290,7 +3936,8 @@ module Aws::AppSync
       :caching_config,
       :max_batch_size,
       :runtime,
-      :code)
+      :code,
+      :metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3443,6 +4090,48 @@ module Aws::AppSync
       :merged_api_id,
       :merged_api_arn,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rds_data_api_config
+    #   The `rdsDataApiConfig` object data.
+    #   @return [Types::RdsDataApiConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/StartDataSourceIntrospectionRequest AWS API Documentation
+    #
+    class StartDataSourceIntrospectionRequest < Struct.new(
+      :rds_data_api_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] introspection_id
+    #   The introspection ID. Each introspection contains a unique ID that
+    #   can be used to reference the instrospection record.
+    #   @return [String]
+    #
+    # @!attribute [rw] introspection_status
+    #   The status of the introspection during creation. By default, when a
+    #   new instrospection has been created, the status will be set to
+    #   `PROCESSING`. Once the operation has been completed, the status will
+    #   change to `SUCCESS` or `FAILED` depending on how the data was
+    #   parsed. A `FAILED` operation will return an error and its details as
+    #   an `introspectionStatusDetail`.
+    #   @return [String]
+    #
+    # @!attribute [rw] introspection_status_detail
+    #   The error detail field. When a `FAILED` `introspectionStatus` is
+    #   returned, the `introspectionStatusDetail` will also return the exact
+    #   error that was generated during the operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/StartDataSourceIntrospectionResponse AWS API Documentation
+    #
+    class StartDataSourceIntrospectionResponse < Struct.new(
+      :introspection_id,
+      :introspection_status,
+      :introspection_status_detail)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3707,13 +4396,28 @@ module Aws::AppSync
     #   * **R4\_8XLARGE**: A r4.8xlarge instance type.
     #   @return [String]
     #
+    # @!attribute [rw] health_metrics_config
+    #   Controls how cache health metrics will be emitted to CloudWatch.
+    #   Cache health metrics include:
+    #
+    #   * NetworkBandwidthOutAllowanceExceeded: The number of times a
+    #     specified GraphQL operation was called.
+    #
+    #   * EngineCPUUtilization: The number of GraphQL errors that occurred
+    #     during a specified GraphQL operation.
+    #
+    #   Metrics will be recorded by API ID. You can set the value to
+    #   `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiCacheRequest AWS API Documentation
     #
     class UpdateApiCacheRequest < Struct.new(
       :api_id,
       :ttl,
       :api_caching_behavior,
-      :type)
+      :type,
+      :health_metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3826,6 +4530,18 @@ module Aws::AppSync
     #   The new Amazon EventBridge settings.
     #   @return [Types::EventBridgeDataSourceConfig]
     #
+    # @!attribute [rw] metrics_config
+    #   Enables or disables enhanced data source metrics for specified data
+    #   sources. Note that `metricsConfig` won't be used unless the
+    #   `dataSourceLevelMetricsBehavior` value is set to
+    #   `PER_DATA_SOURCE_METRICS`. If the `dataSourceLevelMetricsBehavior`
+    #   is set to `FULL_REQUEST_DATA_SOURCE_METRICS` instead,
+    #   `metricsConfig` will be ignored. However, you can still set its
+    #   value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDataSourceRequest AWS API Documentation
     #
     class UpdateDataSourceRequest < Struct.new(
@@ -3840,7 +4556,8 @@ module Aws::AppSync
       :open_search_service_config,
       :http_config,
       :relational_database_config,
-      :event_bridge_config)
+      :event_bridge_config,
+      :metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4030,6 +4747,46 @@ module Aws::AppSync
     #   characters.
     #   @return [String]
     #
+    # @!attribute [rw] introspection_config
+    #   Sets the value of the GraphQL API to enable (`ENABLED`) or disable
+    #   (`DISABLED`) introspection. If no value is provided, the
+    #   introspection configuration will be set to `ENABLED` by default.
+    #   This field will produce an error if the operation attempts to use
+    #   the introspection feature while this field is disabled.
+    #
+    #   For more information about introspection, see [GraphQL
+    #   introspection][1].
+    #
+    #
+    #
+    #   [1]: https://graphql.org/learn/introspection/
+    #   @return [String]
+    #
+    # @!attribute [rw] query_depth_limit
+    #   The maximum depth a query can have in a single request. Depth refers
+    #   to the amount of nested levels allowed in the body of query. The
+    #   default value is `0` (or unspecified), which indicates there's no
+    #   depth limit. If you set a limit, it can be between `1` and `75`
+    #   nested levels. This field will produce a limit error if the
+    #   operation falls out of bounds.
+    #
+    #   Note that fields can still be set to nullable or non-nullable. If a
+    #   non-nullable field produces an error, the error will be thrown
+    #   upwards to the first nullable field available.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resolver_count_limit
+    #   The maximum number of resolvers that can be invoked in a single
+    #   request. The default value is `0` (or unspecified), which will set
+    #   the limit to `10000`. When specified, the limit value can be between
+    #   `1` and `10000`. This field will produce a limit error if the
+    #   operation falls out of bounds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enhanced_metrics_config
+    #   The `enhancedMetricsConfig` object.
+    #   @return [Types::EnhancedMetricsConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApiRequest AWS API Documentation
     #
     class UpdateGraphqlApiRequest < Struct.new(
@@ -4043,7 +4800,11 @@ module Aws::AppSync
       :xray_enabled,
       :lambda_authorizer_config,
       :merged_api_execution_role_arn,
-      :owner_contact)
+      :owner_contact,
+      :introspection_config,
+      :query_depth_limit,
+      :resolver_count_limit,
+      :enhanced_metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4134,6 +4895,17 @@ module Aws::AppSync
     #   `runtime` value must be `APPSYNC_JS`.
     #   @return [String]
     #
+    # @!attribute [rw] metrics_config
+    #   Enables or disables enhanced resolver metrics for specified
+    #   resolvers. Note that `metricsConfig` won't be used unless the
+    #   `resolverLevelMetricsBehavior` value is set to
+    #   `PER_RESOLVER_METRICS`. If the `resolverLevelMetricsBehavior` is set
+    #   to `FULL_REQUEST_RESOLVER_METRICS` instead, `metricsConfig` will be
+    #   ignored. However, you can still set its value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolverRequest AWS API Documentation
     #
     class UpdateResolverRequest < Struct.new(
@@ -4149,7 +4921,8 @@ module Aws::AppSync
       :caching_config,
       :max_batch_size,
       :runtime,
-      :code)
+      :code,
+      :metrics_config)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.55.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.53.0 (2023-11-01)
+------------------
+
+* Feature - Global Accelerator now support accelerators with cross account endpoints.
+
 1.52.0 (2023-10-17)
 ------------------
 

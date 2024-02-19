@@ -1,0 +1,1323 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Athena
+  module Types
+
+    class AclConfiguration
+      attr_accessor s3_acl_option: ("BUCKET_OWNER_FULL_CONTROL")
+      SENSITIVE: []
+    end
+
+    class ApplicationDPUSizes
+      attr_accessor application_runtime_id: ::String
+      attr_accessor supported_dpu_sizes: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class AthenaError
+      attr_accessor error_category: ::Integer
+      attr_accessor error_type: ::Integer
+      attr_accessor retryable: bool
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetNamedQueryInput
+      attr_accessor named_query_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetNamedQueryOutput
+      attr_accessor named_queries: ::Array[Types::NamedQuery]
+      attr_accessor unprocessed_named_query_ids: ::Array[Types::UnprocessedNamedQueryId]
+      SENSITIVE: []
+    end
+
+    class BatchGetPreparedStatementInput
+      attr_accessor prepared_statement_names: ::Array[::String]
+      attr_accessor work_group: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetPreparedStatementOutput
+      attr_accessor prepared_statements: ::Array[Types::PreparedStatement]
+      attr_accessor unprocessed_prepared_statement_names: ::Array[Types::UnprocessedPreparedStatementName]
+      SENSITIVE: []
+    end
+
+    class BatchGetQueryExecutionInput
+      attr_accessor query_execution_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetQueryExecutionOutput
+      attr_accessor query_executions: ::Array[Types::QueryExecution]
+      attr_accessor unprocessed_query_execution_ids: ::Array[Types::UnprocessedQueryExecutionId]
+      SENSITIVE: []
+    end
+
+    class CalculationConfiguration
+      attr_accessor code_block: ::String
+      SENSITIVE: []
+    end
+
+    class CalculationResult
+      attr_accessor std_out_s3_uri: ::String
+      attr_accessor std_error_s3_uri: ::String
+      attr_accessor result_s3_uri: ::String
+      attr_accessor result_type: ::String
+      SENSITIVE: []
+    end
+
+    class CalculationStatistics
+      attr_accessor dpu_execution_in_millis: ::Integer
+      attr_accessor progress: ::String
+      SENSITIVE: []
+    end
+
+    class CalculationStatus
+      attr_accessor submission_date_time: ::Time
+      attr_accessor completion_date_time: ::Time
+      attr_accessor state: ("CREATING" | "CREATED" | "QUEUED" | "RUNNING" | "CANCELING" | "CANCELED" | "COMPLETED" | "FAILED")
+      attr_accessor state_change_reason: ::String
+      SENSITIVE: []
+    end
+
+    class CalculationSummary
+      attr_accessor calculation_execution_id: ::String
+      attr_accessor description: ::String
+      attr_accessor status: Types::CalculationStatus
+      SENSITIVE: []
+    end
+
+    class CancelCapacityReservationInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CancelCapacityReservationOutput < Aws::EmptyStructure
+    end
+
+    class CapacityAllocation
+      attr_accessor status: ("PENDING" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor request_time: ::Time
+      attr_accessor request_completion_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CapacityAssignment
+      attr_accessor work_group_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CapacityAssignmentConfiguration
+      attr_accessor capacity_reservation_name: ::String
+      attr_accessor capacity_assignments: ::Array[Types::CapacityAssignment]
+      SENSITIVE: []
+    end
+
+    class CapacityReservation
+      attr_accessor name: ::String
+      attr_accessor status: ("PENDING" | "ACTIVE" | "CANCELLING" | "CANCELLED" | "FAILED" | "UPDATE_PENDING")
+      attr_accessor target_dpus: ::Integer
+      attr_accessor allocated_dpus: ::Integer
+      attr_accessor last_allocation: Types::CapacityAllocation
+      attr_accessor last_successful_allocation_time: ::Time
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Column
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class ColumnInfo
+      attr_accessor catalog_name: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor name: ::String
+      attr_accessor label: ::String
+      attr_accessor type: ::String
+      attr_accessor precision: ::Integer
+      attr_accessor scale: ::Integer
+      attr_accessor nullable: ("NOT_NULL" | "NULLABLE" | "UNKNOWN")
+      attr_accessor case_sensitive: bool
+      SENSITIVE: []
+    end
+
+    class CreateCapacityReservationInput
+      attr_accessor target_dpus: ::Integer
+      attr_accessor name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateCapacityReservationOutput < Aws::EmptyStructure
+    end
+
+    class CreateDataCatalogInput
+      attr_accessor name: ::String
+      attr_accessor type: ("LAMBDA" | "GLUE" | "HIVE")
+      attr_accessor description: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDataCatalogOutput < Aws::EmptyStructure
+    end
+
+    class CreateNamedQueryInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor database: ::String
+      attr_accessor query_string: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor work_group: ::String
+      SENSITIVE: []
+    end
+
+    class CreateNamedQueryOutput
+      attr_accessor named_query_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateNotebookInput
+      attr_accessor work_group: ::String
+      attr_accessor name: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateNotebookOutput
+      attr_accessor notebook_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePreparedStatementInput
+      attr_accessor statement_name: ::String
+      attr_accessor work_group: ::String
+      attr_accessor query_statement: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePreparedStatementOutput < Aws::EmptyStructure
+    end
+
+    class CreatePresignedNotebookUrlRequest
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePresignedNotebookUrlResponse
+      attr_accessor notebook_url: ::String
+      attr_accessor auth_token: ::String
+      attr_accessor auth_token_expiration_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateWorkGroupInput
+      attr_accessor name: ::String
+      attr_accessor configuration: Types::WorkGroupConfiguration
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateWorkGroupOutput < Aws::EmptyStructure
+    end
+
+    class CustomerContentEncryptionConfiguration
+      attr_accessor kms_key: ::String
+      SENSITIVE: []
+    end
+
+    class DataCatalog
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("LAMBDA" | "GLUE" | "HIVE")
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DataCatalogSummary
+      attr_accessor catalog_name: ::String
+      attr_accessor type: ("LAMBDA" | "GLUE" | "HIVE")
+      SENSITIVE: []
+    end
+
+    class Database
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Datum
+      attr_accessor var_char_value: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCapacityReservationInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCapacityReservationOutput < Aws::EmptyStructure
+    end
+
+    class DeleteDataCatalogInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataCatalogOutput < Aws::EmptyStructure
+    end
+
+    class DeleteNamedQueryInput
+      attr_accessor named_query_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNamedQueryOutput < Aws::EmptyStructure
+    end
+
+    class DeleteNotebookInput
+      attr_accessor notebook_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNotebookOutput < Aws::EmptyStructure
+    end
+
+    class DeletePreparedStatementInput
+      attr_accessor statement_name: ::String
+      attr_accessor work_group: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePreparedStatementOutput < Aws::EmptyStructure
+    end
+
+    class DeleteWorkGroupInput
+      attr_accessor work_group: ::String
+      attr_accessor recursive_delete_option: bool
+      SENSITIVE: []
+    end
+
+    class DeleteWorkGroupOutput < Aws::EmptyStructure
+    end
+
+    class EncryptionConfiguration
+      attr_accessor encryption_option: ("SSE_S3" | "SSE_KMS" | "CSE_KMS")
+      attr_accessor kms_key: ::String
+      SENSITIVE: []
+    end
+
+    class EngineConfiguration
+      attr_accessor coordinator_dpu_size: ::Integer
+      attr_accessor max_concurrent_dpus: ::Integer
+      attr_accessor default_executor_dpu_size: ::Integer
+      attr_accessor additional_configs: ::Hash[::String, ::String]
+      attr_accessor spark_properties: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class EngineVersion
+      attr_accessor selected_engine_version: ::String
+      attr_accessor effective_engine_version: ::String
+      SENSITIVE: []
+    end
+
+    class ExecutorsSummary
+      attr_accessor executor_id: ::String
+      attr_accessor executor_type: ("COORDINATOR" | "GATEWAY" | "WORKER")
+      attr_accessor start_date_time: ::Integer
+      attr_accessor termination_date_time: ::Integer
+      attr_accessor executor_state: ("CREATING" | "CREATED" | "REGISTERED" | "TERMINATING" | "TERMINATED" | "FAILED")
+      attr_accessor executor_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExportNotebookInput
+      attr_accessor notebook_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExportNotebookOutput
+      attr_accessor notebook_metadata: Types::NotebookMetadata
+      attr_accessor payload: ::String
+      SENSITIVE: []
+    end
+
+    class FilterDefinition
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCalculationExecutionCodeRequest
+      attr_accessor calculation_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCalculationExecutionCodeResponse
+      attr_accessor code_block: ::String
+      SENSITIVE: []
+    end
+
+    class GetCalculationExecutionRequest
+      attr_accessor calculation_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCalculationExecutionResponse
+      attr_accessor calculation_execution_id: ::String
+      attr_accessor session_id: ::String
+      attr_accessor description: ::String
+      attr_accessor working_directory: ::String
+      attr_accessor status: Types::CalculationStatus
+      attr_accessor statistics: Types::CalculationStatistics
+      attr_accessor result: Types::CalculationResult
+      SENSITIVE: []
+    end
+
+    class GetCalculationExecutionStatusRequest
+      attr_accessor calculation_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCalculationExecutionStatusResponse
+      attr_accessor status: Types::CalculationStatus
+      attr_accessor statistics: Types::CalculationStatistics
+      SENSITIVE: []
+    end
+
+    class GetCapacityAssignmentConfigurationInput
+      attr_accessor capacity_reservation_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCapacityAssignmentConfigurationOutput
+      attr_accessor capacity_assignment_configuration: Types::CapacityAssignmentConfiguration
+      SENSITIVE: []
+    end
+
+    class GetCapacityReservationInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCapacityReservationOutput
+      attr_accessor capacity_reservation: Types::CapacityReservation
+      SENSITIVE: []
+    end
+
+    class GetDataCatalogInput
+      attr_accessor name: ::String
+      attr_accessor work_group: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataCatalogOutput
+      attr_accessor data_catalog: Types::DataCatalog
+      SENSITIVE: []
+    end
+
+    class GetDatabaseInput
+      attr_accessor catalog_name: ::String
+      attr_accessor database_name: ::String
+      attr_accessor work_group: ::String
+      SENSITIVE: []
+    end
+
+    class GetDatabaseOutput
+      attr_accessor database: Types::Database
+      SENSITIVE: []
+    end
+
+    class GetNamedQueryInput
+      attr_accessor named_query_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetNamedQueryOutput
+      attr_accessor named_query: Types::NamedQuery
+      SENSITIVE: []
+    end
+
+    class GetNotebookMetadataInput
+      attr_accessor notebook_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetNotebookMetadataOutput
+      attr_accessor notebook_metadata: Types::NotebookMetadata
+      SENSITIVE: []
+    end
+
+    class GetPreparedStatementInput
+      attr_accessor statement_name: ::String
+      attr_accessor work_group: ::String
+      SENSITIVE: []
+    end
+
+    class GetPreparedStatementOutput
+      attr_accessor prepared_statement: Types::PreparedStatement
+      SENSITIVE: []
+    end
+
+    class GetQueryExecutionInput
+      attr_accessor query_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueryExecutionOutput
+      attr_accessor query_execution: Types::QueryExecution
+      SENSITIVE: []
+    end
+
+    class GetQueryResultsInput
+      attr_accessor query_execution_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetQueryResultsOutput
+      attr_accessor update_count: ::Integer
+      attr_accessor result_set: Types::ResultSet
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueryRuntimeStatisticsInput
+      attr_accessor query_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueryRuntimeStatisticsOutput
+      attr_accessor query_runtime_statistics: Types::QueryRuntimeStatistics
+      SENSITIVE: []
+    end
+
+    class GetSessionRequest
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSessionResponse
+      attr_accessor session_id: ::String
+      attr_accessor description: ::String
+      attr_accessor work_group: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor engine_configuration: Types::EngineConfiguration
+      attr_accessor notebook_version: ::String
+      attr_accessor session_configuration: Types::SessionConfiguration
+      attr_accessor status: Types::SessionStatus
+      attr_accessor statistics: Types::SessionStatistics
+      SENSITIVE: []
+    end
+
+    class GetSessionStatusRequest
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSessionStatusResponse
+      attr_accessor session_id: ::String
+      attr_accessor status: Types::SessionStatus
+      SENSITIVE: []
+    end
+
+    class GetTableMetadataInput
+      attr_accessor catalog_name: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor work_group: ::String
+      SENSITIVE: []
+    end
+
+    class GetTableMetadataOutput
+      attr_accessor table_metadata: Types::TableMetadata
+      SENSITIVE: []
+    end
+
+    class GetWorkGroupInput
+      attr_accessor work_group: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkGroupOutput
+      attr_accessor work_group: Types::WorkGroup
+      SENSITIVE: []
+    end
+
+    class IdentityCenterConfiguration
+      attr_accessor enable_identity_center: bool
+      attr_accessor identity_center_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ImportNotebookInput
+      attr_accessor work_group: ::String
+      attr_accessor name: ::String
+      attr_accessor payload: ::String
+      attr_accessor type: ("IPYNB")
+      attr_accessor notebook_s3_location_uri: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class ImportNotebookOutput
+      attr_accessor notebook_id: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor athena_error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationDPUSizesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationDPUSizesOutput
+      attr_accessor application_dpu_sizes: ::Array[Types::ApplicationDPUSizes]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCalculationExecutionsRequest
+      attr_accessor session_id: ::String
+      attr_accessor state_filter: ("CREATING" | "CREATED" | "QUEUED" | "RUNNING" | "CANCELING" | "CANCELED" | "COMPLETED" | "FAILED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCalculationExecutionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor calculations: ::Array[Types::CalculationSummary]
+      SENSITIVE: []
+    end
+
+    class ListCapacityReservationsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCapacityReservationsOutput
+      attr_accessor next_token: ::String
+      attr_accessor capacity_reservations: ::Array[Types::CapacityReservation]
+      SENSITIVE: []
+    end
+
+    class ListDataCatalogsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor work_group: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataCatalogsOutput
+      attr_accessor data_catalogs_summary: ::Array[Types::DataCatalogSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatabasesInput
+      attr_accessor catalog_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor work_group: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatabasesOutput
+      attr_accessor database_list: ::Array[Types::Database]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEngineVersionsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEngineVersionsOutput
+      attr_accessor engine_versions: ::Array[Types::EngineVersion]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExecutorsRequest
+      attr_accessor session_id: ::String
+      attr_accessor executor_state_filter: ("CREATING" | "CREATED" | "REGISTERED" | "TERMINATING" | "TERMINATED" | "FAILED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExecutorsResponse
+      attr_accessor session_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor executors_summary: ::Array[Types::ExecutorsSummary]
+      SENSITIVE: []
+    end
+
+    class ListNamedQueriesInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor work_group: ::String
+      SENSITIVE: []
+    end
+
+    class ListNamedQueriesOutput
+      attr_accessor named_query_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotebookMetadataInput
+      attr_accessor filters: Types::FilterDefinition
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor work_group: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotebookMetadataOutput
+      attr_accessor next_token: ::String
+      attr_accessor notebook_metadata_list: ::Array[Types::NotebookMetadata]
+      SENSITIVE: []
+    end
+
+    class ListNotebookSessionsRequest
+      attr_accessor notebook_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotebookSessionsResponse
+      attr_accessor notebook_sessions_list: ::Array[Types::NotebookSessionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPreparedStatementsInput
+      attr_accessor work_group: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPreparedStatementsOutput
+      attr_accessor prepared_statements: ::Array[Types::PreparedStatementSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListQueryExecutionsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor work_group: ::String
+      SENSITIVE: []
+    end
+
+    class ListQueryExecutionsOutput
+      attr_accessor query_execution_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSessionsRequest
+      attr_accessor work_group: ::String
+      attr_accessor state_filter: ("CREATING" | "CREATED" | "IDLE" | "BUSY" | "TERMINATING" | "TERMINATED" | "DEGRADED" | "FAILED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSessionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor sessions: ::Array[Types::SessionSummary]
+      SENSITIVE: []
+    end
+
+    class ListTableMetadataInput
+      attr_accessor catalog_name: ::String
+      attr_accessor database_name: ::String
+      attr_accessor expression: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor work_group: ::String
+      SENSITIVE: []
+    end
+
+    class ListTableMetadataOutput
+      attr_accessor table_metadata_list: ::Array[Types::TableMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkGroupsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWorkGroupsOutput
+      attr_accessor work_groups: ::Array[Types::WorkGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MetadataException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NamedQuery
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor database: ::String
+      attr_accessor query_string: ::String
+      attr_accessor named_query_id: ::String
+      attr_accessor work_group: ::String
+      SENSITIVE: []
+    end
+
+    class NotebookMetadata
+      attr_accessor notebook_id: ::String
+      attr_accessor name: ::String
+      attr_accessor work_group: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor type: ("IPYNB")
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class NotebookSessionSummary
+      attr_accessor session_id: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class PreparedStatement
+      attr_accessor statement_name: ::String
+      attr_accessor query_statement: ::String
+      attr_accessor work_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class PreparedStatementSummary
+      attr_accessor statement_name: ::String
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class PutCapacityAssignmentConfigurationInput
+      attr_accessor capacity_reservation_name: ::String
+      attr_accessor capacity_assignments: ::Array[Types::CapacityAssignment]
+      SENSITIVE: []
+    end
+
+    class PutCapacityAssignmentConfigurationOutput < Aws::EmptyStructure
+    end
+
+    class QueryExecution
+      attr_accessor query_execution_id: ::String
+      attr_accessor query: ::String
+      attr_accessor statement_type: ("DDL" | "DML" | "UTILITY")
+      attr_accessor result_configuration: Types::ResultConfiguration
+      attr_accessor result_reuse_configuration: Types::ResultReuseConfiguration
+      attr_accessor query_execution_context: Types::QueryExecutionContext
+      attr_accessor status: Types::QueryExecutionStatus
+      attr_accessor statistics: Types::QueryExecutionStatistics
+      attr_accessor work_group: ::String
+      attr_accessor engine_version: Types::EngineVersion
+      attr_accessor execution_parameters: ::Array[::String]
+      attr_accessor substatement_type: ::String
+      attr_accessor query_results_s3_access_grants_configuration: Types::QueryResultsS3AccessGrantsConfiguration
+      SENSITIVE: []
+    end
+
+    class QueryExecutionContext
+      attr_accessor database: ::String
+      attr_accessor catalog: ::String
+      SENSITIVE: []
+    end
+
+    class QueryExecutionStatistics
+      attr_accessor engine_execution_time_in_millis: ::Integer
+      attr_accessor data_scanned_in_bytes: ::Integer
+      attr_accessor data_manifest_location: ::String
+      attr_accessor total_execution_time_in_millis: ::Integer
+      attr_accessor query_queue_time_in_millis: ::Integer
+      attr_accessor service_pre_processing_time_in_millis: ::Integer
+      attr_accessor query_planning_time_in_millis: ::Integer
+      attr_accessor service_processing_time_in_millis: ::Integer
+      attr_accessor result_reuse_information: Types::ResultReuseInformation
+      SENSITIVE: []
+    end
+
+    class QueryExecutionStatus
+      attr_accessor state: ("QUEUED" | "RUNNING" | "SUCCEEDED" | "FAILED" | "CANCELLED")
+      attr_accessor state_change_reason: ::String
+      attr_accessor submission_date_time: ::Time
+      attr_accessor completion_date_time: ::Time
+      attr_accessor athena_error: Types::AthenaError
+      SENSITIVE: []
+    end
+
+    class QueryResultsS3AccessGrantsConfiguration
+      attr_accessor enable_s3_access_grants: bool
+      attr_accessor create_user_level_prefix: bool
+      attr_accessor authentication_type: ("DIRECTORY_IDENTITY")
+      SENSITIVE: []
+    end
+
+    class QueryRuntimeStatistics
+      attr_accessor timeline: Types::QueryRuntimeStatisticsTimeline
+      attr_accessor rows: Types::QueryRuntimeStatisticsRows
+      attr_accessor output_stage: Types::QueryStage
+      SENSITIVE: []
+    end
+
+    class QueryRuntimeStatisticsRows
+      attr_accessor input_rows: ::Integer
+      attr_accessor input_bytes: ::Integer
+      attr_accessor output_bytes: ::Integer
+      attr_accessor output_rows: ::Integer
+      SENSITIVE: []
+    end
+
+    class QueryRuntimeStatisticsTimeline
+      attr_accessor query_queue_time_in_millis: ::Integer
+      attr_accessor service_pre_processing_time_in_millis: ::Integer
+      attr_accessor query_planning_time_in_millis: ::Integer
+      attr_accessor engine_execution_time_in_millis: ::Integer
+      attr_accessor service_processing_time_in_millis: ::Integer
+      attr_accessor total_execution_time_in_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class QueryStage
+      attr_accessor stage_id: ::Integer
+      attr_accessor state: ::String
+      attr_accessor output_bytes: ::Integer
+      attr_accessor output_rows: ::Integer
+      attr_accessor input_bytes: ::Integer
+      attr_accessor input_rows: ::Integer
+      attr_accessor execution_time: ::Integer
+      attr_accessor query_stage_plan: Types::QueryStagePlanNode
+      attr_accessor sub_stages: ::Array[Types::QueryStage]
+      SENSITIVE: []
+    end
+
+    class QueryStagePlanNode
+      attr_accessor name: ::String
+      attr_accessor identifier: ::String
+      attr_accessor children: ::Array[Types::QueryStagePlanNode]
+      attr_accessor remote_sources: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResultConfiguration
+      attr_accessor output_location: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor expected_bucket_owner: ::String
+      attr_accessor acl_configuration: Types::AclConfiguration
+      SENSITIVE: []
+    end
+
+    class ResultConfigurationUpdates
+      attr_accessor output_location: ::String
+      attr_accessor remove_output_location: bool
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor remove_encryption_configuration: bool
+      attr_accessor expected_bucket_owner: ::String
+      attr_accessor remove_expected_bucket_owner: bool
+      attr_accessor acl_configuration: Types::AclConfiguration
+      attr_accessor remove_acl_configuration: bool
+      SENSITIVE: []
+    end
+
+    class ResultReuseByAgeConfiguration
+      attr_accessor enabled: bool
+      attr_accessor max_age_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResultReuseConfiguration
+      attr_accessor result_reuse_by_age_configuration: Types::ResultReuseByAgeConfiguration
+      SENSITIVE: []
+    end
+
+    class ResultReuseInformation
+      attr_accessor reused_previous_result: bool
+      SENSITIVE: []
+    end
+
+    class ResultSet
+      attr_accessor rows: ::Array[Types::Row]
+      attr_accessor result_set_metadata: Types::ResultSetMetadata
+      SENSITIVE: []
+    end
+
+    class ResultSetMetadata
+      attr_accessor column_info: ::Array[Types::ColumnInfo]
+      SENSITIVE: []
+    end
+
+    class Row
+      attr_accessor data: ::Array[Types::Datum]
+      SENSITIVE: []
+    end
+
+    class SessionAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SessionConfiguration
+      attr_accessor execution_role: ::String
+      attr_accessor working_directory: ::String
+      attr_accessor idle_timeout_seconds: ::Integer
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class SessionStatistics
+      attr_accessor dpu_execution_in_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class SessionStatus
+      attr_accessor start_date_time: ::Time
+      attr_accessor last_modified_date_time: ::Time
+      attr_accessor end_date_time: ::Time
+      attr_accessor idle_since_date_time: ::Time
+      attr_accessor state: ("CREATING" | "CREATED" | "IDLE" | "BUSY" | "TERMINATING" | "TERMINATED" | "DEGRADED" | "FAILED")
+      attr_accessor state_change_reason: ::String
+      SENSITIVE: []
+    end
+
+    class SessionSummary
+      attr_accessor session_id: ::String
+      attr_accessor description: ::String
+      attr_accessor engine_version: Types::EngineVersion
+      attr_accessor notebook_version: ::String
+      attr_accessor status: Types::SessionStatus
+      SENSITIVE: []
+    end
+
+    class StartCalculationExecutionRequest
+      attr_accessor session_id: ::String
+      attr_accessor description: ::String
+      attr_accessor calculation_configuration: Types::CalculationConfiguration
+      attr_accessor code_block: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartCalculationExecutionResponse
+      attr_accessor calculation_execution_id: ::String
+      attr_accessor state: ("CREATING" | "CREATED" | "QUEUED" | "RUNNING" | "CANCELING" | "CANCELED" | "COMPLETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class StartQueryExecutionInput
+      attr_accessor query_string: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor query_execution_context: Types::QueryExecutionContext
+      attr_accessor result_configuration: Types::ResultConfiguration
+      attr_accessor work_group: ::String
+      attr_accessor execution_parameters: ::Array[::String]
+      attr_accessor result_reuse_configuration: Types::ResultReuseConfiguration
+      SENSITIVE: []
+    end
+
+    class StartQueryExecutionOutput
+      attr_accessor query_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartSessionRequest
+      attr_accessor description: ::String
+      attr_accessor work_group: ::String
+      attr_accessor engine_configuration: Types::EngineConfiguration
+      attr_accessor notebook_version: ::String
+      attr_accessor session_idle_timeout_in_minutes: ::Integer
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartSessionResponse
+      attr_accessor session_id: ::String
+      attr_accessor state: ("CREATING" | "CREATED" | "IDLE" | "BUSY" | "TERMINATING" | "TERMINATED" | "DEGRADED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class StopCalculationExecutionRequest
+      attr_accessor calculation_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopCalculationExecutionResponse
+      attr_accessor state: ("CREATING" | "CREATED" | "QUEUED" | "RUNNING" | "CANCELING" | "CANCELED" | "COMPLETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class StopQueryExecutionInput
+      attr_accessor query_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopQueryExecutionOutput < Aws::EmptyStructure
+    end
+
+    class TableMetadata
+      attr_accessor name: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor last_access_time: ::Time
+      attr_accessor table_type: ::String
+      attr_accessor columns: ::Array[Types::Column]
+      attr_accessor partition_keys: ::Array[Types::Column]
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class TerminateSessionRequest
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateSessionResponse
+      attr_accessor state: ("CREATING" | "CREATED" | "IDLE" | "BUSY" | "TERMINATING" | "TERMINATED" | "DEGRADED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      attr_accessor reason: ("CONCURRENT_QUERY_LIMIT_EXCEEDED")
+      SENSITIVE: []
+    end
+
+    class UnprocessedNamedQueryId
+      attr_accessor named_query_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class UnprocessedPreparedStatementName
+      attr_accessor statement_name: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class UnprocessedQueryExecutionId
+      attr_accessor query_execution_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateCapacityReservationInput
+      attr_accessor target_dpus: ::Integer
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCapacityReservationOutput < Aws::EmptyStructure
+    end
+
+    class UpdateDataCatalogInput
+      attr_accessor name: ::String
+      attr_accessor type: ("LAMBDA" | "GLUE" | "HIVE")
+      attr_accessor description: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateDataCatalogOutput < Aws::EmptyStructure
+    end
+
+    class UpdateNamedQueryInput
+      attr_accessor named_query_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor query_string: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateNamedQueryOutput < Aws::EmptyStructure
+    end
+
+    class UpdateNotebookInput
+      attr_accessor notebook_id: ::String
+      attr_accessor payload: ::String
+      attr_accessor type: ("IPYNB")
+      attr_accessor session_id: ::String
+      attr_accessor client_request_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateNotebookMetadataInput
+      attr_accessor notebook_id: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateNotebookMetadataOutput < Aws::EmptyStructure
+    end
+
+    class UpdateNotebookOutput < Aws::EmptyStructure
+    end
+
+    class UpdatePreparedStatementInput
+      attr_accessor statement_name: ::String
+      attr_accessor work_group: ::String
+      attr_accessor query_statement: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePreparedStatementOutput < Aws::EmptyStructure
+    end
+
+    class UpdateWorkGroupInput
+      attr_accessor work_group: ::String
+      attr_accessor description: ::String
+      attr_accessor configuration_updates: Types::WorkGroupConfigurationUpdates
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateWorkGroupOutput < Aws::EmptyStructure
+    end
+
+    class WorkGroup
+      attr_accessor name: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor configuration: Types::WorkGroupConfiguration
+      attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor identity_center_application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class WorkGroupConfiguration
+      attr_accessor result_configuration: Types::ResultConfiguration
+      attr_accessor enforce_work_group_configuration: bool
+      attr_accessor publish_cloud_watch_metrics_enabled: bool
+      attr_accessor bytes_scanned_cutoff_per_query: ::Integer
+      attr_accessor requester_pays_enabled: bool
+      attr_accessor engine_version: Types::EngineVersion
+      attr_accessor additional_configuration: ::String
+      attr_accessor execution_role: ::String
+      attr_accessor customer_content_encryption_configuration: Types::CustomerContentEncryptionConfiguration
+      attr_accessor enable_minimum_encryption_configuration: bool
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration
+      attr_accessor query_results_s3_access_grants_configuration: Types::QueryResultsS3AccessGrantsConfiguration
+      SENSITIVE: []
+    end
+
+    class WorkGroupConfigurationUpdates
+      attr_accessor enforce_work_group_configuration: bool
+      attr_accessor result_configuration_updates: Types::ResultConfigurationUpdates
+      attr_accessor publish_cloud_watch_metrics_enabled: bool
+      attr_accessor bytes_scanned_cutoff_per_query: ::Integer
+      attr_accessor remove_bytes_scanned_cutoff_per_query: bool
+      attr_accessor requester_pays_enabled: bool
+      attr_accessor engine_version: Types::EngineVersion
+      attr_accessor remove_customer_content_encryption_configuration: bool
+      attr_accessor additional_configuration: ::String
+      attr_accessor execution_role: ::String
+      attr_accessor customer_content_encryption_configuration: Types::CustomerContentEncryptionConfiguration
+      attr_accessor enable_minimum_encryption_configuration: bool
+      attr_accessor query_results_s3_access_grants_configuration: Types::QueryResultsS3AccessGrantsConfiguration
+      SENSITIVE: []
+    end
+
+    class WorkGroupSummary
+      attr_accessor name: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor engine_version: Types::EngineVersion
+      attr_accessor identity_center_application_arn: ::String
+      SENSITIVE: []
+    end
+  end
+end

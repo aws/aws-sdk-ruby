@@ -1,0 +1,1113 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::VPCLattice
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessLogSubscriptionSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor destination_arn: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUpdateRuleRequest
+      attr_accessor listener_identifier: ::String
+      attr_accessor rules: ::Array[Types::RuleUpdate]
+      attr_accessor service_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUpdateRuleResponse
+      attr_accessor successful: ::Array[Types::RuleUpdateSuccess]
+      attr_accessor unsuccessful: ::Array[Types::RuleUpdateFailure]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessLogSubscriptionRequest
+      attr_accessor client_token: ::String
+      attr_accessor destination_arn: ::String
+      attr_accessor resource_identifier: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAccessLogSubscriptionResponse
+      attr_accessor arn: ::String
+      attr_accessor destination_arn: ::String
+      attr_accessor id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateListenerRequest
+      attr_accessor client_token: ::String
+      attr_accessor default_action: Types::RuleAction
+      attr_accessor name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor service_identifier: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateListenerResponse
+      attr_accessor arn: ::String
+      attr_accessor default_action: Types::RuleAction
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor service_arn: ::String
+      attr_accessor service_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRuleRequest
+      attr_accessor action: Types::RuleAction
+      attr_accessor client_token: ::String
+      attr_accessor listener_identifier: ::String
+      attr_accessor match: Types::RuleMatch
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor service_identifier: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateRuleResponse
+      attr_accessor action: Types::RuleAction
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor match: Types::RuleMatch
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateServiceNetworkRequest
+      attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateServiceNetworkResponse
+      attr_accessor arn: ::String
+      attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateServiceNetworkServiceAssociationRequest
+      attr_accessor client_token: ::String
+      attr_accessor service_identifier: ::String
+      attr_accessor service_network_identifier: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateServiceNetworkServiceAssociationResponse
+      attr_accessor arn: ::String
+      attr_accessor created_by: ::String
+      attr_accessor custom_domain_name: ::String
+      attr_accessor dns_entry: Types::DnsEntry
+      attr_accessor id: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class CreateServiceNetworkVpcAssociationRequest
+      attr_accessor client_token: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor service_network_identifier: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CreateServiceNetworkVpcAssociationResponse
+      attr_accessor arn: ::String
+      attr_accessor created_by: ::String
+      attr_accessor id: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED")
+      SENSITIVE: []
+    end
+
+    class CreateServiceRequest
+      attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor certificate_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor custom_domain_name: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateServiceResponse
+      attr_accessor arn: ::String
+      attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor certificate_arn: ::String
+      attr_accessor custom_domain_name: ::String
+      attr_accessor dns_entry: Types::DnsEntry
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class CreateTargetGroupRequest
+      attr_accessor client_token: ::String
+      attr_accessor config: Types::TargetGroupConfig
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("IP" | "LAMBDA" | "INSTANCE" | "ALB")
+      SENSITIVE: []
+    end
+
+    class CreateTargetGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor config: Types::TargetGroupConfig
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor type: ("IP" | "LAMBDA" | "INSTANCE" | "ALB")
+      SENSITIVE: []
+    end
+
+    class DeleteAccessLogSubscriptionRequest
+      attr_accessor access_log_subscription_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessLogSubscriptionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAuthPolicyRequest
+      attr_accessor resource_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAuthPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteListenerRequest
+      attr_accessor listener_identifier: ::String
+      attr_accessor service_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteListenerResponse < Aws::EmptyStructure
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRuleRequest
+      attr_accessor listener_identifier: ::String
+      attr_accessor rule_identifier: ::String
+      attr_accessor service_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRuleResponse < Aws::EmptyStructure
+    end
+
+    class DeleteServiceNetworkRequest
+      attr_accessor service_network_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceNetworkResponse < Aws::EmptyStructure
+    end
+
+    class DeleteServiceNetworkServiceAssociationRequest
+      attr_accessor service_network_service_association_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceNetworkServiceAssociationResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteServiceNetworkVpcAssociationRequest
+      attr_accessor service_network_vpc_association_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceNetworkVpcAssociationResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteServiceRequest
+      attr_accessor service_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteTargetGroupRequest
+      attr_accessor target_group_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTargetGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class DeregisterTargetsRequest
+      attr_accessor target_group_identifier: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      SENSITIVE: []
+    end
+
+    class DeregisterTargetsResponse
+      attr_accessor successful: ::Array[Types::Target]
+      attr_accessor unsuccessful: ::Array[Types::TargetFailure]
+      SENSITIVE: []
+    end
+
+    class DnsEntry
+      attr_accessor domain_name: ::String
+      attr_accessor hosted_zone_id: ::String
+      SENSITIVE: []
+    end
+
+    class FixedResponseAction
+      attr_accessor status_code: ::Integer
+      SENSITIVE: []
+    end
+
+    class ForwardAction
+      attr_accessor target_groups: ::Array[Types::WeightedTargetGroup]
+      SENSITIVE: []
+    end
+
+    class GetAccessLogSubscriptionRequest
+      attr_accessor access_log_subscription_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessLogSubscriptionResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor destination_arn: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAuthPolicyRequest
+      attr_accessor resource_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetAuthPolicyResponse
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor policy: ::String
+      attr_accessor state: ("Active" | "Inactive")
+      SENSITIVE: []
+    end
+
+    class GetListenerRequest
+      attr_accessor listener_identifier: ::String
+      attr_accessor service_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetListenerResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor default_action: Types::RuleAction
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor service_arn: ::String
+      attr_accessor service_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResponse
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetRuleRequest
+      attr_accessor listener_identifier: ::String
+      attr_accessor rule_identifier: ::String
+      attr_accessor service_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetRuleResponse
+      attr_accessor action: Types::RuleAction
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor is_default: bool
+      attr_accessor last_updated_at: ::Time
+      attr_accessor match: Types::RuleMatch
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetServiceNetworkRequest
+      attr_accessor service_network_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceNetworkResponse
+      attr_accessor arn: ::String
+      attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor created_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor number_of_associated_services: ::Integer
+      attr_accessor number_of_associated_vp_cs: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetServiceNetworkServiceAssociationRequest
+      attr_accessor service_network_service_association_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceNetworkServiceAssociationResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor custom_domain_name: ::String
+      attr_accessor dns_entry: Types::DnsEntry
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
+      attr_accessor id: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor service_id: ::String
+      attr_accessor service_name: ::String
+      attr_accessor service_network_arn: ::String
+      attr_accessor service_network_id: ::String
+      attr_accessor service_network_name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class GetServiceNetworkVpcAssociationRequest
+      attr_accessor service_network_vpc_association_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceNetworkVpcAssociationResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor service_network_arn: ::String
+      attr_accessor service_network_id: ::String
+      attr_accessor service_network_name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED")
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceRequest
+      attr_accessor service_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceResponse
+      attr_accessor arn: ::String
+      attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor certificate_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor custom_domain_name: ::String
+      attr_accessor dns_entry: Types::DnsEntry
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class GetTargetGroupRequest
+      attr_accessor target_group_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetTargetGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor config: Types::TargetGroupConfig
+      attr_accessor created_at: ::Time
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor service_arns: ::Array[::String]
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor type: ("IP" | "LAMBDA" | "INSTANCE" | "ALB")
+      SENSITIVE: []
+    end
+
+    class HeaderMatch
+      attr_accessor case_sensitive: bool
+      attr_accessor match: Types::HeaderMatchType
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class HeaderMatchType
+      attr_accessor contains: ::String
+      attr_accessor exact: ::String
+      attr_accessor prefix: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Contains < HeaderMatchType
+      end
+      class Exact < HeaderMatchType
+      end
+      class Prefix < HeaderMatchType
+      end
+      class Unknown < HeaderMatchType
+      end
+    end
+
+    class HealthCheckConfig
+      attr_accessor enabled: bool
+      attr_accessor health_check_interval_seconds: ::Integer
+      attr_accessor health_check_timeout_seconds: ::Integer
+      attr_accessor healthy_threshold_count: ::Integer
+      attr_accessor matcher: Types::Matcher
+      attr_accessor path: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor protocol_version: ("HTTP1" | "HTTP2")
+      attr_accessor unhealthy_threshold_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class HttpMatch
+      attr_accessor header_matches: ::Array[Types::HeaderMatch]
+      attr_accessor method: ::String
+      attr_accessor path_match: Types::PathMatch
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccessLogSubscriptionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resource_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessLogSubscriptionsResponse
+      attr_accessor items: ::Array[Types::AccessLogSubscriptionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListListenersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor service_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListListenersResponse
+      attr_accessor items: ::Array[Types::ListenerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRulesRequest
+      attr_accessor listener_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor service_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListRulesResponse
+      attr_accessor items: ::Array[Types::RuleSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceNetworkServiceAssociationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor service_identifier: ::String
+      attr_accessor service_network_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceNetworkServiceAssociationsResponse
+      attr_accessor items: ::Array[Types::ServiceNetworkServiceAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceNetworkVpcAssociationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor service_network_identifier: ::String
+      attr_accessor vpc_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceNetworkVpcAssociationsResponse
+      attr_accessor items: ::Array[Types::ServiceNetworkVpcAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceNetworksRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceNetworksResponse
+      attr_accessor items: ::Array[Types::ServiceNetworkSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicesResponse
+      attr_accessor items: ::Array[Types::ServiceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTargetGroupsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor target_group_type: ("IP" | "LAMBDA" | "INSTANCE" | "ALB")
+      attr_accessor vpc_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListTargetGroupsResponse
+      attr_accessor items: ::Array[Types::TargetGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTargetsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor target_group_identifier: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      SENSITIVE: []
+    end
+
+    class ListTargetsResponse
+      attr_accessor items: ::Array[Types::TargetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListenerSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      SENSITIVE: []
+    end
+
+    class Matcher
+      attr_accessor http_code: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class HttpCode < Matcher
+      end
+      class Unknown < Matcher
+      end
+    end
+
+    class PathMatch
+      attr_accessor case_sensitive: bool
+      attr_accessor match: Types::PathMatchType
+      SENSITIVE: []
+    end
+
+    class PathMatchType
+      attr_accessor exact: ::String
+      attr_accessor prefix: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Exact < PathMatchType
+      end
+      class Prefix < PathMatchType
+      end
+      class Unknown < PathMatchType
+      end
+    end
+
+    class PutAuthPolicyRequest
+      attr_accessor policy: ::String
+      attr_accessor resource_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class PutAuthPolicyResponse
+      attr_accessor policy: ::String
+      attr_accessor state: ("Active" | "Inactive")
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor policy: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class RegisterTargetsRequest
+      attr_accessor target_group_identifier: ::String
+      attr_accessor targets: ::Array[Types::Target]
+      SENSITIVE: []
+    end
+
+    class RegisterTargetsResponse
+      attr_accessor successful: ::Array[Types::Target]
+      attr_accessor unsuccessful: ::Array[Types::TargetFailure]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class RuleAction
+      attr_accessor fixed_response: Types::FixedResponseAction
+      attr_accessor forward: Types::ForwardAction
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FixedResponse < RuleAction
+      end
+      class Forward < RuleAction
+      end
+      class Unknown < RuleAction
+      end
+    end
+
+    class RuleMatch
+      attr_accessor http_match: Types::HttpMatch
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class HttpMatch < RuleMatch
+      end
+      class Unknown < RuleMatch
+      end
+    end
+
+    class RuleSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor is_default: bool
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class RuleUpdate
+      attr_accessor action: Types::RuleAction
+      attr_accessor match: Types::RuleMatch
+      attr_accessor priority: ::Integer
+      attr_accessor rule_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class RuleUpdateFailure
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
+      attr_accessor rule_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class RuleUpdateSuccess
+      attr_accessor action: Types::RuleAction
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor is_default: bool
+      attr_accessor match: Types::RuleMatch
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceNetworkServiceAssociationSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor custom_domain_name: ::String
+      attr_accessor dns_entry: Types::DnsEntry
+      attr_accessor id: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor service_id: ::String
+      attr_accessor service_name: ::String
+      attr_accessor service_network_arn: ::String
+      attr_accessor service_network_id: ::String
+      attr_accessor service_network_name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class ServiceNetworkSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor number_of_associated_services: ::Integer
+      attr_accessor number_of_associated_vp_cs: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceNetworkVpcAssociationSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor service_network_arn: ::String
+      attr_accessor service_network_id: ::String
+      attr_accessor service_network_name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED")
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor custom_domain_name: ::String
+      attr_accessor dns_entry: Types::DnsEntry
+      attr_accessor id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Target
+      attr_accessor id: ::String
+      attr_accessor port: ::Integer
+      SENSITIVE: []
+    end
+
+    class TargetFailure
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
+      attr_accessor id: ::String
+      attr_accessor port: ::Integer
+      SENSITIVE: []
+    end
+
+    class TargetGroupConfig
+      attr_accessor health_check: Types::HealthCheckConfig
+      attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor lambda_event_structure_version: ("V1" | "V2")
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor protocol_version: ("HTTP1" | "HTTP2" | "GRPC")
+      attr_accessor vpc_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class TargetGroupSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor ip_address_type: ("IPV4" | "IPV6")
+      attr_accessor lambda_event_structure_version: ("V1" | "V2")
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor service_arns: ::Array[::String]
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor type: ("IP" | "LAMBDA" | "INSTANCE" | "ALB")
+      attr_accessor vpc_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class TargetSummary
+      attr_accessor id: ::String
+      attr_accessor port: ::Integer
+      attr_accessor reason_code: ::String
+      attr_accessor status: ("DRAINING" | "UNAVAILABLE" | "HEALTHY" | "UNHEALTHY" | "INITIAL" | "UNUSED")
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAccessLogSubscriptionRequest
+      attr_accessor access_log_subscription_identifier: ::String
+      attr_accessor destination_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAccessLogSubscriptionResponse
+      attr_accessor arn: ::String
+      attr_accessor destination_arn: ::String
+      attr_accessor id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateListenerRequest
+      attr_accessor default_action: Types::RuleAction
+      attr_accessor listener_identifier: ::String
+      attr_accessor service_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateListenerResponse
+      attr_accessor arn: ::String
+      attr_accessor default_action: Types::RuleAction
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor service_arn: ::String
+      attr_accessor service_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRuleRequest
+      attr_accessor action: Types::RuleAction
+      attr_accessor listener_identifier: ::String
+      attr_accessor match: Types::RuleMatch
+      attr_accessor priority: ::Integer
+      attr_accessor rule_identifier: ::String
+      attr_accessor service_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRuleResponse
+      attr_accessor action: Types::RuleAction
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor is_default: bool
+      attr_accessor match: Types::RuleMatch
+      attr_accessor name: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateServiceNetworkRequest
+      attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor service_network_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServiceNetworkResponse
+      attr_accessor arn: ::String
+      attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServiceNetworkVpcAssociationRequest
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor service_network_vpc_association_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServiceNetworkVpcAssociationResponse
+      attr_accessor arn: ::String
+      attr_accessor created_by: ::String
+      attr_accessor id: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED" | "UPDATE_FAILED")
+      SENSITIVE: []
+    end
+
+    class UpdateServiceRequest
+      attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor certificate_arn: ::String
+      attr_accessor service_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServiceResponse
+      attr_accessor arn: ::String
+      attr_accessor auth_type: ("NONE" | "AWS_IAM")
+      attr_accessor certificate_arn: ::String
+      attr_accessor custom_domain_name: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTargetGroupRequest
+      attr_accessor health_check: Types::HealthCheckConfig
+      attr_accessor target_group_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTargetGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor config: Types::TargetGroupConfig
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "ACTIVE" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor type: ("IP" | "LAMBDA" | "INSTANCE" | "ALB")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class WeightedTargetGroup
+      attr_accessor target_group_identifier: ::String
+      attr_accessor weight: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

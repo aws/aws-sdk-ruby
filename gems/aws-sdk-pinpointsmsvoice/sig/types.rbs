@@ -1,0 +1,184 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::PinpointSMSVoice
+  module Types
+
+    class AlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CallInstructionsMessageType
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogsDestination
+      attr_accessor iam_role_arn: ::String
+      attr_accessor log_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationSetEventDestinationRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination: Types::EventDestinationDefinition
+      attr_accessor event_destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationSetEventDestinationResponse < Aws::EmptyStructure
+    end
+
+    class CreateConfigurationSetRequest
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationSetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteConfigurationSetEventDestinationRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfigurationSetEventDestinationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteConfigurationSetRequest
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfigurationSetResponse < Aws::EmptyStructure
+    end
+
+    class EventDestination
+      attr_accessor cloud_watch_logs_destination: Types::CloudWatchLogsDestination
+      attr_accessor enabled: bool
+      attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination
+      attr_accessor matching_event_types: ::Array[("INITIATED_CALL" | "RINGING" | "ANSWERED" | "COMPLETED_CALL" | "BUSY" | "FAILED" | "NO_ANSWER")]
+      attr_accessor name: ::String
+      attr_accessor sns_destination: Types::SnsDestination
+      SENSITIVE: []
+    end
+
+    class EventDestinationDefinition
+      attr_accessor cloud_watch_logs_destination: Types::CloudWatchLogsDestination
+      attr_accessor enabled: bool
+      attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination
+      attr_accessor matching_event_types: ::Array[("INITIATED_CALL" | "RINGING" | "ANSWERED" | "COMPLETED_CALL" | "BUSY" | "FAILED" | "NO_ANSWER")]
+      attr_accessor sns_destination: Types::SnsDestination
+      SENSITIVE: []
+    end
+
+    class GetConfigurationSetEventDestinationsRequest
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetConfigurationSetEventDestinationsResponse
+      attr_accessor event_destinations: ::Array[Types::EventDestination]
+      SENSITIVE: []
+    end
+
+    class InternalServiceErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KinesisFirehoseDestination
+      attr_accessor delivery_stream_arn: ::String
+      attr_accessor iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationSetsRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationSetsResponse
+      attr_accessor configuration_sets: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PlainTextMessageType
+      attr_accessor language_code: ::String
+      attr_accessor text: ::String
+      attr_accessor voice_id: ::String
+      SENSITIVE: []
+    end
+
+    class SSMLMessageType
+      attr_accessor language_code: ::String
+      attr_accessor text: ::String
+      attr_accessor voice_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendVoiceMessageRequest
+      attr_accessor caller_id: ::String
+      attr_accessor configuration_set_name: ::String
+      attr_accessor content: Types::VoiceMessageContent
+      attr_accessor destination_phone_number: ::String
+      attr_accessor origination_phone_number: ::String
+      SENSITIVE: []
+    end
+
+    class SendVoiceMessageResponse
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class SnsDestination
+      attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationSetEventDestinationRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination: Types::EventDestinationDefinition
+      attr_accessor event_destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationSetEventDestinationResponse < Aws::EmptyStructure
+    end
+
+    class VoiceMessageContent
+      attr_accessor call_instructions_message: Types::CallInstructionsMessageType
+      attr_accessor plain_text_message: Types::PlainTextMessageType
+      attr_accessor ssml_message: Types::SSMLMessageType
+      SENSITIVE: []
+    end
+  end
+end

@@ -137,6 +137,8 @@
         {"shape":"ValidationException"},
         {"shape":"InternalServerException"}
       ],
+      "deprecated":true,
+      "deprecatedMessage":"This API is for internal use and not meant for public use, and is no longer available.",
       "endpoint":{"hostPrefix":"ops."}
     },
     "TagResource":{
@@ -207,11 +209,22 @@
       "value":{"shape":"ConfigValue"},
       "sensitive":true
     },
+    "AirflowIdentity":{
+      "type":"string",
+      "max":64,
+      "min":1
+    },
     "AirflowVersion":{
       "type":"string",
       "max":32,
       "min":1,
       "pattern":"^[0-9a-z.]+$"
+    },
+    "CeleryExecutorQueue":{
+      "type":"string",
+      "max":1224,
+      "min":1,
+      "pattern":"^arn:aws(-[a-z]+)?:sqs:[a-z0-9\\-]+:\\d{12}:[a-zA-Z_0-9+=,.@\\-_/]+$"
     },
     "CloudWatchLogGroupArn":{
       "type":"string",
@@ -263,6 +276,7 @@
         "AirflowConfigurationOptions":{"shape":"AirflowConfigurationOptions"},
         "AirflowVersion":{"shape":"AirflowVersion"},
         "DagS3Path":{"shape":"RelativePath"},
+        "EndpointManagement":{"shape":"EndpointManagement"},
         "EnvironmentClass":{"shape":"EnvironmentClass"},
         "ExecutionRoleArn":{"shape":"IamRoleArn"},
         "KmsKey":{"shape":"KmsKey"},
@@ -308,6 +322,8 @@
     "CreateWebLoginTokenResponse":{
       "type":"structure",
       "members":{
+        "AirflowIdentity":{"shape":"AirflowIdentity"},
+        "IamIdentity":{"shape":"IamIdentity"},
         "WebServerHostname":{"shape":"Hostname"},
         "WebToken":{"shape":"Token"}
       }
@@ -338,15 +354,26 @@
       "members":{
         "Name":{"shape":"String"},
         "Value":{"shape":"String"}
-      }
+      },
+      "deprecated":true,
+      "deprecatedMessage":"This type is for internal use and not meant for public use. Data set for this type will be ignored."
     },
     "Dimensions":{
       "type":"list",
-      "member":{"shape":"Dimension"}
+      "member":{"shape":"Dimension"},
+      "deprecated":true,
+      "deprecatedMessage":"This type is for internal use and not meant for public use. Data set for this type will be ignored."
     },
     "Double":{
       "type":"double",
       "box":true
+    },
+    "EndpointManagement":{
+      "type":"string",
+      "enum":[
+        "CUSTOMER",
+        "SERVICE"
+      ]
     },
     "Environment":{
       "type":"structure",
@@ -354,8 +381,11 @@
         "AirflowConfigurationOptions":{"shape":"AirflowConfigurationOptions"},
         "AirflowVersion":{"shape":"AirflowVersion"},
         "Arn":{"shape":"EnvironmentArn"},
+        "CeleryExecutorQueue":{"shape":"CeleryExecutorQueue"},
         "CreatedAt":{"shape":"CreatedAt"},
         "DagS3Path":{"shape":"RelativePath"},
+        "DatabaseVpcEndpointService":{"shape":"VpcEndpointServiceName"},
+        "EndpointManagement":{"shape":"EndpointManagement"},
         "EnvironmentClass":{"shape":"EnvironmentClass"},
         "ExecutionRoleArn":{"shape":"IamRoleArn"},
         "KmsKey":{"shape":"KmsKey"},
@@ -378,6 +408,7 @@
         "Tags":{"shape":"TagMap"},
         "WebserverAccessMode":{"shape":"WebserverAccessMode"},
         "WebserverUrl":{"shape":"WebserverUrl"},
+        "WebserverVpcEndpointService":{"shape":"VpcEndpointServiceName"},
         "WeeklyMaintenanceWindowStart":{"shape":"WeeklyMaintenanceWindowStart"}
       }
     },
@@ -414,7 +445,9 @@
         "UNAVAILABLE",
         "UPDATE_FAILED",
         "ROLLING_BACK",
-        "CREATING_SNAPSHOT"
+        "CREATING_SNAPSHOT",
+        "PENDING",
+        "MAINTENANCE"
       ]
     },
     "ErrorCode":{"type":"string"},
@@ -447,6 +480,7 @@
       "min":1,
       "pattern":"^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$"
     },
+    "IamIdentity":{"type":"string"},
     "IamRoleArn":{
       "type":"string",
       "max":1224,
@@ -568,7 +602,9 @@
     },
     "MetricData":{
       "type":"list",
-      "member":{"shape":"MetricDatum"}
+      "member":{"shape":"MetricDatum"},
+      "deprecated":true,
+      "deprecatedMessage":"This type is for internal use and not meant for public use. Data set for this type will be ignored."
     },
     "MetricDatum":{
       "type":"structure",
@@ -583,7 +619,9 @@
         "Timestamp":{"shape":"Timestamp"},
         "Unit":{"shape":"Unit"},
         "Value":{"shape":"Double"}
-      }
+      },
+      "deprecated":true,
+      "deprecatedMessage":"This type is for internal use and not meant for public use. Data set for this type will be ignored."
     },
     "MinWorkers":{
       "type":"integer",
@@ -634,12 +672,16 @@
           "locationName":"EnvironmentName"
         },
         "MetricData":{"shape":"MetricData"}
-      }
+      },
+      "deprecated":true,
+      "deprecatedMessage":"This type is for internal use and not meant for public use. Data set for this type will be ignored."
     },
     "PublishMetricsOutput":{
       "type":"structure",
       "members":{
-      }
+      },
+      "deprecated":true,
+      "deprecatedMessage":"This type is for internal use and not meant for public use. Data set for this type will be ignored."
     },
     "RelativePath":{
       "type":"string",
@@ -693,7 +735,9 @@
         "Minimum":{"shape":"Double"},
         "SampleCount":{"shape":"Integer"},
         "Sum":{"shape":"Double"}
-      }
+      },
+      "deprecated":true,
+      "deprecatedMessage":"This type is for internal use and not meant for public use. Data set for this type will be ignored."
     },
     "String":{"type":"string"},
     "SubnetId":{
@@ -889,6 +933,12 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "VpcEndpointServiceName":{
+      "type":"string",
+      "max":1224,
+      "min":1,
+      "pattern":"^([a-z.-]+)?com\\.amazonaws\\.vpce\\.[a-z0-9\\-]+\\.[a-zA-Z_0-9+=,.@\\-_/]+$"
     },
     "WebserverAccessMode":{
       "type":"string",

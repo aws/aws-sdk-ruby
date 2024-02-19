@@ -2057,6 +2057,56 @@ module Aws::CloudFront
     #   * {Types::CreateFunctionResult#location #location} => String
     #   * {Types::CreateFunctionResult#etag #etag} => String
     #
+    #
+    # @example Example: To create a function
+    #
+    #   # Use the following command to create a function.
+    #
+    #   resp = client.create_function({
+    #     function_code: "function-code.js", 
+    #     function_config: {
+    #       comment: "my-function-comment", 
+    #       key_value_store_associations: {
+    #         items: [
+    #           {
+    #             key_value_store_arn: "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #           }, 
+    #         ], 
+    #         quantity: 1, 
+    #       }, 
+    #       runtime: "cloudfront-js-2.0", 
+    #     }, 
+    #     name: "my-function-name", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "ETVPDKIKX0DER", 
+    #     function_summary: {
+    #       function_config: {
+    #         comment: "my-function-comment", 
+    #         key_value_store_associations: {
+    #           items: [
+    #             {
+    #               key_value_store_arn: "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #             }, 
+    #           ], 
+    #           quantity: 1, 
+    #         }, 
+    #         runtime: "cloudfront-js-2.0", 
+    #       }, 
+    #       function_metadata: {
+    #         created_time: Time.parse("2023-11-07T19:53:50.334Z"), 
+    #         function_arn: "arn:aws:cloudfront::123456789012:function/my-function-name", 
+    #         last_modified_time: Time.parse("2023-11-07T19:53:50.334Z"), 
+    #         stage: "DEVELOPMENT", 
+    #       }, 
+    #       name: "my-function-name", 
+    #       status: "UNPUBLISHED", 
+    #     }, 
+    #     location: "https://cloudfront.amazonaws.com/2020-05-31/function/arn:aws:cloudfront::123456789012:function/my-function-name", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_function({
@@ -2064,6 +2114,14 @@ module Aws::CloudFront
     #     function_config: { # required
     #       comment: "string", # required
     #       runtime: "cloudfront-js-1.0", # required, accepts cloudfront-js-1.0, cloudfront-js-2.0
+    #       key_value_store_associations: {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             key_value_store_arn: "KeyValueStoreARN", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     function_code: "data", # required
     #   })
@@ -2074,6 +2132,9 @@ module Aws::CloudFront
     #   resp.function_summary.status #=> String
     #   resp.function_summary.function_config.comment #=> String
     #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
+    #   resp.function_summary.function_config.key_value_store_associations.quantity #=> Integer
+    #   resp.function_summary.function_config.key_value_store_associations.items #=> Array
+    #   resp.function_summary.function_config.key_value_store_associations.items[0].key_value_store_arn #=> String
     #   resp.function_summary.function_metadata.function_arn #=> String
     #   resp.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.function_summary.function_metadata.created_time #=> Time
@@ -2190,6 +2251,87 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def create_key_group(params = {}, options = {})
       req = build_request(:create_key_group, params)
+      req.send_request(options)
+    end
+
+    # Specifies the Key Value Store resource to add to your account. In your
+    # account, the Key Value Store names must be unique. You can also import
+    # Key Value Store data in JSON format from an S3 bucket by providing a
+    # valid `ImportSource` that you own.
+    #
+    # @option params [required, String] :name
+    #   The name of the Key Value Store. The maximum length of the name is 32
+    #   characters.
+    #
+    # @option params [String] :comment
+    #   The comment of the Key Value Store.
+    #
+    # @option params [Types::ImportSource] :import_source
+    #   The S3 bucket that provides the source for the import. The source must
+    #   be in a valid JSON format.
+    #
+    # @return [Types::CreateKeyValueStoreResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateKeyValueStoreResult#key_value_store #key_value_store} => Types::KeyValueStore
+    #   * {Types::CreateKeyValueStoreResult#etag #etag} => String
+    #   * {Types::CreateKeyValueStoreResult#location #location} => String
+    #
+    #
+    # @example Example: To create a KeyValueStore
+    #
+    #   # Use the following command to create a KeyValueStore.
+    #
+    #   resp = client.create_key_value_store({
+    #     comment: "my-key-valuestore-comment", 
+    #     import_source: {
+    #       source_arn: "arn:aws:s3:::my-bucket/validJSON.json", 
+    #       source_type: "S3", 
+    #     }, 
+    #     name: "my-keyvaluestore-name", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "ETVPDKIKX0DER", 
+    #     key_value_store: {
+    #       arn: "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #       comment: "my-key-valuestore-comment", 
+    #       id: "54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #       last_modified_time: Time.parse("2023-11-07T18:15:52.042Z"), 
+    #       name: "my-keyvaluestore-name", 
+    #       status: "PROVISIONING", 
+    #     }, 
+    #     location: "https://cloudfront.amazonaws.com/2020-05-31/key-value-store/arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_key_value_store({
+    #     name: "KeyValueStoreName", # required
+    #     comment: "KeyValueStoreComment",
+    #     import_source: {
+    #       source_type: "S3", # required, accepts S3
+    #       source_arn: "string", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_value_store.name #=> String
+    #   resp.key_value_store.id #=> String
+    #   resp.key_value_store.comment #=> String
+    #   resp.key_value_store.arn #=> String
+    #   resp.key_value_store.status #=> String
+    #   resp.key_value_store.last_modified_time #=> Time
+    #   resp.etag #=> String
+    #   resp.location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateKeyValueStore AWS API Documentation
+    #
+    # @overload create_key_value_store(params = {})
+    # @param [Hash] params ({})
+    def create_key_value_store(params = {}, options = {})
+      req = build_request(:create_key_value_store, params)
       req.send_request(options)
     end
 
@@ -3130,6 +3272,42 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Specifies the Key Value Store to delete.
+    #
+    # @option params [required, String] :name
+    #   The name of the Key Value Store.
+    #
+    # @option params [required, String] :if_match
+    #   The Key Value Store to delete, if a match occurs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a KeyValueStore
+    #
+    #   # Use the following command to delete a KeyValueStore.
+    #
+    #   resp = client.delete_key_value_store({
+    #     if_match: "ETVPDKIKX0DER", 
+    #     name: "my-keyvaluestore-name", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_key_value_store({
+    #     name: "KeyValueStoreName", # required
+    #     if_match: "string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteKeyValueStore AWS API Documentation
+    #
+    # @overload delete_key_value_store(params = {})
+    # @param [Hash] params ({})
+    def delete_key_value_store(params = {}, options = {})
+      req = build_request(:delete_key_value_store, params)
+      req.send_request(options)
+    end
+
     # Disables additional CloudWatch metrics for the specified CloudFront
     # distribution.
     #
@@ -3432,6 +3610,9 @@ module Aws::CloudFront
     #   resp.function_summary.status #=> String
     #   resp.function_summary.function_config.comment #=> String
     #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
+    #   resp.function_summary.function_config.key_value_store_associations.quantity #=> Integer
+    #   resp.function_summary.function_config.key_value_store_associations.items #=> Array
+    #   resp.function_summary.function_config.key_value_store_associations.items[0].key_value_store_arn #=> String
     #   resp.function_summary.function_metadata.function_arn #=> String
     #   resp.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.function_summary.function_metadata.created_time #=> Time
@@ -3444,6 +3625,63 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def describe_function(params = {}, options = {})
       req = build_request(:describe_function, params)
+      req.send_request(options)
+    end
+
+    # Specifies the Key Value Store and its configuration.
+    #
+    # @option params [required, String] :name
+    #   The name of the Key Value Store.
+    #
+    # @return [Types::DescribeKeyValueStoreResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeKeyValueStoreResult#key_value_store #key_value_store} => Types::KeyValueStore
+    #   * {Types::DescribeKeyValueStoreResult#etag #etag} => String
+    #
+    #
+    # @example Example: To describe a KeyValueStore
+    #
+    #   # Use the following command to describe a KeyValueStore.
+    #
+    #   resp = client.describe_key_value_store({
+    #     name: "my-keyvaluestore-name", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "ETVPDKIKX0DER", 
+    #     key_value_store: {
+    #       arn: "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #       comment: "my-key-valuestore-comment", 
+    #       id: "54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #       last_modified_time: Time.parse("2023-11-07T18:20:33.056Z"), 
+    #       name: "my-keyvaluestore-name", 
+    #       status: "READY", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_key_value_store({
+    #     name: "KeyValueStoreName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_value_store.name #=> String
+    #   resp.key_value_store.id #=> String
+    #   resp.key_value_store.comment #=> String
+    #   resp.key_value_store.arn #=> String
+    #   resp.key_value_store.status #=> String
+    #   resp.key_value_store.last_modified_time #=> Time
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DescribeKeyValueStore AWS API Documentation
+    #
+    # @overload describe_key_value_store(params = {})
+    # @param [Hash] params ({})
+    def describe_key_value_store(params = {}, options = {})
+      req = build_request(:describe_key_value_store, params)
       req.send_request(options)
     end
 
@@ -6371,6 +6609,9 @@ module Aws::CloudFront
     #   resp.function_list.items[0].status #=> String
     #   resp.function_list.items[0].function_config.comment #=> String
     #   resp.function_list.items[0].function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
+    #   resp.function_list.items[0].function_config.key_value_store_associations.quantity #=> Integer
+    #   resp.function_list.items[0].function_config.key_value_store_associations.items #=> Array
+    #   resp.function_list.items[0].function_config.key_value_store_associations.items[0].key_value_store_arn #=> String
     #   resp.function_list.items[0].function_metadata.function_arn #=> String
     #   resp.function_list.items[0].function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.function_list.items[0].function_metadata.created_time #=> Time
@@ -6488,6 +6729,83 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def list_key_groups(params = {}, options = {})
       req = build_request(:list_key_groups, params)
+      req.send_request(options)
+    end
+
+    # Specifies the Key Value Stores to list.
+    #
+    # @option params [String] :marker
+    #   The marker associated with the Key Value Stores list.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of items in the Key Value Stores list.
+    #
+    # @option params [String] :status
+    #   The status of the request for the Key Value Stores list.
+    #
+    # @return [Types::ListKeyValueStoresResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListKeyValueStoresResult#key_value_store_list #key_value_store_list} => Types::KeyValueStoreList
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To get a list of KeyValueStores
+    #
+    #   # The following command retrieves a list of KeyValueStores with READY status.
+    #
+    #   resp = client.list_key_value_stores({
+    #     marker: "", 
+    #     max_items: 100, 
+    #     status: "READY", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_value_store_list: {
+    #       items: [
+    #         {
+    #           arn: "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #           comment: "", 
+    #           id: "54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #           last_modified_time: Time.parse("2023-11-07T18:45:21.069Z"), 
+    #           name: "my-keyvaluestore-name", 
+    #           status: "READY", 
+    #         }, 
+    #       ], 
+    #       max_items: 100, 
+    #       next_marker: "", 
+    #       quantity: 1, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_key_value_stores({
+    #     marker: "string",
+    #     max_items: 1,
+    #     status: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_value_store_list.next_marker #=> String
+    #   resp.key_value_store_list.max_items #=> Integer
+    #   resp.key_value_store_list.quantity #=> Integer
+    #   resp.key_value_store_list.items #=> Array
+    #   resp.key_value_store_list.items[0].name #=> String
+    #   resp.key_value_store_list.items[0].id #=> String
+    #   resp.key_value_store_list.items[0].comment #=> String
+    #   resp.key_value_store_list.items[0].arn #=> String
+    #   resp.key_value_store_list.items[0].status #=> String
+    #   resp.key_value_store_list.items[0].last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListKeyValueStores AWS API Documentation
+    #
+    # @overload list_key_value_stores(params = {})
+    # @param [Hash] params ({})
+    def list_key_value_stores(params = {}, options = {})
+      req = build_request(:list_key_value_stores, params)
       req.send_request(options)
     end
 
@@ -6958,6 +7276,9 @@ module Aws::CloudFront
     #   resp.function_summary.status #=> String
     #   resp.function_summary.function_config.comment #=> String
     #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
+    #   resp.function_summary.function_config.key_value_store_associations.quantity #=> Integer
+    #   resp.function_summary.function_config.key_value_store_associations.items #=> Array
+    #   resp.function_summary.function_config.key_value_store_associations.items[0].key_value_store_arn #=> String
     #   resp.function_summary.function_metadata.function_arn #=> String
     #   resp.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.function_summary.function_metadata.created_time #=> Time
@@ -7063,6 +7384,9 @@ module Aws::CloudFront
     #   resp.test_result.function_summary.status #=> String
     #   resp.test_result.function_summary.function_config.comment #=> String
     #   resp.test_result.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
+    #   resp.test_result.function_summary.function_config.key_value_store_associations.quantity #=> Integer
+    #   resp.test_result.function_summary.function_config.key_value_store_associations.items #=> Array
+    #   resp.test_result.function_summary.function_config.key_value_store_associations.items[0].key_value_store_arn #=> String
     #   resp.test_result.function_summary.function_metadata.function_arn #=> String
     #   resp.test_result.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.test_result.function_summary.function_metadata.created_time #=> Time
@@ -8284,6 +8608,56 @@ module Aws::CloudFront
     #   * {Types::UpdateFunctionResult#function_summary #function_summary} => Types::FunctionSummary
     #   * {Types::UpdateFunctionResult#etag #etag} => String
     #
+    #
+    # @example Example: To update a function
+    #
+    #   # Use the following command to update a function.
+    #
+    #   resp = client.update_function({
+    #     function_code: "function-code-changed.js", 
+    #     function_config: {
+    #       comment: "my-changed-comment", 
+    #       key_value_store_associations: {
+    #         items: [
+    #           {
+    #             key_value_store_arn: "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #           }, 
+    #         ], 
+    #         quantity: 1, 
+    #       }, 
+    #       runtime: "cloudfront-js-2.0", 
+    #     }, 
+    #     if_match: "ETVPDKIKX0DER", 
+    #     name: "my-function-name", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "E3UN6WX5RRO2AG", 
+    #     function_summary: {
+    #       function_config: {
+    #         comment: "my-changed-comment", 
+    #         key_value_store_associations: {
+    #           items: [
+    #             {
+    #               key_value_store_arn: "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #             }, 
+    #           ], 
+    #           quantity: 1, 
+    #         }, 
+    #         runtime: "cloudfront-js-2.0", 
+    #       }, 
+    #       function_metadata: {
+    #         created_time: Time.parse("2023-11-07T19:53:50.334Z"), 
+    #         function_arn: "arn:aws:cloudfront::123456789012:function/my-function-name", 
+    #         last_modified_time: Time.parse("2023-11-07T20:01:37.174Z"), 
+    #         stage: "DEVELOPMENT", 
+    #       }, 
+    #       name: "my-function-name", 
+    #       status: "UNPUBLISHED", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_function({
@@ -8292,6 +8666,14 @@ module Aws::CloudFront
     #     function_config: { # required
     #       comment: "string", # required
     #       runtime: "cloudfront-js-1.0", # required, accepts cloudfront-js-1.0, cloudfront-js-2.0
+    #       key_value_store_associations: {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             key_value_store_arn: "KeyValueStoreARN", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     function_code: "data", # required
     #   })
@@ -8302,6 +8684,9 @@ module Aws::CloudFront
     #   resp.function_summary.status #=> String
     #   resp.function_summary.function_config.comment #=> String
     #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
+    #   resp.function_summary.function_config.key_value_store_associations.quantity #=> Integer
+    #   resp.function_summary.function_config.key_value_store_associations.items #=> Array
+    #   resp.function_summary.function_config.key_value_store_associations.items[0].key_value_store_arn #=> String
     #   resp.function_summary.function_metadata.function_arn #=> String
     #   resp.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.function_summary.function_metadata.created_time #=> Time
@@ -8375,6 +8760,73 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def update_key_group(params = {}, options = {})
       req = build_request(:update_key_group, params)
+      req.send_request(options)
+    end
+
+    # Specifies the Key Value Store to update.
+    #
+    # @option params [required, String] :name
+    #   The name of the Key Value Store to update.
+    #
+    # @option params [required, String] :comment
+    #   The comment of the Key Value Store to update.
+    #
+    # @option params [required, String] :if_match
+    #   The Key Value Store to update, if a match occurs.
+    #
+    # @return [Types::UpdateKeyValueStoreResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateKeyValueStoreResult#key_value_store #key_value_store} => Types::KeyValueStore
+    #   * {Types::UpdateKeyValueStoreResult#etag #etag} => String
+    #
+    #
+    # @example Example: To update a KeyValueStore
+    #
+    #   # Use the following command to update a KeyValueStore.
+    #
+    #   resp = client.update_key_value_store({
+    #     comment: "my-changed-comment", 
+    #     if_match: "ETVPDKIKX0DER", 
+    #     name: "my-keyvaluestore-name", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "E3UN6WX5RRO2AG", 
+    #     key_value_store: {
+    #       arn: "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #       comment: "my-changed-comment", 
+    #       id: "54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #       last_modified_time: Time.parse("2023-11-07T18:45:21.069Z"), 
+    #       name: "my-keyvaluestore-name", 
+    #       status: "READY", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_key_value_store({
+    #     name: "KeyValueStoreName", # required
+    #     comment: "KeyValueStoreComment", # required
+    #     if_match: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_value_store.name #=> String
+    #   resp.key_value_store.id #=> String
+    #   resp.key_value_store.comment #=> String
+    #   resp.key_value_store.arn #=> String
+    #   resp.key_value_store.status #=> String
+    #   resp.key_value_store.last_modified_time #=> Time
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateKeyValueStore AWS API Documentation
+    #
+    # @overload update_key_value_store(params = {})
+    # @param [Hash] params ({})
+    def update_key_value_store(params = {}, options = {})
+      req = build_request(:update_key_value_store, params)
       req.send_request(options)
     end
 
@@ -8940,7 +9392,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

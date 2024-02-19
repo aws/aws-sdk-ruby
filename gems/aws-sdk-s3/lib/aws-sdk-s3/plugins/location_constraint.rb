@@ -22,7 +22,9 @@ module Aws
 
           def populate_location_constraint(params, region)
             params[:create_bucket_configuration] ||= {}
-            params[:create_bucket_configuration][:location_constraint] ||= region
+            unless params[:create_bucket_configuration][:location]
+              params[:create_bucket_configuration][:location_constraint] ||= region
+            end
           end
 
         end

@@ -1,0 +1,1560 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Route53
+  module Types
+
+    class AccountLimit
+      attr_accessor type: ("MAX_HEALTH_CHECKS_BY_OWNER" | "MAX_HOSTED_ZONES_BY_OWNER" | "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER" | "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER" | "MAX_TRAFFIC_POLICIES_BY_OWNER")
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class ActivateKeySigningKeyRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ActivateKeySigningKeyResponse
+      attr_accessor change_info: Types::ChangeInfo
+      SENSITIVE: []
+    end
+
+    class AlarmIdentifier
+      attr_accessor region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "ca-central-1" | "eu-central-1" | "eu-central-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "ap-east-1" | "me-south-1" | "me-central-1" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "cn-northwest-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "ap-southeast-4" | "il-central-1" | "ca-west-1")
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AliasTarget
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor evaluate_target_health: bool
+      SENSITIVE: []
+    end
+
+    class AssociateVPCWithHostedZoneRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor vpc: Types::VPC
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateVPCWithHostedZoneResponse
+      attr_accessor change_info: Types::ChangeInfo
+      SENSITIVE: []
+    end
+
+    class Change
+      attr_accessor action: ("CREATE" | "DELETE" | "UPSERT")
+      attr_accessor resource_record_set: Types::ResourceRecordSet
+      SENSITIVE: []
+    end
+
+    class ChangeBatch
+      attr_accessor comment: ::String
+      attr_accessor changes: ::Array[Types::Change]
+      SENSITIVE: []
+    end
+
+    class ChangeCidrCollectionRequest
+      attr_accessor id: ::String
+      attr_accessor collection_version: ::Integer
+      attr_accessor changes: ::Array[Types::CidrCollectionChange]
+      SENSITIVE: []
+    end
+
+    class ChangeCidrCollectionResponse
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ChangeInfo
+      attr_accessor id: ::String
+      attr_accessor status: ("PENDING" | "INSYNC")
+      attr_accessor submitted_at: ::Time
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class ChangeResourceRecordSetsRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor change_batch: Types::ChangeBatch
+      SENSITIVE: []
+    end
+
+    class ChangeResourceRecordSetsResponse
+      attr_accessor change_info: Types::ChangeInfo
+      SENSITIVE: []
+    end
+
+    class ChangeTagsForResourceRequest
+      attr_accessor resource_type: ("healthcheck" | "hostedzone")
+      attr_accessor resource_id: ::String
+      attr_accessor add_tags: ::Array[Types::Tag]
+      attr_accessor remove_tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ChangeTagsForResourceResponse < Aws::EmptyStructure
+    end
+
+    class CidrBlockInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CidrBlockSummary
+      attr_accessor cidr_block: ::String
+      attr_accessor location_name: ::String
+      SENSITIVE: []
+    end
+
+    class CidrCollection
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class CidrCollectionAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CidrCollectionChange
+      attr_accessor location_name: ::String
+      attr_accessor action: ("PUT" | "DELETE_IF_EXISTS")
+      attr_accessor cidr_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CidrCollectionInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CidrCollectionVersionMismatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CidrRoutingConfig
+      attr_accessor collection_id: ::String
+      attr_accessor location_name: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchAlarmConfiguration
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor threshold: ::Float
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+      attr_accessor period: ::Integer
+      attr_accessor metric_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor statistic: ("Average" | "Sum" | "SampleCount" | "Maximum" | "Minimum")
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      SENSITIVE: []
+    end
+
+    class CollectionSummary
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConcurrentModification
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictingDomainExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictingTypes
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Coordinates
+      attr_accessor latitude: ::String
+      attr_accessor longitude: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCidrCollectionRequest
+      attr_accessor name: ::String
+      attr_accessor caller_reference: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCidrCollectionResponse
+      attr_accessor collection: Types::CidrCollection
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class CreateHealthCheckRequest
+      attr_accessor caller_reference: ::String
+      attr_accessor health_check_config: Types::HealthCheckConfig
+      SENSITIVE: []
+    end
+
+    class CreateHealthCheckResponse
+      attr_accessor health_check: Types::HealthCheck
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class CreateHostedZoneRequest
+      attr_accessor name: ::String
+      attr_accessor vpc: Types::VPC
+      attr_accessor caller_reference: ::String
+      attr_accessor hosted_zone_config: Types::HostedZoneConfig
+      attr_accessor delegation_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateHostedZoneResponse
+      attr_accessor hosted_zone: Types::HostedZone
+      attr_accessor change_info: Types::ChangeInfo
+      attr_accessor delegation_set: Types::DelegationSet
+      attr_accessor vpc: Types::VPC
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class CreateKeySigningKeyRequest
+      attr_accessor caller_reference: ::String
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor key_management_service_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CreateKeySigningKeyResponse
+      attr_accessor change_info: Types::ChangeInfo
+      attr_accessor key_signing_key: Types::KeySigningKey
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class CreateQueryLoggingConfigRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor cloud_watch_logs_log_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateQueryLoggingConfigResponse
+      attr_accessor query_logging_config: Types::QueryLoggingConfig
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class CreateReusableDelegationSetRequest
+      attr_accessor caller_reference: ::String
+      attr_accessor hosted_zone_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateReusableDelegationSetResponse
+      attr_accessor delegation_set: Types::DelegationSet
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTrafficPolicyInstanceRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor name: ::String
+      attr_accessor ttl: ::Integer
+      attr_accessor traffic_policy_id: ::String
+      attr_accessor traffic_policy_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateTrafficPolicyInstanceResponse
+      attr_accessor traffic_policy_instance: Types::TrafficPolicyInstance
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTrafficPolicyRequest
+      attr_accessor name: ::String
+      attr_accessor document: ::String
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTrafficPolicyResponse
+      attr_accessor traffic_policy: Types::TrafficPolicy
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTrafficPolicyVersionRequest
+      attr_accessor id: ::String
+      attr_accessor document: ::String
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTrafficPolicyVersionResponse
+      attr_accessor traffic_policy: Types::TrafficPolicy
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVPCAssociationAuthorizationRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor vpc: Types::VPC
+      SENSITIVE: []
+    end
+
+    class CreateVPCAssociationAuthorizationResponse
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor vpc: Types::VPC
+      SENSITIVE: []
+    end
+
+    class DNSSECNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DNSSECStatus
+      attr_accessor serve_signature: ::String
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class DeactivateKeySigningKeyRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeactivateKeySigningKeyResponse
+      attr_accessor change_info: Types::ChangeInfo
+      SENSITIVE: []
+    end
+
+    class DelegationSet
+      attr_accessor id: ::String
+      attr_accessor caller_reference: ::String
+      attr_accessor name_servers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DelegationSetAlreadyCreated
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DelegationSetAlreadyReusable
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DelegationSetInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DelegationSetNotAvailable
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DelegationSetNotReusable
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCidrCollectionRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCidrCollectionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteHealthCheckRequest
+      attr_accessor health_check_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHealthCheckResponse < Aws::EmptyStructure
+    end
+
+    class DeleteHostedZoneRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHostedZoneResponse
+      attr_accessor change_info: Types::ChangeInfo
+      SENSITIVE: []
+    end
+
+    class DeleteKeySigningKeyRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKeySigningKeyResponse
+      attr_accessor change_info: Types::ChangeInfo
+      SENSITIVE: []
+    end
+
+    class DeleteQueryLoggingConfigRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteQueryLoggingConfigResponse < Aws::EmptyStructure
+    end
+
+    class DeleteReusableDelegationSetRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReusableDelegationSetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTrafficPolicyInstanceRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTrafficPolicyInstanceResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTrafficPolicyRequest
+      attr_accessor id: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteTrafficPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteVPCAssociationAuthorizationRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor vpc: Types::VPC
+      SENSITIVE: []
+    end
+
+    class DeleteVPCAssociationAuthorizationResponse < Aws::EmptyStructure
+    end
+
+    class Dimension
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class DisableHostedZoneDNSSECRequest
+      attr_accessor hosted_zone_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisableHostedZoneDNSSECResponse
+      attr_accessor change_info: Types::ChangeInfo
+      SENSITIVE: []
+    end
+
+    class DisassociateVPCFromHostedZoneRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor vpc: Types::VPC
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateVPCFromHostedZoneResponse
+      attr_accessor change_info: Types::ChangeInfo
+      SENSITIVE: []
+    end
+
+    class EnableHostedZoneDNSSECRequest
+      attr_accessor hosted_zone_id: ::String
+      SENSITIVE: []
+    end
+
+    class EnableHostedZoneDNSSECResponse
+      attr_accessor change_info: Types::ChangeInfo
+      SENSITIVE: []
+    end
+
+    class GeoLocation
+      attr_accessor continent_code: ::String
+      attr_accessor country_code: ::String
+      attr_accessor subdivision_code: ::String
+      SENSITIVE: []
+    end
+
+    class GeoLocationDetails
+      attr_accessor continent_code: ::String
+      attr_accessor continent_name: ::String
+      attr_accessor country_code: ::String
+      attr_accessor country_name: ::String
+      attr_accessor subdivision_code: ::String
+      attr_accessor subdivision_name: ::String
+      SENSITIVE: []
+    end
+
+    class GeoProximityLocation
+      attr_accessor aws_region: ::String
+      attr_accessor local_zone_group: ::String
+      attr_accessor coordinates: Types::Coordinates
+      attr_accessor bias: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAccountLimitRequest
+      attr_accessor type: ("MAX_HEALTH_CHECKS_BY_OWNER" | "MAX_HOSTED_ZONES_BY_OWNER" | "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER" | "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER" | "MAX_TRAFFIC_POLICIES_BY_OWNER")
+      SENSITIVE: []
+    end
+
+    class GetAccountLimitResponse
+      attr_accessor limit: Types::AccountLimit
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetChangeRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetChangeResponse
+      attr_accessor change_info: Types::ChangeInfo
+      SENSITIVE: []
+    end
+
+    class GetCheckerIpRangesRequest < Aws::EmptyStructure
+    end
+
+    class GetCheckerIpRangesResponse
+      attr_accessor checker_ip_ranges: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetDNSSECRequest
+      attr_accessor hosted_zone_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDNSSECResponse
+      attr_accessor status: Types::DNSSECStatus
+      attr_accessor key_signing_keys: ::Array[Types::KeySigningKey]
+      SENSITIVE: []
+    end
+
+    class GetGeoLocationRequest
+      attr_accessor continent_code: ::String
+      attr_accessor country_code: ::String
+      attr_accessor subdivision_code: ::String
+      SENSITIVE: []
+    end
+
+    class GetGeoLocationResponse
+      attr_accessor geo_location_details: Types::GeoLocationDetails
+      SENSITIVE: []
+    end
+
+    class GetHealthCheckCountRequest < Aws::EmptyStructure
+    end
+
+    class GetHealthCheckCountResponse
+      attr_accessor health_check_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetHealthCheckLastFailureReasonRequest
+      attr_accessor health_check_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetHealthCheckLastFailureReasonResponse
+      attr_accessor health_check_observations: ::Array[Types::HealthCheckObservation]
+      SENSITIVE: []
+    end
+
+    class GetHealthCheckRequest
+      attr_accessor health_check_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetHealthCheckResponse
+      attr_accessor health_check: Types::HealthCheck
+      SENSITIVE: []
+    end
+
+    class GetHealthCheckStatusRequest
+      attr_accessor health_check_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetHealthCheckStatusResponse
+      attr_accessor health_check_observations: ::Array[Types::HealthCheckObservation]
+      SENSITIVE: []
+    end
+
+    class GetHostedZoneCountRequest < Aws::EmptyStructure
+    end
+
+    class GetHostedZoneCountResponse
+      attr_accessor hosted_zone_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetHostedZoneLimitRequest
+      attr_accessor type: ("MAX_RRSETS_BY_ZONE" | "MAX_VPCS_ASSOCIATED_BY_ZONE")
+      attr_accessor hosted_zone_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetHostedZoneLimitResponse
+      attr_accessor limit: Types::HostedZoneLimit
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetHostedZoneRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetHostedZoneResponse
+      attr_accessor hosted_zone: Types::HostedZone
+      attr_accessor delegation_set: Types::DelegationSet
+      attr_accessor vp_cs: ::Array[Types::VPC]
+      SENSITIVE: []
+    end
+
+    class GetQueryLoggingConfigRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetQueryLoggingConfigResponse
+      attr_accessor query_logging_config: Types::QueryLoggingConfig
+      SENSITIVE: []
+    end
+
+    class GetReusableDelegationSetLimitRequest
+      attr_accessor type: ("MAX_ZONES_BY_REUSABLE_DELEGATION_SET")
+      attr_accessor delegation_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetReusableDelegationSetLimitResponse
+      attr_accessor limit: Types::ReusableDelegationSetLimit
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetReusableDelegationSetRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetReusableDelegationSetResponse
+      attr_accessor delegation_set: Types::DelegationSet
+      SENSITIVE: []
+    end
+
+    class GetTrafficPolicyInstanceCountRequest < Aws::EmptyStructure
+    end
+
+    class GetTrafficPolicyInstanceCountResponse
+      attr_accessor traffic_policy_instance_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetTrafficPolicyInstanceRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTrafficPolicyInstanceResponse
+      attr_accessor traffic_policy_instance: Types::TrafficPolicyInstance
+      SENSITIVE: []
+    end
+
+    class GetTrafficPolicyRequest
+      attr_accessor id: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetTrafficPolicyResponse
+      attr_accessor traffic_policy: Types::TrafficPolicy
+      SENSITIVE: []
+    end
+
+    class HealthCheck
+      attr_accessor id: ::String
+      attr_accessor caller_reference: ::String
+      attr_accessor linked_service: Types::LinkedService
+      attr_accessor health_check_config: Types::HealthCheckConfig
+      attr_accessor health_check_version: ::Integer
+      attr_accessor cloud_watch_alarm_configuration: Types::CloudWatchAlarmConfiguration
+      SENSITIVE: []
+    end
+
+    class HealthCheckAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HealthCheckConfig
+      attr_accessor ip_address: ::String
+      attr_accessor port: ::Integer
+      attr_accessor type: ("HTTP" | "HTTPS" | "HTTP_STR_MATCH" | "HTTPS_STR_MATCH" | "TCP" | "CALCULATED" | "CLOUDWATCH_METRIC" | "RECOVERY_CONTROL")
+      attr_accessor resource_path: ::String
+      attr_accessor fully_qualified_domain_name: ::String
+      attr_accessor search_string: ::String
+      attr_accessor request_interval: ::Integer
+      attr_accessor failure_threshold: ::Integer
+      attr_accessor measure_latency: bool
+      attr_accessor inverted: bool
+      attr_accessor disabled: bool
+      attr_accessor health_threshold: ::Integer
+      attr_accessor child_health_checks: ::Array[::String]
+      attr_accessor enable_sni: bool
+      attr_accessor regions: ::Array[("us-east-1" | "us-west-1" | "us-west-2" | "eu-west-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "sa-east-1")]
+      attr_accessor alarm_identifier: Types::AlarmIdentifier
+      attr_accessor insufficient_data_health_status: ("Healthy" | "Unhealthy" | "LastKnownStatus")
+      attr_accessor routing_control_arn: ::String
+      SENSITIVE: []
+    end
+
+    class HealthCheckInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HealthCheckObservation
+      attr_accessor region: ("us-east-1" | "us-west-1" | "us-west-2" | "eu-west-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "sa-east-1")
+      attr_accessor ip_address: ::String
+      attr_accessor status_report: Types::StatusReport
+      SENSITIVE: []
+    end
+
+    class HealthCheckVersionMismatch
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HostedZone
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor caller_reference: ::String
+      attr_accessor config: Types::HostedZoneConfig
+      attr_accessor resource_record_set_count: ::Integer
+      attr_accessor linked_service: Types::LinkedService
+      SENSITIVE: []
+    end
+
+    class HostedZoneAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HostedZoneConfig
+      attr_accessor comment: ::String
+      attr_accessor private_zone: bool
+      SENSITIVE: []
+    end
+
+    class HostedZoneLimit
+      attr_accessor type: ("MAX_RRSETS_BY_ZONE" | "MAX_VPCS_ASSOCIATED_BY_ZONE")
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class HostedZoneNotEmpty
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HostedZoneNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HostedZoneNotPrivate
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HostedZoneOwner
+      attr_accessor owning_account: ::String
+      attr_accessor owning_service: ::String
+      SENSITIVE: []
+    end
+
+    class HostedZonePartiallyDelegated
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HostedZoneSummary
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor name: ::String
+      attr_accessor owner: Types::HostedZoneOwner
+      SENSITIVE: []
+    end
+
+    class IncompatibleVersion
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InsufficientCloudWatchLogsResourcePolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidArgument
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidChangeBatch
+      attr_accessor messages: ::Array[::String]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidDomainName
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInput
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidKMSArn
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidKeySigningKeyName
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidKeySigningKeyStatus
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPaginationToken
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSigningStatus
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTrafficPolicyDocument
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidVPCId
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KeySigningKey
+      attr_accessor name: ::String
+      attr_accessor kms_arn: ::String
+      attr_accessor flag: ::Integer
+      attr_accessor signing_algorithm_mnemonic: ::String
+      attr_accessor signing_algorithm_type: ::Integer
+      attr_accessor digest_algorithm_mnemonic: ::String
+      attr_accessor digest_algorithm_type: ::Integer
+      attr_accessor key_tag: ::Integer
+      attr_accessor digest_value: ::String
+      attr_accessor public_key: ::String
+      attr_accessor ds_record: ::String
+      attr_accessor dnskey_record: ::String
+      attr_accessor status: ::String
+      attr_accessor status_message: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
+    end
+
+    class KeySigningKeyAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KeySigningKeyInParentDSRecord
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KeySigningKeyInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KeySigningKeyWithActiveStatusNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LastVPCAssociation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitsExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LinkedService
+      attr_accessor service_principal: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ListCidrBlocksRequest
+      attr_accessor collection_id: ::String
+      attr_accessor location_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::String
+      SENSITIVE: []
+    end
+
+    class ListCidrBlocksResponse
+      attr_accessor next_token: ::String
+      attr_accessor cidr_blocks: ::Array[Types::CidrBlockSummary]
+      SENSITIVE: []
+    end
+
+    class ListCidrCollectionsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::String
+      SENSITIVE: []
+    end
+
+    class ListCidrCollectionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor cidr_collections: ::Array[Types::CollectionSummary]
+      SENSITIVE: []
+    end
+
+    class ListCidrLocationsRequest
+      attr_accessor collection_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::String
+      SENSITIVE: []
+    end
+
+    class ListCidrLocationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor cidr_locations: ::Array[Types::LocationSummary]
+      SENSITIVE: []
+    end
+
+    class ListGeoLocationsRequest
+      attr_accessor start_continent_code: ::String
+      attr_accessor start_country_code: ::String
+      attr_accessor start_subdivision_code: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGeoLocationsResponse
+      attr_accessor geo_location_details_list: ::Array[Types::GeoLocationDetails]
+      attr_accessor is_truncated: bool
+      attr_accessor next_continent_code: ::String
+      attr_accessor next_country_code: ::String
+      attr_accessor next_subdivision_code: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListHealthChecksRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListHealthChecksResponse
+      attr_accessor health_checks: ::Array[Types::HealthCheck]
+      attr_accessor marker: ::String
+      attr_accessor is_truncated: bool
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListHostedZonesByNameRequest
+      attr_accessor dns_name: ::String
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListHostedZonesByNameResponse
+      attr_accessor hosted_zones: ::Array[Types::HostedZone]
+      attr_accessor dns_name: ::String
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor is_truncated: bool
+      attr_accessor next_dns_name: ::String
+      attr_accessor next_hosted_zone_id: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListHostedZonesByVPCRequest
+      attr_accessor vpc_id: ::String
+      attr_accessor vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1")
+      attr_accessor max_items: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHostedZonesByVPCResponse
+      attr_accessor hosted_zone_summaries: ::Array[Types::HostedZoneSummary]
+      attr_accessor max_items: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHostedZonesRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      attr_accessor delegation_set_id: ::String
+      attr_accessor hosted_zone_type: ("PrivateHostedZone")
+      SENSITIVE: []
+    end
+
+    class ListHostedZonesResponse
+      attr_accessor hosted_zones: ::Array[Types::HostedZone]
+      attr_accessor marker: ::String
+      attr_accessor is_truncated: bool
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListQueryLoggingConfigsRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::String
+      SENSITIVE: []
+    end
+
+    class ListQueryLoggingConfigsResponse
+      attr_accessor query_logging_configs: ::Array[Types::QueryLoggingConfig]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceRecordSetsRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor start_record_name: ::String
+      attr_accessor start_record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor start_record_identifier: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListResourceRecordSetsResponse
+      attr_accessor resource_record_sets: ::Array[Types::ResourceRecordSet]
+      attr_accessor is_truncated: bool
+      attr_accessor next_record_name: ::String
+      attr_accessor next_record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor next_record_identifier: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReusableDelegationSetsRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListReusableDelegationSetsResponse
+      attr_accessor delegation_sets: ::Array[Types::DelegationSet]
+      attr_accessor marker: ::String
+      attr_accessor is_truncated: bool
+      attr_accessor next_marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_type: ("healthcheck" | "hostedzone")
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor resource_tag_set: Types::ResourceTagSet
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourcesRequest
+      attr_accessor resource_type: ("healthcheck" | "hostedzone")
+      attr_accessor resource_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourcesResponse
+      attr_accessor resource_tag_sets: ::Array[Types::ResourceTagSet]
+      SENSITIVE: []
+    end
+
+    class ListTrafficPoliciesRequest
+      attr_accessor traffic_policy_id_marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTrafficPoliciesResponse
+      attr_accessor traffic_policy_summaries: ::Array[Types::TrafficPolicySummary]
+      attr_accessor is_truncated: bool
+      attr_accessor traffic_policy_id_marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTrafficPolicyInstancesByHostedZoneRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor traffic_policy_instance_name_marker: ::String
+      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTrafficPolicyInstancesByHostedZoneResponse
+      attr_accessor traffic_policy_instances: ::Array[Types::TrafficPolicyInstance]
+      attr_accessor traffic_policy_instance_name_marker: ::String
+      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor is_truncated: bool
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTrafficPolicyInstancesByPolicyRequest
+      attr_accessor traffic_policy_id: ::String
+      attr_accessor traffic_policy_version: ::Integer
+      attr_accessor hosted_zone_id_marker: ::String
+      attr_accessor traffic_policy_instance_name_marker: ::String
+      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTrafficPolicyInstancesByPolicyResponse
+      attr_accessor traffic_policy_instances: ::Array[Types::TrafficPolicyInstance]
+      attr_accessor hosted_zone_id_marker: ::String
+      attr_accessor traffic_policy_instance_name_marker: ::String
+      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor is_truncated: bool
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTrafficPolicyInstancesRequest
+      attr_accessor hosted_zone_id_marker: ::String
+      attr_accessor traffic_policy_instance_name_marker: ::String
+      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTrafficPolicyInstancesResponse
+      attr_accessor traffic_policy_instances: ::Array[Types::TrafficPolicyInstance]
+      attr_accessor hosted_zone_id_marker: ::String
+      attr_accessor traffic_policy_instance_name_marker: ::String
+      attr_accessor traffic_policy_instance_type_marker: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor is_truncated: bool
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTrafficPolicyVersionsRequest
+      attr_accessor id: ::String
+      attr_accessor traffic_policy_version_marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTrafficPolicyVersionsResponse
+      attr_accessor traffic_policies: ::Array[Types::TrafficPolicy]
+      attr_accessor is_truncated: bool
+      attr_accessor traffic_policy_version_marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListVPCAssociationAuthorizationsRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::String
+      SENSITIVE: []
+    end
+
+    class ListVPCAssociationAuthorizationsResponse
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor vp_cs: ::Array[Types::VPC]
+      SENSITIVE: []
+    end
+
+    class LocationSummary
+      attr_accessor location_name: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchChange
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchCidrCollectionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchCidrLocationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchCloudWatchLogsLogGroup
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchDelegationSet
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchGeoLocation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchHealthCheck
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchHostedZone
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchKeySigningKey
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchQueryLoggingConfig
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchTrafficPolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchTrafficPolicyInstance
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotAuthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PriorRequestNotComplete
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PublicZoneVPCAssociation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class QueryLoggingConfig
+      attr_accessor id: ::String
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor cloud_watch_logs_log_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class QueryLoggingConfigAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceRecord
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceRecordSet
+      attr_accessor name: ::String
+      attr_accessor type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor set_identifier: ::String
+      attr_accessor weight: ::Integer
+      attr_accessor region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "ca-central-1" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "cn-north-1" | "cn-northwest-1" | "ap-east-1" | "me-south-1" | "me-central-1" | "ap-south-1" | "ap-south-2" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1")
+      attr_accessor geo_location: Types::GeoLocation
+      attr_accessor failover: ("PRIMARY" | "SECONDARY")
+      attr_accessor multi_value_answer: bool
+      attr_accessor ttl: ::Integer
+      attr_accessor resource_records: ::Array[Types::ResourceRecord]
+      attr_accessor alias_target: Types::AliasTarget
+      attr_accessor health_check_id: ::String
+      attr_accessor traffic_policy_instance_id: ::String
+      attr_accessor cidr_routing_config: Types::CidrRoutingConfig
+      attr_accessor geo_proximity_location: Types::GeoProximityLocation
+      SENSITIVE: []
+    end
+
+    class ResourceTagSet
+      attr_accessor resource_type: ("healthcheck" | "hostedzone")
+      attr_accessor resource_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ReusableDelegationSetLimit
+      attr_accessor type: ("MAX_ZONES_BY_REUSABLE_DELEGATION_SET")
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class StatusReport
+      attr_accessor status: ::String
+      attr_accessor checked_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TestDNSAnswerRequest
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor record_name: ::String
+      attr_accessor record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor resolver_ip: ::String
+      attr_accessor edns0_client_subnet_ip: ::String
+      attr_accessor edns0_client_subnet_mask: ::String
+      SENSITIVE: []
+    end
+
+    class TestDNSAnswerResponse
+      attr_accessor nameserver: ::String
+      attr_accessor record_name: ::String
+      attr_accessor record_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor record_data: ::Array[::String]
+      attr_accessor response_code: ::String
+      attr_accessor protocol: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyHealthChecks
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyHostedZones
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyKeySigningKeys
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTrafficPolicies
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTrafficPolicyInstances
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTrafficPolicyVersionsForCurrentPolicy
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyVPCAssociationAuthorizations
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrafficPolicy
+      attr_accessor id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor name: ::String
+      attr_accessor type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor document: ::String
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class TrafficPolicyAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrafficPolicyInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrafficPolicyInstance
+      attr_accessor id: ::String
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor name: ::String
+      attr_accessor ttl: ::Integer
+      attr_accessor state: ::String
+      attr_accessor message: ::String
+      attr_accessor traffic_policy_id: ::String
+      attr_accessor traffic_policy_version: ::Integer
+      attr_accessor traffic_policy_type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      SENSITIVE: []
+    end
+
+    class TrafficPolicyInstanceAlreadyExists
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrafficPolicySummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("SOA" | "A" | "TXT" | "NS" | "CNAME" | "MX" | "NAPTR" | "PTR" | "SRV" | "SPF" | "AAAA" | "CAA" | "DS")
+      attr_accessor latest_version: ::Integer
+      attr_accessor traffic_policy_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateHealthCheckRequest
+      attr_accessor health_check_id: ::String
+      attr_accessor health_check_version: ::Integer
+      attr_accessor ip_address: ::String
+      attr_accessor port: ::Integer
+      attr_accessor resource_path: ::String
+      attr_accessor fully_qualified_domain_name: ::String
+      attr_accessor search_string: ::String
+      attr_accessor failure_threshold: ::Integer
+      attr_accessor inverted: bool
+      attr_accessor disabled: bool
+      attr_accessor health_threshold: ::Integer
+      attr_accessor child_health_checks: ::Array[::String]
+      attr_accessor enable_sni: bool
+      attr_accessor regions: ::Array[("us-east-1" | "us-west-1" | "us-west-2" | "eu-west-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "sa-east-1")]
+      attr_accessor alarm_identifier: Types::AlarmIdentifier
+      attr_accessor insufficient_data_health_status: ("Healthy" | "Unhealthy" | "LastKnownStatus")
+      attr_accessor reset_elements: ::Array[("FullyQualifiedDomainName" | "Regions" | "ResourcePath" | "ChildHealthChecks")]
+      SENSITIVE: []
+    end
+
+    class UpdateHealthCheckResponse
+      attr_accessor health_check: Types::HealthCheck
+      SENSITIVE: []
+    end
+
+    class UpdateHostedZoneCommentRequest
+      attr_accessor id: ::String
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateHostedZoneCommentResponse
+      attr_accessor hosted_zone: Types::HostedZone
+      SENSITIVE: []
+    end
+
+    class UpdateTrafficPolicyCommentRequest
+      attr_accessor id: ::String
+      attr_accessor version: ::Integer
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTrafficPolicyCommentResponse
+      attr_accessor traffic_policy: Types::TrafficPolicy
+      SENSITIVE: []
+    end
+
+    class UpdateTrafficPolicyInstanceRequest
+      attr_accessor id: ::String
+      attr_accessor ttl: ::Integer
+      attr_accessor traffic_policy_id: ::String
+      attr_accessor traffic_policy_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateTrafficPolicyInstanceResponse
+      attr_accessor traffic_policy_instance: Types::TrafficPolicyInstance
+      SENSITIVE: []
+    end
+
+    class VPC
+      attr_accessor vpc_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-central-2" | "ap-east-1" | "me-south-1" | "us-gov-west-1" | "us-gov-east-1" | "us-iso-east-1" | "us-iso-west-1" | "us-isob-east-1" | "me-central-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-south-1" | "ap-south-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "eu-north-1" | "sa-east-1" | "ca-central-1" | "cn-north-1" | "af-south-1" | "eu-south-1" | "eu-south-2" | "ap-southeast-4" | "il-central-1" | "ca-west-1")
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+
+    class VPCAssociationAuthorizationNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VPCAssociationNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

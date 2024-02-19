@@ -388,61 +388,64 @@ module Aws::SSOOIDC
 
     # @!group API Operations
 
-    # Creates and returns an access token for the authorized client. The
-    # access token issued will be used to fetch short-term credentials for
-    # the assigned roles in the AWS account.
+    # Creates and returns access and refresh tokens for clients that are
+    # authenticated using client secrets. The access token can be used to
+    # fetch short-term credentials for the assigned AWS accounts or to
+    # access application APIs using `bearer` authentication.
     #
     # @option params [required, String] :client_id
-    #   The unique identifier string for each client. This value should come
-    #   from the persisted result of the RegisterClient API.
+    #   The unique identifier string for the client or application. This value
+    #   comes from the result of the RegisterClient API.
     #
     # @option params [required, String] :client_secret
     #   A secret string generated for the client. This value should come from
     #   the persisted result of the RegisterClient API.
     #
     # @option params [required, String] :grant_type
-    #   Supports grant types for the authorization code, refresh token, and
-    #   device code request. For device code requests, specify the following
-    #   value:
+    #   Supports the following OAuth grant types: Device Code and Refresh
+    #   Token. Specify either of the following values, depending on the grant
+    #   type that you want:
     #
-    #   `urn:ietf:params:oauth:grant-type:device_code `
+    #   * Device Code - `urn:ietf:params:oauth:grant-type:device_code`
+    #
+    #   * Refresh Token - `refresh_token`
     #
     #   For information about how to obtain the device code, see the
     #   StartDeviceAuthorization topic.
     #
     # @option params [String] :device_code
-    #   Used only when calling this API for the device code grant type. This
-    #   short-term code is used to identify this authentication attempt. This
-    #   should come from an in-memory reference to the result of the
-    #   StartDeviceAuthorization API.
+    #   Used only when calling this API for the Device Code grant type. This
+    #   short-term code is used to identify this authorization request. This
+    #   comes from the result of the StartDeviceAuthorization API.
     #
     # @option params [String] :code
-    #   The authorization code received from the authorization service. This
-    #   parameter is required to perform an authorization grant request to get
-    #   access to a token.
+    #   Used only when calling this API for the Authorization Code grant type.
+    #   The short-term code is used to identify this authorization request.
+    #   This grant type is currently unsupported for the CreateToken API.
     #
     # @option params [String] :refresh_token
-    #   Currently, `refreshToken` is not yet implemented and is not supported.
+    #   Used only when calling this API for the Refresh Token grant type. This
+    #   token is used to refresh short-term tokens, such as the access token,
+    #   that might expire.
+    #
     #   For more information about the features and limitations of the current
     #   IAM Identity Center OIDC implementation, see *Considerations for Using
     #   this Guide* in the [IAM Identity Center OIDC API Reference][1].
-    #
-    #   The token used to obtain an access token in the event that the access
-    #   token is invalid or expired.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html
     #
     # @option params [Array<String>] :scope
-    #   The list of scopes that is defined by the client. Upon authorization,
-    #   this list is used to restrict permissions when granting an access
-    #   token.
+    #   The list of scopes for which authorization is requested. The access
+    #   token that is issued is limited to the scopes that are granted. If
+    #   this value is not specified, IAM Identity Center authorizes all scopes
+    #   that are configured for the client during the call to RegisterClient.
     #
     # @option params [String] :redirect_uri
-    #   The location of the application that will receive the authorization
-    #   code. Users authorize the service to send the request to this
-    #   location.
+    #   Used only when calling this API for the Authorization Code grant type.
+    #   This value specifies the location of the client or application that
+    #   has registered to receive the authorization code.
     #
     # @return [Types::CreateTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -451,6 +454,44 @@ module Aws::SSOOIDC
     #   * {Types::CreateTokenResponse#expires_in #expires_in} => Integer
     #   * {Types::CreateTokenResponse#refresh_token #refresh_token} => String
     #   * {Types::CreateTokenResponse#id_token #id_token} => String
+    #
+    #
+    # @example Example: Call OAuth/OIDC /token endpoint for Device Code grant with Secret authentication
+    #
+    #   resp = client.create_token({
+    #     client_id: "_yzkThXVzLWVhc3QtMQEXAMPLECLIENTID", 
+    #     client_secret: "VERYLONGSECRETeyJraWQiOiJrZXktMTU2NDAyODA5OSIsImFsZyI6IkhTMzg0In0", 
+    #     device_code: "yJraWQiOiJrZXktMTU2Njk2ODA4OCIsImFsZyI6IkhTMzIn0EXAMPLEDEVICECODE", 
+    #     grant_type: "urn:ietf:params:oauth:grant-type:device-code", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     access_token: "aoal-YigITUDiNX1xZwOMXM5MxOWDL0E0jg9P6_C_jKQPxS_SKCP6f0kh1Up4g7TtvQqkMnD-GJiU_S1gvug6SrggAkc0:MGYCMQD3IatVjV7jAJU91kK3PkS/SfA2wtgWzOgZWDOR7sDGN9t0phCZz5It/aes/3C1Zj0CMQCKWOgRaiz6AIhza3DSXQNMLjRKXC8F8ceCsHlgYLMZ7hZidEXAMPLEACCESSTOKEN", 
+    #     expires_in: 1579729529, 
+    #     refresh_token: "aorvJYubGpU6i91YnH7Mfo-AT2fIVa1zCfA_Rvq9yjVKIP3onFmmykuQ7E93y2I-9Nyj-A_sVvMufaLNL0bqnDRtgAkc0:MGUCMFrRsktMRVlWaOR70XGMFGLL0SlcCw4DiYveIiOVx1uK9BbD0gvAddsW3UTLozXKMgIxAJ3qxUvjpnlLIOaaKOoa/FuNgqJVvr9GMwDtnAtlh9iZzAkEXAMPLEREFRESHTOKEN", 
+    #     token_type: "Bearer", 
+    #   }
+    #
+    # @example Example: Call OAuth/OIDC /token endpoint for Refresh Token grant with Secret authentication
+    #
+    #   resp = client.create_token({
+    #     client_id: "_yzkThXVzLWVhc3QtMQEXAMPLECLIENTID", 
+    #     client_secret: "VERYLONGSECRETeyJraWQiOiJrZXktMTU2NDAyODA5OSIsImFsZyI6IkhTMzg0In0", 
+    #     grant_type: "refresh_token", 
+    #     refresh_token: "aorvJYubGpU6i91YnH7Mfo-AT2fIVa1zCfA_Rvq9yjVKIP3onFmmykuQ7E93y2I-9Nyj-A_sVvMufaLNL0bqnDRtgAkc0:MGUCMFrRsktMRVlWaOR70XGMFGLL0SlcCw4DiYveIiOVx1uK9BbD0gvAddsW3UTLozXKMgIxAJ3qxUvjpnlLIOaaKOoa/FuNgqJVvr9GMwDtnAtlh9iZzAkEXAMPLEREFRESHTOKEN", 
+    #     scope: [
+    #       "codewhisperer:completions", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     access_token: "aoal-YigITUDiNX1xZwOMXM5MxOWDL0E0jg9P6_C_jKQPxS_SKCP6f0kh1Up4g7TtvQqkMnD-GJiU_S1gvug6SrggAkc0:MGYCMQD3IatVjV7jAJU91kK3PkS/SfA2wtgWzOgZWDOR7sDGN9t0phCZz5It/aes/3C1Zj0CMQCKWOgRaiz6AIhza3DSXQNMLjRKXC8F8ceCsHlgYLMZ7hZidEXAMPLEACCESSTOKEN", 
+    #     expires_in: 1579729529, 
+    #     refresh_token: "aorvJYubGpU6i91YnH7Mfo-AT2fIVa1zCfA_Rvq9yjVKIP3onFmmykuQ7E93y2I-9Nyj-A_sVvMufaLNL0bqnDRtgAkc0:MGUCMFrRsktMRVlWaOR70XGMFGLL0SlcCw4DiYveIiOVx1uK9BbD0gvAddsW3UTLozXKMgIxAJ3qxUvjpnlLIOaaKOoa/FuNgqJVvr9GMwDtnAtlh9iZzAkEXAMPLEREFRESHTOKEN", 
+    #     token_type: "Bearer", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -482,6 +523,234 @@ module Aws::SSOOIDC
       req.send_request(options)
     end
 
+    # Creates and returns access and refresh tokens for clients and
+    # applications that are authenticated using IAM entities. The access
+    # token can be used to fetch short-term credentials for the assigned AWS
+    # accounts or to access application APIs using `bearer` authentication.
+    #
+    # @option params [required, String] :client_id
+    #   The unique identifier string for the client or application. This value
+    #   is an application ARN that has OAuth grants configured.
+    #
+    # @option params [required, String] :grant_type
+    #   Supports the following OAuth grant types: Authorization Code, Refresh
+    #   Token, JWT Bearer, and Token Exchange. Specify one of the following
+    #   values, depending on the grant type that you want:
+    #
+    #   * Authorization Code - `authorization_code`
+    #
+    #   * Refresh Token - `refresh_token`
+    #
+    #   * JWT Bearer - `urn:ietf:params:oauth:grant-type:jwt-bearer`
+    #
+    #   * Token Exchange - `urn:ietf:params:oauth:grant-type:token-exchange`
+    #
+    # @option params [String] :code
+    #   Used only when calling this API for the Authorization Code grant type.
+    #   This short-term code is used to identify this authorization request.
+    #   The code is obtained through a redirect from IAM Identity Center to a
+    #   redirect URI persisted in the Authorization Code GrantOptions for the
+    #   application.
+    #
+    # @option params [String] :refresh_token
+    #   Used only when calling this API for the Refresh Token grant type. This
+    #   token is used to refresh short-term tokens, such as the access token,
+    #   that might expire.
+    #
+    #   For more information about the features and limitations of the current
+    #   IAM Identity Center OIDC implementation, see *Considerations for Using
+    #   this Guide* in the [IAM Identity Center OIDC API Reference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/Welcome.html
+    #
+    # @option params [String] :assertion
+    #   Used only when calling this API for the JWT Bearer grant type. This
+    #   value specifies the JSON Web Token (JWT) issued by a trusted token
+    #   issuer. To authorize a trusted token issuer, configure the JWT Bearer
+    #   GrantOptions for the application.
+    #
+    # @option params [Array<String>] :scope
+    #   The list of scopes for which authorization is requested. The access
+    #   token that is issued is limited to the scopes that are granted. If the
+    #   value is not specified, IAM Identity Center authorizes all scopes
+    #   configured for the application, including the following default
+    #   scopes: `openid`, `aws`, `sts:identity_context`.
+    #
+    # @option params [String] :redirect_uri
+    #   Used only when calling this API for the Authorization Code grant type.
+    #   This value specifies the location of the client or application that
+    #   has registered to receive the authorization code.
+    #
+    # @option params [String] :subject_token
+    #   Used only when calling this API for the Token Exchange grant type.
+    #   This value specifies the subject of the exchange. The value of the
+    #   subject token must be an access token issued by IAM Identity Center to
+    #   a different client or application. The access token must have
+    #   authorized scopes that indicate the requested application as a target
+    #   audience.
+    #
+    # @option params [String] :subject_token_type
+    #   Used only when calling this API for the Token Exchange grant type.
+    #   This value specifies the type of token that is passed as the subject
+    #   of the exchange. The following value is supported:
+    #
+    #   * Access Token - `urn:ietf:params:oauth:token-type:access_token`
+    #
+    # @option params [String] :requested_token_type
+    #   Used only when calling this API for the Token Exchange grant type.
+    #   This value specifies the type of token that the requester can receive.
+    #   The following values are supported:
+    #
+    #   * Access Token - `urn:ietf:params:oauth:token-type:access_token`
+    #
+    #   * Refresh Token - `urn:ietf:params:oauth:token-type:refresh_token`
+    #
+    # @return [Types::CreateTokenWithIAMResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTokenWithIAMResponse#access_token #access_token} => String
+    #   * {Types::CreateTokenWithIAMResponse#token_type #token_type} => String
+    #   * {Types::CreateTokenWithIAMResponse#expires_in #expires_in} => Integer
+    #   * {Types::CreateTokenWithIAMResponse#refresh_token #refresh_token} => String
+    #   * {Types::CreateTokenWithIAMResponse#id_token #id_token} => String
+    #   * {Types::CreateTokenWithIAMResponse#issued_token_type #issued_token_type} => String
+    #   * {Types::CreateTokenWithIAMResponse#scope #scope} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: Call OAuth/OIDC /token endpoint for Authorization Code grant with IAM authentication
+    #
+    #   resp = client.create_token_with_iam({
+    #     client_id: "arn:aws:sso::123456789012:application/ssoins-111111111111/apl-222222222222", 
+    #     code: "yJraWQiOiJrZXktMTU2Njk2ODA4OCIsImFsZyI6IkhTMzg0In0EXAMPLEAUTHCODE", 
+    #     grant_type: "authorization_code", 
+    #     redirect_uri: "https://mywebapp.example/redirect", 
+    #     scope: [
+    #       "openid", 
+    #       "aws", 
+    #       "sts:identity_context", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     access_token: "aoal-YigITUDiNX1xZwOMXM5MxOWDL0E0jg9P6_C_jKQPxS_SKCP6f0kh1Up4g7TtvQqkMnD-GJiU_S1gvug6SrggAkc0:MGYCMQD3IatVjV7jAJU91kK3PkS/SfA2wtgWzOgZWDOR7sDGN9t0phCZz5It/aes/3C1Zj0CMQCKWOgRaiz6AIhza3DSXQNMLjRKXC8F8ceCsHlgYLMZ7hZidEXAMPLEACCESSTOKEN", 
+    #     expires_in: 1579729529, 
+    #     id_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhd3M6aWRlbnRpdHlfc3RvcmVfaWQiOiJkLTMzMzMzMzMzMzMiLCJzdWIiOiI3MzA0NDhmMi1lMGExLTcwYTctYzk1NC0wMDAwMDAwMDAwMDAiLCJhd3M6aW5zdGFuY2VfYWNjb3VudCI6IjExMTExMTExMTExMSIsInN0czppZGVudGl0eV9jb250ZXh0IjoiRVhBTVBMRUlERU5USVRZQ09OVEVYVCIsInN0czphdWRpdF9jb250ZXh0IjoiRVhBTVBMRUFVRElUQ09OVEVYVCIsImlzcyI6Imh0dHBzOi8vaWRlbnRpdHljZW50ZXIuYW1hem9uYXdzLmNvbS9zc29pbnMtMTExMTExMTExMTExIiwiYXdzOmlkZW50aXR5X3N0b3JlX2FybiI6ImFybjphd3M6aWRlbnRpdHlzdG9yZTo6MTExMTExMTExMTExOmlkZW50aXR5c3RvcmUvZC0zMzMzMzMzMzMzIiwiYXVkIjoiYXJuOmF3czpzc286OjEyMzQ1Njc4OTAxMjphcHBsaWNhdGlvbi9zc29pbnMtMTExMTExMTExMTExL2FwbC0yMjIyMjIyMjIyMjIiLCJhd3M6aW5zdGFuY2VfYXJuIjoiYXJuOmF3czpzc286OjppbnN0YW5jZS9zc29pbnMtMTExMTExMTExMTExIiwiYXdzOmNyZWRlbnRpYWxfaWQiOiJfWlIyTjZhVkJqMjdGUEtheWpfcEtwVjc3QVBERl80MXB4ZXRfWWpJdUpONlVJR2RBdkpFWEFNUExFQ1JFRElEIiwiYXV0aF90aW1lIjoiMjAyMC0wMS0yMlQxMjo0NToyOVoiLCJleHAiOjE1Nzk3Mjk1MjksImlhdCI6MTU3OTcyNTkyOX0.Xyah6qbk78qThzJ41iFU2yfGuRqqtKXHrJYwQ8L9Ip0", 
+    #     issued_token_type: "urn:ietf:params:oauth:token-type:refresh_token", 
+    #     refresh_token: "aorvJYubGpU6i91YnH7Mfo-AT2fIVa1zCfA_Rvq9yjVKIP3onFmmykuQ7E93y2I-9Nyj-A_sVvMufaLNL0bqnDRtgAkc0:MGUCMFrRsktMRVlWaOR70XGMFGLL0SlcCw4DiYveIiOVx1uK9BbD0gvAddsW3UTLozXKMgIxAJ3qxUvjpnlLIOaaKOoa/FuNgqJVvr9GMwDtnAtlh9iZzAkEXAMPLEREFRESHTOKEN", 
+    #     scope: [
+    #       "openid", 
+    #       "aws", 
+    #       "sts:identity_context", 
+    #     ], 
+    #     token_type: "Bearer", 
+    #   }
+    #
+    # @example Example: Call OAuth/OIDC /token endpoint for Refresh Token grant with IAM authentication
+    #
+    #   resp = client.create_token_with_iam({
+    #     client_id: "arn:aws:sso::123456789012:application/ssoins-111111111111/apl-222222222222", 
+    #     grant_type: "refresh_token", 
+    #     refresh_token: "aorvJYubGpU6i91YnH7Mfo-AT2fIVa1zCfA_Rvq9yjVKIP3onFmmykuQ7E93y2I-9Nyj-A_sVvMufaLNL0bqnDRtgAkc0:MGUCMFrRsktMRVlWaOR70XGMFGLL0SlcCw4DiYveIiOVx1uK9BbD0gvAddsW3UTLozXKMgIxAJ3qxUvjpnlLIOaaKOoa/FuNgqJVvr9GMwDtnAtlh9iZzAkEXAMPLEREFRESHTOKEN", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     access_token: "aoal-YigITUDiNX1xZwOMXM5MxOWDL0E0jg9P6_C_jKQPxS_SKCP6f0kh1Up4g7TtvQqkMnD-GJiU_S1gvug6SrggAkc0:MGYCMQD3IatVjV7jAJU91kK3PkS/SfA2wtgWzOgZWDOR7sDGN9t0phCZz5It/aes/3C1Zj0CMQCKWOgRaiz6AIhza3DSXQNMLjRKXC8F8ceCsHlgYLMZ7hZidEXAMPLEACCESSTOKEN", 
+    #     expires_in: 1579729529, 
+    #     issued_token_type: "urn:ietf:params:oauth:token-type:refresh_token", 
+    #     refresh_token: "aorvJYubGpU6i91YnH7Mfo-AT2fIVa1zCfA_Rvq9yjVKIP3onFmmykuQ7E93y2I-9Nyj-A_sVvMufaLNL0bqnDRtgAkc0:MGUCMFrRsktMRVlWaOR70XGMFGLL0SlcCw4DiYveIiOVx1uK9BbD0gvAddsW3UTLozXKMgIxAJ3qxUvjpnlLIOaaKOoa/FuNgqJVvr9GMwDtnAtlh9iZzAkEXAMPLEREFRESHTOKEN", 
+    #     scope: [
+    #       "openid", 
+    #       "aws", 
+    #       "sts:identity_context", 
+    #     ], 
+    #     token_type: "Bearer", 
+    #   }
+    #
+    # @example Example: Call OAuth/OIDC /token endpoint for JWT Bearer grant with IAM authentication
+    #
+    #   resp = client.create_token_with_iam({
+    #     assertion: "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjFMVE16YWtpaGlSbGFfOHoyQkVKVlhlV01xbyJ9.eyJ2ZXIiOiIyLjAiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vOTEyMjA0MGQtNmM2Ny00YzViLWIxMTItMzZhMzA0YjY2ZGFkL3YyLjAiLCJzdWIiOiJBQUFBQUFBQUFBQUFBQUFBQUFBQUFJa3pxRlZyU2FTYUZIeTc4MmJidGFRIiwiYXVkIjoiNmNiMDQwMTgtYTNmNS00NmE3LWI5OTUtOTQwYzc4ZjVhZWYzIiwiZXhwIjoxNTM2MzYxNDExLCJpYXQiOjE1MzYyNzQ3MTEsIm5iZiI6MTUzNjI3NDcxMSwibmFtZSI6IkFiZSBMaW5jb2xuIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiQWJlTGlAbWljcm9zb2Z0LmNvbSIsIm9pZCI6IjAwMDAwMDAwLTAwMDAtMDAwMC02NmYzLTMzMzJlY2E3ZWE4MSIsInRpZCI6IjkxMjIwNDBkLTZjNjctNGM1Yi1iMTEyLTM2YTMwNGI2NmRhZCIsIm5vbmNlIjoiMTIzNTIzIiwiYWlvIjoiRGYyVVZYTDFpeCFsTUNXTVNPSkJjRmF0emNHZnZGR2hqS3Y4cTVnMHg3MzJkUjVNQjVCaXN2R1FPN1lXQnlqZDhpUURMcSFlR2JJRGFreXA1bW5PcmNkcUhlWVNubHRlcFFtUnA2QUlaOGpZIn0.1AFWW-Ck5nROwSlltm7GzZvDwUkqvhSQpm55TQsmVo9Y59cLhRXpvB8n-55HCr9Z6G_31_UbeUkoz612I2j_Sm9FFShSDDjoaLQr54CreGIJvjtmS3EkK9a7SJBbcpL1MpUtlfygow39tFjY7EVNW9plWUvRrTgVk7lYLprvfzw-CIqw3gHC-T7IK_m_xkr08INERBtaecwhTeN4chPC4W3jdmw_lIxzC48YoQ0dB1L9-ImX98Egypfrlbm0IBL5spFzL6JDZIRRJOu8vecJvj1mq-IUhGt0MacxX8jdxYLP-KUu2d9MbNKpCKJuZ7p8gwTL5B7NlUdh_dmSviPWrw", 
+    #     client_id: "arn:aws:sso::123456789012:application/ssoins-111111111111/apl-222222222222", 
+    #     grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     access_token: "aoal-YigITUDiNX1xZwOMXM5MxOWDL0E0jg9P6_C_jKQPxS_SKCP6f0kh1Up4g7TtvQqkMnD-GJiU_S1gvug6SrggAkc0:MGYCMQD3IatVjV7jAJU91kK3PkS/SfA2wtgWzOgZWDOR7sDGN9t0phCZz5It/aes/3C1Zj0CMQCKWOgRaiz6AIhza3DSXQNMLjRKXC8F8ceCsHlgYLMZ7hZidEXAMPLEACCESSTOKEN", 
+    #     expires_in: 1579729529, 
+    #     id_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhd3M6aWRlbnRpdHlfc3RvcmVfaWQiOiJkLTMzMzMzMzMzMzMiLCJzdWIiOiI3MzA0NDhmMi1lMGExLTcwYTctYzk1NC0wMDAwMDAwMDAwMDAiLCJhd3M6aW5zdGFuY2VfYWNjb3VudCI6IjExMTExMTExMTExMSIsInN0czppZGVudGl0eV9jb250ZXh0IjoiRVhBTVBMRUlERU5USVRZQ09OVEVYVCIsInN0czphdWRpdF9jb250ZXh0IjoiRVhBTVBMRUFVRElUQ09OVEVYVCIsImlzcyI6Imh0dHBzOi8vaWRlbnRpdHljZW50ZXIuYW1hem9uYXdzLmNvbS9zc29pbnMtMTExMTExMTExMTExIiwiYXdzOmlkZW50aXR5X3N0b3JlX2FybiI6ImFybjphd3M6aWRlbnRpdHlzdG9yZTo6MTExMTExMTExMTExOmlkZW50aXR5c3RvcmUvZC0zMzMzMzMzMzMzIiwiYXVkIjoiYXJuOmF3czpzc286OjEyMzQ1Njc4OTAxMjphcHBsaWNhdGlvbi9zc29pbnMtMTExMTExMTExMTExL2FwbC0yMjIyMjIyMjIyMjIiLCJhd3M6aW5zdGFuY2VfYXJuIjoiYXJuOmF3czpzc286OjppbnN0YW5jZS9zc29pbnMtMTExMTExMTExMTExIiwiYXdzOmNyZWRlbnRpYWxfaWQiOiJfWlIyTjZhVkJqMjdGUEtheWpfcEtwVjc3QVBERl80MXB4ZXRfWWpJdUpONlVJR2RBdkpFWEFNUExFQ1JFRElEIiwiYXV0aF90aW1lIjoiMjAyMC0wMS0yMlQxMjo0NToyOVoiLCJleHAiOjE1Nzk3Mjk1MjksImlhdCI6MTU3OTcyNTkyOX0.Xyah6qbk78qThzJ41iFU2yfGuRqqtKXHrJYwQ8L9Ip0", 
+    #     issued_token_type: "urn:ietf:params:oauth:token-type:refresh_token", 
+    #     refresh_token: "aorvJYubGpU6i91YnH7Mfo-AT2fIVa1zCfA_Rvq9yjVKIP3onFmmykuQ7E93y2I-9Nyj-A_sVvMufaLNL0bqnDRtgAkc0:MGUCMFrRsktMRVlWaOR70XGMFGLL0SlcCw4DiYveIiOVx1uK9BbD0gvAddsW3UTLozXKMgIxAJ3qxUvjpnlLIOaaKOoa/FuNgqJVvr9GMwDtnAtlh9iZzAkEXAMPLEREFRESHTOKEN", 
+    #     scope: [
+    #       "openid", 
+    #       "aws", 
+    #       "sts:identity_context", 
+    #     ], 
+    #     token_type: "Bearer", 
+    #   }
+    #
+    # @example Example: Call OAuth/OIDC /token endpoint for Token Exchange grant with IAM authentication
+    #
+    #   resp = client.create_token_with_iam({
+    #     client_id: "arn:aws:sso::123456789012:application/ssoins-111111111111/apl-222222222222", 
+    #     grant_type: "urn:ietf:params:oauth:grant-type:token-exchange", 
+    #     requested_token_type: "urn:ietf:params:oauth:token-type:access_token", 
+    #     subject_token: "aoak-Hig8TUDPNX1xZwOMXM5MxOWDL0E0jg9P6_C_jKQPxS_SKCP6f0kh1Up4g7TtvQqkMnD-GJiU_S1gvug6SrggAkc0:MGYCMQD3IatVjV7jAJU91kK3PkS/SfA2wtgWzOgZWDOR7sDGN9t0phCZz5It/aes/3C1Zj0CMQCKWOgRaiz6AIhza3DSXQNMLjRKXC8F8ceCsHlgYLMZ7hZDIFFERENTACCESSTOKEN", 
+    #     subject_token_type: "urn:ietf:params:oauth:token-type:access_token", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     access_token: "aoal-YigITUDiNX1xZwOMXM5MxOWDL0E0jg9P6_C_jKQPxS_SKCP6f0kh1Up4g7TtvQqkMnD-GJiU_S1gvug6SrggAkc0:MGYCMQD3IatVjV7jAJU91kK3PkS/SfA2wtgWzOgZWDOR7sDGN9t0phCZz5It/aes/3C1Zj0CMQCKWOgRaiz6AIhza3DSXQNMLjRKXC8F8ceCsHlgYLMZ7hZidEXAMPLEACCESSTOKEN", 
+    #     expires_in: 1579729529, 
+    #     id_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhd3M6aWRlbnRpdHlfc3RvcmVfaWQiOiJkLTMzMzMzMzMzMzMiLCJzdWIiOiI3MzA0NDhmMi1lMGExLTcwYTctYzk1NC0wMDAwMDAwMDAwMDAiLCJhd3M6aW5zdGFuY2VfYWNjb3VudCI6IjExMTExMTExMTExMSIsInN0czppZGVudGl0eV9jb250ZXh0IjoiRVhBTVBMRUlERU5USVRZQ09OVEVYVCIsImlzcyI6Imh0dHBzOi8vaWRlbnRpdHljZW50ZXIuYW1hem9uYXdzLmNvbS9zc29pbnMtMTExMTExMTExMTExIiwiYXdzOmlkZW50aXR5X3N0b3JlX2FybiI6ImFybjphd3M6aWRlbnRpdHlzdG9yZTo6MTExMTExMTExMTExOmlkZW50aXR5c3RvcmUvZC0zMzMzMzMzMzMzIiwiYXVkIjoiYXJuOmF3czpzc286OjEyMzQ1Njc4OTAxMjphcHBsaWNhdGlvbi9zc29pbnMtMTExMTExMTExMTExL2FwbC0yMjIyMjIyMjIyMjIiLCJhd3M6aW5zdGFuY2VfYXJuIjoiYXJuOmF3czpzc286OjppbnN0YW5jZS9zc29pbnMtMTExMTExMTExMTExIiwiYXdzOmNyZWRlbnRpYWxfaWQiOiJfWlIyTjZhVkJqMjdGUEtheWpfcEtwVjc3QVBERl80MXB4ZXRfWWpJdUpONlVJR2RBdkpFWEFNUExFQ1JFRElEIiwiYXV0aF90aW1lIjoiMjAyMC0wMS0yMlQxMjo0NToyOVoiLCJleHAiOjE1Nzk3Mjk1MjksImlhdCI6MTU3OTcyNTkyOX0.5SYiW1kMsuUr7nna-l5tlakM0GNbMHvIM2_n0QD23jM", 
+    #     issued_token_type: "urn:ietf:params:oauth:token-type:access_token", 
+    #     scope: [
+    #       "openid", 
+    #       "aws", 
+    #       "sts:identity_context", 
+    #     ], 
+    #     token_type: "Bearer", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_token_with_iam({
+    #     client_id: "ClientId", # required
+    #     grant_type: "GrantType", # required
+    #     code: "AuthCode",
+    #     refresh_token: "RefreshToken",
+    #     assertion: "Assertion",
+    #     scope: ["Scope"],
+    #     redirect_uri: "URI",
+    #     subject_token: "SubjectToken",
+    #     subject_token_type: "TokenTypeURI",
+    #     requested_token_type: "TokenTypeURI",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_token #=> String
+    #   resp.token_type #=> String
+    #   resp.expires_in #=> Integer
+    #   resp.refresh_token #=> String
+    #   resp.id_token #=> String
+    #   resp.issued_token_type #=> String
+    #   resp.scope #=> Array
+    #   resp.scope[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sso-oidc-2019-06-10/CreateTokenWithIAM AWS API Documentation
+    #
+    # @overload create_token_with_iam(params = {})
+    # @param [Hash] params ({})
+    def create_token_with_iam(params = {}, options = {})
+      req = build_request(:create_token_with_iam, params)
+      req.send_request(options)
+    end
+
     # Registers a client with IAM Identity Center. This allows clients to
     # initiate device authorization. The output should be persisted for
     # reuse through many authentication requests.
@@ -506,6 +775,26 @@ module Aws::SSOOIDC
     #   * {Types::RegisterClientResponse#client_secret_expires_at #client_secret_expires_at} => Integer
     #   * {Types::RegisterClientResponse#authorization_endpoint #authorization_endpoint} => String
     #   * {Types::RegisterClientResponse#token_endpoint #token_endpoint} => String
+    #
+    #
+    # @example Example: Call OAuth/OIDC /register-client endpoint
+    #
+    #   resp = client.register_client({
+    #     client_name: "My IDE Plugin", 
+    #     client_type: "public", 
+    #     scopes: [
+    #       "sso:account:access", 
+    #       "codewhisperer:completions", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     client_id: "_yzkThXVzLWVhc3QtMQEXAMPLECLIENTID", 
+    #     client_id_issued_at: 1579725929, 
+    #     client_secret: "VERYLONGSECRETeyJraWQiOiJrZXktMTU2NDAyODA5OSIsImFsZyI6IkhTMzg0In0", 
+    #     client_secret_expires_at: 1587584729, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -546,8 +835,9 @@ module Aws::SSOOIDC
     #   come from the persisted result of the RegisterClient API operation.
     #
     # @option params [required, String] :start_url
-    #   The URL for the AWS access portal. For more information, see [Using
-    #   the AWS access portal][1] in the *IAM Identity Center User Guide*.
+    #   The URL for the Amazon Web Services access portal. For more
+    #   information, see [Using the Amazon Web Services access portal][1] in
+    #   the *IAM Identity Center User Guide*.
     #
     #
     #
@@ -561,6 +851,25 @@ module Aws::SSOOIDC
     #   * {Types::StartDeviceAuthorizationResponse#verification_uri_complete #verification_uri_complete} => String
     #   * {Types::StartDeviceAuthorizationResponse#expires_in #expires_in} => Integer
     #   * {Types::StartDeviceAuthorizationResponse#interval #interval} => Integer
+    #
+    #
+    # @example Example: Call OAuth/OIDC /start-device-authorization endpoint
+    #
+    #   resp = client.start_device_authorization({
+    #     client_id: "_yzkThXVzLWVhc3QtMQEXAMPLECLIENTID", 
+    #     client_secret: "VERYLONGSECRETeyJraWQiOiJrZXktMTU2NDAyODA5OSIsImFsZyI6IkhTMzg0In0", 
+    #     start_url: "https://identitycenter.amazonaws.com/ssoins-111111111111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     device_code: "yJraWQiOiJrZXktMTU2Njk2ODA4OCIsImFsZyI6IkhTMzIn0EXAMPLEDEVICECODE", 
+    #     expires_in: 1579729529, 
+    #     interval: 1, 
+    #     user_code: "makdfsk83yJraWQiOiJrZXktMTU2Njk2sImFsZyI6IkhTMzIn0EXAMPLEUSERCODE", 
+    #     verification_uri: "https://device.sso.us-west-2.amazonaws.com", 
+    #     verification_uri_complete: "https://device.sso.us-west-2.amazonaws.com?user_code=makdfsk83yJraWQiOiJrZXktMTU2Njk2sImFsZyI6IkhTMzIn0EXAMPLEUSERCODE", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -601,7 +910,7 @@ module Aws::SSOOIDC
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.185.1'
+      context[:gem_version] = '3.191.2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

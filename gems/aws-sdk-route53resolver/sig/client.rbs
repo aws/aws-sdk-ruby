@@ -1,0 +1,1016 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Route53Resolver
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateFirewallRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateFirewallRuleGroupResponse]
+        def firewall_rule_group_association: () -> Types::FirewallRuleGroupAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#associate_firewall_rule_group-instance_method
+      def associate_firewall_rule_group: (
+                                           creator_request_id: ::String,
+                                           firewall_rule_group_id: ::String,
+                                           vpc_id: ::String,
+                                           priority: ::Integer,
+                                           name: ::String,
+                                           ?mutation_protection: ("ENABLED" | "DISABLED"),
+                                           ?tags: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String
+                                             },
+                                           ]
+                                         ) -> _AssociateFirewallRuleGroupResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateFirewallRuleGroupResponseSuccess
+
+      interface _AssociateResolverEndpointIpAddressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateResolverEndpointIpAddressResponse]
+        def resolver_endpoint: () -> Types::ResolverEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#associate_resolver_endpoint_ip_address-instance_method
+      def associate_resolver_endpoint_ip_address: (
+                                                    resolver_endpoint_id: ::String,
+                                                    ip_address: {
+                                                      ip_id: ::String?,
+                                                      subnet_id: ::String?,
+                                                      ip: ::String?,
+                                                      ipv_6: ::String?
+                                                    }
+                                                  ) -> _AssociateResolverEndpointIpAddressResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateResolverEndpointIpAddressResponseSuccess
+
+      interface _AssociateResolverQueryLogConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateResolverQueryLogConfigResponse]
+        def resolver_query_log_config_association: () -> Types::ResolverQueryLogConfigAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#associate_resolver_query_log_config-instance_method
+      def associate_resolver_query_log_config: (
+                                                 resolver_query_log_config_id: ::String,
+                                                 resource_id: ::String
+                                               ) -> _AssociateResolverQueryLogConfigResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateResolverQueryLogConfigResponseSuccess
+
+      interface _AssociateResolverRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateResolverRuleResponse]
+        def resolver_rule_association: () -> Types::ResolverRuleAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#associate_resolver_rule-instance_method
+      def associate_resolver_rule: (
+                                     resolver_rule_id: ::String,
+                                     ?name: ::String,
+                                     vpc_id: ::String
+                                   ) -> _AssociateResolverRuleResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateResolverRuleResponseSuccess
+
+      interface _CreateFirewallDomainListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFirewallDomainListResponse]
+        def firewall_domain_list: () -> Types::FirewallDomainList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#create_firewall_domain_list-instance_method
+      def create_firewall_domain_list: (
+                                         creator_request_id: ::String,
+                                         name: ::String,
+                                         ?tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String
+                                           },
+                                         ]
+                                       ) -> _CreateFirewallDomainListResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFirewallDomainListResponseSuccess
+
+      interface _CreateFirewallRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFirewallRuleResponse]
+        def firewall_rule: () -> Types::FirewallRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#create_firewall_rule-instance_method
+      def create_firewall_rule: (
+                                  creator_request_id: ::String,
+                                  firewall_rule_group_id: ::String,
+                                  firewall_domain_list_id: ::String,
+                                  priority: ::Integer,
+                                  action: ("ALLOW" | "BLOCK" | "ALERT"),
+                                  ?block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE"),
+                                  ?block_override_domain: ::String,
+                                  ?block_override_dns_type: ("CNAME"),
+                                  ?block_override_ttl: ::Integer,
+                                  name: ::String,
+                                  ?qtype: ::String
+                                ) -> _CreateFirewallRuleResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFirewallRuleResponseSuccess
+
+      interface _CreateFirewallRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFirewallRuleGroupResponse]
+        def firewall_rule_group: () -> Types::FirewallRuleGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#create_firewall_rule_group-instance_method
+      def create_firewall_rule_group: (
+                                        creator_request_id: ::String,
+                                        name: ::String,
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String
+                                          },
+                                        ]
+                                      ) -> _CreateFirewallRuleGroupResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFirewallRuleGroupResponseSuccess
+
+      interface _CreateOutpostResolverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOutpostResolverResponse]
+        def outpost_resolver: () -> Types::OutpostResolver
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#create_outpost_resolver-instance_method
+      def create_outpost_resolver: (
+                                     creator_request_id: ::String,
+                                     name: ::String,
+                                     ?instance_count: ::Integer,
+                                     preferred_instance_type: ::String,
+                                     outpost_arn: ::String,
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ]
+                                   ) -> _CreateOutpostResolverResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOutpostResolverResponseSuccess
+
+      interface _CreateResolverEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResolverEndpointResponse]
+        def resolver_endpoint: () -> Types::ResolverEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#create_resolver_endpoint-instance_method
+      def create_resolver_endpoint: (
+                                      creator_request_id: ::String,
+                                      ?name: ::String,
+                                      security_group_ids: Array[::String],
+                                      direction: ("INBOUND" | "OUTBOUND"),
+                                      ip_addresses: Array[
+                                        {
+                                          subnet_id: ::String,
+                                          ip: ::String?,
+                                          ipv_6: ::String?
+                                        },
+                                      ],
+                                      ?outpost_arn: ::String,
+                                      ?preferred_instance_type: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ],
+                                      ?resolver_endpoint_type: ("IPV6" | "IPV4" | "DUALSTACK"),
+                                      ?protocols: Array[("DoH" | "Do53" | "DoH-FIPS")]
+                                    ) -> _CreateResolverEndpointResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResolverEndpointResponseSuccess
+
+      interface _CreateResolverQueryLogConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResolverQueryLogConfigResponse]
+        def resolver_query_log_config: () -> Types::ResolverQueryLogConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#create_resolver_query_log_config-instance_method
+      def create_resolver_query_log_config: (
+                                              name: ::String,
+                                              destination_arn: ::String,
+                                              creator_request_id: ::String,
+                                              ?tags: Array[
+                                                {
+                                                  key: ::String,
+                                                  value: ::String
+                                                },
+                                              ]
+                                            ) -> _CreateResolverQueryLogConfigResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResolverQueryLogConfigResponseSuccess
+
+      interface _CreateResolverRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResolverRuleResponse]
+        def resolver_rule: () -> Types::ResolverRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#create_resolver_rule-instance_method
+      def create_resolver_rule: (
+                                  creator_request_id: ::String,
+                                  ?name: ::String,
+                                  rule_type: ("FORWARD" | "SYSTEM" | "RECURSIVE"),
+                                  ?domain_name: ::String,
+                                  ?target_ips: Array[
+                                    {
+                                      ip: ::String?,
+                                      port: ::Integer?,
+                                      ipv_6: ::String?,
+                                      protocol: ("DoH" | "Do53" | "DoH-FIPS")?
+                                    },
+                                  ],
+                                  ?resolver_endpoint_id: ::String,
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> _CreateResolverRuleResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResolverRuleResponseSuccess
+
+      interface _DeleteFirewallDomainListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFirewallDomainListResponse]
+        def firewall_domain_list: () -> Types::FirewallDomainList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#delete_firewall_domain_list-instance_method
+      def delete_firewall_domain_list: (
+                                         firewall_domain_list_id: ::String
+                                       ) -> _DeleteFirewallDomainListResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFirewallDomainListResponseSuccess
+
+      interface _DeleteFirewallRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFirewallRuleResponse]
+        def firewall_rule: () -> Types::FirewallRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#delete_firewall_rule-instance_method
+      def delete_firewall_rule: (
+                                  firewall_rule_group_id: ::String,
+                                  firewall_domain_list_id: ::String,
+                                  ?qtype: ::String
+                                ) -> _DeleteFirewallRuleResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFirewallRuleResponseSuccess
+
+      interface _DeleteFirewallRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFirewallRuleGroupResponse]
+        def firewall_rule_group: () -> Types::FirewallRuleGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#delete_firewall_rule_group-instance_method
+      def delete_firewall_rule_group: (
+                                        firewall_rule_group_id: ::String
+                                      ) -> _DeleteFirewallRuleGroupResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFirewallRuleGroupResponseSuccess
+
+      interface _DeleteOutpostResolverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOutpostResolverResponse]
+        def outpost_resolver: () -> Types::OutpostResolver
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#delete_outpost_resolver-instance_method
+      def delete_outpost_resolver: (
+                                     id: ::String
+                                   ) -> _DeleteOutpostResolverResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOutpostResolverResponseSuccess
+
+      interface _DeleteResolverEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResolverEndpointResponse]
+        def resolver_endpoint: () -> Types::ResolverEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#delete_resolver_endpoint-instance_method
+      def delete_resolver_endpoint: (
+                                      resolver_endpoint_id: ::String
+                                    ) -> _DeleteResolverEndpointResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResolverEndpointResponseSuccess
+
+      interface _DeleteResolverQueryLogConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResolverQueryLogConfigResponse]
+        def resolver_query_log_config: () -> Types::ResolverQueryLogConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#delete_resolver_query_log_config-instance_method
+      def delete_resolver_query_log_config: (
+                                              resolver_query_log_config_id: ::String
+                                            ) -> _DeleteResolverQueryLogConfigResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResolverQueryLogConfigResponseSuccess
+
+      interface _DeleteResolverRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResolverRuleResponse]
+        def resolver_rule: () -> Types::ResolverRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#delete_resolver_rule-instance_method
+      def delete_resolver_rule: (
+                                  resolver_rule_id: ::String
+                                ) -> _DeleteResolverRuleResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResolverRuleResponseSuccess
+
+      interface _DisassociateFirewallRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateFirewallRuleGroupResponse]
+        def firewall_rule_group_association: () -> Types::FirewallRuleGroupAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#disassociate_firewall_rule_group-instance_method
+      def disassociate_firewall_rule_group: (
+                                              firewall_rule_group_association_id: ::String
+                                            ) -> _DisassociateFirewallRuleGroupResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateFirewallRuleGroupResponseSuccess
+
+      interface _DisassociateResolverEndpointIpAddressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateResolverEndpointIpAddressResponse]
+        def resolver_endpoint: () -> Types::ResolverEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#disassociate_resolver_endpoint_ip_address-instance_method
+      def disassociate_resolver_endpoint_ip_address: (
+                                                       resolver_endpoint_id: ::String,
+                                                       ip_address: {
+                                                         ip_id: ::String?,
+                                                         subnet_id: ::String?,
+                                                         ip: ::String?,
+                                                         ipv_6: ::String?
+                                                       }
+                                                     ) -> _DisassociateResolverEndpointIpAddressResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateResolverEndpointIpAddressResponseSuccess
+
+      interface _DisassociateResolverQueryLogConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateResolverQueryLogConfigResponse]
+        def resolver_query_log_config_association: () -> Types::ResolverQueryLogConfigAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#disassociate_resolver_query_log_config-instance_method
+      def disassociate_resolver_query_log_config: (
+                                                    resolver_query_log_config_id: ::String,
+                                                    resource_id: ::String
+                                                  ) -> _DisassociateResolverQueryLogConfigResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateResolverQueryLogConfigResponseSuccess
+
+      interface _DisassociateResolverRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateResolverRuleResponse]
+        def resolver_rule_association: () -> Types::ResolverRuleAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#disassociate_resolver_rule-instance_method
+      def disassociate_resolver_rule: (
+                                        vpc_id: ::String,
+                                        resolver_rule_id: ::String
+                                      ) -> _DisassociateResolverRuleResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateResolverRuleResponseSuccess
+
+      interface _GetFirewallConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFirewallConfigResponse]
+        def firewall_config: () -> Types::FirewallConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#get_firewall_config-instance_method
+      def get_firewall_config: (
+                                 resource_id: ::String
+                               ) -> _GetFirewallConfigResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFirewallConfigResponseSuccess
+
+      interface _GetFirewallDomainListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFirewallDomainListResponse]
+        def firewall_domain_list: () -> Types::FirewallDomainList
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#get_firewall_domain_list-instance_method
+      def get_firewall_domain_list: (
+                                      firewall_domain_list_id: ::String
+                                    ) -> _GetFirewallDomainListResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFirewallDomainListResponseSuccess
+
+      interface _GetFirewallRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFirewallRuleGroupResponse]
+        def firewall_rule_group: () -> Types::FirewallRuleGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#get_firewall_rule_group-instance_method
+      def get_firewall_rule_group: (
+                                     firewall_rule_group_id: ::String
+                                   ) -> _GetFirewallRuleGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFirewallRuleGroupResponseSuccess
+
+      interface _GetFirewallRuleGroupAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFirewallRuleGroupAssociationResponse]
+        def firewall_rule_group_association: () -> Types::FirewallRuleGroupAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#get_firewall_rule_group_association-instance_method
+      def get_firewall_rule_group_association: (
+                                                 firewall_rule_group_association_id: ::String
+                                               ) -> _GetFirewallRuleGroupAssociationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFirewallRuleGroupAssociationResponseSuccess
+
+      interface _GetFirewallRuleGroupPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFirewallRuleGroupPolicyResponse]
+        def firewall_rule_group_policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#get_firewall_rule_group_policy-instance_method
+      def get_firewall_rule_group_policy: (
+                                            arn: ::String
+                                          ) -> _GetFirewallRuleGroupPolicyResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFirewallRuleGroupPolicyResponseSuccess
+
+      interface _GetOutpostResolverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOutpostResolverResponse]
+        def outpost_resolver: () -> Types::OutpostResolver
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#get_outpost_resolver-instance_method
+      def get_outpost_resolver: (
+                                  id: ::String
+                                ) -> _GetOutpostResolverResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOutpostResolverResponseSuccess
+
+      interface _GetResolverConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResolverConfigResponse]
+        def resolver_config: () -> Types::ResolverConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#get_resolver_config-instance_method
+      def get_resolver_config: (
+                                 resource_id: ::String
+                               ) -> _GetResolverConfigResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResolverConfigResponseSuccess
+
+      interface _GetResolverDnssecConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResolverDnssecConfigResponse]
+        def resolver_dnssec_config: () -> Types::ResolverDnssecConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#get_resolver_dnssec_config-instance_method
+      def get_resolver_dnssec_config: (
+                                        resource_id: ::String
+                                      ) -> _GetResolverDnssecConfigResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResolverDnssecConfigResponseSuccess
+
+      interface _GetResolverEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResolverEndpointResponse]
+        def resolver_endpoint: () -> Types::ResolverEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#get_resolver_endpoint-instance_method
+      def get_resolver_endpoint: (
+                                   resolver_endpoint_id: ::String
+                                 ) -> _GetResolverEndpointResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResolverEndpointResponseSuccess
+
+      interface _GetResolverQueryLogConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResolverQueryLogConfigResponse]
+        def resolver_query_log_config: () -> Types::ResolverQueryLogConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#get_resolver_query_log_config-instance_method
+      def get_resolver_query_log_config: (
+                                           resolver_query_log_config_id: ::String
+                                         ) -> _GetResolverQueryLogConfigResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResolverQueryLogConfigResponseSuccess
+
+      interface _GetResolverQueryLogConfigAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResolverQueryLogConfigAssociationResponse]
+        def resolver_query_log_config_association: () -> Types::ResolverQueryLogConfigAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#get_resolver_query_log_config_association-instance_method
+      def get_resolver_query_log_config_association: (
+                                                       resolver_query_log_config_association_id: ::String
+                                                     ) -> _GetResolverQueryLogConfigAssociationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResolverQueryLogConfigAssociationResponseSuccess
+
+      interface _GetResolverQueryLogConfigPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResolverQueryLogConfigPolicyResponse]
+        def resolver_query_log_config_policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#get_resolver_query_log_config_policy-instance_method
+      def get_resolver_query_log_config_policy: (
+                                                  arn: ::String
+                                                ) -> _GetResolverQueryLogConfigPolicyResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResolverQueryLogConfigPolicyResponseSuccess
+
+      interface _GetResolverRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResolverRuleResponse]
+        def resolver_rule: () -> Types::ResolverRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#get_resolver_rule-instance_method
+      def get_resolver_rule: (
+                               resolver_rule_id: ::String
+                             ) -> _GetResolverRuleResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResolverRuleResponseSuccess
+
+      interface _GetResolverRuleAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResolverRuleAssociationResponse]
+        def resolver_rule_association: () -> Types::ResolverRuleAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#get_resolver_rule_association-instance_method
+      def get_resolver_rule_association: (
+                                           resolver_rule_association_id: ::String
+                                         ) -> _GetResolverRuleAssociationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResolverRuleAssociationResponseSuccess
+
+      interface _GetResolverRulePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResolverRulePolicyResponse]
+        def resolver_rule_policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#get_resolver_rule_policy-instance_method
+      def get_resolver_rule_policy: (
+                                      arn: ::String
+                                    ) -> _GetResolverRulePolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResolverRulePolicyResponseSuccess
+
+      interface _ImportFirewallDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportFirewallDomainsResponse]
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("COMPLETE" | "COMPLETE_IMPORT_FAILED" | "IMPORTING" | "DELETING" | "UPDATING")
+        def status_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#import_firewall_domains-instance_method
+      def import_firewall_domains: (
+                                     firewall_domain_list_id: ::String,
+                                     operation: ("REPLACE"),
+                                     domain_file_url: ::String
+                                   ) -> _ImportFirewallDomainsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportFirewallDomainsResponseSuccess
+
+      interface _ListFirewallConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallConfigsResponse]
+        def next_token: () -> ::String
+        def firewall_configs: () -> ::Array[Types::FirewallConfig]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_firewall_configs-instance_method
+      def list_firewall_configs: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListFirewallConfigsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallConfigsResponseSuccess
+
+      interface _ListFirewallDomainListsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallDomainListsResponse]
+        def next_token: () -> ::String
+        def firewall_domain_lists: () -> ::Array[Types::FirewallDomainListMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_firewall_domain_lists-instance_method
+      def list_firewall_domain_lists: (
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListFirewallDomainListsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallDomainListsResponseSuccess
+
+      interface _ListFirewallDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallDomainsResponse]
+        def next_token: () -> ::String
+        def domains: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_firewall_domains-instance_method
+      def list_firewall_domains: (
+                                   firewall_domain_list_id: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListFirewallDomainsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallDomainsResponseSuccess
+
+      interface _ListFirewallRuleGroupAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallRuleGroupAssociationsResponse]
+        def next_token: () -> ::String
+        def firewall_rule_group_associations: () -> ::Array[Types::FirewallRuleGroupAssociation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_firewall_rule_group_associations-instance_method
+      def list_firewall_rule_group_associations: (
+                                                   ?firewall_rule_group_id: ::String,
+                                                   ?vpc_id: ::String,
+                                                   ?priority: ::Integer,
+                                                   ?status: ("COMPLETE" | "DELETING" | "UPDATING"),
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _ListFirewallRuleGroupAssociationsResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallRuleGroupAssociationsResponseSuccess
+
+      interface _ListFirewallRuleGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallRuleGroupsResponse]
+        def next_token: () -> ::String
+        def firewall_rule_groups: () -> ::Array[Types::FirewallRuleGroupMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_firewall_rule_groups-instance_method
+      def list_firewall_rule_groups: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListFirewallRuleGroupsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallRuleGroupsResponseSuccess
+
+      interface _ListFirewallRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallRulesResponse]
+        def next_token: () -> ::String
+        def firewall_rules: () -> ::Array[Types::FirewallRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_firewall_rules-instance_method
+      def list_firewall_rules: (
+                                 firewall_rule_group_id: ::String,
+                                 ?priority: ::Integer,
+                                 ?action: ("ALLOW" | "BLOCK" | "ALERT"),
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListFirewallRulesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallRulesResponseSuccess
+
+      interface _ListOutpostResolversResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOutpostResolversResponse]
+        def outpost_resolvers: () -> ::Array[Types::OutpostResolver]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_outpost_resolvers-instance_method
+      def list_outpost_resolvers: (
+                                    ?outpost_arn: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListOutpostResolversResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOutpostResolversResponseSuccess
+
+      interface _ListResolverConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResolverConfigsResponse]
+        def next_token: () -> ::String
+        def resolver_configs: () -> ::Array[Types::ResolverConfig]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_resolver_configs-instance_method
+      def list_resolver_configs: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListResolverConfigsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResolverConfigsResponseSuccess
+
+      interface _ListResolverDnssecConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResolverDnssecConfigsResponse]
+        def next_token: () -> ::String
+        def resolver_dnssec_configs: () -> ::Array[Types::ResolverDnssecConfig]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_resolver_dnssec_configs-instance_method
+      def list_resolver_dnssec_configs: (
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String,
+                                          ?filters: Array[
+                                            {
+                                              name: ::String?,
+                                              values: Array[::String]?
+                                            },
+                                          ]
+                                        ) -> _ListResolverDnssecConfigsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResolverDnssecConfigsResponseSuccess
+
+      interface _ListResolverEndpointIpAddressesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResolverEndpointIpAddressesResponse]
+        def next_token: () -> ::String
+        def max_results: () -> ::Integer
+        def ip_addresses: () -> ::Array[Types::IpAddressResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_resolver_endpoint_ip_addresses-instance_method
+      def list_resolver_endpoint_ip_addresses: (
+                                                 resolver_endpoint_id: ::String,
+                                                 ?max_results: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _ListResolverEndpointIpAddressesResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResolverEndpointIpAddressesResponseSuccess
+
+      interface _ListResolverEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResolverEndpointsResponse]
+        def next_token: () -> ::String
+        def max_results: () -> ::Integer
+        def resolver_endpoints: () -> ::Array[Types::ResolverEndpoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_resolver_endpoints-instance_method
+      def list_resolver_endpoints: (
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String,
+                                     ?filters: Array[
+                                       {
+                                         name: ::String?,
+                                         values: Array[::String]?
+                                       },
+                                     ]
+                                   ) -> _ListResolverEndpointsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResolverEndpointsResponseSuccess
+
+      interface _ListResolverQueryLogConfigAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResolverQueryLogConfigAssociationsResponse]
+        def next_token: () -> ::String
+        def total_count: () -> ::Integer
+        def total_filtered_count: () -> ::Integer
+        def resolver_query_log_config_associations: () -> ::Array[Types::ResolverQueryLogConfigAssociation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_resolver_query_log_config_associations-instance_method
+      def list_resolver_query_log_config_associations: (
+                                                         ?max_results: ::Integer,
+                                                         ?next_token: ::String,
+                                                         ?filters: Array[
+                                                           {
+                                                             name: ::String?,
+                                                             values: Array[::String]?
+                                                           },
+                                                         ],
+                                                         ?sort_by: ::String,
+                                                         ?sort_order: ("ASCENDING" | "DESCENDING")
+                                                       ) -> _ListResolverQueryLogConfigAssociationsResponseSuccess
+                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResolverQueryLogConfigAssociationsResponseSuccess
+
+      interface _ListResolverQueryLogConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResolverQueryLogConfigsResponse]
+        def next_token: () -> ::String
+        def total_count: () -> ::Integer
+        def total_filtered_count: () -> ::Integer
+        def resolver_query_log_configs: () -> ::Array[Types::ResolverQueryLogConfig]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_resolver_query_log_configs-instance_method
+      def list_resolver_query_log_configs: (
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String,
+                                             ?filters: Array[
+                                               {
+                                                 name: ::String?,
+                                                 values: Array[::String]?
+                                               },
+                                             ],
+                                             ?sort_by: ::String,
+                                             ?sort_order: ("ASCENDING" | "DESCENDING")
+                                           ) -> _ListResolverQueryLogConfigsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResolverQueryLogConfigsResponseSuccess
+
+      interface _ListResolverRuleAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResolverRuleAssociationsResponse]
+        def next_token: () -> ::String
+        def max_results: () -> ::Integer
+        def resolver_rule_associations: () -> ::Array[Types::ResolverRuleAssociation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_resolver_rule_associations-instance_method
+      def list_resolver_rule_associations: (
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String,
+                                             ?filters: Array[
+                                               {
+                                                 name: ::String?,
+                                                 values: Array[::String]?
+                                               },
+                                             ]
+                                           ) -> _ListResolverRuleAssociationsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResolverRuleAssociationsResponseSuccess
+
+      interface _ListResolverRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResolverRulesResponse]
+        def next_token: () -> ::String
+        def max_results: () -> ::Integer
+        def resolver_rules: () -> ::Array[Types::ResolverRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_resolver_rules-instance_method
+      def list_resolver_rules: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 ?filters: Array[
+                                   {
+                                     name: ::String?,
+                                     values: Array[::String]?
+                                   },
+                                 ]
+                               ) -> _ListResolverRulesResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResolverRulesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutFirewallRuleGroupPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutFirewallRuleGroupPolicyResponse]
+        def return_value: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#put_firewall_rule_group_policy-instance_method
+      def put_firewall_rule_group_policy: (
+                                            arn: ::String,
+                                            firewall_rule_group_policy: ::String
+                                          ) -> _PutFirewallRuleGroupPolicyResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFirewallRuleGroupPolicyResponseSuccess
+
+      interface _PutResolverQueryLogConfigPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResolverQueryLogConfigPolicyResponse]
+        def return_value: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#put_resolver_query_log_config_policy-instance_method
+      def put_resolver_query_log_config_policy: (
+                                                  arn: ::String,
+                                                  resolver_query_log_config_policy: ::String
+                                                ) -> _PutResolverQueryLogConfigPolicyResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResolverQueryLogConfigPolicyResponseSuccess
+
+      interface _PutResolverRulePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResolverRulePolicyResponse]
+        def return_value: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#put_resolver_rule_policy-instance_method
+      def put_resolver_rule_policy: (
+                                      arn: ::String,
+                                      resolver_rule_policy: ::String
+                                    ) -> _PutResolverRulePolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResolverRulePolicyResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateFirewallConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFirewallConfigResponse]
+        def firewall_config: () -> Types::FirewallConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#update_firewall_config-instance_method
+      def update_firewall_config: (
+                                    resource_id: ::String,
+                                    firewall_fail_open: ("ENABLED" | "DISABLED" | "USE_LOCAL_RESOURCE_SETTING")
+                                  ) -> _UpdateFirewallConfigResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallConfigResponseSuccess
+
+      interface _UpdateFirewallDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFirewallDomainsResponse]
+        def id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("COMPLETE" | "COMPLETE_IMPORT_FAILED" | "IMPORTING" | "DELETING" | "UPDATING")
+        def status_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#update_firewall_domains-instance_method
+      def update_firewall_domains: (
+                                     firewall_domain_list_id: ::String,
+                                     operation: ("ADD" | "REMOVE" | "REPLACE"),
+                                     domains: Array[::String]
+                                   ) -> _UpdateFirewallDomainsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallDomainsResponseSuccess
+
+      interface _UpdateFirewallRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFirewallRuleResponse]
+        def firewall_rule: () -> Types::FirewallRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#update_firewall_rule-instance_method
+      def update_firewall_rule: (
+                                  firewall_rule_group_id: ::String,
+                                  firewall_domain_list_id: ::String,
+                                  ?priority: ::Integer,
+                                  ?action: ("ALLOW" | "BLOCK" | "ALERT"),
+                                  ?block_response: ("NODATA" | "NXDOMAIN" | "OVERRIDE"),
+                                  ?block_override_domain: ::String,
+                                  ?block_override_dns_type: ("CNAME"),
+                                  ?block_override_ttl: ::Integer,
+                                  ?name: ::String,
+                                  ?qtype: ::String
+                                ) -> _UpdateFirewallRuleResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallRuleResponseSuccess
+
+      interface _UpdateFirewallRuleGroupAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFirewallRuleGroupAssociationResponse]
+        def firewall_rule_group_association: () -> Types::FirewallRuleGroupAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#update_firewall_rule_group_association-instance_method
+      def update_firewall_rule_group_association: (
+                                                    firewall_rule_group_association_id: ::String,
+                                                    ?priority: ::Integer,
+                                                    ?mutation_protection: ("ENABLED" | "DISABLED"),
+                                                    ?name: ::String
+                                                  ) -> _UpdateFirewallRuleGroupAssociationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallRuleGroupAssociationResponseSuccess
+
+      interface _UpdateOutpostResolverResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOutpostResolverResponse]
+        def outpost_resolver: () -> Types::OutpostResolver
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#update_outpost_resolver-instance_method
+      def update_outpost_resolver: (
+                                     id: ::String,
+                                     ?name: ::String,
+                                     ?instance_count: ::Integer,
+                                     ?preferred_instance_type: ::String
+                                   ) -> _UpdateOutpostResolverResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOutpostResolverResponseSuccess
+
+      interface _UpdateResolverConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResolverConfigResponse]
+        def resolver_config: () -> Types::ResolverConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#update_resolver_config-instance_method
+      def update_resolver_config: (
+                                    resource_id: ::String,
+                                    autodefined_reverse_flag: ("ENABLE" | "DISABLE" | "USE_LOCAL_RESOURCE_SETTING")
+                                  ) -> _UpdateResolverConfigResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResolverConfigResponseSuccess
+
+      interface _UpdateResolverDnssecConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResolverDnssecConfigResponse]
+        def resolver_dnssec_config: () -> Types::ResolverDnssecConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#update_resolver_dnssec_config-instance_method
+      def update_resolver_dnssec_config: (
+                                           resource_id: ::String,
+                                           validation: ("ENABLE" | "DISABLE" | "USE_LOCAL_RESOURCE_SETTING")
+                                         ) -> _UpdateResolverDnssecConfigResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResolverDnssecConfigResponseSuccess
+
+      interface _UpdateResolverEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResolverEndpointResponse]
+        def resolver_endpoint: () -> Types::ResolverEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#update_resolver_endpoint-instance_method
+      def update_resolver_endpoint: (
+                                      resolver_endpoint_id: ::String,
+                                      ?name: ::String,
+                                      ?resolver_endpoint_type: ("IPV6" | "IPV4" | "DUALSTACK"),
+                                      ?update_ip_addresses: Array[
+                                        {
+                                          ip_id: ::String,
+                                          ipv_6: ::String
+                                        },
+                                      ],
+                                      ?protocols: Array[("DoH" | "Do53" | "DoH-FIPS")]
+                                    ) -> _UpdateResolverEndpointResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResolverEndpointResponseSuccess
+
+      interface _UpdateResolverRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResolverRuleResponse]
+        def resolver_rule: () -> Types::ResolverRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Resolver/Client.html#update_resolver_rule-instance_method
+      def update_resolver_rule: (
+                                  resolver_rule_id: ::String,
+                                  config: {
+                                    name: ::String?,
+                                    target_ips: Array[
+                                      {
+                                        ip: ::String?,
+                                        port: ::Integer?,
+                                        ipv_6: ::String?,
+                                        protocol: ("DoH" | "Do53" | "DoH-FIPS")?
+                                      },
+                                    ]?,
+                                    resolver_endpoint_id: ::String?
+                                  }
+                                ) -> _UpdateResolverRuleResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResolverRuleResponseSuccess
+    end
+  end
+end
+

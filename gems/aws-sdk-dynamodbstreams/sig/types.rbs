@@ -1,0 +1,167 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::DynamoDBStreams
+  module Types
+
+    class AttributeValue
+      attr_accessor s: ::String
+      attr_accessor n: ::String
+      attr_accessor b: ::String
+      attr_accessor ss: ::Array[::String]
+      attr_accessor ns: ::Array[::String]
+      attr_accessor bs: ::Array[::String]
+      attr_accessor m: ::Hash[::String, Types::AttributeValue]
+      attr_accessor l: ::Array[Types::AttributeValue]
+      attr_accessor null: bool
+      attr_accessor bool: bool
+      SENSITIVE: []
+    end
+
+    class DescribeStreamInput
+      attr_accessor stream_arn: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor exclusive_start_shard_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStreamOutput
+      attr_accessor stream_description: Types::StreamDescription
+      SENSITIVE: []
+    end
+
+    class ExpiredIteratorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecordsInput
+      attr_accessor shard_iterator: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetRecordsOutput
+      attr_accessor records: ::Array[Types::Record]
+      attr_accessor next_shard_iterator: ::String
+      SENSITIVE: []
+    end
+
+    class GetShardIteratorInput
+      attr_accessor stream_arn: ::String
+      attr_accessor shard_id: ::String
+      attr_accessor shard_iterator_type: ("TRIM_HORIZON" | "LATEST" | "AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER")
+      attr_accessor sequence_number: ::String
+      SENSITIVE: []
+    end
+
+    class GetShardIteratorOutput
+      attr_accessor shard_iterator: ::String
+      SENSITIVE: []
+    end
+
+    class Identity
+      attr_accessor principal_id: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KeySchemaElement
+      attr_accessor attribute_name: ::String
+      attr_accessor key_type: ("HASH" | "RANGE")
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamsInput
+      attr_accessor table_name: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor exclusive_start_stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamsOutput
+      attr_accessor streams: ::Array[Types::Stream]
+      attr_accessor last_evaluated_stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Record
+      attr_accessor event_id: ::String
+      attr_accessor event_name: ("INSERT" | "MODIFY" | "REMOVE")
+      attr_accessor event_version: ::String
+      attr_accessor event_source: ::String
+      attr_accessor aws_region: ::String
+      attr_accessor dynamodb: Types::StreamRecord
+      attr_accessor user_identity: Types::Identity
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SequenceNumberRange
+      attr_accessor starting_sequence_number: ::String
+      attr_accessor ending_sequence_number: ::String
+      SENSITIVE: []
+    end
+
+    class Shard
+      attr_accessor shard_id: ::String
+      attr_accessor sequence_number_range: Types::SequenceNumberRange
+      attr_accessor parent_shard_id: ::String
+      SENSITIVE: []
+    end
+
+    class Stream
+      attr_accessor stream_arn: ::String
+      attr_accessor table_name: ::String
+      attr_accessor stream_label: ::String
+      SENSITIVE: []
+    end
+
+    class StreamDescription
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_label: ::String
+      attr_accessor stream_status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED")
+      attr_accessor stream_view_type: ("NEW_IMAGE" | "OLD_IMAGE" | "NEW_AND_OLD_IMAGES" | "KEYS_ONLY")
+      attr_accessor creation_request_date_time: ::Time
+      attr_accessor table_name: ::String
+      attr_accessor key_schema: ::Array[Types::KeySchemaElement]
+      attr_accessor shards: ::Array[Types::Shard]
+      attr_accessor last_evaluated_shard_id: ::String
+      SENSITIVE: []
+    end
+
+    class StreamRecord
+      attr_accessor approximate_creation_date_time: ::Time
+      attr_accessor keys: ::Hash[::String, Types::AttributeValue]
+      attr_accessor new_image: ::Hash[::String, Types::AttributeValue]
+      attr_accessor old_image: ::Hash[::String, Types::AttributeValue]
+      attr_accessor sequence_number: ::String
+      attr_accessor size_bytes: ::Integer
+      attr_accessor stream_view_type: ("NEW_IMAGE" | "OLD_IMAGE" | "NEW_AND_OLD_IMAGES" | "KEYS_ONLY")
+      SENSITIVE: []
+    end
+
+    class TrimmedDataAccessException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

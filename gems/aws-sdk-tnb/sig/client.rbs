@@ -1,0 +1,519 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Tnb
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#cancel_sol_network_operation-instance_method
+      def cancel_sol_network_operation: (
+                                          ns_lcm_op_occ_id: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateSolFunctionPackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSolFunctionPackageOutput]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def onboarding_state: () -> ("CREATED" | "ONBOARDED" | "ERROR")
+        def operational_state: () -> ("ENABLED" | "DISABLED")
+        def tags: () -> ::Hash[::String, ::String]
+        def usage_state: () -> ("IN_USE" | "NOT_IN_USE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#create_sol_function_package-instance_method
+      def create_sol_function_package: (
+                                         ?tags: Hash[::String, ::String]
+                                       ) -> _CreateSolFunctionPackageResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSolFunctionPackageResponseSuccess
+
+      interface _CreateSolNetworkInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSolNetworkInstanceOutput]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def ns_instance_name: () -> ::String
+        def nsd_info_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#create_sol_network_instance-instance_method
+      def create_sol_network_instance: (
+                                         ?ns_description: ::String,
+                                         ns_name: ::String,
+                                         nsd_info_id: ::String,
+                                         ?tags: Hash[::String, ::String]
+                                       ) -> _CreateSolNetworkInstanceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSolNetworkInstanceResponseSuccess
+
+      interface _CreateSolNetworkPackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSolNetworkPackageOutput]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def nsd_onboarding_state: () -> ("CREATED" | "ONBOARDED" | "ERROR")
+        def nsd_operational_state: () -> ("ENABLED" | "DISABLED")
+        def nsd_usage_state: () -> ("IN_USE" | "NOT_IN_USE")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#create_sol_network_package-instance_method
+      def create_sol_network_package: (
+                                        ?tags: Hash[::String, ::String]
+                                      ) -> _CreateSolNetworkPackageResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSolNetworkPackageResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#delete_sol_function_package-instance_method
+      def delete_sol_function_package: (
+                                         vnf_pkg_id: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#delete_sol_network_instance-instance_method
+      def delete_sol_network_instance: (
+                                         ns_instance_id: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#delete_sol_network_package-instance_method
+      def delete_sol_network_package: (
+                                        nsd_info_id: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetSolFunctionInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSolFunctionInstanceOutput]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def instantiated_vnf_info: () -> Types::GetSolVnfInfo
+        def instantiation_state: () -> ("INSTANTIATED" | "NOT_INSTANTIATED")
+        def metadata: () -> Types::GetSolFunctionInstanceMetadata
+        def ns_instance_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def vnf_pkg_id: () -> ::String
+        def vnf_product_name: () -> ::String
+        def vnf_provider: () -> ::String
+        def vnfd_id: () -> ::String
+        def vnfd_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#get_sol_function_instance-instance_method
+      def get_sol_function_instance: (
+                                       vnf_instance_id: ::String
+                                     ) -> _GetSolFunctionInstanceResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSolFunctionInstanceResponseSuccess
+
+      interface _GetSolFunctionPackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSolFunctionPackageOutput]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def metadata: () -> Types::GetSolFunctionPackageMetadata
+        def onboarding_state: () -> ("CREATED" | "ONBOARDED" | "ERROR")
+        def operational_state: () -> ("ENABLED" | "DISABLED")
+        def tags: () -> ::Hash[::String, ::String]
+        def usage_state: () -> ("IN_USE" | "NOT_IN_USE")
+        def vnf_product_name: () -> ::String
+        def vnf_provider: () -> ::String
+        def vnfd_id: () -> ::String
+        def vnfd_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#get_sol_function_package-instance_method
+      def get_sol_function_package: (
+                                      vnf_pkg_id: ::String
+                                    ) -> _GetSolFunctionPackageResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSolFunctionPackageResponseSuccess
+
+      interface _GetSolFunctionPackageContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSolFunctionPackageContentOutput]
+        def content_type: () -> ("application/zip")
+        def package_content: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#get_sol_function_package_content-instance_method
+      def get_sol_function_package_content: (
+                                              accept: ("application/zip"),
+                                              vnf_pkg_id: ::String
+                                            ) -> _GetSolFunctionPackageContentResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSolFunctionPackageContentResponseSuccess
+
+      interface _GetSolFunctionPackageDescriptorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSolFunctionPackageDescriptorOutput]
+        def content_type: () -> ("text/plain")
+        def vnfd: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#get_sol_function_package_descriptor-instance_method
+      def get_sol_function_package_descriptor: (
+                                                 accept: ("text/plain"),
+                                                 vnf_pkg_id: ::String
+                                               ) -> _GetSolFunctionPackageDescriptorResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSolFunctionPackageDescriptorResponseSuccess
+
+      interface _GetSolNetworkInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSolNetworkInstanceOutput]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def lcm_op_info: () -> Types::LcmOperationInfo
+        def metadata: () -> Types::GetSolNetworkInstanceMetadata
+        def ns_instance_description: () -> ::String
+        def ns_instance_name: () -> ::String
+        def ns_state: () -> ("INSTANTIATED" | "NOT_INSTANTIATED" | "IMPAIRED" | "STOPPED" | "DELETED" | "INSTANTIATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "TERMINATE_IN_PROGRESS")
+        def nsd_id: () -> ::String
+        def nsd_info_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#get_sol_network_instance-instance_method
+      def get_sol_network_instance: (
+                                      ns_instance_id: ::String
+                                    ) -> _GetSolNetworkInstanceResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSolNetworkInstanceResponseSuccess
+
+      interface _GetSolNetworkOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSolNetworkOperationOutput]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def lcm_operation_type: () -> ("INSTANTIATE" | "UPDATE" | "TERMINATE")
+        def metadata: () -> Types::GetSolNetworkOperationMetadata
+        def ns_instance_id: () -> ::String
+        def operation_state: () -> ("PROCESSING" | "COMPLETED" | "FAILED" | "CANCELLING" | "CANCELLED")
+        def tags: () -> ::Hash[::String, ::String]
+        def tasks: () -> ::Array[Types::GetSolNetworkOperationTaskDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#get_sol_network_operation-instance_method
+      def get_sol_network_operation: (
+                                       ns_lcm_op_occ_id: ::String
+                                     ) -> _GetSolNetworkOperationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSolNetworkOperationResponseSuccess
+
+      interface _GetSolNetworkPackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSolNetworkPackageOutput]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def metadata: () -> Types::GetSolNetworkPackageMetadata
+        def nsd_id: () -> ::String
+        def nsd_name: () -> ::String
+        def nsd_onboarding_state: () -> ("CREATED" | "ONBOARDED" | "ERROR")
+        def nsd_operational_state: () -> ("ENABLED" | "DISABLED")
+        def nsd_usage_state: () -> ("IN_USE" | "NOT_IN_USE")
+        def nsd_version: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def vnf_pkg_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#get_sol_network_package-instance_method
+      def get_sol_network_package: (
+                                     nsd_info_id: ::String
+                                   ) -> _GetSolNetworkPackageResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSolNetworkPackageResponseSuccess
+
+      interface _GetSolNetworkPackageContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSolNetworkPackageContentOutput]
+        def content_type: () -> ("application/zip")
+        def nsd_content: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#get_sol_network_package_content-instance_method
+      def get_sol_network_package_content: (
+                                             accept: ("application/zip"),
+                                             nsd_info_id: ::String
+                                           ) -> _GetSolNetworkPackageContentResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSolNetworkPackageContentResponseSuccess
+
+      interface _GetSolNetworkPackageDescriptorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSolNetworkPackageDescriptorOutput]
+        def content_type: () -> ("text/plain")
+        def nsd: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#get_sol_network_package_descriptor-instance_method
+      def get_sol_network_package_descriptor: (
+                                                nsd_info_id: ::String
+                                              ) -> _GetSolNetworkPackageDescriptorResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSolNetworkPackageDescriptorResponseSuccess
+
+      interface _InstantiateSolNetworkInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InstantiateSolNetworkInstanceOutput]
+        def ns_lcm_op_occ_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#instantiate_sol_network_instance-instance_method
+      def instantiate_sol_network_instance: (
+                                              ?additional_params_for_ns: {
+                                              },
+                                              ?dry_run: bool,
+                                              ns_instance_id: ::String,
+                                              ?tags: Hash[::String, ::String]
+                                            ) -> _InstantiateSolNetworkInstanceResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InstantiateSolNetworkInstanceResponseSuccess
+
+      interface _ListSolFunctionInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSolFunctionInstancesOutput]
+        def function_instances: () -> ::Array[Types::ListSolFunctionInstanceInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#list_sol_function_instances-instance_method
+      def list_sol_function_instances: (
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListSolFunctionInstancesResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSolFunctionInstancesResponseSuccess
+
+      interface _ListSolFunctionPackagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSolFunctionPackagesOutput]
+        def function_packages: () -> ::Array[Types::ListSolFunctionPackageInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#list_sol_function_packages-instance_method
+      def list_sol_function_packages: (
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListSolFunctionPackagesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSolFunctionPackagesResponseSuccess
+
+      interface _ListSolNetworkInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSolNetworkInstancesOutput]
+        def network_instances: () -> ::Array[Types::ListSolNetworkInstanceInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#list_sol_network_instances-instance_method
+      def list_sol_network_instances: (
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListSolNetworkInstancesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSolNetworkInstancesResponseSuccess
+
+      interface _ListSolNetworkOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSolNetworkOperationsOutput]
+        def network_operations: () -> ::Array[Types::ListSolNetworkOperationsInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#list_sol_network_operations-instance_method
+      def list_sol_network_operations: (
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListSolNetworkOperationsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSolNetworkOperationsResponseSuccess
+
+      interface _ListSolNetworkPackagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSolNetworkPackagesOutput]
+        def network_packages: () -> ::Array[Types::ListSolNetworkPackageInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#list_sol_network_packages-instance_method
+      def list_sol_network_packages: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListSolNetworkPackagesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSolNetworkPackagesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutSolFunctionPackageContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutSolFunctionPackageContentOutput]
+        def id: () -> ::String
+        def metadata: () -> Types::PutSolFunctionPackageContentMetadata
+        def vnf_product_name: () -> ::String
+        def vnf_provider: () -> ::String
+        def vnfd_id: () -> ::String
+        def vnfd_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#put_sol_function_package_content-instance_method
+      def put_sol_function_package_content: (
+                                              ?content_type: ("application/zip"),
+                                              file: ::String,
+                                              vnf_pkg_id: ::String
+                                            ) -> _PutSolFunctionPackageContentResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSolFunctionPackageContentResponseSuccess
+
+      interface _PutSolNetworkPackageContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutSolNetworkPackageContentOutput]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def metadata: () -> Types::PutSolNetworkPackageContentMetadata
+        def nsd_id: () -> ::String
+        def nsd_name: () -> ::String
+        def nsd_version: () -> ::String
+        def vnf_pkg_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#put_sol_network_package_content-instance_method
+      def put_sol_network_package_content: (
+                                             ?content_type: ("application/zip"),
+                                             file: ::String,
+                                             nsd_info_id: ::String
+                                           ) -> _PutSolNetworkPackageContentResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSolNetworkPackageContentResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _TerminateSolNetworkInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TerminateSolNetworkInstanceOutput]
+        def ns_lcm_op_occ_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#terminate_sol_network_instance-instance_method
+      def terminate_sol_network_instance: (
+                                            ns_instance_id: ::String,
+                                            ?tags: Hash[::String, ::String]
+                                          ) -> _TerminateSolNetworkInstanceResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateSolNetworkInstanceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateSolFunctionPackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSolFunctionPackageOutput]
+        def operational_state: () -> ("ENABLED" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#update_sol_function_package-instance_method
+      def update_sol_function_package: (
+                                         operational_state: ("ENABLED" | "DISABLED"),
+                                         vnf_pkg_id: ::String
+                                       ) -> _UpdateSolFunctionPackageResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSolFunctionPackageResponseSuccess
+
+      interface _UpdateSolNetworkInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSolNetworkInstanceOutput]
+        def ns_lcm_op_occ_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#update_sol_network_instance-instance_method
+      def update_sol_network_instance: (
+                                         ?modify_vnf_info_data: {
+                                           vnf_configurable_properties: {
+                                           },
+                                           vnf_instance_id: ::String
+                                         },
+                                         ns_instance_id: ::String,
+                                         ?tags: Hash[::String, ::String],
+                                         update_type: ("MODIFY_VNF_INFORMATION")
+                                       ) -> _UpdateSolNetworkInstanceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSolNetworkInstanceResponseSuccess
+
+      interface _UpdateSolNetworkPackageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSolNetworkPackageOutput]
+        def nsd_operational_state: () -> ("ENABLED" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#update_sol_network_package-instance_method
+      def update_sol_network_package: (
+                                        nsd_info_id: ::String,
+                                        nsd_operational_state: ("ENABLED" | "DISABLED")
+                                      ) -> _UpdateSolNetworkPackageResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSolNetworkPackageResponseSuccess
+
+      interface _ValidateSolFunctionPackageContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidateSolFunctionPackageContentOutput]
+        def id: () -> ::String
+        def metadata: () -> Types::ValidateSolFunctionPackageContentMetadata
+        def vnf_product_name: () -> ::String
+        def vnf_provider: () -> ::String
+        def vnfd_id: () -> ::String
+        def vnfd_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#validate_sol_function_package_content-instance_method
+      def validate_sol_function_package_content: (
+                                                   ?content_type: ("application/zip"),
+                                                   file: ::String,
+                                                   vnf_pkg_id: ::String
+                                                 ) -> _ValidateSolFunctionPackageContentResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateSolFunctionPackageContentResponseSuccess
+
+      interface _ValidateSolNetworkPackageContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidateSolNetworkPackageContentOutput]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def metadata: () -> Types::ValidateSolNetworkPackageContentMetadata
+        def nsd_id: () -> ::String
+        def nsd_name: () -> ::String
+        def nsd_version: () -> ::String
+        def vnf_pkg_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Tnb/Client.html#validate_sol_network_package_content-instance_method
+      def validate_sol_network_package_content: (
+                                                  ?content_type: ("application/zip"),
+                                                  file: ::String,
+                                                  nsd_info_id: ::String
+                                                ) -> _ValidateSolNetworkPackageContentResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateSolNetworkPackageContentResponseSuccess
+    end
+  end
+end
+

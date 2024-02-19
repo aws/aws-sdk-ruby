@@ -1,0 +1,377 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ConnectCampaignService
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class AgentlessDialerConfig
+      attr_accessor dialing_capacity: ::Float
+      SENSITIVE: []
+    end
+
+    class AnswerMachineDetectionConfig
+      attr_accessor enable_answer_machine_detection: bool
+      SENSITIVE: []
+    end
+
+    class Campaign
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor connect_instance_id: ::String
+      attr_accessor dialer_config: Types::DialerConfig
+      attr_accessor outbound_call_config: Types::OutboundCallConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CampaignFilters
+      attr_accessor instance_id_filter: Types::InstanceIdFilter
+      SENSITIVE: []
+    end
+
+    class CampaignSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor connect_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCampaignRequest
+      attr_accessor name: ::String
+      attr_accessor connect_instance_id: ::String
+      attr_accessor dialer_config: Types::DialerConfig
+      attr_accessor outbound_call_config: Types::OutboundCallConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCampaignResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeleteCampaignRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectInstanceConfigRequest
+      attr_accessor connect_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInstanceOnboardingJobRequest
+      attr_accessor connect_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCampaignRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCampaignResponse
+      attr_accessor campaign: Types::Campaign
+      SENSITIVE: []
+    end
+
+    class DialRequest
+      attr_accessor client_token: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor expiration_time: ::Time
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: [:phone_number, :attributes]
+    end
+
+    class DialerConfig
+      attr_accessor progressive_dialer_config: Types::ProgressiveDialerConfig
+      attr_accessor predictive_dialer_config: Types::PredictiveDialerConfig
+      attr_accessor agentless_dialer_config: Types::AgentlessDialerConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ProgressiveDialerConfig < DialerConfig
+      end
+      class PredictiveDialerConfig < DialerConfig
+      end
+      class AgentlessDialerConfig < DialerConfig
+      end
+      class Unknown < DialerConfig
+      end
+    end
+
+    class EncryptionConfig
+      attr_accessor enabled: bool
+      attr_accessor encryption_type: ("KMS")
+      attr_accessor key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class FailedCampaignStateResponse
+      attr_accessor campaign_id: ::String
+      attr_accessor failure_code: ("ResourceNotFound" | "UnknownError")
+      SENSITIVE: []
+    end
+
+    class FailedRequest
+      attr_accessor client_token: ::String
+      attr_accessor id: ::String
+      attr_accessor failure_code: ("InvalidInput" | "RequestThrottled" | "UnknownError")
+      SENSITIVE: []
+    end
+
+    class GetCampaignStateBatchRequest
+      attr_accessor campaign_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetCampaignStateBatchResponse
+      attr_accessor successful_requests: ::Array[Types::SuccessfulCampaignStateResponse]
+      attr_accessor failed_requests: ::Array[Types::FailedCampaignStateResponse]
+      SENSITIVE: []
+    end
+
+    class GetCampaignStateRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCampaignStateResponse
+      attr_accessor state: ("Initialized" | "Running" | "Paused" | "Stopped" | "Failed")
+      SENSITIVE: []
+    end
+
+    class GetConnectInstanceConfigRequest
+      attr_accessor connect_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectInstanceConfigResponse
+      attr_accessor connect_instance_config: Types::InstanceConfig
+      SENSITIVE: []
+    end
+
+    class GetInstanceOnboardingJobStatusRequest
+      attr_accessor connect_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstanceOnboardingJobStatusResponse
+      attr_accessor connect_instance_onboarding_job_status: Types::InstanceOnboardingJobStatus
+      SENSITIVE: []
+    end
+
+    class InstanceConfig
+      attr_accessor connect_instance_id: ::String
+      attr_accessor service_linked_role_arn: ::String
+      attr_accessor encryption_config: Types::EncryptionConfig
+      SENSITIVE: []
+    end
+
+    class InstanceIdFilter
+      attr_accessor value: ::String
+      attr_accessor operator: ("Eq")
+      SENSITIVE: []
+    end
+
+    class InstanceOnboardingJobStatus
+      attr_accessor connect_instance_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor failure_code: ("EVENT_BRIDGE_ACCESS_DENIED" | "EVENT_BRIDGE_MANAGED_RULE_LIMIT_EXCEEDED" | "IAM_ACCESS_DENIED" | "KMS_ACCESS_DENIED" | "KMS_KEY_NOT_FOUND" | "INTERNAL_FAILURE")
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidCampaignStateException
+      attr_accessor state: ("Initialized" | "Running" | "Paused" | "Stopped" | "Failed")
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidStateException
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListCampaignsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: Types::CampaignFilters
+      SENSITIVE: []
+    end
+
+    class ListCampaignsResponse
+      attr_accessor next_token: ::String
+      attr_accessor campaign_summary_list: ::Array[Types::CampaignSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class OutboundCallConfig
+      attr_accessor connect_contact_flow_id: ::String
+      attr_accessor connect_source_phone_number: ::String
+      attr_accessor connect_queue_id: ::String
+      attr_accessor answer_machine_detection_config: Types::AnswerMachineDetectionConfig
+      SENSITIVE: []
+    end
+
+    class PauseCampaignRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class PredictiveDialerConfig
+      attr_accessor bandwidth_allocation: ::Float
+      attr_accessor dialing_capacity: ::Float
+      SENSITIVE: []
+    end
+
+    class ProgressiveDialerConfig
+      attr_accessor bandwidth_allocation: ::Float
+      attr_accessor dialing_capacity: ::Float
+      SENSITIVE: []
+    end
+
+    class PutDialRequestBatchRequest
+      attr_accessor id: ::String
+      attr_accessor dial_requests: ::Array[Types::DialRequest]
+      SENSITIVE: []
+    end
+
+    class PutDialRequestBatchResponse
+      attr_accessor successful_requests: ::Array[Types::SuccessfulRequest]
+      attr_accessor failed_requests: ::Array[Types::FailedRequest]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResumeCampaignRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class StartCampaignRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class StartInstanceOnboardingJobRequest
+      attr_accessor connect_instance_id: ::String
+      attr_accessor encryption_config: Types::EncryptionConfig
+      SENSITIVE: []
+    end
+
+    class StartInstanceOnboardingJobResponse
+      attr_accessor connect_instance_onboarding_job_status: Types::InstanceOnboardingJobStatus
+      SENSITIVE: []
+    end
+
+    class StopCampaignRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class SuccessfulCampaignStateResponse
+      attr_accessor campaign_id: ::String
+      attr_accessor state: ("Initialized" | "Running" | "Paused" | "Stopped" | "Failed")
+      SENSITIVE: []
+    end
+
+    class SuccessfulRequest
+      attr_accessor client_token: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateCampaignDialerConfigRequest
+      attr_accessor id: ::String
+      attr_accessor dialer_config: Types::DialerConfig
+      SENSITIVE: []
+    end
+
+    class UpdateCampaignNameRequest
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCampaignOutboundCallConfigRequest
+      attr_accessor id: ::String
+      attr_accessor connect_contact_flow_id: ::String
+      attr_accessor connect_source_phone_number: ::String
+      attr_accessor answer_machine_detection_config: Types::AnswerMachineDetectionConfig
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor x_amz_error_type: ::String
+      SENSITIVE: []
+    end
+  end
+end

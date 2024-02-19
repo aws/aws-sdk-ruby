@@ -1,0 +1,58 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IAM
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/GroupPolicy.html
+    class GroupPolicy
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/GroupPolicy.html#initialize-instance_method
+      def initialize: (String group_name, String name, Hash[Symbol, untyped] options) -> void
+                    | (group_name: String, name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/GroupPolicy.html#group_name-instance_method
+      def group_name: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/GroupPolicy.html#name-instance_method
+      def name: () -> String
+      alias policy_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/GroupPolicy.html#policy_document-instance_method
+      def policy_document: () -> ::String
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/GroupPolicy.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/GroupPolicy.html#data-instance_method
+      def data: () -> Types::GetGroupPolicyResponse
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/GroupPolicy.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/GroupPolicy.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/GroupPolicy.html#put-instance_method
+      def put: (
+                 policy_document: ::String
+               ) -> ::Aws::EmptyStructure
+             | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/GroupPolicy.html#group-instance_method
+      def group: () -> Group
+
+      class Collection < ::Aws::Resources::Collection[GroupPolicy]
+      end
+    end
+  end
+end

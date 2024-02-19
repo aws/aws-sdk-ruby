@@ -1558,9 +1558,10 @@ module Aws::CloudWatch
     #   @return [Time]
     #
     # @!attribute [rw] output_format
-    #   The output format for the stream. Valid values are `json` and
-    #   `opentelemetry0.7`. For more information about metric stream output
-    #   formats, see [Metric streams output formats][1].
+    #   The output format for the stream. Valid values are `json`,
+    #   `opentelemetry1.0`, and `opentelemetry0.7`. For more information
+    #   about metric stream output formats, see [Metric streams output
+    #   formats][1].
     #
     #
     #
@@ -2977,8 +2978,8 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] output_format
-    #   The output format of this metric stream. Valid values are `json` and
-    #   `opentelemetry0.7`.
+    #   The output format of this metric stream. Valid values are `json`,
+    #   `opentelemetry1.0`, and `opentelemetry0.7`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricStreamEntry AWS API Documentation
@@ -3061,9 +3062,9 @@ module Aws::CloudWatch
     #   metrics listed in the `IncludeMetrics` array in this structure. This
     #   list can include as many as 20 statistics.
     #
-    #   If the `OutputFormat` for the stream is `opentelemetry0.7`, the only
-    #   valid values are `p?? ` percentile statistics such as `p90`, `p99`
-    #   and so on.
+    #   If the `OutputFormat` for the stream is `opentelemetry1.0` or
+    #   `opentelemetry0.7`, the only valid values are `p?? ` percentile
+    #   statistics such as `p90`, `p99` and so on.
     #
     #   If the `OutputFormat` for the stream is `json`, the valid values
     #   include the abbreviations for all of the statistics listed in [
@@ -3672,8 +3673,8 @@ module Aws::CloudWatch
     #   a `Metrics` array.
     #
     #   If you are creating an alarm based on a math expression, you cannot
-    #   specify this parameter, or any of the `Dimensions`, `Period`,
-    #   `Namespace`, `Statistic`, or `ExtendedStatistic` parameters.
+    #   specify this parameter, or any of the `Namespace`, `Dimensions`,
+    #   `Period`, `Unit`, `Statistic`, or `ExtendedStatistic` parameters.
     #   Instead, you specify all this information in the `Metrics` array.
     #   @return [String]
     #
@@ -3766,7 +3767,9 @@ module Aws::CloudWatch
     #   interfaces. You can also specify a unit when you create a custom
     #   metric. Units help provide conceptual meaning to your data. Metric
     #   data points that specify a unit of measure, such as Percent, are
-    #   aggregated separately.
+    #   aggregated separately. If you are creating an alarm based on a
+    #   metric math expression, you can specify the unit for each metric (if
+    #   needed) within the objects in the `Metrics` array.
     #
     #   If you don't specify `Unit`, CloudWatch retrieves all unit types
     #   that have been published for the metric and attempts to evaluate the
@@ -3874,10 +3877,10 @@ module Aws::CloudWatch
     #   [MetricDataQuery][1].
     #
     #   If you use the `Metrics` parameter, you cannot include the
-    #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or
-    #   `ExtendedStatistic` parameters of `PutMetricAlarm` in the same
-    #   operation. Instead, you retrieve the metrics you are using in your
-    #   math expression as part of the `Metrics` array.
+    #   `Namespace`, `MetricName`, `Dimensions`, `Period`, `Unit`,
+    #   `Statistic`, or `ExtendedStatistic` parameters of `PutMetricAlarm`
+    #   in the same operation. Instead, you retrieve the metrics you are
+    #   using in your math expression as part of the `Metrics` array.
     #
     #
     #
@@ -4014,9 +4017,10 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] output_format
-    #   The output format for the stream. Valid values are `json` and
-    #   `opentelemetry0.7`. For more information about metric stream output
-    #   formats, see [ Metric streams output formats][1].
+    #   The output format for the stream. Valid values are `json`,
+    #   `opentelemetry1.0`, and `opentelemetry0.7`. For more information
+    #   about metric stream output formats, see [ Metric streams output
+    #   formats][1].
     #
     #
     #
@@ -4057,8 +4061,8 @@ module Aws::CloudWatch
     #   `OutputFormat`. If the `OutputFormat` is `json`, you can stream any
     #   additional statistic that is supported by CloudWatch, listed in [
     #   CloudWatch statistics definitions][1]. If the `OutputFormat` is
-    #   `opentelemetry0.7`, you can stream percentile statistics such as
-    #   p95, p99.9, and so on.
+    #   `opentelemetry1.0` or `opentelemetry0.7`, you can stream percentile
+    #   statistics such as p95, p99.9, and so on.
     #
     #
     #

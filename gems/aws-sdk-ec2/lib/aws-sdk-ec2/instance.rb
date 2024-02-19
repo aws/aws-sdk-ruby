@@ -85,7 +85,8 @@ module Aws::EC2
       data[:placement]
     end
 
-    # The value is `Windows` for Windows instances; otherwise blank.
+    # The platform. This value is `windows` for Windows instances;
+    # otherwise, it is empty.
     # @return [String]
     def platform
       data[:platform]
@@ -220,7 +221,13 @@ module Aws::EC2
       data[:instance_lifecycle]
     end
 
-    # The Elastic GPU associated with the instance.
+    # Deprecated.
+    #
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #  </note>
     # @return [Array<Types::ElasticGpuAssociation>]
     def elastic_gpu_associations
       data[:elastic_gpu_associations]
@@ -779,9 +786,22 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   The block device mappings. This parameter cannot be used to modify the
-    #   encryption status of existing volumes or snapshots. To create an AMI
-    #   with encrypted snapshots, use the CopyImage action.
+    #   The block device mappings.
+    #
+    #   When using the CreateImage action:
+    #
+    #   * You can't change the volume size using the VolumeSize parameter. If
+    #     you want a different volume size, you must first change the volume
+    #     size of the source instance.
+    #
+    #   * You can't modify the encryption status of existing volumes or
+    #     snapshots. To create an AMI with volumes or snapshots that have a
+    #     different encryption status (for example, where the source volume
+    #     and snapshots are unencrypted, and you want to create an AMI with
+    #     encrypted volumes or snapshots), use the CopyImage action.
+    #
+    #   * The only option that can be changed for existing mappings or
+    #     snapshots is `DeleteOnTermination`.
     # @option options [String] :description
     #   A description for the new image.
     # @option options [Boolean] :dry_run
@@ -1074,7 +1094,9 @@ module Aws::EC2
     #   Modifies the `DeleteOnTermination` attribute for volumes that are
     #   currently attached. The volume must be owned by the caller. If no
     #   value is specified for `DeleteOnTermination`, the default is `true`
-    #   and the volume is deleted when the instance is terminated.
+    #   and the volume is deleted when the instance is terminated. You can't
+    #   modify the `DeleteOnTermination` attribute for volumes that are
+    #   attached to Fargate tasks.
     #
     #   To add instance store volumes to an Amazon EBS-backed instance, you
     #   must add them when you launch the instance. For more information, see

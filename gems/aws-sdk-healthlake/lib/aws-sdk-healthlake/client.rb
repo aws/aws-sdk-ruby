@@ -632,6 +632,14 @@ module Aws::HealthLake
     #   resp.import_job_properties.input_data_config.s3_uri #=> String
     #   resp.import_job_properties.job_output_data_config.s3_configuration.s3_uri #=> String
     #   resp.import_job_properties.job_output_data_config.s3_configuration.kms_key_id #=> String
+    #   resp.import_job_properties.job_progress_report.total_number_of_scanned_files #=> Integer
+    #   resp.import_job_properties.job_progress_report.total_size_of_scanned_files_in_mb #=> Float
+    #   resp.import_job_properties.job_progress_report.total_number_of_imported_files #=> Integer
+    #   resp.import_job_properties.job_progress_report.total_number_of_resources_scanned #=> Integer
+    #   resp.import_job_properties.job_progress_report.total_number_of_resources_imported #=> Integer
+    #   resp.import_job_properties.job_progress_report.total_number_of_resources_with_customer_error #=> Integer
+    #   resp.import_job_properties.job_progress_report.total_number_of_files_read_with_customer_error #=> Integer
+    #   resp.import_job_properties.job_progress_report.throughput #=> Float
     #   resp.import_job_properties.data_access_role_arn #=> String
     #   resp.import_job_properties.message #=> String
     #
@@ -841,6 +849,14 @@ module Aws::HealthLake
     #   resp.import_job_properties_list[0].input_data_config.s3_uri #=> String
     #   resp.import_job_properties_list[0].job_output_data_config.s3_configuration.s3_uri #=> String
     #   resp.import_job_properties_list[0].job_output_data_config.s3_configuration.kms_key_id #=> String
+    #   resp.import_job_properties_list[0].job_progress_report.total_number_of_scanned_files #=> Integer
+    #   resp.import_job_properties_list[0].job_progress_report.total_size_of_scanned_files_in_mb #=> Float
+    #   resp.import_job_properties_list[0].job_progress_report.total_number_of_imported_files #=> Integer
+    #   resp.import_job_properties_list[0].job_progress_report.total_number_of_resources_scanned #=> Integer
+    #   resp.import_job_properties_list[0].job_progress_report.total_number_of_resources_imported #=> Integer
+    #   resp.import_job_properties_list[0].job_progress_report.total_number_of_resources_with_customer_error #=> Integer
+    #   resp.import_job_properties_list[0].job_progress_report.total_number_of_files_read_with_customer_error #=> Integer
+    #   resp.import_job_properties_list[0].job_progress_report.throughput #=> Float
     #   resp.import_job_properties_list[0].data_access_role_arn #=> String
     #   resp.import_job_properties_list[0].message #=> String
     #   resp.next_token #=> String
@@ -1081,7 +1097,7 @@ module Aws::HealthLake
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-healthlake'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,0 +1,123 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MediaLive
+    module Waiters
+
+      class ChannelCreated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    channel_id: ::String
+                  ) -> Client::_DescribeChannelResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeChannelResponseSuccess
+      end
+
+      class ChannelDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    channel_id: ::String
+                  ) -> Client::_DescribeChannelResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeChannelResponseSuccess
+      end
+
+      class ChannelRunning
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    channel_id: ::String
+                  ) -> Client::_DescribeChannelResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeChannelResponseSuccess
+      end
+
+      class ChannelStopped
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    channel_id: ::String
+                  ) -> Client::_DescribeChannelResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeChannelResponseSuccess
+      end
+
+      class InputAttached
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    input_id: ::String
+                  ) -> Client::_DescribeInputResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeInputResponseSuccess
+      end
+
+      class InputDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    input_id: ::String
+                  ) -> Client::_DescribeInputResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeInputResponseSuccess
+      end
+
+      class InputDetached
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    input_id: ::String
+                  ) -> Client::_DescribeInputResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeInputResponseSuccess
+      end
+
+      class MultiplexCreated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    multiplex_id: ::String
+                  ) -> Client::_DescribeMultiplexResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeMultiplexResponseSuccess
+      end
+
+      class MultiplexDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    multiplex_id: ::String
+                  ) -> Client::_DescribeMultiplexResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeMultiplexResponseSuccess
+      end
+
+      class MultiplexRunning
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    multiplex_id: ::String
+                  ) -> Client::_DescribeMultiplexResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeMultiplexResponseSuccess
+      end
+
+      class MultiplexStopped
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    multiplex_id: ::String
+                  ) -> Client::_DescribeMultiplexResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeMultiplexResponseSuccess
+      end
+    end
+  end
+end

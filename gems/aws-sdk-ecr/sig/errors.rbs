@@ -1,0 +1,135 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ECR
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class EmptyUploadException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ImageAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ImageDigestDoesNotMatchException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ImageNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ImageTagAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidLayerException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidLayerPartException < ::Aws::Errors::ServiceError
+        def registry_id: () -> ::String
+        def repository_name: () -> ::String
+        def upload_id: () -> ::String
+        def last_valid_byte_received: () -> ::String
+        def message: () -> ::String
+      end
+      class InvalidParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidTagParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KmsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def kms_error: () -> ::String
+      end
+      class LayerAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LayerInaccessibleException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LayerPartTooSmallException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LayersNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LifecyclePolicyNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LifecyclePolicyPreviewInProgressException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LifecyclePolicyPreviewNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PullThroughCacheRuleAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PullThroughCacheRuleNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ReferencedImagesNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RegistryPolicyNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RepositoryAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RepositoryNotEmptyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RepositoryNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RepositoryPolicyNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ScanNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SecretNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServerException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnableToAccessSecretException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnableToDecryptSecretValueException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnableToGetUpstreamImageException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnableToGetUpstreamLayerException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedImageTypeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedUpstreamRegistryException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UploadNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ValidationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

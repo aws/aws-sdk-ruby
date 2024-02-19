@@ -1,0 +1,1316 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module FSx
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateFileSystemAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateFileSystemAliasesResponse]
+        def aliases: () -> ::Array[Types::Alias]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#associate_file_system_aliases-instance_method
+      def associate_file_system_aliases: (
+                                           ?client_request_token: ::String,
+                                           file_system_id: ::String,
+                                           aliases: Array[::String]
+                                         ) -> _AssociateFileSystemAliasesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateFileSystemAliasesResponseSuccess
+
+      interface _CancelDataRepositoryTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelDataRepositoryTaskResponse]
+        def lifecycle: () -> ("PENDING" | "EXECUTING" | "FAILED" | "SUCCEEDED" | "CANCELED" | "CANCELING")
+        def task_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#cancel_data_repository_task-instance_method
+      def cancel_data_repository_task: (
+                                         task_id: ::String
+                                       ) -> _CancelDataRepositoryTaskResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelDataRepositoryTaskResponseSuccess
+
+      interface _CopyBackupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopyBackupResponse]
+        def backup: () -> Types::Backup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#copy_backup-instance_method
+      def copy_backup: (
+                         ?client_request_token: ::String,
+                         source_backup_id: ::String,
+                         ?source_region: ::String,
+                         ?kms_key_id: ::String,
+                         ?copy_tags: bool,
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> _CopyBackupResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyBackupResponseSuccess
+
+      interface _CopySnapshotAndUpdateVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopySnapshotAndUpdateVolumeResponse]
+        def volume_id: () -> ::String
+        def lifecycle: () -> ("CREATING" | "CREATED" | "DELETING" | "FAILED" | "MISCONFIGURED" | "PENDING" | "AVAILABLE")
+        def administrative_actions: () -> ::Array[Types::AdministrativeAction]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#copy_snapshot_and_update_volume-instance_method
+      def copy_snapshot_and_update_volume: (
+                                             ?client_request_token: ::String,
+                                             volume_id: ::String,
+                                             source_snapshot_arn: ::String,
+                                             ?copy_strategy: ("CLONE" | "FULL_COPY" | "INCREMENTAL_COPY"),
+                                             ?options: Array[("DELETE_INTERMEDIATE_SNAPSHOTS" | "DELETE_CLONED_VOLUMES" | "DELETE_INTERMEDIATE_DATA")]
+                                           ) -> _CopySnapshotAndUpdateVolumeResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopySnapshotAndUpdateVolumeResponseSuccess
+
+      interface _CreateBackupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBackupResponse]
+        def backup: () -> Types::Backup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#create_backup-instance_method
+      def create_backup: (
+                           ?file_system_id: ::String,
+                           ?client_request_token: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
+                           ],
+                           ?volume_id: ::String
+                         ) -> _CreateBackupResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBackupResponseSuccess
+
+      interface _CreateDataRepositoryAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataRepositoryAssociationResponse]
+        def association: () -> Types::DataRepositoryAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#create_data_repository_association-instance_method
+      def create_data_repository_association: (
+                                                file_system_id: ::String,
+                                                ?file_system_path: ::String,
+                                                data_repository_path: ::String,
+                                                ?batch_import_meta_data_on_create: bool,
+                                                ?imported_file_chunk_size: ::Integer,
+                                                ?s3: {
+                                                  auto_import_policy: {
+                                                    events: Array[("NEW" | "CHANGED" | "DELETED")]?
+                                                  }?,
+                                                  auto_export_policy: {
+                                                    events: Array[("NEW" | "CHANGED" | "DELETED")]?
+                                                  }?
+                                                },
+                                                ?client_request_token: ::String,
+                                                ?tags: Array[
+                                                  {
+                                                    key: ::String,
+                                                    value: ::String
+                                                  },
+                                                ]
+                                              ) -> _CreateDataRepositoryAssociationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataRepositoryAssociationResponseSuccess
+
+      interface _CreateDataRepositoryTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataRepositoryTaskResponse]
+        def data_repository_task: () -> Types::DataRepositoryTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#create_data_repository_task-instance_method
+      def create_data_repository_task: (
+                                         type: ("EXPORT_TO_REPOSITORY" | "IMPORT_METADATA_FROM_REPOSITORY" | "RELEASE_DATA_FROM_FILESYSTEM" | "AUTO_RELEASE_DATA"),
+                                         ?paths: Array[::String],
+                                         file_system_id: ::String,
+                                         report: {
+                                           enabled: bool,
+                                           path: ::String?,
+                                           format: ("REPORT_CSV_20191124")?,
+                                           scope: ("FAILED_FILES_ONLY")?
+                                         },
+                                         ?client_request_token: ::String,
+                                         ?tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String
+                                           },
+                                         ],
+                                         ?capacity_to_release: ::Integer,
+                                         ?release_configuration: {
+                                           duration_since_last_access: {
+                                             unit: ("DAYS")?,
+                                             value: ::Integer?
+                                           }?
+                                         }
+                                       ) -> _CreateDataRepositoryTaskResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataRepositoryTaskResponseSuccess
+
+      interface _CreateFileCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFileCacheResponse]
+        def file_cache: () -> Types::FileCacheCreating
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#create_file_cache-instance_method
+      def create_file_cache: (
+                               ?client_request_token: ::String,
+                               file_cache_type: ("LUSTRE"),
+                               file_cache_type_version: ::String,
+                               storage_capacity: ::Integer,
+                               subnet_ids: Array[::String],
+                               ?security_group_ids: Array[::String],
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ],
+                               ?copy_tags_to_data_repository_associations: bool,
+                               ?kms_key_id: ::String,
+                               ?lustre_configuration: {
+                                 per_unit_storage_throughput: ::Integer,
+                                 deployment_type: ("CACHE_1"),
+                                 weekly_maintenance_start_time: ::String?,
+                                 metadata_configuration: {
+                                   storage_capacity: ::Integer
+                                 }
+                               },
+                               ?data_repository_associations: Array[
+                                 {
+                                   file_cache_path: ::String,
+                                   data_repository_path: ::String,
+                                   data_repository_subdirectories: Array[::String]?,
+                                   nfs: {
+                                     version: ("NFS3"),
+                                     dns_ips: Array[::String]?
+                                   }?
+                                 },
+                               ]
+                             ) -> _CreateFileCacheResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFileCacheResponseSuccess
+
+      interface _CreateFileSystemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFileSystemResponse]
+        def file_system: () -> Types::FileSystem
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#create_file_system-instance_method
+      def create_file_system: (
+                                ?client_request_token: ::String,
+                                file_system_type: ("WINDOWS" | "LUSTRE" | "ONTAP" | "OPENZFS"),
+                                storage_capacity: ::Integer,
+                                ?storage_type: ("SSD" | "HDD"),
+                                subnet_ids: Array[::String],
+                                ?security_group_ids: Array[::String],
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ],
+                                ?kms_key_id: ::String,
+                                ?windows_configuration: {
+                                  active_directory_id: ::String?,
+                                  self_managed_active_directory_configuration: {
+                                    domain_name: ::String,
+                                    organizational_unit_distinguished_name: ::String?,
+                                    file_system_administrators_group: ::String?,
+                                    user_name: ::String,
+                                    password: ::String,
+                                    dns_ips: Array[::String]
+                                  }?,
+                                  deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2")?,
+                                  preferred_subnet_id: ::String?,
+                                  throughput_capacity: ::Integer,
+                                  weekly_maintenance_start_time: ::String?,
+                                  daily_automatic_backup_start_time: ::String?,
+                                  automatic_backup_retention_days: ::Integer?,
+                                  copy_tags_to_backups: bool?,
+                                  aliases: Array[::String]?,
+                                  audit_log_configuration: {
+                                    file_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE"),
+                                    file_share_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE"),
+                                    audit_log_destination: ::String?
+                                  }?,
+                                  disk_iops_configuration: {
+                                    mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
+                                    iops: ::Integer?
+                                  }?
+                                },
+                                ?lustre_configuration: {
+                                  weekly_maintenance_start_time: ::String?,
+                                  import_path: ::String?,
+                                  export_path: ::String?,
+                                  imported_file_chunk_size: ::Integer?,
+                                  deployment_type: ("SCRATCH_1" | "SCRATCH_2" | "PERSISTENT_1" | "PERSISTENT_2")?,
+                                  auto_import_policy: ("NONE" | "NEW" | "NEW_CHANGED" | "NEW_CHANGED_DELETED")?,
+                                  per_unit_storage_throughput: ::Integer?,
+                                  daily_automatic_backup_start_time: ::String?,
+                                  automatic_backup_retention_days: ::Integer?,
+                                  copy_tags_to_backups: bool?,
+                                  drive_cache_type: ("NONE" | "READ")?,
+                                  data_compression_type: ("NONE" | "LZ4")?,
+                                  log_configuration: {
+                                    level: ("DISABLED" | "WARN_ONLY" | "ERROR_ONLY" | "WARN_ERROR"),
+                                    destination: ::String?
+                                  }?,
+                                  root_squash_configuration: {
+                                    root_squash: ::String?,
+                                    no_squash_nids: Array[::String]?
+                                  }?
+                                },
+                                ?ontap_configuration: {
+                                  automatic_backup_retention_days: ::Integer?,
+                                  daily_automatic_backup_start_time: ::String?,
+                                  deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2"),
+                                  endpoint_ip_address_range: ::String?,
+                                  fsx_admin_password: ::String?,
+                                  disk_iops_configuration: {
+                                    mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
+                                    iops: ::Integer?
+                                  }?,
+                                  preferred_subnet_id: ::String?,
+                                  route_table_ids: Array[::String]?,
+                                  throughput_capacity: ::Integer?,
+                                  weekly_maintenance_start_time: ::String?,
+                                  ha_pairs: ::Integer?,
+                                  throughput_capacity_per_ha_pair: ::Integer?
+                                },
+                                ?file_system_type_version: ::String,
+                                ?open_zfs_configuration: {
+                                  automatic_backup_retention_days: ::Integer?,
+                                  copy_tags_to_backups: bool?,
+                                  copy_tags_to_volumes: bool?,
+                                  daily_automatic_backup_start_time: ::String?,
+                                  deployment_type: ("SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_1"),
+                                  throughput_capacity: ::Integer,
+                                  weekly_maintenance_start_time: ::String?,
+                                  disk_iops_configuration: {
+                                    mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
+                                    iops: ::Integer?
+                                  }?,
+                                  root_volume_configuration: {
+                                    record_size_ki_b: ::Integer?,
+                                    data_compression_type: ("NONE" | "ZSTD" | "LZ4")?,
+                                    nfs_exports: Array[
+                                      {
+                                        client_configurations: Array[
+                                          {
+                                            clients: ::String,
+                                            options: Array[::String]
+                                          },
+                                        ]
+                                      },
+                                    ]?,
+                                    user_and_group_quotas: Array[
+                                      {
+                                        type: ("USER" | "GROUP"),
+                                        id: ::Integer,
+                                        storage_capacity_quota_gi_b: ::Integer
+                                      },
+                                    ]?,
+                                    copy_tags_to_snapshots: bool?,
+                                    read_only: bool?
+                                  }?,
+                                  preferred_subnet_id: ::String?,
+                                  endpoint_ip_address_range: ::String?,
+                                  route_table_ids: Array[::String]?
+                                }
+                              ) -> _CreateFileSystemResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFileSystemResponseSuccess
+
+      interface _CreateFileSystemFromBackupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFileSystemFromBackupResponse]
+        def file_system: () -> Types::FileSystem
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#create_file_system_from_backup-instance_method
+      def create_file_system_from_backup: (
+                                            backup_id: ::String,
+                                            ?client_request_token: ::String,
+                                            subnet_ids: Array[::String],
+                                            ?security_group_ids: Array[::String],
+                                            ?tags: Array[
+                                              {
+                                                key: ::String,
+                                                value: ::String
+                                              },
+                                            ],
+                                            ?windows_configuration: {
+                                              active_directory_id: ::String?,
+                                              self_managed_active_directory_configuration: {
+                                                domain_name: ::String,
+                                                organizational_unit_distinguished_name: ::String?,
+                                                file_system_administrators_group: ::String?,
+                                                user_name: ::String,
+                                                password: ::String,
+                                                dns_ips: Array[::String]
+                                              }?,
+                                              deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2")?,
+                                              preferred_subnet_id: ::String?,
+                                              throughput_capacity: ::Integer,
+                                              weekly_maintenance_start_time: ::String?,
+                                              daily_automatic_backup_start_time: ::String?,
+                                              automatic_backup_retention_days: ::Integer?,
+                                              copy_tags_to_backups: bool?,
+                                              aliases: Array[::String]?,
+                                              audit_log_configuration: {
+                                                file_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE"),
+                                                file_share_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE"),
+                                                audit_log_destination: ::String?
+                                              }?,
+                                              disk_iops_configuration: {
+                                                mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
+                                                iops: ::Integer?
+                                              }?
+                                            },
+                                            ?lustre_configuration: {
+                                              weekly_maintenance_start_time: ::String?,
+                                              import_path: ::String?,
+                                              export_path: ::String?,
+                                              imported_file_chunk_size: ::Integer?,
+                                              deployment_type: ("SCRATCH_1" | "SCRATCH_2" | "PERSISTENT_1" | "PERSISTENT_2")?,
+                                              auto_import_policy: ("NONE" | "NEW" | "NEW_CHANGED" | "NEW_CHANGED_DELETED")?,
+                                              per_unit_storage_throughput: ::Integer?,
+                                              daily_automatic_backup_start_time: ::String?,
+                                              automatic_backup_retention_days: ::Integer?,
+                                              copy_tags_to_backups: bool?,
+                                              drive_cache_type: ("NONE" | "READ")?,
+                                              data_compression_type: ("NONE" | "LZ4")?,
+                                              log_configuration: {
+                                                level: ("DISABLED" | "WARN_ONLY" | "ERROR_ONLY" | "WARN_ERROR"),
+                                                destination: ::String?
+                                              }?,
+                                              root_squash_configuration: {
+                                                root_squash: ::String?,
+                                                no_squash_nids: Array[::String]?
+                                              }?
+                                            },
+                                            ?storage_type: ("SSD" | "HDD"),
+                                            ?kms_key_id: ::String,
+                                            ?file_system_type_version: ::String,
+                                            ?open_zfs_configuration: {
+                                              automatic_backup_retention_days: ::Integer?,
+                                              copy_tags_to_backups: bool?,
+                                              copy_tags_to_volumes: bool?,
+                                              daily_automatic_backup_start_time: ::String?,
+                                              deployment_type: ("SINGLE_AZ_1" | "SINGLE_AZ_2" | "MULTI_AZ_1"),
+                                              throughput_capacity: ::Integer,
+                                              weekly_maintenance_start_time: ::String?,
+                                              disk_iops_configuration: {
+                                                mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
+                                                iops: ::Integer?
+                                              }?,
+                                              root_volume_configuration: {
+                                                record_size_ki_b: ::Integer?,
+                                                data_compression_type: ("NONE" | "ZSTD" | "LZ4")?,
+                                                nfs_exports: Array[
+                                                  {
+                                                    client_configurations: Array[
+                                                      {
+                                                        clients: ::String,
+                                                        options: Array[::String]
+                                                      },
+                                                    ]
+                                                  },
+                                                ]?,
+                                                user_and_group_quotas: Array[
+                                                  {
+                                                    type: ("USER" | "GROUP"),
+                                                    id: ::Integer,
+                                                    storage_capacity_quota_gi_b: ::Integer
+                                                  },
+                                                ]?,
+                                                copy_tags_to_snapshots: bool?,
+                                                read_only: bool?
+                                              }?,
+                                              preferred_subnet_id: ::String?,
+                                              endpoint_ip_address_range: ::String?,
+                                              route_table_ids: Array[::String]?
+                                            },
+                                            ?storage_capacity: ::Integer
+                                          ) -> _CreateFileSystemFromBackupResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFileSystemFromBackupResponseSuccess
+
+      interface _CreateSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSnapshotResponse]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#create_snapshot-instance_method
+      def create_snapshot: (
+                             ?client_request_token: ::String,
+                             name: ::String,
+                             volume_id: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _CreateSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotResponseSuccess
+
+      interface _CreateStorageVirtualMachineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStorageVirtualMachineResponse]
+        def storage_virtual_machine: () -> Types::StorageVirtualMachine
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#create_storage_virtual_machine-instance_method
+      def create_storage_virtual_machine: (
+                                            ?active_directory_configuration: {
+                                              net_bios_name: ::String,
+                                              self_managed_active_directory_configuration: {
+                                                domain_name: ::String,
+                                                organizational_unit_distinguished_name: ::String?,
+                                                file_system_administrators_group: ::String?,
+                                                user_name: ::String,
+                                                password: ::String,
+                                                dns_ips: Array[::String]
+                                              }?
+                                            },
+                                            ?client_request_token: ::String,
+                                            file_system_id: ::String,
+                                            name: ::String,
+                                            ?svm_admin_password: ::String,
+                                            ?tags: Array[
+                                              {
+                                                key: ::String,
+                                                value: ::String
+                                              },
+                                            ],
+                                            ?root_volume_security_style: ("UNIX" | "NTFS" | "MIXED")
+                                          ) -> _CreateStorageVirtualMachineResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStorageVirtualMachineResponseSuccess
+
+      interface _CreateVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVolumeResponse]
+        def volume: () -> Types::Volume
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#create_volume-instance_method
+      def create_volume: (
+                           ?client_request_token: ::String,
+                           volume_type: ("ONTAP" | "OPENZFS"),
+                           name: ::String,
+                           ?ontap_configuration: {
+                             junction_path: ::String?,
+                             security_style: ("UNIX" | "NTFS" | "MIXED")?,
+                             size_in_megabytes: ::Integer?,
+                             storage_efficiency_enabled: bool?,
+                             storage_virtual_machine_id: ::String,
+                             tiering_policy: {
+                               cooling_period: ::Integer?,
+                               name: ("SNAPSHOT_ONLY" | "AUTO" | "ALL" | "NONE")?
+                             }?,
+                             ontap_volume_type: ("RW" | "DP")?,
+                             snapshot_policy: ::String?,
+                             copy_tags_to_backups: bool?,
+                             snaplock_configuration: {
+                               audit_log_volume: bool?,
+                               autocommit_period: {
+                                 type: ("MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "NONE"),
+                                 value: ::Integer?
+                               }?,
+                               privileged_delete: ("DISABLED" | "ENABLED" | "PERMANENTLY_DISABLED")?,
+                               retention_period: {
+                                 default_retention: {
+                                   type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
+                                   value: ::Integer?
+                                 },
+                                 minimum_retention: {
+                                   type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
+                                   value: ::Integer?
+                                 },
+                                 maximum_retention: {
+                                   type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
+                                   value: ::Integer?
+                                 }
+                               }?,
+                               snaplock_type: ("COMPLIANCE" | "ENTERPRISE"),
+                               volume_append_mode_enabled: bool?
+                             }?,
+                             volume_style: ("FLEXVOL" | "FLEXGROUP")?,
+                             aggregate_configuration: {
+                               aggregates: Array[::String]?,
+                               constituents_per_aggregate: ::Integer?
+                             }?,
+                             size_in_bytes: ::Integer?
+                           },
+                           ?tags: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
+                           ],
+                           ?open_zfs_configuration: {
+                             parent_volume_id: ::String,
+                             storage_capacity_reservation_gi_b: ::Integer?,
+                             storage_capacity_quota_gi_b: ::Integer?,
+                             record_size_ki_b: ::Integer?,
+                             data_compression_type: ("NONE" | "ZSTD" | "LZ4")?,
+                             copy_tags_to_snapshots: bool?,
+                             origin_snapshot: {
+                               snapshot_arn: ::String,
+                               copy_strategy: ("CLONE" | "FULL_COPY" | "INCREMENTAL_COPY")
+                             }?,
+                             read_only: bool?,
+                             nfs_exports: Array[
+                               {
+                                 client_configurations: Array[
+                                   {
+                                     clients: ::String,
+                                     options: Array[::String]
+                                   },
+                                 ]
+                               },
+                             ]?,
+                             user_and_group_quotas: Array[
+                               {
+                                 type: ("USER" | "GROUP"),
+                                 id: ::Integer,
+                                 storage_capacity_quota_gi_b: ::Integer
+                               },
+                             ]?
+                           }
+                         ) -> _CreateVolumeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVolumeResponseSuccess
+
+      interface _CreateVolumeFromBackupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVolumeFromBackupResponse]
+        def volume: () -> Types::Volume
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#create_volume_from_backup-instance_method
+      def create_volume_from_backup: (
+                                       backup_id: ::String,
+                                       ?client_request_token: ::String,
+                                       name: ::String,
+                                       ?ontap_configuration: {
+                                         junction_path: ::String?,
+                                         security_style: ("UNIX" | "NTFS" | "MIXED")?,
+                                         size_in_megabytes: ::Integer?,
+                                         storage_efficiency_enabled: bool?,
+                                         storage_virtual_machine_id: ::String,
+                                         tiering_policy: {
+                                           cooling_period: ::Integer?,
+                                           name: ("SNAPSHOT_ONLY" | "AUTO" | "ALL" | "NONE")?
+                                         }?,
+                                         ontap_volume_type: ("RW" | "DP")?,
+                                         snapshot_policy: ::String?,
+                                         copy_tags_to_backups: bool?,
+                                         snaplock_configuration: {
+                                           audit_log_volume: bool?,
+                                           autocommit_period: {
+                                             type: ("MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "NONE"),
+                                             value: ::Integer?
+                                           }?,
+                                           privileged_delete: ("DISABLED" | "ENABLED" | "PERMANENTLY_DISABLED")?,
+                                           retention_period: {
+                                             default_retention: {
+                                               type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
+                                               value: ::Integer?
+                                             },
+                                             minimum_retention: {
+                                               type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
+                                               value: ::Integer?
+                                             },
+                                             maximum_retention: {
+                                               type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
+                                               value: ::Integer?
+                                             }
+                                           }?,
+                                           snaplock_type: ("COMPLIANCE" | "ENTERPRISE"),
+                                           volume_append_mode_enabled: bool?
+                                         }?,
+                                         volume_style: ("FLEXVOL" | "FLEXGROUP")?,
+                                         aggregate_configuration: {
+                                           aggregates: Array[::String]?,
+                                           constituents_per_aggregate: ::Integer?
+                                         }?,
+                                         size_in_bytes: ::Integer?
+                                       },
+                                       ?tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]
+                                     ) -> _CreateVolumeFromBackupResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVolumeFromBackupResponseSuccess
+
+      interface _DeleteBackupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBackupResponse]
+        def backup_id: () -> ::String
+        def lifecycle: () -> ("AVAILABLE" | "CREATING" | "TRANSFERRING" | "DELETED" | "FAILED" | "PENDING" | "COPYING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#delete_backup-instance_method
+      def delete_backup: (
+                           backup_id: ::String,
+                           ?client_request_token: ::String
+                         ) -> _DeleteBackupResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBackupResponseSuccess
+
+      interface _DeleteDataRepositoryAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataRepositoryAssociationResponse]
+        def association_id: () -> ::String
+        def lifecycle: () -> ("CREATING" | "AVAILABLE" | "MISCONFIGURED" | "UPDATING" | "DELETING" | "FAILED")
+        def delete_data_in_file_system: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#delete_data_repository_association-instance_method
+      def delete_data_repository_association: (
+                                                association_id: ::String,
+                                                ?client_request_token: ::String,
+                                                ?delete_data_in_file_system: bool
+                                              ) -> _DeleteDataRepositoryAssociationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataRepositoryAssociationResponseSuccess
+
+      interface _DeleteFileCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFileCacheResponse]
+        def file_cache_id: () -> ::String
+        def lifecycle: () -> ("AVAILABLE" | "CREATING" | "DELETING" | "UPDATING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#delete_file_cache-instance_method
+      def delete_file_cache: (
+                               file_cache_id: ::String,
+                               ?client_request_token: ::String
+                             ) -> _DeleteFileCacheResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFileCacheResponseSuccess
+
+      interface _DeleteFileSystemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFileSystemResponse]
+        def file_system_id: () -> ::String
+        def lifecycle: () -> ("AVAILABLE" | "CREATING" | "FAILED" | "DELETING" | "MISCONFIGURED" | "UPDATING" | "MISCONFIGURED_UNAVAILABLE")
+        def windows_response: () -> Types::DeleteFileSystemWindowsResponse
+        def lustre_response: () -> Types::DeleteFileSystemLustreResponse
+        def open_zfs_response: () -> Types::DeleteFileSystemOpenZFSResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#delete_file_system-instance_method
+      def delete_file_system: (
+                                file_system_id: ::String,
+                                ?client_request_token: ::String,
+                                ?windows_configuration: {
+                                  skip_final_backup: bool?,
+                                  final_backup_tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]?
+                                },
+                                ?lustre_configuration: {
+                                  skip_final_backup: bool?,
+                                  final_backup_tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]?
+                                },
+                                ?open_zfs_configuration: {
+                                  skip_final_backup: bool?,
+                                  final_backup_tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]?,
+                                  options: Array[("DELETE_CHILD_VOLUMES_AND_SNAPSHOTS")]?
+                                }
+                              ) -> _DeleteFileSystemResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFileSystemResponseSuccess
+
+      interface _DeleteSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSnapshotResponse]
+        def snapshot_id: () -> ::String
+        def lifecycle: () -> ("PENDING" | "CREATING" | "DELETING" | "AVAILABLE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#delete_snapshot-instance_method
+      def delete_snapshot: (
+                             ?client_request_token: ::String,
+                             snapshot_id: ::String
+                           ) -> _DeleteSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSnapshotResponseSuccess
+
+      interface _DeleteStorageVirtualMachineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStorageVirtualMachineResponse]
+        def storage_virtual_machine_id: () -> ::String
+        def lifecycle: () -> ("CREATED" | "CREATING" | "DELETING" | "FAILED" | "MISCONFIGURED" | "PENDING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#delete_storage_virtual_machine-instance_method
+      def delete_storage_virtual_machine: (
+                                            ?client_request_token: ::String,
+                                            storage_virtual_machine_id: ::String
+                                          ) -> _DeleteStorageVirtualMachineResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStorageVirtualMachineResponseSuccess
+
+      interface _DeleteVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVolumeResponse]
+        def volume_id: () -> ::String
+        def lifecycle: () -> ("CREATING" | "CREATED" | "DELETING" | "FAILED" | "MISCONFIGURED" | "PENDING" | "AVAILABLE")
+        def ontap_response: () -> Types::DeleteVolumeOntapResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#delete_volume-instance_method
+      def delete_volume: (
+                           ?client_request_token: ::String,
+                           volume_id: ::String,
+                           ?ontap_configuration: {
+                             skip_final_backup: bool?,
+                             final_backup_tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]?,
+                             bypass_snaplock_enterprise_retention: bool?
+                           },
+                           ?open_zfs_configuration: {
+                             options: Array[("DELETE_CHILD_VOLUMES_AND_SNAPSHOTS")]?
+                           }
+                         ) -> _DeleteVolumeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVolumeResponseSuccess
+
+      interface _DescribeBackupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBackupsResponse]
+        def backups: () -> ::Array[Types::Backup]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#describe_backups-instance_method
+      def describe_backups: (
+                              ?backup_ids: Array[::String],
+                              ?filters: Array[
+                                {
+                                  name: ("file-system-id" | "backup-type" | "file-system-type" | "volume-id" | "data-repository-type" | "file-cache-id" | "file-cache-type")?,
+                                  values: Array[::String]?
+                                },
+                              ],
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _DescribeBackupsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBackupsResponseSuccess
+
+      interface _DescribeDataRepositoryAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDataRepositoryAssociationsResponse]
+        def associations: () -> ::Array[Types::DataRepositoryAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#describe_data_repository_associations-instance_method
+      def describe_data_repository_associations: (
+                                                   ?association_ids: Array[::String],
+                                                   ?filters: Array[
+                                                     {
+                                                       name: ("file-system-id" | "backup-type" | "file-system-type" | "volume-id" | "data-repository-type" | "file-cache-id" | "file-cache-type")?,
+                                                       values: Array[::String]?
+                                                     },
+                                                   ],
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _DescribeDataRepositoryAssociationsResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDataRepositoryAssociationsResponseSuccess
+
+      interface _DescribeDataRepositoryTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDataRepositoryTasksResponse]
+        def data_repository_tasks: () -> ::Array[Types::DataRepositoryTask]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#describe_data_repository_tasks-instance_method
+      def describe_data_repository_tasks: (
+                                            ?task_ids: Array[::String],
+                                            ?filters: Array[
+                                              {
+                                                name: ("file-system-id" | "task-lifecycle" | "data-repository-association-id" | "file-cache-id")?,
+                                                values: Array[::String]?
+                                              },
+                                            ],
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _DescribeDataRepositoryTasksResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDataRepositoryTasksResponseSuccess
+
+      interface _DescribeFileCachesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFileCachesResponse]
+        def file_caches: () -> ::Array[Types::FileCache]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#describe_file_caches-instance_method
+      def describe_file_caches: (
+                                  ?file_cache_ids: Array[::String],
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _DescribeFileCachesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFileCachesResponseSuccess
+
+      interface _DescribeFileSystemAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFileSystemAliasesResponse]
+        def aliases: () -> ::Array[Types::Alias]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#describe_file_system_aliases-instance_method
+      def describe_file_system_aliases: (
+                                          ?client_request_token: ::String,
+                                          file_system_id: ::String,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _DescribeFileSystemAliasesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFileSystemAliasesResponseSuccess
+
+      interface _DescribeFileSystemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFileSystemsResponse]
+        def file_systems: () -> ::Array[Types::FileSystem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#describe_file_systems-instance_method
+      def describe_file_systems: (
+                                   ?file_system_ids: Array[::String],
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _DescribeFileSystemsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFileSystemsResponseSuccess
+
+      interface _DescribeSharedVpcConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSharedVpcConfigurationResponse]
+        def enable_fsx_route_table_updates_from_participant_accounts: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#describe_shared_vpc_configuration-instance_method
+      def describe_shared_vpc_configuration: (
+                                             ) -> _DescribeSharedVpcConfigurationResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSharedVpcConfigurationResponseSuccess
+
+      interface _DescribeSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSnapshotsResponse]
+        def snapshots: () -> ::Array[Types::Snapshot]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#describe_snapshots-instance_method
+      def describe_snapshots: (
+                                ?snapshot_ids: Array[::String],
+                                ?filters: Array[
+                                  {
+                                    name: ("file-system-id" | "volume-id")?,
+                                    values: Array[::String]?
+                                  },
+                                ],
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                ?include_shared: bool
+                              ) -> _DescribeSnapshotsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSnapshotsResponseSuccess
+
+      interface _DescribeStorageVirtualMachinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStorageVirtualMachinesResponse]
+        def storage_virtual_machines: () -> ::Array[Types::StorageVirtualMachine]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#describe_storage_virtual_machines-instance_method
+      def describe_storage_virtual_machines: (
+                                               ?storage_virtual_machine_ids: Array[::String],
+                                               ?filters: Array[
+                                                 {
+                                                   name: ("file-system-id")?,
+                                                   values: Array[::String]?
+                                                 },
+                                               ],
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _DescribeStorageVirtualMachinesResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStorageVirtualMachinesResponseSuccess
+
+      interface _DescribeVolumesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVolumesResponse]
+        def volumes: () -> ::Array[Types::Volume]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#describe_volumes-instance_method
+      def describe_volumes: (
+                              ?volume_ids: Array[::String],
+                              ?filters: Array[
+                                {
+                                  name: ("file-system-id" | "storage-virtual-machine-id")?,
+                                  values: Array[::String]?
+                                },
+                              ],
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _DescribeVolumesResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVolumesResponseSuccess
+
+      interface _DisassociateFileSystemAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateFileSystemAliasesResponse]
+        def aliases: () -> ::Array[Types::Alias]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#disassociate_file_system_aliases-instance_method
+      def disassociate_file_system_aliases: (
+                                              ?client_request_token: ::String,
+                                              file_system_id: ::String,
+                                              aliases: Array[::String]
+                                            ) -> _DisassociateFileSystemAliasesResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateFileSystemAliasesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ReleaseFileSystemNfsV3LocksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReleaseFileSystemNfsV3LocksResponse]
+        def file_system: () -> Types::FileSystem
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#release_file_system_nfs_v3_locks-instance_method
+      def release_file_system_nfs_v3_locks: (
+                                              file_system_id: ::String,
+                                              ?client_request_token: ::String
+                                            ) -> _ReleaseFileSystemNfsV3LocksResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReleaseFileSystemNfsV3LocksResponseSuccess
+
+      interface _RestoreVolumeFromSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreVolumeFromSnapshotResponse]
+        def volume_id: () -> ::String
+        def lifecycle: () -> ("CREATING" | "CREATED" | "DELETING" | "FAILED" | "MISCONFIGURED" | "PENDING" | "AVAILABLE")
+        def administrative_actions: () -> ::Array[Types::AdministrativeAction]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#restore_volume_from_snapshot-instance_method
+      def restore_volume_from_snapshot: (
+                                          ?client_request_token: ::String,
+                                          volume_id: ::String,
+                                          snapshot_id: ::String,
+                                          ?options: Array[("DELETE_INTERMEDIATE_SNAPSHOTS" | "DELETE_CLONED_VOLUMES")]
+                                        ) -> _RestoreVolumeFromSnapshotResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreVolumeFromSnapshotResponseSuccess
+
+      interface _StartMisconfiguredStateRecoveryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMisconfiguredStateRecoveryResponse]
+        def file_system: () -> Types::FileSystem
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#start_misconfigured_state_recovery-instance_method
+      def start_misconfigured_state_recovery: (
+                                                ?client_request_token: ::String,
+                                                file_system_id: ::String
+                                              ) -> _StartMisconfiguredStateRecoveryResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMisconfiguredStateRecoveryResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDataRepositoryAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataRepositoryAssociationResponse]
+        def association: () -> Types::DataRepositoryAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#update_data_repository_association-instance_method
+      def update_data_repository_association: (
+                                                association_id: ::String,
+                                                ?client_request_token: ::String,
+                                                ?imported_file_chunk_size: ::Integer,
+                                                ?s3: {
+                                                  auto_import_policy: {
+                                                    events: Array[("NEW" | "CHANGED" | "DELETED")]?
+                                                  }?,
+                                                  auto_export_policy: {
+                                                    events: Array[("NEW" | "CHANGED" | "DELETED")]?
+                                                  }?
+                                                }
+                                              ) -> _UpdateDataRepositoryAssociationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataRepositoryAssociationResponseSuccess
+
+      interface _UpdateFileCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFileCacheResponse]
+        def file_cache: () -> Types::FileCache
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#update_file_cache-instance_method
+      def update_file_cache: (
+                               file_cache_id: ::String,
+                               ?client_request_token: ::String,
+                               ?lustre_configuration: {
+                                 weekly_maintenance_start_time: ::String?
+                               }
+                             ) -> _UpdateFileCacheResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFileCacheResponseSuccess
+
+      interface _UpdateFileSystemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFileSystemResponse]
+        def file_system: () -> Types::FileSystem
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#update_file_system-instance_method
+      def update_file_system: (
+                                file_system_id: ::String,
+                                ?client_request_token: ::String,
+                                ?storage_capacity: ::Integer,
+                                ?windows_configuration: {
+                                  weekly_maintenance_start_time: ::String?,
+                                  daily_automatic_backup_start_time: ::String?,
+                                  automatic_backup_retention_days: ::Integer?,
+                                  throughput_capacity: ::Integer?,
+                                  self_managed_active_directory_configuration: {
+                                    user_name: ::String?,
+                                    password: ::String?,
+                                    dns_ips: Array[::String]?,
+                                    domain_name: ::String?,
+                                    organizational_unit_distinguished_name: ::String?,
+                                    file_system_administrators_group: ::String?
+                                  }?,
+                                  audit_log_configuration: {
+                                    file_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE"),
+                                    file_share_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE"),
+                                    audit_log_destination: ::String?
+                                  }?,
+                                  disk_iops_configuration: {
+                                    mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
+                                    iops: ::Integer?
+                                  }?
+                                },
+                                ?lustre_configuration: {
+                                  weekly_maintenance_start_time: ::String?,
+                                  daily_automatic_backup_start_time: ::String?,
+                                  automatic_backup_retention_days: ::Integer?,
+                                  auto_import_policy: ("NONE" | "NEW" | "NEW_CHANGED" | "NEW_CHANGED_DELETED")?,
+                                  data_compression_type: ("NONE" | "LZ4")?,
+                                  log_configuration: {
+                                    level: ("DISABLED" | "WARN_ONLY" | "ERROR_ONLY" | "WARN_ERROR"),
+                                    destination: ::String?
+                                  }?,
+                                  root_squash_configuration: {
+                                    root_squash: ::String?,
+                                    no_squash_nids: Array[::String]?
+                                  }?,
+                                  per_unit_storage_throughput: ::Integer?
+                                },
+                                ?ontap_configuration: {
+                                  automatic_backup_retention_days: ::Integer?,
+                                  daily_automatic_backup_start_time: ::String?,
+                                  fsx_admin_password: ::String?,
+                                  weekly_maintenance_start_time: ::String?,
+                                  disk_iops_configuration: {
+                                    mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
+                                    iops: ::Integer?
+                                  }?,
+                                  throughput_capacity: ::Integer?,
+                                  add_route_table_ids: Array[::String]?,
+                                  remove_route_table_ids: Array[::String]?,
+                                  throughput_capacity_per_ha_pair: ::Integer?
+                                },
+                                ?open_zfs_configuration: {
+                                  automatic_backup_retention_days: ::Integer?,
+                                  copy_tags_to_backups: bool?,
+                                  copy_tags_to_volumes: bool?,
+                                  daily_automatic_backup_start_time: ::String?,
+                                  throughput_capacity: ::Integer?,
+                                  weekly_maintenance_start_time: ::String?,
+                                  disk_iops_configuration: {
+                                    mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
+                                    iops: ::Integer?
+                                  }?,
+                                  add_route_table_ids: Array[::String]?,
+                                  remove_route_table_ids: Array[::String]?
+                                },
+                                ?storage_type: ("SSD" | "HDD")
+                              ) -> _UpdateFileSystemResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFileSystemResponseSuccess
+
+      interface _UpdateSharedVpcConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSharedVpcConfigurationResponse]
+        def enable_fsx_route_table_updates_from_participant_accounts: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#update_shared_vpc_configuration-instance_method
+      def update_shared_vpc_configuration: (
+                                             ?enable_fsx_route_table_updates_from_participant_accounts: ::String,
+                                             ?client_request_token: ::String
+                                           ) -> _UpdateSharedVpcConfigurationResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSharedVpcConfigurationResponseSuccess
+
+      interface _UpdateSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSnapshotResponse]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#update_snapshot-instance_method
+      def update_snapshot: (
+                             ?client_request_token: ::String,
+                             name: ::String,
+                             snapshot_id: ::String
+                           ) -> _UpdateSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSnapshotResponseSuccess
+
+      interface _UpdateStorageVirtualMachineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStorageVirtualMachineResponse]
+        def storage_virtual_machine: () -> Types::StorageVirtualMachine
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#update_storage_virtual_machine-instance_method
+      def update_storage_virtual_machine: (
+                                            ?active_directory_configuration: {
+                                              self_managed_active_directory_configuration: {
+                                                user_name: ::String?,
+                                                password: ::String?,
+                                                dns_ips: Array[::String]?,
+                                                domain_name: ::String?,
+                                                organizational_unit_distinguished_name: ::String?,
+                                                file_system_administrators_group: ::String?
+                                              }?,
+                                              net_bios_name: ::String?
+                                            },
+                                            ?client_request_token: ::String,
+                                            storage_virtual_machine_id: ::String,
+                                            ?svm_admin_password: ::String
+                                          ) -> _UpdateStorageVirtualMachineResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStorageVirtualMachineResponseSuccess
+
+      interface _UpdateVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVolumeResponse]
+        def volume: () -> Types::Volume
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#update_volume-instance_method
+      def update_volume: (
+                           ?client_request_token: ::String,
+                           volume_id: ::String,
+                           ?ontap_configuration: {
+                             junction_path: ::String?,
+                             security_style: ("UNIX" | "NTFS" | "MIXED")?,
+                             size_in_megabytes: ::Integer?,
+                             storage_efficiency_enabled: bool?,
+                             tiering_policy: {
+                               cooling_period: ::Integer?,
+                               name: ("SNAPSHOT_ONLY" | "AUTO" | "ALL" | "NONE")?
+                             }?,
+                             snapshot_policy: ::String?,
+                             copy_tags_to_backups: bool?,
+                             snaplock_configuration: {
+                               audit_log_volume: bool?,
+                               autocommit_period: {
+                                 type: ("MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "NONE"),
+                                 value: ::Integer?
+                               }?,
+                               privileged_delete: ("DISABLED" | "ENABLED" | "PERMANENTLY_DISABLED")?,
+                               retention_period: {
+                                 default_retention: {
+                                   type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
+                                   value: ::Integer?
+                                 },
+                                 minimum_retention: {
+                                   type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
+                                   value: ::Integer?
+                                 },
+                                 maximum_retention: {
+                                   type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
+                                   value: ::Integer?
+                                 }
+                               }?,
+                               volume_append_mode_enabled: bool?
+                             }?,
+                             size_in_bytes: ::Integer?
+                           },
+                           ?name: ::String,
+                           ?open_zfs_configuration: {
+                             storage_capacity_reservation_gi_b: ::Integer?,
+                             storage_capacity_quota_gi_b: ::Integer?,
+                             record_size_ki_b: ::Integer?,
+                             data_compression_type: ("NONE" | "ZSTD" | "LZ4")?,
+                             nfs_exports: Array[
+                               {
+                                 client_configurations: Array[
+                                   {
+                                     clients: ::String,
+                                     options: Array[::String]
+                                   },
+                                 ]
+                               },
+                             ]?,
+                             user_and_group_quotas: Array[
+                               {
+                                 type: ("USER" | "GROUP"),
+                                 id: ::Integer,
+                                 storage_capacity_quota_gi_b: ::Integer
+                               },
+                             ]?,
+                             read_only: bool?
+                           }
+                         ) -> _UpdateVolumeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVolumeResponseSuccess
+    end
+  end
+end
+

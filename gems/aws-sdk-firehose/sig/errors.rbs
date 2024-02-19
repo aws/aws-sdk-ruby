@@ -1,0 +1,66 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Firehose
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidArgumentException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidKMSResourceException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class InvalidSourceException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+      end
+      class InvalidStreamTypeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def source: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TagrisAccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TagrisInternalServiceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TagrisInvalidArnException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def sweep_list_item: () -> ::String
+      end
+      class TagrisInvalidParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TagrisPartialResourcesExistResultsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_existence_information: () -> ::String
+      end
+      class TagrisThrottledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

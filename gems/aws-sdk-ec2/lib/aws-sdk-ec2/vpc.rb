@@ -368,6 +368,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     client_token: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -377,6 +378,14 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the network ACL.
+    # @option options [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     # @return [NetworkAcl]
     def create_network_acl(options = {})
       options = options.merge(vpc_id: @id)
@@ -405,6 +414,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     client_token: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -414,6 +424,14 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the route table.
+    # @option options [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     # @return [RouteTable]
     def create_route_table(options = {})
       options = options.merge(vpc_id: @id)
@@ -500,6 +518,10 @@ module Aws::EC2
     #     outpost_arn: "String",
     #     dry_run: false,
     #     ipv_6_native: false,
+    #     ipv_4_ipam_pool_id: "IpamPoolId",
+    #     ipv_4_netmask_length: 1,
+    #     ipv_6_ipam_pool_id: "IpamPoolId",
+    #     ipv_6_netmask_length: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::TagSpecification>] :tag_specifications
@@ -531,10 +553,8 @@ module Aws::EC2
     #
     #   This parameter is not supported for an IPv6 only subnet.
     # @option options [String] :ipv_6_cidr_block
-    #   The IPv6 network range for the subnet, in CIDR notation. The subnet
-    #   size must use a /64 prefix length.
-    #
-    #   This parameter is required for an IPv6 only subnet.
+    #   The IPv6 network range for the subnet, in CIDR notation. This
+    #   parameter is required for an IPv6 only subnet.
     # @option options [String] :outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost. If you specify an
     #   Outpost ARN, you must also specify the Availability Zone of the
@@ -546,6 +566,14 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Boolean] :ipv_6_native
     #   Indicates whether to create an IPv6 only subnet.
+    # @option options [String] :ipv_4_ipam_pool_id
+    #   An IPv4 IPAM pool ID for the subnet.
+    # @option options [Integer] :ipv_4_netmask_length
+    #   An IPv4 netmask length for the subnet.
+    # @option options [String] :ipv_6_ipam_pool_id
+    #   An IPv6 IPAM pool ID for the subnet.
+    # @option options [Integer] :ipv_6_netmask_length
+    #   An IPv6 netmask length for the subnet.
     # @return [Subnet]
     def create_subnet(options = {})
       options = options.merge(vpc_id: @id)
@@ -1066,8 +1094,9 @@ module Aws::EC2
     #
     #   * `instance-id` - The ID of the instance.
     #
-    #   * `instance-lifecycle` - Indicates whether this is a Spot Instance or
-    #     a Scheduled Instance (`spot` \| `scheduled`).
+    #   * `instance-lifecycle` - Indicates whether this is a Spot Instance, a
+    #     Scheduled Instance, or a Capacity Block (`spot` \| `scheduled` \|
+    #     `capacity-block`).
     #
     #   * `instance-state-code` - The state of the instance, as a 16-bit
     #     unsigned integer. The high byte is used for internal purposes and
@@ -1882,6 +1911,9 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
+    #
+    #   * `association.gateway-id` - The ID of the gateway involved in the
+    #     association.
     #
     #   * `association.route-table-association-id` - The ID of an association
     #     ID for the route table.

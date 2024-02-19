@@ -1,0 +1,1404 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MediaConnect
+  module Types
+
+    class AddBridgeFlowSourceRequest
+      attr_accessor flow_arn: ::String
+      attr_accessor flow_vpc_interface_attachment: Types::VpcInterfaceAttachment
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AddBridgeNetworkOutputRequest
+      attr_accessor ip_address: ::String
+      attr_accessor name: ::String
+      attr_accessor network_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor ttl: ::Integer
+      SENSITIVE: []
+    end
+
+    class AddBridgeNetworkSourceRequest
+      attr_accessor multicast_ip: ::String
+      attr_accessor name: ::String
+      attr_accessor network_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      SENSITIVE: []
+    end
+
+    class AddBridgeOutputRequest
+      attr_accessor network_output: Types::AddBridgeNetworkOutputRequest
+      SENSITIVE: []
+    end
+
+    class AddBridgeOutputsRequest
+      attr_accessor bridge_arn: ::String
+      attr_accessor outputs: ::Array[Types::AddBridgeOutputRequest]
+      SENSITIVE: []
+    end
+
+    class AddBridgeOutputsResponse
+      attr_accessor bridge_arn: ::String
+      attr_accessor outputs: ::Array[Types::BridgeOutput]
+      SENSITIVE: []
+    end
+
+    class AddBridgeSourceRequest
+      attr_accessor flow_source: Types::AddBridgeFlowSourceRequest
+      attr_accessor network_source: Types::AddBridgeNetworkSourceRequest
+      SENSITIVE: []
+    end
+
+    class AddBridgeSourcesRequest
+      attr_accessor bridge_arn: ::String
+      attr_accessor sources: ::Array[Types::AddBridgeSourceRequest]
+      SENSITIVE: []
+    end
+
+    class AddBridgeSourcesResponse
+      attr_accessor bridge_arn: ::String
+      attr_accessor sources: ::Array[Types::BridgeSource]
+      SENSITIVE: []
+    end
+
+    class AddEgressGatewayBridgeRequest
+      attr_accessor max_bitrate: ::Integer
+      SENSITIVE: []
+    end
+
+    class AddFlowMediaStreamsRequest
+      attr_accessor flow_arn: ::String
+      attr_accessor media_streams: ::Array[Types::AddMediaStreamRequest]
+      SENSITIVE: []
+    end
+
+    class AddFlowMediaStreamsResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor media_streams: ::Array[Types::MediaStream]
+      SENSITIVE: []
+    end
+
+    class AddFlowOutputs420Exception
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AddFlowOutputsRequest
+      attr_accessor flow_arn: ::String
+      attr_accessor outputs: ::Array[Types::AddOutputRequest]
+      SENSITIVE: []
+    end
+
+    class AddFlowOutputsResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor outputs: ::Array[Types::Output]
+      SENSITIVE: []
+    end
+
+    class AddFlowSourcesRequest
+      attr_accessor flow_arn: ::String
+      attr_accessor sources: ::Array[Types::SetSourceRequest]
+      SENSITIVE: []
+    end
+
+    class AddFlowSourcesResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor sources: ::Array[Types::Source]
+      SENSITIVE: []
+    end
+
+    class AddFlowVpcInterfacesRequest
+      attr_accessor flow_arn: ::String
+      attr_accessor vpc_interfaces: ::Array[Types::VpcInterfaceRequest]
+      SENSITIVE: []
+    end
+
+    class AddFlowVpcInterfacesResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor vpc_interfaces: ::Array[Types::VpcInterface]
+      SENSITIVE: []
+    end
+
+    class AddIngressGatewayBridgeRequest
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor max_outputs: ::Integer
+      SENSITIVE: []
+    end
+
+    class AddMaintenance
+      attr_accessor maintenance_day: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday")
+      attr_accessor maintenance_start_hour: ::String
+      SENSITIVE: []
+    end
+
+    class AddMediaStreamRequest
+      attr_accessor attributes: Types::MediaStreamAttributesRequest
+      attr_accessor clock_rate: ::Integer
+      attr_accessor description: ::String
+      attr_accessor media_stream_id: ::Integer
+      attr_accessor media_stream_name: ::String
+      attr_accessor media_stream_type: ("video" | "audio" | "ancillary-data")
+      attr_accessor video_format: ::String
+      SENSITIVE: []
+    end
+
+    class AddOutputRequest
+      attr_accessor cidr_allow_list: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor destination: ::String
+      attr_accessor encryption: Types::Encryption
+      attr_accessor max_latency: ::Integer
+      attr_accessor media_stream_output_configurations: ::Array[Types::MediaStreamOutputConfigurationRequest]
+      attr_accessor min_latency: ::Integer
+      attr_accessor name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor remote_id: ::String
+      attr_accessor sender_control_port: ::Integer
+      attr_accessor smoothing_latency: ::Integer
+      attr_accessor stream_id: ::String
+      attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Bridge
+      attr_accessor bridge_arn: ::String
+      attr_accessor bridge_messages: ::Array[Types::MessageDetail]
+      attr_accessor bridge_state: ("CREATING" | "STANDBY" | "STARTING" | "DEPLOYING" | "ACTIVE" | "STOPPING" | "DELETING" | "DELETED" | "START_FAILED" | "START_PENDING" | "STOP_FAILED" | "UPDATING")
+      attr_accessor egress_gateway_bridge: Types::EgressGatewayBridge
+      attr_accessor ingress_gateway_bridge: Types::IngressGatewayBridge
+      attr_accessor name: ::String
+      attr_accessor outputs: ::Array[Types::BridgeOutput]
+      attr_accessor placement_arn: ::String
+      attr_accessor source_failover_config: Types::FailoverConfig
+      attr_accessor sources: ::Array[Types::BridgeSource]
+      SENSITIVE: []
+    end
+
+    class BridgeFlowOutput
+      attr_accessor flow_arn: ::String
+      attr_accessor flow_source_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class BridgeFlowSource
+      attr_accessor flow_arn: ::String
+      attr_accessor flow_vpc_interface_attachment: Types::VpcInterfaceAttachment
+      attr_accessor name: ::String
+      attr_accessor output_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BridgeNetworkOutput
+      attr_accessor ip_address: ::String
+      attr_accessor name: ::String
+      attr_accessor network_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor ttl: ::Integer
+      SENSITIVE: []
+    end
+
+    class BridgeNetworkSource
+      attr_accessor multicast_ip: ::String
+      attr_accessor name: ::String
+      attr_accessor network_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      SENSITIVE: []
+    end
+
+    class BridgeOutput
+      attr_accessor flow_output: Types::BridgeFlowOutput
+      attr_accessor network_output: Types::BridgeNetworkOutput
+      SENSITIVE: []
+    end
+
+    class BridgeSource
+      attr_accessor flow_source: Types::BridgeFlowSource
+      attr_accessor network_source: Types::BridgeNetworkSource
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBridge420Exception
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBridgeRequest
+      attr_accessor egress_gateway_bridge: Types::AddEgressGatewayBridgeRequest
+      attr_accessor ingress_gateway_bridge: Types::AddIngressGatewayBridgeRequest
+      attr_accessor name: ::String
+      attr_accessor outputs: ::Array[Types::AddBridgeOutputRequest]
+      attr_accessor placement_arn: ::String
+      attr_accessor source_failover_config: Types::FailoverConfig
+      attr_accessor sources: ::Array[Types::AddBridgeSourceRequest]
+      SENSITIVE: []
+    end
+
+    class CreateBridgeResponse
+      attr_accessor bridge: Types::Bridge
+      SENSITIVE: []
+    end
+
+    class CreateFlow420Exception
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFlowRequest
+      attr_accessor availability_zone: ::String
+      attr_accessor entitlements: ::Array[Types::GrantEntitlementRequest]
+      attr_accessor media_streams: ::Array[Types::AddMediaStreamRequest]
+      attr_accessor name: ::String
+      attr_accessor outputs: ::Array[Types::AddOutputRequest]
+      attr_accessor source: Types::SetSourceRequest
+      attr_accessor source_failover_config: Types::FailoverConfig
+      attr_accessor sources: ::Array[Types::SetSourceRequest]
+      attr_accessor vpc_interfaces: ::Array[Types::VpcInterfaceRequest]
+      attr_accessor maintenance: Types::AddMaintenance
+      SENSITIVE: []
+    end
+
+    class CreateFlowResponse
+      attr_accessor flow: Types::Flow
+      SENSITIVE: []
+    end
+
+    class CreateGateway420Exception
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGatewayRequest
+      attr_accessor egress_cidr_blocks: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor networks: ::Array[Types::GatewayNetwork]
+      SENSITIVE: []
+    end
+
+    class CreateGatewayResponse
+      attr_accessor gateway: Types::Gateway
+      SENSITIVE: []
+    end
+
+    class DeleteBridgeRequest
+      attr_accessor bridge_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBridgeResponse
+      attr_accessor bridge_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFlowRequest
+      attr_accessor flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFlowResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor status: ("STANDBY" | "ACTIVE" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayRequest
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayResponse
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterGatewayInstanceRequest
+      attr_accessor force: bool
+      attr_accessor gateway_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterGatewayInstanceResponse
+      attr_accessor gateway_instance_arn: ::String
+      attr_accessor instance_state: ("REGISTERING" | "ACTIVE" | "DEREGISTERING" | "DEREGISTERED" | "REGISTRATION_ERROR" | "DEREGISTRATION_ERROR")
+      SENSITIVE: []
+    end
+
+    class DescribeBridgeRequest
+      attr_accessor bridge_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBridgeResponse
+      attr_accessor bridge: Types::Bridge
+      SENSITIVE: []
+    end
+
+    class DescribeFlowRequest
+      attr_accessor flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFlowResponse
+      attr_accessor flow: Types::Flow
+      attr_accessor messages: Types::Messages
+      SENSITIVE: []
+    end
+
+    class DescribeFlowSourceMetadataRequest
+      attr_accessor flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFlowSourceMetadataResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor messages: ::Array[Types::MessageDetail]
+      attr_accessor timestamp: ::Time
+      attr_accessor transport_media_info: Types::TransportMediaInfo
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayInstanceRequest
+      attr_accessor gateway_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayInstanceResponse
+      attr_accessor gateway_instance: Types::GatewayInstance
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayRequest
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayResponse
+      attr_accessor gateway: Types::Gateway
+      SENSITIVE: []
+    end
+
+    class DescribeOfferingRequest
+      attr_accessor offering_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOfferingResponse
+      attr_accessor offering: Types::Offering
+      SENSITIVE: []
+    end
+
+    class DescribeReservationRequest
+      attr_accessor reservation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReservationResponse
+      attr_accessor reservation: Types::Reservation
+      SENSITIVE: []
+    end
+
+    class DestinationConfiguration
+      attr_accessor destination_ip: ::String
+      attr_accessor destination_port: ::Integer
+      attr_accessor interface: Types::Interface
+      attr_accessor outbound_ip: ::String
+      SENSITIVE: []
+    end
+
+    class DestinationConfigurationRequest
+      attr_accessor destination_ip: ::String
+      attr_accessor destination_port: ::Integer
+      attr_accessor interface: Types::InterfaceRequest
+      SENSITIVE: []
+    end
+
+    class EgressGatewayBridge
+      attr_accessor instance_id: ::String
+      attr_accessor max_bitrate: ::Integer
+      SENSITIVE: []
+    end
+
+    class EncodingParameters
+      attr_accessor compression_factor: ::Float
+      attr_accessor encoder_profile: ("main" | "high")
+      SENSITIVE: []
+    end
+
+    class EncodingParametersRequest
+      attr_accessor compression_factor: ::Float
+      attr_accessor encoder_profile: ("main" | "high")
+      SENSITIVE: []
+    end
+
+    class Encryption
+      attr_accessor algorithm: ("aes128" | "aes192" | "aes256")
+      attr_accessor constant_initialization_vector: ::String
+      attr_accessor device_id: ::String
+      attr_accessor key_type: ("speke" | "static-key" | "srt-password")
+      attr_accessor region: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class Entitlement
+      attr_accessor data_transfer_subscriber_fee_percent: ::Integer
+      attr_accessor description: ::String
+      attr_accessor encryption: Types::Encryption
+      attr_accessor entitlement_arn: ::String
+      attr_accessor entitlement_status: ("ENABLED" | "DISABLED")
+      attr_accessor name: ::String
+      attr_accessor subscribers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FailoverConfig
+      attr_accessor failover_mode: ("MERGE" | "FAILOVER")
+      attr_accessor recovery_window: ::Integer
+      attr_accessor source_priority: Types::SourcePriority
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class Flow
+      attr_accessor availability_zone: ::String
+      attr_accessor description: ::String
+      attr_accessor egress_ip: ::String
+      attr_accessor entitlements: ::Array[Types::Entitlement]
+      attr_accessor flow_arn: ::String
+      attr_accessor media_streams: ::Array[Types::MediaStream]
+      attr_accessor name: ::String
+      attr_accessor outputs: ::Array[Types::Output]
+      attr_accessor source: Types::Source
+      attr_accessor source_failover_config: Types::FailoverConfig
+      attr_accessor sources: ::Array[Types::Source]
+      attr_accessor status: ("STANDBY" | "ACTIVE" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "ERROR")
+      attr_accessor vpc_interfaces: ::Array[Types::VpcInterface]
+      attr_accessor maintenance: Types::Maintenance
+      SENSITIVE: []
+    end
+
+    class Fmtp
+      attr_accessor channel_order: ::String
+      attr_accessor colorimetry: ("BT601" | "BT709" | "BT2020" | "BT2100" | "ST2065-1" | "ST2065-3" | "XYZ")
+      attr_accessor exact_framerate: ::String
+      attr_accessor par: ::String
+      attr_accessor range: ("NARROW" | "FULL" | "FULLPROTECT")
+      attr_accessor scan_mode: ("progressive" | "interlace" | "progressive-segmented-frame")
+      attr_accessor tcs: ("SDR" | "PQ" | "HLG" | "LINEAR" | "BT2100LINPQ" | "BT2100LINHLG" | "ST2065-1" | "ST428-1" | "DENSITY")
+      SENSITIVE: []
+    end
+
+    class FmtpRequest
+      attr_accessor channel_order: ::String
+      attr_accessor colorimetry: ("BT601" | "BT709" | "BT2020" | "BT2100" | "ST2065-1" | "ST2065-3" | "XYZ")
+      attr_accessor exact_framerate: ::String
+      attr_accessor par: ::String
+      attr_accessor range: ("NARROW" | "FULL" | "FULLPROTECT")
+      attr_accessor scan_mode: ("progressive" | "interlace" | "progressive-segmented-frame")
+      attr_accessor tcs: ("SDR" | "PQ" | "HLG" | "LINEAR" | "BT2100LINPQ" | "BT2100LINHLG" | "ST2065-1" | "ST428-1" | "DENSITY")
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FrameResolution
+      attr_accessor frame_height: ::Integer
+      attr_accessor frame_width: ::Integer
+      SENSITIVE: []
+    end
+
+    class Gateway
+      attr_accessor egress_cidr_blocks: ::Array[::String]
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_messages: ::Array[Types::MessageDetail]
+      attr_accessor gateway_state: ("CREATING" | "ACTIVE" | "UPDATING" | "ERROR" | "DELETING" | "DELETED")
+      attr_accessor name: ::String
+      attr_accessor networks: ::Array[Types::GatewayNetwork]
+      SENSITIVE: []
+    end
+
+    class GatewayBridgeSource
+      attr_accessor bridge_arn: ::String
+      attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment
+      SENSITIVE: []
+    end
+
+    class GatewayInstance
+      attr_accessor bridge_placement: ("AVAILABLE" | "LOCKED")
+      attr_accessor connection_status: ("CONNECTED" | "DISCONNECTED")
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_instance_arn: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor instance_messages: ::Array[Types::MessageDetail]
+      attr_accessor instance_state: ("REGISTERING" | "ACTIVE" | "DEREGISTERING" | "DEREGISTERED" | "REGISTRATION_ERROR" | "DEREGISTRATION_ERROR")
+      attr_accessor running_bridge_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class GatewayNetwork
+      attr_accessor cidr_block: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GrantEntitlementRequest
+      attr_accessor data_transfer_subscriber_fee_percent: ::Integer
+      attr_accessor description: ::String
+      attr_accessor encryption: Types::Encryption
+      attr_accessor entitlement_status: ("ENABLED" | "DISABLED")
+      attr_accessor name: ::String
+      attr_accessor subscribers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GrantFlowEntitlements420Exception
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GrantFlowEntitlementsRequest
+      attr_accessor entitlements: ::Array[Types::GrantEntitlementRequest]
+      attr_accessor flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GrantFlowEntitlementsResponse
+      attr_accessor entitlements: ::Array[Types::Entitlement]
+      attr_accessor flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class IngressGatewayBridge
+      attr_accessor instance_id: ::String
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor max_outputs: ::Integer
+      SENSITIVE: []
+    end
+
+    class InputConfiguration
+      attr_accessor input_ip: ::String
+      attr_accessor input_port: ::Integer
+      attr_accessor interface: Types::Interface
+      SENSITIVE: []
+    end
+
+    class InputConfigurationRequest
+      attr_accessor input_port: ::Integer
+      attr_accessor interface: Types::InterfaceRequest
+      SENSITIVE: []
+    end
+
+    class Interface
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class InterfaceRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListBridgesRequest
+      attr_accessor filter_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBridgesResponse
+      attr_accessor bridges: ::Array[Types::ListedBridge]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntitlementsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntitlementsResponse
+      attr_accessor entitlements: ::Array[Types::ListedEntitlement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFlowsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFlowsResponse
+      attr_accessor flows: ::Array[Types::ListedFlow]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewayInstancesRequest
+      attr_accessor filter_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewayInstancesResponse
+      attr_accessor instances: ::Array[Types::ListedGatewayInstance]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewaysRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewaysResponse
+      attr_accessor gateways: ::Array[Types::ListedGateway]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOfferingsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOfferingsResponse
+      attr_accessor next_token: ::String
+      attr_accessor offerings: ::Array[Types::Offering]
+      SENSITIVE: []
+    end
+
+    class ListReservationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReservationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor reservations: ::Array[Types::Reservation]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListedBridge
+      attr_accessor bridge_arn: ::String
+      attr_accessor bridge_state: ("CREATING" | "STANDBY" | "STARTING" | "DEPLOYING" | "ACTIVE" | "STOPPING" | "DELETING" | "DELETED" | "START_FAILED" | "START_PENDING" | "STOP_FAILED" | "UPDATING")
+      attr_accessor bridge_type: ::String
+      attr_accessor name: ::String
+      attr_accessor placement_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListedEntitlement
+      attr_accessor data_transfer_subscriber_fee_percent: ::Integer
+      attr_accessor entitlement_arn: ::String
+      attr_accessor entitlement_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListedFlow
+      attr_accessor availability_zone: ::String
+      attr_accessor description: ::String
+      attr_accessor flow_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor source_type: ("OWNED" | "ENTITLED")
+      attr_accessor status: ("STANDBY" | "ACTIVE" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "ERROR")
+      attr_accessor maintenance: Types::Maintenance
+      SENSITIVE: []
+    end
+
+    class ListedGateway
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_state: ("CREATING" | "ACTIVE" | "UPDATING" | "ERROR" | "DELETING" | "DELETED")
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ListedGatewayInstance
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_instance_arn: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor instance_state: ("REGISTERING" | "ACTIVE" | "DEREGISTERING" | "DEREGISTERED" | "REGISTRATION_ERROR" | "DEREGISTRATION_ERROR")
+      SENSITIVE: []
+    end
+
+    class Maintenance
+      attr_accessor maintenance_day: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday")
+      attr_accessor maintenance_deadline: ::String
+      attr_accessor maintenance_scheduled_date: ::String
+      attr_accessor maintenance_start_hour: ::String
+      SENSITIVE: []
+    end
+
+    class MediaStream
+      attr_accessor attributes: Types::MediaStreamAttributes
+      attr_accessor clock_rate: ::Integer
+      attr_accessor description: ::String
+      attr_accessor fmt: ::Integer
+      attr_accessor media_stream_id: ::Integer
+      attr_accessor media_stream_name: ::String
+      attr_accessor media_stream_type: ("video" | "audio" | "ancillary-data")
+      attr_accessor video_format: ::String
+      SENSITIVE: []
+    end
+
+    class MediaStreamAttributes
+      attr_accessor fmtp: Types::Fmtp
+      attr_accessor lang: ::String
+      SENSITIVE: []
+    end
+
+    class MediaStreamAttributesRequest
+      attr_accessor fmtp: Types::FmtpRequest
+      attr_accessor lang: ::String
+      SENSITIVE: []
+    end
+
+    class MediaStreamOutputConfiguration
+      attr_accessor destination_configurations: ::Array[Types::DestinationConfiguration]
+      attr_accessor encoding_name: ("jxsv" | "raw" | "smpte291" | "pcm")
+      attr_accessor encoding_parameters: Types::EncodingParameters
+      attr_accessor media_stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class MediaStreamOutputConfigurationRequest
+      attr_accessor destination_configurations: ::Array[Types::DestinationConfigurationRequest]
+      attr_accessor encoding_name: ("jxsv" | "raw" | "smpte291" | "pcm")
+      attr_accessor encoding_parameters: Types::EncodingParametersRequest
+      attr_accessor media_stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class MediaStreamSourceConfiguration
+      attr_accessor encoding_name: ("jxsv" | "raw" | "smpte291" | "pcm")
+      attr_accessor input_configurations: ::Array[Types::InputConfiguration]
+      attr_accessor media_stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class MediaStreamSourceConfigurationRequest
+      attr_accessor encoding_name: ("jxsv" | "raw" | "smpte291" | "pcm")
+      attr_accessor input_configurations: ::Array[Types::InputConfigurationRequest]
+      attr_accessor media_stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class MessageDetail
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class Messages
+      attr_accessor errors: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Offering
+      attr_accessor currency_code: ::String
+      attr_accessor duration: ::Integer
+      attr_accessor duration_units: ("MONTHS")
+      attr_accessor offering_arn: ::String
+      attr_accessor offering_description: ::String
+      attr_accessor price_per_unit: ::String
+      attr_accessor price_units: ("HOURLY")
+      attr_accessor resource_specification: Types::ResourceSpecification
+      SENSITIVE: []
+    end
+
+    class Output
+      attr_accessor data_transfer_subscriber_fee_percent: ::Integer
+      attr_accessor description: ::String
+      attr_accessor destination: ::String
+      attr_accessor encryption: Types::Encryption
+      attr_accessor entitlement_arn: ::String
+      attr_accessor listener_address: ::String
+      attr_accessor media_live_input_arn: ::String
+      attr_accessor media_stream_output_configurations: ::Array[Types::MediaStreamOutputConfiguration]
+      attr_accessor name: ::String
+      attr_accessor output_arn: ::String
+      attr_accessor port: ::Integer
+      attr_accessor transport: Types::Transport
+      attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment
+      attr_accessor bridge_arn: ::String
+      attr_accessor bridge_ports: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class PurchaseOfferingRequest
+      attr_accessor offering_arn: ::String
+      attr_accessor reservation_name: ::String
+      attr_accessor start: ::String
+      SENSITIVE: []
+    end
+
+    class PurchaseOfferingResponse
+      attr_accessor reservation: Types::Reservation
+      SENSITIVE: []
+    end
+
+    class RemoveBridgeOutputRequest
+      attr_accessor bridge_arn: ::String
+      attr_accessor output_name: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveBridgeOutputResponse
+      attr_accessor bridge_arn: ::String
+      attr_accessor output_name: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveBridgeSourceRequest
+      attr_accessor bridge_arn: ::String
+      attr_accessor source_name: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveBridgeSourceResponse
+      attr_accessor bridge_arn: ::String
+      attr_accessor source_name: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveFlowMediaStreamRequest
+      attr_accessor flow_arn: ::String
+      attr_accessor media_stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveFlowMediaStreamResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor media_stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveFlowOutputRequest
+      attr_accessor flow_arn: ::String
+      attr_accessor output_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveFlowOutputResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor output_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveFlowSourceRequest
+      attr_accessor flow_arn: ::String
+      attr_accessor source_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveFlowSourceResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor source_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveFlowVpcInterfaceRequest
+      attr_accessor flow_arn: ::String
+      attr_accessor vpc_interface_name: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveFlowVpcInterfaceResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor non_deleted_network_interface_ids: ::Array[::String]
+      attr_accessor vpc_interface_name: ::String
+      SENSITIVE: []
+    end
+
+    class Reservation
+      attr_accessor currency_code: ::String
+      attr_accessor duration: ::Integer
+      attr_accessor duration_units: ("MONTHS")
+      attr_accessor end: ::String
+      attr_accessor offering_arn: ::String
+      attr_accessor offering_description: ::String
+      attr_accessor price_per_unit: ::String
+      attr_accessor price_units: ("HOURLY")
+      attr_accessor reservation_arn: ::String
+      attr_accessor reservation_name: ::String
+      attr_accessor reservation_state: ("ACTIVE" | "EXPIRED" | "PROCESSING" | "CANCELED")
+      attr_accessor resource_specification: Types::ResourceSpecification
+      attr_accessor start: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceSpecification
+      attr_accessor reserved_bitrate: ::Integer
+      attr_accessor resource_type: ("Mbps_Outbound_Bandwidth")
+      SENSITIVE: []
+    end
+
+    class ResponseError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeFlowEntitlementRequest
+      attr_accessor entitlement_arn: ::String
+      attr_accessor flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeFlowEntitlementResponse
+      attr_accessor entitlement_arn: ::String
+      attr_accessor flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SetGatewayBridgeSourceRequest
+      attr_accessor bridge_arn: ::String
+      attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment
+      SENSITIVE: []
+    end
+
+    class SetSourceRequest
+      attr_accessor decryption: Types::Encryption
+      attr_accessor description: ::String
+      attr_accessor entitlement_arn: ::String
+      attr_accessor ingest_port: ::Integer
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor max_latency: ::Integer
+      attr_accessor max_sync_buffer: ::Integer
+      attr_accessor media_stream_source_configurations: ::Array[Types::MediaStreamSourceConfigurationRequest]
+      attr_accessor min_latency: ::Integer
+      attr_accessor name: ::String
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor sender_control_port: ::Integer
+      attr_accessor sender_ip_address: ::String
+      attr_accessor source_listener_address: ::String
+      attr_accessor source_listener_port: ::Integer
+      attr_accessor stream_id: ::String
+      attr_accessor vpc_interface_name: ::String
+      attr_accessor whitelist_cidr: ::String
+      attr_accessor gateway_bridge_source: Types::SetGatewayBridgeSourceRequest
+      SENSITIVE: []
+    end
+
+    class Source
+      attr_accessor data_transfer_subscriber_fee_percent: ::Integer
+      attr_accessor decryption: Types::Encryption
+      attr_accessor description: ::String
+      attr_accessor entitlement_arn: ::String
+      attr_accessor ingest_ip: ::String
+      attr_accessor ingest_port: ::Integer
+      attr_accessor media_stream_source_configurations: ::Array[Types::MediaStreamSourceConfiguration]
+      attr_accessor name: ::String
+      attr_accessor sender_control_port: ::Integer
+      attr_accessor sender_ip_address: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor transport: Types::Transport
+      attr_accessor vpc_interface_name: ::String
+      attr_accessor whitelist_cidr: ::String
+      attr_accessor gateway_bridge_source: Types::GatewayBridgeSource
+      SENSITIVE: []
+    end
+
+    class SourcePriority
+      attr_accessor primary_source: ::String
+      SENSITIVE: []
+    end
+
+    class StartFlowRequest
+      attr_accessor flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartFlowResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor status: ("STANDBY" | "ACTIVE" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class StopFlowRequest
+      attr_accessor flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopFlowResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor status: ("STANDBY" | "ACTIVE" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Transport
+      attr_accessor cidr_allow_list: ::Array[::String]
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor max_latency: ::Integer
+      attr_accessor max_sync_buffer: ::Integer
+      attr_accessor min_latency: ::Integer
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor remote_id: ::String
+      attr_accessor sender_control_port: ::Integer
+      attr_accessor sender_ip_address: ::String
+      attr_accessor smoothing_latency: ::Integer
+      attr_accessor source_listener_address: ::String
+      attr_accessor source_listener_port: ::Integer
+      attr_accessor stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class TransportMediaInfo
+      attr_accessor programs: ::Array[Types::TransportStreamProgram]
+      SENSITIVE: []
+    end
+
+    class TransportStream
+      attr_accessor channels: ::Integer
+      attr_accessor codec: ::String
+      attr_accessor frame_rate: ::String
+      attr_accessor frame_resolution: Types::FrameResolution
+      attr_accessor pid: ::Integer
+      attr_accessor sample_rate: ::Integer
+      attr_accessor sample_size: ::Integer
+      attr_accessor stream_type: ::String
+      SENSITIVE: []
+    end
+
+    class TransportStreamProgram
+      attr_accessor pcr_pid: ::Integer
+      attr_accessor program_name: ::String
+      attr_accessor program_number: ::Integer
+      attr_accessor program_pid: ::Integer
+      attr_accessor streams: ::Array[Types::TransportStream]
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateBridgeFlowSourceRequest
+      attr_accessor flow_arn: ::String
+      attr_accessor flow_vpc_interface_attachment: Types::VpcInterfaceAttachment
+      SENSITIVE: []
+    end
+
+    class UpdateBridgeNetworkOutputRequest
+      attr_accessor ip_address: ::String
+      attr_accessor network_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor ttl: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateBridgeNetworkSourceRequest
+      attr_accessor multicast_ip: ::String
+      attr_accessor network_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      SENSITIVE: []
+    end
+
+    class UpdateBridgeOutputRequest
+      attr_accessor bridge_arn: ::String
+      attr_accessor network_output: Types::UpdateBridgeNetworkOutputRequest
+      attr_accessor output_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBridgeOutputResponse
+      attr_accessor bridge_arn: ::String
+      attr_accessor output: Types::BridgeOutput
+      SENSITIVE: []
+    end
+
+    class UpdateBridgeRequest
+      attr_accessor bridge_arn: ::String
+      attr_accessor egress_gateway_bridge: Types::UpdateEgressGatewayBridgeRequest
+      attr_accessor ingress_gateway_bridge: Types::UpdateIngressGatewayBridgeRequest
+      attr_accessor source_failover_config: Types::UpdateFailoverConfig
+      SENSITIVE: []
+    end
+
+    class UpdateBridgeResponse
+      attr_accessor bridge: Types::Bridge
+      SENSITIVE: []
+    end
+
+    class UpdateBridgeSourceRequest
+      attr_accessor bridge_arn: ::String
+      attr_accessor flow_source: Types::UpdateBridgeFlowSourceRequest
+      attr_accessor network_source: Types::UpdateBridgeNetworkSourceRequest
+      attr_accessor source_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBridgeSourceResponse
+      attr_accessor bridge_arn: ::String
+      attr_accessor source: Types::BridgeSource
+      SENSITIVE: []
+    end
+
+    class UpdateBridgeStateRequest
+      attr_accessor bridge_arn: ::String
+      attr_accessor desired_state: ("ACTIVE" | "STANDBY" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class UpdateBridgeStateResponse
+      attr_accessor bridge_arn: ::String
+      attr_accessor desired_state: ("ACTIVE" | "STANDBY" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class UpdateEgressGatewayBridgeRequest
+      attr_accessor max_bitrate: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateEncryption
+      attr_accessor algorithm: ("aes128" | "aes192" | "aes256")
+      attr_accessor constant_initialization_vector: ::String
+      attr_accessor device_id: ::String
+      attr_accessor key_type: ("speke" | "static-key" | "srt-password")
+      attr_accessor region: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFailoverConfig
+      attr_accessor failover_mode: ("MERGE" | "FAILOVER")
+      attr_accessor recovery_window: ::Integer
+      attr_accessor source_priority: Types::SourcePriority
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateFlowEntitlementRequest
+      attr_accessor description: ::String
+      attr_accessor encryption: Types::UpdateEncryption
+      attr_accessor entitlement_arn: ::String
+      attr_accessor entitlement_status: ("ENABLED" | "DISABLED")
+      attr_accessor flow_arn: ::String
+      attr_accessor subscribers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateFlowEntitlementResponse
+      attr_accessor entitlement: Types::Entitlement
+      attr_accessor flow_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFlowMediaStreamRequest
+      attr_accessor attributes: Types::MediaStreamAttributesRequest
+      attr_accessor clock_rate: ::Integer
+      attr_accessor description: ::String
+      attr_accessor flow_arn: ::String
+      attr_accessor media_stream_name: ::String
+      attr_accessor media_stream_type: ("video" | "audio" | "ancillary-data")
+      attr_accessor video_format: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFlowMediaStreamResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor media_stream: Types::MediaStream
+      SENSITIVE: []
+    end
+
+    class UpdateFlowOutputRequest
+      attr_accessor cidr_allow_list: ::Array[::String]
+      attr_accessor description: ::String
+      attr_accessor destination: ::String
+      attr_accessor encryption: Types::UpdateEncryption
+      attr_accessor flow_arn: ::String
+      attr_accessor max_latency: ::Integer
+      attr_accessor media_stream_output_configurations: ::Array[Types::MediaStreamOutputConfigurationRequest]
+      attr_accessor min_latency: ::Integer
+      attr_accessor output_arn: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor remote_id: ::String
+      attr_accessor sender_control_port: ::Integer
+      attr_accessor sender_ip_address: ::String
+      attr_accessor smoothing_latency: ::Integer
+      attr_accessor stream_id: ::String
+      attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment
+      SENSITIVE: []
+    end
+
+    class UpdateFlowOutputResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor output: Types::Output
+      SENSITIVE: []
+    end
+
+    class UpdateFlowRequest
+      attr_accessor flow_arn: ::String
+      attr_accessor source_failover_config: Types::UpdateFailoverConfig
+      attr_accessor maintenance: Types::UpdateMaintenance
+      SENSITIVE: []
+    end
+
+    class UpdateFlowResponse
+      attr_accessor flow: Types::Flow
+      SENSITIVE: []
+    end
+
+    class UpdateFlowSourceRequest
+      attr_accessor decryption: Types::UpdateEncryption
+      attr_accessor description: ::String
+      attr_accessor entitlement_arn: ::String
+      attr_accessor flow_arn: ::String
+      attr_accessor ingest_port: ::Integer
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor max_latency: ::Integer
+      attr_accessor max_sync_buffer: ::Integer
+      attr_accessor media_stream_source_configurations: ::Array[Types::MediaStreamSourceConfigurationRequest]
+      attr_accessor min_latency: ::Integer
+      attr_accessor protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp")
+      attr_accessor sender_control_port: ::Integer
+      attr_accessor sender_ip_address: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor source_listener_address: ::String
+      attr_accessor source_listener_port: ::Integer
+      attr_accessor stream_id: ::String
+      attr_accessor vpc_interface_name: ::String
+      attr_accessor whitelist_cidr: ::String
+      attr_accessor gateway_bridge_source: Types::UpdateGatewayBridgeSourceRequest
+      SENSITIVE: []
+    end
+
+    class UpdateFlowSourceResponse
+      attr_accessor flow_arn: ::String
+      attr_accessor source: Types::Source
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayBridgeSourceRequest
+      attr_accessor bridge_arn: ::String
+      attr_accessor vpc_interface_attachment: Types::VpcInterfaceAttachment
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayInstanceRequest
+      attr_accessor bridge_placement: ("AVAILABLE" | "LOCKED")
+      attr_accessor gateway_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayInstanceResponse
+      attr_accessor bridge_placement: ("AVAILABLE" | "LOCKED")
+      attr_accessor gateway_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateIngressGatewayBridgeRequest
+      attr_accessor max_bitrate: ::Integer
+      attr_accessor max_outputs: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateMaintenance
+      attr_accessor maintenance_day: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday")
+      attr_accessor maintenance_scheduled_date: ::String
+      attr_accessor maintenance_start_hour: ::String
+      SENSITIVE: []
+    end
+
+    class VpcInterface
+      attr_accessor name: ::String
+      attr_accessor network_interface_ids: ::Array[::String]
+      attr_accessor network_interface_type: ("ena" | "efa")
+      attr_accessor role_arn: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_id: ::String
+      SENSITIVE: []
+    end
+
+    class VpcInterfaceAttachment
+      attr_accessor vpc_interface_name: ::String
+      SENSITIVE: []
+    end
+
+    class VpcInterfaceRequest
+      attr_accessor name: ::String
+      attr_accessor network_interface_type: ("ena" | "efa")
+      attr_accessor role_arn: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_id: ::String
+      SENSITIVE: []
+    end
+  end
+end

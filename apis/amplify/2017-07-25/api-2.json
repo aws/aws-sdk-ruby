@@ -735,6 +735,12 @@
       "max":1000,
       "pattern":"^$|^arn:aws:iam::\\d{12}:role.+"
     },
+    "Backend":{
+      "type":"structure",
+      "members":{
+        "stackArn":{"shape":"StackArn"}
+      }
+    },
     "BackendEnvironment":{
       "type":"structure",
       "required":[
@@ -824,7 +830,8 @@
         "pullRequestEnvironmentName":{"shape":"PullRequestEnvironmentName"},
         "destinationBranch":{"shape":"BranchName"},
         "sourceBranch":{"shape":"BranchName"},
-        "backendEnvironmentArn":{"shape":"BackendEnvironmentArn"}
+        "backendEnvironmentArn":{"shape":"BackendEnvironmentArn"},
+        "backend":{"shape":"Backend"}
       }
     },
     "BranchArn":{
@@ -849,6 +856,36 @@
       "min":1,
       "pattern":"(?s).+",
       "sensitive":true
+    },
+    "Certificate":{
+      "type":"structure",
+      "required":["type"],
+      "members":{
+        "type":{"shape":"CertificateType"},
+        "customCertificateArn":{"shape":"CertificateArn"},
+        "certificateVerificationDNSRecord":{"shape":"CertificateVerificationDNSRecord"}
+      }
+    },
+    "CertificateArn":{
+      "type":"string",
+      "max":1000,
+      "min":0,
+      "pattern":"^arn:aws:acm:[a-z0-9-]+:\\d{12}:certificate\\/.+$"
+    },
+    "CertificateSettings":{
+      "type":"structure",
+      "required":["type"],
+      "members":{
+        "type":{"shape":"CertificateType"},
+        "customCertificateArn":{"shape":"CertificateArn"}
+      }
+    },
+    "CertificateType":{
+      "type":"string",
+      "enum":[
+        "AMPLIFY_MANAGED",
+        "CUSTOM"
+      ]
     },
     "CertificateVerificationDNSRecord":{
       "type":"string",
@@ -957,7 +994,8 @@
         "displayName":{"shape":"DisplayName"},
         "enablePullRequestPreview":{"shape":"EnablePullRequestPreview"},
         "pullRequestEnvironmentName":{"shape":"PullRequestEnvironmentName"},
-        "backendEnvironmentArn":{"shape":"BackendEnvironmentArn"}
+        "backendEnvironmentArn":{"shape":"BackendEnvironmentArn"},
+        "backend":{"shape":"Backend"}
       }
     },
     "CreateBranchResult":{
@@ -1016,7 +1054,8 @@
         "enableAutoSubDomain":{"shape":"EnableAutoSubDomain"},
         "subDomainSettings":{"shape":"SubDomainSettings"},
         "autoSubDomainCreationPatterns":{"shape":"AutoSubDomainCreationPatterns"},
-        "autoSubDomainIAMRole":{"shape":"AutoSubDomainIAMRole"}
+        "autoSubDomainIAMRole":{"shape":"AutoSubDomainIAMRole"},
+        "certificateSettings":{"shape":"CertificateSettings"}
       }
     },
     "CreateDomainAssociationResult":{
@@ -1278,9 +1317,11 @@
         "autoSubDomainCreationPatterns":{"shape":"AutoSubDomainCreationPatterns"},
         "autoSubDomainIAMRole":{"shape":"AutoSubDomainIAMRole"},
         "domainStatus":{"shape":"DomainStatus"},
+        "updateStatus":{"shape":"UpdateStatus"},
         "statusReason":{"shape":"StatusReason"},
         "certificateVerificationDNSRecord":{"shape":"CertificateVerificationDNSRecord"},
-        "subDomains":{"shape":"SubDomains"}
+        "subDomains":{"shape":"SubDomains"},
+        "certificate":{"shape":"Certificate"}
       }
     },
     "DomainAssociationArn":{
@@ -1308,7 +1349,9 @@
         "PENDING_VERIFICATION",
         "IN_PROGRESS",
         "AVAILABLE",
+        "IMPORTING_CUSTOM_CERTIFICATE",
         "PENDING_DEPLOYMENT",
+        "AWAITING_APP_CNAME",
         "FAILED",
         "CREATING",
         "REQUESTING_CERTIFICATE",
@@ -2010,6 +2053,12 @@
       "max":3000,
       "pattern":"(?s).*"
     },
+    "StackArn":{
+      "type":"string",
+      "max":2048,
+      "min":20,
+      "pattern":"^arn:aws:cloudformation:[a-z0-9-]+:\\d{12}:stack/.+/.+$"
+    },
     "StackName":{
       "type":"string",
       "max":255,
@@ -2370,7 +2419,8 @@
         "displayName":{"shape":"DisplayName"},
         "enablePullRequestPreview":{"shape":"EnablePullRequestPreview"},
         "pullRequestEnvironmentName":{"shape":"PullRequestEnvironmentName"},
-        "backendEnvironmentArn":{"shape":"BackendEnvironmentArn"}
+        "backendEnvironmentArn":{"shape":"BackendEnvironmentArn"},
+        "backend":{"shape":"Backend"}
       }
     },
     "UpdateBranchResult":{
@@ -2400,7 +2450,8 @@
         "enableAutoSubDomain":{"shape":"EnableAutoSubDomain"},
         "subDomainSettings":{"shape":"SubDomainSettings"},
         "autoSubDomainCreationPatterns":{"shape":"AutoSubDomainCreationPatterns"},
-        "autoSubDomainIAMRole":{"shape":"AutoSubDomainIAMRole"}
+        "autoSubDomainIAMRole":{"shape":"AutoSubDomainIAMRole"},
+        "certificateSettings":{"shape":"CertificateSettings"}
       }
     },
     "UpdateDomainAssociationResult":{
@@ -2409,6 +2460,18 @@
       "members":{
         "domainAssociation":{"shape":"DomainAssociation"}
       }
+    },
+    "UpdateStatus":{
+      "type":"string",
+      "enum":[
+        "REQUESTING_CERTIFICATE",
+        "PENDING_VERIFICATION",
+        "IMPORTING_CUSTOM_CERTIFICATE",
+        "PENDING_DEPLOYMENT",
+        "AWAITING_APP_CNAME",
+        "UPDATE_COMPLETE",
+        "UPDATE_FAILED"
+      ]
     },
     "UpdateTime":{"type":"timestamp"},
     "UpdateWebhookRequest":{

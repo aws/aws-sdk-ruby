@@ -1,0 +1,987 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::DataExchange
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Action
+      attr_accessor export_revision_to_s3: Types::AutoExportRevisionToS3RequestDetails
+      SENSITIVE: []
+    end
+
+    class ApiGatewayApiAsset
+      attr_accessor api_description: ::String
+      attr_accessor api_endpoint: ::String
+      attr_accessor api_id: ::String
+      attr_accessor api_key: ::String
+      attr_accessor api_name: ::String
+      attr_accessor api_specification_download_url: ::String
+      attr_accessor api_specification_download_url_expires_at: ::Time
+      attr_accessor protocol_type: ("REST")
+      attr_accessor stage: ::String
+      SENSITIVE: []
+    end
+
+    class AssetDestinationEntry
+      attr_accessor asset_id: ::String
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class AssetDetails
+      attr_accessor s3_snapshot_asset: Types::S3SnapshotAsset
+      attr_accessor redshift_data_share_asset: Types::RedshiftDataShareAsset
+      attr_accessor api_gateway_api_asset: Types::ApiGatewayApiAsset
+      attr_accessor s3_data_access_asset: Types::S3DataAccessAsset
+      attr_accessor lake_formation_data_permission_asset: Types::LakeFormationDataPermissionAsset
+      SENSITIVE: []
+    end
+
+    class AssetEntry
+      attr_accessor arn: ::String
+      attr_accessor asset_details: Types::AssetDetails
+      attr_accessor asset_type: ("S3_SNAPSHOT" | "REDSHIFT_DATA_SHARE" | "API_GATEWAY_API" | "S3_DATA_ACCESS" | "LAKE_FORMATION_DATA_PERMISSION")
+      attr_accessor created_at: ::Time
+      attr_accessor data_set_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor source_id: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AssetSourceEntry
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class AutoExportRevisionDestinationEntry
+      attr_accessor bucket: ::String
+      attr_accessor key_pattern: ::String
+      SENSITIVE: []
+    end
+
+    class AutoExportRevisionToS3RequestDetails
+      attr_accessor encryption: Types::ExportServerSideEncryption
+      attr_accessor revision_destination: Types::AutoExportRevisionDestinationEntry
+      SENSITIVE: []
+    end
+
+    class CancelJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("DATA_SET" | "REVISION" | "ASSET" | "JOB" | "EVENT_ACTION")
+      SENSITIVE: []
+    end
+
+    class CreateDataSetRequest
+      attr_accessor asset_type: ("S3_SNAPSHOT" | "REDSHIFT_DATA_SHARE" | "API_GATEWAY_API" | "S3_DATA_ACCESS" | "LAKE_FORMATION_DATA_PERMISSION")
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDataSetResponse
+      attr_accessor arn: ::String
+      attr_accessor asset_type: ("S3_SNAPSHOT" | "REDSHIFT_DATA_SHARE" | "API_GATEWAY_API" | "S3_DATA_ACCESS" | "LAKE_FORMATION_DATA_PERMISSION")
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor origin: ("OWNED" | "ENTITLED")
+      attr_accessor origin_details: Types::OriginDetails
+      attr_accessor source_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateEventActionRequest
+      attr_accessor action: Types::Action
+      attr_accessor event: Types::Event
+      SENSITIVE: []
+    end
+
+    class CreateEventActionResponse
+      attr_accessor action: Types::Action
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor event: Types::Event
+      attr_accessor id: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateJobRequest
+      attr_accessor details: Types::RequestDetails
+      attr_accessor type: ("IMPORT_ASSETS_FROM_S3" | "IMPORT_ASSET_FROM_SIGNED_URL" | "EXPORT_ASSETS_TO_S3" | "EXPORT_ASSET_TO_SIGNED_URL" | "EXPORT_REVISIONS_TO_S3" | "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES" | "IMPORT_ASSET_FROM_API_GATEWAY_API" | "CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET" | "IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY")
+      SENSITIVE: []
+    end
+
+    class CreateJobResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor details: Types::ResponseDetails
+      attr_accessor errors: ::Array[Types::JobError]
+      attr_accessor id: ::String
+      attr_accessor state: ("WAITING" | "IN_PROGRESS" | "ERROR" | "COMPLETED" | "CANCELLED" | "TIMED_OUT")
+      attr_accessor type: ("IMPORT_ASSETS_FROM_S3" | "IMPORT_ASSET_FROM_SIGNED_URL" | "EXPORT_ASSETS_TO_S3" | "EXPORT_ASSET_TO_SIGNED_URL" | "EXPORT_REVISIONS_TO_S3" | "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES" | "IMPORT_ASSET_FROM_API_GATEWAY_API" | "CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET" | "IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateRevisionRequest
+      attr_accessor comment: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateRevisionResponse
+      attr_accessor arn: ::String
+      attr_accessor comment: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor data_set_id: ::String
+      attr_accessor finalized: bool
+      attr_accessor id: ::String
+      attr_accessor source_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor updated_at: ::Time
+      attr_accessor revocation_comment: ::String
+      attr_accessor revoked: bool
+      attr_accessor revoked_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateS3DataAccessFromS3BucketRequestDetails
+      attr_accessor asset_source: Types::S3DataAccessAssetSourceEntry
+      attr_accessor data_set_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateS3DataAccessFromS3BucketResponseDetails
+      attr_accessor asset_source: Types::S3DataAccessAssetSourceEntry
+      attr_accessor data_set_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DataSetEntry
+      attr_accessor arn: ::String
+      attr_accessor asset_type: ("S3_SNAPSHOT" | "REDSHIFT_DATA_SHARE" | "API_GATEWAY_API" | "S3_DATA_ACCESS" | "LAKE_FORMATION_DATA_PERMISSION")
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor origin: ("OWNED" | "ENTITLED")
+      attr_accessor origin_details: Types::OriginDetails
+      attr_accessor source_id: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DataUpdateRequestDetails
+      attr_accessor data_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DatabaseLFTagPolicy
+      attr_accessor expression: ::Array[Types::LFTag]
+      SENSITIVE: []
+    end
+
+    class DatabaseLFTagPolicyAndPermissions
+      attr_accessor expression: ::Array[Types::LFTag]
+      attr_accessor permissions: ::Array[("DESCRIBE")]
+      SENSITIVE: []
+    end
+
+    class DeleteAssetRequest
+      attr_accessor asset_id: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataSetRequest
+      attr_accessor data_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventActionRequest
+      attr_accessor event_action_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRevisionRequest
+      attr_accessor data_set_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeprecationRequestDetails
+      attr_accessor deprecation_at: ::Time
+      SENSITIVE: []
+    end
+
+    class Details
+      attr_accessor import_asset_from_signed_url_job_error_details: Types::ImportAssetFromSignedUrlJobErrorDetails
+      attr_accessor import_assets_from_s3_job_error_details: ::Array[Types::AssetSourceEntry]
+      SENSITIVE: []
+    end
+
+    class Event
+      attr_accessor revision_published: Types::RevisionPublished
+      SENSITIVE: []
+    end
+
+    class EventActionEntry
+      attr_accessor action: Types::Action
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor event: Types::Event
+      attr_accessor id: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ExportAssetToSignedUrlRequestDetails
+      attr_accessor asset_id: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExportAssetToSignedUrlResponseDetails
+      attr_accessor asset_id: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor signed_url: ::String
+      attr_accessor signed_url_expires_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ExportAssetsToS3RequestDetails
+      attr_accessor asset_destinations: ::Array[Types::AssetDestinationEntry]
+      attr_accessor data_set_id: ::String
+      attr_accessor encryption: Types::ExportServerSideEncryption
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExportAssetsToS3ResponseDetails
+      attr_accessor asset_destinations: ::Array[Types::AssetDestinationEntry]
+      attr_accessor data_set_id: ::String
+      attr_accessor encryption: Types::ExportServerSideEncryption
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExportRevisionsToS3RequestDetails
+      attr_accessor data_set_id: ::String
+      attr_accessor encryption: Types::ExportServerSideEncryption
+      attr_accessor revision_destinations: ::Array[Types::RevisionDestinationEntry]
+      SENSITIVE: []
+    end
+
+    class ExportRevisionsToS3ResponseDetails
+      attr_accessor data_set_id: ::String
+      attr_accessor encryption: Types::ExportServerSideEncryption
+      attr_accessor revision_destinations: ::Array[Types::RevisionDestinationEntry]
+      attr_accessor event_action_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ExportServerSideEncryption
+      attr_accessor kms_key_arn: ::String
+      attr_accessor type: ("aws:kms" | "AES256")
+      SENSITIVE: []
+    end
+
+    class GetAssetRequest
+      attr_accessor asset_id: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssetResponse
+      attr_accessor arn: ::String
+      attr_accessor asset_details: Types::AssetDetails
+      attr_accessor asset_type: ("S3_SNAPSHOT" | "REDSHIFT_DATA_SHARE" | "API_GATEWAY_API" | "S3_DATA_ACCESS" | "LAKE_FORMATION_DATA_PERMISSION")
+      attr_accessor created_at: ::Time
+      attr_accessor data_set_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor source_id: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetDataSetRequest
+      attr_accessor data_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataSetResponse
+      attr_accessor arn: ::String
+      attr_accessor asset_type: ("S3_SNAPSHOT" | "REDSHIFT_DATA_SHARE" | "API_GATEWAY_API" | "S3_DATA_ACCESS" | "LAKE_FORMATION_DATA_PERMISSION")
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor origin: ("OWNED" | "ENTITLED")
+      attr_accessor origin_details: Types::OriginDetails
+      attr_accessor source_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetEventActionRequest
+      attr_accessor event_action_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventActionResponse
+      attr_accessor action: Types::Action
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor event: Types::Event
+      attr_accessor id: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor details: Types::ResponseDetails
+      attr_accessor errors: ::Array[Types::JobError]
+      attr_accessor id: ::String
+      attr_accessor state: ("WAITING" | "IN_PROGRESS" | "ERROR" | "COMPLETED" | "CANCELLED" | "TIMED_OUT")
+      attr_accessor type: ("IMPORT_ASSETS_FROM_S3" | "IMPORT_ASSET_FROM_SIGNED_URL" | "EXPORT_ASSETS_TO_S3" | "EXPORT_ASSET_TO_SIGNED_URL" | "EXPORT_REVISIONS_TO_S3" | "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES" | "IMPORT_ASSET_FROM_API_GATEWAY_API" | "CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET" | "IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetRevisionRequest
+      attr_accessor data_set_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRevisionResponse
+      attr_accessor arn: ::String
+      attr_accessor comment: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor data_set_id: ::String
+      attr_accessor finalized: bool
+      attr_accessor id: ::String
+      attr_accessor source_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor updated_at: ::Time
+      attr_accessor revocation_comment: ::String
+      attr_accessor revoked: bool
+      attr_accessor revoked_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ImportAssetFromApiGatewayApiRequestDetails
+      attr_accessor api_description: ::String
+      attr_accessor api_id: ::String
+      attr_accessor api_key: ::String
+      attr_accessor api_name: ::String
+      attr_accessor api_specification_md_5_hash: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor protocol_type: ("REST")
+      attr_accessor revision_id: ::String
+      attr_accessor stage: ::String
+      SENSITIVE: []
+    end
+
+    class ImportAssetFromApiGatewayApiResponseDetails
+      attr_accessor api_description: ::String
+      attr_accessor api_id: ::String
+      attr_accessor api_key: ::String
+      attr_accessor api_name: ::String
+      attr_accessor api_specification_md_5_hash: ::String
+      attr_accessor api_specification_upload_url: ::String
+      attr_accessor api_specification_upload_url_expires_at: ::Time
+      attr_accessor data_set_id: ::String
+      attr_accessor protocol_type: ("REST")
+      attr_accessor revision_id: ::String
+      attr_accessor stage: ::String
+      SENSITIVE: []
+    end
+
+    class ImportAssetFromSignedUrlJobErrorDetails
+      attr_accessor asset_name: ::String
+      SENSITIVE: []
+    end
+
+    class ImportAssetFromSignedUrlRequestDetails
+      attr_accessor asset_name: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor md_5_hash: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImportAssetFromSignedUrlResponseDetails
+      attr_accessor asset_name: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor md_5_hash: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor signed_url: ::String
+      attr_accessor signed_url_expires_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ImportAssetsFromLakeFormationTagPolicyRequestDetails
+      attr_accessor catalog_id: ::String
+      attr_accessor database: Types::DatabaseLFTagPolicyAndPermissions
+      attr_accessor table: Types::TableLFTagPolicyAndPermissions
+      attr_accessor role_arn: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImportAssetsFromLakeFormationTagPolicyResponseDetails
+      attr_accessor catalog_id: ::String
+      attr_accessor database: Types::DatabaseLFTagPolicyAndPermissions
+      attr_accessor table: Types::TableLFTagPolicyAndPermissions
+      attr_accessor role_arn: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImportAssetsFromRedshiftDataSharesRequestDetails
+      attr_accessor asset_sources: ::Array[Types::RedshiftDataShareAssetSourceEntry]
+      attr_accessor data_set_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImportAssetsFromRedshiftDataSharesResponseDetails
+      attr_accessor asset_sources: ::Array[Types::RedshiftDataShareAssetSourceEntry]
+      attr_accessor data_set_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImportAssetsFromS3RequestDetails
+      attr_accessor asset_sources: ::Array[Types::AssetSourceEntry]
+      attr_accessor data_set_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImportAssetsFromS3ResponseDetails
+      attr_accessor asset_sources: ::Array[Types::AssetSourceEntry]
+      attr_accessor data_set_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobEntry
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor details: Types::ResponseDetails
+      attr_accessor errors: ::Array[Types::JobError]
+      attr_accessor id: ::String
+      attr_accessor state: ("WAITING" | "IN_PROGRESS" | "ERROR" | "COMPLETED" | "CANCELLED" | "TIMED_OUT")
+      attr_accessor type: ("IMPORT_ASSETS_FROM_S3" | "IMPORT_ASSET_FROM_SIGNED_URL" | "EXPORT_ASSETS_TO_S3" | "EXPORT_ASSET_TO_SIGNED_URL" | "EXPORT_REVISIONS_TO_S3" | "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES" | "IMPORT_ASSET_FROM_API_GATEWAY_API" | "CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET" | "IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class JobError
+      attr_accessor code: ("ACCESS_DENIED_EXCEPTION" | "INTERNAL_SERVER_EXCEPTION" | "MALWARE_DETECTED" | "RESOURCE_NOT_FOUND_EXCEPTION" | "SERVICE_QUOTA_EXCEEDED_EXCEPTION" | "VALIDATION_EXCEPTION" | "MALWARE_SCAN_ENCRYPTED_FILE")
+      attr_accessor details: Types::Details
+      attr_accessor limit_name: ("Assets per revision" | "Asset size in GB" | "Amazon Redshift datashare assets per revision" | "AWS Lake Formation data permission assets per revision" | "Amazon S3 data access assets per revision")
+      attr_accessor limit_value: ::Float
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("REVISION" | "ASSET" | "DATA_SET")
+      SENSITIVE: []
+    end
+
+    class KmsKeyToGrant
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LFResourceDetails
+      attr_accessor database: Types::DatabaseLFTagPolicy
+      attr_accessor table: Types::TableLFTagPolicy
+      SENSITIVE: []
+    end
+
+    class LFTag
+      attr_accessor tag_key: ::String
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LFTagPolicyDetails
+      attr_accessor catalog_id: ::String
+      attr_accessor resource_type: ("TABLE" | "DATABASE")
+      attr_accessor resource_details: Types::LFResourceDetails
+      SENSITIVE: []
+    end
+
+    class LakeFormationDataPermissionAsset
+      attr_accessor lake_formation_data_permission_details: Types::LakeFormationDataPermissionDetails
+      attr_accessor lake_formation_data_permission_type: ("LFTagPolicy")
+      attr_accessor permissions: ::Array[("DESCRIBE" | "SELECT")]
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LakeFormationDataPermissionDetails
+      attr_accessor lf_tag_policy: Types::LFTagPolicyDetails
+      SENSITIVE: []
+    end
+
+    class LakeFormationTagPolicyDetails
+      attr_accessor database: ::String
+      attr_accessor table: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataSetRevisionsRequest
+      attr_accessor data_set_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataSetRevisionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor revisions: ::Array[Types::RevisionEntry]
+      SENSITIVE: []
+    end
+
+    class ListDataSetsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor origin: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataSetsResponse
+      attr_accessor data_sets: ::Array[Types::DataSetEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventActionsRequest
+      attr_accessor event_source_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventActionsResponse
+      attr_accessor event_actions: ::Array[Types::EventActionEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsRequest
+      attr_accessor data_set_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsResponse
+      attr_accessor jobs: ::Array[Types::JobEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRevisionAssetsRequest
+      attr_accessor data_set_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListRevisionAssetsResponse
+      attr_accessor assets: ::Array[Types::AssetEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NotificationDetails
+      attr_accessor data_update: Types::DataUpdateRequestDetails
+      attr_accessor deprecation: Types::DeprecationRequestDetails
+      attr_accessor schema_change: Types::SchemaChangeRequestDetails
+      SENSITIVE: []
+    end
+
+    class OriginDetails
+      attr_accessor product_id: ::String
+      SENSITIVE: []
+    end
+
+    class RedshiftDataShareAsset
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class RedshiftDataShareAssetSourceEntry
+      attr_accessor data_share_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RedshiftDataShareDetails
+      attr_accessor arn: ::String
+      attr_accessor database: ::String
+      attr_accessor function: ::String
+      attr_accessor table: ::String
+      attr_accessor schema: ::String
+      attr_accessor view: ::String
+      SENSITIVE: []
+    end
+
+    class RequestDetails
+      attr_accessor export_asset_to_signed_url: Types::ExportAssetToSignedUrlRequestDetails
+      attr_accessor export_assets_to_s3: Types::ExportAssetsToS3RequestDetails
+      attr_accessor export_revisions_to_s3: Types::ExportRevisionsToS3RequestDetails
+      attr_accessor import_asset_from_signed_url: Types::ImportAssetFromSignedUrlRequestDetails
+      attr_accessor import_assets_from_s3: Types::ImportAssetsFromS3RequestDetails
+      attr_accessor import_assets_from_redshift_data_shares: Types::ImportAssetsFromRedshiftDataSharesRequestDetails
+      attr_accessor import_asset_from_api_gateway_api: Types::ImportAssetFromApiGatewayApiRequestDetails
+      attr_accessor create_s3_data_access_from_s3_bucket: Types::CreateS3DataAccessFromS3BucketRequestDetails
+      attr_accessor import_assets_from_lake_formation_tag_policy: Types::ImportAssetsFromLakeFormationTagPolicyRequestDetails
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("DATA_SET" | "REVISION" | "ASSET" | "JOB" | "EVENT_ACTION")
+      SENSITIVE: []
+    end
+
+    class ResponseDetails
+      attr_accessor export_asset_to_signed_url: Types::ExportAssetToSignedUrlResponseDetails
+      attr_accessor export_assets_to_s3: Types::ExportAssetsToS3ResponseDetails
+      attr_accessor export_revisions_to_s3: Types::ExportRevisionsToS3ResponseDetails
+      attr_accessor import_asset_from_signed_url: Types::ImportAssetFromSignedUrlResponseDetails
+      attr_accessor import_assets_from_s3: Types::ImportAssetsFromS3ResponseDetails
+      attr_accessor import_assets_from_redshift_data_shares: Types::ImportAssetsFromRedshiftDataSharesResponseDetails
+      attr_accessor import_asset_from_api_gateway_api: Types::ImportAssetFromApiGatewayApiResponseDetails
+      attr_accessor create_s3_data_access_from_s3_bucket: Types::CreateS3DataAccessFromS3BucketResponseDetails
+      attr_accessor import_assets_from_lake_formation_tag_policy: Types::ImportAssetsFromLakeFormationTagPolicyResponseDetails
+      SENSITIVE: []
+    end
+
+    class RevisionDestinationEntry
+      attr_accessor bucket: ::String
+      attr_accessor key_pattern: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class RevisionEntry
+      attr_accessor arn: ::String
+      attr_accessor comment: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor data_set_id: ::String
+      attr_accessor finalized: bool
+      attr_accessor id: ::String
+      attr_accessor source_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor revocation_comment: ::String
+      attr_accessor revoked: bool
+      attr_accessor revoked_at: ::Time
+      SENSITIVE: []
+    end
+
+    class RevisionPublished
+      attr_accessor data_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeRevisionRequest
+      attr_accessor data_set_id: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor revocation_comment: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeRevisionResponse
+      attr_accessor arn: ::String
+      attr_accessor comment: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor data_set_id: ::String
+      attr_accessor finalized: bool
+      attr_accessor id: ::String
+      attr_accessor source_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor revocation_comment: ::String
+      attr_accessor revoked: bool
+      attr_accessor revoked_at: ::Time
+      SENSITIVE: []
+    end
+
+    class S3DataAccessAsset
+      attr_accessor bucket: ::String
+      attr_accessor key_prefixes: ::Array[::String]
+      attr_accessor keys: ::Array[::String]
+      attr_accessor s3_access_point_alias: ::String
+      attr_accessor s3_access_point_arn: ::String
+      attr_accessor kms_keys_to_grant: ::Array[Types::KmsKeyToGrant]
+      SENSITIVE: []
+    end
+
+    class S3DataAccessAssetSourceEntry
+      attr_accessor bucket: ::String
+      attr_accessor key_prefixes: ::Array[::String]
+      attr_accessor keys: ::Array[::String]
+      attr_accessor kms_keys_to_grant: ::Array[Types::KmsKeyToGrant]
+      SENSITIVE: []
+    end
+
+    class S3DataAccessDetails
+      attr_accessor key_prefixes: ::Array[::String]
+      attr_accessor keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class S3SnapshotAsset
+      attr_accessor size: ::Float
+      SENSITIVE: []
+    end
+
+    class SchemaChangeDetails
+      attr_accessor name: ::String
+      attr_accessor type: ("ADD" | "REMOVE" | "MODIFY")
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class SchemaChangeRequestDetails
+      attr_accessor changes: ::Array[Types::SchemaChangeDetails]
+      attr_accessor schema_change_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ScopeDetails
+      attr_accessor lake_formation_tag_policies: ::Array[Types::LakeFormationTagPolicyDetails]
+      attr_accessor redshift_data_shares: ::Array[Types::RedshiftDataShareDetails]
+      attr_accessor s3_data_accesses: ::Array[Types::S3DataAccessDetails]
+      SENSITIVE: []
+    end
+
+    class SendApiAssetRequest
+      attr_accessor body: ::String
+      attr_accessor query_string_parameters: ::Hash[::String, ::String]
+      attr_accessor asset_id: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor request_headers: ::Hash[::String, ::String]
+      attr_accessor method: ::String
+      attr_accessor path: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendApiAssetResponse
+      attr_accessor body: ::String
+      attr_accessor response_headers: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SendDataSetNotificationRequest
+      attr_accessor scope: Types::ScopeDetails
+      attr_accessor client_token: ::String
+      attr_accessor comment: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor details: Types::NotificationDetails
+      attr_accessor type: ("DATA_DELAY" | "DATA_UPDATE" | "DEPRECATION" | "SCHEMA_CHANGE")
+      SENSITIVE: []
+    end
+
+    class SendDataSetNotificationResponse < Aws::EmptyStructure
+    end
+
+    class ServiceLimitExceededException
+      attr_accessor limit_name: ("Products per account" | "Data sets per account" | "Data sets per product" | "Revisions per data set" | "Assets per revision" | "Assets per import job from Amazon S3" | "Asset per export job from Amazon S3" | "Asset size in GB" | "Concurrent in progress jobs to export assets to Amazon S3" | "Concurrent in progress jobs to export assets to a signed URL" | "Concurrent in progress jobs to import assets from Amazon S3" | "Concurrent in progress jobs to import assets from a signed URL" | "Concurrent in progress jobs to export revisions to Amazon S3" | "Event actions per account" | "Auto export event actions per data set" | "Amazon Redshift datashare assets per import job from Redshift" | "Concurrent in progress jobs to import assets from Amazon Redshift datashares" | "Revisions per Amazon Redshift datashare data set" | "Amazon Redshift datashare assets per revision" | "Concurrent in progress jobs to import assets from an API Gateway API" | "Amazon API Gateway API assets per revision" | "Revisions per Amazon API Gateway API data set" | "Concurrent in progress jobs to import assets from an AWS Lake Formation tag policy" | "AWS Lake Formation data permission assets per revision" | "Revisions per AWS Lake Formation data permission data set" | "Revisions per Amazon S3 data access data set" | "Amazon S3 data access assets per revision" | "Concurrent in progress jobs to create Amazon S3 data access assets from S3 buckets")
+      attr_accessor limit_value: ::Float
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartJobResponse < Aws::EmptyStructure
+    end
+
+    class TableLFTagPolicy
+      attr_accessor expression: ::Array[Types::LFTag]
+      SENSITIVE: []
+    end
+
+    class TableLFTagPolicyAndPermissions
+      attr_accessor expression: ::Array[Types::LFTag]
+      attr_accessor permissions: ::Array[("DESCRIBE" | "SELECT")]
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAssetRequest
+      attr_accessor asset_id: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor name: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAssetResponse
+      attr_accessor arn: ::String
+      attr_accessor asset_details: Types::AssetDetails
+      attr_accessor asset_type: ("S3_SNAPSHOT" | "REDSHIFT_DATA_SHARE" | "API_GATEWAY_API" | "S3_DATA_ACCESS" | "LAKE_FORMATION_DATA_PERMISSION")
+      attr_accessor created_at: ::Time
+      attr_accessor data_set_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor source_id: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateDataSetRequest
+      attr_accessor data_set_id: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDataSetResponse
+      attr_accessor arn: ::String
+      attr_accessor asset_type: ("S3_SNAPSHOT" | "REDSHIFT_DATA_SHARE" | "API_GATEWAY_API" | "S3_DATA_ACCESS" | "LAKE_FORMATION_DATA_PERMISSION")
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor origin: ("OWNED" | "ENTITLED")
+      attr_accessor origin_details: Types::OriginDetails
+      attr_accessor source_id: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateEventActionRequest
+      attr_accessor action: Types::Action
+      attr_accessor event_action_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEventActionResponse
+      attr_accessor action: Types::Action
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor event: Types::Event
+      attr_accessor id: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateRevisionRequest
+      attr_accessor comment: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor finalized: bool
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRevisionResponse
+      attr_accessor arn: ::String
+      attr_accessor comment: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor data_set_id: ::String
+      attr_accessor finalized: bool
+      attr_accessor id: ::String
+      attr_accessor source_id: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor revocation_comment: ::String
+      attr_accessor revoked: bool
+      attr_accessor revoked_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor exception_cause: ("InsufficientS3BucketPolicy" | "S3AccessDenied")
+      SENSITIVE: []
+    end
+  end
+end

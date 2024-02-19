@@ -554,10 +554,9 @@ module Aws::WAFV2
     #     includes it in the logs. For information about the logging fields,
     #     see [Log fields][1] in the *WAF Developer Guide*.
     #
-    #   * `HeaderOrder`: The comma-separated list of header names to match
-    #     for. WAF creates a string that contains the ordered list of header
-    #     names, from the headers in the web request, and then matches
-    #     against that string.
+    #   * `HeaderOrder`: The list of header names to match for. WAF creates
+    #     a string that contains the ordered list of header names, from the
+    #     headers in the web request, and then matches against that string.
     #
     #   If `SearchString` includes alphabetic characters A-Z and a-z, note
     #   that the value is case sensitive.
@@ -978,7 +977,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] match_scope
     #   The parts of the cookies to inspect with the rule inspection
-    #   criteria. If you specify `All`, WAF inspects both keys and values.
+    #   criteria. If you specify `ALL`, WAF inspects both keys and values.
+    #
+    #   `All` does not require a match to be found in the keys and a match
+    #   to be found in the values. It requires a match to be found in the
+    #   keys or the values or both. To require a match in the keys and in
+    #   the values, use a logical `AND` statement to combine two match
+    #   rules, one that inspects the keys and another that inspects the
+    #   values.
     #   @return [String]
     #
     # @!attribute [rw] oversize_handling
@@ -1059,7 +1065,7 @@ module Aws::WAFV2
     #   Example JSON: `"TokenDomains": ["abc.com", "store.abc.com"]`
     #
     #   Public suffixes aren't allowed. For example, you can't use
-    #   `usa.gov` or `co.uk` as token domains.
+    #   `gov.au` or `co.uk` as token domains.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/CreateAPIKeyRequest AWS API Documentation
@@ -1456,7 +1462,7 @@ module Aws::WAFV2
     #   "myotherwebsite.com" \}`
     #
     #   Public suffixes aren't allowed. For example, you can't use
-    #   `usa.gov` or `co.uk` as token domains.
+    #   `gov.au` or `co.uk` as token domains.
     #   @return [Array<String>]
     #
     # @!attribute [rw] association_config
@@ -1683,6 +1689,39 @@ module Aws::WAFV2
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or
+    #   for a regional application. A regional application can be an
+    #   Application Load Balancer (ALB), an Amazon API Gateway REST API, an
+    #   AppSync GraphQL API, an Amazon Cognito user pool, an App Runner
+    #   service, or an Amazon Web Services Verified Access instance.
+    #
+    #   To work with CloudFront, you must also specify the Region US East
+    #   (N. Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_key
+    #   The encrypted API key that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteAPIKeyRequest AWS API Documentation
+    #
+    class DeleteAPIKeyRequest < Struct.new(
+      :scope,
+      :api_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteAPIKeyResponse AWS API Documentation
+    #
+    class DeleteAPIKeyResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] web_acl_arn
     #   The Amazon Resource Name (ARN) of the web ACL.
@@ -3561,7 +3600,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] match_scope
     #   The parts of the headers to match with the rule inspection criteria.
-    #   If you specify `All`, WAF inspects both keys and values.
+    #   If you specify `ALL`, WAF inspects both keys and values.
+    #
+    #   `All` does not require a match to be found in the keys and a match
+    #   to be found in the values. It requires a match to be found in the
+    #   keys or the values or both. To require a match in the keys and in
+    #   the values, use a logical `AND` statement to combine two match
+    #   rules, one that inspects the keys and another that inspects the
+    #   values.
     #   @return [String]
     #
     # @!attribute [rw] oversize_handling
@@ -3928,7 +3974,14 @@ module Aws::WAFV2
     #
     # @!attribute [rw] match_scope
     #   The parts of the JSON to match against using the `MatchPattern`. If
-    #   you specify `All`, WAF matches against keys and values.
+    #   you specify `ALL`, WAF matches against keys and values.
+    #
+    #   `All` does not require a match to be found in the keys and a match
+    #   to be found in the values. It requires a match to be found in the
+    #   keys or the values or both. To require a match in the keys and in
+    #   the values, use a logical `AND` statement to combine two match
+    #   rules, one that inspects the keys and another that inspects the
+    #   values.
     #   @return [String]
     #
     # @!attribute [rw] invalid_fallback_behavior
@@ -8939,7 +8992,7 @@ module Aws::WAFV2
     #   "myotherwebsite.com" \}`
     #
     #   Public suffixes aren't allowed. For example, you can't use
-    #   `usa.gov` or `co.uk` as token domains.
+    #   `gov.au` or `co.uk` as token domains.
     #   @return [Array<String>]
     #
     # @!attribute [rw] association_config

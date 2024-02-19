@@ -1,0 +1,310 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CognitoSync
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BulkPublishResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BulkPublishResponse]
+        def identity_pool_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#bulk_publish-instance_method
+      def bulk_publish: (
+                          identity_pool_id: ::String
+                        ) -> _BulkPublishResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BulkPublishResponseSuccess
+
+      interface _DeleteDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDatasetResponse]
+        def dataset: () -> Types::Dataset
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#delete_dataset-instance_method
+      def delete_dataset: (
+                            identity_pool_id: ::String,
+                            identity_id: ::String,
+                            dataset_name: ::String
+                          ) -> _DeleteDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDatasetResponseSuccess
+
+      interface _DescribeDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetResponse]
+        def dataset: () -> Types::Dataset
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#describe_dataset-instance_method
+      def describe_dataset: (
+                              identity_pool_id: ::String,
+                              identity_id: ::String,
+                              dataset_name: ::String
+                            ) -> _DescribeDatasetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatasetResponseSuccess
+
+      interface _DescribeIdentityPoolUsageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeIdentityPoolUsageResponse]
+        def identity_pool_usage: () -> Types::IdentityPoolUsage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#describe_identity_pool_usage-instance_method
+      def describe_identity_pool_usage: (
+                                          identity_pool_id: ::String
+                                        ) -> _DescribeIdentityPoolUsageResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeIdentityPoolUsageResponseSuccess
+
+      interface _DescribeIdentityUsageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeIdentityUsageResponse]
+        def identity_usage: () -> Types::IdentityUsage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#describe_identity_usage-instance_method
+      def describe_identity_usage: (
+                                     identity_pool_id: ::String,
+                                     identity_id: ::String
+                                   ) -> _DescribeIdentityUsageResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeIdentityUsageResponseSuccess
+
+      interface _GetBulkPublishDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBulkPublishDetailsResponse]
+        def identity_pool_id: () -> ::String
+        def bulk_publish_start_time: () -> ::Time
+        def bulk_publish_complete_time: () -> ::Time
+        def bulk_publish_status: () -> ("NOT_STARTED" | "IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+        def failure_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#get_bulk_publish_details-instance_method
+      def get_bulk_publish_details: (
+                                      identity_pool_id: ::String
+                                    ) -> _GetBulkPublishDetailsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBulkPublishDetailsResponseSuccess
+
+      interface _GetCognitoEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCognitoEventsResponse]
+        def events: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#get_cognito_events-instance_method
+      def get_cognito_events: (
+                                identity_pool_id: ::String
+                              ) -> _GetCognitoEventsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCognitoEventsResponseSuccess
+
+      interface _GetIdentityPoolConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdentityPoolConfigurationResponse]
+        def identity_pool_id: () -> ::String
+        def push_sync: () -> Types::PushSync
+        def cognito_streams: () -> Types::CognitoStreams
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#get_identity_pool_configuration-instance_method
+      def get_identity_pool_configuration: (
+                                             identity_pool_id: ::String
+                                           ) -> _GetIdentityPoolConfigurationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdentityPoolConfigurationResponseSuccess
+
+      interface _ListDatasetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetsResponse]
+        def datasets: () -> ::Array[Types::Dataset]
+        def count: () -> ::Integer
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#list_datasets-instance_method
+      def list_datasets: (
+                           identity_pool_id: ::String,
+                           identity_id: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListDatasetsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetsResponseSuccess
+
+      interface _ListIdentityPoolUsageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIdentityPoolUsageResponse]
+        def identity_pool_usages: () -> ::Array[Types::IdentityPoolUsage]
+        def max_results: () -> ::Integer
+        def count: () -> ::Integer
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#list_identity_pool_usage-instance_method
+      def list_identity_pool_usage: (
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListIdentityPoolUsageResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdentityPoolUsageResponseSuccess
+
+      interface _ListRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecordsResponse]
+        def records: () -> ::Array[Types::Record]
+        def next_token: () -> ::String
+        def count: () -> ::Integer
+        def dataset_sync_count: () -> ::Integer
+        def last_modified_by: () -> ::String
+        def merged_dataset_names: () -> ::Array[::String]
+        def dataset_exists: () -> bool
+        def dataset_deleted_after_requested_sync_count: () -> bool
+        def sync_session_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#list_records-instance_method
+      def list_records: (
+                          identity_pool_id: ::String,
+                          identity_id: ::String,
+                          dataset_name: ::String,
+                          ?last_sync_count: ::Integer,
+                          ?next_token: ::String,
+                          ?max_results: ::Integer,
+                          ?sync_session_token: ::String
+                        ) -> _ListRecordsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecordsResponseSuccess
+
+      interface _RegisterDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterDeviceResponse]
+        def device_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#register_device-instance_method
+      def register_device: (
+                             identity_pool_id: ::String,
+                             identity_id: ::String,
+                             platform: ("APNS" | "APNS_SANDBOX" | "GCM" | "ADM"),
+                             token: ::String
+                           ) -> _RegisterDeviceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterDeviceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#set_cognito_events-instance_method
+      def set_cognito_events: (
+                                identity_pool_id: ::String,
+                                events: Hash[::String, ::String]
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _SetIdentityPoolConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetIdentityPoolConfigurationResponse]
+        def identity_pool_id: () -> ::String
+        def push_sync: () -> Types::PushSync
+        def cognito_streams: () -> Types::CognitoStreams
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#set_identity_pool_configuration-instance_method
+      def set_identity_pool_configuration: (
+                                             identity_pool_id: ::String,
+                                             ?push_sync: {
+                                               application_arns: Array[::String]?,
+                                               role_arn: ::String?
+                                             },
+                                             ?cognito_streams: {
+                                               stream_name: ::String?,
+                                               role_arn: ::String?,
+                                               streaming_status: ("ENABLED" | "DISABLED")?
+                                             }
+                                           ) -> _SetIdentityPoolConfigurationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetIdentityPoolConfigurationResponseSuccess
+
+      interface _SubscribeToDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SubscribeToDatasetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#subscribe_to_dataset-instance_method
+      def subscribe_to_dataset: (
+                                  identity_pool_id: ::String,
+                                  identity_id: ::String,
+                                  dataset_name: ::String,
+                                  device_id: ::String
+                                ) -> _SubscribeToDatasetResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SubscribeToDatasetResponseSuccess
+
+      interface _UnsubscribeFromDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UnsubscribeFromDatasetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#unsubscribe_from_dataset-instance_method
+      def unsubscribe_from_dataset: (
+                                      identity_pool_id: ::String,
+                                      identity_id: ::String,
+                                      dataset_name: ::String,
+                                      device_id: ::String
+                                    ) -> _UnsubscribeFromDatasetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UnsubscribeFromDatasetResponseSuccess
+
+      interface _UpdateRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRecordsResponse]
+        def records: () -> ::Array[Types::Record]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CognitoSync/Client.html#update_records-instance_method
+      def update_records: (
+                            identity_pool_id: ::String,
+                            identity_id: ::String,
+                            dataset_name: ::String,
+                            ?device_id: ::String,
+                            ?record_patches: Array[
+                              {
+                                op: ("replace" | "remove"),
+                                key: ::String,
+                                value: ::String?,
+                                sync_count: ::Integer,
+                                device_last_modified_date: ::Time?
+                              },
+                            ],
+                            sync_session_token: ::String,
+                            ?client_context: ::String
+                          ) -> _UpdateRecordsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecordsResponseSuccess
+    end
+  end
+end
+

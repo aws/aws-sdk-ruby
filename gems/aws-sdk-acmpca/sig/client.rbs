@@ -1,0 +1,562 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ACMPCA
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateCertificateAuthorityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCertificateAuthorityResponse]
+        def certificate_authority_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#create_certificate_authority-instance_method
+      def create_certificate_authority: (
+                                          certificate_authority_configuration: {
+                                            key_algorithm: ("RSA_2048" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1"),
+                                            signing_algorithm: ("SHA256WITHECDSA" | "SHA384WITHECDSA" | "SHA512WITHECDSA" | "SHA256WITHRSA" | "SHA384WITHRSA" | "SHA512WITHRSA"),
+                                            subject: {
+                                              country: ::String?,
+                                              organization: ::String?,
+                                              organizational_unit: ::String?,
+                                              distinguished_name_qualifier: ::String?,
+                                              state: ::String?,
+                                              common_name: ::String?,
+                                              serial_number: ::String?,
+                                              locality: ::String?,
+                                              title: ::String?,
+                                              surname: ::String?,
+                                              given_name: ::String?,
+                                              initials: ::String?,
+                                              pseudonym: ::String?,
+                                              generation_qualifier: ::String?,
+                                              custom_attributes: Array[
+                                                {
+                                                  object_identifier: ::String,
+                                                  value: ::String
+                                                },
+                                              ]?
+                                            },
+                                            csr_extensions: {
+                                              key_usage: {
+                                                digital_signature: bool?,
+                                                non_repudiation: bool?,
+                                                key_encipherment: bool?,
+                                                data_encipherment: bool?,
+                                                key_agreement: bool?,
+                                                key_cert_sign: bool?,
+                                                crl_sign: bool?,
+                                                encipher_only: bool?,
+                                                decipher_only: bool?
+                                              }?,
+                                              subject_information_access: Array[
+                                                {
+                                                  access_method: {
+                                                    custom_object_identifier: ::String?,
+                                                    access_method_type: ("CA_REPOSITORY" | "RESOURCE_PKI_MANIFEST" | "RESOURCE_PKI_NOTIFY")?
+                                                  },
+                                                  access_location: {
+                                                    other_name: {
+                                                      type_id: ::String,
+                                                      value: ::String
+                                                    }?,
+                                                    rfc_822_name: ::String?,
+                                                    dns_name: ::String?,
+                                                    directory_name: {
+                                                      country: ::String?,
+                                                      organization: ::String?,
+                                                      organizational_unit: ::String?,
+                                                      distinguished_name_qualifier: ::String?,
+                                                      state: ::String?,
+                                                      common_name: ::String?,
+                                                      serial_number: ::String?,
+                                                      locality: ::String?,
+                                                      title: ::String?,
+                                                      surname: ::String?,
+                                                      given_name: ::String?,
+                                                      initials: ::String?,
+                                                      pseudonym: ::String?,
+                                                      generation_qualifier: ::String?,
+                                                      custom_attributes: Array[
+                                                        {
+                                                          object_identifier: ::String,
+                                                          value: ::String
+                                                        },
+                                                      ]?
+                                                    }?,
+                                                    edi_party_name: {
+                                                      party_name: ::String,
+                                                      name_assigner: ::String?
+                                                    }?,
+                                                    uniform_resource_identifier: ::String?,
+                                                    ip_address: ::String?,
+                                                    registered_id: ::String?
+                                                  }
+                                                },
+                                              ]?
+                                            }?
+                                          },
+                                          ?revocation_configuration: {
+                                            crl_configuration: {
+                                              enabled: bool,
+                                              expiration_in_days: ::Integer?,
+                                              custom_cname: ::String?,
+                                              s3_bucket_name: ::String?,
+                                              s3_object_acl: ("PUBLIC_READ" | "BUCKET_OWNER_FULL_CONTROL")?,
+                                              crl_distribution_point_extension_configuration: {
+                                                omit_extension: bool
+                                              }?
+                                            }?,
+                                            ocsp_configuration: {
+                                              enabled: bool,
+                                              ocsp_custom_cname: ::String?
+                                            }?
+                                          },
+                                          certificate_authority_type: ("ROOT" | "SUBORDINATE"),
+                                          ?idempotency_token: ::String,
+                                          ?key_storage_security_standard: ("FIPS_140_2_LEVEL_2_OR_HIGHER" | "FIPS_140_2_LEVEL_3_OR_HIGHER"),
+                                          ?tags: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String?
+                                            },
+                                          ],
+                                          ?usage_mode: ("GENERAL_PURPOSE" | "SHORT_LIVED_CERTIFICATE")
+                                        ) -> _CreateCertificateAuthorityResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCertificateAuthorityResponseSuccess
+
+      interface _CreateCertificateAuthorityAuditReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCertificateAuthorityAuditReportResponse]
+        def audit_report_id: () -> ::String
+        def s3_key: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#create_certificate_authority_audit_report-instance_method
+      def create_certificate_authority_audit_report: (
+                                                       certificate_authority_arn: ::String,
+                                                       s3_bucket_name: ::String,
+                                                       audit_report_response_format: ("JSON" | "CSV")
+                                                     ) -> _CreateCertificateAuthorityAuditReportResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCertificateAuthorityAuditReportResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#create_permission-instance_method
+      def create_permission: (
+                               certificate_authority_arn: ::String,
+                               principal: ::String,
+                               ?source_account: ::String,
+                               actions: Array[("IssueCertificate" | "GetCertificate" | "ListPermissions")]
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#delete_certificate_authority-instance_method
+      def delete_certificate_authority: (
+                                          certificate_authority_arn: ::String,
+                                          ?permanent_deletion_time_in_days: ::Integer
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#delete_permission-instance_method
+      def delete_permission: (
+                               certificate_authority_arn: ::String,
+                               principal: ::String,
+                               ?source_account: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#delete_policy-instance_method
+      def delete_policy: (
+                           resource_arn: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeCertificateAuthorityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCertificateAuthorityResponse]
+        def certificate_authority: () -> Types::CertificateAuthority
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#describe_certificate_authority-instance_method
+      def describe_certificate_authority: (
+                                            certificate_authority_arn: ::String
+                                          ) -> _DescribeCertificateAuthorityResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCertificateAuthorityResponseSuccess
+
+      interface _DescribeCertificateAuthorityAuditReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCertificateAuthorityAuditReportResponse]
+        def audit_report_status: () -> ("CREATING" | "SUCCESS" | "FAILED")
+        def s3_bucket_name: () -> ::String
+        def s3_key: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#describe_certificate_authority_audit_report-instance_method
+      def describe_certificate_authority_audit_report: (
+                                                         certificate_authority_arn: ::String,
+                                                         audit_report_id: ::String
+                                                       ) -> _DescribeCertificateAuthorityAuditReportResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCertificateAuthorityAuditReportResponseSuccess
+
+      interface _GetCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCertificateResponse]
+        def certificate: () -> ::String
+        def certificate_chain: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#get_certificate-instance_method
+      def get_certificate: (
+                             certificate_authority_arn: ::String,
+                             certificate_arn: ::String
+                           ) -> _GetCertificateResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCertificateResponseSuccess
+
+      interface _GetCertificateAuthorityCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCertificateAuthorityCertificateResponse]
+        def certificate: () -> ::String
+        def certificate_chain: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#get_certificate_authority_certificate-instance_method
+      def get_certificate_authority_certificate: (
+                                                   certificate_authority_arn: ::String
+                                                 ) -> _GetCertificateAuthorityCertificateResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCertificateAuthorityCertificateResponseSuccess
+
+      interface _GetCertificateAuthorityCsrResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCertificateAuthorityCsrResponse]
+        def csr: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#get_certificate_authority_csr-instance_method
+      def get_certificate_authority_csr: (
+                                           certificate_authority_arn: ::String
+                                         ) -> _GetCertificateAuthorityCsrResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCertificateAuthorityCsrResponseSuccess
+
+      interface _GetPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyResponse]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#get_policy-instance_method
+      def get_policy: (
+                        resource_arn: ::String
+                      ) -> _GetPolicyResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#import_certificate_authority_certificate-instance_method
+      def import_certificate_authority_certificate: (
+                                                      certificate_authority_arn: ::String,
+                                                      certificate: ::String,
+                                                      ?certificate_chain: ::String
+                                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _IssueCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IssueCertificateResponse]
+        def certificate_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#issue_certificate-instance_method
+      def issue_certificate: (
+                               ?api_passthrough: {
+                                 extensions: {
+                                   certificate_policies: Array[
+                                     {
+                                       cert_policy_id: ::String,
+                                       policy_qualifiers: Array[
+                                         {
+                                           policy_qualifier_id: ("CPS"),
+                                           qualifier: {
+                                             cps_uri: ::String
+                                           }
+                                         },
+                                       ]?
+                                     },
+                                   ]?,
+                                   extended_key_usage: Array[
+                                     {
+                                       extended_key_usage_type: ("SERVER_AUTH" | "CLIENT_AUTH" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "SMART_CARD_LOGIN" | "DOCUMENT_SIGNING" | "CERTIFICATE_TRANSPARENCY")?,
+                                       extended_key_usage_object_identifier: ::String?
+                                     },
+                                   ]?,
+                                   key_usage: {
+                                     digital_signature: bool?,
+                                     non_repudiation: bool?,
+                                     key_encipherment: bool?,
+                                     data_encipherment: bool?,
+                                     key_agreement: bool?,
+                                     key_cert_sign: bool?,
+                                     crl_sign: bool?,
+                                     encipher_only: bool?,
+                                     decipher_only: bool?
+                                   }?,
+                                   subject_alternative_names: Array[
+                                     {
+                                       other_name: {
+                                         type_id: ::String,
+                                         value: ::String
+                                       }?,
+                                       rfc_822_name: ::String?,
+                                       dns_name: ::String?,
+                                       directory_name: {
+                                         country: ::String?,
+                                         organization: ::String?,
+                                         organizational_unit: ::String?,
+                                         distinguished_name_qualifier: ::String?,
+                                         state: ::String?,
+                                         common_name: ::String?,
+                                         serial_number: ::String?,
+                                         locality: ::String?,
+                                         title: ::String?,
+                                         surname: ::String?,
+                                         given_name: ::String?,
+                                         initials: ::String?,
+                                         pseudonym: ::String?,
+                                         generation_qualifier: ::String?,
+                                         custom_attributes: Array[
+                                           {
+                                             object_identifier: ::String,
+                                             value: ::String
+                                           },
+                                         ]?
+                                       }?,
+                                       edi_party_name: {
+                                         party_name: ::String,
+                                         name_assigner: ::String?
+                                       }?,
+                                       uniform_resource_identifier: ::String?,
+                                       ip_address: ::String?,
+                                       registered_id: ::String?
+                                     },
+                                   ]?,
+                                   custom_extensions: Array[
+                                     {
+                                       object_identifier: ::String,
+                                       value: ::String,
+                                       critical: bool?
+                                     },
+                                   ]?
+                                 }?,
+                                 subject: {
+                                   country: ::String?,
+                                   organization: ::String?,
+                                   organizational_unit: ::String?,
+                                   distinguished_name_qualifier: ::String?,
+                                   state: ::String?,
+                                   common_name: ::String?,
+                                   serial_number: ::String?,
+                                   locality: ::String?,
+                                   title: ::String?,
+                                   surname: ::String?,
+                                   given_name: ::String?,
+                                   initials: ::String?,
+                                   pseudonym: ::String?,
+                                   generation_qualifier: ::String?,
+                                   custom_attributes: Array[
+                                     {
+                                       object_identifier: ::String,
+                                       value: ::String
+                                     },
+                                   ]?
+                                 }?
+                               },
+                               certificate_authority_arn: ::String,
+                               csr: ::String,
+                               signing_algorithm: ("SHA256WITHECDSA" | "SHA384WITHECDSA" | "SHA512WITHECDSA" | "SHA256WITHRSA" | "SHA384WITHRSA" | "SHA512WITHRSA"),
+                               ?template_arn: ::String,
+                               validity: {
+                                 value: ::Integer,
+                                 type: ("END_DATE" | "ABSOLUTE" | "DAYS" | "MONTHS" | "YEARS")
+                               },
+                               ?validity_not_before: {
+                                 value: ::Integer,
+                                 type: ("END_DATE" | "ABSOLUTE" | "DAYS" | "MONTHS" | "YEARS")
+                               },
+                               ?idempotency_token: ::String
+                             ) -> _IssueCertificateResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _IssueCertificateResponseSuccess
+
+      interface _ListCertificateAuthoritiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCertificateAuthoritiesResponse]
+        def certificate_authorities: () -> ::Array[Types::CertificateAuthority]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#list_certificate_authorities-instance_method
+      def list_certificate_authorities: (
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer,
+                                          ?resource_owner: ("SELF" | "OTHER_ACCOUNTS")
+                                        ) -> _ListCertificateAuthoritiesResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCertificateAuthoritiesResponseSuccess
+
+      interface _ListPermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPermissionsResponse]
+        def permissions: () -> ::Array[Types::Permission]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#list_permissions-instance_method
+      def list_permissions: (
+                              certificate_authority_arn: ::String,
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _ListPermissionsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPermissionsResponseSuccess
+
+      interface _ListTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#list_tags-instance_method
+      def list_tags: (
+                       certificate_authority_arn: ::String,
+                       ?next_token: ::String,
+                       ?max_results: ::Integer
+                     ) -> _ListTagsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#put_policy-instance_method
+      def put_policy: (
+                        resource_arn: ::String,
+                        policy: ::String
+                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#restore_certificate_authority-instance_method
+      def restore_certificate_authority: (
+                                           certificate_authority_arn: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#revoke_certificate-instance_method
+      def revoke_certificate: (
+                                certificate_authority_arn: ::String,
+                                certificate_serial: ::String,
+                                revocation_reason: ("UNSPECIFIED" | "KEY_COMPROMISE" | "CERTIFICATE_AUTHORITY_COMPROMISE" | "AFFILIATION_CHANGED" | "SUPERSEDED" | "CESSATION_OF_OPERATION" | "PRIVILEGE_WITHDRAWN" | "A_A_COMPROMISE")
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#tag_certificate_authority-instance_method
+      def tag_certificate_authority: (
+                                       certificate_authority_arn: ::String,
+                                       tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String?
+                                         },
+                                       ]
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#untag_certificate_authority-instance_method
+      def untag_certificate_authority: (
+                                         certificate_authority_arn: ::String,
+                                         tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String?
+                                           },
+                                         ]
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#update_certificate_authority-instance_method
+      def update_certificate_authority: (
+                                          certificate_authority_arn: ::String,
+                                          ?revocation_configuration: {
+                                            crl_configuration: {
+                                              enabled: bool,
+                                              expiration_in_days: ::Integer?,
+                                              custom_cname: ::String?,
+                                              s3_bucket_name: ::String?,
+                                              s3_object_acl: ("PUBLIC_READ" | "BUCKET_OWNER_FULL_CONTROL")?,
+                                              crl_distribution_point_extension_configuration: {
+                                                omit_extension: bool
+                                              }?
+                                            }?,
+                                            ocsp_configuration: {
+                                              enabled: bool,
+                                              ocsp_custom_cname: ::String?
+                                            }?
+                                          },
+                                          ?status: ("CREATING" | "PENDING_CERTIFICATE" | "ACTIVE" | "DELETED" | "DISABLED" | "EXPIRED" | "FAILED")
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ACMPCA/Client.html#wait_until-instance_method
+      def wait_until: (:audit_report_created waiter_name, 
+                    certificate_authority_arn: ::String,
+                    audit_report_id: ::String
+                  ) -> Client::_DescribeCertificateAuthorityAuditReportResponseSuccess
+                    | (:audit_report_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeCertificateAuthorityAuditReportResponseSuccess
+                    | (:certificate_authority_csr_created waiter_name, 
+                    certificate_authority_arn: ::String
+                  ) -> Client::_GetCertificateAuthorityCsrResponseSuccess
+                    | (:certificate_authority_csr_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetCertificateAuthorityCsrResponseSuccess
+                    | (:certificate_issued waiter_name, 
+                    certificate_authority_arn: ::String,
+                    certificate_arn: ::String
+                  ) -> Client::_GetCertificateResponseSuccess
+                    | (:certificate_issued waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetCertificateResponseSuccess
+    end
+  end
+end
+

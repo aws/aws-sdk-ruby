@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2024-02-01)
+------------------
+
+* Feature - This release includes support for broadcast-mixed audio description tracks.
+
+1.124.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.123.0 (2024-01-03)
+------------------
+
+* Feature - This release includes video engine updates including HEVC improvements, support for ingesting VP9 encoded video in MP4 containers, and support for user-specified 3D LUTs.
+
+1.122.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.121.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.120.0 (2023-11-10)
+------------------
+
+* Feature - This release includes the ability to specify any input source as the primary input for corresponding follow modes, and allows users to specify fit and fill behaviors without resizing content.
+
 1.119.0 (2023-10-03)
 ------------------
 

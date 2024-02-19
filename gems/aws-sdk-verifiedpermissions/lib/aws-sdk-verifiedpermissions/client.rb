@@ -398,6 +398,126 @@ module Aws::VerifiedPermissions
 
     # @!group API Operations
 
+    # Makes a series of decisions about multiple authorization requests for
+    # one principal or resource. Each request contains the equivalent
+    # content of an `IsAuthorized` request: principal, action, resource, and
+    # context. Either the `principal` or the `resource` parameter must be
+    # identical across all requests. For example, Verified Permissions
+    # won't evaluate a pair of requests where `bob` views `photo1` and
+    # `alice` views `photo2`. Authorization of `bob` to view `photo1` and
+    # `photo2`, or `bob` and `alice` to view `photo1`, are valid batches.
+    #
+    # The request is evaluated against all policies in the specified policy
+    # store that match the entities that you declare. The result of the
+    # decisions is a series of `Allow` or `Deny` responses, along with the
+    # IDs of the policies that produced each decision.
+    #
+    # The `entities` of a `BatchIsAuthorized` API request can contain up to
+    # 100 principals and up to 100 resources. The `requests` of a
+    # `BatchIsAuthorized` API request can contain up to 30 requests.
+    #
+    # <note markdown="1"> The `BatchIsAuthorized` operation doesn't have its own IAM
+    # permission. To authorize this operation for Amazon Web Services
+    # principals, include the permission `verifiedpermissions:IsAuthorized`
+    # in their IAM policies.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :policy_store_id
+    #   Specifies the ID of the policy store. Policies in this policy store
+    #   will be used to make the authorization decisions for the input.
+    #
+    # @option params [Types::EntitiesDefinition] :entities
+    #   Specifies the list of resources and principals and their associated
+    #   attributes that Verified Permissions can examine when evaluating the
+    #   policies.
+    #
+    #   <note markdown="1"> You can include only principal and resource entities in this
+    #   parameter; you can't include actions. You must specify actions in the
+    #   schema.
+    #
+    #    </note>
+    #
+    # @option params [required, Array<Types::BatchIsAuthorizedInputItem>] :requests
+    #   An array of up to 30 requests that you want Verified Permissions to
+    #   evaluate.
+    #
+    # @return [Types::BatchIsAuthorizedOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchIsAuthorizedOutput#results #results} => Array&lt;Types::BatchIsAuthorizedOutputItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_is_authorized({
+    #     policy_store_id: "PolicyStoreId", # required
+    #     entities: {
+    #       entity_list: [
+    #         {
+    #           identifier: { # required
+    #             entity_type: "EntityType", # required
+    #             entity_id: "EntityId", # required
+    #           },
+    #           attributes: {
+    #             "String" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           parents: [
+    #             {
+    #               entity_type: "EntityType", # required
+    #               entity_id: "EntityId", # required
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #     },
+    #     requests: [ # required
+    #       {
+    #         principal: {
+    #           entity_type: "EntityType", # required
+    #           entity_id: "EntityId", # required
+    #         },
+    #         action: {
+    #           action_type: "ActionType", # required
+    #           action_id: "ActionId", # required
+    #         },
+    #         resource: {
+    #           entity_type: "EntityType", # required
+    #           entity_id: "EntityId", # required
+    #         },
+    #         context: {
+    #           context_map: {
+    #             "String" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].request.principal.entity_type #=> String
+    #   resp.results[0].request.principal.entity_id #=> String
+    #   resp.results[0].request.action.action_type #=> String
+    #   resp.results[0].request.action.action_id #=> String
+    #   resp.results[0].request.resource.entity_type #=> String
+    #   resp.results[0].request.resource.entity_id #=> String
+    #   resp.results[0].request.context.context_map #=> Hash
+    #   resp.results[0].request.context.context_map["String"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.results[0].decision #=> String, one of "ALLOW", "DENY"
+    #   resp.results[0].determining_policies #=> Array
+    #   resp.results[0].determining_policies[0].policy_id #=> String
+    #   resp.results[0].errors #=> Array
+    #   resp.results[0].errors[0].error_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchIsAuthorized AWS API Documentation
+    #
+    # @overload batch_is_authorized(params = {})
+    # @param [Hash] params ({})
+    def batch_is_authorized(params = {}, options = {})
+      req = build_request(:batch_is_authorized, params)
+      req.send_request(options)
+    end
+
     # Creates a reference to an Amazon Cognito user pool as an external
     # identity provider (IdP).
     #
@@ -697,6 +817,10 @@ module Aws::VerifiedPermissions
     #
     #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyStore
     #
+    # @option params [String] :description
+    #   Descriptive text that you can provide to help with identification of
+    #   the current policy store.
+    #
     # @return [Types::CreatePolicyStoreOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePolicyStoreOutput#policy_store_id #policy_store_id} => String
@@ -711,6 +835,7 @@ module Aws::VerifiedPermissions
     #     validation_settings: { # required
     #       mode: "OFF", # required, accepts OFF, STRICT
     #     },
+    #     description: "PolicyStoreDescription",
     #   })
     #
     # @example Response structure
@@ -1048,6 +1173,7 @@ module Aws::VerifiedPermissions
     #   * {Types::GetPolicyStoreOutput#validation_settings #validation_settings} => Types::ValidationSettings
     #   * {Types::GetPolicyStoreOutput#created_date #created_date} => Time
     #   * {Types::GetPolicyStoreOutput#last_updated_date #last_updated_date} => Time
+    #   * {Types::GetPolicyStoreOutput#description #description} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1062,6 +1188,7 @@ module Aws::VerifiedPermissions
     #   resp.validation_settings.mode #=> String, one of "OFF", "STRICT"
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
+    #   resp.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetPolicyStore AWS API Documentation
     #
@@ -1129,6 +1256,7 @@ module Aws::VerifiedPermissions
     #   * {Types::GetSchemaOutput#schema #schema} => String
     #   * {Types::GetSchemaOutput#created_date #created_date} => Time
     #   * {Types::GetSchemaOutput#last_updated_date #last_updated_date} => Time
+    #   * {Types::GetSchemaOutput#namespaces #namespaces} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1142,6 +1270,8 @@ module Aws::VerifiedPermissions
     #   resp.schema #=> String
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
+    #   resp.namespaces #=> Array
+    #   resp.namespaces[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetSchema AWS API Documentation
     #
@@ -1611,6 +1741,8 @@ module Aws::VerifiedPermissions
     #   resp.policy_stores[0].policy_store_id #=> String
     #   resp.policy_stores[0].arn #=> String
     #   resp.policy_stores[0].created_date #=> Time
+    #   resp.policy_stores[0].last_updated_date #=> Time
+    #   resp.policy_stores[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ListPolicyStores AWS API Documentation
     #
@@ -1952,6 +2084,10 @@ module Aws::VerifiedPermissions
     #   A structure that defines the validation settings that want to enable
     #   for the policy store.
     #
+    # @option params [String] :description
+    #   Descriptive text that you can provide to help with identification of
+    #   the current policy store.
+    #
     # @return [Types::UpdatePolicyStoreOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePolicyStoreOutput#policy_store_id #policy_store_id} => String
@@ -1966,6 +2102,7 @@ module Aws::VerifiedPermissions
     #     validation_settings: { # required
     #       mode: "OFF", # required, accepts OFF, STRICT
     #     },
+    #     description: "PolicyStoreDescription",
     #   })
     #
     # @example Response structure
@@ -2077,7 +2214,7 @@ module Aws::VerifiedPermissions
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

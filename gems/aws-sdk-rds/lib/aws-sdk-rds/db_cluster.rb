@@ -211,6 +211,12 @@ module Aws::RDS
       data[:read_replica_identifiers]
     end
 
+    # Reserved for future use.
+    # @return [Array<Types::DBClusterStatusInfo>]
+    def status_infos
+      data[:status_infos]
+    end
+
     # The list of DB instances that make up the DB cluster.
     # @return [Array<Types::DBClusterMember>]
     def db_cluster_members
@@ -364,6 +370,12 @@ module Aws::RDS
       data[:scaling_configuration_info]
     end
 
+    # Reserved for future use.
+    # @return [Types::RdsCustomClusterConfiguration]
+    def rds_custom_cluster_configuration
+      data[:rds_custom_cluster_configuration]
+    end
+
     # Indicates whether the DB cluster has deletion protection enabled. The
     # database can't be deleted when deletion protection is enabled.
     # @return [Boolean]
@@ -371,16 +383,16 @@ module Aws::RDS
       data[:deletion_protection]
     end
 
-    # Indicates whether the HTTP endpoint for an Aurora Serverless v1 DB
-    # cluster is enabled.
+    # Indicates whether the HTTP endpoint is enabled for an Aurora DB
+    # cluster.
     #
     # When enabled, the HTTP endpoint provides a connectionless web service
-    # API for running SQL queries on the Aurora Serverless v1 DB cluster.
-    # You can also query your database from inside the RDS console with the
+    # API (RDS Data API) for running SQL queries on the DB cluster. You can
+    # also query your database from inside the RDS console with the RDS
     # query editor.
     #
-    # For more information, see [Using the Data API for Aurora Serverless
-    # v1][1] in the *Amazon Aurora User Guide*.
+    # For more information, see [Using RDS Data API][1] in the *Amazon
+    # Aurora User Guide*.
     #
     #
     #
@@ -668,6 +680,12 @@ module Aws::RDS
       data[:aws_backup_recovery_point_arn]
     end
 
+    # The details for Aurora Limitless Database.
+    # @return [Types::LimitlessDatabase]
+    def limitless_database
+      data[:limitless_database]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -846,6 +864,11 @@ module Aws::RDS
     #       timeout_action: "String",
     #       seconds_before_timeout: 1,
     #     },
+    #     rds_custom_cluster_configuration: {
+    #       interconnect_subnet_id: "String",
+    #       transit_gateway_multicast_domain_id: "String",
+    #       replica_mode: "open-read-only", # accepts open-read-only, mounted
+    #     },
     #     deletion_protection: false,
     #     global_cluster_identifier: "String",
     #     enable_http_endpoint: false,
@@ -864,6 +887,7 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
+    #     enable_limitless_database: false,
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
@@ -1269,6 +1293,8 @@ module Aws::RDS
     #   of the DB cluster.
     #
     #   Valid for Cluster Type: Aurora DB clusters only
+    # @option options [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
+    #   Reserved for future use.
     # @option options [Boolean] :deletion_protection
     #   Specifies whether the DB cluster has deletion protection enabled. The
     #   database can't be deleted when deletion protection is enabled. By
@@ -1281,16 +1307,22 @@ module Aws::RDS
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     # @option options [Boolean] :enable_http_endpoint
-    #   Specifies whether to enable the HTTP endpoint for an Aurora Serverless
-    #   v1 DB cluster. By default, the HTTP endpoint is disabled.
+    #   Specifies whether to enable the HTTP endpoint for the DB cluster. By
+    #   default, the HTTP endpoint isn't enabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web service
-    #   API for running SQL queries on the Aurora Serverless v1 DB cluster.
-    #   You can also query your database from inside the RDS console with the
+    #   API (RDS Data API) for running SQL queries on the DB cluster. You can
+    #   also query your database from inside the RDS console with the RDS
     #   query editor.
     #
-    #   For more information, see [Using the Data API for Aurora Serverless
-    #   v1][1] in the *Amazon Aurora User Guide*.
+    #   RDS Data API is supported with the following DB clusters:
+    #
+    #   * Aurora PostgreSQL Serverless v2 and provisioned
+    #
+    #   * Aurora PostgreSQL and Aurora MySQL Serverless v1
+    #
+    #   For more information, see [Using RDS Data API][1] in the *Amazon
+    #   Aurora User Guide*.
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
@@ -1531,6 +1563,11 @@ module Aws::RDS
     #
     #   If you specify a retention period that isn't valid, such as `94`,
     #   Amazon RDS issues an error.
+    # @option options [Boolean] :enable_limitless_database
+    #   Specifies whether to enable Aurora Limitless Database. You must enable
+    #   Aurora Limitless Database to create a DB shard group.
+    #
+    #   Valid for: Aurora DB clusters only
     # @option options [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
     #   Contains the scaling configuration of an Aurora Serverless v2 DB
     #   cluster.
@@ -1809,6 +1846,7 @@ module Aws::RDS
     #     allow_engine_mode_change: false,
     #     enable_local_write_forwarding: false,
     #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
+    #     enable_limitless_database: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :new_db_cluster_identifier
@@ -2094,15 +2132,22 @@ module Aws::RDS
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Boolean] :enable_http_endpoint
     #   Specifies whether to enable the HTTP endpoint for an Aurora Serverless
-    #   v1 DB cluster. By default, the HTTP endpoint is disabled.
+    #   v1 DB cluster. By default, the HTTP endpoint isn't enabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web service
-    #   API for running SQL queries on the Aurora Serverless v1 DB cluster.
-    #   You can also query your database from inside the RDS console with the
-    #   query editor.
+    #   API (RDS Data API) for running SQL queries on the Aurora Serverless v1
+    #   DB cluster. You can also query your database from inside the RDS
+    #   console with the RDS query editor.
     #
-    #   For more information, see [Using the Data API for Aurora Serverless
-    #   v1][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using RDS Data API][1] in the *Amazon
+    #   Aurora User Guide*.
+    #
+    #   <note markdown="1"> This parameter applies only to Aurora Serverless v1 DB clusters. To
+    #   enable or disable the HTTP endpoint for an Aurora PostgreSQL
+    #   Serverless v2 or provisioned DB cluster, use the `EnableHttpEndpoint`
+    #   and `DisableHttpEndpoint` operations.
+    #
+    #    </note>
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
@@ -2426,6 +2471,11 @@ module Aws::RDS
     # @option options [String] :aws_backup_recovery_point_arn
     #   The Amazon Resource Name (ARN) of the recovery point in Amazon Web
     #   Services Backup.
+    # @option options [Boolean] :enable_limitless_database
+    #   Specifies whether to enable Aurora Limitless Database. You must enable
+    #   Aurora Limitless Database to create a DB shard group.
+    #
+    #   Valid for: Aurora DB clusters only
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)
@@ -2484,6 +2534,11 @@ module Aws::RDS
     #     },
     #     network_type: "String",
     #     source_db_cluster_resource_id: "String",
+    #     rds_custom_cluster_configuration: {
+    #       interconnect_subnet_id: "String",
+    #       transit_gateway_multicast_domain_id: "String",
+    #       replica_mode: "open-read-only", # accepts open-read-only, mounted
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_cluster_identifier
@@ -2841,6 +2896,8 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @option options [String] :source_db_cluster_resource_id
     #   The resource ID of the source DB cluster from which to restore.
+    # @option options [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
+    #   Reserved for future use.
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)

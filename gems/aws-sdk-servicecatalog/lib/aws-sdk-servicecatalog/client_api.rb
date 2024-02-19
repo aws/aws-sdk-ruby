@@ -542,6 +542,7 @@ module Aws::ServiceCatalog
     AssociateServiceActionWithProvisioningArtifactInput.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisioningArtifactId"))
     AssociateServiceActionWithProvisioningArtifactInput.add_member(:service_action_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ServiceActionId"))
     AssociateServiceActionWithProvisioningArtifactInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    AssociateServiceActionWithProvisioningArtifactInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
     AssociateServiceActionWithProvisioningArtifactInput.struct_class = Types::AssociateServiceActionWithProvisioningArtifactInput
 
     AssociateServiceActionWithProvisioningArtifactOutput.struct_class = Types::AssociateServiceActionWithProvisioningArtifactOutput
@@ -761,6 +762,7 @@ module Aws::ServiceCatalog
 
     DeleteServiceActionInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
     DeleteServiceActionInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    DeleteServiceActionInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
     DeleteServiceActionInput.struct_class = Types::DeleteServiceActionInput
 
     DeleteServiceActionOutput.struct_class = Types::DeleteServiceActionOutput
@@ -964,6 +966,7 @@ module Aws::ServiceCatalog
     DisassociateServiceActionFromProvisioningArtifactInput.add_member(:provisioning_artifact_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ProvisioningArtifactId"))
     DisassociateServiceActionFromProvisioningArtifactInput.add_member(:service_action_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "ServiceActionId"))
     DisassociateServiceActionFromProvisioningArtifactInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+    DisassociateServiceActionFromProvisioningArtifactInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken", metadata: {"idempotencyToken"=>true}))
     DisassociateServiceActionFromProvisioningArtifactInput.struct_class = Types::DisassociateServiceActionFromProvisioningArtifactInput
 
     DisassociateServiceActionFromProvisioningArtifactOutput.struct_class = Types::DisassociateServiceActionFromProvisioningArtifactOutput

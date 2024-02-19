@@ -1,0 +1,183 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::EBS
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor reason: ("UNAUTHORIZED_ACCOUNT" | "DEPENDENCY_ACCESS_DENIED")
+      SENSITIVE: []
+    end
+
+    class Block
+      attr_accessor block_index: ::Integer
+      attr_accessor block_token: ::String
+      SENSITIVE: []
+    end
+
+    class ChangedBlock
+      attr_accessor block_index: ::Integer
+      attr_accessor first_block_token: ::String
+      attr_accessor second_block_token: ::String
+      SENSITIVE: []
+    end
+
+    class CompleteSnapshotRequest
+      attr_accessor snapshot_id: ::String
+      attr_accessor changed_blocks_count: ::Integer
+      attr_accessor checksum: ::String
+      attr_accessor checksum_algorithm: ("SHA256")
+      attr_accessor checksum_aggregation_method: ("LINEAR")
+      SENSITIVE: []
+    end
+
+    class CompleteSnapshotResponse
+      attr_accessor status: ("completed" | "pending" | "error")
+      SENSITIVE: []
+    end
+
+    class ConcurrentLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetSnapshotBlockRequest
+      attr_accessor snapshot_id: ::String
+      attr_accessor block_index: ::Integer
+      attr_accessor block_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSnapshotBlockResponse
+      attr_accessor data_length: ::Integer
+      attr_accessor block_data: ::IO
+      attr_accessor checksum: ::String
+      attr_accessor checksum_algorithm: ("SHA256")
+      SENSITIVE: [:block_data]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListChangedBlocksRequest
+      attr_accessor first_snapshot_id: ::String
+      attr_accessor second_snapshot_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor starting_block_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListChangedBlocksResponse
+      attr_accessor changed_blocks: ::Array[Types::ChangedBlock]
+      attr_accessor expiry_time: ::Time
+      attr_accessor volume_size: ::Integer
+      attr_accessor block_size: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSnapshotBlocksRequest
+      attr_accessor snapshot_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor starting_block_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSnapshotBlocksResponse
+      attr_accessor blocks: ::Array[Types::Block]
+      attr_accessor expiry_time: ::Time
+      attr_accessor volume_size: ::Integer
+      attr_accessor block_size: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:blocks]
+    end
+
+    class PutSnapshotBlockRequest
+      attr_accessor snapshot_id: ::String
+      attr_accessor block_index: ::Integer
+      attr_accessor block_data: ::IO
+      attr_accessor data_length: ::Integer
+      attr_accessor progress: ::Integer
+      attr_accessor checksum: ::String
+      attr_accessor checksum_algorithm: ("SHA256")
+      SENSITIVE: [:block_data]
+    end
+
+    class PutSnapshotBlockResponse
+      attr_accessor checksum: ::String
+      attr_accessor checksum_algorithm: ("SHA256")
+      SENSITIVE: []
+    end
+
+    class RequestThrottledException
+      attr_accessor message: ::String
+      attr_accessor reason: ("ACCOUNT_THROTTLED" | "DEPENDENCY_REQUEST_THROTTLED" | "RESOURCE_LEVEL_THROTTLE")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor reason: ("SNAPSHOT_NOT_FOUND" | "GRANT_NOT_FOUND" | "DEPENDENCY_RESOURCE_NOT_FOUND" | "IMAGE_NOT_FOUND")
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor reason: ("DEPENDENCY_SERVICE_QUOTA_EXCEEDED")
+      SENSITIVE: []
+    end
+
+    class StartSnapshotRequest
+      attr_accessor volume_size: ::Integer
+      attr_accessor parent_snapshot_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_arn: ::String
+      attr_accessor timeout: ::Integer
+      SENSITIVE: [:kms_key_arn]
+    end
+
+    class StartSnapshotResponse
+      attr_accessor description: ::String
+      attr_accessor snapshot_id: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor status: ("completed" | "pending" | "error")
+      attr_accessor start_time: ::Time
+      attr_accessor volume_size: ::Integer
+      attr_accessor block_size: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor parent_snapshot_id: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor sse_type: ("sse-ebs" | "sse-kms" | "none")
+      SENSITIVE: [:kms_key_arn]
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("INVALID_CUSTOMER_KEY" | "INVALID_PAGE_TOKEN" | "INVALID_BLOCK_TOKEN" | "INVALID_GRANT_TOKEN" | "INVALID_SNAPSHOT_ID" | "UNRELATED_SNAPSHOTS" | "INVALID_BLOCK" | "INVALID_CONTENT_ENCODING" | "INVALID_TAG" | "INVALID_DEPENDENCY_REQUEST" | "INVALID_PARAMETER_VALUE" | "INVALID_VOLUME_SIZE" | "CONFLICTING_BLOCK_UPDATE" | "INVALID_IMAGE_ID" | "WRITE_REQUEST_TIMEOUT")
+      SENSITIVE: []
+    end
+  end
+end

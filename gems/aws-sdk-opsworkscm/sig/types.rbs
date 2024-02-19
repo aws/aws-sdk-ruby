@@ -1,0 +1,360 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::OpsWorksCM
+  module Types
+
+    class AccountAttribute
+      attr_accessor name: ::String
+      attr_accessor maximum: ::Integer
+      attr_accessor used: ::Integer
+      SENSITIVE: []
+    end
+
+    class AssociateNodeRequest
+      attr_accessor server_name: ::String
+      attr_accessor node_name: ::String
+      attr_accessor engine_attributes: ::Array[Types::EngineAttribute]
+      SENSITIVE: []
+    end
+
+    class AssociateNodeResponse
+      attr_accessor node_association_status_token: ::String
+      SENSITIVE: []
+    end
+
+    class Backup
+      attr_accessor backup_arn: ::String
+      attr_accessor backup_id: ::String
+      attr_accessor backup_type: ("AUTOMATED" | "MANUAL")
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor engine: ::String
+      attr_accessor engine_model: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor instance_profile_arn: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor key_pair: ::String
+      attr_accessor preferred_backup_window: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor s3_data_size: ::Integer
+      attr_accessor s3_data_url: ::String
+      attr_accessor s3_log_url: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor server_name: ::String
+      attr_accessor service_role_arn: ::String
+      attr_accessor status: ("IN_PROGRESS" | "OK" | "FAILED" | "DELETING")
+      attr_accessor status_description: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tools_version: ::String
+      attr_accessor user_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBackupRequest
+      attr_accessor server_name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateBackupResponse
+      attr_accessor backup: Types::Backup
+      SENSITIVE: []
+    end
+
+    class CreateServerRequest
+      attr_accessor associate_public_ip_address: bool
+      attr_accessor custom_domain: ::String
+      attr_accessor custom_certificate: ::String
+      attr_accessor custom_private_key: ::String
+      attr_accessor disable_automated_backup: bool
+      attr_accessor engine: ::String
+      attr_accessor engine_model: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor engine_attributes: ::Array[Types::EngineAttribute]
+      attr_accessor backup_retention_count: ::Integer
+      attr_accessor server_name: ::String
+      attr_accessor instance_profile_arn: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor key_pair: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor preferred_backup_window: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor service_role_arn: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor backup_id: ::String
+      SENSITIVE: [:custom_private_key]
+    end
+
+    class CreateServerResponse
+      attr_accessor server: Types::Server
+      SENSITIVE: []
+    end
+
+    class DeleteBackupRequest
+      attr_accessor backup_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBackupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteServerRequest
+      attr_accessor server_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServerResponse < Aws::EmptyStructure
+    end
+
+    class DescribeAccountAttributesRequest < Aws::EmptyStructure
+    end
+
+    class DescribeAccountAttributesResponse
+      attr_accessor attributes: ::Array[Types::AccountAttribute]
+      SENSITIVE: []
+    end
+
+    class DescribeBackupsRequest
+      attr_accessor backup_id: ::String
+      attr_accessor server_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeBackupsResponse
+      attr_accessor backups: ::Array[Types::Backup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventsRequest
+      attr_accessor server_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeEventsResponse
+      attr_accessor server_events: ::Array[Types::ServerEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNodeAssociationStatusRequest
+      attr_accessor node_association_status_token: ::String
+      attr_accessor server_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNodeAssociationStatusResponse
+      attr_accessor node_association_status: ("SUCCESS" | "FAILED" | "IN_PROGRESS")
+      attr_accessor engine_attributes: ::Array[Types::EngineAttribute]
+      SENSITIVE: []
+    end
+
+    class DescribeServersRequest
+      attr_accessor server_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeServersResponse
+      attr_accessor servers: ::Array[Types::Server]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateNodeRequest
+      attr_accessor server_name: ::String
+      attr_accessor node_name: ::String
+      attr_accessor engine_attributes: ::Array[Types::EngineAttribute]
+      SENSITIVE: []
+    end
+
+    class DisassociateNodeResponse
+      attr_accessor node_association_status_token: ::String
+      SENSITIVE: []
+    end
+
+    class EngineAttribute
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: [:value]
+    end
+
+    class ExportServerEngineAttributeRequest
+      attr_accessor export_attribute_name: ::String
+      attr_accessor server_name: ::String
+      attr_accessor input_attributes: ::Array[Types::EngineAttribute]
+      SENSITIVE: []
+    end
+
+    class ExportServerEngineAttributeResponse
+      attr_accessor engine_attribute: Types::EngineAttribute
+      attr_accessor server_name: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreServerRequest
+      attr_accessor backup_id: ::String
+      attr_accessor server_name: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor key_pair: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreServerResponse
+      attr_accessor server: Types::Server
+      SENSITIVE: []
+    end
+
+    class Server
+      attr_accessor associate_public_ip_address: bool
+      attr_accessor backup_retention_count: ::Integer
+      attr_accessor server_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor cloud_formation_stack_arn: ::String
+      attr_accessor custom_domain: ::String
+      attr_accessor disable_automated_backup: bool
+      attr_accessor endpoint: ::String
+      attr_accessor engine: ::String
+      attr_accessor engine_model: ::String
+      attr_accessor engine_attributes: ::Array[Types::EngineAttribute]
+      attr_accessor engine_version: ::String
+      attr_accessor instance_profile_arn: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor key_pair: ::String
+      attr_accessor maintenance_status: ("SUCCESS" | "FAILED")
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor preferred_backup_window: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor service_role_arn: ::String
+      attr_accessor status: ("BACKING_UP" | "CONNECTION_LOST" | "CREATING" | "DELETING" | "MODIFYING" | "FAILED" | "HEALTHY" | "RUNNING" | "RESTORING" | "SETUP" | "UNDER_MAINTENANCE" | "UNHEALTHY" | "TERMINATED")
+      attr_accessor status_reason: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor server_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServerEvent
+      attr_accessor created_at: ::Time
+      attr_accessor server_name: ::String
+      attr_accessor message: ::String
+      attr_accessor log_url: ::String
+      SENSITIVE: []
+    end
+
+    class StartMaintenanceRequest
+      attr_accessor server_name: ::String
+      attr_accessor engine_attributes: ::Array[Types::EngineAttribute]
+      SENSITIVE: []
+    end
+
+    class StartMaintenanceResponse
+      attr_accessor server: Types::Server
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateServerEngineAttributesRequest
+      attr_accessor server_name: ::String
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_value: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServerEngineAttributesResponse
+      attr_accessor server: Types::Server
+      SENSITIVE: []
+    end
+
+    class UpdateServerRequest
+      attr_accessor disable_automated_backup: bool
+      attr_accessor backup_retention_count: ::Integer
+      attr_accessor server_name: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor preferred_backup_window: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServerResponse
+      attr_accessor server: Types::Server
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

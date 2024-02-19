@@ -14,6 +14,7 @@ module Aws::PrometheusService
       option(
         :endpoint_provider,
         doc_type: 'Aws::PrometheusService::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::PrometheusService
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -62,6 +64,8 @@ module Aws::PrometheusService
             Aws::PrometheusService::Endpoints::CreateLoggingConfiguration.build(context)
           when :create_rule_groups_namespace
             Aws::PrometheusService::Endpoints::CreateRuleGroupsNamespace.build(context)
+          when :create_scraper
+            Aws::PrometheusService::Endpoints::CreateScraper.build(context)
           when :create_workspace
             Aws::PrometheusService::Endpoints::CreateWorkspace.build(context)
           when :delete_alert_manager_definition
@@ -70,6 +74,8 @@ module Aws::PrometheusService
             Aws::PrometheusService::Endpoints::DeleteLoggingConfiguration.build(context)
           when :delete_rule_groups_namespace
             Aws::PrometheusService::Endpoints::DeleteRuleGroupsNamespace.build(context)
+          when :delete_scraper
+            Aws::PrometheusService::Endpoints::DeleteScraper.build(context)
           when :delete_workspace
             Aws::PrometheusService::Endpoints::DeleteWorkspace.build(context)
           when :describe_alert_manager_definition
@@ -78,10 +84,16 @@ module Aws::PrometheusService
             Aws::PrometheusService::Endpoints::DescribeLoggingConfiguration.build(context)
           when :describe_rule_groups_namespace
             Aws::PrometheusService::Endpoints::DescribeRuleGroupsNamespace.build(context)
+          when :describe_scraper
+            Aws::PrometheusService::Endpoints::DescribeScraper.build(context)
           when :describe_workspace
             Aws::PrometheusService::Endpoints::DescribeWorkspace.build(context)
+          when :get_default_scraper_configuration
+            Aws::PrometheusService::Endpoints::GetDefaultScraperConfiguration.build(context)
           when :list_rule_groups_namespaces
             Aws::PrometheusService::Endpoints::ListRuleGroupsNamespaces.build(context)
+          when :list_scrapers
+            Aws::PrometheusService::Endpoints::ListScrapers.build(context)
           when :list_tags_for_resource
             Aws::PrometheusService::Endpoints::ListTagsForResource.build(context)
           when :list_workspaces

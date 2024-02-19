@@ -1,0 +1,452 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ManagedGrafana
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssertionAttributes
+      attr_accessor email: ::String
+      attr_accessor groups: ::String
+      attr_accessor login: ::String
+      attr_accessor name: ::String
+      attr_accessor org: ::String
+      attr_accessor role: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateLicenseRequest
+      attr_accessor license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL")
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateLicenseResponse
+      attr_accessor workspace: Types::WorkspaceDescription
+      SENSITIVE: []
+    end
+
+    class AuthenticationDescription
+      attr_accessor aws_sso: Types::AwsSsoAuthentication
+      attr_accessor providers: ::Array[("AWS_SSO" | "SAML")]
+      attr_accessor saml: Types::SamlAuthentication
+      SENSITIVE: []
+    end
+
+    class AuthenticationSummary
+      attr_accessor providers: ::Array[("AWS_SSO" | "SAML")]
+      attr_accessor saml_configuration_status: ("CONFIGURED" | "NOT_CONFIGURED")
+      SENSITIVE: []
+    end
+
+    class AwsSsoAuthentication
+      attr_accessor sso_client_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkspaceApiKeyRequest
+      attr_accessor key_name: ::String
+      attr_accessor key_role: ::String
+      attr_accessor seconds_to_live: ::Integer
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkspaceApiKeyResponse
+      attr_accessor key: ::String
+      attr_accessor key_name: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: [:key]
+    end
+
+    class CreateWorkspaceRequest
+      attr_accessor account_access_type: ("CURRENT_ACCOUNT" | "ORGANIZATION")
+      attr_accessor authentication_providers: ::Array[("AWS_SSO" | "SAML")]
+      attr_accessor client_token: ::String
+      attr_accessor configuration: ::String
+      attr_accessor grafana_version: ::String
+      attr_accessor network_access_control: Types::NetworkAccessConfiguration
+      attr_accessor organization_role_name: ::String
+      attr_accessor permission_type: ("CUSTOMER_MANAGED" | "SERVICE_MANAGED")
+      attr_accessor stack_set_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor workspace_data_sources: ::Array[("AMAZON_OPENSEARCH_SERVICE" | "CLOUDWATCH" | "PROMETHEUS" | "XRAY" | "TIMESTREAM" | "SITEWISE" | "ATHENA" | "REDSHIFT" | "TWINMAKER")]
+      attr_accessor workspace_description: ::String
+      attr_accessor workspace_name: ::String
+      attr_accessor workspace_notification_destinations: ::Array[("SNS")]
+      attr_accessor workspace_organizational_units: ::Array[::String]
+      attr_accessor workspace_role_arn: ::String
+      SENSITIVE: [:organization_role_name, :workspace_description, :workspace_name, :workspace_organizational_units, :workspace_role_arn]
+    end
+
+    class CreateWorkspaceResponse
+      attr_accessor workspace: Types::WorkspaceDescription
+      SENSITIVE: []
+    end
+
+    class DeleteWorkspaceApiKeyRequest
+      attr_accessor key_name: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkspaceApiKeyResponse
+      attr_accessor key_name: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkspaceRequest
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkspaceResponse
+      attr_accessor workspace: Types::WorkspaceDescription
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceAuthenticationRequest
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceAuthenticationResponse
+      attr_accessor authentication: Types::AuthenticationDescription
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceConfigurationRequest
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceConfigurationResponse
+      attr_accessor configuration: ::String
+      attr_accessor grafana_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceRequest
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkspaceResponse
+      attr_accessor workspace: Types::WorkspaceDescription
+      SENSITIVE: []
+    end
+
+    class DisassociateLicenseRequest
+      attr_accessor license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL")
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateLicenseResponse
+      attr_accessor workspace: Types::WorkspaceDescription
+      SENSITIVE: []
+    end
+
+    class IdpMetadata
+      attr_accessor url: ::String
+      attr_accessor xml: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Url < IdpMetadata
+      end
+      class Xml < IdpMetadata
+      end
+      class Unknown < IdpMetadata
+      end
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPermissionsRequest
+      attr_accessor group_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor user_id: ::String
+      attr_accessor user_type: ("SSO_USER" | "SSO_GROUP")
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListPermissionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor permissions: ::Array[Types::PermissionEntry]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListVersionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListVersionsResponse
+      attr_accessor grafana_versions: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkspacesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkspacesResponse
+      attr_accessor next_token: ::String
+      attr_accessor workspaces: ::Array[Types::WorkspaceSummary]
+      SENSITIVE: []
+    end
+
+    class NetworkAccessConfiguration
+      attr_accessor prefix_list_ids: ::Array[::String]
+      attr_accessor vpce_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PermissionEntry
+      attr_accessor role: ("ADMIN" | "EDITOR" | "VIEWER")
+      attr_accessor user: Types::User
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class RoleValues
+      attr_accessor admin: ::Array[::String]
+      attr_accessor editor: ::Array[::String]
+      SENSITIVE: [:admin, :editor]
+    end
+
+    class SamlAuthentication
+      attr_accessor configuration: Types::SamlConfiguration
+      attr_accessor status: ("CONFIGURED" | "NOT_CONFIGURED")
+      SENSITIVE: []
+    end
+
+    class SamlConfiguration
+      attr_accessor allowed_organizations: ::Array[::String]
+      attr_accessor assertion_attributes: Types::AssertionAttributes
+      attr_accessor idp_metadata: Types::IdpMetadata
+      attr_accessor login_validity_duration: ::Integer
+      attr_accessor role_values: Types::RoleValues
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateError
+      attr_accessor caused_by: Types::UpdateInstruction
+      attr_accessor code: ::Integer
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateInstruction
+      attr_accessor action: ("ADD" | "REVOKE")
+      attr_accessor role: ("ADMIN" | "EDITOR" | "VIEWER")
+      attr_accessor users: ::Array[Types::User]
+      SENSITIVE: []
+    end
+
+    class UpdatePermissionsRequest
+      attr_accessor update_instruction_batch: ::Array[Types::UpdateInstruction]
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePermissionsResponse
+      attr_accessor errors: ::Array[Types::UpdateError]
+      SENSITIVE: []
+    end
+
+    class UpdateWorkspaceAuthenticationRequest
+      attr_accessor authentication_providers: ::Array[("AWS_SSO" | "SAML")]
+      attr_accessor saml_configuration: Types::SamlConfiguration
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateWorkspaceAuthenticationResponse
+      attr_accessor authentication: Types::AuthenticationDescription
+      SENSITIVE: []
+    end
+
+    class UpdateWorkspaceConfigurationRequest
+      attr_accessor configuration: ::String
+      attr_accessor grafana_version: ::String
+      attr_accessor workspace_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateWorkspaceConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateWorkspaceRequest
+      attr_accessor account_access_type: ("CURRENT_ACCOUNT" | "ORGANIZATION")
+      attr_accessor network_access_control: Types::NetworkAccessConfiguration
+      attr_accessor organization_role_name: ::String
+      attr_accessor permission_type: ("CUSTOMER_MANAGED" | "SERVICE_MANAGED")
+      attr_accessor remove_network_access_configuration: bool
+      attr_accessor remove_vpc_configuration: bool
+      attr_accessor stack_set_name: ::String
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor workspace_data_sources: ::Array[("AMAZON_OPENSEARCH_SERVICE" | "CLOUDWATCH" | "PROMETHEUS" | "XRAY" | "TIMESTREAM" | "SITEWISE" | "ATHENA" | "REDSHIFT" | "TWINMAKER")]
+      attr_accessor workspace_description: ::String
+      attr_accessor workspace_id: ::String
+      attr_accessor workspace_name: ::String
+      attr_accessor workspace_notification_destinations: ::Array[("SNS")]
+      attr_accessor workspace_organizational_units: ::Array[::String]
+      attr_accessor workspace_role_arn: ::String
+      SENSITIVE: [:organization_role_name, :workspace_description, :workspace_name, :workspace_organizational_units, :workspace_role_arn]
+    end
+
+    class UpdateWorkspaceResponse
+      attr_accessor workspace: Types::WorkspaceDescription
+      SENSITIVE: []
+    end
+
+    class User
+      attr_accessor id: ::String
+      attr_accessor type: ("SSO_USER" | "SSO_GROUP")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      attr_accessor reason: ("UNKNOWN_OPERATION" | "CANNOT_PARSE" | "FIELD_VALIDATION_FAILED" | "OTHER")
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class VpcConfiguration
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class WorkspaceDescription
+      attr_accessor account_access_type: ("CURRENT_ACCOUNT" | "ORGANIZATION")
+      attr_accessor authentication: Types::AuthenticationSummary
+      attr_accessor created: ::Time
+      attr_accessor data_sources: ::Array[("AMAZON_OPENSEARCH_SERVICE" | "CLOUDWATCH" | "PROMETHEUS" | "XRAY" | "TIMESTREAM" | "SITEWISE" | "ATHENA" | "REDSHIFT" | "TWINMAKER")]
+      attr_accessor description: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor free_trial_consumed: bool
+      attr_accessor free_trial_expiration: ::Time
+      attr_accessor grafana_version: ::String
+      attr_accessor id: ::String
+      attr_accessor license_expiration: ::Time
+      attr_accessor license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL")
+      attr_accessor modified: ::Time
+      attr_accessor name: ::String
+      attr_accessor network_access_control: Types::NetworkAccessConfiguration
+      attr_accessor notification_destinations: ::Array[("SNS")]
+      attr_accessor organization_role_name: ::String
+      attr_accessor organizational_units: ::Array[::String]
+      attr_accessor permission_type: ("CUSTOMER_MANAGED" | "SERVICE_MANAGED")
+      attr_accessor stack_set_name: ::String
+      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING" | "FAILED" | "UPDATING" | "UPGRADING" | "DELETION_FAILED" | "CREATION_FAILED" | "UPDATE_FAILED" | "UPGRADE_FAILED" | "LICENSE_REMOVAL_FAILED" | "VERSION_UPDATING" | "VERSION_UPDATE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor workspace_role_arn: ::String
+      SENSITIVE: [:description, :name, :organization_role_name, :organizational_units, :workspace_role_arn]
+    end
+
+    class WorkspaceSummary
+      attr_accessor authentication: Types::AuthenticationSummary
+      attr_accessor created: ::Time
+      attr_accessor description: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor grafana_version: ::String
+      attr_accessor id: ::String
+      attr_accessor modified: ::Time
+      attr_accessor name: ::String
+      attr_accessor notification_destinations: ::Array[("SNS")]
+      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING" | "FAILED" | "UPDATING" | "UPGRADING" | "DELETION_FAILED" | "CREATION_FAILED" | "UPDATE_FAILED" | "UPGRADE_FAILED" | "LICENSE_REMOVAL_FAILED" | "VERSION_UPDATING" | "VERSION_UPDATE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description, :name]
+    end
+  end
+end

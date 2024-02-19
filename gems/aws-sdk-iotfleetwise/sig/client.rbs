@@ -1,0 +1,1304 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTFleetWise
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateVehicleFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateVehicleFleetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#associate_vehicle_fleet-instance_method
+      def associate_vehicle_fleet: (
+                                     vehicle_name: ::String,
+                                     fleet_id: ::String
+                                   ) -> _AssociateVehicleFleetResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateVehicleFleetResponseSuccess
+
+      interface _BatchCreateVehicleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateVehicleResponse]
+        def vehicles: () -> ::Array[Types::CreateVehicleResponseItem]
+        def errors: () -> ::Array[Types::CreateVehicleError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#batch_create_vehicle-instance_method
+      def batch_create_vehicle: (
+                                  vehicles: Array[
+                                    {
+                                      vehicle_name: ::String,
+                                      model_manifest_arn: ::String,
+                                      decoder_manifest_arn: ::String,
+                                      attributes: Hash[::String, ::String]?,
+                                      association_behavior: ("CreateIotThing" | "ValidateIotThingExists")?,
+                                      tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ]?
+                                    },
+                                  ]
+                                ) -> _BatchCreateVehicleResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateVehicleResponseSuccess
+
+      interface _BatchUpdateVehicleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdateVehicleResponse]
+        def vehicles: () -> ::Array[Types::UpdateVehicleResponseItem]
+        def errors: () -> ::Array[Types::UpdateVehicleError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#batch_update_vehicle-instance_method
+      def batch_update_vehicle: (
+                                  vehicles: Array[
+                                    {
+                                      vehicle_name: ::String,
+                                      model_manifest_arn: ::String?,
+                                      decoder_manifest_arn: ::String?,
+                                      attributes: Hash[::String, ::String]?,
+                                      attribute_update_mode: ("Overwrite" | "Merge")?
+                                    },
+                                  ]
+                                ) -> _BatchUpdateVehicleResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateVehicleResponseSuccess
+
+      interface _CreateCampaignResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCampaignResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#create_campaign-instance_method
+      def create_campaign: (
+                             name: ::String,
+                             ?description: ::String,
+                             signal_catalog_arn: ::String,
+                             target_arn: ::String,
+                             ?start_time: ::Time,
+                             ?expiry_time: ::Time,
+                             ?post_trigger_collection_duration: ::Integer,
+                             ?diagnostics_mode: ("OFF" | "SEND_ACTIVE_DTCS"),
+                             ?spooling_mode: ("OFF" | "TO_DISK"),
+                             ?compression: ("OFF" | "SNAPPY"),
+                             ?priority: ::Integer,
+                             ?signals_to_collect: Array[
+                               {
+                                 name: ::String,
+                                 max_sample_count: ::Integer?,
+                                 minimum_sampling_interval_ms: ::Integer?
+                               },
+                             ],
+                             collection_scheme: {
+                               time_based_collection_scheme: {
+                                 period_ms: ::Integer
+                               }?,
+                               condition_based_collection_scheme: {
+                                 expression: ::String,
+                                 minimum_trigger_interval_ms: ::Integer?,
+                                 trigger_mode: ("ALWAYS" | "RISING_EDGE")?,
+                                 condition_language_version: ::Integer?
+                               }?
+                             },
+                             ?data_extra_dimensions: Array[::String],
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ],
+                             ?data_destination_configs: Array[
+                               {
+                                 s3_config: {
+                                   bucket_arn: ::String,
+                                   data_format: ("JSON" | "PARQUET")?,
+                                   storage_compression_format: ("NONE" | "GZIP")?,
+                                   prefix: ::String?
+                                 }?,
+                                 timestream_config: {
+                                   timestream_table_arn: ::String,
+                                   execution_role_arn: ::String
+                                 }?
+                               },
+                             ]
+                           ) -> _CreateCampaignResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCampaignResponseSuccess
+
+      interface _CreateDecoderManifestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDecoderManifestResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#create_decoder_manifest-instance_method
+      def create_decoder_manifest: (
+                                     name: ::String,
+                                     ?description: ::String,
+                                     model_manifest_arn: ::String,
+                                     ?signal_decoders: Array[
+                                       {
+                                         fully_qualified_name: ::String,
+                                         type: ("CAN_SIGNAL" | "OBD_SIGNAL" | "MESSAGE_SIGNAL"),
+                                         interface_id: ::String,
+                                         can_signal: {
+                                           message_id: ::Integer,
+                                           is_big_endian: bool,
+                                           is_signed: bool,
+                                           start_bit: ::Integer,
+                                           offset: ::Float,
+                                           factor: ::Float,
+                                           length: ::Integer,
+                                           name: ::String?
+                                         }?,
+                                         obd_signal: {
+                                           pid_response_length: ::Integer,
+                                           service_mode: ::Integer,
+                                           pid: ::Integer,
+                                           scaling: ::Float,
+                                           offset: ::Float,
+                                           start_byte: ::Integer,
+                                           byte_length: ::Integer,
+                                           bit_right_shift: ::Integer?,
+                                           bit_mask_length: ::Integer?
+                                         }?,
+                                         message_signal: {
+                                           topic_name: ::String,
+                                           structured_message: {
+                                             primitive_message_definition: {
+                                               ros2_primitive_message_definition: {
+                                                 primitive_type: ("BOOL" | "BYTE" | "CHAR" | "FLOAT32" | "FLOAT64" | "INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "STRING" | "WSTRING"),
+                                                 offset: ::Float?,
+                                                 scaling: ::Float?,
+                                                 upper_bound: ::Integer?
+                                               }?
+                                             }?,
+                                             structured_message_list_definition: {
+                                               name: ::String,
+                                               member_type: untyped,
+                                               list_type: ("FIXED_CAPACITY" | "DYNAMIC_UNBOUNDED_CAPACITY" | "DYNAMIC_BOUNDED_CAPACITY"),
+                                               capacity: ::Integer?
+                                             }?,
+                                             structured_message_definition: Array[
+                                               {
+                                                 field_name: ::String,
+                                                 data_type: untyped
+                                               },
+                                             ]?
+                                           }
+                                         }?
+                                       },
+                                     ],
+                                     ?network_interfaces: Array[
+                                       {
+                                         interface_id: ::String,
+                                         type: ("CAN_INTERFACE" | "OBD_INTERFACE" | "VEHICLE_MIDDLEWARE"),
+                                         can_interface: {
+                                           name: ::String,
+                                           protocol_name: ::String?,
+                                           protocol_version: ::String?
+                                         }?,
+                                         obd_interface: {
+                                           name: ::String,
+                                           request_message_id: ::Integer,
+                                           obd_standard: ::String?,
+                                           pid_request_interval_seconds: ::Integer?,
+                                           dtc_request_interval_seconds: ::Integer?,
+                                           use_extended_ids: bool?,
+                                           has_transmission_ecu: bool?
+                                         }?,
+                                         vehicle_middleware: {
+                                           name: ::String,
+                                           protocol_name: ("ROS_2")
+                                         }?
+                                       },
+                                     ],
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ]
+                                   ) -> _CreateDecoderManifestResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDecoderManifestResponseSuccess
+
+      interface _CreateFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFleetResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#create_fleet-instance_method
+      def create_fleet: (
+                          fleet_id: ::String,
+                          ?description: ::String,
+                          signal_catalog_arn: ::String,
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _CreateFleetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFleetResponseSuccess
+
+      interface _CreateModelManifestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateModelManifestResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#create_model_manifest-instance_method
+      def create_model_manifest: (
+                                   name: ::String,
+                                   ?description: ::String,
+                                   nodes: Array[::String],
+                                   signal_catalog_arn: ::String,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ]
+                                 ) -> _CreateModelManifestResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelManifestResponseSuccess
+
+      interface _CreateSignalCatalogResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSignalCatalogResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#create_signal_catalog-instance_method
+      def create_signal_catalog: (
+                                   name: ::String,
+                                   ?description: ::String,
+                                   ?nodes: Array[
+                                     {
+                                       branch: {
+                                         fully_qualified_name: ::String,
+                                         description: ::String?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?
+                                       }?,
+                                       sensor: {
+                                         fully_qualified_name: ::String,
+                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
+                                         description: ::String?,
+                                         unit: ::String?,
+                                         allowed_values: Array[::String]?,
+                                         min: ::Float?,
+                                         max: ::Float?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?,
+                                         struct_fully_qualified_name: ::String?
+                                       }?,
+                                       actuator: {
+                                         fully_qualified_name: ::String,
+                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
+                                         description: ::String?,
+                                         unit: ::String?,
+                                         allowed_values: Array[::String]?,
+                                         min: ::Float?,
+                                         max: ::Float?,
+                                         assigned_value: ::String?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?,
+                                         struct_fully_qualified_name: ::String?
+                                       }?,
+                                       attribute: {
+                                         fully_qualified_name: ::String,
+                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
+                                         description: ::String?,
+                                         unit: ::String?,
+                                         allowed_values: Array[::String]?,
+                                         min: ::Float?,
+                                         max: ::Float?,
+                                         assigned_value: ::String?,
+                                         default_value: ::String?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?
+                                       }?,
+                                       struct: {
+                                         fully_qualified_name: ::String,
+                                         description: ::String?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?
+                                       }?,
+                                       property: {
+                                         fully_qualified_name: ::String,
+                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
+                                         data_encoding: ("BINARY" | "TYPED")?,
+                                         description: ::String?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?,
+                                         struct_fully_qualified_name: ::String?
+                                       }?
+                                     },
+                                   ],
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ]
+                                 ) -> _CreateSignalCatalogResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSignalCatalogResponseSuccess
+
+      interface _CreateVehicleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVehicleResponse]
+        def vehicle_name: () -> ::String
+        def arn: () -> ::String
+        def thing_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#create_vehicle-instance_method
+      def create_vehicle: (
+                            vehicle_name: ::String,
+                            model_manifest_arn: ::String,
+                            decoder_manifest_arn: ::String,
+                            ?attributes: Hash[::String, ::String],
+                            ?association_behavior: ("CreateIotThing" | "ValidateIotThingExists"),
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _CreateVehicleResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVehicleResponseSuccess
+
+      interface _DeleteCampaignResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCampaignResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#delete_campaign-instance_method
+      def delete_campaign: (
+                             name: ::String
+                           ) -> _DeleteCampaignResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCampaignResponseSuccess
+
+      interface _DeleteDecoderManifestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDecoderManifestResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#delete_decoder_manifest-instance_method
+      def delete_decoder_manifest: (
+                                     name: ::String
+                                   ) -> _DeleteDecoderManifestResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDecoderManifestResponseSuccess
+
+      interface _DeleteFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFleetResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#delete_fleet-instance_method
+      def delete_fleet: (
+                          fleet_id: ::String
+                        ) -> _DeleteFleetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFleetResponseSuccess
+
+      interface _DeleteModelManifestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteModelManifestResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#delete_model_manifest-instance_method
+      def delete_model_manifest: (
+                                   name: ::String
+                                 ) -> _DeleteModelManifestResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteModelManifestResponseSuccess
+
+      interface _DeleteSignalCatalogResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSignalCatalogResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#delete_signal_catalog-instance_method
+      def delete_signal_catalog: (
+                                   name: ::String
+                                 ) -> _DeleteSignalCatalogResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSignalCatalogResponseSuccess
+
+      interface _DeleteVehicleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVehicleResponse]
+        def vehicle_name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#delete_vehicle-instance_method
+      def delete_vehicle: (
+                            vehicle_name: ::String
+                          ) -> _DeleteVehicleResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVehicleResponseSuccess
+
+      interface _DisassociateVehicleFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateVehicleFleetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#disassociate_vehicle_fleet-instance_method
+      def disassociate_vehicle_fleet: (
+                                        vehicle_name: ::String,
+                                        fleet_id: ::String
+                                      ) -> _DisassociateVehicleFleetResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateVehicleFleetResponseSuccess
+
+      interface _GetCampaignResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCampaignResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+        def description: () -> ::String
+        def signal_catalog_arn: () -> ::String
+        def target_arn: () -> ::String
+        def status: () -> ("CREATING" | "WAITING_FOR_APPROVAL" | "RUNNING" | "SUSPENDED")
+        def start_time: () -> ::Time
+        def expiry_time: () -> ::Time
+        def post_trigger_collection_duration: () -> ::Integer
+        def diagnostics_mode: () -> ("OFF" | "SEND_ACTIVE_DTCS")
+        def spooling_mode: () -> ("OFF" | "TO_DISK")
+        def compression: () -> ("OFF" | "SNAPPY")
+        def priority: () -> ::Integer
+        def signals_to_collect: () -> ::Array[Types::SignalInformation]
+        def collection_scheme: () -> Types::CollectionScheme
+        def data_extra_dimensions: () -> ::Array[::String]
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+        def data_destination_configs: () -> ::Array[Types::DataDestinationConfig]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#get_campaign-instance_method
+      def get_campaign: (
+                          name: ::String
+                        ) -> _GetCampaignResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCampaignResponseSuccess
+
+      interface _GetDecoderManifestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDecoderManifestResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+        def description: () -> ::String
+        def model_manifest_arn: () -> ::String
+        def status: () -> ("ACTIVE" | "DRAFT" | "INVALID" | "VALIDATING")
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#get_decoder_manifest-instance_method
+      def get_decoder_manifest: (
+                                  name: ::String
+                                ) -> _GetDecoderManifestResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDecoderManifestResponseSuccess
+
+      interface _GetEncryptionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEncryptionConfigurationResponse]
+        def kms_key_id: () -> ::String
+        def encryption_status: () -> ("PENDING" | "SUCCESS" | "FAILURE")
+        def encryption_type: () -> ("KMS_BASED_ENCRYPTION" | "FLEETWISE_DEFAULT_ENCRYPTION")
+        def error_message: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#get_encryption_configuration-instance_method
+      def get_encryption_configuration: (
+                                        ) -> _GetEncryptionConfigurationResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEncryptionConfigurationResponseSuccess
+
+      interface _GetFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFleetResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def description: () -> ::String
+        def signal_catalog_arn: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#get_fleet-instance_method
+      def get_fleet: (
+                       fleet_id: ::String
+                     ) -> _GetFleetResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFleetResponseSuccess
+
+      interface _GetLoggingOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLoggingOptionsResponse]
+        def cloud_watch_log_delivery: () -> Types::CloudWatchLogDeliveryOptions
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#get_logging_options-instance_method
+      def get_logging_options: (
+                               ) -> _GetLoggingOptionsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLoggingOptionsResponseSuccess
+
+      interface _GetModelManifestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetModelManifestResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+        def description: () -> ::String
+        def signal_catalog_arn: () -> ::String
+        def status: () -> ("ACTIVE" | "DRAFT" | "INVALID" | "VALIDATING")
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#get_model_manifest-instance_method
+      def get_model_manifest: (
+                                name: ::String
+                              ) -> _GetModelManifestResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetModelManifestResponseSuccess
+
+      interface _GetRegisterAccountStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRegisterAccountStatusResponse]
+        def customer_account_id: () -> ::String
+        def account_status: () -> ("REGISTRATION_PENDING" | "REGISTRATION_SUCCESS" | "REGISTRATION_FAILURE")
+        def timestream_registration_response: () -> Types::TimestreamRegistrationResponse
+        def iam_registration_response: () -> Types::IamRegistrationResponse
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#get_register_account_status-instance_method
+      def get_register_account_status: (
+                                       ) -> _GetRegisterAccountStatusResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRegisterAccountStatusResponseSuccess
+
+      interface _GetSignalCatalogResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSignalCatalogResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+        def description: () -> ::String
+        def node_counts: () -> Types::NodeCounts
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#get_signal_catalog-instance_method
+      def get_signal_catalog: (
+                                name: ::String
+                              ) -> _GetSignalCatalogResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSignalCatalogResponseSuccess
+
+      interface _GetVehicleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVehicleResponse]
+        def vehicle_name: () -> ::String
+        def arn: () -> ::String
+        def model_manifest_arn: () -> ::String
+        def decoder_manifest_arn: () -> ::String
+        def attributes: () -> ::Hash[::String, ::String]
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#get_vehicle-instance_method
+      def get_vehicle: (
+                         vehicle_name: ::String
+                       ) -> _GetVehicleResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVehicleResponseSuccess
+
+      interface _GetVehicleStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVehicleStatusResponse]
+        def campaigns: () -> ::Array[Types::VehicleStatus]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#get_vehicle_status-instance_method
+      def get_vehicle_status: (
+                                ?next_token: ::String,
+                                ?max_results: ::Integer,
+                                vehicle_name: ::String
+                              ) -> _GetVehicleStatusResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVehicleStatusResponseSuccess
+
+      interface _ImportDecoderManifestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportDecoderManifestResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#import_decoder_manifest-instance_method
+      def import_decoder_manifest: (
+                                     name: ::String,
+                                     network_file_definitions: Array[
+                                       {
+                                         can_dbc: {
+                                           network_interface: ::String,
+                                           can_dbc_files: Array[::String],
+                                           signals_map: Hash[::String, ::String]?
+                                         }?
+                                       },
+                                     ]
+                                   ) -> _ImportDecoderManifestResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportDecoderManifestResponseSuccess
+
+      interface _ImportSignalCatalogResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportSignalCatalogResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#import_signal_catalog-instance_method
+      def import_signal_catalog: (
+                                   name: ::String,
+                                   ?description: ::String,
+                                   ?vss: {
+                                     vss_json: ::String?
+                                   },
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ]
+                                 ) -> _ImportSignalCatalogResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportSignalCatalogResponseSuccess
+
+      interface _ListCampaignsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCampaignsResponse]
+        def campaign_summaries: () -> ::Array[Types::CampaignSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#list_campaigns-instance_method
+      def list_campaigns: (
+                            ?next_token: ::String,
+                            ?max_results: ::Integer,
+                            ?status: ::String
+                          ) -> _ListCampaignsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCampaignsResponseSuccess
+
+      interface _ListDecoderManifestNetworkInterfacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDecoderManifestNetworkInterfacesResponse]
+        def network_interfaces: () -> ::Array[Types::NetworkInterface]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#list_decoder_manifest_network_interfaces-instance_method
+      def list_decoder_manifest_network_interfaces: (
+                                                      name: ::String,
+                                                      ?next_token: ::String,
+                                                      ?max_results: ::Integer
+                                                    ) -> _ListDecoderManifestNetworkInterfacesResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDecoderManifestNetworkInterfacesResponseSuccess
+
+      interface _ListDecoderManifestSignalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDecoderManifestSignalsResponse]
+        def signal_decoders: () -> ::Array[Types::SignalDecoder]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#list_decoder_manifest_signals-instance_method
+      def list_decoder_manifest_signals: (
+                                           name: ::String,
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _ListDecoderManifestSignalsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDecoderManifestSignalsResponseSuccess
+
+      interface _ListDecoderManifestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDecoderManifestsResponse]
+        def summaries: () -> ::Array[Types::DecoderManifestSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#list_decoder_manifests-instance_method
+      def list_decoder_manifests: (
+                                    ?model_manifest_arn: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListDecoderManifestsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDecoderManifestsResponseSuccess
+
+      interface _ListFleetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFleetsResponse]
+        def fleet_summaries: () -> ::Array[Types::FleetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#list_fleets-instance_method
+      def list_fleets: (
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListFleetsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFleetsResponseSuccess
+
+      interface _ListFleetsForVehicleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFleetsForVehicleResponse]
+        def fleets: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#list_fleets_for_vehicle-instance_method
+      def list_fleets_for_vehicle: (
+                                     vehicle_name: ::String,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListFleetsForVehicleResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFleetsForVehicleResponseSuccess
+
+      interface _ListModelManifestNodesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListModelManifestNodesResponse]
+        def nodes: () -> ::Array[Types::Node]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#list_model_manifest_nodes-instance_method
+      def list_model_manifest_nodes: (
+                                       name: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListModelManifestNodesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListModelManifestNodesResponseSuccess
+
+      interface _ListModelManifestsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListModelManifestsResponse]
+        def summaries: () -> ::Array[Types::ModelManifestSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#list_model_manifests-instance_method
+      def list_model_manifests: (
+                                  ?signal_catalog_arn: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListModelManifestsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListModelManifestsResponseSuccess
+
+      interface _ListSignalCatalogNodesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSignalCatalogNodesResponse]
+        def nodes: () -> ::Array[Types::Node]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#list_signal_catalog_nodes-instance_method
+      def list_signal_catalog_nodes: (
+                                       name: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer,
+                                       ?signal_node_type: ("SENSOR" | "ACTUATOR" | "ATTRIBUTE" | "BRANCH" | "CUSTOM_STRUCT" | "CUSTOM_PROPERTY")
+                                     ) -> _ListSignalCatalogNodesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSignalCatalogNodesResponseSuccess
+
+      interface _ListSignalCatalogsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSignalCatalogsResponse]
+        def summaries: () -> ::Array[Types::SignalCatalogSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#list_signal_catalogs-instance_method
+      def list_signal_catalogs: (
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListSignalCatalogsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSignalCatalogsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListVehiclesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVehiclesResponse]
+        def vehicle_summaries: () -> ::Array[Types::VehicleSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#list_vehicles-instance_method
+      def list_vehicles: (
+                           ?model_manifest_arn: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListVehiclesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVehiclesResponseSuccess
+
+      interface _ListVehiclesInFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVehiclesInFleetResponse]
+        def vehicles: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#list_vehicles_in_fleet-instance_method
+      def list_vehicles_in_fleet: (
+                                    fleet_id: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListVehiclesInFleetResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVehiclesInFleetResponseSuccess
+
+      interface _PutEncryptionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEncryptionConfigurationResponse]
+        def kms_key_id: () -> ::String
+        def encryption_status: () -> ("PENDING" | "SUCCESS" | "FAILURE")
+        def encryption_type: () -> ("KMS_BASED_ENCRYPTION" | "FLEETWISE_DEFAULT_ENCRYPTION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#put_encryption_configuration-instance_method
+      def put_encryption_configuration: (
+                                          ?kms_key_id: ::String,
+                                          encryption_type: ("KMS_BASED_ENCRYPTION" | "FLEETWISE_DEFAULT_ENCRYPTION")
+                                        ) -> _PutEncryptionConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEncryptionConfigurationResponseSuccess
+
+      interface _PutLoggingOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutLoggingOptionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#put_logging_options-instance_method
+      def put_logging_options: (
+                                 cloud_watch_log_delivery: {
+                                   log_type: ("OFF" | "ERROR"),
+                                   log_group_name: ::String?
+                                 }
+                               ) -> _PutLoggingOptionsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLoggingOptionsResponseSuccess
+
+      interface _RegisterAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterAccountResponse]
+        def register_account_status: () -> ("REGISTRATION_PENDING" | "REGISTRATION_SUCCESS" | "REGISTRATION_FAILURE")
+        def timestream_resources: () -> Types::TimestreamResources
+        def iam_resources: () -> Types::IamResources
+        def creation_time: () -> ::Time
+        def last_modification_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#register_account-instance_method
+      def register_account: (
+                              ?timestream_resources: {
+                                timestream_database_name: ::String,
+                                timestream_table_name: ::String
+                              },
+                              ?iam_resources: {
+                                role_arn: ::String
+                              }
+                            ) -> _RegisterAccountResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterAccountResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateCampaignResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCampaignResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "WAITING_FOR_APPROVAL" | "RUNNING" | "SUSPENDED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#update_campaign-instance_method
+      def update_campaign: (
+                             name: ::String,
+                             ?description: ::String,
+                             ?data_extra_dimensions: Array[::String],
+                             action: ("APPROVE" | "SUSPEND" | "RESUME" | "UPDATE")
+                           ) -> _UpdateCampaignResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCampaignResponseSuccess
+
+      interface _UpdateDecoderManifestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDecoderManifestResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#update_decoder_manifest-instance_method
+      def update_decoder_manifest: (
+                                     name: ::String,
+                                     ?description: ::String,
+                                     ?signal_decoders_to_add: Array[
+                                       {
+                                         fully_qualified_name: ::String,
+                                         type: ("CAN_SIGNAL" | "OBD_SIGNAL" | "MESSAGE_SIGNAL"),
+                                         interface_id: ::String,
+                                         can_signal: {
+                                           message_id: ::Integer,
+                                           is_big_endian: bool,
+                                           is_signed: bool,
+                                           start_bit: ::Integer,
+                                           offset: ::Float,
+                                           factor: ::Float,
+                                           length: ::Integer,
+                                           name: ::String?
+                                         }?,
+                                         obd_signal: {
+                                           pid_response_length: ::Integer,
+                                           service_mode: ::Integer,
+                                           pid: ::Integer,
+                                           scaling: ::Float,
+                                           offset: ::Float,
+                                           start_byte: ::Integer,
+                                           byte_length: ::Integer,
+                                           bit_right_shift: ::Integer?,
+                                           bit_mask_length: ::Integer?
+                                         }?,
+                                         message_signal: {
+                                           topic_name: ::String,
+                                           structured_message: {
+                                             primitive_message_definition: {
+                                               ros2_primitive_message_definition: {
+                                                 primitive_type: ("BOOL" | "BYTE" | "CHAR" | "FLOAT32" | "FLOAT64" | "INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "STRING" | "WSTRING"),
+                                                 offset: ::Float?,
+                                                 scaling: ::Float?,
+                                                 upper_bound: ::Integer?
+                                               }?
+                                             }?,
+                                             structured_message_list_definition: {
+                                               name: ::String,
+                                               member_type: untyped,
+                                               list_type: ("FIXED_CAPACITY" | "DYNAMIC_UNBOUNDED_CAPACITY" | "DYNAMIC_BOUNDED_CAPACITY"),
+                                               capacity: ::Integer?
+                                             }?,
+                                             structured_message_definition: Array[
+                                               {
+                                                 field_name: ::String,
+                                                 data_type: untyped
+                                               },
+                                             ]?
+                                           }
+                                         }?
+                                       },
+                                     ],
+                                     ?signal_decoders_to_update: Array[
+                                       {
+                                         fully_qualified_name: ::String,
+                                         type: ("CAN_SIGNAL" | "OBD_SIGNAL" | "MESSAGE_SIGNAL"),
+                                         interface_id: ::String,
+                                         can_signal: {
+                                           message_id: ::Integer,
+                                           is_big_endian: bool,
+                                           is_signed: bool,
+                                           start_bit: ::Integer,
+                                           offset: ::Float,
+                                           factor: ::Float,
+                                           length: ::Integer,
+                                           name: ::String?
+                                         }?,
+                                         obd_signal: {
+                                           pid_response_length: ::Integer,
+                                           service_mode: ::Integer,
+                                           pid: ::Integer,
+                                           scaling: ::Float,
+                                           offset: ::Float,
+                                           start_byte: ::Integer,
+                                           byte_length: ::Integer,
+                                           bit_right_shift: ::Integer?,
+                                           bit_mask_length: ::Integer?
+                                         }?,
+                                         message_signal: {
+                                           topic_name: ::String,
+                                           structured_message: {
+                                             primitive_message_definition: {
+                                               ros2_primitive_message_definition: {
+                                                 primitive_type: ("BOOL" | "BYTE" | "CHAR" | "FLOAT32" | "FLOAT64" | "INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "STRING" | "WSTRING"),
+                                                 offset: ::Float?,
+                                                 scaling: ::Float?,
+                                                 upper_bound: ::Integer?
+                                               }?
+                                             }?,
+                                             structured_message_list_definition: {
+                                               name: ::String,
+                                               member_type: untyped,
+                                               list_type: ("FIXED_CAPACITY" | "DYNAMIC_UNBOUNDED_CAPACITY" | "DYNAMIC_BOUNDED_CAPACITY"),
+                                               capacity: ::Integer?
+                                             }?,
+                                             structured_message_definition: Array[
+                                               {
+                                                 field_name: ::String,
+                                                 data_type: untyped
+                                               },
+                                             ]?
+                                           }
+                                         }?
+                                       },
+                                     ],
+                                     ?signal_decoders_to_remove: Array[::String],
+                                     ?network_interfaces_to_add: Array[
+                                       {
+                                         interface_id: ::String,
+                                         type: ("CAN_INTERFACE" | "OBD_INTERFACE" | "VEHICLE_MIDDLEWARE"),
+                                         can_interface: {
+                                           name: ::String,
+                                           protocol_name: ::String?,
+                                           protocol_version: ::String?
+                                         }?,
+                                         obd_interface: {
+                                           name: ::String,
+                                           request_message_id: ::Integer,
+                                           obd_standard: ::String?,
+                                           pid_request_interval_seconds: ::Integer?,
+                                           dtc_request_interval_seconds: ::Integer?,
+                                           use_extended_ids: bool?,
+                                           has_transmission_ecu: bool?
+                                         }?,
+                                         vehicle_middleware: {
+                                           name: ::String,
+                                           protocol_name: ("ROS_2")
+                                         }?
+                                       },
+                                     ],
+                                     ?network_interfaces_to_update: Array[
+                                       {
+                                         interface_id: ::String,
+                                         type: ("CAN_INTERFACE" | "OBD_INTERFACE" | "VEHICLE_MIDDLEWARE"),
+                                         can_interface: {
+                                           name: ::String,
+                                           protocol_name: ::String?,
+                                           protocol_version: ::String?
+                                         }?,
+                                         obd_interface: {
+                                           name: ::String,
+                                           request_message_id: ::Integer,
+                                           obd_standard: ::String?,
+                                           pid_request_interval_seconds: ::Integer?,
+                                           dtc_request_interval_seconds: ::Integer?,
+                                           use_extended_ids: bool?,
+                                           has_transmission_ecu: bool?
+                                         }?,
+                                         vehicle_middleware: {
+                                           name: ::String,
+                                           protocol_name: ("ROS_2")
+                                         }?
+                                       },
+                                     ],
+                                     ?network_interfaces_to_remove: Array[::String],
+                                     ?status: ("ACTIVE" | "DRAFT" | "INVALID" | "VALIDATING")
+                                   ) -> _UpdateDecoderManifestResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDecoderManifestResponseSuccess
+
+      interface _UpdateFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFleetResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#update_fleet-instance_method
+      def update_fleet: (
+                          fleet_id: ::String,
+                          ?description: ::String
+                        ) -> _UpdateFleetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFleetResponseSuccess
+
+      interface _UpdateModelManifestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateModelManifestResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#update_model_manifest-instance_method
+      def update_model_manifest: (
+                                   name: ::String,
+                                   ?description: ::String,
+                                   ?nodes_to_add: Array[::String],
+                                   ?nodes_to_remove: Array[::String],
+                                   ?status: ("ACTIVE" | "DRAFT" | "INVALID" | "VALIDATING")
+                                 ) -> _UpdateModelManifestResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateModelManifestResponseSuccess
+
+      interface _UpdateSignalCatalogResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSignalCatalogResponse]
+        def name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#update_signal_catalog-instance_method
+      def update_signal_catalog: (
+                                   name: ::String,
+                                   ?description: ::String,
+                                   ?nodes_to_add: Array[
+                                     {
+                                       branch: {
+                                         fully_qualified_name: ::String,
+                                         description: ::String?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?
+                                       }?,
+                                       sensor: {
+                                         fully_qualified_name: ::String,
+                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
+                                         description: ::String?,
+                                         unit: ::String?,
+                                         allowed_values: Array[::String]?,
+                                         min: ::Float?,
+                                         max: ::Float?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?,
+                                         struct_fully_qualified_name: ::String?
+                                       }?,
+                                       actuator: {
+                                         fully_qualified_name: ::String,
+                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
+                                         description: ::String?,
+                                         unit: ::String?,
+                                         allowed_values: Array[::String]?,
+                                         min: ::Float?,
+                                         max: ::Float?,
+                                         assigned_value: ::String?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?,
+                                         struct_fully_qualified_name: ::String?
+                                       }?,
+                                       attribute: {
+                                         fully_qualified_name: ::String,
+                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
+                                         description: ::String?,
+                                         unit: ::String?,
+                                         allowed_values: Array[::String]?,
+                                         min: ::Float?,
+                                         max: ::Float?,
+                                         assigned_value: ::String?,
+                                         default_value: ::String?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?
+                                       }?,
+                                       struct: {
+                                         fully_qualified_name: ::String,
+                                         description: ::String?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?
+                                       }?,
+                                       property: {
+                                         fully_qualified_name: ::String,
+                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
+                                         data_encoding: ("BINARY" | "TYPED")?,
+                                         description: ::String?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?,
+                                         struct_fully_qualified_name: ::String?
+                                       }?
+                                     },
+                                   ],
+                                   ?nodes_to_update: Array[
+                                     {
+                                       branch: {
+                                         fully_qualified_name: ::String,
+                                         description: ::String?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?
+                                       }?,
+                                       sensor: {
+                                         fully_qualified_name: ::String,
+                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
+                                         description: ::String?,
+                                         unit: ::String?,
+                                         allowed_values: Array[::String]?,
+                                         min: ::Float?,
+                                         max: ::Float?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?,
+                                         struct_fully_qualified_name: ::String?
+                                       }?,
+                                       actuator: {
+                                         fully_qualified_name: ::String,
+                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
+                                         description: ::String?,
+                                         unit: ::String?,
+                                         allowed_values: Array[::String]?,
+                                         min: ::Float?,
+                                         max: ::Float?,
+                                         assigned_value: ::String?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?,
+                                         struct_fully_qualified_name: ::String?
+                                       }?,
+                                       attribute: {
+                                         fully_qualified_name: ::String,
+                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
+                                         description: ::String?,
+                                         unit: ::String?,
+                                         allowed_values: Array[::String]?,
+                                         min: ::Float?,
+                                         max: ::Float?,
+                                         assigned_value: ::String?,
+                                         default_value: ::String?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?
+                                       }?,
+                                       struct: {
+                                         fully_qualified_name: ::String,
+                                         description: ::String?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?
+                                       }?,
+                                       property: {
+                                         fully_qualified_name: ::String,
+                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
+                                         data_encoding: ("BINARY" | "TYPED")?,
+                                         description: ::String?,
+                                         deprecation_message: ::String?,
+                                         comment: ::String?,
+                                         struct_fully_qualified_name: ::String?
+                                       }?
+                                     },
+                                   ],
+                                   ?nodes_to_remove: Array[::String]
+                                 ) -> _UpdateSignalCatalogResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSignalCatalogResponseSuccess
+
+      interface _UpdateVehicleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVehicleResponse]
+        def vehicle_name: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTFleetWise/Client.html#update_vehicle-instance_method
+      def update_vehicle: (
+                            vehicle_name: ::String,
+                            ?model_manifest_arn: ::String,
+                            ?decoder_manifest_arn: ::String,
+                            ?attributes: Hash[::String, ::String],
+                            ?attribute_update_mode: ("Overwrite" | "Merge")
+                          ) -> _UpdateVehicleResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVehicleResponseSuccess
+    end
+  end
+end
+

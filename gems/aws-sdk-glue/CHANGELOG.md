@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.168.0 (2024-02-05)
+------------------
+
+* Feature - Introduce Catalog Encryption Role within Glue Data Catalog Settings. Introduce SASL/PLAIN as an authentication method for Glue Kafka connections
+
+1.167.0 (2024-01-31)
+------------------
+
+* Feature - Update page size limits for GetJobRuns and GetTriggers APIs.
+
+1.166.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.165.0 (2023-12-22)
+------------------
+
+* Feature - This release adds additional configurations for Query Session Context on the following APIs: GetUnfilteredTableMetadata, GetUnfilteredPartitionMetadata, GetUnfilteredPartitionsMetadata.
+
+1.164.0 (2023-11-30)
+------------------
+
+* Feature - Adds observation and analyzer support to the GetDataQualityResult and BatchGetDataQualityResult APIs.
+
+1.163.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.162.0 (2023-11-27)
+------------------
+
+* Feature - add observations support to DQ CodeGen config model + update document for connectiontypes supported by ConnectorData entities
+
+1.161.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.160.0 (2023-11-16)
+------------------
+
+* Feature - Introduces new column statistics APIs to support statistics generation for tables within the Glue Data Catalog.
+
+1.159.0 (2023-11-14)
+------------------
+
+* Feature - Introduces new storage optimization APIs to support automatic compaction of Apache Iceberg tables.
+
+1.158.0 (2023-11-02)
+------------------
+
+* Feature - This release introduces Google BigQuery Source and Target in AWS Glue CodeGenConfigurationNode.
+
 1.157.0 (2023-10-12)
 ------------------
 

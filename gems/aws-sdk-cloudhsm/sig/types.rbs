@@ -1,0 +1,286 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudHSM
+  module Types
+
+    class AddTagsToResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AddTagsToResourceResponse
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CloudHsmInternalException < Aws::EmptyStructure
+    end
+
+    class CloudHsmServiceException
+      attr_accessor message: ::String
+      attr_accessor retryable: bool
+      SENSITIVE: []
+    end
+
+    class CreateHapgRequest
+      attr_accessor label: ::String
+      SENSITIVE: []
+    end
+
+    class CreateHapgResponse
+      attr_accessor hapg_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateHsmRequest
+      attr_accessor subnet_id: ::String
+      attr_accessor ssh_key: ::String
+      attr_accessor eni_ip: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor external_id: ::String
+      attr_accessor subscription_type: ("PRODUCTION")
+      attr_accessor client_token: ::String
+      attr_accessor syslog_ip: ::String
+      SENSITIVE: []
+    end
+
+    class CreateHsmResponse
+      attr_accessor hsm_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLunaClientRequest
+      attr_accessor label: ::String
+      attr_accessor certificate: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLunaClientResponse
+      attr_accessor client_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHapgRequest
+      attr_accessor hapg_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHapgResponse
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHsmRequest
+      attr_accessor hsm_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHsmResponse
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLunaClientRequest
+      attr_accessor client_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLunaClientResponse
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeHapgRequest
+      attr_accessor hapg_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeHapgResponse
+      attr_accessor hapg_arn: ::String
+      attr_accessor hapg_serial: ::String
+      attr_accessor hsms_last_action_failed: ::Array[::String]
+      attr_accessor hsms_pending_deletion: ::Array[::String]
+      attr_accessor hsms_pending_registration: ::Array[::String]
+      attr_accessor label: ::String
+      attr_accessor last_modified_timestamp: ::String
+      attr_accessor partition_serial_list: ::Array[::String]
+      attr_accessor state: ("READY" | "UPDATING" | "DEGRADED")
+      SENSITIVE: []
+    end
+
+    class DescribeHsmRequest
+      attr_accessor hsm_arn: ::String
+      attr_accessor hsm_serial_number: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeHsmResponse
+      attr_accessor hsm_arn: ::String
+      attr_accessor status: ("PENDING" | "RUNNING" | "UPDATING" | "SUSPENDED" | "TERMINATING" | "TERMINATED" | "DEGRADED")
+      attr_accessor status_details: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor eni_id: ::String
+      attr_accessor eni_ip: ::String
+      attr_accessor subscription_type: ("PRODUCTION")
+      attr_accessor subscription_start_date: ::String
+      attr_accessor subscription_end_date: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor serial_number: ::String
+      attr_accessor vendor_name: ::String
+      attr_accessor hsm_type: ::String
+      attr_accessor software_version: ::String
+      attr_accessor ssh_public_key: ::String
+      attr_accessor ssh_key_last_updated: ::String
+      attr_accessor server_cert_uri: ::String
+      attr_accessor server_cert_last_updated: ::String
+      attr_accessor partitions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeLunaClientRequest
+      attr_accessor client_arn: ::String
+      attr_accessor certificate_fingerprint: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLunaClientResponse
+      attr_accessor client_arn: ::String
+      attr_accessor certificate: ::String
+      attr_accessor certificate_fingerprint: ::String
+      attr_accessor last_modified_timestamp: ::String
+      attr_accessor label: ::String
+      SENSITIVE: []
+    end
+
+    class GetConfigRequest
+      attr_accessor client_arn: ::String
+      attr_accessor client_version: ("5.1" | "5.3")
+      attr_accessor hapg_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetConfigResponse
+      attr_accessor config_type: ::String
+      attr_accessor config_file: ::String
+      attr_accessor config_cred: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException < Aws::EmptyStructure
+    end
+
+    class ListAvailableZonesRequest < Aws::EmptyStructure
+    end
+
+    class ListAvailableZonesResponse
+      attr_accessor az_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListHapgsRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHapgsResponse
+      attr_accessor hapg_list: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHsmsRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHsmsResponse
+      attr_accessor hsm_list: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLunaClientsRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLunaClientsResponse
+      attr_accessor client_list: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ModifyHapgRequest
+      attr_accessor hapg_arn: ::String
+      attr_accessor label: ::String
+      attr_accessor partition_serial_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ModifyHapgResponse
+      attr_accessor hapg_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyHsmRequest
+      attr_accessor hsm_arn: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor eni_ip: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor external_id: ::String
+      attr_accessor syslog_ip: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyHsmResponse
+      attr_accessor hsm_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyLunaClientRequest
+      attr_accessor client_arn: ::String
+      attr_accessor certificate: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyLunaClientResponse
+      attr_accessor client_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveTagsFromResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_key_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RemoveTagsFromResourceResponse
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+  end
+end

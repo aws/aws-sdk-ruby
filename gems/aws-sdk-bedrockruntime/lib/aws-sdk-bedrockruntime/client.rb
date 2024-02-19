@@ -412,10 +412,6 @@ module Aws::BedrockRuntime
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
     #
-    # @option params [String] :accept
-    #   The desired MIME type of the inference body in the response. The
-    #   default value is `application/json`.
-    #
     # @option params [required, String, StringIO, File] :body
     #   Input data in the format specified in the content-type request header.
     #   To see the format and content of this field for different models,
@@ -429,6 +425,10 @@ module Aws::BedrockRuntime
     #   The MIME type of the input data in the request. The default value is
     #   `application/json`.
     #
+    # @option params [String] :accept
+    #   The desired MIME type of the inference body in the response. The
+    #   default value is `application/json`.
+    #
     # @option params [required, String] :model_id
     #   Identifier of the model.
     #
@@ -440,9 +440,9 @@ module Aws::BedrockRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.invoke_model({
-    #     accept: "MimeType",
     #     body: "data", # required
     #     content_type: "MimeType",
+    #     accept: "MimeType",
     #     model_id: "InvokeModelIdentifier", # required
     #   })
     #
@@ -473,10 +473,6 @@ module Aws::BedrockRuntime
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
     #
-    # @option params [String] :accept
-    #   The desired MIME type of the inference body in the response. The
-    #   default value is `application/json`.
-    #
     # @option params [required, String, StringIO, File] :body
     #   Inference input in the format specified by the content-type. To see
     #   the format and content of this field for different models, refer to
@@ -489,6 +485,10 @@ module Aws::BedrockRuntime
     # @option params [String] :content_type
     #   The MIME type of the input data in the request. The default value is
     #   `application/json`.
+    #
+    # @option params [String] :accept
+    #   The desired MIME type of the inference body in the response. The
+    #   default value is `application/json`.
     #
     # @option params [required, String] :model_id
     #   Id of the model to invoke using the streaming request.
@@ -550,14 +550,14 @@ module Aws::BedrockRuntime
     #       handler.on_model_stream_error_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::modelStreamErrorException
     #       end
-    #       handler.on_model_timeout_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::modelTimeoutException
+    #       handler.on_validation_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::validationException
     #       end
     #       handler.on_throttling_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::throttlingException
     #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::validationException
+    #       handler.on_model_timeout_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::modelTimeoutException
     #       end
     #
     #     client.invoke_model_with_response_stream( # params input #, event_stream_handler: handler)
@@ -575,14 +575,14 @@ module Aws::BedrockRuntime
     #       stream.on_model_stream_error_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::modelStreamErrorException
     #       end
-    #       stream.on_model_timeout_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::modelTimeoutException
+    #       stream.on_validation_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::validationException
     #       end
     #       stream.on_throttling_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::throttlingException
     #       end
-    #       stream.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::validationException
+    #       stream.on_model_timeout_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::modelTimeoutException
     #       end
     #     end
     #
@@ -600,14 +600,14 @@ module Aws::BedrockRuntime
     #       handler.on_model_stream_error_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::modelStreamErrorException
     #       end
-    #       handler.on_model_timeout_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::modelTimeoutException
+    #       handler.on_validation_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::validationException
     #       end
     #       handler.on_throttling_exception_event do |event|
     #         event # => Aws::BedrockRuntime::Types::throttlingException
     #       end
-    #       handler.on_validation_exception_event do |event|
-    #         event # => Aws::BedrockRuntime::Types::validationException
+    #       handler.on_model_timeout_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::modelTimeoutException
     #       end
     #
     #     client.invoke_model_with_response_stream( # params input #, event_stream_handler: handler) do |stream|
@@ -630,9 +630,9 @@ module Aws::BedrockRuntime
     # @example Request syntax with placeholder values
     #
     #   resp = client.invoke_model_with_response_stream({
-    #     accept: "MimeType",
     #     body: "data", # required
     #     content_type: "MimeType",
+    #     accept: "MimeType",
     #     model_id: "InvokeModelIdentifier", # required
     #   })
     #
@@ -640,7 +640,7 @@ module Aws::BedrockRuntime
     #
     #   All events are available at resp.body:
     #   resp.body #=> Enumerator
-    #   resp.body.event_types #=> [:chunk, :internal_server_exception, :model_stream_error_exception, :model_timeout_exception, :throttling_exception, :validation_exception]
+    #   resp.body.event_types #=> [:chunk, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception, :model_timeout_exception]
     #
     #   For :chunk event available at #on_chunk_event callback and response eventstream enumerator:
     #   event.bytes #=> String
@@ -650,16 +650,16 @@ module Aws::BedrockRuntime
     #
     #   For :model_stream_error_exception event available at #on_model_stream_error_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
-    #   event.original_message #=> String
     #   event.original_status_code #=> Integer
+    #   event.original_message #=> String
     #
-    #   For :model_timeout_exception event available at #on_model_timeout_exception_event callback and response eventstream enumerator:
+    #   For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
-    #   For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
+    #   For :model_timeout_exception event available at #on_model_timeout_exception_event callback and response eventstream enumerator:
     #   event.message #=> String
     #
     #   resp.content_type #=> String
@@ -704,7 +704,7 @@ module Aws::BedrockRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

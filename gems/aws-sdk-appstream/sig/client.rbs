@@ -1,0 +1,1216 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AppStream
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateAppBlockBuilderAppBlockResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateAppBlockBuilderAppBlockResult]
+        def app_block_builder_app_block_association: () -> Types::AppBlockBuilderAppBlockAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#associate_app_block_builder_app_block-instance_method
+      def associate_app_block_builder_app_block: (
+                                                   app_block_arn: ::String,
+                                                   app_block_builder_name: ::String
+                                                 ) -> _AssociateAppBlockBuilderAppBlockResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateAppBlockBuilderAppBlockResponseSuccess
+
+      interface _AssociateApplicationFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateApplicationFleetResult]
+        def application_fleet_association: () -> Types::ApplicationFleetAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#associate_application_fleet-instance_method
+      def associate_application_fleet: (
+                                         fleet_name: ::String,
+                                         application_arn: ::String
+                                       ) -> _AssociateApplicationFleetResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateApplicationFleetResponseSuccess
+
+      interface _AssociateApplicationToEntitlementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateApplicationToEntitlementResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#associate_application_to_entitlement-instance_method
+      def associate_application_to_entitlement: (
+                                                  stack_name: ::String,
+                                                  entitlement_name: ::String,
+                                                  application_identifier: ::String
+                                                ) -> _AssociateApplicationToEntitlementResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateApplicationToEntitlementResponseSuccess
+
+      interface _AssociateFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateFleetResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#associate_fleet-instance_method
+      def associate_fleet: (
+                             fleet_name: ::String,
+                             stack_name: ::String
+                           ) -> _AssociateFleetResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateFleetResponseSuccess
+
+      interface _BatchAssociateUserStackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchAssociateUserStackResult]
+        def errors: () -> ::Array[Types::UserStackAssociationError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#batch_associate_user_stack-instance_method
+      def batch_associate_user_stack: (
+                                        user_stack_associations: Array[
+                                          {
+                                            stack_name: ::String,
+                                            user_name: ::String,
+                                            authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD"),
+                                            send_email_notification: bool?
+                                          },
+                                        ]
+                                      ) -> _BatchAssociateUserStackResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAssociateUserStackResponseSuccess
+
+      interface _BatchDisassociateUserStackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDisassociateUserStackResult]
+        def errors: () -> ::Array[Types::UserStackAssociationError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#batch_disassociate_user_stack-instance_method
+      def batch_disassociate_user_stack: (
+                                           user_stack_associations: Array[
+                                             {
+                                               stack_name: ::String,
+                                               user_name: ::String,
+                                               authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD"),
+                                               send_email_notification: bool?
+                                             },
+                                           ]
+                                         ) -> _BatchDisassociateUserStackResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisassociateUserStackResponseSuccess
+
+      interface _CopyImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CopyImageResponse]
+        def destination_image_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#copy_image-instance_method
+      def copy_image: (
+                        source_image_name: ::String,
+                        destination_image_name: ::String,
+                        destination_region: ::String,
+                        ?destination_image_description: ::String
+                      ) -> _CopyImageResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyImageResponseSuccess
+
+      interface _CreateAppBlockResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppBlockResult]
+        def app_block: () -> Types::AppBlock
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_app_block-instance_method
+      def create_app_block: (
+                              name: ::String,
+                              ?description: ::String,
+                              ?display_name: ::String,
+                              source_s3_location: {
+                                s3_bucket: ::String,
+                                s3_key: ::String?
+                              },
+                              ?setup_script_details: {
+                                script_s3_location: {
+                                  s3_bucket: ::String,
+                                  s3_key: ::String?
+                                },
+                                executable_path: ::String,
+                                executable_parameters: ::String?,
+                                timeout_in_seconds: ::Integer
+                              },
+                              ?tags: Hash[::String, ::String],
+                              ?post_setup_script_details: {
+                                script_s3_location: {
+                                  s3_bucket: ::String,
+                                  s3_key: ::String?
+                                },
+                                executable_path: ::String,
+                                executable_parameters: ::String?,
+                                timeout_in_seconds: ::Integer
+                              },
+                              ?packaging_type: ("CUSTOM" | "APPSTREAM2")
+                            ) -> _CreateAppBlockResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppBlockResponseSuccess
+
+      interface _CreateAppBlockBuilderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppBlockBuilderResult]
+        def app_block_builder: () -> Types::AppBlockBuilder
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_app_block_builder-instance_method
+      def create_app_block_builder: (
+                                      name: ::String,
+                                      ?description: ::String,
+                                      ?display_name: ::String,
+                                      ?tags: Hash[::String, ::String],
+                                      platform: ("WINDOWS_SERVER_2019"),
+                                      instance_type: ::String,
+                                      vpc_config: {
+                                        subnet_ids: Array[::String]?,
+                                        security_group_ids: Array[::String]?
+                                      },
+                                      ?enable_default_internet_access: bool,
+                                      ?iam_role_arn: ::String,
+                                      ?access_endpoints: Array[
+                                        {
+                                          endpoint_type: ("STREAMING"),
+                                          vpce_id: ::String?
+                                        },
+                                      ]
+                                    ) -> _CreateAppBlockBuilderResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppBlockBuilderResponseSuccess
+
+      interface _CreateAppBlockBuilderStreamingURLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppBlockBuilderStreamingURLResult]
+        def streaming_url: () -> ::String
+        def expires: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_app_block_builder_streaming_url-instance_method
+      def create_app_block_builder_streaming_url: (
+                                                    app_block_builder_name: ::String,
+                                                    ?validity: ::Integer
+                                                  ) -> _CreateAppBlockBuilderStreamingURLResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppBlockBuilderStreamingURLResponseSuccess
+
+      interface _CreateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationResult]
+        def application: () -> Types::Application
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_application-instance_method
+      def create_application: (
+                                name: ::String,
+                                ?display_name: ::String,
+                                ?description: ::String,
+                                icon_s3_location: {
+                                  s3_bucket: ::String,
+                                  s3_key: ::String?
+                                },
+                                launch_path: ::String,
+                                ?working_directory: ::String,
+                                ?launch_parameters: ::String,
+                                platforms: Array[("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2")],
+                                instance_families: Array[::String],
+                                app_block_arn: ::String,
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
+
+      interface _CreateDirectoryConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDirectoryConfigResult]
+        def directory_config: () -> Types::DirectoryConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_directory_config-instance_method
+      def create_directory_config: (
+                                     directory_name: ::String,
+                                     organizational_unit_distinguished_names: Array[::String],
+                                     ?service_account_credentials: {
+                                       account_name: ::String,
+                                       account_password: ::String
+                                     },
+                                     ?certificate_based_auth_properties: {
+                                       status: ("DISABLED" | "ENABLED" | "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK")?,
+                                       certificate_authority_arn: ::String?
+                                     }
+                                   ) -> _CreateDirectoryConfigResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDirectoryConfigResponseSuccess
+
+      interface _CreateEntitlementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEntitlementResult]
+        def entitlement: () -> Types::Entitlement
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_entitlement-instance_method
+      def create_entitlement: (
+                                name: ::String,
+                                stack_name: ::String,
+                                ?description: ::String,
+                                app_visibility: ("ALL" | "ASSOCIATED"),
+                                attributes: Array[
+                                  {
+                                    name: ::String,
+                                    value: ::String
+                                  },
+                                ]
+                              ) -> _CreateEntitlementResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEntitlementResponseSuccess
+
+      interface _CreateFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFleetResult]
+        def fleet: () -> Types::Fleet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_fleet-instance_method
+      def create_fleet: (
+                          name: ::String,
+                          ?image_name: ::String,
+                          ?image_arn: ::String,
+                          instance_type: ::String,
+                          ?fleet_type: ("ALWAYS_ON" | "ON_DEMAND" | "ELASTIC"),
+                          ?compute_capacity: {
+                            desired_instances: ::Integer?,
+                            desired_sessions: ::Integer?
+                          },
+                          ?vpc_config: {
+                            subnet_ids: Array[::String]?,
+                            security_group_ids: Array[::String]?
+                          },
+                          ?max_user_duration_in_seconds: ::Integer,
+                          ?disconnect_timeout_in_seconds: ::Integer,
+                          ?description: ::String,
+                          ?display_name: ::String,
+                          ?enable_default_internet_access: bool,
+                          ?domain_join_info: {
+                            directory_name: ::String?,
+                            organizational_unit_distinguished_name: ::String?
+                          },
+                          ?tags: Hash[::String, ::String],
+                          ?idle_disconnect_timeout_in_seconds: ::Integer,
+                          ?iam_role_arn: ::String,
+                          ?stream_view: ("APP" | "DESKTOP"),
+                          ?platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2"),
+                          ?max_concurrent_sessions: ::Integer,
+                          ?usb_device_filter_strings: Array[::String],
+                          ?session_script_s3_location: {
+                            s3_bucket: ::String,
+                            s3_key: ::String?
+                          },
+                          ?max_sessions_per_instance: ::Integer
+                        ) -> _CreateFleetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFleetResponseSuccess
+
+      interface _CreateImageBuilderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateImageBuilderResult]
+        def image_builder: () -> Types::ImageBuilder
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_image_builder-instance_method
+      def create_image_builder: (
+                                  name: ::String,
+                                  ?image_name: ::String,
+                                  ?image_arn: ::String,
+                                  instance_type: ::String,
+                                  ?description: ::String,
+                                  ?display_name: ::String,
+                                  ?vpc_config: {
+                                    subnet_ids: Array[::String]?,
+                                    security_group_ids: Array[::String]?
+                                  },
+                                  ?iam_role_arn: ::String,
+                                  ?enable_default_internet_access: bool,
+                                  ?domain_join_info: {
+                                    directory_name: ::String?,
+                                    organizational_unit_distinguished_name: ::String?
+                                  },
+                                  ?appstream_agent_version: ::String,
+                                  ?tags: Hash[::String, ::String],
+                                  ?access_endpoints: Array[
+                                    {
+                                      endpoint_type: ("STREAMING"),
+                                      vpce_id: ::String?
+                                    },
+                                  ]
+                                ) -> _CreateImageBuilderResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImageBuilderResponseSuccess
+
+      interface _CreateImageBuilderStreamingURLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateImageBuilderStreamingURLResult]
+        def streaming_url: () -> ::String
+        def expires: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_image_builder_streaming_url-instance_method
+      def create_image_builder_streaming_url: (
+                                                name: ::String,
+                                                ?validity: ::Integer
+                                              ) -> _CreateImageBuilderStreamingURLResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImageBuilderStreamingURLResponseSuccess
+
+      interface _CreateStackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStackResult]
+        def stack: () -> Types::Stack
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_stack-instance_method
+      def create_stack: (
+                          name: ::String,
+                          ?description: ::String,
+                          ?display_name: ::String,
+                          ?storage_connectors: Array[
+                            {
+                              connector_type: ("HOMEFOLDERS" | "GOOGLE_DRIVE" | "ONE_DRIVE"),
+                              resource_identifier: ::String?,
+                              domains: Array[::String]?
+                            },
+                          ],
+                          ?redirect_url: ::String,
+                          ?feedback_url: ::String,
+                          ?user_settings: Array[
+                            {
+                              action: ("CLIPBOARD_COPY_FROM_LOCAL_DEVICE" | "CLIPBOARD_COPY_TO_LOCAL_DEVICE" | "FILE_UPLOAD" | "FILE_DOWNLOAD" | "PRINTING_TO_LOCAL_DEVICE" | "DOMAIN_PASSWORD_SIGNIN" | "DOMAIN_SMART_CARD_SIGNIN"),
+                              permission: ("ENABLED" | "DISABLED"),
+                              maximum_length: ::Integer?
+                            },
+                          ],
+                          ?application_settings: {
+                            enabled: bool,
+                            settings_group: ::String?
+                          },
+                          ?tags: Hash[::String, ::String],
+                          ?access_endpoints: Array[
+                            {
+                              endpoint_type: ("STREAMING"),
+                              vpce_id: ::String?
+                            },
+                          ],
+                          ?embed_host_domains: Array[::String],
+                          ?streaming_experience_settings: {
+                            preferred_protocol: ("TCP" | "UDP")?
+                          }
+                        ) -> _CreateStackResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStackResponseSuccess
+
+      interface _CreateStreamingURLResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStreamingURLResult]
+        def streaming_url: () -> ::String
+        def expires: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_streaming_url-instance_method
+      def create_streaming_url: (
+                                  stack_name: ::String,
+                                  fleet_name: ::String,
+                                  user_id: ::String,
+                                  ?application_id: ::String,
+                                  ?validity: ::Integer,
+                                  ?session_context: ::String
+                                ) -> _CreateStreamingURLResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamingURLResponseSuccess
+
+      interface _CreateUpdatedImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUpdatedImageResult]
+        def image: () -> Types::Image
+        def can_update_image: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_updated_image-instance_method
+      def create_updated_image: (
+                                  existing_image_name: ::String,
+                                  new_image_name: ::String,
+                                  ?new_image_description: ::String,
+                                  ?new_image_display_name: ::String,
+                                  ?new_image_tags: Hash[::String, ::String],
+                                  ?dry_run: bool
+                                ) -> _CreateUpdatedImageResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUpdatedImageResponseSuccess
+
+      interface _CreateUsageReportSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUsageReportSubscriptionResult]
+        def s3_bucket_name: () -> ::String
+        def schedule: () -> ("DAILY")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_usage_report_subscription-instance_method
+      def create_usage_report_subscription: (
+                                            ) -> _CreateUsageReportSubscriptionResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUsageReportSubscriptionResponseSuccess
+
+      interface _CreateUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#create_user-instance_method
+      def create_user: (
+                         user_name: ::String,
+                         ?message_action: ("SUPPRESS" | "RESEND"),
+                         ?first_name: ::String,
+                         ?last_name: ::String,
+                         authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD")
+                       ) -> _CreateUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
+
+      interface _DeleteAppBlockResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAppBlockResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#delete_app_block-instance_method
+      def delete_app_block: (
+                              name: ::String
+                            ) -> _DeleteAppBlockResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAppBlockResponseSuccess
+
+      interface _DeleteAppBlockBuilderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAppBlockBuilderResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#delete_app_block_builder-instance_method
+      def delete_app_block_builder: (
+                                      name: ::String
+                                    ) -> _DeleteAppBlockBuilderResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAppBlockBuilderResponseSuccess
+
+      interface _DeleteApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#delete_application-instance_method
+      def delete_application: (
+                                name: ::String
+                              ) -> _DeleteApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationResponseSuccess
+
+      interface _DeleteDirectoryConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDirectoryConfigResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#delete_directory_config-instance_method
+      def delete_directory_config: (
+                                     directory_name: ::String
+                                   ) -> _DeleteDirectoryConfigResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDirectoryConfigResponseSuccess
+
+      interface _DeleteEntitlementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEntitlementResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#delete_entitlement-instance_method
+      def delete_entitlement: (
+                                name: ::String,
+                                stack_name: ::String
+                              ) -> _DeleteEntitlementResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEntitlementResponseSuccess
+
+      interface _DeleteFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFleetResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#delete_fleet-instance_method
+      def delete_fleet: (
+                          name: ::String
+                        ) -> _DeleteFleetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFleetResponseSuccess
+
+      interface _DeleteImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteImageResult]
+        def image: () -> Types::Image
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#delete_image-instance_method
+      def delete_image: (
+                          name: ::String
+                        ) -> _DeleteImageResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteImageResponseSuccess
+
+      interface _DeleteImageBuilderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteImageBuilderResult]
+        def image_builder: () -> Types::ImageBuilder
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#delete_image_builder-instance_method
+      def delete_image_builder: (
+                                  name: ::String
+                                ) -> _DeleteImageBuilderResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteImageBuilderResponseSuccess
+
+      interface _DeleteImagePermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteImagePermissionsResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#delete_image_permissions-instance_method
+      def delete_image_permissions: (
+                                      name: ::String,
+                                      shared_account_id: ::String
+                                    ) -> _DeleteImagePermissionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteImagePermissionsResponseSuccess
+
+      interface _DeleteStackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStackResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#delete_stack-instance_method
+      def delete_stack: (
+                          name: ::String
+                        ) -> _DeleteStackResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStackResponseSuccess
+
+      interface _DeleteUsageReportSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUsageReportSubscriptionResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#delete_usage_report_subscription-instance_method
+      def delete_usage_report_subscription: (
+                                            ) -> _DeleteUsageReportSubscriptionResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUsageReportSubscriptionResponseSuccess
+
+      interface _DeleteUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUserResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#delete_user-instance_method
+      def delete_user: (
+                         user_name: ::String,
+                         authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD")
+                       ) -> _DeleteUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUserResponseSuccess
+
+      interface _DescribeAppBlockBuilderAppBlockAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppBlockBuilderAppBlockAssociationsResult]
+        def app_block_builder_app_block_associations: () -> ::Array[Types::AppBlockBuilderAppBlockAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_app_block_builder_app_block_associations-instance_method
+      def describe_app_block_builder_app_block_associations: (
+                                                               ?app_block_arn: ::String,
+                                                               ?app_block_builder_name: ::String,
+                                                               ?max_results: ::Integer,
+                                                               ?next_token: ::String
+                                                             ) -> _DescribeAppBlockBuilderAppBlockAssociationsResponseSuccess
+                                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppBlockBuilderAppBlockAssociationsResponseSuccess
+
+      interface _DescribeAppBlockBuildersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppBlockBuildersResult]
+        def app_block_builders: () -> ::Array[Types::AppBlockBuilder]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_app_block_builders-instance_method
+      def describe_app_block_builders: (
+                                         ?names: Array[::String],
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _DescribeAppBlockBuildersResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppBlockBuildersResponseSuccess
+
+      interface _DescribeAppBlocksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppBlocksResult]
+        def app_blocks: () -> ::Array[Types::AppBlock]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_app_blocks-instance_method
+      def describe_app_blocks: (
+                                 ?arns: Array[::String],
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _DescribeAppBlocksResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppBlocksResponseSuccess
+
+      interface _DescribeApplicationFleetAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationFleetAssociationsResult]
+        def application_fleet_associations: () -> ::Array[Types::ApplicationFleetAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_application_fleet_associations-instance_method
+      def describe_application_fleet_associations: (
+                                                     ?fleet_name: ::String,
+                                                     ?application_arn: ::String,
+                                                     ?max_results: ::Integer,
+                                                     ?next_token: ::String
+                                                   ) -> _DescribeApplicationFleetAssociationsResponseSuccess
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationFleetAssociationsResponseSuccess
+
+      interface _DescribeApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicationsResult]
+        def applications: () -> ::Array[Types::Application]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_applications-instance_method
+      def describe_applications: (
+                                   ?arns: Array[::String],
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _DescribeApplicationsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicationsResponseSuccess
+
+      interface _DescribeDirectoryConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDirectoryConfigsResult]
+        def directory_configs: () -> ::Array[Types::DirectoryConfig]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_directory_configs-instance_method
+      def describe_directory_configs: (
+                                        ?directory_names: Array[::String],
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _DescribeDirectoryConfigsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDirectoryConfigsResponseSuccess
+
+      interface _DescribeEntitlementsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEntitlementsResult]
+        def entitlements: () -> ::Array[Types::Entitlement]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_entitlements-instance_method
+      def describe_entitlements: (
+                                   ?name: ::String,
+                                   stack_name: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _DescribeEntitlementsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEntitlementsResponseSuccess
+
+      interface _DescribeFleetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFleetsResult]
+        def fleets: () -> ::Array[Types::Fleet]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_fleets-instance_method
+      def describe_fleets: (
+                             ?names: Array[::String],
+                             ?next_token: ::String
+                           ) -> _DescribeFleetsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFleetsResponseSuccess
+
+      interface _DescribeImageBuildersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeImageBuildersResult]
+        def image_builders: () -> ::Array[Types::ImageBuilder]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_image_builders-instance_method
+      def describe_image_builders: (
+                                     ?names: Array[::String],
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _DescribeImageBuildersResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeImageBuildersResponseSuccess
+
+      interface _DescribeImagePermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeImagePermissionsResult]
+        def name: () -> ::String
+        def shared_image_permissions_list: () -> ::Array[Types::SharedImagePermissions]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_image_permissions-instance_method
+      def describe_image_permissions: (
+                                        name: ::String,
+                                        ?max_results: ::Integer,
+                                        ?shared_aws_account_ids: Array[::String],
+                                        ?next_token: ::String
+                                      ) -> _DescribeImagePermissionsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeImagePermissionsResponseSuccess
+
+      interface _DescribeImagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeImagesResult]
+        def images: () -> ::Array[Types::Image]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_images-instance_method
+      def describe_images: (
+                             ?names: Array[::String],
+                             ?arns: Array[::String],
+                             ?type: ("PUBLIC" | "PRIVATE" | "SHARED"),
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _DescribeImagesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeImagesResponseSuccess
+
+      interface _DescribeSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSessionsResult]
+        def sessions: () -> ::Array[Types::Session]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_sessions-instance_method
+      def describe_sessions: (
+                               stack_name: ::String,
+                               fleet_name: ::String,
+                               ?user_id: ::String,
+                               ?next_token: ::String,
+                               ?limit: ::Integer,
+                               ?authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD"),
+                               ?instance_id: ::String
+                             ) -> _DescribeSessionsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSessionsResponseSuccess
+
+      interface _DescribeStacksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStacksResult]
+        def stacks: () -> ::Array[Types::Stack]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_stacks-instance_method
+      def describe_stacks: (
+                             ?names: Array[::String],
+                             ?next_token: ::String
+                           ) -> _DescribeStacksResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStacksResponseSuccess
+
+      interface _DescribeUsageReportSubscriptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUsageReportSubscriptionsResult]
+        def usage_report_subscriptions: () -> ::Array[Types::UsageReportSubscription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_usage_report_subscriptions-instance_method
+      def describe_usage_report_subscriptions: (
+                                                 ?max_results: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _DescribeUsageReportSubscriptionsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUsageReportSubscriptionsResponseSuccess
+
+      interface _DescribeUserStackAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUserStackAssociationsResult]
+        def user_stack_associations: () -> ::Array[Types::UserStackAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_user_stack_associations-instance_method
+      def describe_user_stack_associations: (
+                                              ?stack_name: ::String,
+                                              ?user_name: ::String,
+                                              ?authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD"),
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _DescribeUserStackAssociationsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUserStackAssociationsResponseSuccess
+
+      interface _DescribeUsersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUsersResult]
+        def users: () -> ::Array[Types::User]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#describe_users-instance_method
+      def describe_users: (
+                            authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD"),
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _DescribeUsersResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUsersResponseSuccess
+
+      interface _DisableUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableUserResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#disable_user-instance_method
+      def disable_user: (
+                          user_name: ::String,
+                          authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD")
+                        ) -> _DisableUserResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableUserResponseSuccess
+
+      interface _DisassociateAppBlockBuilderAppBlockResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateAppBlockBuilderAppBlockResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#disassociate_app_block_builder_app_block-instance_method
+      def disassociate_app_block_builder_app_block: (
+                                                      app_block_arn: ::String,
+                                                      app_block_builder_name: ::String
+                                                    ) -> _DisassociateAppBlockBuilderAppBlockResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateAppBlockBuilderAppBlockResponseSuccess
+
+      interface _DisassociateApplicationFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateApplicationFleetResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#disassociate_application_fleet-instance_method
+      def disassociate_application_fleet: (
+                                            fleet_name: ::String,
+                                            application_arn: ::String
+                                          ) -> _DisassociateApplicationFleetResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateApplicationFleetResponseSuccess
+
+      interface _DisassociateApplicationFromEntitlementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateApplicationFromEntitlementResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#disassociate_application_from_entitlement-instance_method
+      def disassociate_application_from_entitlement: (
+                                                       stack_name: ::String,
+                                                       entitlement_name: ::String,
+                                                       application_identifier: ::String
+                                                     ) -> _DisassociateApplicationFromEntitlementResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateApplicationFromEntitlementResponseSuccess
+
+      interface _DisassociateFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateFleetResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#disassociate_fleet-instance_method
+      def disassociate_fleet: (
+                                fleet_name: ::String,
+                                stack_name: ::String
+                              ) -> _DisassociateFleetResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateFleetResponseSuccess
+
+      interface _EnableUserResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableUserResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#enable_user-instance_method
+      def enable_user: (
+                         user_name: ::String,
+                         authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD")
+                       ) -> _EnableUserResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableUserResponseSuccess
+
+      interface _ExpireSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExpireSessionResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#expire_session-instance_method
+      def expire_session: (
+                            session_id: ::String
+                          ) -> _ExpireSessionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExpireSessionResponseSuccess
+
+      interface _ListAssociatedFleetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssociatedFleetsResult]
+        def names: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#list_associated_fleets-instance_method
+      def list_associated_fleets: (
+                                    stack_name: ::String,
+                                    ?next_token: ::String
+                                  ) -> _ListAssociatedFleetsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssociatedFleetsResponseSuccess
+
+      interface _ListAssociatedStacksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssociatedStacksResult]
+        def names: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#list_associated_stacks-instance_method
+      def list_associated_stacks: (
+                                    fleet_name: ::String,
+                                    ?next_token: ::String
+                                  ) -> _ListAssociatedStacksResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssociatedStacksResponseSuccess
+
+      interface _ListEntitledApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEntitledApplicationsResult]
+        def entitled_applications: () -> ::Array[Types::EntitledApplication]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#list_entitled_applications-instance_method
+      def list_entitled_applications: (
+                                        stack_name: ::String,
+                                        entitlement_name: ::String,
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListEntitledApplicationsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntitledApplicationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartAppBlockBuilderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAppBlockBuilderResult]
+        def app_block_builder: () -> Types::AppBlockBuilder
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#start_app_block_builder-instance_method
+      def start_app_block_builder: (
+                                     name: ::String
+                                   ) -> _StartAppBlockBuilderResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAppBlockBuilderResponseSuccess
+
+      interface _StartFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartFleetResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#start_fleet-instance_method
+      def start_fleet: (
+                         name: ::String
+                       ) -> _StartFleetResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFleetResponseSuccess
+
+      interface _StartImageBuilderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartImageBuilderResult]
+        def image_builder: () -> Types::ImageBuilder
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#start_image_builder-instance_method
+      def start_image_builder: (
+                                 name: ::String,
+                                 ?appstream_agent_version: ::String
+                               ) -> _StartImageBuilderResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartImageBuilderResponseSuccess
+
+      interface _StopAppBlockBuilderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopAppBlockBuilderResult]
+        def app_block_builder: () -> Types::AppBlockBuilder
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#stop_app_block_builder-instance_method
+      def stop_app_block_builder: (
+                                    name: ::String
+                                  ) -> _StopAppBlockBuilderResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopAppBlockBuilderResponseSuccess
+
+      interface _StopFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopFleetResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#stop_fleet-instance_method
+      def stop_fleet: (
+                        name: ::String
+                      ) -> _StopFleetResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopFleetResponseSuccess
+
+      interface _StopImageBuilderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopImageBuilderResult]
+        def image_builder: () -> Types::ImageBuilder
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#stop_image_builder-instance_method
+      def stop_image_builder: (
+                                name: ::String
+                              ) -> _StopImageBuilderResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopImageBuilderResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAppBlockBuilderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAppBlockBuilderResult]
+        def app_block_builder: () -> Types::AppBlockBuilder
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#update_app_block_builder-instance_method
+      def update_app_block_builder: (
+                                      name: ::String,
+                                      ?description: ::String,
+                                      ?display_name: ::String,
+                                      ?platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2"),
+                                      ?instance_type: ::String,
+                                      ?vpc_config: {
+                                        subnet_ids: Array[::String]?,
+                                        security_group_ids: Array[::String]?
+                                      },
+                                      ?enable_default_internet_access: bool,
+                                      ?iam_role_arn: ::String,
+                                      ?access_endpoints: Array[
+                                        {
+                                          endpoint_type: ("STREAMING"),
+                                          vpce_id: ::String?
+                                        },
+                                      ],
+                                      ?attributes_to_delete: Array[("IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS")]
+                                    ) -> _UpdateAppBlockBuilderResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppBlockBuilderResponseSuccess
+
+      interface _UpdateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationResult]
+        def application: () -> Types::Application
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#update_application-instance_method
+      def update_application: (
+                                name: ::String,
+                                ?display_name: ::String,
+                                ?description: ::String,
+                                ?icon_s3_location: {
+                                  s3_bucket: ::String,
+                                  s3_key: ::String?
+                                },
+                                ?launch_path: ::String,
+                                ?working_directory: ::String,
+                                ?launch_parameters: ::String,
+                                ?app_block_arn: ::String,
+                                ?attributes_to_delete: Array[("LAUNCH_PARAMETERS" | "WORKING_DIRECTORY")]
+                              ) -> _UpdateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
+
+      interface _UpdateDirectoryConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDirectoryConfigResult]
+        def directory_config: () -> Types::DirectoryConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#update_directory_config-instance_method
+      def update_directory_config: (
+                                     directory_name: ::String,
+                                     ?organizational_unit_distinguished_names: Array[::String],
+                                     ?service_account_credentials: {
+                                       account_name: ::String,
+                                       account_password: ::String
+                                     },
+                                     ?certificate_based_auth_properties: {
+                                       status: ("DISABLED" | "ENABLED" | "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK")?,
+                                       certificate_authority_arn: ::String?
+                                     }
+                                   ) -> _UpdateDirectoryConfigResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDirectoryConfigResponseSuccess
+
+      interface _UpdateEntitlementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEntitlementResult]
+        def entitlement: () -> Types::Entitlement
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#update_entitlement-instance_method
+      def update_entitlement: (
+                                name: ::String,
+                                stack_name: ::String,
+                                ?description: ::String,
+                                ?app_visibility: ("ALL" | "ASSOCIATED"),
+                                ?attributes: Array[
+                                  {
+                                    name: ::String,
+                                    value: ::String
+                                  },
+                                ]
+                              ) -> _UpdateEntitlementResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEntitlementResponseSuccess
+
+      interface _UpdateFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFleetResult]
+        def fleet: () -> Types::Fleet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#update_fleet-instance_method
+      def update_fleet: (
+                          ?image_name: ::String,
+                          ?image_arn: ::String,
+                          ?name: ::String,
+                          ?instance_type: ::String,
+                          ?compute_capacity: {
+                            desired_instances: ::Integer?,
+                            desired_sessions: ::Integer?
+                          },
+                          ?vpc_config: {
+                            subnet_ids: Array[::String]?,
+                            security_group_ids: Array[::String]?
+                          },
+                          ?max_user_duration_in_seconds: ::Integer,
+                          ?disconnect_timeout_in_seconds: ::Integer,
+                          ?delete_vpc_config: bool,
+                          ?description: ::String,
+                          ?display_name: ::String,
+                          ?enable_default_internet_access: bool,
+                          ?domain_join_info: {
+                            directory_name: ::String?,
+                            organizational_unit_distinguished_name: ::String?
+                          },
+                          ?idle_disconnect_timeout_in_seconds: ::Integer,
+                          ?attributes_to_delete: Array[("VPC_CONFIGURATION" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS" | "DOMAIN_JOIN_INFO" | "IAM_ROLE_ARN" | "USB_DEVICE_FILTER_STRINGS" | "SESSION_SCRIPT_S3_LOCATION" | "MAX_SESSIONS_PER_INSTANCE")],
+                          ?iam_role_arn: ::String,
+                          ?stream_view: ("APP" | "DESKTOP"),
+                          ?platform: ("WINDOWS" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "AMAZON_LINUX2"),
+                          ?max_concurrent_sessions: ::Integer,
+                          ?usb_device_filter_strings: Array[::String],
+                          ?session_script_s3_location: {
+                            s3_bucket: ::String,
+                            s3_key: ::String?
+                          },
+                          ?max_sessions_per_instance: ::Integer
+                        ) -> _UpdateFleetResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFleetResponseSuccess
+
+      interface _UpdateImagePermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateImagePermissionsResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#update_image_permissions-instance_method
+      def update_image_permissions: (
+                                      name: ::String,
+                                      shared_account_id: ::String,
+                                      image_permissions: {
+                                        allow_fleet: bool?,
+                                        allow_image_builder: bool?
+                                      }
+                                    ) -> _UpdateImagePermissionsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateImagePermissionsResponseSuccess
+
+      interface _UpdateStackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStackResult]
+        def stack: () -> Types::Stack
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#update_stack-instance_method
+      def update_stack: (
+                          ?display_name: ::String,
+                          ?description: ::String,
+                          name: ::String,
+                          ?storage_connectors: Array[
+                            {
+                              connector_type: ("HOMEFOLDERS" | "GOOGLE_DRIVE" | "ONE_DRIVE"),
+                              resource_identifier: ::String?,
+                              domains: Array[::String]?
+                            },
+                          ],
+                          ?delete_storage_connectors: bool,
+                          ?redirect_url: ::String,
+                          ?feedback_url: ::String,
+                          ?attributes_to_delete: Array[("STORAGE_CONNECTORS" | "STORAGE_CONNECTOR_HOMEFOLDERS" | "STORAGE_CONNECTOR_GOOGLE_DRIVE" | "STORAGE_CONNECTOR_ONE_DRIVE" | "REDIRECT_URL" | "FEEDBACK_URL" | "THEME_NAME" | "USER_SETTINGS" | "EMBED_HOST_DOMAINS" | "IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "STREAMING_EXPERIENCE_SETTINGS")],
+                          ?user_settings: Array[
+                            {
+                              action: ("CLIPBOARD_COPY_FROM_LOCAL_DEVICE" | "CLIPBOARD_COPY_TO_LOCAL_DEVICE" | "FILE_UPLOAD" | "FILE_DOWNLOAD" | "PRINTING_TO_LOCAL_DEVICE" | "DOMAIN_PASSWORD_SIGNIN" | "DOMAIN_SMART_CARD_SIGNIN"),
+                              permission: ("ENABLED" | "DISABLED"),
+                              maximum_length: ::Integer?
+                            },
+                          ],
+                          ?application_settings: {
+                            enabled: bool,
+                            settings_group: ::String?
+                          },
+                          ?access_endpoints: Array[
+                            {
+                              endpoint_type: ("STREAMING"),
+                              vpce_id: ::String?
+                            },
+                          ],
+                          ?embed_host_domains: Array[::String],
+                          ?streaming_experience_settings: {
+                            preferred_protocol: ("TCP" | "UDP")?
+                          }
+                        ) -> _UpdateStackResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStackResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppStream/Client.html#wait_until-instance_method
+      def wait_until: (:fleet_started waiter_name, 
+                    ?names: Array[::String],
+                    ?next_token: ::String
+                  ) -> Client::_DescribeFleetsResponseSuccess
+                    | (:fleet_started waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeFleetsResponseSuccess
+                    | (:fleet_stopped waiter_name, 
+                    ?names: Array[::String],
+                    ?next_token: ::String
+                  ) -> Client::_DescribeFleetsResponseSuccess
+                    | (:fleet_stopped waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeFleetsResponseSuccess
+    end
+  end
+end
+

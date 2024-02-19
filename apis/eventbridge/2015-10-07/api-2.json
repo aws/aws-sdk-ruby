@@ -873,6 +873,12 @@
         "INACTIVE"
       ]
     },
+    "AppSyncParameters":{
+      "type":"structure",
+      "members":{
+        "GraphQLOperation":{"shape":"GraphQLOperation"}
+      }
+    },
     "Archive":{
       "type":"structure",
       "members":{
@@ -1906,6 +1912,12 @@
         "Secondary":{"shape":"Secondary"}
       }
     },
+    "GraphQLOperation":{
+      "type":"string",
+      "max":1048576,
+      "min":1,
+      "sensitive":true
+    },
     "HeaderKey":{
       "type":"string",
       "max":512,
@@ -2804,7 +2816,8 @@
       "type":"string",
       "enum":[
         "ENABLED",
-        "DISABLED"
+        "DISABLED",
+        "ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS"
       ]
     },
     "RunCommandParameters":{
@@ -3031,7 +3044,8 @@
         "RedshiftDataParameters":{"shape":"RedshiftDataParameters"},
         "SageMakerPipelineParameters":{"shape":"SageMakerPipelineParameters"},
         "DeadLetterConfig":{"shape":"DeadLetterConfig"},
-        "RetryPolicy":{"shape":"RetryPolicy"}
+        "RetryPolicy":{"shape":"RetryPolicy"},
+        "AppSyncParameters":{"shape":"AppSyncParameters"}
       }
     },
     "TargetArn":{

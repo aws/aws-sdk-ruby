@@ -1,0 +1,291 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module HealthLake
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateFHIRDatastoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFHIRDatastoreResponse]
+        def datastore_id: () -> ::String
+        def datastore_arn: () -> ::String
+        def datastore_status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED")
+        def datastore_endpoint: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#create_fhir_datastore-instance_method
+      def create_fhir_datastore: (
+                                   ?datastore_name: ::String,
+                                   datastore_type_version: ("R4"),
+                                   ?sse_configuration: {
+                                     kms_encryption_config: {
+                                       cmk_type: ("CUSTOMER_MANAGED_KMS_KEY" | "AWS_OWNED_KMS_KEY"),
+                                       kms_key_id: ::String?
+                                     }
+                                   },
+                                   ?preload_data_config: {
+                                     preload_data_type: ("SYNTHEA")
+                                   },
+                                   ?client_token: ::String,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ],
+                                   ?identity_provider_configuration: {
+                                     authorization_strategy: ("SMART_ON_FHIR_V1" | "AWS_AUTH"),
+                                     fine_grained_authorization_enabled: bool?,
+                                     metadata: ::String?,
+                                     idp_lambda_arn: ::String?
+                                   }
+                                 ) -> _CreateFHIRDatastoreResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFHIRDatastoreResponseSuccess
+
+      interface _DeleteFHIRDatastoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFHIRDatastoreResponse]
+        def datastore_id: () -> ::String
+        def datastore_arn: () -> ::String
+        def datastore_status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED")
+        def datastore_endpoint: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#delete_fhir_datastore-instance_method
+      def delete_fhir_datastore: (
+                                   datastore_id: ::String
+                                 ) -> _DeleteFHIRDatastoreResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFHIRDatastoreResponseSuccess
+
+      interface _DescribeFHIRDatastoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFHIRDatastoreResponse]
+        def datastore_properties: () -> Types::DatastoreProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#describe_fhir_datastore-instance_method
+      def describe_fhir_datastore: (
+                                     datastore_id: ::String
+                                   ) -> _DescribeFHIRDatastoreResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFHIRDatastoreResponseSuccess
+
+      interface _DescribeFHIRExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFHIRExportJobResponse]
+        def export_job_properties: () -> Types::ExportJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#describe_fhir_export_job-instance_method
+      def describe_fhir_export_job: (
+                                      datastore_id: ::String,
+                                      job_id: ::String
+                                    ) -> _DescribeFHIRExportJobResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFHIRExportJobResponseSuccess
+
+      interface _DescribeFHIRImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFHIRImportJobResponse]
+        def import_job_properties: () -> Types::ImportJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#describe_fhir_import_job-instance_method
+      def describe_fhir_import_job: (
+                                      datastore_id: ::String,
+                                      job_id: ::String
+                                    ) -> _DescribeFHIRImportJobResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFHIRImportJobResponseSuccess
+
+      interface _ListFHIRDatastoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFHIRDatastoresResponse]
+        def datastore_properties_list: () -> ::Array[Types::DatastoreProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#list_fhir_datastores-instance_method
+      def list_fhir_datastores: (
+                                  ?filter: {
+                                    datastore_name: ::String?,
+                                    datastore_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED")?,
+                                    created_before: ::Time?,
+                                    created_after: ::Time?
+                                  },
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListFHIRDatastoresResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFHIRDatastoresResponseSuccess
+
+      interface _ListFHIRExportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFHIRExportJobsResponse]
+        def export_job_properties_list: () -> ::Array[Types::ExportJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#list_fhir_export_jobs-instance_method
+      def list_fhir_export_jobs: (
+                                   datastore_id: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
+                                   ?job_name: ::String,
+                                   ?job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED_WITH_ERRORS" | "COMPLETED" | "FAILED" | "CANCEL_SUBMITTED" | "CANCEL_IN_PROGRESS" | "CANCEL_COMPLETED" | "CANCEL_FAILED"),
+                                   ?submitted_before: ::Time,
+                                   ?submitted_after: ::Time
+                                 ) -> _ListFHIRExportJobsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFHIRExportJobsResponseSuccess
+
+      interface _ListFHIRImportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFHIRImportJobsResponse]
+        def import_job_properties_list: () -> ::Array[Types::ImportJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#list_fhir_import_jobs-instance_method
+      def list_fhir_import_jobs: (
+                                   datastore_id: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
+                                   ?job_name: ::String,
+                                   ?job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED_WITH_ERRORS" | "COMPLETED" | "FAILED" | "CANCEL_SUBMITTED" | "CANCEL_IN_PROGRESS" | "CANCEL_COMPLETED" | "CANCEL_FAILED"),
+                                   ?submitted_before: ::Time,
+                                   ?submitted_after: ::Time
+                                 ) -> _ListFHIRImportJobsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFHIRImportJobsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartFHIRExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartFHIRExportJobResponse]
+        def job_id: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED_WITH_ERRORS" | "COMPLETED" | "FAILED" | "CANCEL_SUBMITTED" | "CANCEL_IN_PROGRESS" | "CANCEL_COMPLETED" | "CANCEL_FAILED")
+        def datastore_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#start_fhir_export_job-instance_method
+      def start_fhir_export_job: (
+                                   ?job_name: ::String,
+                                   output_data_config: {
+                                     s3_configuration: {
+                                       s3_uri: ::String,
+                                       kms_key_id: ::String
+                                     }?
+                                   },
+                                   datastore_id: ::String,
+                                   data_access_role_arn: ::String,
+                                   client_token: ::String
+                                 ) -> _StartFHIRExportJobResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFHIRExportJobResponseSuccess
+
+      interface _StartFHIRImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartFHIRImportJobResponse]
+        def job_id: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED_WITH_ERRORS" | "COMPLETED" | "FAILED" | "CANCEL_SUBMITTED" | "CANCEL_IN_PROGRESS" | "CANCEL_COMPLETED" | "CANCEL_FAILED")
+        def datastore_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#start_fhir_import_job-instance_method
+      def start_fhir_import_job: (
+                                   ?job_name: ::String,
+                                   input_data_config: {
+                                     s3_uri: ::String?
+                                   },
+                                   job_output_data_config: {
+                                     s3_configuration: {
+                                       s3_uri: ::String,
+                                       kms_key_id: ::String
+                                     }?
+                                   },
+                                   datastore_id: ::String,
+                                   data_access_role_arn: ::String,
+                                   client_token: ::String
+                                 ) -> _StartFHIRImportJobResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFHIRImportJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/HealthLake/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+    end
+  end
+end
+

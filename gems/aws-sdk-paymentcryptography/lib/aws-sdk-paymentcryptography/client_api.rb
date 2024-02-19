@@ -29,6 +29,9 @@ module Aws::PaymentCryptography
     DeleteKeyInput = Shapes::StructureShape.new(name: 'DeleteKeyInput')
     DeleteKeyInputDeleteKeyInDaysInteger = Shapes::IntegerShape.new(name: 'DeleteKeyInputDeleteKeyInDaysInteger')
     DeleteKeyOutput = Shapes::StructureShape.new(name: 'DeleteKeyOutput')
+    ExportAttributes = Shapes::StructureShape.new(name: 'ExportAttributes')
+    ExportDukptInitialKey = Shapes::StructureShape.new(name: 'ExportDukptInitialKey')
+    ExportKeyCryptogram = Shapes::StructureShape.new(name: 'ExportKeyCryptogram')
     ExportKeyInput = Shapes::StructureShape.new(name: 'ExportKeyInput')
     ExportKeyMaterial = Shapes::UnionShape.new(name: 'ExportKeyMaterial')
     ExportKeyOutput = Shapes::StructureShape.new(name: 'ExportKeyOutput')
@@ -46,6 +49,8 @@ module Aws::PaymentCryptography
     GetPublicKeyCertificateInput = Shapes::StructureShape.new(name: 'GetPublicKeyCertificateInput')
     GetPublicKeyCertificateOutput = Shapes::StructureShape.new(name: 'GetPublicKeyCertificateOutput')
     HexLength16 = Shapes::StringShape.new(name: 'HexLength16')
+    HexLength20Or24 = Shapes::StringShape.new(name: 'HexLength20Or24')
+    ImportKeyCryptogram = Shapes::StructureShape.new(name: 'ImportKeyCryptogram')
     ImportKeyInput = Shapes::StructureShape.new(name: 'ImportKeyInput')
     ImportKeyMaterial = Shapes::UnionShape.new(name: 'ImportKeyMaterial')
     ImportKeyOutput = Shapes::StructureShape.new(name: 'ImportKeyOutput')
@@ -109,7 +114,9 @@ module Aws::PaymentCryptography
     UpdateAliasOutput = Shapes::StructureShape.new(name: 'UpdateAliasOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     WrappedKey = Shapes::StructureShape.new(name: 'WrappedKey')
+    WrappedKeyCryptogram = Shapes::StringShape.new(name: 'WrappedKeyCryptogram')
     WrappedKeyMaterialFormat = Shapes::StringShape.new(name: 'WrappedKeyMaterialFormat')
+    WrappingKeySpec = Shapes::StringShape.new(name: 'WrappingKeySpec')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -152,13 +159,28 @@ module Aws::PaymentCryptography
     DeleteKeyOutput.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "Key"))
     DeleteKeyOutput.struct_class = Types::DeleteKeyOutput
 
+    ExportAttributes.add_member(:export_dukpt_initial_key, Shapes::ShapeRef.new(shape: ExportDukptInitialKey, location_name: "ExportDukptInitialKey"))
+    ExportAttributes.add_member(:key_check_value_algorithm, Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
+    ExportAttributes.struct_class = Types::ExportAttributes
+
+    ExportDukptInitialKey.add_member(:key_serial_number, Shapes::ShapeRef.new(shape: HexLength20Or24, required: true, location_name: "KeySerialNumber"))
+    ExportDukptInitialKey.struct_class = Types::ExportDukptInitialKey
+
+    ExportKeyCryptogram.add_member(:certificate_authority_public_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "CertificateAuthorityPublicKeyIdentifier"))
+    ExportKeyCryptogram.add_member(:wrapping_key_certificate, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "WrappingKeyCertificate"))
+    ExportKeyCryptogram.add_member(:wrapping_spec, Shapes::ShapeRef.new(shape: WrappingKeySpec, location_name: "WrappingSpec"))
+    ExportKeyCryptogram.struct_class = Types::ExportKeyCryptogram
+
+    ExportKeyInput.add_member(:export_attributes, Shapes::ShapeRef.new(shape: ExportAttributes, location_name: "ExportAttributes"))
     ExportKeyInput.add_member(:export_key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "ExportKeyIdentifier"))
     ExportKeyInput.add_member(:key_material, Shapes::ShapeRef.new(shape: ExportKeyMaterial, required: true, location_name: "KeyMaterial"))
     ExportKeyInput.struct_class = Types::ExportKeyInput
 
+    ExportKeyMaterial.add_member(:key_cryptogram, Shapes::ShapeRef.new(shape: ExportKeyCryptogram, location_name: "KeyCryptogram"))
     ExportKeyMaterial.add_member(:tr_31_key_block, Shapes::ShapeRef.new(shape: ExportTr31KeyBlock, location_name: "Tr31KeyBlock"))
     ExportKeyMaterial.add_member(:tr_34_key_block, Shapes::ShapeRef.new(shape: ExportTr34KeyBlock, location_name: "Tr34KeyBlock"))
     ExportKeyMaterial.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ExportKeyMaterial.add_member_subclass(:key_cryptogram, Types::ExportKeyMaterial::KeyCryptogram)
     ExportKeyMaterial.add_member_subclass(:tr_31_key_block, Types::ExportKeyMaterial::Tr31KeyBlock)
     ExportKeyMaterial.add_member_subclass(:tr_34_key_block, Types::ExportKeyMaterial::Tr34KeyBlock)
     ExportKeyMaterial.add_member_subclass(:unknown, Types::ExportKeyMaterial::Unknown)
@@ -218,17 +240,26 @@ module Aws::PaymentCryptography
     GetPublicKeyCertificateOutput.add_member(:key_certificate_chain, Shapes::ShapeRef.new(shape: CertificateType, required: true, location_name: "KeyCertificateChain"))
     GetPublicKeyCertificateOutput.struct_class = Types::GetPublicKeyCertificateOutput
 
+    ImportKeyCryptogram.add_member(:exportable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Exportable"))
+    ImportKeyCryptogram.add_member(:import_token, Shapes::ShapeRef.new(shape: ImportTokenId, required: true, location_name: "ImportToken"))
+    ImportKeyCryptogram.add_member(:key_attributes, Shapes::ShapeRef.new(shape: KeyAttributes, required: true, location_name: "KeyAttributes"))
+    ImportKeyCryptogram.add_member(:wrapped_key_cryptogram, Shapes::ShapeRef.new(shape: WrappedKeyCryptogram, required: true, location_name: "WrappedKeyCryptogram"))
+    ImportKeyCryptogram.add_member(:wrapping_spec, Shapes::ShapeRef.new(shape: WrappingKeySpec, location_name: "WrappingSpec"))
+    ImportKeyCryptogram.struct_class = Types::ImportKeyCryptogram
+
     ImportKeyInput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     ImportKeyInput.add_member(:key_check_value_algorithm, Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
     ImportKeyInput.add_member(:key_material, Shapes::ShapeRef.new(shape: ImportKeyMaterial, required: true, location_name: "KeyMaterial"))
     ImportKeyInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     ImportKeyInput.struct_class = Types::ImportKeyInput
 
+    ImportKeyMaterial.add_member(:key_cryptogram, Shapes::ShapeRef.new(shape: ImportKeyCryptogram, location_name: "KeyCryptogram"))
     ImportKeyMaterial.add_member(:root_certificate_public_key, Shapes::ShapeRef.new(shape: RootCertificatePublicKey, location_name: "RootCertificatePublicKey"))
     ImportKeyMaterial.add_member(:tr_31_key_block, Shapes::ShapeRef.new(shape: ImportTr31KeyBlock, location_name: "Tr31KeyBlock"))
     ImportKeyMaterial.add_member(:tr_34_key_block, Shapes::ShapeRef.new(shape: ImportTr34KeyBlock, location_name: "Tr34KeyBlock"))
     ImportKeyMaterial.add_member(:trusted_certificate_public_key, Shapes::ShapeRef.new(shape: TrustedCertificatePublicKey, location_name: "TrustedCertificatePublicKey"))
     ImportKeyMaterial.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ImportKeyMaterial.add_member_subclass(:key_cryptogram, Types::ImportKeyMaterial::KeyCryptogram)
     ImportKeyMaterial.add_member_subclass(:root_certificate_public_key, Types::ImportKeyMaterial::RootCertificatePublicKey)
     ImportKeyMaterial.add_member_subclass(:tr_31_key_block, Types::ImportKeyMaterial::Tr31KeyBlock)
     ImportKeyMaterial.add_member_subclass(:tr_34_key_block, Types::ImportKeyMaterial::Tr34KeyBlock)
@@ -391,6 +422,8 @@ module Aws::PaymentCryptography
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
 
+    WrappedKey.add_member(:key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, location_name: "KeyCheckValue"))
+    WrappedKey.add_member(:key_check_value_algorithm, Shapes::ShapeRef.new(shape: KeyCheckValueAlgorithm, location_name: "KeyCheckValueAlgorithm"))
     WrappedKey.add_member(:key_material, Shapes::ShapeRef.new(shape: KeyMaterial, required: true, location_name: "KeyMaterial"))
     WrappedKey.add_member(:wrapped_key_material_format, Shapes::ShapeRef.new(shape: WrappedKeyMaterialFormat, required: true, location_name: "WrappedKeyMaterialFormat"))
     WrappedKey.add_member(:wrapping_key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "WrappingKeyArn"))

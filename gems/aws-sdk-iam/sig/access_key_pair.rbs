@@ -1,0 +1,63 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IAM
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccessKeyPair.html
+    class AccessKeyPair
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccessKeyPair.html#initialize-instance_method
+      def initialize: (String user_name, String id, String secret, Hash[Symbol, untyped] options) -> void
+                    | (user_name: String, id: String, secret: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccessKeyPair.html#user_name-instance_method
+      def user_name: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccessKeyPair.html#id-instance_method
+      def id: () -> String
+      alias access_key_id id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccessKeyPair.html#secret-instance_method
+      def secret: () -> String
+      alias secret_access_key secret
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccessKeyPair.html#status-instance_method
+      def status: () -> ("Active" | "Inactive")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccessKeyPair.html#create_date-instance_method
+      def create_date: () -> ::Time
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccessKeyPair.html#data-instance_method
+      def data: () -> Types::AccessKey
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccessKeyPair.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccessKeyPair.html#activate-instance_method
+      def activate: (
+                    ) -> ::Aws::EmptyStructure
+                  | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccessKeyPair.html#deactivate-instance_method
+      def deactivate: (
+                      ) -> ::Aws::EmptyStructure
+                    | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/AccessKeyPair.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      class Collection < ::Aws::Resources::Collection[AccessKeyPair]
+      end
+    end
+  end
+end

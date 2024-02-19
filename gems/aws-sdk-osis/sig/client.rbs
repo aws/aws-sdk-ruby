@@ -1,0 +1,263 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module OSIS
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreatePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePipelineResponse]
+        def pipeline: () -> Types::Pipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#create_pipeline-instance_method
+      def create_pipeline: (
+                             pipeline_name: ::String,
+                             min_units: ::Integer,
+                             max_units: ::Integer,
+                             pipeline_configuration_body: ::String,
+                             ?log_publishing_options: {
+                               is_logging_enabled: bool?,
+                               cloud_watch_log_destination: {
+                                 log_group: ::String
+                               }?
+                             },
+                             ?vpc_options: {
+                               subnet_ids: Array[::String],
+                               security_group_ids: Array[::String]?
+                             },
+                             ?buffer_options: {
+                               persistent_buffer_enabled: bool
+                             },
+                             ?encryption_at_rest_options: {
+                               kms_key_arn: ::String
+                             },
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _CreatePipelineResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePipelineResponseSuccess
+
+      interface _DeletePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePipelineResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#delete_pipeline-instance_method
+      def delete_pipeline: (
+                             pipeline_name: ::String
+                           ) -> _DeletePipelineResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePipelineResponseSuccess
+
+      interface _GetPipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPipelineResponse]
+        def pipeline: () -> Types::Pipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#get_pipeline-instance_method
+      def get_pipeline: (
+                          pipeline_name: ::String
+                        ) -> _GetPipelineResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPipelineResponseSuccess
+
+      interface _GetPipelineBlueprintResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPipelineBlueprintResponse]
+        def blueprint: () -> Types::PipelineBlueprint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#get_pipeline_blueprint-instance_method
+      def get_pipeline_blueprint: (
+                                    blueprint_name: ::String
+                                  ) -> _GetPipelineBlueprintResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPipelineBlueprintResponseSuccess
+
+      interface _GetPipelineChangeProgressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPipelineChangeProgressResponse]
+        def change_progress_statuses: () -> ::Array[Types::ChangeProgressStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#get_pipeline_change_progress-instance_method
+      def get_pipeline_change_progress: (
+                                          pipeline_name: ::String
+                                        ) -> _GetPipelineChangeProgressResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPipelineChangeProgressResponseSuccess
+
+      interface _ListPipelineBlueprintsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelineBlueprintsResponse]
+        def blueprints: () -> ::Array[Types::PipelineBlueprintSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#list_pipeline_blueprints-instance_method
+      def list_pipeline_blueprints: (
+                                    ) -> _ListPipelineBlueprintsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelineBlueprintsResponseSuccess
+
+      interface _ListPipelinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelinesResponse]
+        def next_token: () -> ::String
+        def pipelines: () -> ::Array[Types::PipelineSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#list_pipelines-instance_method
+      def list_pipelines: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListPipelinesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelinesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartPipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartPipelineResponse]
+        def pipeline: () -> Types::Pipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#start_pipeline-instance_method
+      def start_pipeline: (
+                            pipeline_name: ::String
+                          ) -> _StartPipelineResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPipelineResponseSuccess
+
+      interface _StopPipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopPipelineResponse]
+        def pipeline: () -> Types::Pipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#stop_pipeline-instance_method
+      def stop_pipeline: (
+                           pipeline_name: ::String
+                         ) -> _StopPipelineResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopPipelineResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdatePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePipelineResponse]
+        def pipeline: () -> Types::Pipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#update_pipeline-instance_method
+      def update_pipeline: (
+                             pipeline_name: ::String,
+                             ?min_units: ::Integer,
+                             ?max_units: ::Integer,
+                             ?pipeline_configuration_body: ::String,
+                             ?log_publishing_options: {
+                               is_logging_enabled: bool?,
+                               cloud_watch_log_destination: {
+                                 log_group: ::String
+                               }?
+                             },
+                             ?buffer_options: {
+                               persistent_buffer_enabled: bool
+                             },
+                             ?encryption_at_rest_options: {
+                               kms_key_arn: ::String
+                             }
+                           ) -> _UpdatePipelineResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePipelineResponseSuccess
+
+      interface _ValidatePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidatePipelineResponse]
+        def is_valid: () -> bool
+        def errors: () -> ::Array[Types::ValidationMessage]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OSIS/Client.html#validate_pipeline-instance_method
+      def validate_pipeline: (
+                               pipeline_configuration_body: ::String
+                             ) -> _ValidatePipelineResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidatePipelineResponseSuccess
+    end
+  end
+end
+

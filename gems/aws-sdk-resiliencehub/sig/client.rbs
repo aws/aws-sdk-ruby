@@ -1,0 +1,942 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ResilienceHub
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddDraftAppVersionResourceMappingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddDraftAppVersionResourceMappingsResponse]
+        def app_arn: () -> ::String
+        def app_version: () -> ::String
+        def resource_mappings: () -> ::Array[Types::ResourceMapping]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#add_draft_app_version_resource_mappings-instance_method
+      def add_draft_app_version_resource_mappings: (
+                                                     app_arn: ::String,
+                                                     resource_mappings: Array[
+                                                       {
+                                                         app_registry_app_name: ::String?,
+                                                         eks_source_name: ::String?,
+                                                         logical_stack_name: ::String?,
+                                                         mapping_type: ("CfnStack" | "Resource" | "AppRegistryApp" | "ResourceGroup" | "Terraform" | "EKS"),
+                                                         physical_resource_id: {
+                                                           aws_account_id: ::String?,
+                                                           aws_region: ::String?,
+                                                           identifier: ::String,
+                                                           type: ("Arn" | "Native")
+                                                         },
+                                                         resource_group_name: ::String?,
+                                                         resource_name: ::String?,
+                                                         terraform_source_name: ::String?
+                                                       },
+                                                     ]
+                                                   ) -> _AddDraftAppVersionResourceMappingsResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddDraftAppVersionResourceMappingsResponseSuccess
+
+      interface _BatchUpdateRecommendationStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdateRecommendationStatusResponse]
+        def app_arn: () -> ::String
+        def failed_entries: () -> ::Array[Types::BatchUpdateRecommendationStatusFailedEntry]
+        def successful_entries: () -> ::Array[Types::BatchUpdateRecommendationStatusSuccessfulEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#batch_update_recommendation_status-instance_method
+      def batch_update_recommendation_status: (
+                                                app_arn: ::String,
+                                                request_entries: Array[
+                                                  {
+                                                    entry_id: ::String,
+                                                    exclude_reason: ("AlreadyImplemented" | "NotRelevant" | "ComplexityOfImplementation")?,
+                                                    excluded: bool,
+                                                    item: {
+                                                      resource_id: ::String?,
+                                                      target_account_id: ::String?,
+                                                      target_region: ::String?
+                                                    },
+                                                    reference_id: ::String
+                                                  },
+                                                ]
+                                              ) -> _BatchUpdateRecommendationStatusResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateRecommendationStatusResponseSuccess
+
+      interface _CreateAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppResponse]
+        def app: () -> Types::App
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#create_app-instance_method
+      def create_app: (
+                        ?assessment_schedule: ("Disabled" | "Daily"),
+                        ?client_token: ::String,
+                        ?description: ::String,
+                        ?event_subscriptions: Array[
+                          {
+                            event_type: ("ScheduledAssessmentFailure" | "DriftDetected"),
+                            name: ::String,
+                            sns_topic_arn: ::String?
+                          },
+                        ],
+                        name: ::String,
+                        ?permission_model: {
+                          cross_account_role_arns: Array[::String]?,
+                          invoker_role_name: ::String?,
+                          type: ("LegacyIAMUser" | "RoleBased")
+                        },
+                        ?policy_arn: ::String,
+                        ?tags: Hash[::String, ::String]
+                      ) -> _CreateAppResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppResponseSuccess
+
+      interface _CreateAppVersionAppComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppVersionAppComponentResponse]
+        def app_arn: () -> ::String
+        def app_component: () -> Types::AppComponent
+        def app_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#create_app_version_app_component-instance_method
+      def create_app_version_app_component: (
+                                              ?additional_info: Hash[::String, Array[::String]],
+                                              app_arn: ::String,
+                                              ?client_token: ::String,
+                                              ?id: ::String,
+                                              name: ::String,
+                                              type: ::String
+                                            ) -> _CreateAppVersionAppComponentResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppVersionAppComponentResponseSuccess
+
+      interface _CreateAppVersionResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppVersionResourceResponse]
+        def app_arn: () -> ::String
+        def app_version: () -> ::String
+        def physical_resource: () -> Types::PhysicalResource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#create_app_version_resource-instance_method
+      def create_app_version_resource: (
+                                         ?additional_info: Hash[::String, Array[::String]],
+                                         app_arn: ::String,
+                                         app_components: Array[::String],
+                                         ?aws_account_id: ::String,
+                                         ?aws_region: ::String,
+                                         ?client_token: ::String,
+                                         logical_resource_id: {
+                                           eks_source_name: ::String?,
+                                           identifier: ::String,
+                                           logical_stack_name: ::String?,
+                                           resource_group_name: ::String?,
+                                           terraform_source_name: ::String?
+                                         },
+                                         physical_resource_id: ::String,
+                                         ?resource_name: ::String,
+                                         resource_type: ::String
+                                       ) -> _CreateAppVersionResourceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppVersionResourceResponseSuccess
+
+      interface _CreateRecommendationTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRecommendationTemplateResponse]
+        def recommendation_template: () -> Types::RecommendationTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#create_recommendation_template-instance_method
+      def create_recommendation_template: (
+                                            assessment_arn: ::String,
+                                            ?bucket_name: ::String,
+                                            ?client_token: ::String,
+                                            ?format: ("CfnYaml" | "CfnJson"),
+                                            name: ::String,
+                                            ?recommendation_ids: Array[::String],
+                                            ?recommendation_types: Array[("Alarm" | "Sop" | "Test")],
+                                            ?tags: Hash[::String, ::String]
+                                          ) -> _CreateRecommendationTemplateResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRecommendationTemplateResponseSuccess
+
+      interface _CreateResiliencyPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResiliencyPolicyResponse]
+        def policy: () -> Types::ResiliencyPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#create_resiliency_policy-instance_method
+      def create_resiliency_policy: (
+                                      ?client_token: ::String,
+                                      ?data_location_constraint: ("AnyLocation" | "SameContinent" | "SameCountry"),
+                                      policy: Hash[("Software" | "Hardware" | "AZ" | "Region"), {
+                                          rpo_in_secs: ::Integer,
+                                          rto_in_secs: ::Integer
+                                        }],
+                                      ?policy_description: ::String,
+                                      policy_name: ::String,
+                                      ?tags: Hash[::String, ::String],
+                                      tier: ("MissionCritical" | "Critical" | "Important" | "CoreServices" | "NonCritical" | "NotApplicable")
+                                    ) -> _CreateResiliencyPolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResiliencyPolicyResponseSuccess
+
+      interface _DeleteAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAppResponse]
+        def app_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#delete_app-instance_method
+      def delete_app: (
+                        app_arn: ::String,
+                        ?client_token: ::String,
+                        ?force_delete: bool
+                      ) -> _DeleteAppResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAppResponseSuccess
+
+      interface _DeleteAppAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAppAssessmentResponse]
+        def assessment_arn: () -> ::String
+        def assessment_status: () -> ("Pending" | "InProgress" | "Failed" | "Success")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#delete_app_assessment-instance_method
+      def delete_app_assessment: (
+                                   assessment_arn: ::String,
+                                   ?client_token: ::String
+                                 ) -> _DeleteAppAssessmentResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAppAssessmentResponseSuccess
+
+      interface _DeleteAppInputSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAppInputSourceResponse]
+        def app_arn: () -> ::String
+        def app_input_source: () -> Types::AppInputSource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#delete_app_input_source-instance_method
+      def delete_app_input_source: (
+                                     app_arn: ::String,
+                                     ?client_token: ::String,
+                                     ?eks_source_cluster_namespace: {
+                                       eks_cluster_arn: ::String,
+                                       namespace: ::String
+                                     },
+                                     ?source_arn: ::String,
+                                     ?terraform_source: {
+                                       s3_state_file_url: ::String
+                                     }
+                                   ) -> _DeleteAppInputSourceResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAppInputSourceResponseSuccess
+
+      interface _DeleteAppVersionAppComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAppVersionAppComponentResponse]
+        def app_arn: () -> ::String
+        def app_component: () -> Types::AppComponent
+        def app_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#delete_app_version_app_component-instance_method
+      def delete_app_version_app_component: (
+                                              app_arn: ::String,
+                                              ?client_token: ::String,
+                                              id: ::String
+                                            ) -> _DeleteAppVersionAppComponentResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAppVersionAppComponentResponseSuccess
+
+      interface _DeleteAppVersionResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAppVersionResourceResponse]
+        def app_arn: () -> ::String
+        def app_version: () -> ::String
+        def physical_resource: () -> Types::PhysicalResource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#delete_app_version_resource-instance_method
+      def delete_app_version_resource: (
+                                         app_arn: ::String,
+                                         ?aws_account_id: ::String,
+                                         ?aws_region: ::String,
+                                         ?client_token: ::String,
+                                         ?logical_resource_id: {
+                                           eks_source_name: ::String?,
+                                           identifier: ::String,
+                                           logical_stack_name: ::String?,
+                                           resource_group_name: ::String?,
+                                           terraform_source_name: ::String?
+                                         },
+                                         ?physical_resource_id: ::String,
+                                         ?resource_name: ::String
+                                       ) -> _DeleteAppVersionResourceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAppVersionResourceResponseSuccess
+
+      interface _DeleteRecommendationTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRecommendationTemplateResponse]
+        def recommendation_template_arn: () -> ::String
+        def status: () -> ("Pending" | "InProgress" | "Failed" | "Success")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#delete_recommendation_template-instance_method
+      def delete_recommendation_template: (
+                                            ?client_token: ::String,
+                                            recommendation_template_arn: ::String
+                                          ) -> _DeleteRecommendationTemplateResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRecommendationTemplateResponseSuccess
+
+      interface _DeleteResiliencyPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResiliencyPolicyResponse]
+        def policy_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#delete_resiliency_policy-instance_method
+      def delete_resiliency_policy: (
+                                      ?client_token: ::String,
+                                      policy_arn: ::String
+                                    ) -> _DeleteResiliencyPolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResiliencyPolicyResponseSuccess
+
+      interface _DescribeAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppResponse]
+        def app: () -> Types::App
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#describe_app-instance_method
+      def describe_app: (
+                          app_arn: ::String
+                        ) -> _DescribeAppResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppResponseSuccess
+
+      interface _DescribeAppAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppAssessmentResponse]
+        def assessment: () -> Types::AppAssessment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#describe_app_assessment-instance_method
+      def describe_app_assessment: (
+                                     assessment_arn: ::String
+                                   ) -> _DescribeAppAssessmentResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppAssessmentResponseSuccess
+
+      interface _DescribeAppVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppVersionResponse]
+        def additional_info: () -> ::Hash[::String, ::Array[::String]]
+        def app_arn: () -> ::String
+        def app_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#describe_app_version-instance_method
+      def describe_app_version: (
+                                  app_arn: ::String,
+                                  app_version: ::String
+                                ) -> _DescribeAppVersionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppVersionResponseSuccess
+
+      interface _DescribeAppVersionAppComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppVersionAppComponentResponse]
+        def app_arn: () -> ::String
+        def app_component: () -> Types::AppComponent
+        def app_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#describe_app_version_app_component-instance_method
+      def describe_app_version_app_component: (
+                                                app_arn: ::String,
+                                                app_version: ::String,
+                                                id: ::String
+                                              ) -> _DescribeAppVersionAppComponentResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppVersionAppComponentResponseSuccess
+
+      interface _DescribeAppVersionResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppVersionResourceResponse]
+        def app_arn: () -> ::String
+        def app_version: () -> ::String
+        def physical_resource: () -> Types::PhysicalResource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#describe_app_version_resource-instance_method
+      def describe_app_version_resource: (
+                                           app_arn: ::String,
+                                           app_version: ::String,
+                                           ?aws_account_id: ::String,
+                                           ?aws_region: ::String,
+                                           ?logical_resource_id: {
+                                             eks_source_name: ::String?,
+                                             identifier: ::String,
+                                             logical_stack_name: ::String?,
+                                             resource_group_name: ::String?,
+                                             terraform_source_name: ::String?
+                                           },
+                                           ?physical_resource_id: ::String,
+                                           ?resource_name: ::String
+                                         ) -> _DescribeAppVersionResourceResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppVersionResourceResponseSuccess
+
+      interface _DescribeAppVersionResourcesResolutionStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppVersionResourcesResolutionStatusResponse]
+        def app_arn: () -> ::String
+        def app_version: () -> ::String
+        def error_message: () -> ::String
+        def resolution_id: () -> ::String
+        def status: () -> ("Pending" | "InProgress" | "Failed" | "Success")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#describe_app_version_resources_resolution_status-instance_method
+      def describe_app_version_resources_resolution_status: (
+                                                              app_arn: ::String,
+                                                              app_version: ::String,
+                                                              ?resolution_id: ::String
+                                                            ) -> _DescribeAppVersionResourcesResolutionStatusResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppVersionResourcesResolutionStatusResponseSuccess
+
+      interface _DescribeAppVersionTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAppVersionTemplateResponse]
+        def app_arn: () -> ::String
+        def app_template_body: () -> ::String
+        def app_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#describe_app_version_template-instance_method
+      def describe_app_version_template: (
+                                           app_arn: ::String,
+                                           app_version: ::String
+                                         ) -> _DescribeAppVersionTemplateResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAppVersionTemplateResponseSuccess
+
+      interface _DescribeDraftAppVersionResourcesImportStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDraftAppVersionResourcesImportStatusResponse]
+        def app_arn: () -> ::String
+        def app_version: () -> ::String
+        def error_message: () -> ::String
+        def status: () -> ("Pending" | "InProgress" | "Failed" | "Success")
+        def status_change_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#describe_draft_app_version_resources_import_status-instance_method
+      def describe_draft_app_version_resources_import_status: (
+                                                                app_arn: ::String
+                                                              ) -> _DescribeDraftAppVersionResourcesImportStatusResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDraftAppVersionResourcesImportStatusResponseSuccess
+
+      interface _DescribeResiliencyPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResiliencyPolicyResponse]
+        def policy: () -> Types::ResiliencyPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#describe_resiliency_policy-instance_method
+      def describe_resiliency_policy: (
+                                        policy_arn: ::String
+                                      ) -> _DescribeResiliencyPolicyResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResiliencyPolicyResponseSuccess
+
+      interface _ImportResourcesToDraftAppVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportResourcesToDraftAppVersionResponse]
+        def app_arn: () -> ::String
+        def app_version: () -> ::String
+        def eks_sources: () -> ::Array[Types::EksSource]
+        def source_arns: () -> ::Array[::String]
+        def status: () -> ("Pending" | "InProgress" | "Failed" | "Success")
+        def terraform_sources: () -> ::Array[Types::TerraformSource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#import_resources_to_draft_app_version-instance_method
+      def import_resources_to_draft_app_version: (
+                                                   app_arn: ::String,
+                                                   ?eks_sources: Array[
+                                                     {
+                                                       eks_cluster_arn: ::String,
+                                                       namespaces: Array[::String]
+                                                     },
+                                                   ],
+                                                   ?import_strategy: ("AddOnly" | "ReplaceAll"),
+                                                   ?source_arns: Array[::String],
+                                                   ?terraform_sources: Array[
+                                                     {
+                                                       s3_state_file_url: ::String
+                                                     },
+                                                   ]
+                                                 ) -> _ImportResourcesToDraftAppVersionResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportResourcesToDraftAppVersionResponseSuccess
+
+      interface _ListAlarmRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAlarmRecommendationsResponse]
+        def alarm_recommendations: () -> ::Array[Types::AlarmRecommendation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_alarm_recommendations-instance_method
+      def list_alarm_recommendations: (
+                                        assessment_arn: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListAlarmRecommendationsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAlarmRecommendationsResponseSuccess
+
+      interface _ListAppAssessmentComplianceDriftsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppAssessmentComplianceDriftsResponse]
+        def compliance_drifts: () -> ::Array[Types::ComplianceDrift]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_app_assessment_compliance_drifts-instance_method
+      def list_app_assessment_compliance_drifts: (
+                                                   assessment_arn: ::String,
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _ListAppAssessmentComplianceDriftsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppAssessmentComplianceDriftsResponseSuccess
+
+      interface _ListAppAssessmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppAssessmentsResponse]
+        def assessment_summaries: () -> ::Array[Types::AppAssessmentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_app_assessments-instance_method
+      def list_app_assessments: (
+                                  ?app_arn: ::String,
+                                  ?assessment_name: ::String,
+                                  ?assessment_status: Array[("Pending" | "InProgress" | "Failed" | "Success")],
+                                  ?compliance_status: ("PolicyBreached" | "PolicyMet"),
+                                  ?invoker: ("User" | "System"),
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?reverse_order: bool
+                                ) -> _ListAppAssessmentsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppAssessmentsResponseSuccess
+
+      interface _ListAppComponentCompliancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppComponentCompliancesResponse]
+        def component_compliances: () -> ::Array[Types::AppComponentCompliance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_app_component_compliances-instance_method
+      def list_app_component_compliances: (
+                                            assessment_arn: ::String,
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _ListAppComponentCompliancesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppComponentCompliancesResponseSuccess
+
+      interface _ListAppComponentRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppComponentRecommendationsResponse]
+        def component_recommendations: () -> ::Array[Types::ComponentRecommendation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_app_component_recommendations-instance_method
+      def list_app_component_recommendations: (
+                                                assessment_arn: ::String,
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListAppComponentRecommendationsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppComponentRecommendationsResponseSuccess
+
+      interface _ListAppInputSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppInputSourcesResponse]
+        def app_input_sources: () -> ::Array[Types::AppInputSource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_app_input_sources-instance_method
+      def list_app_input_sources: (
+                                    app_arn: ::String,
+                                    app_version: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListAppInputSourcesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppInputSourcesResponseSuccess
+
+      interface _ListAppVersionAppComponentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppVersionAppComponentsResponse]
+        def app_arn: () -> ::String
+        def app_components: () -> ::Array[Types::AppComponent]
+        def app_version: () -> ::String
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_app_version_app_components-instance_method
+      def list_app_version_app_components: (
+                                             app_arn: ::String,
+                                             app_version: ::String,
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListAppVersionAppComponentsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppVersionAppComponentsResponseSuccess
+
+      interface _ListAppVersionResourceMappingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppVersionResourceMappingsResponse]
+        def next_token: () -> ::String
+        def resource_mappings: () -> ::Array[Types::ResourceMapping]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_app_version_resource_mappings-instance_method
+      def list_app_version_resource_mappings: (
+                                                app_arn: ::String,
+                                                app_version: ::String,
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListAppVersionResourceMappingsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppVersionResourceMappingsResponseSuccess
+
+      interface _ListAppVersionResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppVersionResourcesResponse]
+        def next_token: () -> ::String
+        def physical_resources: () -> ::Array[Types::PhysicalResource]
+        def resolution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_app_version_resources-instance_method
+      def list_app_version_resources: (
+                                        app_arn: ::String,
+                                        app_version: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?resolution_id: ::String
+                                      ) -> _ListAppVersionResourcesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppVersionResourcesResponseSuccess
+
+      interface _ListAppVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppVersionsResponse]
+        def app_versions: () -> ::Array[Types::AppVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_app_versions-instance_method
+      def list_app_versions: (
+                               app_arn: ::String,
+                               ?end_time: ::Time,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               ?start_time: ::Time
+                             ) -> _ListAppVersionsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppVersionsResponseSuccess
+
+      interface _ListAppsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppsResponse]
+        def app_summaries: () -> ::Array[Types::AppSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_apps-instance_method
+      def list_apps: (
+                       ?app_arn: ::String,
+                       ?from_last_assessment_time: ::Time,
+                       ?max_results: ::Integer,
+                       ?name: ::String,
+                       ?next_token: ::String,
+                       ?reverse_order: bool,
+                       ?to_last_assessment_time: ::Time
+                     ) -> _ListAppsResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppsResponseSuccess
+
+      interface _ListRecommendationTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendationTemplatesResponse]
+        def next_token: () -> ::String
+        def recommendation_templates: () -> ::Array[Types::RecommendationTemplate]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_recommendation_templates-instance_method
+      def list_recommendation_templates: (
+                                           assessment_arn: ::String,
+                                           ?max_results: ::Integer,
+                                           ?name: ::String,
+                                           ?next_token: ::String,
+                                           ?recommendation_template_arn: ::String,
+                                           ?reverse_order: bool,
+                                           ?status: Array[("Pending" | "InProgress" | "Failed" | "Success")]
+                                         ) -> _ListRecommendationTemplatesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendationTemplatesResponseSuccess
+
+      interface _ListResiliencyPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResiliencyPoliciesResponse]
+        def next_token: () -> ::String
+        def resiliency_policies: () -> ::Array[Types::ResiliencyPolicy]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_resiliency_policies-instance_method
+      def list_resiliency_policies: (
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      ?policy_name: ::String
+                                    ) -> _ListResiliencyPoliciesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResiliencyPoliciesResponseSuccess
+
+      interface _ListSopRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSopRecommendationsResponse]
+        def next_token: () -> ::String
+        def sop_recommendations: () -> ::Array[Types::SopRecommendation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_sop_recommendations-instance_method
+      def list_sop_recommendations: (
+                                      assessment_arn: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _ListSopRecommendationsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSopRecommendationsResponseSuccess
+
+      interface _ListSuggestedResiliencyPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSuggestedResiliencyPoliciesResponse]
+        def next_token: () -> ::String
+        def resiliency_policies: () -> ::Array[Types::ResiliencyPolicy]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_suggested_resiliency_policies-instance_method
+      def list_suggested_resiliency_policies: (
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _ListSuggestedResiliencyPoliciesResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSuggestedResiliencyPoliciesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTestRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestRecommendationsResponse]
+        def next_token: () -> ::String
+        def test_recommendations: () -> ::Array[Types::TestRecommendation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_test_recommendations-instance_method
+      def list_test_recommendations: (
+                                       assessment_arn: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListTestRecommendationsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestRecommendationsResponseSuccess
+
+      interface _ListUnsupportedAppVersionResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUnsupportedAppVersionResourcesResponse]
+        def next_token: () -> ::String
+        def resolution_id: () -> ::String
+        def unsupported_resources: () -> ::Array[Types::UnsupportedResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#list_unsupported_app_version_resources-instance_method
+      def list_unsupported_app_version_resources: (
+                                                    app_arn: ::String,
+                                                    app_version: ::String,
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String,
+                                                    ?resolution_id: ::String
+                                                  ) -> _ListUnsupportedAppVersionResourcesResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUnsupportedAppVersionResourcesResponseSuccess
+
+      interface _PublishAppVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PublishAppVersionResponse]
+        def app_arn: () -> ::String
+        def app_version: () -> ::String
+        def identifier: () -> ::Integer
+        def version_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#publish_app_version-instance_method
+      def publish_app_version: (
+                                 app_arn: ::String,
+                                 ?version_name: ::String
+                               ) -> _PublishAppVersionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishAppVersionResponseSuccess
+
+      interface _PutDraftAppVersionTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDraftAppVersionTemplateResponse]
+        def app_arn: () -> ::String
+        def app_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#put_draft_app_version_template-instance_method
+      def put_draft_app_version_template: (
+                                            app_arn: ::String,
+                                            app_template_body: ::String
+                                          ) -> _PutDraftAppVersionTemplateResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDraftAppVersionTemplateResponseSuccess
+
+      interface _RemoveDraftAppVersionResourceMappingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveDraftAppVersionResourceMappingsResponse]
+        def app_arn: () -> ::String
+        def app_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#remove_draft_app_version_resource_mappings-instance_method
+      def remove_draft_app_version_resource_mappings: (
+                                                        app_arn: ::String,
+                                                        ?app_registry_app_names: Array[::String],
+                                                        ?eks_source_names: Array[::String],
+                                                        ?logical_stack_names: Array[::String],
+                                                        ?resource_group_names: Array[::String],
+                                                        ?resource_names: Array[::String],
+                                                        ?terraform_source_names: Array[::String]
+                                                      ) -> _RemoveDraftAppVersionResourceMappingsResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveDraftAppVersionResourceMappingsResponseSuccess
+
+      interface _ResolveAppVersionResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResolveAppVersionResourcesResponse]
+        def app_arn: () -> ::String
+        def app_version: () -> ::String
+        def resolution_id: () -> ::String
+        def status: () -> ("Pending" | "InProgress" | "Failed" | "Success")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#resolve_app_version_resources-instance_method
+      def resolve_app_version_resources: (
+                                           app_arn: ::String,
+                                           app_version: ::String
+                                         ) -> _ResolveAppVersionResourcesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResolveAppVersionResourcesResponseSuccess
+
+      interface _StartAppAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAppAssessmentResponse]
+        def assessment: () -> Types::AppAssessment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#start_app_assessment-instance_method
+      def start_app_assessment: (
+                                  app_arn: ::String,
+                                  app_version: ::String,
+                                  assessment_name: ::String,
+                                  ?client_token: ::String,
+                                  ?tags: Hash[::String, ::String]
+                                ) -> _StartAppAssessmentResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAppAssessmentResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAppResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAppResponse]
+        def app: () -> Types::App
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#update_app-instance_method
+      def update_app: (
+                        app_arn: ::String,
+                        ?assessment_schedule: ("Disabled" | "Daily"),
+                        ?clear_resiliency_policy_arn: bool,
+                        ?description: ::String,
+                        ?event_subscriptions: Array[
+                          {
+                            event_type: ("ScheduledAssessmentFailure" | "DriftDetected"),
+                            name: ::String,
+                            sns_topic_arn: ::String?
+                          },
+                        ],
+                        ?permission_model: {
+                          cross_account_role_arns: Array[::String]?,
+                          invoker_role_name: ::String?,
+                          type: ("LegacyIAMUser" | "RoleBased")
+                        },
+                        ?policy_arn: ::String
+                      ) -> _UpdateAppResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppResponseSuccess
+
+      interface _UpdateAppVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAppVersionResponse]
+        def additional_info: () -> ::Hash[::String, ::Array[::String]]
+        def app_arn: () -> ::String
+        def app_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#update_app_version-instance_method
+      def update_app_version: (
+                                ?additional_info: Hash[::String, Array[::String]],
+                                app_arn: ::String
+                              ) -> _UpdateAppVersionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppVersionResponseSuccess
+
+      interface _UpdateAppVersionAppComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAppVersionAppComponentResponse]
+        def app_arn: () -> ::String
+        def app_component: () -> Types::AppComponent
+        def app_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#update_app_version_app_component-instance_method
+      def update_app_version_app_component: (
+                                              ?additional_info: Hash[::String, Array[::String]],
+                                              app_arn: ::String,
+                                              id: ::String,
+                                              ?name: ::String,
+                                              ?type: ::String
+                                            ) -> _UpdateAppVersionAppComponentResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppVersionAppComponentResponseSuccess
+
+      interface _UpdateAppVersionResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAppVersionResourceResponse]
+        def app_arn: () -> ::String
+        def app_version: () -> ::String
+        def physical_resource: () -> Types::PhysicalResource
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#update_app_version_resource-instance_method
+      def update_app_version_resource: (
+                                         ?additional_info: Hash[::String, Array[::String]],
+                                         app_arn: ::String,
+                                         ?app_components: Array[::String],
+                                         ?aws_account_id: ::String,
+                                         ?aws_region: ::String,
+                                         ?excluded: bool,
+                                         ?logical_resource_id: {
+                                           eks_source_name: ::String?,
+                                           identifier: ::String,
+                                           logical_stack_name: ::String?,
+                                           resource_group_name: ::String?,
+                                           terraform_source_name: ::String?
+                                         },
+                                         ?physical_resource_id: ::String,
+                                         ?resource_name: ::String,
+                                         ?resource_type: ::String
+                                       ) -> _UpdateAppVersionResourceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppVersionResourceResponseSuccess
+
+      interface _UpdateResiliencyPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResiliencyPolicyResponse]
+        def policy: () -> Types::ResiliencyPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResilienceHub/Client.html#update_resiliency_policy-instance_method
+      def update_resiliency_policy: (
+                                      ?data_location_constraint: ("AnyLocation" | "SameContinent" | "SameCountry"),
+                                      ?policy: Hash[("Software" | "Hardware" | "AZ" | "Region"), {
+                                          rpo_in_secs: ::Integer,
+                                          rto_in_secs: ::Integer
+                                        }],
+                                      policy_arn: ::String,
+                                      ?policy_description: ::String,
+                                      ?policy_name: ::String,
+                                      ?tier: ("MissionCritical" | "Critical" | "Important" | "CoreServices" | "NonCritical" | "NotApplicable")
+                                    ) -> _UpdateResiliencyPolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResiliencyPolicyResponseSuccess
+    end
+  end
+end
+

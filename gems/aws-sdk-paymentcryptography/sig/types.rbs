@@ -1,0 +1,457 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::PaymentCryptography
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Alias
+      attr_accessor alias_name: ::String
+      attr_accessor key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAliasInput
+      attr_accessor alias_name: ::String
+      attr_accessor key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAliasOutput
+      attr_accessor alias: Types::Alias
+      SENSITIVE: []
+    end
+
+    class CreateKeyInput
+      attr_accessor enabled: bool
+      attr_accessor exportable: bool
+      attr_accessor key_attributes: Types::KeyAttributes
+      attr_accessor key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateKeyOutput
+      attr_accessor key: Types::Key
+      SENSITIVE: []
+    end
+
+    class DeleteAliasInput
+      attr_accessor alias_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAliasOutput < Aws::EmptyStructure
+    end
+
+    class DeleteKeyInput
+      attr_accessor delete_key_in_days: ::Integer
+      attr_accessor key_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKeyOutput
+      attr_accessor key: Types::Key
+      SENSITIVE: []
+    end
+
+    class ExportAttributes
+      attr_accessor export_dukpt_initial_key: Types::ExportDukptInitialKey
+      attr_accessor key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")
+      SENSITIVE: []
+    end
+
+    class ExportDukptInitialKey
+      attr_accessor key_serial_number: ::String
+      SENSITIVE: []
+    end
+
+    class ExportKeyCryptogram
+      attr_accessor certificate_authority_public_key_identifier: ::String
+      attr_accessor wrapping_key_certificate: ::String
+      attr_accessor wrapping_spec: ("RSA_OAEP_SHA_256" | "RSA_OAEP_SHA_512")
+      SENSITIVE: [:wrapping_key_certificate]
+    end
+
+    class ExportKeyInput
+      attr_accessor export_attributes: Types::ExportAttributes
+      attr_accessor export_key_identifier: ::String
+      attr_accessor key_material: Types::ExportKeyMaterial
+      SENSITIVE: []
+    end
+
+    class ExportKeyMaterial
+      attr_accessor key_cryptogram: Types::ExportKeyCryptogram
+      attr_accessor tr_31_key_block: Types::ExportTr31KeyBlock
+      attr_accessor tr_34_key_block: Types::ExportTr34KeyBlock
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class KeyCryptogram < ExportKeyMaterial
+      end
+      class Tr31KeyBlock < ExportKeyMaterial
+      end
+      class Tr34KeyBlock < ExportKeyMaterial
+      end
+      class Unknown < ExportKeyMaterial
+      end
+    end
+
+    class ExportKeyOutput
+      attr_accessor wrapped_key: Types::WrappedKey
+      SENSITIVE: []
+    end
+
+    class ExportTr31KeyBlock
+      attr_accessor wrapping_key_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ExportTr34KeyBlock
+      attr_accessor certificate_authority_public_key_identifier: ::String
+      attr_accessor export_token: ::String
+      attr_accessor key_block_format: ("X9_TR34_2012")
+      attr_accessor random_nonce: ::String
+      attr_accessor wrapping_key_certificate: ::String
+      SENSITIVE: [:wrapping_key_certificate]
+    end
+
+    class GetAliasInput
+      attr_accessor alias_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAliasOutput
+      attr_accessor alias: Types::Alias
+      SENSITIVE: []
+    end
+
+    class GetKeyInput
+      attr_accessor key_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetKeyOutput
+      attr_accessor key: Types::Key
+      SENSITIVE: []
+    end
+
+    class GetParametersForExportInput
+      attr_accessor key_material_type: ("TR34_KEY_BLOCK" | "TR31_KEY_BLOCK" | "ROOT_PUBLIC_KEY_CERTIFICATE" | "TRUSTED_PUBLIC_KEY_CERTIFICATE" | "KEY_CRYPTOGRAM")
+      attr_accessor signing_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096")
+      SENSITIVE: []
+    end
+
+    class GetParametersForExportOutput
+      attr_accessor export_token: ::String
+      attr_accessor parameters_valid_until_timestamp: ::Time
+      attr_accessor signing_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096")
+      attr_accessor signing_key_certificate: ::String
+      attr_accessor signing_key_certificate_chain: ::String
+      SENSITIVE: [:signing_key_certificate, :signing_key_certificate_chain]
+    end
+
+    class GetParametersForImportInput
+      attr_accessor key_material_type: ("TR34_KEY_BLOCK" | "TR31_KEY_BLOCK" | "ROOT_PUBLIC_KEY_CERTIFICATE" | "TRUSTED_PUBLIC_KEY_CERTIFICATE" | "KEY_CRYPTOGRAM")
+      attr_accessor wrapping_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096")
+      SENSITIVE: []
+    end
+
+    class GetParametersForImportOutput
+      attr_accessor import_token: ::String
+      attr_accessor parameters_valid_until_timestamp: ::Time
+      attr_accessor wrapping_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096")
+      attr_accessor wrapping_key_certificate: ::String
+      attr_accessor wrapping_key_certificate_chain: ::String
+      SENSITIVE: [:wrapping_key_certificate, :wrapping_key_certificate_chain]
+    end
+
+    class GetPublicKeyCertificateInput
+      attr_accessor key_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetPublicKeyCertificateOutput
+      attr_accessor key_certificate: ::String
+      attr_accessor key_certificate_chain: ::String
+      SENSITIVE: [:key_certificate, :key_certificate_chain]
+    end
+
+    class ImportKeyCryptogram
+      attr_accessor exportable: bool
+      attr_accessor import_token: ::String
+      attr_accessor key_attributes: Types::KeyAttributes
+      attr_accessor wrapped_key_cryptogram: ::String
+      attr_accessor wrapping_spec: ("RSA_OAEP_SHA_256" | "RSA_OAEP_SHA_512")
+      SENSITIVE: []
+    end
+
+    class ImportKeyInput
+      attr_accessor enabled: bool
+      attr_accessor key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")
+      attr_accessor key_material: Types::ImportKeyMaterial
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ImportKeyMaterial
+      attr_accessor key_cryptogram: Types::ImportKeyCryptogram
+      attr_accessor root_certificate_public_key: Types::RootCertificatePublicKey
+      attr_accessor tr_31_key_block: Types::ImportTr31KeyBlock
+      attr_accessor tr_34_key_block: Types::ImportTr34KeyBlock
+      attr_accessor trusted_certificate_public_key: Types::TrustedCertificatePublicKey
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class KeyCryptogram < ImportKeyMaterial
+      end
+      class RootCertificatePublicKey < ImportKeyMaterial
+      end
+      class Tr31KeyBlock < ImportKeyMaterial
+      end
+      class Tr34KeyBlock < ImportKeyMaterial
+      end
+      class TrustedCertificatePublicKey < ImportKeyMaterial
+      end
+      class Unknown < ImportKeyMaterial
+      end
+    end
+
+    class ImportKeyOutput
+      attr_accessor key: Types::Key
+      SENSITIVE: []
+    end
+
+    class ImportTr31KeyBlock
+      attr_accessor wrapped_key_block: ::String
+      attr_accessor wrapping_key_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ImportTr34KeyBlock
+      attr_accessor certificate_authority_public_key_identifier: ::String
+      attr_accessor import_token: ::String
+      attr_accessor key_block_format: ("X9_TR34_2012")
+      attr_accessor random_nonce: ::String
+      attr_accessor signing_key_certificate: ::String
+      attr_accessor wrapped_key_block: ::String
+      SENSITIVE: [:signing_key_certificate]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Key
+      attr_accessor create_timestamp: ::Time
+      attr_accessor delete_pending_timestamp: ::Time
+      attr_accessor delete_timestamp: ::Time
+      attr_accessor enabled: bool
+      attr_accessor exportable: bool
+      attr_accessor key_arn: ::String
+      attr_accessor key_attributes: Types::KeyAttributes
+      attr_accessor key_check_value: ::String
+      attr_accessor key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")
+      attr_accessor key_origin: ("EXTERNAL" | "AWS_PAYMENT_CRYPTOGRAPHY")
+      attr_accessor key_state: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "DELETE_PENDING" | "DELETE_COMPLETE")
+      attr_accessor usage_start_timestamp: ::Time
+      attr_accessor usage_stop_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class KeyAttributes
+      attr_accessor key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "RSA_2048" | "RSA_3072" | "RSA_4096")
+      attr_accessor key_class: ("SYMMETRIC_KEY" | "ASYMMETRIC_KEY_PAIR" | "PRIVATE_KEY" | "PUBLIC_KEY")
+      attr_accessor key_modes_of_use: Types::KeyModesOfUse
+      attr_accessor key_usage: ("TR31_B0_BASE_DERIVATION_KEY" | "TR31_C0_CARD_VERIFICATION_KEY" | "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY" | "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION" | "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS" | "TR31_E1_EMV_MKEY_CONFIDENTIALITY" | "TR31_E2_EMV_MKEY_INTEGRITY" | "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS" | "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION" | "TR31_E6_EMV_MKEY_OTHER" | "TR31_K0_KEY_ENCRYPTION_KEY" | "TR31_K1_KEY_BLOCK_PROTECTION_KEY" | "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT" | "TR31_M3_ISO_9797_3_MAC_KEY" | "TR31_M1_ISO_9797_1_MAC_KEY" | "TR31_M6_ISO_9797_5_CMAC_KEY" | "TR31_M7_HMAC_KEY" | "TR31_P0_PIN_ENCRYPTION_KEY" | "TR31_P1_PIN_GENERATION_KEY" | "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE" | "TR31_V1_IBM3624_PIN_VERIFICATION_KEY" | "TR31_V2_VISA_PIN_VERIFICATION_KEY" | "TR31_K2_TR34_ASYMMETRIC_KEY")
+      SENSITIVE: []
+    end
+
+    class KeyModesOfUse
+      attr_accessor decrypt: bool
+      attr_accessor derive_key: bool
+      attr_accessor encrypt: bool
+      attr_accessor generate: bool
+      attr_accessor no_restrictions: bool
+      attr_accessor sign: bool
+      attr_accessor unwrap: bool
+      attr_accessor verify: bool
+      attr_accessor wrap: bool
+      SENSITIVE: []
+    end
+
+    class KeySummary
+      attr_accessor enabled: bool
+      attr_accessor exportable: bool
+      attr_accessor key_arn: ::String
+      attr_accessor key_attributes: Types::KeyAttributes
+      attr_accessor key_check_value: ::String
+      attr_accessor key_state: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "DELETE_PENDING" | "DELETE_COMPLETE")
+      SENSITIVE: []
+    end
+
+    class ListAliasesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAliasesOutput
+      attr_accessor aliases: ::Array[Types::Alias]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKeysInput
+      attr_accessor key_state: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "DELETE_PENDING" | "DELETE_COMPLETE")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKeysOutput
+      attr_accessor keys: ::Array[Types::KeySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor next_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreKeyInput
+      attr_accessor key_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreKeyOutput
+      attr_accessor key: Types::Key
+      SENSITIVE: []
+    end
+
+    class RootCertificatePublicKey
+      attr_accessor key_attributes: Types::KeyAttributes
+      attr_accessor public_key_certificate: ::String
+      SENSITIVE: [:public_key_certificate]
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartKeyUsageInput
+      attr_accessor key_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartKeyUsageOutput
+      attr_accessor key: Types::Key
+      SENSITIVE: []
+    end
+
+    class StopKeyUsageInput
+      attr_accessor key_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StopKeyUsageOutput
+      attr_accessor key: Types::Key
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrustedCertificatePublicKey
+      attr_accessor certificate_authority_public_key_identifier: ::String
+      attr_accessor key_attributes: Types::KeyAttributes
+      attr_accessor public_key_certificate: ::String
+      SENSITIVE: [:public_key_certificate]
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateAliasInput
+      attr_accessor alias_name: ::String
+      attr_accessor key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAliasOutput
+      attr_accessor alias: Types::Alias
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WrappedKey
+      attr_accessor key_check_value: ::String
+      attr_accessor key_check_value_algorithm: ("CMAC" | "ANSI_X9_24")
+      attr_accessor key_material: ::String
+      attr_accessor wrapped_key_material_format: ("KEY_CRYPTOGRAM" | "TR31_KEY_BLOCK" | "TR34_KEY_BLOCK")
+      attr_accessor wrapping_key_arn: ::String
+      SENSITIVE: [:key_material]
+    end
+  end
+end

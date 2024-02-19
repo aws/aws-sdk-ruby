@@ -1,0 +1,73 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ACMPCA
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class CertificateMismatchException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidArgsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidArnException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidPolicyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidStateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidTagException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LockoutPreventedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MalformedCSRException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MalformedCertificateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PermissionAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RequestAlreadyProcessedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RequestFailedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RequestInProgressException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

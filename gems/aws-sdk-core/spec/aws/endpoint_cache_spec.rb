@@ -3,7 +3,7 @@
 require_relative '../spec_helper'
 
 module Aws
-  describe EndpointCache do
+  describe EndpointCache, :jruby_flaky do
     it 'allows configure max entries limit' do
       cache = Aws::EndpointCache.new(max_entries: 3)
       expect(cache.max_entries).to eq(3)

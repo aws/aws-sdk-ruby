@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2024-02-15)
+------------------
+
+* Feature - Adds additional supported instance types.
+
+1.37.0 (2024-02-06)
+------------------
+
+* Feature - This release adds clear visibility to the customers on the changes that they make on the domain.
+
+1.36.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2024-01-04)
+------------------
+
+* Feature - This release adds support for new or existing Amazon OpenSearch domains to enable TLS 1.3 or TLS 1.2 with perfect forward secrecy cipher suites for domain endpoints.
+
+1.34.0 (2023-12-14)
+------------------
+
+* Feature - Updating documentation for Amazon OpenSearch Service support for new zero-ETL integration with Amazon S3.
+
+1.33.0 (2023-11-29)
+------------------
+
+* Feature - Launching Amazon OpenSearch Service support for new zero-ETL integration with Amazon S3. Customers can now manage their direct query data sources to Amazon S3 programatically
+
+1.32.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2023-10-26)
+------------------
+
+* Feature - You can specify ipv4 or dualstack IPAddressType for cluster endpoints. If you specify IPAddressType as dualstack, the new endpoint will be visible under the 'EndpointV2' parameter and will support IPv4 and IPv6 requests. Whereas, the 'Endpoint' will continue to serve IPv4 requests.
+
 1.29.0 (2023-10-19)
 ------------------
 

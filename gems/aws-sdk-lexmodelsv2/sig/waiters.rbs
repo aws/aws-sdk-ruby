@@ -1,0 +1,101 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LexModelsV2
+    module Waiters
+
+      class BotAliasAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    bot_alias_id: ::String,
+                    bot_id: ::String
+                  ) -> Client::_DescribeBotAliasResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeBotAliasResponseSuccess
+      end
+
+      class BotAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    bot_id: ::String
+                  ) -> Client::_DescribeBotResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeBotResponseSuccess
+      end
+
+      class BotExportCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    export_id: ::String
+                  ) -> Client::_DescribeExportResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeExportResponseSuccess
+      end
+
+      class BotImportCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    import_id: ::String
+                  ) -> Client::_DescribeImportResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeImportResponseSuccess
+      end
+
+      class BotLocaleBuilt
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    bot_id: ::String,
+                    bot_version: ::String,
+                    locale_id: ::String
+                  ) -> Client::_DescribeBotLocaleResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeBotLocaleResponseSuccess
+      end
+
+      class BotLocaleCreated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    bot_id: ::String,
+                    bot_version: ::String,
+                    locale_id: ::String
+                  ) -> Client::_DescribeBotLocaleResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeBotLocaleResponseSuccess
+      end
+
+      class BotLocaleExpressTestingAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    bot_id: ::String,
+                    bot_version: ::String,
+                    locale_id: ::String
+                  ) -> Client::_DescribeBotLocaleResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeBotLocaleResponseSuccess
+      end
+
+      class BotVersionAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    bot_id: ::String,
+                    bot_version: ::String
+                  ) -> Client::_DescribeBotVersionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeBotVersionResponseSuccess
+      end
+    end
+  end
+end

@@ -1,0 +1,59 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Certificate.html
+    class Certificate
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Certificate.html#initialize-instance_method
+      def initialize: (String id, Hash[Symbol, untyped] options) -> void
+                    | (id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Certificate.html#id-instance_method
+      def id: () -> String
+      alias certificate_identifier id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Certificate.html#certificate_type-instance_method
+      def certificate_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Certificate.html#thumbprint-instance_method
+      def thumbprint: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Certificate.html#valid_from-instance_method
+      def valid_from: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Certificate.html#valid_till-instance_method
+      def valid_till: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Certificate.html#certificate_arn-instance_method
+      def certificate_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Certificate.html#customer_override-instance_method
+      def customer_override: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Certificate.html#customer_override_valid_till-instance_method
+      def customer_override_valid_till: () -> ::Time
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Certificate.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Certificate.html#data-instance_method
+      def data: () -> Types::Certificate
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Certificate.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      class Collection < ::Aws::Resources::Collection[Certificate]
+      end
+    end
+  end
+end

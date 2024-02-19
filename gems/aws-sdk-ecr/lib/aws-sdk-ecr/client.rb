@@ -532,7 +532,7 @@ module Aws::ECR
     #   resp.failures #=> Array
     #   resp.failures[0].image_id.image_digest #=> String
     #   resp.failures[0].image_id.image_tag #=> String
-    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList", "KmsError"
+    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList", "KmsError", "UpstreamAccessDenied", "UpstreamTooManyRequests", "UpstreamUnavailable"
     #   resp.failures[0].failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchDeleteImage AWS API Documentation
@@ -633,7 +633,7 @@ module Aws::ECR
     #   resp.failures #=> Array
     #   resp.failures[0].image_id.image_digest #=> String
     #   resp.failures[0].image_id.image_tag #=> String
-    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList", "KmsError"
+    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList", "KmsError", "UpstreamAccessDenied", "UpstreamTooManyRequests", "UpstreamUnavailable"
     #   resp.failures[0].failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchGetImage AWS API Documentation
@@ -747,8 +747,13 @@ module Aws::ECR
     end
 
     # Creates a pull through cache rule. A pull through cache rule provides
-    # a way to cache images from an external public registry in your Amazon
-    # ECR private registry.
+    # a way to cache images from an upstream registry source in your Amazon
+    # ECR private registry. For more information, see [Using pull through
+    # cache rules][1] in the *Amazon Elastic Container Registry User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache.html
     #
     # @option params [required, String] :ecr_repository_prefix
     #   The repository name prefix to use when caching images from the source
@@ -756,12 +761,34 @@ module Aws::ECR
     #
     # @option params [required, String] :upstream_registry_url
     #   The registry URL of the upstream public registry to use as the source
-    #   for the pull through cache rule.
+    #   for the pull through cache rule. The following is the syntax to use
+    #   for each supported upstream registry.
+    #
+    #   * Amazon ECR Public (`ecr-public`) - `public.ecr.aws`
+    #
+    #   * Docker Hub (`docker-hub`) - `registry-1.docker.io`
+    #
+    #   * Quay (`quay`) - `quay.io`
+    #
+    #   * Kubernetes (`k8s`) - `registry.k8s.io`
+    #
+    #   * GitHub Container Registry (`github-container-registry`) - `ghcr.io`
+    #
+    #   * Microsoft Azure Container Registry (`azure-container-registry`) -
+    #     `<custom>.azurecr.io`
     #
     # @option params [String] :registry_id
     #   The Amazon Web Services account ID associated with the registry to
     #   create the pull through cache rule for. If you do not specify a
     #   registry, the default registry is assumed.
+    #
+    # @option params [String] :upstream_registry
+    #   The name of the upstream registry.
+    #
+    # @option params [String] :credential_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that identifies the credentials to authenticate to the
+    #   upstream registry.
     #
     # @return [Types::CreatePullThroughCacheRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -769,6 +796,8 @@ module Aws::ECR
     #   * {Types::CreatePullThroughCacheRuleResponse#upstream_registry_url #upstream_registry_url} => String
     #   * {Types::CreatePullThroughCacheRuleResponse#created_at #created_at} => Time
     #   * {Types::CreatePullThroughCacheRuleResponse#registry_id #registry_id} => String
+    #   * {Types::CreatePullThroughCacheRuleResponse#upstream_registry #upstream_registry} => String
+    #   * {Types::CreatePullThroughCacheRuleResponse#credential_arn #credential_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -776,6 +805,8 @@ module Aws::ECR
     #     ecr_repository_prefix: "PullThroughCacheRuleRepositoryPrefix", # required
     #     upstream_registry_url: "Url", # required
     #     registry_id: "RegistryId",
+    #     upstream_registry: "ecr-public", # accepts ecr-public, quay, k8s, docker-hub, github-container-registry, azure-container-registry
+    #     credential_arn: "CredentialArn",
     #   })
     #
     # @example Response structure
@@ -784,6 +815,8 @@ module Aws::ECR
     #   resp.upstream_registry_url #=> String
     #   resp.created_at #=> Time
     #   resp.registry_id #=> String
+    #   resp.upstream_registry #=> String, one of "ecr-public", "quay", "k8s", "docker-hub", "github-container-registry", "azure-container-registry"
+    #   resp.credential_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreatePullThroughCacheRule AWS API Documentation
     #
@@ -961,6 +994,7 @@ module Aws::ECR
     #   * {Types::DeletePullThroughCacheRuleResponse#upstream_registry_url #upstream_registry_url} => String
     #   * {Types::DeletePullThroughCacheRuleResponse#created_at #created_at} => Time
     #   * {Types::DeletePullThroughCacheRuleResponse#registry_id #registry_id} => String
+    #   * {Types::DeletePullThroughCacheRuleResponse#credential_arn #credential_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -975,6 +1009,7 @@ module Aws::ECR
     #   resp.upstream_registry_url #=> String
     #   resp.created_at #=> Time
     #   resp.registry_id #=> String
+    #   resp.credential_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeletePullThroughCacheRule AWS API Documentation
     #
@@ -1006,9 +1041,10 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Deletes a repository. If the repository contains images, you must
-    # either delete all images in the repository or use the `force` option
-    # to delete the repository.
+    # Deletes a repository. If the repository isn't empty, you must either
+    # delete the contents of the repository or use the `force` option to
+    # delete the repository and have Amazon ECR delete all of its contents
+    # on your behalf.
     #
     # @option params [String] :registry_id
     #   The Amazon Web Services account ID associated with the registry that
@@ -1019,7 +1055,9 @@ module Aws::ECR
     #   The name of the repository to delete.
     #
     # @option params [Boolean] :force
-    #   If a repository contains images, forces the deletion.
+    #   If true, deleting the repository force deletes the contents of the
+    #   repository. If false, the repository must be empty before attempting
+    #   to delete it.
     #
     # @return [Types::DeleteRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1486,6 +1524,9 @@ module Aws::ECR
     #   resp.pull_through_cache_rules[0].upstream_registry_url #=> String
     #   resp.pull_through_cache_rules[0].created_at #=> Time
     #   resp.pull_through_cache_rules[0].registry_id #=> String
+    #   resp.pull_through_cache_rules[0].credential_arn #=> String
+    #   resp.pull_through_cache_rules[0].upstream_registry #=> String, one of "ecr-public", "quay", "k8s", "docker-hub", "github-container-registry", "azure-container-registry"
+    #   resp.pull_through_cache_rules[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribePullThroughCacheRules AWS API Documentation
@@ -2792,6 +2833,53 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Updates an existing pull through cache rule.
+    #
+    # @option params [String] :registry_id
+    #   The Amazon Web Services account ID associated with the registry
+    #   associated with the pull through cache rule. If you do not specify a
+    #   registry, the default registry is assumed.
+    #
+    # @option params [required, String] :ecr_repository_prefix
+    #   The repository name prefix to use when caching images from the source
+    #   registry.
+    #
+    # @option params [required, String] :credential_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that identifies the credentials to authenticate to the
+    #   upstream registry.
+    #
+    # @return [Types::UpdatePullThroughCacheRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePullThroughCacheRuleResponse#ecr_repository_prefix #ecr_repository_prefix} => String
+    #   * {Types::UpdatePullThroughCacheRuleResponse#registry_id #registry_id} => String
+    #   * {Types::UpdatePullThroughCacheRuleResponse#updated_at #updated_at} => Time
+    #   * {Types::UpdatePullThroughCacheRuleResponse#credential_arn #credential_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_pull_through_cache_rule({
+    #     registry_id: "RegistryId",
+    #     ecr_repository_prefix: "PullThroughCacheRuleRepositoryPrefix", # required
+    #     credential_arn: "CredentialArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ecr_repository_prefix #=> String
+    #   resp.registry_id #=> String
+    #   resp.updated_at #=> Time
+    #   resp.credential_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UpdatePullThroughCacheRule AWS API Documentation
+    #
+    # @overload update_pull_through_cache_rule(params = {})
+    # @param [Hash] params ({})
+    def update_pull_through_cache_rule(params = {}, options = {})
+      req = build_request(:update_pull_through_cache_rule, params)
+      req.send_request(options)
+    end
+
     # Uploads an image layer part to Amazon ECR.
     #
     # When an image is pushed, each new image layer is uploaded in parts.
@@ -2862,6 +2950,54 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Validates an existing pull through cache rule for an upstream registry
+    # that requires authentication. This will retrieve the contents of the
+    # Amazon Web Services Secrets Manager secret, verify the syntax, and
+    # then validate that authentication to the upstream registry is
+    # successful.
+    #
+    # @option params [required, String] :ecr_repository_prefix
+    #   The repository name prefix associated with the pull through cache
+    #   rule.
+    #
+    # @option params [String] :registry_id
+    #   The registry ID associated with the pull through cache rule. If you do
+    #   not specify a registry, the default registry is assumed.
+    #
+    # @return [Types::ValidatePullThroughCacheRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ValidatePullThroughCacheRuleResponse#ecr_repository_prefix #ecr_repository_prefix} => String
+    #   * {Types::ValidatePullThroughCacheRuleResponse#registry_id #registry_id} => String
+    #   * {Types::ValidatePullThroughCacheRuleResponse#upstream_registry_url #upstream_registry_url} => String
+    #   * {Types::ValidatePullThroughCacheRuleResponse#credential_arn #credential_arn} => String
+    #   * {Types::ValidatePullThroughCacheRuleResponse#is_valid #is_valid} => Boolean
+    #   * {Types::ValidatePullThroughCacheRuleResponse#failure #failure} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.validate_pull_through_cache_rule({
+    #     ecr_repository_prefix: "PullThroughCacheRuleRepositoryPrefix", # required
+    #     registry_id: "RegistryId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ecr_repository_prefix #=> String
+    #   resp.registry_id #=> String
+    #   resp.upstream_registry_url #=> String
+    #   resp.credential_arn #=> String
+    #   resp.is_valid #=> Boolean
+    #   resp.failure #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ValidatePullThroughCacheRule AWS API Documentation
+    #
+    # @overload validate_pull_through_cache_rule(params = {})
+    # @param [Hash] params ({})
+    def validate_pull_through_cache_rule(params = {}, options = {})
+      req = build_request(:validate_pull_through_cache_rule, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2875,7 +3011,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,0 +1,1969 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::S3Control
+  module Types
+
+    class AbortIncompleteMultipartUpload
+      attr_accessor days_after_initiation: ::Integer
+      SENSITIVE: []
+    end
+
+    class AccessControlTranslation
+      attr_accessor owner: ("Destination")
+      SENSITIVE: []
+    end
+
+    class AccessGrantsLocationConfiguration
+      attr_accessor s3_sub_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class AccessPoint
+      attr_accessor name: ::String
+      attr_accessor network_origin: ("Internet" | "VPC")
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor bucket: ::String
+      attr_accessor access_point_arn: ::String
+      attr_accessor alias: ::String
+      attr_accessor bucket_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class AccountLevel
+      attr_accessor activity_metrics: Types::ActivityMetrics
+      attr_accessor bucket_level: Types::BucketLevel
+      attr_accessor advanced_cost_optimization_metrics: Types::AdvancedCostOptimizationMetrics
+      attr_accessor advanced_data_protection_metrics: Types::AdvancedDataProtectionMetrics
+      attr_accessor detailed_status_codes_metrics: Types::DetailedStatusCodesMetrics
+      attr_accessor storage_lens_group_level: Types::StorageLensGroupLevel
+      SENSITIVE: []
+    end
+
+    class ActivityMetrics
+      attr_accessor is_enabled: bool
+      SENSITIVE: []
+    end
+
+    class AdvancedCostOptimizationMetrics
+      attr_accessor is_enabled: bool
+      SENSITIVE: []
+    end
+
+    class AdvancedDataProtectionMetrics
+      attr_accessor is_enabled: bool
+      SENSITIVE: []
+    end
+
+    class AssociateAccessGrantsIdentityCenterRequest
+      attr_accessor account_id: ::String
+      attr_accessor identity_center_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AsyncErrorDetails
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor resource: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class AsyncOperation
+      attr_accessor creation_time: ::Time
+      attr_accessor operation: ("CreateMultiRegionAccessPoint" | "DeleteMultiRegionAccessPoint" | "PutMultiRegionAccessPointPolicy")
+      attr_accessor request_token_arn: ::String
+      attr_accessor request_parameters: Types::AsyncRequestParameters
+      attr_accessor request_status: ::String
+      attr_accessor response_details: Types::AsyncResponseDetails
+      SENSITIVE: []
+    end
+
+    class AsyncRequestParameters
+      attr_accessor create_multi_region_access_point_request: Types::CreateMultiRegionAccessPointInput
+      attr_accessor delete_multi_region_access_point_request: Types::DeleteMultiRegionAccessPointInput
+      attr_accessor put_multi_region_access_point_policy_request: Types::PutMultiRegionAccessPointPolicyInput
+      SENSITIVE: []
+    end
+
+    class AsyncResponseDetails
+      attr_accessor multi_region_access_point_details: Types::MultiRegionAccessPointsAsyncResponse
+      attr_accessor error_details: Types::AsyncErrorDetails
+      SENSITIVE: []
+    end
+
+    class AwsLambdaTransformation
+      attr_accessor function_arn: ::String
+      attr_accessor function_payload: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BucketAlreadyExists < Aws::EmptyStructure
+    end
+
+    class BucketAlreadyOwnedByYou < Aws::EmptyStructure
+    end
+
+    class BucketLevel
+      attr_accessor activity_metrics: Types::ActivityMetrics
+      attr_accessor prefix_level: Types::PrefixLevel
+      attr_accessor advanced_cost_optimization_metrics: Types::AdvancedCostOptimizationMetrics
+      attr_accessor advanced_data_protection_metrics: Types::AdvancedDataProtectionMetrics
+      attr_accessor detailed_status_codes_metrics: Types::DetailedStatusCodesMetrics
+      SENSITIVE: []
+    end
+
+    class CloudWatchMetrics
+      attr_accessor is_enabled: bool
+      SENSITIVE: []
+    end
+
+    class CreateAccessGrantRequest
+      attr_accessor account_id: ::String
+      attr_accessor access_grants_location_id: ::String
+      attr_accessor access_grants_location_configuration: Types::AccessGrantsLocationConfiguration
+      attr_accessor grantee: Types::Grantee
+      attr_accessor permission: ("READ" | "WRITE" | "READWRITE")
+      attr_accessor application_arn: ::String
+      attr_accessor s3_prefix_type: ("Object")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAccessGrantResult
+      attr_accessor created_at: ::Time
+      attr_accessor access_grant_id: ::String
+      attr_accessor access_grant_arn: ::String
+      attr_accessor grantee: Types::Grantee
+      attr_accessor access_grants_location_id: ::String
+      attr_accessor access_grants_location_configuration: Types::AccessGrantsLocationConfiguration
+      attr_accessor permission: ("READ" | "WRITE" | "READWRITE")
+      attr_accessor application_arn: ::String
+      attr_accessor grant_scope: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessGrantsInstanceRequest
+      attr_accessor account_id: ::String
+      attr_accessor identity_center_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAccessGrantsInstanceResult
+      attr_accessor created_at: ::Time
+      attr_accessor access_grants_instance_id: ::String
+      attr_accessor access_grants_instance_arn: ::String
+      attr_accessor identity_center_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessGrantsLocationRequest
+      attr_accessor account_id: ::String
+      attr_accessor location_scope: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateAccessGrantsLocationResult
+      attr_accessor created_at: ::Time
+      attr_accessor access_grants_location_id: ::String
+      attr_accessor access_grants_location_arn: ::String
+      attr_accessor location_scope: ::String
+      attr_accessor iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessPointForObjectLambdaRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      attr_accessor configuration: Types::ObjectLambdaConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateAccessPointForObjectLambdaResult
+      attr_accessor object_lambda_access_point_arn: ::String
+      attr_accessor alias: Types::ObjectLambdaAccessPointAlias
+      SENSITIVE: []
+    end
+
+    class CreateAccessPointRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      attr_accessor bucket: ::String
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor public_access_block_configuration: Types::PublicAccessBlockConfiguration
+      attr_accessor bucket_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessPointResult
+      attr_accessor access_point_arn: ::String
+      attr_accessor alias: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBucketConfiguration
+      attr_accessor location_constraint: ("EU" | "eu-west-1" | "us-west-1" | "us-west-2" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "sa-east-1" | "cn-north-1" | "eu-central-1")
+      SENSITIVE: []
+    end
+
+    class CreateBucketRequest
+      attr_accessor acl: ("private" | "public-read" | "public-read-write" | "authenticated-read")
+      attr_accessor bucket: ::String
+      attr_accessor create_bucket_configuration: Types::CreateBucketConfiguration
+      attr_accessor grant_full_control: ::String
+      attr_accessor grant_read: ::String
+      attr_accessor grant_read_acp: ::String
+      attr_accessor grant_write: ::String
+      attr_accessor grant_write_acp: ::String
+      attr_accessor object_lock_enabled_for_bucket: bool
+      attr_accessor outpost_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBucketResult
+      attr_accessor location: ::String
+      attr_accessor bucket_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateJobRequest
+      attr_accessor account_id: ::String
+      attr_accessor confirmation_required: bool
+      attr_accessor operation: Types::JobOperation
+      attr_accessor report: Types::JobReport
+      attr_accessor client_request_token: ::String
+      attr_accessor manifest: Types::JobManifest
+      attr_accessor description: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Array[Types::S3Tag]
+      attr_accessor manifest_generator: Types::JobManifestGenerator
+      SENSITIVE: []
+    end
+
+    class CreateJobResult
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMultiRegionAccessPointInput
+      attr_accessor name: ::String
+      attr_accessor public_access_block: Types::PublicAccessBlockConfiguration
+      attr_accessor regions: ::Array[Types::Region]
+      SENSITIVE: []
+    end
+
+    class CreateMultiRegionAccessPointRequest
+      attr_accessor account_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor details: Types::CreateMultiRegionAccessPointInput
+      SENSITIVE: []
+    end
+
+    class CreateMultiRegionAccessPointResult
+      attr_accessor request_token_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStorageLensGroupRequest
+      attr_accessor account_id: ::String
+      attr_accessor storage_lens_group: Types::StorageLensGroup
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class Credentials
+      attr_accessor access_key_id: ::String
+      attr_accessor secret_access_key: ::String
+      attr_accessor session_token: ::String
+      attr_accessor expiration: ::Time
+      SENSITIVE: [:access_key_id, :secret_access_key, :session_token]
+    end
+
+    class DeleteAccessGrantRequest
+      attr_accessor account_id: ::String
+      attr_accessor access_grant_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessGrantsInstanceRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessGrantsInstanceResourcePolicyRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessGrantsLocationRequest
+      attr_accessor account_id: ::String
+      attr_accessor access_grants_location_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessPointForObjectLambdaRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessPointPolicyForObjectLambdaRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessPointPolicyRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessPointRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBucketLifecycleConfigurationRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBucketPolicyRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBucketReplicationRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBucketRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBucketTaggingRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteJobTaggingRequest
+      attr_accessor account_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteJobTaggingResult < Aws::EmptyStructure
+    end
+
+    class DeleteMarkerReplication
+      attr_accessor status: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class DeleteMultiRegionAccessPointInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMultiRegionAccessPointRequest
+      attr_accessor account_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor details: Types::DeleteMultiRegionAccessPointInput
+      SENSITIVE: []
+    end
+
+    class DeleteMultiRegionAccessPointResult
+      attr_accessor request_token_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePublicAccessBlockRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStorageLensConfigurationRequest
+      attr_accessor config_id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStorageLensConfigurationTaggingRequest
+      attr_accessor config_id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStorageLensConfigurationTaggingResult < Aws::EmptyStructure
+    end
+
+    class DeleteStorageLensGroupRequest
+      attr_accessor name: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobRequest
+      attr_accessor account_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobResult
+      attr_accessor job: Types::JobDescriptor
+      SENSITIVE: []
+    end
+
+    class DescribeMultiRegionAccessPointOperationRequest
+      attr_accessor account_id: ::String
+      attr_accessor request_token_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMultiRegionAccessPointOperationResult
+      attr_accessor async_operation: Types::AsyncOperation
+      SENSITIVE: []
+    end
+
+    class Destination
+      attr_accessor account: ::String
+      attr_accessor bucket: ::String
+      attr_accessor replication_time: Types::ReplicationTime
+      attr_accessor access_control_translation: Types::AccessControlTranslation
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor metrics: Types::Metrics
+      attr_accessor storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR")
+      SENSITIVE: []
+    end
+
+    class DetailedStatusCodesMetrics
+      attr_accessor is_enabled: bool
+      SENSITIVE: []
+    end
+
+    class DissociateAccessGrantsIdentityCenterRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionConfiguration
+      attr_accessor replica_kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class EstablishedMultiRegionAccessPointPolicy
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class Exclude
+      attr_accessor buckets: ::Array[::String]
+      attr_accessor regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ExistingObjectReplication
+      attr_accessor status: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class GeneratedManifestEncryption
+      attr_accessor sses3: Types::SSES3Encryption
+      attr_accessor ssekms: Types::SSEKMSEncryption
+      SENSITIVE: []
+    end
+
+    class GetAccessGrantRequest
+      attr_accessor account_id: ::String
+      attr_accessor access_grant_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessGrantResult
+      attr_accessor created_at: ::Time
+      attr_accessor access_grant_id: ::String
+      attr_accessor access_grant_arn: ::String
+      attr_accessor grantee: Types::Grantee
+      attr_accessor permission: ("READ" | "WRITE" | "READWRITE")
+      attr_accessor access_grants_location_id: ::String
+      attr_accessor access_grants_location_configuration: Types::AccessGrantsLocationConfiguration
+      attr_accessor grant_scope: ::String
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessGrantsInstanceForPrefixRequest
+      attr_accessor account_id: ::String
+      attr_accessor s3_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessGrantsInstanceForPrefixResult
+      attr_accessor access_grants_instance_arn: ::String
+      attr_accessor access_grants_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessGrantsInstanceRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessGrantsInstanceResourcePolicyRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessGrantsInstanceResourcePolicyResult
+      attr_accessor policy: ::String
+      attr_accessor organization: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAccessGrantsInstanceResult
+      attr_accessor access_grants_instance_arn: ::String
+      attr_accessor access_grants_instance_id: ::String
+      attr_accessor identity_center_arn: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAccessGrantsLocationRequest
+      attr_accessor account_id: ::String
+      attr_accessor access_grants_location_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessGrantsLocationResult
+      attr_accessor created_at: ::Time
+      attr_accessor access_grants_location_id: ::String
+      attr_accessor access_grants_location_arn: ::String
+      attr_accessor location_scope: ::String
+      attr_accessor iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessPointConfigurationForObjectLambdaRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessPointConfigurationForObjectLambdaResult
+      attr_accessor configuration: Types::ObjectLambdaConfiguration
+      SENSITIVE: []
+    end
+
+    class GetAccessPointForObjectLambdaRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessPointForObjectLambdaResult
+      attr_accessor name: ::String
+      attr_accessor public_access_block_configuration: Types::PublicAccessBlockConfiguration
+      attr_accessor creation_date: ::Time
+      attr_accessor alias: Types::ObjectLambdaAccessPointAlias
+      SENSITIVE: []
+    end
+
+    class GetAccessPointPolicyForObjectLambdaRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessPointPolicyForObjectLambdaResult
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessPointPolicyRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessPointPolicyResult
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessPointPolicyStatusForObjectLambdaRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessPointPolicyStatusForObjectLambdaResult
+      attr_accessor policy_status: Types::PolicyStatus
+      SENSITIVE: []
+    end
+
+    class GetAccessPointPolicyStatusRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessPointPolicyStatusResult
+      attr_accessor policy_status: Types::PolicyStatus
+      SENSITIVE: []
+    end
+
+    class GetAccessPointRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessPointResult
+      attr_accessor name: ::String
+      attr_accessor bucket: ::String
+      attr_accessor network_origin: ("Internet" | "VPC")
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor public_access_block_configuration: Types::PublicAccessBlockConfiguration
+      attr_accessor creation_date: ::Time
+      attr_accessor alias: ::String
+      attr_accessor access_point_arn: ::String
+      attr_accessor endpoints: ::Hash[::String, ::String]
+      attr_accessor bucket_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketLifecycleConfigurationRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketLifecycleConfigurationResult
+      attr_accessor rules: ::Array[Types::LifecycleRule]
+      SENSITIVE: []
+    end
+
+    class GetBucketPolicyRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketPolicyResult
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketReplicationRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketReplicationResult
+      attr_accessor replication_configuration: Types::ReplicationConfiguration
+      SENSITIVE: []
+    end
+
+    class GetBucketRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketResult
+      attr_accessor bucket: ::String
+      attr_accessor public_access_block_enabled: bool
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class GetBucketTaggingRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketTaggingResult
+      attr_accessor tag_set: ::Array[Types::S3Tag]
+      SENSITIVE: []
+    end
+
+    class GetBucketVersioningRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketVersioningResult
+      attr_accessor status: ("Enabled" | "Suspended")
+      attr_accessor mfa_delete: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class GetDataAccessRequest
+      attr_accessor account_id: ::String
+      attr_accessor target: ::String
+      attr_accessor permission: ("READ" | "WRITE" | "READWRITE")
+      attr_accessor duration_seconds: ::Integer
+      attr_accessor privilege: ("Minimal" | "Default")
+      attr_accessor target_type: ("Object")
+      SENSITIVE: []
+    end
+
+    class GetDataAccessResult
+      attr_accessor credentials: Types::Credentials
+      attr_accessor matched_grant_target: ::String
+      SENSITIVE: [:credentials]
+    end
+
+    class GetJobTaggingRequest
+      attr_accessor account_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobTaggingResult
+      attr_accessor tags: ::Array[Types::S3Tag]
+      SENSITIVE: []
+    end
+
+    class GetMultiRegionAccessPointPolicyRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMultiRegionAccessPointPolicyResult
+      attr_accessor policy: Types::MultiRegionAccessPointPolicyDocument
+      SENSITIVE: []
+    end
+
+    class GetMultiRegionAccessPointPolicyStatusRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMultiRegionAccessPointPolicyStatusResult
+      attr_accessor established: Types::PolicyStatus
+      SENSITIVE: []
+    end
+
+    class GetMultiRegionAccessPointRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMultiRegionAccessPointResult
+      attr_accessor access_point: Types::MultiRegionAccessPointReport
+      SENSITIVE: []
+    end
+
+    class GetMultiRegionAccessPointRoutesRequest
+      attr_accessor account_id: ::String
+      attr_accessor mrap: ::String
+      SENSITIVE: []
+    end
+
+    class GetMultiRegionAccessPointRoutesResult
+      attr_accessor mrap: ::String
+      attr_accessor routes: ::Array[Types::MultiRegionAccessPointRoute]
+      SENSITIVE: []
+    end
+
+    class GetPublicAccessBlockOutput
+      attr_accessor public_access_block_configuration: Types::PublicAccessBlockConfiguration
+      SENSITIVE: []
+    end
+
+    class GetPublicAccessBlockRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetStorageLensConfigurationRequest
+      attr_accessor config_id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetStorageLensConfigurationResult
+      attr_accessor storage_lens_configuration: Types::StorageLensConfiguration
+      SENSITIVE: []
+    end
+
+    class GetStorageLensConfigurationTaggingRequest
+      attr_accessor config_id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetStorageLensConfigurationTaggingResult
+      attr_accessor tags: ::Array[Types::StorageLensTag]
+      SENSITIVE: []
+    end
+
+    class GetStorageLensGroupRequest
+      attr_accessor name: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetStorageLensGroupResult
+      attr_accessor storage_lens_group: Types::StorageLensGroup
+      SENSITIVE: []
+    end
+
+    class Grantee
+      attr_accessor grantee_type: ("DIRECTORY_USER" | "DIRECTORY_GROUP" | "IAM")
+      attr_accessor grantee_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class IdempotencyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Include
+      attr_accessor buckets: ::Array[::String]
+      attr_accessor regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobDescriptor
+      attr_accessor job_id: ::String
+      attr_accessor confirmation_required: bool
+      attr_accessor description: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor status: ("Active" | "Cancelled" | "Cancelling" | "Complete" | "Completing" | "Failed" | "Failing" | "New" | "Paused" | "Pausing" | "Preparing" | "Ready" | "Suspended")
+      attr_accessor manifest: Types::JobManifest
+      attr_accessor operation: Types::JobOperation
+      attr_accessor priority: ::Integer
+      attr_accessor progress_summary: Types::JobProgressSummary
+      attr_accessor status_update_reason: ::String
+      attr_accessor failure_reasons: ::Array[Types::JobFailure]
+      attr_accessor report: Types::JobReport
+      attr_accessor creation_time: ::Time
+      attr_accessor termination_date: ::Time
+      attr_accessor role_arn: ::String
+      attr_accessor suspended_date: ::Time
+      attr_accessor suspended_cause: ::String
+      attr_accessor manifest_generator: Types::JobManifestGenerator
+      attr_accessor generated_manifest_descriptor: Types::S3GeneratedManifestDescriptor
+      SENSITIVE: []
+    end
+
+    class JobFailure
+      attr_accessor failure_code: ::String
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class JobListDescriptor
+      attr_accessor job_id: ::String
+      attr_accessor description: ::String
+      attr_accessor operation: ("LambdaInvoke" | "S3PutObjectCopy" | "S3PutObjectAcl" | "S3PutObjectTagging" | "S3DeleteObjectTagging" | "S3InitiateRestoreObject" | "S3PutObjectLegalHold" | "S3PutObjectRetention" | "S3ReplicateObject")
+      attr_accessor priority: ::Integer
+      attr_accessor status: ("Active" | "Cancelled" | "Cancelling" | "Complete" | "Completing" | "Failed" | "Failing" | "New" | "Paused" | "Pausing" | "Preparing" | "Ready" | "Suspended")
+      attr_accessor creation_time: ::Time
+      attr_accessor termination_date: ::Time
+      attr_accessor progress_summary: Types::JobProgressSummary
+      SENSITIVE: []
+    end
+
+    class JobManifest
+      attr_accessor spec: Types::JobManifestSpec
+      attr_accessor location: Types::JobManifestLocation
+      SENSITIVE: []
+    end
+
+    class JobManifestGenerator
+      attr_accessor s3_job_manifest_generator: Types::S3JobManifestGenerator
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3JobManifestGenerator < JobManifestGenerator
+      end
+      class Unknown < JobManifestGenerator
+      end
+    end
+
+    class JobManifestGeneratorFilter
+      attr_accessor eligible_for_replication: bool
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      attr_accessor object_replication_statuses: ::Array[("COMPLETED" | "FAILED" | "REPLICA" | "NONE")]
+      attr_accessor key_name_constraint: Types::KeyNameConstraint
+      attr_accessor object_size_greater_than_bytes: ::Integer
+      attr_accessor object_size_less_than_bytes: ::Integer
+      attr_accessor match_any_storage_class: ::Array[("STANDARD" | "STANDARD_IA" | "ONEZONE_IA" | "GLACIER" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "GLACIER_IR")]
+      SENSITIVE: []
+    end
+
+    class JobManifestLocation
+      attr_accessor object_arn: ::String
+      attr_accessor object_version_id: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class JobManifestSpec
+      attr_accessor format: ("S3BatchOperations_CSV_20180820" | "S3InventoryReport_CSV_20161130")
+      attr_accessor fields: ::Array[("Ignore" | "Bucket" | "Key" | "VersionId")]
+      SENSITIVE: []
+    end
+
+    class JobOperation
+      attr_accessor lambda_invoke: Types::LambdaInvokeOperation
+      attr_accessor s3_put_object_copy: Types::S3CopyObjectOperation
+      attr_accessor s3_put_object_acl: Types::S3SetObjectAclOperation
+      attr_accessor s3_put_object_tagging: Types::S3SetObjectTaggingOperation
+      attr_accessor s3_delete_object_tagging: Types::S3DeleteObjectTaggingOperation
+      attr_accessor s3_initiate_restore_object: Types::S3InitiateRestoreObjectOperation
+      attr_accessor s3_put_object_legal_hold: Types::S3SetObjectLegalHoldOperation
+      attr_accessor s3_put_object_retention: Types::S3SetObjectRetentionOperation
+      attr_accessor s3_replicate_object: Types::S3ReplicateObjectOperation
+      SENSITIVE: []
+    end
+
+    class JobProgressSummary
+      attr_accessor total_number_of_tasks: ::Integer
+      attr_accessor number_of_tasks_succeeded: ::Integer
+      attr_accessor number_of_tasks_failed: ::Integer
+      attr_accessor timers: Types::JobTimers
+      SENSITIVE: []
+    end
+
+    class JobReport
+      attr_accessor bucket: ::String
+      attr_accessor format: ("Report_CSV_20180820")
+      attr_accessor enabled: bool
+      attr_accessor prefix: ::String
+      attr_accessor report_scope: ("AllTasks" | "FailedTasksOnly")
+      SENSITIVE: []
+    end
+
+    class JobStatusException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobTimers
+      attr_accessor elapsed_time_in_active_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class KeyNameConstraint
+      attr_accessor match_any_prefix: ::Array[::String]
+      attr_accessor match_any_suffix: ::Array[::String]
+      attr_accessor match_any_substring: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LambdaInvokeOperation
+      attr_accessor function_arn: ::String
+      attr_accessor invocation_schema_version: ::String
+      attr_accessor user_arguments: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LifecycleConfiguration
+      attr_accessor rules: ::Array[Types::LifecycleRule]
+      SENSITIVE: []
+    end
+
+    class LifecycleExpiration
+      attr_accessor date: ::Time
+      attr_accessor days: ::Integer
+      attr_accessor expired_object_delete_marker: bool
+      SENSITIVE: []
+    end
+
+    class LifecycleRule
+      attr_accessor expiration: Types::LifecycleExpiration
+      attr_accessor id: ::String
+      attr_accessor filter: Types::LifecycleRuleFilter
+      attr_accessor status: ("Enabled" | "Disabled")
+      attr_accessor transitions: ::Array[Types::Transition]
+      attr_accessor noncurrent_version_transitions: ::Array[Types::NoncurrentVersionTransition]
+      attr_accessor noncurrent_version_expiration: Types::NoncurrentVersionExpiration
+      attr_accessor abort_incomplete_multipart_upload: Types::AbortIncompleteMultipartUpload
+      SENSITIVE: []
+    end
+
+    class LifecycleRuleAndOperator
+      attr_accessor prefix: ::String
+      attr_accessor tags: ::Array[Types::S3Tag]
+      attr_accessor object_size_greater_than: ::Integer
+      attr_accessor object_size_less_than: ::Integer
+      SENSITIVE: []
+    end
+
+    class LifecycleRuleFilter
+      attr_accessor prefix: ::String
+      attr_accessor tag: Types::S3Tag
+      attr_accessor and: Types::LifecycleRuleAndOperator
+      attr_accessor object_size_greater_than: ::Integer
+      attr_accessor object_size_less_than: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccessGrantEntry
+      attr_accessor created_at: ::Time
+      attr_accessor access_grant_id: ::String
+      attr_accessor access_grant_arn: ::String
+      attr_accessor grantee: Types::Grantee
+      attr_accessor permission: ("READ" | "WRITE" | "READWRITE")
+      attr_accessor access_grants_location_id: ::String
+      attr_accessor access_grants_location_configuration: Types::AccessGrantsLocationConfiguration
+      attr_accessor grant_scope: ::String
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessGrantsInstanceEntry
+      attr_accessor access_grants_instance_id: ::String
+      attr_accessor access_grants_instance_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor identity_center_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessGrantsInstancesRequest
+      attr_accessor account_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccessGrantsInstancesResult
+      attr_accessor next_token: ::String
+      attr_accessor access_grants_instances_list: ::Array[Types::ListAccessGrantsInstanceEntry]
+      SENSITIVE: []
+    end
+
+    class ListAccessGrantsLocationsEntry
+      attr_accessor created_at: ::Time
+      attr_accessor access_grants_location_id: ::String
+      attr_accessor access_grants_location_arn: ::String
+      attr_accessor location_scope: ::String
+      attr_accessor iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessGrantsLocationsRequest
+      attr_accessor account_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor location_scope: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessGrantsLocationsResult
+      attr_accessor next_token: ::String
+      attr_accessor access_grants_locations_list: ::Array[Types::ListAccessGrantsLocationsEntry]
+      SENSITIVE: []
+    end
+
+    class ListAccessGrantsRequest
+      attr_accessor account_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor grantee_type: ("DIRECTORY_USER" | "DIRECTORY_GROUP" | "IAM")
+      attr_accessor grantee_identifier: ::String
+      attr_accessor permission: ("READ" | "WRITE" | "READWRITE")
+      attr_accessor grant_scope: ::String
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessGrantsResult
+      attr_accessor next_token: ::String
+      attr_accessor access_grants_list: ::Array[Types::ListAccessGrantEntry]
+      SENSITIVE: []
+    end
+
+    class ListAccessPointsForObjectLambdaRequest
+      attr_accessor account_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccessPointsForObjectLambdaResult
+      attr_accessor object_lambda_access_point_list: ::Array[Types::ObjectLambdaAccessPoint]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessPointsRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccessPointsResult
+      attr_accessor access_point_list: ::Array[Types::AccessPoint]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsRequest
+      attr_accessor account_id: ::String
+      attr_accessor job_statuses: ::Array[("Active" | "Cancelled" | "Cancelling" | "Complete" | "Completing" | "Failed" | "Failing" | "New" | "Paused" | "Pausing" | "Preparing" | "Ready" | "Suspended")]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListJobsResult
+      attr_accessor next_token: ::String
+      attr_accessor jobs: ::Array[Types::JobListDescriptor]
+      SENSITIVE: []
+    end
+
+    class ListMultiRegionAccessPointsRequest
+      attr_accessor account_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMultiRegionAccessPointsResult
+      attr_accessor access_points: ::Array[Types::MultiRegionAccessPointReport]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRegionalBucketsRequest
+      attr_accessor account_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor outpost_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListRegionalBucketsResult
+      attr_accessor regional_bucket_list: ::Array[Types::RegionalBucket]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStorageLensConfigurationEntry
+      attr_accessor id: ::String
+      attr_accessor storage_lens_arn: ::String
+      attr_accessor home_region: ::String
+      attr_accessor is_enabled: bool
+      SENSITIVE: []
+    end
+
+    class ListStorageLensConfigurationsRequest
+      attr_accessor account_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStorageLensConfigurationsResult
+      attr_accessor next_token: ::String
+      attr_accessor storage_lens_configuration_list: ::Array[Types::ListStorageLensConfigurationEntry]
+      SENSITIVE: []
+    end
+
+    class ListStorageLensGroupEntry
+      attr_accessor name: ::String
+      attr_accessor storage_lens_group_arn: ::String
+      attr_accessor home_region: ::String
+      SENSITIVE: []
+    end
+
+    class ListStorageLensGroupsRequest
+      attr_accessor account_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStorageLensGroupsResult
+      attr_accessor next_token: ::String
+      attr_accessor storage_lens_group_list: ::Array[Types::ListStorageLensGroupEntry]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor account_id: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResult
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MatchObjectAge
+      attr_accessor days_greater_than: ::Integer
+      attr_accessor days_less_than: ::Integer
+      SENSITIVE: []
+    end
+
+    class MatchObjectSize
+      attr_accessor bytes_greater_than: ::Integer
+      attr_accessor bytes_less_than: ::Integer
+      SENSITIVE: []
+    end
+
+    class Metrics
+      attr_accessor status: ("Enabled" | "Disabled")
+      attr_accessor event_threshold: Types::ReplicationTimeValue
+      SENSITIVE: []
+    end
+
+    class MultiRegionAccessPointPolicyDocument
+      attr_accessor established: Types::EstablishedMultiRegionAccessPointPolicy
+      attr_accessor proposed: Types::ProposedMultiRegionAccessPointPolicy
+      SENSITIVE: []
+    end
+
+    class MultiRegionAccessPointRegionalResponse
+      attr_accessor name: ::String
+      attr_accessor request_status: ::String
+      SENSITIVE: []
+    end
+
+    class MultiRegionAccessPointReport
+      attr_accessor name: ::String
+      attr_accessor alias: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor public_access_block: Types::PublicAccessBlockConfiguration
+      attr_accessor status: ("READY" | "INCONSISTENT_ACROSS_REGIONS" | "CREATING" | "PARTIALLY_CREATED" | "PARTIALLY_DELETED" | "DELETING")
+      attr_accessor regions: ::Array[Types::RegionReport]
+      SENSITIVE: []
+    end
+
+    class MultiRegionAccessPointRoute
+      attr_accessor bucket: ::String
+      attr_accessor region: ::String
+      attr_accessor traffic_dial_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class MultiRegionAccessPointsAsyncResponse
+      attr_accessor regions: ::Array[Types::MultiRegionAccessPointRegionalResponse]
+      SENSITIVE: []
+    end
+
+    class NoSuchPublicAccessBlockConfiguration
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoncurrentVersionExpiration
+      attr_accessor noncurrent_days: ::Integer
+      attr_accessor newer_noncurrent_versions: ::Integer
+      SENSITIVE: []
+    end
+
+    class NoncurrentVersionTransition
+      attr_accessor noncurrent_days: ::Integer
+      attr_accessor storage_class: ("GLACIER" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE")
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ObjectLambdaAccessPoint
+      attr_accessor name: ::String
+      attr_accessor object_lambda_access_point_arn: ::String
+      attr_accessor alias: Types::ObjectLambdaAccessPointAlias
+      SENSITIVE: []
+    end
+
+    class ObjectLambdaAccessPointAlias
+      attr_accessor value: ::String
+      attr_accessor status: ("PROVISIONING" | "READY")
+      SENSITIVE: []
+    end
+
+    class ObjectLambdaConfiguration
+      attr_accessor supporting_access_point: ::String
+      attr_accessor cloud_watch_metrics_enabled: bool
+      attr_accessor allowed_features: ::Array[("GetObject-Range" | "GetObject-PartNumber" | "HeadObject-Range" | "HeadObject-PartNumber")]
+      attr_accessor transformation_configurations: ::Array[Types::ObjectLambdaTransformationConfiguration]
+      SENSITIVE: []
+    end
+
+    class ObjectLambdaContentTransformation
+      attr_accessor aws_lambda: Types::AwsLambdaTransformation
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AwsLambda < ObjectLambdaContentTransformation
+      end
+      class Unknown < ObjectLambdaContentTransformation
+      end
+    end
+
+    class ObjectLambdaTransformationConfiguration
+      attr_accessor actions: ::Array[("GetObject" | "HeadObject" | "ListObjects" | "ListObjectsV2")]
+      attr_accessor content_transformation: Types::ObjectLambdaContentTransformation
+      SENSITIVE: []
+    end
+
+    class PolicyStatus
+      attr_accessor is_public: bool
+      SENSITIVE: []
+    end
+
+    class PrefixLevel
+      attr_accessor storage_metrics: Types::PrefixLevelStorageMetrics
+      SENSITIVE: []
+    end
+
+    class PrefixLevelStorageMetrics
+      attr_accessor is_enabled: bool
+      attr_accessor selection_criteria: Types::SelectionCriteria
+      SENSITIVE: []
+    end
+
+    class ProposedMultiRegionAccessPointPolicy
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PublicAccessBlockConfiguration
+      attr_accessor block_public_acls: bool
+      attr_accessor ignore_public_acls: bool
+      attr_accessor block_public_policy: bool
+      attr_accessor restrict_public_buckets: bool
+      SENSITIVE: []
+    end
+
+    class PutAccessGrantsInstanceResourcePolicyRequest
+      attr_accessor account_id: ::String
+      attr_accessor policy: ::String
+      attr_accessor organization: ::String
+      SENSITIVE: []
+    end
+
+    class PutAccessGrantsInstanceResourcePolicyResult
+      attr_accessor policy: ::String
+      attr_accessor organization: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PutAccessPointConfigurationForObjectLambdaRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      attr_accessor configuration: Types::ObjectLambdaConfiguration
+      SENSITIVE: []
+    end
+
+    class PutAccessPointPolicyForObjectLambdaRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutAccessPointPolicyRequest
+      attr_accessor account_id: ::String
+      attr_accessor name: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutBucketLifecycleConfigurationRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      attr_accessor lifecycle_configuration: Types::LifecycleConfiguration
+      SENSITIVE: []
+    end
+
+    class PutBucketPolicyRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      attr_accessor confirm_remove_self_bucket_access: bool
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutBucketReplicationRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      attr_accessor replication_configuration: Types::ReplicationConfiguration
+      SENSITIVE: []
+    end
+
+    class PutBucketTaggingRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      attr_accessor tagging: Types::Tagging
+      SENSITIVE: []
+    end
+
+    class PutBucketVersioningRequest
+      attr_accessor account_id: ::String
+      attr_accessor bucket: ::String
+      attr_accessor mfa: ::String
+      attr_accessor versioning_configuration: Types::VersioningConfiguration
+      SENSITIVE: []
+    end
+
+    class PutJobTaggingRequest
+      attr_accessor account_id: ::String
+      attr_accessor job_id: ::String
+      attr_accessor tags: ::Array[Types::S3Tag]
+      SENSITIVE: []
+    end
+
+    class PutJobTaggingResult < Aws::EmptyStructure
+    end
+
+    class PutMultiRegionAccessPointPolicyInput
+      attr_accessor name: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutMultiRegionAccessPointPolicyRequest
+      attr_accessor account_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor details: Types::PutMultiRegionAccessPointPolicyInput
+      SENSITIVE: []
+    end
+
+    class PutMultiRegionAccessPointPolicyResult
+      attr_accessor request_token_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutPublicAccessBlockRequest
+      attr_accessor public_access_block_configuration: Types::PublicAccessBlockConfiguration
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutStorageLensConfigurationRequest
+      attr_accessor config_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor storage_lens_configuration: Types::StorageLensConfiguration
+      attr_accessor tags: ::Array[Types::StorageLensTag]
+      SENSITIVE: []
+    end
+
+    class PutStorageLensConfigurationTaggingRequest
+      attr_accessor config_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor tags: ::Array[Types::StorageLensTag]
+      SENSITIVE: []
+    end
+
+    class PutStorageLensConfigurationTaggingResult < Aws::EmptyStructure
+    end
+
+    class Region
+      attr_accessor bucket: ::String
+      attr_accessor bucket_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegionReport
+      attr_accessor bucket: ::String
+      attr_accessor region: ::String
+      attr_accessor bucket_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegionalBucket
+      attr_accessor bucket: ::String
+      attr_accessor bucket_arn: ::String
+      attr_accessor public_access_block_enabled: bool
+      attr_accessor creation_date: ::Time
+      attr_accessor outpost_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicaModifications
+      attr_accessor status: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class ReplicationConfiguration
+      attr_accessor role: ::String
+      attr_accessor rules: ::Array[Types::ReplicationRule]
+      SENSITIVE: []
+    end
+
+    class ReplicationRule
+      attr_accessor id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor prefix: ::String
+      attr_accessor filter: Types::ReplicationRuleFilter
+      attr_accessor status: ("Enabled" | "Disabled")
+      attr_accessor source_selection_criteria: Types::SourceSelectionCriteria
+      attr_accessor existing_object_replication: Types::ExistingObjectReplication
+      attr_accessor destination: Types::Destination
+      attr_accessor delete_marker_replication: Types::DeleteMarkerReplication
+      attr_accessor bucket: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationRuleAndOperator
+      attr_accessor prefix: ::String
+      attr_accessor tags: ::Array[Types::S3Tag]
+      SENSITIVE: []
+    end
+
+    class ReplicationRuleFilter
+      attr_accessor prefix: ::String
+      attr_accessor tag: Types::S3Tag
+      attr_accessor and: Types::ReplicationRuleAndOperator
+      SENSITIVE: []
+    end
+
+    class ReplicationTime
+      attr_accessor status: ("Enabled" | "Disabled")
+      attr_accessor time: Types::ReplicationTimeValue
+      SENSITIVE: []
+    end
+
+    class ReplicationTimeValue
+      attr_accessor minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class S3AccessControlList
+      attr_accessor owner: Types::S3ObjectOwner
+      attr_accessor grants: ::Array[Types::S3Grant]
+      SENSITIVE: []
+    end
+
+    class S3AccessControlPolicy
+      attr_accessor access_control_list: Types::S3AccessControlList
+      attr_accessor canned_access_control_list: ("private" | "public-read" | "public-read-write" | "aws-exec-read" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control")
+      SENSITIVE: []
+    end
+
+    class S3BucketDestination
+      attr_accessor format: ("CSV" | "Parquet")
+      attr_accessor output_schema_version: ("V_1")
+      attr_accessor account_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor prefix: ::String
+      attr_accessor encryption: Types::StorageLensDataExportEncryption
+      SENSITIVE: []
+    end
+
+    class S3CopyObjectOperation
+      attr_accessor target_resource: ::String
+      attr_accessor canned_access_control_list: ("private" | "public-read" | "public-read-write" | "aws-exec-read" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control")
+      attr_accessor access_control_grants: ::Array[Types::S3Grant]
+      attr_accessor metadata_directive: ("COPY" | "REPLACE")
+      attr_accessor modified_since_constraint: ::Time
+      attr_accessor new_object_metadata: Types::S3ObjectMetadata
+      attr_accessor new_object_tagging: ::Array[Types::S3Tag]
+      attr_accessor redirect_location: ::String
+      attr_accessor requester_pays: bool
+      attr_accessor storage_class: ("STANDARD" | "STANDARD_IA" | "ONEZONE_IA" | "GLACIER" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "GLACIER_IR")
+      attr_accessor un_modified_since_constraint: ::Time
+      attr_accessor sse_aws_kms_key_id: ::String
+      attr_accessor target_key_prefix: ::String
+      attr_accessor object_lock_legal_hold_status: ("OFF" | "ON")
+      attr_accessor object_lock_mode: ("COMPLIANCE" | "GOVERNANCE")
+      attr_accessor object_lock_retain_until_date: ::Time
+      attr_accessor bucket_key_enabled: bool
+      attr_accessor checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256")
+      SENSITIVE: []
+    end
+
+    class S3DeleteObjectTaggingOperation < Aws::EmptyStructure
+    end
+
+    class S3GeneratedManifestDescriptor
+      attr_accessor format: ("S3InventoryReport_CSV_20211130")
+      attr_accessor location: Types::JobManifestLocation
+      SENSITIVE: []
+    end
+
+    class S3Grant
+      attr_accessor grantee: Types::S3Grantee
+      attr_accessor permission: ("FULL_CONTROL" | "READ" | "WRITE" | "READ_ACP" | "WRITE_ACP")
+      SENSITIVE: []
+    end
+
+    class S3Grantee
+      attr_accessor type_identifier: ("id" | "emailAddress" | "uri")
+      attr_accessor identifier: ::String
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class S3InitiateRestoreObjectOperation
+      attr_accessor expiration_in_days: ::Integer
+      attr_accessor glacier_job_tier: ("BULK" | "STANDARD")
+      SENSITIVE: []
+    end
+
+    class S3JobManifestGenerator
+      attr_accessor expected_bucket_owner: ::String
+      attr_accessor source_bucket: ::String
+      attr_accessor manifest_output_location: Types::S3ManifestOutputLocation
+      attr_accessor filter: Types::JobManifestGeneratorFilter
+      attr_accessor enable_manifest_output: bool
+      SENSITIVE: []
+    end
+
+    class S3ManifestOutputLocation
+      attr_accessor expected_manifest_bucket_owner: ::String
+      attr_accessor bucket: ::String
+      attr_accessor manifest_prefix: ::String
+      attr_accessor manifest_encryption: Types::GeneratedManifestEncryption
+      attr_accessor manifest_format: ("S3InventoryReport_CSV_20211130")
+      SENSITIVE: []
+    end
+
+    class S3ObjectLockLegalHold
+      attr_accessor status: ("OFF" | "ON")
+      SENSITIVE: []
+    end
+
+    class S3ObjectMetadata
+      attr_accessor cache_control: ::String
+      attr_accessor content_disposition: ::String
+      attr_accessor content_encoding: ::String
+      attr_accessor content_language: ::String
+      attr_accessor user_metadata: ::Hash[::String, ::String]
+      attr_accessor content_length: ::Integer
+      attr_accessor content_md5: ::String
+      attr_accessor content_type: ::String
+      attr_accessor http_expires_date: ::Time
+      attr_accessor requester_charged: bool
+      attr_accessor sse_algorithm: ("AES256" | "KMS")
+      SENSITIVE: []
+    end
+
+    class S3ObjectOwner
+      attr_accessor id: ::String
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class S3ReplicateObjectOperation < Aws::EmptyStructure
+    end
+
+    class S3Retention
+      attr_accessor retain_until_date: ::Time
+      attr_accessor mode: ("COMPLIANCE" | "GOVERNANCE")
+      SENSITIVE: []
+    end
+
+    class S3SetObjectAclOperation
+      attr_accessor access_control_policy: Types::S3AccessControlPolicy
+      SENSITIVE: []
+    end
+
+    class S3SetObjectLegalHoldOperation
+      attr_accessor legal_hold: Types::S3ObjectLockLegalHold
+      SENSITIVE: []
+    end
+
+    class S3SetObjectRetentionOperation
+      attr_accessor bypass_governance_retention: bool
+      attr_accessor retention: Types::S3Retention
+      SENSITIVE: []
+    end
+
+    class S3SetObjectTaggingOperation
+      attr_accessor tag_set: ::Array[Types::S3Tag]
+      SENSITIVE: []
+    end
+
+    class S3Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SSEKMS
+      attr_accessor key_id: ::String
+      SENSITIVE: []
+    end
+
+    class SSEKMSEncryption
+      attr_accessor key_id: ::String
+      SENSITIVE: []
+    end
+
+    class SSES3 < Aws::EmptyStructure
+    end
+
+    class SSES3Encryption < Aws::EmptyStructure
+    end
+
+    class SelectionCriteria
+      attr_accessor delimiter: ::String
+      attr_accessor max_depth: ::Integer
+      attr_accessor min_storage_bytes_percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class SourceSelectionCriteria
+      attr_accessor sse_kms_encrypted_objects: Types::SseKmsEncryptedObjects
+      attr_accessor replica_modifications: Types::ReplicaModifications
+      SENSITIVE: []
+    end
+
+    class SseKmsEncryptedObjects
+      attr_accessor status: ("Enabled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class StorageLensAwsOrg
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class StorageLensConfiguration
+      attr_accessor id: ::String
+      attr_accessor account_level: Types::AccountLevel
+      attr_accessor include: Types::Include
+      attr_accessor exclude: Types::Exclude
+      attr_accessor data_export: Types::StorageLensDataExport
+      attr_accessor is_enabled: bool
+      attr_accessor aws_org: Types::StorageLensAwsOrg
+      attr_accessor storage_lens_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StorageLensDataExport
+      attr_accessor s3_bucket_destination: Types::S3BucketDestination
+      attr_accessor cloud_watch_metrics: Types::CloudWatchMetrics
+      SENSITIVE: []
+    end
+
+    class StorageLensDataExportEncryption
+      attr_accessor sses3: Types::SSES3
+      attr_accessor ssekms: Types::SSEKMS
+      SENSITIVE: []
+    end
+
+    class StorageLensGroup
+      attr_accessor name: ::String
+      attr_accessor filter: Types::StorageLensGroupFilter
+      attr_accessor storage_lens_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StorageLensGroupAndOperator
+      attr_accessor match_any_prefix: ::Array[::String]
+      attr_accessor match_any_suffix: ::Array[::String]
+      attr_accessor match_any_tag: ::Array[Types::S3Tag]
+      attr_accessor match_object_age: Types::MatchObjectAge
+      attr_accessor match_object_size: Types::MatchObjectSize
+      SENSITIVE: []
+    end
+
+    class StorageLensGroupFilter
+      attr_accessor match_any_prefix: ::Array[::String]
+      attr_accessor match_any_suffix: ::Array[::String]
+      attr_accessor match_any_tag: ::Array[Types::S3Tag]
+      attr_accessor match_object_age: Types::MatchObjectAge
+      attr_accessor match_object_size: Types::MatchObjectSize
+      attr_accessor and: Types::StorageLensGroupAndOperator
+      attr_accessor or: Types::StorageLensGroupOrOperator
+      SENSITIVE: []
+    end
+
+    class StorageLensGroupLevel
+      attr_accessor selection_criteria: Types::StorageLensGroupLevelSelectionCriteria
+      SENSITIVE: []
+    end
+
+    class StorageLensGroupLevelSelectionCriteria
+      attr_accessor include: ::Array[::String]
+      attr_accessor exclude: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StorageLensGroupOrOperator
+      attr_accessor match_any_prefix: ::Array[::String]
+      attr_accessor match_any_suffix: ::Array[::String]
+      attr_accessor match_any_tag: ::Array[Types::S3Tag]
+      attr_accessor match_object_age: Types::MatchObjectAge
+      attr_accessor match_object_size: Types::MatchObjectSize
+      SENSITIVE: []
+    end
+
+    class StorageLensTag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SubmitMultiRegionAccessPointRoutesRequest
+      attr_accessor account_id: ::String
+      attr_accessor mrap: ::String
+      attr_accessor route_updates: ::Array[Types::MultiRegionAccessPointRoute]
+      SENSITIVE: []
+    end
+
+    class SubmitMultiRegionAccessPointRoutesResult < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor account_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResult < Aws::EmptyStructure
+    end
+
+    class Tagging
+      attr_accessor tag_set: ::Array[Types::S3Tag]
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Transition
+      attr_accessor date: ::Time
+      attr_accessor days: ::Integer
+      attr_accessor storage_class: ("GLACIER" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE")
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor account_id: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResult < Aws::EmptyStructure
+    end
+
+    class UpdateAccessGrantsLocationRequest
+      attr_accessor account_id: ::String
+      attr_accessor access_grants_location_id: ::String
+      attr_accessor iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAccessGrantsLocationResult
+      attr_accessor created_at: ::Time
+      attr_accessor access_grants_location_id: ::String
+      attr_accessor access_grants_location_arn: ::String
+      attr_accessor location_scope: ::String
+      attr_accessor iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateJobPriorityRequest
+      attr_accessor account_id: ::String
+      attr_accessor job_id: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateJobPriorityResult
+      attr_accessor job_id: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateJobStatusRequest
+      attr_accessor account_id: ::String
+      attr_accessor job_id: ::String
+      attr_accessor requested_job_status: ("Cancelled" | "Ready")
+      attr_accessor status_update_reason: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateJobStatusResult
+      attr_accessor job_id: ::String
+      attr_accessor status: ("Active" | "Cancelled" | "Cancelling" | "Complete" | "Completing" | "Failed" | "Failing" | "New" | "Paused" | "Pausing" | "Preparing" | "Ready" | "Suspended")
+      attr_accessor status_update_reason: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateStorageLensGroupRequest
+      attr_accessor name: ::String
+      attr_accessor account_id: ::String
+      attr_accessor storage_lens_group: Types::StorageLensGroup
+      SENSITIVE: []
+    end
+
+    class VersioningConfiguration
+      attr_accessor mfa_delete: ("Enabled" | "Disabled")
+      attr_accessor status: ("Enabled" | "Suspended")
+      SENSITIVE: []
+    end
+
+    class VpcConfiguration
+      attr_accessor vpc_id: ::String
+      SENSITIVE: []
+    end
+  end
+end

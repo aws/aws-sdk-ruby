@@ -14,6 +14,7 @@ module Aws::Finspace
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AttachedClusterList = Shapes::ListShape.new(name: 'AttachedClusterList')
     AttributeMap = Shapes::MapShape.new(name: 'AttributeMap')
     AutoScalingConfiguration = Shapes::StructureShape.new(name: 'AutoScalingConfiguration')
     AutoScalingMetric = Shapes::StringShape.new(name: 'AutoScalingMetric')
@@ -29,9 +30,11 @@ module Aws::Finspace
     ChangesetStatus = Shapes::StringShape.new(name: 'ChangesetStatus')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ClientTokenString = Shapes::StringShape.new(name: 'ClientTokenString')
+    ClusterNodeCount = Shapes::IntegerShape.new(name: 'ClusterNodeCount')
     CodeConfiguration = Shapes::StructureShape.new(name: 'CodeConfiguration')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CooldownTime = Shapes::FloatShape.new(name: 'CooldownTime')
+    CpuCount = Shapes::FloatShape.new(name: 'CpuCount')
     CreateEnvironmentRequest = Shapes::StructureShape.new(name: 'CreateEnvironmentRequest')
     CreateEnvironmentResponse = Shapes::StructureShape.new(name: 'CreateEnvironmentResponse')
     CreateKxChangesetRequest = Shapes::StructureShape.new(name: 'CreateKxChangesetRequest')
@@ -40,10 +43,16 @@ module Aws::Finspace
     CreateKxClusterResponse = Shapes::StructureShape.new(name: 'CreateKxClusterResponse')
     CreateKxDatabaseRequest = Shapes::StructureShape.new(name: 'CreateKxDatabaseRequest')
     CreateKxDatabaseResponse = Shapes::StructureShape.new(name: 'CreateKxDatabaseResponse')
+    CreateKxDataviewRequest = Shapes::StructureShape.new(name: 'CreateKxDataviewRequest')
+    CreateKxDataviewResponse = Shapes::StructureShape.new(name: 'CreateKxDataviewResponse')
     CreateKxEnvironmentRequest = Shapes::StructureShape.new(name: 'CreateKxEnvironmentRequest')
     CreateKxEnvironmentResponse = Shapes::StructureShape.new(name: 'CreateKxEnvironmentResponse')
+    CreateKxScalingGroupRequest = Shapes::StructureShape.new(name: 'CreateKxScalingGroupRequest')
+    CreateKxScalingGroupResponse = Shapes::StructureShape.new(name: 'CreateKxScalingGroupResponse')
     CreateKxUserRequest = Shapes::StructureShape.new(name: 'CreateKxUserRequest')
     CreateKxUserResponse = Shapes::StructureShape.new(name: 'CreateKxUserResponse')
+    CreateKxVolumeRequest = Shapes::StructureShape.new(name: 'CreateKxVolumeRequest')
+    CreateKxVolumeResponse = Shapes::StructureShape.new(name: 'CreateKxVolumeResponse')
     CustomDNSConfiguration = Shapes::ListShape.new(name: 'CustomDNSConfiguration')
     CustomDNSServer = Shapes::StructureShape.new(name: 'CustomDNSServer')
     DataBundleArn = Shapes::StringShape.new(name: 'DataBundleArn')
@@ -58,10 +67,16 @@ module Aws::Finspace
     DeleteKxClusterResponse = Shapes::StructureShape.new(name: 'DeleteKxClusterResponse')
     DeleteKxDatabaseRequest = Shapes::StructureShape.new(name: 'DeleteKxDatabaseRequest')
     DeleteKxDatabaseResponse = Shapes::StructureShape.new(name: 'DeleteKxDatabaseResponse')
+    DeleteKxDataviewRequest = Shapes::StructureShape.new(name: 'DeleteKxDataviewRequest')
+    DeleteKxDataviewResponse = Shapes::StructureShape.new(name: 'DeleteKxDataviewResponse')
     DeleteKxEnvironmentRequest = Shapes::StructureShape.new(name: 'DeleteKxEnvironmentRequest')
     DeleteKxEnvironmentResponse = Shapes::StructureShape.new(name: 'DeleteKxEnvironmentResponse')
+    DeleteKxScalingGroupRequest = Shapes::StructureShape.new(name: 'DeleteKxScalingGroupRequest')
+    DeleteKxScalingGroupResponse = Shapes::StructureShape.new(name: 'DeleteKxScalingGroupResponse')
     DeleteKxUserRequest = Shapes::StructureShape.new(name: 'DeleteKxUserRequest')
     DeleteKxUserResponse = Shapes::StructureShape.new(name: 'DeleteKxUserResponse')
+    DeleteKxVolumeRequest = Shapes::StructureShape.new(name: 'DeleteKxVolumeRequest')
+    DeleteKxVolumeResponse = Shapes::StructureShape.new(name: 'DeleteKxVolumeResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     EmailId = Shapes::StringShape.new(name: 'EmailId')
     Environment = Shapes::StructureShape.new(name: 'Environment')
@@ -91,10 +106,16 @@ module Aws::Finspace
     GetKxConnectionStringResponse = Shapes::StructureShape.new(name: 'GetKxConnectionStringResponse')
     GetKxDatabaseRequest = Shapes::StructureShape.new(name: 'GetKxDatabaseRequest')
     GetKxDatabaseResponse = Shapes::StructureShape.new(name: 'GetKxDatabaseResponse')
+    GetKxDataviewRequest = Shapes::StructureShape.new(name: 'GetKxDataviewRequest')
+    GetKxDataviewResponse = Shapes::StructureShape.new(name: 'GetKxDataviewResponse')
     GetKxEnvironmentRequest = Shapes::StructureShape.new(name: 'GetKxEnvironmentRequest')
     GetKxEnvironmentResponse = Shapes::StructureShape.new(name: 'GetKxEnvironmentResponse')
+    GetKxScalingGroupRequest = Shapes::StructureShape.new(name: 'GetKxScalingGroupRequest')
+    GetKxScalingGroupResponse = Shapes::StructureShape.new(name: 'GetKxScalingGroupResponse')
     GetKxUserRequest = Shapes::StructureShape.new(name: 'GetKxUserRequest')
     GetKxUserResponse = Shapes::StructureShape.new(name: 'GetKxUserResponse')
+    GetKxVolumeRequest = Shapes::StructureShape.new(name: 'GetKxVolumeRequest')
+    GetKxVolumeResponse = Shapes::StructureShape.new(name: 'GetKxVolumeResponse')
     IPAddressType = Shapes::StringShape.new(name: 'IPAddressType')
     IcmpTypeCode = Shapes::StructureShape.new(name: 'IcmpTypeCode')
     IcmpTypeOrCode = Shapes::IntegerShape.new(name: 'IcmpTypeOrCode')
@@ -104,6 +125,8 @@ module Aws::Finspace
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     KmsKeyARN = Shapes::StringShape.new(name: 'KmsKeyARN')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
+    KxAttachedCluster = Shapes::StructureShape.new(name: 'KxAttachedCluster')
+    KxAttachedClusters = Shapes::ListShape.new(name: 'KxAttachedClusters')
     KxAzMode = Shapes::StringShape.new(name: 'KxAzMode')
     KxCacheStorageConfiguration = Shapes::StructureShape.new(name: 'KxCacheStorageConfiguration')
     KxCacheStorageConfigurations = Shapes::ListShape.new(name: 'KxCacheStorageConfigurations')
@@ -112,8 +135,11 @@ module Aws::Finspace
     KxChangesetListEntry = Shapes::StructureShape.new(name: 'KxChangesetListEntry')
     KxChangesets = Shapes::ListShape.new(name: 'KxChangesets')
     KxCluster = Shapes::StructureShape.new(name: 'KxCluster')
+    KxClusterCodeDeploymentConfiguration = Shapes::StructureShape.new(name: 'KxClusterCodeDeploymentConfiguration')
+    KxClusterCodeDeploymentStrategy = Shapes::StringShape.new(name: 'KxClusterCodeDeploymentStrategy')
     KxClusterDescription = Shapes::StringShape.new(name: 'KxClusterDescription')
     KxClusterName = Shapes::StringShape.new(name: 'KxClusterName')
+    KxClusterNameList = Shapes::ListShape.new(name: 'KxClusterNameList')
     KxClusterNodeIdString = Shapes::StringShape.new(name: 'KxClusterNodeIdString')
     KxClusterStatus = Shapes::StringShape.new(name: 'KxClusterStatus')
     KxClusterStatusReason = Shapes::StringShape.new(name: 'KxClusterStatusReason')
@@ -129,21 +155,47 @@ module Aws::Finspace
     KxDatabaseConfigurations = Shapes::ListShape.new(name: 'KxDatabaseConfigurations')
     KxDatabaseListEntry = Shapes::StructureShape.new(name: 'KxDatabaseListEntry')
     KxDatabases = Shapes::ListShape.new(name: 'KxDatabases')
+    KxDataviewActiveVersion = Shapes::StructureShape.new(name: 'KxDataviewActiveVersion')
+    KxDataviewActiveVersionList = Shapes::ListShape.new(name: 'KxDataviewActiveVersionList')
+    KxDataviewConfiguration = Shapes::StructureShape.new(name: 'KxDataviewConfiguration')
+    KxDataviewListEntry = Shapes::StructureShape.new(name: 'KxDataviewListEntry')
+    KxDataviewName = Shapes::StringShape.new(name: 'KxDataviewName')
+    KxDataviewSegmentConfiguration = Shapes::StructureShape.new(name: 'KxDataviewSegmentConfiguration')
+    KxDataviewSegmentConfigurationList = Shapes::ListShape.new(name: 'KxDataviewSegmentConfigurationList')
+    KxDataviewStatus = Shapes::StringShape.new(name: 'KxDataviewStatus')
+    KxDataviewStatusReason = Shapes::StringShape.new(name: 'KxDataviewStatusReason')
+    KxDataviews = Shapes::ListShape.new(name: 'KxDataviews')
     KxDeploymentConfiguration = Shapes::StructureShape.new(name: 'KxDeploymentConfiguration')
     KxDeploymentStrategy = Shapes::StringShape.new(name: 'KxDeploymentStrategy')
     KxEnvironment = Shapes::StructureShape.new(name: 'KxEnvironment')
     KxEnvironmentId = Shapes::StringShape.new(name: 'KxEnvironmentId')
     KxEnvironmentList = Shapes::ListShape.new(name: 'KxEnvironmentList')
     KxEnvironmentName = Shapes::StringShape.new(name: 'KxEnvironmentName')
+    KxHostType = Shapes::StringShape.new(name: 'KxHostType')
+    KxNAS1Configuration = Shapes::StructureShape.new(name: 'KxNAS1Configuration')
+    KxNAS1Size = Shapes::IntegerShape.new(name: 'KxNAS1Size')
+    KxNAS1Type = Shapes::StringShape.new(name: 'KxNAS1Type')
     KxNode = Shapes::StructureShape.new(name: 'KxNode')
     KxNodeSummaries = Shapes::ListShape.new(name: 'KxNodeSummaries')
     KxSavedownStorageConfiguration = Shapes::StructureShape.new(name: 'KxSavedownStorageConfiguration')
     KxSavedownStorageSize = Shapes::IntegerShape.new(name: 'KxSavedownStorageSize')
     KxSavedownStorageType = Shapes::StringShape.new(name: 'KxSavedownStorageType')
+    KxScalingGroup = Shapes::StructureShape.new(name: 'KxScalingGroup')
+    KxScalingGroupConfiguration = Shapes::StructureShape.new(name: 'KxScalingGroupConfiguration')
+    KxScalingGroupList = Shapes::ListShape.new(name: 'KxScalingGroupList')
+    KxScalingGroupName = Shapes::StringShape.new(name: 'KxScalingGroupName')
+    KxScalingGroupStatus = Shapes::StringShape.new(name: 'KxScalingGroupStatus')
     KxUser = Shapes::StructureShape.new(name: 'KxUser')
     KxUserArn = Shapes::StringShape.new(name: 'KxUserArn')
     KxUserList = Shapes::ListShape.new(name: 'KxUserList')
     KxUserNameString = Shapes::StringShape.new(name: 'KxUserNameString')
+    KxVolume = Shapes::StructureShape.new(name: 'KxVolume')
+    KxVolumeArn = Shapes::StringShape.new(name: 'KxVolumeArn')
+    KxVolumeName = Shapes::StringShape.new(name: 'KxVolumeName')
+    KxVolumeStatus = Shapes::StringShape.new(name: 'KxVolumeStatus')
+    KxVolumeStatusReason = Shapes::StringShape.new(name: 'KxVolumeStatusReason')
+    KxVolumeType = Shapes::StringShape.new(name: 'KxVolumeType')
+    KxVolumes = Shapes::ListShape.new(name: 'KxVolumes')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListEnvironmentsRequest = Shapes::StructureShape.new(name: 'ListEnvironmentsRequest')
     ListEnvironmentsResponse = Shapes::StructureShape.new(name: 'ListEnvironmentsResponse')
@@ -155,13 +207,20 @@ module Aws::Finspace
     ListKxClustersResponse = Shapes::StructureShape.new(name: 'ListKxClustersResponse')
     ListKxDatabasesRequest = Shapes::StructureShape.new(name: 'ListKxDatabasesRequest')
     ListKxDatabasesResponse = Shapes::StructureShape.new(name: 'ListKxDatabasesResponse')
+    ListKxDataviewsRequest = Shapes::StructureShape.new(name: 'ListKxDataviewsRequest')
+    ListKxDataviewsResponse = Shapes::StructureShape.new(name: 'ListKxDataviewsResponse')
     ListKxEnvironmentsRequest = Shapes::StructureShape.new(name: 'ListKxEnvironmentsRequest')
     ListKxEnvironmentsResponse = Shapes::StructureShape.new(name: 'ListKxEnvironmentsResponse')
+    ListKxScalingGroupsRequest = Shapes::StructureShape.new(name: 'ListKxScalingGroupsRequest')
+    ListKxScalingGroupsResponse = Shapes::StructureShape.new(name: 'ListKxScalingGroupsResponse')
     ListKxUsersRequest = Shapes::StructureShape.new(name: 'ListKxUsersRequest')
     ListKxUsersResponse = Shapes::StructureShape.new(name: 'ListKxUsersResponse')
+    ListKxVolumesRequest = Shapes::StructureShape.new(name: 'ListKxVolumesRequest')
+    ListKxVolumesResponse = Shapes::StructureShape.new(name: 'ListKxVolumesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MemoryMib = Shapes::IntegerShape.new(name: 'MemoryMib')
     NameString = Shapes::StringShape.new(name: 'NameString')
     NetworkACLConfiguration = Shapes::ListShape.new(name: 'NetworkACLConfiguration')
     NetworkACLEntry = Shapes::StructureShape.new(name: 'NetworkACLEntry')
@@ -185,6 +244,7 @@ module Aws::Finspace
     SamlMetadataDocument = Shapes::StringShape.new(name: 'SamlMetadataDocument')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     SecurityGroupIdString = Shapes::StringShape.new(name: 'SecurityGroupIdString')
+    SegmentConfigurationDbPathList = Shapes::ListShape.new(name: 'SegmentConfigurationDbPathList')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SignedKxConnectionString = Shapes::StringShape.new(name: 'SignedKxConnectionString')
     SmsDomainUrl = Shapes::StringShape.new(name: 'SmsDomainUrl')
@@ -198,6 +258,8 @@ module Aws::Finspace
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TickerplantLogConfiguration = Shapes::StructureShape.new(name: 'TickerplantLogConfiguration')
+    TickerplantLogVolumes = Shapes::ListShape.new(name: 'TickerplantLogVolumes')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TransitGatewayConfiguration = Shapes::StructureShape.new(name: 'TransitGatewayConfiguration')
     TransitGatewayID = Shapes::StringShape.new(name: 'TransitGatewayID')
@@ -205,23 +267,36 @@ module Aws::Finspace
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateEnvironmentRequest = Shapes::StructureShape.new(name: 'UpdateEnvironmentRequest')
     UpdateEnvironmentResponse = Shapes::StructureShape.new(name: 'UpdateEnvironmentResponse')
+    UpdateKxClusterCodeConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateKxClusterCodeConfigurationRequest')
+    UpdateKxClusterCodeConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateKxClusterCodeConfigurationResponse')
     UpdateKxClusterDatabasesRequest = Shapes::StructureShape.new(name: 'UpdateKxClusterDatabasesRequest')
     UpdateKxClusterDatabasesResponse = Shapes::StructureShape.new(name: 'UpdateKxClusterDatabasesResponse')
     UpdateKxDatabaseRequest = Shapes::StructureShape.new(name: 'UpdateKxDatabaseRequest')
     UpdateKxDatabaseResponse = Shapes::StructureShape.new(name: 'UpdateKxDatabaseResponse')
+    UpdateKxDataviewRequest = Shapes::StructureShape.new(name: 'UpdateKxDataviewRequest')
+    UpdateKxDataviewResponse = Shapes::StructureShape.new(name: 'UpdateKxDataviewResponse')
     UpdateKxEnvironmentNetworkRequest = Shapes::StructureShape.new(name: 'UpdateKxEnvironmentNetworkRequest')
     UpdateKxEnvironmentNetworkResponse = Shapes::StructureShape.new(name: 'UpdateKxEnvironmentNetworkResponse')
     UpdateKxEnvironmentRequest = Shapes::StructureShape.new(name: 'UpdateKxEnvironmentRequest')
     UpdateKxEnvironmentResponse = Shapes::StructureShape.new(name: 'UpdateKxEnvironmentResponse')
     UpdateKxUserRequest = Shapes::StructureShape.new(name: 'UpdateKxUserRequest')
     UpdateKxUserResponse = Shapes::StructureShape.new(name: 'UpdateKxUserResponse')
+    UpdateKxVolumeRequest = Shapes::StructureShape.new(name: 'UpdateKxVolumeRequest')
+    UpdateKxVolumeResponse = Shapes::StructureShape.new(name: 'UpdateKxVolumeResponse')
     ValidCIDRBlock = Shapes::StringShape.new(name: 'ValidCIDRBlock')
     ValidCIDRSpace = Shapes::StringShape.new(name: 'ValidCIDRSpace')
     ValidHostname = Shapes::StringShape.new(name: 'ValidHostname')
     ValidIPAddress = Shapes::StringShape.new(name: 'ValidIPAddress')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    VersionId = Shapes::StringShape.new(name: 'VersionId')
+    Volume = Shapes::StructureShape.new(name: 'Volume')
+    VolumeName = Shapes::StringShape.new(name: 'VolumeName')
+    VolumeType = Shapes::StringShape.new(name: 'VolumeType')
+    Volumes = Shapes::ListShape.new(name: 'Volumes')
     VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
     VpcIdString = Shapes::StringShape.new(name: 'VpcIdString')
+    arn = Shapes::StringShape.new(name: 'arn')
+    booleanValue = Shapes::BooleanShape.new(name: 'booleanValue')
     dnsStatus = Shapes::StringShape.new(name: 'dnsStatus')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
     numBytes = Shapes::IntegerShape.new(name: 'numBytes')
@@ -234,6 +309,8 @@ module Aws::Finspace
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AttachedClusterList.member = Shapes::ShapeRef.new(shape: KxClusterName)
 
     AttributeMap.key = Shapes::ShapeRef.new(shape: FederationAttributeKey)
     AttributeMap.value = Shapes::ShapeRef.new(shape: FederationAttributeValue)
@@ -303,13 +380,14 @@ module Aws::Finspace
     CreateKxClusterRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     CreateKxClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, required: true, location_name: "clusterName"))
     CreateKxClusterRequest.add_member(:cluster_type, Shapes::ShapeRef.new(shape: KxClusterType, required: true, location_name: "clusterType"))
+    CreateKxClusterRequest.add_member(:tickerplant_log_configuration, Shapes::ShapeRef.new(shape: TickerplantLogConfiguration, location_name: "tickerplantLogConfiguration"))
     CreateKxClusterRequest.add_member(:databases, Shapes::ShapeRef.new(shape: KxDatabaseConfigurations, location_name: "databases"))
     CreateKxClusterRequest.add_member(:cache_storage_configurations, Shapes::ShapeRef.new(shape: KxCacheStorageConfigurations, location_name: "cacheStorageConfigurations"))
     CreateKxClusterRequest.add_member(:auto_scaling_configuration, Shapes::ShapeRef.new(shape: AutoScalingConfiguration, location_name: "autoScalingConfiguration"))
     CreateKxClusterRequest.add_member(:cluster_description, Shapes::ShapeRef.new(shape: KxClusterDescription, location_name: "clusterDescription"))
-    CreateKxClusterRequest.add_member(:capacity_configuration, Shapes::ShapeRef.new(shape: CapacityConfiguration, required: true, location_name: "capacityConfiguration"))
+    CreateKxClusterRequest.add_member(:capacity_configuration, Shapes::ShapeRef.new(shape: CapacityConfiguration, location_name: "capacityConfiguration"))
     CreateKxClusterRequest.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, required: true, location_name: "releaseLabel"))
-    CreateKxClusterRequest.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "vpcConfiguration"))
+    CreateKxClusterRequest.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, required: true, location_name: "vpcConfiguration"))
     CreateKxClusterRequest.add_member(:initialization_script, Shapes::ShapeRef.new(shape: InitializationScriptFilePath, location_name: "initializationScript"))
     CreateKxClusterRequest.add_member(:command_line_arguments, Shapes::ShapeRef.new(shape: KxCommandLineArguments, location_name: "commandLineArguments"))
     CreateKxClusterRequest.add_member(:code, Shapes::ShapeRef.new(shape: CodeConfiguration, location_name: "code"))
@@ -318,6 +396,7 @@ module Aws::Finspace
     CreateKxClusterRequest.add_member(:az_mode, Shapes::ShapeRef.new(shape: KxAzMode, required: true, location_name: "azMode"))
     CreateKxClusterRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
     CreateKxClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateKxClusterRequest.add_member(:scaling_group_configuration, Shapes::ShapeRef.new(shape: KxScalingGroupConfiguration, location_name: "scalingGroupConfiguration"))
     CreateKxClusterRequest.struct_class = Types::CreateKxClusterRequest
 
     CreateKxClusterResponse.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, location_name: "environmentId"))
@@ -325,6 +404,8 @@ module Aws::Finspace
     CreateKxClusterResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: KxClusterStatusReason, location_name: "statusReason"))
     CreateKxClusterResponse.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, location_name: "clusterName"))
     CreateKxClusterResponse.add_member(:cluster_type, Shapes::ShapeRef.new(shape: KxClusterType, location_name: "clusterType"))
+    CreateKxClusterResponse.add_member(:tickerplant_log_configuration, Shapes::ShapeRef.new(shape: TickerplantLogConfiguration, location_name: "tickerplantLogConfiguration"))
+    CreateKxClusterResponse.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "volumes"))
     CreateKxClusterResponse.add_member(:databases, Shapes::ShapeRef.new(shape: KxDatabaseConfigurations, location_name: "databases"))
     CreateKxClusterResponse.add_member(:cache_storage_configurations, Shapes::ShapeRef.new(shape: KxCacheStorageConfigurations, location_name: "cacheStorageConfigurations"))
     CreateKxClusterResponse.add_member(:auto_scaling_configuration, Shapes::ShapeRef.new(shape: AutoScalingConfiguration, location_name: "autoScalingConfiguration"))
@@ -341,6 +422,7 @@ module Aws::Finspace
     CreateKxClusterResponse.add_member(:az_mode, Shapes::ShapeRef.new(shape: KxAzMode, location_name: "azMode"))
     CreateKxClusterResponse.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
     CreateKxClusterResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
+    CreateKxClusterResponse.add_member(:scaling_group_configuration, Shapes::ShapeRef.new(shape: KxScalingGroupConfiguration, location_name: "scalingGroupConfiguration"))
     CreateKxClusterResponse.struct_class = Types::CreateKxClusterResponse
 
     CreateKxDatabaseRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "environmentId"))
@@ -358,11 +440,38 @@ module Aws::Finspace
     CreateKxDatabaseResponse.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
     CreateKxDatabaseResponse.struct_class = Types::CreateKxDatabaseResponse
 
+    CreateKxDataviewRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    CreateKxDataviewRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location: "uri", location_name: "databaseName"))
+    CreateKxDataviewRequest.add_member(:dataview_name, Shapes::ShapeRef.new(shape: KxDataviewName, required: true, location_name: "dataviewName"))
+    CreateKxDataviewRequest.add_member(:az_mode, Shapes::ShapeRef.new(shape: KxAzMode, required: true, location_name: "azMode"))
+    CreateKxDataviewRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
+    CreateKxDataviewRequest.add_member(:changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "changesetId"))
+    CreateKxDataviewRequest.add_member(:segment_configurations, Shapes::ShapeRef.new(shape: KxDataviewSegmentConfigurationList, location_name: "segmentConfigurations"))
+    CreateKxDataviewRequest.add_member(:auto_update, Shapes::ShapeRef.new(shape: booleanValue, location_name: "autoUpdate"))
+    CreateKxDataviewRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateKxDataviewRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateKxDataviewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateKxDataviewRequest.struct_class = Types::CreateKxDataviewRequest
+
+    CreateKxDataviewResponse.add_member(:dataview_name, Shapes::ShapeRef.new(shape: KxDataviewName, location_name: "dataviewName"))
+    CreateKxDataviewResponse.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, location_name: "databaseName"))
+    CreateKxDataviewResponse.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId"))
+    CreateKxDataviewResponse.add_member(:az_mode, Shapes::ShapeRef.new(shape: KxAzMode, location_name: "azMode"))
+    CreateKxDataviewResponse.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
+    CreateKxDataviewResponse.add_member(:changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "changesetId"))
+    CreateKxDataviewResponse.add_member(:segment_configurations, Shapes::ShapeRef.new(shape: KxDataviewSegmentConfigurationList, location_name: "segmentConfigurations"))
+    CreateKxDataviewResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateKxDataviewResponse.add_member(:auto_update, Shapes::ShapeRef.new(shape: booleanValue, location_name: "autoUpdate"))
+    CreateKxDataviewResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
+    CreateKxDataviewResponse.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
+    CreateKxDataviewResponse.add_member(:status, Shapes::ShapeRef.new(shape: KxDataviewStatus, location_name: "status"))
+    CreateKxDataviewResponse.struct_class = Types::CreateKxDataviewResponse
+
     CreateKxEnvironmentRequest.add_member(:name, Shapes::ShapeRef.new(shape: KxEnvironmentName, required: true, location_name: "name"))
     CreateKxEnvironmentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateKxEnvironmentRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyARN, required: true, location_name: "kmsKeyId"))
     CreateKxEnvironmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateKxEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    CreateKxEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateKxEnvironmentRequest.struct_class = Types::CreateKxEnvironmentRequest
 
     CreateKxEnvironmentResponse.add_member(:name, Shapes::ShapeRef.new(shape: KxEnvironmentName, location_name: "name"))
@@ -374,11 +483,28 @@ module Aws::Finspace
     CreateKxEnvironmentResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTimestamp"))
     CreateKxEnvironmentResponse.struct_class = Types::CreateKxEnvironmentResponse
 
+    CreateKxScalingGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateKxScalingGroupRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    CreateKxScalingGroupRequest.add_member(:scaling_group_name, Shapes::ShapeRef.new(shape: KxScalingGroupName, required: true, location_name: "scalingGroupName"))
+    CreateKxScalingGroupRequest.add_member(:host_type, Shapes::ShapeRef.new(shape: KxHostType, required: true, location_name: "hostType"))
+    CreateKxScalingGroupRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, required: true, location_name: "availabilityZoneId"))
+    CreateKxScalingGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateKxScalingGroupRequest.struct_class = Types::CreateKxScalingGroupRequest
+
+    CreateKxScalingGroupResponse.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, location_name: "environmentId"))
+    CreateKxScalingGroupResponse.add_member(:scaling_group_name, Shapes::ShapeRef.new(shape: KxScalingGroupName, location_name: "scalingGroupName"))
+    CreateKxScalingGroupResponse.add_member(:host_type, Shapes::ShapeRef.new(shape: KxHostType, location_name: "hostType"))
+    CreateKxScalingGroupResponse.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
+    CreateKxScalingGroupResponse.add_member(:status, Shapes::ShapeRef.new(shape: KxScalingGroupStatus, location_name: "status"))
+    CreateKxScalingGroupResponse.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
+    CreateKxScalingGroupResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
+    CreateKxScalingGroupResponse.struct_class = Types::CreateKxScalingGroupResponse
+
     CreateKxUserRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "environmentId"))
     CreateKxUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: KxUserNameString, required: true, location_name: "userName"))
     CreateKxUserRequest.add_member(:iam_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "iamRole"))
     CreateKxUserRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
-    CreateKxUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    CreateKxUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateKxUserRequest.struct_class = Types::CreateKxUserRequest
 
     CreateKxUserResponse.add_member(:user_name, Shapes::ShapeRef.new(shape: KxUserNameString, location_name: "userName"))
@@ -386,6 +512,30 @@ module Aws::Finspace
     CreateKxUserResponse.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, location_name: "environmentId"))
     CreateKxUserResponse.add_member(:iam_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "iamRole"))
     CreateKxUserResponse.struct_class = Types::CreateKxUserResponse
+
+    CreateKxVolumeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateKxVolumeRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    CreateKxVolumeRequest.add_member(:volume_type, Shapes::ShapeRef.new(shape: KxVolumeType, required: true, location_name: "volumeType"))
+    CreateKxVolumeRequest.add_member(:volume_name, Shapes::ShapeRef.new(shape: KxVolumeName, required: true, location_name: "volumeName"))
+    CreateKxVolumeRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateKxVolumeRequest.add_member(:nas1_configuration, Shapes::ShapeRef.new(shape: KxNAS1Configuration, location_name: "nas1Configuration"))
+    CreateKxVolumeRequest.add_member(:az_mode, Shapes::ShapeRef.new(shape: KxAzMode, required: true, location_name: "azMode"))
+    CreateKxVolumeRequest.add_member(:availability_zone_ids, Shapes::ShapeRef.new(shape: AvailabilityZoneIds, required: true, location_name: "availabilityZoneIds"))
+    CreateKxVolumeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateKxVolumeRequest.struct_class = Types::CreateKxVolumeRequest
+
+    CreateKxVolumeResponse.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, location_name: "environmentId"))
+    CreateKxVolumeResponse.add_member(:volume_name, Shapes::ShapeRef.new(shape: KxVolumeName, location_name: "volumeName"))
+    CreateKxVolumeResponse.add_member(:volume_type, Shapes::ShapeRef.new(shape: KxVolumeType, location_name: "volumeType"))
+    CreateKxVolumeResponse.add_member(:volume_arn, Shapes::ShapeRef.new(shape: KxVolumeArn, location_name: "volumeArn"))
+    CreateKxVolumeResponse.add_member(:nas1_configuration, Shapes::ShapeRef.new(shape: KxNAS1Configuration, location_name: "nas1Configuration"))
+    CreateKxVolumeResponse.add_member(:status, Shapes::ShapeRef.new(shape: KxVolumeStatus, location_name: "status"))
+    CreateKxVolumeResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: KxVolumeStatusReason, location_name: "statusReason"))
+    CreateKxVolumeResponse.add_member(:az_mode, Shapes::ShapeRef.new(shape: KxAzMode, location_name: "azMode"))
+    CreateKxVolumeResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateKxVolumeResponse.add_member(:availability_zone_ids, Shapes::ShapeRef.new(shape: AvailabilityZoneIds, location_name: "availabilityZoneIds"))
+    CreateKxVolumeResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
+    CreateKxVolumeResponse.struct_class = Types::CreateKxVolumeResponse
 
     CustomDNSConfiguration.member = Shapes::ShapeRef.new(shape: CustomDNSServer)
 
@@ -416,16 +566,40 @@ module Aws::Finspace
 
     DeleteKxDatabaseResponse.struct_class = Types::DeleteKxDatabaseResponse
 
+    DeleteKxDataviewRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    DeleteKxDataviewRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location: "uri", location_name: "databaseName"))
+    DeleteKxDataviewRequest.add_member(:dataview_name, Shapes::ShapeRef.new(shape: KxDataviewName, required: true, location: "uri", location_name: "dataviewName"))
+    DeleteKxDataviewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteKxDataviewRequest.struct_class = Types::DeleteKxDataviewRequest
+
+    DeleteKxDataviewResponse.struct_class = Types::DeleteKxDataviewResponse
+
     DeleteKxEnvironmentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "environmentId"))
+    DeleteKxEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     DeleteKxEnvironmentRequest.struct_class = Types::DeleteKxEnvironmentRequest
 
     DeleteKxEnvironmentResponse.struct_class = Types::DeleteKxEnvironmentResponse
 
+    DeleteKxScalingGroupRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    DeleteKxScalingGroupRequest.add_member(:scaling_group_name, Shapes::ShapeRef.new(shape: KxScalingGroupName, required: true, location: "uri", location_name: "scalingGroupName"))
+    DeleteKxScalingGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteKxScalingGroupRequest.struct_class = Types::DeleteKxScalingGroupRequest
+
+    DeleteKxScalingGroupResponse.struct_class = Types::DeleteKxScalingGroupResponse
+
     DeleteKxUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: KxUserNameString, required: true, location: "uri", location_name: "userName"))
     DeleteKxUserRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "environmentId"))
+    DeleteKxUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     DeleteKxUserRequest.struct_class = Types::DeleteKxUserRequest
 
     DeleteKxUserResponse.struct_class = Types::DeleteKxUserResponse
+
+    DeleteKxVolumeRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    DeleteKxVolumeRequest.add_member(:volume_name, Shapes::ShapeRef.new(shape: KxVolumeName, required: true, location: "uri", location_name: "volumeName"))
+    DeleteKxVolumeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteKxVolumeRequest.struct_class = Types::DeleteKxVolumeRequest
+
+    DeleteKxVolumeResponse.struct_class = Types::DeleteKxVolumeResponse
 
     Environment.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "name"))
     Environment.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, location_name: "environmentId"))
@@ -485,6 +659,8 @@ module Aws::Finspace
     GetKxClusterResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: KxClusterStatusReason, location_name: "statusReason"))
     GetKxClusterResponse.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, location_name: "clusterName"))
     GetKxClusterResponse.add_member(:cluster_type, Shapes::ShapeRef.new(shape: KxClusterType, location_name: "clusterType"))
+    GetKxClusterResponse.add_member(:tickerplant_log_configuration, Shapes::ShapeRef.new(shape: TickerplantLogConfiguration, location_name: "tickerplantLogConfiguration"))
+    GetKxClusterResponse.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "volumes"))
     GetKxClusterResponse.add_member(:databases, Shapes::ShapeRef.new(shape: KxDatabaseConfigurations, location_name: "databases"))
     GetKxClusterResponse.add_member(:cache_storage_configurations, Shapes::ShapeRef.new(shape: KxCacheStorageConfigurations, location_name: "cacheStorageConfigurations"))
     GetKxClusterResponse.add_member(:auto_scaling_configuration, Shapes::ShapeRef.new(shape: AutoScalingConfiguration, location_name: "autoScalingConfiguration"))
@@ -501,6 +677,7 @@ module Aws::Finspace
     GetKxClusterResponse.add_member(:az_mode, Shapes::ShapeRef.new(shape: KxAzMode, location_name: "azMode"))
     GetKxClusterResponse.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
     GetKxClusterResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
+    GetKxClusterResponse.add_member(:scaling_group_configuration, Shapes::ShapeRef.new(shape: KxScalingGroupConfiguration, location_name: "scalingGroupConfiguration"))
     GetKxClusterResponse.struct_class = Types::GetKxClusterResponse
 
     GetKxConnectionStringRequest.add_member(:user_arn, Shapes::ShapeRef.new(shape: KxUserArn, required: true, location: "querystring", location_name: "userArn"))
@@ -527,6 +704,27 @@ module Aws::Finspace
     GetKxDatabaseResponse.add_member(:num_files, Shapes::ShapeRef.new(shape: numFiles, location_name: "numFiles"))
     GetKxDatabaseResponse.struct_class = Types::GetKxDatabaseResponse
 
+    GetKxDataviewRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    GetKxDataviewRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location: "uri", location_name: "databaseName"))
+    GetKxDataviewRequest.add_member(:dataview_name, Shapes::ShapeRef.new(shape: KxDataviewName, required: true, location: "uri", location_name: "dataviewName"))
+    GetKxDataviewRequest.struct_class = Types::GetKxDataviewRequest
+
+    GetKxDataviewResponse.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, location_name: "databaseName"))
+    GetKxDataviewResponse.add_member(:dataview_name, Shapes::ShapeRef.new(shape: KxDataviewName, location_name: "dataviewName"))
+    GetKxDataviewResponse.add_member(:az_mode, Shapes::ShapeRef.new(shape: KxAzMode, location_name: "azMode"))
+    GetKxDataviewResponse.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
+    GetKxDataviewResponse.add_member(:changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "changesetId"))
+    GetKxDataviewResponse.add_member(:segment_configurations, Shapes::ShapeRef.new(shape: KxDataviewSegmentConfigurationList, location_name: "segmentConfigurations"))
+    GetKxDataviewResponse.add_member(:active_versions, Shapes::ShapeRef.new(shape: KxDataviewActiveVersionList, location_name: "activeVersions"))
+    GetKxDataviewResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    GetKxDataviewResponse.add_member(:auto_update, Shapes::ShapeRef.new(shape: booleanValue, location_name: "autoUpdate"))
+    GetKxDataviewResponse.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId"))
+    GetKxDataviewResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
+    GetKxDataviewResponse.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
+    GetKxDataviewResponse.add_member(:status, Shapes::ShapeRef.new(shape: KxDataviewStatus, location_name: "status"))
+    GetKxDataviewResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: KxDataviewStatusReason, location_name: "statusReason"))
+    GetKxDataviewResponse.struct_class = Types::GetKxDataviewResponse
+
     GetKxEnvironmentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "environmentId"))
     GetKxEnvironmentRequest.struct_class = Types::GetKxEnvironmentRequest
 
@@ -549,6 +747,21 @@ module Aws::Finspace
     GetKxEnvironmentResponse.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: stringValueLength1to255, location_name: "certificateAuthorityArn"))
     GetKxEnvironmentResponse.struct_class = Types::GetKxEnvironmentResponse
 
+    GetKxScalingGroupRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    GetKxScalingGroupRequest.add_member(:scaling_group_name, Shapes::ShapeRef.new(shape: KxScalingGroupName, required: true, location: "uri", location_name: "scalingGroupName"))
+    GetKxScalingGroupRequest.struct_class = Types::GetKxScalingGroupRequest
+
+    GetKxScalingGroupResponse.add_member(:scaling_group_name, Shapes::ShapeRef.new(shape: KxScalingGroupName, location_name: "scalingGroupName"))
+    GetKxScalingGroupResponse.add_member(:scaling_group_arn, Shapes::ShapeRef.new(shape: arn, location_name: "scalingGroupArn"))
+    GetKxScalingGroupResponse.add_member(:host_type, Shapes::ShapeRef.new(shape: KxHostType, location_name: "hostType"))
+    GetKxScalingGroupResponse.add_member(:clusters, Shapes::ShapeRef.new(shape: KxClusterNameList, location_name: "clusters"))
+    GetKxScalingGroupResponse.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
+    GetKxScalingGroupResponse.add_member(:status, Shapes::ShapeRef.new(shape: KxScalingGroupStatus, location_name: "status"))
+    GetKxScalingGroupResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: KxClusterStatusReason, location_name: "statusReason"))
+    GetKxScalingGroupResponse.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
+    GetKxScalingGroupResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
+    GetKxScalingGroupResponse.struct_class = Types::GetKxScalingGroupResponse
+
     GetKxUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: KxUserNameString, required: true, location: "uri", location_name: "userName"))
     GetKxUserRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "environmentId"))
     GetKxUserRequest.struct_class = Types::GetKxUserRequest
@@ -559,6 +772,25 @@ module Aws::Finspace
     GetKxUserResponse.add_member(:iam_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "iamRole"))
     GetKxUserResponse.struct_class = Types::GetKxUserResponse
 
+    GetKxVolumeRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    GetKxVolumeRequest.add_member(:volume_name, Shapes::ShapeRef.new(shape: KxVolumeName, required: true, location: "uri", location_name: "volumeName"))
+    GetKxVolumeRequest.struct_class = Types::GetKxVolumeRequest
+
+    GetKxVolumeResponse.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, location_name: "environmentId"))
+    GetKxVolumeResponse.add_member(:volume_name, Shapes::ShapeRef.new(shape: KxVolumeName, location_name: "volumeName"))
+    GetKxVolumeResponse.add_member(:volume_type, Shapes::ShapeRef.new(shape: KxVolumeType, location_name: "volumeType"))
+    GetKxVolumeResponse.add_member(:volume_arn, Shapes::ShapeRef.new(shape: KxVolumeArn, location_name: "volumeArn"))
+    GetKxVolumeResponse.add_member(:nas1_configuration, Shapes::ShapeRef.new(shape: KxNAS1Configuration, location_name: "nas1Configuration"))
+    GetKxVolumeResponse.add_member(:status, Shapes::ShapeRef.new(shape: KxVolumeStatus, location_name: "status"))
+    GetKxVolumeResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: KxVolumeStatusReason, location_name: "statusReason"))
+    GetKxVolumeResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
+    GetKxVolumeResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    GetKxVolumeResponse.add_member(:az_mode, Shapes::ShapeRef.new(shape: KxAzMode, location_name: "azMode"))
+    GetKxVolumeResponse.add_member(:availability_zone_ids, Shapes::ShapeRef.new(shape: AvailabilityZoneIds, location_name: "availabilityZoneIds"))
+    GetKxVolumeResponse.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
+    GetKxVolumeResponse.add_member(:attached_clusters, Shapes::ShapeRef.new(shape: KxAttachedClusters, location_name: "attachedClusters"))
+    GetKxVolumeResponse.struct_class = Types::GetKxVolumeResponse
+
     IcmpTypeCode.add_member(:type, Shapes::ShapeRef.new(shape: IcmpTypeOrCode, required: true, location_name: "type"))
     IcmpTypeCode.add_member(:code, Shapes::ShapeRef.new(shape: IcmpTypeOrCode, required: true, location_name: "code"))
     IcmpTypeCode.struct_class = Types::IcmpTypeCode
@@ -568,6 +800,13 @@ module Aws::Finspace
 
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    KxAttachedCluster.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, location_name: "clusterName"))
+    KxAttachedCluster.add_member(:cluster_type, Shapes::ShapeRef.new(shape: KxClusterType, location_name: "clusterType"))
+    KxAttachedCluster.add_member(:cluster_status, Shapes::ShapeRef.new(shape: KxClusterStatus, location_name: "clusterStatus"))
+    KxAttachedCluster.struct_class = Types::KxAttachedCluster
+
+    KxAttachedClusters.member = Shapes::ShapeRef.new(shape: KxAttachedCluster)
 
     KxCacheStorageConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: KxCacheStorageType, required: true, location_name: "type"))
     KxCacheStorageConfiguration.add_member(:size, Shapes::ShapeRef.new(shape: KxCacheStorageSize, required: true, location_name: "size"))
@@ -590,6 +829,7 @@ module Aws::Finspace
     KxCluster.add_member(:cluster_type, Shapes::ShapeRef.new(shape: KxClusterType, location_name: "clusterType"))
     KxCluster.add_member(:cluster_description, Shapes::ShapeRef.new(shape: KxClusterDescription, location_name: "clusterDescription"))
     KxCluster.add_member(:release_label, Shapes::ShapeRef.new(shape: ReleaseLabel, location_name: "releaseLabel"))
+    KxCluster.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "volumes"))
     KxCluster.add_member(:initialization_script, Shapes::ShapeRef.new(shape: InitializationScriptFilePath, location_name: "initializationScript"))
     KxCluster.add_member(:execution_role, Shapes::ShapeRef.new(shape: ExecutionRoleArn, location_name: "executionRole"))
     KxCluster.add_member(:az_mode, Shapes::ShapeRef.new(shape: KxAzMode, location_name: "azMode"))
@@ -597,6 +837,11 @@ module Aws::Finspace
     KxCluster.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
     KxCluster.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
     KxCluster.struct_class = Types::KxCluster
+
+    KxClusterCodeDeploymentConfiguration.add_member(:deployment_strategy, Shapes::ShapeRef.new(shape: KxClusterCodeDeploymentStrategy, required: true, location_name: "deploymentStrategy"))
+    KxClusterCodeDeploymentConfiguration.struct_class = Types::KxClusterCodeDeploymentConfiguration
+
+    KxClusterNameList.member = Shapes::ShapeRef.new(shape: KxClusterName)
 
     KxClusters.member = Shapes::ShapeRef.new(shape: KxCluster)
 
@@ -608,6 +853,7 @@ module Aws::Finspace
 
     KxDatabaseCacheConfiguration.add_member(:cache_type, Shapes::ShapeRef.new(shape: KxCacheStorageType, required: true, location_name: "cacheType"))
     KxDatabaseCacheConfiguration.add_member(:db_paths, Shapes::ShapeRef.new(shape: DbPaths, required: true, location_name: "dbPaths"))
+    KxDatabaseCacheConfiguration.add_member(:dataview_name, Shapes::ShapeRef.new(shape: KxDataviewName, location_name: "dataviewName"))
     KxDatabaseCacheConfiguration.struct_class = Types::KxDatabaseCacheConfiguration
 
     KxDatabaseCacheConfigurations.member = Shapes::ShapeRef.new(shape: KxDatabaseCacheConfiguration)
@@ -615,6 +861,8 @@ module Aws::Finspace
     KxDatabaseConfiguration.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location_name: "databaseName"))
     KxDatabaseConfiguration.add_member(:cache_configurations, Shapes::ShapeRef.new(shape: KxDatabaseCacheConfigurations, location_name: "cacheConfigurations"))
     KxDatabaseConfiguration.add_member(:changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "changesetId"))
+    KxDatabaseConfiguration.add_member(:dataview_name, Shapes::ShapeRef.new(shape: KxDataviewName, location_name: "dataviewName"))
+    KxDatabaseConfiguration.add_member(:dataview_configuration, Shapes::ShapeRef.new(shape: KxDataviewConfiguration, location_name: "dataviewConfiguration"))
     KxDatabaseConfiguration.struct_class = Types::KxDatabaseConfiguration
 
     KxDatabaseConfigurations.member = Shapes::ShapeRef.new(shape: KxDatabaseConfiguration)
@@ -625,6 +873,45 @@ module Aws::Finspace
     KxDatabaseListEntry.struct_class = Types::KxDatabaseListEntry
 
     KxDatabases.member = Shapes::ShapeRef.new(shape: KxDatabaseListEntry)
+
+    KxDataviewActiveVersion.add_member(:changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "changesetId"))
+    KxDataviewActiveVersion.add_member(:segment_configurations, Shapes::ShapeRef.new(shape: KxDataviewSegmentConfigurationList, location_name: "segmentConfigurations"))
+    KxDataviewActiveVersion.add_member(:attached_clusters, Shapes::ShapeRef.new(shape: AttachedClusterList, location_name: "attachedClusters"))
+    KxDataviewActiveVersion.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
+    KxDataviewActiveVersion.add_member(:version_id, Shapes::ShapeRef.new(shape: VersionId, location_name: "versionId"))
+    KxDataviewActiveVersion.struct_class = Types::KxDataviewActiveVersion
+
+    KxDataviewActiveVersionList.member = Shapes::ShapeRef.new(shape: KxDataviewActiveVersion)
+
+    KxDataviewConfiguration.add_member(:dataview_name, Shapes::ShapeRef.new(shape: KxDataviewName, location_name: "dataviewName"))
+    KxDataviewConfiguration.add_member(:dataview_version_id, Shapes::ShapeRef.new(shape: VersionId, location_name: "dataviewVersionId"))
+    KxDataviewConfiguration.add_member(:changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "changesetId"))
+    KxDataviewConfiguration.add_member(:segment_configurations, Shapes::ShapeRef.new(shape: KxDataviewSegmentConfigurationList, location_name: "segmentConfigurations"))
+    KxDataviewConfiguration.struct_class = Types::KxDataviewConfiguration
+
+    KxDataviewListEntry.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId"))
+    KxDataviewListEntry.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, location_name: "databaseName"))
+    KxDataviewListEntry.add_member(:dataview_name, Shapes::ShapeRef.new(shape: KxDataviewName, location_name: "dataviewName"))
+    KxDataviewListEntry.add_member(:az_mode, Shapes::ShapeRef.new(shape: KxAzMode, location_name: "azMode"))
+    KxDataviewListEntry.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
+    KxDataviewListEntry.add_member(:changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "changesetId"))
+    KxDataviewListEntry.add_member(:segment_configurations, Shapes::ShapeRef.new(shape: KxDataviewSegmentConfigurationList, location_name: "segmentConfigurations"))
+    KxDataviewListEntry.add_member(:active_versions, Shapes::ShapeRef.new(shape: KxDataviewActiveVersionList, location_name: "activeVersions"))
+    KxDataviewListEntry.add_member(:status, Shapes::ShapeRef.new(shape: KxDataviewStatus, location_name: "status"))
+    KxDataviewListEntry.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    KxDataviewListEntry.add_member(:auto_update, Shapes::ShapeRef.new(shape: booleanValue, location_name: "autoUpdate"))
+    KxDataviewListEntry.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
+    KxDataviewListEntry.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
+    KxDataviewListEntry.add_member(:status_reason, Shapes::ShapeRef.new(shape: KxDataviewStatusReason, location_name: "statusReason"))
+    KxDataviewListEntry.struct_class = Types::KxDataviewListEntry
+
+    KxDataviewSegmentConfiguration.add_member(:db_paths, Shapes::ShapeRef.new(shape: SegmentConfigurationDbPathList, required: true, location_name: "dbPaths"))
+    KxDataviewSegmentConfiguration.add_member(:volume_name, Shapes::ShapeRef.new(shape: KxVolumeName, required: true, location_name: "volumeName"))
+    KxDataviewSegmentConfiguration.struct_class = Types::KxDataviewSegmentConfiguration
+
+    KxDataviewSegmentConfigurationList.member = Shapes::ShapeRef.new(shape: KxDataviewSegmentConfiguration)
+
+    KxDataviews.member = Shapes::ShapeRef.new(shape: KxDataviewListEntry)
 
     KxDeploymentConfiguration.add_member(:deployment_strategy, Shapes::ShapeRef.new(shape: KxDeploymentStrategy, required: true, location_name: "deploymentStrategy"))
     KxDeploymentConfiguration.struct_class = Types::KxDeploymentConfiguration
@@ -650,6 +937,10 @@ module Aws::Finspace
 
     KxEnvironmentList.member = Shapes::ShapeRef.new(shape: KxEnvironment)
 
+    KxNAS1Configuration.add_member(:type, Shapes::ShapeRef.new(shape: KxNAS1Type, location_name: "type"))
+    KxNAS1Configuration.add_member(:size, Shapes::ShapeRef.new(shape: KxNAS1Size, location_name: "size"))
+    KxNAS1Configuration.struct_class = Types::KxNAS1Configuration
+
     KxNode.add_member(:node_id, Shapes::ShapeRef.new(shape: KxClusterNodeIdString, location_name: "nodeId"))
     KxNode.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
     KxNode.add_member(:launch_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "launchTime"))
@@ -657,9 +948,29 @@ module Aws::Finspace
 
     KxNodeSummaries.member = Shapes::ShapeRef.new(shape: KxNode)
 
-    KxSavedownStorageConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: KxSavedownStorageType, required: true, location_name: "type"))
-    KxSavedownStorageConfiguration.add_member(:size, Shapes::ShapeRef.new(shape: KxSavedownStorageSize, required: true, location_name: "size"))
+    KxSavedownStorageConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: KxSavedownStorageType, location_name: "type"))
+    KxSavedownStorageConfiguration.add_member(:size, Shapes::ShapeRef.new(shape: KxSavedownStorageSize, location_name: "size"))
+    KxSavedownStorageConfiguration.add_member(:volume_name, Shapes::ShapeRef.new(shape: KxVolumeName, location_name: "volumeName"))
     KxSavedownStorageConfiguration.struct_class = Types::KxSavedownStorageConfiguration
+
+    KxScalingGroup.add_member(:scaling_group_name, Shapes::ShapeRef.new(shape: KxScalingGroupName, location_name: "scalingGroupName"))
+    KxScalingGroup.add_member(:host_type, Shapes::ShapeRef.new(shape: KxHostType, location_name: "hostType"))
+    KxScalingGroup.add_member(:clusters, Shapes::ShapeRef.new(shape: KxClusterNameList, location_name: "clusters"))
+    KxScalingGroup.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
+    KxScalingGroup.add_member(:status, Shapes::ShapeRef.new(shape: KxScalingGroupStatus, location_name: "status"))
+    KxScalingGroup.add_member(:status_reason, Shapes::ShapeRef.new(shape: KxClusterStatusReason, location_name: "statusReason"))
+    KxScalingGroup.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
+    KxScalingGroup.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
+    KxScalingGroup.struct_class = Types::KxScalingGroup
+
+    KxScalingGroupConfiguration.add_member(:scaling_group_name, Shapes::ShapeRef.new(shape: KxScalingGroupName, required: true, location_name: "scalingGroupName"))
+    KxScalingGroupConfiguration.add_member(:memory_limit, Shapes::ShapeRef.new(shape: MemoryMib, location_name: "memoryLimit"))
+    KxScalingGroupConfiguration.add_member(:memory_reservation, Shapes::ShapeRef.new(shape: MemoryMib, required: true, location_name: "memoryReservation"))
+    KxScalingGroupConfiguration.add_member(:node_count, Shapes::ShapeRef.new(shape: ClusterNodeCount, required: true, location_name: "nodeCount"))
+    KxScalingGroupConfiguration.add_member(:cpu, Shapes::ShapeRef.new(shape: CpuCount, location_name: "cpu"))
+    KxScalingGroupConfiguration.struct_class = Types::KxScalingGroupConfiguration
+
+    KxScalingGroupList.member = Shapes::ShapeRef.new(shape: KxScalingGroup)
 
     KxUser.add_member(:user_arn, Shapes::ShapeRef.new(shape: KxUserArn, location_name: "userArn"))
     KxUser.add_member(:user_name, Shapes::ShapeRef.new(shape: KxUserNameString, location_name: "userName"))
@@ -669,6 +980,19 @@ module Aws::Finspace
     KxUser.struct_class = Types::KxUser
 
     KxUserList.member = Shapes::ShapeRef.new(shape: KxUser)
+
+    KxVolume.add_member(:volume_name, Shapes::ShapeRef.new(shape: KxVolumeName, location_name: "volumeName"))
+    KxVolume.add_member(:volume_type, Shapes::ShapeRef.new(shape: KxVolumeType, location_name: "volumeType"))
+    KxVolume.add_member(:status, Shapes::ShapeRef.new(shape: KxVolumeStatus, location_name: "status"))
+    KxVolume.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    KxVolume.add_member(:status_reason, Shapes::ShapeRef.new(shape: KxVolumeStatusReason, location_name: "statusReason"))
+    KxVolume.add_member(:az_mode, Shapes::ShapeRef.new(shape: KxAzMode, location_name: "azMode"))
+    KxVolume.add_member(:availability_zone_ids, Shapes::ShapeRef.new(shape: AvailabilityZoneIds, location_name: "availabilityZoneIds"))
+    KxVolume.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
+    KxVolume.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
+    KxVolume.struct_class = Types::KxVolume
+
+    KxVolumes.member = Shapes::ShapeRef.new(shape: KxVolume)
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException
@@ -720,6 +1044,16 @@ module Aws::Finspace
     ListKxDatabasesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListKxDatabasesResponse.struct_class = Types::ListKxDatabasesResponse
 
+    ListKxDataviewsRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    ListKxDataviewsRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location: "uri", location_name: "databaseName"))
+    ListKxDataviewsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListKxDataviewsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListKxDataviewsRequest.struct_class = Types::ListKxDataviewsRequest
+
+    ListKxDataviewsResponse.add_member(:kx_dataviews, Shapes::ShapeRef.new(shape: KxDataviews, location_name: "kxDataviews"))
+    ListKxDataviewsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListKxDataviewsResponse.struct_class = Types::ListKxDataviewsResponse
+
     ListKxEnvironmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListKxEnvironmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location: "querystring", location_name: "maxResults"))
     ListKxEnvironmentsRequest.struct_class = Types::ListKxEnvironmentsRequest
@@ -727,6 +1061,15 @@ module Aws::Finspace
     ListKxEnvironmentsResponse.add_member(:environments, Shapes::ShapeRef.new(shape: KxEnvironmentList, location_name: "environments"))
     ListKxEnvironmentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListKxEnvironmentsResponse.struct_class = Types::ListKxEnvironmentsResponse
+
+    ListKxScalingGroupsRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    ListKxScalingGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListKxScalingGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListKxScalingGroupsRequest.struct_class = Types::ListKxScalingGroupsRequest
+
+    ListKxScalingGroupsResponse.add_member(:scaling_groups, Shapes::ShapeRef.new(shape: KxScalingGroupList, location_name: "scalingGroups"))
+    ListKxScalingGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListKxScalingGroupsResponse.struct_class = Types::ListKxScalingGroupsResponse
 
     ListKxUsersRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "environmentId"))
     ListKxUsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -736,6 +1079,16 @@ module Aws::Finspace
     ListKxUsersResponse.add_member(:users, Shapes::ShapeRef.new(shape: KxUserList, location_name: "users"))
     ListKxUsersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListKxUsersResponse.struct_class = Types::ListKxUsersResponse
+
+    ListKxVolumesRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    ListKxVolumesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListKxVolumesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListKxVolumesRequest.add_member(:volume_type, Shapes::ShapeRef.new(shape: KxVolumeType, location: "querystring", location_name: "volumeType"))
+    ListKxVolumesRequest.struct_class = Types::ListKxVolumesRequest
+
+    ListKxVolumesResponse.add_member(:kx_volume_summaries, Shapes::ShapeRef.new(shape: KxVolumes, location_name: "kxVolumeSummaries"))
+    ListKxVolumesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListKxVolumesResponse.struct_class = Types::ListKxVolumesResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: FinSpaceTaggableArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -765,6 +1118,8 @@ module Aws::Finspace
 
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: SecurityGroupIdString)
 
+    SegmentConfigurationDbPathList.member = Shapes::ShapeRef.new(shape: DbPath)
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
@@ -789,6 +1144,11 @@ module Aws::Finspace
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    TickerplantLogConfiguration.add_member(:tickerplant_log_volumes, Shapes::ShapeRef.new(shape: TickerplantLogVolumes, location_name: "tickerplantLogVolumes"))
+    TickerplantLogConfiguration.struct_class = Types::TickerplantLogConfiguration
+
+    TickerplantLogVolumes.member = Shapes::ShapeRef.new(shape: VolumeName)
+
     TransitGatewayConfiguration.add_member(:transit_gateway_id, Shapes::ShapeRef.new(shape: TransitGatewayID, required: true, location_name: "transitGatewayID"))
     TransitGatewayConfiguration.add_member(:routable_cidr_space, Shapes::ShapeRef.new(shape: ValidCIDRSpace, required: true, location_name: "routableCIDRSpace"))
     TransitGatewayConfiguration.add_member(:attachment_network_acl_configuration, Shapes::ShapeRef.new(shape: NetworkACLConfiguration, location_name: "attachmentNetworkAclConfiguration"))
@@ -809,6 +1169,17 @@ module Aws::Finspace
 
     UpdateEnvironmentResponse.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "environment"))
     UpdateEnvironmentResponse.struct_class = Types::UpdateEnvironmentResponse
+
+    UpdateKxClusterCodeConfigurationRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    UpdateKxClusterCodeConfigurationRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, required: true, location: "uri", location_name: "clusterName"))
+    UpdateKxClusterCodeConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateKxClusterCodeConfigurationRequest.add_member(:code, Shapes::ShapeRef.new(shape: CodeConfiguration, required: true, location_name: "code"))
+    UpdateKxClusterCodeConfigurationRequest.add_member(:initialization_script, Shapes::ShapeRef.new(shape: InitializationScriptFilePath, location_name: "initializationScript"))
+    UpdateKxClusterCodeConfigurationRequest.add_member(:command_line_arguments, Shapes::ShapeRef.new(shape: KxCommandLineArguments, location_name: "commandLineArguments"))
+    UpdateKxClusterCodeConfigurationRequest.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: KxClusterCodeDeploymentConfiguration, location_name: "deploymentConfiguration"))
+    UpdateKxClusterCodeConfigurationRequest.struct_class = Types::UpdateKxClusterCodeConfigurationRequest
+
+    UpdateKxClusterCodeConfigurationResponse.struct_class = Types::UpdateKxClusterCodeConfigurationResponse
 
     UpdateKxClusterDatabasesRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     UpdateKxClusterDatabasesRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, required: true, location: "uri", location_name: "clusterName"))
@@ -831,10 +1202,34 @@ module Aws::Finspace
     UpdateKxDatabaseResponse.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
     UpdateKxDatabaseResponse.struct_class = Types::UpdateKxDatabaseResponse
 
+    UpdateKxDataviewRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    UpdateKxDataviewRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, required: true, location: "uri", location_name: "databaseName"))
+    UpdateKxDataviewRequest.add_member(:dataview_name, Shapes::ShapeRef.new(shape: KxDataviewName, required: true, location: "uri", location_name: "dataviewName"))
+    UpdateKxDataviewRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateKxDataviewRequest.add_member(:changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "changesetId"))
+    UpdateKxDataviewRequest.add_member(:segment_configurations, Shapes::ShapeRef.new(shape: KxDataviewSegmentConfigurationList, location_name: "segmentConfigurations"))
+    UpdateKxDataviewRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateKxDataviewRequest.struct_class = Types::UpdateKxDataviewRequest
+
+    UpdateKxDataviewResponse.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "environmentId"))
+    UpdateKxDataviewResponse.add_member(:database_name, Shapes::ShapeRef.new(shape: DatabaseName, location_name: "databaseName"))
+    UpdateKxDataviewResponse.add_member(:dataview_name, Shapes::ShapeRef.new(shape: KxDataviewName, location_name: "dataviewName"))
+    UpdateKxDataviewResponse.add_member(:az_mode, Shapes::ShapeRef.new(shape: KxAzMode, location_name: "azMode"))
+    UpdateKxDataviewResponse.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
+    UpdateKxDataviewResponse.add_member(:changeset_id, Shapes::ShapeRef.new(shape: ChangesetId, location_name: "changesetId"))
+    UpdateKxDataviewResponse.add_member(:segment_configurations, Shapes::ShapeRef.new(shape: KxDataviewSegmentConfigurationList, location_name: "segmentConfigurations"))
+    UpdateKxDataviewResponse.add_member(:active_versions, Shapes::ShapeRef.new(shape: KxDataviewActiveVersionList, location_name: "activeVersions"))
+    UpdateKxDataviewResponse.add_member(:status, Shapes::ShapeRef.new(shape: KxDataviewStatus, location_name: "status"))
+    UpdateKxDataviewResponse.add_member(:auto_update, Shapes::ShapeRef.new(shape: booleanValue, location_name: "autoUpdate"))
+    UpdateKxDataviewResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateKxDataviewResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
+    UpdateKxDataviewResponse.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
+    UpdateKxDataviewResponse.struct_class = Types::UpdateKxDataviewResponse
+
     UpdateKxEnvironmentNetworkRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "environmentId"))
     UpdateKxEnvironmentNetworkRequest.add_member(:transit_gateway_configuration, Shapes::ShapeRef.new(shape: TransitGatewayConfiguration, location_name: "transitGatewayConfiguration"))
     UpdateKxEnvironmentNetworkRequest.add_member(:custom_dns_configuration, Shapes::ShapeRef.new(shape: CustomDNSConfiguration, location_name: "customDNSConfiguration"))
-    UpdateKxEnvironmentNetworkRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    UpdateKxEnvironmentNetworkRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateKxEnvironmentNetworkRequest.struct_class = Types::UpdateKxEnvironmentNetworkRequest
 
     UpdateKxEnvironmentNetworkResponse.add_member(:name, Shapes::ShapeRef.new(shape: KxEnvironmentName, location_name: "name"))
@@ -858,7 +1253,7 @@ module Aws::Finspace
     UpdateKxEnvironmentRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "environmentId"))
     UpdateKxEnvironmentRequest.add_member(:name, Shapes::ShapeRef.new(shape: KxEnvironmentName, location_name: "name"))
     UpdateKxEnvironmentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    UpdateKxEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    UpdateKxEnvironmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateKxEnvironmentRequest.struct_class = Types::UpdateKxEnvironmentRequest
 
     UpdateKxEnvironmentResponse.add_member(:name, Shapes::ShapeRef.new(shape: KxEnvironmentName, location_name: "name"))
@@ -882,7 +1277,7 @@ module Aws::Finspace
     UpdateKxUserRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: IdType, required: true, location: "uri", location_name: "environmentId"))
     UpdateKxUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: KxUserNameString, required: true, location: "uri", location_name: "userName"))
     UpdateKxUserRequest.add_member(:iam_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "iamRole"))
-    UpdateKxUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
+    UpdateKxUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateKxUserRequest.struct_class = Types::UpdateKxUserRequest
 
     UpdateKxUserResponse.add_member(:user_name, Shapes::ShapeRef.new(shape: KxUserNameString, location_name: "userName"))
@@ -891,8 +1286,36 @@ module Aws::Finspace
     UpdateKxUserResponse.add_member(:iam_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "iamRole"))
     UpdateKxUserResponse.struct_class = Types::UpdateKxUserResponse
 
+    UpdateKxVolumeRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    UpdateKxVolumeRequest.add_member(:volume_name, Shapes::ShapeRef.new(shape: KxVolumeName, required: true, location: "uri", location_name: "volumeName"))
+    UpdateKxVolumeRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateKxVolumeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateKxVolumeRequest.add_member(:nas1_configuration, Shapes::ShapeRef.new(shape: KxNAS1Configuration, location_name: "nas1Configuration"))
+    UpdateKxVolumeRequest.struct_class = Types::UpdateKxVolumeRequest
+
+    UpdateKxVolumeResponse.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, location_name: "environmentId"))
+    UpdateKxVolumeResponse.add_member(:volume_name, Shapes::ShapeRef.new(shape: KxVolumeName, location_name: "volumeName"))
+    UpdateKxVolumeResponse.add_member(:volume_type, Shapes::ShapeRef.new(shape: KxVolumeType, location_name: "volumeType"))
+    UpdateKxVolumeResponse.add_member(:volume_arn, Shapes::ShapeRef.new(shape: KxVolumeArn, location_name: "volumeArn"))
+    UpdateKxVolumeResponse.add_member(:nas1_configuration, Shapes::ShapeRef.new(shape: KxNAS1Configuration, location_name: "nas1Configuration"))
+    UpdateKxVolumeResponse.add_member(:status, Shapes::ShapeRef.new(shape: KxVolumeStatus, location_name: "status"))
+    UpdateKxVolumeResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateKxVolumeResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: KxVolumeStatusReason, location_name: "statusReason"))
+    UpdateKxVolumeResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
+    UpdateKxVolumeResponse.add_member(:az_mode, Shapes::ShapeRef.new(shape: KxAzMode, location_name: "azMode"))
+    UpdateKxVolumeResponse.add_member(:availability_zone_ids, Shapes::ShapeRef.new(shape: AvailabilityZoneIds, location_name: "availabilityZoneIds"))
+    UpdateKxVolumeResponse.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTimestamp"))
+    UpdateKxVolumeResponse.add_member(:attached_clusters, Shapes::ShapeRef.new(shape: KxAttachedClusters, location_name: "attachedClusters"))
+    UpdateKxVolumeResponse.struct_class = Types::UpdateKxVolumeResponse
+
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
+
+    Volume.add_member(:volume_name, Shapes::ShapeRef.new(shape: VolumeName, location_name: "volumeName"))
+    Volume.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
+    Volume.struct_class = Types::Volume
+
+    Volumes.member = Shapes::ShapeRef.new(shape: Volume)
 
     VpcConfiguration.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcIdString, location_name: "vpcId"))
     VpcConfiguration.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
@@ -923,6 +1346,7 @@ module Aws::Finspace
         o.name = "CreateEnvironment"
         o.http_method = "POST"
         o.http_request_uri = "/environment"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateEnvironmentRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateEnvironmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -980,6 +1404,22 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:create_kx_dataview, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateKxDataview"
+        o.http_method = "POST"
+        o.http_request_uri = "/kx/environments/{environmentId}/databases/{databaseName}/dataviews"
+        o.input = Shapes::ShapeRef.new(shape: CreateKxDataviewRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateKxDataviewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+      end)
+
       api.add_operation(:create_kx_environment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateKxEnvironment"
         o.http_method = "POST"
@@ -993,6 +1433,22 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_kx_scaling_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateKxScalingGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/kx/environments/{environmentId}/scalingGroups"
+        o.input = Shapes::ShapeRef.new(shape: CreateKxScalingGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateKxScalingGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:create_kx_user, Seahorse::Model::Operation.new.tap do |o|
@@ -1011,10 +1467,28 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:create_kx_volume, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateKxVolume"
+        o.http_method = "POST"
+        o.http_request_uri = "/kx/environments/{environmentId}/kxvolumes"
+        o.input = Shapes::ShapeRef.new(shape: CreateKxVolumeRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateKxVolumeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_environment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteEnvironment"
         o.http_method = "DELETE"
         o.http_request_uri = "/environment/{environmentId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteEnvironmentRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteEnvironmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1053,6 +1527,20 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:delete_kx_dataview, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteKxDataview"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/kx/environments/{environmentId}/databases/{databaseName}/dataviews/{dataviewName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteKxDataviewRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteKxDataviewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:delete_kx_environment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteKxEnvironment"
         o.http_method = "DELETE"
@@ -1064,6 +1552,22 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_kx_scaling_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteKxScalingGroup"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/kx/environments/{environmentId}/scalingGroups/{scalingGroupName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteKxScalingGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteKxScalingGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_kx_user, Seahorse::Model::Operation.new.tap do |o|
@@ -1077,12 +1581,29 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_kx_volume, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteKxVolume"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/kx/environments/{environmentId}/kxvolumes/{volumeName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteKxVolumeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteKxVolumeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_environment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetEnvironment"
         o.http_method = "GET"
         o.http_request_uri = "/environment/{environmentId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetEnvironmentRequest)
         o.output = Shapes::ShapeRef.new(shape: GetEnvironmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1145,6 +1666,19 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_kx_dataview, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetKxDataview"
+        o.http_method = "GET"
+        o.http_request_uri = "/kx/environments/{environmentId}/databases/{databaseName}/dataviews/{dataviewName}"
+        o.input = Shapes::ShapeRef.new(shape: GetKxDataviewRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetKxDataviewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_kx_environment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetKxEnvironment"
         o.http_method = "GET"
@@ -1155,6 +1689,22 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:get_kx_scaling_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetKxScalingGroup"
+        o.http_method = "GET"
+        o.http_request_uri = "/kx/environments/{environmentId}/scalingGroups/{scalingGroupName}"
+        o.input = Shapes::ShapeRef.new(shape: GetKxScalingGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetKxScalingGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_kx_user, Seahorse::Model::Operation.new.tap do |o|
@@ -1170,14 +1720,31 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:get_kx_volume, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetKxVolume"
+        o.http_method = "GET"
+        o.http_request_uri = "/kx/environments/{environmentId}/kxvolumes/{volumeName}"
+        o.input = Shapes::ShapeRef.new(shape: GetKxVolumeRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetKxVolumeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:list_environments, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListEnvironments"
         o.http_method = "GET"
         o.http_request_uri = "/environment"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListEnvironmentsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListEnvironmentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:list_kx_changesets, Seahorse::Model::Operation.new.tap do |o|
@@ -1253,6 +1820,25 @@ module Aws::Finspace
         )
       end)
 
+      api.add_operation(:list_kx_dataviews, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListKxDataviews"
+        o.http_method = "GET"
+        o.http_request_uri = "/kx/environments/{environmentId}/databases/{databaseName}/dataviews"
+        o.input = Shapes::ShapeRef.new(shape: ListKxDataviewsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListKxDataviewsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_kx_environments, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListKxEnvironments"
         o.http_method = "GET"
@@ -1260,7 +1846,29 @@ module Aws::Finspace
         o.input = Shapes::ShapeRef.new(shape: ListKxEnvironmentsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListKxEnvironmentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_kx_scaling_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListKxScalingGroups"
+        o.http_method = "GET"
+        o.http_request_uri = "/kx/environments/{environmentId}/scalingGroups"
+        o.input = Shapes::ShapeRef.new(shape: ListKxScalingGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListKxScalingGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1280,6 +1888,21 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:list_kx_volumes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListKxVolumes"
+        o.http_method = "GET"
+        o.http_request_uri = "/kx/environments/{environmentId}/kxvolumes"
+        o.input = Shapes::ShapeRef.new(shape: ListKxVolumesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListKxVolumesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1319,6 +1942,7 @@ module Aws::Finspace
         o.name = "UpdateEnvironment"
         o.http_method = "PUT"
         o.http_request_uri = "/environment/{environmentId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateEnvironmentRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateEnvironmentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1326,6 +1950,21 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_kx_cluster_code_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateKxClusterCodeConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/kx/environments/{environmentId}/clusters/{clusterName}/configuration/code"
+        o.input = Shapes::ShapeRef.new(shape: UpdateKxClusterCodeConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateKxClusterCodeConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_kx_cluster_databases, Seahorse::Model::Operation.new.tap do |o|
@@ -1355,6 +1994,21 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_kx_dataview, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateKxDataview"
+        o.http_method = "PUT"
+        o.http_request_uri = "/kx/environments/{environmentId}/databases/{databaseName}/dataviews/{dataviewName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateKxDataviewRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateKxDataviewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
       end)
 
       api.add_operation(:update_kx_environment, Seahorse::Model::Operation.new.tap do |o|
@@ -1398,6 +2052,21 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_kx_volume, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateKxVolume"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/kx/environments/{environmentId}/kxvolumes/{volumeName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateKxVolumeRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateKxVolumeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
     end
 

@@ -388,8 +388,28 @@ module Aws::DLM
 
     # @!group API Operations
 
-    # Creates a policy to manage the lifecycle of the specified Amazon Web
-    # Services resources. You can create up to 100 lifecycle policies.
+    # Creates an Amazon Data Lifecycle Manager lifecycle policy. Amazon Data
+    # Lifecycle Manager supports the following policy types:
+    #
+    # * Custom EBS snapshot policy
+    #
+    # * Custom EBS-backed AMI policy
+    #
+    # * Cross-account copy event policy
+    #
+    # * Default policy for EBS snapshots
+    #
+    # * Default policy for EBS-backed AMIs
+    #
+    # For more information, see [ Default policies vs custom policies][1].
+    #
+    # If you create a default policy, you can specify the request parameters
+    # either in the request body, or in the PolicyDetails request structure,
+    # but not both.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/policy-differences.html
     #
     # @option params [required, String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role used to run the
@@ -400,13 +420,89 @@ module Aws::DLM
     #   \_-\]+$ are supported.
     #
     # @option params [required, String] :state
-    #   The desired activation state of the lifecycle policy after creation.
+    #   The activation state of the lifecycle policy after creation.
     #
-    # @option params [required, Types::PolicyDetails] :policy_details
+    # @option params [Types::PolicyDetails] :policy_details
     #   The configuration details of the lifecycle policy.
+    #
+    #   If you create a default policy, you can specify the request parameters
+    #   either in the request body, or in the PolicyDetails request structure,
+    #   but not both.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to apply to the lifecycle policy during creation.
+    #
+    # @option params [String] :default_policy
+    #   **\[Default policies only\]** Specify the type of default policy to
+    #   create.
+    #
+    #   * To create a default policy for EBS snapshots, that creates snapshots
+    #     of all volumes in the Region that do not have recent backups,
+    #     specify `VOLUME`.
+    #
+    #   * To create a default policy for EBS-backed AMIs, that creates
+    #     EBS-backed AMIs from all instances in the Region that do not have
+    #     recent backups, specify `INSTANCE`.
+    #
+    # @option params [Integer] :create_interval
+    #   **\[Default policies only\]** Specifies how often the policy should
+    #   run and create snapshots or AMIs. The creation frequency can range
+    #   from 1 to 7 days. If you do not specify a value, the default is 1.
+    #
+    #   Default: 1
+    #
+    # @option params [Integer] :retain_interval
+    #   **\[Default policies only\]** Specifies how long the policy should
+    #   retain snapshots or AMIs before deleting them. The retention period
+    #   can range from 2 to 14 days, but it must be greater than the creation
+    #   frequency to ensure that the policy retains at least 1 snapshot or AMI
+    #   at any given time. If you do not specify a value, the default is 7.
+    #
+    #   Default: 7
+    #
+    # @option params [Boolean] :copy_tags
+    #   **\[Default policies only\]** Indicates whether the policy should copy
+    #   tags from the source resource to the snapshot or AMI. If you do not
+    #   specify a value, the default is `false`.
+    #
+    #   Default: false
+    #
+    # @option params [Boolean] :extend_deletion
+    #   **\[Default policies only\]** Defines the snapshot or AMI retention
+    #   behavior for the policy if the source volume or instance is deleted,
+    #   or if the policy enters the error, disabled, or deleted state.
+    #
+    #   By default (**ExtendDeletion=false**):
+    #
+    #   * If a source resource is deleted, Amazon Data Lifecycle Manager will
+    #     continue to delete previously created snapshots or AMIs, up to but
+    #     not including the last one, based on the specified retention period.
+    #     If you want Amazon Data Lifecycle Manager to delete all snapshots or
+    #     AMIs, including the last one, specify `true`.
+    #
+    #   * If a policy enters the error, disabled, or deleted state, Amazon
+    #     Data Lifecycle Manager stops deleting snapshots and AMIs. If you
+    #     want Amazon Data Lifecycle Manager to continue deleting snapshots or
+    #     AMIs, including the last one, if the policy enters one of these
+    #     states, specify `true`.
+    #
+    #   If you enable extended deletion (**ExtendDeletion=true**), you
+    #   override both default behaviors simultaneously.
+    #
+    #   If you do not specify a value, the default is `false`.
+    #
+    #   Default: false
+    #
+    # @option params [Array<Types::CrossRegionCopyTarget>] :cross_region_copy_targets
+    #   **\[Default policies only\]** Specifies destination Regions for
+    #   snapshot or AMI copies. You can specify up to 3 destination Regions.
+    #   If you do not want to create cross-Region copies, omit this parameter.
+    #
+    # @option params [Types::Exclusions] :exclusions
+    #   **\[Default policies only\]** Specifies exclusion parameters for
+    #   volumes or instances for which you do not want to create snapshots or
+    #   AMIs. The policy will not create snapshots or AMIs for target
+    #   resources that match any of the specified exclusion parameters.
     #
     # @return [Types::CreateLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -418,7 +514,7 @@ module Aws::DLM
     #     execution_role_arn: "ExecutionRoleArn", # required
     #     description: "PolicyDescription", # required
     #     state: "ENABLED", # required, accepts ENABLED, DISABLED
-    #     policy_details: { # required
+    #     policy_details: {
     #       policy_type: "EBS_SNAPSHOT_MANAGEMENT", # accepts EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT, EVENT_BASED_POLICY
     #       resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #       resource_locations: ["CLOUD"], # accepts CLOUD, OUTPOST
@@ -450,6 +546,16 @@ module Aws::DLM
     #             interval_unit: "HOURS", # accepts HOURS
     #             times: ["Time"],
     #             cron_expression: "CronExpression",
+    #             scripts: [
+    #               {
+    #                 stages: ["PRE"], # accepts PRE, POST
+    #                 execution_handler_service: "AWS_SYSTEMS_MANAGER", # accepts AWS_SYSTEMS_MANAGER
+    #                 execution_handler: "ExecutionHandler", # required
+    #                 execute_operation_on_script_failure: false,
+    #                 execution_timeout: 1,
+    #                 maximum_retry_count: 1,
+    #               },
+    #             ],
     #           },
     #           retain_rule: {
     #             count: 1,
@@ -538,9 +644,50 @@ module Aws::DLM
     #           ],
     #         },
     #       ],
+    #       policy_language: "SIMPLIFIED", # accepts SIMPLIFIED, STANDARD
+    #       resource_type: "VOLUME", # accepts VOLUME, INSTANCE
+    #       create_interval: 1,
+    #       retain_interval: 1,
+    #       copy_tags: false,
+    #       cross_region_copy_targets: [
+    #         {
+    #           target_region: "TargetRegion",
+    #         },
+    #       ],
+    #       extend_deletion: false,
+    #       exclusions: {
+    #         exclude_boot_volumes: false,
+    #         exclude_volume_types: ["VolumeTypeValues"],
+    #         exclude_tags: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     default_policy: "VOLUME", # accepts VOLUME, INSTANCE
+    #     create_interval: 1,
+    #     retain_interval: 1,
+    #     copy_tags: false,
+    #     extend_deletion: false,
+    #     cross_region_copy_targets: [
+    #       {
+    #         target_region: "TargetRegion",
+    #       },
+    #     ],
+    #     exclusions: {
+    #       exclude_boot_volumes: false,
+    #       exclude_volume_types: ["VolumeTypeValues"],
+    #       exclude_tags: [
+    #         {
+    #           key: "String", # required
+    #           value: "String", # required
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -590,7 +737,12 @@ module Aws::DLM
     # Gets summary information about all or the specified data lifecycle
     # policies.
     #
-    # To get complete information about a policy, use GetLifecyclePolicy.
+    # To get complete information about a policy, use
+    # [GetLifecyclePolicy][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/dlm/latest/APIReference/API_GetLifecyclePolicy.html
     #
     # @option params [Array<String>] :policy_ids
     #   The identifiers of the data lifecycle policies.
@@ -614,6 +766,16 @@ module Aws::DLM
     #   These user-defined tags are added in addition to the Amazon Web
     #   Services-added lifecycle tags.
     #
+    # @option params [String] :default_policy_type
+    #   **\[Default policies only\]** Specifies the type of default policy to
+    #   get. Specify one of the following:
+    #
+    #   * `VOLUME` - To get only the default policy for EBS snapshots
+    #
+    #   * `INSTANCE` - To get only the default policy for EBS-backed AMIs
+    #
+    #   * `ALL` - To get all default policies
+    #
     # @return [Types::GetLifecyclePoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetLifecyclePoliciesResponse#policies #policies} => Array&lt;Types::LifecyclePolicySummary&gt;
@@ -626,6 +788,7 @@ module Aws::DLM
     #     resource_types: ["VOLUME"], # accepts VOLUME, INSTANCE
     #     target_tags: ["TagFilter"],
     #     tags_to_add: ["TagFilter"],
+    #     default_policy_type: "VOLUME", # accepts VOLUME, INSTANCE, ALL
     #   })
     #
     # @example Response structure
@@ -637,6 +800,7 @@ module Aws::DLM
     #   resp.policies[0].tags #=> Hash
     #   resp.policies[0].tags["TagKey"] #=> String
     #   resp.policies[0].policy_type #=> String, one of "EBS_SNAPSHOT_MANAGEMENT", "IMAGE_MANAGEMENT", "EVENT_BASED_POLICY"
+    #   resp.policies[0].default_policy #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/GetLifecyclePolicies AWS API Documentation
     #
@@ -694,6 +858,14 @@ module Aws::DLM
     #   resp.policy.policy_details.schedules[0].create_rule.times #=> Array
     #   resp.policy.policy_details.schedules[0].create_rule.times[0] #=> String
     #   resp.policy.policy_details.schedules[0].create_rule.cron_expression #=> String
+    #   resp.policy.policy_details.schedules[0].create_rule.scripts #=> Array
+    #   resp.policy.policy_details.schedules[0].create_rule.scripts[0].stages #=> Array
+    #   resp.policy.policy_details.schedules[0].create_rule.scripts[0].stages[0] #=> String, one of "PRE", "POST"
+    #   resp.policy.policy_details.schedules[0].create_rule.scripts[0].execution_handler_service #=> String, one of "AWS_SYSTEMS_MANAGER"
+    #   resp.policy.policy_details.schedules[0].create_rule.scripts[0].execution_handler #=> String
+    #   resp.policy.policy_details.schedules[0].create_rule.scripts[0].execute_operation_on_script_failure #=> Boolean
+    #   resp.policy.policy_details.schedules[0].create_rule.scripts[0].execution_timeout #=> Integer
+    #   resp.policy.policy_details.schedules[0].create_rule.scripts[0].maximum_retry_count #=> Integer
     #   resp.policy.policy_details.schedules[0].retain_rule.count #=> Integer
     #   resp.policy.policy_details.schedules[0].retain_rule.interval #=> Integer
     #   resp.policy.policy_details.schedules[0].retain_rule.interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
@@ -741,9 +913,24 @@ module Aws::DLM
     #   resp.policy.policy_details.actions[0].cross_region_copy[0].encryption_configuration.cmk_arn #=> String
     #   resp.policy.policy_details.actions[0].cross_region_copy[0].retain_rule.interval #=> Integer
     #   resp.policy.policy_details.actions[0].cross_region_copy[0].retain_rule.interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
+    #   resp.policy.policy_details.policy_language #=> String, one of "SIMPLIFIED", "STANDARD"
+    #   resp.policy.policy_details.resource_type #=> String, one of "VOLUME", "INSTANCE"
+    #   resp.policy.policy_details.create_interval #=> Integer
+    #   resp.policy.policy_details.retain_interval #=> Integer
+    #   resp.policy.policy_details.copy_tags #=> Boolean
+    #   resp.policy.policy_details.cross_region_copy_targets #=> Array
+    #   resp.policy.policy_details.cross_region_copy_targets[0].target_region #=> String
+    #   resp.policy.policy_details.extend_deletion #=> Boolean
+    #   resp.policy.policy_details.exclusions.exclude_boot_volumes #=> Boolean
+    #   resp.policy.policy_details.exclusions.exclude_volume_types #=> Array
+    #   resp.policy.policy_details.exclusions.exclude_volume_types[0] #=> String
+    #   resp.policy.policy_details.exclusions.exclude_tags #=> Array
+    #   resp.policy.policy_details.exclusions.exclude_tags[0].key #=> String
+    #   resp.policy.policy_details.exclusions.exclude_tags[0].value #=> String
     #   resp.policy.tags #=> Hash
     #   resp.policy.tags["TagKey"] #=> String
     #   resp.policy.policy_arn #=> String
+    #   resp.policy.default_policy #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/GetLifecyclePolicy AWS API Documentation
     #
@@ -863,6 +1050,57 @@ module Aws::DLM
     #   The configuration of the lifecycle policy. You cannot update the
     #   policy type or the resource type.
     #
+    # @option params [Integer] :create_interval
+    #   **\[Default policies only\]** Specifies how often the policy should
+    #   run and create snapshots or AMIs. The creation frequency can range
+    #   from 1 to 7 days.
+    #
+    # @option params [Integer] :retain_interval
+    #   **\[Default policies only\]** Specifies how long the policy should
+    #   retain snapshots or AMIs before deleting them. The retention period
+    #   can range from 2 to 14 days, but it must be greater than the creation
+    #   frequency to ensure that the policy retains at least 1 snapshot or AMI
+    #   at any given time.
+    #
+    # @option params [Boolean] :copy_tags
+    #   **\[Default policies only\]** Indicates whether the policy should copy
+    #   tags from the source resource to the snapshot or AMI.
+    #
+    # @option params [Boolean] :extend_deletion
+    #   **\[Default policies only\]** Defines the snapshot or AMI retention
+    #   behavior for the policy if the source volume or instance is deleted,
+    #   or if the policy enters the error, disabled, or deleted state.
+    #
+    #   By default (**ExtendDeletion=false**):
+    #
+    #   * If a source resource is deleted, Amazon Data Lifecycle Manager will
+    #     continue to delete previously created snapshots or AMIs, up to but
+    #     not including the last one, based on the specified retention period.
+    #     If you want Amazon Data Lifecycle Manager to delete all snapshots or
+    #     AMIs, including the last one, specify `true`.
+    #
+    #   * If a policy enters the error, disabled, or deleted state, Amazon
+    #     Data Lifecycle Manager stops deleting snapshots and AMIs. If you
+    #     want Amazon Data Lifecycle Manager to continue deleting snapshots or
+    #     AMIs, including the last one, if the policy enters one of these
+    #     states, specify `true`.
+    #
+    #   If you enable extended deletion (**ExtendDeletion=true**), you
+    #   override both default behaviors simultaneously.
+    #
+    #   Default: false
+    #
+    # @option params [Array<Types::CrossRegionCopyTarget>] :cross_region_copy_targets
+    #   **\[Default policies only\]** Specifies destination Regions for
+    #   snapshot or AMI copies. You can specify up to 3 destination Regions.
+    #   If you do not want to create cross-Region copies, omit this parameter.
+    #
+    # @option params [Types::Exclusions] :exclusions
+    #   **\[Default policies only\]** Specifies exclusion parameters for
+    #   volumes or instances for which you do not want to create snapshots or
+    #   AMIs. The policy will not create snapshots or AMIs for target
+    #   resources that match any of the specified exclusion parameters.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -904,6 +1142,16 @@ module Aws::DLM
     #             interval_unit: "HOURS", # accepts HOURS
     #             times: ["Time"],
     #             cron_expression: "CronExpression",
+    #             scripts: [
+    #               {
+    #                 stages: ["PRE"], # accepts PRE, POST
+    #                 execution_handler_service: "AWS_SYSTEMS_MANAGER", # accepts AWS_SYSTEMS_MANAGER
+    #                 execution_handler: "ExecutionHandler", # required
+    #                 execute_operation_on_script_failure: false,
+    #                 execution_timeout: 1,
+    #                 maximum_retry_count: 1,
+    #               },
+    #             ],
     #           },
     #           retain_rule: {
     #             count: 1,
@@ -992,6 +1240,46 @@ module Aws::DLM
     #           ],
     #         },
     #       ],
+    #       policy_language: "SIMPLIFIED", # accepts SIMPLIFIED, STANDARD
+    #       resource_type: "VOLUME", # accepts VOLUME, INSTANCE
+    #       create_interval: 1,
+    #       retain_interval: 1,
+    #       copy_tags: false,
+    #       cross_region_copy_targets: [
+    #         {
+    #           target_region: "TargetRegion",
+    #         },
+    #       ],
+    #       extend_deletion: false,
+    #       exclusions: {
+    #         exclude_boot_volumes: false,
+    #         exclude_volume_types: ["VolumeTypeValues"],
+    #         exclude_tags: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     create_interval: 1,
+    #     retain_interval: 1,
+    #     copy_tags: false,
+    #     extend_deletion: false,
+    #     cross_region_copy_targets: [
+    #       {
+    #         target_region: "TargetRegion",
+    #       },
+    #     ],
+    #     exclusions: {
+    #       exclude_boot_volumes: false,
+    #       exclude_volume_types: ["VolumeTypeValues"],
+    #       exclude_tags: [
+    #         {
+    #           key: "String", # required
+    #           value: "String", # required
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -1017,7 +1305,7 @@ module Aws::DLM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dlm'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2023-11-17)
+------------------
+
+* Feature - Improves support for configuring RefreshToken and TokenExchange grants on applications.
+
+1.31.0 (2023-11-16)
+------------------
+
+* Feature - Instances bound to a single AWS account, API operations for managing instances and applications, and assignments to applications are now supported. Trusted identity propagation is also supported, with new API operations for managing trusted token issuers and application grants and scopes.
+
 1.30.0 (2023-09-27)
 ------------------
 

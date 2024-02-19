@@ -1,0 +1,114 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::LicenseManagerLinuxSubscriptions
+  module Types
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor operator: ("Equal" | "NotEqual" | "Contains")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetServiceSettingsRequest < Aws::EmptyStructure
+    end
+
+    class GetServiceSettingsResponse
+      attr_accessor home_regions: ::Array[::String]
+      attr_accessor linux_subscriptions_discovery: ("Enabled" | "Disabled")
+      attr_accessor linux_subscriptions_discovery_settings: Types::LinuxSubscriptionsDiscoverySettings
+      attr_accessor status: ("InProgress" | "Completed" | "Successful" | "Failed")
+      attr_accessor status_message: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Instance
+      attr_accessor account_id: ::String
+      attr_accessor ami_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor last_updated_time: ::String
+      attr_accessor product_code: ::Array[::String]
+      attr_accessor region: ::String
+      attr_accessor status: ::String
+      attr_accessor subscription_name: ::String
+      attr_accessor usage_operation: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LinuxSubscriptionsDiscoverySettings
+      attr_accessor organization_integration: ("Enabled" | "Disabled")
+      attr_accessor source_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListLinuxSubscriptionInstancesRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLinuxSubscriptionInstancesResponse
+      attr_accessor instances: ::Array[Types::Instance]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLinuxSubscriptionsRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLinuxSubscriptionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor subscriptions: ::Array[Types::Subscription]
+      SENSITIVE: []
+    end
+
+    class Subscription
+      attr_accessor instance_count: ::Integer
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateServiceSettingsRequest
+      attr_accessor allow_update: bool
+      attr_accessor linux_subscriptions_discovery: ("Enabled" | "Disabled")
+      attr_accessor linux_subscriptions_discovery_settings: Types::LinuxSubscriptionsDiscoverySettings
+      SENSITIVE: []
+    end
+
+    class UpdateServiceSettingsResponse
+      attr_accessor home_regions: ::Array[::String]
+      attr_accessor linux_subscriptions_discovery: ("Enabled" | "Disabled")
+      attr_accessor linux_subscriptions_discovery_settings: Types::LinuxSubscriptionsDiscoverySettings
+      attr_accessor status: ("InProgress" | "Completed" | "Successful" | "Failed")
+      attr_accessor status_message: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

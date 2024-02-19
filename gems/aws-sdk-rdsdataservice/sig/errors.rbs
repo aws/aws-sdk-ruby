@@ -1,0 +1,59 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDSDataService
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class BadRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DatabaseErrorException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DatabaseNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DatabaseUnavailableException < ::Aws::Errors::ServiceError
+      end
+      class ForbiddenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class HttpEndpointNotEnabledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalServerErrorException < ::Aws::Errors::ServiceError
+      end
+      class InvalidSecretException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SecretsErrorException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceUnavailableError < ::Aws::Errors::ServiceError
+      end
+      class StatementTimeoutException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def db_connection_id: () -> ::String
+      end
+      class TransactionNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedResultException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

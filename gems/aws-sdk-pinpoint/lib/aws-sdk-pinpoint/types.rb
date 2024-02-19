@@ -2182,7 +2182,7 @@ module Aws::Pinpoint
     #   The maximum number of messages that a campaign can send each second.
     #   For an application, this value specifies the default limit for the
     #   number of messages that campaigns can send each second. The minimum
-    #   value is 50. The maximum value is 20,000.
+    #   value is 1. The maximum value is 20,000.
     #   @return [Integer]
     #
     # @!attribute [rw] total
@@ -4581,7 +4581,9 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier for the endpoint in the context of the batch.
+    #   The case insensitive unique identifier for the endpoint in the
+    #   context of the batch. The identifier can't contain `$`, `\{` or
+    #   `\}`.
     #   @return [String]
     #
     # @!attribute [rw] location

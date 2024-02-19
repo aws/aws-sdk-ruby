@@ -1,0 +1,68 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Inspector
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def error_code: () -> ::String
+        def can_retry: () -> ::String
+      end
+      class AgentsAlreadyRunningAssessmentException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def agents: () -> ::String
+        def agents_truncated: () -> ::String
+        def can_retry: () -> ::String
+      end
+      class AssessmentRunInProgressException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def assessment_run_arns: () -> ::String
+        def assessment_run_arns_truncated: () -> ::String
+        def can_retry: () -> ::String
+      end
+      class InternalException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def can_retry: () -> ::String
+      end
+      class InvalidCrossAccountRoleException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def error_code: () -> ::String
+        def can_retry: () -> ::String
+      end
+      class InvalidInputException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def error_code: () -> ::String
+        def can_retry: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def error_code: () -> ::String
+        def can_retry: () -> ::String
+      end
+      class NoSuchEntityException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def error_code: () -> ::String
+        def can_retry: () -> ::String
+      end
+      class PreviewGenerationInProgressException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceTemporarilyUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def can_retry: () -> ::String
+      end
+      class UnsupportedFeatureException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def can_retry: () -> ::String
+      end
+    end
+  end
+end

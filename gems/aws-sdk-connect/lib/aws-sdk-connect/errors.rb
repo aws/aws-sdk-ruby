@@ -28,6 +28,7 @@ module Aws::Connect
   #
   # ## Error Classes
   # * {AccessDeniedException}
+  # * {ConflictException}
   # * {ContactFlowNotPublishedException}
   # * {ContactNotFoundException}
   # * {DestinationNotAllowedException}
@@ -41,6 +42,7 @@ module Aws::Connect
   # * {LimitExceededException}
   # * {MaximumResultReturnedException}
   # * {OutboundContactNotPermittedException}
+  # * {OutputTypeNotFoundException}
   # * {PropertyValidationException}
   # * {ResourceConflictException}
   # * {ResourceInUseException}
@@ -62,6 +64,21 @@ module Aws::Connect
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Connect::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Connect::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -257,6 +274,21 @@ module Aws::Connect
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Connect::Types::OutboundContactNotPermittedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class OutputTypeNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Connect::Types::OutputTypeNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

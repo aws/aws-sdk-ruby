@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2024-02-16)
+------------------
+
+* Feature - This release adds support for Data Message Extraction for decompressed CloudWatch logs, and to use a custom file extension or time zone for S3 destinations.
+
+1.63.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.62.0 (2024-01-18)
+------------------
+
+* Feature - Allow support for Snowflake as a Kinesis Data Firehose delivery destination.
+
+1.61.0 (2023-12-14)
+------------------
+
+* Feature - This release, 1) adds configurable buffering hints for the Splunk destination, and 2) reduces the minimum configurable buffering interval for supported destinations
+
+1.60.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.59.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.58.0 (2023-09-27)
 ------------------
 

@@ -1,0 +1,1281 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IoTFleetWise
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Actuator
+      attr_accessor fully_qualified_name: ::String
+      attr_accessor data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY")
+      attr_accessor description: ::String
+      attr_accessor unit: ::String
+      attr_accessor allowed_values: ::Array[::String]
+      attr_accessor min: ::Float
+      attr_accessor max: ::Float
+      attr_accessor assigned_value: ::String
+      attr_accessor deprecation_message: ::String
+      attr_accessor comment: ::String
+      attr_accessor struct_fully_qualified_name: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateVehicleFleetRequest
+      attr_accessor vehicle_name: ::String
+      attr_accessor fleet_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateVehicleFleetResponse < Aws::EmptyStructure
+    end
+
+    class Attribute
+      attr_accessor fully_qualified_name: ::String
+      attr_accessor data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY")
+      attr_accessor description: ::String
+      attr_accessor unit: ::String
+      attr_accessor allowed_values: ::Array[::String]
+      attr_accessor min: ::Float
+      attr_accessor max: ::Float
+      attr_accessor assigned_value: ::String
+      attr_accessor default_value: ::String
+      attr_accessor deprecation_message: ::String
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateVehicleRequest
+      attr_accessor vehicles: ::Array[Types::CreateVehicleRequestItem]
+      SENSITIVE: []
+    end
+
+    class BatchCreateVehicleResponse
+      attr_accessor vehicles: ::Array[Types::CreateVehicleResponseItem]
+      attr_accessor errors: ::Array[Types::CreateVehicleError]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateVehicleRequest
+      attr_accessor vehicles: ::Array[Types::UpdateVehicleRequestItem]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateVehicleResponse
+      attr_accessor vehicles: ::Array[Types::UpdateVehicleResponseItem]
+      attr_accessor errors: ::Array[Types::UpdateVehicleError]
+      SENSITIVE: []
+    end
+
+    class Branch
+      attr_accessor fully_qualified_name: ::String
+      attr_accessor description: ::String
+      attr_accessor deprecation_message: ::String
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class CampaignSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor signal_catalog_arn: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor status: ("CREATING" | "WAITING_FOR_APPROVAL" | "RUNNING" | "SUSPENDED")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CanDbcDefinition
+      attr_accessor network_interface: ::String
+      attr_accessor can_dbc_files: ::Array[::String]
+      attr_accessor signals_map: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CanInterface
+      attr_accessor name: ::String
+      attr_accessor protocol_name: ::String
+      attr_accessor protocol_version: ::String
+      SENSITIVE: []
+    end
+
+    class CanSignal
+      attr_accessor message_id: ::Integer
+      attr_accessor is_big_endian: bool
+      attr_accessor is_signed: bool
+      attr_accessor start_bit: ::Integer
+      attr_accessor offset: ::Float
+      attr_accessor factor: ::Float
+      attr_accessor length: ::Integer
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogDeliveryOptions
+      attr_accessor log_type: ("OFF" | "ERROR")
+      attr_accessor log_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class CollectionScheme
+      attr_accessor time_based_collection_scheme: Types::TimeBasedCollectionScheme
+      attr_accessor condition_based_collection_scheme: Types::ConditionBasedCollectionScheme
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TimeBasedCollectionScheme < CollectionScheme
+      end
+      class ConditionBasedCollectionScheme < CollectionScheme
+      end
+      class Unknown < CollectionScheme
+      end
+    end
+
+    class ConditionBasedCollectionScheme
+      attr_accessor expression: ::String
+      attr_accessor minimum_trigger_interval_ms: ::Integer
+      attr_accessor trigger_mode: ("ALWAYS" | "RISING_EDGE")
+      attr_accessor condition_language_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCampaignRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor signal_catalog_arn: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor expiry_time: ::Time
+      attr_accessor post_trigger_collection_duration: ::Integer
+      attr_accessor diagnostics_mode: ("OFF" | "SEND_ACTIVE_DTCS")
+      attr_accessor spooling_mode: ("OFF" | "TO_DISK")
+      attr_accessor compression: ("OFF" | "SNAPPY")
+      attr_accessor priority: ::Integer
+      attr_accessor signals_to_collect: ::Array[Types::SignalInformation]
+      attr_accessor collection_scheme: Types::CollectionScheme
+      attr_accessor data_extra_dimensions: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor data_destination_configs: ::Array[Types::DataDestinationConfig]
+      SENSITIVE: []
+    end
+
+    class CreateCampaignResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDecoderManifestRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor model_manifest_arn: ::String
+      attr_accessor signal_decoders: ::Array[Types::SignalDecoder]
+      attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDecoderManifestResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFleetRequest
+      attr_accessor fleet_id: ::String
+      attr_accessor description: ::String
+      attr_accessor signal_catalog_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateFleetResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateModelManifestRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor nodes: ::Array[::String]
+      attr_accessor signal_catalog_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateModelManifestResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSignalCatalogRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor nodes: ::Array[Types::Node]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSignalCatalogResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVehicleError
+      attr_accessor vehicle_name: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVehicleRequest
+      attr_accessor vehicle_name: ::String
+      attr_accessor model_manifest_arn: ::String
+      attr_accessor decoder_manifest_arn: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor association_behavior: ("CreateIotThing" | "ValidateIotThingExists")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateVehicleRequestItem
+      attr_accessor vehicle_name: ::String
+      attr_accessor model_manifest_arn: ::String
+      attr_accessor decoder_manifest_arn: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor association_behavior: ("CreateIotThing" | "ValidateIotThingExists")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateVehicleResponse
+      attr_accessor vehicle_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor thing_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVehicleResponseItem
+      attr_accessor vehicle_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor thing_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomProperty
+      attr_accessor fully_qualified_name: ::String
+      attr_accessor data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY")
+      attr_accessor data_encoding: ("BINARY" | "TYPED")
+      attr_accessor description: ::String
+      attr_accessor deprecation_message: ::String
+      attr_accessor comment: ::String
+      attr_accessor struct_fully_qualified_name: ::String
+      SENSITIVE: []
+    end
+
+    class CustomStruct
+      attr_accessor fully_qualified_name: ::String
+      attr_accessor description: ::String
+      attr_accessor deprecation_message: ::String
+      attr_accessor comment: ::String
+      SENSITIVE: []
+    end
+
+    class DataDestinationConfig
+      attr_accessor s3_config: Types::S3Config
+      attr_accessor timestream_config: Types::TimestreamConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3Config < DataDestinationConfig
+      end
+      class TimestreamConfig < DataDestinationConfig
+      end
+      class Unknown < DataDestinationConfig
+      end
+    end
+
+    class DecoderManifestSummary
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor model_manifest_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE" | "DRAFT" | "INVALID" | "VALIDATING")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DecoderManifestValidationException
+      attr_accessor invalid_signals: ::Array[Types::InvalidSignalDecoder]
+      attr_accessor invalid_network_interfaces: ::Array[Types::InvalidNetworkInterface]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCampaignRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCampaignResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDecoderManifestRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDecoderManifestResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFleetRequest
+      attr_accessor fleet_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFleetResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteModelManifestRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteModelManifestResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSignalCatalogRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSignalCatalogResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVehicleRequest
+      attr_accessor vehicle_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVehicleResponse
+      attr_accessor vehicle_name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateVehicleFleetRequest
+      attr_accessor vehicle_name: ::String
+      attr_accessor fleet_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateVehicleFleetResponse < Aws::EmptyStructure
+    end
+
+    class FleetSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor signal_catalog_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class FormattedVss
+      attr_accessor vss_json: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class VssJson < FormattedVss
+      end
+      class Unknown < FormattedVss
+      end
+    end
+
+    class GetCampaignRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCampaignResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor signal_catalog_arn: ::String
+      attr_accessor target_arn: ::String
+      attr_accessor status: ("CREATING" | "WAITING_FOR_APPROVAL" | "RUNNING" | "SUSPENDED")
+      attr_accessor start_time: ::Time
+      attr_accessor expiry_time: ::Time
+      attr_accessor post_trigger_collection_duration: ::Integer
+      attr_accessor diagnostics_mode: ("OFF" | "SEND_ACTIVE_DTCS")
+      attr_accessor spooling_mode: ("OFF" | "TO_DISK")
+      attr_accessor compression: ("OFF" | "SNAPPY")
+      attr_accessor priority: ::Integer
+      attr_accessor signals_to_collect: ::Array[Types::SignalInformation]
+      attr_accessor collection_scheme: Types::CollectionScheme
+      attr_accessor data_extra_dimensions: ::Array[::String]
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor data_destination_configs: ::Array[Types::DataDestinationConfig]
+      SENSITIVE: []
+    end
+
+    class GetDecoderManifestRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDecoderManifestResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor model_manifest_arn: ::String
+      attr_accessor status: ("ACTIVE" | "DRAFT" | "INVALID" | "VALIDATING")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetEncryptionConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetEncryptionConfigurationResponse
+      attr_accessor kms_key_id: ::String
+      attr_accessor encryption_status: ("PENDING" | "SUCCESS" | "FAILURE")
+      attr_accessor encryption_type: ("KMS_BASED_ENCRYPTION" | "FLEETWISE_DEFAULT_ENCRYPTION")
+      attr_accessor error_message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetFleetRequest
+      attr_accessor fleet_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFleetResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor signal_catalog_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetLoggingOptionsRequest < Aws::EmptyStructure
+    end
+
+    class GetLoggingOptionsResponse
+      attr_accessor cloud_watch_log_delivery: Types::CloudWatchLogDeliveryOptions
+      SENSITIVE: []
+    end
+
+    class GetModelManifestRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetModelManifestResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor signal_catalog_arn: ::String
+      attr_accessor status: ("ACTIVE" | "DRAFT" | "INVALID" | "VALIDATING")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetRegisterAccountStatusRequest < Aws::EmptyStructure
+    end
+
+    class GetRegisterAccountStatusResponse
+      attr_accessor customer_account_id: ::String
+      attr_accessor account_status: ("REGISTRATION_PENDING" | "REGISTRATION_SUCCESS" | "REGISTRATION_FAILURE")
+      attr_accessor timestream_registration_response: Types::TimestreamRegistrationResponse
+      attr_accessor iam_registration_response: Types::IamRegistrationResponse
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetSignalCatalogRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetSignalCatalogResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor node_counts: Types::NodeCounts
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetVehicleRequest
+      attr_accessor vehicle_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetVehicleResponse
+      attr_accessor vehicle_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor model_manifest_arn: ::String
+      attr_accessor decoder_manifest_arn: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetVehicleStatusRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor vehicle_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetVehicleStatusResponse
+      attr_accessor campaigns: ::Array[Types::VehicleStatus]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class IamRegistrationResponse
+      attr_accessor role_arn: ::String
+      attr_accessor registration_status: ("REGISTRATION_PENDING" | "REGISTRATION_SUCCESS" | "REGISTRATION_FAILURE")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class IamResources
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ImportDecoderManifestRequest
+      attr_accessor name: ::String
+      attr_accessor network_file_definitions: ::Array[Types::NetworkFileDefinition]
+      SENSITIVE: []
+    end
+
+    class ImportDecoderManifestResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ImportSignalCatalogRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor vss: Types::FormattedVss
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ImportSignalCatalogResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class InvalidNetworkInterface
+      attr_accessor interface_id: ::String
+      attr_accessor reason: ("DUPLICATE_NETWORK_INTERFACE" | "CONFLICTING_NETWORK_INTERFACE" | "NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS" | "CAN_NETWORK_INTERFACE_INFO_IS_NULL" | "OBD_NETWORK_INTERFACE_INFO_IS_NULL" | "NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS" | "VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL")
+      SENSITIVE: []
+    end
+
+    class InvalidNodeException
+      attr_accessor invalid_nodes: ::Array[Types::Node]
+      attr_accessor reason: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSignal
+      attr_accessor name: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSignalDecoder
+      attr_accessor name: ::String
+      attr_accessor reason: ("DUPLICATE_SIGNAL" | "CONFLICTING_SIGNAL" | "SIGNAL_TO_ADD_ALREADY_EXISTS" | "SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE" | "NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE" | "SIGNAL_NOT_IN_MODEL" | "CAN_SIGNAL_INFO_IS_NULL" | "OBD_SIGNAL_INFO_IS_NULL" | "NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL" | "MESSAGE_SIGNAL_INFO_IS_NULL" | "SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE" | "STRUCT_SIZE_MISMATCH" | "NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL" | "SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG" | "EMPTY_MESSAGE_SIGNAL")
+      attr_accessor hint: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSignalsException
+      attr_accessor message: ::String
+      attr_accessor invalid_signals: ::Array[Types::InvalidSignal]
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListCampaignsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class ListCampaignsResponse
+      attr_accessor campaign_summaries: ::Array[Types::CampaignSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDecoderManifestNetworkInterfacesRequest
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDecoderManifestNetworkInterfacesResponse
+      attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDecoderManifestSignalsRequest
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDecoderManifestSignalsResponse
+      attr_accessor signal_decoders: ::Array[Types::SignalDecoder]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDecoderManifestsRequest
+      attr_accessor model_manifest_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDecoderManifestsResponse
+      attr_accessor summaries: ::Array[Types::DecoderManifestSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFleetsForVehicleRequest
+      attr_accessor vehicle_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFleetsForVehicleResponse
+      attr_accessor fleets: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFleetsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFleetsResponse
+      attr_accessor fleet_summaries: ::Array[Types::FleetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListModelManifestNodesRequest
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListModelManifestNodesResponse
+      attr_accessor nodes: ::Array[Types::Node]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListModelManifestsRequest
+      attr_accessor signal_catalog_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListModelManifestsResponse
+      attr_accessor summaries: ::Array[Types::ModelManifestSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSignalCatalogNodesRequest
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor signal_node_type: ("SENSOR" | "ACTUATOR" | "ATTRIBUTE" | "BRANCH" | "CUSTOM_STRUCT" | "CUSTOM_PROPERTY")
+      SENSITIVE: []
+    end
+
+    class ListSignalCatalogNodesResponse
+      attr_accessor nodes: ::Array[Types::Node]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSignalCatalogsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSignalCatalogsResponse
+      attr_accessor summaries: ::Array[Types::SignalCatalogSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListVehiclesInFleetRequest
+      attr_accessor fleet_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListVehiclesInFleetResponse
+      attr_accessor vehicles: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVehiclesRequest
+      attr_accessor model_manifest_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListVehiclesResponse
+      attr_accessor vehicle_summaries: ::Array[Types::VehicleSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MessageSignal
+      attr_accessor topic_name: ::String
+      attr_accessor structured_message: Types::StructuredMessage
+      SENSITIVE: []
+    end
+
+    class ModelManifestSummary
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor signal_catalog_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE" | "DRAFT" | "INVALID" | "VALIDATING")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class NetworkFileDefinition
+      attr_accessor can_dbc: Types::CanDbcDefinition
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CanDbc < NetworkFileDefinition
+      end
+      class Unknown < NetworkFileDefinition
+      end
+    end
+
+    class NetworkInterface
+      attr_accessor interface_id: ::String
+      attr_accessor type: ("CAN_INTERFACE" | "OBD_INTERFACE" | "VEHICLE_MIDDLEWARE")
+      attr_accessor can_interface: Types::CanInterface
+      attr_accessor obd_interface: Types::ObdInterface
+      attr_accessor vehicle_middleware: Types::VehicleMiddleware
+      SENSITIVE: []
+    end
+
+    class Node
+      attr_accessor branch: Types::Branch
+      attr_accessor sensor: Types::Sensor
+      attr_accessor actuator: Types::Actuator
+      attr_accessor attribute: Types::Attribute
+      attr_accessor struct: Types::CustomStruct
+      attr_accessor property: Types::CustomProperty
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Branch < Node
+      end
+      class Sensor < Node
+      end
+      class Actuator < Node
+      end
+      class Attribute < Node
+      end
+      class Struct < Node
+      end
+      class Property < Node
+      end
+      class Unknown < Node
+      end
+    end
+
+    class NodeCounts
+      attr_accessor total_nodes: ::Integer
+      attr_accessor total_branches: ::Integer
+      attr_accessor total_sensors: ::Integer
+      attr_accessor total_attributes: ::Integer
+      attr_accessor total_actuators: ::Integer
+      attr_accessor total_structs: ::Integer
+      attr_accessor total_properties: ::Integer
+      SENSITIVE: []
+    end
+
+    class ObdInterface
+      attr_accessor name: ::String
+      attr_accessor request_message_id: ::Integer
+      attr_accessor obd_standard: ::String
+      attr_accessor pid_request_interval_seconds: ::Integer
+      attr_accessor dtc_request_interval_seconds: ::Integer
+      attr_accessor use_extended_ids: bool
+      attr_accessor has_transmission_ecu: bool
+      SENSITIVE: []
+    end
+
+    class ObdSignal
+      attr_accessor pid_response_length: ::Integer
+      attr_accessor service_mode: ::Integer
+      attr_accessor pid: ::Integer
+      attr_accessor scaling: ::Float
+      attr_accessor offset: ::Float
+      attr_accessor start_byte: ::Integer
+      attr_accessor byte_length: ::Integer
+      attr_accessor bit_right_shift: ::Integer
+      attr_accessor bit_mask_length: ::Integer
+      SENSITIVE: []
+    end
+
+    class PrimitiveMessageDefinition
+      attr_accessor ros2_primitive_message_definition: Types::ROS2PrimitiveMessageDefinition
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Ros2PrimitiveMessageDefinition < PrimitiveMessageDefinition
+      end
+      class Unknown < PrimitiveMessageDefinition
+      end
+    end
+
+    class PutEncryptionConfigurationRequest
+      attr_accessor kms_key_id: ::String
+      attr_accessor encryption_type: ("KMS_BASED_ENCRYPTION" | "FLEETWISE_DEFAULT_ENCRYPTION")
+      SENSITIVE: []
+    end
+
+    class PutEncryptionConfigurationResponse
+      attr_accessor kms_key_id: ::String
+      attr_accessor encryption_status: ("PENDING" | "SUCCESS" | "FAILURE")
+      attr_accessor encryption_type: ("KMS_BASED_ENCRYPTION" | "FLEETWISE_DEFAULT_ENCRYPTION")
+      SENSITIVE: []
+    end
+
+    class PutLoggingOptionsRequest
+      attr_accessor cloud_watch_log_delivery: Types::CloudWatchLogDeliveryOptions
+      SENSITIVE: []
+    end
+
+    class PutLoggingOptionsResponse < Aws::EmptyStructure
+    end
+
+    class ROS2PrimitiveMessageDefinition
+      attr_accessor primitive_type: ("BOOL" | "BYTE" | "CHAR" | "FLOAT32" | "FLOAT64" | "INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "STRING" | "WSTRING")
+      attr_accessor offset: ::Float
+      attr_accessor scaling: ::Float
+      attr_accessor upper_bound: ::Integer
+      SENSITIVE: []
+    end
+
+    class RegisterAccountRequest
+      attr_accessor timestream_resources: Types::TimestreamResources
+      attr_accessor iam_resources: Types::IamResources
+      SENSITIVE: []
+    end
+
+    class RegisterAccountResponse
+      attr_accessor register_account_status: ("REGISTRATION_PENDING" | "REGISTRATION_SUCCESS" | "REGISTRATION_FAILURE")
+      attr_accessor timestream_resources: Types::TimestreamResources
+      attr_accessor iam_resources: Types::IamResources
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class S3Config
+      attr_accessor bucket_arn: ::String
+      attr_accessor data_format: ("JSON" | "PARQUET")
+      attr_accessor storage_compression_format: ("NONE" | "GZIP")
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class Sensor
+      attr_accessor fully_qualified_name: ::String
+      attr_accessor data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY")
+      attr_accessor description: ::String
+      attr_accessor unit: ::String
+      attr_accessor allowed_values: ::Array[::String]
+      attr_accessor min: ::Float
+      attr_accessor max: ::Float
+      attr_accessor deprecation_message: ::String
+      attr_accessor comment: ::String
+      attr_accessor struct_fully_qualified_name: ::String
+      SENSITIVE: []
+    end
+
+    class SignalCatalogSummary
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class SignalDecoder
+      attr_accessor fully_qualified_name: ::String
+      attr_accessor type: ("CAN_SIGNAL" | "OBD_SIGNAL" | "MESSAGE_SIGNAL")
+      attr_accessor interface_id: ::String
+      attr_accessor can_signal: Types::CanSignal
+      attr_accessor obd_signal: Types::ObdSignal
+      attr_accessor message_signal: Types::MessageSignal
+      SENSITIVE: []
+    end
+
+    class SignalInformation
+      attr_accessor name: ::String
+      attr_accessor max_sample_count: ::Integer
+      attr_accessor minimum_sampling_interval_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class StructuredMessage
+      attr_accessor primitive_message_definition: Types::PrimitiveMessageDefinition
+      attr_accessor structured_message_list_definition: Types::StructuredMessageListDefinition
+      attr_accessor structured_message_definition: ::Array[Types::StructuredMessageFieldNameAndDataTypePair]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PrimitiveMessageDefinition < StructuredMessage
+      end
+      class StructuredMessageListDefinition < StructuredMessage
+      end
+      class StructuredMessageDefinition < StructuredMessage
+      end
+      class Unknown < StructuredMessage
+      end
+    end
+
+    class StructuredMessageFieldNameAndDataTypePair
+      attr_accessor field_name: ::String
+      attr_accessor data_type: Types::StructuredMessage
+      SENSITIVE: []
+    end
+
+    class StructuredMessageListDefinition
+      attr_accessor name: ::String
+      attr_accessor member_type: Types::StructuredMessage
+      attr_accessor list_type: ("FIXED_CAPACITY" | "DYNAMIC_UNBOUNDED_CAPACITY" | "DYNAMIC_BOUNDED_CAPACITY")
+      attr_accessor capacity: ::Integer
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimeBasedCollectionScheme
+      attr_accessor period_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimestreamConfig
+      attr_accessor timestream_table_arn: ::String
+      attr_accessor execution_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TimestreamRegistrationResponse
+      attr_accessor timestream_database_name: ::String
+      attr_accessor timestream_table_name: ::String
+      attr_accessor timestream_database_arn: ::String
+      attr_accessor timestream_table_arn: ::String
+      attr_accessor registration_status: ("REGISTRATION_PENDING" | "REGISTRATION_SUCCESS" | "REGISTRATION_FAILURE")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class TimestreamResources
+      attr_accessor timestream_database_name: ::String
+      attr_accessor timestream_table_name: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCampaignRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor data_extra_dimensions: ::Array[::String]
+      attr_accessor action: ("APPROVE" | "SUSPEND" | "RESUME" | "UPDATE")
+      SENSITIVE: []
+    end
+
+    class UpdateCampaignResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CREATING" | "WAITING_FOR_APPROVAL" | "RUNNING" | "SUSPENDED")
+      SENSITIVE: []
+    end
+
+    class UpdateDecoderManifestRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor signal_decoders_to_add: ::Array[Types::SignalDecoder]
+      attr_accessor signal_decoders_to_update: ::Array[Types::SignalDecoder]
+      attr_accessor signal_decoders_to_remove: ::Array[::String]
+      attr_accessor network_interfaces_to_add: ::Array[Types::NetworkInterface]
+      attr_accessor network_interfaces_to_update: ::Array[Types::NetworkInterface]
+      attr_accessor network_interfaces_to_remove: ::Array[::String]
+      attr_accessor status: ("ACTIVE" | "DRAFT" | "INVALID" | "VALIDATING")
+      SENSITIVE: []
+    end
+
+    class UpdateDecoderManifestResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFleetRequest
+      attr_accessor fleet_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFleetResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateModelManifestRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor nodes_to_add: ::Array[::String]
+      attr_accessor nodes_to_remove: ::Array[::String]
+      attr_accessor status: ("ACTIVE" | "DRAFT" | "INVALID" | "VALIDATING")
+      SENSITIVE: []
+    end
+
+    class UpdateModelManifestResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSignalCatalogRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor nodes_to_add: ::Array[Types::Node]
+      attr_accessor nodes_to_update: ::Array[Types::Node]
+      attr_accessor nodes_to_remove: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateSignalCatalogResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVehicleError
+      attr_accessor vehicle_name: ::String
+      attr_accessor code: ::Integer
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVehicleRequest
+      attr_accessor vehicle_name: ::String
+      attr_accessor model_manifest_arn: ::String
+      attr_accessor decoder_manifest_arn: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor attribute_update_mode: ("Overwrite" | "Merge")
+      SENSITIVE: []
+    end
+
+    class UpdateVehicleRequestItem
+      attr_accessor vehicle_name: ::String
+      attr_accessor model_manifest_arn: ::String
+      attr_accessor decoder_manifest_arn: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor attribute_update_mode: ("Overwrite" | "Merge")
+      SENSITIVE: []
+    end
+
+    class UpdateVehicleResponse
+      attr_accessor vehicle_name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVehicleResponseItem
+      attr_accessor vehicle_name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VehicleMiddleware
+      attr_accessor name: ::String
+      attr_accessor protocol_name: ("ROS_2")
+      SENSITIVE: []
+    end
+
+    class VehicleStatus
+      attr_accessor campaign_name: ::String
+      attr_accessor vehicle_name: ::String
+      attr_accessor status: ("CREATED" | "READY" | "HEALTHY" | "SUSPENDED" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class VehicleSummary
+      attr_accessor vehicle_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor model_manifest_arn: ::String
+      attr_accessor decoder_manifest_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+  end
+end

@@ -90,6 +90,10 @@ module AwsSdkCodeGenerator
               !@expect['endpoint']['properties']['authSchemes'].empty?
           end
 
+          def s3_express_auth?
+            expect_auth? && expected_auth['name'] == 'sigv4-s3express'
+          end
+
           def expected_headers
             @expect['endpoint']['headers'].map { |k,v| Param.new(k, v.join(",")) }
           end
@@ -138,7 +142,7 @@ module AwsSdkCodeGenerator
             case value
             when Hash
               value.each_with_object({}) do |(k, v), o|
-                o[Underscore.underscore(k)] = transform_operation_values(v)
+                o[Underscore.underscore(k).to_sym] = transform_operation_values(v)
               end
             when Array
               value.map { |v| transform_operation_values(v) }

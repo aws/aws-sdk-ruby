@@ -199,6 +199,35 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # Returns the details of the DB instance’s server certificate.
+    #
+    # For more information, see [Updating Your Amazon DocumentDB TLS
+    # Certificates][1] and [ Encrypting Data in Transit][2] in the *Amazon
+    # DocumentDB Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
+    # [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+    #
+    # @!attribute [rw] ca_identifier
+    #   The CA identifier of the CA certificate used for the DB instance's
+    #   server certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] valid_till
+    #   The expiration date of the DB instance’s server certificate.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CertificateDetails AWS API Documentation
+    #
+    class CertificateDetails < Struct.new(
+      :ca_identifier,
+      :valid_till)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] certificates
     #   A list of certificates for this Amazon Web Services account.
     #   @return [Array<Types::Certificate>]
@@ -639,6 +668,24 @@ module Aws::DocDB
     #   The cluster identifier of the new global cluster.
     #   @return [String]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type to associate with the DB cluster.
+    #
+    #   For information on storage types for Amazon DocumentDB clusters, see
+    #   Cluster storage configurations in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #   Valid values for storage type - `standard | iopt1`
+    #
+    #   Default value is `standard `
+    #
+    #   <note markdown="1"> When you create a DocumentDB DB cluster with the storage type set to
+    #   `iopt1`, the storage type is returned in the response. The storage
+    #   type isn't returned when you set it to `standard`.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -667,6 +714,7 @@ module Aws::DocDB
       :enable_cloudwatch_logs_exports,
       :deletion_protection,
       :global_cluster_identifier,
+      :storage_type,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -898,6 +946,20 @@ module Aws::DocDB
     #   region.
     #   @return [String]
     #
+    # @!attribute [rw] ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB instance's server
+    #   certificate.
+    #
+    #   For more information, see [Updating Your Amazon DocumentDB TLS
+    #   Certificates][1] and [ Encrypting Data in Transit][2] in the *Amazon
+    #   DocumentDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
     class CreateDBInstanceMessage < Struct.new(
@@ -912,7 +974,8 @@ module Aws::DocDB
       :copy_tags_to_snapshot,
       :promotion_tier,
       :enable_performance_insights,
-      :performance_insights_kms_key_id)
+      :performance_insights_kms_key_id,
+      :ca_certificate_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1296,6 +1359,20 @@ module Aws::DocDB
     #   deleted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] storage_type
+    #   Storage type associated with your cluster
+    #
+    #   Storage type associated with your cluster
+    #
+    #   For information on storage types for Amazon DocumentDB clusters, see
+    #   Cluster storage configurations in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #   Valid values for storage type - `standard | iopt1`
+    #
+    #   Default value is `standard `
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -1330,7 +1407,8 @@ module Aws::DocDB
       :clone_group_id,
       :cluster_create_time,
       :enabled_cloudwatch_logs_exports,
-      :deletion_protection)
+      :deletion_protection,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1625,6 +1703,18 @@ module Aws::DocDB
     #   the ARN for the source cluster snapshot; otherwise, a null value.
     #   @return [String]
     #
+    # @!attribute [rw] storage_type
+    #   Storage type associated with your cluster snapshot
+    #
+    #   For information on storage types for Amazon DocumentDB clusters, see
+    #   Cluster storage configurations in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #   Valid values for storage type - `standard | iopt1`
+    #
+    #   Default value is `standard `
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterSnapshot AWS API Documentation
     #
     class DBClusterSnapshot < Struct.new(
@@ -1644,7 +1734,8 @@ module Aws::DocDB
       :storage_encrypted,
       :kms_key_id,
       :db_cluster_snapshot_arn,
-      :source_db_cluster_snapshot_arn)
+      :source_db_cluster_snapshot_arn,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1773,6 +1864,24 @@ module Aws::DocDB
     #   the log types specified by `ExportableLogTypes` to CloudWatch Logs.
     #   @return [Boolean]
     #
+    # @!attribute [rw] supported_ca_certificate_identifiers
+    #   A list of the supported CA certificate identifiers.
+    #
+    #   For more information, see [Updating Your Amazon DocumentDB TLS
+    #   Certificates][1] and [ Encrypting Data in Transit][2] in the *Amazon
+    #   DocumentDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supports_certificate_rotation_without_restart
+    #   Indicates whether the engine version supports rotating the server
+    #   certificate without rebooting the DB instance.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -1783,7 +1892,9 @@ module Aws::DocDB
       :db_engine_version_description,
       :valid_upgrade_target,
       :exportable_log_types,
-      :supports_log_exports_to_cloudwatch_logs)
+      :supports_log_exports_to_cloudwatch_logs,
+      :supported_ca_certificate_identifiers,
+      :supports_certificate_rotation_without_restart)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1945,6 +2056,21 @@ module Aws::DocDB
     #   CloudWatch Logs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] certificate_details
+    #   The details of the DB instance's server certificate.
+    #   @return [Types::CertificateDetails]
+    #
+    # @!attribute [rw] performance_insights_enabled
+    #   Set to `true` if Amazon RDS Performance Insights is enabled for the
+    #   DB instance, and otherwise `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] performance_insights_kms_key_id
+    #   The KMS key identifier for encryption of Performance Insights data.
+    #   The KMS key ID is the Amazon Resource Name (ARN), KMS key
+    #   identifier, or the KMS key alias for the KMS encryption key.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -1974,7 +2100,10 @@ module Aws::DocDB
       :copy_tags_to_snapshot,
       :promotion_tier,
       :db_instance_arn,
-      :enabled_cloudwatch_logs_exports)
+      :enabled_cloudwatch_logs_exports,
+      :certificate_details,
+      :performance_insights_enabled,
+      :performance_insights_kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4010,6 +4139,18 @@ module Aws::DocDB
     #   deleted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type to associate with the DB cluster.
+    #
+    #   For information on storage types for Amazon DocumentDB clusters, see
+    #   Cluster storage configurations in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #   Valid values for storage type - `standard | iopt1`
+    #
+    #   Default value is `standard `
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -4026,7 +4167,8 @@ module Aws::DocDB
       :cloudwatch_logs_export_configuration,
       :engine_version,
       :allow_major_version_upgrade,
-      :deletion_protection)
+      :deletion_protection,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4253,6 +4395,28 @@ module Aws::DocDB
     #   region.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_rotation_restart
+    #   Specifies whether the DB instance is restarted when you rotate your
+    #   SSL/TLS certificate.
+    #
+    #   By default, the DB instance is restarted when you rotate your
+    #   SSL/TLS certificate. The certificate is not updated until the DB
+    #   instance is restarted.
+    #
+    #   Set this parameter only if you are *not* using SSL/TLS to connect to
+    #   the DB instance.
+    #
+    #   If you are using SSL/TLS to connect to the DB instance, see
+    #   [Updating Your Amazon DocumentDB TLS Certificates][1] and [
+    #   Encrypting Data in Transit][2] in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -4266,7 +4430,8 @@ module Aws::DocDB
       :copy_tags_to_snapshot,
       :promotion_tier,
       :enable_performance_insights,
-      :performance_insights_kms_key_id)
+      :performance_insights_kms_key_id,
+      :certificate_rotation_restart)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4460,6 +4625,10 @@ module Aws::DocDB
     #   Indicates whether an instance is in a virtual private cloud (VPC).
     #   @return [Boolean]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type to associate with the DB cluster
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -4468,7 +4637,8 @@ module Aws::DocDB
       :db_instance_class,
       :license_model,
       :availability_zones,
-      :vpc)
+      :vpc,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5045,6 +5215,18 @@ module Aws::DocDB
     #   and it cannot end with a hyphen or contain two consecutive hyphens.
     #   @return [String]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type to associate with the DB cluster.
+    #
+    #   For information on storage types for Amazon DocumentDB clusters, see
+    #   Cluster storage configurations in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #   Valid values for storage type - `standard | iopt1`
+    #
+    #   Default value is `standard `
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -5060,7 +5242,8 @@ module Aws::DocDB
       :kms_key_id,
       :enable_cloudwatch_logs_exports,
       :deletion_protection,
-      :db_cluster_parameter_group_name)
+      :db_cluster_parameter_group_name,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5216,6 +5399,18 @@ module Aws::DocDB
     #   deleted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type to associate with the DB cluster.
+    #
+    #   For information on storage types for Amazon DocumentDB clusters, see
+    #   Cluster storage configurations in the *Amazon DocumentDB Developer
+    #   Guide*.
+    #
+    #   Valid values for storage type - `standard | iopt1`
+    #
+    #   Default value is `standard `
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -5230,7 +5425,8 @@ module Aws::DocDB
       :tags,
       :kms_key_id,
       :enable_cloudwatch_logs_exports,
-      :deletion_protection)
+      :deletion_protection,
+      :storage_type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -14,6 +14,7 @@ module Aws::IVS
       option(
         :endpoint_provider,
         doc_type: 'Aws::IVS::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::IVS
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -64,6 +66,8 @@ module Aws::IVS
             Aws::IVS::Endpoints::BatchStartViewerSessionRevocation.build(context)
           when :create_channel
             Aws::IVS::Endpoints::CreateChannel.build(context)
+          when :create_playback_restriction_policy
+            Aws::IVS::Endpoints::CreatePlaybackRestrictionPolicy.build(context)
           when :create_recording_configuration
             Aws::IVS::Endpoints::CreateRecordingConfiguration.build(context)
           when :create_stream_key
@@ -72,6 +76,8 @@ module Aws::IVS
             Aws::IVS::Endpoints::DeleteChannel.build(context)
           when :delete_playback_key_pair
             Aws::IVS::Endpoints::DeletePlaybackKeyPair.build(context)
+          when :delete_playback_restriction_policy
+            Aws::IVS::Endpoints::DeletePlaybackRestrictionPolicy.build(context)
           when :delete_recording_configuration
             Aws::IVS::Endpoints::DeleteRecordingConfiguration.build(context)
           when :delete_stream_key
@@ -80,6 +86,8 @@ module Aws::IVS
             Aws::IVS::Endpoints::GetChannel.build(context)
           when :get_playback_key_pair
             Aws::IVS::Endpoints::GetPlaybackKeyPair.build(context)
+          when :get_playback_restriction_policy
+            Aws::IVS::Endpoints::GetPlaybackRestrictionPolicy.build(context)
           when :get_recording_configuration
             Aws::IVS::Endpoints::GetRecordingConfiguration.build(context)
           when :get_stream
@@ -94,6 +102,8 @@ module Aws::IVS
             Aws::IVS::Endpoints::ListChannels.build(context)
           when :list_playback_key_pairs
             Aws::IVS::Endpoints::ListPlaybackKeyPairs.build(context)
+          when :list_playback_restriction_policies
+            Aws::IVS::Endpoints::ListPlaybackRestrictionPolicies.build(context)
           when :list_recording_configurations
             Aws::IVS::Endpoints::ListRecordingConfigurations.build(context)
           when :list_stream_keys
@@ -116,6 +126,8 @@ module Aws::IVS
             Aws::IVS::Endpoints::UntagResource.build(context)
           when :update_channel
             Aws::IVS::Endpoints::UpdateChannel.build(context)
+          when :update_playback_restriction_policy
+            Aws::IVS::Endpoints::UpdatePlaybackRestrictionPolicy.build(context)
           end
         end
       end

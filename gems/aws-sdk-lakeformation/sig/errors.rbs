@@ -1,0 +1,70 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LakeFormation
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class AlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EntityNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ExpiredException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class GlueEncryptionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalServiceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidInputException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OperationTimeoutException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PermissionTypeMismatchException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotReadyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNumberLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class StatisticsNotReadyYetException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ThrottledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TransactionCanceledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TransactionCommitInProgressException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TransactionCommittedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WorkUnitsNotReadyYetException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

@@ -1159,7 +1159,7 @@ module Aws::Neptunedata
     # have a policy attached that allows the
     # [neptune-db:ReadDataViaQuery][2] IAM action in that cluster.
     #
-    # Note that the [neptune-db:QueryLanguage:Opencypher][3] IAM condition
+    # Note that the [neptune-db:QueryLanguage:OpenCypher][3] IAM condition
     # key can be used in the policy document to restrict the use of
     # openCypher queries (see [Condition keys available in Neptune IAM
     # data-access policy statements][4]).
@@ -1230,7 +1230,7 @@ module Aws::Neptunedata
     #
     # * [neptune-db:DeleteDataViaQuery][5]
     #
-    # Note also that the [neptune-db:QueryLanguage:Opencypher][6] IAM
+    # Note also that the [neptune-db:QueryLanguage:OpenCypher][6] IAM
     # condition key can be used in the policy document to restrict the use
     # of openCypher queries (see [Condition keys available in Neptune IAM
     # data-access policy statements][7]).
@@ -1709,7 +1709,7 @@ module Aws::Neptunedata
     # have a policy attached that allows the [neptune-db:GetQueryStatus][1]
     # IAM action in that cluster.
     #
-    # Note that the [neptune-db:QueryLanguage:Opencypher][2] IAM condition
+    # Note that the [neptune-db:QueryLanguage:OpenCypher][2] IAM condition
     # key can be used in the policy document to restrict the use of
     # openCypher queries (see [Condition keys available in Neptune IAM
     # data-access policy statements][3]).
@@ -1818,7 +1818,7 @@ module Aws::Neptunedata
     #
     # * [neptune-db:QueryLanguage:Gremlin][4]
     #
-    # * [neptune-db:QueryLanguage:Opencypher][4]
+    # * [neptune-db:QueryLanguage:OpenCypher][4]
     #
     # See [Condition keys available in Neptune IAM data-access policy
     # statements][5]).
@@ -2483,7 +2483,7 @@ module Aws::Neptunedata
     # have a policy attached that allows the [neptune-db:GetQueryStatus][2]
     # IAM action in that cluster.
     #
-    # Note that the [neptune-db:QueryLanguage:Opencypher][3] IAM condition
+    # Note that the [neptune-db:QueryLanguage:OpenCypher][3] IAM condition
     # key can be used in the policy document to restrict the use of
     # openCypher queries (see [Condition keys available in Neptune IAM
     # data-access policy statements][4]).
@@ -2834,7 +2834,8 @@ module Aws::Neptunedata
     #   You don't have to wait for one load job to complete before issuing
     #   the next one, because Neptune can queue up as many as 64 jobs at a
     #   time, provided that their `queueRequest` parameters are all set to
-    #   `"TRUE"`.
+    #   `"TRUE"`. The queue order of the jobs will be first-in-first-out
+    #   (FIFO).
     #
     #   If the `queueRequest` parameter is omitted or set to `"FALSE"`, the
     #   load request will fail if another load job is already running.
@@ -3333,7 +3334,7 @@ module Aws::Neptunedata
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptunedata'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,0 +1,1028 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ComputeOptimizer
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountEnrollmentStatus
+      attr_accessor account_id: ::String
+      attr_accessor status: ("Active" | "Inactive" | "Pending" | "Failed")
+      attr_accessor status_reason: ::String
+      attr_accessor last_updated_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class AutoScalingGroupConfiguration
+      attr_accessor desired_capacity: ::Integer
+      attr_accessor min_size: ::Integer
+      attr_accessor max_size: ::Integer
+      attr_accessor instance_type: ::String
+      SENSITIVE: []
+    end
+
+    class AutoScalingGroupEstimatedMonthlySavings
+      attr_accessor currency: ("USD" | "CNY")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class AutoScalingGroupRecommendation
+      attr_accessor account_id: ::String
+      attr_accessor auto_scaling_group_arn: ::String
+      attr_accessor auto_scaling_group_name: ::String
+      attr_accessor finding: ("Underprovisioned" | "Overprovisioned" | "Optimized" | "NotOptimized")
+      attr_accessor utilization_metrics: ::Array[Types::UtilizationMetric]
+      attr_accessor look_back_period_in_days: ::Float
+      attr_accessor current_configuration: Types::AutoScalingGroupConfiguration
+      attr_accessor recommendation_options: ::Array[Types::AutoScalingGroupRecommendationOption]
+      attr_accessor last_refresh_timestamp: ::Time
+      attr_accessor current_performance_risk: ("VeryLow" | "Low" | "Medium" | "High")
+      attr_accessor effective_recommendation_preferences: Types::EffectiveRecommendationPreferences
+      attr_accessor inferred_workload_types: ::Array[("AmazonEmr" | "ApacheCassandra" | "ApacheHadoop" | "Memcached" | "Nginx" | "PostgreSql" | "Redis" | "Kafka" | "SQLServer")]
+      attr_accessor current_instance_gpu_info: Types::GpuInfo
+      SENSITIVE: []
+    end
+
+    class AutoScalingGroupRecommendationOption
+      attr_accessor configuration: Types::AutoScalingGroupConfiguration
+      attr_accessor projected_utilization_metrics: ::Array[Types::UtilizationMetric]
+      attr_accessor performance_risk: ::Float
+      attr_accessor rank: ::Integer
+      attr_accessor savings_opportunity: Types::SavingsOpportunity
+      attr_accessor migration_effort: ("VeryLow" | "Low" | "Medium" | "High")
+      attr_accessor instance_gpu_info: Types::GpuInfo
+      attr_accessor savings_opportunity_after_discounts: Types::AutoScalingGroupSavingsOpportunityAfterDiscounts
+      SENSITIVE: []
+    end
+
+    class AutoScalingGroupSavingsOpportunityAfterDiscounts
+      attr_accessor savings_opportunity_percentage: ::Float
+      attr_accessor estimated_monthly_savings: Types::AutoScalingGroupEstimatedMonthlySavings
+      SENSITIVE: []
+    end
+
+    class ContainerConfiguration
+      attr_accessor container_name: ::String
+      attr_accessor memory_size_configuration: Types::MemorySizeConfiguration
+      attr_accessor cpu: ::Integer
+      SENSITIVE: []
+    end
+
+    class ContainerRecommendation
+      attr_accessor container_name: ::String
+      attr_accessor memory_size_configuration: Types::MemorySizeConfiguration
+      attr_accessor cpu: ::Integer
+      SENSITIVE: []
+    end
+
+    class CurrentPerformanceRiskRatings
+      attr_accessor high: ::Integer
+      attr_accessor medium: ::Integer
+      attr_accessor low: ::Integer
+      attr_accessor very_low: ::Integer
+      SENSITIVE: []
+    end
+
+    class CustomizableMetricParameters
+      attr_accessor threshold: ("P90" | "P95" | "P99_5")
+      attr_accessor headroom: ("PERCENT_30" | "PERCENT_20" | "PERCENT_0")
+      SENSITIVE: []
+    end
+
+    class DeleteRecommendationPreferencesRequest
+      attr_accessor resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License")
+      attr_accessor scope: Types::Scope
+      attr_accessor recommendation_preference_names: ::Array[("EnhancedInfrastructureMetrics" | "InferredWorkloadTypes" | "ExternalMetricsPreference" | "LookBackPeriodPreference" | "PreferredResources" | "UtilizationPreferences")]
+      SENSITIVE: []
+    end
+
+    class DeleteRecommendationPreferencesResponse < Aws::EmptyStructure
+    end
+
+    class DescribeRecommendationExportJobsRequest
+      attr_accessor job_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::JobFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeRecommendationExportJobsResponse
+      attr_accessor recommendation_export_jobs: ::Array[Types::RecommendationExportJob]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class EBSEffectiveRecommendationPreferences
+      attr_accessor savings_estimation_mode: Types::EBSSavingsEstimationMode
+      SENSITIVE: []
+    end
+
+    class EBSEstimatedMonthlySavings
+      attr_accessor currency: ("USD" | "CNY")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class EBSFilter
+      attr_accessor name: ("Finding")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EBSSavingsEstimationMode
+      attr_accessor source: ("PublicPricing" | "CostExplorerRightsizing" | "CostOptimizationHub")
+      SENSITIVE: []
+    end
+
+    class EBSSavingsOpportunityAfterDiscounts
+      attr_accessor savings_opportunity_percentage: ::Float
+      attr_accessor estimated_monthly_savings: Types::EBSEstimatedMonthlySavings
+      SENSITIVE: []
+    end
+
+    class EBSUtilizationMetric
+      attr_accessor name: ("VolumeReadOpsPerSecond" | "VolumeWriteOpsPerSecond" | "VolumeReadBytesPerSecond" | "VolumeWriteBytesPerSecond")
+      attr_accessor statistic: ("Maximum" | "Average")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class ECSEffectiveRecommendationPreferences
+      attr_accessor savings_estimation_mode: Types::ECSSavingsEstimationMode
+      SENSITIVE: []
+    end
+
+    class ECSEstimatedMonthlySavings
+      attr_accessor currency: ("USD" | "CNY")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class ECSSavingsEstimationMode
+      attr_accessor source: ("PublicPricing" | "CostExplorerRightsizing" | "CostOptimizationHub")
+      SENSITIVE: []
+    end
+
+    class ECSSavingsOpportunityAfterDiscounts
+      attr_accessor savings_opportunity_percentage: ::Float
+      attr_accessor estimated_monthly_savings: Types::ECSEstimatedMonthlySavings
+      SENSITIVE: []
+    end
+
+    class ECSServiceProjectedMetric
+      attr_accessor name: ("Cpu" | "Memory")
+      attr_accessor timestamps: ::Array[::Time]
+      attr_accessor upper_bound_values: ::Array[::Float]
+      attr_accessor lower_bound_values: ::Array[::Float]
+      SENSITIVE: []
+    end
+
+    class ECSServiceProjectedUtilizationMetric
+      attr_accessor name: ("Cpu" | "Memory")
+      attr_accessor statistic: ("Maximum" | "Average")
+      attr_accessor lower_bound_value: ::Float
+      attr_accessor upper_bound_value: ::Float
+      SENSITIVE: []
+    end
+
+    class ECSServiceRecommendation
+      attr_accessor service_arn: ::String
+      attr_accessor account_id: ::String
+      attr_accessor current_service_configuration: Types::ServiceConfiguration
+      attr_accessor utilization_metrics: ::Array[Types::ECSServiceUtilizationMetric]
+      attr_accessor lookback_period_in_days: ::Float
+      attr_accessor launch_type: ("EC2" | "Fargate")
+      attr_accessor last_refresh_timestamp: ::Time
+      attr_accessor finding: ("Optimized" | "Underprovisioned" | "Overprovisioned")
+      attr_accessor finding_reason_codes: ::Array[("MemoryOverprovisioned" | "MemoryUnderprovisioned" | "CPUOverprovisioned" | "CPUUnderprovisioned")]
+      attr_accessor service_recommendation_options: ::Array[Types::ECSServiceRecommendationOption]
+      attr_accessor current_performance_risk: ("VeryLow" | "Low" | "Medium" | "High")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor effective_recommendation_preferences: Types::ECSEffectiveRecommendationPreferences
+      SENSITIVE: []
+    end
+
+    class ECSServiceRecommendationFilter
+      attr_accessor name: ("Finding" | "FindingReasonCode")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ECSServiceRecommendationOption
+      attr_accessor memory: ::Integer
+      attr_accessor cpu: ::Integer
+      attr_accessor savings_opportunity: Types::SavingsOpportunity
+      attr_accessor projected_utilization_metrics: ::Array[Types::ECSServiceProjectedUtilizationMetric]
+      attr_accessor container_recommendations: ::Array[Types::ContainerRecommendation]
+      attr_accessor savings_opportunity_after_discounts: Types::ECSSavingsOpportunityAfterDiscounts
+      SENSITIVE: []
+    end
+
+    class ECSServiceRecommendedOptionProjectedMetric
+      attr_accessor recommended_cpu_units: ::Integer
+      attr_accessor recommended_memory_size: ::Integer
+      attr_accessor projected_metrics: ::Array[Types::ECSServiceProjectedMetric]
+      SENSITIVE: []
+    end
+
+    class ECSServiceUtilizationMetric
+      attr_accessor name: ("Cpu" | "Memory")
+      attr_accessor statistic: ("Maximum" | "Average")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class EffectivePreferredResource
+      attr_accessor name: ("Ec2InstanceTypes")
+      attr_accessor include_list: ::Array[::String]
+      attr_accessor effective_include_list: ::Array[::String]
+      attr_accessor exclude_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EffectiveRecommendationPreferences
+      attr_accessor cpu_vendor_architectures: ::Array[("AWS_ARM64" | "CURRENT")]
+      attr_accessor enhanced_infrastructure_metrics: ("Active" | "Inactive")
+      attr_accessor inferred_workload_types: ("Active" | "Inactive")
+      attr_accessor external_metrics_preference: Types::ExternalMetricsPreference
+      attr_accessor look_back_period: ("DAYS_14" | "DAYS_32" | "DAYS_93")
+      attr_accessor utilization_preferences: ::Array[Types::UtilizationPreference]
+      attr_accessor preferred_resources: ::Array[Types::EffectivePreferredResource]
+      attr_accessor savings_estimation_mode: Types::InstanceSavingsEstimationMode
+      SENSITIVE: []
+    end
+
+    class EnrollmentFilter
+      attr_accessor name: ("Status")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EstimatedMonthlySavings
+      attr_accessor currency: ("USD" | "CNY")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class ExportAutoScalingGroupRecommendationsRequest
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor fields_to_export: ::Array[("AccountId" | "AutoScalingGroupArn" | "AutoScalingGroupName" | "Finding" | "UtilizationMetricsCpuMaximum" | "UtilizationMetricsMemoryMaximum" | "UtilizationMetricsEbsReadOpsPerSecondMaximum" | "UtilizationMetricsEbsWriteOpsPerSecondMaximum" | "UtilizationMetricsEbsReadBytesPerSecondMaximum" | "UtilizationMetricsEbsWriteBytesPerSecondMaximum" | "UtilizationMetricsDiskReadOpsPerSecondMaximum" | "UtilizationMetricsDiskWriteOpsPerSecondMaximum" | "UtilizationMetricsDiskReadBytesPerSecondMaximum" | "UtilizationMetricsDiskWriteBytesPerSecondMaximum" | "UtilizationMetricsNetworkInBytesPerSecondMaximum" | "UtilizationMetricsNetworkOutBytesPerSecondMaximum" | "UtilizationMetricsNetworkPacketsInPerSecondMaximum" | "UtilizationMetricsNetworkPacketsOutPerSecondMaximum" | "LookbackPeriodInDays" | "CurrentConfigurationInstanceType" | "CurrentConfigurationDesiredCapacity" | "CurrentConfigurationMinSize" | "CurrentConfigurationMaxSize" | "CurrentOnDemandPrice" | "CurrentStandardOneYearNoUpfrontReservedPrice" | "CurrentStandardThreeYearNoUpfrontReservedPrice" | "CurrentVCpus" | "CurrentMemory" | "CurrentStorage" | "CurrentNetwork" | "RecommendationOptionsConfigurationInstanceType" | "RecommendationOptionsConfigurationDesiredCapacity" | "RecommendationOptionsConfigurationMinSize" | "RecommendationOptionsConfigurationMaxSize" | "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum" | "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum" | "RecommendationOptionsPerformanceRisk" | "RecommendationOptionsOnDemandPrice" | "RecommendationOptionsStandardOneYearNoUpfrontReservedPrice" | "RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice" | "RecommendationOptionsVcpus" | "RecommendationOptionsMemory" | "RecommendationOptionsStorage" | "RecommendationOptionsNetwork" | "LastRefreshTimestamp" | "CurrentPerformanceRisk" | "RecommendationOptionsSavingsOpportunityPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrency" | "RecommendationOptionsEstimatedMonthlySavingsValue" | "EffectiveRecommendationPreferencesCpuVendorArchitectures" | "EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics" | "EffectiveRecommendationPreferencesInferredWorkloadTypes" | "InferredWorkloadTypes" | "RecommendationOptionsMigrationEffort" | "CurrentInstanceGpuInfo" | "RecommendationOptionsInstanceGpuInfo" | "UtilizationMetricsGpuPercentageMaximum" | "UtilizationMetricsGpuMemoryPercentageMaximum" | "RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum" | "RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum" | "EffectiveRecommendationPreferencesSavingsEstimationMode" | "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts" | "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts" | "EffectiveRecommendationPreferencesPreferredResources" | "EffectiveRecommendationPreferencesLookBackPeriod")]
+      attr_accessor s3_destination_config: Types::S3DestinationConfig
+      attr_accessor file_format: ("Csv")
+      attr_accessor include_member_accounts: bool
+      attr_accessor recommendation_preferences: Types::RecommendationPreferences
+      SENSITIVE: []
+    end
+
+    class ExportAutoScalingGroupRecommendationsResponse
+      attr_accessor job_id: ::String
+      attr_accessor s3_destination: Types::S3Destination
+      SENSITIVE: []
+    end
+
+    class ExportDestination
+      attr_accessor s3: Types::S3Destination
+      SENSITIVE: []
+    end
+
+    class ExportEBSVolumeRecommendationsRequest
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::EBSFilter]
+      attr_accessor fields_to_export: ::Array[("AccountId" | "VolumeArn" | "Finding" | "UtilizationMetricsVolumeReadOpsPerSecondMaximum" | "UtilizationMetricsVolumeWriteOpsPerSecondMaximum" | "UtilizationMetricsVolumeReadBytesPerSecondMaximum" | "UtilizationMetricsVolumeWriteBytesPerSecondMaximum" | "LookbackPeriodInDays" | "CurrentConfigurationVolumeType" | "CurrentConfigurationVolumeBaselineIOPS" | "CurrentConfigurationVolumeBaselineThroughput" | "CurrentConfigurationVolumeBurstIOPS" | "CurrentConfigurationVolumeBurstThroughput" | "CurrentConfigurationVolumeSize" | "CurrentMonthlyPrice" | "RecommendationOptionsConfigurationVolumeType" | "RecommendationOptionsConfigurationVolumeBaselineIOPS" | "RecommendationOptionsConfigurationVolumeBaselineThroughput" | "RecommendationOptionsConfigurationVolumeBurstIOPS" | "RecommendationOptionsConfigurationVolumeBurstThroughput" | "RecommendationOptionsConfigurationVolumeSize" | "RecommendationOptionsMonthlyPrice" | "RecommendationOptionsPerformanceRisk" | "LastRefreshTimestamp" | "CurrentPerformanceRisk" | "RecommendationOptionsSavingsOpportunityPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrency" | "RecommendationOptionsEstimatedMonthlySavingsValue" | "RootVolume" | "Tags" | "CurrentConfigurationRootVolume" | "EffectiveRecommendationPreferencesSavingsEstimationMode" | "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts" | "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts")]
+      attr_accessor s3_destination_config: Types::S3DestinationConfig
+      attr_accessor file_format: ("Csv")
+      attr_accessor include_member_accounts: bool
+      SENSITIVE: []
+    end
+
+    class ExportEBSVolumeRecommendationsResponse
+      attr_accessor job_id: ::String
+      attr_accessor s3_destination: Types::S3Destination
+      SENSITIVE: []
+    end
+
+    class ExportEC2InstanceRecommendationsRequest
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor fields_to_export: ::Array[("AccountId" | "InstanceArn" | "InstanceName" | "Finding" | "FindingReasonCodes" | "LookbackPeriodInDays" | "CurrentInstanceType" | "UtilizationMetricsCpuMaximum" | "UtilizationMetricsMemoryMaximum" | "UtilizationMetricsEbsReadOpsPerSecondMaximum" | "UtilizationMetricsEbsWriteOpsPerSecondMaximum" | "UtilizationMetricsEbsReadBytesPerSecondMaximum" | "UtilizationMetricsEbsWriteBytesPerSecondMaximum" | "UtilizationMetricsDiskReadOpsPerSecondMaximum" | "UtilizationMetricsDiskWriteOpsPerSecondMaximum" | "UtilizationMetricsDiskReadBytesPerSecondMaximum" | "UtilizationMetricsDiskWriteBytesPerSecondMaximum" | "UtilizationMetricsNetworkInBytesPerSecondMaximum" | "UtilizationMetricsNetworkOutBytesPerSecondMaximum" | "UtilizationMetricsNetworkPacketsInPerSecondMaximum" | "UtilizationMetricsNetworkPacketsOutPerSecondMaximum" | "CurrentOnDemandPrice" | "CurrentStandardOneYearNoUpfrontReservedPrice" | "CurrentStandardThreeYearNoUpfrontReservedPrice" | "CurrentVCpus" | "CurrentMemory" | "CurrentStorage" | "CurrentNetwork" | "RecommendationOptionsInstanceType" | "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum" | "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum" | "RecommendationOptionsPlatformDifferences" | "RecommendationOptionsPerformanceRisk" | "RecommendationOptionsVcpus" | "RecommendationOptionsMemory" | "RecommendationOptionsStorage" | "RecommendationOptionsNetwork" | "RecommendationOptionsOnDemandPrice" | "RecommendationOptionsStandardOneYearNoUpfrontReservedPrice" | "RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice" | "RecommendationsSourcesRecommendationSourceArn" | "RecommendationsSourcesRecommendationSourceType" | "LastRefreshTimestamp" | "CurrentPerformanceRisk" | "RecommendationOptionsSavingsOpportunityPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrency" | "RecommendationOptionsEstimatedMonthlySavingsValue" | "EffectiveRecommendationPreferencesCpuVendorArchitectures" | "EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics" | "EffectiveRecommendationPreferencesInferredWorkloadTypes" | "InferredWorkloadTypes" | "RecommendationOptionsMigrationEffort" | "EffectiveRecommendationPreferencesExternalMetricsSource" | "InstanceState" | "Tags" | "ExternalMetricStatusCode" | "ExternalMetricStatusReason" | "CurrentInstanceGpuInfo" | "RecommendationOptionsInstanceGpuInfo" | "UtilizationMetricsGpuPercentageMaximum" | "UtilizationMetricsGpuMemoryPercentageMaximum" | "RecommendationOptionsProjectedUtilizationMetricsGpuPercentageMaximum" | "RecommendationOptionsProjectedUtilizationMetricsGpuMemoryPercentageMaximum" | "Idle" | "EffectiveRecommendationPreferencesPreferredResources" | "EffectiveRecommendationPreferencesLookBackPeriod" | "EffectiveRecommendationPreferencesUtilizationPreferences" | "EffectiveRecommendationPreferencesSavingsEstimationMode" | "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts" | "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts")]
+      attr_accessor s3_destination_config: Types::S3DestinationConfig
+      attr_accessor file_format: ("Csv")
+      attr_accessor include_member_accounts: bool
+      attr_accessor recommendation_preferences: Types::RecommendationPreferences
+      SENSITIVE: []
+    end
+
+    class ExportEC2InstanceRecommendationsResponse
+      attr_accessor job_id: ::String
+      attr_accessor s3_destination: Types::S3Destination
+      SENSITIVE: []
+    end
+
+    class ExportECSServiceRecommendationsRequest
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::ECSServiceRecommendationFilter]
+      attr_accessor fields_to_export: ::Array[("AccountId" | "ServiceArn" | "LookbackPeriodInDays" | "LastRefreshTimestamp" | "LaunchType" | "CurrentPerformanceRisk" | "CurrentServiceConfigurationMemory" | "CurrentServiceConfigurationCpu" | "CurrentServiceConfigurationTaskDefinitionArn" | "CurrentServiceConfigurationAutoScalingConfiguration" | "CurrentServiceContainerConfigurations" | "UtilizationMetricsCpuMaximum" | "UtilizationMetricsMemoryMaximum" | "Finding" | "FindingReasonCodes" | "RecommendationOptionsMemory" | "RecommendationOptionsCpu" | "RecommendationOptionsSavingsOpportunityPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrency" | "RecommendationOptionsEstimatedMonthlySavingsValue" | "RecommendationOptionsContainerRecommendations" | "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum" | "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum" | "Tags" | "EffectiveRecommendationPreferencesSavingsEstimationMode" | "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts" | "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts")]
+      attr_accessor s3_destination_config: Types::S3DestinationConfig
+      attr_accessor file_format: ("Csv")
+      attr_accessor include_member_accounts: bool
+      SENSITIVE: []
+    end
+
+    class ExportECSServiceRecommendationsResponse
+      attr_accessor job_id: ::String
+      attr_accessor s3_destination: Types::S3Destination
+      SENSITIVE: []
+    end
+
+    class ExportLambdaFunctionRecommendationsRequest
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::LambdaFunctionRecommendationFilter]
+      attr_accessor fields_to_export: ::Array[("AccountId" | "FunctionArn" | "FunctionVersion" | "Finding" | "FindingReasonCodes" | "NumberOfInvocations" | "UtilizationMetricsDurationMaximum" | "UtilizationMetricsDurationAverage" | "UtilizationMetricsMemoryMaximum" | "UtilizationMetricsMemoryAverage" | "LookbackPeriodInDays" | "CurrentConfigurationMemorySize" | "CurrentConfigurationTimeout" | "CurrentCostTotal" | "CurrentCostAverage" | "RecommendationOptionsConfigurationMemorySize" | "RecommendationOptionsCostLow" | "RecommendationOptionsCostHigh" | "RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound" | "RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound" | "RecommendationOptionsProjectedUtilizationMetricsDurationExpected" | "LastRefreshTimestamp" | "CurrentPerformanceRisk" | "RecommendationOptionsSavingsOpportunityPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrency" | "RecommendationOptionsEstimatedMonthlySavingsValue" | "Tags" | "EffectiveRecommendationPreferencesSavingsEstimationMode" | "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts" | "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts")]
+      attr_accessor s3_destination_config: Types::S3DestinationConfig
+      attr_accessor file_format: ("Csv")
+      attr_accessor include_member_accounts: bool
+      SENSITIVE: []
+    end
+
+    class ExportLambdaFunctionRecommendationsResponse
+      attr_accessor job_id: ::String
+      attr_accessor s3_destination: Types::S3Destination
+      SENSITIVE: []
+    end
+
+    class ExportLicenseRecommendationsRequest
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::LicenseRecommendationFilter]
+      attr_accessor fields_to_export: ::Array[("AccountId" | "ResourceArn" | "LookbackPeriodInDays" | "LastRefreshTimestamp" | "Finding" | "FindingReasonCodes" | "CurrentLicenseConfigurationNumberOfCores" | "CurrentLicenseConfigurationInstanceType" | "CurrentLicenseConfigurationOperatingSystem" | "CurrentLicenseConfigurationLicenseName" | "CurrentLicenseConfigurationLicenseEdition" | "CurrentLicenseConfigurationLicenseModel" | "CurrentLicenseConfigurationLicenseVersion" | "CurrentLicenseConfigurationMetricsSource" | "RecommendationOptionsOperatingSystem" | "RecommendationOptionsLicenseEdition" | "RecommendationOptionsLicenseModel" | "RecommendationOptionsSavingsOpportunityPercentage" | "RecommendationOptionsEstimatedMonthlySavingsCurrency" | "RecommendationOptionsEstimatedMonthlySavingsValue" | "Tags")]
+      attr_accessor s3_destination_config: Types::S3DestinationConfig
+      attr_accessor file_format: ("Csv")
+      attr_accessor include_member_accounts: bool
+      SENSITIVE: []
+    end
+
+    class ExportLicenseRecommendationsResponse
+      attr_accessor job_id: ::String
+      attr_accessor s3_destination: Types::S3Destination
+      SENSITIVE: []
+    end
+
+    class ExternalMetricStatus
+      attr_accessor status_code: ("NO_EXTERNAL_METRIC_SET" | "INTEGRATION_SUCCESS" | "DATADOG_INTEGRATION_ERROR" | "DYNATRACE_INTEGRATION_ERROR" | "NEWRELIC_INTEGRATION_ERROR" | "INSTANA_INTEGRATION_ERROR" | "INSUFFICIENT_DATADOG_METRICS" | "INSUFFICIENT_DYNATRACE_METRICS" | "INSUFFICIENT_NEWRELIC_METRICS" | "INSUFFICIENT_INSTANA_METRICS")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class ExternalMetricsPreference
+      attr_accessor source: ("Datadog" | "Dynatrace" | "NewRelic" | "Instana")
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ("Finding" | "FindingReasonCodes" | "RecommendationSourceType" | "InferredWorkloadTypes")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetAutoScalingGroupRecommendationsRequest
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor auto_scaling_group_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor recommendation_preferences: Types::RecommendationPreferences
+      SENSITIVE: []
+    end
+
+    class GetAutoScalingGroupRecommendationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor auto_scaling_group_recommendations: ::Array[Types::AutoScalingGroupRecommendation]
+      attr_accessor errors: ::Array[Types::GetRecommendationError]
+      SENSITIVE: []
+    end
+
+    class GetEBSVolumeRecommendationsRequest
+      attr_accessor volume_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::EBSFilter]
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetEBSVolumeRecommendationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor volume_recommendations: ::Array[Types::VolumeRecommendation]
+      attr_accessor errors: ::Array[Types::GetRecommendationError]
+      SENSITIVE: []
+    end
+
+    class GetEC2InstanceRecommendationsRequest
+      attr_accessor instance_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor recommendation_preferences: Types::RecommendationPreferences
+      SENSITIVE: []
+    end
+
+    class GetEC2InstanceRecommendationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor instance_recommendations: ::Array[Types::InstanceRecommendation]
+      attr_accessor errors: ::Array[Types::GetRecommendationError]
+      SENSITIVE: []
+    end
+
+    class GetEC2RecommendationProjectedMetricsRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor stat: ("Maximum" | "Average")
+      attr_accessor period: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor recommendation_preferences: Types::RecommendationPreferences
+      SENSITIVE: []
+    end
+
+    class GetEC2RecommendationProjectedMetricsResponse
+      attr_accessor recommended_option_projected_metrics: ::Array[Types::RecommendedOptionProjectedMetric]
+      SENSITIVE: []
+    end
+
+    class GetECSServiceRecommendationProjectedMetricsRequest
+      attr_accessor service_arn: ::String
+      attr_accessor stat: ("Maximum" | "Average")
+      attr_accessor period: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetECSServiceRecommendationProjectedMetricsResponse
+      attr_accessor recommended_option_projected_metrics: ::Array[Types::ECSServiceRecommendedOptionProjectedMetric]
+      SENSITIVE: []
+    end
+
+    class GetECSServiceRecommendationsRequest
+      attr_accessor service_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::ECSServiceRecommendationFilter]
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetECSServiceRecommendationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor ecs_service_recommendations: ::Array[Types::ECSServiceRecommendation]
+      attr_accessor errors: ::Array[Types::GetRecommendationError]
+      SENSITIVE: []
+    end
+
+    class GetEffectiveRecommendationPreferencesRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetEffectiveRecommendationPreferencesResponse
+      attr_accessor enhanced_infrastructure_metrics: ("Active" | "Inactive")
+      attr_accessor external_metrics_preference: Types::ExternalMetricsPreference
+      attr_accessor look_back_period: ("DAYS_14" | "DAYS_32" | "DAYS_93")
+      attr_accessor utilization_preferences: ::Array[Types::UtilizationPreference]
+      attr_accessor preferred_resources: ::Array[Types::EffectivePreferredResource]
+      SENSITIVE: []
+    end
+
+    class GetEnrollmentStatusRequest < Aws::EmptyStructure
+    end
+
+    class GetEnrollmentStatusResponse
+      attr_accessor status: ("Active" | "Inactive" | "Pending" | "Failed")
+      attr_accessor status_reason: ::String
+      attr_accessor member_accounts_enrolled: bool
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor number_of_member_accounts_opted_in: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetEnrollmentStatusesForOrganizationRequest
+      attr_accessor filters: ::Array[Types::EnrollmentFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetEnrollmentStatusesForOrganizationResponse
+      attr_accessor account_enrollment_statuses: ::Array[Types::AccountEnrollmentStatus]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetLambdaFunctionRecommendationsRequest
+      attr_accessor function_arns: ::Array[::String]
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::LambdaFunctionRecommendationFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetLambdaFunctionRecommendationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor lambda_function_recommendations: ::Array[Types::LambdaFunctionRecommendation]
+      SENSITIVE: []
+    end
+
+    class GetLicenseRecommendationsRequest
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::LicenseRecommendationFilter]
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetLicenseRecommendationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor license_recommendations: ::Array[Types::LicenseRecommendation]
+      attr_accessor errors: ::Array[Types::GetRecommendationError]
+      SENSITIVE: []
+    end
+
+    class GetRecommendationError
+      attr_accessor identifier: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecommendationPreferencesRequest
+      attr_accessor resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License")
+      attr_accessor scope: Types::Scope
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetRecommendationPreferencesResponse
+      attr_accessor next_token: ::String
+      attr_accessor recommendation_preferences_details: ::Array[Types::RecommendationPreferencesDetail]
+      SENSITIVE: []
+    end
+
+    class GetRecommendationSummariesRequest
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetRecommendationSummariesResponse
+      attr_accessor next_token: ::String
+      attr_accessor recommendation_summaries: ::Array[Types::RecommendationSummary]
+      SENSITIVE: []
+    end
+
+    class Gpu
+      attr_accessor gpu_count: ::Integer
+      attr_accessor gpu_memory_size_in_mi_b: ::Integer
+      SENSITIVE: []
+    end
+
+    class GpuInfo
+      attr_accessor gpus: ::Array[Types::Gpu]
+      SENSITIVE: []
+    end
+
+    class InferredWorkloadSaving
+      attr_accessor inferred_workload_types: ::Array[("AmazonEmr" | "ApacheCassandra" | "ApacheHadoop" | "Memcached" | "Nginx" | "PostgreSql" | "Redis" | "Kafka" | "SQLServer")]
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings
+      SENSITIVE: []
+    end
+
+    class InstanceEstimatedMonthlySavings
+      attr_accessor currency: ("USD" | "CNY")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class InstanceRecommendation
+      attr_accessor instance_arn: ::String
+      attr_accessor account_id: ::String
+      attr_accessor instance_name: ::String
+      attr_accessor current_instance_type: ::String
+      attr_accessor finding: ("Underprovisioned" | "Overprovisioned" | "Optimized" | "NotOptimized")
+      attr_accessor finding_reason_codes: ::Array[("CPUOverprovisioned" | "CPUUnderprovisioned" | "MemoryOverprovisioned" | "MemoryUnderprovisioned" | "EBSThroughputOverprovisioned" | "EBSThroughputUnderprovisioned" | "EBSIOPSOverprovisioned" | "EBSIOPSUnderprovisioned" | "NetworkBandwidthOverprovisioned" | "NetworkBandwidthUnderprovisioned" | "NetworkPPSOverprovisioned" | "NetworkPPSUnderprovisioned" | "DiskIOPSOverprovisioned" | "DiskIOPSUnderprovisioned" | "DiskThroughputOverprovisioned" | "DiskThroughputUnderprovisioned" | "GPUUnderprovisioned" | "GPUOverprovisioned" | "GPUMemoryUnderprovisioned" | "GPUMemoryOverprovisioned")]
+      attr_accessor utilization_metrics: ::Array[Types::UtilizationMetric]
+      attr_accessor look_back_period_in_days: ::Float
+      attr_accessor recommendation_options: ::Array[Types::InstanceRecommendationOption]
+      attr_accessor recommendation_sources: ::Array[Types::RecommendationSource]
+      attr_accessor last_refresh_timestamp: ::Time
+      attr_accessor current_performance_risk: ("VeryLow" | "Low" | "Medium" | "High")
+      attr_accessor effective_recommendation_preferences: Types::EffectiveRecommendationPreferences
+      attr_accessor inferred_workload_types: ::Array[("AmazonEmr" | "ApacheCassandra" | "ApacheHadoop" | "Memcached" | "Nginx" | "PostgreSql" | "Redis" | "Kafka" | "SQLServer")]
+      attr_accessor instance_state: ("pending" | "running" | "shutting-down" | "terminated" | "stopping" | "stopped")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor external_metric_status: Types::ExternalMetricStatus
+      attr_accessor current_instance_gpu_info: Types::GpuInfo
+      attr_accessor idle: ("True" | "False")
+      SENSITIVE: []
+    end
+
+    class InstanceRecommendationOption
+      attr_accessor instance_type: ::String
+      attr_accessor projected_utilization_metrics: ::Array[Types::UtilizationMetric]
+      attr_accessor platform_differences: ::Array[("Hypervisor" | "NetworkInterface" | "StorageInterface" | "InstanceStoreAvailability" | "VirtualizationType" | "Architecture")]
+      attr_accessor performance_risk: ::Float
+      attr_accessor rank: ::Integer
+      attr_accessor savings_opportunity: Types::SavingsOpportunity
+      attr_accessor migration_effort: ("VeryLow" | "Low" | "Medium" | "High")
+      attr_accessor instance_gpu_info: Types::GpuInfo
+      attr_accessor savings_opportunity_after_discounts: Types::InstanceSavingsOpportunityAfterDiscounts
+      SENSITIVE: []
+    end
+
+    class InstanceSavingsEstimationMode
+      attr_accessor source: ("PublicPricing" | "CostExplorerRightsizing" | "CostOptimizationHub")
+      SENSITIVE: []
+    end
+
+    class InstanceSavingsOpportunityAfterDiscounts
+      attr_accessor savings_opportunity_percentage: ::Float
+      attr_accessor estimated_monthly_savings: Types::InstanceEstimatedMonthlySavings
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterValueException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobFilter
+      attr_accessor name: ("ResourceType" | "JobStatus")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LambdaEffectiveRecommendationPreferences
+      attr_accessor savings_estimation_mode: Types::LambdaSavingsEstimationMode
+      SENSITIVE: []
+    end
+
+    class LambdaEstimatedMonthlySavings
+      attr_accessor currency: ("USD" | "CNY")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class LambdaFunctionMemoryProjectedMetric
+      attr_accessor name: ("Duration")
+      attr_accessor statistic: ("LowerBound" | "UpperBound" | "Expected")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class LambdaFunctionMemoryRecommendationOption
+      attr_accessor rank: ::Integer
+      attr_accessor memory_size: ::Integer
+      attr_accessor projected_utilization_metrics: ::Array[Types::LambdaFunctionMemoryProjectedMetric]
+      attr_accessor savings_opportunity: Types::SavingsOpportunity
+      attr_accessor savings_opportunity_after_discounts: Types::LambdaSavingsOpportunityAfterDiscounts
+      SENSITIVE: []
+    end
+
+    class LambdaFunctionRecommendation
+      attr_accessor function_arn: ::String
+      attr_accessor function_version: ::String
+      attr_accessor account_id: ::String
+      attr_accessor current_memory_size: ::Integer
+      attr_accessor number_of_invocations: ::Integer
+      attr_accessor utilization_metrics: ::Array[Types::LambdaFunctionUtilizationMetric]
+      attr_accessor lookback_period_in_days: ::Float
+      attr_accessor last_refresh_timestamp: ::Time
+      attr_accessor finding: ("Optimized" | "NotOptimized" | "Unavailable")
+      attr_accessor finding_reason_codes: ::Array[("MemoryOverprovisioned" | "MemoryUnderprovisioned" | "InsufficientData" | "Inconclusive")]
+      attr_accessor memory_size_recommendation_options: ::Array[Types::LambdaFunctionMemoryRecommendationOption]
+      attr_accessor current_performance_risk: ("VeryLow" | "Low" | "Medium" | "High")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor effective_recommendation_preferences: Types::LambdaEffectiveRecommendationPreferences
+      SENSITIVE: []
+    end
+
+    class LambdaFunctionRecommendationFilter
+      attr_accessor name: ("Finding" | "FindingReasonCode")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LambdaFunctionUtilizationMetric
+      attr_accessor name: ("Duration" | "Memory")
+      attr_accessor statistic: ("Maximum" | "Average")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class LambdaSavingsEstimationMode
+      attr_accessor source: ("PublicPricing" | "CostExplorerRightsizing" | "CostOptimizationHub")
+      SENSITIVE: []
+    end
+
+    class LambdaSavingsOpportunityAfterDiscounts
+      attr_accessor savings_opportunity_percentage: ::Float
+      attr_accessor estimated_monthly_savings: Types::LambdaEstimatedMonthlySavings
+      SENSITIVE: []
+    end
+
+    class LicenseConfiguration
+      attr_accessor number_of_cores: ::Integer
+      attr_accessor instance_type: ::String
+      attr_accessor operating_system: ::String
+      attr_accessor license_edition: ("Enterprise" | "Standard" | "Free" | "NoLicenseEditionFound")
+      attr_accessor license_name: ("SQLServer")
+      attr_accessor license_model: ("LicenseIncluded" | "BringYourOwnLicense")
+      attr_accessor license_version: ::String
+      attr_accessor metrics_source: ::Array[Types::MetricSource]
+      SENSITIVE: []
+    end
+
+    class LicenseRecommendation
+      attr_accessor resource_arn: ::String
+      attr_accessor account_id: ::String
+      attr_accessor current_license_configuration: Types::LicenseConfiguration
+      attr_accessor lookback_period_in_days: ::Float
+      attr_accessor last_refresh_timestamp: ::Time
+      attr_accessor finding: ("InsufficientMetrics" | "Optimized" | "NotOptimized")
+      attr_accessor finding_reason_codes: ::Array[("InvalidCloudWatchApplicationInsightsSetup" | "CloudWatchApplicationInsightsError" | "LicenseOverprovisioned" | "Optimized")]
+      attr_accessor license_recommendation_options: ::Array[Types::LicenseRecommendationOption]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class LicenseRecommendationFilter
+      attr_accessor name: ("Finding" | "FindingReasonCode" | "LicenseName")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LicenseRecommendationOption
+      attr_accessor rank: ::Integer
+      attr_accessor operating_system: ::String
+      attr_accessor license_edition: ("Enterprise" | "Standard" | "Free" | "NoLicenseEditionFound")
+      attr_accessor license_model: ("LicenseIncluded" | "BringYourOwnLicense")
+      attr_accessor savings_opportunity: Types::SavingsOpportunity
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MemorySizeConfiguration
+      attr_accessor memory: ::Integer
+      attr_accessor memory_reservation: ::Integer
+      SENSITIVE: []
+    end
+
+    class MetricSource
+      attr_accessor provider: ("CloudWatchApplicationInsights")
+      attr_accessor provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MissingAuthenticationToken
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OptInRequiredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PreferredResource
+      attr_accessor name: ("Ec2InstanceTypes")
+      attr_accessor include_list: ::Array[::String]
+      attr_accessor exclude_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ProjectedMetric
+      attr_accessor name: ("Cpu" | "Memory" | "EBS_READ_OPS_PER_SECOND" | "EBS_WRITE_OPS_PER_SECOND" | "EBS_READ_BYTES_PER_SECOND" | "EBS_WRITE_BYTES_PER_SECOND" | "DISK_READ_OPS_PER_SECOND" | "DISK_WRITE_OPS_PER_SECOND" | "DISK_READ_BYTES_PER_SECOND" | "DISK_WRITE_BYTES_PER_SECOND" | "NETWORK_IN_BYTES_PER_SECOND" | "NETWORK_OUT_BYTES_PER_SECOND" | "NETWORK_PACKETS_IN_PER_SECOND" | "NETWORK_PACKETS_OUT_PER_SECOND" | "GPU_PERCENTAGE" | "GPU_MEMORY_PERCENTAGE")
+      attr_accessor timestamps: ::Array[::Time]
+      attr_accessor values: ::Array[::Float]
+      SENSITIVE: []
+    end
+
+    class PutRecommendationPreferencesRequest
+      attr_accessor resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License")
+      attr_accessor scope: Types::Scope
+      attr_accessor enhanced_infrastructure_metrics: ("Active" | "Inactive")
+      attr_accessor inferred_workload_types: ("Active" | "Inactive")
+      attr_accessor external_metrics_preference: Types::ExternalMetricsPreference
+      attr_accessor look_back_period: ("DAYS_14" | "DAYS_32" | "DAYS_93")
+      attr_accessor utilization_preferences: ::Array[Types::UtilizationPreference]
+      attr_accessor preferred_resources: ::Array[Types::PreferredResource]
+      attr_accessor savings_estimation_mode: ("AfterDiscounts" | "BeforeDiscounts")
+      SENSITIVE: []
+    end
+
+    class PutRecommendationPreferencesResponse < Aws::EmptyStructure
+    end
+
+    class ReasonCodeSummary
+      attr_accessor name: ("MemoryOverprovisioned" | "MemoryUnderprovisioned")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class RecommendationExportJob
+      attr_accessor job_id: ::String
+      attr_accessor destination: Types::ExportDestination
+      attr_accessor resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License")
+      attr_accessor status: ("Queued" | "InProgress" | "Complete" | "Failed")
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class RecommendationPreferences
+      attr_accessor cpu_vendor_architectures: ::Array[("AWS_ARM64" | "CURRENT")]
+      SENSITIVE: []
+    end
+
+    class RecommendationPreferencesDetail
+      attr_accessor scope: Types::Scope
+      attr_accessor resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "NotApplicable" | "EcsService" | "License")
+      attr_accessor enhanced_infrastructure_metrics: ("Active" | "Inactive")
+      attr_accessor inferred_workload_types: ("Active" | "Inactive")
+      attr_accessor external_metrics_preference: Types::ExternalMetricsPreference
+      attr_accessor look_back_period: ("DAYS_14" | "DAYS_32" | "DAYS_93")
+      attr_accessor utilization_preferences: ::Array[Types::UtilizationPreference]
+      attr_accessor preferred_resources: ::Array[Types::EffectivePreferredResource]
+      attr_accessor savings_estimation_mode: ("AfterDiscounts" | "BeforeDiscounts")
+      SENSITIVE: []
+    end
+
+    class RecommendationSource
+      attr_accessor recommendation_source_arn: ::String
+      attr_accessor recommendation_source_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "EcsService" | "License")
+      SENSITIVE: []
+    end
+
+    class RecommendationSummary
+      attr_accessor summaries: ::Array[Types::Summary]
+      attr_accessor recommendation_resource_type: ("Ec2Instance" | "AutoScalingGroup" | "EbsVolume" | "LambdaFunction" | "EcsService" | "License")
+      attr_accessor account_id: ::String
+      attr_accessor savings_opportunity: Types::SavingsOpportunity
+      attr_accessor current_performance_risk_ratings: Types::CurrentPerformanceRiskRatings
+      attr_accessor inferred_workload_savings: ::Array[Types::InferredWorkloadSaving]
+      SENSITIVE: []
+    end
+
+    class RecommendedOptionProjectedMetric
+      attr_accessor recommended_instance_type: ::String
+      attr_accessor rank: ::Integer
+      attr_accessor projected_metrics: ::Array[Types::ProjectedMetric]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3Destination
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor metadata_key: ::String
+      SENSITIVE: []
+    end
+
+    class S3DestinationConfig
+      attr_accessor bucket: ::String
+      attr_accessor key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class SavingsOpportunity
+      attr_accessor savings_opportunity_percentage: ::Float
+      attr_accessor estimated_monthly_savings: Types::EstimatedMonthlySavings
+      SENSITIVE: []
+    end
+
+    class Scope
+      attr_accessor name: ("Organization" | "AccountId" | "ResourceArn")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceConfiguration
+      attr_accessor memory: ::Integer
+      attr_accessor cpu: ::Integer
+      attr_accessor container_configurations: ::Array[Types::ContainerConfiguration]
+      attr_accessor auto_scaling_configuration: ("TargetTrackingScalingCpu" | "TargetTrackingScalingMemory")
+      attr_accessor task_definition_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Summary
+      attr_accessor name: ("Underprovisioned" | "Overprovisioned" | "Optimized" | "NotOptimized")
+      attr_accessor value: ::Float
+      attr_accessor reason_code_summaries: ::Array[Types::ReasonCodeSummary]
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateEnrollmentStatusRequest
+      attr_accessor status: ("Active" | "Inactive" | "Pending" | "Failed")
+      attr_accessor include_member_accounts: bool
+      SENSITIVE: []
+    end
+
+    class UpdateEnrollmentStatusResponse
+      attr_accessor status: ("Active" | "Inactive" | "Pending" | "Failed")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class UtilizationMetric
+      attr_accessor name: ("Cpu" | "Memory" | "EBS_READ_OPS_PER_SECOND" | "EBS_WRITE_OPS_PER_SECOND" | "EBS_READ_BYTES_PER_SECOND" | "EBS_WRITE_BYTES_PER_SECOND" | "DISK_READ_OPS_PER_SECOND" | "DISK_WRITE_OPS_PER_SECOND" | "DISK_READ_BYTES_PER_SECOND" | "DISK_WRITE_BYTES_PER_SECOND" | "NETWORK_IN_BYTES_PER_SECOND" | "NETWORK_OUT_BYTES_PER_SECOND" | "NETWORK_PACKETS_IN_PER_SECOND" | "NETWORK_PACKETS_OUT_PER_SECOND" | "GPU_PERCENTAGE" | "GPU_MEMORY_PERCENTAGE")
+      attr_accessor statistic: ("Maximum" | "Average")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class UtilizationPreference
+      attr_accessor metric_name: ("CpuUtilization")
+      attr_accessor metric_parameters: Types::CustomizableMetricParameters
+      SENSITIVE: []
+    end
+
+    class VolumeConfiguration
+      attr_accessor volume_type: ::String
+      attr_accessor volume_size: ::Integer
+      attr_accessor volume_baseline_iops: ::Integer
+      attr_accessor volume_burst_iops: ::Integer
+      attr_accessor volume_baseline_throughput: ::Integer
+      attr_accessor volume_burst_throughput: ::Integer
+      attr_accessor root_volume: bool
+      SENSITIVE: []
+    end
+
+    class VolumeRecommendation
+      attr_accessor volume_arn: ::String
+      attr_accessor account_id: ::String
+      attr_accessor current_configuration: Types::VolumeConfiguration
+      attr_accessor finding: ("Optimized" | "NotOptimized")
+      attr_accessor utilization_metrics: ::Array[Types::EBSUtilizationMetric]
+      attr_accessor look_back_period_in_days: ::Float
+      attr_accessor volume_recommendation_options: ::Array[Types::VolumeRecommendationOption]
+      attr_accessor last_refresh_timestamp: ::Time
+      attr_accessor current_performance_risk: ("VeryLow" | "Low" | "Medium" | "High")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor effective_recommendation_preferences: Types::EBSEffectiveRecommendationPreferences
+      SENSITIVE: []
+    end
+
+    class VolumeRecommendationOption
+      attr_accessor configuration: Types::VolumeConfiguration
+      attr_accessor performance_risk: ::Float
+      attr_accessor rank: ::Integer
+      attr_accessor savings_opportunity: Types::SavingsOpportunity
+      attr_accessor savings_opportunity_after_discounts: Types::EBSSavingsOpportunityAfterDiscounts
+      SENSITIVE: []
+    end
+  end
+end

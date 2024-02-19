@@ -1,0 +1,311 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LexRuntimeV2
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexRuntimeV2/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?event_stream_handler: Proc,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?input_event_stream_handler: Proc,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?output_event_stream_handler: Proc,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _DeleteSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSessionResponse]
+        def bot_id: () -> ::String
+        def bot_alias_id: () -> ::String
+        def locale_id: () -> ::String
+        def session_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexRuntimeV2/Client.html#delete_session-instance_method
+      def delete_session: (
+                            bot_id: ::String,
+                            bot_alias_id: ::String,
+                            locale_id: ::String,
+                            session_id: ::String
+                          ) -> _DeleteSessionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSessionResponseSuccess
+
+      interface _GetSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionResponse]
+        def session_id: () -> ::String
+        def messages: () -> ::Array[Types::Message]
+        def interpretations: () -> ::Array[Types::Interpretation]
+        def session_state: () -> Types::SessionState
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexRuntimeV2/Client.html#get_session-instance_method
+      def get_session: (
+                         bot_id: ::String,
+                         bot_alias_id: ::String,
+                         locale_id: ::String,
+                         session_id: ::String
+                       ) -> _GetSessionResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionResponseSuccess
+
+      interface _PutSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutSessionResponse]
+        def content_type: () -> ::String
+        def messages: () -> ::String
+        def session_state: () -> ::String
+        def request_attributes: () -> ::String
+        def session_id: () -> ::String
+        def audio_stream: () -> ::IO
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexRuntimeV2/Client.html#put_session-instance_method
+      def put_session: (
+                         bot_id: ::String,
+                         bot_alias_id: ::String,
+                         locale_id: ::String,
+                         session_id: ::String,
+                         ?messages: Array[
+                           {
+                             content: ::String?,
+                             content_type: ("CustomPayload" | "ImageResponseCard" | "PlainText" | "SSML"),
+                             image_response_card: {
+                               title: ::String,
+                               subtitle: ::String?,
+                               image_url: ::String?,
+                               buttons: Array[
+                                 {
+                                   text: ::String,
+                                   value: ::String
+                                 },
+                               ]?
+                             }?
+                           },
+                         ],
+                         session_state: {
+                           dialog_action: {
+                             type: ("Close" | "ConfirmIntent" | "Delegate" | "ElicitIntent" | "ElicitSlot" | "None"),
+                             slot_to_elicit: ::String?,
+                             slot_elicitation_style: ("Default" | "SpellByLetter" | "SpellByWord")?,
+                             sub_slot_to_elicit: {
+                               name: ::String,
+                               sub_slot_to_elicit: untyped?
+                             }?
+                           }?,
+                           intent: {
+                             name: ::String,
+                             slots: Hash[::String, {
+                                 value: {
+                                   original_value: ::String?,
+                                   interpreted_value: ::String,
+                                   resolved_values: Array[::String]?
+                                 }?,
+                                 shape: ("Scalar" | "List" | "Composite")?,
+                                 values: Array[
+                                   untyped,
+                                 ]?,
+                                 sub_slots: untyped?
+                               }]?,
+                             state: ("Failed" | "Fulfilled" | "InProgress" | "ReadyForFulfillment" | "Waiting" | "FulfillmentInProgress")?,
+                             confirmation_state: ("Confirmed" | "Denied" | "None")?
+                           }?,
+                           active_contexts: Array[
+                             {
+                               name: ::String,
+                               time_to_live: {
+                                 time_to_live_in_seconds: ::Integer,
+                                 turns_to_live: ::Integer
+                               },
+                               context_attributes: Hash[::String, ::String]
+                             },
+                           ]?,
+                           session_attributes: Hash[::String, ::String]?,
+                           originating_request_id: ::String?,
+                           runtime_hints: {
+                             slot_hints: Hash[::String, Hash[::String, {
+                                   runtime_hint_values: Array[
+                                     {
+                                       phrase: ::String
+                                     },
+                                   ]?,
+                                   sub_slot_hints: untyped?
+                                 }]]?
+                           }?
+                         },
+                         ?request_attributes: Hash[::String, ::String],
+                         ?response_content_type: ::String
+                       ) ?{ (*untyped) -> void } -> _PutSessionResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _PutSessionResponseSuccess
+
+      interface _RecognizeTextResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RecognizeTextResponse]
+        def messages: () -> ::Array[Types::Message]
+        def session_state: () -> Types::SessionState
+        def interpretations: () -> ::Array[Types::Interpretation]
+        def request_attributes: () -> ::Hash[::String, ::String]
+        def session_id: () -> ::String
+        def recognized_bot_member: () -> Types::RecognizedBotMember
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexRuntimeV2/Client.html#recognize_text-instance_method
+      def recognize_text: (
+                            bot_id: ::String,
+                            bot_alias_id: ::String,
+                            locale_id: ::String,
+                            session_id: ::String,
+                            text: ::String,
+                            ?session_state: {
+                              dialog_action: {
+                                type: ("Close" | "ConfirmIntent" | "Delegate" | "ElicitIntent" | "ElicitSlot" | "None"),
+                                slot_to_elicit: ::String?,
+                                slot_elicitation_style: ("Default" | "SpellByLetter" | "SpellByWord")?,
+                                sub_slot_to_elicit: {
+                                  name: ::String,
+                                  sub_slot_to_elicit: untyped?
+                                }?
+                              }?,
+                              intent: {
+                                name: ::String,
+                                slots: Hash[::String, {
+                                    value: {
+                                      original_value: ::String?,
+                                      interpreted_value: ::String,
+                                      resolved_values: Array[::String]?
+                                    }?,
+                                    shape: ("Scalar" | "List" | "Composite")?,
+                                    values: Array[
+                                      untyped,
+                                    ]?,
+                                    sub_slots: untyped?
+                                  }]?,
+                                state: ("Failed" | "Fulfilled" | "InProgress" | "ReadyForFulfillment" | "Waiting" | "FulfillmentInProgress")?,
+                                confirmation_state: ("Confirmed" | "Denied" | "None")?
+                              }?,
+                              active_contexts: Array[
+                                {
+                                  name: ::String,
+                                  time_to_live: {
+                                    time_to_live_in_seconds: ::Integer,
+                                    turns_to_live: ::Integer
+                                  },
+                                  context_attributes: Hash[::String, ::String]
+                                },
+                              ]?,
+                              session_attributes: Hash[::String, ::String]?,
+                              originating_request_id: ::String?,
+                              runtime_hints: {
+                                slot_hints: Hash[::String, Hash[::String, {
+                                      runtime_hint_values: Array[
+                                        {
+                                          phrase: ::String
+                                        },
+                                      ]?,
+                                      sub_slot_hints: untyped?
+                                    }]]?
+                              }?
+                            },
+                            ?request_attributes: Hash[::String, ::String]
+                          ) -> _RecognizeTextResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RecognizeTextResponseSuccess
+
+      interface _RecognizeUtteranceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RecognizeUtteranceResponse]
+        def input_mode: () -> ::String
+        def content_type: () -> ::String
+        def messages: () -> ::String
+        def interpretations: () -> ::String
+        def session_state: () -> ::String
+        def request_attributes: () -> ::String
+        def session_id: () -> ::String
+        def input_transcript: () -> ::String
+        def audio_stream: () -> ::IO
+        def recognized_bot_member: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexRuntimeV2/Client.html#recognize_utterance-instance_method
+      def recognize_utterance: (
+                                 bot_id: ::String,
+                                 bot_alias_id: ::String,
+                                 locale_id: ::String,
+                                 session_id: ::String,
+                                 ?session_state: ::String,
+                                 ?request_attributes: ::String,
+                                 request_content_type: ::String,
+                                 ?response_content_type: ::String,
+                                 ?input_stream: ::String
+                               ) ?{ (*untyped) -> void } -> _RecognizeUtteranceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _RecognizeUtteranceResponseSuccess
+
+      interface _StartConversationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartConversationResponse]
+        def response_event_stream: () -> Types::StartConversationResponseEventStream
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LexRuntimeV2/Client.html#start_conversation-instance_method
+      def start_conversation: (
+                                bot_id: ::String,
+                                bot_alias_id: ::String,
+                                locale_id: ::String,
+                                session_id: ::String,
+                                ?conversation_mode: ("AUDIO" | "TEXT"),
+                                input_event_stream_hander: untyped
+                              ) ?{ (*untyped) -> void } -> _StartConversationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _StartConversationResponseSuccess
+    end
+  end
+end
+

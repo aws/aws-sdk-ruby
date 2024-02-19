@@ -21,6 +21,7 @@ module Aws::Athena
     ApplicationDPUSizesList = Shapes::ListShape.new(name: 'ApplicationDPUSizesList')
     AthenaError = Shapes::StructureShape.new(name: 'AthenaError')
     AuthToken = Shapes::StringShape.new(name: 'AuthToken')
+    AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     BatchGetNamedQueryInput = Shapes::StructureShape.new(name: 'BatchGetNamedQueryInput')
     BatchGetNamedQueryOutput = Shapes::StructureShape.new(name: 'BatchGetNamedQueryOutput')
@@ -154,6 +155,9 @@ module Aws::Athena
     GetWorkGroupInput = Shapes::StructureShape.new(name: 'GetWorkGroupInput')
     GetWorkGroupOutput = Shapes::StructureShape.new(name: 'GetWorkGroupOutput')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
+    IdentityCenterApplicationArn = Shapes::StringShape.new(name: 'IdentityCenterApplicationArn')
+    IdentityCenterConfiguration = Shapes::StructureShape.new(name: 'IdentityCenterConfiguration')
+    IdentityCenterInstanceArn = Shapes::StringShape.new(name: 'IdentityCenterInstanceArn')
     ImportNotebookInput = Shapes::StructureShape.new(name: 'ImportNotebookInput')
     ImportNotebookOutput = Shapes::StructureShape.new(name: 'ImportNotebookOutput')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -243,6 +247,7 @@ module Aws::Athena
     QueryExecutionState = Shapes::StringShape.new(name: 'QueryExecutionState')
     QueryExecutionStatistics = Shapes::StructureShape.new(name: 'QueryExecutionStatistics')
     QueryExecutionStatus = Shapes::StructureShape.new(name: 'QueryExecutionStatus')
+    QueryResultsS3AccessGrantsConfiguration = Shapes::StructureShape.new(name: 'QueryResultsS3AccessGrantsConfiguration')
     QueryRuntimeStatistics = Shapes::StructureShape.new(name: 'QueryRuntimeStatistics')
     QueryRuntimeStatisticsRows = Shapes::StructureShape.new(name: 'QueryRuntimeStatisticsRows')
     QueryRuntimeStatisticsTimeline = Shapes::StructureShape.new(name: 'QueryRuntimeStatisticsTimeline')
@@ -650,6 +655,7 @@ module Aws::Athena
     GetCapacityReservationOutput.struct_class = Types::GetCapacityReservationOutput
 
     GetDataCatalogInput.add_member(:name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "Name"))
+    GetDataCatalogInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
     GetDataCatalogInput.struct_class = Types::GetDataCatalogInput
 
     GetDataCatalogOutput.add_member(:data_catalog, Shapes::ShapeRef.new(shape: DataCatalog, location_name: "DataCatalog"))
@@ -657,6 +663,7 @@ module Aws::Athena
 
     GetDatabaseInput.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "CatalogName"))
     GetDatabaseInput.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    GetDatabaseInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
     GetDatabaseInput.struct_class = Types::GetDatabaseInput
 
     GetDatabaseOutput.add_member(:database, Shapes::ShapeRef.new(shape: Database, location_name: "Database"))
@@ -727,6 +734,7 @@ module Aws::Athena
     GetTableMetadataInput.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "CatalogName"))
     GetTableMetadataInput.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     GetTableMetadataInput.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    GetTableMetadataInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
     GetTableMetadataInput.struct_class = Types::GetTableMetadataInput
 
     GetTableMetadataOutput.add_member(:table_metadata, Shapes::ShapeRef.new(shape: TableMetadata, location_name: "TableMetadata"))
@@ -738,10 +746,15 @@ module Aws::Athena
     GetWorkGroupOutput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroup, location_name: "WorkGroup"))
     GetWorkGroupOutput.struct_class = Types::GetWorkGroupOutput
 
+    IdentityCenterConfiguration.add_member(:enable_identity_center, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "EnableIdentityCenter"))
+    IdentityCenterConfiguration.add_member(:identity_center_instance_arn, Shapes::ShapeRef.new(shape: IdentityCenterInstanceArn, location_name: "IdentityCenterInstanceArn"))
+    IdentityCenterConfiguration.struct_class = Types::IdentityCenterConfiguration
+
     ImportNotebookInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
     ImportNotebookInput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, required: true, location_name: "Name"))
-    ImportNotebookInput.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, required: true, location_name: "Payload"))
+    ImportNotebookInput.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "Payload"))
     ImportNotebookInput.add_member(:type, Shapes::ShapeRef.new(shape: NotebookType, required: true, location_name: "Type"))
+    ImportNotebookInput.add_member(:notebook_s3_location_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "NotebookS3LocationUri"))
     ImportNotebookInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     ImportNotebookInput.struct_class = Types::ImportNotebookInput
 
@@ -783,6 +796,7 @@ module Aws::Athena
 
     ListDataCatalogsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListDataCatalogsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxDataCatalogsCount, location_name: "MaxResults"))
+    ListDataCatalogsInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
     ListDataCatalogsInput.struct_class = Types::ListDataCatalogsInput
 
     ListDataCatalogsOutput.add_member(:data_catalogs_summary, Shapes::ShapeRef.new(shape: DataCatalogSummaryList, location_name: "DataCatalogsSummary"))
@@ -792,6 +806,7 @@ module Aws::Athena
     ListDatabasesInput.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "CatalogName"))
     ListDatabasesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListDatabasesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxDatabasesCount, location_name: "MaxResults"))
+    ListDatabasesInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
     ListDatabasesInput.struct_class = Types::ListDatabasesInput
 
     ListDatabasesOutput.add_member(:database_list, Shapes::ShapeRef.new(shape: DatabaseList, location_name: "DatabaseList"))
@@ -878,6 +893,7 @@ module Aws::Athena
     ListTableMetadataInput.add_member(:expression, Shapes::ShapeRef.new(shape: ExpressionString, location_name: "Expression"))
     ListTableMetadataInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListTableMetadataInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxTableMetadataCount, location_name: "MaxResults"))
+    ListTableMetadataInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, location_name: "WorkGroup"))
     ListTableMetadataInput.struct_class = Types::ListTableMetadataInput
 
     ListTableMetadataOutput.add_member(:table_metadata_list, Shapes::ShapeRef.new(shape: TableMetadataList, location_name: "TableMetadataList"))
@@ -970,6 +986,7 @@ module Aws::Athena
     QueryExecution.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
     QueryExecution.add_member(:execution_parameters, Shapes::ShapeRef.new(shape: ExecutionParameters, location_name: "ExecutionParameters"))
     QueryExecution.add_member(:substatement_type, Shapes::ShapeRef.new(shape: String, location_name: "SubstatementType"))
+    QueryExecution.add_member(:query_results_s3_access_grants_configuration, Shapes::ShapeRef.new(shape: QueryResultsS3AccessGrantsConfiguration, location_name: "QueryResultsS3AccessGrantsConfiguration"))
     QueryExecution.struct_class = Types::QueryExecution
 
     QueryExecutionContext.add_member(:database, Shapes::ShapeRef.new(shape: DatabaseString, location_name: "Database"))
@@ -985,6 +1002,7 @@ module Aws::Athena
     QueryExecutionStatistics.add_member(:data_manifest_location, Shapes::ShapeRef.new(shape: String, location_name: "DataManifestLocation"))
     QueryExecutionStatistics.add_member(:total_execution_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "TotalExecutionTimeInMillis"))
     QueryExecutionStatistics.add_member(:query_queue_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "QueryQueueTimeInMillis"))
+    QueryExecutionStatistics.add_member(:service_pre_processing_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "ServicePreProcessingTimeInMillis"))
     QueryExecutionStatistics.add_member(:query_planning_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "QueryPlanningTimeInMillis"))
     QueryExecutionStatistics.add_member(:service_processing_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "ServiceProcessingTimeInMillis"))
     QueryExecutionStatistics.add_member(:result_reuse_information, Shapes::ShapeRef.new(shape: ResultReuseInformation, location_name: "ResultReuseInformation"))
@@ -996,6 +1014,11 @@ module Aws::Athena
     QueryExecutionStatus.add_member(:completion_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "CompletionDateTime"))
     QueryExecutionStatus.add_member(:athena_error, Shapes::ShapeRef.new(shape: AthenaError, location_name: "AthenaError"))
     QueryExecutionStatus.struct_class = Types::QueryExecutionStatus
+
+    QueryResultsS3AccessGrantsConfiguration.add_member(:enable_s3_access_grants, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "EnableS3AccessGrants"))
+    QueryResultsS3AccessGrantsConfiguration.add_member(:create_user_level_prefix, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "CreateUserLevelPrefix"))
+    QueryResultsS3AccessGrantsConfiguration.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, required: true, location_name: "AuthenticationType"))
+    QueryResultsS3AccessGrantsConfiguration.struct_class = Types::QueryResultsS3AccessGrantsConfiguration
 
     QueryRuntimeStatistics.add_member(:timeline, Shapes::ShapeRef.new(shape: QueryRuntimeStatisticsTimeline, location_name: "Timeline"))
     QueryRuntimeStatistics.add_member(:rows, Shapes::ShapeRef.new(shape: QueryRuntimeStatisticsRows, location_name: "Rows"))
@@ -1009,6 +1032,7 @@ module Aws::Athena
     QueryRuntimeStatisticsRows.struct_class = Types::QueryRuntimeStatisticsRows
 
     QueryRuntimeStatisticsTimeline.add_member(:query_queue_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "QueryQueueTimeInMillis"))
+    QueryRuntimeStatisticsTimeline.add_member(:service_pre_processing_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "ServicePreProcessingTimeInMillis"))
     QueryRuntimeStatisticsTimeline.add_member(:query_planning_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "QueryPlanningTimeInMillis"))
     QueryRuntimeStatisticsTimeline.add_member(:engine_execution_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "EngineExecutionTimeInMillis"))
     QueryRuntimeStatisticsTimeline.add_member(:service_processing_time_in_millis, Shapes::ShapeRef.new(shape: Long, location_name: "ServiceProcessingTimeInMillis"))
@@ -1278,6 +1302,7 @@ module Aws::Athena
     WorkGroup.add_member(:configuration, Shapes::ShapeRef.new(shape: WorkGroupConfiguration, location_name: "Configuration"))
     WorkGroup.add_member(:description, Shapes::ShapeRef.new(shape: WorkGroupDescriptionString, location_name: "Description"))
     WorkGroup.add_member(:creation_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
+    WorkGroup.add_member(:identity_center_application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "IdentityCenterApplicationArn"))
     WorkGroup.struct_class = Types::WorkGroup
 
     WorkGroupConfiguration.add_member(:result_configuration, Shapes::ShapeRef.new(shape: ResultConfiguration, location_name: "ResultConfiguration"))
@@ -1290,6 +1315,8 @@ module Aws::Athena
     WorkGroupConfiguration.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRole"))
     WorkGroupConfiguration.add_member(:customer_content_encryption_configuration, Shapes::ShapeRef.new(shape: CustomerContentEncryptionConfiguration, location_name: "CustomerContentEncryptionConfiguration"))
     WorkGroupConfiguration.add_member(:enable_minimum_encryption_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "EnableMinimumEncryptionConfiguration"))
+    WorkGroupConfiguration.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfiguration, location_name: "IdentityCenterConfiguration"))
+    WorkGroupConfiguration.add_member(:query_results_s3_access_grants_configuration, Shapes::ShapeRef.new(shape: QueryResultsS3AccessGrantsConfiguration, location_name: "QueryResultsS3AccessGrantsConfiguration"))
     WorkGroupConfiguration.struct_class = Types::WorkGroupConfiguration
 
     WorkGroupConfigurationUpdates.add_member(:enforce_work_group_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "EnforceWorkGroupConfiguration"))
@@ -1304,6 +1331,7 @@ module Aws::Athena
     WorkGroupConfigurationUpdates.add_member(:execution_role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRole"))
     WorkGroupConfigurationUpdates.add_member(:customer_content_encryption_configuration, Shapes::ShapeRef.new(shape: CustomerContentEncryptionConfiguration, location_name: "CustomerContentEncryptionConfiguration"))
     WorkGroupConfigurationUpdates.add_member(:enable_minimum_encryption_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "EnableMinimumEncryptionConfiguration"))
+    WorkGroupConfigurationUpdates.add_member(:query_results_s3_access_grants_configuration, Shapes::ShapeRef.new(shape: QueryResultsS3AccessGrantsConfiguration, location_name: "QueryResultsS3AccessGrantsConfiguration"))
     WorkGroupConfigurationUpdates.struct_class = Types::WorkGroupConfigurationUpdates
 
     WorkGroupNamesList.member = Shapes::ShapeRef.new(shape: WorkGroupName)
@@ -1313,6 +1341,7 @@ module Aws::Athena
     WorkGroupSummary.add_member(:description, Shapes::ShapeRef.new(shape: WorkGroupDescriptionString, location_name: "Description"))
     WorkGroupSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
     WorkGroupSummary.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
+    WorkGroupSummary.add_member(:identity_center_application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "IdentityCenterApplicationArn"))
     WorkGroupSummary.struct_class = Types::WorkGroupSummary
 
     WorkGroupsList.member = Shapes::ShapeRef.new(shape: WorkGroupSummary)

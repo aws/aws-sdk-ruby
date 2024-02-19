@@ -944,6 +944,27 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # Describes the data replication settings.
+    #
+    # @!attribute [rw] data_replication
+    #   Indicates whether data replication is enabled, and if enabled, the
+    #   type of data replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_snapshot_time
+    #   The date and time at which the last successful snapshot was taken of
+    #   the primary WorkSpace used for replicating data.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DataReplicationSettings AWS API Documentation
+    #
+    class DataReplicationSettings < Struct.new(
+      :data_replication,
+      :recovery_snapshot_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Returns default client branding attributes that were imported. These
     # attributes display on the client login screen.
     #
@@ -2137,6 +2158,10 @@ module Aws::WorkSpaces
     #   paginated, provide this token to receive the next set of results.
     #   @return [String]
     #
+    # @!attribute [rw] workspace_name
+    #   The name of the user-decoupled WorkSpace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesRequest AWS API Documentation
     #
     class DescribeWorkspacesRequest < Struct.new(
@@ -2145,7 +2170,8 @@ module Aws::WorkSpaces
       :user_name,
       :bundle_id,
       :limit,
-      :next_token)
+      :next_token,
+      :workspace_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3093,11 +3119,16 @@ module Aws::WorkSpaces
     #   The properties of the WorkSpace.
     #   @return [Types::WorkspaceProperties]
     #
+    # @!attribute [rw] data_replication
+    #   Indicates the data replication status.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspacePropertiesRequest AWS API Documentation
     #
     class ModifyWorkspacePropertiesRequest < Struct.new(
       :workspace_id,
-      :workspace_properties)
+      :workspace_properties,
+      :data_replication)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3680,13 +3711,45 @@ module Aws::WorkSpaces
     #   The tags associated with the standby WorkSpace.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] data_replication
+    #   Indicates whether data replication is enabled, and if enabled, the
+    #   type of data replication.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StandbyWorkspace AWS API Documentation
     #
     class StandbyWorkspace < Struct.new(
       :primary_workspace_id,
       :volume_encryption_key,
       :directory_id,
-      :tags)
+      :tags,
+      :data_replication)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the properties of the related standby WorkSpaces.
+    #
+    # @!attribute [rw] standby_workspace_id
+    #   The identifier of the standby WorkSpace
+    #   @return [String]
+    #
+    # @!attribute [rw] data_replication
+    #   Indicates whether data replication is enabled, and if enabled, the
+    #   type of data replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_snapshot_time
+    #   The date and time at which the last successful snapshot was taken of
+    #   the primary WorkSpace used for replicating data.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StandbyWorkspacesProperties AWS API Documentation
+    #
+    class StandbyWorkspacesProperties < Struct.new(
+      :standby_workspace_id,
+      :data_replication,
+      :recovery_snapshot_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4175,6 +4238,10 @@ module Aws::WorkSpaces
     #   Indicates whether the data stored on the root volume is encrypted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] workspace_name
+    #   The name of the user-decoupled WorkSpace.
+    #   @return [String]
+    #
     # @!attribute [rw] workspace_properties
     #   The properties of the WorkSpace.
     #   @return [Types::WorkspaceProperties]
@@ -4187,6 +4254,14 @@ module Aws::WorkSpaces
     #   The standby WorkSpace or primary WorkSpace related to the specified
     #   WorkSpace.
     #   @return [Array<Types::RelatedWorkspaceProperties>]
+    #
+    # @!attribute [rw] data_replication_settings
+    #   Indicates the settings of the data replication.
+    #   @return [Types::DataReplicationSettings]
+    #
+    # @!attribute [rw] standby_workspaces_properties
+    #   The properties of the standby WorkSpace
+    #   @return [Array<Types::StandbyWorkspacesProperties>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/Workspace AWS API Documentation
     #
@@ -4204,9 +4279,12 @@ module Aws::WorkSpaces
       :volume_encryption_key,
       :user_volume_encryption_enabled,
       :root_volume_encryption_enabled,
+      :workspace_name,
       :workspace_properties,
       :modification_states,
-      :related_workspaces)
+      :related_workspaces,
+      :data_replication_settings,
+      :standby_workspaces_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4774,6 +4852,9 @@ module Aws::WorkSpaces
     # @!attribute [rw] user_name
     #   The user name of the user for the WorkSpace. This user name must
     #   exist in the Directory Service directory for the WorkSpace.
+    #
+    #   The reserved keyword, `[UNDEFINED]`, is used when creating
+    #   user-decoupled WorkSpaces.
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
@@ -4802,6 +4883,10 @@ module Aws::WorkSpaces
     #   The tags for the WorkSpace.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] workspace_name
+    #   The name of the user-decoupled WorkSpace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceRequest AWS API Documentation
     #
     class WorkspaceRequest < Struct.new(
@@ -4812,7 +4897,8 @@ module Aws::WorkSpaces
       :user_volume_encryption_enabled,
       :root_volume_encryption_enabled,
       :workspace_properties,
-      :tags)
+      :tags,
+      :workspace_name)
       SENSITIVE = []
       include Aws::Structure
     end

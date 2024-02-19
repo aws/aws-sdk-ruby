@@ -1,0 +1,55 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CognitoSync
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AlreadyStreamedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DuplicateRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalErrorException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidConfigurationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidLambdaFunctionOutputException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LambdaThrottledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotAuthorizedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyRequestsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

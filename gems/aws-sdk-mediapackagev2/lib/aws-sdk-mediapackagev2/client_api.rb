@@ -55,6 +55,9 @@ module Aws::MediaPackageV2
     EncryptionContractConfiguration = Shapes::StructureShape.new(name: 'EncryptionContractConfiguration')
     EncryptionKeyRotationIntervalSecondsInteger = Shapes::IntegerShape.new(name: 'EncryptionKeyRotationIntervalSecondsInteger')
     EncryptionMethod = Shapes::StructureShape.new(name: 'EncryptionMethod')
+    FilterConfiguration = Shapes::StructureShape.new(name: 'FilterConfiguration')
+    FilterConfigurationManifestFilterString = Shapes::StringShape.new(name: 'FilterConfigurationManifestFilterString')
+    FilterConfigurationTimeDelaySecondsInteger = Shapes::IntegerShape.new(name: 'FilterConfigurationTimeDelaySecondsInteger')
     GetChannelGroupRequest = Shapes::StructureShape.new(name: 'GetChannelGroupRequest')
     GetChannelGroupResponse = Shapes::StructureShape.new(name: 'GetChannelGroupResponse')
     GetChannelPolicyRequest = Shapes::StructureShape.new(name: 'GetChannelPolicyRequest')
@@ -198,6 +201,7 @@ module Aws::MediaPackageV2
     CreateHlsManifestConfiguration.add_member(:scte_hls, Shapes::ShapeRef.new(shape: ScteHls, location_name: "ScteHls"))
     CreateHlsManifestConfiguration.add_member(:manifest_window_seconds, Shapes::ShapeRef.new(shape: CreateHlsManifestConfigurationManifestWindowSecondsInteger, location_name: "ManifestWindowSeconds"))
     CreateHlsManifestConfiguration.add_member(:program_date_time_interval_seconds, Shapes::ShapeRef.new(shape: CreateHlsManifestConfigurationProgramDateTimeIntervalSecondsInteger, location_name: "ProgramDateTimeIntervalSeconds"))
+    CreateHlsManifestConfiguration.add_member(:filter_configuration, Shapes::ShapeRef.new(shape: FilterConfiguration, location_name: "FilterConfiguration"))
     CreateHlsManifestConfiguration.struct_class = Types::CreateHlsManifestConfiguration
 
     CreateHlsManifests.member = Shapes::ShapeRef.new(shape: CreateHlsManifestConfiguration)
@@ -207,6 +211,7 @@ module Aws::MediaPackageV2
     CreateLowLatencyHlsManifestConfiguration.add_member(:scte_hls, Shapes::ShapeRef.new(shape: ScteHls, location_name: "ScteHls"))
     CreateLowLatencyHlsManifestConfiguration.add_member(:manifest_window_seconds, Shapes::ShapeRef.new(shape: CreateLowLatencyHlsManifestConfigurationManifestWindowSecondsInteger, location_name: "ManifestWindowSeconds"))
     CreateLowLatencyHlsManifestConfiguration.add_member(:program_date_time_interval_seconds, Shapes::ShapeRef.new(shape: CreateLowLatencyHlsManifestConfigurationProgramDateTimeIntervalSecondsInteger, location_name: "ProgramDateTimeIntervalSeconds"))
+    CreateLowLatencyHlsManifestConfiguration.add_member(:filter_configuration, Shapes::ShapeRef.new(shape: FilterConfiguration, location_name: "FilterConfiguration"))
     CreateLowLatencyHlsManifestConfiguration.struct_class = Types::CreateLowLatencyHlsManifestConfiguration
 
     CreateLowLatencyHlsManifests.member = Shapes::ShapeRef.new(shape: CreateLowLatencyHlsManifestConfiguration)
@@ -284,6 +289,12 @@ module Aws::MediaPackageV2
     EncryptionMethod.add_member(:cmaf_encryption_method, Shapes::ShapeRef.new(shape: CmafEncryptionMethod, location_name: "CmafEncryptionMethod"))
     EncryptionMethod.struct_class = Types::EncryptionMethod
 
+    FilterConfiguration.add_member(:manifest_filter, Shapes::ShapeRef.new(shape: FilterConfigurationManifestFilterString, location_name: "ManifestFilter"))
+    FilterConfiguration.add_member(:start, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Start"))
+    FilterConfiguration.add_member(:end, Shapes::ShapeRef.new(shape: Timestamp, location_name: "End"))
+    FilterConfiguration.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: FilterConfigurationTimeDelaySecondsInteger, location_name: "TimeDelaySeconds"))
+    FilterConfiguration.struct_class = Types::FilterConfiguration
+
     GetChannelGroupRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
     GetChannelGroupRequest.struct_class = Types::GetChannelGroupRequest
 
@@ -325,6 +336,7 @@ module Aws::MediaPackageV2
     GetHlsManifestConfiguration.add_member(:manifest_window_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "ManifestWindowSeconds"))
     GetHlsManifestConfiguration.add_member(:program_date_time_interval_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "ProgramDateTimeIntervalSeconds"))
     GetHlsManifestConfiguration.add_member(:scte_hls, Shapes::ShapeRef.new(shape: ScteHls, location_name: "ScteHls"))
+    GetHlsManifestConfiguration.add_member(:filter_configuration, Shapes::ShapeRef.new(shape: FilterConfiguration, location_name: "FilterConfiguration"))
     GetHlsManifestConfiguration.struct_class = Types::GetHlsManifestConfiguration
 
     GetHlsManifests.member = Shapes::ShapeRef.new(shape: GetHlsManifestConfiguration)
@@ -335,6 +347,7 @@ module Aws::MediaPackageV2
     GetLowLatencyHlsManifestConfiguration.add_member(:manifest_window_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "ManifestWindowSeconds"))
     GetLowLatencyHlsManifestConfiguration.add_member(:program_date_time_interval_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "ProgramDateTimeIntervalSeconds"))
     GetLowLatencyHlsManifestConfiguration.add_member(:scte_hls, Shapes::ShapeRef.new(shape: ScteHls, location_name: "ScteHls"))
+    GetLowLatencyHlsManifestConfiguration.add_member(:filter_configuration, Shapes::ShapeRef.new(shape: FilterConfiguration, location_name: "FilterConfiguration"))
     GetLowLatencyHlsManifestConfiguration.struct_class = Types::GetLowLatencyHlsManifestConfiguration
 
     GetLowLatencyHlsManifests.member = Shapes::ShapeRef.new(shape: GetLowLatencyHlsManifestConfiguration)
@@ -783,6 +796,7 @@ module Aws::MediaPackageV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

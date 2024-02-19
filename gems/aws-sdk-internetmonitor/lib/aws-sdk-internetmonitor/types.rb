@@ -275,12 +275,64 @@ module Aws::InternetMonitor
     #
     class DeleteMonitorOutput < Aws::EmptyStructure; end
 
+    # A filter that you use with the results of a Amazon CloudWatch Internet
+    # Monitor query that you created and ran. The query sets up a repository
+    # of data that is a subset of your application's Internet Monitor data.
+    # `FilterParameter` is a string that defines how you want to filter the
+    # repository of data to return a set of results, based on your criteria.
+    #
+    # The filter parameters that you can specify depend on the query type
+    # that you used to create the repository, since each query type returns
+    # a different set of Internet Monitor data.
+    #
+    # For each filter, you specify a field (such as `city`), an operator
+    # (such as `not_equals`, and a value or array of values (such as
+    # `["Seattle", "Redmond"]`). Separate values in the array with commas.
+    #
+    # For more information about specifying filter parameters, see [Using
+    # the Amazon CloudWatch Internet Monitor query interface][1] in the
+    # Amazon CloudWatch Internet Monitor User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html
+    #
+    # @!attribute [rw] field
+    #   A data field that you want to filter, to further scope your
+    #   application's Internet Monitor data in a repository that you
+    #   created by running a query. A field might be `city`, for example.
+    #   The field must be one of the fields that was returned by the
+    #   specific query that you used to create the repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operator to use with the filter field and a value, such as
+    #   `not_equals`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   One or more values to be used, together with the specified operator,
+    #   to filter data for a query. For example, you could specify an array
+    #   of values such as `["Seattle", "Redmond"]`. Values in the array are
+    #   separated by commas.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/FilterParameter AWS API Documentation
+    #
+    class FilterParameter < Struct.new(
+      :field,
+      :operator,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] monitor_name
     #   The name of the monitor.
     #   @return [String]
     #
     # @!attribute [rw] event_id
-    #   The internally generated identifier of a health event. Because
+    #   The internally-generated identifier of a health event. Because
     #   `EventID` contains the forward slash (“/”) character, you must
     #   URL-encode the `EventID` field in the request URL.
     #   @return [String]
@@ -299,7 +351,7 @@ module Aws::InternetMonitor
     #   @return [String]
     #
     # @!attribute [rw] event_id
-    #   The internally generated identifier of a health event.
+    #   The internally-generated identifier of a health event.
     #   @return [String]
     #
     # @!attribute [rw] started_at
@@ -486,6 +538,94 @@ module Aws::InternetMonitor
       include Aws::Structure
     end
 
+    # @!attribute [rw] monitor_name
+    #   The name of the monitor to return data for.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_id
+    #   The ID of the query that you want to return data results for. A
+    #   `QueryId` is an internally-generated identifier for a specific
+    #   query.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of query results that you want to return with this call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetQueryResultsInput AWS API Documentation
+    #
+    class GetQueryResultsInput < Struct.new(
+      :monitor_name,
+      :query_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fields
+    #   The fields that the query returns data for. Fields are name-data
+    #   type pairs, such as `availability_score`-`float`.
+    #   @return [Array<Types::QueryField>]
+    #
+    # @!attribute [rw] data
+    #   The data results that the query returns. Data is returned in arrays,
+    #   aligned with the `Fields` for the query, which creates a repository
+    #   of Amazon CloudWatch Internet Monitor information for your
+    #   application. Then, you can filter the information in the repository
+    #   by using `FilterParameters` that you define.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetQueryResultsOutput AWS API Documentation
+    #
+    class GetQueryResultsOutput < Struct.new(
+      :fields,
+      :data,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitor_name
+    #   The name of the monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_id
+    #   The ID of the query that you want to return the status for. A
+    #   `QueryId` is an internally-generated dentifier for a specific query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetQueryStatusInput AWS API Documentation
+    #
+    class GetQueryStatusInput < Struct.new(
+      :monitor_name,
+      :query_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current status for a query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/GetQueryStatusOutput AWS API Documentation
+    #
+    class GetQueryStatusOutput < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a health event created in a monitor in Amazon
     # CloudWatch Internet Monitor.
     #
@@ -494,7 +634,7 @@ module Aws::InternetMonitor
     #   @return [String]
     #
     # @!attribute [rw] event_id
-    #   The internally generated identifier of a specific network traffic
+    #   The internally-generated identifier of a specific network traffic
     #   impairment health event.
     #   @return [String]
     #
@@ -977,6 +1117,9 @@ module Aws::InternetMonitor
     # Monitor creates an event when a threshold is crossed for a local
     # health score.
     #
+    # If you don't set a local health event threshold, the default value is
+    # 60%.
+    #
     # For more information, see [ Change health event thresholds][1] in the
     # Internet Monitor section of the *CloudWatch User Guide*.
     #
@@ -998,6 +1141,9 @@ module Aws::InternetMonitor
     #   The minimum percentage of overall traffic for an application that
     #   must be impacted by an issue before Internet Monitor creates an
     #   event when a threshold is crossed for a local health score.
+    #
+    #   If you don't set a minimum traffic impact threshold, the default
+    #   value is 0.01%.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/LocalHealthEventsConfig AWS API Documentation
@@ -1205,6 +1351,31 @@ module Aws::InternetMonitor
       include Aws::Structure
     end
 
+    # Defines a field to query for your application's Amazon CloudWatch
+    # Internet Monitor data. You create a data repository by running a query
+    # of a specific type. Each `QueryType` includes a specific set of fields
+    # and datatypes to retrieve data for.
+    #
+    # @!attribute [rw] name
+    #   The name of a field to query your application's Amazon CloudWatch
+    #   Internet Monitor data for, such as `availability_score`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data type for a query field, which must correspond to the field
+    #   you're defining for `QueryField`. For example, if the query field
+    #   name is `availability_score`, the data type is `float`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/QueryField AWS API Documentation
+    #
+    class QueryField < Struct.new(
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request specifies a resource that doesn't exist.
     #
     # @!attribute [rw] message
@@ -1273,6 +1444,102 @@ module Aws::InternetMonitor
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] monitor_name
+    #   The name of the monitor to query.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp that is the beginning of the period that you want to
+    #   retrieve data for with your query.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp that is the end of the period that you want to
+    #   retrieve data for with your query.
+    #   @return [Time]
+    #
+    # @!attribute [rw] query_type
+    #   The type of query to run. The following are the three types of
+    #   queries that you can run using the Internet Monitor query interface:
+    #
+    #   * `MEASUREMENTS`: TBD definition
+    #
+    #   * `TOP_LOCATIONS`: TBD definition
+    #
+    #   * `TOP_LOCATION_DETAILS`: TBD definition
+    #
+    #   For lists of the fields returned with each query type and more
+    #   information about how each type of query is performed, see [ Using
+    #   the Amazon CloudWatch Internet Monitor query interface][1] in the
+    #   Amazon CloudWatch Internet Monitor User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_parameters
+    #   The `FilterParameters` field that you use with Amazon CloudWatch
+    #   Internet Monitor queries is a string the defines how you want a
+    #   query to be filtered. The filter parameters that you can specify
+    #   depend on the query type, since each query type returns a different
+    #   set of Internet Monitor data.
+    #
+    #   For more information about specifying filter parameters, see [Using
+    #   the Amazon CloudWatch Internet Monitor query interface][1] in the
+    #   Amazon CloudWatch Internet Monitor User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html
+    #   @return [Array<Types::FilterParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/StartQueryInput AWS API Documentation
+    #
+    class StartQueryInput < Struct.new(
+      :monitor_name,
+      :start_time,
+      :end_time,
+      :query_type,
+      :filter_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_id
+    #   The internally-generated identifier of a specific query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/StartQueryOutput AWS API Documentation
+    #
+    class StartQueryOutput < Struct.new(
+      :query_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitor_name
+    #   The name of the monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_id
+    #   The ID of the query that you want to stop. A `QueryId` is an
+    #   internally-generated identifier for a specific query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/StopQueryInput AWS API Documentation
+    #
+    class StopQueryInput < Struct.new(
+      :monitor_name,
+      :query_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/StopQueryOutput AWS API Documentation
+    #
+    class StopQueryOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) for a tag that you add to a resource.

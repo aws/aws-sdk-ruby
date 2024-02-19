@@ -1,0 +1,1066 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SES
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CloneReceiptRuleSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CloneReceiptRuleSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#clone_receipt_rule_set-instance_method
+      def clone_receipt_rule_set: (
+                                    rule_set_name: ::String,
+                                    original_rule_set_name: ::String
+                                  ) -> _CloneReceiptRuleSetResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CloneReceiptRuleSetResponseSuccess
+
+      interface _CreateConfigurationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfigurationSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#create_configuration_set-instance_method
+      def create_configuration_set: (
+                                      configuration_set: {
+                                        name: ::String
+                                      }
+                                    ) -> _CreateConfigurationSetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationSetResponseSuccess
+
+      interface _CreateConfigurationSetEventDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfigurationSetEventDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#create_configuration_set_event_destination-instance_method
+      def create_configuration_set_event_destination: (
+                                                        configuration_set_name: ::String,
+                                                        event_destination: {
+                                                          name: ::String,
+                                                          enabled: bool?,
+                                                          matching_event_types: Array[("send" | "reject" | "bounce" | "complaint" | "delivery" | "open" | "click" | "renderingFailure")],
+                                                          kinesis_firehose_destination: {
+                                                            iam_role_arn: ::String,
+                                                            delivery_stream_arn: ::String
+                                                          }?,
+                                                          cloud_watch_destination: {
+                                                            dimension_configurations: Array[
+                                                              {
+                                                                dimension_name: ::String,
+                                                                dimension_value_source: ("messageTag" | "emailHeader" | "linkTag"),
+                                                                default_dimension_value: ::String
+                                                              },
+                                                            ]
+                                                          }?,
+                                                          sns_destination: {
+                                                            topic_arn: ::String
+                                                          }?
+                                                        }
+                                                      ) -> _CreateConfigurationSetEventDestinationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationSetEventDestinationResponseSuccess
+
+      interface _CreateConfigurationSetTrackingOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConfigurationSetTrackingOptionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#create_configuration_set_tracking_options-instance_method
+      def create_configuration_set_tracking_options: (
+                                                       configuration_set_name: ::String,
+                                                       tracking_options: {
+                                                         custom_redirect_domain: ::String?
+                                                       }
+                                                     ) -> _CreateConfigurationSetTrackingOptionsResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationSetTrackingOptionsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#create_custom_verification_email_template-instance_method
+      def create_custom_verification_email_template: (
+                                                       template_name: ::String,
+                                                       from_email_address: ::String,
+                                                       template_subject: ::String,
+                                                       template_content: ::String,
+                                                       success_redirection_url: ::String,
+                                                       failure_redirection_url: ::String
+                                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateReceiptFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReceiptFilterResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#create_receipt_filter-instance_method
+      def create_receipt_filter: (
+                                   filter: {
+                                     name: ::String,
+                                     ip_filter: {
+                                       policy: ("Block" | "Allow"),
+                                       cidr: ::String
+                                     }
+                                   }
+                                 ) -> _CreateReceiptFilterResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReceiptFilterResponseSuccess
+
+      interface _CreateReceiptRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReceiptRuleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#create_receipt_rule-instance_method
+      def create_receipt_rule: (
+                                 rule_set_name: ::String,
+                                 ?after: ::String,
+                                 rule: {
+                                   name: ::String,
+                                   enabled: bool?,
+                                   tls_policy: ("Require" | "Optional")?,
+                                   recipients: Array[::String]?,
+                                   actions: Array[
+                                     {
+                                       s3_action: {
+                                         topic_arn: ::String?,
+                                         bucket_name: ::String,
+                                         object_key_prefix: ::String?,
+                                         kms_key_arn: ::String?
+                                       }?,
+                                       bounce_action: {
+                                         topic_arn: ::String?,
+                                         smtp_reply_code: ::String,
+                                         status_code: ::String?,
+                                         message: ::String,
+                                         sender: ::String
+                                       }?,
+                                       workmail_action: {
+                                         topic_arn: ::String?,
+                                         organization_arn: ::String
+                                       }?,
+                                       lambda_action: {
+                                         topic_arn: ::String?,
+                                         function_arn: ::String,
+                                         invocation_type: ("Event" | "RequestResponse")?
+                                       }?,
+                                       stop_action: {
+                                         scope: ("RuleSet"),
+                                         topic_arn: ::String?
+                                       }?,
+                                       add_header_action: {
+                                         header_name: ::String,
+                                         header_value: ::String
+                                       }?,
+                                       sns_action: {
+                                         topic_arn: ::String,
+                                         encoding: ("UTF-8" | "Base64")?
+                                       }?
+                                     },
+                                   ]?,
+                                   scan_enabled: bool?
+                                 }
+                               ) -> _CreateReceiptRuleResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReceiptRuleResponseSuccess
+
+      interface _CreateReceiptRuleSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReceiptRuleSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#create_receipt_rule_set-instance_method
+      def create_receipt_rule_set: (
+                                     rule_set_name: ::String
+                                   ) -> _CreateReceiptRuleSetResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReceiptRuleSetResponseSuccess
+
+      interface _CreateTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#create_template-instance_method
+      def create_template: (
+                             template: {
+                               template_name: ::String,
+                               subject_part: ::String?,
+                               text_part: ::String?,
+                               html_part: ::String?
+                             }
+                           ) -> _CreateTemplateResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTemplateResponseSuccess
+
+      interface _DeleteConfigurationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfigurationSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#delete_configuration_set-instance_method
+      def delete_configuration_set: (
+                                      configuration_set_name: ::String
+                                    ) -> _DeleteConfigurationSetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfigurationSetResponseSuccess
+
+      interface _DeleteConfigurationSetEventDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfigurationSetEventDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#delete_configuration_set_event_destination-instance_method
+      def delete_configuration_set_event_destination: (
+                                                        configuration_set_name: ::String,
+                                                        event_destination_name: ::String
+                                                      ) -> _DeleteConfigurationSetEventDestinationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfigurationSetEventDestinationResponseSuccess
+
+      interface _DeleteConfigurationSetTrackingOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConfigurationSetTrackingOptionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#delete_configuration_set_tracking_options-instance_method
+      def delete_configuration_set_tracking_options: (
+                                                       configuration_set_name: ::String
+                                                     ) -> _DeleteConfigurationSetTrackingOptionsResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfigurationSetTrackingOptionsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#delete_custom_verification_email_template-instance_method
+      def delete_custom_verification_email_template: (
+                                                       template_name: ::String
+                                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIdentityResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#delete_identity-instance_method
+      def delete_identity: (
+                             identity: ::String
+                           ) -> _DeleteIdentityResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIdentityResponseSuccess
+
+      interface _DeleteIdentityPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIdentityPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#delete_identity_policy-instance_method
+      def delete_identity_policy: (
+                                    identity: ::String,
+                                    policy_name: ::String
+                                  ) -> _DeleteIdentityPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIdentityPolicyResponseSuccess
+
+      interface _DeleteReceiptFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReceiptFilterResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#delete_receipt_filter-instance_method
+      def delete_receipt_filter: (
+                                   filter_name: ::String
+                                 ) -> _DeleteReceiptFilterResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReceiptFilterResponseSuccess
+
+      interface _DeleteReceiptRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReceiptRuleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#delete_receipt_rule-instance_method
+      def delete_receipt_rule: (
+                                 rule_set_name: ::String,
+                                 rule_name: ::String
+                               ) -> _DeleteReceiptRuleResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReceiptRuleResponseSuccess
+
+      interface _DeleteReceiptRuleSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReceiptRuleSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#delete_receipt_rule_set-instance_method
+      def delete_receipt_rule_set: (
+                                     rule_set_name: ::String
+                                   ) -> _DeleteReceiptRuleSetResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReceiptRuleSetResponseSuccess
+
+      interface _DeleteTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#delete_template-instance_method
+      def delete_template: (
+                             template_name: ::String
+                           ) -> _DeleteTemplateResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTemplateResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#delete_verified_email_address-instance_method
+      def delete_verified_email_address: (
+                                           email_address: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeActiveReceiptRuleSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeActiveReceiptRuleSetResponse]
+        def metadata: () -> Types::ReceiptRuleSetMetadata
+        def rules: () -> ::Array[Types::ReceiptRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#describe_active_receipt_rule_set-instance_method
+      def describe_active_receipt_rule_set: (
+                                            ) -> _DescribeActiveReceiptRuleSetResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeActiveReceiptRuleSetResponseSuccess
+
+      interface _DescribeConfigurationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConfigurationSetResponse]
+        def configuration_set: () -> Types::ConfigurationSet
+        def event_destinations: () -> ::Array[Types::EventDestination]
+        def tracking_options: () -> Types::TrackingOptions
+        def delivery_options: () -> Types::DeliveryOptions
+        def reputation_options: () -> Types::ReputationOptions
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#describe_configuration_set-instance_method
+      def describe_configuration_set: (
+                                        configuration_set_name: ::String,
+                                        ?configuration_set_attribute_names: Array[("eventDestinations" | "trackingOptions" | "deliveryOptions" | "reputationOptions")]
+                                      ) -> _DescribeConfigurationSetResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConfigurationSetResponseSuccess
+
+      interface _DescribeReceiptRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReceiptRuleResponse]
+        def rule: () -> Types::ReceiptRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#describe_receipt_rule-instance_method
+      def describe_receipt_rule: (
+                                   rule_set_name: ::String,
+                                   rule_name: ::String
+                                 ) -> _DescribeReceiptRuleResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReceiptRuleResponseSuccess
+
+      interface _DescribeReceiptRuleSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReceiptRuleSetResponse]
+        def metadata: () -> Types::ReceiptRuleSetMetadata
+        def rules: () -> ::Array[Types::ReceiptRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#describe_receipt_rule_set-instance_method
+      def describe_receipt_rule_set: (
+                                       rule_set_name: ::String
+                                     ) -> _DescribeReceiptRuleSetResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReceiptRuleSetResponseSuccess
+
+      interface _GetAccountSendingEnabledResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountSendingEnabledResponse]
+        def enabled: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#get_account_sending_enabled-instance_method
+      def get_account_sending_enabled: () -> _GetAccountSendingEnabledResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountSendingEnabledResponseSuccess
+
+      interface _GetCustomVerificationEmailTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCustomVerificationEmailTemplateResponse]
+        def template_name: () -> ::String
+        def from_email_address: () -> ::String
+        def template_subject: () -> ::String
+        def template_content: () -> ::String
+        def success_redirection_url: () -> ::String
+        def failure_redirection_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#get_custom_verification_email_template-instance_method
+      def get_custom_verification_email_template: (
+                                                    template_name: ::String
+                                                  ) -> _GetCustomVerificationEmailTemplateResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCustomVerificationEmailTemplateResponseSuccess
+
+      interface _GetIdentityDkimAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdentityDkimAttributesResponse]
+        def dkim_attributes: () -> ::Hash[::String, Types::IdentityDkimAttributes]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#get_identity_dkim_attributes-instance_method
+      def get_identity_dkim_attributes: (
+                                          identities: Array[::String]
+                                        ) -> _GetIdentityDkimAttributesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdentityDkimAttributesResponseSuccess
+
+      interface _GetIdentityMailFromDomainAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdentityMailFromDomainAttributesResponse]
+        def mail_from_domain_attributes: () -> ::Hash[::String, Types::IdentityMailFromDomainAttributes]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#get_identity_mail_from_domain_attributes-instance_method
+      def get_identity_mail_from_domain_attributes: (
+                                                      identities: Array[::String]
+                                                    ) -> _GetIdentityMailFromDomainAttributesResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdentityMailFromDomainAttributesResponseSuccess
+
+      interface _GetIdentityNotificationAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdentityNotificationAttributesResponse]
+        def notification_attributes: () -> ::Hash[::String, Types::IdentityNotificationAttributes]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#get_identity_notification_attributes-instance_method
+      def get_identity_notification_attributes: (
+                                                  identities: Array[::String]
+                                                ) -> _GetIdentityNotificationAttributesResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdentityNotificationAttributesResponseSuccess
+
+      interface _GetIdentityPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdentityPoliciesResponse]
+        def policies: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#get_identity_policies-instance_method
+      def get_identity_policies: (
+                                   identity: ::String,
+                                   policy_names: Array[::String]
+                                 ) -> _GetIdentityPoliciesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdentityPoliciesResponseSuccess
+
+      interface _GetIdentityVerificationAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdentityVerificationAttributesResponse]
+        def verification_attributes: () -> ::Hash[::String, Types::IdentityVerificationAttributes]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#get_identity_verification_attributes-instance_method
+      def get_identity_verification_attributes: (
+                                                  identities: Array[::String]
+                                                ) -> _GetIdentityVerificationAttributesResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdentityVerificationAttributesResponseSuccess
+
+      interface _GetSendQuotaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSendQuotaResponse]
+        def max_24_hour_send: () -> ::Float
+        def max_send_rate: () -> ::Float
+        def sent_last_24_hours: () -> ::Float
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#get_send_quota-instance_method
+      def get_send_quota: () -> _GetSendQuotaResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSendQuotaResponseSuccess
+
+      interface _GetSendStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSendStatisticsResponse]
+        def send_data_points: () -> ::Array[Types::SendDataPoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#get_send_statistics-instance_method
+      def get_send_statistics: () -> _GetSendStatisticsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSendStatisticsResponseSuccess
+
+      interface _GetTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTemplateResponse]
+        def template: () -> Types::Template
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#get_template-instance_method
+      def get_template: (
+                          template_name: ::String
+                        ) -> _GetTemplateResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTemplateResponseSuccess
+
+      interface _ListConfigurationSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfigurationSetsResponse]
+        def configuration_sets: () -> ::Array[Types::ConfigurationSet]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#list_configuration_sets-instance_method
+      def list_configuration_sets: (
+                                     ?next_token: ::String,
+                                     ?max_items: ::Integer
+                                   ) -> _ListConfigurationSetsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationSetsResponseSuccess
+
+      interface _ListCustomVerificationEmailTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomVerificationEmailTemplatesResponse]
+        def custom_verification_email_templates: () -> ::Array[Types::CustomVerificationEmailTemplate]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#list_custom_verification_email_templates-instance_method
+      def list_custom_verification_email_templates: (
+                                                      ?next_token: ::String,
+                                                      ?max_results: ::Integer
+                                                    ) -> _ListCustomVerificationEmailTemplatesResponseSuccess
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomVerificationEmailTemplatesResponseSuccess
+
+      interface _ListIdentitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIdentitiesResponse]
+        def identities: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#list_identities-instance_method
+      def list_identities: (
+                             ?identity_type: ("EmailAddress" | "Domain"),
+                             ?next_token: ::String,
+                             ?max_items: ::Integer
+                           ) -> _ListIdentitiesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdentitiesResponseSuccess
+
+      interface _ListIdentityPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIdentityPoliciesResponse]
+        def policy_names: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#list_identity_policies-instance_method
+      def list_identity_policies: (
+                                    identity: ::String
+                                  ) -> _ListIdentityPoliciesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdentityPoliciesResponseSuccess
+
+      interface _ListReceiptFiltersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReceiptFiltersResponse]
+        def filters: () -> ::Array[Types::ReceiptFilter]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#list_receipt_filters-instance_method
+      def list_receipt_filters: (
+                                ) -> _ListReceiptFiltersResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReceiptFiltersResponseSuccess
+
+      interface _ListReceiptRuleSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReceiptRuleSetsResponse]
+        def rule_sets: () -> ::Array[Types::ReceiptRuleSetMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#list_receipt_rule_sets-instance_method
+      def list_receipt_rule_sets: (
+                                    ?next_token: ::String
+                                  ) -> _ListReceiptRuleSetsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReceiptRuleSetsResponseSuccess
+
+      interface _ListTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTemplatesResponse]
+        def templates_metadata: () -> ::Array[Types::TemplateMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#list_templates-instance_method
+      def list_templates: (
+                            ?next_token: ::String,
+                            ?max_items: ::Integer
+                          ) -> _ListTemplatesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTemplatesResponseSuccess
+
+      interface _ListVerifiedEmailAddressesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVerifiedEmailAddressesResponse]
+        def verified_email_addresses: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#list_verified_email_addresses-instance_method
+      def list_verified_email_addresses: () -> _ListVerifiedEmailAddressesResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVerifiedEmailAddressesResponseSuccess
+
+      interface _PutConfigurationSetDeliveryOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutConfigurationSetDeliveryOptionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#put_configuration_set_delivery_options-instance_method
+      def put_configuration_set_delivery_options: (
+                                                    configuration_set_name: ::String,
+                                                    ?delivery_options: {
+                                                      tls_policy: ("Require" | "Optional")?
+                                                    }
+                                                  ) -> _PutConfigurationSetDeliveryOptionsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetDeliveryOptionsResponseSuccess
+
+      interface _PutIdentityPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutIdentityPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#put_identity_policy-instance_method
+      def put_identity_policy: (
+                                 identity: ::String,
+                                 policy_name: ::String,
+                                 policy: ::String
+                               ) -> _PutIdentityPolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutIdentityPolicyResponseSuccess
+
+      interface _ReorderReceiptRuleSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReorderReceiptRuleSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#reorder_receipt_rule_set-instance_method
+      def reorder_receipt_rule_set: (
+                                      rule_set_name: ::String,
+                                      rule_names: Array[::String]
+                                    ) -> _ReorderReceiptRuleSetResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReorderReceiptRuleSetResponseSuccess
+
+      interface _SendBounceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendBounceResponse]
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#send_bounce-instance_method
+      def send_bounce: (
+                         original_message_id: ::String,
+                         bounce_sender: ::String,
+                         ?explanation: ::String,
+                         ?message_dsn: {
+                           reporting_mta: ::String,
+                           arrival_date: ::Time?,
+                           extension_fields: Array[
+                             {
+                               name: ::String,
+                               value: ::String
+                             },
+                           ]?
+                         },
+                         bounced_recipient_info_list: Array[
+                           {
+                             recipient: ::String,
+                             recipient_arn: ::String?,
+                             bounce_type: ("DoesNotExist" | "MessageTooLarge" | "ExceededQuota" | "ContentRejected" | "Undefined" | "TemporaryFailure")?,
+                             recipient_dsn_fields: {
+                               final_recipient: ::String?,
+                               action: ("failed" | "delayed" | "delivered" | "relayed" | "expanded"),
+                               remote_mta: ::String?,
+                               status: ::String,
+                               diagnostic_code: ::String?,
+                               last_attempt_date: ::Time?,
+                               extension_fields: Array[
+                                 {
+                                   name: ::String,
+                                   value: ::String
+                                 },
+                               ]?
+                             }?
+                           },
+                         ],
+                         ?bounce_sender_arn: ::String
+                       ) -> _SendBounceResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendBounceResponseSuccess
+
+      interface _SendBulkTemplatedEmailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendBulkTemplatedEmailResponse]
+        def status: () -> ::Array[Types::BulkEmailDestinationStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#send_bulk_templated_email-instance_method
+      def send_bulk_templated_email: (
+                                       source: ::String,
+                                       ?source_arn: ::String,
+                                       ?reply_to_addresses: Array[::String],
+                                       ?return_path: ::String,
+                                       ?return_path_arn: ::String,
+                                       ?configuration_set_name: ::String,
+                                       ?default_tags: Array[
+                                         {
+                                           name: ::String,
+                                           value: ::String
+                                         },
+                                       ],
+                                       template: ::String,
+                                       ?template_arn: ::String,
+                                       ?default_template_data: ::String,
+                                       destinations: Array[
+                                         {
+                                           destination: {
+                                             to_addresses: Array[::String]?,
+                                             cc_addresses: Array[::String]?,
+                                             bcc_addresses: Array[::String]?
+                                           },
+                                           replacement_tags: Array[
+                                             {
+                                               name: ::String,
+                                               value: ::String
+                                             },
+                                           ]?,
+                                           replacement_template_data: ::String?
+                                         },
+                                       ]
+                                     ) -> _SendBulkTemplatedEmailResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendBulkTemplatedEmailResponseSuccess
+
+      interface _SendCustomVerificationEmailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendCustomVerificationEmailResponse]
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#send_custom_verification_email-instance_method
+      def send_custom_verification_email: (
+                                            email_address: ::String,
+                                            template_name: ::String,
+                                            ?configuration_set_name: ::String
+                                          ) -> _SendCustomVerificationEmailResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendCustomVerificationEmailResponseSuccess
+
+      interface _SendEmailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendEmailResponse]
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#send_email-instance_method
+      def send_email: (
+                        source: ::String,
+                        destination: {
+                          to_addresses: Array[::String]?,
+                          cc_addresses: Array[::String]?,
+                          bcc_addresses: Array[::String]?
+                        },
+                        message: {
+                          subject: {
+                            data: ::String,
+                            charset: ::String?
+                          },
+                          body: {
+                            text: {
+                              data: ::String,
+                              charset: ::String?
+                            }?,
+                            html: {
+                              data: ::String,
+                              charset: ::String?
+                            }?
+                          }
+                        },
+                        ?reply_to_addresses: Array[::String],
+                        ?return_path: ::String,
+                        ?source_arn: ::String,
+                        ?return_path_arn: ::String,
+                        ?tags: Array[
+                          {
+                            name: ::String,
+                            value: ::String
+                          },
+                        ],
+                        ?configuration_set_name: ::String
+                      ) -> _SendEmailResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendEmailResponseSuccess
+
+      interface _SendRawEmailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendRawEmailResponse]
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#send_raw_email-instance_method
+      def send_raw_email: (
+                            ?source: ::String,
+                            ?destinations: Array[::String],
+                            raw_message: {
+                              data: ::String
+                            },
+                            ?from_arn: ::String,
+                            ?source_arn: ::String,
+                            ?return_path_arn: ::String,
+                            ?tags: Array[
+                              {
+                                name: ::String,
+                                value: ::String
+                              },
+                            ],
+                            ?configuration_set_name: ::String
+                          ) -> _SendRawEmailResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendRawEmailResponseSuccess
+
+      interface _SendTemplatedEmailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendTemplatedEmailResponse]
+        def message_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#send_templated_email-instance_method
+      def send_templated_email: (
+                                  source: ::String,
+                                  destination: {
+                                    to_addresses: Array[::String]?,
+                                    cc_addresses: Array[::String]?,
+                                    bcc_addresses: Array[::String]?
+                                  },
+                                  ?reply_to_addresses: Array[::String],
+                                  ?return_path: ::String,
+                                  ?source_arn: ::String,
+                                  ?return_path_arn: ::String,
+                                  ?tags: Array[
+                                    {
+                                      name: ::String,
+                                      value: ::String
+                                    },
+                                  ],
+                                  ?configuration_set_name: ::String,
+                                  template: ::String,
+                                  ?template_arn: ::String,
+                                  template_data: ::String
+                                ) -> _SendTemplatedEmailResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendTemplatedEmailResponseSuccess
+
+      interface _SetActiveReceiptRuleSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetActiveReceiptRuleSetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#set_active_receipt_rule_set-instance_method
+      def set_active_receipt_rule_set: (
+                                         ?rule_set_name: ::String
+                                       ) -> _SetActiveReceiptRuleSetResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetActiveReceiptRuleSetResponseSuccess
+
+      interface _SetIdentityDkimEnabledResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetIdentityDkimEnabledResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#set_identity_dkim_enabled-instance_method
+      def set_identity_dkim_enabled: (
+                                       identity: ::String,
+                                       dkim_enabled: bool
+                                     ) -> _SetIdentityDkimEnabledResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetIdentityDkimEnabledResponseSuccess
+
+      interface _SetIdentityFeedbackForwardingEnabledResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetIdentityFeedbackForwardingEnabledResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#set_identity_feedback_forwarding_enabled-instance_method
+      def set_identity_feedback_forwarding_enabled: (
+                                                      identity: ::String,
+                                                      forwarding_enabled: bool
+                                                    ) -> _SetIdentityFeedbackForwardingEnabledResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetIdentityFeedbackForwardingEnabledResponseSuccess
+
+      interface _SetIdentityHeadersInNotificationsEnabledResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetIdentityHeadersInNotificationsEnabledResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#set_identity_headers_in_notifications_enabled-instance_method
+      def set_identity_headers_in_notifications_enabled: (
+                                                           identity: ::String,
+                                                           notification_type: ("Bounce" | "Complaint" | "Delivery"),
+                                                           enabled: bool
+                                                         ) -> _SetIdentityHeadersInNotificationsEnabledResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetIdentityHeadersInNotificationsEnabledResponseSuccess
+
+      interface _SetIdentityMailFromDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetIdentityMailFromDomainResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#set_identity_mail_from_domain-instance_method
+      def set_identity_mail_from_domain: (
+                                           identity: ::String,
+                                           ?mail_from_domain: ::String,
+                                           ?behavior_on_mx_failure: ("UseDefaultValue" | "RejectMessage")
+                                         ) -> _SetIdentityMailFromDomainResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetIdentityMailFromDomainResponseSuccess
+
+      interface _SetIdentityNotificationTopicResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetIdentityNotificationTopicResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#set_identity_notification_topic-instance_method
+      def set_identity_notification_topic: (
+                                             identity: ::String,
+                                             notification_type: ("Bounce" | "Complaint" | "Delivery"),
+                                             ?sns_topic: ::String
+                                           ) -> _SetIdentityNotificationTopicResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetIdentityNotificationTopicResponseSuccess
+
+      interface _SetReceiptRulePositionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetReceiptRulePositionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#set_receipt_rule_position-instance_method
+      def set_receipt_rule_position: (
+                                       rule_set_name: ::String,
+                                       rule_name: ::String,
+                                       ?after: ::String
+                                     ) -> _SetReceiptRulePositionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetReceiptRulePositionResponseSuccess
+
+      interface _TestRenderTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestRenderTemplateResponse]
+        def rendered_template: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#test_render_template-instance_method
+      def test_render_template: (
+                                  template_name: ::String,
+                                  template_data: ::String
+                                ) -> _TestRenderTemplateResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestRenderTemplateResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#update_account_sending_enabled-instance_method
+      def update_account_sending_enabled: (
+                                            ?enabled: bool
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateConfigurationSetEventDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfigurationSetEventDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#update_configuration_set_event_destination-instance_method
+      def update_configuration_set_event_destination: (
+                                                        configuration_set_name: ::String,
+                                                        event_destination: {
+                                                          name: ::String,
+                                                          enabled: bool?,
+                                                          matching_event_types: Array[("send" | "reject" | "bounce" | "complaint" | "delivery" | "open" | "click" | "renderingFailure")],
+                                                          kinesis_firehose_destination: {
+                                                            iam_role_arn: ::String,
+                                                            delivery_stream_arn: ::String
+                                                          }?,
+                                                          cloud_watch_destination: {
+                                                            dimension_configurations: Array[
+                                                              {
+                                                                dimension_name: ::String,
+                                                                dimension_value_source: ("messageTag" | "emailHeader" | "linkTag"),
+                                                                default_dimension_value: ::String
+                                                              },
+                                                            ]
+                                                          }?,
+                                                          sns_destination: {
+                                                            topic_arn: ::String
+                                                          }?
+                                                        }
+                                                      ) -> _UpdateConfigurationSetEventDestinationResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationSetEventDestinationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#update_configuration_set_reputation_metrics_enabled-instance_method
+      def update_configuration_set_reputation_metrics_enabled: (
+                                                                 configuration_set_name: ::String,
+                                                                 enabled: bool
+                                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#update_configuration_set_sending_enabled-instance_method
+      def update_configuration_set_sending_enabled: (
+                                                      configuration_set_name: ::String,
+                                                      enabled: bool
+                                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateConfigurationSetTrackingOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConfigurationSetTrackingOptionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#update_configuration_set_tracking_options-instance_method
+      def update_configuration_set_tracking_options: (
+                                                       configuration_set_name: ::String,
+                                                       tracking_options: {
+                                                         custom_redirect_domain: ::String?
+                                                       }
+                                                     ) -> _UpdateConfigurationSetTrackingOptionsResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationSetTrackingOptionsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#update_custom_verification_email_template-instance_method
+      def update_custom_verification_email_template: (
+                                                       template_name: ::String,
+                                                       ?from_email_address: ::String,
+                                                       ?template_subject: ::String,
+                                                       ?template_content: ::String,
+                                                       ?success_redirection_url: ::String,
+                                                       ?failure_redirection_url: ::String
+                                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateReceiptRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateReceiptRuleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#update_receipt_rule-instance_method
+      def update_receipt_rule: (
+                                 rule_set_name: ::String,
+                                 rule: {
+                                   name: ::String,
+                                   enabled: bool?,
+                                   tls_policy: ("Require" | "Optional")?,
+                                   recipients: Array[::String]?,
+                                   actions: Array[
+                                     {
+                                       s3_action: {
+                                         topic_arn: ::String?,
+                                         bucket_name: ::String,
+                                         object_key_prefix: ::String?,
+                                         kms_key_arn: ::String?
+                                       }?,
+                                       bounce_action: {
+                                         topic_arn: ::String?,
+                                         smtp_reply_code: ::String,
+                                         status_code: ::String?,
+                                         message: ::String,
+                                         sender: ::String
+                                       }?,
+                                       workmail_action: {
+                                         topic_arn: ::String?,
+                                         organization_arn: ::String
+                                       }?,
+                                       lambda_action: {
+                                         topic_arn: ::String?,
+                                         function_arn: ::String,
+                                         invocation_type: ("Event" | "RequestResponse")?
+                                       }?,
+                                       stop_action: {
+                                         scope: ("RuleSet"),
+                                         topic_arn: ::String?
+                                       }?,
+                                       add_header_action: {
+                                         header_name: ::String,
+                                         header_value: ::String
+                                       }?,
+                                       sns_action: {
+                                         topic_arn: ::String,
+                                         encoding: ("UTF-8" | "Base64")?
+                                       }?
+                                     },
+                                   ]?,
+                                   scan_enabled: bool?
+                                 }
+                               ) -> _UpdateReceiptRuleResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReceiptRuleResponseSuccess
+
+      interface _UpdateTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#update_template-instance_method
+      def update_template: (
+                             template: {
+                               template_name: ::String,
+                               subject_part: ::String?,
+                               text_part: ::String?,
+                               html_part: ::String?
+                             }
+                           ) -> _UpdateTemplateResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTemplateResponseSuccess
+
+      interface _VerifyDomainDkimResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VerifyDomainDkimResponse]
+        def dkim_tokens: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#verify_domain_dkim-instance_method
+      def verify_domain_dkim: (
+                                domain: ::String
+                              ) -> _VerifyDomainDkimResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyDomainDkimResponseSuccess
+
+      interface _VerifyDomainIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VerifyDomainIdentityResponse]
+        def verification_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#verify_domain_identity-instance_method
+      def verify_domain_identity: (
+                                    domain: ::String
+                                  ) -> _VerifyDomainIdentityResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyDomainIdentityResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#verify_email_address-instance_method
+      def verify_email_address: (
+                                  email_address: ::String
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _VerifyEmailIdentityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VerifyEmailIdentityResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#verify_email_identity-instance_method
+      def verify_email_identity: (
+                                   email_address: ::String
+                                 ) -> _VerifyEmailIdentityResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyEmailIdentityResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#wait_until-instance_method
+      def wait_until: (:identity_exists waiter_name, 
+                    identities: Array[::String]
+                  ) -> Client::_GetIdentityVerificationAttributesResponseSuccess
+                    | (:identity_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetIdentityVerificationAttributesResponseSuccess
+    end
+  end
+end
+

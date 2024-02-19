@@ -1,0 +1,615 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MachineLearning
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddTagsOutput]
+        def resource_id: () -> ::String
+        def resource_type: () -> ("BatchPrediction" | "DataSource" | "Evaluation" | "MLModel")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#add_tags-instance_method
+      def add_tags: (
+                      tags: Array[
+                        {
+                          key: ::String?,
+                          value: ::String?
+                        },
+                      ],
+                      resource_id: ::String,
+                      resource_type: ("BatchPrediction" | "DataSource" | "Evaluation" | "MLModel")
+                    ) -> _AddTagsResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsResponseSuccess
+
+      interface _CreateBatchPredictionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBatchPredictionOutput]
+        def batch_prediction_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#create_batch_prediction-instance_method
+      def create_batch_prediction: (
+                                     batch_prediction_id: ::String,
+                                     ?batch_prediction_name: ::String,
+                                     ml_model_id: ::String,
+                                     batch_prediction_data_source_id: ::String,
+                                     output_uri: ::String
+                                   ) -> _CreateBatchPredictionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBatchPredictionResponseSuccess
+
+      interface _CreateDataSourceFromRDSResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataSourceFromRDSOutput]
+        def data_source_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#create_data_source_from_rds-instance_method
+      def create_data_source_from_rds: (
+                                         data_source_id: ::String,
+                                         ?data_source_name: ::String,
+                                         rds_data: {
+                                           database_information: {
+                                             instance_identifier: ::String,
+                                             database_name: ::String
+                                           },
+                                           select_sql_query: ::String,
+                                           database_credentials: {
+                                             username: ::String,
+                                             password: ::String
+                                           },
+                                           s3_staging_location: ::String,
+                                           data_rearrangement: ::String?,
+                                           data_schema: ::String?,
+                                           data_schema_uri: ::String?,
+                                           resource_role: ::String,
+                                           service_role: ::String,
+                                           subnet_id: ::String,
+                                           security_group_ids: Array[::String]
+                                         },
+                                         role_arn: ::String,
+                                         ?compute_statistics: bool
+                                       ) -> _CreateDataSourceFromRDSResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSourceFromRDSResponseSuccess
+
+      interface _CreateDataSourceFromRedshiftResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataSourceFromRedshiftOutput]
+        def data_source_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#create_data_source_from_redshift-instance_method
+      def create_data_source_from_redshift: (
+                                              data_source_id: ::String,
+                                              ?data_source_name: ::String,
+                                              data_spec: {
+                                                database_information: {
+                                                  database_name: ::String,
+                                                  cluster_identifier: ::String
+                                                },
+                                                select_sql_query: ::String,
+                                                database_credentials: {
+                                                  username: ::String,
+                                                  password: ::String
+                                                },
+                                                s3_staging_location: ::String,
+                                                data_rearrangement: ::String?,
+                                                data_schema: ::String?,
+                                                data_schema_uri: ::String?
+                                              },
+                                              role_arn: ::String,
+                                              ?compute_statistics: bool
+                                            ) -> _CreateDataSourceFromRedshiftResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSourceFromRedshiftResponseSuccess
+
+      interface _CreateDataSourceFromS3ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataSourceFromS3Output]
+        def data_source_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#create_data_source_from_s3-instance_method
+      def create_data_source_from_s3: (
+                                        data_source_id: ::String,
+                                        ?data_source_name: ::String,
+                                        data_spec: {
+                                          data_location_s3: ::String,
+                                          data_rearrangement: ::String?,
+                                          data_schema: ::String?,
+                                          data_schema_location_s3: ::String?
+                                        },
+                                        ?compute_statistics: bool
+                                      ) -> _CreateDataSourceFromS3ResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataSourceFromS3ResponseSuccess
+
+      interface _CreateEvaluationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEvaluationOutput]
+        def evaluation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#create_evaluation-instance_method
+      def create_evaluation: (
+                               evaluation_id: ::String,
+                               ?evaluation_name: ::String,
+                               ml_model_id: ::String,
+                               evaluation_data_source_id: ::String
+                             ) -> _CreateEvaluationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEvaluationResponseSuccess
+
+      interface _CreateMLModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMLModelOutput]
+        def ml_model_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#create_ml_model-instance_method
+      def create_ml_model: (
+                             ml_model_id: ::String,
+                             ?ml_model_name: ::String,
+                             ml_model_type: ("REGRESSION" | "BINARY" | "MULTICLASS"),
+                             ?parameters: Hash[::String, ::String],
+                             training_data_source_id: ::String,
+                             ?recipe: ::String,
+                             ?recipe_uri: ::String
+                           ) -> _CreateMLModelResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMLModelResponseSuccess
+
+      interface _CreateRealtimeEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRealtimeEndpointOutput]
+        def ml_model_id: () -> ::String
+        def realtime_endpoint_info: () -> Types::RealtimeEndpointInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#create_realtime_endpoint-instance_method
+      def create_realtime_endpoint: (
+                                      ml_model_id: ::String
+                                    ) -> _CreateRealtimeEndpointResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRealtimeEndpointResponseSuccess
+
+      interface _DeleteBatchPredictionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBatchPredictionOutput]
+        def batch_prediction_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#delete_batch_prediction-instance_method
+      def delete_batch_prediction: (
+                                     batch_prediction_id: ::String
+                                   ) -> _DeleteBatchPredictionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBatchPredictionResponseSuccess
+
+      interface _DeleteDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataSourceOutput]
+        def data_source_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#delete_data_source-instance_method
+      def delete_data_source: (
+                                data_source_id: ::String
+                              ) -> _DeleteDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataSourceResponseSuccess
+
+      interface _DeleteEvaluationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEvaluationOutput]
+        def evaluation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#delete_evaluation-instance_method
+      def delete_evaluation: (
+                               evaluation_id: ::String
+                             ) -> _DeleteEvaluationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEvaluationResponseSuccess
+
+      interface _DeleteMLModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMLModelOutput]
+        def ml_model_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#delete_ml_model-instance_method
+      def delete_ml_model: (
+                             ml_model_id: ::String
+                           ) -> _DeleteMLModelResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMLModelResponseSuccess
+
+      interface _DeleteRealtimeEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRealtimeEndpointOutput]
+        def ml_model_id: () -> ::String
+        def realtime_endpoint_info: () -> Types::RealtimeEndpointInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#delete_realtime_endpoint-instance_method
+      def delete_realtime_endpoint: (
+                                      ml_model_id: ::String
+                                    ) -> _DeleteRealtimeEndpointResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRealtimeEndpointResponseSuccess
+
+      interface _DeleteTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTagsOutput]
+        def resource_id: () -> ::String
+        def resource_type: () -> ("BatchPrediction" | "DataSource" | "Evaluation" | "MLModel")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#delete_tags-instance_method
+      def delete_tags: (
+                         tag_keys: Array[::String],
+                         resource_id: ::String,
+                         resource_type: ("BatchPrediction" | "DataSource" | "Evaluation" | "MLModel")
+                       ) -> _DeleteTagsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTagsResponseSuccess
+
+      interface _DescribeBatchPredictionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBatchPredictionsOutput]
+        def results: () -> ::Array[Types::BatchPrediction]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#describe_batch_predictions-instance_method
+      def describe_batch_predictions: (
+                                        ?filter_variable: ("CreatedAt" | "LastUpdatedAt" | "Status" | "Name" | "IAMUser" | "MLModelId" | "DataSourceId" | "DataURI"),
+                                        ?eq: ::String,
+                                        ?gt: ::String,
+                                        ?lt: ::String,
+                                        ?ge: ::String,
+                                        ?le: ::String,
+                                        ?ne: ::String,
+                                        ?prefix: ::String,
+                                        ?sort_order: ("asc" | "dsc"),
+                                        ?next_token: ::String,
+                                        ?limit: ::Integer
+                                      ) -> _DescribeBatchPredictionsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBatchPredictionsResponseSuccess
+
+      interface _DescribeDataSourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDataSourcesOutput]
+        def results: () -> ::Array[Types::DataSource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#describe_data_sources-instance_method
+      def describe_data_sources: (
+                                   ?filter_variable: ("CreatedAt" | "LastUpdatedAt" | "Status" | "Name" | "DataLocationS3" | "IAMUser"),
+                                   ?eq: ::String,
+                                   ?gt: ::String,
+                                   ?lt: ::String,
+                                   ?ge: ::String,
+                                   ?le: ::String,
+                                   ?ne: ::String,
+                                   ?prefix: ::String,
+                                   ?sort_order: ("asc" | "dsc"),
+                                   ?next_token: ::String,
+                                   ?limit: ::Integer
+                                 ) -> _DescribeDataSourcesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDataSourcesResponseSuccess
+
+      interface _DescribeEvaluationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEvaluationsOutput]
+        def results: () -> ::Array[Types::Evaluation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#describe_evaluations-instance_method
+      def describe_evaluations: (
+                                  ?filter_variable: ("CreatedAt" | "LastUpdatedAt" | "Status" | "Name" | "IAMUser" | "MLModelId" | "DataSourceId" | "DataURI"),
+                                  ?eq: ::String,
+                                  ?gt: ::String,
+                                  ?lt: ::String,
+                                  ?ge: ::String,
+                                  ?le: ::String,
+                                  ?ne: ::String,
+                                  ?prefix: ::String,
+                                  ?sort_order: ("asc" | "dsc"),
+                                  ?next_token: ::String,
+                                  ?limit: ::Integer
+                                ) -> _DescribeEvaluationsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEvaluationsResponseSuccess
+
+      interface _DescribeMLModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMLModelsOutput]
+        def results: () -> ::Array[Types::MLModel]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#describe_ml_models-instance_method
+      def describe_ml_models: (
+                                ?filter_variable: ("CreatedAt" | "LastUpdatedAt" | "Status" | "Name" | "IAMUser" | "TrainingDataSourceId" | "RealtimeEndpointStatus" | "MLModelType" | "Algorithm" | "TrainingDataURI"),
+                                ?eq: ::String,
+                                ?gt: ::String,
+                                ?lt: ::String,
+                                ?ge: ::String,
+                                ?le: ::String,
+                                ?ne: ::String,
+                                ?prefix: ::String,
+                                ?sort_order: ("asc" | "dsc"),
+                                ?next_token: ::String,
+                                ?limit: ::Integer
+                              ) -> _DescribeMLModelsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMLModelsResponseSuccess
+
+      interface _DescribeTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTagsOutput]
+        def resource_id: () -> ::String
+        def resource_type: () -> ("BatchPrediction" | "DataSource" | "Evaluation" | "MLModel")
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#describe_tags-instance_method
+      def describe_tags: (
+                           resource_id: ::String,
+                           resource_type: ("BatchPrediction" | "DataSource" | "Evaluation" | "MLModel")
+                         ) -> _DescribeTagsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTagsResponseSuccess
+
+      interface _GetBatchPredictionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBatchPredictionOutput]
+        def batch_prediction_id: () -> ::String
+        def ml_model_id: () -> ::String
+        def batch_prediction_data_source_id: () -> ::String
+        def input_data_location_s3: () -> ::String
+        def created_by_iam_user: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def name: () -> ::String
+        def status: () -> ("PENDING" | "INPROGRESS" | "FAILED" | "COMPLETED" | "DELETED")
+        def output_uri: () -> ::String
+        def log_uri: () -> ::String
+        def message: () -> ::String
+        def compute_time: () -> ::Integer
+        def finished_at: () -> ::Time
+        def started_at: () -> ::Time
+        def total_record_count: () -> ::Integer
+        def invalid_record_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#get_batch_prediction-instance_method
+      def get_batch_prediction: (
+                                  batch_prediction_id: ::String
+                                ) -> _GetBatchPredictionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBatchPredictionResponseSuccess
+
+      interface _GetDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataSourceOutput]
+        def data_source_id: () -> ::String
+        def data_location_s3: () -> ::String
+        def data_rearrangement: () -> ::String
+        def created_by_iam_user: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def data_size_in_bytes: () -> ::Integer
+        def number_of_files: () -> ::Integer
+        def name: () -> ::String
+        def status: () -> ("PENDING" | "INPROGRESS" | "FAILED" | "COMPLETED" | "DELETED")
+        def log_uri: () -> ::String
+        def message: () -> ::String
+        def redshift_metadata: () -> Types::RedshiftMetadata
+        def rds_metadata: () -> Types::RDSMetadata
+        def role_arn: () -> ::String
+        def compute_statistics: () -> bool
+        def compute_time: () -> ::Integer
+        def finished_at: () -> ::Time
+        def started_at: () -> ::Time
+        def data_source_schema: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#get_data_source-instance_method
+      def get_data_source: (
+                             data_source_id: ::String,
+                             ?verbose: bool
+                           ) -> _GetDataSourceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataSourceResponseSuccess
+
+      interface _GetEvaluationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEvaluationOutput]
+        def evaluation_id: () -> ::String
+        def ml_model_id: () -> ::String
+        def evaluation_data_source_id: () -> ::String
+        def input_data_location_s3: () -> ::String
+        def created_by_iam_user: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def name: () -> ::String
+        def status: () -> ("PENDING" | "INPROGRESS" | "FAILED" | "COMPLETED" | "DELETED")
+        def performance_metrics: () -> Types::PerformanceMetrics
+        def log_uri: () -> ::String
+        def message: () -> ::String
+        def compute_time: () -> ::Integer
+        def finished_at: () -> ::Time
+        def started_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#get_evaluation-instance_method
+      def get_evaluation: (
+                            evaluation_id: ::String
+                          ) -> _GetEvaluationResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEvaluationResponseSuccess
+
+      interface _GetMLModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMLModelOutput]
+        def ml_model_id: () -> ::String
+        def training_data_source_id: () -> ::String
+        def created_by_iam_user: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def name: () -> ::String
+        def status: () -> ("PENDING" | "INPROGRESS" | "FAILED" | "COMPLETED" | "DELETED")
+        def size_in_bytes: () -> ::Integer
+        def endpoint_info: () -> Types::RealtimeEndpointInfo
+        def training_parameters: () -> ::Hash[::String, ::String]
+        def input_data_location_s3: () -> ::String
+        def ml_model_type: () -> ("REGRESSION" | "BINARY" | "MULTICLASS")
+        def score_threshold: () -> ::Float
+        def score_threshold_last_updated_at: () -> ::Time
+        def log_uri: () -> ::String
+        def message: () -> ::String
+        def compute_time: () -> ::Integer
+        def finished_at: () -> ::Time
+        def started_at: () -> ::Time
+        def recipe: () -> ::String
+        def schema: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#get_ml_model-instance_method
+      def get_ml_model: (
+                          ml_model_id: ::String,
+                          ?verbose: bool
+                        ) -> _GetMLModelResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMLModelResponseSuccess
+
+      interface _PredictResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PredictOutput]
+        def prediction: () -> Types::Prediction
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#predict-instance_method
+      def predict: (
+                     ml_model_id: ::String,
+                     record: Hash[::String, ::String],
+                     predict_endpoint: ::String
+                   ) -> _PredictResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PredictResponseSuccess
+
+      interface _UpdateBatchPredictionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBatchPredictionOutput]
+        def batch_prediction_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#update_batch_prediction-instance_method
+      def update_batch_prediction: (
+                                     batch_prediction_id: ::String,
+                                     batch_prediction_name: ::String
+                                   ) -> _UpdateBatchPredictionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBatchPredictionResponseSuccess
+
+      interface _UpdateDataSourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataSourceOutput]
+        def data_source_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#update_data_source-instance_method
+      def update_data_source: (
+                                data_source_id: ::String,
+                                data_source_name: ::String
+                              ) -> _UpdateDataSourceResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataSourceResponseSuccess
+
+      interface _UpdateEvaluationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEvaluationOutput]
+        def evaluation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#update_evaluation-instance_method
+      def update_evaluation: (
+                               evaluation_id: ::String,
+                               evaluation_name: ::String
+                             ) -> _UpdateEvaluationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEvaluationResponseSuccess
+
+      interface _UpdateMLModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMLModelOutput]
+        def ml_model_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#update_ml_model-instance_method
+      def update_ml_model: (
+                             ml_model_id: ::String,
+                             ?ml_model_name: ::String,
+                             ?score_threshold: ::Float
+                           ) -> _UpdateMLModelResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMLModelResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MachineLearning/Client.html#wait_until-instance_method
+      def wait_until: (:batch_prediction_available waiter_name, 
+                    ?filter_variable: ("CreatedAt" | "LastUpdatedAt" | "Status" | "Name" | "IAMUser" | "MLModelId" | "DataSourceId" | "DataURI"),
+                    ?eq: ::String,
+                    ?gt: ::String,
+                    ?lt: ::String,
+                    ?ge: ::String,
+                    ?le: ::String,
+                    ?ne: ::String,
+                    ?prefix: ::String,
+                    ?sort_order: ("asc" | "dsc"),
+                    ?next_token: ::String,
+                    ?limit: ::Integer
+                  ) -> Client::_DescribeBatchPredictionsResponseSuccess
+                    | (:batch_prediction_available waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeBatchPredictionsResponseSuccess
+                    | (:data_source_available waiter_name, 
+                    ?filter_variable: ("CreatedAt" | "LastUpdatedAt" | "Status" | "Name" | "DataLocationS3" | "IAMUser"),
+                    ?eq: ::String,
+                    ?gt: ::String,
+                    ?lt: ::String,
+                    ?ge: ::String,
+                    ?le: ::String,
+                    ?ne: ::String,
+                    ?prefix: ::String,
+                    ?sort_order: ("asc" | "dsc"),
+                    ?next_token: ::String,
+                    ?limit: ::Integer
+                  ) -> Client::_DescribeDataSourcesResponseSuccess
+                    | (:data_source_available waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeDataSourcesResponseSuccess
+                    | (:evaluation_available waiter_name, 
+                    ?filter_variable: ("CreatedAt" | "LastUpdatedAt" | "Status" | "Name" | "IAMUser" | "MLModelId" | "DataSourceId" | "DataURI"),
+                    ?eq: ::String,
+                    ?gt: ::String,
+                    ?lt: ::String,
+                    ?ge: ::String,
+                    ?le: ::String,
+                    ?ne: ::String,
+                    ?prefix: ::String,
+                    ?sort_order: ("asc" | "dsc"),
+                    ?next_token: ::String,
+                    ?limit: ::Integer
+                  ) -> Client::_DescribeEvaluationsResponseSuccess
+                    | (:evaluation_available waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeEvaluationsResponseSuccess
+                    | (:ml_model_available waiter_name, 
+                    ?filter_variable: ("CreatedAt" | "LastUpdatedAt" | "Status" | "Name" | "IAMUser" | "TrainingDataSourceId" | "RealtimeEndpointStatus" | "MLModelType" | "Algorithm" | "TrainingDataURI"),
+                    ?eq: ::String,
+                    ?gt: ::String,
+                    ?lt: ::String,
+                    ?ge: ::String,
+                    ?le: ::String,
+                    ?ne: ::String,
+                    ?prefix: ::String,
+                    ?sort_order: ("asc" | "dsc"),
+                    ?next_token: ::String,
+                    ?limit: ::Integer
+                  ) -> Client::_DescribeMLModelsResponseSuccess
+                    | (:ml_model_available waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeMLModelsResponseSuccess
+    end
+  end
+end
+

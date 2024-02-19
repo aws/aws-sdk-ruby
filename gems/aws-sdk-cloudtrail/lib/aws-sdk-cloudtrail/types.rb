@@ -10,6 +10,12 @@
 module Aws::CloudTrail
   module Types
 
+    # You do not have sufficient access to perform this action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Aws::EmptyStructure; end
+
     # This exception is thrown when you start a new import and a previous
     # import is still in progress.
     #
@@ -121,17 +127,20 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] field
     #   A field in a CloudTrail event record on which to filter events to be
-    #   logged. For event data stores for Config configuration items, Audit
-    #   Manager evidence, or non-Amazon Web Services events, the field is
-    #   used only for selecting events as filtering is not supported.
+    #   logged. For event data stores for CloudTrail Insights events, Config
+    #   configuration items, Audit Manager evidence, or events outside of
+    #   Amazon Web Services, the field is used only for selecting events as
+    #   filtering is not supported.
     #
-    #   For CloudTrail event records, supported fields include `readOnly`,
-    #   `eventCategory`, `eventSource` (for management events), `eventName`,
-    #   `resources.type`, and `resources.ARN`.
+    #   For CloudTrail management events, supported fields include
+    #   `readOnly`, `eventCategory`, and `eventSource`.
     #
-    #   For event data stores for Config configuration items, Audit Manager
-    #   evidence, or non-Amazon Web Services events, the only supported
-    #   field is `eventCategory`.
+    #   For CloudTrail data events, supported fields include `readOnly`,
+    #   `eventCategory`, `eventName`, `resources.type`, and `resources.ARN`.
+    #
+    #   For event data stores for CloudTrail Insights events, Config
+    #   configuration items, Audit Manager evidence, or events outside of
+    #   Amazon Web Services, the only supported field is `eventCategory`.
     #
     #   * <b> <code>readOnly</code> </b> - Optional. Can be set to `Equals`
     #     a value of `true` or `false`. If you do not add this field,
@@ -140,8 +149,8 @@ module Aws::CloudTrail
     #     events.
     #
     #   * <b> <code>eventSource</code> </b> - For filtering management
-    #     events only. This can be set only to `NotEquals`
-    #     `kms.amazonaws.com`.
+    #     events only. This can be set to `NotEquals` `kms.amazonaws.com` or
+    #     `NotEquals` `rdsdata.amazonaws.com`.
     #
     #   * <b> <code>eventName</code> </b> - Can use any operator. You can
     #     use it to ﬁlter in or ﬁlter out any data event logged to
@@ -151,8 +160,14 @@ module Aws::CloudTrail
     #   * <b> <code>eventCategory</code> </b> - This is required and must be
     #     set to `Equals`.
     #
-    #     * For CloudTrail event records, the value must be `Management` or
-    #       `Data`.
+    #     * For CloudTrail management events, the value must be
+    #       `Management`.
+    #
+    #     * For CloudTrail data events, the value must be `Data`.
+    #
+    #     The following are used only for event data stores:
+    #
+    #     * For CloudTrail Insights events, the value must be `Insight`.
     #
     #     * For Config configuration items, the value must be
     #       `ConfigurationItem`.
@@ -172,7 +187,19 @@ module Aws::CloudTrail
     #
     #     * `AWS::S3::Object`
     #
+    #     * `AWS::B2BI::Transformer`
+    #
+    #     * `AWS::Bedrock::AgentAlias`
+    #
+    #     * `AWS::Bedrock::KnowledgeBase`
+    #
+    #     * `AWS::Cassandra::Table`
+    #
+    #     * `AWS::CloudFront::KeyValueStore`
+    #
     #     * `AWS::CloudTrail::Channel`
+    #
+    #     * `AWS::CodeWhisperer::Customization`
     #
     #     * `AWS::CodeWhisperer::Profile`
     #
@@ -190,7 +217,13 @@ module Aws::CloudTrail
     #
     #     * `AWS::GuardDuty::Detector`
     #
+    #     * `AWS::IoTTwinMaker::Entity`
+    #
+    #     * `AWS::IoTTwinMaker::Workspace`
+    #
     #     * `AWS::KendraRanking::ExecutionPlan`
+    #
+    #     * `AWS::KinesisVideo::Stream`
     #
     #     * `AWS::ManagedBlockchain::Network`
     #
@@ -198,9 +231,37 @@ module Aws::CloudTrail
     #
     #     * `AWS::MedicalImaging::Datastore`
     #
+    #     * `AWS::NeptuneGraph::Graph`
+    #
+    #     * `AWS::PCAConnectorAD::Connector`
+    #
+    #     * `AWS::QBusiness::Application`
+    #
+    #     * `AWS::QBusiness::DataSource`
+    #
+    #     * `AWS::QBusiness::Index`
+    #
+    #     * `AWS::QBusiness::WebExperience`
+    #
+    #     * `AWS::RDS::DBCluster`
+    #
+    #     * `AWS::SageMaker::Endpoint`
+    #
     #     * `AWS::SageMaker::ExperimentTrialComponent`
     #
     #     * `AWS::SageMaker::FeatureGroup`
+    #
+    #     * `AWS::ServiceDiscovery::Namespace `
+    #
+    #     * `AWS::ServiceDiscovery::Service`
+    #
+    #     * `AWS::SCN::Instance`
+    #
+    #     * `AWS::SNS::PlatformEndpoint`
+    #
+    #     * `AWS::SNS::Topic`
+    #
+    #     * `AWS::SQS::Queue`
     #
     #     * `AWS::S3::AccessPoint`
     #
@@ -209,6 +270,14 @@ module Aws::CloudTrail
     #     * `AWS::S3Outposts::Object`
     #
     #     * `AWS::SSMMessages::ControlChannel`
+    #
+    #     * `AWS::ThinClient::Device`
+    #
+    #     * `AWS::ThinClient::Environment`
+    #
+    #     * `AWS::Timestream::Database`
+    #
+    #     * `AWS::Timestream::Table`
     #
     #     * `AWS::VerifiedPermissions::PolicyStore`
     #
@@ -248,11 +317,59 @@ module Aws::CloudTrail
     #
     #     ^
     #
+    #     When resources.type equals `AWS::B2BI::Transformer`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:b2bi:<region>:<account_ID>:transformer/<transformer_ID>`
+    #
+    #     ^
+    #
+    #     When resources.type equals `AWS::Bedrock::AgentAlias`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:bedrock:<region>:<account_ID>:agent-alias/<agent_ID>/<alias_ID>`
+    #
+    #     ^
+    #
+    #     When resources.type equals `AWS::Bedrock::KnowledgeBase`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:bedrock:<region>:<account_ID>:knowledge-base/<knowledge_base_ID>`
+    #
+    #     ^
+    #
+    #     When resources.type equals `AWS::Cassandra::Table`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:cassandra:<region>:<account_ID>:/keyspace/<keyspace_name>/table/<table_name>`
+    #
+    #     ^
+    #
+    #     When resources.type equals `AWS::CloudFront::KeyValueStore`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:cloudfront:<region>:<account_ID>:key-value-store/<KVS_name>`
+    #
+    #     ^
+    #
     #     When resources.type equals `AWS::CloudTrail::Channel`, and the
     #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
     #
     #     * `arn:<partition>:cloudtrail:<region>:<account_ID>:channel/<channel_UUID>`
+    #
+    #     ^
+    #
+    #     When resources.type equals `AWS::CodeWhisperer::Customization`,
+    #     and the operator is set to `Equals` or `NotEquals`, the ARN must
+    #     be in the following format:
+    #
+    #     * `arn:<partition>:codewhisperer:<region>:<account_ID>:customization/<customization_ID>`
     #
     #     ^
     #
@@ -292,7 +409,7 @@ module Aws::CloudTrail
     #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
     #
-    #     * `arn:<partition>:emrwal:<region>::workspace/<workspace_name>`
+    #     * `arn:<partition>:emrwal:<region>:<account_ID>:workspace/<workspace_name>`
     #
     #     ^
     #
@@ -320,11 +437,35 @@ module Aws::CloudTrail
     #
     #     ^
     #
+    #     When `resources.type` equals `AWS::IoTTwinMaker::Entity`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:iottwinmaker:<region>:<account_ID>:workspace/<workspace_ID>/entity/<entity_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::IoTTwinMaker::Workspace`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:iottwinmaker:<region>:<account_ID>:workspace/<workspace_ID>`
+    #
+    #     ^
+    #
     #     When `resources.type` equals `AWS::KendraRanking::ExecutionPlan`,
     #     and the operator is set to `Equals` or `NotEquals`, the ARN must
     #     be in the following format:
     #
     #     * `arn:<partition>:kendra-ranking:<region>:<account_ID>:rescore-execution-plan/<rescore_execution_plan_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::KinesisVideo::Stream`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:kinesisvideo:<region>:<account_ID>:stream/<stream_name>/<creation_time>`
     #
     #     ^
     #
@@ -352,6 +493,70 @@ module Aws::CloudTrail
     #
     #     ^
     #
+    #     When `resources.type` equals `AWS::NeptuneGraph::Graph`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:neptune-graph:<region>:<account_ID>:graph/<graph_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::PCAConnectorAD::Connector`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:pca-connector-ad:<region>:<account_ID>:connector/<connector_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::QBusiness::Application`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:qbusiness:<region>:<account_ID>:application/<application_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::QBusiness::DataSource`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:qbusiness:<region>:<account_ID>:application/<application_ID>/index/<index_ID>/data-source/<datasource_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::QBusiness::Index`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:qbusiness:<region>:<account_ID>:application/<application_ID>/index/<index_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::QBusiness::WebExperience`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:qbusiness:<region>:<account_ID>:application/<application_ID>/web-experience/<web_experience_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::RDS::DBCluster`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:rds:<region>:<account_ID>:cluster/<cluster_name>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::SageMaker::Endpoint`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:sagemaker:<region>:<account_ID>:endpoint/<endpoint_name>`
+    #
+    #     ^
+    #
     #     When `resources.type` equals
     #     `AWS::SageMaker::ExperimentTrialComponent`, and the operator is
     #     set to `Equals` or `NotEquals`, the ARN must be in the following
@@ -366,6 +571,54 @@ module Aws::CloudTrail
     #     the following format:
     #
     #     * `arn:<partition>:sagemaker:<region>:<account_ID>:feature-group/<feature_group_name>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::SCN::Instance`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:scn:<region>:<account_ID>:instance/<instance_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::ServiceDiscovery::Namespace`,
+    #     and the operator is set to `Equals` or `NotEquals`, the ARN must
+    #     be in the following format:
+    #
+    #     * `arn:<partition>:servicediscovery:<region>:<account_ID>:namespace/<namespace_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::ServiceDiscovery::Service`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:servicediscovery:<region>:<account_ID>:service/<service_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::SNS::PlatformEndpoint`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:sns:<region>:<account_ID>:endpoint/<endpoint_type>/<endpoint_name>/<endpoint_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::SNS::Topic`, and the operator
+    #     is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:sns:<region>:<account_ID>:<topic_name>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::SQS::Queue`, and the operator
+    #     is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:sqs:<region>:<account_ID>:<queue_name>`
     #
     #     ^
     #
@@ -401,6 +654,38 @@ module Aws::CloudTrail
     #     be in the following format:
     #
     #     * `arn:<partition>:ssmmessages:<region>:<account_ID>:control-channel/<channel_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::ThinClient::Device`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:thinclient:<region>:<account_ID>:device/<device_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::ThinClient::Environment`, and
+    #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
+    #     the following format:
+    #
+    #     * `arn:<partition>:thinclient:<region>:<account_ID>:environment/<environment_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::Timestream::Database`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:timestream:<region>:<account_ID>:database/<database_name>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::Timestream::Table`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:timestream:<region>:<account_ID>:database/<database_name>/table/<table_name>`
     #
     #     ^
     #
@@ -561,14 +846,11 @@ module Aws::CloudTrail
     #
     class ChannelNotFoundException < Aws::EmptyStructure; end
 
-    # This exception is thrown when an operation is called with a trail ARN
-    # that is not valid. The following is the format of a trail ARN.
+    # This exception is thrown when an operation is called with an ARN that
+    # is not valid.
     #
+    # The following is the format of a trail ARN:
     # `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
-    #
-    # This exception is also thrown when you call `AddTags` or `RemoveTags`
-    # on a trail, event data store, or channel with a resource ARN that is
-    # not valid.
     #
     # The following is the format of an event data store ARN:
     # `arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
@@ -608,6 +890,14 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CloudWatchLogsDeliveryUnavailableException AWS API Documentation
     #
     class CloudWatchLogsDeliveryUnavailableException < Aws::EmptyStructure; end
+
+    # You are trying to update a resource when another request is in
+    # progress. Allow sufficient wait time for the previous request to
+    # complete, then retry your request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Aws::EmptyStructure; end
 
     # This exception is thrown when the specified resource is not ready for
     # an operation. This can occur when you try to run an operation on a
@@ -734,8 +1024,12 @@ module Aws::CloudTrail
     #   @return [Boolean]
     #
     # @!attribute [rw] retention_period
-    #   The retention period of the event data store, in days. You can set a
+    #   The retention period of the event data store, in days. If
+    #   `BillingMode` is set to `EXTENDABLE_RETENTION_PRICING`, you can set
+    #   a retention period of up to 3653 days, the equivalent of 10 years.
+    #   If `BillingMode` is set to `FIXED_RETENTION_PRICING`, you can set a
     #   retention period of up to 2557 days, the equivalent of seven years.
+    #
     #   CloudTrail Lake determines whether to retain an event by checking if
     #   the `eventTime` of the event is within the specified retention
     #   period. For example, if you set a retention period of 90 days,
@@ -801,6 +1095,34 @@ module Aws::CloudTrail
     #   events. The default is true.
     #   @return [Boolean]
     #
+    # @!attribute [rw] billing_mode
+    #   The billing mode for the event data store determines the cost for
+    #   ingesting events and the default and maximum retention period for
+    #   the event data store.
+    #
+    #   The following are the possible values:
+    #
+    #   * `EXTENDABLE_RETENTION_PRICING` - This billing mode is generally
+    #     recommended if you want a flexible retention period of up to 3653
+    #     days (about 10 years). The default retention period for this
+    #     billing mode is 366 days.
+    #
+    #   * `FIXED_RETENTION_PRICING` - This billing mode is recommended if
+    #     you expect to ingest more than 25 TB of event data per month and
+    #     need a retention period of up to 2557 days (about 7 years). The
+    #     default retention period for this billing mode is 2557 days.
+    #
+    #   The default value is `EXTENDABLE_RETENTION_PRICING`.
+    #
+    #   For more information about CloudTrail pricing, see [CloudTrail
+    #   Pricing][1] and [Managing CloudTrail Lake costs][2].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/cloudtrail/pricing/
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateEventDataStoreRequest AWS API Documentation
     #
     class CreateEventDataStoreRequest < Struct.new(
@@ -812,7 +1134,8 @@ module Aws::CloudTrail
       :termination_protection_enabled,
       :tags_list,
       :kms_key_id,
-      :start_ingestion)
+      :start_ingestion,
+      :billing_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -875,6 +1198,10 @@ module Aws::CloudTrail
     #   `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
     #   @return [String]
     #
+    # @!attribute [rw] billing_mode
+    #   The billing mode for the event data store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateEventDataStoreResponse AWS API Documentation
     #
     class CreateEventDataStoreResponse < Struct.new(
@@ -889,7 +1216,8 @@ module Aws::CloudTrail
       :tags_list,
       :created_timestamp,
       :updated_timestamp,
-      :kms_key_id)
+      :kms_key_id,
+      :billing_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1202,51 +1530,9 @@ module Aws::CloudTrail
     #
     #   * `AWS::S3::Object`
     #
-    #   The following resource types are also available through *advanced*
-    #   event selectors. Basic event selector resource types are valid in
-    #   advanced event selectors, but advanced event selector resource types
-    #   are not valid in basic event selectors. For more information, see
-    #   [AdvancedFieldSelector][1].
-    #
-    #   * `AWS::CloudTrail::Channel`
-    #
-    #   * `AWS::CodeWhisperer::Profile`
-    #
-    #   * `AWS::Cognito::IdentityPool`
-    #
-    #   * `AWS::DynamoDB::Stream`
-    #
-    #   * `AWS::EC2::Snapshot`
-    #
-    #   * `AWS::EMRWAL::Workspace`
-    #
-    #   * `AWS::FinSpace::Environment`
-    #
-    #   * `AWS::Glue::Table`
-    #
-    #   * `AWS::GuardDuty::Detector`
-    #
-    #   * `AWS::KendraRanking::ExecutionPlan`
-    #
-    #   * `AWS::ManagedBlockchain::Network`
-    #
-    #   * `AWS::ManagedBlockchain::Node`
-    #
-    #   * `AWS::MedicalImaging::Datastore`
-    #
-    #   * `AWS::SageMaker::ExperimentTrialComponent`
-    #
-    #   * `AWS::SageMaker::FeatureGroup`
-    #
-    #   * `AWS::S3::AccessPoint`
-    #
-    #   * `AWS::S3ObjectLambda::AccessPoint`
-    #
-    #   * `AWS::S3Outposts::Object`
-    #
-    #   * `AWS::SSMMessages::ControlChannel`
-    #
-    #   * `AWS::VerifiedPermissions::PolicyStore`
+    #   Additional resource types are available through *advanced* event
+    #   selectors. For more information about these additional resource
+    #   types, see [AdvancedFieldSelector][1].
     #
     #
     #
@@ -1559,7 +1845,7 @@ module Aws::CloudTrail
     # @!attribute [rw] type
     #   The type of destination for events arriving from a channel. For
     #   channels used for a CloudTrail Lake integration, the value is
-    #   `EventDataStore`. For service-linked channels, the value is
+    #   `EVENT_DATA_STORE`. For service-linked channels, the value is
     #   `AWS_SERVICE`.
     #   @return [String]
     #
@@ -1575,6 +1861,86 @@ module Aws::CloudTrail
     class Destination < Struct.new(
       :type,
       :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_data_store
+    #   The ARN (or ID suffix of the ARN) of the event data store for which
+    #   you want to disable Lake query federation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DisableFederationRequest AWS API Documentation
+    #
+    class DisableFederationRequest < Struct.new(
+      :event_data_store)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_data_store_arn
+    #   The ARN of the event data store for which you disabled Lake query
+    #   federation.
+    #   @return [String]
+    #
+    # @!attribute [rw] federation_status
+    #   The federation status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DisableFederationResponse AWS API Documentation
+    #
+    class DisableFederationResponse < Struct.new(
+      :event_data_store_arn,
+      :federation_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_data_store
+    #   The ARN (or ID suffix of the ARN) of the event data store for which
+    #   you want to enable Lake query federation.
+    #   @return [String]
+    #
+    # @!attribute [rw] federation_role_arn
+    #   The ARN of the federation role to use for the event data store.
+    #   Amazon Web Services services like Lake Formation use this federation
+    #   role to access data for the federated event data store. The
+    #   federation role must exist in your account and provide the [required
+    #   minimum permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html#query-federation-permissions-role
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EnableFederationRequest AWS API Documentation
+    #
+    class EnableFederationRequest < Struct.new(
+      :event_data_store,
+      :federation_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_data_store_arn
+    #   The ARN of the event data store for which you enabled Lake query
+    #   federation.
+    #   @return [String]
+    #
+    # @!attribute [rw] federation_status
+    #   The federation status.
+    #   @return [String]
+    #
+    # @!attribute [rw] federation_role_arn
+    #   The ARN of the federation role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EnableFederationResponse AWS API Documentation
+    #
+    class EnableFederationResponse < Struct.new(
+      :event_data_store_arn,
+      :federation_status,
+      :federation_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1640,9 +2006,8 @@ module Aws::CloudTrail
 
     # A storage lake of event data against which you can run complex
     # SQL-based queries. An event data store can include events that you
-    # have logged on your account from the last 90 to 2557 days (about three
-    # months to up to seven years). To select events for an event data
-    # store, use [advanced event selectors][1].
+    # have logged on your account. To select events for an event data store,
+    # use [advanced event selectors][1].
     #
     #
     #
@@ -1723,6 +2088,15 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventDataStoreAlreadyExistsException AWS API Documentation
     #
     class EventDataStoreAlreadyExistsException < Aws::EmptyStructure; end
+
+    # You cannot delete the event data store because Lake query federation
+    # is enabled. To delete the event data store, run the
+    # `DisableFederation` operation to disable Lake query federation on the
+    # event data store.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventDataStoreFederationEnabledException AWS API Documentation
+    #
+    class EventDataStoreFederationEnabledException < Aws::EmptyStructure; end
 
     # This exception is thrown when you try to update or delete an event
     # data store that currently has an import in progress.
@@ -1958,6 +2332,27 @@ module Aws::CloudTrail
     #   `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
     #   @return [String]
     #
+    # @!attribute [rw] billing_mode
+    #   The billing mode for the event data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] federation_status
+    #   Indicates the [Lake query federation][1] status. The status is
+    #   `ENABLED` if Lake query federation is enabled, or `DISABLED` if Lake
+    #   query federation is disabled. You cannot delete an event data store
+    #   if the `FederationStatus` is `ENABLED`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html
+    #   @return [String]
+    #
+    # @!attribute [rw] federation_role_arn
+    #   If Lake query federation is enabled, provides the ARN of the
+    #   federation role used to access the resources for the federated event
+    #   data store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventDataStoreResponse AWS API Documentation
     #
     class GetEventDataStoreResponse < Struct.new(
@@ -1971,7 +2366,10 @@ module Aws::CloudTrail
       :termination_protection_enabled,
       :created_timestamp,
       :updated_timestamp,
-      :kms_key_id)
+      :kms_key_id,
+      :billing_mode,
+      :federation_status,
+      :federation_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2118,12 +2516,22 @@ module Aws::CloudTrail
     #   If you specify a trail ARN, it must be in the format:
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #
+    #   You cannot use this parameter with the `EventDataStore` parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_data_store
+    #   Specifies the ARN (or ID suffix of the ARN) of the event data store
+    #   for which you want to get Insights selectors.
+    #
+    #   You cannot use this parameter with the `TrailName` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetInsightSelectorsRequest AWS API Documentation
     #
     class GetInsightSelectorsRequest < Struct.new(
-      :trail_name)
+      :trail_name,
+      :event_data_store)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2134,16 +2542,27 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] insight_selectors
-    #   A JSON string that contains the insight types you want to log on a
-    #   trail. In this release, `ApiErrorRateInsight` and
-    #   `ApiCallRateInsight` are supported as insight types.
+    #   A JSON string that contains the Insight types you want to log on a
+    #   trail or event data store. `ApiErrorRateInsight` and
+    #   `ApiCallRateInsight` are supported as Insights types.
     #   @return [Array<Types::InsightSelector>]
+    #
+    # @!attribute [rw] event_data_store_arn
+    #   The ARN of the source event data store that enabled Insights events.
+    #   @return [String]
+    #
+    # @!attribute [rw] insights_destination
+    #   The ARN of the destination event data store that logs Insights
+    #   events.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetInsightSelectorsResponse AWS API Documentation
     #
     class GetInsightSelectorsResponse < Struct.new(
       :trail_arn,
-      :insight_selectors)
+      :insight_selectors,
+      :event_data_store_arn,
+      :insights_destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2603,20 +3022,21 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # If you run `GetInsightSelectors` on a trail that does not have
-    # Insights events enabled, the operation throws the exception
-    # `InsightNotEnabledException`.
+    # If you run `GetInsightSelectors` on a trail or event data store that
+    # does not have Insights events enabled, the operation throws the
+    # exception `InsightNotEnabledException`.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsightNotEnabledException AWS API Documentation
     #
     class InsightNotEnabledException < Aws::EmptyStructure; end
 
     # A JSON string that contains a list of Insights types that are logged
-    # on a trail.
+    # on a trail or event data store.
     #
     # @!attribute [rw] insight_type
-    #   The type of Insights events to log on a trail. `ApiCallRateInsight`
-    #   and `ApiErrorRateInsight` are valid Insight types.
+    #   The type of Insights events to log on a trail or event data store.
+    #   `ApiCallRateInsight` and `ApiErrorRateInsight` are valid Insight
+    #   types.
     #
     #   The `ApiCallRateInsight` Insights type analyzes write-only
     #   management API calls that are aggregated per minute against a
@@ -2754,10 +3174,24 @@ module Aws::CloudTrail
     #
     class InvalidImportSourceException < Aws::EmptyStructure; end
 
-    # The formatting or syntax of the `InsightSelectors` JSON statement in
-    # your `PutInsightSelectors` or `GetInsightSelectors` request is not
-    # valid, or the specified insight type in the `InsightSelectors`
-    # statement is not a valid insight type.
+    # For `PutInsightSelectors`, this exception is thrown when the
+    # formatting or syntax of the `InsightSelectors` JSON statement is not
+    # valid, or the specified `InsightType` in the `InsightSelectors`
+    # statement is not valid. Valid values for `InsightType` are
+    # `ApiCallRateInsight` and `ApiErrorRateInsight`. To enable Insights on
+    # an event data store, the destination event data store specified by the
+    # `InsightsDestination` parameter must log Insights events and the
+    # source event data store specified by the `EventDataStore` parameter
+    # must log management events.
+    #
+    # For `UpdateEventDataStore`, this exception is thrown if Insights are
+    # enabled on the event data store and the updated advanced event
+    # selectors are not compatible with the configured `InsightSelectors`.
+    # If the `InsightSelectors` includes an `InsightType` of
+    # `ApiCallRateInsight`, the source event data store must log `write`
+    # management events. If the `InsightSelectors` includes an `InsightType`
+    # of `ApiErrorRateInsight`, the source event data store must log
+    # management events.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidInsightSelectorsException AWS API Documentation
     #
@@ -3065,6 +3499,148 @@ module Aws::CloudTrail
     #
     class ListImportsResponse < Struct.new(
       :imports,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_source
+    #   The Amazon Web Services service to which the request was made, such
+    #   as `iam.amazonaws.com` or `s3.amazonaws.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_name
+    #   The name of the event, typically the Amazon Web Services API on
+    #   which unusual levels of activity were recorded.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_type
+    #   The type of CloudTrail Insights event, which is either
+    #   `ApiCallRateInsight` or `ApiErrorRateInsight`. The
+    #   `ApiCallRateInsight` Insights type analyzes write-only management
+    #   API calls that are aggregated per minute against a baseline API call
+    #   volume. The `ApiErrorRateInsight` Insights type analyzes management
+    #   API calls that result in error codes.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   Conditionally required if the `InsightType` parameter is set to
+    #   `ApiErrorRateInsight`.
+    #
+    #   If returning metrics for the `ApiErrorRateInsight` Insights type,
+    #   this is the error to retrieve data for. For example, `AccessDenied`.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   Specifies, in UTC, the start time for time-series data. The value
+    #   specified is inclusive; results include data points with the
+    #   specified time stamp.
+    #
+    #   The default is 90 days before the time of request.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   Specifies, in UTC, the end time for time-series data. The value
+    #   specified is exclusive; results include data points up to the
+    #   specified time stamp.
+    #
+    #   The default is the time of request.
+    #   @return [Time]
+    #
+    # @!attribute [rw] period
+    #   Granularity of data to retrieve, in seconds. Valid values are `60`,
+    #   `300`, and `3600`. If you specify any other value, you will get an
+    #   error. The default is 3600 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] data_type
+    #   Type of datapoints to return. Valid values are `NonZeroData` and
+    #   `FillWithZeros`. The default is `NonZeroData`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of datapoints to return. Valid values are
+    #   integers from 1 to 21600. The default value is 21600.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Returned if all datapoints can't be returned in a single call. For
+    #   example, due to reaching `MaxResults`.
+    #
+    #   Add this parameter to the request to continue retrieving results
+    #   starting from the last evaluated point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListInsightsMetricDataRequest AWS API Documentation
+    #
+    class ListInsightsMetricDataRequest < Struct.new(
+      :event_source,
+      :event_name,
+      :insight_type,
+      :error_code,
+      :start_time,
+      :end_time,
+      :period,
+      :data_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_source
+    #   The Amazon Web Services service to which the request was made, such
+    #   as `iam.amazonaws.com` or `s3.amazonaws.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_name
+    #   The name of the event, typically the Amazon Web Services API on
+    #   which unusual levels of activity were recorded.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_type
+    #   The type of CloudTrail Insights event, which is either
+    #   `ApiCallRateInsight` or `ApiErrorRateInsight`. The
+    #   `ApiCallRateInsight` Insights type analyzes write-only management
+    #   API calls that are aggregated per minute against a baseline API call
+    #   volume. The `ApiErrorRateInsight` Insights type analyzes management
+    #   API calls that result in error codes.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   Only returned if `InsightType` parameter was set to
+    #   `ApiErrorRateInsight`.
+    #
+    #   If returning metrics for the `ApiErrorRateInsight` Insights type,
+    #   this is the error to retrieve data for. For example, `AccessDenied`.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamps
+    #   List of timestamps at intervals corresponding to the specified time
+    #   period.
+    #   @return [Array<Time>]
+    #
+    # @!attribute [rw] values
+    #   List of values representing the API call rate or error rate at each
+    #   timestamp. The number of values is equal to the number of
+    #   timestamps.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] next_token
+    #   Only returned if the full results could not be returned in a single
+    #   query. You can set the `NextToken` parameter in the next request to
+    #   this value to continue retrieval.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListInsightsMetricDataResponse AWS API Documentation
+    #
+    class ListInsightsMetricDataResponse < Struct.new(
+      :event_source,
+      :event_name,
+      :insight_type,
+      :error_code,
+      :timestamps,
+      :values,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3549,12 +4125,15 @@ module Aws::CloudTrail
     # @!attribute [rw] trail_name
     #   The name of the CloudTrail trail for which you want to change or add
     #   Insights selectors.
+    #
+    #   You cannot use this parameter with the `EventDataStore` and
+    #   `InsightsDestination` parameters.
     #   @return [String]
     #
     # @!attribute [rw] insight_selectors
-    #   A JSON string that contains the insight types you want to log on a
-    #   trail. `ApiCallRateInsight` and `ApiErrorRateInsight` are valid
-    #   Insight types.
+    #   A JSON string that contains the Insights types you want to log on a
+    #   trail or event data store. `ApiCallRateInsight` and
+    #   `ApiErrorRateInsight` are valid Insight types.
     #
     #   The `ApiCallRateInsight` Insights type analyzes write-only
     #   management API calls that are aggregated per minute against a
@@ -3565,11 +4144,31 @@ module Aws::CloudTrail
     #   is unsuccessful.
     #   @return [Array<Types::InsightSelector>]
     #
+    # @!attribute [rw] event_data_store
+    #   The ARN (or ID suffix of the ARN) of the source event data store for
+    #   which you want to change or add Insights selectors. To enable
+    #   Insights on an event data store, you must provide both the
+    #   `EventDataStore` and `InsightsDestination` parameters.
+    #
+    #   You cannot use this parameter with the `TrailName` parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] insights_destination
+    #   The ARN (or ID suffix of the ARN) of the destination event data
+    #   store that logs Insights events. To enable Insights on an event data
+    #   store, you must provide both the `EventDataStore` and
+    #   `InsightsDestination` parameters.
+    #
+    #   You cannot use this parameter with the `TrailName` parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutInsightSelectorsRequest AWS API Documentation
     #
     class PutInsightSelectorsRequest < Struct.new(
       :trail_name,
-      :insight_selectors)
+      :insight_selectors,
+      :event_data_store,
+      :insights_destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3581,15 +4180,27 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] insight_selectors
     #   A JSON string that contains the Insights event types that you want
-    #   to log on a trail. The valid Insights types in this release are
+    #   to log on a trail or event data store. The valid Insights types are
     #   `ApiErrorRateInsight` and `ApiCallRateInsight`.
     #   @return [Array<Types::InsightSelector>]
+    #
+    # @!attribute [rw] event_data_store_arn
+    #   The Amazon Resource Name (ARN) of the source event data store for
+    #   which you want to change or add Insights selectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] insights_destination
+    #   The ARN of the destination event data store that logs Insights
+    #   events.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutInsightSelectorsResponse AWS API Documentation
     #
     class PutInsightSelectorsResponse < Struct.new(
       :trail_arn,
-      :insight_selectors)
+      :insight_selectors,
+      :event_data_store_arn,
+      :insights_destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3963,6 +4574,10 @@ module Aws::CloudTrail
     #   `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
     #   @return [String]
     #
+    # @!attribute [rw] billing_mode
+    #   The billing mode for the event data store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RestoreEventDataStoreResponse AWS API Documentation
     #
     class RestoreEventDataStoreResponse < Struct.new(
@@ -3976,7 +4591,8 @@ module Aws::CloudTrail
       :termination_protection_enabled,
       :created_timestamp,
       :updated_timestamp,
-      :kms_key_id)
+      :kms_key_id,
+      :billing_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4602,11 +5218,22 @@ module Aws::CloudTrail
     # @!attribute [rw] organization_enabled
     #   Specifies whether an event data store collects events logged for an
     #   organization in Organizations.
+    #
+    #   <note markdown="1"> Only the management account for the organization can convert an
+    #   organization event data store to a non-organization event data
+    #   store, or convert a non-organization event data store to an
+    #   organization event data store.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] retention_period
-    #   The retention period of the event data store, in days. You can set a
+    #   The retention period of the event data store, in days. If
+    #   `BillingMode` is set to `EXTENDABLE_RETENTION_PRICING`, you can set
+    #   a retention period of up to 3653 days, the equivalent of 10 years.
+    #   If `BillingMode` is set to `FIXED_RETENTION_PRICING`, you can set a
     #   retention period of up to 2557 days, the equivalent of seven years.
+    #
     #   CloudTrail Lake determines whether to retain an event by checking if
     #   the `eventTime` of the event is within the specified retention
     #   period. For example, if you set a retention period of 90 days,
@@ -4661,6 +5288,41 @@ module Aws::CloudTrail
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
     #   @return [String]
     #
+    # @!attribute [rw] billing_mode
+    #   <note markdown="1"> You can't change the billing mode from
+    #   `EXTENDABLE_RETENTION_PRICING` to `FIXED_RETENTION_PRICING`. If
+    #   `BillingMode` is set to `EXTENDABLE_RETENTION_PRICING` and you want
+    #   to use `FIXED_RETENTION_PRICING` instead, you'll need to stop
+    #   ingestion on the event data store and create a new event data store
+    #   that uses `FIXED_RETENTION_PRICING`.
+    #
+    #    </note>
+    #
+    #   The billing mode for the event data store determines the cost for
+    #   ingesting events and the default and maximum retention period for
+    #   the event data store.
+    #
+    #   The following are the possible values:
+    #
+    #   * `EXTENDABLE_RETENTION_PRICING` - This billing mode is generally
+    #     recommended if you want a flexible retention period of up to 3653
+    #     days (about 10 years). The default retention period for this
+    #     billing mode is 366 days.
+    #
+    #   * `FIXED_RETENTION_PRICING` - This billing mode is recommended if
+    #     you expect to ingest more than 25 TB of event data per month and
+    #     need a retention period of up to 2557 days (about 7 years). The
+    #     default retention period for this billing mode is 2557 days.
+    #
+    #   For more information about CloudTrail pricing, see [CloudTrail
+    #   Pricing][1] and [Managing CloudTrail Lake costs][2].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/cloudtrail/pricing/
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateEventDataStoreRequest AWS API Documentation
     #
     class UpdateEventDataStoreRequest < Struct.new(
@@ -4671,7 +5333,8 @@ module Aws::CloudTrail
       :organization_enabled,
       :retention_period,
       :termination_protection_enabled,
-      :kms_key_id)
+      :kms_key_id,
+      :billing_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4730,6 +5393,27 @@ module Aws::CloudTrail
     #   `arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012`
     #   @return [String]
     #
+    # @!attribute [rw] billing_mode
+    #   The billing mode for the event data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] federation_status
+    #   Indicates the [Lake query federation][1] status. The status is
+    #   `ENABLED` if Lake query federation is enabled, or `DISABLED` if Lake
+    #   query federation is disabled. You cannot delete an event data store
+    #   if the `FederationStatus` is `ENABLED`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html
+    #   @return [String]
+    #
+    # @!attribute [rw] federation_role_arn
+    #   If Lake query federation is enabled, provides the ARN of the
+    #   federation role used to access the resources for the federated event
+    #   data store.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateEventDataStoreResponse AWS API Documentation
     #
     class UpdateEventDataStoreResponse < Struct.new(
@@ -4743,7 +5427,10 @@ module Aws::CloudTrail
       :termination_protection_enabled,
       :created_timestamp,
       :updated_timestamp,
-      :kms_key_id)
+      :kms_key_id,
+      :billing_mode,
+      :federation_status,
+      :federation_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4874,13 +5561,19 @@ module Aws::CloudTrail
     #   organization in Organizations, or only for the current Amazon Web
     #   Services account. The default is false, and cannot be true unless
     #   the call is made on behalf of an Amazon Web Services account that is
-    #   the management account or delegated administrator account for an
-    #   organization in Organizations. If the trail is not an organization
-    #   trail and this is set to `true`, the trail will be created in all
-    #   Amazon Web Services accounts that belong to the organization. If the
-    #   trail is an organization trail and this is set to `false`, the trail
-    #   will remain in the current Amazon Web Services account but be
-    #   deleted from all member accounts in the organization.
+    #   the management account for an organization in Organizations. If the
+    #   trail is not an organization trail and this is set to `true`, the
+    #   trail will be created in all Amazon Web Services accounts that
+    #   belong to the organization. If the trail is an organization trail
+    #   and this is set to `false`, the trail will remain in the current
+    #   Amazon Web Services account but be deleted from all member accounts
+    #   in the organization.
+    #
+    #   <note markdown="1"> Only the management account for the organization can convert an
+    #   organization trail to a non-organization trail, or convert a
+    #   non-organization trail to an organization trail.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateTrailRequest AWS API Documentation

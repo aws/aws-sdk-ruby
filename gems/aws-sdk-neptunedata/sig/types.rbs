@@ -1,0 +1,1013 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Neptunedata
+  module Types
+
+    class AccessDeniedException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class BulkLoadIdNotFoundException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class CancelGremlinQueryInput
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelGremlinQueryOutput
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CancelLoaderJobInput
+      attr_accessor load_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelLoaderJobOutput
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CancelMLDataProcessingJobInput
+      attr_accessor id: ::String
+      attr_accessor neptune_iam_role_arn: ::String
+      attr_accessor clean: bool
+      SENSITIVE: []
+    end
+
+    class CancelMLDataProcessingJobOutput
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CancelMLModelTrainingJobInput
+      attr_accessor id: ::String
+      attr_accessor neptune_iam_role_arn: ::String
+      attr_accessor clean: bool
+      SENSITIVE: []
+    end
+
+    class CancelMLModelTrainingJobOutput
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CancelMLModelTransformJobInput
+      attr_accessor id: ::String
+      attr_accessor neptune_iam_role_arn: ::String
+      attr_accessor clean: bool
+      SENSITIVE: []
+    end
+
+    class CancelMLModelTransformJobOutput
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CancelOpenCypherQueryInput
+      attr_accessor query_id: ::String
+      attr_accessor silent: bool
+      SENSITIVE: []
+    end
+
+    class CancelOpenCypherQueryOutput
+      attr_accessor status: ::String
+      attr_accessor payload: bool
+      SENSITIVE: []
+    end
+
+    class CancelledByUserException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class ClientTimeoutException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class ConstraintViolationException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMLEndpointInput
+      attr_accessor id: ::String
+      attr_accessor ml_model_training_job_id: ::String
+      attr_accessor ml_model_transform_job_id: ::String
+      attr_accessor update: bool
+      attr_accessor neptune_iam_role_arn: ::String
+      attr_accessor model_name: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor instance_count: ::Integer
+      attr_accessor volume_encryption_kms_key: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMLEndpointOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor creation_time_in_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class CustomModelTrainingParameters
+      attr_accessor source_s3_directory_path: ::String
+      attr_accessor training_entry_point_script: ::String
+      attr_accessor transform_entry_point_script: ::String
+      SENSITIVE: []
+    end
+
+    class CustomModelTransformParameters
+      attr_accessor source_s3_directory_path: ::String
+      attr_accessor transform_entry_point_script: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMLEndpointInput
+      attr_accessor id: ::String
+      attr_accessor neptune_iam_role_arn: ::String
+      attr_accessor clean: bool
+      SENSITIVE: []
+    end
+
+    class DeleteMLEndpointOutput
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePropertygraphStatisticsOutput
+      attr_accessor status_code: ::Integer
+      attr_accessor status: ::String
+      attr_accessor payload: Types::DeleteStatisticsValueMap
+      SENSITIVE: []
+    end
+
+    class DeleteSparqlStatisticsOutput
+      attr_accessor status_code: ::Integer
+      attr_accessor status: ::String
+      attr_accessor payload: Types::DeleteStatisticsValueMap
+      SENSITIVE: []
+    end
+
+    class DeleteStatisticsValueMap
+      attr_accessor active: bool
+      attr_accessor statistics_id: ::String
+      SENSITIVE: []
+    end
+
+    class EdgeStructure
+      attr_accessor count: ::Integer
+      attr_accessor edge_properties: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ExecuteFastResetInput
+      attr_accessor action: ("initiateDatabaseReset" | "performDatabaseReset")
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteFastResetOutput
+      attr_accessor status: ::String
+      attr_accessor payload: Types::FastResetToken
+      SENSITIVE: []
+    end
+
+    class ExecuteGremlinExplainQueryInput
+      attr_accessor gremlin_query: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteGremlinExplainQueryOutput
+      attr_accessor output: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteGremlinProfileQueryInput
+      attr_accessor gremlin_query: ::String
+      attr_accessor results: bool
+      attr_accessor chop: ::Integer
+      attr_accessor serializer: ::String
+      attr_accessor index_ops: bool
+      SENSITIVE: []
+    end
+
+    class ExecuteGremlinProfileQueryOutput
+      attr_accessor output: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteGremlinQueryInput
+      attr_accessor gremlin_query: ::String
+      attr_accessor serializer: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteGremlinQueryOutput
+      attr_accessor request_id: ::String
+      attr_accessor status: Types::GremlinQueryStatusAttributes
+      attr_accessor result: untyped
+      attr_accessor meta: untyped
+      SENSITIVE: []
+    end
+
+    class ExecuteOpenCypherExplainQueryInput
+      attr_accessor open_cypher_query: ::String
+      attr_accessor parameters: ::String
+      attr_accessor explain_mode: ("static" | "dynamic" | "details")
+      SENSITIVE: []
+    end
+
+    class ExecuteOpenCypherExplainQueryOutput
+      attr_accessor results: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteOpenCypherQueryInput
+      attr_accessor open_cypher_query: ::String
+      attr_accessor parameters: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteOpenCypherQueryOutput
+      attr_accessor results: untyped
+      SENSITIVE: []
+    end
+
+    class ExpiredStreamException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class FailureByQueryException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class FastResetToken
+      attr_accessor token: ::String
+      SENSITIVE: []
+    end
+
+    class GetEngineStatusOutput
+      attr_accessor status: ::String
+      attr_accessor start_time: ::String
+      attr_accessor db_engine_version: ::String
+      attr_accessor role: ::String
+      attr_accessor dfe_query_engine: ::String
+      attr_accessor gremlin: Types::QueryLanguageVersion
+      attr_accessor sparql: Types::QueryLanguageVersion
+      attr_accessor opencypher: Types::QueryLanguageVersion
+      attr_accessor lab_mode: ::Hash[::String, ::String]
+      attr_accessor rolling_back_trx_count: ::Integer
+      attr_accessor rolling_back_trx_earliest_start_time: ::String
+      attr_accessor features: ::Hash[::String, untyped]
+      attr_accessor settings: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetGremlinQueryStatusInput
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGremlinQueryStatusOutput
+      attr_accessor query_id: ::String
+      attr_accessor query_string: ::String
+      attr_accessor query_eval_stats: Types::QueryEvalStats
+      SENSITIVE: []
+    end
+
+    class GetLoaderJobStatusInput
+      attr_accessor load_id: ::String
+      attr_accessor details: bool
+      attr_accessor errors: bool
+      attr_accessor page: ::Integer
+      attr_accessor errors_per_page: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetLoaderJobStatusOutput
+      attr_accessor status: ::String
+      attr_accessor payload: untyped
+      SENSITIVE: []
+    end
+
+    class GetMLDataProcessingJobInput
+      attr_accessor id: ::String
+      attr_accessor neptune_iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetMLDataProcessingJobOutput
+      attr_accessor status: ::String
+      attr_accessor id: ::String
+      attr_accessor processing_job: Types::MlResourceDefinition
+      SENSITIVE: []
+    end
+
+    class GetMLEndpointInput
+      attr_accessor id: ::String
+      attr_accessor neptune_iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetMLEndpointOutput
+      attr_accessor status: ::String
+      attr_accessor id: ::String
+      attr_accessor endpoint: Types::MlResourceDefinition
+      attr_accessor endpoint_config: Types::MlConfigDefinition
+      SENSITIVE: []
+    end
+
+    class GetMLModelTrainingJobInput
+      attr_accessor id: ::String
+      attr_accessor neptune_iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetMLModelTrainingJobOutput
+      attr_accessor status: ::String
+      attr_accessor id: ::String
+      attr_accessor processing_job: Types::MlResourceDefinition
+      attr_accessor hpo_job: Types::MlResourceDefinition
+      attr_accessor model_transform_job: Types::MlResourceDefinition
+      attr_accessor ml_models: ::Array[Types::MlConfigDefinition]
+      SENSITIVE: []
+    end
+
+    class GetMLModelTransformJobInput
+      attr_accessor id: ::String
+      attr_accessor neptune_iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetMLModelTransformJobOutput
+      attr_accessor status: ::String
+      attr_accessor id: ::String
+      attr_accessor base_processing_job: Types::MlResourceDefinition
+      attr_accessor remote_model_transform_job: Types::MlResourceDefinition
+      attr_accessor models: ::Array[Types::MlConfigDefinition]
+      SENSITIVE: []
+    end
+
+    class GetOpenCypherQueryStatusInput
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOpenCypherQueryStatusOutput
+      attr_accessor query_id: ::String
+      attr_accessor query_string: ::String
+      attr_accessor query_eval_stats: Types::QueryEvalStats
+      SENSITIVE: []
+    end
+
+    class GetPropertygraphStatisticsOutput
+      attr_accessor status: ::String
+      attr_accessor payload: Types::Statistics
+      SENSITIVE: []
+    end
+
+    class GetPropertygraphStreamInput
+      attr_accessor limit: ::Integer
+      attr_accessor iterator_type: ("AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER" | "TRIM_HORIZON" | "LATEST")
+      attr_accessor commit_num: ::Integer
+      attr_accessor op_num: ::Integer
+      attr_accessor encoding: ("gzip")
+      SENSITIVE: []
+    end
+
+    class GetPropertygraphStreamOutput
+      attr_accessor last_event_id: ::Hash[::String, ::String]
+      attr_accessor last_trx_timestamp_in_millis: ::Integer
+      attr_accessor format: ::String
+      attr_accessor records: ::Array[Types::PropertygraphRecord]
+      attr_accessor total_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetPropertygraphSummaryInput
+      attr_accessor mode: ("basic" | "detailed")
+      SENSITIVE: []
+    end
+
+    class GetPropertygraphSummaryOutput
+      attr_accessor status_code: ::Integer
+      attr_accessor payload: Types::PropertygraphSummaryValueMap
+      SENSITIVE: []
+    end
+
+    class GetRDFGraphSummaryInput
+      attr_accessor mode: ("basic" | "detailed")
+      SENSITIVE: []
+    end
+
+    class GetRDFGraphSummaryOutput
+      attr_accessor status_code: ::Integer
+      attr_accessor payload: Types::RDFGraphSummaryValueMap
+      SENSITIVE: []
+    end
+
+    class GetSparqlStatisticsOutput
+      attr_accessor status: ::String
+      attr_accessor payload: Types::Statistics
+      SENSITIVE: []
+    end
+
+    class GetSparqlStreamInput
+      attr_accessor limit: ::Integer
+      attr_accessor iterator_type: ("AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER" | "TRIM_HORIZON" | "LATEST")
+      attr_accessor commit_num: ::Integer
+      attr_accessor op_num: ::Integer
+      attr_accessor encoding: ("gzip")
+      SENSITIVE: []
+    end
+
+    class GetSparqlStreamOutput
+      attr_accessor last_event_id: ::Hash[::String, ::String]
+      attr_accessor last_trx_timestamp_in_millis: ::Integer
+      attr_accessor format: ::String
+      attr_accessor records: ::Array[Types::SparqlRecord]
+      attr_accessor total_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class GremlinQueryStatus
+      attr_accessor query_id: ::String
+      attr_accessor query_string: ::String
+      attr_accessor query_eval_stats: Types::QueryEvalStats
+      SENSITIVE: []
+    end
+
+    class GremlinQueryStatusAttributes
+      attr_accessor message: ::String
+      attr_accessor code: ::Integer
+      attr_accessor attributes: untyped
+      SENSITIVE: []
+    end
+
+    class IllegalArgumentException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidArgumentException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNumericDataException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class ListGremlinQueriesInput
+      attr_accessor include_waiting: bool
+      SENSITIVE: []
+    end
+
+    class ListGremlinQueriesOutput
+      attr_accessor accepted_query_count: ::Integer
+      attr_accessor running_query_count: ::Integer
+      attr_accessor queries: ::Array[Types::GremlinQueryStatus]
+      SENSITIVE: []
+    end
+
+    class ListLoaderJobsInput
+      attr_accessor limit: ::Integer
+      attr_accessor include_queued_loads: bool
+      SENSITIVE: []
+    end
+
+    class ListLoaderJobsOutput
+      attr_accessor status: ::String
+      attr_accessor payload: Types::LoaderIdResult
+      SENSITIVE: []
+    end
+
+    class ListMLDataProcessingJobsInput
+      attr_accessor max_items: ::Integer
+      attr_accessor neptune_iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListMLDataProcessingJobsOutput
+      attr_accessor ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListMLEndpointsInput
+      attr_accessor max_items: ::Integer
+      attr_accessor neptune_iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListMLEndpointsOutput
+      attr_accessor ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListMLModelTrainingJobsInput
+      attr_accessor max_items: ::Integer
+      attr_accessor neptune_iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListMLModelTrainingJobsOutput
+      attr_accessor ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListMLModelTransformJobsInput
+      attr_accessor max_items: ::Integer
+      attr_accessor neptune_iam_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListMLModelTransformJobsOutput
+      attr_accessor ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListOpenCypherQueriesInput
+      attr_accessor include_waiting: bool
+      SENSITIVE: []
+    end
+
+    class ListOpenCypherQueriesOutput
+      attr_accessor accepted_query_count: ::Integer
+      attr_accessor running_query_count: ::Integer
+      attr_accessor queries: ::Array[Types::GremlinQueryStatus]
+      SENSITIVE: []
+    end
+
+    class LoadUrlAccessDeniedException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class LoaderIdResult
+      attr_accessor load_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MLResourceNotFoundException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class MalformedQueryException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class ManagePropertygraphStatisticsInput
+      attr_accessor mode: ("disableAutoCompute" | "enableAutoCompute" | "refresh")
+      SENSITIVE: []
+    end
+
+    class ManagePropertygraphStatisticsOutput
+      attr_accessor status: ::String
+      attr_accessor payload: Types::RefreshStatisticsIdMap
+      SENSITIVE: []
+    end
+
+    class ManageSparqlStatisticsInput
+      attr_accessor mode: ("disableAutoCompute" | "enableAutoCompute" | "refresh")
+      SENSITIVE: []
+    end
+
+    class ManageSparqlStatisticsOutput
+      attr_accessor status: ::String
+      attr_accessor payload: Types::RefreshStatisticsIdMap
+      SENSITIVE: []
+    end
+
+    class MemoryLimitExceededException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class MethodNotAllowedException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class MissingParameterException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class MlConfigDefinition
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class MlResourceDefinition
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ::String
+      attr_accessor output_location: ::String
+      attr_accessor failure_reason: ::String
+      attr_accessor cloudwatch_log_url: ::String
+      SENSITIVE: []
+    end
+
+    class NodeStructure
+      attr_accessor count: ::Integer
+      attr_accessor node_properties: ::Array[::String]
+      attr_accessor distinct_outgoing_edge_labels: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ParsingException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class PreconditionsFailedException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class PropertygraphData
+      attr_accessor id: ::String
+      attr_accessor type: ::String
+      attr_accessor key: ::String
+      attr_accessor value: untyped
+      attr_accessor from: ::String
+      attr_accessor to: ::String
+      SENSITIVE: []
+    end
+
+    class PropertygraphRecord
+      attr_accessor commit_timestamp_in_millis: ::Integer
+      attr_accessor event_id: ::Hash[::String, ::String]
+      attr_accessor data: Types::PropertygraphData
+      attr_accessor op: ::String
+      attr_accessor is_last_op: bool
+      SENSITIVE: []
+    end
+
+    class PropertygraphSummary
+      attr_accessor num_nodes: ::Integer
+      attr_accessor num_edges: ::Integer
+      attr_accessor num_node_labels: ::Integer
+      attr_accessor num_edge_labels: ::Integer
+      attr_accessor node_labels: ::Array[::String]
+      attr_accessor edge_labels: ::Array[::String]
+      attr_accessor num_node_properties: ::Integer
+      attr_accessor num_edge_properties: ::Integer
+      attr_accessor node_properties: ::Array[::Hash[::String, ::Integer]]
+      attr_accessor edge_properties: ::Array[::Hash[::String, ::Integer]]
+      attr_accessor total_node_property_values: ::Integer
+      attr_accessor total_edge_property_values: ::Integer
+      attr_accessor node_structures: ::Array[Types::NodeStructure]
+      attr_accessor edge_structures: ::Array[Types::EdgeStructure]
+      SENSITIVE: []
+    end
+
+    class PropertygraphSummaryValueMap
+      attr_accessor version: ::String
+      attr_accessor last_statistics_computation_time: ::Time
+      attr_accessor graph_summary: Types::PropertygraphSummary
+      SENSITIVE: []
+    end
+
+    class QueryEvalStats
+      attr_accessor waited: ::Integer
+      attr_accessor elapsed: ::Integer
+      attr_accessor cancelled: bool
+      attr_accessor subqueries: untyped
+      SENSITIVE: []
+    end
+
+    class QueryLanguageVersion
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class QueryLimitExceededException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class QueryLimitException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class QueryTooLargeException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class RDFGraphSummary
+      attr_accessor num_distinct_subjects: ::Integer
+      attr_accessor num_distinct_predicates: ::Integer
+      attr_accessor num_quads: ::Integer
+      attr_accessor num_classes: ::Integer
+      attr_accessor classes: ::Array[::String]
+      attr_accessor predicates: ::Array[::Hash[::String, ::Integer]]
+      attr_accessor subject_structures: ::Array[Types::SubjectStructure]
+      SENSITIVE: []
+    end
+
+    class RDFGraphSummaryValueMap
+      attr_accessor version: ::String
+      attr_accessor last_statistics_computation_time: ::Time
+      attr_accessor graph_summary: Types::RDFGraphSummary
+      SENSITIVE: []
+    end
+
+    class ReadOnlyViolationException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class RefreshStatisticsIdMap
+      attr_accessor statistics_id: ::String
+      SENSITIVE: []
+    end
+
+    class S3Exception
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class ServerShutdownException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class SparqlData
+      attr_accessor stmt: ::String
+      SENSITIVE: []
+    end
+
+    class SparqlRecord
+      attr_accessor commit_timestamp_in_millis: ::Integer
+      attr_accessor event_id: ::Hash[::String, ::String]
+      attr_accessor data: Types::SparqlData
+      attr_accessor op: ::String
+      attr_accessor is_last_op: bool
+      SENSITIVE: []
+    end
+
+    class StartLoaderJobInput
+      attr_accessor source: ::String
+      attr_accessor format: ("csv" | "opencypher" | "ntriples" | "nquads" | "rdfxml" | "turtle")
+      attr_accessor s3_bucket_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "ca-central-1" | "sa-east-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "me-south-1" | "af-south-1" | "ap-east-1" | "ap-northeast-1" | "ap-northeast-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-south-1" | "cn-north-1" | "cn-northwest-1" | "us-gov-west-1" | "us-gov-east-1")
+      attr_accessor iam_role_arn: ::String
+      attr_accessor mode: ("RESUME" | "NEW" | "AUTO")
+      attr_accessor fail_on_error: bool
+      attr_accessor parallelism: ("LOW" | "MEDIUM" | "HIGH" | "OVERSUBSCRIBE")
+      attr_accessor parser_configuration: ::Hash[::String, ::String]
+      attr_accessor update_single_cardinality_properties: bool
+      attr_accessor queue_request: bool
+      attr_accessor dependencies: ::Array[::String]
+      attr_accessor user_provided_edge_ids: bool
+      SENSITIVE: []
+    end
+
+    class StartLoaderJobOutput
+      attr_accessor status: ::String
+      attr_accessor payload: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartMLDataProcessingJobInput
+      attr_accessor id: ::String
+      attr_accessor previous_data_processing_job_id: ::String
+      attr_accessor input_data_s3_location: ::String
+      attr_accessor processed_data_s3_location: ::String
+      attr_accessor sagemaker_iam_role_arn: ::String
+      attr_accessor neptune_iam_role_arn: ::String
+      attr_accessor processing_instance_type: ::String
+      attr_accessor processing_instance_volume_size_in_gb: ::Integer
+      attr_accessor processing_time_out_in_seconds: ::Integer
+      attr_accessor model_type: ::String
+      attr_accessor config_file_name: ::String
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor volume_encryption_kms_key: ::String
+      attr_accessor s3_output_encryption_kms_key: ::String
+      SENSITIVE: []
+    end
+
+    class StartMLDataProcessingJobOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor creation_time_in_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartMLModelTrainingJobInput
+      attr_accessor id: ::String
+      attr_accessor previous_model_training_job_id: ::String
+      attr_accessor data_processing_job_id: ::String
+      attr_accessor train_model_s3_location: ::String
+      attr_accessor sagemaker_iam_role_arn: ::String
+      attr_accessor neptune_iam_role_arn: ::String
+      attr_accessor base_processing_instance_type: ::String
+      attr_accessor training_instance_type: ::String
+      attr_accessor training_instance_volume_size_in_gb: ::Integer
+      attr_accessor training_time_out_in_seconds: ::Integer
+      attr_accessor max_hpo_number_of_training_jobs: ::Integer
+      attr_accessor max_hpo_parallel_training_jobs: ::Integer
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor volume_encryption_kms_key: ::String
+      attr_accessor s3_output_encryption_kms_key: ::String
+      attr_accessor enable_managed_spot_training: bool
+      attr_accessor custom_model_training_parameters: Types::CustomModelTrainingParameters
+      SENSITIVE: []
+    end
+
+    class StartMLModelTrainingJobOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor creation_time_in_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartMLModelTransformJobInput
+      attr_accessor id: ::String
+      attr_accessor data_processing_job_id: ::String
+      attr_accessor ml_model_training_job_id: ::String
+      attr_accessor training_job_name: ::String
+      attr_accessor model_transform_output_s3_location: ::String
+      attr_accessor sagemaker_iam_role_arn: ::String
+      attr_accessor neptune_iam_role_arn: ::String
+      attr_accessor custom_model_transform_parameters: Types::CustomModelTransformParameters
+      attr_accessor base_processing_instance_type: ::String
+      attr_accessor base_processing_instance_volume_size_in_gb: ::Integer
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor volume_encryption_kms_key: ::String
+      attr_accessor s3_output_encryption_kms_key: ::String
+      SENSITIVE: []
+    end
+
+    class StartMLModelTransformJobOutput
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor creation_time_in_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class Statistics
+      attr_accessor auto_compute: bool
+      attr_accessor active: bool
+      attr_accessor statistics_id: ::String
+      attr_accessor date: ::Time
+      attr_accessor note: ::String
+      attr_accessor signature_info: Types::StatisticsSummary
+      SENSITIVE: []
+    end
+
+    class StatisticsNotAvailableException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class StatisticsSummary
+      attr_accessor signature_count: ::Integer
+      attr_accessor instance_count: ::Integer
+      attr_accessor predicate_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class StreamRecordsNotFoundException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class SubjectStructure
+      attr_accessor count: ::Integer
+      attr_accessor predicates: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class TimeLimitExceededException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedOperationException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+  end
+end

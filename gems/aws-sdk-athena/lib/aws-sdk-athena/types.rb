@@ -541,7 +541,7 @@ module Aws::Athena
     #   @return [Integer]
     #
     # @!attribute [rw] nullable
-    #   Indicates the column's nullable status.
+    #   Unsupported constraint. This value always shows as `UNKNOWN`.
     #   @return [String]
     #
     # @!attribute [rw] case_sensitive
@@ -646,12 +646,7 @@ module Aws::Athena
     #       `AwsDataCatalog` that already exists in your account, of which
     #       you can have only one and cannot modify.
     #
-    #     * Queries that specify a Glue Data Catalog other than the default
-    #       `AwsDataCatalog` must be run on Athena engine version 2.
-    #
-    #     * In Regions where Athena engine version 2 is not available,
-    #       creating new Glue data catalogs results in an `INVALID_INPUT`
-    #       error.
+    #     ^
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
@@ -888,12 +883,14 @@ module Aws::Athena
     #
     class CreateWorkGroupOutput < Aws::EmptyStructure; end
 
-    # Specifies the KMS key that is used to encrypt the user's data stores
-    # in Athena. This setting does not apply to Athena SQL workgroups.
+    # Specifies the customer managed KMS key that is used to encrypt the
+    # user's data stores in Athena. When an Amazon Web Services managed key
+    # is used, this value is null. This setting does not apply to Athena SQL
+    # workgroups.
     #
     # @!attribute [rw] kms_key
-    #   The KMS key that is used to encrypt the user's data stores in
-    #   Athena.
+    #   The customer managed KMS key that is used to encrypt the user's
+    #   data stores in Athena.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CustomerContentEncryptionConfiguration AWS API Documentation
@@ -966,8 +963,7 @@ module Aws::Athena
     #       `AwsDataCatalog` that already exists in your account, of which
     #       you can have only one and cannot modify.
     #
-    #     * Queries that specify a Glue Data Catalog other than the default
-    #       `AwsDataCatalog` must be run on Athena engine version 2.
+    #     ^
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DataCatalog AWS API Documentation
@@ -1520,10 +1516,16 @@ module Aws::Athena
     #   The name of the data catalog to return.
     #   @return [String]
     #
+    # @!attribute [rw] work_group
+    #   The name of the workgroup. Required if making an IAM Identity Center
+    #   request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetDataCatalogInput AWS API Documentation
     #
     class GetDataCatalogInput < Struct.new(
-      :name)
+      :name,
+      :work_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1548,11 +1550,18 @@ module Aws::Athena
     #   The name of the database to return.
     #   @return [String]
     #
+    # @!attribute [rw] work_group
+    #   The name of the workgroup for which the metadata is being fetched.
+    #   Required if requesting an IAM Identity Center enabled Glue Data
+    #   Catalog.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetDatabaseInput AWS API Documentation
     #
     class GetDatabaseInput < Struct.new(
       :catalog_name,
-      :database_name)
+      :database_name,
+      :work_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1854,12 +1863,19 @@ module Aws::Athena
     #   The name of the table for which metadata is returned.
     #   @return [String]
     #
+    # @!attribute [rw] work_group
+    #   The name of the workgroup for which the metadata is being fetched.
+    #   Required if requesting an IAM Identity Center enabled Glue Data
+    #   Catalog.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetTableMetadataInput AWS API Documentation
     #
     class GetTableMetadataInput < Struct.new(
       :catalog_name,
       :database_name,
-      :table_name)
+      :table_name,
+      :work_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1900,6 +1916,26 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # Specifies whether the workgroup is IAM Identity Center supported.
+    #
+    # @!attribute [rw] enable_identity_center
+    #   Specifies whether the workgroup is IAM Identity Center supported.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] identity_center_instance_arn
+    #   The IAM Identity Center instance ARN that the workgroup associates
+    #   to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/IdentityCenterConfiguration AWS API Documentation
+    #
+    class IdentityCenterConfiguration < Struct.new(
+      :enable_identity_center,
+      :identity_center_instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] work_group
     #   The name of the Spark enabled workgroup to import the notebook to.
     #   @return [String]
@@ -1909,12 +1945,18 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] payload
-    #   The notebook content to be imported.
+    #   The notebook content to be imported. The payload must be in `ipynb`
+    #   format.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The notebook content type. Currently, the only valid type is
     #   `IPYNB`.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_s3_location_uri
+    #   A URI that specifies the Amazon S3 location of a notebook file in
+    #   `ipynb` format.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -1935,6 +1977,7 @@ module Aws::Athena
       :name,
       :payload,
       :type,
+      :notebook_s3_location_uri,
       :client_request_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2143,11 +2186,17 @@ module Aws::Athena
     #   Specifies the maximum number of data catalogs to return.
     #   @return [Integer]
     #
+    # @!attribute [rw] work_group
+    #   The name of the workgroup. Required if making an IAM Identity Center
+    #   request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListDataCatalogsInput AWS API Documentation
     #
     class ListDataCatalogsInput < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :work_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2187,12 +2236,19 @@ module Aws::Athena
     #   Specifies the maximum number of results to return.
     #   @return [Integer]
     #
+    # @!attribute [rw] work_group
+    #   The name of the workgroup for which the metadata is being fetched.
+    #   Required if requesting an IAM Identity Center enabled Glue Data
+    #   Catalog.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListDatabasesInput AWS API Documentation
     #
     class ListDatabasesInput < Struct.new(
       :catalog_name,
       :next_token,
-      :max_results)
+      :max_results,
+      :work_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2652,6 +2708,12 @@ module Aws::Athena
     #   Specifies the maximum number of results to return.
     #   @return [Integer]
     #
+    # @!attribute [rw] work_group
+    #   The name of the workgroup for which the metadata is being fetched.
+    #   Required if requesting an IAM Identity Center enabled Glue Data
+    #   Catalog.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListTableMetadataInput AWS API Documentation
     #
     class ListTableMetadataInput < Struct.new(
@@ -2659,7 +2721,8 @@ module Aws::Athena
       :database_name,
       :expression,
       :next_token,
-      :max_results)
+      :max_results,
+      :work_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3026,6 +3089,11 @@ module Aws::Athena
     #   The kind of query statement that was run.
     #   @return [String]
     #
+    # @!attribute [rw] query_results_s3_access_grants_configuration
+    #   Specifies whether Amazon S3 access grants are enabled for query
+    #   results.
+    #   @return [Types::QueryResultsS3AccessGrantsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecution AWS API Documentation
     #
     class QueryExecution < Struct.new(
@@ -3040,7 +3108,8 @@ module Aws::Athena
       :work_group,
       :engine_version,
       :execution_parameters,
-      :substatement_type)
+      :substatement_type,
+      :query_results_s3_access_grants_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3103,6 +3172,11 @@ module Aws::Athena
     #   might automatically add the query back to the queue.
     #   @return [Integer]
     #
+    # @!attribute [rw] service_pre_processing_time_in_millis
+    #   The number of milliseconds that Athena took to preprocess the query
+    #   before submitting the query to the query engine.
+    #   @return [Integer]
+    #
     # @!attribute [rw] query_planning_time_in_millis
     #   The number of milliseconds that Athena took to plan the query
     #   processing flow. This includes the time spent retrieving table
@@ -3129,6 +3203,7 @@ module Aws::Athena
       :data_manifest_location,
       :total_execution_time_in_millis,
       :query_queue_time_in_millis,
+      :service_pre_processing_time_in_millis,
       :query_planning_time_in_millis,
       :service_processing_time_in_millis,
       :result_reuse_information)
@@ -3179,6 +3254,34 @@ module Aws::Athena
       :submission_date_time,
       :completion_date_time,
       :athena_error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies whether Amazon S3 access grants are enabled for query
+    # results.
+    #
+    # @!attribute [rw] enable_s3_access_grants
+    #   Specifies whether Amazon S3 access grants are enabled for query
+    #   results.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] create_user_level_prefix
+    #   When enabled, appends the user ID as an Amazon S3 path prefix to the
+    #   query result output location.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication type used for Amazon S3 access grants. Currently,
+    #   only `DIRECTORY_IDENTITY` is supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryResultsS3AccessGrantsConfiguration AWS API Documentation
+    #
+    class QueryResultsS3AccessGrantsConfiguration < Struct.new(
+      :enable_s3_access_grants,
+      :create_user_level_prefix,
+      :authentication_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3254,6 +3357,11 @@ module Aws::Athena
     #   might automatically add the query back to the queue.
     #   @return [Integer]
     #
+    # @!attribute [rw] service_pre_processing_time_in_millis
+    #   The number of milliseconds that Athena spends on preprocessing
+    #   before it submits the query to the engine.
+    #   @return [Integer]
+    #
     # @!attribute [rw] query_planning_time_in_millis
     #   The number of milliseconds that Athena took to plan the query
     #   processing flow. This includes the time spent retrieving table
@@ -3279,6 +3387,7 @@ module Aws::Athena
     #
     class QueryRuntimeStatisticsTimeline < Struct.new(
       :query_queue_time_in_millis,
+      :service_pre_processing_time_in_millis,
       :query_planning_time_in_millis,
       :engine_execution_time_in_millis,
       :service_processing_time_in_millis,
@@ -3728,7 +3837,10 @@ module Aws::Athena
     # Contains session configuration information.
     #
     # @!attribute [rw] execution_role
-    #   The ARN of the execution role used for the session.
+    #   The ARN of the execution role used to access user resources for
+    #   Spark sessions and Identity Center enabled workgroups. This property
+    #   applies only to Spark enabled workgroups and Identity Center enabled
+    #   workgroups.
     #   @return [String]
     #
     # @!attribute [rw] working_directory
@@ -3879,7 +3991,9 @@ module Aws::Athena
     #   @return [Types::CalculationConfiguration]
     #
     # @!attribute [rw] code_block
-    #   A string that contains the code of the calculation.
+    #   A string that contains the code of the calculation. Use this
+    #   parameter instead of CalculationConfiguration$CodeBlock, which is
+    #   deprecated.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -3949,8 +4063,11 @@ module Aws::Athena
     #   A unique case-sensitive string used to ensure the request to create
     #   the query is idempotent (executes only once). If another
     #   `StartQueryExecution` request is received, the same response is
-    #   returned and another query is not created. If a parameter has
-    #   changed, for example, the `QueryString`, an error is returned.
+    #   returned and another query is not created. An error is returned if a
+    #   parameter, such as `QueryString`, has changed. A call to
+    #   `StartQueryExecution` that uses a previous client request token
+    #   returns the same `QueryExecutionId` even if the requester doesn't
+    #   have permission on the tables specified in `QueryString`.
     #
     #   This token is listed as not required because Amazon Web Services
     #   SDKs (for example the Amazon Web Services SDK for Java)
@@ -4737,6 +4854,11 @@ module Aws::Athena
     #   The date and time the workgroup was created.
     #   @return [Time]
     #
+    # @!attribute [rw] identity_center_application_arn
+    #   The ARN of the IAM Identity Center enabled application associated
+    #   with the workgroup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroup AWS API Documentation
     #
     class WorkGroup < Struct.new(
@@ -4744,7 +4866,8 @@ module Aws::Athena
       :state,
       :configuration,
       :description,
-      :creation_time)
+      :creation_time,
+      :identity_center_application_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4824,7 +4947,11 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] execution_role
-    #   Role used in a session for accessing the user's resources.
+    #   The ARN of the execution role used to access user resources for
+    #   Spark sessions and IAM Identity Center enabled workgroups. This
+    #   property applies only to Spark enabled workgroups and IAM Identity
+    #   Center enabled workgroups. The property is required for IAM Identity
+    #   Center enabled workgroups.
     #   @return [String]
     #
     # @!attribute [rw] customer_content_encryption_configuration
@@ -4846,6 +4973,15 @@ module Aws::Athena
     #   workgroup configuration for encryption is used.
     #   @return [Boolean]
     #
+    # @!attribute [rw] identity_center_configuration
+    #   Specifies whether the workgroup is IAM Identity Center supported.
+    #   @return [Types::IdentityCenterConfiguration]
+    #
+    # @!attribute [rw] query_results_s3_access_grants_configuration
+    #   Specifies whether Amazon S3 access grants are enabled for query
+    #   results.
+    #   @return [Types::QueryResultsS3AccessGrantsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupConfiguration AWS API Documentation
     #
     class WorkGroupConfiguration < Struct.new(
@@ -4858,7 +4994,9 @@ module Aws::Athena
       :additional_configuration,
       :execution_role,
       :customer_content_encryption_configuration,
-      :enable_minimum_encryption_configuration)
+      :enable_minimum_encryption_configuration,
+      :identity_center_configuration,
+      :query_results_s3_access_grants_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4936,13 +5074,17 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] execution_role
-    #   Contains the ARN of the execution role for the workgroup
+    #   The ARN of the execution role used to access user resources for
+    #   Spark sessions and Identity Center enabled workgroups. This property
+    #   applies only to Spark enabled workgroups and Identity Center enabled
+    #   workgroups.
     #   @return [String]
     #
     # @!attribute [rw] customer_content_encryption_configuration
-    #   Specifies the KMS key that is used to encrypt the user's data
-    #   stores in Athena. This setting does not apply to Athena SQL
-    #   workgroups.
+    #   Specifies the customer managed KMS key that is used to encrypt the
+    #   user's data stores in Athena. When an Amazon Web Services managed
+    #   key is used, this value is null. This setting does not apply to
+    #   Athena SQL workgroups.
     #   @return [Types::CustomerContentEncryptionConfiguration]
     #
     # @!attribute [rw] enable_minimum_encryption_configuration
@@ -4959,6 +5101,11 @@ module Aws::Athena
     #   workgroup configuration for encryption is used.
     #   @return [Boolean]
     #
+    # @!attribute [rw] query_results_s3_access_grants_configuration
+    #   Specifies whether Amazon S3 access grants are enabled for query
+    #   results.
+    #   @return [Types::QueryResultsS3AccessGrantsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupConfigurationUpdates AWS API Documentation
     #
     class WorkGroupConfigurationUpdates < Struct.new(
@@ -4973,7 +5120,8 @@ module Aws::Athena
       :additional_configuration,
       :execution_role,
       :customer_content_encryption_configuration,
-      :enable_minimum_encryption_configuration)
+      :enable_minimum_encryption_configuration,
+      :query_results_s3_access_grants_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5003,6 +5151,11 @@ module Aws::Athena
     #   preview engine regardless of this setting.
     #   @return [Types::EngineVersion]
     #
+    # @!attribute [rw] identity_center_application_arn
+    #   The ARN of the IAM Identity Center enabled application associated
+    #   with the workgroup.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupSummary AWS API Documentation
     #
     class WorkGroupSummary < Struct.new(
@@ -5010,7 +5163,8 @@ module Aws::Athena
       :state,
       :description,
       :creation_time,
-      :engine_version)
+      :engine_version,
+      :identity_center_application_arn)
       SENSITIVE = []
       include Aws::Structure
     end

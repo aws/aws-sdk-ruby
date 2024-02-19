@@ -1,0 +1,765 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MigrationHubStrategyRecommendations
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AnalysisStatusUnion
+      attr_accessor runtime_analysis_status: ("ANALYSIS_TO_BE_SCHEDULED" | "ANALYSIS_STARTED" | "ANALYSIS_SUCCESS" | "ANALYSIS_FAILED")
+      attr_accessor src_code_or_db_analysis_status: ("ANALYSIS_TO_BE_SCHEDULED" | "ANALYSIS_STARTED" | "ANALYSIS_SUCCESS" | "ANALYSIS_FAILED" | "ANALYSIS_PARTIAL_SUCCESS" | "UNCONFIGURED" | "CONFIGURED")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RuntimeAnalysisStatus < AnalysisStatusUnion
+      end
+      class SrcCodeOrDbAnalysisStatus < AnalysisStatusUnion
+      end
+      class Unknown < AnalysisStatusUnion
+      end
+    end
+
+    class AnalyzableServerSummary
+      attr_accessor hostname: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor source: ::String
+      attr_accessor vm_id: ::String
+      SENSITIVE: []
+    end
+
+    class AnalyzerNameUnion
+      attr_accessor binary_analyzer_name: ("DLL_ANALYZER" | "BYTECODE_ANALYZER")
+      attr_accessor run_time_analyzer_name: ("A2C_ANALYZER" | "REHOST_ANALYZER" | "EMP_PA_ANALYZER" | "DATABASE_ANALYZER" | "SCT_ANALYZER")
+      attr_accessor source_code_analyzer_name: ("CSHARP_ANALYZER" | "JAVA_ANALYZER" | "BYTECODE_ANALYZER" | "PORTING_ASSISTANT")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BinaryAnalyzerName < AnalyzerNameUnion
+      end
+      class RunTimeAnalyzerName < AnalyzerNameUnion
+      end
+      class SourceCodeAnalyzerName < AnalyzerNameUnion
+      end
+      class Unknown < AnalyzerNameUnion
+      end
+    end
+
+    class AntipatternReportResult
+      attr_accessor analyzer_name: Types::AnalyzerNameUnion
+      attr_accessor anti_pattern_report_s3_object: Types::S3Object
+      attr_accessor antipattern_report_status: ("FAILED" | "IN_PROGRESS" | "SUCCESS")
+      attr_accessor antipattern_report_status_message: ::String
+      SENSITIVE: []
+    end
+
+    class AntipatternSeveritySummary
+      attr_accessor count: ::Integer
+      attr_accessor severity: ("HIGH" | "MEDIUM" | "LOW")
+      SENSITIVE: []
+    end
+
+    class AppUnitError
+      attr_accessor app_unit_error_category: ("CREDENTIAL_ERROR" | "CONNECTIVITY_ERROR" | "PERMISSION_ERROR" | "UNSUPPORTED_ERROR" | "OTHER_ERROR")
+      SENSITIVE: []
+    end
+
+    class ApplicationComponentDetail
+      attr_accessor analysis_status: ("ANALYSIS_TO_BE_SCHEDULED" | "ANALYSIS_STARTED" | "ANALYSIS_SUCCESS" | "ANALYSIS_FAILED" | "ANALYSIS_PARTIAL_SUCCESS" | "UNCONFIGURED" | "CONFIGURED")
+      attr_accessor antipattern_report_s3_object: Types::S3Object
+      attr_accessor antipattern_report_status: ("FAILED" | "IN_PROGRESS" | "SUCCESS")
+      attr_accessor antipattern_report_status_message: ::String
+      attr_accessor app_type: ("DotNetFramework" | "Java" | "SQLServer" | "IIS" | "Oracle" | "Other" | "Tomcat" | "JBoss" | "Spring" | "Mongo DB" | "DB2" | "Maria DB" | "MySQL" | "Sybase" | "PostgreSQLServer" | "Cassandra" | "IBM WebSphere" | "Oracle WebLogic" | "Visual Basic" | "Unknown" | "DotnetCore" | "Dotnet")
+      attr_accessor app_unit_error: Types::AppUnitError
+      attr_accessor associated_server_id: ::String
+      attr_accessor database_config_detail: Types::DatabaseConfigDetail
+      attr_accessor id: ::String
+      attr_accessor inclusion_status: ("excludeFromAssessment" | "includeInAssessment")
+      attr_accessor last_analyzed_timestamp: ::Time
+      attr_accessor list_antipattern_severity_summary: ::Array[Types::AntipatternSeveritySummary]
+      attr_accessor more_server_association_exists: bool
+      attr_accessor name: ::String
+      attr_accessor os_driver: ::String
+      attr_accessor os_version: ::String
+      attr_accessor recommendation_set: Types::RecommendationSet
+      attr_accessor resource_sub_type: ("Database" | "Process" | "DatabaseProcess")
+      attr_accessor result_list: ::Array[Types::Result]
+      attr_accessor runtime_status: ("ANALYSIS_TO_BE_SCHEDULED" | "ANALYSIS_STARTED" | "ANALYSIS_SUCCESS" | "ANALYSIS_FAILED")
+      attr_accessor runtime_status_message: ::String
+      attr_accessor source_code_repositories: ::Array[Types::SourceCodeRepository]
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationComponentStatusSummary
+      attr_accessor count: ::Integer
+      attr_accessor src_code_or_db_analysis_status: ("ANALYSIS_TO_BE_SCHEDULED" | "ANALYSIS_STARTED" | "ANALYSIS_SUCCESS" | "ANALYSIS_FAILED" | "ANALYSIS_PARTIAL_SUCCESS" | "UNCONFIGURED" | "CONFIGURED")
+      SENSITIVE: []
+    end
+
+    class ApplicationComponentStrategy
+      attr_accessor is_preferred: bool
+      attr_accessor recommendation: Types::RecommendationSet
+      attr_accessor status: ("recommended" | "viableOption" | "notRecommended" | "potential")
+      SENSITIVE: []
+    end
+
+    class ApplicationComponentSummary
+      attr_accessor app_type: ("DotNetFramework" | "Java" | "SQLServer" | "IIS" | "Oracle" | "Other" | "Tomcat" | "JBoss" | "Spring" | "Mongo DB" | "DB2" | "Maria DB" | "MySQL" | "Sybase" | "PostgreSQLServer" | "Cassandra" | "IBM WebSphere" | "Oracle WebLogic" | "Visual Basic" | "Unknown" | "DotnetCore" | "Dotnet")
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ApplicationPreferences
+      attr_accessor management_preference: Types::ManagementPreference
+      SENSITIVE: []
+    end
+
+    class AssessmentSummary
+      attr_accessor antipattern_report_s3_object: Types::S3Object
+      attr_accessor antipattern_report_status: ("FAILED" | "IN_PROGRESS" | "SUCCESS")
+      attr_accessor antipattern_report_status_message: ::String
+      attr_accessor last_analyzed_timestamp: ::Time
+      attr_accessor list_antipattern_severity_summary: ::Array[Types::AntipatternSeveritySummary]
+      attr_accessor list_application_component_status_summary: ::Array[Types::ApplicationComponentStatusSummary]
+      attr_accessor list_application_component_strategy_summary: ::Array[Types::StrategySummary]
+      attr_accessor list_application_component_summary: ::Array[Types::ApplicationComponentSummary]
+      attr_accessor list_server_status_summary: ::Array[Types::ServerStatusSummary]
+      attr_accessor list_server_strategy_summary: ::Array[Types::StrategySummary]
+      attr_accessor list_server_summary: ::Array[Types::ServerSummary]
+      SENSITIVE: []
+    end
+
+    class AssessmentTarget
+      attr_accessor condition: ("EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS")
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociatedApplication
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AwsManagedResources
+      attr_accessor target_destination: ::Array[("None specified" | "AWS Elastic BeanStalk" | "AWS Fargate")]
+      SENSITIVE: []
+    end
+
+    class BusinessGoals
+      attr_accessor license_cost_reduction: ::Integer
+      attr_accessor modernize_infrastructure_with_cloud_native_technologies: ::Integer
+      attr_accessor reduce_operational_overhead_with_managed_services: ::Integer
+      attr_accessor speed_of_migration: ::Integer
+      SENSITIVE: []
+    end
+
+    class Collector
+      attr_accessor collector_health: ("COLLECTOR_HEALTHY" | "COLLECTOR_UNHEALTHY")
+      attr_accessor collector_id: ::String
+      attr_accessor collector_version: ::String
+      attr_accessor configuration_summary: Types::ConfigurationSummary
+      attr_accessor host_name: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor last_activity_time_stamp: ::String
+      attr_accessor registered_time_stamp: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationSummary
+      attr_accessor ip_address_based_remote_info_list: ::Array[Types::IPAddressBasedRemoteInfo]
+      attr_accessor pipeline_info_list: ::Array[Types::PipelineInfo]
+      attr_accessor remote_source_code_analysis_server_info: Types::RemoteSourceCodeAnalysisServerInfo
+      attr_accessor vcenter_based_remote_info_list: ::Array[Types::VcenterBasedRemoteInfo]
+      attr_accessor version_control_info_list: ::Array[Types::VersionControlInfo]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DataCollectionDetails
+      attr_accessor completion_time: ::Time
+      attr_accessor failed: ::Integer
+      attr_accessor in_progress: ::Integer
+      attr_accessor servers: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "FAILED" | "STOPPED")
+      attr_accessor status_message: ::String
+      attr_accessor success: ::Integer
+      SENSITIVE: []
+    end
+
+    class DatabaseConfigDetail
+      attr_accessor secret_name: ::String
+      SENSITIVE: []
+    end
+
+    class DatabaseMigrationPreference
+      attr_accessor heterogeneous: Types::Heterogeneous
+      attr_accessor homogeneous: Types::Homogeneous
+      attr_accessor no_preference: Types::NoDatabaseMigrationPreference
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Heterogeneous < DatabaseMigrationPreference
+      end
+      class Homogeneous < DatabaseMigrationPreference
+      end
+      class NoPreference < DatabaseMigrationPreference
+      end
+      class Unknown < DatabaseMigrationPreference
+      end
+    end
+
+    class DatabasePreferences
+      attr_accessor database_management_preference: ("AWS-managed" | "Self-manage" | "No preference")
+      attr_accessor database_migration_preference: Types::DatabaseMigrationPreference
+      SENSITIVE: []
+    end
+
+    class DependencyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationComponentDetailsRequest
+      attr_accessor application_component_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationComponentDetailsResponse
+      attr_accessor application_component_detail: Types::ApplicationComponentDetail
+      attr_accessor associated_applications: ::Array[Types::AssociatedApplication]
+      attr_accessor associated_server_ids: ::Array[::String]
+      attr_accessor more_application_resource: bool
+      SENSITIVE: []
+    end
+
+    class GetApplicationComponentStrategiesRequest
+      attr_accessor application_component_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationComponentStrategiesResponse
+      attr_accessor application_component_strategies: ::Array[Types::ApplicationComponentStrategy]
+      SENSITIVE: []
+    end
+
+    class GetAssessmentRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssessmentResponse
+      attr_accessor assessment_targets: ::Array[Types::AssessmentTarget]
+      attr_accessor data_collection_details: Types::DataCollectionDetails
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetImportFileTaskRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetImportFileTaskResponse
+      attr_accessor completion_time: ::Time
+      attr_accessor id: ::String
+      attr_accessor import_name: ::String
+      attr_accessor input_s3_bucket: ::String
+      attr_accessor input_s3_key: ::String
+      attr_accessor number_of_records_failed: ::Integer
+      attr_accessor number_of_records_success: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("ImportInProgress" | "ImportFailed" | "ImportPartialSuccess" | "ImportSuccess" | "DeleteInProgress" | "DeleteFailed" | "DeletePartialSuccess" | "DeleteSuccess")
+      attr_accessor status_report_s3_bucket: ::String
+      attr_accessor status_report_s3_key: ::String
+      SENSITIVE: []
+    end
+
+    class GetLatestAssessmentIdRequest < Aws::EmptyStructure
+    end
+
+    class GetLatestAssessmentIdResponse
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPortfolioPreferencesRequest < Aws::EmptyStructure
+    end
+
+    class GetPortfolioPreferencesResponse
+      attr_accessor application_mode: ("ALL" | "KNOWN" | "UNKNOWN")
+      attr_accessor application_preferences: Types::ApplicationPreferences
+      attr_accessor database_preferences: Types::DatabasePreferences
+      attr_accessor prioritize_business_goals: Types::PrioritizeBusinessGoals
+      SENSITIVE: []
+    end
+
+    class GetPortfolioSummaryRequest < Aws::EmptyStructure
+    end
+
+    class GetPortfolioSummaryResponse
+      attr_accessor assessment_summary: Types::AssessmentSummary
+      SENSITIVE: []
+    end
+
+    class GetRecommendationReportDetailsRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecommendationReportDetailsResponse
+      attr_accessor id: ::String
+      attr_accessor recommendation_report_details: Types::RecommendationReportDetails
+      SENSITIVE: []
+    end
+
+    class GetServerDetailsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor server_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetServerDetailsResponse
+      attr_accessor associated_applications: ::Array[Types::AssociatedApplication]
+      attr_accessor next_token: ::String
+      attr_accessor server_detail: Types::ServerDetail
+      SENSITIVE: []
+    end
+
+    class GetServerStrategiesRequest
+      attr_accessor server_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetServerStrategiesResponse
+      attr_accessor server_strategies: ::Array[Types::ServerStrategy]
+      SENSITIVE: []
+    end
+
+    class Group
+      attr_accessor name: ("ExternalId" | "ExternalSourceType")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Heterogeneous
+      attr_accessor target_database_engine: ::Array[("None specified" | "Amazon Aurora" | "AWS PostgreSQL" | "MySQL" | "Microsoft SQL Server" | "Oracle Database" | "MariaDB" | "SAP" | "Db2 LUW" | "MongoDB")]
+      SENSITIVE: []
+    end
+
+    class Homogeneous
+      attr_accessor target_database_engine: ::Array[("None specified")]
+      SENSITIVE: []
+    end
+
+    class IPAddressBasedRemoteInfo
+      attr_accessor auth_type: ("NTLM" | "SSH" | "CERT")
+      attr_accessor ip_address_configuration_time_stamp: ::String
+      attr_accessor os_type: ("LINUX" | "WINDOWS")
+      SENSITIVE: []
+    end
+
+    class ImportFileTaskInformation
+      attr_accessor completion_time: ::Time
+      attr_accessor id: ::String
+      attr_accessor import_name: ::String
+      attr_accessor input_s3_bucket: ::String
+      attr_accessor input_s3_key: ::String
+      attr_accessor number_of_records_failed: ::Integer
+      attr_accessor number_of_records_success: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("ImportInProgress" | "ImportFailed" | "ImportPartialSuccess" | "ImportSuccess" | "DeleteInProgress" | "DeleteFailed" | "DeletePartialSuccess" | "DeleteSuccess")
+      attr_accessor status_report_s3_bucket: ::String
+      attr_accessor status_report_s3_key: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnalyzableServersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class ListAnalyzableServersResponse
+      attr_accessor analyzable_servers: ::Array[Types::AnalyzableServerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationComponentsRequest
+      attr_accessor application_component_criteria: ("NOT_DEFINED" | "APP_NAME" | "SERVER_ID" | "APP_TYPE" | "STRATEGY" | "DESTINATION" | "ANALYSIS_STATUS" | "ERROR_CATEGORY")
+      attr_accessor filter_value: ::String
+      attr_accessor group_id_filter: ::Array[Types::Group]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class ListApplicationComponentsResponse
+      attr_accessor application_component_infos: ::Array[Types::ApplicationComponentDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCollectorsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCollectorsResponse
+      attr_accessor collectors: ::Array[Types::Collector]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportFileTaskRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportFileTaskResponse
+      attr_accessor next_token: ::String
+      attr_accessor task_infos: ::Array[Types::ImportFileTaskInformation]
+      SENSITIVE: []
+    end
+
+    class ListServersRequest
+      attr_accessor filter_value: ::String
+      attr_accessor group_id_filter: ::Array[Types::Group]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor server_criteria: ("NOT_DEFINED" | "OS_NAME" | "STRATEGY" | "DESTINATION" | "SERVER_ID" | "ANALYSIS_STATUS" | "ERROR_CATEGORY")
+      attr_accessor sort: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class ListServersResponse
+      attr_accessor next_token: ::String
+      attr_accessor server_infos: ::Array[Types::ServerDetail]
+      SENSITIVE: []
+    end
+
+    class ManagementPreference
+      attr_accessor aws_managed_resources: Types::AwsManagedResources
+      attr_accessor no_preference: Types::NoManagementPreference
+      attr_accessor self_manage_resources: Types::SelfManageResources
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AwsManagedResources < ManagementPreference
+      end
+      class NoPreference < ManagementPreference
+      end
+      class SelfManageResources < ManagementPreference
+      end
+      class Unknown < ManagementPreference
+      end
+    end
+
+    class NetworkInfo
+      attr_accessor interface_name: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor mac_address: ::String
+      attr_accessor net_mask: ::String
+      SENSITIVE: []
+    end
+
+    class NoDatabaseMigrationPreference
+      attr_accessor target_database_engine: ::Array[("None specified" | "Amazon Aurora" | "AWS PostgreSQL" | "MySQL" | "Microsoft SQL Server" | "Oracle Database" | "MariaDB" | "SAP" | "Db2 LUW" | "MongoDB")]
+      SENSITIVE: []
+    end
+
+    class NoManagementPreference
+      attr_accessor target_destination: ::Array[("None specified" | "AWS Elastic BeanStalk" | "AWS Fargate" | "Amazon Elastic Cloud Compute (EC2)" | "Amazon Elastic Container Service (ECS)" | "Amazon Elastic Kubernetes Service (EKS)")]
+      SENSITIVE: []
+    end
+
+    class OSInfo
+      attr_accessor type: ("LINUX" | "WINDOWS")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineInfo
+      attr_accessor pipeline_configuration_time_stamp: ::String
+      attr_accessor pipeline_type: ("AZURE_DEVOPS")
+      SENSITIVE: []
+    end
+
+    class PrioritizeBusinessGoals
+      attr_accessor business_goals: Types::BusinessGoals
+      SENSITIVE: []
+    end
+
+    class PutPortfolioPreferencesRequest
+      attr_accessor application_mode: ("ALL" | "KNOWN" | "UNKNOWN")
+      attr_accessor application_preferences: Types::ApplicationPreferences
+      attr_accessor database_preferences: Types::DatabasePreferences
+      attr_accessor prioritize_business_goals: Types::PrioritizeBusinessGoals
+      SENSITIVE: []
+    end
+
+    class PutPortfolioPreferencesResponse < Aws::EmptyStructure
+    end
+
+    class RecommendationReportDetails
+      attr_accessor completion_time: ::Time
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_keys: ::Array[::String]
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("FAILED" | "IN_PROGRESS" | "SUCCESS")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class RecommendationSet
+      attr_accessor strategy: ("Rehost" | "Retirement" | "Refactor" | "Replatform" | "Retain" | "Relocate" | "Repurchase")
+      attr_accessor target_destination: ("None specified" | "AWS Elastic BeanStalk" | "AWS Fargate" | "Amazon Elastic Cloud Compute (EC2)" | "Amazon Elastic Container Service (ECS)" | "Amazon Elastic Kubernetes Service (EKS)" | "Aurora MySQL" | "Aurora PostgreSQL" | "Amazon Relational Database Service on MySQL" | "Amazon Relational Database Service on PostgreSQL" | "Amazon DocumentDB" | "Amazon DynamoDB" | "Amazon Relational Database Service" | "Babelfish for Aurora PostgreSQL")
+      attr_accessor transformation_tool: Types::TransformationTool
+      SENSITIVE: []
+    end
+
+    class RemoteSourceCodeAnalysisServerInfo
+      attr_accessor remote_source_code_analysis_server_configuration_timestamp: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Result
+      attr_accessor analysis_status: Types::AnalysisStatusUnion
+      attr_accessor analysis_type: ("SOURCE_CODE_ANALYSIS" | "DATABASE_ANALYSIS" | "RUNTIME_ANALYSIS" | "BINARY_ANALYSIS")
+      attr_accessor antipattern_report_result_list: ::Array[Types::AntipatternReportResult]
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class S3Object
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3key: ::String
+      SENSITIVE: []
+    end
+
+    class SelfManageResources
+      attr_accessor target_destination: ::Array[("None specified" | "Amazon Elastic Cloud Compute (EC2)" | "Amazon Elastic Container Service (ECS)" | "Amazon Elastic Kubernetes Service (EKS)")]
+      SENSITIVE: []
+    end
+
+    class ServerDetail
+      attr_accessor antipattern_report_s3_object: Types::S3Object
+      attr_accessor antipattern_report_status: ("FAILED" | "IN_PROGRESS" | "SUCCESS")
+      attr_accessor antipattern_report_status_message: ::String
+      attr_accessor application_component_strategy_summary: ::Array[Types::StrategySummary]
+      attr_accessor data_collection_status: ("dataCollectionTaskToBeScheduled" | "dataCollectionTaskScheduled" | "dataCollectionTaskStarted" | "dataCollectionTaskStopped" | "dataCollectionTaskSuccess" | "dataCollectionTaskFailed" | "dataCollectionTaskPartialSuccess")
+      attr_accessor id: ::String
+      attr_accessor last_analyzed_timestamp: ::Time
+      attr_accessor list_antipattern_severity_summary: ::Array[Types::AntipatternSeveritySummary]
+      attr_accessor name: ::String
+      attr_accessor recommendation_set: Types::RecommendationSet
+      attr_accessor server_error: Types::ServerError
+      attr_accessor server_type: ::String
+      attr_accessor status_message: ::String
+      attr_accessor system_info: Types::SystemInfo
+      SENSITIVE: []
+    end
+
+    class ServerError
+      attr_accessor server_error_category: ("CONNECTIVITY_ERROR" | "CREDENTIAL_ERROR" | "PERMISSION_ERROR" | "ARCHITECTURE_ERROR" | "OTHER_ERROR")
+      SENSITIVE: []
+    end
+
+    class ServerStatusSummary
+      attr_accessor count: ::Integer
+      attr_accessor run_time_assessment_status: ("dataCollectionTaskToBeScheduled" | "dataCollectionTaskScheduled" | "dataCollectionTaskStarted" | "dataCollectionTaskStopped" | "dataCollectionTaskSuccess" | "dataCollectionTaskFailed" | "dataCollectionTaskPartialSuccess")
+      SENSITIVE: []
+    end
+
+    class ServerStrategy
+      attr_accessor is_preferred: bool
+      attr_accessor number_of_application_components: ::Integer
+      attr_accessor recommendation: Types::RecommendationSet
+      attr_accessor status: ("recommended" | "viableOption" | "notRecommended" | "potential")
+      SENSITIVE: []
+    end
+
+    class ServerSummary
+      attr_accessor server_os_type: ("WindowsServer" | "AmazonLinux" | "EndOfSupportWindowsServer" | "Redhat" | "Other")
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceLinkedRoleLockClientException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SourceCode
+      attr_accessor location: ::String
+      attr_accessor project_name: ::String
+      attr_accessor source_version: ::String
+      attr_accessor version_control: ("GITHUB" | "GITHUB_ENTERPRISE" | "AZURE_DEVOPS_GIT")
+      SENSITIVE: []
+    end
+
+    class SourceCodeRepository
+      attr_accessor branch: ::String
+      attr_accessor project_name: ::String
+      attr_accessor repository: ::String
+      attr_accessor version_control_type: ::String
+      SENSITIVE: []
+    end
+
+    class StartAssessmentRequest
+      attr_accessor assessment_data_source_type: ("StrategyRecommendationsApplicationDataCollector" | "ManualImport" | "ApplicationDiscoveryService")
+      attr_accessor assessment_targets: ::Array[Types::AssessmentTarget]
+      attr_accessor s3bucket_for_analysis_data: ::String
+      attr_accessor s3bucket_for_report_data: ::String
+      SENSITIVE: []
+    end
+
+    class StartAssessmentResponse
+      attr_accessor assessment_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartImportFileTaskRequest
+      attr_accessor s3_bucket: ::String
+      attr_accessor data_source_type: ("ApplicationDiscoveryService" | "MPA" | "Import" | "StrategyRecommendationsApplicationDataCollector")
+      attr_accessor group_id: ::Array[Types::Group]
+      attr_accessor name: ::String
+      attr_accessor s3bucket_for_report_data: ::String
+      attr_accessor s3key: ::String
+      SENSITIVE: []
+    end
+
+    class StartImportFileTaskResponse
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class StartRecommendationReportGenerationRequest
+      attr_accessor group_id_filter: ::Array[Types::Group]
+      attr_accessor output_format: ("Excel" | "Json")
+      SENSITIVE: []
+    end
+
+    class StartRecommendationReportGenerationResponse
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class StopAssessmentRequest
+      attr_accessor assessment_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopAssessmentResponse < Aws::EmptyStructure
+    end
+
+    class StrategyOption
+      attr_accessor is_preferred: bool
+      attr_accessor strategy: ("Rehost" | "Retirement" | "Refactor" | "Replatform" | "Retain" | "Relocate" | "Repurchase")
+      attr_accessor target_destination: ("None specified" | "AWS Elastic BeanStalk" | "AWS Fargate" | "Amazon Elastic Cloud Compute (EC2)" | "Amazon Elastic Container Service (ECS)" | "Amazon Elastic Kubernetes Service (EKS)" | "Aurora MySQL" | "Aurora PostgreSQL" | "Amazon Relational Database Service on MySQL" | "Amazon Relational Database Service on PostgreSQL" | "Amazon DocumentDB" | "Amazon DynamoDB" | "Amazon Relational Database Service" | "Babelfish for Aurora PostgreSQL")
+      attr_accessor tool_name: ("App2Container" | "Porting Assistant For .NET" | "End of Support Migration" | "Windows Web Application Migration Assistant" | "Application Migration Service" | "Strategy Recommendation Support" | "In Place Operating System Upgrade" | "Schema Conversion Tool" | "Database Migration Service" | "Native SQL Server Backup/Restore")
+      SENSITIVE: []
+    end
+
+    class StrategySummary
+      attr_accessor count: ::Integer
+      attr_accessor strategy: ("Rehost" | "Retirement" | "Refactor" | "Replatform" | "Retain" | "Relocate" | "Repurchase")
+      SENSITIVE: []
+    end
+
+    class SystemInfo
+      attr_accessor cpu_architecture: ::String
+      attr_accessor file_system_type: ::String
+      attr_accessor network_info_list: ::Array[Types::NetworkInfo]
+      attr_accessor os_info: Types::OSInfo
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TransformationTool
+      attr_accessor description: ::String
+      attr_accessor name: ("App2Container" | "Porting Assistant For .NET" | "End of Support Migration" | "Windows Web Application Migration Assistant" | "Application Migration Service" | "Strategy Recommendation Support" | "In Place Operating System Upgrade" | "Schema Conversion Tool" | "Database Migration Service" | "Native SQL Server Backup/Restore")
+      attr_accessor tranformation_tool_installation_link: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationComponentConfigRequest
+      attr_accessor app_type: ("DotNetFramework" | "Java" | "SQLServer" | "IIS" | "Oracle" | "Other" | "Tomcat" | "JBoss" | "Spring" | "Mongo DB" | "DB2" | "Maria DB" | "MySQL" | "Sybase" | "PostgreSQLServer" | "Cassandra" | "IBM WebSphere" | "Oracle WebLogic" | "Visual Basic" | "Unknown" | "DotnetCore" | "Dotnet")
+      attr_accessor application_component_id: ::String
+      attr_accessor configure_only: bool
+      attr_accessor inclusion_status: ("excludeFromAssessment" | "includeInAssessment")
+      attr_accessor secrets_manager_key: ::String
+      attr_accessor source_code_list: ::Array[Types::SourceCode]
+      attr_accessor strategy_option: Types::StrategyOption
+      SENSITIVE: [:secrets_manager_key]
+    end
+
+    class UpdateApplicationComponentConfigResponse < Aws::EmptyStructure
+    end
+
+    class UpdateServerConfigRequest
+      attr_accessor server_id: ::String
+      attr_accessor strategy_option: Types::StrategyOption
+      SENSITIVE: []
+    end
+
+    class UpdateServerConfigResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VcenterBasedRemoteInfo
+      attr_accessor os_type: ("LINUX" | "WINDOWS")
+      attr_accessor vcenter_configuration_time_stamp: ::String
+      SENSITIVE: []
+    end
+
+    class VersionControlInfo
+      attr_accessor version_control_configuration_time_stamp: ::String
+      attr_accessor version_control_type: ("GITHUB" | "GITHUB_ENTERPRISE" | "AZURE_DEVOPS_GIT")
+      SENSITIVE: []
+    end
+  end
+end

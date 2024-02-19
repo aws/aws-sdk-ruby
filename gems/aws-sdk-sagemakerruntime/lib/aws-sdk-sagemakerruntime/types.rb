@@ -46,7 +46,8 @@ module Aws::SageMakerRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InternalStreamFailure AWS API Documentation
     #
     class InternalStreamFailure < Struct.new(
-      :message)
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -256,6 +257,11 @@ module Aws::SageMakerRuntime
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-enable
     #   @return [String]
     #
+    # @!attribute [rw] inference_component_name
+    #   If the endpoint hosts one or more inference components, this
+    #   parameter specifies the name of inference component to invoke.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointInput AWS API Documentation
     #
     class InvokeEndpointInput < Struct.new(
@@ -268,7 +274,8 @@ module Aws::SageMakerRuntime
       :target_variant,
       :target_container_hostname,
       :inference_id,
-      :enable_explanations)
+      :enable_explanations,
+      :inference_component_name)
       SENSITIVE = [:body, :custom_attributes]
       include Aws::Structure
     end
@@ -416,6 +423,12 @@ module Aws::SageMakerRuntime
     #   An identifier that you assign to your request.
     #   @return [String]
     #
+    # @!attribute [rw] inference_component_name
+    #   If the endpoint hosts one or more inference components, this
+    #   parameter specifies the name of inference component to invoke for a
+    #   streaming response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointWithResponseStreamInput AWS API Documentation
     #
     class InvokeEndpointWithResponseStreamInput < Struct.new(
@@ -426,7 +439,8 @@ module Aws::SageMakerRuntime
       :custom_attributes,
       :target_variant,
       :target_container_hostname,
-      :inference_id)
+      :inference_id,
+      :inference_component_name)
       SENSITIVE = [:body, :custom_attributes]
       include Aws::Structure
     end
@@ -560,7 +574,8 @@ module Aws::SageMakerRuntime
     #
     class ModelStreamError < Struct.new(
       :message,
-      :error_code)
+      :error_code,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end

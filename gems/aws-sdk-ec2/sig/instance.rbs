@@ -1,0 +1,557 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EC2
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html
+    class Instance
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#initialize-instance_method
+      def initialize: (String id, Hash[Symbol, untyped] options) -> void
+                    | (id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#id-instance_method
+      def id: () -> String
+      alias instance_id id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#ami_launch_index-instance_method
+      def ami_launch_index: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#image_id-instance_method
+      def image_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#instance_type-instance_method
+      def instance_type: () -> ("a1.medium" | "a1.large" | "a1.xlarge" | "a1.2xlarge" | "a1.4xlarge" | "a1.metal" | "c1.medium" | "c1.xlarge" | "c3.large" | "c3.xlarge" | "c3.2xlarge" | "c3.4xlarge" | "c3.8xlarge" | "c4.large" | "c4.xlarge" | "c4.2xlarge" | "c4.4xlarge" | "c4.8xlarge" | "c5.large" | "c5.xlarge" | "c5.2xlarge" | "c5.4xlarge" | "c5.9xlarge" | "c5.12xlarge" | "c5.18xlarge" | "c5.24xlarge" | "c5.metal" | "c5a.large" | "c5a.xlarge" | "c5a.2xlarge" | "c5a.4xlarge" | "c5a.8xlarge" | "c5a.12xlarge" | "c5a.16xlarge" | "c5a.24xlarge" | "c5ad.large" | "c5ad.xlarge" | "c5ad.2xlarge" | "c5ad.4xlarge" | "c5ad.8xlarge" | "c5ad.12xlarge" | "c5ad.16xlarge" | "c5ad.24xlarge" | "c5d.large" | "c5d.xlarge" | "c5d.2xlarge" | "c5d.4xlarge" | "c5d.9xlarge" | "c5d.12xlarge" | "c5d.18xlarge" | "c5d.24xlarge" | "c5d.metal" | "c5n.large" | "c5n.xlarge" | "c5n.2xlarge" | "c5n.4xlarge" | "c5n.9xlarge" | "c5n.18xlarge" | "c5n.metal" | "c6g.medium" | "c6g.large" | "c6g.xlarge" | "c6g.2xlarge" | "c6g.4xlarge" | "c6g.8xlarge" | "c6g.12xlarge" | "c6g.16xlarge" | "c6g.metal" | "c6gd.medium" | "c6gd.large" | "c6gd.xlarge" | "c6gd.2xlarge" | "c6gd.4xlarge" | "c6gd.8xlarge" | "c6gd.12xlarge" | "c6gd.16xlarge" | "c6gd.metal" | "c6gn.medium" | "c6gn.large" | "c6gn.xlarge" | "c6gn.2xlarge" | "c6gn.4xlarge" | "c6gn.8xlarge" | "c6gn.12xlarge" | "c6gn.16xlarge" | "c6i.large" | "c6i.xlarge" | "c6i.2xlarge" | "c6i.4xlarge" | "c6i.8xlarge" | "c6i.12xlarge" | "c6i.16xlarge" | "c6i.24xlarge" | "c6i.32xlarge" | "c6i.metal" | "cc1.4xlarge" | "cc2.8xlarge" | "cg1.4xlarge" | "cr1.8xlarge" | "d2.xlarge" | "d2.2xlarge" | "d2.4xlarge" | "d2.8xlarge" | "d3.xlarge" | "d3.2xlarge" | "d3.4xlarge" | "d3.8xlarge" | "d3en.xlarge" | "d3en.2xlarge" | "d3en.4xlarge" | "d3en.6xlarge" | "d3en.8xlarge" | "d3en.12xlarge" | "dl1.24xlarge" | "f1.2xlarge" | "f1.4xlarge" | "f1.16xlarge" | "g2.2xlarge" | "g2.8xlarge" | "g3.4xlarge" | "g3.8xlarge" | "g3.16xlarge" | "g3s.xlarge" | "g4ad.xlarge" | "g4ad.2xlarge" | "g4ad.4xlarge" | "g4ad.8xlarge" | "g4ad.16xlarge" | "g4dn.xlarge" | "g4dn.2xlarge" | "g4dn.4xlarge" | "g4dn.8xlarge" | "g4dn.12xlarge" | "g4dn.16xlarge" | "g4dn.metal" | "g5.xlarge" | "g5.2xlarge" | "g5.4xlarge" | "g5.8xlarge" | "g5.12xlarge" | "g5.16xlarge" | "g5.24xlarge" | "g5.48xlarge" | "g5g.xlarge" | "g5g.2xlarge" | "g5g.4xlarge" | "g5g.8xlarge" | "g5g.16xlarge" | "g5g.metal" | "hi1.4xlarge" | "hpc6a.48xlarge" | "hs1.8xlarge" | "h1.2xlarge" | "h1.4xlarge" | "h1.8xlarge" | "h1.16xlarge" | "i2.xlarge" | "i2.2xlarge" | "i2.4xlarge" | "i2.8xlarge" | "i3.large" | "i3.xlarge" | "i3.2xlarge" | "i3.4xlarge" | "i3.8xlarge" | "i3.16xlarge" | "i3.metal" | "i3en.large" | "i3en.xlarge" | "i3en.2xlarge" | "i3en.3xlarge" | "i3en.6xlarge" | "i3en.12xlarge" | "i3en.24xlarge" | "i3en.metal" | "im4gn.large" | "im4gn.xlarge" | "im4gn.2xlarge" | "im4gn.4xlarge" | "im4gn.8xlarge" | "im4gn.16xlarge" | "inf1.xlarge" | "inf1.2xlarge" | "inf1.6xlarge" | "inf1.24xlarge" | "is4gen.medium" | "is4gen.large" | "is4gen.xlarge" | "is4gen.2xlarge" | "is4gen.4xlarge" | "is4gen.8xlarge" | "m1.small" | "m1.medium" | "m1.large" | "m1.xlarge" | "m2.xlarge" | "m2.2xlarge" | "m2.4xlarge" | "m3.medium" | "m3.large" | "m3.xlarge" | "m3.2xlarge" | "m4.large" | "m4.xlarge" | "m4.2xlarge" | "m4.4xlarge" | "m4.10xlarge" | "m4.16xlarge" | "m5.large" | "m5.xlarge" | "m5.2xlarge" | "m5.4xlarge" | "m5.8xlarge" | "m5.12xlarge" | "m5.16xlarge" | "m5.24xlarge" | "m5.metal" | "m5a.large" | "m5a.xlarge" | "m5a.2xlarge" | "m5a.4xlarge" | "m5a.8xlarge" | "m5a.12xlarge" | "m5a.16xlarge" | "m5a.24xlarge" | "m5ad.large" | "m5ad.xlarge" | "m5ad.2xlarge" | "m5ad.4xlarge" | "m5ad.8xlarge" | "m5ad.12xlarge" | "m5ad.16xlarge" | "m5ad.24xlarge" | "m5d.large" | "m5d.xlarge" | "m5d.2xlarge" | "m5d.4xlarge" | "m5d.8xlarge" | "m5d.12xlarge" | "m5d.16xlarge" | "m5d.24xlarge" | "m5d.metal" | "m5dn.large" | "m5dn.xlarge" | "m5dn.2xlarge" | "m5dn.4xlarge" | "m5dn.8xlarge" | "m5dn.12xlarge" | "m5dn.16xlarge" | "m5dn.24xlarge" | "m5dn.metal" | "m5n.large" | "m5n.xlarge" | "m5n.2xlarge" | "m5n.4xlarge" | "m5n.8xlarge" | "m5n.12xlarge" | "m5n.16xlarge" | "m5n.24xlarge" | "m5n.metal" | "m5zn.large" | "m5zn.xlarge" | "m5zn.2xlarge" | "m5zn.3xlarge" | "m5zn.6xlarge" | "m5zn.12xlarge" | "m5zn.metal" | "m6a.large" | "m6a.xlarge" | "m6a.2xlarge" | "m6a.4xlarge" | "m6a.8xlarge" | "m6a.12xlarge" | "m6a.16xlarge" | "m6a.24xlarge" | "m6a.32xlarge" | "m6a.48xlarge" | "m6g.metal" | "m6g.medium" | "m6g.large" | "m6g.xlarge" | "m6g.2xlarge" | "m6g.4xlarge" | "m6g.8xlarge" | "m6g.12xlarge" | "m6g.16xlarge" | "m6gd.metal" | "m6gd.medium" | "m6gd.large" | "m6gd.xlarge" | "m6gd.2xlarge" | "m6gd.4xlarge" | "m6gd.8xlarge" | "m6gd.12xlarge" | "m6gd.16xlarge" | "m6i.large" | "m6i.xlarge" | "m6i.2xlarge" | "m6i.4xlarge" | "m6i.8xlarge" | "m6i.12xlarge" | "m6i.16xlarge" | "m6i.24xlarge" | "m6i.32xlarge" | "m6i.metal" | "mac1.metal" | "p2.xlarge" | "p2.8xlarge" | "p2.16xlarge" | "p3.2xlarge" | "p3.8xlarge" | "p3.16xlarge" | "p3dn.24xlarge" | "p4d.24xlarge" | "r3.large" | "r3.xlarge" | "r3.2xlarge" | "r3.4xlarge" | "r3.8xlarge" | "r4.large" | "r4.xlarge" | "r4.2xlarge" | "r4.4xlarge" | "r4.8xlarge" | "r4.16xlarge" | "r5.large" | "r5.xlarge" | "r5.2xlarge" | "r5.4xlarge" | "r5.8xlarge" | "r5.12xlarge" | "r5.16xlarge" | "r5.24xlarge" | "r5.metal" | "r5a.large" | "r5a.xlarge" | "r5a.2xlarge" | "r5a.4xlarge" | "r5a.8xlarge" | "r5a.12xlarge" | "r5a.16xlarge" | "r5a.24xlarge" | "r5ad.large" | "r5ad.xlarge" | "r5ad.2xlarge" | "r5ad.4xlarge" | "r5ad.8xlarge" | "r5ad.12xlarge" | "r5ad.16xlarge" | "r5ad.24xlarge" | "r5b.large" | "r5b.xlarge" | "r5b.2xlarge" | "r5b.4xlarge" | "r5b.8xlarge" | "r5b.12xlarge" | "r5b.16xlarge" | "r5b.24xlarge" | "r5b.metal" | "r5d.large" | "r5d.xlarge" | "r5d.2xlarge" | "r5d.4xlarge" | "r5d.8xlarge" | "r5d.12xlarge" | "r5d.16xlarge" | "r5d.24xlarge" | "r5d.metal" | "r5dn.large" | "r5dn.xlarge" | "r5dn.2xlarge" | "r5dn.4xlarge" | "r5dn.8xlarge" | "r5dn.12xlarge" | "r5dn.16xlarge" | "r5dn.24xlarge" | "r5dn.metal" | "r5n.large" | "r5n.xlarge" | "r5n.2xlarge" | "r5n.4xlarge" | "r5n.8xlarge" | "r5n.12xlarge" | "r5n.16xlarge" | "r5n.24xlarge" | "r5n.metal" | "r6g.medium" | "r6g.large" | "r6g.xlarge" | "r6g.2xlarge" | "r6g.4xlarge" | "r6g.8xlarge" | "r6g.12xlarge" | "r6g.16xlarge" | "r6g.metal" | "r6gd.medium" | "r6gd.large" | "r6gd.xlarge" | "r6gd.2xlarge" | "r6gd.4xlarge" | "r6gd.8xlarge" | "r6gd.12xlarge" | "r6gd.16xlarge" | "r6gd.metal" | "r6i.large" | "r6i.xlarge" | "r6i.2xlarge" | "r6i.4xlarge" | "r6i.8xlarge" | "r6i.12xlarge" | "r6i.16xlarge" | "r6i.24xlarge" | "r6i.32xlarge" | "r6i.metal" | "t1.micro" | "t2.nano" | "t2.micro" | "t2.small" | "t2.medium" | "t2.large" | "t2.xlarge" | "t2.2xlarge" | "t3.nano" | "t3.micro" | "t3.small" | "t3.medium" | "t3.large" | "t3.xlarge" | "t3.2xlarge" | "t3a.nano" | "t3a.micro" | "t3a.small" | "t3a.medium" | "t3a.large" | "t3a.xlarge" | "t3a.2xlarge" | "t4g.nano" | "t4g.micro" | "t4g.small" | "t4g.medium" | "t4g.large" | "t4g.xlarge" | "t4g.2xlarge" | "u-6tb1.56xlarge" | "u-6tb1.112xlarge" | "u-9tb1.112xlarge" | "u-12tb1.112xlarge" | "u-6tb1.metal" | "u-9tb1.metal" | "u-12tb1.metal" | "u-18tb1.metal" | "u-24tb1.metal" | "vt1.3xlarge" | "vt1.6xlarge" | "vt1.24xlarge" | "x1.16xlarge" | "x1.32xlarge" | "x1e.xlarge" | "x1e.2xlarge" | "x1e.4xlarge" | "x1e.8xlarge" | "x1e.16xlarge" | "x1e.32xlarge" | "x2iezn.2xlarge" | "x2iezn.4xlarge" | "x2iezn.6xlarge" | "x2iezn.8xlarge" | "x2iezn.12xlarge" | "x2iezn.metal" | "x2gd.medium" | "x2gd.large" | "x2gd.xlarge" | "x2gd.2xlarge" | "x2gd.4xlarge" | "x2gd.8xlarge" | "x2gd.12xlarge" | "x2gd.16xlarge" | "x2gd.metal" | "z1d.large" | "z1d.xlarge" | "z1d.2xlarge" | "z1d.3xlarge" | "z1d.6xlarge" | "z1d.12xlarge" | "z1d.metal" | "x2idn.16xlarge" | "x2idn.24xlarge" | "x2idn.32xlarge" | "x2iedn.xlarge" | "x2iedn.2xlarge" | "x2iedn.4xlarge" | "x2iedn.8xlarge" | "x2iedn.16xlarge" | "x2iedn.24xlarge" | "x2iedn.32xlarge" | "c6a.large" | "c6a.xlarge" | "c6a.2xlarge" | "c6a.4xlarge" | "c6a.8xlarge" | "c6a.12xlarge" | "c6a.16xlarge" | "c6a.24xlarge" | "c6a.32xlarge" | "c6a.48xlarge" | "c6a.metal" | "m6a.metal" | "i4i.large" | "i4i.xlarge" | "i4i.2xlarge" | "i4i.4xlarge" | "i4i.8xlarge" | "i4i.16xlarge" | "i4i.32xlarge" | "i4i.metal" | "x2idn.metal" | "x2iedn.metal" | "c7g.medium" | "c7g.large" | "c7g.xlarge" | "c7g.2xlarge" | "c7g.4xlarge" | "c7g.8xlarge" | "c7g.12xlarge" | "c7g.16xlarge" | "mac2.metal" | "c6id.large" | "c6id.xlarge" | "c6id.2xlarge" | "c6id.4xlarge" | "c6id.8xlarge" | "c6id.12xlarge" | "c6id.16xlarge" | "c6id.24xlarge" | "c6id.32xlarge" | "c6id.metal" | "m6id.large" | "m6id.xlarge" | "m6id.2xlarge" | "m6id.4xlarge" | "m6id.8xlarge" | "m6id.12xlarge" | "m6id.16xlarge" | "m6id.24xlarge" | "m6id.32xlarge" | "m6id.metal" | "r6id.large" | "r6id.xlarge" | "r6id.2xlarge" | "r6id.4xlarge" | "r6id.8xlarge" | "r6id.12xlarge" | "r6id.16xlarge" | "r6id.24xlarge" | "r6id.32xlarge" | "r6id.metal" | "r6a.large" | "r6a.xlarge" | "r6a.2xlarge" | "r6a.4xlarge" | "r6a.8xlarge" | "r6a.12xlarge" | "r6a.16xlarge" | "r6a.24xlarge" | "r6a.32xlarge" | "r6a.48xlarge" | "r6a.metal" | "p4de.24xlarge" | "u-3tb1.56xlarge" | "u-18tb1.112xlarge" | "u-24tb1.112xlarge" | "trn1.2xlarge" | "trn1.32xlarge" | "hpc6id.32xlarge" | "c6in.large" | "c6in.xlarge" | "c6in.2xlarge" | "c6in.4xlarge" | "c6in.8xlarge" | "c6in.12xlarge" | "c6in.16xlarge" | "c6in.24xlarge" | "c6in.32xlarge" | "m6in.large" | "m6in.xlarge" | "m6in.2xlarge" | "m6in.4xlarge" | "m6in.8xlarge" | "m6in.12xlarge" | "m6in.16xlarge" | "m6in.24xlarge" | "m6in.32xlarge" | "m6idn.large" | "m6idn.xlarge" | "m6idn.2xlarge" | "m6idn.4xlarge" | "m6idn.8xlarge" | "m6idn.12xlarge" | "m6idn.16xlarge" | "m6idn.24xlarge" | "m6idn.32xlarge" | "r6in.large" | "r6in.xlarge" | "r6in.2xlarge" | "r6in.4xlarge" | "r6in.8xlarge" | "r6in.12xlarge" | "r6in.16xlarge" | "r6in.24xlarge" | "r6in.32xlarge" | "r6idn.large" | "r6idn.xlarge" | "r6idn.2xlarge" | "r6idn.4xlarge" | "r6idn.8xlarge" | "r6idn.12xlarge" | "r6idn.16xlarge" | "r6idn.24xlarge" | "r6idn.32xlarge" | "c7g.metal" | "m7g.medium" | "m7g.large" | "m7g.xlarge" | "m7g.2xlarge" | "m7g.4xlarge" | "m7g.8xlarge" | "m7g.12xlarge" | "m7g.16xlarge" | "m7g.metal" | "r7g.medium" | "r7g.large" | "r7g.xlarge" | "r7g.2xlarge" | "r7g.4xlarge" | "r7g.8xlarge" | "r7g.12xlarge" | "r7g.16xlarge" | "r7g.metal" | "c6in.metal" | "m6in.metal" | "m6idn.metal" | "r6in.metal" | "r6idn.metal" | "inf2.xlarge" | "inf2.8xlarge" | "inf2.24xlarge" | "inf2.48xlarge" | "trn1n.32xlarge" | "i4g.large" | "i4g.xlarge" | "i4g.2xlarge" | "i4g.4xlarge" | "i4g.8xlarge" | "i4g.16xlarge" | "hpc7g.4xlarge" | "hpc7g.8xlarge" | "hpc7g.16xlarge" | "c7gn.medium" | "c7gn.large" | "c7gn.xlarge" | "c7gn.2xlarge" | "c7gn.4xlarge" | "c7gn.8xlarge" | "c7gn.12xlarge" | "c7gn.16xlarge" | "p5.48xlarge" | "m7i.large" | "m7i.xlarge" | "m7i.2xlarge" | "m7i.4xlarge" | "m7i.8xlarge" | "m7i.12xlarge" | "m7i.16xlarge" | "m7i.24xlarge" | "m7i.48xlarge" | "m7i-flex.large" | "m7i-flex.xlarge" | "m7i-flex.2xlarge" | "m7i-flex.4xlarge" | "m7i-flex.8xlarge" | "m7a.medium" | "m7a.large" | "m7a.xlarge" | "m7a.2xlarge" | "m7a.4xlarge" | "m7a.8xlarge" | "m7a.12xlarge" | "m7a.16xlarge" | "m7a.24xlarge" | "m7a.32xlarge" | "m7a.48xlarge" | "m7a.metal-48xl" | "hpc7a.12xlarge" | "hpc7a.24xlarge" | "hpc7a.48xlarge" | "hpc7a.96xlarge" | "c7gd.medium" | "c7gd.large" | "c7gd.xlarge" | "c7gd.2xlarge" | "c7gd.4xlarge" | "c7gd.8xlarge" | "c7gd.12xlarge" | "c7gd.16xlarge" | "m7gd.medium" | "m7gd.large" | "m7gd.xlarge" | "m7gd.2xlarge" | "m7gd.4xlarge" | "m7gd.8xlarge" | "m7gd.12xlarge" | "m7gd.16xlarge" | "r7gd.medium" | "r7gd.large" | "r7gd.xlarge" | "r7gd.2xlarge" | "r7gd.4xlarge" | "r7gd.8xlarge" | "r7gd.12xlarge" | "r7gd.16xlarge" | "r7a.medium" | "r7a.large" | "r7a.xlarge" | "r7a.2xlarge" | "r7a.4xlarge" | "r7a.8xlarge" | "r7a.12xlarge" | "r7a.16xlarge" | "r7a.24xlarge" | "r7a.32xlarge" | "r7a.48xlarge" | "c7i.large" | "c7i.xlarge" | "c7i.2xlarge" | "c7i.4xlarge" | "c7i.8xlarge" | "c7i.12xlarge" | "c7i.16xlarge" | "c7i.24xlarge" | "c7i.48xlarge" | "mac2-m2pro.metal" | "r7iz.large" | "r7iz.xlarge" | "r7iz.2xlarge" | "r7iz.4xlarge" | "r7iz.8xlarge" | "r7iz.12xlarge" | "r7iz.16xlarge" | "r7iz.32xlarge" | "c7a.medium" | "c7a.large" | "c7a.xlarge" | "c7a.2xlarge" | "c7a.4xlarge" | "c7a.8xlarge" | "c7a.12xlarge" | "c7a.16xlarge" | "c7a.24xlarge" | "c7a.32xlarge" | "c7a.48xlarge" | "c7a.metal-48xl" | "r7a.metal-48xl" | "r7i.large" | "r7i.xlarge" | "r7i.2xlarge" | "r7i.4xlarge" | "r7i.8xlarge" | "r7i.12xlarge" | "r7i.16xlarge" | "r7i.24xlarge" | "r7i.48xlarge" | "dl2q.24xlarge" | "mac2-m2.metal" | "i4i.12xlarge" | "i4i.24xlarge" | "c7i.metal-24xl" | "c7i.metal-48xl" | "m7i.metal-24xl" | "m7i.metal-48xl" | "r7i.metal-24xl" | "r7i.metal-48xl" | "r7iz.metal-16xl" | "r7iz.metal-32xl")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#kernel_id-instance_method
+      def kernel_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#key_name-instance_method
+      def key_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#launch_time-instance_method
+      def launch_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#monitoring-instance_method
+      def monitoring: () -> Types::Monitoring
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#placement-instance_method
+      def placement: () -> Types::Placement
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#platform-instance_method
+      def platform: () -> ("Windows")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#private_dns_name-instance_method
+      def private_dns_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#private_ip_address-instance_method
+      def private_ip_address: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#product_codes-instance_method
+      def product_codes: () -> ::Array[Types::ProductCode]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#public_dns_name-instance_method
+      def public_dns_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#public_ip_address-instance_method
+      def public_ip_address: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#ramdisk_id-instance_method
+      def ramdisk_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#state-instance_method
+      def state: () -> Types::InstanceState
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#state_transition_reason-instance_method
+      def state_transition_reason: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#subnet_id-instance_method
+      def subnet_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#vpc_id-instance_method
+      def vpc_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#architecture-instance_method
+      def architecture: () -> ("i386" | "x86_64" | "arm64" | "x86_64_mac" | "arm64_mac")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#block_device_mappings-instance_method
+      def block_device_mappings: () -> ::Array[Types::InstanceBlockDeviceMapping]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#client_token-instance_method
+      def client_token: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#ebs_optimized-instance_method
+      def ebs_optimized: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#ena_support-instance_method
+      def ena_support: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#hypervisor-instance_method
+      def hypervisor: () -> ("ovm" | "xen")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#iam_instance_profile-instance_method
+      def iam_instance_profile: () -> Types::IamInstanceProfile
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#instance_lifecycle-instance_method
+      def instance_lifecycle: () -> ("spot" | "scheduled" | "capacity-block")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#elastic_gpu_associations-instance_method
+      def elastic_gpu_associations: () -> ::Array[Types::ElasticGpuAssociation]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#elastic_inference_accelerator_associations-instance_method
+      def elastic_inference_accelerator_associations: () -> ::Array[Types::ElasticInferenceAcceleratorAssociation]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#outpost_arn-instance_method
+      def outpost_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#root_device_name-instance_method
+      def root_device_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#root_device_type-instance_method
+      def root_device_type: () -> ("ebs" | "instance-store")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#security_groups-instance_method
+      def security_groups: () -> ::Array[Types::GroupIdentifier]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#source_dest_check-instance_method
+      def source_dest_check: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#spot_instance_request_id-instance_method
+      def spot_instance_request_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#sriov_net_support-instance_method
+      def sriov_net_support: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#state_reason-instance_method
+      def state_reason: () -> Types::StateReason
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#tags-instance_method
+      def tags: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#virtualization_type-instance_method
+      def virtualization_type: () -> ("hvm" | "paravirtual")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#cpu_options-instance_method
+      def cpu_options: () -> Types::CpuOptions
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#capacity_reservation_id-instance_method
+      def capacity_reservation_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#capacity_reservation_specification-instance_method
+      def capacity_reservation_specification: () -> Types::CapacityReservationSpecificationResponse
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#hibernation_options-instance_method
+      def hibernation_options: () -> Types::HibernationOptions
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#licenses-instance_method
+      def licenses: () -> ::Array[Types::LicenseConfiguration]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#metadata_options-instance_method
+      def metadata_options: () -> Types::InstanceMetadataOptionsResponse
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#enclave_options-instance_method
+      def enclave_options: () -> Types::EnclaveOptions
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#boot_mode-instance_method
+      def boot_mode: () -> ("legacy-bios" | "uefi" | "uefi-preferred")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#platform_details-instance_method
+      def platform_details: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#usage_operation-instance_method
+      def usage_operation: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#usage_operation_update_time-instance_method
+      def usage_operation_update_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#private_dns_name_options-instance_method
+      def private_dns_name_options: () -> Types::PrivateDnsNameOptionsResponse
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#ipv_6_address-instance_method
+      def ipv_6_address: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#tpm_support-instance_method
+      def tpm_support: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#maintenance_options-instance_method
+      def maintenance_options: () -> Types::InstanceMaintenanceOptions
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#current_instance_boot_mode-instance_method
+      def current_instance_boot_mode: () -> ("legacy-bios" | "uefi")
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#data-instance_method
+      def data: () -> Types::Instance
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#exists?-instance_method
+      def exists?: (?max_attempts: Integer, ?delay: Numeric, ?before_attempt: (^(Integer attempts) -> void), ?before_wait: (^(Integer attempts, untyped response) -> void)) -> bool
+                 | (?Hash[Symbol, untyped]) -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#wait_until_exists-instance_method
+      def wait_until_exists: (?max_attempts: Integer, ?delay: Numeric, ?before_attempt: (^(Integer attempts) -> void), ?before_wait: (^(Integer attempts, untyped response) -> void)) ?{ (untyped waiter) -> void } -> Instance
+                           | (?Hash[Symbol, untyped]) ?{ (untyped waiter) -> void } -> Instance
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#wait_until_running-instance_method
+      def wait_until_running: (?max_attempts: Integer, ?delay: Numeric, ?before_attempt: (^(Integer attempts) -> void), ?before_wait: (^(Integer attempts, untyped response) -> void)) ?{ (untyped waiter) -> void } -> Instance
+                            | (?Hash[Symbol, untyped]) ?{ (untyped waiter) -> void } -> Instance
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#wait_until_stopped-instance_method
+      def wait_until_stopped: (?max_attempts: Integer, ?delay: Numeric, ?before_attempt: (^(Integer attempts) -> void), ?before_wait: (^(Integer attempts, untyped response) -> void)) ?{ (untyped waiter) -> void } -> Instance
+                            | (?Hash[Symbol, untyped]) ?{ (untyped waiter) -> void } -> Instance
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#wait_until_terminated-instance_method
+      def wait_until_terminated: (?max_attempts: Integer, ?delay: Numeric, ?before_attempt: (^(Integer attempts) -> void), ?before_wait: (^(Integer attempts, untyped response) -> void)) ?{ (untyped waiter) -> void } -> Instance
+                               | (?Hash[Symbol, untyped]) ?{ (untyped waiter) -> void } -> Instance
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#attach_classic_link_vpc-instance_method
+      def attach_classic_link_vpc: (
+                                     ?dry_run: bool,
+                                     groups: Array[::String],
+                                     vpc_id: ::String
+                                   ) -> Types::AttachClassicLinkVpcResult
+                                 | (?Hash[Symbol, untyped]) -> Types::AttachClassicLinkVpcResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#attach_volume-instance_method
+      def attach_volume: (
+                           device: ::String,
+                           volume_id: ::String,
+                           ?dry_run: bool
+                         ) -> Types::VolumeAttachment
+                       | (?Hash[Symbol, untyped]) -> Types::VolumeAttachment
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#console_output-instance_method
+      def console_output: (
+                            ?dry_run: bool,
+                            ?latest: bool
+                          ) -> Types::GetConsoleOutputResult
+                        | (?Hash[Symbol, untyped]) -> Types::GetConsoleOutputResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#create_image-instance_method
+      def create_image: (
+                          ?block_device_mappings: Array[
+                            {
+                              device_name: ::String?,
+                              virtual_name: ::String?,
+                              ebs: {
+                                delete_on_termination: bool?,
+                                iops: ::Integer?,
+                                snapshot_id: ::String?,
+                                volume_size: ::Integer?,
+                                volume_type: ("standard" | "io1" | "io2" | "gp2" | "sc1" | "st1" | "gp3")?,
+                                kms_key_id: ::String?,
+                                throughput: ::Integer?,
+                                outpost_arn: ::String?,
+                                encrypted: bool?
+                              }?,
+                              no_device: ::String?
+                            },
+                          ],
+                          ?description: ::String,
+                          ?dry_run: bool,
+                          name: ::String,
+                          ?no_reboot: bool,
+                          ?tag_specifications: Array[
+                            {
+                              resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                              tags: Array[
+                                {
+                                  key: ::String?,
+                                  value: ::String?
+                                },
+                              ]?
+                            },
+                          ]
+                        ) -> Image
+                      | (?Hash[Symbol, untyped]) -> Image
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#create_tags-instance_method
+      def create_tags: (
+                         ?dry_run: bool,
+                         tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> Tag::Collection
+                     | (?Hash[Symbol, untyped]) -> Tag::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#delete_tags-instance_method
+      def delete_tags: (
+                         ?dry_run: bool,
+                         ?tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> Tag::Collection
+                     | (?Hash[Symbol, untyped]) -> Tag::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#describe_attribute-instance_method
+      def describe_attribute: (
+                                attribute: ("instanceType" | "kernel" | "ramdisk" | "userData" | "disableApiTermination" | "instanceInitiatedShutdownBehavior" | "rootDeviceName" | "blockDeviceMapping" | "productCodes" | "sourceDestCheck" | "groupSet" | "ebsOptimized" | "sriovNetSupport" | "enaSupport" | "enclaveOptions" | "disableApiStop"),
+                                ?dry_run: bool
+                              ) -> Types::InstanceAttribute
+                            | (?Hash[Symbol, untyped]) -> Types::InstanceAttribute
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#detach_classic_link_vpc-instance_method
+      def detach_classic_link_vpc: (
+                                     ?dry_run: bool,
+                                     vpc_id: ::String
+                                   ) -> Types::DetachClassicLinkVpcResult
+                                 | (?Hash[Symbol, untyped]) -> Types::DetachClassicLinkVpcResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#detach_volume-instance_method
+      def detach_volume: (
+                           ?device: ::String,
+                           ?force: bool,
+                           volume_id: ::String,
+                           ?dry_run: bool
+                         ) -> Types::VolumeAttachment
+                       | (?Hash[Symbol, untyped]) -> Types::VolumeAttachment
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#modify_attribute-instance_method
+      def modify_attribute: (
+                              ?source_dest_check: {
+                                value: bool?
+                              },
+                              ?attribute: ("instanceType" | "kernel" | "ramdisk" | "userData" | "disableApiTermination" | "instanceInitiatedShutdownBehavior" | "rootDeviceName" | "blockDeviceMapping" | "productCodes" | "sourceDestCheck" | "groupSet" | "ebsOptimized" | "sriovNetSupport" | "enaSupport" | "enclaveOptions" | "disableApiStop"),
+                              ?block_device_mappings: Array[
+                                {
+                                  device_name: ::String?,
+                                  ebs: {
+                                    delete_on_termination: bool?,
+                                    volume_id: ::String?
+                                  }?,
+                                  no_device: ::String?,
+                                  virtual_name: ::String?
+                                },
+                              ],
+                              ?disable_api_termination: {
+                                value: bool?
+                              },
+                              ?dry_run: bool,
+                              ?ebs_optimized: {
+                                value: bool?
+                              },
+                              ?ena_support: {
+                                value: bool?
+                              },
+                              ?groups: Array[::String],
+                              ?instance_initiated_shutdown_behavior: untyped,
+                              ?instance_type: untyped,
+                              ?kernel: untyped,
+                              ?ramdisk: untyped,
+                              ?sriov_net_support: untyped,
+                              ?user_data: {
+                                value: ::String?
+                              },
+                              ?value: ::String,
+                              ?disable_api_stop: {
+                                value: bool?
+                              }
+                            ) -> ::Aws::EmptyStructure
+                          | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#monitor-instance_method
+      def monitor: (
+                     ?dry_run: bool
+                   ) -> Types::MonitorInstancesResult
+                 | (?Hash[Symbol, untyped]) -> Types::MonitorInstancesResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#password_data-instance_method
+      def password_data: (
+                           ?dry_run: bool
+                         ) -> Types::GetPasswordDataResult
+                       | (?Hash[Symbol, untyped]) -> Types::GetPasswordDataResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#reboot-instance_method
+      def reboot: (
+                    ?dry_run: bool
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#report_status-instance_method
+      def report_status: (
+                           ?description: ::String,
+                           ?dry_run: bool,
+                           ?end_time: ::Time,
+                           reason_codes: Array[("instance-stuck-in-state" | "unresponsive" | "not-accepting-credentials" | "password-not-available" | "performance-network" | "performance-instance-store" | "performance-ebs-volume" | "performance-other" | "other")],
+                           ?start_time: ::Time,
+                           status: ("ok" | "impaired")
+                         ) -> ::Aws::EmptyStructure
+                       | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#reset_attribute-instance_method
+      def reset_attribute: (
+                             attribute: ("instanceType" | "kernel" | "ramdisk" | "userData" | "disableApiTermination" | "instanceInitiatedShutdownBehavior" | "rootDeviceName" | "blockDeviceMapping" | "productCodes" | "sourceDestCheck" | "groupSet" | "ebsOptimized" | "sriovNetSupport" | "enaSupport" | "enclaveOptions" | "disableApiStop"),
+                             ?dry_run: bool
+                           ) -> ::Aws::EmptyStructure
+                         | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#reset_kernel-instance_method
+      def reset_kernel: (
+                          ?dry_run: bool
+                        ) -> ::Aws::EmptyStructure
+                      | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#reset_ramdisk-instance_method
+      def reset_ramdisk: (
+                           ?dry_run: bool
+                         ) -> ::Aws::EmptyStructure
+                       | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#reset_source_dest_check-instance_method
+      def reset_source_dest_check: (
+                                     ?dry_run: bool
+                                   ) -> ::Aws::EmptyStructure
+                                 | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#start-instance_method
+      def start: (
+                   ?additional_info: ::String,
+                   ?dry_run: bool
+                 ) -> Types::StartInstancesResult
+               | (?Hash[Symbol, untyped]) -> Types::StartInstancesResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#stop-instance_method
+      def stop: (
+                  ?hibernate: bool,
+                  ?dry_run: bool,
+                  ?force: bool
+                ) -> Types::StopInstancesResult
+              | (?Hash[Symbol, untyped]) -> Types::StopInstancesResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#terminate-instance_method
+      def terminate: (
+                       ?dry_run: bool
+                     ) -> Types::TerminateInstancesResult
+                   | (?Hash[Symbol, untyped]) -> Types::TerminateInstancesResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#unmonitor-instance_method
+      def unmonitor: (
+                       ?dry_run: bool
+                     ) -> Types::UnmonitorInstancesResult
+                   | (?Hash[Symbol, untyped]) -> Types::UnmonitorInstancesResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#classic_address-instance_method
+      def classic_address: () -> ClassicAddress?
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#image-instance_method
+      def image: () -> Image?
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#key_pair-instance_method
+      def key_pair: () -> KeyPairInfo?
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#network_interfaces-instance_method
+      def network_interfaces: () -> NetworkInterface::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#placement_group-instance_method
+      def placement_group: () -> PlacementGroup?
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#subnet-instance_method
+      def subnet: () -> Subnet?
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#volumes-instance_method
+      def volumes: (
+                     ?filters: Array[
+                       {
+                         name: ::String?,
+                         values: Array[::String]?
+                       },
+                     ],
+                     ?volume_ids: Array[::String],
+                     ?dry_run: bool
+                   ) -> Volume::Collection
+                 | (?Hash[Symbol, untyped]) -> Volume::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#vpc-instance_method
+      def vpc: () -> Vpc?
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Instance.html#vpc_addresses-instance_method
+      def vpc_addresses: (
+                           ?filters: Array[
+                             {
+                               name: ::String?,
+                               values: Array[::String]?
+                             },
+                           ],
+                           ?public_ips: Array[::String],
+                           ?allocation_ids: Array[::String],
+                           ?dry_run: bool
+                         ) -> VpcAddress::Collection
+                       | (?Hash[Symbol, untyped]) -> VpcAddress::Collection
+
+      class Collection < ::Aws::Resources::Collection[Instance]
+
+        def batch_create_tags: (
+                                 ?dry_run: bool,
+                                 tags: Array[
+                                   {
+                                     key: ::String?,
+                                     value: ::String?
+                                   },
+                                 ]
+                               ) -> void
+                           | (?Hash[Symbol, untyped]) -> void
+
+        def batch_delete_tags!: (
+                                  ?dry_run: bool,
+                                  ?tags: Array[
+                                    {
+                                      key: ::String?,
+                                      value: ::String?
+                                    },
+                                  ]
+                                ) -> void
+                            | (?Hash[Symbol, untyped]) -> void
+
+        def batch_monitor: (
+                             ?dry_run: bool
+                           ) -> void
+                       | (?Hash[Symbol, untyped]) -> void
+
+        def batch_reboot: (
+                            ?dry_run: bool
+                          ) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def batch_start: (
+                           ?additional_info: ::String,
+                           ?dry_run: bool
+                         ) -> void
+                     | (?Hash[Symbol, untyped]) -> void
+
+        def batch_stop: (
+                          ?hibernate: bool,
+                          ?dry_run: bool,
+                          ?force: bool
+                        ) -> void
+                    | (?Hash[Symbol, untyped]) -> void
+
+        def batch_terminate!: (
+                                ?dry_run: bool
+                              ) -> void
+                          | (?Hash[Symbol, untyped]) -> void
+
+        def batch_unmonitor: (
+                               ?dry_run: bool
+                             ) -> void
+                         | (?Hash[Symbol, untyped]) -> void
+      end
+    end
+  end
+end

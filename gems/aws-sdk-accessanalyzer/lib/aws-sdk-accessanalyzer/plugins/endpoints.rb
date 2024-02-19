@@ -14,6 +14,7 @@ module Aws::AccessAnalyzer
       option(
         :endpoint_provider,
         doc_type: 'Aws::AccessAnalyzer::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::AccessAnalyzer
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -60,6 +62,10 @@ module Aws::AccessAnalyzer
             Aws::AccessAnalyzer::Endpoints::ApplyArchiveRule.build(context)
           when :cancel_policy_generation
             Aws::AccessAnalyzer::Endpoints::CancelPolicyGeneration.build(context)
+          when :check_access_not_granted
+            Aws::AccessAnalyzer::Endpoints::CheckAccessNotGranted.build(context)
+          when :check_no_new_access
+            Aws::AccessAnalyzer::Endpoints::CheckNoNewAccess.build(context)
           when :create_access_preview
             Aws::AccessAnalyzer::Endpoints::CreateAccessPreview.build(context)
           when :create_analyzer
@@ -80,6 +86,8 @@ module Aws::AccessAnalyzer
             Aws::AccessAnalyzer::Endpoints::GetArchiveRule.build(context)
           when :get_finding
             Aws::AccessAnalyzer::Endpoints::GetFinding.build(context)
+          when :get_finding_v2
+            Aws::AccessAnalyzer::Endpoints::GetFindingV2.build(context)
           when :get_generated_policy
             Aws::AccessAnalyzer::Endpoints::GetGeneratedPolicy.build(context)
           when :list_access_preview_findings
@@ -94,6 +102,8 @@ module Aws::AccessAnalyzer
             Aws::AccessAnalyzer::Endpoints::ListArchiveRules.build(context)
           when :list_findings
             Aws::AccessAnalyzer::Endpoints::ListFindings.build(context)
+          when :list_findings_v2
+            Aws::AccessAnalyzer::Endpoints::ListFindingsV2.build(context)
           when :list_policy_generations
             Aws::AccessAnalyzer::Endpoints::ListPolicyGenerations.build(context)
           when :list_tags_for_resource

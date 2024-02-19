@@ -937,6 +937,24 @@ module Aws::SSM
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
     #
+    # @option params [Integer] :duration
+    #   The number of hours the association can run before it is canceled.
+    #   Duration applies to associations that are currently running, and any
+    #   pending and in progress commands on all targets. If a target was taken
+    #   offline for the association to run, it is made available again
+    #   immediately, without a reboot.
+    #
+    #   The `Duration` parameter applies only when both these conditions are
+    #   true:
+    #
+    #   * The association for which you specify a duration is cancelable
+    #     according to the parameters of the SSM command document or
+    #     Automation runbook associated with this execution.
+    #
+    #   * The command specifies the ` ApplyOnlyAtCronInterval ` parameter,
+    #     which means that the association doesn't run immediately after it
+    #     is created, but only according to the specified schedule.
+    #
     # @option params [Array<Hash>] :target_maps
     #   A key-value mapping of document parameters to target resources. Both
     #   Targets and TargetMaps can't be specified together.
@@ -1005,6 +1023,7 @@ module Aws::SSM
     #       },
     #     ],
     #     schedule_offset: 1,
+    #     duration: 1,
     #     target_maps: [
     #       {
     #         "TargetMapKey" => ["TargetMapValue"],
@@ -1077,6 +1096,7 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.duration #=> Integer
     #   resp.association_description.target_maps #=> Array
     #   resp.association_description.target_maps[0] #=> Hash
     #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
@@ -1168,6 +1188,7 @@ module Aws::SSM
     #           },
     #         ],
     #         schedule_offset: 1,
+    #         duration: 1,
     #         target_maps: [
     #           {
     #             "TargetMapKey" => ["TargetMapValue"],
@@ -1237,6 +1258,7 @@ module Aws::SSM
     #   resp.successful[0].target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.successful[0].target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.successful[0].schedule_offset #=> Integer
+    #   resp.successful[0].duration #=> Integer
     #   resp.successful[0].target_maps #=> Array
     #   resp.successful[0].target_maps[0] #=> Hash
     #   resp.successful[0].target_maps[0]["TargetMapKey"] #=> Array
@@ -1283,6 +1305,7 @@ module Aws::SSM
     #   resp.failed[0].entry.target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.failed[0].entry.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.failed[0].entry.schedule_offset #=> Integer
+    #   resp.failed[0].entry.duration #=> Integer
     #   resp.failed[0].entry.target_maps #=> Array
     #   resp.failed[0].entry.target_maps[0] #=> Hash
     #   resp.failed[0].entry.target_maps[0]["TargetMapKey"] #=> Array
@@ -1691,7 +1714,7 @@ module Aws::SSM
     #     This type of OpsItem is used by Change Manager for reviewing and
     #     approving or rejecting change requests.
     #
-    #   * `/aws/insights`
+    #   * `/aws/insight`
     #
     #     This type of OpsItem is used by OpsCenter for aggregating and
     #     reporting on duplicate OpsItems.
@@ -2905,6 +2928,7 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.duration #=> Integer
     #   resp.association_description.target_maps #=> Array
     #   resp.association_description.target_maps[0] #=> Hash
     #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
@@ -3116,7 +3140,7 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].automation_execution_id #=> String
     #   resp.automation_execution_metadata_list[0].document_name #=> String
     #   resp.automation_execution_metadata_list[0].document_version #=> String
-    #   resp.automation_execution_metadata_list[0].automation_execution_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed", "PendingApproval", "Approved", "Rejected", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "CompletedWithSuccess", "CompletedWithFailure"
+    #   resp.automation_execution_metadata_list[0].automation_execution_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed", "PendingApproval", "Approved", "Rejected", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "CompletedWithSuccess", "CompletedWithFailure", "Exited"
     #   resp.automation_execution_metadata_list[0].execution_start_time #=> Time
     #   resp.automation_execution_metadata_list[0].execution_end_time #=> Time
     #   resp.automation_execution_metadata_list[0].executed_by #=> String
@@ -3232,7 +3256,7 @@ module Aws::SSM
     #     automation_execution_id: "AutomationExecutionId", # required
     #     filters: [
     #       {
-    #         key: "StartTimeBefore", # required, accepts StartTimeBefore, StartTimeAfter, StepExecutionStatus, StepExecutionId, StepName, Action
+    #         key: "StartTimeBefore", # required, accepts StartTimeBefore, StartTimeAfter, StepExecutionStatus, StepExecutionId, StepName, Action, ParentStepExecutionId, ParentStepIteration, ParentStepIteratorValue
     #         values: ["StepExecutionFilterValue"], # required
     #       },
     #     ],
@@ -3251,7 +3275,7 @@ module Aws::SSM
     #   resp.step_executions[0].max_attempts #=> Integer
     #   resp.step_executions[0].execution_start_time #=> Time
     #   resp.step_executions[0].execution_end_time #=> Time
-    #   resp.step_executions[0].step_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed", "PendingApproval", "Approved", "Rejected", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "CompletedWithSuccess", "CompletedWithFailure"
+    #   resp.step_executions[0].step_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed", "PendingApproval", "Approved", "Rejected", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "CompletedWithSuccess", "CompletedWithFailure", "Exited"
     #   resp.step_executions[0].response_code #=> String
     #   resp.step_executions[0].inputs #=> Hash
     #   resp.step_executions[0].inputs["String"] #=> String
@@ -3291,6 +3315,11 @@ module Aws::SSM
     #   resp.step_executions[0].triggered_alarms #=> Array
     #   resp.step_executions[0].triggered_alarms[0].name #=> String
     #   resp.step_executions[0].triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
+    #   resp.step_executions[0].parent_step_details.step_execution_id #=> String
+    #   resp.step_executions[0].parent_step_details.step_name #=> String
+    #   resp.step_executions[0].parent_step_details.action #=> String
+    #   resp.step_executions[0].parent_step_details.iteration #=> Integer
+    #   resp.step_executions[0].parent_step_details.iterator_value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationStepExecutions AWS API Documentation
@@ -3303,6 +3332,11 @@ module Aws::SSM
     end
 
     # Lists all patches eligible to be included in a patch baseline.
+    #
+    # <note markdown="1"> Currently, `DescribeAvailablePatches` supports only the Amazon Linux
+    # 1, Amazon Linux 2, and Windows Server operating systems.
+    #
+    #  </note>
     #
     # @option params [Array<Types::PatchOrchestratorFilter>] :filters
     #   Each element in the array is a structure containing a key-value pair.
@@ -3477,8 +3511,8 @@ module Aws::SSM
     #
     # @option params [String] :version_name
     #   An optional field specifying the version of the artifact associated
-    #   with the document. For example, "Release 12, Update 6". This value
-    #   is unique across all versions of a document, and can't be changed.
+    #   with the document. For example, 12.6. This value is unique across all
+    #   versions of a document, and can't be changed.
     #
     # @return [Types::DescribeDocumentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4060,6 +4094,14 @@ module Aws::SSM
     #
     #     Sample values: `Installed` \| `InstalledOther` \|
     #     `InstalledPendingReboot`
+    #
+    #     For lists of all `State` values, see [Understanding patch compliance
+    #     state values][1] in the *Amazon Web Services Systems Manager User
+    #     Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-compliance-states.html
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -5355,7 +5397,7 @@ module Aws::SSM
     #   resp.automation_execution.document_version #=> String
     #   resp.automation_execution.execution_start_time #=> Time
     #   resp.automation_execution.execution_end_time #=> Time
-    #   resp.automation_execution.automation_execution_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed", "PendingApproval", "Approved", "Rejected", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "CompletedWithSuccess", "CompletedWithFailure"
+    #   resp.automation_execution.automation_execution_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed", "PendingApproval", "Approved", "Rejected", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "CompletedWithSuccess", "CompletedWithFailure", "Exited"
     #   resp.automation_execution.step_executions #=> Array
     #   resp.automation_execution.step_executions[0].step_name #=> String
     #   resp.automation_execution.step_executions[0].action #=> String
@@ -5364,7 +5406,7 @@ module Aws::SSM
     #   resp.automation_execution.step_executions[0].max_attempts #=> Integer
     #   resp.automation_execution.step_executions[0].execution_start_time #=> Time
     #   resp.automation_execution.step_executions[0].execution_end_time #=> Time
-    #   resp.automation_execution.step_executions[0].step_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed", "PendingApproval", "Approved", "Rejected", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "CompletedWithSuccess", "CompletedWithFailure"
+    #   resp.automation_execution.step_executions[0].step_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed", "PendingApproval", "Approved", "Rejected", "Scheduled", "RunbookInProgress", "PendingChangeCalendarOverride", "ChangeCalendarOverrideApproved", "ChangeCalendarOverrideRejected", "CompletedWithSuccess", "CompletedWithFailure", "Exited"
     #   resp.automation_execution.step_executions[0].response_code #=> String
     #   resp.automation_execution.step_executions[0].inputs #=> Hash
     #   resp.automation_execution.step_executions[0].inputs["String"] #=> String
@@ -5404,6 +5446,11 @@ module Aws::SSM
     #   resp.automation_execution.step_executions[0].triggered_alarms #=> Array
     #   resp.automation_execution.step_executions[0].triggered_alarms[0].name #=> String
     #   resp.automation_execution.step_executions[0].triggered_alarms[0].state #=> String, one of "UNKNOWN", "ALARM"
+    #   resp.automation_execution.step_executions[0].parent_step_details.step_execution_id #=> String
+    #   resp.automation_execution.step_executions[0].parent_step_details.step_name #=> String
+    #   resp.automation_execution.step_executions[0].parent_step_details.action #=> String
+    #   resp.automation_execution.step_executions[0].parent_step_details.iteration #=> Integer
+    #   resp.automation_execution.step_executions[0].parent_step_details.iterator_value #=> String
     #   resp.automation_execution.step_executions_truncated #=> Boolean
     #   resp.automation_execution.parameters #=> Hash
     #   resp.automation_execution.parameters["AutomationParameterKey"] #=> Array
@@ -5487,6 +5534,9 @@ module Aws::SSM
     #   resp.automation_execution.ops_item_id #=> String
     #   resp.automation_execution.association_id #=> String
     #   resp.automation_execution.change_request_name #=> String
+    #   resp.automation_execution.variables #=> Hash
+    #   resp.automation_execution.variables["AutomationParameterKey"] #=> Array
+    #   resp.automation_execution.variables["AutomationParameterKey"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetAutomationExecution AWS API Documentation
     #
@@ -5830,8 +5880,8 @@ module Aws::SSM
     #
     # @option params [String] :version_name
     #   An optional field specifying the version of the artifact associated
-    #   with the document. For example, "Release 12, Update 6". This value
-    #   is unique across all versions of a document and can't be changed.
+    #   with the document. For example, 12.6. This value is unique across all
+    #   versions of a document and can't be changed.
     #
     # @option params [String] :document_version
     #   The document version for which you want information.
@@ -7252,6 +7302,7 @@ module Aws::SSM
     #   resp.association_versions[0].target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.association_versions[0].target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.association_versions[0].schedule_offset #=> Integer
+    #   resp.association_versions[0].duration #=> Integer
     #   resp.association_versions[0].target_maps #=> Array
     #   resp.association_versions[0].target_maps[0] #=> Hash
     #   resp.association_versions[0].target_maps[0]["TargetMapKey"] #=> Array
@@ -7333,6 +7384,7 @@ module Aws::SSM
     #   resp.associations[0].schedule_expression #=> String
     #   resp.associations[0].association_name #=> String
     #   resp.associations[0].schedule_offset #=> Integer
+    #   resp.associations[0].duration #=> Integer
     #   resp.associations[0].target_maps #=> Array
     #   resp.associations[0].target_maps[0] #=> Hash
     #   resp.associations[0].target_maps[0]["TargetMapKey"] #=> Array
@@ -10576,6 +10628,24 @@ module Aws::SSM
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
     #
+    # @option params [Integer] :duration
+    #   The number of hours the association can run before it is canceled.
+    #   Duration applies to associations that are currently running, and any
+    #   pending and in progress commands on all targets. If a target was taken
+    #   offline for the association to run, it is made available again
+    #   immediately, without a reboot.
+    #
+    #   The `Duration` parameter applies only when both these conditions are
+    #   true:
+    #
+    #   * The association for which you specify a duration is cancelable
+    #     according to the parameters of the SSM command document or
+    #     Automation runbook associated with this execution.
+    #
+    #   * The command specifies the ` ApplyOnlyAtCronInterval ` parameter,
+    #     which means that the association doesn't run immediately after it
+    #     is updated, but only according to the specified schedule.
+    #
     # @option params [Array<Hash>] :target_maps
     #   A key-value mapping of document parameters to target resources. Both
     #   Targets and TargetMaps can't be specified together.
@@ -10638,6 +10708,7 @@ module Aws::SSM
     #       },
     #     ],
     #     schedule_offset: 1,
+    #     duration: 1,
     #     target_maps: [
     #       {
     #         "TargetMapKey" => ["TargetMapValue"],
@@ -10704,6 +10775,7 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.duration #=> Integer
     #   resp.association_description.target_maps #=> Array
     #   resp.association_description.target_maps[0] #=> Hash
     #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
@@ -10809,6 +10881,7 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms #=> Array
     #   resp.association_description.target_locations[0].target_location_alarm_configuration.alarms[0].name #=> String
     #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.duration #=> Integer
     #   resp.association_description.target_maps #=> Array
     #   resp.association_description.target_maps[0] #=> Hash
     #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
@@ -10849,9 +10922,8 @@ module Aws::SSM
     #
     # @option params [String] :version_name
     #   An optional field specifying the version of the artifact you are
-    #   updating with the document. For example, "Release 12, Update 6".
-    #   This value is unique across all versions of a document, and can't be
-    #   changed.
+    #   updating with the document. For example, 12.6. This value is unique
+    #   across all versions of a document, and can't be changed.
     #
     # @option params [String] :document_version
     #   The version of the document that you want to update. Currently,
@@ -12182,25 +12254,28 @@ module Aws::SSM
     #   The new value to specify for the service setting. The following list
     #   specifies the available values for each setting.
     #
-    #   * `/ssm/managed-instance/default-ec2-instance-management-role: The
-    #     name of an IAM role`
+    #   * For `/ssm/managed-instance/default-ec2-instance-management-role`,
+    #     enter the name of an IAM role.
     #
-    #   * `/ssm/automation/customer-script-log-destination`: `CloudWatch`
+    #   * For `/ssm/automation/customer-script-log-destination`, enter
+    #     `CloudWatch`.
     #
-    #   * `/ssm/automation/customer-script-log-group-name`: The name of an
-    #     Amazon CloudWatch Logs log group
+    #   * For `/ssm/automation/customer-script-log-group-name`, enter the name
+    #     of an Amazon CloudWatch Logs log group.
     #
-    #   * `/ssm/documents/console/public-sharing-permission`: `Enable` or
-    #     `Disable`
+    #   * For `/ssm/documents/console/public-sharing-permission`, enter
+    #     `Enable` or `Disable`.
     #
-    #   * `/ssm/managed-instance/activation-tier`: `standard` or `advanced`
+    #   * For `/ssm/managed-instance/activation-tier`, enter `standard` or
+    #     `advanced`.
     #
-    #   * `/ssm/opsinsights/opscenter`: `Enabled` or `Disabled`
+    #   * For `/ssm/opsinsights/opscenter`, enter `Enabled` or `Disabled`.
     #
-    #   * `/ssm/parameter-store/default-parameter-tier`: `Standard`,
-    #     `Advanced`, `Intelligent-Tiering`
+    #   * For `/ssm/parameter-store/default-parameter-tier`, enter `Standard`,
+    #     `Advanced`, or `Intelligent-Tiering`
     #
-    #   * `/ssm/parameter-store/high-throughput-enabled`: `true` or `false`
+    #   * For `/ssm/parameter-store/high-throughput-enabled`, enter `true` or
+    #     `false`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -12233,7 +12308,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.159.0'
+      context[:gem_version] = '1.164.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

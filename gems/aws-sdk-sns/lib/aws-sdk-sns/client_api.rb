@@ -64,6 +64,7 @@ module Aws::SNS
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
     InvalidSecurityException = Shapes::StructureShape.new(name: 'InvalidSecurityException')
+    InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
     Iso2CountryCode = Shapes::StringShape.new(name: 'Iso2CountryCode')
     KMSAccessDeniedException = Shapes::StructureShape.new(name: 'KMSAccessDeniedException')
     KMSDisabledException = Shapes::StructureShape.new(name: 'KMSDisabledException')
@@ -122,6 +123,7 @@ module Aws::SNS
     PublishResponse = Shapes::StructureShape.new(name: 'PublishResponse')
     PutDataProtectionPolicyInput = Shapes::StructureShape.new(name: 'PutDataProtectionPolicyInput')
     RemovePermissionInput = Shapes::StructureShape.new(name: 'RemovePermissionInput')
+    ReplayLimitExceededException = Shapes::StructureShape.new(name: 'ReplayLimitExceededException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RouteType = Shapes::StringShape.new(name: 'RouteType')
     SMSSandboxPhoneNumber = Shapes::StructureShape.new(name: 'SMSSandboxPhoneNumber')
@@ -345,6 +347,9 @@ module Aws::SNS
     InvalidSecurityException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     InvalidSecurityException.struct_class = Types::InvalidSecurityException
 
+    InvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    InvalidStateException.struct_class = Types::InvalidStateException
+
     KMSAccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     KMSAccessDeniedException.struct_class = Types::KMSAccessDeniedException
 
@@ -460,7 +465,7 @@ module Aws::SNS
     OptedOutException.struct_class = Types::OptedOutException
 
     PhoneNumberInformation.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
-    PhoneNumberInformation.add_member(:phone_number, Shapes::ShapeRef.new(shape: String, location_name: "PhoneNumber"))
+    PhoneNumberInformation.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
     PhoneNumberInformation.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     PhoneNumberInformation.add_member(:iso_2_country_code, Shapes::ShapeRef.new(shape: Iso2CountryCode, location_name: "Iso2CountryCode"))
     PhoneNumberInformation.add_member(:route_type, Shapes::ShapeRef.new(shape: RouteType, location_name: "RouteType"))
@@ -506,7 +511,7 @@ module Aws::SNS
 
     PublishInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, location_name: "TopicArn"))
     PublishInput.add_member(:target_arn, Shapes::ShapeRef.new(shape: String, location_name: "TargetArn"))
-    PublishInput.add_member(:phone_number, Shapes::ShapeRef.new(shape: String, location_name: "PhoneNumber"))
+    PublishInput.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
     PublishInput.add_member(:message, Shapes::ShapeRef.new(shape: message, required: true, location_name: "Message"))
     PublishInput.add_member(:subject, Shapes::ShapeRef.new(shape: subject, location_name: "Subject"))
     PublishInput.add_member(:message_structure, Shapes::ShapeRef.new(shape: messageStructure, location_name: "MessageStructure"))
@@ -526,6 +531,9 @@ module Aws::SNS
     RemovePermissionInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, required: true, location_name: "TopicArn"))
     RemovePermissionInput.add_member(:label, Shapes::ShapeRef.new(shape: label, required: true, location_name: "Label"))
     RemovePermissionInput.struct_class = Types::RemovePermissionInput
+
+    ReplayLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
+    ReplayLimitExceededException.struct_class = Types::ReplayLimitExceededException
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -703,6 +711,7 @@ module Aws::SNS
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         o.errors << Shapes::ShapeRef.new(shape: FilterPolicyLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ReplayLimitExceededException)
       end)
 
       api.add_operation(:create_platform_application, Seahorse::Model::Operation.new.tap do |o|
@@ -802,6 +811,7 @@ module Aws::SNS
         o.input = Shapes::ShapeRef.new(shape: DeleteTopicInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1177,6 +1187,7 @@ module Aws::SNS
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: FilterPolicyLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ReplayLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
@@ -1203,6 +1214,7 @@ module Aws::SNS
         o.output = Shapes::ShapeRef.new(shape: SubscribeResponse)
         o.errors << Shapes::ShapeRef.new(shape: SubscriptionLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: FilterPolicyLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ReplayLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)

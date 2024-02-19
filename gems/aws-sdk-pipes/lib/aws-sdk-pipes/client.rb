@@ -404,6 +404,9 @@ module Aws::Pipes
     # @option params [Types::PipeEnrichmentParameters] :enrichment_parameters
     #   The parameters required to set up enrichment on your pipe.
     #
+    # @option params [Types::PipeLogConfigurationParameters] :log_configuration
+    #   The logging configuration settings for the pipe.
+    #
     # @option params [required, String] :name
     #   The name of the pipe.
     #
@@ -424,6 +427,14 @@ module Aws::Pipes
     #
     # @option params [Types::PipeTargetParameters] :target_parameters
     #   The parameters required to set up a target for your pipe.
+    #
+    #   For more information about pipe target parameters, including how to
+    #   use dynamic path parameters, see [Target parameters][1] in the *Amazon
+    #   EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
     #
     # @return [Types::CreatePipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -451,6 +462,22 @@ module Aws::Pipes
     #         },
     #       },
     #       input_template: "InputTemplate",
+    #     },
+    #     log_configuration: {
+    #       cloudwatch_logs_log_destination: {
+    #         log_group_arn: "CloudwatchLogGroupArn", # required
+    #       },
+    #       firehose_log_destination: {
+    #         delivery_stream_arn: "FirehoseArn", # required
+    #       },
+    #       include_execution_data: ["ALL"], # accepts ALL
+    #       level: "OFF", # required, accepts OFF, ERROR, INFO, TRACE
+    #       s3_log_destination: {
+    #         bucket_name: "S3LogDestinationParametersBucketNameString", # required
+    #         bucket_owner: "S3LogDestinationParametersBucketOwnerString", # required
+    #         output_format: "json", # accepts json, plain, w3c
+    #         prefix: "S3LogDestinationParametersPrefixString",
+    #       },
     #     },
     #     name: "PipeName", # required
     #     role_arn: "RoleArn", # required
@@ -722,7 +749,7 @@ module Aws::Pipes
     #
     #   resp.arn #=> String
     #   resp.creation_time #=> Time
-    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED"
+    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
     #   resp.desired_state #=> String, one of "RUNNING", "STOPPED"
     #   resp.last_modified_time #=> Time
     #   resp.name #=> String
@@ -765,7 +792,7 @@ module Aws::Pipes
     #
     #   resp.arn #=> String
     #   resp.creation_time #=> Time
-    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED"
+    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
     #   resp.desired_state #=> String, one of "RUNNING", "STOPPED", "DELETED"
     #   resp.last_modified_time #=> Time
     #   resp.name #=> String
@@ -800,6 +827,7 @@ module Aws::Pipes
     #   * {Types::DescribePipeResponse#enrichment #enrichment} => String
     #   * {Types::DescribePipeResponse#enrichment_parameters #enrichment_parameters} => Types::PipeEnrichmentParameters
     #   * {Types::DescribePipeResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribePipeResponse#log_configuration #log_configuration} => Types::PipeLogConfiguration
     #   * {Types::DescribePipeResponse#name #name} => String
     #   * {Types::DescribePipeResponse#role_arn #role_arn} => String
     #   * {Types::DescribePipeResponse#source #source} => String
@@ -819,7 +847,7 @@ module Aws::Pipes
     #
     #   resp.arn #=> String
     #   resp.creation_time #=> Time
-    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED"
+    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
     #   resp.description #=> String
     #   resp.desired_state #=> String, one of "RUNNING", "STOPPED", "DELETED"
     #   resp.enrichment #=> String
@@ -831,6 +859,15 @@ module Aws::Pipes
     #   resp.enrichment_parameters.http_parameters.query_string_parameters["QueryStringKey"] #=> String
     #   resp.enrichment_parameters.input_template #=> String
     #   resp.last_modified_time #=> Time
+    #   resp.log_configuration.cloudwatch_logs_log_destination.log_group_arn #=> String
+    #   resp.log_configuration.firehose_log_destination.delivery_stream_arn #=> String
+    #   resp.log_configuration.include_execution_data #=> Array
+    #   resp.log_configuration.include_execution_data[0] #=> String, one of "ALL"
+    #   resp.log_configuration.level #=> String, one of "OFF", "ERROR", "INFO", "TRACE"
+    #   resp.log_configuration.s3_log_destination.bucket_name #=> String
+    #   resp.log_configuration.s3_log_destination.bucket_owner #=> String
+    #   resp.log_configuration.s3_log_destination.output_format #=> String, one of "json", "plain", "w3c"
+    #   resp.log_configuration.s3_log_destination.prefix #=> String
     #   resp.name #=> String
     #   resp.role_arn #=> String
     #   resp.source #=> String
@@ -1046,7 +1083,7 @@ module Aws::Pipes
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_pipes({
-    #     current_state: "RUNNING", # accepts RUNNING, STOPPED, CREATING, UPDATING, DELETING, STARTING, STOPPING, CREATE_FAILED, UPDATE_FAILED, START_FAILED, STOP_FAILED
+    #     current_state: "RUNNING", # accepts RUNNING, STOPPED, CREATING, UPDATING, DELETING, STARTING, STOPPING, CREATE_FAILED, UPDATE_FAILED, START_FAILED, STOP_FAILED, DELETE_FAILED, CREATE_ROLLBACK_FAILED, DELETE_ROLLBACK_FAILED, UPDATE_ROLLBACK_FAILED
     #     desired_state: "RUNNING", # accepts RUNNING, STOPPED
     #     limit: 1,
     #     name_prefix: "PipeName",
@@ -1061,7 +1098,7 @@ module Aws::Pipes
     #   resp.pipes #=> Array
     #   resp.pipes[0].arn #=> String
     #   resp.pipes[0].creation_time #=> Time
-    #   resp.pipes[0].current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED"
+    #   resp.pipes[0].current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
     #   resp.pipes[0].desired_state #=> String, one of "RUNNING", "STOPPED"
     #   resp.pipes[0].enrichment #=> String
     #   resp.pipes[0].last_modified_time #=> Time
@@ -1132,7 +1169,7 @@ module Aws::Pipes
     #
     #   resp.arn #=> String
     #   resp.creation_time #=> Time
-    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED"
+    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
     #   resp.desired_state #=> String, one of "RUNNING", "STOPPED"
     #   resp.last_modified_time #=> Time
     #   resp.name #=> String
@@ -1170,7 +1207,7 @@ module Aws::Pipes
     #
     #   resp.arn #=> String
     #   resp.creation_time #=> Time
-    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED"
+    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
     #   resp.desired_state #=> String, one of "RUNNING", "STOPPED"
     #   resp.last_modified_time #=> Time
     #   resp.name #=> String
@@ -1252,15 +1289,17 @@ module Aws::Pipes
       req.send_request(options)
     end
 
-    # Update an existing pipe. When you call `UpdatePipe`, only the fields
-    # that are included in the request are changed, the rest are unchanged.
-    # The exception to this is if you modify any Amazon Web Services-service
-    # specific fields in the `SourceParameters`, `EnrichmentParameters`, or
-    # `TargetParameters` objects. The fields in these objects are updated
-    # atomically as one and override existing values. This is by design and
-    # means that if you don't specify an optional field in one of these
-    # Parameters objects, that field will be set to its system-default value
-    # after the update.
+    # Update an existing pipe. When you call `UpdatePipe`, EventBridge only
+    # the updates fields you have specified in the request; the rest remain
+    # unchanged. The exception to this is if you modify any Amazon Web
+    # Services-service specific fields in the `SourceParameters`,
+    # `EnrichmentParameters`, or `TargetParameters` objects. For example,
+    # `DynamoDBStreamParameters` or `EventBridgeEventBusParameters`.
+    # EventBridge updates the fields in these objects atomically as one and
+    # overrides existing values. This is by design, and means that if you
+    # don't specify an optional field in one of these `Parameters` objects,
+    # EventBridge sets that field to its system-default value during the
+    # update.
     #
     # For more information about pipes, see [ Amazon EventBridge Pipes][1]
     # in the Amazon EventBridge User Guide.
@@ -1281,6 +1320,9 @@ module Aws::Pipes
     # @option params [Types::PipeEnrichmentParameters] :enrichment_parameters
     #   The parameters required to set up enrichment on your pipe.
     #
+    # @option params [Types::PipeLogConfigurationParameters] :log_configuration
+    #   The logging configuration settings for the pipe.
+    #
     # @option params [required, String] :name
     #   The name of the pipe.
     #
@@ -1295,6 +1337,14 @@ module Aws::Pipes
     #
     # @option params [Types::PipeTargetParameters] :target_parameters
     #   The parameters required to set up a target for your pipe.
+    #
+    #   For more information about pipe target parameters, including how to
+    #   use dynamic path parameters, see [Target parameters][1] in the *Amazon
+    #   EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
     #
     # @return [Types::UpdatePipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1322,6 +1372,22 @@ module Aws::Pipes
     #         },
     #       },
     #       input_template: "InputTemplate",
+    #     },
+    #     log_configuration: {
+    #       cloudwatch_logs_log_destination: {
+    #         log_group_arn: "CloudwatchLogGroupArn", # required
+    #       },
+    #       firehose_log_destination: {
+    #         delivery_stream_arn: "FirehoseArn", # required
+    #       },
+    #       include_execution_data: ["ALL"], # accepts ALL
+    #       level: "OFF", # required, accepts OFF, ERROR, INFO, TRACE
+    #       s3_log_destination: {
+    #         bucket_name: "S3LogDestinationParametersBucketNameString", # required
+    #         bucket_owner: "S3LogDestinationParametersBucketOwnerString", # required
+    #         output_format: "json", # accepts json, plain, w3c
+    #         prefix: "S3LogDestinationParametersPrefixString",
+    #       },
     #     },
     #     name: "PipeName", # required
     #     role_arn: "RoleArn", # required
@@ -1576,7 +1642,7 @@ module Aws::Pipes
     #
     #   resp.arn #=> String
     #   resp.creation_time #=> Time
-    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED"
+    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
     #   resp.desired_state #=> String, one of "RUNNING", "STOPPED"
     #   resp.last_modified_time #=> Time
     #   resp.name #=> String
@@ -1603,7 +1669,7 @@ module Aws::Pipes
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pipes'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

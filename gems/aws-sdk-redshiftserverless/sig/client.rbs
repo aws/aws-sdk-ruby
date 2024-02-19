@@ -1,0 +1,861 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RedshiftServerless
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _ConvertRecoveryPointToSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConvertRecoveryPointToSnapshotResponse]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#convert_recovery_point_to_snapshot-instance_method
+      def convert_recovery_point_to_snapshot: (
+                                                recovery_point_id: ::String,
+                                                ?retention_period: ::Integer,
+                                                snapshot_name: ::String,
+                                                ?tags: Array[
+                                                  {
+                                                    key: ::String,
+                                                    value: ::String
+                                                  },
+                                                ]
+                                              ) -> _ConvertRecoveryPointToSnapshotResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConvertRecoveryPointToSnapshotResponseSuccess
+
+      interface _CreateCustomDomainAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomDomainAssociationResponse]
+        def custom_domain_certificate_arn: () -> ::String
+        def custom_domain_certificate_expiry_time: () -> ::Time
+        def custom_domain_name: () -> ::String
+        def workgroup_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#create_custom_domain_association-instance_method
+      def create_custom_domain_association: (
+                                              custom_domain_certificate_arn: ::String,
+                                              custom_domain_name: ::String,
+                                              workgroup_name: ::String
+                                            ) -> _CreateCustomDomainAssociationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomDomainAssociationResponseSuccess
+
+      interface _CreateEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEndpointAccessResponse]
+        def endpoint: () -> Types::EndpointAccess
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#create_endpoint_access-instance_method
+      def create_endpoint_access: (
+                                    endpoint_name: ::String,
+                                    ?owner_account: ::String,
+                                    subnet_ids: Array[::String],
+                                    ?vpc_security_group_ids: Array[::String],
+                                    workgroup_name: ::String
+                                  ) -> _CreateEndpointAccessResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEndpointAccessResponseSuccess
+
+      interface _CreateNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNamespaceResponse]
+        def namespace: () -> Types::Namespace
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#create_namespace-instance_method
+      def create_namespace: (
+                              ?admin_password_secret_kms_key_id: ::String,
+                              ?admin_user_password: ::String,
+                              ?admin_username: ::String,
+                              ?db_name: ::String,
+                              ?default_iam_role_arn: ::String,
+                              ?iam_roles: Array[::String],
+                              ?kms_key_id: ::String,
+                              ?log_exports: Array[("useractivitylog" | "userlog" | "connectionlog")],
+                              ?manage_admin_password: bool,
+                              namespace_name: ::String,
+                              ?redshift_idc_application_arn: ::String,
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ]
+                            ) -> _CreateNamespaceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNamespaceResponseSuccess
+
+      interface _CreateScheduledActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateScheduledActionResponse]
+        def scheduled_action: () -> Types::ScheduledActionResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#create_scheduled_action-instance_method
+      def create_scheduled_action: (
+                                     ?enabled: bool,
+                                     ?end_time: ::Time,
+                                     namespace_name: ::String,
+                                     role_arn: ::String,
+                                     schedule: {
+                                       at: ::Time?,
+                                       cron: ::String?
+                                     },
+                                     ?scheduled_action_description: ::String,
+                                     scheduled_action_name: ::String,
+                                     ?start_time: ::Time,
+                                     target_action: {
+                                       create_snapshot: {
+                                         namespace_name: ::String,
+                                         retention_period: ::Integer?,
+                                         snapshot_name_prefix: ::String,
+                                         tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String
+                                           },
+                                         ]?
+                                       }?
+                                     }
+                                   ) -> _CreateScheduledActionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScheduledActionResponseSuccess
+
+      interface _CreateSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSnapshotResponse]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#create_snapshot-instance_method
+      def create_snapshot: (
+                             namespace_name: ::String,
+                             ?retention_period: ::Integer,
+                             snapshot_name: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _CreateSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotResponseSuccess
+
+      interface _CreateSnapshotCopyConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSnapshotCopyConfigurationResponse]
+        def snapshot_copy_configuration: () -> Types::SnapshotCopyConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#create_snapshot_copy_configuration-instance_method
+      def create_snapshot_copy_configuration: (
+                                                ?destination_kms_key_id: ::String,
+                                                destination_region: ::String,
+                                                namespace_name: ::String,
+                                                ?snapshot_retention_period: ::Integer
+                                              ) -> _CreateSnapshotCopyConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotCopyConfigurationResponseSuccess
+
+      interface _CreateUsageLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUsageLimitResponse]
+        def usage_limit: () -> Types::UsageLimit
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#create_usage_limit-instance_method
+      def create_usage_limit: (
+                                amount: ::Integer,
+                                ?breach_action: ("log" | "emit-metric" | "deactivate"),
+                                ?period: ("daily" | "weekly" | "monthly"),
+                                resource_arn: ::String,
+                                usage_type: ("serverless-compute" | "cross-region-datasharing")
+                              ) -> _CreateUsageLimitResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUsageLimitResponseSuccess
+
+      interface _CreateWorkgroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkgroupResponse]
+        def workgroup: () -> Types::Workgroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#create_workgroup-instance_method
+      def create_workgroup: (
+                              ?base_capacity: ::Integer,
+                              ?config_parameters: Array[
+                                {
+                                  parameter_key: ::String?,
+                                  parameter_value: ::String?
+                                },
+                              ],
+                              ?enhanced_vpc_routing: bool,
+                              ?max_capacity: ::Integer,
+                              namespace_name: ::String,
+                              ?port: ::Integer,
+                              ?publicly_accessible: bool,
+                              ?security_group_ids: Array[::String],
+                              ?subnet_ids: Array[::String],
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ],
+                              workgroup_name: ::String
+                            ) -> _CreateWorkgroupResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkgroupResponseSuccess
+
+      interface _DeleteCustomDomainAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCustomDomainAssociationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#delete_custom_domain_association-instance_method
+      def delete_custom_domain_association: (
+                                              custom_domain_name: ::String,
+                                              workgroup_name: ::String
+                                            ) -> _DeleteCustomDomainAssociationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomDomainAssociationResponseSuccess
+
+      interface _DeleteEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEndpointAccessResponse]
+        def endpoint: () -> Types::EndpointAccess
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#delete_endpoint_access-instance_method
+      def delete_endpoint_access: (
+                                    endpoint_name: ::String
+                                  ) -> _DeleteEndpointAccessResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEndpointAccessResponseSuccess
+
+      interface _DeleteNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNamespaceResponse]
+        def namespace: () -> Types::Namespace
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#delete_namespace-instance_method
+      def delete_namespace: (
+                              ?final_snapshot_name: ::String,
+                              ?final_snapshot_retention_period: ::Integer,
+                              namespace_name: ::String
+                            ) -> _DeleteNamespaceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNamespaceResponseSuccess
+
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
+      interface _DeleteScheduledActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteScheduledActionResponse]
+        def scheduled_action: () -> Types::ScheduledActionResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#delete_scheduled_action-instance_method
+      def delete_scheduled_action: (
+                                     scheduled_action_name: ::String
+                                   ) -> _DeleteScheduledActionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteScheduledActionResponseSuccess
+
+      interface _DeleteSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSnapshotResponse]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#delete_snapshot-instance_method
+      def delete_snapshot: (
+                             snapshot_name: ::String
+                           ) -> _DeleteSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSnapshotResponseSuccess
+
+      interface _DeleteSnapshotCopyConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSnapshotCopyConfigurationResponse]
+        def snapshot_copy_configuration: () -> Types::SnapshotCopyConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#delete_snapshot_copy_configuration-instance_method
+      def delete_snapshot_copy_configuration: (
+                                                snapshot_copy_configuration_id: ::String
+                                              ) -> _DeleteSnapshotCopyConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSnapshotCopyConfigurationResponseSuccess
+
+      interface _DeleteUsageLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUsageLimitResponse]
+        def usage_limit: () -> Types::UsageLimit
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#delete_usage_limit-instance_method
+      def delete_usage_limit: (
+                                usage_limit_id: ::String
+                              ) -> _DeleteUsageLimitResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUsageLimitResponseSuccess
+
+      interface _DeleteWorkgroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkgroupResponse]
+        def workgroup: () -> Types::Workgroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#delete_workgroup-instance_method
+      def delete_workgroup: (
+                              workgroup_name: ::String
+                            ) -> _DeleteWorkgroupResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkgroupResponseSuccess
+
+      interface _GetCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCredentialsResponse]
+        def db_password: () -> ::String
+        def db_user: () -> ::String
+        def expiration: () -> ::Time
+        def next_refresh_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#get_credentials-instance_method
+      def get_credentials: (
+                             ?custom_domain_name: ::String,
+                             ?db_name: ::String,
+                             ?duration_seconds: ::Integer,
+                             ?workgroup_name: ::String
+                           ) -> _GetCredentialsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCredentialsResponseSuccess
+
+      interface _GetCustomDomainAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCustomDomainAssociationResponse]
+        def custom_domain_certificate_arn: () -> ::String
+        def custom_domain_certificate_expiry_time: () -> ::Time
+        def custom_domain_name: () -> ::String
+        def workgroup_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#get_custom_domain_association-instance_method
+      def get_custom_domain_association: (
+                                           custom_domain_name: ::String,
+                                           workgroup_name: ::String
+                                         ) -> _GetCustomDomainAssociationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCustomDomainAssociationResponseSuccess
+
+      interface _GetEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEndpointAccessResponse]
+        def endpoint: () -> Types::EndpointAccess
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#get_endpoint_access-instance_method
+      def get_endpoint_access: (
+                                 endpoint_name: ::String
+                               ) -> _GetEndpointAccessResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEndpointAccessResponseSuccess
+
+      interface _GetNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNamespaceResponse]
+        def namespace: () -> Types::Namespace
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#get_namespace-instance_method
+      def get_namespace: (
+                           namespace_name: ::String
+                         ) -> _GetNamespaceResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNamespaceResponseSuccess
+
+      interface _GetRecoveryPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecoveryPointResponse]
+        def recovery_point: () -> Types::RecoveryPoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#get_recovery_point-instance_method
+      def get_recovery_point: (
+                                recovery_point_id: ::String
+                              ) -> _GetRecoveryPointResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecoveryPointResponseSuccess
+
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResponse]
+        def resource_policy: () -> Types::ResourcePolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 resource_arn: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _GetScheduledActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetScheduledActionResponse]
+        def scheduled_action: () -> Types::ScheduledActionResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#get_scheduled_action-instance_method
+      def get_scheduled_action: (
+                                  scheduled_action_name: ::String
+                                ) -> _GetScheduledActionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetScheduledActionResponseSuccess
+
+      interface _GetSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSnapshotResponse]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#get_snapshot-instance_method
+      def get_snapshot: (
+                          ?owner_account: ::String,
+                          ?snapshot_arn: ::String,
+                          ?snapshot_name: ::String
+                        ) -> _GetSnapshotResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSnapshotResponseSuccess
+
+      interface _GetTableRestoreStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTableRestoreStatusResponse]
+        def table_restore_status: () -> Types::TableRestoreStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#get_table_restore_status-instance_method
+      def get_table_restore_status: (
+                                      table_restore_request_id: ::String
+                                    ) -> _GetTableRestoreStatusResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableRestoreStatusResponseSuccess
+
+      interface _GetUsageLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUsageLimitResponse]
+        def usage_limit: () -> Types::UsageLimit
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#get_usage_limit-instance_method
+      def get_usage_limit: (
+                             usage_limit_id: ::String
+                           ) -> _GetUsageLimitResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUsageLimitResponseSuccess
+
+      interface _GetWorkgroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkgroupResponse]
+        def workgroup: () -> Types::Workgroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#get_workgroup-instance_method
+      def get_workgroup: (
+                           workgroup_name: ::String
+                         ) -> _GetWorkgroupResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkgroupResponseSuccess
+
+      interface _ListCustomDomainAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomDomainAssociationsResponse]
+        def associations: () -> ::Array[Types::Association]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#list_custom_domain_associations-instance_method
+      def list_custom_domain_associations: (
+                                             ?custom_domain_certificate_arn: ::String,
+                                             ?custom_domain_name: ::String,
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListCustomDomainAssociationsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomDomainAssociationsResponseSuccess
+
+      interface _ListEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEndpointAccessResponse]
+        def endpoints: () -> ::Array[Types::EndpointAccess]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#list_endpoint_access-instance_method
+      def list_endpoint_access: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?owner_account: ::String,
+                                  ?vpc_id: ::String,
+                                  ?workgroup_name: ::String
+                                ) -> _ListEndpointAccessResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEndpointAccessResponseSuccess
+
+      interface _ListNamespacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNamespacesResponse]
+        def namespaces: () -> ::Array[Types::Namespace]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#list_namespaces-instance_method
+      def list_namespaces: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListNamespacesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNamespacesResponseSuccess
+
+      interface _ListRecoveryPointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecoveryPointsResponse]
+        def next_token: () -> ::String
+        def recovery_points: () -> ::Array[Types::RecoveryPoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#list_recovery_points-instance_method
+      def list_recovery_points: (
+                                  ?end_time: ::Time,
+                                  ?max_results: ::Integer,
+                                  ?namespace_arn: ::String,
+                                  ?namespace_name: ::String,
+                                  ?next_token: ::String,
+                                  ?start_time: ::Time
+                                ) -> _ListRecoveryPointsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecoveryPointsResponseSuccess
+
+      interface _ListScheduledActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListScheduledActionsResponse]
+        def next_token: () -> ::String
+        def scheduled_actions: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#list_scheduled_actions-instance_method
+      def list_scheduled_actions: (
+                                    ?max_results: ::Integer,
+                                    ?namespace_name: ::String,
+                                    ?next_token: ::String
+                                  ) -> _ListScheduledActionsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScheduledActionsResponseSuccess
+
+      interface _ListSnapshotCopyConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSnapshotCopyConfigurationsResponse]
+        def next_token: () -> ::String
+        def snapshot_copy_configurations: () -> ::Array[Types::SnapshotCopyConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#list_snapshot_copy_configurations-instance_method
+      def list_snapshot_copy_configurations: (
+                                               ?max_results: ::Integer,
+                                               ?namespace_name: ::String,
+                                               ?next_token: ::String
+                                             ) -> _ListSnapshotCopyConfigurationsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSnapshotCopyConfigurationsResponseSuccess
+
+      interface _ListSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSnapshotsResponse]
+        def next_token: () -> ::String
+        def snapshots: () -> ::Array[Types::Snapshot]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#list_snapshots-instance_method
+      def list_snapshots: (
+                            ?end_time: ::Time,
+                            ?max_results: ::Integer,
+                            ?namespace_arn: ::String,
+                            ?namespace_name: ::String,
+                            ?next_token: ::String,
+                            ?owner_account: ::String,
+                            ?start_time: ::Time
+                          ) -> _ListSnapshotsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSnapshotsResponseSuccess
+
+      interface _ListTableRestoreStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTableRestoreStatusResponse]
+        def next_token: () -> ::String
+        def table_restore_statuses: () -> ::Array[Types::TableRestoreStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#list_table_restore_status-instance_method
+      def list_table_restore_status: (
+                                       ?max_results: ::Integer,
+                                       ?namespace_name: ::String,
+                                       ?next_token: ::String,
+                                       ?workgroup_name: ::String
+                                     ) -> _ListTableRestoreStatusResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTableRestoreStatusResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListUsageLimitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUsageLimitsResponse]
+        def next_token: () -> ::String
+        def usage_limits: () -> ::Array[Types::UsageLimit]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#list_usage_limits-instance_method
+      def list_usage_limits: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               ?resource_arn: ::String,
+                               ?usage_type: ("serverless-compute" | "cross-region-datasharing")
+                             ) -> _ListUsageLimitsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUsageLimitsResponseSuccess
+
+      interface _ListWorkgroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkgroupsResponse]
+        def next_token: () -> ::String
+        def workgroups: () -> ::Array[Types::Workgroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#list_workgroups-instance_method
+      def list_workgroups: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?owner_account: ::String
+                           ) -> _ListWorkgroupsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkgroupsResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
+        def resource_policy: () -> Types::ResourcePolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 policy: ::String,
+                                 resource_arn: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _RestoreFromRecoveryPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreFromRecoveryPointResponse]
+        def namespace: () -> Types::Namespace
+        def recovery_point_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#restore_from_recovery_point-instance_method
+      def restore_from_recovery_point: (
+                                         namespace_name: ::String,
+                                         recovery_point_id: ::String,
+                                         workgroup_name: ::String
+                                       ) -> _RestoreFromRecoveryPointResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreFromRecoveryPointResponseSuccess
+
+      interface _RestoreFromSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreFromSnapshotResponse]
+        def namespace: () -> Types::Namespace
+        def owner_account: () -> ::String
+        def snapshot_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#restore_from_snapshot-instance_method
+      def restore_from_snapshot: (
+                                   ?admin_password_secret_kms_key_id: ::String,
+                                   ?manage_admin_password: bool,
+                                   namespace_name: ::String,
+                                   ?owner_account: ::String,
+                                   ?snapshot_arn: ::String,
+                                   ?snapshot_name: ::String,
+                                   workgroup_name: ::String
+                                 ) -> _RestoreFromSnapshotResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreFromSnapshotResponseSuccess
+
+      interface _RestoreTableFromRecoveryPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreTableFromRecoveryPointResponse]
+        def table_restore_status: () -> Types::TableRestoreStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#restore_table_from_recovery_point-instance_method
+      def restore_table_from_recovery_point: (
+                                               ?activate_case_sensitive_identifier: bool,
+                                               namespace_name: ::String,
+                                               new_table_name: ::String,
+                                               recovery_point_id: ::String,
+                                               source_database_name: ::String,
+                                               ?source_schema_name: ::String,
+                                               source_table_name: ::String,
+                                               ?target_database_name: ::String,
+                                               ?target_schema_name: ::String,
+                                               workgroup_name: ::String
+                                             ) -> _RestoreTableFromRecoveryPointResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreTableFromRecoveryPointResponseSuccess
+
+      interface _RestoreTableFromSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreTableFromSnapshotResponse]
+        def table_restore_status: () -> Types::TableRestoreStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#restore_table_from_snapshot-instance_method
+      def restore_table_from_snapshot: (
+                                         ?activate_case_sensitive_identifier: bool,
+                                         namespace_name: ::String,
+                                         new_table_name: ::String,
+                                         snapshot_name: ::String,
+                                         source_database_name: ::String,
+                                         ?source_schema_name: ::String,
+                                         source_table_name: ::String,
+                                         ?target_database_name: ::String,
+                                         ?target_schema_name: ::String,
+                                         workgroup_name: ::String
+                                       ) -> _RestoreTableFromSnapshotResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreTableFromSnapshotResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateCustomDomainAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCustomDomainAssociationResponse]
+        def custom_domain_certificate_arn: () -> ::String
+        def custom_domain_certificate_expiry_time: () -> ::Time
+        def custom_domain_name: () -> ::String
+        def workgroup_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#update_custom_domain_association-instance_method
+      def update_custom_domain_association: (
+                                              custom_domain_certificate_arn: ::String,
+                                              custom_domain_name: ::String,
+                                              workgroup_name: ::String
+                                            ) -> _UpdateCustomDomainAssociationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomDomainAssociationResponseSuccess
+
+      interface _UpdateEndpointAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEndpointAccessResponse]
+        def endpoint: () -> Types::EndpointAccess
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#update_endpoint_access-instance_method
+      def update_endpoint_access: (
+                                    endpoint_name: ::String,
+                                    ?vpc_security_group_ids: Array[::String]
+                                  ) -> _UpdateEndpointAccessResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEndpointAccessResponseSuccess
+
+      interface _UpdateNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNamespaceResponse]
+        def namespace: () -> Types::Namespace
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#update_namespace-instance_method
+      def update_namespace: (
+                              ?admin_password_secret_kms_key_id: ::String,
+                              ?admin_user_password: ::String,
+                              ?admin_username: ::String,
+                              ?default_iam_role_arn: ::String,
+                              ?iam_roles: Array[::String],
+                              ?kms_key_id: ::String,
+                              ?log_exports: Array[("useractivitylog" | "userlog" | "connectionlog")],
+                              ?manage_admin_password: bool,
+                              namespace_name: ::String
+                            ) -> _UpdateNamespaceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNamespaceResponseSuccess
+
+      interface _UpdateScheduledActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateScheduledActionResponse]
+        def scheduled_action: () -> Types::ScheduledActionResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#update_scheduled_action-instance_method
+      def update_scheduled_action: (
+                                     ?enabled: bool,
+                                     ?end_time: ::Time,
+                                     ?role_arn: ::String,
+                                     ?schedule: {
+                                       at: ::Time?,
+                                       cron: ::String?
+                                     },
+                                     ?scheduled_action_description: ::String,
+                                     scheduled_action_name: ::String,
+                                     ?start_time: ::Time,
+                                     ?target_action: {
+                                       create_snapshot: {
+                                         namespace_name: ::String,
+                                         retention_period: ::Integer?,
+                                         snapshot_name_prefix: ::String,
+                                         tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String
+                                           },
+                                         ]?
+                                       }?
+                                     }
+                                   ) -> _UpdateScheduledActionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScheduledActionResponseSuccess
+
+      interface _UpdateSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSnapshotResponse]
+        def snapshot: () -> Types::Snapshot
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#update_snapshot-instance_method
+      def update_snapshot: (
+                             ?retention_period: ::Integer,
+                             snapshot_name: ::String
+                           ) -> _UpdateSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSnapshotResponseSuccess
+
+      interface _UpdateSnapshotCopyConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSnapshotCopyConfigurationResponse]
+        def snapshot_copy_configuration: () -> Types::SnapshotCopyConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#update_snapshot_copy_configuration-instance_method
+      def update_snapshot_copy_configuration: (
+                                                snapshot_copy_configuration_id: ::String,
+                                                ?snapshot_retention_period: ::Integer
+                                              ) -> _UpdateSnapshotCopyConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSnapshotCopyConfigurationResponseSuccess
+
+      interface _UpdateUsageLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUsageLimitResponse]
+        def usage_limit: () -> Types::UsageLimit
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#update_usage_limit-instance_method
+      def update_usage_limit: (
+                                ?amount: ::Integer,
+                                ?breach_action: ("log" | "emit-metric" | "deactivate"),
+                                usage_limit_id: ::String
+                              ) -> _UpdateUsageLimitResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUsageLimitResponseSuccess
+
+      interface _UpdateWorkgroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkgroupResponse]
+        def workgroup: () -> Types::Workgroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftServerless/Client.html#update_workgroup-instance_method
+      def update_workgroup: (
+                              ?base_capacity: ::Integer,
+                              ?config_parameters: Array[
+                                {
+                                  parameter_key: ::String?,
+                                  parameter_value: ::String?
+                                },
+                              ],
+                              ?enhanced_vpc_routing: bool,
+                              ?max_capacity: ::Integer,
+                              ?port: ::Integer,
+                              ?publicly_accessible: bool,
+                              ?security_group_ids: Array[::String],
+                              ?subnet_ids: Array[::String],
+                              workgroup_name: ::String
+                            ) -> _UpdateWorkgroupResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkgroupResponseSuccess
+    end
+  end
+end
+

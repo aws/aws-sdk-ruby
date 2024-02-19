@@ -29,6 +29,7 @@ module Aws::MarketplaceEntitlementService
     InternalServiceErrorException = Shapes::StructureShape.new(name: 'InternalServiceErrorException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
+    PageSizeInteger = Shapes::IntegerShape.new(name: 'PageSizeInteger')
     ProductCode = Shapes::StringShape.new(name: 'ProductCode')
     String = Shapes::StringShape.new(name: 'String')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
@@ -57,7 +58,7 @@ module Aws::MarketplaceEntitlementService
     GetEntitlementsRequest.add_member(:product_code, Shapes::ShapeRef.new(shape: ProductCode, required: true, location_name: "ProductCode"))
     GetEntitlementsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: GetEntitlementFilters, location_name: "Filter"))
     GetEntitlementsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NextToken"))
-    GetEntitlementsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    GetEntitlementsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSizeInteger, location_name: "MaxResults"))
     GetEntitlementsRequest.struct_class = Types::GetEntitlementsRequest
 
     GetEntitlementsResult.add_member(:entitlements, Shapes::ShapeRef.new(shape: EntitlementList, location_name: "Entitlements"))
@@ -85,6 +86,7 @@ module Aws::MarketplaceEntitlementService
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Marketplace Entitlement Service",
+        "serviceId" => "Marketplace Entitlement Service",
         "signatureVersion" => "v4",
         "signingName" => "aws-marketplace",
         "targetPrefix" => "AWSMPEntitlementService",
@@ -100,6 +102,12 @@ module Aws::MarketplaceEntitlementService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
     end
 

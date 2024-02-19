@@ -1,0 +1,216 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoT1ClickDevicesService
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickDevicesService/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _ClaimDevicesByClaimCodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClaimDevicesByClaimCodeResponse]
+        def claim_code: () -> ::String
+        def total: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickDevicesService/Client.html#claim_devices_by_claim_code-instance_method
+      def claim_devices_by_claim_code: (
+                                         claim_code: ::String
+                                       ) -> _ClaimDevicesByClaimCodeResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ClaimDevicesByClaimCodeResponseSuccess
+
+      interface _DescribeDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDeviceResponse]
+        def device_description: () -> Types::DeviceDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickDevicesService/Client.html#describe_device-instance_method
+      def describe_device: (
+                             device_id: ::String
+                           ) -> _DescribeDeviceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDeviceResponseSuccess
+
+      interface _FinalizeDeviceClaimResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FinalizeDeviceClaimResponse]
+        def state: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickDevicesService/Client.html#finalize_device_claim-instance_method
+      def finalize_device_claim: (
+                                   device_id: ::String,
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _FinalizeDeviceClaimResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _FinalizeDeviceClaimResponseSuccess
+
+      interface _GetDeviceMethodsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeviceMethodsResponse]
+        def device_methods: () -> ::Array[Types::DeviceMethod]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickDevicesService/Client.html#get_device_methods-instance_method
+      def get_device_methods: (
+                                device_id: ::String
+                              ) -> _GetDeviceMethodsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeviceMethodsResponseSuccess
+
+      interface _InitiateDeviceClaimResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InitiateDeviceClaimResponse]
+        def state: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickDevicesService/Client.html#initiate_device_claim-instance_method
+      def initiate_device_claim: (
+                                   device_id: ::String
+                                 ) -> _InitiateDeviceClaimResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InitiateDeviceClaimResponseSuccess
+
+      interface _InvokeDeviceMethodResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InvokeDeviceMethodResponse]
+        def device_method_response: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickDevicesService/Client.html#invoke_device_method-instance_method
+      def invoke_device_method: (
+                                  device_id: ::String,
+                                  ?device_method: {
+                                    device_type: ::String?,
+                                    method_name: ::String?
+                                  },
+                                  ?device_method_parameters: ::String
+                                ) -> _InvokeDeviceMethodResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeDeviceMethodResponseSuccess
+
+      interface _ListDeviceEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDeviceEventsResponse]
+        def events: () -> ::Array[Types::DeviceEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickDevicesService/Client.html#list_device_events-instance_method
+      def list_device_events: (
+                                device_id: ::String,
+                                from_time_stamp: ::Time,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                to_time_stamp: ::Time
+                              ) -> _ListDeviceEventsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeviceEventsResponseSuccess
+
+      interface _ListDevicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDevicesResponse]
+        def devices: () -> ::Array[Types::DeviceDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickDevicesService/Client.html#list_devices-instance_method
+      def list_devices: (
+                          ?device_type: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListDevicesResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDevicesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickDevicesService/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickDevicesService/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UnclaimDeviceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UnclaimDeviceResponse]
+        def state: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickDevicesService/Client.html#unclaim_device-instance_method
+      def unclaim_device: (
+                            device_id: ::String
+                          ) -> _UnclaimDeviceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UnclaimDeviceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickDevicesService/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateDeviceStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDeviceStateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickDevicesService/Client.html#update_device_state-instance_method
+      def update_device_state: (
+                                 device_id: ::String,
+                                 ?enabled: bool
+                               ) -> _UpdateDeviceStateResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeviceStateResponseSuccess
+    end
+  end
+end
+

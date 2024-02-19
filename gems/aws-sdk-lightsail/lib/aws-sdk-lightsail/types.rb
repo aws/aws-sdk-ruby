@@ -459,7 +459,7 @@ module Aws::Lightsail
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
-    #   The Lightsail resource type (e.g., `Alarm`).
+    #   The Lightsail resource type of the alarm.
     #   @return [String]
     #
     # @!attribute [rw] support_code
@@ -681,7 +681,7 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] disk_name
-    #   The unique Lightsail disk name (e.g., `my-disk`).
+    #   The unique Lightsail disk name (`my-disk`).
     #   @return [String]
     #
     # @!attribute [rw] instance_name
@@ -690,7 +690,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] disk_path
-    #   The disk path to expose to the instance (e.g., `/dev/xvdf`).
+    #   The disk path to expose to the instance (`/dev/xvdf`).
     #   @return [String]
     #
     # @!attribute [rw] auto_mounting
@@ -835,7 +835,7 @@ module Aws::Lightsail
     # included in an automatic snapshot.
     #
     # @!attribute [rw] path
-    #   The path of the disk (e.g., `/dev/xvdf`).
+    #   The path of the disk (`/dev/xvdf`).
     #   @return [String]
     #
     # @!attribute [rw] size_in_gb
@@ -961,20 +961,20 @@ module Aws::Lightsail
     # Describes a blueprint (a virtual private server image).
     #
     # @!attribute [rw] blueprint_id
-    #   The ID for the virtual private server image (e.g.,
-    #   `app_wordpress_4_4` or `app_lamp_7_0`).
+    #   The ID for the virtual private server image (`app_wordpress_4_4` or
+    #   `app_lamp_7_0`).
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The friendly name of the blueprint (e.g., `Amazon Linux`).
+    #   The friendly name of the blueprint (`Amazon Linux`).
     #   @return [String]
     #
     # @!attribute [rw] group
-    #   The group name of the blueprint (e.g., `amazon-linux`).
+    #   The group name of the blueprint (`amazon-linux`).
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the blueprint (e.g., `os` or `app`).
+    #   The type of the blueprint (`os` or `app`).
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -997,8 +997,8 @@ module Aws::Lightsail
     #   @return [Integer]
     #
     # @!attribute [rw] version
-    #   The version number of the operating system, application, or stack
-    #   (e.g., `2016.03.0`).
+    #   The version number of the operating system, application, or stack (
+    #   `2016.03.0`).
     #   @return [String]
     #
     # @!attribute [rw] version_code
@@ -1048,7 +1048,7 @@ module Aws::Lightsail
     # Describes an Amazon Lightsail bucket.
     #
     # @!attribute [rw] resource_type
-    #   The Lightsail resource type of the bucket (for example, `Bucket`).
+    #   The Lightsail resource type of the bucket.
     #   @return [String]
     #
     # @!attribute [rw] access_rules
@@ -1310,23 +1310,23 @@ module Aws::Lightsail
     # private server (or *instance*).
     #
     # @!attribute [rw] price
-    #   The price in US dollars (e.g., `5.0`) of the bundle.
+    #   The price in US dollars (`5.0`) of the bundle.
     #   @return [Float]
     #
     # @!attribute [rw] cpu_count
-    #   The number of vCPUs included in the bundle (e.g., `2`).
+    #   The number of vCPUs included in the bundle (`2`).
     #   @return [Integer]
     #
     # @!attribute [rw] disk_size_in_gb
-    #   The size of the SSD (e.g., `30`).
+    #   The size of the SSD (`30`).
     #   @return [Integer]
     #
     # @!attribute [rw] bundle_id
-    #   The bundle ID (e.g., `micro_1_0`).
+    #   The bundle ID (`micro_1_0`).
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The Amazon EC2 instance type (e.g., `t2.micro`).
+    #   The Amazon EC2 instance type (`t2.micro`).
     #   @return [String]
     #
     # @!attribute [rw] is_active
@@ -1334,24 +1334,24 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] name
-    #   A friendly name for the bundle (e.g., `Micro`).
+    #   A friendly name for the bundle (`Micro`).
     #   @return [String]
     #
     # @!attribute [rw] power
-    #   A numeric value that represents the power of the bundle (e.g.,
-    #   `500`). You can use the bundle's power value in conjunction with a
-    #   blueprint's minimum power value to determine whether the blueprint
-    #   will run on the bundle. For example, you need a bundle with a power
-    #   value of 500 or more to create an instance that uses a blueprint
-    #   with a minimum power value of 500.
+    #   A numeric value that represents the power of the bundle (`500`). You
+    #   can use the bundle's power value in conjunction with a blueprint's
+    #   minimum power value to determine whether the blueprint will run on
+    #   the bundle. For example, you need a bundle with a power value of 500
+    #   or more to create an instance that uses a blueprint with a minimum
+    #   power value of 500.
     #   @return [Integer]
     #
     # @!attribute [rw] ram_size_in_gb
-    #   The amount of RAM in GB (e.g., `2.0`).
+    #   The amount of RAM in GB (`2.0`).
     #   @return [Float]
     #
     # @!attribute [rw] transfer_per_month_in_gb
-    #   The data transfer rate per month in GB (e.g., `2000`).
+    #   The data transfer rate per month in GB (`2000`).
     #   @return [Integer]
     #
     # @!attribute [rw] supported_platforms
@@ -1368,6 +1368,11 @@ module Aws::Lightsail
     #   This parameter only applies to Lightsail for Research resources.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] public_ipv_4_address_count
+    #   An integer that indicates the public ipv4 address count included in
+    #   the bundle, the value is either 0 or 1.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Bundle AWS API Documentation
     #
     class Bundle < Struct.new(
@@ -1382,7 +1387,8 @@ module Aws::Lightsail
       :ram_size_in_gb,
       :transfer_per_month_in_gb,
       :supported_platforms,
-      :supported_app_categories)
+      :supported_app_categories,
+      :public_ipv_4_address_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1610,7 +1616,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the certificate (e.g., `my-certificate`).
+    #   The name of the certificate (`my-certificate`).
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -1626,8 +1632,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] subject_alternative_names
-    #   An array of strings that specify the alternate domains (e.g.,
-    #   `example2.com`) and subdomains (e.g., `blog.example.com`) of the
+    #   An array of strings that specify the alternate domains
+    #   (`example2.com`) and subdomains (`blog.example.com`) of the
     #   certificate.
     #   @return [Array<String>]
     #
@@ -1890,7 +1896,7 @@ module Aws::Lightsail
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
-    #   The Lightsail resource type (e.g., `CloudFormationStackRecord`).
+    #   The Lightsail resource type (`CloudFormationStackRecord`).
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -1927,7 +1933,7 @@ module Aws::Lightsail
     # export snapshot record).
     #
     # @!attribute [rw] resource_type
-    #   The Lightsail resource type (e.g., `ExportSnapshotRecord`).
+    #   The Lightsail resource type (`ExportSnapshotRecord`).
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1999,7 +2005,7 @@ module Aws::Lightsail
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
-    #   The Lightsail resource type (e.g., `ContactMethod`).
+    #   The Lightsail resource type of the contact method.
     #   @return [String]
     #
     # @!attribute [rw] support_code
@@ -2115,8 +2121,7 @@ module Aws::Lightsail
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
-    #   The Lightsail resource type of the container service (i.e.,
-    #   `ContainerService`).
+    #   The Lightsail resource type of the container service.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2299,16 +2304,16 @@ module Aws::Lightsail
     #
     #   A deployment can be in one of the following states:
     #
-    #   * `Activating` - The deployment is being created.
+    #   * `ACTIVATING` - The deployment is being created.
     #
-    #   * `Active` - The deployment was successfully created, and it's
+    #   * `ACTIVE` - The deployment was successfully created, and it's
     #     currently running on the container service. The container service
     #     can have only one deployment in an active state at a time.
     #
-    #   * `Inactive` - The deployment was previously successfully created,
+    #   * `INACTIVE` - The deployment was previously successfully created,
     #     but it is not currently running on the container service.
     #
-    #   * `Failed` - The deployment failed. Use the `GetContainerLog` action
+    #   * `FAILED` - The deployment failed. Use the `GetContainerLog` action
     #     to view the log events for the containers in the deployment to try
     #     to determine the reason for the failure.
     #   @return [String]
@@ -2534,7 +2539,7 @@ module Aws::Lightsail
     # base price of the container service.
     #
     # @!attribute [rw] power_id
-    #   The ID of the power (e.g., `nano-1`).
+    #   The ID of the power (`nano-1`).
     #   @return [String]
     #
     # @!attribute [rw] price
@@ -2550,7 +2555,7 @@ module Aws::Lightsail
     #   @return [Float]
     #
     # @!attribute [rw] name
-    #   The friendly name of the power (e.g., `nano`).
+    #   The friendly name of the power (`nano`).
     #   @return [String]
     #
     # @!attribute [rw] is_active
@@ -2954,18 +2959,18 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   The domain name (e.g., `example.com`) for the certificate.
+    #   The domain name (`example.com`) for the certificate.
     #   @return [String]
     #
     # @!attribute [rw] subject_alternative_names
-    #   An array of strings that specify the alternate domains (e.g.,
-    #   `example2.com`) and subdomains (e.g., `blog.example.com`) for the
+    #   An array of strings that specify the alternate domains
+    #   (`example2.com`) and subdomains (`blog.example.com`) for the
     #   certificate.
     #
     #   You can specify a maximum of nine alternate domains (in addition to
     #   the primary domain name).
     #
-    #   Wildcard domain entries (e.g., `*.example.com`) are not supported.
+    #   Wildcard domain entries (`*.example.com`) are not supported.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -3301,12 +3306,12 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] disk_name
-    #   The unique Lightsail disk name (e.g., `my-disk`).
+    #   The unique Lightsail disk name (`my-disk`).
     #   @return [String]
     #
     # @!attribute [rw] disk_snapshot_name
-    #   The name of the disk snapshot (e.g., `my-snapshot`) from which to
-    #   create the new storage disk.
+    #   The name of the disk snapshot (`my-snapshot`) from which to create
+    #   the new storage disk.
     #
     #   Constraint:
     #
@@ -3318,8 +3323,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone where you want to create the disk (e.g.,
-    #   `us-east-2a`). Choose the same Availability Zone as the Lightsail
+    #   The Availability Zone where you want to create the disk
+    #   (`us-east-2a`). Choose the same Availability Zone as the Lightsail
     #   instance where you want to create the disk.
     #
     #   Use the GetRegions operation to list the Availability Zones where
@@ -3327,7 +3332,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] size_in_gb
-    #   The size of the disk in GB (e.g., `32`).
+    #   The size of the disk in GB (`32`).
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -3434,12 +3439,12 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] disk_name
-    #   The unique Lightsail disk name (e.g., `my-disk`).
+    #   The unique Lightsail disk name (`my-disk`).
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone where you want to create the disk (e.g.,
-    #   `us-east-2a`). Use the same Availability Zone as the Lightsail
+    #   The Availability Zone where you want to create the disk
+    #   (`us-east-2a`). Use the same Availability Zone as the Lightsail
     #   instance to which you want to attach the disk.
     #
     #   Use the `get regions` operation to list the Availability Zones where
@@ -3447,7 +3452,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] size_in_gb
-    #   The size of the disk in GB (e.g., `32`).
+    #   The size of the disk in GB (`32`).
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -3489,7 +3494,7 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] disk_name
-    #   The unique name of the source disk (e.g., `Disk-Virginia-1`).
+    #   The unique name of the source disk (`Disk-Virginia-1`).
     #
     #   <note markdown="1"> This parameter cannot be defined together with the `instance name`
     #   parameter. The `disk name` and `instance name` parameters are
@@ -3499,13 +3504,13 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] disk_snapshot_name
-    #   The name of the destination disk snapshot (e.g., `my-disk-snapshot`)
-    #   based on the source disk.
+    #   The name of the destination disk snapshot (`my-disk-snapshot`) based
+    #   on the source disk.
     #   @return [String]
     #
     # @!attribute [rw] instance_name
-    #   The unique name of the source instance (e.g.,
-    #   `Amazon_Linux-512MB-Virginia-1`). When this is defined, a snapshot
+    #   The unique name of the source instance
+    #   (`Amazon_Linux-512MB-Virginia-1`). When this is defined, a snapshot
     #   of the instance's system volume is created.
     #
     #   <note markdown="1"> This parameter cannot be defined together with the `disk name`
@@ -3635,8 +3640,8 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] domain_name
-    #   The domain name (e.g., `example.com`) for which you want to create
-    #   the domain entry.
+    #   The domain name (`example.com`) for which you want to create the
+    #   domain entry.
     #   @return [String]
     #
     # @!attribute [rw] domain_entry
@@ -3668,7 +3673,7 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] domain_name
-    #   The domain name to manage (e.g., `example.com`).
+    #   The domain name to manage (`example.com`).
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3820,8 +3825,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] bundle_id
     #   The bundle of specification information for your virtual private
-    #   server (or *instance*), including the pricing plan (e.g.,
-    #   `micro_1_0`).
+    #   server (or *instance*), including the pricing plan (`micro_1_0`).
     #   @return [String]
     #
     # @!attribute [rw] user_data
@@ -3979,18 +3983,18 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] custom_image_name
-    #   (Deprecated) The name for your custom image.
+    #   (Discontinued) The name for your custom image.
     #
     #   <note markdown="1"> In releases prior to June 12, 2017, this parameter was ignored by
-    #   the API. It is now deprecated.
+    #   the API. It is now discontinued.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] blueprint_id
-    #   The ID for a virtual private server image (e.g., `app_wordpress_4_4`
-    #   or `app_lamp_7_0`). Use the `get blueprints` operation to return a
-    #   list of available images (or *blueprints*).
+    #   The ID for a virtual private server image (`app_wordpress_4_4` or
+    #   `app_lamp_7_0`). Use the `get blueprints` operation to return a list
+    #   of available images (or *blueprints*).
     #
     #   <note markdown="1"> Use active blueprints when creating new instances. Inactive
     #   blueprints are listed to support customers with existing instances
@@ -4003,8 +4007,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] bundle_id
     #   The bundle of specification information for your virtual private
-    #   server (or *instance*), including the pricing plan (e.g.,
-    #   `micro_1_0`).
+    #   server (or *instance*), including the pricing plan (`micro_1_0`).
     #   @return [String]
     #
     # @!attribute [rw] user_data
@@ -4141,7 +4144,7 @@ module Aws::Lightsail
     # @!attribute [rw] health_check_path
     #   The path you provided to perform the load balancer health check. If
     #   you didn't specify a health check path, Lightsail uses the root
-    #   path of your website (e.g., `"/"`).
+    #   path of your website (`"/"`).
     #
     #   You may want to specify a custom health check path other than the
     #   root of your application if your home page loads slowly or has a lot
@@ -4156,8 +4159,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] certificate_domain_name
-    #   The domain name with which your certificate is associated (e.g.,
-    #   `example.com`).
+    #   The domain name with which your certificate is associated
+    #   (`example.com`).
     #
     #   If you specify `certificateDomainName`, then `certificateName` is
     #   required (and vice-versa).
@@ -4165,7 +4168,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] certificate_alternative_names
     #   The optional alternative domains and subdomains to use with your
-    #   SSL/TLS certificate (e.g., `www.example.com`, `example.com`,
+    #   SSL/TLS certificate (`www.example.com`, `example.com`,
     #   `m.example.com`, `blog.example.com`).
     #   @return [Array<String>]
     #
@@ -4251,15 +4254,14 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] certificate_domain_name
-    #   The domain name (e.g., `example.com`) for your SSL/TLS certificate.
+    #   The domain name (`example.com`) for your SSL/TLS certificate.
     #   @return [String]
     #
     # @!attribute [rw] certificate_alternative_names
     #   An array of strings listing alternative domains and subdomains for
     #   your SSL/TLS certificate. Lightsail will de-dupe the names for you.
     #   You can have a maximum of 9 alternative names (in addition to the 1
-    #   primary domain). We do not support wildcards (e.g.,
-    #   `*.example.com`).
+    #   primary domain). We do not support wildcards (`*.example.com`).
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -4964,7 +4966,7 @@ module Aws::Lightsail
     class DeleteContainerServiceResult < Aws::EmptyStructure; end
 
     # @!attribute [rw] disk_name
-    #   The unique name of the disk you want to delete (e.g., `my-disk`).
+    #   The unique name of the disk you want to delete (`my-disk`).
     #   @return [String]
     #
     # @!attribute [rw] force_delete_add_ons
@@ -4996,8 +4998,8 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] disk_snapshot_name
-    #   The name of the disk snapshot you want to delete (e.g.,
-    #   `my-disk-snapshot`).
+    #   The name of the disk snapshot you want to delete
+    #   (`my-disk-snapshot`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDiskSnapshotRequest AWS API Documentation
@@ -5429,7 +5431,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] disk_name
     #   The unique name of the disk you want to detach from your instance
-    #   (e.g., `my-disk`).
+    #   (`my-disk`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachDiskRequest AWS API Documentation
@@ -5569,7 +5571,7 @@ module Aws::Lightsail
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
-    #   The Lightsail resource type (e.g., `Disk`).
+    #   The Lightsail resource type (`Disk`).
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -5616,21 +5618,21 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] attachment_state
-    #   (Deprecated) The attachment state of the disk.
+    #   (Discontinued) The attachment state of the disk.
     #
     #   <note markdown="1"> In releases prior to November 14, 2017, this parameter returned
     #   `attached` for system disks in the API response. It is now
-    #   deprecated, but still included in the response. Use `isAttached`
+    #   discontinued, but still included in the response. Use `isAttached`
     #   instead.
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] gb_in_use
-    #   (Deprecated) The number of GB in use by the disk.
+    #   (Discontinued) The number of GB in use by the disk.
     #
     #   <note markdown="1"> In releases prior to November 14, 2017, this parameter was not
-    #   included in the API response. It is now deprecated.
+    #   included in the API response. It is now discontinued.
     #
     #    </note>
     #   @return [Integer]
@@ -5678,7 +5680,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] size_in_gb
-    #   The size of the disk in GB (e.g., `32`).
+    #   The size of the disk in GB (`32`).
     #   @return [Integer]
     #
     # @!attribute [rw] is_system_disk
@@ -5705,7 +5707,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] new_disk_name
-    #   The new disk name (e.g., `my-new-disk`).
+    #   The new disk name (`my-new-disk`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DiskMap AWS API Documentation
@@ -5720,7 +5722,7 @@ module Aws::Lightsail
     # Describes a block storage disk snapshot.
     #
     # @!attribute [rw] name
-    #   The name of the disk snapshot (e.g., `my-disk-snapshot`).
+    #   The name of the disk snapshot (`my-disk-snapshot`).
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -5744,7 +5746,7 @@ module Aws::Lightsail
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
-    #   The Lightsail resource type (e.g., `DiskSnapshot`).
+    #   The Lightsail resource type (`DiskSnapshot`).
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -5819,7 +5821,7 @@ module Aws::Lightsail
     # Describes a disk snapshot.
     #
     # @!attribute [rw] size_in_gb
-    #   The size of the disk in GB (e.g., `32`).
+    #   The size of the disk in GB (`32`).
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DiskSnapshotInfo AWS API Documentation
@@ -5918,8 +5920,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the domain recordset (e.g.,
-    #   `arn:aws:lightsail:global:123456789101:Domain/824cede0-abc7-4f84-8dbc-12345EXAMPLE`).
+    #   The Amazon Resource Name (ARN) of the domain recordset
+    #   (`arn:aws:lightsail:global:123456789101:Domain/824cede0-abc7-4f84-8dbc-12345EXAMPLE`).
     #   @return [String]
     #
     # @!attribute [rw] support_code
@@ -5989,8 +5991,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] target
-    #   The target IP address (e.g., `192.0.2.0`), or AWS name server (e.g.,
-    #   `ns-111.awsdns-22.com.`).
+    #   The target IP address (`192.0.2.0`), or AWS name server
+    #   (`ns-111.awsdns-22.com.`).
     #
     #   For Lightsail load balancers, the value looks like
     #   `ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com`.
@@ -6038,10 +6040,10 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] options
-    #   (Deprecated) The options for the domain entry.
+    #   (Discontinued) The options for the domain entry.
     #
     #   <note markdown="1"> In releases prior to November 29, 2017, this parameter was not
-    #   included in the API response. It is now deprecated.
+    #   included in the API response. It is now discontinued.
     #
     #    </note>
     #   @return [Hash<String,String>]
@@ -6237,7 +6239,7 @@ module Aws::Lightsail
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
-    #   The Lightsail resource type (e.g., `ExportSnapshotRecord`).
+    #   The Lightsail resource type (`ExportSnapshotRecord`).
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -6272,8 +6274,7 @@ module Aws::Lightsail
     # Describes the source of an export snapshot record.
     #
     # @!attribute [rw] resource_type
-    #   The Lightsail resource type (e.g., `InstanceSnapshot` or
-    #   `DiskSnapshot`).
+    #   The Lightsail resource type (`InstanceSnapshot` or `DiskSnapshot`).
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -6461,7 +6462,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type (e.g., `Instance` or `Disk`).
+    #   The resource type of the automatic snapshot. The possible values are
+    #   `Instance`, and `Disk`.
     #   @return [String]
     #
     # @!attribute [rw] auto_snapshots
@@ -7364,7 +7366,7 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] disk_name
-    #   The name of the disk (e.g., `my-disk`).
+    #   The name of the disk (`my-disk`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDiskRequest AWS API Documentation
@@ -7388,7 +7390,7 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] disk_snapshot_name
-    #   The name of the disk snapshot (e.g., `my-disk-snapshot`).
+    #   The name of the disk snapshot (`my-disk-snapshot`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDiskSnapshotRequest AWS API Documentation
@@ -7535,8 +7537,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] create_time
-    #   The timestamp of the last cache reset (e.g., `1479734909.17`) in
-    #   Unix time format.
+    #   The timestamp of the last cache reset (`1479734909.17`) in Unix time
+    #   format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDistributionLatestCacheResetResult AWS API Documentation
@@ -8765,11 +8767,11 @@ module Aws::Lightsail
     #   @return [Array<Types::Operation>]
     #
     # @!attribute [rw] next_page_count
-    #   (Deprecated) Returns the number of pages of results that remain.
+    #   (Discontinued) Returns the number of pages of results that remain.
     #
     #   <note markdown="1"> In releases prior to June 12, 2017, this parameter returned `null`
-    #   by the API. It is now deprecated, and the API returns the `next page
-    #   token` parameter instead.
+    #   by the API. It is now discontinued, and the API returns the `next
+    #   page token` parameter instead.
     #
     #    </note>
     #   @return [String]
@@ -8841,13 +8843,13 @@ module Aws::Lightsail
     # @!attribute [rw] include_availability_zones
     #   A Boolean value indicating whether to also include Availability
     #   Zones in your get regions request. Availability Zones are indicated
-    #   with a letter: e.g., `us-east-2a`.
+    #   with a letter: `us-east-2a`.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_relational_database_availability_zones
     #   A Boolean value indicating whether to also include Availability
     #   Zones for databases in your get regions request. Availability Zones
-    #   are indicated with a letter (e.g., `us-east-2a`).
+    #   are indicated with a letter (`us-east-2a`).
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRegionsRequest AWS API Documentation
@@ -9522,6 +9524,52 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_name
+    #   The name of the resource for which you are requesting information.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_token
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetSetupHistory` request.
+    #   If your results are paginated, the response will return a next page
+    #   token that you can specify as the page token in a subsequent
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetSetupHistoryRequest AWS API Documentation
+    #
+    class GetSetupHistoryRequest < Struct.new(
+      :resource_name,
+      :page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] setup_history
+    #   The historical information that's returned.
+    #   @return [Array<Types::SetupHistory>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to advance to the next page of results from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another `GetSetupHistory`
+    #   request and specify the next page token using the pageToken
+    #   parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetSetupHistoryResult AWS API Documentation
+    #
+    class GetSetupHistoryResult < Struct.new(
+      :setup_history,
+      :next_page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] static_ip_name
     #   The name of the static IP in Lightsail.
     #   @return [String]
@@ -9734,9 +9782,9 @@ module Aws::Lightsail
     # Describes the origin resource of an Amazon Lightsail content delivery
     # network (CDN) distribution.
     #
-    # An origin can be a Lightsail instance, bucket, or load balancer. A
-    # distribution pulls content from an origin, caches it, and serves it to
-    # viewers via a worldwide network of edge servers.
+    # An origin can be a Lightsail instance, bucket, container service, or
+    # load balancer. A distribution pulls content from an origin, caches it,
+    # and serves it to viewers via a worldwide network of edge servers.
     #
     # @!attribute [rw] name
     #   The name of the origin resource.
@@ -9764,13 +9812,12 @@ module Aws::Lightsail
     # Describes an instance (a virtual private server).
     #
     # @!attribute [rw] name
-    #   The name the user gave the instance (e.g.,
-    #   `Amazon_Linux-1GB-Ohio-1`).
+    #   The name the user gave the instance (`Amazon_Linux-1GB-Ohio-1`).
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the instance (e.g.,
-    #   `arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE`).
+    #   The Amazon Resource Name (ARN) of the instance
+    #   (`arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE`).
     #   @return [String]
     #
     # @!attribute [rw] support_code
@@ -9781,8 +9828,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the instance was created (e.g., `1479734909.17`)
-    #   in Unix time format.
+    #   The timestamp when the instance was created (`1479734909.17`) in
+    #   Unix time format.
     #   @return [Time]
     #
     # @!attribute [rw] location
@@ -9804,15 +9851,15 @@ module Aws::Lightsail
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] blueprint_id
-    #   The blueprint ID (e.g., `os_amlinux_2016_03`).
+    #   The blueprint ID (`os_amlinux_2016_03`).
     #   @return [String]
     #
     # @!attribute [rw] blueprint_name
-    #   The friendly name of the blueprint (e.g., `Amazon Linux`).
+    #   The friendly name of the blueprint (`Amazon Linux`).
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
-    #   The bundle for the instance (e.g., `micro_1_0`).
+    #   The bundle for the instance (`micro_1_0`).
     #   @return [String]
     #
     # @!attribute [rw] add_ons
@@ -9854,16 +9901,16 @@ module Aws::Lightsail
     #   @return [Types::InstanceNetworking]
     #
     # @!attribute [rw] state
-    #   The status code and the state (e.g., `running`) for the instance.
+    #   The status code and the state (`running`) for the instance.
     #   @return [Types::InstanceState]
     #
     # @!attribute [rw] username
-    #   The user name for connecting to the instance (e.g., `ec2-user`).
+    #   The user name for connecting to the instance (`ec2-user`).
     #   @return [String]
     #
     # @!attribute [rw] ssh_key_name
-    #   The name of the SSH key being used to connect to the instance (e.g.,
-    #   `LightsailDefaultKeyPair`).
+    #   The name of the SSH key being used to connect to the instance
+    #   (`LightsailDefaultKeyPair`).
     #   @return [String]
     #
     # @!attribute [rw] metadata_options
@@ -9904,8 +9951,8 @@ module Aws::Lightsail
     #
     # @!attribute [rw] cert_key
     #   For SSH access, the public key to use when accessing your instance
-    #   For OpenSSH clients (e.g., command line SSH), you should save this
-    #   value to `tempkey-cert.pub`.
+    #   For OpenSSH clients (command line SSH), you should save this value
+    #   to `tempkey-cert.pub`.
     #   @return [String]
     #
     # @!attribute [rw] expires_at
@@ -9915,6 +9962,10 @@ module Aws::Lightsail
     # @!attribute [rw] ip_address
     #   The public IP address of the Amazon Lightsail instance.
     #   @return [String]
+    #
+    # @!attribute [rw] ipv6_addresses
+    #   The IPv6 address of the Amazon Lightsail instance.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] password
     #   For RDP access, the password for your Amazon Lightsail instance.
@@ -9944,7 +9995,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] private_key
     #   For SSH access, the temporary private key. For OpenSSH clients
-    #   (e.g., command line SSH), you should save this value to `tempkey`).
+    #   (command line SSH), you should save this value to `tempkey`).
     #   @return [String]
     #
     # @!attribute [rw] protocol
@@ -9970,6 +10021,7 @@ module Aws::Lightsail
       :cert_key,
       :expires_at,
       :ip_address,
+      :ipv6_addresses,
       :password,
       :password_data,
       :private_key,
@@ -9996,7 +10048,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type (e.g., `t2.micro`) to use for the new Amazon EC2
+    #   The instance type (`t2.micro`) to use for the new Amazon EC2
     #   instance.
     #   @return [String]
     #
@@ -10074,7 +10126,7 @@ module Aws::Lightsail
     #   @return [Array<Types::Disk>]
     #
     # @!attribute [rw] ram_size_in_gb
-    #   The amount of RAM in GB on the instance (e.g., `1.0`).
+    #   The amount of RAM in GB on the instance (`1.0`).
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceHardware AWS API Documentation
@@ -10593,8 +10645,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the snapshot (e.g.,
-    #   `arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE`).
+    #   The Amazon Resource Name (ARN) of the snapshot
+    #   (`arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE`).
     #   @return [String]
     #
     # @!attribute [rw] support_code
@@ -10605,8 +10657,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the snapshot was created (e.g.,
-    #   `1479907467.024`).
+    #   The timestamp when the snapshot was created (`1479907467.024`).
     #   @return [Time]
     #
     # @!attribute [rw] location
@@ -10652,19 +10703,18 @@ module Aws::Lightsail
     #
     # @!attribute [rw] from_instance_arn
     #   The Amazon Resource Name (ARN) of the instance from which the
-    #   snapshot was created (e.g.,
-    #   `arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE`).
+    #   snapshot was created
+    #   (`arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE`).
     #   @return [String]
     #
     # @!attribute [rw] from_blueprint_id
-    #   The blueprint ID from which you created the snapshot (e.g.,
-    #   `os_debian_8_3`). A blueprint is a virtual private server (or
+    #   The blueprint ID from which you created the snapshot
+    #   (`os_debian_8_3`). A blueprint is a virtual private server (or
     #   *instance*) image used to create instances quickly.
     #   @return [String]
     #
     # @!attribute [rw] from_bundle_id
-    #   The bundle ID from which you created the snapshot (e.g.,
-    #   `micro_1_0`).
+    #   The bundle ID from which you created the snapshot (`micro_1_0`).
     #   @return [String]
     #
     # @!attribute [rw] is_from_auto_snapshot
@@ -10702,13 +10752,12 @@ module Aws::Lightsail
     # Describes an instance snapshot.
     #
     # @!attribute [rw] from_bundle_id
-    #   The bundle ID from which the source instance was created (e.g.,
-    #   `micro_1_0`).
+    #   The bundle ID from which the source instance was created
+    #   (`micro_1_0`).
     #   @return [String]
     #
     # @!attribute [rw] from_blueprint_id
-    #   The blueprint ID from which the source instance (e.g.,
-    #   `os_debian_8_3`).
+    #   The blueprint ID from which the source instance (`os_debian_8_3`).
     #   @return [String]
     #
     # @!attribute [rw] from_disk_info
@@ -10733,7 +10782,7 @@ module Aws::Lightsail
     #   @return [Integer]
     #
     # @!attribute [rw] name
-    #   The state of the instance (e.g., `running` or `pending`).
+    #   The state of the instance (`running` or `pending`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceState AWS API Documentation
@@ -10803,8 +10852,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the key pair (e.g.,
-    #   `arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE`).
+    #   The Amazon Resource Name (ARN) of the key pair
+    #   (`arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE`).
     #   @return [String]
     #
     # @!attribute [rw] support_code
@@ -10815,8 +10864,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the key pair was created (e.g.,
-    #   `1479816991.349`).
+    #   The timestamp when the key pair was created (`1479816991.349`).
     #   @return [Time]
     #
     # @!attribute [rw] location
@@ -10892,7 +10940,7 @@ module Aws::Lightsail
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
-    #   The Lightsail resource type (e.g., `Distribution`).
+    #   The Lightsail resource type (`Distribution`).
     #   @return [String]
     #
     # @!attribute [rw] alternative_domain_names
@@ -11002,7 +11050,7 @@ module Aws::Lightsail
     # Describes a load balancer.
     #
     # @!attribute [rw] name
-    #   The name of the load balancer (e.g., `my-load-balancer`).
+    #   The name of the load balancer (`my-load-balancer`).
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -11021,13 +11069,13 @@ module Aws::Lightsail
     #   @return [Time]
     #
     # @!attribute [rw] location
-    #   The AWS Region where your load balancer was created (e.g.,
-    #   `us-east-2a`). Lightsail automatically creates your load balancer
-    #   across Availability Zones.
+    #   The AWS Region where your load balancer was created (`us-east-2a`).
+    #   Lightsail automatically creates your load balancer across
+    #   Availability Zones.
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
-    #   The resource type (e.g., `LoadBalancer`.
+    #   The resource type (`LoadBalancer`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -11136,7 +11184,7 @@ module Aws::Lightsail
     # (SSL).
     #
     # @!attribute [rw] name
-    #   The name of the SSL/TLS certificate (e.g., `my-certificate`).
+    #   The name of the SSL/TLS certificate (`my-certificate`).
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -11160,7 +11208,7 @@ module Aws::Lightsail
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
-    #   The resource type (e.g., `LoadBalancerTlsCertificate`).
+    #   The resource type (`LoadBalancerTlsCertificate`).
     #
     #   * <b> <code>Instance</code> </b> - A Lightsail instance (a virtual
     #     private server)
@@ -11333,8 +11381,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] subject_alternative_names
-    #   An array of strings that specify the alternate domains (e.g.,
-    #   `example2.com`) and subdomains (e.g., `blog.example.com`) for the
+    #   An array of strings that specify the alternate domains
+    #   (`example2.com`) and subdomains (`blog.example.com`) for the
     #   certificate.
     #   @return [Array<String>]
     #
@@ -11641,7 +11689,7 @@ module Aws::Lightsail
     #   @return [Float]
     #
     # @!attribute [rw] timestamp
-    #   The timestamp (e.g., `1479816991.349`).
+    #   The timestamp (`1479816991.349`).
     #   @return [Time]
     #
     # @!attribute [rw] unit
@@ -11819,8 +11867,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the operation was initialized (e.g.,
-    #   `1479816991.349`).
+    #   The timestamp when the operation was initialized (`1479816991.349`).
     #   @return [Time]
     #
     # @!attribute [rw] location
@@ -11832,7 +11879,7 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] operation_details
-    #   Details about the operation (e.g., `Debian-1GB-Ohio-1`).
+    #   Details about the operation (`Debian-1GB-Ohio-1`).
     #   @return [String]
     #
     # @!attribute [rw] operation_type
@@ -11844,7 +11891,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] status_changed_at
-    #   The timestamp when the status was changed (e.g., `1479816991.349`).
+    #   The timestamp when the status was changed (`1479816991.349`).
     #   @return [Time]
     #
     # @!attribute [rw] error_code
@@ -11911,7 +11958,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type of the origin resource (e.g., *Instance*).
+    #   The resource type of the origin resource (*Instance*).
     #   @return [String]
     #
     # @!attribute [rw] region_name
@@ -12586,21 +12633,21 @@ module Aws::Lightsail
     # Describes the Amazon Web Services Region.
     #
     # @!attribute [rw] continent_code
-    #   The continent code (e.g., `NA`, meaning North America).
+    #   The continent code (`NA`, meaning North America).
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the Amazon Web Services Region (e.g., `This
-    #   region is recommended to serve users in the eastern United States
-    #   and eastern Canada`).
+    #   The description of the Amazon Web Services Region (`This region is
+    #   recommended to serve users in the eastern United States and eastern
+    #   Canada`).
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The display name (e.g., `Ohio`).
+    #   The display name (`Ohio`).
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The region name (e.g., `us-east-2`).
+    #   The region name (`us-east-2`).
     #   @return [String]
     #
     # @!attribute [rw] availability_zones
@@ -13328,8 +13375,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] create_time
-    #   The timestamp of the reset cache request (e.g., `1479734909.17`) in
-    #   Unix time format.
+    #   The timestamp of the reset cache request (`1479734909.17`) in Unix
+    #   time format.
     #   @return [Time]
     #
     # @!attribute [rw] operation
@@ -13528,7 +13575,7 @@ module Aws::Lightsail
     # @!attribute [rw] resource_type
     #   The resource type.
     #
-    #   The possible values are `Distribution`, `Instance`, and
+    #   The resource values are `Distribution`, `Instance`, and
     #   `LoadBalancer`.
     #
     #   <note markdown="1"> Distribution-related APIs are available only in the N. Virginia
@@ -13619,6 +13666,187 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Returns details about the commands that were run.
+    #
+    # @!attribute [rw] command
+    #   The command that was executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] date_time
+    #   The timestamp for when the request was run.
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   The name of the target resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the `SetupInstanceHttps` request.
+    #   @return [String]
+    #
+    # @!attribute [rw] standard_error
+    #   The text written by the command to stderr.
+    #   @return [String]
+    #
+    # @!attribute [rw] standard_output
+    #   The text written by the command to stdout.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The current version of the script..
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/SetupExecutionDetails AWS API Documentation
+    #
+    class SetupExecutionDetails < Struct.new(
+      :command,
+      :date_time,
+      :name,
+      :status,
+      :standard_error,
+      :standard_output,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns a list of the commands that were ran on the target resource.
+    #
+    # The status of each command is also returned.
+    #
+    # @!attribute [rw] operation_id
+    #   A GUID that's used to identify the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] request
+    #   Information about the specified request.
+    #   @return [Types::SetupRequest]
+    #
+    # @!attribute [rw] resource
+    #   The target resource name for the request.
+    #   @return [Types::SetupHistoryResource]
+    #
+    # @!attribute [rw] execution_details
+    #   Describes the full details of the request.
+    #   @return [Array<Types::SetupExecutionDetails>]
+    #
+    # @!attribute [rw] status
+    #   The status of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/SetupHistory AWS API Documentation
+    #
+    class SetupHistory < Struct.new(
+      :operation_id,
+      :request,
+      :resource,
+      :execution_details,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Lightsail resource that `SetupHistory` was ran on.
+    #
+    # @!attribute [rw] name
+    #   The name of the Lightsail resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Lightsail resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp for when the resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] location
+    #   Describes the resource location.
+    #   @return [Types::ResourceLocation]
+    #
+    # @!attribute [rw] resource_type
+    #   The Lightsail resource type. For example, `Instance`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/SetupHistoryResource AWS API Documentation
+    #
+    class SetupHistoryResource < Struct.new(
+      :name,
+      :arn,
+      :created_at,
+      :location,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_name
+    #   The name of the Lightsail instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   The contact method for SSL/TLS certificate renewal alerts. You can
+    #   enter one email address.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_names
+    #   The name of the domain and subdomains that were specified for the
+    #   SSL/TLS certificate.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] certificate_provider
+    #   The certificate authority that issues the SSL/TLS certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/SetupInstanceHttpsRequest AWS API Documentation
+    #
+    class SetupInstanceHttpsRequest < Struct.new(
+      :instance_name,
+      :email_address,
+      :domain_names,
+      :certificate_provider)
+      SENSITIVE = [:email_address]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   The available API operations for `SetupInstanceHttps`.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/SetupInstanceHttpsResult AWS API Documentation
+    #
+    class SetupInstanceHttpsResult < Struct.new(
+      :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information that was submitted during the `SetupInstanceHttps`
+    # request. Email information is redacted for privacy.
+    #
+    # @!attribute [rw] instance_name
+    #   The name of the Lightsail instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_names
+    #   The name of the domain and subdomains that the SSL/TLS certificate
+    #   secures.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] certificate_provider
+    #   The Certificate Authority (CA) that issues the SSL/TLS certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/SetupRequest AWS API Documentation
+    #
+    class SetupRequest < Struct.new(
+      :instance_name,
+      :domain_names,
+      :certificate_provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_name
     #   The resource name.
     #   @return [String]
@@ -13698,12 +13926,12 @@ module Aws::Lightsail
     # Describes a static IP.
     #
     # @!attribute [rw] name
-    #   The name of the static IP (e.g., `StaticIP-Ohio-EXAMPLE`).
+    #   The name of the static IP (`StaticIP-Ohio-EXAMPLE`).
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the static IP (e.g.,
-    #   `arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE`).
+    #   The Amazon Resource Name (ARN) of the static IP
+    #   (`arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE`).
     #   @return [String]
     #
     # @!attribute [rw] support_code
@@ -13714,8 +13942,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when the static IP was created (e.g.,
-    #   `1479735304.222`).
+    #   The timestamp when the static IP was created (`1479735304.222`).
     #   @return [Time]
     #
     # @!attribute [rw] location
@@ -13731,8 +13958,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] attached_to
-    #   The instance where the static IP is attached (e.g.,
-    #   `Amazon_Linux-1GB-Ohio-1`).
+    #   The instance where the static IP is attached
+    #   (`Amazon_Linux-1GB-Ohio-1`).
     #   @return [String]
     #
     # @!attribute [rw] is_attached
@@ -14499,8 +14726,8 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] load_balancer_name
-    #   The name of the load balancer that you want to modify (e.g.,
-    #   `my-load-balancer`.
+    #   The name of the load balancer that you want to modify
+    #   (`my-load-balancer`.
     #   @return [String]
     #
     # @!attribute [rw] attribute_name
@@ -14702,6 +14929,19 @@ module Aws::Lightsail
     #   database.
     #   @return [String]
     #
+    # @!attribute [rw] relational_database_blueprint_id
+    #   This parameter is used to update the major version of the database.
+    #   Enter the `blueprintId` for the major version that you want to
+    #   update to.
+    #
+    #   Use the [GetRelationalDatabaseBlueprints][1] action to get a list of
+    #   available blueprint IDs.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRelationalDatabaseBlueprints.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabaseRequest AWS API Documentation
     #
     class UpdateRelationalDatabaseRequest < Struct.new(
@@ -14714,7 +14954,8 @@ module Aws::Lightsail
       :disable_backup_retention,
       :publicly_accessible,
       :apply_immediately,
-      :ca_certificate_identifier)
+      :ca_certificate_identifier,
+      :relational_database_blueprint_id)
       SENSITIVE = [:master_user_password]
       include Aws::Structure
     end

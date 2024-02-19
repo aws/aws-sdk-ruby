@@ -1,0 +1,79 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ChimeSDKMeetings
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class BadRequestException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class ForbiddenException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class NotFoundException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+        def request_id: () -> ::String
+        def resource_name: () -> ::String
+      end
+      class ServiceFailureException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+        def request_id: () -> ::String
+        def retry_after_seconds: () -> ::String
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+        def request_id: () -> ::String
+        def resource_name: () -> ::String
+      end
+      class UnauthorizedException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class UnprocessableEntityException < ::Aws::Errors::ServiceError
+        def code: () -> ::String
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+    end
+  end
+end

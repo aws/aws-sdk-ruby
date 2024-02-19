@@ -91,16 +91,16 @@ module Aws::Transfer
             operation_name: :describe_server,
             acceptors: [
               {
-                "argument" => "server.state",
-                "expected" => "OFFLINE",
                 "matcher" => "path",
-                "state" => "success"
+                "argument" => "server.state",
+                "state" => "success",
+                "expected" => "OFFLINE"
               },
               {
-                "argument" => "server.state",
-                "expected" => "STOP_FAILED",
                 "matcher" => "path",
-                "state" => "failure"
+                "argument" => "server.state",
+                "state" => "failure",
+                "expected" => "STOP_FAILED"
               }
             ]
           )
@@ -135,16 +135,16 @@ module Aws::Transfer
             operation_name: :describe_server,
             acceptors: [
               {
-                "argument" => "server.state",
-                "expected" => "ONLINE",
                 "matcher" => "path",
-                "state" => "success"
+                "argument" => "server.state",
+                "state" => "success",
+                "expected" => "ONLINE"
               },
               {
-                "argument" => "server.state",
-                "expected" => "START_FAILED",
                 "matcher" => "path",
-                "state" => "failure"
+                "argument" => "server.state",
+                "state" => "failure",
+                "expected" => "START_FAILED"
               }
             ]
           )

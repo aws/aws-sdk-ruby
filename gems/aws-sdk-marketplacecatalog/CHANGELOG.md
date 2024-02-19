@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2024-02-13)
+------------------
+
+* Feature - AWS Marketplace Catalog API now supports setting intent on requests
+
+1.39.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2023-12-19)
+------------------
+
+* Feature - AWS Marketplace now supports a new API, BatchDescribeEntities, which returns metadata and content for multiple entities.
+
+1.37.0 (2023-11-30)
+------------------
+
+* Feature - This release enhances the ListEntities API to support new entity type-specific strongly typed filters in the request and entity type-specific strongly typed summaries in the response.
+
+1.36.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.34.0 (2023-10-06)
 ------------------
 

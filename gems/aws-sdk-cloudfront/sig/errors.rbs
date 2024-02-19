@@ -1,0 +1,463 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudFront
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDenied < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class BatchTooLarge < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CNAMEAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CachePolicyAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CachePolicyInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CannotChangeImmutablePublicKeyFields < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CannotDeleteEntityWhileInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CloudFrontOriginAccessIdentityAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CloudFrontOriginAccessIdentityInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ContinuousDeploymentPolicyAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ContinuousDeploymentPolicyInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DistributionAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DistributionNotDisabled < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EntityAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EntityLimitExceeded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EntityNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EntitySizeLimitExceeded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FieldLevelEncryptionConfigAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FieldLevelEncryptionConfigInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FieldLevelEncryptionProfileAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FieldLevelEncryptionProfileInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FieldLevelEncryptionProfileSizeExceeded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FunctionAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FunctionInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class FunctionSizeLimitExceeded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IllegalDelete < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IllegalOriginAccessConfiguration < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IllegalUpdate < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InconsistentQuantities < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidArgument < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidDefaultRootObject < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidDomainNameForOriginAccessControl < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidErrorCode < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidForwardCookies < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidFunctionAssociation < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidGeoRestrictionParameter < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidHeadersForS3Origin < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidIfMatchVersion < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidLambdaFunctionAssociation < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidLocationCode < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidMinimumProtocolVersion < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidOrigin < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidOriginAccessControl < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidOriginAccessIdentity < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidOriginKeepaliveTimeout < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidOriginReadTimeout < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidProtocolSettings < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidQueryStringParameters < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRelativePath < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRequiredProtocol < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidResponseCode < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidTTLOrder < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidTagging < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidViewerCertificate < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidWebACLId < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KeyGroupAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MissingBody < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MonitoringSubscriptionAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchCachePolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchCloudFrontOriginAccessIdentity < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchContinuousDeploymentPolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchDistribution < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchFieldLevelEncryptionConfig < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchFieldLevelEncryptionProfile < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchFunctionExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchInvalidation < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchMonitoringSubscription < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchOrigin < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchOriginAccessControl < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchOriginRequestPolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchPublicKey < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchRealtimeLogConfig < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchResource < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchResponseHeadersPolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchStreamingDistribution < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OriginAccessControlAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OriginAccessControlInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OriginRequestPolicyAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OriginRequestPolicyInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PreconditionFailed < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PublicKeyAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PublicKeyInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class QueryArgProfileEmpty < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RealtimeLogConfigAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RealtimeLogConfigInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RealtimeLogConfigOwnerMismatch < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResponseHeadersPolicyAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResponseHeadersPolicyInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class StagingDistributionInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class StreamingDistributionAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class StreamingDistributionNotDisabled < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TestFunctionFailed < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooLongCSPInResponseHeadersPolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyCacheBehaviors < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyCachePolicies < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyCertificates < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyCloudFrontOriginAccessIdentities < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyContinuousDeploymentPolicies < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyCookieNamesInWhiteList < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyCookiesInCachePolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyCookiesInOriginRequestPolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyCustomHeadersInResponseHeadersPolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyDistributionCNAMEs < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyDistributions < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyDistributionsAssociatedToCachePolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyDistributionsAssociatedToFieldLevelEncryptionConfig < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyDistributionsAssociatedToKeyGroup < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyDistributionsAssociatedToOriginAccessControl < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyDistributionsAssociatedToOriginRequestPolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyDistributionsAssociatedToResponseHeadersPolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyDistributionsWithFunctionAssociations < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyDistributionsWithLambdaAssociations < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyDistributionsWithSingleFunctionARN < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyFieldLevelEncryptionConfigs < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyFieldLevelEncryptionContentTypeProfiles < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyFieldLevelEncryptionEncryptionEntities < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyFieldLevelEncryptionFieldPatterns < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyFieldLevelEncryptionProfiles < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyFieldLevelEncryptionQueryArgProfiles < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyFunctionAssociations < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyFunctions < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyHeadersInCachePolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyHeadersInForwardedValues < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyHeadersInOriginRequestPolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyInvalidationsInProgress < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyKeyGroups < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyKeyGroupsAssociatedToDistribution < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyLambdaFunctionAssociations < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyOriginAccessControls < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyOriginCustomHeaders < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyOriginGroupsPerDistribution < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyOriginRequestPolicies < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyOrigins < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyPublicKeys < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyPublicKeysInKeyGroup < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyQueryStringParameters < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyQueryStringsInCachePolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyQueryStringsInOriginRequestPolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyRealtimeLogConfigs < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyRemoveHeadersInResponseHeadersPolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyResponseHeadersPolicies < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyStreamingDistributionCNAMEs < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyStreamingDistributions < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTrustedSigners < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TrustedKeyGroupDoesNotExist < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TrustedSignerDoesNotExist < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedOperation < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

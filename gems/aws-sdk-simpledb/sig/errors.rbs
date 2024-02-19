@@ -1,0 +1,67 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SimpleDB
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AttributeDoesNotExist < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+      class DuplicateItemName < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+      class InvalidNextToken < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+      class InvalidNumberPredicates < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+      class InvalidNumberValueTests < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+      class InvalidParameterValue < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+      class InvalidQueryExpression < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+      class MissingParameter < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+      class NoSuchDomain < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+      class NumberDomainAttributesExceeded < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+      class NumberDomainBytesExceeded < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+      class NumberDomainsExceeded < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+      class NumberItemAttributesExceeded < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+      class NumberSubmittedAttributesExceeded < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+      class NumberSubmittedItemsExceeded < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+      class RequestTimeout < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+      class TooManyRequestedAttributes < ::Aws::Errors::ServiceError
+        def box_usage: () -> ::String
+      end
+    end
+  end
+end

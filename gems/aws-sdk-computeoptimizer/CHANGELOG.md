@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.52.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2023-11-27)
+------------------
+
+* Feature - This release enables AWS Compute Optimizer to analyze and generate recommendations with customization and discounts preferences.
+
+1.50.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.49.0 (2023-09-27)
 ------------------
 

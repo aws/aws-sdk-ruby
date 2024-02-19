@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.97.0 (2023-12-20)
+------------------
+
+* Feature - Add support for cluster insights, new EKS capability that surfaces potentially upgrade impacting issues.
+
+1.96.0 (2023-12-18)
+------------------
+
+* Feature - Add support for EKS Cluster Access Management.
+
+1.95.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.94.0 (2023-11-27)
+------------------
+
+* Feature - This release adds support for EKS Pod Identity feature. EKS Pod Identity makes it easy for customers to obtain IAM permissions for the applications running in their EKS clusters.
+
+1.93.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2023-11-09)
+------------------
+
+* Feature - Adding EKS Anywhere subscription related operations.
+
+1.91.0 (2023-10-24)
+------------------
+
+* Feature - Added support for Cluster Subnet and Security Group mutability.
+
 1.90.0 (2023-09-27)
 ------------------
 

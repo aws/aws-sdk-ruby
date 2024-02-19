@@ -107,6 +107,36 @@ module Aws::CodeBuild
     end
 
     # @!attribute [rw] names
+    #   The names or ARNs of the compute fleets.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetFleetsInput AWS API Documentation
+    #
+    class BatchGetFleetsInput < Struct.new(
+      :names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fleets
+    #   Information about the requested compute fleets.
+    #   @return [Array<Types::Fleet>]
+    #
+    # @!attribute [rw] fleets_not_found
+    #   The names of compute fleets for which information could not be
+    #   found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetFleetsOutput AWS API Documentation
+    #
+    class BatchGetFleetsOutput < Struct.new(
+      :fleets,
+      :fleets_not_found)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] names
     #   The names or ARNs of the build projects. To get information about a
     #   project shared with your Amazon Web Services account, its ARN must
     #   be specified. You cannot specify a shared project using its name.
@@ -377,7 +407,7 @@ module Aws::CodeBuild
     #   * If CodePipeline started the build, the pipeline's name (for
     #     example, `codepipeline/my-demo-pipeline`).
     #
-    #   * If an IAM user started the build, the user's name (for example,
+    #   * If a user started the build, the user's name (for example,
     #     `MyUserName`).
     #
     #   * If the Jenkins plugin for CodeBuild started the build, the string
@@ -720,7 +750,7 @@ module Aws::CodeBuild
     #   * If CodePipeline started the build, the pipeline's name (for
     #     example, `codepipeline/my-demo-pipeline`).
     #
-    #   * If an IAM user started the build, the user's name.
+    #   * If a user started the build, the user's name.
     #
     #   * If the Jenkins plugin for CodeBuild started the build, the string
     #     `CodeBuild-Jenkins-Plugin`.
@@ -1367,6 +1397,141 @@ module Aws::CodeBuild
     end
 
     # @!attribute [rw] name
+    #   The name of the compute fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_capacity
+    #   The initial number of machines allocated to the ﬂeet, which deﬁnes
+    #   the number of builds that can run in parallel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] environment_type
+    #   The environment type of the compute fleet.
+    #
+    #   * The environment type `ARM_CONTAINER` is available only in regions
+    #     US East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia
+    #     Pacific (Singapore), Asia Pacific (Sydney), EU (Frankfurt), and
+    #     South America (São Paulo).
+    #
+    #   * The environment type `LINUX_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
+    #
+    #   * The environment type `LINUX_GPU_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia
+    #     Pacific (Sydney).
+    #
+    #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
+    #     only in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), Asia Pacific (Sydney), Asia Pacific (Tokyo), Asia
+    #     Pacific (Mumbai) and EU (Ireland).
+    #
+    #   * The environment type `WINDOWS_SERVER_2022_CONTAINER` is available
+    #     only in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Sydney),
+    #     Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São
+    #     Paulo) and Asia Pacific (Mumbai).
+    #
+    #   For more information, see [Build environment compute types][1] in
+    #   the *CodeBuild user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_type
+    #   Information about the compute resources the compute fleet uses.
+    #   Available values include:
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
+    #     824 GB of SSD storage for builds. This compute type supports
+    #     Docker images up to 100 GB uncompressed.
+    #
+    #   If you use `BUILD_GENERAL1_SMALL`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #     memory and 2 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
+    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #     memory and 2 vCPUs on ARM-based processors for builds.
+    #
+    #   If you use `BUILD_GENERAL1_LARGE`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #     memory and 8 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255
+    #     GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
+    #     memory and 8 vCPUs on ARM-based processors for builds.
+    #
+    #   For more information, see [Build environment compute types][1] in
+    #   the *CodeBuild User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_configuration
+    #   The scaling configuration of the compute fleet.
+    #   @return [Types::ScalingConfigurationInput]
+    #
+    # @!attribute [rw] tags
+    #   A list of tag key and value pairs associated with this compute
+    #   fleet.
+    #
+    #   These tags are available for use by Amazon Web Services services
+    #   that support CodeBuild build project tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateFleetInput AWS API Documentation
+    #
+    class CreateFleetInput < Struct.new(
+      :name,
+      :base_capacity,
+      :environment_type,
+      :compute_type,
+      :scaling_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fleet
+    #   Information about the compute fleet
+    #   @return [Types::Fleet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateFleetOutput AWS API Documentation
+    #
+    class CreateFleetOutput < Struct.new(
+      :fleet)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
     #   The name of the build project.
     #   @return [String]
     #
@@ -1714,6 +1879,22 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The ARN of the compute fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteFleetInput AWS API Documentation
+    #
+    class DeleteFleetInput < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteFleetOutput AWS API Documentation
+    #
+    class DeleteFleetOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] name
     #   The name of the build project.
     #   @return [String]
@@ -2044,27 +2225,33 @@ module Aws::CodeBuild
     #
     #   We strongly discourage the use of `PLAINTEXT` environment variables
     #   to store sensitive values, especially Amazon Web Services secret key
-    #   IDs and secret access keys. `PLAINTEXT` environment variables can be
-    #   displayed in plain text using the CodeBuild console and the CLI. For
-    #   sensitive values, we recommend you use an environment variable of
-    #   type `PARAMETER_STORE` or `SECRETS_MANAGER`.
+    #   IDs. `PLAINTEXT` environment variables can be displayed in plain
+    #   text using the CodeBuild console and the CLI. For sensitive values,
+    #   we recommend you use an environment variable of type
+    #   `PARAMETER_STORE` or `SECRETS_MANAGER`.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The type of environment variable. Valid values include:
     #
     #   * `PARAMETER_STORE`: An environment variable stored in Systems
-    #     Manager Parameter Store. To learn how to specify a parameter store
-    #     environment variable, see [env/parameter-store][1] in the
-    #     *CodeBuild User Guide*.
+    #     Manager Parameter Store. For environment variables of this type,
+    #     specify the name of the parameter as the `value` of the
+    #     EnvironmentVariable. The parameter value will be substituted for
+    #     the name at runtime. You can also define Parameter Store
+    #     environment variables in the buildspec. To learn how to do so, see
+    #     [env/parameter-store][1] in the *CodeBuild User Guide*.
     #
     #   * `PLAINTEXT`: An environment variable in plain text format. This is
     #     the default value.
     #
     #   * `SECRETS_MANAGER`: An environment variable stored in Secrets
-    #     Manager. To learn how to specify a secrets manager environment
-    #     variable, see [env/secrets-manager][2] in the *CodeBuild User
-    #     Guide*.
+    #     Manager. For environment variables of this type, specify the name
+    #     of the secret as the `value` of the EnvironmentVariable. The
+    #     secret value will be substituted for the name at runtime. You can
+    #     also define Secrets Manager environment variables in the
+    #     buildspec. To learn how to do so, see [env/secrets-manager][2] in
+    #     the *CodeBuild User Guide*.
     #
     #
     #
@@ -2113,6 +2300,199 @@ module Aws::CodeBuild
     class ExportedEnvironmentVariable < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A set of dedicated instances for your build environment.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the compute fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the compute fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the compute fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] created
+    #   The time at which the compute fleet was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified
+    #   The time at which the compute fleet was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the compute fleet.
+    #   @return [Types::FleetStatus]
+    #
+    # @!attribute [rw] base_capacity
+    #   The initial number of machines allocated to the compute ﬂeet, which
+    #   deﬁnes the number of builds that can run in parallel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] environment_type
+    #   The environment type of the compute fleet.
+    #
+    #   * The environment type `ARM_CONTAINER` is available only in regions
+    #     US East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia
+    #     Pacific (Singapore), Asia Pacific (Sydney), EU (Frankfurt), and
+    #     South America (São Paulo).
+    #
+    #   * The environment type `LINUX_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
+    #
+    #   * The environment type `LINUX_GPU_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia
+    #     Pacific (Sydney).
+    #
+    #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
+    #     only in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), Asia Pacific (Sydney), Asia Pacific (Tokyo), Asia
+    #     Pacific (Mumbai) and EU (Ireland).
+    #
+    #   * The environment type `WINDOWS_SERVER_2022_CONTAINER` is available
+    #     only in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Sydney),
+    #     Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São
+    #     Paulo) and Asia Pacific (Mumbai).
+    #
+    #   For more information, see [Build environment compute types][1] in
+    #   the *CodeBuild user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_type
+    #   Information about the compute resources the compute fleet uses.
+    #   Available values include:
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
+    #     824 GB of SSD storage for builds. This compute type supports
+    #     Docker images up to 100 GB uncompressed.
+    #
+    #   If you use `BUILD_GENERAL1_SMALL`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #     memory and 2 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
+    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #     memory and 2 vCPUs on ARM-based processors for builds.
+    #
+    #   If you use `BUILD_GENERAL1_LARGE`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #     memory and 8 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255
+    #     GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
+    #     memory and 8 vCPUs on ARM-based processors for builds.
+    #
+    #   For more information, see [Build environment compute types][1] in
+    #   the *CodeBuild User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_configuration
+    #   The scaling configuration of the compute fleet.
+    #   @return [Types::ScalingConfigurationOutput]
+    #
+    # @!attribute [rw] tags
+    #   A list of tag key and value pairs associated with this compute
+    #   fleet.
+    #
+    #   These tags are available for use by Amazon Web Services services
+    #   that support CodeBuild build project tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Fleet AWS API Documentation
+    #
+    class Fleet < Struct.new(
+      :arn,
+      :name,
+      :id,
+      :created,
+      :last_modified,
+      :status,
+      :base_capacity,
+      :environment_type,
+      :compute_type,
+      :scaling_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of the compute fleet.
+    #
+    # @!attribute [rw] status_code
+    #   The status code of the compute fleet. Valid values include:
+    #
+    #   * `CREATING`: The compute fleet is being created.
+    #
+    #   * `UPDATING`: The compute fleet is being updated.
+    #
+    #   * `ROTATING`: The compute fleet is being rotated.
+    #
+    #   * `DELETING`: The compute fleet is being deleted.
+    #
+    #   * `CREATE_FAILED`: The compute fleet has failed to create.
+    #
+    #   * `UPDATE_ROLLBACK_FAILED`: The compute fleet has failed to update
+    #     and could not rollback to previous state.
+    #
+    #   * `ACTIVE`: The compute fleet has succeeded and is active.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   Additional information about a compute fleet. Valid values include:
+    #
+    #   * `CREATE_FAILED`: The compute fleet has failed to create.
+    #
+    #   * `UPDATE_FAILED`: The compute fleet has failed to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message associated with the status of a compute fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/FleetStatus AWS API Documentation
+    #
+    class FleetStatus < Struct.new(
+      :status_code,
+      :context,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2564,6 +2944,79 @@ module Aws::CodeBuild
     #
     class ListCuratedEnvironmentImagesOutput < Struct.new(
       :platforms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   During a previous call, if there are more than 100 items in the
+    #   list, only the first 100 items are returned, along with a unique
+    #   string called a *nextToken*. To get the next batch of items in the
+    #   list, call this operation again, adding the next token to the call.
+    #   To get all of the items in the list, keep calling this operation
+    #   with each subsequent next token that is returned, until no more next
+    #   tokens are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of paginated compute fleets returned per
+    #   response. Use `nextToken` to iterate pages in the list of returned
+    #   compute fleets.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sort_order
+    #   The order in which to list compute fleets. Valid values include:
+    #
+    #   * `ASCENDING`: List in ascending order.
+    #
+    #   * `DESCENDING`: List in descending order.
+    #
+    #   Use `sortBy` to specify the criterion to be used to list compute
+    #   fleet names.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The criterion to be used to list compute fleet names. Valid values
+    #   include:
+    #
+    #   * `CREATED_TIME`: List based on when each compute fleet was created.
+    #
+    #   * `LAST_MODIFIED_TIME`: List based on when information about each
+    #     compute fleet was last changed.
+    #
+    #   * `NAME`: List based on each compute fleet's name.
+    #
+    #   Use `sortOrder` to specify in what order to list the compute fleet
+    #   names based on the preceding criteria.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListFleetsInput AWS API Documentation
+    #
+    class ListFleetsInput < Struct.new(
+      :next_token,
+      :max_results,
+      :sort_order,
+      :sort_by)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are more than 100 items in the list, only the first 100
+    #   items are returned, along with a unique string called a *nextToken*.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleets
+    #   The list of compute fleet names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListFleetsOutput AWS API Documentation
+    #
+    class ListFleetsOutput < Struct.new(
+      :next_token,
+      :fleets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3027,7 +3480,9 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] deep_link
-    #   The URL to an individual build log in CloudWatch Logs.
+    #   The URL to an individual build log in CloudWatch Logs. The log
+    #   stream is created during the PROVISIONING phase of a build and the
+    #   `deeplink` will not be valid until it is created.
     #   @return [String]
     #
     # @!attribute [rw] s3_deep_link
@@ -3035,9 +3490,12 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_logs_arn
-    #   The ARN of CloudWatch Logs for a build project. Its format is
+    #   The ARN of the CloudWatch Logs stream for a build execution. Its
+    #   format is
     #   `arn:$\{Partition\}:logs:$\{Region\}:$\{Account\}:log-group:$\{LogGroupName\}:log-stream:$\{LogStreamName\}`.
-    #   For more information, see [Resources Defined by CloudWatch Logs][1].
+    #   The CloudWatch Logs stream is created during the PROVISIONING phase
+    #   of a build and the ARN will not be valid until it is created. For
+    #   more information, see [Resources Defined by CloudWatch Logs][1].
     #
     #
     #
@@ -3718,12 +4176,11 @@ module Aws::CodeBuild
     #     (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia
     #     Pacific (Sydney), and EU (Frankfurt).
     #
-    #   * The environment type `LINUX_CONTAINER` with compute type
-    #     `build.general1.2xlarge` is available only in regions US East (N.
-    #     Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU
-    #     (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia
-    #     Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney),
-    #     China (Beijing), and China (Ningxia).
+    #   * The environment type `LINUX_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     Canada (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia
+    #     Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore),
+    #     Asia Pacific (Sydney), China (Beijing), and China (Ningxia).
     #
     #   * The environment type `LINUX_GPU_CONTAINER` is available only in
     #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
@@ -3732,12 +4189,27 @@ module Aws::CodeBuild
     #     Asia Pacific (Sydney) , China (Beijing), and China (Ningxia).
     #   ^
     #
+    #   * The environment types `ARM_LAMBDA_CONTAINER` and
+    #     `LINUX_LAMBDA_CONTAINER` are available only in regions US East (N.
+    #     Virginia), US East (Ohio), US West (Oregon), Asia Pacific
+    #     (Mumbai), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia
+    #     Pacific (Tokyo), EU (Frankfurt), EU (Ireland), and South America
+    #     (São Paulo).
+    #
+    #   ^
+    #   ^
+    #
     #   * The environment types `WINDOWS_CONTAINER` and
     #     `WINDOWS_SERVER_2019_CONTAINER` are available only in regions US
     #     East (N. Virginia), US East (Ohio), US West (Oregon), and EU
     #     (Ireland).
     #
     #   ^
+    #
+    #   <note markdown="1"> If you're using compute fleets during project creation, `type` will
+    #   be ignored.
+    #
+    #    </note>
     #
     #   For more information, see [Build environment compute types][1] in
     #   the *CodeBuild user guide*.
@@ -3782,9 +4254,43 @@ module Aws::CodeBuild
     #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
     #     builds, depending on your environment type.
     #
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #     builds, depending on your environment type.
+    #
     #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
     #     824 GB of SSD storage for builds. This compute type supports
     #     Docker images up to 100 GB uncompressed.
+    #
+    #   * `BUILD_LAMBDA_1GB`: Use up to 1 GB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_2GB`: Use up to 2 GB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_4GB`: Use up to 4 GB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_8GB`: Use up to 8 GB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_10GB`: Use up to 10 GB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   If you use `BUILD_GENERAL1_SMALL`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #     memory and 2 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
+    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #     memory and 2 vCPUs on ARM-based processors for builds.
     #
     #   If you use `BUILD_GENERAL1_LARGE`:
     #
@@ -3797,6 +4303,11 @@ module Aws::CodeBuild
     #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
     #     memory and 8 vCPUs on ARM-based processors for builds.
     #
+    #   <note markdown="1"> If you're using compute fleets during project creation,
+    #   `computeType` will be ignored.
+    #
+    #    </note>
+    #
     #   For more information, see [Build Environment Compute Types][1] in
     #   the *CodeBuild User Guide.*
     #
@@ -3804,6 +4315,10 @@ module Aws::CodeBuild
     #
     #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
     #   @return [String]
+    #
+    # @!attribute [rw] fleet
+    #   A ProjectFleet object to use for this build project.
+    #   @return [Types::ProjectFleet]
     #
     # @!attribute [rw] environment_variables
     #   A set of environment variables to make available to builds for this
@@ -3873,6 +4388,7 @@ module Aws::CodeBuild
       :type,
       :image,
       :compute_type,
+      :fleet,
       :environment_variables,
       :privileged_mode,
       :certificate,
@@ -3942,6 +4458,25 @@ module Aws::CodeBuild
       :mount_point,
       :identifier,
       :mount_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the compute fleet of the build project. For more
+    # information, see [Working with reserved capacity in CodeBuild][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/fleets.html
+    #
+    # @!attribute [rw] fleet_arn
+    #   Specifies the compute fleet ARN for the build project.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectFleet AWS API Documentation
+    #
+    class ProjectFleet < Struct.new(
+      :fleet_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4735,6 +5270,59 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # The scaling configuration input of a compute fleet.
+    #
+    # @!attribute [rw] scaling_type
+    #   The scaling type for a compute fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_tracking_scaling_configs
+    #   A list of `TargetTrackingScalingConfiguration` objects.
+    #   @return [Array<Types::TargetTrackingScalingConfiguration>]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum number of instances in the ﬂeet when auto-scaling.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ScalingConfigurationInput AWS API Documentation
+    #
+    class ScalingConfigurationInput < Struct.new(
+      :scaling_type,
+      :target_tracking_scaling_configs,
+      :max_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scaling configuration output of a compute fleet.
+    #
+    # @!attribute [rw] scaling_type
+    #   The scaling type for a compute fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_tracking_scaling_configs
+    #   A list of `TargetTrackingScalingConfiguration` objects.
+    #   @return [Array<Types::TargetTrackingScalingConfiguration>]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum number of instances in the ﬂeet when auto-scaling.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] desired_capacity
+    #   The desired number of instances in the ﬂeet when auto-scaling.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ScalingConfigurationOutput AWS API Documentation
+    #
+    class ScalingConfigurationOutput < Struct.new(
+      :scaling_type,
+      :target_tracking_scaling_configs,
+      :max_capacity,
+      :desired_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the authorization settings for CodeBuild to access
     # the source code to be built.
     #
@@ -5347,6 +5935,11 @@ module Aws::CodeBuild
     #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] fleet_override
+    #   A ProjectFleet object specified for this build that overrides the
+    #   one defined in the build project.
+    #   @return [Types::ProjectFleet]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildInput AWS API Documentation
     #
     class StartBuildInput < Struct.new(
@@ -5380,7 +5973,8 @@ module Aws::CodeBuild
       :logs_config_override,
       :registry_credential_override,
       :image_pull_credentials_type_override,
-      :debug_session_enabled)
+      :debug_session_enabled,
+      :fleet_override)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5463,6 +6057,25 @@ module Aws::CodeBuild
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines when a new instance is auto-scaled into the compute fleet.
+    #
+    # @!attribute [rw] metric_type
+    #   The metric type to determine auto-scaling.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_value
+    #   The value of `metricType` when to start scaling.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/TargetTrackingScalingConfiguration AWS API Documentation
+    #
+    class TargetTrackingScalingConfiguration < Struct.new(
+      :metric_type,
+      :target_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5580,6 +6193,141 @@ module Aws::CodeBuild
       :total,
       :status_counts,
       :duration_in_nano_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the compute fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_capacity
+    #   The initial number of machines allocated to the compute ﬂeet, which
+    #   deﬁnes the number of builds that can run in parallel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] environment_type
+    #   The environment type of the compute fleet.
+    #
+    #   * The environment type `ARM_CONTAINER` is available only in regions
+    #     US East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia
+    #     Pacific (Singapore), Asia Pacific (Sydney), EU (Frankfurt), and
+    #     South America (São Paulo).
+    #
+    #   * The environment type `LINUX_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
+    #
+    #   * The environment type `LINUX_GPU_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia
+    #     Pacific (Sydney).
+    #
+    #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
+    #     only in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), Asia Pacific (Sydney), Asia Pacific (Tokyo), Asia
+    #     Pacific (Mumbai) and EU (Ireland).
+    #
+    #   * The environment type `WINDOWS_SERVER_2022_CONTAINER` is available
+    #     only in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Sydney),
+    #     Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São
+    #     Paulo) and Asia Pacific (Mumbai).
+    #
+    #   For more information, see [Build environment compute types][1] in
+    #   the *CodeBuild user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_type
+    #   Information about the compute resources the compute fleet uses.
+    #   Available values include:
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
+    #     824 GB of SSD storage for builds. This compute type supports
+    #     Docker images up to 100 GB uncompressed.
+    #
+    #   If you use `BUILD_GENERAL1_SMALL`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #     memory and 2 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
+    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #     memory and 2 vCPUs on ARM-based processors for builds.
+    #
+    #   If you use `BUILD_GENERAL1_LARGE`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #     memory and 8 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255
+    #     GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
+    #     memory and 8 vCPUs on ARM-based processors for builds.
+    #
+    #   For more information, see [Build environment compute types][1] in
+    #   the *CodeBuild User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_configuration
+    #   The scaling configuration of the compute fleet.
+    #   @return [Types::ScalingConfigurationInput]
+    #
+    # @!attribute [rw] tags
+    #   A list of tag key and value pairs associated with this compute
+    #   fleet.
+    #
+    #   These tags are available for use by Amazon Web Services services
+    #   that support CodeBuild build project tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateFleetInput AWS API Documentation
+    #
+    class UpdateFleetInput < Struct.new(
+      :arn,
+      :base_capacity,
+      :environment_type,
+      :compute_type,
+      :scaling_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fleet
+    #   A `Fleet` object.
+    #   @return [Types::Fleet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateFleetOutput AWS API Documentation
+    #
+    class UpdateFleetOutput < Struct.new(
+      :fleet)
       SENSITIVE = []
       include Aws::Structure
     end

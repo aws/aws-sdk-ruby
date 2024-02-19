@@ -1,0 +1,1368 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Kafka
+  module Types
+
+    class AmazonMskCluster
+      attr_accessor msk_cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BatchAssociateScramSecretRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor secret_arn_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchAssociateScramSecretResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor unprocessed_scram_secrets: ::Array[Types::UnprocessedScramSecret]
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BrokerEBSVolumeInfo
+      attr_accessor kafka_broker_node_id: ::String
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      attr_accessor volume_size_gb: ::Integer
+      SENSITIVE: []
+    end
+
+    class BrokerLogs
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogs
+      attr_accessor firehose: Types::Firehose
+      attr_accessor s3: Types::S3
+      SENSITIVE: []
+    end
+
+    class BrokerNodeGroupInfo
+      attr_accessor broker_az_distribution: ("DEFAULT")
+      attr_accessor client_subnets: ::Array[::String]
+      attr_accessor instance_type: ::String
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor storage_info: Types::StorageInfo
+      attr_accessor connectivity_info: Types::ConnectivityInfo
+      attr_accessor zone_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BrokerNodeInfo
+      attr_accessor attached_eni_id: ::String
+      attr_accessor broker_id: ::Float
+      attr_accessor client_subnet: ::String
+      attr_accessor client_vpc_ip_address: ::String
+      attr_accessor current_broker_software_info: Types::BrokerSoftwareInfo
+      attr_accessor endpoints: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BrokerSoftwareInfo
+      attr_accessor configuration_arn: ::String
+      attr_accessor configuration_revision: ::Integer
+      attr_accessor kafka_version: ::String
+      SENSITIVE: []
+    end
+
+    class ClientAuthentication
+      attr_accessor sasl: Types::Sasl
+      attr_accessor tls: Types::Tls
+      attr_accessor unauthenticated: Types::Unauthenticated
+      SENSITIVE: []
+    end
+
+    class VpcConnectivityClientAuthentication
+      attr_accessor sasl: Types::VpcConnectivitySasl
+      attr_accessor tls: Types::VpcConnectivityTls
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogs
+      attr_accessor enabled: bool
+      attr_accessor log_group: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterInfo
+      attr_accessor active_operation_arn: ::String
+      attr_accessor broker_node_group_info: Types::BrokerNodeGroupInfo
+      attr_accessor client_authentication: Types::ClientAuthentication
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor current_broker_software_info: Types::BrokerSoftwareInfo
+      attr_accessor logging_info: Types::LoggingInfo
+      attr_accessor current_version: ::String
+      attr_accessor encryption_info: Types::EncryptionInfo
+      attr_accessor enhanced_monitoring: ("DEFAULT" | "PER_BROKER" | "PER_TOPIC_PER_BROKER" | "PER_TOPIC_PER_PARTITION")
+      attr_accessor number_of_broker_nodes: ::Integer
+      attr_accessor open_monitoring: Types::OpenMonitoring
+      attr_accessor state: ("ACTIVE" | "CREATING" | "DELETING" | "FAILED" | "HEALING" | "MAINTENANCE" | "REBOOTING_BROKER" | "UPDATING")
+      attr_accessor state_info: Types::StateInfo
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor zookeeper_connect_string: ::String
+      attr_accessor zookeeper_connect_string_tls: ::String
+      attr_accessor storage_mode: ("LOCAL" | "TIERED")
+      attr_accessor customer_action_status: ("CRITICAL_ACTION_REQUIRED" | "ACTION_RECOMMENDED" | "NONE")
+      SENSITIVE: []
+    end
+
+    class ClusterOperationInfo
+      attr_accessor client_request_id: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor error_info: Types::ErrorInfo
+      attr_accessor operation_steps: ::Array[Types::ClusterOperationStep]
+      attr_accessor operation_arn: ::String
+      attr_accessor operation_state: ::String
+      attr_accessor operation_type: ::String
+      attr_accessor source_cluster_info: Types::MutableClusterInfo
+      attr_accessor target_cluster_info: Types::MutableClusterInfo
+      attr_accessor vpc_connection_info: Types::VpcConnectionInfo
+      SENSITIVE: []
+    end
+
+    class ClusterOperationStep
+      attr_accessor step_info: Types::ClusterOperationStepInfo
+      attr_accessor step_name: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterOperationStepInfo
+      attr_accessor step_status: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterOperationV2
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_type: ("PROVISIONED" | "SERVERLESS")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor operation_arn: ::String
+      attr_accessor operation_state: ::String
+      attr_accessor operation_type: ::String
+      attr_accessor provisioned: Types::ClusterOperationV2Provisioned
+      attr_accessor serverless: Types::ClusterOperationV2Serverless
+      SENSITIVE: []
+    end
+
+    class ClusterOperationV2Provisioned
+      attr_accessor operation_steps: ::Array[Types::ClusterOperationStep]
+      attr_accessor source_cluster_info: Types::MutableClusterInfo
+      attr_accessor target_cluster_info: Types::MutableClusterInfo
+      attr_accessor vpc_connection_info: Types::VpcConnectionInfo
+      SENSITIVE: []
+    end
+
+    class ClusterOperationV2Serverless
+      attr_accessor vpc_connection_info: Types::VpcConnectionInfoServerless
+      SENSITIVE: []
+    end
+
+    class ClusterOperationV2Summary
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_type: ("PROVISIONED" | "SERVERLESS")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor operation_arn: ::String
+      attr_accessor operation_state: ::String
+      attr_accessor operation_type: ::String
+      SENSITIVE: []
+    end
+
+    class ClientVpcConnection
+      attr_accessor authentication: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor state: ("CREATING" | "AVAILABLE" | "INACTIVE" | "DEACTIVATING" | "DELETING" | "FAILED" | "REJECTED" | "REJECTING")
+      attr_accessor vpc_connection_arn: ::String
+      attr_accessor owner: ::String
+      SENSITIVE: []
+    end
+
+    class VpcConnection
+      attr_accessor vpc_connection_arn: ::String
+      attr_accessor target_cluster_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor authentication: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor state: ("CREATING" | "AVAILABLE" | "INACTIVE" | "DEACTIVATING" | "DELETING" | "FAILED" | "REJECTED" | "REJECTING")
+      SENSITIVE: []
+    end
+
+    class CompatibleKafkaVersion
+      attr_accessor source_version: ::String
+      attr_accessor target_versions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Configuration
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor kafka_versions: ::Array[::String]
+      attr_accessor latest_revision: Types::ConfigurationRevision
+      attr_accessor name: ::String
+      attr_accessor state: ("ACTIVE" | "DELETING" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class ConfigurationInfo
+      attr_accessor arn: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConfigurationRevision
+      attr_accessor creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectivityInfo
+      attr_accessor public_access: Types::PublicAccess
+      attr_accessor vpc_connectivity: Types::VpcConnectivity
+      SENSITIVE: []
+    end
+
+    class ConsumerGroupReplication
+      attr_accessor consumer_groups_to_exclude: ::Array[::String]
+      attr_accessor consumer_groups_to_replicate: ::Array[::String]
+      attr_accessor detect_and_copy_new_consumer_groups: bool
+      attr_accessor synchronise_consumer_group_offsets: bool
+      SENSITIVE: []
+    end
+
+    class ConsumerGroupReplicationUpdate
+      attr_accessor consumer_groups_to_exclude: ::Array[::String]
+      attr_accessor consumer_groups_to_replicate: ::Array[::String]
+      attr_accessor detect_and_copy_new_consumer_groups: bool
+      attr_accessor synchronise_consumer_group_offsets: bool
+      SENSITIVE: []
+    end
+
+    class CreateClusterRequest
+      attr_accessor broker_node_group_info: Types::BrokerNodeGroupInfo
+      attr_accessor client_authentication: Types::ClientAuthentication
+      attr_accessor cluster_name: ::String
+      attr_accessor configuration_info: Types::ConfigurationInfo
+      attr_accessor encryption_info: Types::EncryptionInfo
+      attr_accessor enhanced_monitoring: ("DEFAULT" | "PER_BROKER" | "PER_TOPIC_PER_BROKER" | "PER_TOPIC_PER_PARTITION")
+      attr_accessor kafka_version: ::String
+      attr_accessor logging_info: Types::LoggingInfo
+      attr_accessor number_of_broker_nodes: ::Integer
+      attr_accessor open_monitoring: Types::OpenMonitoringInfo
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor storage_mode: ("LOCAL" | "TIERED")
+      SENSITIVE: []
+    end
+
+    class CreateClusterResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor state: ("ACTIVE" | "CREATING" | "DELETING" | "FAILED" | "HEALING" | "MAINTENANCE" | "REBOOTING_BROKER" | "UPDATING")
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationRequest
+      attr_accessor description: ::String
+      attr_accessor kafka_versions: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor server_properties: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor latest_revision: Types::ConfigurationRevision
+      attr_accessor name: ::String
+      attr_accessor state: ("ACTIVE" | "DELETING" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class CreateReplicatorRequest
+      attr_accessor description: ::String
+      attr_accessor kafka_clusters: ::Array[Types::KafkaCluster]
+      attr_accessor replication_info_list: ::Array[Types::ReplicationInfo]
+      attr_accessor replicator_name: ::String
+      attr_accessor service_execution_role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateReplicatorResponse
+      attr_accessor replicator_arn: ::String
+      attr_accessor replicator_name: ::String
+      attr_accessor replicator_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class CreateVpcConnectionRequest
+      attr_accessor target_cluster_arn: ::String
+      attr_accessor authentication: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor client_subnets: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateVpcConnectionResponse
+      attr_accessor vpc_connection_arn: ::String
+      attr_accessor state: ("CREATING" | "AVAILABLE" | "INACTIVE" | "DEACTIVATING" | "DELETING" | "FAILED" | "REJECTED" | "REJECTING")
+      attr_accessor authentication: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor client_subnets: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor creation_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeleteClusterRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor current_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor state: ("ACTIVE" | "CREATING" | "DELETING" | "FAILED" | "HEALING" | "MAINTENANCE" | "REBOOTING_BROKER" | "UPDATING")
+      SENSITIVE: []
+    end
+
+    class DeleteConfigurationRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfigurationResponse
+      attr_accessor arn: ::String
+      attr_accessor state: ("ACTIVE" | "DELETING" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteReplicatorRequest
+      attr_accessor current_version: ::String
+      attr_accessor replicator_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReplicatorResponse
+      attr_accessor replicator_arn: ::String
+      attr_accessor replicator_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteVpcConnectionRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVpcConnectionResponse
+      attr_accessor vpc_connection_arn: ::String
+      attr_accessor state: ("CREATING" | "AVAILABLE" | "INACTIVE" | "DEACTIVATING" | "DELETING" | "FAILED" | "REJECTED" | "REJECTING")
+      SENSITIVE: []
+    end
+
+    class DescribeClusterOperationRequest
+      attr_accessor cluster_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterOperationV2Request
+      attr_accessor cluster_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterOperationResponse
+      attr_accessor cluster_operation_info: Types::ClusterOperationInfo
+      SENSITIVE: []
+    end
+
+    class DescribeClusterOperationV2Response
+      attr_accessor cluster_operation_info: Types::ClusterOperationV2
+      SENSITIVE: []
+    end
+
+    class DescribeClusterRequest
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterResponse
+      attr_accessor cluster_info: Types::ClusterInfo
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor kafka_versions: ::Array[::String]
+      attr_accessor latest_revision: Types::ConfigurationRevision
+      attr_accessor name: ::String
+      attr_accessor state: ("ACTIVE" | "DELETING" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationRevisionRequest
+      attr_accessor arn: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationRevisionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor revision: ::Integer
+      attr_accessor server_properties: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReplicatorRequest
+      attr_accessor replicator_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReplicatorResponse
+      attr_accessor creation_time: ::Time
+      attr_accessor current_version: ::String
+      attr_accessor is_replicator_reference: bool
+      attr_accessor kafka_clusters: ::Array[Types::KafkaClusterDescription]
+      attr_accessor replication_info_list: ::Array[Types::ReplicationInfoDescription]
+      attr_accessor replicator_arn: ::String
+      attr_accessor replicator_description: ::String
+      attr_accessor replicator_name: ::String
+      attr_accessor replicator_resource_arn: ::String
+      attr_accessor replicator_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      attr_accessor service_execution_role_arn: ::String
+      attr_accessor state_info: Types::ReplicationStateInfo
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeVpcConnectionRequest
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVpcConnectionResponse
+      attr_accessor vpc_connection_arn: ::String
+      attr_accessor target_cluster_arn: ::String
+      attr_accessor state: ("CREATING" | "AVAILABLE" | "INACTIVE" | "DEACTIVATING" | "DELETING" | "FAILED" | "REJECTED" | "REJECTING")
+      attr_accessor authentication: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor creation_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateScramSecretRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor secret_arn_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateScramSecretResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor unprocessed_scram_secrets: ::Array[Types::UnprocessedScramSecret]
+      SENSITIVE: []
+    end
+
+    class EBSStorageInfo
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      attr_accessor volume_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class EncryptionAtRest
+      attr_accessor data_volume_kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionInTransit
+      attr_accessor client_broker: ("TLS" | "TLS_PLAINTEXT" | "PLAINTEXT")
+      attr_accessor in_cluster: bool
+      SENSITIVE: []
+    end
+
+    class EncryptionInfo
+      attr_accessor encryption_at_rest: Types::EncryptionAtRest
+      attr_accessor encryption_in_transit: Types::EncryptionInTransit
+      SENSITIVE: []
+    end
+
+    class Error
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Firehose
+      attr_accessor delivery_stream: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ErrorInfo
+      attr_accessor error_code: ::String
+      attr_accessor error_string: ::String
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetBootstrapBrokersRequest
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetBootstrapBrokersResponse
+      attr_accessor bootstrap_broker_string: ::String
+      attr_accessor bootstrap_broker_string_public_sasl_iam: ::String
+      attr_accessor bootstrap_broker_string_public_sasl_scram: ::String
+      attr_accessor bootstrap_broker_string_public_tls: ::String
+      attr_accessor bootstrap_broker_string_tls: ::String
+      attr_accessor bootstrap_broker_string_sasl_scram: ::String
+      attr_accessor bootstrap_broker_string_sasl_iam: ::String
+      attr_accessor bootstrap_broker_string_vpc_connectivity_tls: ::String
+      attr_accessor bootstrap_broker_string_vpc_connectivity_sasl_scram: ::String
+      attr_accessor bootstrap_broker_string_vpc_connectivity_sasl_iam: ::String
+      SENSITIVE: []
+    end
+
+    class GetCompatibleKafkaVersionsRequest
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetCompatibleKafkaVersionsResponse
+      attr_accessor compatible_kafka_versions: ::Array[Types::CompatibleKafkaVersion]
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KafkaCluster
+      attr_accessor amazon_msk_cluster: Types::AmazonMskCluster
+      attr_accessor vpc_config: Types::KafkaClusterClientVpcConfig
+      SENSITIVE: []
+    end
+
+    class KafkaClusterClientVpcConfig
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class KafkaClusterDescription
+      attr_accessor amazon_msk_cluster: Types::AmazonMskCluster
+      attr_accessor kafka_cluster_alias: ::String
+      attr_accessor vpc_config: Types::KafkaClusterClientVpcConfig
+      SENSITIVE: []
+    end
+
+    class KafkaClusterSummary
+      attr_accessor amazon_msk_cluster: Types::AmazonMskCluster
+      attr_accessor kafka_cluster_alias: ::String
+      SENSITIVE: []
+    end
+
+    class KafkaVersion
+      attr_accessor version: ::String
+      attr_accessor status: ("ACTIVE" | "DEPRECATED")
+      SENSITIVE: []
+    end
+
+    class ListClusterOperationsRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClusterOperationsV2Request
+      attr_accessor cluster_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClusterOperationsResponse
+      attr_accessor cluster_operation_info_list: ::Array[Types::ClusterOperationInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClusterOperationsV2Response
+      attr_accessor cluster_operation_info_list: ::Array[Types::ClusterOperationV2Summary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClustersV2Request
+      attr_accessor cluster_name_filter: ::String
+      attr_accessor cluster_type_filter: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClustersV2Response
+      attr_accessor cluster_info_list: ::Array[Types::Cluster]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateClusterV2Request
+      attr_accessor cluster_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor provisioned: Types::ProvisionedRequest
+      attr_accessor serverless: Types::ServerlessRequest
+      SENSITIVE: []
+    end
+
+    class CreateClusterV2Response
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor state: ("ACTIVE" | "CREATING" | "DELETING" | "FAILED" | "HEALING" | "MAINTENANCE" | "REBOOTING_BROKER" | "UPDATING")
+      attr_accessor cluster_type: ("PROVISIONED" | "SERVERLESS")
+      SENSITIVE: []
+    end
+
+    class DescribeClusterV2Request
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterV2Response
+      attr_accessor cluster_info: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class DeleteClusterPolicyRequest
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterPolicyResponse < Aws::EmptyStructure
+    end
+
+    class GetClusterPolicyRequest
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetClusterPolicyResponse
+      attr_accessor current_version: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutClusterPolicyRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor current_version: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutClusterPolicyResponse
+      attr_accessor current_version: ::String
+      SENSITIVE: []
+    end
+
+    class Cluster
+      attr_accessor active_operation_arn: ::String
+      attr_accessor cluster_type: ("PROVISIONED" | "SERVERLESS")
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor current_version: ::String
+      attr_accessor state: ("ACTIVE" | "CREATING" | "DELETING" | "FAILED" | "HEALING" | "MAINTENANCE" | "REBOOTING_BROKER" | "UPDATING")
+      attr_accessor state_info: Types::StateInfo
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor provisioned: Types::Provisioned
+      attr_accessor serverless: Types::Serverless
+      SENSITIVE: []
+    end
+
+    class ProvisionedRequest
+      attr_accessor broker_node_group_info: Types::BrokerNodeGroupInfo
+      attr_accessor client_authentication: Types::ClientAuthentication
+      attr_accessor configuration_info: Types::ConfigurationInfo
+      attr_accessor encryption_info: Types::EncryptionInfo
+      attr_accessor enhanced_monitoring: ("DEFAULT" | "PER_BROKER" | "PER_TOPIC_PER_BROKER" | "PER_TOPIC_PER_PARTITION")
+      attr_accessor open_monitoring: Types::OpenMonitoringInfo
+      attr_accessor kafka_version: ::String
+      attr_accessor logging_info: Types::LoggingInfo
+      attr_accessor number_of_broker_nodes: ::Integer
+      attr_accessor storage_mode: ("LOCAL" | "TIERED")
+      SENSITIVE: []
+    end
+
+    class Provisioned
+      attr_accessor broker_node_group_info: Types::BrokerNodeGroupInfo
+      attr_accessor current_broker_software_info: Types::BrokerSoftwareInfo
+      attr_accessor client_authentication: Types::ClientAuthentication
+      attr_accessor encryption_info: Types::EncryptionInfo
+      attr_accessor enhanced_monitoring: ("DEFAULT" | "PER_BROKER" | "PER_TOPIC_PER_BROKER" | "PER_TOPIC_PER_PARTITION")
+      attr_accessor open_monitoring: Types::OpenMonitoringInfo
+      attr_accessor logging_info: Types::LoggingInfo
+      attr_accessor number_of_broker_nodes: ::Integer
+      attr_accessor zookeeper_connect_string: ::String
+      attr_accessor zookeeper_connect_string_tls: ::String
+      attr_accessor storage_mode: ("LOCAL" | "TIERED")
+      attr_accessor customer_action_status: ("CRITICAL_ACTION_REQUIRED" | "ACTION_RECOMMENDED" | "NONE")
+      SENSITIVE: []
+    end
+
+    class VpcConfig
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ServerlessRequest
+      attr_accessor vpc_configs: ::Array[Types::VpcConfig]
+      attr_accessor client_authentication: Types::ServerlessClientAuthentication
+      SENSITIVE: []
+    end
+
+    class ServerlessClientAuthentication
+      attr_accessor sasl: Types::ServerlessSasl
+      SENSITIVE: []
+    end
+
+    class ServerlessSasl
+      attr_accessor iam: Types::Iam
+      SENSITIVE: []
+    end
+
+    class Serverless
+      attr_accessor vpc_configs: ::Array[Types::VpcConfig]
+      attr_accessor client_authentication: Types::ServerlessClientAuthentication
+      SENSITIVE: []
+    end
+
+    class ListClustersRequest
+      attr_accessor cluster_name_filter: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClustersResponse
+      attr_accessor cluster_info_list: ::Array[Types::ClusterInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationRevisionsRequest
+      attr_accessor arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationRevisionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor revisions: ::Array[Types::ConfigurationRevision]
+      SENSITIVE: []
+    end
+
+    class ListConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationsResponse
+      attr_accessor configurations: ::Array[Types::Configuration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKafkaVersionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKafkaVersionsResponse
+      attr_accessor kafka_versions: ::Array[Types::KafkaVersion]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNodesRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNodesResponse
+      attr_accessor next_token: ::String
+      attr_accessor node_info_list: ::Array[Types::NodeInfo]
+      SENSITIVE: []
+    end
+
+    class ListScramSecretsRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListScramSecretsResponse
+      attr_accessor next_token: ::String
+      attr_accessor secret_arn_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LoggingInfo
+      attr_accessor broker_logs: Types::BrokerLogs
+      SENSITIVE: []
+    end
+
+    class ListClientVpcConnectionsRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClientVpcConnectionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor client_vpc_connections: ::Array[Types::ClientVpcConnection]
+      SENSITIVE: []
+    end
+
+    class ListReplicatorsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor replicator_name_filter: ::String
+      SENSITIVE: []
+    end
+
+    class ListReplicatorsResponse
+      attr_accessor next_token: ::String
+      attr_accessor replicators: ::Array[Types::ReplicatorSummary]
+      SENSITIVE: []
+    end
+
+    class ListVpcConnectionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVpcConnectionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor vpc_connections: ::Array[Types::VpcConnection]
+      SENSITIVE: []
+    end
+
+    class RejectClientVpcConnectionRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor vpc_connection_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RejectClientVpcConnectionResponse < Aws::EmptyStructure
+    end
+
+    class MutableClusterInfo
+      attr_accessor broker_ebs_volume_info: ::Array[Types::BrokerEBSVolumeInfo]
+      attr_accessor configuration_info: Types::ConfigurationInfo
+      attr_accessor number_of_broker_nodes: ::Integer
+      attr_accessor open_monitoring: Types::OpenMonitoring
+      attr_accessor enhanced_monitoring: ("DEFAULT" | "PER_BROKER" | "PER_TOPIC_PER_BROKER" | "PER_TOPIC_PER_PARTITION")
+      attr_accessor kafka_version: ::String
+      attr_accessor logging_info: Types::LoggingInfo
+      attr_accessor instance_type: ::String
+      attr_accessor client_authentication: Types::ClientAuthentication
+      attr_accessor encryption_info: Types::EncryptionInfo
+      attr_accessor connectivity_info: Types::ConnectivityInfo
+      attr_accessor storage_mode: ("LOCAL" | "TIERED")
+      SENSITIVE: []
+    end
+
+    class NodeInfo
+      attr_accessor added_to_cluster_time: ::String
+      attr_accessor broker_node_info: Types::BrokerNodeInfo
+      attr_accessor instance_type: ::String
+      attr_accessor node_arn: ::String
+      attr_accessor node_type: ("BROKER")
+      attr_accessor zookeeper_node_info: Types::ZookeeperNodeInfo
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationInfo
+      attr_accessor consumer_group_replication: Types::ConsumerGroupReplication
+      attr_accessor source_kafka_cluster_arn: ::String
+      attr_accessor target_compression_type: ("NONE" | "GZIP" | "SNAPPY" | "LZ4" | "ZSTD")
+      attr_accessor target_kafka_cluster_arn: ::String
+      attr_accessor topic_replication: Types::TopicReplication
+      SENSITIVE: []
+    end
+
+    class ReplicationInfoDescription
+      attr_accessor consumer_group_replication: Types::ConsumerGroupReplication
+      attr_accessor source_kafka_cluster_alias: ::String
+      attr_accessor target_compression_type: ("NONE" | "GZIP" | "SNAPPY" | "LZ4" | "ZSTD")
+      attr_accessor target_kafka_cluster_alias: ::String
+      attr_accessor topic_replication: Types::TopicReplication
+      SENSITIVE: []
+    end
+
+    class ReplicationInfoSummary
+      attr_accessor source_kafka_cluster_alias: ::String
+      attr_accessor target_kafka_cluster_alias: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationStateInfo
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicatorSummary
+      attr_accessor creation_time: ::Time
+      attr_accessor current_version: ::String
+      attr_accessor is_replicator_reference: bool
+      attr_accessor kafka_clusters_summary: ::Array[Types::KafkaClusterSummary]
+      attr_accessor replication_info_summary_list: ::Array[Types::ReplicationInfoSummary]
+      attr_accessor replicator_arn: ::String
+      attr_accessor replicator_name: ::String
+      attr_accessor replicator_resource_arn: ::String
+      attr_accessor replicator_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class Sasl
+      attr_accessor scram: Types::Scram
+      attr_accessor iam: Types::Iam
+      SENSITIVE: []
+    end
+
+    class VpcConnectivitySasl
+      attr_accessor scram: Types::VpcConnectivityScram
+      attr_accessor iam: Types::VpcConnectivityIam
+      SENSITIVE: []
+    end
+
+    class Scram
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class VpcConnectivityScram
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class Iam
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class VpcConnectivityIam
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StateInfo
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StorageInfo
+      attr_accessor ebs_storage_info: Types::EBSStorageInfo
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TopicReplication
+      attr_accessor copy_access_control_lists_for_topics: bool
+      attr_accessor copy_topic_configurations: bool
+      attr_accessor detect_and_copy_new_topics: bool
+      attr_accessor topics_to_exclude: ::Array[::String]
+      attr_accessor topics_to_replicate: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TopicReplicationUpdate
+      attr_accessor copy_access_control_lists_for_topics: bool
+      attr_accessor copy_topic_configurations: bool
+      attr_accessor detect_and_copy_new_topics: bool
+      attr_accessor topics_to_exclude: ::Array[::String]
+      attr_accessor topics_to_replicate: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Tls
+      attr_accessor certificate_authority_arn_list: ::Array[::String]
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class VpcConnectivityTls
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Unauthenticated
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor invalid_parameter: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnprocessedScramSecret
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateBrokerTypeRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor current_version: ::String
+      attr_accessor target_instance_type: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBrokerTypeResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBrokerCountRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor current_version: ::String
+      attr_accessor target_number_of_broker_nodes: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateBrokerCountResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBrokerStorageRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor current_version: ::String
+      attr_accessor target_broker_ebs_volume_info: ::Array[Types::BrokerEBSVolumeInfo]
+      SENSITIVE: []
+    end
+
+    class UpdateBrokerStorageResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateClusterConfigurationRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor configuration_info: Types::ConfigurationInfo
+      attr_accessor current_version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateClusterConfigurationResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateClusterKafkaVersionRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor configuration_info: Types::ConfigurationInfo
+      attr_accessor current_version: ::String
+      attr_accessor target_kafka_version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateClusterKafkaVersionResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationRequest
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor server_properties: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationResponse
+      attr_accessor arn: ::String
+      attr_accessor latest_revision: Types::ConfigurationRevision
+      SENSITIVE: []
+    end
+
+    class UpdateConnectivityRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor connectivity_info: Types::ConnectivityInfo
+      attr_accessor current_version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectivityResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMonitoringRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor current_version: ::String
+      attr_accessor enhanced_monitoring: ("DEFAULT" | "PER_BROKER" | "PER_TOPIC_PER_BROKER" | "PER_TOPIC_PER_PARTITION")
+      attr_accessor open_monitoring: Types::OpenMonitoringInfo
+      attr_accessor logging_info: Types::LoggingInfo
+      SENSITIVE: []
+    end
+
+    class UpdateMonitoringResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateReplicationInfoRequest
+      attr_accessor consumer_group_replication: Types::ConsumerGroupReplicationUpdate
+      attr_accessor current_version: ::String
+      attr_accessor replicator_arn: ::String
+      attr_accessor source_kafka_cluster_arn: ::String
+      attr_accessor target_kafka_cluster_arn: ::String
+      attr_accessor topic_replication: Types::TopicReplicationUpdate
+      SENSITIVE: []
+    end
+
+    class UpdateReplicationInfoResponse
+      attr_accessor replicator_arn: ::String
+      attr_accessor replicator_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class UpdateSecurityRequest
+      attr_accessor client_authentication: Types::ClientAuthentication
+      attr_accessor cluster_arn: ::String
+      attr_accessor current_version: ::String
+      attr_accessor encryption_info: Types::EncryptionInfo
+      SENSITIVE: []
+    end
+
+    class UpdateSecurityResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateStorageRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor current_version: ::String
+      attr_accessor provisioned_throughput: Types::ProvisionedThroughput
+      attr_accessor storage_mode: ("LOCAL" | "TIERED")
+      attr_accessor volume_size_gb: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateStorageResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UserIdentity
+      attr_accessor type: ("AWSACCOUNT" | "AWSSERVICE")
+      attr_accessor principal_id: ::String
+      SENSITIVE: []
+    end
+
+    class ZookeeperNodeInfo
+      attr_accessor attached_eni_id: ::String
+      attr_accessor client_vpc_ip_address: ::String
+      attr_accessor endpoints: ::Array[::String]
+      attr_accessor zookeeper_id: ::Float
+      attr_accessor zookeeper_version: ::String
+      SENSITIVE: []
+    end
+
+    class OpenMonitoring
+      attr_accessor prometheus: Types::Prometheus
+      SENSITIVE: []
+    end
+
+    class OpenMonitoringInfo
+      attr_accessor prometheus: Types::PrometheusInfo
+      SENSITIVE: []
+    end
+
+    class Prometheus
+      attr_accessor jmx_exporter: Types::JmxExporter
+      attr_accessor node_exporter: Types::NodeExporter
+      SENSITIVE: []
+    end
+
+    class PrometheusInfo
+      attr_accessor jmx_exporter: Types::JmxExporterInfo
+      attr_accessor node_exporter: Types::NodeExporterInfo
+      SENSITIVE: []
+    end
+
+    class ProvisionedThroughput
+      attr_accessor enabled: bool
+      attr_accessor volume_throughput: ::Integer
+      SENSITIVE: []
+    end
+
+    class PublicAccess
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class VpcConnectivity
+      attr_accessor client_authentication: Types::VpcConnectivityClientAuthentication
+      SENSITIVE: []
+    end
+
+    class VpcConnectionInfo
+      attr_accessor vpc_connection_arn: ::String
+      attr_accessor owner: ::String
+      attr_accessor user_identity: Types::UserIdentity
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class VpcConnectionInfoServerless
+      attr_accessor creation_time: ::Time
+      attr_accessor owner: ::String
+      attr_accessor user_identity: Types::UserIdentity
+      attr_accessor vpc_connection_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RebootBrokerRequest
+      attr_accessor broker_ids: ::Array[::String]
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RebootBrokerResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class S3
+      attr_accessor bucket: ::String
+      attr_accessor enabled: bool
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class JmxExporter
+      attr_accessor enabled_in_broker: bool
+      SENSITIVE: []
+    end
+
+    class JmxExporterInfo
+      attr_accessor enabled_in_broker: bool
+      SENSITIVE: []
+    end
+
+    class NodeExporter
+      attr_accessor enabled_in_broker: bool
+      SENSITIVE: []
+    end
+
+    class NodeExporterInfo
+      attr_accessor enabled_in_broker: bool
+      SENSITIVE: []
+    end
+  end
+end

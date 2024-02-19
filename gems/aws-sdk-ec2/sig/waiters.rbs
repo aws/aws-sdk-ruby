@@ -1,0 +1,664 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EC2
+    module Waiters
+
+      class BundleTaskComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?bundle_ids: Array[::String],
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?dry_run: bool
+                  ) -> Client::_DescribeBundleTasksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeBundleTasksResponseSuccess
+      end
+
+      class ConversionTaskCancelled
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?conversion_task_ids: Array[::String],
+                    ?dry_run: bool
+                  ) -> Client::_DescribeConversionTasksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeConversionTasksResponseSuccess
+      end
+
+      class ConversionTaskCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?conversion_task_ids: Array[::String],
+                    ?dry_run: bool
+                  ) -> Client::_DescribeConversionTasksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeConversionTasksResponseSuccess
+      end
+
+      class ConversionTaskDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?conversion_task_ids: Array[::String],
+                    ?dry_run: bool
+                  ) -> Client::_DescribeConversionTasksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeConversionTasksResponseSuccess
+      end
+
+      class CustomerGatewayAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?customer_gateway_ids: Array[::String],
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?dry_run: bool
+                  ) -> Client::_DescribeCustomerGatewaysResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeCustomerGatewaysResponseSuccess
+      end
+
+      class ExportTaskCancelled
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?export_task_ids: Array[::String],
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ]
+                  ) -> Client::_DescribeExportTasksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeExportTasksResponseSuccess
+      end
+
+      class ExportTaskCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?export_task_ids: Array[::String],
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ]
+                  ) -> Client::_DescribeExportTasksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeExportTasksResponseSuccess
+      end
+
+      class ImageAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?executable_users: Array[::String],
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?image_ids: Array[::String],
+                    ?owners: Array[::String],
+                    ?include_deprecated: bool,
+                    ?include_disabled: bool,
+                    ?dry_run: bool,
+                    ?max_results: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeImagesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeImagesResponseSuccess
+      end
+
+      class ImageExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?executable_users: Array[::String],
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?image_ids: Array[::String],
+                    ?owners: Array[::String],
+                    ?include_deprecated: bool,
+                    ?include_disabled: bool,
+                    ?dry_run: bool,
+                    ?max_results: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeImagesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeImagesResponseSuccess
+      end
+
+      class InstanceExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?instance_ids: Array[::String],
+                    ?dry_run: bool,
+                    ?max_results: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeInstancesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeInstancesResponseSuccess
+      end
+
+      class InstanceRunning
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?instance_ids: Array[::String],
+                    ?dry_run: bool,
+                    ?max_results: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeInstancesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeInstancesResponseSuccess
+      end
+
+      class InstanceStatusOk
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?instance_ids: Array[::String],
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?dry_run: bool,
+                    ?include_all_instances: bool
+                  ) -> Client::_DescribeInstanceStatusResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeInstanceStatusResponseSuccess
+      end
+
+      class InstanceStopped
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?instance_ids: Array[::String],
+                    ?dry_run: bool,
+                    ?max_results: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeInstancesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeInstancesResponseSuccess
+      end
+
+      class InstanceTerminated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?instance_ids: Array[::String],
+                    ?dry_run: bool,
+                    ?max_results: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeInstancesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeInstancesResponseSuccess
+      end
+
+      class InternetGatewayExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?dry_run: bool,
+                    ?internet_gateway_ids: Array[::String],
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
+                  ) -> Client::_DescribeInternetGatewaysResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeInternetGatewaysResponseSuccess
+      end
+
+      class KeyPairExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?key_names: Array[::String],
+                    ?key_pair_ids: Array[::String],
+                    ?dry_run: bool,
+                    ?include_public_key: bool
+                  ) -> Client::_DescribeKeyPairsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeKeyPairsResponseSuccess
+      end
+
+      class NatGatewayAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?dry_run: bool,
+                    ?filter: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?max_results: ::Integer,
+                    ?nat_gateway_ids: Array[::String],
+                    ?next_token: ::String
+                  ) -> Client::_DescribeNatGatewaysResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeNatGatewaysResponseSuccess
+      end
+
+      class NatGatewayDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?dry_run: bool,
+                    ?filter: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?max_results: ::Integer,
+                    ?nat_gateway_ids: Array[::String],
+                    ?next_token: ::String
+                  ) -> Client::_DescribeNatGatewaysResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeNatGatewaysResponseSuccess
+      end
+
+      class NetworkInterfaceAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?dry_run: bool,
+                    ?network_interface_ids: Array[::String],
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
+                  ) -> Client::_DescribeNetworkInterfacesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeNetworkInterfacesResponseSuccess
+      end
+
+      class PasswordDataAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    instance_id: ::String,
+                    ?dry_run: bool
+                  ) -> Client::_GetPasswordDataResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetPasswordDataResponseSuccess
+      end
+
+      class SecurityGroupExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?group_ids: Array[::String],
+                    ?group_names: Array[::String],
+                    ?dry_run: bool,
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
+                  ) -> Client::_DescribeSecurityGroupsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeSecurityGroupsResponseSuccess
+      end
+
+      class SnapshotCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?owner_ids: Array[::String],
+                    ?restorable_by_user_ids: Array[::String],
+                    ?snapshot_ids: Array[::String],
+                    ?dry_run: bool
+                  ) -> Client::_DescribeSnapshotsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeSnapshotsResponseSuccess
+      end
+
+      class SnapshotImported
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?dry_run: bool,
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?import_task_ids: Array[::String],
+                    ?max_results: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeImportSnapshotTasksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeImportSnapshotTasksResponseSuccess
+      end
+
+      class SpotInstanceRequestFulfilled
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?dry_run: bool,
+                    ?spot_instance_request_ids: Array[::String],
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
+                  ) -> Client::_DescribeSpotInstanceRequestsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeSpotInstanceRequestsResponseSuccess
+      end
+
+      class StoreImageTaskComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?image_ids: Array[::String],
+                    ?dry_run: bool,
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
+                  ) -> Client::_DescribeStoreImageTasksResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeStoreImageTasksResponseSuccess
+      end
+
+      class SubnetAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?subnet_ids: Array[::String],
+                    ?dry_run: bool,
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
+                  ) -> Client::_DescribeSubnetsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeSubnetsResponseSuccess
+      end
+
+      class SystemStatusOk
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?instance_ids: Array[::String],
+                    ?max_results: ::Integer,
+                    ?next_token: ::String,
+                    ?dry_run: bool,
+                    ?include_all_instances: bool
+                  ) -> Client::_DescribeInstanceStatusResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeInstanceStatusResponseSuccess
+      end
+
+      class VolumeAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?volume_ids: Array[::String],
+                    ?dry_run: bool,
+                    ?max_results: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeVolumesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeVolumesResponseSuccess
+      end
+
+      class VolumeDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?volume_ids: Array[::String],
+                    ?dry_run: bool,
+                    ?max_results: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeVolumesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeVolumesResponseSuccess
+      end
+
+      class VolumeInUse
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?volume_ids: Array[::String],
+                    ?dry_run: bool,
+                    ?max_results: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeVolumesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeVolumesResponseSuccess
+      end
+
+      class VpcAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?vpc_ids: Array[::String],
+                    ?dry_run: bool,
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
+                  ) -> Client::_DescribeVpcsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeVpcsResponseSuccess
+      end
+
+      class VpcExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?vpc_ids: Array[::String],
+                    ?dry_run: bool,
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
+                  ) -> Client::_DescribeVpcsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeVpcsResponseSuccess
+      end
+
+      class VpcPeeringConnectionDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?dry_run: bool,
+                    ?vpc_peering_connection_ids: Array[::String],
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
+                  ) -> Client::_DescribeVpcPeeringConnectionsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeVpcPeeringConnectionsResponseSuccess
+      end
+
+      class VpcPeeringConnectionExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?dry_run: bool,
+                    ?vpc_peering_connection_ids: Array[::String],
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
+                  ) -> Client::_DescribeVpcPeeringConnectionsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeVpcPeeringConnectionsResponseSuccess
+      end
+
+      class VpnConnectionAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?vpn_connection_ids: Array[::String],
+                    ?dry_run: bool
+                  ) -> Client::_DescribeVpnConnectionsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeVpnConnectionsResponseSuccess
+      end
+
+      class VpnConnectionDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String?,
+                        values: Array[::String]?
+                      },
+                    ],
+                    ?vpn_connection_ids: Array[::String],
+                    ?dry_run: bool
+                  ) -> Client::_DescribeVpnConnectionsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeVpnConnectionsResponseSuccess
+      end
+    end
+  end
+end

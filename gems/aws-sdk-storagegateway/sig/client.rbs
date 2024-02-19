@@ -1,0 +1,1389 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module StorageGateway
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _ActivateGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivateGatewayOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#activate_gateway-instance_method
+      def activate_gateway: (
+                              activation_key: ::String,
+                              gateway_name: ::String,
+                              gateway_timezone: ::String,
+                              gateway_region: ::String,
+                              ?gateway_type: ::String,
+                              ?tape_drive_type: ::String,
+                              ?medium_changer_type: ::String,
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ]
+                            ) -> _ActivateGatewayResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ActivateGatewayResponseSuccess
+
+      interface _AddCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddCacheOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#add_cache-instance_method
+      def add_cache: (
+                       gateway_arn: ::String,
+                       disk_ids: Array[::String]
+                     ) -> _AddCacheResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddCacheResponseSuccess
+
+      interface _AddTagsToResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddTagsToResourceOutput]
+        def resource_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#add_tags_to_resource-instance_method
+      def add_tags_to_resource: (
+                                  resource_arn: ::String,
+                                  tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> _AddTagsToResourceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsToResourceResponseSuccess
+
+      interface _AddUploadBufferResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddUploadBufferOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#add_upload_buffer-instance_method
+      def add_upload_buffer: (
+                               gateway_arn: ::String,
+                               disk_ids: Array[::String]
+                             ) -> _AddUploadBufferResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddUploadBufferResponseSuccess
+
+      interface _AddWorkingStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddWorkingStorageOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#add_working_storage-instance_method
+      def add_working_storage: (
+                                 gateway_arn: ::String,
+                                 disk_ids: Array[::String]
+                               ) -> _AddWorkingStorageResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddWorkingStorageResponseSuccess
+
+      interface _AssignTapePoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssignTapePoolOutput]
+        def tape_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#assign_tape_pool-instance_method
+      def assign_tape_pool: (
+                              tape_arn: ::String,
+                              pool_id: ::String,
+                              ?bypass_governance_retention: bool
+                            ) -> _AssignTapePoolResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssignTapePoolResponseSuccess
+
+      interface _AssociateFileSystemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateFileSystemOutput]
+        def file_system_association_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#associate_file_system-instance_method
+      def associate_file_system: (
+                                   user_name: ::String,
+                                   password: ::String,
+                                   client_token: ::String,
+                                   gateway_arn: ::String,
+                                   location_arn: ::String,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ],
+                                   ?audit_destination_arn: ::String,
+                                   ?cache_attributes: {
+                                     cache_stale_timeout_in_seconds: ::Integer?
+                                   },
+                                   ?endpoint_network_configuration: {
+                                     ip_addresses: Array[::String]?
+                                   }
+                                 ) -> _AssociateFileSystemResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateFileSystemResponseSuccess
+
+      interface _AttachVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachVolumeOutput]
+        def volume_arn: () -> ::String
+        def target_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#attach_volume-instance_method
+      def attach_volume: (
+                           gateway_arn: ::String,
+                           ?target_name: ::String,
+                           volume_arn: ::String,
+                           network_interface_id: ::String,
+                           ?disk_id: ::String
+                         ) -> _AttachVolumeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachVolumeResponseSuccess
+
+      interface _CancelArchivalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelArchivalOutput]
+        def tape_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#cancel_archival-instance_method
+      def cancel_archival: (
+                             gateway_arn: ::String,
+                             tape_arn: ::String
+                           ) -> _CancelArchivalResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelArchivalResponseSuccess
+
+      interface _CancelRetrievalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelRetrievalOutput]
+        def tape_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#cancel_retrieval-instance_method
+      def cancel_retrieval: (
+                              gateway_arn: ::String,
+                              tape_arn: ::String
+                            ) -> _CancelRetrievalResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelRetrievalResponseSuccess
+
+      interface _CreateCachediSCSIVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCachediSCSIVolumeOutput]
+        def volume_arn: () -> ::String
+        def target_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#create_cached_iscsi_volume-instance_method
+      def create_cached_iscsi_volume: (
+                                        gateway_arn: ::String,
+                                        volume_size_in_bytes: ::Integer,
+                                        ?snapshot_id: ::String,
+                                        target_name: ::String,
+                                        ?source_volume_arn: ::String,
+                                        network_interface_id: ::String,
+                                        client_token: ::String,
+                                        ?kms_encrypted: bool,
+                                        ?kms_key: ::String,
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String
+                                          },
+                                        ]
+                                      ) -> _CreateCachediSCSIVolumeResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCachediSCSIVolumeResponseSuccess
+
+      interface _CreateNFSFileShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNFSFileShareOutput]
+        def file_share_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#create_nfs_file_share-instance_method
+      def create_nfs_file_share: (
+                                   client_token: ::String,
+                                   ?nfs_file_share_defaults: {
+                                     file_mode: ::String?,
+                                     directory_mode: ::String?,
+                                     group_id: ::Integer?,
+                                     owner_id: ::Integer?
+                                   },
+                                   gateway_arn: ::String,
+                                   ?kms_encrypted: bool,
+                                   ?kms_key: ::String,
+                                   role: ::String,
+                                   location_arn: ::String,
+                                   ?default_storage_class: ::String,
+                                   ?object_acl: ("private" | "public-read" | "public-read-write" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control" | "aws-exec-read"),
+                                   ?client_list: Array[::String],
+                                   ?squash: ::String,
+                                   ?read_only: bool,
+                                   ?guess_mime_type_enabled: bool,
+                                   ?requester_pays: bool,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ],
+                                   ?file_share_name: ::String,
+                                   ?cache_attributes: {
+                                     cache_stale_timeout_in_seconds: ::Integer?
+                                   },
+                                   ?notification_policy: ::String,
+                                   ?vpc_endpoint_dns_name: ::String,
+                                   ?bucket_region: ::String,
+                                   ?audit_destination_arn: ::String
+                                 ) -> _CreateNFSFileShareResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNFSFileShareResponseSuccess
+
+      interface _CreateSMBFileShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSMBFileShareOutput]
+        def file_share_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#create_smb_file_share-instance_method
+      def create_smb_file_share: (
+                                   client_token: ::String,
+                                   gateway_arn: ::String,
+                                   ?kms_encrypted: bool,
+                                   ?kms_key: ::String,
+                                   role: ::String,
+                                   location_arn: ::String,
+                                   ?default_storage_class: ::String,
+                                   ?object_acl: ("private" | "public-read" | "public-read-write" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control" | "aws-exec-read"),
+                                   ?read_only: bool,
+                                   ?guess_mime_type_enabled: bool,
+                                   ?requester_pays: bool,
+                                   ?smbacl_enabled: bool,
+                                   ?access_based_enumeration: bool,
+                                   ?admin_user_list: Array[::String],
+                                   ?valid_user_list: Array[::String],
+                                   ?invalid_user_list: Array[::String],
+                                   ?audit_destination_arn: ::String,
+                                   ?authentication: ::String,
+                                   ?case_sensitivity: ("ClientSpecified" | "CaseSensitive"),
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ],
+                                   ?file_share_name: ::String,
+                                   ?cache_attributes: {
+                                     cache_stale_timeout_in_seconds: ::Integer?
+                                   },
+                                   ?notification_policy: ::String,
+                                   ?vpc_endpoint_dns_name: ::String,
+                                   ?bucket_region: ::String,
+                                   ?oplocks_enabled: bool
+                                 ) -> _CreateSMBFileShareResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSMBFileShareResponseSuccess
+
+      interface _CreateSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSnapshotOutput]
+        def volume_arn: () -> ::String
+        def snapshot_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#create_snapshot-instance_method
+      def create_snapshot: (
+                             volume_arn: ::String,
+                             snapshot_description: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _CreateSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotResponseSuccess
+
+      interface _CreateSnapshotFromVolumeRecoveryPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSnapshotFromVolumeRecoveryPointOutput]
+        def snapshot_id: () -> ::String
+        def volume_arn: () -> ::String
+        def volume_recovery_point_time: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#create_snapshot_from_volume_recovery_point-instance_method
+      def create_snapshot_from_volume_recovery_point: (
+                                                        volume_arn: ::String,
+                                                        snapshot_description: ::String,
+                                                        ?tags: Array[
+                                                          {
+                                                            key: ::String,
+                                                            value: ::String
+                                                          },
+                                                        ]
+                                                      ) -> _CreateSnapshotFromVolumeRecoveryPointResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotFromVolumeRecoveryPointResponseSuccess
+
+      interface _CreateStorediSCSIVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStorediSCSIVolumeOutput]
+        def volume_arn: () -> ::String
+        def volume_size_in_bytes: () -> ::Integer
+        def target_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#create_stored_iscsi_volume-instance_method
+      def create_stored_iscsi_volume: (
+                                        gateway_arn: ::String,
+                                        disk_id: ::String,
+                                        ?snapshot_id: ::String,
+                                        preserve_existing_data: bool,
+                                        target_name: ::String,
+                                        network_interface_id: ::String,
+                                        ?kms_encrypted: bool,
+                                        ?kms_key: ::String,
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String
+                                          },
+                                        ]
+                                      ) -> _CreateStorediSCSIVolumeResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStorediSCSIVolumeResponseSuccess
+
+      interface _CreateTapePoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTapePoolOutput]
+        def pool_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#create_tape_pool-instance_method
+      def create_tape_pool: (
+                              pool_name: ::String,
+                              storage_class: ("DEEP_ARCHIVE" | "GLACIER"),
+                              ?retention_lock_type: ("COMPLIANCE" | "GOVERNANCE" | "NONE"),
+                              ?retention_lock_time_in_days: ::Integer,
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ]
+                            ) -> _CreateTapePoolResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTapePoolResponseSuccess
+
+      interface _CreateTapeWithBarcodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTapeWithBarcodeOutput]
+        def tape_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#create_tape_with_barcode-instance_method
+      def create_tape_with_barcode: (
+                                      gateway_arn: ::String,
+                                      tape_size_in_bytes: ::Integer,
+                                      tape_barcode: ::String,
+                                      ?kms_encrypted: bool,
+                                      ?kms_key: ::String,
+                                      ?pool_id: ::String,
+                                      ?worm: bool,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ]
+                                    ) -> _CreateTapeWithBarcodeResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTapeWithBarcodeResponseSuccess
+
+      interface _CreateTapesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTapesOutput]
+        def tape_arns: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#create_tapes-instance_method
+      def create_tapes: (
+                          gateway_arn: ::String,
+                          tape_size_in_bytes: ::Integer,
+                          client_token: ::String,
+                          num_tapes_to_create: ::Integer,
+                          tape_barcode_prefix: ::String,
+                          ?kms_encrypted: bool,
+                          ?kms_key: ::String,
+                          ?pool_id: ::String,
+                          ?worm: bool,
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _CreateTapesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTapesResponseSuccess
+
+      interface _DeleteAutomaticTapeCreationPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAutomaticTapeCreationPolicyOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#delete_automatic_tape_creation_policy-instance_method
+      def delete_automatic_tape_creation_policy: (
+                                                   gateway_arn: ::String
+                                                 ) -> _DeleteAutomaticTapeCreationPolicyResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAutomaticTapeCreationPolicyResponseSuccess
+
+      interface _DeleteBandwidthRateLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBandwidthRateLimitOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#delete_bandwidth_rate_limit-instance_method
+      def delete_bandwidth_rate_limit: (
+                                         gateway_arn: ::String,
+                                         bandwidth_type: ::String
+                                       ) -> _DeleteBandwidthRateLimitResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBandwidthRateLimitResponseSuccess
+
+      interface _DeleteChapCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteChapCredentialsOutput]
+        def target_arn: () -> ::String
+        def initiator_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#delete_chap_credentials-instance_method
+      def delete_chap_credentials: (
+                                     target_arn: ::String,
+                                     initiator_name: ::String
+                                   ) -> _DeleteChapCredentialsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteChapCredentialsResponseSuccess
+
+      interface _DeleteFileShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFileShareOutput]
+        def file_share_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#delete_file_share-instance_method
+      def delete_file_share: (
+                               file_share_arn: ::String,
+                               ?force_delete: bool
+                             ) -> _DeleteFileShareResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFileShareResponseSuccess
+
+      interface _DeleteGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGatewayOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#delete_gateway-instance_method
+      def delete_gateway: (
+                            gateway_arn: ::String
+                          ) -> _DeleteGatewayResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGatewayResponseSuccess
+
+      interface _DeleteSnapshotScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSnapshotScheduleOutput]
+        def volume_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#delete_snapshot_schedule-instance_method
+      def delete_snapshot_schedule: (
+                                      volume_arn: ::String
+                                    ) -> _DeleteSnapshotScheduleResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSnapshotScheduleResponseSuccess
+
+      interface _DeleteTapeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTapeOutput]
+        def tape_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#delete_tape-instance_method
+      def delete_tape: (
+                         gateway_arn: ::String,
+                         tape_arn: ::String,
+                         ?bypass_governance_retention: bool
+                       ) -> _DeleteTapeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTapeResponseSuccess
+
+      interface _DeleteTapeArchiveResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTapeArchiveOutput]
+        def tape_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#delete_tape_archive-instance_method
+      def delete_tape_archive: (
+                                 tape_arn: ::String,
+                                 ?bypass_governance_retention: bool
+                               ) -> _DeleteTapeArchiveResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTapeArchiveResponseSuccess
+
+      interface _DeleteTapePoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTapePoolOutput]
+        def pool_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#delete_tape_pool-instance_method
+      def delete_tape_pool: (
+                              pool_arn: ::String
+                            ) -> _DeleteTapePoolResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTapePoolResponseSuccess
+
+      interface _DeleteVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVolumeOutput]
+        def volume_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#delete_volume-instance_method
+      def delete_volume: (
+                           volume_arn: ::String
+                         ) -> _DeleteVolumeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVolumeResponseSuccess
+
+      interface _DescribeAvailabilityMonitorTestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAvailabilityMonitorTestOutput]
+        def gateway_arn: () -> ::String
+        def status: () -> ("COMPLETE" | "FAILED" | "PENDING")
+        def start_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_availability_monitor_test-instance_method
+      def describe_availability_monitor_test: (
+                                                gateway_arn: ::String
+                                              ) -> _DescribeAvailabilityMonitorTestResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAvailabilityMonitorTestResponseSuccess
+
+      interface _DescribeBandwidthRateLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBandwidthRateLimitOutput]
+        def gateway_arn: () -> ::String
+        def average_upload_rate_limit_in_bits_per_sec: () -> ::Integer
+        def average_download_rate_limit_in_bits_per_sec: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_bandwidth_rate_limit-instance_method
+      def describe_bandwidth_rate_limit: (
+                                           gateway_arn: ::String
+                                         ) -> _DescribeBandwidthRateLimitResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBandwidthRateLimitResponseSuccess
+
+      interface _DescribeBandwidthRateLimitScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBandwidthRateLimitScheduleOutput]
+        def gateway_arn: () -> ::String
+        def bandwidth_rate_limit_intervals: () -> ::Array[Types::BandwidthRateLimitInterval]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_bandwidth_rate_limit_schedule-instance_method
+      def describe_bandwidth_rate_limit_schedule: (
+                                                    gateway_arn: ::String
+                                                  ) -> _DescribeBandwidthRateLimitScheduleResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBandwidthRateLimitScheduleResponseSuccess
+
+      interface _DescribeCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCacheOutput]
+        def gateway_arn: () -> ::String
+        def disk_ids: () -> ::Array[::String]
+        def cache_allocated_in_bytes: () -> ::Integer
+        def cache_used_percentage: () -> ::Float
+        def cache_dirty_percentage: () -> ::Float
+        def cache_hit_percentage: () -> ::Float
+        def cache_miss_percentage: () -> ::Float
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_cache-instance_method
+      def describe_cache: (
+                            gateway_arn: ::String
+                          ) -> _DescribeCacheResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCacheResponseSuccess
+
+      interface _DescribeCachediSCSIVolumesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCachediSCSIVolumesOutput]
+        def cached_iscsi_volumes: () -> ::Array[Types::CachediSCSIVolume]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_cached_iscsi_volumes-instance_method
+      def describe_cached_iscsi_volumes: (
+                                           volume_arns: Array[::String]
+                                         ) -> _DescribeCachediSCSIVolumesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCachediSCSIVolumesResponseSuccess
+
+      interface _DescribeChapCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChapCredentialsOutput]
+        def chap_credentials: () -> ::Array[Types::ChapInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_chap_credentials-instance_method
+      def describe_chap_credentials: (
+                                       target_arn: ::String
+                                     ) -> _DescribeChapCredentialsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChapCredentialsResponseSuccess
+
+      interface _DescribeFileSystemAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFileSystemAssociationsOutput]
+        def file_system_association_info_list: () -> ::Array[Types::FileSystemAssociationInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_file_system_associations-instance_method
+      def describe_file_system_associations: (
+                                               file_system_association_arn_list: Array[::String]
+                                             ) -> _DescribeFileSystemAssociationsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFileSystemAssociationsResponseSuccess
+
+      interface _DescribeGatewayInformationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGatewayInformationOutput]
+        def gateway_arn: () -> ::String
+        def gateway_id: () -> ::String
+        def gateway_name: () -> ::String
+        def gateway_timezone: () -> ::String
+        def gateway_state: () -> ::String
+        def gateway_network_interfaces: () -> ::Array[Types::NetworkInterface]
+        def gateway_type: () -> ::String
+        def next_update_availability_date: () -> ::String
+        def last_software_update: () -> ::String
+        def ec2_instance_id: () -> ::String
+        def ec2_instance_region: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+        def vpc_endpoint: () -> ::String
+        def cloud_watch_log_group_arn: () -> ::String
+        def host_environment: () -> ("VMWARE" | "HYPER-V" | "EC2" | "KVM" | "OTHER" | "SNOWBALL")
+        def endpoint_type: () -> ::String
+        def software_updates_end_date: () -> ::String
+        def deprecation_date: () -> ::String
+        def gateway_capacity: () -> ("Small" | "Medium" | "Large")
+        def supported_gateway_capacities: () -> ::Array[("Small" | "Medium" | "Large")]
+        def host_environment_id: () -> ::String
+        def software_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_gateway_information-instance_method
+      def describe_gateway_information: (
+                                          gateway_arn: ::String
+                                        ) -> _DescribeGatewayInformationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGatewayInformationResponseSuccess
+
+      interface _DescribeMaintenanceStartTimeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMaintenanceStartTimeOutput]
+        def gateway_arn: () -> ::String
+        def hour_of_day: () -> ::Integer
+        def minute_of_hour: () -> ::Integer
+        def day_of_week: () -> ::Integer
+        def day_of_month: () -> ::Integer
+        def timezone: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_maintenance_start_time-instance_method
+      def describe_maintenance_start_time: (
+                                             gateway_arn: ::String
+                                           ) -> _DescribeMaintenanceStartTimeResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMaintenanceStartTimeResponseSuccess
+
+      interface _DescribeNFSFileSharesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeNFSFileSharesOutput]
+        def nfs_file_share_info_list: () -> ::Array[Types::NFSFileShareInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_nfs_file_shares-instance_method
+      def describe_nfs_file_shares: (
+                                      file_share_arn_list: Array[::String]
+                                    ) -> _DescribeNFSFileSharesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNFSFileSharesResponseSuccess
+
+      interface _DescribeSMBFileSharesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSMBFileSharesOutput]
+        def smb_file_share_info_list: () -> ::Array[Types::SMBFileShareInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_smb_file_shares-instance_method
+      def describe_smb_file_shares: (
+                                      file_share_arn_list: Array[::String]
+                                    ) -> _DescribeSMBFileSharesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSMBFileSharesResponseSuccess
+
+      interface _DescribeSMBSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSMBSettingsOutput]
+        def gateway_arn: () -> ::String
+        def domain_name: () -> ::String
+        def active_directory_status: () -> ("ACCESS_DENIED" | "DETACHED" | "JOINED" | "JOINING" | "NETWORK_ERROR" | "TIMEOUT" | "UNKNOWN_ERROR")
+        def smb_guest_password_set: () -> bool
+        def smb_security_strategy: () -> ("ClientSpecified" | "MandatorySigning" | "MandatoryEncryption")
+        def file_shares_visible: () -> bool
+        def smb_local_groups: () -> Types::SMBLocalGroups
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_smb_settings-instance_method
+      def describe_smb_settings: (
+                                   gateway_arn: ::String
+                                 ) -> _DescribeSMBSettingsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSMBSettingsResponseSuccess
+
+      interface _DescribeSnapshotScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSnapshotScheduleOutput]
+        def volume_arn: () -> ::String
+        def start_at: () -> ::Integer
+        def recurrence_in_hours: () -> ::Integer
+        def description: () -> ::String
+        def timezone: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_snapshot_schedule-instance_method
+      def describe_snapshot_schedule: (
+                                        volume_arn: ::String
+                                      ) -> _DescribeSnapshotScheduleResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSnapshotScheduleResponseSuccess
+
+      interface _DescribeStorediSCSIVolumesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStorediSCSIVolumesOutput]
+        def stored_iscsi_volumes: () -> ::Array[Types::StorediSCSIVolume]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_stored_iscsi_volumes-instance_method
+      def describe_stored_iscsi_volumes: (
+                                           volume_arns: Array[::String]
+                                         ) -> _DescribeStorediSCSIVolumesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStorediSCSIVolumesResponseSuccess
+
+      interface _DescribeTapeArchivesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTapeArchivesOutput]
+        def tape_archives: () -> ::Array[Types::TapeArchive]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_tape_archives-instance_method
+      def describe_tape_archives: (
+                                    ?tape_arns: Array[::String],
+                                    ?marker: ::String,
+                                    ?limit: ::Integer
+                                  ) -> _DescribeTapeArchivesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTapeArchivesResponseSuccess
+
+      interface _DescribeTapeRecoveryPointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTapeRecoveryPointsOutput]
+        def gateway_arn: () -> ::String
+        def tape_recovery_point_infos: () -> ::Array[Types::TapeRecoveryPointInfo]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_tape_recovery_points-instance_method
+      def describe_tape_recovery_points: (
+                                           gateway_arn: ::String,
+                                           ?marker: ::String,
+                                           ?limit: ::Integer
+                                         ) -> _DescribeTapeRecoveryPointsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTapeRecoveryPointsResponseSuccess
+
+      interface _DescribeTapesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTapesOutput]
+        def tapes: () -> ::Array[Types::Tape]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_tapes-instance_method
+      def describe_tapes: (
+                            gateway_arn: ::String,
+                            ?tape_arns: Array[::String],
+                            ?marker: ::String,
+                            ?limit: ::Integer
+                          ) -> _DescribeTapesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTapesResponseSuccess
+
+      interface _DescribeUploadBufferResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUploadBufferOutput]
+        def gateway_arn: () -> ::String
+        def disk_ids: () -> ::Array[::String]
+        def upload_buffer_used_in_bytes: () -> ::Integer
+        def upload_buffer_allocated_in_bytes: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_upload_buffer-instance_method
+      def describe_upload_buffer: (
+                                    gateway_arn: ::String
+                                  ) -> _DescribeUploadBufferResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUploadBufferResponseSuccess
+
+      interface _DescribeVTLDevicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVTLDevicesOutput]
+        def gateway_arn: () -> ::String
+        def vtl_devices: () -> ::Array[Types::VTLDevice]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_vtl_devices-instance_method
+      def describe_vtl_devices: (
+                                  gateway_arn: ::String,
+                                  ?vtl_device_arns: Array[::String],
+                                  ?marker: ::String,
+                                  ?limit: ::Integer
+                                ) -> _DescribeVTLDevicesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVTLDevicesResponseSuccess
+
+      interface _DescribeWorkingStorageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkingStorageOutput]
+        def gateway_arn: () -> ::String
+        def disk_ids: () -> ::Array[::String]
+        def working_storage_used_in_bytes: () -> ::Integer
+        def working_storage_allocated_in_bytes: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_working_storage-instance_method
+      def describe_working_storage: (
+                                      gateway_arn: ::String
+                                    ) -> _DescribeWorkingStorageResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkingStorageResponseSuccess
+
+      interface _DetachVolumeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetachVolumeOutput]
+        def volume_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#detach_volume-instance_method
+      def detach_volume: (
+                           volume_arn: ::String,
+                           ?force_detach: bool
+                         ) -> _DetachVolumeResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetachVolumeResponseSuccess
+
+      interface _DisableGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableGatewayOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#disable_gateway-instance_method
+      def disable_gateway: (
+                             gateway_arn: ::String
+                           ) -> _DisableGatewayResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableGatewayResponseSuccess
+
+      interface _DisassociateFileSystemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateFileSystemOutput]
+        def file_system_association_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#disassociate_file_system-instance_method
+      def disassociate_file_system: (
+                                      file_system_association_arn: ::String,
+                                      ?force_delete: bool
+                                    ) -> _DisassociateFileSystemResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateFileSystemResponseSuccess
+
+      interface _JoinDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::JoinDomainOutput]
+        def gateway_arn: () -> ::String
+        def active_directory_status: () -> ("ACCESS_DENIED" | "DETACHED" | "JOINED" | "JOINING" | "NETWORK_ERROR" | "TIMEOUT" | "UNKNOWN_ERROR")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#join_domain-instance_method
+      def join_domain: (
+                         gateway_arn: ::String,
+                         domain_name: ::String,
+                         ?organizational_unit: ::String,
+                         ?domain_controllers: Array[::String],
+                         ?timeout_in_seconds: ::Integer,
+                         user_name: ::String,
+                         password: ::String
+                       ) -> _JoinDomainResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _JoinDomainResponseSuccess
+
+      interface _ListAutomaticTapeCreationPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAutomaticTapeCreationPoliciesOutput]
+        def automatic_tape_creation_policy_infos: () -> ::Array[Types::AutomaticTapeCreationPolicyInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#list_automatic_tape_creation_policies-instance_method
+      def list_automatic_tape_creation_policies: (
+                                                   ?gateway_arn: ::String
+                                                 ) -> _ListAutomaticTapeCreationPoliciesResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAutomaticTapeCreationPoliciesResponseSuccess
+
+      interface _ListFileSharesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFileSharesOutput]
+        def marker: () -> ::String
+        def next_marker: () -> ::String
+        def file_share_info_list: () -> ::Array[Types::FileShareInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#list_file_shares-instance_method
+      def list_file_shares: (
+                              ?gateway_arn: ::String,
+                              ?limit: ::Integer,
+                              ?marker: ::String
+                            ) -> _ListFileSharesResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFileSharesResponseSuccess
+
+      interface _ListFileSystemAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFileSystemAssociationsOutput]
+        def marker: () -> ::String
+        def next_marker: () -> ::String
+        def file_system_association_summary_list: () -> ::Array[Types::FileSystemAssociationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#list_file_system_associations-instance_method
+      def list_file_system_associations: (
+                                           ?gateway_arn: ::String,
+                                           ?limit: ::Integer,
+                                           ?marker: ::String
+                                         ) -> _ListFileSystemAssociationsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFileSystemAssociationsResponseSuccess
+
+      interface _ListGatewaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGatewaysOutput]
+        def gateways: () -> ::Array[Types::GatewayInfo]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#list_gateways-instance_method
+      def list_gateways: (
+                           ?marker: ::String,
+                           ?limit: ::Integer
+                         ) -> _ListGatewaysResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGatewaysResponseSuccess
+
+      interface _ListLocalDisksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLocalDisksOutput]
+        def gateway_arn: () -> ::String
+        def disks: () -> ::Array[Types::Disk]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#list_local_disks-instance_method
+      def list_local_disks: (
+                              gateway_arn: ::String
+                            ) -> _ListLocalDisksResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLocalDisksResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def resource_arn: () -> ::String
+        def marker: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String,
+                                    ?marker: ::String,
+                                    ?limit: ::Integer
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTapePoolsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTapePoolsOutput]
+        def pool_infos: () -> ::Array[Types::PoolInfo]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#list_tape_pools-instance_method
+      def list_tape_pools: (
+                             ?pool_arns: Array[::String],
+                             ?marker: ::String,
+                             ?limit: ::Integer
+                           ) -> _ListTapePoolsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTapePoolsResponseSuccess
+
+      interface _ListTapesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTapesOutput]
+        def tape_infos: () -> ::Array[Types::TapeInfo]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#list_tapes-instance_method
+      def list_tapes: (
+                        ?tape_arns: Array[::String],
+                        ?marker: ::String,
+                        ?limit: ::Integer
+                      ) -> _ListTapesResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTapesResponseSuccess
+
+      interface _ListVolumeInitiatorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVolumeInitiatorsOutput]
+        def initiators: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#list_volume_initiators-instance_method
+      def list_volume_initiators: (
+                                    volume_arn: ::String
+                                  ) -> _ListVolumeInitiatorsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVolumeInitiatorsResponseSuccess
+
+      interface _ListVolumeRecoveryPointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVolumeRecoveryPointsOutput]
+        def gateway_arn: () -> ::String
+        def volume_recovery_point_infos: () -> ::Array[Types::VolumeRecoveryPointInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#list_volume_recovery_points-instance_method
+      def list_volume_recovery_points: (
+                                         gateway_arn: ::String
+                                       ) -> _ListVolumeRecoveryPointsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVolumeRecoveryPointsResponseSuccess
+
+      interface _ListVolumesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVolumesOutput]
+        def gateway_arn: () -> ::String
+        def marker: () -> ::String
+        def volume_infos: () -> ::Array[Types::VolumeInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#list_volumes-instance_method
+      def list_volumes: (
+                          ?gateway_arn: ::String,
+                          ?marker: ::String,
+                          ?limit: ::Integer
+                        ) -> _ListVolumesResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVolumesResponseSuccess
+
+      interface _NotifyWhenUploadedResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::NotifyWhenUploadedOutput]
+        def file_share_arn: () -> ::String
+        def notification_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#notify_when_uploaded-instance_method
+      def notify_when_uploaded: (
+                                  file_share_arn: ::String
+                                ) -> _NotifyWhenUploadedResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _NotifyWhenUploadedResponseSuccess
+
+      interface _RefreshCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RefreshCacheOutput]
+        def file_share_arn: () -> ::String
+        def notification_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#refresh_cache-instance_method
+      def refresh_cache: (
+                           file_share_arn: ::String,
+                           ?folder_list: Array[::String],
+                           ?recursive: bool
+                         ) -> _RefreshCacheResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RefreshCacheResponseSuccess
+
+      interface _RemoveTagsFromResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveTagsFromResourceOutput]
+        def resource_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#remove_tags_from_resource-instance_method
+      def remove_tags_from_resource: (
+                                       resource_arn: ::String,
+                                       tag_keys: Array[::String]
+                                     ) -> _RemoveTagsFromResourceResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveTagsFromResourceResponseSuccess
+
+      interface _ResetCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetCacheOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#reset_cache-instance_method
+      def reset_cache: (
+                         gateway_arn: ::String
+                       ) -> _ResetCacheResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetCacheResponseSuccess
+
+      interface _RetrieveTapeArchiveResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RetrieveTapeArchiveOutput]
+        def tape_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#retrieve_tape_archive-instance_method
+      def retrieve_tape_archive: (
+                                   tape_arn: ::String,
+                                   gateway_arn: ::String
+                                 ) -> _RetrieveTapeArchiveResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetrieveTapeArchiveResponseSuccess
+
+      interface _RetrieveTapeRecoveryPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RetrieveTapeRecoveryPointOutput]
+        def tape_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#retrieve_tape_recovery_point-instance_method
+      def retrieve_tape_recovery_point: (
+                                          tape_arn: ::String,
+                                          gateway_arn: ::String
+                                        ) -> _RetrieveTapeRecoveryPointResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RetrieveTapeRecoveryPointResponseSuccess
+
+      interface _SetLocalConsolePasswordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetLocalConsolePasswordOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#set_local_console_password-instance_method
+      def set_local_console_password: (
+                                        gateway_arn: ::String,
+                                        local_console_password: ::String
+                                      ) -> _SetLocalConsolePasswordResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetLocalConsolePasswordResponseSuccess
+
+      interface _SetSMBGuestPasswordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetSMBGuestPasswordOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#set_smb_guest_password-instance_method
+      def set_smb_guest_password: (
+                                    gateway_arn: ::String,
+                                    password: ::String
+                                  ) -> _SetSMBGuestPasswordResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetSMBGuestPasswordResponseSuccess
+
+      interface _ShutdownGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ShutdownGatewayOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#shutdown_gateway-instance_method
+      def shutdown_gateway: (
+                              gateway_arn: ::String
+                            ) -> _ShutdownGatewayResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ShutdownGatewayResponseSuccess
+
+      interface _StartAvailabilityMonitorTestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAvailabilityMonitorTestOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#start_availability_monitor_test-instance_method
+      def start_availability_monitor_test: (
+                                             gateway_arn: ::String
+                                           ) -> _StartAvailabilityMonitorTestResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAvailabilityMonitorTestResponseSuccess
+
+      interface _StartGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartGatewayOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#start_gateway-instance_method
+      def start_gateway: (
+                           gateway_arn: ::String
+                         ) -> _StartGatewayResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartGatewayResponseSuccess
+
+      interface _UpdateAutomaticTapeCreationPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAutomaticTapeCreationPolicyOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_automatic_tape_creation_policy-instance_method
+      def update_automatic_tape_creation_policy: (
+                                                   automatic_tape_creation_rules: Array[
+                                                     {
+                                                       tape_barcode_prefix: ::String,
+                                                       pool_id: ::String,
+                                                       tape_size_in_bytes: ::Integer,
+                                                       minimum_num_tapes: ::Integer,
+                                                       worm: bool?
+                                                     },
+                                                   ],
+                                                   gateway_arn: ::String
+                                                 ) -> _UpdateAutomaticTapeCreationPolicyResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAutomaticTapeCreationPolicyResponseSuccess
+
+      interface _UpdateBandwidthRateLimitResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBandwidthRateLimitOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_bandwidth_rate_limit-instance_method
+      def update_bandwidth_rate_limit: (
+                                         gateway_arn: ::String,
+                                         ?average_upload_rate_limit_in_bits_per_sec: ::Integer,
+                                         ?average_download_rate_limit_in_bits_per_sec: ::Integer
+                                       ) -> _UpdateBandwidthRateLimitResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBandwidthRateLimitResponseSuccess
+
+      interface _UpdateBandwidthRateLimitScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBandwidthRateLimitScheduleOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_bandwidth_rate_limit_schedule-instance_method
+      def update_bandwidth_rate_limit_schedule: (
+                                                  gateway_arn: ::String,
+                                                  bandwidth_rate_limit_intervals: Array[
+                                                    {
+                                                      start_hour_of_day: ::Integer,
+                                                      start_minute_of_hour: ::Integer,
+                                                      end_hour_of_day: ::Integer,
+                                                      end_minute_of_hour: ::Integer,
+                                                      days_of_week: Array[::Integer],
+                                                      average_upload_rate_limit_in_bits_per_sec: ::Integer?,
+                                                      average_download_rate_limit_in_bits_per_sec: ::Integer?
+                                                    },
+                                                  ]
+                                                ) -> _UpdateBandwidthRateLimitScheduleResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBandwidthRateLimitScheduleResponseSuccess
+
+      interface _UpdateChapCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChapCredentialsOutput]
+        def target_arn: () -> ::String
+        def initiator_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_chap_credentials-instance_method
+      def update_chap_credentials: (
+                                     target_arn: ::String,
+                                     secret_to_authenticate_initiator: ::String,
+                                     initiator_name: ::String,
+                                     ?secret_to_authenticate_target: ::String
+                                   ) -> _UpdateChapCredentialsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChapCredentialsResponseSuccess
+
+      interface _UpdateFileSystemAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFileSystemAssociationOutput]
+        def file_system_association_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_file_system_association-instance_method
+      def update_file_system_association: (
+                                            file_system_association_arn: ::String,
+                                            ?user_name: ::String,
+                                            ?password: ::String,
+                                            ?audit_destination_arn: ::String,
+                                            ?cache_attributes: {
+                                              cache_stale_timeout_in_seconds: ::Integer?
+                                            }
+                                          ) -> _UpdateFileSystemAssociationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFileSystemAssociationResponseSuccess
+
+      interface _UpdateGatewayInformationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGatewayInformationOutput]
+        def gateway_arn: () -> ::String
+        def gateway_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_gateway_information-instance_method
+      def update_gateway_information: (
+                                        gateway_arn: ::String,
+                                        ?gateway_name: ::String,
+                                        ?gateway_timezone: ::String,
+                                        ?cloud_watch_log_group_arn: ::String,
+                                        ?gateway_capacity: ("Small" | "Medium" | "Large")
+                                      ) -> _UpdateGatewayInformationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayInformationResponseSuccess
+
+      interface _UpdateGatewaySoftwareNowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGatewaySoftwareNowOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_gateway_software_now-instance_method
+      def update_gateway_software_now: (
+                                         gateway_arn: ::String
+                                       ) -> _UpdateGatewaySoftwareNowResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewaySoftwareNowResponseSuccess
+
+      interface _UpdateMaintenanceStartTimeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMaintenanceStartTimeOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_maintenance_start_time-instance_method
+      def update_maintenance_start_time: (
+                                           gateway_arn: ::String,
+                                           hour_of_day: ::Integer,
+                                           minute_of_hour: ::Integer,
+                                           ?day_of_week: ::Integer,
+                                           ?day_of_month: ::Integer
+                                         ) -> _UpdateMaintenanceStartTimeResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMaintenanceStartTimeResponseSuccess
+
+      interface _UpdateNFSFileShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNFSFileShareOutput]
+        def file_share_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_nfs_file_share-instance_method
+      def update_nfs_file_share: (
+                                   file_share_arn: ::String,
+                                   ?kms_encrypted: bool,
+                                   ?kms_key: ::String,
+                                   ?nfs_file_share_defaults: {
+                                     file_mode: ::String?,
+                                     directory_mode: ::String?,
+                                     group_id: ::Integer?,
+                                     owner_id: ::Integer?
+                                   },
+                                   ?default_storage_class: ::String,
+                                   ?object_acl: ("private" | "public-read" | "public-read-write" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control" | "aws-exec-read"),
+                                   ?client_list: Array[::String],
+                                   ?squash: ::String,
+                                   ?read_only: bool,
+                                   ?guess_mime_type_enabled: bool,
+                                   ?requester_pays: bool,
+                                   ?file_share_name: ::String,
+                                   ?cache_attributes: {
+                                     cache_stale_timeout_in_seconds: ::Integer?
+                                   },
+                                   ?notification_policy: ::String,
+                                   ?audit_destination_arn: ::String
+                                 ) -> _UpdateNFSFileShareResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNFSFileShareResponseSuccess
+
+      interface _UpdateSMBFileShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSMBFileShareOutput]
+        def file_share_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_smb_file_share-instance_method
+      def update_smb_file_share: (
+                                   file_share_arn: ::String,
+                                   ?kms_encrypted: bool,
+                                   ?kms_key: ::String,
+                                   ?default_storage_class: ::String,
+                                   ?object_acl: ("private" | "public-read" | "public-read-write" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control" | "aws-exec-read"),
+                                   ?read_only: bool,
+                                   ?guess_mime_type_enabled: bool,
+                                   ?requester_pays: bool,
+                                   ?smbacl_enabled: bool,
+                                   ?access_based_enumeration: bool,
+                                   ?admin_user_list: Array[::String],
+                                   ?valid_user_list: Array[::String],
+                                   ?invalid_user_list: Array[::String],
+                                   ?audit_destination_arn: ::String,
+                                   ?case_sensitivity: ("ClientSpecified" | "CaseSensitive"),
+                                   ?file_share_name: ::String,
+                                   ?cache_attributes: {
+                                     cache_stale_timeout_in_seconds: ::Integer?
+                                   },
+                                   ?notification_policy: ::String,
+                                   ?oplocks_enabled: bool
+                                 ) -> _UpdateSMBFileShareResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSMBFileShareResponseSuccess
+
+      interface _UpdateSMBFileShareVisibilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSMBFileShareVisibilityOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_smb_file_share_visibility-instance_method
+      def update_smb_file_share_visibility: (
+                                              gateway_arn: ::String,
+                                              file_shares_visible: bool
+                                            ) -> _UpdateSMBFileShareVisibilityResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSMBFileShareVisibilityResponseSuccess
+
+      interface _UpdateSMBLocalGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSMBLocalGroupsOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_smb_local_groups-instance_method
+      def update_smb_local_groups: (
+                                     gateway_arn: ::String,
+                                     smb_local_groups: {
+                                       gateway_admins: Array[::String]?
+                                     }
+                                   ) -> _UpdateSMBLocalGroupsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSMBLocalGroupsResponseSuccess
+
+      interface _UpdateSMBSecurityStrategyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSMBSecurityStrategyOutput]
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_smb_security_strategy-instance_method
+      def update_smb_security_strategy: (
+                                          gateway_arn: ::String,
+                                          smb_security_strategy: ("ClientSpecified" | "MandatorySigning" | "MandatoryEncryption")
+                                        ) -> _UpdateSMBSecurityStrategyResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSMBSecurityStrategyResponseSuccess
+
+      interface _UpdateSnapshotScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSnapshotScheduleOutput]
+        def volume_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_snapshot_schedule-instance_method
+      def update_snapshot_schedule: (
+                                      volume_arn: ::String,
+                                      start_at: ::Integer,
+                                      recurrence_in_hours: ::Integer,
+                                      ?description: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ]
+                                    ) -> _UpdateSnapshotScheduleResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSnapshotScheduleResponseSuccess
+
+      interface _UpdateVTLDeviceTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVTLDeviceTypeOutput]
+        def vtl_device_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_vtl_device_type-instance_method
+      def update_vtl_device_type: (
+                                    vtl_device_arn: ::String,
+                                    device_type: ::String
+                                  ) -> _UpdateVTLDeviceTypeResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVTLDeviceTypeResponseSuccess
+    end
+  end
+end
+

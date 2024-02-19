@@ -428,6 +428,10 @@ module Aws::AppIntegrationsService
     #   For example, \\\{ "tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
     #
+    # @option params [Array<String>] :permissions
+    #   The configuration of events or requests that the application has
+    #   access to.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#arn #arn} => String
@@ -484,6 +488,7 @@ module Aws::AppIntegrationsService
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     permissions: ["Permission"],
     #   })
     #
     # @example Response structure
@@ -692,6 +697,42 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
+    # Deletes the Application. Only Applications that don't have any
+    # Application Associations can be deleted.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the Application.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete an application
+    #
+    #   # The following deletes an application.
+    #
+    #   resp = client.delete_application({
+    #     arn: "arn:aws:app-integrations:us-west-2:0123456789012:application/98542c53-e8ac-4570-9c85-c6552c8d9c5e", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_application({
+    #     arn: "ArnOrUUID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/DeleteApplication AWS API Documentation
+    #
+    # @overload delete_application(params = {})
+    # @param [Hash] params ({})
+    def delete_application(params = {}, options = {})
+      req = build_request(:delete_application, params)
+      req.send_request(options)
+    end
+
     # Deletes the DataIntegration. Only DataIntegrations that don't have
     # any DataIntegrationAssociations can be deleted. Deleting a
     # DataIntegration also deletes the underlying Amazon AppFlow flow and
@@ -771,6 +812,7 @@ module Aws::AppIntegrationsService
     #   * {Types::GetApplicationResponse#created_time #created_time} => Time
     #   * {Types::GetApplicationResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::GetApplicationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetApplicationResponse#permissions #permissions} => Array&lt;String&gt;
     #
     #
     # @example Example: To get an application
@@ -820,6 +862,8 @@ module Aws::AppIntegrationsService
     #   resp.last_modified_time #=> Time
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.permissions #=> Array
+    #   resp.permissions[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetApplication AWS API Documentation
     #
@@ -933,6 +977,73 @@ module Aws::AppIntegrationsService
     # @param [Hash] params ({})
     def get_event_integration(params = {}, options = {})
       req = build_request(:get_event_integration, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of application associations for an
+    # application.
+    #
+    # @option params [required, String] :application_id
+    #   A unique identifier for the Application.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListApplicationAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListApplicationAssociationsResponse#application_associations #application_associations} => Array&lt;Types::ApplicationAssociationSummary&gt;
+    #   * {Types::ListApplicationAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list application associations of an application
+    #
+    #   # The following retrives application associations of an application
+    #
+    #   resp = client.list_application_associations({
+    #     application_id: "98542c53-e8ac-4570-9c85-c6552c8d9c5e", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_associations: [
+    #       {
+    #         application_arn: "arn:aws:app-integrations:us-west-2:0123456789012:application/98542c53-e8ac-4570-9c85-c6552c8d9c5e", 
+    #         application_association_arn: "arn:aws:app-integrations:us-west-2:0123456789012:application-association/98542c53-e8ac-4570-9c85-c6552c8d9c5e/461dfb57-320a-454d-9bba-bb560845ff38", 
+    #         client_id: "connect.amazonaws.com", 
+    #       }, 
+    #     ], 
+    #     next_token: "abc", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_application_associations({
+    #     application_id: "ArnOrUUID", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_associations #=> Array
+    #   resp.application_associations[0].application_association_arn #=> String
+    #   resp.application_associations[0].application_arn #=> String
+    #   resp.application_associations[0].client_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ListApplicationAssociations AWS API Documentation
+    #
+    # @overload list_application_associations(params = {})
+    # @param [Hash] params ({})
+    def list_application_associations(params = {}, options = {})
+      req = build_request(:list_application_associations, params)
       req.send_request(options)
     end
 
@@ -1315,6 +1426,10 @@ module Aws::AppIntegrationsService
     # @option params [Array<Types::Publication>] :publications
     #   The events that the application publishes.
     #
+    # @option params [Array<String>] :permissions
+    #   The configuration of events or requests that the application has
+    #   access to.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -1356,6 +1471,7 @@ module Aws::AppIntegrationsService
     #         description: "Description",
     #       },
     #     ],
+    #     permissions: ["Permission"],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateApplication AWS API Documentation
@@ -1447,7 +1563,7 @@ module Aws::AppIntegrationsService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appintegrationsservice'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -45,6 +45,25 @@ module Aws::Braket
       include Aws::Structure
     end
 
+    # The Amazon Braket resource and the association type.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Braket resource arn.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The association type for the specified Amazon Braket resource arn.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/Association AWS API Documentation
+    #
+    class Association < Struct.new(
+      :arn,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_arn
     #   The ARN of the Amazon Braket job to cancel.
     #   @return [String]
@@ -144,6 +163,10 @@ module Aws::Braket
     #   scripts used for entry and training.
     #   @return [Types::AlgorithmSpecification]
     #
+    # @!attribute [rw] associations
+    #   The list of Amazon Braket resources associated with the hybrid job.
+    #   @return [Array<Types::Association>]
+    #
     # @!attribute [rw] checkpoint_config
     #   Information about the output locations for job checkpoint data.
     #   @return [Types::JobCheckpointConfig]
@@ -207,6 +230,7 @@ module Aws::Braket
     #
     class CreateJobRequest < Struct.new(
       :algorithm_specification,
+      :associations,
       :checkpoint_config,
       :client_token,
       :device_config,
@@ -237,6 +261,11 @@ module Aws::Braket
     # @!attribute [rw] action
     #   The action associated with the task.
     #   @return [String]
+    #
+    # @!attribute [rw] associations
+    #   The list of Amazon Braket resources associated with the quantum
+    #   task.
+    #   @return [Array<Types::Association>]
     #
     # @!attribute [rw] client_token
     #   The client token associated with the request.
@@ -279,6 +308,7 @@ module Aws::Braket
     #
     class CreateQuantumTaskRequest < Struct.new(
       :action,
+      :associations,
       :client_token,
       :device_arn,
       :device_parameters,
@@ -498,6 +528,10 @@ module Aws::Braket
     #   the job.
     #   @return [Types::AlgorithmSpecification]
     #
+    # @!attribute [rw] associations
+    #   The list of Amazon Braket resources associated with the hybrid job.
+    #   @return [Array<Types::Association>]
+    #
     # @!attribute [rw] billable_duration
     #   The billable time the Amazon Braket job used to complete.
     #   @return [Integer]
@@ -593,6 +627,7 @@ module Aws::Braket
     #
     class GetJobResponse < Struct.new(
       :algorithm_specification,
+      :associations,
       :billable_duration,
       :checkpoint_config,
       :created_at,
@@ -621,7 +656,7 @@ module Aws::Braket
     #   @return [Array<String>]
     #
     # @!attribute [rw] quantum_task_arn
-    #   the ARN of the task to retrieve.
+    #   The ARN of the task to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/GetQuantumTaskRequest AWS API Documentation
@@ -633,6 +668,11 @@ module Aws::Braket
       include Aws::Structure
     end
 
+    # @!attribute [rw] associations
+    #   The list of Amazon Braket resources associated with the quantum
+    #   task.
+    #   @return [Array<Types::Association>]
+    #
     # @!attribute [rw] created_at
     #   The time at which the task was created.
     #   @return [Time]
@@ -690,6 +730,7 @@ module Aws::Braket
     # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/GetQuantumTaskResponse AWS API Documentation
     #
     class GetQuantumTaskResponse < Struct.new(
+      :associations,
       :created_at,
       :device_arn,
       :device_parameters,
@@ -834,7 +875,7 @@ module Aws::Braket
     #   @return [String]
     #
     # @!attribute [rw] time_of_event
-    #   TThe type of event that occurred related to the Amazon Braket job.
+    #   The type of event that occurred related to the Amazon Braket job.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/JobEventDetails AWS API Documentation

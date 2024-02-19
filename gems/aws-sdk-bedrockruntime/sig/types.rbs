@@ -1,0 +1,108 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::BedrockRuntime
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class InvokeModelRequest
+      attr_accessor body: ::String
+      attr_accessor content_type: ::String
+      attr_accessor accept: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: [:body]
+    end
+
+    class InvokeModelResponse
+      attr_accessor body: ::String
+      attr_accessor content_type: ::String
+      SENSITIVE: [:body]
+    end
+
+    class InvokeModelWithResponseStreamRequest
+      attr_accessor body: ::String
+      attr_accessor content_type: ::String
+      attr_accessor accept: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: [:body]
+    end
+
+    class InvokeModelWithResponseStreamResponse
+      attr_accessor body: Types::ResponseStream
+      attr_accessor content_type: ::String
+      SENSITIVE: []
+    end
+
+    class ModelErrorException
+      attr_accessor message: ::String
+      attr_accessor original_status_code: ::Integer
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ModelNotReadyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ModelStreamErrorException
+      attr_accessor message: ::String
+      attr_accessor original_status_code: ::Integer
+      attr_accessor original_message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ModelTimeoutException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class PayloadPart
+      attr_accessor bytes: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: [:bytes]
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ResponseStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:chunk, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception, :model_timeout_exception]
+    end
+  end
+end

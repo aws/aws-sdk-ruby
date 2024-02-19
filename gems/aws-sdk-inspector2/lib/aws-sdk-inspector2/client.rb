@@ -761,6 +761,81 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Creates a CIS scan configuration.
+    #
+    # @option params [required, String] :scan_name
+    #   The scan name for the CIS scan configuration.
+    #
+    # @option params [required, Types::Schedule] :schedule
+    #   The schedule for the CIS scan configuration.
+    #
+    # @option params [required, String] :security_level
+    #   The security level for the CIS scan configuration. Security level
+    #   refers to the Benchmark levels that CIS assigns to a profile.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags for the CIS scan configuration.
+    #
+    # @option params [required, Types::CreateCisTargets] :targets
+    #   The targets for the CIS scan configuration.
+    #
+    # @return [Types::CreateCisScanConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCisScanConfigurationResponse#scan_configuration_arn #scan_configuration_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_cis_scan_configuration({
+    #     scan_name: "CisScanName", # required
+    #     schedule: { # required
+    #       daily: {
+    #         start_time: { # required
+    #           time_of_day: "TimeOfDay", # required
+    #           timezone: "Timezone", # required
+    #         },
+    #       },
+    #       monthly: {
+    #         day: "SUN", # required, accepts SUN, MON, TUE, WED, THU, FRI, SAT
+    #         start_time: { # required
+    #           time_of_day: "TimeOfDay", # required
+    #           timezone: "Timezone", # required
+    #         },
+    #       },
+    #       one_time: {
+    #       },
+    #       weekly: {
+    #         days: ["SUN"], # required, accepts SUN, MON, TUE, WED, THU, FRI, SAT
+    #         start_time: { # required
+    #           time_of_day: "TimeOfDay", # required
+    #           timezone: "Timezone", # required
+    #         },
+    #       },
+    #     },
+    #     security_level: "LEVEL_1", # required, accepts LEVEL_1, LEVEL_2
+    #     tags: {
+    #       "MapKey" => "MapValue",
+    #     },
+    #     targets: { # required
+    #       account_ids: ["TargetAccount"], # required
+    #       target_resource_tags: { # required
+    #         "NonEmptyString" => ["String"],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scan_configuration_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateCisScanConfiguration AWS API Documentation
+    #
+    # @overload create_cis_scan_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_cis_scan_configuration(params = {}, options = {})
+      req = build_request(:create_cis_scan_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates a filter resource using specified filter criteria. When the
     # filter action is set to `SUPPRESS` this action creates a suppression
     # rule.
@@ -1511,6 +1586,34 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Deletes a CIS scan configuration.
+    #
+    # @option params [required, String] :scan_configuration_arn
+    #   The ARN of the CIS scan configuration.
+    #
+    # @return [Types::DeleteCisScanConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCisScanConfigurationResponse#scan_configuration_arn #scan_configuration_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_cis_scan_configuration({
+    #     scan_configuration_arn: "CisScanConfigurationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scan_configuration_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DeleteCisScanConfiguration AWS API Documentation
+    #
+    # @overload delete_cis_scan_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_cis_scan_configuration(params = {}, options = {})
+      req = build_request(:delete_cis_scan_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes a filter resource.
     #
     # @option params [required, String] :arn
@@ -1768,6 +1871,145 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Retrieves a CIS scan report.
+    #
+    # @option params [required, String] :scan_arn
+    #   The scan ARN.
+    #
+    # @option params [Array<String>] :target_accounts
+    #   The target accounts.
+    #
+    # @return [Types::GetCisScanReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCisScanReportResponse#status #status} => String
+    #   * {Types::GetCisScanReportResponse#url #url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cis_scan_report({
+    #     scan_arn: "CisScanArn", # required
+    #     target_accounts: ["AccountId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "SUCCEEDED", "FAILED", "IN_PROGRESS"
+    #   resp.url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCisScanReport AWS API Documentation
+    #
+    # @overload get_cis_scan_report(params = {})
+    # @param [Hash] params ({})
+    def get_cis_scan_report(params = {}, options = {})
+      req = build_request(:get_cis_scan_report, params)
+      req.send_request(options)
+    end
+
+    # Retrieves CIS scan result details.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID.
+    #
+    # @option params [Types::CisScanResultDetailsFilterCriteria] :filter_criteria
+    #   The filter criteria.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of CIS scan result details to be returned in a
+    #   single page of results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous request that's used to retrieve
+    #   the next page of results.
+    #
+    # @option params [required, String] :scan_arn
+    #   The scan ARN.
+    #
+    # @option params [String] :sort_by
+    #   The sort by order.
+    #
+    # @option params [String] :sort_order
+    #   The sort order.
+    #
+    # @option params [required, String] :target_resource_id
+    #   The target resource ID.
+    #
+    # @return [Types::GetCisScanResultDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCisScanResultDetailsResponse#next_token #next_token} => String
+    #   * {Types::GetCisScanResultDetailsResponse#scan_result_details #scan_result_details} => Array&lt;Types::CisScanResultDetails&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cis_scan_result_details({
+    #     account_id: "AccountId", # required
+    #     filter_criteria: {
+    #       check_id_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       finding_arn_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       finding_status_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           value: "PASSED", # required, accepts PASSED, FAILED, SKIPPED
+    #         },
+    #       ],
+    #       security_level_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           value: "LEVEL_1", # required, accepts LEVEL_1, LEVEL_2
+    #         },
+    #       ],
+    #       title_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     scan_arn: "CisScanArn", # required
+    #     sort_by: "CHECK_ID", # accepts CHECK_ID, STATUS
+    #     sort_order: "ASC", # accepts ASC, DESC
+    #     target_resource_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.scan_result_details #=> Array
+    #   resp.scan_result_details[0].account_id #=> String
+    #   resp.scan_result_details[0].check_description #=> String
+    #   resp.scan_result_details[0].check_id #=> String
+    #   resp.scan_result_details[0].finding_arn #=> String
+    #   resp.scan_result_details[0].level #=> String, one of "LEVEL_1", "LEVEL_2"
+    #   resp.scan_result_details[0].platform #=> String
+    #   resp.scan_result_details[0].remediation #=> String
+    #   resp.scan_result_details[0].scan_arn #=> String
+    #   resp.scan_result_details[0].status #=> String, one of "PASSED", "FAILED", "SKIPPED"
+    #   resp.scan_result_details[0].status_reason #=> String
+    #   resp.scan_result_details[0].target_resource_id #=> String
+    #   resp.scan_result_details[0].title #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCisScanResultDetails AWS API Documentation
+    #
+    # @overload get_cis_scan_result_details(params = {})
+    # @param [Hash] params ({})
+    def get_cis_scan_result_details(params = {}, options = {})
+      req = build_request(:get_cis_scan_result_details, params)
+      req.send_request(options)
+    end
+
     # Retrieves setting configurations for Inspector scans.
     #
     # @return [Types::GetConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1776,7 +2018,8 @@ module Aws::Inspector2
     #
     # @example Response structure
     #
-    #   resp.ecr_configuration.rescan_duration_state.rescan_duration #=> String, one of "LIFETIME", "DAYS_30", "DAYS_180"
+    #   resp.ecr_configuration.rescan_duration_state.pull_date_rescan_duration #=> String, one of "DAYS_14", "DAYS_30", "DAYS_60", "DAYS_90", "DAYS_180"
+    #   resp.ecr_configuration.rescan_duration_state.rescan_duration #=> String, one of "LIFETIME", "DAYS_30", "DAYS_180", "DAYS_14", "DAYS_60", "DAYS_90"
     #   resp.ecr_configuration.rescan_duration_state.status #=> String, one of "SUCCESS", "PENDING", "FAILED"
     #   resp.ecr_configuration.rescan_duration_state.updated_at #=> Time
     #
@@ -2197,6 +2440,448 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Lists CIS scan configurations.
+    #
+    # @option params [Types::ListCisScanConfigurationsFilterCriteria] :filter_criteria
+    #   The CIS scan configuration filter criteria.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of CIS scan configurations to be returned in a
+    #   single page of results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous request that's used to retrieve
+    #   the next page of results.
+    #
+    # @option params [String] :sort_by
+    #   The CIS scan configuration sort by order.
+    #
+    # @option params [String] :sort_order
+    #   The CIS scan configuration sort order order.
+    #
+    # @return [Types::ListCisScanConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCisScanConfigurationsResponse#next_token #next_token} => String
+    #   * {Types::ListCisScanConfigurationsResponse#scan_configurations #scan_configurations} => Array&lt;Types::CisScanConfiguration&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cis_scan_configurations({
+    #     filter_criteria: {
+    #       scan_configuration_arn_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       scan_name_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       target_resource_tag_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString", # required
+    #         },
+    #       ],
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     sort_by: "SCAN_NAME", # accepts SCAN_NAME, SCAN_CONFIGURATION_ARN
+    #     sort_order: "ASC", # accepts ASC, DESC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.scan_configurations #=> Array
+    #   resp.scan_configurations[0].owner_id #=> String
+    #   resp.scan_configurations[0].scan_configuration_arn #=> String
+    #   resp.scan_configurations[0].scan_name #=> String
+    #   resp.scan_configurations[0].schedule.daily.start_time.time_of_day #=> String
+    #   resp.scan_configurations[0].schedule.daily.start_time.timezone #=> String
+    #   resp.scan_configurations[0].schedule.monthly.day #=> String, one of "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"
+    #   resp.scan_configurations[0].schedule.monthly.start_time.time_of_day #=> String
+    #   resp.scan_configurations[0].schedule.monthly.start_time.timezone #=> String
+    #   resp.scan_configurations[0].schedule.weekly.days #=> Array
+    #   resp.scan_configurations[0].schedule.weekly.days[0] #=> String, one of "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"
+    #   resp.scan_configurations[0].schedule.weekly.start_time.time_of_day #=> String
+    #   resp.scan_configurations[0].schedule.weekly.start_time.timezone #=> String
+    #   resp.scan_configurations[0].security_level #=> String, one of "LEVEL_1", "LEVEL_2"
+    #   resp.scan_configurations[0].tags #=> Hash
+    #   resp.scan_configurations[0].tags["MapKey"] #=> String
+    #   resp.scan_configurations[0].targets.account_ids #=> Array
+    #   resp.scan_configurations[0].targets.account_ids[0] #=> String
+    #   resp.scan_configurations[0].targets.target_resource_tags #=> Hash
+    #   resp.scan_configurations[0].targets.target_resource_tags["NonEmptyString"] #=> Array
+    #   resp.scan_configurations[0].targets.target_resource_tags["NonEmptyString"][0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScanConfigurations AWS API Documentation
+    #
+    # @overload list_cis_scan_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_cis_scan_configurations(params = {}, options = {})
+      req = build_request(:list_cis_scan_configurations, params)
+      req.send_request(options)
+    end
+
+    # Lists scan results aggregated by checks.
+    #
+    # @option params [Types::CisScanResultsAggregatedByChecksFilterCriteria] :filter_criteria
+    #   The filter criteria.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of scan results aggregated by checks to be returned
+    #   in a single page of results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous request that's used to retrieve
+    #   the next page of results.
+    #
+    # @option params [required, String] :scan_arn
+    #   The scan ARN.
+    #
+    # @option params [String] :sort_by
+    #   The sort by order.
+    #
+    # @option params [String] :sort_order
+    #   The sort order.
+    #
+    # @return [Types::ListCisScanResultsAggregatedByChecksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCisScanResultsAggregatedByChecksResponse#check_aggregations #check_aggregations} => Array&lt;Types::CisCheckAggregation&gt;
+    #   * {Types::ListCisScanResultsAggregatedByChecksResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cis_scan_results_aggregated_by_checks({
+    #     filter_criteria: {
+    #       account_id_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       check_id_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       failed_resources_filters: [
+    #         {
+    #           lower_inclusive: 1,
+    #           upper_inclusive: 1,
+    #         },
+    #       ],
+    #       platform_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       security_level_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           value: "LEVEL_1", # required, accepts LEVEL_1, LEVEL_2
+    #         },
+    #       ],
+    #       title_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     scan_arn: "CisScanArn", # required
+    #     sort_by: "CHECK_ID", # accepts CHECK_ID, TITLE, PLATFORM, FAILED_COUNTS, SECURITY_LEVEL
+    #     sort_order: "ASC", # accepts ASC, DESC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.check_aggregations #=> Array
+    #   resp.check_aggregations[0].account_id #=> String
+    #   resp.check_aggregations[0].check_description #=> String
+    #   resp.check_aggregations[0].check_id #=> String
+    #   resp.check_aggregations[0].level #=> String, one of "LEVEL_1", "LEVEL_2"
+    #   resp.check_aggregations[0].platform #=> String
+    #   resp.check_aggregations[0].scan_arn #=> String
+    #   resp.check_aggregations[0].status_counts.failed #=> Integer
+    #   resp.check_aggregations[0].status_counts.passed #=> Integer
+    #   resp.check_aggregations[0].status_counts.skipped #=> Integer
+    #   resp.check_aggregations[0].title #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScanResultsAggregatedByChecks AWS API Documentation
+    #
+    # @overload list_cis_scan_results_aggregated_by_checks(params = {})
+    # @param [Hash] params ({})
+    def list_cis_scan_results_aggregated_by_checks(params = {}, options = {})
+      req = build_request(:list_cis_scan_results_aggregated_by_checks, params)
+      req.send_request(options)
+    end
+
+    # Lists scan results aggregated by a target resource.
+    #
+    # @option params [Types::CisScanResultsAggregatedByTargetResourceFilterCriteria] :filter_criteria
+    #   The filter criteria.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of scan results aggregated by a target resource to
+    #   be returned in a single page of results.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous request that's used to retrieve
+    #   the next page of results.
+    #
+    # @option params [required, String] :scan_arn
+    #   The scan ARN.
+    #
+    # @option params [String] :sort_by
+    #   The sort by order.
+    #
+    # @option params [String] :sort_order
+    #   The sort order.
+    #
+    # @return [Types::ListCisScanResultsAggregatedByTargetResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCisScanResultsAggregatedByTargetResourceResponse#next_token #next_token} => String
+    #   * {Types::ListCisScanResultsAggregatedByTargetResourceResponse#target_resource_aggregations #target_resource_aggregations} => Array&lt;Types::CisTargetResourceAggregation&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cis_scan_results_aggregated_by_target_resource({
+    #     filter_criteria: {
+    #       account_id_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       check_id_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       failed_checks_filters: [
+    #         {
+    #           lower_inclusive: 1,
+    #           upper_inclusive: 1,
+    #         },
+    #       ],
+    #       platform_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       status_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           value: "PASSED", # required, accepts PASSED, FAILED, SKIPPED
+    #         },
+    #       ],
+    #       target_resource_id_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       target_resource_tag_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString", # required
+    #         },
+    #       ],
+    #       target_status_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           value: "TIMED_OUT", # required, accepts TIMED_OUT, CANCELLED, COMPLETED
+    #         },
+    #       ],
+    #       target_status_reason_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           value: "SCAN_IN_PROGRESS", # required, accepts SCAN_IN_PROGRESS, UNSUPPORTED_OS, SSM_UNMANAGED
+    #         },
+    #       ],
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     scan_arn: "CisScanArn", # required
+    #     sort_by: "RESOURCE_ID", # accepts RESOURCE_ID, FAILED_COUNTS, ACCOUNT_ID, PLATFORM, TARGET_STATUS, TARGET_STATUS_REASON
+    #     sort_order: "ASC", # accepts ASC, DESC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.target_resource_aggregations #=> Array
+    #   resp.target_resource_aggregations[0].account_id #=> String
+    #   resp.target_resource_aggregations[0].platform #=> String
+    #   resp.target_resource_aggregations[0].scan_arn #=> String
+    #   resp.target_resource_aggregations[0].status_counts.failed #=> Integer
+    #   resp.target_resource_aggregations[0].status_counts.passed #=> Integer
+    #   resp.target_resource_aggregations[0].status_counts.skipped #=> Integer
+    #   resp.target_resource_aggregations[0].target_resource_id #=> String
+    #   resp.target_resource_aggregations[0].target_resource_tags #=> Hash
+    #   resp.target_resource_aggregations[0].target_resource_tags["NonEmptyString"] #=> Array
+    #   resp.target_resource_aggregations[0].target_resource_tags["NonEmptyString"][0] #=> String
+    #   resp.target_resource_aggregations[0].target_status #=> String, one of "TIMED_OUT", "CANCELLED", "COMPLETED"
+    #   resp.target_resource_aggregations[0].target_status_reason #=> String, one of "SCAN_IN_PROGRESS", "UNSUPPORTED_OS", "SSM_UNMANAGED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScanResultsAggregatedByTargetResource AWS API Documentation
+    #
+    # @overload list_cis_scan_results_aggregated_by_target_resource(params = {})
+    # @param [Hash] params ({})
+    def list_cis_scan_results_aggregated_by_target_resource(params = {}, options = {})
+      req = build_request(:list_cis_scan_results_aggregated_by_target_resource, params)
+      req.send_request(options)
+    end
+
+    # Returns a CIS scan list.
+    #
+    # @option params [String] :detail_level
+    #   The detail applied to the CIS scan.
+    #
+    # @option params [Types::ListCisScansFilterCriteria] :filter_criteria
+    #   The CIS scan filter criteria.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned.
+    #
+    # @option params [String] :next_token
+    #   The pagination token from a previous request that's used to retrieve
+    #   the next page of results.
+    #
+    # @option params [String] :sort_by
+    #   The CIS scans sort by order.
+    #
+    # @option params [String] :sort_order
+    #   The CIS scans sort order.
+    #
+    # @return [Types::ListCisScansResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCisScansResponse#next_token #next_token} => String
+    #   * {Types::ListCisScansResponse#scans #scans} => Array&lt;Types::CisScan&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cis_scans({
+    #     detail_level: "ORGANIZATION", # accepts ORGANIZATION, MEMBER
+    #     filter_criteria: {
+    #       failed_checks_filters: [
+    #         {
+    #           lower_inclusive: 1,
+    #           upper_inclusive: 1,
+    #         },
+    #       ],
+    #       scan_arn_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       scan_at_filters: [
+    #         {
+    #           earliest_scan_start_time: Time.now,
+    #           latest_scan_start_time: Time.now,
+    #         },
+    #       ],
+    #       scan_configuration_arn_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       scan_name_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       scan_status_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           value: "FAILED", # required, accepts FAILED, COMPLETED, CANCELLED, IN_PROGRESS
+    #         },
+    #       ],
+    #       scheduled_by_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       target_account_id_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       target_resource_id_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "String", # required
+    #         },
+    #       ],
+    #       target_resource_tag_filters: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString", # required
+    #         },
+    #       ],
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     sort_by: "STATUS", # accepts STATUS, SCHEDULED_BY, SCAN_START_DATE, FAILED_CHECKS
+    #     sort_order: "ASC", # accepts ASC, DESC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.scans #=> Array
+    #   resp.scans[0].failed_checks #=> Integer
+    #   resp.scans[0].scan_arn #=> String
+    #   resp.scans[0].scan_configuration_arn #=> String
+    #   resp.scans[0].scan_date #=> Time
+    #   resp.scans[0].scan_name #=> String
+    #   resp.scans[0].scheduled_by #=> String
+    #   resp.scans[0].security_level #=> String, one of "LEVEL_1", "LEVEL_2"
+    #   resp.scans[0].status #=> String, one of "FAILED", "COMPLETED", "CANCELLED", "IN_PROGRESS"
+    #   resp.scans[0].targets.account_ids #=> Array
+    #   resp.scans[0].targets.account_ids[0] #=> String
+    #   resp.scans[0].targets.target_resource_tags #=> Hash
+    #   resp.scans[0].targets.target_resource_tags["NonEmptyString"] #=> Array
+    #   resp.scans[0].targets.target_resource_tags["NonEmptyString"][0] #=> String
+    #   resp.scans[0].total_checks #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScans AWS API Documentation
+    #
+    # @overload list_cis_scans(params = {})
+    # @param [Hash] params ({})
+    def list_cis_scans(params = {}, options = {})
+      req = build_request(:list_cis_scans, params)
+      req.send_request(options)
+    end
+
     # Lists coverage details for you environment.
     #
     # @option params [Types::CoverageFilterCriteria] :filter_criteria
@@ -2251,6 +2936,12 @@ module Aws::Inspector2
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
     #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
+    #       image_pulled_at: [
+    #         {
+    #           end_inclusive: Time.now,
+    #           start_inclusive: Time.now,
     #         },
     #       ],
     #       lambda_function_name: [
@@ -2323,6 +3014,7 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.ec2.platform #=> String, one of "WINDOWS", "LINUX", "UNKNOWN", "MACOS"
     #   resp.covered_resources[0].resource_metadata.ec2.tags #=> Hash
     #   resp.covered_resources[0].resource_metadata.ec2.tags["MapKey"] #=> String
+    #   resp.covered_resources[0].resource_metadata.ecr_image.image_pulled_at #=> Time
     #   resp.covered_resources[0].resource_metadata.ecr_image.tags #=> Array
     #   resp.covered_resources[0].resource_metadata.ecr_image.tags[0] #=> String
     #   resp.covered_resources[0].resource_metadata.ecr_repository.name #=> String
@@ -2399,6 +3091,12 @@ module Aws::Inspector2
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
     #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
+    #       image_pulled_at: [
+    #         {
+    #           end_inclusive: Time.now,
+    #           start_inclusive: Time.now,
     #         },
     #       ],
     #       lambda_function_name: [
@@ -3763,6 +4461,158 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Sends a CIS session health. This API is used by the Amazon Inspector
+    # SSM plugin to communicate with the Amazon Inspector service. The
+    # Amazon Inspector SSM plugin calls this API to start a CIS scan session
+    # for the scan ID supplied by the service.
+    #
+    # @option params [required, String] :scan_job_id
+    #   A unique identifier for the scan job.
+    #
+    # @option params [required, String] :session_token
+    #   The unique token that identifies the CIS session.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_cis_session_health({
+    #     scan_job_id: "UUID", # required
+    #     session_token: "UUID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SendCisSessionHealth AWS API Documentation
+    #
+    # @overload send_cis_session_health(params = {})
+    # @param [Hash] params ({})
+    def send_cis_session_health(params = {}, options = {})
+      req = build_request(:send_cis_session_health, params)
+      req.send_request(options)
+    end
+
+    # Sends a CIS session telemetry. This API is used by the Amazon
+    # Inspector SSM plugin to communicate with the Amazon Inspector service.
+    # The Amazon Inspector SSM plugin calls this API to start a CIS scan
+    # session for the scan ID supplied by the service.
+    #
+    # @option params [required, Array<Types::CisSessionMessage>] :messages
+    #   The CIS session telemetry messages.
+    #
+    # @option params [required, String] :scan_job_id
+    #   A unique identifier for the scan job.
+    #
+    # @option params [required, String] :session_token
+    #   The unique token that identifies the CIS session.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_cis_session_telemetry({
+    #     messages: [ # required
+    #       {
+    #         cis_rule_details: "data", # required
+    #         rule_id: "RuleId", # required
+    #         status: "FAILED", # required, accepts FAILED, PASSED, NOT_EVALUATED, INFORMATIONAL, UNKNOWN, NOT_APPLICABLE, ERROR
+    #       },
+    #     ],
+    #     scan_job_id: "UUID", # required
+    #     session_token: "UUID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SendCisSessionTelemetry AWS API Documentation
+    #
+    # @overload send_cis_session_telemetry(params = {})
+    # @param [Hash] params ({})
+    def send_cis_session_telemetry(params = {}, options = {})
+      req = build_request(:send_cis_session_telemetry, params)
+      req.send_request(options)
+    end
+
+    # Starts a CIS session. This API is used by the Amazon Inspector SSM
+    # plugin to communicate with the Amazon Inspector service. The Amazon
+    # Inspector SSM plugin calls this API to start a CIS scan session for
+    # the scan ID supplied by the service.
+    #
+    # @option params [required, Types::StartCisSessionMessage] :message
+    #   The start CIS session message.
+    #
+    # @option params [required, String] :scan_job_id
+    #   A unique identifier for the scan job.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_cis_session({
+    #     message: { # required
+    #       session_token: "UUID", # required
+    #     },
+    #     scan_job_id: "UUID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StartCisSession AWS API Documentation
+    #
+    # @overload start_cis_session(params = {})
+    # @param [Hash] params ({})
+    def start_cis_session(params = {}, options = {})
+      req = build_request(:start_cis_session, params)
+      req.send_request(options)
+    end
+
+    # Stops a CIS session. This API is used by the Amazon Inspector SSM
+    # plugin to communicate with the Amazon Inspector service. The Amazon
+    # Inspector SSM plugin calls this API to start a CIS scan session for
+    # the scan ID supplied by the service.
+    #
+    # @option params [required, Types::StopCisSessionMessage] :message
+    #   The stop CIS session message.
+    #
+    # @option params [required, String] :scan_job_id
+    #   A unique identifier for the scan job.
+    #
+    # @option params [required, String] :session_token
+    #   The unique token that identifies the CIS session.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_cis_session({
+    #     message: { # required
+    #       benchmark_profile: "BenchmarkProfile",
+    #       benchmark_version: "BenchmarkVersion",
+    #       compute_platform: {
+    #         product: "Product",
+    #         vendor: "Vendor",
+    #         version: "PlatformVersion",
+    #       },
+    #       progress: { # required
+    #         error_checks: 1,
+    #         failed_checks: 1,
+    #         informational_checks: 1,
+    #         not_applicable_checks: 1,
+    #         not_evaluated_checks: 1,
+    #         successful_checks: 1,
+    #         total_checks: 1,
+    #         unknown_checks: 1,
+    #       },
+    #       reason: "Reason",
+    #       status: "SUCCESS", # required, accepts SUCCESS, FAILED, INTERRUPTED, UNSUPPORTED_OS
+    #     },
+    #     scan_job_id: "UUID", # required
+    #     session_token: "UUID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StopCisSession AWS API Documentation
+    #
+    # @overload stop_cis_session(params = {})
+    # @param [Hash] params ({})
+    def stop_cis_session(params = {}, options = {})
+      req = build_request(:stop_cis_session, params)
+      req.send_request(options)
+    end
+
     # Adds tags to a resource.
     #
     # @option params [required, String] :resource_arn
@@ -3817,6 +4667,79 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Updates a CIS scan configuration.
+    #
+    # @option params [required, String] :scan_configuration_arn
+    #   The CIS scan configuration ARN.
+    #
+    # @option params [String] :scan_name
+    #   The scan name for the CIS scan configuration.
+    #
+    # @option params [Types::Schedule] :schedule
+    #   The schedule for the CIS scan configuration.
+    #
+    # @option params [String] :security_level
+    #   The security level for the CIS scan configuration. Security level
+    #   refers to the Benchmark levels that CIS assigns to a profile.
+    #
+    # @option params [Types::UpdateCisTargets] :targets
+    #   The targets for the CIS scan configuration.
+    #
+    # @return [Types::UpdateCisScanConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCisScanConfigurationResponse#scan_configuration_arn #scan_configuration_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cis_scan_configuration({
+    #     scan_configuration_arn: "CisScanConfigurationArn", # required
+    #     scan_name: "CisScanName",
+    #     schedule: {
+    #       daily: {
+    #         start_time: { # required
+    #           time_of_day: "TimeOfDay", # required
+    #           timezone: "Timezone", # required
+    #         },
+    #       },
+    #       monthly: {
+    #         day: "SUN", # required, accepts SUN, MON, TUE, WED, THU, FRI, SAT
+    #         start_time: { # required
+    #           time_of_day: "TimeOfDay", # required
+    #           timezone: "Timezone", # required
+    #         },
+    #       },
+    #       one_time: {
+    #       },
+    #       weekly: {
+    #         days: ["SUN"], # required, accepts SUN, MON, TUE, WED, THU, FRI, SAT
+    #         start_time: { # required
+    #           time_of_day: "TimeOfDay", # required
+    #           timezone: "Timezone", # required
+    #         },
+    #       },
+    #     },
+    #     security_level: "LEVEL_1", # accepts LEVEL_1, LEVEL_2
+    #     targets: {
+    #       account_ids: ["TargetAccount"],
+    #       target_resource_tags: {
+    #         "NonEmptyString" => ["String"],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scan_configuration_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateCisScanConfiguration AWS API Documentation
+    #
+    # @overload update_cis_scan_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_cis_scan_configuration(params = {}, options = {})
+      req = build_request(:update_cis_scan_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates setting configurations for your Amazon Inspector account. When
     # you use this API as an Amazon Inspector delegated administrator this
     # updates the setting for all accounts you manage. Member accounts in an
@@ -3832,7 +4755,8 @@ module Aws::Inspector2
     #
     #   resp = client.update_configuration({
     #     ecr_configuration: { # required
-    #       rescan_duration: "LIFETIME", # required, accepts LIFETIME, DAYS_30, DAYS_180
+    #       pull_date_rescan_duration: "DAYS_14", # accepts DAYS_14, DAYS_30, DAYS_60, DAYS_90, DAYS_180
+    #       rescan_duration: "LIFETIME", # required, accepts LIFETIME, DAYS_30, DAYS_180, DAYS_14, DAYS_60, DAYS_90
     #     },
     #   })
     #
@@ -3896,7 +4820,7 @@ module Aws::Inspector2
     end
 
     # Updates an encryption key. A `ResourceNotFoundException` means that an
-    # AWS owned key is being used for encryption.
+    # Amazon Web Services owned key is being used for encryption.
     #
     # @option params [required, String] :kms_key_id
     #   A KMS key ID for the encryption key.
@@ -4331,7 +5255,7 @@ module Aws::Inspector2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

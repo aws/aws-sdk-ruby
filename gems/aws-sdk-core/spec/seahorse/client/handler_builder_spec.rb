@@ -48,7 +48,7 @@ module Seahorse
           expect(handler_class.new.call('context')).to eq('context')
         end
 
-        it 'accepts a step with the block' do
+        it 'accepts a step with the block', rbs_test: :skip do
           obj.handler(step: :validate) do |context|
             context << :validate
             super(context)

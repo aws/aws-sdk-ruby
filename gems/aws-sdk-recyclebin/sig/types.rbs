@@ -1,0 +1,232 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::RecycleBin
+  module Types
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor reason: ("INVALID_RULE_STATE")
+      SENSITIVE: []
+    end
+
+    class CreateRuleRequest
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE")
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      attr_accessor lock_configuration: Types::LockConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateRuleResponse
+      attr_accessor identifier: ::String
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE")
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      attr_accessor status: ("pending" | "available")
+      attr_accessor lock_configuration: Types::LockConfiguration
+      attr_accessor lock_state: ("locked" | "pending_unlock" | "unlocked")
+      attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRuleRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRuleResponse < Aws::EmptyStructure
+    end
+
+    class GetRuleRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetRuleResponse
+      attr_accessor identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE")
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      attr_accessor status: ("pending" | "available")
+      attr_accessor lock_configuration: Types::LockConfiguration
+      attr_accessor lock_state: ("locked" | "pending_unlock" | "unlocked")
+      attr_accessor lock_end_time: ::Time
+      attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListRulesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE")
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      attr_accessor lock_state: ("locked" | "pending_unlock" | "unlocked")
+      SENSITIVE: []
+    end
+
+    class ListRulesResponse
+      attr_accessor rules: ::Array[Types::RuleSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class LockConfiguration
+      attr_accessor unlock_delay: Types::UnlockDelay
+      SENSITIVE: []
+    end
+
+    class LockRuleRequest
+      attr_accessor identifier: ::String
+      attr_accessor lock_configuration: Types::LockConfiguration
+      SENSITIVE: []
+    end
+
+    class LockRuleResponse
+      attr_accessor identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE")
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      attr_accessor status: ("pending" | "available")
+      attr_accessor lock_configuration: Types::LockConfiguration
+      attr_accessor lock_state: ("locked" | "pending_unlock" | "unlocked")
+      attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor reason: ("RULE_NOT_FOUND")
+      SENSITIVE: []
+    end
+
+    class ResourceTag
+      attr_accessor resource_tag_key: ::String
+      attr_accessor resource_tag_value: ::String
+      SENSITIVE: []
+    end
+
+    class RetentionPeriod
+      attr_accessor retention_period_value: ::Integer
+      attr_accessor retention_period_unit: ("DAYS")
+      SENSITIVE: []
+    end
+
+    class RuleSummary
+      attr_accessor identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor lock_state: ("locked" | "pending_unlock" | "unlocked")
+      attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor reason: ("SERVICE_QUOTA_EXCEEDED")
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UnlockDelay
+      attr_accessor unlock_delay_value: ::Integer
+      attr_accessor unlock_delay_unit: ("DAYS")
+      SENSITIVE: []
+    end
+
+    class UnlockRuleRequest
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class UnlockRuleResponse
+      attr_accessor identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE")
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      attr_accessor status: ("pending" | "available")
+      attr_accessor lock_configuration: Types::LockConfiguration
+      attr_accessor lock_state: ("locked" | "pending_unlock" | "unlocked")
+      attr_accessor lock_end_time: ::Time
+      attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateRuleRequest
+      attr_accessor identifier: ::String
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor description: ::String
+      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE")
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
+    class UpdateRuleResponse
+      attr_accessor identifier: ::String
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor description: ::String
+      attr_accessor resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE")
+      attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      attr_accessor status: ("pending" | "available")
+      attr_accessor lock_state: ("locked" | "pending_unlock" | "unlocked")
+      attr_accessor lock_end_time: ::Time
+      attr_accessor rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("INVALID_PAGE_TOKEN" | "INVALID_PARAMETER_VALUE")
+      SENSITIVE: []
+    end
+  end
+end

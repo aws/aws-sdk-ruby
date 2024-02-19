@@ -1,0 +1,379 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::TranscribeStreamingService
+  module Types
+
+    class Alternative
+      attr_accessor transcript: ::String
+      attr_accessor items: ::Array[Types::Item]
+      attr_accessor entities: ::Array[Types::Entity]
+      SENSITIVE: []
+    end
+
+    class AudioEvent
+      attr_accessor audio_chunk: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class CallAnalyticsEntity
+      attr_accessor begin_offset_millis: ::Integer
+      attr_accessor end_offset_millis: ::Integer
+      attr_accessor category: ::String
+      attr_accessor type: ::String
+      attr_accessor content: ::String
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class CallAnalyticsItem
+      attr_accessor begin_offset_millis: ::Integer
+      attr_accessor end_offset_millis: ::Integer
+      attr_accessor type: ("pronunciation" | "punctuation")
+      attr_accessor content: ::String
+      attr_accessor confidence: ::Float
+      attr_accessor vocabulary_filter_match: bool
+      attr_accessor stable: bool
+      SENSITIVE: []
+    end
+
+    class CategoryEvent
+      attr_accessor matched_categories: ::Array[::String]
+      attr_accessor matched_details: ::Hash[::String, Types::PointsOfInterest]
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ChannelDefinition
+      attr_accessor channel_id: ::Integer
+      attr_accessor participant_role: ("AGENT" | "CUSTOMER")
+      SENSITIVE: []
+    end
+
+    class CharacterOffsets
+      attr_accessor begin: ::Integer
+      attr_accessor end: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConfigurationEvent
+      attr_accessor channel_definitions: ::Array[Types::ChannelDefinition]
+      attr_accessor post_call_analytics_settings: Types::PostCallAnalyticsSettings
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class Entity
+      attr_accessor start_time: ::Float
+      attr_accessor end_time: ::Float
+      attr_accessor category: ::String
+      attr_accessor type: ::String
+      attr_accessor content: ::String
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class IssueDetected
+      attr_accessor character_offsets: Types::CharacterOffsets
+      SENSITIVE: []
+    end
+
+    class Item
+      attr_accessor start_time: ::Float
+      attr_accessor end_time: ::Float
+      attr_accessor type: ("pronunciation" | "punctuation")
+      attr_accessor content: ::String
+      attr_accessor vocabulary_filter_match: bool
+      attr_accessor speaker: ::String
+      attr_accessor confidence: ::Float
+      attr_accessor stable: bool
+      SENSITIVE: []
+    end
+
+    class LanguageWithScore
+      attr_accessor language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "hi-IN" | "th-TH")
+      attr_accessor score: ::Float
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class MedicalAlternative
+      attr_accessor transcript: ::String
+      attr_accessor items: ::Array[Types::MedicalItem]
+      attr_accessor entities: ::Array[Types::MedicalEntity]
+      SENSITIVE: []
+    end
+
+    class MedicalEntity
+      attr_accessor start_time: ::Float
+      attr_accessor end_time: ::Float
+      attr_accessor category: ::String
+      attr_accessor content: ::String
+      attr_accessor confidence: ::Float
+      SENSITIVE: []
+    end
+
+    class MedicalItem
+      attr_accessor start_time: ::Float
+      attr_accessor end_time: ::Float
+      attr_accessor type: ("pronunciation" | "punctuation")
+      attr_accessor content: ::String
+      attr_accessor confidence: ::Float
+      attr_accessor speaker: ::String
+      SENSITIVE: []
+    end
+
+    class MedicalResult
+      attr_accessor result_id: ::String
+      attr_accessor start_time: ::Float
+      attr_accessor end_time: ::Float
+      attr_accessor is_partial: bool
+      attr_accessor alternatives: ::Array[Types::MedicalAlternative]
+      attr_accessor channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class MedicalTranscript
+      attr_accessor results: ::Array[Types::MedicalResult]
+      SENSITIVE: []
+    end
+
+    class MedicalTranscriptEvent
+      attr_accessor transcript: Types::MedicalTranscript
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class PointsOfInterest
+      attr_accessor timestamp_ranges: ::Array[Types::TimestampRange]
+      SENSITIVE: []
+    end
+
+    class PostCallAnalyticsSettings
+      attr_accessor output_location: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor content_redaction_output: ("redacted" | "redacted_and_unredacted")
+      attr_accessor output_encryption_kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class Result
+      attr_accessor result_id: ::String
+      attr_accessor start_time: ::Float
+      attr_accessor end_time: ::Float
+      attr_accessor is_partial: bool
+      attr_accessor alternatives: ::Array[Types::Alternative]
+      attr_accessor channel_id: ::String
+      attr_accessor language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "hi-IN" | "th-TH")
+      attr_accessor language_identification: ::Array[Types::LanguageWithScore]
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class StartCallAnalyticsStreamTranscriptionRequest
+      attr_accessor language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_encoding: ("pcm" | "ogg-opus" | "flac")
+      attr_accessor vocabulary_name: ::String
+      attr_accessor session_id: ::String
+      attr_accessor audio_stream: Types::AudioStream
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor vocabulary_filter_method: ("remove" | "mask" | "tag")
+      attr_accessor language_model_name: ::String
+      attr_accessor enable_partial_results_stabilization: bool
+      attr_accessor partial_results_stability: ("high" | "medium" | "low")
+      attr_accessor content_identification_type: ("PII")
+      attr_accessor content_redaction_type: ("PII")
+      attr_accessor pii_entity_types: ::String
+      SENSITIVE: []
+    end
+
+    class StartCallAnalyticsStreamTranscriptionResponse
+      attr_accessor request_id: ::String
+      attr_accessor language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_encoding: ("pcm" | "ogg-opus" | "flac")
+      attr_accessor vocabulary_name: ::String
+      attr_accessor session_id: ::String
+      attr_accessor call_analytics_transcript_result_stream: Types::CallAnalyticsTranscriptResultStream
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor vocabulary_filter_method: ("remove" | "mask" | "tag")
+      attr_accessor language_model_name: ::String
+      attr_accessor enable_partial_results_stabilization: bool
+      attr_accessor partial_results_stability: ("high" | "medium" | "low")
+      attr_accessor content_identification_type: ("PII")
+      attr_accessor content_redaction_type: ("PII")
+      attr_accessor pii_entity_types: ::String
+      SENSITIVE: []
+    end
+
+    class StartMedicalStreamTranscriptionRequest
+      attr_accessor language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "hi-IN" | "th-TH")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_encoding: ("pcm" | "ogg-opus" | "flac")
+      attr_accessor vocabulary_name: ::String
+      attr_accessor specialty: ("PRIMARYCARE" | "CARDIOLOGY" | "NEUROLOGY" | "ONCOLOGY" | "RADIOLOGY" | "UROLOGY")
+      attr_accessor type: ("CONVERSATION" | "DICTATION")
+      attr_accessor show_speaker_label: bool
+      attr_accessor session_id: ::String
+      attr_accessor audio_stream: Types::AudioStream
+      attr_accessor enable_channel_identification: bool
+      attr_accessor number_of_channels: ::Integer
+      attr_accessor content_identification_type: ("PHI")
+      SENSITIVE: []
+    end
+
+    class StartMedicalStreamTranscriptionResponse
+      attr_accessor request_id: ::String
+      attr_accessor language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "hi-IN" | "th-TH")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_encoding: ("pcm" | "ogg-opus" | "flac")
+      attr_accessor vocabulary_name: ::String
+      attr_accessor specialty: ("PRIMARYCARE" | "CARDIOLOGY" | "NEUROLOGY" | "ONCOLOGY" | "RADIOLOGY" | "UROLOGY")
+      attr_accessor type: ("CONVERSATION" | "DICTATION")
+      attr_accessor show_speaker_label: bool
+      attr_accessor session_id: ::String
+      attr_accessor transcript_result_stream: Types::MedicalTranscriptResultStream
+      attr_accessor enable_channel_identification: bool
+      attr_accessor number_of_channels: ::Integer
+      attr_accessor content_identification_type: ("PHI")
+      SENSITIVE: []
+    end
+
+    class StartStreamTranscriptionRequest
+      attr_accessor language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "hi-IN" | "th-TH")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_encoding: ("pcm" | "ogg-opus" | "flac")
+      attr_accessor vocabulary_name: ::String
+      attr_accessor session_id: ::String
+      attr_accessor audio_stream: Types::AudioStream
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor vocabulary_filter_method: ("remove" | "mask" | "tag")
+      attr_accessor show_speaker_label: bool
+      attr_accessor enable_channel_identification: bool
+      attr_accessor number_of_channels: ::Integer
+      attr_accessor enable_partial_results_stabilization: bool
+      attr_accessor partial_results_stability: ("high" | "medium" | "low")
+      attr_accessor content_identification_type: ("PII")
+      attr_accessor content_redaction_type: ("PII")
+      attr_accessor pii_entity_types: ::String
+      attr_accessor language_model_name: ::String
+      attr_accessor identify_language: bool
+      attr_accessor language_options: ::String
+      attr_accessor preferred_language: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "hi-IN" | "th-TH")
+      attr_accessor identify_multiple_languages: bool
+      attr_accessor vocabulary_names: ::String
+      attr_accessor vocabulary_filter_names: ::String
+      SENSITIVE: []
+    end
+
+    class StartStreamTranscriptionResponse
+      attr_accessor request_id: ::String
+      attr_accessor language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "hi-IN" | "th-TH")
+      attr_accessor media_sample_rate_hertz: ::Integer
+      attr_accessor media_encoding: ("pcm" | "ogg-opus" | "flac")
+      attr_accessor vocabulary_name: ::String
+      attr_accessor session_id: ::String
+      attr_accessor transcript_result_stream: Types::TranscriptResultStream
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor vocabulary_filter_method: ("remove" | "mask" | "tag")
+      attr_accessor show_speaker_label: bool
+      attr_accessor enable_channel_identification: bool
+      attr_accessor number_of_channels: ::Integer
+      attr_accessor enable_partial_results_stabilization: bool
+      attr_accessor partial_results_stability: ("high" | "medium" | "low")
+      attr_accessor content_identification_type: ("PII")
+      attr_accessor content_redaction_type: ("PII")
+      attr_accessor pii_entity_types: ::String
+      attr_accessor language_model_name: ::String
+      attr_accessor identify_language: bool
+      attr_accessor language_options: ::String
+      attr_accessor preferred_language: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "hi-IN" | "th-TH")
+      attr_accessor identify_multiple_languages: bool
+      attr_accessor vocabulary_names: ::String
+      attr_accessor vocabulary_filter_names: ::String
+      SENSITIVE: []
+    end
+
+    class TimestampRange
+      attr_accessor begin_offset_millis: ::Integer
+      attr_accessor end_offset_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class Transcript
+      attr_accessor results: ::Array[Types::Result]
+      SENSITIVE: []
+    end
+
+    class TranscriptEvent
+      attr_accessor transcript: Types::Transcript
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class UtteranceEvent
+      attr_accessor utterance_id: ::String
+      attr_accessor is_partial: bool
+      attr_accessor participant_role: ("AGENT" | "CUSTOMER")
+      attr_accessor begin_offset_millis: ::Integer
+      attr_accessor end_offset_millis: ::Integer
+      attr_accessor transcript: ::String
+      attr_accessor items: ::Array[Types::CallAnalyticsItem]
+      attr_accessor entities: ::Array[Types::CallAnalyticsEntity]
+      attr_accessor sentiment: ("POSITIVE" | "NEGATIVE" | "MIXED" | "NEUTRAL")
+      attr_accessor issues_detected: ::Array[Types::IssueDetected]
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class AudioStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:audio_event, :configuration_event]
+    end
+
+    class CallAnalyticsTranscriptResultStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:utterance_event, :category_event, :bad_request_exception, :limit_exceeded_exception, :internal_failure_exception, :conflict_exception, :service_unavailable_exception]
+    end
+
+    class MedicalTranscriptResultStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:transcript_event, :bad_request_exception, :limit_exceeded_exception, :internal_failure_exception, :conflict_exception, :service_unavailable_exception]
+    end
+
+    class TranscriptResultStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:transcript_event, :bad_request_exception, :limit_exceeded_exception, :internal_failure_exception, :conflict_exception, :service_unavailable_exception]
+    end
+  end
+end

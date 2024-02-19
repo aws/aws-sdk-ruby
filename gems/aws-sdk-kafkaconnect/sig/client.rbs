@@ -1,0 +1,336 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module KafkaConnect
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectorResponse]
+        def connector_arn: () -> ::String
+        def connector_name: () -> ::String
+        def connector_state: () -> ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#create_connector-instance_method
+      def create_connector: (
+                              capacity: {
+                                auto_scaling: {
+                                  max_worker_count: ::Integer,
+                                  mcu_count: ::Integer,
+                                  min_worker_count: ::Integer,
+                                  scale_in_policy: {
+                                    cpu_utilization_percentage: ::Integer
+                                  }?,
+                                  scale_out_policy: {
+                                    cpu_utilization_percentage: ::Integer
+                                  }?
+                                }?,
+                                provisioned_capacity: {
+                                  mcu_count: ::Integer,
+                                  worker_count: ::Integer
+                                }?
+                              },
+                              connector_configuration: Hash[::String, ::String],
+                              ?connector_description: ::String,
+                              connector_name: ::String,
+                              kafka_cluster: {
+                                apache_kafka_cluster: {
+                                  bootstrap_servers: ::String,
+                                  vpc: {
+                                    security_groups: Array[::String]?,
+                                    subnets: Array[::String]
+                                  }
+                                }
+                              },
+                              kafka_cluster_client_authentication: {
+                                authentication_type: ("NONE" | "IAM")
+                              },
+                              kafka_cluster_encryption_in_transit: {
+                                encryption_type: ("PLAINTEXT" | "TLS")
+                              },
+                              kafka_connect_version: ::String,
+                              ?log_delivery: {
+                                worker_log_delivery: {
+                                  cloud_watch_logs: {
+                                    enabled: bool,
+                                    log_group: ::String?
+                                  }?,
+                                  firehose: {
+                                    delivery_stream: ::String?,
+                                    enabled: bool
+                                  }?,
+                                  s3: {
+                                    bucket: ::String?,
+                                    enabled: bool,
+                                    prefix: ::String?
+                                  }?
+                                }
+                              },
+                              plugins: Array[
+                                {
+                                  custom_plugin: {
+                                    custom_plugin_arn: ::String,
+                                    revision: ::Integer
+                                  }
+                                },
+                              ],
+                              service_execution_role_arn: ::String,
+                              ?worker_configuration: {
+                                revision: ::Integer,
+                                worker_configuration_arn: ::String
+                              }
+                            ) -> _CreateConnectorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectorResponseSuccess
+
+      interface _CreateCustomPluginResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomPluginResponse]
+        def custom_plugin_arn: () -> ::String
+        def custom_plugin_state: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING")
+        def name: () -> ::String
+        def revision: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#create_custom_plugin-instance_method
+      def create_custom_plugin: (
+                                  content_type: ("JAR" | "ZIP"),
+                                  ?description: ::String,
+                                  location: {
+                                    s3_location: {
+                                      bucket_arn: ::String,
+                                      file_key: ::String,
+                                      object_version: ::String?
+                                    }
+                                  },
+                                  name: ::String
+                                ) -> _CreateCustomPluginResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomPluginResponseSuccess
+
+      interface _CreateWorkerConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkerConfigurationResponse]
+        def creation_time: () -> ::Time
+        def latest_revision: () -> Types::WorkerConfigurationRevisionSummary
+        def name: () -> ::String
+        def worker_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#create_worker_configuration-instance_method
+      def create_worker_configuration: (
+                                         ?description: ::String,
+                                         name: ::String,
+                                         properties_file_content: ::String
+                                       ) -> _CreateWorkerConfigurationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkerConfigurationResponseSuccess
+
+      interface _DeleteConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectorResponse]
+        def connector_arn: () -> ::String
+        def connector_state: () -> ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#delete_connector-instance_method
+      def delete_connector: (
+                              connector_arn: ::String,
+                              ?current_version: ::String
+                            ) -> _DeleteConnectorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectorResponseSuccess
+
+      interface _DeleteCustomPluginResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCustomPluginResponse]
+        def custom_plugin_arn: () -> ::String
+        def custom_plugin_state: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#delete_custom_plugin-instance_method
+      def delete_custom_plugin: (
+                                  custom_plugin_arn: ::String
+                                ) -> _DeleteCustomPluginResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomPluginResponseSuccess
+
+      interface _DescribeConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConnectorResponse]
+        def capacity: () -> Types::CapacityDescription
+        def connector_arn: () -> ::String
+        def connector_configuration: () -> ::Hash[::String, ::String]
+        def connector_description: () -> ::String
+        def connector_name: () -> ::String
+        def connector_state: () -> ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+        def creation_time: () -> ::Time
+        def current_version: () -> ::String
+        def kafka_cluster: () -> Types::KafkaClusterDescription
+        def kafka_cluster_client_authentication: () -> Types::KafkaClusterClientAuthenticationDescription
+        def kafka_cluster_encryption_in_transit: () -> Types::KafkaClusterEncryptionInTransitDescription
+        def kafka_connect_version: () -> ::String
+        def log_delivery: () -> Types::LogDeliveryDescription
+        def plugins: () -> ::Array[Types::PluginDescription]
+        def service_execution_role_arn: () -> ::String
+        def state_description: () -> Types::StateDescription
+        def worker_configuration: () -> Types::WorkerConfigurationDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#describe_connector-instance_method
+      def describe_connector: (
+                                connector_arn: ::String
+                              ) -> _DescribeConnectorResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectorResponseSuccess
+
+      interface _DescribeCustomPluginResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCustomPluginResponse]
+        def creation_time: () -> ::Time
+        def custom_plugin_arn: () -> ::String
+        def custom_plugin_state: () -> ("CREATING" | "CREATE_FAILED" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING")
+        def description: () -> ::String
+        def latest_revision: () -> Types::CustomPluginRevisionSummary
+        def name: () -> ::String
+        def state_description: () -> Types::StateDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#describe_custom_plugin-instance_method
+      def describe_custom_plugin: (
+                                    custom_plugin_arn: ::String
+                                  ) -> _DescribeCustomPluginResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCustomPluginResponseSuccess
+
+      interface _DescribeWorkerConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeWorkerConfigurationResponse]
+        def creation_time: () -> ::Time
+        def description: () -> ::String
+        def latest_revision: () -> Types::WorkerConfigurationRevisionDescription
+        def name: () -> ::String
+        def worker_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#describe_worker_configuration-instance_method
+      def describe_worker_configuration: (
+                                           worker_configuration_arn: ::String
+                                         ) -> _DescribeWorkerConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkerConfigurationResponseSuccess
+
+      interface _ListConnectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectorsResponse]
+        def connectors: () -> ::Array[Types::ConnectorSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#list_connectors-instance_method
+      def list_connectors: (
+                             ?connector_name_prefix: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListConnectorsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectorsResponseSuccess
+
+      interface _ListCustomPluginsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomPluginsResponse]
+        def custom_plugins: () -> ::Array[Types::CustomPluginSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#list_custom_plugins-instance_method
+      def list_custom_plugins: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListCustomPluginsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomPluginsResponseSuccess
+
+      interface _ListWorkerConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkerConfigurationsResponse]
+        def next_token: () -> ::String
+        def worker_configurations: () -> ::Array[Types::WorkerConfigurationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#list_worker_configurations-instance_method
+      def list_worker_configurations: (
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListWorkerConfigurationsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkerConfigurationsResponseSuccess
+
+      interface _UpdateConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectorResponse]
+        def connector_arn: () -> ::String
+        def connector_state: () -> ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#update_connector-instance_method
+      def update_connector: (
+                              capacity: {
+                                auto_scaling: {
+                                  max_worker_count: ::Integer,
+                                  mcu_count: ::Integer,
+                                  min_worker_count: ::Integer,
+                                  scale_in_policy: {
+                                    cpu_utilization_percentage: ::Integer
+                                  },
+                                  scale_out_policy: {
+                                    cpu_utilization_percentage: ::Integer
+                                  }
+                                }?,
+                                provisioned_capacity: {
+                                  mcu_count: ::Integer,
+                                  worker_count: ::Integer
+                                }?
+                              },
+                              connector_arn: ::String,
+                              current_version: ::String
+                            ) -> _UpdateConnectorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectorResponseSuccess
+    end
+  end
+end
+

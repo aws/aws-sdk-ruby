@@ -1,0 +1,1209 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SSOAdmin
+  module Types
+
+    class AccessControlAttribute
+      attr_accessor key: ::String
+      attr_accessor value: Types::AccessControlAttributeValue
+      SENSITIVE: []
+    end
+
+    class AccessControlAttributeValue
+      attr_accessor source: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountAssignment
+      attr_accessor account_id: ::String
+      attr_accessor permission_set_arn: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      SENSITIVE: []
+    end
+
+    class AccountAssignmentForPrincipal
+      attr_accessor account_id: ::String
+      attr_accessor permission_set_arn: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      SENSITIVE: []
+    end
+
+    class AccountAssignmentOperationStatus
+      attr_accessor created_date: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor permission_set_arn: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      attr_accessor request_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+      attr_accessor target_id: ::String
+      attr_accessor target_type: ("AWS_ACCOUNT")
+      SENSITIVE: []
+    end
+
+    class AccountAssignmentOperationStatusMetadata
+      attr_accessor created_date: ::Time
+      attr_accessor request_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+      SENSITIVE: []
+    end
+
+    class Application
+      attr_accessor application_account: ::String
+      attr_accessor application_arn: ::String
+      attr_accessor application_provider_arn: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor portal_options: Types::PortalOptions
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ApplicationAssignment
+      attr_accessor application_arn: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      SENSITIVE: []
+    end
+
+    class ApplicationAssignmentForPrincipal
+      attr_accessor application_arn: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      SENSITIVE: []
+    end
+
+    class ApplicationProvider
+      attr_accessor application_provider_arn: ::String
+      attr_accessor display_data: Types::DisplayData
+      attr_accessor federation_protocol: ("SAML" | "OAUTH")
+      attr_accessor resource_server_config: Types::ResourceServerConfig
+      SENSITIVE: []
+    end
+
+    class AttachCustomerManagedPolicyReferenceToPermissionSetRequest
+      attr_accessor customer_managed_policy_reference: Types::CustomerManagedPolicyReference
+      attr_accessor instance_arn: ::String
+      attr_accessor permission_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AttachCustomerManagedPolicyReferenceToPermissionSetResponse < Aws::EmptyStructure
+    end
+
+    class AttachManagedPolicyToPermissionSetRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor managed_policy_arn: ::String
+      attr_accessor permission_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AttachManagedPolicyToPermissionSetResponse < Aws::EmptyStructure
+    end
+
+    class AttachedManagedPolicy
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AuthenticationMethod
+      attr_accessor iam: Types::IamAuthenticationMethod
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Iam < AuthenticationMethod
+      end
+      class Unknown < AuthenticationMethod
+      end
+    end
+
+    class AuthenticationMethodItem
+      attr_accessor authentication_method: Types::AuthenticationMethod
+      attr_accessor authentication_method_type: ("IAM")
+      SENSITIVE: []
+    end
+
+    class AuthorizationCodeGrant
+      attr_accessor redirect_uris: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AuthorizedTokenIssuer
+      attr_accessor authorized_audiences: ::Array[::String]
+      attr_accessor trusted_token_issuer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccountAssignmentRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor permission_set_arn: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      attr_accessor target_id: ::String
+      attr_accessor target_type: ("AWS_ACCOUNT")
+      SENSITIVE: []
+    end
+
+    class CreateAccountAssignmentResponse
+      attr_accessor account_assignment_creation_status: Types::AccountAssignmentOperationStatus
+      SENSITIVE: []
+    end
+
+    class CreateApplicationAssignmentRequest
+      attr_accessor application_arn: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      SENSITIVE: []
+    end
+
+    class CreateApplicationAssignmentResponse < Aws::EmptyStructure
+    end
+
+    class CreateApplicationRequest
+      attr_accessor application_provider_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor portal_options: Types::PortalOptions
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateApplicationResponse
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInstanceAccessControlAttributeConfigurationRequest
+      attr_accessor instance_access_control_attribute_configuration: Types::InstanceAccessControlAttributeConfiguration
+      attr_accessor instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInstanceAccessControlAttributeConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class CreateInstanceRequest
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateInstanceResponse
+      attr_accessor instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePermissionSetRequest
+      attr_accessor description: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor relay_state: ::String
+      attr_accessor session_duration: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePermissionSetResponse
+      attr_accessor permission_set: Types::PermissionSet
+      SENSITIVE: []
+    end
+
+    class CreateTrustedTokenIssuerRequest
+      attr_accessor client_token: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor trusted_token_issuer_configuration: Types::TrustedTokenIssuerConfiguration
+      attr_accessor trusted_token_issuer_type: ("OIDC_JWT")
+      SENSITIVE: []
+    end
+
+    class CreateTrustedTokenIssuerResponse
+      attr_accessor trusted_token_issuer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomerManagedPolicyReference
+      attr_accessor name: ::String
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccountAssignmentRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor permission_set_arn: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      attr_accessor target_id: ::String
+      attr_accessor target_type: ("AWS_ACCOUNT")
+      SENSITIVE: []
+    end
+
+    class DeleteAccountAssignmentResponse
+      attr_accessor account_assignment_deletion_status: Types::AccountAssignmentOperationStatus
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationAccessScopeRequest
+      attr_accessor application_arn: ::String
+      attr_accessor scope: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationAssignmentRequest
+      attr_accessor application_arn: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationAssignmentResponse < Aws::EmptyStructure
+    end
+
+    class DeleteApplicationAuthenticationMethodRequest
+      attr_accessor application_arn: ::String
+      attr_accessor authentication_method_type: ("IAM")
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationGrantRequest
+      attr_accessor application_arn: ::String
+      attr_accessor grant_type: ("authorization_code" | "refresh_token" | "urn:ietf:params:oauth:grant-type:jwt-bearer" | "urn:ietf:params:oauth:grant-type:token-exchange")
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationRequest
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteInlinePolicyFromPermissionSetRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor permission_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInlinePolicyFromPermissionSetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteInstanceAccessControlAttributeConfigurationRequest
+      attr_accessor instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInstanceAccessControlAttributeConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteInstanceRequest
+      attr_accessor instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInstanceResponse < Aws::EmptyStructure
+    end
+
+    class DeletePermissionSetRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor permission_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePermissionSetResponse < Aws::EmptyStructure
+    end
+
+    class DeletePermissionsBoundaryFromPermissionSetRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor permission_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePermissionsBoundaryFromPermissionSetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTrustedTokenIssuerRequest
+      attr_accessor trusted_token_issuer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTrustedTokenIssuerResponse < Aws::EmptyStructure
+    end
+
+    class DescribeAccountAssignmentCreationStatusRequest
+      attr_accessor account_assignment_creation_request_id: ::String
+      attr_accessor instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccountAssignmentCreationStatusResponse
+      attr_accessor account_assignment_creation_status: Types::AccountAssignmentOperationStatus
+      SENSITIVE: []
+    end
+
+    class DescribeAccountAssignmentDeletionStatusRequest
+      attr_accessor account_assignment_deletion_request_id: ::String
+      attr_accessor instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccountAssignmentDeletionStatusResponse
+      attr_accessor account_assignment_deletion_status: Types::AccountAssignmentOperationStatus
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationAssignmentRequest
+      attr_accessor application_arn: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationAssignmentResponse
+      attr_accessor application_arn: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationProviderRequest
+      attr_accessor application_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationProviderResponse
+      attr_accessor application_provider_arn: ::String
+      attr_accessor display_data: Types::DisplayData
+      attr_accessor federation_protocol: ("SAML" | "OAUTH")
+      attr_accessor resource_server_config: Types::ResourceServerConfig
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationRequest
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationResponse
+      attr_accessor application_account: ::String
+      attr_accessor application_arn: ::String
+      attr_accessor application_provider_arn: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor portal_options: Types::PortalOptions
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceAccessControlAttributeConfigurationRequest
+      attr_accessor instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceAccessControlAttributeConfigurationResponse
+      attr_accessor instance_access_control_attribute_configuration: Types::InstanceAccessControlAttributeConfiguration
+      attr_accessor status: ("ENABLED" | "CREATION_IN_PROGRESS" | "CREATION_FAILED")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceRequest
+      attr_accessor instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceResponse
+      attr_accessor created_date: ::Time
+      attr_accessor identity_store_id: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "ACTIVE")
+      SENSITIVE: []
+    end
+
+    class DescribePermissionSetProvisioningStatusRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor provision_permission_set_request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePermissionSetProvisioningStatusResponse
+      attr_accessor permission_set_provisioning_status: Types::PermissionSetProvisioningStatus
+      SENSITIVE: []
+    end
+
+    class DescribePermissionSetRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor permission_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePermissionSetResponse
+      attr_accessor permission_set: Types::PermissionSet
+      SENSITIVE: []
+    end
+
+    class DescribeTrustedTokenIssuerRequest
+      attr_accessor trusted_token_issuer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTrustedTokenIssuerResponse
+      attr_accessor name: ::String
+      attr_accessor trusted_token_issuer_arn: ::String
+      attr_accessor trusted_token_issuer_configuration: Types::TrustedTokenIssuerConfiguration
+      attr_accessor trusted_token_issuer_type: ("OIDC_JWT")
+      SENSITIVE: []
+    end
+
+    class DetachCustomerManagedPolicyReferenceFromPermissionSetRequest
+      attr_accessor customer_managed_policy_reference: Types::CustomerManagedPolicyReference
+      attr_accessor instance_arn: ::String
+      attr_accessor permission_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DetachCustomerManagedPolicyReferenceFromPermissionSetResponse < Aws::EmptyStructure
+    end
+
+    class DetachManagedPolicyFromPermissionSetRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor managed_policy_arn: ::String
+      attr_accessor permission_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DetachManagedPolicyFromPermissionSetResponse < Aws::EmptyStructure
+    end
+
+    class DisplayData
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor icon_url: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationAccessScopeRequest
+      attr_accessor application_arn: ::String
+      attr_accessor scope: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationAccessScopeResponse
+      attr_accessor authorized_targets: ::Array[::String]
+      attr_accessor scope: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationAssignmentConfigurationRequest
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationAssignmentConfigurationResponse
+      attr_accessor assignment_required: bool
+      SENSITIVE: []
+    end
+
+    class GetApplicationAuthenticationMethodRequest
+      attr_accessor application_arn: ::String
+      attr_accessor authentication_method_type: ("IAM")
+      SENSITIVE: []
+    end
+
+    class GetApplicationAuthenticationMethodResponse
+      attr_accessor authentication_method: Types::AuthenticationMethod
+      SENSITIVE: []
+    end
+
+    class GetApplicationGrantRequest
+      attr_accessor application_arn: ::String
+      attr_accessor grant_type: ("authorization_code" | "refresh_token" | "urn:ietf:params:oauth:grant-type:jwt-bearer" | "urn:ietf:params:oauth:grant-type:token-exchange")
+      SENSITIVE: []
+    end
+
+    class GetApplicationGrantResponse
+      attr_accessor grant: Types::Grant
+      SENSITIVE: []
+    end
+
+    class GetInlinePolicyForPermissionSetRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor permission_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetInlinePolicyForPermissionSetResponse
+      attr_accessor inline_policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetPermissionsBoundaryForPermissionSetRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor permission_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPermissionsBoundaryForPermissionSetResponse
+      attr_accessor permissions_boundary: Types::PermissionsBoundary
+      SENSITIVE: []
+    end
+
+    class Grant
+      attr_accessor authorization_code: Types::AuthorizationCodeGrant
+      attr_accessor jwt_bearer: Types::JwtBearerGrant
+      attr_accessor refresh_token: Types::RefreshTokenGrant
+      attr_accessor token_exchange: Types::TokenExchangeGrant
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AuthorizationCode < Grant
+      end
+      class JwtBearer < Grant
+      end
+      class RefreshToken < Grant
+      end
+      class TokenExchange < Grant
+      end
+      class Unknown < Grant
+      end
+    end
+
+    class GrantItem
+      attr_accessor grant: Types::Grant
+      attr_accessor grant_type: ("authorization_code" | "refresh_token" | "urn:ietf:params:oauth:grant-type:jwt-bearer" | "urn:ietf:params:oauth:grant-type:token-exchange")
+      SENSITIVE: []
+    end
+
+    class IamAuthenticationMethod
+      attr_accessor actor_policy: untyped
+      SENSITIVE: []
+    end
+
+    class InstanceAccessControlAttributeConfiguration
+      attr_accessor access_control_attributes: ::Array[Types::AccessControlAttribute]
+      SENSITIVE: []
+    end
+
+    class InstanceMetadata
+      attr_accessor created_date: ::Time
+      attr_accessor identity_store_id: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "ACTIVE")
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JwtBearerGrant
+      attr_accessor authorized_token_issuers: ::Array[Types::AuthorizedTokenIssuer]
+      SENSITIVE: []
+    end
+
+    class ListAccountAssignmentCreationStatusRequest
+      attr_accessor filter: Types::OperationStatusFilter
+      attr_accessor instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountAssignmentCreationStatusResponse
+      attr_accessor account_assignments_creation_status: ::Array[Types::AccountAssignmentOperationStatusMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountAssignmentDeletionStatusRequest
+      attr_accessor filter: Types::OperationStatusFilter
+      attr_accessor instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountAssignmentDeletionStatusResponse
+      attr_accessor account_assignments_deletion_status: ::Array[Types::AccountAssignmentOperationStatusMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountAssignmentsFilter
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountAssignmentsForPrincipalRequest
+      attr_accessor filter: Types::ListAccountAssignmentsFilter
+      attr_accessor instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      SENSITIVE: []
+    end
+
+    class ListAccountAssignmentsForPrincipalResponse
+      attr_accessor account_assignments: ::Array[Types::AccountAssignmentForPrincipal]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountAssignmentsRequest
+      attr_accessor account_id: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor permission_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountAssignmentsResponse
+      attr_accessor account_assignments: ::Array[Types::AccountAssignment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountsForProvisionedPermissionSetRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor permission_set_arn: ::String
+      attr_accessor provisioning_status: ("LATEST_PERMISSION_SET_PROVISIONED" | "LATEST_PERMISSION_SET_NOT_PROVISIONED")
+      SENSITIVE: []
+    end
+
+    class ListAccountsForProvisionedPermissionSetResponse
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationAccessScopesRequest
+      attr_accessor application_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationAccessScopesResponse
+      attr_accessor next_token: ::String
+      attr_accessor scopes: ::Array[Types::ScopeDetails]
+      SENSITIVE: []
+    end
+
+    class ListApplicationAssignmentsFilter
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationAssignmentsForPrincipalRequest
+      attr_accessor filter: Types::ListApplicationAssignmentsFilter
+      attr_accessor instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      SENSITIVE: []
+    end
+
+    class ListApplicationAssignmentsForPrincipalResponse
+      attr_accessor application_assignments: ::Array[Types::ApplicationAssignmentForPrincipal]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationAssignmentsRequest
+      attr_accessor application_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationAssignmentsResponse
+      attr_accessor application_assignments: ::Array[Types::ApplicationAssignment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationAuthenticationMethodsRequest
+      attr_accessor application_arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationAuthenticationMethodsResponse
+      attr_accessor authentication_methods: ::Array[Types::AuthenticationMethodItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationGrantsRequest
+      attr_accessor application_arn: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationGrantsResponse
+      attr_accessor grants: ::Array[Types::GrantItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationProvidersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationProvidersResponse
+      attr_accessor application_providers: ::Array[Types::ApplicationProvider]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsFilter
+      attr_accessor application_account: ::String
+      attr_accessor application_provider: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsRequest
+      attr_accessor filter: Types::ListApplicationsFilter
+      attr_accessor instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsResponse
+      attr_accessor applications: ::Array[Types::Application]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomerManagedPolicyReferencesInPermissionSetRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor permission_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomerManagedPolicyReferencesInPermissionSetResponse
+      attr_accessor customer_managed_policy_references: ::Array[Types::CustomerManagedPolicyReference]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstancesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstancesResponse
+      attr_accessor instances: ::Array[Types::InstanceMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedPoliciesInPermissionSetRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor permission_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedPoliciesInPermissionSetResponse
+      attr_accessor attached_managed_policies: ::Array[Types::AttachedManagedPolicy]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPermissionSetProvisioningStatusRequest
+      attr_accessor filter: Types::OperationStatusFilter
+      attr_accessor instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPermissionSetProvisioningStatusResponse
+      attr_accessor next_token: ::String
+      attr_accessor permission_sets_provisioning_status: ::Array[Types::PermissionSetProvisioningStatusMetadata]
+      SENSITIVE: []
+    end
+
+    class ListPermissionSetsProvisionedToAccountRequest
+      attr_accessor account_id: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor provisioning_status: ("LATEST_PERMISSION_SET_PROVISIONED" | "LATEST_PERMISSION_SET_NOT_PROVISIONED")
+      SENSITIVE: []
+    end
+
+    class ListPermissionSetsProvisionedToAccountResponse
+      attr_accessor next_token: ::String
+      attr_accessor permission_sets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListPermissionSetsRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPermissionSetsResponse
+      attr_accessor next_token: ::String
+      attr_accessor permission_sets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor next_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTrustedTokenIssuersRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTrustedTokenIssuersResponse
+      attr_accessor next_token: ::String
+      attr_accessor trusted_token_issuers: ::Array[Types::TrustedTokenIssuerMetadata]
+      SENSITIVE: []
+    end
+
+    class OidcJwtConfiguration
+      attr_accessor claim_attribute_path: ::String
+      attr_accessor identity_store_attribute_path: ::String
+      attr_accessor issuer_url: ::String
+      attr_accessor jwks_retrieval_option: ("OPEN_ID_DISCOVERY")
+      SENSITIVE: []
+    end
+
+    class OidcJwtUpdateConfiguration
+      attr_accessor claim_attribute_path: ::String
+      attr_accessor identity_store_attribute_path: ::String
+      attr_accessor jwks_retrieval_option: ("OPEN_ID_DISCOVERY")
+      SENSITIVE: []
+    end
+
+    class OperationStatusFilter
+      attr_accessor status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+      SENSITIVE: []
+    end
+
+    class PermissionSet
+      attr_accessor created_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor permission_set_arn: ::String
+      attr_accessor relay_state: ::String
+      attr_accessor session_duration: ::String
+      SENSITIVE: []
+    end
+
+    class PermissionSetProvisioningStatus
+      attr_accessor account_id: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor failure_reason: ::String
+      attr_accessor permission_set_arn: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+      SENSITIVE: []
+    end
+
+    class PermissionSetProvisioningStatusMetadata
+      attr_accessor created_date: ::Time
+      attr_accessor request_id: ::String
+      attr_accessor status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")
+      SENSITIVE: []
+    end
+
+    class PermissionsBoundary
+      attr_accessor customer_managed_policy_reference: Types::CustomerManagedPolicyReference
+      attr_accessor managed_policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PortalOptions
+      attr_accessor sign_in_options: Types::SignInOptions
+      attr_accessor visibility: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ProvisionPermissionSetRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor permission_set_arn: ::String
+      attr_accessor target_id: ::String
+      attr_accessor target_type: ("AWS_ACCOUNT" | "ALL_PROVISIONED_ACCOUNTS")
+      SENSITIVE: []
+    end
+
+    class ProvisionPermissionSetResponse
+      attr_accessor permission_set_provisioning_status: Types::PermissionSetProvisioningStatus
+      SENSITIVE: []
+    end
+
+    class PutApplicationAccessScopeRequest
+      attr_accessor application_arn: ::String
+      attr_accessor authorized_targets: ::Array[::String]
+      attr_accessor scope: ::String
+      SENSITIVE: []
+    end
+
+    class PutApplicationAssignmentConfigurationRequest
+      attr_accessor application_arn: ::String
+      attr_accessor assignment_required: bool
+      SENSITIVE: []
+    end
+
+    class PutApplicationAssignmentConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class PutApplicationAuthenticationMethodRequest
+      attr_accessor application_arn: ::String
+      attr_accessor authentication_method: Types::AuthenticationMethod
+      attr_accessor authentication_method_type: ("IAM")
+      SENSITIVE: []
+    end
+
+    class PutApplicationGrantRequest
+      attr_accessor application_arn: ::String
+      attr_accessor grant: Types::Grant
+      attr_accessor grant_type: ("authorization_code" | "refresh_token" | "urn:ietf:params:oauth:grant-type:jwt-bearer" | "urn:ietf:params:oauth:grant-type:token-exchange")
+      SENSITIVE: []
+    end
+
+    class PutInlinePolicyToPermissionSetRequest
+      attr_accessor inline_policy: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor permission_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutInlinePolicyToPermissionSetResponse < Aws::EmptyStructure
+    end
+
+    class PutPermissionsBoundaryToPermissionSetRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor permission_set_arn: ::String
+      attr_accessor permissions_boundary: Types::PermissionsBoundary
+      SENSITIVE: []
+    end
+
+    class PutPermissionsBoundaryToPermissionSetResponse < Aws::EmptyStructure
+    end
+
+    class RefreshTokenGrant < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceServerConfig
+      attr_accessor scopes: ::Hash[::String, Types::ResourceServerScopeDetails]
+      SENSITIVE: []
+    end
+
+    class ResourceServerScopeDetails
+      attr_accessor detailed_title: ::String
+      attr_accessor long_description: ::String
+      SENSITIVE: []
+    end
+
+    class ScopeDetails
+      attr_accessor authorized_targets: ::Array[::String]
+      attr_accessor scope: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SignInOptions
+      attr_accessor application_url: ::String
+      attr_accessor origin: ("IDENTITY_CENTER" | "APPLICATION")
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TokenExchangeGrant < Aws::EmptyStructure
+    end
+
+    class TrustedTokenIssuerConfiguration
+      attr_accessor oidc_jwt_configuration: Types::OidcJwtConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class OidcJwtConfiguration < TrustedTokenIssuerConfiguration
+      end
+      class Unknown < TrustedTokenIssuerConfiguration
+      end
+    end
+
+    class TrustedTokenIssuerMetadata
+      attr_accessor name: ::String
+      attr_accessor trusted_token_issuer_arn: ::String
+      attr_accessor trusted_token_issuer_type: ("OIDC_JWT")
+      SENSITIVE: []
+    end
+
+    class TrustedTokenIssuerUpdateConfiguration
+      attr_accessor oidc_jwt_configuration: Types::OidcJwtUpdateConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class OidcJwtConfiguration < TrustedTokenIssuerUpdateConfiguration
+      end
+      class Unknown < TrustedTokenIssuerUpdateConfiguration
+      end
+    end
+
+    class UntagResourceRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateApplicationPortalOptions
+      attr_accessor sign_in_options: Types::SignInOptions
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationRequest
+      attr_accessor application_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor portal_options: Types::UpdateApplicationPortalOptions
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateInstanceAccessControlAttributeConfigurationRequest
+      attr_accessor instance_access_control_attribute_configuration: Types::InstanceAccessControlAttributeConfiguration
+      attr_accessor instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateInstanceAccessControlAttributeConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateInstanceRequest
+      attr_accessor instance_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateInstanceResponse < Aws::EmptyStructure
+    end
+
+    class UpdatePermissionSetRequest
+      attr_accessor description: ::String
+      attr_accessor instance_arn: ::String
+      attr_accessor permission_set_arn: ::String
+      attr_accessor relay_state: ::String
+      attr_accessor session_duration: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePermissionSetResponse < Aws::EmptyStructure
+    end
+
+    class UpdateTrustedTokenIssuerRequest
+      attr_accessor name: ::String
+      attr_accessor trusted_token_issuer_arn: ::String
+      attr_accessor trusted_token_issuer_configuration: Types::TrustedTokenIssuerUpdateConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateTrustedTokenIssuerResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,1427 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Mgn
+  module Types
+
+    class AccessDeniedException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Application
+      attr_accessor application_aggregated_status: Types::ApplicationAggregatedStatus
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor creation_date_time: ::String
+      attr_accessor description: ::String
+      attr_accessor is_archived: bool
+      attr_accessor last_modified_date_time: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor wave_id: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class ApplicationAggregatedStatus
+      attr_accessor health_status: ("HEALTHY" | "LAGGING" | "ERROR")
+      attr_accessor last_update_date_time: ::String
+      attr_accessor progress_status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED")
+      attr_accessor total_source_servers: ::Integer
+      SENSITIVE: []
+    end
+
+    class ArchiveApplicationRequest
+      attr_accessor account_id: ::String
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class ArchiveWaveRequest
+      attr_accessor account_id: ::String
+      attr_accessor wave_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateApplicationsRequest
+      attr_accessor account_id: ::String
+      attr_accessor application_i_ds: ::Array[::String]
+      attr_accessor wave_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateApplicationsResponse < Aws::EmptyStructure
+    end
+
+    class AssociateSourceServersRequest
+      attr_accessor account_id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor source_server_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociateSourceServersResponse < Aws::EmptyStructure
+    end
+
+    class CPU
+      attr_accessor cores: ::Integer
+      attr_accessor model_name: ::String
+      SENSITIVE: []
+    end
+
+    class ChangeServerLifeCycleStateRequest
+      attr_accessor account_id: ::String
+      attr_accessor life_cycle: Types::ChangeServerLifeCycleStateSourceServerLifecycle
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class ChangeServerLifeCycleStateSourceServerLifecycle
+      attr_accessor state: ("READY_FOR_TEST" | "READY_FOR_CUTOVER" | "CUTOVER")
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor code: ::String
+      attr_accessor errors: ::Array[Types::ErrorDetails]
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class Connector
+      attr_accessor arn: ::String
+      attr_accessor connector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor ssm_command_config: Types::ConnectorSsmCommandConfig
+      attr_accessor ssm_instance_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class ConnectorSsmCommandConfig
+      attr_accessor cloud_watch_log_group_name: ::String
+      attr_accessor cloud_watch_output_enabled: bool
+      attr_accessor output_s3_bucket_name: ::String
+      attr_accessor s3_output_enabled: bool
+      SENSITIVE: []
+    end
+
+    class CreateApplicationRequest
+      attr_accessor account_id: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateConnectorRequest
+      attr_accessor name: ::String
+      attr_accessor ssm_command_config: Types::ConnectorSsmCommandConfig
+      attr_accessor ssm_instance_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class CreateLaunchConfigurationTemplateRequest
+      attr_accessor associate_public_ip_address: bool
+      attr_accessor boot_mode: ("LEGACY_BIOS" | "UEFI")
+      attr_accessor copy_private_ip: bool
+      attr_accessor copy_tags: bool
+      attr_accessor enable_map_auto_tagging: bool
+      attr_accessor large_volume_conf: Types::LaunchTemplateDiskConf
+      attr_accessor launch_disposition: ("STOPPED" | "STARTED")
+      attr_accessor licensing: Types::Licensing
+      attr_accessor map_auto_tagging_mpe_id: ::String
+      attr_accessor post_launch_actions: Types::PostLaunchActions
+      attr_accessor small_volume_conf: Types::LaunchTemplateDiskConf
+      attr_accessor small_volume_max_size: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_instance_type_right_sizing_method: ("NONE" | "BASIC")
+      SENSITIVE: [:tags]
+    end
+
+    class CreateReplicationConfigurationTemplateRequest
+      attr_accessor associate_default_security_group: bool
+      attr_accessor bandwidth_throttling: ::Integer
+      attr_accessor create_public_ip: bool
+      attr_accessor data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP")
+      attr_accessor default_large_staging_disk_type: ("GP2" | "ST1" | "GP3")
+      attr_accessor ebs_encryption: ("DEFAULT" | "CUSTOM")
+      attr_accessor ebs_encryption_key_arn: ::String
+      attr_accessor replication_server_instance_type: ::String
+      attr_accessor replication_servers_security_groups_i_ds: ::Array[::String]
+      attr_accessor staging_area_subnet_id: ::String
+      attr_accessor staging_area_tags: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor use_dedicated_replication_server: bool
+      attr_accessor use_fips_endpoint: bool
+      SENSITIVE: [:staging_area_tags, :tags]
+    end
+
+    class CreateWaveRequest
+      attr_accessor account_id: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class DataReplicationError
+      attr_accessor error: ("AGENT_NOT_SEEN" | "SNAPSHOTS_FAILURE" | "NOT_CONVERGING" | "UNSTABLE_NETWORK" | "FAILED_TO_CREATE_SECURITY_GROUP" | "FAILED_TO_LAUNCH_REPLICATION_SERVER" | "FAILED_TO_BOOT_REPLICATION_SERVER" | "FAILED_TO_AUTHENTICATE_WITH_SERVICE" | "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE" | "FAILED_TO_CREATE_STAGING_DISKS" | "FAILED_TO_ATTACH_STAGING_DISKS" | "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT" | "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER" | "FAILED_TO_START_DATA_TRANSFER" | "UNSUPPORTED_VM_CONFIGURATION" | "LAST_SNAPSHOT_JOB_FAILED")
+      attr_accessor raw_error: ::String
+      SENSITIVE: []
+    end
+
+    class DataReplicationInfo
+      attr_accessor data_replication_error: Types::DataReplicationError
+      attr_accessor data_replication_initiation: Types::DataReplicationInitiation
+      attr_accessor data_replication_state: ("STOPPED" | "INITIATING" | "INITIAL_SYNC" | "BACKLOG" | "CREATING_SNAPSHOT" | "CONTINUOUS" | "PAUSED" | "RESCAN" | "STALLED" | "DISCONNECTED" | "PENDING_SNAPSHOT_SHIPPING" | "SHIPPING_SNAPSHOT")
+      attr_accessor eta_date_time: ::String
+      attr_accessor lag_duration: ::String
+      attr_accessor last_snapshot_date_time: ::String
+      attr_accessor replicated_disks: ::Array[Types::DataReplicationInfoReplicatedDisk]
+      SENSITIVE: []
+    end
+
+    class DataReplicationInfoReplicatedDisk
+      attr_accessor backlogged_storage_bytes: ::Integer
+      attr_accessor device_name: ::String
+      attr_accessor replicated_storage_bytes: ::Integer
+      attr_accessor rescanned_storage_bytes: ::Integer
+      attr_accessor total_storage_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class DataReplicationInitiation
+      attr_accessor next_attempt_date_time: ::String
+      attr_accessor start_date_time: ::String
+      attr_accessor steps: ::Array[Types::DataReplicationInitiationStep]
+      SENSITIVE: []
+    end
+
+    class DataReplicationInitiationStep
+      attr_accessor name: ("WAIT" | "CREATE_SECURITY_GROUP" | "LAUNCH_REPLICATION_SERVER" | "BOOT_REPLICATION_SERVER" | "AUTHENTICATE_WITH_SERVICE" | "DOWNLOAD_REPLICATION_SOFTWARE" | "CREATE_STAGING_DISKS" | "ATTACH_STAGING_DISKS" | "PAIR_REPLICATION_SERVER_WITH_AGENT" | "CONNECT_AGENT_TO_REPLICATION_SERVER" | "START_DATA_TRANSFER")
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "SKIPPED")
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationRequest
+      attr_accessor account_id: ::String
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteConnectorRequest
+      attr_accessor connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteJobRequest
+      attr_accessor account_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteJobResponse < Aws::EmptyStructure
+    end
+
+    class DeleteLaunchConfigurationTemplateRequest
+      attr_accessor launch_configuration_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLaunchConfigurationTemplateResponse < Aws::EmptyStructure
+    end
+
+    class DeleteReplicationConfigurationTemplateRequest
+      attr_accessor replication_configuration_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationConfigurationTemplateResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSourceServerRequest
+      attr_accessor account_id: ::String
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSourceServerResponse < Aws::EmptyStructure
+    end
+
+    class DeleteVcenterClientRequest
+      attr_accessor vcenter_client_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWaveRequest
+      attr_accessor account_id: ::String
+      attr_accessor wave_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWaveResponse < Aws::EmptyStructure
+    end
+
+    class DescribeJobLogItemsRequest
+      attr_accessor account_id: ::String
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobLogItemsResponse
+      attr_accessor items: ::Array[Types::JobLog]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobsRequest
+      attr_accessor account_id: ::String
+      attr_accessor filters: Types::DescribeJobsRequestFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobsRequestFilters
+      attr_accessor from_date: ::String
+      attr_accessor job_i_ds: ::Array[::String]
+      attr_accessor to_date: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeJobsResponse
+      attr_accessor items: ::Array[Types::Job]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLaunchConfigurationTemplatesRequest
+      attr_accessor launch_configuration_template_i_ds: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLaunchConfigurationTemplatesResponse
+      attr_accessor items: ::Array[Types::LaunchConfigurationTemplate]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationConfigurationTemplatesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor replication_configuration_template_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationConfigurationTemplatesResponse
+      attr_accessor items: ::Array[Types::ReplicationConfigurationTemplate]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSourceServersRequest
+      attr_accessor account_id: ::String
+      attr_accessor filters: Types::DescribeSourceServersRequestFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSourceServersRequestFilters
+      attr_accessor application_i_ds: ::Array[::String]
+      attr_accessor is_archived: bool
+      attr_accessor life_cycle_states: ::Array[("STOPPED" | "NOT_READY" | "READY_FOR_TEST" | "TESTING" | "READY_FOR_CUTOVER" | "CUTTING_OVER" | "CUTOVER" | "DISCONNECTED" | "DISCOVERED" | "PENDING_INSTALLATION")]
+      attr_accessor replication_types: ::Array[("AGENT_BASED" | "SNAPSHOT_SHIPPING")]
+      attr_accessor source_server_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeSourceServersResponse
+      attr_accessor items: ::Array[Types::SourceServer]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVcenterClientsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVcenterClientsResponse
+      attr_accessor items: ::Array[Types::VcenterClient]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateApplicationsRequest
+      attr_accessor account_id: ::String
+      attr_accessor application_i_ds: ::Array[::String]
+      attr_accessor wave_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateApplicationsResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateSourceServersRequest
+      attr_accessor account_id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor source_server_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateSourceServersResponse < Aws::EmptyStructure
+    end
+
+    class DisconnectFromServiceRequest
+      attr_accessor account_id: ::String
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class Disk
+      attr_accessor bytes: ::Integer
+      attr_accessor device_name: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorDetails
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ExportErrorData
+      attr_accessor raw_error: ::String
+      SENSITIVE: []
+    end
+
+    class ExportTask
+      attr_accessor creation_date_time: ::String
+      attr_accessor end_date_time: ::String
+      attr_accessor export_id: ::String
+      attr_accessor progress_percentage: ::Float
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_bucket_owner: ::String
+      attr_accessor s3_key: ::String
+      attr_accessor status: ("PENDING" | "STARTED" | "FAILED" | "SUCCEEDED")
+      attr_accessor summary: Types::ExportTaskSummary
+      SENSITIVE: []
+    end
+
+    class ExportTaskError
+      attr_accessor error_data: Types::ExportErrorData
+      attr_accessor error_date_time: ::String
+      SENSITIVE: []
+    end
+
+    class ExportTaskSummary
+      attr_accessor applications_count: ::Integer
+      attr_accessor servers_count: ::Integer
+      attr_accessor waves_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class FinalizeCutoverRequest
+      attr_accessor account_id: ::String
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLaunchConfigurationRequest
+      attr_accessor account_id: ::String
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetReplicationConfigurationRequest
+      attr_accessor account_id: ::String
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class IdentificationHints
+      attr_accessor aws_instance_id: ::String
+      attr_accessor fqdn: ::String
+      attr_accessor hostname: ::String
+      attr_accessor vm_path: ::String
+      attr_accessor vm_ware_uuid: ::String
+      SENSITIVE: []
+    end
+
+    class ImportErrorData
+      attr_accessor account_id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor ec2_launch_template_id: ::String
+      attr_accessor raw_error: ::String
+      attr_accessor row_number: ::Integer
+      attr_accessor source_server_id: ::String
+      attr_accessor wave_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImportTask
+      attr_accessor creation_date_time: ::String
+      attr_accessor end_date_time: ::String
+      attr_accessor import_id: ::String
+      attr_accessor progress_percentage: ::Float
+      attr_accessor s3_bucket_source: Types::S3BucketSource
+      attr_accessor status: ("PENDING" | "STARTED" | "FAILED" | "SUCCEEDED")
+      attr_accessor summary: Types::ImportTaskSummary
+      SENSITIVE: []
+    end
+
+    class ImportTaskError
+      attr_accessor error_data: Types::ImportErrorData
+      attr_accessor error_date_time: ::String
+      attr_accessor error_type: ("VALIDATION_ERROR" | "PROCESSING_ERROR")
+      SENSITIVE: []
+    end
+
+    class ImportTaskSummary
+      attr_accessor applications: Types::ImportTaskSummaryApplications
+      attr_accessor servers: Types::ImportTaskSummaryServers
+      attr_accessor waves: Types::ImportTaskSummaryWaves
+      SENSITIVE: []
+    end
+
+    class ImportTaskSummaryApplications
+      attr_accessor created_count: ::Integer
+      attr_accessor modified_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ImportTaskSummaryServers
+      attr_accessor created_count: ::Integer
+      attr_accessor modified_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ImportTaskSummaryWaves
+      attr_accessor created_count: ::Integer
+      attr_accessor modified_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class InitializeServiceRequest < Aws::EmptyStructure
+    end
+
+    class InitializeServiceResponse < Aws::EmptyStructure
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class Job
+      attr_accessor arn: ::String
+      attr_accessor creation_date_time: ::String
+      attr_accessor end_date_time: ::String
+      attr_accessor initiated_by: ("START_TEST" | "START_CUTOVER" | "DIAGNOSTIC" | "TERMINATE")
+      attr_accessor job_id: ::String
+      attr_accessor participating_servers: ::Array[Types::ParticipatingServer]
+      attr_accessor status: ("PENDING" | "STARTED" | "COMPLETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("LAUNCH" | "TERMINATE")
+      SENSITIVE: [:tags]
+    end
+
+    class JobLog
+      attr_accessor event: ("JOB_START" | "SERVER_SKIPPED" | "CLEANUP_START" | "CLEANUP_END" | "CLEANUP_FAIL" | "SNAPSHOT_START" | "SNAPSHOT_END" | "SNAPSHOT_FAIL" | "USING_PREVIOUS_SNAPSHOT" | "CONVERSION_START" | "CONVERSION_END" | "CONVERSION_FAIL" | "LAUNCH_START" | "LAUNCH_FAILED" | "JOB_CANCEL" | "JOB_END")
+      attr_accessor event_data: Types::JobLogEventData
+      attr_accessor log_date_time: ::String
+      SENSITIVE: []
+    end
+
+    class JobLogEventData
+      attr_accessor conversion_server_id: ::String
+      attr_accessor raw_error: ::String
+      attr_accessor source_server_id: ::String
+      attr_accessor target_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class JobPostLaunchActionsLaunchStatus
+      attr_accessor execution_id: ::String
+      attr_accessor execution_status: ("IN_PROGRESS" | "SUCCESS" | "FAILED")
+      attr_accessor failure_reason: ::String
+      attr_accessor ssm_document: Types::SsmDocument
+      attr_accessor ssm_document_type: ("AUTOMATION" | "COMMAND")
+      SENSITIVE: []
+    end
+
+    class LaunchConfiguration
+      attr_accessor boot_mode: ("LEGACY_BIOS" | "UEFI")
+      attr_accessor copy_private_ip: bool
+      attr_accessor copy_tags: bool
+      attr_accessor ec2_launch_template_id: ::String
+      attr_accessor enable_map_auto_tagging: bool
+      attr_accessor launch_disposition: ("STOPPED" | "STARTED")
+      attr_accessor licensing: Types::Licensing
+      attr_accessor map_auto_tagging_mpe_id: ::String
+      attr_accessor name: ::String
+      attr_accessor post_launch_actions: Types::PostLaunchActions
+      attr_accessor source_server_id: ::String
+      attr_accessor target_instance_type_right_sizing_method: ("NONE" | "BASIC")
+      SENSITIVE: []
+    end
+
+    class LaunchConfigurationTemplate
+      attr_accessor arn: ::String
+      attr_accessor associate_public_ip_address: bool
+      attr_accessor boot_mode: ("LEGACY_BIOS" | "UEFI")
+      attr_accessor copy_private_ip: bool
+      attr_accessor copy_tags: bool
+      attr_accessor ec2_launch_template_id: ::String
+      attr_accessor enable_map_auto_tagging: bool
+      attr_accessor large_volume_conf: Types::LaunchTemplateDiskConf
+      attr_accessor launch_configuration_template_id: ::String
+      attr_accessor launch_disposition: ("STOPPED" | "STARTED")
+      attr_accessor licensing: Types::Licensing
+      attr_accessor map_auto_tagging_mpe_id: ::String
+      attr_accessor post_launch_actions: Types::PostLaunchActions
+      attr_accessor small_volume_conf: Types::LaunchTemplateDiskConf
+      attr_accessor small_volume_max_size: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target_instance_type_right_sizing_method: ("NONE" | "BASIC")
+      SENSITIVE: [:tags]
+    end
+
+    class LaunchTemplateDiskConf
+      attr_accessor iops: ::Integer
+      attr_accessor throughput: ::Integer
+      attr_accessor volume_type: ("io1" | "io2" | "gp3" | "gp2" | "st1" | "sc1" | "standard")
+      SENSITIVE: []
+    end
+
+    class LaunchedInstance
+      attr_accessor ec2_instance_id: ::String
+      attr_accessor first_boot: ("WAITING" | "SUCCEEDED" | "UNKNOWN" | "STOPPED")
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class Licensing
+      attr_accessor os_byol: bool
+      SENSITIVE: []
+    end
+
+    class LifeCycle
+      attr_accessor added_to_service_date_time: ::String
+      attr_accessor elapsed_replication_duration: ::String
+      attr_accessor first_byte_date_time: ::String
+      attr_accessor last_cutover: Types::LifeCycleLastCutover
+      attr_accessor last_seen_by_service_date_time: ::String
+      attr_accessor last_test: Types::LifeCycleLastTest
+      attr_accessor state: ("STOPPED" | "NOT_READY" | "READY_FOR_TEST" | "TESTING" | "READY_FOR_CUTOVER" | "CUTTING_OVER" | "CUTOVER" | "DISCONNECTED" | "DISCOVERED" | "PENDING_INSTALLATION")
+      SENSITIVE: []
+    end
+
+    class LifeCycleLastCutover
+      attr_accessor finalized: Types::LifeCycleLastCutoverFinalized
+      attr_accessor initiated: Types::LifeCycleLastCutoverInitiated
+      attr_accessor reverted: Types::LifeCycleLastCutoverReverted
+      SENSITIVE: []
+    end
+
+    class LifeCycleLastCutoverFinalized
+      attr_accessor api_call_date_time: ::String
+      SENSITIVE: []
+    end
+
+    class LifeCycleLastCutoverInitiated
+      attr_accessor api_call_date_time: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class LifeCycleLastCutoverReverted
+      attr_accessor api_call_date_time: ::String
+      SENSITIVE: []
+    end
+
+    class LifeCycleLastTest
+      attr_accessor finalized: Types::LifeCycleLastTestFinalized
+      attr_accessor initiated: Types::LifeCycleLastTestInitiated
+      attr_accessor reverted: Types::LifeCycleLastTestReverted
+      SENSITIVE: []
+    end
+
+    class LifeCycleLastTestFinalized
+      attr_accessor api_call_date_time: ::String
+      SENSITIVE: []
+    end
+
+    class LifeCycleLastTestInitiated
+      attr_accessor api_call_date_time: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class LifeCycleLastTestReverted
+      attr_accessor api_call_date_time: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsRequest
+      attr_accessor account_id: ::String
+      attr_accessor filters: Types::ListApplicationsRequestFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsRequestFilters
+      attr_accessor application_i_ds: ::Array[::String]
+      attr_accessor is_archived: bool
+      attr_accessor wave_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListApplicationsResponse
+      attr_accessor items: ::Array[Types::Application]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectorsRequest
+      attr_accessor filters: Types::ListConnectorsRequestFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectorsRequestFilters
+      attr_accessor connector_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListConnectorsResponse
+      attr_accessor items: ::Array[Types::Connector]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExportErrorsRequest
+      attr_accessor export_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExportErrorsResponse
+      attr_accessor items: ::Array[Types::ExportTaskError]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExportsRequest
+      attr_accessor filters: Types::ListExportsRequestFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExportsRequestFilters
+      attr_accessor export_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListExportsResponse
+      attr_accessor items: ::Array[Types::ExportTask]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportErrorsRequest
+      attr_accessor import_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportErrorsResponse
+      attr_accessor items: ::Array[Types::ImportTaskError]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportsRequest
+      attr_accessor filters: Types::ListImportsRequestFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImportsRequestFilters
+      attr_accessor import_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListImportsResponse
+      attr_accessor items: ::Array[Types::ImportTask]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedAccountsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListManagedAccountsResponse
+      attr_accessor items: ::Array[Types::ManagedAccount]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSourceServerActionsRequest
+      attr_accessor account_id: ::String
+      attr_accessor filters: Types::SourceServerActionsRequestFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListSourceServerActionsResponse
+      attr_accessor items: ::Array[Types::SourceServerActionDocument]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class ListTemplateActionsRequest
+      attr_accessor filters: Types::TemplateActionsRequestFilters
+      attr_accessor launch_configuration_template_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTemplateActionsResponse
+      attr_accessor items: ::Array[Types::TemplateActionDocument]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWavesRequest
+      attr_accessor account_id: ::String
+      attr_accessor filters: Types::ListWavesRequestFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWavesRequestFilters
+      attr_accessor is_archived: bool
+      attr_accessor wave_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListWavesResponse
+      attr_accessor items: ::Array[Types::Wave]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ManagedAccount
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class MarkAsArchivedRequest
+      attr_accessor account_id: ::String
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkInterface
+      attr_accessor ips: ::Array[::String]
+      attr_accessor is_primary: bool
+      attr_accessor mac_address: ::String
+      SENSITIVE: []
+    end
+
+    class OS
+      attr_accessor full_string: ::String
+      SENSITIVE: []
+    end
+
+    class ParticipatingServer
+      attr_accessor launch_status: ("PENDING" | "IN_PROGRESS" | "LAUNCHED" | "FAILED" | "TERMINATED")
+      attr_accessor launched_ec2_instance_id: ::String
+      attr_accessor post_launch_actions_status: Types::PostLaunchActionsStatus
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class PauseReplicationRequest
+      attr_accessor account_id: ::String
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class PostLaunchActions
+      attr_accessor cloud_watch_log_group_name: ::String
+      attr_accessor deployment: ("TEST_AND_CUTOVER" | "CUTOVER_ONLY" | "TEST_ONLY")
+      attr_accessor s3_log_bucket: ::String
+      attr_accessor s3_output_key_prefix: ::String
+      attr_accessor ssm_documents: ::Array[Types::SsmDocument]
+      SENSITIVE: []
+    end
+
+    class PostLaunchActionsStatus
+      attr_accessor post_launch_actions_launch_status_list: ::Array[Types::JobPostLaunchActionsLaunchStatus]
+      attr_accessor ssm_agent_discovery_datetime: ::String
+      SENSITIVE: []
+    end
+
+    class PutSourceServerActionRequest
+      attr_accessor account_id: ::String
+      attr_accessor action_id: ::String
+      attr_accessor action_name: ::String
+      attr_accessor active: bool
+      attr_accessor category: ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER")
+      attr_accessor description: ::String
+      attr_accessor document_identifier: ::String
+      attr_accessor document_version: ::String
+      attr_accessor external_parameters: ::Hash[::String, Types::SsmExternalParameter]
+      attr_accessor must_succeed_for_cutover: bool
+      attr_accessor order: ::Integer
+      attr_accessor parameters: ::Hash[::String, ::Array[Types::SsmParameterStoreParameter]]
+      attr_accessor source_server_id: ::String
+      attr_accessor timeout_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutTemplateActionRequest
+      attr_accessor action_id: ::String
+      attr_accessor action_name: ::String
+      attr_accessor active: bool
+      attr_accessor category: ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER")
+      attr_accessor description: ::String
+      attr_accessor document_identifier: ::String
+      attr_accessor document_version: ::String
+      attr_accessor external_parameters: ::Hash[::String, Types::SsmExternalParameter]
+      attr_accessor launch_configuration_template_id: ::String
+      attr_accessor must_succeed_for_cutover: bool
+      attr_accessor operating_system: ::String
+      attr_accessor order: ::Integer
+      attr_accessor parameters: ::Hash[::String, ::Array[Types::SsmParameterStoreParameter]]
+      attr_accessor timeout_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class RemoveSourceServerActionRequest
+      attr_accessor account_id: ::String
+      attr_accessor action_id: ::String
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveSourceServerActionResponse < Aws::EmptyStructure
+    end
+
+    class RemoveTemplateActionRequest
+      attr_accessor action_id: ::String
+      attr_accessor launch_configuration_template_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveTemplateActionResponse < Aws::EmptyStructure
+    end
+
+    class ReplicationConfiguration
+      attr_accessor associate_default_security_group: bool
+      attr_accessor bandwidth_throttling: ::Integer
+      attr_accessor create_public_ip: bool
+      attr_accessor data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP")
+      attr_accessor default_large_staging_disk_type: ("GP2" | "ST1" | "GP3")
+      attr_accessor ebs_encryption: ("DEFAULT" | "CUSTOM")
+      attr_accessor ebs_encryption_key_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor replicated_disks: ::Array[Types::ReplicationConfigurationReplicatedDisk]
+      attr_accessor replication_server_instance_type: ::String
+      attr_accessor replication_servers_security_groups_i_ds: ::Array[::String]
+      attr_accessor source_server_id: ::String
+      attr_accessor staging_area_subnet_id: ::String
+      attr_accessor staging_area_tags: ::Hash[::String, ::String]
+      attr_accessor use_dedicated_replication_server: bool
+      attr_accessor use_fips_endpoint: bool
+      SENSITIVE: [:staging_area_tags]
+    end
+
+    class ReplicationConfigurationReplicatedDisk
+      attr_accessor device_name: ::String
+      attr_accessor iops: ::Integer
+      attr_accessor is_boot_disk: bool
+      attr_accessor staging_disk_type: ("AUTO" | "GP2" | "IO1" | "SC1" | "ST1" | "STANDARD" | "GP3" | "IO2")
+      attr_accessor throughput: ::Integer
+      SENSITIVE: []
+    end
+
+    class ReplicationConfigurationTemplate
+      attr_accessor arn: ::String
+      attr_accessor associate_default_security_group: bool
+      attr_accessor bandwidth_throttling: ::Integer
+      attr_accessor create_public_ip: bool
+      attr_accessor data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP")
+      attr_accessor default_large_staging_disk_type: ("GP2" | "ST1" | "GP3")
+      attr_accessor ebs_encryption: ("DEFAULT" | "CUSTOM")
+      attr_accessor ebs_encryption_key_arn: ::String
+      attr_accessor replication_configuration_template_id: ::String
+      attr_accessor replication_server_instance_type: ::String
+      attr_accessor replication_servers_security_groups_i_ds: ::Array[::String]
+      attr_accessor staging_area_subnet_id: ::String
+      attr_accessor staging_area_tags: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor use_dedicated_replication_server: bool
+      attr_accessor use_fips_endpoint: bool
+      SENSITIVE: [:staging_area_tags, :tags]
+    end
+
+    class ResourceNotFoundException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResumeReplicationRequest
+      attr_accessor account_id: ::String
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class RetryDataReplicationRequest
+      attr_accessor account_id: ::String
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class S3BucketSource
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_bucket_owner: ::String
+      attr_accessor s3_key: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor quota_value: ::Integer
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class SourceProperties
+      attr_accessor cpus: ::Array[Types::CPU]
+      attr_accessor disks: ::Array[Types::Disk]
+      attr_accessor identification_hints: Types::IdentificationHints
+      attr_accessor last_updated_date_time: ::String
+      attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
+      attr_accessor os: Types::OS
+      attr_accessor ram_bytes: ::Integer
+      attr_accessor recommended_instance_type: ::String
+      SENSITIVE: []
+    end
+
+    class SourceServer
+      attr_accessor application_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor connector_action: Types::SourceServerConnectorAction
+      attr_accessor data_replication_info: Types::DataReplicationInfo
+      attr_accessor fqdn_for_action_framework: ::String
+      attr_accessor is_archived: bool
+      attr_accessor launched_instance: Types::LaunchedInstance
+      attr_accessor life_cycle: Types::LifeCycle
+      attr_accessor replication_type: ("AGENT_BASED" | "SNAPSHOT_SHIPPING")
+      attr_accessor source_properties: Types::SourceProperties
+      attr_accessor source_server_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor user_provided_id: ::String
+      attr_accessor vcenter_client_id: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class SourceServerActionDocument
+      attr_accessor action_id: ::String
+      attr_accessor action_name: ::String
+      attr_accessor active: bool
+      attr_accessor category: ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER")
+      attr_accessor description: ::String
+      attr_accessor document_identifier: ::String
+      attr_accessor document_version: ::String
+      attr_accessor external_parameters: ::Hash[::String, Types::SsmExternalParameter]
+      attr_accessor must_succeed_for_cutover: bool
+      attr_accessor order: ::Integer
+      attr_accessor parameters: ::Hash[::String, ::Array[Types::SsmParameterStoreParameter]]
+      attr_accessor timeout_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class SourceServerActionsRequestFilters
+      attr_accessor action_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SourceServerConnectorAction
+      attr_accessor connector_arn: ::String
+      attr_accessor credentials_secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SsmDocument
+      attr_accessor action_name: ::String
+      attr_accessor external_parameters: ::Hash[::String, Types::SsmExternalParameter]
+      attr_accessor must_succeed_for_cutover: bool
+      attr_accessor parameters: ::Hash[::String, ::Array[Types::SsmParameterStoreParameter]]
+      attr_accessor ssm_document_name: ::String
+      attr_accessor timeout_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class SsmExternalParameter
+      attr_accessor dynamic_path: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DynamicPath < SsmExternalParameter
+      end
+      class Unknown < SsmExternalParameter
+      end
+    end
+
+    class SsmParameterStoreParameter
+      attr_accessor parameter_name: ::String
+      attr_accessor parameter_type: ("STRING")
+      SENSITIVE: []
+    end
+
+    class StartCutoverRequest
+      attr_accessor account_id: ::String
+      attr_accessor source_server_i_ds: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class StartCutoverResponse
+      attr_accessor job: Types::Job
+      SENSITIVE: []
+    end
+
+    class StartExportRequest
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_bucket_owner: ::String
+      attr_accessor s3_key: ::String
+      SENSITIVE: []
+    end
+
+    class StartExportResponse
+      attr_accessor export_task: Types::ExportTask
+      SENSITIVE: []
+    end
+
+    class StartImportRequest
+      attr_accessor client_token: ::String
+      attr_accessor s3_bucket_source: Types::S3BucketSource
+      SENSITIVE: []
+    end
+
+    class StartImportResponse
+      attr_accessor import_task: Types::ImportTask
+      SENSITIVE: []
+    end
+
+    class StartReplicationRequest
+      attr_accessor account_id: ::String
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartTestRequest
+      attr_accessor account_id: ::String
+      attr_accessor source_server_i_ds: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class StartTestResponse
+      attr_accessor job: Types::Job
+      SENSITIVE: []
+    end
+
+    class StopReplicationRequest
+      attr_accessor account_id: ::String
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class TemplateActionDocument
+      attr_accessor action_id: ::String
+      attr_accessor action_name: ::String
+      attr_accessor active: bool
+      attr_accessor category: ("DISASTER_RECOVERY" | "OPERATING_SYSTEM" | "LICENSE_AND_SUBSCRIPTION" | "VALIDATION" | "OBSERVABILITY" | "SECURITY" | "NETWORKING" | "CONFIGURATION" | "BACKUP" | "OTHER")
+      attr_accessor description: ::String
+      attr_accessor document_identifier: ::String
+      attr_accessor document_version: ::String
+      attr_accessor external_parameters: ::Hash[::String, Types::SsmExternalParameter]
+      attr_accessor must_succeed_for_cutover: bool
+      attr_accessor operating_system: ::String
+      attr_accessor order: ::Integer
+      attr_accessor parameters: ::Hash[::String, ::Array[Types::SsmParameterStoreParameter]]
+      attr_accessor timeout_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class TemplateActionsRequestFilters
+      attr_accessor action_i_ds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TerminateTargetInstancesRequest
+      attr_accessor account_id: ::String
+      attr_accessor source_server_i_ds: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:tags]
+    end
+
+    class TerminateTargetInstancesResponse
+      attr_accessor job: Types::Job
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class UnarchiveApplicationRequest
+      attr_accessor account_id: ::String
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class UnarchiveWaveRequest
+      attr_accessor account_id: ::String
+      attr_accessor wave_id: ::String
+      SENSITIVE: []
+    end
+
+    class UninitializedAccountException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: [:tag_keys]
+    end
+
+    class UpdateApplicationRequest
+      attr_accessor account_id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorRequest
+      attr_accessor connector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor ssm_command_config: Types::ConnectorSsmCommandConfig
+      SENSITIVE: []
+    end
+
+    class UpdateLaunchConfigurationRequest
+      attr_accessor account_id: ::String
+      attr_accessor boot_mode: ("LEGACY_BIOS" | "UEFI")
+      attr_accessor copy_private_ip: bool
+      attr_accessor copy_tags: bool
+      attr_accessor enable_map_auto_tagging: bool
+      attr_accessor launch_disposition: ("STOPPED" | "STARTED")
+      attr_accessor licensing: Types::Licensing
+      attr_accessor map_auto_tagging_mpe_id: ::String
+      attr_accessor name: ::String
+      attr_accessor post_launch_actions: Types::PostLaunchActions
+      attr_accessor source_server_id: ::String
+      attr_accessor target_instance_type_right_sizing_method: ("NONE" | "BASIC")
+      SENSITIVE: []
+    end
+
+    class UpdateLaunchConfigurationTemplateRequest
+      attr_accessor associate_public_ip_address: bool
+      attr_accessor boot_mode: ("LEGACY_BIOS" | "UEFI")
+      attr_accessor copy_private_ip: bool
+      attr_accessor copy_tags: bool
+      attr_accessor enable_map_auto_tagging: bool
+      attr_accessor large_volume_conf: Types::LaunchTemplateDiskConf
+      attr_accessor launch_configuration_template_id: ::String
+      attr_accessor launch_disposition: ("STOPPED" | "STARTED")
+      attr_accessor licensing: Types::Licensing
+      attr_accessor map_auto_tagging_mpe_id: ::String
+      attr_accessor post_launch_actions: Types::PostLaunchActions
+      attr_accessor small_volume_conf: Types::LaunchTemplateDiskConf
+      attr_accessor small_volume_max_size: ::Integer
+      attr_accessor target_instance_type_right_sizing_method: ("NONE" | "BASIC")
+      SENSITIVE: []
+    end
+
+    class UpdateReplicationConfigurationRequest
+      attr_accessor account_id: ::String
+      attr_accessor associate_default_security_group: bool
+      attr_accessor bandwidth_throttling: ::Integer
+      attr_accessor create_public_ip: bool
+      attr_accessor data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP")
+      attr_accessor default_large_staging_disk_type: ("GP2" | "ST1" | "GP3")
+      attr_accessor ebs_encryption: ("DEFAULT" | "CUSTOM")
+      attr_accessor ebs_encryption_key_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor replicated_disks: ::Array[Types::ReplicationConfigurationReplicatedDisk]
+      attr_accessor replication_server_instance_type: ::String
+      attr_accessor replication_servers_security_groups_i_ds: ::Array[::String]
+      attr_accessor source_server_id: ::String
+      attr_accessor staging_area_subnet_id: ::String
+      attr_accessor staging_area_tags: ::Hash[::String, ::String]
+      attr_accessor use_dedicated_replication_server: bool
+      attr_accessor use_fips_endpoint: bool
+      SENSITIVE: [:staging_area_tags]
+    end
+
+    class UpdateReplicationConfigurationTemplateRequest
+      attr_accessor arn: ::String
+      attr_accessor associate_default_security_group: bool
+      attr_accessor bandwidth_throttling: ::Integer
+      attr_accessor create_public_ip: bool
+      attr_accessor data_plane_routing: ("PRIVATE_IP" | "PUBLIC_IP")
+      attr_accessor default_large_staging_disk_type: ("GP2" | "ST1" | "GP3")
+      attr_accessor ebs_encryption: ("DEFAULT" | "CUSTOM")
+      attr_accessor ebs_encryption_key_arn: ::String
+      attr_accessor replication_configuration_template_id: ::String
+      attr_accessor replication_server_instance_type: ::String
+      attr_accessor replication_servers_security_groups_i_ds: ::Array[::String]
+      attr_accessor staging_area_subnet_id: ::String
+      attr_accessor staging_area_tags: ::Hash[::String, ::String]
+      attr_accessor use_dedicated_replication_server: bool
+      attr_accessor use_fips_endpoint: bool
+      SENSITIVE: [:staging_area_tags]
+    end
+
+    class UpdateSourceServerReplicationTypeRequest
+      attr_accessor account_id: ::String
+      attr_accessor replication_type: ("AGENT_BASED" | "SNAPSHOT_SHIPPING")
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSourceServerRequest
+      attr_accessor account_id: ::String
+      attr_accessor connector_action: Types::SourceServerConnectorAction
+      attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateWaveRequest
+      attr_accessor account_id: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor wave_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor code: ::String
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class VcenterClient
+      attr_accessor arn: ::String
+      attr_accessor datacenter_name: ::String
+      attr_accessor hostname: ::String
+      attr_accessor last_seen_datetime: ::String
+      attr_accessor source_server_tags: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vcenter_client_id: ::String
+      attr_accessor vcenter_uuid: ::String
+      SENSITIVE: [:source_server_tags, :tags]
+    end
+
+    class Wave
+      attr_accessor arn: ::String
+      attr_accessor creation_date_time: ::String
+      attr_accessor description: ::String
+      attr_accessor is_archived: bool
+      attr_accessor last_modified_date_time: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor wave_aggregated_status: Types::WaveAggregatedStatus
+      attr_accessor wave_id: ::String
+      SENSITIVE: [:tags]
+    end
+
+    class WaveAggregatedStatus
+      attr_accessor health_status: ("HEALTHY" | "LAGGING" | "ERROR")
+      attr_accessor last_update_date_time: ::String
+      attr_accessor progress_status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED")
+      attr_accessor replication_started_date_time: ::String
+      attr_accessor total_applications: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

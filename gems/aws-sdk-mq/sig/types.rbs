@@ -1,0 +1,836 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MQ
+  module Types
+
+    class ActionRequired
+      attr_accessor action_required_code: ::String
+      attr_accessor action_required_info: ::String
+      SENSITIVE: []
+    end
+
+    class AvailabilityZone
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor error_attribute: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BrokerEngineType
+      attr_accessor engine_type: ("ACTIVEMQ" | "RABBITMQ")
+      attr_accessor engine_versions: ::Array[Types::EngineVersion]
+      SENSITIVE: []
+    end
+
+    class BrokerEngineTypeOutput
+      attr_accessor broker_engine_types: ::Array[Types::BrokerEngineType]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BrokerInstance
+      attr_accessor console_url: ::String
+      attr_accessor endpoints: ::Array[::String]
+      attr_accessor ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class BrokerInstanceOption
+      attr_accessor availability_zones: ::Array[Types::AvailabilityZone]
+      attr_accessor engine_type: ("ACTIVEMQ" | "RABBITMQ")
+      attr_accessor host_instance_type: ::String
+      attr_accessor storage_type: ("EBS" | "EFS")
+      attr_accessor supported_deployment_modes: ::Array[("SINGLE_INSTANCE" | "ACTIVE_STANDBY_MULTI_AZ" | "CLUSTER_MULTI_AZ")]
+      attr_accessor supported_engine_versions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BrokerInstanceOptionsOutput
+      attr_accessor broker_instance_options: ::Array[Types::BrokerInstanceOption]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BrokerSummary
+      attr_accessor broker_arn: ::String
+      attr_accessor broker_id: ::String
+      attr_accessor broker_name: ::String
+      attr_accessor broker_state: ("CREATION_IN_PROGRESS" | "CREATION_FAILED" | "DELETION_IN_PROGRESS" | "RUNNING" | "REBOOT_IN_PROGRESS" | "CRITICAL_ACTION_REQUIRED" | "REPLICA")
+      attr_accessor created: ::Time
+      attr_accessor deployment_mode: ("SINGLE_INSTANCE" | "ACTIVE_STANDBY_MULTI_AZ" | "CLUSTER_MULTI_AZ")
+      attr_accessor engine_type: ("ACTIVEMQ" | "RABBITMQ")
+      attr_accessor host_instance_type: ::String
+      SENSITIVE: []
+    end
+
+    class Configuration
+      attr_accessor arn: ::String
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor created: ::Time
+      attr_accessor description: ::String
+      attr_accessor engine_type: ("ACTIVEMQ" | "RABBITMQ")
+      attr_accessor engine_version: ::String
+      attr_accessor id: ::String
+      attr_accessor latest_revision: Types::ConfigurationRevision
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ConfigurationId
+      attr_accessor id: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConfigurationRevision
+      attr_accessor created: ::Time
+      attr_accessor description: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class Configurations
+      attr_accessor current: Types::ConfigurationId
+      attr_accessor history: ::Array[Types::ConfigurationId]
+      attr_accessor pending: Types::ConfigurationId
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor error_attribute: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBrokerInput
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor broker_name: ::String
+      attr_accessor configuration: Types::ConfigurationId
+      attr_accessor creator_request_id: ::String
+      attr_accessor deployment_mode: ("SINGLE_INSTANCE" | "ACTIVE_STANDBY_MULTI_AZ" | "CLUSTER_MULTI_AZ")
+      attr_accessor data_replication_mode: ("NONE" | "CRDR")
+      attr_accessor data_replication_primary_broker_arn: ::String
+      attr_accessor encryption_options: Types::EncryptionOptions
+      attr_accessor engine_type: ("ACTIVEMQ" | "RABBITMQ")
+      attr_accessor engine_version: ::String
+      attr_accessor host_instance_type: ::String
+      attr_accessor ldap_server_metadata: Types::LdapServerMetadataInput
+      attr_accessor logs: Types::Logs
+      attr_accessor maintenance_window_start_time: Types::WeeklyStartTime
+      attr_accessor publicly_accessible: bool
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor storage_type: ("EBS" | "EFS")
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor users: ::Array[Types::User]
+      SENSITIVE: []
+    end
+
+    class CreateBrokerOutput
+      attr_accessor broker_arn: ::String
+      attr_accessor broker_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBrokerRequest
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor broker_name: ::String
+      attr_accessor configuration: Types::ConfigurationId
+      attr_accessor creator_request_id: ::String
+      attr_accessor deployment_mode: ("SINGLE_INSTANCE" | "ACTIVE_STANDBY_MULTI_AZ" | "CLUSTER_MULTI_AZ")
+      attr_accessor encryption_options: Types::EncryptionOptions
+      attr_accessor engine_type: ("ACTIVEMQ" | "RABBITMQ")
+      attr_accessor engine_version: ::String
+      attr_accessor host_instance_type: ::String
+      attr_accessor ldap_server_metadata: Types::LdapServerMetadataInput
+      attr_accessor logs: Types::Logs
+      attr_accessor maintenance_window_start_time: Types::WeeklyStartTime
+      attr_accessor publicly_accessible: bool
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor storage_type: ("EBS" | "EFS")
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor users: ::Array[Types::User]
+      attr_accessor data_replication_mode: ("NONE" | "CRDR")
+      attr_accessor data_replication_primary_broker_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBrokerResponse
+      attr_accessor broker_arn: ::String
+      attr_accessor broker_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationInput
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor engine_type: ("ACTIVEMQ" | "RABBITMQ")
+      attr_accessor engine_version: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationOutput
+      attr_accessor arn: ::String
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor created: ::Time
+      attr_accessor id: ::String
+      attr_accessor latest_revision: Types::ConfigurationRevision
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationRequest
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor engine_type: ("ACTIVEMQ" | "RABBITMQ")
+      attr_accessor engine_version: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationResponse
+      attr_accessor arn: ::String
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor created: ::Time
+      attr_accessor id: ::String
+      attr_accessor latest_revision: Types::ConfigurationRevision
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTagsRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateUserInput
+      attr_accessor console_access: bool
+      attr_accessor groups: ::Array[::String]
+      attr_accessor password: ::String
+      attr_accessor replication_user: bool
+      SENSITIVE: []
+    end
+
+    class CreateUserRequest
+      attr_accessor broker_id: ::String
+      attr_accessor console_access: bool
+      attr_accessor groups: ::Array[::String]
+      attr_accessor password: ::String
+      attr_accessor username: ::String
+      attr_accessor replication_user: bool
+      SENSITIVE: []
+    end
+
+    class CreateUserResponse < Aws::EmptyStructure
+    end
+
+    class DataReplicationCounterpart
+      attr_accessor broker_id: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class DataReplicationMetadataOutput
+      attr_accessor data_replication_counterpart: Types::DataReplicationCounterpart
+      attr_accessor data_replication_role: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBrokerOutput
+      attr_accessor broker_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBrokerRequest
+      attr_accessor broker_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBrokerResponse
+      attr_accessor broker_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTagsRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteUserRequest
+      attr_accessor broker_id: ::String
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserResponse < Aws::EmptyStructure
+    end
+
+    class DescribeBrokerEngineTypesRequest
+      attr_accessor engine_type: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBrokerEngineTypesResponse
+      attr_accessor broker_engine_types: ::Array[Types::BrokerEngineType]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBrokerInstanceOptionsRequest
+      attr_accessor engine_type: ::String
+      attr_accessor host_instance_type: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor storage_type: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBrokerInstanceOptionsResponse
+      attr_accessor broker_instance_options: ::Array[Types::BrokerInstanceOption]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBrokerOutput
+      attr_accessor actions_required: ::Array[Types::ActionRequired]
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor broker_arn: ::String
+      attr_accessor broker_id: ::String
+      attr_accessor broker_instances: ::Array[Types::BrokerInstance]
+      attr_accessor broker_name: ::String
+      attr_accessor broker_state: ("CREATION_IN_PROGRESS" | "CREATION_FAILED" | "DELETION_IN_PROGRESS" | "RUNNING" | "REBOOT_IN_PROGRESS" | "CRITICAL_ACTION_REQUIRED" | "REPLICA")
+      attr_accessor configurations: Types::Configurations
+      attr_accessor created: ::Time
+      attr_accessor deployment_mode: ("SINGLE_INSTANCE" | "ACTIVE_STANDBY_MULTI_AZ" | "CLUSTER_MULTI_AZ")
+      attr_accessor data_replication_metadata: Types::DataReplicationMetadataOutput
+      attr_accessor data_replication_mode: ("NONE" | "CRDR")
+      attr_accessor encryption_options: Types::EncryptionOptions
+      attr_accessor engine_type: ("ACTIVEMQ" | "RABBITMQ")
+      attr_accessor engine_version: ::String
+      attr_accessor host_instance_type: ::String
+      attr_accessor ldap_server_metadata: Types::LdapServerMetadataOutput
+      attr_accessor logs: Types::LogsSummary
+      attr_accessor maintenance_window_start_time: Types::WeeklyStartTime
+      attr_accessor pending_authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor pending_data_replication_metadata: Types::DataReplicationMetadataOutput
+      attr_accessor pending_data_replication_mode: ("NONE" | "CRDR")
+      attr_accessor pending_engine_version: ::String
+      attr_accessor pending_host_instance_type: ::String
+      attr_accessor pending_ldap_server_metadata: Types::LdapServerMetadataOutput
+      attr_accessor pending_security_groups: ::Array[::String]
+      attr_accessor publicly_accessible: bool
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor storage_type: ("EBS" | "EFS")
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor users: ::Array[Types::UserSummary]
+      SENSITIVE: []
+    end
+
+    class DescribeBrokerRequest
+      attr_accessor broker_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBrokerResponse
+      attr_accessor actions_required: ::Array[Types::ActionRequired]
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor broker_arn: ::String
+      attr_accessor broker_id: ::String
+      attr_accessor broker_instances: ::Array[Types::BrokerInstance]
+      attr_accessor broker_name: ::String
+      attr_accessor broker_state: ("CREATION_IN_PROGRESS" | "CREATION_FAILED" | "DELETION_IN_PROGRESS" | "RUNNING" | "REBOOT_IN_PROGRESS" | "CRITICAL_ACTION_REQUIRED" | "REPLICA")
+      attr_accessor configurations: Types::Configurations
+      attr_accessor created: ::Time
+      attr_accessor deployment_mode: ("SINGLE_INSTANCE" | "ACTIVE_STANDBY_MULTI_AZ" | "CLUSTER_MULTI_AZ")
+      attr_accessor encryption_options: Types::EncryptionOptions
+      attr_accessor engine_type: ("ACTIVEMQ" | "RABBITMQ")
+      attr_accessor engine_version: ::String
+      attr_accessor host_instance_type: ::String
+      attr_accessor ldap_server_metadata: Types::LdapServerMetadataOutput
+      attr_accessor logs: Types::LogsSummary
+      attr_accessor maintenance_window_start_time: Types::WeeklyStartTime
+      attr_accessor pending_authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor pending_engine_version: ::String
+      attr_accessor pending_host_instance_type: ::String
+      attr_accessor pending_ldap_server_metadata: Types::LdapServerMetadataOutput
+      attr_accessor pending_security_groups: ::Array[::String]
+      attr_accessor publicly_accessible: bool
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor storage_type: ("EBS" | "EFS")
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor users: ::Array[Types::UserSummary]
+      attr_accessor data_replication_metadata: Types::DataReplicationMetadataOutput
+      attr_accessor data_replication_mode: ("NONE" | "CRDR")
+      attr_accessor pending_data_replication_metadata: Types::DataReplicationMetadataOutput
+      attr_accessor pending_data_replication_mode: ("NONE" | "CRDR")
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationRequest
+      attr_accessor configuration_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationResponse
+      attr_accessor arn: ::String
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor created: ::Time
+      attr_accessor description: ::String
+      attr_accessor engine_type: ("ACTIVEMQ" | "RABBITMQ")
+      attr_accessor engine_version: ::String
+      attr_accessor id: ::String
+      attr_accessor latest_revision: Types::ConfigurationRevision
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationRevisionOutput
+      attr_accessor configuration_id: ::String
+      attr_accessor created: ::Time
+      attr_accessor data: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationRevisionRequest
+      attr_accessor configuration_id: ::String
+      attr_accessor configuration_revision: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationRevisionResponse
+      attr_accessor configuration_id: ::String
+      attr_accessor created: ::Time
+      attr_accessor data: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUserOutput
+      attr_accessor broker_id: ::String
+      attr_accessor console_access: bool
+      attr_accessor groups: ::Array[::String]
+      attr_accessor pending: Types::UserPendingChanges
+      attr_accessor replication_user: bool
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUserRequest
+      attr_accessor broker_id: ::String
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUserResponse
+      attr_accessor broker_id: ::String
+      attr_accessor console_access: bool
+      attr_accessor groups: ::Array[::String]
+      attr_accessor pending: Types::UserPendingChanges
+      attr_accessor username: ::String
+      attr_accessor replication_user: bool
+      SENSITIVE: []
+    end
+
+    class EncryptionOptions
+      attr_accessor kms_key_id: ::String
+      attr_accessor use_aws_owned_key: bool
+      SENSITIVE: []
+    end
+
+    class EngineVersion
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class Error
+      attr_accessor error_attribute: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor error_attribute: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor error_attribute: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LdapServerMetadataInput
+      attr_accessor hosts: ::Array[::String]
+      attr_accessor role_base: ::String
+      attr_accessor role_name: ::String
+      attr_accessor role_search_matching: ::String
+      attr_accessor role_search_subtree: bool
+      attr_accessor service_account_password: ::String
+      attr_accessor service_account_username: ::String
+      attr_accessor user_base: ::String
+      attr_accessor user_role_name: ::String
+      attr_accessor user_search_matching: ::String
+      attr_accessor user_search_subtree: bool
+      SENSITIVE: []
+    end
+
+    class LdapServerMetadataOutput
+      attr_accessor hosts: ::Array[::String]
+      attr_accessor role_base: ::String
+      attr_accessor role_name: ::String
+      attr_accessor role_search_matching: ::String
+      attr_accessor role_search_subtree: bool
+      attr_accessor service_account_username: ::String
+      attr_accessor user_base: ::String
+      attr_accessor user_role_name: ::String
+      attr_accessor user_search_matching: ::String
+      attr_accessor user_search_subtree: bool
+      SENSITIVE: []
+    end
+
+    class ListBrokersOutput
+      attr_accessor broker_summaries: ::Array[Types::BrokerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBrokersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBrokersResponse
+      attr_accessor broker_summaries: ::Array[Types::BrokerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationRevisionsOutput
+      attr_accessor configuration_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor revisions: ::Array[Types::ConfigurationRevision]
+      SENSITIVE: []
+    end
+
+    class ListConfigurationRevisionsRequest
+      attr_accessor configuration_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationRevisionsResponse
+      attr_accessor configuration_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor revisions: ::Array[Types::ConfigurationRevision]
+      SENSITIVE: []
+    end
+
+    class ListConfigurationsOutput
+      attr_accessor configurations: ::Array[Types::Configuration]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConfigurationsResponse
+      attr_accessor configurations: ::Array[Types::Configuration]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListUsersOutput
+      attr_accessor broker_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor users: ::Array[Types::UserSummary]
+      SENSITIVE: []
+    end
+
+    class ListUsersRequest
+      attr_accessor broker_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUsersResponse
+      attr_accessor broker_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor users: ::Array[Types::UserSummary]
+      SENSITIVE: []
+    end
+
+    class Logs
+      attr_accessor audit: bool
+      attr_accessor general: bool
+      SENSITIVE: []
+    end
+
+    class LogsSummary
+      attr_accessor audit: bool
+      attr_accessor audit_log_group: ::String
+      attr_accessor general: bool
+      attr_accessor general_log_group: ::String
+      attr_accessor pending: Types::PendingLogs
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor error_attribute: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PendingLogs
+      attr_accessor audit: bool
+      attr_accessor general: bool
+      SENSITIVE: []
+    end
+
+    class PromoteInput
+      attr_accessor mode: ("SWITCHOVER" | "FAILOVER")
+      SENSITIVE: []
+    end
+
+    class PromoteOutput
+      attr_accessor broker_id: ::String
+      SENSITIVE: []
+    end
+
+    class PromoteRequest
+      attr_accessor broker_id: ::String
+      attr_accessor mode: ("SWITCHOVER" | "FAILOVER")
+      SENSITIVE: []
+    end
+
+    class PromoteResponse
+      attr_accessor broker_id: ::String
+      SENSITIVE: []
+    end
+
+    class RebootBrokerRequest
+      attr_accessor broker_id: ::String
+      SENSITIVE: []
+    end
+
+    class RebootBrokerResponse < Aws::EmptyStructure
+    end
+
+    class SanitizationWarning
+      attr_accessor attribute_name: ::String
+      attr_accessor element_name: ::String
+      attr_accessor reason: ("DISALLOWED_ELEMENT_REMOVED" | "DISALLOWED_ATTRIBUTE_REMOVED" | "INVALID_ATTRIBUTE_VALUE_REMOVED")
+      SENSITIVE: []
+    end
+
+    class Tags
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor error_attribute: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBrokerInput
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor configuration: Types::ConfigurationId
+      attr_accessor data_replication_mode: ("NONE" | "CRDR")
+      attr_accessor engine_version: ::String
+      attr_accessor host_instance_type: ::String
+      attr_accessor ldap_server_metadata: Types::LdapServerMetadataInput
+      attr_accessor logs: Types::Logs
+      attr_accessor maintenance_window_start_time: Types::WeeklyStartTime
+      attr_accessor security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateBrokerOutput
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor broker_id: ::String
+      attr_accessor configuration: Types::ConfigurationId
+      attr_accessor data_replication_metadata: Types::DataReplicationMetadataOutput
+      attr_accessor data_replication_mode: ("NONE" | "CRDR")
+      attr_accessor engine_version: ::String
+      attr_accessor host_instance_type: ::String
+      attr_accessor ldap_server_metadata: Types::LdapServerMetadataOutput
+      attr_accessor logs: Types::Logs
+      attr_accessor maintenance_window_start_time: Types::WeeklyStartTime
+      attr_accessor pending_data_replication_metadata: Types::DataReplicationMetadataOutput
+      attr_accessor pending_data_replication_mode: ("NONE" | "CRDR")
+      attr_accessor security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateBrokerRequest
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor broker_id: ::String
+      attr_accessor configuration: Types::ConfigurationId
+      attr_accessor engine_version: ::String
+      attr_accessor host_instance_type: ::String
+      attr_accessor ldap_server_metadata: Types::LdapServerMetadataInput
+      attr_accessor logs: Types::Logs
+      attr_accessor maintenance_window_start_time: Types::WeeklyStartTime
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor data_replication_mode: ("NONE" | "CRDR")
+      SENSITIVE: []
+    end
+
+    class UpdateBrokerResponse
+      attr_accessor authentication_strategy: ("SIMPLE" | "LDAP")
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor broker_id: ::String
+      attr_accessor configuration: Types::ConfigurationId
+      attr_accessor engine_version: ::String
+      attr_accessor host_instance_type: ::String
+      attr_accessor ldap_server_metadata: Types::LdapServerMetadataOutput
+      attr_accessor logs: Types::Logs
+      attr_accessor maintenance_window_start_time: Types::WeeklyStartTime
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor data_replication_metadata: Types::DataReplicationMetadataOutput
+      attr_accessor data_replication_mode: ("NONE" | "CRDR")
+      attr_accessor pending_data_replication_metadata: Types::DataReplicationMetadataOutput
+      attr_accessor pending_data_replication_mode: ("NONE" | "CRDR")
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationInput
+      attr_accessor data: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationOutput
+      attr_accessor arn: ::String
+      attr_accessor created: ::Time
+      attr_accessor id: ::String
+      attr_accessor latest_revision: Types::ConfigurationRevision
+      attr_accessor name: ::String
+      attr_accessor warnings: ::Array[Types::SanitizationWarning]
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationRequest
+      attr_accessor configuration_id: ::String
+      attr_accessor data: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationResponse
+      attr_accessor arn: ::String
+      attr_accessor created: ::Time
+      attr_accessor id: ::String
+      attr_accessor latest_revision: Types::ConfigurationRevision
+      attr_accessor name: ::String
+      attr_accessor warnings: ::Array[Types::SanitizationWarning]
+      SENSITIVE: []
+    end
+
+    class UpdateUserInput
+      attr_accessor console_access: bool
+      attr_accessor groups: ::Array[::String]
+      attr_accessor password: ::String
+      attr_accessor replication_user: bool
+      SENSITIVE: []
+    end
+
+    class UpdateUserRequest
+      attr_accessor broker_id: ::String
+      attr_accessor console_access: bool
+      attr_accessor groups: ::Array[::String]
+      attr_accessor password: ::String
+      attr_accessor username: ::String
+      attr_accessor replication_user: bool
+      SENSITIVE: []
+    end
+
+    class UpdateUserResponse < Aws::EmptyStructure
+    end
+
+    class User
+      attr_accessor console_access: bool
+      attr_accessor groups: ::Array[::String]
+      attr_accessor password: ::String
+      attr_accessor username: ::String
+      attr_accessor replication_user: bool
+      SENSITIVE: []
+    end
+
+    class UserPendingChanges
+      attr_accessor console_access: bool
+      attr_accessor groups: ::Array[::String]
+      attr_accessor pending_change: ("CREATE" | "UPDATE" | "DELETE")
+      SENSITIVE: []
+    end
+
+    class UserSummary
+      attr_accessor pending_change: ("CREATE" | "UPDATE" | "DELETE")
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class WeeklyStartTime
+      attr_accessor day_of_week: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")
+      attr_accessor time_of_day: ::String
+      attr_accessor time_zone: ::String
+      SENSITIVE: []
+    end
+  end
+end

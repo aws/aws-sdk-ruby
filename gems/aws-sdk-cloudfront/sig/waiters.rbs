@@ -1,0 +1,44 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudFront
+    module Waiters
+
+      class DistributionDeployed
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    id: ::String
+                  ) -> Client::_GetDistributionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetDistributionResponseSuccess
+      end
+
+      class InvalidationCompleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    distribution_id: ::String,
+                    id: ::String
+                  ) -> Client::_GetInvalidationResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetInvalidationResponseSuccess
+      end
+
+      class StreamingDistributionDeployed
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    id: ::String
+                  ) -> Client::_GetStreamingDistributionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetStreamingDistributionResponseSuccess
+      end
+    end
+  end
+end

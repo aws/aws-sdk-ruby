@@ -1,0 +1,193 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::LaunchWizard
+  module Types
+
+    class CreateDeploymentInput
+      attr_accessor deployment_pattern_name: ::String
+      attr_accessor dry_run: bool
+      attr_accessor name: ::String
+      attr_accessor specifications: ::Hash[::String, ::String]
+      attr_accessor workload_name: ::String
+      SENSITIVE: [:specifications]
+    end
+
+    class CreateDeploymentOutput
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeploymentInput
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeploymentOutput
+      attr_accessor status: ("COMPLETED" | "CREATING" | "DELETE_IN_PROGRESS" | "DELETE_INITIATING" | "DELETE_FAILED" | "DELETED" | "FAILED" | "IN_PROGRESS" | "VALIDATING")
+      attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class DeploymentData
+      attr_accessor created_at: ::Time
+      attr_accessor deleted_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor pattern_name: ::String
+      attr_accessor resource_group: ::String
+      attr_accessor specifications: ::Hash[::String, ::String]
+      attr_accessor status: ("COMPLETED" | "CREATING" | "DELETE_IN_PROGRESS" | "DELETE_INITIATING" | "DELETE_FAILED" | "DELETED" | "FAILED" | "IN_PROGRESS" | "VALIDATING")
+      attr_accessor workload_name: ::String
+      SENSITIVE: [:specifications]
+    end
+
+    class DeploymentDataSummary
+      attr_accessor created_at: ::Time
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor pattern_name: ::String
+      attr_accessor status: ("COMPLETED" | "CREATING" | "DELETE_IN_PROGRESS" | "DELETE_INITIATING" | "DELETE_FAILED" | "DELETED" | "FAILED" | "IN_PROGRESS" | "VALIDATING")
+      attr_accessor workload_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeploymentEventDataSummary
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("CANCELED" | "CANCELING" | "COMPLETED" | "CREATED" | "FAILED" | "IN_PROGRESS" | "PENDING" | "TIMED_OUT")
+      attr_accessor status_reason: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DeploymentFilter
+      attr_accessor name: ("WORKLOAD_NAME" | "DEPLOYMENT_STATUS")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetDeploymentInput
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentOutput
+      attr_accessor deployment: Types::DeploymentData
+      SENSITIVE: []
+    end
+
+    class GetWorkloadInput
+      attr_accessor workload_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkloadOutput
+      attr_accessor workload: Types::WorkloadData
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentEventsInput
+      attr_accessor deployment_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentEventsOutput
+      attr_accessor deployment_events: ::Array[Types::DeploymentEventDataSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentsInput
+      attr_accessor filters: ::Array[Types::DeploymentFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentsOutput
+      attr_accessor deployments: ::Array[Types::DeploymentDataSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkloadDeploymentPatternsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor workload_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkloadDeploymentPatternsOutput
+      attr_accessor next_token: ::String
+      attr_accessor workload_deployment_patterns: ::Array[Types::WorkloadDeploymentPatternDataSummary]
+      SENSITIVE: []
+    end
+
+    class ListWorkloadsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkloadsOutput
+      attr_accessor next_token: ::String
+      attr_accessor workloads: ::Array[Types::WorkloadDataSummary]
+      SENSITIVE: []
+    end
+
+    class ResourceLimitException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WorkloadData
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor documentation_url: ::String
+      attr_accessor icon_url: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DISABLED" | "DELETED")
+      attr_accessor status_message: ::String
+      attr_accessor workload_name: ::String
+      SENSITIVE: []
+    end
+
+    class WorkloadDataSummary
+      attr_accessor display_name: ::String
+      attr_accessor workload_name: ::String
+      SENSITIVE: []
+    end
+
+    class WorkloadDeploymentPatternDataSummary
+      attr_accessor deployment_pattern_name: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DISABLED" | "DELETED")
+      attr_accessor status_message: ::String
+      attr_accessor workload_name: ::String
+      attr_accessor workload_version_name: ::String
+      SENSITIVE: []
+    end
+  end
+end

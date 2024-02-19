@@ -1,0 +1,93 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::EC2InstanceConnect
+  module Types
+
+    class AuthException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EC2InstanceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EC2InstanceStateInvalidException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EC2InstanceTypeInvalidException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EC2InstanceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidArgsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SendSSHPublicKeyRequest
+      attr_accessor instance_id: ::String
+      attr_accessor instance_os_user: ::String
+      attr_accessor ssh_public_key: ::String
+      attr_accessor availability_zone: ::String
+      SENSITIVE: []
+    end
+
+    class SendSSHPublicKeyResponse
+      attr_accessor request_id: ::String
+      attr_accessor success: bool
+      SENSITIVE: []
+    end
+
+    class SendSerialConsoleSSHPublicKeyRequest
+      attr_accessor instance_id: ::String
+      attr_accessor serial_port: ::Integer
+      attr_accessor ssh_public_key: ::String
+      SENSITIVE: []
+    end
+
+    class SendSerialConsoleSSHPublicKeyResponse
+      attr_accessor request_id: ::String
+      attr_accessor success: bool
+      SENSITIVE: []
+    end
+
+    class SerialConsoleAccessDisabledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SerialConsoleSessionLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SerialConsoleSessionUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

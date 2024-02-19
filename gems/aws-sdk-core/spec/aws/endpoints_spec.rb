@@ -184,6 +184,15 @@ module Aws
           end
         end
 
+        context 'sigv4-s3express region default' do
+          let(:auth_schemes) { [{ 'name' => 'sigv4-s3express' }] }
+
+          it 'defaults the signing region from config' do
+            expect_auth_scheme({ 'signingRegion' => 'us-stubbed-1' })
+            client.operation
+          end
+        end
+
         context 'default precedence' do
           let(:auth_schemes) { [{ 'name' => 'sigv4' }] }
           let(:signing_name) { 'service-override' }

@@ -401,11 +401,11 @@ module Aws::PinpointSMSVoiceV2
     # Associates the specified origination identity with a pool.
     #
     # If the origination identity is a phone number and is already
-    # associated with another pool, an Error is returned. A sender ID can be
+    # associated with another pool, an error is returned. A sender ID can be
     # associated with multiple pools.
     #
     # If the origination identity configuration doesn't match the pool's
-    # configuration, an Error is returned.
+    # configuration, an error is returned.
     #
     # @option params [required, String] :pool_id
     #   The pool to update with the new Identity. This value can be either the
@@ -554,6 +554,10 @@ module Aws::PinpointSMSVoiceV2
     #   An array of event types that determine which events to log. If "ALL"
     #   is used, then Amazon Pinpoint logs every event type.
     #
+    #   <note markdown="1"> The `TEXT_SENT` event type is not supported.
+    #
+    #    </note>
+    #
     # @option params [Types::CloudWatchLogsDestination] :cloud_watch_logs_destination
     #   An object that contains information about an event destination for
     #   logging to Amazon CloudWatch logs.
@@ -626,7 +630,7 @@ module Aws::PinpointSMSVoiceV2
 
     # Creates a new opt-out list.
     #
-    # If the opt-out list name already exists, an Error is returned.
+    # If the opt-out list name already exists, an error is returned.
     #
     # An opt-out list is a list of phone numbers that are opted out, meaning
     # you can't send SMS or voice messages to them. If end user replies
@@ -705,7 +709,7 @@ module Aws::PinpointSMSVoiceV2
     # to false.
     #
     # If the origination identity is a phone number and is already
-    # associated with another pool, an Error is returned. A sender ID can be
+    # associated with another pool, an error is returned. A sender ID can be
     # associated with multiple pools.
     #
     # @option params [required, String] :origination_identity
@@ -748,6 +752,7 @@ module Aws::PinpointSMSVoiceV2
     #   * {Types::CreatePoolResult#message_type #message_type} => String
     #   * {Types::CreatePoolResult#two_way_enabled #two_way_enabled} => Boolean
     #   * {Types::CreatePoolResult#two_way_channel_arn #two_way_channel_arn} => String
+    #   * {Types::CreatePoolResult#two_way_channel_role #two_way_channel_role} => String
     #   * {Types::CreatePoolResult#self_managed_opt_outs_enabled #self_managed_opt_outs_enabled} => Boolean
     #   * {Types::CreatePoolResult#opt_out_list_name #opt_out_list_name} => String
     #   * {Types::CreatePoolResult#shared_routes_enabled #shared_routes_enabled} => Boolean
@@ -779,6 +784,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.two_way_enabled #=> Boolean
     #   resp.two_way_channel_arn #=> String
+    #   resp.two_way_channel_role #=> String
     #   resp.self_managed_opt_outs_enabled #=> Boolean
     #   resp.opt_out_list_name #=> String
     #   resp.shared_routes_enabled #=> Boolean
@@ -794,6 +800,295 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def create_pool(params = {}, options = {})
       req = build_request(:create_pool, params)
+      req.send_request(options)
+    end
+
+    # Creates a new registration based on the **RegistrationType** field.
+    #
+    # @option params [required, String] :registration_type
+    #   The type of registration form to create. The list of
+    #   **RegistrationTypes** can be found using the
+    #   DescribeRegistrationTypeDefinitions action.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of tags (key and value pairs) to associate with the
+    #   registration.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateRegistrationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRegistrationResult#registration_arn #registration_arn} => String
+    #   * {Types::CreateRegistrationResult#registration_id #registration_id} => String
+    #   * {Types::CreateRegistrationResult#registration_type #registration_type} => String
+    #   * {Types::CreateRegistrationResult#registration_status #registration_status} => String
+    #   * {Types::CreateRegistrationResult#current_version_number #current_version_number} => Integer
+    #   * {Types::CreateRegistrationResult#additional_attributes #additional_attributes} => Hash&lt;String,String&gt;
+    #   * {Types::CreateRegistrationResult#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::CreateRegistrationResult#created_timestamp #created_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_registration({
+    #     registration_type: "RegistrationType", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_arn #=> String
+    #   resp.registration_id #=> String
+    #   resp.registration_type #=> String
+    #   resp.registration_status #=> String, one of "CREATED", "SUBMITTED", "REVIEWING", "PROVISIONING", "COMPLETE", "REQUIRES_UPDATES", "CLOSED", "DELETED"
+    #   resp.current_version_number #=> Integer
+    #   resp.additional_attributes #=> Hash
+    #   resp.additional_attributes["String"] #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateRegistration AWS API Documentation
+    #
+    # @overload create_registration(params = {})
+    # @param [Hash] params ({})
+    def create_registration(params = {}, options = {})
+      req = build_request(:create_registration, params)
+      req.send_request(options)
+    end
+
+    # Associate the registration with an origination identity such as a
+    # phone number or sender ID.
+    #
+    # @option params [required, String] :registration_id
+    #   The unique identifier for the registration.
+    #
+    # @option params [required, String] :resource_id
+    #   The unique identifier for the origination identity. For example this
+    #   could be a **PhoneNumberId** or **SenderId**.
+    #
+    # @return [Types::CreateRegistrationAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRegistrationAssociationResult#registration_arn #registration_arn} => String
+    #   * {Types::CreateRegistrationAssociationResult#registration_id #registration_id} => String
+    #   * {Types::CreateRegistrationAssociationResult#registration_type #registration_type} => String
+    #   * {Types::CreateRegistrationAssociationResult#resource_arn #resource_arn} => String
+    #   * {Types::CreateRegistrationAssociationResult#resource_id #resource_id} => String
+    #   * {Types::CreateRegistrationAssociationResult#resource_type #resource_type} => String
+    #   * {Types::CreateRegistrationAssociationResult#iso_country_code #iso_country_code} => String
+    #   * {Types::CreateRegistrationAssociationResult#phone_number #phone_number} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_registration_association({
+    #     registration_id: "RegistrationIdOrArn", # required
+    #     resource_id: "ResourceIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_arn #=> String
+    #   resp.registration_id #=> String
+    #   resp.registration_type #=> String
+    #   resp.resource_arn #=> String
+    #   resp.resource_id #=> String
+    #   resp.resource_type #=> String
+    #   resp.iso_country_code #=> String
+    #   resp.phone_number #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateRegistrationAssociation AWS API Documentation
+    #
+    # @overload create_registration_association(params = {})
+    # @param [Hash] params ({})
+    def create_registration_association(params = {}, options = {})
+      req = build_request(:create_registration_association, params)
+      req.send_request(options)
+    end
+
+    # Create a new registration attachment to use for uploading a file or a
+    # URL to a file. The maximum file size is 1MiB and valid file extensions
+    # are PDF, JPEG and PNG. For example, many sender ID registrations
+    # require a signed “letter of authorization” (LOA) to be submitted.
+    #
+    # @option params [String, StringIO, File] :attachment_body
+    #   The registration file to upload. The maximum file size is 1MiB and
+    #   valid file extensions are PDF, JPEG and PNG.
+    #
+    # @option params [String] :attachment_url
+    #   A URL to the required registration file. For example, you can provide
+    #   the S3 object URL.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of tags (key and value pairs) to associate with the
+    #   registration attachment.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateRegistrationAttachmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRegistrationAttachmentResult#registration_attachment_arn #registration_attachment_arn} => String
+    #   * {Types::CreateRegistrationAttachmentResult#registration_attachment_id #registration_attachment_id} => String
+    #   * {Types::CreateRegistrationAttachmentResult#attachment_status #attachment_status} => String
+    #   * {Types::CreateRegistrationAttachmentResult#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::CreateRegistrationAttachmentResult#created_timestamp #created_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_registration_attachment({
+    #     attachment_body: "data",
+    #     attachment_url: "AttachmentUrl",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_attachment_arn #=> String
+    #   resp.registration_attachment_id #=> String
+    #   resp.attachment_status #=> String, one of "UPLOAD_IN_PROGRESS", "UPLOAD_COMPLETE", "UPLOAD_FAILED", "DELETED"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateRegistrationAttachment AWS API Documentation
+    #
+    # @overload create_registration_attachment(params = {})
+    # @param [Hash] params ({})
+    def create_registration_attachment(params = {}, options = {})
+      req = build_request(:create_registration_attachment, params)
+      req.send_request(options)
+    end
+
+    # Create a new version of the registration and increase the
+    # **VersionNumber**. The previous version of the registration becomes
+    # read-only.
+    #
+    # @option params [required, String] :registration_id
+    #   The unique identifier for the registration.
+    #
+    # @return [Types::CreateRegistrationVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRegistrationVersionResult#registration_arn #registration_arn} => String
+    #   * {Types::CreateRegistrationVersionResult#registration_id #registration_id} => String
+    #   * {Types::CreateRegistrationVersionResult#version_number #version_number} => Integer
+    #   * {Types::CreateRegistrationVersionResult#registration_version_status #registration_version_status} => String
+    #   * {Types::CreateRegistrationVersionResult#registration_version_status_history #registration_version_status_history} => Types::RegistrationVersionStatusHistory
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_registration_version({
+    #     registration_id: "RegistrationIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_arn #=> String
+    #   resp.registration_id #=> String
+    #   resp.version_number #=> Integer
+    #   resp.registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "REVIEWING", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED"
+    #   resp.registration_version_status_history.draft_timestamp #=> Time
+    #   resp.registration_version_status_history.submitted_timestamp #=> Time
+    #   resp.registration_version_status_history.reviewing_timestamp #=> Time
+    #   resp.registration_version_status_history.approved_timestamp #=> Time
+    #   resp.registration_version_status_history.discarded_timestamp #=> Time
+    #   resp.registration_version_status_history.denied_timestamp #=> Time
+    #   resp.registration_version_status_history.revoked_timestamp #=> Time
+    #   resp.registration_version_status_history.archived_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateRegistrationVersion AWS API Documentation
+    #
+    # @overload create_registration_version(params = {})
+    # @param [Hash] params ({})
+    def create_registration_version(params = {}, options = {})
+      req = build_request(:create_registration_version, params)
+      req.send_request(options)
+    end
+
+    # You can only send messages to verified destination numbers when your
+    # account is in the sandbox. You can add up to 10 verified destination
+    # numbers.
+    #
+    # @option params [required, String] :destination_phone_number
+    #   The verified destination phone number, in E.164 format.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of tags (key and value pairs) to associate with the
+    #   destination number.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateVerifiedDestinationNumberResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVerifiedDestinationNumberResult#verified_destination_number_arn #verified_destination_number_arn} => String
+    #   * {Types::CreateVerifiedDestinationNumberResult#verified_destination_number_id #verified_destination_number_id} => String
+    #   * {Types::CreateVerifiedDestinationNumberResult#destination_phone_number #destination_phone_number} => String
+    #   * {Types::CreateVerifiedDestinationNumberResult#status #status} => String
+    #   * {Types::CreateVerifiedDestinationNumberResult#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::CreateVerifiedDestinationNumberResult#created_timestamp #created_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_verified_destination_number({
+    #     destination_phone_number: "PhoneNumber", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.verified_destination_number_arn #=> String
+    #   resp.verified_destination_number_id #=> String
+    #   resp.destination_phone_number #=> String
+    #   resp.status #=> String, one of "PENDING", "VERIFIED"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateVerifiedDestinationNumber AWS API Documentation
+    #
+    # @overload create_verified_destination_number(params = {})
+    # @param [Hash] params ({})
+    def create_verified_destination_number(params = {}, options = {})
+      req = build_request(:create_verified_destination_number, params)
       req.send_request(options)
     end
 
@@ -1041,7 +1336,7 @@ module Aws::PinpointSMSVoiceV2
     # opt-out list are deleted.
     #
     # If the specified opt-out list name doesn't exist or is in-use by an
-    # origination phone number or pool, an Error is returned.
+    # origination phone number or pool, an error is returned.
     #
     # @option params [required, String] :opt_out_list_name
     #   The OptOutListName or OptOutListArn of the OptOutList to delete. You
@@ -1081,7 +1376,7 @@ module Aws::PinpointSMSVoiceV2
     # Each destination phone number can only be deleted once every 30 days.
     #
     # If the specified destination phone number doesn't exist or if the
-    # opt-out list doesn't exist, an Error is returned.
+    # opt-out list doesn't exist, an error is returned.
     #
     # @option params [required, String] :opt_out_list_name
     #   The OptOutListName or OptOutListArn to remove the phone number from.
@@ -1125,7 +1420,7 @@ module Aws::PinpointSMSVoiceV2
     # origination identities from that pool.
     #
     # If the pool status isn't active or if deletion protection is enabled,
-    # an Error is returned.
+    # an error is returned.
     #
     # A pool is a collection of phone numbers and SenderIds. A pool can
     # include one or more phone numbers and SenderIds that are associated
@@ -1143,6 +1438,7 @@ module Aws::PinpointSMSVoiceV2
     #   * {Types::DeletePoolResult#message_type #message_type} => String
     #   * {Types::DeletePoolResult#two_way_enabled #two_way_enabled} => Boolean
     #   * {Types::DeletePoolResult#two_way_channel_arn #two_way_channel_arn} => String
+    #   * {Types::DeletePoolResult#two_way_channel_role #two_way_channel_role} => String
     #   * {Types::DeletePoolResult#self_managed_opt_outs_enabled #self_managed_opt_outs_enabled} => Boolean
     #   * {Types::DeletePoolResult#opt_out_list_name #opt_out_list_name} => String
     #   * {Types::DeletePoolResult#shared_routes_enabled #shared_routes_enabled} => Boolean
@@ -1162,6 +1458,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.two_way_enabled #=> Boolean
     #   resp.two_way_channel_arn #=> String
+    #   resp.two_way_channel_role #=> String
     #   resp.self_managed_opt_outs_enabled #=> Boolean
     #   resp.opt_out_list_name #=> String
     #   resp.shared_routes_enabled #=> Boolean
@@ -1173,6 +1470,133 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def delete_pool(params = {}, options = {})
       req = build_request(:delete_pool, params)
+      req.send_request(options)
+    end
+
+    # Permanently delete an existing registration from your account.
+    #
+    # @option params [required, String] :registration_id
+    #   The unique identifier for the registration.
+    #
+    # @return [Types::DeleteRegistrationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRegistrationResult#registration_arn #registration_arn} => String
+    #   * {Types::DeleteRegistrationResult#registration_id #registration_id} => String
+    #   * {Types::DeleteRegistrationResult#registration_type #registration_type} => String
+    #   * {Types::DeleteRegistrationResult#registration_status #registration_status} => String
+    #   * {Types::DeleteRegistrationResult#current_version_number #current_version_number} => Integer
+    #   * {Types::DeleteRegistrationResult#approved_version_number #approved_version_number} => Integer
+    #   * {Types::DeleteRegistrationResult#latest_denied_version_number #latest_denied_version_number} => Integer
+    #   * {Types::DeleteRegistrationResult#additional_attributes #additional_attributes} => Hash&lt;String,String&gt;
+    #   * {Types::DeleteRegistrationResult#created_timestamp #created_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_registration({
+    #     registration_id: "RegistrationIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_arn #=> String
+    #   resp.registration_id #=> String
+    #   resp.registration_type #=> String
+    #   resp.registration_status #=> String, one of "CREATED", "SUBMITTED", "REVIEWING", "PROVISIONING", "COMPLETE", "REQUIRES_UPDATES", "CLOSED", "DELETED"
+    #   resp.current_version_number #=> Integer
+    #   resp.approved_version_number #=> Integer
+    #   resp.latest_denied_version_number #=> Integer
+    #   resp.additional_attributes #=> Hash
+    #   resp.additional_attributes["String"] #=> String
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteRegistration AWS API Documentation
+    #
+    # @overload delete_registration(params = {})
+    # @param [Hash] params ({})
+    def delete_registration(params = {}, options = {})
+      req = build_request(:delete_registration, params)
+      req.send_request(options)
+    end
+
+    # Permanently delete the specified registration attachment.
+    #
+    # @option params [required, String] :registration_attachment_id
+    #   The unique identifier for the registration attachment.
+    #
+    # @return [Types::DeleteRegistrationAttachmentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRegistrationAttachmentResult#registration_attachment_arn #registration_attachment_arn} => String
+    #   * {Types::DeleteRegistrationAttachmentResult#registration_attachment_id #registration_attachment_id} => String
+    #   * {Types::DeleteRegistrationAttachmentResult#attachment_status #attachment_status} => String
+    #   * {Types::DeleteRegistrationAttachmentResult#attachment_upload_error_reason #attachment_upload_error_reason} => String
+    #   * {Types::DeleteRegistrationAttachmentResult#created_timestamp #created_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_registration_attachment({
+    #     registration_attachment_id: "RegistrationAttachmentIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_attachment_arn #=> String
+    #   resp.registration_attachment_id #=> String
+    #   resp.attachment_status #=> String, one of "UPLOAD_IN_PROGRESS", "UPLOAD_COMPLETE", "UPLOAD_FAILED", "DELETED"
+    #   resp.attachment_upload_error_reason #=> String, one of "INTERNAL_ERROR"
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteRegistrationAttachment AWS API Documentation
+    #
+    # @overload delete_registration_attachment(params = {})
+    # @param [Hash] params ({})
+    def delete_registration_attachment(params = {}, options = {})
+      req = build_request(:delete_registration_attachment, params)
+      req.send_request(options)
+    end
+
+    # Delete the value in a registration form field.
+    #
+    # @option params [required, String] :registration_id
+    #   The unique identifier for the registration.
+    #
+    # @option params [required, String] :field_path
+    #   The path to the registration form field. You can use
+    #   DescribeRegistrationFieldDefinitions for a list of **FieldPaths**.
+    #
+    # @return [Types::DeleteRegistrationFieldValueResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRegistrationFieldValueResult#registration_arn #registration_arn} => String
+    #   * {Types::DeleteRegistrationFieldValueResult#registration_id #registration_id} => String
+    #   * {Types::DeleteRegistrationFieldValueResult#version_number #version_number} => Integer
+    #   * {Types::DeleteRegistrationFieldValueResult#field_path #field_path} => String
+    #   * {Types::DeleteRegistrationFieldValueResult#select_choices #select_choices} => Array&lt;String&gt;
+    #   * {Types::DeleteRegistrationFieldValueResult#text_value #text_value} => String
+    #   * {Types::DeleteRegistrationFieldValueResult#registration_attachment_id #registration_attachment_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_registration_field_value({
+    #     registration_id: "RegistrationIdOrArn", # required
+    #     field_path: "FieldPath", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_arn #=> String
+    #   resp.registration_id #=> String
+    #   resp.version_number #=> Integer
+    #   resp.field_path #=> String
+    #   resp.select_choices #=> Array
+    #   resp.select_choices[0] #=> String
+    #   resp.text_value #=> String
+    #   resp.registration_attachment_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteRegistrationFieldValue AWS API Documentation
+    #
+    # @overload delete_registration_field_value(params = {})
+    # @param [Hash] params ({})
+    def delete_registration_field_value(params = {}, options = {})
+      req = build_request(:delete_registration_field_value, params)
       req.send_request(options)
     end
 
@@ -1200,6 +1624,40 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def delete_text_message_spend_limit_override(params = {}, options = {})
       req = build_request(:delete_text_message_spend_limit_override, params)
+      req.send_request(options)
+    end
+
+    # Delete a verified destination phone number.
+    #
+    # @option params [required, String] :verified_destination_number_id
+    #   The unique identifier for the verified destination phone number.
+    #
+    # @return [Types::DeleteVerifiedDestinationNumberResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVerifiedDestinationNumberResult#verified_destination_number_arn #verified_destination_number_arn} => String
+    #   * {Types::DeleteVerifiedDestinationNumberResult#verified_destination_number_id #verified_destination_number_id} => String
+    #   * {Types::DeleteVerifiedDestinationNumberResult#destination_phone_number #destination_phone_number} => String
+    #   * {Types::DeleteVerifiedDestinationNumberResult#created_timestamp #created_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_verified_destination_number({
+    #     verified_destination_number_id: "VerifiedDestinationNumberIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.verified_destination_number_arn #=> String
+    #   resp.verified_destination_number_id #=> String
+    #   resp.destination_phone_number #=> String
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteVerifiedDestinationNumber AWS API Documentation
+    #
+    # @overload delete_verified_destination_number(params = {})
+    # @param [Hash] params ({})
+    def delete_verified_destination_number(params = {}, options = {})
+      req = build_request(:delete_verified_destination_number, params)
       req.send_request(options)
     end
 
@@ -1315,7 +1773,7 @@ module Aws::PinpointSMSVoiceV2
     # @example Response structure
     #
     #   resp.account_limits #=> Array
-    #   resp.account_limits[0].name #=> String, one of "PHONE_NUMBERS", "POOLS", "CONFIGURATION_SETS", "OPT_OUT_LISTS"
+    #   resp.account_limits[0].name #=> String, one of "PHONE_NUMBERS", "POOLS", "CONFIGURATION_SETS", "OPT_OUT_LISTS", "SENDER_IDS", "REGISTRATIONS", "REGISTRATION_ATTACHMENTS", "VERIFIED_DESTINATION_NUMBERS"
     #   resp.account_limits[0].used #=> Integer
     #   resp.account_limits[0].max #=> Integer
     #   resp.next_token #=> String
@@ -1415,7 +1873,7 @@ module Aws::PinpointSMSVoiceV2
     # begins with a keyword, Amazon Pinpoint responds with a customizable
     # message.
     #
-    # If you specify a keyword that isn't valid, an Error is returned.
+    # If you specify a keyword that isn't valid, an error is returned.
     #
     # @option params [required, String] :origination_identity
     #   The origination identity to use such as a PhoneNumberId,
@@ -1489,7 +1947,7 @@ module Aws::PinpointSMSVoiceV2
     # names or filters, the output includes information for all opt-out
     # lists.
     #
-    # If you specify an opt-out list name that isn't valid, an Error is
+    # If you specify an opt-out list name that isn't valid, an error is
     # returned.
     #
     # @option params [Array<String>] :opt_out_list_names
@@ -1545,7 +2003,7 @@ module Aws::PinpointSMSVoiceV2
     # filters, the output includes information for all opted out destination
     # numbers in your opt-out list.
     #
-    # If you specify an opted out number that isn't valid, an Error is
+    # If you specify an opted out number that isn't valid, an error is
     # returned.
     #
     # @option params [required, String] :opt_out_list_name
@@ -1618,7 +2076,7 @@ module Aws::PinpointSMSVoiceV2
     # criteria. If you don't specify phone number IDs or filters, the
     # output includes information for all phone numbers.
     #
-    # If you specify a phone number ID that isn't valid, an Error is
+    # If you specify a phone number ID that isn't valid, an error is
     # returned.
     #
     # @option params [Array<String>] :phone_number_ids
@@ -1649,7 +2107,7 @@ module Aws::PinpointSMSVoiceV2
     #     phone_number_ids: ["PhoneNumberIdOrArn"],
     #     filters: [
     #       {
-    #         name: "status", # required, accepts status, iso-country-code, message-type, number-capability, number-type, two-way-enabled, self-managed-opt-outs-enabled, opt-out-list-name, deletion-protection-enabled
+    #         name: "status", # required, accepts status, iso-country-code, message-type, number-capability, number-type, two-way-enabled, self-managed-opt-outs-enabled, opt-out-list-name, deletion-protection-enabled, two-way-channel-arn
     #         values: ["FilterValue"], # required
     #       },
     #     ],
@@ -1668,14 +2126,16 @@ module Aws::PinpointSMSVoiceV2
     #   resp.phone_numbers[0].message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.phone_numbers[0].number_capabilities #=> Array
     #   resp.phone_numbers[0].number_capabilities[0] #=> String, one of "SMS", "VOICE"
-    #   resp.phone_numbers[0].number_type #=> String, one of "SHORT_CODE", "LONG_CODE", "TOLL_FREE", "TEN_DLC"
+    #   resp.phone_numbers[0].number_type #=> String, one of "SHORT_CODE", "LONG_CODE", "TOLL_FREE", "TEN_DLC", "SIMULATOR"
     #   resp.phone_numbers[0].monthly_leasing_price #=> String
     #   resp.phone_numbers[0].two_way_enabled #=> Boolean
     #   resp.phone_numbers[0].two_way_channel_arn #=> String
+    #   resp.phone_numbers[0].two_way_channel_role #=> String
     #   resp.phone_numbers[0].self_managed_opt_outs_enabled #=> Boolean
     #   resp.phone_numbers[0].opt_out_list_name #=> String
     #   resp.phone_numbers[0].deletion_protection_enabled #=> Boolean
     #   resp.phone_numbers[0].pool_id #=> String
+    #   resp.phone_numbers[0].registration_id #=> String
     #   resp.phone_numbers[0].created_timestamp #=> Time
     #   resp.next_token #=> String
     #
@@ -1697,7 +2157,7 @@ module Aws::PinpointSMSVoiceV2
     # don't specify pool IDs or filters, the output includes information
     # for all pools.
     #
-    # If you specify a pool ID that isn't valid, an Error is returned.
+    # If you specify a pool ID that isn't valid, an error is returned.
     #
     # A pool is a collection of phone numbers and SenderIds. A pool can
     # include one or more phone numbers and SenderIds that are associated
@@ -1730,7 +2190,7 @@ module Aws::PinpointSMSVoiceV2
     #     pool_ids: ["PoolIdOrArn"],
     #     filters: [
     #       {
-    #         name: "status", # required, accepts status, message-type, two-way-enabled, self-managed-opt-outs-enabled, opt-out-list-name, shared-routes-enabled, deletion-protection-enabled
+    #         name: "status", # required, accepts status, message-type, two-way-enabled, self-managed-opt-outs-enabled, opt-out-list-name, shared-routes-enabled, deletion-protection-enabled, two-way-channel-arn
     #         values: ["FilterValue"], # required
     #       },
     #     ],
@@ -1747,6 +2207,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.pools[0].message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.pools[0].two_way_enabled #=> Boolean
     #   resp.pools[0].two_way_channel_arn #=> String
+    #   resp.pools[0].two_way_channel_role #=> String
     #   resp.pools[0].self_managed_opt_outs_enabled #=> Boolean
     #   resp.pools[0].opt_out_list_name #=> String
     #   resp.pools[0].shared_routes_enabled #=> Boolean
@@ -1763,6 +2224,459 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Retrieves the specified registration attachments or all registration
+    # attachments associated with your Amazon Web Services account.
+    #
+    # @option params [Array<String>] :registration_attachment_ids
+    #   The unique identifier of registration attachments to find. This is an
+    #   array of **RegistrationAttachmentId**.
+    #
+    # @option params [Array<Types::RegistrationAttachmentFilter>] :filters
+    #   An array of RegistrationAttachmentFilter objects to filter the
+    #   results.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results. You don't
+    #   need to supply a value for this field in the initial request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per each request.
+    #
+    # @return [Types::DescribeRegistrationAttachmentsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRegistrationAttachmentsResult#registration_attachments #registration_attachments} => Array&lt;Types::RegistrationAttachmentsInformation&gt;
+    #   * {Types::DescribeRegistrationAttachmentsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_registration_attachments({
+    #     registration_attachment_ids: ["RegistrationIdOrArn"],
+    #     filters: [
+    #       {
+    #         name: "attachment-status", # required, accepts attachment-status
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_attachments #=> Array
+    #   resp.registration_attachments[0].registration_attachment_arn #=> String
+    #   resp.registration_attachments[0].registration_attachment_id #=> String
+    #   resp.registration_attachments[0].attachment_status #=> String, one of "UPLOAD_IN_PROGRESS", "UPLOAD_COMPLETE", "UPLOAD_FAILED", "DELETED"
+    #   resp.registration_attachments[0].attachment_upload_error_reason #=> String, one of "INTERNAL_ERROR"
+    #   resp.registration_attachments[0].created_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationAttachments AWS API Documentation
+    #
+    # @overload describe_registration_attachments(params = {})
+    # @param [Hash] params ({})
+    def describe_registration_attachments(params = {}, options = {})
+      req = build_request(:describe_registration_attachments, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified registration type field definitions. You can
+    # use DescribeRegistrationFieldDefinitions to view the requirements for
+    # creating, filling out, and submitting each registration type.
+    #
+    # @option params [required, String] :registration_type
+    #   The type of registration form. The list of **RegistrationTypes** can
+    #   be found using the DescribeRegistrationTypeDefinitions action.
+    #
+    # @option params [String] :section_path
+    #   The path to the section of the registration.
+    #
+    # @option params [Array<String>] :field_paths
+    #   An array of paths to the registration form field.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results. You don't
+    #   need to supply a value for this field in the initial request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per each request.
+    #
+    # @return [Types::DescribeRegistrationFieldDefinitionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRegistrationFieldDefinitionsResult#registration_type #registration_type} => String
+    #   * {Types::DescribeRegistrationFieldDefinitionsResult#registration_field_definitions #registration_field_definitions} => Array&lt;Types::RegistrationFieldDefinition&gt;
+    #   * {Types::DescribeRegistrationFieldDefinitionsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_registration_field_definitions({
+    #     registration_type: "RegistrationType", # required
+    #     section_path: "SectionPath",
+    #     field_paths: ["FieldPath"],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_type #=> String
+    #   resp.registration_field_definitions #=> Array
+    #   resp.registration_field_definitions[0].section_path #=> String
+    #   resp.registration_field_definitions[0].field_path #=> String
+    #   resp.registration_field_definitions[0].field_type #=> String, one of "SELECT", "TEXT", "ATTACHMENT"
+    #   resp.registration_field_definitions[0].field_requirement #=> String, one of "REQUIRED", "CONDITIONAL", "OPTIONAL"
+    #   resp.registration_field_definitions[0].select_validation.min_choices #=> Integer
+    #   resp.registration_field_definitions[0].select_validation.max_choices #=> Integer
+    #   resp.registration_field_definitions[0].select_validation.options #=> Array
+    #   resp.registration_field_definitions[0].select_validation.options[0] #=> String
+    #   resp.registration_field_definitions[0].text_validation.min_length #=> Integer
+    #   resp.registration_field_definitions[0].text_validation.max_length #=> Integer
+    #   resp.registration_field_definitions[0].text_validation.pattern #=> String
+    #   resp.registration_field_definitions[0].display_hints.title #=> String
+    #   resp.registration_field_definitions[0].display_hints.short_description #=> String
+    #   resp.registration_field_definitions[0].display_hints.long_description #=> String
+    #   resp.registration_field_definitions[0].display_hints.documentation_title #=> String
+    #   resp.registration_field_definitions[0].display_hints.documentation_link #=> String
+    #   resp.registration_field_definitions[0].display_hints.select_option_descriptions #=> Array
+    #   resp.registration_field_definitions[0].display_hints.select_option_descriptions[0].option #=> String
+    #   resp.registration_field_definitions[0].display_hints.select_option_descriptions[0].title #=> String
+    #   resp.registration_field_definitions[0].display_hints.select_option_descriptions[0].description #=> String
+    #   resp.registration_field_definitions[0].display_hints.text_validation_description #=> String
+    #   resp.registration_field_definitions[0].display_hints.example_text_value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationFieldDefinitions AWS API Documentation
+    #
+    # @overload describe_registration_field_definitions(params = {})
+    # @param [Hash] params ({})
+    def describe_registration_field_definitions(params = {}, options = {})
+      req = build_request(:describe_registration_field_definitions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified registration field values.
+    #
+    # @option params [required, String] :registration_id
+    #   The unique identifier for the registration.
+    #
+    # @option params [Integer] :version_number
+    #   The version number of the registration.
+    #
+    # @option params [String] :section_path
+    #   The path to the section of the registration.
+    #
+    # @option params [Array<String>] :field_paths
+    #   An array of paths to the registration form field.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results. You don't
+    #   need to supply a value for this field in the initial request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per each request.
+    #
+    # @return [Types::DescribeRegistrationFieldValuesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRegistrationFieldValuesResult#registration_arn #registration_arn} => String
+    #   * {Types::DescribeRegistrationFieldValuesResult#registration_id #registration_id} => String
+    #   * {Types::DescribeRegistrationFieldValuesResult#version_number #version_number} => Integer
+    #   * {Types::DescribeRegistrationFieldValuesResult#registration_field_values #registration_field_values} => Array&lt;Types::RegistrationFieldValueInformation&gt;
+    #   * {Types::DescribeRegistrationFieldValuesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_registration_field_values({
+    #     registration_id: "RegistrationIdOrArn", # required
+    #     version_number: 1,
+    #     section_path: "SectionPath",
+    #     field_paths: ["FieldPath"],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_arn #=> String
+    #   resp.registration_id #=> String
+    #   resp.version_number #=> Integer
+    #   resp.registration_field_values #=> Array
+    #   resp.registration_field_values[0].field_path #=> String
+    #   resp.registration_field_values[0].select_choices #=> Array
+    #   resp.registration_field_values[0].select_choices[0] #=> String
+    #   resp.registration_field_values[0].text_value #=> String
+    #   resp.registration_field_values[0].registration_attachment_id #=> String
+    #   resp.registration_field_values[0].denied_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationFieldValues AWS API Documentation
+    #
+    # @overload describe_registration_field_values(params = {})
+    # @param [Hash] params ({})
+    def describe_registration_field_values(params = {}, options = {})
+      req = build_request(:describe_registration_field_values, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified registration section definitions. You can use
+    # DescribeRegistrationSectionDefinitions to view the requirements for
+    # creating, filling out, and submitting each registration type.
+    #
+    # @option params [required, String] :registration_type
+    #   The type of registration form. The list of **RegistrationTypes** can
+    #   be found using the DescribeRegistrationTypeDefinitions action.
+    #
+    # @option params [Array<String>] :section_paths
+    #   An array of paths for the registration form section.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results. You don't
+    #   need to supply a value for this field in the initial request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per each request.
+    #
+    # @return [Types::DescribeRegistrationSectionDefinitionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRegistrationSectionDefinitionsResult#registration_type #registration_type} => String
+    #   * {Types::DescribeRegistrationSectionDefinitionsResult#registration_section_definitions #registration_section_definitions} => Array&lt;Types::RegistrationSectionDefinition&gt;
+    #   * {Types::DescribeRegistrationSectionDefinitionsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_registration_section_definitions({
+    #     registration_type: "RegistrationType", # required
+    #     section_paths: ["SectionPath"],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_type #=> String
+    #   resp.registration_section_definitions #=> Array
+    #   resp.registration_section_definitions[0].section_path #=> String
+    #   resp.registration_section_definitions[0].display_hints.title #=> String
+    #   resp.registration_section_definitions[0].display_hints.short_description #=> String
+    #   resp.registration_section_definitions[0].display_hints.long_description #=> String
+    #   resp.registration_section_definitions[0].display_hints.documentation_title #=> String
+    #   resp.registration_section_definitions[0].display_hints.documentation_link #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationSectionDefinitions AWS API Documentation
+    #
+    # @overload describe_registration_section_definitions(params = {})
+    # @param [Hash] params ({})
+    def describe_registration_section_definitions(params = {}, options = {})
+      req = build_request(:describe_registration_section_definitions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified registration type definitions. You can use
+    # DescribeRegistrationTypeDefinitions to view the requirements for
+    # creating, filling out, and submitting each registration type.
+    #
+    # @option params [Array<String>] :registration_types
+    #   The type of registration form. The list of **RegistrationTypes** can
+    #   be found using the DescribeRegistrationTypeDefinitions action.
+    #
+    # @option params [Array<Types::RegistrationTypeFilter>] :filters
+    #   An array of RegistrationFilter objects to filter the results.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results. You don't
+    #   need to supply a value for this field in the initial request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per each request.
+    #
+    # @return [Types::DescribeRegistrationTypeDefinitionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRegistrationTypeDefinitionsResult#registration_type_definitions #registration_type_definitions} => Array&lt;Types::RegistrationTypeDefinition&gt;
+    #   * {Types::DescribeRegistrationTypeDefinitionsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_registration_type_definitions({
+    #     registration_types: ["RegistrationType"],
+    #     filters: [
+    #       {
+    #         name: "supported-association-resource-type", # required, accepts supported-association-resource-type, supported-association-iso-country-code
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_type_definitions #=> Array
+    #   resp.registration_type_definitions[0].registration_type #=> String
+    #   resp.registration_type_definitions[0].supported_associations #=> Array
+    #   resp.registration_type_definitions[0].supported_associations[0].resource_type #=> String
+    #   resp.registration_type_definitions[0].supported_associations[0].iso_country_code #=> String
+    #   resp.registration_type_definitions[0].supported_associations[0].association_behavior #=> String, one of "ASSOCIATE_BEFORE_SUBMIT", "ASSOCIATE_ON_APPROVAL", "ASSOCIATE_AFTER_COMPLETE"
+    #   resp.registration_type_definitions[0].supported_associations[0].disassociation_behavior #=> String, one of "DISASSOCIATE_ALL_CLOSES_REGISTRATION", "DISASSOCIATE_ALL_ALLOWS_DELETE_REGISTRATION", "DELETE_REGISTRATION_DISASSOCIATES"
+    #   resp.registration_type_definitions[0].display_hints.title #=> String
+    #   resp.registration_type_definitions[0].display_hints.short_description #=> String
+    #   resp.registration_type_definitions[0].display_hints.long_description #=> String
+    #   resp.registration_type_definitions[0].display_hints.documentation_title #=> String
+    #   resp.registration_type_definitions[0].display_hints.documentation_link #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationTypeDefinitions AWS API Documentation
+    #
+    # @overload describe_registration_type_definitions(params = {})
+    # @param [Hash] params ({})
+    def describe_registration_type_definitions(params = {}, options = {})
+      req = build_request(:describe_registration_type_definitions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified registration version.
+    #
+    # @option params [required, String] :registration_id
+    #   The unique identifier for the registration.
+    #
+    # @option params [Array<Integer>] :version_numbers
+    #   An array of registration version numbers.
+    #
+    # @option params [Array<Types::RegistrationVersionFilter>] :filters
+    #   An array of RegistrationVersionFilter objects to filter the results.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results. You don't
+    #   need to supply a value for this field in the initial request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per each request.
+    #
+    # @return [Types::DescribeRegistrationVersionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRegistrationVersionsResult#registration_arn #registration_arn} => String
+    #   * {Types::DescribeRegistrationVersionsResult#registration_id #registration_id} => String
+    #   * {Types::DescribeRegistrationVersionsResult#registration_versions #registration_versions} => Array&lt;Types::RegistrationVersionInformation&gt;
+    #   * {Types::DescribeRegistrationVersionsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_registration_versions({
+    #     registration_id: "RegistrationIdOrArn", # required
+    #     version_numbers: [1],
+    #     filters: [
+    #       {
+    #         name: "registration-version-status", # required, accepts registration-version-status
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_arn #=> String
+    #   resp.registration_id #=> String
+    #   resp.registration_versions #=> Array
+    #   resp.registration_versions[0].version_number #=> Integer
+    #   resp.registration_versions[0].registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "REVIEWING", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED"
+    #   resp.registration_versions[0].registration_version_status_history.draft_timestamp #=> Time
+    #   resp.registration_versions[0].registration_version_status_history.submitted_timestamp #=> Time
+    #   resp.registration_versions[0].registration_version_status_history.reviewing_timestamp #=> Time
+    #   resp.registration_versions[0].registration_version_status_history.approved_timestamp #=> Time
+    #   resp.registration_versions[0].registration_version_status_history.discarded_timestamp #=> Time
+    #   resp.registration_versions[0].registration_version_status_history.denied_timestamp #=> Time
+    #   resp.registration_versions[0].registration_version_status_history.revoked_timestamp #=> Time
+    #   resp.registration_versions[0].registration_version_status_history.archived_timestamp #=> Time
+    #   resp.registration_versions[0].denied_reasons #=> Array
+    #   resp.registration_versions[0].denied_reasons[0].reason #=> String
+    #   resp.registration_versions[0].denied_reasons[0].short_description #=> String
+    #   resp.registration_versions[0].denied_reasons[0].long_description #=> String
+    #   resp.registration_versions[0].denied_reasons[0].documentation_title #=> String
+    #   resp.registration_versions[0].denied_reasons[0].documentation_link #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationVersions AWS API Documentation
+    #
+    # @overload describe_registration_versions(params = {})
+    # @param [Hash] params ({})
+    def describe_registration_versions(params = {}, options = {})
+      req = build_request(:describe_registration_versions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the specified registrations.
+    #
+    # @option params [Array<String>] :registration_ids
+    #   An array of unique identifiers for each registration.
+    #
+    # @option params [Array<Types::RegistrationFilter>] :filters
+    #   An array of RegistrationFilter objects to filter the results.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results. You don't
+    #   need to supply a value for this field in the initial request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per each request.
+    #
+    # @return [Types::DescribeRegistrationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRegistrationsResult#registrations #registrations} => Array&lt;Types::RegistrationInformation&gt;
+    #   * {Types::DescribeRegistrationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_registrations({
+    #     registration_ids: ["RegistrationIdOrArn"],
+    #     filters: [
+    #       {
+    #         name: "registration-type", # required, accepts registration-type, registration-status
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registrations #=> Array
+    #   resp.registrations[0].registration_arn #=> String
+    #   resp.registrations[0].registration_id #=> String
+    #   resp.registrations[0].registration_type #=> String
+    #   resp.registrations[0].registration_status #=> String, one of "CREATED", "SUBMITTED", "REVIEWING", "PROVISIONING", "COMPLETE", "REQUIRES_UPDATES", "CLOSED", "DELETED"
+    #   resp.registrations[0].current_version_number #=> Integer
+    #   resp.registrations[0].approved_version_number #=> Integer
+    #   resp.registrations[0].latest_denied_version_number #=> Integer
+    #   resp.registrations[0].additional_attributes #=> Hash
+    #   resp.registrations[0].additional_attributes["String"] #=> String
+    #   resp.registrations[0].created_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrations AWS API Documentation
+    #
+    # @overload describe_registrations(params = {})
+    # @param [Hash] params ({})
+    def describe_registrations(params = {}, options = {})
+      req = build_request(:describe_registrations, params)
+      req.send_request(options)
+    end
+
     # Describes the specified SenderIds or all SenderIds associated with
     # your Amazon Web Services account.
     #
@@ -1772,7 +2686,7 @@ module Aws::PinpointSMSVoiceV2
     # you don't specify SenderIds or filters, the output includes
     # information for all SenderIds.
     #
-    # f you specify a sender ID that isn't valid, an Error is returned.
+    # f you specify a sender ID that isn't valid, an error is returned.
     #
     # @option params [Array<Types::SenderIdAndCountry>] :sender_ids
     #   An array of SenderIdAndCountry objects to search for.
@@ -1805,7 +2719,7 @@ module Aws::PinpointSMSVoiceV2
     #     ],
     #     filters: [
     #       {
-    #         name: "sender-id", # required, accepts sender-id, iso-country-code, message-type
+    #         name: "sender-id", # required, accepts sender-id, iso-country-code, message-type, deletion-protection-enabled, registered
     #         values: ["FilterValue"], # required
     #       },
     #     ],
@@ -1822,6 +2736,9 @@ module Aws::PinpointSMSVoiceV2
     #   resp.sender_ids[0].message_types #=> Array
     #   resp.sender_ids[0].message_types[0] #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.sender_ids[0].monthly_leasing_price #=> String
+    #   resp.sender_ids[0].deletion_protection_enabled #=> Boolean
+    #   resp.sender_ids[0].registered #=> Boolean
+    #   resp.sender_ids[0].registration_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeSenderIds AWS API Documentation
@@ -1885,10 +2802,70 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Retrieves the specified verified destiona numbers.
+    #
+    # @option params [Array<String>] :verified_destination_number_ids
+    #   An array of VerifiedDestinationNumberid to retreive.
+    #
+    # @option params [Array<String>] :destination_phone_numbers
+    #   An array of verified destination phone number, in E.164 format.
+    #
+    # @option params [Array<Types::VerifiedDestinationNumberFilter>] :filters
+    #   An array of VerifiedDestinationNumberFilter objects to filter the
+    #   results.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results. You don't
+    #   need to supply a value for this field in the initial request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per each request.
+    #
+    # @return [Types::DescribeVerifiedDestinationNumbersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVerifiedDestinationNumbersResult#verified_destination_numbers #verified_destination_numbers} => Array&lt;Types::VerifiedDestinationNumberInformation&gt;
+    #   * {Types::DescribeVerifiedDestinationNumbersResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_verified_destination_numbers({
+    #     verified_destination_number_ids: ["VerifiedDestinationNumberIdOrArn"],
+    #     destination_phone_numbers: ["PhoneNumber"],
+    #     filters: [
+    #       {
+    #         name: "status", # required, accepts status
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.verified_destination_numbers #=> Array
+    #   resp.verified_destination_numbers[0].verified_destination_number_arn #=> String
+    #   resp.verified_destination_numbers[0].verified_destination_number_id #=> String
+    #   resp.verified_destination_numbers[0].destination_phone_number #=> String
+    #   resp.verified_destination_numbers[0].status #=> String, one of "PENDING", "VERIFIED"
+    #   resp.verified_destination_numbers[0].created_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeVerifiedDestinationNumbers AWS API Documentation
+    #
+    # @overload describe_verified_destination_numbers(params = {})
+    # @param [Hash] params ({})
+    def describe_verified_destination_numbers(params = {}, options = {})
+      req = build_request(:describe_verified_destination_numbers, params)
+      req.send_request(options)
+    end
+
     # Removes the specified origination identity from an existing pool.
     #
     # If the origination identity isn't associated with the specified pool,
-    # an Error is returned.
+    # an error is returned.
     #
     # @option params [required, String] :pool_id
     #   The unique identifier for the pool to disassociate with the
@@ -1948,6 +2925,49 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Discard the current version of the registration.
+    #
+    # @option params [required, String] :registration_id
+    #   The unique identifier for the registration.
+    #
+    # @return [Types::DiscardRegistrationVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DiscardRegistrationVersionResult#registration_arn #registration_arn} => String
+    #   * {Types::DiscardRegistrationVersionResult#registration_id #registration_id} => String
+    #   * {Types::DiscardRegistrationVersionResult#version_number #version_number} => Integer
+    #   * {Types::DiscardRegistrationVersionResult#registration_version_status #registration_version_status} => String
+    #   * {Types::DiscardRegistrationVersionResult#registration_version_status_history #registration_version_status_history} => Types::RegistrationVersionStatusHistory
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.discard_registration_version({
+    #     registration_id: "RegistrationIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_arn #=> String
+    #   resp.registration_id #=> String
+    #   resp.version_number #=> Integer
+    #   resp.registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "REVIEWING", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED"
+    #   resp.registration_version_status_history.draft_timestamp #=> Time
+    #   resp.registration_version_status_history.submitted_timestamp #=> Time
+    #   resp.registration_version_status_history.reviewing_timestamp #=> Time
+    #   resp.registration_version_status_history.approved_timestamp #=> Time
+    #   resp.registration_version_status_history.discarded_timestamp #=> Time
+    #   resp.registration_version_status_history.denied_timestamp #=> Time
+    #   resp.registration_version_status_history.revoked_timestamp #=> Time
+    #   resp.registration_version_status_history.archived_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DiscardRegistrationVersion AWS API Documentation
+    #
+    # @overload discard_registration_version(params = {})
+    # @param [Hash] params ({})
+    def discard_registration_version(params = {}, options = {})
+      req = build_request(:discard_registration_version, params)
+      req.send_request(options)
+    end
+
     # Lists all associated origination identities in your pool.
     #
     # If you specify filters, the output includes information for only those
@@ -2001,6 +3021,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.origination_identities[0].iso_country_code #=> String
     #   resp.origination_identities[0].number_capabilities #=> Array
     #   resp.origination_identities[0].number_capabilities[0] #=> String, one of "SMS", "VOICE"
+    #   resp.origination_identities[0].phone_number #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ListPoolOriginationIdentities AWS API Documentation
@@ -2009,6 +3030,69 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def list_pool_origination_identities(params = {}, options = {})
       req = build_request(:list_pool_origination_identities, params)
+      req.send_request(options)
+    end
+
+    # Retreive all of the origination identies that are associated with a
+    # registration.
+    #
+    # @option params [required, String] :registration_id
+    #   The unique identifier for the registration.
+    #
+    # @option params [Array<Types::RegistrationAssociationFilter>] :filters
+    #   An array of RegistrationAssociationFilter to apply to the results that
+    #   are returned.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results. You don't
+    #   need to supply a value for this field in the initial request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per each request.
+    #
+    # @return [Types::ListRegistrationAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRegistrationAssociationsResult#registration_arn #registration_arn} => String
+    #   * {Types::ListRegistrationAssociationsResult#registration_id #registration_id} => String
+    #   * {Types::ListRegistrationAssociationsResult#registration_type #registration_type} => String
+    #   * {Types::ListRegistrationAssociationsResult#registration_associations #registration_associations} => Array&lt;Types::RegistrationAssociationMetadata&gt;
+    #   * {Types::ListRegistrationAssociationsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_registration_associations({
+    #     registration_id: "RegistrationIdOrArn", # required
+    #     filters: [
+    #       {
+    #         name: "resource-type", # required, accepts resource-type, iso-country-code
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_arn #=> String
+    #   resp.registration_id #=> String
+    #   resp.registration_type #=> String
+    #   resp.registration_associations #=> Array
+    #   resp.registration_associations[0].resource_arn #=> String
+    #   resp.registration_associations[0].resource_id #=> String
+    #   resp.registration_associations[0].resource_type #=> String
+    #   resp.registration_associations[0].iso_country_code #=> String
+    #   resp.registration_associations[0].phone_number #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ListRegistrationAssociations AWS API Documentation
+    #
+    # @overload list_registration_associations(params = {})
+    # @param [Hash] params ({})
+    def list_registration_associations(params = {}, options = {})
+      req = build_request(:list_registration_associations, params)
       req.send_request(options)
     end
 
@@ -2054,7 +3138,7 @@ module Aws::PinpointSMSVoiceV2
     # begins with a keyword, Amazon Pinpoint responds with a customizable
     # message.
     #
-    # If you specify a keyword that isn't valid, an Error is returned.
+    # If you specify a keyword that isn't valid, an error is returned.
     #
     # @option params [required, String] :origination_identity
     #   The origination identity to use such as a PhoneNumberId,
@@ -2069,14 +3153,14 @@ module Aws::PinpointSMSVoiceV2
     # @option params [required, String] :keyword_message
     #   The message associated with the keyword.
     #
+    # @option params [String] :keyword_action
+    #   The action to perform for the new keyword when it is received.
+    #
     #   * AUTOMATIC\_RESPONSE: A message is sent to the recipient.
     #
     #   * OPT\_OUT: Keeps the recipient from receiving future messages.
     #
     #   * OPT\_IN: The recipient wants to receive future messages.
-    #
-    # @option params [String] :keyword_action
-    #   The action to perform for the new keyword when it is received.
     #
     # @return [Types::PutKeywordResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2115,7 +3199,7 @@ module Aws::PinpointSMSVoiceV2
     # Creates an opted out destination phone number in the opt-out list.
     #
     # If the destination phone number isn't valid or if the specified
-    # opt-out list doesn't exist, an Error is returned.
+    # opt-out list doesn't exist, an error is returned.
     #
     # @option params [required, String] :opt_out_list_name
     #   The OptOutListName or OptOutListArn to add the phone number to.
@@ -2155,11 +3239,69 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Creates or updates a field value for a registration.
+    #
+    # @option params [required, String] :registration_id
+    #   The unique identifier for the registration.
+    #
+    # @option params [required, String] :field_path
+    #   The path to the registration form field. You can use
+    #   DescribeRegistrationFieldDefinitions for a list of **FieldPaths**.
+    #
+    # @option params [Array<String>] :select_choices
+    #   An array of values for the form field.
+    #
+    # @option params [String] :text_value
+    #   The text data for a free form field.
+    #
+    # @option params [String] :registration_attachment_id
+    #   The unique identifier for the registration attachment.
+    #
+    # @return [Types::PutRegistrationFieldValueResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutRegistrationFieldValueResult#registration_arn #registration_arn} => String
+    #   * {Types::PutRegistrationFieldValueResult#registration_id #registration_id} => String
+    #   * {Types::PutRegistrationFieldValueResult#version_number #version_number} => Integer
+    #   * {Types::PutRegistrationFieldValueResult#field_path #field_path} => String
+    #   * {Types::PutRegistrationFieldValueResult#select_choices #select_choices} => Array&lt;String&gt;
+    #   * {Types::PutRegistrationFieldValueResult#text_value #text_value} => String
+    #   * {Types::PutRegistrationFieldValueResult#registration_attachment_id #registration_attachment_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_registration_field_value({
+    #     registration_id: "RegistrationIdOrArn", # required
+    #     field_path: "FieldPath", # required
+    #     select_choices: ["SelectChoice"],
+    #     text_value: "TextValue",
+    #     registration_attachment_id: "RegistrationAttachmentIdOrArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_arn #=> String
+    #   resp.registration_id #=> String
+    #   resp.version_number #=> Integer
+    #   resp.field_path #=> String
+    #   resp.select_choices #=> Array
+    #   resp.select_choices[0] #=> String
+    #   resp.text_value #=> String
+    #   resp.registration_attachment_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/PutRegistrationFieldValue AWS API Documentation
+    #
+    # @overload put_registration_field_value(params = {})
+    # @param [Hash] params ({})
+    def put_registration_field_value(params = {}, options = {})
+      req = build_request(:put_registration_field_value, params)
+      req.send_request(options)
+    end
+
     # Releases an existing origination phone number in your account. Once
     # released, a phone number is no longer available for sending messages.
     #
     # If the origination phone number has deletion protection enabled or is
-    # associated with a pool, an Error is returned.
+    # associated with a pool, an error is returned.
     #
     # @option params [required, String] :phone_number_id
     #   The PhoneNumberId or PhoneNumberArn of the phone number to release.
@@ -2179,8 +3321,10 @@ module Aws::PinpointSMSVoiceV2
     #   * {Types::ReleasePhoneNumberResult#monthly_leasing_price #monthly_leasing_price} => String
     #   * {Types::ReleasePhoneNumberResult#two_way_enabled #two_way_enabled} => Boolean
     #   * {Types::ReleasePhoneNumberResult#two_way_channel_arn #two_way_channel_arn} => String
+    #   * {Types::ReleasePhoneNumberResult#two_way_channel_role #two_way_channel_role} => String
     #   * {Types::ReleasePhoneNumberResult#self_managed_opt_outs_enabled #self_managed_opt_outs_enabled} => Boolean
     #   * {Types::ReleasePhoneNumberResult#opt_out_list_name #opt_out_list_name} => String
+    #   * {Types::ReleasePhoneNumberResult#registration_id #registration_id} => String
     #   * {Types::ReleasePhoneNumberResult#created_timestamp #created_timestamp} => Time
     #
     # @example Request syntax with placeholder values
@@ -2199,12 +3343,14 @@ module Aws::PinpointSMSVoiceV2
     #   resp.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.number_capabilities #=> Array
     #   resp.number_capabilities[0] #=> String, one of "SMS", "VOICE"
-    #   resp.number_type #=> String, one of "SHORT_CODE", "LONG_CODE", "TOLL_FREE", "TEN_DLC"
+    #   resp.number_type #=> String, one of "SHORT_CODE", "LONG_CODE", "TOLL_FREE", "TEN_DLC", "SIMULATOR"
     #   resp.monthly_leasing_price #=> String
     #   resp.two_way_enabled #=> Boolean
     #   resp.two_way_channel_arn #=> String
+    #   resp.two_way_channel_role #=> String
     #   resp.self_managed_opt_outs_enabled #=> Boolean
     #   resp.opt_out_list_name #=> String
+    #   resp.registration_id #=> String
     #   resp.created_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ReleasePhoneNumber AWS API Documentation
@@ -2213,6 +3359,52 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def release_phone_number(params = {}, options = {})
       req = build_request(:release_phone_number, params)
+      req.send_request(options)
+    end
+
+    # Releases an existing sender ID in your account.
+    #
+    # @option params [required, String] :sender_id
+    #   The sender ID to release.
+    #
+    # @option params [required, String] :iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the country
+    #   or region.
+    #
+    # @return [Types::ReleaseSenderIdResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ReleaseSenderIdResult#sender_id_arn #sender_id_arn} => String
+    #   * {Types::ReleaseSenderIdResult#sender_id #sender_id} => String
+    #   * {Types::ReleaseSenderIdResult#iso_country_code #iso_country_code} => String
+    #   * {Types::ReleaseSenderIdResult#message_types #message_types} => Array&lt;String&gt;
+    #   * {Types::ReleaseSenderIdResult#monthly_leasing_price #monthly_leasing_price} => String
+    #   * {Types::ReleaseSenderIdResult#registered #registered} => Boolean
+    #   * {Types::ReleaseSenderIdResult#registration_id #registration_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.release_sender_id({
+    #     sender_id: "SenderIdOrArn", # required
+    #     iso_country_code: "IsoCountryCode", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sender_id_arn #=> String
+    #   resp.sender_id #=> String
+    #   resp.iso_country_code #=> String
+    #   resp.message_types #=> Array
+    #   resp.message_types[0] #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.monthly_leasing_price #=> String
+    #   resp.registered #=> Boolean
+    #   resp.registration_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ReleaseSenderId AWS API Documentation
+    #
+    # @overload release_sender_id(params = {})
+    # @param [Hash] params ({})
+    def release_sender_id(params = {}, options = {})
+      req = build_request(:release_sender_id, params)
       req.send_request(options)
     end
 
@@ -2242,7 +3434,7 @@ module Aws::PinpointSMSVoiceV2
     #
     # @option params [String] :opt_out_list_name
     #   The name of the OptOutList to associate with the phone number. You can
-    #   use the OutOutListName or OptPutListArn.
+    #   use the OptOutListName or OptOutListArn.
     #
     # @option params [String] :pool_id
     #   The pool to associated with the phone number. You can use the PoolId
@@ -2282,10 +3474,12 @@ module Aws::PinpointSMSVoiceV2
     #   * {Types::RequestPhoneNumberResult#monthly_leasing_price #monthly_leasing_price} => String
     #   * {Types::RequestPhoneNumberResult#two_way_enabled #two_way_enabled} => Boolean
     #   * {Types::RequestPhoneNumberResult#two_way_channel_arn #two_way_channel_arn} => String
+    #   * {Types::RequestPhoneNumberResult#two_way_channel_role #two_way_channel_role} => String
     #   * {Types::RequestPhoneNumberResult#self_managed_opt_outs_enabled #self_managed_opt_outs_enabled} => Boolean
     #   * {Types::RequestPhoneNumberResult#opt_out_list_name #opt_out_list_name} => String
     #   * {Types::RequestPhoneNumberResult#deletion_protection_enabled #deletion_protection_enabled} => Boolean
     #   * {Types::RequestPhoneNumberResult#pool_id #pool_id} => String
+    #   * {Types::RequestPhoneNumberResult#registration_id #registration_id} => String
     #   * {Types::RequestPhoneNumberResult#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::RequestPhoneNumberResult#created_timestamp #created_timestamp} => Time
     #
@@ -2295,10 +3489,10 @@ module Aws::PinpointSMSVoiceV2
     #     iso_country_code: "IsoCountryCode", # required
     #     message_type: "TRANSACTIONAL", # required, accepts TRANSACTIONAL, PROMOTIONAL
     #     number_capabilities: ["SMS"], # required, accepts SMS, VOICE
-    #     number_type: "LONG_CODE", # required, accepts LONG_CODE, TOLL_FREE, TEN_DLC
+    #     number_type: "LONG_CODE", # required, accepts LONG_CODE, TOLL_FREE, TEN_DLC, SIMULATOR
     #     opt_out_list_name: "OptOutListNameOrArn",
     #     pool_id: "PoolIdOrArn",
-    #     registration_id: "RegistrationId",
+    #     registration_id: "RegistrationIdOrArn",
     #     deletion_protection_enabled: false,
     #     tags: [
     #       {
@@ -2319,14 +3513,16 @@ module Aws::PinpointSMSVoiceV2
     #   resp.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.number_capabilities #=> Array
     #   resp.number_capabilities[0] #=> String, one of "SMS", "VOICE"
-    #   resp.number_type #=> String, one of "LONG_CODE", "TOLL_FREE", "TEN_DLC"
+    #   resp.number_type #=> String, one of "LONG_CODE", "TOLL_FREE", "TEN_DLC", "SIMULATOR"
     #   resp.monthly_leasing_price #=> String
     #   resp.two_way_enabled #=> Boolean
     #   resp.two_way_channel_arn #=> String
+    #   resp.two_way_channel_role #=> String
     #   resp.self_managed_opt_outs_enabled #=> Boolean
     #   resp.opt_out_list_name #=> String
     #   resp.deletion_protection_enabled #=> Boolean
     #   resp.pool_id #=> String
+    #   resp.registration_id #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -2338,6 +3534,160 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def request_phone_number(params = {}, options = {})
       req = build_request(:request_phone_number, params)
+      req.send_request(options)
+    end
+
+    # Request a new sender ID that doesn't require registration.
+    #
+    # @option params [required, String] :sender_id
+    #   The sender ID string to request.
+    #
+    # @option params [required, String] :iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the country
+    #   or region.
+    #
+    # @option params [Array<String>] :message_types
+    #   The type of message. Valid values are TRANSACTIONAL for messages that
+    #   are critical or time-sensitive and PROMOTIONAL for messages that
+    #   aren't critical or time-sensitive.
+    #
+    # @option params [Boolean] :deletion_protection_enabled
+    #   By default this is set to false. When set to true the sender ID can't
+    #   be deleted.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of tags (key and value pairs) to associate with the sender
+    #   ID.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::RequestSenderIdResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RequestSenderIdResult#sender_id_arn #sender_id_arn} => String
+    #   * {Types::RequestSenderIdResult#sender_id #sender_id} => String
+    #   * {Types::RequestSenderIdResult#iso_country_code #iso_country_code} => String
+    #   * {Types::RequestSenderIdResult#message_types #message_types} => Array&lt;String&gt;
+    #   * {Types::RequestSenderIdResult#monthly_leasing_price #monthly_leasing_price} => String
+    #   * {Types::RequestSenderIdResult#deletion_protection_enabled #deletion_protection_enabled} => Boolean
+    #   * {Types::RequestSenderIdResult#registered #registered} => Boolean
+    #   * {Types::RequestSenderIdResult#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.request_sender_id({
+    #     sender_id: "SenderId", # required
+    #     iso_country_code: "IsoCountryCode", # required
+    #     message_types: ["TRANSACTIONAL"], # accepts TRANSACTIONAL, PROMOTIONAL
+    #     deletion_protection_enabled: false,
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sender_id_arn #=> String
+    #   resp.sender_id #=> String
+    #   resp.iso_country_code #=> String
+    #   resp.message_types #=> Array
+    #   resp.message_types[0] #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.monthly_leasing_price #=> String
+    #   resp.deletion_protection_enabled #=> Boolean
+    #   resp.registered #=> Boolean
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RequestSenderId AWS API Documentation
+    #
+    # @overload request_sender_id(params = {})
+    # @param [Hash] params ({})
+    def request_sender_id(params = {}, options = {})
+      req = build_request(:request_sender_id, params)
+      req.send_request(options)
+    end
+
+    # Before you can send test messages to a verified destination phone
+    # number you need to opt-in the verified destination phone number.
+    # Creates a new text message with a verification code and send it to a
+    # verified destination phone number. Once you have the verification code
+    # use VerifyDestinationNumber to opt-in the verified destination phone
+    # number to receive messages.
+    #
+    # @option params [required, String] :verified_destination_number_id
+    #   The unique identifier for the verified destination phone number.
+    #
+    # @option params [required, String] :verification_channel
+    #   Choose to send the verification code as an SMS or voice message.
+    #
+    # @option params [String] :language_code
+    #   Choose the language to use for the message.
+    #
+    # @option params [String] :origination_identity
+    #   The origination identity of the message. This can be either the
+    #   PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn,
+    #   PoolId, or PoolArn.
+    #
+    # @option params [String] :configuration_set_name
+    #   The name of the configuration set to use. This can be either the
+    #   ConfigurationSetName or ConfigurationSetArn.
+    #
+    # @option params [Hash<String,String>] :context
+    #   You can specify custom data in this field. If you do, that data is
+    #   logged to the event destination.
+    #
+    # @option params [Hash<String,String>] :destination_country_parameters
+    #   This field is used for any country-specific registration requirements.
+    #   Currently, this setting is only used when you send messages to
+    #   recipients in India using a sender ID. For more information see
+    #   [Special requirements for sending SMS messages to recipients in
+    #   India][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html
+    #
+    # @return [Types::SendDestinationNumberVerificationCodeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendDestinationNumberVerificationCodeResult#message_id #message_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_destination_number_verification_code({
+    #     verified_destination_number_id: "VerifiedDestinationNumberIdOrArn", # required
+    #     verification_channel: "TEXT", # required, accepts TEXT, VOICE
+    #     language_code: "DE_DE", # accepts DE_DE, EN_GB, EN_US, ES_419, ES_ES, FR_CA, FR_FR, IT_IT, JA_JP, KO_KR, PT_BR, ZH_CN, ZH_TW
+    #     origination_identity: "VerificationMessageOriginationIdentity",
+    #     configuration_set_name: "ConfigurationSetNameOrArn",
+    #     context: {
+    #       "ContextKey" => "ContextValue",
+    #     },
+    #     destination_country_parameters: {
+    #       "IN_TEMPLATE_ID" => "DestinationCountryParameterValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendDestinationNumberVerificationCode AWS API Documentation
+    #
+    # @overload send_destination_number_verification_code(params = {})
+    # @param [Hash] params ({})
+    def send_destination_number_verification_code(params = {}, options = {})
+      req = build_request(:send_destination_number_verification_code, params)
       req.send_request(options)
     end
 
@@ -2366,9 +3716,9 @@ module Aws::PinpointSMSVoiceV2
     #   The body of the text message.
     #
     # @option params [String] :message_type
-    #   The type of message. Valid values are TRANSACTIONAL for messages that
-    #   are critical or time-sensitive and PROMOTIONAL for messages that
-    #   aren't critical or time-sensitive.
+    #   The type of message. Valid values are for messages that are critical
+    #   or time-sensitive and PROMOTIONAL for messages that aren't critical
+    #   or time-sensitive.
     #
     # @option params [String] :keyword
     #   When you register a short code in the US, you must specify a program
@@ -2441,7 +3791,7 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
-    # Allows you to send a request that sends a text message through Amazon
+    # Allows you to send a request that sends a voice message through Amazon
     # Pinpoint. This operation uses [Amazon Polly][1] to convert a text
     # script into a voice message.
     #
@@ -2686,6 +4036,49 @@ module Aws::PinpointSMSVoiceV2
       req.send_request(options)
     end
 
+    # Submit the specified registration for review and approval.
+    #
+    # @option params [required, String] :registration_id
+    #   The unique identifier for the registration.
+    #
+    # @return [Types::SubmitRegistrationVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SubmitRegistrationVersionResult#registration_arn #registration_arn} => String
+    #   * {Types::SubmitRegistrationVersionResult#registration_id #registration_id} => String
+    #   * {Types::SubmitRegistrationVersionResult#version_number #version_number} => Integer
+    #   * {Types::SubmitRegistrationVersionResult#registration_version_status #registration_version_status} => String
+    #   * {Types::SubmitRegistrationVersionResult#registration_version_status_history #registration_version_status_history} => Types::RegistrationVersionStatusHistory
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.submit_registration_version({
+    #     registration_id: "RegistrationIdOrArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registration_arn #=> String
+    #   resp.registration_id #=> String
+    #   resp.version_number #=> Integer
+    #   resp.registration_version_status #=> String, one of "DRAFT", "SUBMITTED", "REVIEWING", "APPROVED", "DISCARDED", "DENIED", "REVOKED", "ARCHIVED"
+    #   resp.registration_version_status_history.draft_timestamp #=> Time
+    #   resp.registration_version_status_history.submitted_timestamp #=> Time
+    #   resp.registration_version_status_history.reviewing_timestamp #=> Time
+    #   resp.registration_version_status_history.approved_timestamp #=> Time
+    #   resp.registration_version_status_history.discarded_timestamp #=> Time
+    #   resp.registration_version_status_history.denied_timestamp #=> Time
+    #   resp.registration_version_status_history.revoked_timestamp #=> Time
+    #   resp.registration_version_status_history.archived_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SubmitRegistrationVersion AWS API Documentation
+    #
+    # @overload submit_registration_version(params = {})
+    # @param [Hash] params ({})
+    def submit_registration_version(params = {}, options = {})
+      req = build_request(:submit_registration_version, params)
+      req.send_request(options)
+    end
+
     # Adds or overwrites only the specified tags for the specified Amazon
     # Pinpoint SMS Voice, version 2 resource. When you specify an existing
     # tag key, the value is overwritten with the new value. Each resource
@@ -2784,6 +4177,10 @@ module Aws::PinpointSMSVoiceV2
     # @option params [Array<String>] :matching_event_types
     #   An array of event types that determine which events to log.
     #
+    #   <note markdown="1"> The `TEXT_SENT` event type is not supported.
+    #
+    #    </note>
+    #
     # @option params [Types::CloudWatchLogsDestination] :cloud_watch_logs_destination
     #   An object that contains information about an event destination that
     #   sends data to CloudWatch Logs.
@@ -2850,7 +4247,7 @@ module Aws::PinpointSMSVoiceV2
     # change the TwoWayChannelArn, enable or disable self-managed opt-outs,
     # and enable or disable deletion protection.
     #
-    # If the origination phone number is associated with a pool, an Error is
+    # If the origination phone number is associated with a pool, an error is
     # returned.
     #
     # @option params [required, String] :phone_number_id
@@ -2863,6 +4260,10 @@ module Aws::PinpointSMSVoiceV2
     #
     # @option params [String] :two_way_channel_arn
     #   The Amazon Resource Name (ARN) of the two way channel.
+    #
+    # @option params [String] :two_way_channel_role
+    #   An optional IAM Role Arn for a service to assume, to be able to post
+    #   inbound SMS messages.
     #
     # @option params [Boolean] :self_managed_opt_outs_enabled
     #   By default this is set to false. When an end recipient sends a message
@@ -2893,9 +4294,11 @@ module Aws::PinpointSMSVoiceV2
     #   * {Types::UpdatePhoneNumberResult#monthly_leasing_price #monthly_leasing_price} => String
     #   * {Types::UpdatePhoneNumberResult#two_way_enabled #two_way_enabled} => Boolean
     #   * {Types::UpdatePhoneNumberResult#two_way_channel_arn #two_way_channel_arn} => String
+    #   * {Types::UpdatePhoneNumberResult#two_way_channel_role #two_way_channel_role} => String
     #   * {Types::UpdatePhoneNumberResult#self_managed_opt_outs_enabled #self_managed_opt_outs_enabled} => Boolean
     #   * {Types::UpdatePhoneNumberResult#opt_out_list_name #opt_out_list_name} => String
     #   * {Types::UpdatePhoneNumberResult#deletion_protection_enabled #deletion_protection_enabled} => Boolean
+    #   * {Types::UpdatePhoneNumberResult#registration_id #registration_id} => String
     #   * {Types::UpdatePhoneNumberResult#created_timestamp #created_timestamp} => Time
     #
     # @example Request syntax with placeholder values
@@ -2904,6 +4307,7 @@ module Aws::PinpointSMSVoiceV2
     #     phone_number_id: "PhoneNumberIdOrArn", # required
     #     two_way_enabled: false,
     #     two_way_channel_arn: "TwoWayChannelArn",
+    #     two_way_channel_role: "IamRoleArn",
     #     self_managed_opt_outs_enabled: false,
     #     opt_out_list_name: "OptOutListNameOrArn",
     #     deletion_protection_enabled: false,
@@ -2919,13 +4323,15 @@ module Aws::PinpointSMSVoiceV2
     #   resp.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.number_capabilities #=> Array
     #   resp.number_capabilities[0] #=> String, one of "SMS", "VOICE"
-    #   resp.number_type #=> String, one of "SHORT_CODE", "LONG_CODE", "TOLL_FREE", "TEN_DLC"
+    #   resp.number_type #=> String, one of "SHORT_CODE", "LONG_CODE", "TOLL_FREE", "TEN_DLC", "SIMULATOR"
     #   resp.monthly_leasing_price #=> String
     #   resp.two_way_enabled #=> Boolean
     #   resp.two_way_channel_arn #=> String
+    #   resp.two_way_channel_role #=> String
     #   resp.self_managed_opt_outs_enabled #=> Boolean
     #   resp.opt_out_list_name #=> String
     #   resp.deletion_protection_enabled #=> Boolean
+    #   resp.registration_id #=> String
     #   resp.created_timestamp #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdatePhoneNumber AWS API Documentation
@@ -2953,6 +4359,10 @@ module Aws::PinpointSMSVoiceV2
     # @option params [String] :two_way_channel_arn
     #   The Amazon Resource Name (ARN) of the two way channel.
     #
+    # @option params [String] :two_way_channel_role
+    #   An optional IAM Role Arn for a service to assume, to be able to post
+    #   inbound SMS messages.
+    #
     # @option params [Boolean] :self_managed_opt_outs_enabled
     #   By default this is set to false. When an end recipient sends a message
     #   that begins with HELP or STOP to one of your dedicated numbers, Amazon
@@ -2979,6 +4389,7 @@ module Aws::PinpointSMSVoiceV2
     #   * {Types::UpdatePoolResult#message_type #message_type} => String
     #   * {Types::UpdatePoolResult#two_way_enabled #two_way_enabled} => Boolean
     #   * {Types::UpdatePoolResult#two_way_channel_arn #two_way_channel_arn} => String
+    #   * {Types::UpdatePoolResult#two_way_channel_role #two_way_channel_role} => String
     #   * {Types::UpdatePoolResult#self_managed_opt_outs_enabled #self_managed_opt_outs_enabled} => Boolean
     #   * {Types::UpdatePoolResult#opt_out_list_name #opt_out_list_name} => String
     #   * {Types::UpdatePoolResult#shared_routes_enabled #shared_routes_enabled} => Boolean
@@ -2991,6 +4402,7 @@ module Aws::PinpointSMSVoiceV2
     #     pool_id: "PoolIdOrArn", # required
     #     two_way_enabled: false,
     #     two_way_channel_arn: "TwoWayChannelArn",
+    #     two_way_channel_role: "IamRoleArn",
     #     self_managed_opt_outs_enabled: false,
     #     opt_out_list_name: "OptOutListNameOrArn",
     #     shared_routes_enabled: false,
@@ -3005,6 +4417,7 @@ module Aws::PinpointSMSVoiceV2
     #   resp.message_type #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
     #   resp.two_way_enabled #=> Boolean
     #   resp.two_way_channel_arn #=> String
+    #   resp.two_way_channel_role #=> String
     #   resp.self_managed_opt_outs_enabled #=> Boolean
     #   resp.opt_out_list_name #=> String
     #   resp.shared_routes_enabled #=> Boolean
@@ -3017,6 +4430,102 @@ module Aws::PinpointSMSVoiceV2
     # @param [Hash] params ({})
     def update_pool(params = {}, options = {})
       req = build_request(:update_pool, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration of an existing sender ID.
+    #
+    # @option params [required, String] :sender_id
+    #   The sender ID to update.
+    #
+    # @option params [required, String] :iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the country
+    #   or region.
+    #
+    # @option params [Boolean] :deletion_protection_enabled
+    #   By default this is set to false. When set to true the sender ID can't
+    #   be deleted.
+    #
+    # @return [Types::UpdateSenderIdResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSenderIdResult#sender_id_arn #sender_id_arn} => String
+    #   * {Types::UpdateSenderIdResult#sender_id #sender_id} => String
+    #   * {Types::UpdateSenderIdResult#iso_country_code #iso_country_code} => String
+    #   * {Types::UpdateSenderIdResult#message_types #message_types} => Array&lt;String&gt;
+    #   * {Types::UpdateSenderIdResult#monthly_leasing_price #monthly_leasing_price} => String
+    #   * {Types::UpdateSenderIdResult#deletion_protection_enabled #deletion_protection_enabled} => Boolean
+    #   * {Types::UpdateSenderIdResult#registered #registered} => Boolean
+    #   * {Types::UpdateSenderIdResult#registration_id #registration_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_sender_id({
+    #     sender_id: "SenderIdOrArn", # required
+    #     iso_country_code: "IsoCountryCode", # required
+    #     deletion_protection_enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sender_id_arn #=> String
+    #   resp.sender_id #=> String
+    #   resp.iso_country_code #=> String
+    #   resp.message_types #=> Array
+    #   resp.message_types[0] #=> String, one of "TRANSACTIONAL", "PROMOTIONAL"
+    #   resp.monthly_leasing_price #=> String
+    #   resp.deletion_protection_enabled #=> Boolean
+    #   resp.registered #=> Boolean
+    #   resp.registration_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateSenderId AWS API Documentation
+    #
+    # @overload update_sender_id(params = {})
+    # @param [Hash] params ({})
+    def update_sender_id(params = {}, options = {})
+      req = build_request(:update_sender_id, params)
+      req.send_request(options)
+    end
+
+    # Use the verification code that was received by the verified
+    # destination phone number to opt-in the verified destination phone
+    # number to receive more messages.
+    #
+    # @option params [required, String] :verified_destination_number_id
+    #   The unique identifier for the verififed destination phone number.
+    #
+    # @option params [required, String] :verification_code
+    #   The verification code that was received by the verified destination
+    #   phone number.
+    #
+    # @return [Types::VerifyDestinationNumberResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::VerifyDestinationNumberResult#verified_destination_number_arn #verified_destination_number_arn} => String
+    #   * {Types::VerifyDestinationNumberResult#verified_destination_number_id #verified_destination_number_id} => String
+    #   * {Types::VerifyDestinationNumberResult#destination_phone_number #destination_phone_number} => String
+    #   * {Types::VerifyDestinationNumberResult#status #status} => String
+    #   * {Types::VerifyDestinationNumberResult#created_timestamp #created_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.verify_destination_number({
+    #     verified_destination_number_id: "VerifiedDestinationNumberIdOrArn", # required
+    #     verification_code: "VerificationCode", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.verified_destination_number_arn #=> String
+    #   resp.verified_destination_number_id #=> String
+    #   resp.destination_phone_number #=> String
+    #   resp.status #=> String, one of "PENDING", "VERIFIED"
+    #   resp.created_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/VerifyDestinationNumber AWS API Documentation
+    #
+    # @overload verify_destination_number(params = {})
+    # @param [Hash] params ({})
+    def verify_destination_number(params = {}, options = {})
+      req = build_request(:verify_destination_number, params)
       req.send_request(options)
     end
 
@@ -3033,7 +4542,7 @@ module Aws::PinpointSMSVoiceV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpointsmsvoicev2'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

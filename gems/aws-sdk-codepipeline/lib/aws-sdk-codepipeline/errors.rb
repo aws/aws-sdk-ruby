@@ -32,6 +32,7 @@ module Aws::CodePipeline
   # * {ActionTypeNotFoundException}
   # * {ApprovalAlreadyCompletedException}
   # * {ConcurrentModificationException}
+  # * {ConcurrentPipelineExecutionsLimitExceededException}
   # * {ConflictException}
   # * {DuplicatedStopRequestException}
   # * {InvalidActionDeclarationException}
@@ -116,6 +117,21 @@ module Aws::CodePipeline
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CodePipeline::Types::ConcurrentModificationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConcurrentPipelineExecutionsLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodePipeline::Types::ConcurrentPipelineExecutionsLimitExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

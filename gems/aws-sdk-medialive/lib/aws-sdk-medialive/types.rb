@@ -164,6 +164,10 @@ module Aws::MediaLive
     end
 
     # @!attribute [rw] kms_key_id
+    #   Specifies the KMS key to use for all features that use key
+    #   encryption. Specify the ARN of a KMS key that you have created. Or
+    #   leave blank to use the key that MediaLive creates and manages for
+    #   you.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AccountConfiguration AWS API Documentation
@@ -1977,6 +1981,55 @@ module Aws::MediaLive
     #
     class ClaimDeviceResponse < Aws::EmptyStructure; end
 
+    # Property of ColorCorrectionSettings. Used for custom color space
+    # conversion. The object identifies one 3D LUT file and specifies the
+    # input/output color space combination that the file will be used for.
+    #
+    # @!attribute [rw] input_color_space
+    #   The color space of the input.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_color_space
+    #   The color space of the output.
+    #   @return [String]
+    #
+    # @!attribute [rw] uri
+    #   The URI of the 3D LUT file. The protocol must be 's3:' or
+    #   's3ssl:':.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ColorCorrection AWS API Documentation
+    #
+    class ColorCorrection < Struct.new(
+      :input_color_space,
+      :output_color_space,
+      :uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Property of encoderSettings. Controls color conversion when you are
+    # using 3D LUT files to perform color conversion on video.
+    #
+    # @!attribute [rw] global_color_corrections
+    #   An array of colorCorrections that applies when you are using 3D LUT
+    #   files to perform color conversion on video. Each colorCorrection
+    #   contains one 3D LUT file (that defines the color mapping for
+    #   converting an input color space to an output color space), and the
+    #   input/output combination that this 3D LUT file applies to. MediaLive
+    #   reads the color space in the input metadata, determines the color
+    #   space that you have specified for the output, and finds and uses the
+    #   LUT file that applies to this combination.
+    #   @return [Array<Types::ColorCorrection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ColorCorrectionSettings AWS API Documentation
+    #
+    class ColorCorrectionSettings < Struct.new(
+      :global_color_corrections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Passthrough applies no color space conversion to the output
     #
     # @api private
@@ -2958,6 +3011,36 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationRequest AWS API Documentation
+    #
+    class DescribeAccountConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationResponse AWS API Documentation
+    #
+    class DescribeAccountConfigurationResponse < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The account's configuration.
+    #
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationResultModel AWS API Documentation
+    #
+    class DescribeAccountConfigurationResultModel < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channel_id
     #   @return [String]
     #
@@ -3627,6 +3710,49 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_id
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbnail_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsRequest AWS API Documentation
+    #
+    class DescribeThumbnailsRequest < Struct.new(
+      :channel_id,
+      :pipeline_id,
+      :thumbnail_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] thumbnail_details
+    #   @return [Array<Types::ThumbnailDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsResponse AWS API Documentation
+    #
+    class DescribeThumbnailsResponse < Struct.new(
+      :thumbnail_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Thumbnail details for all the pipelines of a running channel.
+    #
+    # @!attribute [rw] thumbnail_details
+    #   @return [Array<Types::ThumbnailDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsResultModel AWS API Documentation
+    #
+    class DescribeThumbnailsResultModel < Struct.new(
+      :thumbnail_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Dolby Vision81 Settings
     #
     # @api private
@@ -4231,6 +4357,10 @@ module Aws::MediaLive
     #   Thumbnail configuration settings.
     #   @return [Types::ThumbnailConfiguration]
     #
+    # @!attribute [rw] color_correction_settings
+    #   Color Correction Settings
+    #   @return [Types::ColorCorrectionSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EncoderSettings AWS API Documentation
     #
     class EncoderSettings < Struct.new(
@@ -4246,7 +4376,8 @@ module Aws::MediaLive
       :output_groups,
       :timecode_config,
       :video_descriptions,
-      :thumbnail_configuration)
+      :thumbnail_configuration,
+      :color_correction_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4382,10 +4513,17 @@ module Aws::MediaLive
     #   first delete all input prepare actions from the schedule.
     #   @return [String]
     #
+    # @!attribute [rw] output_static_image_overlay_schedule_actions
+    #   Enables the output static image overlay feature. Enabling this
+    #   feature allows you to send channel schedule updates to
+    #   display/clear/modify image overlays on an output-by-output bases.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FeatureActivations AWS API Documentation
     #
     class FeatureActivations < Struct.new(
-      :input_prepare_schedule_actions)
+      :input_prepare_schedule_actions,
+      :output_static_image_overlay_schedule_actions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4612,79 +4750,6 @@ module Aws::MediaLive
     #
     class GatewayTimeoutException < Struct.new(
       :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @api private
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationRequest AWS API Documentation
-    #
-    class DescribeAccountConfigurationRequest < Aws::EmptyStructure; end
-
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationResponse AWS API Documentation
-    #
-    class DescribeAccountConfigurationResponse < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The account's configuration.
-    #
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationResultModel AWS API Documentation
-    #
-    class DescribeAccountConfigurationResultModel < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] channel_id
-    #   @return [String]
-    #
-    # @!attribute [rw] pipeline_id
-    #   @return [String]
-    #
-    # @!attribute [rw] thumbnail_type
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsRequest AWS API Documentation
-    #
-    class DescribeThumbnailsRequest < Struct.new(
-      :channel_id,
-      :pipeline_id,
-      :thumbnail_type)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] thumbnail_details
-    #   @return [Array<Types::ThumbnailDetail>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsResponse AWS API Documentation
-    #
-    class DescribeThumbnailsResponse < Struct.new(
-      :thumbnail_details)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Thumbnail details for all the pipelines of a running channel.
-    #
-    # @!attribute [rw] thumbnail_details
-    #   @return [Array<Types::ThumbnailDetail>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsResultModel AWS API Documentation
-    #
-    class DescribeThumbnailsResultModel < Struct.new(
-      :thumbnail_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6501,6 +6566,16 @@ module Aws::MediaLive
     #   parameter.
     #   @return [Types::InputDeviceMediaConnectConfigurableSettings]
     #
+    # @!attribute [rw] audio_channel_pairs
+    #   An array of eight audio configurations, one for each audio pair in
+    #   the source. Set up each audio configuration either to exclude the
+    #   pair, or to format it and include it in the output from the device.
+    #   This parameter applies only to UHD devices, and only when the device
+    #   is configured as the source for a MediaConnect flow. For an HD
+    #   device, you configure the audio by setting up audio selectors in the
+    #   channel configuration.
+    #   @return [Array<Types::InputDeviceConfigurableAudioChannelPairConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceConfigurableSettings AWS API Documentation
     #
     class InputDeviceConfigurableSettings < Struct.new(
@@ -6508,7 +6583,8 @@ module Aws::MediaLive
       :max_bitrate,
       :latency_ms,
       :codec,
-      :mediaconnect_settings)
+      :mediaconnect_settings,
+      :audio_channel_pairs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6865,6 +6941,14 @@ module Aws::MediaLive
     #   Returned only if the outputType is MEDIACONNECT\_FLOW.
     #   @return [Types::InputDeviceMediaConnectSettings]
     #
+    # @!attribute [rw] audio_channel_pairs
+    #   An array of eight audio configurations, one for each audio pair in
+    #   the source. Each audio configuration specifies either to exclude the
+    #   pair, or to format it and include it in the output from the UHD
+    #   device. Applies only when the device is configured as the source for
+    #   a MediaConnect flow.
+    #   @return [Array<Types::InputDeviceUhdAudioChannelPairConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceUhdSettings AWS API Documentation
     #
     class InputDeviceUhdSettings < Struct.new(
@@ -6878,7 +6962,8 @@ module Aws::MediaLive
       :width,
       :latency_ms,
       :codec,
-      :mediaconnect_settings)
+      :mediaconnect_settings,
+      :audio_channel_pairs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10559,6 +10644,16 @@ module Aws::MediaLive
     #   Action to deactivate a static image overlay
     #   @return [Types::StaticImageDeactivateScheduleActionSettings]
     #
+    # @!attribute [rw] static_image_output_activate_settings
+    #   Action to activate a static image overlay in one or more specified
+    #   outputs
+    #   @return [Types::StaticImageOutputActivateScheduleActionSettings]
+    #
+    # @!attribute [rw] static_image_output_deactivate_settings
+    #   Action to deactivate a static image overlay in one or more specified
+    #   outputs
+    #   @return [Types::StaticImageOutputDeactivateScheduleActionSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionSettings AWS API Documentation
     #
     class ScheduleActionSettings < Struct.new(
@@ -10574,7 +10669,9 @@ module Aws::MediaLive
       :scte_35_splice_insert_settings,
       :scte_35_time_signal_settings,
       :static_image_activate_settings,
-      :static_image_deactivate_settings)
+      :static_image_deactivate_settings,
+      :static_image_output_activate_settings,
+      :static_image_output_deactivate_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10979,54 +11076,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationRequest AWS API Documentation
-    #
-    class UpdateAccountConfigurationRequest < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The desired new account configuration.
-    #
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationRequestModel AWS API Documentation
-    #
-    class UpdateAccountConfigurationRequestModel < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationResponse AWS API Documentation
-    #
-    class UpdateAccountConfigurationResponse < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The account's updated configuration.
-    #
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationResultModel AWS API Documentation
-    #
-    class UpdateAccountConfigurationResultModel < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Smpte Tt Destination Settings
     #
     # @api private
@@ -11361,6 +11410,120 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Settings for the action to activate a static image.
+    #
+    # @!attribute [rw] duration
+    #   The duration in milliseconds for the image to remain on the video.
+    #   If omitted or set to 0 the duration is unlimited and the image will
+    #   remain until it is explicitly deactivated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fade_in
+    #   The time in milliseconds for the image to fade in. The fade-in
+    #   starts at the start time of the overlay. Default is 0 (no fade-in).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fade_out
+    #   Applies only if a duration is specified. The time in milliseconds
+    #   for the image to fade out. The fade-out starts when the duration
+    #   time is hit, so it effectively extends the duration. Default is 0
+    #   (no fade-out).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] height
+    #   The height of the image when inserted into the video, in pixels. The
+    #   overlay will be scaled up or down to the specified height. Leave
+    #   blank to use the native height of the overlay.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] image
+    #   The location and filename of the image file to overlay on the video.
+    #   The file must be a 32-bit BMP, PNG, or TGA file, and must not be
+    #   larger (in pixels) than the input video.
+    #   @return [Types::InputLocation]
+    #
+    # @!attribute [rw] image_x
+    #   Placement of the left edge of the overlay relative to the left edge
+    #   of the video frame, in pixels. 0 (the default) is the left edge of
+    #   the frame. If the placement causes the overlay to extend beyond the
+    #   right edge of the underlying video, then the overlay is cropped on
+    #   the right.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] image_y
+    #   Placement of the top edge of the overlay relative to the top edge of
+    #   the video frame, in pixels. 0 (the default) is the top edge of the
+    #   frame. If the placement causes the overlay to extend beyond the
+    #   bottom edge of the underlying video, then the overlay is cropped on
+    #   the bottom.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] layer
+    #   The number of the layer, 0 to 7. There are 8 layers that can be
+    #   overlaid on the video, each layer with a different image. The layers
+    #   are in Z order, which means that overlays with higher values of
+    #   layer are inserted on top of overlays with lower values of layer.
+    #   Default is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] opacity
+    #   Opacity of image where 0 is transparent and 100 is fully opaque.
+    #   Default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_names
+    #   The name(s) of the output(s) the activation should apply to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] width
+    #   The width of the image when inserted into the video, in pixels. The
+    #   overlay will be scaled up or down to the specified width. Leave
+    #   blank to use the native width of the overlay.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticImageOutputActivateScheduleActionSettings AWS API Documentation
+    #
+    class StaticImageOutputActivateScheduleActionSettings < Struct.new(
+      :duration,
+      :fade_in,
+      :fade_out,
+      :height,
+      :image,
+      :image_x,
+      :image_y,
+      :layer,
+      :opacity,
+      :output_names,
+      :width)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for the action to deactivate the image in a specific layer.
+    #
+    # @!attribute [rw] fade_out
+    #   The time in milliseconds for the image to fade out. Default is 0 (no
+    #   fade-out).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] layer
+    #   The image overlay layer to deactivate, 0 to 7. Default is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_names
+    #   The name(s) of the output(s) the deactivation should apply to.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticImageOutputDeactivateScheduleActionSettings AWS API Documentation
+    #
+    class StaticImageOutputDeactivateScheduleActionSettings < Struct.new(
+      :fade_out,
+      :layer,
+      :output_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Static Key Settings
     #
     # @!attribute [rw] key_provider_server
@@ -11671,7 +11834,9 @@ module Aws::MediaLive
     # Thumbnail Configuration
     #
     # @!attribute [rw] state
-    #   Whether Thumbnail is enabled.
+    #   Enables the thumbnail feature. The feature generates thumbnails of
+    #   the incoming video in each pipeline in the channel. AUTO turns the
+    #   feature on, DISABLE turns the feature off.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ThumbnailConfiguration AWS API Documentation
@@ -11974,6 +12139,54 @@ module Aws::MediaLive
     class UnprocessableEntityException < Struct.new(
       :element_path,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationRequest AWS API Documentation
+    #
+    class UpdateAccountConfigurationRequest < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The desired new account configuration.
+    #
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationRequestModel AWS API Documentation
+    #
+    class UpdateAccountConfigurationRequestModel < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationResponse AWS API Documentation
+    #
+    class UpdateAccountConfigurationResponse < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The account's updated configuration.
+    #
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationResultModel AWS API Documentation
+    #
+    class UpdateAccountConfigurationResultModel < Struct.new(
+      :account_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12985,6 +13198,55 @@ module Aws::MediaLive
     #
     class WebvttDestinationSettings < Struct.new(
       :style_control)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One audio configuration that specifies the format for one audio pair
+    # that the device produces as output.
+    #
+    # @!attribute [rw] id
+    #   The ID for one audio pair configuration, a value from 1 to 8.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] profile
+    #   The profile to set for one audio pair configuration. Choose an
+    #   enumeration value. Each value describes one audio configuration
+    #   using the format (rate control
+    #   algorithm)-(codec)\_(quality)-(bitrate in bytes). For example,
+    #   CBR-AAC\_HQ-192000. Or choose DISABLED, in which case the device
+    #   won't produce audio for this pair.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceConfigurableAudioChannelPairConfig AWS API Documentation
+    #
+    class InputDeviceConfigurableAudioChannelPairConfig < Struct.new(
+      :id,
+      :profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One audio configuration that specifies the format for one audio pair
+    # that the device produces as output.
+    #
+    # @!attribute [rw] id
+    #   The ID for one audio pair configuration, a value from 1 to 8.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] profile
+    #   The profile for one audio pair configuration. This property
+    #   describes one audio configuration in the format (rate control
+    #   algorithm)-(codec)\_(quality)-(bitrate in bytes). For example,
+    #   CBR-AAC\_HQ-192000. Or DISABLED, in which case the device won't
+    #   produce audio for this pair.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceUhdAudioChannelPairConfig AWS API Documentation
+    #
+    class InputDeviceUhdAudioChannelPairConfig < Struct.new(
+      :id,
+      :profile)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -175,7 +175,6 @@ module Aws
               error
             end
           end
-          thread.abort_on_exception = true
           threads << thread
         end
         threads.map(&:value).compact

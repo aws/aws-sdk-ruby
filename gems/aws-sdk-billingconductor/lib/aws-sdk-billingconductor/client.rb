@@ -658,6 +658,10 @@ module Aws::BillingConductor
     #   A `CustomLineItemChargeDetails` that describes the charge details for
     #   a custom line item.
     #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account in which this custom line item will be
+    #   applied to.
+    #
     # @return [Types::CreateCustomLineItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCustomLineItemOutput#arn #arn} => String
@@ -693,6 +697,7 @@ module Aws::BillingConductor
     #         },
     #       ],
     #     },
+    #     account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -1056,6 +1061,71 @@ module Aws::BillingConductor
       req.send_request(options)
     end
 
+    # Retrieves the margin summary report, which includes the Amazon Web
+    # Services cost and charged amount (pro forma cost) by Amazon Web
+    # Service for a specific billing group.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Number (ARN) that uniquely identifies the billing
+    #   group.
+    #
+    # @option params [Types::BillingPeriodRange] :billing_period_range
+    #   A time range for which the margin summary is effective. You can
+    #   specify up to 12 months.
+    #
+    # @option params [Array<String>] :group_by
+    #   A list of strings that specify the attributes that are used to break
+    #   down costs in the margin summary reports for the billing group. For
+    #   example, you can view your costs by the Amazon Web Service name or the
+    #   billing period.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of margin summary reports to retrieve.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used on subsequent calls to get reports.
+    #
+    # @return [Types::GetBillingGroupCostReportOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBillingGroupCostReportOutput#billing_group_cost_report_results #billing_group_cost_report_results} => Array&lt;Types::BillingGroupCostReportResultElement&gt;
+    #   * {Types::GetBillingGroupCostReportOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_billing_group_cost_report({
+    #     arn: "BillingGroupArn", # required
+    #     billing_period_range: {
+    #       inclusive_start_billing_period: "BillingPeriod", # required
+    #       exclusive_end_billing_period: "BillingPeriod", # required
+    #     },
+    #     group_by: ["PRODUCT_NAME"], # accepts PRODUCT_NAME, BILLING_PERIOD
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.billing_group_cost_report_results #=> Array
+    #   resp.billing_group_cost_report_results[0].arn #=> String
+    #   resp.billing_group_cost_report_results[0].aws_cost #=> String
+    #   resp.billing_group_cost_report_results[0].proforma_cost #=> String
+    #   resp.billing_group_cost_report_results[0].margin #=> String
+    #   resp.billing_group_cost_report_results[0].margin_percentage #=> String
+    #   resp.billing_group_cost_report_results[0].currency #=> String
+    #   resp.billing_group_cost_report_results[0].attributes #=> Array
+    #   resp.billing_group_cost_report_results[0].attributes[0].key #=> String
+    #   resp.billing_group_cost_report_results[0].attributes[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/GetBillingGroupCostReport AWS API Documentation
+    #
+    # @overload get_billing_group_cost_report(params = {})
+    # @param [Hash] params ({})
+    def get_billing_group_cost_report(params = {}, options = {})
+      req = build_request(:get_billing_group_cost_report, params)
+      req.send_request(options)
+    end
+
     # This is a paginated call to list linked accounts that are linked to
     # the payer account for the specified time period. If no information is
     # provided, the current billing period is used. The response will
@@ -1297,6 +1367,7 @@ module Aws::BillingConductor
     #   resp.custom_line_item_versions[0].end_billing_period #=> String
     #   resp.custom_line_item_versions[0].arn #=> String
     #   resp.custom_line_item_versions[0].start_time #=> Integer
+    #   resp.custom_line_item_versions[0].account_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItemVersions AWS API Documentation
@@ -1344,6 +1415,7 @@ module Aws::BillingConductor
     #       names: ["CustomLineItemName"],
     #       billing_groups: ["BillingGroupArn"],
     #       arns: ["CustomLineItemArn"],
+    #       account_ids: ["AccountId"],
     #     },
     #   })
     #
@@ -1367,6 +1439,7 @@ module Aws::BillingConductor
     #   resp.custom_line_items[0].creation_time #=> Integer
     #   resp.custom_line_items[0].last_modified_time #=> Integer
     #   resp.custom_line_items[0].association_size #=> Integer
+    #   resp.custom_line_items[0].account_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItems AWS API Documentation
@@ -2041,7 +2114,7 @@ module Aws::BillingConductor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-billingconductor'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

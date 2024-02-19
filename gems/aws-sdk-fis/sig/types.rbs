@@ -1,0 +1,664 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::FIS
+  module Types
+
+    class Action
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor parameters: ::Hash[::String, Types::ActionParameter]
+      attr_accessor targets: ::Hash[::String, Types::ActionTarget]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ActionParameter
+      attr_accessor description: ::String
+      attr_accessor required: bool
+      SENSITIVE: []
+    end
+
+    class ActionSummary
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor targets: ::Hash[::String, Types::ActionTarget]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ActionTarget
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateExperimentTemplateActionInput
+      attr_accessor action_id: ::String
+      attr_accessor description: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor targets: ::Hash[::String, ::String]
+      attr_accessor start_after: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateExperimentTemplateExperimentOptionsInput
+      attr_accessor account_targeting: ("single-account" | "multi-account")
+      attr_accessor empty_target_resolution_mode: ("fail" | "skip")
+      SENSITIVE: []
+    end
+
+    class CreateExperimentTemplateLogConfigurationInput
+      attr_accessor cloud_watch_logs_configuration: Types::ExperimentTemplateCloudWatchLogsLogConfigurationInput
+      attr_accessor s3_configuration: Types::ExperimentTemplateS3LogConfigurationInput
+      attr_accessor log_schema_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateExperimentTemplateRequest
+      attr_accessor client_token: ::String
+      attr_accessor description: ::String
+      attr_accessor stop_conditions: ::Array[Types::CreateExperimentTemplateStopConditionInput]
+      attr_accessor targets: ::Hash[::String, Types::CreateExperimentTemplateTargetInput]
+      attr_accessor actions: ::Hash[::String, Types::CreateExperimentTemplateActionInput]
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor log_configuration: Types::CreateExperimentTemplateLogConfigurationInput
+      attr_accessor experiment_options: Types::CreateExperimentTemplateExperimentOptionsInput
+      SENSITIVE: []
+    end
+
+    class CreateExperimentTemplateResponse
+      attr_accessor experiment_template: Types::ExperimentTemplate
+      SENSITIVE: []
+    end
+
+    class CreateExperimentTemplateStopConditionInput
+      attr_accessor source: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class CreateExperimentTemplateTargetInput
+      attr_accessor resource_type: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor resource_tags: ::Hash[::String, ::String]
+      attr_accessor filters: ::Array[Types::ExperimentTemplateTargetInputFilter]
+      attr_accessor selection_mode: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateTargetAccountConfigurationRequest
+      attr_accessor client_token: ::String
+      attr_accessor experiment_template_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTargetAccountConfigurationResponse
+      attr_accessor target_account_configuration: Types::TargetAccountConfiguration
+      SENSITIVE: []
+    end
+
+    class DeleteExperimentTemplateRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteExperimentTemplateResponse
+      attr_accessor experiment_template: Types::ExperimentTemplate
+      SENSITIVE: []
+    end
+
+    class DeleteTargetAccountConfigurationRequest
+      attr_accessor experiment_template_id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTargetAccountConfigurationResponse
+      attr_accessor target_account_configuration: Types::TargetAccountConfiguration
+      SENSITIVE: []
+    end
+
+    class Experiment
+      attr_accessor id: ::String
+      attr_accessor experiment_template_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor state: Types::ExperimentState
+      attr_accessor targets: ::Hash[::String, Types::ExperimentTarget]
+      attr_accessor actions: ::Hash[::String, Types::ExperimentAction]
+      attr_accessor stop_conditions: ::Array[Types::ExperimentStopCondition]
+      attr_accessor creation_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor log_configuration: Types::ExperimentLogConfiguration
+      attr_accessor experiment_options: Types::ExperimentOptions
+      attr_accessor target_account_configurations_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExperimentAction
+      attr_accessor action_id: ::String
+      attr_accessor description: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor targets: ::Hash[::String, ::String]
+      attr_accessor start_after: ::Array[::String]
+      attr_accessor state: Types::ExperimentActionState
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ExperimentActionState
+      attr_accessor status: ("pending" | "initiating" | "running" | "completed" | "cancelled" | "stopping" | "stopped" | "failed" | "skipped")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentCloudWatchLogsLogConfiguration
+      attr_accessor log_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentLogConfiguration
+      attr_accessor cloud_watch_logs_configuration: Types::ExperimentCloudWatchLogsLogConfiguration
+      attr_accessor s3_configuration: Types::ExperimentS3LogConfiguration
+      attr_accessor log_schema_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExperimentOptions
+      attr_accessor account_targeting: ("single-account" | "multi-account")
+      attr_accessor empty_target_resolution_mode: ("fail" | "skip")
+      SENSITIVE: []
+    end
+
+    class ExperimentS3LogConfiguration
+      attr_accessor bucket_name: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentState
+      attr_accessor status: ("pending" | "initiating" | "running" | "completed" | "stopping" | "stopped" | "failed")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentStopCondition
+      attr_accessor source: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentSummary
+      attr_accessor id: ::String
+      attr_accessor experiment_template_id: ::String
+      attr_accessor state: Types::ExperimentState
+      attr_accessor creation_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ExperimentTarget
+      attr_accessor resource_type: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor resource_tags: ::Hash[::String, ::String]
+      attr_accessor filters: ::Array[Types::ExperimentTargetFilter]
+      attr_accessor selection_mode: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ExperimentTargetAccountConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor account_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentTargetAccountConfigurationSummary
+      attr_accessor role_arn: ::String
+      attr_accessor account_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentTargetFilter
+      attr_accessor path: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplate
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor targets: ::Hash[::String, Types::ExperimentTemplateTarget]
+      attr_accessor actions: ::Hash[::String, Types::ExperimentTemplateAction]
+      attr_accessor stop_conditions: ::Array[Types::ExperimentTemplateStopCondition]
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor log_configuration: Types::ExperimentTemplateLogConfiguration
+      attr_accessor experiment_options: Types::ExperimentTemplateExperimentOptions
+      attr_accessor target_account_configurations_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateAction
+      attr_accessor action_id: ::String
+      attr_accessor description: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor targets: ::Hash[::String, ::String]
+      attr_accessor start_after: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateCloudWatchLogsLogConfiguration
+      attr_accessor log_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateCloudWatchLogsLogConfigurationInput
+      attr_accessor log_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateExperimentOptions
+      attr_accessor account_targeting: ("single-account" | "multi-account")
+      attr_accessor empty_target_resolution_mode: ("fail" | "skip")
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateLogConfiguration
+      attr_accessor cloud_watch_logs_configuration: Types::ExperimentTemplateCloudWatchLogsLogConfiguration
+      attr_accessor s3_configuration: Types::ExperimentTemplateS3LogConfiguration
+      attr_accessor log_schema_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateS3LogConfiguration
+      attr_accessor bucket_name: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateS3LogConfigurationInput
+      attr_accessor bucket_name: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateStopCondition
+      attr_accessor source: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateSummary
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateTarget
+      attr_accessor resource_type: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor resource_tags: ::Hash[::String, ::String]
+      attr_accessor filters: ::Array[Types::ExperimentTemplateTargetFilter]
+      attr_accessor selection_mode: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateTargetFilter
+      attr_accessor path: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ExperimentTemplateTargetInputFilter
+      attr_accessor path: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetActionRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetActionResponse
+      attr_accessor action: Types::Action
+      SENSITIVE: []
+    end
+
+    class GetExperimentRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetExperimentResponse
+      attr_accessor experiment: Types::Experiment
+      SENSITIVE: []
+    end
+
+    class GetExperimentTargetAccountConfigurationRequest
+      attr_accessor experiment_id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetExperimentTargetAccountConfigurationResponse
+      attr_accessor target_account_configuration: Types::ExperimentTargetAccountConfiguration
+      SENSITIVE: []
+    end
+
+    class GetExperimentTemplateRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetExperimentTemplateResponse
+      attr_accessor experiment_template: Types::ExperimentTemplate
+      SENSITIVE: []
+    end
+
+    class GetTargetAccountConfigurationRequest
+      attr_accessor experiment_template_id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTargetAccountConfigurationResponse
+      attr_accessor target_account_configuration: Types::TargetAccountConfiguration
+      SENSITIVE: []
+    end
+
+    class GetTargetResourceTypeRequest
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class GetTargetResourceTypeResponse
+      attr_accessor target_resource_type: Types::TargetResourceType
+      SENSITIVE: []
+    end
+
+    class ListActionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListActionsResponse
+      attr_accessor actions: ::Array[Types::ActionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExperimentResolvedTargetsRequest
+      attr_accessor experiment_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor target_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListExperimentResolvedTargetsResponse
+      attr_accessor resolved_targets: ::Array[Types::ResolvedTarget]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExperimentTargetAccountConfigurationsRequest
+      attr_accessor experiment_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExperimentTargetAccountConfigurationsResponse
+      attr_accessor target_account_configurations: ::Array[Types::ExperimentTargetAccountConfigurationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExperimentTemplatesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExperimentTemplatesResponse
+      attr_accessor experiment_templates: ::Array[Types::ExperimentTemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExperimentsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExperimentsResponse
+      attr_accessor experiments: ::Array[Types::ExperimentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTargetAccountConfigurationsRequest
+      attr_accessor experiment_template_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTargetAccountConfigurationsResponse
+      attr_accessor target_account_configurations: ::Array[Types::TargetAccountConfigurationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTargetResourceTypesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTargetResourceTypesResponse
+      attr_accessor target_resource_types: ::Array[Types::TargetResourceTypeSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ResolvedTarget
+      attr_accessor resource_type: ::String
+      attr_accessor target_name: ::String
+      attr_accessor target_information: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartExperimentRequest
+      attr_accessor client_token: ::String
+      attr_accessor experiment_template_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartExperimentResponse
+      attr_accessor experiment: Types::Experiment
+      SENSITIVE: []
+    end
+
+    class StopExperimentRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class StopExperimentResponse
+      attr_accessor experiment: Types::Experiment
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TargetAccountConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor account_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class TargetAccountConfigurationSummary
+      attr_accessor role_arn: ::String
+      attr_accessor account_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class TargetResourceType
+      attr_accessor resource_type: ::String
+      attr_accessor description: ::String
+      attr_accessor parameters: ::Hash[::String, Types::TargetResourceTypeParameter]
+      SENSITIVE: []
+    end
+
+    class TargetResourceTypeParameter
+      attr_accessor description: ::String
+      attr_accessor required: bool
+      SENSITIVE: []
+    end
+
+    class TargetResourceTypeSummary
+      attr_accessor resource_type: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateExperimentTemplateActionInputItem
+      attr_accessor action_id: ::String
+      attr_accessor description: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor targets: ::Hash[::String, ::String]
+      attr_accessor start_after: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateExperimentTemplateExperimentOptionsInput
+      attr_accessor empty_target_resolution_mode: ("fail" | "skip")
+      SENSITIVE: []
+    end
+
+    class UpdateExperimentTemplateLogConfigurationInput
+      attr_accessor cloud_watch_logs_configuration: Types::ExperimentTemplateCloudWatchLogsLogConfigurationInput
+      attr_accessor s3_configuration: Types::ExperimentTemplateS3LogConfigurationInput
+      attr_accessor log_schema_version: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateExperimentTemplateRequest
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor stop_conditions: ::Array[Types::UpdateExperimentTemplateStopConditionInput]
+      attr_accessor targets: ::Hash[::String, Types::UpdateExperimentTemplateTargetInput]
+      attr_accessor actions: ::Hash[::String, Types::UpdateExperimentTemplateActionInputItem]
+      attr_accessor role_arn: ::String
+      attr_accessor log_configuration: Types::UpdateExperimentTemplateLogConfigurationInput
+      attr_accessor experiment_options: Types::UpdateExperimentTemplateExperimentOptionsInput
+      SENSITIVE: []
+    end
+
+    class UpdateExperimentTemplateResponse
+      attr_accessor experiment_template: Types::ExperimentTemplate
+      SENSITIVE: []
+    end
+
+    class UpdateExperimentTemplateStopConditionInput
+      attr_accessor source: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateExperimentTemplateTargetInput
+      attr_accessor resource_type: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor resource_tags: ::Hash[::String, ::String]
+      attr_accessor filters: ::Array[Types::ExperimentTemplateTargetInputFilter]
+      attr_accessor selection_mode: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateTargetAccountConfigurationRequest
+      attr_accessor experiment_template_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTargetAccountConfigurationResponse
+      attr_accessor target_account_configuration: Types::TargetAccountConfiguration
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

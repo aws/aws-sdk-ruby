@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.114.0 (2023-12-21)
+------------------
+
+* Feature - MediaLive now supports the ability to configure the audio that an AWS Elemental Link UHD device produces, when the device is configured as the source for a flow in AWS Elemental MediaConnect.
+
+1.113.0 (2023-12-04)
+------------------
+
+* Feature - Adds support for custom color correction on channels using 3D LUT files.
+
+1.112.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.111.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.110.0 (2023-11-17)
+------------------
+
+* Feature - MediaLive has now added support for per-output static image overlay.
+
 1.109.0 (2023-09-27)
 ------------------
 

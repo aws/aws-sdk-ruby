@@ -436,7 +436,7 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # The detailed configuration of a specified resource.
+    # The detailed configurations of a specified resource.
     #
     # @!attribute [rw] version
     #   The version number of the resource configuration.
@@ -448,25 +448,26 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] configuration_item_capture_time
-    #   The time when the configuration recording was initiated.
+    #   The time when the recording of configuration changes was initiated
+    #   for the resource.
     #   @return [Time]
     #
     # @!attribute [rw] configuration_item_status
-    #   The configuration item status. The valid values are:
+    #   The configuration item status. Valid values include:
     #
-    #   * OK – The resource configuration has been updated
+    #   * OK – The resource configuration has been updated.
     #
-    #   * ResourceDiscovered – The resource was newly discovered
+    #   * ResourceDiscovered – The resource was newly discovered.
     #
-    #   * ResourceNotRecorded – The resource was discovered but its
-    #     configuration was not recorded since the recorder excludes the
-    #     recording of resources of this type
+    #   * ResourceNotRecorded – The resource was discovered, but its
+    #     configuration was not recorded since the recorder doesn't record
+    #     resources of this type.
     #
     #   * ResourceDeleted – The resource was deleted
     #
-    #   * ResourceDeletedNotRecorded – The resource was deleted but its
-    #     configuration was not recorded since the recorder excludes the
-    #     recording of resources of this type
+    #   * ResourceDeletedNotRecorded – The resource was deleted, but its
+    #     configuration was not recorded since the recorder doesn't record
+    #     resources of this type.
     #   @return [String]
     #
     # @!attribute [rw] configuration_state_id
@@ -512,6 +513,15 @@ module Aws::ConfigService
     #   parameter.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] recording_frequency
+    #   The recording frequency that Config uses to record configuration
+    #   changes for the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_item_delivery_time
+    #   The time when configuration changes for the resource were delivered.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BaseConfigurationItem AWS API Documentation
     #
     class BaseConfigurationItem < Struct.new(
@@ -528,7 +538,9 @@ module Aws::ConfigService
       :availability_zone,
       :resource_creation_time,
       :configuration,
-      :supplementary_configuration)
+      :supplementary_configuration,
+      :recording_frequency,
+      :configuration_item_delivery_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1263,25 +1275,26 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] configuration_item_capture_time
-    #   The time when the configuration recording was initiated.
+    #   The time when the recording of configuration changes was initiated
+    #   for the resource.
     #   @return [Time]
     #
     # @!attribute [rw] configuration_item_status
-    #   The configuration item status. The valid values are:
+    #   The configuration item status. Valid values include:
     #
     #   * OK – The resource configuration has been updated
     #
     #   * ResourceDiscovered – The resource was newly discovered
     #
     #   * ResourceNotRecorded – The resource was discovered but its
-    #     configuration was not recorded since the recorder excludes the
-    #     recording of resources of this type
+    #     configuration was not recorded since the recorder doesn't record
+    #     resources of this type
     #
     #   * ResourceDeleted – The resource was deleted
     #
     #   * ResourceDeletedNotRecorded – The resource was deleted but its
-    #     configuration was not recorded since the recorder excludes the
-    #     recording of resources of this type
+    #     configuration was not recorded since the recorder doesn't record
+    #     resources of this type
     #   @return [String]
     #
     # @!attribute [rw] configuration_state_id
@@ -1360,6 +1373,15 @@ module Aws::ConfigService
     #   parameter.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] recording_frequency
+    #   The recording frequency that Config uses to record configuration
+    #   changes for the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_item_delivery_time
+    #   The time when configuration changes for the resource were delivered.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationItem AWS API Documentation
     #
     class ConfigurationItem < Struct.new(
@@ -1380,14 +1402,16 @@ module Aws::ConfigService
       :related_events,
       :relationships,
       :configuration,
-      :supplementary_configuration)
+      :supplementary_configuration,
+      :recording_frequency,
+      :configuration_item_delivery_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Records configuration changes to specified resource types. For more
-    # information about the configuration recorder, see [ **Managing the
-    # Configuration Recorder** ][1] in the *Config Developer Guide*.
+    # Records configuration changes to your specified resource types. For
+    # more information about the configuration recorder, see [ **Managing
+    # the Configuration Recorder** ][1] in the *Config Developer Guide*.
     #
     #
     #
@@ -1397,10 +1421,12 @@ module Aws::ConfigService
     #   The name of the configuration recorder. Config automatically assigns
     #   the name of "default" when creating the configuration recorder.
     #
-    #   You cannot change the name of the configuration recorder after it
+    #   <note markdown="1"> You cannot change the name of the configuration recorder after it
     #   has been created. To change the configuration recorder name, you
     #   must delete it and create a new configuration recorder with a new
     #   name.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -1463,12 +1489,36 @@ module Aws::ConfigService
     #    </note>
     #   @return [Types::RecordingGroup]
     #
+    # @!attribute [rw] recording_mode
+    #   Specifies the default recording frequency that Config uses to record
+    #   configuration changes. Config supports *Continuous recording* and
+    #   *Daily recording*.
+    #
+    #   * Continuous recording allows you to record configuration changes
+    #     continuously whenever a change occurs.
+    #
+    #   * Daily recording allows you to receive a configuration item (CI)
+    #     representing the most recent state of your resources over the last
+    #     24-hour period, only if it’s different from the previous CI
+    #     recorded.
+    #
+    #   <note markdown="1"> Firewall Manager depends on continuous recording to monitor your
+    #   resources. If you are using Firewall Manager, it is recommended that
+    #   you set the recording frequency to Continuous.
+    #
+    #    </note>
+    #
+    #   You can also override the recording frequency for specific resource
+    #   types.
+    #   @return [Types::RecordingMode]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationRecorder AWS API Documentation
     #
     class ConfigurationRecorder < Struct.new(
       :name,
       :role_arn,
-      :recording_group)
+      :recording_group,
+      :recording_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3622,7 +3672,7 @@ module Aws::ConfigService
     # resource types, Config starts recording resources of that type
     # automatically.
     #
-    # <note markdown="1"> **How to use**
+    # <note markdown="1"> <b>How to use the exclusion recording strategy </b>
     #
     #  To use this option, you must set the `useOnly` field of
     # [RecordingStrategy][1] to `EXCLUSION_BY_RESOURCE_TYPES`.
@@ -3631,18 +3681,24 @@ module Aws::ConfigService
     # resource types, except the resource types that you specify to exclude
     # from being recorded.
     #
-    #  **Globally recorded resources**
+    #  <b>Global resource types and the exclusion recording strategy </b>
     #
     #  Unless specifically listed as exclusions, `AWS::RDS::GlobalCluster`
     # will be recorded automatically in all supported Config Regions were
-    # the configuration recorder is enabled. IAM users, groups, roles, and
-    # customer managed policies will be recorded automatically in all
-    # enabled Config Regions where Config was available before February
-    # 2022. This list does not include the following Regions:
+    # the configuration recorder is enabled.
+    #
+    #  IAM users, groups, roles, and customer managed policies will be
+    # recorded in the Region where you set up the configuration recorder if
+    # that is a Region where Config was available before February 2022. You
+    # cannot be record the global IAM resouce types in Regions supported by
+    # Config after February 2022. This list where you cannot record the
+    # global IAM resource types includes the following Regions:
     #
     #  * Asia Pacific (Hyderabad)
     #
     # * Asia Pacific (Melbourne)
+    #
+    # * Canada West (Calgary)
     #
     # * Europe (Spain)
     #
@@ -6963,9 +7019,9 @@ module Aws::ConfigService
     # Specifies which resource types Config records for configuration
     # changes. By default, Config records configuration changes for all
     # current and future supported resource types in the Amazon Web Services
-    # Region where you have enabled Config (excluding the globally recorded
-    # IAM resource types: IAM users, groups, roles, and customer managed
-    # policies).
+    # Region where you have enabled Config, excluding the global IAM
+    # resource types: IAM users, groups, roles, and customer managed
+    # policies.
     #
     # In the recording group, you specify whether you want to record all
     # supported current and future supported resource types or to include or
@@ -6974,7 +7030,8 @@ module Aws::ConfigService
     # guide*.
     #
     # If you don't want Config to record all current and future supported
-    # resource types, use one of the following recording strategies:
+    # resource types (excluding the global IAM resource types), use one of
+    # the following recording strategies:
     #
     # 1.  **Record all current and future resource types with exclusions**
     #     (`EXCLUSION_BY_RESOURCE_TYPES`), or
@@ -6982,7 +7039,12 @@ module Aws::ConfigService
     # 2.  **Record specific resource types**
     #     (`INCLUSION_BY_RESOURCE_TYPES`).
     #
-    # **Aurora global clusters are automatically globally recorded**
+    # If you use the recording strategy to **Record all current and future
+    # resource types** (`ALL_SUPPORTED_RESOURCE_TYPES`), you can use the
+    # flag `includeGlobalResourceTypes` to include the global IAM resource
+    # types in your recording.
+    #
+    # **Aurora global clusters are recorded in all enabled Regions**
     #
     #  The `AWS::RDS::GlobalCluster` resource type will be recorded in all
     # supported Config Regions where the configuration recorder is enabled.
@@ -6997,18 +7059,18 @@ module Aws::ConfigService
     #
     # @!attribute [rw] all_supported
     #   Specifies whether Config records configuration changes for all
-    #   supported regionally recorded resource types.
+    #   supported resource types, excluding the global IAM resource types.
     #
     #   If you set this field to `true`, when Config adds support for a new
-    #   regionally recorded resource type, Config starts recording resources
-    #   of that type automatically.
+    #   resource type, Config starts recording resources of that type
+    #   automatically.
     #
     #   If you set this field to `true`, you cannot enumerate specific
     #   resource types to record in the `resourceTypes` field of
     #   [RecordingGroup][1], or to exclude in the `resourceTypes` field of
     #   [ExclusionByResourceTypes][2].
     #
-    #   <note markdown="1"> **Region Availability**
+    #   <note markdown="1"> **Region availability**
     #
     #    Check [Resource Coverage by Region Availability][3] to see if a
     #   resource type is supported in the Amazon Web Services Region where
@@ -7024,16 +7086,19 @@ module Aws::ConfigService
     #   @return [Boolean]
     #
     # @!attribute [rw] include_global_resource_types
-    #   A legacy field which **only applies to the globally recorded IAM
-    #   resource types**: IAM users, groups, roles, and customer managed
-    #   policies. If you select this option, these resource types will be
-    #   recorded in all enabled Config regions where Config was available
-    #   before February 2022. This list does not include the following
-    #   Regions:
+    #   This option is a bundle which only applies to the global IAM
+    #   resource types: IAM users, groups, roles, and customer managed
+    #   policies. These global IAM resource types can only be recorded by
+    #   Config in Regions where Config was available before February 2022.
+    #   You cannot be record the global IAM resouce types in Regions
+    #   supported by Config after February 2022. This list where you cannot
+    #   record the global IAM resource types includes the following Regions:
     #
     #   * Asia Pacific (Hyderabad)
     #
     #   * Asia Pacific (Melbourne)
+    #
+    #   * Canada West (Calgary)
     #
     #   * Europe (Spain)
     #
@@ -7043,13 +7108,13 @@ module Aws::ConfigService
     #
     #   * Middle East (UAE)
     #
-    #   **Aurora global clusters are automatically globally recorded**
+    #   **Aurora global clusters are recorded in all enabled Regions**
     #
     #    The `AWS::RDS::GlobalCluster` resource type will be recorded in all
     #   supported Config Regions where the configuration recorder is
-    #   enabled, even if `includeGlobalResourceTypes` is not set to `true`.
-    #   `includeGlobalResourceTypes` is a legacy field which only applies to
-    #   IAM users, groups, roles, and customer managed policies.
+    #   enabled, even if `includeGlobalResourceTypes` is set`false`. The
+    #   `includeGlobalResourceTypes` option is a bundle which only applies
+    #   to IAM users, groups, roles, and customer managed policies.
     #
     #    If you do not want to record `AWS::RDS::GlobalCluster` in all
     #   enabled Regions, use one of the following recording strategies:
@@ -7064,6 +7129,28 @@ module Aws::ConfigService
     #    For more information, see [Selecting Which Resources are
     #   Recorded][1] in the *Config developer guide*.
     #
+    #   **includeGlobalResourceTypes and the exclusion recording strategy**
+    #
+    #    The `includeGlobalResourceTypes` field has no impact on the
+    #   `EXCLUSION_BY_RESOURCE_TYPES` recording strategy. This means that
+    #   the global IAM resource types (IAM users, groups, roles, and
+    #   customer managed policies) will not be automatically added as
+    #   exclusions for `exclusionByResourceTypes` when
+    #   `includeGlobalResourceTypes` is set to `false`.
+    #
+    #    The `includeGlobalResourceTypes` field should only be used to
+    #   modify
+    #   the `AllSupported` field, as the default for the `AllSupported`
+    #   field is to record configuration changes for all supported resource
+    #   types excluding the global IAM resource types. To include the global
+    #   IAM resource types when `AllSupported` is set to `true`, make sure
+    #   to set `includeGlobalResourceTypes` to `true`.
+    #
+    #    To exclude the global IAM resource types for the
+    #   `EXCLUSION_BY_RESOURCE_TYPES` recording strategy, you need to
+    #   manually add them to the `resourceTypes` field of
+    #   `exclusionByResourceTypes`.
+    #
     #   <note markdown="1"> **Required and optional fields**
     #
     #    Before you set this field to `true`, set the `allSupported` field of
@@ -7074,17 +7161,17 @@ module Aws::ConfigService
     #
     #   <note markdown="1"> **Overriding fields**
     #
-    #    If you set this field to `false` but list globally recorded IAM
-    #   resource types in the `resourceTypes` field of [RecordingGroup][2],
-    #   Config will still record configuration changes for those specified
-    #   resource types *regardless* of if you set the
-    #   `includeGlobalResourceTypes` field to false.
+    #    If you set this field to `false` but list global IAM resource types
+    #   in the `resourceTypes` field of [RecordingGroup][2], Config will
+    #   still record configuration changes for those specified resource
+    #   types *regardless* of if you set the `includeGlobalResourceTypes`
+    #   field to false.
     #
-    #    If you do not want to record configuration changes to the globally
-    #   recorded IAM resource types (IAM users, groups, roles, and customer
-    #   managed policies), make sure to not list them in the `resourceTypes`
-    #   field in addition to setting the `includeGlobalResourceTypes` field
-    #   to false.
+    #    If you do not want to record configuration changes to the global IAM
+    #   resource types (IAM users, groups, roles, and customer managed
+    #   policies), make sure to not list them in the `resourceTypes` field
+    #   in addition to setting the `includeGlobalResourceTypes` field to
+    #   false.
     #
     #    </note>
     #
@@ -7099,22 +7186,26 @@ module Aws::ConfigService
     #   A comma-separated list that specifies which resource types Config
     #   records.
     #
-    #   Optionally, you can set the `useOnly` field of
-    #   [RecordingStrategy][1] to `INCLUSION_BY_RESOURCE_TYPES`.
+    #   For a list of valid `resourceTypes` values, see the **Resource Type
+    #   Value** column in [Supported Amazon Web Services resource Types][1]
+    #   in the *Config developer guide*.
     #
-    #   To record all configuration changes, set the `allSupported` field of
-    #   [RecordingGroup][2] to `true`, and either omit this field or don't
+    #   <note markdown="1"> **Required and optional fields**
+    #
+    #    Optionally, you can set the `useOnly` field of
+    #   [RecordingStrategy][2] to `INCLUSION_BY_RESOURCE_TYPES`.
+    #
+    #    To record all configuration changes, set the `allSupported` field of
+    #   [RecordingGroup][3] to `true`, and either omit this field or don't
     #   specify any resource types in this field. If you set the
     #   `allSupported` field to `false` and specify values for
     #   `resourceTypes`, when Config adds support for a new type of
     #   resource, it will not record resources of that type unless you
     #   manually add that type to your recording group.
     #
-    #   For a list of valid `resourceTypes` values, see the **Resource Type
-    #   Value** column in [Supported Amazon Web Services resource Types][3]
-    #   in the *Config developer guide*.
+    #    </note>
     #
-    #   <note markdown="1"> **Region Availability**
+    #   <note markdown="1"> **Region availability**
     #
     #    Before specifying a resource type for Config to track, check
     #   [Resource Coverage by Region Availability][4] to see if the resource
@@ -7129,9 +7220,9 @@ module Aws::ConfigService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html
-    #   [2]: https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html
-    #   [3]: https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources
+    #   [2]: https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html
+    #   [3]: https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html
     #   [4]: https://docs.aws.amazon.com/config/latest/developerguide/what-is-resource-config-coverage.html
     #   @return [Array<String>]
     #
@@ -7139,8 +7230,12 @@ module Aws::ConfigService
     #   An object that specifies how Config excludes resource types from
     #   being recorded by the configuration recorder.
     #
-    #   To use this option, you must set the `useOnly` field of
+    #   <note markdown="1"> **Required fields**
+    #
+    #    To use this option, you must set the `useOnly` field of
     #   [RecordingStrategy][1] to `EXCLUSION_BY_RESOURCE_TYPES`.
+    #
+    #    </note>
     #
     #
     #
@@ -7153,9 +7248,9 @@ module Aws::ConfigService
     #
     #   * If you set the `useOnly` field of [RecordingStrategy][1] to
     #     `ALL_SUPPORTED_RESOURCE_TYPES`, Config records configuration
-    #     changes for all supported regionally recorded resource types. You
-    #     also must set the `allSupported` field of [RecordingGroup][2] to
-    #     `true`. When Config adds support for a new regionally recorded
+    #     changes for all supported resource types, excluding the global IAM
+    #     resource types. You also must set the `allSupported` field of
+    #     [RecordingGroup][2] to `true`. When Config adds support for a new
     #     resource type, Config automatically starts recording resources of
     #     that type.
     #
@@ -7191,9 +7286,9 @@ module Aws::ConfigService
     #   properties in the request.
     #
     #    For example, even if you set `includeGlobalResourceTypes` to false,
-    #   globally recorded IAM resource types will still be automatically
-    #   recorded in this option unless those resource types are specifically
-    #   listed as exclusions in the `resourceTypes` field of
+    #   global IAM resource types will still be automatically recorded in
+    #   this option unless those resource types are specifically listed as
+    #   exclusions in the `resourceTypes` field of
     #   `exclusionByResourceTypes`.
     #
     #    </note>
@@ -7207,17 +7302,22 @@ module Aws::ConfigService
     #   global resource types, Config starts recording resources of that
     #   type automatically.
     #
-    #    In addition, unless specifically listed as exclusions,
-    #   `AWS::RDS::GlobalCluster` will be recorded automatically in all
-    #   supported Config Regions were the configuration recorder is enabled.
-    #   IAM users, groups, roles, and customer managed policies will be
-    #   recorded automatically in all enabled Config Regions where Config
-    #   was available before February 2022. This list does not include the
-    #   following Regions:
+    #    Unless specifically listed as exclusions, `AWS::RDS::GlobalCluster`
+    #   will be recorded automatically in all supported Config Regions were
+    #   the configuration recorder is enabled.
+    #
+    #    IAM users, groups, roles, and customer managed policies will be
+    #   recorded in the Region where you set up the configuration recorder
+    #   if that is a Region where Config was available before February 2022.
+    #   You cannot be record the global IAM resouce types in Regions
+    #   supported by Config after February 2022. This list where you cannot
+    #   record the global IAM resource types includes the following Regions:
     #
     #    * Asia Pacific (Hyderabad)
     #
     #   * Asia Pacific (Melbourne)
+    #
+    #   * Canada West (Calgary)
     #
     #   * Europe (Spain)
     #
@@ -7248,19 +7348,121 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # Specifies the default recording frequency that Config uses to record
+    # configuration changes. Config supports *Continuous recording* and
+    # *Daily recording*.
+    #
+    # * Continuous recording allows you to record configuration changes
+    #   continuously whenever a change occurs.
+    #
+    # * Daily recording allows you to receive a configuration item (CI)
+    #   representing the most recent state of your resources over the last
+    #   24-hour period, only if it’s different from the previous CI
+    #   recorded.
+    #
+    # <note markdown="1"> Firewall Manager depends on continuous recording to monitor your
+    # resources. If you are using Firewall Manager, it is recommended that
+    # you set the recording frequency to Continuous.
+    #
+    #  </note>
+    #
+    # You can also override the recording frequency for specific resource
+    # types.
+    #
+    # @!attribute [rw] recording_frequency
+    #   The default recording frequency that Config uses to record
+    #   configuration changes.
+    #
+    #   Daily recording is not supported for the following resource types:
+    #
+    #    * `AWS::Config::ResourceCompliance`
+    #
+    #   * `AWS::Config::ConformancePackCompliance`
+    #
+    #   * `AWS::Config::ConfigurationRecorder`
+    #
+    #    For the **allSupported** (`ALL_SUPPORTED_RESOURCE_TYPES`) recording
+    #   strategy, these resource types will be set to Continuous recording.
+    #   @return [String]
+    #
+    # @!attribute [rw] recording_mode_overrides
+    #   An array of `recordingModeOverride` objects for you to specify your
+    #   overrides for the recording mode. The `recordingModeOverride` object
+    #   in the `recordingModeOverrides` array consists of three fields: a
+    #   `description`, the new `recordingFrequency`, and an array of
+    #   `resourceTypes` to override.
+    #   @return [Array<Types::RecordingModeOverride>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RecordingMode AWS API Documentation
+    #
+    class RecordingMode < Struct.new(
+      :recording_frequency,
+      :recording_mode_overrides)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object for you to specify your overrides for the recording mode.
+    #
+    # @!attribute [rw] description
+    #   A description that you provide for the override.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_types
+    #   A comma-separated list that specifies which resource types Config
+    #   includes in the override.
+    #
+    #   Daily recording is not supported for the following resource types:
+    #
+    #    * `AWS::Config::ResourceCompliance`
+    #
+    #   * `AWS::Config::ConformancePackCompliance`
+    #
+    #   * `AWS::Config::ConfigurationRecorder`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] recording_frequency
+    #   The recording frequency that will be applied to all the resource
+    #   types specified in the override.
+    #
+    #   * Continuous recording allows you to record configuration changes
+    #     continuously whenever a change occurs.
+    #
+    #   * Daily recording allows you to receive a configuration item (CI)
+    #     representing the most recent state of your resources over the last
+    #     24-hour period, only if it’s different from the previous CI
+    #     recorded.
+    #
+    #   <note markdown="1"> Firewall Manager depends on continuous recording to monitor your
+    #   resources. If you are using Firewall Manager, it is recommended that
+    #   you set the recording frequency to Continuous.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RecordingModeOverride AWS API Documentation
+    #
+    class RecordingModeOverride < Struct.new(
+      :description,
+      :resource_types,
+      :recording_frequency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the recording strategy of the configuration recorder.
     #
     # @!attribute [rw] use_only
     #   The recording strategy for the configuration recorder.
     #
     #   * If you set this option to `ALL_SUPPORTED_RESOURCE_TYPES`, Config
-    #     records configuration changes for all supported regionally
-    #     recorded resource types. You also must set the `allSupported`
-    #     field of [RecordingGroup][1] to `true`. When Config adds support
-    #     for a new regionally recorded resource type, Config automatically
-    #     starts recording resources of that type. For a list of supported
-    #     resource types, see [Supported Resource Types][2] in the *Config
-    #     developer guide*.
+    #     records configuration changes for all supported resource types,
+    #     excluding the global IAM resource types. You also must set the
+    #     `allSupported` field of [RecordingGroup][1] to `true`. When Config
+    #     adds support for a new resource type, Config automatically starts
+    #     recording resources of that type. For a list of supported resource
+    #     types, see [Supported Resource Types][2] in the *Config developer
+    #     guide*.
     #
     #   * If you set this option to `INCLUSION_BY_RESOURCE_TYPES`, Config
     #     records configuration changes for only the resource types that you
@@ -7293,9 +7495,9 @@ module Aws::ConfigService
     #   properties in the request.
     #
     #    For example, even if you set `includeGlobalResourceTypes` to false,
-    #   globally recorded IAM resource types will still be automatically
-    #   recorded in this option unless those resource types are specifically
-    #   listed as exclusions in the `resourceTypes` field of
+    #   global IAM resource types will still be automatically recorded in
+    #   this option unless those resource types are specifically listed as
+    #   exclusions in the `resourceTypes` field of
     #   `exclusionByResourceTypes`.
     #
     #    </note>
@@ -7308,17 +7510,22 @@ module Aws::ConfigService
     #   global resource types, Config starts recording resources of that
     #   type automatically.
     #
-    #    In addition, unless specifically listed as exclusions,
-    #   `AWS::RDS::GlobalCluster` will be recorded automatically in all
-    #   supported Config Regions were the configuration recorder is enabled.
-    #   IAM users, groups, roles, and customer managed policies will be
-    #   recorded automatically in all enabled Config Regions where Config
-    #   was available before February 2022. This list does not include the
-    #   following Regions:
+    #    Unless specifically listed as exclusions, `AWS::RDS::GlobalCluster`
+    #   will be recorded automatically in all supported Config Regions were
+    #   the configuration recorder is enabled.
+    #
+    #    IAM users, groups, roles, and customer managed policies will be
+    #   recorded in the Region where you set up the configuration recorder
+    #   if that is a Region where Config was available before February 2022.
+    #   You cannot be record the global IAM resouce types in Regions
+    #   supported by Config after February 2022. This list where you cannot
+    #   record the global IAM resource types includes the following Regions:
     #
     #    * Asia Pacific (Hyderabad)
     #
     #   * Asia Pacific (Melbourne)
+    #
+    #   * Canada West (Calgary)
     #
     #   * Europe (Spain)
     #
@@ -7428,12 +7635,16 @@ module Aws::ConfigService
     #   @return [Integer]
     #
     # @!attribute [rw] retry_attempt_seconds
-    #   Maximum time in seconds that Config runs auto-remediation. If you do
-    #   not select a number, the default is 60 seconds.
+    #   Time window to determine whether or not to add a remediation
+    #   exception to prevent infinite remediation attempts. If
+    #   `MaximumAutomaticAttempts` remediation attempts have been made under
+    #   `RetryAttemptSeconds`, a remediation exception will be added to the
+    #   resource. If you do not select a number, the default is 60 seconds.
     #
-    #   For example, if you specify RetryAttemptSeconds as 50 seconds and
-    #   MaximumAutomaticAttempts as 5, Config will run auto-remediations 5
-    #   times within 50 seconds before throwing an exception.
+    #   For example, if you specify `RetryAttemptSeconds` as 50 seconds and
+    #   `MaximumAutomaticAttempts` as 5, Config will run auto-remediations 5
+    #   times within 50 seconds before adding a remediation exception to the
+    #   resource.
     #   @return [Integer]
     #
     # @!attribute [rw] arn
@@ -8596,8 +8807,7 @@ module Aws::ConfigService
     #   The name or Amazon Resource Name (ARN) of the SSM document to use to
     #   create a conformance pack. If you use the document name, Config
     #   checks only your account and Amazon Web Services Region for the SSM
-    #   document. If you want to use an SSM document from another Region or
-    #   account, you must provide the ARN.
+    #   document.
     #   @return [String]
     #
     # @!attribute [rw] document_version

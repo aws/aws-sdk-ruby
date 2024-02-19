@@ -439,6 +439,10 @@ module Aws::QuickSight
     #   The configuration for default analysis settings.
     #   @return [Types::AnalysisDefaults]
     #
+    # @!attribute [rw] options
+    #   An array of option definitions for an analysis.
+    #   @return [Types::AssetOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AnalysisDefinition AWS API Documentation
     #
     class AnalysisDefinition < Struct.new(
@@ -448,7 +452,8 @@ module Aws::QuickSight
       :parameter_declarations,
       :filter_groups,
       :column_configurations,
-      :analysis_defaults)
+      :analysis_defaults,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1067,6 +1072,16 @@ module Aws::QuickSight
     #   The format for the export job.
     #   @return [String]
     #
+    # @!attribute [rw] include_permissions
+    #   The flag that determines the inclusion of permissions associated
+    #   with each resource ARN.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_tags
+    #   The flag that determines the inclusion of tags associated with each
+    #   resource ARN.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleExportJobSummary AWS API Documentation
     #
     class AssetBundleExportJobSummary < Struct.new(
@@ -1075,7 +1090,9 @@ module Aws::QuickSight
       :created_time,
       :asset_bundle_export_job_id,
       :include_all_dependencies,
-      :export_format)
+      :export_format,
+      :include_permissions,
+      :include_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1124,6 +1141,42 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The option to relax the validation that is required to export each
+    # asset. When `StrictModeForAllResource` is set to true, validation is
+    # skipped for specific UI errors.
+    #
+    # @!attribute [rw] strict_mode_for_all_resources
+    #   A Boolean value that indicates whether to export resources under
+    #   strict or lenient mode.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleExportJobValidationStrategy AWS API Documentation
+    #
+    class AssetBundleExportJobValidationStrategy < Struct.new(
+      :strict_mode_for_all_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a warning that occurred during an Asset Bundle export job.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the resource whose processing caused a warning.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the warning.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleExportJobWarning AWS API Documentation
+    #
+    class AssetBundleExportJobWarning < Struct.new(
+      :arn,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The override parameters for a single analysis that is being imported.
     #
     # @!attribute [rw] analysis_id
@@ -1139,6 +1192,49 @@ module Aws::QuickSight
     class AssetBundleImportJobAnalysisOverrideParameters < Struct.new(
       :analysis_id,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains a list of permissions to be applied to a list
+    # of analysis IDs.
+    #
+    # @!attribute [rw] analysis_ids
+    #   A list of analysis IDs that you want to apply overrides to. You can
+    #   use `*` to override all analyses in this asset bundle.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] permissions
+    #   A list of permissions for the analyses that you want to apply
+    #   overrides to.
+    #   @return [Types::AssetBundleResourcePermissions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobAnalysisOverridePermissions AWS API Documentation
+    #
+    class AssetBundleImportJobAnalysisOverridePermissions < Struct.new(
+      :analysis_ids,
+      :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains a list of tags to be assigned to a list of
+    # analysis IDs.
+    #
+    # @!attribute [rw] analysis_ids
+    #   A list of analysis IDs that you want to apply overrides to. You can
+    #   use `*` to override all analyses in this asset bundle.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags for the analyses that you want to apply overrides to.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobAnalysisOverrideTags AWS API Documentation
+    #
+    class AssetBundleImportJobAnalysisOverrideTags < Struct.new(
+      :analysis_ids,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1162,6 +1258,56 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # An object that contains a list of permissions to be applied to a list
+    # of dashboard IDs.
+    #
+    # @!attribute [rw] dashboard_ids
+    #   A list of dashboard IDs that you want to apply overrides to. You can
+    #   use `*` to override all dashboards in this asset bundle.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] permissions
+    #   A list of permissions for the dashboards that you want to apply
+    #   overrides to.
+    #   @return [Types::AssetBundleResourcePermissions]
+    #
+    # @!attribute [rw] link_sharing_configuration
+    #   A structure that contains the link sharing configurations that you
+    #   want to apply overrides to.
+    #   @return [Types::AssetBundleResourceLinkSharingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobDashboardOverridePermissions AWS API Documentation
+    #
+    class AssetBundleImportJobDashboardOverridePermissions < Struct.new(
+      :dashboard_ids,
+      :permissions,
+      :link_sharing_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains a list of tags to be assigned to a list of
+    # dashboard IDs.
+    #
+    # @!attribute [rw] dashboard_ids
+    #   A list of dashboard IDs that you want to apply overrides to. You can
+    #   use `*` to override all dashboards in this asset bundle.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags for the dashboards that you want to apply overrides
+    #   to.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobDashboardOverrideTags AWS API Documentation
+    #
+    class AssetBundleImportJobDashboardOverrideTags < Struct.new(
+      :dashboard_ids,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The override parameters for a single dataset that is being imported.
     #
     # @!attribute [rw] data_set_id
@@ -1177,6 +1323,49 @@ module Aws::QuickSight
     class AssetBundleImportJobDataSetOverrideParameters < Struct.new(
       :data_set_id,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains a list of permissions to be applied to a list
+    # of dataset IDs.
+    #
+    # @!attribute [rw] data_set_ids
+    #   A list of dataset IDs that you want to apply overrides to. You can
+    #   use `*` to override all datasets in this asset bundle.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] permissions
+    #   A list of permissions for the datasets that you want to apply
+    #   overrides to.
+    #   @return [Types::AssetBundleResourcePermissions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobDataSetOverridePermissions AWS API Documentation
+    #
+    class AssetBundleImportJobDataSetOverridePermissions < Struct.new(
+      :data_set_ids,
+      :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains a list of tags to be assigned to a list of
+    # dataset IDs.
+    #
+    # @!attribute [rw] data_set_ids
+    #   A list of dataset IDs that you want to apply overrides to. You can
+    #   use `*` to override all datasets in this asset bundle.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags for the datasets that you want to apply overrides to.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobDataSetOverrideTags AWS API Documentation
+    #
+    class AssetBundleImportJobDataSetOverrideTags < Struct.new(
+      :data_set_ids,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1268,6 +1457,50 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # An object that contains a list of permissions to be applied to a list
+    # of data source IDs.
+    #
+    # @!attribute [rw] data_source_ids
+    #   A list of data source IDs that you want to apply overrides to. You
+    #   can use `*` to override all data sources in this asset bundle.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] permissions
+    #   A list of permissions for the data source that you want to apply
+    #   overrides to.
+    #   @return [Types::AssetBundleResourcePermissions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobDataSourceOverridePermissions AWS API Documentation
+    #
+    class AssetBundleImportJobDataSourceOverridePermissions < Struct.new(
+      :data_source_ids,
+      :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains a list of tags to be assigned to a list of
+    # data source IDs.
+    #
+    # @!attribute [rw] data_source_ids
+    #   A list of data source IDs that you want to apply overrides to. You
+    #   can use `*` to override all data sources in this asset bundle.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags for the data source that you want to apply overrides
+    #   to.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobDataSourceOverrideTags AWS API Documentation
+    #
+    class AssetBundleImportJobDataSourceOverrideTags < Struct.new(
+      :data_source_ids,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an error that occurred within an Asset Bundle import
     # execution.
     #
@@ -1347,6 +1580,110 @@ module Aws::QuickSight
       :themes,
       :analyses,
       :dashboards)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the override permission configurations that
+    # modify the permissions for specified resources before the resource is
+    # imported.
+    #
+    # @!attribute [rw] data_sources
+    #   A list of permissions overrides for any `DataSource` resources that
+    #   are present in the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobDataSourceOverridePermissions>]
+    #
+    # @!attribute [rw] data_sets
+    #   A list of permissions overrides for any `DataSet` resources that are
+    #   present in the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobDataSetOverridePermissions>]
+    #
+    # @!attribute [rw] themes
+    #   A list of permissions overrides for any `Theme` resources that are
+    #   present in the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobThemeOverridePermissions>]
+    #
+    # @!attribute [rw] analyses
+    #   A list of permissions overrides for any `Analysis` resources that
+    #   are present in the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobAnalysisOverridePermissions>]
+    #
+    # @!attribute [rw] dashboards
+    #   A list of permissions overrides for any `Dashboard` resources that
+    #   are present in the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobDashboardOverridePermissions>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobOverridePermissions AWS API Documentation
+    #
+    class AssetBundleImportJobOverridePermissions < Struct.new(
+      :data_sources,
+      :data_sets,
+      :themes,
+      :analyses,
+      :dashboards)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the override tag configuration that modify
+    # the tags that are assigned to specified resources before the resource
+    # is imported.
+    #
+    # @!attribute [rw] vpc_connections
+    #   A list of tag overrides for any `VPCConnection` resources that are
+    #   present in the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobVPCConnectionOverrideTags>]
+    #
+    # @!attribute [rw] data_sources
+    #   A list of tag overrides for any `DataSource` resources that are
+    #   present in the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobDataSourceOverrideTags>]
+    #
+    # @!attribute [rw] data_sets
+    #   A list of tag overrides for any `DataSet` resources that are present
+    #   in the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobDataSetOverrideTags>]
+    #
+    # @!attribute [rw] themes
+    #   A list of tag overrides for any `Theme` resources that are present
+    #   in the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobThemeOverrideTags>]
+    #
+    # @!attribute [rw] analyses
+    #   A list of tag overrides for any `Analysis` resources that are
+    #   present in the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobAnalysisOverrideTags>]
+    #
+    # @!attribute [rw] dashboards
+    #   A list of tag overrides for any `Dashboard` resources that are
+    #   present in the asset bundle that is imported.
+    #   @return [Array<Types::AssetBundleImportJobDashboardOverrideTags>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobOverrideTags AWS API Documentation
+    #
+    class AssetBundleImportJobOverrideTags < Struct.new(
+      :vpc_connections,
+      :data_sources,
+      :data_sets,
+      :themes,
+      :analyses,
+      :dashboards)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An optional parameter that overrides the validation strategy for all
+    # analyses and dashboards before the resource is imported.
+    #
+    # @!attribute [rw] strict_mode_for_all_resources
+    #   A Boolean value that indicates whether to import all analyses and
+    #   dashboards under strict or lenient mode.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobOverrideValidationStrategy AWS API Documentation
+    #
+    class AssetBundleImportJobOverrideValidationStrategy < Struct.new(
+      :strict_mode_for_all_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1454,6 +1791,49 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # An object that contains a list of permissions to be applied to a list
+    # of theme IDs.
+    #
+    # @!attribute [rw] theme_ids
+    #   A list of theme IDs that you want to apply overrides to. You can use
+    #   `*` to override all themes in this asset bundle.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] permissions
+    #   A list of permissions for the themes that you want to apply
+    #   overrides to.
+    #   @return [Types::AssetBundleResourcePermissions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobThemeOverridePermissions AWS API Documentation
+    #
+    class AssetBundleImportJobThemeOverridePermissions < Struct.new(
+      :theme_ids,
+      :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains a list of tags to be assigned to a list of
+    # theme IDs.
+    #
+    # @!attribute [rw] theme_ids
+    #   A list of theme IDs that you want to apply overrides to. You can use
+    #   `*` to override all themes in this asset bundle.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags for the themes that you want to apply overrides to.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobThemeOverrideTags AWS API Documentation
+    #
+    class AssetBundleImportJobThemeOverrideTags < Struct.new(
+      :theme_ids,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The override parameters for a single VPC connection that is imported.
     #
     # @!attribute [rw] vpc_connection_id
@@ -1495,6 +1875,29 @@ module Aws::QuickSight
       :security_group_ids,
       :dns_resolvers,
       :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains a list of tags to be assigned to a list of VPC
+    # connection IDs.
+    #
+    # @!attribute [rw] vpc_connection_ids
+    #   A list of VPC connection IDs that you want to apply overrides to.
+    #   You can use `*` to override all VPC connections in this asset
+    #   bundle.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags for the VPC connections that you want to apply
+    #   overrides to.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleImportJobVPCConnectionOverrideTags AWS API Documentation
+    #
+    class AssetBundleImportJobVPCConnectionOverrideTags < Struct.new(
+      :vpc_connection_ids,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1549,6 +1952,61 @@ module Aws::QuickSight
     class AssetBundleImportSourceDescription < Struct.new(
       :body,
       :s3_uri)
+      SENSITIVE = [:body]
+      include Aws::Structure
+    end
+
+    # A structure that contains the configuration of a shared link to an
+    # Amazon QuickSight dashboard.
+    #
+    # @!attribute [rw] permissions
+    #   A list of link sharing permissions for the dashboards that you want
+    #   to apply overrides to.
+    #   @return [Types::AssetBundleResourcePermissions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleResourceLinkSharingConfiguration AWS API Documentation
+    #
+    class AssetBundleResourceLinkSharingConfiguration < Struct.new(
+      :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains the permissions for the resource that you
+    # want to override in an asset bundle import job.
+    #
+    # @!attribute [rw] principals
+    #   A list of principals to grant permissions on.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] actions
+    #   A list of IAM actions to grant permissions on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetBundleResourcePermissions AWS API Documentation
+    #
+    class AssetBundleResourcePermissions < Struct.new(
+      :principals,
+      :actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array of analysis level configurations.
+    #
+    # @!attribute [rw] timezone
+    #   Determines the timezone for the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] week_start
+    #   Determines the week start day for an analysis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AssetOptions AWS API Documentation
+    #
+    class AssetOptions < Struct.new(
+      :timezone,
+      :week_start)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1648,6 +2106,26 @@ module Aws::QuickSight
       :host,
       :port,
       :database)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The authorized targets that are associated with a service.
+    #
+    # @!attribute [rw] service
+    #   The name of the Amazon Web Services service.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorized_targets
+    #   Aist of authorized targets that are represented by IAM Identity
+    #   Center application ARNs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AuthorizedTargetsByService AWS API Documentation
+    #
+    class AuthorizedTargetsByService < Struct.new(
+      :service,
+      :authorized_targets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2011,6 +2489,10 @@ module Aws::QuickSight
     #   visual.
     #   @return [Array<Types::ContributionAnalysisDefault>]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BarChartConfiguration AWS API Documentation
     #
     class BarChartConfiguration < Struct.new(
@@ -2029,7 +2511,8 @@ module Aws::QuickSight
       :data_labels,
       :tooltip,
       :reference_lines,
-      :contribution_analysis_defaults)
+      :contribution_analysis_defaults,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2152,6 +2635,27 @@ module Aws::QuickSight
       :chart_configuration,
       :actions,
       :column_hierarchies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The parameters that are required to connect to a Google BigQuery data
+    # source.
+    #
+    # @!attribute [rw] project_id
+    #   The Google Cloud Platform project ID where your datasource was
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_region
+    #   The storage location where you create a Google BigQuery data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BigQueryParameters AWS API Documentation
+    #
+    class BigQueryParameters < Struct.new(
+      :project_id,
+      :data_set_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2332,6 +2836,10 @@ module Aws::QuickSight
     #   The palette (chart color) display setup of the visual.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/BoxPlotChartConfiguration AWS API Documentation
     #
     class BoxPlotChartConfiguration < Struct.new(
@@ -2345,7 +2853,8 @@ module Aws::QuickSight
       :legend,
       :tooltip,
       :reference_lines,
-      :visual_palette)
+      :visual_palette,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2640,6 +3149,11 @@ module Aws::QuickSight
     #   New column data type.
     #   @return [String]
     #
+    # @!attribute [rw] sub_type
+    #   The sub data type of the new column. Sub types are only available
+    #   for decimal columns that are part of a SPICE dataset.
+    #   @return [String]
+    #
     # @!attribute [rw] format
     #   When casting a column from string to datetime type, you can supply a
     #   string in a format supported by Amazon QuickSight to denote the
@@ -2651,6 +3165,7 @@ module Aws::QuickSight
     class CastColumnTypeOperation < Struct.new(
       :column_name,
       :new_column_type,
+      :sub_type,
       :format)
       SENSITIVE = []
       include Aws::Structure
@@ -3270,6 +3785,10 @@ module Aws::QuickSight
     #   visibility) of a combo chart's secondary y-axis(line) field well.
     #   @return [Types::ChartAxisLabelOptions]
     #
+    # @!attribute [rw] single_axis_options
+    #   The settings of a chart's single axis configuration.
+    #   @return [Types::SingleAxisOptions]
+    #
     # @!attribute [rw] color_label_options
     #   The label options (label text, label visibility, and sort icon
     #   visibility) of a combo chart's color field well.
@@ -3303,6 +3822,10 @@ module Aws::QuickSight
     #   The palette (chart color) display setup of the visual.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ComboChartConfiguration AWS API Documentation
     #
     class ComboChartConfiguration < Struct.new(
@@ -3315,13 +3838,15 @@ module Aws::QuickSight
       :primary_y_axis_label_options,
       :secondary_y_axis_display_options,
       :secondary_y_axis_label_options,
+      :single_axis_options,
       :color_label_options,
       :legend,
       :bar_data_labels,
       :line_data_labels,
       :tooltip,
       :reference_lines,
-      :visual_palette)
+      :visual_palette,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3759,6 +4284,22 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The context menu options for a visual's interactions.
+    #
+    # @!attribute [rw] availability_status
+    #   The availability status of the context menu options. If the value of
+    #   this property is set to `ENABLED`, dashboard readers can interact
+    #   with the context menu.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ContextMenuOption AWS API Documentation
+    #
+    class ContextMenuOption < Struct.new(
+      :availability_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The contribution analysis visual display for a line, pie, or bar
     # chart.
     #
@@ -3878,11 +4419,13 @@ module Aws::QuickSight
     #
     # @!attribute [rw] authentication_method
     #   The method that you want to use to authenticate your Amazon
-    #   QuickSight account. Currently, the valid values for this parameter
-    #   are `IAM_AND_QUICKSIGHT`, `IAM_ONLY`, and `ACTIVE_DIRECTORY`.
+    #   QuickSight account.
     #
     #   If you choose `ACTIVE_DIRECTORY`, provide an `ActiveDirectoryName`
     #   and an `AdminGroup` associated with your Active Directory.
+    #
+    #   If you choose `IAM_IDENTITY_CENTER`, provide an `AdminGroup`
+    #   associated with your IAM Identity Center account.
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
@@ -3922,38 +4465,56 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] admin_group
-    #   The admin group associated with your Active Directory. This field is
-    #   required if `ACTIVE_DIRECTORY` is the selected authentication method
-    #   of the new Amazon QuickSight account. For more information about
-    #   using Active Directory in Amazon QuickSight, see [Using Active
-    #   Directory with Amazon QuickSight Enterprise Edition][1] in the
-    #   Amazon QuickSight User Guide.
+    #   The admin group associated with your Active Directory or IAM
+    #   Identity Center account. This field is required if
+    #   `ACTIVE_DIRECTORY` or `IAM_IDENTITY_CENTER` is the selected
+    #   authentication method of the new Amazon QuickSight account.
+    #
+    #   For more information about using IAM Identity Center in Amazon
+    #   QuickSight, see [Using IAM Identity Center with Amazon QuickSight
+    #   Enterprise Edition][1] in the Amazon QuickSight User Guide. For more
+    #   information about using Active Directory in Amazon QuickSight, see
+    #   [Using Active Directory with Amazon QuickSight Enterprise
+    #   Edition][2] in the Amazon QuickSight User Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
+    #   [2]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] author_group
-    #   The author group associated with your Active Directory. For more
+    #   The author group associated with your Active Directory or IAM
+    #   Identity Center account.
+    #
+    #   For more information about using IAM Identity Center in Amazon
+    #   QuickSight, see [Using IAM Identity Center with Amazon QuickSight
+    #   Enterprise Edition][1] in the Amazon QuickSight User Guide. For more
     #   information about using Active Directory in Amazon QuickSight, see
     #   [Using Active Directory with Amazon QuickSight Enterprise
-    #   Edition][1] in the Amazon QuickSight User Guide.
+    #   Edition][2] in the Amazon QuickSight User Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
+    #   [2]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] reader_group
-    #   The reader group associated with your Active Direcrtory. For more
+    #   The reader group associated with your Active Directory or IAM
+    #   Identity Center account.
+    #
+    #   For more information about using IAM Identity Center in Amazon
+    #   QuickSight, see [Using IAM Identity Center with Amazon QuickSight
+    #   Enterprise Edition][1] in the Amazon QuickSight User Guide. For more
     #   information about using Active Directory in Amazon QuickSight, see
     #   [Using Active Directory with Amazon QuickSight Enterprise
-    #   Edition][1] in the *Amazon QuickSight User Guide*.
+    #   Edition][2] in the Amazon QuickSight User Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html
+    #   [2]: https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] first_name
@@ -4268,6 +4829,16 @@ module Aws::QuickSight
     #   to these folders.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] link_sharing_configuration
+    #   A structure that contains the permissions of a shareable link to the
+    #   dashboard.
+    #   @return [Types::LinkSharingConfiguration]
+    #
+    # @!attribute [rw] link_entities
+    #   A list of analysis Amazon Resource Names (ARNs) to be linked to the
+    #   dashboard.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateDashboardRequest AWS API Documentation
     #
     class CreateDashboardRequest < Struct.new(
@@ -4283,7 +4854,9 @@ module Aws::QuickSight
       :theme_arn,
       :definition,
       :validation_strategy,
-      :folder_arns)
+      :folder_arns,
+      :link_sharing_configuration,
+      :link_entities)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5098,6 +5671,53 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] member_name
+    #   The name of the group that you want to add to the role.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the Amazon Web Services account that you want to create a
+    #   group in. The Amazon Web Services account ID that you provide must
+    #   be the same Amazon Web Services account that contains your Amazon
+    #   QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace that the role belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The role that you want to add a group to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateRoleMembershipRequest AWS API Documentation
+    #
+    class CreateRoleMembershipRequest < Struct.new(
+      :member_name,
+      :aws_account_id,
+      :namespace,
+      :role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateRoleMembershipResponse AWS API Documentation
+    #
+    class CreateRoleMembershipResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that contains the template
     #   that you creating an alias for.
@@ -5845,12 +6465,17 @@ module Aws::QuickSight
     #   `'IMAGE'`.
     #   @return [String]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CustomContentConfiguration AWS API Documentation
     #
     class CustomContentConfiguration < Struct.new(
       :content_url,
       :content_type,
-      :image_scaling)
+      :image_scaling,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6127,6 +6752,11 @@ module Aws::QuickSight
     #   The last time that this dashboard was updated.
     #   @return [Time]
     #
+    # @!attribute [rw] link_entities
+    #   A list of analysis Amazon Resource Names (ARNs) to be linked to the
+    #   dashboard.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Dashboard AWS API Documentation
     #
     class Dashboard < Struct.new(
@@ -6136,7 +6766,8 @@ module Aws::QuickSight
       :version,
       :created_time,
       :last_published_time,
-      :last_updated_time)
+      :last_updated_time,
+      :link_entities)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6489,6 +7120,10 @@ module Aws::QuickSight
     #   The configuration for default analysis settings.
     #   @return [Types::AnalysisDefaults]
     #
+    # @!attribute [rw] options
+    #   An array of option definitions for a dashboard.
+    #   @return [Types::AssetOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardVersionDefinition AWS API Documentation
     #
     class DashboardVersionDefinition < Struct.new(
@@ -6498,7 +7133,8 @@ module Aws::QuickSight
       :parameter_declarations,
       :filter_groups,
       :column_configurations,
-      :analysis_defaults)
+      :analysis_defaults,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7577,6 +8213,11 @@ module Aws::QuickSight
     #   The parameters that are required to connect to a Trino data source.
     #   @return [Types::TrinoParameters]
     #
+    # @!attribute [rw] big_query_parameters
+    #   The parameters that are required to connect to a Google BigQuery
+    #   data source.
+    #   @return [Types::BigQueryParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSourceParameters AWS API Documentation
     #
     class DataSourceParameters < Struct.new(
@@ -7604,7 +8245,8 @@ module Aws::QuickSight
       :exasol_parameters,
       :databricks_parameters,
       :starburst_parameters,
-      :trino_parameters)
+      :trino_parameters,
+      :big_query_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8965,6 +9607,42 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that you want to delete an
+    #   identity propagation configuration from.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The name of the Amazon Web Services service that you want to delete
+    #   the associated access scopes and authorized targets from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteIdentityPropagationConfigRequest AWS API Documentation
+    #
+    class DeleteIdentityPropagationConfigRequest < Struct.new(
+      :aws_account_id,
+      :service)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteIdentityPropagationConfigResponse AWS API Documentation
+    #
+    class DeleteIdentityPropagationConfigResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID for the Amazon Web Services account that you want to delete
     #   the Amazon QuickSight namespace from.
     #   @return [String]
@@ -9044,6 +9722,94 @@ module Aws::QuickSight
       :request_id,
       :schedule_id,
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] role
+    #   The role that you want to remove permissions from.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the Amazon Web Services account that the group is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
+    #   contains your Amazon QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace that includes the role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteRoleCustomPermissionRequest AWS API Documentation
+    #
+    class DeleteRoleCustomPermissionRequest < Struct.new(
+      :role,
+      :aws_account_id,
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteRoleCustomPermissionResponse AWS API Documentation
+    #
+    class DeleteRoleCustomPermissionResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] member_name
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The role that you want to remove permissions from.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the Amazon Web Services account that you want to create a
+    #   group in. The Amazon Web Services account ID that you provide must
+    #   be the same Amazon Web Services account that contains your Amazon
+    #   QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace that contains the role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteRoleMembershipRequest AWS API Documentation
+    #
+    class DeleteRoleMembershipRequest < Struct.new(
+      :member_name,
+      :role,
+      :aws_account_id,
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteRoleMembershipResponse AWS API Documentation
+    #
+    class DeleteRoleMembershipResponse < Struct.new(
+      :request_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9945,6 +10711,28 @@ module Aws::QuickSight
     #   The HTTP status of the response.
     #   @return [Integer]
     #
+    # @!attribute [rw] include_permissions
+    #   The include permissions flag.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_tags
+    #   The include tags flag.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] validation_strategy
+    #   The validation strategy that is used to export the analysis or
+    #   dashboard.
+    #   @return [Types::AssetBundleExportJobValidationStrategy]
+    #
+    # @!attribute [rw] warnings
+    #   An array of warning records that describe the analysis or dashboard
+    #   that is exported. This array includes UI errors that can be skipped
+    #   during the validation process.
+    #
+    #   This property only appears if `StrictModeForAllResources` in
+    #   `ValidationStrategy` is set to `FALSE`.
+    #   @return [Array<Types::AssetBundleExportJobWarning>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAssetBundleExportJobResponse AWS API Documentation
     #
     class DescribeAssetBundleExportJobResponse < Struct.new(
@@ -9960,8 +10748,12 @@ module Aws::QuickSight
       :export_format,
       :cloud_formation_override_property_configuration,
       :request_id,
-      :status)
-      SENSITIVE = []
+      :status,
+      :include_permissions,
+      :include_tags,
+      :validation_strategy,
+      :warnings)
+      SENSITIVE = [:download_url]
       include Aws::Structure
     end
 
@@ -10041,7 +10833,7 @@ module Aws::QuickSight
     #   @return [Types::AssetBundleImportSourceDescription]
     #
     # @!attribute [rw] override_parameters
-    #   Optional overrides to be applied to the resource configuration
+    #   Optional overrides that are applied to the resource configuration
     #   before import.
     #   @return [Types::AssetBundleImportJobOverrideParameters]
     #
@@ -10057,6 +10849,22 @@ module Aws::QuickSight
     #   The HTTP status of the response.
     #   @return [Integer]
     #
+    # @!attribute [rw] override_permissions
+    #   Optional permission overrides that are applied to the resource
+    #   configuration before import.
+    #   @return [Types::AssetBundleImportJobOverridePermissions]
+    #
+    # @!attribute [rw] override_tags
+    #   Optional tag overrides that are applied to the resource
+    #   configuration before import.
+    #   @return [Types::AssetBundleImportJobOverrideTags]
+    #
+    # @!attribute [rw] override_validation_strategy
+    #   An optional validation strategy override for all analyses and
+    #   dashboards to be applied to the resource configuration before
+    #   import.
+    #   @return [Types::AssetBundleImportJobOverrideValidationStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeAssetBundleImportJobResponse AWS API Documentation
     #
     class DescribeAssetBundleImportJobResponse < Struct.new(
@@ -10071,7 +10879,10 @@ module Aws::QuickSight
       :override_parameters,
       :failure_action,
       :request_id,
-      :status)
+      :status,
+      :override_permissions,
+      :override_tags,
+      :override_validation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11205,6 +12016,53 @@ module Aws::QuickSight
       :status,
       :request_id,
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] role
+    #   The name of the role whose permissions you want described.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the Amazon Web Services account that you want to create a
+    #   group in. The Amazon Web Services account ID that you provide must
+    #   be the same Amazon Web Services account that contains your Amazon
+    #   QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace that contains the role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeRoleCustomPermissionRequest AWS API Documentation
+    #
+    class DescribeRoleCustomPermissionRequest < Struct.new(
+      :role,
+      :aws_account_id,
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_permissions_name
+    #   The name of the custom permission that is described.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeRoleCustomPermissionResponse AWS API Documentation
+    #
+    class DescribeRoleCustomPermissionResponse < Struct.new(
+      :custom_permissions_name,
+      :request_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12611,6 +13469,10 @@ module Aws::QuickSight
     #   The map style options of the filled map visual.
     #   @return [Types::GeospatialMapStyleOptions]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilledMapConfiguration AWS API Documentation
     #
     class FilledMapConfiguration < Struct.new(
@@ -12619,7 +13481,8 @@ module Aws::QuickSight
       :legend,
       :tooltip,
       :window_options,
-      :map_style_options)
+      :map_style_options,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13965,6 +14828,10 @@ module Aws::QuickSight
     #   The visual palette configuration of a `FunnelChartVisual`.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FunnelChartConfiguration AWS API Documentation
     #
     class FunnelChartConfiguration < Struct.new(
@@ -13974,7 +14841,8 @@ module Aws::QuickSight
       :value_label_options,
       :tooltip,
       :data_label_options,
-      :visual_palette)
+      :visual_palette,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14185,6 +15053,10 @@ module Aws::QuickSight
     #   The visual palette configuration of a `GaugeChartVisual`.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GaugeChartConfiguration AWS API Documentation
     #
     class GaugeChartConfiguration < Struct.new(
@@ -14192,7 +15064,8 @@ module Aws::QuickSight
       :gauge_chart_options,
       :data_labels,
       :tooltip_options,
-      :visual_palette)
+      :visual_palette,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14639,6 +15512,10 @@ module Aws::QuickSight
     #   The visual display options for the visual palette.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GeospatialMapConfiguration AWS API Documentation
     #
     class GeospatialMapConfiguration < Struct.new(
@@ -14648,7 +15525,8 @@ module Aws::QuickSight
       :window_options,
       :map_style_options,
       :point_style_options,
-      :visual_palette)
+      :visual_palette,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15354,6 +16232,10 @@ module Aws::QuickSight
     #   The tooltip display setup of the visual.
     #   @return [Types::TooltipOptions]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HeatMapConfiguration AWS API Documentation
     #
     class HeatMapConfiguration < Struct.new(
@@ -15364,7 +16246,8 @@ module Aws::QuickSight
       :color_scale,
       :legend,
       :data_labels,
-      :tooltip)
+      :tooltip,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15543,6 +16426,10 @@ module Aws::QuickSight
     #   The visual palette configuration of a histogram.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/HistogramConfiguration AWS API Documentation
     #
     class HistogramConfiguration < Struct.new(
@@ -15553,7 +16440,8 @@ module Aws::QuickSight
       :bin_options,
       :data_labels,
       :tooltip,
-      :visual_palette)
+      :visual_palette,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15674,6 +16562,21 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The parameters for an IAM Identity Center configuration.
+    #
+    # @!attribute [rw] enable_identity_propagation
+    #   A Boolean option that controls whether Trusted Identity Propagation
+    #   should be used.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/IdentityCenterConfiguration AWS API Documentation
+    #
+    class IdentityCenterConfiguration < Struct.new(
+      :enable_identity_propagation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The identity type specified isn't supported. Supported identity types
     # include `IAM` and `QUICKSIGHT`.
     #
@@ -15782,11 +16685,17 @@ module Aws::QuickSight
     #   The data type of the column.
     #   @return [String]
     #
+    # @!attribute [rw] sub_type
+    #   The sub data type of the column. Sub types are only available for
+    #   decimal columns that are part of a SPICE dataset.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InputColumn AWS API Documentation
     #
     class InputColumn < Struct.new(
       :name,
-      :type)
+      :type,
+      :sub_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15801,11 +16710,16 @@ module Aws::QuickSight
     #   The custom narrative of the insight visual.
     #   @return [Types::CustomNarrativeOptions]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InsightConfiguration AWS API Documentation
     #
     class InsightConfiguration < Struct.new(
       :computations,
-      :custom_narrative)
+      :custom_narrative,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16271,12 +17185,17 @@ module Aws::QuickSight
     #   The options that determine the presentation of a KPI visual.
     #   @return [Types::KPIOptions]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/KPIConfiguration AWS API Documentation
     #
     class KPIConfiguration < Struct.new(
       :field_wells,
       :sort_configuration,
-      :kpi_options)
+      :kpi_options,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16752,6 +17671,10 @@ module Aws::QuickSight
     #   label.
     #   @return [Types::ChartAxisLabelOptions]
     #
+    # @!attribute [rw] single_axis_options
+    #   The settings of a chart's single axis configuration.
+    #   @return [Types::SingleAxisOptions]
+    #
     # @!attribute [rw] default_series_settings
     #   The options that determine the default presentation of all line
     #   series in `LineChartVisual`.
@@ -16785,6 +17708,10 @@ module Aws::QuickSight
     #   The visual palette configuration of a line chart.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/LineChartConfiguration AWS API Documentation
     #
     class LineChartConfiguration < Struct.new(
@@ -16799,6 +17726,7 @@ module Aws::QuickSight
       :primary_y_axis_label_options,
       :secondary_y_axis_display_options,
       :secondary_y_axis_label_options,
+      :single_axis_options,
       :default_series_settings,
       :series,
       :legend,
@@ -16806,7 +17734,8 @@ module Aws::QuickSight
       :reference_lines,
       :tooltip,
       :contribution_analysis_defaults,
-      :visual_palette)
+      :visual_palette,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17850,6 +18779,59 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contain the identity
+    #   propagation configurations of.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListIdentityPropagationConfigsRequest AWS API Documentation
+    #
+    class ListIdentityPropagationConfigsRequest < Struct.new(
+      :aws_account_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] services
+    #   A list of services and their authorized targets that the Amazon
+    #   QuickSight IAM Identity Center application can access.
+    #   @return [Array<Types::AuthorizedTargetsByService>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListIdentityPropagationConfigsResponse AWS API Documentation
+    #
+    class ListIdentityPropagationConfigsResponse < Struct.new(
+      :services,
+      :next_token,
+      :status,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] data_set_id
     #   The ID of the dataset used in the ingestion.
     #   @return [String]
@@ -18007,6 +18989,68 @@ module Aws::QuickSight
       :refresh_schedules,
       :status,
       :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] role
+    #   The name of the role.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the Amazon Web Services account that you want to create a
+    #   group in. The Amazon Web Services account ID that you provide must
+    #   be the same Amazon Web Services account that contains your Amazon
+    #   QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace that includes the role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListRoleMembershipsRequest AWS API Documentation
+    #
+    class ListRoleMembershipsRequest < Struct.new(
+      :role,
+      :next_token,
+      :max_results,
+      :aws_account_id,
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] members_list
+    #   The list of groups associated with a role
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListRoleMembershipsResponse AWS API Documentation
+    #
+    class ListRoleMembershipsResponse < Struct.new(
+      :members_list,
+      :next_token,
+      :request_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19728,7 +20772,7 @@ module Aws::QuickSight
     # Output column.
     #
     # @!attribute [rw] name
-    #   A display name for the dataset.
+    #   The display name of the column..
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -19736,7 +20780,11 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type.
+    #   The data type of the column.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub_type
+    #   The sub data type of the column.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OutputColumn AWS API Documentation
@@ -19744,7 +20792,8 @@ module Aws::QuickSight
     class OutputColumn < Struct.new(
       :name,
       :description,
-      :type)
+      :type,
+      :sub_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20489,6 +21538,10 @@ module Aws::QuickSight
     #   visual.
     #   @return [Array<Types::ContributionAnalysisDefault>]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PieChartConfiguration AWS API Documentation
     #
     class PieChartConfiguration < Struct.new(
@@ -20502,7 +21555,8 @@ module Aws::QuickSight
       :data_labels,
       :tooltip,
       :visual_palette,
-      :contribution_analysis_defaults)
+      :contribution_analysis_defaults,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20761,6 +21815,10 @@ module Aws::QuickSight
     #   The paginated report options for a pivot table visual.
     #   @return [Types::PivotTablePaginatedReportOptions]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/PivotTableConfiguration AWS API Documentation
     #
     class PivotTableConfiguration < Struct.new(
@@ -20769,7 +21827,8 @@ module Aws::QuickSight
       :table_options,
       :total_options,
       :field_options,
-      :paginated_report_options)
+      :paginated_report_options,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21517,6 +22576,10 @@ module Aws::QuickSight
     #   The axis behavior options of a radar chart.
     #   @return [String]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RadarChartConfiguration AWS API Documentation
     #
     class RadarChartConfiguration < Struct.new(
@@ -21534,7 +22597,8 @@ module Aws::QuickSight
       :color_axis,
       :color_label_options,
       :legend,
-      :axes_range_scale)
+      :axes_range_scale,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21774,6 +22838,14 @@ module Aws::QuickSight
     #   [1]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DataSourceCredentials.html
     #   @return [Types::RedshiftIAMParameters]
     #
+    # @!attribute [rw] identity_center_configuration
+    #   An optional parameter that configures IAM Identity Center
+    #   authentication to grant Amazon QuickSight access to your cluster.
+    #
+    #   This parameter can only be specified if your Amazon QuickSight
+    #   account is configured with IAM Identity Center.
+    #   @return [Types::IdentityCenterConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RedshiftParameters AWS API Documentation
     #
     class RedshiftParameters < Struct.new(
@@ -21781,7 +22853,8 @@ module Aws::QuickSight
       :port,
       :database,
       :cluster_id,
-      :iam_parameters)
+      :iam_parameters,
+      :identity_center_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23170,12 +24243,17 @@ module Aws::QuickSight
     #   The data label configuration of a sankey diagram.
     #   @return [Types::DataLabelOptions]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SankeyDiagramChartConfiguration AWS API Documentation
     #
     class SankeyDiagramChartConfiguration < Struct.new(
       :field_wells,
       :sort_configuration,
-      :data_labels)
+      :data_labels,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23308,6 +24386,10 @@ module Aws::QuickSight
     #   The field wells of the visual.
     #   @return [Types::ScatterPlotFieldWells]
     #
+    # @!attribute [rw] sort_configuration
+    #   The sort configuration of a scatter plot.
+    #   @return [Types::ScatterPlotSortConfiguration]
+    #
     # @!attribute [rw] x_axis_label_options
     #   The label options (label text, label visibility, and sort icon
     #   visibility) of the scatter plot's x-axis.
@@ -23344,10 +24426,15 @@ module Aws::QuickSight
     #   The palette (chart color) display setup of the visual.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ScatterPlotConfiguration AWS API Documentation
     #
     class ScatterPlotConfiguration < Struct.new(
       :field_wells,
+      :sort_configuration,
       :x_axis_label_options,
       :x_axis_display_options,
       :y_axis_label_options,
@@ -23355,7 +24442,8 @@ module Aws::QuickSight
       :legend,
       :data_labels,
       :tooltip,
-      :visual_palette)
+      :visual_palette,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23381,6 +24469,20 @@ module Aws::QuickSight
     class ScatterPlotFieldWells < Struct.new(
       :scatter_plot_categorically_aggregated_field_wells,
       :scatter_plot_unaggregated_field_wells)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The sort configuration of a scatter plot.
+    #
+    # @!attribute [rw] scatter_plot_limit_configuration
+    #   The limit configuration of the visual display for an axis.
+    #   @return [Types::ItemsLimitConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ScatterPlotSortConfiguration AWS API Documentation
+    #
+    class ScatterPlotSortConfiguration < Struct.new(
+      :scatter_plot_limit_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24591,6 +25693,20 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The settings of a chart's single axis configuration.
+    #
+    # @!attribute [rw] y_axis_options
+    #   The Y axis options of a single axis configuration.
+    #   @return [Types::YAxisOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SingleAxisOptions AWS API Documentation
+    #
+    class SingleAxisOptions < Struct.new(
+      :y_axis_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The display options of a control.
     #
     # @!attribute [rw] title_options
@@ -25196,6 +26312,27 @@ module Aws::QuickSight
     #   `CLOUDFORMATION_JSON`.
     #   @return [Types::AssetBundleCloudFormationOverridePropertyConfiguration]
     #
+    # @!attribute [rw] include_permissions
+    #   A Boolean that determines whether all permissions for each resource
+    #   ARN are exported with the job. If you set `IncludePermissions` to
+    #   `TRUE`, any permissions associated with each resource are exported.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_tags
+    #   A Boolean that determines whether all tags for each resource ARN are
+    #   exported with the job. If you set `IncludeTags` to `TRUE`, any tags
+    #   associated with each resource are exported.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] validation_strategy
+    #   An optional parameter that determines which validation strategy to
+    #   use for the export job. If `StrictModeForAllResources` is set to
+    #   `TRUE`, strict validation for every error is enforced. If it is set
+    #   to `FALSE`, validation is skipped for specific UI errors that are
+    #   shown as warnings. The default value for `StrictModeForAllResources`
+    #   is `FALSE`.
+    #   @return [Types::AssetBundleExportJobValidationStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartAssetBundleExportJobRequest AWS API Documentation
     #
     class StartAssetBundleExportJobRequest < Struct.new(
@@ -25204,7 +26341,10 @@ module Aws::QuickSight
       :resource_arns,
       :include_all_dependencies,
       :export_format,
-      :cloud_formation_override_property_configuration)
+      :cloud_formation_override_property_configuration,
+      :include_permissions,
+      :include_tags,
+      :validation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25252,7 +26392,7 @@ module Aws::QuickSight
     #   @return [Types::AssetBundleImportSource]
     #
     # @!attribute [rw] override_parameters
-    #   Optional overrides to be applied to the resource configuration
+    #   Optional overrides that are applied to the resource configuration
     #   before import.
     #   @return [Types::AssetBundleImportJobOverrideParameters]
     #
@@ -25267,6 +26407,22 @@ module Aws::QuickSight
     #   keeping the Amazon QuickSight account in an inconsistent state.
     #   @return [String]
     #
+    # @!attribute [rw] override_permissions
+    #   Optional permission overrides that are applied to the resource
+    #   configuration before import.
+    #   @return [Types::AssetBundleImportJobOverridePermissions]
+    #
+    # @!attribute [rw] override_tags
+    #   Optional tag overrides that are applied to the resource
+    #   configuration before import.
+    #   @return [Types::AssetBundleImportJobOverrideTags]
+    #
+    # @!attribute [rw] override_validation_strategy
+    #   An optional validation strategy override for all analyses and
+    #   dashboards that is applied to the resource configuration before
+    #   import.
+    #   @return [Types::AssetBundleImportJobOverrideValidationStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/StartAssetBundleImportJobRequest AWS API Documentation
     #
     class StartAssetBundleImportJobRequest < Struct.new(
@@ -25274,7 +26430,10 @@ module Aws::QuickSight
       :asset_bundle_import_job_id,
       :asset_bundle_import_source,
       :override_parameters,
-      :failure_action)
+      :failure_action,
+      :override_permissions,
+      :override_tags,
+      :override_validation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25801,6 +26960,10 @@ module Aws::QuickSight
     #   A collection of inline visualizations to display within a chart.
     #   @return [Array<Types::TableInlineVisualization>]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TableConfiguration AWS API Documentation
     #
     class TableConfiguration < Struct.new(
@@ -25810,7 +26973,8 @@ module Aws::QuickSight
       :total_options,
       :field_options,
       :paginated_report_options,
-      :table_inline_visualizations)
+      :table_inline_visualizations,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26635,6 +27799,10 @@ module Aws::QuickSight
     #   The configuration for default analysis settings.
     #   @return [Types::AnalysisDefaults]
     #
+    # @!attribute [rw] options
+    #   An array of option definitions for a template.
+    #   @return [Types::AssetOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TemplateVersionDefinition AWS API Documentation
     #
     class TemplateVersionDefinition < Struct.new(
@@ -26644,7 +27812,8 @@ module Aws::QuickSight
       :parameter_declarations,
       :filter_groups,
       :column_configurations,
-      :analysis_defaults)
+      :analysis_defaults,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27819,6 +28988,10 @@ module Aws::QuickSight
     #   The description of the topic.
     #   @return [String]
     #
+    # @!attribute [rw] user_experience_version
+    #   The user experience version of a topic.
+    #   @return [String]
+    #
     # @!attribute [rw] data_sets
     #   The data sets that the topic is associated with.
     #   @return [Array<Types::DatasetMetadata>]
@@ -27828,6 +29001,7 @@ module Aws::QuickSight
     class TopicDetails < Struct.new(
       :name,
       :description,
+      :user_experience_version,
       :data_sets)
       SENSITIVE = []
       include Aws::Structure
@@ -28405,6 +29579,10 @@ module Aws::QuickSight
     #   The tooltip display setup of the visual.
     #   @return [Types::TooltipOptions]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TreeMapConfiguration AWS API Documentation
     #
     class TreeMapConfiguration < Struct.new(
@@ -28416,7 +29594,8 @@ module Aws::QuickSight
       :color_scale,
       :legend,
       :data_labels,
-      :tooltip)
+      :tooltip,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29120,6 +30299,58 @@ module Aws::QuickSight
 
     # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that contains the
+    #   dashboard whose links you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] dashboard_id
+    #   The ID for the dashboard.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_entities
+    #   list of analysis Amazon Resource Names (ARNs) to be linked to the
+    #   dashboard.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDashboardLinksRequest AWS API Documentation
+    #
+    class UpdateDashboardLinksRequest < Struct.new(
+      :aws_account_id,
+      :dashboard_id,
+      :link_entities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dashboard_arn
+    #   The Amazon Resource Name (ARN) of the dashboard.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_entities
+    #   A list of analysis Amazon Resource Names (ARNs) to be linked to the
+    #   dashboard.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDashboardLinksResponse AWS API Documentation
+    #
+    class UpdateDashboardLinksResponse < Struct.new(
+      :request_id,
+      :status,
+      :dashboard_arn,
+      :link_entities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the
     #   dashboard whose permissions you're updating.
     #   @return [String]
     #
@@ -29705,11 +30936,13 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] grant_permissions
-    #   The permissions that you want to grant on a resource.
+    #   The permissions that you want to grant on a resource. Namespace ARNs
+    #   are not supported `Principal` values for folder permissions.
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] revoke_permissions
-    #   The permissions that you want to revoke from a resource.
+    #   The permissions that you want to revoke from a resource. Namespace
+    #   ARNs are not supported `Principal` values for folder permissions.
     #   @return [Array<Types::ResourcePermission>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateFolderPermissionsRequest AWS API Documentation
@@ -29960,6 +31193,48 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account that contains the identity
+    #   propagation configuration that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The name of the Amazon Web Services service that contains the
+    #   authorized targets that you want to add or update.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorized_targets
+    #   Specifies a list of application ARNs that represent the authorized
+    #   targets for a service.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateIdentityPropagationConfigRequest AWS API Documentation
+    #
+    class UpdateIdentityPropagationConfigRequest < Struct.new(
+      :aws_account_id,
+      :service,
+      :authorized_targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateIdentityPropagationConfigResponse AWS API Documentation
+    #
+    class UpdateIdentityPropagationConfigResponse < Struct.new(
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
     #   The ID of the Amazon Web Services account that contains the IP
     #   rules.
     #   @return [String]
@@ -30087,6 +31362,54 @@ module Aws::QuickSight
       :request_id,
       :schedule_id,
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_permissions_name
+    #   The name of the custom permission that you want to update the role
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The name of role tht you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the Amazon Web Services account that you want to create a
+    #   group in. The Amazon Web Services account ID that you provide must
+    #   be the same Amazon Web Services account that contains your Amazon
+    #   QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace that contains the role that you want to update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateRoleCustomPermissionRequest AWS API Documentation
+    #
+    class UpdateRoleCustomPermissionRequest < Struct.new(
+      :custom_permissions_name,
+      :role,
+      :aws_account_id,
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateRoleCustomPermissionResponse AWS API Documentation
+    #
+    class UpdateRoleCustomPermissionResponse < Struct.new(
+      :request_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31181,7 +32504,7 @@ module Aws::QuickSight
     # specific errors.
     #
     # @!attribute [rw] mode
-    #   The mode of validation for the asset to be creaed or updated. When
+    #   The mode of validation for the asset to be created or updated. When
     #   you set this value to `STRICT`, strict validation for every error is
     #   enforced. When you set this value to `LENIENT`, validation is
     #   skipped for specific UI errors.
@@ -31583,6 +32906,25 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The general visual interactions setup for visual publish options
+    #
+    # @!attribute [rw] visual_menu_option
+    #   The on-visual menu options for a visual.
+    #   @return [Types::VisualMenuOption]
+    #
+    # @!attribute [rw] context_menu_option
+    #   The context menu options for a visual.
+    #   @return [Types::ContextMenuOption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/VisualInteractionOptions AWS API Documentation
+    #
+    class VisualInteractionOptions < Struct.new(
+      :visual_menu_option,
+      :context_menu_option)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The menu options for a visual.
     #
     # @!attribute [rw] availability_status
@@ -31694,6 +33036,21 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # The color configuration of a waterfall visual.
+    #
+    # @!attribute [rw] group_color_configuration
+    #   The color configuration for individual groups within a waterfall
+    #   visual.
+    #   @return [Types::WaterfallChartGroupColorConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/WaterfallChartColorConfiguration AWS API Documentation
+    #
+    class WaterfallChartColorConfiguration < Struct.new(
+      :group_color_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for a waterfall visual.
     #
     # @!attribute [rw] field_wells
@@ -31737,6 +33094,14 @@ module Aws::QuickSight
     #   The visual palette configuration of a waterfall visual.
     #   @return [Types::VisualPalette]
     #
+    # @!attribute [rw] color_configuration
+    #   The color configuration of a waterfall visual.
+    #   @return [Types::WaterfallChartColorConfiguration]
+    #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/WaterfallChartConfiguration AWS API Documentation
     #
     class WaterfallChartConfiguration < Struct.new(
@@ -31749,7 +33114,9 @@ module Aws::QuickSight
       :primary_y_axis_display_options,
       :legend,
       :data_labels,
-      :visual_palette)
+      :visual_palette,
+      :color_configuration,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31764,6 +33131,31 @@ module Aws::QuickSight
     #
     class WaterfallChartFieldWells < Struct.new(
       :waterfall_chart_aggregated_field_wells)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The color configuration for individual groups within a waterfall
+    # visual.
+    #
+    # @!attribute [rw] positive_bar_color
+    #   Defines the color for the positive bars of a waterfall chart.
+    #   @return [String]
+    #
+    # @!attribute [rw] negative_bar_color
+    #   Defines the color for the negative bars of a waterfall chart.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_bar_color
+    #   Defines the color for the total bars of a waterfall chart.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/WaterfallChartGroupColorConfiguration AWS API Documentation
+    #
+    class WaterfallChartGroupColorConfiguration < Struct.new(
+      :positive_bar_color,
+      :negative_bar_color,
+      :total_bar_color)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31935,13 +33327,18 @@ module Aws::QuickSight
     #   The options for a word cloud visual.
     #   @return [Types::WordCloudOptions]
     #
+    # @!attribute [rw] interactions
+    #   The general visual interactions setup for a visual.
+    #   @return [Types::VisualInteractionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/WordCloudChartConfiguration AWS API Documentation
     #
     class WordCloudChartConfiguration < Struct.new(
       :field_wells,
       :sort_configuration,
       :category_label_options,
-      :word_cloud_options)
+      :word_cloud_options,
+      :interactions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32071,6 +33468,23 @@ module Aws::QuickSight
       :chart_configuration,
       :actions,
       :column_hierarchies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options that are available for a single Y axis in a chart.
+    #
+    # @!attribute [rw] y_axis
+    #   The Y axis type to be used in the chart.
+    #
+    #   If you choose `PRIMARY_Y_AXIS`, the primary Y Axis is located on the
+    #   leftmost vertical axis of the chart.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/YAxisOptions AWS API Documentation
+    #
+    class YAxisOptions < Struct.new(
+      :y_axis)
       SENSITIVE = []
       include Aws::Structure
     end

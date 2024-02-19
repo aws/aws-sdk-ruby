@@ -1,0 +1,67 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ServiceQuotas
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AWSServiceAccessNotEnabledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DependencyAccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IllegalArgumentException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidPaginationTokenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidResourceStateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoAvailableOrganizationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchResourceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OrganizationNotInAllFeaturesModeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class QuotaExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceQuotaTemplateNotInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TagPolicyViolationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TemplatesNotAvailableInRegionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyRequestsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

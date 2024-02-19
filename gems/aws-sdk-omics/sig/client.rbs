@@ -1,0 +1,1582 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Omics
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AbortMultipartReadSetUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AbortMultipartReadSetUploadResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#abort_multipart_read_set_upload-instance_method
+      def abort_multipart_read_set_upload: (
+                                             sequence_store_id: ::String,
+                                             upload_id: ::String
+                                           ) -> _AbortMultipartReadSetUploadResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AbortMultipartReadSetUploadResponseSuccess
+
+      interface _AcceptShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptShareResponse]
+        def status: () -> ("PENDING" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#accept_share-instance_method
+      def accept_share: (
+                          share_id: ::String
+                        ) -> _AcceptShareResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptShareResponseSuccess
+
+      interface _BatchDeleteReadSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteReadSetResponse]
+        def errors: () -> ::Array[Types::ReadSetBatchError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#batch_delete_read_set-instance_method
+      def batch_delete_read_set: (
+                                   ids: Array[::String],
+                                   sequence_store_id: ::String
+                                 ) -> _BatchDeleteReadSetResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteReadSetResponseSuccess
+
+      interface _CancelAnnotationImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelAnnotationImportResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#cancel_annotation_import_job-instance_method
+      def cancel_annotation_import_job: (
+                                          job_id: ::String
+                                        ) -> _CancelAnnotationImportJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelAnnotationImportJobResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#cancel_run-instance_method
+      def cancel_run: (
+                        id: ::String
+                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CancelVariantImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelVariantImportResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#cancel_variant_import_job-instance_method
+      def cancel_variant_import_job: (
+                                       job_id: ::String
+                                     ) -> _CancelVariantImportJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelVariantImportJobResponseSuccess
+
+      interface _CompleteMultipartReadSetUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CompleteMultipartReadSetUploadResponse]
+        def read_set_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#complete_multipart_read_set_upload-instance_method
+      def complete_multipart_read_set_upload: (
+                                                sequence_store_id: ::String,
+                                                upload_id: ::String,
+                                                parts: Array[
+                                                  {
+                                                    part_number: ::Integer,
+                                                    part_source: ("SOURCE1" | "SOURCE2"),
+                                                    checksum: ::String
+                                                  },
+                                                ]
+                                              ) -> _CompleteMultipartReadSetUploadResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CompleteMultipartReadSetUploadResponseSuccess
+
+      interface _CreateAnnotationStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAnnotationStoreResponse]
+        def id: () -> ::String
+        def reference: () -> Types::ReferenceItem
+        def store_format: () -> ("GFF" | "TSV" | "VCF")
+        def store_options: () -> Types::StoreOptions
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+        def name: () -> ::String
+        def version_name: () -> ::String
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#create_annotation_store-instance_method
+      def create_annotation_store: (
+                                     ?reference: {
+                                       reference_arn: ::String?
+                                     },
+                                     ?name: ::String,
+                                     ?description: ::String,
+                                     ?tags: Hash[::String, ::String],
+                                     ?version_name: ::String,
+                                     ?sse_config: {
+                                       type: ("KMS"),
+                                       key_arn: ::String?
+                                     },
+                                     store_format: ("GFF" | "TSV" | "VCF"),
+                                     ?store_options: {
+                                       tsv_store_options: {
+                                         annotation_type: ("GENERIC" | "CHR_POS" | "CHR_POS_REF_ALT" | "CHR_START_END_ONE_BASE" | "CHR_START_END_REF_ALT_ONE_BASE" | "CHR_START_END_ZERO_BASE" | "CHR_START_END_REF_ALT_ZERO_BASE")?,
+                                         format_to_header: Hash[("CHR" | "START" | "END" | "REF" | "ALT" | "POS"), ::String]?,
+                                         schema: Array[
+                                           Hash[::String, ("LONG" | "INT" | "STRING" | "FLOAT" | "DOUBLE" | "BOOLEAN")],
+                                         ]?
+                                       }?
+                                     }
+                                   ) -> _CreateAnnotationStoreResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAnnotationStoreResponseSuccess
+
+      interface _CreateAnnotationStoreVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAnnotationStoreVersionResponse]
+        def id: () -> ::String
+        def version_name: () -> ::String
+        def store_id: () -> ::String
+        def version_options: () -> Types::VersionOptions
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#create_annotation_store_version-instance_method
+      def create_annotation_store_version: (
+                                             name: ::String,
+                                             version_name: ::String,
+                                             ?description: ::String,
+                                             ?version_options: {
+                                               tsv_version_options: {
+                                                 annotation_type: ("GENERIC" | "CHR_POS" | "CHR_POS_REF_ALT" | "CHR_START_END_ONE_BASE" | "CHR_START_END_REF_ALT_ONE_BASE" | "CHR_START_END_ZERO_BASE" | "CHR_START_END_REF_ALT_ZERO_BASE")?,
+                                                 format_to_header: Hash[("CHR" | "START" | "END" | "REF" | "ALT" | "POS"), ::String]?,
+                                                 schema: Array[
+                                                   Hash[::String, ("LONG" | "INT" | "STRING" | "FLOAT" | "DOUBLE" | "BOOLEAN")],
+                                                 ]?
+                                               }?
+                                             },
+                                             ?tags: Hash[::String, ::String]
+                                           ) -> _CreateAnnotationStoreVersionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAnnotationStoreVersionResponseSuccess
+
+      interface _CreateMultipartReadSetUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMultipartReadSetUploadResponse]
+        def sequence_store_id: () -> ::String
+        def upload_id: () -> ::String
+        def source_file_type: () -> ("FASTQ" | "BAM" | "CRAM" | "UBAM")
+        def subject_id: () -> ::String
+        def sample_id: () -> ::String
+        def generated_from: () -> ::String
+        def reference_arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#create_multipart_read_set_upload-instance_method
+      def create_multipart_read_set_upload: (
+                                              sequence_store_id: ::String,
+                                              ?client_token: ::String,
+                                              source_file_type: ("FASTQ" | "BAM" | "CRAM" | "UBAM"),
+                                              subject_id: ::String,
+                                              sample_id: ::String,
+                                              ?generated_from: ::String,
+                                              ?reference_arn: ::String,
+                                              name: ::String,
+                                              ?description: ::String,
+                                              ?tags: Hash[::String, ::String]
+                                            ) -> _CreateMultipartReadSetUploadResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMultipartReadSetUploadResponseSuccess
+
+      interface _CreateReferenceStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReferenceStoreResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def sse_config: () -> Types::SseConfig
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#create_reference_store-instance_method
+      def create_reference_store: (
+                                    name: ::String,
+                                    ?description: ::String,
+                                    ?sse_config: {
+                                      type: ("KMS"),
+                                      key_arn: ::String?
+                                    },
+                                    ?tags: Hash[::String, ::String],
+                                    ?client_token: ::String
+                                  ) -> _CreateReferenceStoreResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReferenceStoreResponseSuccess
+
+      interface _CreateRunGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRunGroupResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#create_run_group-instance_method
+      def create_run_group: (
+                              ?name: ::String,
+                              ?max_cpus: ::Integer,
+                              ?max_runs: ::Integer,
+                              ?max_duration: ::Integer,
+                              ?tags: Hash[::String, ::String],
+                              request_id: ::String,
+                              ?max_gpus: ::Integer
+                            ) -> _CreateRunGroupResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRunGroupResponseSuccess
+
+      interface _CreateSequenceStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSequenceStoreResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def sse_config: () -> Types::SseConfig
+        def creation_time: () -> ::Time
+        def fallback_location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#create_sequence_store-instance_method
+      def create_sequence_store: (
+                                   name: ::String,
+                                   ?description: ::String,
+                                   ?sse_config: {
+                                     type: ("KMS"),
+                                     key_arn: ::String?
+                                   },
+                                   ?tags: Hash[::String, ::String],
+                                   ?client_token: ::String,
+                                   ?fallback_location: ::String
+                                 ) -> _CreateSequenceStoreResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSequenceStoreResponseSuccess
+
+      interface _CreateShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateShareResponse]
+        def share_id: () -> ::String
+        def status: () -> ("PENDING" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED")
+        def share_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#create_share-instance_method
+      def create_share: (
+                          resource_arn: ::String,
+                          principal_subscriber: ::String,
+                          ?share_name: ::String
+                        ) -> _CreateShareResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateShareResponseSuccess
+
+      interface _CreateVariantStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVariantStoreResponse]
+        def id: () -> ::String
+        def reference: () -> Types::ReferenceItem
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+        def name: () -> ::String
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#create_variant_store-instance_method
+      def create_variant_store: (
+                                  reference: {
+                                    reference_arn: ::String?
+                                  },
+                                  ?name: ::String,
+                                  ?description: ::String,
+                                  ?tags: Hash[::String, ::String],
+                                  ?sse_config: {
+                                    type: ("KMS"),
+                                    key_arn: ::String?
+                                  }
+                                ) -> _CreateVariantStoreResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVariantStoreResponseSuccess
+
+      interface _CreateWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkflowResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETED" | "FAILED" | "INACTIVE")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#create_workflow-instance_method
+      def create_workflow: (
+                             ?name: ::String,
+                             ?description: ::String,
+                             ?engine: ("WDL" | "NEXTFLOW" | "CWL"),
+                             ?definition_zip: ::String,
+                             ?definition_uri: ::String,
+                             ?main: ::String,
+                             ?parameter_template: Hash[::String, {
+                                 description: ::String?,
+                                 optional: bool?
+                               }],
+                             ?storage_capacity: ::Integer,
+                             ?tags: Hash[::String, ::String],
+                             request_id: ::String,
+                             ?accelerators: ("GPU")
+                           ) -> _CreateWorkflowResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowResponseSuccess
+
+      interface _DeleteAnnotationStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAnnotationStoreResponse]
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#delete_annotation_store-instance_method
+      def delete_annotation_store: (
+                                     name: ::String,
+                                     ?force: bool
+                                   ) -> _DeleteAnnotationStoreResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAnnotationStoreResponseSuccess
+
+      interface _DeleteAnnotationStoreVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAnnotationStoreVersionsResponse]
+        def errors: () -> ::Array[Types::VersionDeleteError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#delete_annotation_store_versions-instance_method
+      def delete_annotation_store_versions: (
+                                              name: ::String,
+                                              versions: Array[::String],
+                                              ?force: bool
+                                            ) -> _DeleteAnnotationStoreVersionsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAnnotationStoreVersionsResponseSuccess
+
+      interface _DeleteReferenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReferenceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#delete_reference-instance_method
+      def delete_reference: (
+                              id: ::String,
+                              reference_store_id: ::String
+                            ) -> _DeleteReferenceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReferenceResponseSuccess
+
+      interface _DeleteReferenceStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReferenceStoreResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#delete_reference_store-instance_method
+      def delete_reference_store: (
+                                    id: ::String
+                                  ) -> _DeleteReferenceStoreResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReferenceStoreResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#delete_run-instance_method
+      def delete_run: (
+                        id: ::String
+                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#delete_run_group-instance_method
+      def delete_run_group: (
+                              id: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteSequenceStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSequenceStoreResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#delete_sequence_store-instance_method
+      def delete_sequence_store: (
+                                   id: ::String
+                                 ) -> _DeleteSequenceStoreResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSequenceStoreResponseSuccess
+
+      interface _DeleteShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteShareResponse]
+        def status: () -> ("PENDING" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#delete_share-instance_method
+      def delete_share: (
+                          share_id: ::String
+                        ) -> _DeleteShareResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteShareResponseSuccess
+
+      interface _DeleteVariantStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVariantStoreResponse]
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#delete_variant_store-instance_method
+      def delete_variant_store: (
+                                  name: ::String,
+                                  ?force: bool
+                                ) -> _DeleteVariantStoreResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVariantStoreResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#delete_workflow-instance_method
+      def delete_workflow: (
+                             id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetAnnotationImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAnnotationImportResponse]
+        def id: () -> ::String
+        def destination_name: () -> ::String
+        def version_name: () -> ::String
+        def role_arn: () -> ::String
+        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")
+        def status_message: () -> ::String
+        def creation_time: () -> ::Time
+        def update_time: () -> ::Time
+        def completion_time: () -> ::Time
+        def items: () -> ::Array[Types::AnnotationImportItemDetail]
+        def run_left_normalization: () -> bool
+        def format_options: () -> Types::FormatOptions
+        def annotation_fields: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_annotation_import_job-instance_method
+      def get_annotation_import_job: (
+                                       job_id: ::String
+                                     ) -> _GetAnnotationImportJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAnnotationImportJobResponseSuccess
+
+      interface _GetAnnotationStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAnnotationStoreResponse]
+        def id: () -> ::String
+        def reference: () -> Types::ReferenceItem
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+        def store_arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def sse_config: () -> Types::SseConfig
+        def creation_time: () -> ::Time
+        def update_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+        def store_options: () -> Types::StoreOptions
+        def store_format: () -> ("GFF" | "TSV" | "VCF")
+        def status_message: () -> ::String
+        def store_size_bytes: () -> ::Integer
+        def num_versions: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_annotation_store-instance_method
+      def get_annotation_store: (
+                                  name: ::String
+                                ) -> _GetAnnotationStoreResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAnnotationStoreResponseSuccess
+
+      interface _GetAnnotationStoreVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAnnotationStoreVersionResponse]
+        def store_id: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+        def version_arn: () -> ::String
+        def name: () -> ::String
+        def version_name: () -> ::String
+        def description: () -> ::String
+        def creation_time: () -> ::Time
+        def update_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+        def version_options: () -> Types::VersionOptions
+        def status_message: () -> ::String
+        def version_size_bytes: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_annotation_store_version-instance_method
+      def get_annotation_store_version: (
+                                          name: ::String,
+                                          version_name: ::String
+                                        ) -> _GetAnnotationStoreVersionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAnnotationStoreVersionResponseSuccess
+
+      interface _GetReadSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReadSetResponse]
+        def payload: () -> ::IO
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_read_set-instance_method
+      def get_read_set: (
+                          id: ::String,
+                          sequence_store_id: ::String,
+                          ?file: ("SOURCE1" | "SOURCE2" | "INDEX"),
+                          part_number: ::Integer
+                        ) ?{ (*untyped) -> void } -> _GetReadSetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetReadSetResponseSuccess
+
+      interface _GetReadSetActivationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReadSetActivationJobResponse]
+        def id: () -> ::String
+        def sequence_store_id: () -> ::String
+        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+        def status_message: () -> ::String
+        def creation_time: () -> ::Time
+        def completion_time: () -> ::Time
+        def sources: () -> ::Array[Types::ActivateReadSetSourceItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_read_set_activation_job-instance_method
+      def get_read_set_activation_job: (
+                                         id: ::String,
+                                         sequence_store_id: ::String
+                                       ) -> _GetReadSetActivationJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReadSetActivationJobResponseSuccess
+
+      interface _GetReadSetExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReadSetExportJobResponse]
+        def id: () -> ::String
+        def sequence_store_id: () -> ::String
+        def destination: () -> ::String
+        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+        def status_message: () -> ::String
+        def creation_time: () -> ::Time
+        def completion_time: () -> ::Time
+        def read_sets: () -> ::Array[Types::ExportReadSetDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_read_set_export_job-instance_method
+      def get_read_set_export_job: (
+                                     sequence_store_id: ::String,
+                                     id: ::String
+                                   ) -> _GetReadSetExportJobResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReadSetExportJobResponseSuccess
+
+      interface _GetReadSetImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReadSetImportJobResponse]
+        def id: () -> ::String
+        def sequence_store_id: () -> ::String
+        def role_arn: () -> ::String
+        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+        def status_message: () -> ::String
+        def creation_time: () -> ::Time
+        def completion_time: () -> ::Time
+        def sources: () -> ::Array[Types::ImportReadSetSourceItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_read_set_import_job-instance_method
+      def get_read_set_import_job: (
+                                     id: ::String,
+                                     sequence_store_id: ::String
+                                   ) -> _GetReadSetImportJobResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReadSetImportJobResponseSuccess
+
+      interface _GetReadSetMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReadSetMetadataResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def sequence_store_id: () -> ::String
+        def subject_id: () -> ::String
+        def sample_id: () -> ::String
+        def status: () -> ("ARCHIVED" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "PROCESSING_UPLOAD" | "UPLOAD_FAILED")
+        def name: () -> ::String
+        def description: () -> ::String
+        def file_type: () -> ("FASTQ" | "BAM" | "CRAM" | "UBAM")
+        def creation_time: () -> ::Time
+        def sequence_information: () -> Types::SequenceInformation
+        def reference_arn: () -> ::String
+        def files: () -> Types::ReadSetFiles
+        def status_message: () -> ::String
+        def creation_type: () -> ("IMPORT" | "UPLOAD")
+        def etag: () -> Types::ETag
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_read_set_metadata-instance_method
+      def get_read_set_metadata: (
+                                   id: ::String,
+                                   sequence_store_id: ::String
+                                 ) -> _GetReadSetMetadataResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReadSetMetadataResponseSuccess
+
+      interface _GetReferenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReferenceResponse]
+        def payload: () -> ::IO
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_reference-instance_method
+      def get_reference: (
+                           id: ::String,
+                           reference_store_id: ::String,
+                           ?range: ::String,
+                           part_number: ::Integer,
+                           ?file: ("SOURCE" | "INDEX")
+                         ) ?{ (*untyped) -> void } -> _GetReferenceResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetReferenceResponseSuccess
+
+      interface _GetReferenceImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReferenceImportJobResponse]
+        def id: () -> ::String
+        def reference_store_id: () -> ::String
+        def role_arn: () -> ::String
+        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+        def status_message: () -> ::String
+        def creation_time: () -> ::Time
+        def completion_time: () -> ::Time
+        def sources: () -> ::Array[Types::ImportReferenceSourceItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_reference_import_job-instance_method
+      def get_reference_import_job: (
+                                      id: ::String,
+                                      reference_store_id: ::String
+                                    ) -> _GetReferenceImportJobResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReferenceImportJobResponseSuccess
+
+      interface _GetReferenceMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReferenceMetadataResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def reference_store_id: () -> ::String
+        def md5: () -> ::String
+        def status: () -> ("ACTIVE" | "DELETING" | "DELETED")
+        def name: () -> ::String
+        def description: () -> ::String
+        def creation_time: () -> ::Time
+        def update_time: () -> ::Time
+        def files: () -> Types::ReferenceFiles
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_reference_metadata-instance_method
+      def get_reference_metadata: (
+                                    id: ::String,
+                                    reference_store_id: ::String
+                                  ) -> _GetReferenceMetadataResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReferenceMetadataResponseSuccess
+
+      interface _GetReferenceStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReferenceStoreResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def sse_config: () -> Types::SseConfig
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_reference_store-instance_method
+      def get_reference_store: (
+                                 id: ::String
+                               ) -> _GetReferenceStoreResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReferenceStoreResponseSuccess
+
+      interface _GetRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRunResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("PENDING" | "STARTING" | "RUNNING" | "STOPPING" | "COMPLETED" | "DELETED" | "CANCELLED" | "FAILED")
+        def workflow_id: () -> ::String
+        def workflow_type: () -> ("PRIVATE" | "READY2RUN")
+        def run_id: () -> ::String
+        def role_arn: () -> ::String
+        def name: () -> ::String
+        def run_group_id: () -> ::String
+        def priority: () -> ::Integer
+        def definition: () -> ::String
+        def digest: () -> ::String
+        def parameters: () -> untyped
+        def storage_capacity: () -> ::Integer
+        def output_uri: () -> ::String
+        def log_level: () -> ("OFF" | "FATAL" | "ERROR" | "ALL")
+        def resource_digests: () -> ::Hash[::String, ::String]
+        def started_by: () -> ::String
+        def creation_time: () -> ::Time
+        def start_time: () -> ::Time
+        def stop_time: () -> ::Time
+        def status_message: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def accelerators: () -> ("GPU")
+        def retention_mode: () -> ("RETAIN" | "REMOVE")
+        def failure_reason: () -> ::String
+        def log_location: () -> Types::RunLogLocation
+        def uuid: () -> ::String
+        def run_output_uri: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_run-instance_method
+      def get_run: (
+                     id: ::String,
+                     ?export: Array[("DEFINITION")]
+                   ) -> _GetRunResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRunResponseSuccess
+
+      interface _GetRunGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRunGroupResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def max_cpus: () -> ::Integer
+        def max_runs: () -> ::Integer
+        def max_duration: () -> ::Integer
+        def creation_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+        def max_gpus: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_run_group-instance_method
+      def get_run_group: (
+                           id: ::String
+                         ) -> _GetRunGroupResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRunGroupResponseSuccess
+
+      interface _GetRunTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRunTaskResponse]
+        def task_id: () -> ::String
+        def status: () -> ("PENDING" | "STARTING" | "RUNNING" | "STOPPING" | "COMPLETED" | "CANCELLED" | "FAILED")
+        def name: () -> ::String
+        def cpus: () -> ::Integer
+        def memory: () -> ::Integer
+        def creation_time: () -> ::Time
+        def start_time: () -> ::Time
+        def stop_time: () -> ::Time
+        def status_message: () -> ::String
+        def log_stream: () -> ::String
+        def gpus: () -> ::Integer
+        def instance_type: () -> ::String
+        def failure_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_run_task-instance_method
+      def get_run_task: (
+                          id: ::String,
+                          task_id: ::String
+                        ) -> _GetRunTaskResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRunTaskResponseSuccess
+
+      interface _GetSequenceStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSequenceStoreResponse]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def sse_config: () -> Types::SseConfig
+        def creation_time: () -> ::Time
+        def fallback_location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_sequence_store-instance_method
+      def get_sequence_store: (
+                                id: ::String
+                              ) -> _GetSequenceStoreResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSequenceStoreResponseSuccess
+
+      interface _GetShareResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetShareResponse]
+        def share: () -> Types::ShareDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_share-instance_method
+      def get_share: (
+                       share_id: ::String
+                     ) -> _GetShareResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetShareResponseSuccess
+
+      interface _GetVariantImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVariantImportResponse]
+        def id: () -> ::String
+        def destination_name: () -> ::String
+        def role_arn: () -> ::String
+        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")
+        def status_message: () -> ::String
+        def creation_time: () -> ::Time
+        def update_time: () -> ::Time
+        def completion_time: () -> ::Time
+        def items: () -> ::Array[Types::VariantImportItemDetail]
+        def run_left_normalization: () -> bool
+        def annotation_fields: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_variant_import_job-instance_method
+      def get_variant_import_job: (
+                                    job_id: ::String
+                                  ) -> _GetVariantImportJobResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVariantImportJobResponseSuccess
+
+      interface _GetVariantStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVariantStoreResponse]
+        def id: () -> ::String
+        def reference: () -> Types::ReferenceItem
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+        def store_arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def sse_config: () -> Types::SseConfig
+        def creation_time: () -> ::Time
+        def update_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+        def status_message: () -> ::String
+        def store_size_bytes: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_variant_store-instance_method
+      def get_variant_store: (
+                               name: ::String
+                             ) -> _GetVariantStoreResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVariantStoreResponseSuccess
+
+      interface _GetWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkflowResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETED" | "FAILED" | "INACTIVE")
+        def type: () -> ("PRIVATE" | "READY2RUN")
+        def name: () -> ::String
+        def description: () -> ::String
+        def engine: () -> ("WDL" | "NEXTFLOW" | "CWL")
+        def definition: () -> ::String
+        def main: () -> ::String
+        def digest: () -> ::String
+        def parameter_template: () -> ::Hash[::String, Types::WorkflowParameter]
+        def storage_capacity: () -> ::Integer
+        def creation_time: () -> ::Time
+        def status_message: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def metadata: () -> ::Hash[::String, ::String]
+        def accelerators: () -> ("GPU")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_workflow-instance_method
+      def get_workflow: (
+                          id: ::String,
+                          ?type: ("PRIVATE" | "READY2RUN"),
+                          ?export: Array[("DEFINITION")]
+                        ) -> _GetWorkflowResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowResponseSuccess
+
+      interface _ListAnnotationImportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAnnotationImportJobsResponse]
+        def annotation_import_jobs: () -> ::Array[Types::AnnotationImportJobItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_annotation_import_jobs-instance_method
+      def list_annotation_import_jobs: (
+                                         ?max_results: ::Integer,
+                                         ?ids: Array[::String],
+                                         ?next_token: ::String,
+                                         ?filter: {
+                                           status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")?,
+                                           store_name: ::String?
+                                         }
+                                       ) -> _ListAnnotationImportJobsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnnotationImportJobsResponseSuccess
+
+      interface _ListAnnotationStoreVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAnnotationStoreVersionsResponse]
+        def annotation_store_versions: () -> ::Array[Types::AnnotationStoreVersionItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_annotation_store_versions-instance_method
+      def list_annotation_store_versions: (
+                                            name: ::String,
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String,
+                                            ?filter: {
+                                              status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")?
+                                            }
+                                          ) -> _ListAnnotationStoreVersionsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnnotationStoreVersionsResponseSuccess
+
+      interface _ListAnnotationStoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAnnotationStoresResponse]
+        def annotation_stores: () -> ::Array[Types::AnnotationStoreItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_annotation_stores-instance_method
+      def list_annotation_stores: (
+                                    ?ids: Array[::String],
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String,
+                                    ?filter: {
+                                      status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")?
+                                    }
+                                  ) -> _ListAnnotationStoresResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAnnotationStoresResponseSuccess
+
+      interface _ListMultipartReadSetUploadsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMultipartReadSetUploadsResponse]
+        def next_token: () -> ::String
+        def uploads: () -> ::Array[Types::MultipartReadSetUploadListItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_multipart_read_set_uploads-instance_method
+      def list_multipart_read_set_uploads: (
+                                             sequence_store_id: ::String,
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _ListMultipartReadSetUploadsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMultipartReadSetUploadsResponseSuccess
+
+      interface _ListReadSetActivationJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReadSetActivationJobsResponse]
+        def next_token: () -> ::String
+        def activation_jobs: () -> ::Array[Types::ActivateReadSetJobItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_read_set_activation_jobs-instance_method
+      def list_read_set_activation_jobs: (
+                                           sequence_store_id: ::String,
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String,
+                                           ?filter: {
+                                             status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")?,
+                                             created_after: ::Time?,
+                                             created_before: ::Time?
+                                           }
+                                         ) -> _ListReadSetActivationJobsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReadSetActivationJobsResponseSuccess
+
+      interface _ListReadSetExportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReadSetExportJobsResponse]
+        def next_token: () -> ::String
+        def export_jobs: () -> ::Array[Types::ExportReadSetJobDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_read_set_export_jobs-instance_method
+      def list_read_set_export_jobs: (
+                                       sequence_store_id: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String,
+                                       ?filter: {
+                                         status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")?,
+                                         created_after: ::Time?,
+                                         created_before: ::Time?
+                                       }
+                                     ) -> _ListReadSetExportJobsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReadSetExportJobsResponseSuccess
+
+      interface _ListReadSetImportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReadSetImportJobsResponse]
+        def next_token: () -> ::String
+        def import_jobs: () -> ::Array[Types::ImportReadSetJobItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_read_set_import_jobs-instance_method
+      def list_read_set_import_jobs: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String,
+                                       sequence_store_id: ::String,
+                                       ?filter: {
+                                         status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")?,
+                                         created_after: ::Time?,
+                                         created_before: ::Time?
+                                       }
+                                     ) -> _ListReadSetImportJobsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReadSetImportJobsResponseSuccess
+
+      interface _ListReadSetUploadPartsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReadSetUploadPartsResponse]
+        def next_token: () -> ::String
+        def parts: () -> ::Array[Types::ReadSetUploadPartListItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_read_set_upload_parts-instance_method
+      def list_read_set_upload_parts: (
+                                        sequence_store_id: ::String,
+                                        upload_id: ::String,
+                                        part_source: ("SOURCE1" | "SOURCE2"),
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?filter: {
+                                          created_after: ::Time?,
+                                          created_before: ::Time?
+                                        }
+                                      ) -> _ListReadSetUploadPartsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReadSetUploadPartsResponseSuccess
+
+      interface _ListReadSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReadSetsResponse]
+        def next_token: () -> ::String
+        def read_sets: () -> ::Array[Types::ReadSetListItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_read_sets-instance_method
+      def list_read_sets: (
+                            sequence_store_id: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?filter: {
+                              name: ::String?,
+                              status: ("ARCHIVED" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "PROCESSING_UPLOAD" | "UPLOAD_FAILED")?,
+                              reference_arn: ::String?,
+                              created_after: ::Time?,
+                              created_before: ::Time?,
+                              sample_id: ::String?,
+                              subject_id: ::String?,
+                              generated_from: ::String?,
+                              creation_type: ("IMPORT" | "UPLOAD")?
+                            }
+                          ) -> _ListReadSetsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReadSetsResponseSuccess
+
+      interface _ListReferenceImportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReferenceImportJobsResponse]
+        def next_token: () -> ::String
+        def import_jobs: () -> ::Array[Types::ImportReferenceJobItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_reference_import_jobs-instance_method
+      def list_reference_import_jobs: (
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        reference_store_id: ::String,
+                                        ?filter: {
+                                          status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")?,
+                                          created_after: ::Time?,
+                                          created_before: ::Time?
+                                        }
+                                      ) -> _ListReferenceImportJobsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReferenceImportJobsResponseSuccess
+
+      interface _ListReferenceStoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReferenceStoresResponse]
+        def next_token: () -> ::String
+        def reference_stores: () -> ::Array[Types::ReferenceStoreDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_reference_stores-instance_method
+      def list_reference_stores: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   ?filter: {
+                                     name: ::String?,
+                                     created_after: ::Time?,
+                                     created_before: ::Time?
+                                   }
+                                 ) -> _ListReferenceStoresResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReferenceStoresResponseSuccess
+
+      interface _ListReferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReferencesResponse]
+        def next_token: () -> ::String
+        def references: () -> ::Array[Types::ReferenceListItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_references-instance_method
+      def list_references: (
+                             reference_store_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?filter: {
+                               name: ::String?,
+                               md5: ::String?,
+                               created_after: ::Time?,
+                               created_before: ::Time?
+                             }
+                           ) -> _ListReferencesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReferencesResponseSuccess
+
+      interface _ListRunGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRunGroupsResponse]
+        def items: () -> ::Array[Types::RunGroupListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_run_groups-instance_method
+      def list_run_groups: (
+                             ?name: ::String,
+                             ?starting_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListRunGroupsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRunGroupsResponseSuccess
+
+      interface _ListRunTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRunTasksResponse]
+        def items: () -> ::Array[Types::TaskListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_run_tasks-instance_method
+      def list_run_tasks: (
+                            id: ::String,
+                            ?status: ("PENDING" | "STARTING" | "RUNNING" | "STOPPING" | "COMPLETED" | "CANCELLED" | "FAILED"),
+                            ?starting_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListRunTasksResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRunTasksResponseSuccess
+
+      interface _ListRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRunsResponse]
+        def items: () -> ::Array[Types::RunListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_runs-instance_method
+      def list_runs: (
+                       ?name: ::String,
+                       ?run_group_id: ::String,
+                       ?starting_token: ::String,
+                       ?max_results: ::Integer,
+                       ?status: ("PENDING" | "STARTING" | "RUNNING" | "STOPPING" | "COMPLETED" | "DELETED" | "CANCELLED" | "FAILED")
+                     ) -> _ListRunsResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRunsResponseSuccess
+
+      interface _ListSequenceStoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSequenceStoresResponse]
+        def next_token: () -> ::String
+        def sequence_stores: () -> ::Array[Types::SequenceStoreDetail]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_sequence_stores-instance_method
+      def list_sequence_stores: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?filter: {
+                                    name: ::String?,
+                                    created_after: ::Time?,
+                                    created_before: ::Time?
+                                  }
+                                ) -> _ListSequenceStoresResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSequenceStoresResponseSuccess
+
+      interface _ListSharesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSharesResponse]
+        def shares: () -> ::Array[Types::ShareDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_shares-instance_method
+      def list_shares: (
+                         resource_owner: ("SELF" | "OTHER"),
+                         ?filter: {
+                           resource_arns: Array[::String]?,
+                           status: Array[("PENDING" | "ACTIVATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED")]?
+                         },
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListSharesResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSharesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListVariantImportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVariantImportJobsResponse]
+        def variant_import_jobs: () -> ::Array[Types::VariantImportJobItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_variant_import_jobs-instance_method
+      def list_variant_import_jobs: (
+                                      ?max_results: ::Integer,
+                                      ?ids: Array[::String],
+                                      ?next_token: ::String,
+                                      ?filter: {
+                                        status: ("SUBMITTED" | "IN_PROGRESS" | "CANCELLED" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")?,
+                                        store_name: ::String?
+                                      }
+                                    ) -> _ListVariantImportJobsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVariantImportJobsResponseSuccess
+
+      interface _ListVariantStoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVariantStoresResponse]
+        def variant_stores: () -> ::Array[Types::VariantStoreItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_variant_stores-instance_method
+      def list_variant_stores: (
+                                 ?max_results: ::Integer,
+                                 ?ids: Array[::String],
+                                 ?next_token: ::String,
+                                 ?filter: {
+                                   status: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")?
+                                 }
+                               ) -> _ListVariantStoresResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVariantStoresResponseSuccess
+
+      interface _ListWorkflowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowsResponse]
+        def items: () -> ::Array[Types::WorkflowListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#list_workflows-instance_method
+      def list_workflows: (
+                            ?type: ("PRIVATE" | "READY2RUN"),
+                            ?name: ::String,
+                            ?starting_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListWorkflowsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowsResponseSuccess
+
+      interface _StartAnnotationImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAnnotationImportResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#start_annotation_import_job-instance_method
+      def start_annotation_import_job: (
+                                         destination_name: ::String,
+                                         role_arn: ::String,
+                                         items: Array[
+                                           {
+                                             source: ::String
+                                           },
+                                         ],
+                                         ?version_name: ::String,
+                                         ?format_options: {
+                                           tsv_options: {
+                                             read_options: {
+                                               sep: ::String?,
+                                               encoding: ::String?,
+                                               quote: ::String?,
+                                               quote_all: bool?,
+                                               escape: ::String?,
+                                               escape_quotes: bool?,
+                                               comment: ::String?,
+                                               header: bool?,
+                                               line_sep: ::String?
+                                             }?
+                                           }?,
+                                           vcf_options: {
+                                             ignore_qual_field: bool?,
+                                             ignore_filter_field: bool?
+                                           }?
+                                         },
+                                         ?run_left_normalization: bool,
+                                         ?annotation_fields: Hash[::String, ::String]
+                                       ) -> _StartAnnotationImportJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAnnotationImportJobResponseSuccess
+
+      interface _StartReadSetActivationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartReadSetActivationJobResponse]
+        def id: () -> ::String
+        def sequence_store_id: () -> ::String
+        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#start_read_set_activation_job-instance_method
+      def start_read_set_activation_job: (
+                                           sequence_store_id: ::String,
+                                           ?client_token: ::String,
+                                           sources: Array[
+                                             {
+                                               read_set_id: ::String
+                                             },
+                                           ]
+                                         ) -> _StartReadSetActivationJobResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReadSetActivationJobResponseSuccess
+
+      interface _StartReadSetExportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartReadSetExportJobResponse]
+        def id: () -> ::String
+        def sequence_store_id: () -> ::String
+        def destination: () -> ::String
+        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#start_read_set_export_job-instance_method
+      def start_read_set_export_job: (
+                                       sequence_store_id: ::String,
+                                       destination: ::String,
+                                       role_arn: ::String,
+                                       ?client_token: ::String,
+                                       sources: Array[
+                                         {
+                                           read_set_id: ::String
+                                         },
+                                       ]
+                                     ) -> _StartReadSetExportJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReadSetExportJobResponseSuccess
+
+      interface _StartReadSetImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartReadSetImportJobResponse]
+        def id: () -> ::String
+        def sequence_store_id: () -> ::String
+        def role_arn: () -> ::String
+        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#start_read_set_import_job-instance_method
+      def start_read_set_import_job: (
+                                       sequence_store_id: ::String,
+                                       role_arn: ::String,
+                                       ?client_token: ::String,
+                                       sources: Array[
+                                         {
+                                           source_files: {
+                                             source1: ::String,
+                                             source2: ::String?
+                                           },
+                                           source_file_type: ("FASTQ" | "BAM" | "CRAM" | "UBAM"),
+                                           subject_id: ::String,
+                                           sample_id: ::String,
+                                           generated_from: ::String?,
+                                           reference_arn: ::String?,
+                                           name: ::String?,
+                                           description: ::String?,
+                                           tags: Hash[::String, ::String]?
+                                         },
+                                       ]
+                                     ) -> _StartReadSetImportJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReadSetImportJobResponseSuccess
+
+      interface _StartReferenceImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartReferenceImportJobResponse]
+        def id: () -> ::String
+        def reference_store_id: () -> ::String
+        def role_arn: () -> ::String
+        def status: () -> ("SUBMITTED" | "IN_PROGRESS" | "CANCELLING" | "CANCELLED" | "FAILED" | "COMPLETED" | "COMPLETED_WITH_FAILURES")
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#start_reference_import_job-instance_method
+      def start_reference_import_job: (
+                                        reference_store_id: ::String,
+                                        role_arn: ::String,
+                                        ?client_token: ::String,
+                                        sources: Array[
+                                          {
+                                            source_file: ::String,
+                                            name: ::String,
+                                            description: ::String?,
+                                            tags: Hash[::String, ::String]?
+                                          },
+                                        ]
+                                      ) -> _StartReferenceImportJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReferenceImportJobResponseSuccess
+
+      interface _StartRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartRunResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("PENDING" | "STARTING" | "RUNNING" | "STOPPING" | "COMPLETED" | "DELETED" | "CANCELLED" | "FAILED")
+        def tags: () -> ::Hash[::String, ::String]
+        def uuid: () -> ::String
+        def run_output_uri: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#start_run-instance_method
+      def start_run: (
+                       ?workflow_id: ::String,
+                       ?workflow_type: ("PRIVATE" | "READY2RUN"),
+                       ?run_id: ::String,
+                       role_arn: ::String,
+                       ?name: ::String,
+                       ?run_group_id: ::String,
+                       ?priority: ::Integer,
+                       ?parameters: {
+                       },
+                       ?storage_capacity: ::Integer,
+                       ?output_uri: ::String,
+                       ?log_level: ("OFF" | "FATAL" | "ERROR" | "ALL"),
+                       ?tags: Hash[::String, ::String],
+                       request_id: ::String,
+                       ?retention_mode: ("RETAIN" | "REMOVE")
+                     ) -> _StartRunResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRunResponseSuccess
+
+      interface _StartVariantImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartVariantImportResponse]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#start_variant_import_job-instance_method
+      def start_variant_import_job: (
+                                      destination_name: ::String,
+                                      role_arn: ::String,
+                                      items: Array[
+                                        {
+                                          source: ::String
+                                        },
+                                      ],
+                                      ?run_left_normalization: bool,
+                                      ?annotation_fields: Hash[::String, ::String]
+                                    ) -> _StartVariantImportJobResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartVariantImportJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAnnotationStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAnnotationStoreResponse]
+        def id: () -> ::String
+        def reference: () -> Types::ReferenceItem
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+        def name: () -> ::String
+        def description: () -> ::String
+        def creation_time: () -> ::Time
+        def update_time: () -> ::Time
+        def store_options: () -> Types::StoreOptions
+        def store_format: () -> ("GFF" | "TSV" | "VCF")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#update_annotation_store-instance_method
+      def update_annotation_store: (
+                                     name: ::String,
+                                     ?description: ::String
+                                   ) -> _UpdateAnnotationStoreResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAnnotationStoreResponseSuccess
+
+      interface _UpdateAnnotationStoreVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAnnotationStoreVersionResponse]
+        def store_id: () -> ::String
+        def id: () -> ::String
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+        def name: () -> ::String
+        def version_name: () -> ::String
+        def description: () -> ::String
+        def creation_time: () -> ::Time
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#update_annotation_store_version-instance_method
+      def update_annotation_store_version: (
+                                             name: ::String,
+                                             version_name: ::String,
+                                             ?description: ::String
+                                           ) -> _UpdateAnnotationStoreVersionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAnnotationStoreVersionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#update_run_group-instance_method
+      def update_run_group: (
+                              id: ::String,
+                              ?name: ::String,
+                              ?max_cpus: ::Integer,
+                              ?max_runs: ::Integer,
+                              ?max_duration: ::Integer,
+                              ?max_gpus: ::Integer
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateVariantStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVariantStoreResponse]
+        def id: () -> ::String
+        def reference: () -> Types::ReferenceItem
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+        def name: () -> ::String
+        def description: () -> ::String
+        def creation_time: () -> ::Time
+        def update_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#update_variant_store-instance_method
+      def update_variant_store: (
+                                  name: ::String,
+                                  ?description: ::String
+                                ) -> _UpdateVariantStoreResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVariantStoreResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#update_workflow-instance_method
+      def update_workflow: (
+                             id: ::String,
+                             ?name: ::String,
+                             ?description: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UploadReadSetPartResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UploadReadSetPartResponse]
+        def checksum: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#upload_read_set_part-instance_method
+      def upload_read_set_part: (
+                                  sequence_store_id: ::String,
+                                  upload_id: ::String,
+                                  part_source: ("SOURCE1" | "SOURCE2"),
+                                  part_number: ::Integer,
+                                  payload: ::String
+                                ) -> _UploadReadSetPartResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UploadReadSetPartResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#wait_until-instance_method
+      def wait_until: (:annotation_import_job_created waiter_name, 
+                    job_id: ::String
+                  ) -> Client::_GetAnnotationImportJobResponseSuccess
+                    | (:annotation_import_job_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetAnnotationImportJobResponseSuccess
+                    | (:annotation_store_created waiter_name, 
+                    name: ::String
+                  ) -> Client::_GetAnnotationStoreResponseSuccess
+                    | (:annotation_store_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetAnnotationStoreResponseSuccess
+                    | (:annotation_store_deleted waiter_name, 
+                    name: ::String
+                  ) -> Client::_GetAnnotationStoreResponseSuccess
+                    | (:annotation_store_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetAnnotationStoreResponseSuccess
+                    | (:annotation_store_version_created waiter_name, 
+                    name: ::String,
+                    version_name: ::String
+                  ) -> Client::_GetAnnotationStoreVersionResponseSuccess
+                    | (:annotation_store_version_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetAnnotationStoreVersionResponseSuccess
+                    | (:annotation_store_version_deleted waiter_name, 
+                    name: ::String,
+                    version_name: ::String
+                  ) -> Client::_GetAnnotationStoreVersionResponseSuccess
+                    | (:annotation_store_version_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetAnnotationStoreVersionResponseSuccess
+                    | (:read_set_activation_job_completed waiter_name, 
+                    id: ::String,
+                    sequence_store_id: ::String
+                  ) -> Client::_GetReadSetActivationJobResponseSuccess
+                    | (:read_set_activation_job_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetReadSetActivationJobResponseSuccess
+                    | (:read_set_export_job_completed waiter_name, 
+                    sequence_store_id: ::String,
+                    id: ::String
+                  ) -> Client::_GetReadSetExportJobResponseSuccess
+                    | (:read_set_export_job_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetReadSetExportJobResponseSuccess
+                    | (:read_set_import_job_completed waiter_name, 
+                    id: ::String,
+                    sequence_store_id: ::String
+                  ) -> Client::_GetReadSetImportJobResponseSuccess
+                    | (:read_set_import_job_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetReadSetImportJobResponseSuccess
+                    | (:reference_import_job_completed waiter_name, 
+                    id: ::String,
+                    reference_store_id: ::String
+                  ) -> Client::_GetReferenceImportJobResponseSuccess
+                    | (:reference_import_job_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetReferenceImportJobResponseSuccess
+                    | (:run_completed waiter_name, 
+                    id: ::String,
+                    ?export: Array[("DEFINITION")]
+                  ) -> Client::_GetRunResponseSuccess
+                    | (:run_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetRunResponseSuccess
+                    | (:run_running waiter_name, 
+                    id: ::String,
+                    ?export: Array[("DEFINITION")]
+                  ) -> Client::_GetRunResponseSuccess
+                    | (:run_running waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetRunResponseSuccess
+                    | (:task_completed waiter_name, 
+                    id: ::String,
+                    task_id: ::String
+                  ) -> Client::_GetRunTaskResponseSuccess
+                    | (:task_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetRunTaskResponseSuccess
+                    | (:task_running waiter_name, 
+                    id: ::String,
+                    task_id: ::String
+                  ) -> Client::_GetRunTaskResponseSuccess
+                    | (:task_running waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetRunTaskResponseSuccess
+                    | (:variant_import_job_created waiter_name, 
+                    job_id: ::String
+                  ) -> Client::_GetVariantImportJobResponseSuccess
+                    | (:variant_import_job_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetVariantImportJobResponseSuccess
+                    | (:variant_store_created waiter_name, 
+                    name: ::String
+                  ) -> Client::_GetVariantStoreResponseSuccess
+                    | (:variant_store_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetVariantStoreResponseSuccess
+                    | (:variant_store_deleted waiter_name, 
+                    name: ::String
+                  ) -> Client::_GetVariantStoreResponseSuccess
+                    | (:variant_store_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetVariantStoreResponseSuccess
+                    | (:workflow_active waiter_name, 
+                    id: ::String,
+                    ?type: ("PRIVATE" | "READY2RUN"),
+                    ?export: Array[("DEFINITION")]
+                  ) -> Client::_GetWorkflowResponseSuccess
+                    | (:workflow_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetWorkflowResponseSuccess
+    end
+  end
+end
+

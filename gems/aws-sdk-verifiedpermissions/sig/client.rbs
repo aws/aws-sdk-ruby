@@ -1,0 +1,583 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module VerifiedPermissions
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchIsAuthorizedResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchIsAuthorizedOutput]
+        def results: () -> ::Array[Types::BatchIsAuthorizedOutputItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#batch_is_authorized-instance_method
+      def batch_is_authorized: (
+                                 policy_store_id: ::String,
+                                 ?entities: {
+                                   entity_list: Array[
+                                     {
+                                       identifier: {
+                                         entity_type: ::String,
+                                         entity_id: ::String
+                                       },
+                                       attributes: Hash[::String, untyped]?,
+                                       parents: Array[
+                                         {
+                                           entity_type: ::String,
+                                           entity_id: ::String
+                                         },
+                                       ]?
+                                     },
+                                   ]?
+                                 },
+                                 requests: Array[
+                                   {
+                                     principal: {
+                                       entity_type: ::String,
+                                       entity_id: ::String
+                                     }?,
+                                     action: {
+                                       action_type: ::String,
+                                       action_id: ::String
+                                     }?,
+                                     resource: {
+                                       entity_type: ::String,
+                                       entity_id: ::String
+                                     }?,
+                                     context: {
+                                       context_map: Hash[::String, untyped]?
+                                     }?
+                                   },
+                                 ]
+                               ) -> _BatchIsAuthorizedResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchIsAuthorizedResponseSuccess
+
+      interface _CreateIdentitySourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIdentitySourceOutput]
+        def created_date: () -> ::Time
+        def identity_source_id: () -> ::String
+        def last_updated_date: () -> ::Time
+        def policy_store_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#create_identity_source-instance_method
+      def create_identity_source: (
+                                    ?client_token: ::String,
+                                    policy_store_id: ::String,
+                                    configuration: {
+                                      cognito_user_pool_configuration: {
+                                        user_pool_arn: ::String,
+                                        client_ids: Array[::String]?
+                                      }?
+                                    },
+                                    ?principal_entity_type: ::String
+                                  ) -> _CreateIdentitySourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIdentitySourceResponseSuccess
+
+      interface _CreatePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePolicyOutput]
+        def policy_store_id: () -> ::String
+        def policy_id: () -> ::String
+        def policy_type: () -> ("STATIC" | "TEMPLATE_LINKED")
+        def principal: () -> Types::EntityIdentifier
+        def resource: () -> Types::EntityIdentifier
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#create_policy-instance_method
+      def create_policy: (
+                           ?client_token: ::String,
+                           policy_store_id: ::String,
+                           definition: {
+                             static: {
+                               description: ::String?,
+                               statement: ::String
+                             }?,
+                             template_linked: {
+                               policy_template_id: ::String,
+                               principal: {
+                                 entity_type: ::String,
+                                 entity_id: ::String
+                               }?,
+                               resource: {
+                                 entity_type: ::String,
+                                 entity_id: ::String
+                               }?
+                             }?
+                           }
+                         ) -> _CreatePolicyResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePolicyResponseSuccess
+
+      interface _CreatePolicyStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePolicyStoreOutput]
+        def policy_store_id: () -> ::String
+        def arn: () -> ::String
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#create_policy_store-instance_method
+      def create_policy_store: (
+                                 ?client_token: ::String,
+                                 validation_settings: {
+                                   mode: ("OFF" | "STRICT")
+                                 },
+                                 ?description: ::String
+                               ) -> _CreatePolicyStoreResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePolicyStoreResponseSuccess
+
+      interface _CreatePolicyTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePolicyTemplateOutput]
+        def policy_store_id: () -> ::String
+        def policy_template_id: () -> ::String
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#create_policy_template-instance_method
+      def create_policy_template: (
+                                    ?client_token: ::String,
+                                    policy_store_id: ::String,
+                                    ?description: ::String,
+                                    statement: ::String
+                                  ) -> _CreatePolicyTemplateResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePolicyTemplateResponseSuccess
+
+      interface _DeleteIdentitySourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIdentitySourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#delete_identity_source-instance_method
+      def delete_identity_source: (
+                                    policy_store_id: ::String,
+                                    identity_source_id: ::String
+                                  ) -> _DeleteIdentitySourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIdentitySourceResponseSuccess
+
+      interface _DeletePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#delete_policy-instance_method
+      def delete_policy: (
+                           policy_store_id: ::String,
+                           policy_id: ::String
+                         ) -> _DeletePolicyResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePolicyResponseSuccess
+
+      interface _DeletePolicyStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePolicyStoreOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#delete_policy_store-instance_method
+      def delete_policy_store: (
+                                 policy_store_id: ::String
+                               ) -> _DeletePolicyStoreResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePolicyStoreResponseSuccess
+
+      interface _DeletePolicyTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePolicyTemplateOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#delete_policy_template-instance_method
+      def delete_policy_template: (
+                                    policy_store_id: ::String,
+                                    policy_template_id: ::String
+                                  ) -> _DeletePolicyTemplateResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePolicyTemplateResponseSuccess
+
+      interface _GetIdentitySourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdentitySourceOutput]
+        def created_date: () -> ::Time
+        def details: () -> Types::IdentitySourceDetails
+        def identity_source_id: () -> ::String
+        def last_updated_date: () -> ::Time
+        def policy_store_id: () -> ::String
+        def principal_entity_type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#get_identity_source-instance_method
+      def get_identity_source: (
+                                 policy_store_id: ::String,
+                                 identity_source_id: ::String
+                               ) -> _GetIdentitySourceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdentitySourceResponseSuccess
+
+      interface _GetPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyOutput]
+        def policy_store_id: () -> ::String
+        def policy_id: () -> ::String
+        def policy_type: () -> ("STATIC" | "TEMPLATE_LINKED")
+        def principal: () -> Types::EntityIdentifier
+        def resource: () -> Types::EntityIdentifier
+        def definition: () -> Types::PolicyDefinitionDetail
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#get_policy-instance_method
+      def get_policy: (
+                        policy_store_id: ::String,
+                        policy_id: ::String
+                      ) -> _GetPolicyResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyResponseSuccess
+
+      interface _GetPolicyStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyStoreOutput]
+        def policy_store_id: () -> ::String
+        def arn: () -> ::String
+        def validation_settings: () -> Types::ValidationSettings
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#get_policy_store-instance_method
+      def get_policy_store: (
+                              policy_store_id: ::String
+                            ) -> _GetPolicyStoreResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyStoreResponseSuccess
+
+      interface _GetPolicyTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyTemplateOutput]
+        def policy_store_id: () -> ::String
+        def policy_template_id: () -> ::String
+        def description: () -> ::String
+        def statement: () -> ::String
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#get_policy_template-instance_method
+      def get_policy_template: (
+                                 policy_store_id: ::String,
+                                 policy_template_id: ::String
+                               ) -> _GetPolicyTemplateResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyTemplateResponseSuccess
+
+      interface _GetSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSchemaOutput]
+        def policy_store_id: () -> ::String
+        def schema: () -> ::String
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+        def namespaces: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#get_schema-instance_method
+      def get_schema: (
+                        policy_store_id: ::String
+                      ) -> _GetSchemaResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSchemaResponseSuccess
+
+      interface _IsAuthorizedResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IsAuthorizedOutput]
+        def decision: () -> ("ALLOW" | "DENY")
+        def determining_policies: () -> ::Array[Types::DeterminingPolicyItem]
+        def errors: () -> ::Array[Types::EvaluationErrorItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#is_authorized-instance_method
+      def is_authorized: (
+                           policy_store_id: ::String,
+                           ?principal: {
+                             entity_type: ::String,
+                             entity_id: ::String
+                           },
+                           ?action: {
+                             action_type: ::String,
+                             action_id: ::String
+                           },
+                           ?resource: {
+                             entity_type: ::String,
+                             entity_id: ::String
+                           },
+                           ?context: {
+                             context_map: Hash[::String, untyped]?
+                           },
+                           ?entities: {
+                             entity_list: Array[
+                               {
+                                 identifier: {
+                                   entity_type: ::String,
+                                   entity_id: ::String
+                                 },
+                                 attributes: Hash[::String, untyped]?,
+                                 parents: Array[
+                                   {
+                                     entity_type: ::String,
+                                     entity_id: ::String
+                                   },
+                                 ]?
+                               },
+                             ]?
+                           }
+                         ) -> _IsAuthorizedResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _IsAuthorizedResponseSuccess
+
+      interface _IsAuthorizedWithTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IsAuthorizedWithTokenOutput]
+        def decision: () -> ("ALLOW" | "DENY")
+        def determining_policies: () -> ::Array[Types::DeterminingPolicyItem]
+        def errors: () -> ::Array[Types::EvaluationErrorItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#is_authorized_with_token-instance_method
+      def is_authorized_with_token: (
+                                      policy_store_id: ::String,
+                                      ?identity_token: ::String,
+                                      ?access_token: ::String,
+                                      ?action: {
+                                        action_type: ::String,
+                                        action_id: ::String
+                                      },
+                                      ?resource: {
+                                        entity_type: ::String,
+                                        entity_id: ::String
+                                      },
+                                      ?context: {
+                                        context_map: Hash[::String, untyped]?
+                                      },
+                                      ?entities: {
+                                        entity_list: Array[
+                                          {
+                                            identifier: {
+                                              entity_type: ::String,
+                                              entity_id: ::String
+                                            },
+                                            attributes: Hash[::String, untyped]?,
+                                            parents: Array[
+                                              {
+                                                entity_type: ::String,
+                                                entity_id: ::String
+                                              },
+                                            ]?
+                                          },
+                                        ]?
+                                      }
+                                    ) -> _IsAuthorizedWithTokenResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _IsAuthorizedWithTokenResponseSuccess
+
+      interface _ListIdentitySourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIdentitySourcesOutput]
+        def next_token: () -> ::String
+        def identity_sources: () -> ::Array[Types::IdentitySourceItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#list_identity_sources-instance_method
+      def list_identity_sources: (
+                                   policy_store_id: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
+                                   ?filters: Array[
+                                     {
+                                       principal_entity_type: ::String?
+                                     },
+                                   ]
+                                 ) -> _ListIdentitySourcesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdentitySourcesResponseSuccess
+
+      interface _ListPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPoliciesOutput]
+        def next_token: () -> ::String
+        def policies: () -> ::Array[Types::PolicyItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#list_policies-instance_method
+      def list_policies: (
+                           policy_store_id: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer,
+                           ?filter: {
+                             principal: {
+                               unspecified: bool?,
+                               identifier: {
+                                 entity_type: ::String,
+                                 entity_id: ::String
+                               }?
+                             }?,
+                             resource: {
+                               unspecified: bool?,
+                               identifier: {
+                                 entity_type: ::String,
+                                 entity_id: ::String
+                               }?
+                             }?,
+                             policy_type: ("STATIC" | "TEMPLATE_LINKED")?,
+                             policy_template_id: ::String?
+                           }
+                         ) -> _ListPoliciesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPoliciesResponseSuccess
+
+      interface _ListPolicyStoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicyStoresOutput]
+        def next_token: () -> ::String
+        def policy_stores: () -> ::Array[Types::PolicyStoreItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#list_policy_stores-instance_method
+      def list_policy_stores: (
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListPolicyStoresResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicyStoresResponseSuccess
+
+      interface _ListPolicyTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicyTemplatesOutput]
+        def next_token: () -> ::String
+        def policy_templates: () -> ::Array[Types::PolicyTemplateItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#list_policy_templates-instance_method
+      def list_policy_templates: (
+                                   policy_store_id: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListPolicyTemplatesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicyTemplatesResponseSuccess
+
+      interface _PutSchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutSchemaOutput]
+        def policy_store_id: () -> ::String
+        def namespaces: () -> ::Array[::String]
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#put_schema-instance_method
+      def put_schema: (
+                        policy_store_id: ::String,
+                        definition: {
+                          cedar_json: ::String?
+                        }
+                      ) -> _PutSchemaResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSchemaResponseSuccess
+
+      interface _UpdateIdentitySourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIdentitySourceOutput]
+        def created_date: () -> ::Time
+        def identity_source_id: () -> ::String
+        def last_updated_date: () -> ::Time
+        def policy_store_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#update_identity_source-instance_method
+      def update_identity_source: (
+                                    policy_store_id: ::String,
+                                    identity_source_id: ::String,
+                                    update_configuration: {
+                                      cognito_user_pool_configuration: {
+                                        user_pool_arn: ::String,
+                                        client_ids: Array[::String]?
+                                      }?
+                                    },
+                                    ?principal_entity_type: ::String
+                                  ) -> _UpdateIdentitySourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIdentitySourceResponseSuccess
+
+      interface _UpdatePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePolicyOutput]
+        def policy_store_id: () -> ::String
+        def policy_id: () -> ::String
+        def policy_type: () -> ("STATIC" | "TEMPLATE_LINKED")
+        def principal: () -> Types::EntityIdentifier
+        def resource: () -> Types::EntityIdentifier
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#update_policy-instance_method
+      def update_policy: (
+                           policy_store_id: ::String,
+                           policy_id: ::String,
+                           definition: {
+                             static: {
+                               description: ::String?,
+                               statement: ::String
+                             }?
+                           }
+                         ) -> _UpdatePolicyResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePolicyResponseSuccess
+
+      interface _UpdatePolicyStoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePolicyStoreOutput]
+        def policy_store_id: () -> ::String
+        def arn: () -> ::String
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#update_policy_store-instance_method
+      def update_policy_store: (
+                                 policy_store_id: ::String,
+                                 validation_settings: {
+                                   mode: ("OFF" | "STRICT")
+                                 },
+                                 ?description: ::String
+                               ) -> _UpdatePolicyStoreResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePolicyStoreResponseSuccess
+
+      interface _UpdatePolicyTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePolicyTemplateOutput]
+        def policy_store_id: () -> ::String
+        def policy_template_id: () -> ::String
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#update_policy_template-instance_method
+      def update_policy_template: (
+                                    policy_store_id: ::String,
+                                    policy_template_id: ::String,
+                                    ?description: ::String,
+                                    statement: ::String
+                                  ) -> _UpdatePolicyTemplateResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePolicyTemplateResponseSuccess
+    end
+  end
+end
+

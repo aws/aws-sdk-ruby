@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2024-02-15)
+------------------
+
+* Feature - Doc only updates for content enhancement
+
+1.45.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2023-11-27)
+------------------
+
+* Feature - Added new APIs in Detective to support resource investigations
+
+1.42.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.41.0 (2023-09-27)
 ------------------
 

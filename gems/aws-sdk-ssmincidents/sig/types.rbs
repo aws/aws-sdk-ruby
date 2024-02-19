@@ -1,0 +1,819 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SSMIncidents
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Action
+      attr_accessor ssm_automation: Types::SsmAutomation
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SsmAutomation < Action
+      end
+      class Unknown < Action
+      end
+    end
+
+    class AddRegionAction
+      attr_accessor region_name: ::String
+      attr_accessor sse_kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class AttributeValueList
+      attr_accessor integer_values: ::Array[::Integer]
+      attr_accessor string_values: ::Array[::String]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IntegerValues < AttributeValueList
+      end
+      class StringValues < AttributeValueList
+      end
+      class Unknown < AttributeValueList
+      end
+    end
+
+    class AutomationExecution
+      attr_accessor ssm_execution_arn: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SsmExecutionArn < AutomationExecution
+      end
+      class Unknown < AutomationExecution
+      end
+    end
+
+    class BatchGetIncidentFindingsError
+      attr_accessor code: ::String
+      attr_accessor finding_id: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetIncidentFindingsInput
+      attr_accessor finding_ids: ::Array[::String]
+      attr_accessor incident_record_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetIncidentFindingsOutput
+      attr_accessor errors: ::Array[Types::BatchGetIncidentFindingsError]
+      attr_accessor findings: ::Array[Types::Finding]
+      SENSITIVE: []
+    end
+
+    class ChatChannel
+      attr_accessor chatbot_sns: ::Array[::String]
+      attr_accessor empty: Types::EmptyChatChannel
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ChatbotSns < ChatChannel
+      end
+      class Empty < ChatChannel
+      end
+      class Unknown < ChatChannel
+      end
+    end
+
+    class CloudFormationStackUpdate
+      attr_accessor end_time: ::Time
+      attr_accessor stack_arn: ::String
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CodeDeployDeployment
+      attr_accessor deployment_group_arn: ::String
+      attr_accessor deployment_id: ::String
+      attr_accessor end_time: ::Time
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Condition
+      attr_accessor after: ::Time
+      attr_accessor before: ::Time
+      attr_accessor equals: Types::AttributeValueList
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class After < Condition
+      end
+      class Before < Condition
+      end
+      class Equals < Condition
+      end
+      class Unknown < Condition
+      end
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_identifier: ::String
+      attr_accessor resource_type: ("RESPONSE_PLAN" | "INCIDENT_RECORD" | "TIMELINE_EVENT" | "REPLICATION_SET" | "RESOURCE_POLICY")
+      attr_accessor retry_after: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateReplicationSetInput
+      attr_accessor client_token: ::String
+      attr_accessor regions: ::Hash[::String, Types::RegionMapInputValue]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateReplicationSetOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateResponsePlanInput
+      attr_accessor actions: ::Array[Types::Action]
+      attr_accessor chat_channel: Types::ChatChannel
+      attr_accessor client_token: ::String
+      attr_accessor display_name: ::String
+      attr_accessor engagements: ::Array[::String]
+      attr_accessor incident_template: Types::IncidentTemplate
+      attr_accessor integrations: ::Array[Types::Integration]
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateResponsePlanOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTimelineEventInput
+      attr_accessor client_token: ::String
+      attr_accessor event_data: ::String
+      attr_accessor event_references: ::Array[Types::EventReference]
+      attr_accessor event_time: ::Time
+      attr_accessor event_type: ::String
+      attr_accessor incident_record_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTimelineEventOutput
+      attr_accessor event_id: ::String
+      attr_accessor incident_record_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIncidentRecordInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIncidentRecordOutput < Aws::EmptyStructure
+    end
+
+    class DeleteRegionAction
+      attr_accessor region_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationSetInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationSetOutput < Aws::EmptyStructure
+    end
+
+    class DeleteResourcePolicyInput
+      attr_accessor policy_id: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyOutput < Aws::EmptyStructure
+    end
+
+    class DeleteResponsePlanInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResponsePlanOutput < Aws::EmptyStructure
+    end
+
+    class DeleteTimelineEventInput
+      attr_accessor event_id: ::String
+      attr_accessor incident_record_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTimelineEventOutput < Aws::EmptyStructure
+    end
+
+    class DynamicSsmParameterValue
+      attr_accessor variable: ("INCIDENT_RECORD_ARN" | "INVOLVED_RESOURCES")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Variable < DynamicSsmParameterValue
+      end
+      class Unknown < DynamicSsmParameterValue
+      end
+    end
+
+    class EmptyChatChannel < Aws::EmptyStructure
+    end
+
+    class EventReference
+      attr_accessor related_item_id: ::String
+      attr_accessor resource: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RelatedItemId < EventReference
+      end
+      class Resource < EventReference
+      end
+      class Unknown < EventReference
+      end
+    end
+
+    class EventSummary
+      attr_accessor event_id: ::String
+      attr_accessor event_references: ::Array[Types::EventReference]
+      attr_accessor event_time: ::Time
+      attr_accessor event_type: ::String
+      attr_accessor event_updated_time: ::Time
+      attr_accessor incident_record_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor condition: Types::Condition
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class Finding
+      attr_accessor creation_time: ::Time
+      attr_accessor details: Types::FindingDetails
+      attr_accessor id: ::String
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class FindingDetails
+      attr_accessor cloud_formation_stack_update: Types::CloudFormationStackUpdate
+      attr_accessor code_deploy_deployment: Types::CodeDeployDeployment
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CloudFormationStackUpdate < FindingDetails
+      end
+      class CodeDeployDeployment < FindingDetails
+      end
+      class Unknown < FindingDetails
+      end
+    end
+
+    class FindingSummary
+      attr_accessor id: ::String
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetIncidentRecordInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetIncidentRecordOutput
+      attr_accessor incident_record: Types::IncidentRecord
+      SENSITIVE: []
+    end
+
+    class GetReplicationSetInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetReplicationSetOutput
+      attr_accessor replication_set: Types::ReplicationSet
+      SENSITIVE: []
+    end
+
+    class GetResourcePoliciesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePoliciesOutput
+      attr_accessor next_token: ::String
+      attr_accessor resource_policies: ::Array[Types::ResourcePolicy]
+      SENSITIVE: []
+    end
+
+    class GetResponsePlanInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResponsePlanOutput
+      attr_accessor actions: ::Array[Types::Action]
+      attr_accessor arn: ::String
+      attr_accessor chat_channel: Types::ChatChannel
+      attr_accessor display_name: ::String
+      attr_accessor engagements: ::Array[::String]
+      attr_accessor incident_template: Types::IncidentTemplate
+      attr_accessor integrations: ::Array[Types::Integration]
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetTimelineEventInput
+      attr_accessor event_id: ::String
+      attr_accessor incident_record_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTimelineEventOutput
+      attr_accessor event: Types::TimelineEvent
+      SENSITIVE: []
+    end
+
+    class IncidentRecord
+      attr_accessor arn: ::String
+      attr_accessor automation_executions: ::Array[Types::AutomationExecution]
+      attr_accessor chat_channel: Types::ChatChannel
+      attr_accessor creation_time: ::Time
+      attr_accessor dedupe_string: ::String
+      attr_accessor impact: ::Integer
+      attr_accessor incident_record_source: Types::IncidentRecordSource
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor notification_targets: ::Array[Types::NotificationTargetItem]
+      attr_accessor resolved_time: ::Time
+      attr_accessor status: ("OPEN" | "RESOLVED")
+      attr_accessor summary: ::String
+      attr_accessor title: ::String
+      SENSITIVE: []
+    end
+
+    class IncidentRecordSource
+      attr_accessor created_by: ::String
+      attr_accessor invoked_by: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor source: ::String
+      SENSITIVE: []
+    end
+
+    class IncidentRecordSummary
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor impact: ::Integer
+      attr_accessor incident_record_source: Types::IncidentRecordSource
+      attr_accessor resolved_time: ::Time
+      attr_accessor status: ("OPEN" | "RESOLVED")
+      attr_accessor title: ::String
+      SENSITIVE: []
+    end
+
+    class IncidentTemplate
+      attr_accessor dedupe_string: ::String
+      attr_accessor impact: ::Integer
+      attr_accessor incident_tags: ::Hash[::String, ::String]
+      attr_accessor notification_targets: ::Array[Types::NotificationTargetItem]
+      attr_accessor summary: ::String
+      attr_accessor title: ::String
+      SENSITIVE: []
+    end
+
+    class Integration
+      attr_accessor pager_duty_configuration: Types::PagerDutyConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PagerDutyConfiguration < Integration
+      end
+      class Unknown < Integration
+      end
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ItemIdentifier
+      attr_accessor type: ("ANALYSIS" | "INCIDENT" | "METRIC" | "PARENT" | "ATTACHMENT" | "OTHER" | "AUTOMATION" | "INVOLVED_RESOURCE" | "TASK")
+      attr_accessor value: Types::ItemValue
+      SENSITIVE: []
+    end
+
+    class ItemValue
+      attr_accessor arn: ::String
+      attr_accessor metric_definition: ::String
+      attr_accessor pager_duty_incident_detail: Types::PagerDutyIncidentDetail
+      attr_accessor url: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Arn < ItemValue
+      end
+      class MetricDefinition < ItemValue
+      end
+      class PagerDutyIncidentDetail < ItemValue
+      end
+      class Url < ItemValue
+      end
+      class Unknown < ItemValue
+      end
+    end
+
+    class ListIncidentFindingsInput
+      attr_accessor incident_record_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIncidentFindingsOutput
+      attr_accessor findings: ::Array[Types::FindingSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIncidentRecordsInput
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIncidentRecordsOutput
+      attr_accessor incident_record_summaries: ::Array[Types::IncidentRecordSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRelatedItemsInput
+      attr_accessor incident_record_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRelatedItemsOutput
+      attr_accessor next_token: ::String
+      attr_accessor related_items: ::Array[Types::RelatedItem]
+      SENSITIVE: []
+    end
+
+    class ListReplicationSetsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReplicationSetsOutput
+      attr_accessor next_token: ::String
+      attr_accessor replication_set_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListResponsePlansInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResponsePlansOutput
+      attr_accessor next_token: ::String
+      attr_accessor response_plan_summaries: ::Array[Types::ResponsePlanSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTimelineEventsInput
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor incident_record_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("EVENT_TIME")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ListTimelineEventsOutput
+      attr_accessor event_summaries: ::Array[Types::EventSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class NotificationTargetItem
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class SnsTopicArn < NotificationTargetItem
+      end
+      class Unknown < NotificationTargetItem
+      end
+    end
+
+    class PagerDutyConfiguration
+      attr_accessor name: ::String
+      attr_accessor pager_duty_incident_configuration: Types::PagerDutyIncidentConfiguration
+      attr_accessor secret_id: ::String
+      SENSITIVE: []
+    end
+
+    class PagerDutyIncidentConfiguration
+      attr_accessor service_id: ::String
+      SENSITIVE: []
+    end
+
+    class PagerDutyIncidentDetail
+      attr_accessor auto_resolve: bool
+      attr_accessor id: ::String
+      attr_accessor secret_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyInput
+      attr_accessor policy: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyOutput
+      attr_accessor policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegionInfo
+      attr_accessor sse_kms_key_id: ::String
+      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor status_update_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class RegionMapInputValue
+      attr_accessor sse_kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class RelatedItem
+      attr_accessor generated_id: ::String
+      attr_accessor identifier: Types::ItemIdentifier
+      attr_accessor title: ::String
+      SENSITIVE: []
+    end
+
+    class RelatedItemsUpdate
+      attr_accessor item_to_add: Types::RelatedItem
+      attr_accessor item_to_remove: Types::ItemIdentifier
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ItemToAdd < RelatedItemsUpdate
+      end
+      class ItemToRemove < RelatedItemsUpdate
+      end
+      class Unknown < RelatedItemsUpdate
+      end
+    end
+
+    class ReplicationSet
+      attr_accessor arn: ::String
+      attr_accessor created_by: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor deletion_protected: bool
+      attr_accessor last_modified_by: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor region_map: ::Hash[::String, Types::RegionInfo]
+      attr_accessor status: ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_identifier: ::String
+      attr_accessor resource_type: ("RESPONSE_PLAN" | "INCIDENT_RECORD" | "TIMELINE_EVENT" | "REPLICATION_SET" | "RESOURCE_POLICY")
+      SENSITIVE: []
+    end
+
+    class ResourcePolicy
+      attr_accessor policy_document: ::String
+      attr_accessor policy_id: ::String
+      attr_accessor ram_resource_share_region: ::String
+      SENSITIVE: []
+    end
+
+    class ResponsePlanSummary
+      attr_accessor arn: ::String
+      attr_accessor display_name: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor resource_identifier: ::String
+      attr_accessor resource_type: ("RESPONSE_PLAN" | "INCIDENT_RECORD" | "TIMELINE_EVENT" | "REPLICATION_SET" | "RESOURCE_POLICY")
+      attr_accessor service_code: ("ssm-incidents")
+      SENSITIVE: []
+    end
+
+    class SsmAutomation
+      attr_accessor document_name: ::String
+      attr_accessor document_version: ::String
+      attr_accessor dynamic_parameters: ::Hash[::String, Types::DynamicSsmParameterValue]
+      attr_accessor parameters: ::Hash[::String, ::Array[::String]]
+      attr_accessor role_arn: ::String
+      attr_accessor target_account: ("RESPONSE_PLAN_OWNER_ACCOUNT" | "IMPACTED_ACCOUNT")
+      SENSITIVE: []
+    end
+
+    class StartIncidentInput
+      attr_accessor client_token: ::String
+      attr_accessor impact: ::Integer
+      attr_accessor related_items: ::Array[Types::RelatedItem]
+      attr_accessor response_plan_arn: ::String
+      attr_accessor title: ::String
+      attr_accessor trigger_details: Types::TriggerDetails
+      SENSITIVE: []
+    end
+
+    class StartIncidentOutput
+      attr_accessor incident_record_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ("ssm-incidents")
+      SENSITIVE: []
+    end
+
+    class TimelineEvent
+      attr_accessor event_data: ::String
+      attr_accessor event_id: ::String
+      attr_accessor event_references: ::Array[Types::EventReference]
+      attr_accessor event_time: ::Time
+      attr_accessor event_type: ::String
+      attr_accessor event_updated_time: ::Time
+      attr_accessor incident_record_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TriggerDetails
+      attr_accessor raw_data: ::String
+      attr_accessor source: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor trigger_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDeletionProtectionInput
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor deletion_protected: bool
+      SENSITIVE: []
+    end
+
+    class UpdateDeletionProtectionOutput < Aws::EmptyStructure
+    end
+
+    class UpdateIncidentRecordInput
+      attr_accessor arn: ::String
+      attr_accessor chat_channel: Types::ChatChannel
+      attr_accessor client_token: ::String
+      attr_accessor impact: ::Integer
+      attr_accessor notification_targets: ::Array[Types::NotificationTargetItem]
+      attr_accessor status: ("OPEN" | "RESOLVED")
+      attr_accessor summary: ::String
+      attr_accessor title: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateIncidentRecordOutput < Aws::EmptyStructure
+    end
+
+    class UpdateRelatedItemsInput
+      attr_accessor client_token: ::String
+      attr_accessor incident_record_arn: ::String
+      attr_accessor related_items_update: Types::RelatedItemsUpdate
+      SENSITIVE: []
+    end
+
+    class UpdateRelatedItemsOutput < Aws::EmptyStructure
+    end
+
+    class UpdateReplicationSetAction
+      attr_accessor add_region_action: Types::AddRegionAction
+      attr_accessor delete_region_action: Types::DeleteRegionAction
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AddRegionAction < UpdateReplicationSetAction
+      end
+      class DeleteRegionAction < UpdateReplicationSetAction
+      end
+      class Unknown < UpdateReplicationSetAction
+      end
+    end
+
+    class UpdateReplicationSetInput
+      attr_accessor actions: ::Array[Types::UpdateReplicationSetAction]
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateReplicationSetOutput < Aws::EmptyStructure
+    end
+
+    class UpdateResponsePlanInput
+      attr_accessor actions: ::Array[Types::Action]
+      attr_accessor arn: ::String
+      attr_accessor chat_channel: Types::ChatChannel
+      attr_accessor client_token: ::String
+      attr_accessor display_name: ::String
+      attr_accessor engagements: ::Array[::String]
+      attr_accessor incident_template_dedupe_string: ::String
+      attr_accessor incident_template_impact: ::Integer
+      attr_accessor incident_template_notification_targets: ::Array[Types::NotificationTargetItem]
+      attr_accessor incident_template_summary: ::String
+      attr_accessor incident_template_tags: ::Hash[::String, ::String]
+      attr_accessor incident_template_title: ::String
+      attr_accessor integrations: ::Array[Types::Integration]
+      SENSITIVE: []
+    end
+
+    class UpdateResponsePlanOutput < Aws::EmptyStructure
+    end
+
+    class UpdateTimelineEventInput
+      attr_accessor client_token: ::String
+      attr_accessor event_data: ::String
+      attr_accessor event_id: ::String
+      attr_accessor event_references: ::Array[Types::EventReference]
+      attr_accessor event_time: ::Time
+      attr_accessor event_type: ::String
+      attr_accessor incident_record_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTimelineEventOutput < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

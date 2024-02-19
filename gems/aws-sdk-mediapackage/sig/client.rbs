@@ -1,0 +1,672 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MediaPackage
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _ConfigureLogsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigureLogsResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::String
+        def description: () -> ::String
+        def egress_access_logs: () -> Types::EgressAccessLogs
+        def hls_ingest: () -> Types::HlsIngest
+        def id: () -> ::String
+        def ingress_access_logs: () -> Types::IngressAccessLogs
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#configure_logs-instance_method
+      def configure_logs: (
+                            ?egress_access_logs: {
+                              log_group_name: ::String?
+                            },
+                            id: ::String,
+                            ?ingress_access_logs: {
+                              log_group_name: ::String?
+                            }
+                          ) -> _ConfigureLogsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfigureLogsResponseSuccess
+
+      interface _CreateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::String
+        def description: () -> ::String
+        def egress_access_logs: () -> Types::EgressAccessLogs
+        def hls_ingest: () -> Types::HlsIngest
+        def id: () -> ::String
+        def ingress_access_logs: () -> Types::IngressAccessLogs
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#create_channel-instance_method
+      def create_channel: (
+                            ?description: ::String,
+                            id: ::String,
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
+
+      interface _CreateHarvestJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHarvestJobResponse]
+        def arn: () -> ::String
+        def channel_id: () -> ::String
+        def created_at: () -> ::String
+        def end_time: () -> ::String
+        def id: () -> ::String
+        def origin_endpoint_id: () -> ::String
+        def s3_destination: () -> Types::S3Destination
+        def start_time: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#create_harvest_job-instance_method
+      def create_harvest_job: (
+                                end_time: ::String,
+                                id: ::String,
+                                origin_endpoint_id: ::String,
+                                s3_destination: {
+                                  bucket_name: ::String,
+                                  manifest_key: ::String,
+                                  role_arn: ::String
+                                },
+                                start_time: ::String
+                              ) -> _CreateHarvestJobResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHarvestJobResponseSuccess
+
+      interface _CreateOriginEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOriginEndpointResponse]
+        def arn: () -> ::String
+        def authorization: () -> Types::Authorization
+        def channel_id: () -> ::String
+        def cmaf_package: () -> Types::CmafPackage
+        def created_at: () -> ::String
+        def dash_package: () -> Types::DashPackage
+        def description: () -> ::String
+        def hls_package: () -> Types::HlsPackage
+        def id: () -> ::String
+        def manifest_name: () -> ::String
+        def mss_package: () -> Types::MssPackage
+        def origination: () -> ("ALLOW" | "DENY")
+        def startover_window_seconds: () -> ::Integer
+        def tags: () -> ::Hash[::String, ::String]
+        def time_delay_seconds: () -> ::Integer
+        def url: () -> ::String
+        def whitelist: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#create_origin_endpoint-instance_method
+      def create_origin_endpoint: (
+                                    ?authorization: {
+                                      cdn_identifier_secret: ::String,
+                                      secrets_role_arn: ::String
+                                    },
+                                    channel_id: ::String,
+                                    ?cmaf_package: {
+                                      encryption: {
+                                        constant_initialization_vector: ::String?,
+                                        encryption_method: ("SAMPLE_AES" | "AES_CTR")?,
+                                        key_rotation_interval_seconds: ::Integer?,
+                                        speke_key_provider: {
+                                          certificate_arn: ::String?,
+                                          encryption_contract_configuration: {
+                                            preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
+                                            preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
+                                          }?,
+                                          resource_id: ::String,
+                                          role_arn: ::String,
+                                          system_ids: Array[::String],
+                                          url: ::String
+                                        }
+                                      }?,
+                                      hls_manifests: Array[
+                                        {
+                                          ad_markers: ("NONE" | "SCTE35_ENHANCED" | "PASSTHROUGH" | "DATERANGE")?,
+                                          ad_triggers: Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY")]?,
+                                          ads_on_delivery_restrictions: ("NONE" | "RESTRICTED" | "UNRESTRICTED" | "BOTH")?,
+                                          id: ::String,
+                                          include_iframe_only_stream: bool?,
+                                          manifest_name: ::String?,
+                                          playlist_type: ("NONE" | "EVENT" | "VOD")?,
+                                          playlist_window_seconds: ::Integer?,
+                                          program_date_time_interval_seconds: ::Integer?
+                                        },
+                                      ]?,
+                                      segment_duration_seconds: ::Integer?,
+                                      segment_prefix: ::String?,
+                                      stream_selection: {
+                                        max_video_bits_per_second: ::Integer?,
+                                        min_video_bits_per_second: ::Integer?,
+                                        stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+                                      }?
+                                    },
+                                    ?dash_package: {
+                                      ad_triggers: Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY")]?,
+                                      ads_on_delivery_restrictions: ("NONE" | "RESTRICTED" | "UNRESTRICTED" | "BOTH")?,
+                                      encryption: {
+                                        key_rotation_interval_seconds: ::Integer?,
+                                        speke_key_provider: {
+                                          certificate_arn: ::String?,
+                                          encryption_contract_configuration: {
+                                            preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
+                                            preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
+                                          }?,
+                                          resource_id: ::String,
+                                          role_arn: ::String,
+                                          system_ids: Array[::String],
+                                          url: ::String
+                                        }
+                                      }?,
+                                      include_iframe_only_stream: bool?,
+                                      manifest_layout: ("FULL" | "COMPACT" | "DRM_TOP_LEVEL_COMPACT")?,
+                                      manifest_window_seconds: ::Integer?,
+                                      min_buffer_time_seconds: ::Integer?,
+                                      min_update_period_seconds: ::Integer?,
+                                      period_triggers: Array[("ADS")]?,
+                                      profile: ("NONE" | "HBBTV_1_5" | "HYBRIDCAST" | "DVB_DASH_2014")?,
+                                      segment_duration_seconds: ::Integer?,
+                                      segment_template_format: ("NUMBER_WITH_TIMELINE" | "TIME_WITH_TIMELINE" | "NUMBER_WITH_DURATION")?,
+                                      stream_selection: {
+                                        max_video_bits_per_second: ::Integer?,
+                                        min_video_bits_per_second: ::Integer?,
+                                        stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+                                      }?,
+                                      suggested_presentation_delay_seconds: ::Integer?,
+                                      utc_timing: ("NONE" | "HTTP-HEAD" | "HTTP-ISO" | "HTTP-XSDATE")?,
+                                      utc_timing_uri: ::String?
+                                    },
+                                    ?description: ::String,
+                                    ?hls_package: {
+                                      ad_markers: ("NONE" | "SCTE35_ENHANCED" | "PASSTHROUGH" | "DATERANGE")?,
+                                      ad_triggers: Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY")]?,
+                                      ads_on_delivery_restrictions: ("NONE" | "RESTRICTED" | "UNRESTRICTED" | "BOTH")?,
+                                      encryption: {
+                                        constant_initialization_vector: ::String?,
+                                        encryption_method: ("AES_128" | "SAMPLE_AES")?,
+                                        key_rotation_interval_seconds: ::Integer?,
+                                        repeat_ext_x_key: bool?,
+                                        speke_key_provider: {
+                                          certificate_arn: ::String?,
+                                          encryption_contract_configuration: {
+                                            preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
+                                            preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
+                                          }?,
+                                          resource_id: ::String,
+                                          role_arn: ::String,
+                                          system_ids: Array[::String],
+                                          url: ::String
+                                        }
+                                      }?,
+                                      include_dvb_subtitles: bool?,
+                                      include_iframe_only_stream: bool?,
+                                      playlist_type: ("NONE" | "EVENT" | "VOD")?,
+                                      playlist_window_seconds: ::Integer?,
+                                      program_date_time_interval_seconds: ::Integer?,
+                                      segment_duration_seconds: ::Integer?,
+                                      stream_selection: {
+                                        max_video_bits_per_second: ::Integer?,
+                                        min_video_bits_per_second: ::Integer?,
+                                        stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+                                      }?,
+                                      use_audio_rendition_group: bool?
+                                    },
+                                    id: ::String,
+                                    ?manifest_name: ::String,
+                                    ?mss_package: {
+                                      encryption: {
+                                        speke_key_provider: {
+                                          certificate_arn: ::String?,
+                                          encryption_contract_configuration: {
+                                            preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
+                                            preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
+                                          }?,
+                                          resource_id: ::String,
+                                          role_arn: ::String,
+                                          system_ids: Array[::String],
+                                          url: ::String
+                                        }
+                                      }?,
+                                      manifest_window_seconds: ::Integer?,
+                                      segment_duration_seconds: ::Integer?,
+                                      stream_selection: {
+                                        max_video_bits_per_second: ::Integer?,
+                                        min_video_bits_per_second: ::Integer?,
+                                        stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+                                      }?
+                                    },
+                                    ?origination: ("ALLOW" | "DENY"),
+                                    ?startover_window_seconds: ::Integer,
+                                    ?tags: Hash[::String, ::String],
+                                    ?time_delay_seconds: ::Integer,
+                                    ?whitelist: Array[::String]
+                                  ) -> _CreateOriginEndpointResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOriginEndpointResponseSuccess
+
+      interface _DeleteChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteChannelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#delete_channel-instance_method
+      def delete_channel: (
+                            id: ::String
+                          ) -> _DeleteChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteChannelResponseSuccess
+
+      interface _DeleteOriginEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOriginEndpointResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#delete_origin_endpoint-instance_method
+      def delete_origin_endpoint: (
+                                    id: ::String
+                                  ) -> _DeleteOriginEndpointResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOriginEndpointResponseSuccess
+
+      interface _DescribeChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::String
+        def description: () -> ::String
+        def egress_access_logs: () -> Types::EgressAccessLogs
+        def hls_ingest: () -> Types::HlsIngest
+        def id: () -> ::String
+        def ingress_access_logs: () -> Types::IngressAccessLogs
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#describe_channel-instance_method
+      def describe_channel: (
+                              id: ::String
+                            ) -> _DescribeChannelResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelResponseSuccess
+
+      interface _DescribeHarvestJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeHarvestJobResponse]
+        def arn: () -> ::String
+        def channel_id: () -> ::String
+        def created_at: () -> ::String
+        def end_time: () -> ::String
+        def id: () -> ::String
+        def origin_endpoint_id: () -> ::String
+        def s3_destination: () -> Types::S3Destination
+        def start_time: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#describe_harvest_job-instance_method
+      def describe_harvest_job: (
+                                  id: ::String
+                                ) -> _DescribeHarvestJobResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeHarvestJobResponseSuccess
+
+      interface _DescribeOriginEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOriginEndpointResponse]
+        def arn: () -> ::String
+        def authorization: () -> Types::Authorization
+        def channel_id: () -> ::String
+        def cmaf_package: () -> Types::CmafPackage
+        def created_at: () -> ::String
+        def dash_package: () -> Types::DashPackage
+        def description: () -> ::String
+        def hls_package: () -> Types::HlsPackage
+        def id: () -> ::String
+        def manifest_name: () -> ::String
+        def mss_package: () -> Types::MssPackage
+        def origination: () -> ("ALLOW" | "DENY")
+        def startover_window_seconds: () -> ::Integer
+        def tags: () -> ::Hash[::String, ::String]
+        def time_delay_seconds: () -> ::Integer
+        def url: () -> ::String
+        def whitelist: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#describe_origin_endpoint-instance_method
+      def describe_origin_endpoint: (
+                                      id: ::String
+                                    ) -> _DescribeOriginEndpointResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOriginEndpointResponseSuccess
+
+      interface _ListChannelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelsResponse]
+        def channels: () -> ::Array[Types::Channel]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#list_channels-instance_method
+      def list_channels: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListChannelsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsResponseSuccess
+
+      interface _ListHarvestJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListHarvestJobsResponse]
+        def harvest_jobs: () -> ::Array[Types::HarvestJob]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#list_harvest_jobs-instance_method
+      def list_harvest_jobs: (
+                               ?include_channel_id: ::String,
+                               ?include_status: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListHarvestJobsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListHarvestJobsResponseSuccess
+
+      interface _ListOriginEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOriginEndpointsResponse]
+        def next_token: () -> ::String
+        def origin_endpoints: () -> ::Array[Types::OriginEndpoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#list_origin_endpoints-instance_method
+      def list_origin_endpoints: (
+                                   ?channel_id: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListOriginEndpointsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOriginEndpointsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RotateChannelCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RotateChannelCredentialsResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::String
+        def description: () -> ::String
+        def egress_access_logs: () -> Types::EgressAccessLogs
+        def hls_ingest: () -> Types::HlsIngest
+        def id: () -> ::String
+        def ingress_access_logs: () -> Types::IngressAccessLogs
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#rotate_channel_credentials-instance_method
+      def rotate_channel_credentials: (
+                                        id: ::String
+                                      ) -> _RotateChannelCredentialsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RotateChannelCredentialsResponseSuccess
+
+      interface _RotateIngestEndpointCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RotateIngestEndpointCredentialsResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::String
+        def description: () -> ::String
+        def egress_access_logs: () -> Types::EgressAccessLogs
+        def hls_ingest: () -> Types::HlsIngest
+        def id: () -> ::String
+        def ingress_access_logs: () -> Types::IngressAccessLogs
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#rotate_ingest_endpoint_credentials-instance_method
+      def rotate_ingest_endpoint_credentials: (
+                                                id: ::String,
+                                                ingest_endpoint_id: ::String
+                                              ) -> _RotateIngestEndpointCredentialsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RotateIngestEndpointCredentialsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::String
+        def description: () -> ::String
+        def egress_access_logs: () -> Types::EgressAccessLogs
+        def hls_ingest: () -> Types::HlsIngest
+        def id: () -> ::String
+        def ingress_access_logs: () -> Types::IngressAccessLogs
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#update_channel-instance_method
+      def update_channel: (
+                            ?description: ::String,
+                            id: ::String
+                          ) -> _UpdateChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
+
+      interface _UpdateOriginEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOriginEndpointResponse]
+        def arn: () -> ::String
+        def authorization: () -> Types::Authorization
+        def channel_id: () -> ::String
+        def cmaf_package: () -> Types::CmafPackage
+        def created_at: () -> ::String
+        def dash_package: () -> Types::DashPackage
+        def description: () -> ::String
+        def hls_package: () -> Types::HlsPackage
+        def id: () -> ::String
+        def manifest_name: () -> ::String
+        def mss_package: () -> Types::MssPackage
+        def origination: () -> ("ALLOW" | "DENY")
+        def startover_window_seconds: () -> ::Integer
+        def tags: () -> ::Hash[::String, ::String]
+        def time_delay_seconds: () -> ::Integer
+        def url: () -> ::String
+        def whitelist: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackage/Client.html#update_origin_endpoint-instance_method
+      def update_origin_endpoint: (
+                                    ?authorization: {
+                                      cdn_identifier_secret: ::String,
+                                      secrets_role_arn: ::String
+                                    },
+                                    ?cmaf_package: {
+                                      encryption: {
+                                        constant_initialization_vector: ::String?,
+                                        encryption_method: ("SAMPLE_AES" | "AES_CTR")?,
+                                        key_rotation_interval_seconds: ::Integer?,
+                                        speke_key_provider: {
+                                          certificate_arn: ::String?,
+                                          encryption_contract_configuration: {
+                                            preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
+                                            preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
+                                          }?,
+                                          resource_id: ::String,
+                                          role_arn: ::String,
+                                          system_ids: Array[::String],
+                                          url: ::String
+                                        }
+                                      }?,
+                                      hls_manifests: Array[
+                                        {
+                                          ad_markers: ("NONE" | "SCTE35_ENHANCED" | "PASSTHROUGH" | "DATERANGE")?,
+                                          ad_triggers: Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY")]?,
+                                          ads_on_delivery_restrictions: ("NONE" | "RESTRICTED" | "UNRESTRICTED" | "BOTH")?,
+                                          id: ::String,
+                                          include_iframe_only_stream: bool?,
+                                          manifest_name: ::String?,
+                                          playlist_type: ("NONE" | "EVENT" | "VOD")?,
+                                          playlist_window_seconds: ::Integer?,
+                                          program_date_time_interval_seconds: ::Integer?
+                                        },
+                                      ]?,
+                                      segment_duration_seconds: ::Integer?,
+                                      segment_prefix: ::String?,
+                                      stream_selection: {
+                                        max_video_bits_per_second: ::Integer?,
+                                        min_video_bits_per_second: ::Integer?,
+                                        stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+                                      }?
+                                    },
+                                    ?dash_package: {
+                                      ad_triggers: Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY")]?,
+                                      ads_on_delivery_restrictions: ("NONE" | "RESTRICTED" | "UNRESTRICTED" | "BOTH")?,
+                                      encryption: {
+                                        key_rotation_interval_seconds: ::Integer?,
+                                        speke_key_provider: {
+                                          certificate_arn: ::String?,
+                                          encryption_contract_configuration: {
+                                            preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
+                                            preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
+                                          }?,
+                                          resource_id: ::String,
+                                          role_arn: ::String,
+                                          system_ids: Array[::String],
+                                          url: ::String
+                                        }
+                                      }?,
+                                      include_iframe_only_stream: bool?,
+                                      manifest_layout: ("FULL" | "COMPACT" | "DRM_TOP_LEVEL_COMPACT")?,
+                                      manifest_window_seconds: ::Integer?,
+                                      min_buffer_time_seconds: ::Integer?,
+                                      min_update_period_seconds: ::Integer?,
+                                      period_triggers: Array[("ADS")]?,
+                                      profile: ("NONE" | "HBBTV_1_5" | "HYBRIDCAST" | "DVB_DASH_2014")?,
+                                      segment_duration_seconds: ::Integer?,
+                                      segment_template_format: ("NUMBER_WITH_TIMELINE" | "TIME_WITH_TIMELINE" | "NUMBER_WITH_DURATION")?,
+                                      stream_selection: {
+                                        max_video_bits_per_second: ::Integer?,
+                                        min_video_bits_per_second: ::Integer?,
+                                        stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+                                      }?,
+                                      suggested_presentation_delay_seconds: ::Integer?,
+                                      utc_timing: ("NONE" | "HTTP-HEAD" | "HTTP-ISO" | "HTTP-XSDATE")?,
+                                      utc_timing_uri: ::String?
+                                    },
+                                    ?description: ::String,
+                                    ?hls_package: {
+                                      ad_markers: ("NONE" | "SCTE35_ENHANCED" | "PASSTHROUGH" | "DATERANGE")?,
+                                      ad_triggers: Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY")]?,
+                                      ads_on_delivery_restrictions: ("NONE" | "RESTRICTED" | "UNRESTRICTED" | "BOTH")?,
+                                      encryption: {
+                                        constant_initialization_vector: ::String?,
+                                        encryption_method: ("AES_128" | "SAMPLE_AES")?,
+                                        key_rotation_interval_seconds: ::Integer?,
+                                        repeat_ext_x_key: bool?,
+                                        speke_key_provider: {
+                                          certificate_arn: ::String?,
+                                          encryption_contract_configuration: {
+                                            preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
+                                            preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
+                                          }?,
+                                          resource_id: ::String,
+                                          role_arn: ::String,
+                                          system_ids: Array[::String],
+                                          url: ::String
+                                        }
+                                      }?,
+                                      include_dvb_subtitles: bool?,
+                                      include_iframe_only_stream: bool?,
+                                      playlist_type: ("NONE" | "EVENT" | "VOD")?,
+                                      playlist_window_seconds: ::Integer?,
+                                      program_date_time_interval_seconds: ::Integer?,
+                                      segment_duration_seconds: ::Integer?,
+                                      stream_selection: {
+                                        max_video_bits_per_second: ::Integer?,
+                                        min_video_bits_per_second: ::Integer?,
+                                        stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+                                      }?,
+                                      use_audio_rendition_group: bool?
+                                    },
+                                    id: ::String,
+                                    ?manifest_name: ::String,
+                                    ?mss_package: {
+                                      encryption: {
+                                        speke_key_provider: {
+                                          certificate_arn: ::String?,
+                                          encryption_contract_configuration: {
+                                            preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
+                                            preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
+                                          }?,
+                                          resource_id: ::String,
+                                          role_arn: ::String,
+                                          system_ids: Array[::String],
+                                          url: ::String
+                                        }
+                                      }?,
+                                      manifest_window_seconds: ::Integer?,
+                                      segment_duration_seconds: ::Integer?,
+                                      stream_selection: {
+                                        max_video_bits_per_second: ::Integer?,
+                                        min_video_bits_per_second: ::Integer?,
+                                        stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+                                      }?
+                                    },
+                                    ?origination: ("ALLOW" | "DENY"),
+                                    ?startover_window_seconds: ::Integer,
+                                    ?time_delay_seconds: ::Integer,
+                                    ?whitelist: Array[::String]
+                                  ) -> _UpdateOriginEndpointResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOriginEndpointResponseSuccess
+    end
+  end
+end
+

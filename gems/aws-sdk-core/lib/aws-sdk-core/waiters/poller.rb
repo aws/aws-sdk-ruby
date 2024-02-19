@@ -97,7 +97,7 @@ module Aws
 
       def matches_error?(acceptor, response)
         Aws::Errors::ServiceError === response.error &&
-        response.error.code == acceptor['expected'].gsub('.', '')
+        response.error.code == acceptor['expected'].delete('.')
       end
 
       def path(acceptor)

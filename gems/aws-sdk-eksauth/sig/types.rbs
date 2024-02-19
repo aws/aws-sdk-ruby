@@ -1,0 +1,97 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::EKSAuth
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssumeRoleForPodIdentityRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor token: ::String
+      SENSITIVE: [:token]
+    end
+
+    class AssumeRoleForPodIdentityResponse
+      attr_accessor subject: Types::Subject
+      attr_accessor audience: ::String
+      attr_accessor pod_identity_association: Types::PodIdentityAssociation
+      attr_accessor assumed_role_user: Types::AssumedRoleUser
+      attr_accessor credentials: Types::Credentials
+      SENSITIVE: [:credentials]
+    end
+
+    class AssumedRoleUser
+      attr_accessor arn: ::String
+      attr_accessor assume_role_id: ::String
+      SENSITIVE: []
+    end
+
+    class Credentials
+      attr_accessor session_token: ::String
+      attr_accessor secret_access_key: ::String
+      attr_accessor access_key_id: ::String
+      attr_accessor expiration: ::Time
+      SENSITIVE: []
+    end
+
+    class ExpiredTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PodIdentityAssociation
+      attr_accessor association_arn: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Subject
+      attr_accessor namespace: ::String
+      attr_accessor service_account: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

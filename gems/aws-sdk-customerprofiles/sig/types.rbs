@@ -1,0 +1,1409 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CustomerProfiles
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AddProfileKeyRequest
+      attr_accessor profile_id: ::String
+      attr_accessor key_name: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class AddProfileKeyResponse
+      attr_accessor key_name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AdditionalSearchKey
+      attr_accessor key_name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Address
+      attr_accessor address_1: ::String
+      attr_accessor address_2: ::String
+      attr_accessor address_3: ::String
+      attr_accessor address_4: ::String
+      attr_accessor city: ::String
+      attr_accessor county: ::String
+      attr_accessor state: ::String
+      attr_accessor province: ::String
+      attr_accessor country: ::String
+      attr_accessor postal_code: ::String
+      SENSITIVE: []
+    end
+
+    class AppflowIntegration
+      attr_accessor flow_definition: Types::FlowDefinition
+      attr_accessor batches: ::Array[Types::Batch]
+      SENSITIVE: [:flow_definition]
+    end
+
+    class AppflowIntegrationWorkflowAttributes
+      attr_accessor source_connector_type: ("Salesforce" | "Marketo" | "Zendesk" | "Servicenow" | "S3")
+      attr_accessor connector_profile_name: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AppflowIntegrationWorkflowMetrics
+      attr_accessor records_processed: ::Integer
+      attr_accessor steps_completed: ::Integer
+      attr_accessor total_steps: ::Integer
+      SENSITIVE: []
+    end
+
+    class AppflowIntegrationWorkflowStep
+      attr_accessor flow_name: ::String
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "SPLIT" | "RETRY" | "CANCELLED")
+      attr_accessor execution_message: ::String
+      attr_accessor records_processed: ::Integer
+      attr_accessor batch_records_start_time: ::String
+      attr_accessor batch_records_end_time: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AttributeDetails
+      attr_accessor attributes: ::Array[Types::AttributeItem]
+      attr_accessor expression: ::String
+      SENSITIVE: []
+    end
+
+    class AttributeItem
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AttributeTypesSelector
+      attr_accessor attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY")
+      attr_accessor address: ::Array[::String]
+      attr_accessor phone_number: ::Array[::String]
+      attr_accessor email_address: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AutoMerging
+      attr_accessor enabled: bool
+      attr_accessor consolidation: Types::Consolidation
+      attr_accessor conflict_resolution: Types::ConflictResolution
+      attr_accessor min_allowed_confidence_score_for_merging: ::Float
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Batch
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Conditions
+      attr_accessor range: Types::Range
+      attr_accessor object_count: ::Integer
+      attr_accessor threshold: Types::Threshold
+      SENSITIVE: []
+    end
+
+    class ConflictResolution
+      attr_accessor conflict_resolving_model: ("RECENCY" | "SOURCE")
+      attr_accessor source_name: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectorOperator
+      attr_accessor marketo: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor s3: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor salesforce: ("PROJECTION" | "LESS_THAN" | "CONTAINS" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor service_now: ("PROJECTION" | "CONTAINS" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      attr_accessor zendesk: ("PROJECTION" | "GREATER_THAN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")
+      SENSITIVE: []
+    end
+
+    class Consolidation
+      attr_accessor matching_attributes_list: ::Array[::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class CreateCalculatedAttributeDefinitionRequest
+      attr_accessor domain_name: ::String
+      attr_accessor calculated_attribute_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor attribute_details: Types::AttributeDetails
+      attr_accessor conditions: Types::Conditions
+      attr_accessor statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description, :attribute_details, :conditions, :statistic]
+    end
+
+    class CreateCalculatedAttributeDefinitionResponse
+      attr_accessor calculated_attribute_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor attribute_details: Types::AttributeDetails
+      attr_accessor conditions: Types::Conditions
+      attr_accessor statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description, :attribute_details, :conditions, :statistic]
+    end
+
+    class CreateDomainRequest
+      attr_accessor domain_name: ::String
+      attr_accessor default_expiration_days: ::Integer
+      attr_accessor default_encryption_key: ::String
+      attr_accessor dead_letter_queue_url: ::String
+      attr_accessor matching: Types::MatchingRequest
+      attr_accessor rule_based_matching: Types::RuleBasedMatchingRequest
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDomainResponse
+      attr_accessor domain_name: ::String
+      attr_accessor default_expiration_days: ::Integer
+      attr_accessor default_encryption_key: ::String
+      attr_accessor dead_letter_queue_url: ::String
+      attr_accessor matching: Types::MatchingResponse
+      attr_accessor rule_based_matching: Types::RuleBasedMatchingResponse
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateEventStreamRequest
+      attr_accessor domain_name: ::String
+      attr_accessor uri: ::String
+      attr_accessor event_stream_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateEventStreamResponse
+      attr_accessor event_stream_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateIntegrationWorkflowRequest
+      attr_accessor domain_name: ::String
+      attr_accessor workflow_type: ("APPFLOW_INTEGRATION")
+      attr_accessor integration_config: Types::IntegrationConfig
+      attr_accessor object_type_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateIntegrationWorkflowResponse
+      attr_accessor workflow_id: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProfileRequest
+      attr_accessor domain_name: ::String
+      attr_accessor account_number: ::String
+      attr_accessor additional_information: ::String
+      attr_accessor party_type: ("INDIVIDUAL" | "BUSINESS" | "OTHER")
+      attr_accessor business_name: ::String
+      attr_accessor first_name: ::String
+      attr_accessor middle_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor birth_date: ::String
+      attr_accessor gender: ("MALE" | "FEMALE" | "UNSPECIFIED")
+      attr_accessor phone_number: ::String
+      attr_accessor mobile_phone_number: ::String
+      attr_accessor home_phone_number: ::String
+      attr_accessor business_phone_number: ::String
+      attr_accessor email_address: ::String
+      attr_accessor personal_email_address: ::String
+      attr_accessor business_email_address: ::String
+      attr_accessor address: Types::Address
+      attr_accessor shipping_address: Types::Address
+      attr_accessor mailing_address: Types::Address
+      attr_accessor billing_address: Types::Address
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor party_type_string: ::String
+      attr_accessor gender_string: ::String
+      SENSITIVE: [:account_number, :additional_information, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string]
+    end
+
+    class CreateProfileResponse
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCalculatedAttributeDefinitionRequest
+      attr_accessor domain_name: ::String
+      attr_accessor calculated_attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCalculatedAttributeDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDomainRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventStreamRequest
+      attr_accessor domain_name: ::String
+      attr_accessor event_stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventStreamResponse < Aws::EmptyStructure
+    end
+
+    class DeleteIntegrationRequest
+      attr_accessor domain_name: ::String
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIntegrationResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProfileKeyRequest
+      attr_accessor profile_id: ::String
+      attr_accessor key_name: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProfileKeyResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProfileObjectRequest
+      attr_accessor profile_id: ::String
+      attr_accessor profile_object_unique_key: ::String
+      attr_accessor object_type_name: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProfileObjectResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProfileObjectTypeRequest
+      attr_accessor domain_name: ::String
+      attr_accessor object_type_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProfileObjectTypeResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProfileRequest
+      attr_accessor profile_id: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProfileResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowRequest
+      attr_accessor domain_name: ::String
+      attr_accessor workflow_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowResponse < Aws::EmptyStructure
+    end
+
+    class DestinationSummary
+      attr_accessor uri: ::String
+      attr_accessor status: ("HEALTHY" | "UNHEALTHY")
+      attr_accessor unhealthy_since: ::Time
+      SENSITIVE: []
+    end
+
+    class DetectProfileObjectTypeRequest
+      attr_accessor objects: ::Array[::String]
+      attr_accessor domain_name: ::String
+      SENSITIVE: [:objects]
+    end
+
+    class DetectProfileObjectTypeResponse
+      attr_accessor detected_profile_object_types: ::Array[Types::DetectedProfileObjectType]
+      SENSITIVE: []
+    end
+
+    class DetectedProfileObjectType
+      attr_accessor source_last_updated_timestamp_format: ::String
+      attr_accessor fields: ::Hash[::String, Types::ObjectTypeField]
+      attr_accessor keys: ::Hash[::String, ::Array[Types::ObjectTypeKey]]
+      SENSITIVE: [:fields, :keys]
+    end
+
+    class DomainStats
+      attr_accessor profile_count: ::Integer
+      attr_accessor metering_profile_count: ::Integer
+      attr_accessor object_count: ::Integer
+      attr_accessor total_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class EventStreamDestinationDetails
+      attr_accessor uri: ::String
+      attr_accessor status: ("HEALTHY" | "UNHEALTHY")
+      attr_accessor unhealthy_since: ::Time
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EventStreamSummary
+      attr_accessor domain_name: ::String
+      attr_accessor event_stream_name: ::String
+      attr_accessor event_stream_arn: ::String
+      attr_accessor state: ("RUNNING" | "STOPPED")
+      attr_accessor stopped_since: ::Time
+      attr_accessor destination_summary: Types::DestinationSummary
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ExportingConfig
+      attr_accessor s3_exporting: Types::S3ExportingConfig
+      SENSITIVE: []
+    end
+
+    class ExportingLocation
+      attr_accessor s3_exporting: Types::S3ExportingLocation
+      SENSITIVE: []
+    end
+
+    class FieldSourceProfileIds
+      attr_accessor account_number: ::String
+      attr_accessor additional_information: ::String
+      attr_accessor party_type: ::String
+      attr_accessor business_name: ::String
+      attr_accessor first_name: ::String
+      attr_accessor middle_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor birth_date: ::String
+      attr_accessor gender: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor mobile_phone_number: ::String
+      attr_accessor home_phone_number: ::String
+      attr_accessor business_phone_number: ::String
+      attr_accessor email_address: ::String
+      attr_accessor personal_email_address: ::String
+      attr_accessor business_email_address: ::String
+      attr_accessor address: ::String
+      attr_accessor shipping_address: ::String
+      attr_accessor mailing_address: ::String
+      attr_accessor billing_address: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class FlowDefinition
+      attr_accessor description: ::String
+      attr_accessor flow_name: ::String
+      attr_accessor kms_arn: ::String
+      attr_accessor source_flow_config: Types::SourceFlowConfig
+      attr_accessor tasks: ::Array[Types::Task]
+      attr_accessor trigger_config: Types::TriggerConfig
+      SENSITIVE: []
+    end
+
+    class FoundByKeyValue
+      attr_accessor key_name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetAutoMergingPreviewRequest
+      attr_accessor domain_name: ::String
+      attr_accessor consolidation: Types::Consolidation
+      attr_accessor conflict_resolution: Types::ConflictResolution
+      attr_accessor min_allowed_confidence_score_for_merging: ::Float
+      SENSITIVE: []
+    end
+
+    class GetAutoMergingPreviewResponse
+      attr_accessor domain_name: ::String
+      attr_accessor number_of_matches_in_sample: ::Integer
+      attr_accessor number_of_profiles_in_sample: ::Integer
+      attr_accessor number_of_profiles_will_be_merged: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetCalculatedAttributeDefinitionRequest
+      attr_accessor domain_name: ::String
+      attr_accessor calculated_attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCalculatedAttributeDefinitionResponse
+      attr_accessor calculated_attribute_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
+      attr_accessor conditions: Types::Conditions
+      attr_accessor attribute_details: Types::AttributeDetails
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description, :statistic, :conditions, :attribute_details]
+    end
+
+    class GetCalculatedAttributeForProfileRequest
+      attr_accessor domain_name: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor calculated_attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCalculatedAttributeForProfileResponse
+      attr_accessor calculated_attribute_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor is_data_partial: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainResponse
+      attr_accessor domain_name: ::String
+      attr_accessor default_expiration_days: ::Integer
+      attr_accessor default_encryption_key: ::String
+      attr_accessor dead_letter_queue_url: ::String
+      attr_accessor stats: Types::DomainStats
+      attr_accessor matching: Types::MatchingResponse
+      attr_accessor rule_based_matching: Types::RuleBasedMatchingResponse
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetEventStreamRequest
+      attr_accessor domain_name: ::String
+      attr_accessor event_stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetEventStreamResponse
+      attr_accessor domain_name: ::String
+      attr_accessor event_stream_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor state: ("RUNNING" | "STOPPED")
+      attr_accessor stopped_since: ::Time
+      attr_accessor destination_details: Types::EventStreamDestinationDetails
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetIdentityResolutionJobRequest
+      attr_accessor domain_name: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetIdentityResolutionJobResponse
+      attr_accessor domain_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor status: ("PENDING" | "PREPROCESSING" | "FIND_MATCHING" | "MERGING" | "COMPLETED" | "PARTIAL_SUCCESS" | "FAILED")
+      attr_accessor message: ::String
+      attr_accessor job_start_time: ::Time
+      attr_accessor job_end_time: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor job_expiration_time: ::Time
+      attr_accessor auto_merging: Types::AutoMerging
+      attr_accessor exporting_location: Types::ExportingLocation
+      attr_accessor job_stats: Types::JobStats
+      SENSITIVE: []
+    end
+
+    class GetIntegrationRequest
+      attr_accessor domain_name: ::String
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class GetIntegrationResponse
+      attr_accessor domain_name: ::String
+      attr_accessor uri: ::String
+      attr_accessor object_type_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor object_type_names: ::Hash[::String, ::String]
+      attr_accessor workflow_id: ::String
+      attr_accessor is_unstructured: bool
+      SENSITIVE: []
+    end
+
+    class GetMatchesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMatchesResponse
+      attr_accessor next_token: ::String
+      attr_accessor match_generation_date: ::Time
+      attr_accessor potential_matches: ::Integer
+      attr_accessor matches: ::Array[Types::MatchItem]
+      SENSITIVE: []
+    end
+
+    class GetProfileObjectTypeRequest
+      attr_accessor domain_name: ::String
+      attr_accessor object_type_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetProfileObjectTypeResponse
+      attr_accessor object_type_name: ::String
+      attr_accessor description: ::String
+      attr_accessor template_id: ::String
+      attr_accessor expiration_days: ::Integer
+      attr_accessor encryption_key: ::String
+      attr_accessor allow_profile_creation: bool
+      attr_accessor source_last_updated_timestamp_format: ::String
+      attr_accessor fields: ::Hash[::String, Types::ObjectTypeField]
+      attr_accessor keys: ::Hash[::String, ::Array[Types::ObjectTypeKey]]
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description, :fields, :keys]
+    end
+
+    class GetProfileObjectTypeTemplateRequest
+      attr_accessor template_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProfileObjectTypeTemplateResponse
+      attr_accessor template_id: ::String
+      attr_accessor source_name: ::String
+      attr_accessor source_object: ::String
+      attr_accessor allow_profile_creation: bool
+      attr_accessor source_last_updated_timestamp_format: ::String
+      attr_accessor fields: ::Hash[::String, Types::ObjectTypeField]
+      attr_accessor keys: ::Hash[::String, ::Array[Types::ObjectTypeKey]]
+      SENSITIVE: [:fields, :keys]
+    end
+
+    class GetSimilarProfilesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor domain_name: ::String
+      attr_accessor match_type: ("RULE_BASED_MATCHING" | "ML_BASED_MATCHING")
+      attr_accessor search_key: ::String
+      attr_accessor search_value: ::String
+      SENSITIVE: []
+    end
+
+    class GetSimilarProfilesResponse
+      attr_accessor profile_ids: ::Array[::String]
+      attr_accessor match_id: ::String
+      attr_accessor match_type: ("RULE_BASED_MATCHING" | "ML_BASED_MATCHING")
+      attr_accessor rule_level: ::Integer
+      attr_accessor confidence_score: ::Float
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRequest
+      attr_accessor domain_name: ::String
+      attr_accessor workflow_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowResponse
+      attr_accessor workflow_id: ::String
+      attr_accessor workflow_type: ("APPFLOW_INTEGRATION")
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "SPLIT" | "RETRY" | "CANCELLED")
+      attr_accessor error_description: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor attributes: Types::WorkflowAttributes
+      attr_accessor metrics: Types::WorkflowMetrics
+      SENSITIVE: []
+    end
+
+    class GetWorkflowStepsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetWorkflowStepsResponse
+      attr_accessor workflow_id: ::String
+      attr_accessor workflow_type: ("APPFLOW_INTEGRATION")
+      attr_accessor items: ::Array[Types::WorkflowStepItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class IdentityResolutionJob
+      attr_accessor domain_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor status: ("PENDING" | "PREPROCESSING" | "FIND_MATCHING" | "MERGING" | "COMPLETED" | "PARTIAL_SUCCESS" | "FAILED")
+      attr_accessor job_start_time: ::Time
+      attr_accessor job_end_time: ::Time
+      attr_accessor job_stats: Types::JobStats
+      attr_accessor exporting_location: Types::ExportingLocation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IncrementalPullConfig
+      attr_accessor datetime_type_field_name: ::String
+      SENSITIVE: []
+    end
+
+    class IntegrationConfig
+      attr_accessor appflow_integration: Types::AppflowIntegration
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobSchedule
+      attr_accessor day_of_the_week: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")
+      attr_accessor time: ::String
+      SENSITIVE: []
+    end
+
+    class JobStats
+      attr_accessor number_of_profiles_reviewed: ::Integer
+      attr_accessor number_of_matches_found: ::Integer
+      attr_accessor number_of_merges_done: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccountIntegrationsRequest
+      attr_accessor uri: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor include_hidden: bool
+      SENSITIVE: []
+    end
+
+    class ListAccountIntegrationsResponse
+      attr_accessor items: ::Array[Types::ListIntegrationItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCalculatedAttributeDefinitionItem
+      attr_accessor calculated_attribute_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description]
+    end
+
+    class ListCalculatedAttributeDefinitionsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCalculatedAttributeDefinitionsResponse
+      attr_accessor items: ::Array[Types::ListCalculatedAttributeDefinitionItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:items]
+    end
+
+    class ListCalculatedAttributeForProfileItem
+      attr_accessor calculated_attribute_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor is_data_partial: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ListCalculatedAttributesForProfileRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor domain_name: ::String
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListCalculatedAttributesForProfileResponse
+      attr_accessor items: ::Array[Types::ListCalculatedAttributeForProfileItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainItem
+      attr_accessor domain_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListDomainsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDomainsResponse
+      attr_accessor items: ::Array[Types::ListDomainItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventStreamsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEventStreamsResponse
+      attr_accessor items: ::Array[Types::EventStreamSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentityResolutionJobsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIdentityResolutionJobsResponse
+      attr_accessor identity_resolution_jobs_list: ::Array[Types::IdentityResolutionJob]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIntegrationItem
+      attr_accessor domain_name: ::String
+      attr_accessor uri: ::String
+      attr_accessor object_type_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor object_type_names: ::Hash[::String, ::String]
+      attr_accessor workflow_id: ::String
+      attr_accessor is_unstructured: bool
+      SENSITIVE: []
+    end
+
+    class ListIntegrationsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor include_hidden: bool
+      SENSITIVE: []
+    end
+
+    class ListIntegrationsResponse
+      attr_accessor items: ::Array[Types::ListIntegrationItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProfileObjectTypeItem
+      attr_accessor object_type_name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListProfileObjectTypeTemplateItem
+      attr_accessor template_id: ::String
+      attr_accessor source_name: ::String
+      attr_accessor source_object: ::String
+      SENSITIVE: []
+    end
+
+    class ListProfileObjectTypeTemplatesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProfileObjectTypeTemplatesResponse
+      attr_accessor items: ::Array[Types::ListProfileObjectTypeTemplateItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProfileObjectTypesRequest
+      attr_accessor domain_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProfileObjectTypesResponse
+      attr_accessor items: ::Array[Types::ListProfileObjectTypeItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:items]
+    end
+
+    class ListProfileObjectsItem
+      attr_accessor object_type_name: ::String
+      attr_accessor profile_object_unique_key: ::String
+      attr_accessor object: ::String
+      SENSITIVE: [:object]
+    end
+
+    class ListProfileObjectsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor domain_name: ::String
+      attr_accessor object_type_name: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor object_filter: Types::ObjectFilter
+      SENSITIVE: []
+    end
+
+    class ListProfileObjectsResponse
+      attr_accessor items: ::Array[Types::ListProfileObjectsItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRuleBasedMatchesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListRuleBasedMatchesResponse
+      attr_accessor match_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListWorkflowsItem
+      attr_accessor workflow_type: ("APPFLOW_INTEGRATION")
+      attr_accessor workflow_id: ::String
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "SPLIT" | "RETRY" | "CANCELLED")
+      attr_accessor status_description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ListWorkflowsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor workflow_type: ("APPFLOW_INTEGRATION")
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "SPLIT" | "RETRY" | "CANCELLED")
+      attr_accessor query_start_date: ::Time
+      attr_accessor query_end_date: ::Time
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWorkflowsResponse
+      attr_accessor items: ::Array[Types::ListWorkflowsItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MarketoSourceProperties
+      attr_accessor object: ::String
+      SENSITIVE: []
+    end
+
+    class MatchItem
+      attr_accessor match_id: ::String
+      attr_accessor profile_ids: ::Array[::String]
+      attr_accessor confidence_score: ::Float
+      SENSITIVE: []
+    end
+
+    class MatchingRequest
+      attr_accessor enabled: bool
+      attr_accessor job_schedule: Types::JobSchedule
+      attr_accessor auto_merging: Types::AutoMerging
+      attr_accessor exporting_config: Types::ExportingConfig
+      SENSITIVE: []
+    end
+
+    class MatchingResponse
+      attr_accessor enabled: bool
+      attr_accessor job_schedule: Types::JobSchedule
+      attr_accessor auto_merging: Types::AutoMerging
+      attr_accessor exporting_config: Types::ExportingConfig
+      SENSITIVE: []
+    end
+
+    class MatchingRule
+      attr_accessor rule: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MergeProfilesRequest
+      attr_accessor domain_name: ::String
+      attr_accessor main_profile_id: ::String
+      attr_accessor profile_ids_to_be_merged: ::Array[::String]
+      attr_accessor field_source_profile_ids: Types::FieldSourceProfileIds
+      SENSITIVE: []
+    end
+
+    class MergeProfilesResponse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ObjectFilter
+      attr_accessor key_name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ObjectTypeField
+      attr_accessor source: ::String
+      attr_accessor target: ::String
+      attr_accessor content_type: ("STRING" | "NUMBER" | "PHONE_NUMBER" | "EMAIL_ADDRESS" | "NAME")
+      SENSITIVE: []
+    end
+
+    class ObjectTypeKey
+      attr_accessor standard_identifiers: ::Array[("PROFILE" | "ASSET" | "CASE" | "UNIQUE" | "SECONDARY" | "LOOKUP_ONLY" | "NEW_ONLY" | "ORDER")]
+      attr_accessor field_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Profile
+      attr_accessor profile_id: ::String
+      attr_accessor account_number: ::String
+      attr_accessor additional_information: ::String
+      attr_accessor party_type: ("INDIVIDUAL" | "BUSINESS" | "OTHER")
+      attr_accessor business_name: ::String
+      attr_accessor first_name: ::String
+      attr_accessor middle_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor birth_date: ::String
+      attr_accessor gender: ("MALE" | "FEMALE" | "UNSPECIFIED")
+      attr_accessor phone_number: ::String
+      attr_accessor mobile_phone_number: ::String
+      attr_accessor home_phone_number: ::String
+      attr_accessor business_phone_number: ::String
+      attr_accessor email_address: ::String
+      attr_accessor personal_email_address: ::String
+      attr_accessor business_email_address: ::String
+      attr_accessor address: Types::Address
+      attr_accessor shipping_address: Types::Address
+      attr_accessor mailing_address: Types::Address
+      attr_accessor billing_address: Types::Address
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor found_by_items: ::Array[Types::FoundByKeyValue]
+      attr_accessor party_type_string: ::String
+      attr_accessor gender_string: ::String
+      SENSITIVE: [:account_number, :additional_information, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string]
+    end
+
+    class PutIntegrationRequest
+      attr_accessor domain_name: ::String
+      attr_accessor uri: ::String
+      attr_accessor object_type_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor flow_definition: Types::FlowDefinition
+      attr_accessor object_type_names: ::Hash[::String, ::String]
+      SENSITIVE: [:flow_definition]
+    end
+
+    class PutIntegrationResponse
+      attr_accessor domain_name: ::String
+      attr_accessor uri: ::String
+      attr_accessor object_type_name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor object_type_names: ::Hash[::String, ::String]
+      attr_accessor workflow_id: ::String
+      attr_accessor is_unstructured: bool
+      SENSITIVE: []
+    end
+
+    class PutProfileObjectRequest
+      attr_accessor object_type_name: ::String
+      attr_accessor object: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: [:object]
+    end
+
+    class PutProfileObjectResponse
+      attr_accessor profile_object_unique_key: ::String
+      SENSITIVE: []
+    end
+
+    class PutProfileObjectTypeRequest
+      attr_accessor domain_name: ::String
+      attr_accessor object_type_name: ::String
+      attr_accessor description: ::String
+      attr_accessor template_id: ::String
+      attr_accessor expiration_days: ::Integer
+      attr_accessor encryption_key: ::String
+      attr_accessor allow_profile_creation: bool
+      attr_accessor source_last_updated_timestamp_format: ::String
+      attr_accessor fields: ::Hash[::String, Types::ObjectTypeField]
+      attr_accessor keys: ::Hash[::String, ::Array[Types::ObjectTypeKey]]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description, :fields, :keys]
+    end
+
+    class PutProfileObjectTypeResponse
+      attr_accessor object_type_name: ::String
+      attr_accessor description: ::String
+      attr_accessor template_id: ::String
+      attr_accessor expiration_days: ::Integer
+      attr_accessor encryption_key: ::String
+      attr_accessor allow_profile_creation: bool
+      attr_accessor source_last_updated_timestamp_format: ::String
+      attr_accessor fields: ::Hash[::String, Types::ObjectTypeField]
+      attr_accessor keys: ::Hash[::String, ::Array[Types::ObjectTypeKey]]
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description, :fields, :keys]
+    end
+
+    class Range
+      attr_accessor value: ::Integer
+      attr_accessor unit: ("DAYS")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RuleBasedMatchingRequest
+      attr_accessor enabled: bool
+      attr_accessor matching_rules: ::Array[Types::MatchingRule]
+      attr_accessor max_allowed_rule_level_for_merging: ::Integer
+      attr_accessor max_allowed_rule_level_for_matching: ::Integer
+      attr_accessor attribute_types_selector: Types::AttributeTypesSelector
+      attr_accessor conflict_resolution: Types::ConflictResolution
+      attr_accessor exporting_config: Types::ExportingConfig
+      SENSITIVE: []
+    end
+
+    class RuleBasedMatchingResponse
+      attr_accessor enabled: bool
+      attr_accessor matching_rules: ::Array[Types::MatchingRule]
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "ACTIVE")
+      attr_accessor max_allowed_rule_level_for_merging: ::Integer
+      attr_accessor max_allowed_rule_level_for_matching: ::Integer
+      attr_accessor attribute_types_selector: Types::AttributeTypesSelector
+      attr_accessor conflict_resolution: Types::ConflictResolution
+      attr_accessor exporting_config: Types::ExportingConfig
+      SENSITIVE: []
+    end
+
+    class S3ExportingConfig
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_key_name: ::String
+      SENSITIVE: []
+    end
+
+    class S3ExportingLocation
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_key_name: ::String
+      SENSITIVE: []
+    end
+
+    class S3SourceProperties
+      attr_accessor bucket_name: ::String
+      attr_accessor bucket_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class SalesforceSourceProperties
+      attr_accessor object: ::String
+      attr_accessor enable_dynamic_field_update: bool
+      attr_accessor include_deleted_records: bool
+      SENSITIVE: []
+    end
+
+    class ScheduledTriggerProperties
+      attr_accessor schedule_expression: ::String
+      attr_accessor data_pull_mode: ("Incremental" | "Complete")
+      attr_accessor schedule_start_time: ::Time
+      attr_accessor schedule_end_time: ::Time
+      attr_accessor timezone: ::String
+      attr_accessor schedule_offset: ::Integer
+      attr_accessor first_execution_from: ::Time
+      SENSITIVE: []
+    end
+
+    class SearchProfilesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor domain_name: ::String
+      attr_accessor key_name: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor additional_search_keys: ::Array[Types::AdditionalSearchKey]
+      attr_accessor logical_operator: ("AND" | "OR")
+      SENSITIVE: []
+    end
+
+    class SearchProfilesResponse
+      attr_accessor items: ::Array[Types::Profile]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceNowSourceProperties
+      attr_accessor object: ::String
+      SENSITIVE: []
+    end
+
+    class SourceConnectorProperties
+      attr_accessor marketo: Types::MarketoSourceProperties
+      attr_accessor s3: Types::S3SourceProperties
+      attr_accessor salesforce: Types::SalesforceSourceProperties
+      attr_accessor service_now: Types::ServiceNowSourceProperties
+      attr_accessor zendesk: Types::ZendeskSourceProperties
+      SENSITIVE: []
+    end
+
+    class SourceFlowConfig
+      attr_accessor connector_profile_name: ::String
+      attr_accessor connector_type: ("Salesforce" | "Marketo" | "Zendesk" | "Servicenow" | "S3")
+      attr_accessor incremental_pull_config: Types::IncrementalPullConfig
+      attr_accessor source_connector_properties: Types::SourceConnectorProperties
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Task
+      attr_accessor connector_operator: Types::ConnectorOperator
+      attr_accessor destination_field: ::String
+      attr_accessor source_fields: ::Array[::String]
+      attr_accessor task_properties: ::Hash[("VALUE" | "VALUES" | "DATA_TYPE" | "UPPER_BOUND" | "LOWER_BOUND" | "SOURCE_DATA_TYPE" | "DESTINATION_DATA_TYPE" | "VALIDATION_ACTION" | "MASK_VALUE" | "MASK_LENGTH" | "TRUNCATE_LENGTH" | "MATH_OPERATION_FIELDS_ORDER" | "CONCAT_FORMAT" | "SUBFIELD_CATEGORY_MAP"), ::String]
+      attr_accessor task_type: ("Arithmetic" | "Filter" | "Map" | "Mask" | "Merge" | "Truncate" | "Validate")
+      SENSITIVE: []
+    end
+
+    class Threshold
+      attr_accessor value: ::String
+      attr_accessor operator: ("EQUAL_TO" | "GREATER_THAN" | "LESS_THAN" | "NOT_EQUAL_TO")
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TriggerConfig
+      attr_accessor trigger_type: ("Scheduled" | "Event" | "OnDemand")
+      attr_accessor trigger_properties: Types::TriggerProperties
+      SENSITIVE: []
+    end
+
+    class TriggerProperties
+      attr_accessor scheduled: Types::ScheduledTriggerProperties
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAddress
+      attr_accessor address_1: ::String
+      attr_accessor address_2: ::String
+      attr_accessor address_3: ::String
+      attr_accessor address_4: ::String
+      attr_accessor city: ::String
+      attr_accessor county: ::String
+      attr_accessor state: ::String
+      attr_accessor province: ::String
+      attr_accessor country: ::String
+      attr_accessor postal_code: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCalculatedAttributeDefinitionRequest
+      attr_accessor domain_name: ::String
+      attr_accessor calculated_attribute_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor conditions: Types::Conditions
+      SENSITIVE: [:description, :conditions]
+    end
+
+    class UpdateCalculatedAttributeDefinitionResponse
+      attr_accessor calculated_attribute_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
+      attr_accessor conditions: Types::Conditions
+      attr_accessor attribute_details: Types::AttributeDetails
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:description, :statistic, :conditions, :attribute_details]
+    end
+
+    class UpdateDomainRequest
+      attr_accessor domain_name: ::String
+      attr_accessor default_expiration_days: ::Integer
+      attr_accessor default_encryption_key: ::String
+      attr_accessor dead_letter_queue_url: ::String
+      attr_accessor matching: Types::MatchingRequest
+      attr_accessor rule_based_matching: Types::RuleBasedMatchingRequest
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateDomainResponse
+      attr_accessor domain_name: ::String
+      attr_accessor default_expiration_days: ::Integer
+      attr_accessor default_encryption_key: ::String
+      attr_accessor dead_letter_queue_url: ::String
+      attr_accessor matching: Types::MatchingResponse
+      attr_accessor rule_based_matching: Types::RuleBasedMatchingResponse
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateProfileRequest
+      attr_accessor domain_name: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor additional_information: ::String
+      attr_accessor account_number: ::String
+      attr_accessor party_type: ("INDIVIDUAL" | "BUSINESS" | "OTHER")
+      attr_accessor business_name: ::String
+      attr_accessor first_name: ::String
+      attr_accessor middle_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor birth_date: ::String
+      attr_accessor gender: ("MALE" | "FEMALE" | "UNSPECIFIED")
+      attr_accessor phone_number: ::String
+      attr_accessor mobile_phone_number: ::String
+      attr_accessor home_phone_number: ::String
+      attr_accessor business_phone_number: ::String
+      attr_accessor email_address: ::String
+      attr_accessor personal_email_address: ::String
+      attr_accessor business_email_address: ::String
+      attr_accessor address: Types::UpdateAddress
+      attr_accessor shipping_address: Types::UpdateAddress
+      attr_accessor mailing_address: Types::UpdateAddress
+      attr_accessor billing_address: Types::UpdateAddress
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor party_type_string: ::String
+      attr_accessor gender_string: ::String
+      SENSITIVE: [:additional_information, :account_number, :party_type, :business_name, :first_name, :middle_name, :last_name, :birth_date, :gender, :phone_number, :mobile_phone_number, :home_phone_number, :business_phone_number, :email_address, :personal_email_address, :business_email_address, :address, :shipping_address, :mailing_address, :billing_address, :attributes, :party_type_string, :gender_string]
+    end
+
+    class UpdateProfileResponse
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowAttributes
+      attr_accessor appflow_integration: Types::AppflowIntegrationWorkflowAttributes
+      SENSITIVE: []
+    end
+
+    class WorkflowMetrics
+      attr_accessor appflow_integration: Types::AppflowIntegrationWorkflowMetrics
+      SENSITIVE: []
+    end
+
+    class WorkflowStepItem
+      attr_accessor appflow_integration: Types::AppflowIntegrationWorkflowStep
+      SENSITIVE: []
+    end
+
+    class ZendeskSourceProperties
+      attr_accessor object: ::String
+      SENSITIVE: []
+    end
+  end
+end

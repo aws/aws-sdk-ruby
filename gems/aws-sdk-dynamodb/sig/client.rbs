@@ -1,0 +1,1402 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DynamoDB
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?compute_checksums: bool,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_attributes: bool,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchExecuteStatementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchExecuteStatementOutput]
+        def responses: () -> ::Array[Types::BatchStatementResponse]
+        def consumed_capacity: () -> ::Array[Types::ConsumedCapacity]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#batch_execute_statement-instance_method
+      def batch_execute_statement: (
+                                     statements: Array[
+                                       {
+                                         statement: ::String,
+                                         parameters: Array[untyped]?,
+                                         consistent_read: bool?,
+                                         return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")?
+                                       },
+                                     ],
+                                     ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+                                   ) -> _BatchExecuteStatementResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchExecuteStatementResponseSuccess
+
+      interface _BatchGetItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetItemOutput]
+        def responses: () -> ::Hash[::String, ::Array[::Hash[::String, Types::AttributeValue]]]
+        def unprocessed_keys: () -> ::Hash[::String, Types::KeysAndAttributes]
+        def consumed_capacity: () -> ::Array[Types::ConsumedCapacity]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#batch_get_item-instance_method
+      def batch_get_item: (
+                            request_items: Hash[::String, {
+                                keys: Array[
+                                  Hash[::String, untyped],
+                                ],
+                                attributes_to_get: Array[::String]?,
+                                consistent_read: bool?,
+                                projection_expression: ::String?,
+                                expression_attribute_names: Hash[::String, ::String]?
+                              }],
+                            ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+                          ) -> _BatchGetItemResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetItemResponseSuccess
+
+      interface _BatchWriteItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchWriteItemOutput]
+        def unprocessed_items: () -> ::Hash[::String, ::Array[Types::WriteRequest]]
+        def item_collection_metrics: () -> ::Hash[::String, ::Array[Types::ItemCollectionMetrics]]
+        def consumed_capacity: () -> ::Array[Types::ConsumedCapacity]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#batch_write_item-instance_method
+      def batch_write_item: (
+                              request_items: Hash[::String, Array[
+                                  {
+                                    put_request: {
+                                      item: Hash[::String, untyped]
+                                    }?,
+                                    delete_request: {
+                                      key: Hash[::String, untyped]
+                                    }?
+                                  },
+                                ]],
+                              ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
+                              ?return_item_collection_metrics: ("SIZE" | "NONE")
+                            ) -> _BatchWriteItemResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchWriteItemResponseSuccess
+
+      interface _CreateBackupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBackupOutput]
+        def backup_details: () -> Types::BackupDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#create_backup-instance_method
+      def create_backup: (
+                           table_name: ::String,
+                           backup_name: ::String
+                         ) -> _CreateBackupResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBackupResponseSuccess
+
+      interface _CreateGlobalTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGlobalTableOutput]
+        def global_table_description: () -> Types::GlobalTableDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#create_global_table-instance_method
+      def create_global_table: (
+                                 global_table_name: ::String,
+                                 replication_group: Array[
+                                   {
+                                     region_name: ::String?
+                                   },
+                                 ]
+                               ) -> _CreateGlobalTableResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlobalTableResponseSuccess
+
+      interface _CreateTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTableOutput]
+        def table_description: () -> Types::TableDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#create_table-instance_method
+      def create_table: (
+                          attribute_definitions: Array[
+                            {
+                              attribute_name: ::String,
+                              attribute_type: ("S" | "N" | "B")
+                            },
+                          ],
+                          table_name: ::String,
+                          key_schema: Array[
+                            {
+                              attribute_name: ::String,
+                              key_type: ("HASH" | "RANGE")
+                            },
+                          ],
+                          ?local_secondary_indexes: Array[
+                            {
+                              index_name: ::String,
+                              key_schema: Array[
+                                {
+                                  attribute_name: ::String,
+                                  key_type: ("HASH" | "RANGE")
+                                },
+                              ],
+                              projection: {
+                                projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
+                                non_key_attributes: Array[::String]?
+                              }
+                            },
+                          ],
+                          ?global_secondary_indexes: Array[
+                            {
+                              index_name: ::String,
+                              key_schema: Array[
+                                {
+                                  attribute_name: ::String,
+                                  key_type: ("HASH" | "RANGE")
+                                },
+                              ],
+                              projection: {
+                                projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
+                                non_key_attributes: Array[::String]?
+                              },
+                              provisioned_throughput: {
+                                read_capacity_units: ::Integer,
+                                write_capacity_units: ::Integer
+                              }?
+                            },
+                          ],
+                          ?billing_mode: ("PROVISIONED" | "PAY_PER_REQUEST"),
+                          ?provisioned_throughput: {
+                            read_capacity_units: ::Integer,
+                            write_capacity_units: ::Integer
+                          },
+                          ?stream_specification: {
+                            stream_enabled: bool,
+                            stream_view_type: ("NEW_IMAGE" | "OLD_IMAGE" | "NEW_AND_OLD_IMAGES" | "KEYS_ONLY")?
+                          },
+                          ?sse_specification: {
+                            enabled: bool?,
+                            sse_type: ("AES256" | "KMS")?,
+                            kms_master_key_id: ::String?
+                          },
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ],
+                          ?table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS"),
+                          ?deletion_protection_enabled: bool
+                        ) -> _CreateTableResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTableResponseSuccess
+
+      interface _DeleteBackupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBackupOutput]
+        def backup_description: () -> Types::BackupDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#delete_backup-instance_method
+      def delete_backup: (
+                           backup_arn: ::String
+                         ) -> _DeleteBackupResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBackupResponseSuccess
+
+      interface _DeleteItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteItemOutput]
+        def attributes: () -> ::Hash[::String, Types::AttributeValue]
+        def consumed_capacity: () -> Types::ConsumedCapacity
+        def item_collection_metrics: () -> Types::ItemCollectionMetrics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#delete_item-instance_method
+      def delete_item: (
+                         table_name: ::String,
+                         key: Hash[::String, untyped],
+                         ?expected: Hash[::String, {
+                             value: untyped?,
+                             exists: bool?,
+                             comparison_operator: ("EQ" | "NE" | "IN" | "LE" | "LT" | "GE" | "GT" | "BETWEEN" | "NOT_NULL" | "NULL" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH")?,
+                             attribute_value_list: Array[untyped]?
+                           }],
+                         ?conditional_operator: ("AND" | "OR"),
+                         ?return_values: ("NONE" | "ALL_OLD" | "UPDATED_OLD" | "ALL_NEW" | "UPDATED_NEW"),
+                         ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
+                         ?return_item_collection_metrics: ("SIZE" | "NONE"),
+                         ?condition_expression: ::String,
+                         ?expression_attribute_names: Hash[::String, ::String],
+                         ?expression_attribute_values: Hash[::String, untyped],
+                         ?return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+                       ) -> _DeleteItemResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteItemResponseSuccess
+
+      interface _DeleteTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTableOutput]
+        def table_description: () -> Types::TableDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#delete_table-instance_method
+      def delete_table: (
+                          table_name: ::String
+                        ) -> _DeleteTableResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTableResponseSuccess
+
+      interface _DescribeBackupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBackupOutput]
+        def backup_description: () -> Types::BackupDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#describe_backup-instance_method
+      def describe_backup: (
+                             backup_arn: ::String
+                           ) -> _DescribeBackupResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBackupResponseSuccess
+
+      interface _DescribeContinuousBackupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeContinuousBackupsOutput]
+        def continuous_backups_description: () -> Types::ContinuousBackupsDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#describe_continuous_backups-instance_method
+      def describe_continuous_backups: (
+                                         table_name: ::String
+                                       ) -> _DescribeContinuousBackupsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeContinuousBackupsResponseSuccess
+
+      interface _DescribeContributorInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeContributorInsightsOutput]
+        def table_name: () -> ::String
+        def index_name: () -> ::String
+        def contributor_insights_rule_list: () -> ::Array[::String]
+        def contributor_insights_status: () -> ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "FAILED")
+        def last_update_date_time: () -> ::Time
+        def failure_exception: () -> Types::FailureException
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#describe_contributor_insights-instance_method
+      def describe_contributor_insights: (
+                                           table_name: ::String,
+                                           ?index_name: ::String
+                                         ) -> _DescribeContributorInsightsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeContributorInsightsResponseSuccess
+
+      interface _DescribeEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEndpointsResponse]
+        def endpoints: () -> ::Array[Types::Endpoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#describe_endpoints-instance_method
+      def describe_endpoints: (
+                              ) -> _DescribeEndpointsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEndpointsResponseSuccess
+
+      interface _DescribeExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeExportOutput]
+        def export_description: () -> Types::ExportDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#describe_export-instance_method
+      def describe_export: (
+                             export_arn: ::String
+                           ) -> _DescribeExportResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeExportResponseSuccess
+
+      interface _DescribeGlobalTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGlobalTableOutput]
+        def global_table_description: () -> Types::GlobalTableDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#describe_global_table-instance_method
+      def describe_global_table: (
+                                   global_table_name: ::String
+                                 ) -> _DescribeGlobalTableResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGlobalTableResponseSuccess
+
+      interface _DescribeGlobalTableSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGlobalTableSettingsOutput]
+        def global_table_name: () -> ::String
+        def replica_settings: () -> ::Array[Types::ReplicaSettingsDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#describe_global_table_settings-instance_method
+      def describe_global_table_settings: (
+                                            global_table_name: ::String
+                                          ) -> _DescribeGlobalTableSettingsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGlobalTableSettingsResponseSuccess
+
+      interface _DescribeImportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeImportOutput]
+        def import_table_description: () -> Types::ImportTableDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#describe_import-instance_method
+      def describe_import: (
+                             import_arn: ::String
+                           ) -> _DescribeImportResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeImportResponseSuccess
+
+      interface _DescribeKinesisStreamingDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeKinesisStreamingDestinationOutput]
+        def table_name: () -> ::String
+        def kinesis_data_stream_destinations: () -> ::Array[Types::KinesisDataStreamDestination]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#describe_kinesis_streaming_destination-instance_method
+      def describe_kinesis_streaming_destination: (
+                                                    table_name: ::String
+                                                  ) -> _DescribeKinesisStreamingDestinationResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeKinesisStreamingDestinationResponseSuccess
+
+      interface _DescribeLimitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLimitsOutput]
+        def account_max_read_capacity_units: () -> ::Integer
+        def account_max_write_capacity_units: () -> ::Integer
+        def table_max_read_capacity_units: () -> ::Integer
+        def table_max_write_capacity_units: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#describe_limits-instance_method
+      def describe_limits: (
+                           ) -> _DescribeLimitsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLimitsResponseSuccess
+
+      interface _DescribeTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTableOutput]
+        def table: () -> Types::TableDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#describe_table-instance_method
+      def describe_table: (
+                            table_name: ::String
+                          ) -> _DescribeTableResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTableResponseSuccess
+
+      interface _DescribeTableReplicaAutoScalingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTableReplicaAutoScalingOutput]
+        def table_auto_scaling_description: () -> Types::TableAutoScalingDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#describe_table_replica_auto_scaling-instance_method
+      def describe_table_replica_auto_scaling: (
+                                                 table_name: ::String
+                                               ) -> _DescribeTableReplicaAutoScalingResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTableReplicaAutoScalingResponseSuccess
+
+      interface _DescribeTimeToLiveResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTimeToLiveOutput]
+        def time_to_live_description: () -> Types::TimeToLiveDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#describe_time_to_live-instance_method
+      def describe_time_to_live: (
+                                   table_name: ::String
+                                 ) -> _DescribeTimeToLiveResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTimeToLiveResponseSuccess
+
+      interface _DisableKinesisStreamingDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::KinesisStreamingDestinationOutput]
+        def table_name: () -> ::String
+        def stream_arn: () -> ::String
+        def destination_status: () -> ("ENABLING" | "ACTIVE" | "DISABLING" | "DISABLED" | "ENABLE_FAILED" | "UPDATING")
+        def enable_kinesis_streaming_configuration: () -> Types::EnableKinesisStreamingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#disable_kinesis_streaming_destination-instance_method
+      def disable_kinesis_streaming_destination: (
+                                                   table_name: ::String,
+                                                   stream_arn: ::String,
+                                                   ?enable_kinesis_streaming_configuration: {
+                                                     approximate_creation_date_time_precision: ("MILLISECOND" | "MICROSECOND")?
+                                                   }
+                                                 ) -> _DisableKinesisStreamingDestinationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableKinesisStreamingDestinationResponseSuccess
+
+      interface _EnableKinesisStreamingDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::KinesisStreamingDestinationOutput]
+        def table_name: () -> ::String
+        def stream_arn: () -> ::String
+        def destination_status: () -> ("ENABLING" | "ACTIVE" | "DISABLING" | "DISABLED" | "ENABLE_FAILED" | "UPDATING")
+        def enable_kinesis_streaming_configuration: () -> Types::EnableKinesisStreamingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#enable_kinesis_streaming_destination-instance_method
+      def enable_kinesis_streaming_destination: (
+                                                  table_name: ::String,
+                                                  stream_arn: ::String,
+                                                  ?enable_kinesis_streaming_configuration: {
+                                                    approximate_creation_date_time_precision: ("MILLISECOND" | "MICROSECOND")?
+                                                  }
+                                                ) -> _EnableKinesisStreamingDestinationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableKinesisStreamingDestinationResponseSuccess
+
+      interface _ExecuteStatementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteStatementOutput]
+        def items: () -> ::Array[::Hash[::String, Types::AttributeValue]]
+        def next_token: () -> ::String
+        def consumed_capacity: () -> Types::ConsumedCapacity
+        def last_evaluated_key: () -> ::Hash[::String, Types::AttributeValue]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#execute_statement-instance_method
+      def execute_statement: (
+                               statement: ::String,
+                               ?parameters: Array[untyped],
+                               ?consistent_read: bool,
+                               ?next_token: ::String,
+                               ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
+                               ?limit: ::Integer,
+                               ?return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+                             ) -> _ExecuteStatementResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteStatementResponseSuccess
+
+      interface _ExecuteTransactionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteTransactionOutput]
+        def responses: () -> ::Array[Types::ItemResponse]
+        def consumed_capacity: () -> ::Array[Types::ConsumedCapacity]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#execute_transaction-instance_method
+      def execute_transaction: (
+                                 transact_statements: Array[
+                                   {
+                                     statement: ::String,
+                                     parameters: Array[untyped]?,
+                                     return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")?
+                                   },
+                                 ],
+                                 ?client_request_token: ::String,
+                                 ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+                               ) -> _ExecuteTransactionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteTransactionResponseSuccess
+
+      interface _ExportTableToPointInTimeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportTableToPointInTimeOutput]
+        def export_description: () -> Types::ExportDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#export_table_to_point_in_time-instance_method
+      def export_table_to_point_in_time: (
+                                           table_arn: ::String,
+                                           ?export_time: ::Time,
+                                           ?client_token: ::String,
+                                           s3_bucket: ::String,
+                                           ?s3_bucket_owner: ::String,
+                                           ?s3_prefix: ::String,
+                                           ?s3_sse_algorithm: ("AES256" | "KMS"),
+                                           ?s3_sse_kms_key_id: ::String,
+                                           ?export_format: ("DYNAMODB_JSON" | "ION"),
+                                           ?export_type: ("FULL_EXPORT" | "INCREMENTAL_EXPORT"),
+                                           ?incremental_export_specification: {
+                                             export_from_time: ::Time?,
+                                             export_to_time: ::Time?,
+                                             export_view_type: ("NEW_IMAGE" | "NEW_AND_OLD_IMAGES")?
+                                           }
+                                         ) -> _ExportTableToPointInTimeResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportTableToPointInTimeResponseSuccess
+
+      interface _GetItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetItemOutput]
+        def item: () -> ::Hash[::String, Types::AttributeValue]
+        def consumed_capacity: () -> Types::ConsumedCapacity
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#get_item-instance_method
+      def get_item: (
+                      table_name: ::String,
+                      key: Hash[::String, untyped],
+                      ?attributes_to_get: Array[::String],
+                      ?consistent_read: bool,
+                      ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
+                      ?projection_expression: ::String,
+                      ?expression_attribute_names: Hash[::String, ::String]
+                    ) -> _GetItemResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetItemResponseSuccess
+
+      interface _ImportTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportTableOutput]
+        def import_table_description: () -> Types::ImportTableDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#import_table-instance_method
+      def import_table: (
+                          ?client_token: ::String,
+                          s3_bucket_source: {
+                            s3_bucket_owner: ::String?,
+                            s3_bucket: ::String,
+                            s3_key_prefix: ::String?
+                          },
+                          input_format: ("DYNAMODB_JSON" | "ION" | "CSV"),
+                          ?input_format_options: {
+                            csv: {
+                              delimiter: ::String?,
+                              header_list: Array[::String]?
+                            }?
+                          },
+                          ?input_compression_type: ("GZIP" | "ZSTD" | "NONE"),
+                          table_creation_parameters: {
+                            table_name: ::String,
+                            attribute_definitions: Array[
+                              {
+                                attribute_name: ::String,
+                                attribute_type: ("S" | "N" | "B")
+                              },
+                            ],
+                            key_schema: Array[
+                              {
+                                attribute_name: ::String,
+                                key_type: ("HASH" | "RANGE")
+                              },
+                            ],
+                            billing_mode: ("PROVISIONED" | "PAY_PER_REQUEST")?,
+                            provisioned_throughput: {
+                              read_capacity_units: ::Integer,
+                              write_capacity_units: ::Integer
+                            }?,
+                            sse_specification: {
+                              enabled: bool?,
+                              sse_type: ("AES256" | "KMS")?,
+                              kms_master_key_id: ::String?
+                            }?,
+                            global_secondary_indexes: Array[
+                              {
+                                index_name: ::String,
+                                key_schema: Array[
+                                  {
+                                    attribute_name: ::String,
+                                    key_type: ("HASH" | "RANGE")
+                                  },
+                                ],
+                                projection: {
+                                  projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
+                                  non_key_attributes: Array[::String]?
+                                },
+                                provisioned_throughput: {
+                                  read_capacity_units: ::Integer,
+                                  write_capacity_units: ::Integer
+                                }?
+                              },
+                            ]?
+                          }
+                        ) -> _ImportTableResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportTableResponseSuccess
+
+      interface _ListBackupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBackupsOutput]
+        def backup_summaries: () -> ::Array[Types::BackupSummary]
+        def last_evaluated_backup_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#list_backups-instance_method
+      def list_backups: (
+                          ?table_name: ::String,
+                          ?limit: ::Integer,
+                          ?time_range_lower_bound: ::Time,
+                          ?time_range_upper_bound: ::Time,
+                          ?exclusive_start_backup_arn: ::String,
+                          ?backup_type: ("USER" | "SYSTEM" | "AWS_BACKUP" | "ALL")
+                        ) -> _ListBackupsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBackupsResponseSuccess
+
+      interface _ListContributorInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContributorInsightsOutput]
+        def contributor_insights_summaries: () -> ::Array[Types::ContributorInsightsSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#list_contributor_insights-instance_method
+      def list_contributor_insights: (
+                                       ?table_name: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListContributorInsightsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContributorInsightsResponseSuccess
+
+      interface _ListExportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExportsOutput]
+        def export_summaries: () -> ::Array[Types::ExportSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#list_exports-instance_method
+      def list_exports: (
+                          ?table_arn: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListExportsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExportsResponseSuccess
+
+      interface _ListGlobalTablesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGlobalTablesOutput]
+        def global_tables: () -> ::Array[Types::GlobalTable]
+        def last_evaluated_global_table_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#list_global_tables-instance_method
+      def list_global_tables: (
+                                ?exclusive_start_global_table_name: ::String,
+                                ?limit: ::Integer,
+                                ?region_name: ::String
+                              ) -> _ListGlobalTablesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGlobalTablesResponseSuccess
+
+      interface _ListImportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListImportsOutput]
+        def import_summary_list: () -> ::Array[Types::ImportSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#list_imports-instance_method
+      def list_imports: (
+                          ?table_arn: ::String,
+                          ?page_size: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListImportsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListImportsResponseSuccess
+
+      interface _ListTablesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTablesOutput]
+        def table_names: () -> ::Array[::String]
+        def last_evaluated_table_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#list_tables-instance_method
+      def list_tables: (
+                         ?exclusive_start_table_name: ::String,
+                         ?limit: ::Integer
+                       ) -> _ListTablesResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTablesResponseSuccess
+
+      interface _ListTagsOfResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsOfResourceOutput]
+        def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#list_tags_of_resource-instance_method
+      def list_tags_of_resource: (
+                                   resource_arn: ::String,
+                                   ?next_token: ::String
+                                 ) -> _ListTagsOfResourceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsOfResourceResponseSuccess
+
+      interface _PutItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutItemOutput]
+        def attributes: () -> ::Hash[::String, Types::AttributeValue]
+        def consumed_capacity: () -> Types::ConsumedCapacity
+        def item_collection_metrics: () -> Types::ItemCollectionMetrics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#put_item-instance_method
+      def put_item: (
+                      table_name: ::String,
+                      item: Hash[::String, untyped],
+                      ?expected: Hash[::String, {
+                          value: untyped?,
+                          exists: bool?,
+                          comparison_operator: ("EQ" | "NE" | "IN" | "LE" | "LT" | "GE" | "GT" | "BETWEEN" | "NOT_NULL" | "NULL" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH")?,
+                          attribute_value_list: Array[untyped]?
+                        }],
+                      ?return_values: ("NONE" | "ALL_OLD" | "UPDATED_OLD" | "ALL_NEW" | "UPDATED_NEW"),
+                      ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
+                      ?return_item_collection_metrics: ("SIZE" | "NONE"),
+                      ?conditional_operator: ("AND" | "OR"),
+                      ?condition_expression: ::String,
+                      ?expression_attribute_names: Hash[::String, ::String],
+                      ?expression_attribute_values: Hash[::String, untyped],
+                      ?return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+                    ) -> _PutItemResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutItemResponseSuccess
+
+      interface _QueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::QueryOutput]
+        def items: () -> ::Array[::Hash[::String, Types::AttributeValue]]
+        def count: () -> ::Integer
+        def scanned_count: () -> ::Integer
+        def last_evaluated_key: () -> ::Hash[::String, Types::AttributeValue]
+        def consumed_capacity: () -> Types::ConsumedCapacity
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#query-instance_method
+      def query: (
+                   table_name: ::String,
+                   ?index_name: ::String,
+                   ?select: ("ALL_ATTRIBUTES" | "ALL_PROJECTED_ATTRIBUTES" | "SPECIFIC_ATTRIBUTES" | "COUNT"),
+                   ?attributes_to_get: Array[::String],
+                   ?limit: ::Integer,
+                   ?consistent_read: bool,
+                   ?key_conditions: Hash[::String, {
+                       attribute_value_list: Array[untyped]?,
+                       comparison_operator: ("EQ" | "NE" | "IN" | "LE" | "LT" | "GE" | "GT" | "BETWEEN" | "NOT_NULL" | "NULL" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH")
+                     }],
+                   ?query_filter: Hash[::String, {
+                       attribute_value_list: Array[untyped]?,
+                       comparison_operator: ("EQ" | "NE" | "IN" | "LE" | "LT" | "GE" | "GT" | "BETWEEN" | "NOT_NULL" | "NULL" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH")
+                     }],
+                   ?conditional_operator: ("AND" | "OR"),
+                   ?scan_index_forward: bool,
+                   ?exclusive_start_key: Hash[::String, untyped],
+                   ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
+                   ?projection_expression: ::String,
+                   ?filter_expression: ::String,
+                   ?key_condition_expression: ::String,
+                   ?expression_attribute_names: Hash[::String, ::String],
+                   ?expression_attribute_values: Hash[::String, untyped]
+                 ) -> _QueryResponseSuccess
+               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _QueryResponseSuccess
+
+      interface _RestoreTableFromBackupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreTableFromBackupOutput]
+        def table_description: () -> Types::TableDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#restore_table_from_backup-instance_method
+      def restore_table_from_backup: (
+                                       target_table_name: ::String,
+                                       backup_arn: ::String,
+                                       ?billing_mode_override: ("PROVISIONED" | "PAY_PER_REQUEST"),
+                                       ?global_secondary_index_override: Array[
+                                         {
+                                           index_name: ::String,
+                                           key_schema: Array[
+                                             {
+                                               attribute_name: ::String,
+                                               key_type: ("HASH" | "RANGE")
+                                             },
+                                           ],
+                                           projection: {
+                                             projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
+                                             non_key_attributes: Array[::String]?
+                                           },
+                                           provisioned_throughput: {
+                                             read_capacity_units: ::Integer,
+                                             write_capacity_units: ::Integer
+                                           }?
+                                         },
+                                       ],
+                                       ?local_secondary_index_override: Array[
+                                         {
+                                           index_name: ::String,
+                                           key_schema: Array[
+                                             {
+                                               attribute_name: ::String,
+                                               key_type: ("HASH" | "RANGE")
+                                             },
+                                           ],
+                                           projection: {
+                                             projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
+                                             non_key_attributes: Array[::String]?
+                                           }
+                                         },
+                                       ],
+                                       ?provisioned_throughput_override: {
+                                         read_capacity_units: ::Integer,
+                                         write_capacity_units: ::Integer
+                                       },
+                                       ?sse_specification_override: {
+                                         enabled: bool?,
+                                         sse_type: ("AES256" | "KMS")?,
+                                         kms_master_key_id: ::String?
+                                       }
+                                     ) -> _RestoreTableFromBackupResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreTableFromBackupResponseSuccess
+
+      interface _RestoreTableToPointInTimeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreTableToPointInTimeOutput]
+        def table_description: () -> Types::TableDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#restore_table_to_point_in_time-instance_method
+      def restore_table_to_point_in_time: (
+                                            ?source_table_arn: ::String,
+                                            ?source_table_name: ::String,
+                                            target_table_name: ::String,
+                                            ?use_latest_restorable_time: bool,
+                                            ?restore_date_time: ::Time,
+                                            ?billing_mode_override: ("PROVISIONED" | "PAY_PER_REQUEST"),
+                                            ?global_secondary_index_override: Array[
+                                              {
+                                                index_name: ::String,
+                                                key_schema: Array[
+                                                  {
+                                                    attribute_name: ::String,
+                                                    key_type: ("HASH" | "RANGE")
+                                                  },
+                                                ],
+                                                projection: {
+                                                  projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
+                                                  non_key_attributes: Array[::String]?
+                                                },
+                                                provisioned_throughput: {
+                                                  read_capacity_units: ::Integer,
+                                                  write_capacity_units: ::Integer
+                                                }?
+                                              },
+                                            ],
+                                            ?local_secondary_index_override: Array[
+                                              {
+                                                index_name: ::String,
+                                                key_schema: Array[
+                                                  {
+                                                    attribute_name: ::String,
+                                                    key_type: ("HASH" | "RANGE")
+                                                  },
+                                                ],
+                                                projection: {
+                                                  projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
+                                                  non_key_attributes: Array[::String]?
+                                                }
+                                              },
+                                            ],
+                                            ?provisioned_throughput_override: {
+                                              read_capacity_units: ::Integer,
+                                              write_capacity_units: ::Integer
+                                            },
+                                            ?sse_specification_override: {
+                                              enabled: bool?,
+                                              sse_type: ("AES256" | "KMS")?,
+                                              kms_master_key_id: ::String?
+                                            }
+                                          ) -> _RestoreTableToPointInTimeResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreTableToPointInTimeResponseSuccess
+
+      interface _ScanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ScanOutput]
+        def items: () -> ::Array[::Hash[::String, Types::AttributeValue]]
+        def count: () -> ::Integer
+        def scanned_count: () -> ::Integer
+        def last_evaluated_key: () -> ::Hash[::String, Types::AttributeValue]
+        def consumed_capacity: () -> Types::ConsumedCapacity
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#scan-instance_method
+      def scan: (
+                  table_name: ::String,
+                  ?index_name: ::String,
+                  ?attributes_to_get: Array[::String],
+                  ?limit: ::Integer,
+                  ?select: ("ALL_ATTRIBUTES" | "ALL_PROJECTED_ATTRIBUTES" | "SPECIFIC_ATTRIBUTES" | "COUNT"),
+                  ?scan_filter: Hash[::String, {
+                      attribute_value_list: Array[untyped]?,
+                      comparison_operator: ("EQ" | "NE" | "IN" | "LE" | "LT" | "GE" | "GT" | "BETWEEN" | "NOT_NULL" | "NULL" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH")
+                    }],
+                  ?conditional_operator: ("AND" | "OR"),
+                  ?exclusive_start_key: Hash[::String, untyped],
+                  ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
+                  ?total_segments: ::Integer,
+                  ?segment: ::Integer,
+                  ?projection_expression: ::String,
+                  ?filter_expression: ::String,
+                  ?expression_attribute_names: Hash[::String, ::String],
+                  ?expression_attribute_values: Hash[::String, untyped],
+                  ?consistent_read: bool
+                ) -> _ScanResponseSuccess
+              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ScanResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TransactGetItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TransactGetItemsOutput]
+        def consumed_capacity: () -> ::Array[Types::ConsumedCapacity]
+        def responses: () -> ::Array[Types::ItemResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#transact_get_items-instance_method
+      def transact_get_items: (
+                                transact_items: Array[
+                                  {
+                                    get: {
+                                      key: Hash[::String, untyped],
+                                      table_name: ::String,
+                                      projection_expression: ::String?,
+                                      expression_attribute_names: Hash[::String, ::String]?
+                                    }
+                                  },
+                                ],
+                                ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE")
+                              ) -> _TransactGetItemsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TransactGetItemsResponseSuccess
+
+      interface _TransactWriteItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TransactWriteItemsOutput]
+        def consumed_capacity: () -> ::Array[Types::ConsumedCapacity]
+        def item_collection_metrics: () -> ::Hash[::String, ::Array[Types::ItemCollectionMetrics]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#transact_write_items-instance_method
+      def transact_write_items: (
+                                  transact_items: Array[
+                                    {
+                                      condition_check: {
+                                        key: Hash[::String, untyped],
+                                        table_name: ::String,
+                                        condition_expression: ::String,
+                                        expression_attribute_names: Hash[::String, ::String]?,
+                                        expression_attribute_values: Hash[::String, untyped]?,
+                                        return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")?
+                                      }?,
+                                      put: {
+                                        item: Hash[::String, untyped],
+                                        table_name: ::String,
+                                        condition_expression: ::String?,
+                                        expression_attribute_names: Hash[::String, ::String]?,
+                                        expression_attribute_values: Hash[::String, untyped]?,
+                                        return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")?
+                                      }?,
+                                      delete: {
+                                        key: Hash[::String, untyped],
+                                        table_name: ::String,
+                                        condition_expression: ::String?,
+                                        expression_attribute_names: Hash[::String, ::String]?,
+                                        expression_attribute_values: Hash[::String, untyped]?,
+                                        return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")?
+                                      }?,
+                                      update: {
+                                        key: Hash[::String, untyped],
+                                        update_expression: ::String,
+                                        table_name: ::String,
+                                        condition_expression: ::String?,
+                                        expression_attribute_names: Hash[::String, ::String]?,
+                                        expression_attribute_values: Hash[::String, untyped]?,
+                                        return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")?
+                                      }?
+                                    },
+                                  ],
+                                  ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
+                                  ?return_item_collection_metrics: ("SIZE" | "NONE"),
+                                  ?client_request_token: ::String
+                                ) -> _TransactWriteItemsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TransactWriteItemsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateContinuousBackupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContinuousBackupsOutput]
+        def continuous_backups_description: () -> Types::ContinuousBackupsDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#update_continuous_backups-instance_method
+      def update_continuous_backups: (
+                                       table_name: ::String,
+                                       point_in_time_recovery_specification: {
+                                         point_in_time_recovery_enabled: bool
+                                       }
+                                     ) -> _UpdateContinuousBackupsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContinuousBackupsResponseSuccess
+
+      interface _UpdateContributorInsightsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContributorInsightsOutput]
+        def table_name: () -> ::String
+        def index_name: () -> ::String
+        def contributor_insights_status: () -> ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#update_contributor_insights-instance_method
+      def update_contributor_insights: (
+                                         table_name: ::String,
+                                         ?index_name: ::String,
+                                         contributor_insights_action: ("ENABLE" | "DISABLE")
+                                       ) -> _UpdateContributorInsightsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContributorInsightsResponseSuccess
+
+      interface _UpdateGlobalTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGlobalTableOutput]
+        def global_table_description: () -> Types::GlobalTableDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#update_global_table-instance_method
+      def update_global_table: (
+                                 global_table_name: ::String,
+                                 replica_updates: Array[
+                                   {
+                                     create: {
+                                       region_name: ::String
+                                     }?,
+                                     delete: {
+                                       region_name: ::String
+                                     }?
+                                   },
+                                 ]
+                               ) -> _UpdateGlobalTableResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGlobalTableResponseSuccess
+
+      interface _UpdateGlobalTableSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGlobalTableSettingsOutput]
+        def global_table_name: () -> ::String
+        def replica_settings: () -> ::Array[Types::ReplicaSettingsDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#update_global_table_settings-instance_method
+      def update_global_table_settings: (
+                                          global_table_name: ::String,
+                                          ?global_table_billing_mode: ("PROVISIONED" | "PAY_PER_REQUEST"),
+                                          ?global_table_provisioned_write_capacity_units: ::Integer,
+                                          ?global_table_provisioned_write_capacity_auto_scaling_settings_update: {
+                                            minimum_units: ::Integer?,
+                                            maximum_units: ::Integer?,
+                                            auto_scaling_disabled: bool?,
+                                            auto_scaling_role_arn: ::String?,
+                                            scaling_policy_update: {
+                                              policy_name: ::String?,
+                                              target_tracking_scaling_policy_configuration: {
+                                                disable_scale_in: bool?,
+                                                scale_in_cooldown: ::Integer?,
+                                                scale_out_cooldown: ::Integer?,
+                                                target_value: ::Float
+                                              }
+                                            }?
+                                          },
+                                          ?global_table_global_secondary_index_settings_update: Array[
+                                            {
+                                              index_name: ::String,
+                                              provisioned_write_capacity_units: ::Integer?,
+                                              provisioned_write_capacity_auto_scaling_settings_update: {
+                                                minimum_units: ::Integer?,
+                                                maximum_units: ::Integer?,
+                                                auto_scaling_disabled: bool?,
+                                                auto_scaling_role_arn: ::String?,
+                                                scaling_policy_update: {
+                                                  policy_name: ::String?,
+                                                  target_tracking_scaling_policy_configuration: {
+                                                    disable_scale_in: bool?,
+                                                    scale_in_cooldown: ::Integer?,
+                                                    scale_out_cooldown: ::Integer?,
+                                                    target_value: ::Float
+                                                  }
+                                                }?
+                                              }?
+                                            },
+                                          ],
+                                          ?replica_settings_update: Array[
+                                            {
+                                              region_name: ::String,
+                                              replica_provisioned_read_capacity_units: ::Integer?,
+                                              replica_provisioned_read_capacity_auto_scaling_settings_update: {
+                                                minimum_units: ::Integer?,
+                                                maximum_units: ::Integer?,
+                                                auto_scaling_disabled: bool?,
+                                                auto_scaling_role_arn: ::String?,
+                                                scaling_policy_update: {
+                                                  policy_name: ::String?,
+                                                  target_tracking_scaling_policy_configuration: {
+                                                    disable_scale_in: bool?,
+                                                    scale_in_cooldown: ::Integer?,
+                                                    scale_out_cooldown: ::Integer?,
+                                                    target_value: ::Float
+                                                  }
+                                                }?
+                                              }?,
+                                              replica_global_secondary_index_settings_update: Array[
+                                                {
+                                                  index_name: ::String,
+                                                  provisioned_read_capacity_units: ::Integer?,
+                                                  provisioned_read_capacity_auto_scaling_settings_update: {
+                                                    minimum_units: ::Integer?,
+                                                    maximum_units: ::Integer?,
+                                                    auto_scaling_disabled: bool?,
+                                                    auto_scaling_role_arn: ::String?,
+                                                    scaling_policy_update: {
+                                                      policy_name: ::String?,
+                                                      target_tracking_scaling_policy_configuration: {
+                                                        disable_scale_in: bool?,
+                                                        scale_in_cooldown: ::Integer?,
+                                                        scale_out_cooldown: ::Integer?,
+                                                        target_value: ::Float
+                                                      }
+                                                    }?
+                                                  }?
+                                                },
+                                              ]?,
+                                              replica_table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")?
+                                            },
+                                          ]
+                                        ) -> _UpdateGlobalTableSettingsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGlobalTableSettingsResponseSuccess
+
+      interface _UpdateItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateItemOutput]
+        def attributes: () -> ::Hash[::String, Types::AttributeValue]
+        def consumed_capacity: () -> Types::ConsumedCapacity
+        def item_collection_metrics: () -> Types::ItemCollectionMetrics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#update_item-instance_method
+      def update_item: (
+                         table_name: ::String,
+                         key: Hash[::String, untyped],
+                         ?attribute_updates: Hash[::String, {
+                             value: untyped?,
+                             action: ("ADD" | "PUT" | "DELETE")?
+                           }],
+                         ?expected: Hash[::String, {
+                             value: untyped?,
+                             exists: bool?,
+                             comparison_operator: ("EQ" | "NE" | "IN" | "LE" | "LT" | "GE" | "GT" | "BETWEEN" | "NOT_NULL" | "NULL" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH")?,
+                             attribute_value_list: Array[untyped]?
+                           }],
+                         ?conditional_operator: ("AND" | "OR"),
+                         ?return_values: ("NONE" | "ALL_OLD" | "UPDATED_OLD" | "ALL_NEW" | "UPDATED_NEW"),
+                         ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
+                         ?return_item_collection_metrics: ("SIZE" | "NONE"),
+                         ?update_expression: ::String,
+                         ?condition_expression: ::String,
+                         ?expression_attribute_names: Hash[::String, ::String],
+                         ?expression_attribute_values: Hash[::String, untyped],
+                         ?return_values_on_condition_check_failure: ("ALL_OLD" | "NONE")
+                       ) -> _UpdateItemResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateItemResponseSuccess
+
+      interface _UpdateKinesisStreamingDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateKinesisStreamingDestinationOutput]
+        def table_name: () -> ::String
+        def stream_arn: () -> ::String
+        def destination_status: () -> ("ENABLING" | "ACTIVE" | "DISABLING" | "DISABLED" | "ENABLE_FAILED" | "UPDATING")
+        def update_kinesis_streaming_configuration: () -> Types::UpdateKinesisStreamingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#update_kinesis_streaming_destination-instance_method
+      def update_kinesis_streaming_destination: (
+                                                  table_name: ::String,
+                                                  stream_arn: ::String,
+                                                  ?update_kinesis_streaming_configuration: {
+                                                    approximate_creation_date_time_precision: ("MILLISECOND" | "MICROSECOND")?
+                                                  }
+                                                ) -> _UpdateKinesisStreamingDestinationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKinesisStreamingDestinationResponseSuccess
+
+      interface _UpdateTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTableOutput]
+        def table_description: () -> Types::TableDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#update_table-instance_method
+      def update_table: (
+                          ?attribute_definitions: Array[
+                            {
+                              attribute_name: ::String,
+                              attribute_type: ("S" | "N" | "B")
+                            },
+                          ],
+                          table_name: ::String,
+                          ?billing_mode: ("PROVISIONED" | "PAY_PER_REQUEST"),
+                          ?provisioned_throughput: {
+                            read_capacity_units: ::Integer,
+                            write_capacity_units: ::Integer
+                          },
+                          ?global_secondary_index_updates: Array[
+                            {
+                              update: {
+                                index_name: ::String,
+                                provisioned_throughput: {
+                                  read_capacity_units: ::Integer,
+                                  write_capacity_units: ::Integer
+                                }
+                              }?,
+                              create: {
+                                index_name: ::String,
+                                key_schema: Array[
+                                  {
+                                    attribute_name: ::String,
+                                    key_type: ("HASH" | "RANGE")
+                                  },
+                                ],
+                                projection: {
+                                  projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
+                                  non_key_attributes: Array[::String]?
+                                },
+                                provisioned_throughput: {
+                                  read_capacity_units: ::Integer,
+                                  write_capacity_units: ::Integer
+                                }?
+                              }?,
+                              delete: {
+                                index_name: ::String
+                              }?
+                            },
+                          ],
+                          ?stream_specification: {
+                            stream_enabled: bool,
+                            stream_view_type: ("NEW_IMAGE" | "OLD_IMAGE" | "NEW_AND_OLD_IMAGES" | "KEYS_ONLY")?
+                          },
+                          ?sse_specification: {
+                            enabled: bool?,
+                            sse_type: ("AES256" | "KMS")?,
+                            kms_master_key_id: ::String?
+                          },
+                          ?replica_updates: Array[
+                            {
+                              create: {
+                                region_name: ::String,
+                                kms_master_key_id: ::String?,
+                                provisioned_throughput_override: {
+                                  read_capacity_units: ::Integer?
+                                }?,
+                                global_secondary_indexes: Array[
+                                  {
+                                    index_name: ::String,
+                                    provisioned_throughput_override: {
+                                      read_capacity_units: ::Integer?
+                                    }?
+                                  },
+                                ]?,
+                                table_class_override: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")?
+                              }?,
+                              update: {
+                                region_name: ::String,
+                                kms_master_key_id: ::String?,
+                                provisioned_throughput_override: {
+                                  read_capacity_units: ::Integer?
+                                }?,
+                                global_secondary_indexes: Array[
+                                  {
+                                    index_name: ::String,
+                                    provisioned_throughput_override: {
+                                      read_capacity_units: ::Integer?
+                                    }?
+                                  },
+                                ]?,
+                                table_class_override: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")?
+                              }?,
+                              delete: {
+                                region_name: ::String
+                              }?
+                            },
+                          ],
+                          ?table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS"),
+                          ?deletion_protection_enabled: bool
+                        ) -> _UpdateTableResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableResponseSuccess
+
+      interface _UpdateTableReplicaAutoScalingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTableReplicaAutoScalingOutput]
+        def table_auto_scaling_description: () -> Types::TableAutoScalingDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#update_table_replica_auto_scaling-instance_method
+      def update_table_replica_auto_scaling: (
+                                               ?global_secondary_index_updates: Array[
+                                                 {
+                                                   index_name: ::String?,
+                                                   provisioned_write_capacity_auto_scaling_update: {
+                                                     minimum_units: ::Integer?,
+                                                     maximum_units: ::Integer?,
+                                                     auto_scaling_disabled: bool?,
+                                                     auto_scaling_role_arn: ::String?,
+                                                     scaling_policy_update: {
+                                                       policy_name: ::String?,
+                                                       target_tracking_scaling_policy_configuration: {
+                                                         disable_scale_in: bool?,
+                                                         scale_in_cooldown: ::Integer?,
+                                                         scale_out_cooldown: ::Integer?,
+                                                         target_value: ::Float
+                                                       }
+                                                     }?
+                                                   }?
+                                                 },
+                                               ],
+                                               table_name: ::String,
+                                               ?provisioned_write_capacity_auto_scaling_update: {
+                                                 minimum_units: ::Integer?,
+                                                 maximum_units: ::Integer?,
+                                                 auto_scaling_disabled: bool?,
+                                                 auto_scaling_role_arn: ::String?,
+                                                 scaling_policy_update: {
+                                                   policy_name: ::String?,
+                                                   target_tracking_scaling_policy_configuration: {
+                                                     disable_scale_in: bool?,
+                                                     scale_in_cooldown: ::Integer?,
+                                                     scale_out_cooldown: ::Integer?,
+                                                     target_value: ::Float
+                                                   }
+                                                 }?
+                                               },
+                                               ?replica_updates: Array[
+                                                 {
+                                                   region_name: ::String,
+                                                   replica_global_secondary_index_updates: Array[
+                                                     {
+                                                       index_name: ::String?,
+                                                       provisioned_read_capacity_auto_scaling_update: {
+                                                         minimum_units: ::Integer?,
+                                                         maximum_units: ::Integer?,
+                                                         auto_scaling_disabled: bool?,
+                                                         auto_scaling_role_arn: ::String?,
+                                                         scaling_policy_update: {
+                                                           policy_name: ::String?,
+                                                           target_tracking_scaling_policy_configuration: {
+                                                             disable_scale_in: bool?,
+                                                             scale_in_cooldown: ::Integer?,
+                                                             scale_out_cooldown: ::Integer?,
+                                                             target_value: ::Float
+                                                           }
+                                                         }?
+                                                       }?
+                                                     },
+                                                   ]?,
+                                                   replica_provisioned_read_capacity_auto_scaling_update: {
+                                                     minimum_units: ::Integer?,
+                                                     maximum_units: ::Integer?,
+                                                     auto_scaling_disabled: bool?,
+                                                     auto_scaling_role_arn: ::String?,
+                                                     scaling_policy_update: {
+                                                       policy_name: ::String?,
+                                                       target_tracking_scaling_policy_configuration: {
+                                                         disable_scale_in: bool?,
+                                                         scale_in_cooldown: ::Integer?,
+                                                         scale_out_cooldown: ::Integer?,
+                                                         target_value: ::Float
+                                                       }
+                                                     }?
+                                                   }?
+                                                 },
+                                               ]
+                                             ) -> _UpdateTableReplicaAutoScalingResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableReplicaAutoScalingResponseSuccess
+
+      interface _UpdateTimeToLiveResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTimeToLiveOutput]
+        def time_to_live_specification: () -> Types::TimeToLiveSpecification
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#update_time_to_live-instance_method
+      def update_time_to_live: (
+                                 table_name: ::String,
+                                 time_to_live_specification: {
+                                   enabled: bool,
+                                   attribute_name: ::String
+                                 }
+                               ) -> _UpdateTimeToLiveResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTimeToLiveResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#wait_until-instance_method
+      def wait_until: (:table_exists waiter_name, 
+                    table_name: ::String
+                  ) -> Client::_DescribeTableResponseSuccess
+                    | (:table_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeTableResponseSuccess
+                    | (:table_not_exists waiter_name, 
+                    table_name: ::String
+                  ) -> Client::_DescribeTableResponseSuccess
+                    | (:table_not_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeTableResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,58 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBParameterGroupFamily.html
+    class DBParameterGroupFamily
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBParameterGroupFamily.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBParameterGroupFamily.html#name-instance_method
+      def name: () -> String
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBParameterGroupFamily.html#data-instance_method
+      def data: () -> EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBParameterGroupFamily.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBParameterGroupFamily.html#engine_default_cluster_parameters-instance_method
+      def engine_default_cluster_parameters: (
+                                               ?filters: Array[
+                                                 {
+                                                   name: ::String,
+                                                   values: Array[::String]
+                                                 },
+                                               ],
+                                               ?max_records: ::Integer,
+                                               ?marker: ::String
+                                             ) -> Parameter::Collection
+                                           | (?Hash[Symbol, untyped]) -> Parameter::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBParameterGroupFamily.html#engine_default_parameters-instance_method
+      def engine_default_parameters: (
+                                       ?filters: Array[
+                                         {
+                                           name: ::String,
+                                           values: Array[::String]
+                                         },
+                                       ]
+                                     ) -> Parameter::Collection
+                                   | (?Hash[Symbol, untyped]) -> Parameter::Collection
+
+      class Collection < ::Aws::Resources::Collection[DBParameterGroupFamily]
+      end
+    end
+  end
+end

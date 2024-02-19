@@ -1181,7 +1181,7 @@ module Aws::Omics
     #   @return [Hash<String,Types::WorkflowParameter>]
     #
     # @!attribute [rw] storage_capacity
-    #   A storage capacity for the workflow in gigabytes.
+    #   A storage capacity for the workflow in gibibytes.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -2675,6 +2675,14 @@ module Aws::Omics
     #   The location of the run log.
     #   @return [Types::RunLogLocation]
     #
+    # @!attribute [rw] uuid
+    #   The universally unique identifier for a run.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_output_uri
+    #   The destination for workflow outputs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetRunResponse AWS API Documentation
     #
     class GetRunResponse < Struct.new(
@@ -2704,7 +2712,9 @@ module Aws::Omics
       :accelerators,
       :retention_mode,
       :failure_reason,
-      :log_location)
+      :log_location,
+      :uuid,
+      :run_output_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5825,13 +5835,23 @@ module Aws::Omics
     #   The run's tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] uuid
+    #   The universally unique identifier for a run.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_output_uri
+    #   The destination for workflow outputs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartRunResponse AWS API Documentation
     #
     class StartRunResponse < Struct.new(
       :arn,
       :id,
       :status,
-      :tags)
+      :tags,
+      :uuid,
+      :run_output_uri)
       SENSITIVE = []
       include Aws::Structure
     end

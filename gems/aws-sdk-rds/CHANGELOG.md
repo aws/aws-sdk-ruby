@@ -1,6 +1,101 @@
 Unreleased Changes
 ------------------
 
+1.217.0 (2024-02-16)
+------------------
+
+* Feature - Doc only update for a valid option in DB parameter group
+
+1.216.0 (2024-02-14)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.215.0 (2024-01-29)
+------------------
+
+* Feature - Introduced support for the InsufficientDBInstanceCapacityFault error in the RDS RestoreDBClusterFromSnapshot and RestoreDBClusterToPointInTime API methods. This provides enhanced error handling, ensuring a more robust experience.
+
+1.214.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.213.0 (2024-01-24)
+------------------
+
+* Feature - This release adds support for Aurora Limitless Database.
+
+1.212.0 (2024-01-22)
+------------------
+
+* Feature - Introduced support for the InsufficientDBInstanceCapacityFault error in the RDS CreateDBCluster API method. This provides enhanced error handling, ensuring a more robust experience when creating database clusters with insufficient instance capacity.
+
+1.211.0 (2023-12-21)
+------------------
+
+* Feature - This release adds support for using RDS Data API with Aurora PostgreSQL Serverless v2 and provisioned DB clusters.
+
+1.210.0 (2023-12-19)
+------------------
+
+* Feature - RDS - The release adds two new APIs: DescribeDBRecommendations and ModifyDBRecommendation
+
+1.209.0 (2023-12-15)
+------------------
+
+* Feature - Updates Amazon RDS documentation by adding code examples
+
+1.208.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.207.0 (2023-11-27)
+------------------
+
+* Feature - Updates Amazon RDS documentation for support for RDS for Db2.
+
+1.206.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.205.0 (2023-11-17)
+------------------
+
+* Feature - This release adds support for option groups and replica enhancements to Amazon RDS Custom.
+
+1.204.0 (2023-11-15)
+------------------
+
+* Feature - Updates Amazon RDS documentation for support for upgrading RDS for MySQL snapshots from version 5.7 to version 8.0.
+
+1.203.0 (2023-11-10)
+------------------
+
+* Feature - Updates Amazon RDS documentation for zero-ETL integrations.
+
+1.202.0 (2023-11-08)
+------------------
+
+* Feature - This Amazon RDS release adds support for patching the OS of an RDS Custom for Oracle DB instance. You can now upgrade the database or operating system using the modify-db-instance command.
+
+1.201.0 (2023-11-07)
+------------------
+
+* Feature - This Amazon RDS release adds support for the multi-tenant configuration. In this configuration, an RDS DB instance can contain multiple tenant databases. In RDS for Oracle, a tenant database is a pluggable database (PDB).
+
+1.200.0 (2023-11-01)
+------------------
+
+* Feature - This release adds support for customized networking resources to Amazon RDS Custom.
+
+1.199.0 (2023-10-30)
+------------------
+
+* Feature - This release launches the CreateIntegration, DeleteIntegration, and DescribeIntegrations APIs to manage zero-ETL Integrations.
+
 1.198.0 (2023-10-18)
 ------------------
 

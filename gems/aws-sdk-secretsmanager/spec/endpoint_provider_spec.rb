@@ -394,7 +394,7 @@ module Aws::SecretsManager
 
     context 'For region us-east-1 with FIPS enabled and DualStack enabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://secretsmanager-fips.us-east-1.api.aws"}}
+        {"endpoint"=>{"url"=>"https://secretsmanager-fips.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -408,7 +408,7 @@ module Aws::SecretsManager
 
     context 'For region us-east-1 with FIPS disabled and DualStack enabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://secretsmanager.us-east-1.api.aws"}}
+        {"endpoint"=>{"url"=>"https://secretsmanager.us-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -478,7 +478,7 @@ module Aws::SecretsManager
 
     context 'For region cn-north-1 with FIPS disabled and DualStack enabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://secretsmanager.cn-north-1.api.amazonwebservices.com.cn"}}
+        {"endpoint"=>{"url"=>"https://secretsmanager.cn-north-1.amazonaws.com.cn"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -548,7 +548,7 @@ module Aws::SecretsManager
 
     context 'For region us-gov-east-1 with FIPS enabled and DualStack enabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://secretsmanager-fips.us-gov-east-1.api.aws"}}
+        {"endpoint"=>{"url"=>"https://secretsmanager-fips.us-gov-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
@@ -562,7 +562,7 @@ module Aws::SecretsManager
 
     context 'For region us-gov-east-1 with FIPS disabled and DualStack enabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://secretsmanager.us-gov-east-1.api.aws"}}
+        {"endpoint"=>{"url"=>"https://secretsmanager.us-gov-east-1.amazonaws.com"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do

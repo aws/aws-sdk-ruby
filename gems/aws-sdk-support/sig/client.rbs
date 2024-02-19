@@ -1,0 +1,279 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Support
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddAttachmentsToSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddAttachmentsToSetResponse]
+        def attachment_set_id: () -> ::String
+        def expiry_time: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#add_attachments_to_set-instance_method
+      def add_attachments_to_set: (
+                                    ?attachment_set_id: ::String,
+                                    attachments: Array[
+                                      {
+                                        file_name: ::String?,
+                                        data: ::String?
+                                      },
+                                    ]
+                                  ) -> _AddAttachmentsToSetResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddAttachmentsToSetResponseSuccess
+
+      interface _AddCommunicationToCaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddCommunicationToCaseResponse]
+        def result: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#add_communication_to_case-instance_method
+      def add_communication_to_case: (
+                                       ?case_id: ::String,
+                                       communication_body: ::String,
+                                       ?cc_email_addresses: Array[::String],
+                                       ?attachment_set_id: ::String
+                                     ) -> _AddCommunicationToCaseResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddCommunicationToCaseResponseSuccess
+
+      interface _CreateCaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCaseResponse]
+        def case_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#create_case-instance_method
+      def create_case: (
+                         subject: ::String,
+                         ?service_code: ::String,
+                         ?severity_code: ::String,
+                         ?category_code: ::String,
+                         communication_body: ::String,
+                         ?cc_email_addresses: Array[::String],
+                         ?language: ::String,
+                         ?issue_type: ::String,
+                         ?attachment_set_id: ::String
+                       ) -> _CreateCaseResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCaseResponseSuccess
+
+      interface _DescribeAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAttachmentResponse]
+        def attachment: () -> Types::Attachment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#describe_attachment-instance_method
+      def describe_attachment: (
+                                 attachment_id: ::String
+                               ) -> _DescribeAttachmentResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAttachmentResponseSuccess
+
+      interface _DescribeCasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCasesResponse]
+        def cases: () -> ::Array[Types::CaseDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#describe_cases-instance_method
+      def describe_cases: (
+                            ?case_id_list: Array[::String],
+                            ?display_id: ::String,
+                            ?after_time: ::String,
+                            ?before_time: ::String,
+                            ?include_resolved_cases: bool,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer,
+                            ?language: ::String,
+                            ?include_communications: bool
+                          ) -> _DescribeCasesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCasesResponseSuccess
+
+      interface _DescribeCommunicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCommunicationsResponse]
+        def communications: () -> ::Array[Types::Communication]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#describe_communications-instance_method
+      def describe_communications: (
+                                     case_id: ::String,
+                                     ?before_time: ::String,
+                                     ?after_time: ::String,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _DescribeCommunicationsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCommunicationsResponseSuccess
+
+      interface _DescribeCreateCaseOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCreateCaseOptionsResponse]
+        def language_availability: () -> ::String
+        def communication_types: () -> ::Array[Types::CommunicationTypeOptions]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#describe_create_case_options-instance_method
+      def describe_create_case_options: (
+                                          issue_type: ::String,
+                                          service_code: ::String,
+                                          language: ::String,
+                                          category_code: ::String
+                                        ) -> _DescribeCreateCaseOptionsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCreateCaseOptionsResponseSuccess
+
+      interface _DescribeServicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeServicesResponse]
+        def services: () -> ::Array[Types::Service]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#describe_services-instance_method
+      def describe_services: (
+                               ?service_code_list: Array[::String],
+                               ?language: ::String
+                             ) -> _DescribeServicesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeServicesResponseSuccess
+
+      interface _DescribeSeverityLevelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSeverityLevelsResponse]
+        def severity_levels: () -> ::Array[Types::SeverityLevel]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#describe_severity_levels-instance_method
+      def describe_severity_levels: (
+                                      ?language: ::String
+                                    ) -> _DescribeSeverityLevelsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSeverityLevelsResponseSuccess
+
+      interface _DescribeSupportedLanguagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSupportedLanguagesResponse]
+        def supported_languages: () -> ::Array[Types::SupportedLanguage]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#describe_supported_languages-instance_method
+      def describe_supported_languages: (
+                                          issue_type: ::String,
+                                          service_code: ::String,
+                                          category_code: ::String
+                                        ) -> _DescribeSupportedLanguagesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSupportedLanguagesResponseSuccess
+
+      interface _DescribeTrustedAdvisorCheckRefreshStatusesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTrustedAdvisorCheckRefreshStatusesResponse]
+        def statuses: () -> ::Array[Types::TrustedAdvisorCheckRefreshStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#describe_trusted_advisor_check_refresh_statuses-instance_method
+      def describe_trusted_advisor_check_refresh_statuses: (
+                                                             check_ids: Array[::String]
+                                                           ) -> _DescribeTrustedAdvisorCheckRefreshStatusesResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTrustedAdvisorCheckRefreshStatusesResponseSuccess
+
+      interface _DescribeTrustedAdvisorCheckResultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTrustedAdvisorCheckResultResponse]
+        def result: () -> Types::TrustedAdvisorCheckResult
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#describe_trusted_advisor_check_result-instance_method
+      def describe_trusted_advisor_check_result: (
+                                                   check_id: ::String,
+                                                   ?language: ::String
+                                                 ) -> _DescribeTrustedAdvisorCheckResultResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTrustedAdvisorCheckResultResponseSuccess
+
+      interface _DescribeTrustedAdvisorCheckSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTrustedAdvisorCheckSummariesResponse]
+        def summaries: () -> ::Array[Types::TrustedAdvisorCheckSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#describe_trusted_advisor_check_summaries-instance_method
+      def describe_trusted_advisor_check_summaries: (
+                                                      check_ids: Array[::String]
+                                                    ) -> _DescribeTrustedAdvisorCheckSummariesResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTrustedAdvisorCheckSummariesResponseSuccess
+
+      interface _DescribeTrustedAdvisorChecksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTrustedAdvisorChecksResponse]
+        def checks: () -> ::Array[Types::TrustedAdvisorCheckDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#describe_trusted_advisor_checks-instance_method
+      def describe_trusted_advisor_checks: (
+                                             language: ::String
+                                           ) -> _DescribeTrustedAdvisorChecksResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTrustedAdvisorChecksResponseSuccess
+
+      interface _RefreshTrustedAdvisorCheckResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RefreshTrustedAdvisorCheckResponse]
+        def status: () -> Types::TrustedAdvisorCheckRefreshStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#refresh_trusted_advisor_check-instance_method
+      def refresh_trusted_advisor_check: (
+                                           check_id: ::String
+                                         ) -> _RefreshTrustedAdvisorCheckResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RefreshTrustedAdvisorCheckResponseSuccess
+
+      interface _ResolveCaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResolveCaseResponse]
+        def initial_case_status: () -> ::String
+        def final_case_status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Support/Client.html#resolve_case-instance_method
+      def resolve_case: (
+                          ?case_id: ::String
+                        ) -> _ResolveCaseResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResolveCaseResponseSuccess
+    end
+  end
+end
+

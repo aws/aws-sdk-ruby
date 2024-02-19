@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.68.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2023-11-09)
+------------------
+
+* Feature - This release enables customers to call SQS using AWS JSON-1.0 protocol and bug fix.
+
+1.66.0 (2023-11-08)
+------------------
+
+* Feature - This release enables customers to call SQS using AWS JSON-1.0 protocol.
+
+1.65.0 (2023-10-31)
+------------------
+
+* Feature - Update `QueuePoller` to allow for the definition of an `after_empty_receive` callback which is triggered when a polling request returns no records.
+
 1.64.0 (2023-10-02)
 ------------------
 

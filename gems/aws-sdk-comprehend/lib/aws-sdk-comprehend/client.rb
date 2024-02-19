@@ -663,7 +663,7 @@ module Aws::Comprehend
     # each entity identified in the documents.
     #
     # For more information about targeted sentiment, see [Targeted
-    # sentiment][1].
+    # sentiment][1] in the *Amazon Comprehend Developer Guide*.
     #
     #
     #
@@ -723,42 +723,67 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
-    # Creates a new document classification request to analyze a single
-    # document in real-time, using a previously created and trained custom
-    # model and an endpoint.
+    # Creates a classification request to analyze a single document in
+    # real-time. `ClassifyDocument` supports the following model types:
     #
-    # You can input plain text or you can upload a single-page input
-    # document (text, PDF, Word, or image).
+    # * Custom classifier - a custom model that you have created and
+    #   trained. For input, you can provide plain text, a single-page
+    #   document (PDF, Word, or image), or Amazon Textract API output. For
+    #   more information, see [Custom classification][1] in the *Amazon
+    #   Comprehend Developer Guide*.
+    #
+    # * Prompt safety classifier - Amazon Comprehend provides a pre-trained
+    #   model for classifying input prompts for generative AI applications.
+    #   For input, you provide English plain text input. For prompt safety
+    #   classification, the response includes only the `Classes` field. For
+    #   more information about prompt safety classifiers, see [Prompt safety
+    #   classification][2] in the *Amazon Comprehend Developer Guide*.
     #
     # If the system detects errors while processing a page in the input
-    # document, the API response includes an entry in `Errors` that
-    # describes the errors.
+    # document, the API response includes an `Errors` field that describes
+    # the errors.
     #
     # If the system detects a document-level error in your input document,
     # the API returns an `InvalidRequestException` error response. For
     # details about this exception, see [ Errors in semi-structured
-    # documents][1] in the Comprehend Developer Guide.
+    # documents][3] in the Comprehend Developer Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync-err.html
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/how-document-classification.html
+    # [2]: https://docs.aws.amazon.com/comprehend/latest/dg/trust-safety.html#prompt-classification
+    # [3]: https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync-err.html
     #
     # @option params [String] :text
     #   The document text to be analyzed. If you enter text using this
     #   parameter, do not use the `Bytes` parameter.
     #
     # @option params [required, String] :endpoint_arn
-    #   The Amazon Resource Number (ARN) of the endpoint. For information
-    #   about endpoints, see [Managing endpoints][1].
+    #   The Amazon Resource Number (ARN) of the endpoint.
+    #
+    #   For prompt safety classification, Amazon Comprehend provides the
+    #   endpoint ARN. For more information about prompt safety classifiers,
+    #   see [Prompt safety classification][1] in the *Amazon Comprehend
+    #   Developer Guide*
+    #
+    #   For custom classification, you create an endpoint for your custom
+    #   model. For more information, see [Using Amazon Comprehend
+    #   endpoints][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/trust-safety.html#prompt-classification
+    #   [2]: https://docs.aws.amazon.com/comprehend/latest/dg/using-endpoints.html
     #
     # @option params [String, StringIO, File] :bytes
     #   Use the `Bytes` parameter to input a text, PDF, Word or image file.
-    #   You can also use the `Bytes` parameter to input an Amazon Textract
-    #   `DetectDocumentText` or `AnalyzeDocument` output file.
+    #
+    #   When you classify a document using a custom model, you can also use
+    #   the `Bytes` parameter to input an Amazon Textract `DetectDocumentText`
+    #   or `AnalyzeDocument` output file.
+    #
+    #   To classify a document using the prompt safety classifier, use the
+    #   `Text` parameter for input.
     #
     #   Provide the input document as a sequence of base64-encoded bytes. If
     #   your code uses an Amazon Web Services SDK to classify documents, the
@@ -843,8 +868,7 @@ module Aws::Comprehend
     #   A UTF-8 text string. The maximum string size is 100 KB.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. Currently, English is the only
-    #   valid language.
+    #   The language of the input documents.
     #
     # @return [Types::ContainsPiiEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1006,7 +1030,7 @@ module Aws::Comprehend
     # @option params [Types::DocumentClassifierOutputDataConfig] :output_data_config
     #   Specifies the location for the output files from a custom classifier
     #   job. This parameter is required for a request that creates a native
-    #   classifier model.
+    #   document model.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -1042,11 +1066,12 @@ module Aws::Comprehend
     #
     # @option params [String] :mode
     #   Indicates the mode in which the classifier will be trained. The
-    #   classifier can be trained in multi-class mode, which identifies one
-    #   and only one class for each document, or multi-label mode, which
-    #   identifies one or more labels for each document. In multi-label mode,
-    #   multiple labels for an individual document are separated by a
-    #   delimiter. The default delimiter between labels is a pipe (\|).
+    #   classifier can be trained in multi-class (single-label) mode or
+    #   multi-label mode. Multi-class mode identifies a single class label for
+    #   each document and multi-label mode identifies one or more class labels
+    #   for each document. Multiple labels for an individual document are
+    #   separated by a delimiter. The default delimiter between labels is a
+    #   pipe (\|).
     #
     # @option params [String] :model_kms_key_id
     #   ID for the KMS key that Amazon Comprehend uses to encrypt trained
@@ -1420,7 +1445,8 @@ module Aws::Comprehend
     #
     # @option params [String] :active_model_arn
     #   To associate an existing model with the flywheel, specify the Amazon
-    #   Resource Number (ARN) of the model version.
+    #   Resource Number (ARN) of the model version. Do not set `TaskConfig` or
+    #   `ModelType` if you specify an `ActiveModelArn`.
     #
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that grants Amazon
@@ -1428,11 +1454,12 @@ module Aws::Comprehend
     #   data lake.
     #
     # @option params [Types::TaskConfig] :task_config
-    #   Configuration about the custom classifier associated with the
-    #   flywheel.
+    #   Configuration about the model associated with the flywheel. You need
+    #   to set `TaskConfig` if you are creating a flywheel for a new model.
     #
     # @option params [String] :model_type
-    #   The model type.
+    #   The model type. You need to set `ModelType` if you are creating a
+    #   flywheel for a new model.
     #
     # @option params [required, String] :data_lake_s3_uri
     #   Enter the S3 location for the data lake. You can specify a new S3
@@ -2753,8 +2780,8 @@ module Aws::Comprehend
     #   A UTF-8 text string. The maximum string size is 100 KB.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. Currently, English is the only
-    #   valid language.
+    #   The language of the input text. Enter the language code for English
+    #   (en) or Spanish (es).
     #
     # @return [Types::DetectPiiEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2875,7 +2902,7 @@ module Aws::Comprehend
     # entity identified in the text.
     #
     # For more information about targeted sentiment, see [Targeted
-    # sentiment][1].
+    # sentiment][1] in the *Amazon Comprehend Developer Guide*.
     #
     #
     #
@@ -2923,6 +2950,56 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def detect_targeted_sentiment(params = {}, options = {})
       req = build_request(:detect_targeted_sentiment, params)
+      req.send_request(options)
+    end
+
+    # Performs toxicity analysis on the list of text strings that you
+    # provide as input. The API response contains a results list that
+    # matches the size of the input list. For more information about
+    # toxicity detection, see [Toxicity detection][1] in the *Amazon
+    # Comprehend Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/toxicity-detection.html
+    #
+    # @option params [required, Array<Types::TextSegment>] :text_segments
+    #   A list of up to 10 text strings. Each string has a maximum size of 1
+    #   KB, and the maximum size of the list is 10 KB.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input text. Currently, English is the only
+    #   supported language.
+    #
+    # @return [Types::DetectToxicContentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetectToxicContentResponse#result_list #result_list} => Array&lt;Types::ToxicLabels&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detect_toxic_content({
+    #     text_segments: [ # required
+    #       {
+    #         text: "CustomerInputString", # required
+    #       },
+    #     ],
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result_list #=> Array
+    #   resp.result_list[0].labels #=> Array
+    #   resp.result_list[0].labels[0].name #=> String, one of "GRAPHIC", "HARASSMENT_OR_ABUSE", "HATE_SPEECH", "INSULT", "PROFANITY", "SEXUAL", "VIOLENCE_OR_THREAT"
+    #   resp.result_list[0].labels[0].score #=> Float
+    #   resp.result_list[0].toxicity #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectToxicContent AWS API Documentation
+    #
+    # @overload detect_toxic_content(params = {})
+    # @param [Hash] params ({})
+    def detect_toxic_content(params = {}, options = {})
+      req = build_request(:detect_toxic_content, params)
       req.send_request(options)
     end
 
@@ -4266,9 +4343,9 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
-    # Starts an asynchronous document classification job. Use the
-    # `DescribeDocumentClassificationJob` operation to track the progress of
-    # the job.
+    # Starts an asynchronous document classification job using a custom
+    # classification model. Use the `DescribeDocumentClassificationJob`
+    # operation to track the progress of the job.
     #
     # @option params [String] :job_name
     #   The identifier of the job.
@@ -4889,8 +4966,8 @@ module Aws::Comprehend
     #   The identifier of the job.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. Currently, English is the only
-    #   valid language.
+    #   The language of the input documents. Enter the language code for
+    #   English (en) or Spanish (es).
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -5092,7 +5169,7 @@ module Aws::Comprehend
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions
     #
     # @option params [String] :job_name
     #   The identifier of the job.
@@ -5835,7 +5912,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,0 +1,549 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ECRPublic
+  module Types
+
+    class AuthorizationData
+      attr_accessor authorization_token: ::String
+      attr_accessor expires_at: ::Time
+      SENSITIVE: []
+    end
+
+    class BatchCheckLayerAvailabilityRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor layer_digests: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchCheckLayerAvailabilityResponse
+      attr_accessor layers: ::Array[Types::Layer]
+      attr_accessor failures: ::Array[Types::LayerFailure]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteImageRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_ids: ::Array[Types::ImageIdentifier]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteImageResponse
+      attr_accessor image_ids: ::Array[Types::ImageIdentifier]
+      attr_accessor failures: ::Array[Types::ImageFailure]
+      SENSITIVE: []
+    end
+
+    class CompleteLayerUploadRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor layer_digests: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CompleteLayerUploadResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor layer_digest: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRepositoryRequest
+      attr_accessor repository_name: ::String
+      attr_accessor catalog_data: Types::RepositoryCatalogDataInput
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRepositoryResponse
+      attr_accessor repository: Types::Repository
+      attr_accessor catalog_data: Types::RepositoryCatalogData
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryPolicyRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryPolicyResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor policy_text: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryResponse
+      attr_accessor repository: Types::Repository
+      SENSITIVE: []
+    end
+
+    class DescribeImageTagsRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeImageTagsResponse
+      attr_accessor image_tag_details: ::Array[Types::ImageTagDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeImagesRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_ids: ::Array[Types::ImageIdentifier]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeImagesResponse
+      attr_accessor image_details: ::Array[Types::ImageDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRegistriesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeRegistriesResponse
+      attr_accessor registries: ::Array[Types::Registry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRepositoriesRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeRepositoriesResponse
+      attr_accessor repositories: ::Array[Types::Repository]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class EmptyUploadException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetAuthorizationTokenRequest < Aws::EmptyStructure
+    end
+
+    class GetAuthorizationTokenResponse
+      attr_accessor authorization_data: Types::AuthorizationData
+      SENSITIVE: []
+    end
+
+    class GetRegistryCatalogDataRequest < Aws::EmptyStructure
+    end
+
+    class GetRegistryCatalogDataResponse
+      attr_accessor registry_catalog_data: Types::RegistryCatalogData
+      SENSITIVE: []
+    end
+
+    class GetRepositoryCatalogDataRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRepositoryCatalogDataResponse
+      attr_accessor catalog_data: Types::RepositoryCatalogData
+      SENSITIVE: []
+    end
+
+    class GetRepositoryPolicyRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRepositoryPolicyResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor policy_text: ::String
+      SENSITIVE: []
+    end
+
+    class Image
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_id: Types::ImageIdentifier
+      attr_accessor image_manifest: ::String
+      attr_accessor image_manifest_media_type: ::String
+      SENSITIVE: []
+    end
+
+    class ImageAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImageDetail
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_digest: ::String
+      attr_accessor image_tags: ::Array[::String]
+      attr_accessor image_size_in_bytes: ::Integer
+      attr_accessor image_pushed_at: ::Time
+      attr_accessor image_manifest_media_type: ::String
+      attr_accessor artifact_media_type: ::String
+      SENSITIVE: []
+    end
+
+    class ImageDigestDoesNotMatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImageFailure
+      attr_accessor image_id: Types::ImageIdentifier
+      attr_accessor failure_code: ("InvalidImageDigest" | "InvalidImageTag" | "ImageTagDoesNotMatchDigest" | "ImageNotFound" | "MissingDigestAndTag" | "ImageReferencedByManifestList" | "KmsError")
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class ImageIdentifier
+      attr_accessor image_digest: ::String
+      attr_accessor image_tag: ::String
+      SENSITIVE: []
+    end
+
+    class ImageNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImageTagAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImageTagDetail
+      attr_accessor image_tag: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor image_detail: Types::ReferencedImageDetail
+      SENSITIVE: []
+    end
+
+    class InitiateLayerUploadRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class InitiateLayerUploadResponse
+      attr_accessor upload_id: ::String
+      attr_accessor part_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class InvalidLayerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidLayerPartException
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor last_valid_byte_received: ::Integer
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTagParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Layer
+      attr_accessor layer_digest: ::String
+      attr_accessor layer_availability: ("AVAILABLE" | "UNAVAILABLE")
+      attr_accessor layer_size: ::Integer
+      attr_accessor media_type: ::String
+      SENSITIVE: []
+    end
+
+    class LayerAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LayerFailure
+      attr_accessor layer_digest: ::String
+      attr_accessor failure_code: ("InvalidLayerDigest" | "MissingLayerDigest")
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class LayerPartTooSmallException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LayersNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutImageRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor image_manifest: ::String
+      attr_accessor image_manifest_media_type: ::String
+      attr_accessor image_tag: ::String
+      attr_accessor image_digest: ::String
+      SENSITIVE: []
+    end
+
+    class PutImageResponse
+      attr_accessor image: Types::Image
+      SENSITIVE: []
+    end
+
+    class PutRegistryCatalogDataRequest
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class PutRegistryCatalogDataResponse
+      attr_accessor registry_catalog_data: Types::RegistryCatalogData
+      SENSITIVE: []
+    end
+
+    class PutRepositoryCatalogDataRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor catalog_data: Types::RepositoryCatalogDataInput
+      SENSITIVE: []
+    end
+
+    class PutRepositoryCatalogDataResponse
+      attr_accessor catalog_data: Types::RepositoryCatalogData
+      SENSITIVE: []
+    end
+
+    class ReferencedImageDetail
+      attr_accessor image_digest: ::String
+      attr_accessor image_size_in_bytes: ::Integer
+      attr_accessor image_pushed_at: ::Time
+      attr_accessor image_manifest_media_type: ::String
+      attr_accessor artifact_media_type: ::String
+      SENSITIVE: []
+    end
+
+    class ReferencedImagesNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Registry
+      attr_accessor registry_id: ::String
+      attr_accessor registry_arn: ::String
+      attr_accessor registry_uri: ::String
+      attr_accessor verified: bool
+      attr_accessor aliases: ::Array[Types::RegistryAlias]
+      SENSITIVE: []
+    end
+
+    class RegistryAlias
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "PENDING" | "REJECTED")
+      attr_accessor primary_registry_alias: bool
+      attr_accessor default_registry_alias: bool
+      SENSITIVE: []
+    end
+
+    class RegistryCatalogData
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class RegistryNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Repository
+      attr_accessor repository_arn: ::String
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor repository_uri: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class RepositoryAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RepositoryCatalogData
+      attr_accessor description: ::String
+      attr_accessor architectures: ::Array[::String]
+      attr_accessor operating_systems: ::Array[::String]
+      attr_accessor logo_url: ::String
+      attr_accessor about_text: ::String
+      attr_accessor usage_text: ::String
+      attr_accessor marketplace_certified: bool
+      SENSITIVE: []
+    end
+
+    class RepositoryCatalogDataInput
+      attr_accessor description: ::String
+      attr_accessor architectures: ::Array[::String]
+      attr_accessor operating_systems: ::Array[::String]
+      attr_accessor logo_image_blob: ::String
+      attr_accessor about_text: ::String
+      attr_accessor usage_text: ::String
+      SENSITIVE: []
+    end
+
+    class RepositoryCatalogDataNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RepositoryNotEmptyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RepositoryNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RepositoryPolicyNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SetRepositoryPolicyRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor policy_text: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class SetRepositoryPolicyResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor policy_text: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedCommandException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UploadLayerPartRequest
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor part_first_byte: ::Integer
+      attr_accessor part_last_byte: ::Integer
+      attr_accessor layer_part_blob: ::String
+      SENSITIVE: []
+    end
+
+    class UploadLayerPartResponse
+      attr_accessor registry_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor upload_id: ::String
+      attr_accessor last_byte_received: ::Integer
+      SENSITIVE: []
+    end
+
+    class UploadNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

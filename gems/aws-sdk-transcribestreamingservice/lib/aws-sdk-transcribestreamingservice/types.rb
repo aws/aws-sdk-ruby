@@ -1675,8 +1675,9 @@ module Aws::TranscribeStreamingService
     #   audio channel.
     #
     #   Note that you must include either `LanguageCode` or
-    #   `IdentifyLanguage` in your request. If you include both parameters,
-    #   your request fails.
+    #   `IdentifyLanguage` or `IdentifyMultipleLanguages` in your request.
+    #   If you include more than one of these parameters, your transcription
+    #   job fails.
     #
     #   Streaming language identification can't be combined with custom
     #   language models or redaction.
@@ -1713,6 +1714,28 @@ module Aws::TranscribeStreamingService
     #   You can only use this parameter if you've included
     #   `IdentifyLanguage` and `LanguageOptions` in your request.
     #   @return [String]
+    #
+    # @!attribute [rw] identify_multiple_languages
+    #   Enables automatic multi-language identification in your
+    #   transcription job request. Use this parameter if your stream
+    #   contains more than one language. If your stream contains only one
+    #   language, use IdentifyLanguage instead.
+    #
+    #   If you include `IdentifyMultipleLanguages`, you can optionally
+    #   include a list of language codes, using `LanguageOptions`, that you
+    #   think may be present in your stream. Including `LanguageOptions`
+    #   restricts `IdentifyMultipleLanguages` to only the language options
+    #   that you specify, which can improve transcription accuracy.
+    #
+    #   If you want to apply a custom vocabulary or a custom vocabulary
+    #   filter to your automatic multiple language identification request,
+    #   include `VocabularyNames` or `VocabularyFilterNames`.
+    #
+    #   Note that you must include one of `LanguageCode`,
+    #   `IdentifyLanguage`, or `IdentifyMultipleLanguages` in your request.
+    #   If you include more than one of these parameters, your transcription
+    #   job fails.
+    #   @return [Boolean]
     #
     # @!attribute [rw] vocabulary_names
     #   Specify the names of the custom vocabularies that you want to use
@@ -1780,6 +1803,7 @@ module Aws::TranscribeStreamingService
       :identify_language,
       :language_options,
       :preferred_language,
+      :identify_multiple_languages,
       :vocabulary_names,
       :vocabulary_filter_names)
       SENSITIVE = []
@@ -1878,6 +1902,11 @@ module Aws::TranscribeStreamingService
     #   Provides the preferred language that you specified in your request.
     #   @return [String]
     #
+    # @!attribute [rw] identify_multiple_languages
+    #   Shows whether automatic multi-language identification was enabled
+    #   for your transcription.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] vocabulary_names
     #   Provides the names of the custom vocabularies that you specified in
     #   your request.
@@ -1912,6 +1941,7 @@ module Aws::TranscribeStreamingService
       :identify_language,
       :language_options,
       :preferred_language,
+      :identify_multiple_languages,
       :vocabulary_names,
       :vocabulary_filter_names)
       SENSITIVE = []

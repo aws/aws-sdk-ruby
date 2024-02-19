@@ -1995,7 +1995,7 @@ module Aws::CloudWatch
     #   resp.state #=> String
     #   resp.creation_date #=> Time
     #   resp.last_update_date #=> Time
-    #   resp.output_format #=> String, one of "json", "opentelemetry0.7"
+    #   resp.output_format #=> String, one of "json", "opentelemetry0.7", "opentelemetry1.0"
     #   resp.statistics_configurations #=> Array
     #   resp.statistics_configurations[0].include_metrics #=> Array
     #   resp.statistics_configurations[0].include_metrics[0].namespace #=> String
@@ -2238,7 +2238,7 @@ module Aws::CloudWatch
     #   resp.data.entries[0].name #=> String
     #   resp.data.entries[0].firehose_arn #=> String
     #   resp.data.entries[0].state #=> String
-    #   resp.data.entries[0].output_format #=> String, one of "json", "opentelemetry0.7"
+    #   resp.data.entries[0].output_format #=> String, one of "json", "opentelemetry0.7", "opentelemetry1.0"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricStreams AWS API Documentation
     #
@@ -3158,9 +3158,9 @@ module Aws::CloudWatch
     #   `Metrics` array.
     #
     #   If you are creating an alarm based on a math expression, you cannot
-    #   specify this parameter, or any of the `Dimensions`, `Period`,
-    #   `Namespace`, `Statistic`, or `ExtendedStatistic` parameters. Instead,
-    #   you specify all this information in the `Metrics` array.
+    #   specify this parameter, or any of the `Namespace`, `Dimensions`,
+    #   `Period`, `Unit`, `Statistic`, or `ExtendedStatistic` parameters.
+    #   Instead, you specify all this information in the `Metrics` array.
     #
     # @option params [String] :namespace
     #   The namespace for the metric associated specified in `MetricName`.
@@ -3245,6 +3245,9 @@ module Aws::CloudWatch
     #   You can also specify a unit when you create a custom metric. Units
     #   help provide conceptual meaning to your data. Metric data points that
     #   specify a unit of measure, such as Percent, are aggregated separately.
+    #   If you are creating an alarm based on a metric math expression, you
+    #   can specify the unit for each metric (if needed) within the objects in
+    #   the `Metrics` array.
     #
     #   If you don't specify `Unit`, CloudWatch retrieves all unit types that
     #   have been published for the metric and attempts to evaluate the alarm.
@@ -3344,10 +3347,10 @@ module Aws::CloudWatch
     #   [MetricDataQuery][1].
     #
     #   If you use the `Metrics` parameter, you cannot include the
-    #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or
-    #   `ExtendedStatistic` parameters of `PutMetricAlarm` in the same
-    #   operation. Instead, you retrieve the metrics you are using in your
-    #   math expression as part of the `Metrics` array.
+    #   `Namespace`, `MetricName`, `Dimensions`, `Period`, `Unit`,
+    #   `Statistic`, or `ExtendedStatistic` parameters of `PutMetricAlarm` in
+    #   the same operation. Instead, you retrieve the metrics you are using in
+    #   your math expression as part of the `Metrics` array.
     #
     #
     #
@@ -3647,9 +3650,9 @@ module Aws::CloudWatch
     #   * firehose:PutRecordBatch
     #
     # @option params [required, String] :output_format
-    #   The output format for the stream. Valid values are `json` and
-    #   `opentelemetry0.7`. For more information about metric stream output
-    #   formats, see [ Metric streams output formats][1].
+    #   The output format for the stream. Valid values are `json`,
+    #   `opentelemetry1.0`, and `opentelemetry0.7`. For more information about
+    #   metric stream output formats, see [ Metric streams output formats][1].
     #
     #
     #
@@ -3686,8 +3689,8 @@ module Aws::CloudWatch
     #   `OutputFormat`. If the `OutputFormat` is `json`, you can stream any
     #   additional statistic that is supported by CloudWatch, listed in [
     #   CloudWatch statistics definitions][1]. If the `OutputFormat` is
-    #   `opentelemetry0.7`, you can stream percentile statistics such as p95,
-    #   p99.9, and so on.
+    #   `opentelemetry1.0` or `opentelemetry0.7`, you can stream percentile
+    #   statistics such as p95, p99.9, and so on.
     #
     #
     #
@@ -3719,7 +3722,7 @@ module Aws::CloudWatch
     #     ],
     #     firehose_arn: "AmazonResourceName", # required
     #     role_arn: "AmazonResourceName", # required
-    #     output_format: "json", # required, accepts json, opentelemetry0.7
+    #     output_format: "json", # required, accepts json, opentelemetry0.7, opentelemetry1.0
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -3983,7 +3986,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

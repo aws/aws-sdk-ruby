@@ -183,6 +183,7 @@ module Aws::CostExplorer
     MatchOption = Shapes::StringShape.new(name: 'MatchOption')
     MatchOptions = Shapes::ListShape.new(name: 'MatchOptions')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MemoryDBInstanceDetails = Shapes::StructureShape.new(name: 'MemoryDBInstanceDetails')
     Metric = Shapes::StringShape.new(name: 'Metric')
     MetricAmount = Shapes::StringShape.new(name: 'MetricAmount')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
@@ -948,6 +949,7 @@ module Aws::CostExplorer
     InstanceDetails.add_member(:redshift_instance_details, Shapes::ShapeRef.new(shape: RedshiftInstanceDetails, location_name: "RedshiftInstanceDetails"))
     InstanceDetails.add_member(:elasticache_instance_details, Shapes::ShapeRef.new(shape: ElastiCacheInstanceDetails, location_name: "ElastiCacheInstanceDetails"))
     InstanceDetails.add_member(:es_instance_details, Shapes::ShapeRef.new(shape: ESInstanceDetails, location_name: "ESInstanceDetails"))
+    InstanceDetails.add_member(:memory_db_instance_details, Shapes::ShapeRef.new(shape: MemoryDBInstanceDetails, location_name: "MemoryDBInstanceDetails"))
     InstanceDetails.struct_class = Types::InstanceDetails
 
     InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -995,6 +997,13 @@ module Aws::CostExplorer
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     MatchOptions.member = Shapes::ShapeRef.new(shape: MatchOption)
+
+    MemoryDBInstanceDetails.add_member(:family, Shapes::ShapeRef.new(shape: GenericString, location_name: "Family"))
+    MemoryDBInstanceDetails.add_member(:node_type, Shapes::ShapeRef.new(shape: GenericString, location_name: "NodeType"))
+    MemoryDBInstanceDetails.add_member(:region, Shapes::ShapeRef.new(shape: GenericString, location_name: "Region"))
+    MemoryDBInstanceDetails.add_member(:current_generation, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "CurrentGeneration"))
+    MemoryDBInstanceDetails.add_member(:size_flex_eligible, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "SizeFlexEligible"))
+    MemoryDBInstanceDetails.struct_class = Types::MemoryDBInstanceDetails
 
     MetricNames.member = Shapes::ShapeRef.new(shape: MetricName)
 

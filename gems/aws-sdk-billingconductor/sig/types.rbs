@@ -1,0 +1,835 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::BillingConductor
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountAssociationsListElement
+      attr_accessor account_id: ::String
+      attr_accessor billing_group_arn: ::String
+      attr_accessor account_name: ::String
+      attr_accessor account_email: ::String
+      SENSITIVE: [:account_name, :account_email]
+    end
+
+    class AccountGrouping
+      attr_accessor linked_account_ids: ::Array[::String]
+      attr_accessor auto_associate: bool
+      SENSITIVE: []
+    end
+
+    class AssociateAccountsInput
+      attr_accessor arn: ::String
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociateAccountsOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatePricingRulesInput
+      attr_accessor arn: ::String
+      attr_accessor pricing_rule_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociatePricingRulesOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateResourceError
+      attr_accessor message: ::String
+      attr_accessor reason: ("INVALID_ARN" | "SERVICE_LIMIT_EXCEEDED" | "ILLEGAL_CUSTOMLINEITEM" | "INTERNAL_SERVER_EXCEPTION" | "INVALID_BILLING_PERIOD_RANGE")
+      SENSITIVE: []
+    end
+
+    class AssociateResourceResponseElement
+      attr_accessor arn: ::String
+      attr_accessor error: Types::AssociateResourceError
+      SENSITIVE: []
+    end
+
+    class Attribute
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class BatchAssociateResourcesToCustomLineItemInput
+      attr_accessor target_arn: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor billing_period_range: Types::CustomLineItemBillingPeriodRange
+      SENSITIVE: []
+    end
+
+    class BatchAssociateResourcesToCustomLineItemOutput
+      attr_accessor successfully_associated_resources: ::Array[Types::AssociateResourceResponseElement]
+      attr_accessor failed_associated_resources: ::Array[Types::AssociateResourceResponseElement]
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateResourcesFromCustomLineItemInput
+      attr_accessor target_arn: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor billing_period_range: Types::CustomLineItemBillingPeriodRange
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateResourcesFromCustomLineItemOutput
+      attr_accessor successfully_disassociated_resources: ::Array[Types::DisassociateResourceResponseElement]
+      attr_accessor failed_disassociated_resources: ::Array[Types::DisassociateResourceResponseElement]
+      SENSITIVE: []
+    end
+
+    class BillingGroupCostReportElement
+      attr_accessor arn: ::String
+      attr_accessor aws_cost: ::String
+      attr_accessor proforma_cost: ::String
+      attr_accessor margin: ::String
+      attr_accessor margin_percentage: ::String
+      attr_accessor currency: ::String
+      SENSITIVE: []
+    end
+
+    class BillingGroupCostReportResultElement
+      attr_accessor arn: ::String
+      attr_accessor aws_cost: ::String
+      attr_accessor proforma_cost: ::String
+      attr_accessor margin: ::String
+      attr_accessor margin_percentage: ::String
+      attr_accessor currency: ::String
+      attr_accessor attributes: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class BillingGroupListElement
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor primary_account_id: ::String
+      attr_accessor computation_preference: Types::ComputationPreference
+      attr_accessor size: ::Integer
+      attr_accessor creation_time: ::Integer
+      attr_accessor last_modified_time: ::Integer
+      attr_accessor status: ("ACTIVE" | "PRIMARY_ACCOUNT_MISSING")
+      attr_accessor status_reason: ::String
+      attr_accessor account_grouping: Types::ListBillingGroupAccountGrouping
+      SENSITIVE: [:name, :description]
+    end
+
+    class BillingPeriodRange
+      attr_accessor inclusive_start_billing_period: ::String
+      attr_accessor exclusive_end_billing_period: ::String
+      SENSITIVE: []
+    end
+
+    class ComputationPreference
+      attr_accessor pricing_plan_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor reason: ("RESOURCE_NAME_CONFLICT" | "PRICING_RULE_IN_PRICING_PLAN_CONFLICT" | "PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT" | "PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT" | "WRITE_CONFLICT_RETRY")
+      SENSITIVE: []
+    end
+
+    class CreateBillingGroupInput
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor account_grouping: Types::AccountGrouping
+      attr_accessor computation_preference: Types::ComputationPreference
+      attr_accessor primary_account_id: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:name, :description]
+    end
+
+    class CreateBillingGroupOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomLineItemInput
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor billing_group_arn: ::String
+      attr_accessor billing_period_range: Types::CustomLineItemBillingPeriodRange
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor charge_details: Types::CustomLineItemChargeDetails
+      attr_accessor account_id: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class CreateCustomLineItemOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFreeTierConfig
+      attr_accessor activated: bool
+      SENSITIVE: []
+    end
+
+    class CreatePricingPlanInput
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor pricing_rule_arns: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:name, :description]
+    end
+
+    class CreatePricingPlanOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePricingRuleInput
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor scope: ("GLOBAL" | "SERVICE" | "BILLING_ENTITY" | "SKU")
+      attr_accessor type: ("MARKUP" | "DISCOUNT" | "TIERING")
+      attr_accessor modifier_percentage: ::Float
+      attr_accessor service: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor billing_entity: ::String
+      attr_accessor tiering: Types::CreateTieringInput
+      attr_accessor usage_type: ::String
+      attr_accessor operation: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class CreatePricingRuleOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTieringInput
+      attr_accessor free_tier: Types::CreateFreeTierConfig
+      SENSITIVE: []
+    end
+
+    class CustomLineItemBillingPeriodRange
+      attr_accessor inclusive_start_billing_period: ::String
+      attr_accessor exclusive_end_billing_period: ::String
+      SENSITIVE: []
+    end
+
+    class CustomLineItemChargeDetails
+      attr_accessor flat: Types::CustomLineItemFlatChargeDetails
+      attr_accessor percentage: Types::CustomLineItemPercentageChargeDetails
+      attr_accessor type: ("CREDIT" | "FEE")
+      attr_accessor line_item_filters: ::Array[Types::LineItemFilter]
+      SENSITIVE: []
+    end
+
+    class CustomLineItemFlatChargeDetails
+      attr_accessor charge_value: ::Float
+      SENSITIVE: []
+    end
+
+    class CustomLineItemListElement
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor charge_details: Types::ListCustomLineItemChargeDetails
+      attr_accessor currency_code: ("USD" | "CNY")
+      attr_accessor description: ::String
+      attr_accessor product_code: ::String
+      attr_accessor billing_group_arn: ::String
+      attr_accessor creation_time: ::Integer
+      attr_accessor last_modified_time: ::Integer
+      attr_accessor association_size: ::Integer
+      attr_accessor account_id: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class CustomLineItemPercentageChargeDetails
+      attr_accessor percentage_value: ::Float
+      attr_accessor associated_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CustomLineItemVersionListElement
+      attr_accessor name: ::String
+      attr_accessor charge_details: Types::ListCustomLineItemChargeDetails
+      attr_accessor currency_code: ("USD" | "CNY")
+      attr_accessor description: ::String
+      attr_accessor product_code: ::String
+      attr_accessor billing_group_arn: ::String
+      attr_accessor creation_time: ::Integer
+      attr_accessor last_modified_time: ::Integer
+      attr_accessor association_size: ::Integer
+      attr_accessor start_billing_period: ::String
+      attr_accessor end_billing_period: ::String
+      attr_accessor arn: ::String
+      attr_accessor start_time: ::Integer
+      attr_accessor account_id: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class DeleteBillingGroupInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBillingGroupOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomLineItemInput
+      attr_accessor arn: ::String
+      attr_accessor billing_period_range: Types::CustomLineItemBillingPeriodRange
+      SENSITIVE: []
+    end
+
+    class DeleteCustomLineItemOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePricingPlanInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePricingPlanOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePricingRuleInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePricingRuleOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateAccountsInput
+      attr_accessor arn: ::String
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateAccountsOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociatePricingRulesInput
+      attr_accessor arn: ::String
+      attr_accessor pricing_rule_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociatePricingRulesOutput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateResourceResponseElement
+      attr_accessor arn: ::String
+      attr_accessor error: Types::AssociateResourceError
+      SENSITIVE: []
+    end
+
+    class FreeTierConfig
+      attr_accessor activated: bool
+      SENSITIVE: []
+    end
+
+    class GetBillingGroupCostReportInput
+      attr_accessor arn: ::String
+      attr_accessor billing_period_range: Types::BillingPeriodRange
+      attr_accessor group_by: ::Array[("PRODUCT_NAME" | "BILLING_PERIOD")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetBillingGroupCostReportOutput
+      attr_accessor billing_group_cost_report_results: ::Array[Types::BillingGroupCostReportResultElement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class LineItemFilter
+      attr_accessor attribute: ("LINE_ITEM_TYPE")
+      attr_accessor match_option: ("NOT_EQUAL")
+      attr_accessor values: ::Array[("SAVINGS_PLAN_NEGATION")]
+      SENSITIVE: []
+    end
+
+    class ListAccountAssociationsFilter
+      attr_accessor association: ::String
+      attr_accessor account_id: ::String
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListAccountAssociationsInput
+      attr_accessor billing_period: ::String
+      attr_accessor filters: Types::ListAccountAssociationsFilter
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountAssociationsOutput
+      attr_accessor linked_accounts: ::Array[Types::AccountAssociationsListElement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBillingGroupAccountGrouping
+      attr_accessor auto_associate: bool
+      SENSITIVE: []
+    end
+
+    class ListBillingGroupCostReportsFilter
+      attr_accessor billing_group_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListBillingGroupCostReportsInput
+      attr_accessor billing_period: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: Types::ListBillingGroupCostReportsFilter
+      SENSITIVE: []
+    end
+
+    class ListBillingGroupCostReportsOutput
+      attr_accessor billing_group_cost_reports: ::Array[Types::BillingGroupCostReportElement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBillingGroupsFilter
+      attr_accessor arns: ::Array[::String]
+      attr_accessor pricing_plan: ::String
+      attr_accessor statuses: ::Array[("ACTIVE" | "PRIMARY_ACCOUNT_MISSING")]
+      attr_accessor auto_associate: bool
+      SENSITIVE: []
+    end
+
+    class ListBillingGroupsInput
+      attr_accessor billing_period: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: Types::ListBillingGroupsFilter
+      SENSITIVE: []
+    end
+
+    class ListBillingGroupsOutput
+      attr_accessor billing_groups: ::Array[Types::BillingGroupListElement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomLineItemChargeDetails
+      attr_accessor flat: Types::ListCustomLineItemFlatChargeDetails
+      attr_accessor percentage: Types::ListCustomLineItemPercentageChargeDetails
+      attr_accessor type: ("CREDIT" | "FEE")
+      attr_accessor line_item_filters: ::Array[Types::LineItemFilter]
+      SENSITIVE: []
+    end
+
+    class ListCustomLineItemFlatChargeDetails
+      attr_accessor charge_value: ::Float
+      SENSITIVE: []
+    end
+
+    class ListCustomLineItemPercentageChargeDetails
+      attr_accessor percentage_value: ::Float
+      SENSITIVE: []
+    end
+
+    class ListCustomLineItemVersionsBillingPeriodRangeFilter
+      attr_accessor start_billing_period: ::String
+      attr_accessor end_billing_period: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomLineItemVersionsFilter
+      attr_accessor billing_period_range: Types::ListCustomLineItemVersionsBillingPeriodRangeFilter
+      SENSITIVE: []
+    end
+
+    class ListCustomLineItemVersionsInput
+      attr_accessor arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: Types::ListCustomLineItemVersionsFilter
+      SENSITIVE: []
+    end
+
+    class ListCustomLineItemVersionsOutput
+      attr_accessor custom_line_item_versions: ::Array[Types::CustomLineItemVersionListElement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomLineItemsFilter
+      attr_accessor names: ::Array[::String]
+      attr_accessor billing_groups: ::Array[::String]
+      attr_accessor arns: ::Array[::String]
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListCustomLineItemsInput
+      attr_accessor billing_period: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: Types::ListCustomLineItemsFilter
+      SENSITIVE: []
+    end
+
+    class ListCustomLineItemsOutput
+      attr_accessor custom_line_items: ::Array[Types::CustomLineItemListElement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPricingPlansAssociatedWithPricingRuleInput
+      attr_accessor billing_period: ::String
+      attr_accessor pricing_rule_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPricingPlansAssociatedWithPricingRuleOutput
+      attr_accessor billing_period: ::String
+      attr_accessor pricing_rule_arn: ::String
+      attr_accessor pricing_plan_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPricingPlansFilter
+      attr_accessor arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListPricingPlansInput
+      attr_accessor billing_period: ::String
+      attr_accessor filters: Types::ListPricingPlansFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPricingPlansOutput
+      attr_accessor billing_period: ::String
+      attr_accessor pricing_plans: ::Array[Types::PricingPlanListElement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPricingRulesAssociatedToPricingPlanInput
+      attr_accessor billing_period: ::String
+      attr_accessor pricing_plan_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPricingRulesAssociatedToPricingPlanOutput
+      attr_accessor billing_period: ::String
+      attr_accessor pricing_plan_arn: ::String
+      attr_accessor pricing_rule_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPricingRulesFilter
+      attr_accessor arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListPricingRulesInput
+      attr_accessor billing_period: ::String
+      attr_accessor filters: Types::ListPricingRulesFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPricingRulesOutput
+      attr_accessor billing_period: ::String
+      attr_accessor pricing_rules: ::Array[Types::PricingRuleListElement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcesAssociatedToCustomLineItemFilter
+      attr_accessor relationship: ("PARENT" | "CHILD")
+      SENSITIVE: []
+    end
+
+    class ListResourcesAssociatedToCustomLineItemInput
+      attr_accessor billing_period: ::String
+      attr_accessor arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: Types::ListResourcesAssociatedToCustomLineItemFilter
+      SENSITIVE: []
+    end
+
+    class ListResourcesAssociatedToCustomLineItemOutput
+      attr_accessor arn: ::String
+      attr_accessor associated_resources: ::Array[Types::ListResourcesAssociatedToCustomLineItemResponseElement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcesAssociatedToCustomLineItemResponseElement
+      attr_accessor arn: ::String
+      attr_accessor relationship: ("PARENT" | "CHILD")
+      attr_accessor end_billing_period: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PricingPlanListElement
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor size: ::Integer
+      attr_accessor creation_time: ::Integer
+      attr_accessor last_modified_time: ::Integer
+      SENSITIVE: [:name, :description]
+    end
+
+    class PricingRuleListElement
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor scope: ("GLOBAL" | "SERVICE" | "BILLING_ENTITY" | "SKU")
+      attr_accessor type: ("MARKUP" | "DISCOUNT" | "TIERING")
+      attr_accessor modifier_percentage: ::Float
+      attr_accessor service: ::String
+      attr_accessor associated_pricing_plan_count: ::Integer
+      attr_accessor creation_time: ::Integer
+      attr_accessor last_modified_time: ::Integer
+      attr_accessor billing_entity: ::String
+      attr_accessor tiering: Types::Tiering
+      attr_accessor usage_type: ::String
+      attr_accessor operation: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceLimitExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor limit_code: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class Tiering
+      attr_accessor free_tier: Types::FreeTierConfig
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateBillingGroupAccountGrouping
+      attr_accessor auto_associate: bool
+      SENSITIVE: []
+    end
+
+    class UpdateBillingGroupInput
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "PRIMARY_ACCOUNT_MISSING")
+      attr_accessor computation_preference: Types::ComputationPreference
+      attr_accessor description: ::String
+      attr_accessor account_grouping: Types::UpdateBillingGroupAccountGrouping
+      SENSITIVE: [:name, :description]
+    end
+
+    class UpdateBillingGroupOutput
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor primary_account_id: ::String
+      attr_accessor pricing_plan_arn: ::String
+      attr_accessor size: ::Integer
+      attr_accessor last_modified_time: ::Integer
+      attr_accessor status: ("ACTIVE" | "PRIMARY_ACCOUNT_MISSING")
+      attr_accessor status_reason: ::String
+      attr_accessor account_grouping: Types::UpdateBillingGroupAccountGrouping
+      SENSITIVE: [:name, :description]
+    end
+
+    class UpdateCustomLineItemChargeDetails
+      attr_accessor flat: Types::UpdateCustomLineItemFlatChargeDetails
+      attr_accessor percentage: Types::UpdateCustomLineItemPercentageChargeDetails
+      attr_accessor line_item_filters: ::Array[Types::LineItemFilter]
+      SENSITIVE: []
+    end
+
+    class UpdateCustomLineItemFlatChargeDetails
+      attr_accessor charge_value: ::Float
+      SENSITIVE: []
+    end
+
+    class UpdateCustomLineItemInput
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor charge_details: Types::UpdateCustomLineItemChargeDetails
+      attr_accessor billing_period_range: Types::CustomLineItemBillingPeriodRange
+      SENSITIVE: [:name, :description]
+    end
+
+    class UpdateCustomLineItemOutput
+      attr_accessor arn: ::String
+      attr_accessor billing_group_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor charge_details: Types::ListCustomLineItemChargeDetails
+      attr_accessor last_modified_time: ::Integer
+      attr_accessor association_size: ::Integer
+      SENSITIVE: [:name, :description]
+    end
+
+    class UpdateCustomLineItemPercentageChargeDetails
+      attr_accessor percentage_value: ::Float
+      SENSITIVE: []
+    end
+
+    class UpdateFreeTierConfig
+      attr_accessor activated: bool
+      SENSITIVE: []
+    end
+
+    class UpdatePricingPlanInput
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class UpdatePricingPlanOutput
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor size: ::Integer
+      attr_accessor last_modified_time: ::Integer
+      SENSITIVE: [:name, :description]
+    end
+
+    class UpdatePricingRuleInput
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("MARKUP" | "DISCOUNT" | "TIERING")
+      attr_accessor modifier_percentage: ::Float
+      attr_accessor tiering: Types::UpdateTieringInput
+      SENSITIVE: [:name, :description]
+    end
+
+    class UpdatePricingRuleOutput
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor scope: ("GLOBAL" | "SERVICE" | "BILLING_ENTITY" | "SKU")
+      attr_accessor type: ("MARKUP" | "DISCOUNT" | "TIERING")
+      attr_accessor modifier_percentage: ::Float
+      attr_accessor service: ::String
+      attr_accessor associated_pricing_plan_count: ::Integer
+      attr_accessor last_modified_time: ::Integer
+      attr_accessor billing_entity: ::String
+      attr_accessor tiering: Types::UpdateTieringInput
+      attr_accessor usage_type: ::String
+      attr_accessor operation: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class UpdateTieringInput
+      attr_accessor free_tier: Types::UpdateFreeTierConfig
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("UNKNOWN_OPERATION" | "CANNOT_PARSE" | "FIELD_VALIDATION_FAILED" | "OTHER" | "PRIMARY_NOT_ASSOCIATED" | "PRIMARY_CANNOT_DISASSOCIATE" | "ACCOUNTS_NOT_ASSOCIATED" | "ACCOUNTS_ALREADY_ASSOCIATED" | "ILLEGAL_PRIMARY_ACCOUNT" | "ILLEGAL_ACCOUNTS" | "MISMATCHED_BILLINGGROUP_ARN" | "MISSING_BILLINGGROUP" | "MISMATCHED_CUSTOMLINEITEM_ARN" | "ILLEGAL_BILLING_PERIOD" | "ILLEGAL_BILLING_PERIOD_RANGE" | "TOO_MANY_ACCOUNTS_IN_REQUEST" | "DUPLICATE_ACCOUNT" | "INVALID_BILLING_GROUP_STATUS" | "MISMATCHED_PRICINGPLAN_ARN" | "MISSING_PRICINGPLAN" | "MISMATCHED_PRICINGRULE_ARN" | "DUPLICATE_PRICINGRULE_ARNS" | "ILLEGAL_EXPRESSION" | "ILLEGAL_SCOPE" | "ILLEGAL_SERVICE" | "PRICINGRULES_NOT_EXIST" | "PRICINGRULES_ALREADY_ASSOCIATED" | "PRICINGRULES_NOT_ASSOCIATED" | "INVALID_TIME_RANGE" | "INVALID_BILLINGVIEW_ARN" | "MISMATCHED_BILLINGVIEW_ARN" | "ILLEGAL_CUSTOMLINEITEM" | "MISSING_CUSTOMLINEITEM" | "ILLEGAL_CUSTOMLINEITEM_UPDATE" | "TOO_MANY_CUSTOMLINEITEMS_IN_REQUEST" | "ILLEGAL_CHARGE_DETAILS" | "ILLEGAL_UPDATE_CHARGE_DETAILS" | "INVALID_ARN" | "ILLEGAL_RESOURCE_ARNS" | "ILLEGAL_CUSTOMLINEITEM_MODIFICATION" | "MISSING_LINKED_ACCOUNT_IDS" | "MULTIPLE_LINKED_ACCOUNT_IDS" | "MISSING_PRICING_PLAN_ARN" | "MULTIPLE_PRICING_PLAN_ARN" | "ILLEGAL_CHILD_ASSOCIATE_RESOURCE" | "CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS" | "INVALID_BILLING_GROUP" | "INVALID_BILLING_PERIOD_FOR_OPERATION" | "ILLEGAL_BILLING_ENTITY" | "ILLEGAL_MODIFIER_PERCENTAGE" | "ILLEGAL_TYPE" | "ILLEGAL_ENDED_BILLINGGROUP" | "ILLEGAL_TIERING_INPUT" | "ILLEGAL_OPERATION" | "ILLEGAL_USAGE_TYPE" | "INVALID_SKU_COMBO" | "INVALID_FILTER" | "TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS" | "CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP" | "ILLEGAL_ACCOUNT_ID")
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

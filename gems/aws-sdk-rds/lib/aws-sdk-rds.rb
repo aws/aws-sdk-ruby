@@ -8,8 +8,8 @@
 # WARNING ABOUT GENERATED CODE
 
 
-require 'aws-sigv4'
 require 'aws-sdk-core'
+require 'aws-sigv4'
 
 require_relative 'aws-sdk-rds/types'
 require_relative 'aws-sdk-rds/client_api'
@@ -78,6 +78,6 @@ require_relative 'aws-sdk-rds/customizations'
 # @!group service
 module Aws::RDS
 
-  GEM_VERSION = '1.198.0'
+  GEM_VERSION = '1.217.0'
 
 end

@@ -588,6 +588,7 @@ module Aws::CodeDeploy
     #   resp.deployment_groups_info[0].auto_scaling_groups #=> Array
     #   resp.deployment_groups_info[0].auto_scaling_groups[0].name #=> String
     #   resp.deployment_groups_info[0].auto_scaling_groups[0].hook #=> String
+    #   resp.deployment_groups_info[0].auto_scaling_groups[0].termination_hook #=> String
     #   resp.deployment_groups_info[0].service_role_arn #=> String
     #   resp.deployment_groups_info[0].target_revision.revision_type #=> String, one of "S3", "GitHub", "String", "AppSpecContent"
     #   resp.deployment_groups_info[0].target_revision.s3_location.bucket #=> String
@@ -654,6 +655,7 @@ module Aws::CodeDeploy
     #   resp.deployment_groups_info[0].ecs_services #=> Array
     #   resp.deployment_groups_info[0].ecs_services[0].service_name #=> String
     #   resp.deployment_groups_info[0].ecs_services[0].cluster_name #=> String
+    #   resp.deployment_groups_info[0].termination_hook_enabled #=> Boolean
     #   resp.error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroups AWS API Documentation
@@ -740,10 +742,10 @@ module Aws::CodeDeploy
     # * **CloudFormation**: Information about targets of blue/green
     #   deployments initiated by a CloudFormation stack update.
     #
-    # @option params [String] :deployment_id
+    # @option params [required, String] :deployment_id
     #   The unique ID of a deployment.
     #
-    # @option params [Array<String>] :target_ids
+    # @option params [required, Array<String>] :target_ids
     #   The unique IDs of the deployment targets. The compute platform of the
     #   deployment determines the type of the targets and their formats. The
     #   maximum number of deployment target IDs you can specify is 25.
@@ -772,8 +774,8 @@ module Aws::CodeDeploy
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_get_deployment_targets({
-    #     deployment_id: "DeploymentId",
-    #     target_ids: ["TargetId"],
+    #     deployment_id: "DeploymentId", # required
+    #     target_ids: ["TargetId"], # required
     #   })
     #
     # @example Response structure
@@ -923,7 +925,7 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].deployment_overview.skipped #=> Integer
     #   resp.deployments_info[0].deployment_overview.ready #=> Integer
     #   resp.deployments_info[0].description #=> String
-    #   resp.deployments_info[0].creator #=> String, one of "user", "autoscaling", "codeDeployRollback", "CodeDeploy", "CodeDeployAutoUpdate", "CloudFormation", "CloudFormationRollback"
+    #   resp.deployments_info[0].creator #=> String, one of "user", "autoscaling", "codeDeployRollback", "CodeDeploy", "CodeDeployAutoUpdate", "CloudFormation", "CloudFormationRollback", "autoscalingTermination"
     #   resp.deployments_info[0].ignore_application_stop_failures #=> Boolean
     #   resp.deployments_info[0].auto_rollback_configuration.enabled #=> Boolean
     #   resp.deployments_info[0].auto_rollback_configuration.events #=> Array
@@ -1323,6 +1325,19 @@ module Aws::CodeDeploy
     #   The destination platform type for the deployment (`Lambda`, `Server`,
     #   or `ECS`).
     #
+    # @option params [Types::ZonalConfig] :zonal_config
+    #   Configure the `ZonalConfig` object if you want CodeDeploy to deploy
+    #   your application to one [Availability Zone][1] at a time, within an
+    #   Amazon Web Services Region.
+    #
+    #   For more information about the zonal configuration feature, see [zonal
+    #   configuration][2] in the *CodeDeploy User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones
+    #   [2]: https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config
+    #
     # @return [Types::CreateDeploymentConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDeploymentConfigOutput#deployment_config_id #deployment_config_id} => String
@@ -1347,6 +1362,14 @@ module Aws::CodeDeploy
     #       },
     #     },
     #     compute_platform: "Server", # accepts Server, Lambda, ECS
+    #     zonal_config: {
+    #       first_zone_monitor_duration_in_seconds: 1,
+    #       monitor_duration_in_seconds: 1,
+    #       minimum_healthy_hosts_per_zone: {
+    #         type: "HOST_COUNT", # accepts HOST_COUNT, FLEET_PERCENT
+    #         value: 1,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1471,6 +1494,29 @@ module Aws::CodeDeploy
     #   The metadata that you apply to CodeDeploy deployment groups to help
     #   you organize and categorize them. Each tag consists of a key and an
     #   optional value, both of which you define.
+    #
+    # @option params [Boolean] :termination_hook_enabled
+    #   This parameter only applies if you are using CodeDeploy with Amazon
+    #   EC2 Auto Scaling. For more information, see [Integrating CodeDeploy
+    #   with Amazon EC2 Auto Scaling][1] in the *CodeDeploy User Guide*.
+    #
+    #   Set `terminationHookEnabled` to `true` to have CodeDeploy install a
+    #   termination hook into your Auto Scaling group when you create a
+    #   deployment group. When this hook is installed, CodeDeploy will perform
+    #   termination deployments.
+    #
+    #   For information about termination deployments, see [Enabling
+    #   termination deployments during Auto Scaling scale-in events][2] in the
+    #   *CodeDeploy User Guide*.
+    #
+    #   For more information about Auto Scaling scale-in events, see the
+    #   [Scale in][3] topic in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html
+    #   [2]: https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors-hook-enable
+    #   [3]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-lifecycle.html#as-lifecycle-scale-in
     #
     # @return [Types::CreateDeploymentGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1597,6 +1643,7 @@ module Aws::CodeDeploy
     #         value: "Value",
     #       },
     #     ],
+    #     termination_hook_enabled: false,
     #   })
     #
     # @example Response structure
@@ -1688,6 +1735,7 @@ module Aws::CodeDeploy
     #   resp.hooks_not_cleaned_up #=> Array
     #   resp.hooks_not_cleaned_up[0].name #=> String
     #   resp.hooks_not_cleaned_up[0].hook #=> String
+    #   resp.hooks_not_cleaned_up[0].termination_hook #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentGroup AWS API Documentation
     #
@@ -1953,7 +2001,7 @@ module Aws::CodeDeploy
     #   resp.deployment_info.deployment_overview.skipped #=> Integer
     #   resp.deployment_info.deployment_overview.ready #=> Integer
     #   resp.deployment_info.description #=> String
-    #   resp.deployment_info.creator #=> String, one of "user", "autoscaling", "codeDeployRollback", "CodeDeploy", "CodeDeployAutoUpdate", "CloudFormation", "CloudFormationRollback"
+    #   resp.deployment_info.creator #=> String, one of "user", "autoscaling", "codeDeployRollback", "CodeDeploy", "CodeDeployAutoUpdate", "CloudFormation", "CloudFormationRollback", "autoscalingTermination"
     #   resp.deployment_info.ignore_application_stop_failures #=> Boolean
     #   resp.deployment_info.auto_rollback_configuration.enabled #=> Boolean
     #   resp.deployment_info.auto_rollback_configuration.events #=> Array
@@ -2049,6 +2097,10 @@ module Aws::CodeDeploy
     #   resp.deployment_config_info.traffic_routing_config.time_based_canary.canary_interval #=> Integer
     #   resp.deployment_config_info.traffic_routing_config.time_based_linear.linear_percentage #=> Integer
     #   resp.deployment_config_info.traffic_routing_config.time_based_linear.linear_interval #=> Integer
+    #   resp.deployment_config_info.zonal_config.first_zone_monitor_duration_in_seconds #=> Integer
+    #   resp.deployment_config_info.zonal_config.monitor_duration_in_seconds #=> Integer
+    #   resp.deployment_config_info.zonal_config.minimum_healthy_hosts_per_zone.type #=> String, one of "HOST_COUNT", "FLEET_PERCENT"
+    #   resp.deployment_config_info.zonal_config.minimum_healthy_hosts_per_zone.value #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentConfig AWS API Documentation
     #
@@ -2096,6 +2148,7 @@ module Aws::CodeDeploy
     #   resp.deployment_group_info.auto_scaling_groups #=> Array
     #   resp.deployment_group_info.auto_scaling_groups[0].name #=> String
     #   resp.deployment_group_info.auto_scaling_groups[0].hook #=> String
+    #   resp.deployment_group_info.auto_scaling_groups[0].termination_hook #=> String
     #   resp.deployment_group_info.service_role_arn #=> String
     #   resp.deployment_group_info.target_revision.revision_type #=> String, one of "S3", "GitHub", "String", "AppSpecContent"
     #   resp.deployment_group_info.target_revision.s3_location.bucket #=> String
@@ -2162,6 +2215,7 @@ module Aws::CodeDeploy
     #   resp.deployment_group_info.ecs_services #=> Array
     #   resp.deployment_group_info.ecs_services[0].service_name #=> String
     #   resp.deployment_group_info.ecs_services[0].cluster_name #=> String
+    #   resp.deployment_group_info.termination_hook_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroup AWS API Documentation
     #
@@ -2219,10 +2273,10 @@ module Aws::CodeDeploy
 
     # Returns information about a deployment target.
     #
-    # @option params [String] :deployment_id
+    # @option params [required, String] :deployment_id
     #   The unique ID of a deployment.
     #
-    # @option params [String] :target_id
+    # @option params [required, String] :target_id
     #   The unique ID of a deployment target.
     #
     # @return [Types::GetDeploymentTargetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2232,8 +2286,8 @@ module Aws::CodeDeploy
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_deployment_target({
-    #     deployment_id: "DeploymentId",
-    #     target_id: "TargetId",
+    #     deployment_id: "DeploymentId", # required
+    #     target_id: "TargetId", # required
     #   })
     #
     # @example Response structure
@@ -2648,7 +2702,7 @@ module Aws::CodeDeploy
 
     # Returns an array of target IDs that are associated a deployment.
     #
-    # @option params [String] :deployment_id
+    # @option params [required, String] :deployment_id
     #   The unique ID of a deployment.
     #
     # @option params [String] :next_token
@@ -2674,7 +2728,7 @@ module Aws::CodeDeploy
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_deployment_targets({
-    #     deployment_id: "DeploymentId",
+    #     deployment_id: "DeploymentId", # required
     #     next_token: "NextToken",
     #     target_filters: {
     #       "TargetStatus" => ["FilterValue"],
@@ -3345,6 +3399,29 @@ module Aws::CodeDeploy
     #   group includes only on-premises instances identified by all the tag
     #   groups.
     #
+    # @option params [Boolean] :termination_hook_enabled
+    #   This parameter only applies if you are using CodeDeploy with Amazon
+    #   EC2 Auto Scaling. For more information, see [Integrating CodeDeploy
+    #   with Amazon EC2 Auto Scaling][1] in the *CodeDeploy User Guide*.
+    #
+    #   Set `terminationHookEnabled` to `true` to have CodeDeploy install a
+    #   termination hook into your Auto Scaling group when you update a
+    #   deployment group. When this hook is installed, CodeDeploy will perform
+    #   termination deployments.
+    #
+    #   For information about termination deployments, see [Enabling
+    #   termination deployments during Auto Scaling scale-in events][2] in the
+    #   *CodeDeploy User Guide*.
+    #
+    #   For more information about Auto Scaling scale-in events, see the
+    #   [Scale in][3] topic in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html
+    #   [2]: https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors-hook-enable
+    #   [3]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-lifecycle.html#as-lifecycle-scale-in
+    #
     # @return [Types::UpdateDeploymentGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDeploymentGroupOutput#hooks_not_cleaned_up #hooks_not_cleaned_up} => Array&lt;Types::AutoScalingGroup&gt;
@@ -3465,6 +3542,7 @@ module Aws::CodeDeploy
     #         ],
     #       ],
     #     },
+    #     termination_hook_enabled: false,
     #   })
     #
     # @example Response structure
@@ -3472,6 +3550,7 @@ module Aws::CodeDeploy
     #   resp.hooks_not_cleaned_up #=> Array
     #   resp.hooks_not_cleaned_up[0].name #=> String
     #   resp.hooks_not_cleaned_up[0].hook #=> String
+    #   resp.hooks_not_cleaned_up[0].termination_hook #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateDeploymentGroup AWS API Documentation
     #
@@ -3495,7 +3574,7 @@ module Aws::CodeDeploy
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

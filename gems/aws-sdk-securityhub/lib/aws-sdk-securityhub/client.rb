@@ -845,10 +845,14 @@ module Aws::SecurityHub
     #   resp.rules[0].criteria.confidence[0].gte #=> Float
     #   resp.rules[0].criteria.confidence[0].lte #=> Float
     #   resp.rules[0].criteria.confidence[0].eq #=> Float
+    #   resp.rules[0].criteria.confidence[0].gt #=> Float
+    #   resp.rules[0].criteria.confidence[0].lt #=> Float
     #   resp.rules[0].criteria.criticality #=> Array
     #   resp.rules[0].criteria.criticality[0].gte #=> Float
     #   resp.rules[0].criteria.criticality[0].lte #=> Float
     #   resp.rules[0].criteria.criticality[0].eq #=> Float
+    #   resp.rules[0].criteria.criticality[0].gt #=> Float
+    #   resp.rules[0].criteria.criticality[0].lt #=> Float
     #   resp.rules[0].criteria.title #=> Array
     #   resp.rules[0].criteria.title[0].value #=> String
     #   resp.rules[0].criteria.title[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -926,6 +930,15 @@ module Aws::SecurityHub
     #   resp.rules[0].criteria.user_defined_fields[0].key #=> String
     #   resp.rules[0].criteria.user_defined_fields[0].value #=> String
     #   resp.rules[0].criteria.user_defined_fields[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.rules[0].criteria.resource_application_arn #=> Array
+    #   resp.rules[0].criteria.resource_application_arn[0].value #=> String
+    #   resp.rules[0].criteria.resource_application_arn[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.rules[0].criteria.resource_application_name #=> Array
+    #   resp.rules[0].criteria.resource_application_name[0].value #=> String
+    #   resp.rules[0].criteria.resource_application_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.rules[0].criteria.aws_account_name #=> Array
+    #   resp.rules[0].criteria.aws_account_name[0].value #=> String
+    #   resp.rules[0].criteria.aws_account_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
     #   resp.rules[0].actions #=> Array
     #   resp.rules[0].actions[0].type #=> String, one of "FINDING_FIELDS_UPDATE"
     #   resp.rules[0].actions[0].finding_fields_update.note.text #=> String
@@ -961,6 +974,108 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Returns associations between an Security Hub configuration and a batch
+    # of target accounts, organizational units, or the root. Only the
+    # Security Hub delegated administrator can invoke this operation from
+    # the home Region. A configuration can refer to a configuration policy
+    # or to a self-managed configuration.
+    #
+    # @option params [required, Array<Types::ConfigurationPolicyAssociation>] :configuration_policy_association_identifiers
+    #   Specifies one or more target account IDs, organizational unit (OU)
+    #   IDs, or the root ID to retrieve associations for.
+    #
+    # @return [Types::BatchGetConfigurationPolicyAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetConfigurationPolicyAssociationsResponse#configuration_policy_associations #configuration_policy_associations} => Array&lt;Types::ConfigurationPolicyAssociationSummary&gt;
+    #   * {Types::BatchGetConfigurationPolicyAssociationsResponse#unprocessed_configuration_policy_associations #unprocessed_configuration_policy_associations} => Array&lt;Types::UnprocessedConfigurationPolicyAssociation&gt;
+    #
+    #
+    # @example Example: To get configuration associations for a batch of targets
+    #
+    #   # This operation provides details about configuration associations for a batch of target accounts, organizational units,
+    #   # or the root.
+    #
+    #   resp = client.batch_get_configuration_policy_associations({
+    #     configuration_policy_association_identifiers: [
+    #       {
+    #         target: {
+    #           account_id: "111122223333", 
+    #         }, 
+    #       }, 
+    #       {
+    #         target: {
+    #           root_id: "r-f6g7h8i9j0example", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     configuration_policy_associations: [
+    #       {
+    #         association_status: "SUCCESS", 
+    #         association_status_message: "This field is only populated for a failed association", 
+    #         association_type: "INHERITED", 
+    #         configuration_policy_id: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #         target_id: "111122223333", 
+    #         target_type: "ACCOUNT", 
+    #         updated_at: Time.parse("2023-01-11T06:17:17.154Z"), 
+    #       }, 
+    #     ], 
+    #     unprocessed_configuration_policy_associations: [
+    #       {
+    #         configuration_policy_association_identifiers: {
+    #           target: {
+    #             root_id: "r-f6g7h8i9j0example", 
+    #           }, 
+    #         }, 
+    #         error_code: "400", 
+    #         error_reason: "You do not have sufficient access to perform this action.", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_configuration_policy_associations({
+    #     configuration_policy_association_identifiers: [ # required
+    #       {
+    #         target: {
+    #           account_id: "NonEmptyString",
+    #           organizational_unit_id: "NonEmptyString",
+    #           root_id: "NonEmptyString",
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_policy_associations #=> Array
+    #   resp.configuration_policy_associations[0].configuration_policy_id #=> String
+    #   resp.configuration_policy_associations[0].target_id #=> String
+    #   resp.configuration_policy_associations[0].target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT"
+    #   resp.configuration_policy_associations[0].association_type #=> String, one of "INHERITED", "APPLIED"
+    #   resp.configuration_policy_associations[0].updated_at #=> Time
+    #   resp.configuration_policy_associations[0].association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
+    #   resp.configuration_policy_associations[0].association_status_message #=> String
+    #   resp.unprocessed_configuration_policy_associations #=> Array
+    #   resp.unprocessed_configuration_policy_associations[0].configuration_policy_association_identifiers.target.account_id #=> String
+    #   resp.unprocessed_configuration_policy_associations[0].configuration_policy_association_identifiers.target.organizational_unit_id #=> String
+    #   resp.unprocessed_configuration_policy_associations[0].configuration_policy_association_identifiers.target.root_id #=> String
+    #   resp.unprocessed_configuration_policy_associations[0].error_code #=> String
+    #   resp.unprocessed_configuration_policy_associations[0].error_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetConfigurationPolicyAssociations AWS API Documentation
+    #
+    # @overload batch_get_configuration_policy_associations(params = {})
+    # @param [Hash] params ({})
+    def batch_get_configuration_policy_associations(params = {}, options = {})
+      req = build_request(:batch_get_configuration_policy_associations, params)
+      req.send_request(options)
+    end
+
     # Provides details about a batch of security controls for the current
     # Amazon Web Services account and Amazon Web Services Region.
     #
@@ -991,21 +1106,41 @@ module Aws::SecurityHub
     #     security_controls: [
     #       {
     #         description: "This AWS control checks whether ACM Certificates in your account are marked for expiration within a specified time period. Certificates provided by ACM are automatically renewed. ACM does not automatically renew certificates that you import.", 
+    #         last_update_reason: "Stayed with default value", 
+    #         parameters: {
+    #           "daysToExpiration" => {
+    #             value: {
+    #               integer: 30, 
+    #             }, 
+    #             value_type: "DEFAULT", 
+    #           }, 
+    #         }, 
     #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/ACM.1/remediation", 
     #         security_control_arn: "arn:aws:securityhub:us-west-2:123456789012:security-control/ACM.1", 
     #         security_control_id: "ACM.1", 
     #         security_control_status: "ENABLED", 
     #         severity_rating: "MEDIUM", 
     #         title: "Imported and ACM-issued certificates should be renewed after a specified time period", 
+    #         update_status: "UPDATING", 
     #       }, 
     #       {
     #         description: "This control checks whether all stages of Amazon API Gateway REST and WebSocket APIs have logging enabled. The control fails if logging is not enabled for all methods of a stage or if loggingLevel is neither ERROR nor INFO.", 
+    #         last_update_reason: "Updated control parameters to comply with internal requirements", 
+    #         parameters: {
+    #           "loggingLevel" => {
+    #             value: {
+    #               enum: "ERROR", 
+    #             }, 
+    #             value_type: "CUSTOM", 
+    #           }, 
+    #         }, 
     #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/APIGateway.1/remediation", 
     #         security_control_arn: "arn:aws:securityhub:us-west-2:123456789012:security-control/APIGateway.1", 
     #         security_control_id: "APIGateway.1", 
     #         security_control_status: "ENABLED", 
     #         severity_rating: "MEDIUM", 
     #         title: "API Gateway REST and WebSocket API execution logging should be enabled", 
+    #         update_status: "UPDATING", 
     #       }, 
     #     ], 
     #   }
@@ -1026,6 +1161,21 @@ module Aws::SecurityHub
     #   resp.security_controls[0].remediation_url #=> String
     #   resp.security_controls[0].severity_rating #=> String, one of "LOW", "MEDIUM", "HIGH", "CRITICAL"
     #   resp.security_controls[0].security_control_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.security_controls[0].update_status #=> String, one of "READY", "UPDATING"
+    #   resp.security_controls[0].parameters #=> Hash
+    #   resp.security_controls[0].parameters["NonEmptyString"].value_type #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.integer #=> Integer
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.integer_list #=> Array
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.integer_list[0] #=> Integer
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.double #=> Float
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.string #=> String
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.string_list #=> Array
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.string_list[0] #=> String
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.boolean #=> Boolean
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.enum #=> String
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.enum_list #=> Array
+    #   resp.security_controls[0].parameters["NonEmptyString"].value.enum_list[0] #=> String
+    #   resp.security_controls[0].last_update_reason #=> String
     #   resp.unprocessed_ids #=> Array
     #   resp.unprocessed_ids[0].security_control_id #=> String
     #   resp.unprocessed_ids[0].error_code #=> String, one of "INVALID_INPUT", "ACCESS_DENIED", "NOT_FOUND", "LIMIT_EXCEEDED"
@@ -1403,6 +1553,8 @@ module Aws::SecurityHub
     #               gte: 1.0,
     #               lte: 1.0,
     #               eq: 1.0,
+    #               gt: 1.0,
+    #               lt: 1.0,
     #             },
     #           ],
     #           criticality: [
@@ -1410,6 +1562,8 @@ module Aws::SecurityHub
     #               gte: 1.0,
     #               lte: 1.0,
     #               eq: 1.0,
+    #               gt: 1.0,
+    #               lt: 1.0,
     #             },
     #           ],
     #           title: [
@@ -1561,6 +1715,24 @@ module Aws::SecurityHub
     #               key: "NonEmptyString",
     #               value: "NonEmptyString",
     #               comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #             },
+    #           ],
+    #           resource_application_arn: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #             },
+    #           ],
+    #           resource_application_name: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #             },
+    #           ],
+    #           aws_account_name: [
+    #             {
+    #               value: "NonEmptyString",
+    #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
     #             },
     #           ],
     #         },
@@ -1992,7 +2164,7 @@ module Aws::SecurityHub
     # Creates an automation rule based on input parameters.
     #
     # @option params [Hash<String,String>] :tags
-    #   User-defined tags that help you label the purpose of a rule.
+    #   User-defined tags associated with an automation rule.
     #
     # @option params [String] :rule_status
     #   Whether the rule is active after it is created. If this parameter is
@@ -2192,6 +2364,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       criticality: [
@@ -2199,6 +2373,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       title: [
@@ -2352,6 +2528,24 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS
     #         },
     #       ],
+    #       resource_application_arn: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       resource_application_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       aws_account_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
     #     },
     #     actions: [ # required
     #       {
@@ -2397,6 +2591,201 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def create_automation_rule(params = {}, options = {})
       req = build_request(:create_automation_rule, params)
+      req.send_request(options)
+    end
+
+    # Creates a configuration policy with the defined configuration. Only
+    # the Security Hub delegated administrator can invoke this operation
+    # from the home Region.
+    #
+    # @option params [required, String] :name
+    #   The name of the configuration policy. Alphanumeric characters and the
+    #   following ASCII characters are permitted: `-, ., !, *, /`.
+    #
+    # @option params [String] :description
+    #   The description of the configuration policy.
+    #
+    # @option params [required, Types::Policy] :configuration_policy
+    #   An object that defines how Security Hub is configured. It includes
+    #   whether Security Hub is enabled or disabled, a list of enabled
+    #   security standards, a list of enabled or disabled security controls,
+    #   and a list of custom parameter values for specified controls. If you
+    #   provide a list of security controls that are enabled in the
+    #   configuration policy, Security Hub disables all other controls
+    #   (including newly released controls). If you provide a list of security
+    #   controls that are disabled in the configuration policy, Security Hub
+    #   enables all other controls (including newly released controls).
+    #
+    # @option params [Hash<String,String>] :tags
+    #   User-defined tags associated with a configuration policy. For more
+    #   information, see [Tagging Security Hub resources][1] in the *Security
+    #   Hub user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/tagging-resources.html
+    #
+    # @return [Types::CreateConfigurationPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConfigurationPolicyResponse#arn #arn} => String
+    #   * {Types::CreateConfigurationPolicyResponse#id #id} => String
+    #   * {Types::CreateConfigurationPolicyResponse#name #name} => String
+    #   * {Types::CreateConfigurationPolicyResponse#description #description} => String
+    #   * {Types::CreateConfigurationPolicyResponse#updated_at #updated_at} => Time
+    #   * {Types::CreateConfigurationPolicyResponse#created_at #created_at} => Time
+    #   * {Types::CreateConfigurationPolicyResponse#configuration_policy #configuration_policy} => Types::Policy
+    #
+    #
+    # @example Example: To create a configuration policy
+    #
+    #   # This operation creates a configuration policy in Security Hub.
+    #
+    #   resp = client.create_configuration_policy({
+    #     configuration_policy: {
+    #       security_hub: {
+    #         enabled_standard_identifiers: [
+    #           "arn:aws:securityhub:us-east-1::standards/aws-foundational-security-best-practices/v/1.0.0", 
+    #           "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0", 
+    #         ], 
+    #         security_controls_configuration: {
+    #           disabled_security_control_identifiers: [
+    #             "CloudWatch.1", 
+    #           ], 
+    #           security_control_custom_parameters: [
+    #             {
+    #               parameters: {
+    #                 "daysToExpiration" => {
+    #                   value: {
+    #                     integer: 14, 
+    #                   }, 
+    #                   value_type: "CUSTOM", 
+    #                 }, 
+    #               }, 
+    #               security_control_id: "ACM.1", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         service_enabled: true, 
+    #       }, 
+    #     }, 
+    #     description: "Configuration policy for testing FSBP and CIS", 
+    #     name: "TestConfigurationPolicy", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:securityhub:us-east-1:123456789012:configuration-policy/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     configuration_policy: {
+    #       security_hub: {
+    #         enabled_standard_identifiers: [
+    #           "arn:aws:securityhub:us-east-1::standards/aws-foundational-security-best-practices/v/1.0.0", 
+    #           "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0", 
+    #         ], 
+    #         security_controls_configuration: {
+    #           disabled_security_control_identifiers: [
+    #             "CloudWatch.1", 
+    #           ], 
+    #           security_control_custom_parameters: [
+    #             {
+    #               parameters: {
+    #                 "daysToExpiration" => {
+    #                   value: {
+    #                     integer: 14, 
+    #                   }, 
+    #                   value_type: "CUSTOM", 
+    #                 }, 
+    #               }, 
+    #               security_control_id: "ACM.1", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         service_enabled: true, 
+    #       }, 
+    #     }, 
+    #     created_at: Time.parse("2023-01-11T06:17:17.154Z"), 
+    #     description: "Configuration policy for testing FSBP and CIS", 
+    #     id: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     name: "TestConfigurationPolicy", 
+    #     updated_at: Time.parse("2023-01-11T06:17:17.154Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_configuration_policy({
+    #     name: "NonEmptyString", # required
+    #     description: "NonEmptyString",
+    #     configuration_policy: { # required
+    #       security_hub: {
+    #         service_enabled: false,
+    #         enabled_standard_identifiers: ["NonEmptyString"],
+    #         security_controls_configuration: {
+    #           enabled_security_control_identifiers: ["NonEmptyString"],
+    #           disabled_security_control_identifiers: ["NonEmptyString"],
+    #           security_control_custom_parameters: [
+    #             {
+    #               security_control_id: "NonEmptyString",
+    #               parameters: {
+    #                 "NonEmptyString" => {
+    #                   value_type: "DEFAULT", # required, accepts DEFAULT, CUSTOM
+    #                   value: {
+    #                     integer: 1,
+    #                     integer_list: [1],
+    #                     double: 1.0,
+    #                     string: "NonEmptyString",
+    #                     string_list: ["NonEmptyString"],
+    #                     boolean: false,
+    #                     enum: "NonEmptyString",
+    #                     enum_list: ["NonEmptyString"],
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.updated_at #=> Time
+    #   resp.created_at #=> Time
+    #   resp.configuration_policy.security_hub.service_enabled #=> Boolean
+    #   resp.configuration_policy.security_hub.enabled_standard_identifiers #=> Array
+    #   resp.configuration_policy.security_hub.enabled_standard_identifiers[0] #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.enabled_security_control_identifiers #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.enabled_security_control_identifiers[0] #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.disabled_security_control_identifiers #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.disabled_security_control_identifiers[0] #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].security_control_id #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters #=> Hash
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value_type #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.integer #=> Integer
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.integer_list #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.integer_list[0] #=> Integer
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.double #=> Float
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.string #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.string_list #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.string_list[0] #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.boolean #=> Boolean
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.enum #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.enum_list #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.enum_list[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateConfigurationPolicy AWS API Documentation
+    #
+    # @overload create_configuration_policy(params = {})
+    # @param [Hash] params ({})
+    def create_configuration_policy(params = {}, options = {})
+      req = build_request(:create_configuration_policy, params)
       req.send_request(options)
     end
 
@@ -2641,6 +3030,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
@@ -2648,6 +3039,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -2661,6 +3054,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       criticality: [
@@ -2668,6 +3063,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       title: [
@@ -2771,6 +3168,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -2800,6 +3199,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -2825,6 +3226,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
@@ -2832,6 +3235,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -3136,6 +3541,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
@@ -3143,6 +3550,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -3187,6 +3596,48 @@ module Aws::SecurityHub
     #         },
     #       ],
     #       compliance_associated_standards_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       vulnerabilities_exploit_available: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       vulnerabilities_fix_available: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       compliance_security_control_parameters_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       compliance_security_control_parameters_value: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       aws_account_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       resource_application_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       resource_application_arn: [
     #         {
     #           value: "NonEmptyString",
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
@@ -3417,6 +3868,42 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def delete_action_target(params = {}, options = {})
       req = build_request(:delete_action_target, params)
+      req.send_request(options)
+    end
+
+    # Deletes a configuration policy. Only the Security Hub delegated
+    # administrator can invoke this operation from the home Region. For the
+    # deletion to succeed, you must first disassociate a configuration
+    # policy from target accounts, organizational units, or the root by
+    # invoking the `StartConfigurationPolicyDisassociation` operation.
+    #
+    # @option params [required, String] :identifier
+    #   The Amazon Resource Name (ARN) or universally unique identifier (UUID)
+    #   of the configuration policy.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a configuration policy
+    #
+    #   # This operation deletes the specified configuration policy.
+    #
+    #   resp = client.delete_configuration_policy({
+    #     identifier: "arn:aws:securityhub:us-east-1:123456789012:configuration-policy/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_configuration_policy({
+    #     identifier: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteConfigurationPolicy AWS API Documentation
+    #
+    # @overload delete_configuration_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_configuration_policy(params = {}, options = {})
+      req = build_request(:delete_configuration_policy, params)
       req.send_request(options)
     end
 
@@ -3739,29 +4226,35 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns information about the Organizations configuration for Security
-    # Hub. Can only be called from a Security Hub administrator account.
+    # Returns information about the way your organization is configured in
+    # Security Hub. Only the Security Hub administrator account can invoke
+    # this operation.
     #
     # @return [Types::DescribeOrganizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeOrganizationConfigurationResponse#auto_enable #auto_enable} => Boolean
     #   * {Types::DescribeOrganizationConfigurationResponse#member_account_limit_reached #member_account_limit_reached} => Boolean
     #   * {Types::DescribeOrganizationConfigurationResponse#auto_enable_standards #auto_enable_standards} => String
+    #   * {Types::DescribeOrganizationConfigurationResponse#organization_configuration #organization_configuration} => Types::OrganizationConfiguration
     #
     #
-    # @example Example: To get information about Organizations configuration
+    # @example Example: To get information about organization configuration
     #
-    #   # The following example returns details about the way in which AWS Organizations is configured for a Security Hub account
-    #   # that belongs to an organization. Only a Security Hub administrator account can call this operation.
+    #   # This operation provides information about the way your organization is configured in Security Hub. Only a Security Hub
+    #   # administrator account can invoke this operation.
     #
     #   resp = client.describe_organization_configuration({
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
-    #     auto_enable: true, 
-    #     auto_enable_standards: "DEFAULT", 
-    #     member_account_limit_reached: true, 
+    #     auto_enable: false, 
+    #     auto_enable_standards: "NONE", 
+    #     member_account_limit_reached: false, 
+    #     organization_configuration: {
+    #       configuration_type: "CENTRAL", 
+    #       status: "ENABLED", 
+    #     }, 
     #   }
     #
     # @example Response structure
@@ -3769,6 +4262,9 @@ module Aws::SecurityHub
     #   resp.auto_enable #=> Boolean
     #   resp.member_account_limit_reached #=> Boolean
     #   resp.auto_enable_standards #=> String, one of "NONE", "DEFAULT"
+    #   resp.organization_configuration.configuration_type #=> String, one of "CENTRAL", "LOCAL"
+    #   resp.organization_configuration.status #=> String, one of "PENDING", "ENABLED", "FAILED"
+    #   resp.organization_configuration.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfiguration AWS API Documentation
     #
@@ -4492,6 +4988,188 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Provides information about a configuration policy. Only the Security
+    # Hub delegated administrator can invoke this operation from the home
+    # Region.
+    #
+    # @option params [required, String] :identifier
+    #   The Amazon Resource Name (ARN) or universally unique identifier (UUID)
+    #   of the configuration policy.
+    #
+    # @return [Types::GetConfigurationPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConfigurationPolicyResponse#arn #arn} => String
+    #   * {Types::GetConfigurationPolicyResponse#id #id} => String
+    #   * {Types::GetConfigurationPolicyResponse#name #name} => String
+    #   * {Types::GetConfigurationPolicyResponse#description #description} => String
+    #   * {Types::GetConfigurationPolicyResponse#updated_at #updated_at} => Time
+    #   * {Types::GetConfigurationPolicyResponse#created_at #created_at} => Time
+    #   * {Types::GetConfigurationPolicyResponse#configuration_policy #configuration_policy} => Types::Policy
+    #
+    #
+    # @example Example: To get details about a configuration policy
+    #
+    #   # This operation provides details about the specified configuration policy.
+    #
+    #   resp = client.get_configuration_policy({
+    #     identifier: "arn:aws:securityhub:us-east-1:123456789012:configuration-policy/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:securityhub:us-east-1:123456789012:configuration-policy/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     configuration_policy: {
+    #       security_hub: {
+    #         enabled_standard_identifiers: [
+    #           "arn:aws:securityhub:us-east-1::standards/aws-foundational-security-best-practices/v/1.0.0", 
+    #           "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0", 
+    #         ], 
+    #         security_controls_configuration: {
+    #           disabled_security_control_identifiers: [
+    #             "CloudWatch.1", 
+    #           ], 
+    #           security_control_custom_parameters: [
+    #             {
+    #               parameters: {
+    #                 "daysToExpiration" => {
+    #                   value: {
+    #                     integer: 14, 
+    #                   }, 
+    #                   value_type: "CUSTOM", 
+    #                 }, 
+    #               }, 
+    #               security_control_id: "ACM.1", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         service_enabled: true, 
+    #       }, 
+    #     }, 
+    #     created_at: Time.parse("2023-01-11T06:17:17.154Z"), 
+    #     description: "Configuration policy for testing FSBP and CIS", 
+    #     id: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     name: "TestConfigurationPolicy", 
+    #     updated_at: Time.parse("2023-01-11T06:17:17.154Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_configuration_policy({
+    #     identifier: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.updated_at #=> Time
+    #   resp.created_at #=> Time
+    #   resp.configuration_policy.security_hub.service_enabled #=> Boolean
+    #   resp.configuration_policy.security_hub.enabled_standard_identifiers #=> Array
+    #   resp.configuration_policy.security_hub.enabled_standard_identifiers[0] #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.enabled_security_control_identifiers #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.enabled_security_control_identifiers[0] #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.disabled_security_control_identifiers #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.disabled_security_control_identifiers[0] #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].security_control_id #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters #=> Hash
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value_type #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.integer #=> Integer
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.integer_list #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.integer_list[0] #=> Integer
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.double #=> Float
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.string #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.string_list #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.string_list[0] #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.boolean #=> Boolean
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.enum #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.enum_list #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.enum_list[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConfigurationPolicy AWS API Documentation
+    #
+    # @overload get_configuration_policy(params = {})
+    # @param [Hash] params ({})
+    def get_configuration_policy(params = {}, options = {})
+      req = build_request(:get_configuration_policy, params)
+      req.send_request(options)
+    end
+
+    # Returns the association between a configuration and a target account,
+    # organizational unit, or the root. The configuration can be a
+    # configuration policy or self-managed behavior. Only the Security Hub
+    # delegated administrator can invoke this operation from the home
+    # Region.
+    #
+    # @option params [required, Types::Target] :target
+    #   The target account ID, organizational unit ID, or the root ID to
+    #   retrieve the association for.
+    #
+    # @return [Types::GetConfigurationPolicyAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConfigurationPolicyAssociationResponse#configuration_policy_id #configuration_policy_id} => String
+    #   * {Types::GetConfigurationPolicyAssociationResponse#target_id #target_id} => String
+    #   * {Types::GetConfigurationPolicyAssociationResponse#target_type #target_type} => String
+    #   * {Types::GetConfigurationPolicyAssociationResponse#association_type #association_type} => String
+    #   * {Types::GetConfigurationPolicyAssociationResponse#updated_at #updated_at} => Time
+    #   * {Types::GetConfigurationPolicyAssociationResponse#association_status #association_status} => String
+    #   * {Types::GetConfigurationPolicyAssociationResponse#association_status_message #association_status_message} => String
+    #
+    #
+    # @example Example: To get details about a configuration association
+    #
+    #   # This operation provides details about configuration associations for a specific target account, organizational unit, or
+    #   # the root.
+    #
+    #   resp = client.get_configuration_policy_association({
+    #     target: {
+    #       account_id: "111122223333", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     association_status: "FAILED", 
+    #     association_status_message: "Configuration Policy a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 couldn\u2019t be applied to account 111122223333 in us-east-1 Region. Retry your request.", 
+    #     association_type: "INHERITED", 
+    #     configuration_policy_id: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     target_id: "111122223333", 
+    #     target_type: "ACCOUNT", 
+    #     updated_at: Time.parse("2023-01-11T06:17:17.154Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_configuration_policy_association({
+    #     target: { # required
+    #       account_id: "NonEmptyString",
+    #       organizational_unit_id: "NonEmptyString",
+    #       root_id: "NonEmptyString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_policy_id #=> String
+    #   resp.target_id #=> String
+    #   resp.target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT"
+    #   resp.association_type #=> String, one of "INHERITED", "APPLIED"
+    #   resp.updated_at #=> Time
+    #   resp.association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
+    #   resp.association_status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConfigurationPolicyAssociation AWS API Documentation
+    #
+    # @overload get_configuration_policy_association(params = {})
+    # @param [Hash] params ({})
+    def get_configuration_policy_association(params = {}, options = {})
+      req = build_request(:get_configuration_policy_association, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the standards that are currently enabled.
     #
     # @option params [Array<String>] :standards_subscription_arns
@@ -5009,6 +5687,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
@@ -5016,6 +5696,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -5029,6 +5711,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       criticality: [
@@ -5036,6 +5720,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       title: [
@@ -5139,6 +5825,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -5168,6 +5856,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -5193,6 +5883,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
@@ -5200,6 +5892,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -5504,6 +6198,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
@@ -5511,6 +6207,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -5555,6 +6253,48 @@ module Aws::SecurityHub
     #         },
     #       ],
     #       compliance_associated_standards_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       vulnerabilities_exploit_available: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       vulnerabilities_fix_available: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       compliance_security_control_parameters_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       compliance_security_control_parameters_value: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       aws_account_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       resource_application_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       resource_application_arn: [
     #         {
     #           value: "NonEmptyString",
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
@@ -5756,10 +6496,14 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.severity_product[0].gte #=> Float
     #   resp.insights[0].filters.severity_product[0].lte #=> Float
     #   resp.insights[0].filters.severity_product[0].eq #=> Float
+    #   resp.insights[0].filters.severity_product[0].gt #=> Float
+    #   resp.insights[0].filters.severity_product[0].lt #=> Float
     #   resp.insights[0].filters.severity_normalized #=> Array
     #   resp.insights[0].filters.severity_normalized[0].gte #=> Float
     #   resp.insights[0].filters.severity_normalized[0].lte #=> Float
     #   resp.insights[0].filters.severity_normalized[0].eq #=> Float
+    #   resp.insights[0].filters.severity_normalized[0].gt #=> Float
+    #   resp.insights[0].filters.severity_normalized[0].lt #=> Float
     #   resp.insights[0].filters.severity_label #=> Array
     #   resp.insights[0].filters.severity_label[0].value #=> String
     #   resp.insights[0].filters.severity_label[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -5767,10 +6511,14 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.confidence[0].gte #=> Float
     #   resp.insights[0].filters.confidence[0].lte #=> Float
     #   resp.insights[0].filters.confidence[0].eq #=> Float
+    #   resp.insights[0].filters.confidence[0].gt #=> Float
+    #   resp.insights[0].filters.confidence[0].lt #=> Float
     #   resp.insights[0].filters.criticality #=> Array
     #   resp.insights[0].filters.criticality[0].gte #=> Float
     #   resp.insights[0].filters.criticality[0].lte #=> Float
     #   resp.insights[0].filters.criticality[0].eq #=> Float
+    #   resp.insights[0].filters.criticality[0].gt #=> Float
+    #   resp.insights[0].filters.criticality[0].lt #=> Float
     #   resp.insights[0].filters.title #=> Array
     #   resp.insights[0].filters.title[0].value #=> String
     #   resp.insights[0].filters.title[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -5823,6 +6571,8 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.network_source_port[0].gte #=> Float
     #   resp.insights[0].filters.network_source_port[0].lte #=> Float
     #   resp.insights[0].filters.network_source_port[0].eq #=> Float
+    #   resp.insights[0].filters.network_source_port[0].gt #=> Float
+    #   resp.insights[0].filters.network_source_port[0].lt #=> Float
     #   resp.insights[0].filters.network_source_domain #=> Array
     #   resp.insights[0].filters.network_source_domain[0].value #=> String
     #   resp.insights[0].filters.network_source_domain[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -5837,6 +6587,8 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.network_destination_port[0].gte #=> Float
     #   resp.insights[0].filters.network_destination_port[0].lte #=> Float
     #   resp.insights[0].filters.network_destination_port[0].eq #=> Float
+    #   resp.insights[0].filters.network_destination_port[0].gt #=> Float
+    #   resp.insights[0].filters.network_destination_port[0].lt #=> Float
     #   resp.insights[0].filters.network_destination_domain #=> Array
     #   resp.insights[0].filters.network_destination_domain[0].value #=> String
     #   resp.insights[0].filters.network_destination_domain[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -5850,10 +6602,14 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.process_pid[0].gte #=> Float
     #   resp.insights[0].filters.process_pid[0].lte #=> Float
     #   resp.insights[0].filters.process_pid[0].eq #=> Float
+    #   resp.insights[0].filters.process_pid[0].gt #=> Float
+    #   resp.insights[0].filters.process_pid[0].lt #=> Float
     #   resp.insights[0].filters.process_parent_pid #=> Array
     #   resp.insights[0].filters.process_parent_pid[0].gte #=> Float
     #   resp.insights[0].filters.process_parent_pid[0].lte #=> Float
     #   resp.insights[0].filters.process_parent_pid[0].eq #=> Float
+    #   resp.insights[0].filters.process_parent_pid[0].gt #=> Float
+    #   resp.insights[0].filters.process_parent_pid[0].lt #=> Float
     #   resp.insights[0].filters.process_launched_at #=> Array
     #   resp.insights[0].filters.process_launched_at[0].start #=> String
     #   resp.insights[0].filters.process_launched_at[0].end #=> String
@@ -6006,10 +6762,14 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].gte #=> Float
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].lte #=> Float
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].eq #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_confidence[0].gt #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_confidence[0].lt #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality #=> Array
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].gte #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].lte #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].eq #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_criticality[0].gt #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_criticality[0].lt #=> Float
     #   resp.insights[0].filters.finding_provider_fields_related_findings_id #=> Array
     #   resp.insights[0].filters.finding_provider_fields_related_findings_id[0].value #=> String
     #   resp.insights[0].filters.finding_provider_fields_related_findings_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -6033,6 +6793,27 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.compliance_associated_standards_id #=> Array
     #   resp.insights[0].filters.compliance_associated_standards_id[0].value #=> String
     #   resp.insights[0].filters.compliance_associated_standards_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.insights[0].filters.vulnerabilities_exploit_available #=> Array
+    #   resp.insights[0].filters.vulnerabilities_exploit_available[0].value #=> String
+    #   resp.insights[0].filters.vulnerabilities_exploit_available[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.insights[0].filters.vulnerabilities_fix_available #=> Array
+    #   resp.insights[0].filters.vulnerabilities_fix_available[0].value #=> String
+    #   resp.insights[0].filters.vulnerabilities_fix_available[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.insights[0].filters.compliance_security_control_parameters_name #=> Array
+    #   resp.insights[0].filters.compliance_security_control_parameters_name[0].value #=> String
+    #   resp.insights[0].filters.compliance_security_control_parameters_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.insights[0].filters.compliance_security_control_parameters_value #=> Array
+    #   resp.insights[0].filters.compliance_security_control_parameters_value[0].value #=> String
+    #   resp.insights[0].filters.compliance_security_control_parameters_value[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.insights[0].filters.aws_account_name #=> Array
+    #   resp.insights[0].filters.aws_account_name[0].value #=> String
+    #   resp.insights[0].filters.aws_account_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.insights[0].filters.resource_application_name #=> Array
+    #   resp.insights[0].filters.resource_application_name[0].value #=> String
+    #   resp.insights[0].filters.resource_application_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
+    #   resp.insights[0].filters.resource_application_arn #=> Array
+    #   resp.insights[0].filters.resource_application_arn[0].value #=> String
+    #   resp.insights[0].filters.resource_application_arn[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
     #   resp.insights[0].group_by_attribute #=> String
     #   resp.next_token #=> String
     #
@@ -6201,6 +6982,107 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Retrieves the definition of a security control. The definition
+    # includes the control title, description, Region availability,
+    # parameter definitions, and other details.
+    #
+    # @option params [required, String] :security_control_id
+    #   The ID of the security control to retrieve the definition for. This
+    #   field doesn’t accept an Amazon Resource Name (ARN).
+    #
+    # @return [Types::GetSecurityControlDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSecurityControlDefinitionResponse#security_control_definition #security_control_definition} => Types::SecurityControlDefinition
+    #
+    #
+    # @example Example: To get the definition of a security control.
+    #
+    #   # The following example retrieves definition details for the specified security control.
+    #
+    #   resp = client.get_security_control_definition({
+    #     security_control_id: "EC2.4", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     security_control_definition: {
+    #       current_region_availability: "AVAILABLE", 
+    #       description: "This control checks whether an Amazon EC2 instance has been stopped for longer than the allowed number of days. The control fails if an EC2 instance is stopped for longer than the maximum allowed time period. Unless you provide a custom parameter value for the maximum allowed time period, Security Hub uses a default value of 30 days.", 
+    #       parameter_definitions: {
+    #         "AllowedDays" => {
+    #           configuration_options: {
+    #             integer: {
+    #               default_value: 30, 
+    #               max: 365, 
+    #               min: 1, 
+    #             }, 
+    #           }, 
+    #           description: "Number of days the EC2 instance is allowed to be in a stopped state before generating a failed finding", 
+    #         }, 
+    #       }, 
+    #       remediation_url: "https://docs.aws.amazon.com/console/securityhub/EC2.4/remediation", 
+    #       security_control_id: "EC2.4", 
+    #       severity_rating: "MEDIUM", 
+    #       title: "Stopped Amazon EC2 instances should be removed after a specified time period", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_security_control_definition({
+    #     security_control_id: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_control_definition.security_control_id #=> String
+    #   resp.security_control_definition.title #=> String
+    #   resp.security_control_definition.description #=> String
+    #   resp.security_control_definition.remediation_url #=> String
+    #   resp.security_control_definition.severity_rating #=> String, one of "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.security_control_definition.current_region_availability #=> String, one of "AVAILABLE", "UNAVAILABLE"
+    #   resp.security_control_definition.customizable_properties #=> Array
+    #   resp.security_control_definition.customizable_properties[0] #=> String, one of "Parameters"
+    #   resp.security_control_definition.parameter_definitions #=> Hash
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].description #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.integer.default_value #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.integer.min #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.integer.max #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.integer_list.default_value #=> Array
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.integer_list.default_value[0] #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.integer_list.min #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.integer_list.max #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.integer_list.max_items #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.double.default_value #=> Float
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.double.min #=> Float
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.double.max #=> Float
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.string.default_value #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.string.re_2_expression #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.string.expression_description #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.string_list.default_value #=> Array
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.string_list.default_value[0] #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.string_list.re_2_expression #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.string_list.max_items #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.string_list.expression_description #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.boolean.default_value #=> Boolean
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum.default_value #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum.allowed_values #=> Array
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum.allowed_values[0] #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.default_value #=> Array
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.default_value[0] #=> String
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.max_items #=> Integer
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values #=> Array
+    #   resp.security_control_definition.parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSecurityControlDefinition AWS API Documentation
+    #
+    # @overload get_security_control_definition(params = {})
+    # @param [Hash] params ({})
+    def get_security_control_definition(params = {}, options = {})
+      req = build_request(:get_security_control_definition, params)
+      req.send_request(options)
+    end
+
     # Invites other Amazon Web Services accounts to become member accounts
     # for the Security Hub administrator account that the invitation is sent
     # from.
@@ -6346,6 +7228,185 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def list_automation_rules(params = {}, options = {})
       req = build_request(:list_automation_rules, params)
+      req.send_request(options)
+    end
+
+    # Lists the configuration policies that the Security Hub delegated
+    # administrator has created for your organization. Only the delegated
+    # administrator can invoke this operation from the home Region.
+    #
+    # @option params [String] :next_token
+    #   The NextToken value that's returned from a previous paginated
+    #   `ListConfigurationPolicies` request where `MaxResults` was used but
+    #   the results exceeded the value of that parameter. Pagination continues
+    #   from the `MaxResults` was used but the results exceeded the value of
+    #   that parameter. Pagination continues from the end of the previous
+    #   response that returned the `NextToken` value. This value is `null`
+    #   when there are no more results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that's returned by
+    #   `ListConfigurationPolicies` in each page of the response. When this
+    #   parameter is used, `ListConfigurationPolicies` returns the specified
+    #   number of results in a single page and a `NextToken` response element.
+    #   You can see the remaining results of the initial request by sending
+    #   another `ListConfigurationPolicies` request with the returned
+    #   `NextToken` value. A valid range for `MaxResults` is between 1 and
+    #   100.
+    #
+    # @return [Types::ListConfigurationPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConfigurationPoliciesResponse#configuration_policy_summaries #configuration_policy_summaries} => Array&lt;Types::ConfigurationPolicySummary&gt;
+    #   * {Types::ListConfigurationPoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To view a list of configuration policies
+    #
+    #   # This operation provides a list of your configuration policies, including metadata for each policy.
+    #
+    #   resp = client.list_configuration_policies({
+    #     max_results: 1, 
+    #     next_token: "U1FsdGVkX19nBV2zoh+Gou9NgnulLJHWpn9xnG4hqSOhvw3o2JqjI86QDxdf", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     configuration_policy_summaries: [
+    #       {
+    #         arn: "arn:aws:securityhub:us-east-1:123456789012:configuration-policy/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #         description: "Configuration policy for testing FSBP and CIS", 
+    #         id: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #         name: "TestConfigurationPolicy", 
+    #         service_enabled: true, 
+    #         updated_at: Time.parse("2023-01-11T06:17:17.154Z"), 
+    #       }, 
+    #     ], 
+    #     next_token: "U1FsdGVkX19nBV2zoh+Gou9NgnulLJHWpn9xnG4hqSOfvw3o2JqjI86QDxef", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_configuration_policies({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_policy_summaries #=> Array
+    #   resp.configuration_policy_summaries[0].arn #=> String
+    #   resp.configuration_policy_summaries[0].id #=> String
+    #   resp.configuration_policy_summaries[0].name #=> String
+    #   resp.configuration_policy_summaries[0].description #=> String
+    #   resp.configuration_policy_summaries[0].updated_at #=> Time
+    #   resp.configuration_policy_summaries[0].service_enabled #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConfigurationPolicies AWS API Documentation
+    #
+    # @overload list_configuration_policies(params = {})
+    # @param [Hash] params ({})
+    def list_configuration_policies(params = {}, options = {})
+      req = build_request(:list_configuration_policies, params)
+      req.send_request(options)
+    end
+
+    # Provides information about the associations for your configuration
+    # policies and self-managed behavior. Only the Security Hub delegated
+    # administrator can invoke this operation from the home Region.
+    #
+    # @option params [String] :next_token
+    #   The `NextToken` value that's returned from a previous paginated
+    #   `ListConfigurationPolicyAssociations` request where `MaxResults` was
+    #   used but the results exceeded the value of that parameter. Pagination
+    #   continues from the end of the previous response that returned the
+    #   `NextToken` value. This value is `null` when there are no more results
+    #   to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that's returned by
+    #   `ListConfigurationPolicies` in each page of the response. When this
+    #   parameter is used, `ListConfigurationPolicyAssociations` returns the
+    #   specified number of results in a single page and a `NextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another `ListConfigurationPolicyAssociations`
+    #   request with the returned `NextToken` value. A valid range for
+    #   `MaxResults` is between 1 and 100.
+    #
+    # @option params [Types::AssociationFilters] :filters
+    #   Options for filtering the `ListConfigurationPolicyAssociations`
+    #   response. You can filter by the Amazon Resource Name (ARN) or
+    #   universally unique identifier (UUID) of a configuration,
+    #   `AssociationType`, or `AssociationStatus`.
+    #
+    # @return [Types::ListConfigurationPolicyAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConfigurationPolicyAssociationsResponse#configuration_policy_association_summaries #configuration_policy_association_summaries} => Array&lt;Types::ConfigurationPolicyAssociationSummary&gt;
+    #   * {Types::ListConfigurationPolicyAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list configuration associations
+    #
+    #   # This operation lists all of the associations between targets and configuration policies or self-managed behavior.
+    #   # Targets can include accounts, organizational units, or the root.
+    #
+    #   resp = client.list_configuration_policy_associations({
+    #     filters: {
+    #       association_type: "APPLIED", 
+    #     }, 
+    #     max_results: 1, 
+    #     next_token: "U1FsdGVkX19nBV2zoh+Gou9NgnulLJHWpn9xnG4hqSOhvw3o2JqjI86QDxdf", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     configuration_policy_association_summaries: [
+    #       {
+    #         association_status: "PENDING", 
+    #         association_type: "APPLIED", 
+    #         configuration_policy_id: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #         target_id: "123456789012", 
+    #         target_type: "ACCOUNT", 
+    #         updated_at: Time.parse("2023-01-11T06:17:17.154Z"), 
+    #       }, 
+    #     ], 
+    #     next_token: "U1FsdGVkX19nBV2zoh+Gou9NgnulLJHWpn9xnG4hqSOfvw3o2JqjI86QDxef", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_configuration_policy_associations({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     filters: {
+    #       configuration_policy_id: "NonEmptyString",
+    #       association_type: "INHERITED", # accepts INHERITED, APPLIED
+    #       association_status: "PENDING", # accepts PENDING, SUCCESS, FAILED
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_policy_association_summaries #=> Array
+    #   resp.configuration_policy_association_summaries[0].configuration_policy_id #=> String
+    #   resp.configuration_policy_association_summaries[0].target_id #=> String
+    #   resp.configuration_policy_association_summaries[0].target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT"
+    #   resp.configuration_policy_association_summaries[0].association_type #=> String, one of "INHERITED", "APPLIED"
+    #   resp.configuration_policy_association_summaries[0].updated_at #=> Time
+    #   resp.configuration_policy_association_summaries[0].association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
+    #   resp.configuration_policy_association_summaries[0].association_status_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConfigurationPolicyAssociations AWS API Documentation
+    #
+    # @overload list_configuration_policy_associations(params = {})
+    # @param [Hash] params ({})
+    def list_configuration_policy_associations(params = {}, options = {})
+      req = build_request(:list_configuration_policy_associations, params)
       req.send_request(options)
     end
 
@@ -6742,6 +7803,9 @@ module Aws::SecurityHub
     #     security_control_definitions: [
     #       {
     #         current_region_availability: "AVAILABLE", 
+    #         customizable_properties: [
+    #           "Parameters", 
+    #         ], 
     #         description: "This AWS control checks whether ACM Certificates in your account are marked for expiration within a specified time period. Certificates provided by ACM are automatically renewed. ACM does not automatically renew certificates that you import.", 
     #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/ACM.1/remediation", 
     #         security_control_id: "ACM.1", 
@@ -6750,6 +7814,9 @@ module Aws::SecurityHub
     #       }, 
     #       {
     #         current_region_availability: "AVAILABLE", 
+    #         customizable_properties: [
+    #           "Parameters", 
+    #         ], 
     #         description: "This control checks whether all stages of Amazon API Gateway REST and WebSocket APIs have logging enabled. The control fails if logging is not enabled for all methods of a stage or if loggingLevel is neither ERROR nor INFO.", 
     #         remediation_url: "https://docs.aws.amazon.com/console/securityhub/APIGateway.1/remediation", 
     #         security_control_id: "APIGateway.1", 
@@ -6784,6 +7851,38 @@ module Aws::SecurityHub
     #   resp.security_control_definitions[0].remediation_url #=> String
     #   resp.security_control_definitions[0].severity_rating #=> String, one of "LOW", "MEDIUM", "HIGH", "CRITICAL"
     #   resp.security_control_definitions[0].current_region_availability #=> String, one of "AVAILABLE", "UNAVAILABLE"
+    #   resp.security_control_definitions[0].customizable_properties #=> Array
+    #   resp.security_control_definitions[0].customizable_properties[0] #=> String, one of "Parameters"
+    #   resp.security_control_definitions[0].parameter_definitions #=> Hash
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].description #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.integer.default_value #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.integer.min #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.integer.max #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.integer_list.default_value #=> Array
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.integer_list.default_value[0] #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.integer_list.min #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.integer_list.max #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.integer_list.max_items #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.double.default_value #=> Float
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.double.min #=> Float
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.double.max #=> Float
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.string.default_value #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.string.re_2_expression #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.string.expression_description #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.string_list.default_value #=> Array
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.string_list.default_value[0] #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.string_list.re_2_expression #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.string_list.max_items #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.string_list.expression_description #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.boolean.default_value #=> Boolean
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum.default_value #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum.allowed_values #=> Array
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum.allowed_values[0] #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.default_value #=> Array
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.default_value[0] #=> String
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.max_items #=> Integer
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values #=> Array
+    #   resp.security_control_definitions[0].parameter_definitions["NonEmptyString"].configuration_options.enum_list.allowed_values[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListSecurityControlDefinitions AWS API Documentation
@@ -6945,6 +8044,136 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Associates a target account, organizational unit, or the root with a
+    # specified configuration. The target can be associated with a
+    # configuration policy or self-managed behavior. Only the Security Hub
+    # delegated administrator can invoke this operation from the home
+    # Region.
+    #
+    # @option params [required, String] :configuration_policy_identifier
+    #   The Amazon Resource Name (ARN) or universally unique identifier (UUID)
+    #   of the configuration policy.
+    #
+    # @option params [required, Types::Target] :target
+    #   The identifier of the target account, organizational unit, or the root
+    #   to associate with the specified configuration.
+    #
+    # @return [Types::StartConfigurationPolicyAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartConfigurationPolicyAssociationResponse#configuration_policy_id #configuration_policy_id} => String
+    #   * {Types::StartConfigurationPolicyAssociationResponse#target_id #target_id} => String
+    #   * {Types::StartConfigurationPolicyAssociationResponse#target_type #target_type} => String
+    #   * {Types::StartConfigurationPolicyAssociationResponse#association_type #association_type} => String
+    #   * {Types::StartConfigurationPolicyAssociationResponse#updated_at #updated_at} => Time
+    #   * {Types::StartConfigurationPolicyAssociationResponse#association_status #association_status} => String
+    #   * {Types::StartConfigurationPolicyAssociationResponse#association_status_message #association_status_message} => String
+    #
+    #
+    # @example Example: To associate a configuration with a target
+    #
+    #   # This operation associates a configuration policy or self-managed behavior with the target account, organizational unit,
+    #   # or the root.
+    #
+    #   resp = client.start_configuration_policy_association({
+    #     configuration_policy_identifier: "arn:aws:securityhub:us-east-1:123456789012:configuration-policy/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     target: {
+    #       account_id: "111122223333", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     association_status: "SUCCESS", 
+    #     association_status_message: "This field is populated only if the association fails", 
+    #     association_type: "APPLIED", 
+    #     configuration_policy_id: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     target_id: "111122223333", 
+    #     target_type: "ACCOUNT", 
+    #     updated_at: Time.parse("2023-01-11T06:17:17.154Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_configuration_policy_association({
+    #     configuration_policy_identifier: "NonEmptyString", # required
+    #     target: { # required
+    #       account_id: "NonEmptyString",
+    #       organizational_unit_id: "NonEmptyString",
+    #       root_id: "NonEmptyString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_policy_id #=> String
+    #   resp.target_id #=> String
+    #   resp.target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT"
+    #   resp.association_type #=> String, one of "INHERITED", "APPLIED"
+    #   resp.updated_at #=> Time
+    #   resp.association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
+    #   resp.association_status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartConfigurationPolicyAssociation AWS API Documentation
+    #
+    # @overload start_configuration_policy_association(params = {})
+    # @param [Hash] params ({})
+    def start_configuration_policy_association(params = {}, options = {})
+      req = build_request(:start_configuration_policy_association, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a target account, organizational unit, or the root from
+    # a specified configuration. When you disassociate a configuration from
+    # its target, the target inherits the configuration of the closest
+    # parent. If there’s no configuration to inherit, the target retains its
+    # settings but becomes a self-managed account. A target can be
+    # disassociated from a configuration policy or self-managed behavior.
+    # Only the Security Hub delegated administrator can invoke this
+    # operation from the home Region.
+    #
+    # @option params [Types::Target] :target
+    #   The identifier of the target account, organizational unit, or the root
+    #   to disassociate from the specified configuration.
+    #
+    # @option params [required, String] :configuration_policy_identifier
+    #   The Amazon Resource Name (ARN) or universally unique identifier (UUID)
+    #   of the configuration policy.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To disassociate a configuration from a target
+    #
+    #   # This operation disassociates a configuration policy or self-managed behavior from the target account, organizational
+    #   # unit, or the root.
+    #
+    #   resp = client.start_configuration_policy_disassociation({
+    #     configuration_policy_identifier: "SELF_MANAGED_SECURITY_HUB", 
+    #     target: {
+    #       root_id: "r-f6g7h8i9j0example", 
+    #     }, 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_configuration_policy_disassociation({
+    #     target: {
+    #       account_id: "NonEmptyString",
+    #       organizational_unit_id: "NonEmptyString",
+    #       root_id: "NonEmptyString",
+    #     },
+    #     configuration_policy_identifier: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartConfigurationPolicyDisassociation AWS API Documentation
+    #
+    # @overload start_configuration_policy_disassociation(params = {})
+    # @param [Hash] params ({})
+    def start_configuration_policy_disassociation(params = {}, options = {})
+      req = build_request(:start_configuration_policy_disassociation, params)
+      req.send_request(options)
+    end
+
     # Adds one or more tags to a resource.
     #
     # @option params [required, String] :resource_arn
@@ -7067,6 +8296,206 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def update_action_target(params = {}, options = {})
       req = build_request(:update_action_target, params)
+      req.send_request(options)
+    end
+
+    # Updates a configuration policy. Only the Security Hub delegated
+    # administrator can invoke this operation from the home Region.
+    #
+    # @option params [required, String] :identifier
+    #   The Amazon Resource Name (ARN) or universally unique identifier (UUID)
+    #   of the configuration policy.
+    #
+    # @option params [String] :name
+    #   The name of the configuration policy. Alphanumeric characters and the
+    #   following ASCII characters are permitted: `-, ., !, *, /`.
+    #
+    # @option params [String] :description
+    #   The description of the configuration policy.
+    #
+    # @option params [String] :updated_reason
+    #   The reason for updating the configuration policy.
+    #
+    # @option params [Types::Policy] :configuration_policy
+    #   An object that defines how Security Hub is configured. It includes
+    #   whether Security Hub is enabled or disabled, a list of enabled
+    #   security standards, a list of enabled or disabled security controls,
+    #   and a list of custom parameter values for specified controls. If you
+    #   provide a list of security controls that are enabled in the
+    #   configuration policy, Security Hub disables all other controls
+    #   (including newly released controls). If you provide a list of security
+    #   controls that are disabled in the configuration policy, Security Hub
+    #   enables all other controls (including newly released controls).
+    #
+    #   When updating a configuration policy, provide a complete list of
+    #   standards that you want to enable and a complete list of controls that
+    #   you want to enable or disable. The updated configuration replaces the
+    #   current configuration.
+    #
+    # @return [Types::UpdateConfigurationPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConfigurationPolicyResponse#arn #arn} => String
+    #   * {Types::UpdateConfigurationPolicyResponse#id #id} => String
+    #   * {Types::UpdateConfigurationPolicyResponse#name #name} => String
+    #   * {Types::UpdateConfigurationPolicyResponse#description #description} => String
+    #   * {Types::UpdateConfigurationPolicyResponse#updated_at #updated_at} => Time
+    #   * {Types::UpdateConfigurationPolicyResponse#created_at #created_at} => Time
+    #   * {Types::UpdateConfigurationPolicyResponse#configuration_policy #configuration_policy} => Types::Policy
+    #
+    #
+    # @example Example: To update a configuration policy
+    #
+    #   # This operation updates the specified configuration policy.
+    #
+    #   resp = client.update_configuration_policy({
+    #     configuration_policy: {
+    #       security_hub: {
+    #         enabled_standard_identifiers: [
+    #           "arn:aws:securityhub:us-east-1::standards/aws-foundational-security-best-practices/v/1.0.0", 
+    #           "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0", 
+    #         ], 
+    #         security_controls_configuration: {
+    #           disabled_security_control_identifiers: [
+    #             "CloudWatch.1", 
+    #             "CloudWatch.2", 
+    #           ], 
+    #           security_control_custom_parameters: [
+    #             {
+    #               parameters: {
+    #                 "daysToExpiration" => {
+    #                   value: {
+    #                     integer: 21, 
+    #                   }, 
+    #                   value_type: "CUSTOM", 
+    #                 }, 
+    #               }, 
+    #               security_control_id: "ACM.1", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         service_enabled: true, 
+    #       }, 
+    #     }, 
+    #     description: "Updated configuration policy for testing FSBP and CIS", 
+    #     identifier: "arn:aws:securityhub:us-east-1:123456789012:configuration-policy/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     name: "TestConfigurationPolicy", 
+    #     updated_reason: "Enabling ACM.2", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:securityhub:us-east-1:123456789012:configuration-policy/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     configuration_policy: {
+    #       security_hub: {
+    #         enabled_standard_identifiers: [
+    #           "arn:aws:securityhub:us-east-1::standards/aws-foundational-security-best-practices/v/1.0.0", 
+    #           "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0", 
+    #         ], 
+    #         security_controls_configuration: {
+    #           disabled_security_control_identifiers: [
+    #             "CloudWatch.1", 
+    #             "CloudWatch.2", 
+    #           ], 
+    #           security_control_custom_parameters: [
+    #             {
+    #               parameters: {
+    #                 "daysToExpiration" => {
+    #                   value: {
+    #                     integer: 21, 
+    #                   }, 
+    #                   value_type: "CUSTOM", 
+    #                 }, 
+    #               }, 
+    #               security_control_id: "ACM.1", 
+    #             }, 
+    #           ], 
+    #         }, 
+    #         service_enabled: true, 
+    #       }, 
+    #     }, 
+    #     created_at: Time.parse("2023-01-11T06:17:17.154Z"), 
+    #     description: "Updated configuration policy for testing FSBP and CIS", 
+    #     id: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     name: "TestConfigurationPolicy", 
+    #     updated_at: Time.parse("2023-01-12T06:17:17.154Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_configuration_policy({
+    #     identifier: "NonEmptyString", # required
+    #     name: "NonEmptyString",
+    #     description: "NonEmptyString",
+    #     updated_reason: "NonEmptyString",
+    #     configuration_policy: {
+    #       security_hub: {
+    #         service_enabled: false,
+    #         enabled_standard_identifiers: ["NonEmptyString"],
+    #         security_controls_configuration: {
+    #           enabled_security_control_identifiers: ["NonEmptyString"],
+    #           disabled_security_control_identifiers: ["NonEmptyString"],
+    #           security_control_custom_parameters: [
+    #             {
+    #               security_control_id: "NonEmptyString",
+    #               parameters: {
+    #                 "NonEmptyString" => {
+    #                   value_type: "DEFAULT", # required, accepts DEFAULT, CUSTOM
+    #                   value: {
+    #                     integer: 1,
+    #                     integer_list: [1],
+    #                     double: 1.0,
+    #                     string: "NonEmptyString",
+    #                     string_list: ["NonEmptyString"],
+    #                     boolean: false,
+    #                     enum: "NonEmptyString",
+    #                     enum_list: ["NonEmptyString"],
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.updated_at #=> Time
+    #   resp.created_at #=> Time
+    #   resp.configuration_policy.security_hub.service_enabled #=> Boolean
+    #   resp.configuration_policy.security_hub.enabled_standard_identifiers #=> Array
+    #   resp.configuration_policy.security_hub.enabled_standard_identifiers[0] #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.enabled_security_control_identifiers #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.enabled_security_control_identifiers[0] #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.disabled_security_control_identifiers #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.disabled_security_control_identifiers[0] #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].security_control_id #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters #=> Hash
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value_type #=> String, one of "DEFAULT", "CUSTOM"
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.integer #=> Integer
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.integer_list #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.integer_list[0] #=> Integer
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.double #=> Float
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.string #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.string_list #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.string_list[0] #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.boolean #=> Boolean
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.enum #=> String
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.enum_list #=> Array
+    #   resp.configuration_policy.security_hub.security_controls_configuration.security_control_custom_parameters[0].parameters["NonEmptyString"].value.enum_list[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateConfigurationPolicy AWS API Documentation
+    #
+    # @overload update_configuration_policy(params = {})
+    # @param [Hash] params ({})
+    def update_configuration_policy(params = {}, options = {})
+      req = build_request(:update_configuration_policy, params)
       req.send_request(options)
     end
 
@@ -7279,6 +8708,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
@@ -7286,6 +8717,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -7299,6 +8732,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       criticality: [
@@ -7306,6 +8741,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       title: [
@@ -7409,6 +8846,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -7438,6 +8877,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -7463,6 +8904,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
@@ -7470,6 +8913,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -7774,6 +9219,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
@@ -7781,6 +9228,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -7825,6 +9274,48 @@ module Aws::SecurityHub
     #         },
     #       ],
     #       compliance_associated_standards_id: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       vulnerabilities_exploit_available: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       vulnerabilities_fix_available: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       compliance_security_control_parameters_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       compliance_security_control_parameters_value: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       aws_account_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       resource_application_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       resource_application_arn: [
     #         {
     #           value: "NonEmptyString",
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
@@ -7975,6 +9466,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
@@ -7982,6 +9475,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -7995,6 +9490,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       criticality: [
@@ -8002,6 +9499,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       title: [
@@ -8105,6 +9604,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -8134,6 +9635,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -8159,6 +9662,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
@@ -8166,6 +9671,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -8470,6 +9977,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
@@ -8477,6 +9986,8 @@ module Aws::SecurityHub
     #           gte: 1.0,
     #           lte: 1.0,
     #           eq: 1.0,
+    #           gt: 1.0,
+    #           lt: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -8526,6 +10037,48 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
     #         },
     #       ],
+    #       vulnerabilities_exploit_available: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       vulnerabilities_fix_available: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       compliance_security_control_parameters_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       compliance_security_control_parameters_value: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       aws_account_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       resource_application_name: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
+    #       resource_application_arn: [
+    #         {
+    #           value: "NonEmptyString",
+    #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS
+    #         },
+    #       ],
     #     },
     #     group_by_attribute: "NonEmptyString",
     #   })
@@ -8539,44 +10092,63 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Used to update the configuration related to Organizations. Can only be
-    # called from a Security Hub administrator account.
+    # Updates the configuration of your organization in Security Hub. Only
+    # the Security Hub administrator account can invoke this operation.
     #
     # @option params [required, Boolean] :auto_enable
-    #   Whether to automatically enable Security Hub for new accounts in the
-    #   organization.
+    #   Whether to automatically enable Security Hub in new member accounts
+    #   when they join the organization.
     #
-    #   By default, this is `false`, and new accounts are not added
-    #   automatically.
+    #   If set to `true`, then Security Hub is automatically enabled in new
+    #   accounts. If set to `false`, then Security Hub isn't enabled in new
+    #   accounts automatically. The default value is `false`.
     #
-    #   To automatically enable Security Hub for new accounts, set this to
-    #   `true`.
+    #   If the `ConfigurationType` of your organization is set to `CENTRAL`,
+    #   then this field is set to `false` and can't be changed in the home
+    #   Region and linked Regions. However, in that case, the delegated
+    #   administrator can create a configuration policy in which Security Hub
+    #   is enabled and associate the policy with new organization accounts.
     #
     # @option params [String] :auto_enable_standards
-    #   Whether to automatically enable Security Hub [default standards][1]
-    #   for new member accounts in the organization.
+    #   Whether to automatically enable Security Hub [default standards][1] in
+    #   new member accounts when they join the organization.
     #
-    #   By default, this parameter is equal to `DEFAULT`, and new member
-    #   accounts are automatically enabled with default Security Hub
-    #   standards.
+    #   The default value of this parameter is equal to `DEFAULT`.
     #
-    #   To opt out of enabling default standards for new member accounts, set
-    #   this parameter equal to `NONE`.
+    #   If equal to `DEFAULT`, then Security Hub default standards are
+    #   automatically enabled for new member accounts. If equal to `NONE`,
+    #   then default standards are not automatically enabled for new member
+    #   accounts.
+    #
+    #   If the `ConfigurationType` of your organization is set to `CENTRAL`,
+    #   then this field is set to `NONE` and can't be changed in the home
+    #   Region and linked Regions. However, in that case, the delegated
+    #   administrator can create a configuration policy in which specific
+    #   security standards are enabled and associate the policy with new
+    #   organization accounts.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html
+    #
+    # @option params [Types::OrganizationConfiguration] :organization_configuration
+    #   Provides information about the way an organization is configured in
+    #   Security Hub.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
     # @example Example: To update organization configuration
     #
-    #   # The following example updates the configuration for an organization so that Security Hub is automatically activated for
-    #   # new member accounts. Only the Security Hub administrator account can call this operation.
+    #   # This operation updates the way your organization is configured in Security Hub. Only a Security Hub administrator
+    #   # account can invoke this operation.
     #
     #   resp = client.update_organization_configuration({
-    #     auto_enable: true, 
+    #     auto_enable: false, 
+    #     auto_enable_standards: "NONE", 
+    #     organization_configuration: {
+    #       configuration_type: "CENTRAL", 
+    #     }, 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -8584,6 +10156,11 @@ module Aws::SecurityHub
     #   resp = client.update_organization_configuration({
     #     auto_enable: false, # required
     #     auto_enable_standards: "NONE", # accepts NONE, DEFAULT
+    #     organization_configuration: {
+    #       configuration_type: "CENTRAL", # accepts CENTRAL, LOCAL
+    #       status: "PENDING", # accepts PENDING, ENABLED, FAILED
+    #       status_message: "NonEmptyString",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateOrganizationConfiguration AWS API Documentation
@@ -8592,6 +10169,74 @@ module Aws::SecurityHub
     # @param [Hash] params ({})
     def update_organization_configuration(params = {}, options = {})
       req = build_request(:update_organization_configuration, params)
+      req.send_request(options)
+    end
+
+    # Updates the properties of a security control.
+    #
+    # @option params [required, String] :security_control_id
+    #   The Amazon Resource Name (ARN) or ID of the control to update.
+    #
+    # @option params [required, Hash<String,Types::ParameterConfiguration>] :parameters
+    #   An object that specifies which security control parameters to update.
+    #
+    # @option params [String] :last_update_reason
+    #   The most recent reason for updating the properties of the security
+    #   control. This field accepts alphanumeric characters in addition to
+    #   white spaces, dashes, and underscores.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To update security control properties
+    #
+    #   # The following example updates the specified security control. Specifically, this example updates control parameters.
+    #
+    #   resp = client.update_security_control({
+    #     last_update_reason: "Comply with internal requirements", 
+    #     parameters: {
+    #       "maxCredentialUsageAge" => {
+    #         value: {
+    #           integer: 15, 
+    #         }, 
+    #         value_type: "CUSTOM", 
+    #       }, 
+    #     }, 
+    #     security_control_id: "ACM.1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_security_control({
+    #     security_control_id: "NonEmptyString", # required
+    #     parameters: { # required
+    #       "NonEmptyString" => {
+    #         value_type: "DEFAULT", # required, accepts DEFAULT, CUSTOM
+    #         value: {
+    #           integer: 1,
+    #           integer_list: [1],
+    #           double: 1.0,
+    #           string: "NonEmptyString",
+    #           string_list: ["NonEmptyString"],
+    #           boolean: false,
+    #           enum: "NonEmptyString",
+    #           enum_list: ["NonEmptyString"],
+    #         },
+    #       },
+    #     },
+    #     last_update_reason: "AlphaNumericNonEmptyString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateSecurityControl AWS API Documentation
+    #
+    # @overload update_security_control(params = {})
+    # @param [Hash] params ({})
+    def update_security_control(params = {}, options = {})
+      req = build_request(:update_security_control, params)
       req.send_request(options)
     end
 
@@ -8703,7 +10348,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

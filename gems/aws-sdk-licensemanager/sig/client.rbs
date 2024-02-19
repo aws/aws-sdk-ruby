@@ -1,0 +1,977 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LicenseManager
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptGrantResponse]
+        def grant_arn: () -> ::String
+        def status: () -> ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#accept_grant-instance_method
+      def accept_grant: (
+                          grant_arn: ::String
+                        ) -> _AcceptGrantResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptGrantResponseSuccess
+
+      interface _CheckInLicenseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CheckInLicenseResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#check_in_license-instance_method
+      def check_in_license: (
+                              license_consumption_token: ::String,
+                              ?beneficiary: ::String
+                            ) -> _CheckInLicenseResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CheckInLicenseResponseSuccess
+
+      interface _CheckoutBorrowLicenseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CheckoutBorrowLicenseResponse]
+        def license_arn: () -> ::String
+        def license_consumption_token: () -> ::String
+        def entitlements_allowed: () -> ::Array[Types::EntitlementData]
+        def node_id: () -> ::String
+        def signed_token: () -> ::String
+        def issued_at: () -> ::String
+        def expiration: () -> ::String
+        def checkout_metadata: () -> ::Array[Types::Metadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#checkout_borrow_license-instance_method
+      def checkout_borrow_license: (
+                                     license_arn: ::String,
+                                     entitlements: Array[
+                                       {
+                                         name: ::String,
+                                         value: ::String?,
+                                         unit: ("Count" | "None" | "Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second")
+                                       },
+                                     ],
+                                     digital_signature_method: ("JWT_PS384"),
+                                     ?node_id: ::String,
+                                     ?checkout_metadata: Array[
+                                       {
+                                         name: ::String?,
+                                         value: ::String?
+                                       },
+                                     ],
+                                     client_token: ::String
+                                   ) -> _CheckoutBorrowLicenseResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CheckoutBorrowLicenseResponseSuccess
+
+      interface _CheckoutLicenseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CheckoutLicenseResponse]
+        def checkout_type: () -> ("PROVISIONAL" | "PERPETUAL")
+        def license_consumption_token: () -> ::String
+        def entitlements_allowed: () -> ::Array[Types::EntitlementData]
+        def signed_token: () -> ::String
+        def node_id: () -> ::String
+        def issued_at: () -> ::String
+        def expiration: () -> ::String
+        def license_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#checkout_license-instance_method
+      def checkout_license: (
+                              product_sku: ::String,
+                              checkout_type: ("PROVISIONAL" | "PERPETUAL"),
+                              key_fingerprint: ::String,
+                              entitlements: Array[
+                                {
+                                  name: ::String,
+                                  value: ::String?,
+                                  unit: ("Count" | "None" | "Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second")
+                                },
+                              ],
+                              client_token: ::String,
+                              ?beneficiary: ::String,
+                              ?node_id: ::String
+                            ) -> _CheckoutLicenseResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CheckoutLicenseResponseSuccess
+
+      interface _CreateGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGrantResponse]
+        def grant_arn: () -> ::String
+        def status: () -> ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#create_grant-instance_method
+      def create_grant: (
+                          client_token: ::String,
+                          grant_name: ::String,
+                          license_arn: ::String,
+                          principals: Array[::String],
+                          home_region: ::String,
+                          allowed_operations: Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken")]
+                        ) -> _CreateGrantResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGrantResponseSuccess
+
+      interface _CreateGrantVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGrantVersionResponse]
+        def grant_arn: () -> ::String
+        def status: () -> ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#create_grant_version-instance_method
+      def create_grant_version: (
+                                  client_token: ::String,
+                                  grant_arn: ::String,
+                                  ?grant_name: ::String,
+                                  ?allowed_operations: Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken")],
+                                  ?status: ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED"),
+                                  ?status_reason: ::String,
+                                  ?source_version: ::String,
+                                  ?options: {
+                                    activation_override_behavior: ("DISTRIBUTED_GRANTS_ONLY" | "ALL_GRANTS_PERMITTED_BY_ISSUER")?
+                                  }
+                                ) -> _CreateGrantVersionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGrantVersionResponseSuccess
+
+      interface _CreateLicenseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLicenseResponse]
+        def license_arn: () -> ::String
+        def status: () -> ("AVAILABLE" | "PENDING_AVAILABLE" | "DEACTIVATED" | "SUSPENDED" | "EXPIRED" | "PENDING_DELETE" | "DELETED")
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#create_license-instance_method
+      def create_license: (
+                            license_name: ::String,
+                            product_name: ::String,
+                            product_sku: ::String,
+                            issuer: {
+                              name: ::String,
+                              sign_key: ::String?
+                            },
+                            home_region: ::String,
+                            validity: {
+                              begin: ::String,
+                              end: ::String?
+                            },
+                            entitlements: Array[
+                              {
+                                name: ::String,
+                                value: ::String?,
+                                max_count: ::Integer?,
+                                overage: bool?,
+                                unit: ("Count" | "None" | "Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second"),
+                                allow_check_in: bool?
+                              },
+                            ],
+                            beneficiary: ::String,
+                            consumption_configuration: {
+                              renew_type: ("None" | "Weekly" | "Monthly")?,
+                              provisional_configuration: {
+                                max_time_to_live_in_minutes: ::Integer
+                              }?,
+                              borrow_configuration: {
+                                allow_early_check_in: bool,
+                                max_time_to_live_in_minutes: ::Integer
+                              }?
+                            },
+                            ?license_metadata: Array[
+                              {
+                                name: ::String?,
+                                value: ::String?
+                              },
+                            ],
+                            client_token: ::String
+                          ) -> _CreateLicenseResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLicenseResponseSuccess
+
+      interface _CreateLicenseConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLicenseConfigurationResponse]
+        def license_configuration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#create_license_configuration-instance_method
+      def create_license_configuration: (
+                                          name: ::String,
+                                          ?description: ::String,
+                                          license_counting_type: ("vCPU" | "Instance" | "Core" | "Socket"),
+                                          ?license_count: ::Integer,
+                                          ?license_count_hard_limit: bool,
+                                          ?license_rules: Array[::String],
+                                          ?tags: Array[
+                                            {
+                                              key: ::String?,
+                                              value: ::String?
+                                            },
+                                          ],
+                                          ?disassociate_when_not_found: bool,
+                                          ?product_information_list: Array[
+                                            {
+                                              resource_type: ::String,
+                                              product_information_filter_list: Array[
+                                                {
+                                                  product_information_filter_name: ::String,
+                                                  product_information_filter_value: Array[::String]?,
+                                                  product_information_filter_comparator: ::String
+                                                },
+                                              ]
+                                            },
+                                          ]
+                                        ) -> _CreateLicenseConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLicenseConfigurationResponseSuccess
+
+      interface _CreateLicenseConversionTaskForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLicenseConversionTaskForResourceResponse]
+        def license_conversion_task_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#create_license_conversion_task_for_resource-instance_method
+      def create_license_conversion_task_for_resource: (
+                                                         resource_arn: ::String,
+                                                         source_license_context: {
+                                                           usage_operation: ::String?
+                                                         },
+                                                         destination_license_context: {
+                                                           usage_operation: ::String?
+                                                         }
+                                                       ) -> _CreateLicenseConversionTaskForResourceResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLicenseConversionTaskForResourceResponseSuccess
+
+      interface _CreateLicenseManagerReportGeneratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLicenseManagerReportGeneratorResponse]
+        def license_manager_report_generator_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#create_license_manager_report_generator-instance_method
+      def create_license_manager_report_generator: (
+                                                     report_generator_name: ::String,
+                                                     type: Array[("LicenseConfigurationSummaryReport" | "LicenseConfigurationUsageReport")],
+                                                     report_context: {
+                                                       license_configuration_arns: Array[::String]
+                                                     },
+                                                     report_frequency: {
+                                                       value: ::Integer?,
+                                                       period: ("DAY" | "WEEK" | "MONTH")?
+                                                     },
+                                                     client_token: ::String,
+                                                     ?description: ::String,
+                                                     ?tags: Array[
+                                                       {
+                                                         key: ::String?,
+                                                         value: ::String?
+                                                       },
+                                                     ]
+                                                   ) -> _CreateLicenseManagerReportGeneratorResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLicenseManagerReportGeneratorResponseSuccess
+
+      interface _CreateLicenseVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLicenseVersionResponse]
+        def license_arn: () -> ::String
+        def version: () -> ::String
+        def status: () -> ("AVAILABLE" | "PENDING_AVAILABLE" | "DEACTIVATED" | "SUSPENDED" | "EXPIRED" | "PENDING_DELETE" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#create_license_version-instance_method
+      def create_license_version: (
+                                    license_arn: ::String,
+                                    license_name: ::String,
+                                    product_name: ::String,
+                                    issuer: {
+                                      name: ::String,
+                                      sign_key: ::String?
+                                    },
+                                    home_region: ::String,
+                                    validity: {
+                                      begin: ::String,
+                                      end: ::String?
+                                    },
+                                    ?license_metadata: Array[
+                                      {
+                                        name: ::String?,
+                                        value: ::String?
+                                      },
+                                    ],
+                                    entitlements: Array[
+                                      {
+                                        name: ::String,
+                                        value: ::String?,
+                                        max_count: ::Integer?,
+                                        overage: bool?,
+                                        unit: ("Count" | "None" | "Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second"),
+                                        allow_check_in: bool?
+                                      },
+                                    ],
+                                    consumption_configuration: {
+                                      renew_type: ("None" | "Weekly" | "Monthly")?,
+                                      provisional_configuration: {
+                                        max_time_to_live_in_minutes: ::Integer
+                                      }?,
+                                      borrow_configuration: {
+                                        allow_early_check_in: bool,
+                                        max_time_to_live_in_minutes: ::Integer
+                                      }?
+                                    },
+                                    status: ("AVAILABLE" | "PENDING_AVAILABLE" | "DEACTIVATED" | "SUSPENDED" | "EXPIRED" | "PENDING_DELETE" | "DELETED"),
+                                    client_token: ::String,
+                                    ?source_version: ::String
+                                  ) -> _CreateLicenseVersionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLicenseVersionResponseSuccess
+
+      interface _CreateTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTokenResponse]
+        def token_id: () -> ::String
+        def token_type: () -> ("REFRESH_TOKEN")
+        def token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#create_token-instance_method
+      def create_token: (
+                          license_arn: ::String,
+                          ?role_arns: Array[::String],
+                          ?expiration_in_days: ::Integer,
+                          ?token_properties: Array[::String],
+                          client_token: ::String
+                        ) -> _CreateTokenResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTokenResponseSuccess
+
+      interface _DeleteGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGrantResponse]
+        def grant_arn: () -> ::String
+        def status: () -> ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#delete_grant-instance_method
+      def delete_grant: (
+                          grant_arn: ::String,
+                          ?status_reason: ::String,
+                          version: ::String
+                        ) -> _DeleteGrantResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGrantResponseSuccess
+
+      interface _DeleteLicenseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLicenseResponse]
+        def status: () -> ("PENDING_DELETE" | "DELETED")
+        def deletion_date: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#delete_license-instance_method
+      def delete_license: (
+                            license_arn: ::String,
+                            source_version: ::String
+                          ) -> _DeleteLicenseResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLicenseResponseSuccess
+
+      interface _DeleteLicenseConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLicenseConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#delete_license_configuration-instance_method
+      def delete_license_configuration: (
+                                          license_configuration_arn: ::String
+                                        ) -> _DeleteLicenseConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLicenseConfigurationResponseSuccess
+
+      interface _DeleteLicenseManagerReportGeneratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLicenseManagerReportGeneratorResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#delete_license_manager_report_generator-instance_method
+      def delete_license_manager_report_generator: (
+                                                     license_manager_report_generator_arn: ::String
+                                                   ) -> _DeleteLicenseManagerReportGeneratorResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLicenseManagerReportGeneratorResponseSuccess
+
+      interface _DeleteTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTokenResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#delete_token-instance_method
+      def delete_token: (
+                          token_id: ::String
+                        ) -> _DeleteTokenResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTokenResponseSuccess
+
+      interface _ExtendLicenseConsumptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExtendLicenseConsumptionResponse]
+        def license_consumption_token: () -> ::String
+        def expiration: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#extend_license_consumption-instance_method
+      def extend_license_consumption: (
+                                        license_consumption_token: ::String,
+                                        ?dry_run: bool
+                                      ) -> _ExtendLicenseConsumptionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExtendLicenseConsumptionResponseSuccess
+
+      interface _GetAccessTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessTokenResponse]
+        def access_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#get_access_token-instance_method
+      def get_access_token: (
+                              token: ::String,
+                              ?token_properties: Array[::String]
+                            ) -> _GetAccessTokenResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessTokenResponseSuccess
+
+      interface _GetGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGrantResponse]
+        def grant: () -> Types::Grant
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#get_grant-instance_method
+      def get_grant: (
+                       grant_arn: ::String,
+                       ?version: ::String
+                     ) -> _GetGrantResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGrantResponseSuccess
+
+      interface _GetLicenseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLicenseResponse]
+        def license: () -> Types::License
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#get_license-instance_method
+      def get_license: (
+                         license_arn: ::String,
+                         ?version: ::String
+                       ) -> _GetLicenseResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLicenseResponseSuccess
+
+      interface _GetLicenseConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLicenseConfigurationResponse]
+        def license_configuration_id: () -> ::String
+        def license_configuration_arn: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def license_counting_type: () -> ("vCPU" | "Instance" | "Core" | "Socket")
+        def license_rules: () -> ::Array[::String]
+        def license_count: () -> ::Integer
+        def license_count_hard_limit: () -> bool
+        def consumed_licenses: () -> ::Integer
+        def status: () -> ::String
+        def owner_account_id: () -> ::String
+        def consumed_license_summary_list: () -> ::Array[Types::ConsumedLicenseSummary]
+        def managed_resource_summary_list: () -> ::Array[Types::ManagedResourceSummary]
+        def tags: () -> ::Array[Types::Tag]
+        def product_information_list: () -> ::Array[Types::ProductInformation]
+        def automated_discovery_information: () -> Types::AutomatedDiscoveryInformation
+        def disassociate_when_not_found: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#get_license_configuration-instance_method
+      def get_license_configuration: (
+                                       license_configuration_arn: ::String
+                                     ) -> _GetLicenseConfigurationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLicenseConfigurationResponseSuccess
+
+      interface _GetLicenseConversionTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLicenseConversionTaskResponse]
+        def license_conversion_task_id: () -> ::String
+        def resource_arn: () -> ::String
+        def source_license_context: () -> Types::LicenseConversionContext
+        def destination_license_context: () -> Types::LicenseConversionContext
+        def status_message: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def start_time: () -> ::Time
+        def license_conversion_time: () -> ::Time
+        def end_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#get_license_conversion_task-instance_method
+      def get_license_conversion_task: (
+                                         license_conversion_task_id: ::String
+                                       ) -> _GetLicenseConversionTaskResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLicenseConversionTaskResponseSuccess
+
+      interface _GetLicenseManagerReportGeneratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLicenseManagerReportGeneratorResponse]
+        def report_generator: () -> Types::ReportGenerator
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#get_license_manager_report_generator-instance_method
+      def get_license_manager_report_generator: (
+                                                  license_manager_report_generator_arn: ::String
+                                                ) -> _GetLicenseManagerReportGeneratorResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLicenseManagerReportGeneratorResponseSuccess
+
+      interface _GetLicenseUsageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLicenseUsageResponse]
+        def license_usage: () -> Types::LicenseUsage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#get_license_usage-instance_method
+      def get_license_usage: (
+                               license_arn: ::String
+                             ) -> _GetLicenseUsageResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLicenseUsageResponseSuccess
+
+      interface _GetServiceSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceSettingsResponse]
+        def s3_bucket_arn: () -> ::String
+        def sns_topic_arn: () -> ::String
+        def organization_configuration: () -> Types::OrganizationConfiguration
+        def enable_cross_accounts_discovery: () -> bool
+        def license_manager_resource_share_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#get_service_settings-instance_method
+      def get_service_settings: (
+                                ) -> _GetServiceSettingsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceSettingsResponseSuccess
+
+      interface _ListAssociationsForLicenseConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssociationsForLicenseConfigurationResponse]
+        def license_configuration_associations: () -> ::Array[Types::LicenseConfigurationAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_associations_for_license_configuration-instance_method
+      def list_associations_for_license_configuration: (
+                                                         license_configuration_arn: ::String,
+                                                         ?max_results: ::Integer,
+                                                         ?next_token: ::String
+                                                       ) -> _ListAssociationsForLicenseConfigurationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssociationsForLicenseConfigurationResponseSuccess
+
+      interface _ListDistributedGrantsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDistributedGrantsResponse]
+        def grants: () -> ::Array[Types::Grant]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_distributed_grants-instance_method
+      def list_distributed_grants: (
+                                     ?grant_arns: Array[::String],
+                                     ?filters: Array[
+                                       {
+                                         name: ::String?,
+                                         values: Array[::String]?
+                                       },
+                                     ],
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListDistributedGrantsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDistributedGrantsResponseSuccess
+
+      interface _ListFailuresForLicenseConfigurationOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFailuresForLicenseConfigurationOperationsResponse]
+        def license_operation_failure_list: () -> ::Array[Types::LicenseOperationFailure]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_failures_for_license_configuration_operations-instance_method
+      def list_failures_for_license_configuration_operations: (
+                                                                license_configuration_arn: ::String,
+                                                                ?max_results: ::Integer,
+                                                                ?next_token: ::String
+                                                              ) -> _ListFailuresForLicenseConfigurationOperationsResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFailuresForLicenseConfigurationOperationsResponseSuccess
+
+      interface _ListLicenseConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLicenseConfigurationsResponse]
+        def license_configurations: () -> ::Array[Types::LicenseConfiguration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_license_configurations-instance_method
+      def list_license_configurations: (
+                                         ?license_configuration_arns: Array[::String],
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String,
+                                         ?filters: Array[
+                                           {
+                                             name: ::String?,
+                                             values: Array[::String]?
+                                           },
+                                         ]
+                                       ) -> _ListLicenseConfigurationsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLicenseConfigurationsResponseSuccess
+
+      interface _ListLicenseConversionTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLicenseConversionTasksResponse]
+        def license_conversion_tasks: () -> ::Array[Types::LicenseConversionTask]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_license_conversion_tasks-instance_method
+      def list_license_conversion_tasks: (
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer,
+                                           ?filters: Array[
+                                             {
+                                               name: ::String?,
+                                               values: Array[::String]?
+                                             },
+                                           ]
+                                         ) -> _ListLicenseConversionTasksResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLicenseConversionTasksResponseSuccess
+
+      interface _ListLicenseManagerReportGeneratorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLicenseManagerReportGeneratorsResponse]
+        def report_generators: () -> ::Array[Types::ReportGenerator]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_license_manager_report_generators-instance_method
+      def list_license_manager_report_generators: (
+                                                    ?filters: Array[
+                                                      {
+                                                        name: ::String?,
+                                                        values: Array[::String]?
+                                                      },
+                                                    ],
+                                                    ?next_token: ::String,
+                                                    ?max_results: ::Integer
+                                                  ) -> _ListLicenseManagerReportGeneratorsResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLicenseManagerReportGeneratorsResponseSuccess
+
+      interface _ListLicenseSpecificationsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLicenseSpecificationsForResourceResponse]
+        def license_specifications: () -> ::Array[Types::LicenseSpecification]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_license_specifications_for_resource-instance_method
+      def list_license_specifications_for_resource: (
+                                                      resource_arn: ::String,
+                                                      ?max_results: ::Integer,
+                                                      ?next_token: ::String
+                                                    ) -> _ListLicenseSpecificationsForResourceResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLicenseSpecificationsForResourceResponseSuccess
+
+      interface _ListLicenseVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLicenseVersionsResponse]
+        def licenses: () -> ::Array[Types::License]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_license_versions-instance_method
+      def list_license_versions: (
+                                   license_arn: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListLicenseVersionsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLicenseVersionsResponseSuccess
+
+      interface _ListLicensesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLicensesResponse]
+        def licenses: () -> ::Array[Types::License]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_licenses-instance_method
+      def list_licenses: (
+                           ?license_arns: Array[::String],
+                           ?filters: Array[
+                             {
+                               name: ::String?,
+                               values: Array[::String]?
+                             },
+                           ],
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListLicensesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLicensesResponseSuccess
+
+      interface _ListReceivedGrantsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReceivedGrantsResponse]
+        def grants: () -> ::Array[Types::Grant]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_received_grants-instance_method
+      def list_received_grants: (
+                                  ?grant_arns: Array[::String],
+                                  ?filters: Array[
+                                    {
+                                      name: ::String?,
+                                      values: Array[::String]?
+                                    },
+                                  ],
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListReceivedGrantsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReceivedGrantsResponseSuccess
+
+      interface _ListReceivedGrantsForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReceivedGrantsForOrganizationResponse]
+        def grants: () -> ::Array[Types::Grant]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_received_grants_for_organization-instance_method
+      def list_received_grants_for_organization: (
+                                                   license_arn: ::String,
+                                                   ?filters: Array[
+                                                     {
+                                                       name: ::String?,
+                                                       values: Array[::String]?
+                                                     },
+                                                   ],
+                                                   ?next_token: ::String,
+                                                   ?max_results: ::Integer
+                                                 ) -> _ListReceivedGrantsForOrganizationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReceivedGrantsForOrganizationResponseSuccess
+
+      interface _ListReceivedLicensesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReceivedLicensesResponse]
+        def licenses: () -> ::Array[Types::GrantedLicense]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_received_licenses-instance_method
+      def list_received_licenses: (
+                                    ?license_arns: Array[::String],
+                                    ?filters: Array[
+                                      {
+                                        name: ::String?,
+                                        values: Array[::String]?
+                                      },
+                                    ],
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListReceivedLicensesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReceivedLicensesResponseSuccess
+
+      interface _ListReceivedLicensesForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReceivedLicensesForOrganizationResponse]
+        def licenses: () -> ::Array[Types::GrantedLicense]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_received_licenses_for_organization-instance_method
+      def list_received_licenses_for_organization: (
+                                                     ?filters: Array[
+                                                       {
+                                                         name: ::String?,
+                                                         values: Array[::String]?
+                                                       },
+                                                     ],
+                                                     ?next_token: ::String,
+                                                     ?max_results: ::Integer
+                                                   ) -> _ListReceivedLicensesForOrganizationResponseSuccess
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReceivedLicensesForOrganizationResponseSuccess
+
+      interface _ListResourceInventoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceInventoryResponse]
+        def resource_inventory_list: () -> ::Array[Types::ResourceInventory]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_resource_inventory-instance_method
+      def list_resource_inventory: (
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String,
+                                     ?filters: Array[
+                                       {
+                                         name: ::String,
+                                         condition: ("EQUALS" | "NOT_EQUALS" | "BEGINS_WITH" | "CONTAINS"),
+                                         value: ::String?
+                                       },
+                                     ]
+                                   ) -> _ListResourceInventoryResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceInventoryResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTokensResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTokensResponse]
+        def tokens: () -> ::Array[Types::TokenData]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_tokens-instance_method
+      def list_tokens: (
+                         ?token_ids: Array[::String],
+                         ?filters: Array[
+                           {
+                             name: ::String?,
+                             values: Array[::String]?
+                           },
+                         ],
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListTokensResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTokensResponseSuccess
+
+      interface _ListUsageForLicenseConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUsageForLicenseConfigurationResponse]
+        def license_configuration_usage_list: () -> ::Array[Types::LicenseConfigurationUsage]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#list_usage_for_license_configuration-instance_method
+      def list_usage_for_license_configuration: (
+                                                  license_configuration_arn: ::String,
+                                                  ?max_results: ::Integer,
+                                                  ?next_token: ::String,
+                                                  ?filters: Array[
+                                                    {
+                                                      name: ::String?,
+                                                      values: Array[::String]?
+                                                    },
+                                                  ]
+                                                ) -> _ListUsageForLicenseConfigurationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUsageForLicenseConfigurationResponseSuccess
+
+      interface _RejectGrantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectGrantResponse]
+        def grant_arn: () -> ::String
+        def status: () -> ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")
+        def version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#reject_grant-instance_method
+      def reject_grant: (
+                          grant_arn: ::String
+                        ) -> _RejectGrantResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectGrantResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateLicenseConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLicenseConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#update_license_configuration-instance_method
+      def update_license_configuration: (
+                                          license_configuration_arn: ::String,
+                                          ?license_configuration_status: ("AVAILABLE" | "DISABLED"),
+                                          ?license_rules: Array[::String],
+                                          ?license_count: ::Integer,
+                                          ?license_count_hard_limit: bool,
+                                          ?name: ::String,
+                                          ?description: ::String,
+                                          ?product_information_list: Array[
+                                            {
+                                              resource_type: ::String,
+                                              product_information_filter_list: Array[
+                                                {
+                                                  product_information_filter_name: ::String,
+                                                  product_information_filter_value: Array[::String]?,
+                                                  product_information_filter_comparator: ::String
+                                                },
+                                              ]
+                                            },
+                                          ],
+                                          ?disassociate_when_not_found: bool
+                                        ) -> _UpdateLicenseConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLicenseConfigurationResponseSuccess
+
+      interface _UpdateLicenseManagerReportGeneratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLicenseManagerReportGeneratorResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#update_license_manager_report_generator-instance_method
+      def update_license_manager_report_generator: (
+                                                     license_manager_report_generator_arn: ::String,
+                                                     report_generator_name: ::String,
+                                                     type: Array[("LicenseConfigurationSummaryReport" | "LicenseConfigurationUsageReport")],
+                                                     report_context: {
+                                                       license_configuration_arns: Array[::String]
+                                                     },
+                                                     report_frequency: {
+                                                       value: ::Integer?,
+                                                       period: ("DAY" | "WEEK" | "MONTH")?
+                                                     },
+                                                     client_token: ::String,
+                                                     ?description: ::String
+                                                   ) -> _UpdateLicenseManagerReportGeneratorResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLicenseManagerReportGeneratorResponseSuccess
+
+      interface _UpdateLicenseSpecificationsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLicenseSpecificationsForResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#update_license_specifications_for_resource-instance_method
+      def update_license_specifications_for_resource: (
+                                                        resource_arn: ::String,
+                                                        ?add_license_specifications: Array[
+                                                          {
+                                                            license_configuration_arn: ::String,
+                                                            ami_association_scope: ::String?
+                                                          },
+                                                        ],
+                                                        ?remove_license_specifications: Array[
+                                                          {
+                                                            license_configuration_arn: ::String,
+                                                            ami_association_scope: ::String?
+                                                          },
+                                                        ]
+                                                      ) -> _UpdateLicenseSpecificationsForResourceResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLicenseSpecificationsForResourceResponseSuccess
+
+      interface _UpdateServiceSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceSettingsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManager/Client.html#update_service_settings-instance_method
+      def update_service_settings: (
+                                     ?s3_bucket_arn: ::String,
+                                     ?sns_topic_arn: ::String,
+                                     ?organization_configuration: {
+                                       enable_integration: bool
+                                     },
+                                     ?enable_cross_accounts_discovery: bool
+                                   ) -> _UpdateServiceSettingsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceSettingsResponseSuccess
+    end
+  end
+end
+

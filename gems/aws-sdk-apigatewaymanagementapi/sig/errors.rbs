@@ -1,0 +1,25 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ApiGatewayManagementApi
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ForbiddenException < ::Aws::Errors::ServiceError
+      end
+      class GoneException < ::Aws::Errors::ServiceError
+      end
+      class PayloadTooLargeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

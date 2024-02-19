@@ -1227,6 +1227,15 @@ module Aws::AutoScaling
     #   group: Classic Load Balancer, Application Load Balancer, Gateway Load
     #   Balancer, Network Load Balancer, and VPC Lattice.
     #
+    # @option params [Types::InstanceMaintenancePolicy] :instance_maintenance_policy
+    #   An instance maintenance policy. For more information, see [Set
+    #   instance maintenance policy][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -1394,6 +1403,7 @@ module Aws::AutoScaling
     #               excluded_instance_types: ["ExcludedInstance"],
     #               instance_generations: ["current"], # accepts current, previous
     #               spot_max_price_percentage_over_lowest_price: 1,
+    #               max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #               on_demand_max_price_percentage_over_lowest_price: 1,
     #               bare_metal: "included", # accepts included, excluded, required
     #               burstable_performance: "included", # accepts included, excluded, required
@@ -1487,6 +1497,10 @@ module Aws::AutoScaling
     #         type: "XmlStringMaxLen511",
     #       },
     #     ],
+    #     instance_maintenance_policy: {
+    #       min_healthy_percentage: 1,
+    #       max_healthy_percentage: 1,
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroup AWS API Documentation
@@ -2498,6 +2512,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.instance_generations #=> Array
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.bare_metal #=> String, one of "included", "excluded", "required"
     #   resp.auto_scaling_groups[0].mixed_instances_policy.launch_template.overrides[0].instance_requirements.burstable_performance #=> String, one of "included", "excluded", "required"
@@ -2590,6 +2605,8 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].traffic_sources #=> Array
     #   resp.auto_scaling_groups[0].traffic_sources[0].identifier #=> String
     #   resp.auto_scaling_groups[0].traffic_sources[0].type #=> String
+    #   resp.auto_scaling_groups[0].instance_maintenance_policy.min_healthy_percentage #=> Integer
+    #   resp.auto_scaling_groups[0].instance_maintenance_policy.max_healthy_percentage #=> Integer
     #   resp.next_token #=> String
     #
     #
@@ -2735,7 +2752,7 @@ module Aws::AutoScaling
     end
 
     # Gets information about the instance refreshes for the specified Auto
-    # Scaling group.
+    # Scaling group from the previous six weeks.
     #
     # This operation is part of the [instance refresh feature][1] in Amazon
     # EC2 Auto Scaling, which helps you update instances in your Auto
@@ -2800,6 +2817,7 @@ module Aws::AutoScaling
     #           }, 
     #           auto_rollback: true, 
     #           instance_warmup: 200, 
+    #           max_healthy_percentage: 120, 
     #           min_healthy_percentage: 90, 
     #           scale_in_protected_instances: "Ignore", 
     #           skip_matching: false, 
@@ -2823,6 +2841,7 @@ module Aws::AutoScaling
     #           }, 
     #           auto_rollback: true, 
     #           instance_warmup: 200, 
+    #           max_healthy_percentage: 120, 
     #           min_healthy_percentage: 90, 
     #           scale_in_protected_instances: "Ignore", 
     #           skip_matching: false, 
@@ -2869,6 +2888,7 @@ module Aws::AutoScaling
     #   resp.instance_refreshes[0].preferences.standby_instances #=> String, one of "Terminate", "Ignore", "Wait"
     #   resp.instance_refreshes[0].preferences.alarm_specification.alarms #=> Array
     #   resp.instance_refreshes[0].preferences.alarm_specification.alarms[0] #=> String
+    #   resp.instance_refreshes[0].preferences.max_healthy_percentage #=> Integer
     #   resp.instance_refreshes[0].desired_configuration.launch_template.launch_template_id #=> String
     #   resp.instance_refreshes[0].desired_configuration.launch_template.launch_template_name #=> String
     #   resp.instance_refreshes[0].desired_configuration.launch_template.version #=> String
@@ -2894,6 +2914,7 @@ module Aws::AutoScaling
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.instance_generations #=> Array
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.bare_metal #=> String, one of "included", "excluded", "required"
     #   resp.instance_refreshes[0].desired_configuration.mixed_instances_policy.launch_template.overrides[0].instance_requirements.burstable_performance #=> String, one of "included", "excluded", "required"
@@ -6347,11 +6368,7 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Starts an instance refresh. During an instance refresh, Amazon EC2
-    # Auto Scaling performs a rolling update of instances in an Auto Scaling
-    # group. Instances are terminated first and then replaced, which
-    # temporarily reduces the capacity available within your Auto Scaling
-    # group.
+    # Starts an instance refresh.
     #
     # This operation is part of the [instance refresh feature][1] in Amazon
     # EC2 Auto Scaling, which helps you update instances in your Auto
@@ -6414,10 +6431,10 @@ module Aws::AutoScaling
     # @option params [Types::RefreshPreferences] :preferences
     #   Sets your preferences for the instance refresh so that it performs as
     #   expected when you start it. Includes the instance warmup time, the
-    #   minimum healthy percentage, and the behaviors that you want Amazon EC2
-    #   Auto Scaling to use if instances that are in `Standby` state or
-    #   protected from scale in are found. You can also choose to enable
-    #   additional features, such as the following:
+    #   minimum and maximum healthy percentages, and the behaviors that you
+    #   want Amazon EC2 Auto Scaling to use if instances that are in `Standby`
+    #   state or protected from scale in are found. You can also choose to
+    #   enable additional features, such as the following:
     #
     #   * Auto rollback
     #
@@ -6452,6 +6469,7 @@ module Aws::AutoScaling
     #       }, 
     #       auto_rollback: true, 
     #       instance_warmup: 200, 
+    #       max_healthy_percentage: 120, 
     #       min_healthy_percentage: 90, 
     #     }, 
     #   })
@@ -6505,6 +6523,7 @@ module Aws::AutoScaling
     #                 excluded_instance_types: ["ExcludedInstance"],
     #                 instance_generations: ["current"], # accepts current, previous
     #                 spot_max_price_percentage_over_lowest_price: 1,
+    #                 max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #                 on_demand_max_price_percentage_over_lowest_price: 1,
     #                 bare_metal: "included", # accepts included, excluded, required
     #                 burstable_performance: "included", # accepts included, excluded, required
@@ -6565,6 +6584,7 @@ module Aws::AutoScaling
     #       alarm_specification: {
     #         alarms: ["XmlStringMaxLen255"],
     #       },
+    #       max_healthy_percentage: 1,
     #     },
     #   })
     #
@@ -6986,6 +7006,15 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html
     #
+    # @option params [Types::InstanceMaintenancePolicy] :instance_maintenance_policy
+    #   An instance maintenance policy. For more information, see [Set
+    #   instance maintenance policy][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -7047,6 +7076,7 @@ module Aws::AutoScaling
     #               excluded_instance_types: ["ExcludedInstance"],
     #               instance_generations: ["current"], # accepts current, previous
     #               spot_max_price_percentage_over_lowest_price: 1,
+    #               max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #               on_demand_max_price_percentage_over_lowest_price: 1,
     #               bare_metal: "included", # accepts included, excluded, required
     #               burstable_performance: "included", # accepts included, excluded, required
@@ -7111,6 +7141,10 @@ module Aws::AutoScaling
     #     context: "Context",
     #     desired_capacity_type: "XmlStringMaxLen255",
     #     default_instance_warmup: 1,
+    #     instance_maintenance_policy: {
+    #       min_healthy_percentage: 1,
+    #       max_healthy_percentage: 1,
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroup AWS API Documentation
@@ -7135,7 +7169,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

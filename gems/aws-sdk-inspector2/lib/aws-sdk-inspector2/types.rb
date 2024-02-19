@@ -158,11 +158,13 @@ module Aws::Inspector2
     #   @return [Types::ImageLayerAggregation]
     #
     # @!attribute [rw] lambda_function_aggregation
-    #   Returns an object with findings aggregated by AWS Lambda function.
+    #   Returns an object with findings aggregated by Amazon Web Services
+    #   Lambda function.
     #   @return [Types::LambdaFunctionAggregation]
     #
     # @!attribute [rw] lambda_layer_aggregation
-    #   Returns an object with findings aggregated by AWS Lambda layer.
+    #   Returns an object with findings aggregated by Amazon Web Services
+    #   Lambda layer.
     #   @return [Types::LambdaLayerAggregation]
     #
     # @!attribute [rw] package_aggregation
@@ -249,11 +251,11 @@ module Aws::Inspector2
     #   @return [Types::ImageLayerAggregationResponse]
     #
     # @!attribute [rw] lambda_function_aggregation
-    #   An aggregation of findings by AWS Lambda function.
+    #   An aggregation of findings by Amazon Web Services Lambda function.
     #   @return [Types::LambdaFunctionAggregationResponse]
     #
     # @!attribute [rw] lambda_layer_aggregation
-    #   An aggregation of findings by AWS Lambda layer.
+    #   An aggregation of findings by Amazon Web Services Lambda layer.
     #   @return [Types::LambdaLayerAggregationResponse]
     #
     # @!attribute [rw] package_aggregation
@@ -433,13 +435,14 @@ module Aws::Inspector2
     #   @return [Boolean]
     #
     # @!attribute [rw] lambda
-    #   Represents whether AWS Lambda standard scans are automatically
-    #   enabled for new members of your Amazon Inspector organization.
+    #   Represents whether Amazon Web Services Lambda standard scans are
+    #   automatically enabled for new members of your Amazon Inspector
+    #   organization.
     #   @return [Boolean]
     #
     # @!attribute [rw] lambda_code
-    #   Represents whether AWS Lambda code scans are automatically enabled
-    #   for new members of your Amazon Inspector organization.      </p>
+    #   Represents whether Lambda code scans are automatically enabled for
+    #   new members of your Amazon Inspector organization.      </p>
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AutoEnable AWS API Documentation
@@ -651,24 +654,26 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # A summary of information about the AWS Lambda function.
+    # A summary of information about the Amazon Web Services Lambda
+    # function.
     #
     # @!attribute [rw] architectures
-    #   The instruction set architecture that the AWS Lambda function
-    #   supports. Architecture is a string array with one of the valid
-    #   values. The default architecture value is `x86_64`.
+    #   The instruction set architecture that the Amazon Web Services Lambda
+    #   function supports. Architecture is a string array with one of the
+    #   valid values. The default architecture value is `x86_64`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] code_sha_256
-    #   The SHA256 hash of the AWS Lambda function's deployment package.
+    #   The SHA256 hash of the Amazon Web Services Lambda function's
+    #   deployment package.
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
-    #   The AWS Lambda function's execution role.
+    #   The Amazon Web Services Lambda function's execution role.
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The name of the AWS Lambda function.
+    #   The name of the Amazon Web Services Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_at
@@ -681,8 +686,8 @@ module Aws::Inspector2
     #   @return [Time]
     #
     # @!attribute [rw] layers
-    #   The AWS Lambda function's [ layers][1]. A Lambda function can have
-    #   up to five layers.
+    #   The Amazon Web Services Lambda function's [ layers][1]. A Lambda
+    #   function can have up to five layers.
     #
     #
     #
@@ -695,15 +700,15 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] runtime
-    #   The runtime environment for the AWS Lambda function.
+    #   The runtime environment for the Amazon Web Services Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version of the AWS Lambda function.
+    #   The version of the Amazon Web Services Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] vpc_config
-    #   The AWS Lambda function's networking configuration.
+    #   The Amazon Web Services Lambda function's networking configuration.
     #   @return [Types::LambdaVpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AwsLambdaFunctionDetails AWS API Documentation
@@ -977,6 +982,621 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # A CIS check.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the CIS check.
+    #   @return [String]
+    #
+    # @!attribute [rw] check_description
+    #   The description for the CIS check.
+    #   @return [String]
+    #
+    # @!attribute [rw] check_id
+    #   The check ID for the CIS check.
+    #   @return [String]
+    #
+    # @!attribute [rw] level
+    #   The CIS check level.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The CIS check platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_arn
+    #   The scan ARN for the CIS check scan ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_counts
+    #   The CIS check status counts.
+    #   @return [Types::StatusCounts]
+    #
+    # @!attribute [rw] title
+    #   The CIS check title.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisCheckAggregation AWS API Documentation
+    #
+    class CisCheckAggregation < Struct.new(
+      :account_id,
+      :check_description,
+      :check_id,
+      :level,
+      :platform,
+      :scan_arn,
+      :status_counts,
+      :title)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIS date filter.
+    #
+    # @!attribute [rw] earliest_scan_start_time
+    #   The CIS date filter's earliest scan start time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_scan_start_time
+    #   The CIS date filter's latest scan start time.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisDateFilter AWS API Documentation
+    #
+    class CisDateFilter < Struct.new(
+      :earliest_scan_start_time,
+      :latest_scan_start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIS finding status filter.
+    #
+    # @!attribute [rw] comparison
+    #   The comparison value of the CIS finding status filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the CIS finding status filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisFindingStatusFilter AWS API Documentation
+    #
+    class CisFindingStatusFilter < Struct.new(
+      :comparison,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIS number filter.
+    #
+    # @!attribute [rw] lower_inclusive
+    #   The CIS number filter's lower inclusive.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] upper_inclusive
+    #   The CIS number filter's upper inclusive.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisNumberFilter AWS API Documentation
+    #
+    class CisNumberFilter < Struct.new(
+      :lower_inclusive,
+      :upper_inclusive)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIS result status filter.
+    #
+    # @!attribute [rw] comparison
+    #   The comparison value of the CIS result status filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the CIS result status filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisResultStatusFilter AWS API Documentation
+    #
+    class CisResultStatusFilter < Struct.new(
+      :comparison,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIS scan.
+    #
+    # @!attribute [rw] failed_checks
+    #   The CIS scan's failed checks.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scan_arn
+    #   The CIS scan's ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_configuration_arn
+    #   The CIS scan's configuration ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_date
+    #   The CIS scan's date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scan_name
+    #   The the name of the scan configuration that's associated with this
+    #   scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_by
+    #   The account or organization that schedules the CIS scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_level
+    #   The security level for the CIS scan. Security level refers to the
+    #   Benchmark levels that CIS assigns to a profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The CIS scan's status.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The CIS scan's targets.
+    #   @return [Types::CisTargets]
+    #
+    # @!attribute [rw] total_checks
+    #   The CIS scan's total checks.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisScan AWS API Documentation
+    #
+    class CisScan < Struct.new(
+      :failed_checks,
+      :scan_arn,
+      :scan_configuration_arn,
+      :scan_date,
+      :scan_name,
+      :scheduled_by,
+      :security_level,
+      :status,
+      :targets,
+      :total_checks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIS scan configuration.
+    #
+    # @!attribute [rw] owner_id
+    #   The CIS scan configuration's owner ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_configuration_arn
+    #   The CIS scan configuration's scan configuration ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_name
+    #   The name of the CIS scan configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The CIS scan configuration's schedule.
+    #   @return [Types::Schedule]
+    #
+    # @!attribute [rw] security_level
+    #   The CIS scan configuration's security level.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The CIS scan configuration's tags.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] targets
+    #   The CIS scan configuration's targets.
+    #   @return [Types::CisTargets]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisScanConfiguration AWS API Documentation
+    #
+    class CisScanConfiguration < Struct.new(
+      :owner_id,
+      :scan_configuration_arn,
+      :scan_name,
+      :schedule,
+      :security_level,
+      :tags,
+      :targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIS scan result details.
+    #
+    # @!attribute [rw] account_id
+    #   The CIS scan result details' account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] check_description
+    #   The account ID that's associated with the CIS scan result details.
+    #   @return [String]
+    #
+    # @!attribute [rw] check_id
+    #   The CIS scan result details' check ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_arn
+    #   The CIS scan result details' finding ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] level
+    #   The CIS scan result details' level.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The CIS scan result details' platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation
+    #   The CIS scan result details' remediation.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_arn
+    #   The CIS scan result details' scan ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The CIS scan result details' status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The CIS scan result details' status reason.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_resource_id
+    #   The CIS scan result details' target resource ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The CIS scan result details' title.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisScanResultDetails AWS API Documentation
+    #
+    class CisScanResultDetails < Struct.new(
+      :account_id,
+      :check_description,
+      :check_id,
+      :finding_arn,
+      :level,
+      :platform,
+      :remediation,
+      :scan_arn,
+      :status,
+      :status_reason,
+      :target_resource_id,
+      :title)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIS scan result details filter criteria.
+    #
+    # @!attribute [rw] check_id_filters
+    #   The criteria's check ID filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] finding_arn_filters
+    #   The criteria's finding ARN filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] finding_status_filters
+    #   The criteria's finding status filters.
+    #   @return [Array<Types::CisFindingStatusFilter>]
+    #
+    # @!attribute [rw] security_level_filters
+    #   The criteria's security level filters. . Security level refers to
+    #   the Benchmark levels that CIS assigns to a profile.
+    #   @return [Array<Types::CisSecurityLevelFilter>]
+    #
+    # @!attribute [rw] title_filters
+    #   The criteria's title filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisScanResultDetailsFilterCriteria AWS API Documentation
+    #
+    class CisScanResultDetailsFilterCriteria < Struct.new(
+      :check_id_filters,
+      :finding_arn_filters,
+      :finding_status_filters,
+      :security_level_filters,
+      :title_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scan results aggregated by checks filter criteria.
+    #
+    # @!attribute [rw] account_id_filters
+    #   The criteria's account ID filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] check_id_filters
+    #   The criteria's check ID filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] failed_resources_filters
+    #   The criteria's failed resources filters.
+    #   @return [Array<Types::CisNumberFilter>]
+    #
+    # @!attribute [rw] platform_filters
+    #   The criteria's platform filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] security_level_filters
+    #   The criteria's security level filters.
+    #   @return [Array<Types::CisSecurityLevelFilter>]
+    #
+    # @!attribute [rw] title_filters
+    #   The criteria's title filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisScanResultsAggregatedByChecksFilterCriteria AWS API Documentation
+    #
+    class CisScanResultsAggregatedByChecksFilterCriteria < Struct.new(
+      :account_id_filters,
+      :check_id_filters,
+      :failed_resources_filters,
+      :platform_filters,
+      :security_level_filters,
+      :title_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scan results aggregated by target resource filter criteria.
+    #
+    # @!attribute [rw] account_id_filters
+    #   The criteria's account ID filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] check_id_filters
+    #   The criteria's check ID filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] failed_checks_filters
+    #   The criteria's failed checks filters.
+    #   @return [Array<Types::CisNumberFilter>]
+    #
+    # @!attribute [rw] platform_filters
+    #   The criteria's platform filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] status_filters
+    #   The criteria's status filter.
+    #   @return [Array<Types::CisResultStatusFilter>]
+    #
+    # @!attribute [rw] target_resource_id_filters
+    #   The criteria's target resource ID filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] target_resource_tag_filters
+    #   The criteria's target resource tag filters.
+    #   @return [Array<Types::TagFilter>]
+    #
+    # @!attribute [rw] target_status_filters
+    #   The criteria's target status filters.
+    #   @return [Array<Types::CisTargetStatusFilter>]
+    #
+    # @!attribute [rw] target_status_reason_filters
+    #   The criteria's target status reason filters.
+    #   @return [Array<Types::CisTargetStatusReasonFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisScanResultsAggregatedByTargetResourceFilterCriteria AWS API Documentation
+    #
+    class CisScanResultsAggregatedByTargetResourceFilterCriteria < Struct.new(
+      :account_id_filters,
+      :check_id_filters,
+      :failed_checks_filters,
+      :platform_filters,
+      :status_filters,
+      :target_resource_id_filters,
+      :target_resource_tag_filters,
+      :target_status_filters,
+      :target_status_reason_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIS scan status filter.
+    #
+    # @!attribute [rw] comparison
+    #   The filter comparison value.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The filter value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisScanStatusFilter AWS API Documentation
+    #
+    class CisScanStatusFilter < Struct.new(
+      :comparison,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIS security level filter. Security level refers to the Benchmark
+    # levels that CIS assigns to a profile.
+    #
+    # @!attribute [rw] comparison
+    #   The CIS security filter comparison value.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The CIS security filter value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisSecurityLevelFilter AWS API Documentation
+    #
+    class CisSecurityLevelFilter < Struct.new(
+      :comparison,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIS session message.
+    #
+    # @!attribute [rw] cis_rule_details
+    #   The CIS rule details for the CIS session message.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   The rule ID for the CIS session message.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the CIS session message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisSessionMessage AWS API Documentation
+    #
+    class CisSessionMessage < Struct.new(
+      :cis_rule_details,
+      :rule_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIS string filter.
+    #
+    # @!attribute [rw] comparison
+    #   The comparison value of the CIS string filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the CIS string filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisStringFilter AWS API Documentation
+    #
+    class CisStringFilter < Struct.new(
+      :comparison,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIS target resource aggregation.
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the CIS target resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The platform for the CIS target resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_arn
+    #   The scan ARN for the CIS target resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_counts
+    #   The target resource status counts.
+    #   @return [Types::StatusCounts]
+    #
+    # @!attribute [rw] target_resource_id
+    #   The ID of the target resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_resource_tags
+    #   The tag for the target resource.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] target_status
+    #   The status of the target resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_status_reason
+    #   The reason for the target resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisTargetResourceAggregation AWS API Documentation
+    #
+    class CisTargetResourceAggregation < Struct.new(
+      :account_id,
+      :platform,
+      :scan_arn,
+      :status_counts,
+      :target_resource_id,
+      :target_resource_tags,
+      :target_status,
+      :target_status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIS target status filter.
+    #
+    # @!attribute [rw] comparison
+    #   The comparison value of the CIS target status filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the CIS target status filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisTargetStatusFilter AWS API Documentation
+    #
+    class CisTargetStatusFilter < Struct.new(
+      :comparison,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIS target status reason filter.
+    #
+    # @!attribute [rw] comparison
+    #   The comparison value of the CIS target status reason filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the CIS target status reason filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisTargetStatusReasonFilter AWS API Documentation
+    #
+    class CisTargetStatusReasonFilter < Struct.new(
+      :comparison,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The CIS targets.
+    #
+    # @!attribute [rw] account_ids
+    #   The CIS target account ids.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] target_resource_tags
+    #   The CIS target resource tags.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CisTargets AWS API Documentation
+    #
+    class CisTargets < Struct.new(
+      :account_ids,
+      :target_resource_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Cybersecurity and Infrastructure Security Agency (CISA) details
     # for a specific vulnerability.
     #
@@ -1193,6 +1813,30 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # A compute platform.
+    #
+    # @!attribute [rw] product
+    #   The compute platform product.
+    #   @return [String]
+    #
+    # @!attribute [rw] vendor
+    #   The compute platform vendor.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The compute platform version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ComputePlatform AWS API Documentation
+    #
+    class ComputePlatform < Struct.new(
+      :product,
+      :vendor,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A conflict occurred.
     #
     # @!attribute [rw] message
@@ -1277,19 +1921,23 @@ module Aws::Inspector2
     #   The Amazon ECR repository name to filter on.
     #   @return [Array<Types::CoverageStringFilter>]
     #
+    # @!attribute [rw] image_pulled_at
+    #   The date an image was last pulled at.
+    #   @return [Array<Types::CoverageDateFilter>]
+    #
     # @!attribute [rw] lambda_function_name
-    #   Returns coverage statistics for AWS Lambda functions filtered by
-    #   function names.
+    #   Returns coverage statistics for Amazon Web Services Lambda functions
+    #   filtered by function names.
     #   @return [Array<Types::CoverageStringFilter>]
     #
     # @!attribute [rw] lambda_function_runtime
-    #   Returns coverage statistics for AWS Lambda functions filtered by
-    #   runtime.
+    #   Returns coverage statistics for Amazon Web Services Lambda functions
+    #   filtered by runtime.
     #   @return [Array<Types::CoverageStringFilter>]
     #
     # @!attribute [rw] lambda_function_tags
-    #   Returns coverage statistics for AWS Lambda functions filtered by
-    #   tag.
+    #   Returns coverage statistics for Amazon Web Services Lambda functions
+    #   filtered by tag.
     #   @return [Array<Types::CoverageMapFilter>]
     #
     # @!attribute [rw] last_scanned_at
@@ -1306,7 +1954,8 @@ module Aws::Inspector2
     # @!attribute [rw] resource_type
     #   An array of Amazon Web Services resource types to return coverage
     #   statistics for. The values can be `AWS_EC2_INSTANCE`,
-    #   `AWS_LAMBDA_FUNCTION` or `AWS_ECR_REPOSITORY`.
+    #   `AWS_LAMBDA_FUNCTION`, `AWS_ECR_CONTAINER_IMAGE`,
+    #   `AWS_ECR_REPOSITORY` or `AWS_ACCOUNT`.
     #   @return [Array<Types::CoverageStringFilter>]
     #
     # @!attribute [rw] scan_status_code
@@ -1332,6 +1981,7 @@ module Aws::Inspector2
       :ec2_instance_tags,
       :ecr_image_tags,
       :ecr_repository_name,
+      :image_pulled_at,
       :lambda_function_name,
       :lambda_function_runtime,
       :lambda_function_tags,
@@ -1429,6 +2079,70 @@ module Aws::Inspector2
       :resource_type,
       :scan_status,
       :scan_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_name
+    #   The scan name for the CIS scan configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The schedule for the CIS scan configuration.
+    #   @return [Types::Schedule]
+    #
+    # @!attribute [rw] security_level
+    #   The security level for the CIS scan configuration. Security level
+    #   refers to the Benchmark levels that CIS assigns to a profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the CIS scan configuration.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] targets
+    #   The targets for the CIS scan configuration.
+    #   @return [Types::CreateCisTargets]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateCisScanConfigurationRequest AWS API Documentation
+    #
+    class CreateCisScanConfigurationRequest < Struct.new(
+      :scan_name,
+      :schedule,
+      :security_level,
+      :tags,
+      :targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_configuration_arn
+    #   The scan configuration ARN for the CIS scan configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateCisScanConfigurationResponse AWS API Documentation
+    #
+    class CreateCisScanConfigurationResponse < Struct.new(
+      :scan_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates CIS targets.
+    #
+    # @!attribute [rw] account_ids
+    #   The CIS target account ids.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] target_resource_tags
+    #   The CIS target resource tags.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/CreateCisTargets AWS API Documentation
+    #
+    class CreateCisTargets < Struct.new(
+      :account_ids,
+      :target_resource_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1684,6 +2398,20 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # A daily schedule.
+    #
+    # @!attribute [rw] start_time
+    #   The schedule start time.
+    #   @return [Types::Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DailySchedule AWS API Documentation
+    #
+    class DailySchedule < Struct.new(
+      :start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details on the time range used to filter findings.
     #
     # @!attribute [rw] end_inclusive
@@ -1741,6 +2469,30 @@ module Aws::Inspector2
     class DelegatedAdminAccount < Struct.new(
       :account_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_configuration_arn
+    #   The ARN of the CIS scan configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DeleteCisScanConfigurationRequest AWS API Documentation
+    #
+    class DeleteCisScanConfigurationRequest < Struct.new(
+      :scan_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_configuration_arn
+    #   The ARN of the CIS scan configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DeleteCisScanConfigurationResponse AWS API Documentation
+    #
+    class DeleteCisScanConfigurationResponse < Struct.new(
+      :scan_configuration_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2024,17 +2776,18 @@ module Aws::Inspector2
     # Details about the ECR automated re-scan duration setting for your
     # environment.
     #
+    # @!attribute [rw] pull_date_rescan_duration
+    #   The rescan duration configured for image pull date.
+    #   @return [String]
+    #
     # @!attribute [rw] rescan_duration
-    #   The ECR automated re-scan duration defines how long an ECR image
-    #   will be actively scanned by Amazon Inspector. When the number of
-    #   days since an image was last pushed exceeds the automated re-scan
-    #   duration the monitoring state of that image becomes `inactive` and
-    #   all associated findings are scheduled for closure.
+    #   The rescan duration configured for image push date.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/EcrConfiguration AWS API Documentation
     #
     class EcrConfiguration < Struct.new(
+      :pull_date_rescan_duration,
       :rescan_duration)
       SENSITIVE = []
       include Aws::Structure
@@ -2043,8 +2796,8 @@ module Aws::Inspector2
     # Details about the state of the ECR scans for your environment.
     #
     # @!attribute [rw] rescan_duration_state
-    #   An object that contains details about the state of the ECR automated
-    #   re-scan setting.
+    #   An object that contains details about the state of the ECR re-scan
+    #   settings.
     #   @return [Types::EcrRescanDurationState]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/EcrConfigurationState AWS API Documentation
@@ -2058,6 +2811,10 @@ module Aws::Inspector2
     # Information on the Amazon ECR image metadata associated with a
     # finding.
     #
+    # @!attribute [rw] image_pulled_at
+    #   The date an image was last pulled at.
+    #   @return [Time]
+    #
     # @!attribute [rw] tags
     #   Tags associated with the Amazon ECR image metadata.
     #   @return [Array<String>]
@@ -2065,6 +2822,7 @@ module Aws::Inspector2
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/EcrContainerImageMetadata AWS API Documentation
     #
     class EcrContainerImageMetadata < Struct.new(
+      :image_pulled_at,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2090,15 +2848,20 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # Details about the state of any changes to the ECR automated re-scan
-    # duration setting.
+    # Details about the state of your ECR re-scan duration settings. The ECR
+    # re-scan duration defines how long an ECR image will be actively
+    # scanned by Amazon Inspector. When the number of days since an image
+    # was last pushed exceeds the duration configured for image pull date,
+    # and the duration configured for image pull date, the monitoring state
+    # of that image becomes `inactive` and all associated findings are
+    # scheduled for closure.
+    #
+    # @!attribute [rw] pull_date_rescan_duration
+    #   The rescan duration configured for image pull date.
+    #   @return [String]
     #
     # @!attribute [rw] rescan_duration
-    #   The ECR automated re-scan duration defines how long an ECR image
-    #   will be actively scanned by Amazon Inspector. When the number of
-    #   days since an image was last pushed exceeds the automated re-scan
-    #   duration the monitoring state of that image becomes `inactive` and
-    #   all associated findings are scheduled for closure.
+    #   The rescan duration configured for image push date.      </p>
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2113,6 +2876,7 @@ module Aws::Inspector2
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/EcrRescanDurationState AWS API Documentation
     #
     class EcrRescanDurationState < Struct.new(
+      :pull_date_rescan_duration,
       :rescan_duration,
       :status,
       :updated_at)
@@ -2497,8 +3261,8 @@ module Aws::Inspector2
     #   @return [Array<Types::NumberFilter>]
     #
     # @!attribute [rw] exploit_available
-    #   Filters the list of AWS Lambda findings by the availability of
-    #   exploits.
+    #   Filters the list of Amazon Web Services Lambda findings by the
+    #   availability of exploits.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] finding_arn
@@ -2530,12 +3294,14 @@ module Aws::Inspector2
     #   @return [Array<Types::NumberFilter>]
     #
     # @!attribute [rw] lambda_function_execution_role_arn
-    #   Filters the list of AWS Lambda functions by execution role.
+    #   Filters the list of Amazon Web Services Lambda functions by
+    #   execution role.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] lambda_function_last_modified_at
-    #   Filters the list of AWS Lambda functions by the date and time that a
-    #   user last updated the configuration, in [ISO 8601 format][1]
+    #   Filters the list of Amazon Web Services Lambda functions by the date
+    #   and time that a user last updated the configuration, in [ISO 8601
+    #   format][1]
     #
     #
     #
@@ -2543,8 +3309,9 @@ module Aws::Inspector2
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] lambda_function_layers
-    #   Filters the list of AWS Lambda functions by the function's [
-    #   layers][1]. A Lambda function can have up to five layers.
+    #   Filters the list of Amazon Web Services Lambda functions by the
+    #   function's [ layers][1]. A Lambda function can have up to five
+    #   layers.
     #
     #
     #
@@ -2552,13 +3319,13 @@ module Aws::Inspector2
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] lambda_function_name
-    #   Filters the list of AWS Lambda functions by the name of the
-    #   function.
+    #   Filters the list of Amazon Web Services Lambda functions by the name
+    #   of the function.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] lambda_function_runtime
-    #   Filters the list of AWS Lambda functions by the runtime environment
-    #   for the Lambda function.
+    #   Filters the list of Amazon Web Services Lambda functions by the
+    #   runtime environment for the Lambda function.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] last_observed_at
@@ -3027,6 +3794,107 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @!attribute [rw] scan_arn
+    #   The scan ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_accounts
+    #   The target accounts.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCisScanReportRequest AWS API Documentation
+    #
+    class GetCisScanReportRequest < Struct.new(
+      :scan_arn,
+      :target_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL where the CIS scan report PDF can be downloaded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCisScanReportResponse AWS API Documentation
+    #
+    class GetCisScanReportResponse < Struct.new(
+      :status,
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_id
+    #   The account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_criteria
+    #   The filter criteria.
+    #   @return [Types::CisScanResultDetailsFilterCriteria]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of CIS scan result details to be returned in a
+    #   single page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request that's used to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_arn
+    #   The scan ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The sort by order.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_resource_id
+    #   The target resource ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCisScanResultDetailsRequest AWS API Documentation
+    #
+    class GetCisScanResultDetailsRequest < Struct.new(
+      :account_id,
+      :filter_criteria,
+      :max_results,
+      :next_token,
+      :scan_arn,
+      :sort_by,
+      :sort_order,
+      :target_resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request that's used to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_result_details
+    #   The scan result details.
+    #   @return [Array<Types::CisScanResultDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetCisScanResultDetailsResponse AWS API Documentation
+    #
+    class GetCisScanResultDetailsResponse < Struct.new(
+      :next_token,
+      :scan_result_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetConfigurationRequest AWS API Documentation
@@ -3367,11 +4235,12 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # The details that define a findings aggregation based on AWS Lambda
-    # functions.
+    # The details that define a findings aggregation based on Amazon Web
+    # Services Lambda functions.
     #
     # @!attribute [rw] function_names
-    #   The AWS Lambda function names to include in the aggregation results.
+    #   The Amazon Web Services Lambda function names to include in the
+    #   aggregation results.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] function_tags
@@ -3383,8 +4252,8 @@ module Aws::Inspector2
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] runtimes
-    #   Returns findings aggregated by AWS Lambda function runtime
-    #   environments.
+    #   Returns findings aggregated by Amazon Web Services Lambda function
+    #   runtime environments.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] sort_by
@@ -3408,15 +4277,17 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # A response that contains the results of an AWS Lambda function finding
-    # aggregation.
+    # A response that contains the results of an Amazon Web Services Lambda
+    # function finding aggregation.
     #
     # @!attribute [rw] account_id
-    #   The ID of the AWS account that owns the AWS Lambda function.
+    #   The ID of the Amazon Web Services account that owns the Amazon Web
+    #   Services Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The AWS Lambda function names included in the aggregation results.
+    #   The Amazon Web Services Lambda function names included in the
+    #   aggregation results.
     #   @return [String]
     #
     # @!attribute [rw] lambda_tags
@@ -3424,8 +4295,8 @@ module Aws::Inspector2
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] last_modified_at
-    #   The date that the AWS Lambda function included in the aggregation
-    #   results was last changed.
+    #   The date that the Amazon Web Services Lambda function included in
+    #   the aggregation results was last changed.
     #   @return [Time]
     #
     # @!attribute [rw] resource_id
@@ -3455,23 +4326,23 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # The AWS Lambda function metadata.
+    # The Amazon Web Services Lambda function metadata.
     #
     # @!attribute [rw] function_name
     #   The name of a function.
     #   @return [String]
     #
     # @!attribute [rw] function_tags
-    #   The resource tags on an AWS Lambda function.
+    #   The resource tags on an Amazon Web Services Lambda function.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] layers
-    #   The layers for an AWS Lambda function. A Lambda function can have up
-    #   to five layers.
+    #   The layers for an Amazon Web Services Lambda function. A Lambda
+    #   function can have up to five layers.
     #   @return [Array<String>]
     #
     # @!attribute [rw] runtime
-    #   An AWS Lambda function's runtime.
+    #   An Amazon Web Services Lambda function's runtime.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/LambdaFunctionMetadata AWS API Documentation
@@ -3485,19 +4356,21 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # The details that define a findings aggregation based on an AWS Lambda
-    # function's layers.
+    # The details that define a findings aggregation based on an Amazon Web
+    # Services Lambda function's layers.
     #
     # @!attribute [rw] function_names
-    #   The names of the AWS Lambda functions associated with the layers.
+    #   The names of the Amazon Web Services Lambda functions associated
+    #   with the layers.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] layer_arns
-    #   The Amazon Resource Name (ARN) of the AWS Lambda function layer.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Lambda
+    #   function layer.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] resource_ids
-    #   The resource IDs for the AWS Lambda function layers.
+    #   The resource IDs for the Amazon Web Services Lambda function layers.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] sort_by
@@ -3520,23 +4393,25 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # A response that contains the results of an AWS Lambda function layer
-    # finding aggregation.
+    # A response that contains the results of an Amazon Web Services Lambda
+    # function layer finding aggregation.
     #
     # @!attribute [rw] account_id
-    #   The account ID of the AWS Lambda function layer.
+    #   The account ID of the Amazon Web Services Lambda function layer.
     #   @return [String]
     #
     # @!attribute [rw] function_name
-    #   The names of the AWS Lambda functions associated with the layers.
+    #   The names of the Amazon Web Services Lambda functions associated
+    #   with the layers.
     #   @return [String]
     #
     # @!attribute [rw] layer_arn
-    #   The Amazon Resource Name (ARN) of the AWS Lambda function layer.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Lambda
+    #   function layer.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The Resource ID of the AWS Lambda function layer.
+    #   The Resource ID of the Amazon Web Services Lambda function layer.
     #   @return [String]
     #
     # @!attribute [rw] severity_counts
@@ -3556,16 +4431,17 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
-    # The VPC security groups and subnets that are attached to an AWS Lambda
-    # function. For more information, see [VPC Settings][1].
+    # The VPC security groups and subnets that are attached to an Amazon Web
+    # Services Lambda function. For more information, see [VPC Settings][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
     #
     # @!attribute [rw] security_group_ids
-    #   The VPC security groups and subnets that are attached to an AWS
-    #   Lambda function. For more information, see [VPC Settings][1].
+    #   The VPC security groups and subnets that are attached to an Amazon
+    #   Web Services Lambda function. For more information, see [VPC
+    #   Settings][1].
     #
     #
     #
@@ -3638,6 +4514,311 @@ module Aws::Inspector2
     class ListAccountPermissionsResponse < Struct.new(
       :next_token,
       :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of CIS scan configurations filter criteria.
+    #
+    # @!attribute [rw] scan_configuration_arn_filters
+    #   The list of scan configuration ARN filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] scan_name_filters
+    #   The list of scan name filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] target_resource_tag_filters
+    #   The list of target resource tag filters.
+    #   @return [Array<Types::TagFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScanConfigurationsFilterCriteria AWS API Documentation
+    #
+    class ListCisScanConfigurationsFilterCriteria < Struct.new(
+      :scan_configuration_arn_filters,
+      :scan_name_filters,
+      :target_resource_tag_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter_criteria
+    #   The CIS scan configuration filter criteria.
+    #   @return [Types::ListCisScanConfigurationsFilterCriteria]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of CIS scan configurations to be returned in a
+    #   single page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request that's used to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The CIS scan configuration sort by order.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The CIS scan configuration sort order order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScanConfigurationsRequest AWS API Documentation
+    #
+    class ListCisScanConfigurationsRequest < Struct.new(
+      :filter_criteria,
+      :max_results,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request that's used to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_configurations
+    #   The CIS scan configuration scan configurations.
+    #   @return [Array<Types::CisScanConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScanConfigurationsResponse AWS API Documentation
+    #
+    class ListCisScanConfigurationsResponse < Struct.new(
+      :next_token,
+      :scan_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter_criteria
+    #   The filter criteria.
+    #   @return [Types::CisScanResultsAggregatedByChecksFilterCriteria]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of scan results aggregated by checks to be
+    #   returned in a single page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request that's used to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_arn
+    #   The scan ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The sort by order.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScanResultsAggregatedByChecksRequest AWS API Documentation
+    #
+    class ListCisScanResultsAggregatedByChecksRequest < Struct.new(
+      :filter_criteria,
+      :max_results,
+      :next_token,
+      :scan_arn,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] check_aggregations
+    #   The check aggregations.
+    #   @return [Array<Types::CisCheckAggregation>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request that's used to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScanResultsAggregatedByChecksResponse AWS API Documentation
+    #
+    class ListCisScanResultsAggregatedByChecksResponse < Struct.new(
+      :check_aggregations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter_criteria
+    #   The filter criteria.
+    #   @return [Types::CisScanResultsAggregatedByTargetResourceFilterCriteria]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of scan results aggregated by a target resource
+    #   to be returned in a single page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request that's used to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_arn
+    #   The scan ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The sort by order.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScanResultsAggregatedByTargetResourceRequest AWS API Documentation
+    #
+    class ListCisScanResultsAggregatedByTargetResourceRequest < Struct.new(
+      :filter_criteria,
+      :max_results,
+      :next_token,
+      :scan_arn,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request that's used to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_resource_aggregations
+    #   The resource aggregations.
+    #   @return [Array<Types::CisTargetResourceAggregation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScanResultsAggregatedByTargetResourceResponse AWS API Documentation
+    #
+    class ListCisScanResultsAggregatedByTargetResourceResponse < Struct.new(
+      :next_token,
+      :target_resource_aggregations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of CIS scans filter criteria.
+    #
+    # @!attribute [rw] failed_checks_filters
+    #   The list of failed checks filters.
+    #   @return [Array<Types::CisNumberFilter>]
+    #
+    # @!attribute [rw] scan_arn_filters
+    #   The list of scan ARN filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] scan_at_filters
+    #   The list of scan at filters.
+    #   @return [Array<Types::CisDateFilter>]
+    #
+    # @!attribute [rw] scan_configuration_arn_filters
+    #   The list of scan configuration ARN filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] scan_name_filters
+    #   The list of scan name filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] scan_status_filters
+    #   The list of scan status filters.
+    #   @return [Array<Types::CisScanStatusFilter>]
+    #
+    # @!attribute [rw] scheduled_by_filters
+    #   The list of scheduled by filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] target_account_id_filters
+    #   The list of target account ID filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] target_resource_id_filters
+    #   The list of target resource ID filters.
+    #   @return [Array<Types::CisStringFilter>]
+    #
+    # @!attribute [rw] target_resource_tag_filters
+    #   The list of target resource tag filters.
+    #   @return [Array<Types::TagFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScansFilterCriteria AWS API Documentation
+    #
+    class ListCisScansFilterCriteria < Struct.new(
+      :failed_checks_filters,
+      :scan_arn_filters,
+      :scan_at_filters,
+      :scan_configuration_arn_filters,
+      :scan_name_filters,
+      :scan_status_filters,
+      :scheduled_by_filters,
+      :target_account_id_filters,
+      :target_resource_id_filters,
+      :target_resource_tag_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] detail_level
+    #   The detail applied to the CIS scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_criteria
+    #   The CIS scan filter criteria.
+    #   @return [Types::ListCisScansFilterCriteria]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request that's used to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The CIS scans sort by order.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The CIS scans sort order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScansRequest AWS API Documentation
+    #
+    class ListCisScansRequest < Struct.new(
+      :detail_level,
+      :filter_criteria,
+      :max_results,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous request that's used to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] scans
+    #   The CIS scans.
+    #   @return [Array<Types::CisScan>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCisScansResponse AWS API Documentation
+    #
+    class ListCisScansResponse < Struct.new(
+      :next_token,
+      :scans)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4200,6 +5381,25 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # A monthly schedule.
+    #
+    # @!attribute [rw] day
+    #   The monthly schedule's day.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The monthly schedule's start time.
+    #   @return [Types::Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/MonthlySchedule AWS API Documentation
+    #
+    class MonthlySchedule < Struct.new(
+      :day,
+      :start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information on the network path associated with a finding.
     #
     # @!attribute [rw] steps
@@ -4258,6 +5458,14 @@ module Aws::Inspector2
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # A one time schedule.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/OneTimeSchedule AWS API Documentation
+    #
+    class OneTimeSchedule < Aws::EmptyStructure; end
 
     # The details that define an aggregation based on operating system
     # package type.
@@ -4642,8 +5850,8 @@ module Aws::Inspector2
     #   @return [Types::AwsEcrContainerImageDetails]
     #
     # @!attribute [rw] aws_lambda_function
-    #   A summary of the information about an AWS Lambda function affected
-    #   by a finding.
+    #   A summary of the information about an Amazon Web Services Lambda
+    #   function affected by a finding.
     #   @return [Types::AwsLambdaFunctionDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceDetails AWS API Documentation
@@ -4676,11 +5884,13 @@ module Aws::Inspector2
     #   @return [Array<Types::ResourceStringFilter>]
     #
     # @!attribute [rw] lambda_function_name
-    #   The AWS Lambda function name used as resource filter criteria.
+    #   The Amazon Web Services Lambda function name used as resource filter
+    #   criteria.
     #   @return [Array<Types::ResourceStringFilter>]
     #
     # @!attribute [rw] lambda_function_tags
-    #   The AWS Lambda function tags used as resource filter criteria.
+    #   The Amazon Web Services Lambda function tags used as resource filter
+    #   criteria.
     #   @return [Array<Types::ResourceMapFilter>]
     #
     # @!attribute [rw] resource_id
@@ -4762,7 +5972,8 @@ module Aws::Inspector2
     #   @return [Types::EcrRepositoryMetadata]
     #
     # @!attribute [rw] lambda_function
-    #   An object that contains metadata details for an AWS Lambda function.
+    #   An object that contains metadata details for an Amazon Web Services
+    #   Lambda function.
     #   @return [Types::LambdaFunctionMetadata]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceScanMetadata AWS API Documentation
@@ -4822,7 +6033,8 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] lambda
-    #   The status of Amazon Inspector scanning for AWS Lambda function.
+    #   The status of Amazon Inspector scanning for Amazon Web Services
+    #   Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] lambda_code
@@ -4987,6 +6199,47 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # A schedule.
+    #
+    # @note Schedule is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Schedule is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Schedule corresponding to the set member.
+    #
+    # @!attribute [rw] daily
+    #   The schedule's daily.
+    #   @return [Types::DailySchedule]
+    #
+    # @!attribute [rw] monthly
+    #   The schedule's monthly.
+    #   @return [Types::MonthlySchedule]
+    #
+    # @!attribute [rw] one_time
+    #   The schedule's one time.
+    #   @return [Types::OneTimeSchedule]
+    #
+    # @!attribute [rw] weekly
+    #   The schedule's weekly.
+    #   @return [Types::WeeklySchedule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Schedule AWS API Documentation
+    #
+    class Schedule < Struct.new(
+      :daily,
+      :monthly,
+      :one_time,
+      :weekly,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Daily < Schedule; end
+      class Monthly < Schedule; end
+      class OneTime < Schedule; end
+      class Weekly < Schedule; end
+      class Unknown < Schedule; end
+    end
+
     # Details on the criteria used to define the filter for a vulnerability
     # search.
     #
@@ -5040,6 +6293,53 @@ module Aws::Inspector2
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] scan_job_id
+    #   A unique identifier for the scan job.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_token
+    #   The unique token that identifies the CIS session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SendCisSessionHealthRequest AWS API Documentation
+    #
+    class SendCisSessionHealthRequest < Struct.new(
+      :scan_job_id,
+      :session_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SendCisSessionHealthResponse AWS API Documentation
+    #
+    class SendCisSessionHealthResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] messages
+    #   The CIS session telemetry messages.
+    #   @return [Array<Types::CisSessionMessage>]
+    #
+    # @!attribute [rw] scan_job_id
+    #   A unique identifier for the scan job.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_token
+    #   The unique token that identifies the CIS session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SendCisSessionTelemetryRequest AWS API Documentation
+    #
+    class SendCisSessionTelemetryRequest < Struct.new(
+      :messages,
+      :scan_job_id,
+      :session_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/SendCisSessionTelemetryResponse AWS API Documentation
+    #
+    class SendCisSessionTelemetryResponse < Aws::EmptyStructure; end
 
     # You have exceeded your service quota. To perform the requested action,
     # remove some of the relevant resources, or use Service Quotas to
@@ -5109,6 +6409,41 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # The start CIS session message.
+    #
+    # @!attribute [rw] session_token
+    #   The unique token that identifies the CIS session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StartCisSessionMessage AWS API Documentation
+    #
+    class StartCisSessionMessage < Struct.new(
+      :session_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   The start CIS session message.
+    #   @return [Types::StartCisSessionMessage]
+    #
+    # @!attribute [rw] scan_job_id
+    #   A unique identifier for the scan job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StartCisSessionRequest AWS API Documentation
+    #
+    class StartCisSessionRequest < Struct.new(
+      :message,
+      :scan_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StartCisSessionResponse AWS API Documentation
+    #
+    class StartCisSessionResponse < Aws::EmptyStructure; end
+
     # An object that described the state of Amazon Inspector scans for an
     # account.
     #
@@ -5136,6 +6471,30 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # The status counts.
+    #
+    # @!attribute [rw] failed
+    #   The number of checks that failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] passed
+    #   The number of checks that passed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] skipped
+    #   The number of checks that were skipped.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StatusCounts AWS API Documentation
+    #
+    class StatusCounts < Struct.new(
+      :failed,
+      :passed,
+      :skipped)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the step associated with a finding.
     #
     # @!attribute [rw] component_id
@@ -5154,6 +6513,120 @@ module Aws::Inspector2
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The stop CIS message progress.
+    #
+    # @!attribute [rw] error_checks
+    #   The progress' error checks.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_checks
+    #   The progress' failed checks.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] informational_checks
+    #   The progress' informational checks.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] not_applicable_checks
+    #   The progress' not applicable checks.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] not_evaluated_checks
+    #   The progress' not evaluated checks.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] successful_checks
+    #   The progress' successful checks.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_checks
+    #   The progress' total checks.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unknown_checks
+    #   The progress' unknown checks.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StopCisMessageProgress AWS API Documentation
+    #
+    class StopCisMessageProgress < Struct.new(
+      :error_checks,
+      :failed_checks,
+      :informational_checks,
+      :not_applicable_checks,
+      :not_evaluated_checks,
+      :successful_checks,
+      :total_checks,
+      :unknown_checks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The stop CIS session message.
+    #
+    # @!attribute [rw] benchmark_profile
+    #   The message benchmark profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] benchmark_version
+    #   The message benchmark version.
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_platform
+    #   The message compute platform.
+    #   @return [Types::ComputePlatform]
+    #
+    # @!attribute [rw] progress
+    #   The progress of the message.
+    #   @return [Types::StopCisMessageProgress]
+    #
+    # @!attribute [rw] reason
+    #   The reason for the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StopCisSessionMessage AWS API Documentation
+    #
+    class StopCisSessionMessage < Struct.new(
+      :benchmark_profile,
+      :benchmark_version,
+      :compute_platform,
+      :progress,
+      :reason,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   The stop CIS session message.
+    #   @return [Types::StopCisSessionMessage]
+    #
+    # @!attribute [rw] scan_job_id
+    #   A unique identifier for the scan job.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_token
+    #   The unique token that identifies the CIS session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StopCisSessionRequest AWS API Documentation
+    #
+    class StopCisSessionRequest < Struct.new(
+      :message,
+      :scan_job_id,
+      :session_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StopCisSessionResponse AWS API Documentation
+    #
+    class StopCisSessionResponse < Aws::EmptyStructure; end
 
     # An object that describes the details of a string filter.
     #
@@ -5193,6 +6666,30 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # The tag filter.
+    #
+    # @!attribute [rw] comparison
+    #   The tag filter comparison value.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The tag filter key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag filter value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/TagFilter AWS API Documentation
+    #
+    class TagFilter < Struct.new(
+      :comparison,
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to apply a tag to.
     #   @return [String]
@@ -5228,6 +6725,25 @@ module Aws::Inspector2
     class ThrottlingException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The time.
+    #
+    # @!attribute [rw] time_of_day
+    #   The time of day in 24-hour format (00:00).
+    #   @return [String]
+    #
+    # @!attribute [rw] timezone
+    #   The timezone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Time AWS API Documentation
+    #
+    class Time < Struct.new(
+      :time_of_day,
+      :timezone)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5322,6 +6838,70 @@ module Aws::Inspector2
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] scan_configuration_arn
+    #   The CIS scan configuration ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_name
+    #   The scan name for the CIS scan configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule
+    #   The schedule for the CIS scan configuration.
+    #   @return [Types::Schedule]
+    #
+    # @!attribute [rw] security_level
+    #   The security level for the CIS scan configuration. Security level
+    #   refers to the Benchmark levels that CIS assigns to a profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The targets for the CIS scan configuration.
+    #   @return [Types::UpdateCisTargets]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateCisScanConfigurationRequest AWS API Documentation
+    #
+    class UpdateCisScanConfigurationRequest < Struct.new(
+      :scan_configuration_arn,
+      :scan_name,
+      :schedule,
+      :security_level,
+      :targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_configuration_arn
+    #   The CIS scan configuration ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateCisScanConfigurationResponse AWS API Documentation
+    #
+    class UpdateCisScanConfigurationResponse < Struct.new(
+      :scan_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updates CIS targets.
+    #
+    # @!attribute [rw] account_ids
+    #   The target account ids.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] target_resource_tags
+    #   The target resource tags.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateCisTargets AWS API Documentation
+    #
+    class UpdateCisTargets < Struct.new(
+      :account_ids,
+      :target_resource_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] ecr_configuration
     #   Specifies how the ECR automated re-scan will be updated for your
@@ -5746,8 +7326,8 @@ module Aws::Inspector2
     #   @return [String]
     #
     # @!attribute [rw] source_lambda_layer_arn
-    #   The Amazon Resource Number (ARN) of the AWS Lambda function affected
-    #   by a finding.
+    #   The Amazon Resource Number (ARN) of the Amazon Web Services Lambda
+    #   function affected by a finding.
     #   @return [String]
     #
     # @!attribute [rw] source_layer_hash
@@ -5772,6 +7352,25 @@ module Aws::Inspector2
       :source_lambda_layer_arn,
       :source_layer_hash,
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A weekly schedule.
+    #
+    # @!attribute [rw] days
+    #   The weekly schedule's days.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] start_time
+    #   The weekly schedule's start time.
+    #   @return [Types::Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/WeeklySchedule AWS API Documentation
+    #
+    class WeeklySchedule < Struct.new(
+      :days,
+      :start_time)
       SENSITIVE = []
       include Aws::Structure
     end

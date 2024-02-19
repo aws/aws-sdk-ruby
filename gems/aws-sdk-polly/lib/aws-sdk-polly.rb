@@ -52,6 +52,6 @@ require_relative 'aws-sdk-polly/customizations'
 # @!group service
 module Aws::Polly
 
-  GEM_VERSION = '1.76.0'
+  GEM_VERSION = '1.82.0'
 
 end

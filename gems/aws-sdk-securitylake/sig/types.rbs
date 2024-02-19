@@ -1,0 +1,577 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SecurityLake
+  module Types
+
+    class AccessDeniedException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AwsIdentity
+      attr_accessor external_id: ::String
+      attr_accessor principal: ::String
+      SENSITIVE: []
+    end
+
+    class AwsLogSourceConfiguration
+      attr_accessor accounts: ::Array[::String]
+      attr_accessor regions: ::Array[::String]
+      attr_accessor source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA")
+      attr_accessor source_version: ::String
+      SENSITIVE: []
+    end
+
+    class AwsLogSourceResource
+      attr_accessor source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA")
+      attr_accessor source_version: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAwsLogSourceRequest
+      attr_accessor sources: ::Array[Types::AwsLogSourceConfiguration]
+      SENSITIVE: []
+    end
+
+    class CreateAwsLogSourceResponse
+      attr_accessor failed: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateCustomLogSourceRequest
+      attr_accessor configuration: Types::CustomLogSourceConfiguration
+      attr_accessor event_classes: ::Array[::String]
+      attr_accessor source_name: ::String
+      attr_accessor source_version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomLogSourceResponse
+      attr_accessor source: Types::CustomLogSourceResource
+      SENSITIVE: []
+    end
+
+    class CreateDataLakeExceptionSubscriptionRequest
+      attr_accessor exception_time_to_live: ::Integer
+      attr_accessor notification_endpoint: ::String
+      attr_accessor subscription_protocol: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDataLakeExceptionSubscriptionResponse < Aws::EmptyStructure
+    end
+
+    class CreateDataLakeOrganizationConfigurationRequest
+      attr_accessor auto_enable_new_account: ::Array[Types::DataLakeAutoEnableNewAccountConfiguration]
+      SENSITIVE: []
+    end
+
+    class CreateDataLakeOrganizationConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class CreateDataLakeRequest
+      attr_accessor configurations: ::Array[Types::DataLakeConfiguration]
+      attr_accessor meta_store_manager_role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDataLakeResponse
+      attr_accessor data_lakes: ::Array[Types::DataLakeResource]
+      SENSITIVE: []
+    end
+
+    class CreateSubscriberNotificationRequest
+      attr_accessor configuration: Types::NotificationConfiguration
+      attr_accessor subscriber_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSubscriberNotificationResponse
+      attr_accessor subscriber_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSubscriberRequest
+      attr_accessor access_types: ::Array[("LAKEFORMATION" | "S3")]
+      attr_accessor sources: ::Array[Types::LogSourceResource]
+      attr_accessor subscriber_description: ::String
+      attr_accessor subscriber_identity: Types::AwsIdentity
+      attr_accessor subscriber_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateSubscriberResponse
+      attr_accessor subscriber: Types::SubscriberResource
+      SENSITIVE: []
+    end
+
+    class CustomLogSourceAttributes
+      attr_accessor crawler_arn: ::String
+      attr_accessor database_arn: ::String
+      attr_accessor table_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomLogSourceConfiguration
+      attr_accessor crawler_configuration: Types::CustomLogSourceCrawlerConfiguration
+      attr_accessor provider_identity: Types::AwsIdentity
+      SENSITIVE: []
+    end
+
+    class CustomLogSourceCrawlerConfiguration
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomLogSourceProvider
+      attr_accessor location: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomLogSourceResource
+      attr_accessor attributes: Types::CustomLogSourceAttributes
+      attr_accessor provider: Types::CustomLogSourceProvider
+      attr_accessor source_name: ::String
+      attr_accessor source_version: ::String
+      SENSITIVE: []
+    end
+
+    class DataLakeAutoEnableNewAccountConfiguration
+      attr_accessor region: ::String
+      attr_accessor sources: ::Array[Types::AwsLogSourceResource]
+      SENSITIVE: []
+    end
+
+    class DataLakeConfiguration
+      attr_accessor encryption_configuration: Types::DataLakeEncryptionConfiguration
+      attr_accessor lifecycle_configuration: Types::DataLakeLifecycleConfiguration
+      attr_accessor region: ::String
+      attr_accessor replication_configuration: Types::DataLakeReplicationConfiguration
+      SENSITIVE: []
+    end
+
+    class DataLakeEncryptionConfiguration
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class DataLakeException
+      attr_accessor exception: ::String
+      attr_accessor region: ::String
+      attr_accessor remediation: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DataLakeLifecycleConfiguration
+      attr_accessor expiration: Types::DataLakeLifecycleExpiration
+      attr_accessor transitions: ::Array[Types::DataLakeLifecycleTransition]
+      SENSITIVE: []
+    end
+
+    class DataLakeLifecycleExpiration
+      attr_accessor days: ::Integer
+      SENSITIVE: []
+    end
+
+    class DataLakeLifecycleTransition
+      attr_accessor days: ::Integer
+      attr_accessor storage_class: ::String
+      SENSITIVE: []
+    end
+
+    class DataLakeReplicationConfiguration
+      attr_accessor regions: ::Array[::String]
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataLakeResource
+      attr_accessor create_status: ("INITIALIZED" | "PENDING" | "COMPLETED" | "FAILED")
+      attr_accessor data_lake_arn: ::String
+      attr_accessor encryption_configuration: Types::DataLakeEncryptionConfiguration
+      attr_accessor lifecycle_configuration: Types::DataLakeLifecycleConfiguration
+      attr_accessor region: ::String
+      attr_accessor replication_configuration: Types::DataLakeReplicationConfiguration
+      attr_accessor s3_bucket_arn: ::String
+      attr_accessor update_status: Types::DataLakeUpdateStatus
+      SENSITIVE: []
+    end
+
+    class DataLakeSource
+      attr_accessor account: ::String
+      attr_accessor event_classes: ::Array[::String]
+      attr_accessor source_name: ::String
+      attr_accessor source_statuses: ::Array[Types::DataLakeSourceStatus]
+      SENSITIVE: []
+    end
+
+    class DataLakeSourceStatus
+      attr_accessor resource: ::String
+      attr_accessor status: ("COLLECTING" | "MISCONFIGURED" | "NOT_COLLECTING")
+      SENSITIVE: []
+    end
+
+    class DataLakeUpdateException
+      attr_accessor code: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class DataLakeUpdateStatus
+      attr_accessor exception: Types::DataLakeUpdateException
+      attr_accessor request_id: ::String
+      attr_accessor status: ("INITIALIZED" | "PENDING" | "COMPLETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteAwsLogSourceRequest
+      attr_accessor sources: ::Array[Types::AwsLogSourceConfiguration]
+      SENSITIVE: []
+    end
+
+    class DeleteAwsLogSourceResponse
+      attr_accessor failed: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteCustomLogSourceRequest
+      attr_accessor source_name: ::String
+      attr_accessor source_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomLogSourceResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDataLakeExceptionSubscriptionRequest < Aws::EmptyStructure
+    end
+
+    class DeleteDataLakeExceptionSubscriptionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDataLakeOrganizationConfigurationRequest
+      attr_accessor auto_enable_new_account: ::Array[Types::DataLakeAutoEnableNewAccountConfiguration]
+      SENSITIVE: []
+    end
+
+    class DeleteDataLakeOrganizationConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDataLakeRequest
+      attr_accessor regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteDataLakeResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSubscriberNotificationRequest
+      attr_accessor subscriber_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSubscriberNotificationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSubscriberRequest
+      attr_accessor subscriber_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSubscriberResponse < Aws::EmptyStructure
+    end
+
+    class DeregisterDataLakeDelegatedAdministratorRequest < Aws::EmptyStructure
+    end
+
+    class DeregisterDataLakeDelegatedAdministratorResponse < Aws::EmptyStructure
+    end
+
+    class GetDataLakeExceptionSubscriptionRequest < Aws::EmptyStructure
+    end
+
+    class GetDataLakeExceptionSubscriptionResponse
+      attr_accessor exception_time_to_live: ::Integer
+      attr_accessor notification_endpoint: ::String
+      attr_accessor subscription_protocol: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataLakeOrganizationConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class GetDataLakeOrganizationConfigurationResponse
+      attr_accessor auto_enable_new_account: ::Array[Types::DataLakeAutoEnableNewAccountConfiguration]
+      SENSITIVE: []
+    end
+
+    class GetDataLakeSourcesRequest
+      attr_accessor accounts: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataLakeSourcesResponse
+      attr_accessor data_lake_arn: ::String
+      attr_accessor data_lake_sources: ::Array[Types::DataLakeSource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriberRequest
+      attr_accessor subscriber_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriberResponse
+      attr_accessor subscriber: Types::SubscriberResource
+      SENSITIVE: []
+    end
+
+    class HttpsNotificationConfiguration
+      attr_accessor authorization_api_key_name: ::String
+      attr_accessor authorization_api_key_value: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor http_method: ("POST" | "PUT")
+      attr_accessor target_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataLakeExceptionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListDataLakeExceptionsResponse
+      attr_accessor exceptions: ::Array[Types::DataLakeException]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataLakesRequest
+      attr_accessor regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListDataLakesResponse
+      attr_accessor data_lakes: ::Array[Types::DataLakeResource]
+      SENSITIVE: []
+    end
+
+    class ListLogSourcesRequest
+      attr_accessor accounts: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor regions: ::Array[::String]
+      attr_accessor sources: ::Array[Types::LogSourceResource]
+      SENSITIVE: []
+    end
+
+    class ListLogSourcesResponse
+      attr_accessor next_token: ::String
+      attr_accessor sources: ::Array[Types::LogSource]
+      SENSITIVE: []
+    end
+
+    class ListSubscribersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscribersResponse
+      attr_accessor next_token: ::String
+      attr_accessor subscribers: ::Array[Types::SubscriberResource]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class LogSource
+      attr_accessor account: ::String
+      attr_accessor region: ::String
+      attr_accessor sources: ::Array[Types::LogSourceResource]
+      SENSITIVE: []
+    end
+
+    class LogSourceResource
+      attr_accessor aws_log_source: Types::AwsLogSourceResource
+      attr_accessor custom_log_source: Types::CustomLogSourceResource
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AwsLogSource < LogSourceResource
+      end
+      class CustomLogSource < LogSourceResource
+      end
+      class Unknown < LogSourceResource
+      end
+    end
+
+    class NotificationConfiguration
+      attr_accessor https_notification_configuration: Types::HttpsNotificationConfiguration
+      attr_accessor sqs_notification_configuration: Types::SqsNotificationConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class HttpsNotificationConfiguration < NotificationConfiguration
+      end
+      class SqsNotificationConfiguration < NotificationConfiguration
+      end
+      class Unknown < NotificationConfiguration
+      end
+    end
+
+    class RegisterDataLakeDelegatedAdministratorRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterDataLakeDelegatedAdministratorResponse < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class SqsNotificationConfiguration < Aws::EmptyStructure
+    end
+
+    class SubscriberResource
+      attr_accessor access_types: ::Array[("LAKEFORMATION" | "S3")]
+      attr_accessor created_at: ::Time
+      attr_accessor resource_share_arn: ::String
+      attr_accessor resource_share_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor s3_bucket_arn: ::String
+      attr_accessor sources: ::Array[Types::LogSourceResource]
+      attr_accessor subscriber_arn: ::String
+      attr_accessor subscriber_description: ::String
+      attr_accessor subscriber_endpoint: ::String
+      attr_accessor subscriber_id: ::String
+      attr_accessor subscriber_identity: Types::AwsIdentity
+      attr_accessor subscriber_name: ::String
+      attr_accessor subscriber_status: ("ACTIVE" | "DEACTIVATED" | "PENDING" | "READY")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDataLakeExceptionSubscriptionRequest
+      attr_accessor exception_time_to_live: ::Integer
+      attr_accessor notification_endpoint: ::String
+      attr_accessor subscription_protocol: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDataLakeExceptionSubscriptionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDataLakeRequest
+      attr_accessor configurations: ::Array[Types::DataLakeConfiguration]
+      SENSITIVE: []
+    end
+
+    class UpdateDataLakeResponse
+      attr_accessor data_lakes: ::Array[Types::DataLakeResource]
+      SENSITIVE: []
+    end
+
+    class UpdateSubscriberNotificationRequest
+      attr_accessor configuration: Types::NotificationConfiguration
+      attr_accessor subscriber_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSubscriberNotificationResponse
+      attr_accessor subscriber_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSubscriberRequest
+      attr_accessor sources: ::Array[Types::LogSourceResource]
+      attr_accessor subscriber_description: ::String
+      attr_accessor subscriber_id: ::String
+      attr_accessor subscriber_identity: Types::AwsIdentity
+      attr_accessor subscriber_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSubscriberResponse
+      attr_accessor subscriber: Types::SubscriberResource
+      SENSITIVE: []
+    end
+  end
+end

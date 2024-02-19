@@ -511,6 +511,10 @@ module Aws::MediaTailor
     # @option params [String] :tier
     #   The tier of the channel.
     #
+    # @option params [Types::TimeShiftConfiguration] :time_shift_configuration
+    #   The time-shifted viewing configuration you want to associate to the
+    #   channel.
+    #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#arn #arn} => String
@@ -523,6 +527,7 @@ module Aws::MediaTailor
     #   * {Types::CreateChannelResponse#playback_mode #playback_mode} => String
     #   * {Types::CreateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::CreateChannelResponse#tier #tier} => String
+    #   * {Types::CreateChannelResponse#time_shift_configuration #time_shift_configuration} => Types::TimeShiftConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -553,6 +558,9 @@ module Aws::MediaTailor
     #       "__string" => "__string",
     #     },
     #     tier: "BASIC", # accepts BASIC, STANDARD
+    #     time_shift_configuration: {
+    #       max_time_delay_seconds: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -579,6 +587,7 @@ module Aws::MediaTailor
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #   resp.tier #=> String
+    #   resp.time_shift_configuration.max_time_delay_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateChannel AWS API Documentation
     #
@@ -809,7 +818,7 @@ module Aws::MediaTailor
     #           },
     #         ],
     #         message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT, TIME_SIGNAL
-    #         offset_millis: 1,
+    #         offset_millis: 1, # required
     #         slate: {
     #           source_location_name: "__string",
     #           vod_source_name: "__string",
@@ -1318,6 +1327,7 @@ module Aws::MediaTailor
     #   * {Types::DescribeChannelResponse#playback_mode #playback_mode} => String
     #   * {Types::DescribeChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeChannelResponse#tier #tier} => String
+    #   * {Types::DescribeChannelResponse#time_shift_configuration #time_shift_configuration} => Types::TimeShiftConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -1351,6 +1361,7 @@ module Aws::MediaTailor
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #   resp.tier #=> String
+    #   resp.time_shift_configuration.max_time_delay_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeChannel AWS API Documentation
     #
@@ -2686,6 +2697,10 @@ module Aws::MediaTailor
     # @option params [required, Array<Types::RequestOutputItem>] :outputs
     #   The channel's output properties.
     #
+    # @option params [Types::TimeShiftConfiguration] :time_shift_configuration
+    #   The time-shifted viewing configuration you want to associate to the
+    #   channel.
+    #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateChannelResponse#arn #arn} => String
@@ -2698,6 +2713,7 @@ module Aws::MediaTailor
     #   * {Types::UpdateChannelResponse#playback_mode #playback_mode} => String
     #   * {Types::UpdateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::UpdateChannelResponse#tier #tier} => String
+    #   * {Types::UpdateChannelResponse#time_shift_configuration #time_shift_configuration} => Types::TimeShiftConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -2723,6 +2739,9 @@ module Aws::MediaTailor
     #         source_group: "__string", # required
     #       },
     #     ],
+    #     time_shift_configuration: {
+    #       max_time_delay_seconds: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2749,6 +2768,7 @@ module Aws::MediaTailor
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
     #   resp.tier #=> String
+    #   resp.time_shift_configuration.max_time_delay_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateChannel AWS API Documentation
     #
@@ -2858,7 +2878,7 @@ module Aws::MediaTailor
     #           },
     #         ],
     #         message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT, TIME_SIGNAL
-    #         offset_millis: 1,
+    #         offset_millis: 1, # required
     #         slate: {
     #           source_location_name: "__string",
     #           vod_source_name: "__string",
@@ -3103,7 +3123,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

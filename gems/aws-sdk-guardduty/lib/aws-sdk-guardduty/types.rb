@@ -151,7 +151,7 @@ module Aws::GuardDuty
     class AccountDetail < Struct.new(
       :account_id,
       :email)
-      SENSITIVE = []
+      SENSITIVE = [:email]
       include Aws::Structure
     end
 
@@ -230,6 +230,20 @@ module Aws::GuardDuty
     #   finding.
     #   @return [Types::RdsLoginAttemptAction]
     #
+    # @!attribute [rw] kubernetes_permission_checked_details
+    #   Information whether the user has the permission to use a specific
+    #   Kubernetes API.
+    #   @return [Types::KubernetesPermissionCheckedDetails]
+    #
+    # @!attribute [rw] kubernetes_role_binding_details
+    #   Information about the role binding that grants the permission
+    #   defined in a Kubernetes role.
+    #   @return [Types::KubernetesRoleBindingDetails]
+    #
+    # @!attribute [rw] kubernetes_role_details
+    #   Information about the Kubernetes role name and role type.
+    #   @return [Types::KubernetesRoleDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Action AWS API Documentation
     #
     class Action < Struct.new(
@@ -239,7 +253,10 @@ module Aws::GuardDuty
       :network_connection_action,
       :port_probe_action,
       :kubernetes_api_call_action,
-      :rds_login_attempt_action)
+      :rds_login_attempt_action,
+      :kubernetes_permission_checked_details,
+      :kubernetes_role_binding_details,
+      :kubernetes_role_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -311,6 +328,79 @@ module Aws::GuardDuty
       :invitation_id,
       :relationship_status,
       :invited_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the installed GuardDuty security agent.
+    #
+    # @!attribute [rw] version
+    #   Version of the installed GuardDuty security agent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AgentDetails AWS API Documentation
+    #
+    class AgentDetails < Struct.new(
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the anomalies.
+    #
+    # @!attribute [rw] profiles
+    #   Information about the types of profiles.
+    #   @return [Hash<String,Hash<String,Array<Types::AnomalyObject>>>]
+    #
+    # @!attribute [rw] unusual
+    #   Information about the behavior of the anomalies.
+    #   @return [Types::AnomalyUnusual]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Anomaly AWS API Documentation
+    #
+    class Anomaly < Struct.new(
+      :profiles,
+      :unusual)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the unusual anomalies.
+    #
+    # @!attribute [rw] profile_type
+    #   The type of behavior of the profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_subtype
+    #   The frequency of the anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] observations
+    #   The recorded value.
+    #   @return [Types::Observations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AnomalyObject AWS API Documentation
+    #
+    class AnomalyObject < Struct.new(
+      :profile_type,
+      :profile_subtype,
+      :observations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the behavior of the anomaly that is new to
+    # GuardDuty.
+    #
+    # @!attribute [rw] behavior
+    #   The behavior of the anomalous activity that caused GuardDuty to
+    #   generate the finding.
+    #   @return [Hash<String,Hash<String,Types::AnomalyObject>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AnomalyUnusual AWS API Documentation
+    #
+    class AnomalyUnusual < Struct.new(
+      :behavior)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -677,6 +767,27 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the Amazon EC2 instance that is running the
+    # Amazon ECS container.
+    #
+    # @!attribute [rw] covered_container_instances
+    #   Represents the nodes in the Amazon ECS cluster that has a `HEALTHY`
+    #   coverage status.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compatible_container_instances
+    #   Represents total number of nodes in the Amazon ECS cluster.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ContainerInstanceDetails AWS API Documentation
+    #
+    class ContainerInstanceDetails < Struct.new(
+      :covered_container_instances,
+      :compatible_container_instances)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the country where the remote IP address is
     # located.
     #
@@ -693,6 +804,92 @@ module Aws::GuardDuty
     class Country < Struct.new(
       :country_code,
       :country_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # <note markdown="1"> This API is also used when you use GuardDuty Runtime Monitoring for
+    # your Amazon EC2 instances (currently in preview release) and is
+    # subject to change. The use of this API is subject to Section 2 of the
+    # [Amazon Web Services Service Terms][1] ("Betas and Previews").
+    #
+    #  </note>
+    #
+    # Contains information about the Amazon EC2 instance runtime coverage
+    # details.
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/service-terms/
+    #
+    # @!attribute [rw] instance_id
+    #   The Amazon EC2 instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type of the Amazon EC2 instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The cluster ARN of the Amazon ECS cluster running on the Amazon EC2
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_details
+    #   Information about the installed security agent.
+    #   @return [Types::AgentDetails]
+    #
+    # @!attribute [rw] management_type
+    #   Indicates how the GuardDuty security agent is managed for this
+    #   resource.
+    #
+    #   * `AUTO_MANAGED` indicates that GuardDuty deploys and manages
+    #     updates for this resource.
+    #
+    #   * `MANUAL` indicates that you are responsible to deploy, update, and
+    #     manage the GuardDuty security agent updates for this resource.
+    #
+    #   <note markdown="1"> The `DISABLED` status doesn't apply to Amazon EC2 instances and
+    #   Amazon EKS clusters.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CoverageEc2InstanceDetails AWS API Documentation
+    #
+    class CoverageEc2InstanceDetails < Struct.new(
+      :instance_id,
+      :instance_type,
+      :cluster_arn,
+      :agent_details,
+      :management_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about Amazon ECS cluster runtime coverage
+    # details.
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon ECS cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] fargate_details
+    #   Information about the Fargate details associated with the Amazon ECS
+    #   cluster.
+    #   @return [Types::FargateDetails]
+    #
+    # @!attribute [rw] container_instance_details
+    #   Information about the Amazon ECS container running on Amazon EC2
+    #   instance.
+    #   @return [Types::ContainerInstanceDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CoverageEcsClusterDetails AWS API Documentation
+    #
+    class CoverageEcsClusterDetails < Struct.new(
+      :cluster_name,
+      :fargate_details,
+      :container_instance_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -859,11 +1056,34 @@ module Aws::GuardDuty
     #   The type of Amazon Web Services resource.
     #   @return [String]
     #
+    # @!attribute [rw] ecs_cluster_details
+    #   Information about the Amazon ECS cluster that is assessed for
+    #   runtime coverage.
+    #   @return [Types::CoverageEcsClusterDetails]
+    #
+    # @!attribute [rw] ec2_instance_details
+    #   <note markdown="1"> This API is also used when you use GuardDuty Runtime Monitoring for
+    #   your Amazon EC2 instances (currently in preview release) and is
+    #   subject to change. The use of this API is subject to Section 2 of
+    #   the [Amazon Web Services Service Terms][1] ("Betas and Previews").
+    #
+    #    </note>
+    #
+    #   Information about the Amazon EC2 instance assessed for runtime
+    #   coverage.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/service-terms/
+    #   @return [Types::CoverageEc2InstanceDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CoverageResourceDetails AWS API Documentation
     #
     class CoverageResourceDetails < Struct.new(
       :eks_cluster_details,
-      :resource_type)
+      :resource_type,
+      :ecs_cluster_details,
+      :ec2_instance_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1116,6 +1336,8 @@ module Aws::GuardDuty
     #
     #   * service.action.dnsRequestAction.domain
     #
+    #   * service.action.dnsRequestAction.domainWithSuffix
+    #
     #   * service.action.networkConnectionAction.blocked
     #
     #   * service.action.networkConnectionAction.connectionDirection
@@ -1140,7 +1362,13 @@ module Aws::GuardDuty
     #
     #   * service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4
     #
+    #   * service.action.kubernetesApiCallAction.namespace
+    #
+    #   * service.action.kubernetesApiCallAction.remoteIpDetails.organization.asn
+    #
     #   * service.action.kubernetesApiCallAction.requestUri
+    #
+    #   * service.action.kubernetesApiCallAction.statusCode
     #
     #   * service.action.networkConnectionAction.localIpDetails.ipAddressV4
     #
@@ -2076,6 +2304,21 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the detected behavior.
+    #
+    # @!attribute [rw] anomaly
+    #   The details about the anomalous activity that caused GuardDuty to
+    #   generate the finding.
+    #   @return [Types::Anomaly]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Detection AWS API Documentation
+    #
+    class Detection < Struct.new(
+      :anomaly)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the additional configuration for a feature in your
     # GuardDuty account.
     #
@@ -2561,6 +2804,39 @@ module Aws::GuardDuty
     #
     class Evidence < Struct.new(
       :threat_intelligence_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about Amazon Web Services Fargate details
+    # associated with an Amazon ECS cluster.
+    #
+    # @!attribute [rw] issues
+    #   Runtime coverage issues identified for the resource running on
+    #   Amazon Web Services Fargate.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] management_type
+    #   Indicates how the GuardDuty security agent is managed for this
+    #   resource.
+    #
+    #   * `AUTO_MANAGED` indicates that GuardDuty deploys and manages
+    #     updates for this resource.
+    #
+    #   * `DISABLED` indicates that the deployment of the GuardDuty security
+    #     agent is disabled for this resource.
+    #
+    #   <note markdown="1"> The `MANUAL` status doesn't apply to the Amazon Web Services
+    #   Fargate (Amazon ECS only) woprkloads.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FargateDetails AWS API Documentation
+    #
+    class FargateDetails < Struct.new(
+      :issues,
+      :management_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3249,6 +3525,18 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # @!attribute [rw] organization_details
+    #   Information about the statistics report for your organization.
+    #   @return [Types::OrganizationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetOrganizationStatisticsResponse AWS API Documentation
+    #
+    class GetOrganizationStatisticsResponse < Struct.new(
+      :organization_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty member account.
     #   @return [String]
@@ -3460,6 +3748,25 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about the impersonated user.
+    #
+    # @!attribute [rw] username
+    #   Information about the `username` that was being impersonated.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups
+    #   The `group` to which the user name belongs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ImpersonatedUser AWS API Documentation
+    #
+    class ImpersonatedUser < Struct.new(
+      :username,
+      :groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the details of an instance.
     #
     # @!attribute [rw] availability_zone
@@ -3662,6 +3969,23 @@ module Aws::GuardDuty
     #   Parameters related to the Kubernetes API call action.
     #   @return [String]
     #
+    # @!attribute [rw] resource
+    #   The resource component in the Kubernetes API call action.
+    #   @return [String]
+    #
+    # @!attribute [rw] subresource
+    #   The name of the sub-resource in the Kubernetes API call action.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The name of the namespace where the Kubernetes API call action takes
+    #   place.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the resource in the Kubernetes API call action.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesApiCallAction AWS API Documentation
     #
     class KubernetesApiCallAction < Struct.new(
@@ -3671,7 +3995,11 @@ module Aws::GuardDuty
       :user_agent,
       :remote_ip_details,
       :status_code,
-      :parameters)
+      :parameters,
+      :resource,
+      :subresource,
+      :namespace,
+      :resource_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3772,6 +4100,102 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Information about the Kubernetes API for which you check if you have
+    # permission to call.
+    #
+    # @!attribute [rw] verb
+    #   The verb component of the Kubernetes API call. For example, when you
+    #   check whether or not you have the permission to call the `CreatePod`
+    #   API, the verb component will be `Create`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The Kubernetes resource with which your Kubernetes API call will
+    #   interact.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace where the Kubernetes API action will take place.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed
+    #   Information whether the user has the permission to call the
+    #   Kubernetes API.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesPermissionCheckedDetails AWS API Documentation
+    #
+    class KubernetesPermissionCheckedDetails < Struct.new(
+      :verb,
+      :resource,
+      :namespace,
+      :allowed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the role binding that grants the permission
+    # defined in a Kubernetes role.
+    #
+    # @!attribute [rw] kind
+    #   The kind of the role. For role binding, this value will be
+    #   `RoleBinding`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the `RoleBinding`.
+    #   @return [String]
+    #
+    # @!attribute [rw] uid
+    #   The unique identifier of the role binding.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_ref_name
+    #   The name of the role being referenced. This must match the name of
+    #   the `Role` or `ClusterRole` that you want to bind to.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_ref_kind
+    #   The type of the role being referenced. This could be either `Role`
+    #   or `ClusterRole`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesRoleBindingDetails AWS API Documentation
+    #
+    class KubernetesRoleBindingDetails < Struct.new(
+      :kind,
+      :name,
+      :uid,
+      :role_ref_name,
+      :role_ref_kind)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the Kubernetes role name and role type.
+    #
+    # @!attribute [rw] kind
+    #   The kind of role. For this API, the value of `kind` will be `Role`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the Kubernetes role.
+    #   @return [String]
+    #
+    # @!attribute [rw] uid
+    #   The unique identifier of the Kubernetes role name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesRoleDetails AWS API Documentation
+    #
+    class KubernetesRoleDetails < Struct.new(
+      :kind,
+      :name,
+      :uid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the Kubernetes user involved in a Kubernetes finding.
     #
     # @!attribute [rw] username
@@ -3791,13 +4215,18 @@ module Aws::GuardDuty
     #   are assigned to that role.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] impersonated_user
+    #   Information about the impersonated user.
+    #   @return [Types::ImpersonatedUser]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesUserDetails AWS API Documentation
     #
     class KubernetesUserDetails < Struct.new(
       :username,
       :uid,
       :groups,
-      :session_name)
+      :session_name,
+      :impersonated_user)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3834,6 +4263,19 @@ module Aws::GuardDuty
     #   Volumes used by the Kubernetes workload.
     #   @return [Array<Types::Volume>]
     #
+    # @!attribute [rw] service_account_name
+    #   The service account name that is associated with a Kubernetes
+    #   workload.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_ipc
+    #   Whether the host IPC flag is enabled for the pods in the workload.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] host_pid
+    #   Whether the host PID flag is enabled for the pods in the workload.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesWorkloadDetails AWS API Documentation
     #
     class KubernetesWorkloadDetails < Struct.new(
@@ -3843,7 +4285,10 @@ module Aws::GuardDuty
       :namespace,
       :host_network,
       :containers,
-      :volumes)
+      :volumes,
+      :service_account_name,
+      :host_ipc,
+      :host_pid)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4395,6 +4840,11 @@ module Aws::GuardDuty
 
     # @!attribute [rw] members
     #   A list of members.
+    #
+    #   <note markdown="1"> The values for `email` and `invitedAt` are available only if the
+    #   member accounts are added by invitation.
+    #
+    #    </note>
     #   @return [Array<Types::Member>]
     #
     # @!attribute [rw] next_token
@@ -4579,7 +5029,7 @@ module Aws::GuardDuty
     #
     class LocalIpDetails < Struct.new(
       :ip_address_v4)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address_v4]
       include Aws::Structure
     end
 
@@ -4762,7 +5212,7 @@ module Aws::GuardDuty
       :invited_at,
       :updated_at,
       :administrator_id)
-      SENSITIVE = []
+      SENSITIVE = [:email]
       include Aws::Structure
     end
 
@@ -4995,6 +5445,20 @@ module Aws::GuardDuty
       :security_groups,
       :subnet_id,
       :vpc_id)
+      SENSITIVE = [:private_ip_address]
+      include Aws::Structure
+    end
+
+    # Contains information about the observed behavior.
+    #
+    # @!attribute [rw] text
+    #   The text that was unusual.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Observations AWS API Documentation
+    #
+    class Observations < Struct.new(
+      :text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5163,6 +5627,28 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Information about GuardDuty coverage statistics for members in your
+    # Amazon Web Services organization.
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp at which the organization statistics was last updated.
+    #   This is in UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] organization_statistics
+    #   Information about the GuardDuty coverage statistics for members in
+    #   your Amazon Web Services organization.
+    #   @return [Types::OrganizationStatistics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationDetails AWS API Documentation
+    #
+    class OrganizationDetails < Struct.new(
+      :updated_at,
+      :organization_statistics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Organization-wide EBS volumes scan configuration.
     #
     # @!attribute [rw] auto_enable
@@ -5272,6 +5758,52 @@ module Aws::GuardDuty
       :name,
       :auto_enable,
       :additional_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the number of accounts that have enabled a specific
+    # feature.
+    #
+    # @!attribute [rw] name
+    #   Name of the feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_accounts_count
+    #   Total number of accounts that have enabled a specific feature.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_configuration
+    #   Name of the additional configuration.
+    #   @return [Array<Types::OrganizationFeatureStatisticsAdditionalConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationFeatureStatistics AWS API Documentation
+    #
+    class OrganizationFeatureStatistics < Struct.new(
+      :name,
+      :enabled_accounts_count,
+      :additional_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the coverage statistic for the additional
+    # configuration of the feature.
+    #
+    # @!attribute [rw] name
+    #   Name of the additional configuration within a feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled_accounts_count
+    #   Total number of accounts that have enabled the additional
+    #   configuration.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationFeatureStatisticsAdditionalConfiguration AWS API Documentation
+    #
+    class OrganizationFeatureStatisticsAdditionalConfiguration < Struct.new(
+      :name,
+      :enabled_accounts_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5433,6 +5965,47 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Information about the coverage statistics of the features for the
+    # entire Amazon Web Services organization.
+    #
+    # When you create a new Amazon Web Services organization, it might take
+    # up to 24 hours to generate the statistics summary for this
+    # organization.
+    #
+    # @!attribute [rw] total_accounts_count
+    #   Total number of accounts in your Amazon Web Services organization.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] member_accounts_count
+    #   Total number of accounts in your Amazon Web Services organization
+    #   that are associated with GuardDuty.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] active_accounts_count
+    #   Total number of active accounts in your Amazon Web Services
+    #   organization that are associated with GuardDuty.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enabled_accounts_count
+    #   Total number of accounts that have enabled GuardDuty.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] count_by_feature
+    #   Retrieves the coverage statistics for each feature.
+    #   @return [Array<Types::OrganizationFeatureStatistics>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationStatistics AWS API Documentation
+    #
+    class OrganizationStatistics < Struct.new(
+      :total_accounts_count,
+      :member_accounts_count,
+      :active_accounts_count,
+      :enabled_accounts_count,
+      :count_by_feature)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information on the owner of the bucket.
     #
     # @!attribute [rw] id
@@ -5535,7 +6108,7 @@ module Aws::GuardDuty
     class PrivateIpAddressDetails < Struct.new(
       :private_dns_name,
       :private_ip_address)
-      SENSITIVE = []
+      SENSITIVE = [:private_ip_address]
       include Aws::Structure
     end
 
@@ -5808,7 +6381,7 @@ module Aws::GuardDuty
       :geo_location,
       :ip_address_v4,
       :organization)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address_v4]
       include Aws::Structure
     end
 
@@ -6448,10 +7021,16 @@ module Aws::GuardDuty
     #   Whether the container is privileged.
     #   @return [Boolean]
     #
+    # @!attribute [rw] allow_privilege_escalation
+    #   Whether or not a container or a Kubernetes pod is allowed to gain
+    #   more privileges than its parent process.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SecurityContext AWS API Documentation
     #
     class SecurityContext < Struct.new(
-      :privileged)
+      :privileged,
+      :allow_privilege_escalation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6538,6 +7117,10 @@ module Aws::GuardDuty
     #   specific finding
     #   @return [Types::RuntimeDetails]
     #
+    # @!attribute [rw] detection
+    #   Contains information about the detected unusual behavior.
+    #   @return [Types::Detection]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Service AWS API Documentation
     #
     class Service < Struct.new(
@@ -6554,7 +7137,8 @@ module Aws::GuardDuty
       :additional_info,
       :feature_name,
       :ebs_volume_scan_details,
-      :runtime_details)
+      :runtime_details,
+      :detection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7402,6 +7986,13 @@ module Aws::GuardDuty
     #   The usage statistic sum organized by account ID.
     #   @return [Array<Types::UsageAccountResult>]
     #
+    # @!attribute [rw] top_accounts_by_feature
+    #   Lists the top 50 accounts by feature that have generated the most
+    #   GuardDuty usage, in the order from most to least expensive.
+    #
+    #   Currently, this doesn't support `RDS_LOGIN_EVENTS`.
+    #   @return [Array<Types::UsageTopAccountsResult>]
+    #
     # @!attribute [rw] sum_by_data_source
     #   The usage statistic sum organized by on data source.
     #   @return [Array<Types::UsageDataSourceResult>]
@@ -7423,10 +8014,55 @@ module Aws::GuardDuty
     #
     class UsageStatistics < Struct.new(
       :sum_by_account,
+      :top_accounts_by_feature,
       :sum_by_data_source,
       :sum_by_resource,
       :top_resources,
       :sum_by_feature)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on the total of usage based on the topmost 50
+    # account IDs.
+    #
+    # @!attribute [rw] account_id
+    #   The unique account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] total
+    #   Contains the total usage with the corresponding currency unit for
+    #   that value.
+    #   @return [Types::Total]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageTopAccountResult AWS API Documentation
+    #
+    class UsageTopAccountResult < Struct.new(
+      :account_id,
+      :total)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the usage statistics, calculated by top accounts by
+    # feature.
+    #
+    # @!attribute [rw] feature
+    #   Features by which you can generate the usage statistics.
+    #
+    #   `RDS_LOGIN_EVENTS` is currently not supported with
+    #   `topAccountsByFeature`.
+    #   @return [String]
+    #
+    # @!attribute [rw] accounts
+    #   The accounts that contributed to the total usage cost.
+    #   @return [Array<Types::UsageTopAccountResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UsageTopAccountsResult AWS API Documentation
+    #
+    class UsageTopAccountsResult < Struct.new(
+      :feature,
+      :accounts)
       SENSITIVE = []
       include Aws::Structure
     end

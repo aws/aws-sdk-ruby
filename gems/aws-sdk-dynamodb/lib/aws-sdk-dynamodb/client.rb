@@ -2713,8 +2713,9 @@ module Aws::DynamoDB
     #   resp.table_name #=> String
     #   resp.kinesis_data_stream_destinations #=> Array
     #   resp.kinesis_data_stream_destinations[0].stream_arn #=> String
-    #   resp.kinesis_data_stream_destinations[0].destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED"
+    #   resp.kinesis_data_stream_destinations[0].destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED", "UPDATING"
     #   resp.kinesis_data_stream_destinations[0].destination_status_description #=> String
+    #   resp.kinesis_data_stream_destinations[0].approximate_creation_date_time_precision #=> String, one of "MILLISECOND", "MICROSECOND"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeKinesisStreamingDestination AWS API Documentation
     #
@@ -3134,24 +3135,33 @@ module Aws::DynamoDB
     # @option params [required, String] :stream_arn
     #   The ARN for a Kinesis data stream.
     #
+    # @option params [Types::EnableKinesisStreamingConfiguration] :enable_kinesis_streaming_configuration
+    #   The source for the Kinesis streaming information that is being
+    #   enabled.
+    #
     # @return [Types::KinesisStreamingDestinationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::KinesisStreamingDestinationOutput#table_name #table_name} => String
     #   * {Types::KinesisStreamingDestinationOutput#stream_arn #stream_arn} => String
     #   * {Types::KinesisStreamingDestinationOutput#destination_status #destination_status} => String
+    #   * {Types::KinesisStreamingDestinationOutput#enable_kinesis_streaming_configuration #enable_kinesis_streaming_configuration} => Types::EnableKinesisStreamingConfiguration
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disable_kinesis_streaming_destination({
     #     table_name: "TableName", # required
     #     stream_arn: "StreamArn", # required
+    #     enable_kinesis_streaming_configuration: {
+    #       approximate_creation_date_time_precision: "MILLISECOND", # accepts MILLISECOND, MICROSECOND
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.table_name #=> String
     #   resp.stream_arn #=> String
-    #   resp.destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED"
+    #   resp.destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED", "UPDATING"
+    #   resp.enable_kinesis_streaming_configuration.approximate_creation_date_time_precision #=> String, one of "MILLISECOND", "MICROSECOND"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DisableKinesisStreamingDestination AWS API Documentation
     #
@@ -3174,24 +3184,33 @@ module Aws::DynamoDB
     # @option params [required, String] :stream_arn
     #   The ARN for a Kinesis data stream.
     #
+    # @option params [Types::EnableKinesisStreamingConfiguration] :enable_kinesis_streaming_configuration
+    #   The source for the Kinesis streaming information that is being
+    #   enabled.
+    #
     # @return [Types::KinesisStreamingDestinationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::KinesisStreamingDestinationOutput#table_name #table_name} => String
     #   * {Types::KinesisStreamingDestinationOutput#stream_arn #stream_arn} => String
     #   * {Types::KinesisStreamingDestinationOutput#destination_status #destination_status} => String
+    #   * {Types::KinesisStreamingDestinationOutput#enable_kinesis_streaming_configuration #enable_kinesis_streaming_configuration} => Types::EnableKinesisStreamingConfiguration
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_kinesis_streaming_destination({
     #     table_name: "TableName", # required
     #     stream_arn: "StreamArn", # required
+    #     enable_kinesis_streaming_configuration: {
+    #       approximate_creation_date_time_precision: "MILLISECOND", # accepts MILLISECOND, MICROSECOND
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.table_name #=> String
     #   resp.stream_arn #=> String
-    #   resp.destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED"
+    #   resp.destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED", "UPDATING"
+    #   resp.enable_kinesis_streaming_configuration.approximate_creation_date_time_precision #=> String, one of "MILLISECOND", "MICROSECOND"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/EnableKinesisStreamingDestination AWS API Documentation
     #
@@ -5357,7 +5376,7 @@ module Aws::DynamoDB
     # Restores the specified table to the specified point in time within
     # `EarliestRestorableDateTime` and `LatestRestorableDateTime`. You can
     # restore your table to any point in time during the last 35 days. Any
-    # number of users can execute up to 4 concurrent restores (any type of
+    # number of users can execute up to 50 concurrent restores (any type of
     # restore) in a given account.
     #
     # When you restore using point in time recovery, DynamoDB restores your
@@ -7248,6 +7267,50 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # The command to update the Kinesis stream destination.
+    #
+    # @option params [required, String] :table_name
+    #   The table name for the Kinesis streaming destination input.
+    #
+    # @option params [required, String] :stream_arn
+    #   The ARN for the Kinesis stream input.
+    #
+    # @option params [Types::UpdateKinesisStreamingConfiguration] :update_kinesis_streaming_configuration
+    #   The command to update the Kinesis stream configuration.
+    #
+    # @return [Types::UpdateKinesisStreamingDestinationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateKinesisStreamingDestinationOutput#table_name #table_name} => String
+    #   * {Types::UpdateKinesisStreamingDestinationOutput#stream_arn #stream_arn} => String
+    #   * {Types::UpdateKinesisStreamingDestinationOutput#destination_status #destination_status} => String
+    #   * {Types::UpdateKinesisStreamingDestinationOutput#update_kinesis_streaming_configuration #update_kinesis_streaming_configuration} => Types::UpdateKinesisStreamingConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_kinesis_streaming_destination({
+    #     table_name: "TableName", # required
+    #     stream_arn: "StreamArn", # required
+    #     update_kinesis_streaming_configuration: {
+    #       approximate_creation_date_time_precision: "MILLISECOND", # accepts MILLISECOND, MICROSECOND
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_name #=> String
+    #   resp.stream_arn #=> String
+    #   resp.destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED", "UPDATING"
+    #   resp.update_kinesis_streaming_configuration.approximate_creation_date_time_precision #=> String, one of "MILLISECOND", "MICROSECOND"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateKinesisStreamingDestination AWS API Documentation
+    #
+    # @overload update_kinesis_streaming_destination(params = {})
+    # @param [Hash] params ({})
+    def update_kinesis_streaming_destination(params = {}, options = {})
+      req = build_request(:update_kinesis_streaming_destination, params)
+      req.send_request(options)
+    end
+
     # Modifies the provisioned throughput settings, global secondary
     # indexes, or DynamoDB Streams settings for a given table.
     #
@@ -7332,9 +7395,9 @@ module Aws::DynamoDB
     # @option params [Types::StreamSpecification] :stream_specification
     #   Represents the DynamoDB Streams configuration for the table.
     #
-    #   <note markdown="1"> You receive a `ResourceInUseException` if you try to enable a stream
-    #   on a table that already has a stream, or if you try to disable a
-    #   stream on a table that doesn't have a stream.
+    #   <note markdown="1"> You receive a `ValidationException` if you try to enable a stream on a
+    #   table that already has a stream, or if you try to disable a stream on
+    #   a table that doesn't have a stream.
     #
     #    </note>
     #
@@ -7861,7 +7924,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

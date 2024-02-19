@@ -226,14 +226,36 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] hook
-    #   An Auto Scaling lifecycle event hook name.
+    #   The name of the launch hook that CodeDeploy installed into the Auto
+    #   Scaling group.
+    #
+    #   For more information about the launch hook, see [How Amazon EC2 Auto
+    #   Scaling works with CodeDeploy][1] in the *CodeDeploy User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors
+    #   @return [String]
+    #
+    # @!attribute [rw] termination_hook
+    #   The name of the termination hook that CodeDeploy installed into the
+    #   Auto Scaling group.
+    #
+    #   For more information about the termination hook, see [Enabling
+    #   termination deployments during Auto Scaling scale-in events][1] in
+    #   the *CodeDeploy User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors-hook-enable
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AutoScalingGroup AWS API Documentation
     #
     class AutoScalingGroup < Struct.new(
       :name,
-      :hook)
+      :hook,
+      :termination_hook)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -747,13 +769,28 @@ module Aws::CodeDeploy
     #   `Server`, or `ECS`).
     #   @return [String]
     #
+    # @!attribute [rw] zonal_config
+    #   Configure the `ZonalConfig` object if you want CodeDeploy to deploy
+    #   your application to one [Availability Zone][1] at a time, within an
+    #   Amazon Web Services Region.
+    #
+    #   For more information about the zonal configuration feature, see
+    #   [zonal configuration][2] in the *CodeDeploy User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones
+    #   [2]: https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config
+    #   @return [Types::ZonalConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentConfigInput AWS API Documentation
     #
     class CreateDeploymentConfigInput < Struct.new(
       :deployment_config_name,
       :minimum_healthy_hosts,
       :traffic_routing_config,
-      :compute_platform)
+      :compute_platform,
+      :zonal_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -901,6 +938,30 @@ module Aws::CodeDeploy
     #   optional value, both of which you define.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] termination_hook_enabled
+    #   This parameter only applies if you are using CodeDeploy with Amazon
+    #   EC2 Auto Scaling. For more information, see [Integrating CodeDeploy
+    #   with Amazon EC2 Auto Scaling][1] in the *CodeDeploy User Guide*.
+    #
+    #   Set `terminationHookEnabled` to `true` to have CodeDeploy install a
+    #   termination hook into your Auto Scaling group when you create a
+    #   deployment group. When this hook is installed, CodeDeploy will
+    #   perform termination deployments.
+    #
+    #   For information about termination deployments, see [Enabling
+    #   termination deployments during Auto Scaling scale-in events][2] in
+    #   the *CodeDeploy User Guide*.
+    #
+    #   For more information about Auto Scaling scale-in events, see the
+    #   [Scale in][3] topic in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html
+    #   [2]: https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors-hook-enable
+    #   [3]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-lifecycle.html#as-lifecycle-scale-in
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroupInput AWS API Documentation
     #
     class CreateDeploymentGroupInput < Struct.new(
@@ -921,7 +982,8 @@ module Aws::CodeDeploy
       :ec2_tag_set,
       :ecs_services,
       :on_premises_tag_set,
-      :tags)
+      :tags,
+      :termination_hook_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1244,7 +1306,7 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] minimum_healthy_hosts
     #   Information about the number or percentage of minimum healthy
-    #   instance.
+    #   instances.
     #   @return [Types::MinimumHealthyHosts]
     #
     # @!attribute [rw] create_time
@@ -1262,6 +1324,10 @@ module Aws::CodeDeploy
     #   platform only.
     #   @return [Types::TrafficRoutingConfig]
     #
+    # @!attribute [rw] zonal_config
+    #   Information about a zonal configuration.
+    #   @return [Types::ZonalConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentConfigInfo AWS API Documentation
     #
     class DeploymentConfigInfo < Struct.new(
@@ -1270,7 +1336,8 @@ module Aws::CodeDeploy
       :minimum_healthy_hosts,
       :create_time,
       :compute_platform,
-      :traffic_routing_config)
+      :traffic_routing_config,
+      :zonal_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1435,6 +1502,19 @@ module Aws::CodeDeploy
     #   `<clustername>:<servicename>`.
     #   @return [Array<Types::ECSService>]
     #
+    # @!attribute [rw] termination_hook_enabled
+    #   Indicates whether the deployment group was configured to have
+    #   CodeDeploy install a termination hook into an Auto Scaling group.
+    #
+    #   For more information about the termination hook, see [How Amazon EC2
+    #   Auto Scaling works with CodeDeploy][1] in the *CodeDeploy User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupInfo AWS API Documentation
     #
     class DeploymentGroupInfo < Struct.new(
@@ -1459,7 +1539,8 @@ module Aws::CodeDeploy
       :ec2_tag_set,
       :on_premises_tag_set,
       :compute_platform,
-      :ecs_services)
+      :ecs_services,
+      :termination_hook_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3197,6 +3278,12 @@ module Aws::CodeDeploy
     #
     class InvalidUpdateOutdatedInstancesOnlyValueException < Aws::EmptyStructure; end
 
+    # The `ZonalConfig` object is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidZonalDeploymentConfigurationException AWS API Documentation
+    #
+    class InvalidZonalDeploymentConfigurationException < Aws::EmptyStructure; end
+
     # Information about a Lambda function specified in a deployment.
     #
     # @!attribute [rw] function_name
@@ -4002,7 +4089,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Information about minimum healthy instance.
+    # Information about the minimum number of healthy instances.
     #
     # @!attribute [rw] type
     #   The minimum healthy instance type:
@@ -4049,6 +4136,26 @@ module Aws::CodeDeploy
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/MinimumHealthyHosts AWS API Documentation
     #
     class MinimumHealthyHosts < Struct.new(
+      :type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the minimum number of healthy instances per
+    # Availability Zone.
+    #
+    # @!attribute [rw] type
+    #   The `type` associated with the `MinimumHealthyHostsPerZone` option.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The `value` associated with the `MinimumHealthyHostsPerZone` option.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/MinimumHealthyHostsPerZone AWS API Documentation
+    #
+    class MinimumHealthyHostsPerZone < Struct.new(
       :type,
       :value)
       SENSITIVE = []
@@ -4998,6 +5105,30 @@ module Aws::CodeDeploy
     #   groups.
     #   @return [Types::OnPremisesTagSet]
     #
+    # @!attribute [rw] termination_hook_enabled
+    #   This parameter only applies if you are using CodeDeploy with Amazon
+    #   EC2 Auto Scaling. For more information, see [Integrating CodeDeploy
+    #   with Amazon EC2 Auto Scaling][1] in the *CodeDeploy User Guide*.
+    #
+    #   Set `terminationHookEnabled` to `true` to have CodeDeploy install a
+    #   termination hook into your Auto Scaling group when you update a
+    #   deployment group. When this hook is installed, CodeDeploy will
+    #   perform termination deployments.
+    #
+    #   For information about termination deployments, see [Enabling
+    #   termination deployments during Auto Scaling scale-in events][2] in
+    #   the *CodeDeploy User Guide*.
+    #
+    #   For more information about Auto Scaling scale-in events, see the
+    #   [Scale in][3] topic in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html
+    #   [2]: https://docs.aws.amazon.com/codedeploy/latest/userguide/integrations-aws-auto-scaling.html#integrations-aws-auto-scaling-behaviors-hook-enable
+    #   [3]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-lifecycle.html#as-lifecycle-scale-in
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateDeploymentGroupInput AWS API Documentation
     #
     class UpdateDeploymentGroupInput < Struct.new(
@@ -5018,7 +5149,8 @@ module Aws::CodeDeploy
       :load_balancer_info,
       :ec2_tag_set,
       :ecs_services,
-      :on_premises_tag_set)
+      :on_premises_tag_set,
+      :termination_hook_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5038,6 +5170,88 @@ module Aws::CodeDeploy
     #
     class UpdateDeploymentGroupOutput < Struct.new(
       :hooks_not_cleaned_up)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configure the `ZonalConfig` object if you want CodeDeploy to deploy
+    # your application to one [Availability Zone][1] at a time, within an
+    # Amazon Web Services Region. By deploying to one Availability Zone at a
+    # time, you can expose your deployment to a progressively larger
+    # audience as confidence in the deployment's performance and viability
+    # grows. If you don't configure the `ZonalConfig` object, CodeDeploy
+    # deploys your application to a random selection of hosts across a
+    # Region.
+    #
+    # For more information about the zonal configuration feature, see [zonal
+    # configuration][2] in the *CodeDeploy User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones
+    # [2]: https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config
+    #
+    # @!attribute [rw] first_zone_monitor_duration_in_seconds
+    #   The period of time, in seconds, that CodeDeploy must wait after
+    #   completing a deployment to the *first* Availability Zone. CodeDeploy
+    #   will wait this amount of time before starting a deployment to the
+    #   second Availability Zone. You might set this option if you want to
+    #   allow extra bake time for the first Availability Zone. If you don't
+    #   specify a value for `firstZoneMonitorDurationInSeconds`, then
+    #   CodeDeploy uses the `monitorDurationInSeconds` value for the first
+    #   Availability Zone.
+    #
+    #   For more information about the zonal configuration feature, see
+    #   [zonal configuration][1] in the *CodeDeploy User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config
+    #   @return [Integer]
+    #
+    # @!attribute [rw] monitor_duration_in_seconds
+    #   The period of time, in seconds, that CodeDeploy must wait after
+    #   completing a deployment to an Availability Zone. CodeDeploy will
+    #   wait this amount of time before starting a deployment to the next
+    #   Availability Zone. Consider adding a monitor duration to give the
+    #   deployment some time to prove itself (or 'bake') in one
+    #   Availability Zone before it is released in the next zone. If you
+    #   don't specify a `monitorDurationInSeconds`, CodeDeploy starts
+    #   deploying to the next Availability Zone immediately.
+    #
+    #   For more information about the zonal configuration feature, see
+    #   [zonal configuration][1] in the *CodeDeploy User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum_healthy_hosts_per_zone
+    #   The number or percentage of instances that must remain available per
+    #   Availability Zone during a deployment. This option works in
+    #   conjunction with the `MinimumHealthyHosts` option. For more
+    #   information, see [About the minimum number of healthy hosts per
+    #   Availability Zone][1] in the *CodeDeploy User Guide*.
+    #
+    #   If you don't specify the `minimumHealthyHostsPerZone` option, then
+    #   CodeDeploy uses a default value of `0` percent.
+    #
+    #   For more information about the zonal configuration feature, see
+    #   [zonal configuration][2] in the *CodeDeploy User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html#minimum-healthy-hosts-az
+    #   [2]: https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config
+    #   @return [Types::MinimumHealthyHostsPerZone]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ZonalConfig AWS API Documentation
+    #
+    class ZonalConfig < Struct.new(
+      :first_zone_monitor_duration_in_seconds,
+      :monitor_duration_in_seconds,
+      :minimum_healthy_hosts_per_zone)
       SENSITIVE = []
       include Aws::Structure
     end

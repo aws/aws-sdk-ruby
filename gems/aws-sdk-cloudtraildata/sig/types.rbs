@@ -1,0 +1,74 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudTrailData
+  module Types
+
+    class AuditEvent
+      attr_accessor event_data: ::String
+      attr_accessor event_data_checksum: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class AuditEventResultEntry
+      attr_accessor event_id: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelInsufficientPermission
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelUnsupportedSchema
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DuplicatedAuditEventId
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidChannelARN
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutAuditEventsRequest
+      attr_accessor audit_events: ::Array[Types::AuditEvent]
+      attr_accessor channel_arn: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutAuditEventsResponse
+      attr_accessor failed: ::Array[Types::ResultErrorEntry]
+      attr_accessor successful: ::Array[Types::AuditEventResultEntry]
+      SENSITIVE: []
+    end
+
+    class ResultErrorEntry
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,24 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module OpsWorksCM
+    module Waiters
+
+      class NodeAssociated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    node_association_status_token: ::String,
+                    server_name: ::String
+                  ) -> Client::_DescribeNodeAssociationStatusResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeNodeAssociationStatusResponseSuccess
+      end
+    end
+  end
+end

@@ -684,7 +684,7 @@ module Aws::MediaPackage
     #         },
     #       },
     #       include_iframe_only_stream: false,
-    #       manifest_layout: "FULL", # accepts FULL, COMPACT
+    #       manifest_layout: "FULL", # accepts FULL, COMPACT, DRM_TOP_LEVEL_COMPACT
     #       manifest_window_seconds: 1,
     #       min_buffer_time_seconds: 1,
     #       min_update_period_seconds: 1,
@@ -814,7 +814,7 @@ module Aws::MediaPackage
     #   resp.dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.dash_package.encryption.speke_key_provider.url #=> String
     #   resp.dash_package.include_iframe_only_stream #=> Boolean
-    #   resp.dash_package.manifest_layout #=> String, one of "FULL", "COMPACT"
+    #   resp.dash_package.manifest_layout #=> String, one of "FULL", "COMPACT", "DRM_TOP_LEVEL_COMPACT"
     #   resp.dash_package.manifest_window_seconds #=> Integer
     #   resp.dash_package.min_buffer_time_seconds #=> Integer
     #   resp.dash_package.min_update_period_seconds #=> Integer
@@ -1097,7 +1097,7 @@ module Aws::MediaPackage
     #   resp.dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.dash_package.encryption.speke_key_provider.url #=> String
     #   resp.dash_package.include_iframe_only_stream #=> Boolean
-    #   resp.dash_package.manifest_layout #=> String, one of "FULL", "COMPACT"
+    #   resp.dash_package.manifest_layout #=> String, one of "FULL", "COMPACT", "DRM_TOP_LEVEL_COMPACT"
     #   resp.dash_package.manifest_window_seconds #=> Integer
     #   resp.dash_package.min_buffer_time_seconds #=> Integer
     #   resp.dash_package.min_update_period_seconds #=> Integer
@@ -1340,7 +1340,7 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.url #=> String
     #   resp.origin_endpoints[0].dash_package.include_iframe_only_stream #=> Boolean
-    #   resp.origin_endpoints[0].dash_package.manifest_layout #=> String, one of "FULL", "COMPACT"
+    #   resp.origin_endpoints[0].dash_package.manifest_layout #=> String, one of "FULL", "COMPACT", "DRM_TOP_LEVEL_COMPACT"
     #   resp.origin_endpoints[0].dash_package.manifest_window_seconds #=> Integer
     #   resp.origin_endpoints[0].dash_package.min_buffer_time_seconds #=> Integer
     #   resp.origin_endpoints[0].dash_package.min_update_period_seconds #=> Integer
@@ -1748,7 +1748,7 @@ module Aws::MediaPackage
     #         },
     #       },
     #       include_iframe_only_stream: false,
-    #       manifest_layout: "FULL", # accepts FULL, COMPACT
+    #       manifest_layout: "FULL", # accepts FULL, COMPACT, DRM_TOP_LEVEL_COMPACT
     #       manifest_window_seconds: 1,
     #       min_buffer_time_seconds: 1,
     #       min_update_period_seconds: 1,
@@ -1875,7 +1875,7 @@ module Aws::MediaPackage
     #   resp.dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.dash_package.encryption.speke_key_provider.url #=> String
     #   resp.dash_package.include_iframe_only_stream #=> Boolean
-    #   resp.dash_package.manifest_layout #=> String, one of "FULL", "COMPACT"
+    #   resp.dash_package.manifest_layout #=> String, one of "FULL", "COMPACT", "DRM_TOP_LEVEL_COMPACT"
     #   resp.dash_package.manifest_window_seconds #=> Integer
     #   resp.dash_package.min_buffer_time_seconds #=> Integer
     #   resp.dash_package.min_update_period_seconds #=> Integer
@@ -1963,7 +1963,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

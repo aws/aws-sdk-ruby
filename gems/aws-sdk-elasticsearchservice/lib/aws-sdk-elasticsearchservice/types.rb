@@ -541,6 +541,48 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Container for parameters of the `CancelDomainConfigChange` operation.
+    #
+    # @!attribute [rw] domain_name
+    #   Name of the OpenSearch Service domain configuration request to
+    #   cancel.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   When set to **True**, returns the list of change IDs and properties
+    #   that will be cancelled without actually cancelling the change.
+    #   @return [Boolean]
+    #
+    class CancelDomainConfigChangeRequest < Struct.new(
+      :domain_name,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the details of the cancelled domain config change.
+    #
+    # @!attribute [rw] dry_run
+    #   Whether or not the request was a dry run. If **True**, the changes
+    #   were not actually cancelled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cancelled_change_ids
+    #   The unique identifiers of the changes that were cancelled.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cancelled_change_properties
+    #   The domain change properties that were cancelled.
+    #   @return [Array<Types::CancelledChangeProperty>]
+    #
+    class CancelDomainConfigChangeResponse < Struct.new(
+      :dry_run,
+      :cancelled_change_ids,
+      :cancelled_change_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the parameters to the
     # `CancelElasticsearchServiceSoftwareUpdate` operation. Specifies the
     # name of the Elasticsearch domain that you wish to cancel a service
@@ -570,6 +612,31 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # A property change that was cancelled for an Amazon OpenSearch Service
+    # domain.
+    #
+    # @!attribute [rw] property_name
+    #   The name of the property whose change was cancelled.
+    #   @return [String]
+    #
+    # @!attribute [rw] cancelled_value
+    #   The pending value of the property that was cancelled. This would
+    #   have been the eventual value of the property if the chance had not
+    #   been cancelled.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_value
+    #   The current value of the property, after the change was cancelled.
+    #   @return [String]
+    #
+    class CancelledChangeProperty < Struct.new(
+      :property_name,
+      :cancelled_value,
+      :active_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies change details of the domain configuration change.
     #
     # @!attribute [rw] change_id
@@ -582,9 +649,30 @@ module Aws::ElasticsearchService
     #   configuration change.
     #   @return [String]
     #
+    # @!attribute [rw] config_change_status
+    #   The current status of the configuration change.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time that the configuration change was initiated, in Universal
+    #   Coordinated Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The last time that the configuration change was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] initiated_by
+    #   The IAM principal who initiated the configuration change.
+    #   @return [String]
+    #
     class ChangeProgressDetails < Struct.new(
       :change_id,
-      :message)
+      :message,
+      :config_change_status,
+      :start_time,
+      :last_updated_time,
+      :initiated_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -652,6 +740,19 @@ module Aws::ElasticsearchService
     #   configuration change.
     #   @return [Array<Types::ChangeProgressStage>]
     #
+    # @!attribute [rw] config_change_status
+    #   The current status of the configuration change.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The last time that the status of the configuration change was
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] initiated_by
+    #   The IAM principal who initiated the configuration change.
+    #   @return [String]
+    #
     class ChangeProgressStatusDetails < Struct.new(
       :change_id,
       :start_time,
@@ -659,7 +760,10 @@ module Aws::ElasticsearchService
       :pending_properties,
       :completed_properties,
       :total_number_of_stages,
-      :change_progress_stages)
+      :change_progress_stages,
+      :config_change_status,
+      :last_updated_time,
+      :initiated_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1708,10 +1812,13 @@ module Aws::ElasticsearchService
     #   Specify the TLS security policy that needs to be applied to the
     #   HTTPS endpoint of Elasticsearch domain.
     #    It can be one of the following values: *
-    #   <b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which
-    #     supports TLSv1.0 and higher.
-    #   * <b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which
-    #     supports only TLSv1.2
+    #   <b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy that
+    #     supports TLS version 1.0 to TLS version 1.2
+    #   * <b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy that
+    #     supports only TLS version 1.2
+    #   * <b>Policy-Min-TLS-1-2-PFS-2023-10: </b> TLS security policy that
+    #     supports TLS version 1.2 to TLS version 1.3 with perfect forward
+    #     secrecy cipher suites
     #   @return [String]
     #
     # @!attribute [rw] custom_endpoint_enabled
@@ -2133,6 +2240,11 @@ module Aws::ElasticsearchService
     #   Specifies change details of the domain configuration change.
     #   @return [Types::ChangeProgressDetails]
     #
+    # @!attribute [rw] modifying_properties
+    #   Information about the domain properties that are currently being
+    #   modified.
+    #   @return [Array<Types::ModifyingProperties>]
+    #
     class ElasticsearchDomainConfig < Struct.new(
       :elasticsearch_version,
       :elasticsearch_cluster_config,
@@ -2148,7 +2260,8 @@ module Aws::ElasticsearchService
       :domain_endpoint_options,
       :advanced_security_options,
       :auto_tune_options,
-      :change_progress_details)
+      :change_progress_details,
+      :modifying_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2291,6 +2404,16 @@ module Aws::ElasticsearchService
     #   Specifies change details of the domain configuration change.
     #   @return [Types::ChangeProgressDetails]
     #
+    # @!attribute [rw] domain_processing_status
+    #   The status of any changes that are currently in progress for the
+    #   domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] modifying_properties
+    #   Information about the domain properties that are currently being
+    #   modified.
+    #   @return [Array<Types::ModifyingProperties>]
+    #
     class ElasticsearchDomainStatus < Struct.new(
       :domain_id,
       :domain_name,
@@ -2316,7 +2439,9 @@ module Aws::ElasticsearchService
       :domain_endpoint_options,
       :advanced_security_options,
       :auto_tune_options,
-      :change_progress_details)
+      :change_progress_details,
+      :domain_processing_status,
+      :modifying_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3135,6 +3260,41 @@ module Aws::ElasticsearchService
       :master_user_name,
       :master_user_password)
       SENSITIVE = [:master_user_name, :master_user_password]
+      include Aws::Structure
+    end
+
+    # Information about the domain properties that are currently being
+    # modified.
+    #
+    # @!attribute [rw] name
+    #   The name of the property that is currently being modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_value
+    #   The current value of the domain property that is being modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_value
+    #   The value that the property that is currently being modified will
+    #   eventually have.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_type
+    #   The type of value that is currently being modified. Properties can
+    #   have two types:
+    #
+    #   * **PLAIN\_TEXT**: Contain direct values such as "1", "True", or
+    #     "c5.large.search".
+    #   * **STRINGIFIED\_JSON**: Contain content in JSON format, such as
+    #     \\\{"Enabled":"True"\\}".
+    #   @return [String]
+    #
+    class ModifyingProperties < Struct.new(
+      :name,
+      :active_value,
+      :pending_value,
+      :value_type)
+      SENSITIVE = []
       include Aws::Structure
     end
 

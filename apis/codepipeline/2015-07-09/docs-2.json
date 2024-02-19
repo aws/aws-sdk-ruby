@@ -240,9 +240,11 @@
         "ActionDeclaration$name": "<p>The action declaration's name.</p>",
         "ActionExecutionDetail$actionName": "<p>The name of the action.</p>",
         "ActionState$actionName": "<p>The name of the action.</p>",
+        "GitConfiguration$sourceActionName": "<p>The name of the pipeline source action where the trigger configuration, such as Git tags, is specified. The trigger configuration will start the pipeline upon the specified change only.</p> <note> <p>You can only specify one trigger configuration per source action.</p> </note>",
         "PutActionRevisionInput$actionName": "<p>The name of the action that processes the revision.</p>",
         "PutApprovalResultInput$actionName": "<p>The name of the action for which approval is requested.</p>",
         "SourceRevision$actionName": "<p>The name of the action that processed the revision to the source artifact.</p>",
+        "SourceRevisionOverride$actionName": "<p>The name of the action where the override will be applied.</p>",
         "WebhookDefinition$targetAction": "<p>The name of the action in a pipeline you want to connect to the webhook. The action must be from the source (first) stage of the pipeline.</p>"
       }
     },
@@ -298,6 +300,12 @@
       "base": null,
       "refs": {
         "StageState$actionStates": "<p>The state of the stage.</p>"
+      }
+    },
+    "ActionTimeout": {
+      "base": null,
+      "refs": {
+        "ActionDeclaration$timeoutInMinutes": "<p>A timeout duration in minutes that can be applied against the ActionType’s default timeout value specified in <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/limits.html\">Quotas for CodePipeline </a>. This attribute is available only to the manual approval ActionType.</p>"
       }
     },
     "ActionType": {
@@ -607,6 +615,11 @@
       "refs": {
       }
     },
+    "ConcurrentPipelineExecutionsLimitExceededException": {
+      "base": "<p>The pipeline has reached the limit for concurrent pipeline executions.</p>",
+      "refs": {
+      }
+    },
     "ConflictException": {
       "base": "<p>Your request cannot be handled because the pipeline is busy handling ongoing activities. Try again later.</p>",
       "refs": {
@@ -735,7 +748,8 @@
     "ErrorDetails": {
       "base": "<p>Represents information about an error in CodePipeline.</p>",
       "refs": {
-        "ActionExecution$errorDetails": "<p>The details of an error returned by a URL external to Amazon Web Services.</p>"
+        "ActionExecution$errorDetails": "<p>The details of an error returned by a URL external to Amazon Web Services.</p>",
+        "ActionExecutionResult$errorDetails": null
       }
     },
     "ExecutionDetails": {
@@ -753,6 +767,15 @@
         "FailureDetails$externalExecutionId": "<p>The external ID of the run of the action that failed.</p>"
       }
     },
+    "ExecutionMode": {
+      "base": null,
+      "refs": {
+        "PipelineDeclaration$executionMode": "<p>The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.</p>",
+        "PipelineExecution$executionMode": "<p>The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.</p>",
+        "PipelineExecutionSummary$executionMode": "<p>The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.</p>",
+        "PipelineSummary$executionMode": "<p>The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.</p>"
+      }
+    },
     "ExecutionSummary": {
       "base": null,
       "refs": {
@@ -763,6 +786,7 @@
     "ExecutionTrigger": {
       "base": "<p>The interaction or event that started a pipeline execution.</p>",
       "refs": {
+        "PipelineExecution$trigger": null,
         "PipelineExecutionSummary$trigger": "<p>The interaction or event that started a pipeline execution, such as automated change detection or a <code>StartPipelineExecution</code> API call.</p>"
       }
     },
@@ -861,6 +885,107 @@
     "GetThirdPartyJobDetailsOutput": {
       "base": "<p>Represents the output of a <code>GetThirdPartyJobDetails</code> action.</p>",
       "refs": {
+      }
+    },
+    "GitBranchFilterCriteria": {
+      "base": "<p>The Git repository branches specified as filter criteria to start the pipeline.</p>",
+      "refs": {
+        "GitPullRequestFilter$branches": "<p>The field that specifies to filter on branches for the pull request trigger configuration.</p>",
+        "GitPushFilter$branches": "<p>The field that specifies to filter on branches for the push trigger configuration.</p>"
+      }
+    },
+    "GitBranchNamePattern": {
+      "base": null,
+      "refs": {
+        "GitBranchPatternList$member": null
+      }
+    },
+    "GitBranchPatternList": {
+      "base": null,
+      "refs": {
+        "GitBranchFilterCriteria$includes": "<p>The list of patterns of Git branches that, when a commit is pushed, are to be included as criteria that starts the pipeline.</p>",
+        "GitBranchFilterCriteria$excludes": "<p>The list of patterns of Git branches that, when a commit is pushed, are to be excluded from starting the pipeline.</p>"
+      }
+    },
+    "GitConfiguration": {
+      "base": "<p>A type of trigger configuration for Git-based source actions.</p> <note> <p>You can specify the Git configuration trigger type for all third-party Git-based source actions that are supported by the <code>CodeStarSourceConnection</code> action type.</p> </note>",
+      "refs": {
+        "PipelineTriggerDeclaration$gitConfiguration": "<p>Provides the filter criteria and the source stage for the repository event that starts the pipeline, such as Git tags.</p>"
+      }
+    },
+    "GitFilePathFilterCriteria": {
+      "base": "<p>The Git repository file paths specified as filter criteria to start the pipeline.</p>",
+      "refs": {
+        "GitPullRequestFilter$filePaths": "<p>The field that specifies to filter on file paths for the pull request trigger configuration.</p>",
+        "GitPushFilter$filePaths": "<p>The field that specifies to filter on file paths for the push trigger configuration.</p>"
+      }
+    },
+    "GitFilePathPattern": {
+      "base": null,
+      "refs": {
+        "GitFilePathPatternList$member": null
+      }
+    },
+    "GitFilePathPatternList": {
+      "base": null,
+      "refs": {
+        "GitFilePathFilterCriteria$includes": "<p>The list of patterns of Git repository file paths that, when a commit is pushed, are to be included as criteria that starts the pipeline.</p>",
+        "GitFilePathFilterCriteria$excludes": "<p>The list of patterns of Git repository file paths that, when a commit is pushed, are to be excluded from starting the pipeline.</p>"
+      }
+    },
+    "GitPullRequestEventType": {
+      "base": null,
+      "refs": {
+        "GitPullRequestEventTypeList$member": null
+      }
+    },
+    "GitPullRequestEventTypeList": {
+      "base": null,
+      "refs": {
+        "GitPullRequestFilter$events": "<p>The field that specifies which pull request events to filter on (opened, updated, closed) for the trigger configuration.</p>"
+      }
+    },
+    "GitPullRequestFilter": {
+      "base": "<p>The event criteria for the pull request trigger configuration, such as the lists of branches or file paths to include and exclude.</p>",
+      "refs": {
+        "GitPullRequestFilterList$member": null
+      }
+    },
+    "GitPullRequestFilterList": {
+      "base": null,
+      "refs": {
+        "GitConfiguration$pullRequest": "<p>The field where the repository event that will start the pipeline is specified as pull requests.</p>"
+      }
+    },
+    "GitPushFilter": {
+      "base": "<p>The event criteria that specify when a specified repository event will start the pipeline for the specified trigger configuration, such as the lists of Git tags to include and exclude.</p>",
+      "refs": {
+        "GitPushFilterList$member": null
+      }
+    },
+    "GitPushFilterList": {
+      "base": null,
+      "refs": {
+        "GitConfiguration$push": "<p>The field where the repository event that will start the pipeline, such as pushing Git tags, is specified with details.</p>"
+      }
+    },
+    "GitTagFilterCriteria": {
+      "base": "<p>The Git tags specified as filter criteria for whether a Git tag repository event will start the pipeline.</p>",
+      "refs": {
+        "GitPushFilter$tags": "<p>The field that contains the details for the Git tags trigger configuration.</p>"
+      }
+    },
+    "GitTagNamePattern": {
+      "base": null,
+      "refs": {
+        "GitTagPatternList$member": null
+      }
+    },
+    "GitTagPatternList": {
+      "base": null,
+      "refs": {
+        "GitTagFilterCriteria$includes": "<p>The list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.</p>",
+        "GitTagFilterCriteria$excludes": "<p>The list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.</p>"
       }
     },
     "InputArtifact": {
@@ -1039,7 +1164,14 @@
     "LastUpdatedBy": {
       "base": null,
       "refs": {
-        "ActionExecution$lastUpdatedBy": "<p>The ARN of the user who last changed the pipeline.</p>"
+        "ActionExecution$lastUpdatedBy": "<p>The ARN of the user who last changed the pipeline.</p>",
+        "ActionExecutionDetail$updatedBy": "<p>The ARN of the user who changed the pipeline execution details.</p>"
+      }
+    },
+    "LatestInPipelineExecutionFilter": {
+      "base": "<p>The field that specifies to filter on the latest execution in the pipeline.</p> <note> <p>Filtering on the latest execution is available for executions run on or after February 08, 2024.</p> </note>",
+      "refs": {
+        "ActionExecutionFilter$latestInPipelineExecution": "<p>The latest execution in the pipeline.</p> <note> <p>Filtering on the latest execution is available for executions run on or after February 08, 2024.</p> </note>"
       }
     },
     "LimitExceededException": {
@@ -1158,6 +1290,7 @@
       "base": null,
       "refs": {
         "ConcurrentModificationException$message": null,
+        "ConcurrentPipelineExecutionsLimitExceededException$message": null,
         "ConflictException$message": null,
         "DuplicatedStopRequestException$message": null,
         "ErrorDetails$message": "<p>The text of the error message.</p>",
@@ -1292,6 +1425,7 @@
         "ActionExecutionDetail$pipelineExecutionId": "<p>The pipeline execution ID for the action execution.</p>",
         "ActionExecutionFilter$pipelineExecutionId": "<p>The pipeline execution ID used to filter action execution history.</p>",
         "GetPipelineExecutionInput$pipelineExecutionId": "<p>The ID of the pipeline execution about which you want to get execution details.</p>",
+        "LatestInPipelineExecutionFilter$pipelineExecutionId": "<p>The execution ID for the latest execution in the pipeline.</p>",
         "PipelineContext$pipelineExecutionId": "<p>The execution ID of the pipeline.</p>",
         "PipelineExecution$pipelineExecutionId": "<p>The ID of the pipeline execution.</p>",
         "PipelineExecutionSummary$pipelineExecutionId": "<p>The ID of the pipeline execution.</p>",
@@ -1395,6 +1529,75 @@
       "base": "<p>Returns a summary of a pipeline.</p>",
       "refs": {
         "PipelineList$member": null
+      }
+    },
+    "PipelineTriggerDeclaration": {
+      "base": "<p>Represents information about the specified trigger configuration, such as the filter criteria and the source stage for the action that contains the trigger.</p> <note> <p>This is only supported for the <code>CodeStarSourceConnection</code> action type.</p> </note> <note> <p>When a trigger configuration is specified, default change detection for repository and branch commits is disabled.</p> </note>",
+      "refs": {
+        "PipelineTriggerDeclarationList$member": null
+      }
+    },
+    "PipelineTriggerDeclarationList": {
+      "base": null,
+      "refs": {
+        "PipelineDeclaration$triggers": "<p>The trigger configuration specifying a type of event, such as Git tags, that starts the pipeline.</p> <note> <p>When a trigger configuration is specified, default change detection for repository and branch commits is disabled.</p> </note>"
+      }
+    },
+    "PipelineTriggerProviderType": {
+      "base": null,
+      "refs": {
+        "PipelineTriggerDeclaration$providerType": "<p>The source provider for the event, such as connections configured for a repository with Git tags, for the specified trigger configuration.</p>"
+      }
+    },
+    "PipelineType": {
+      "base": null,
+      "refs": {
+        "PipelineDeclaration$pipelineType": "<p>CodePipeline provides the following pipeline types, which differ in characteristics and price, so that you can tailor your pipeline features and cost to the needs of your applications.</p> <ul> <li> <p>V1 type pipelines have a JSON structure that contains standard pipeline, stage, and action-level parameters.</p> </li> <li> <p>V2 type pipelines have the same structure as a V1 type, along with additional parameters for release safety and trigger configuration.</p> </li> </ul> <important> <p>Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when creating or updating a pipeline will result in the pipeline having the V2 type of pipeline and the associated costs.</p> </important> <p>For information about pricing for CodePipeline, see <a href=\"http://aws.amazon.com/codepipeline/pricing/\">Pricing</a>.</p> <p> For information about which type of pipeline to choose, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html\">What type of pipeline is right for me?</a>.</p>",
+        "PipelineSummary$pipelineType": "<p>CodePipeline provides the following pipeline types, which differ in characteristics and price, so that you can tailor your pipeline features and cost to the needs of your applications.</p> <ul> <li> <p>V1 type pipelines have a JSON structure that contains standard pipeline, stage, and action-level parameters.</p> </li> <li> <p>V2 type pipelines have the same structure as a V1 type, along with additional parameters for release safety and trigger configuration.</p> </li> </ul> <important> <p>Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when creating or updating a pipeline will result in the pipeline having the V2 type of pipeline and the associated costs.</p> </important> <p>For information about pricing for CodePipeline, see <a href=\"http://aws.amazon.com/codepipeline/pricing/\">Pricing</a>.</p> <p> For information about which type of pipeline to choose, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-types-planning.html\">What type of pipeline is right for me?</a>.</p>"
+      }
+    },
+    "PipelineVariable": {
+      "base": "<p>A pipeline-level variable used for a pipeline execution.</p>",
+      "refs": {
+        "PipelineVariableList$member": null
+      }
+    },
+    "PipelineVariableDeclaration": {
+      "base": "<p>A variable declared at the pipeline level.</p>",
+      "refs": {
+        "PipelineVariableDeclarationList$member": null
+      }
+    },
+    "PipelineVariableDeclarationList": {
+      "base": null,
+      "refs": {
+        "PipelineDeclaration$variables": "<p>A list that defines the pipeline variables for a pipeline resource. Variable names can have alphanumeric and underscore characters, and the values must match <code>[A-Za-z0-9@\\-_]+</code>.</p>"
+      }
+    },
+    "PipelineVariableDescription": {
+      "base": null,
+      "refs": {
+        "PipelineVariableDeclaration$description": "<p>The description of a pipeline-level variable. It's used to add additional context about the variable, and not being used at time when pipeline executes.</p>"
+      }
+    },
+    "PipelineVariableList": {
+      "base": null,
+      "refs": {
+        "StartPipelineExecutionInput$variables": "<p>A list that overrides pipeline variables for a pipeline execution that's being started. Variable names must match <code>[A-Za-z0-9@\\-_]+</code>, and the values can be anything except an empty string.</p>"
+      }
+    },
+    "PipelineVariableName": {
+      "base": null,
+      "refs": {
+        "PipelineVariable$name": "<p>The name of a pipeline-level variable.</p>",
+        "PipelineVariableDeclaration$name": "<p>The name of a pipeline-level variable.</p>"
+      }
+    },
+    "PipelineVariableValue": {
+      "base": null,
+      "refs": {
+        "PipelineVariable$value": "<p>The value of a pipeline-level variable.</p>",
+        "PipelineVariableDeclaration$defaultValue": "<p>The value of a pipeline-level variable.</p>"
       }
     },
     "PipelineVersion": {
@@ -1534,6 +1737,18 @@
         "ActionExecutionInput$resolvedConfiguration": "<p>Configuration data for an action execution with all variable references replaced with their real values for the execution.</p>"
       }
     },
+    "ResolvedPipelineVariable": {
+      "base": "<p>A pipeline-level variable used for a pipeline execution.</p>",
+      "refs": {
+        "ResolvedPipelineVariableList$member": null
+      }
+    },
+    "ResolvedPipelineVariableList": {
+      "base": null,
+      "refs": {
+        "PipelineExecution$variables": "<p>A list of pipeline variables used for the pipeline execution.</p>"
+      }
+    },
     "ResourceArn": {
       "base": null,
       "refs": {
@@ -1564,7 +1779,8 @@
         "Artifact$revision": "<p>The artifact's revision ID. Depending on the type of object, this could be a commit ID (GitHub) or a revision ID (Amazon S3).</p>",
         "ArtifactRevision$revisionId": "<p>The revision ID of the artifact.</p>",
         "CurrentRevision$revision": "<p>The revision ID of the current version of an artifact.</p>",
-        "SourceRevision$revisionId": "<p>The system-generated unique ID that identifies the revision number of the artifact.</p>"
+        "SourceRevision$revisionId": "<p>The system-generated unique ID that identifies the revision number of the artifact.</p>",
+        "SourceRevisionOverride$revisionValue": "<p>The source revision, or version of your source artifact, with the changes that you want to run in the pipeline execution.</p>"
       }
     },
     "RevisionChangeIdentifier": {
@@ -1657,6 +1873,24 @@
         "PipelineExecutionSummary$sourceRevisions": "<p>A list of the source artifact revisions that initiated a pipeline execution.</p>"
       }
     },
+    "SourceRevisionOverride": {
+      "base": "<p>A list that allows you to specify, or override, the source revision for a pipeline execution that's being started. A source revision is the version with all the changes to your application code, or source artifact, for the pipeline execution.</p>",
+      "refs": {
+        "SourceRevisionOverrideList$member": null
+      }
+    },
+    "SourceRevisionOverrideList": {
+      "base": null,
+      "refs": {
+        "StartPipelineExecutionInput$sourceRevisions": "<p>A list that allows you to specify, or override, the source revision for a pipeline execution that's being started. A source revision is the version with all the changes to your application code, or source artifact, for the pipeline execution.</p>"
+      }
+    },
+    "SourceRevisionType": {
+      "base": null,
+      "refs": {
+        "SourceRevisionOverride$revisionType": "<p>The type of source revision, based on the source provider. For example, the revision type for the CodeCommit action provider is the commit ID.</p>"
+      }
+    },
     "StageActionDeclarationList": {
       "base": null,
       "refs": {
@@ -1684,8 +1918,15 @@
     "StageExecution": {
       "base": "<p>Represents information about the run of a stage.</p>",
       "refs": {
+        "StageExecutionList$member": null,
         "StageState$inboundExecution": null,
         "StageState$latestExecution": "<p>Information about the latest execution in the stage, including its ID and status.</p>"
+      }
+    },
+    "StageExecutionList": {
+      "base": null,
+      "refs": {
+        "StageState$inboundExecutions": "<p>The inbound executions for a stage.</p>"
       }
     },
     "StageExecutionStatus": {
@@ -1753,6 +1994,12 @@
       "refs": {
       }
     },
+    "StartTimeRange": {
+      "base": null,
+      "refs": {
+        "LatestInPipelineExecutionFilter$startTimeRange": "<p>The start time to filter on for the latest execution in the pipeline. Valid options:</p> <ul> <li> <p>All</p> </li> <li> <p>Latest</p> </li> </ul>"
+      }
+    },
     "StopExecutionTrigger": {
       "base": "<p>The interaction that stopped a pipeline execution.</p>",
       "refs": {
@@ -1780,7 +2027,9 @@
       "base": null,
       "refs": {
         "ResolvedActionConfigurationMap$key": null,
-        "ResolvedActionConfigurationMap$value": null
+        "ResolvedActionConfigurationMap$value": null,
+        "ResolvedPipelineVariable$name": "<p>The name of a pipeline-level variable.</p>",
+        "ResolvedPipelineVariable$resolvedValue": "<p>The resolved value of a pipeline-level variable.</p>"
       }
     },
     "Tag": {

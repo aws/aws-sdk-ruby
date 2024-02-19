@@ -47,6 +47,19 @@ module Aws::EC2
       data[:availability_zone]
     end
 
+    # A security group connection tracking configuration that enables you to
+    # set the timeout for connection tracking on an Elastic network
+    # interface. For more information, see [Connection tracking timeouts][1]
+    # in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    # @return [Types::ConnectionTrackingConfiguration]
+    def connection_tracking_configuration
+      data[:connection_tracking_configuration]
+    end
+
     # A description.
     # @return [String]
     def description
@@ -599,6 +612,11 @@ module Aws::EC2
     #       },
     #     },
     #     enable_primary_ipv_6: false,
+    #     connection_tracking_specification: {
+    #       tcp_established_timeout: 1,
+    #       udp_stream_timeout: 1,
+    #       udp_timeout: 1,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Types::NetworkInterfaceAttachmentChanges] :attachment
@@ -643,6 +661,8 @@ module Aws::EC2
     #   with an ENI attached to your instance and you enable a primary IPv6
     #   address, the first IPv6 GUA address associated with the ENI becomes
     #   the primary IPv6 address.
+    # @option options [Types::ConnectionTrackingSpecificationRequest] :connection_tracking_specification
+    #   A connection tracking specification.
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(network_interface_id: @id)

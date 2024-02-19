@@ -650,6 +650,15 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
+    # @option params [String] :idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests from the same Amazon Web Services account use the
+    #   same idempotency token, the same response is returned for each
+    #   repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -659,6 +668,7 @@ module Aws::ServiceCatalog
     #     provisioning_artifact_id: "Id", # required
     #     service_action_id: "Id", # required
     #     accept_language: "AcceptLanguage",
+    #     idempotency_token: "IdempotencyToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateServiceActionWithProvisioningArtifact AWS API Documentation
@@ -1160,8 +1170,13 @@ module Aws::ServiceCatalog
     #   share. If this flag is not provided, TagOptions sharing is disabled.
     #
     # @option params [Boolean] :share_principals
+    #   This parameter is only supported for portfolios with an
+    #   **OrganizationalNode** Type of `ORGANIZATION` or
+    #   `ORGANIZATIONAL_UNIT`.
+    #
     #   Enables or disables `Principal` sharing when creating the portfolio
-    #   share. If this flag is not provided, principal sharing is disabled.
+    #   share. If you do **not** provide this flag, principal sharing is
+    #   disabled.
     #
     #   When you enable Principal Name Sharing for a portfolio share, the
     #   share recipient account end users with a principal that matches any of
@@ -1930,6 +1945,15 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
+    # @option params [String] :idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests from the same Amazon Web Services account use the
+    #   same idempotency token, the same response is returned for each
+    #   repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1937,6 +1961,7 @@ module Aws::ServiceCatalog
     #   resp = client.delete_service_action({
     #     id: "Id", # required
     #     accept_language: "AcceptLanguage",
+    #     idempotency_token: "IdempotencyToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteServiceAction AWS API Documentation
@@ -3180,6 +3205,15 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
+    # @option params [String] :idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests from the same Amazon Web Services account use the
+    #   same idempotency token, the same response is returned for each
+    #   repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3189,6 +3223,7 @@ module Aws::ServiceCatalog
     #     provisioning_artifact_id: "Id", # required
     #     service_action_id: "Id", # required
     #     accept_language: "AcceptLanguage",
+    #     idempotency_token: "IdempotencyToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateServiceActionFromProvisioningArtifact AWS API Documentation
@@ -6254,7 +6289,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

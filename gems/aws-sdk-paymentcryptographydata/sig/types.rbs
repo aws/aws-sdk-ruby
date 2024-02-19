@@ -1,0 +1,677 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::PaymentCryptographyData
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AmexCardSecurityCodeVersion1
+      attr_accessor card_expiry_date: ::String
+      SENSITIVE: []
+    end
+
+    class AmexCardSecurityCodeVersion2
+      attr_accessor card_expiry_date: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class AsymmetricEncryptionAttributes
+      attr_accessor padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")
+      SENSITIVE: []
+    end
+
+    class CardGenerationAttributes
+      attr_accessor amex_card_security_code_version_1: Types::AmexCardSecurityCodeVersion1
+      attr_accessor amex_card_security_code_version_2: Types::AmexCardSecurityCodeVersion2
+      attr_accessor card_holder_verification_value: Types::CardHolderVerificationValue
+      attr_accessor card_verification_value_1: Types::CardVerificationValue1
+      attr_accessor card_verification_value_2: Types::CardVerificationValue2
+      attr_accessor dynamic_card_verification_code: Types::DynamicCardVerificationCode
+      attr_accessor dynamic_card_verification_value: Types::DynamicCardVerificationValue
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AmexCardSecurityCodeVersion1 < CardGenerationAttributes
+      end
+      class AmexCardSecurityCodeVersion2 < CardGenerationAttributes
+      end
+      class CardHolderVerificationValue < CardGenerationAttributes
+      end
+      class CardVerificationValue1 < CardGenerationAttributes
+      end
+      class CardVerificationValue2 < CardGenerationAttributes
+      end
+      class DynamicCardVerificationCode < CardGenerationAttributes
+      end
+      class DynamicCardVerificationValue < CardGenerationAttributes
+      end
+      class Unknown < CardGenerationAttributes
+      end
+    end
+
+    class CardHolderVerificationValue
+      attr_accessor application_transaction_counter: ::String
+      attr_accessor pan_sequence_number: ::String
+      attr_accessor unpredictable_number: ::String
+      SENSITIVE: []
+    end
+
+    class CardVerificationAttributes
+      attr_accessor amex_card_security_code_version_1: Types::AmexCardSecurityCodeVersion1
+      attr_accessor amex_card_security_code_version_2: Types::AmexCardSecurityCodeVersion2
+      attr_accessor card_holder_verification_value: Types::CardHolderVerificationValue
+      attr_accessor card_verification_value_1: Types::CardVerificationValue1
+      attr_accessor card_verification_value_2: Types::CardVerificationValue2
+      attr_accessor discover_dynamic_card_verification_code: Types::DiscoverDynamicCardVerificationCode
+      attr_accessor dynamic_card_verification_code: Types::DynamicCardVerificationCode
+      attr_accessor dynamic_card_verification_value: Types::DynamicCardVerificationValue
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AmexCardSecurityCodeVersion1 < CardVerificationAttributes
+      end
+      class AmexCardSecurityCodeVersion2 < CardVerificationAttributes
+      end
+      class CardHolderVerificationValue < CardVerificationAttributes
+      end
+      class CardVerificationValue1 < CardVerificationAttributes
+      end
+      class CardVerificationValue2 < CardVerificationAttributes
+      end
+      class DiscoverDynamicCardVerificationCode < CardVerificationAttributes
+      end
+      class DynamicCardVerificationCode < CardVerificationAttributes
+      end
+      class DynamicCardVerificationValue < CardVerificationAttributes
+      end
+      class Unknown < CardVerificationAttributes
+      end
+    end
+
+    class CardVerificationValue1
+      attr_accessor card_expiry_date: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class CardVerificationValue2
+      attr_accessor card_expiry_date: ::String
+      SENSITIVE: []
+    end
+
+    class CryptogramAuthResponse
+      attr_accessor arpc_method_1: Types::CryptogramVerificationArpcMethod1
+      attr_accessor arpc_method_2: Types::CryptogramVerificationArpcMethod2
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ArpcMethod1 < CryptogramAuthResponse
+      end
+      class ArpcMethod2 < CryptogramAuthResponse
+      end
+      class Unknown < CryptogramAuthResponse
+      end
+    end
+
+    class CryptogramVerificationArpcMethod1
+      attr_accessor auth_response_code: ::String
+      SENSITIVE: []
+    end
+
+    class CryptogramVerificationArpcMethod2
+      attr_accessor card_status_update: ::String
+      attr_accessor proprietary_authentication_data: ::String
+      SENSITIVE: []
+    end
+
+    class DecryptDataInput
+      attr_accessor cipher_text: ::String
+      attr_accessor decryption_attributes: Types::EncryptionDecryptionAttributes
+      attr_accessor key_identifier: ::String
+      SENSITIVE: [:cipher_text]
+    end
+
+    class DecryptDataOutput
+      attr_accessor key_arn: ::String
+      attr_accessor key_check_value: ::String
+      attr_accessor plain_text: ::String
+      SENSITIVE: [:plain_text]
+    end
+
+    class DiscoverDynamicCardVerificationCode
+      attr_accessor application_transaction_counter: ::String
+      attr_accessor card_expiry_date: ::String
+      attr_accessor unpredictable_number: ::String
+      SENSITIVE: []
+    end
+
+    class DukptAttributes
+      attr_accessor dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")
+      attr_accessor key_serial_number: ::String
+      SENSITIVE: []
+    end
+
+    class DukptDerivationAttributes
+      attr_accessor dukpt_key_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")
+      attr_accessor dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")
+      attr_accessor key_serial_number: ::String
+      SENSITIVE: []
+    end
+
+    class DukptEncryptionAttributes
+      attr_accessor dukpt_key_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")
+      attr_accessor dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")
+      attr_accessor initialization_vector: ::String
+      attr_accessor key_serial_number: ::String
+      attr_accessor mode: ("ECB" | "CBC")
+      SENSITIVE: [:initialization_vector]
+    end
+
+    class DynamicCardVerificationCode
+      attr_accessor application_transaction_counter: ::String
+      attr_accessor pan_sequence_number: ::String
+      attr_accessor track_data: ::String
+      attr_accessor unpredictable_number: ::String
+      SENSITIVE: []
+    end
+
+    class DynamicCardVerificationValue
+      attr_accessor application_transaction_counter: ::String
+      attr_accessor card_expiry_date: ::String
+      attr_accessor pan_sequence_number: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptDataInput
+      attr_accessor encryption_attributes: Types::EncryptionDecryptionAttributes
+      attr_accessor key_identifier: ::String
+      attr_accessor plain_text: ::String
+      SENSITIVE: [:plain_text]
+    end
+
+    class EncryptDataOutput
+      attr_accessor cipher_text: ::String
+      attr_accessor key_arn: ::String
+      attr_accessor key_check_value: ::String
+      SENSITIVE: [:cipher_text]
+    end
+
+    class EncryptionDecryptionAttributes
+      attr_accessor asymmetric: Types::AsymmetricEncryptionAttributes
+      attr_accessor dukpt: Types::DukptEncryptionAttributes
+      attr_accessor symmetric: Types::SymmetricEncryptionAttributes
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Asymmetric < EncryptionDecryptionAttributes
+      end
+      class Dukpt < EncryptionDecryptionAttributes
+      end
+      class Symmetric < EncryptionDecryptionAttributes
+      end
+      class Unknown < EncryptionDecryptionAttributes
+      end
+    end
+
+    class GenerateCardValidationDataInput
+      attr_accessor generation_attributes: Types::CardGenerationAttributes
+      attr_accessor key_identifier: ::String
+      attr_accessor primary_account_number: ::String
+      attr_accessor validation_data_length: ::Integer
+      SENSITIVE: [:primary_account_number]
+    end
+
+    class GenerateCardValidationDataOutput
+      attr_accessor key_arn: ::String
+      attr_accessor key_check_value: ::String
+      attr_accessor validation_data: ::String
+      SENSITIVE: []
+    end
+
+    class GenerateMacInput
+      attr_accessor generation_attributes: Types::MacAttributes
+      attr_accessor key_identifier: ::String
+      attr_accessor mac_length: ::Integer
+      attr_accessor message_data: ::String
+      SENSITIVE: [:message_data]
+    end
+
+    class GenerateMacOutput
+      attr_accessor key_arn: ::String
+      attr_accessor key_check_value: ::String
+      attr_accessor mac: ::String
+      SENSITIVE: []
+    end
+
+    class GeneratePinDataInput
+      attr_accessor encryption_key_identifier: ::String
+      attr_accessor generation_attributes: Types::PinGenerationAttributes
+      attr_accessor generation_key_identifier: ::String
+      attr_accessor pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3")
+      attr_accessor pin_data_length: ::Integer
+      attr_accessor primary_account_number: ::String
+      SENSITIVE: [:primary_account_number]
+    end
+
+    class GeneratePinDataOutput
+      attr_accessor encrypted_pin_block: ::String
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor encryption_key_check_value: ::String
+      attr_accessor generation_key_arn: ::String
+      attr_accessor generation_key_check_value: ::String
+      attr_accessor pin_data: Types::PinData
+      SENSITIVE: []
+    end
+
+    class Ibm3624NaturalPin
+      attr_accessor decimalization_table: ::String
+      attr_accessor pin_validation_data: ::String
+      attr_accessor pin_validation_data_pad_character: ::String
+      SENSITIVE: []
+    end
+
+    class Ibm3624PinFromOffset
+      attr_accessor decimalization_table: ::String
+      attr_accessor pin_offset: ::String
+      attr_accessor pin_validation_data: ::String
+      attr_accessor pin_validation_data_pad_character: ::String
+      SENSITIVE: []
+    end
+
+    class Ibm3624PinOffset
+      attr_accessor decimalization_table: ::String
+      attr_accessor encrypted_pin_block: ::String
+      attr_accessor pin_validation_data: ::String
+      attr_accessor pin_validation_data_pad_character: ::String
+      SENSITIVE: []
+    end
+
+    class Ibm3624PinVerification
+      attr_accessor decimalization_table: ::String
+      attr_accessor pin_offset: ::String
+      attr_accessor pin_validation_data: ::String
+      attr_accessor pin_validation_data_pad_character: ::String
+      SENSITIVE: []
+    end
+
+    class Ibm3624RandomPin
+      attr_accessor decimalization_table: ::String
+      attr_accessor pin_validation_data: ::String
+      attr_accessor pin_validation_data_pad_character: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MacAlgorithmDukpt
+      attr_accessor dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")
+      attr_accessor dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")
+      attr_accessor key_serial_number: ::String
+      SENSITIVE: []
+    end
+
+    class MacAlgorithmEmv
+      attr_accessor major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B")
+      attr_accessor pan_sequence_number: ::String
+      attr_accessor primary_account_number: ::String
+      attr_accessor session_key_derivation_mode: ("EMV_COMMON_SESSION_KEY" | "EMV2000" | "AMEX" | "MASTERCARD_SESSION_KEY" | "VISA")
+      attr_accessor session_key_derivation_value: Types::SessionKeyDerivationValue
+      SENSITIVE: [:primary_account_number]
+    end
+
+    class MacAttributes
+      attr_accessor algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512")
+      attr_accessor dukpt_cmac: Types::MacAlgorithmDukpt
+      attr_accessor dukpt_iso_9797_algorithm_1: Types::MacAlgorithmDukpt
+      attr_accessor dukpt_iso_9797_algorithm_3: Types::MacAlgorithmDukpt
+      attr_accessor emv_mac: Types::MacAlgorithmEmv
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Algorithm < MacAttributes
+      end
+      class DukptCmac < MacAttributes
+      end
+      class DukptIso9797Algorithm1 < MacAttributes
+      end
+      class DukptIso9797Algorithm3 < MacAttributes
+      end
+      class EmvMac < MacAttributes
+      end
+      class Unknown < MacAttributes
+      end
+    end
+
+    class PinData
+      attr_accessor pin_offset: ::String
+      attr_accessor verification_value: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PinOffset < PinData
+      end
+      class VerificationValue < PinData
+      end
+      class Unknown < PinData
+      end
+    end
+
+    class PinGenerationAttributes
+      attr_accessor ibm_3624_natural_pin: Types::Ibm3624NaturalPin
+      attr_accessor ibm_3624_pin_from_offset: Types::Ibm3624PinFromOffset
+      attr_accessor ibm_3624_pin_offset: Types::Ibm3624PinOffset
+      attr_accessor ibm_3624_random_pin: Types::Ibm3624RandomPin
+      attr_accessor visa_pin: Types::VisaPin
+      attr_accessor visa_pin_verification_value: Types::VisaPinVerificationValue
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Ibm3624NaturalPin < PinGenerationAttributes
+      end
+      class Ibm3624PinFromOffset < PinGenerationAttributes
+      end
+      class Ibm3624PinOffset < PinGenerationAttributes
+      end
+      class Ibm3624RandomPin < PinGenerationAttributes
+      end
+      class VisaPin < PinGenerationAttributes
+      end
+      class VisaPinVerificationValue < PinGenerationAttributes
+      end
+      class Unknown < PinGenerationAttributes
+      end
+    end
+
+    class PinVerificationAttributes
+      attr_accessor ibm_3624_pin: Types::Ibm3624PinVerification
+      attr_accessor visa_pin: Types::VisaPinVerification
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Ibm3624Pin < PinVerificationAttributes
+      end
+      class VisaPin < PinVerificationAttributes
+      end
+      class Unknown < PinVerificationAttributes
+      end
+    end
+
+    class ReEncryptDataInput
+      attr_accessor cipher_text: ::String
+      attr_accessor incoming_encryption_attributes: Types::ReEncryptionAttributes
+      attr_accessor incoming_key_identifier: ::String
+      attr_accessor outgoing_encryption_attributes: Types::ReEncryptionAttributes
+      attr_accessor outgoing_key_identifier: ::String
+      SENSITIVE: [:cipher_text]
+    end
+
+    class ReEncryptDataOutput
+      attr_accessor cipher_text: ::String
+      attr_accessor key_arn: ::String
+      attr_accessor key_check_value: ::String
+      SENSITIVE: [:cipher_text]
+    end
+
+    class ReEncryptionAttributes
+      attr_accessor dukpt: Types::DukptEncryptionAttributes
+      attr_accessor symmetric: Types::SymmetricEncryptionAttributes
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Dukpt < ReEncryptionAttributes
+      end
+      class Symmetric < ReEncryptionAttributes
+      end
+      class Unknown < ReEncryptionAttributes
+      end
+    end
+
+    class ResourceNotFoundException
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class SessionKeyAmex
+      attr_accessor pan_sequence_number: ::String
+      attr_accessor primary_account_number: ::String
+      SENSITIVE: [:primary_account_number]
+    end
+
+    class SessionKeyDerivation
+      attr_accessor amex: Types::SessionKeyAmex
+      attr_accessor emv_2000: Types::SessionKeyEmv2000
+      attr_accessor emv_common: Types::SessionKeyEmvCommon
+      attr_accessor mastercard: Types::SessionKeyMastercard
+      attr_accessor visa: Types::SessionKeyVisa
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Amex < SessionKeyDerivation
+      end
+      class Emv2000 < SessionKeyDerivation
+      end
+      class EmvCommon < SessionKeyDerivation
+      end
+      class Mastercard < SessionKeyDerivation
+      end
+      class Visa < SessionKeyDerivation
+      end
+      class Unknown < SessionKeyDerivation
+      end
+    end
+
+    class SessionKeyDerivationValue
+      attr_accessor application_cryptogram: ::String
+      attr_accessor application_transaction_counter: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ApplicationCryptogram < SessionKeyDerivationValue
+      end
+      class ApplicationTransactionCounter < SessionKeyDerivationValue
+      end
+      class Unknown < SessionKeyDerivationValue
+      end
+    end
+
+    class SessionKeyEmv2000
+      attr_accessor application_transaction_counter: ::String
+      attr_accessor pan_sequence_number: ::String
+      attr_accessor primary_account_number: ::String
+      SENSITIVE: [:primary_account_number]
+    end
+
+    class SessionKeyEmvCommon
+      attr_accessor application_transaction_counter: ::String
+      attr_accessor pan_sequence_number: ::String
+      attr_accessor primary_account_number: ::String
+      SENSITIVE: [:primary_account_number]
+    end
+
+    class SessionKeyMastercard
+      attr_accessor application_transaction_counter: ::String
+      attr_accessor pan_sequence_number: ::String
+      attr_accessor primary_account_number: ::String
+      attr_accessor unpredictable_number: ::String
+      SENSITIVE: [:primary_account_number]
+    end
+
+    class SessionKeyVisa
+      attr_accessor pan_sequence_number: ::String
+      attr_accessor primary_account_number: ::String
+      SENSITIVE: [:primary_account_number]
+    end
+
+    class SymmetricEncryptionAttributes
+      attr_accessor initialization_vector: ::String
+      attr_accessor mode: ("ECB" | "CBC" | "CFB" | "CFB1" | "CFB8" | "CFB64" | "CFB128" | "OFB")
+      attr_accessor padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")
+      SENSITIVE: [:initialization_vector]
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TranslatePinDataInput
+      attr_accessor encrypted_pin_block: ::String
+      attr_accessor incoming_dukpt_attributes: Types::DukptDerivationAttributes
+      attr_accessor incoming_key_identifier: ::String
+      attr_accessor incoming_translation_attributes: Types::TranslationIsoFormats
+      attr_accessor outgoing_dukpt_attributes: Types::DukptDerivationAttributes
+      attr_accessor outgoing_key_identifier: ::String
+      attr_accessor outgoing_translation_attributes: Types::TranslationIsoFormats
+      SENSITIVE: [:encrypted_pin_block]
+    end
+
+    class TranslatePinDataOutput
+      attr_accessor key_arn: ::String
+      attr_accessor key_check_value: ::String
+      attr_accessor pin_block: ::String
+      SENSITIVE: []
+    end
+
+    class TranslationIsoFormats
+      attr_accessor iso_format_0: Types::TranslationPinDataIsoFormat034
+      attr_accessor iso_format_1: Types::TranslationPinDataIsoFormat1
+      attr_accessor iso_format_3: Types::TranslationPinDataIsoFormat034
+      attr_accessor iso_format_4: Types::TranslationPinDataIsoFormat034
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IsoFormat0 < TranslationIsoFormats
+      end
+      class IsoFormat1 < TranslationIsoFormats
+      end
+      class IsoFormat3 < TranslationIsoFormats
+      end
+      class IsoFormat4 < TranslationIsoFormats
+      end
+      class Unknown < TranslationIsoFormats
+      end
+    end
+
+    class TranslationPinDataIsoFormat034
+      attr_accessor primary_account_number: ::String
+      SENSITIVE: [:primary_account_number]
+    end
+
+    class TranslationPinDataIsoFormat1 < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor message: ::String
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class VerificationFailedException
+      attr_accessor message: ::String
+      attr_accessor reason: ("INVALID_MAC" | "INVALID_PIN" | "INVALID_VALIDATION_DATA" | "INVALID_AUTH_REQUEST_CRYPTOGRAM")
+      SENSITIVE: []
+    end
+
+    class VerifyAuthRequestCryptogramInput
+      attr_accessor auth_request_cryptogram: ::String
+      attr_accessor auth_response_attributes: Types::CryptogramAuthResponse
+      attr_accessor key_identifier: ::String
+      attr_accessor major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B")
+      attr_accessor session_key_derivation_attributes: Types::SessionKeyDerivation
+      attr_accessor transaction_data: ::String
+      SENSITIVE: []
+    end
+
+    class VerifyAuthRequestCryptogramOutput
+      attr_accessor auth_response_value: ::String
+      attr_accessor key_arn: ::String
+      attr_accessor key_check_value: ::String
+      SENSITIVE: []
+    end
+
+    class VerifyCardValidationDataInput
+      attr_accessor key_identifier: ::String
+      attr_accessor primary_account_number: ::String
+      attr_accessor validation_data: ::String
+      attr_accessor verification_attributes: Types::CardVerificationAttributes
+      SENSITIVE: [:primary_account_number]
+    end
+
+    class VerifyCardValidationDataOutput
+      attr_accessor key_arn: ::String
+      attr_accessor key_check_value: ::String
+      SENSITIVE: []
+    end
+
+    class VerifyMacInput
+      attr_accessor key_identifier: ::String
+      attr_accessor mac: ::String
+      attr_accessor mac_length: ::Integer
+      attr_accessor message_data: ::String
+      attr_accessor verification_attributes: Types::MacAttributes
+      SENSITIVE: [:mac, :message_data]
+    end
+
+    class VerifyMacOutput
+      attr_accessor key_arn: ::String
+      attr_accessor key_check_value: ::String
+      SENSITIVE: []
+    end
+
+    class VerifyPinDataInput
+      attr_accessor dukpt_attributes: Types::DukptAttributes
+      attr_accessor encrypted_pin_block: ::String
+      attr_accessor encryption_key_identifier: ::String
+      attr_accessor pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_3")
+      attr_accessor pin_data_length: ::Integer
+      attr_accessor primary_account_number: ::String
+      attr_accessor verification_attributes: Types::PinVerificationAttributes
+      attr_accessor verification_key_identifier: ::String
+      SENSITIVE: [:primary_account_number]
+    end
+
+    class VerifyPinDataOutput
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor encryption_key_check_value: ::String
+      attr_accessor verification_key_arn: ::String
+      attr_accessor verification_key_check_value: ::String
+      SENSITIVE: []
+    end
+
+    class VisaPin
+      attr_accessor pin_verification_key_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class VisaPinVerification
+      attr_accessor pin_verification_key_index: ::Integer
+      attr_accessor verification_value: ::String
+      SENSITIVE: []
+    end
+
+    class VisaPinVerificationValue
+      attr_accessor encrypted_pin_block: ::String
+      attr_accessor pin_verification_key_index: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

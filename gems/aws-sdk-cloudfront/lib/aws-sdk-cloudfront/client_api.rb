@@ -48,6 +48,7 @@ module Aws::CloudFront
     CachePolicyType = Shapes::StringShape.new(name: 'CachePolicyType')
     CachedMethods = Shapes::StructureShape.new(name: 'CachedMethods')
     CannotChangeImmutablePublicKeyFields = Shapes::StructureShape.new(name: 'CannotChangeImmutablePublicKeyFields')
+    CannotDeleteEntityWhileInUse = Shapes::StructureShape.new(name: 'CannotDeleteEntityWhileInUse')
     CertificateSource = Shapes::StringShape.new(name: 'CertificateSource')
     CloudFrontOriginAccessIdentity = Shapes::StructureShape.new(name: 'CloudFrontOriginAccessIdentity')
     CloudFrontOriginAccessIdentityAlreadyExists = Shapes::StructureShape.new(name: 'CloudFrontOriginAccessIdentityAlreadyExists')
@@ -99,6 +100,8 @@ module Aws::CloudFront
     CreateInvalidationResult = Shapes::StructureShape.new(name: 'CreateInvalidationResult')
     CreateKeyGroupRequest = Shapes::StructureShape.new(name: 'CreateKeyGroupRequest')
     CreateKeyGroupResult = Shapes::StructureShape.new(name: 'CreateKeyGroupResult')
+    CreateKeyValueStoreRequest = Shapes::StructureShape.new(name: 'CreateKeyValueStoreRequest')
+    CreateKeyValueStoreResult = Shapes::StructureShape.new(name: 'CreateKeyValueStoreResult')
     CreateMonitoringSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateMonitoringSubscriptionRequest')
     CreateMonitoringSubscriptionResult = Shapes::StructureShape.new(name: 'CreateMonitoringSubscriptionResult')
     CreateOriginAccessControlRequest = Shapes::StructureShape.new(name: 'CreateOriginAccessControlRequest')
@@ -129,6 +132,7 @@ module Aws::CloudFront
     DeleteFieldLevelEncryptionProfileRequest = Shapes::StructureShape.new(name: 'DeleteFieldLevelEncryptionProfileRequest')
     DeleteFunctionRequest = Shapes::StructureShape.new(name: 'DeleteFunctionRequest')
     DeleteKeyGroupRequest = Shapes::StructureShape.new(name: 'DeleteKeyGroupRequest')
+    DeleteKeyValueStoreRequest = Shapes::StructureShape.new(name: 'DeleteKeyValueStoreRequest')
     DeleteMonitoringSubscriptionRequest = Shapes::StructureShape.new(name: 'DeleteMonitoringSubscriptionRequest')
     DeleteMonitoringSubscriptionResult = Shapes::StructureShape.new(name: 'DeleteMonitoringSubscriptionResult')
     DeleteOriginAccessControlRequest = Shapes::StructureShape.new(name: 'DeleteOriginAccessControlRequest')
@@ -139,6 +143,8 @@ module Aws::CloudFront
     DeleteStreamingDistributionRequest = Shapes::StructureShape.new(name: 'DeleteStreamingDistributionRequest')
     DescribeFunctionRequest = Shapes::StructureShape.new(name: 'DescribeFunctionRequest')
     DescribeFunctionResult = Shapes::StructureShape.new(name: 'DescribeFunctionResult')
+    DescribeKeyValueStoreRequest = Shapes::StructureShape.new(name: 'DescribeKeyValueStoreRequest')
+    DescribeKeyValueStoreResult = Shapes::StructureShape.new(name: 'DescribeKeyValueStoreResult')
     Distribution = Shapes::StructureShape.new(name: 'Distribution')
     DistributionAlreadyExists = Shapes::StructureShape.new(name: 'DistributionAlreadyExists')
     DistributionConfig = Shapes::StructureShape.new(name: 'DistributionConfig')
@@ -154,6 +160,10 @@ module Aws::CloudFront
     EncryptionEntityList = Shapes::ListShape.new(name: 'EncryptionEntityList')
     EndPoint = Shapes::StructureShape.new(name: 'EndPoint')
     EndPointList = Shapes::ListShape.new(name: 'EndPointList')
+    EntityAlreadyExists = Shapes::StructureShape.new(name: 'EntityAlreadyExists')
+    EntityLimitExceeded = Shapes::StructureShape.new(name: 'EntityLimitExceeded')
+    EntityNotFound = Shapes::StructureShape.new(name: 'EntityNotFound')
+    EntitySizeLimitExceeded = Shapes::StructureShape.new(name: 'EntitySizeLimitExceeded')
     EventType = Shapes::StringShape.new(name: 'EventType')
     FieldLevelEncryption = Shapes::StructureShape.new(name: 'FieldLevelEncryption')
     FieldLevelEncryptionConfig = Shapes::StructureShape.new(name: 'FieldLevelEncryptionConfig')
@@ -260,6 +270,8 @@ module Aws::CloudFront
     IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior = Shapes::StructureShape.new(name: 'IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior')
     IllegalOriginAccessConfiguration = Shapes::StructureShape.new(name: 'IllegalOriginAccessConfiguration')
     IllegalUpdate = Shapes::StructureShape.new(name: 'IllegalUpdate')
+    ImportSource = Shapes::StructureShape.new(name: 'ImportSource')
+    ImportSourceType = Shapes::StringShape.new(name: 'ImportSourceType')
     InconsistentQuantities = Shapes::StructureShape.new(name: 'InconsistentQuantities')
     InvalidArgument = Shapes::StructureShape.new(name: 'InvalidArgument')
     InvalidDefaultRootObject = Shapes::StructureShape.new(name: 'InvalidDefaultRootObject')
@@ -303,6 +315,15 @@ module Aws::CloudFront
     KeyGroupSummaryList = Shapes::ListShape.new(name: 'KeyGroupSummaryList')
     KeyPairIdList = Shapes::ListShape.new(name: 'KeyPairIdList')
     KeyPairIds = Shapes::StructureShape.new(name: 'KeyPairIds')
+    KeyValueStore = Shapes::StructureShape.new(name: 'KeyValueStore')
+    KeyValueStoreARN = Shapes::StringShape.new(name: 'KeyValueStoreARN')
+    KeyValueStoreAssociation = Shapes::StructureShape.new(name: 'KeyValueStoreAssociation')
+    KeyValueStoreAssociationList = Shapes::ListShape.new(name: 'KeyValueStoreAssociationList')
+    KeyValueStoreAssociations = Shapes::StructureShape.new(name: 'KeyValueStoreAssociations')
+    KeyValueStoreComment = Shapes::StringShape.new(name: 'KeyValueStoreComment')
+    KeyValueStoreList = Shapes::StructureShape.new(name: 'KeyValueStoreList')
+    KeyValueStoreName = Shapes::StringShape.new(name: 'KeyValueStoreName')
+    KeyValueStoreSummaryList = Shapes::ListShape.new(name: 'KeyValueStoreSummaryList')
     KinesisStreamConfig = Shapes::StructureShape.new(name: 'KinesisStreamConfig')
     LambdaFunctionARN = Shapes::StringShape.new(name: 'LambdaFunctionARN')
     LambdaFunctionAssociation = Shapes::StructureShape.new(name: 'LambdaFunctionAssociation')
@@ -340,6 +361,8 @@ module Aws::CloudFront
     ListInvalidationsResult = Shapes::StructureShape.new(name: 'ListInvalidationsResult')
     ListKeyGroupsRequest = Shapes::StructureShape.new(name: 'ListKeyGroupsRequest')
     ListKeyGroupsResult = Shapes::StructureShape.new(name: 'ListKeyGroupsResult')
+    ListKeyValueStoresRequest = Shapes::StructureShape.new(name: 'ListKeyValueStoresRequest')
+    ListKeyValueStoresResult = Shapes::StructureShape.new(name: 'ListKeyValueStoresResult')
     ListOriginAccessControlsRequest = Shapes::StructureShape.new(name: 'ListOriginAccessControlsRequest')
     ListOriginAccessControlsResult = Shapes::StructureShape.new(name: 'ListOriginAccessControlsResult')
     ListOriginRequestPoliciesRequest = Shapes::StructureShape.new(name: 'ListOriginRequestPoliciesRequest')
@@ -596,6 +619,8 @@ module Aws::CloudFront
     UpdateFunctionResult = Shapes::StructureShape.new(name: 'UpdateFunctionResult')
     UpdateKeyGroupRequest = Shapes::StructureShape.new(name: 'UpdateKeyGroupRequest')
     UpdateKeyGroupResult = Shapes::StructureShape.new(name: 'UpdateKeyGroupResult')
+    UpdateKeyValueStoreRequest = Shapes::StructureShape.new(name: 'UpdateKeyValueStoreRequest')
+    UpdateKeyValueStoreResult = Shapes::StructureShape.new(name: 'UpdateKeyValueStoreResult')
     UpdateOriginAccessControlRequest = Shapes::StructureShape.new(name: 'UpdateOriginAccessControlRequest')
     UpdateOriginAccessControlResult = Shapes::StructureShape.new(name: 'UpdateOriginAccessControlResult')
     UpdateOriginRequestPolicyRequest = Shapes::StructureShape.new(name: 'UpdateOriginRequestPolicyRequest')
@@ -747,6 +772,9 @@ module Aws::CloudFront
 
     CannotChangeImmutablePublicKeyFields.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     CannotChangeImmutablePublicKeyFields.struct_class = Types::CannotChangeImmutablePublicKeyFields
+
+    CannotDeleteEntityWhileInUse.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    CannotDeleteEntityWhileInUse.struct_class = Types::CannotDeleteEntityWhileInUse
 
     CloudFrontOriginAccessIdentity.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
     CloudFrontOriginAccessIdentity.add_member(:s3_canonical_user_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "S3CanonicalUserId"))
@@ -985,6 +1013,18 @@ module Aws::CloudFront
     CreateKeyGroupResult[:payload] = :key_group
     CreateKeyGroupResult[:payload_member] = CreateKeyGroupResult.member(:key_group)
 
+    CreateKeyValueStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: KeyValueStoreName, required: true, location_name: "Name"))
+    CreateKeyValueStoreRequest.add_member(:comment, Shapes::ShapeRef.new(shape: KeyValueStoreComment, location_name: "Comment"))
+    CreateKeyValueStoreRequest.add_member(:import_source, Shapes::ShapeRef.new(shape: ImportSource, location_name: "ImportSource"))
+    CreateKeyValueStoreRequest.struct_class = Types::CreateKeyValueStoreRequest
+
+    CreateKeyValueStoreResult.add_member(:key_value_store, Shapes::ShapeRef.new(shape: KeyValueStore, location_name: "KeyValueStore"))
+    CreateKeyValueStoreResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    CreateKeyValueStoreResult.add_member(:location, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "Location"))
+    CreateKeyValueStoreResult.struct_class = Types::CreateKeyValueStoreResult
+    CreateKeyValueStoreResult[:payload] = :key_value_store
+    CreateKeyValueStoreResult[:payload_member] = CreateKeyValueStoreResult.member(:key_value_store)
+
     CreateMonitoringSubscriptionRequest.add_member(:distribution_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "DistributionId"))
     CreateMonitoringSubscriptionRequest.add_member(:monitoring_subscription, Shapes::ShapeRef.new(shape: MonitoringSubscription, required: true, location_name: "MonitoringSubscription", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     CreateMonitoringSubscriptionRequest.struct_class = Types::CreateMonitoringSubscriptionRequest
@@ -1153,6 +1193,10 @@ module Aws::CloudFront
     DeleteKeyGroupRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
     DeleteKeyGroupRequest.struct_class = Types::DeleteKeyGroupRequest
 
+    DeleteKeyValueStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: KeyValueStoreName, required: true, location: "uri", location_name: "Name"))
+    DeleteKeyValueStoreRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, required: true, location: "header", location_name: "If-Match"))
+    DeleteKeyValueStoreRequest.struct_class = Types::DeleteKeyValueStoreRequest
+
     DeleteMonitoringSubscriptionRequest.add_member(:distribution_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "DistributionId"))
     DeleteMonitoringSubscriptionRequest.struct_class = Types::DeleteMonitoringSubscriptionRequest
 
@@ -1191,6 +1235,15 @@ module Aws::CloudFront
     DescribeFunctionResult.struct_class = Types::DescribeFunctionResult
     DescribeFunctionResult[:payload] = :function_summary
     DescribeFunctionResult[:payload_member] = DescribeFunctionResult.member(:function_summary)
+
+    DescribeKeyValueStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: KeyValueStoreName, required: true, location: "uri", location_name: "Name"))
+    DescribeKeyValueStoreRequest.struct_class = Types::DescribeKeyValueStoreRequest
+
+    DescribeKeyValueStoreResult.add_member(:key_value_store, Shapes::ShapeRef.new(shape: KeyValueStore, location_name: "KeyValueStore"))
+    DescribeKeyValueStoreResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    DescribeKeyValueStoreResult.struct_class = Types::DescribeKeyValueStoreResult
+    DescribeKeyValueStoreResult[:payload] = :key_value_store
+    DescribeKeyValueStoreResult[:payload_member] = DescribeKeyValueStoreResult.member(:key_value_store)
 
     Distribution.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
     Distribution.add_member(:arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ARN"))
@@ -1295,6 +1348,18 @@ module Aws::CloudFront
 
     EndPointList.member = Shapes::ShapeRef.new(shape: EndPoint)
 
+    EntityAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    EntityAlreadyExists.struct_class = Types::EntityAlreadyExists
+
+    EntityLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    EntityLimitExceeded.struct_class = Types::EntityLimitExceeded
+
+    EntityNotFound.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    EntityNotFound.struct_class = Types::EntityNotFound
+
+    EntitySizeLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    EntitySizeLimitExceeded.struct_class = Types::EntitySizeLimitExceeded
+
     FieldLevelEncryption.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
     FieldLevelEncryption.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastModifiedTime"))
     FieldLevelEncryption.add_member(:field_level_encryption_config, Shapes::ShapeRef.new(shape: FieldLevelEncryptionConfig, required: true, location_name: "FieldLevelEncryptionConfig"))
@@ -1391,6 +1456,7 @@ module Aws::CloudFront
 
     FunctionConfig.add_member(:comment, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Comment"))
     FunctionConfig.add_member(:runtime, Shapes::ShapeRef.new(shape: FunctionRuntime, required: true, location_name: "Runtime"))
+    FunctionConfig.add_member(:key_value_store_associations, Shapes::ShapeRef.new(shape: KeyValueStoreAssociations, location_name: "KeyValueStoreAssociations"))
     FunctionConfig.struct_class = Types::FunctionConfig
 
     FunctionExecutionLogList.member = Shapes::ShapeRef.new(shape: string)
@@ -1695,6 +1761,10 @@ module Aws::CloudFront
     IllegalUpdate.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     IllegalUpdate.struct_class = Types::IllegalUpdate
 
+    ImportSource.add_member(:source_type, Shapes::ShapeRef.new(shape: ImportSourceType, required: true, location_name: "SourceType"))
+    ImportSource.add_member(:source_arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "SourceARN"))
+    ImportSource.struct_class = Types::ImportSource
+
     InconsistentQuantities.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     InconsistentQuantities.struct_class = Types::InconsistentQuantities
 
@@ -1836,6 +1906,31 @@ module Aws::CloudFront
     KeyPairIds.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
     KeyPairIds.add_member(:items, Shapes::ShapeRef.new(shape: KeyPairIdList, location_name: "Items"))
     KeyPairIds.struct_class = Types::KeyPairIds
+
+    KeyValueStore.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Name"))
+    KeyValueStore.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
+    KeyValueStore.add_member(:comment, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Comment"))
+    KeyValueStore.add_member(:arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ARN"))
+    KeyValueStore.add_member(:status, Shapes::ShapeRef.new(shape: string, location_name: "Status"))
+    KeyValueStore.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastModifiedTime"))
+    KeyValueStore.struct_class = Types::KeyValueStore
+
+    KeyValueStoreAssociation.add_member(:key_value_store_arn, Shapes::ShapeRef.new(shape: KeyValueStoreARN, required: true, location_name: "KeyValueStoreARN"))
+    KeyValueStoreAssociation.struct_class = Types::KeyValueStoreAssociation
+
+    KeyValueStoreAssociationList.member = Shapes::ShapeRef.new(shape: KeyValueStoreAssociation, location_name: "KeyValueStoreAssociation")
+
+    KeyValueStoreAssociations.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+    KeyValueStoreAssociations.add_member(:items, Shapes::ShapeRef.new(shape: KeyValueStoreAssociationList, location_name: "Items"))
+    KeyValueStoreAssociations.struct_class = Types::KeyValueStoreAssociations
+
+    KeyValueStoreList.add_member(:next_marker, Shapes::ShapeRef.new(shape: string, location_name: "NextMarker"))
+    KeyValueStoreList.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "MaxItems"))
+    KeyValueStoreList.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+    KeyValueStoreList.add_member(:items, Shapes::ShapeRef.new(shape: KeyValueStoreSummaryList, location_name: "Items"))
+    KeyValueStoreList.struct_class = Types::KeyValueStoreList
+
+    KeyValueStoreSummaryList.member = Shapes::ShapeRef.new(shape: KeyValueStore, location_name: "KeyValueStore")
 
     KinesisStreamConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "RoleARN"))
     KinesisStreamConfig.add_member(:stream_arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "StreamARN"))
@@ -2007,6 +2102,16 @@ module Aws::CloudFront
     ListKeyGroupsResult.struct_class = Types::ListKeyGroupsResult
     ListKeyGroupsResult[:payload] = :key_group_list
     ListKeyGroupsResult[:payload_member] = ListKeyGroupsResult.member(:key_group_list)
+
+    ListKeyValueStoresRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
+    ListKeyValueStoresRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
+    ListKeyValueStoresRequest.add_member(:status, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Status"))
+    ListKeyValueStoresRequest.struct_class = Types::ListKeyValueStoresRequest
+
+    ListKeyValueStoresResult.add_member(:key_value_store_list, Shapes::ShapeRef.new(shape: KeyValueStoreList, location_name: "KeyValueStoreList"))
+    ListKeyValueStoresResult.struct_class = Types::ListKeyValueStoresResult
+    ListKeyValueStoresResult[:payload] = :key_value_store_list
+    ListKeyValueStoresResult[:payload_member] = ListKeyValueStoresResult.member(:key_value_store_list)
 
     ListOriginAccessControlsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "Marker"))
     ListOriginAccessControlsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, location: "querystring", location_name: "MaxItems"))
@@ -2946,6 +3051,17 @@ module Aws::CloudFront
     UpdateKeyGroupResult[:payload] = :key_group
     UpdateKeyGroupResult[:payload_member] = UpdateKeyGroupResult.member(:key_group)
 
+    UpdateKeyValueStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: KeyValueStoreName, required: true, location: "uri", location_name: "Name"))
+    UpdateKeyValueStoreRequest.add_member(:comment, Shapes::ShapeRef.new(shape: KeyValueStoreComment, required: true, location_name: "Comment"))
+    UpdateKeyValueStoreRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, required: true, location: "header", location_name: "If-Match"))
+    UpdateKeyValueStoreRequest.struct_class = Types::UpdateKeyValueStoreRequest
+
+    UpdateKeyValueStoreResult.add_member(:key_value_store, Shapes::ShapeRef.new(shape: KeyValueStore, location_name: "KeyValueStore"))
+    UpdateKeyValueStoreResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+    UpdateKeyValueStoreResult.struct_class = Types::UpdateKeyValueStoreResult
+    UpdateKeyValueStoreResult[:payload] = :key_value_store
+    UpdateKeyValueStoreResult[:payload_member] = UpdateKeyValueStoreResult.member(:key_value_store)
+
     UpdateOriginAccessControlRequest.add_member(:origin_access_control_config, Shapes::ShapeRef.new(shape: OriginAccessControlConfig, required: true, location_name: "OriginAccessControlConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
     UpdateOriginAccessControlRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
     UpdateOriginAccessControlRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
@@ -3405,6 +3521,24 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: TooManyPublicKeysInKeyGroup)
       end)
 
+      api.add_operation(:create_key_value_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateKeyValueStore2020_05_31"
+        o.http_method = "POST"
+        o.http_request_uri = "/2020-05-31/key-value-store/"
+        o.input = Shapes::ShapeRef.new(shape: CreateKeyValueStoreRequest,
+          location_name: "CreateKeyValueStoreRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: CreateKeyValueStoreResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: EntityLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: EntitySizeLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+      end)
+
       api.add_operation(:create_monitoring_subscription, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateMonitoringSubscription2020_05_31"
         o.http_method = "POST"
@@ -3636,6 +3770,19 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
       end)
 
+      api.add_operation(:delete_key_value_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteKeyValueStore2020_05_31"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2020-05-31/key-value-store/{Name}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteKeyValueStoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: CannotDeleteEntityWhileInUse)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
+      end)
+
       api.add_operation(:delete_monitoring_subscription, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteMonitoringSubscription2020_05_31"
         o.http_method = "DELETE"
@@ -3740,6 +3887,17 @@ module Aws::CloudFront
         o.output = Shapes::ShapeRef.new(shape: DescribeFunctionResult)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchFunctionExists)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperation)
+      end)
+
+      api.add_operation(:describe_key_value_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeKeyValueStore2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/key-value-store/{Name}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeKeyValueStoreRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeKeyValueStoreResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFound)
       end)
 
       api.add_operation(:get_cache_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -4215,6 +4373,22 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
       end)
 
+      api.add_operation(:list_key_value_stores, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListKeyValueStores2020_05_31"
+        o.http_method = "GET"
+        o.http_request_uri = "/2020-05-31/key-value-store"
+        o.input = Shapes::ShapeRef.new(shape: ListKeyValueStoresRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListKeyValueStoresResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_items",
+          tokens: {
+            "key_value_store_list.next_marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:list_origin_access_controls, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListOriginAccessControls2020_05_31"
         o.http_method = "GET"
@@ -4612,6 +4786,24 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: KeyGroupAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
         o.errors << Shapes::ShapeRef.new(shape: TooManyPublicKeysInKeyGroup)
+      end)
+
+      api.add_operation(:update_key_value_store, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateKeyValueStore2020_05_31"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2020-05-31/key-value-store/{Name}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateKeyValueStoreRequest,
+          location_name: "UpdateKeyValueStoreRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://cloudfront.amazonaws.com/doc/2020-05-31/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: UpdateKeyValueStoreResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIfMatchVersion)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
       end)
 
       api.add_operation(:update_origin_access_control, Seahorse::Model::Operation.new.tap do |o|

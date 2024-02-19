@@ -187,6 +187,14 @@ module Aws::Personalize
     #   requested the batch inference job.
     #   @return [String]
     #
+    # @!attribute [rw] batch_inference_job_mode
+    #   The job's mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_generation_config
+    #   The job's theme generation settings.
+    #   @return [Types::ThemeGenerationConfig]
+    #
     # @!attribute [rw] status
     #   The status of the batch inference job. The status is one of the
     #   following values:
@@ -221,6 +229,8 @@ module Aws::Personalize
       :job_output,
       :batch_inference_job_config,
       :role_arn,
+      :batch_inference_job_mode,
+      :theme_generation_config,
       :status,
       :creation_date_time,
       :last_updated_date_time)
@@ -327,6 +337,10 @@ module Aws::Personalize
     #   The ARN of the solution version used by the batch inference job.
     #   @return [String]
     #
+    # @!attribute [rw] batch_inference_job_mode
+    #   The job's mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/BatchInferenceJobSummary AWS API Documentation
     #
     class BatchInferenceJobSummary < Struct.new(
@@ -336,7 +350,8 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       :failure_reason,
-      :solution_version_arn)
+      :solution_version_arn,
+      :batch_inference_job_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -611,10 +626,28 @@ module Aws::Personalize
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] enable_metadata_with_recommendations
+    #   Whether metadata with recommendations is enabled for the campaign.
+    #   If enabled, you can specify the columns from your Items dataset in
+    #   your request for recommendations. Amazon Personalize returns this
+    #   data for each item in the recommendation response. For information
+    #   about enabling metadata for a campaign, see [Enabling metadata in
+    #   recommendations for a campaign][1].
+    #
+    #   If you enable metadata in recommendations, you will incur additional
+    #   costs. For more information, see [Amazon Personalize pricing][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata
+    #   [2]: https://aws.amazon.com/personalize/pricing/
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CampaignConfig AWS API Documentation
     #
     class CampaignConfig < Struct.new(
-      :item_exploration_config)
+      :item_exploration_config,
+      :enable_metadata_with_recommendations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -823,6 +856,26 @@ module Aws::Personalize
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] batch_inference_job_mode
+    #   The mode of the batch inference job. To generate descriptive themes
+    #   for groups of similar items, set the job mode to `THEME_GENERATION`.
+    #   If you don't want to generate themes, use the default
+    #   `BATCH_INFERENCE`.
+    #
+    #   When you get batch recommendations with themes, you will incur
+    #   additional costs. For more information, see [Amazon Personalize
+    #   pricing][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/personalize/pricing/
+    #   @return [String]
+    #
+    # @!attribute [rw] theme_generation_config
+    #   For theme generation jobs, specify the name of the column in your
+    #   Items dataset that contains each item's name.
+    #   @return [Types::ThemeGenerationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateBatchInferenceJobRequest AWS API Documentation
     #
     class CreateBatchInferenceJobRequest < Struct.new(
@@ -834,7 +887,9 @@ module Aws::Personalize
       :job_output,
       :role_arn,
       :batch_inference_job_config,
-      :tags)
+      :tags,
+      :batch_inference_job_mode,
+      :theme_generation_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1193,6 +1248,10 @@ module Aws::Personalize
     #   * Items
     #
     #   * Users
+    #
+    #   * Actions
+    #
+    #   * Action\_Interactions
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1478,7 +1537,7 @@ module Aws::Personalize
     # @!attribute [rw] perform_auto_ml
     #   We don't recommend enabling automated machine learning. Instead,
     #   match your use case to the available Amazon Personalize recipes. For
-    #   more information, see [Determining your use case.][1]
+    #   more information, see [Choosing a recipe][1].
     #
     #   Whether to perform automated machine learning (AutoML). The default
     #   is `false`. For this case, you must specify `recipeArn`.
@@ -1492,12 +1551,18 @@ module Aws::Personalize
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/determining-use-case.html
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html
     #   @return [Boolean]
     #
     # @!attribute [rw] recipe_arn
-    #   The ARN of the recipe to use for model training. This is required
-    #   when `performAutoML` is false.
+    #   The Amazon Resource Name (ARN) of the recipe to use for model
+    #   training. This is required when `performAutoML` is false. For
+    #   information about different Amazon Personalize recipes and their
+    #   ARNs, see [Choosing a recipe][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html
     #   @return [String]
     #
     # @!attribute [rw] dataset_group_arn
@@ -1571,22 +1636,30 @@ module Aws::Personalize
     #
     # @!attribute [rw] training_mode
     #   The scope of training to be performed when creating the solution
-    #   version. The `FULL` option trains the solution version based on the
-    #   entirety of the input solution's training data, while the `UPDATE`
-    #   option processes only the data that has changed in comparison to the
-    #   input solution. Choose `UPDATE` when you want to incrementally
-    #   update your solution version instead of creating an entirely new
-    #   one.
+    #   version. The default is `FULL`. This creates a completely new model
+    #   based on the entirety of the training data from the datasets in your
+    #   dataset group.
+    #
+    #   If you use [User-Personalization][1], you can specify a training
+    #   mode of `UPDATE`. This updates the model to consider new items for
+    #   recommendations. It is not a full retraining. You should still
+    #   complete a full retraining weekly. If you specify `UPDATE`, Amazon
+    #   Personalize will stop automatic updates for the solution version. To
+    #   resume updates, create a new solution with training mode set to
+    #   `FULL` and deploy it in a campaign. For more information about
+    #   automatic updates, see [Automatic updates][2].
     #
     #   The `UPDATE` option can only be used when you already have an active
     #   solution version created from the input solution using the `FULL`
     #   option and the input solution was trained with the
-    #   [User-Personalization][1] recipe or the [HRNN-Coldstart][2] recipe.
+    #   [User-Personalization][1] recipe or the legacy [HRNN-Coldstart][3]
+    #   recipe.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
-    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/use-case-recipe-features.html#maintaining-with-automatic-updates
+    #   [3]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1661,6 +1734,10 @@ module Aws::Personalize
     #   * Items
     #
     #   * Users
+    #
+    #   * Actions
+    #
+    #   * Action\_Interactions
     #   @return [String]
     #
     # @!attribute [rw] schema_arn
@@ -1690,6 +1767,13 @@ module Aws::Personalize
     #   Describes the latest update to the dataset.
     #   @return [Types::DatasetUpdateSummary]
     #
+    # @!attribute [rw] tracking_id
+    #   The ID of the event tracker for an Action interactions dataset. You
+    #   specify the tracker's ID in the `PutActionInteractions` API
+    #   operation. Amazon Personalize uses it to direct new data to the
+    #   Action interactions dataset in your dataset group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/Dataset AWS API Documentation
     #
     class Dataset < Struct.new(
@@ -1701,7 +1785,8 @@ module Aws::Personalize
       :status,
       :creation_date_time,
       :last_updated_date_time,
-      :latest_dataset_update)
+      :latest_dataset_update,
+      :tracking_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1860,12 +1945,13 @@ module Aws::Personalize
       include Aws::Structure
     end
 
-    # A dataset group is a collection of related datasets (Interactions,
-    # User, and Item). You create a dataset group by calling
-    # [CreateDatasetGroup][1]. You then create a dataset and add it to a
-    # dataset group by calling [CreateDataset][2]. The dataset group is used
-    # to create and train a solution by calling [CreateSolution][3]. A
-    # dataset group can contain only one of each type of dataset.
+    # A dataset group is a collection of related datasets (Item
+    # interactions, Users, Items, Actions, Action interactions). You create
+    # a dataset group by calling [CreateDatasetGroup][1]. You then create a
+    # dataset and add it to a dataset group by calling [CreateDataset][2].
+    # The dataset group is used to create and train a solution by calling
+    # [CreateSolution][3]. A dataset group can contain only one of each type
+    # of dataset.
     #
     # You can specify an Key Management Service (KMS) key to encrypt the
     # datasets in the group.
@@ -1896,8 +1982,9 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the IAM role that has permissions to create the dataset
-    #   group.
+    #   The ARN of the Identity and Access Management (IAM) role that has
+    #   permissions to access the Key Management Service (KMS) key.
+    #   Supplying an IAM role is only valid when also specifying a KMS key.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
@@ -3140,6 +3227,22 @@ module Aws::Personalize
       include Aws::Structure
     end
 
+    # A string to string map of the configuration details for theme
+    # generation.
+    #
+    # @!attribute [rw] item_name
+    #   The name of the Items dataset column that stores the name of each
+    #   item in the dataset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/FieldsForThemeGeneration AWS API Documentation
+    #
+    class FieldsForThemeGeneration < Struct.new(
+      :item_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information on a recommendation filter, including its ARN,
     # status, and filter expression.
     #
@@ -3701,8 +3804,8 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   A token returned from the previous call to `ListDatasetImportJobs`
-    #   for getting the next set of dataset import jobs (if they exist).
+    #   A token returned from the previous call to `ListDatasets` for
+    #   getting the next set of dataset import jobs (if they exist).
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -4547,12 +4650,30 @@ module Aws::Personalize
     #   domain recommender.
     #   @return [Types::TrainingDataConfig]
     #
+    # @!attribute [rw] enable_metadata_with_recommendations
+    #   Whether metadata with recommendations is enabled for the
+    #   recommender. If enabled, you can specify the columns from your Items
+    #   dataset in your request for recommendations. Amazon Personalize
+    #   returns this data for each item in the recommendation response. For
+    #   information about enabling metadata for a recommender, see [Enabling
+    #   metadata in recommendations for a recommender][1].
+    #
+    #   If you enable metadata in recommendations, you will incur additional
+    #   costs. For more information, see [Amazon Personalize pricing][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/creating-recommenders.html#create-recommender-return-metadata
+    #   [2]: https://aws.amazon.com/personalize/pricing/
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/RecommenderConfig AWS API Documentation
     #
     class RecommenderConfig < Struct.new(
       :item_exploration_config,
       :min_recommendation_requests_per_second,
-      :training_data_config)
+      :training_data_config,
+      :enable_metadata_with_recommendations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4841,7 +4962,7 @@ module Aws::Personalize
     #   @return [Types::HPOConfig]
     #
     # @!attribute [rw] algorithm_hyper_parameters
-    #   Lists the hyperparameter names and ranges.
+    #   Lists the algorithm hyperparameters and their values.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] feature_transformation_parameters
@@ -5232,6 +5353,22 @@ module Aws::Personalize
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The configuration details for generating themes with a batch inference
+    # job.
+    #
+    # @!attribute [rw] fields_for_theme_generation
+    #   Fields used to generate descriptive themes for a batch inference
+    #   job.
+    #   @return [Types::FieldsForThemeGeneration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ThemeGenerationConfig AWS API Documentation
+    #
+    class ThemeGenerationConfig < Struct.new(
+      :fields_for_theme_generation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The request contains more tag keys than can be associated with a
     # resource (50 tag keys per resource).

@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.84.0 (2023-12-20)
+------------------
+
+* Feature - This release introduces configurable clipboard, allowing admins to specify the maximum length of text that can be copied by the users from their device to the remote session and vice-versa.
+
+1.83.0 (2023-12-14)
+------------------
+
+* Feature - This release includes support for images of Windows Server 2022 platform.
+
+1.82.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.81.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.80.0 (2023-10-26)
+------------------
+
+* Feature - This release introduces multi-session fleets, allowing customers to provision more than one user session on a single fleet instance.
+
 1.79.0 (2023-09-27)
 ------------------
 

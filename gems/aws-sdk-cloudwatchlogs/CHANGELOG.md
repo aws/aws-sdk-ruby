@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2024-02-06)
+------------------
+
+* Feature - This release adds a new field, logGroupArn, to the response of the logs:DescribeLogGroups action.
+
+1.78.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.77.0 (2024-01-10)
+------------------
+
+* Feature - Add support for account level subscription filter policies to PutAccountPolicy, DescribeAccountPolicies, and DeleteAccountPolicy APIs. Additionally, PutAccountPolicy has been modified with new optional "selectionCriteria" parameter for resource selection.
+
+1.76.0 (2023-12-12)
+------------------
+
+* Feature - This release introduces the StartLiveTail API to tail ingested logs in near real time.
+
+1.75.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.74.0 (2023-11-27)
+------------------
+
+* Feature - Added APIs to Create, Update, Get, List and Delete LogAnomalyDetectors and List and Update Anomalies in Detector. Added LogGroupClass attribute for LogGroups to classify loggroup as Standard loggroup with all capabilities or InfrequentAccess loggroup with limited capabilities.
+
+1.73.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.72.0 (2023-11-09)
+------------------
+
+* Feature - Update to support new APIs for delivery of logs from AWS services.
+
 1.71.0 (2023-09-27)
 ------------------
 

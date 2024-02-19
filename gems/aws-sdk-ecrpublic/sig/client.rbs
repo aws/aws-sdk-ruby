@@ -1,0 +1,401 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ECRPublic
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchCheckLayerAvailabilityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCheckLayerAvailabilityResponse]
+        def layers: () -> ::Array[Types::Layer]
+        def failures: () -> ::Array[Types::LayerFailure]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#batch_check_layer_availability-instance_method
+      def batch_check_layer_availability: (
+                                            ?registry_id: ::String,
+                                            repository_name: ::String,
+                                            layer_digests: Array[::String]
+                                          ) -> _BatchCheckLayerAvailabilityResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCheckLayerAvailabilityResponseSuccess
+
+      interface _BatchDeleteImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteImageResponse]
+        def image_ids: () -> ::Array[Types::ImageIdentifier]
+        def failures: () -> ::Array[Types::ImageFailure]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#batch_delete_image-instance_method
+      def batch_delete_image: (
+                                ?registry_id: ::String,
+                                repository_name: ::String,
+                                image_ids: Array[
+                                  {
+                                    image_digest: ::String?,
+                                    image_tag: ::String?
+                                  },
+                                ]
+                              ) -> _BatchDeleteImageResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteImageResponseSuccess
+
+      interface _CompleteLayerUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CompleteLayerUploadResponse]
+        def registry_id: () -> ::String
+        def repository_name: () -> ::String
+        def upload_id: () -> ::String
+        def layer_digest: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#complete_layer_upload-instance_method
+      def complete_layer_upload: (
+                                   ?registry_id: ::String,
+                                   repository_name: ::String,
+                                   upload_id: ::String,
+                                   layer_digests: Array[::String]
+                                 ) -> _CompleteLayerUploadResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CompleteLayerUploadResponseSuccess
+
+      interface _CreateRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRepositoryResponse]
+        def repository: () -> Types::Repository
+        def catalog_data: () -> Types::RepositoryCatalogData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#create_repository-instance_method
+      def create_repository: (
+                               repository_name: ::String,
+                               ?catalog_data: {
+                                 description: ::String?,
+                                 architectures: Array[::String]?,
+                                 operating_systems: Array[::String]?,
+                                 logo_image_blob: ::String?,
+                                 about_text: ::String?,
+                                 usage_text: ::String?
+                               },
+                               ?tags: Array[
+                                 {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                               ]
+                             ) -> _CreateRepositoryResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRepositoryResponseSuccess
+
+      interface _DeleteRepositoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRepositoryResponse]
+        def repository: () -> Types::Repository
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#delete_repository-instance_method
+      def delete_repository: (
+                               ?registry_id: ::String,
+                               repository_name: ::String,
+                               ?force: bool
+                             ) -> _DeleteRepositoryResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRepositoryResponseSuccess
+
+      interface _DeleteRepositoryPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRepositoryPolicyResponse]
+        def registry_id: () -> ::String
+        def repository_name: () -> ::String
+        def policy_text: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#delete_repository_policy-instance_method
+      def delete_repository_policy: (
+                                      ?registry_id: ::String,
+                                      repository_name: ::String
+                                    ) -> _DeleteRepositoryPolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRepositoryPolicyResponseSuccess
+
+      interface _DescribeImageTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeImageTagsResponse]
+        def image_tag_details: () -> ::Array[Types::ImageTagDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#describe_image_tags-instance_method
+      def describe_image_tags: (
+                                 ?registry_id: ::String,
+                                 repository_name: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _DescribeImageTagsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeImageTagsResponseSuccess
+
+      interface _DescribeImagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeImagesResponse]
+        def image_details: () -> ::Array[Types::ImageDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#describe_images-instance_method
+      def describe_images: (
+                             ?registry_id: ::String,
+                             repository_name: ::String,
+                             ?image_ids: Array[
+                               {
+                                 image_digest: ::String?,
+                                 image_tag: ::String?
+                               },
+                             ],
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _DescribeImagesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeImagesResponseSuccess
+
+      interface _DescribeRegistriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRegistriesResponse]
+        def registries: () -> ::Array[Types::Registry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#describe_registries-instance_method
+      def describe_registries: (
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _DescribeRegistriesResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRegistriesResponseSuccess
+
+      interface _DescribeRepositoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRepositoriesResponse]
+        def repositories: () -> ::Array[Types::Repository]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#describe_repositories-instance_method
+      def describe_repositories: (
+                                   ?registry_id: ::String,
+                                   ?repository_names: Array[::String],
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _DescribeRepositoriesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRepositoriesResponseSuccess
+
+      interface _GetAuthorizationTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAuthorizationTokenResponse]
+        def authorization_data: () -> Types::AuthorizationData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#get_authorization_token-instance_method
+      def get_authorization_token: (
+                                   ) -> _GetAuthorizationTokenResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAuthorizationTokenResponseSuccess
+
+      interface _GetRegistryCatalogDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRegistryCatalogDataResponse]
+        def registry_catalog_data: () -> Types::RegistryCatalogData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#get_registry_catalog_data-instance_method
+      def get_registry_catalog_data: (
+                                     ) -> _GetRegistryCatalogDataResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRegistryCatalogDataResponseSuccess
+
+      interface _GetRepositoryCatalogDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRepositoryCatalogDataResponse]
+        def catalog_data: () -> Types::RepositoryCatalogData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#get_repository_catalog_data-instance_method
+      def get_repository_catalog_data: (
+                                         ?registry_id: ::String,
+                                         repository_name: ::String
+                                       ) -> _GetRepositoryCatalogDataResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRepositoryCatalogDataResponseSuccess
+
+      interface _GetRepositoryPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRepositoryPolicyResponse]
+        def registry_id: () -> ::String
+        def repository_name: () -> ::String
+        def policy_text: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#get_repository_policy-instance_method
+      def get_repository_policy: (
+                                   ?registry_id: ::String,
+                                   repository_name: ::String
+                                 ) -> _GetRepositoryPolicyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRepositoryPolicyResponseSuccess
+
+      interface _InitiateLayerUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InitiateLayerUploadResponse]
+        def upload_id: () -> ::String
+        def part_size: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#initiate_layer_upload-instance_method
+      def initiate_layer_upload: (
+                                   ?registry_id: ::String,
+                                   repository_name: ::String
+                                 ) -> _InitiateLayerUploadResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InitiateLayerUploadResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutImageResponse]
+        def image: () -> Types::Image
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#put_image-instance_method
+      def put_image: (
+                       ?registry_id: ::String,
+                       repository_name: ::String,
+                       image_manifest: ::String,
+                       ?image_manifest_media_type: ::String,
+                       ?image_tag: ::String,
+                       ?image_digest: ::String
+                     ) -> _PutImageResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutImageResponseSuccess
+
+      interface _PutRegistryCatalogDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutRegistryCatalogDataResponse]
+        def registry_catalog_data: () -> Types::RegistryCatalogData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#put_registry_catalog_data-instance_method
+      def put_registry_catalog_data: (
+                                       ?display_name: ::String
+                                     ) -> _PutRegistryCatalogDataResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRegistryCatalogDataResponseSuccess
+
+      interface _PutRepositoryCatalogDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutRepositoryCatalogDataResponse]
+        def catalog_data: () -> Types::RepositoryCatalogData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#put_repository_catalog_data-instance_method
+      def put_repository_catalog_data: (
+                                         ?registry_id: ::String,
+                                         repository_name: ::String,
+                                         catalog_data: {
+                                           description: ::String?,
+                                           architectures: Array[::String]?,
+                                           operating_systems: Array[::String]?,
+                                           logo_image_blob: ::String?,
+                                           about_text: ::String?,
+                                           usage_text: ::String?
+                                         }
+                                       ) -> _PutRepositoryCatalogDataResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRepositoryCatalogDataResponseSuccess
+
+      interface _SetRepositoryPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetRepositoryPolicyResponse]
+        def registry_id: () -> ::String
+        def repository_name: () -> ::String
+        def policy_text: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#set_repository_policy-instance_method
+      def set_repository_policy: (
+                                   ?registry_id: ::String,
+                                   repository_name: ::String,
+                                   policy_text: ::String,
+                                   ?force: bool
+                                 ) -> _SetRepositoryPolicyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetRepositoryPolicyResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UploadLayerPartResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UploadLayerPartResponse]
+        def registry_id: () -> ::String
+        def repository_name: () -> ::String
+        def upload_id: () -> ::String
+        def last_byte_received: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECRPublic/Client.html#upload_layer_part-instance_method
+      def upload_layer_part: (
+                               ?registry_id: ::String,
+                               repository_name: ::String,
+                               upload_id: ::String,
+                               part_first_byte: ::Integer,
+                               part_last_byte: ::Integer,
+                               layer_part_blob: ::String
+                             ) -> _UploadLayerPartResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UploadLayerPartResponseSuccess
+    end
+  end
+end
+

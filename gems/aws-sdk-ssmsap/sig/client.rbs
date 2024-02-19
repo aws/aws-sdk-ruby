@@ -1,0 +1,330 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SsmSap
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _DeleteResourcePermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePermissionOutput]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#delete_resource_permission-instance_method
+      def delete_resource_permission: (
+                                        ?action_type: ("RESTORE"),
+                                        ?source_resource_arn: ::String,
+                                        resource_arn: ::String
+                                      ) -> _DeleteResourcePermissionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePermissionResponseSuccess
+
+      interface _DeregisterApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterApplicationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#deregister_application-instance_method
+      def deregister_application: (
+                                    application_id: ::String
+                                  ) -> _DeregisterApplicationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterApplicationResponseSuccess
+
+      interface _GetApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationOutput]
+        def application: () -> Types::Application
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#get_application-instance_method
+      def get_application: (
+                             ?application_id: ::String,
+                             ?application_arn: ::String,
+                             ?app_registry_arn: ::String
+                           ) -> _GetApplicationResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationResponseSuccess
+
+      interface _GetComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetComponentOutput]
+        def component: () -> Types::Component
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#get_component-instance_method
+      def get_component: (
+                           application_id: ::String,
+                           component_id: ::String
+                         ) -> _GetComponentResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetComponentResponseSuccess
+
+      interface _GetDatabaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDatabaseOutput]
+        def database: () -> Types::Database
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#get_database-instance_method
+      def get_database: (
+                          ?application_id: ::String,
+                          ?component_id: ::String,
+                          ?database_id: ::String,
+                          ?database_arn: ::String
+                        ) -> _GetDatabaseResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDatabaseResponseSuccess
+
+      interface _GetOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOperationOutput]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#get_operation-instance_method
+      def get_operation: (
+                           operation_id: ::String
+                         ) -> _GetOperationResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOperationResponseSuccess
+
+      interface _GetResourcePermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePermissionOutput]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#get_resource_permission-instance_method
+      def get_resource_permission: (
+                                     ?action_type: ("RESTORE"),
+                                     resource_arn: ::String
+                                   ) -> _GetResourcePermissionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePermissionResponseSuccess
+
+      interface _ListApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationsOutput]
+        def applications: () -> ::Array[Types::ApplicationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#list_applications-instance_method
+      def list_applications: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer,
+                               ?filters: Array[
+                                 {
+                                   name: ::String,
+                                   value: ::String,
+                                   operator: ("Equals" | "GreaterThanOrEquals" | "LessThanOrEquals")
+                                 },
+                               ]
+                             ) -> _ListApplicationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
+
+      interface _ListComponentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComponentsOutput]
+        def components: () -> ::Array[Types::ComponentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#list_components-instance_method
+      def list_components: (
+                             ?application_id: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListComponentsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComponentsResponseSuccess
+
+      interface _ListDatabasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatabasesOutput]
+        def databases: () -> ::Array[Types::DatabaseSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#list_databases-instance_method
+      def list_databases: (
+                            ?application_id: ::String,
+                            ?component_id: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListDatabasesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatabasesResponseSuccess
+
+      interface _ListOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOperationsOutput]
+        def operations: () -> ::Array[Types::Operation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#list_operations-instance_method
+      def list_operations: (
+                             application_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?filters: Array[
+                               {
+                                 name: ::String,
+                                 value: ::String,
+                                 operator: ("Equals" | "GreaterThanOrEquals" | "LessThanOrEquals")
+                               },
+                             ]
+                           ) -> _ListOperationsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOperationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutResourcePermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePermissionOutput]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#put_resource_permission-instance_method
+      def put_resource_permission: (
+                                     action_type: ("RESTORE"),
+                                     source_resource_arn: ::String,
+                                     resource_arn: ::String
+                                   ) -> _PutResourcePermissionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePermissionResponseSuccess
+
+      interface _RegisterApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterApplicationOutput]
+        def application: () -> Types::Application
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#register_application-instance_method
+      def register_application: (
+                                  application_id: ::String,
+                                  application_type: ("HANA" | "SAP_ABAP"),
+                                  instances: Array[::String],
+                                  ?sap_instance_number: ::String,
+                                  ?sid: ::String,
+                                  ?tags: Hash[::String, ::String],
+                                  ?credentials: Array[
+                                    {
+                                      database_name: ::String,
+                                      credential_type: ("ADMIN"),
+                                      secret_id: ::String
+                                    },
+                                  ],
+                                  ?database_arn: ::String
+                                ) -> _RegisterApplicationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterApplicationResponseSuccess
+
+      interface _StartApplicationRefreshResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartApplicationRefreshOutput]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#start_application_refresh-instance_method
+      def start_application_refresh: (
+                                       application_id: ::String
+                                     ) -> _StartApplicationRefreshResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartApplicationRefreshResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateApplicationSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationSettingsOutput]
+        def message: () -> ::String
+        def operation_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SsmSap/Client.html#update_application_settings-instance_method
+      def update_application_settings: (
+                                         application_id: ::String,
+                                         ?credentials_to_add_or_update: Array[
+                                           {
+                                             database_name: ::String,
+                                             credential_type: ("ADMIN"),
+                                             secret_id: ::String
+                                           },
+                                         ],
+                                         ?credentials_to_remove: Array[
+                                           {
+                                             database_name: ::String,
+                                             credential_type: ("ADMIN"),
+                                             secret_id: ::String
+                                           },
+                                         ],
+                                         ?backint: {
+                                           backint_mode: ("AWSBackup"),
+                                           ensure_no_backup_in_process: bool
+                                         },
+                                         ?database_arn: ::String
+                                       ) -> _UpdateApplicationSettingsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationSettingsResponseSuccess
+    end
+  end
+end
+

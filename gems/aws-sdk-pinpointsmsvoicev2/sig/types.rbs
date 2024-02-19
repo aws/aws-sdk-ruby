@@ -1,0 +1,1556 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::PinpointSMSVoiceV2
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor reason: ("INSUFFICIENT_ACCOUNT_REPUTATION" | "ACCOUNT_DISABLED")
+      SENSITIVE: []
+    end
+
+    class AccountAttribute
+      attr_accessor name: ("ACCOUNT_TIER")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AccountLimit
+      attr_accessor name: ("PHONE_NUMBERS" | "POOLS" | "CONFIGURATION_SETS" | "OPT_OUT_LISTS" | "SENDER_IDS" | "REGISTRATIONS" | "REGISTRATION_ATTACHMENTS" | "VERIFIED_DESTINATION_NUMBERS")
+      attr_accessor used: ::Integer
+      attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
+    class AssociateOriginationIdentityRequest
+      attr_accessor pool_id: ::String
+      attr_accessor origination_identity: ::String
+      attr_accessor iso_country_code: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateOriginationIdentityResult
+      attr_accessor pool_arn: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor origination_identity_arn: ::String
+      attr_accessor origination_identity: ::String
+      attr_accessor iso_country_code: ::String
+      SENSITIVE: []
+    end
+
+    class CloudWatchLogsDestination
+      attr_accessor iam_role_arn: ::String
+      attr_accessor log_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationSetFilter
+      attr_accessor name: ("event-destination-name" | "matching-event-types" | "default-message-type" | "default-sender-id")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConfigurationSetInformation
+      attr_accessor configuration_set_arn: ::String
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destinations: ::Array[Types::EventDestination]
+      attr_accessor default_message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      attr_accessor default_sender_id: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor reason: ("CREATE_REGISTRATION_VERSION_NOT_ALLOWED" | "DELETION_PROTECTION_ENABLED" | "DESTINATION_PHONE_NUMBER_NOT_VERIFIED" | "DESTINATION_PHONE_NUMBER_OPTED_OUT" | "DISASSOCIATE_REGISTRATION_NOT_ALLOWED" | "DISCARD_REGISTRATION_VERSION_NOT_ALLOWED" | "EDIT_REGISTRATION_FIELD_VALUES_NOT_ALLOWED" | "EVENT_DESTINATION_MISMATCH" | "KEYWORD_MISMATCH" | "LAST_PHONE_NUMBER" | "NUMBER_CAPABILITIES_MISMATCH" | "MESSAGE_TYPE_MISMATCH" | "NO_ORIGINATION_IDENTITIES_FOUND" | "OPT_OUT_LIST_MISMATCH" | "PHONE_NUMBER_ASSOCIATED_TO_POOL" | "PHONE_NUMBER_ASSOCIATED_TO_REGISTRATION" | "PHONE_NUMBER_NOT_ASSOCIATED_TO_POOL" | "PHONE_NUMBER_NOT_IN_REGISTRATION_REGION" | "REGISTRATION_ALREADY_SUBMITTED" | "REGISTRATION_NOT_COMPLETE" | "SENDER_ID_ASSOCIATED_TO_POOL" | "RESOURCE_ALREADY_EXISTS" | "RESOURCE_DELETION_NOT_ALLOWED" | "RESOURCE_MODIFICATION_NOT_ALLOWED" | "RESOURCE_NOT_ACTIVE" | "RESOURCE_NOT_EMPTY" | "SELF_MANAGED_OPT_OUTS_MISMATCH" | "SUBMIT_REGISTRATION_VERSION_NOT_ALLOWED" | "TWO_WAY_CONFIG_MISMATCH" | "VERIFICATION_CODE_EXPIRED" | "VERIFICATION_ALREADY_COMPLETE")
+      attr_accessor resource_type: ("account" | "phone-number" | "sender-id" | "pool" | "configuration-set" | "opt-out-list" | "event-destination" | "keyword" | "opted-out-number" | "registration" | "registration-attachment" | "verified-destination-number")
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationSetRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationSetResult
+      attr_accessor configuration_set_arn: ::String
+      attr_accessor configuration_set_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateEventDestinationRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination_name: ::String
+      attr_accessor matching_event_types: ::Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED")]
+      attr_accessor cloud_watch_logs_destination: Types::CloudWatchLogsDestination
+      attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination
+      attr_accessor sns_destination: Types::SnsDestination
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEventDestinationResult
+      attr_accessor configuration_set_arn: ::String
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination: Types::EventDestination
+      SENSITIVE: []
+    end
+
+    class CreateOptOutListRequest
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateOptOutListResult
+      attr_accessor opt_out_list_arn: ::String
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class CreatePoolRequest
+      attr_accessor origination_identity: ::String
+      attr_accessor iso_country_code: ::String
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePoolResult
+      attr_accessor pool_arn: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING")
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      attr_accessor two_way_enabled: bool
+      attr_accessor two_way_channel_arn: ::String
+      attr_accessor two_way_channel_role: ::String
+      attr_accessor self_managed_opt_outs_enabled: bool
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor shared_routes_enabled: bool
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateRegistrationAssociationRequest
+      attr_accessor registration_id: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRegistrationAssociationResult
+      attr_accessor registration_arn: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor registration_type: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor iso_country_code: ::String
+      attr_accessor phone_number: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRegistrationAttachmentRequest
+      attr_accessor attachment_body: ::String
+      attr_accessor attachment_url: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRegistrationAttachmentResult
+      attr_accessor registration_attachment_arn: ::String
+      attr_accessor registration_attachment_id: ::String
+      attr_accessor attachment_status: ("UPLOAD_IN_PROGRESS" | "UPLOAD_COMPLETE" | "UPLOAD_FAILED" | "DELETED")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateRegistrationRequest
+      attr_accessor registration_type: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRegistrationResult
+      attr_accessor registration_arn: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor registration_type: ::String
+      attr_accessor registration_status: ("CREATED" | "SUBMITTED" | "REVIEWING" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
+      attr_accessor current_version_number: ::Integer
+      attr_accessor additional_attributes: ::Hash[::String, ::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateRegistrationVersionRequest
+      attr_accessor registration_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRegistrationVersionResult
+      attr_accessor registration_arn: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor version_number: ::Integer
+      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "REVIEWING" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+      attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory
+      SENSITIVE: []
+    end
+
+    class CreateVerifiedDestinationNumberRequest
+      attr_accessor destination_phone_number: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVerifiedDestinationNumberResult
+      attr_accessor verified_destination_number_arn: ::String
+      attr_accessor verified_destination_number_id: ::String
+      attr_accessor destination_phone_number: ::String
+      attr_accessor status: ("PENDING" | "VERIFIED")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteConfigurationSetRequest
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfigurationSetResult
+      attr_accessor configuration_set_arn: ::String
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destinations: ::Array[Types::EventDestination]
+      attr_accessor default_message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      attr_accessor default_sender_id: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteDefaultMessageTypeRequest
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDefaultMessageTypeResult
+      attr_accessor configuration_set_arn: ::String
+      attr_accessor configuration_set_name: ::String
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      SENSITIVE: []
+    end
+
+    class DeleteDefaultSenderIdRequest
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDefaultSenderIdResult
+      attr_accessor configuration_set_arn: ::String
+      attr_accessor configuration_set_name: ::String
+      attr_accessor sender_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventDestinationRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventDestinationResult
+      attr_accessor configuration_set_arn: ::String
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination: Types::EventDestination
+      SENSITIVE: []
+    end
+
+    class DeleteKeywordRequest
+      attr_accessor origination_identity: ::String
+      attr_accessor keyword: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKeywordResult
+      attr_accessor origination_identity_arn: ::String
+      attr_accessor origination_identity: ::String
+      attr_accessor keyword: ::String
+      attr_accessor keyword_message: ::String
+      attr_accessor keyword_action: ("AUTOMATIC_RESPONSE" | "OPT_OUT" | "OPT_IN")
+      SENSITIVE: []
+    end
+
+    class DeleteOptOutListRequest
+      attr_accessor opt_out_list_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOptOutListResult
+      attr_accessor opt_out_list_arn: ::String
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteOptedOutNumberRequest
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor opted_out_number: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOptedOutNumberResult
+      attr_accessor opt_out_list_arn: ::String
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor opted_out_number: ::String
+      attr_accessor opted_out_timestamp: ::Time
+      attr_accessor end_user_opted_out: bool
+      SENSITIVE: []
+    end
+
+    class DeletePoolRequest
+      attr_accessor pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePoolResult
+      attr_accessor pool_arn: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING")
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      attr_accessor two_way_enabled: bool
+      attr_accessor two_way_channel_arn: ::String
+      attr_accessor two_way_channel_role: ::String
+      attr_accessor self_managed_opt_outs_enabled: bool
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor shared_routes_enabled: bool
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteRegistrationAttachmentRequest
+      attr_accessor registration_attachment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRegistrationAttachmentResult
+      attr_accessor registration_attachment_arn: ::String
+      attr_accessor registration_attachment_id: ::String
+      attr_accessor attachment_status: ("UPLOAD_IN_PROGRESS" | "UPLOAD_COMPLETE" | "UPLOAD_FAILED" | "DELETED")
+      attr_accessor attachment_upload_error_reason: ("INTERNAL_ERROR")
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteRegistrationFieldValueRequest
+      attr_accessor registration_id: ::String
+      attr_accessor field_path: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRegistrationFieldValueResult
+      attr_accessor registration_arn: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor version_number: ::Integer
+      attr_accessor field_path: ::String
+      attr_accessor select_choices: ::Array[::String]
+      attr_accessor text_value: ::String
+      attr_accessor registration_attachment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRegistrationRequest
+      attr_accessor registration_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRegistrationResult
+      attr_accessor registration_arn: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor registration_type: ::String
+      attr_accessor registration_status: ("CREATED" | "SUBMITTED" | "REVIEWING" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
+      attr_accessor current_version_number: ::Integer
+      attr_accessor approved_version_number: ::Integer
+      attr_accessor latest_denied_version_number: ::Integer
+      attr_accessor additional_attributes: ::Hash[::String, ::String]
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteTextMessageSpendLimitOverrideRequest < Aws::EmptyStructure
+    end
+
+    class DeleteTextMessageSpendLimitOverrideResult
+      attr_accessor monthly_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DeleteVerifiedDestinationNumberRequest
+      attr_accessor verified_destination_number_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVerifiedDestinationNumberResult
+      attr_accessor verified_destination_number_arn: ::String
+      attr_accessor verified_destination_number_id: ::String
+      attr_accessor destination_phone_number: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteVoiceMessageSpendLimitOverrideRequest < Aws::EmptyStructure
+    end
+
+    class DeleteVoiceMessageSpendLimitOverrideResult
+      attr_accessor monthly_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAccountAttributesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAccountAttributesResult
+      attr_accessor account_attributes: ::Array[Types::AccountAttribute]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccountLimitsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAccountLimitsResult
+      attr_accessor account_limits: ::Array[Types::AccountLimit]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationSetsRequest
+      attr_accessor configuration_set_names: ::Array[::String]
+      attr_accessor filters: ::Array[Types::ConfigurationSetFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationSetsResult
+      attr_accessor configuration_sets: ::Array[Types::ConfigurationSetInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeKeywordsRequest
+      attr_accessor origination_identity: ::String
+      attr_accessor keywords: ::Array[::String]
+      attr_accessor filters: ::Array[Types::KeywordFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeKeywordsResult
+      attr_accessor origination_identity_arn: ::String
+      attr_accessor origination_identity: ::String
+      attr_accessor keywords: ::Array[Types::KeywordInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOptOutListsRequest
+      attr_accessor opt_out_list_names: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeOptOutListsResult
+      attr_accessor opt_out_lists: ::Array[Types::OptOutListInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOptedOutNumbersRequest
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor opted_out_numbers: ::Array[::String]
+      attr_accessor filters: ::Array[Types::OptedOutFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeOptedOutNumbersResult
+      attr_accessor opt_out_list_arn: ::String
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor opted_out_numbers: ::Array[Types::OptedOutNumberInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePhoneNumbersRequest
+      attr_accessor phone_number_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::PhoneNumberFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribePhoneNumbersResult
+      attr_accessor phone_numbers: ::Array[Types::PhoneNumberInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePoolsRequest
+      attr_accessor pool_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::PoolFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribePoolsResult
+      attr_accessor pools: ::Array[Types::PoolInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRegistrationAttachmentsRequest
+      attr_accessor registration_attachment_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::RegistrationAttachmentFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeRegistrationAttachmentsResult
+      attr_accessor registration_attachments: ::Array[Types::RegistrationAttachmentsInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRegistrationFieldDefinitionsRequest
+      attr_accessor registration_type: ::String
+      attr_accessor section_path: ::String
+      attr_accessor field_paths: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeRegistrationFieldDefinitionsResult
+      attr_accessor registration_type: ::String
+      attr_accessor registration_field_definitions: ::Array[Types::RegistrationFieldDefinition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRegistrationFieldValuesRequest
+      attr_accessor registration_id: ::String
+      attr_accessor version_number: ::Integer
+      attr_accessor section_path: ::String
+      attr_accessor field_paths: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeRegistrationFieldValuesResult
+      attr_accessor registration_arn: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor version_number: ::Integer
+      attr_accessor registration_field_values: ::Array[Types::RegistrationFieldValueInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRegistrationSectionDefinitionsRequest
+      attr_accessor registration_type: ::String
+      attr_accessor section_paths: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeRegistrationSectionDefinitionsResult
+      attr_accessor registration_type: ::String
+      attr_accessor registration_section_definitions: ::Array[Types::RegistrationSectionDefinition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRegistrationTypeDefinitionsRequest
+      attr_accessor registration_types: ::Array[::String]
+      attr_accessor filters: ::Array[Types::RegistrationTypeFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeRegistrationTypeDefinitionsResult
+      attr_accessor registration_type_definitions: ::Array[Types::RegistrationTypeDefinition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRegistrationVersionsRequest
+      attr_accessor registration_id: ::String
+      attr_accessor version_numbers: ::Array[::Integer]
+      attr_accessor filters: ::Array[Types::RegistrationVersionFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeRegistrationVersionsResult
+      attr_accessor registration_arn: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor registration_versions: ::Array[Types::RegistrationVersionInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRegistrationsRequest
+      attr_accessor registration_ids: ::Array[::String]
+      attr_accessor filters: ::Array[Types::RegistrationFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeRegistrationsResult
+      attr_accessor registrations: ::Array[Types::RegistrationInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSenderIdsRequest
+      attr_accessor sender_ids: ::Array[Types::SenderIdAndCountry]
+      attr_accessor filters: ::Array[Types::SenderIdFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeSenderIdsResult
+      attr_accessor sender_ids: ::Array[Types::SenderIdInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSpendLimitsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeSpendLimitsResult
+      attr_accessor spend_limits: ::Array[Types::SpendLimit]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVerifiedDestinationNumbersRequest
+      attr_accessor verified_destination_number_ids: ::Array[::String]
+      attr_accessor destination_phone_numbers: ::Array[::String]
+      attr_accessor filters: ::Array[Types::VerifiedDestinationNumberFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeVerifiedDestinationNumbersResult
+      attr_accessor verified_destination_numbers: ::Array[Types::VerifiedDestinationNumberInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateOriginationIdentityRequest
+      attr_accessor pool_id: ::String
+      attr_accessor origination_identity: ::String
+      attr_accessor iso_country_code: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateOriginationIdentityResult
+      attr_accessor pool_arn: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor origination_identity_arn: ::String
+      attr_accessor origination_identity: ::String
+      attr_accessor iso_country_code: ::String
+      SENSITIVE: []
+    end
+
+    class DiscardRegistrationVersionRequest
+      attr_accessor registration_id: ::String
+      SENSITIVE: []
+    end
+
+    class DiscardRegistrationVersionResult
+      attr_accessor registration_arn: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor version_number: ::Integer
+      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "REVIEWING" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+      attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory
+      SENSITIVE: []
+    end
+
+    class EventDestination
+      attr_accessor event_destination_name: ::String
+      attr_accessor enabled: bool
+      attr_accessor matching_event_types: ::Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED")]
+      attr_accessor cloud_watch_logs_destination: Types::CloudWatchLogsDestination
+      attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination
+      attr_accessor sns_destination: Types::SnsDestination
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class KeywordFilter
+      attr_accessor name: ("keyword-action")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class KeywordInformation
+      attr_accessor keyword: ::String
+      attr_accessor keyword_message: ::String
+      attr_accessor keyword_action: ("AUTOMATIC_RESPONSE" | "OPT_OUT" | "OPT_IN")
+      SENSITIVE: []
+    end
+
+    class KinesisFirehoseDestination
+      attr_accessor iam_role_arn: ::String
+      attr_accessor delivery_stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListPoolOriginationIdentitiesRequest
+      attr_accessor pool_id: ::String
+      attr_accessor filters: ::Array[Types::PoolOriginationIdentitiesFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPoolOriginationIdentitiesResult
+      attr_accessor pool_arn: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor origination_identities: ::Array[Types::OriginationIdentityMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRegistrationAssociationsRequest
+      attr_accessor registration_id: ::String
+      attr_accessor filters: ::Array[Types::RegistrationAssociationFilter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRegistrationAssociationsResult
+      attr_accessor registration_arn: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor registration_type: ::String
+      attr_accessor registration_associations: ::Array[Types::RegistrationAssociationMetadata]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResult
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class OptOutListInformation
+      attr_accessor opt_out_list_arn: ::String
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class OptedOutFilter
+      attr_accessor name: ("end-user-opted-out")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class OptedOutNumberInformation
+      attr_accessor opted_out_number: ::String
+      attr_accessor opted_out_timestamp: ::Time
+      attr_accessor end_user_opted_out: bool
+      SENSITIVE: []
+    end
+
+    class OriginationIdentityMetadata
+      attr_accessor origination_identity_arn: ::String
+      attr_accessor origination_identity: ::String
+      attr_accessor iso_country_code: ::String
+      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE")]
+      attr_accessor phone_number: ::String
+      SENSITIVE: []
+    end
+
+    class PhoneNumberFilter
+      attr_accessor name: ("status" | "iso-country-code" | "message-type" | "number-capability" | "number-type" | "two-way-enabled" | "self-managed-opt-outs-enabled" | "opt-out-list-name" | "deletion-protection-enabled" | "two-way-channel-arn")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PhoneNumberInformation
+      attr_accessor phone_number_arn: ::String
+      attr_accessor phone_number_id: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor status: ("PENDING" | "ACTIVE" | "ASSOCIATING" | "DISASSOCIATING" | "DELETED")
+      attr_accessor iso_country_code: ::String
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE")]
+      attr_accessor number_type: ("SHORT_CODE" | "LONG_CODE" | "TOLL_FREE" | "TEN_DLC" | "SIMULATOR")
+      attr_accessor monthly_leasing_price: ::String
+      attr_accessor two_way_enabled: bool
+      attr_accessor two_way_channel_arn: ::String
+      attr_accessor two_way_channel_role: ::String
+      attr_accessor self_managed_opt_outs_enabled: bool
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor pool_id: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class PoolFilter
+      attr_accessor name: ("status" | "message-type" | "two-way-enabled" | "self-managed-opt-outs-enabled" | "opt-out-list-name" | "shared-routes-enabled" | "deletion-protection-enabled" | "two-way-channel-arn")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PoolInformation
+      attr_accessor pool_arn: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING")
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      attr_accessor two_way_enabled: bool
+      attr_accessor two_way_channel_arn: ::String
+      attr_accessor two_way_channel_role: ::String
+      attr_accessor self_managed_opt_outs_enabled: bool
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor shared_routes_enabled: bool
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class PoolOriginationIdentitiesFilter
+      attr_accessor name: ("iso-country-code" | "number-capability")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PutKeywordRequest
+      attr_accessor origination_identity: ::String
+      attr_accessor keyword: ::String
+      attr_accessor keyword_message: ::String
+      attr_accessor keyword_action: ("AUTOMATIC_RESPONSE" | "OPT_OUT" | "OPT_IN")
+      SENSITIVE: []
+    end
+
+    class PutKeywordResult
+      attr_accessor origination_identity_arn: ::String
+      attr_accessor origination_identity: ::String
+      attr_accessor keyword: ::String
+      attr_accessor keyword_message: ::String
+      attr_accessor keyword_action: ("AUTOMATIC_RESPONSE" | "OPT_OUT" | "OPT_IN")
+      SENSITIVE: []
+    end
+
+    class PutOptedOutNumberRequest
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor opted_out_number: ::String
+      SENSITIVE: []
+    end
+
+    class PutOptedOutNumberResult
+      attr_accessor opt_out_list_arn: ::String
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor opted_out_number: ::String
+      attr_accessor opted_out_timestamp: ::Time
+      attr_accessor end_user_opted_out: bool
+      SENSITIVE: []
+    end
+
+    class PutRegistrationFieldValueRequest
+      attr_accessor registration_id: ::String
+      attr_accessor field_path: ::String
+      attr_accessor select_choices: ::Array[::String]
+      attr_accessor text_value: ::String
+      attr_accessor registration_attachment_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutRegistrationFieldValueResult
+      attr_accessor registration_arn: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor version_number: ::Integer
+      attr_accessor field_path: ::String
+      attr_accessor select_choices: ::Array[::String]
+      attr_accessor text_value: ::String
+      attr_accessor registration_attachment_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegistrationAssociationFilter
+      attr_accessor name: ("resource-type" | "iso-country-code")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RegistrationAssociationMetadata
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor iso_country_code: ::String
+      attr_accessor phone_number: ::String
+      SENSITIVE: []
+    end
+
+    class RegistrationAttachmentFilter
+      attr_accessor name: ("attachment-status")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RegistrationAttachmentsInformation
+      attr_accessor registration_attachment_arn: ::String
+      attr_accessor registration_attachment_id: ::String
+      attr_accessor attachment_status: ("UPLOAD_IN_PROGRESS" | "UPLOAD_COMPLETE" | "UPLOAD_FAILED" | "DELETED")
+      attr_accessor attachment_upload_error_reason: ("INTERNAL_ERROR")
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class RegistrationDeniedReasonInformation
+      attr_accessor reason: ::String
+      attr_accessor short_description: ::String
+      attr_accessor long_description: ::String
+      attr_accessor documentation_title: ::String
+      attr_accessor documentation_link: ::String
+      SENSITIVE: []
+    end
+
+    class RegistrationFieldDefinition
+      attr_accessor section_path: ::String
+      attr_accessor field_path: ::String
+      attr_accessor field_type: ("SELECT" | "TEXT" | "ATTACHMENT")
+      attr_accessor field_requirement: ("REQUIRED" | "CONDITIONAL" | "OPTIONAL")
+      attr_accessor select_validation: Types::SelectValidation
+      attr_accessor text_validation: Types::TextValidation
+      attr_accessor display_hints: Types::RegistrationFieldDisplayHints
+      SENSITIVE: []
+    end
+
+    class RegistrationFieldDisplayHints
+      attr_accessor title: ::String
+      attr_accessor short_description: ::String
+      attr_accessor long_description: ::String
+      attr_accessor documentation_title: ::String
+      attr_accessor documentation_link: ::String
+      attr_accessor select_option_descriptions: ::Array[Types::SelectOptionDescription]
+      attr_accessor text_validation_description: ::String
+      attr_accessor example_text_value: ::String
+      SENSITIVE: []
+    end
+
+    class RegistrationFieldValueInformation
+      attr_accessor field_path: ::String
+      attr_accessor select_choices: ::Array[::String]
+      attr_accessor text_value: ::String
+      attr_accessor registration_attachment_id: ::String
+      attr_accessor denied_reason: ::String
+      SENSITIVE: []
+    end
+
+    class RegistrationFilter
+      attr_accessor name: ("registration-type" | "registration-status")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RegistrationInformation
+      attr_accessor registration_arn: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor registration_type: ::String
+      attr_accessor registration_status: ("CREATED" | "SUBMITTED" | "REVIEWING" | "PROVISIONING" | "COMPLETE" | "REQUIRES_UPDATES" | "CLOSED" | "DELETED")
+      attr_accessor current_version_number: ::Integer
+      attr_accessor approved_version_number: ::Integer
+      attr_accessor latest_denied_version_number: ::Integer
+      attr_accessor additional_attributes: ::Hash[::String, ::String]
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class RegistrationSectionDefinition
+      attr_accessor section_path: ::String
+      attr_accessor display_hints: Types::RegistrationSectionDisplayHints
+      SENSITIVE: []
+    end
+
+    class RegistrationSectionDisplayHints
+      attr_accessor title: ::String
+      attr_accessor short_description: ::String
+      attr_accessor long_description: ::String
+      attr_accessor documentation_title: ::String
+      attr_accessor documentation_link: ::String
+      SENSITIVE: []
+    end
+
+    class RegistrationTypeDefinition
+      attr_accessor registration_type: ::String
+      attr_accessor supported_associations: ::Array[Types::SupportedAssociation]
+      attr_accessor display_hints: Types::RegistrationTypeDisplayHints
+      SENSITIVE: []
+    end
+
+    class RegistrationTypeDisplayHints
+      attr_accessor title: ::String
+      attr_accessor short_description: ::String
+      attr_accessor long_description: ::String
+      attr_accessor documentation_title: ::String
+      attr_accessor documentation_link: ::String
+      SENSITIVE: []
+    end
+
+    class RegistrationTypeFilter
+      attr_accessor name: ("supported-association-resource-type" | "supported-association-iso-country-code")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RegistrationVersionFilter
+      attr_accessor name: ("registration-version-status")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RegistrationVersionInformation
+      attr_accessor version_number: ::Integer
+      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "REVIEWING" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+      attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory
+      attr_accessor denied_reasons: ::Array[Types::RegistrationDeniedReasonInformation]
+      SENSITIVE: []
+    end
+
+    class RegistrationVersionStatusHistory
+      attr_accessor draft_timestamp: ::Time
+      attr_accessor submitted_timestamp: ::Time
+      attr_accessor reviewing_timestamp: ::Time
+      attr_accessor approved_timestamp: ::Time
+      attr_accessor discarded_timestamp: ::Time
+      attr_accessor denied_timestamp: ::Time
+      attr_accessor revoked_timestamp: ::Time
+      attr_accessor archived_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ReleasePhoneNumberRequest
+      attr_accessor phone_number_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReleasePhoneNumberResult
+      attr_accessor phone_number_arn: ::String
+      attr_accessor phone_number_id: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor status: ("PENDING" | "ACTIVE" | "ASSOCIATING" | "DISASSOCIATING" | "DELETED")
+      attr_accessor iso_country_code: ::String
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE")]
+      attr_accessor number_type: ("SHORT_CODE" | "LONG_CODE" | "TOLL_FREE" | "TEN_DLC" | "SIMULATOR")
+      attr_accessor monthly_leasing_price: ::String
+      attr_accessor two_way_enabled: bool
+      attr_accessor two_way_channel_arn: ::String
+      attr_accessor two_way_channel_role: ::String
+      attr_accessor self_managed_opt_outs_enabled: bool
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ReleaseSenderIdRequest
+      attr_accessor sender_id: ::String
+      attr_accessor iso_country_code: ::String
+      SENSITIVE: []
+    end
+
+    class ReleaseSenderIdResult
+      attr_accessor sender_id_arn: ::String
+      attr_accessor sender_id: ::String
+      attr_accessor iso_country_code: ::String
+      attr_accessor message_types: ::Array[("TRANSACTIONAL" | "PROMOTIONAL")]
+      attr_accessor monthly_leasing_price: ::String
+      attr_accessor registered: bool
+      attr_accessor registration_id: ::String
+      SENSITIVE: []
+    end
+
+    class RequestPhoneNumberRequest
+      attr_accessor iso_country_code: ::String
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE")]
+      attr_accessor number_type: ("LONG_CODE" | "TOLL_FREE" | "TEN_DLC" | "SIMULATOR")
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class RequestPhoneNumberResult
+      attr_accessor phone_number_arn: ::String
+      attr_accessor phone_number_id: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor status: ("PENDING" | "ACTIVE" | "ASSOCIATING" | "DISASSOCIATING" | "DELETED")
+      attr_accessor iso_country_code: ::String
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE")]
+      attr_accessor number_type: ("LONG_CODE" | "TOLL_FREE" | "TEN_DLC" | "SIMULATOR")
+      attr_accessor monthly_leasing_price: ::String
+      attr_accessor two_way_enabled: bool
+      attr_accessor two_way_channel_arn: ::String
+      attr_accessor two_way_channel_role: ::String
+      attr_accessor self_managed_opt_outs_enabled: bool
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor pool_id: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class RequestSenderIdRequest
+      attr_accessor sender_id: ::String
+      attr_accessor iso_country_code: ::String
+      attr_accessor message_types: ::Array[("TRANSACTIONAL" | "PROMOTIONAL")]
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class RequestSenderIdResult
+      attr_accessor sender_id_arn: ::String
+      attr_accessor sender_id: ::String
+      attr_accessor iso_country_code: ::String
+      attr_accessor message_types: ::Array[("TRANSACTIONAL" | "PROMOTIONAL")]
+      attr_accessor monthly_leasing_price: ::String
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor registered: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ("account" | "phone-number" | "sender-id" | "pool" | "configuration-set" | "opt-out-list" | "event-destination" | "keyword" | "opted-out-number" | "registration" | "registration-attachment" | "verified-destination-number")
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class SelectOptionDescription
+      attr_accessor option: ::String
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class SelectValidation
+      attr_accessor min_choices: ::Integer
+      attr_accessor max_choices: ::Integer
+      attr_accessor options: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SendDestinationNumberVerificationCodeRequest
+      attr_accessor verified_destination_number_id: ::String
+      attr_accessor verification_channel: ("TEXT" | "VOICE")
+      attr_accessor language_code: ("DE_DE" | "EN_GB" | "EN_US" | "ES_419" | "ES_ES" | "FR_CA" | "FR_FR" | "IT_IT" | "JA_JP" | "KO_KR" | "PT_BR" | "ZH_CN" | "ZH_TW")
+      attr_accessor origination_identity: ::String
+      attr_accessor configuration_set_name: ::String
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor destination_country_parameters: ::Hash[("IN_TEMPLATE_ID" | "IN_ENTITY_ID"), ::String]
+      SENSITIVE: []
+    end
+
+    class SendDestinationNumberVerificationCodeResult
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendTextMessageRequest
+      attr_accessor destination_phone_number: ::String
+      attr_accessor origination_identity: ::String
+      attr_accessor message_body: ::String
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      attr_accessor keyword: ::String
+      attr_accessor configuration_set_name: ::String
+      attr_accessor max_price: ::String
+      attr_accessor time_to_live: ::Integer
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor destination_country_parameters: ::Hash[("IN_TEMPLATE_ID" | "IN_ENTITY_ID"), ::String]
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class SendTextMessageResult
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendVoiceMessageRequest
+      attr_accessor destination_phone_number: ::String
+      attr_accessor origination_identity: ::String
+      attr_accessor message_body: ::String
+      attr_accessor message_body_text_type: ("TEXT" | "SSML")
+      attr_accessor voice_id: ("AMY" | "ASTRID" | "BIANCA" | "BRIAN" | "CAMILA" | "CARLA" | "CARMEN" | "CELINE" | "CHANTAL" | "CONCHITA" | "CRISTIANO" | "DORA" | "EMMA" | "ENRIQUE" | "EWA" | "FILIZ" | "GERAINT" | "GIORGIO" | "GWYNETH" | "HANS" | "INES" | "IVY" | "JACEK" | "JAN" | "JOANNA" | "JOEY" | "JUSTIN" | "KARL" | "KENDRA" | "KIMBERLY" | "LEA" | "LIV" | "LOTTE" | "LUCIA" | "LUPE" | "MADS" | "MAJA" | "MARLENE" | "MATHIEU" | "MATTHEW" | "MAXIM" | "MIA" | "MIGUEL" | "MIZUKI" | "NAJA" | "NICOLE" | "PENELOPE" | "RAVEENA" | "RICARDO" | "RUBEN" | "RUSSELL" | "SALLI" | "SEOYEON" | "TAKUMI" | "TATYANA" | "VICKI" | "VITORIA" | "ZEINA" | "ZHIYU")
+      attr_accessor configuration_set_name: ::String
+      attr_accessor max_price_per_minute: ::String
+      attr_accessor time_to_live: ::Integer
+      attr_accessor context: ::Hash[::String, ::String]
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class SendVoiceMessageResult
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class SenderIdAndCountry
+      attr_accessor sender_id: ::String
+      attr_accessor iso_country_code: ::String
+      SENSITIVE: []
+    end
+
+    class SenderIdFilter
+      attr_accessor name: ("sender-id" | "iso-country-code" | "message-type" | "deletion-protection-enabled" | "registered")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SenderIdInformation
+      attr_accessor sender_id_arn: ::String
+      attr_accessor sender_id: ::String
+      attr_accessor iso_country_code: ::String
+      attr_accessor message_types: ::Array[("TRANSACTIONAL" | "PROMOTIONAL")]
+      attr_accessor monthly_leasing_price: ::String
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor registered: bool
+      attr_accessor registration_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor reason: ("ASSOCIATIONS_PER_REGISTRATION" | "CONFIGURATION_SETS_PER_ACCOUNT" | "DAILY_DESTINATION_CALL_LIMIT" | "EVENT_DESTINATIONS_PER_CONFIGURATION_SET" | "KEYWORDS_PER_PHONE_NUMBER" | "KEYWORDS_PER_POOL" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT" | "MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE" | "OPT_OUT_LISTS_PER_ACCOUNT" | "ORIGINATION_IDENTITIES_PER_POOL" | "PHONE_NUMBERS_PER_ACCOUNT" | "PHONE_NUMBERS_PER_REGISTRATION" | "POOLS_PER_ACCOUNT" | "REGISTRATION_ATTACHMENTS_CREATED_PER_DAY" | "REGISTRATION_ATTACHMENTS_PER_ACCOUNT" | "REGISTRATION_VERSIONS_CREATED_PER_DAY" | "REGISTRATIONS_PER_ACCOUNT" | "SENDER_IDS_PER_ACCOUNT" | "TAGS_PER_RESOURCE" | "VERIFIED_DESTINATION_NUMBERS_PER_ACCOUNT" | "VERIFICATION_ATTEMPTS_PER_DAY")
+      SENSITIVE: []
+    end
+
+    class SetDefaultMessageTypeRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      SENSITIVE: []
+    end
+
+    class SetDefaultMessageTypeResult
+      attr_accessor configuration_set_arn: ::String
+      attr_accessor configuration_set_name: ::String
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      SENSITIVE: []
+    end
+
+    class SetDefaultSenderIdRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor sender_id: ::String
+      SENSITIVE: []
+    end
+
+    class SetDefaultSenderIdResult
+      attr_accessor configuration_set_arn: ::String
+      attr_accessor configuration_set_name: ::String
+      attr_accessor sender_id: ::String
+      SENSITIVE: []
+    end
+
+    class SetTextMessageSpendLimitOverrideRequest
+      attr_accessor monthly_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class SetTextMessageSpendLimitOverrideResult
+      attr_accessor monthly_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class SetVoiceMessageSpendLimitOverrideRequest
+      attr_accessor monthly_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class SetVoiceMessageSpendLimitOverrideResult
+      attr_accessor monthly_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class SnsDestination
+      attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SpendLimit
+      attr_accessor name: ("TEXT_MESSAGE_MONTHLY_SPEND_LIMIT" | "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT")
+      attr_accessor enforced_limit: ::Integer
+      attr_accessor max_limit: ::Integer
+      attr_accessor overridden: bool
+      SENSITIVE: []
+    end
+
+    class SubmitRegistrationVersionRequest
+      attr_accessor registration_id: ::String
+      SENSITIVE: []
+    end
+
+    class SubmitRegistrationVersionResult
+      attr_accessor registration_arn: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor version_number: ::Integer
+      attr_accessor registration_version_status: ("DRAFT" | "SUBMITTED" | "REVIEWING" | "APPROVED" | "DISCARDED" | "DENIED" | "REVOKED" | "ARCHIVED")
+      attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory
+      SENSITIVE: []
+    end
+
+    class SupportedAssociation
+      attr_accessor resource_type: ::String
+      attr_accessor iso_country_code: ::String
+      attr_accessor association_behavior: ("ASSOCIATE_BEFORE_SUBMIT" | "ASSOCIATE_ON_APPROVAL" | "ASSOCIATE_AFTER_COMPLETE")
+      attr_accessor disassociation_behavior: ("DISASSOCIATE_ALL_CLOSES_REGISTRATION" | "DISASSOCIATE_ALL_ALLOWS_DELETE_REGISTRATION" | "DELETE_REGISTRATION_DISASSOCIATES")
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResult < Aws::EmptyStructure
+    end
+
+    class TextValidation
+      attr_accessor min_length: ::Integer
+      attr_accessor max_length: ::Integer
+      attr_accessor pattern: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResult < Aws::EmptyStructure
+    end
+
+    class UpdateEventDestinationRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination_name: ::String
+      attr_accessor enabled: bool
+      attr_accessor matching_event_types: ::Array[("ALL" | "TEXT_ALL" | "TEXT_SENT" | "TEXT_PENDING" | "TEXT_QUEUED" | "TEXT_SUCCESSFUL" | "TEXT_DELIVERED" | "TEXT_INVALID" | "TEXT_INVALID_MESSAGE" | "TEXT_UNREACHABLE" | "TEXT_CARRIER_UNREACHABLE" | "TEXT_BLOCKED" | "TEXT_CARRIER_BLOCKED" | "TEXT_SPAM" | "TEXT_UNKNOWN" | "TEXT_TTL_EXPIRED" | "VOICE_ALL" | "VOICE_INITIATED" | "VOICE_RINGING" | "VOICE_ANSWERED" | "VOICE_COMPLETED" | "VOICE_BUSY" | "VOICE_NO_ANSWER" | "VOICE_FAILED" | "VOICE_TTL_EXPIRED")]
+      attr_accessor cloud_watch_logs_destination: Types::CloudWatchLogsDestination
+      attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination
+      attr_accessor sns_destination: Types::SnsDestination
+      SENSITIVE: []
+    end
+
+    class UpdateEventDestinationResult
+      attr_accessor configuration_set_arn: ::String
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination: Types::EventDestination
+      SENSITIVE: []
+    end
+
+    class UpdatePhoneNumberRequest
+      attr_accessor phone_number_id: ::String
+      attr_accessor two_way_enabled: bool
+      attr_accessor two_way_channel_arn: ::String
+      attr_accessor two_way_channel_role: ::String
+      attr_accessor self_managed_opt_outs_enabled: bool
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor deletion_protection_enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdatePhoneNumberResult
+      attr_accessor phone_number_arn: ::String
+      attr_accessor phone_number_id: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor status: ("PENDING" | "ACTIVE" | "ASSOCIATING" | "DISASSOCIATING" | "DELETED")
+      attr_accessor iso_country_code: ::String
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      attr_accessor number_capabilities: ::Array[("SMS" | "VOICE")]
+      attr_accessor number_type: ("SHORT_CODE" | "LONG_CODE" | "TOLL_FREE" | "TEN_DLC" | "SIMULATOR")
+      attr_accessor monthly_leasing_price: ::String
+      attr_accessor two_way_enabled: bool
+      attr_accessor two_way_channel_arn: ::String
+      attr_accessor two_way_channel_role: ::String
+      attr_accessor self_managed_opt_outs_enabled: bool
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor registration_id: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdatePoolRequest
+      attr_accessor pool_id: ::String
+      attr_accessor two_way_enabled: bool
+      attr_accessor two_way_channel_arn: ::String
+      attr_accessor two_way_channel_role: ::String
+      attr_accessor self_managed_opt_outs_enabled: bool
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor shared_routes_enabled: bool
+      attr_accessor deletion_protection_enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdatePoolResult
+      attr_accessor pool_arn: ::String
+      attr_accessor pool_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING")
+      attr_accessor message_type: ("TRANSACTIONAL" | "PROMOTIONAL")
+      attr_accessor two_way_enabled: bool
+      attr_accessor two_way_channel_arn: ::String
+      attr_accessor two_way_channel_role: ::String
+      attr_accessor self_managed_opt_outs_enabled: bool
+      attr_accessor opt_out_list_name: ::String
+      attr_accessor shared_routes_enabled: bool
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateSenderIdRequest
+      attr_accessor sender_id: ::String
+      attr_accessor iso_country_code: ::String
+      attr_accessor deletion_protection_enabled: bool
+      SENSITIVE: []
+    end
+
+    class UpdateSenderIdResult
+      attr_accessor sender_id_arn: ::String
+      attr_accessor sender_id: ::String
+      attr_accessor iso_country_code: ::String
+      attr_accessor message_types: ::Array[("TRANSACTIONAL" | "PROMOTIONAL")]
+      attr_accessor monthly_leasing_price: ::String
+      attr_accessor deletion_protection_enabled: bool
+      attr_accessor registered: bool
+      attr_accessor registration_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("CANNOT_ADD_OPTED_OUT_NUMBER" | "CANNOT_PARSE" | "COUNTRY_CODE_MISMATCH" | "DESTINATION_COUNTRY_BLOCKED" | "FIELD_VALIDATION_FAILED" | "ATTACHMENT_TYPE_NOT_SUPPORTED" | "INVALID_ARN" | "INVALID_FILTER_VALUES" | "INVALID_IDENTITY_FOR_DESTINATION_COUNTRY" | "INVALID_NEXT_TOKEN" | "INVALID_PARAMETER" | "INVALID_REQUEST" | "INVALID_REGISTRATION_ASSOCIATION" | "MAXIMUM_SIZE_EXCEEDED" | "MISSING_PARAMETER" | "PARAMETERS_CANNOT_BE_USED_TOGETHER" | "PHONE_NUMBER_CANNOT_BE_OPTED_IN" | "PHONE_NUMBER_CANNOT_BE_RELEASED" | "PRICE_OVER_THRESHOLD" | "RESOURCE_NOT_ACCESSIBLE" | "REQUESTED_SPEND_LIMIT_HIGHER_THAN_SERVICE_LIMIT" | "SENDER_ID_NOT_REGISTERED" | "SENDER_ID_NOT_SUPPORTED" | "SENDER_ID_REQUIRES_REGISTRATION" | "TWO_WAY_TOPIC_NOT_PRESENT" | "TWO_WAY_NOT_ENABLED" | "TWO_WAY_NOT_SUPPORTED_IN_COUNTRY" | "TWO_WAY_NOT_SUPPORTED_IN_REGION" | "TWO_WAY_CHANNEL_NOT_PRESENT" | "UNKNOWN_REGISTRATION_FIELD" | "UNKNOWN_REGISTRATION_SECTION" | "UNKNOWN_REGISTRATION_TYPE" | "UNKNOWN_REGISTRATION_VERSION" | "UNKNOWN_OPERATION" | "REGISTRATION_FIELD_CANNOT_BE_DELETED" | "VERIFICATION_CODE_MISMATCH" | "VOICE_CAPABILITY_NOT_AVAILABLE" | "OTHER")
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VerifiedDestinationNumberFilter
+      attr_accessor name: ("status")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class VerifiedDestinationNumberInformation
+      attr_accessor verified_destination_number_arn: ::String
+      attr_accessor verified_destination_number_id: ::String
+      attr_accessor destination_phone_number: ::String
+      attr_accessor status: ("PENDING" | "VERIFIED")
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class VerifyDestinationNumberRequest
+      attr_accessor verified_destination_number_id: ::String
+      attr_accessor verification_code: ::String
+      SENSITIVE: []
+    end
+
+    class VerifyDestinationNumberResult
+      attr_accessor verified_destination_number_arn: ::String
+      attr_accessor verified_destination_number_id: ::String
+      attr_accessor destination_phone_number: ::String
+      attr_accessor status: ("PENDING" | "VERIFIED")
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+  end
+end

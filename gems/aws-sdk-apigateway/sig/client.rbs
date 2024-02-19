@@ -1,0 +1,2163 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module APIGateway
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateApiKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApiKey]
+        def id: () -> ::String
+        def value: () -> ::String
+        def name: () -> ::String
+        def customer_id: () -> ::String
+        def description: () -> ::String
+        def enabled: () -> bool
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+        def stage_keys: () -> ::Array[::String]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_api_key-instance_method
+      def create_api_key: (
+                            ?name: ::String,
+                            ?description: ::String,
+                            ?enabled: bool,
+                            ?generate_distinct_id: bool,
+                            ?value: ::String,
+                            ?stage_keys: Array[
+                              {
+                                rest_api_id: ::String?,
+                                stage_name: ::String?
+                              },
+                            ],
+                            ?customer_id: ::String,
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateApiKeyResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApiKeyResponseSuccess
+
+      interface _CreateAuthorizerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Authorizer]
+        def id: () -> ::String
+        def name: () -> ::String
+        def type: () -> ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS")
+        def provider_arns: () -> ::Array[::String]
+        def auth_type: () -> ::String
+        def authorizer_uri: () -> ::String
+        def authorizer_credentials: () -> ::String
+        def identity_source: () -> ::String
+        def identity_validation_expression: () -> ::String
+        def authorizer_result_ttl_in_seconds: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_authorizer-instance_method
+      def create_authorizer: (
+                               rest_api_id: ::String,
+                               name: ::String,
+                               type: ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS"),
+                               ?provider_arns: Array[::String],
+                               ?auth_type: ::String,
+                               ?authorizer_uri: ::String,
+                               ?authorizer_credentials: ::String,
+                               ?identity_source: ::String,
+                               ?identity_validation_expression: ::String,
+                               ?authorizer_result_ttl_in_seconds: ::Integer
+                             ) -> _CreateAuthorizerResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAuthorizerResponseSuccess
+
+      interface _CreateBasePathMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BasePathMapping]
+        def base_path: () -> ::String
+        def rest_api_id: () -> ::String
+        def stage: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_base_path_mapping-instance_method
+      def create_base_path_mapping: (
+                                      domain_name: ::String,
+                                      ?base_path: ::String,
+                                      rest_api_id: ::String,
+                                      ?stage: ::String
+                                    ) -> _CreateBasePathMappingResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBasePathMappingResponseSuccess
+
+      interface _CreateDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Deployment]
+        def id: () -> ::String
+        def description: () -> ::String
+        def created_date: () -> ::Time
+        def api_summary: () -> ::Hash[::String, ::Hash[::String, Types::MethodSnapshot]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_deployment-instance_method
+      def create_deployment: (
+                               rest_api_id: ::String,
+                               ?stage_name: ::String,
+                               ?stage_description: ::String,
+                               ?description: ::String,
+                               ?cache_cluster_enabled: bool,
+                               ?cache_cluster_size: ("0.5" | "1.6" | "6.1" | "13.5" | "28.4" | "58.2" | "118" | "237"),
+                               ?variables: Hash[::String, ::String],
+                               ?canary_settings: {
+                                 percent_traffic: ::Float?,
+                                 stage_variable_overrides: Hash[::String, ::String]?,
+                                 use_stage_cache: bool?
+                               },
+                               ?tracing_enabled: bool
+                             ) -> _CreateDeploymentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeploymentResponseSuccess
+
+      interface _CreateDocumentationPartResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DocumentationPart]
+        def id: () -> ::String
+        def location: () -> Types::DocumentationPartLocation
+        def properties: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_documentation_part-instance_method
+      def create_documentation_part: (
+                                       rest_api_id: ::String,
+                                       location: {
+                                         type: ("API" | "AUTHORIZER" | "MODEL" | "RESOURCE" | "METHOD" | "PATH_PARAMETER" | "QUERY_PARAMETER" | "REQUEST_HEADER" | "REQUEST_BODY" | "RESPONSE" | "RESPONSE_HEADER" | "RESPONSE_BODY"),
+                                         path: ::String?,
+                                         method: ::String?,
+                                         status_code: ::String?,
+                                         name: ::String?
+                                       },
+                                       properties: ::String
+                                     ) -> _CreateDocumentationPartResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDocumentationPartResponseSuccess
+
+      interface _CreateDocumentationVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DocumentationVersion]
+        def version: () -> ::String
+        def created_date: () -> ::Time
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_documentation_version-instance_method
+      def create_documentation_version: (
+                                          rest_api_id: ::String,
+                                          documentation_version: ::String,
+                                          ?stage_name: ::String,
+                                          ?description: ::String
+                                        ) -> _CreateDocumentationVersionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDocumentationVersionResponseSuccess
+
+      interface _CreateDomainNameResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DomainName]
+        def domain_name: () -> ::String
+        def certificate_name: () -> ::String
+        def certificate_arn: () -> ::String
+        def certificate_upload_date: () -> ::Time
+        def regional_domain_name: () -> ::String
+        def regional_hosted_zone_id: () -> ::String
+        def regional_certificate_name: () -> ::String
+        def regional_certificate_arn: () -> ::String
+        def distribution_domain_name: () -> ::String
+        def distribution_hosted_zone_id: () -> ::String
+        def endpoint_configuration: () -> Types::EndpointConfiguration
+        def domain_name_status: () -> ("AVAILABLE" | "UPDATING" | "PENDING" | "PENDING_CERTIFICATE_REIMPORT" | "PENDING_OWNERSHIP_VERIFICATION")
+        def domain_name_status_message: () -> ::String
+        def security_policy: () -> ("TLS_1_0" | "TLS_1_2")
+        def tags: () -> ::Hash[::String, ::String]
+        def mutual_tls_authentication: () -> Types::MutualTlsAuthentication
+        def ownership_verification_certificate_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_domain_name-instance_method
+      def create_domain_name: (
+                                domain_name: ::String,
+                                ?certificate_name: ::String,
+                                ?certificate_body: ::String,
+                                ?certificate_private_key: ::String,
+                                ?certificate_chain: ::String,
+                                ?certificate_arn: ::String,
+                                ?regional_certificate_name: ::String,
+                                ?regional_certificate_arn: ::String,
+                                ?endpoint_configuration: {
+                                  types: Array[("REGIONAL" | "EDGE" | "PRIVATE")]?,
+                                  vpc_endpoint_ids: Array[::String]?
+                                },
+                                ?tags: Hash[::String, ::String],
+                                ?security_policy: ("TLS_1_0" | "TLS_1_2"),
+                                ?mutual_tls_authentication: {
+                                  truststore_uri: ::String?,
+                                  truststore_version: ::String?
+                                },
+                                ?ownership_verification_certificate_arn: ::String
+                              ) -> _CreateDomainNameResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainNameResponseSuccess
+
+      interface _CreateModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Model]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def schema: () -> ::String
+        def content_type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_model-instance_method
+      def create_model: (
+                          rest_api_id: ::String,
+                          name: ::String,
+                          ?description: ::String,
+                          ?schema: ::String,
+                          content_type: ::String
+                        ) -> _CreateModelResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelResponseSuccess
+
+      interface _CreateRequestValidatorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RequestValidator]
+        def id: () -> ::String
+        def name: () -> ::String
+        def validate_request_body: () -> bool
+        def validate_request_parameters: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_request_validator-instance_method
+      def create_request_validator: (
+                                      rest_api_id: ::String,
+                                      ?name: ::String,
+                                      ?validate_request_body: bool,
+                                      ?validate_request_parameters: bool
+                                    ) -> _CreateRequestValidatorResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRequestValidatorResponseSuccess
+
+      interface _CreateResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Resource]
+        def id: () -> ::String
+        def parent_id: () -> ::String
+        def path_part: () -> ::String
+        def path: () -> ::String
+        def resource_methods: () -> ::Hash[::String, Types::Method]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_resource-instance_method
+      def create_resource: (
+                             rest_api_id: ::String,
+                             parent_id: ::String,
+                             path_part: ::String
+                           ) -> _CreateResourceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceResponseSuccess
+
+      interface _CreateRestApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestApi]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def created_date: () -> ::Time
+        def version: () -> ::String
+        def warnings: () -> ::Array[::String]
+        def binary_media_types: () -> ::Array[::String]
+        def minimum_compression_size: () -> ::Integer
+        def api_key_source: () -> ("HEADER" | "AUTHORIZER")
+        def endpoint_configuration: () -> Types::EndpointConfiguration
+        def policy: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def disable_execute_api_endpoint: () -> bool
+        def root_resource_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_rest_api-instance_method
+      def create_rest_api: (
+                             name: ::String,
+                             ?description: ::String,
+                             ?version: ::String,
+                             ?clone_from: ::String,
+                             ?binary_media_types: Array[::String],
+                             ?minimum_compression_size: ::Integer,
+                             ?api_key_source: ("HEADER" | "AUTHORIZER"),
+                             ?endpoint_configuration: {
+                               types: Array[("REGIONAL" | "EDGE" | "PRIVATE")]?,
+                               vpc_endpoint_ids: Array[::String]?
+                             },
+                             ?policy: ::String,
+                             ?tags: Hash[::String, ::String],
+                             ?disable_execute_api_endpoint: bool
+                           ) -> _CreateRestApiResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRestApiResponseSuccess
+
+      interface _CreateStageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Stage]
+        def deployment_id: () -> ::String
+        def client_certificate_id: () -> ::String
+        def stage_name: () -> ::String
+        def description: () -> ::String
+        def cache_cluster_enabled: () -> bool
+        def cache_cluster_size: () -> ("0.5" | "1.6" | "6.1" | "13.5" | "28.4" | "58.2" | "118" | "237")
+        def cache_cluster_status: () -> ("CREATE_IN_PROGRESS" | "AVAILABLE" | "DELETE_IN_PROGRESS" | "NOT_AVAILABLE" | "FLUSH_IN_PROGRESS")
+        def method_settings: () -> ::Hash[::String, Types::MethodSetting]
+        def variables: () -> ::Hash[::String, ::String]
+        def documentation_version: () -> ::String
+        def access_log_settings: () -> Types::AccessLogSettings
+        def canary_settings: () -> Types::CanarySettings
+        def tracing_enabled: () -> bool
+        def web_acl_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_stage-instance_method
+      def create_stage: (
+                          rest_api_id: ::String,
+                          stage_name: ::String,
+                          deployment_id: ::String,
+                          ?description: ::String,
+                          ?cache_cluster_enabled: bool,
+                          ?cache_cluster_size: ("0.5" | "1.6" | "6.1" | "13.5" | "28.4" | "58.2" | "118" | "237"),
+                          ?variables: Hash[::String, ::String],
+                          ?documentation_version: ::String,
+                          ?canary_settings: {
+                            percent_traffic: ::Float?,
+                            deployment_id: ::String?,
+                            stage_variable_overrides: Hash[::String, ::String]?,
+                            use_stage_cache: bool?
+                          },
+                          ?tracing_enabled: bool,
+                          ?tags: Hash[::String, ::String]
+                        ) -> _CreateStageResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStageResponseSuccess
+
+      interface _CreateUsagePlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UsagePlan]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def api_stages: () -> ::Array[Types::ApiStage]
+        def throttle: () -> Types::ThrottleSettings
+        def quota: () -> Types::QuotaSettings
+        def product_code: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_usage_plan-instance_method
+      def create_usage_plan: (
+                               name: ::String,
+                               ?description: ::String,
+                               ?api_stages: Array[
+                                 {
+                                   api_id: ::String?,
+                                   stage: ::String?,
+                                   throttle: Hash[::String, {
+                                       burst_limit: ::Integer?,
+                                       rate_limit: ::Float?
+                                     }]?
+                                 },
+                               ],
+                               ?throttle: {
+                                 burst_limit: ::Integer?,
+                                 rate_limit: ::Float?
+                               },
+                               ?quota: {
+                                 limit: ::Integer?,
+                                 offset: ::Integer?,
+                                 period: ("DAY" | "WEEK" | "MONTH")?
+                               },
+                               ?tags: Hash[::String, ::String]
+                             ) -> _CreateUsagePlanResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUsagePlanResponseSuccess
+
+      interface _CreateUsagePlanKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UsagePlanKey]
+        def id: () -> ::String
+        def type: () -> ::String
+        def value: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_usage_plan_key-instance_method
+      def create_usage_plan_key: (
+                                   usage_plan_id: ::String,
+                                   key_id: ::String,
+                                   key_type: ::String
+                                 ) -> _CreateUsagePlanKeyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUsagePlanKeyResponseSuccess
+
+      interface _CreateVpcLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VpcLink]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def target_arns: () -> ::Array[::String]
+        def status: () -> ("AVAILABLE" | "PENDING" | "DELETING" | "FAILED")
+        def status_message: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#create_vpc_link-instance_method
+      def create_vpc_link: (
+                             name: ::String,
+                             ?description: ::String,
+                             target_arns: Array[::String],
+                             ?tags: Hash[::String, ::String]
+                           ) -> _CreateVpcLinkResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcLinkResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_api_key-instance_method
+      def delete_api_key: (
+                            api_key: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_authorizer-instance_method
+      def delete_authorizer: (
+                               rest_api_id: ::String,
+                               authorizer_id: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_base_path_mapping-instance_method
+      def delete_base_path_mapping: (
+                                      domain_name: ::String,
+                                      base_path: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_client_certificate-instance_method
+      def delete_client_certificate: (
+                                       client_certificate_id: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_deployment-instance_method
+      def delete_deployment: (
+                               rest_api_id: ::String,
+                               deployment_id: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_documentation_part-instance_method
+      def delete_documentation_part: (
+                                       rest_api_id: ::String,
+                                       documentation_part_id: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_documentation_version-instance_method
+      def delete_documentation_version: (
+                                          rest_api_id: ::String,
+                                          documentation_version: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_domain_name-instance_method
+      def delete_domain_name: (
+                                domain_name: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_gateway_response-instance_method
+      def delete_gateway_response: (
+                                     rest_api_id: ::String,
+                                     response_type: ("DEFAULT_4XX" | "DEFAULT_5XX" | "RESOURCE_NOT_FOUND" | "UNAUTHORIZED" | "INVALID_API_KEY" | "ACCESS_DENIED" | "AUTHORIZER_FAILURE" | "AUTHORIZER_CONFIGURATION_ERROR" | "INVALID_SIGNATURE" | "EXPIRED_TOKEN" | "MISSING_AUTHENTICATION_TOKEN" | "INTEGRATION_FAILURE" | "INTEGRATION_TIMEOUT" | "API_CONFIGURATION_ERROR" | "UNSUPPORTED_MEDIA_TYPE" | "BAD_REQUEST_PARAMETERS" | "BAD_REQUEST_BODY" | "REQUEST_TOO_LARGE" | "THROTTLED" | "QUOTA_EXCEEDED" | "WAF_FILTERED")
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_integration-instance_method
+      def delete_integration: (
+                                rest_api_id: ::String,
+                                resource_id: ::String,
+                                http_method: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_integration_response-instance_method
+      def delete_integration_response: (
+                                         rest_api_id: ::String,
+                                         resource_id: ::String,
+                                         http_method: ::String,
+                                         status_code: ::String
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_method-instance_method
+      def delete_method: (
+                           rest_api_id: ::String,
+                           resource_id: ::String,
+                           http_method: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_method_response-instance_method
+      def delete_method_response: (
+                                    rest_api_id: ::String,
+                                    resource_id: ::String,
+                                    http_method: ::String,
+                                    status_code: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_model-instance_method
+      def delete_model: (
+                          rest_api_id: ::String,
+                          model_name: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_request_validator-instance_method
+      def delete_request_validator: (
+                                      rest_api_id: ::String,
+                                      request_validator_id: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_resource-instance_method
+      def delete_resource: (
+                             rest_api_id: ::String,
+                             resource_id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_rest_api-instance_method
+      def delete_rest_api: (
+                             rest_api_id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_stage-instance_method
+      def delete_stage: (
+                          rest_api_id: ::String,
+                          stage_name: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_usage_plan-instance_method
+      def delete_usage_plan: (
+                               usage_plan_id: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_usage_plan_key-instance_method
+      def delete_usage_plan_key: (
+                                   usage_plan_id: ::String,
+                                   key_id: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#delete_vpc_link-instance_method
+      def delete_vpc_link: (
+                             vpc_link_id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#flush_stage_authorizers_cache-instance_method
+      def flush_stage_authorizers_cache: (
+                                           rest_api_id: ::String,
+                                           stage_name: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#flush_stage_cache-instance_method
+      def flush_stage_cache: (
+                               rest_api_id: ::String,
+                               stage_name: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GenerateClientCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClientCertificate]
+        def client_certificate_id: () -> ::String
+        def description: () -> ::String
+        def pem_encoded_certificate: () -> ::String
+        def created_date: () -> ::Time
+        def expiration_date: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#generate_client_certificate-instance_method
+      def generate_client_certificate: (
+                                         ?description: ::String,
+                                         ?tags: Hash[::String, ::String]
+                                       ) -> _GenerateClientCertificateResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateClientCertificateResponseSuccess
+
+      interface _GetAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Account]
+        def cloudwatch_role_arn: () -> ::String
+        def throttle_settings: () -> Types::ThrottleSettings
+        def features: () -> ::Array[::String]
+        def api_key_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_account-instance_method
+      def get_account: (
+                       ) -> _GetAccountResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountResponseSuccess
+
+      interface _GetApiKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApiKey]
+        def id: () -> ::String
+        def value: () -> ::String
+        def name: () -> ::String
+        def customer_id: () -> ::String
+        def description: () -> ::String
+        def enabled: () -> bool
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+        def stage_keys: () -> ::Array[::String]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_api_key-instance_method
+      def get_api_key: (
+                         api_key: ::String,
+                         ?include_value: bool
+                       ) -> _GetApiKeyResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApiKeyResponseSuccess
+
+      interface _GetApiKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApiKeys]
+        def warnings: () -> ::Array[::String]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::ApiKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_api_keys-instance_method
+      def get_api_keys: (
+                          ?position: ::String,
+                          ?limit: ::Integer,
+                          ?name_query: ::String,
+                          ?customer_id: ::String,
+                          ?include_values: bool
+                        ) -> _GetApiKeysResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApiKeysResponseSuccess
+
+      interface _GetAuthorizerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Authorizer]
+        def id: () -> ::String
+        def name: () -> ::String
+        def type: () -> ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS")
+        def provider_arns: () -> ::Array[::String]
+        def auth_type: () -> ::String
+        def authorizer_uri: () -> ::String
+        def authorizer_credentials: () -> ::String
+        def identity_source: () -> ::String
+        def identity_validation_expression: () -> ::String
+        def authorizer_result_ttl_in_seconds: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_authorizer-instance_method
+      def get_authorizer: (
+                            rest_api_id: ::String,
+                            authorizer_id: ::String
+                          ) -> _GetAuthorizerResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAuthorizerResponseSuccess
+
+      interface _GetAuthorizersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Authorizers]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::Authorizer]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_authorizers-instance_method
+      def get_authorizers: (
+                             rest_api_id: ::String,
+                             ?position: ::String,
+                             ?limit: ::Integer
+                           ) -> _GetAuthorizersResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAuthorizersResponseSuccess
+
+      interface _GetBasePathMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BasePathMapping]
+        def base_path: () -> ::String
+        def rest_api_id: () -> ::String
+        def stage: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_base_path_mapping-instance_method
+      def get_base_path_mapping: (
+                                   domain_name: ::String,
+                                   base_path: ::String
+                                 ) -> _GetBasePathMappingResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBasePathMappingResponseSuccess
+
+      interface _GetBasePathMappingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BasePathMappings]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::BasePathMapping]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_base_path_mappings-instance_method
+      def get_base_path_mappings: (
+                                    domain_name: ::String,
+                                    ?position: ::String,
+                                    ?limit: ::Integer
+                                  ) -> _GetBasePathMappingsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBasePathMappingsResponseSuccess
+
+      interface _GetClientCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClientCertificate]
+        def client_certificate_id: () -> ::String
+        def description: () -> ::String
+        def pem_encoded_certificate: () -> ::String
+        def created_date: () -> ::Time
+        def expiration_date: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_client_certificate-instance_method
+      def get_client_certificate: (
+                                    client_certificate_id: ::String
+                                  ) -> _GetClientCertificateResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClientCertificateResponseSuccess
+
+      interface _GetClientCertificatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClientCertificates]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::ClientCertificate]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_client_certificates-instance_method
+      def get_client_certificates: (
+                                     ?position: ::String,
+                                     ?limit: ::Integer
+                                   ) -> _GetClientCertificatesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClientCertificatesResponseSuccess
+
+      interface _GetDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Deployment]
+        def id: () -> ::String
+        def description: () -> ::String
+        def created_date: () -> ::Time
+        def api_summary: () -> ::Hash[::String, ::Hash[::String, Types::MethodSnapshot]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_deployment-instance_method
+      def get_deployment: (
+                            rest_api_id: ::String,
+                            deployment_id: ::String,
+                            ?embed: Array[::String]
+                          ) -> _GetDeploymentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentResponseSuccess
+
+      interface _GetDeploymentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Deployments]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::Deployment]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_deployments-instance_method
+      def get_deployments: (
+                             rest_api_id: ::String,
+                             ?position: ::String,
+                             ?limit: ::Integer
+                           ) -> _GetDeploymentsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeploymentsResponseSuccess
+
+      interface _GetDocumentationPartResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DocumentationPart]
+        def id: () -> ::String
+        def location: () -> Types::DocumentationPartLocation
+        def properties: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_documentation_part-instance_method
+      def get_documentation_part: (
+                                    rest_api_id: ::String,
+                                    documentation_part_id: ::String
+                                  ) -> _GetDocumentationPartResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDocumentationPartResponseSuccess
+
+      interface _GetDocumentationPartsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DocumentationParts]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::DocumentationPart]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_documentation_parts-instance_method
+      def get_documentation_parts: (
+                                     rest_api_id: ::String,
+                                     ?type: ("API" | "AUTHORIZER" | "MODEL" | "RESOURCE" | "METHOD" | "PATH_PARAMETER" | "QUERY_PARAMETER" | "REQUEST_HEADER" | "REQUEST_BODY" | "RESPONSE" | "RESPONSE_HEADER" | "RESPONSE_BODY"),
+                                     ?name_query: ::String,
+                                     ?path: ::String,
+                                     ?position: ::String,
+                                     ?limit: ::Integer,
+                                     ?location_status: ("DOCUMENTED" | "UNDOCUMENTED")
+                                   ) -> _GetDocumentationPartsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDocumentationPartsResponseSuccess
+
+      interface _GetDocumentationVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DocumentationVersion]
+        def version: () -> ::String
+        def created_date: () -> ::Time
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_documentation_version-instance_method
+      def get_documentation_version: (
+                                       rest_api_id: ::String,
+                                       documentation_version: ::String
+                                     ) -> _GetDocumentationVersionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDocumentationVersionResponseSuccess
+
+      interface _GetDocumentationVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DocumentationVersions]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::DocumentationVersion]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_documentation_versions-instance_method
+      def get_documentation_versions: (
+                                        rest_api_id: ::String,
+                                        ?position: ::String,
+                                        ?limit: ::Integer
+                                      ) -> _GetDocumentationVersionsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDocumentationVersionsResponseSuccess
+
+      interface _GetDomainNameResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DomainName]
+        def domain_name: () -> ::String
+        def certificate_name: () -> ::String
+        def certificate_arn: () -> ::String
+        def certificate_upload_date: () -> ::Time
+        def regional_domain_name: () -> ::String
+        def regional_hosted_zone_id: () -> ::String
+        def regional_certificate_name: () -> ::String
+        def regional_certificate_arn: () -> ::String
+        def distribution_domain_name: () -> ::String
+        def distribution_hosted_zone_id: () -> ::String
+        def endpoint_configuration: () -> Types::EndpointConfiguration
+        def domain_name_status: () -> ("AVAILABLE" | "UPDATING" | "PENDING" | "PENDING_CERTIFICATE_REIMPORT" | "PENDING_OWNERSHIP_VERIFICATION")
+        def domain_name_status_message: () -> ::String
+        def security_policy: () -> ("TLS_1_0" | "TLS_1_2")
+        def tags: () -> ::Hash[::String, ::String]
+        def mutual_tls_authentication: () -> Types::MutualTlsAuthentication
+        def ownership_verification_certificate_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_domain_name-instance_method
+      def get_domain_name: (
+                             domain_name: ::String
+                           ) -> _GetDomainNameResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainNameResponseSuccess
+
+      interface _GetDomainNamesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DomainNames]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::DomainName]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_domain_names-instance_method
+      def get_domain_names: (
+                              ?position: ::String,
+                              ?limit: ::Integer
+                            ) -> _GetDomainNamesResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainNamesResponseSuccess
+
+      interface _GetExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportResponse]
+        def content_type: () -> ::String
+        def content_disposition: () -> ::String
+        def body: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_export-instance_method
+      def get_export: (
+                        rest_api_id: ::String,
+                        stage_name: ::String,
+                        export_type: ::String,
+                        ?parameters: Hash[::String, ::String],
+                        ?accepts: ::String
+                      ) -> _GetExportResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExportResponseSuccess
+
+      interface _GetGatewayResponseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GatewayResponse]
+        def response_type: () -> ("DEFAULT_4XX" | "DEFAULT_5XX" | "RESOURCE_NOT_FOUND" | "UNAUTHORIZED" | "INVALID_API_KEY" | "ACCESS_DENIED" | "AUTHORIZER_FAILURE" | "AUTHORIZER_CONFIGURATION_ERROR" | "INVALID_SIGNATURE" | "EXPIRED_TOKEN" | "MISSING_AUTHENTICATION_TOKEN" | "INTEGRATION_FAILURE" | "INTEGRATION_TIMEOUT" | "API_CONFIGURATION_ERROR" | "UNSUPPORTED_MEDIA_TYPE" | "BAD_REQUEST_PARAMETERS" | "BAD_REQUEST_BODY" | "REQUEST_TOO_LARGE" | "THROTTLED" | "QUOTA_EXCEEDED" | "WAF_FILTERED")
+        def status_code: () -> ::String
+        def response_parameters: () -> ::Hash[::String, ::String]
+        def response_templates: () -> ::Hash[::String, ::String]
+        def default_response: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_gateway_response-instance_method
+      def get_gateway_response: (
+                                  rest_api_id: ::String,
+                                  response_type: ("DEFAULT_4XX" | "DEFAULT_5XX" | "RESOURCE_NOT_FOUND" | "UNAUTHORIZED" | "INVALID_API_KEY" | "ACCESS_DENIED" | "AUTHORIZER_FAILURE" | "AUTHORIZER_CONFIGURATION_ERROR" | "INVALID_SIGNATURE" | "EXPIRED_TOKEN" | "MISSING_AUTHENTICATION_TOKEN" | "INTEGRATION_FAILURE" | "INTEGRATION_TIMEOUT" | "API_CONFIGURATION_ERROR" | "UNSUPPORTED_MEDIA_TYPE" | "BAD_REQUEST_PARAMETERS" | "BAD_REQUEST_BODY" | "REQUEST_TOO_LARGE" | "THROTTLED" | "QUOTA_EXCEEDED" | "WAF_FILTERED")
+                                ) -> _GetGatewayResponseResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGatewayResponseResponseSuccess
+
+      interface _GetGatewayResponsesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GatewayResponses]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::GatewayResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_gateway_responses-instance_method
+      def get_gateway_responses: (
+                                   rest_api_id: ::String,
+                                   ?position: ::String,
+                                   ?limit: ::Integer
+                                 ) -> _GetGatewayResponsesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGatewayResponsesResponseSuccess
+
+      interface _GetIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Integration]
+        def type: () -> ("HTTP" | "AWS" | "MOCK" | "HTTP_PROXY" | "AWS_PROXY")
+        def http_method: () -> ::String
+        def uri: () -> ::String
+        def connection_type: () -> ("INTERNET" | "VPC_LINK")
+        def connection_id: () -> ::String
+        def credentials: () -> ::String
+        def request_parameters: () -> ::Hash[::String, ::String]
+        def request_templates: () -> ::Hash[::String, ::String]
+        def passthrough_behavior: () -> ::String
+        def content_handling: () -> ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+        def timeout_in_millis: () -> ::Integer
+        def cache_namespace: () -> ::String
+        def cache_key_parameters: () -> ::Array[::String]
+        def integration_responses: () -> ::Hash[::String, Types::IntegrationResponse]
+        def tls_config: () -> Types::TlsConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_integration-instance_method
+      def get_integration: (
+                             rest_api_id: ::String,
+                             resource_id: ::String,
+                             http_method: ::String
+                           ) -> _GetIntegrationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIntegrationResponseSuccess
+
+      interface _GetIntegrationResponseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IntegrationResponse]
+        def status_code: () -> ::String
+        def selection_pattern: () -> ::String
+        def response_parameters: () -> ::Hash[::String, ::String]
+        def response_templates: () -> ::Hash[::String, ::String]
+        def content_handling: () -> ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_integration_response-instance_method
+      def get_integration_response: (
+                                      rest_api_id: ::String,
+                                      resource_id: ::String,
+                                      http_method: ::String,
+                                      status_code: ::String
+                                    ) -> _GetIntegrationResponseResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIntegrationResponseResponseSuccess
+
+      interface _GetMethodResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Method]
+        def http_method: () -> ::String
+        def authorization_type: () -> ::String
+        def authorizer_id: () -> ::String
+        def api_key_required: () -> bool
+        def request_validator_id: () -> ::String
+        def operation_name: () -> ::String
+        def request_parameters: () -> ::Hash[::String, bool]
+        def request_models: () -> ::Hash[::String, ::String]
+        def method_responses: () -> ::Hash[::String, Types::MethodResponse]
+        def method_integration: () -> Types::Integration
+        def authorization_scopes: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_method-instance_method
+      def get_method: (
+                        rest_api_id: ::String,
+                        resource_id: ::String,
+                        http_method: ::String
+                      ) -> _GetMethodResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMethodResponseSuccess
+
+      interface _GetMethodResponseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MethodResponse]
+        def status_code: () -> ::String
+        def response_parameters: () -> ::Hash[::String, bool]
+        def response_models: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_method_response-instance_method
+      def get_method_response: (
+                                 rest_api_id: ::String,
+                                 resource_id: ::String,
+                                 http_method: ::String,
+                                 status_code: ::String
+                               ) -> _GetMethodResponseResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMethodResponseResponseSuccess
+
+      interface _GetModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Model]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def schema: () -> ::String
+        def content_type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_model-instance_method
+      def get_model: (
+                       rest_api_id: ::String,
+                       model_name: ::String,
+                       ?flatten: bool
+                     ) -> _GetModelResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetModelResponseSuccess
+
+      interface _GetModelTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Template]
+        def value: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_model_template-instance_method
+      def get_model_template: (
+                                rest_api_id: ::String,
+                                model_name: ::String
+                              ) -> _GetModelTemplateResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetModelTemplateResponseSuccess
+
+      interface _GetModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Models]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::Model]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_models-instance_method
+      def get_models: (
+                        rest_api_id: ::String,
+                        ?position: ::String,
+                        ?limit: ::Integer
+                      ) -> _GetModelsResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetModelsResponseSuccess
+
+      interface _GetRequestValidatorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RequestValidator]
+        def id: () -> ::String
+        def name: () -> ::String
+        def validate_request_body: () -> bool
+        def validate_request_parameters: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_request_validator-instance_method
+      def get_request_validator: (
+                                   rest_api_id: ::String,
+                                   request_validator_id: ::String
+                                 ) -> _GetRequestValidatorResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRequestValidatorResponseSuccess
+
+      interface _GetRequestValidatorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RequestValidators]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::RequestValidator]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_request_validators-instance_method
+      def get_request_validators: (
+                                    rest_api_id: ::String,
+                                    ?position: ::String,
+                                    ?limit: ::Integer
+                                  ) -> _GetRequestValidatorsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRequestValidatorsResponseSuccess
+
+      interface _GetResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Resource]
+        def id: () -> ::String
+        def parent_id: () -> ::String
+        def path_part: () -> ::String
+        def path: () -> ::String
+        def resource_methods: () -> ::Hash[::String, Types::Method]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_resource-instance_method
+      def get_resource: (
+                          rest_api_id: ::String,
+                          resource_id: ::String,
+                          ?embed: Array[::String]
+                        ) -> _GetResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceResponseSuccess
+
+      interface _GetResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Resources]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::Resource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_resources-instance_method
+      def get_resources: (
+                           rest_api_id: ::String,
+                           ?position: ::String,
+                           ?limit: ::Integer,
+                           ?embed: Array[::String]
+                         ) -> _GetResourcesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcesResponseSuccess
+
+      interface _GetRestApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestApi]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def created_date: () -> ::Time
+        def version: () -> ::String
+        def warnings: () -> ::Array[::String]
+        def binary_media_types: () -> ::Array[::String]
+        def minimum_compression_size: () -> ::Integer
+        def api_key_source: () -> ("HEADER" | "AUTHORIZER")
+        def endpoint_configuration: () -> Types::EndpointConfiguration
+        def policy: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def disable_execute_api_endpoint: () -> bool
+        def root_resource_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_rest_api-instance_method
+      def get_rest_api: (
+                          rest_api_id: ::String
+                        ) -> _GetRestApiResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRestApiResponseSuccess
+
+      interface _GetRestApisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestApis]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::RestApi]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_rest_apis-instance_method
+      def get_rest_apis: (
+                           ?position: ::String,
+                           ?limit: ::Integer
+                         ) -> _GetRestApisResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRestApisResponseSuccess
+
+      interface _GetSdkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SdkResponse]
+        def content_type: () -> ::String
+        def content_disposition: () -> ::String
+        def body: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_sdk-instance_method
+      def get_sdk: (
+                     rest_api_id: ::String,
+                     stage_name: ::String,
+                     sdk_type: ::String,
+                     ?parameters: Hash[::String, ::String]
+                   ) -> _GetSdkResponseSuccess
+                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSdkResponseSuccess
+
+      interface _GetSdkTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SdkType]
+        def id: () -> ::String
+        def friendly_name: () -> ::String
+        def description: () -> ::String
+        def configuration_properties: () -> ::Array[Types::SdkConfigurationProperty]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_sdk_type-instance_method
+      def get_sdk_type: (
+                          id: ::String
+                        ) -> _GetSdkTypeResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSdkTypeResponseSuccess
+
+      interface _GetSdkTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SdkTypes]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::SdkType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_sdk_types-instance_method
+      def get_sdk_types: (
+                           ?position: ::String,
+                           ?limit: ::Integer
+                         ) -> _GetSdkTypesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSdkTypesResponseSuccess
+
+      interface _GetStageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Stage]
+        def deployment_id: () -> ::String
+        def client_certificate_id: () -> ::String
+        def stage_name: () -> ::String
+        def description: () -> ::String
+        def cache_cluster_enabled: () -> bool
+        def cache_cluster_size: () -> ("0.5" | "1.6" | "6.1" | "13.5" | "28.4" | "58.2" | "118" | "237")
+        def cache_cluster_status: () -> ("CREATE_IN_PROGRESS" | "AVAILABLE" | "DELETE_IN_PROGRESS" | "NOT_AVAILABLE" | "FLUSH_IN_PROGRESS")
+        def method_settings: () -> ::Hash[::String, Types::MethodSetting]
+        def variables: () -> ::Hash[::String, ::String]
+        def documentation_version: () -> ::String
+        def access_log_settings: () -> Types::AccessLogSettings
+        def canary_settings: () -> Types::CanarySettings
+        def tracing_enabled: () -> bool
+        def web_acl_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_stage-instance_method
+      def get_stage: (
+                       rest_api_id: ::String,
+                       stage_name: ::String
+                     ) -> _GetStageResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStageResponseSuccess
+
+      interface _GetStagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Stages]
+        def item: () -> ::Array[Types::Stage]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_stages-instance_method
+      def get_stages: (
+                        rest_api_id: ::String,
+                        ?deployment_id: ::String
+                      ) -> _GetStagesResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStagesResponseSuccess
+
+      interface _GetTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Tags]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_tags-instance_method
+      def get_tags: (
+                      resource_arn: ::String,
+                      ?position: ::String,
+                      ?limit: ::Integer
+                    ) -> _GetTagsResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTagsResponseSuccess
+
+      interface _GetUsageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Usage]
+        def usage_plan_id: () -> ::String
+        def start_date: () -> ::String
+        def end_date: () -> ::String
+        def position: () -> ::String
+        def items: () -> ::Hash[::String, ::Array[::Array[::Integer]]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_usage-instance_method
+      def get_usage: (
+                       usage_plan_id: ::String,
+                       ?key_id: ::String,
+                       start_date: ::String,
+                       end_date: ::String,
+                       ?position: ::String,
+                       ?limit: ::Integer
+                     ) -> _GetUsageResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUsageResponseSuccess
+
+      interface _GetUsagePlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UsagePlan]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def api_stages: () -> ::Array[Types::ApiStage]
+        def throttle: () -> Types::ThrottleSettings
+        def quota: () -> Types::QuotaSettings
+        def product_code: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_usage_plan-instance_method
+      def get_usage_plan: (
+                            usage_plan_id: ::String
+                          ) -> _GetUsagePlanResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUsagePlanResponseSuccess
+
+      interface _GetUsagePlanKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UsagePlanKey]
+        def id: () -> ::String
+        def type: () -> ::String
+        def value: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_usage_plan_key-instance_method
+      def get_usage_plan_key: (
+                                usage_plan_id: ::String,
+                                key_id: ::String
+                              ) -> _GetUsagePlanKeyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUsagePlanKeyResponseSuccess
+
+      interface _GetUsagePlanKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UsagePlanKeys]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::UsagePlanKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_usage_plan_keys-instance_method
+      def get_usage_plan_keys: (
+                                 usage_plan_id: ::String,
+                                 ?position: ::String,
+                                 ?limit: ::Integer,
+                                 ?name_query: ::String
+                               ) -> _GetUsagePlanKeysResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUsagePlanKeysResponseSuccess
+
+      interface _GetUsagePlansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UsagePlans]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::UsagePlan]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_usage_plans-instance_method
+      def get_usage_plans: (
+                             ?position: ::String,
+                             ?key_id: ::String,
+                             ?limit: ::Integer
+                           ) -> _GetUsagePlansResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUsagePlansResponseSuccess
+
+      interface _GetVpcLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VpcLink]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def target_arns: () -> ::Array[::String]
+        def status: () -> ("AVAILABLE" | "PENDING" | "DELETING" | "FAILED")
+        def status_message: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_vpc_link-instance_method
+      def get_vpc_link: (
+                          vpc_link_id: ::String
+                        ) -> _GetVpcLinkResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVpcLinkResponseSuccess
+
+      interface _GetVpcLinksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VpcLinks]
+        def position: () -> ::String
+        def items: () -> ::Array[Types::VpcLink]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#get_vpc_links-instance_method
+      def get_vpc_links: (
+                           ?position: ::String,
+                           ?limit: ::Integer
+                         ) -> _GetVpcLinksResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVpcLinksResponseSuccess
+
+      interface _ImportApiKeysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApiKeyIds]
+        def ids: () -> ::Array[::String]
+        def warnings: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#import_api_keys-instance_method
+      def import_api_keys: (
+                             body: ::String,
+                             format: ("csv"),
+                             ?fail_on_warnings: bool
+                           ) -> _ImportApiKeysResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportApiKeysResponseSuccess
+
+      interface _ImportDocumentationPartsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DocumentationPartIds]
+        def ids: () -> ::Array[::String]
+        def warnings: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#import_documentation_parts-instance_method
+      def import_documentation_parts: (
+                                        rest_api_id: ::String,
+                                        ?mode: ("merge" | "overwrite"),
+                                        ?fail_on_warnings: bool,
+                                        body: ::String
+                                      ) -> _ImportDocumentationPartsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportDocumentationPartsResponseSuccess
+
+      interface _ImportRestApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestApi]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def created_date: () -> ::Time
+        def version: () -> ::String
+        def warnings: () -> ::Array[::String]
+        def binary_media_types: () -> ::Array[::String]
+        def minimum_compression_size: () -> ::Integer
+        def api_key_source: () -> ("HEADER" | "AUTHORIZER")
+        def endpoint_configuration: () -> Types::EndpointConfiguration
+        def policy: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def disable_execute_api_endpoint: () -> bool
+        def root_resource_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#import_rest_api-instance_method
+      def import_rest_api: (
+                             ?fail_on_warnings: bool,
+                             ?parameters: Hash[::String, ::String],
+                             body: ::String
+                           ) -> _ImportRestApiResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportRestApiResponseSuccess
+
+      interface _PutGatewayResponseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GatewayResponse]
+        def response_type: () -> ("DEFAULT_4XX" | "DEFAULT_5XX" | "RESOURCE_NOT_FOUND" | "UNAUTHORIZED" | "INVALID_API_KEY" | "ACCESS_DENIED" | "AUTHORIZER_FAILURE" | "AUTHORIZER_CONFIGURATION_ERROR" | "INVALID_SIGNATURE" | "EXPIRED_TOKEN" | "MISSING_AUTHENTICATION_TOKEN" | "INTEGRATION_FAILURE" | "INTEGRATION_TIMEOUT" | "API_CONFIGURATION_ERROR" | "UNSUPPORTED_MEDIA_TYPE" | "BAD_REQUEST_PARAMETERS" | "BAD_REQUEST_BODY" | "REQUEST_TOO_LARGE" | "THROTTLED" | "QUOTA_EXCEEDED" | "WAF_FILTERED")
+        def status_code: () -> ::String
+        def response_parameters: () -> ::Hash[::String, ::String]
+        def response_templates: () -> ::Hash[::String, ::String]
+        def default_response: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#put_gateway_response-instance_method
+      def put_gateway_response: (
+                                  rest_api_id: ::String,
+                                  response_type: ("DEFAULT_4XX" | "DEFAULT_5XX" | "RESOURCE_NOT_FOUND" | "UNAUTHORIZED" | "INVALID_API_KEY" | "ACCESS_DENIED" | "AUTHORIZER_FAILURE" | "AUTHORIZER_CONFIGURATION_ERROR" | "INVALID_SIGNATURE" | "EXPIRED_TOKEN" | "MISSING_AUTHENTICATION_TOKEN" | "INTEGRATION_FAILURE" | "INTEGRATION_TIMEOUT" | "API_CONFIGURATION_ERROR" | "UNSUPPORTED_MEDIA_TYPE" | "BAD_REQUEST_PARAMETERS" | "BAD_REQUEST_BODY" | "REQUEST_TOO_LARGE" | "THROTTLED" | "QUOTA_EXCEEDED" | "WAF_FILTERED"),
+                                  ?status_code: ::String,
+                                  ?response_parameters: Hash[::String, ::String],
+                                  ?response_templates: Hash[::String, ::String]
+                                ) -> _PutGatewayResponseResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutGatewayResponseResponseSuccess
+
+      interface _PutIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Integration]
+        def type: () -> ("HTTP" | "AWS" | "MOCK" | "HTTP_PROXY" | "AWS_PROXY")
+        def http_method: () -> ::String
+        def uri: () -> ::String
+        def connection_type: () -> ("INTERNET" | "VPC_LINK")
+        def connection_id: () -> ::String
+        def credentials: () -> ::String
+        def request_parameters: () -> ::Hash[::String, ::String]
+        def request_templates: () -> ::Hash[::String, ::String]
+        def passthrough_behavior: () -> ::String
+        def content_handling: () -> ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+        def timeout_in_millis: () -> ::Integer
+        def cache_namespace: () -> ::String
+        def cache_key_parameters: () -> ::Array[::String]
+        def integration_responses: () -> ::Hash[::String, Types::IntegrationResponse]
+        def tls_config: () -> Types::TlsConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#put_integration-instance_method
+      def put_integration: (
+                             rest_api_id: ::String,
+                             resource_id: ::String,
+                             http_method: ::String,
+                             type: ("HTTP" | "AWS" | "MOCK" | "HTTP_PROXY" | "AWS_PROXY"),
+                             ?integration_http_method: ::String,
+                             ?uri: ::String,
+                             ?connection_type: ("INTERNET" | "VPC_LINK"),
+                             ?connection_id: ::String,
+                             ?credentials: ::String,
+                             ?request_parameters: Hash[::String, ::String],
+                             ?request_templates: Hash[::String, ::String],
+                             ?passthrough_behavior: ::String,
+                             ?cache_namespace: ::String,
+                             ?cache_key_parameters: Array[::String],
+                             ?content_handling: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT"),
+                             ?timeout_in_millis: ::Integer,
+                             ?tls_config: {
+                               insecure_skip_verification: bool?
+                             }
+                           ) -> _PutIntegrationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutIntegrationResponseSuccess
+
+      interface _PutIntegrationResponseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IntegrationResponse]
+        def status_code: () -> ::String
+        def selection_pattern: () -> ::String
+        def response_parameters: () -> ::Hash[::String, ::String]
+        def response_templates: () -> ::Hash[::String, ::String]
+        def content_handling: () -> ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#put_integration_response-instance_method
+      def put_integration_response: (
+                                      rest_api_id: ::String,
+                                      resource_id: ::String,
+                                      http_method: ::String,
+                                      status_code: ::String,
+                                      ?selection_pattern: ::String,
+                                      ?response_parameters: Hash[::String, ::String],
+                                      ?response_templates: Hash[::String, ::String],
+                                      ?content_handling: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+                                    ) -> _PutIntegrationResponseResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutIntegrationResponseResponseSuccess
+
+      interface _PutMethodResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Method]
+        def http_method: () -> ::String
+        def authorization_type: () -> ::String
+        def authorizer_id: () -> ::String
+        def api_key_required: () -> bool
+        def request_validator_id: () -> ::String
+        def operation_name: () -> ::String
+        def request_parameters: () -> ::Hash[::String, bool]
+        def request_models: () -> ::Hash[::String, ::String]
+        def method_responses: () -> ::Hash[::String, Types::MethodResponse]
+        def method_integration: () -> Types::Integration
+        def authorization_scopes: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#put_method-instance_method
+      def put_method: (
+                        rest_api_id: ::String,
+                        resource_id: ::String,
+                        http_method: ::String,
+                        authorization_type: ::String,
+                        ?authorizer_id: ::String,
+                        ?api_key_required: bool,
+                        ?operation_name: ::String,
+                        ?request_parameters: Hash[::String, bool],
+                        ?request_models: Hash[::String, ::String],
+                        ?request_validator_id: ::String,
+                        ?authorization_scopes: Array[::String]
+                      ) -> _PutMethodResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutMethodResponseSuccess
+
+      interface _PutMethodResponseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MethodResponse]
+        def status_code: () -> ::String
+        def response_parameters: () -> ::Hash[::String, bool]
+        def response_models: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#put_method_response-instance_method
+      def put_method_response: (
+                                 rest_api_id: ::String,
+                                 resource_id: ::String,
+                                 http_method: ::String,
+                                 status_code: ::String,
+                                 ?response_parameters: Hash[::String, bool],
+                                 ?response_models: Hash[::String, ::String]
+                               ) -> _PutMethodResponseResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutMethodResponseResponseSuccess
+
+      interface _PutRestApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestApi]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def created_date: () -> ::Time
+        def version: () -> ::String
+        def warnings: () -> ::Array[::String]
+        def binary_media_types: () -> ::Array[::String]
+        def minimum_compression_size: () -> ::Integer
+        def api_key_source: () -> ("HEADER" | "AUTHORIZER")
+        def endpoint_configuration: () -> Types::EndpointConfiguration
+        def policy: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def disable_execute_api_endpoint: () -> bool
+        def root_resource_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#put_rest_api-instance_method
+      def put_rest_api: (
+                          rest_api_id: ::String,
+                          ?mode: ("merge" | "overwrite"),
+                          ?fail_on_warnings: bool,
+                          ?parameters: Hash[::String, ::String],
+                          body: ::String
+                        ) -> _PutRestApiResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRestApiResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TestInvokeAuthorizerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestInvokeAuthorizerResponse]
+        def client_status: () -> ::Integer
+        def log: () -> ::String
+        def latency: () -> ::Integer
+        def principal_id: () -> ::String
+        def policy: () -> ::String
+        def authorization: () -> ::Hash[::String, ::Array[::String]]
+        def claims: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#test_invoke_authorizer-instance_method
+      def test_invoke_authorizer: (
+                                    rest_api_id: ::String,
+                                    authorizer_id: ::String,
+                                    ?headers: Hash[::String, ::String],
+                                    ?multi_value_headers: Hash[::String, Array[::String]],
+                                    ?path_with_query_string: ::String,
+                                    ?body: ::String,
+                                    ?stage_variables: Hash[::String, ::String],
+                                    ?additional_context: Hash[::String, ::String]
+                                  ) -> _TestInvokeAuthorizerResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestInvokeAuthorizerResponseSuccess
+
+      interface _TestInvokeMethodResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestInvokeMethodResponse]
+        def status: () -> ::Integer
+        def body: () -> ::String
+        def headers: () -> ::Hash[::String, ::String]
+        def multi_value_headers: () -> ::Hash[::String, ::Array[::String]]
+        def log: () -> ::String
+        def latency: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#test_invoke_method-instance_method
+      def test_invoke_method: (
+                                rest_api_id: ::String,
+                                resource_id: ::String,
+                                http_method: ::String,
+                                ?path_with_query_string: ::String,
+                                ?body: ::String,
+                                ?headers: Hash[::String, ::String],
+                                ?multi_value_headers: Hash[::String, Array[::String]],
+                                ?client_certificate_id: ::String,
+                                ?stage_variables: Hash[::String, ::String]
+                              ) -> _TestInvokeMethodResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestInvokeMethodResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Account]
+        def cloudwatch_role_arn: () -> ::String
+        def throttle_settings: () -> Types::ThrottleSettings
+        def features: () -> ::Array[::String]
+        def api_key_version: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_account-instance_method
+      def update_account: (
+                            ?patch_operations: Array[
+                              {
+                                op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                path: ::String?,
+                                value: ::String?,
+                                from: ::String?
+                              },
+                            ]
+                          ) -> _UpdateAccountResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccountResponseSuccess
+
+      interface _UpdateApiKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApiKey]
+        def id: () -> ::String
+        def value: () -> ::String
+        def name: () -> ::String
+        def customer_id: () -> ::String
+        def description: () -> ::String
+        def enabled: () -> bool
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+        def stage_keys: () -> ::Array[::String]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_api_key-instance_method
+      def update_api_key: (
+                            api_key: ::String,
+                            ?patch_operations: Array[
+                              {
+                                op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                path: ::String?,
+                                value: ::String?,
+                                from: ::String?
+                              },
+                            ]
+                          ) -> _UpdateApiKeyResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApiKeyResponseSuccess
+
+      interface _UpdateAuthorizerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Authorizer]
+        def id: () -> ::String
+        def name: () -> ::String
+        def type: () -> ("TOKEN" | "REQUEST" | "COGNITO_USER_POOLS")
+        def provider_arns: () -> ::Array[::String]
+        def auth_type: () -> ::String
+        def authorizer_uri: () -> ::String
+        def authorizer_credentials: () -> ::String
+        def identity_source: () -> ::String
+        def identity_validation_expression: () -> ::String
+        def authorizer_result_ttl_in_seconds: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_authorizer-instance_method
+      def update_authorizer: (
+                               rest_api_id: ::String,
+                               authorizer_id: ::String,
+                               ?patch_operations: Array[
+                                 {
+                                   op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                   path: ::String?,
+                                   value: ::String?,
+                                   from: ::String?
+                                 },
+                               ]
+                             ) -> _UpdateAuthorizerResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAuthorizerResponseSuccess
+
+      interface _UpdateBasePathMappingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BasePathMapping]
+        def base_path: () -> ::String
+        def rest_api_id: () -> ::String
+        def stage: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_base_path_mapping-instance_method
+      def update_base_path_mapping: (
+                                      domain_name: ::String,
+                                      base_path: ::String,
+                                      ?patch_operations: Array[
+                                        {
+                                          op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                          path: ::String?,
+                                          value: ::String?,
+                                          from: ::String?
+                                        },
+                                      ]
+                                    ) -> _UpdateBasePathMappingResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBasePathMappingResponseSuccess
+
+      interface _UpdateClientCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClientCertificate]
+        def client_certificate_id: () -> ::String
+        def description: () -> ::String
+        def pem_encoded_certificate: () -> ::String
+        def created_date: () -> ::Time
+        def expiration_date: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_client_certificate-instance_method
+      def update_client_certificate: (
+                                       client_certificate_id: ::String,
+                                       ?patch_operations: Array[
+                                         {
+                                           op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                           path: ::String?,
+                                           value: ::String?,
+                                           from: ::String?
+                                         },
+                                       ]
+                                     ) -> _UpdateClientCertificateResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClientCertificateResponseSuccess
+
+      interface _UpdateDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Deployment]
+        def id: () -> ::String
+        def description: () -> ::String
+        def created_date: () -> ::Time
+        def api_summary: () -> ::Hash[::String, ::Hash[::String, Types::MethodSnapshot]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_deployment-instance_method
+      def update_deployment: (
+                               rest_api_id: ::String,
+                               deployment_id: ::String,
+                               ?patch_operations: Array[
+                                 {
+                                   op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                   path: ::String?,
+                                   value: ::String?,
+                                   from: ::String?
+                                 },
+                               ]
+                             ) -> _UpdateDeploymentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeploymentResponseSuccess
+
+      interface _UpdateDocumentationPartResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DocumentationPart]
+        def id: () -> ::String
+        def location: () -> Types::DocumentationPartLocation
+        def properties: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_documentation_part-instance_method
+      def update_documentation_part: (
+                                       rest_api_id: ::String,
+                                       documentation_part_id: ::String,
+                                       ?patch_operations: Array[
+                                         {
+                                           op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                           path: ::String?,
+                                           value: ::String?,
+                                           from: ::String?
+                                         },
+                                       ]
+                                     ) -> _UpdateDocumentationPartResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDocumentationPartResponseSuccess
+
+      interface _UpdateDocumentationVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DocumentationVersion]
+        def version: () -> ::String
+        def created_date: () -> ::Time
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_documentation_version-instance_method
+      def update_documentation_version: (
+                                          rest_api_id: ::String,
+                                          documentation_version: ::String,
+                                          ?patch_operations: Array[
+                                            {
+                                              op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                              path: ::String?,
+                                              value: ::String?,
+                                              from: ::String?
+                                            },
+                                          ]
+                                        ) -> _UpdateDocumentationVersionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDocumentationVersionResponseSuccess
+
+      interface _UpdateDomainNameResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DomainName]
+        def domain_name: () -> ::String
+        def certificate_name: () -> ::String
+        def certificate_arn: () -> ::String
+        def certificate_upload_date: () -> ::Time
+        def regional_domain_name: () -> ::String
+        def regional_hosted_zone_id: () -> ::String
+        def regional_certificate_name: () -> ::String
+        def regional_certificate_arn: () -> ::String
+        def distribution_domain_name: () -> ::String
+        def distribution_hosted_zone_id: () -> ::String
+        def endpoint_configuration: () -> Types::EndpointConfiguration
+        def domain_name_status: () -> ("AVAILABLE" | "UPDATING" | "PENDING" | "PENDING_CERTIFICATE_REIMPORT" | "PENDING_OWNERSHIP_VERIFICATION")
+        def domain_name_status_message: () -> ::String
+        def security_policy: () -> ("TLS_1_0" | "TLS_1_2")
+        def tags: () -> ::Hash[::String, ::String]
+        def mutual_tls_authentication: () -> Types::MutualTlsAuthentication
+        def ownership_verification_certificate_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_domain_name-instance_method
+      def update_domain_name: (
+                                domain_name: ::String,
+                                ?patch_operations: Array[
+                                  {
+                                    op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                    path: ::String?,
+                                    value: ::String?,
+                                    from: ::String?
+                                  },
+                                ]
+                              ) -> _UpdateDomainNameResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainNameResponseSuccess
+
+      interface _UpdateGatewayResponseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GatewayResponse]
+        def response_type: () -> ("DEFAULT_4XX" | "DEFAULT_5XX" | "RESOURCE_NOT_FOUND" | "UNAUTHORIZED" | "INVALID_API_KEY" | "ACCESS_DENIED" | "AUTHORIZER_FAILURE" | "AUTHORIZER_CONFIGURATION_ERROR" | "INVALID_SIGNATURE" | "EXPIRED_TOKEN" | "MISSING_AUTHENTICATION_TOKEN" | "INTEGRATION_FAILURE" | "INTEGRATION_TIMEOUT" | "API_CONFIGURATION_ERROR" | "UNSUPPORTED_MEDIA_TYPE" | "BAD_REQUEST_PARAMETERS" | "BAD_REQUEST_BODY" | "REQUEST_TOO_LARGE" | "THROTTLED" | "QUOTA_EXCEEDED" | "WAF_FILTERED")
+        def status_code: () -> ::String
+        def response_parameters: () -> ::Hash[::String, ::String]
+        def response_templates: () -> ::Hash[::String, ::String]
+        def default_response: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_gateway_response-instance_method
+      def update_gateway_response: (
+                                     rest_api_id: ::String,
+                                     response_type: ("DEFAULT_4XX" | "DEFAULT_5XX" | "RESOURCE_NOT_FOUND" | "UNAUTHORIZED" | "INVALID_API_KEY" | "ACCESS_DENIED" | "AUTHORIZER_FAILURE" | "AUTHORIZER_CONFIGURATION_ERROR" | "INVALID_SIGNATURE" | "EXPIRED_TOKEN" | "MISSING_AUTHENTICATION_TOKEN" | "INTEGRATION_FAILURE" | "INTEGRATION_TIMEOUT" | "API_CONFIGURATION_ERROR" | "UNSUPPORTED_MEDIA_TYPE" | "BAD_REQUEST_PARAMETERS" | "BAD_REQUEST_BODY" | "REQUEST_TOO_LARGE" | "THROTTLED" | "QUOTA_EXCEEDED" | "WAF_FILTERED"),
+                                     ?patch_operations: Array[
+                                       {
+                                         op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                         path: ::String?,
+                                         value: ::String?,
+                                         from: ::String?
+                                       },
+                                     ]
+                                   ) -> _UpdateGatewayResponseResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayResponseResponseSuccess
+
+      interface _UpdateIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Integration]
+        def type: () -> ("HTTP" | "AWS" | "MOCK" | "HTTP_PROXY" | "AWS_PROXY")
+        def http_method: () -> ::String
+        def uri: () -> ::String
+        def connection_type: () -> ("INTERNET" | "VPC_LINK")
+        def connection_id: () -> ::String
+        def credentials: () -> ::String
+        def request_parameters: () -> ::Hash[::String, ::String]
+        def request_templates: () -> ::Hash[::String, ::String]
+        def passthrough_behavior: () -> ::String
+        def content_handling: () -> ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+        def timeout_in_millis: () -> ::Integer
+        def cache_namespace: () -> ::String
+        def cache_key_parameters: () -> ::Array[::String]
+        def integration_responses: () -> ::Hash[::String, Types::IntegrationResponse]
+        def tls_config: () -> Types::TlsConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_integration-instance_method
+      def update_integration: (
+                                rest_api_id: ::String,
+                                resource_id: ::String,
+                                http_method: ::String,
+                                ?patch_operations: Array[
+                                  {
+                                    op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                    path: ::String?,
+                                    value: ::String?,
+                                    from: ::String?
+                                  },
+                                ]
+                              ) -> _UpdateIntegrationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIntegrationResponseSuccess
+
+      interface _UpdateIntegrationResponseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::IntegrationResponse]
+        def status_code: () -> ::String
+        def selection_pattern: () -> ::String
+        def response_parameters: () -> ::Hash[::String, ::String]
+        def response_templates: () -> ::Hash[::String, ::String]
+        def content_handling: () -> ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_integration_response-instance_method
+      def update_integration_response: (
+                                         rest_api_id: ::String,
+                                         resource_id: ::String,
+                                         http_method: ::String,
+                                         status_code: ::String,
+                                         ?patch_operations: Array[
+                                           {
+                                             op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                             path: ::String?,
+                                             value: ::String?,
+                                             from: ::String?
+                                           },
+                                         ]
+                                       ) -> _UpdateIntegrationResponseResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIntegrationResponseResponseSuccess
+
+      interface _UpdateMethodResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Method]
+        def http_method: () -> ::String
+        def authorization_type: () -> ::String
+        def authorizer_id: () -> ::String
+        def api_key_required: () -> bool
+        def request_validator_id: () -> ::String
+        def operation_name: () -> ::String
+        def request_parameters: () -> ::Hash[::String, bool]
+        def request_models: () -> ::Hash[::String, ::String]
+        def method_responses: () -> ::Hash[::String, Types::MethodResponse]
+        def method_integration: () -> Types::Integration
+        def authorization_scopes: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_method-instance_method
+      def update_method: (
+                           rest_api_id: ::String,
+                           resource_id: ::String,
+                           http_method: ::String,
+                           ?patch_operations: Array[
+                             {
+                               op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                               path: ::String?,
+                               value: ::String?,
+                               from: ::String?
+                             },
+                           ]
+                         ) -> _UpdateMethodResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMethodResponseSuccess
+
+      interface _UpdateMethodResponseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MethodResponse]
+        def status_code: () -> ::String
+        def response_parameters: () -> ::Hash[::String, bool]
+        def response_models: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_method_response-instance_method
+      def update_method_response: (
+                                    rest_api_id: ::String,
+                                    resource_id: ::String,
+                                    http_method: ::String,
+                                    status_code: ::String,
+                                    ?patch_operations: Array[
+                                      {
+                                        op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                        path: ::String?,
+                                        value: ::String?,
+                                        from: ::String?
+                                      },
+                                    ]
+                                  ) -> _UpdateMethodResponseResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMethodResponseResponseSuccess
+
+      interface _UpdateModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Model]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def schema: () -> ::String
+        def content_type: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_model-instance_method
+      def update_model: (
+                          rest_api_id: ::String,
+                          model_name: ::String,
+                          ?patch_operations: Array[
+                            {
+                              op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                              path: ::String?,
+                              value: ::String?,
+                              from: ::String?
+                            },
+                          ]
+                        ) -> _UpdateModelResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateModelResponseSuccess
+
+      interface _UpdateRequestValidatorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RequestValidator]
+        def id: () -> ::String
+        def name: () -> ::String
+        def validate_request_body: () -> bool
+        def validate_request_parameters: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_request_validator-instance_method
+      def update_request_validator: (
+                                      rest_api_id: ::String,
+                                      request_validator_id: ::String,
+                                      ?patch_operations: Array[
+                                        {
+                                          op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                          path: ::String?,
+                                          value: ::String?,
+                                          from: ::String?
+                                        },
+                                      ]
+                                    ) -> _UpdateRequestValidatorResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRequestValidatorResponseSuccess
+
+      interface _UpdateResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Resource]
+        def id: () -> ::String
+        def parent_id: () -> ::String
+        def path_part: () -> ::String
+        def path: () -> ::String
+        def resource_methods: () -> ::Hash[::String, Types::Method]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_resource-instance_method
+      def update_resource: (
+                             rest_api_id: ::String,
+                             resource_id: ::String,
+                             ?patch_operations: Array[
+                               {
+                                 op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                 path: ::String?,
+                                 value: ::String?,
+                                 from: ::String?
+                               },
+                             ]
+                           ) -> _UpdateResourceResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceResponseSuccess
+
+      interface _UpdateRestApiResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestApi]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def created_date: () -> ::Time
+        def version: () -> ::String
+        def warnings: () -> ::Array[::String]
+        def binary_media_types: () -> ::Array[::String]
+        def minimum_compression_size: () -> ::Integer
+        def api_key_source: () -> ("HEADER" | "AUTHORIZER")
+        def endpoint_configuration: () -> Types::EndpointConfiguration
+        def policy: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def disable_execute_api_endpoint: () -> bool
+        def root_resource_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_rest_api-instance_method
+      def update_rest_api: (
+                             rest_api_id: ::String,
+                             ?patch_operations: Array[
+                               {
+                                 op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                 path: ::String?,
+                                 value: ::String?,
+                                 from: ::String?
+                               },
+                             ]
+                           ) -> _UpdateRestApiResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRestApiResponseSuccess
+
+      interface _UpdateStageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Stage]
+        def deployment_id: () -> ::String
+        def client_certificate_id: () -> ::String
+        def stage_name: () -> ::String
+        def description: () -> ::String
+        def cache_cluster_enabled: () -> bool
+        def cache_cluster_size: () -> ("0.5" | "1.6" | "6.1" | "13.5" | "28.4" | "58.2" | "118" | "237")
+        def cache_cluster_status: () -> ("CREATE_IN_PROGRESS" | "AVAILABLE" | "DELETE_IN_PROGRESS" | "NOT_AVAILABLE" | "FLUSH_IN_PROGRESS")
+        def method_settings: () -> ::Hash[::String, Types::MethodSetting]
+        def variables: () -> ::Hash[::String, ::String]
+        def documentation_version: () -> ::String
+        def access_log_settings: () -> Types::AccessLogSettings
+        def canary_settings: () -> Types::CanarySettings
+        def tracing_enabled: () -> bool
+        def web_acl_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def created_date: () -> ::Time
+        def last_updated_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_stage-instance_method
+      def update_stage: (
+                          rest_api_id: ::String,
+                          stage_name: ::String,
+                          ?patch_operations: Array[
+                            {
+                              op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                              path: ::String?,
+                              value: ::String?,
+                              from: ::String?
+                            },
+                          ]
+                        ) -> _UpdateStageResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStageResponseSuccess
+
+      interface _UpdateUsageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Usage]
+        def usage_plan_id: () -> ::String
+        def start_date: () -> ::String
+        def end_date: () -> ::String
+        def position: () -> ::String
+        def items: () -> ::Hash[::String, ::Array[::Array[::Integer]]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_usage-instance_method
+      def update_usage: (
+                          usage_plan_id: ::String,
+                          key_id: ::String,
+                          ?patch_operations: Array[
+                            {
+                              op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                              path: ::String?,
+                              value: ::String?,
+                              from: ::String?
+                            },
+                          ]
+                        ) -> _UpdateUsageResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUsageResponseSuccess
+
+      interface _UpdateUsagePlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UsagePlan]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def api_stages: () -> ::Array[Types::ApiStage]
+        def throttle: () -> Types::ThrottleSettings
+        def quota: () -> Types::QuotaSettings
+        def product_code: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_usage_plan-instance_method
+      def update_usage_plan: (
+                               usage_plan_id: ::String,
+                               ?patch_operations: Array[
+                                 {
+                                   op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                   path: ::String?,
+                                   value: ::String?,
+                                   from: ::String?
+                                 },
+                               ]
+                             ) -> _UpdateUsagePlanResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUsagePlanResponseSuccess
+
+      interface _UpdateVpcLinkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VpcLink]
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def target_arns: () -> ::Array[::String]
+        def status: () -> ("AVAILABLE" | "PENDING" | "DELETING" | "FAILED")
+        def status_message: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/APIGateway/Client.html#update_vpc_link-instance_method
+      def update_vpc_link: (
+                             vpc_link_id: ::String,
+                             ?patch_operations: Array[
+                               {
+                                 op: ("add" | "remove" | "replace" | "move" | "copy" | "test")?,
+                                 path: ::String?,
+                                 value: ::String?,
+                                 from: ::String?
+                               },
+                             ]
+                           ) -> _UpdateVpcLinkResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVpcLinkResponseSuccess
+    end
+  end
+end
+

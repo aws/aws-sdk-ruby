@@ -30,10 +30,18 @@ module Aws::Firehose
   # * {ConcurrentModificationException}
   # * {InvalidArgumentException}
   # * {InvalidKMSResourceException}
+  # * {InvalidSourceException}
+  # * {InvalidStreamTypeException}
   # * {LimitExceededException}
   # * {ResourceInUseException}
   # * {ResourceNotFoundException}
   # * {ServiceUnavailableException}
+  # * {TagrisAccessDeniedException}
+  # * {TagrisInternalServiceException}
+  # * {TagrisInvalidArnException}
+  # * {TagrisInvalidParameterException}
+  # * {TagrisPartialResourcesExistResultsException}
+  # * {TagrisThrottledException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -91,6 +99,46 @@ module Aws::Firehose
       end
     end
 
+    class InvalidSourceException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Firehose::Types::InvalidSourceException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidStreamTypeException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Firehose::Types::InvalidStreamTypeException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def source
+        @data[:source]
+      end
+    end
+
     class LimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -141,6 +189,106 @@ module Aws::Firehose
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Firehose::Types::ServiceUnavailableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TagrisAccessDeniedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Firehose::Types::TagrisAccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TagrisInternalServiceException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Firehose::Types::TagrisInternalServiceException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TagrisInvalidArnException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Firehose::Types::TagrisInvalidArnException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def sweep_list_item
+        @data[:sweep_list_item]
+      end
+    end
+
+    class TagrisInvalidParameterException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Firehose::Types::TagrisInvalidParameterException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class TagrisPartialResourcesExistResultsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Firehose::Types::TagrisPartialResourcesExistResultsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_existence_information
+        @data[:resource_existence_information]
+      end
+    end
+
+    class TagrisThrottledException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Firehose::Types::TagrisThrottledException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

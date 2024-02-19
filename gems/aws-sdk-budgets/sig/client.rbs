@@ -1,0 +1,623 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Budgets
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateBudgetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBudgetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#create_budget-instance_method
+      def create_budget: (
+                           account_id: ::String,
+                           budget: {
+                             budget_name: ::String,
+                             budget_limit: {
+                               amount: ::String,
+                               unit: ::String
+                             }?,
+                             planned_budget_limits: Hash[::String, {
+                                 amount: ::String,
+                                 unit: ::String
+                               }]?,
+                             cost_filters: Hash[::String, Array[::String]]?,
+                             cost_types: {
+                               include_tax: bool?,
+                               include_subscription: bool?,
+                               use_blended: bool?,
+                               include_refund: bool?,
+                               include_credit: bool?,
+                               include_upfront: bool?,
+                               include_recurring: bool?,
+                               include_other_subscription: bool?,
+                               include_support: bool?,
+                               include_discount: bool?,
+                               use_amortized: bool?
+                             }?,
+                             time_unit: ("DAILY" | "MONTHLY" | "QUARTERLY" | "ANNUALLY"),
+                             time_period: {
+                               start: ::Time?,
+                               end: ::Time?
+                             }?,
+                             calculated_spend: {
+                               actual_spend: {
+                                 amount: ::String,
+                                 unit: ::String
+                               },
+                               forecasted_spend: {
+                                 amount: ::String,
+                                 unit: ::String
+                               }?
+                             }?,
+                             budget_type: ("USAGE" | "COST" | "RI_UTILIZATION" | "RI_COVERAGE" | "SAVINGS_PLANS_UTILIZATION" | "SAVINGS_PLANS_COVERAGE"),
+                             last_updated_time: ::Time?,
+                             auto_adjust_data: {
+                               auto_adjust_type: ("HISTORICAL" | "FORECAST"),
+                               historical_options: {
+                                 budget_adjustment_period: ::Integer,
+                                 look_back_available_periods: ::Integer?
+                               }?,
+                               last_auto_adjust_time: ::Time?
+                             }?
+                           },
+                           ?notifications_with_subscribers: Array[
+                             {
+                               notification: {
+                                 notification_type: ("ACTUAL" | "FORECASTED"),
+                                 comparison_operator: ("GREATER_THAN" | "LESS_THAN" | "EQUAL_TO"),
+                                 threshold: ::Float,
+                                 threshold_type: ("PERCENTAGE" | "ABSOLUTE_VALUE")?,
+                                 notification_state: ("OK" | "ALARM")?
+                               },
+                               subscribers: Array[
+                                 {
+                                   subscription_type: ("SNS" | "EMAIL"),
+                                   address: ::String
+                                 },
+                               ]
+                             },
+                           ]
+                         ) -> _CreateBudgetResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBudgetResponseSuccess
+
+      interface _CreateBudgetActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBudgetActionResponse]
+        def account_id: () -> ::String
+        def budget_name: () -> ::String
+        def action_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#create_budget_action-instance_method
+      def create_budget_action: (
+                                  account_id: ::String,
+                                  budget_name: ::String,
+                                  notification_type: ("ACTUAL" | "FORECASTED"),
+                                  action_type: ("APPLY_IAM_POLICY" | "APPLY_SCP_POLICY" | "RUN_SSM_DOCUMENTS"),
+                                  action_threshold: {
+                                    action_threshold_value: ::Float,
+                                    action_threshold_type: ("PERCENTAGE" | "ABSOLUTE_VALUE")
+                                  },
+                                  definition: {
+                                    iam_action_definition: {
+                                      policy_arn: ::String,
+                                      roles: Array[::String]?,
+                                      groups: Array[::String]?,
+                                      users: Array[::String]?
+                                    }?,
+                                    scp_action_definition: {
+                                      policy_id: ::String,
+                                      target_ids: Array[::String]
+                                    }?,
+                                    ssm_action_definition: {
+                                      action_sub_type: ("STOP_EC2_INSTANCES" | "STOP_RDS_INSTANCES"),
+                                      region: ::String,
+                                      instance_ids: Array[::String]
+                                    }?
+                                  },
+                                  execution_role_arn: ::String,
+                                  approval_model: ("AUTOMATIC" | "MANUAL"),
+                                  subscribers: Array[
+                                    {
+                                      subscription_type: ("SNS" | "EMAIL"),
+                                      address: ::String
+                                    },
+                                  ]
+                                ) -> _CreateBudgetActionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBudgetActionResponseSuccess
+
+      interface _CreateNotificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNotificationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#create_notification-instance_method
+      def create_notification: (
+                                 account_id: ::String,
+                                 budget_name: ::String,
+                                 notification: {
+                                   notification_type: ("ACTUAL" | "FORECASTED"),
+                                   comparison_operator: ("GREATER_THAN" | "LESS_THAN" | "EQUAL_TO"),
+                                   threshold: ::Float,
+                                   threshold_type: ("PERCENTAGE" | "ABSOLUTE_VALUE")?,
+                                   notification_state: ("OK" | "ALARM")?
+                                 },
+                                 subscribers: Array[
+                                   {
+                                     subscription_type: ("SNS" | "EMAIL"),
+                                     address: ::String
+                                   },
+                                 ]
+                               ) -> _CreateNotificationResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNotificationResponseSuccess
+
+      interface _CreateSubscriberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubscriberResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#create_subscriber-instance_method
+      def create_subscriber: (
+                               account_id: ::String,
+                               budget_name: ::String,
+                               notification: {
+                                 notification_type: ("ACTUAL" | "FORECASTED"),
+                                 comparison_operator: ("GREATER_THAN" | "LESS_THAN" | "EQUAL_TO"),
+                                 threshold: ::Float,
+                                 threshold_type: ("PERCENTAGE" | "ABSOLUTE_VALUE")?,
+                                 notification_state: ("OK" | "ALARM")?
+                               },
+                               subscriber: {
+                                 subscription_type: ("SNS" | "EMAIL"),
+                                 address: ::String
+                               }
+                             ) -> _CreateSubscriberResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriberResponseSuccess
+
+      interface _DeleteBudgetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBudgetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#delete_budget-instance_method
+      def delete_budget: (
+                           account_id: ::String,
+                           budget_name: ::String
+                         ) -> _DeleteBudgetResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBudgetResponseSuccess
+
+      interface _DeleteBudgetActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBudgetActionResponse]
+        def account_id: () -> ::String
+        def budget_name: () -> ::String
+        def action: () -> Types::Action
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#delete_budget_action-instance_method
+      def delete_budget_action: (
+                                  account_id: ::String,
+                                  budget_name: ::String,
+                                  action_id: ::String
+                                ) -> _DeleteBudgetActionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBudgetActionResponseSuccess
+
+      interface _DeleteNotificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNotificationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#delete_notification-instance_method
+      def delete_notification: (
+                                 account_id: ::String,
+                                 budget_name: ::String,
+                                 notification: {
+                                   notification_type: ("ACTUAL" | "FORECASTED"),
+                                   comparison_operator: ("GREATER_THAN" | "LESS_THAN" | "EQUAL_TO"),
+                                   threshold: ::Float,
+                                   threshold_type: ("PERCENTAGE" | "ABSOLUTE_VALUE")?,
+                                   notification_state: ("OK" | "ALARM")?
+                                 }
+                               ) -> _DeleteNotificationResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNotificationResponseSuccess
+
+      interface _DeleteSubscriberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSubscriberResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#delete_subscriber-instance_method
+      def delete_subscriber: (
+                               account_id: ::String,
+                               budget_name: ::String,
+                               notification: {
+                                 notification_type: ("ACTUAL" | "FORECASTED"),
+                                 comparison_operator: ("GREATER_THAN" | "LESS_THAN" | "EQUAL_TO"),
+                                 threshold: ::Float,
+                                 threshold_type: ("PERCENTAGE" | "ABSOLUTE_VALUE")?,
+                                 notification_state: ("OK" | "ALARM")?
+                               },
+                               subscriber: {
+                                 subscription_type: ("SNS" | "EMAIL"),
+                                 address: ::String
+                               }
+                             ) -> _DeleteSubscriberResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSubscriberResponseSuccess
+
+      interface _DescribeBudgetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBudgetResponse]
+        def budget: () -> Types::Budget
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#describe_budget-instance_method
+      def describe_budget: (
+                             account_id: ::String,
+                             budget_name: ::String
+                           ) -> _DescribeBudgetResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBudgetResponseSuccess
+
+      interface _DescribeBudgetActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBudgetActionResponse]
+        def account_id: () -> ::String
+        def budget_name: () -> ::String
+        def action: () -> Types::Action
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#describe_budget_action-instance_method
+      def describe_budget_action: (
+                                    account_id: ::String,
+                                    budget_name: ::String,
+                                    action_id: ::String
+                                  ) -> _DescribeBudgetActionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBudgetActionResponseSuccess
+
+      interface _DescribeBudgetActionHistoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBudgetActionHistoriesResponse]
+        def action_histories: () -> ::Array[Types::ActionHistory]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#describe_budget_action_histories-instance_method
+      def describe_budget_action_histories: (
+                                              account_id: ::String,
+                                              budget_name: ::String,
+                                              action_id: ::String,
+                                              ?time_period: {
+                                                start: ::Time?,
+                                                end: ::Time?
+                                              },
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _DescribeBudgetActionHistoriesResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBudgetActionHistoriesResponseSuccess
+
+      interface _DescribeBudgetActionsForAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBudgetActionsForAccountResponse]
+        def actions: () -> ::Array[Types::Action]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#describe_budget_actions_for_account-instance_method
+      def describe_budget_actions_for_account: (
+                                                 account_id: ::String,
+                                                 ?max_results: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _DescribeBudgetActionsForAccountResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBudgetActionsForAccountResponseSuccess
+
+      interface _DescribeBudgetActionsForBudgetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBudgetActionsForBudgetResponse]
+        def actions: () -> ::Array[Types::Action]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#describe_budget_actions_for_budget-instance_method
+      def describe_budget_actions_for_budget: (
+                                                account_id: ::String,
+                                                budget_name: ::String,
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _DescribeBudgetActionsForBudgetResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBudgetActionsForBudgetResponseSuccess
+
+      interface _DescribeBudgetNotificationsForAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBudgetNotificationsForAccountResponse]
+        def budget_notifications_for_account: () -> ::Array[Types::BudgetNotificationsForAccount]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#describe_budget_notifications_for_account-instance_method
+      def describe_budget_notifications_for_account: (
+                                                       account_id: ::String,
+                                                       ?max_results: ::Integer,
+                                                       ?next_token: ::String
+                                                     ) -> _DescribeBudgetNotificationsForAccountResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBudgetNotificationsForAccountResponseSuccess
+
+      interface _DescribeBudgetPerformanceHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBudgetPerformanceHistoryResponse]
+        def budget_performance_history: () -> Types::BudgetPerformanceHistory
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#describe_budget_performance_history-instance_method
+      def describe_budget_performance_history: (
+                                                 account_id: ::String,
+                                                 budget_name: ::String,
+                                                 ?time_period: {
+                                                   start: ::Time?,
+                                                   end: ::Time?
+                                                 },
+                                                 ?max_results: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _DescribeBudgetPerformanceHistoryResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBudgetPerformanceHistoryResponseSuccess
+
+      interface _DescribeBudgetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBudgetsResponse]
+        def budgets: () -> ::Array[Types::Budget]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#describe_budgets-instance_method
+      def describe_budgets: (
+                              account_id: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _DescribeBudgetsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBudgetsResponseSuccess
+
+      interface _DescribeNotificationsForBudgetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeNotificationsForBudgetResponse]
+        def notifications: () -> ::Array[Types::Notification]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#describe_notifications_for_budget-instance_method
+      def describe_notifications_for_budget: (
+                                               account_id: ::String,
+                                               budget_name: ::String,
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _DescribeNotificationsForBudgetResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNotificationsForBudgetResponseSuccess
+
+      interface _DescribeSubscribersForNotificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSubscribersForNotificationResponse]
+        def subscribers: () -> ::Array[Types::Subscriber]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#describe_subscribers_for_notification-instance_method
+      def describe_subscribers_for_notification: (
+                                                   account_id: ::String,
+                                                   budget_name: ::String,
+                                                   notification: {
+                                                     notification_type: ("ACTUAL" | "FORECASTED"),
+                                                     comparison_operator: ("GREATER_THAN" | "LESS_THAN" | "EQUAL_TO"),
+                                                     threshold: ::Float,
+                                                     threshold_type: ("PERCENTAGE" | "ABSOLUTE_VALUE")?,
+                                                     notification_state: ("OK" | "ALARM")?
+                                                   },
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _DescribeSubscribersForNotificationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSubscribersForNotificationResponseSuccess
+
+      interface _ExecuteBudgetActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteBudgetActionResponse]
+        def account_id: () -> ::String
+        def budget_name: () -> ::String
+        def action_id: () -> ::String
+        def execution_type: () -> ("APPROVE_BUDGET_ACTION" | "RETRY_BUDGET_ACTION" | "REVERSE_BUDGET_ACTION" | "RESET_BUDGET_ACTION")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#execute_budget_action-instance_method
+      def execute_budget_action: (
+                                   account_id: ::String,
+                                   budget_name: ::String,
+                                   action_id: ::String,
+                                   execution_type: ("APPROVE_BUDGET_ACTION" | "RETRY_BUDGET_ACTION" | "REVERSE_BUDGET_ACTION" | "RESET_BUDGET_ACTION")
+                                 ) -> _ExecuteBudgetActionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteBudgetActionResponseSuccess
+
+      interface _UpdateBudgetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBudgetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#update_budget-instance_method
+      def update_budget: (
+                           account_id: ::String,
+                           new_budget: {
+                             budget_name: ::String,
+                             budget_limit: {
+                               amount: ::String,
+                               unit: ::String
+                             }?,
+                             planned_budget_limits: Hash[::String, {
+                                 amount: ::String,
+                                 unit: ::String
+                               }]?,
+                             cost_filters: Hash[::String, Array[::String]]?,
+                             cost_types: {
+                               include_tax: bool?,
+                               include_subscription: bool?,
+                               use_blended: bool?,
+                               include_refund: bool?,
+                               include_credit: bool?,
+                               include_upfront: bool?,
+                               include_recurring: bool?,
+                               include_other_subscription: bool?,
+                               include_support: bool?,
+                               include_discount: bool?,
+                               use_amortized: bool?
+                             }?,
+                             time_unit: ("DAILY" | "MONTHLY" | "QUARTERLY" | "ANNUALLY"),
+                             time_period: {
+                               start: ::Time?,
+                               end: ::Time?
+                             }?,
+                             calculated_spend: {
+                               actual_spend: {
+                                 amount: ::String,
+                                 unit: ::String
+                               },
+                               forecasted_spend: {
+                                 amount: ::String,
+                                 unit: ::String
+                               }?
+                             }?,
+                             budget_type: ("USAGE" | "COST" | "RI_UTILIZATION" | "RI_COVERAGE" | "SAVINGS_PLANS_UTILIZATION" | "SAVINGS_PLANS_COVERAGE"),
+                             last_updated_time: ::Time?,
+                             auto_adjust_data: {
+                               auto_adjust_type: ("HISTORICAL" | "FORECAST"),
+                               historical_options: {
+                                 budget_adjustment_period: ::Integer,
+                                 look_back_available_periods: ::Integer?
+                               }?,
+                               last_auto_adjust_time: ::Time?
+                             }?
+                           }
+                         ) -> _UpdateBudgetResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBudgetResponseSuccess
+
+      interface _UpdateBudgetActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBudgetActionResponse]
+        def account_id: () -> ::String
+        def budget_name: () -> ::String
+        def old_action: () -> Types::Action
+        def new_action: () -> Types::Action
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#update_budget_action-instance_method
+      def update_budget_action: (
+                                  account_id: ::String,
+                                  budget_name: ::String,
+                                  action_id: ::String,
+                                  ?notification_type: ("ACTUAL" | "FORECASTED"),
+                                  ?action_threshold: {
+                                    action_threshold_value: ::Float,
+                                    action_threshold_type: ("PERCENTAGE" | "ABSOLUTE_VALUE")
+                                  },
+                                  ?definition: {
+                                    iam_action_definition: {
+                                      policy_arn: ::String,
+                                      roles: Array[::String]?,
+                                      groups: Array[::String]?,
+                                      users: Array[::String]?
+                                    }?,
+                                    scp_action_definition: {
+                                      policy_id: ::String,
+                                      target_ids: Array[::String]
+                                    }?,
+                                    ssm_action_definition: {
+                                      action_sub_type: ("STOP_EC2_INSTANCES" | "STOP_RDS_INSTANCES"),
+                                      region: ::String,
+                                      instance_ids: Array[::String]
+                                    }?
+                                  },
+                                  ?execution_role_arn: ::String,
+                                  ?approval_model: ("AUTOMATIC" | "MANUAL"),
+                                  ?subscribers: Array[
+                                    {
+                                      subscription_type: ("SNS" | "EMAIL"),
+                                      address: ::String
+                                    },
+                                  ]
+                                ) -> _UpdateBudgetActionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBudgetActionResponseSuccess
+
+      interface _UpdateNotificationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNotificationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#update_notification-instance_method
+      def update_notification: (
+                                 account_id: ::String,
+                                 budget_name: ::String,
+                                 old_notification: {
+                                   notification_type: ("ACTUAL" | "FORECASTED"),
+                                   comparison_operator: ("GREATER_THAN" | "LESS_THAN" | "EQUAL_TO"),
+                                   threshold: ::Float,
+                                   threshold_type: ("PERCENTAGE" | "ABSOLUTE_VALUE")?,
+                                   notification_state: ("OK" | "ALARM")?
+                                 },
+                                 new_notification: {
+                                   notification_type: ("ACTUAL" | "FORECASTED"),
+                                   comparison_operator: ("GREATER_THAN" | "LESS_THAN" | "EQUAL_TO"),
+                                   threshold: ::Float,
+                                   threshold_type: ("PERCENTAGE" | "ABSOLUTE_VALUE")?,
+                                   notification_state: ("OK" | "ALARM")?
+                                 }
+                               ) -> _UpdateNotificationResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNotificationResponseSuccess
+
+      interface _UpdateSubscriberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSubscriberResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Budgets/Client.html#update_subscriber-instance_method
+      def update_subscriber: (
+                               account_id: ::String,
+                               budget_name: ::String,
+                               notification: {
+                                 notification_type: ("ACTUAL" | "FORECASTED"),
+                                 comparison_operator: ("GREATER_THAN" | "LESS_THAN" | "EQUAL_TO"),
+                                 threshold: ::Float,
+                                 threshold_type: ("PERCENTAGE" | "ABSOLUTE_VALUE")?,
+                                 notification_state: ("OK" | "ALARM")?
+                               },
+                               old_subscriber: {
+                                 subscription_type: ("SNS" | "EMAIL"),
+                                 address: ::String
+                               },
+                               new_subscriber: {
+                                 subscription_type: ("SNS" | "EMAIL"),
+                                 address: ::String
+                               }
+                             ) -> _UpdateSubscriberResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubscriberResponseSuccess
+    end
+  end
+end
+

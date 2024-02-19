@@ -28,8 +28,8 @@ module Aws::Polly
     class DeleteLexiconOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] engine
-    #   Specifies the engine (`standard` or `neural`) used by Amazon Polly
-    #   when processing input text for speech synthesis.
+    #   Specifies the engine (`standard`, `neural` or `long-form`) used by
+    #   Amazon Polly when processing input text for speech synthesis.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -575,10 +575,10 @@ module Aws::Polly
     end
 
     # @!attribute [rw] engine
-    #   Specifies the engine (`standard` or `neural`) for Amazon Polly to
-    #   use when processing input text for speech synthesis. Using a voice
-    #   that is not supported for the engine selected will result in an
-    #   error.
+    #   Specifies the engine (`standard`, `neural` or `long-form`) for
+    #   Amazon Polly to use when processing input text for speech synthesis.
+    #   Using a voice that is not supported for the engine selected will
+    #   result in an error.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -623,7 +623,8 @@ module Aws::Polly
     #
     #   The valid values for mp3 and ogg\_vorbis are "8000", "16000",
     #   "22050", and "24000". The default value for standard voices is
-    #   "22050". The default value for neural voices is "24000".
+    #   "22050". The default value for neural voices is "24000". The
+    #   default value for long-form voices is "24000".
     #
     #   Valid values for pcm are "8000" and "16000" The default value is
     #   "16000".
@@ -688,10 +689,10 @@ module Aws::Polly
     # synthesis task.
     #
     # @!attribute [rw] engine
-    #   Specifies the engine (`standard` or `neural`) for Amazon Polly to
-    #   use when processing input text for speech synthesis. Using a voice
-    #   that is not supported for the engine selected will result in an
-    #   error.
+    #   Specifies the engine (`standard`, `neural` or `long-form`) for
+    #   Amazon Polly to use when processing input text for speech synthesis.
+    #   Using a voice that is not supported for the engine selected will
+    #   result in an error.
     #   @return [String]
     #
     # @!attribute [rw] task_id
@@ -741,7 +742,8 @@ module Aws::Polly
     #
     #   The valid values for mp3 and ogg\_vorbis are "8000", "16000",
     #   "22050", and "24000". The default value for standard voices is
-    #   "22050". The default value for neural voices is "24000".
+    #   "22050". The default value for neural voices is "24000". The
+    #   default value for long-form voices is "24000".
     #
     #   Valid values for pcm are "8000" and "16000" The default value is
     #   "16000".
@@ -813,11 +815,10 @@ module Aws::Polly
     end
 
     # @!attribute [rw] engine
-    #   Specifies the engine (`standard` or `neural`) for Amazon Polly to
-    #   use when processing input text for speech synthesis. For information
-    #   on Amazon Polly voices and which voices are available in
-    #   standard-only, NTTS-only, and both standard and NTTS formats, see
-    #   [Available Voices][1].
+    #   Specifies the engine (`standard`, `neural` or `long-form`) for
+    #   Amazon Polly to use when processing input text for speech synthesis.
+    #   For information on Amazon Polly voices and which voices are
+    #   available for each engine, see [Available Voices][1].
     #
     #   **NTTS-only voices**
     #
@@ -825,9 +826,16 @@ module Aws::Polly
     #   required and must be set to `neural`. If the engine is not
     #   specified, or is set to `standard`, this will result in an error.
     #
+    #   **long-form-only voices**
+    #
+    #   When using long-form-only voices such as Danielle (en-US), this
+    #   parameter is required and must be set to `long-form`. If the engine
+    #   is not specified, or is set to `standard` or `neural`, this will
+    #   result in an error.
+    #
     #   Type: String
     #
-    #   Valid Values: `standard` \| `neural`
+    #   Valid Values: `standard` \| `neural` \| `long-form`
     #
     #   Required: Yes
     #
@@ -885,7 +893,8 @@ module Aws::Polly
     #
     #   The valid values for mp3 and ogg\_vorbis are "8000", "16000",
     #   "22050", and "24000". The default value for standard voices is
-    #   "22050". The default value for neural voices is "24000".
+    #   "22050". The default value for neural voices is "24000". The
+    #   default value for long-form voices is "24000".
     #
     #   Valid values for pcm are "8000" and "16000" The default value is
     #   "16000".
@@ -1056,8 +1065,8 @@ module Aws::Polly
     #   @return [Array<String>]
     #
     # @!attribute [rw] supported_engines
-    #   Specifies which engines (`standard` or `neural`) that are supported
-    #   by a given voice.
+    #   Specifies which engines (`standard`, `neural` or `long-form`) are
+    #   supported by a given voice.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/Voice AWS API Documentation

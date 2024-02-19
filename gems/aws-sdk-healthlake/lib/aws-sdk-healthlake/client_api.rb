@@ -43,6 +43,8 @@ module Aws::HealthLake
     ExportJobProperties = Shapes::StructureShape.new(name: 'ExportJobProperties')
     ExportJobPropertiesList = Shapes::ListShape.new(name: 'ExportJobPropertiesList')
     FHIRVersion = Shapes::StringShape.new(name: 'FHIRVersion')
+    GenericDouble = Shapes::FloatShape.new(name: 'GenericDouble')
+    GenericLong = Shapes::IntegerShape.new(name: 'GenericLong')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IdentityProviderConfiguration = Shapes::StructureShape.new(name: 'IdentityProviderConfiguration')
     ImportJobProperties = Shapes::StructureShape.new(name: 'ImportJobProperties')
@@ -51,6 +53,7 @@ module Aws::HealthLake
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JobId = Shapes::StringShape.new(name: 'JobId')
     JobName = Shapes::StringShape.new(name: 'JobName')
+    JobProgressReport = Shapes::StructureShape.new(name: 'JobProgressReport')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
     KmsEncryptionConfig = Shapes::StructureShape.new(name: 'KmsEncryptionConfig')
     LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
@@ -187,6 +190,7 @@ module Aws::HealthLake
     ImportJobProperties.add_member(:datastore_id, Shapes::ShapeRef.new(shape: DatastoreId, required: true, location_name: "DatastoreId"))
     ImportJobProperties.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
     ImportJobProperties.add_member(:job_output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "JobOutputDataConfig"))
+    ImportJobProperties.add_member(:job_progress_report, Shapes::ShapeRef.new(shape: JobProgressReport, location_name: "JobProgressReport"))
     ImportJobProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
     ImportJobProperties.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ImportJobProperties.struct_class = Types::ImportJobProperties
@@ -201,6 +205,16 @@ module Aws::HealthLake
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    JobProgressReport.add_member(:total_number_of_scanned_files, Shapes::ShapeRef.new(shape: GenericLong, location_name: "TotalNumberOfScannedFiles"))
+    JobProgressReport.add_member(:total_size_of_scanned_files_in_mb, Shapes::ShapeRef.new(shape: GenericDouble, location_name: "TotalSizeOfScannedFilesInMB"))
+    JobProgressReport.add_member(:total_number_of_imported_files, Shapes::ShapeRef.new(shape: GenericLong, location_name: "TotalNumberOfImportedFiles"))
+    JobProgressReport.add_member(:total_number_of_resources_scanned, Shapes::ShapeRef.new(shape: GenericLong, location_name: "TotalNumberOfResourcesScanned"))
+    JobProgressReport.add_member(:total_number_of_resources_imported, Shapes::ShapeRef.new(shape: GenericLong, location_name: "TotalNumberOfResourcesImported"))
+    JobProgressReport.add_member(:total_number_of_resources_with_customer_error, Shapes::ShapeRef.new(shape: GenericLong, location_name: "TotalNumberOfResourcesWithCustomerError"))
+    JobProgressReport.add_member(:total_number_of_files_read_with_customer_error, Shapes::ShapeRef.new(shape: GenericLong, location_name: "TotalNumberOfFilesReadWithCustomerError"))
+    JobProgressReport.add_member(:throughput, Shapes::ShapeRef.new(shape: GenericDouble, location_name: "Throughput"))
+    JobProgressReport.struct_class = Types::JobProgressReport
 
     KmsEncryptionConfig.add_member(:cmk_type, Shapes::ShapeRef.new(shape: CmkType, required: true, location_name: "CmkType"))
     KmsEncryptionConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: EncryptionKeyID, location_name: "KmsKeyId"))

@@ -96,7 +96,8 @@ module Aws::ConnectParticipant
     #
     class CompleteAttachmentUploadResponse < Aws::EmptyStructure; end
 
-    # An attachment with that identifier is already being uploaded.
+    # The requested operation conflicts with the current state of a service
+    # resource associated with the request.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -528,6 +529,7 @@ module Aws::ConnectParticipant
     #   * application/vnd.amazonaws.connect.event.typing
     #
     #   * application/vnd.amazonaws.connect.event.connection.acknowledged
+    #     (will be deprecated on December 31, 2024)
     #
     #   * application/vnd.amazonaws.connect.event.message.delivered
     #

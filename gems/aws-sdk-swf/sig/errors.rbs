@@ -1,0 +1,46 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SWF
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class DefaultUndefinedFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DomainAlreadyExistsFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DomainDeprecatedFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OperationNotPermittedFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTagsFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TypeAlreadyExistsFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TypeDeprecatedFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnknownResourceFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WorkflowExecutionAlreadyStartedFault < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

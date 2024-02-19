@@ -1,0 +1,444 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MediaPackageVod
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _ConfigureLogsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfigureLogsResponse]
+        def arn: () -> ::String
+        def authorization: () -> Types::Authorization
+        def created_at: () -> ::String
+        def domain_name: () -> ::String
+        def egress_access_logs: () -> Types::EgressAccessLogs
+        def id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#configure_logs-instance_method
+      def configure_logs: (
+                            ?egress_access_logs: {
+                              log_group_name: ::String?
+                            },
+                            id: ::String
+                          ) -> _ConfigureLogsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfigureLogsResponseSuccess
+
+      interface _CreateAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssetResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::String
+        def egress_endpoints: () -> ::Array[Types::EgressEndpoint]
+        def id: () -> ::String
+        def packaging_group_id: () -> ::String
+        def resource_id: () -> ::String
+        def source_arn: () -> ::String
+        def source_role_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#create_asset-instance_method
+      def create_asset: (
+                          id: ::String,
+                          packaging_group_id: ::String,
+                          ?resource_id: ::String,
+                          source_arn: ::String,
+                          source_role_arn: ::String,
+                          ?tags: Hash[::String, ::String]
+                        ) -> _CreateAssetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssetResponseSuccess
+
+      interface _CreatePackagingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePackagingConfigurationResponse]
+        def arn: () -> ::String
+        def cmaf_package: () -> Types::CmafPackage
+        def created_at: () -> ::String
+        def dash_package: () -> Types::DashPackage
+        def hls_package: () -> Types::HlsPackage
+        def id: () -> ::String
+        def mss_package: () -> Types::MssPackage
+        def packaging_group_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#create_packaging_configuration-instance_method
+      def create_packaging_configuration: (
+                                            ?cmaf_package: {
+                                              encryption: {
+                                                constant_initialization_vector: ::String?,
+                                                speke_key_provider: {
+                                                  encryption_contract_configuration: {
+                                                    preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
+                                                    preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
+                                                  }?,
+                                                  role_arn: ::String,
+                                                  system_ids: Array[::String],
+                                                  url: ::String
+                                                }
+                                              }?,
+                                              hls_manifests: Array[
+                                                {
+                                                  ad_markers: ("NONE" | "SCTE35_ENHANCED" | "PASSTHROUGH")?,
+                                                  include_iframe_only_stream: bool?,
+                                                  manifest_name: ::String?,
+                                                  program_date_time_interval_seconds: ::Integer?,
+                                                  repeat_ext_x_key: bool?,
+                                                  stream_selection: {
+                                                    max_video_bits_per_second: ::Integer?,
+                                                    min_video_bits_per_second: ::Integer?,
+                                                    stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+                                                  }?
+                                                },
+                                              ],
+                                              include_encoder_configuration_in_segments: bool?,
+                                              segment_duration_seconds: ::Integer?
+                                            },
+                                            ?dash_package: {
+                                              dash_manifests: Array[
+                                                {
+                                                  manifest_layout: ("FULL" | "COMPACT")?,
+                                                  manifest_name: ::String?,
+                                                  min_buffer_time_seconds: ::Integer?,
+                                                  profile: ("NONE" | "HBBTV_1_5")?,
+                                                  scte_markers_source: ("SEGMENTS" | "MANIFEST")?,
+                                                  stream_selection: {
+                                                    max_video_bits_per_second: ::Integer?,
+                                                    min_video_bits_per_second: ::Integer?,
+                                                    stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+                                                  }?
+                                                },
+                                              ],
+                                              encryption: {
+                                                speke_key_provider: {
+                                                  encryption_contract_configuration: {
+                                                    preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
+                                                    preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
+                                                  }?,
+                                                  role_arn: ::String,
+                                                  system_ids: Array[::String],
+                                                  url: ::String
+                                                }
+                                              }?,
+                                              include_encoder_configuration_in_segments: bool?,
+                                              include_iframe_only_stream: bool?,
+                                              period_triggers: Array[("ADS")]?,
+                                              segment_duration_seconds: ::Integer?,
+                                              segment_template_format: ("NUMBER_WITH_TIMELINE" | "TIME_WITH_TIMELINE" | "NUMBER_WITH_DURATION")?
+                                            },
+                                            ?hls_package: {
+                                              encryption: {
+                                                constant_initialization_vector: ::String?,
+                                                encryption_method: ("AES_128" | "SAMPLE_AES")?,
+                                                speke_key_provider: {
+                                                  encryption_contract_configuration: {
+                                                    preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
+                                                    preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
+                                                  }?,
+                                                  role_arn: ::String,
+                                                  system_ids: Array[::String],
+                                                  url: ::String
+                                                }
+                                              }?,
+                                              hls_manifests: Array[
+                                                {
+                                                  ad_markers: ("NONE" | "SCTE35_ENHANCED" | "PASSTHROUGH")?,
+                                                  include_iframe_only_stream: bool?,
+                                                  manifest_name: ::String?,
+                                                  program_date_time_interval_seconds: ::Integer?,
+                                                  repeat_ext_x_key: bool?,
+                                                  stream_selection: {
+                                                    max_video_bits_per_second: ::Integer?,
+                                                    min_video_bits_per_second: ::Integer?,
+                                                    stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+                                                  }?
+                                                },
+                                              ],
+                                              include_dvb_subtitles: bool?,
+                                              segment_duration_seconds: ::Integer?,
+                                              use_audio_rendition_group: bool?
+                                            },
+                                            id: ::String,
+                                            ?mss_package: {
+                                              encryption: {
+                                                speke_key_provider: {
+                                                  encryption_contract_configuration: {
+                                                    preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
+                                                    preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
+                                                  }?,
+                                                  role_arn: ::String,
+                                                  system_ids: Array[::String],
+                                                  url: ::String
+                                                }
+                                              }?,
+                                              mss_manifests: Array[
+                                                {
+                                                  manifest_name: ::String?,
+                                                  stream_selection: {
+                                                    max_video_bits_per_second: ::Integer?,
+                                                    min_video_bits_per_second: ::Integer?,
+                                                    stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+                                                  }?
+                                                },
+                                              ],
+                                              segment_duration_seconds: ::Integer?
+                                            },
+                                            packaging_group_id: ::String,
+                                            ?tags: Hash[::String, ::String]
+                                          ) -> _CreatePackagingConfigurationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePackagingConfigurationResponseSuccess
+
+      interface _CreatePackagingGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePackagingGroupResponse]
+        def arn: () -> ::String
+        def authorization: () -> Types::Authorization
+        def created_at: () -> ::String
+        def domain_name: () -> ::String
+        def egress_access_logs: () -> Types::EgressAccessLogs
+        def id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#create_packaging_group-instance_method
+      def create_packaging_group: (
+                                    ?authorization: {
+                                      cdn_identifier_secret: ::String,
+                                      secrets_role_arn: ::String
+                                    },
+                                    ?egress_access_logs: {
+                                      log_group_name: ::String?
+                                    },
+                                    id: ::String,
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreatePackagingGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePackagingGroupResponseSuccess
+
+      interface _DeleteAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssetResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#delete_asset-instance_method
+      def delete_asset: (
+                          id: ::String
+                        ) -> _DeleteAssetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssetResponseSuccess
+
+      interface _DeletePackagingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePackagingConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#delete_packaging_configuration-instance_method
+      def delete_packaging_configuration: (
+                                            id: ::String
+                                          ) -> _DeletePackagingConfigurationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePackagingConfigurationResponseSuccess
+
+      interface _DeletePackagingGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePackagingGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#delete_packaging_group-instance_method
+      def delete_packaging_group: (
+                                    id: ::String
+                                  ) -> _DeletePackagingGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePackagingGroupResponseSuccess
+
+      interface _DescribeAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssetResponse]
+        def arn: () -> ::String
+        def created_at: () -> ::String
+        def egress_endpoints: () -> ::Array[Types::EgressEndpoint]
+        def id: () -> ::String
+        def packaging_group_id: () -> ::String
+        def resource_id: () -> ::String
+        def source_arn: () -> ::String
+        def source_role_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#describe_asset-instance_method
+      def describe_asset: (
+                            id: ::String
+                          ) -> _DescribeAssetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssetResponseSuccess
+
+      interface _DescribePackagingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePackagingConfigurationResponse]
+        def arn: () -> ::String
+        def cmaf_package: () -> Types::CmafPackage
+        def created_at: () -> ::String
+        def dash_package: () -> Types::DashPackage
+        def hls_package: () -> Types::HlsPackage
+        def id: () -> ::String
+        def mss_package: () -> Types::MssPackage
+        def packaging_group_id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#describe_packaging_configuration-instance_method
+      def describe_packaging_configuration: (
+                                              id: ::String
+                                            ) -> _DescribePackagingConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePackagingConfigurationResponseSuccess
+
+      interface _DescribePackagingGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePackagingGroupResponse]
+        def approximate_asset_count: () -> ::Integer
+        def arn: () -> ::String
+        def authorization: () -> Types::Authorization
+        def created_at: () -> ::String
+        def domain_name: () -> ::String
+        def egress_access_logs: () -> Types::EgressAccessLogs
+        def id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#describe_packaging_group-instance_method
+      def describe_packaging_group: (
+                                      id: ::String
+                                    ) -> _DescribePackagingGroupResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePackagingGroupResponseSuccess
+
+      interface _ListAssetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetsResponse]
+        def assets: () -> ::Array[Types::AssetShallow]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#list_assets-instance_method
+      def list_assets: (
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         ?packaging_group_id: ::String
+                       ) -> _ListAssetsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetsResponseSuccess
+
+      interface _ListPackagingConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPackagingConfigurationsResponse]
+        def next_token: () -> ::String
+        def packaging_configurations: () -> ::Array[Types::PackagingConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#list_packaging_configurations-instance_method
+      def list_packaging_configurations: (
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String,
+                                           ?packaging_group_id: ::String
+                                         ) -> _ListPackagingConfigurationsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPackagingConfigurationsResponseSuccess
+
+      interface _ListPackagingGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPackagingGroupsResponse]
+        def next_token: () -> ::String
+        def packaging_groups: () -> ::Array[Types::PackagingGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#list_packaging_groups-instance_method
+      def list_packaging_groups: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListPackagingGroupsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPackagingGroupsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdatePackagingGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePackagingGroupResponse]
+        def approximate_asset_count: () -> ::Integer
+        def arn: () -> ::String
+        def authorization: () -> Types::Authorization
+        def created_at: () -> ::String
+        def domain_name: () -> ::String
+        def egress_access_logs: () -> Types::EgressAccessLogs
+        def id: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageVod/Client.html#update_packaging_group-instance_method
+      def update_packaging_group: (
+                                    ?authorization: {
+                                      cdn_identifier_secret: ::String,
+                                      secrets_role_arn: ::String
+                                    },
+                                    id: ::String
+                                  ) -> _UpdatePackagingGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePackagingGroupResponseSuccess
+    end
+  end
+end
+

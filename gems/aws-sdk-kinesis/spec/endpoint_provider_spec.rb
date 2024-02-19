@@ -1511,5 +1511,726 @@ module Aws::Kinesis
       end
     end
 
+    context 'ResourceARN test: Invalid ARN: Failed to parse ARN.' do
+      let(:expected) do
+        {"error"=>"Invalid ARN: Failed to parse ARN."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Invalid ARN: partition missing from ARN.' do
+      let(:expected) do
+        {"error"=>"Invalid ARN: Failed to parse ARN."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn::kinesis:us-west-2:123456789012:stream/testStream"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Invalid ARN: partitions mismatch.' do
+      let(:expected) do
+        {"error"=>"Partition: aws from ARN doesn't match with partition name: aws-us-gov."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-gov-west-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn:aws:kinesis:us-west-2:123456789012:stream/testStream"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Invalid ARN: Not Kinesis' do
+      let(:expected) do
+        {"error"=>"Invalid ARN: The ARN was not for the Kinesis service, found: s3."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn:aws:s3:us-west-2:123456789012:stream/testStream"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Invalid ARN: Region is missing in ARN' do
+      let(:expected) do
+        {"error"=>"Invalid ARN: Invalid region."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn:aws:kinesis::123456789012:stream/testStream"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Invalid ARN: Region is empty string in ARN' do
+      let(:expected) do
+        {"error"=>"Invalid ARN: Invalid region."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn:aws:kinesis:  :123456789012:stream/testStream"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Invalid ARN: Invalid account id' do
+      let(:expected) do
+        {"error"=>"Invalid ARN: Invalid account id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn:aws:kinesis:us-east-1::stream/testStream", :operation_type=>"control"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Invalid ARN: Invalid account id' do
+      let(:expected) do
+        {"error"=>"Invalid ARN: Invalid account id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn:aws:kinesis:us-east-1:   :stream/testStream", :operation_type=>"control"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Invalid ARN: Kinesis ARNs only support stream arn types' do
+      let(:expected) do
+        {"error"=>"Invalid ARN: Kinesis ARNs don't support `accesspoint` arn types."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn:aws:kinesis:us-east-1:123:accesspoint/testStream"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Dual Stack not supported region.' do
+      let(:expected) do
+        {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-iso-west-1", :use_fips=>true, :use_dual_stack=>true, :resource_arn=>"arn:aws-iso:kinesis:us-iso-west-1:123456789012:stream/testStream", :operation_type=>"control"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: OperationType not set' do
+      let(:expected) do
+        {"error"=>"Operation Type is not set. Please contact service team for resolution."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn:aws:kinesis:us-east-1:123456789012:stream/testStream"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Custom Endpoint is specified' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :operation_type=>"control", :resource_arn=>"arn:aws:kinesis:us-east-1:123:stream/test-stream", :endpoint=>"https://example.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Account endpoint targeting control operation type' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.control-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :operation_type=>"control", :resource_arn=>"arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Account endpoint targeting data operation type' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.data-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :operation_type=>"data", :resource_arn=>"arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Account endpoint with fips targeting data operation type' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.data-kinesis-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>false, :operation_type=>"data", :resource_arn=>"arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Account endpoint with fips targeting control operation type' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.control-kinesis-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>false, :operation_type=>"control", :resource_arn=>"arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Account endpoint with Dual Stack and FIPS enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.control-kinesis-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>true, :operation_type=>"control", :resource_arn=>"arn:aws:kinesis:us-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Account endpoint with Dual Stack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.data-kinesis.us-west-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-west-1", :use_fips=>false, :use_dual_stack=>true, :operation_type=>"data", :resource_arn=>"arn:aws:kinesis:us-west-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Account endpoint with FIPS and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.control-kinesis.us-west-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-west-1", :use_fips=>false, :use_dual_stack=>false, :operation_type=>"control", :resource_arn=>"arn:aws:kinesis:us-west-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: RegionMismatch: client region should be used for endpoint region' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.data-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :operation_type=>"data", :resource_arn=>"arn:aws:kinesis:us-west-1:123:stream/testStream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Account endpoint with FIPS enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.data-kinesis-fips.cn-northwest-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"cn-northwest-1", :use_fips=>true, :use_dual_stack=>false, :operation_type=>"data", :resource_arn=>"arn:aws-cn:kinesis:cn-northwest-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Account endpoint with FIPS and DualStack enabled for cn regions.' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.data-kinesis-fips.cn-northwest-1.api.amazonwebservices.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"cn-northwest-1", :use_fips=>true, :use_dual_stack=>true, :operation_type=>"data", :resource_arn=>"arn:aws-cn:kinesis:cn-northwest-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Account endpoint targeting control operation type in ADC regions' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://kinesis.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-iso-east-1", :use_fips=>false, :use_dual_stack=>false, :operation_type=>"control", :resource_arn=>"arn:aws-iso:kinesis:us-iso-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Account endpoint targeting control operation type in ADC regions' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://kinesis.us-iso-west-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-iso-west-1", :use_fips=>false, :use_dual_stack=>false, :operation_type=>"control", :resource_arn=>"arn:aws-iso:kinesis:us-iso-west-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Account endpoint targeting data operation type in ADC regions' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://kinesis.us-isob-east-1.sc2s.sgov.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-isob-east-1", :use_fips=>false, :use_dual_stack=>false, :operation_type=>"data", :resource_arn=>"arn:aws-iso-b:kinesis:us-isob-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Account endpoint with fips targeting control operation type in ADC regions' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://kinesis-fips.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-iso-east-1", :use_fips=>true, :use_dual_stack=>false, :operation_type=>"control", :resource_arn=>"arn:aws-iso:kinesis:us-iso-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as StreamARN test: Account endpoint with fips targeting data operation type in ADC regions' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://kinesis-fips.us-isob-east-1.sc2s.sgov.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-isob-east-1", :use_fips=>true, :use_dual_stack=>false, :operation_type=>"data", :resource_arn=>"arn:aws-iso-b:kinesis:us-isob-east-1:123:stream/test-stream"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Invalid ARN: partition missing from ARN.' do
+      let(:expected) do
+        {"error"=>"Invalid ARN: Failed to parse ARN."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn::kinesis:us-west-2:123456789012:stream/testStream/consumer/test-consumer:1525898737"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Invalid ARN: partitions mismatch.' do
+      let(:expected) do
+        {"error"=>"Partition: aws from ARN doesn't match with partition name: aws-us-gov."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-gov-west-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn:aws:kinesis:us-west-2:123456789012:stream/testStream/consumer/test-consumer:1525898737"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Invalid ARN: Not Kinesis' do
+      let(:expected) do
+        {"error"=>"Invalid ARN: The ARN was not for the Kinesis service, found: s3."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn:aws:s3:us-west-2:123456789012:stream/testStream/consumer/test-consumer:1525898737"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Invalid ARN: Region is missing in ARN' do
+      let(:expected) do
+        {"error"=>"Invalid ARN: Invalid region."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn:aws:kinesis::123456789012:stream/testStream/consumer/test-consumer:1525898737"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Invalid ARN: Region is empty string in ARN' do
+      let(:expected) do
+        {"error"=>"Invalid ARN: Invalid region."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn:aws:kinesis:  :123456789012:stream/testStream/consumer/test-consumer:1525898737"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Invalid ARN: Invalid account id' do
+      let(:expected) do
+        {"error"=>"Invalid ARN: Invalid account id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn:aws:kinesis:us-east-1::stream/testStream/consumer/test-consumer:1525898737", :operation_type=>"control"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Invalid ARN: Invalid account id' do
+      let(:expected) do
+        {"error"=>"Invalid ARN: Invalid account id."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn:aws:kinesis:us-east-1:   :stream/testStream/consumer/test-consumer:1525898737", :operation_type=>"control"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Invalid ARN: Kinesis ARNs only support stream arn/consumer arn types' do
+      let(:expected) do
+        {"error"=>"Invalid ARN: Kinesis ARNs don't support `accesspoint` arn types."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn:aws:kinesis:us-east-1:123:accesspoint/testStream/consumer/test-consumer:1525898737"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Dual Stack not supported region.' do
+      let(:expected) do
+        {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-iso-west-1", :use_fips=>true, :use_dual_stack=>true, :resource_arn=>"arn:aws-iso:kinesis:us-iso-west-1:123456789012:stream/testStream/consumer/test-consumer:1525898737", :operation_type=>"control"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: OperationType not set' do
+      let(:expected) do
+        {"error"=>"Operation Type is not set. Please contact service team for resolution."}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :resource_arn=>"arn:aws:kinesis:us-east-1:123456789012:stream/testStream/consumer/test-consumer:1525898737"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Custom Endpoint is specified' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://example.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :operation_type=>"control", :resource_arn=>"arn:aws:kinesis:us-east-1:123:stream/test-stream/consumer/test-consumer:1525898737", :endpoint=>"https://example.com"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Account endpoint targeting control operation type' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.control-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :operation_type=>"control", :resource_arn=>"arn:aws:kinesis:us-east-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Account endpoint targeting data operation type' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.data-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :operation_type=>"data", :resource_arn=>"arn:aws:kinesis:us-east-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Account endpoint with fips targeting data operation type' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.data-kinesis-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>false, :operation_type=>"data", :resource_arn=>"arn:aws:kinesis:us-east-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Account endpoint with fips targeting control operation type' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.control-kinesis-fips.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>false, :operation_type=>"control", :resource_arn=>"arn:aws:kinesis:us-east-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Account endpoint with Dual Stack and FIPS enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.control-kinesis-fips.us-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>true, :use_dual_stack=>true, :operation_type=>"control", :resource_arn=>"arn:aws:kinesis:us-east-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Account endpoint with Dual Stack enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.data-kinesis.us-west-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-west-1", :use_fips=>false, :use_dual_stack=>true, :operation_type=>"data", :resource_arn=>"arn:aws:kinesis:us-west-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Account endpoint with FIPS and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.control-kinesis.us-west-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-west-1", :use_fips=>false, :use_dual_stack=>false, :operation_type=>"control", :resource_arn=>"arn:aws:kinesis:us-west-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: RegionMismatch: client region should be used for endpoint region' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.data-kinesis.us-east-1.amazonaws.com"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-east-1", :use_fips=>false, :use_dual_stack=>false, :operation_type=>"data", :resource_arn=>"arn:aws:kinesis:us-west-1:123:stream/testStream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Account endpoint with FIPS enabled' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.data-kinesis-fips.cn-northwest-1.amazonaws.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"cn-northwest-1", :use_fips=>true, :use_dual_stack=>false, :operation_type=>"data", :resource_arn=>"arn:aws-cn:kinesis:cn-northwest-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Account endpoint with FIPS and DualStack enabled for cn regions.' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://123.data-kinesis-fips.cn-northwest-1.api.amazonwebservices.com.cn"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"cn-northwest-1", :use_fips=>true, :use_dual_stack=>true, :operation_type=>"data", :resource_arn=>"arn:aws-cn:kinesis:cn-northwest-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Account endpoint targeting control operation type in ADC regions' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://kinesis.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-iso-east-1", :use_fips=>false, :use_dual_stack=>false, :operation_type=>"control", :resource_arn=>"arn:aws-iso:kinesis:us-iso-east-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Account endpoint targeting control operation type in ADC regions' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://kinesis.us-iso-west-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-iso-west-1", :use_fips=>false, :use_dual_stack=>false, :operation_type=>"control", :resource_arn=>"arn:aws-iso:kinesis:us-iso-west-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Account endpoint targeting data operation type in ADC regions' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://kinesis.us-isob-east-1.sc2s.sgov.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-isob-east-1", :use_fips=>false, :use_dual_stack=>false, :operation_type=>"data", :resource_arn=>"arn:aws-iso-b:kinesis:us-isob-east-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Account endpoint with fips targeting control operation type in ADC regions' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://kinesis-fips.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-iso-east-1", :use_fips=>true, :use_dual_stack=>false, :operation_type=>"control", :resource_arn=>"arn:aws-iso:kinesis:us-iso-east-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'ResourceARN as ConsumerARN test: Account endpoint with fips targeting data operation type in ADC regions' do
+      let(:expected) do
+        {"endpoint"=>{"url"=>"https://kinesis-fips.us-isob-east-1.sc2s.sgov.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-isob-east-1", :use_fips=>true, :use_dual_stack=>false, :operation_type=>"data", :resource_arn=>"arn:aws-iso-b:kinesis:us-isob-east-1:123:stream/test-stream/consumer/test-consumer:1525898737"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
   end
 end

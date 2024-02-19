@@ -40,6 +40,34 @@ module Aws::AccessAnalyzer
       end
     end
 
+    class CheckAccessNotGranted
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::AccessAnalyzer::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class CheckNoNewAccess
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::AccessAnalyzer::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateAccessPreview
       def self.build(context)
         unless context.config.regional_endpoint
@@ -180,6 +208,20 @@ module Aws::AccessAnalyzer
       end
     end
 
+    class GetFindingV2
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::AccessAnalyzer::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetGeneratedPolicy
       def self.build(context)
         unless context.config.regional_endpoint
@@ -265,6 +307,20 @@ module Aws::AccessAnalyzer
     end
 
     class ListFindings
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::AccessAnalyzer::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListFindingsV2
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

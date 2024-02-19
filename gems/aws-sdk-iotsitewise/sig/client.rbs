@@ -1,0 +1,1940 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTSiteWise
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#associate_assets-instance_method
+      def associate_assets: (
+                              asset_id: ::String,
+                              hierarchy_id: ::String,
+                              child_asset_id: ::String,
+                              ?client_token: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#associate_time_series_to_asset_property-instance_method
+      def associate_time_series_to_asset_property: (
+                                                     alias: ::String,
+                                                     asset_id: ::String,
+                                                     property_id: ::String,
+                                                     ?client_token: ::String
+                                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _BatchAssociateProjectAssetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchAssociateProjectAssetsResponse]
+        def errors: () -> ::Array[Types::AssetErrorDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#batch_associate_project_assets-instance_method
+      def batch_associate_project_assets: (
+                                            project_id: ::String,
+                                            asset_ids: Array[::String],
+                                            ?client_token: ::String
+                                          ) -> _BatchAssociateProjectAssetsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAssociateProjectAssetsResponseSuccess
+
+      interface _BatchDisassociateProjectAssetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDisassociateProjectAssetsResponse]
+        def errors: () -> ::Array[Types::AssetErrorDetails]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#batch_disassociate_project_assets-instance_method
+      def batch_disassociate_project_assets: (
+                                               project_id: ::String,
+                                               asset_ids: Array[::String],
+                                               ?client_token: ::String
+                                             ) -> _BatchDisassociateProjectAssetsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisassociateProjectAssetsResponseSuccess
+
+      interface _BatchGetAssetPropertyAggregatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetAssetPropertyAggregatesResponse]
+        def error_entries: () -> ::Array[Types::BatchGetAssetPropertyAggregatesErrorEntry]
+        def success_entries: () -> ::Array[Types::BatchGetAssetPropertyAggregatesSuccessEntry]
+        def skipped_entries: () -> ::Array[Types::BatchGetAssetPropertyAggregatesSkippedEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#batch_get_asset_property_aggregates-instance_method
+      def batch_get_asset_property_aggregates: (
+                                                 entries: Array[
+                                                   {
+                                                     entry_id: ::String,
+                                                     asset_id: ::String?,
+                                                     property_id: ::String?,
+                                                     property_alias: ::String?,
+                                                     aggregate_types: Array[("AVERAGE" | "COUNT" | "MAXIMUM" | "MINIMUM" | "SUM" | "STANDARD_DEVIATION")],
+                                                     resolution: ::String,
+                                                     start_date: ::Time,
+                                                     end_date: ::Time,
+                                                     qualities: Array[("GOOD" | "BAD" | "UNCERTAIN")]?,
+                                                     time_ordering: ("ASCENDING" | "DESCENDING")?
+                                                   },
+                                                 ],
+                                                 ?next_token: ::String,
+                                                 ?max_results: ::Integer
+                                               ) -> _BatchGetAssetPropertyAggregatesResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetAssetPropertyAggregatesResponseSuccess
+
+      interface _BatchGetAssetPropertyValueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetAssetPropertyValueResponse]
+        def error_entries: () -> ::Array[Types::BatchGetAssetPropertyValueErrorEntry]
+        def success_entries: () -> ::Array[Types::BatchGetAssetPropertyValueSuccessEntry]
+        def skipped_entries: () -> ::Array[Types::BatchGetAssetPropertyValueSkippedEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#batch_get_asset_property_value-instance_method
+      def batch_get_asset_property_value: (
+                                            entries: Array[
+                                              {
+                                                entry_id: ::String,
+                                                asset_id: ::String?,
+                                                property_id: ::String?,
+                                                property_alias: ::String?
+                                              },
+                                            ],
+                                            ?next_token: ::String
+                                          ) -> _BatchGetAssetPropertyValueResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetAssetPropertyValueResponseSuccess
+
+      interface _BatchGetAssetPropertyValueHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetAssetPropertyValueHistoryResponse]
+        def error_entries: () -> ::Array[Types::BatchGetAssetPropertyValueHistoryErrorEntry]
+        def success_entries: () -> ::Array[Types::BatchGetAssetPropertyValueHistorySuccessEntry]
+        def skipped_entries: () -> ::Array[Types::BatchGetAssetPropertyValueHistorySkippedEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#batch_get_asset_property_value_history-instance_method
+      def batch_get_asset_property_value_history: (
+                                                    entries: Array[
+                                                      {
+                                                        entry_id: ::String,
+                                                        asset_id: ::String?,
+                                                        property_id: ::String?,
+                                                        property_alias: ::String?,
+                                                        start_date: ::Time?,
+                                                        end_date: ::Time?,
+                                                        qualities: Array[("GOOD" | "BAD" | "UNCERTAIN")]?,
+                                                        time_ordering: ("ASCENDING" | "DESCENDING")?
+                                                      },
+                                                    ],
+                                                    ?next_token: ::String,
+                                                    ?max_results: ::Integer
+                                                  ) -> _BatchGetAssetPropertyValueHistoryResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetAssetPropertyValueHistoryResponseSuccess
+
+      interface _BatchPutAssetPropertyValueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchPutAssetPropertyValueResponse]
+        def error_entries: () -> ::Array[Types::BatchPutAssetPropertyErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#batch_put_asset_property_value-instance_method
+      def batch_put_asset_property_value: (
+                                            entries: Array[
+                                              {
+                                                entry_id: ::String,
+                                                asset_id: ::String?,
+                                                property_id: ::String?,
+                                                property_alias: ::String?,
+                                                property_values: Array[
+                                                  {
+                                                    value: {
+                                                      string_value: ::String?,
+                                                      integer_value: ::Integer?,
+                                                      double_value: ::Float?,
+                                                      boolean_value: bool?
+                                                    },
+                                                    timestamp: {
+                                                      time_in_seconds: ::Integer,
+                                                      offset_in_nanos: ::Integer?
+                                                    },
+                                                    quality: ("GOOD" | "BAD" | "UNCERTAIN")?
+                                                  },
+                                                ]
+                                              },
+                                            ]
+                                          ) -> _BatchPutAssetPropertyValueResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutAssetPropertyValueResponseSuccess
+
+      interface _CreateAccessPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessPolicyResponse]
+        def access_policy_id: () -> ::String
+        def access_policy_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_access_policy-instance_method
+      def create_access_policy: (
+                                  access_policy_identity: {
+                                    user: {
+                                      id: ::String
+                                    }?,
+                                    group: {
+                                      id: ::String
+                                    }?,
+                                    iam_user: {
+                                      arn: ::String
+                                    }?,
+                                    iam_role: {
+                                      arn: ::String
+                                    }?
+                                  },
+                                  access_policy_resource: {
+                                    portal: {
+                                      id: ::String
+                                    }?,
+                                    project: {
+                                      id: ::String
+                                    }?
+                                  },
+                                  access_policy_permission: ("ADMINISTRATOR" | "VIEWER"),
+                                  ?client_token: ::String,
+                                  ?tags: Hash[::String, ::String]
+                                ) -> _CreateAccessPolicyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessPolicyResponseSuccess
+
+      interface _CreateAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssetResponse]
+        def asset_id: () -> ::String
+        def asset_arn: () -> ::String
+        def asset_status: () -> Types::AssetStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_asset-instance_method
+      def create_asset: (
+                          asset_name: ::String,
+                          asset_model_id: ::String,
+                          ?client_token: ::String,
+                          ?tags: Hash[::String, ::String],
+                          ?asset_description: ::String,
+                          ?asset_id: ::String,
+                          ?asset_external_id: ::String
+                        ) -> _CreateAssetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssetResponseSuccess
+
+      interface _CreateAssetModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssetModelResponse]
+        def asset_model_id: () -> ::String
+        def asset_model_arn: () -> ::String
+        def asset_model_status: () -> Types::AssetModelStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_asset_model-instance_method
+      def create_asset_model: (
+                                asset_model_name: ::String,
+                                ?asset_model_description: ::String,
+                                ?asset_model_properties: Array[
+                                  {
+                                    name: ::String,
+                                    data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
+                                    data_type_spec: ::String?,
+                                    unit: ::String?,
+                                    type: {
+                                      attribute: {
+                                        default_value: ::String?
+                                      }?,
+                                      measurement: {
+                                        processing_config: {
+                                          forwarding_config: {
+                                            state: ("DISABLED" | "ENABLED")
+                                          }
+                                        }?
+                                      }?,
+                                      transform: {
+                                        expression: ::String,
+                                        variables: Array[
+                                          {
+                                            name: ::String,
+                                            value: {
+                                              property_id: ::String?,
+                                              hierarchy_id: ::String?,
+                                              property_path: Array[
+                                                {
+                                                  id: ::String?,
+                                                  name: ::String?
+                                                },
+                                              ]?
+                                            }
+                                          },
+                                        ],
+                                        processing_config: {
+                                          compute_location: ("EDGE" | "CLOUD"),
+                                          forwarding_config: {
+                                            state: ("DISABLED" | "ENABLED")
+                                          }?
+                                        }?
+                                      }?,
+                                      metric: {
+                                        expression: ::String,
+                                        variables: Array[
+                                          {
+                                            name: ::String,
+                                            value: {
+                                              property_id: ::String?,
+                                              hierarchy_id: ::String?,
+                                              property_path: Array[
+                                                {
+                                                  id: ::String?,
+                                                  name: ::String?
+                                                },
+                                              ]?
+                                            }
+                                          },
+                                        ],
+                                        window: {
+                                          tumbling: {
+                                            interval: ::String,
+                                            offset: ::String?
+                                          }?
+                                        },
+                                        processing_config: {
+                                          compute_location: ("EDGE" | "CLOUD")
+                                        }?
+                                      }?
+                                    },
+                                    id: ::String?,
+                                    external_id: ::String?
+                                  },
+                                ],
+                                ?asset_model_hierarchies: Array[
+                                  {
+                                    name: ::String,
+                                    child_asset_model_id: ::String,
+                                    id: ::String?,
+                                    external_id: ::String?
+                                  },
+                                ],
+                                ?asset_model_composite_models: Array[
+                                  {
+                                    name: ::String,
+                                    description: ::String?,
+                                    type: ::String,
+                                    properties: Array[
+                                      {
+                                        name: ::String,
+                                        data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
+                                        data_type_spec: ::String?,
+                                        unit: ::String?,
+                                        type: {
+                                          attribute: {
+                                            default_value: ::String?
+                                          }?,
+                                          measurement: {
+                                            processing_config: {
+                                              forwarding_config: {
+                                                state: ("DISABLED" | "ENABLED")
+                                              }
+                                            }?
+                                          }?,
+                                          transform: {
+                                            expression: ::String,
+                                            variables: Array[
+                                              {
+                                                name: ::String,
+                                                value: {
+                                                  property_id: ::String?,
+                                                  hierarchy_id: ::String?,
+                                                  property_path: Array[
+                                                    {
+                                                      id: ::String?,
+                                                      name: ::String?
+                                                    },
+                                                  ]?
+                                                }
+                                              },
+                                            ],
+                                            processing_config: {
+                                              compute_location: ("EDGE" | "CLOUD"),
+                                              forwarding_config: {
+                                                state: ("DISABLED" | "ENABLED")
+                                              }?
+                                            }?
+                                          }?,
+                                          metric: {
+                                            expression: ::String,
+                                            variables: Array[
+                                              {
+                                                name: ::String,
+                                                value: {
+                                                  property_id: ::String?,
+                                                  hierarchy_id: ::String?,
+                                                  property_path: Array[
+                                                    {
+                                                      id: ::String?,
+                                                      name: ::String?
+                                                    },
+                                                  ]?
+                                                }
+                                              },
+                                            ],
+                                            window: {
+                                              tumbling: {
+                                                interval: ::String,
+                                                offset: ::String?
+                                              }?
+                                            },
+                                            processing_config: {
+                                              compute_location: ("EDGE" | "CLOUD")
+                                            }?
+                                          }?
+                                        },
+                                        id: ::String?,
+                                        external_id: ::String?
+                                      },
+                                    ]?,
+                                    id: ::String?,
+                                    external_id: ::String?
+                                  },
+                                ],
+                                ?client_token: ::String,
+                                ?tags: Hash[::String, ::String],
+                                ?asset_model_id: ::String,
+                                ?asset_model_external_id: ::String,
+                                ?asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL")
+                              ) -> _CreateAssetModelResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssetModelResponseSuccess
+
+      interface _CreateAssetModelCompositeModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssetModelCompositeModelResponse]
+        def asset_model_composite_model_id: () -> ::String
+        def asset_model_composite_model_path: () -> ::Array[Types::AssetModelCompositeModelPathSegment]
+        def asset_model_status: () -> Types::AssetModelStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_asset_model_composite_model-instance_method
+      def create_asset_model_composite_model: (
+                                                asset_model_id: ::String,
+                                                ?parent_asset_model_composite_model_id: ::String,
+                                                ?asset_model_composite_model_external_id: ::String,
+                                                ?asset_model_composite_model_id: ::String,
+                                                ?asset_model_composite_model_description: ::String,
+                                                asset_model_composite_model_name: ::String,
+                                                asset_model_composite_model_type: ::String,
+                                                ?client_token: ::String,
+                                                ?composed_asset_model_id: ::String,
+                                                ?asset_model_composite_model_properties: Array[
+                                                  {
+                                                    name: ::String,
+                                                    data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
+                                                    data_type_spec: ::String?,
+                                                    unit: ::String?,
+                                                    type: {
+                                                      attribute: {
+                                                        default_value: ::String?
+                                                      }?,
+                                                      measurement: {
+                                                        processing_config: {
+                                                          forwarding_config: {
+                                                            state: ("DISABLED" | "ENABLED")
+                                                          }
+                                                        }?
+                                                      }?,
+                                                      transform: {
+                                                        expression: ::String,
+                                                        variables: Array[
+                                                          {
+                                                            name: ::String,
+                                                            value: {
+                                                              property_id: ::String?,
+                                                              hierarchy_id: ::String?,
+                                                              property_path: Array[
+                                                                {
+                                                                  id: ::String?,
+                                                                  name: ::String?
+                                                                },
+                                                              ]?
+                                                            }
+                                                          },
+                                                        ],
+                                                        processing_config: {
+                                                          compute_location: ("EDGE" | "CLOUD"),
+                                                          forwarding_config: {
+                                                            state: ("DISABLED" | "ENABLED")
+                                                          }?
+                                                        }?
+                                                      }?,
+                                                      metric: {
+                                                        expression: ::String,
+                                                        variables: Array[
+                                                          {
+                                                            name: ::String,
+                                                            value: {
+                                                              property_id: ::String?,
+                                                              hierarchy_id: ::String?,
+                                                              property_path: Array[
+                                                                {
+                                                                  id: ::String?,
+                                                                  name: ::String?
+                                                                },
+                                                              ]?
+                                                            }
+                                                          },
+                                                        ],
+                                                        window: {
+                                                          tumbling: {
+                                                            interval: ::String,
+                                                            offset: ::String?
+                                                          }?
+                                                        },
+                                                        processing_config: {
+                                                          compute_location: ("EDGE" | "CLOUD")
+                                                        }?
+                                                      }?
+                                                    },
+                                                    id: ::String?,
+                                                    external_id: ::String?
+                                                  },
+                                                ]
+                                              ) -> _CreateAssetModelCompositeModelResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssetModelCompositeModelResponseSuccess
+
+      interface _CreateBulkImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBulkImportJobResponse]
+        def job_id: () -> ::String
+        def job_name: () -> ::String
+        def job_status: () -> ("PENDING" | "CANCELLED" | "RUNNING" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_bulk_import_job-instance_method
+      def create_bulk_import_job: (
+                                    job_name: ::String,
+                                    job_role_arn: ::String,
+                                    files: Array[
+                                      {
+                                        bucket: ::String,
+                                        key: ::String,
+                                        version_id: ::String?
+                                      },
+                                    ],
+                                    error_report_location: {
+                                      bucket: ::String,
+                                      prefix: ::String
+                                    },
+                                    job_configuration: {
+                                      file_format: {
+                                        csv: {
+                                          column_names: Array[("ALIAS" | "ASSET_ID" | "PROPERTY_ID" | "DATA_TYPE" | "TIMESTAMP_SECONDS" | "TIMESTAMP_NANO_OFFSET" | "QUALITY" | "VALUE")]
+                                        }?,
+                                        parquet: {
+                                        }?
+                                      }
+                                    },
+                                    ?adaptive_ingestion: bool,
+                                    ?delete_files_after_import: bool
+                                  ) -> _CreateBulkImportJobResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBulkImportJobResponseSuccess
+
+      interface _CreateDashboardResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDashboardResponse]
+        def dashboard_id: () -> ::String
+        def dashboard_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_dashboard-instance_method
+      def create_dashboard: (
+                              project_id: ::String,
+                              dashboard_name: ::String,
+                              ?dashboard_description: ::String,
+                              dashboard_definition: ::String,
+                              ?client_token: ::String,
+                              ?tags: Hash[::String, ::String]
+                            ) -> _CreateDashboardResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDashboardResponseSuccess
+
+      interface _CreateGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGatewayResponse]
+        def gateway_id: () -> ::String
+        def gateway_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_gateway-instance_method
+      def create_gateway: (
+                            gateway_name: ::String,
+                            gateway_platform: {
+                              greengrass: {
+                                group_arn: ::String
+                              }?,
+                              greengrass_v2: {
+                                core_device_thing_name: ::String
+                              }?
+                            },
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateGatewayResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGatewayResponseSuccess
+
+      interface _CreatePortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePortalResponse]
+        def portal_id: () -> ::String
+        def portal_arn: () -> ::String
+        def portal_start_url: () -> ::String
+        def portal_status: () -> Types::PortalStatus
+        def sso_application_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_portal-instance_method
+      def create_portal: (
+                           portal_name: ::String,
+                           ?portal_description: ::String,
+                           portal_contact_email: ::String,
+                           ?client_token: ::String,
+                           ?portal_logo_image_file: {
+                             data: ::String,
+                             type: ("PNG")
+                           },
+                           role_arn: ::String,
+                           ?tags: Hash[::String, ::String],
+                           ?portal_auth_mode: ("IAM" | "SSO"),
+                           ?notification_sender_email: ::String,
+                           ?alarms: {
+                             alarm_role_arn: ::String,
+                             notification_lambda_arn: ::String?
+                           }
+                         ) -> _CreatePortalResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePortalResponseSuccess
+
+      interface _CreateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProjectResponse]
+        def project_id: () -> ::String
+        def project_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_project-instance_method
+      def create_project: (
+                            portal_id: ::String,
+                            project_name: ::String,
+                            ?project_description: ::String,
+                            ?client_token: ::String,
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectResponseSuccess
+
+      interface _DeleteAccessPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccessPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_access_policy-instance_method
+      def delete_access_policy: (
+                                  access_policy_id: ::String,
+                                  ?client_token: ::String
+                                ) -> _DeleteAccessPolicyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccessPolicyResponseSuccess
+
+      interface _DeleteAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssetResponse]
+        def asset_status: () -> Types::AssetStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_asset-instance_method
+      def delete_asset: (
+                          asset_id: ::String,
+                          ?client_token: ::String
+                        ) -> _DeleteAssetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssetResponseSuccess
+
+      interface _DeleteAssetModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssetModelResponse]
+        def asset_model_status: () -> Types::AssetModelStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_asset_model-instance_method
+      def delete_asset_model: (
+                                asset_model_id: ::String,
+                                ?client_token: ::String
+                              ) -> _DeleteAssetModelResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssetModelResponseSuccess
+
+      interface _DeleteAssetModelCompositeModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssetModelCompositeModelResponse]
+        def asset_model_status: () -> Types::AssetModelStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_asset_model_composite_model-instance_method
+      def delete_asset_model_composite_model: (
+                                                asset_model_id: ::String,
+                                                asset_model_composite_model_id: ::String,
+                                                ?client_token: ::String
+                                              ) -> _DeleteAssetModelCompositeModelResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssetModelCompositeModelResponseSuccess
+
+      interface _DeleteDashboardResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDashboardResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_dashboard-instance_method
+      def delete_dashboard: (
+                              dashboard_id: ::String,
+                              ?client_token: ::String
+                            ) -> _DeleteDashboardResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDashboardResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_gateway-instance_method
+      def delete_gateway: (
+                            gateway_id: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeletePortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePortalResponse]
+        def portal_status: () -> Types::PortalStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_portal-instance_method
+      def delete_portal: (
+                           portal_id: ::String,
+                           ?client_token: ::String
+                         ) -> _DeletePortalResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePortalResponseSuccess
+
+      interface _DeleteProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_project-instance_method
+      def delete_project: (
+                            project_id: ::String,
+                            ?client_token: ::String
+                          ) -> _DeleteProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#delete_time_series-instance_method
+      def delete_time_series: (
+                                ?alias: ::String,
+                                ?asset_id: ::String,
+                                ?property_id: ::String,
+                                ?client_token: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeAccessPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccessPolicyResponse]
+        def access_policy_id: () -> ::String
+        def access_policy_arn: () -> ::String
+        def access_policy_identity: () -> Types::Identity
+        def access_policy_resource: () -> Types::Resource
+        def access_policy_permission: () -> ("ADMINISTRATOR" | "VIEWER")
+        def access_policy_creation_date: () -> ::Time
+        def access_policy_last_update_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_access_policy-instance_method
+      def describe_access_policy: (
+                                    access_policy_id: ::String
+                                  ) -> _DescribeAccessPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccessPolicyResponseSuccess
+
+      interface _DescribeActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeActionResponse]
+        def action_id: () -> ::String
+        def target_resource: () -> Types::TargetResource
+        def action_definition_id: () -> ::String
+        def action_payload: () -> Types::ActionPayload
+        def execution_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_action-instance_method
+      def describe_action: (
+                             action_id: ::String
+                           ) -> _DescribeActionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeActionResponseSuccess
+
+      interface _DescribeAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssetResponse]
+        def asset_id: () -> ::String
+        def asset_arn: () -> ::String
+        def asset_name: () -> ::String
+        def asset_model_id: () -> ::String
+        def asset_properties: () -> ::Array[Types::AssetProperty]
+        def asset_hierarchies: () -> ::Array[Types::AssetHierarchy]
+        def asset_composite_models: () -> ::Array[Types::AssetCompositeModel]
+        def asset_creation_date: () -> ::Time
+        def asset_last_update_date: () -> ::Time
+        def asset_status: () -> Types::AssetStatus
+        def asset_description: () -> ::String
+        def asset_composite_model_summaries: () -> ::Array[Types::AssetCompositeModelSummary]
+        def asset_external_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_asset-instance_method
+      def describe_asset: (
+                            asset_id: ::String,
+                            ?exclude_properties: bool
+                          ) -> _DescribeAssetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssetResponseSuccess
+
+      interface _DescribeAssetCompositeModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssetCompositeModelResponse]
+        def asset_id: () -> ::String
+        def asset_composite_model_id: () -> ::String
+        def asset_composite_model_external_id: () -> ::String
+        def asset_composite_model_path: () -> ::Array[Types::AssetCompositeModelPathSegment]
+        def asset_composite_model_name: () -> ::String
+        def asset_composite_model_description: () -> ::String
+        def asset_composite_model_type: () -> ::String
+        def asset_composite_model_properties: () -> ::Array[Types::AssetProperty]
+        def asset_composite_model_summaries: () -> ::Array[Types::AssetCompositeModelSummary]
+        def action_definitions: () -> ::Array[Types::ActionDefinition]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_asset_composite_model-instance_method
+      def describe_asset_composite_model: (
+                                            asset_id: ::String,
+                                            asset_composite_model_id: ::String
+                                          ) -> _DescribeAssetCompositeModelResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssetCompositeModelResponseSuccess
+
+      interface _DescribeAssetModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssetModelResponse]
+        def asset_model_id: () -> ::String
+        def asset_model_arn: () -> ::String
+        def asset_model_name: () -> ::String
+        def asset_model_description: () -> ::String
+        def asset_model_properties: () -> ::Array[Types::AssetModelProperty]
+        def asset_model_hierarchies: () -> ::Array[Types::AssetModelHierarchy]
+        def asset_model_composite_models: () -> ::Array[Types::AssetModelCompositeModel]
+        def asset_model_creation_date: () -> ::Time
+        def asset_model_last_update_date: () -> ::Time
+        def asset_model_status: () -> Types::AssetModelStatus
+        def asset_model_type: () -> ("ASSET_MODEL" | "COMPONENT_MODEL")
+        def asset_model_composite_model_summaries: () -> ::Array[Types::AssetModelCompositeModelSummary]
+        def asset_model_external_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_asset_model-instance_method
+      def describe_asset_model: (
+                                  asset_model_id: ::String,
+                                  ?exclude_properties: bool
+                                ) -> _DescribeAssetModelResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssetModelResponseSuccess
+
+      interface _DescribeAssetModelCompositeModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssetModelCompositeModelResponse]
+        def asset_model_id: () -> ::String
+        def asset_model_composite_model_id: () -> ::String
+        def asset_model_composite_model_external_id: () -> ::String
+        def asset_model_composite_model_path: () -> ::Array[Types::AssetModelCompositeModelPathSegment]
+        def asset_model_composite_model_name: () -> ::String
+        def asset_model_composite_model_description: () -> ::String
+        def asset_model_composite_model_type: () -> ::String
+        def asset_model_composite_model_properties: () -> ::Array[Types::AssetModelProperty]
+        def composition_details: () -> Types::CompositionDetails
+        def asset_model_composite_model_summaries: () -> ::Array[Types::AssetModelCompositeModelSummary]
+        def action_definitions: () -> ::Array[Types::ActionDefinition]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_asset_model_composite_model-instance_method
+      def describe_asset_model_composite_model: (
+                                                  asset_model_id: ::String,
+                                                  asset_model_composite_model_id: ::String
+                                                ) -> _DescribeAssetModelCompositeModelResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssetModelCompositeModelResponseSuccess
+
+      interface _DescribeAssetPropertyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssetPropertyResponse]
+        def asset_id: () -> ::String
+        def asset_name: () -> ::String
+        def asset_model_id: () -> ::String
+        def asset_property: () -> Types::Property
+        def composite_model: () -> Types::CompositeModelProperty
+        def asset_external_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_asset_property-instance_method
+      def describe_asset_property: (
+                                     asset_id: ::String,
+                                     property_id: ::String
+                                   ) -> _DescribeAssetPropertyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssetPropertyResponseSuccess
+
+      interface _DescribeBulkImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBulkImportJobResponse]
+        def job_id: () -> ::String
+        def job_name: () -> ::String
+        def job_status: () -> ("PENDING" | "CANCELLED" | "RUNNING" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")
+        def job_role_arn: () -> ::String
+        def files: () -> ::Array[Types::File]
+        def error_report_location: () -> Types::ErrorReportLocation
+        def job_configuration: () -> Types::JobConfiguration
+        def job_creation_date: () -> ::Time
+        def job_last_update_date: () -> ::Time
+        def adaptive_ingestion: () -> bool
+        def delete_files_after_import: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_bulk_import_job-instance_method
+      def describe_bulk_import_job: (
+                                      job_id: ::String
+                                    ) -> _DescribeBulkImportJobResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBulkImportJobResponseSuccess
+
+      interface _DescribeDashboardResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDashboardResponse]
+        def dashboard_id: () -> ::String
+        def dashboard_arn: () -> ::String
+        def dashboard_name: () -> ::String
+        def project_id: () -> ::String
+        def dashboard_description: () -> ::String
+        def dashboard_definition: () -> ::String
+        def dashboard_creation_date: () -> ::Time
+        def dashboard_last_update_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_dashboard-instance_method
+      def describe_dashboard: (
+                                dashboard_id: ::String
+                              ) -> _DescribeDashboardResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDashboardResponseSuccess
+
+      interface _DescribeDefaultEncryptionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDefaultEncryptionConfigurationResponse]
+        def encryption_type: () -> ("SITEWISE_DEFAULT_ENCRYPTION" | "KMS_BASED_ENCRYPTION")
+        def kms_key_arn: () -> ::String
+        def configuration_status: () -> Types::ConfigurationStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_default_encryption_configuration-instance_method
+      def describe_default_encryption_configuration: (
+                                                     ) -> _DescribeDefaultEncryptionConfigurationResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDefaultEncryptionConfigurationResponseSuccess
+
+      interface _DescribeGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGatewayResponse]
+        def gateway_id: () -> ::String
+        def gateway_name: () -> ::String
+        def gateway_arn: () -> ::String
+        def gateway_platform: () -> Types::GatewayPlatform
+        def gateway_capability_summaries: () -> ::Array[Types::GatewayCapabilitySummary]
+        def creation_date: () -> ::Time
+        def last_update_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_gateway-instance_method
+      def describe_gateway: (
+                              gateway_id: ::String
+                            ) -> _DescribeGatewayResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGatewayResponseSuccess
+
+      interface _DescribeGatewayCapabilityConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGatewayCapabilityConfigurationResponse]
+        def gateway_id: () -> ::String
+        def capability_namespace: () -> ::String
+        def capability_configuration: () -> ::String
+        def capability_sync_status: () -> ("IN_SYNC" | "OUT_OF_SYNC" | "SYNC_FAILED" | "UNKNOWN")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_gateway_capability_configuration-instance_method
+      def describe_gateway_capability_configuration: (
+                                                       gateway_id: ::String,
+                                                       capability_namespace: ::String
+                                                     ) -> _DescribeGatewayCapabilityConfigurationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGatewayCapabilityConfigurationResponseSuccess
+
+      interface _DescribeLoggingOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLoggingOptionsResponse]
+        def logging_options: () -> Types::LoggingOptions
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_logging_options-instance_method
+      def describe_logging_options: (
+                                    ) -> _DescribeLoggingOptionsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoggingOptionsResponseSuccess
+
+      interface _DescribePortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePortalResponse]
+        def portal_id: () -> ::String
+        def portal_arn: () -> ::String
+        def portal_name: () -> ::String
+        def portal_description: () -> ::String
+        def portal_client_id: () -> ::String
+        def portal_start_url: () -> ::String
+        def portal_contact_email: () -> ::String
+        def portal_status: () -> Types::PortalStatus
+        def portal_creation_date: () -> ::Time
+        def portal_last_update_date: () -> ::Time
+        def portal_logo_image_location: () -> Types::ImageLocation
+        def role_arn: () -> ::String
+        def portal_auth_mode: () -> ("IAM" | "SSO")
+        def notification_sender_email: () -> ::String
+        def alarms: () -> Types::Alarms
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_portal-instance_method
+      def describe_portal: (
+                             portal_id: ::String
+                           ) -> _DescribePortalResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePortalResponseSuccess
+
+      interface _DescribeProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProjectResponse]
+        def project_id: () -> ::String
+        def project_arn: () -> ::String
+        def project_name: () -> ::String
+        def portal_id: () -> ::String
+        def project_description: () -> ::String
+        def project_creation_date: () -> ::Time
+        def project_last_update_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_project-instance_method
+      def describe_project: (
+                              project_id: ::String
+                            ) -> _DescribeProjectResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProjectResponseSuccess
+
+      interface _DescribeStorageConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStorageConfigurationResponse]
+        def storage_type: () -> ("SITEWISE_DEFAULT_STORAGE" | "MULTI_LAYER_STORAGE")
+        def multi_layer_storage: () -> Types::MultiLayerStorage
+        def disassociated_data_storage: () -> ("ENABLED" | "DISABLED")
+        def retention_period: () -> Types::RetentionPeriod
+        def configuration_status: () -> Types::ConfigurationStatus
+        def last_update_date: () -> ::Time
+        def warm_tier: () -> ("ENABLED" | "DISABLED")
+        def warm_tier_retention_period: () -> Types::WarmTierRetentionPeriod
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_storage_configuration-instance_method
+      def describe_storage_configuration: (
+                                          ) -> _DescribeStorageConfigurationResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStorageConfigurationResponseSuccess
+
+      interface _DescribeTimeSeriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTimeSeriesResponse]
+        def asset_id: () -> ::String
+        def property_id: () -> ::String
+        def alias: () -> ::String
+        def time_series_id: () -> ::String
+        def data_type: () -> ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT")
+        def data_type_spec: () -> ::String
+        def time_series_creation_date: () -> ::Time
+        def time_series_last_update_date: () -> ::Time
+        def time_series_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#describe_time_series-instance_method
+      def describe_time_series: (
+                                  ?alias: ::String,
+                                  ?asset_id: ::String,
+                                  ?property_id: ::String
+                                ) -> _DescribeTimeSeriesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTimeSeriesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#disassociate_assets-instance_method
+      def disassociate_assets: (
+                                 asset_id: ::String,
+                                 hierarchy_id: ::String,
+                                 child_asset_id: ::String,
+                                 ?client_token: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#disassociate_time_series_from_asset_property-instance_method
+      def disassociate_time_series_from_asset_property: (
+                                                          alias: ::String,
+                                                          asset_id: ::String,
+                                                          property_id: ::String,
+                                                          ?client_token: ::String
+                                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _ExecuteActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteActionResponse]
+        def action_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#execute_action-instance_method
+      def execute_action: (
+                            target_resource: {
+                              asset_id: ::String
+                            },
+                            action_definition_id: ::String,
+                            action_payload: {
+                              string_value: ::String
+                            },
+                            ?client_token: ::String
+                          ) -> _ExecuteActionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteActionResponseSuccess
+
+      interface _ExecuteQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteQueryResponse]
+        def columns: () -> ::Array[Types::ColumnInfo]
+        def rows: () -> ::Array[Types::Row]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#execute_query-instance_method
+      def execute_query: (
+                           query_statement: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ExecuteQueryResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteQueryResponseSuccess
+
+      interface _GetAssetPropertyAggregatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssetPropertyAggregatesResponse]
+        def aggregated_values: () -> ::Array[Types::AggregatedValue]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#get_asset_property_aggregates-instance_method
+      def get_asset_property_aggregates: (
+                                           ?asset_id: ::String,
+                                           ?property_id: ::String,
+                                           ?property_alias: ::String,
+                                           aggregate_types: Array[("AVERAGE" | "COUNT" | "MAXIMUM" | "MINIMUM" | "SUM" | "STANDARD_DEVIATION")],
+                                           resolution: ::String,
+                                           ?qualities: Array[("GOOD" | "BAD" | "UNCERTAIN")],
+                                           start_date: ::Time,
+                                           end_date: ::Time,
+                                           ?time_ordering: ("ASCENDING" | "DESCENDING"),
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _GetAssetPropertyAggregatesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssetPropertyAggregatesResponseSuccess
+
+      interface _GetAssetPropertyValueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssetPropertyValueResponse]
+        def property_value: () -> Types::AssetPropertyValue
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#get_asset_property_value-instance_method
+      def get_asset_property_value: (
+                                      ?asset_id: ::String,
+                                      ?property_id: ::String,
+                                      ?property_alias: ::String
+                                    ) -> _GetAssetPropertyValueResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssetPropertyValueResponseSuccess
+
+      interface _GetAssetPropertyValueHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssetPropertyValueHistoryResponse]
+        def asset_property_value_history: () -> ::Array[Types::AssetPropertyValue]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#get_asset_property_value_history-instance_method
+      def get_asset_property_value_history: (
+                                              ?asset_id: ::String,
+                                              ?property_id: ::String,
+                                              ?property_alias: ::String,
+                                              ?start_date: ::Time,
+                                              ?end_date: ::Time,
+                                              ?qualities: Array[("GOOD" | "BAD" | "UNCERTAIN")],
+                                              ?time_ordering: ("ASCENDING" | "DESCENDING"),
+                                              ?next_token: ::String,
+                                              ?max_results: ::Integer
+                                            ) -> _GetAssetPropertyValueHistoryResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssetPropertyValueHistoryResponseSuccess
+
+      interface _GetInterpolatedAssetPropertyValuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInterpolatedAssetPropertyValuesResponse]
+        def interpolated_asset_property_values: () -> ::Array[Types::InterpolatedAssetPropertyValue]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#get_interpolated_asset_property_values-instance_method
+      def get_interpolated_asset_property_values: (
+                                                    ?asset_id: ::String,
+                                                    ?property_id: ::String,
+                                                    ?property_alias: ::String,
+                                                    start_time_in_seconds: ::Integer,
+                                                    ?start_time_offset_in_nanos: ::Integer,
+                                                    end_time_in_seconds: ::Integer,
+                                                    ?end_time_offset_in_nanos: ::Integer,
+                                                    quality: ("GOOD" | "BAD" | "UNCERTAIN"),
+                                                    interval_in_seconds: ::Integer,
+                                                    ?next_token: ::String,
+                                                    ?max_results: ::Integer,
+                                                    type: ::String,
+                                                    ?interval_window_in_seconds: ::Integer
+                                                  ) -> _GetInterpolatedAssetPropertyValuesResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInterpolatedAssetPropertyValuesResponseSuccess
+
+      interface _ListAccessPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessPoliciesResponse]
+        def access_policy_summaries: () -> ::Array[Types::AccessPolicySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_access_policies-instance_method
+      def list_access_policies: (
+                                  ?identity_type: ("USER" | "GROUP" | "IAM"),
+                                  ?identity_id: ::String,
+                                  ?resource_type: ("PORTAL" | "PROJECT"),
+                                  ?resource_id: ::String,
+                                  ?iam_arn: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListAccessPoliciesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessPoliciesResponseSuccess
+
+      interface _ListActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListActionsResponse]
+        def action_summaries: () -> ::Array[Types::ActionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_actions-instance_method
+      def list_actions: (
+                          target_resource_type: ("ASSET"),
+                          target_resource_id: ::String,
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListActionsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListActionsResponseSuccess
+
+      interface _ListAssetModelCompositeModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetModelCompositeModelsResponse]
+        def asset_model_composite_model_summaries: () -> ::Array[Types::AssetModelCompositeModelSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_asset_model_composite_models-instance_method
+      def list_asset_model_composite_models: (
+                                               asset_model_id: ::String,
+                                               ?next_token: ::String,
+                                               ?max_results: ::Integer
+                                             ) -> _ListAssetModelCompositeModelsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetModelCompositeModelsResponseSuccess
+
+      interface _ListAssetModelPropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetModelPropertiesResponse]
+        def asset_model_property_summaries: () -> ::Array[Types::AssetModelPropertySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_asset_model_properties-instance_method
+      def list_asset_model_properties: (
+                                         asset_model_id: ::String,
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer,
+                                         ?filter: ("ALL" | "BASE")
+                                       ) -> _ListAssetModelPropertiesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetModelPropertiesResponseSuccess
+
+      interface _ListAssetModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetModelsResponse]
+        def asset_model_summaries: () -> ::Array[Types::AssetModelSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_asset_models-instance_method
+      def list_asset_models: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer,
+                               ?asset_model_types: Array[("ASSET_MODEL" | "COMPONENT_MODEL")]
+                             ) -> _ListAssetModelsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetModelsResponseSuccess
+
+      interface _ListAssetPropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetPropertiesResponse]
+        def asset_property_summaries: () -> ::Array[Types::AssetPropertySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_asset_properties-instance_method
+      def list_asset_properties: (
+                                   asset_id: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
+                                   ?filter: ("ALL" | "BASE")
+                                 ) -> _ListAssetPropertiesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetPropertiesResponseSuccess
+
+      interface _ListAssetRelationshipsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetRelationshipsResponse]
+        def asset_relationship_summaries: () -> ::Array[Types::AssetRelationshipSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_asset_relationships-instance_method
+      def list_asset_relationships: (
+                                      asset_id: ::String,
+                                      traversal_type: ("PATH_TO_ROOT"),
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListAssetRelationshipsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetRelationshipsResponseSuccess
+
+      interface _ListAssetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssetsResponse]
+        def asset_summaries: () -> ::Array[Types::AssetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_assets-instance_method
+      def list_assets: (
+                         ?next_token: ::String,
+                         ?max_results: ::Integer,
+                         ?asset_model_id: ::String,
+                         ?filter: ("ALL" | "TOP_LEVEL")
+                       ) -> _ListAssetsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssetsResponseSuccess
+
+      interface _ListAssociatedAssetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssociatedAssetsResponse]
+        def asset_summaries: () -> ::Array[Types::AssociatedAssetsSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_associated_assets-instance_method
+      def list_associated_assets: (
+                                    asset_id: ::String,
+                                    ?hierarchy_id: ::String,
+                                    ?traversal_direction: ("PARENT" | "CHILD"),
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListAssociatedAssetsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssociatedAssetsResponseSuccess
+
+      interface _ListBulkImportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBulkImportJobsResponse]
+        def job_summaries: () -> ::Array[Types::JobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_bulk_import_jobs-instance_method
+      def list_bulk_import_jobs: (
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
+                                   ?filter: ("ALL" | "PENDING" | "RUNNING" | "CANCELLED" | "FAILED" | "COMPLETED_WITH_FAILURES" | "COMPLETED")
+                                 ) -> _ListBulkImportJobsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBulkImportJobsResponseSuccess
+
+      interface _ListCompositionRelationshipsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCompositionRelationshipsResponse]
+        def composition_relationship_summaries: () -> ::Array[Types::CompositionRelationshipSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_composition_relationships-instance_method
+      def list_composition_relationships: (
+                                            asset_model_id: ::String,
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _ListCompositionRelationshipsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCompositionRelationshipsResponseSuccess
+
+      interface _ListDashboardsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDashboardsResponse]
+        def dashboard_summaries: () -> ::Array[Types::DashboardSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_dashboards-instance_method
+      def list_dashboards: (
+                             project_id: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListDashboardsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDashboardsResponseSuccess
+
+      interface _ListGatewaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGatewaysResponse]
+        def gateway_summaries: () -> ::Array[Types::GatewaySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_gateways-instance_method
+      def list_gateways: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListGatewaysResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGatewaysResponseSuccess
+
+      interface _ListPortalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPortalsResponse]
+        def portal_summaries: () -> ::Array[Types::PortalSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_portals-instance_method
+      def list_portals: (
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListPortalsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPortalsResponseSuccess
+
+      interface _ListProjectAssetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProjectAssetsResponse]
+        def asset_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_project_assets-instance_method
+      def list_project_assets: (
+                                 project_id: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListProjectAssetsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProjectAssetsResponseSuccess
+
+      interface _ListProjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProjectsResponse]
+        def project_summaries: () -> ::Array[Types::ProjectSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_projects-instance_method
+      def list_projects: (
+                           portal_id: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListProjectsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProjectsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTimeSeriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTimeSeriesResponse]
+        def time_series_summaries: () -> ::Array[Types::TimeSeriesSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#list_time_series-instance_method
+      def list_time_series: (
+                              ?next_token: ::String,
+                              ?max_results: ::Integer,
+                              ?asset_id: ::String,
+                              ?alias_prefix: ::String,
+                              ?time_series_type: ("ASSOCIATED" | "DISASSOCIATED")
+                            ) -> _ListTimeSeriesResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTimeSeriesResponseSuccess
+
+      interface _PutDefaultEncryptionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDefaultEncryptionConfigurationResponse]
+        def encryption_type: () -> ("SITEWISE_DEFAULT_ENCRYPTION" | "KMS_BASED_ENCRYPTION")
+        def kms_key_arn: () -> ::String
+        def configuration_status: () -> Types::ConfigurationStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#put_default_encryption_configuration-instance_method
+      def put_default_encryption_configuration: (
+                                                  encryption_type: ("SITEWISE_DEFAULT_ENCRYPTION" | "KMS_BASED_ENCRYPTION"),
+                                                  ?kms_key_id: ::String
+                                                ) -> _PutDefaultEncryptionConfigurationResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDefaultEncryptionConfigurationResponseSuccess
+
+      interface _PutLoggingOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutLoggingOptionsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#put_logging_options-instance_method
+      def put_logging_options: (
+                                 logging_options: {
+                                   level: ("ERROR" | "INFO" | "OFF")
+                                 }
+                               ) -> _PutLoggingOptionsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLoggingOptionsResponseSuccess
+
+      interface _PutStorageConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutStorageConfigurationResponse]
+        def storage_type: () -> ("SITEWISE_DEFAULT_STORAGE" | "MULTI_LAYER_STORAGE")
+        def multi_layer_storage: () -> Types::MultiLayerStorage
+        def disassociated_data_storage: () -> ("ENABLED" | "DISABLED")
+        def retention_period: () -> Types::RetentionPeriod
+        def configuration_status: () -> Types::ConfigurationStatus
+        def warm_tier: () -> ("ENABLED" | "DISABLED")
+        def warm_tier_retention_period: () -> Types::WarmTierRetentionPeriod
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#put_storage_configuration-instance_method
+      def put_storage_configuration: (
+                                       storage_type: ("SITEWISE_DEFAULT_STORAGE" | "MULTI_LAYER_STORAGE"),
+                                       ?multi_layer_storage: {
+                                         customer_managed_s3_storage: {
+                                           s3_resource_arn: ::String,
+                                           role_arn: ::String
+                                         }
+                                       },
+                                       ?disassociated_data_storage: ("ENABLED" | "DISABLED"),
+                                       ?retention_period: {
+                                         number_of_days: ::Integer?,
+                                         unlimited: bool?
+                                       },
+                                       ?warm_tier: ("ENABLED" | "DISABLED"),
+                                       ?warm_tier_retention_period: {
+                                         number_of_days: ::Integer?,
+                                         unlimited: bool?
+                                       }
+                                     ) -> _PutStorageConfigurationResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutStorageConfigurationResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAccessPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccessPolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_access_policy-instance_method
+      def update_access_policy: (
+                                  access_policy_id: ::String,
+                                  access_policy_identity: {
+                                    user: {
+                                      id: ::String
+                                    }?,
+                                    group: {
+                                      id: ::String
+                                    }?,
+                                    iam_user: {
+                                      arn: ::String
+                                    }?,
+                                    iam_role: {
+                                      arn: ::String
+                                    }?
+                                  },
+                                  access_policy_resource: {
+                                    portal: {
+                                      id: ::String
+                                    }?,
+                                    project: {
+                                      id: ::String
+                                    }?
+                                  },
+                                  access_policy_permission: ("ADMINISTRATOR" | "VIEWER"),
+                                  ?client_token: ::String
+                                ) -> _UpdateAccessPolicyResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccessPolicyResponseSuccess
+
+      interface _UpdateAssetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssetResponse]
+        def asset_status: () -> Types::AssetStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_asset-instance_method
+      def update_asset: (
+                          asset_id: ::String,
+                          asset_name: ::String,
+                          ?client_token: ::String,
+                          ?asset_description: ::String,
+                          ?asset_external_id: ::String
+                        ) -> _UpdateAssetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssetResponseSuccess
+
+      interface _UpdateAssetModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssetModelResponse]
+        def asset_model_status: () -> Types::AssetModelStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_asset_model-instance_method
+      def update_asset_model: (
+                                asset_model_id: ::String,
+                                asset_model_name: ::String,
+                                ?asset_model_description: ::String,
+                                ?asset_model_properties: Array[
+                                  {
+                                    id: ::String?,
+                                    name: ::String,
+                                    data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
+                                    data_type_spec: ::String?,
+                                    unit: ::String?,
+                                    type: {
+                                      attribute: {
+                                        default_value: ::String?
+                                      }?,
+                                      measurement: {
+                                        processing_config: {
+                                          forwarding_config: {
+                                            state: ("DISABLED" | "ENABLED")
+                                          }
+                                        }?
+                                      }?,
+                                      transform: {
+                                        expression: ::String,
+                                        variables: Array[
+                                          {
+                                            name: ::String,
+                                            value: {
+                                              property_id: ::String?,
+                                              hierarchy_id: ::String?,
+                                              property_path: Array[
+                                                {
+                                                  id: ::String?,
+                                                  name: ::String?
+                                                },
+                                              ]?
+                                            }
+                                          },
+                                        ],
+                                        processing_config: {
+                                          compute_location: ("EDGE" | "CLOUD"),
+                                          forwarding_config: {
+                                            state: ("DISABLED" | "ENABLED")
+                                          }?
+                                        }?
+                                      }?,
+                                      metric: {
+                                        expression: ::String,
+                                        variables: Array[
+                                          {
+                                            name: ::String,
+                                            value: {
+                                              property_id: ::String?,
+                                              hierarchy_id: ::String?,
+                                              property_path: Array[
+                                                {
+                                                  id: ::String?,
+                                                  name: ::String?
+                                                },
+                                              ]?
+                                            }
+                                          },
+                                        ],
+                                        window: {
+                                          tumbling: {
+                                            interval: ::String,
+                                            offset: ::String?
+                                          }?
+                                        },
+                                        processing_config: {
+                                          compute_location: ("EDGE" | "CLOUD")
+                                        }?
+                                      }?
+                                    },
+                                    path: Array[
+                                      {
+                                        id: ::String?,
+                                        name: ::String?
+                                      },
+                                    ]?,
+                                    external_id: ::String?
+                                  },
+                                ],
+                                ?asset_model_hierarchies: Array[
+                                  {
+                                    id: ::String?,
+                                    name: ::String,
+                                    child_asset_model_id: ::String,
+                                    external_id: ::String?
+                                  },
+                                ],
+                                ?asset_model_composite_models: Array[
+                                  {
+                                    name: ::String,
+                                    description: ::String?,
+                                    type: ::String,
+                                    properties: Array[
+                                      {
+                                        id: ::String?,
+                                        name: ::String,
+                                        data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
+                                        data_type_spec: ::String?,
+                                        unit: ::String?,
+                                        type: {
+                                          attribute: {
+                                            default_value: ::String?
+                                          }?,
+                                          measurement: {
+                                            processing_config: {
+                                              forwarding_config: {
+                                                state: ("DISABLED" | "ENABLED")
+                                              }
+                                            }?
+                                          }?,
+                                          transform: {
+                                            expression: ::String,
+                                            variables: Array[
+                                              {
+                                                name: ::String,
+                                                value: {
+                                                  property_id: ::String?,
+                                                  hierarchy_id: ::String?,
+                                                  property_path: Array[
+                                                    {
+                                                      id: ::String?,
+                                                      name: ::String?
+                                                    },
+                                                  ]?
+                                                }
+                                              },
+                                            ],
+                                            processing_config: {
+                                              compute_location: ("EDGE" | "CLOUD"),
+                                              forwarding_config: {
+                                                state: ("DISABLED" | "ENABLED")
+                                              }?
+                                            }?
+                                          }?,
+                                          metric: {
+                                            expression: ::String,
+                                            variables: Array[
+                                              {
+                                                name: ::String,
+                                                value: {
+                                                  property_id: ::String?,
+                                                  hierarchy_id: ::String?,
+                                                  property_path: Array[
+                                                    {
+                                                      id: ::String?,
+                                                      name: ::String?
+                                                    },
+                                                  ]?
+                                                }
+                                              },
+                                            ],
+                                            window: {
+                                              tumbling: {
+                                                interval: ::String,
+                                                offset: ::String?
+                                              }?
+                                            },
+                                            processing_config: {
+                                              compute_location: ("EDGE" | "CLOUD")
+                                            }?
+                                          }?
+                                        },
+                                        path: Array[
+                                          {
+                                            id: ::String?,
+                                            name: ::String?
+                                          },
+                                        ]?,
+                                        external_id: ::String?
+                                      },
+                                    ]?,
+                                    id: ::String?,
+                                    external_id: ::String?
+                                  },
+                                ],
+                                ?client_token: ::String,
+                                ?asset_model_external_id: ::String
+                              ) -> _UpdateAssetModelResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssetModelResponseSuccess
+
+      interface _UpdateAssetModelCompositeModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssetModelCompositeModelResponse]
+        def asset_model_composite_model_path: () -> ::Array[Types::AssetModelCompositeModelPathSegment]
+        def asset_model_status: () -> Types::AssetModelStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_asset_model_composite_model-instance_method
+      def update_asset_model_composite_model: (
+                                                asset_model_id: ::String,
+                                                asset_model_composite_model_id: ::String,
+                                                ?asset_model_composite_model_external_id: ::String,
+                                                ?asset_model_composite_model_description: ::String,
+                                                asset_model_composite_model_name: ::String,
+                                                ?client_token: ::String,
+                                                ?asset_model_composite_model_properties: Array[
+                                                  {
+                                                    id: ::String?,
+                                                    name: ::String,
+                                                    data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
+                                                    data_type_spec: ::String?,
+                                                    unit: ::String?,
+                                                    type: {
+                                                      attribute: {
+                                                        default_value: ::String?
+                                                      }?,
+                                                      measurement: {
+                                                        processing_config: {
+                                                          forwarding_config: {
+                                                            state: ("DISABLED" | "ENABLED")
+                                                          }
+                                                        }?
+                                                      }?,
+                                                      transform: {
+                                                        expression: ::String,
+                                                        variables: Array[
+                                                          {
+                                                            name: ::String,
+                                                            value: {
+                                                              property_id: ::String?,
+                                                              hierarchy_id: ::String?,
+                                                              property_path: Array[
+                                                                {
+                                                                  id: ::String?,
+                                                                  name: ::String?
+                                                                },
+                                                              ]?
+                                                            }
+                                                          },
+                                                        ],
+                                                        processing_config: {
+                                                          compute_location: ("EDGE" | "CLOUD"),
+                                                          forwarding_config: {
+                                                            state: ("DISABLED" | "ENABLED")
+                                                          }?
+                                                        }?
+                                                      }?,
+                                                      metric: {
+                                                        expression: ::String,
+                                                        variables: Array[
+                                                          {
+                                                            name: ::String,
+                                                            value: {
+                                                              property_id: ::String?,
+                                                              hierarchy_id: ::String?,
+                                                              property_path: Array[
+                                                                {
+                                                                  id: ::String?,
+                                                                  name: ::String?
+                                                                },
+                                                              ]?
+                                                            }
+                                                          },
+                                                        ],
+                                                        window: {
+                                                          tumbling: {
+                                                            interval: ::String,
+                                                            offset: ::String?
+                                                          }?
+                                                        },
+                                                        processing_config: {
+                                                          compute_location: ("EDGE" | "CLOUD")
+                                                        }?
+                                                      }?
+                                                    },
+                                                    path: Array[
+                                                      {
+                                                        id: ::String?,
+                                                        name: ::String?
+                                                      },
+                                                    ]?,
+                                                    external_id: ::String?
+                                                  },
+                                                ]
+                                              ) -> _UpdateAssetModelCompositeModelResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssetModelCompositeModelResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_asset_property-instance_method
+      def update_asset_property: (
+                                   asset_id: ::String,
+                                   property_id: ::String,
+                                   ?property_alias: ::String,
+                                   ?property_notification_state: ("ENABLED" | "DISABLED"),
+                                   ?client_token: ::String,
+                                   ?property_unit: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateDashboardResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDashboardResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_dashboard-instance_method
+      def update_dashboard: (
+                              dashboard_id: ::String,
+                              dashboard_name: ::String,
+                              ?dashboard_description: ::String,
+                              dashboard_definition: ::String,
+                              ?client_token: ::String
+                            ) -> _UpdateDashboardResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDashboardResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_gateway-instance_method
+      def update_gateway: (
+                            gateway_id: ::String,
+                            gateway_name: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateGatewayCapabilityConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGatewayCapabilityConfigurationResponse]
+        def capability_namespace: () -> ::String
+        def capability_sync_status: () -> ("IN_SYNC" | "OUT_OF_SYNC" | "SYNC_FAILED" | "UNKNOWN")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_gateway_capability_configuration-instance_method
+      def update_gateway_capability_configuration: (
+                                                     gateway_id: ::String,
+                                                     capability_namespace: ::String,
+                                                     capability_configuration: ::String
+                                                   ) -> _UpdateGatewayCapabilityConfigurationResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayCapabilityConfigurationResponseSuccess
+
+      interface _UpdatePortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePortalResponse]
+        def portal_status: () -> Types::PortalStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_portal-instance_method
+      def update_portal: (
+                           portal_id: ::String,
+                           portal_name: ::String,
+                           ?portal_description: ::String,
+                           portal_contact_email: ::String,
+                           ?portal_logo_image: {
+                             id: ::String?,
+                             file: {
+                               data: ::String,
+                               type: ("PNG")
+                             }?
+                           },
+                           role_arn: ::String,
+                           ?client_token: ::String,
+                           ?notification_sender_email: ::String,
+                           ?alarms: {
+                             alarm_role_arn: ::String,
+                             notification_lambda_arn: ::String?
+                           }
+                         ) -> _UpdatePortalResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePortalResponseSuccess
+
+      interface _UpdateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProjectResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_project-instance_method
+      def update_project: (
+                            project_id: ::String,
+                            project_name: ::String,
+                            ?project_description: ::String,
+                            ?client_token: ::String
+                          ) -> _UpdateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#wait_until-instance_method
+      def wait_until: (:asset_active waiter_name, 
+                    asset_id: ::String,
+                    ?exclude_properties: bool
+                  ) -> Client::_DescribeAssetResponseSuccess
+                    | (:asset_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAssetResponseSuccess
+                    | (:asset_model_active waiter_name, 
+                    asset_model_id: ::String,
+                    ?exclude_properties: bool
+                  ) -> Client::_DescribeAssetModelResponseSuccess
+                    | (:asset_model_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAssetModelResponseSuccess
+                    | (:asset_model_not_exists waiter_name, 
+                    asset_model_id: ::String,
+                    ?exclude_properties: bool
+                  ) -> Client::_DescribeAssetModelResponseSuccess
+                    | (:asset_model_not_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAssetModelResponseSuccess
+                    | (:asset_not_exists waiter_name, 
+                    asset_id: ::String,
+                    ?exclude_properties: bool
+                  ) -> Client::_DescribeAssetResponseSuccess
+                    | (:asset_not_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeAssetResponseSuccess
+                    | (:portal_active waiter_name, 
+                    portal_id: ::String
+                  ) -> Client::_DescribePortalResponseSuccess
+                    | (:portal_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribePortalResponseSuccess
+                    | (:portal_not_exists waiter_name, 
+                    portal_id: ::String
+                  ) -> Client::_DescribePortalResponseSuccess
+                    | (:portal_not_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribePortalResponseSuccess
+    end
+  end
+end
+

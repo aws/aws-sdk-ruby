@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2024-02-14)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.102.0 (2024-02-02)
+------------------
+
+* Feature - Any number of users can execute up to 50 concurrent restores (any type of restore) in a given account.
+
+1.101.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2024-01-19)
+------------------
+
+* Feature - This release adds support for including ApproximateCreationDateTimePrecision configurations in EnableKinesisStreamingDestination API, adds the same as an optional field in the response of DescribeKinesisStreamingDestination, and adds support for a new UpdateKinesisStreamingDestination API.
+
+1.99.0 (2024-01-17)
+------------------
+
+* Feature - Updating note for enabling streams for UpdateTable.
+
+1.98.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.97.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.96.0 (2023-10-18)
 ------------------
 

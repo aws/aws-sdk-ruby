@@ -900,6 +900,23 @@ module Aws::EMR
     #   with a maximum of 128 characters, and an optional value string with a
     #   maximum of 256 characters.
     #
+    # @option params [Boolean] :trusted_identity_propagation_enabled
+    #   A Boolean indicating whether to enable Trusted identity propagation
+    #   for the Studio. The default value is `false`.
+    #
+    # @option params [String] :idc_user_assignment
+    #   Specifies whether IAM Identity Center user assignment is `REQUIRED` or
+    #   `OPTIONAL`. If the value is set to `REQUIRED`, users must be
+    #   explicitly assigned to the Studio application to access the Studio.
+    #
+    # @option params [String] :idc_instance_arn
+    #   The ARN of the IAM Identity Center instance to create the Studio
+    #   application.
+    #
+    # @option params [String] :encryption_key_arn
+    #   The KMS key identifier (ARN) used to encrypt Amazon EMR Studio
+    #   workspace and notebook files when backed up to Amazon S3.
+    #
     # @return [Types::CreateStudioOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStudioOutput#studio_id #studio_id} => String
@@ -926,6 +943,10 @@ module Aws::EMR
     #         value: "String",
     #       },
     #     ],
+    #     trusted_identity_propagation_enabled: false,
+    #     idc_user_assignment: "REQUIRED", # accepts REQUIRED, OPTIONAL
+    #     idc_instance_arn: "ArnType",
+    #     encryption_key_arn: "XmlString",
     #   })
     #
     # @example Response structure
@@ -1166,6 +1187,7 @@ module Aws::EMR
     #   resp.cluster.release_label #=> String
     #   resp.cluster.auto_terminate #=> Boolean
     #   resp.cluster.termination_protected #=> Boolean
+    #   resp.cluster.unhealthy_node_replacement #=> Boolean
     #   resp.cluster.visible_to_all_users #=> Boolean
     #   resp.cluster.applications #=> Array
     #   resp.cluster.applications[0].name #=> String
@@ -1203,6 +1225,8 @@ module Aws::EMR
     #   resp.cluster.placement_groups[0].instance_role #=> String, one of "MASTER", "CORE", "TASK"
     #   resp.cluster.placement_groups[0].placement_strategy #=> String, one of "SPREAD", "PARTITION", "CLUSTER", "NONE"
     #   resp.cluster.os_release_label #=> String
+    #   resp.cluster.ebs_root_volume_iops #=> Integer
+    #   resp.cluster.ebs_root_volume_throughput #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1309,6 +1333,7 @@ module Aws::EMR
     #   resp.job_flows[0].instances.placement.availability_zones[0] #=> String
     #   resp.job_flows[0].instances.keep_job_flow_alive_when_no_steps #=> Boolean
     #   resp.job_flows[0].instances.termination_protected #=> Boolean
+    #   resp.job_flows[0].instances.unhealthy_node_replacement #=> Boolean
     #   resp.job_flows[0].instances.hadoop_version #=> String
     #   resp.job_flows[0].steps #=> Array
     #   resp.job_flows[0].steps[0].step_config.name #=> String
@@ -1573,6 +1598,10 @@ module Aws::EMR
     #   resp.studio.tags #=> Array
     #   resp.studio.tags[0].key #=> String
     #   resp.studio.tags[0].value #=> String
+    #   resp.studio.idc_instance_arn #=> String
+    #   resp.studio.trusted_identity_propagation_enabled #=> Boolean
+    #   resp.studio.idc_user_assignment #=> String, one of "REQUIRED", "OPTIONAL"
+    #   resp.studio.encryption_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeStudio AWS API Documentation
     #
@@ -1652,7 +1681,7 @@ module Aws::EMR
     # @option params [required, String] :cluster_id
     #   The unique identifier of the cluster.
     #
-    # @option params [required, String] :execution_role_arn
+    # @option params [String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the runtime role for interactive
     #   workload submission on the cluster. The runtime role can be a
     #   cross-account IAM role. The runtime role ARN is a combination of
@@ -1668,7 +1697,7 @@ module Aws::EMR
     #
     #   resp = client.get_cluster_session_credentials({
     #     cluster_id: "XmlStringMaxLen256", # required
-    #     execution_role_arn: "ArnType", # required
+    #     execution_role_arn: "ArnType",
     #   })
     #
     # @example Response structure
@@ -3340,6 +3369,16 @@ module Aws::EMR
     #   launch RunJobFlow request. If a release is not specified, Amazon EMR
     #   uses the latest validated Amazon Linux release for cluster launch.
     #
+    # @option params [Integer] :ebs_root_volume_iops
+    #   The IOPS, of the Amazon EBS root device volume of the Linux AMI that
+    #   is used for each Amazon EC2 instance. Available in Amazon EMR releases
+    #   6.15.0 and later.
+    #
+    # @option params [Integer] :ebs_root_volume_throughput
+    #   The throughput, in MiB/s, of the Amazon EBS root device volume of the
+    #   Linux AMI that is used for each Amazon EC2 instance. Available in
+    #   Amazon EMR releases 6.15.0 and later.
+    #
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RunJobFlowOutput#job_flow_id #job_flow_id} => String
@@ -3505,6 +3544,7 @@ module Aws::EMR
     #       },
     #       keep_job_flow_alive_when_no_steps: false,
     #       termination_protected: false,
+    #       unhealthy_node_replacement: false,
     #       hadoop_version: "XmlStringMaxLen256",
     #       ec2_subnet_id: "XmlStringMaxLen256",
     #       ec2_subnet_ids: ["XmlStringMaxLen256"],
@@ -3610,6 +3650,8 @@ module Aws::EMR
     #       idle_timeout: 1,
     #     },
     #     os_release_label: "XmlStringMaxLen256",
+    #     ebs_root_volume_iops: 1,
+    #     ebs_root_volume_throughput: 1,
     #   })
     #
     # @example Response structure
@@ -3623,6 +3665,53 @@ module Aws::EMR
     # @param [Hash] params ({})
     def run_job_flow(params = {}, options = {})
       req = build_request(:run_job_flow, params)
+      req.send_request(options)
+    end
+
+    # You can use the `SetKeepJobFlowAliveWhenNoSteps` to configure a
+    # cluster (job flow) to terminate after the step execution, i.e., all
+    # your steps are executed. If you want a transient cluster that shuts
+    # down after the last of the current executing steps are completed, you
+    # can configure `SetKeepJobFlowAliveWhenNoSteps` to false. If you want a
+    # long running cluster, configure `SetKeepJobFlowAliveWhenNoSteps` to
+    # true.
+    #
+    # For more information, see [Managing Cluster Termination][1] in the
+    # *Amazon EMR Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html
+    #
+    # @option params [required, Array<String>] :job_flow_ids
+    #   A list of strings that uniquely identify the clusters to protect. This
+    #   identifier is returned by [RunJobFlow][1] and can also be obtained
+    #   from [DescribeJobFlows][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/emr/latest/APIReference/API_RunJobFlow.html
+    #   [2]: https://docs.aws.amazon.com/emr/latest/APIReference/API_DescribeJobFlows.html
+    #
+    # @option params [required, Boolean] :keep_job_flow_alive_when_no_steps
+    #   A Boolean that indicates whether to terminate the cluster after all
+    #   steps are executed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_keep_job_flow_alive_when_no_steps({
+    #     job_flow_ids: ["XmlString"], # required
+    #     keep_job_flow_alive_when_no_steps: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetKeepJobFlowAliveWhenNoSteps AWS API Documentation
+    #
+    # @overload set_keep_job_flow_alive_when_no_steps(params = {})
+    # @param [Hash] params ({})
+    def set_keep_job_flow_alive_when_no_steps(params = {}, options = {})
+      req = build_request(:set_keep_job_flow_alive_when_no_steps, params)
       req.send_request(options)
     end
 
@@ -3644,7 +3733,7 @@ module Aws::EMR
     # flow by a subsequent call to `SetTerminationProtection` in which you
     # set the value to `false`.
     #
-    # For more information, see[Managing Cluster Termination][1] in the
+    # For more information, see [Managing Cluster Termination][1] in the
     # *Amazon EMR Management Guide*.
     #
     #
@@ -3676,6 +3765,54 @@ module Aws::EMR
     # @param [Hash] params ({})
     def set_termination_protection(params = {}, options = {})
       req = build_request(:set_termination_protection, params)
+      req.send_request(options)
+    end
+
+    # Specify whether to enable unhealthy node replacement, which lets
+    # Amazon EMR gracefully replace core nodes on a cluster if any nodes
+    # become unhealthy. For example, a node becomes unhealthy if disk usage
+    # is above 90%. If unhealthy node replacement is on and
+    # `TerminationProtected` are off, Amazon EMR immediately terminates the
+    # unhealthy core nodes. To use unhealthy node replacement and retain
+    # unhealthy core nodes, use to turn on termination protection. In such
+    # cases, Amazon EMR adds the unhealthy nodes to a denylist, reducing job
+    # interruptions and failures.
+    #
+    # If unhealthy node replacement is on, Amazon EMR notifies YARN and
+    # other applications on the cluster to stop scheduling tasks with these
+    # nodes, moves the data, and then terminates the nodes.
+    #
+    # For more information, see [graceful node replacement][1] in the
+    # *Amazon EMR Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_UnhealthyNodeReplacement.html
+    #
+    # @option params [required, Array<String>] :job_flow_ids
+    #   The list of strings that uniquely identify the clusters for which to
+    #   turn on unhealthy node replacement. You can get these identifiers by
+    #   running the RunJobFlow or the DescribeJobFlows operations.
+    #
+    # @option params [required, Boolean] :unhealthy_node_replacement
+    #   Indicates whether to turn on or turn off graceful unhealthy node
+    #   replacement.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_unhealthy_node_replacement({
+    #     job_flow_ids: ["XmlString"], # required
+    #     unhealthy_node_replacement: false, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetUnhealthyNodeReplacement AWS API Documentation
+    #
+    # @overload set_unhealthy_node_replacement(params = {})
+    # @param [Hash] params ({})
+    def set_unhealthy_node_replacement(params = {}, options = {})
+      req = build_request(:set_unhealthy_node_replacement, params)
       req.send_request(options)
     end
 
@@ -3915,6 +4052,10 @@ module Aws::EMR
     #   The Amazon S3 location to back up Workspaces and notebook files for
     #   the Amazon EMR Studio.
     #
+    # @option params [String] :encryption_key_arn
+    #   The KMS key identifier (ARN) used to encrypt Amazon EMR Studio
+    #   workspace and notebook files when backed up to Amazon S3.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3925,6 +4066,7 @@ module Aws::EMR
     #     description: "XmlStringMaxLen256",
     #     subnet_ids: ["String"],
     #     default_s3_location: "XmlString",
+    #     encryption_key_arn: "XmlString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/UpdateStudio AWS API Documentation
@@ -4005,7 +4147,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

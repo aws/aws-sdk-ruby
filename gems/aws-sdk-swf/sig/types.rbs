@@ -1,0 +1,1223 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SWF
+  module Types
+
+    class ActivityTask
+      attr_accessor task_token: ::String
+      attr_accessor activity_id: ::String
+      attr_accessor started_event_id: ::Integer
+      attr_accessor workflow_execution: Types::WorkflowExecution
+      attr_accessor activity_type: Types::ActivityType
+      attr_accessor input: ::String
+      SENSITIVE: []
+    end
+
+    class ActivityTaskCancelRequestedEventAttributes
+      attr_accessor decision_task_completed_event_id: ::Integer
+      attr_accessor activity_id: ::String
+      SENSITIVE: []
+    end
+
+    class ActivityTaskCanceledEventAttributes
+      attr_accessor details: ::String
+      attr_accessor scheduled_event_id: ::Integer
+      attr_accessor started_event_id: ::Integer
+      attr_accessor latest_cancel_requested_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class ActivityTaskCompletedEventAttributes
+      attr_accessor result: ::String
+      attr_accessor scheduled_event_id: ::Integer
+      attr_accessor started_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class ActivityTaskFailedEventAttributes
+      attr_accessor reason: ::String
+      attr_accessor details: ::String
+      attr_accessor scheduled_event_id: ::Integer
+      attr_accessor started_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class ActivityTaskScheduledEventAttributes
+      attr_accessor activity_type: Types::ActivityType
+      attr_accessor activity_id: ::String
+      attr_accessor input: ::String
+      attr_accessor control: ::String
+      attr_accessor schedule_to_start_timeout: ::String
+      attr_accessor schedule_to_close_timeout: ::String
+      attr_accessor start_to_close_timeout: ::String
+      attr_accessor task_list: Types::TaskList
+      attr_accessor task_priority: ::String
+      attr_accessor decision_task_completed_event_id: ::Integer
+      attr_accessor heartbeat_timeout: ::String
+      SENSITIVE: []
+    end
+
+    class ActivityTaskStartedEventAttributes
+      attr_accessor identity: ::String
+      attr_accessor scheduled_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class ActivityTaskStatus
+      attr_accessor cancel_requested: bool
+      SENSITIVE: []
+    end
+
+    class ActivityTaskTimedOutEventAttributes
+      attr_accessor timeout_type: ("START_TO_CLOSE" | "SCHEDULE_TO_START" | "SCHEDULE_TO_CLOSE" | "HEARTBEAT")
+      attr_accessor scheduled_event_id: ::Integer
+      attr_accessor started_event_id: ::Integer
+      attr_accessor details: ::String
+      SENSITIVE: []
+    end
+
+    class ActivityType
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class ActivityTypeConfiguration
+      attr_accessor default_task_start_to_close_timeout: ::String
+      attr_accessor default_task_heartbeat_timeout: ::String
+      attr_accessor default_task_list: Types::TaskList
+      attr_accessor default_task_priority: ::String
+      attr_accessor default_task_schedule_to_start_timeout: ::String
+      attr_accessor default_task_schedule_to_close_timeout: ::String
+      SENSITIVE: []
+    end
+
+    class ActivityTypeDetail
+      attr_accessor type_info: Types::ActivityTypeInfo
+      attr_accessor configuration: Types::ActivityTypeConfiguration
+      SENSITIVE: []
+    end
+
+    class ActivityTypeInfo
+      attr_accessor activity_type: Types::ActivityType
+      attr_accessor status: ("REGISTERED" | "DEPRECATED")
+      attr_accessor description: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor deprecation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ActivityTypeInfos
+      attr_accessor type_infos: ::Array[Types::ActivityTypeInfo]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class CancelTimerDecisionAttributes
+      attr_accessor timer_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelTimerFailedEventAttributes
+      attr_accessor timer_id: ::String
+      attr_accessor cause: ("TIMER_ID_UNKNOWN" | "OPERATION_NOT_PERMITTED")
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class CancelWorkflowExecutionDecisionAttributes
+      attr_accessor details: ::String
+      SENSITIVE: []
+    end
+
+    class CancelWorkflowExecutionFailedEventAttributes
+      attr_accessor cause: ("UNHANDLED_DECISION" | "OPERATION_NOT_PERMITTED")
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class ChildWorkflowExecutionCanceledEventAttributes
+      attr_accessor workflow_execution: Types::WorkflowExecution
+      attr_accessor workflow_type: Types::WorkflowType
+      attr_accessor details: ::String
+      attr_accessor initiated_event_id: ::Integer
+      attr_accessor started_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class ChildWorkflowExecutionCompletedEventAttributes
+      attr_accessor workflow_execution: Types::WorkflowExecution
+      attr_accessor workflow_type: Types::WorkflowType
+      attr_accessor result: ::String
+      attr_accessor initiated_event_id: ::Integer
+      attr_accessor started_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class ChildWorkflowExecutionFailedEventAttributes
+      attr_accessor workflow_execution: Types::WorkflowExecution
+      attr_accessor workflow_type: Types::WorkflowType
+      attr_accessor reason: ::String
+      attr_accessor details: ::String
+      attr_accessor initiated_event_id: ::Integer
+      attr_accessor started_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class ChildWorkflowExecutionStartedEventAttributes
+      attr_accessor workflow_execution: Types::WorkflowExecution
+      attr_accessor workflow_type: Types::WorkflowType
+      attr_accessor initiated_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class ChildWorkflowExecutionTerminatedEventAttributes
+      attr_accessor workflow_execution: Types::WorkflowExecution
+      attr_accessor workflow_type: Types::WorkflowType
+      attr_accessor initiated_event_id: ::Integer
+      attr_accessor started_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class ChildWorkflowExecutionTimedOutEventAttributes
+      attr_accessor workflow_execution: Types::WorkflowExecution
+      attr_accessor workflow_type: Types::WorkflowType
+      attr_accessor timeout_type: ("START_TO_CLOSE")
+      attr_accessor initiated_event_id: ::Integer
+      attr_accessor started_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class CloseStatusFilter
+      attr_accessor status: ("COMPLETED" | "FAILED" | "CANCELED" | "TERMINATED" | "CONTINUED_AS_NEW" | "TIMED_OUT")
+      SENSITIVE: []
+    end
+
+    class CompleteWorkflowExecutionDecisionAttributes
+      attr_accessor result: ::String
+      SENSITIVE: []
+    end
+
+    class CompleteWorkflowExecutionFailedEventAttributes
+      attr_accessor cause: ("UNHANDLED_DECISION" | "OPERATION_NOT_PERMITTED")
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class ContinueAsNewWorkflowExecutionDecisionAttributes
+      attr_accessor input: ::String
+      attr_accessor execution_start_to_close_timeout: ::String
+      attr_accessor task_list: Types::TaskList
+      attr_accessor task_priority: ::String
+      attr_accessor task_start_to_close_timeout: ::String
+      attr_accessor child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON")
+      attr_accessor tag_list: ::Array[::String]
+      attr_accessor workflow_type_version: ::String
+      attr_accessor lambda_role: ::String
+      SENSITIVE: []
+    end
+
+    class ContinueAsNewWorkflowExecutionFailedEventAttributes
+      attr_accessor cause: ("UNHANDLED_DECISION" | "WORKFLOW_TYPE_DEPRECATED" | "WORKFLOW_TYPE_DOES_NOT_EXIST" | "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED" | "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED" | "DEFAULT_TASK_LIST_UNDEFINED" | "DEFAULT_CHILD_POLICY_UNDEFINED" | "CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED" | "OPERATION_NOT_PERMITTED")
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class CountClosedWorkflowExecutionsInput
+      attr_accessor domain: ::String
+      attr_accessor start_time_filter: Types::ExecutionTimeFilter
+      attr_accessor close_time_filter: Types::ExecutionTimeFilter
+      attr_accessor execution_filter: Types::WorkflowExecutionFilter
+      attr_accessor type_filter: Types::WorkflowTypeFilter
+      attr_accessor tag_filter: Types::TagFilter
+      attr_accessor close_status_filter: Types::CloseStatusFilter
+      SENSITIVE: []
+    end
+
+    class CountOpenWorkflowExecutionsInput
+      attr_accessor domain: ::String
+      attr_accessor start_time_filter: Types::ExecutionTimeFilter
+      attr_accessor type_filter: Types::WorkflowTypeFilter
+      attr_accessor tag_filter: Types::TagFilter
+      attr_accessor execution_filter: Types::WorkflowExecutionFilter
+      SENSITIVE: []
+    end
+
+    class CountPendingActivityTasksInput
+      attr_accessor domain: ::String
+      attr_accessor task_list: Types::TaskList
+      SENSITIVE: []
+    end
+
+    class CountPendingDecisionTasksInput
+      attr_accessor domain: ::String
+      attr_accessor task_list: Types::TaskList
+      SENSITIVE: []
+    end
+
+    class Decision
+      attr_accessor decision_type: ("ScheduleActivityTask" | "RequestCancelActivityTask" | "CompleteWorkflowExecution" | "FailWorkflowExecution" | "CancelWorkflowExecution" | "ContinueAsNewWorkflowExecution" | "RecordMarker" | "StartTimer" | "CancelTimer" | "SignalExternalWorkflowExecution" | "RequestCancelExternalWorkflowExecution" | "StartChildWorkflowExecution" | "ScheduleLambdaFunction")
+      attr_accessor schedule_activity_task_decision_attributes: Types::ScheduleActivityTaskDecisionAttributes
+      attr_accessor request_cancel_activity_task_decision_attributes: Types::RequestCancelActivityTaskDecisionAttributes
+      attr_accessor complete_workflow_execution_decision_attributes: Types::CompleteWorkflowExecutionDecisionAttributes
+      attr_accessor fail_workflow_execution_decision_attributes: Types::FailWorkflowExecutionDecisionAttributes
+      attr_accessor cancel_workflow_execution_decision_attributes: Types::CancelWorkflowExecutionDecisionAttributes
+      attr_accessor continue_as_new_workflow_execution_decision_attributes: Types::ContinueAsNewWorkflowExecutionDecisionAttributes
+      attr_accessor record_marker_decision_attributes: Types::RecordMarkerDecisionAttributes
+      attr_accessor start_timer_decision_attributes: Types::StartTimerDecisionAttributes
+      attr_accessor cancel_timer_decision_attributes: Types::CancelTimerDecisionAttributes
+      attr_accessor signal_external_workflow_execution_decision_attributes: Types::SignalExternalWorkflowExecutionDecisionAttributes
+      attr_accessor request_cancel_external_workflow_execution_decision_attributes: Types::RequestCancelExternalWorkflowExecutionDecisionAttributes
+      attr_accessor start_child_workflow_execution_decision_attributes: Types::StartChildWorkflowExecutionDecisionAttributes
+      attr_accessor schedule_lambda_function_decision_attributes: Types::ScheduleLambdaFunctionDecisionAttributes
+      SENSITIVE: []
+    end
+
+    class DecisionTask
+      attr_accessor task_token: ::String
+      attr_accessor started_event_id: ::Integer
+      attr_accessor workflow_execution: Types::WorkflowExecution
+      attr_accessor workflow_type: Types::WorkflowType
+      attr_accessor events: ::Array[Types::HistoryEvent]
+      attr_accessor next_page_token: ::String
+      attr_accessor previous_started_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class DecisionTaskCompletedEventAttributes
+      attr_accessor execution_context: ::String
+      attr_accessor scheduled_event_id: ::Integer
+      attr_accessor started_event_id: ::Integer
+      attr_accessor task_list: Types::TaskList
+      attr_accessor task_list_schedule_to_start_timeout: ::String
+      SENSITIVE: []
+    end
+
+    class DecisionTaskScheduledEventAttributes
+      attr_accessor task_list: Types::TaskList
+      attr_accessor task_priority: ::String
+      attr_accessor start_to_close_timeout: ::String
+      attr_accessor schedule_to_start_timeout: ::String
+      SENSITIVE: []
+    end
+
+    class DecisionTaskStartedEventAttributes
+      attr_accessor identity: ::String
+      attr_accessor scheduled_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class DecisionTaskTimedOutEventAttributes
+      attr_accessor timeout_type: ("START_TO_CLOSE" | "SCHEDULE_TO_START")
+      attr_accessor scheduled_event_id: ::Integer
+      attr_accessor started_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class DefaultUndefinedFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeprecateActivityTypeInput
+      attr_accessor domain: ::String
+      attr_accessor activity_type: Types::ActivityType
+      SENSITIVE: []
+    end
+
+    class DeprecateDomainInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeprecateWorkflowTypeInput
+      attr_accessor domain: ::String
+      attr_accessor workflow_type: Types::WorkflowType
+      SENSITIVE: []
+    end
+
+    class DescribeActivityTypeInput
+      attr_accessor domain: ::String
+      attr_accessor activity_type: Types::ActivityType
+      SENSITIVE: []
+    end
+
+    class DescribeDomainInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorkflowExecutionInput
+      attr_accessor domain: ::String
+      attr_accessor execution: Types::WorkflowExecution
+      SENSITIVE: []
+    end
+
+    class DescribeWorkflowTypeInput
+      attr_accessor domain: ::String
+      attr_accessor workflow_type: Types::WorkflowType
+      SENSITIVE: []
+    end
+
+    class DomainAlreadyExistsFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DomainConfiguration
+      attr_accessor workflow_execution_retention_period_in_days: ::String
+      SENSITIVE: []
+    end
+
+    class DomainDeprecatedFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DomainDetail
+      attr_accessor domain_info: Types::DomainInfo
+      attr_accessor configuration: Types::DomainConfiguration
+      SENSITIVE: []
+    end
+
+    class DomainInfo
+      attr_accessor name: ::String
+      attr_accessor status: ("REGISTERED" | "DEPRECATED")
+      attr_accessor description: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DomainInfos
+      attr_accessor domain_infos: ::Array[Types::DomainInfo]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class ExecutionTimeFilter
+      attr_accessor oldest_date: ::Time
+      attr_accessor latest_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ExternalWorkflowExecutionCancelRequestedEventAttributes
+      attr_accessor workflow_execution: Types::WorkflowExecution
+      attr_accessor initiated_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExternalWorkflowExecutionSignaledEventAttributes
+      attr_accessor workflow_execution: Types::WorkflowExecution
+      attr_accessor initiated_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class FailWorkflowExecutionDecisionAttributes
+      attr_accessor reason: ::String
+      attr_accessor details: ::String
+      SENSITIVE: []
+    end
+
+    class FailWorkflowExecutionFailedEventAttributes
+      attr_accessor cause: ("UNHANDLED_DECISION" | "OPERATION_NOT_PERMITTED")
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetWorkflowExecutionHistoryInput
+      attr_accessor domain: ::String
+      attr_accessor execution: Types::WorkflowExecution
+      attr_accessor next_page_token: ::String
+      attr_accessor maximum_page_size: ::Integer
+      attr_accessor reverse_order: bool
+      SENSITIVE: []
+    end
+
+    class History
+      attr_accessor events: ::Array[Types::HistoryEvent]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class HistoryEvent
+      attr_accessor event_timestamp: ::Time
+      attr_accessor event_type: ("WorkflowExecutionStarted" | "WorkflowExecutionCancelRequested" | "WorkflowExecutionCompleted" | "CompleteWorkflowExecutionFailed" | "WorkflowExecutionFailed" | "FailWorkflowExecutionFailed" | "WorkflowExecutionTimedOut" | "WorkflowExecutionCanceled" | "CancelWorkflowExecutionFailed" | "WorkflowExecutionContinuedAsNew" | "ContinueAsNewWorkflowExecutionFailed" | "WorkflowExecutionTerminated" | "DecisionTaskScheduled" | "DecisionTaskStarted" | "DecisionTaskCompleted" | "DecisionTaskTimedOut" | "ActivityTaskScheduled" | "ScheduleActivityTaskFailed" | "ActivityTaskStarted" | "ActivityTaskCompleted" | "ActivityTaskFailed" | "ActivityTaskTimedOut" | "ActivityTaskCanceled" | "ActivityTaskCancelRequested" | "RequestCancelActivityTaskFailed" | "WorkflowExecutionSignaled" | "MarkerRecorded" | "RecordMarkerFailed" | "TimerStarted" | "StartTimerFailed" | "TimerFired" | "TimerCanceled" | "CancelTimerFailed" | "StartChildWorkflowExecutionInitiated" | "StartChildWorkflowExecutionFailed" | "ChildWorkflowExecutionStarted" | "ChildWorkflowExecutionCompleted" | "ChildWorkflowExecutionFailed" | "ChildWorkflowExecutionTimedOut" | "ChildWorkflowExecutionCanceled" | "ChildWorkflowExecutionTerminated" | "SignalExternalWorkflowExecutionInitiated" | "SignalExternalWorkflowExecutionFailed" | "ExternalWorkflowExecutionSignaled" | "RequestCancelExternalWorkflowExecutionInitiated" | "RequestCancelExternalWorkflowExecutionFailed" | "ExternalWorkflowExecutionCancelRequested" | "LambdaFunctionScheduled" | "LambdaFunctionStarted" | "LambdaFunctionCompleted" | "LambdaFunctionFailed" | "LambdaFunctionTimedOut" | "ScheduleLambdaFunctionFailed" | "StartLambdaFunctionFailed")
+      attr_accessor event_id: ::Integer
+      attr_accessor workflow_execution_started_event_attributes: Types::WorkflowExecutionStartedEventAttributes
+      attr_accessor workflow_execution_completed_event_attributes: Types::WorkflowExecutionCompletedEventAttributes
+      attr_accessor complete_workflow_execution_failed_event_attributes: Types::CompleteWorkflowExecutionFailedEventAttributes
+      attr_accessor workflow_execution_failed_event_attributes: Types::WorkflowExecutionFailedEventAttributes
+      attr_accessor fail_workflow_execution_failed_event_attributes: Types::FailWorkflowExecutionFailedEventAttributes
+      attr_accessor workflow_execution_timed_out_event_attributes: Types::WorkflowExecutionTimedOutEventAttributes
+      attr_accessor workflow_execution_canceled_event_attributes: Types::WorkflowExecutionCanceledEventAttributes
+      attr_accessor cancel_workflow_execution_failed_event_attributes: Types::CancelWorkflowExecutionFailedEventAttributes
+      attr_accessor workflow_execution_continued_as_new_event_attributes: Types::WorkflowExecutionContinuedAsNewEventAttributes
+      attr_accessor continue_as_new_workflow_execution_failed_event_attributes: Types::ContinueAsNewWorkflowExecutionFailedEventAttributes
+      attr_accessor workflow_execution_terminated_event_attributes: Types::WorkflowExecutionTerminatedEventAttributes
+      attr_accessor workflow_execution_cancel_requested_event_attributes: Types::WorkflowExecutionCancelRequestedEventAttributes
+      attr_accessor decision_task_scheduled_event_attributes: Types::DecisionTaskScheduledEventAttributes
+      attr_accessor decision_task_started_event_attributes: Types::DecisionTaskStartedEventAttributes
+      attr_accessor decision_task_completed_event_attributes: Types::DecisionTaskCompletedEventAttributes
+      attr_accessor decision_task_timed_out_event_attributes: Types::DecisionTaskTimedOutEventAttributes
+      attr_accessor activity_task_scheduled_event_attributes: Types::ActivityTaskScheduledEventAttributes
+      attr_accessor activity_task_started_event_attributes: Types::ActivityTaskStartedEventAttributes
+      attr_accessor activity_task_completed_event_attributes: Types::ActivityTaskCompletedEventAttributes
+      attr_accessor activity_task_failed_event_attributes: Types::ActivityTaskFailedEventAttributes
+      attr_accessor activity_task_timed_out_event_attributes: Types::ActivityTaskTimedOutEventAttributes
+      attr_accessor activity_task_canceled_event_attributes: Types::ActivityTaskCanceledEventAttributes
+      attr_accessor activity_task_cancel_requested_event_attributes: Types::ActivityTaskCancelRequestedEventAttributes
+      attr_accessor workflow_execution_signaled_event_attributes: Types::WorkflowExecutionSignaledEventAttributes
+      attr_accessor marker_recorded_event_attributes: Types::MarkerRecordedEventAttributes
+      attr_accessor record_marker_failed_event_attributes: Types::RecordMarkerFailedEventAttributes
+      attr_accessor timer_started_event_attributes: Types::TimerStartedEventAttributes
+      attr_accessor timer_fired_event_attributes: Types::TimerFiredEventAttributes
+      attr_accessor timer_canceled_event_attributes: Types::TimerCanceledEventAttributes
+      attr_accessor start_child_workflow_execution_initiated_event_attributes: Types::StartChildWorkflowExecutionInitiatedEventAttributes
+      attr_accessor child_workflow_execution_started_event_attributes: Types::ChildWorkflowExecutionStartedEventAttributes
+      attr_accessor child_workflow_execution_completed_event_attributes: Types::ChildWorkflowExecutionCompletedEventAttributes
+      attr_accessor child_workflow_execution_failed_event_attributes: Types::ChildWorkflowExecutionFailedEventAttributes
+      attr_accessor child_workflow_execution_timed_out_event_attributes: Types::ChildWorkflowExecutionTimedOutEventAttributes
+      attr_accessor child_workflow_execution_canceled_event_attributes: Types::ChildWorkflowExecutionCanceledEventAttributes
+      attr_accessor child_workflow_execution_terminated_event_attributes: Types::ChildWorkflowExecutionTerminatedEventAttributes
+      attr_accessor signal_external_workflow_execution_initiated_event_attributes: Types::SignalExternalWorkflowExecutionInitiatedEventAttributes
+      attr_accessor external_workflow_execution_signaled_event_attributes: Types::ExternalWorkflowExecutionSignaledEventAttributes
+      attr_accessor signal_external_workflow_execution_failed_event_attributes: Types::SignalExternalWorkflowExecutionFailedEventAttributes
+      attr_accessor external_workflow_execution_cancel_requested_event_attributes: Types::ExternalWorkflowExecutionCancelRequestedEventAttributes
+      attr_accessor request_cancel_external_workflow_execution_initiated_event_attributes: Types::RequestCancelExternalWorkflowExecutionInitiatedEventAttributes
+      attr_accessor request_cancel_external_workflow_execution_failed_event_attributes: Types::RequestCancelExternalWorkflowExecutionFailedEventAttributes
+      attr_accessor schedule_activity_task_failed_event_attributes: Types::ScheduleActivityTaskFailedEventAttributes
+      attr_accessor request_cancel_activity_task_failed_event_attributes: Types::RequestCancelActivityTaskFailedEventAttributes
+      attr_accessor start_timer_failed_event_attributes: Types::StartTimerFailedEventAttributes
+      attr_accessor cancel_timer_failed_event_attributes: Types::CancelTimerFailedEventAttributes
+      attr_accessor start_child_workflow_execution_failed_event_attributes: Types::StartChildWorkflowExecutionFailedEventAttributes
+      attr_accessor lambda_function_scheduled_event_attributes: Types::LambdaFunctionScheduledEventAttributes
+      attr_accessor lambda_function_started_event_attributes: Types::LambdaFunctionStartedEventAttributes
+      attr_accessor lambda_function_completed_event_attributes: Types::LambdaFunctionCompletedEventAttributes
+      attr_accessor lambda_function_failed_event_attributes: Types::LambdaFunctionFailedEventAttributes
+      attr_accessor lambda_function_timed_out_event_attributes: Types::LambdaFunctionTimedOutEventAttributes
+      attr_accessor schedule_lambda_function_failed_event_attributes: Types::ScheduleLambdaFunctionFailedEventAttributes
+      attr_accessor start_lambda_function_failed_event_attributes: Types::StartLambdaFunctionFailedEventAttributes
+      SENSITIVE: []
+    end
+
+    class LambdaFunctionCompletedEventAttributes
+      attr_accessor scheduled_event_id: ::Integer
+      attr_accessor started_event_id: ::Integer
+      attr_accessor result: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaFunctionFailedEventAttributes
+      attr_accessor scheduled_event_id: ::Integer
+      attr_accessor started_event_id: ::Integer
+      attr_accessor reason: ::String
+      attr_accessor details: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaFunctionScheduledEventAttributes
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor control: ::String
+      attr_accessor input: ::String
+      attr_accessor start_to_close_timeout: ::String
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class LambdaFunctionStartedEventAttributes
+      attr_accessor scheduled_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class LambdaFunctionTimedOutEventAttributes
+      attr_accessor scheduled_event_id: ::Integer
+      attr_accessor started_event_id: ::Integer
+      attr_accessor timeout_type: ("START_TO_CLOSE")
+      SENSITIVE: []
+    end
+
+    class LimitExceededFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListActivityTypesInput
+      attr_accessor domain: ::String
+      attr_accessor name: ::String
+      attr_accessor registration_status: ("REGISTERED" | "DEPRECATED")
+      attr_accessor next_page_token: ::String
+      attr_accessor maximum_page_size: ::Integer
+      attr_accessor reverse_order: bool
+      SENSITIVE: []
+    end
+
+    class ListClosedWorkflowExecutionsInput
+      attr_accessor domain: ::String
+      attr_accessor start_time_filter: Types::ExecutionTimeFilter
+      attr_accessor close_time_filter: Types::ExecutionTimeFilter
+      attr_accessor execution_filter: Types::WorkflowExecutionFilter
+      attr_accessor close_status_filter: Types::CloseStatusFilter
+      attr_accessor type_filter: Types::WorkflowTypeFilter
+      attr_accessor tag_filter: Types::TagFilter
+      attr_accessor next_page_token: ::String
+      attr_accessor maximum_page_size: ::Integer
+      attr_accessor reverse_order: bool
+      SENSITIVE: []
+    end
+
+    class ListDomainsInput
+      attr_accessor next_page_token: ::String
+      attr_accessor registration_status: ("REGISTERED" | "DEPRECATED")
+      attr_accessor maximum_page_size: ::Integer
+      attr_accessor reverse_order: bool
+      SENSITIVE: []
+    end
+
+    class ListOpenWorkflowExecutionsInput
+      attr_accessor domain: ::String
+      attr_accessor start_time_filter: Types::ExecutionTimeFilter
+      attr_accessor type_filter: Types::WorkflowTypeFilter
+      attr_accessor tag_filter: Types::TagFilter
+      attr_accessor next_page_token: ::String
+      attr_accessor maximum_page_size: ::Integer
+      attr_accessor reverse_order: bool
+      attr_accessor execution_filter: Types::WorkflowExecutionFilter
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
+    class ListWorkflowTypesInput
+      attr_accessor domain: ::String
+      attr_accessor name: ::String
+      attr_accessor registration_status: ("REGISTERED" | "DEPRECATED")
+      attr_accessor next_page_token: ::String
+      attr_accessor maximum_page_size: ::Integer
+      attr_accessor reverse_order: bool
+      SENSITIVE: []
+    end
+
+    class MarkerRecordedEventAttributes
+      attr_accessor marker_name: ::String
+      attr_accessor details: ::String
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class OperationNotPermittedFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PendingTaskCount
+      attr_accessor count: ::Integer
+      attr_accessor truncated: bool
+      SENSITIVE: []
+    end
+
+    class PollForActivityTaskInput
+      attr_accessor domain: ::String
+      attr_accessor task_list: Types::TaskList
+      attr_accessor identity: ::String
+      SENSITIVE: []
+    end
+
+    class PollForDecisionTaskInput
+      attr_accessor domain: ::String
+      attr_accessor task_list: Types::TaskList
+      attr_accessor identity: ::String
+      attr_accessor next_page_token: ::String
+      attr_accessor maximum_page_size: ::Integer
+      attr_accessor reverse_order: bool
+      attr_accessor start_at_previous_started_event: bool
+      SENSITIVE: []
+    end
+
+    class RecordActivityTaskHeartbeatInput
+      attr_accessor task_token: ::String
+      attr_accessor details: ::String
+      SENSITIVE: []
+    end
+
+    class RecordMarkerDecisionAttributes
+      attr_accessor marker_name: ::String
+      attr_accessor details: ::String
+      SENSITIVE: []
+    end
+
+    class RecordMarkerFailedEventAttributes
+      attr_accessor marker_name: ::String
+      attr_accessor cause: ("OPERATION_NOT_PERMITTED")
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class RegisterActivityTypeInput
+      attr_accessor domain: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor description: ::String
+      attr_accessor default_task_start_to_close_timeout: ::String
+      attr_accessor default_task_heartbeat_timeout: ::String
+      attr_accessor default_task_list: Types::TaskList
+      attr_accessor default_task_priority: ::String
+      attr_accessor default_task_schedule_to_start_timeout: ::String
+      attr_accessor default_task_schedule_to_close_timeout: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterDomainInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor workflow_execution_retention_period_in_days: ::String
+      attr_accessor tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
+    class RegisterWorkflowTypeInput
+      attr_accessor domain: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor description: ::String
+      attr_accessor default_task_start_to_close_timeout: ::String
+      attr_accessor default_execution_start_to_close_timeout: ::String
+      attr_accessor default_task_list: Types::TaskList
+      attr_accessor default_task_priority: ::String
+      attr_accessor default_child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON")
+      attr_accessor default_lambda_role: ::String
+      SENSITIVE: []
+    end
+
+    class RequestCancelActivityTaskDecisionAttributes
+      attr_accessor activity_id: ::String
+      SENSITIVE: []
+    end
+
+    class RequestCancelActivityTaskFailedEventAttributes
+      attr_accessor activity_id: ::String
+      attr_accessor cause: ("ACTIVITY_ID_UNKNOWN" | "OPERATION_NOT_PERMITTED")
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class RequestCancelExternalWorkflowExecutionDecisionAttributes
+      attr_accessor workflow_id: ::String
+      attr_accessor run_id: ::String
+      attr_accessor control: ::String
+      SENSITIVE: []
+    end
+
+    class RequestCancelExternalWorkflowExecutionFailedEventAttributes
+      attr_accessor workflow_id: ::String
+      attr_accessor run_id: ::String
+      attr_accessor cause: ("UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION" | "REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED" | "OPERATION_NOT_PERMITTED")
+      attr_accessor initiated_event_id: ::Integer
+      attr_accessor decision_task_completed_event_id: ::Integer
+      attr_accessor control: ::String
+      SENSITIVE: []
+    end
+
+    class RequestCancelExternalWorkflowExecutionInitiatedEventAttributes
+      attr_accessor workflow_id: ::String
+      attr_accessor run_id: ::String
+      attr_accessor decision_task_completed_event_id: ::Integer
+      attr_accessor control: ::String
+      SENSITIVE: []
+    end
+
+    class RequestCancelWorkflowExecutionInput
+      attr_accessor domain: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceTag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class RespondActivityTaskCanceledInput
+      attr_accessor task_token: ::String
+      attr_accessor details: ::String
+      SENSITIVE: []
+    end
+
+    class RespondActivityTaskCompletedInput
+      attr_accessor task_token: ::String
+      attr_accessor result: ::String
+      SENSITIVE: []
+    end
+
+    class RespondActivityTaskFailedInput
+      attr_accessor task_token: ::String
+      attr_accessor reason: ::String
+      attr_accessor details: ::String
+      SENSITIVE: []
+    end
+
+    class RespondDecisionTaskCompletedInput
+      attr_accessor task_token: ::String
+      attr_accessor decisions: ::Array[Types::Decision]
+      attr_accessor execution_context: ::String
+      attr_accessor task_list: Types::TaskList
+      attr_accessor task_list_schedule_to_start_timeout: ::String
+      SENSITIVE: []
+    end
+
+    class Run
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduleActivityTaskDecisionAttributes
+      attr_accessor activity_type: Types::ActivityType
+      attr_accessor activity_id: ::String
+      attr_accessor control: ::String
+      attr_accessor input: ::String
+      attr_accessor schedule_to_close_timeout: ::String
+      attr_accessor task_list: Types::TaskList
+      attr_accessor task_priority: ::String
+      attr_accessor schedule_to_start_timeout: ::String
+      attr_accessor start_to_close_timeout: ::String
+      attr_accessor heartbeat_timeout: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduleActivityTaskFailedEventAttributes
+      attr_accessor activity_type: Types::ActivityType
+      attr_accessor activity_id: ::String
+      attr_accessor cause: ("ACTIVITY_TYPE_DEPRECATED" | "ACTIVITY_TYPE_DOES_NOT_EXIST" | "ACTIVITY_ID_ALREADY_IN_USE" | "OPEN_ACTIVITIES_LIMIT_EXCEEDED" | "ACTIVITY_CREATION_RATE_EXCEEDED" | "DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED" | "DEFAULT_TASK_LIST_UNDEFINED" | "DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED" | "DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED" | "DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED" | "OPERATION_NOT_PERMITTED")
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScheduleLambdaFunctionDecisionAttributes
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor control: ::String
+      attr_accessor input: ::String
+      attr_accessor start_to_close_timeout: ::String
+      SENSITIVE: []
+    end
+
+    class ScheduleLambdaFunctionFailedEventAttributes
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor cause: ("ID_ALREADY_IN_USE" | "OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED" | "LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED" | "LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION")
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class SignalExternalWorkflowExecutionDecisionAttributes
+      attr_accessor workflow_id: ::String
+      attr_accessor run_id: ::String
+      attr_accessor signal_name: ::String
+      attr_accessor input: ::String
+      attr_accessor control: ::String
+      SENSITIVE: []
+    end
+
+    class SignalExternalWorkflowExecutionFailedEventAttributes
+      attr_accessor workflow_id: ::String
+      attr_accessor run_id: ::String
+      attr_accessor cause: ("UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION" | "SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED" | "OPERATION_NOT_PERMITTED")
+      attr_accessor initiated_event_id: ::Integer
+      attr_accessor decision_task_completed_event_id: ::Integer
+      attr_accessor control: ::String
+      SENSITIVE: []
+    end
+
+    class SignalExternalWorkflowExecutionInitiatedEventAttributes
+      attr_accessor workflow_id: ::String
+      attr_accessor run_id: ::String
+      attr_accessor signal_name: ::String
+      attr_accessor input: ::String
+      attr_accessor decision_task_completed_event_id: ::Integer
+      attr_accessor control: ::String
+      SENSITIVE: []
+    end
+
+    class SignalWorkflowExecutionInput
+      attr_accessor domain: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor run_id: ::String
+      attr_accessor signal_name: ::String
+      attr_accessor input: ::String
+      SENSITIVE: []
+    end
+
+    class StartChildWorkflowExecutionDecisionAttributes
+      attr_accessor workflow_type: Types::WorkflowType
+      attr_accessor workflow_id: ::String
+      attr_accessor control: ::String
+      attr_accessor input: ::String
+      attr_accessor execution_start_to_close_timeout: ::String
+      attr_accessor task_list: Types::TaskList
+      attr_accessor task_priority: ::String
+      attr_accessor task_start_to_close_timeout: ::String
+      attr_accessor child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON")
+      attr_accessor tag_list: ::Array[::String]
+      attr_accessor lambda_role: ::String
+      SENSITIVE: []
+    end
+
+    class StartChildWorkflowExecutionFailedEventAttributes
+      attr_accessor workflow_type: Types::WorkflowType
+      attr_accessor cause: ("WORKFLOW_TYPE_DOES_NOT_EXIST" | "WORKFLOW_TYPE_DEPRECATED" | "OPEN_CHILDREN_LIMIT_EXCEEDED" | "OPEN_WORKFLOWS_LIMIT_EXCEEDED" | "CHILD_CREATION_RATE_EXCEEDED" | "WORKFLOW_ALREADY_RUNNING" | "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED" | "DEFAULT_TASK_LIST_UNDEFINED" | "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED" | "DEFAULT_CHILD_POLICY_UNDEFINED" | "OPERATION_NOT_PERMITTED")
+      attr_accessor workflow_id: ::String
+      attr_accessor initiated_event_id: ::Integer
+      attr_accessor decision_task_completed_event_id: ::Integer
+      attr_accessor control: ::String
+      SENSITIVE: []
+    end
+
+    class StartChildWorkflowExecutionInitiatedEventAttributes
+      attr_accessor workflow_id: ::String
+      attr_accessor workflow_type: Types::WorkflowType
+      attr_accessor control: ::String
+      attr_accessor input: ::String
+      attr_accessor execution_start_to_close_timeout: ::String
+      attr_accessor task_list: Types::TaskList
+      attr_accessor task_priority: ::String
+      attr_accessor decision_task_completed_event_id: ::Integer
+      attr_accessor child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON")
+      attr_accessor task_start_to_close_timeout: ::String
+      attr_accessor tag_list: ::Array[::String]
+      attr_accessor lambda_role: ::String
+      SENSITIVE: []
+    end
+
+    class StartLambdaFunctionFailedEventAttributes
+      attr_accessor scheduled_event_id: ::Integer
+      attr_accessor cause: ("ASSUME_ROLE_FAILED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartTimerDecisionAttributes
+      attr_accessor timer_id: ::String
+      attr_accessor control: ::String
+      attr_accessor start_to_fire_timeout: ::String
+      SENSITIVE: []
+    end
+
+    class StartTimerFailedEventAttributes
+      attr_accessor timer_id: ::String
+      attr_accessor cause: ("TIMER_ID_ALREADY_IN_USE" | "OPEN_TIMERS_LIMIT_EXCEEDED" | "TIMER_CREATION_RATE_EXCEEDED" | "OPERATION_NOT_PERMITTED")
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartWorkflowExecutionInput
+      attr_accessor domain: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor workflow_type: Types::WorkflowType
+      attr_accessor task_list: Types::TaskList
+      attr_accessor task_priority: ::String
+      attr_accessor input: ::String
+      attr_accessor execution_start_to_close_timeout: ::String
+      attr_accessor tag_list: ::Array[::String]
+      attr_accessor task_start_to_close_timeout: ::String
+      attr_accessor child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON")
+      attr_accessor lambda_role: ::String
+      SENSITIVE: []
+    end
+
+    class TagFilter
+      attr_accessor tag: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
+    class TaskList
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateWorkflowExecutionInput
+      attr_accessor domain: ::String
+      attr_accessor workflow_id: ::String
+      attr_accessor run_id: ::String
+      attr_accessor reason: ::String
+      attr_accessor details: ::String
+      attr_accessor child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON")
+      SENSITIVE: []
+    end
+
+    class TimerCanceledEventAttributes
+      attr_accessor timer_id: ::String
+      attr_accessor started_event_id: ::Integer
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimerFiredEventAttributes
+      attr_accessor timer_id: ::String
+      attr_accessor started_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimerStartedEventAttributes
+      attr_accessor timer_id: ::String
+      attr_accessor control: ::String
+      attr_accessor start_to_fire_timeout: ::String
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class TooManyTagsFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TypeAlreadyExistsFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TypeDeprecatedFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UndeprecateActivityTypeInput
+      attr_accessor domain: ::String
+      attr_accessor activity_type: Types::ActivityType
+      SENSITIVE: []
+    end
+
+    class UndeprecateDomainInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UndeprecateWorkflowTypeInput
+      attr_accessor domain: ::String
+      attr_accessor workflow_type: Types::WorkflowType
+      SENSITIVE: []
+    end
+
+    class UnknownResourceFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class WorkflowExecution
+      attr_accessor workflow_id: ::String
+      attr_accessor run_id: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionAlreadyStartedFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionCancelRequestedEventAttributes
+      attr_accessor external_workflow_execution: Types::WorkflowExecution
+      attr_accessor external_initiated_event_id: ::Integer
+      attr_accessor cause: ("CHILD_POLICY_APPLIED")
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionCanceledEventAttributes
+      attr_accessor details: ::String
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionCompletedEventAttributes
+      attr_accessor result: ::String
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionConfiguration
+      attr_accessor task_start_to_close_timeout: ::String
+      attr_accessor execution_start_to_close_timeout: ::String
+      attr_accessor task_list: Types::TaskList
+      attr_accessor task_priority: ::String
+      attr_accessor child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON")
+      attr_accessor lambda_role: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionContinuedAsNewEventAttributes
+      attr_accessor input: ::String
+      attr_accessor decision_task_completed_event_id: ::Integer
+      attr_accessor new_execution_run_id: ::String
+      attr_accessor execution_start_to_close_timeout: ::String
+      attr_accessor task_list: Types::TaskList
+      attr_accessor task_priority: ::String
+      attr_accessor task_start_to_close_timeout: ::String
+      attr_accessor child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON")
+      attr_accessor tag_list: ::Array[::String]
+      attr_accessor workflow_type: Types::WorkflowType
+      attr_accessor lambda_role: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionCount
+      attr_accessor count: ::Integer
+      attr_accessor truncated: bool
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionDetail
+      attr_accessor execution_info: Types::WorkflowExecutionInfo
+      attr_accessor execution_configuration: Types::WorkflowExecutionConfiguration
+      attr_accessor open_counts: Types::WorkflowExecutionOpenCounts
+      attr_accessor latest_activity_task_timestamp: ::Time
+      attr_accessor latest_execution_context: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionFailedEventAttributes
+      attr_accessor reason: ::String
+      attr_accessor details: ::String
+      attr_accessor decision_task_completed_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionFilter
+      attr_accessor workflow_id: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionInfo
+      attr_accessor execution: Types::WorkflowExecution
+      attr_accessor workflow_type: Types::WorkflowType
+      attr_accessor start_timestamp: ::Time
+      attr_accessor close_timestamp: ::Time
+      attr_accessor execution_status: ("OPEN" | "CLOSED")
+      attr_accessor close_status: ("COMPLETED" | "FAILED" | "CANCELED" | "TERMINATED" | "CONTINUED_AS_NEW" | "TIMED_OUT")
+      attr_accessor parent: Types::WorkflowExecution
+      attr_accessor tag_list: ::Array[::String]
+      attr_accessor cancel_requested: bool
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionInfos
+      attr_accessor execution_infos: ::Array[Types::WorkflowExecutionInfo]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionOpenCounts
+      attr_accessor open_activity_tasks: ::Integer
+      attr_accessor open_decision_tasks: ::Integer
+      attr_accessor open_timers: ::Integer
+      attr_accessor open_child_workflow_executions: ::Integer
+      attr_accessor open_lambda_functions: ::Integer
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionSignaledEventAttributes
+      attr_accessor signal_name: ::String
+      attr_accessor input: ::String
+      attr_accessor external_workflow_execution: Types::WorkflowExecution
+      attr_accessor external_initiated_event_id: ::Integer
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionStartedEventAttributes
+      attr_accessor input: ::String
+      attr_accessor execution_start_to_close_timeout: ::String
+      attr_accessor task_start_to_close_timeout: ::String
+      attr_accessor child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON")
+      attr_accessor task_list: Types::TaskList
+      attr_accessor task_priority: ::String
+      attr_accessor workflow_type: Types::WorkflowType
+      attr_accessor tag_list: ::Array[::String]
+      attr_accessor continued_execution_run_id: ::String
+      attr_accessor parent_workflow_execution: Types::WorkflowExecution
+      attr_accessor parent_initiated_event_id: ::Integer
+      attr_accessor lambda_role: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionTerminatedEventAttributes
+      attr_accessor reason: ::String
+      attr_accessor details: ::String
+      attr_accessor child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON")
+      attr_accessor cause: ("CHILD_POLICY_APPLIED" | "EVENT_LIMIT_EXCEEDED" | "OPERATOR_INITIATED")
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionTimedOutEventAttributes
+      attr_accessor timeout_type: ("START_TO_CLOSE")
+      attr_accessor child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON")
+      SENSITIVE: []
+    end
+
+    class WorkflowType
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowTypeConfiguration
+      attr_accessor default_task_start_to_close_timeout: ::String
+      attr_accessor default_execution_start_to_close_timeout: ::String
+      attr_accessor default_task_list: Types::TaskList
+      attr_accessor default_task_priority: ::String
+      attr_accessor default_child_policy: ("TERMINATE" | "REQUEST_CANCEL" | "ABANDON")
+      attr_accessor default_lambda_role: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowTypeDetail
+      attr_accessor type_info: Types::WorkflowTypeInfo
+      attr_accessor configuration: Types::WorkflowTypeConfiguration
+      SENSITIVE: []
+    end
+
+    class WorkflowTypeFilter
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowTypeInfo
+      attr_accessor workflow_type: Types::WorkflowType
+      attr_accessor status: ("REGISTERED" | "DEPRECATED")
+      attr_accessor description: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor deprecation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class WorkflowTypeInfos
+      attr_accessor type_infos: ::Array[Types::WorkflowTypeInfo]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+  end
+end

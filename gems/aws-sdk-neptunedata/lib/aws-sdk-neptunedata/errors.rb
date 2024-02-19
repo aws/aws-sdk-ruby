@@ -170,10 +170,6 @@ module Aws::Neptunedata
       def code
         @code || @data[:code]
       end
-
-      def retryable?
-        true
-      end
     end
 
     class ClientTimeoutException < ServiceError

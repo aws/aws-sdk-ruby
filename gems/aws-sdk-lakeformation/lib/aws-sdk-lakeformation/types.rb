@@ -463,6 +463,48 @@ module Aws::LakeFormation
     #
     class CreateLFTagResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, view definitions, and other control
+    #   information to manage your Lake Formation environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_arn
+    #   The ARN of the IAM Identity Center instance for which the operation
+    #   will be executed. For more information about ARNs, see Amazon
+    #   Resource Names (ARNs) and Amazon Web Services Service Namespaces in
+    #   the Amazon Web Services General Reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_filtering
+    #   A list of the account IDs of Amazon Web Services accounts of
+    #   third-party applications that are allowed to access data managed by
+    #   Lake Formation.
+    #   @return [Types::ExternalFilteringConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateLakeFormationIdentityCenterConfigurationRequest AWS API Documentation
+    #
+    class CreateLakeFormationIdentityCenterConfigurationRequest < Struct.new(
+      :catalog_id,
+      :instance_arn,
+      :external_filtering)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the integrated application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateLakeFormationIdentityCenterConfigurationResponse AWS API Documentation
+    #
+    class CreateLakeFormationIdentityCenterConfigurationResponse < Struct.new(
+      :application_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] principal
     #   The Lake Formation principal. Supported principals are IAM users or
     #   IAM roles.
@@ -649,9 +691,9 @@ module Aws::LakeFormation
     #
     # @!attribute [rw] parameters
     #   A key-value map that provides an additional configuration on your
-    #   data lake. CrossAccountVersion is the key you can configure in the
-    #   Parameters field. Accepted values for the CrossAccountVersion key
-    #   are 1, 2, and 3.
+    #   data lake. CROSS\_ACCOUNT\_VERSION is the key you can configure in
+    #   the Parameters field. Accepted values for the CrossAccountVersion
+    #   key are 1, 2, 3, and 4.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] trusted_resource_owners
@@ -816,6 +858,25 @@ module Aws::LakeFormation
     #
     class DeleteLFTagResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, view definition, and other control
+    #   information to manage your Lake Formation environment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteLakeFormationIdentityCenterConfigurationRequest AWS API Documentation
+    #
+    class DeleteLakeFormationIdentityCenterConfigurationRequest < Struct.new(
+      :catalog_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteLakeFormationIdentityCenterConfigurationResponse AWS API Documentation
+    #
+    class DeleteLakeFormationIdentityCenterConfigurationResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] principal
     #   The Lake Formation principal. Supported principals are IAM users or
     #   IAM roles.
@@ -918,6 +979,51 @@ module Aws::LakeFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeregisterResourceResponse AWS API Documentation
     #
     class DeregisterResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, and other control information to
+    #   manage your Lake Formation environment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DescribeLakeFormationIdentityCenterConfigurationRequest AWS API Documentation
+    #
+    class DescribeLakeFormationIdentityCenterConfigurationRequest < Struct.new(
+      :catalog_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, and other control information to
+    #   manage your Lake Formation environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_arn
+    #   The Amazon Resource Name (ARN) of the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the integrated application.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_filtering
+    #   Indicates if external filtering is enabled.
+    #   @return [Types::ExternalFilteringConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DescribeLakeFormationIdentityCenterConfigurationResponse AWS API Documentation
+    #
+    class DescribeLakeFormationIdentityCenterConfigurationResponse < Struct.new(
+      :catalog_id,
+      :instance_arn,
+      :application_arn,
+      :external_filtering)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] resource_arn
     #   The resource ARN.
@@ -1072,6 +1178,28 @@ module Aws::LakeFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ExtendTransactionResponse AWS API Documentation
     #
     class ExtendTransactionResponse < Aws::EmptyStructure; end
+
+    # Configuration for enabling external data filtering for third-party
+    # applications to access data managed by Lake Formation .
+    #
+    # @!attribute [rw] status
+    #   Allows to enable or disable the third-party applications that are
+    #   allowed to access data managed by Lake Formation.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorized_targets
+    #   List of third-party application `ARNs` integrated with Lake
+    #   Formation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/ExternalFilteringConfiguration AWS API Documentation
+    #
+    class ExternalFilteringConfiguration < Struct.new(
+      :status,
+      :authorized_targets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # This structure describes the filtering of columns in a table based on
     # a filter condition.
@@ -1561,6 +1689,17 @@ module Aws::LakeFormation
     #   `COLUMN_PERMISSION` and `CELL_FILTER_PERMISSION`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] s3_path
+    #   The Amazon S3 path for the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_session_context
+    #   A structure used as a protocol between query engines and Lake
+    #   Formation or Glue. Contains both a Lake Formation generated
+    #   authorization identifier and information from the request's
+    #   authorization context.
+    #   @return [Types::QuerySessionContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTemporaryGlueTableCredentialsRequest AWS API Documentation
     #
     class GetTemporaryGlueTableCredentialsRequest < Struct.new(
@@ -1568,7 +1707,9 @@ module Aws::LakeFormation
       :permissions,
       :duration_seconds,
       :audit_context,
-      :supported_permission_types)
+      :supported_permission_types,
+      :s3_path,
+      :query_session_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1589,13 +1730,18 @@ module Aws::LakeFormation
     #   The date and time when the temporary credentials expire.
     #   @return [Time]
     #
+    # @!attribute [rw] vended_s3_path
+    #   The Amazon S3 path for the temporary credentials.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTemporaryGlueTableCredentialsResponse AWS API Documentation
     #
     class GetTemporaryGlueTableCredentialsResponse < Struct.new(
       :access_key_id,
       :secret_access_key,
       :session_token,
-      :expiration)
+      :expiration,
+      :vended_s3_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2535,6 +2681,44 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # A structure used as a protocol between query engines and Lake
+    # Formation or Glue. Contains both a Lake Formation generated
+    # authorization identifier and information from the request's
+    # authorization context.
+    #
+    # @!attribute [rw] query_id
+    #   A unique identifier generated by the query engine for the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_start_time
+    #   A timestamp provided by the query engine for when the query started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] cluster_id
+    #   An identifier string for the consumer cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_authorization_id
+    #   A cryptographically generated query identifier generated by Glue or
+    #   Lake Formation.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_context
+    #   An opaque string-string map passed by the query engine.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/QuerySessionContext AWS API Documentation
+    #
+    class QuerySessionContext < Struct.new(
+      :query_id,
+      :query_start_time,
+      :cluster_id,
+      :query_authorization_id,
+      :additional_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource that you want to
     #   register.
@@ -2896,7 +3080,8 @@ module Aws::LakeFormation
 
     # @!attribute [rw] next_token
     #   A continuation token, present if the current list segment is not the
-    #   last.
+    #   last. On the first run, if you include a not null (a value) token
+    #   you can get empty pages.
     #   @return [String]
     #
     # @!attribute [rw] table_list
@@ -3335,6 +3520,37 @@ module Aws::LakeFormation
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateLFTagResponse AWS API Documentation
     #
     class UpdateLFTagResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, view definitions, and other control
+    #   information to manage your Lake Formation environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_status
+    #   Allows to enable or disable the IAM Identity Center connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_filtering
+    #   A list of the account IDs of Amazon Web Services accounts of
+    #   third-party applications that are allowed to access data managed by
+    #   Lake Formation.
+    #   @return [Types::ExternalFilteringConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateLakeFormationIdentityCenterConfigurationRequest AWS API Documentation
+    #
+    class UpdateLakeFormationIdentityCenterConfigurationRequest < Struct.new(
+      :catalog_id,
+      :application_status,
+      :external_filtering)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateLakeFormationIdentityCenterConfigurationResponse AWS API Documentation
+    #
+    class UpdateLakeFormationIdentityCenterConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] role_arn
     #   The new role to use for the given resource registered in Lake

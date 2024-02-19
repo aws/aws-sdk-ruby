@@ -1,0 +1,390 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DataPipeline
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _ActivatePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivatePipelineOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#activate_pipeline-instance_method
+      def activate_pipeline: (
+                               pipeline_id: ::String,
+                               ?parameter_values: Array[
+                                 {
+                                   id: ::String,
+                                   string_value: ::String
+                                 },
+                               ],
+                               ?start_timestamp: ::Time
+                             ) -> _ActivatePipelineResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ActivatePipelineResponseSuccess
+
+      interface _AddTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddTagsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#add_tags-instance_method
+      def add_tags: (
+                      pipeline_id: ::String,
+                      tags: Array[
+                        {
+                          key: ::String,
+                          value: ::String
+                        },
+                      ]
+                    ) -> _AddTagsResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsResponseSuccess
+
+      interface _CreatePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePipelineOutput]
+        def pipeline_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#create_pipeline-instance_method
+      def create_pipeline: (
+                             name: ::String,
+                             unique_id: ::String,
+                             ?description: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _CreatePipelineResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePipelineResponseSuccess
+
+      interface _DeactivatePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeactivatePipelineOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#deactivate_pipeline-instance_method
+      def deactivate_pipeline: (
+                                 pipeline_id: ::String,
+                                 ?cancel_active: bool
+                               ) -> _DeactivatePipelineResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeactivatePipelineResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#delete_pipeline-instance_method
+      def delete_pipeline: (
+                             pipeline_id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeObjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeObjectsOutput]
+        def pipeline_objects: () -> ::Array[Types::PipelineObject]
+        def marker: () -> ::String
+        def has_more_results: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#describe_objects-instance_method
+      def describe_objects: (
+                              pipeline_id: ::String,
+                              object_ids: Array[::String],
+                              ?evaluate_expressions: bool,
+                              ?marker: ::String
+                            ) -> _DescribeObjectsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeObjectsResponseSuccess
+
+      interface _DescribePipelinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePipelinesOutput]
+        def pipeline_description_list: () -> ::Array[Types::PipelineDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#describe_pipelines-instance_method
+      def describe_pipelines: (
+                                pipeline_ids: Array[::String]
+                              ) -> _DescribePipelinesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePipelinesResponseSuccess
+
+      interface _EvaluateExpressionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EvaluateExpressionOutput]
+        def evaluated_expression: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#evaluate_expression-instance_method
+      def evaluate_expression: (
+                                 pipeline_id: ::String,
+                                 object_id: ::String,
+                                 expression: ::String
+                               ) -> _EvaluateExpressionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EvaluateExpressionResponseSuccess
+
+      interface _GetPipelineDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPipelineDefinitionOutput]
+        def pipeline_objects: () -> ::Array[Types::PipelineObject]
+        def parameter_objects: () -> ::Array[Types::ParameterObject]
+        def parameter_values: () -> ::Array[Types::ParameterValue]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#get_pipeline_definition-instance_method
+      def get_pipeline_definition: (
+                                     pipeline_id: ::String,
+                                     ?version: ::String
+                                   ) -> _GetPipelineDefinitionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPipelineDefinitionResponseSuccess
+
+      interface _ListPipelinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelinesOutput]
+        def pipeline_id_list: () -> ::Array[Types::PipelineIdName]
+        def marker: () -> ::String
+        def has_more_results: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#list_pipelines-instance_method
+      def list_pipelines: (
+                            ?marker: ::String
+                          ) -> _ListPipelinesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelinesResponseSuccess
+
+      interface _PollForTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PollForTaskOutput]
+        def task_object: () -> Types::TaskObject
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#poll_for_task-instance_method
+      def poll_for_task: (
+                           worker_group: ::String,
+                           ?hostname: ::String,
+                           ?instance_identity: {
+                             document: ::String?,
+                             signature: ::String?
+                           }
+                         ) -> _PollForTaskResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PollForTaskResponseSuccess
+
+      interface _PutPipelineDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutPipelineDefinitionOutput]
+        def validation_errors: () -> ::Array[Types::ValidationError]
+        def validation_warnings: () -> ::Array[Types::ValidationWarning]
+        def errored: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#put_pipeline_definition-instance_method
+      def put_pipeline_definition: (
+                                     pipeline_id: ::String,
+                                     pipeline_objects: Array[
+                                       {
+                                         id: ::String,
+                                         name: ::String,
+                                         fields: Array[
+                                           {
+                                             key: ::String,
+                                             string_value: ::String?,
+                                             ref_value: ::String?
+                                           },
+                                         ]
+                                       },
+                                     ],
+                                     ?parameter_objects: Array[
+                                       {
+                                         id: ::String,
+                                         attributes: Array[
+                                           {
+                                             key: ::String,
+                                             string_value: ::String
+                                           },
+                                         ]
+                                       },
+                                     ],
+                                     ?parameter_values: Array[
+                                       {
+                                         id: ::String,
+                                         string_value: ::String
+                                       },
+                                     ]
+                                   ) -> _PutPipelineDefinitionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPipelineDefinitionResponseSuccess
+
+      interface _QueryObjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::QueryObjectsOutput]
+        def ids: () -> ::Array[::String]
+        def marker: () -> ::String
+        def has_more_results: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#query_objects-instance_method
+      def query_objects: (
+                           pipeline_id: ::String,
+                           ?query: {
+                             selectors: Array[
+                               {
+                                 field_name: ::String?,
+                                 operator: {
+                                   type: ("EQ" | "REF_EQ" | "LE" | "GE" | "BETWEEN")?,
+                                   values: Array[::String]?
+                                 }?
+                               },
+                             ]?
+                           },
+                           sphere: ::String,
+                           ?marker: ::String,
+                           ?limit: ::Integer
+                         ) -> _QueryObjectsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _QueryObjectsResponseSuccess
+
+      interface _RemoveTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveTagsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#remove_tags-instance_method
+      def remove_tags: (
+                         pipeline_id: ::String,
+                         tag_keys: Array[::String]
+                       ) -> _RemoveTagsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveTagsResponseSuccess
+
+      interface _ReportTaskProgressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReportTaskProgressOutput]
+        def canceled: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#report_task_progress-instance_method
+      def report_task_progress: (
+                                  task_id: ::String,
+                                  ?fields: Array[
+                                    {
+                                      key: ::String,
+                                      string_value: ::String?,
+                                      ref_value: ::String?
+                                    },
+                                  ]
+                                ) -> _ReportTaskProgressResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReportTaskProgressResponseSuccess
+
+      interface _ReportTaskRunnerHeartbeatResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReportTaskRunnerHeartbeatOutput]
+        def terminate: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#report_task_runner_heartbeat-instance_method
+      def report_task_runner_heartbeat: (
+                                          taskrunner_id: ::String,
+                                          ?worker_group: ::String,
+                                          ?hostname: ::String
+                                        ) -> _ReportTaskRunnerHeartbeatResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReportTaskRunnerHeartbeatResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#set_status-instance_method
+      def set_status: (
+                        pipeline_id: ::String,
+                        object_ids: Array[::String],
+                        status: ::String
+                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _SetTaskStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SetTaskStatusOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#set_task_status-instance_method
+      def set_task_status: (
+                             task_id: ::String,
+                             task_status: ("FINISHED" | "FAILED" | "FALSE"),
+                             ?error_id: ::String,
+                             ?error_message: ::String,
+                             ?error_stack_trace: ::String
+                           ) -> _SetTaskStatusResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetTaskStatusResponseSuccess
+
+      interface _ValidatePipelineDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidatePipelineDefinitionOutput]
+        def validation_errors: () -> ::Array[Types::ValidationError]
+        def validation_warnings: () -> ::Array[Types::ValidationWarning]
+        def errored: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataPipeline/Client.html#validate_pipeline_definition-instance_method
+      def validate_pipeline_definition: (
+                                          pipeline_id: ::String,
+                                          pipeline_objects: Array[
+                                            {
+                                              id: ::String,
+                                              name: ::String,
+                                              fields: Array[
+                                                {
+                                                  key: ::String,
+                                                  string_value: ::String?,
+                                                  ref_value: ::String?
+                                                },
+                                              ]
+                                            },
+                                          ],
+                                          ?parameter_objects: Array[
+                                            {
+                                              id: ::String,
+                                              attributes: Array[
+                                                {
+                                                  key: ::String,
+                                                  string_value: ::String
+                                                },
+                                              ]
+                                            },
+                                          ],
+                                          ?parameter_values: Array[
+                                            {
+                                              id: ::String,
+                                              string_value: ::String
+                                            },
+                                          ]
+                                        ) -> _ValidatePipelineDefinitionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidatePipelineDefinitionResponseSuccess
+    end
+  end
+end
+

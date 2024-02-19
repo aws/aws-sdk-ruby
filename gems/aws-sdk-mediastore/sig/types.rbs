@@ -1,0 +1,271 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MediaStore
+  module Types
+
+    class Container
+      attr_accessor endpoint: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING")
+      attr_accessor access_logging_enabled: bool
+      SENSITIVE: []
+    end
+
+    class ContainerInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CorsPolicyNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CorsRule
+      attr_accessor allowed_origins: ::Array[::String]
+      attr_accessor allowed_methods: ::Array[("PUT" | "GET" | "DELETE" | "HEAD")]
+      attr_accessor allowed_headers: ::Array[::String]
+      attr_accessor max_age_seconds: ::Integer
+      attr_accessor expose_headers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateContainerInput
+      attr_accessor container_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateContainerOutput
+      attr_accessor container: Types::Container
+      SENSITIVE: []
+    end
+
+    class DeleteContainerInput
+      attr_accessor container_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContainerOutput < Aws::EmptyStructure
+    end
+
+    class DeleteContainerPolicyInput
+      attr_accessor container_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContainerPolicyOutput < Aws::EmptyStructure
+    end
+
+    class DeleteCorsPolicyInput
+      attr_accessor container_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCorsPolicyOutput < Aws::EmptyStructure
+    end
+
+    class DeleteLifecyclePolicyInput
+      attr_accessor container_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLifecyclePolicyOutput < Aws::EmptyStructure
+    end
+
+    class DeleteMetricPolicyInput
+      attr_accessor container_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMetricPolicyOutput < Aws::EmptyStructure
+    end
+
+    class DescribeContainerInput
+      attr_accessor container_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeContainerOutput
+      attr_accessor container: Types::Container
+      SENSITIVE: []
+    end
+
+    class GetContainerPolicyInput
+      attr_accessor container_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetContainerPolicyOutput
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetCorsPolicyInput
+      attr_accessor container_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCorsPolicyOutput
+      attr_accessor cors_policy: ::Array[Types::CorsRule]
+      SENSITIVE: []
+    end
+
+    class GetLifecyclePolicyInput
+      attr_accessor container_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetLifecyclePolicyOutput
+      attr_accessor lifecycle_policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetMetricPolicyInput
+      attr_accessor container_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMetricPolicyOutput
+      attr_accessor metric_policy: Types::MetricPolicy
+      SENSITIVE: []
+    end
+
+    class InternalServerError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListContainersInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContainersOutput
+      attr_accessor containers: ::Array[Types::Container]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MetricPolicy
+      attr_accessor container_level_metrics: ("ENABLED" | "DISABLED")
+      attr_accessor metric_policy_rules: ::Array[Types::MetricPolicyRule]
+      SENSITIVE: []
+    end
+
+    class MetricPolicyRule
+      attr_accessor object_group: ::String
+      attr_accessor object_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutContainerPolicyInput
+      attr_accessor container_name: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutContainerPolicyOutput < Aws::EmptyStructure
+    end
+
+    class PutCorsPolicyInput
+      attr_accessor container_name: ::String
+      attr_accessor cors_policy: ::Array[Types::CorsRule]
+      SENSITIVE: []
+    end
+
+    class PutCorsPolicyOutput < Aws::EmptyStructure
+    end
+
+    class PutLifecyclePolicyInput
+      attr_accessor container_name: ::String
+      attr_accessor lifecycle_policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutLifecyclePolicyOutput < Aws::EmptyStructure
+    end
+
+    class PutMetricPolicyInput
+      attr_accessor container_name: ::String
+      attr_accessor metric_policy: Types::MetricPolicy
+      SENSITIVE: []
+    end
+
+    class PutMetricPolicyOutput < Aws::EmptyStructure
+    end
+
+    class StartAccessLoggingInput
+      attr_accessor container_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartAccessLoggingOutput < Aws::EmptyStructure
+    end
+
+    class StopAccessLoggingInput
+      attr_accessor container_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopAccessLoggingOutput < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UntagResourceInput
+      attr_accessor resource: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+  end
+end

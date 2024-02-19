@@ -471,7 +471,9 @@ module Aws::Snowball
     # regions, addresses are validated at the time of creation. The address
     # you provide must be located within the serviceable area of your
     # region. If the address is invalid or unsupported, then an exception is
-    # thrown.
+    # thrown. If providing an address as a JSON file through the
+    # `cli-input-json` option, include the full file path. For example,
+    # `--cli-input-json file://create-address.json`.
     #
     # @option params [required, Types::Address] :address
     #   The address that you want the Snow device shipped to.
@@ -2891,7 +2893,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

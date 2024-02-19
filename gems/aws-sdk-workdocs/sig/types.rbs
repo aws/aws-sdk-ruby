@@ -1,0 +1,914 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::WorkDocs
+  module Types
+
+    class AbortDocumentVersionUploadRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor document_id: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class ActivateUserRequest
+      attr_accessor user_id: ::String
+      attr_accessor authentication_token: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class ActivateUserResponse
+      attr_accessor user: Types::User
+      SENSITIVE: []
+    end
+
+    class Activity
+      attr_accessor type: ("DOCUMENT_CHECKED_IN" | "DOCUMENT_CHECKED_OUT" | "DOCUMENT_RENAMED" | "DOCUMENT_VERSION_UPLOADED" | "DOCUMENT_VERSION_DELETED" | "DOCUMENT_VERSION_VIEWED" | "DOCUMENT_VERSION_DOWNLOADED" | "DOCUMENT_RECYCLED" | "DOCUMENT_RESTORED" | "DOCUMENT_REVERTED" | "DOCUMENT_SHARED" | "DOCUMENT_UNSHARED" | "DOCUMENT_SHARE_PERMISSION_CHANGED" | "DOCUMENT_SHAREABLE_LINK_CREATED" | "DOCUMENT_SHAREABLE_LINK_REMOVED" | "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED" | "DOCUMENT_MOVED" | "DOCUMENT_COMMENT_ADDED" | "DOCUMENT_COMMENT_DELETED" | "DOCUMENT_ANNOTATION_ADDED" | "DOCUMENT_ANNOTATION_DELETED" | "FOLDER_CREATED" | "FOLDER_DELETED" | "FOLDER_RENAMED" | "FOLDER_RECYCLED" | "FOLDER_RESTORED" | "FOLDER_SHARED" | "FOLDER_UNSHARED" | "FOLDER_SHARE_PERMISSION_CHANGED" | "FOLDER_SHAREABLE_LINK_CREATED" | "FOLDER_SHAREABLE_LINK_REMOVED" | "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED" | "FOLDER_MOVED")
+      attr_accessor time_stamp: ::Time
+      attr_accessor is_indirect_activity: bool
+      attr_accessor organization_id: ::String
+      attr_accessor initiator: Types::UserMetadata
+      attr_accessor participants: Types::Participants
+      attr_accessor resource_metadata: Types::ResourceMetadata
+      attr_accessor original_parent: Types::ResourceMetadata
+      attr_accessor comment_metadata: Types::CommentMetadata
+      SENSITIVE: []
+    end
+
+    class AddResourcePermissionsRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor principals: ::Array[Types::SharePrincipal]
+      attr_accessor notification_options: Types::NotificationOptions
+      SENSITIVE: [:authentication_token]
+    end
+
+    class AddResourcePermissionsResponse
+      attr_accessor share_results: ::Array[Types::ShareResult]
+      SENSITIVE: []
+    end
+
+    class Comment
+      attr_accessor comment_id: ::String
+      attr_accessor parent_id: ::String
+      attr_accessor thread_id: ::String
+      attr_accessor text: ::String
+      attr_accessor contributor: Types::User
+      attr_accessor created_timestamp: ::Time
+      attr_accessor status: ("DRAFT" | "PUBLISHED" | "DELETED")
+      attr_accessor visibility: ("PUBLIC" | "PRIVATE")
+      attr_accessor recipient_id: ::String
+      SENSITIVE: [:text]
+    end
+
+    class CommentMetadata
+      attr_accessor comment_id: ::String
+      attr_accessor contributor: Types::User
+      attr_accessor created_timestamp: ::Time
+      attr_accessor comment_status: ("DRAFT" | "PUBLISHED" | "DELETED")
+      attr_accessor recipient_id: ::String
+      attr_accessor contributor_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictingOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCommentRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor document_id: ::String
+      attr_accessor version_id: ::String
+      attr_accessor parent_id: ::String
+      attr_accessor thread_id: ::String
+      attr_accessor text: ::String
+      attr_accessor visibility: ("PUBLIC" | "PRIVATE")
+      attr_accessor notify_collaborators: bool
+      SENSITIVE: [:authentication_token, :text]
+    end
+
+    class CreateCommentResponse
+      attr_accessor comment: Types::Comment
+      SENSITIVE: []
+    end
+
+    class CreateCustomMetadataRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor version_id: ::String
+      attr_accessor custom_metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:authentication_token]
+    end
+
+    class CreateCustomMetadataResponse < Aws::EmptyStructure
+    end
+
+    class CreateFolderRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor name: ::String
+      attr_accessor parent_folder_id: ::String
+      SENSITIVE: [:authentication_token, :name]
+    end
+
+    class CreateFolderResponse
+      attr_accessor metadata: Types::FolderMetadata
+      SENSITIVE: []
+    end
+
+    class CreateLabelsRequest
+      attr_accessor resource_id: ::String
+      attr_accessor labels: ::Array[::String]
+      attr_accessor authentication_token: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class CreateLabelsResponse < Aws::EmptyStructure
+    end
+
+    class CreateNotificationSubscriptionRequest
+      attr_accessor organization_id: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor protocol: ("HTTPS" | "SQS")
+      attr_accessor subscription_type: ("ALL")
+      SENSITIVE: []
+    end
+
+    class CreateNotificationSubscriptionResponse
+      attr_accessor subscription: Types::Subscription
+      SENSITIVE: []
+    end
+
+    class CreateUserRequest
+      attr_accessor organization_id: ::String
+      attr_accessor username: ::String
+      attr_accessor email_address: ::String
+      attr_accessor given_name: ::String
+      attr_accessor surname: ::String
+      attr_accessor password: ::String
+      attr_accessor time_zone_id: ::String
+      attr_accessor storage_rule: Types::StorageRuleType
+      attr_accessor authentication_token: ::String
+      SENSITIVE: [:username, :email_address, :given_name, :surname, :password, :authentication_token]
+    end
+
+    class CreateUserResponse
+      attr_accessor user: Types::User
+      SENSITIVE: []
+    end
+
+    class CustomMetadataLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DateRangeType
+      attr_accessor start_value: ::Time
+      attr_accessor end_value: ::Time
+      SENSITIVE: []
+    end
+
+    class DeactivateUserRequest
+      attr_accessor user_id: ::String
+      attr_accessor authentication_token: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class DeactivatingLastSystemUserException < Aws::EmptyStructure
+    end
+
+    class DeleteCommentRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor document_id: ::String
+      attr_accessor version_id: ::String
+      attr_accessor comment_id: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class DeleteCustomMetadataRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor version_id: ::String
+      attr_accessor keys: ::Array[::String]
+      attr_accessor delete_all: bool
+      SENSITIVE: [:authentication_token]
+    end
+
+    class DeleteCustomMetadataResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDocumentRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor document_id: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class DeleteDocumentVersionRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor document_id: ::String
+      attr_accessor version_id: ::String
+      attr_accessor delete_prior_versions: bool
+      SENSITIVE: [:authentication_token]
+    end
+
+    class DeleteFolderContentsRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor folder_id: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class DeleteFolderRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor folder_id: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class DeleteLabelsRequest
+      attr_accessor resource_id: ::String
+      attr_accessor authentication_token: ::String
+      attr_accessor labels: ::Array[::String]
+      attr_accessor delete_all: bool
+      SENSITIVE: [:authentication_token]
+    end
+
+    class DeleteLabelsResponse < Aws::EmptyStructure
+    end
+
+    class DeleteNotificationSubscriptionRequest
+      attr_accessor subscription_id: ::String
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class DescribeActivitiesRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor organization_id: ::String
+      attr_accessor activity_types: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor include_indirect_activities: bool
+      attr_accessor limit: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class DescribeActivitiesResponse
+      attr_accessor user_activities: ::Array[Types::Activity]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCommentsRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor document_id: ::String
+      attr_accessor version_id: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class DescribeCommentsResponse
+      attr_accessor comments: ::Array[Types::Comment]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDocumentVersionsRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor document_id: ::String
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor include: ::String
+      attr_accessor fields: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class DescribeDocumentVersionsResponse
+      attr_accessor document_versions: ::Array[Types::DocumentVersionMetadata]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFolderContentsRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor folder_id: ::String
+      attr_accessor sort: ("DATE" | "NAME")
+      attr_accessor order: ("ASCENDING" | "DESCENDING")
+      attr_accessor limit: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor type: ("ALL" | "DOCUMENT" | "FOLDER")
+      attr_accessor include: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class DescribeFolderContentsResponse
+      attr_accessor folders: ::Array[Types::FolderMetadata]
+      attr_accessor documents: ::Array[Types::DocumentMetadata]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGroupsRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor search_query: ::String
+      attr_accessor organization_id: ::String
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: [:authentication_token, :search_query]
+    end
+
+    class DescribeGroupsResponse
+      attr_accessor groups: ::Array[Types::GroupMetadata]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNotificationSubscriptionsRequest
+      attr_accessor organization_id: ::String
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeNotificationSubscriptionsResponse
+      attr_accessor subscriptions: ::Array[Types::Subscription]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourcePermissionsRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class DescribeResourcePermissionsResponse
+      attr_accessor principals: ::Array[Types::Principal]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRootFoldersRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class DescribeRootFoldersResponse
+      attr_accessor folders: ::Array[Types::FolderMetadata]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUsersRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor organization_id: ::String
+      attr_accessor user_ids: ::String
+      attr_accessor query: ::String
+      attr_accessor include: ("ALL" | "ACTIVE_PENDING")
+      attr_accessor order: ("ASCENDING" | "DESCENDING")
+      attr_accessor sort: ("USER_NAME" | "FULL_NAME" | "STORAGE_LIMIT" | "USER_STATUS" | "STORAGE_USED")
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor fields: ::String
+      SENSITIVE: [:authentication_token, :query]
+    end
+
+    class DescribeUsersResponse
+      attr_accessor users: ::Array[Types::User]
+      attr_accessor total_number_of_users: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentLockedForCommentsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentMetadata
+      attr_accessor id: ::String
+      attr_accessor creator_id: ::String
+      attr_accessor parent_folder_id: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor modified_timestamp: ::Time
+      attr_accessor latest_version_metadata: Types::DocumentVersionMetadata
+      attr_accessor resource_state: ("ACTIVE" | "RESTORING" | "RECYCLING" | "RECYCLED")
+      attr_accessor labels: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DocumentVersionMetadata
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor content_type: ::String
+      attr_accessor size: ::Integer
+      attr_accessor signature: ::String
+      attr_accessor status: ("INITIALIZED" | "ACTIVE")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor modified_timestamp: ::Time
+      attr_accessor content_created_timestamp: ::Time
+      attr_accessor content_modified_timestamp: ::Time
+      attr_accessor creator_id: ::String
+      attr_accessor thumbnail: ::Hash[("SMALL" | "SMALL_HQ" | "LARGE"), ::String]
+      attr_accessor source: ::Hash[("ORIGINAL" | "WITH_COMMENTS"), ::String]
+      SENSITIVE: [:name]
+    end
+
+    class DraftUploadOutOfSyncException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EntityAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EntityNotExistsException
+      attr_accessor message: ::String
+      attr_accessor entity_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FailedDependencyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Filters
+      attr_accessor text_locales: ::Array[("AR" | "BG" | "BN" | "DA" | "DE" | "CS" | "EL" | "EN" | "ES" | "FA" | "FI" | "FR" | "HI" | "HU" | "ID" | "IT" | "JA" | "KO" | "LT" | "LV" | "NL" | "NO" | "PT" | "RO" | "RU" | "SV" | "SW" | "TH" | "TR" | "ZH" | "DEFAULT")]
+      attr_accessor content_categories: ::Array[("IMAGE" | "DOCUMENT" | "PDF" | "SPREADSHEET" | "PRESENTATION" | "AUDIO" | "VIDEO" | "SOURCE_CODE" | "OTHER")]
+      attr_accessor resource_types: ::Array[("FOLDER" | "DOCUMENT" | "COMMENT" | "DOCUMENT_VERSION")]
+      attr_accessor labels: ::Array[::String]
+      attr_accessor principals: ::Array[Types::SearchPrincipalType]
+      attr_accessor ancestor_ids: ::Array[::String]
+      attr_accessor search_collection_types: ::Array[("OWNED" | "SHARED_WITH_ME")]
+      attr_accessor size_range: Types::LongRangeType
+      attr_accessor created_range: Types::DateRangeType
+      attr_accessor modified_range: Types::DateRangeType
+      SENSITIVE: []
+    end
+
+    class FolderMetadata
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor creator_id: ::String
+      attr_accessor parent_folder_id: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor modified_timestamp: ::Time
+      attr_accessor resource_state: ("ACTIVE" | "RESTORING" | "RECYCLING" | "RECYCLED")
+      attr_accessor signature: ::String
+      attr_accessor labels: ::Array[::String]
+      attr_accessor size: ::Integer
+      attr_accessor latest_version_size: ::Integer
+      SENSITIVE: [:name]
+    end
+
+    class GetCurrentUserRequest
+      attr_accessor authentication_token: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class GetCurrentUserResponse
+      attr_accessor user: Types::User
+      SENSITIVE: []
+    end
+
+    class GetDocumentPathRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor document_id: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor fields: ::String
+      attr_accessor marker: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class GetDocumentPathResponse
+      attr_accessor path: Types::ResourcePath
+      SENSITIVE: []
+    end
+
+    class GetDocumentRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor document_id: ::String
+      attr_accessor include_custom_metadata: bool
+      SENSITIVE: [:authentication_token]
+    end
+
+    class GetDocumentResponse
+      attr_accessor metadata: Types::DocumentMetadata
+      attr_accessor custom_metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetDocumentVersionRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor document_id: ::String
+      attr_accessor version_id: ::String
+      attr_accessor fields: ::String
+      attr_accessor include_custom_metadata: bool
+      SENSITIVE: [:authentication_token]
+    end
+
+    class GetDocumentVersionResponse
+      attr_accessor metadata: Types::DocumentVersionMetadata
+      attr_accessor custom_metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetFolderPathRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor folder_id: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor fields: ::String
+      attr_accessor marker: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class GetFolderPathResponse
+      attr_accessor path: Types::ResourcePath
+      SENSITIVE: []
+    end
+
+    class GetFolderRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor folder_id: ::String
+      attr_accessor include_custom_metadata: bool
+      SENSITIVE: [:authentication_token]
+    end
+
+    class GetFolderResponse
+      attr_accessor metadata: Types::FolderMetadata
+      attr_accessor custom_metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetResourcesRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor user_id: ::String
+      attr_accessor collection_type: ("SHARED_WITH_ME")
+      attr_accessor limit: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class GetResourcesResponse
+      attr_accessor folders: ::Array[Types::FolderMetadata]
+      attr_accessor documents: ::Array[Types::DocumentMetadata]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class GroupMetadata
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class IllegalUserStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InitiateDocumentVersionUploadRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor content_created_timestamp: ::Time
+      attr_accessor content_modified_timestamp: ::Time
+      attr_accessor content_type: ::String
+      attr_accessor document_size_in_bytes: ::Integer
+      attr_accessor parent_folder_id: ::String
+      SENSITIVE: [:authentication_token, :name]
+    end
+
+    class InitiateDocumentVersionUploadResponse
+      attr_accessor metadata: Types::DocumentMetadata
+      attr_accessor upload_metadata: Types::UploadMetadata
+      SENSITIVE: []
+    end
+
+    class InvalidArgumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidCommentOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPasswordException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LongRangeType
+      attr_accessor start_value: ::Integer
+      attr_accessor end_value: ::Integer
+      SENSITIVE: []
+    end
+
+    class NotificationOptions
+      attr_accessor send_email: bool
+      attr_accessor email_message: ::String
+      SENSITIVE: [:email_message]
+    end
+
+    class Participants
+      attr_accessor users: ::Array[Types::UserMetadata]
+      attr_accessor groups: ::Array[Types::GroupMetadata]
+      SENSITIVE: []
+    end
+
+    class PermissionInfo
+      attr_accessor role: ("VIEWER" | "CONTRIBUTOR" | "OWNER" | "COOWNER")
+      attr_accessor type: ("DIRECT" | "INHERITED")
+      SENSITIVE: []
+    end
+
+    class Principal
+      attr_accessor id: ::String
+      attr_accessor type: ("USER" | "GROUP" | "INVITE" | "ANONYMOUS" | "ORGANIZATION")
+      attr_accessor roles: ::Array[Types::PermissionInfo]
+      SENSITIVE: []
+    end
+
+    class ProhibitedStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveAllResourcePermissionsRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class RemoveResourcePermissionRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("USER" | "GROUP" | "INVITE" | "ANONYMOUS" | "ORGANIZATION")
+      SENSITIVE: [:authentication_token]
+    end
+
+    class RequestedEntityTooLargeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyCheckedOutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceMetadata
+      attr_accessor type: ("FOLDER" | "DOCUMENT")
+      attr_accessor name: ::String
+      attr_accessor original_name: ::String
+      attr_accessor id: ::String
+      attr_accessor version_id: ::String
+      attr_accessor owner: Types::UserMetadata
+      attr_accessor parent_id: ::String
+      SENSITIVE: [:name, :original_name]
+    end
+
+    class ResourcePath
+      attr_accessor components: ::Array[Types::ResourcePathComponent]
+      SENSITIVE: []
+    end
+
+    class ResourcePathComponent
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:name]
+    end
+
+    class ResponseItem
+      attr_accessor resource_type: ("DOCUMENT" | "FOLDER" | "COMMENT" | "DOCUMENT_VERSION")
+      attr_accessor web_url: ::String
+      attr_accessor document_metadata: Types::DocumentMetadata
+      attr_accessor folder_metadata: Types::FolderMetadata
+      attr_accessor comment_metadata: Types::CommentMetadata
+      attr_accessor document_version_metadata: Types::DocumentVersionMetadata
+      SENSITIVE: [:web_url]
+    end
+
+    class RestoreDocumentVersionsRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor document_id: ::String
+      SENSITIVE: [:authentication_token]
+    end
+
+    class SearchPrincipalType
+      attr_accessor id: ::String
+      attr_accessor roles: ::Array[("VIEWER" | "CONTRIBUTOR" | "OWNER" | "COOWNER")]
+      SENSITIVE: []
+    end
+
+    class SearchResourcesRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor query_text: ::String
+      attr_accessor query_scopes: ::Array[("NAME" | "CONTENT")]
+      attr_accessor organization_id: ::String
+      attr_accessor additional_response_fields: ::Array[("WEBURL")]
+      attr_accessor filters: Types::Filters
+      attr_accessor order_by: ::Array[Types::SearchSortResult]
+      attr_accessor limit: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: [:authentication_token, :query_text]
+    end
+
+    class SearchResourcesResponse
+      attr_accessor items: ::Array[Types::ResponseItem]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class SearchSortResult
+      attr_accessor field: ("RELEVANCE" | "NAME" | "SIZE" | "CREATED_TIMESTAMP" | "MODIFIED_TIMESTAMP")
+      attr_accessor order: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SharePrincipal
+      attr_accessor id: ::String
+      attr_accessor type: ("USER" | "GROUP" | "INVITE" | "ANONYMOUS" | "ORGANIZATION")
+      attr_accessor role: ("VIEWER" | "CONTRIBUTOR" | "OWNER" | "COOWNER")
+      SENSITIVE: []
+    end
+
+    class ShareResult
+      attr_accessor principal_id: ::String
+      attr_accessor invitee_principal_id: ::String
+      attr_accessor role: ("VIEWER" | "CONTRIBUTOR" | "OWNER" | "COOWNER")
+      attr_accessor status: ("SUCCESS" | "FAILURE")
+      attr_accessor share_id: ::String
+      attr_accessor status_message: ::String
+      SENSITIVE: [:status_message]
+    end
+
+    class StorageLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StorageLimitWillExceedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StorageRuleType
+      attr_accessor storage_allocated_in_bytes: ::Integer
+      attr_accessor storage_type: ("UNLIMITED" | "QUOTA")
+      SENSITIVE: []
+    end
+
+    class Subscription
+      attr_accessor subscription_id: ::String
+      attr_accessor end_point: ::String
+      attr_accessor protocol: ("HTTPS" | "SQS")
+      SENSITIVE: []
+    end
+
+    class TooManyLabelsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManySubscriptionsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedOperationException < Aws::EmptyStructure
+    end
+
+    class UnauthorizedResourceAccessException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDocumentRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor document_id: ::String
+      attr_accessor name: ::String
+      attr_accessor parent_folder_id: ::String
+      attr_accessor resource_state: ("ACTIVE" | "RESTORING" | "RECYCLING" | "RECYCLED")
+      SENSITIVE: [:authentication_token, :name]
+    end
+
+    class UpdateDocumentVersionRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor document_id: ::String
+      attr_accessor version_id: ::String
+      attr_accessor version_status: ("ACTIVE")
+      SENSITIVE: [:authentication_token]
+    end
+
+    class UpdateFolderRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor folder_id: ::String
+      attr_accessor name: ::String
+      attr_accessor parent_folder_id: ::String
+      attr_accessor resource_state: ("ACTIVE" | "RESTORING" | "RECYCLING" | "RECYCLED")
+      SENSITIVE: [:authentication_token, :name]
+    end
+
+    class UpdateUserRequest
+      attr_accessor authentication_token: ::String
+      attr_accessor user_id: ::String
+      attr_accessor given_name: ::String
+      attr_accessor surname: ::String
+      attr_accessor type: ("USER" | "ADMIN" | "POWERUSER" | "MINIMALUSER" | "WORKSPACESUSER")
+      attr_accessor storage_rule: Types::StorageRuleType
+      attr_accessor time_zone_id: ::String
+      attr_accessor locale: ("en" | "fr" | "ko" | "de" | "es" | "ja" | "ru" | "zh_CN" | "zh_TW" | "pt_BR" | "default")
+      attr_accessor grant_poweruser_privileges: ("TRUE" | "FALSE")
+      SENSITIVE: [:authentication_token, :given_name, :surname]
+    end
+
+    class UpdateUserResponse
+      attr_accessor user: Types::User
+      SENSITIVE: []
+    end
+
+    class UploadMetadata
+      attr_accessor upload_url: ::String
+      attr_accessor signed_headers: ::Hash[::String, ::String]
+      SENSITIVE: [:upload_url]
+    end
+
+    class User
+      attr_accessor id: ::String
+      attr_accessor username: ::String
+      attr_accessor email_address: ::String
+      attr_accessor given_name: ::String
+      attr_accessor surname: ::String
+      attr_accessor organization_id: ::String
+      attr_accessor root_folder_id: ::String
+      attr_accessor recycle_bin_folder_id: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "PENDING")
+      attr_accessor type: ("USER" | "ADMIN" | "POWERUSER" | "MINIMALUSER" | "WORKSPACESUSER")
+      attr_accessor created_timestamp: ::Time
+      attr_accessor modified_timestamp: ::Time
+      attr_accessor time_zone_id: ::String
+      attr_accessor locale: ("en" | "fr" | "ko" | "de" | "es" | "ja" | "ru" | "zh_CN" | "zh_TW" | "pt_BR" | "default")
+      attr_accessor storage: Types::UserStorageMetadata
+      SENSITIVE: [:username, :email_address, :given_name, :surname]
+    end
+
+    class UserMetadata
+      attr_accessor id: ::String
+      attr_accessor username: ::String
+      attr_accessor given_name: ::String
+      attr_accessor surname: ::String
+      attr_accessor email_address: ::String
+      SENSITIVE: [:username, :given_name, :surname, :email_address]
+    end
+
+    class UserStorageMetadata
+      attr_accessor storage_utilized_in_bytes: ::Integer
+      attr_accessor storage_rule: Types::StorageRuleType
+      SENSITIVE: []
+    end
+  end
+end

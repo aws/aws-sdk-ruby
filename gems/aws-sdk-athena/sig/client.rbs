@@ -1,0 +1,1012 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Athena
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchGetNamedQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetNamedQueryOutput]
+        def named_queries: () -> ::Array[Types::NamedQuery]
+        def unprocessed_named_query_ids: () -> ::Array[Types::UnprocessedNamedQueryId]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#batch_get_named_query-instance_method
+      def batch_get_named_query: (
+                                   named_query_ids: Array[::String]
+                                 ) -> _BatchGetNamedQueryResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetNamedQueryResponseSuccess
+
+      interface _BatchGetPreparedStatementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetPreparedStatementOutput]
+        def prepared_statements: () -> ::Array[Types::PreparedStatement]
+        def unprocessed_prepared_statement_names: () -> ::Array[Types::UnprocessedPreparedStatementName]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#batch_get_prepared_statement-instance_method
+      def batch_get_prepared_statement: (
+                                          prepared_statement_names: Array[::String],
+                                          work_group: ::String
+                                        ) -> _BatchGetPreparedStatementResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetPreparedStatementResponseSuccess
+
+      interface _BatchGetQueryExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetQueryExecutionOutput]
+        def query_executions: () -> ::Array[Types::QueryExecution]
+        def unprocessed_query_execution_ids: () -> ::Array[Types::UnprocessedQueryExecutionId]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#batch_get_query_execution-instance_method
+      def batch_get_query_execution: (
+                                       query_execution_ids: Array[::String]
+                                     ) -> _BatchGetQueryExecutionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetQueryExecutionResponseSuccess
+
+      interface _CancelCapacityReservationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelCapacityReservationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#cancel_capacity_reservation-instance_method
+      def cancel_capacity_reservation: (
+                                         name: ::String
+                                       ) -> _CancelCapacityReservationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelCapacityReservationResponseSuccess
+
+      interface _CreateCapacityReservationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCapacityReservationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#create_capacity_reservation-instance_method
+      def create_capacity_reservation: (
+                                         target_dpus: ::Integer,
+                                         name: ::String,
+                                         ?tags: Array[
+                                           {
+                                             key: ::String?,
+                                             value: ::String?
+                                           },
+                                         ]
+                                       ) -> _CreateCapacityReservationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCapacityReservationResponseSuccess
+
+      interface _CreateDataCatalogResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataCatalogOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#create_data_catalog-instance_method
+      def create_data_catalog: (
+                                 name: ::String,
+                                 type: ("LAMBDA" | "GLUE" | "HIVE"),
+                                 ?description: ::String,
+                                 ?parameters: Hash[::String, ::String],
+                                 ?tags: Array[
+                                   {
+                                     key: ::String?,
+                                     value: ::String?
+                                   },
+                                 ]
+                               ) -> _CreateDataCatalogResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataCatalogResponseSuccess
+
+      interface _CreateNamedQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNamedQueryOutput]
+        def named_query_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#create_named_query-instance_method
+      def create_named_query: (
+                                name: ::String,
+                                ?description: ::String,
+                                database: ::String,
+                                query_string: ::String,
+                                ?client_request_token: ::String,
+                                ?work_group: ::String
+                              ) -> _CreateNamedQueryResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNamedQueryResponseSuccess
+
+      interface _CreateNotebookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNotebookOutput]
+        def notebook_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#create_notebook-instance_method
+      def create_notebook: (
+                             work_group: ::String,
+                             name: ::String,
+                             ?client_request_token: ::String
+                           ) -> _CreateNotebookResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNotebookResponseSuccess
+
+      interface _CreatePreparedStatementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePreparedStatementOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#create_prepared_statement-instance_method
+      def create_prepared_statement: (
+                                       statement_name: ::String,
+                                       work_group: ::String,
+                                       query_statement: ::String,
+                                       ?description: ::String
+                                     ) -> _CreatePreparedStatementResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePreparedStatementResponseSuccess
+
+      interface _CreatePresignedNotebookUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePresignedNotebookUrlResponse]
+        def notebook_url: () -> ::String
+        def auth_token: () -> ::String
+        def auth_token_expiration_time: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#create_presigned_notebook_url-instance_method
+      def create_presigned_notebook_url: (
+                                           session_id: ::String
+                                         ) -> _CreatePresignedNotebookUrlResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePresignedNotebookUrlResponseSuccess
+
+      interface _CreateWorkGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkGroupOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#create_work_group-instance_method
+      def create_work_group: (
+                               name: ::String,
+                               ?configuration: {
+                                 result_configuration: {
+                                   output_location: ::String?,
+                                   encryption_configuration: {
+                                     encryption_option: ("SSE_S3" | "SSE_KMS" | "CSE_KMS"),
+                                     kms_key: ::String?
+                                   }?,
+                                   expected_bucket_owner: ::String?,
+                                   acl_configuration: {
+                                     s3_acl_option: ("BUCKET_OWNER_FULL_CONTROL")
+                                   }?
+                                 }?,
+                                 enforce_work_group_configuration: bool?,
+                                 publish_cloud_watch_metrics_enabled: bool?,
+                                 bytes_scanned_cutoff_per_query: ::Integer?,
+                                 requester_pays_enabled: bool?,
+                                 engine_version: {
+                                   selected_engine_version: ::String?,
+                                   effective_engine_version: ::String?
+                                 }?,
+                                 additional_configuration: ::String?,
+                                 execution_role: ::String?,
+                                 customer_content_encryption_configuration: {
+                                   kms_key: ::String
+                                 }?,
+                                 enable_minimum_encryption_configuration: bool?,
+                                 identity_center_configuration: {
+                                   enable_identity_center: bool?,
+                                   identity_center_instance_arn: ::String?
+                                 }?,
+                                 query_results_s3_access_grants_configuration: {
+                                   enable_s3_access_grants: bool,
+                                   create_user_level_prefix: bool?,
+                                   authentication_type: ("DIRECTORY_IDENTITY")
+                                 }?
+                               },
+                               ?description: ::String,
+                               ?tags: Array[
+                                 {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                               ]
+                             ) -> _CreateWorkGroupResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkGroupResponseSuccess
+
+      interface _DeleteCapacityReservationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCapacityReservationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#delete_capacity_reservation-instance_method
+      def delete_capacity_reservation: (
+                                         name: ::String
+                                       ) -> _DeleteCapacityReservationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCapacityReservationResponseSuccess
+
+      interface _DeleteDataCatalogResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataCatalogOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#delete_data_catalog-instance_method
+      def delete_data_catalog: (
+                                 name: ::String
+                               ) -> _DeleteDataCatalogResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataCatalogResponseSuccess
+
+      interface _DeleteNamedQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNamedQueryOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#delete_named_query-instance_method
+      def delete_named_query: (
+                                named_query_id: ::String
+                              ) -> _DeleteNamedQueryResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNamedQueryResponseSuccess
+
+      interface _DeleteNotebookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNotebookOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#delete_notebook-instance_method
+      def delete_notebook: (
+                             notebook_id: ::String
+                           ) -> _DeleteNotebookResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNotebookResponseSuccess
+
+      interface _DeletePreparedStatementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePreparedStatementOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#delete_prepared_statement-instance_method
+      def delete_prepared_statement: (
+                                       statement_name: ::String,
+                                       work_group: ::String
+                                     ) -> _DeletePreparedStatementResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePreparedStatementResponseSuccess
+
+      interface _DeleteWorkGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkGroupOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#delete_work_group-instance_method
+      def delete_work_group: (
+                               work_group: ::String,
+                               ?recursive_delete_option: bool
+                             ) -> _DeleteWorkGroupResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkGroupResponseSuccess
+
+      interface _ExportNotebookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportNotebookOutput]
+        def notebook_metadata: () -> Types::NotebookMetadata
+        def payload: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#export_notebook-instance_method
+      def export_notebook: (
+                             notebook_id: ::String
+                           ) -> _ExportNotebookResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportNotebookResponseSuccess
+
+      interface _GetCalculationExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCalculationExecutionResponse]
+        def calculation_execution_id: () -> ::String
+        def session_id: () -> ::String
+        def description: () -> ::String
+        def working_directory: () -> ::String
+        def status: () -> Types::CalculationStatus
+        def statistics: () -> Types::CalculationStatistics
+        def result: () -> Types::CalculationResult
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_calculation_execution-instance_method
+      def get_calculation_execution: (
+                                       calculation_execution_id: ::String
+                                     ) -> _GetCalculationExecutionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCalculationExecutionResponseSuccess
+
+      interface _GetCalculationExecutionCodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCalculationExecutionCodeResponse]
+        def code_block: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_calculation_execution_code-instance_method
+      def get_calculation_execution_code: (
+                                            calculation_execution_id: ::String
+                                          ) -> _GetCalculationExecutionCodeResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCalculationExecutionCodeResponseSuccess
+
+      interface _GetCalculationExecutionStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCalculationExecutionStatusResponse]
+        def status: () -> Types::CalculationStatus
+        def statistics: () -> Types::CalculationStatistics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_calculation_execution_status-instance_method
+      def get_calculation_execution_status: (
+                                              calculation_execution_id: ::String
+                                            ) -> _GetCalculationExecutionStatusResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCalculationExecutionStatusResponseSuccess
+
+      interface _GetCapacityAssignmentConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCapacityAssignmentConfigurationOutput]
+        def capacity_assignment_configuration: () -> Types::CapacityAssignmentConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_capacity_assignment_configuration-instance_method
+      def get_capacity_assignment_configuration: (
+                                                   capacity_reservation_name: ::String
+                                                 ) -> _GetCapacityAssignmentConfigurationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCapacityAssignmentConfigurationResponseSuccess
+
+      interface _GetCapacityReservationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCapacityReservationOutput]
+        def capacity_reservation: () -> Types::CapacityReservation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_capacity_reservation-instance_method
+      def get_capacity_reservation: (
+                                      name: ::String
+                                    ) -> _GetCapacityReservationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCapacityReservationResponseSuccess
+
+      interface _GetDataCatalogResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataCatalogOutput]
+        def data_catalog: () -> Types::DataCatalog
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_data_catalog-instance_method
+      def get_data_catalog: (
+                              name: ::String,
+                              ?work_group: ::String
+                            ) -> _GetDataCatalogResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataCatalogResponseSuccess
+
+      interface _GetDatabaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDatabaseOutput]
+        def database: () -> Types::Database
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_database-instance_method
+      def get_database: (
+                          catalog_name: ::String,
+                          database_name: ::String,
+                          ?work_group: ::String
+                        ) -> _GetDatabaseResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDatabaseResponseSuccess
+
+      interface _GetNamedQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNamedQueryOutput]
+        def named_query: () -> Types::NamedQuery
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_named_query-instance_method
+      def get_named_query: (
+                             named_query_id: ::String
+                           ) -> _GetNamedQueryResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNamedQueryResponseSuccess
+
+      interface _GetNotebookMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNotebookMetadataOutput]
+        def notebook_metadata: () -> Types::NotebookMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_notebook_metadata-instance_method
+      def get_notebook_metadata: (
+                                   notebook_id: ::String
+                                 ) -> _GetNotebookMetadataResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNotebookMetadataResponseSuccess
+
+      interface _GetPreparedStatementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPreparedStatementOutput]
+        def prepared_statement: () -> Types::PreparedStatement
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_prepared_statement-instance_method
+      def get_prepared_statement: (
+                                    statement_name: ::String,
+                                    work_group: ::String
+                                  ) -> _GetPreparedStatementResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPreparedStatementResponseSuccess
+
+      interface _GetQueryExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQueryExecutionOutput]
+        def query_execution: () -> Types::QueryExecution
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_query_execution-instance_method
+      def get_query_execution: (
+                                 query_execution_id: ::String
+                               ) -> _GetQueryExecutionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueryExecutionResponseSuccess
+
+      interface _GetQueryResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQueryResultsOutput]
+        def update_count: () -> ::Integer
+        def result_set: () -> Types::ResultSet
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_query_results-instance_method
+      def get_query_results: (
+                               query_execution_id: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _GetQueryResultsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueryResultsResponseSuccess
+
+      interface _GetQueryRuntimeStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetQueryRuntimeStatisticsOutput]
+        def query_runtime_statistics: () -> Types::QueryRuntimeStatistics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_query_runtime_statistics-instance_method
+      def get_query_runtime_statistics: (
+                                          query_execution_id: ::String
+                                        ) -> _GetQueryRuntimeStatisticsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetQueryRuntimeStatisticsResponseSuccess
+
+      interface _GetSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionResponse]
+        def session_id: () -> ::String
+        def description: () -> ::String
+        def work_group: () -> ::String
+        def engine_version: () -> ::String
+        def engine_configuration: () -> Types::EngineConfiguration
+        def notebook_version: () -> ::String
+        def session_configuration: () -> Types::SessionConfiguration
+        def status: () -> Types::SessionStatus
+        def statistics: () -> Types::SessionStatistics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_session-instance_method
+      def get_session: (
+                         session_id: ::String
+                       ) -> _GetSessionResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionResponseSuccess
+
+      interface _GetSessionStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSessionStatusResponse]
+        def session_id: () -> ::String
+        def status: () -> Types::SessionStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_session_status-instance_method
+      def get_session_status: (
+                                session_id: ::String
+                              ) -> _GetSessionStatusResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionStatusResponseSuccess
+
+      interface _GetTableMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTableMetadataOutput]
+        def table_metadata: () -> Types::TableMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_table_metadata-instance_method
+      def get_table_metadata: (
+                                catalog_name: ::String,
+                                database_name: ::String,
+                                table_name: ::String,
+                                ?work_group: ::String
+                              ) -> _GetTableMetadataResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableMetadataResponseSuccess
+
+      interface _GetWorkGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkGroupOutput]
+        def work_group: () -> Types::WorkGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_work_group-instance_method
+      def get_work_group: (
+                            work_group: ::String
+                          ) -> _GetWorkGroupResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkGroupResponseSuccess
+
+      interface _ImportNotebookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportNotebookOutput]
+        def notebook_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#import_notebook-instance_method
+      def import_notebook: (
+                             work_group: ::String,
+                             name: ::String,
+                             ?payload: ::String,
+                             type: ("IPYNB"),
+                             ?notebook_s3_location_uri: ::String,
+                             ?client_request_token: ::String
+                           ) -> _ImportNotebookResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportNotebookResponseSuccess
+
+      interface _ListApplicationDPUSizesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationDPUSizesOutput]
+        def application_dpu_sizes: () -> ::Array[Types::ApplicationDPUSizes]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_application_dpu_sizes-instance_method
+      def list_application_dpu_sizes: (
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListApplicationDPUSizesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationDPUSizesResponseSuccess
+
+      interface _ListCalculationExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCalculationExecutionsResponse]
+        def next_token: () -> ::String
+        def calculations: () -> ::Array[Types::CalculationSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_calculation_executions-instance_method
+      def list_calculation_executions: (
+                                         session_id: ::String,
+                                         ?state_filter: ("CREATING" | "CREATED" | "QUEUED" | "RUNNING" | "CANCELING" | "CANCELED" | "COMPLETED" | "FAILED"),
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListCalculationExecutionsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCalculationExecutionsResponseSuccess
+
+      interface _ListCapacityReservationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCapacityReservationsOutput]
+        def next_token: () -> ::String
+        def capacity_reservations: () -> ::Array[Types::CapacityReservation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_capacity_reservations-instance_method
+      def list_capacity_reservations: (
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListCapacityReservationsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCapacityReservationsResponseSuccess
+
+      interface _ListDataCatalogsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataCatalogsOutput]
+        def data_catalogs_summary: () -> ::Array[Types::DataCatalogSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_data_catalogs-instance_method
+      def list_data_catalogs: (
+                                ?next_token: ::String,
+                                ?max_results: ::Integer,
+                                ?work_group: ::String
+                              ) -> _ListDataCatalogsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataCatalogsResponseSuccess
+
+      interface _ListDatabasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatabasesOutput]
+        def database_list: () -> ::Array[Types::Database]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_databases-instance_method
+      def list_databases: (
+                            catalog_name: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer,
+                            ?work_group: ::String
+                          ) -> _ListDatabasesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatabasesResponseSuccess
+
+      interface _ListEngineVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEngineVersionsOutput]
+        def engine_versions: () -> ::Array[Types::EngineVersion]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_engine_versions-instance_method
+      def list_engine_versions: (
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListEngineVersionsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEngineVersionsResponseSuccess
+
+      interface _ListExecutorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExecutorsResponse]
+        def session_id: () -> ::String
+        def next_token: () -> ::String
+        def executors_summary: () -> ::Array[Types::ExecutorsSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_executors-instance_method
+      def list_executors: (
+                            session_id: ::String,
+                            ?executor_state_filter: ("CREATING" | "CREATED" | "REGISTERED" | "TERMINATING" | "TERMINATED" | "FAILED"),
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListExecutorsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExecutorsResponseSuccess
+
+      interface _ListNamedQueriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNamedQueriesOutput]
+        def named_query_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_named_queries-instance_method
+      def list_named_queries: (
+                                ?next_token: ::String,
+                                ?max_results: ::Integer,
+                                ?work_group: ::String
+                              ) -> _ListNamedQueriesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNamedQueriesResponseSuccess
+
+      interface _ListNotebookMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNotebookMetadataOutput]
+        def next_token: () -> ::String
+        def notebook_metadata_list: () -> ::Array[Types::NotebookMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_notebook_metadata-instance_method
+      def list_notebook_metadata: (
+                                    ?filters: {
+                                      name: ::String?
+                                    },
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer,
+                                    work_group: ::String
+                                  ) -> _ListNotebookMetadataResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotebookMetadataResponseSuccess
+
+      interface _ListNotebookSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNotebookSessionsResponse]
+        def notebook_sessions_list: () -> ::Array[Types::NotebookSessionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_notebook_sessions-instance_method
+      def list_notebook_sessions: (
+                                    notebook_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListNotebookSessionsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotebookSessionsResponseSuccess
+
+      interface _ListPreparedStatementsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPreparedStatementsOutput]
+        def prepared_statements: () -> ::Array[Types::PreparedStatementSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_prepared_statements-instance_method
+      def list_prepared_statements: (
+                                      work_group: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListPreparedStatementsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPreparedStatementsResponseSuccess
+
+      interface _ListQueryExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListQueryExecutionsOutput]
+        def query_execution_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_query_executions-instance_method
+      def list_query_executions: (
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
+                                   ?work_group: ::String
+                                 ) -> _ListQueryExecutionsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListQueryExecutionsResponseSuccess
+
+      interface _ListSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSessionsResponse]
+        def next_token: () -> ::String
+        def sessions: () -> ::Array[Types::SessionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_sessions-instance_method
+      def list_sessions: (
+                           work_group: ::String,
+                           ?state_filter: ("CREATING" | "CREATED" | "IDLE" | "BUSY" | "TERMINATING" | "TERMINATED" | "DEGRADED" | "FAILED"),
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListSessionsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSessionsResponseSuccess
+
+      interface _ListTableMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTableMetadataOutput]
+        def table_metadata_list: () -> ::Array[Types::TableMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_table_metadata-instance_method
+      def list_table_metadata: (
+                                 catalog_name: ::String,
+                                 database_name: ::String,
+                                 ?expression: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer,
+                                 ?work_group: ::String
+                               ) -> _ListTableMetadataResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTableMetadataResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWorkGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkGroupsOutput]
+        def work_groups: () -> ::Array[Types::WorkGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_work_groups-instance_method
+      def list_work_groups: (
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _ListWorkGroupsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkGroupsResponseSuccess
+
+      interface _PutCapacityAssignmentConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutCapacityAssignmentConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#put_capacity_assignment_configuration-instance_method
+      def put_capacity_assignment_configuration: (
+                                                   capacity_reservation_name: ::String,
+                                                   capacity_assignments: Array[
+                                                     {
+                                                       work_group_names: Array[::String]?
+                                                     },
+                                                   ]
+                                                 ) -> _PutCapacityAssignmentConfigurationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutCapacityAssignmentConfigurationResponseSuccess
+
+      interface _StartCalculationExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartCalculationExecutionResponse]
+        def calculation_execution_id: () -> ::String
+        def state: () -> ("CREATING" | "CREATED" | "QUEUED" | "RUNNING" | "CANCELING" | "CANCELED" | "COMPLETED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#start_calculation_execution-instance_method
+      def start_calculation_execution: (
+                                         session_id: ::String,
+                                         ?description: ::String,
+                                         ?calculation_configuration: {
+                                           code_block: ::String?
+                                         },
+                                         ?code_block: ::String,
+                                         ?client_request_token: ::String
+                                       ) -> _StartCalculationExecutionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCalculationExecutionResponseSuccess
+
+      interface _StartQueryExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartQueryExecutionOutput]
+        def query_execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#start_query_execution-instance_method
+      def start_query_execution: (
+                                   query_string: ::String,
+                                   ?client_request_token: ::String,
+                                   ?query_execution_context: {
+                                     database: ::String?,
+                                     catalog: ::String?
+                                   },
+                                   ?result_configuration: {
+                                     output_location: ::String?,
+                                     encryption_configuration: {
+                                       encryption_option: ("SSE_S3" | "SSE_KMS" | "CSE_KMS"),
+                                       kms_key: ::String?
+                                     }?,
+                                     expected_bucket_owner: ::String?,
+                                     acl_configuration: {
+                                       s3_acl_option: ("BUCKET_OWNER_FULL_CONTROL")
+                                     }?
+                                   },
+                                   ?work_group: ::String,
+                                   ?execution_parameters: Array[::String],
+                                   ?result_reuse_configuration: {
+                                     result_reuse_by_age_configuration: {
+                                       enabled: bool,
+                                       max_age_in_minutes: ::Integer?
+                                     }?
+                                   }
+                                 ) -> _StartQueryExecutionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartQueryExecutionResponseSuccess
+
+      interface _StartSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSessionResponse]
+        def session_id: () -> ::String
+        def state: () -> ("CREATING" | "CREATED" | "IDLE" | "BUSY" | "TERMINATING" | "TERMINATED" | "DEGRADED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#start_session-instance_method
+      def start_session: (
+                           ?description: ::String,
+                           work_group: ::String,
+                           engine_configuration: {
+                             coordinator_dpu_size: ::Integer?,
+                             max_concurrent_dpus: ::Integer,
+                             default_executor_dpu_size: ::Integer?,
+                             additional_configs: Hash[::String, ::String]?,
+                             spark_properties: Hash[::String, ::String]?
+                           },
+                           ?notebook_version: ::String,
+                           ?session_idle_timeout_in_minutes: ::Integer,
+                           ?client_request_token: ::String
+                         ) -> _StartSessionResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSessionResponseSuccess
+
+      interface _StopCalculationExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopCalculationExecutionResponse]
+        def state: () -> ("CREATING" | "CREATED" | "QUEUED" | "RUNNING" | "CANCELING" | "CANCELED" | "COMPLETED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#stop_calculation_execution-instance_method
+      def stop_calculation_execution: (
+                                        calculation_execution_id: ::String
+                                      ) -> _StopCalculationExecutionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopCalculationExecutionResponseSuccess
+
+      interface _StopQueryExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopQueryExecutionOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#stop_query_execution-instance_method
+      def stop_query_execution: (
+                                  query_execution_id: ::String
+                                ) -> _StopQueryExecutionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopQueryExecutionResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _TerminateSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TerminateSessionResponse]
+        def state: () -> ("CREATING" | "CREATED" | "IDLE" | "BUSY" | "TERMINATING" | "TERMINATED" | "DEGRADED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#terminate_session-instance_method
+      def terminate_session: (
+                               session_id: ::String
+                             ) -> _TerminateSessionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateSessionResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateCapacityReservationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCapacityReservationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#update_capacity_reservation-instance_method
+      def update_capacity_reservation: (
+                                         target_dpus: ::Integer,
+                                         name: ::String
+                                       ) -> _UpdateCapacityReservationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCapacityReservationResponseSuccess
+
+      interface _UpdateDataCatalogResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataCatalogOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#update_data_catalog-instance_method
+      def update_data_catalog: (
+                                 name: ::String,
+                                 type: ("LAMBDA" | "GLUE" | "HIVE"),
+                                 ?description: ::String,
+                                 ?parameters: Hash[::String, ::String]
+                               ) -> _UpdateDataCatalogResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataCatalogResponseSuccess
+
+      interface _UpdateNamedQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNamedQueryOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#update_named_query-instance_method
+      def update_named_query: (
+                                named_query_id: ::String,
+                                name: ::String,
+                                ?description: ::String,
+                                query_string: ::String
+                              ) -> _UpdateNamedQueryResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNamedQueryResponseSuccess
+
+      interface _UpdateNotebookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNotebookOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#update_notebook-instance_method
+      def update_notebook: (
+                             notebook_id: ::String,
+                             payload: ::String,
+                             type: ("IPYNB"),
+                             ?session_id: ::String,
+                             ?client_request_token: ::String
+                           ) -> _UpdateNotebookResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNotebookResponseSuccess
+
+      interface _UpdateNotebookMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNotebookMetadataOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#update_notebook_metadata-instance_method
+      def update_notebook_metadata: (
+                                      notebook_id: ::String,
+                                      ?client_request_token: ::String,
+                                      name: ::String
+                                    ) -> _UpdateNotebookMetadataResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNotebookMetadataResponseSuccess
+
+      interface _UpdatePreparedStatementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePreparedStatementOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#update_prepared_statement-instance_method
+      def update_prepared_statement: (
+                                       statement_name: ::String,
+                                       work_group: ::String,
+                                       query_statement: ::String,
+                                       ?description: ::String
+                                     ) -> _UpdatePreparedStatementResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePreparedStatementResponseSuccess
+
+      interface _UpdateWorkGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkGroupOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#update_work_group-instance_method
+      def update_work_group: (
+                               work_group: ::String,
+                               ?description: ::String,
+                               ?configuration_updates: {
+                                 enforce_work_group_configuration: bool?,
+                                 result_configuration_updates: {
+                                   output_location: ::String?,
+                                   remove_output_location: bool?,
+                                   encryption_configuration: {
+                                     encryption_option: ("SSE_S3" | "SSE_KMS" | "CSE_KMS"),
+                                     kms_key: ::String?
+                                   }?,
+                                   remove_encryption_configuration: bool?,
+                                   expected_bucket_owner: ::String?,
+                                   remove_expected_bucket_owner: bool?,
+                                   acl_configuration: {
+                                     s3_acl_option: ("BUCKET_OWNER_FULL_CONTROL")
+                                   }?,
+                                   remove_acl_configuration: bool?
+                                 }?,
+                                 publish_cloud_watch_metrics_enabled: bool?,
+                                 bytes_scanned_cutoff_per_query: ::Integer?,
+                                 remove_bytes_scanned_cutoff_per_query: bool?,
+                                 requester_pays_enabled: bool?,
+                                 engine_version: {
+                                   selected_engine_version: ::String?,
+                                   effective_engine_version: ::String?
+                                 }?,
+                                 remove_customer_content_encryption_configuration: bool?,
+                                 additional_configuration: ::String?,
+                                 execution_role: ::String?,
+                                 customer_content_encryption_configuration: {
+                                   kms_key: ::String
+                                 }?,
+                                 enable_minimum_encryption_configuration: bool?,
+                                 query_results_s3_access_grants_configuration: {
+                                   enable_s3_access_grants: bool,
+                                   create_user_level_prefix: bool?,
+                                   authentication_type: ("DIRECTORY_IDENTITY")
+                                 }?
+                               },
+                               ?state: ("ENABLED" | "DISABLED")
+                             ) -> _UpdateWorkGroupResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkGroupResponseSuccess
+    end
+  end
+end
+

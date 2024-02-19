@@ -1,0 +1,612 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::EntityResolution
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIdMappingWorkflowInput
+      attr_accessor description: ::String
+      attr_accessor id_mapping_techniques: Types::IdMappingTechniques
+      attr_accessor input_source_config: ::Array[Types::IdMappingWorkflowInputSource]
+      attr_accessor output_source_config: ::Array[Types::IdMappingWorkflowOutputSource]
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIdMappingWorkflowOutput
+      attr_accessor description: ::String
+      attr_accessor id_mapping_techniques: Types::IdMappingTechniques
+      attr_accessor input_source_config: ::Array[Types::IdMappingWorkflowInputSource]
+      attr_accessor output_source_config: ::Array[Types::IdMappingWorkflowOutputSource]
+      attr_accessor role_arn: ::String
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMatchingWorkflowInput
+      attr_accessor description: ::String
+      attr_accessor incremental_run_config: Types::IncrementalRunConfig
+      attr_accessor input_source_config: ::Array[Types::InputSource]
+      attr_accessor output_source_config: ::Array[Types::OutputSource]
+      attr_accessor resolution_techniques: Types::ResolutionTechniques
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMatchingWorkflowOutput
+      attr_accessor description: ::String
+      attr_accessor incremental_run_config: Types::IncrementalRunConfig
+      attr_accessor input_source_config: ::Array[Types::InputSource]
+      attr_accessor output_source_config: ::Array[Types::OutputSource]
+      attr_accessor resolution_techniques: Types::ResolutionTechniques
+      attr_accessor role_arn: ::String
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSchemaMappingInput
+      attr_accessor description: ::String
+      attr_accessor mapped_input_fields: ::Array[Types::SchemaInputAttribute]
+      attr_accessor schema_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSchemaMappingOutput
+      attr_accessor description: ::String
+      attr_accessor mapped_input_fields: ::Array[Types::SchemaInputAttribute]
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIdMappingWorkflowInput
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIdMappingWorkflowOutput
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMatchingWorkflowInput
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMatchingWorkflowOutput
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSchemaMappingInput
+      attr_accessor schema_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSchemaMappingOutput
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorDetails
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ExceedsLimitException
+      attr_accessor message: ::String
+      attr_accessor quota_name: ::String
+      attr_accessor quota_value: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetIdMappingJobInput
+      attr_accessor job_id: ::String
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetIdMappingJobOutput
+      attr_accessor end_time: ::Time
+      attr_accessor error_details: Types::ErrorDetails
+      attr_accessor job_id: ::String
+      attr_accessor metrics: Types::IdMappingJobMetrics
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "QUEUED")
+      SENSITIVE: []
+    end
+
+    class GetIdMappingWorkflowInput
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetIdMappingWorkflowOutput
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor id_mapping_techniques: Types::IdMappingTechniques
+      attr_accessor input_source_config: ::Array[Types::IdMappingWorkflowInputSource]
+      attr_accessor output_source_config: ::Array[Types::IdMappingWorkflowOutputSource]
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor updated_at: ::Time
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMatchIdInput
+      attr_accessor record: ::Hash[::String, ::String]
+      attr_accessor workflow_name: ::String
+      SENSITIVE: [:record]
+    end
+
+    class GetMatchIdOutput
+      attr_accessor match_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMatchingJobInput
+      attr_accessor job_id: ::String
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMatchingJobOutput
+      attr_accessor end_time: ::Time
+      attr_accessor error_details: Types::ErrorDetails
+      attr_accessor job_id: ::String
+      attr_accessor metrics: Types::JobMetrics
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "QUEUED")
+      SENSITIVE: []
+    end
+
+    class GetMatchingWorkflowInput
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMatchingWorkflowOutput
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor incremental_run_config: Types::IncrementalRunConfig
+      attr_accessor input_source_config: ::Array[Types::InputSource]
+      attr_accessor output_source_config: ::Array[Types::OutputSource]
+      attr_accessor resolution_techniques: Types::ResolutionTechniques
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor updated_at: ::Time
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetProviderServiceInput
+      attr_accessor provider_name: ::String
+      attr_accessor provider_service_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetProviderServiceOutput
+      attr_accessor anonymized_output: bool
+      attr_accessor provider_configuration_definition: untyped
+      attr_accessor provider_endpoint_configuration: Types::ProviderEndpointConfiguration
+      attr_accessor provider_entity_output_definition: untyped
+      attr_accessor provider_intermediate_data_access_configuration: Types::ProviderIntermediateDataAccessConfiguration
+      attr_accessor provider_name: ::String
+      attr_accessor provider_service_arn: ::String
+      attr_accessor provider_service_display_name: ::String
+      attr_accessor provider_service_name: ::String
+      attr_accessor provider_service_type: ("ASSIGNMENT" | "ID_MAPPING")
+      SENSITIVE: []
+    end
+
+    class GetSchemaMappingInput
+      attr_accessor schema_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetSchemaMappingOutput
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor has_workflows: bool
+      attr_accessor mapped_input_fields: ::Array[Types::SchemaInputAttribute]
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class IdMappingJobMetrics
+      attr_accessor input_records: ::Integer
+      attr_accessor records_not_processed: ::Integer
+      attr_accessor total_records_processed: ::Integer
+      SENSITIVE: []
+    end
+
+    class IdMappingTechniques
+      attr_accessor id_mapping_type: ("PROVIDER")
+      attr_accessor provider_properties: Types::ProviderProperties
+      SENSITIVE: []
+    end
+
+    class IdMappingWorkflowInputSource
+      attr_accessor input_source_arn: ::String
+      attr_accessor schema_name: ::String
+      SENSITIVE: []
+    end
+
+    class IdMappingWorkflowOutputSource
+      attr_accessor kms_arn: ::String
+      attr_accessor output_s3_path: ::String
+      SENSITIVE: []
+    end
+
+    class IdMappingWorkflowSummary
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class IncrementalRunConfig
+      attr_accessor incremental_run_type: ("IMMEDIATE")
+      SENSITIVE: []
+    end
+
+    class InputSource
+      attr_accessor apply_normalization: bool
+      attr_accessor input_source_arn: ::String
+      attr_accessor schema_name: ::String
+      SENSITIVE: []
+    end
+
+    class IntermediateSourceConfiguration
+      attr_accessor intermediate_s3_path: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobMetrics
+      attr_accessor input_records: ::Integer
+      attr_accessor match_i_ds: ::Integer
+      attr_accessor records_not_processed: ::Integer
+      attr_accessor total_records_processed: ::Integer
+      SENSITIVE: []
+    end
+
+    class JobSummary
+      attr_accessor end_time: ::Time
+      attr_accessor job_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor status: ("RUNNING" | "SUCCEEDED" | "FAILED" | "QUEUED")
+      SENSITIVE: []
+    end
+
+    class ListIdMappingJobsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdMappingJobsOutput
+      attr_accessor jobs: ::Array[Types::JobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdMappingWorkflowsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdMappingWorkflowsOutput
+      attr_accessor next_token: ::String
+      attr_accessor workflow_summaries: ::Array[Types::IdMappingWorkflowSummary]
+      SENSITIVE: []
+    end
+
+    class ListMatchingJobsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListMatchingJobsOutput
+      attr_accessor jobs: ::Array[Types::JobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMatchingWorkflowsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMatchingWorkflowsOutput
+      attr_accessor next_token: ::String
+      attr_accessor workflow_summaries: ::Array[Types::MatchingWorkflowSummary]
+      SENSITIVE: []
+    end
+
+    class ListProviderServicesInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor provider_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListProviderServicesOutput
+      attr_accessor next_token: ::String
+      attr_accessor provider_service_summaries: ::Array[Types::ProviderServiceSummary]
+      SENSITIVE: []
+    end
+
+    class ListSchemaMappingsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchemaMappingsOutput
+      attr_accessor next_token: ::String
+      attr_accessor schema_list: ::Array[Types::SchemaMappingSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MatchingWorkflowSummary
+      attr_accessor created_at: ::Time
+      attr_accessor resolution_type: ("RULE_MATCHING" | "ML_MATCHING" | "PROVIDER")
+      attr_accessor updated_at: ::Time
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class OutputAttribute
+      attr_accessor hashed: bool
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class OutputSource
+      attr_accessor kms_arn: ::String
+      attr_accessor apply_normalization: bool
+      attr_accessor output: ::Array[Types::OutputAttribute]
+      attr_accessor output_s3_path: ::String
+      SENSITIVE: []
+    end
+
+    class ProviderEndpointConfiguration
+      attr_accessor marketplace_configuration: Types::ProviderMarketplaceConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MarketplaceConfiguration < ProviderEndpointConfiguration
+      end
+      class Unknown < ProviderEndpointConfiguration
+      end
+    end
+
+    class ProviderIntermediateDataAccessConfiguration
+      attr_accessor aws_account_ids: ::Array[::String]
+      attr_accessor required_bucket_actions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ProviderMarketplaceConfiguration
+      attr_accessor asset_id: ::String
+      attr_accessor data_set_id: ::String
+      attr_accessor listing_id: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class ProviderProperties
+      attr_accessor intermediate_source_configuration: Types::IntermediateSourceConfiguration
+      attr_accessor provider_configuration: untyped
+      attr_accessor provider_service_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ProviderServiceSummary
+      attr_accessor provider_name: ::String
+      attr_accessor provider_service_arn: ::String
+      attr_accessor provider_service_display_name: ::String
+      attr_accessor provider_service_name: ::String
+      attr_accessor provider_service_type: ("ASSIGNMENT" | "ID_MAPPING")
+      SENSITIVE: []
+    end
+
+    class ResolutionTechniques
+      attr_accessor provider_properties: Types::ProviderProperties
+      attr_accessor resolution_type: ("RULE_MATCHING" | "ML_MATCHING" | "PROVIDER")
+      attr_accessor rule_based_properties: Types::RuleBasedProperties
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Rule
+      attr_accessor matching_keys: ::Array[::String]
+      attr_accessor rule_name: ::String
+      SENSITIVE: []
+    end
+
+    class RuleBasedProperties
+      attr_accessor attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY")
+      attr_accessor rules: ::Array[Types::Rule]
+      SENSITIVE: []
+    end
+
+    class SchemaInputAttribute
+      attr_accessor field_name: ::String
+      attr_accessor group_name: ::String
+      attr_accessor match_key: ::String
+      attr_accessor sub_type: ::String
+      attr_accessor type: ("NAME" | "NAME_FIRST" | "NAME_MIDDLE" | "NAME_LAST" | "ADDRESS" | "ADDRESS_STREET1" | "ADDRESS_STREET2" | "ADDRESS_STREET3" | "ADDRESS_CITY" | "ADDRESS_STATE" | "ADDRESS_COUNTRY" | "ADDRESS_POSTALCODE" | "PHONE" | "PHONE_NUMBER" | "PHONE_COUNTRYCODE" | "EMAIL_ADDRESS" | "UNIQUE_ID" | "DATE" | "STRING" | "PROVIDER_ID")
+      SENSITIVE: []
+    end
+
+    class SchemaMappingSummary
+      attr_accessor created_at: ::Time
+      attr_accessor has_workflows: bool
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StartIdMappingJobInput
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartIdMappingJobOutput
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartMatchingJobInput
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartMatchingJobOutput
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateIdMappingWorkflowInput
+      attr_accessor description: ::String
+      attr_accessor id_mapping_techniques: Types::IdMappingTechniques
+      attr_accessor input_source_config: ::Array[Types::IdMappingWorkflowInputSource]
+      attr_accessor output_source_config: ::Array[Types::IdMappingWorkflowOutputSource]
+      attr_accessor role_arn: ::String
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateIdMappingWorkflowOutput
+      attr_accessor description: ::String
+      attr_accessor id_mapping_techniques: Types::IdMappingTechniques
+      attr_accessor input_source_config: ::Array[Types::IdMappingWorkflowInputSource]
+      attr_accessor output_source_config: ::Array[Types::IdMappingWorkflowOutputSource]
+      attr_accessor role_arn: ::String
+      attr_accessor workflow_arn: ::String
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMatchingWorkflowInput
+      attr_accessor description: ::String
+      attr_accessor incremental_run_config: Types::IncrementalRunConfig
+      attr_accessor input_source_config: ::Array[Types::InputSource]
+      attr_accessor output_source_config: ::Array[Types::OutputSource]
+      attr_accessor resolution_techniques: Types::ResolutionTechniques
+      attr_accessor role_arn: ::String
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMatchingWorkflowOutput
+      attr_accessor description: ::String
+      attr_accessor incremental_run_config: Types::IncrementalRunConfig
+      attr_accessor input_source_config: ::Array[Types::InputSource]
+      attr_accessor output_source_config: ::Array[Types::OutputSource]
+      attr_accessor resolution_techniques: Types::ResolutionTechniques
+      attr_accessor role_arn: ::String
+      attr_accessor workflow_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSchemaMappingInput
+      attr_accessor description: ::String
+      attr_accessor mapped_input_fields: ::Array[Types::SchemaInputAttribute]
+      attr_accessor schema_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSchemaMappingOutput
+      attr_accessor description: ::String
+      attr_accessor mapped_input_fields: ::Array[Types::SchemaInputAttribute]
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

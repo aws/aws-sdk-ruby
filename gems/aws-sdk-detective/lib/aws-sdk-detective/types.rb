@@ -323,6 +323,27 @@ module Aws::Detective
       include Aws::Structure
     end
 
+    # Contains details on the time range used to filter data.
+    #
+    # @!attribute [rw] start_inclusive
+    #   A timestamp representing the start of the time period from when data
+    #   is filtered, including the start date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_inclusive
+    #   A timestamp representing the end date of the time period until when
+    #   data is filtered, including the end date.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/DateFilter AWS API Documentation
+    #
+    class DateFilter < Struct.new(
+      :start_inclusive,
+      :end_inclusive)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] graph_arn
     #   The ARN of the behavior graph to disable.
     #   @return [String]
@@ -429,6 +450,146 @@ module Aws::Detective
       include Aws::Structure
     end
 
+    # Details on the criteria used to define the filter for investigation
+    # results.
+    #
+    # @!attribute [rw] severity
+    #   Filter the investigation results based on the severity.
+    #   @return [Types::StringFilter]
+    #
+    # @!attribute [rw] status
+    #   Filter the investigation results based on the status.
+    #   @return [Types::StringFilter]
+    #
+    # @!attribute [rw] state
+    #   Filter the investigation results based on the state.
+    #   @return [Types::StringFilter]
+    #
+    # @!attribute [rw] entity_arn
+    #   Filter the investigation results based on the Amazon Resource Name
+    #   (ARN) of the entity.
+    #   @return [Types::StringFilter]
+    #
+    # @!attribute [rw] created_time
+    #   Filter the investigation results based on when the investigation was
+    #   created.
+    #   @return [Types::DateFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/FilterCriteria AWS API Documentation
+    #
+    class FilterCriteria < Struct.new(
+      :severity,
+      :status,
+      :state,
+      :entity_arn,
+      :created_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information on suspicious IP addresses identified as
+    # indicators of compromise. This indicator is derived from Amazon Web
+    # Services threat intelligence.
+    #
+    # @!attribute [rw] ip_address
+    #   IP address of the suspicious entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   Details the reason the IP address was flagged as suspicious.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/FlaggedIpAddressDetail AWS API Documentation
+    #
+    class FlaggedIpAddressDetail < Struct.new(
+      :ip_address,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] graph_arn
+    #   The Amazon Resource Name (ARN) of the behavior graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] investigation_id
+    #   The investigation ID of the investigation report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/GetInvestigationRequest AWS API Documentation
+    #
+    class GetInvestigationRequest < Struct.new(
+      :graph_arn,
+      :investigation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] graph_arn
+    #   The Amazon Resource Name (ARN) of the behavior graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] investigation_id
+    #   The investigation ID of the investigation report.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_arn
+    #   The unique Amazon Resource Name (ARN). Detective supports IAM user
+    #   ARNs and IAM role ARNs.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   Type of entity. For example, Amazon Web Services accounts, such as
+    #   an IAM user and/or IAM role.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The creation time of the investigation report in UTC time stamp
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scope_start_time
+    #   The start date and time used to set the scope time within which you
+    #   want to generate the investigation report. The value is an UTC
+    #   ISO8601 formatted string. For example, `2021-08-18T16:35:56.284Z`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scope_end_time
+    #   The data and time when the investigation began. The value is an UTC
+    #   ISO8601 formatted string. For example, `2021-08-18T16:35:56.284Z`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status based on the completion status of the investigation.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity assigned is based on the likelihood and impact of the
+    #   indicators of compromise discovered in the investigation.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the investigation. An archived investigation
+    #   indicates that you have completed reviewing the investigation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/GetInvestigationResponse AWS API Documentation
+    #
+    class GetInvestigationResponse < Struct.new(
+      :graph_arn,
+      :investigation_id,
+      :entity_arn,
+      :entity_type,
+      :created_time,
+      :scope_start_time,
+      :scope_end_time,
+      :status,
+      :severity,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] graph_arn
     #   The ARN of the behavior graph for which to request the member
     #   details.
@@ -495,6 +656,131 @@ module Aws::Detective
       include Aws::Structure
     end
 
+    # Contains information on unusual and impossible travel in an account.
+    #
+    # @!attribute [rw] starting_ip_address
+    #   IP address where the resource was first used in the impossible
+    #   travel.
+    #   @return [String]
+    #
+    # @!attribute [rw] ending_ip_address
+    #   IP address where the resource was last used in the impossible
+    #   travel.
+    #   @return [String]
+    #
+    # @!attribute [rw] starting_location
+    #   Location where the resource was first used in the impossible travel.
+    #   @return [String]
+    #
+    # @!attribute [rw] ending_location
+    #   Location where the resource was last used in the impossible travel.
+    #   @return [String]
+    #
+    # @!attribute [rw] hourly_time_delta
+    #   Returns the time difference between the first and last timestamp the
+    #   resource was used.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ImpossibleTravelDetail AWS API Documentation
+    #
+    class ImpossibleTravelDetail < Struct.new(
+      :starting_ip_address,
+      :ending_ip_address,
+      :starting_location,
+      :ending_location,
+      :hourly_time_delta)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detective investigations triages indicators of compromises such as a
+    # finding and surfaces only the most critical and suspicious issues, so
+    # you can focus on high-level investigations. An `Indicator` lets you
+    # determine if an Amazon Web Services resource is involved in unusual
+    # activity that could indicate malicious behavior and its impact.
+    #
+    # @!attribute [rw] indicator_type
+    #   The type of indicator.
+    #   @return [String]
+    #
+    # @!attribute [rw] indicator_detail
+    #   Details about the indicators of compromise that are used to
+    #   determine if a resource is involved in a security incident. An
+    #   indicator of compromise (IOC) is an artifact observed in or on a
+    #   network, system, or environment that can (with a high level of
+    #   confidence) identify malicious activity or a security incident.
+    #   @return [Types::IndicatorDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/Indicator AWS API Documentation
+    #
+    class Indicator < Struct.new(
+      :indicator_type,
+      :indicator_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the indicators of compromise which are used to determine
+    # if a resource is involved in a security incident. An indicator of
+    # compromise (IOC) is an artifact observed in or on a network, system,
+    # or environment that can (with a high level of confidence) identify
+    # malicious activity or a security incident. For the list of indicators
+    # of compromise that are generated by Detective investigations, see
+    # [Detective investigations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/detective/latest/userguide/detective-investigations.html
+    #
+    # @!attribute [rw] tt_ps_observed_detail
+    #   Details about the indicator of compromise.
+    #   @return [Types::TTPsObservedDetail]
+    #
+    # @!attribute [rw] impossible_travel_detail
+    #   Identifies unusual and impossible user activity for an account.
+    #   @return [Types::ImpossibleTravelDetail]
+    #
+    # @!attribute [rw] flagged_ip_address_detail
+    #   Suspicious IP addresses that are flagged, which indicates critical
+    #   or severe threats based on threat intelligence by Detective. This
+    #   indicator is derived from Amazon Web Services threat intelligence.
+    #   @return [Types::FlaggedIpAddressDetail]
+    #
+    # @!attribute [rw] new_geolocation_detail
+    #   Contains details about the new geographic location.
+    #   @return [Types::NewGeolocationDetail]
+    #
+    # @!attribute [rw] new_aso_detail
+    #   Contains details about the new Autonomous System Organization (ASO).
+    #   @return [Types::NewAsoDetail]
+    #
+    # @!attribute [rw] new_user_agent_detail
+    #   Contains details about the new user agent.
+    #   @return [Types::NewUserAgentDetail]
+    #
+    # @!attribute [rw] related_finding_detail
+    #   Contains details about related findings.
+    #   @return [Types::RelatedFindingDetail]
+    #
+    # @!attribute [rw] related_finding_group_detail
+    #   Contains details about related finding groups.
+    #   @return [Types::RelatedFindingGroupDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/IndicatorDetail AWS API Documentation
+    #
+    class IndicatorDetail < Struct.new(
+      :tt_ps_observed_detail,
+      :impossible_travel_detail,
+      :flagged_ip_address_detail,
+      :new_geolocation_detail,
+      :new_aso_detail,
+      :new_user_agent_detail,
+      :related_finding_detail,
+      :related_finding_group_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request was valid but failed because of a problem with the
     # service.
     #
@@ -505,6 +791,56 @@ module Aws::Detective
     #
     class InternalServerException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the investigation related to a potential security event
+    # identified by Detective.
+    #
+    # @!attribute [rw] investigation_id
+    #   The investigation ID of the investigation report.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   Severity based on the likelihood and impact of the indicators of
+    #   compromise discovered in the investigation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status based on the completion status of the investigation.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the investigation. An archived investigation
+    #   indicates you have completed reviewing the investigation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time stamp of the creation time of the investigation report. The
+    #   value is an UTC ISO8601 formatted string. For example,
+    #   `2021-08-18T16:35:56.284Z`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] entity_arn
+    #   The unique Amazon Resource Name (ARN) of the IAM user and IAM role.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   Type of entity. For example, Amazon Web Services accounts, such as
+    #   IAM user and role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/InvestigationDetail AWS API Documentation
+    #
+    class InvestigationDetail < Struct.new(
+      :investigation_id,
+      :severity,
+      :status,
+      :state,
+      :created_time,
+      :entity_arn,
+      :entity_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -588,6 +924,143 @@ module Aws::Detective
     #
     class ListGraphsResponse < Struct.new(
       :graph_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] graph_arn
+    #   The Amazon Resource Name (ARN) of the behavior graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] investigation_id
+    #   The investigation ID of the investigation report.
+    #   @return [String]
+    #
+    # @!attribute [rw] indicator_type
+    #   For the list of indicators of compromise that are generated by
+    #   Detective investigations, see [Detective investigations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/detective/latest/userguide/detective-investigations.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Lists if there are more results available. The value of nextToken is
+    #   a unique pagination token for each page. Repeat the call using the
+    #   returned token to retrieve the next page. Keep all other arguments
+    #   unchanged.
+    #
+    #   Each pagination token expires after 24 hours. Using an expired
+    #   pagination token will return a Validation Exception error.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Lists the maximum number of indicators in a page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListIndicatorsRequest AWS API Documentation
+    #
+    class ListIndicatorsRequest < Struct.new(
+      :graph_arn,
+      :investigation_id,
+      :indicator_type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] graph_arn
+    #   The Amazon Resource Name (ARN) of the behavior graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] investigation_id
+    #   The investigation ID of the investigation report.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Lists if there are more results available. The value of nextToken is
+    #   a unique pagination token for each page. Repeat the call using the
+    #   returned token to retrieve the next page. Keep all other arguments
+    #   unchanged.
+    #
+    #   Each pagination token expires after 24 hours. Using an expired
+    #   pagination token will return a Validation Exception error.
+    #   @return [String]
+    #
+    # @!attribute [rw] indicators
+    #   Lists the indicators of compromise.
+    #   @return [Array<Types::Indicator>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListIndicatorsResponse AWS API Documentation
+    #
+    class ListIndicatorsResponse < Struct.new(
+      :graph_arn,
+      :investigation_id,
+      :next_token,
+      :indicators)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] graph_arn
+    #   The Amazon Resource Name (ARN) of the behavior graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Lists if there are more results available. The value of nextToken is
+    #   a unique pagination token for each page. Repeat the call using the
+    #   returned token to retrieve the next page. Keep all other arguments
+    #   unchanged.
+    #
+    #   Each pagination token expires after 24 hours. Using an expired
+    #   pagination token will return a Validation Exception error.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Lists the maximum number of investigations in a page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter_criteria
+    #   Filters the investigation results based on a criteria.
+    #   @return [Types::FilterCriteria]
+    #
+    # @!attribute [rw] sort_criteria
+    #   Sorts the investigation results based on a criteria.
+    #   @return [Types::SortCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListInvestigationsRequest AWS API Documentation
+    #
+    class ListInvestigationsRequest < Struct.new(
+      :graph_arn,
+      :next_token,
+      :max_results,
+      :filter_criteria,
+      :sort_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] investigation_details
+    #   Lists the summary of uncommon behavior or malicious activity which
+    #   indicates a compromise.
+    #   @return [Array<Types::InvestigationDetail>]
+    #
+    # @!attribute [rw] next_token
+    #   Lists if there are more results available. The value of nextToken is
+    #   a unique pagination token for each page. Repeat the call using the
+    #   returned token to retrieve the next page. Keep all other arguments
+    #   unchanged.
+    #
+    #   Each pagination token expires after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListInvestigationsResponse AWS API Documentation
+    #
+    class ListInvestigationsResponse < Struct.new(
+      :investigation_details,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -939,6 +1412,72 @@ module Aws::Detective
       include Aws::Structure
     end
 
+    # Details new Autonomous System Organizations (ASOs) used either at the
+    # resource or account level.
+    #
+    # @!attribute [rw] aso
+    #   Details about the new Autonomous System Organization (ASO).
+    #   @return [String]
+    #
+    # @!attribute [rw] is_new_for_entire_account
+    #   Checks if the Autonomous System Organization (ASO) is new for the
+    #   entire account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/NewAsoDetail AWS API Documentation
+    #
+    class NewAsoDetail < Struct.new(
+      :aso,
+      :is_new_for_entire_account)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details new geolocations used either at the resource or account level.
+    # For example, lists an observed geolocation that is an infrequent or
+    # unused location based on previous user activity.
+    #
+    # @!attribute [rw] location
+    #   Location where the resource was accessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   IP address using which the resource was accessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_new_for_entire_account
+    #   Checks if the geolocation is new for the entire account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/NewGeolocationDetail AWS API Documentation
+    #
+    class NewGeolocationDetail < Struct.new(
+      :location,
+      :ip_address,
+      :is_new_for_entire_account)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details new user agents used either at the resource or account level.
+    #
+    # @!attribute [rw] user_agent
+    #   New user agent which accessed the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_new_for_entire_account
+    #   Checks if the user agent is new for the entire account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/NewUserAgentDetail AWS API Documentation
+    #
+    class NewUserAgentDetail < Struct.new(
+      :user_agent,
+      :is_new_for_entire_account)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] graph_arn
     #   The ARN of the behavior graph to reject the invitation to.
     #
@@ -950,6 +1489,49 @@ module Aws::Detective
     #
     class RejectInvitationRequest < Struct.new(
       :graph_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details related activities associated with a potential security event.
+    # Lists all distinct categories of evidence that are connected to the
+    # resource or the finding group.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the related finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   The IP address of the finding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/RelatedFindingDetail AWS API Documentation
+    #
+    class RelatedFindingDetail < Struct.new(
+      :arn,
+      :type,
+      :ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details multiple activities as they related to a potential security
+    # event. Detective uses graph analysis technique that infers
+    # relationships between findings and entities, and groups them together
+    # as a finding group.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the finding group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/RelatedFindingGroupDetail AWS API Documentation
+    #
+    class RelatedFindingGroupDetail < Struct.new(
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -969,16 +1551,13 @@ module Aws::Detective
 
     # This request cannot be completed for one of the following reasons.
     #
-    # * The request would cause the number of member accounts in the
-    #   behavior graph to exceed the maximum allowed. A behavior graph
-    #   cannot have more than 1200 member accounts.
+    # * This request cannot be completed if it would cause the number of
+    #   member accounts in the behavior graph to exceed the maximum allowed.
+    #   A behavior graph cannot have more than 1,200 member accounts.
     #
-    # * The request would cause the data rate for the behavior graph to
-    #   exceed the maximum allowed.
-    #
-    # * Detective is unable to verify the data rate for the member account.
-    #   This is usually because the member account is not enrolled in Amazon
-    #   GuardDuty.
+    # * This request cannot be completed if the current volume ingested is
+    #   above the limit of 10 TB per day. Detective will not allow you to
+    #   add additional member accounts.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -992,6 +1571,66 @@ module Aws::Detective
     class ServiceQuotaExceededException < Struct.new(
       :message,
       :resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the criteria used for sorting investigations.
+    #
+    # @!attribute [rw] field
+    #   Represents the `Field` attribute to sort investigations.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The order by which the sorted findings are displayed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/SortCriteria AWS API Documentation
+    #
+    class SortCriteria < Struct.new(
+      :field,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] graph_arn
+    #   The Amazon Resource Name (ARN) of the behavior graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_arn
+    #   The unique Amazon Resource Name (ARN) of the IAM user and IAM role.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope_start_time
+    #   The data and time when the investigation began. The value is an UTC
+    #   ISO8601 formatted string. For example, `2021-08-18T16:35:56.284Z`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] scope_end_time
+    #   The data and time when the investigation ended. The value is an UTC
+    #   ISO8601 formatted string. For example, `2021-08-18T16:35:56.284Z`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/StartInvestigationRequest AWS API Documentation
+    #
+    class StartInvestigationRequest < Struct.new(
+      :graph_arn,
+      :entity_arn,
+      :scope_start_time,
+      :scope_end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] investigation_id
+    #   The investigation ID of the investigation report.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/StartInvestigationResponse AWS API Documentation
+    #
+    class StartInvestigationResponse < Struct.new(
+      :investigation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1012,6 +1651,72 @@ module Aws::Detective
     class StartMonitoringMemberRequest < Struct.new(
       :graph_arn,
       :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A string for filtering Detective investigations.
+    #
+    # @!attribute [rw] value
+    #   The string filter value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/StringFilter AWS API Documentation
+    #
+    class StringFilter < Struct.new(
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details tactics, techniques, and procedures (TTPs) used in a potential
+    # security event. Tactics are based on [MITRE ATT&amp;CK Matrix for
+    # Enterprise][1].
+    #
+    #
+    #
+    # [1]: https://attack.mitre.org/matrices/enterprise/
+    #
+    # @!attribute [rw] tactic
+    #   The tactic used, identified by the investigation.
+    #   @return [String]
+    #
+    # @!attribute [rw] technique
+    #   The technique used, identified by the investigation.
+    #   @return [String]
+    #
+    # @!attribute [rw] procedure
+    #   The procedure used, identified by the investigation.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   The IP address where the tactics, techniques, and procedure (TTP)
+    #   was observed.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_name
+    #   The name of the API where the tactics, techniques, and procedure
+    #   (TTP) was observed.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_success_count
+    #   The total number of successful API requests.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] api_failure_count
+    #   The total number of failed API requests.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/TTPsObservedDetail AWS API Documentation
+    #
+    class TTPsObservedDetail < Struct.new(
+      :tactic,
+      :technique,
+      :procedure,
+      :ip_address,
+      :api_name,
+      :api_success_count,
+      :api_failure_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1146,6 +1851,29 @@ module Aws::Detective
     class UpdateDatasourcePackagesRequest < Struct.new(
       :graph_arn,
       :datasource_packages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] graph_arn
+    #   The Amazon Resource Name (ARN) of the behavior graph.
+    #   @return [String]
+    #
+    # @!attribute [rw] investigation_id
+    #   The investigation ID of the investigation report.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the investigation. An archived investigation
+    #   indicates you have completed reviewing the investigation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/UpdateInvestigationStateRequest AWS API Documentation
+    #
+    class UpdateInvestigationStateRequest < Struct.new(
+      :graph_arn,
+      :investigation_id,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end

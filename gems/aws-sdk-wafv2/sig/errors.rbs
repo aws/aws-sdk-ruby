@@ -1,0 +1,76 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module WAFV2
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class WAFAssociatedItemException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFConfigurationWarningException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFDuplicateItemException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFExpiredManagedRuleGroupVersionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFInternalErrorException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFInvalidOperationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFInvalidParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def field: () -> ::String
+        def parameter: () -> ::String
+        def reason: () -> ::String
+      end
+      class WAFInvalidPermissionPolicyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFInvalidResourceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFLimitsExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFLogDestinationPermissionIssueException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFNonexistentItemException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFOptimisticLockException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFServiceLinkedRoleErrorException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFSubscriptionNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFTagOperationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFTagOperationInternalErrorException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFUnavailableEntityException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class WAFUnsupportedAggregateKeyTypeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

@@ -1,0 +1,143 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Artifact
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _GetAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountSettingsResponse]
+        def account_settings: () -> Types::AccountSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#get_account_settings-instance_method
+      def get_account_settings: (
+                                ) -> _GetAccountSettingsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountSettingsResponseSuccess
+
+      interface _GetReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReportResponse]
+        def document_presigned_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#get_report-instance_method
+      def get_report: (
+                        report_id: ::String,
+                        ?report_version: ::Integer,
+                        term_token: ::String
+                      ) -> _GetReportResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReportResponseSuccess
+
+      interface _GetReportMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReportMetadataResponse]
+        def report_details: () -> Types::ReportDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#get_report_metadata-instance_method
+      def get_report_metadata: (
+                                 report_id: ::String,
+                                 ?report_version: ::Integer
+                               ) -> _GetReportMetadataResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReportMetadataResponseSuccess
+
+      interface _GetTermForReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTermForReportResponse]
+        def document_presigned_url: () -> ::String
+        def term_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#get_term_for_report-instance_method
+      def get_term_for_report: (
+                                 report_id: ::String,
+                                 ?report_version: ::Integer
+                               ) -> _GetTermForReportResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTermForReportResponseSuccess
+
+      interface _ListReportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReportsResponse]
+        def next_token: () -> ::String
+        def reports: () -> ::Array[Types::ReportSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#list_reports-instance_method
+      def list_reports: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListReportsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReportsResponseSuccess
+
+      interface _PutAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountSettingsResponse]
+        def account_settings: () -> Types::AccountSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#put_account_settings-instance_method
+      def put_account_settings: (
+                                  ?notification_subscription_status: ("SUBSCRIBED" | "NOT_SUBSCRIBED")
+                                ) -> _PutAccountSettingsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountSettingsResponseSuccess
+    end
+  end
+end
+

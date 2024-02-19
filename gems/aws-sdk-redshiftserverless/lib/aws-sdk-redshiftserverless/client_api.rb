@@ -16,31 +16,48 @@ module Aws::RedshiftServerless
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    Association = Shapes::StructureShape.new(name: 'Association')
+    AssociationList = Shapes::ListShape.new(name: 'AssociationList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConfigParameter = Shapes::StructureShape.new(name: 'ConfigParameter')
     ConfigParameterList = Shapes::ListShape.new(name: 'ConfigParameterList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConvertRecoveryPointToSnapshotRequest = Shapes::StructureShape.new(name: 'ConvertRecoveryPointToSnapshotRequest')
     ConvertRecoveryPointToSnapshotResponse = Shapes::StructureShape.new(name: 'ConvertRecoveryPointToSnapshotResponse')
+    CreateCustomDomainAssociationRequest = Shapes::StructureShape.new(name: 'CreateCustomDomainAssociationRequest')
+    CreateCustomDomainAssociationResponse = Shapes::StructureShape.new(name: 'CreateCustomDomainAssociationResponse')
     CreateEndpointAccessRequest = Shapes::StructureShape.new(name: 'CreateEndpointAccessRequest')
     CreateEndpointAccessResponse = Shapes::StructureShape.new(name: 'CreateEndpointAccessResponse')
     CreateNamespaceRequest = Shapes::StructureShape.new(name: 'CreateNamespaceRequest')
     CreateNamespaceResponse = Shapes::StructureShape.new(name: 'CreateNamespaceResponse')
+    CreateScheduledActionRequest = Shapes::StructureShape.new(name: 'CreateScheduledActionRequest')
+    CreateScheduledActionResponse = Shapes::StructureShape.new(name: 'CreateScheduledActionResponse')
+    CreateSnapshotCopyConfigurationRequest = Shapes::StructureShape.new(name: 'CreateSnapshotCopyConfigurationRequest')
+    CreateSnapshotCopyConfigurationResponse = Shapes::StructureShape.new(name: 'CreateSnapshotCopyConfigurationResponse')
     CreateSnapshotRequest = Shapes::StructureShape.new(name: 'CreateSnapshotRequest')
     CreateSnapshotResponse = Shapes::StructureShape.new(name: 'CreateSnapshotResponse')
+    CreateSnapshotScheduleActionParameters = Shapes::StructureShape.new(name: 'CreateSnapshotScheduleActionParameters')
     CreateUsageLimitRequest = Shapes::StructureShape.new(name: 'CreateUsageLimitRequest')
     CreateUsageLimitResponse = Shapes::StructureShape.new(name: 'CreateUsageLimitResponse')
     CreateWorkgroupRequest = Shapes::StructureShape.new(name: 'CreateWorkgroupRequest')
     CreateWorkgroupResponse = Shapes::StructureShape.new(name: 'CreateWorkgroupResponse')
+    CustomDomainCertificateArnString = Shapes::StringShape.new(name: 'CustomDomainCertificateArnString')
+    CustomDomainName = Shapes::StringShape.new(name: 'CustomDomainName')
     DbName = Shapes::StringShape.new(name: 'DbName')
     DbPassword = Shapes::StringShape.new(name: 'DbPassword')
     DbUser = Shapes::StringShape.new(name: 'DbUser')
+    DeleteCustomDomainAssociationRequest = Shapes::StructureShape.new(name: 'DeleteCustomDomainAssociationRequest')
+    DeleteCustomDomainAssociationResponse = Shapes::StructureShape.new(name: 'DeleteCustomDomainAssociationResponse')
     DeleteEndpointAccessRequest = Shapes::StructureShape.new(name: 'DeleteEndpointAccessRequest')
     DeleteEndpointAccessResponse = Shapes::StructureShape.new(name: 'DeleteEndpointAccessResponse')
     DeleteNamespaceRequest = Shapes::StructureShape.new(name: 'DeleteNamespaceRequest')
     DeleteNamespaceResponse = Shapes::StructureShape.new(name: 'DeleteNamespaceResponse')
     DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
     DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
+    DeleteScheduledActionRequest = Shapes::StructureShape.new(name: 'DeleteScheduledActionRequest')
+    DeleteScheduledActionResponse = Shapes::StructureShape.new(name: 'DeleteScheduledActionResponse')
+    DeleteSnapshotCopyConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteSnapshotCopyConfigurationRequest')
+    DeleteSnapshotCopyConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteSnapshotCopyConfigurationResponse')
     DeleteSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteSnapshotRequest')
     DeleteSnapshotResponse = Shapes::StructureShape.new(name: 'DeleteSnapshotResponse')
     DeleteUsageLimitRequest = Shapes::StructureShape.new(name: 'DeleteUsageLimitRequest')
@@ -53,6 +70,8 @@ module Aws::RedshiftServerless
     EndpointAccessList = Shapes::ListShape.new(name: 'EndpointAccessList')
     GetCredentialsRequest = Shapes::StructureShape.new(name: 'GetCredentialsRequest')
     GetCredentialsResponse = Shapes::StructureShape.new(name: 'GetCredentialsResponse')
+    GetCustomDomainAssociationRequest = Shapes::StructureShape.new(name: 'GetCustomDomainAssociationRequest')
+    GetCustomDomainAssociationResponse = Shapes::StructureShape.new(name: 'GetCustomDomainAssociationResponse')
     GetEndpointAccessRequest = Shapes::StructureShape.new(name: 'GetEndpointAccessRequest')
     GetEndpointAccessResponse = Shapes::StructureShape.new(name: 'GetEndpointAccessResponse')
     GetNamespaceRequest = Shapes::StructureShape.new(name: 'GetNamespaceRequest')
@@ -61,6 +80,8 @@ module Aws::RedshiftServerless
     GetRecoveryPointResponse = Shapes::StructureShape.new(name: 'GetRecoveryPointResponse')
     GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
     GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
+    GetScheduledActionRequest = Shapes::StructureShape.new(name: 'GetScheduledActionRequest')
+    GetScheduledActionResponse = Shapes::StructureShape.new(name: 'GetScheduledActionResponse')
     GetSnapshotRequest = Shapes::StructureShape.new(name: 'GetSnapshotRequest')
     GetSnapshotResponse = Shapes::StructureShape.new(name: 'GetSnapshotResponse')
     GetTableRestoreStatusRequest = Shapes::StructureShape.new(name: 'GetTableRestoreStatusRequest')
@@ -76,6 +97,9 @@ module Aws::RedshiftServerless
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidPaginationException = Shapes::StructureShape.new(name: 'InvalidPaginationException')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
+    ListCustomDomainAssociationsRequest = Shapes::StructureShape.new(name: 'ListCustomDomainAssociationsRequest')
+    ListCustomDomainAssociationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListCustomDomainAssociationsRequestMaxResultsInteger')
+    ListCustomDomainAssociationsResponse = Shapes::StructureShape.new(name: 'ListCustomDomainAssociationsResponse')
     ListEndpointAccessRequest = Shapes::StructureShape.new(name: 'ListEndpointAccessRequest')
     ListEndpointAccessRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListEndpointAccessRequestMaxResultsInteger')
     ListEndpointAccessResponse = Shapes::StructureShape.new(name: 'ListEndpointAccessResponse')
@@ -85,6 +109,12 @@ module Aws::RedshiftServerless
     ListRecoveryPointsRequest = Shapes::StructureShape.new(name: 'ListRecoveryPointsRequest')
     ListRecoveryPointsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRecoveryPointsRequestMaxResultsInteger')
     ListRecoveryPointsResponse = Shapes::StructureShape.new(name: 'ListRecoveryPointsResponse')
+    ListScheduledActionsRequest = Shapes::StructureShape.new(name: 'ListScheduledActionsRequest')
+    ListScheduledActionsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListScheduledActionsRequestMaxResultsInteger')
+    ListScheduledActionsResponse = Shapes::StructureShape.new(name: 'ListScheduledActionsResponse')
+    ListSnapshotCopyConfigurationsRequest = Shapes::StructureShape.new(name: 'ListSnapshotCopyConfigurationsRequest')
+    ListSnapshotCopyConfigurationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListSnapshotCopyConfigurationsRequestMaxResultsInteger')
+    ListSnapshotCopyConfigurationsResponse = Shapes::StructureShape.new(name: 'ListSnapshotCopyConfigurationsResponse')
     ListSnapshotsRequest = Shapes::StructureShape.new(name: 'ListSnapshotsRequest')
     ListSnapshotsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListSnapshotsRequestMaxResultsInteger')
     ListSnapshotsResponse = Shapes::StructureShape.new(name: 'ListSnapshotsResponse')
@@ -108,6 +138,8 @@ module Aws::RedshiftServerless
     NamespaceStatus = Shapes::StringShape.new(name: 'NamespaceStatus')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NetworkInterfaceList = Shapes::ListShape.new(name: 'NetworkInterfaceList')
+    NextInvocationsList = Shapes::ListShape.new(name: 'NextInvocationsList')
+    OwnerAccount = Shapes::StringShape.new(name: 'OwnerAccount')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     ParameterKey = Shapes::StringShape.new(name: 'ParameterKey')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
@@ -115,20 +147,31 @@ module Aws::RedshiftServerless
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     RecoveryPoint = Shapes::StructureShape.new(name: 'RecoveryPoint')
     RecoveryPointList = Shapes::ListShape.new(name: 'RecoveryPointList')
+    RedshiftIdcApplicationArn = Shapes::StringShape.new(name: 'RedshiftIdcApplicationArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcePolicy = Shapes::StructureShape.new(name: 'ResourcePolicy')
     RestoreFromRecoveryPointRequest = Shapes::StructureShape.new(name: 'RestoreFromRecoveryPointRequest')
     RestoreFromRecoveryPointResponse = Shapes::StructureShape.new(name: 'RestoreFromRecoveryPointResponse')
     RestoreFromSnapshotRequest = Shapes::StructureShape.new(name: 'RestoreFromSnapshotRequest')
     RestoreFromSnapshotResponse = Shapes::StructureShape.new(name: 'RestoreFromSnapshotResponse')
+    RestoreTableFromRecoveryPointRequest = Shapes::StructureShape.new(name: 'RestoreTableFromRecoveryPointRequest')
+    RestoreTableFromRecoveryPointResponse = Shapes::StructureShape.new(name: 'RestoreTableFromRecoveryPointResponse')
     RestoreTableFromSnapshotRequest = Shapes::StructureShape.new(name: 'RestoreTableFromSnapshotRequest')
     RestoreTableFromSnapshotResponse = Shapes::StructureShape.new(name: 'RestoreTableFromSnapshotResponse')
+    Schedule = Shapes::UnionShape.new(name: 'Schedule')
+    ScheduledActionName = Shapes::StringShape.new(name: 'ScheduledActionName')
+    ScheduledActionResponse = Shapes::StructureShape.new(name: 'ScheduledActionResponse')
+    ScheduledActionsList = Shapes::ListShape.new(name: 'ScheduledActionsList')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Snapshot = Shapes::StructureShape.new(name: 'Snapshot')
+    SnapshotCopyConfiguration = Shapes::StructureShape.new(name: 'SnapshotCopyConfiguration')
+    SnapshotCopyConfigurations = Shapes::ListShape.new(name: 'SnapshotCopyConfigurations')
     SnapshotList = Shapes::ListShape.new(name: 'SnapshotList')
+    SnapshotNamePrefix = Shapes::StringShape.new(name: 'SnapshotNamePrefix')
     SnapshotStatus = Shapes::StringShape.new(name: 'SnapshotStatus')
+    State = Shapes::StringShape.new(name: 'State')
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
@@ -142,15 +185,22 @@ module Aws::RedshiftServerless
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TargetAction = Shapes::UnionShape.new(name: 'TargetAction')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateCustomDomainAssociationRequest = Shapes::StructureShape.new(name: 'UpdateCustomDomainAssociationRequest')
+    UpdateCustomDomainAssociationResponse = Shapes::StructureShape.new(name: 'UpdateCustomDomainAssociationResponse')
     UpdateEndpointAccessRequest = Shapes::StructureShape.new(name: 'UpdateEndpointAccessRequest')
     UpdateEndpointAccessResponse = Shapes::StructureShape.new(name: 'UpdateEndpointAccessResponse')
     UpdateNamespaceRequest = Shapes::StructureShape.new(name: 'UpdateNamespaceRequest')
     UpdateNamespaceResponse = Shapes::StructureShape.new(name: 'UpdateNamespaceResponse')
+    UpdateScheduledActionRequest = Shapes::StructureShape.new(name: 'UpdateScheduledActionRequest')
+    UpdateScheduledActionResponse = Shapes::StructureShape.new(name: 'UpdateScheduledActionResponse')
+    UpdateSnapshotCopyConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateSnapshotCopyConfigurationRequest')
+    UpdateSnapshotCopyConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateSnapshotCopyConfigurationResponse')
     UpdateSnapshotRequest = Shapes::StructureShape.new(name: 'UpdateSnapshotRequest')
     UpdateSnapshotResponse = Shapes::StructureShape.new(name: 'UpdateSnapshotResponse')
     UpdateUsageLimitRequest = Shapes::StructureShape.new(name: 'UpdateUsageLimitRequest')
@@ -165,6 +215,7 @@ module Aws::RedshiftServerless
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VpcEndpoint = Shapes::StructureShape.new(name: 'VpcEndpoint')
     VpcEndpointList = Shapes::ListShape.new(name: 'VpcEndpointList')
+    VpcIds = Shapes::ListShape.new(name: 'VpcIds')
     VpcSecurityGroupId = Shapes::StringShape.new(name: 'VpcSecurityGroupId')
     VpcSecurityGroupIdList = Shapes::ListShape.new(name: 'VpcSecurityGroupIdList')
     VpcSecurityGroupMembership = Shapes::StructureShape.new(name: 'VpcSecurityGroupMembership')
@@ -179,6 +230,14 @@ module Aws::RedshiftServerless
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AccountIdList.member = Shapes::ShapeRef.new(shape: String)
+
+    Association.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, location_name: "customDomainCertificateArn"))
+    Association.add_member(:custom_domain_certificate_expiry_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "customDomainCertificateExpiryTime"))
+    Association.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, location_name: "customDomainName"))
+    Association.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, location_name: "workgroupName"))
+    Association.struct_class = Types::Association
+
+    AssociationList.member = Shapes::ShapeRef.new(shape: Association)
 
     ConfigParameter.add_member(:parameter_key, Shapes::ShapeRef.new(shape: ParameterKey, location_name: "parameterKey"))
     ConfigParameter.add_member(:parameter_value, Shapes::ShapeRef.new(shape: ParameterValue, location_name: "parameterValue"))
@@ -198,7 +257,19 @@ module Aws::RedshiftServerless
     ConvertRecoveryPointToSnapshotResponse.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "snapshot"))
     ConvertRecoveryPointToSnapshotResponse.struct_class = Types::ConvertRecoveryPointToSnapshotResponse
 
+    CreateCustomDomainAssociationRequest.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, required: true, location_name: "customDomainCertificateArn"))
+    CreateCustomDomainAssociationRequest.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, required: true, location_name: "customDomainName"))
+    CreateCustomDomainAssociationRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, required: true, location_name: "workgroupName"))
+    CreateCustomDomainAssociationRequest.struct_class = Types::CreateCustomDomainAssociationRequest
+
+    CreateCustomDomainAssociationResponse.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, location_name: "customDomainCertificateArn"))
+    CreateCustomDomainAssociationResponse.add_member(:custom_domain_certificate_expiry_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "customDomainCertificateExpiryTime"))
+    CreateCustomDomainAssociationResponse.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, location_name: "customDomainName"))
+    CreateCustomDomainAssociationResponse.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, location_name: "workgroupName"))
+    CreateCustomDomainAssociationResponse.struct_class = Types::CreateCustomDomainAssociationResponse
+
     CreateEndpointAccessRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "endpointName"))
+    CreateEndpointAccessRequest.add_member(:owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "ownerAccount"))
     CreateEndpointAccessRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, required: true, location_name: "subnetIds"))
     CreateEndpointAccessRequest.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "vpcSecurityGroupIds"))
     CreateEndpointAccessRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "workgroupName"))
@@ -217,11 +288,35 @@ module Aws::RedshiftServerless
     CreateNamespaceRequest.add_member(:log_exports, Shapes::ShapeRef.new(shape: LogExportList, location_name: "logExports"))
     CreateNamespaceRequest.add_member(:manage_admin_password, Shapes::ShapeRef.new(shape: Boolean, location_name: "manageAdminPassword"))
     CreateNamespaceRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
+    CreateNamespaceRequest.add_member(:redshift_idc_application_arn, Shapes::ShapeRef.new(shape: RedshiftIdcApplicationArn, location_name: "redshiftIdcApplicationArn"))
     CreateNamespaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateNamespaceRequest.struct_class = Types::CreateNamespaceRequest
 
     CreateNamespaceResponse.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "namespace"))
     CreateNamespaceResponse.struct_class = Types::CreateNamespaceResponse
+
+    CreateScheduledActionRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    CreateScheduledActionRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    CreateScheduledActionRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
+    CreateScheduledActionRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "roleArn"))
+    CreateScheduledActionRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, required: true, location_name: "schedule"))
+    CreateScheduledActionRequest.add_member(:scheduled_action_description, Shapes::ShapeRef.new(shape: String, location_name: "scheduledActionDescription"))
+    CreateScheduledActionRequest.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: ScheduledActionName, required: true, location_name: "scheduledActionName"))
+    CreateScheduledActionRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
+    CreateScheduledActionRequest.add_member(:target_action, Shapes::ShapeRef.new(shape: TargetAction, required: true, location_name: "targetAction"))
+    CreateScheduledActionRequest.struct_class = Types::CreateScheduledActionRequest
+
+    CreateScheduledActionResponse.add_member(:scheduled_action, Shapes::ShapeRef.new(shape: ScheduledActionResponse, location_name: "scheduledAction"))
+    CreateScheduledActionResponse.struct_class = Types::CreateScheduledActionResponse
+
+    CreateSnapshotCopyConfigurationRequest.add_member(:destination_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "destinationKmsKeyId"))
+    CreateSnapshotCopyConfigurationRequest.add_member(:destination_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationRegion"))
+    CreateSnapshotCopyConfigurationRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
+    CreateSnapshotCopyConfigurationRequest.add_member(:snapshot_retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "snapshotRetentionPeriod"))
+    CreateSnapshotCopyConfigurationRequest.struct_class = Types::CreateSnapshotCopyConfigurationRequest
+
+    CreateSnapshotCopyConfigurationResponse.add_member(:snapshot_copy_configuration, Shapes::ShapeRef.new(shape: SnapshotCopyConfiguration, required: true, location_name: "snapshotCopyConfiguration"))
+    CreateSnapshotCopyConfigurationResponse.struct_class = Types::CreateSnapshotCopyConfigurationResponse
 
     CreateSnapshotRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "namespaceName"))
     CreateSnapshotRequest.add_member(:retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "retentionPeriod"))
@@ -231,6 +326,12 @@ module Aws::RedshiftServerless
 
     CreateSnapshotResponse.add_member(:snapshot, Shapes::ShapeRef.new(shape: Snapshot, location_name: "snapshot"))
     CreateSnapshotResponse.struct_class = Types::CreateSnapshotResponse
+
+    CreateSnapshotScheduleActionParameters.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
+    CreateSnapshotScheduleActionParameters.add_member(:retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "retentionPeriod"))
+    CreateSnapshotScheduleActionParameters.add_member(:snapshot_name_prefix, Shapes::ShapeRef.new(shape: SnapshotNamePrefix, required: true, location_name: "snapshotNamePrefix"))
+    CreateSnapshotScheduleActionParameters.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateSnapshotScheduleActionParameters.struct_class = Types::CreateSnapshotScheduleActionParameters
 
     CreateUsageLimitRequest.add_member(:amount, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "amount"))
     CreateUsageLimitRequest.add_member(:breach_action, Shapes::ShapeRef.new(shape: UsageLimitBreachAction, location_name: "breachAction"))
@@ -245,6 +346,7 @@ module Aws::RedshiftServerless
     CreateWorkgroupRequest.add_member(:base_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "baseCapacity"))
     CreateWorkgroupRequest.add_member(:config_parameters, Shapes::ShapeRef.new(shape: ConfigParameterList, location_name: "configParameters"))
     CreateWorkgroupRequest.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: Boolean, location_name: "enhancedVpcRouting"))
+    CreateWorkgroupRequest.add_member(:max_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "maxCapacity"))
     CreateWorkgroupRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespaceName"))
     CreateWorkgroupRequest.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
     CreateWorkgroupRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
@@ -256,6 +358,12 @@ module Aws::RedshiftServerless
 
     CreateWorkgroupResponse.add_member(:workgroup, Shapes::ShapeRef.new(shape: Workgroup, location_name: "workgroup"))
     CreateWorkgroupResponse.struct_class = Types::CreateWorkgroupResponse
+
+    DeleteCustomDomainAssociationRequest.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, required: true, location_name: "customDomainName"))
+    DeleteCustomDomainAssociationRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, required: true, location_name: "workgroupName"))
+    DeleteCustomDomainAssociationRequest.struct_class = Types::DeleteCustomDomainAssociationRequest
+
+    DeleteCustomDomainAssociationResponse.struct_class = Types::DeleteCustomDomainAssociationResponse
 
     DeleteEndpointAccessRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "endpointName"))
     DeleteEndpointAccessRequest.struct_class = Types::DeleteEndpointAccessRequest
@@ -275,6 +383,18 @@ module Aws::RedshiftServerless
     DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
 
     DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
+
+    DeleteScheduledActionRequest.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: ScheduledActionName, required: true, location_name: "scheduledActionName"))
+    DeleteScheduledActionRequest.struct_class = Types::DeleteScheduledActionRequest
+
+    DeleteScheduledActionResponse.add_member(:scheduled_action, Shapes::ShapeRef.new(shape: ScheduledActionResponse, location_name: "scheduledAction"))
+    DeleteScheduledActionResponse.struct_class = Types::DeleteScheduledActionResponse
+
+    DeleteSnapshotCopyConfigurationRequest.add_member(:snapshot_copy_configuration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "snapshotCopyConfigurationId"))
+    DeleteSnapshotCopyConfigurationRequest.struct_class = Types::DeleteSnapshotCopyConfigurationRequest
+
+    DeleteSnapshotCopyConfigurationResponse.add_member(:snapshot_copy_configuration, Shapes::ShapeRef.new(shape: SnapshotCopyConfiguration, required: true, location_name: "snapshotCopyConfiguration"))
+    DeleteSnapshotCopyConfigurationResponse.struct_class = Types::DeleteSnapshotCopyConfigurationResponse
 
     DeleteSnapshotRequest.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "snapshotName"))
     DeleteSnapshotRequest.struct_class = Types::DeleteSnapshotRequest
@@ -313,9 +433,10 @@ module Aws::RedshiftServerless
 
     EndpointAccessList.member = Shapes::ShapeRef.new(shape: EndpointAccess)
 
+    GetCredentialsRequest.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, location_name: "customDomainName"))
     GetCredentialsRequest.add_member(:db_name, Shapes::ShapeRef.new(shape: DbName, location_name: "dbName"))
     GetCredentialsRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "durationSeconds"))
-    GetCredentialsRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, required: true, location_name: "workgroupName"))
+    GetCredentialsRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, location_name: "workgroupName"))
     GetCredentialsRequest.struct_class = Types::GetCredentialsRequest
 
     GetCredentialsResponse.add_member(:db_password, Shapes::ShapeRef.new(shape: DbPassword, location_name: "dbPassword"))
@@ -323,6 +444,16 @@ module Aws::RedshiftServerless
     GetCredentialsResponse.add_member(:expiration, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiration"))
     GetCredentialsResponse.add_member(:next_refresh_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "nextRefreshTime"))
     GetCredentialsResponse.struct_class = Types::GetCredentialsResponse
+
+    GetCustomDomainAssociationRequest.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, required: true, location_name: "customDomainName"))
+    GetCustomDomainAssociationRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, required: true, location_name: "workgroupName"))
+    GetCustomDomainAssociationRequest.struct_class = Types::GetCustomDomainAssociationRequest
+
+    GetCustomDomainAssociationResponse.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, location_name: "customDomainCertificateArn"))
+    GetCustomDomainAssociationResponse.add_member(:custom_domain_certificate_expiry_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "customDomainCertificateExpiryTime"))
+    GetCustomDomainAssociationResponse.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, location_name: "customDomainName"))
+    GetCustomDomainAssociationResponse.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, location_name: "workgroupName"))
+    GetCustomDomainAssociationResponse.struct_class = Types::GetCustomDomainAssociationResponse
 
     GetEndpointAccessRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "endpointName"))
     GetEndpointAccessRequest.struct_class = Types::GetEndpointAccessRequest
@@ -347,6 +478,12 @@ module Aws::RedshiftServerless
 
     GetResourcePolicyResponse.add_member(:resource_policy, Shapes::ShapeRef.new(shape: ResourcePolicy, location_name: "resourcePolicy"))
     GetResourcePolicyResponse.struct_class = Types::GetResourcePolicyResponse
+
+    GetScheduledActionRequest.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: ScheduledActionName, required: true, location_name: "scheduledActionName"))
+    GetScheduledActionRequest.struct_class = Types::GetScheduledActionRequest
+
+    GetScheduledActionResponse.add_member(:scheduled_action, Shapes::ShapeRef.new(shape: ScheduledActionResponse, location_name: "scheduledAction"))
+    GetScheduledActionResponse.struct_class = Types::GetScheduledActionResponse
 
     GetSnapshotRequest.add_member(:owner_account, Shapes::ShapeRef.new(shape: String, location_name: "ownerAccount"))
     GetSnapshotRequest.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: String, location_name: "snapshotArn"))
@@ -385,8 +522,19 @@ module Aws::RedshiftServerless
     InvalidPaginationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InvalidPaginationException.struct_class = Types::InvalidPaginationException
 
+    ListCustomDomainAssociationsRequest.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, location_name: "customDomainCertificateArn"))
+    ListCustomDomainAssociationsRequest.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, location_name: "customDomainName"))
+    ListCustomDomainAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListCustomDomainAssociationsRequestMaxResultsInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListCustomDomainAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListCustomDomainAssociationsRequest.struct_class = Types::ListCustomDomainAssociationsRequest
+
+    ListCustomDomainAssociationsResponse.add_member(:associations, Shapes::ShapeRef.new(shape: AssociationList, location_name: "associations"))
+    ListCustomDomainAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListCustomDomainAssociationsResponse.struct_class = Types::ListCustomDomainAssociationsResponse
+
     ListEndpointAccessRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEndpointAccessRequestMaxResultsInteger, location_name: "maxResults", metadata: {"box"=>true}))
     ListEndpointAccessRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListEndpointAccessRequest.add_member(:owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "ownerAccount"))
     ListEndpointAccessRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     ListEndpointAccessRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: String, location_name: "workgroupName"))
     ListEndpointAccessRequest.struct_class = Types::ListEndpointAccessRequest
@@ -414,6 +562,24 @@ module Aws::RedshiftServerless
     ListRecoveryPointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListRecoveryPointsResponse.add_member(:recovery_points, Shapes::ShapeRef.new(shape: RecoveryPointList, location_name: "recoveryPoints"))
     ListRecoveryPointsResponse.struct_class = Types::ListRecoveryPointsResponse
+
+    ListScheduledActionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListScheduledActionsRequestMaxResultsInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListScheduledActionsRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, location_name: "namespaceName"))
+    ListScheduledActionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListScheduledActionsRequest.struct_class = Types::ListScheduledActionsRequest
+
+    ListScheduledActionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListScheduledActionsResponse.add_member(:scheduled_actions, Shapes::ShapeRef.new(shape: ScheduledActionsList, location_name: "scheduledActions"))
+    ListScheduledActionsResponse.struct_class = Types::ListScheduledActionsResponse
+
+    ListSnapshotCopyConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListSnapshotCopyConfigurationsRequestMaxResultsInteger, location_name: "maxResults", metadata: {"box"=>true}))
+    ListSnapshotCopyConfigurationsRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, location_name: "namespaceName"))
+    ListSnapshotCopyConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListSnapshotCopyConfigurationsRequest.struct_class = Types::ListSnapshotCopyConfigurationsRequest
+
+    ListSnapshotCopyConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListSnapshotCopyConfigurationsResponse.add_member(:snapshot_copy_configurations, Shapes::ShapeRef.new(shape: SnapshotCopyConfigurations, required: true, location_name: "snapshotCopyConfigurations"))
+    ListSnapshotCopyConfigurationsResponse.struct_class = Types::ListSnapshotCopyConfigurationsResponse
 
     ListSnapshotsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
     ListSnapshotsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListSnapshotsRequestMaxResultsInteger, location_name: "maxResults", metadata: {"box"=>true}))
@@ -456,6 +622,7 @@ module Aws::RedshiftServerless
 
     ListWorkgroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListWorkgroupsRequestMaxResultsInteger, location_name: "maxResults", metadata: {"box"=>true}))
     ListWorkgroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListWorkgroupsRequest.add_member(:owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "ownerAccount"))
     ListWorkgroupsRequest.struct_class = Types::ListWorkgroupsRequest
 
     ListWorkgroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -488,6 +655,8 @@ module Aws::RedshiftServerless
     NetworkInterface.struct_class = Types::NetworkInterface
 
     NetworkInterfaceList.member = Shapes::ShapeRef.new(shape: NetworkInterface)
+
+    NextInvocationsList.member = Shapes::ShapeRef.new(shape: Timestamp)
 
     PutResourcePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: String, required: true, location_name: "policy"))
     PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceArn"))
@@ -537,6 +706,21 @@ module Aws::RedshiftServerless
     RestoreFromSnapshotResponse.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: String, location_name: "snapshotName"))
     RestoreFromSnapshotResponse.struct_class = Types::RestoreFromSnapshotResponse
 
+    RestoreTableFromRecoveryPointRequest.add_member(:activate_case_sensitive_identifier, Shapes::ShapeRef.new(shape: Boolean, location_name: "activateCaseSensitiveIdentifier"))
+    RestoreTableFromRecoveryPointRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "namespaceName"))
+    RestoreTableFromRecoveryPointRequest.add_member(:new_table_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "newTableName"))
+    RestoreTableFromRecoveryPointRequest.add_member(:recovery_point_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "recoveryPointId"))
+    RestoreTableFromRecoveryPointRequest.add_member(:source_database_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "sourceDatabaseName"))
+    RestoreTableFromRecoveryPointRequest.add_member(:source_schema_name, Shapes::ShapeRef.new(shape: String, location_name: "sourceSchemaName"))
+    RestoreTableFromRecoveryPointRequest.add_member(:source_table_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "sourceTableName"))
+    RestoreTableFromRecoveryPointRequest.add_member(:target_database_name, Shapes::ShapeRef.new(shape: String, location_name: "targetDatabaseName"))
+    RestoreTableFromRecoveryPointRequest.add_member(:target_schema_name, Shapes::ShapeRef.new(shape: String, location_name: "targetSchemaName"))
+    RestoreTableFromRecoveryPointRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "workgroupName"))
+    RestoreTableFromRecoveryPointRequest.struct_class = Types::RestoreTableFromRecoveryPointRequest
+
+    RestoreTableFromRecoveryPointResponse.add_member(:table_restore_status, Shapes::ShapeRef.new(shape: TableRestoreStatus, location_name: "tableRestoreStatus"))
+    RestoreTableFromRecoveryPointResponse.struct_class = Types::RestoreTableFromRecoveryPointResponse
+
     RestoreTableFromSnapshotRequest.add_member(:activate_case_sensitive_identifier, Shapes::ShapeRef.new(shape: Boolean, location_name: "activateCaseSensitiveIdentifier"))
     RestoreTableFromSnapshotRequest.add_member(:namespace_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "namespaceName"))
     RestoreTableFromSnapshotRequest.add_member(:new_table_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "newTableName"))
@@ -551,6 +735,29 @@ module Aws::RedshiftServerless
 
     RestoreTableFromSnapshotResponse.add_member(:table_restore_status, Shapes::ShapeRef.new(shape: TableRestoreStatus, location_name: "tableRestoreStatus"))
     RestoreTableFromSnapshotResponse.struct_class = Types::RestoreTableFromSnapshotResponse
+
+    Schedule.add_member(:at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "at"))
+    Schedule.add_member(:cron, Shapes::ShapeRef.new(shape: String, location_name: "cron"))
+    Schedule.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    Schedule.add_member_subclass(:at, Types::Schedule::At)
+    Schedule.add_member_subclass(:cron, Types::Schedule::Cron)
+    Schedule.add_member_subclass(:unknown, Types::Schedule::Unknown)
+    Schedule.struct_class = Types::Schedule
+
+    ScheduledActionResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    ScheduledActionResponse.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, location_name: "namespaceName"))
+    ScheduledActionResponse.add_member(:next_invocations, Shapes::ShapeRef.new(shape: NextInvocationsList, location_name: "nextInvocations"))
+    ScheduledActionResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "roleArn"))
+    ScheduledActionResponse.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule"))
+    ScheduledActionResponse.add_member(:scheduled_action_description, Shapes::ShapeRef.new(shape: String, location_name: "scheduledActionDescription"))
+    ScheduledActionResponse.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: ScheduledActionName, location_name: "scheduledActionName"))
+    ScheduledActionResponse.add_member(:scheduled_action_uuid, Shapes::ShapeRef.new(shape: String, location_name: "scheduledActionUuid"))
+    ScheduledActionResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
+    ScheduledActionResponse.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
+    ScheduledActionResponse.add_member(:target_action, Shapes::ShapeRef.new(shape: TargetAction, location_name: "targetAction"))
+    ScheduledActionResponse.struct_class = Types::ScheduledActionResponse
+
+    ScheduledActionsList.member = Shapes::ShapeRef.new(shape: ScheduledActionName)
 
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
@@ -581,6 +788,16 @@ module Aws::RedshiftServerless
     Snapshot.add_member(:total_backup_size_in_mega_bytes, Shapes::ShapeRef.new(shape: Double, location_name: "totalBackupSizeInMegaBytes"))
     Snapshot.struct_class = Types::Snapshot
 
+    SnapshotCopyConfiguration.add_member(:destination_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "destinationKmsKeyId"))
+    SnapshotCopyConfiguration.add_member(:destination_region, Shapes::ShapeRef.new(shape: String, location_name: "destinationRegion"))
+    SnapshotCopyConfiguration.add_member(:namespace_name, Shapes::ShapeRef.new(shape: NamespaceName, location_name: "namespaceName"))
+    SnapshotCopyConfiguration.add_member(:snapshot_copy_configuration_arn, Shapes::ShapeRef.new(shape: String, location_name: "snapshotCopyConfigurationArn"))
+    SnapshotCopyConfiguration.add_member(:snapshot_copy_configuration_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotCopyConfigurationId"))
+    SnapshotCopyConfiguration.add_member(:snapshot_retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "snapshotRetentionPeriod"))
+    SnapshotCopyConfiguration.struct_class = Types::SnapshotCopyConfiguration
+
+    SnapshotCopyConfigurations.member = Shapes::ShapeRef.new(shape: SnapshotCopyConfiguration)
+
     SnapshotList.member = Shapes::ShapeRef.new(shape: Snapshot)
 
     SubnetIdList.member = Shapes::ShapeRef.new(shape: SubnetId)
@@ -589,6 +806,7 @@ module Aws::RedshiftServerless
     TableRestoreStatus.add_member(:namespace_name, Shapes::ShapeRef.new(shape: String, location_name: "namespaceName"))
     TableRestoreStatus.add_member(:new_table_name, Shapes::ShapeRef.new(shape: String, location_name: "newTableName"))
     TableRestoreStatus.add_member(:progress_in_mega_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "progressInMegaBytes"))
+    TableRestoreStatus.add_member(:recovery_point_id, Shapes::ShapeRef.new(shape: String, location_name: "recoveryPointId"))
     TableRestoreStatus.add_member(:request_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "requestTime"))
     TableRestoreStatus.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: String, location_name: "snapshotName"))
     TableRestoreStatus.add_member(:source_database_name, Shapes::ShapeRef.new(shape: String, location_name: "sourceDatabaseName"))
@@ -618,6 +836,12 @@ module Aws::RedshiftServerless
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TargetAction.add_member(:create_snapshot, Shapes::ShapeRef.new(shape: CreateSnapshotScheduleActionParameters, location_name: "createSnapshot"))
+    TargetAction.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TargetAction.add_member_subclass(:create_snapshot, Types::TargetAction::CreateSnapshot)
+    TargetAction.add_member_subclass(:unknown, Types::TargetAction::Unknown)
+    TargetAction.struct_class = Types::TargetAction
+
     ThrottlingException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
@@ -631,6 +855,17 @@ module Aws::RedshiftServerless
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateCustomDomainAssociationRequest.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, required: true, location_name: "customDomainCertificateArn"))
+    UpdateCustomDomainAssociationRequest.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, required: true, location_name: "customDomainName"))
+    UpdateCustomDomainAssociationRequest.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, required: true, location_name: "workgroupName"))
+    UpdateCustomDomainAssociationRequest.struct_class = Types::UpdateCustomDomainAssociationRequest
+
+    UpdateCustomDomainAssociationResponse.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, location_name: "customDomainCertificateArn"))
+    UpdateCustomDomainAssociationResponse.add_member(:custom_domain_certificate_expiry_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "customDomainCertificateExpiryTime"))
+    UpdateCustomDomainAssociationResponse.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, location_name: "customDomainName"))
+    UpdateCustomDomainAssociationResponse.add_member(:workgroup_name, Shapes::ShapeRef.new(shape: WorkgroupName, location_name: "workgroupName"))
+    UpdateCustomDomainAssociationResponse.struct_class = Types::UpdateCustomDomainAssociationResponse
 
     UpdateEndpointAccessRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "endpointName"))
     UpdateEndpointAccessRequest.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "vpcSecurityGroupIds"))
@@ -653,6 +888,26 @@ module Aws::RedshiftServerless
     UpdateNamespaceResponse.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "namespace"))
     UpdateNamespaceResponse.struct_class = Types::UpdateNamespaceResponse
 
+    UpdateScheduledActionRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    UpdateScheduledActionRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    UpdateScheduledActionRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "roleArn"))
+    UpdateScheduledActionRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule"))
+    UpdateScheduledActionRequest.add_member(:scheduled_action_description, Shapes::ShapeRef.new(shape: String, location_name: "scheduledActionDescription"))
+    UpdateScheduledActionRequest.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: ScheduledActionName, required: true, location_name: "scheduledActionName"))
+    UpdateScheduledActionRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
+    UpdateScheduledActionRequest.add_member(:target_action, Shapes::ShapeRef.new(shape: TargetAction, location_name: "targetAction"))
+    UpdateScheduledActionRequest.struct_class = Types::UpdateScheduledActionRequest
+
+    UpdateScheduledActionResponse.add_member(:scheduled_action, Shapes::ShapeRef.new(shape: ScheduledActionResponse, location_name: "scheduledAction"))
+    UpdateScheduledActionResponse.struct_class = Types::UpdateScheduledActionResponse
+
+    UpdateSnapshotCopyConfigurationRequest.add_member(:snapshot_copy_configuration_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "snapshotCopyConfigurationId"))
+    UpdateSnapshotCopyConfigurationRequest.add_member(:snapshot_retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "snapshotRetentionPeriod"))
+    UpdateSnapshotCopyConfigurationRequest.struct_class = Types::UpdateSnapshotCopyConfigurationRequest
+
+    UpdateSnapshotCopyConfigurationResponse.add_member(:snapshot_copy_configuration, Shapes::ShapeRef.new(shape: SnapshotCopyConfiguration, required: true, location_name: "snapshotCopyConfiguration"))
+    UpdateSnapshotCopyConfigurationResponse.struct_class = Types::UpdateSnapshotCopyConfigurationResponse
+
     UpdateSnapshotRequest.add_member(:retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "retentionPeriod"))
     UpdateSnapshotRequest.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "snapshotName"))
     UpdateSnapshotRequest.struct_class = Types::UpdateSnapshotRequest
@@ -671,6 +926,7 @@ module Aws::RedshiftServerless
     UpdateWorkgroupRequest.add_member(:base_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "baseCapacity"))
     UpdateWorkgroupRequest.add_member(:config_parameters, Shapes::ShapeRef.new(shape: ConfigParameterList, location_name: "configParameters"))
     UpdateWorkgroupRequest.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: Boolean, location_name: "enhancedVpcRouting"))
+    UpdateWorkgroupRequest.add_member(:max_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "maxCapacity"))
     UpdateWorkgroupRequest.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
     UpdateWorkgroupRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "publiclyAccessible"))
     UpdateWorkgroupRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "securityGroupIds"))
@@ -702,6 +958,8 @@ module Aws::RedshiftServerless
 
     VpcEndpointList.member = Shapes::ShapeRef.new(shape: VpcEndpoint)
 
+    VpcIds.member = Shapes::ShapeRef.new(shape: String)
+
     VpcSecurityGroupIdList.member = Shapes::ShapeRef.new(shape: VpcSecurityGroupId)
 
     VpcSecurityGroupMembership.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
@@ -713,8 +971,13 @@ module Aws::RedshiftServerless
     Workgroup.add_member(:base_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "baseCapacity"))
     Workgroup.add_member(:config_parameters, Shapes::ShapeRef.new(shape: ConfigParameterList, location_name: "configParameters"))
     Workgroup.add_member(:creation_date, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "creationDate"))
+    Workgroup.add_member(:cross_account_vpcs, Shapes::ShapeRef.new(shape: VpcIds, location_name: "crossAccountVpcs"))
+    Workgroup.add_member(:custom_domain_certificate_arn, Shapes::ShapeRef.new(shape: CustomDomainCertificateArnString, location_name: "customDomainCertificateArn"))
+    Workgroup.add_member(:custom_domain_certificate_expiry_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "customDomainCertificateExpiryTime"))
+    Workgroup.add_member(:custom_domain_name, Shapes::ShapeRef.new(shape: CustomDomainName, location_name: "customDomainName"))
     Workgroup.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "endpoint"))
     Workgroup.add_member(:enhanced_vpc_routing, Shapes::ShapeRef.new(shape: Boolean, location_name: "enhancedVpcRouting"))
+    Workgroup.add_member(:max_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "maxCapacity"))
     Workgroup.add_member(:namespace_name, Shapes::ShapeRef.new(shape: String, location_name: "namespaceName"))
     Workgroup.add_member(:patch_version, Shapes::ShapeRef.new(shape: String, location_name: "patchVersion"))
     Workgroup.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "port"))
@@ -763,6 +1026,20 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_custom_domain_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCustomDomainAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCustomDomainAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCustomDomainAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:create_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateEndpointAccess"
         o.http_method = "POST"
@@ -789,6 +1066,18 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
+      api.add_operation(:create_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateScheduledAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateScheduledActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateScheduledActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:create_snapshot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateSnapshot"
         o.http_method = "POST"
@@ -800,6 +1089,20 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_snapshot_copy_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSnapshotCopyConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateSnapshotCopyConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSnapshotCopyConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
@@ -828,6 +1131,20 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+      end)
+
+      api.add_operation(:delete_custom_domain_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCustomDomainAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCustomDomainAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCustomDomainAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:delete_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
@@ -865,6 +1182,17 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:delete_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteScheduledAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteScheduledActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteScheduledActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:delete_snapshot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteSnapshot"
         o.http_method = "POST"
@@ -875,6 +1203,19 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_snapshot_copy_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSnapshotCopyConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSnapshotCopyConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSnapshotCopyConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_usage_limit, Seahorse::Model::Operation.new.tap do |o|
@@ -910,6 +1251,20 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_custom_domain_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCustomDomainAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCustomDomainAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCustomDomainAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
@@ -953,6 +1308,17 @@ module Aws::RedshiftServerless
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetScheduledAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetScheduledActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetScheduledActionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1002,6 +1368,25 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:list_custom_domain_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCustomDomainAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCustomDomainAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCustomDomainAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListEndpointAccess"
         o.http_method = "POST"
@@ -1043,6 +1428,43 @@ module Aws::RedshiftServerless
         o.input = Shapes::ShapeRef.new(shape: ListRecoveryPointsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListRecoveryPointsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_scheduled_actions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListScheduledActions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListScheduledActionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListScheduledActionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_snapshot_copy_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSnapshotCopyConfigurations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSnapshotCopyConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSnapshotCopyConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1171,6 +1593,18 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:restore_table_from_recovery_point, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreTableFromRecoveryPoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RestoreTableFromRecoveryPointRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestoreTableFromRecoveryPointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:restore_table_from_snapshot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RestoreTableFromSnapshot"
         o.http_method = "POST"
@@ -1208,6 +1642,20 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:update_custom_domain_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCustomDomainAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCustomDomainAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCustomDomainAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:update_endpoint_access, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateEndpointAccess"
         o.http_method = "POST"
@@ -1233,6 +1681,18 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:update_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateScheduledAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateScheduledActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateScheduledActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:update_snapshot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateSnapshot"
         o.http_method = "POST"
@@ -1243,6 +1703,19 @@ module Aws::RedshiftServerless
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_snapshot_copy_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSnapshotCopyConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSnapshotCopyConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSnapshotCopyConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_usage_limit, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2024-01-22)
+------------------
+
+* Feature - This release adds the ability to view audit history on a case and introduces a new parameter, performedBy, for CreateCase and UpdateCase API's.
+
+1.18.0 (2023-12-15)
+------------------
+
+* Feature - Increase number of fields that can be included in CaseEventIncludedData from 50 to 200
+
+1.17.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2023-11-08)
+------------------
+
+* Feature - This release adds the ability to add/view comment authors through CreateRelatedItem and SearchRelatedItems API. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+
+1.14.0 (2023-10-25)
+------------------
+
+* Feature - Increase maximum length of CommentBody to 3000, and increase maximum length of StringValue to 1500
+
 1.13.0 (2023-09-27)
 ------------------
 

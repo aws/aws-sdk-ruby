@@ -1,0 +1,538 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ChimeSDKIdentity
+  module Types
+
+    class AppInstance
+      attr_accessor app_instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor metadata: ::String
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class AppInstanceAdmin
+      attr_accessor admin: Types::Identity
+      attr_accessor app_instance_arn: ::String
+      attr_accessor created_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class AppInstanceAdminSummary
+      attr_accessor admin: Types::Identity
+      SENSITIVE: []
+    end
+
+    class AppInstanceBot
+      attr_accessor app_instance_bot_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor configuration: Types::Configuration
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor metadata: ::String
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class AppInstanceBotSummary
+      attr_accessor app_instance_bot_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class AppInstanceRetentionSettings
+      attr_accessor channel_retention_settings: Types::ChannelRetentionSettings
+      SENSITIVE: []
+    end
+
+    class AppInstanceSummary
+      attr_accessor app_instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class AppInstanceUser
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor expiration_settings: Types::ExpirationSettings
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class AppInstanceUserEndpoint
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor endpoint_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("APNS" | "APNS_SANDBOX" | "GCM")
+      attr_accessor resource_arn: ::String
+      attr_accessor endpoint_attributes: Types::EndpointAttributes
+      attr_accessor created_timestamp: ::Time
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor allow_messages: ("ALL" | "NONE")
+      attr_accessor endpoint_state: Types::EndpointState
+      SENSITIVE: [:name]
+    end
+
+    class AppInstanceUserEndpointSummary
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor endpoint_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("APNS" | "APNS_SANDBOX" | "GCM")
+      attr_accessor allow_messages: ("ALL" | "NONE")
+      attr_accessor endpoint_state: Types::EndpointState
+      SENSITIVE: [:name]
+    end
+
+    class AppInstanceUserSummary
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class BadRequestException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ChannelRetentionSettings
+      attr_accessor retention_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class Configuration
+      attr_accessor lex: Types::LexConfiguration
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppInstanceAdminRequest
+      attr_accessor app_instance_admin_arn: ::String
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppInstanceAdminResponse
+      attr_accessor app_instance_admin: Types::Identity
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppInstanceBotRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor configuration: Types::Configuration
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class CreateAppInstanceBotResponse
+      attr_accessor app_instance_bot_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppInstanceRequest
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class CreateAppInstanceResponse
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAppInstanceUserRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor app_instance_user_id: ::String
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor expiration_settings: Types::ExpirationSettings
+      SENSITIVE: [:app_instance_user_id, :name, :metadata]
+    end
+
+    class CreateAppInstanceUserResponse
+      attr_accessor app_instance_user_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppInstanceAdminRequest
+      attr_accessor app_instance_admin_arn: ::String
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppInstanceBotRequest
+      attr_accessor app_instance_bot_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppInstanceRequest
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAppInstanceUserRequest
+      attr_accessor app_instance_user_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterAppInstanceUserEndpointRequest
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppInstanceAdminRequest
+      attr_accessor app_instance_admin_arn: ::String
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppInstanceAdminResponse
+      attr_accessor app_instance_admin: Types::AppInstanceAdmin
+      SENSITIVE: []
+    end
+
+    class DescribeAppInstanceBotRequest
+      attr_accessor app_instance_bot_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppInstanceBotResponse
+      attr_accessor app_instance_bot: Types::AppInstanceBot
+      SENSITIVE: []
+    end
+
+    class DescribeAppInstanceRequest
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppInstanceResponse
+      attr_accessor app_instance: Types::AppInstance
+      SENSITIVE: []
+    end
+
+    class DescribeAppInstanceUserEndpointRequest
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppInstanceUserEndpointResponse
+      attr_accessor app_instance_user_endpoint: Types::AppInstanceUserEndpoint
+      SENSITIVE: []
+    end
+
+    class DescribeAppInstanceUserRequest
+      attr_accessor app_instance_user_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAppInstanceUserResponse
+      attr_accessor app_instance_user: Types::AppInstanceUser
+      SENSITIVE: []
+    end
+
+    class EndpointAttributes
+      attr_accessor device_token: ::String
+      attr_accessor voip_device_token: ::String
+      SENSITIVE: [:device_token, :voip_device_token]
+    end
+
+    class EndpointState
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor status_reason: ("INVALID_DEVICE_TOKEN" | "INVALID_PINPOINT_ARN")
+      SENSITIVE: []
+    end
+
+    class ExpirationSettings
+      attr_accessor expiration_days: ::Integer
+      attr_accessor expiration_criterion: ("CREATED_TIMESTAMP")
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppInstanceRetentionSettingsRequest
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAppInstanceRetentionSettingsResponse
+      attr_accessor app_instance_retention_settings: Types::AppInstanceRetentionSettings
+      attr_accessor initiate_deletion_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class Identity
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: [:name]
+    end
+
+    class InvokedBy
+      attr_accessor standard_messages: ("AUTO" | "ALL" | "MENTIONS" | "NONE")
+      attr_accessor targeted_messages: ("ALL" | "NONE")
+      SENSITIVE: []
+    end
+
+    class LexConfiguration
+      attr_accessor responds_to: ("STANDARD_MESSAGES")
+      attr_accessor invoked_by: Types::InvokedBy
+      attr_accessor lex_bot_alias_arn: ::String
+      attr_accessor locale_id: ::String
+      attr_accessor welcome_intent: ::String
+      SENSITIVE: []
+    end
+
+    class ListAppInstanceAdminsRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListAppInstanceAdminsResponse
+      attr_accessor app_instance_arn: ::String
+      attr_accessor app_instance_admins: ::Array[Types::AppInstanceAdminSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListAppInstanceBotsRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListAppInstanceBotsResponse
+      attr_accessor app_instance_arn: ::String
+      attr_accessor app_instance_bots: ::Array[Types::AppInstanceBotSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListAppInstanceUserEndpointsRequest
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:app_instance_user_arn, :next_token]
+    end
+
+    class ListAppInstanceUserEndpointsResponse
+      attr_accessor app_instance_user_endpoints: ::Array[Types::AppInstanceUserEndpointSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListAppInstanceUsersRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListAppInstanceUsersResponse
+      attr_accessor app_instance_arn: ::String
+      attr_accessor app_instance_users: ::Array[Types::AppInstanceUserSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListAppInstancesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListAppInstancesResponse
+      attr_accessor app_instances: ::Array[Types::AppInstanceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutAppInstanceRetentionSettingsRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor app_instance_retention_settings: Types::AppInstanceRetentionSettings
+      SENSITIVE: []
+    end
+
+    class PutAppInstanceRetentionSettingsResponse
+      attr_accessor app_instance_retention_settings: Types::AppInstanceRetentionSettings
+      attr_accessor initiate_deletion_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class PutAppInstanceUserExpirationSettingsRequest
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor expiration_settings: Types::ExpirationSettings
+      SENSITIVE: []
+    end
+
+    class PutAppInstanceUserExpirationSettingsResponse
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor expiration_settings: Types::ExpirationSettings
+      SENSITIVE: []
+    end
+
+    class RegisterAppInstanceUserEndpointRequest
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("APNS" | "APNS_SANDBOX" | "GCM")
+      attr_accessor resource_arn: ::String
+      attr_accessor endpoint_attributes: Types::EndpointAttributes
+      attr_accessor client_request_token: ::String
+      attr_accessor allow_messages: ("ALL" | "NONE")
+      SENSITIVE: [:app_instance_user_arn, :name]
+    end
+
+    class RegisterAppInstanceUserEndpointResponse
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceLimitExceededException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceFailureException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: [:key, :value]
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ThrottledClientException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedClientException
+      attr_accessor code: ("BadRequest" | "Conflict" | "Forbidden" | "NotFound" | "PreconditionFailed" | "ResourceLimitExceeded" | "ServiceFailure" | "AccessDenied" | "ServiceUnavailable" | "Throttled" | "Throttling" | "Unauthorized" | "Unprocessable" | "VoiceConnectorGroupAssociationsExist" | "PhoneNumberAssociationsExist")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAppInstanceBotRequest
+      attr_accessor app_instance_bot_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      attr_accessor configuration: Types::Configuration
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class UpdateAppInstanceBotResponse
+      attr_accessor app_instance_bot_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAppInstanceRequest
+      attr_accessor app_instance_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class UpdateAppInstanceResponse
+      attr_accessor app_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAppInstanceUserEndpointRequest
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor endpoint_id: ::String
+      attr_accessor name: ::String
+      attr_accessor allow_messages: ("ALL" | "NONE")
+      SENSITIVE: [:name]
+    end
+
+    class UpdateAppInstanceUserEndpointResponse
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAppInstanceUserRequest
+      attr_accessor app_instance_user_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor metadata: ::String
+      SENSITIVE: [:name, :metadata]
+    end
+
+    class UpdateAppInstanceUserResponse
+      attr_accessor app_instance_user_arn: ::String
+      SENSITIVE: []
+    end
+  end
+end

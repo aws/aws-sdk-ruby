@@ -14,6 +14,7 @@ module Aws::PinpointSMSVoiceV2
       option(
         :endpoint_provider,
         doc_type: 'Aws::PinpointSMSVoiceV2::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::PinpointSMSVoiceV2
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -66,6 +68,16 @@ module Aws::PinpointSMSVoiceV2
             Aws::PinpointSMSVoiceV2::Endpoints::CreateOptOutList.build(context)
           when :create_pool
             Aws::PinpointSMSVoiceV2::Endpoints::CreatePool.build(context)
+          when :create_registration
+            Aws::PinpointSMSVoiceV2::Endpoints::CreateRegistration.build(context)
+          when :create_registration_association
+            Aws::PinpointSMSVoiceV2::Endpoints::CreateRegistrationAssociation.build(context)
+          when :create_registration_attachment
+            Aws::PinpointSMSVoiceV2::Endpoints::CreateRegistrationAttachment.build(context)
+          when :create_registration_version
+            Aws::PinpointSMSVoiceV2::Endpoints::CreateRegistrationVersion.build(context)
+          when :create_verified_destination_number
+            Aws::PinpointSMSVoiceV2::Endpoints::CreateVerifiedDestinationNumber.build(context)
           when :delete_configuration_set
             Aws::PinpointSMSVoiceV2::Endpoints::DeleteConfigurationSet.build(context)
           when :delete_default_message_type
@@ -82,8 +94,16 @@ module Aws::PinpointSMSVoiceV2
             Aws::PinpointSMSVoiceV2::Endpoints::DeleteOptedOutNumber.build(context)
           when :delete_pool
             Aws::PinpointSMSVoiceV2::Endpoints::DeletePool.build(context)
+          when :delete_registration
+            Aws::PinpointSMSVoiceV2::Endpoints::DeleteRegistration.build(context)
+          when :delete_registration_attachment
+            Aws::PinpointSMSVoiceV2::Endpoints::DeleteRegistrationAttachment.build(context)
+          when :delete_registration_field_value
+            Aws::PinpointSMSVoiceV2::Endpoints::DeleteRegistrationFieldValue.build(context)
           when :delete_text_message_spend_limit_override
             Aws::PinpointSMSVoiceV2::Endpoints::DeleteTextMessageSpendLimitOverride.build(context)
+          when :delete_verified_destination_number
+            Aws::PinpointSMSVoiceV2::Endpoints::DeleteVerifiedDestinationNumber.build(context)
           when :delete_voice_message_spend_limit_override
             Aws::PinpointSMSVoiceV2::Endpoints::DeleteVoiceMessageSpendLimitOverride.build(context)
           when :describe_account_attributes
@@ -102,24 +122,52 @@ module Aws::PinpointSMSVoiceV2
             Aws::PinpointSMSVoiceV2::Endpoints::DescribePhoneNumbers.build(context)
           when :describe_pools
             Aws::PinpointSMSVoiceV2::Endpoints::DescribePools.build(context)
+          when :describe_registration_attachments
+            Aws::PinpointSMSVoiceV2::Endpoints::DescribeRegistrationAttachments.build(context)
+          when :describe_registration_field_definitions
+            Aws::PinpointSMSVoiceV2::Endpoints::DescribeRegistrationFieldDefinitions.build(context)
+          when :describe_registration_field_values
+            Aws::PinpointSMSVoiceV2::Endpoints::DescribeRegistrationFieldValues.build(context)
+          when :describe_registration_section_definitions
+            Aws::PinpointSMSVoiceV2::Endpoints::DescribeRegistrationSectionDefinitions.build(context)
+          when :describe_registration_type_definitions
+            Aws::PinpointSMSVoiceV2::Endpoints::DescribeRegistrationTypeDefinitions.build(context)
+          when :describe_registration_versions
+            Aws::PinpointSMSVoiceV2::Endpoints::DescribeRegistrationVersions.build(context)
+          when :describe_registrations
+            Aws::PinpointSMSVoiceV2::Endpoints::DescribeRegistrations.build(context)
           when :describe_sender_ids
             Aws::PinpointSMSVoiceV2::Endpoints::DescribeSenderIds.build(context)
           when :describe_spend_limits
             Aws::PinpointSMSVoiceV2::Endpoints::DescribeSpendLimits.build(context)
+          when :describe_verified_destination_numbers
+            Aws::PinpointSMSVoiceV2::Endpoints::DescribeVerifiedDestinationNumbers.build(context)
           when :disassociate_origination_identity
             Aws::PinpointSMSVoiceV2::Endpoints::DisassociateOriginationIdentity.build(context)
+          when :discard_registration_version
+            Aws::PinpointSMSVoiceV2::Endpoints::DiscardRegistrationVersion.build(context)
           when :list_pool_origination_identities
             Aws::PinpointSMSVoiceV2::Endpoints::ListPoolOriginationIdentities.build(context)
+          when :list_registration_associations
+            Aws::PinpointSMSVoiceV2::Endpoints::ListRegistrationAssociations.build(context)
           when :list_tags_for_resource
             Aws::PinpointSMSVoiceV2::Endpoints::ListTagsForResource.build(context)
           when :put_keyword
             Aws::PinpointSMSVoiceV2::Endpoints::PutKeyword.build(context)
           when :put_opted_out_number
             Aws::PinpointSMSVoiceV2::Endpoints::PutOptedOutNumber.build(context)
+          when :put_registration_field_value
+            Aws::PinpointSMSVoiceV2::Endpoints::PutRegistrationFieldValue.build(context)
           when :release_phone_number
             Aws::PinpointSMSVoiceV2::Endpoints::ReleasePhoneNumber.build(context)
+          when :release_sender_id
+            Aws::PinpointSMSVoiceV2::Endpoints::ReleaseSenderId.build(context)
           when :request_phone_number
             Aws::PinpointSMSVoiceV2::Endpoints::RequestPhoneNumber.build(context)
+          when :request_sender_id
+            Aws::PinpointSMSVoiceV2::Endpoints::RequestSenderId.build(context)
+          when :send_destination_number_verification_code
+            Aws::PinpointSMSVoiceV2::Endpoints::SendDestinationNumberVerificationCode.build(context)
           when :send_text_message
             Aws::PinpointSMSVoiceV2::Endpoints::SendTextMessage.build(context)
           when :send_voice_message
@@ -132,6 +180,8 @@ module Aws::PinpointSMSVoiceV2
             Aws::PinpointSMSVoiceV2::Endpoints::SetTextMessageSpendLimitOverride.build(context)
           when :set_voice_message_spend_limit_override
             Aws::PinpointSMSVoiceV2::Endpoints::SetVoiceMessageSpendLimitOverride.build(context)
+          when :submit_registration_version
+            Aws::PinpointSMSVoiceV2::Endpoints::SubmitRegistrationVersion.build(context)
           when :tag_resource
             Aws::PinpointSMSVoiceV2::Endpoints::TagResource.build(context)
           when :untag_resource
@@ -142,6 +192,10 @@ module Aws::PinpointSMSVoiceV2
             Aws::PinpointSMSVoiceV2::Endpoints::UpdatePhoneNumber.build(context)
           when :update_pool
             Aws::PinpointSMSVoiceV2::Endpoints::UpdatePool.build(context)
+          when :update_sender_id
+            Aws::PinpointSMSVoiceV2::Endpoints::UpdateSenderId.build(context)
+          when :verify_destination_number
+            Aws::PinpointSMSVoiceV2::Endpoints::VerifyDestinationNumber.build(context)
           end
         end
       end

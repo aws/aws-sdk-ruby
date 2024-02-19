@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.76.0 (2024-01-05)
+------------------
+
+* Feature - Documentation updates for AWS Key Management Service (KMS).
+
+1.75.0 (2023-12-15)
+------------------
+
+* Feature - Documentation updates for AWS Key Management Service
+
+1.74.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.72.0 (2023-09-27)
 ------------------
 

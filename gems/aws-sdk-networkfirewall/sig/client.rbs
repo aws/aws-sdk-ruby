@@ -1,0 +1,1031 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module NetworkFirewall
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateFirewallPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateFirewallPolicyResponse]
+        def firewall_arn: () -> ::String
+        def firewall_name: () -> ::String
+        def firewall_policy_arn: () -> ::String
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#associate_firewall_policy-instance_method
+      def associate_firewall_policy: (
+                                       ?update_token: ::String,
+                                       ?firewall_arn: ::String,
+                                       ?firewall_name: ::String,
+                                       firewall_policy_arn: ::String
+                                     ) -> _AssociateFirewallPolicyResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateFirewallPolicyResponseSuccess
+
+      interface _AssociateSubnetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateSubnetsResponse]
+        def firewall_arn: () -> ::String
+        def firewall_name: () -> ::String
+        def subnet_mappings: () -> ::Array[Types::SubnetMapping]
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#associate_subnets-instance_method
+      def associate_subnets: (
+                               ?update_token: ::String,
+                               ?firewall_arn: ::String,
+                               ?firewall_name: ::String,
+                               subnet_mappings: Array[
+                                 {
+                                   subnet_id: ::String,
+                                   ip_address_type: ("DUALSTACK" | "IPV4" | "IPV6")?
+                                 },
+                               ]
+                             ) -> _AssociateSubnetsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSubnetsResponseSuccess
+
+      interface _CreateFirewallResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFirewallResponse]
+        def firewall: () -> Types::Firewall
+        def firewall_status: () -> Types::FirewallStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#create_firewall-instance_method
+      def create_firewall: (
+                             firewall_name: ::String,
+                             firewall_policy_arn: ::String,
+                             vpc_id: ::String,
+                             subnet_mappings: Array[
+                               {
+                                 subnet_id: ::String,
+                                 ip_address_type: ("DUALSTACK" | "IPV4" | "IPV6")?
+                               },
+                             ],
+                             ?delete_protection: bool,
+                             ?subnet_change_protection: bool,
+                             ?firewall_policy_change_protection: bool,
+                             ?description: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ],
+                             ?encryption_configuration: {
+                               key_id: ::String?,
+                               type: ("CUSTOMER_KMS" | "AWS_OWNED_KMS_KEY")
+                             }
+                           ) -> _CreateFirewallResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFirewallResponseSuccess
+
+      interface _CreateFirewallPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFirewallPolicyResponse]
+        def update_token: () -> ::String
+        def firewall_policy_response: () -> Types::FirewallPolicyResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#create_firewall_policy-instance_method
+      def create_firewall_policy: (
+                                    firewall_policy_name: ::String,
+                                    firewall_policy: {
+                                      stateless_rule_group_references: Array[
+                                        {
+                                          resource_arn: ::String,
+                                          priority: ::Integer
+                                        },
+                                      ]?,
+                                      stateless_default_actions: Array[::String],
+                                      stateless_fragment_default_actions: Array[::String],
+                                      stateless_custom_actions: Array[
+                                        {
+                                          action_name: ::String,
+                                          action_definition: {
+                                            publish_metric_action: {
+                                              dimensions: Array[
+                                                {
+                                                  value: ::String
+                                                },
+                                              ]
+                                            }?
+                                          }
+                                        },
+                                      ]?,
+                                      stateful_rule_group_references: Array[
+                                        {
+                                          resource_arn: ::String,
+                                          priority: ::Integer?,
+                                          override: {
+                                            action: ("DROP_TO_ALERT")?
+                                          }?
+                                        },
+                                      ]?,
+                                      stateful_default_actions: Array[::String]?,
+                                      stateful_engine_options: {
+                                        rule_order: ("DEFAULT_ACTION_ORDER" | "STRICT_ORDER")?,
+                                        stream_exception_policy: ("DROP" | "CONTINUE" | "REJECT")?
+                                      }?,
+                                      tls_inspection_configuration_arn: ::String?,
+                                      policy_variables: {
+                                        rule_variables: Hash[::String, {
+                                            definition: Array[::String]
+                                          }]?
+                                      }?
+                                    },
+                                    ?description: ::String,
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String
+                                      },
+                                    ],
+                                    ?dry_run: bool,
+                                    ?encryption_configuration: {
+                                      key_id: ::String?,
+                                      type: ("CUSTOMER_KMS" | "AWS_OWNED_KMS_KEY")
+                                    }
+                                  ) -> _CreateFirewallPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFirewallPolicyResponseSuccess
+
+      interface _CreateRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRuleGroupResponse]
+        def update_token: () -> ::String
+        def rule_group_response: () -> Types::RuleGroupResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#create_rule_group-instance_method
+      def create_rule_group: (
+                               rule_group_name: ::String,
+                               ?rule_group: {
+                                 rule_variables: {
+                                   ip_sets: Hash[::String, {
+                                       definition: Array[::String]
+                                     }]?,
+                                   port_sets: Hash[::String, {
+                                       definition: Array[::String]?
+                                     }]?
+                                 }?,
+                                 reference_sets: {
+                                   ip_set_references: Hash[::String, {
+                                       reference_arn: ::String?
+                                     }]?
+                                 }?,
+                                 rules_source: {
+                                   rules_string: ::String?,
+                                   rules_source_list: {
+                                     targets: Array[::String],
+                                     target_types: Array[("TLS_SNI" | "HTTP_HOST")],
+                                     generated_rules_type: ("ALLOWLIST" | "DENYLIST")
+                                   }?,
+                                   stateful_rules: Array[
+                                     {
+                                       action: ("PASS" | "DROP" | "ALERT" | "REJECT"),
+                                       header: {
+                                         protocol: ("IP" | "TCP" | "UDP" | "ICMP" | "HTTP" | "FTP" | "TLS" | "SMB" | "DNS" | "DCERPC" | "SSH" | "SMTP" | "IMAP" | "MSN" | "KRB5" | "IKEV2" | "TFTP" | "NTP" | "DHCP"),
+                                         source: ::String,
+                                         source_port: ::String,
+                                         direction: ("FORWARD" | "ANY"),
+                                         destination: ::String,
+                                         destination_port: ::String
+                                       },
+                                       rule_options: Array[
+                                         {
+                                           keyword: ::String,
+                                           settings: Array[::String]?
+                                         },
+                                       ]
+                                     },
+                                   ]?,
+                                   stateless_rules_and_custom_actions: {
+                                     stateless_rules: Array[
+                                       {
+                                         rule_definition: {
+                                           match_attributes: {
+                                             sources: Array[
+                                               {
+                                                 address_definition: ::String
+                                               },
+                                             ]?,
+                                             destinations: Array[
+                                               {
+                                                 address_definition: ::String
+                                               },
+                                             ]?,
+                                             source_ports: Array[
+                                               {
+                                                 from_port: ::Integer,
+                                                 to_port: ::Integer
+                                               },
+                                             ]?,
+                                             destination_ports: Array[
+                                               {
+                                                 from_port: ::Integer,
+                                                 to_port: ::Integer
+                                               },
+                                             ]?,
+                                             protocols: Array[::Integer]?,
+                                             tcp_flags: Array[
+                                               {
+                                                 flags: Array[("FIN" | "SYN" | "RST" | "PSH" | "ACK" | "URG" | "ECE" | "CWR")],
+                                                 masks: Array[("FIN" | "SYN" | "RST" | "PSH" | "ACK" | "URG" | "ECE" | "CWR")]?
+                                               },
+                                             ]?
+                                           },
+                                           actions: Array[::String]
+                                         },
+                                         priority: ::Integer
+                                       },
+                                     ],
+                                     custom_actions: Array[
+                                       {
+                                         action_name: ::String,
+                                         action_definition: {
+                                           publish_metric_action: {
+                                             dimensions: Array[
+                                               {
+                                                 value: ::String
+                                               },
+                                             ]
+                                           }?
+                                         }
+                                       },
+                                     ]?
+                                   }?
+                                 },
+                                 stateful_rule_options: {
+                                   rule_order: ("DEFAULT_ACTION_ORDER" | "STRICT_ORDER")?
+                                 }?
+                               },
+                               ?rules: ::String,
+                               type: ("STATELESS" | "STATEFUL"),
+                               ?description: ::String,
+                               capacity: ::Integer,
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ],
+                               ?dry_run: bool,
+                               ?encryption_configuration: {
+                                 key_id: ::String?,
+                                 type: ("CUSTOMER_KMS" | "AWS_OWNED_KMS_KEY")
+                               },
+                               ?source_metadata: {
+                                 source_arn: ::String?,
+                                 source_update_token: ::String?
+                               },
+                               ?analyze_rule_group: bool
+                             ) -> _CreateRuleGroupResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleGroupResponseSuccess
+
+      interface _CreateTLSInspectionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTLSInspectionConfigurationResponse]
+        def update_token: () -> ::String
+        def tls_inspection_configuration_response: () -> Types::TLSInspectionConfigurationResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#create_tls_inspection_configuration-instance_method
+      def create_tls_inspection_configuration: (
+                                                 tls_inspection_configuration_name: ::String,
+                                                 tls_inspection_configuration: {
+                                                   server_certificate_configurations: Array[
+                                                     {
+                                                       server_certificates: Array[
+                                                         {
+                                                           resource_arn: ::String?
+                                                         },
+                                                       ]?,
+                                                       scopes: Array[
+                                                         {
+                                                           sources: Array[
+                                                             {
+                                                               address_definition: ::String
+                                                             },
+                                                           ]?,
+                                                           destinations: Array[
+                                                             {
+                                                               address_definition: ::String
+                                                             },
+                                                           ]?,
+                                                           source_ports: Array[
+                                                             {
+                                                               from_port: ::Integer,
+                                                               to_port: ::Integer
+                                                             },
+                                                           ]?,
+                                                           destination_ports: Array[
+                                                             {
+                                                               from_port: ::Integer,
+                                                               to_port: ::Integer
+                                                             },
+                                                           ]?,
+                                                           protocols: Array[::Integer]?
+                                                         },
+                                                       ]?,
+                                                       certificate_authority_arn: ::String?,
+                                                       check_certificate_revocation_status: {
+                                                         revoked_status_action: ("PASS" | "DROP" | "REJECT")?,
+                                                         unknown_status_action: ("PASS" | "DROP" | "REJECT")?
+                                                       }?
+                                                     },
+                                                   ]?
+                                                 },
+                                                 ?description: ::String,
+                                                 ?tags: Array[
+                                                   {
+                                                     key: ::String,
+                                                     value: ::String
+                                                   },
+                                                 ],
+                                                 ?encryption_configuration: {
+                                                   key_id: ::String?,
+                                                   type: ("CUSTOMER_KMS" | "AWS_OWNED_KMS_KEY")
+                                                 }
+                                               ) -> _CreateTLSInspectionConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTLSInspectionConfigurationResponseSuccess
+
+      interface _DeleteFirewallResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFirewallResponse]
+        def firewall: () -> Types::Firewall
+        def firewall_status: () -> Types::FirewallStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#delete_firewall-instance_method
+      def delete_firewall: (
+                             ?firewall_name: ::String,
+                             ?firewall_arn: ::String
+                           ) -> _DeleteFirewallResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFirewallResponseSuccess
+
+      interface _DeleteFirewallPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFirewallPolicyResponse]
+        def firewall_policy_response: () -> Types::FirewallPolicyResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#delete_firewall_policy-instance_method
+      def delete_firewall_policy: (
+                                    ?firewall_policy_name: ::String,
+                                    ?firewall_policy_arn: ::String
+                                  ) -> _DeleteFirewallPolicyResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFirewallPolicyResponseSuccess
+
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
+      interface _DeleteRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRuleGroupResponse]
+        def rule_group_response: () -> Types::RuleGroupResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#delete_rule_group-instance_method
+      def delete_rule_group: (
+                               ?rule_group_name: ::String,
+                               ?rule_group_arn: ::String,
+                               ?type: ("STATELESS" | "STATEFUL")
+                             ) -> _DeleteRuleGroupResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRuleGroupResponseSuccess
+
+      interface _DeleteTLSInspectionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTLSInspectionConfigurationResponse]
+        def tls_inspection_configuration_response: () -> Types::TLSInspectionConfigurationResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#delete_tls_inspection_configuration-instance_method
+      def delete_tls_inspection_configuration: (
+                                                 ?tls_inspection_configuration_arn: ::String,
+                                                 ?tls_inspection_configuration_name: ::String
+                                               ) -> _DeleteTLSInspectionConfigurationResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTLSInspectionConfigurationResponseSuccess
+
+      interface _DescribeFirewallResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFirewallResponse]
+        def update_token: () -> ::String
+        def firewall: () -> Types::Firewall
+        def firewall_status: () -> Types::FirewallStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_firewall-instance_method
+      def describe_firewall: (
+                               ?firewall_name: ::String,
+                               ?firewall_arn: ::String
+                             ) -> _DescribeFirewallResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFirewallResponseSuccess
+
+      interface _DescribeFirewallPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFirewallPolicyResponse]
+        def update_token: () -> ::String
+        def firewall_policy_response: () -> Types::FirewallPolicyResponse
+        def firewall_policy: () -> Types::FirewallPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_firewall_policy-instance_method
+      def describe_firewall_policy: (
+                                      ?firewall_policy_name: ::String,
+                                      ?firewall_policy_arn: ::String
+                                    ) -> _DescribeFirewallPolicyResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFirewallPolicyResponseSuccess
+
+      interface _DescribeLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLoggingConfigurationResponse]
+        def firewall_arn: () -> ::String
+        def logging_configuration: () -> Types::LoggingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_logging_configuration-instance_method
+      def describe_logging_configuration: (
+                                            ?firewall_arn: ::String,
+                                            ?firewall_name: ::String
+                                          ) -> _DescribeLoggingConfigurationResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoggingConfigurationResponseSuccess
+
+      interface _DescribeResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourcePolicyResponse]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_resource_policy-instance_method
+      def describe_resource_policy: (
+                                      resource_arn: ::String
+                                    ) -> _DescribeResourcePolicyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourcePolicyResponseSuccess
+
+      interface _DescribeRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRuleGroupResponse]
+        def update_token: () -> ::String
+        def rule_group: () -> Types::RuleGroup
+        def rule_group_response: () -> Types::RuleGroupResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_rule_group-instance_method
+      def describe_rule_group: (
+                                 ?rule_group_name: ::String,
+                                 ?rule_group_arn: ::String,
+                                 ?type: ("STATELESS" | "STATEFUL"),
+                                 ?analyze_rule_group: bool
+                               ) -> _DescribeRuleGroupResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRuleGroupResponseSuccess
+
+      interface _DescribeRuleGroupMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRuleGroupMetadataResponse]
+        def rule_group_arn: () -> ::String
+        def rule_group_name: () -> ::String
+        def description: () -> ::String
+        def type: () -> ("STATELESS" | "STATEFUL")
+        def capacity: () -> ::Integer
+        def stateful_rule_options: () -> Types::StatefulRuleOptions
+        def last_modified_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_rule_group_metadata-instance_method
+      def describe_rule_group_metadata: (
+                                          ?rule_group_name: ::String,
+                                          ?rule_group_arn: ::String,
+                                          ?type: ("STATELESS" | "STATEFUL")
+                                        ) -> _DescribeRuleGroupMetadataResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRuleGroupMetadataResponseSuccess
+
+      interface _DescribeTLSInspectionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTLSInspectionConfigurationResponse]
+        def update_token: () -> ::String
+        def tls_inspection_configuration: () -> Types::TLSInspectionConfiguration
+        def tls_inspection_configuration_response: () -> Types::TLSInspectionConfigurationResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#describe_tls_inspection_configuration-instance_method
+      def describe_tls_inspection_configuration: (
+                                                   ?tls_inspection_configuration_arn: ::String,
+                                                   ?tls_inspection_configuration_name: ::String
+                                                 ) -> _DescribeTLSInspectionConfigurationResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTLSInspectionConfigurationResponseSuccess
+
+      interface _DisassociateSubnetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateSubnetsResponse]
+        def firewall_arn: () -> ::String
+        def firewall_name: () -> ::String
+        def subnet_mappings: () -> ::Array[Types::SubnetMapping]
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#disassociate_subnets-instance_method
+      def disassociate_subnets: (
+                                  ?update_token: ::String,
+                                  ?firewall_arn: ::String,
+                                  ?firewall_name: ::String,
+                                  subnet_ids: Array[::String]
+                                ) -> _DisassociateSubnetsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateSubnetsResponseSuccess
+
+      interface _ListFirewallPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallPoliciesResponse]
+        def next_token: () -> ::String
+        def firewall_policies: () -> ::Array[Types::FirewallPolicyMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#list_firewall_policies-instance_method
+      def list_firewall_policies: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListFirewallPoliciesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallPoliciesResponseSuccess
+
+      interface _ListFirewallsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFirewallsResponse]
+        def next_token: () -> ::String
+        def firewalls: () -> ::Array[Types::FirewallMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#list_firewalls-instance_method
+      def list_firewalls: (
+                            ?next_token: ::String,
+                            ?vpc_ids: Array[::String],
+                            ?max_results: ::Integer
+                          ) -> _ListFirewallsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFirewallsResponseSuccess
+
+      interface _ListRuleGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRuleGroupsResponse]
+        def next_token: () -> ::String
+        def rule_groups: () -> ::Array[Types::RuleGroupMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#list_rule_groups-instance_method
+      def list_rule_groups: (
+                              ?next_token: ::String,
+                              ?max_results: ::Integer,
+                              ?scope: ("MANAGED" | "ACCOUNT"),
+                              ?managed_type: ("AWS_MANAGED_THREAT_SIGNATURES" | "AWS_MANAGED_DOMAIN_LISTS"),
+                              ?type: ("STATELESS" | "STATEFUL")
+                            ) -> _ListRuleGroupsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRuleGroupsResponseSuccess
+
+      interface _ListTLSInspectionConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTLSInspectionConfigurationsResponse]
+        def next_token: () -> ::String
+        def tls_inspection_configurations: () -> ::Array[Types::TLSInspectionConfigurationMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#list_tls_inspection_configurations-instance_method
+      def list_tls_inspection_configurations: (
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _ListTLSInspectionConfigurationsResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTLSInspectionConfigurationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def next_token: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer,
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 resource_arn: ::String,
+                                 policy: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateFirewallDeleteProtectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFirewallDeleteProtectionResponse]
+        def firewall_arn: () -> ::String
+        def firewall_name: () -> ::String
+        def delete_protection: () -> bool
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_firewall_delete_protection-instance_method
+      def update_firewall_delete_protection: (
+                                               ?update_token: ::String,
+                                               ?firewall_arn: ::String,
+                                               ?firewall_name: ::String,
+                                               delete_protection: bool
+                                             ) -> _UpdateFirewallDeleteProtectionResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallDeleteProtectionResponseSuccess
+
+      interface _UpdateFirewallDescriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFirewallDescriptionResponse]
+        def firewall_arn: () -> ::String
+        def firewall_name: () -> ::String
+        def description: () -> ::String
+        def update_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_firewall_description-instance_method
+      def update_firewall_description: (
+                                         ?update_token: ::String,
+                                         ?firewall_arn: ::String,
+                                         ?firewall_name: ::String,
+                                         ?description: ::String
+                                       ) -> _UpdateFirewallDescriptionResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallDescriptionResponseSuccess
+
+      interface _UpdateFirewallEncryptionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFirewallEncryptionConfigurationResponse]
+        def firewall_arn: () -> ::String
+        def firewall_name: () -> ::String
+        def update_token: () -> ::String
+        def encryption_configuration: () -> Types::EncryptionConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_firewall_encryption_configuration-instance_method
+      def update_firewall_encryption_configuration: (
+                                                      ?update_token: ::String,
+                                                      ?firewall_arn: ::String,
+                                                      ?firewall_name: ::String,
+                                                      ?encryption_configuration: {
+                                                        key_id: ::String?,
+                                                        type: ("CUSTOMER_KMS" | "AWS_OWNED_KMS_KEY")
+                                                      }
+                                                    ) -> _UpdateFirewallEncryptionConfigurationResponseSuccess
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallEncryptionConfigurationResponseSuccess
+
+      interface _UpdateFirewallPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFirewallPolicyResponse]
+        def update_token: () -> ::String
+        def firewall_policy_response: () -> Types::FirewallPolicyResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_firewall_policy-instance_method
+      def update_firewall_policy: (
+                                    update_token: ::String,
+                                    ?firewall_policy_arn: ::String,
+                                    ?firewall_policy_name: ::String,
+                                    firewall_policy: {
+                                      stateless_rule_group_references: Array[
+                                        {
+                                          resource_arn: ::String,
+                                          priority: ::Integer
+                                        },
+                                      ]?,
+                                      stateless_default_actions: Array[::String],
+                                      stateless_fragment_default_actions: Array[::String],
+                                      stateless_custom_actions: Array[
+                                        {
+                                          action_name: ::String,
+                                          action_definition: {
+                                            publish_metric_action: {
+                                              dimensions: Array[
+                                                {
+                                                  value: ::String
+                                                },
+                                              ]
+                                            }?
+                                          }
+                                        },
+                                      ]?,
+                                      stateful_rule_group_references: Array[
+                                        {
+                                          resource_arn: ::String,
+                                          priority: ::Integer?,
+                                          override: {
+                                            action: ("DROP_TO_ALERT")?
+                                          }?
+                                        },
+                                      ]?,
+                                      stateful_default_actions: Array[::String]?,
+                                      stateful_engine_options: {
+                                        rule_order: ("DEFAULT_ACTION_ORDER" | "STRICT_ORDER")?,
+                                        stream_exception_policy: ("DROP" | "CONTINUE" | "REJECT")?
+                                      }?,
+                                      tls_inspection_configuration_arn: ::String?,
+                                      policy_variables: {
+                                        rule_variables: Hash[::String, {
+                                            definition: Array[::String]
+                                          }]?
+                                      }?
+                                    },
+                                    ?description: ::String,
+                                    ?dry_run: bool,
+                                    ?encryption_configuration: {
+                                      key_id: ::String?,
+                                      type: ("CUSTOMER_KMS" | "AWS_OWNED_KMS_KEY")
+                                    }
+                                  ) -> _UpdateFirewallPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallPolicyResponseSuccess
+
+      interface _UpdateFirewallPolicyChangeProtectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFirewallPolicyChangeProtectionResponse]
+        def update_token: () -> ::String
+        def firewall_arn: () -> ::String
+        def firewall_name: () -> ::String
+        def firewall_policy_change_protection: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_firewall_policy_change_protection-instance_method
+      def update_firewall_policy_change_protection: (
+                                                      ?update_token: ::String,
+                                                      ?firewall_arn: ::String,
+                                                      ?firewall_name: ::String,
+                                                      firewall_policy_change_protection: bool
+                                                    ) -> _UpdateFirewallPolicyChangeProtectionResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFirewallPolicyChangeProtectionResponseSuccess
+
+      interface _UpdateLoggingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLoggingConfigurationResponse]
+        def firewall_arn: () -> ::String
+        def firewall_name: () -> ::String
+        def logging_configuration: () -> Types::LoggingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_logging_configuration-instance_method
+      def update_logging_configuration: (
+                                          ?firewall_arn: ::String,
+                                          ?firewall_name: ::String,
+                                          ?logging_configuration: {
+                                            log_destination_configs: Array[
+                                              {
+                                                log_type: ("ALERT" | "FLOW"),
+                                                log_destination_type: ("S3" | "CloudWatchLogs" | "KinesisDataFirehose"),
+                                                log_destination: Hash[::String, ::String]
+                                              },
+                                            ]
+                                          }
+                                        ) -> _UpdateLoggingConfigurationResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLoggingConfigurationResponseSuccess
+
+      interface _UpdateRuleGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRuleGroupResponse]
+        def update_token: () -> ::String
+        def rule_group_response: () -> Types::RuleGroupResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_rule_group-instance_method
+      def update_rule_group: (
+                               update_token: ::String,
+                               ?rule_group_arn: ::String,
+                               ?rule_group_name: ::String,
+                               ?rule_group: {
+                                 rule_variables: {
+                                   ip_sets: Hash[::String, {
+                                       definition: Array[::String]
+                                     }]?,
+                                   port_sets: Hash[::String, {
+                                       definition: Array[::String]?
+                                     }]?
+                                 }?,
+                                 reference_sets: {
+                                   ip_set_references: Hash[::String, {
+                                       reference_arn: ::String?
+                                     }]?
+                                 }?,
+                                 rules_source: {
+                                   rules_string: ::String?,
+                                   rules_source_list: {
+                                     targets: Array[::String],
+                                     target_types: Array[("TLS_SNI" | "HTTP_HOST")],
+                                     generated_rules_type: ("ALLOWLIST" | "DENYLIST")
+                                   }?,
+                                   stateful_rules: Array[
+                                     {
+                                       action: ("PASS" | "DROP" | "ALERT" | "REJECT"),
+                                       header: {
+                                         protocol: ("IP" | "TCP" | "UDP" | "ICMP" | "HTTP" | "FTP" | "TLS" | "SMB" | "DNS" | "DCERPC" | "SSH" | "SMTP" | "IMAP" | "MSN" | "KRB5" | "IKEV2" | "TFTP" | "NTP" | "DHCP"),
+                                         source: ::String,
+                                         source_port: ::String,
+                                         direction: ("FORWARD" | "ANY"),
+                                         destination: ::String,
+                                         destination_port: ::String
+                                       },
+                                       rule_options: Array[
+                                         {
+                                           keyword: ::String,
+                                           settings: Array[::String]?
+                                         },
+                                       ]
+                                     },
+                                   ]?,
+                                   stateless_rules_and_custom_actions: {
+                                     stateless_rules: Array[
+                                       {
+                                         rule_definition: {
+                                           match_attributes: {
+                                             sources: Array[
+                                               {
+                                                 address_definition: ::String
+                                               },
+                                             ]?,
+                                             destinations: Array[
+                                               {
+                                                 address_definition: ::String
+                                               },
+                                             ]?,
+                                             source_ports: Array[
+                                               {
+                                                 from_port: ::Integer,
+                                                 to_port: ::Integer
+                                               },
+                                             ]?,
+                                             destination_ports: Array[
+                                               {
+                                                 from_port: ::Integer,
+                                                 to_port: ::Integer
+                                               },
+                                             ]?,
+                                             protocols: Array[::Integer]?,
+                                             tcp_flags: Array[
+                                               {
+                                                 flags: Array[("FIN" | "SYN" | "RST" | "PSH" | "ACK" | "URG" | "ECE" | "CWR")],
+                                                 masks: Array[("FIN" | "SYN" | "RST" | "PSH" | "ACK" | "URG" | "ECE" | "CWR")]?
+                                               },
+                                             ]?
+                                           },
+                                           actions: Array[::String]
+                                         },
+                                         priority: ::Integer
+                                       },
+                                     ],
+                                     custom_actions: Array[
+                                       {
+                                         action_name: ::String,
+                                         action_definition: {
+                                           publish_metric_action: {
+                                             dimensions: Array[
+                                               {
+                                                 value: ::String
+                                               },
+                                             ]
+                                           }?
+                                         }
+                                       },
+                                     ]?
+                                   }?
+                                 },
+                                 stateful_rule_options: {
+                                   rule_order: ("DEFAULT_ACTION_ORDER" | "STRICT_ORDER")?
+                                 }?
+                               },
+                               ?rules: ::String,
+                               ?type: ("STATELESS" | "STATEFUL"),
+                               ?description: ::String,
+                               ?dry_run: bool,
+                               ?encryption_configuration: {
+                                 key_id: ::String?,
+                                 type: ("CUSTOMER_KMS" | "AWS_OWNED_KMS_KEY")
+                               },
+                               ?source_metadata: {
+                                 source_arn: ::String?,
+                                 source_update_token: ::String?
+                               },
+                               ?analyze_rule_group: bool
+                             ) -> _UpdateRuleGroupResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuleGroupResponseSuccess
+
+      interface _UpdateSubnetChangeProtectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSubnetChangeProtectionResponse]
+        def update_token: () -> ::String
+        def firewall_arn: () -> ::String
+        def firewall_name: () -> ::String
+        def subnet_change_protection: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_subnet_change_protection-instance_method
+      def update_subnet_change_protection: (
+                                             ?update_token: ::String,
+                                             ?firewall_arn: ::String,
+                                             ?firewall_name: ::String,
+                                             subnet_change_protection: bool
+                                           ) -> _UpdateSubnetChangeProtectionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubnetChangeProtectionResponseSuccess
+
+      interface _UpdateTLSInspectionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTLSInspectionConfigurationResponse]
+        def update_token: () -> ::String
+        def tls_inspection_configuration_response: () -> Types::TLSInspectionConfigurationResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#update_tls_inspection_configuration-instance_method
+      def update_tls_inspection_configuration: (
+                                                 ?tls_inspection_configuration_arn: ::String,
+                                                 ?tls_inspection_configuration_name: ::String,
+                                                 tls_inspection_configuration: {
+                                                   server_certificate_configurations: Array[
+                                                     {
+                                                       server_certificates: Array[
+                                                         {
+                                                           resource_arn: ::String?
+                                                         },
+                                                       ]?,
+                                                       scopes: Array[
+                                                         {
+                                                           sources: Array[
+                                                             {
+                                                               address_definition: ::String
+                                                             },
+                                                           ]?,
+                                                           destinations: Array[
+                                                             {
+                                                               address_definition: ::String
+                                                             },
+                                                           ]?,
+                                                           source_ports: Array[
+                                                             {
+                                                               from_port: ::Integer,
+                                                               to_port: ::Integer
+                                                             },
+                                                           ]?,
+                                                           destination_ports: Array[
+                                                             {
+                                                               from_port: ::Integer,
+                                                               to_port: ::Integer
+                                                             },
+                                                           ]?,
+                                                           protocols: Array[::Integer]?
+                                                         },
+                                                       ]?,
+                                                       certificate_authority_arn: ::String?,
+                                                       check_certificate_revocation_status: {
+                                                         revoked_status_action: ("PASS" | "DROP" | "REJECT")?,
+                                                         unknown_status_action: ("PASS" | "DROP" | "REJECT")?
+                                                       }?
+                                                     },
+                                                   ]?
+                                                 },
+                                                 ?description: ::String,
+                                                 ?encryption_configuration: {
+                                                   key_id: ::String?,
+                                                   type: ("CUSTOMER_KMS" | "AWS_OWNED_KMS_KEY")
+                                                 },
+                                                 update_token: ::String
+                                               ) -> _UpdateTLSInspectionConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTLSInspectionConfigurationResponseSuccess
+    end
+  end
+end
+

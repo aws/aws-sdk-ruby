@@ -16,6 +16,11 @@ require 'aws-sdk-s3/object_multipart_copier'
 require 'aws-sdk-s3/presigned_post'
 require 'aws-sdk-s3/presigner'
 
+# s3 express session auth
+require 'aws-sdk-s3/express_credentials'
+require 'aws-sdk-s3/express_credentials_cache'
+require 'aws-sdk-s3/express_credentials_provider'
+
 # customizations to generated classes
 require 'aws-sdk-s3/customizations/bucket'
 require 'aws-sdk-s3/customizations/errors'

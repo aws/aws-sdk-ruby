@@ -1,0 +1,308 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EC2
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html
+    class SecurityGroup
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#initialize-instance_method
+      def initialize: (String id, Hash[Symbol, untyped] options) -> void
+                    | (id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#id-instance_method
+      def id: () -> String
+      alias group_id id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#description-instance_method
+      def description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#group_name-instance_method
+      def group_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#ip_permissions-instance_method
+      def ip_permissions: () -> ::Array[Types::IpPermission]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#owner_id-instance_method
+      def owner_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#ip_permissions_egress-instance_method
+      def ip_permissions_egress: () -> ::Array[Types::IpPermission]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#tags-instance_method
+      def tags: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#vpc_id-instance_method
+      def vpc_id: () -> ::String
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#data-instance_method
+      def data: () -> Types::SecurityGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#authorize_egress-instance_method
+      def authorize_egress: (
+                              ?dry_run: bool,
+                              ?ip_permissions: Array[
+                                {
+                                  from_port: ::Integer?,
+                                  ip_protocol: ::String?,
+                                  ip_ranges: Array[
+                                    {
+                                      cidr_ip: ::String?,
+                                      description: ::String?
+                                    },
+                                  ]?,
+                                  ipv_6_ranges: Array[
+                                    {
+                                      cidr_ipv_6: ::String?,
+                                      description: ::String?
+                                    },
+                                  ]?,
+                                  prefix_list_ids: Array[
+                                    {
+                                      description: ::String?,
+                                      prefix_list_id: ::String?
+                                    },
+                                  ]?,
+                                  to_port: ::Integer?,
+                                  user_id_group_pairs: Array[
+                                    {
+                                      description: ::String?,
+                                      group_id: ::String?,
+                                      group_name: ::String?,
+                                      peering_status: ::String?,
+                                      user_id: ::String?,
+                                      vpc_id: ::String?,
+                                      vpc_peering_connection_id: ::String?
+                                    },
+                                  ]?
+                                },
+                              ],
+                              ?tag_specifications: Array[
+                                {
+                                  resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                                  tags: Array[
+                                    {
+                                      key: ::String?,
+                                      value: ::String?
+                                    },
+                                  ]?
+                                },
+                              ],
+                              ?cidr_ip: ::String,
+                              ?from_port: ::Integer,
+                              ?ip_protocol: ::String,
+                              ?to_port: ::Integer,
+                              ?source_security_group_name: ::String,
+                              ?source_security_group_owner_id: ::String
+                            ) -> Types::AuthorizeSecurityGroupEgressResult
+                          | (?Hash[Symbol, untyped]) -> Types::AuthorizeSecurityGroupEgressResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#authorize_ingress-instance_method
+      def authorize_ingress: (
+                               ?cidr_ip: ::String,
+                               ?from_port: ::Integer,
+                               ?group_name: ::String,
+                               ?ip_permissions: Array[
+                                 {
+                                   from_port: ::Integer?,
+                                   ip_protocol: ::String?,
+                                   ip_ranges: Array[
+                                     {
+                                       cidr_ip: ::String?,
+                                       description: ::String?
+                                     },
+                                   ]?,
+                                   ipv_6_ranges: Array[
+                                     {
+                                       cidr_ipv_6: ::String?,
+                                       description: ::String?
+                                     },
+                                   ]?,
+                                   prefix_list_ids: Array[
+                                     {
+                                       description: ::String?,
+                                       prefix_list_id: ::String?
+                                     },
+                                   ]?,
+                                   to_port: ::Integer?,
+                                   user_id_group_pairs: Array[
+                                     {
+                                       description: ::String?,
+                                       group_id: ::String?,
+                                       group_name: ::String?,
+                                       peering_status: ::String?,
+                                       user_id: ::String?,
+                                       vpc_id: ::String?,
+                                       vpc_peering_connection_id: ::String?
+                                     },
+                                   ]?
+                                 },
+                               ],
+                               ?ip_protocol: ::String,
+                               ?source_security_group_name: ::String,
+                               ?source_security_group_owner_id: ::String,
+                               ?to_port: ::Integer,
+                               ?dry_run: bool,
+                               ?tag_specifications: Array[
+                                 {
+                                   resource_type: ("capacity-reservation" | "client-vpn-endpoint" | "customer-gateway" | "carrier-gateway" | "coip-pool" | "dedicated-host" | "dhcp-options" | "egress-only-internet-gateway" | "elastic-ip" | "elastic-gpu" | "export-image-task" | "export-instance-task" | "fleet" | "fpga-image" | "host-reservation" | "image" | "import-image-task" | "import-snapshot-task" | "instance" | "instance-event-window" | "internet-gateway" | "ipam" | "ipam-pool" | "ipam-scope" | "ipv4pool-ec2" | "ipv6pool-ec2" | "key-pair" | "launch-template" | "local-gateway" | "local-gateway-route-table" | "local-gateway-virtual-interface" | "local-gateway-virtual-interface-group" | "local-gateway-route-table-vpc-association" | "local-gateway-route-table-virtual-interface-group-association" | "natgateway" | "network-acl" | "network-interface" | "network-insights-analysis" | "network-insights-path" | "network-insights-access-scope" | "network-insights-access-scope-analysis" | "placement-group" | "prefix-list" | "replace-root-volume-task" | "reserved-instances" | "route-table" | "security-group" | "security-group-rule" | "snapshot" | "spot-fleet-request" | "spot-instances-request" | "subnet" | "subnet-cidr-reservation" | "traffic-mirror-filter" | "traffic-mirror-session" | "traffic-mirror-target" | "transit-gateway" | "transit-gateway-attachment" | "transit-gateway-connect-peer" | "transit-gateway-multicast-domain" | "transit-gateway-policy-table" | "transit-gateway-route-table" | "transit-gateway-route-table-announcement" | "volume" | "vpc" | "vpc-endpoint" | "vpc-endpoint-connection" | "vpc-endpoint-service" | "vpc-endpoint-service-permission" | "vpc-peering-connection" | "vpn-connection" | "vpn-gateway" | "vpc-flow-log" | "capacity-reservation-fleet" | "traffic-mirror-filter-rule" | "vpc-endpoint-connection-device-type" | "verified-access-instance" | "verified-access-group" | "verified-access-endpoint" | "verified-access-policy" | "verified-access-trust-provider" | "vpn-connection-device-type" | "vpc-block-public-access-exclusion" | "ipam-resource-discovery" | "ipam-resource-discovery-association" | "instance-connect-endpoint")?,
+                                   tags: Array[
+                                     {
+                                       key: ::String?,
+                                       value: ::String?
+                                     },
+                                   ]?
+                                 },
+                               ]
+                             ) -> Types::AuthorizeSecurityGroupIngressResult
+                           | (?Hash[Symbol, untyped]) -> Types::AuthorizeSecurityGroupIngressResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#create_tags-instance_method
+      def create_tags: (
+                         ?dry_run: bool,
+                         tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> Tag::Collection
+                     | (?Hash[Symbol, untyped]) -> Tag::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#delete_tags-instance_method
+      def delete_tags: (
+                         ?dry_run: bool,
+                         ?tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> Tag::Collection
+                     | (?Hash[Symbol, untyped]) -> Tag::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#delete-instance_method
+      def delete: (
+                    ?group_name: ::String,
+                    ?dry_run: bool
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#revoke_egress-instance_method
+      def revoke_egress: (
+                           ?dry_run: bool,
+                           ?ip_permissions: Array[
+                             {
+                               from_port: ::Integer?,
+                               ip_protocol: ::String?,
+                               ip_ranges: Array[
+                                 {
+                                   cidr_ip: ::String?,
+                                   description: ::String?
+                                 },
+                               ]?,
+                               ipv_6_ranges: Array[
+                                 {
+                                   cidr_ipv_6: ::String?,
+                                   description: ::String?
+                                 },
+                               ]?,
+                               prefix_list_ids: Array[
+                                 {
+                                   description: ::String?,
+                                   prefix_list_id: ::String?
+                                 },
+                               ]?,
+                               to_port: ::Integer?,
+                               user_id_group_pairs: Array[
+                                 {
+                                   description: ::String?,
+                                   group_id: ::String?,
+                                   group_name: ::String?,
+                                   peering_status: ::String?,
+                                   user_id: ::String?,
+                                   vpc_id: ::String?,
+                                   vpc_peering_connection_id: ::String?
+                                 },
+                               ]?
+                             },
+                           ],
+                           ?security_group_rule_ids: Array[::String],
+                           ?cidr_ip: ::String,
+                           ?from_port: ::Integer,
+                           ?ip_protocol: ::String,
+                           ?to_port: ::Integer,
+                           ?source_security_group_name: ::String,
+                           ?source_security_group_owner_id: ::String
+                         ) -> Types::RevokeSecurityGroupEgressResult
+                       | (?Hash[Symbol, untyped]) -> Types::RevokeSecurityGroupEgressResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/SecurityGroup.html#revoke_ingress-instance_method
+      def revoke_ingress: (
+                            ?cidr_ip: ::String,
+                            ?from_port: ::Integer,
+                            ?group_name: ::String,
+                            ?ip_permissions: Array[
+                              {
+                                from_port: ::Integer?,
+                                ip_protocol: ::String?,
+                                ip_ranges: Array[
+                                  {
+                                    cidr_ip: ::String?,
+                                    description: ::String?
+                                  },
+                                ]?,
+                                ipv_6_ranges: Array[
+                                  {
+                                    cidr_ipv_6: ::String?,
+                                    description: ::String?
+                                  },
+                                ]?,
+                                prefix_list_ids: Array[
+                                  {
+                                    description: ::String?,
+                                    prefix_list_id: ::String?
+                                  },
+                                ]?,
+                                to_port: ::Integer?,
+                                user_id_group_pairs: Array[
+                                  {
+                                    description: ::String?,
+                                    group_id: ::String?,
+                                    group_name: ::String?,
+                                    peering_status: ::String?,
+                                    user_id: ::String?,
+                                    vpc_id: ::String?,
+                                    vpc_peering_connection_id: ::String?
+                                  },
+                                ]?
+                              },
+                            ],
+                            ?ip_protocol: ::String,
+                            ?source_security_group_name: ::String,
+                            ?source_security_group_owner_id: ::String,
+                            ?to_port: ::Integer,
+                            ?dry_run: bool,
+                            ?security_group_rule_ids: Array[::String]
+                          ) -> Types::RevokeSecurityGroupIngressResult
+                        | (?Hash[Symbol, untyped]) -> Types::RevokeSecurityGroupIngressResult
+
+      class Collection < ::Aws::Resources::Collection[SecurityGroup]
+      end
+    end
+  end
+end

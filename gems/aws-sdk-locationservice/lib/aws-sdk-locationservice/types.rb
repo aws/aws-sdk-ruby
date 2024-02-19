@@ -120,7 +120,7 @@ module Aws::LocationService
     #
     #   * Other than wildcards, you must include the full ARN, including the
     #     `arn`, `partition`, `service`, `region`, `account-id` and
-    #     `resource-id`, delimited by colons (:).
+    #     `resource-id` delimited by colons (:).
     #
     #   * No spaces allowed, even with wildcards. For example,
     #     `arn:aws:geo:region:account-id:map/ExampleMap*`.
@@ -888,6 +888,16 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] arrival_time
+    #   Specifies the desired time of arrival. Uses the given time to
+    #   calculate the route. Otherwise, the best time of day to travel with
+    #   the best traffic conditions is used to calculate the route.
+    #
+    #   <note markdown="1"> ArrivalTime is not supported Esri.
+    #
+    #    </note>
+    #   @return [Time]
+    #
     # @!attribute [rw] calculator_name
     #   The name of the route calculator resource that you want to use to
     #   calculate the route.
@@ -937,11 +947,6 @@ module Aws::LocationService
     #   Specifies the desired time of departure. Uses the given time to
     #   calculate the route. Otherwise, the best time of day to travel with
     #   the best traffic conditions is used to calculate the route.
-    #
-    #   <note markdown="1"> Setting a departure time in the past returns a `400
-    #   ValidationException` error.
-    #
-    #    </note>
     #
     #   * In [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example,
     #     `2020–07-2T12:15:20.000Z+01:00`
@@ -995,6 +1000,10 @@ module Aws::LocationService
     #
     #
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   @return [String]
+    #
+    # @!attribute [rw] optimize_for
+    #   Specifies the distance to optimize for when calculating a route.
     #   @return [String]
     #
     # @!attribute [rw] travel_mode
@@ -1069,6 +1078,7 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteRequest AWS API Documentation
     #
     class CalculateRouteRequest < Struct.new(
+      :arrival_time,
       :calculator_name,
       :car_mode_options,
       :depart_now,
@@ -1078,6 +1088,7 @@ module Aws::LocationService
       :distance_unit,
       :include_leg_geometry,
       :key,
+      :optimize_for,
       :travel_mode,
       :truck_mode_options,
       :waypoint_positions)
@@ -2115,6 +2126,21 @@ module Aws::LocationService
     #
     class DeleteGeofenceCollectionResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] force_delete
+    #   ForceDelete bypasses an API key's expiry conditions and deletes the
+    #   key. Set the parameter `true` to delete the key or to `false` to not
+    #   preemptively delete the API key.
+    #
+    #   Valid values: `true`, or `false`.
+    #
+    #   Required: No
+    #
+    #   <note markdown="1"> This action is irreversible. Only use ForceDelete if you are certain
+    #   the key is no longer in use.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @!attribute [rw] key_name
     #   The name of the API key to delete.
     #   @return [String]
@@ -2122,6 +2148,7 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DeleteKeyRequest AWS API Documentation
     #
     class DeleteKeyRequest < Struct.new(
+      :force_delete,
       :key_name)
       SENSITIVE = []
       include Aws::Structure
@@ -3192,7 +3219,7 @@ module Aws::LocationService
     #     Bold`
     #
     #   * VectorEsriNavigation – `Arial Regular` \| `Arial Italic` \| `Arial
-    #     Bold`
+    #     Bold` \| `Arial Unicode MS Bold` \| `Arial Unicode MS Regular`
     #
     #   Valid font stacks for [HERE Technologies][2] styles:
     #
@@ -3500,6 +3527,39 @@ module Aws::LocationService
     #
     # @!attribute [rw] place_id
     #   The identifier of the place to find.
+    #
+    #   While you can use PlaceID in subsequent requests, PlaceID is not
+    #   intended to be a permanent identifier and the ID can change between
+    #   consecutive API calls. Please see the following PlaceID behaviour
+    #   for each data provider:
+    #
+    #   * Esri: Place IDs will change every quarter at a minimum. The
+    #     typical time period for these changes would be March, June,
+    #     September, and December. Place IDs might also change between the
+    #     typical quarterly change but that will be much less frequent.
+    #
+    #   * HERE: We recommend that you cache data for no longer than a week
+    #     to keep your data data fresh. You can assume that less than 1% ID
+    #     shifts will release over release which is approximately 1 - 2
+    #     times per week.
+    #
+    #   * Grab: Place IDs can expire or become invalid in the following
+    #     situations.
+    #
+    #     * Data operations: The POI may be removed from Grab POI database
+    #       by Grab Map Ops based on the ground-truth, such as being closed
+    #       in the real world, being detected as a duplicate POI, or having
+    #       incorrect information. Grab will synchronize data to the
+    #       Waypoint environment on weekly basis.
+    #
+    #     * Interpolated POI: Interpolated POI is a temporary POI generated
+    #       in real time when serving a request, and it will be marked as
+    #       derived in the `place.result_type` field in the response. The
+    #       information of interpolated POIs will be retained for at least
+    #       30 days, which means that within 30 days, you are able to obtain
+    #       POI details by Place ID from Place Details API. After 30 days,
+    #       the interpolated POIs(both Place ID and details) may expire and
+    #       inaccessible from the Places Details API.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetPlaceRequest AWS API Documentation
@@ -3656,7 +3716,7 @@ module Aws::LocationService
     end
 
     # @!attribute [rw] filter_geometry
-    #   The geomerty used to filter device positions.
+    #   The geometry used to filter device positions.
     #   @return [Types::TrackingFilterGeometry]
     #
     # @!attribute [rw] max_results
@@ -4555,6 +4615,22 @@ module Aws::LocationService
 
     # Specifies the map tile style selected from an available provider.
     #
+    # @!attribute [rw] custom_layers
+    #   Specifies the custom layers for the style. Leave unset to not enable
+    #   any custom layer, or, for styles that support custom layers, you can
+    #   enable layer(s), such as `POI` layer for the VectorEsriNavigation
+    #   style. Default is `unset`.
+    #
+    #   <note markdown="1"> Currenlty only `VectorEsriNavigation` supports CustomLayers. For
+    #   more information, see [Custom Layers][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#map-custom-layers
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] political_view
     #   Specifies the political view for the style. Leave unset to not use a
     #   political view, or, for styles that support specific political
@@ -4577,10 +4653,15 @@ module Aws::LocationService
     #
     #   Valid [Esri map styles][1]:
     #
-    #   * `VectorEsriDarkGrayCanvas` – The Esri Dark Gray Canvas map style.
-    #     A vector basemap with a dark gray, neutral background with minimal
-    #     colors, labels, and features that's designed to draw attention to
-    #     your thematic content.
+    #   * `VectorEsriNavigation` – The Esri Navigation map style, which
+    #     provides a detailed basemap for the world symbolized with a custom
+    #     navigation map style that's designed for use during the day in
+    #     mobile devices. It also includes a richer set of places, such as
+    #     shops, services, restaurants, attractions, and other points of
+    #     interest. Enable the `POI` layer by setting it in CustomLayers to
+    #     leverage the additional places data.
+    #
+    #
     #
     #   * `RasterEsriImagery` – The Esri Imagery map style. A raster basemap
     #     that provides one meter or better satellite and aerial imagery in
@@ -4600,32 +4681,17 @@ module Aws::LocationService
     #     Esri street map style. The vector tile layer is similar in content
     #     and style to the World Street Map raster map.
     #
-    #   * `VectorEsriNavigation` – The Esri Navigation map style, which
-    #     provides a detailed basemap for the world symbolized with a custom
-    #     navigation map style that's designed for use during the day in
-    #     mobile devices.
+    #   * `VectorEsriDarkGrayCanvas` – The Esri Dark Gray Canvas map style.
+    #     A vector basemap with a dark gray, neutral background with minimal
+    #     colors, labels, and features that's designed to draw attention to
+    #     your thematic content.
     #
     #   Valid [HERE Technologies map styles][2]:
-    #
-    #   * `VectorHereContrast` – The HERE Contrast (Berlin) map style is a
-    #     high contrast detailed base map of the world that blends 3D and 2D
-    #     rendering.
-    #
-    #     <note markdown="1"> The `VectorHereContrast` style has been renamed from
-    #     `VectorHereBerlin`. `VectorHereBerlin` has been deprecated, but
-    #     will continue to work in applications that use it.
-    #
-    #      </note>
     #
     #   * `VectorHereExplore` – A default HERE map style containing a
     #     neutral, global map and its features including roads, buildings,
     #     landmarks, and water features. It also now includes a fully
     #     designed map of Japan.
-    #
-    #   * `VectorHereExploreTruck` – A global map containing truck
-    #     restrictions and attributes (e.g. width / height / HAZMAT)
-    #     symbolized with highlighted segments and icons on top of HERE
-    #     Explore to support use cases within transport and logistics.
     #
     #   * `RasterHereExploreSatellite` – A global map containing high
     #     resolution satellite imagery.
@@ -4641,6 +4707,21 @@ module Aws::LocationService
     #     include all tiles retrieved.
     #
     #      </note>
+    #
+    #   * `VectorHereContrast` – The HERE Contrast (Berlin) map style is a
+    #     high contrast detailed base map of the world that blends 3D and 2D
+    #     rendering.
+    #
+    #     <note markdown="1"> The `VectorHereContrast` style has been renamed from
+    #     `VectorHereBerlin`. `VectorHereBerlin` has been deprecated, but
+    #     will continue to work in applications that use it.
+    #
+    #      </note>
+    #
+    #   * `VectorHereExploreTruck` – A global map containing truck
+    #     restrictions and attributes (e.g. width / height / HAZMAT)
+    #     symbolized with highlighted segments and icons on top of HERE
+    #     Explore to support use cases within transport and logistics.
     #
     #   Valid [GrabMaps map styles][3]:
     #
@@ -4693,6 +4774,7 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfiguration AWS API Documentation
     #
     class MapConfiguration < Struct.new(
+      :custom_layers,
       :political_view,
       :style)
       SENSITIVE = []
@@ -4700,6 +4782,22 @@ module Aws::LocationService
     end
 
     # Specifies the political view for the style.
+    #
+    # @!attribute [rw] custom_layers
+    #   Specifies the custom layers for the style. Leave unset to not enable
+    #   any custom layer, or, for styles that support custom layers, you can
+    #   enable layer(s), such as `POI` layer for the VectorEsriNavigation
+    #   style. Default is `unset`.
+    #
+    #   <note markdown="1"> Currenlty only `VectorEsriNavigation` supports CustomLayers. For
+    #   more information, see [Custom Layers][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#map-custom-layers
+    #   @return [Array<String>]
     #
     # @!attribute [rw] political_view
     #   Specifies the political view for the style. Set to an empty string
@@ -4720,6 +4818,7 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfigurationUpdate AWS API Documentation
     #
     class MapConfigurationUpdate < Struct.new(
+      :custom_layers,
       :political_view)
       SENSITIVE = []
       include Aws::Structure
@@ -4802,6 +4901,23 @@ module Aws::LocationService
     #   `Main Street`.
     #   @return [String]
     #
+    # @!attribute [rw] sub_municipality
+    #   An area that's part of a larger municipality. For example,
+    #   `Blissville` is a submunicipality in the Queen County in New York.
+    #
+    #   <note markdown="1"> This property is only returned for a place index that uses Esri as a
+    #   data provider. The property is represented as a `district`.
+    #
+    #    </note>
+    #
+    #   For more information about data providers, see [Amazon Location
+    #   Service data providers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   @return [String]
+    #
     # @!attribute [rw] sub_region
     #   A county, or an area that's part of a larger region. For example,
     #   `Metro Vancouver`.
@@ -4821,8 +4937,9 @@ module Aws::LocationService
     #   For addresses with multiple units, the unit identifier. Can include
     #   numbers and letters, for example `3B` or `Unit 123`.
     #
-    #   <note markdown="1"> Returned only for a place index that uses Esri or Grab as a data
-    #   provider. Is not returned for `SearchPlaceIndexForPosition`.
+    #   <note markdown="1"> This property is returned only for a place index that uses Esri or
+    #   Grab as a data provider. It is not returned for
+    #   `SearchPlaceIndexForPosition`.
     #
     #    </note>
     #   @return [String]
@@ -4831,7 +4948,8 @@ module Aws::LocationService
     #   For addresses with a `UnitNumber`, the type of unit. For example,
     #   `Apartment`.
     #
-    #   <note markdown="1"> Returned only for a place index that uses Esri as a data provider.
+    #   <note markdown="1"> This property is returned only for a place index that uses Esri as a
+    #   data provider.
     #
     #    </note>
     #   @return [String]
@@ -4850,6 +4968,7 @@ module Aws::LocationService
       :postal_code,
       :region,
       :street,
+      :sub_municipality,
       :sub_region,
       :supplemental_categories,
       :time_zone,
@@ -5132,6 +5251,39 @@ module Aws::LocationService
     #   providers.
     #
     #    </note>
+    #
+    #   While you can use PlaceID in subsequent requests, PlaceID is not
+    #   intended to be a permanent identifier and the ID can change between
+    #   consecutive API calls. Please see the following PlaceID behaviour
+    #   for each data provider:
+    #
+    #   * Esri: Place IDs will change every quarter at a minimum. The
+    #     typical time period for these changes would be March, June,
+    #     September, and December. Place IDs might also change between the
+    #     typical quarterly change but that will be much less frequent.
+    #
+    #   * HERE: We recommend that you cache data for no longer than a week
+    #     to keep your data data fresh. You can assume that less than 1% ID
+    #     shifts will release over release which is approximately 1 - 2
+    #     times per week.
+    #
+    #   * Grab: Place IDs can expire or become invalid in the following
+    #     situations.
+    #
+    #     * Data operations: The POI may be removed from Grab POI database
+    #       by Grab Map Ops based on the ground-truth, such as being closed
+    #       in the real world, being detected as a duplicate POI, or having
+    #       incorrect information. Grab will synchronize data to the
+    #       Waypoint environment on weekly basis.
+    #
+    #     * Interpolated POI: Interpolated POI is a temporary POI generated
+    #       in real time when serving a request, and it will be marked as
+    #       derived in the `place.result_type` field in the response. The
+    #       information of interpolated POIs will be retained for at least
+    #       30 days, which means that within 30 days, you are able to obtain
+    #       POI details by Place ID from Place Details API. After 30 days,
+    #       the interpolated POIs(both Place ID and details) may expire and
+    #       inaccessible from the Places Details API.
     #   @return [String]
     #
     # @!attribute [rw] supplemental_categories

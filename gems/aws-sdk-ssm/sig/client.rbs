@@ -1,0 +1,3018 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SSM
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddTagsToResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddTagsToResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#add_tags_to_resource-instance_method
+      def add_tags_to_resource: (
+                                  resource_type: ("Document" | "ManagedInstance" | "MaintenanceWindow" | "Parameter" | "PatchBaseline" | "OpsItem" | "OpsMetadata" | "Automation" | "Association"),
+                                  resource_id: ::String,
+                                  tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> _AddTagsToResourceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsToResourceResponseSuccess
+
+      interface _AssociateOpsItemRelatedItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateOpsItemRelatedItemResponse]
+        def association_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#associate_ops_item_related_item-instance_method
+      def associate_ops_item_related_item: (
+                                             ops_item_id: ::String,
+                                             association_type: ::String,
+                                             resource_type: ::String,
+                                             resource_uri: ::String
+                                           ) -> _AssociateOpsItemRelatedItemResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateOpsItemRelatedItemResponseSuccess
+
+      interface _CancelCommandResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelCommandResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#cancel_command-instance_method
+      def cancel_command: (
+                            command_id: ::String,
+                            ?instance_ids: Array[::String]
+                          ) -> _CancelCommandResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelCommandResponseSuccess
+
+      interface _CancelMaintenanceWindowExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelMaintenanceWindowExecutionResult]
+        def window_execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#cancel_maintenance_window_execution-instance_method
+      def cancel_maintenance_window_execution: (
+                                                 window_execution_id: ::String
+                                               ) -> _CancelMaintenanceWindowExecutionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelMaintenanceWindowExecutionResponseSuccess
+
+      interface _CreateActivationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateActivationResult]
+        def activation_id: () -> ::String
+        def activation_code: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#create_activation-instance_method
+      def create_activation: (
+                               ?description: ::String,
+                               ?default_instance_name: ::String,
+                               iam_role: ::String,
+                               ?registration_limit: ::Integer,
+                               ?expiration_date: ::Time,
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ],
+                               ?registration_metadata: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ]
+                             ) -> _CreateActivationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateActivationResponseSuccess
+
+      interface _CreateAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssociationResult]
+        def association_description: () -> Types::AssociationDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#create_association-instance_method
+      def create_association: (
+                                name: ::String,
+                                ?document_version: ::String,
+                                ?instance_id: ::String,
+                                ?parameters: Hash[::String, Array[::String]],
+                                ?targets: Array[
+                                  {
+                                    key: ::String?,
+                                    values: Array[::String]?
+                                  },
+                                ],
+                                ?schedule_expression: ::String,
+                                ?output_location: {
+                                  s3_location: {
+                                    output_s3_region: ::String?,
+                                    output_s3_bucket_name: ::String?,
+                                    output_s3_key_prefix: ::String?
+                                  }?
+                                },
+                                ?association_name: ::String,
+                                ?automation_target_parameter_name: ::String,
+                                ?max_errors: ::String,
+                                ?max_concurrency: ::String,
+                                ?compliance_severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "UNSPECIFIED"),
+                                ?sync_compliance: ("AUTO" | "MANUAL"),
+                                ?apply_only_at_cron_interval: bool,
+                                ?calendar_names: Array[::String],
+                                ?target_locations: Array[
+                                  {
+                                    accounts: Array[::String]?,
+                                    regions: Array[::String]?,
+                                    target_location_max_concurrency: ::String?,
+                                    target_location_max_errors: ::String?,
+                                    execution_role_name: ::String?,
+                                    target_location_alarm_configuration: {
+                                      ignore_poll_alarm_failure: bool?,
+                                      alarms: Array[
+                                        {
+                                          name: ::String
+                                        },
+                                      ]
+                                    }?
+                                  },
+                                ],
+                                ?schedule_offset: ::Integer,
+                                ?duration: ::Integer,
+                                ?target_maps: Array[
+                                  Hash[::String, Array[::String]],
+                                ],
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ],
+                                ?alarm_configuration: {
+                                  ignore_poll_alarm_failure: bool?,
+                                  alarms: Array[
+                                    {
+                                      name: ::String
+                                    },
+                                  ]
+                                }
+                              ) -> _CreateAssociationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssociationResponseSuccess
+
+      interface _CreateAssociationBatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAssociationBatchResult]
+        def successful: () -> ::Array[Types::AssociationDescription]
+        def failed: () -> ::Array[Types::FailedCreateAssociation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#create_association_batch-instance_method
+      def create_association_batch: (
+                                      entries: Array[
+                                        {
+                                          name: ::String,
+                                          instance_id: ::String?,
+                                          parameters: Hash[::String, Array[::String]]?,
+                                          automation_target_parameter_name: ::String?,
+                                          document_version: ::String?,
+                                          targets: Array[
+                                            {
+                                              key: ::String?,
+                                              values: Array[::String]?
+                                            },
+                                          ]?,
+                                          schedule_expression: ::String?,
+                                          output_location: {
+                                            s3_location: {
+                                              output_s3_region: ::String?,
+                                              output_s3_bucket_name: ::String?,
+                                              output_s3_key_prefix: ::String?
+                                            }?
+                                          }?,
+                                          association_name: ::String?,
+                                          max_errors: ::String?,
+                                          max_concurrency: ::String?,
+                                          compliance_severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "UNSPECIFIED")?,
+                                          sync_compliance: ("AUTO" | "MANUAL")?,
+                                          apply_only_at_cron_interval: bool?,
+                                          calendar_names: Array[::String]?,
+                                          target_locations: Array[
+                                            {
+                                              accounts: Array[::String]?,
+                                              regions: Array[::String]?,
+                                              target_location_max_concurrency: ::String?,
+                                              target_location_max_errors: ::String?,
+                                              execution_role_name: ::String?,
+                                              target_location_alarm_configuration: {
+                                                ignore_poll_alarm_failure: bool?,
+                                                alarms: Array[
+                                                  {
+                                                    name: ::String
+                                                  },
+                                                ]
+                                              }?
+                                            },
+                                          ]?,
+                                          schedule_offset: ::Integer?,
+                                          duration: ::Integer?,
+                                          target_maps: Array[
+                                            Hash[::String, Array[::String]],
+                                          ]?,
+                                          alarm_configuration: {
+                                            ignore_poll_alarm_failure: bool?,
+                                            alarms: Array[
+                                              {
+                                                name: ::String
+                                              },
+                                            ]
+                                          }?
+                                        },
+                                      ]
+                                    ) -> _CreateAssociationBatchResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssociationBatchResponseSuccess
+
+      interface _CreateDocumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDocumentResult]
+        def document_description: () -> Types::DocumentDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#create_document-instance_method
+      def create_document: (
+                             content: ::String,
+                             ?requires: Array[
+                               {
+                                 name: ::String,
+                                 version: ::String?,
+                                 require_type: ::String?,
+                                 version_name: ::String?
+                               },
+                             ],
+                             ?attachments: Array[
+                               {
+                                 key: ("SourceUrl" | "S3FileUrl" | "AttachmentReference")?,
+                                 values: Array[::String]?,
+                                 name: ::String?
+                               },
+                             ],
+                             name: ::String,
+                             ?display_name: ::String,
+                             ?version_name: ::String,
+                             ?document_type: ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup"),
+                             ?document_format: ("YAML" | "JSON" | "TEXT"),
+                             ?target_type: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _CreateDocumentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDocumentResponseSuccess
+
+      interface _CreateMaintenanceWindowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMaintenanceWindowResult]
+        def window_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#create_maintenance_window-instance_method
+      def create_maintenance_window: (
+                                       name: ::String,
+                                       ?description: ::String,
+                                       ?start_date: ::String,
+                                       ?end_date: ::String,
+                                       schedule: ::String,
+                                       ?schedule_timezone: ::String,
+                                       ?schedule_offset: ::Integer,
+                                       duration: ::Integer,
+                                       cutoff: ::Integer,
+                                       allow_unassociated_targets: bool,
+                                       ?client_token: ::String,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]
+                                     ) -> _CreateMaintenanceWindowResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMaintenanceWindowResponseSuccess
+
+      interface _CreateOpsItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOpsItemResponse]
+        def ops_item_id: () -> ::String
+        def ops_item_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#create_ops_item-instance_method
+      def create_ops_item: (
+                             description: ::String,
+                             ?ops_item_type: ::String,
+                             ?operational_data: Hash[::String, {
+                                 value: ::String?,
+                                 type: ("SearchableString" | "String")?
+                               }],
+                             ?notifications: Array[
+                               {
+                                 arn: ::String?
+                               },
+                             ],
+                             ?priority: ::Integer,
+                             ?related_ops_items: Array[
+                               {
+                                 ops_item_id: ::String
+                               },
+                             ],
+                             source: ::String,
+                             title: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ],
+                             ?category: ::String,
+                             ?severity: ::String,
+                             ?actual_start_time: ::Time,
+                             ?actual_end_time: ::Time,
+                             ?planned_start_time: ::Time,
+                             ?planned_end_time: ::Time,
+                             ?account_id: ::String
+                           ) -> _CreateOpsItemResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOpsItemResponseSuccess
+
+      interface _CreateOpsMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateOpsMetadataResult]
+        def ops_metadata_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#create_ops_metadata-instance_method
+      def create_ops_metadata: (
+                                 resource_id: ::String,
+                                 ?metadata: Hash[::String, {
+                                     value: ::String?
+                                   }],
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ]
+                               ) -> _CreateOpsMetadataResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOpsMetadataResponseSuccess
+
+      interface _CreatePatchBaselineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePatchBaselineResult]
+        def baseline_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#create_patch_baseline-instance_method
+      def create_patch_baseline: (
+                                   ?operating_system: ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023"),
+                                   name: ::String,
+                                   ?global_filters: {
+                                     patch_filters: Array[
+                                       {
+                                         key: ("ARCH" | "ADVISORY_ID" | "BUGZILLA_ID" | "PATCH_SET" | "PRODUCT" | "PRODUCT_FAMILY" | "CLASSIFICATION" | "CVE_ID" | "EPOCH" | "MSRC_SEVERITY" | "NAME" | "PATCH_ID" | "SECTION" | "PRIORITY" | "REPOSITORY" | "RELEASE" | "SEVERITY" | "SECURITY" | "VERSION"),
+                                         values: Array[::String]
+                                       },
+                                     ]
+                                   },
+                                   ?approval_rules: {
+                                     patch_rules: Array[
+                                       {
+                                         patch_filter_group: {
+                                           patch_filters: Array[
+                                             {
+                                               key: ("ARCH" | "ADVISORY_ID" | "BUGZILLA_ID" | "PATCH_SET" | "PRODUCT" | "PRODUCT_FAMILY" | "CLASSIFICATION" | "CVE_ID" | "EPOCH" | "MSRC_SEVERITY" | "NAME" | "PATCH_ID" | "SECTION" | "PRIORITY" | "REPOSITORY" | "RELEASE" | "SEVERITY" | "SECURITY" | "VERSION"),
+                                               values: Array[::String]
+                                             },
+                                           ]
+                                         },
+                                         compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")?,
+                                         approve_after_days: ::Integer?,
+                                         approve_until_date: ::String?,
+                                         enable_non_security: bool?
+                                       },
+                                     ]
+                                   },
+                                   ?approved_patches: Array[::String],
+                                   ?approved_patches_compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED"),
+                                   ?approved_patches_enable_non_security: bool,
+                                   ?rejected_patches: Array[::String],
+                                   ?rejected_patches_action: ("ALLOW_AS_DEPENDENCY" | "BLOCK"),
+                                   ?description: ::String,
+                                   ?sources: Array[
+                                     {
+                                       name: ::String,
+                                       products: Array[::String],
+                                       configuration: ::String
+                                     },
+                                   ],
+                                   ?client_token: ::String,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ]
+                                 ) -> _CreatePatchBaselineResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePatchBaselineResponseSuccess
+
+      interface _CreateResourceDataSyncResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResourceDataSyncResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#create_resource_data_sync-instance_method
+      def create_resource_data_sync: (
+                                       sync_name: ::String,
+                                       ?s3_destination: {
+                                         bucket_name: ::String,
+                                         prefix: ::String?,
+                                         sync_format: ("JsonSerDe"),
+                                         region: ::String,
+                                         awskms_key_arn: ::String?,
+                                         destination_data_sharing: {
+                                           destination_data_sharing_type: ::String?
+                                         }?
+                                       },
+                                       ?sync_type: ::String,
+                                       ?sync_source: {
+                                         source_type: ::String,
+                                         aws_organizations_source: {
+                                           organization_source_type: ::String,
+                                           organizational_units: Array[
+                                             {
+                                               organizational_unit_id: ::String?
+                                             },
+                                           ]?
+                                         }?,
+                                         source_regions: Array[::String],
+                                         include_future_regions: bool?,
+                                         enable_all_ops_data_sources: bool?
+                                       }
+                                     ) -> _CreateResourceDataSyncResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceDataSyncResponseSuccess
+
+      interface _DeleteActivationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteActivationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#delete_activation-instance_method
+      def delete_activation: (
+                               activation_id: ::String
+                             ) -> _DeleteActivationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteActivationResponseSuccess
+
+      interface _DeleteAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAssociationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#delete_association-instance_method
+      def delete_association: (
+                                ?name: ::String,
+                                ?instance_id: ::String,
+                                ?association_id: ::String
+                              ) -> _DeleteAssociationResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAssociationResponseSuccess
+
+      interface _DeleteDocumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDocumentResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#delete_document-instance_method
+      def delete_document: (
+                             name: ::String,
+                             ?document_version: ::String,
+                             ?version_name: ::String,
+                             ?force: bool
+                           ) -> _DeleteDocumentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDocumentResponseSuccess
+
+      interface _DeleteInventoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInventoryResult]
+        def deletion_id: () -> ::String
+        def type_name: () -> ::String
+        def deletion_summary: () -> Types::InventoryDeletionSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#delete_inventory-instance_method
+      def delete_inventory: (
+                              type_name: ::String,
+                              ?schema_delete_option: ("DisableSchema" | "DeleteSchema"),
+                              ?dry_run: bool,
+                              ?client_token: ::String
+                            ) -> _DeleteInventoryResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInventoryResponseSuccess
+
+      interface _DeleteMaintenanceWindowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMaintenanceWindowResult]
+        def window_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#delete_maintenance_window-instance_method
+      def delete_maintenance_window: (
+                                       window_id: ::String
+                                     ) -> _DeleteMaintenanceWindowResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMaintenanceWindowResponseSuccess
+
+      interface _DeleteOpsItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOpsItemResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#delete_ops_item-instance_method
+      def delete_ops_item: (
+                             ops_item_id: ::String
+                           ) -> _DeleteOpsItemResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOpsItemResponseSuccess
+
+      interface _DeleteOpsMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOpsMetadataResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#delete_ops_metadata-instance_method
+      def delete_ops_metadata: (
+                                 ops_metadata_arn: ::String
+                               ) -> _DeleteOpsMetadataResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOpsMetadataResponseSuccess
+
+      interface _DeleteParameterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteParameterResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#delete_parameter-instance_method
+      def delete_parameter: (
+                              name: ::String
+                            ) -> _DeleteParameterResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteParameterResponseSuccess
+
+      interface _DeleteParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteParametersResult]
+        def deleted_parameters: () -> ::Array[::String]
+        def invalid_parameters: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#delete_parameters-instance_method
+      def delete_parameters: (
+                               names: Array[::String]
+                             ) -> _DeleteParametersResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteParametersResponseSuccess
+
+      interface _DeletePatchBaselineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePatchBaselineResult]
+        def baseline_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#delete_patch_baseline-instance_method
+      def delete_patch_baseline: (
+                                   baseline_id: ::String
+                                 ) -> _DeletePatchBaselineResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePatchBaselineResponseSuccess
+
+      interface _DeleteResourceDataSyncResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourceDataSyncResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#delete_resource_data_sync-instance_method
+      def delete_resource_data_sync: (
+                                       sync_name: ::String,
+                                       ?sync_type: ::String
+                                     ) -> _DeleteResourceDataSyncResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourceDataSyncResponseSuccess
+
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    resource_arn: ::String,
+                                    policy_id: ::String,
+                                    policy_hash: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
+      interface _DeregisterManagedInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterManagedInstanceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#deregister_managed_instance-instance_method
+      def deregister_managed_instance: (
+                                         instance_id: ::String
+                                       ) -> _DeregisterManagedInstanceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterManagedInstanceResponseSuccess
+
+      interface _DeregisterPatchBaselineForPatchGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterPatchBaselineForPatchGroupResult]
+        def baseline_id: () -> ::String
+        def patch_group: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#deregister_patch_baseline_for_patch_group-instance_method
+      def deregister_patch_baseline_for_patch_group: (
+                                                       baseline_id: ::String,
+                                                       patch_group: ::String
+                                                     ) -> _DeregisterPatchBaselineForPatchGroupResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterPatchBaselineForPatchGroupResponseSuccess
+
+      interface _DeregisterTargetFromMaintenanceWindowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterTargetFromMaintenanceWindowResult]
+        def window_id: () -> ::String
+        def window_target_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#deregister_target_from_maintenance_window-instance_method
+      def deregister_target_from_maintenance_window: (
+                                                       window_id: ::String,
+                                                       window_target_id: ::String,
+                                                       ?safe: bool
+                                                     ) -> _DeregisterTargetFromMaintenanceWindowResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterTargetFromMaintenanceWindowResponseSuccess
+
+      interface _DeregisterTaskFromMaintenanceWindowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterTaskFromMaintenanceWindowResult]
+        def window_id: () -> ::String
+        def window_task_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#deregister_task_from_maintenance_window-instance_method
+      def deregister_task_from_maintenance_window: (
+                                                     window_id: ::String,
+                                                     window_task_id: ::String
+                                                   ) -> _DeregisterTaskFromMaintenanceWindowResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterTaskFromMaintenanceWindowResponseSuccess
+
+      interface _DescribeActivationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeActivationsResult]
+        def activation_list: () -> ::Array[Types::Activation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_activations-instance_method
+      def describe_activations: (
+                                  ?filters: Array[
+                                    {
+                                      filter_key: ("ActivationIds" | "DefaultInstanceName" | "IamRole")?,
+                                      filter_values: Array[::String]?
+                                    },
+                                  ],
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _DescribeActivationsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeActivationsResponseSuccess
+
+      interface _DescribeAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssociationResult]
+        def association_description: () -> Types::AssociationDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_association-instance_method
+      def describe_association: (
+                                  ?name: ::String,
+                                  ?instance_id: ::String,
+                                  ?association_id: ::String,
+                                  ?association_version: ::String
+                                ) -> _DescribeAssociationResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssociationResponseSuccess
+
+      interface _DescribeAssociationExecutionTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssociationExecutionTargetsResult]
+        def association_execution_targets: () -> ::Array[Types::AssociationExecutionTarget]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_association_execution_targets-instance_method
+      def describe_association_execution_targets: (
+                                                    association_id: ::String,
+                                                    execution_id: ::String,
+                                                    ?filters: Array[
+                                                      {
+                                                        key: ("Status" | "ResourceId" | "ResourceType"),
+                                                        value: ::String
+                                                      },
+                                                    ],
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String
+                                                  ) -> _DescribeAssociationExecutionTargetsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssociationExecutionTargetsResponseSuccess
+
+      interface _DescribeAssociationExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAssociationExecutionsResult]
+        def association_executions: () -> ::Array[Types::AssociationExecution]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_association_executions-instance_method
+      def describe_association_executions: (
+                                             association_id: ::String,
+                                             ?filters: Array[
+                                               {
+                                                 key: ("ExecutionId" | "Status" | "CreatedTime"),
+                                                 value: ::String,
+                                                 type: ("EQUAL" | "LESS_THAN" | "GREATER_THAN")
+                                               },
+                                             ],
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _DescribeAssociationExecutionsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAssociationExecutionsResponseSuccess
+
+      interface _DescribeAutomationExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAutomationExecutionsResult]
+        def automation_execution_metadata_list: () -> ::Array[Types::AutomationExecutionMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_automation_executions-instance_method
+      def describe_automation_executions: (
+                                            ?filters: Array[
+                                              {
+                                                key: ("DocumentNamePrefix" | "ExecutionStatus" | "ExecutionId" | "ParentExecutionId" | "CurrentAction" | "StartTimeBefore" | "StartTimeAfter" | "AutomationType" | "TagKey" | "TargetResourceGroup" | "AutomationSubtype" | "OpsItemId"),
+                                                values: Array[::String]
+                                              },
+                                            ],
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _DescribeAutomationExecutionsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAutomationExecutionsResponseSuccess
+
+      interface _DescribeAutomationStepExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAutomationStepExecutionsResult]
+        def step_executions: () -> ::Array[Types::StepExecution]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_automation_step_executions-instance_method
+      def describe_automation_step_executions: (
+                                                 automation_execution_id: ::String,
+                                                 ?filters: Array[
+                                                   {
+                                                     key: ("StartTimeBefore" | "StartTimeAfter" | "StepExecutionStatus" | "StepExecutionId" | "StepName" | "Action" | "ParentStepExecutionId" | "ParentStepIteration" | "ParentStepIteratorValue"),
+                                                     values: Array[::String]
+                                                   },
+                                                 ],
+                                                 ?next_token: ::String,
+                                                 ?max_results: ::Integer,
+                                                 ?reverse_order: bool
+                                               ) -> _DescribeAutomationStepExecutionsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAutomationStepExecutionsResponseSuccess
+
+      interface _DescribeAvailablePatchesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAvailablePatchesResult]
+        def patches: () -> ::Array[Types::Patch]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_available_patches-instance_method
+      def describe_available_patches: (
+                                        ?filters: Array[
+                                          {
+                                            key: ::String?,
+                                            values: Array[::String]?
+                                          },
+                                        ],
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _DescribeAvailablePatchesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAvailablePatchesResponseSuccess
+
+      interface _DescribeDocumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDocumentResult]
+        def document: () -> Types::DocumentDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_document-instance_method
+      def describe_document: (
+                               name: ::String,
+                               ?document_version: ::String,
+                               ?version_name: ::String
+                             ) -> _DescribeDocumentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDocumentResponseSuccess
+
+      interface _DescribeDocumentPermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDocumentPermissionResponse]
+        def account_ids: () -> ::Array[::String]
+        def account_sharing_info_list: () -> ::Array[Types::AccountSharingInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_document_permission-instance_method
+      def describe_document_permission: (
+                                          name: ::String,
+                                          permission_type: ("Share"),
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _DescribeDocumentPermissionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDocumentPermissionResponseSuccess
+
+      interface _DescribeEffectiveInstanceAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEffectiveInstanceAssociationsResult]
+        def associations: () -> ::Array[Types::InstanceAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_effective_instance_associations-instance_method
+      def describe_effective_instance_associations: (
+                                                      instance_id: ::String,
+                                                      ?max_results: ::Integer,
+                                                      ?next_token: ::String
+                                                    ) -> _DescribeEffectiveInstanceAssociationsResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEffectiveInstanceAssociationsResponseSuccess
+
+      interface _DescribeEffectivePatchesForPatchBaselineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEffectivePatchesForPatchBaselineResult]
+        def effective_patches: () -> ::Array[Types::EffectivePatch]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_effective_patches_for_patch_baseline-instance_method
+      def describe_effective_patches_for_patch_baseline: (
+                                                           baseline_id: ::String,
+                                                           ?max_results: ::Integer,
+                                                           ?next_token: ::String
+                                                         ) -> _DescribeEffectivePatchesForPatchBaselineResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEffectivePatchesForPatchBaselineResponseSuccess
+
+      interface _DescribeInstanceAssociationsStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstanceAssociationsStatusResult]
+        def instance_association_status_infos: () -> ::Array[Types::InstanceAssociationStatusInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_instance_associations_status-instance_method
+      def describe_instance_associations_status: (
+                                                   instance_id: ::String,
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _DescribeInstanceAssociationsStatusResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstanceAssociationsStatusResponseSuccess
+
+      interface _DescribeInstanceInformationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstanceInformationResult]
+        def instance_information_list: () -> ::Array[Types::InstanceInformation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_instance_information-instance_method
+      def describe_instance_information: (
+                                           ?instance_information_filter_list: Array[
+                                             {
+                                               key: ("InstanceIds" | "AgentVersion" | "PingStatus" | "PlatformTypes" | "ActivationIds" | "IamRole" | "ResourceType" | "AssociationStatus"),
+                                               value_set: Array[::String]
+                                             },
+                                           ],
+                                           ?filters: Array[
+                                             {
+                                               key: ::String,
+                                               values: Array[::String]
+                                             },
+                                           ],
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _DescribeInstanceInformationResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstanceInformationResponseSuccess
+
+      interface _DescribeInstancePatchStatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstancePatchStatesResult]
+        def instance_patch_states: () -> ::Array[Types::InstancePatchState]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_instance_patch_states-instance_method
+      def describe_instance_patch_states: (
+                                            instance_ids: Array[::String],
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _DescribeInstancePatchStatesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstancePatchStatesResponseSuccess
+
+      interface _DescribeInstancePatchStatesForPatchGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstancePatchStatesForPatchGroupResult]
+        def instance_patch_states: () -> ::Array[Types::InstancePatchState]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_instance_patch_states_for_patch_group-instance_method
+      def describe_instance_patch_states_for_patch_group: (
+                                                            patch_group: ::String,
+                                                            ?filters: Array[
+                                                              {
+                                                                key: ::String,
+                                                                values: Array[::String],
+                                                                type: ("Equal" | "NotEqual" | "LessThan" | "GreaterThan")
+                                                              },
+                                                            ],
+                                                            ?next_token: ::String,
+                                                            ?max_results: ::Integer
+                                                          ) -> _DescribeInstancePatchStatesForPatchGroupResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstancePatchStatesForPatchGroupResponseSuccess
+
+      interface _DescribeInstancePatchesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstancePatchesResult]
+        def patches: () -> ::Array[Types::PatchComplianceData]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_instance_patches-instance_method
+      def describe_instance_patches: (
+                                       instance_id: ::String,
+                                       ?filters: Array[
+                                         {
+                                           key: ::String?,
+                                           values: Array[::String]?
+                                         },
+                                       ],
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _DescribeInstancePatchesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstancePatchesResponseSuccess
+
+      interface _DescribeInventoryDeletionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInventoryDeletionsResult]
+        def inventory_deletions: () -> ::Array[Types::InventoryDeletionStatusItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_inventory_deletions-instance_method
+      def describe_inventory_deletions: (
+                                          ?deletion_id: ::String,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _DescribeInventoryDeletionsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInventoryDeletionsResponseSuccess
+
+      interface _DescribeMaintenanceWindowExecutionTaskInvocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMaintenanceWindowExecutionTaskInvocationsResult]
+        def window_execution_task_invocation_identities: () -> ::Array[Types::MaintenanceWindowExecutionTaskInvocationIdentity]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_maintenance_window_execution_task_invocations-instance_method
+      def describe_maintenance_window_execution_task_invocations: (
+                                                                    window_execution_id: ::String,
+                                                                    task_id: ::String,
+                                                                    ?filters: Array[
+                                                                      {
+                                                                        key: ::String?,
+                                                                        values: Array[::String]?
+                                                                      },
+                                                                    ],
+                                                                    ?max_results: ::Integer,
+                                                                    ?next_token: ::String
+                                                                  ) -> _DescribeMaintenanceWindowExecutionTaskInvocationsResponseSuccess
+                                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMaintenanceWindowExecutionTaskInvocationsResponseSuccess
+
+      interface _DescribeMaintenanceWindowExecutionTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMaintenanceWindowExecutionTasksResult]
+        def window_execution_task_identities: () -> ::Array[Types::MaintenanceWindowExecutionTaskIdentity]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_maintenance_window_execution_tasks-instance_method
+      def describe_maintenance_window_execution_tasks: (
+                                                         window_execution_id: ::String,
+                                                         ?filters: Array[
+                                                           {
+                                                             key: ::String?,
+                                                             values: Array[::String]?
+                                                           },
+                                                         ],
+                                                         ?max_results: ::Integer,
+                                                         ?next_token: ::String
+                                                       ) -> _DescribeMaintenanceWindowExecutionTasksResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMaintenanceWindowExecutionTasksResponseSuccess
+
+      interface _DescribeMaintenanceWindowExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMaintenanceWindowExecutionsResult]
+        def window_executions: () -> ::Array[Types::MaintenanceWindowExecution]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_maintenance_window_executions-instance_method
+      def describe_maintenance_window_executions: (
+                                                    window_id: ::String,
+                                                    ?filters: Array[
+                                                      {
+                                                        key: ::String?,
+                                                        values: Array[::String]?
+                                                      },
+                                                    ],
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String
+                                                  ) -> _DescribeMaintenanceWindowExecutionsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMaintenanceWindowExecutionsResponseSuccess
+
+      interface _DescribeMaintenanceWindowScheduleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMaintenanceWindowScheduleResult]
+        def scheduled_window_executions: () -> ::Array[Types::ScheduledWindowExecution]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_maintenance_window_schedule-instance_method
+      def describe_maintenance_window_schedule: (
+                                                  ?window_id: ::String,
+                                                  ?targets: Array[
+                                                    {
+                                                      key: ::String?,
+                                                      values: Array[::String]?
+                                                    },
+                                                  ],
+                                                  ?resource_type: ("INSTANCE" | "RESOURCE_GROUP"),
+                                                  ?filters: Array[
+                                                    {
+                                                      key: ::String?,
+                                                      values: Array[::String]?
+                                                    },
+                                                  ],
+                                                  ?max_results: ::Integer,
+                                                  ?next_token: ::String
+                                                ) -> _DescribeMaintenanceWindowScheduleResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMaintenanceWindowScheduleResponseSuccess
+
+      interface _DescribeMaintenanceWindowTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMaintenanceWindowTargetsResult]
+        def targets: () -> ::Array[Types::MaintenanceWindowTarget]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_maintenance_window_targets-instance_method
+      def describe_maintenance_window_targets: (
+                                                 window_id: ::String,
+                                                 ?filters: Array[
+                                                   {
+                                                     key: ::String?,
+                                                     values: Array[::String]?
+                                                   },
+                                                 ],
+                                                 ?max_results: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _DescribeMaintenanceWindowTargetsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMaintenanceWindowTargetsResponseSuccess
+
+      interface _DescribeMaintenanceWindowTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMaintenanceWindowTasksResult]
+        def tasks: () -> ::Array[Types::MaintenanceWindowTask]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_maintenance_window_tasks-instance_method
+      def describe_maintenance_window_tasks: (
+                                               window_id: ::String,
+                                               ?filters: Array[
+                                                 {
+                                                   key: ::String?,
+                                                   values: Array[::String]?
+                                                 },
+                                               ],
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _DescribeMaintenanceWindowTasksResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMaintenanceWindowTasksResponseSuccess
+
+      interface _DescribeMaintenanceWindowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMaintenanceWindowsResult]
+        def window_identities: () -> ::Array[Types::MaintenanceWindowIdentity]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_maintenance_windows-instance_method
+      def describe_maintenance_windows: (
+                                          ?filters: Array[
+                                            {
+                                              key: ::String?,
+                                              values: Array[::String]?
+                                            },
+                                          ],
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _DescribeMaintenanceWindowsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMaintenanceWindowsResponseSuccess
+
+      interface _DescribeMaintenanceWindowsForTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMaintenanceWindowsForTargetResult]
+        def window_identities: () -> ::Array[Types::MaintenanceWindowIdentityForTarget]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_maintenance_windows_for_target-instance_method
+      def describe_maintenance_windows_for_target: (
+                                                     targets: Array[
+                                                       {
+                                                         key: ::String?,
+                                                         values: Array[::String]?
+                                                       },
+                                                     ],
+                                                     resource_type: ("INSTANCE" | "RESOURCE_GROUP"),
+                                                     ?max_results: ::Integer,
+                                                     ?next_token: ::String
+                                                   ) -> _DescribeMaintenanceWindowsForTargetResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMaintenanceWindowsForTargetResponseSuccess
+
+      interface _DescribeOpsItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOpsItemsResponse]
+        def next_token: () -> ::String
+        def ops_item_summaries: () -> ::Array[Types::OpsItemSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_ops_items-instance_method
+      def describe_ops_items: (
+                                ?ops_item_filters: Array[
+                                  {
+                                    key: ("Status" | "CreatedBy" | "Source" | "Priority" | "Title" | "OpsItemId" | "CreatedTime" | "LastModifiedTime" | "ActualStartTime" | "ActualEndTime" | "PlannedStartTime" | "PlannedEndTime" | "OperationalData" | "OperationalDataKey" | "OperationalDataValue" | "ResourceId" | "AutomationId" | "Category" | "Severity" | "OpsItemType" | "ChangeRequestByRequesterArn" | "ChangeRequestByRequesterName" | "ChangeRequestByApproverArn" | "ChangeRequestByApproverName" | "ChangeRequestByTemplate" | "ChangeRequestByTargetsResourceGroup" | "InsightByType" | "AccountId"),
+                                    values: Array[::String],
+                                    operator: ("Equal" | "Contains" | "GreaterThan" | "LessThan")
+                                  },
+                                ],
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _DescribeOpsItemsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOpsItemsResponseSuccess
+
+      interface _DescribeParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeParametersResult]
+        def parameters: () -> ::Array[Types::ParameterMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_parameters-instance_method
+      def describe_parameters: (
+                                 ?filters: Array[
+                                   {
+                                     key: ("Name" | "Type" | "KeyId"),
+                                     values: Array[::String]
+                                   },
+                                 ],
+                                 ?parameter_filters: Array[
+                                   {
+                                     key: ::String,
+                                     option: ::String?,
+                                     values: Array[::String]?
+                                   },
+                                 ],
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _DescribeParametersResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeParametersResponseSuccess
+
+      interface _DescribePatchBaselinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePatchBaselinesResult]
+        def baseline_identities: () -> ::Array[Types::PatchBaselineIdentity]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_patch_baselines-instance_method
+      def describe_patch_baselines: (
+                                      ?filters: Array[
+                                        {
+                                          key: ::String?,
+                                          values: Array[::String]?
+                                        },
+                                      ],
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _DescribePatchBaselinesResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePatchBaselinesResponseSuccess
+
+      interface _DescribePatchGroupStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePatchGroupStateResult]
+        def instances: () -> ::Integer
+        def instances_with_installed_patches: () -> ::Integer
+        def instances_with_installed_other_patches: () -> ::Integer
+        def instances_with_installed_pending_reboot_patches: () -> ::Integer
+        def instances_with_installed_rejected_patches: () -> ::Integer
+        def instances_with_missing_patches: () -> ::Integer
+        def instances_with_failed_patches: () -> ::Integer
+        def instances_with_not_applicable_patches: () -> ::Integer
+        def instances_with_unreported_not_applicable_patches: () -> ::Integer
+        def instances_with_critical_non_compliant_patches: () -> ::Integer
+        def instances_with_security_non_compliant_patches: () -> ::Integer
+        def instances_with_other_non_compliant_patches: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_patch_group_state-instance_method
+      def describe_patch_group_state: (
+                                        patch_group: ::String
+                                      ) -> _DescribePatchGroupStateResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePatchGroupStateResponseSuccess
+
+      interface _DescribePatchGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePatchGroupsResult]
+        def mappings: () -> ::Array[Types::PatchGroupPatchBaselineMapping]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_patch_groups-instance_method
+      def describe_patch_groups: (
+                                   ?max_results: ::Integer,
+                                   ?filters: Array[
+                                     {
+                                       key: ::String?,
+                                       values: Array[::String]?
+                                     },
+                                   ],
+                                   ?next_token: ::String
+                                 ) -> _DescribePatchGroupsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePatchGroupsResponseSuccess
+
+      interface _DescribePatchPropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePatchPropertiesResult]
+        def properties: () -> ::Array[::Hash[::String, ::String]]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_patch_properties-instance_method
+      def describe_patch_properties: (
+                                       operating_system: ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023"),
+                                       property: ("PRODUCT" | "PRODUCT_FAMILY" | "CLASSIFICATION" | "MSRC_SEVERITY" | "PRIORITY" | "SEVERITY"),
+                                       ?patch_set: ("OS" | "APPLICATION"),
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _DescribePatchPropertiesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePatchPropertiesResponseSuccess
+
+      interface _DescribeSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSessionsResponse]
+        def sessions: () -> ::Array[Types::Session]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#describe_sessions-instance_method
+      def describe_sessions: (
+                               state: ("Active" | "History"),
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               ?filters: Array[
+                                 {
+                                   key: ("InvokedAfter" | "InvokedBefore" | "Target" | "Owner" | "Status" | "SessionId"),
+                                   value: ::String
+                                 },
+                               ]
+                             ) -> _DescribeSessionsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSessionsResponseSuccess
+
+      interface _DisassociateOpsItemRelatedItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateOpsItemRelatedItemResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#disassociate_ops_item_related_item-instance_method
+      def disassociate_ops_item_related_item: (
+                                                ops_item_id: ::String,
+                                                association_id: ::String
+                                              ) -> _DisassociateOpsItemRelatedItemResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateOpsItemRelatedItemResponseSuccess
+
+      interface _GetAutomationExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAutomationExecutionResult]
+        def automation_execution: () -> Types::AutomationExecution
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_automation_execution-instance_method
+      def get_automation_execution: (
+                                      automation_execution_id: ::String
+                                    ) -> _GetAutomationExecutionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAutomationExecutionResponseSuccess
+
+      interface _GetCalendarStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCalendarStateResponse]
+        def state: () -> ("OPEN" | "CLOSED")
+        def at_time: () -> ::String
+        def next_transition_time: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_calendar_state-instance_method
+      def get_calendar_state: (
+                                calendar_names: Array[::String],
+                                ?at_time: ::String
+                              ) -> _GetCalendarStateResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCalendarStateResponseSuccess
+
+      interface _GetCommandInvocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCommandInvocationResult]
+        def command_id: () -> ::String
+        def instance_id: () -> ::String
+        def comment: () -> ::String
+        def document_name: () -> ::String
+        def document_version: () -> ::String
+        def plugin_name: () -> ::String
+        def response_code: () -> ::Integer
+        def execution_start_date_time: () -> ::String
+        def execution_elapsed_time: () -> ::String
+        def execution_end_date_time: () -> ::String
+        def status: () -> ("Pending" | "InProgress" | "Delayed" | "Success" | "Cancelled" | "TimedOut" | "Failed" | "Cancelling")
+        def status_details: () -> ::String
+        def standard_output_content: () -> ::String
+        def standard_output_url: () -> ::String
+        def standard_error_content: () -> ::String
+        def standard_error_url: () -> ::String
+        def cloud_watch_output_config: () -> Types::CloudWatchOutputConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_command_invocation-instance_method
+      def get_command_invocation: (
+                                    command_id: ::String,
+                                    instance_id: ::String,
+                                    ?plugin_name: ::String
+                                  ) -> _GetCommandInvocationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCommandInvocationResponseSuccess
+
+      interface _GetConnectionStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConnectionStatusResponse]
+        def target: () -> ::String
+        def status: () -> ("connected" | "notconnected")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_connection_status-instance_method
+      def get_connection_status: (
+                                   target: ::String
+                                 ) -> _GetConnectionStatusResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConnectionStatusResponseSuccess
+
+      interface _GetDefaultPatchBaselineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDefaultPatchBaselineResult]
+        def baseline_id: () -> ::String
+        def operating_system: () -> ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_default_patch_baseline-instance_method
+      def get_default_patch_baseline: (
+                                        ?operating_system: ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")
+                                      ) -> _GetDefaultPatchBaselineResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDefaultPatchBaselineResponseSuccess
+
+      interface _GetDeployablePatchSnapshotForInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeployablePatchSnapshotForInstanceResult]
+        def instance_id: () -> ::String
+        def snapshot_id: () -> ::String
+        def snapshot_download_url: () -> ::String
+        def product: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_deployable_patch_snapshot_for_instance-instance_method
+      def get_deployable_patch_snapshot_for_instance: (
+                                                        instance_id: ::String,
+                                                        snapshot_id: ::String,
+                                                        ?baseline_override: {
+                                                          operating_system: ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")?,
+                                                          global_filters: {
+                                                            patch_filters: Array[
+                                                              {
+                                                                key: ("ARCH" | "ADVISORY_ID" | "BUGZILLA_ID" | "PATCH_SET" | "PRODUCT" | "PRODUCT_FAMILY" | "CLASSIFICATION" | "CVE_ID" | "EPOCH" | "MSRC_SEVERITY" | "NAME" | "PATCH_ID" | "SECTION" | "PRIORITY" | "REPOSITORY" | "RELEASE" | "SEVERITY" | "SECURITY" | "VERSION"),
+                                                                values: Array[::String]
+                                                              },
+                                                            ]
+                                                          }?,
+                                                          approval_rules: {
+                                                            patch_rules: Array[
+                                                              {
+                                                                patch_filter_group: {
+                                                                  patch_filters: Array[
+                                                                    {
+                                                                      key: ("ARCH" | "ADVISORY_ID" | "BUGZILLA_ID" | "PATCH_SET" | "PRODUCT" | "PRODUCT_FAMILY" | "CLASSIFICATION" | "CVE_ID" | "EPOCH" | "MSRC_SEVERITY" | "NAME" | "PATCH_ID" | "SECTION" | "PRIORITY" | "REPOSITORY" | "RELEASE" | "SEVERITY" | "SECURITY" | "VERSION"),
+                                                                      values: Array[::String]
+                                                                    },
+                                                                  ]
+                                                                },
+                                                                compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")?,
+                                                                approve_after_days: ::Integer?,
+                                                                approve_until_date: ::String?,
+                                                                enable_non_security: bool?
+                                                              },
+                                                            ]
+                                                          }?,
+                                                          approved_patches: Array[::String]?,
+                                                          approved_patches_compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")?,
+                                                          rejected_patches: Array[::String]?,
+                                                          rejected_patches_action: ("ALLOW_AS_DEPENDENCY" | "BLOCK")?,
+                                                          approved_patches_enable_non_security: bool?,
+                                                          sources: Array[
+                                                            {
+                                                              name: ::String,
+                                                              products: Array[::String],
+                                                              configuration: ::String
+                                                            },
+                                                          ]?
+                                                        }
+                                                      ) -> _GetDeployablePatchSnapshotForInstanceResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeployablePatchSnapshotForInstanceResponseSuccess
+
+      interface _GetDocumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDocumentResult]
+        def name: () -> ::String
+        def created_date: () -> ::Time
+        def display_name: () -> ::String
+        def version_name: () -> ::String
+        def document_version: () -> ::String
+        def status: () -> ("Creating" | "Active" | "Updating" | "Deleting" | "Failed")
+        def status_information: () -> ::String
+        def content: () -> ::String
+        def document_type: () -> ("Command" | "Policy" | "Automation" | "Session" | "Package" | "ApplicationConfiguration" | "ApplicationConfigurationSchema" | "DeploymentStrategy" | "ChangeCalendar" | "Automation.ChangeTemplate" | "ProblemAnalysis" | "ProblemAnalysisTemplate" | "CloudFormation" | "ConformancePackTemplate" | "QuickSetup")
+        def document_format: () -> ("YAML" | "JSON" | "TEXT")
+        def requires: () -> ::Array[Types::DocumentRequires]
+        def attachments_content: () -> ::Array[Types::AttachmentContent]
+        def review_status: () -> ("APPROVED" | "NOT_REVIEWED" | "PENDING" | "REJECTED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_document-instance_method
+      def get_document: (
+                          name: ::String,
+                          ?version_name: ::String,
+                          ?document_version: ::String,
+                          ?document_format: ("YAML" | "JSON" | "TEXT")
+                        ) -> _GetDocumentResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDocumentResponseSuccess
+
+      interface _GetInventoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInventoryResult]
+        def entities: () -> ::Array[Types::InventoryResultEntity]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_inventory-instance_method
+      def get_inventory: (
+                           ?filters: Array[
+                             {
+                               key: ::String,
+                               values: Array[::String],
+                               type: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan" | "Exists")?
+                             },
+                           ],
+                           ?aggregators: Array[
+                             {
+                               expression: ::String?,
+                               aggregators: untyped?,
+                               groups: Array[
+                                 {
+                                   name: ::String,
+                                   filters: Array[
+                                     {
+                                       key: ::String,
+                                       values: Array[::String],
+                                       type: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan" | "Exists")?
+                                     },
+                                   ]
+                                 },
+                               ]?
+                             },
+                           ],
+                           ?result_attributes: Array[
+                             {
+                               type_name: ::String
+                             },
+                           ],
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _GetInventoryResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInventoryResponseSuccess
+
+      interface _GetInventorySchemaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInventorySchemaResult]
+        def schemas: () -> ::Array[Types::InventoryItemSchema]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_inventory_schema-instance_method
+      def get_inventory_schema: (
+                                  ?type_name: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  ?aggregator: bool,
+                                  ?sub_type: bool
+                                ) -> _GetInventorySchemaResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInventorySchemaResponseSuccess
+
+      interface _GetMaintenanceWindowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMaintenanceWindowResult]
+        def window_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def start_date: () -> ::String
+        def end_date: () -> ::String
+        def schedule: () -> ::String
+        def schedule_timezone: () -> ::String
+        def schedule_offset: () -> ::Integer
+        def next_execution_time: () -> ::String
+        def duration: () -> ::Integer
+        def cutoff: () -> ::Integer
+        def allow_unassociated_targets: () -> bool
+        def enabled: () -> bool
+        def created_date: () -> ::Time
+        def modified_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_maintenance_window-instance_method
+      def get_maintenance_window: (
+                                    window_id: ::String
+                                  ) -> _GetMaintenanceWindowResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMaintenanceWindowResponseSuccess
+
+      interface _GetMaintenanceWindowExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMaintenanceWindowExecutionResult]
+        def window_execution_id: () -> ::String
+        def task_ids: () -> ::Array[::String]
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED" | "TIMED_OUT" | "CANCELLING" | "CANCELLED" | "SKIPPED_OVERLAPPING")
+        def status_details: () -> ::String
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_maintenance_window_execution-instance_method
+      def get_maintenance_window_execution: (
+                                              window_execution_id: ::String
+                                            ) -> _GetMaintenanceWindowExecutionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMaintenanceWindowExecutionResponseSuccess
+
+      interface _GetMaintenanceWindowExecutionTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMaintenanceWindowExecutionTaskResult]
+        def window_execution_id: () -> ::String
+        def task_execution_id: () -> ::String
+        def task_arn: () -> ::String
+        def service_role: () -> ::String
+        def type: () -> ("RUN_COMMAND" | "AUTOMATION" | "STEP_FUNCTIONS" | "LAMBDA")
+        def task_parameters: () -> ::Array[::Hash[::String, Types::MaintenanceWindowTaskParameterValueExpression]]
+        def priority: () -> ::Integer
+        def max_concurrency: () -> ::String
+        def max_errors: () -> ::String
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED" | "TIMED_OUT" | "CANCELLING" | "CANCELLED" | "SKIPPED_OVERLAPPING")
+        def status_details: () -> ::String
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def alarm_configuration: () -> Types::AlarmConfiguration
+        def triggered_alarms: () -> ::Array[Types::AlarmStateInformation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_maintenance_window_execution_task-instance_method
+      def get_maintenance_window_execution_task: (
+                                                   window_execution_id: ::String,
+                                                   task_id: ::String
+                                                 ) -> _GetMaintenanceWindowExecutionTaskResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMaintenanceWindowExecutionTaskResponseSuccess
+
+      interface _GetMaintenanceWindowExecutionTaskInvocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMaintenanceWindowExecutionTaskInvocationResult]
+        def window_execution_id: () -> ::String
+        def task_execution_id: () -> ::String
+        def invocation_id: () -> ::String
+        def execution_id: () -> ::String
+        def task_type: () -> ("RUN_COMMAND" | "AUTOMATION" | "STEP_FUNCTIONS" | "LAMBDA")
+        def parameters: () -> ::String
+        def status: () -> ("PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED" | "TIMED_OUT" | "CANCELLING" | "CANCELLED" | "SKIPPED_OVERLAPPING")
+        def status_details: () -> ::String
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def owner_information: () -> ::String
+        def window_target_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_maintenance_window_execution_task_invocation-instance_method
+      def get_maintenance_window_execution_task_invocation: (
+                                                              window_execution_id: ::String,
+                                                              task_id: ::String,
+                                                              invocation_id: ::String
+                                                            ) -> _GetMaintenanceWindowExecutionTaskInvocationResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMaintenanceWindowExecutionTaskInvocationResponseSuccess
+
+      interface _GetMaintenanceWindowTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMaintenanceWindowTaskResult]
+        def window_id: () -> ::String
+        def window_task_id: () -> ::String
+        def targets: () -> ::Array[Types::Target]
+        def task_arn: () -> ::String
+        def service_role_arn: () -> ::String
+        def task_type: () -> ("RUN_COMMAND" | "AUTOMATION" | "STEP_FUNCTIONS" | "LAMBDA")
+        def task_parameters: () -> ::Hash[::String, Types::MaintenanceWindowTaskParameterValueExpression]
+        def task_invocation_parameters: () -> Types::MaintenanceWindowTaskInvocationParameters
+        def priority: () -> ::Integer
+        def max_concurrency: () -> ::String
+        def max_errors: () -> ::String
+        def logging_info: () -> Types::LoggingInfo
+        def name: () -> ::String
+        def description: () -> ::String
+        def cutoff_behavior: () -> ("CONTINUE_TASK" | "CANCEL_TASK")
+        def alarm_configuration: () -> Types::AlarmConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_maintenance_window_task-instance_method
+      def get_maintenance_window_task: (
+                                         window_id: ::String,
+                                         window_task_id: ::String
+                                       ) -> _GetMaintenanceWindowTaskResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMaintenanceWindowTaskResponseSuccess
+
+      interface _GetOpsItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOpsItemResponse]
+        def ops_item: () -> Types::OpsItem
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_ops_item-instance_method
+      def get_ops_item: (
+                          ops_item_id: ::String,
+                          ?ops_item_arn: ::String
+                        ) -> _GetOpsItemResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOpsItemResponseSuccess
+
+      interface _GetOpsMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOpsMetadataResult]
+        def resource_id: () -> ::String
+        def metadata: () -> ::Hash[::String, Types::MetadataValue]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_ops_metadata-instance_method
+      def get_ops_metadata: (
+                              ops_metadata_arn: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _GetOpsMetadataResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOpsMetadataResponseSuccess
+
+      interface _GetOpsSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOpsSummaryResult]
+        def entities: () -> ::Array[Types::OpsEntity]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_ops_summary-instance_method
+      def get_ops_summary: (
+                             ?sync_name: ::String,
+                             ?filters: Array[
+                               {
+                                 key: ::String,
+                                 values: Array[::String],
+                                 type: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan" | "Exists")?
+                               },
+                             ],
+                             ?aggregators: Array[
+                               {
+                                 aggregator_type: ::String?,
+                                 type_name: ::String?,
+                                 attribute_name: ::String?,
+                                 values: Hash[::String, ::String]?,
+                                 filters: Array[
+                                   {
+                                     key: ::String,
+                                     values: Array[::String],
+                                     type: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan" | "Exists")?
+                                   },
+                                 ]?,
+                                 aggregators: untyped?
+                               },
+                             ],
+                             ?result_attributes: Array[
+                               {
+                                 type_name: ::String
+                               },
+                             ],
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _GetOpsSummaryResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOpsSummaryResponseSuccess
+
+      interface _GetParameterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetParameterResult]
+        def parameter: () -> Types::Parameter
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_parameter-instance_method
+      def get_parameter: (
+                           name: ::String,
+                           ?with_decryption: bool
+                         ) -> _GetParameterResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetParameterResponseSuccess
+
+      interface _GetParameterHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetParameterHistoryResult]
+        def parameters: () -> ::Array[Types::ParameterHistory]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_parameter_history-instance_method
+      def get_parameter_history: (
+                                   name: ::String,
+                                   ?with_decryption: bool,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _GetParameterHistoryResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetParameterHistoryResponseSuccess
+
+      interface _GetParametersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetParametersResult]
+        def parameters: () -> ::Array[Types::Parameter]
+        def invalid_parameters: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_parameters-instance_method
+      def get_parameters: (
+                            names: Array[::String],
+                            ?with_decryption: bool
+                          ) -> _GetParametersResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetParametersResponseSuccess
+
+      interface _GetParametersByPathResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetParametersByPathResult]
+        def parameters: () -> ::Array[Types::Parameter]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_parameters_by_path-instance_method
+      def get_parameters_by_path: (
+                                    path: ::String,
+                                    ?recursive: bool,
+                                    ?parameter_filters: Array[
+                                      {
+                                        key: ::String,
+                                        option: ::String?,
+                                        values: Array[::String]?
+                                      },
+                                    ],
+                                    ?with_decryption: bool,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _GetParametersByPathResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetParametersByPathResponseSuccess
+
+      interface _GetPatchBaselineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPatchBaselineResult]
+        def baseline_id: () -> ::String
+        def name: () -> ::String
+        def operating_system: () -> ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")
+        def global_filters: () -> Types::PatchFilterGroup
+        def approval_rules: () -> Types::PatchRuleGroup
+        def approved_patches: () -> ::Array[::String]
+        def approved_patches_compliance_level: () -> ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")
+        def approved_patches_enable_non_security: () -> bool
+        def rejected_patches: () -> ::Array[::String]
+        def rejected_patches_action: () -> ("ALLOW_AS_DEPENDENCY" | "BLOCK")
+        def patch_groups: () -> ::Array[::String]
+        def created_date: () -> ::Time
+        def modified_date: () -> ::Time
+        def description: () -> ::String
+        def sources: () -> ::Array[Types::PatchSource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_patch_baseline-instance_method
+      def get_patch_baseline: (
+                                baseline_id: ::String
+                              ) -> _GetPatchBaselineResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPatchBaselineResponseSuccess
+
+      interface _GetPatchBaselineForPatchGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPatchBaselineForPatchGroupResult]
+        def baseline_id: () -> ::String
+        def patch_group: () -> ::String
+        def operating_system: () -> ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_patch_baseline_for_patch_group-instance_method
+      def get_patch_baseline_for_patch_group: (
+                                                patch_group: ::String,
+                                                ?operating_system: ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")
+                                              ) -> _GetPatchBaselineForPatchGroupResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPatchBaselineForPatchGroupResponseSuccess
+
+      interface _GetResourcePoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePoliciesResponse]
+        def next_token: () -> ::String
+        def policies: () -> ::Array[Types::GetResourcePoliciesResponseEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_resource_policies-instance_method
+      def get_resource_policies: (
+                                   resource_arn: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _GetResourcePoliciesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePoliciesResponseSuccess
+
+      interface _GetServiceSettingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceSettingResult]
+        def service_setting: () -> Types::ServiceSetting
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#get_service_setting-instance_method
+      def get_service_setting: (
+                                 setting_id: ::String
+                               ) -> _GetServiceSettingResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceSettingResponseSuccess
+
+      interface _LabelParameterVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::LabelParameterVersionResult]
+        def invalid_labels: () -> ::Array[::String]
+        def parameter_version: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#label_parameter_version-instance_method
+      def label_parameter_version: (
+                                     name: ::String,
+                                     ?parameter_version: ::Integer,
+                                     labels: Array[::String]
+                                   ) -> _LabelParameterVersionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _LabelParameterVersionResponseSuccess
+
+      interface _ListAssociationVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssociationVersionsResult]
+        def association_versions: () -> ::Array[Types::AssociationVersionInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_association_versions-instance_method
+      def list_association_versions: (
+                                       association_id: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListAssociationVersionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssociationVersionsResponseSuccess
+
+      interface _ListAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssociationsResult]
+        def associations: () -> ::Array[Types::Association]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_associations-instance_method
+      def list_associations: (
+                               ?association_filter_list: Array[
+                                 {
+                                   key: ("InstanceId" | "Name" | "AssociationId" | "AssociationStatusName" | "LastExecutedBefore" | "LastExecutedAfter" | "AssociationName" | "ResourceGroupName"),
+                                   value: ::String
+                                 },
+                               ],
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListAssociationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssociationsResponseSuccess
+
+      interface _ListCommandInvocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCommandInvocationsResult]
+        def command_invocations: () -> ::Array[Types::CommandInvocation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_command_invocations-instance_method
+      def list_command_invocations: (
+                                      ?command_id: ::String,
+                                      ?instance_id: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      ?filters: Array[
+                                        {
+                                          key: ("InvokedAfter" | "InvokedBefore" | "Status" | "ExecutionStage" | "DocumentName"),
+                                          value: ::String
+                                        },
+                                      ],
+                                      ?details: bool
+                                    ) -> _ListCommandInvocationsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCommandInvocationsResponseSuccess
+
+      interface _ListCommandsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCommandsResult]
+        def commands: () -> ::Array[Types::Command]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_commands-instance_method
+      def list_commands: (
+                           ?command_id: ::String,
+                           ?instance_id: ::String,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           ?filters: Array[
+                             {
+                               key: ("InvokedAfter" | "InvokedBefore" | "Status" | "ExecutionStage" | "DocumentName"),
+                               value: ::String
+                             },
+                           ]
+                         ) -> _ListCommandsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCommandsResponseSuccess
+
+      interface _ListComplianceItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComplianceItemsResult]
+        def compliance_items: () -> ::Array[Types::ComplianceItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_compliance_items-instance_method
+      def list_compliance_items: (
+                                   ?filters: Array[
+                                     {
+                                       key: ::String?,
+                                       values: Array[::String]?,
+                                       type: ("EQUAL" | "NOT_EQUAL" | "BEGIN_WITH" | "LESS_THAN" | "GREATER_THAN")?
+                                     },
+                                   ],
+                                   ?resource_ids: Array[::String],
+                                   ?resource_types: Array[::String],
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListComplianceItemsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComplianceItemsResponseSuccess
+
+      interface _ListComplianceSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComplianceSummariesResult]
+        def compliance_summary_items: () -> ::Array[Types::ComplianceSummaryItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_compliance_summaries-instance_method
+      def list_compliance_summaries: (
+                                       ?filters: Array[
+                                         {
+                                           key: ::String?,
+                                           values: Array[::String]?,
+                                           type: ("EQUAL" | "NOT_EQUAL" | "BEGIN_WITH" | "LESS_THAN" | "GREATER_THAN")?
+                                         },
+                                       ],
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListComplianceSummariesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComplianceSummariesResponseSuccess
+
+      interface _ListDocumentMetadataHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDocumentMetadataHistoryResponse]
+        def name: () -> ::String
+        def document_version: () -> ::String
+        def author: () -> ::String
+        def metadata: () -> Types::DocumentMetadataResponseInfo
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_document_metadata_history-instance_method
+      def list_document_metadata_history: (
+                                            name: ::String,
+                                            ?document_version: ::String,
+                                            metadata: ("DocumentReviews"),
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _ListDocumentMetadataHistoryResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDocumentMetadataHistoryResponseSuccess
+
+      interface _ListDocumentVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDocumentVersionsResult]
+        def document_versions: () -> ::Array[Types::DocumentVersionInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_document_versions-instance_method
+      def list_document_versions: (
+                                    name: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListDocumentVersionsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDocumentVersionsResponseSuccess
+
+      interface _ListDocumentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDocumentsResult]
+        def document_identifiers: () -> ::Array[Types::DocumentIdentifier]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_documents-instance_method
+      def list_documents: (
+                            ?document_filter_list: Array[
+                              {
+                                key: ("Name" | "Owner" | "PlatformTypes" | "DocumentType"),
+                                value: ::String
+                              },
+                            ],
+                            ?filters: Array[
+                              {
+                                key: ::String?,
+                                values: Array[::String]?
+                              },
+                            ],
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListDocumentsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDocumentsResponseSuccess
+
+      interface _ListInventoryEntriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInventoryEntriesResult]
+        def type_name: () -> ::String
+        def instance_id: () -> ::String
+        def schema_version: () -> ::String
+        def capture_time: () -> ::String
+        def entries: () -> ::Array[::Hash[::String, ::String]]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_inventory_entries-instance_method
+      def list_inventory_entries: (
+                                    instance_id: ::String,
+                                    type_name: ::String,
+                                    ?filters: Array[
+                                      {
+                                        key: ::String,
+                                        values: Array[::String],
+                                        type: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan" | "Exists")?
+                                      },
+                                    ],
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListInventoryEntriesResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInventoryEntriesResponseSuccess
+
+      interface _ListOpsItemEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOpsItemEventsResponse]
+        def next_token: () -> ::String
+        def summaries: () -> ::Array[Types::OpsItemEventSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_ops_item_events-instance_method
+      def list_ops_item_events: (
+                                  ?filters: Array[
+                                    {
+                                      key: ("OpsItemId"),
+                                      values: Array[::String],
+                                      operator: ("Equal")
+                                    },
+                                  ],
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListOpsItemEventsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOpsItemEventsResponseSuccess
+
+      interface _ListOpsItemRelatedItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOpsItemRelatedItemsResponse]
+        def next_token: () -> ::String
+        def summaries: () -> ::Array[Types::OpsItemRelatedItemSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_ops_item_related_items-instance_method
+      def list_ops_item_related_items: (
+                                         ?ops_item_id: ::String,
+                                         ?filters: Array[
+                                           {
+                                             key: ("ResourceType" | "AssociationId" | "ResourceUri"),
+                                             values: Array[::String],
+                                             operator: ("Equal")
+                                           },
+                                         ],
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListOpsItemRelatedItemsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOpsItemRelatedItemsResponseSuccess
+
+      interface _ListOpsMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOpsMetadataResult]
+        def ops_metadata_list: () -> ::Array[Types::OpsMetadata]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_ops_metadata-instance_method
+      def list_ops_metadata: (
+                               ?filters: Array[
+                                 {
+                                   key: ::String,
+                                   values: Array[::String]
+                                 },
+                               ],
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListOpsMetadataResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOpsMetadataResponseSuccess
+
+      interface _ListResourceComplianceSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceComplianceSummariesResult]
+        def resource_compliance_summary_items: () -> ::Array[Types::ResourceComplianceSummaryItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_resource_compliance_summaries-instance_method
+      def list_resource_compliance_summaries: (
+                                                ?filters: Array[
+                                                  {
+                                                    key: ::String?,
+                                                    values: Array[::String]?,
+                                                    type: ("EQUAL" | "NOT_EQUAL" | "BEGIN_WITH" | "LESS_THAN" | "GREATER_THAN")?
+                                                  },
+                                                ],
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _ListResourceComplianceSummariesResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceComplianceSummariesResponseSuccess
+
+      interface _ListResourceDataSyncResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceDataSyncResult]
+        def resource_data_sync_items: () -> ::Array[Types::ResourceDataSyncItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_resource_data_sync-instance_method
+      def list_resource_data_sync: (
+                                     ?sync_type: ::String,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListResourceDataSyncResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceDataSyncResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResult]
+        def tag_list: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_type: ("Document" | "ManagedInstance" | "MaintenanceWindow" | "Parameter" | "PatchBaseline" | "OpsItem" | "OpsMetadata" | "Automation" | "Association"),
+                                    resource_id: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ModifyDocumentPermissionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyDocumentPermissionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#modify_document_permission-instance_method
+      def modify_document_permission: (
+                                        name: ::String,
+                                        permission_type: ("Share"),
+                                        ?account_ids_to_add: Array[::String],
+                                        ?account_ids_to_remove: Array[::String],
+                                        ?shared_document_version: ::String
+                                      ) -> _ModifyDocumentPermissionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDocumentPermissionResponseSuccess
+
+      interface _PutComplianceItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutComplianceItemsResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#put_compliance_items-instance_method
+      def put_compliance_items: (
+                                  resource_id: ::String,
+                                  resource_type: ::String,
+                                  compliance_type: ::String,
+                                  execution_summary: {
+                                    execution_time: ::Time,
+                                    execution_id: ::String?,
+                                    execution_type: ::String?
+                                  },
+                                  items: Array[
+                                    {
+                                      id: ::String?,
+                                      title: ::String?,
+                                      severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED"),
+                                      status: ("COMPLIANT" | "NON_COMPLIANT"),
+                                      details: Hash[::String, ::String]?
+                                    },
+                                  ],
+                                  ?item_content_hash: ::String,
+                                  ?upload_type: ("COMPLETE" | "PARTIAL")
+                                ) -> _PutComplianceItemsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutComplianceItemsResponseSuccess
+
+      interface _PutInventoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutInventoryResult]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#put_inventory-instance_method
+      def put_inventory: (
+                           instance_id: ::String,
+                           items: Array[
+                             {
+                               type_name: ::String,
+                               schema_version: ::String,
+                               capture_time: ::String,
+                               content_hash: ::String?,
+                               content: Array[
+                                 Hash[::String, ::String],
+                               ]?,
+                               context: Hash[::String, ::String]?
+                             },
+                           ]
+                         ) -> _PutInventoryResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutInventoryResponseSuccess
+
+      interface _PutParameterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutParameterResult]
+        def version: () -> ::Integer
+        def tier: () -> ("Standard" | "Advanced" | "Intelligent-Tiering")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#put_parameter-instance_method
+      def put_parameter: (
+                           name: ::String,
+                           ?description: ::String,
+                           value: ::String,
+                           ?type: ("String" | "StringList" | "SecureString"),
+                           ?key_id: ::String,
+                           ?overwrite: bool,
+                           ?allowed_pattern: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
+                           ],
+                           ?tier: ("Standard" | "Advanced" | "Intelligent-Tiering"),
+                           ?policies: ::String,
+                           ?data_type: ::String
+                         ) -> _PutParameterResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutParameterResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyResponse]
+        def policy_id: () -> ::String
+        def policy_hash: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 resource_arn: ::String,
+                                 policy: ::String,
+                                 ?policy_id: ::String,
+                                 ?policy_hash: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _RegisterDefaultPatchBaselineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterDefaultPatchBaselineResult]
+        def baseline_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#register_default_patch_baseline-instance_method
+      def register_default_patch_baseline: (
+                                             baseline_id: ::String
+                                           ) -> _RegisterDefaultPatchBaselineResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterDefaultPatchBaselineResponseSuccess
+
+      interface _RegisterPatchBaselineForPatchGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterPatchBaselineForPatchGroupResult]
+        def baseline_id: () -> ::String
+        def patch_group: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#register_patch_baseline_for_patch_group-instance_method
+      def register_patch_baseline_for_patch_group: (
+                                                     baseline_id: ::String,
+                                                     patch_group: ::String
+                                                   ) -> _RegisterPatchBaselineForPatchGroupResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterPatchBaselineForPatchGroupResponseSuccess
+
+      interface _RegisterTargetWithMaintenanceWindowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterTargetWithMaintenanceWindowResult]
+        def window_target_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#register_target_with_maintenance_window-instance_method
+      def register_target_with_maintenance_window: (
+                                                     window_id: ::String,
+                                                     resource_type: ("INSTANCE" | "RESOURCE_GROUP"),
+                                                     targets: Array[
+                                                       {
+                                                         key: ::String?,
+                                                         values: Array[::String]?
+                                                       },
+                                                     ],
+                                                     ?owner_information: ::String,
+                                                     ?name: ::String,
+                                                     ?description: ::String,
+                                                     ?client_token: ::String
+                                                   ) -> _RegisterTargetWithMaintenanceWindowResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterTargetWithMaintenanceWindowResponseSuccess
+
+      interface _RegisterTaskWithMaintenanceWindowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterTaskWithMaintenanceWindowResult]
+        def window_task_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#register_task_with_maintenance_window-instance_method
+      def register_task_with_maintenance_window: (
+                                                   window_id: ::String,
+                                                   ?targets: Array[
+                                                     {
+                                                       key: ::String?,
+                                                       values: Array[::String]?
+                                                     },
+                                                   ],
+                                                   task_arn: ::String,
+                                                   ?service_role_arn: ::String,
+                                                   task_type: ("RUN_COMMAND" | "AUTOMATION" | "STEP_FUNCTIONS" | "LAMBDA"),
+                                                   ?task_parameters: Hash[::String, {
+                                                       values: Array[::String]?
+                                                     }],
+                                                   ?task_invocation_parameters: {
+                                                     run_command: {
+                                                       comment: ::String?,
+                                                       cloud_watch_output_config: {
+                                                         cloud_watch_log_group_name: ::String?,
+                                                         cloud_watch_output_enabled: bool?
+                                                       }?,
+                                                       document_hash: ::String?,
+                                                       document_hash_type: ("Sha256" | "Sha1")?,
+                                                       document_version: ::String?,
+                                                       notification_config: {
+                                                         notification_arn: ::String?,
+                                                         notification_events: Array[("All" | "InProgress" | "Success" | "TimedOut" | "Cancelled" | "Failed")]?,
+                                                         notification_type: ("Command" | "Invocation")?
+                                                       }?,
+                                                       output_s3_bucket_name: ::String?,
+                                                       output_s3_key_prefix: ::String?,
+                                                       parameters: Hash[::String, Array[::String]]?,
+                                                       service_role_arn: ::String?,
+                                                       timeout_seconds: ::Integer?
+                                                     }?,
+                                                     automation: {
+                                                       document_version: ::String?,
+                                                       parameters: Hash[::String, Array[::String]]?
+                                                     }?,
+                                                     step_functions: {
+                                                       input: ::String?,
+                                                       name: ::String?
+                                                     }?,
+                                                     lambda: {
+                                                       client_context: ::String?,
+                                                       qualifier: ::String?,
+                                                       payload: ::String?
+                                                     }?
+                                                   },
+                                                   ?priority: ::Integer,
+                                                   ?max_concurrency: ::String,
+                                                   ?max_errors: ::String,
+                                                   ?logging_info: {
+                                                     s3_bucket_name: ::String,
+                                                     s3_key_prefix: ::String?,
+                                                     s3_region: ::String
+                                                   },
+                                                   ?name: ::String,
+                                                   ?description: ::String,
+                                                   ?client_token: ::String,
+                                                   ?cutoff_behavior: ("CONTINUE_TASK" | "CANCEL_TASK"),
+                                                   ?alarm_configuration: {
+                                                     ignore_poll_alarm_failure: bool?,
+                                                     alarms: Array[
+                                                       {
+                                                         name: ::String
+                                                       },
+                                                     ]
+                                                   }
+                                                 ) -> _RegisterTaskWithMaintenanceWindowResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterTaskWithMaintenanceWindowResponseSuccess
+
+      interface _RemoveTagsFromResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveTagsFromResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#remove_tags_from_resource-instance_method
+      def remove_tags_from_resource: (
+                                       resource_type: ("Document" | "ManagedInstance" | "MaintenanceWindow" | "Parameter" | "PatchBaseline" | "OpsItem" | "OpsMetadata" | "Automation" | "Association"),
+                                       resource_id: ::String,
+                                       tag_keys: Array[::String]
+                                     ) -> _RemoveTagsFromResourceResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveTagsFromResourceResponseSuccess
+
+      interface _ResetServiceSettingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetServiceSettingResult]
+        def service_setting: () -> Types::ServiceSetting
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#reset_service_setting-instance_method
+      def reset_service_setting: (
+                                   setting_id: ::String
+                                 ) -> _ResetServiceSettingResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetServiceSettingResponseSuccess
+
+      interface _ResumeSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResumeSessionResponse]
+        def session_id: () -> ::String
+        def token_value: () -> ::String
+        def stream_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#resume_session-instance_method
+      def resume_session: (
+                            session_id: ::String
+                          ) -> _ResumeSessionResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResumeSessionResponseSuccess
+
+      interface _SendAutomationSignalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendAutomationSignalResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#send_automation_signal-instance_method
+      def send_automation_signal: (
+                                    automation_execution_id: ::String,
+                                    signal_type: ("Approve" | "Reject" | "StartStep" | "StopStep" | "Resume"),
+                                    ?payload: Hash[::String, Array[::String]]
+                                  ) -> _SendAutomationSignalResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendAutomationSignalResponseSuccess
+
+      interface _SendCommandResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendCommandResult]
+        def command: () -> Types::Command
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#send_command-instance_method
+      def send_command: (
+                          ?instance_ids: Array[::String],
+                          ?targets: Array[
+                            {
+                              key: ::String?,
+                              values: Array[::String]?
+                            },
+                          ],
+                          document_name: ::String,
+                          ?document_version: ::String,
+                          ?document_hash: ::String,
+                          ?document_hash_type: ("Sha256" | "Sha1"),
+                          ?timeout_seconds: ::Integer,
+                          ?comment: ::String,
+                          ?parameters: Hash[::String, Array[::String]],
+                          ?output_s3_region: ::String,
+                          ?output_s3_bucket_name: ::String,
+                          ?output_s3_key_prefix: ::String,
+                          ?max_concurrency: ::String,
+                          ?max_errors: ::String,
+                          ?service_role_arn: ::String,
+                          ?notification_config: {
+                            notification_arn: ::String?,
+                            notification_events: Array[("All" | "InProgress" | "Success" | "TimedOut" | "Cancelled" | "Failed")]?,
+                            notification_type: ("Command" | "Invocation")?
+                          },
+                          ?cloud_watch_output_config: {
+                            cloud_watch_log_group_name: ::String?,
+                            cloud_watch_output_enabled: bool?
+                          },
+                          ?alarm_configuration: {
+                            ignore_poll_alarm_failure: bool?,
+                            alarms: Array[
+                              {
+                                name: ::String
+                              },
+                            ]
+                          }
+                        ) -> _SendCommandResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendCommandResponseSuccess
+
+      interface _StartAssociationsOnceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAssociationsOnceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#start_associations_once-instance_method
+      def start_associations_once: (
+                                     association_ids: Array[::String]
+                                   ) -> _StartAssociationsOnceResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAssociationsOnceResponseSuccess
+
+      interface _StartAutomationExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAutomationExecutionResult]
+        def automation_execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#start_automation_execution-instance_method
+      def start_automation_execution: (
+                                        document_name: ::String,
+                                        ?document_version: ::String,
+                                        ?parameters: Hash[::String, Array[::String]],
+                                        ?client_token: ::String,
+                                        ?mode: ("Auto" | "Interactive"),
+                                        ?target_parameter_name: ::String,
+                                        ?targets: Array[
+                                          {
+                                            key: ::String?,
+                                            values: Array[::String]?
+                                          },
+                                        ],
+                                        ?target_maps: Array[
+                                          Hash[::String, Array[::String]],
+                                        ],
+                                        ?max_concurrency: ::String,
+                                        ?max_errors: ::String,
+                                        ?target_locations: Array[
+                                          {
+                                            accounts: Array[::String]?,
+                                            regions: Array[::String]?,
+                                            target_location_max_concurrency: ::String?,
+                                            target_location_max_errors: ::String?,
+                                            execution_role_name: ::String?,
+                                            target_location_alarm_configuration: {
+                                              ignore_poll_alarm_failure: bool?,
+                                              alarms: Array[
+                                                {
+                                                  name: ::String
+                                                },
+                                              ]
+                                            }?
+                                          },
+                                        ],
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String
+                                          },
+                                        ],
+                                        ?alarm_configuration: {
+                                          ignore_poll_alarm_failure: bool?,
+                                          alarms: Array[
+                                            {
+                                              name: ::String
+                                            },
+                                          ]
+                                        }
+                                      ) -> _StartAutomationExecutionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAutomationExecutionResponseSuccess
+
+      interface _StartChangeRequestExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartChangeRequestExecutionResult]
+        def automation_execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#start_change_request_execution-instance_method
+      def start_change_request_execution: (
+                                            ?scheduled_time: ::Time,
+                                            document_name: ::String,
+                                            ?document_version: ::String,
+                                            ?parameters: Hash[::String, Array[::String]],
+                                            ?change_request_name: ::String,
+                                            ?client_token: ::String,
+                                            ?auto_approve: bool,
+                                            runbooks: Array[
+                                              {
+                                                document_name: ::String,
+                                                document_version: ::String?,
+                                                parameters: Hash[::String, Array[::String]]?,
+                                                target_parameter_name: ::String?,
+                                                targets: Array[
+                                                  {
+                                                    key: ::String?,
+                                                    values: Array[::String]?
+                                                  },
+                                                ]?,
+                                                target_maps: Array[
+                                                  Hash[::String, Array[::String]],
+                                                ]?,
+                                                max_concurrency: ::String?,
+                                                max_errors: ::String?,
+                                                target_locations: Array[
+                                                  {
+                                                    accounts: Array[::String]?,
+                                                    regions: Array[::String]?,
+                                                    target_location_max_concurrency: ::String?,
+                                                    target_location_max_errors: ::String?,
+                                                    execution_role_name: ::String?,
+                                                    target_location_alarm_configuration: {
+                                                      ignore_poll_alarm_failure: bool?,
+                                                      alarms: Array[
+                                                        {
+                                                          name: ::String
+                                                        },
+                                                      ]
+                                                    }?
+                                                  },
+                                                ]?
+                                              },
+                                            ],
+                                            ?tags: Array[
+                                              {
+                                                key: ::String,
+                                                value: ::String
+                                              },
+                                            ],
+                                            ?scheduled_end_time: ::Time,
+                                            ?change_details: ::String
+                                          ) -> _StartChangeRequestExecutionResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartChangeRequestExecutionResponseSuccess
+
+      interface _StartSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSessionResponse]
+        def session_id: () -> ::String
+        def token_value: () -> ::String
+        def stream_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#start_session-instance_method
+      def start_session: (
+                           target: ::String,
+                           ?document_name: ::String,
+                           ?reason: ::String,
+                           ?parameters: Hash[::String, Array[::String]]
+                         ) -> _StartSessionResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSessionResponseSuccess
+
+      interface _StopAutomationExecutionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopAutomationExecutionResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#stop_automation_execution-instance_method
+      def stop_automation_execution: (
+                                       automation_execution_id: ::String,
+                                       ?type: ("Complete" | "Cancel")
+                                     ) -> _StopAutomationExecutionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopAutomationExecutionResponseSuccess
+
+      interface _TerminateSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TerminateSessionResponse]
+        def session_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#terminate_session-instance_method
+      def terminate_session: (
+                               session_id: ::String
+                             ) -> _TerminateSessionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateSessionResponseSuccess
+
+      interface _UnlabelParameterVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UnlabelParameterVersionResult]
+        def removed_labels: () -> ::Array[::String]
+        def invalid_labels: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#unlabel_parameter_version-instance_method
+      def unlabel_parameter_version: (
+                                       name: ::String,
+                                       parameter_version: ::Integer,
+                                       labels: Array[::String]
+                                     ) -> _UnlabelParameterVersionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UnlabelParameterVersionResponseSuccess
+
+      interface _UpdateAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssociationResult]
+        def association_description: () -> Types::AssociationDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#update_association-instance_method
+      def update_association: (
+                                association_id: ::String,
+                                ?parameters: Hash[::String, Array[::String]],
+                                ?document_version: ::String,
+                                ?schedule_expression: ::String,
+                                ?output_location: {
+                                  s3_location: {
+                                    output_s3_region: ::String?,
+                                    output_s3_bucket_name: ::String?,
+                                    output_s3_key_prefix: ::String?
+                                  }?
+                                },
+                                ?name: ::String,
+                                ?targets: Array[
+                                  {
+                                    key: ::String?,
+                                    values: Array[::String]?
+                                  },
+                                ],
+                                ?association_name: ::String,
+                                ?association_version: ::String,
+                                ?automation_target_parameter_name: ::String,
+                                ?max_errors: ::String,
+                                ?max_concurrency: ::String,
+                                ?compliance_severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "UNSPECIFIED"),
+                                ?sync_compliance: ("AUTO" | "MANUAL"),
+                                ?apply_only_at_cron_interval: bool,
+                                ?calendar_names: Array[::String],
+                                ?target_locations: Array[
+                                  {
+                                    accounts: Array[::String]?,
+                                    regions: Array[::String]?,
+                                    target_location_max_concurrency: ::String?,
+                                    target_location_max_errors: ::String?,
+                                    execution_role_name: ::String?,
+                                    target_location_alarm_configuration: {
+                                      ignore_poll_alarm_failure: bool?,
+                                      alarms: Array[
+                                        {
+                                          name: ::String
+                                        },
+                                      ]
+                                    }?
+                                  },
+                                ],
+                                ?schedule_offset: ::Integer,
+                                ?duration: ::Integer,
+                                ?target_maps: Array[
+                                  Hash[::String, Array[::String]],
+                                ],
+                                ?alarm_configuration: {
+                                  ignore_poll_alarm_failure: bool?,
+                                  alarms: Array[
+                                    {
+                                      name: ::String
+                                    },
+                                  ]
+                                }
+                              ) -> _UpdateAssociationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssociationResponseSuccess
+
+      interface _UpdateAssociationStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAssociationStatusResult]
+        def association_description: () -> Types::AssociationDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#update_association_status-instance_method
+      def update_association_status: (
+                                       name: ::String,
+                                       instance_id: ::String,
+                                       association_status: {
+                                         date: ::Time,
+                                         name: ("Pending" | "Success" | "Failed"),
+                                         message: ::String,
+                                         additional_info: ::String?
+                                       }
+                                     ) -> _UpdateAssociationStatusResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssociationStatusResponseSuccess
+
+      interface _UpdateDocumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDocumentResult]
+        def document_description: () -> Types::DocumentDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#update_document-instance_method
+      def update_document: (
+                             content: ::String,
+                             ?attachments: Array[
+                               {
+                                 key: ("SourceUrl" | "S3FileUrl" | "AttachmentReference")?,
+                                 values: Array[::String]?,
+                                 name: ::String?
+                               },
+                             ],
+                             name: ::String,
+                             ?display_name: ::String,
+                             ?version_name: ::String,
+                             ?document_version: ::String,
+                             ?document_format: ("YAML" | "JSON" | "TEXT"),
+                             ?target_type: ::String
+                           ) -> _UpdateDocumentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDocumentResponseSuccess
+
+      interface _UpdateDocumentDefaultVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDocumentDefaultVersionResult]
+        def description: () -> Types::DocumentDefaultVersionDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#update_document_default_version-instance_method
+      def update_document_default_version: (
+                                             name: ::String,
+                                             document_version: ::String
+                                           ) -> _UpdateDocumentDefaultVersionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDocumentDefaultVersionResponseSuccess
+
+      interface _UpdateDocumentMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDocumentMetadataResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#update_document_metadata-instance_method
+      def update_document_metadata: (
+                                      name: ::String,
+                                      ?document_version: ::String,
+                                      document_reviews: {
+                                        action: ("SendForReview" | "UpdateReview" | "Approve" | "Reject"),
+                                        comment: Array[
+                                          {
+                                            type: ("Comment")?,
+                                            content: ::String?
+                                          },
+                                        ]?
+                                      }
+                                    ) -> _UpdateDocumentMetadataResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDocumentMetadataResponseSuccess
+
+      interface _UpdateMaintenanceWindowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMaintenanceWindowResult]
+        def window_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def start_date: () -> ::String
+        def end_date: () -> ::String
+        def schedule: () -> ::String
+        def schedule_timezone: () -> ::String
+        def schedule_offset: () -> ::Integer
+        def duration: () -> ::Integer
+        def cutoff: () -> ::Integer
+        def allow_unassociated_targets: () -> bool
+        def enabled: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#update_maintenance_window-instance_method
+      def update_maintenance_window: (
+                                       window_id: ::String,
+                                       ?name: ::String,
+                                       ?description: ::String,
+                                       ?start_date: ::String,
+                                       ?end_date: ::String,
+                                       ?schedule: ::String,
+                                       ?schedule_timezone: ::String,
+                                       ?schedule_offset: ::Integer,
+                                       ?duration: ::Integer,
+                                       ?cutoff: ::Integer,
+                                       ?allow_unassociated_targets: bool,
+                                       ?enabled: bool,
+                                       ?replace: bool
+                                     ) -> _UpdateMaintenanceWindowResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMaintenanceWindowResponseSuccess
+
+      interface _UpdateMaintenanceWindowTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMaintenanceWindowTargetResult]
+        def window_id: () -> ::String
+        def window_target_id: () -> ::String
+        def targets: () -> ::Array[Types::Target]
+        def owner_information: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#update_maintenance_window_target-instance_method
+      def update_maintenance_window_target: (
+                                              window_id: ::String,
+                                              window_target_id: ::String,
+                                              ?targets: Array[
+                                                {
+                                                  key: ::String?,
+                                                  values: Array[::String]?
+                                                },
+                                              ],
+                                              ?owner_information: ::String,
+                                              ?name: ::String,
+                                              ?description: ::String,
+                                              ?replace: bool
+                                            ) -> _UpdateMaintenanceWindowTargetResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMaintenanceWindowTargetResponseSuccess
+
+      interface _UpdateMaintenanceWindowTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMaintenanceWindowTaskResult]
+        def window_id: () -> ::String
+        def window_task_id: () -> ::String
+        def targets: () -> ::Array[Types::Target]
+        def task_arn: () -> ::String
+        def service_role_arn: () -> ::String
+        def task_parameters: () -> ::Hash[::String, Types::MaintenanceWindowTaskParameterValueExpression]
+        def task_invocation_parameters: () -> Types::MaintenanceWindowTaskInvocationParameters
+        def priority: () -> ::Integer
+        def max_concurrency: () -> ::String
+        def max_errors: () -> ::String
+        def logging_info: () -> Types::LoggingInfo
+        def name: () -> ::String
+        def description: () -> ::String
+        def cutoff_behavior: () -> ("CONTINUE_TASK" | "CANCEL_TASK")
+        def alarm_configuration: () -> Types::AlarmConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#update_maintenance_window_task-instance_method
+      def update_maintenance_window_task: (
+                                            window_id: ::String,
+                                            window_task_id: ::String,
+                                            ?targets: Array[
+                                              {
+                                                key: ::String?,
+                                                values: Array[::String]?
+                                              },
+                                            ],
+                                            ?task_arn: ::String,
+                                            ?service_role_arn: ::String,
+                                            ?task_parameters: Hash[::String, {
+                                                values: Array[::String]?
+                                              }],
+                                            ?task_invocation_parameters: {
+                                              run_command: {
+                                                comment: ::String?,
+                                                cloud_watch_output_config: {
+                                                  cloud_watch_log_group_name: ::String?,
+                                                  cloud_watch_output_enabled: bool?
+                                                }?,
+                                                document_hash: ::String?,
+                                                document_hash_type: ("Sha256" | "Sha1")?,
+                                                document_version: ::String?,
+                                                notification_config: {
+                                                  notification_arn: ::String?,
+                                                  notification_events: Array[("All" | "InProgress" | "Success" | "TimedOut" | "Cancelled" | "Failed")]?,
+                                                  notification_type: ("Command" | "Invocation")?
+                                                }?,
+                                                output_s3_bucket_name: ::String?,
+                                                output_s3_key_prefix: ::String?,
+                                                parameters: Hash[::String, Array[::String]]?,
+                                                service_role_arn: ::String?,
+                                                timeout_seconds: ::Integer?
+                                              }?,
+                                              automation: {
+                                                document_version: ::String?,
+                                                parameters: Hash[::String, Array[::String]]?
+                                              }?,
+                                              step_functions: {
+                                                input: ::String?,
+                                                name: ::String?
+                                              }?,
+                                              lambda: {
+                                                client_context: ::String?,
+                                                qualifier: ::String?,
+                                                payload: ::String?
+                                              }?
+                                            },
+                                            ?priority: ::Integer,
+                                            ?max_concurrency: ::String,
+                                            ?max_errors: ::String,
+                                            ?logging_info: {
+                                              s3_bucket_name: ::String,
+                                              s3_key_prefix: ::String?,
+                                              s3_region: ::String
+                                            },
+                                            ?name: ::String,
+                                            ?description: ::String,
+                                            ?replace: bool,
+                                            ?cutoff_behavior: ("CONTINUE_TASK" | "CANCEL_TASK"),
+                                            ?alarm_configuration: {
+                                              ignore_poll_alarm_failure: bool?,
+                                              alarms: Array[
+                                                {
+                                                  name: ::String
+                                                },
+                                              ]
+                                            }
+                                          ) -> _UpdateMaintenanceWindowTaskResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMaintenanceWindowTaskResponseSuccess
+
+      interface _UpdateManagedInstanceRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateManagedInstanceRoleResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#update_managed_instance_role-instance_method
+      def update_managed_instance_role: (
+                                          instance_id: ::String,
+                                          iam_role: ::String
+                                        ) -> _UpdateManagedInstanceRoleResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateManagedInstanceRoleResponseSuccess
+
+      interface _UpdateOpsItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOpsItemResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#update_ops_item-instance_method
+      def update_ops_item: (
+                             ?description: ::String,
+                             ?operational_data: Hash[::String, {
+                                 value: ::String?,
+                                 type: ("SearchableString" | "String")?
+                               }],
+                             ?operational_data_to_delete: Array[::String],
+                             ?notifications: Array[
+                               {
+                                 arn: ::String?
+                               },
+                             ],
+                             ?priority: ::Integer,
+                             ?related_ops_items: Array[
+                               {
+                                 ops_item_id: ::String
+                               },
+                             ],
+                             ?status: ("Open" | "InProgress" | "Resolved" | "Pending" | "TimedOut" | "Cancelling" | "Cancelled" | "Failed" | "CompletedWithSuccess" | "CompletedWithFailure" | "Scheduled" | "RunbookInProgress" | "PendingChangeCalendarOverride" | "ChangeCalendarOverrideApproved" | "ChangeCalendarOverrideRejected" | "PendingApproval" | "Approved" | "Rejected" | "Closed"),
+                             ops_item_id: ::String,
+                             ?title: ::String,
+                             ?category: ::String,
+                             ?severity: ::String,
+                             ?actual_start_time: ::Time,
+                             ?actual_end_time: ::Time,
+                             ?planned_start_time: ::Time,
+                             ?planned_end_time: ::Time,
+                             ?ops_item_arn: ::String
+                           ) -> _UpdateOpsItemResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOpsItemResponseSuccess
+
+      interface _UpdateOpsMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOpsMetadataResult]
+        def ops_metadata_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#update_ops_metadata-instance_method
+      def update_ops_metadata: (
+                                 ops_metadata_arn: ::String,
+                                 ?metadata_to_update: Hash[::String, {
+                                     value: ::String?
+                                   }],
+                                 ?keys_to_delete: Array[::String]
+                               ) -> _UpdateOpsMetadataResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOpsMetadataResponseSuccess
+
+      interface _UpdatePatchBaselineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePatchBaselineResult]
+        def baseline_id: () -> ::String
+        def name: () -> ::String
+        def operating_system: () -> ("WINDOWS" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "AMAZON_LINUX_2022" | "UBUNTU" | "REDHAT_ENTERPRISE_LINUX" | "SUSE" | "CENTOS" | "ORACLE_LINUX" | "DEBIAN" | "MACOS" | "RASPBIAN" | "ROCKY_LINUX" | "ALMA_LINUX" | "AMAZON_LINUX_2023")
+        def global_filters: () -> Types::PatchFilterGroup
+        def approval_rules: () -> Types::PatchRuleGroup
+        def approved_patches: () -> ::Array[::String]
+        def approved_patches_compliance_level: () -> ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")
+        def approved_patches_enable_non_security: () -> bool
+        def rejected_patches: () -> ::Array[::String]
+        def rejected_patches_action: () -> ("ALLOW_AS_DEPENDENCY" | "BLOCK")
+        def created_date: () -> ::Time
+        def modified_date: () -> ::Time
+        def description: () -> ::String
+        def sources: () -> ::Array[Types::PatchSource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#update_patch_baseline-instance_method
+      def update_patch_baseline: (
+                                   baseline_id: ::String,
+                                   ?name: ::String,
+                                   ?global_filters: {
+                                     patch_filters: Array[
+                                       {
+                                         key: ("ARCH" | "ADVISORY_ID" | "BUGZILLA_ID" | "PATCH_SET" | "PRODUCT" | "PRODUCT_FAMILY" | "CLASSIFICATION" | "CVE_ID" | "EPOCH" | "MSRC_SEVERITY" | "NAME" | "PATCH_ID" | "SECTION" | "PRIORITY" | "REPOSITORY" | "RELEASE" | "SEVERITY" | "SECURITY" | "VERSION"),
+                                         values: Array[::String]
+                                       },
+                                     ]
+                                   },
+                                   ?approval_rules: {
+                                     patch_rules: Array[
+                                       {
+                                         patch_filter_group: {
+                                           patch_filters: Array[
+                                             {
+                                               key: ("ARCH" | "ADVISORY_ID" | "BUGZILLA_ID" | "PATCH_SET" | "PRODUCT" | "PRODUCT_FAMILY" | "CLASSIFICATION" | "CVE_ID" | "EPOCH" | "MSRC_SEVERITY" | "NAME" | "PATCH_ID" | "SECTION" | "PRIORITY" | "REPOSITORY" | "RELEASE" | "SEVERITY" | "SECURITY" | "VERSION"),
+                                               values: Array[::String]
+                                             },
+                                           ]
+                                         },
+                                         compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")?,
+                                         approve_after_days: ::Integer?,
+                                         approve_until_date: ::String?,
+                                         enable_non_security: bool?
+                                       },
+                                     ]
+                                   },
+                                   ?approved_patches: Array[::String],
+                                   ?approved_patches_compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED"),
+                                   ?approved_patches_enable_non_security: bool,
+                                   ?rejected_patches: Array[::String],
+                                   ?rejected_patches_action: ("ALLOW_AS_DEPENDENCY" | "BLOCK"),
+                                   ?description: ::String,
+                                   ?sources: Array[
+                                     {
+                                       name: ::String,
+                                       products: Array[::String],
+                                       configuration: ::String
+                                     },
+                                   ],
+                                   ?replace: bool
+                                 ) -> _UpdatePatchBaselineResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePatchBaselineResponseSuccess
+
+      interface _UpdateResourceDataSyncResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourceDataSyncResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#update_resource_data_sync-instance_method
+      def update_resource_data_sync: (
+                                       sync_name: ::String,
+                                       sync_type: ::String,
+                                       sync_source: {
+                                         source_type: ::String,
+                                         aws_organizations_source: {
+                                           organization_source_type: ::String,
+                                           organizational_units: Array[
+                                             {
+                                               organizational_unit_id: ::String?
+                                             },
+                                           ]?
+                                         }?,
+                                         source_regions: Array[::String],
+                                         include_future_regions: bool?,
+                                         enable_all_ops_data_sources: bool?
+                                       }
+                                     ) -> _UpdateResourceDataSyncResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceDataSyncResponseSuccess
+
+      interface _UpdateServiceSettingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceSettingResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#update_service_setting-instance_method
+      def update_service_setting: (
+                                    setting_id: ::String,
+                                    setting_value: ::String
+                                  ) -> _UpdateServiceSettingResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceSettingResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#wait_until-instance_method
+      def wait_until: (:command_executed waiter_name, 
+                    command_id: ::String,
+                    instance_id: ::String,
+                    ?plugin_name: ::String
+                  ) -> Client::_GetCommandInvocationResponseSuccess
+                    | (:command_executed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetCommandInvocationResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,1641 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module GameLift
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptMatchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptMatchOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#accept_match-instance_method
+      def accept_match: (
+                          ticket_id: ::String,
+                          player_ids: Array[::String],
+                          acceptance_type: ("ACCEPT" | "REJECT")
+                        ) -> _AcceptMatchResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptMatchResponseSuccess
+
+      interface _ClaimGameServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ClaimGameServerOutput]
+        def game_server: () -> Types::GameServer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#claim_game_server-instance_method
+      def claim_game_server: (
+                               game_server_group_name: ::String,
+                               ?game_server_id: ::String,
+                               ?game_server_data: ::String,
+                               ?filter_option: {
+                                 instance_statuses: Array[("ACTIVE" | "DRAINING")]?
+                               }
+                             ) -> _ClaimGameServerResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ClaimGameServerResponseSuccess
+
+      interface _CreateAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAliasOutput]
+        def alias: () -> Types::Alias
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#create_alias-instance_method
+      def create_alias: (
+                          name: ::String,
+                          ?description: ::String,
+                          routing_strategy: {
+                            type: ("SIMPLE" | "TERMINAL")?,
+                            fleet_id: ::String?,
+                            message: ::String?
+                          },
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _CreateAliasResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAliasResponseSuccess
+
+      interface _CreateBuildResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBuildOutput]
+        def build: () -> Types::Build
+        def upload_credentials: () -> Types::AwsCredentials
+        def storage_location: () -> Types::S3Location
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#create_build-instance_method
+      def create_build: (
+                          ?name: ::String,
+                          ?version: ::String,
+                          ?storage_location: {
+                            bucket: ::String?,
+                            key: ::String?,
+                            role_arn: ::String?,
+                            object_version: ::String?
+                          },
+                          ?operating_system: ("WINDOWS_2012" | "AMAZON_LINUX" | "AMAZON_LINUX_2" | "WINDOWS_2016" | "AMAZON_LINUX_2023"),
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ],
+                          ?server_sdk_version: ::String
+                        ) -> _CreateBuildResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBuildResponseSuccess
+
+      interface _CreateFleetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFleetOutput]
+        def fleet_attributes: () -> Types::FleetAttributes
+        def location_states: () -> ::Array[Types::LocationState]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#create_fleet-instance_method
+      def create_fleet: (
+                          name: ::String,
+                          ?description: ::String,
+                          ?build_id: ::String,
+                          ?script_id: ::String,
+                          ?server_launch_path: ::String,
+                          ?server_launch_parameters: ::String,
+                          ?log_paths: Array[::String],
+                          ?ec2_instance_type: ("t2.micro" | "t2.small" | "t2.medium" | "t2.large" | "c3.large" | "c3.xlarge" | "c3.2xlarge" | "c3.4xlarge" | "c3.8xlarge" | "c4.large" | "c4.xlarge" | "c4.2xlarge" | "c4.4xlarge" | "c4.8xlarge" | "c5.large" | "c5.xlarge" | "c5.2xlarge" | "c5.4xlarge" | "c5.9xlarge" | "c5.12xlarge" | "c5.18xlarge" | "c5.24xlarge" | "c5a.large" | "c5a.xlarge" | "c5a.2xlarge" | "c5a.4xlarge" | "c5a.8xlarge" | "c5a.12xlarge" | "c5a.16xlarge" | "c5a.24xlarge" | "r3.large" | "r3.xlarge" | "r3.2xlarge" | "r3.4xlarge" | "r3.8xlarge" | "r4.large" | "r4.xlarge" | "r4.2xlarge" | "r4.4xlarge" | "r4.8xlarge" | "r4.16xlarge" | "r5.large" | "r5.xlarge" | "r5.2xlarge" | "r5.4xlarge" | "r5.8xlarge" | "r5.12xlarge" | "r5.16xlarge" | "r5.24xlarge" | "r5a.large" | "r5a.xlarge" | "r5a.2xlarge" | "r5a.4xlarge" | "r5a.8xlarge" | "r5a.12xlarge" | "r5a.16xlarge" | "r5a.24xlarge" | "m3.medium" | "m3.large" | "m3.xlarge" | "m3.2xlarge" | "m4.large" | "m4.xlarge" | "m4.2xlarge" | "m4.4xlarge" | "m4.10xlarge" | "m5.large" | "m5.xlarge" | "m5.2xlarge" | "m5.4xlarge" | "m5.8xlarge" | "m5.12xlarge" | "m5.16xlarge" | "m5.24xlarge" | "m5a.large" | "m5a.xlarge" | "m5a.2xlarge" | "m5a.4xlarge" | "m5a.8xlarge" | "m5a.12xlarge" | "m5a.16xlarge" | "m5a.24xlarge" | "c5d.large" | "c5d.xlarge" | "c5d.2xlarge" | "c5d.4xlarge" | "c5d.9xlarge" | "c5d.12xlarge" | "c5d.18xlarge" | "c5d.24xlarge" | "c6a.large" | "c6a.xlarge" | "c6a.2xlarge" | "c6a.4xlarge" | "c6a.8xlarge" | "c6a.12xlarge" | "c6a.16xlarge" | "c6a.24xlarge" | "c6i.large" | "c6i.xlarge" | "c6i.2xlarge" | "c6i.4xlarge" | "c6i.8xlarge" | "c6i.12xlarge" | "c6i.16xlarge" | "c6i.24xlarge" | "r5d.large" | "r5d.xlarge" | "r5d.2xlarge" | "r5d.4xlarge" | "r5d.8xlarge" | "r5d.12xlarge" | "r5d.16xlarge" | "r5d.24xlarge" | "m6g.medium" | "m6g.large" | "m6g.xlarge" | "m6g.2xlarge" | "m6g.4xlarge" | "m6g.8xlarge" | "m6g.12xlarge" | "m6g.16xlarge" | "c6g.medium" | "c6g.large" | "c6g.xlarge" | "c6g.2xlarge" | "c6g.4xlarge" | "c6g.8xlarge" | "c6g.12xlarge" | "c6g.16xlarge" | "r6g.medium" | "r6g.large" | "r6g.xlarge" | "r6g.2xlarge" | "r6g.4xlarge" | "r6g.8xlarge" | "r6g.12xlarge" | "r6g.16xlarge" | "c6gn.medium" | "c6gn.large" | "c6gn.xlarge" | "c6gn.2xlarge" | "c6gn.4xlarge" | "c6gn.8xlarge" | "c6gn.12xlarge" | "c6gn.16xlarge" | "c7g.medium" | "c7g.large" | "c7g.xlarge" | "c7g.2xlarge" | "c7g.4xlarge" | "c7g.8xlarge" | "c7g.12xlarge" | "c7g.16xlarge" | "r7g.medium" | "r7g.large" | "r7g.xlarge" | "r7g.2xlarge" | "r7g.4xlarge" | "r7g.8xlarge" | "r7g.12xlarge" | "r7g.16xlarge" | "m7g.medium" | "m7g.large" | "m7g.xlarge" | "m7g.2xlarge" | "m7g.4xlarge" | "m7g.8xlarge" | "m7g.12xlarge" | "m7g.16xlarge" | "g5g.xlarge" | "g5g.2xlarge" | "g5g.4xlarge" | "g5g.8xlarge" | "g5g.16xlarge"),
+                          ?ec2_inbound_permissions: Array[
+                            {
+                              from_port: ::Integer,
+                              to_port: ::Integer,
+                              ip_range: ::String,
+                              protocol: ("TCP" | "UDP")
+                            },
+                          ],
+                          ?new_game_session_protection_policy: ("NoProtection" | "FullProtection"),
+                          ?runtime_configuration: {
+                            server_processes: Array[
+                              {
+                                launch_path: ::String,
+                                parameters: ::String?,
+                                concurrent_executions: ::Integer
+                              },
+                            ]?,
+                            max_concurrent_game_session_activations: ::Integer?,
+                            game_session_activation_timeout_seconds: ::Integer?
+                          },
+                          ?resource_creation_limit_policy: {
+                            new_game_sessions_per_creator: ::Integer?,
+                            policy_period_in_minutes: ::Integer?
+                          },
+                          ?metric_groups: Array[::String],
+                          ?peer_vpc_aws_account_id: ::String,
+                          ?peer_vpc_id: ::String,
+                          ?fleet_type: ("ON_DEMAND" | "SPOT"),
+                          ?instance_role_arn: ::String,
+                          ?certificate_configuration: {
+                            certificate_type: ("DISABLED" | "GENERATED")
+                          },
+                          ?locations: Array[
+                            {
+                              location: ::String
+                            },
+                          ],
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ],
+                          ?compute_type: ("EC2" | "ANYWHERE"),
+                          ?anywhere_configuration: {
+                            cost: ::String
+                          },
+                          ?instance_role_credentials_provider: ("SHARED_CREDENTIAL_FILE")
+                        ) -> _CreateFleetResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFleetResponseSuccess
+
+      interface _CreateFleetLocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFleetLocationsOutput]
+        def fleet_id: () -> ::String
+        def fleet_arn: () -> ::String
+        def location_states: () -> ::Array[Types::LocationState]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#create_fleet_locations-instance_method
+      def create_fleet_locations: (
+                                    fleet_id: ::String,
+                                    locations: Array[
+                                      {
+                                        location: ::String
+                                      },
+                                    ]
+                                  ) -> _CreateFleetLocationsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFleetLocationsResponseSuccess
+
+      interface _CreateGameServerGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGameServerGroupOutput]
+        def game_server_group: () -> Types::GameServerGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#create_game_server_group-instance_method
+      def create_game_server_group: (
+                                      game_server_group_name: ::String,
+                                      role_arn: ::String,
+                                      min_size: ::Integer,
+                                      max_size: ::Integer,
+                                      launch_template: {
+                                        launch_template_id: ::String?,
+                                        launch_template_name: ::String?,
+                                        version: ::String?
+                                      },
+                                      instance_definitions: Array[
+                                        {
+                                          instance_type: ("c4.large" | "c4.xlarge" | "c4.2xlarge" | "c4.4xlarge" | "c4.8xlarge" | "c5.large" | "c5.xlarge" | "c5.2xlarge" | "c5.4xlarge" | "c5.9xlarge" | "c5.12xlarge" | "c5.18xlarge" | "c5.24xlarge" | "c5a.large" | "c5a.xlarge" | "c5a.2xlarge" | "c5a.4xlarge" | "c5a.8xlarge" | "c5a.12xlarge" | "c5a.16xlarge" | "c5a.24xlarge" | "c6g.medium" | "c6g.large" | "c6g.xlarge" | "c6g.2xlarge" | "c6g.4xlarge" | "c6g.8xlarge" | "c6g.12xlarge" | "c6g.16xlarge" | "r4.large" | "r4.xlarge" | "r4.2xlarge" | "r4.4xlarge" | "r4.8xlarge" | "r4.16xlarge" | "r5.large" | "r5.xlarge" | "r5.2xlarge" | "r5.4xlarge" | "r5.8xlarge" | "r5.12xlarge" | "r5.16xlarge" | "r5.24xlarge" | "r5a.large" | "r5a.xlarge" | "r5a.2xlarge" | "r5a.4xlarge" | "r5a.8xlarge" | "r5a.12xlarge" | "r5a.16xlarge" | "r5a.24xlarge" | "r6g.medium" | "r6g.large" | "r6g.xlarge" | "r6g.2xlarge" | "r6g.4xlarge" | "r6g.8xlarge" | "r6g.12xlarge" | "r6g.16xlarge" | "m4.large" | "m4.xlarge" | "m4.2xlarge" | "m4.4xlarge" | "m4.10xlarge" | "m5.large" | "m5.xlarge" | "m5.2xlarge" | "m5.4xlarge" | "m5.8xlarge" | "m5.12xlarge" | "m5.16xlarge" | "m5.24xlarge" | "m5a.large" | "m5a.xlarge" | "m5a.2xlarge" | "m5a.4xlarge" | "m5a.8xlarge" | "m5a.12xlarge" | "m5a.16xlarge" | "m5a.24xlarge" | "m6g.medium" | "m6g.large" | "m6g.xlarge" | "m6g.2xlarge" | "m6g.4xlarge" | "m6g.8xlarge" | "m6g.12xlarge" | "m6g.16xlarge"),
+                                          weighted_capacity: ::String?
+                                        },
+                                      ],
+                                      ?auto_scaling_policy: {
+                                        estimated_instance_warmup: ::Integer?,
+                                        target_tracking_configuration: {
+                                          target_value: ::Float
+                                        }
+                                      },
+                                      ?balancing_strategy: ("SPOT_ONLY" | "SPOT_PREFERRED" | "ON_DEMAND_ONLY"),
+                                      ?game_server_protection_policy: ("NO_PROTECTION" | "FULL_PROTECTION"),
+                                      ?vpc_subnets: Array[::String],
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ]
+                                    ) -> _CreateGameServerGroupResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGameServerGroupResponseSuccess
+
+      interface _CreateGameSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGameSessionOutput]
+        def game_session: () -> Types::GameSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#create_game_session-instance_method
+      def create_game_session: (
+                                 ?fleet_id: ::String,
+                                 ?alias_id: ::String,
+                                 maximum_player_session_count: ::Integer,
+                                 ?name: ::String,
+                                 ?game_properties: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ],
+                                 ?creator_id: ::String,
+                                 ?game_session_id: ::String,
+                                 ?idempotency_token: ::String,
+                                 ?game_session_data: ::String,
+                                 ?location: ::String
+                               ) -> _CreateGameSessionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGameSessionResponseSuccess
+
+      interface _CreateGameSessionQueueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGameSessionQueueOutput]
+        def game_session_queue: () -> Types::GameSessionQueue
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#create_game_session_queue-instance_method
+      def create_game_session_queue: (
+                                       name: ::String,
+                                       ?timeout_in_seconds: ::Integer,
+                                       ?player_latency_policies: Array[
+                                         {
+                                           maximum_individual_player_latency_milliseconds: ::Integer?,
+                                           policy_duration_seconds: ::Integer?
+                                         },
+                                       ],
+                                       ?destinations: Array[
+                                         {
+                                           destination_arn: ::String?
+                                         },
+                                       ],
+                                       ?filter_configuration: {
+                                         allowed_locations: Array[::String]?
+                                       },
+                                       ?priority_configuration: {
+                                         priority_order: Array[("LATENCY" | "COST" | "DESTINATION" | "LOCATION")]?,
+                                         location_order: Array[::String]?
+                                       },
+                                       ?custom_event_data: ::String,
+                                       ?notification_target: ::String,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]
+                                     ) -> _CreateGameSessionQueueResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGameSessionQueueResponseSuccess
+
+      interface _CreateLocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLocationOutput]
+        def location: () -> Types::LocationModel
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#create_location-instance_method
+      def create_location: (
+                             location_name: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _CreateLocationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationResponseSuccess
+
+      interface _CreateMatchmakingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMatchmakingConfigurationOutput]
+        def configuration: () -> Types::MatchmakingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#create_matchmaking_configuration-instance_method
+      def create_matchmaking_configuration: (
+                                              name: ::String,
+                                              ?description: ::String,
+                                              ?game_session_queue_arns: Array[::String],
+                                              request_timeout_seconds: ::Integer,
+                                              ?acceptance_timeout_seconds: ::Integer,
+                                              acceptance_required: bool,
+                                              rule_set_name: ::String,
+                                              ?notification_target: ::String,
+                                              ?additional_player_count: ::Integer,
+                                              ?custom_event_data: ::String,
+                                              ?game_properties: Array[
+                                                {
+                                                  key: ::String,
+                                                  value: ::String
+                                                },
+                                              ],
+                                              ?game_session_data: ::String,
+                                              ?backfill_mode: ("AUTOMATIC" | "MANUAL"),
+                                              ?flex_match_mode: ("STANDALONE" | "WITH_QUEUE"),
+                                              ?tags: Array[
+                                                {
+                                                  key: ::String,
+                                                  value: ::String
+                                                },
+                                              ]
+                                            ) -> _CreateMatchmakingConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMatchmakingConfigurationResponseSuccess
+
+      interface _CreateMatchmakingRuleSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMatchmakingRuleSetOutput]
+        def rule_set: () -> Types::MatchmakingRuleSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#create_matchmaking_rule_set-instance_method
+      def create_matchmaking_rule_set: (
+                                         name: ::String,
+                                         rule_set_body: ::String,
+                                         ?tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String
+                                           },
+                                         ]
+                                       ) -> _CreateMatchmakingRuleSetResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMatchmakingRuleSetResponseSuccess
+
+      interface _CreatePlayerSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePlayerSessionOutput]
+        def player_session: () -> Types::PlayerSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#create_player_session-instance_method
+      def create_player_session: (
+                                   game_session_id: ::String,
+                                   player_id: ::String,
+                                   ?player_data: ::String
+                                 ) -> _CreatePlayerSessionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePlayerSessionResponseSuccess
+
+      interface _CreatePlayerSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePlayerSessionsOutput]
+        def player_sessions: () -> ::Array[Types::PlayerSession]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#create_player_sessions-instance_method
+      def create_player_sessions: (
+                                    game_session_id: ::String,
+                                    player_ids: Array[::String],
+                                    ?player_data_map: Hash[::String, ::String]
+                                  ) -> _CreatePlayerSessionsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePlayerSessionsResponseSuccess
+
+      interface _CreateScriptResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateScriptOutput]
+        def script: () -> Types::Script
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#create_script-instance_method
+      def create_script: (
+                           ?name: ::String,
+                           ?version: ::String,
+                           ?storage_location: {
+                             bucket: ::String?,
+                             key: ::String?,
+                             role_arn: ::String?,
+                             object_version: ::String?
+                           },
+                           ?zip_file: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
+                           ]
+                         ) -> _CreateScriptResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScriptResponseSuccess
+
+      interface _CreateVpcPeeringAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVpcPeeringAuthorizationOutput]
+        def vpc_peering_authorization: () -> Types::VpcPeeringAuthorization
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#create_vpc_peering_authorization-instance_method
+      def create_vpc_peering_authorization: (
+                                              game_lift_aws_account_id: ::String,
+                                              peer_vpc_id: ::String
+                                            ) -> _CreateVpcPeeringAuthorizationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcPeeringAuthorizationResponseSuccess
+
+      interface _CreateVpcPeeringConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVpcPeeringConnectionOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#create_vpc_peering_connection-instance_method
+      def create_vpc_peering_connection: (
+                                           fleet_id: ::String,
+                                           peer_vpc_aws_account_id: ::String,
+                                           peer_vpc_id: ::String
+                                         ) -> _CreateVpcPeeringConnectionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcPeeringConnectionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#delete_alias-instance_method
+      def delete_alias: (
+                          alias_id: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#delete_build-instance_method
+      def delete_build: (
+                          build_id: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#delete_fleet-instance_method
+      def delete_fleet: (
+                          fleet_id: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteFleetLocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFleetLocationsOutput]
+        def fleet_id: () -> ::String
+        def fleet_arn: () -> ::String
+        def location_states: () -> ::Array[Types::LocationState]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#delete_fleet_locations-instance_method
+      def delete_fleet_locations: (
+                                    fleet_id: ::String,
+                                    locations: Array[::String]
+                                  ) -> _DeleteFleetLocationsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFleetLocationsResponseSuccess
+
+      interface _DeleteGameServerGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGameServerGroupOutput]
+        def game_server_group: () -> Types::GameServerGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#delete_game_server_group-instance_method
+      def delete_game_server_group: (
+                                      game_server_group_name: ::String,
+                                      ?delete_option: ("SAFE_DELETE" | "FORCE_DELETE" | "RETAIN")
+                                    ) -> _DeleteGameServerGroupResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGameServerGroupResponseSuccess
+
+      interface _DeleteGameSessionQueueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGameSessionQueueOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#delete_game_session_queue-instance_method
+      def delete_game_session_queue: (
+                                       name: ::String
+                                     ) -> _DeleteGameSessionQueueResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGameSessionQueueResponseSuccess
+
+      interface _DeleteLocationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLocationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#delete_location-instance_method
+      def delete_location: (
+                             location_name: ::String
+                           ) -> _DeleteLocationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLocationResponseSuccess
+
+      interface _DeleteMatchmakingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMatchmakingConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#delete_matchmaking_configuration-instance_method
+      def delete_matchmaking_configuration: (
+                                              name: ::String
+                                            ) -> _DeleteMatchmakingConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMatchmakingConfigurationResponseSuccess
+
+      interface _DeleteMatchmakingRuleSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMatchmakingRuleSetOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#delete_matchmaking_rule_set-instance_method
+      def delete_matchmaking_rule_set: (
+                                         name: ::String
+                                       ) -> _DeleteMatchmakingRuleSetResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMatchmakingRuleSetResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#delete_scaling_policy-instance_method
+      def delete_scaling_policy: (
+                                   name: ::String,
+                                   fleet_id: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#delete_script-instance_method
+      def delete_script: (
+                           script_id: ::String
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteVpcPeeringAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVpcPeeringAuthorizationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#delete_vpc_peering_authorization-instance_method
+      def delete_vpc_peering_authorization: (
+                                              game_lift_aws_account_id: ::String,
+                                              peer_vpc_id: ::String
+                                            ) -> _DeleteVpcPeeringAuthorizationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVpcPeeringAuthorizationResponseSuccess
+
+      interface _DeleteVpcPeeringConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVpcPeeringConnectionOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#delete_vpc_peering_connection-instance_method
+      def delete_vpc_peering_connection: (
+                                           fleet_id: ::String,
+                                           vpc_peering_connection_id: ::String
+                                         ) -> _DeleteVpcPeeringConnectionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVpcPeeringConnectionResponseSuccess
+
+      interface _DeregisterComputeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterComputeOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#deregister_compute-instance_method
+      def deregister_compute: (
+                                fleet_id: ::String,
+                                compute_name: ::String
+                              ) -> _DeregisterComputeResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterComputeResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#deregister_game_server-instance_method
+      def deregister_game_server: (
+                                    game_server_group_name: ::String,
+                                    game_server_id: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAliasOutput]
+        def alias: () -> Types::Alias
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_alias-instance_method
+      def describe_alias: (
+                            alias_id: ::String
+                          ) -> _DescribeAliasResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAliasResponseSuccess
+
+      interface _DescribeBuildResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBuildOutput]
+        def build: () -> Types::Build
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_build-instance_method
+      def describe_build: (
+                            build_id: ::String
+                          ) -> _DescribeBuildResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBuildResponseSuccess
+
+      interface _DescribeComputeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeComputeOutput]
+        def compute: () -> Types::Compute
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_compute-instance_method
+      def describe_compute: (
+                              fleet_id: ::String,
+                              compute_name: ::String
+                            ) -> _DescribeComputeResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeComputeResponseSuccess
+
+      interface _DescribeEC2InstanceLimitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEC2InstanceLimitsOutput]
+        def ec2_instance_limits: () -> ::Array[Types::EC2InstanceLimit]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_ec2_instance_limits-instance_method
+      def describe_ec2_instance_limits: (
+                                          ?ec2_instance_type: ("t2.micro" | "t2.small" | "t2.medium" | "t2.large" | "c3.large" | "c3.xlarge" | "c3.2xlarge" | "c3.4xlarge" | "c3.8xlarge" | "c4.large" | "c4.xlarge" | "c4.2xlarge" | "c4.4xlarge" | "c4.8xlarge" | "c5.large" | "c5.xlarge" | "c5.2xlarge" | "c5.4xlarge" | "c5.9xlarge" | "c5.12xlarge" | "c5.18xlarge" | "c5.24xlarge" | "c5a.large" | "c5a.xlarge" | "c5a.2xlarge" | "c5a.4xlarge" | "c5a.8xlarge" | "c5a.12xlarge" | "c5a.16xlarge" | "c5a.24xlarge" | "r3.large" | "r3.xlarge" | "r3.2xlarge" | "r3.4xlarge" | "r3.8xlarge" | "r4.large" | "r4.xlarge" | "r4.2xlarge" | "r4.4xlarge" | "r4.8xlarge" | "r4.16xlarge" | "r5.large" | "r5.xlarge" | "r5.2xlarge" | "r5.4xlarge" | "r5.8xlarge" | "r5.12xlarge" | "r5.16xlarge" | "r5.24xlarge" | "r5a.large" | "r5a.xlarge" | "r5a.2xlarge" | "r5a.4xlarge" | "r5a.8xlarge" | "r5a.12xlarge" | "r5a.16xlarge" | "r5a.24xlarge" | "m3.medium" | "m3.large" | "m3.xlarge" | "m3.2xlarge" | "m4.large" | "m4.xlarge" | "m4.2xlarge" | "m4.4xlarge" | "m4.10xlarge" | "m5.large" | "m5.xlarge" | "m5.2xlarge" | "m5.4xlarge" | "m5.8xlarge" | "m5.12xlarge" | "m5.16xlarge" | "m5.24xlarge" | "m5a.large" | "m5a.xlarge" | "m5a.2xlarge" | "m5a.4xlarge" | "m5a.8xlarge" | "m5a.12xlarge" | "m5a.16xlarge" | "m5a.24xlarge" | "c5d.large" | "c5d.xlarge" | "c5d.2xlarge" | "c5d.4xlarge" | "c5d.9xlarge" | "c5d.12xlarge" | "c5d.18xlarge" | "c5d.24xlarge" | "c6a.large" | "c6a.xlarge" | "c6a.2xlarge" | "c6a.4xlarge" | "c6a.8xlarge" | "c6a.12xlarge" | "c6a.16xlarge" | "c6a.24xlarge" | "c6i.large" | "c6i.xlarge" | "c6i.2xlarge" | "c6i.4xlarge" | "c6i.8xlarge" | "c6i.12xlarge" | "c6i.16xlarge" | "c6i.24xlarge" | "r5d.large" | "r5d.xlarge" | "r5d.2xlarge" | "r5d.4xlarge" | "r5d.8xlarge" | "r5d.12xlarge" | "r5d.16xlarge" | "r5d.24xlarge" | "m6g.medium" | "m6g.large" | "m6g.xlarge" | "m6g.2xlarge" | "m6g.4xlarge" | "m6g.8xlarge" | "m6g.12xlarge" | "m6g.16xlarge" | "c6g.medium" | "c6g.large" | "c6g.xlarge" | "c6g.2xlarge" | "c6g.4xlarge" | "c6g.8xlarge" | "c6g.12xlarge" | "c6g.16xlarge" | "r6g.medium" | "r6g.large" | "r6g.xlarge" | "r6g.2xlarge" | "r6g.4xlarge" | "r6g.8xlarge" | "r6g.12xlarge" | "r6g.16xlarge" | "c6gn.medium" | "c6gn.large" | "c6gn.xlarge" | "c6gn.2xlarge" | "c6gn.4xlarge" | "c6gn.8xlarge" | "c6gn.12xlarge" | "c6gn.16xlarge" | "c7g.medium" | "c7g.large" | "c7g.xlarge" | "c7g.2xlarge" | "c7g.4xlarge" | "c7g.8xlarge" | "c7g.12xlarge" | "c7g.16xlarge" | "r7g.medium" | "r7g.large" | "r7g.xlarge" | "r7g.2xlarge" | "r7g.4xlarge" | "r7g.8xlarge" | "r7g.12xlarge" | "r7g.16xlarge" | "m7g.medium" | "m7g.large" | "m7g.xlarge" | "m7g.2xlarge" | "m7g.4xlarge" | "m7g.8xlarge" | "m7g.12xlarge" | "m7g.16xlarge" | "g5g.xlarge" | "g5g.2xlarge" | "g5g.4xlarge" | "g5g.8xlarge" | "g5g.16xlarge"),
+                                          ?location: ::String
+                                        ) -> _DescribeEC2InstanceLimitsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEC2InstanceLimitsResponseSuccess
+
+      interface _DescribeFleetAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFleetAttributesOutput]
+        def fleet_attributes: () -> ::Array[Types::FleetAttributes]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_fleet_attributes-instance_method
+      def describe_fleet_attributes: (
+                                       ?fleet_ids: Array[::String],
+                                       ?limit: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _DescribeFleetAttributesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFleetAttributesResponseSuccess
+
+      interface _DescribeFleetCapacityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFleetCapacityOutput]
+        def fleet_capacity: () -> ::Array[Types::FleetCapacity]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_fleet_capacity-instance_method
+      def describe_fleet_capacity: (
+                                     ?fleet_ids: Array[::String],
+                                     ?limit: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _DescribeFleetCapacityResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFleetCapacityResponseSuccess
+
+      interface _DescribeFleetEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFleetEventsOutput]
+        def events: () -> ::Array[Types::Event]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_fleet_events-instance_method
+      def describe_fleet_events: (
+                                   fleet_id: ::String,
+                                   ?start_time: ::Time,
+                                   ?end_time: ::Time,
+                                   ?limit: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _DescribeFleetEventsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFleetEventsResponseSuccess
+
+      interface _DescribeFleetLocationAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFleetLocationAttributesOutput]
+        def fleet_id: () -> ::String
+        def fleet_arn: () -> ::String
+        def location_attributes: () -> ::Array[Types::LocationAttributes]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_fleet_location_attributes-instance_method
+      def describe_fleet_location_attributes: (
+                                                fleet_id: ::String,
+                                                ?locations: Array[::String],
+                                                ?limit: ::Integer,
+                                                ?next_token: ::String
+                                              ) -> _DescribeFleetLocationAttributesResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFleetLocationAttributesResponseSuccess
+
+      interface _DescribeFleetLocationCapacityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFleetLocationCapacityOutput]
+        def fleet_capacity: () -> Types::FleetCapacity
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_fleet_location_capacity-instance_method
+      def describe_fleet_location_capacity: (
+                                              fleet_id: ::String,
+                                              location: ::String
+                                            ) -> _DescribeFleetLocationCapacityResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFleetLocationCapacityResponseSuccess
+
+      interface _DescribeFleetLocationUtilizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFleetLocationUtilizationOutput]
+        def fleet_utilization: () -> Types::FleetUtilization
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_fleet_location_utilization-instance_method
+      def describe_fleet_location_utilization: (
+                                                 fleet_id: ::String,
+                                                 location: ::String
+                                               ) -> _DescribeFleetLocationUtilizationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFleetLocationUtilizationResponseSuccess
+
+      interface _DescribeFleetPortSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFleetPortSettingsOutput]
+        def fleet_id: () -> ::String
+        def fleet_arn: () -> ::String
+        def inbound_permissions: () -> ::Array[Types::IpPermission]
+        def update_status: () -> ("PENDING_UPDATE")
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_fleet_port_settings-instance_method
+      def describe_fleet_port_settings: (
+                                          fleet_id: ::String,
+                                          ?location: ::String
+                                        ) -> _DescribeFleetPortSettingsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFleetPortSettingsResponseSuccess
+
+      interface _DescribeFleetUtilizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFleetUtilizationOutput]
+        def fleet_utilization: () -> ::Array[Types::FleetUtilization]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_fleet_utilization-instance_method
+      def describe_fleet_utilization: (
+                                        ?fleet_ids: Array[::String],
+                                        ?limit: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _DescribeFleetUtilizationResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFleetUtilizationResponseSuccess
+
+      interface _DescribeGameServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGameServerOutput]
+        def game_server: () -> Types::GameServer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_game_server-instance_method
+      def describe_game_server: (
+                                  game_server_group_name: ::String,
+                                  game_server_id: ::String
+                                ) -> _DescribeGameServerResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGameServerResponseSuccess
+
+      interface _DescribeGameServerGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGameServerGroupOutput]
+        def game_server_group: () -> Types::GameServerGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_game_server_group-instance_method
+      def describe_game_server_group: (
+                                        game_server_group_name: ::String
+                                      ) -> _DescribeGameServerGroupResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGameServerGroupResponseSuccess
+
+      interface _DescribeGameServerInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGameServerInstancesOutput]
+        def game_server_instances: () -> ::Array[Types::GameServerInstance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_game_server_instances-instance_method
+      def describe_game_server_instances: (
+                                            game_server_group_name: ::String,
+                                            ?instance_ids: Array[::String],
+                                            ?limit: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _DescribeGameServerInstancesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGameServerInstancesResponseSuccess
+
+      interface _DescribeGameSessionDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGameSessionDetailsOutput]
+        def game_session_details: () -> ::Array[Types::GameSessionDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_game_session_details-instance_method
+      def describe_game_session_details: (
+                                           ?fleet_id: ::String,
+                                           ?game_session_id: ::String,
+                                           ?alias_id: ::String,
+                                           ?location: ::String,
+                                           ?status_filter: ::String,
+                                           ?limit: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _DescribeGameSessionDetailsResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGameSessionDetailsResponseSuccess
+
+      interface _DescribeGameSessionPlacementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGameSessionPlacementOutput]
+        def game_session_placement: () -> Types::GameSessionPlacement
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_game_session_placement-instance_method
+      def describe_game_session_placement: (
+                                             placement_id: ::String
+                                           ) -> _DescribeGameSessionPlacementResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGameSessionPlacementResponseSuccess
+
+      interface _DescribeGameSessionQueuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGameSessionQueuesOutput]
+        def game_session_queues: () -> ::Array[Types::GameSessionQueue]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_game_session_queues-instance_method
+      def describe_game_session_queues: (
+                                          ?names: Array[::String],
+                                          ?limit: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _DescribeGameSessionQueuesResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGameSessionQueuesResponseSuccess
+
+      interface _DescribeGameSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeGameSessionsOutput]
+        def game_sessions: () -> ::Array[Types::GameSession]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_game_sessions-instance_method
+      def describe_game_sessions: (
+                                    ?fleet_id: ::String,
+                                    ?game_session_id: ::String,
+                                    ?alias_id: ::String,
+                                    ?location: ::String,
+                                    ?status_filter: ::String,
+                                    ?limit: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _DescribeGameSessionsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeGameSessionsResponseSuccess
+
+      interface _DescribeInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstancesOutput]
+        def instances: () -> ::Array[Types::Instance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_instances-instance_method
+      def describe_instances: (
+                                fleet_id: ::String,
+                                ?instance_id: ::String,
+                                ?limit: ::Integer,
+                                ?next_token: ::String,
+                                ?location: ::String
+                              ) -> _DescribeInstancesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstancesResponseSuccess
+
+      interface _DescribeMatchmakingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMatchmakingOutput]
+        def ticket_list: () -> ::Array[Types::MatchmakingTicket]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_matchmaking-instance_method
+      def describe_matchmaking: (
+                                  ticket_ids: Array[::String]
+                                ) -> _DescribeMatchmakingResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMatchmakingResponseSuccess
+
+      interface _DescribeMatchmakingConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMatchmakingConfigurationsOutput]
+        def configurations: () -> ::Array[Types::MatchmakingConfiguration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_matchmaking_configurations-instance_method
+      def describe_matchmaking_configurations: (
+                                                 ?names: Array[::String],
+                                                 ?rule_set_name: ::String,
+                                                 ?limit: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _DescribeMatchmakingConfigurationsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMatchmakingConfigurationsResponseSuccess
+
+      interface _DescribeMatchmakingRuleSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMatchmakingRuleSetsOutput]
+        def rule_sets: () -> ::Array[Types::MatchmakingRuleSet]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_matchmaking_rule_sets-instance_method
+      def describe_matchmaking_rule_sets: (
+                                            ?names: Array[::String],
+                                            ?limit: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _DescribeMatchmakingRuleSetsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMatchmakingRuleSetsResponseSuccess
+
+      interface _DescribePlayerSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePlayerSessionsOutput]
+        def player_sessions: () -> ::Array[Types::PlayerSession]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_player_sessions-instance_method
+      def describe_player_sessions: (
+                                      ?game_session_id: ::String,
+                                      ?player_id: ::String,
+                                      ?player_session_id: ::String,
+                                      ?player_session_status_filter: ::String,
+                                      ?limit: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _DescribePlayerSessionsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePlayerSessionsResponseSuccess
+
+      interface _DescribeRuntimeConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRuntimeConfigurationOutput]
+        def runtime_configuration: () -> Types::RuntimeConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_runtime_configuration-instance_method
+      def describe_runtime_configuration: (
+                                            fleet_id: ::String
+                                          ) -> _DescribeRuntimeConfigurationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRuntimeConfigurationResponseSuccess
+
+      interface _DescribeScalingPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeScalingPoliciesOutput]
+        def scaling_policies: () -> ::Array[Types::ScalingPolicy]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_scaling_policies-instance_method
+      def describe_scaling_policies: (
+                                       fleet_id: ::String,
+                                       ?status_filter: ("ACTIVE" | "UPDATE_REQUESTED" | "UPDATING" | "DELETE_REQUESTED" | "DELETING" | "DELETED" | "ERROR"),
+                                       ?limit: ::Integer,
+                                       ?next_token: ::String,
+                                       ?location: ::String
+                                     ) -> _DescribeScalingPoliciesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeScalingPoliciesResponseSuccess
+
+      interface _DescribeScriptResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeScriptOutput]
+        def script: () -> Types::Script
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_script-instance_method
+      def describe_script: (
+                             script_id: ::String
+                           ) -> _DescribeScriptResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeScriptResponseSuccess
+
+      interface _DescribeVpcPeeringAuthorizationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVpcPeeringAuthorizationsOutput]
+        def vpc_peering_authorizations: () -> ::Array[Types::VpcPeeringAuthorization]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_vpc_peering_authorizations-instance_method
+      def describe_vpc_peering_authorizations: (
+                                               ) -> _DescribeVpcPeeringAuthorizationsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVpcPeeringAuthorizationsResponseSuccess
+
+      interface _DescribeVpcPeeringConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVpcPeeringConnectionsOutput]
+        def vpc_peering_connections: () -> ::Array[Types::VpcPeeringConnection]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#describe_vpc_peering_connections-instance_method
+      def describe_vpc_peering_connections: (
+                                              ?fleet_id: ::String
+                                            ) -> _DescribeVpcPeeringConnectionsResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVpcPeeringConnectionsResponseSuccess
+
+      interface _GetComputeAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetComputeAccessOutput]
+        def fleet_id: () -> ::String
+        def fleet_arn: () -> ::String
+        def compute_name: () -> ::String
+        def compute_arn: () -> ::String
+        def credentials: () -> Types::AwsCredentials
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#get_compute_access-instance_method
+      def get_compute_access: (
+                                fleet_id: ::String,
+                                compute_name: ::String
+                              ) -> _GetComputeAccessResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetComputeAccessResponseSuccess
+
+      interface _GetComputeAuthTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetComputeAuthTokenOutput]
+        def fleet_id: () -> ::String
+        def fleet_arn: () -> ::String
+        def compute_name: () -> ::String
+        def compute_arn: () -> ::String
+        def auth_token: () -> ::String
+        def expiration_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#get_compute_auth_token-instance_method
+      def get_compute_auth_token: (
+                                    fleet_id: ::String,
+                                    compute_name: ::String
+                                  ) -> _GetComputeAuthTokenResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetComputeAuthTokenResponseSuccess
+
+      interface _GetGameSessionLogUrlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGameSessionLogUrlOutput]
+        def pre_signed_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#get_game_session_log_url-instance_method
+      def get_game_session_log_url: (
+                                      game_session_id: ::String
+                                    ) -> _GetGameSessionLogUrlResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGameSessionLogUrlResponseSuccess
+
+      interface _GetInstanceAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceAccessOutput]
+        def instance_access: () -> Types::InstanceAccess
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#get_instance_access-instance_method
+      def get_instance_access: (
+                                 fleet_id: ::String,
+                                 instance_id: ::String
+                               ) -> _GetInstanceAccessResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceAccessResponseSuccess
+
+      interface _ListAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAliasesOutput]
+        def aliases: () -> ::Array[Types::Alias]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#list_aliases-instance_method
+      def list_aliases: (
+                          ?routing_strategy_type: ("SIMPLE" | "TERMINAL"),
+                          ?name: ::String,
+                          ?limit: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListAliasesResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAliasesResponseSuccess
+
+      interface _ListBuildsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBuildsOutput]
+        def builds: () -> ::Array[Types::Build]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#list_builds-instance_method
+      def list_builds: (
+                         ?status: ("INITIALIZED" | "READY" | "FAILED"),
+                         ?limit: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListBuildsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBuildsResponseSuccess
+
+      interface _ListComputeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComputeOutput]
+        def compute_list: () -> ::Array[Types::Compute]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#list_compute-instance_method
+      def list_compute: (
+                          fleet_id: ::String,
+                          ?location: ::String,
+                          ?limit: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListComputeResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComputeResponseSuccess
+
+      interface _ListFleetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFleetsOutput]
+        def fleet_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#list_fleets-instance_method
+      def list_fleets: (
+                         ?build_id: ::String,
+                         ?script_id: ::String,
+                         ?limit: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListFleetsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFleetsResponseSuccess
+
+      interface _ListGameServerGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGameServerGroupsOutput]
+        def game_server_groups: () -> ::Array[Types::GameServerGroup]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#list_game_server_groups-instance_method
+      def list_game_server_groups: (
+                                     ?limit: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListGameServerGroupsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGameServerGroupsResponseSuccess
+
+      interface _ListGameServersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGameServersOutput]
+        def game_servers: () -> ::Array[Types::GameServer]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#list_game_servers-instance_method
+      def list_game_servers: (
+                               game_server_group_name: ::String,
+                               ?sort_order: ("ASCENDING" | "DESCENDING"),
+                               ?limit: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListGameServersResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGameServersResponseSuccess
+
+      interface _ListLocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLocationsOutput]
+        def locations: () -> ::Array[Types::LocationModel]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#list_locations-instance_method
+      def list_locations: (
+                            ?filters: Array[("AWS" | "CUSTOM")],
+                            ?limit: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListLocationsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLocationsResponseSuccess
+
+      interface _ListScriptsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListScriptsOutput]
+        def scripts: () -> ::Array[Types::Script]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#list_scripts-instance_method
+      def list_scripts: (
+                          ?limit: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListScriptsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScriptsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutScalingPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutScalingPolicyOutput]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#put_scaling_policy-instance_method
+      def put_scaling_policy: (
+                                name: ::String,
+                                fleet_id: ::String,
+                                ?scaling_adjustment: ::Integer,
+                                ?scaling_adjustment_type: ("ChangeInCapacity" | "ExactCapacity" | "PercentChangeInCapacity"),
+                                ?threshold: ::Float,
+                                ?comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold"),
+                                ?evaluation_periods: ::Integer,
+                                metric_name: ("ActivatingGameSessions" | "ActiveGameSessions" | "ActiveInstances" | "AvailableGameSessions" | "AvailablePlayerSessions" | "CurrentPlayerSessions" | "IdleInstances" | "PercentAvailableGameSessions" | "PercentIdleInstances" | "QueueDepth" | "WaitTime" | "ConcurrentActivatableGameSessions"),
+                                ?policy_type: ("RuleBased" | "TargetBased"),
+                                ?target_configuration: {
+                                  target_value: ::Float
+                                }
+                              ) -> _PutScalingPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutScalingPolicyResponseSuccess
+
+      interface _RegisterComputeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterComputeOutput]
+        def compute: () -> Types::Compute
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#register_compute-instance_method
+      def register_compute: (
+                              fleet_id: ::String,
+                              compute_name: ::String,
+                              ?certificate_path: ::String,
+                              ?dns_name: ::String,
+                              ?ip_address: ::String,
+                              ?location: ::String
+                            ) -> _RegisterComputeResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterComputeResponseSuccess
+
+      interface _RegisterGameServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterGameServerOutput]
+        def game_server: () -> Types::GameServer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#register_game_server-instance_method
+      def register_game_server: (
+                                  game_server_group_name: ::String,
+                                  game_server_id: ::String,
+                                  instance_id: ::String,
+                                  ?connection_info: ::String,
+                                  ?game_server_data: ::String
+                                ) -> _RegisterGameServerResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterGameServerResponseSuccess
+
+      interface _RequestUploadCredentialsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RequestUploadCredentialsOutput]
+        def upload_credentials: () -> Types::AwsCredentials
+        def storage_location: () -> Types::S3Location
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#request_upload_credentials-instance_method
+      def request_upload_credentials: (
+                                        build_id: ::String
+                                      ) -> _RequestUploadCredentialsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RequestUploadCredentialsResponseSuccess
+
+      interface _ResolveAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResolveAliasOutput]
+        def fleet_id: () -> ::String
+        def fleet_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#resolve_alias-instance_method
+      def resolve_alias: (
+                           alias_id: ::String
+                         ) -> _ResolveAliasResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResolveAliasResponseSuccess
+
+      interface _ResumeGameServerGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResumeGameServerGroupOutput]
+        def game_server_group: () -> Types::GameServerGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#resume_game_server_group-instance_method
+      def resume_game_server_group: (
+                                      game_server_group_name: ::String,
+                                      resume_actions: Array[("REPLACE_INSTANCE_TYPES")]
+                                    ) -> _ResumeGameServerGroupResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResumeGameServerGroupResponseSuccess
+
+      interface _SearchGameSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchGameSessionsOutput]
+        def game_sessions: () -> ::Array[Types::GameSession]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#search_game_sessions-instance_method
+      def search_game_sessions: (
+                                  ?fleet_id: ::String,
+                                  ?alias_id: ::String,
+                                  ?location: ::String,
+                                  ?filter_expression: ::String,
+                                  ?sort_expression: ::String,
+                                  ?limit: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _SearchGameSessionsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchGameSessionsResponseSuccess
+
+      interface _StartFleetActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartFleetActionsOutput]
+        def fleet_id: () -> ::String
+        def fleet_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#start_fleet_actions-instance_method
+      def start_fleet_actions: (
+                                 fleet_id: ::String,
+                                 actions: Array[("AUTO_SCALING")],
+                                 ?location: ::String
+                               ) -> _StartFleetActionsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFleetActionsResponseSuccess
+
+      interface _StartGameSessionPlacementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartGameSessionPlacementOutput]
+        def game_session_placement: () -> Types::GameSessionPlacement
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#start_game_session_placement-instance_method
+      def start_game_session_placement: (
+                                          placement_id: ::String,
+                                          game_session_queue_name: ::String,
+                                          ?game_properties: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String
+                                            },
+                                          ],
+                                          maximum_player_session_count: ::Integer,
+                                          ?game_session_name: ::String,
+                                          ?player_latencies: Array[
+                                            {
+                                              player_id: ::String?,
+                                              region_identifier: ::String?,
+                                              latency_in_milliseconds: ::Float?
+                                            },
+                                          ],
+                                          ?desired_player_sessions: Array[
+                                            {
+                                              player_id: ::String?,
+                                              player_data: ::String?
+                                            },
+                                          ],
+                                          ?game_session_data: ::String
+                                        ) -> _StartGameSessionPlacementResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartGameSessionPlacementResponseSuccess
+
+      interface _StartMatchBackfillResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMatchBackfillOutput]
+        def matchmaking_ticket: () -> Types::MatchmakingTicket
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#start_match_backfill-instance_method
+      def start_match_backfill: (
+                                  ?ticket_id: ::String,
+                                  configuration_name: ::String,
+                                  ?game_session_arn: ::String,
+                                  players: Array[
+                                    {
+                                      player_id: ::String?,
+                                      player_attributes: Hash[::String, untyped]?,
+                                      team: ::String?,
+                                      latency_in_ms: Hash[::String, ::Integer]?
+                                    },
+                                  ]
+                                ) -> _StartMatchBackfillResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMatchBackfillResponseSuccess
+
+      interface _StartMatchmakingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMatchmakingOutput]
+        def matchmaking_ticket: () -> Types::MatchmakingTicket
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#start_matchmaking-instance_method
+      def start_matchmaking: (
+                               ?ticket_id: ::String,
+                               configuration_name: ::String,
+                               players: Array[
+                                 {
+                                   player_id: ::String?,
+                                   player_attributes: Hash[::String, untyped]?,
+                                   team: ::String?,
+                                   latency_in_ms: Hash[::String, ::Integer]?
+                                 },
+                               ]
+                             ) -> _StartMatchmakingResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMatchmakingResponseSuccess
+
+      interface _StopFleetActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopFleetActionsOutput]
+        def fleet_id: () -> ::String
+        def fleet_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#stop_fleet_actions-instance_method
+      def stop_fleet_actions: (
+                                fleet_id: ::String,
+                                actions: Array[("AUTO_SCALING")],
+                                ?location: ::String
+                              ) -> _StopFleetActionsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopFleetActionsResponseSuccess
+
+      interface _StopGameSessionPlacementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopGameSessionPlacementOutput]
+        def game_session_placement: () -> Types::GameSessionPlacement
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#stop_game_session_placement-instance_method
+      def stop_game_session_placement: (
+                                         placement_id: ::String
+                                       ) -> _StopGameSessionPlacementResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopGameSessionPlacementResponseSuccess
+
+      interface _StopMatchmakingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopMatchmakingOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#stop_matchmaking-instance_method
+      def stop_matchmaking: (
+                              ticket_id: ::String
+                            ) -> _StopMatchmakingResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopMatchmakingResponseSuccess
+
+      interface _SuspendGameServerGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SuspendGameServerGroupOutput]
+        def game_server_group: () -> Types::GameServerGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#suspend_game_server_group-instance_method
+      def suspend_game_server_group: (
+                                       game_server_group_name: ::String,
+                                       suspend_actions: Array[("REPLACE_INSTANCE_TYPES")]
+                                     ) -> _SuspendGameServerGroupResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SuspendGameServerGroupResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAliasOutput]
+        def alias: () -> Types::Alias
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#update_alias-instance_method
+      def update_alias: (
+                          alias_id: ::String,
+                          ?name: ::String,
+                          ?description: ::String,
+                          ?routing_strategy: {
+                            type: ("SIMPLE" | "TERMINAL")?,
+                            fleet_id: ::String?,
+                            message: ::String?
+                          }
+                        ) -> _UpdateAliasResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAliasResponseSuccess
+
+      interface _UpdateBuildResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBuildOutput]
+        def build: () -> Types::Build
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#update_build-instance_method
+      def update_build: (
+                          build_id: ::String,
+                          ?name: ::String,
+                          ?version: ::String
+                        ) -> _UpdateBuildResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBuildResponseSuccess
+
+      interface _UpdateFleetAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFleetAttributesOutput]
+        def fleet_id: () -> ::String
+        def fleet_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#update_fleet_attributes-instance_method
+      def update_fleet_attributes: (
+                                     fleet_id: ::String,
+                                     ?name: ::String,
+                                     ?description: ::String,
+                                     ?new_game_session_protection_policy: ("NoProtection" | "FullProtection"),
+                                     ?resource_creation_limit_policy: {
+                                       new_game_sessions_per_creator: ::Integer?,
+                                       policy_period_in_minutes: ::Integer?
+                                     },
+                                     ?metric_groups: Array[::String],
+                                     ?anywhere_configuration: {
+                                       cost: ::String
+                                     }
+                                   ) -> _UpdateFleetAttributesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFleetAttributesResponseSuccess
+
+      interface _UpdateFleetCapacityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFleetCapacityOutput]
+        def fleet_id: () -> ::String
+        def fleet_arn: () -> ::String
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#update_fleet_capacity-instance_method
+      def update_fleet_capacity: (
+                                   fleet_id: ::String,
+                                   ?desired_instances: ::Integer,
+                                   ?min_size: ::Integer,
+                                   ?max_size: ::Integer,
+                                   ?location: ::String
+                                 ) -> _UpdateFleetCapacityResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFleetCapacityResponseSuccess
+
+      interface _UpdateFleetPortSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFleetPortSettingsOutput]
+        def fleet_id: () -> ::String
+        def fleet_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#update_fleet_port_settings-instance_method
+      def update_fleet_port_settings: (
+                                        fleet_id: ::String,
+                                        ?inbound_permission_authorizations: Array[
+                                          {
+                                            from_port: ::Integer,
+                                            to_port: ::Integer,
+                                            ip_range: ::String,
+                                            protocol: ("TCP" | "UDP")
+                                          },
+                                        ],
+                                        ?inbound_permission_revocations: Array[
+                                          {
+                                            from_port: ::Integer,
+                                            to_port: ::Integer,
+                                            ip_range: ::String,
+                                            protocol: ("TCP" | "UDP")
+                                          },
+                                        ]
+                                      ) -> _UpdateFleetPortSettingsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFleetPortSettingsResponseSuccess
+
+      interface _UpdateGameServerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGameServerOutput]
+        def game_server: () -> Types::GameServer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#update_game_server-instance_method
+      def update_game_server: (
+                                game_server_group_name: ::String,
+                                game_server_id: ::String,
+                                ?game_server_data: ::String,
+                                ?utilization_status: ("AVAILABLE" | "UTILIZED"),
+                                ?health_check: ("HEALTHY")
+                              ) -> _UpdateGameServerResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGameServerResponseSuccess
+
+      interface _UpdateGameServerGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGameServerGroupOutput]
+        def game_server_group: () -> Types::GameServerGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#update_game_server_group-instance_method
+      def update_game_server_group: (
+                                      game_server_group_name: ::String,
+                                      ?role_arn: ::String,
+                                      ?instance_definitions: Array[
+                                        {
+                                          instance_type: ("c4.large" | "c4.xlarge" | "c4.2xlarge" | "c4.4xlarge" | "c4.8xlarge" | "c5.large" | "c5.xlarge" | "c5.2xlarge" | "c5.4xlarge" | "c5.9xlarge" | "c5.12xlarge" | "c5.18xlarge" | "c5.24xlarge" | "c5a.large" | "c5a.xlarge" | "c5a.2xlarge" | "c5a.4xlarge" | "c5a.8xlarge" | "c5a.12xlarge" | "c5a.16xlarge" | "c5a.24xlarge" | "c6g.medium" | "c6g.large" | "c6g.xlarge" | "c6g.2xlarge" | "c6g.4xlarge" | "c6g.8xlarge" | "c6g.12xlarge" | "c6g.16xlarge" | "r4.large" | "r4.xlarge" | "r4.2xlarge" | "r4.4xlarge" | "r4.8xlarge" | "r4.16xlarge" | "r5.large" | "r5.xlarge" | "r5.2xlarge" | "r5.4xlarge" | "r5.8xlarge" | "r5.12xlarge" | "r5.16xlarge" | "r5.24xlarge" | "r5a.large" | "r5a.xlarge" | "r5a.2xlarge" | "r5a.4xlarge" | "r5a.8xlarge" | "r5a.12xlarge" | "r5a.16xlarge" | "r5a.24xlarge" | "r6g.medium" | "r6g.large" | "r6g.xlarge" | "r6g.2xlarge" | "r6g.4xlarge" | "r6g.8xlarge" | "r6g.12xlarge" | "r6g.16xlarge" | "m4.large" | "m4.xlarge" | "m4.2xlarge" | "m4.4xlarge" | "m4.10xlarge" | "m5.large" | "m5.xlarge" | "m5.2xlarge" | "m5.4xlarge" | "m5.8xlarge" | "m5.12xlarge" | "m5.16xlarge" | "m5.24xlarge" | "m5a.large" | "m5a.xlarge" | "m5a.2xlarge" | "m5a.4xlarge" | "m5a.8xlarge" | "m5a.12xlarge" | "m5a.16xlarge" | "m5a.24xlarge" | "m6g.medium" | "m6g.large" | "m6g.xlarge" | "m6g.2xlarge" | "m6g.4xlarge" | "m6g.8xlarge" | "m6g.12xlarge" | "m6g.16xlarge"),
+                                          weighted_capacity: ::String?
+                                        },
+                                      ],
+                                      ?game_server_protection_policy: ("NO_PROTECTION" | "FULL_PROTECTION"),
+                                      ?balancing_strategy: ("SPOT_ONLY" | "SPOT_PREFERRED" | "ON_DEMAND_ONLY")
+                                    ) -> _UpdateGameServerGroupResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGameServerGroupResponseSuccess
+
+      interface _UpdateGameSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGameSessionOutput]
+        def game_session: () -> Types::GameSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#update_game_session-instance_method
+      def update_game_session: (
+                                 game_session_id: ::String,
+                                 ?maximum_player_session_count: ::Integer,
+                                 ?name: ::String,
+                                 ?player_session_creation_policy: ("ACCEPT_ALL" | "DENY_ALL"),
+                                 ?protection_policy: ("NoProtection" | "FullProtection"),
+                                 ?game_properties: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ]
+                               ) -> _UpdateGameSessionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGameSessionResponseSuccess
+
+      interface _UpdateGameSessionQueueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGameSessionQueueOutput]
+        def game_session_queue: () -> Types::GameSessionQueue
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#update_game_session_queue-instance_method
+      def update_game_session_queue: (
+                                       name: ::String,
+                                       ?timeout_in_seconds: ::Integer,
+                                       ?player_latency_policies: Array[
+                                         {
+                                           maximum_individual_player_latency_milliseconds: ::Integer?,
+                                           policy_duration_seconds: ::Integer?
+                                         },
+                                       ],
+                                       ?destinations: Array[
+                                         {
+                                           destination_arn: ::String?
+                                         },
+                                       ],
+                                       ?filter_configuration: {
+                                         allowed_locations: Array[::String]?
+                                       },
+                                       ?priority_configuration: {
+                                         priority_order: Array[("LATENCY" | "COST" | "DESTINATION" | "LOCATION")]?,
+                                         location_order: Array[::String]?
+                                       },
+                                       ?custom_event_data: ::String,
+                                       ?notification_target: ::String
+                                     ) -> _UpdateGameSessionQueueResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGameSessionQueueResponseSuccess
+
+      interface _UpdateMatchmakingConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMatchmakingConfigurationOutput]
+        def configuration: () -> Types::MatchmakingConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#update_matchmaking_configuration-instance_method
+      def update_matchmaking_configuration: (
+                                              name: ::String,
+                                              ?description: ::String,
+                                              ?game_session_queue_arns: Array[::String],
+                                              ?request_timeout_seconds: ::Integer,
+                                              ?acceptance_timeout_seconds: ::Integer,
+                                              ?acceptance_required: bool,
+                                              ?rule_set_name: ::String,
+                                              ?notification_target: ::String,
+                                              ?additional_player_count: ::Integer,
+                                              ?custom_event_data: ::String,
+                                              ?game_properties: Array[
+                                                {
+                                                  key: ::String,
+                                                  value: ::String
+                                                },
+                                              ],
+                                              ?game_session_data: ::String,
+                                              ?backfill_mode: ("AUTOMATIC" | "MANUAL"),
+                                              ?flex_match_mode: ("STANDALONE" | "WITH_QUEUE")
+                                            ) -> _UpdateMatchmakingConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMatchmakingConfigurationResponseSuccess
+
+      interface _UpdateRuntimeConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRuntimeConfigurationOutput]
+        def runtime_configuration: () -> Types::RuntimeConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#update_runtime_configuration-instance_method
+      def update_runtime_configuration: (
+                                          fleet_id: ::String,
+                                          runtime_configuration: {
+                                            server_processes: Array[
+                                              {
+                                                launch_path: ::String,
+                                                parameters: ::String?,
+                                                concurrent_executions: ::Integer
+                                              },
+                                            ]?,
+                                            max_concurrent_game_session_activations: ::Integer?,
+                                            game_session_activation_timeout_seconds: ::Integer?
+                                          }
+                                        ) -> _UpdateRuntimeConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuntimeConfigurationResponseSuccess
+
+      interface _UpdateScriptResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateScriptOutput]
+        def script: () -> Types::Script
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#update_script-instance_method
+      def update_script: (
+                           script_id: ::String,
+                           ?name: ::String,
+                           ?version: ::String,
+                           ?storage_location: {
+                             bucket: ::String?,
+                             key: ::String?,
+                             role_arn: ::String?,
+                             object_version: ::String?
+                           },
+                           ?zip_file: ::String
+                         ) -> _UpdateScriptResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScriptResponseSuccess
+
+      interface _ValidateMatchmakingRuleSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidateMatchmakingRuleSetOutput]
+        def valid: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#validate_matchmaking_rule_set-instance_method
+      def validate_matchmaking_rule_set: (
+                                           rule_set_body: ::String
+                                         ) -> _ValidateMatchmakingRuleSetResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateMatchmakingRuleSetResponseSuccess
+    end
+  end
+end
+

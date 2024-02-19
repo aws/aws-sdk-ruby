@@ -1,0 +1,305 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ServiceQuotas
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateServiceQuotaTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateServiceQuotaTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#associate_service_quota_template-instance_method
+      def associate_service_quota_template: (
+                                            ) -> _AssociateServiceQuotaTemplateResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateServiceQuotaTemplateResponseSuccess
+
+      interface _DeleteServiceQuotaIncreaseRequestFromTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceQuotaIncreaseRequestFromTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#delete_service_quota_increase_request_from_template-instance_method
+      def delete_service_quota_increase_request_from_template: (
+                                                                 service_code: ::String,
+                                                                 quota_code: ::String,
+                                                                 aws_region: ::String
+                                                               ) -> _DeleteServiceQuotaIncreaseRequestFromTemplateResponseSuccess
+                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceQuotaIncreaseRequestFromTemplateResponseSuccess
+
+      interface _DisassociateServiceQuotaTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateServiceQuotaTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#disassociate_service_quota_template-instance_method
+      def disassociate_service_quota_template: (
+                                               ) -> _DisassociateServiceQuotaTemplateResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateServiceQuotaTemplateResponseSuccess
+
+      interface _GetAWSDefaultServiceQuotaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAWSDefaultServiceQuotaResponse]
+        def quota: () -> Types::ServiceQuota
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#get_aws_default_service_quota-instance_method
+      def get_aws_default_service_quota: (
+                                           service_code: ::String,
+                                           quota_code: ::String
+                                         ) -> _GetAWSDefaultServiceQuotaResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAWSDefaultServiceQuotaResponseSuccess
+
+      interface _GetAssociationForServiceQuotaTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssociationForServiceQuotaTemplateResponse]
+        def service_quota_template_association_status: () -> ("ASSOCIATED" | "DISASSOCIATED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#get_association_for_service_quota_template-instance_method
+      def get_association_for_service_quota_template: (
+                                                      ) -> _GetAssociationForServiceQuotaTemplateResponseSuccess
+                                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssociationForServiceQuotaTemplateResponseSuccess
+
+      interface _GetRequestedServiceQuotaChangeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRequestedServiceQuotaChangeResponse]
+        def requested_quota: () -> Types::RequestedServiceQuotaChange
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#get_requested_service_quota_change-instance_method
+      def get_requested_service_quota_change: (
+                                                request_id: ::String
+                                              ) -> _GetRequestedServiceQuotaChangeResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRequestedServiceQuotaChangeResponseSuccess
+
+      interface _GetServiceQuotaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceQuotaResponse]
+        def quota: () -> Types::ServiceQuota
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#get_service_quota-instance_method
+      def get_service_quota: (
+                               service_code: ::String,
+                               quota_code: ::String,
+                               ?context_id: ::String
+                             ) -> _GetServiceQuotaResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceQuotaResponseSuccess
+
+      interface _GetServiceQuotaIncreaseRequestFromTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceQuotaIncreaseRequestFromTemplateResponse]
+        def service_quota_increase_request_in_template: () -> Types::ServiceQuotaIncreaseRequestInTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#get_service_quota_increase_request_from_template-instance_method
+      def get_service_quota_increase_request_from_template: (
+                                                              service_code: ::String,
+                                                              quota_code: ::String,
+                                                              aws_region: ::String
+                                                            ) -> _GetServiceQuotaIncreaseRequestFromTemplateResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceQuotaIncreaseRequestFromTemplateResponseSuccess
+
+      interface _ListAWSDefaultServiceQuotasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAWSDefaultServiceQuotasResponse]
+        def next_token: () -> ::String
+        def quotas: () -> ::Array[Types::ServiceQuota]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#list_aws_default_service_quotas-instance_method
+      def list_aws_default_service_quotas: (
+                                             service_code: ::String,
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
+                                           ) -> _ListAWSDefaultServiceQuotasResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAWSDefaultServiceQuotasResponseSuccess
+
+      interface _ListRequestedServiceQuotaChangeHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRequestedServiceQuotaChangeHistoryResponse]
+        def next_token: () -> ::String
+        def requested_quotas: () -> ::Array[Types::RequestedServiceQuotaChange]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#list_requested_service_quota_change_history-instance_method
+      def list_requested_service_quota_change_history: (
+                                                         ?service_code: ::String,
+                                                         ?status: ("PENDING" | "CASE_OPENED" | "APPROVED" | "DENIED" | "CASE_CLOSED" | "NOT_APPROVED" | "INVALID_REQUEST"),
+                                                         ?next_token: ::String,
+                                                         ?max_results: ::Integer,
+                                                         ?quota_requested_at_level: ("ACCOUNT" | "RESOURCE" | "ALL")
+                                                       ) -> _ListRequestedServiceQuotaChangeHistoryResponseSuccess
+                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRequestedServiceQuotaChangeHistoryResponseSuccess
+
+      interface _ListRequestedServiceQuotaChangeHistoryByQuotaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRequestedServiceQuotaChangeHistoryByQuotaResponse]
+        def next_token: () -> ::String
+        def requested_quotas: () -> ::Array[Types::RequestedServiceQuotaChange]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#list_requested_service_quota_change_history_by_quota-instance_method
+      def list_requested_service_quota_change_history_by_quota: (
+                                                                  service_code: ::String,
+                                                                  quota_code: ::String,
+                                                                  ?status: ("PENDING" | "CASE_OPENED" | "APPROVED" | "DENIED" | "CASE_CLOSED" | "NOT_APPROVED" | "INVALID_REQUEST"),
+                                                                  ?next_token: ::String,
+                                                                  ?max_results: ::Integer,
+                                                                  ?quota_requested_at_level: ("ACCOUNT" | "RESOURCE" | "ALL")
+                                                                ) -> _ListRequestedServiceQuotaChangeHistoryByQuotaResponseSuccess
+                                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRequestedServiceQuotaChangeHistoryByQuotaResponseSuccess
+
+      interface _ListServiceQuotaIncreaseRequestsInTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceQuotaIncreaseRequestsInTemplateResponse]
+        def service_quota_increase_request_in_template_list: () -> ::Array[Types::ServiceQuotaIncreaseRequestInTemplate]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#list_service_quota_increase_requests_in_template-instance_method
+      def list_service_quota_increase_requests_in_template: (
+                                                              ?service_code: ::String,
+                                                              ?aws_region: ::String,
+                                                              ?next_token: ::String,
+                                                              ?max_results: ::Integer
+                                                            ) -> _ListServiceQuotaIncreaseRequestsInTemplateResponseSuccess
+                                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceQuotaIncreaseRequestsInTemplateResponseSuccess
+
+      interface _ListServiceQuotasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceQuotasResponse]
+        def next_token: () -> ::String
+        def quotas: () -> ::Array[Types::ServiceQuota]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#list_service_quotas-instance_method
+      def list_service_quotas: (
+                                 service_code: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer,
+                                 ?quota_code: ::String,
+                                 ?quota_applied_at_level: ("ACCOUNT" | "RESOURCE" | "ALL")
+                               ) -> _ListServiceQuotasResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceQuotasResponseSuccess
+
+      interface _ListServicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServicesResponse]
+        def next_token: () -> ::String
+        def services: () -> ::Array[Types::ServiceInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#list_services-instance_method
+      def list_services: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListServicesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServicesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutServiceQuotaIncreaseRequestIntoTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutServiceQuotaIncreaseRequestIntoTemplateResponse]
+        def service_quota_increase_request_in_template: () -> Types::ServiceQuotaIncreaseRequestInTemplate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#put_service_quota_increase_request_into_template-instance_method
+      def put_service_quota_increase_request_into_template: (
+                                                              quota_code: ::String,
+                                                              service_code: ::String,
+                                                              aws_region: ::String,
+                                                              desired_value: ::Float
+                                                            ) -> _PutServiceQuotaIncreaseRequestIntoTemplateResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutServiceQuotaIncreaseRequestIntoTemplateResponseSuccess
+
+      interface _RequestServiceQuotaIncreaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RequestServiceQuotaIncreaseResponse]
+        def requested_quota: () -> Types::RequestedServiceQuotaChange
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#request_service_quota_increase-instance_method
+      def request_service_quota_increase: (
+                                            service_code: ::String,
+                                            quota_code: ::String,
+                                            desired_value: ::Float,
+                                            ?context_id: ::String
+                                          ) -> _RequestServiceQuotaIncreaseResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RequestServiceQuotaIncreaseResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceQuotas/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+    end
+  end
+end
+

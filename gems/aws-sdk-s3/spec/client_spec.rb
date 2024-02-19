@@ -332,7 +332,7 @@ BODY
       end
 
       describe '#create_bucket' do
-        it 'omits location constraint for the classic region' do
+        it 'omits location constraint for the classic region', rbs_test: :skip do
           s3 = Client.new(region: 'us-east-1')
           s3.handle(step: :send) do |context|
             context.http_response.status_code = 200
@@ -342,7 +342,7 @@ BODY
           expect(resp.context.http_request.body_contents).to eq('')
         end
 
-        it 'populates the bucket location constraint for non-classic regions' do
+        it 'populates the bucket location constraint for non-classic regions', rbs_test: :skip do
           s3 = Client.new(region: 'us-west-2')
           s3.handle(step: :send) do |context|
             context.http_response.status_code = 200
@@ -357,7 +357,7 @@ BODY
             XML
         end
 
-        it 'does not overide bucket location constraint params' do
+        it 'does not overide bucket location constraint params', rbs_test: :skip do
           s3 = Client.new(region: 'eu-west-1')
           s3.handle(step: :send) do |context|
             context.http_response.status_code = 200
@@ -373,6 +373,26 @@ BODY
             .to eq(<<-XML.gsub(/(^\s+|\n)/, ''))
 <CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
   <LocationConstraint>EU</LocationConstraint>
+</CreateBucketConfiguration>
+            XML
+        end
+
+        it 'does not apply location constraint if location is set', rbs_test: :skip do
+          s3 = Client.new(region: 'eu-west-1')
+          s3.handle(step: :send) do |context|
+            context.http_response.status_code = 200
+            Seahorse::Client::Response.new(context: context)
+          end
+          resp = s3.create_bucket(
+            bucket: 'aws-sdk',
+            create_bucket_configuration: {
+              location: { type: 'AvailabilityZone', name: 'us-west-1a' }
+            }
+          )
+          expect(resp.context.http_request.body_contents.strip)
+            .to eq(<<-XML.gsub(/(^\s+|\n)/, ''))
+<CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+  <Location><Type>AvailabilityZone</Type><Name>us-west-1a</Name></Location>
 </CreateBucketConfiguration>
             XML
         end
@@ -718,7 +738,7 @@ BODY
       end
 
       describe '#wait_until' do
-        it 'returns true when the :bucket_exists waiter receives a 301' do
+        it 'returns true when the :bucket_exists waiter receives a 301', rbs_test: :skip do
           stub_request(:head, 'https://bucket.s3.amazonaws.com')
             .to_return(status: 301)
           expect(
@@ -737,7 +757,7 @@ BODY
         }
       }.each do |operation_name, params|
         describe "#{operation_name} response handling" do
-          it 'handles 200 http response errors' do
+          it 'handles 200 http response errors', rbs_test: :skip do
             client.handlers.remove(
               Seahorse::Client::Plugins::RaiseResponseErrors::Handler
             )
@@ -764,7 +784,7 @@ BODY
             expect(resp.data).to be(nil)
           end
 
-          it 'handles 200 http response with incomplete body as error' do
+          it 'handles 200 http response with incomplete body as error', rbs_test: :skip do
             client.handlers.remove(
               Seahorse::Client::Plugins::RaiseResponseErrors::Handler
             )

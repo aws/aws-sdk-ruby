@@ -1,0 +1,2056 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Imagebuilder
+  module Types
+
+    class AccountAggregation
+      attr_accessor account_id: ::String
+      attr_accessor severity_counts: Types::SeverityCounts
+      SENSITIVE: []
+    end
+
+    class AdditionalInstanceConfiguration
+      attr_accessor systems_manager_agent: Types::SystemsManagerAgent
+      attr_accessor user_data_override: ::String
+      SENSITIVE: []
+    end
+
+    class Ami
+      attr_accessor region: ::String
+      attr_accessor image: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor state: Types::ImageState
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class AmiDistributionConfiguration
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor target_account_ids: ::Array[::String]
+      attr_accessor ami_tags: ::Hash[::String, ::String]
+      attr_accessor kms_key_id: ::String
+      attr_accessor launch_permission: Types::LaunchPermissionConfiguration
+      SENSITIVE: []
+    end
+
+    class CallRateLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CancelImageCreationRequest
+      attr_accessor image_build_version_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CancelImageCreationResponse
+      attr_accessor request_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor image_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CancelLifecycleExecutionRequest
+      attr_accessor lifecycle_execution_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CancelLifecycleExecutionResponse
+      attr_accessor lifecycle_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class ClientException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Component
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor description: ::String
+      attr_accessor change_description: ::String
+      attr_accessor type: ("BUILD" | "TEST")
+      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor supported_os_versions: ::Array[::String]
+      attr_accessor state: Types::ComponentState
+      attr_accessor parameters: ::Array[Types::ComponentParameterDetail]
+      attr_accessor owner: ::String
+      attr_accessor data: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor encrypted: bool
+      attr_accessor date_created: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor publisher: ::String
+      attr_accessor obfuscate: bool
+      SENSITIVE: []
+    end
+
+    class ComponentConfiguration
+      attr_accessor component_arn: ::String
+      attr_accessor parameters: ::Array[Types::ComponentParameter]
+      SENSITIVE: []
+    end
+
+    class ComponentParameter
+      attr_accessor name: ::String
+      attr_accessor value: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ComponentParameterDetail
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor default_value: ::Array[::String]
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ComponentState
+      attr_accessor status: ("DEPRECATED")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class ComponentSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor supported_os_versions: ::Array[::String]
+      attr_accessor state: Types::ComponentState
+      attr_accessor type: ("BUILD" | "TEST")
+      attr_accessor owner: ::String
+      attr_accessor description: ::String
+      attr_accessor change_description: ::String
+      attr_accessor date_created: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor publisher: ::String
+      attr_accessor obfuscate: bool
+      SENSITIVE: []
+    end
+
+    class ComponentVersion
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor description: ::String
+      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor supported_os_versions: ::Array[::String]
+      attr_accessor type: ("BUILD" | "TEST")
+      attr_accessor owner: ::String
+      attr_accessor date_created: ::String
+      SENSITIVE: []
+    end
+
+    class Container
+      attr_accessor region: ::String
+      attr_accessor image_uris: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ContainerDistributionConfiguration
+      attr_accessor description: ::String
+      attr_accessor container_tags: ::Array[::String]
+      attr_accessor target_repository: Types::TargetContainerRepository
+      SENSITIVE: []
+    end
+
+    class ContainerRecipe
+      attr_accessor arn: ::String
+      attr_accessor container_type: ("DOCKER")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor owner: ::String
+      attr_accessor version: ::String
+      attr_accessor components: ::Array[Types::ComponentConfiguration]
+      attr_accessor instance_configuration: Types::InstanceConfiguration
+      attr_accessor dockerfile_template_data: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor encrypted: bool
+      attr_accessor parent_image: ::String
+      attr_accessor date_created: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor working_directory: ::String
+      attr_accessor target_repository: Types::TargetContainerRepository
+      SENSITIVE: []
+    end
+
+    class ContainerRecipeSummary
+      attr_accessor arn: ::String
+      attr_accessor container_type: ("DOCKER")
+      attr_accessor name: ::String
+      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor owner: ::String
+      attr_accessor parent_image: ::String
+      attr_accessor date_created: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateComponentRequest
+      attr_accessor name: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor description: ::String
+      attr_accessor change_description: ::String
+      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor supported_os_versions: ::Array[::String]
+      attr_accessor data: ::String
+      attr_accessor uri: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateComponentResponse
+      attr_accessor request_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor component_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContainerRecipeRequest
+      attr_accessor container_type: ("DOCKER")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor components: ::Array[Types::ComponentConfiguration]
+      attr_accessor instance_configuration: Types::InstanceConfiguration
+      attr_accessor dockerfile_template_data: ::String
+      attr_accessor dockerfile_template_uri: ::String
+      attr_accessor platform_override: ("Windows" | "Linux")
+      attr_accessor image_os_version_override: ::String
+      attr_accessor parent_image: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor working_directory: ::String
+      attr_accessor target_repository: Types::TargetContainerRepository
+      attr_accessor kms_key_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContainerRecipeResponse
+      attr_accessor request_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor container_recipe_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDistributionConfigurationRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor distributions: ::Array[Types::Distribution]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDistributionConfigurationResponse
+      attr_accessor request_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor distribution_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateImagePipelineRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor image_recipe_arn: ::String
+      attr_accessor container_recipe_arn: ::String
+      attr_accessor infrastructure_configuration_arn: ::String
+      attr_accessor distribution_configuration_arn: ::String
+      attr_accessor image_tests_configuration: Types::ImageTestsConfiguration
+      attr_accessor enhanced_image_metadata_enabled: bool
+      attr_accessor schedule: Types::Schedule
+      attr_accessor status: ("DISABLED" | "ENABLED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
+      attr_accessor workflows: ::Array[Types::WorkflowConfiguration]
+      attr_accessor execution_role: ::String
+      SENSITIVE: []
+    end
+
+    class CreateImagePipelineResponse
+      attr_accessor request_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor image_pipeline_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateImageRecipeRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor components: ::Array[Types::ComponentConfiguration]
+      attr_accessor parent_image: ::String
+      attr_accessor block_device_mappings: ::Array[Types::InstanceBlockDeviceMapping]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor working_directory: ::String
+      attr_accessor additional_instance_configuration: Types::AdditionalInstanceConfiguration
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateImageRecipeResponse
+      attr_accessor request_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor image_recipe_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateImageRequest
+      attr_accessor image_recipe_arn: ::String
+      attr_accessor container_recipe_arn: ::String
+      attr_accessor distribution_configuration_arn: ::String
+      attr_accessor infrastructure_configuration_arn: ::String
+      attr_accessor image_tests_configuration: Types::ImageTestsConfiguration
+      attr_accessor enhanced_image_metadata_enabled: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
+      attr_accessor workflows: ::Array[Types::WorkflowConfiguration]
+      attr_accessor execution_role: ::String
+      SENSITIVE: []
+    end
+
+    class CreateImageResponse
+      attr_accessor request_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor image_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInfrastructureConfigurationRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor instance_types: ::Array[::String]
+      attr_accessor instance_profile_name: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_id: ::String
+      attr_accessor logging: Types::Logging
+      attr_accessor key_pair: ::String
+      attr_accessor terminate_instance_on_failure: bool
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor resource_tags: ::Hash[::String, ::String]
+      attr_accessor instance_metadata_options: Types::InstanceMetadataOptions
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInfrastructureConfigurationResponse
+      attr_accessor request_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor infrastructure_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLifecyclePolicyRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("DISABLED" | "ENABLED")
+      attr_accessor execution_role: ::String
+      attr_accessor resource_type: ("AMI_IMAGE" | "CONTAINER_IMAGE")
+      attr_accessor policy_details: ::Array[Types::LifecyclePolicyDetail]
+      attr_accessor resource_selection: Types::LifecyclePolicyResourceSelection
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLifecyclePolicyResponse
+      attr_accessor client_token: ::String
+      attr_accessor lifecycle_policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWorkflowRequest
+      attr_accessor name: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor description: ::String
+      attr_accessor change_description: ::String
+      attr_accessor data: ::String
+      attr_accessor uri: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      attr_accessor type: ("BUILD" | "TEST" | "DISTRIBUTION")
+      SENSITIVE: []
+    end
+
+    class CreateWorkflowResponse
+      attr_accessor client_token: ::String
+      attr_accessor workflow_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CvssScore
+      attr_accessor base_score: ::Float
+      attr_accessor scoring_vector: ::String
+      attr_accessor version: ::String
+      attr_accessor source: ::String
+      SENSITIVE: []
+    end
+
+    class CvssScoreAdjustment
+      attr_accessor metric: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class CvssScoreDetails
+      attr_accessor score_source: ::String
+      attr_accessor cvss_source: ::String
+      attr_accessor version: ::String
+      attr_accessor score: ::Float
+      attr_accessor scoring_vector: ::String
+      attr_accessor adjustments: ::Array[Types::CvssScoreAdjustment]
+      SENSITIVE: []
+    end
+
+    class DeleteComponentRequest
+      attr_accessor component_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteComponentResponse
+      attr_accessor request_id: ::String
+      attr_accessor component_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContainerRecipeRequest
+      attr_accessor container_recipe_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContainerRecipeResponse
+      attr_accessor request_id: ::String
+      attr_accessor container_recipe_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDistributionConfigurationRequest
+      attr_accessor distribution_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDistributionConfigurationResponse
+      attr_accessor request_id: ::String
+      attr_accessor distribution_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteImagePipelineRequest
+      attr_accessor image_pipeline_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteImagePipelineResponse
+      attr_accessor request_id: ::String
+      attr_accessor image_pipeline_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteImageRecipeRequest
+      attr_accessor image_recipe_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteImageRecipeResponse
+      attr_accessor request_id: ::String
+      attr_accessor image_recipe_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteImageRequest
+      attr_accessor image_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteImageResponse
+      attr_accessor request_id: ::String
+      attr_accessor image_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInfrastructureConfigurationRequest
+      attr_accessor infrastructure_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInfrastructureConfigurationResponse
+      attr_accessor request_id: ::String
+      attr_accessor infrastructure_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLifecyclePolicyRequest
+      attr_accessor lifecycle_policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLifecyclePolicyResponse
+      attr_accessor lifecycle_policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowRequest
+      attr_accessor workflow_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowResponse
+      attr_accessor workflow_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Distribution
+      attr_accessor region: ::String
+      attr_accessor ami_distribution_configuration: Types::AmiDistributionConfiguration
+      attr_accessor container_distribution_configuration: Types::ContainerDistributionConfiguration
+      attr_accessor license_configuration_arns: ::Array[::String]
+      attr_accessor launch_template_configurations: ::Array[Types::LaunchTemplateConfiguration]
+      attr_accessor s3_export_configuration: Types::S3ExportConfiguration
+      attr_accessor fast_launch_configurations: ::Array[Types::FastLaunchConfiguration]
+      SENSITIVE: []
+    end
+
+    class DistributionConfiguration
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor distributions: ::Array[Types::Distribution]
+      attr_accessor timeout_minutes: ::Integer
+      attr_accessor date_created: ::String
+      attr_accessor date_updated: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DistributionConfigurationSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor date_created: ::String
+      attr_accessor date_updated: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EbsInstanceBlockDeviceSpecification
+      attr_accessor encrypted: bool
+      attr_accessor delete_on_termination: bool
+      attr_accessor iops: ::Integer
+      attr_accessor kms_key_id: ::String
+      attr_accessor snapshot_id: ::String
+      attr_accessor volume_size: ::Integer
+      attr_accessor volume_type: ("standard" | "io1" | "io2" | "gp2" | "gp3" | "sc1" | "st1")
+      attr_accessor throughput: ::Integer
+      SENSITIVE: []
+    end
+
+    class EcrConfiguration
+      attr_accessor repository_name: ::String
+      attr_accessor container_tags: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FastLaunchConfiguration
+      attr_accessor enabled: bool
+      attr_accessor snapshot_configuration: Types::FastLaunchSnapshotConfiguration
+      attr_accessor max_parallel_launches: ::Integer
+      attr_accessor launch_template: Types::FastLaunchLaunchTemplateSpecification
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class FastLaunchLaunchTemplateSpecification
+      attr_accessor launch_template_id: ::String
+      attr_accessor launch_template_name: ::String
+      attr_accessor launch_template_version: ::String
+      SENSITIVE: []
+    end
+
+    class FastLaunchSnapshotConfiguration
+      attr_accessor target_resource_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetComponentPolicyRequest
+      attr_accessor component_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetComponentPolicyResponse
+      attr_accessor request_id: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetComponentRequest
+      attr_accessor component_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetComponentResponse
+      attr_accessor request_id: ::String
+      attr_accessor component: Types::Component
+      SENSITIVE: []
+    end
+
+    class GetContainerRecipePolicyRequest
+      attr_accessor container_recipe_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetContainerRecipePolicyResponse
+      attr_accessor request_id: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetContainerRecipeRequest
+      attr_accessor container_recipe_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetContainerRecipeResponse
+      attr_accessor request_id: ::String
+      attr_accessor container_recipe: Types::ContainerRecipe
+      SENSITIVE: []
+    end
+
+    class GetDistributionConfigurationRequest
+      attr_accessor distribution_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDistributionConfigurationResponse
+      attr_accessor request_id: ::String
+      attr_accessor distribution_configuration: Types::DistributionConfiguration
+      SENSITIVE: []
+    end
+
+    class GetImagePipelineRequest
+      attr_accessor image_pipeline_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetImagePipelineResponse
+      attr_accessor request_id: ::String
+      attr_accessor image_pipeline: Types::ImagePipeline
+      SENSITIVE: []
+    end
+
+    class GetImagePolicyRequest
+      attr_accessor image_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetImagePolicyResponse
+      attr_accessor request_id: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetImageRecipePolicyRequest
+      attr_accessor image_recipe_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetImageRecipePolicyResponse
+      attr_accessor request_id: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetImageRecipeRequest
+      attr_accessor image_recipe_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetImageRecipeResponse
+      attr_accessor request_id: ::String
+      attr_accessor image_recipe: Types::ImageRecipe
+      SENSITIVE: []
+    end
+
+    class GetImageRequest
+      attr_accessor image_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetImageResponse
+      attr_accessor request_id: ::String
+      attr_accessor image: Types::Image
+      SENSITIVE: []
+    end
+
+    class GetInfrastructureConfigurationRequest
+      attr_accessor infrastructure_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetInfrastructureConfigurationResponse
+      attr_accessor request_id: ::String
+      attr_accessor infrastructure_configuration: Types::InfrastructureConfiguration
+      SENSITIVE: []
+    end
+
+    class GetLifecycleExecutionRequest
+      attr_accessor lifecycle_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLifecycleExecutionResponse
+      attr_accessor lifecycle_execution: Types::LifecycleExecution
+      SENSITIVE: []
+    end
+
+    class GetLifecyclePolicyRequest
+      attr_accessor lifecycle_policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetLifecyclePolicyResponse
+      attr_accessor lifecycle_policy: Types::LifecyclePolicy
+      SENSITIVE: []
+    end
+
+    class GetWorkflowExecutionRequest
+      attr_accessor workflow_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowExecutionResponse
+      attr_accessor request_id: ::String
+      attr_accessor workflow_build_version_arn: ::String
+      attr_accessor workflow_execution_id: ::String
+      attr_accessor image_build_version_arn: ::String
+      attr_accessor type: ("BUILD" | "TEST" | "DISTRIBUTION")
+      attr_accessor status: ("PENDING" | "SKIPPED" | "RUNNING" | "COMPLETED" | "FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETED" | "CANCELLED")
+      attr_accessor message: ::String
+      attr_accessor total_step_count: ::Integer
+      attr_accessor total_steps_succeeded: ::Integer
+      attr_accessor total_steps_failed: ::Integer
+      attr_accessor total_steps_skipped: ::Integer
+      attr_accessor start_time: ::String
+      attr_accessor end_time: ::String
+      attr_accessor parallel_group: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowRequest
+      attr_accessor workflow_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowResponse
+      attr_accessor workflow: Types::Workflow
+      SENSITIVE: []
+    end
+
+    class GetWorkflowStepExecutionRequest
+      attr_accessor step_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorkflowStepExecutionResponse
+      attr_accessor request_id: ::String
+      attr_accessor step_execution_id: ::String
+      attr_accessor workflow_build_version_arn: ::String
+      attr_accessor workflow_execution_id: ::String
+      attr_accessor image_build_version_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor action: ::String
+      attr_accessor status: ("PENDING" | "SKIPPED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLED")
+      attr_accessor rollback_status: ("RUNNING" | "COMPLETED" | "SKIPPED" | "FAILED")
+      attr_accessor message: ::String
+      attr_accessor inputs: ::String
+      attr_accessor outputs: ::String
+      attr_accessor start_time: ::String
+      attr_accessor end_time: ::String
+      attr_accessor on_failure: ::String
+      attr_accessor timeout_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class IdempotentParameterMismatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Image
+      attr_accessor arn: ::String
+      attr_accessor type: ("AMI" | "DOCKER")
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor enhanced_image_metadata_enabled: bool
+      attr_accessor os_version: ::String
+      attr_accessor state: Types::ImageState
+      attr_accessor image_recipe: Types::ImageRecipe
+      attr_accessor container_recipe: Types::ContainerRecipe
+      attr_accessor source_pipeline_name: ::String
+      attr_accessor source_pipeline_arn: ::String
+      attr_accessor infrastructure_configuration: Types::InfrastructureConfiguration
+      attr_accessor distribution_configuration: Types::DistributionConfiguration
+      attr_accessor image_tests_configuration: Types::ImageTestsConfiguration
+      attr_accessor date_created: ::String
+      attr_accessor output_resources: Types::OutputResources
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor build_type: ("USER_INITIATED" | "SCHEDULED" | "IMPORT")
+      attr_accessor image_source: ("AMAZON_MANAGED" | "AWS_MARKETPLACE" | "IMPORTED" | "CUSTOM")
+      attr_accessor scan_state: Types::ImageScanState
+      attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
+      attr_accessor deprecation_time: ::Time
+      attr_accessor lifecycle_execution_id: ::String
+      attr_accessor execution_role: ::String
+      attr_accessor workflows: ::Array[Types::WorkflowConfiguration]
+      SENSITIVE: []
+    end
+
+    class ImageAggregation
+      attr_accessor image_build_version_arn: ::String
+      attr_accessor severity_counts: Types::SeverityCounts
+      SENSITIVE: []
+    end
+
+    class ImagePackage
+      attr_accessor package_name: ::String
+      attr_accessor package_version: ::String
+      SENSITIVE: []
+    end
+
+    class ImagePipeline
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor enhanced_image_metadata_enabled: bool
+      attr_accessor image_recipe_arn: ::String
+      attr_accessor container_recipe_arn: ::String
+      attr_accessor infrastructure_configuration_arn: ::String
+      attr_accessor distribution_configuration_arn: ::String
+      attr_accessor image_tests_configuration: Types::ImageTestsConfiguration
+      attr_accessor schedule: Types::Schedule
+      attr_accessor status: ("DISABLED" | "ENABLED")
+      attr_accessor date_created: ::String
+      attr_accessor date_updated: ::String
+      attr_accessor date_last_run: ::String
+      attr_accessor date_next_run: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
+      attr_accessor execution_role: ::String
+      attr_accessor workflows: ::Array[Types::WorkflowConfiguration]
+      SENSITIVE: []
+    end
+
+    class ImagePipelineAggregation
+      attr_accessor image_pipeline_arn: ::String
+      attr_accessor severity_counts: Types::SeverityCounts
+      SENSITIVE: []
+    end
+
+    class ImageRecipe
+      attr_accessor arn: ::String
+      attr_accessor type: ("AMI" | "DOCKER")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor owner: ::String
+      attr_accessor version: ::String
+      attr_accessor components: ::Array[Types::ComponentConfiguration]
+      attr_accessor parent_image: ::String
+      attr_accessor block_device_mappings: ::Array[Types::InstanceBlockDeviceMapping]
+      attr_accessor date_created: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor working_directory: ::String
+      attr_accessor additional_instance_configuration: Types::AdditionalInstanceConfiguration
+      SENSITIVE: []
+    end
+
+    class ImageRecipeSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor owner: ::String
+      attr_accessor parent_image: ::String
+      attr_accessor date_created: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ImageScanFinding
+      attr_accessor aws_account_id: ::String
+      attr_accessor image_build_version_arn: ::String
+      attr_accessor image_pipeline_arn: ::String
+      attr_accessor type: ::String
+      attr_accessor description: ::String
+      attr_accessor title: ::String
+      attr_accessor remediation: Types::Remediation
+      attr_accessor severity: ::String
+      attr_accessor first_observed_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor inspector_score: ::Float
+      attr_accessor inspector_score_details: Types::InspectorScoreDetails
+      attr_accessor package_vulnerability_details: Types::PackageVulnerabilityDetails
+      attr_accessor fix_available: ::String
+      SENSITIVE: []
+    end
+
+    class ImageScanFindingAggregation
+      attr_accessor account_aggregation: Types::AccountAggregation
+      attr_accessor image_aggregation: Types::ImageAggregation
+      attr_accessor image_pipeline_aggregation: Types::ImagePipelineAggregation
+      attr_accessor vulnerability_id_aggregation: Types::VulnerabilityIdAggregation
+      SENSITIVE: []
+    end
+
+    class ImageScanFindingsFilter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ImageScanState
+      attr_accessor status: ("PENDING" | "SCANNING" | "COLLECTING" | "COMPLETED" | "ABANDONED" | "FAILED" | "TIMED_OUT")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class ImageScanningConfiguration
+      attr_accessor image_scanning_enabled: bool
+      attr_accessor ecr_configuration: Types::EcrConfiguration
+      SENSITIVE: []
+    end
+
+    class ImageState
+      attr_accessor status: ("PENDING" | "CREATING" | "BUILDING" | "TESTING" | "DISTRIBUTING" | "INTEGRATING" | "AVAILABLE" | "CANCELLED" | "FAILED" | "DEPRECATED" | "DELETED" | "DISABLED")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class ImageSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("AMI" | "DOCKER")
+      attr_accessor version: ::String
+      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor os_version: ::String
+      attr_accessor state: Types::ImageState
+      attr_accessor owner: ::String
+      attr_accessor date_created: ::String
+      attr_accessor output_resources: Types::OutputResources
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor build_type: ("USER_INITIATED" | "SCHEDULED" | "IMPORT")
+      attr_accessor image_source: ("AMAZON_MANAGED" | "AWS_MARKETPLACE" | "IMPORTED" | "CUSTOM")
+      attr_accessor deprecation_time: ::Time
+      attr_accessor lifecycle_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class ImageTestsConfiguration
+      attr_accessor image_tests_enabled: bool
+      attr_accessor timeout_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class ImageVersion
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("AMI" | "DOCKER")
+      attr_accessor version: ::String
+      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor os_version: ::String
+      attr_accessor owner: ::String
+      attr_accessor date_created: ::String
+      attr_accessor build_type: ("USER_INITIATED" | "SCHEDULED" | "IMPORT")
+      attr_accessor image_source: ("AMAZON_MANAGED" | "AWS_MARKETPLACE" | "IMPORTED" | "CUSTOM")
+      SENSITIVE: []
+    end
+
+    class ImportComponentRequest
+      attr_accessor name: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor description: ::String
+      attr_accessor change_description: ::String
+      attr_accessor type: ("BUILD" | "TEST")
+      attr_accessor format: ("SHELL")
+      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor data: ::String
+      attr_accessor uri: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ImportComponentResponse
+      attr_accessor request_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor component_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ImportVmImageRequest
+      attr_accessor name: ::String
+      attr_accessor semantic_version: ::String
+      attr_accessor description: ::String
+      attr_accessor platform: ("Windows" | "Linux")
+      attr_accessor os_version: ::String
+      attr_accessor vm_import_task_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ImportVmImageResponse
+      attr_accessor request_id: ::String
+      attr_accessor image_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class InfrastructureConfiguration
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor instance_types: ::Array[::String]
+      attr_accessor instance_profile_name: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_id: ::String
+      attr_accessor logging: Types::Logging
+      attr_accessor key_pair: ::String
+      attr_accessor terminate_instance_on_failure: bool
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor date_created: ::String
+      attr_accessor date_updated: ::String
+      attr_accessor resource_tags: ::Hash[::String, ::String]
+      attr_accessor instance_metadata_options: Types::InstanceMetadataOptions
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class InfrastructureConfigurationSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor date_created: ::String
+      attr_accessor date_updated: ::String
+      attr_accessor resource_tags: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor instance_types: ::Array[::String]
+      attr_accessor instance_profile_name: ::String
+      SENSITIVE: []
+    end
+
+    class InspectorScoreDetails
+      attr_accessor adjusted_cvss: Types::CvssScoreDetails
+      SENSITIVE: []
+    end
+
+    class InstanceBlockDeviceMapping
+      attr_accessor device_name: ::String
+      attr_accessor ebs: Types::EbsInstanceBlockDeviceSpecification
+      attr_accessor virtual_name: ::String
+      attr_accessor no_device: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceConfiguration
+      attr_accessor image: ::String
+      attr_accessor block_device_mappings: ::Array[Types::InstanceBlockDeviceMapping]
+      SENSITIVE: []
+    end
+
+    class InstanceMetadataOptions
+      attr_accessor http_tokens: ::String
+      attr_accessor http_put_response_hop_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class InvalidPaginationTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterCombinationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterValueException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidVersionNumberException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LaunchPermissionConfiguration
+      attr_accessor user_ids: ::Array[::String]
+      attr_accessor user_groups: ::Array[::String]
+      attr_accessor organization_arns: ::Array[::String]
+      attr_accessor organizational_unit_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LaunchTemplateConfiguration
+      attr_accessor launch_template_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor set_default_version: bool
+      SENSITIVE: []
+    end
+
+    class LifecycleExecution
+      attr_accessor lifecycle_execution_id: ::String
+      attr_accessor lifecycle_policy_arn: ::String
+      attr_accessor resources_impacted_summary: Types::LifecycleExecutionResourcesImpactedSummary
+      attr_accessor state: Types::LifecycleExecutionState
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class LifecycleExecutionResource
+      attr_accessor account_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor state: Types::LifecycleExecutionResourceState
+      attr_accessor action: Types::LifecycleExecutionResourceAction
+      attr_accessor region: ::String
+      attr_accessor snapshots: ::Array[Types::LifecycleExecutionSnapshotResource]
+      attr_accessor image_uris: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LifecycleExecutionResourceAction
+      attr_accessor name: ("AVAILABLE" | "DELETE" | "DEPRECATE" | "DISABLE")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class LifecycleExecutionResourceState
+      attr_accessor status: ("FAILED" | "IN_PROGRESS" | "SKIPPED" | "SUCCESS")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class LifecycleExecutionResourcesImpactedSummary
+      attr_accessor has_impacted_resources: bool
+      SENSITIVE: []
+    end
+
+    class LifecycleExecutionSnapshotResource
+      attr_accessor snapshot_id: ::String
+      attr_accessor state: Types::LifecycleExecutionResourceState
+      SENSITIVE: []
+    end
+
+    class LifecycleExecutionState
+      attr_accessor status: ("IN_PROGRESS" | "CANCELLED" | "CANCELLING" | "FAILED" | "SUCCESS")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicy
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("DISABLED" | "ENABLED")
+      attr_accessor execution_role: ::String
+      attr_accessor resource_type: ("AMI_IMAGE" | "CONTAINER_IMAGE")
+      attr_accessor policy_details: ::Array[Types::LifecyclePolicyDetail]
+      attr_accessor resource_selection: Types::LifecyclePolicyResourceSelection
+      attr_accessor date_created: ::Time
+      attr_accessor date_updated: ::Time
+      attr_accessor date_last_run: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicyDetail
+      attr_accessor action: Types::LifecyclePolicyDetailAction
+      attr_accessor filter: Types::LifecyclePolicyDetailFilter
+      attr_accessor exclusion_rules: Types::LifecyclePolicyDetailExclusionRules
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicyDetailAction
+      attr_accessor type: ("DELETE" | "DEPRECATE" | "DISABLE")
+      attr_accessor include_resources: Types::LifecyclePolicyDetailActionIncludeResources
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicyDetailActionIncludeResources
+      attr_accessor amis: bool
+      attr_accessor snapshots: bool
+      attr_accessor containers: bool
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicyDetailExclusionRules
+      attr_accessor tag_map: ::Hash[::String, ::String]
+      attr_accessor amis: Types::LifecyclePolicyDetailExclusionRulesAmis
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicyDetailExclusionRulesAmis
+      attr_accessor is_public: bool
+      attr_accessor regions: ::Array[::String]
+      attr_accessor shared_accounts: ::Array[::String]
+      attr_accessor last_launched: Types::LifecyclePolicyDetailExclusionRulesAmisLastLaunched
+      attr_accessor tag_map: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicyDetailExclusionRulesAmisLastLaunched
+      attr_accessor value: ::Integer
+      attr_accessor unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicyDetailFilter
+      attr_accessor type: ("AGE" | "COUNT")
+      attr_accessor value: ::Integer
+      attr_accessor unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+      attr_accessor retain_at_least: ::Integer
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicyResourceSelection
+      attr_accessor recipes: ::Array[Types::LifecyclePolicyResourceSelectionRecipe]
+      attr_accessor tag_map: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicyResourceSelectionRecipe
+      attr_accessor name: ::String
+      attr_accessor semantic_version: ::String
+      SENSITIVE: []
+    end
+
+    class LifecyclePolicySummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("DISABLED" | "ENABLED")
+      attr_accessor execution_role: ::String
+      attr_accessor resource_type: ("AMI_IMAGE" | "CONTAINER_IMAGE")
+      attr_accessor date_created: ::Time
+      attr_accessor date_updated: ::Time
+      attr_accessor date_last_run: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListComponentBuildVersionsRequest
+      attr_accessor component_version_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComponentBuildVersionsResponse
+      attr_accessor request_id: ::String
+      attr_accessor component_summary_list: ::Array[Types::ComponentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComponentsRequest
+      attr_accessor owner: ("Self" | "Shared" | "Amazon" | "ThirdParty")
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor by_name: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListComponentsResponse
+      attr_accessor request_id: ::String
+      attr_accessor component_version_list: ::Array[Types::ComponentVersion]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContainerRecipesRequest
+      attr_accessor owner: ("Self" | "Shared" | "Amazon" | "ThirdParty")
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListContainerRecipesResponse
+      attr_accessor request_id: ::String
+      attr_accessor container_recipe_summary_list: ::Array[Types::ContainerRecipeSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDistributionConfigurationsRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDistributionConfigurationsResponse
+      attr_accessor request_id: ::String
+      attr_accessor distribution_configuration_summary_list: ::Array[Types::DistributionConfigurationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImageBuildVersionsRequest
+      attr_accessor image_version_arn: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImageBuildVersionsResponse
+      attr_accessor request_id: ::String
+      attr_accessor image_summary_list: ::Array[Types::ImageSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImagePackagesRequest
+      attr_accessor image_build_version_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImagePackagesResponse
+      attr_accessor request_id: ::String
+      attr_accessor image_package_list: ::Array[Types::ImagePackage]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImagePipelineImagesRequest
+      attr_accessor image_pipeline_arn: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImagePipelineImagesResponse
+      attr_accessor request_id: ::String
+      attr_accessor image_summary_list: ::Array[Types::ImageSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImagePipelinesRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImagePipelinesResponse
+      attr_accessor request_id: ::String
+      attr_accessor image_pipeline_list: ::Array[Types::ImagePipeline]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImageRecipesRequest
+      attr_accessor owner: ("Self" | "Shared" | "Amazon" | "ThirdParty")
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImageRecipesResponse
+      attr_accessor request_id: ::String
+      attr_accessor image_recipe_summary_list: ::Array[Types::ImageRecipeSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImageScanFindingAggregationsRequest
+      attr_accessor filter: Types::Filter
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImageScanFindingAggregationsResponse
+      attr_accessor request_id: ::String
+      attr_accessor aggregation_type: ::String
+      attr_accessor responses: ::Array[Types::ImageScanFindingAggregation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImageScanFindingsRequest
+      attr_accessor filters: ::Array[Types::ImageScanFindingsFilter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImageScanFindingsResponse
+      attr_accessor request_id: ::String
+      attr_accessor findings: ::Array[Types::ImageScanFinding]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImagesRequest
+      attr_accessor owner: ("Self" | "Shared" | "Amazon" | "ThirdParty")
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor by_name: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor include_deprecated: bool
+      SENSITIVE: []
+    end
+
+    class ListImagesResponse
+      attr_accessor request_id: ::String
+      attr_accessor image_version_list: ::Array[Types::ImageVersion]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInfrastructureConfigurationsRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInfrastructureConfigurationsResponse
+      attr_accessor request_id: ::String
+      attr_accessor infrastructure_configuration_summary_list: ::Array[Types::InfrastructureConfigurationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLifecycleExecutionResourcesRequest
+      attr_accessor lifecycle_execution_id: ::String
+      attr_accessor parent_resource_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLifecycleExecutionResourcesResponse
+      attr_accessor lifecycle_execution_id: ::String
+      attr_accessor lifecycle_execution_state: Types::LifecycleExecutionState
+      attr_accessor resources: ::Array[Types::LifecycleExecutionResource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLifecycleExecutionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListLifecycleExecutionsResponse
+      attr_accessor lifecycle_executions: ::Array[Types::LifecycleExecution]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLifecyclePoliciesRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLifecyclePoliciesResponse
+      attr_accessor lifecycle_policy_summary_list: ::Array[Types::LifecyclePolicySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListWaitingWorkflowStepsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWaitingWorkflowStepsResponse
+      attr_accessor steps: ::Array[Types::WorkflowStepExecution]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowBuildVersionsRequest
+      attr_accessor workflow_version_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowBuildVersionsResponse
+      attr_accessor workflow_summary_list: ::Array[Types::WorkflowSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowExecutionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor image_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowExecutionsResponse
+      attr_accessor request_id: ::String
+      attr_accessor workflow_executions: ::Array[Types::WorkflowExecutionMetadata]
+      attr_accessor image_build_version_arn: ::String
+      attr_accessor message: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowStepExecutionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor workflow_execution_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowStepExecutionsResponse
+      attr_accessor request_id: ::String
+      attr_accessor steps: ::Array[Types::WorkflowStepMetadata]
+      attr_accessor workflow_build_version_arn: ::String
+      attr_accessor workflow_execution_id: ::String
+      attr_accessor image_build_version_arn: ::String
+      attr_accessor message: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowsRequest
+      attr_accessor owner: ("Self" | "Shared" | "Amazon" | "ThirdParty")
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor by_name: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorkflowsResponse
+      attr_accessor workflow_version_list: ::Array[Types::WorkflowVersion]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Logging
+      attr_accessor s3_logs: Types::S3Logs
+      SENSITIVE: []
+    end
+
+    class OutputResources
+      attr_accessor amis: ::Array[Types::Ami]
+      attr_accessor containers: ::Array[Types::Container]
+      SENSITIVE: []
+    end
+
+    class PackageVulnerabilityDetails
+      attr_accessor vulnerability_id: ::String
+      attr_accessor vulnerable_packages: ::Array[Types::VulnerablePackage]
+      attr_accessor source: ::String
+      attr_accessor cvss: ::Array[Types::CvssScore]
+      attr_accessor related_vulnerabilities: ::Array[::String]
+      attr_accessor source_url: ::String
+      attr_accessor vendor_severity: ::String
+      attr_accessor vendor_created_at: ::Time
+      attr_accessor vendor_updated_at: ::Time
+      attr_accessor reference_urls: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PutComponentPolicyRequest
+      attr_accessor component_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutComponentPolicyResponse
+      attr_accessor request_id: ::String
+      attr_accessor component_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutContainerRecipePolicyRequest
+      attr_accessor container_recipe_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutContainerRecipePolicyResponse
+      attr_accessor request_id: ::String
+      attr_accessor container_recipe_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutImagePolicyRequest
+      attr_accessor image_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutImagePolicyResponse
+      attr_accessor request_id: ::String
+      attr_accessor image_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutImageRecipePolicyRequest
+      attr_accessor image_recipe_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutImageRecipePolicyResponse
+      attr_accessor request_id: ::String
+      attr_accessor image_recipe_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Remediation
+      attr_accessor recommendation: Types::RemediationRecommendation
+      SENSITIVE: []
+    end
+
+    class RemediationRecommendation
+      attr_accessor text: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceDependencyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceState
+      attr_accessor status: ("AVAILABLE" | "DELETED" | "DEPRECATED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class ResourceStateUpdateExclusionRules
+      attr_accessor amis: Types::LifecyclePolicyDetailExclusionRulesAmis
+      SENSITIVE: []
+    end
+
+    class ResourceStateUpdateIncludeResources
+      attr_accessor amis: bool
+      attr_accessor snapshots: bool
+      attr_accessor containers: bool
+      SENSITIVE: []
+    end
+
+    class S3ExportConfiguration
+      attr_accessor role_name: ::String
+      attr_accessor disk_image_format: ("VMDK" | "RAW" | "VHD")
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class S3Logs
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class Schedule
+      attr_accessor schedule_expression: ::String
+      attr_accessor timezone: ::String
+      attr_accessor pipeline_execution_start_condition: ("EXPRESSION_MATCH_ONLY" | "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE")
+      SENSITIVE: []
+    end
+
+    class SendWorkflowStepActionRequest
+      attr_accessor step_execution_id: ::String
+      attr_accessor image_build_version_arn: ::String
+      attr_accessor action: ("RESUME" | "STOP")
+      attr_accessor reason: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class SendWorkflowStepActionResponse
+      attr_accessor step_execution_id: ::String
+      attr_accessor image_build_version_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SeverityCounts
+      attr_accessor all: ::Integer
+      attr_accessor critical: ::Integer
+      attr_accessor high: ::Integer
+      attr_accessor medium: ::Integer
+      SENSITIVE: []
+    end
+
+    class StartImagePipelineExecutionRequest
+      attr_accessor image_pipeline_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartImagePipelineExecutionResponse
+      attr_accessor request_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor image_build_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartResourceStateUpdateRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor state: Types::ResourceState
+      attr_accessor execution_role: ::String
+      attr_accessor include_resources: Types::ResourceStateUpdateIncludeResources
+      attr_accessor exclusion_rules: Types::ResourceStateUpdateExclusionRules
+      attr_accessor update_at: ::Time
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartResourceStateUpdateResponse
+      attr_accessor lifecycle_execution_id: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SystemsManagerAgent
+      attr_accessor uninstall_after_build: bool
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TargetContainerRepository
+      attr_accessor service: ("ECR")
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDistributionConfigurationRequest
+      attr_accessor distribution_configuration_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor distributions: ::Array[Types::Distribution]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDistributionConfigurationResponse
+      attr_accessor request_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor distribution_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateImagePipelineRequest
+      attr_accessor image_pipeline_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor image_recipe_arn: ::String
+      attr_accessor container_recipe_arn: ::String
+      attr_accessor infrastructure_configuration_arn: ::String
+      attr_accessor distribution_configuration_arn: ::String
+      attr_accessor image_tests_configuration: Types::ImageTestsConfiguration
+      attr_accessor enhanced_image_metadata_enabled: bool
+      attr_accessor schedule: Types::Schedule
+      attr_accessor status: ("DISABLED" | "ENABLED")
+      attr_accessor client_token: ::String
+      attr_accessor image_scanning_configuration: Types::ImageScanningConfiguration
+      attr_accessor workflows: ::Array[Types::WorkflowConfiguration]
+      attr_accessor execution_role: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateImagePipelineResponse
+      attr_accessor request_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor image_pipeline_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateInfrastructureConfigurationRequest
+      attr_accessor infrastructure_configuration_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor instance_types: ::Array[::String]
+      attr_accessor instance_profile_name: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_id: ::String
+      attr_accessor logging: Types::Logging
+      attr_accessor key_pair: ::String
+      attr_accessor terminate_instance_on_failure: bool
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor resource_tags: ::Hash[::String, ::String]
+      attr_accessor instance_metadata_options: Types::InstanceMetadataOptions
+      SENSITIVE: []
+    end
+
+    class UpdateInfrastructureConfigurationResponse
+      attr_accessor request_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor infrastructure_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateLifecyclePolicyRequest
+      attr_accessor lifecycle_policy_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("DISABLED" | "ENABLED")
+      attr_accessor execution_role: ::String
+      attr_accessor resource_type: ("AMI_IMAGE" | "CONTAINER_IMAGE")
+      attr_accessor policy_details: ::Array[Types::LifecyclePolicyDetail]
+      attr_accessor resource_selection: Types::LifecyclePolicyResourceSelection
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateLifecyclePolicyResponse
+      attr_accessor lifecycle_policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class VulnerabilityIdAggregation
+      attr_accessor vulnerability_id: ::String
+      attr_accessor severity_counts: Types::SeverityCounts
+      SENSITIVE: []
+    end
+
+    class VulnerablePackage
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor source_layer_hash: ::String
+      attr_accessor epoch: ::Integer
+      attr_accessor release: ::String
+      attr_accessor arch: ::String
+      attr_accessor package_manager: ::String
+      attr_accessor file_path: ::String
+      attr_accessor fixed_in_version: ::String
+      attr_accessor remediation: ::String
+      SENSITIVE: []
+    end
+
+    class Workflow
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor description: ::String
+      attr_accessor change_description: ::String
+      attr_accessor type: ("BUILD" | "TEST" | "DISTRIBUTION")
+      attr_accessor state: Types::WorkflowState
+      attr_accessor owner: ::String
+      attr_accessor data: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor date_created: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor parameters: ::Array[Types::WorkflowParameterDetail]
+      SENSITIVE: []
+    end
+
+    class WorkflowConfiguration
+      attr_accessor workflow_arn: ::String
+      attr_accessor parameters: ::Array[Types::WorkflowParameter]
+      attr_accessor parallel_group: ::String
+      attr_accessor on_failure: ("CONTINUE" | "ABORT")
+      SENSITIVE: []
+    end
+
+    class WorkflowExecutionMetadata
+      attr_accessor workflow_build_version_arn: ::String
+      attr_accessor workflow_execution_id: ::String
+      attr_accessor type: ("BUILD" | "TEST" | "DISTRIBUTION")
+      attr_accessor status: ("PENDING" | "SKIPPED" | "RUNNING" | "COMPLETED" | "FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETED" | "CANCELLED")
+      attr_accessor message: ::String
+      attr_accessor total_step_count: ::Integer
+      attr_accessor total_steps_succeeded: ::Integer
+      attr_accessor total_steps_failed: ::Integer
+      attr_accessor total_steps_skipped: ::Integer
+      attr_accessor start_time: ::String
+      attr_accessor end_time: ::String
+      attr_accessor parallel_group: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowParameter
+      attr_accessor name: ::String
+      attr_accessor value: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class WorkflowParameterDetail
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor default_value: ::Array[::String]
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowState
+      attr_accessor status: ("DEPRECATED")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowStepExecution
+      attr_accessor step_execution_id: ::String
+      attr_accessor image_build_version_arn: ::String
+      attr_accessor workflow_execution_id: ::String
+      attr_accessor workflow_build_version_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor action: ::String
+      attr_accessor start_time: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowStepMetadata
+      attr_accessor step_execution_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor action: ::String
+      attr_accessor status: ("PENDING" | "SKIPPED" | "RUNNING" | "COMPLETED" | "FAILED" | "CANCELLED")
+      attr_accessor rollback_status: ("RUNNING" | "COMPLETED" | "SKIPPED" | "FAILED")
+      attr_accessor message: ::String
+      attr_accessor inputs: ::String
+      attr_accessor outputs: ::String
+      attr_accessor start_time: ::String
+      attr_accessor end_time: ::String
+      SENSITIVE: []
+    end
+
+    class WorkflowSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor description: ::String
+      attr_accessor change_description: ::String
+      attr_accessor type: ("BUILD" | "TEST" | "DISTRIBUTION")
+      attr_accessor owner: ::String
+      attr_accessor state: Types::WorkflowState
+      attr_accessor date_created: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class WorkflowVersion
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("BUILD" | "TEST" | "DISTRIBUTION")
+      attr_accessor owner: ::String
+      attr_accessor date_created: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,344 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ServerlessApplicationRepository
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServerlessApplicationRepository/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationResponse]
+        def application_id: () -> ::String
+        def author: () -> ::String
+        def creation_time: () -> ::String
+        def description: () -> ::String
+        def home_page_url: () -> ::String
+        def is_verified_author: () -> bool
+        def labels: () -> ::Array[::String]
+        def license_url: () -> ::String
+        def name: () -> ::String
+        def readme_url: () -> ::String
+        def spdx_license_id: () -> ::String
+        def verified_author_url: () -> ::String
+        def version: () -> Types::Version
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServerlessApplicationRepository/Client.html#create_application-instance_method
+      def create_application: (
+                                author: ::String,
+                                description: ::String,
+                                ?home_page_url: ::String,
+                                ?labels: Array[::String],
+                                ?license_body: ::String,
+                                ?license_url: ::String,
+                                name: ::String,
+                                ?readme_body: ::String,
+                                ?readme_url: ::String,
+                                ?semantic_version: ::String,
+                                ?source_code_archive_url: ::String,
+                                ?source_code_url: ::String,
+                                ?spdx_license_id: ::String,
+                                ?template_body: ::String,
+                                ?template_url: ::String
+                              ) -> _CreateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
+
+      interface _CreateApplicationVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationVersionResponse]
+        def application_id: () -> ::String
+        def creation_time: () -> ::String
+        def parameter_definitions: () -> ::Array[Types::ParameterDefinition]
+        def required_capabilities: () -> ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND" | "CAPABILITY_RESOURCE_POLICY")]
+        def resources_supported: () -> bool
+        def semantic_version: () -> ::String
+        def source_code_archive_url: () -> ::String
+        def source_code_url: () -> ::String
+        def template_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServerlessApplicationRepository/Client.html#create_application_version-instance_method
+      def create_application_version: (
+                                        application_id: ::String,
+                                        semantic_version: ::String,
+                                        ?source_code_archive_url: ::String,
+                                        ?source_code_url: ::String,
+                                        ?template_body: ::String,
+                                        ?template_url: ::String
+                                      ) -> _CreateApplicationVersionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationVersionResponseSuccess
+
+      interface _CreateCloudFormationChangeSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCloudFormationChangeSetResponse]
+        def application_id: () -> ::String
+        def change_set_id: () -> ::String
+        def semantic_version: () -> ::String
+        def stack_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServerlessApplicationRepository/Client.html#create_cloud_formation_change_set-instance_method
+      def create_cloud_formation_change_set: (
+                                               application_id: ::String,
+                                               ?capabilities: Array[::String],
+                                               ?change_set_name: ::String,
+                                               ?client_token: ::String,
+                                               ?description: ::String,
+                                               ?notification_arns: Array[::String],
+                                               ?parameter_overrides: Array[
+                                                 {
+                                                   name: ::String,
+                                                   value: ::String
+                                                 },
+                                               ],
+                                               ?resource_types: Array[::String],
+                                               ?rollback_configuration: {
+                                                 monitoring_time_in_minutes: ::Integer?,
+                                                 rollback_triggers: Array[
+                                                   {
+                                                     arn: ::String,
+                                                     type: ::String
+                                                   },
+                                                 ]?
+                                               },
+                                               ?semantic_version: ::String,
+                                               stack_name: ::String,
+                                               ?tags: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String
+                                                 },
+                                               ],
+                                               ?template_id: ::String
+                                             ) -> _CreateCloudFormationChangeSetResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCloudFormationChangeSetResponseSuccess
+
+      interface _CreateCloudFormationTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCloudFormationTemplateResponse]
+        def application_id: () -> ::String
+        def creation_time: () -> ::String
+        def expiration_time: () -> ::String
+        def semantic_version: () -> ::String
+        def status: () -> ("PREPARING" | "ACTIVE" | "EXPIRED")
+        def template_id: () -> ::String
+        def template_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServerlessApplicationRepository/Client.html#create_cloud_formation_template-instance_method
+      def create_cloud_formation_template: (
+                                             application_id: ::String,
+                                             ?semantic_version: ::String
+                                           ) -> _CreateCloudFormationTemplateResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCloudFormationTemplateResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServerlessApplicationRepository/Client.html#delete_application-instance_method
+      def delete_application: (
+                                application_id: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationResponse]
+        def application_id: () -> ::String
+        def author: () -> ::String
+        def creation_time: () -> ::String
+        def description: () -> ::String
+        def home_page_url: () -> ::String
+        def is_verified_author: () -> bool
+        def labels: () -> ::Array[::String]
+        def license_url: () -> ::String
+        def name: () -> ::String
+        def readme_url: () -> ::String
+        def spdx_license_id: () -> ::String
+        def verified_author_url: () -> ::String
+        def version: () -> Types::Version
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServerlessApplicationRepository/Client.html#get_application-instance_method
+      def get_application: (
+                             application_id: ::String,
+                             ?semantic_version: ::String
+                           ) -> _GetApplicationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationResponseSuccess
+
+      interface _GetApplicationPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationPolicyResponse]
+        def statements: () -> ::Array[Types::ApplicationPolicyStatement]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServerlessApplicationRepository/Client.html#get_application_policy-instance_method
+      def get_application_policy: (
+                                    application_id: ::String
+                                  ) -> _GetApplicationPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationPolicyResponseSuccess
+
+      interface _GetCloudFormationTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCloudFormationTemplateResponse]
+        def application_id: () -> ::String
+        def creation_time: () -> ::String
+        def expiration_time: () -> ::String
+        def semantic_version: () -> ::String
+        def status: () -> ("PREPARING" | "ACTIVE" | "EXPIRED")
+        def template_id: () -> ::String
+        def template_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServerlessApplicationRepository/Client.html#get_cloud_formation_template-instance_method
+      def get_cloud_formation_template: (
+                                          application_id: ::String,
+                                          template_id: ::String
+                                        ) -> _GetCloudFormationTemplateResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCloudFormationTemplateResponseSuccess
+
+      interface _ListApplicationDependenciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationDependenciesResponse]
+        def dependencies: () -> ::Array[Types::ApplicationDependencySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServerlessApplicationRepository/Client.html#list_application_dependencies-instance_method
+      def list_application_dependencies: (
+                                           application_id: ::String,
+                                           ?max_items: ::Integer,
+                                           ?next_token: ::String,
+                                           ?semantic_version: ::String
+                                         ) -> _ListApplicationDependenciesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationDependenciesResponseSuccess
+
+      interface _ListApplicationVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationVersionsResponse]
+        def next_token: () -> ::String
+        def versions: () -> ::Array[Types::VersionSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServerlessApplicationRepository/Client.html#list_application_versions-instance_method
+      def list_application_versions: (
+                                       application_id: ::String,
+                                       ?max_items: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListApplicationVersionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationVersionsResponseSuccess
+
+      interface _ListApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationsResponse]
+        def applications: () -> ::Array[Types::ApplicationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServerlessApplicationRepository/Client.html#list_applications-instance_method
+      def list_applications: (
+                               ?max_items: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListApplicationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
+
+      interface _PutApplicationPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutApplicationPolicyResponse]
+        def statements: () -> ::Array[Types::ApplicationPolicyStatement]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServerlessApplicationRepository/Client.html#put_application_policy-instance_method
+      def put_application_policy: (
+                                    application_id: ::String,
+                                    statements: Array[
+                                      {
+                                        actions: Array[::String],
+                                        principal_org_i_ds: Array[::String]?,
+                                        principals: Array[::String],
+                                        statement_id: ::String?
+                                      },
+                                    ]
+                                  ) -> _PutApplicationPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutApplicationPolicyResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServerlessApplicationRepository/Client.html#unshare_application-instance_method
+      def unshare_application: (
+                                 application_id: ::String,
+                                 organization_id: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationResponse]
+        def application_id: () -> ::String
+        def author: () -> ::String
+        def creation_time: () -> ::String
+        def description: () -> ::String
+        def home_page_url: () -> ::String
+        def is_verified_author: () -> bool
+        def labels: () -> ::Array[::String]
+        def license_url: () -> ::String
+        def name: () -> ::String
+        def readme_url: () -> ::String
+        def spdx_license_id: () -> ::String
+        def verified_author_url: () -> ::String
+        def version: () -> Types::Version
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServerlessApplicationRepository/Client.html#update_application-instance_method
+      def update_application: (
+                                application_id: ::String,
+                                ?author: ::String,
+                                ?description: ::String,
+                                ?home_page_url: ::String,
+                                ?labels: Array[::String],
+                                ?readme_body: ::String,
+                                ?readme_url: ::String
+                              ) -> _UpdateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
+    end
+  end
+end
+

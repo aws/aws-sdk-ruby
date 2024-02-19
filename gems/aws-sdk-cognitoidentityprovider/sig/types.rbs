@@ -1,0 +1,2051 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CognitoIdentityProvider
+  module Types
+
+    class AccountRecoverySettingType
+      attr_accessor recovery_mechanisms: ::Array[Types::RecoveryOptionType]
+      SENSITIVE: []
+    end
+
+    class AccountTakeoverActionType
+      attr_accessor notify: bool
+      attr_accessor event_action: ("BLOCK" | "MFA_IF_CONFIGURED" | "MFA_REQUIRED" | "NO_ACTION")
+      SENSITIVE: []
+    end
+
+    class AccountTakeoverActionsType
+      attr_accessor low_action: Types::AccountTakeoverActionType
+      attr_accessor medium_action: Types::AccountTakeoverActionType
+      attr_accessor high_action: Types::AccountTakeoverActionType
+      SENSITIVE: []
+    end
+
+    class AccountTakeoverRiskConfigurationType
+      attr_accessor notify_configuration: Types::NotifyConfigurationType
+      attr_accessor actions: Types::AccountTakeoverActionsType
+      SENSITIVE: []
+    end
+
+    class AddCustomAttributesRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor custom_attributes: ::Array[Types::SchemaAttributeType]
+      SENSITIVE: []
+    end
+
+    class AddCustomAttributesResponse < Aws::EmptyStructure
+    end
+
+    class AdminAddUserToGroupRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor group_name: ::String
+      SENSITIVE: [:username]
+    end
+
+    class AdminConfirmSignUpRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor client_metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:username]
+    end
+
+    class AdminConfirmSignUpResponse < Aws::EmptyStructure
+    end
+
+    class AdminCreateUserConfigType
+      attr_accessor allow_admin_create_user_only: bool
+      attr_accessor unused_account_validity_days: ::Integer
+      attr_accessor invite_message_template: Types::MessageTemplateType
+      SENSITIVE: []
+    end
+
+    class AdminCreateUserRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor user_attributes: ::Array[Types::AttributeType]
+      attr_accessor validation_data: ::Array[Types::AttributeType]
+      attr_accessor temporary_password: ::String
+      attr_accessor force_alias_creation: bool
+      attr_accessor message_action: ("RESEND" | "SUPPRESS")
+      attr_accessor desired_delivery_mediums: ::Array[("SMS" | "EMAIL")]
+      attr_accessor client_metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:username, :temporary_password]
+    end
+
+    class AdminCreateUserResponse
+      attr_accessor user: Types::UserType
+      SENSITIVE: []
+    end
+
+    class AdminDeleteUserAttributesRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor user_attribute_names: ::Array[::String]
+      SENSITIVE: [:username]
+    end
+
+    class AdminDeleteUserAttributesResponse < Aws::EmptyStructure
+    end
+
+    class AdminDeleteUserRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      SENSITIVE: [:username]
+    end
+
+    class AdminDisableProviderForUserRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor user: Types::ProviderUserIdentifierType
+      SENSITIVE: []
+    end
+
+    class AdminDisableProviderForUserResponse < Aws::EmptyStructure
+    end
+
+    class AdminDisableUserRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      SENSITIVE: [:username]
+    end
+
+    class AdminDisableUserResponse < Aws::EmptyStructure
+    end
+
+    class AdminEnableUserRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      SENSITIVE: [:username]
+    end
+
+    class AdminEnableUserResponse < Aws::EmptyStructure
+    end
+
+    class AdminForgetDeviceRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor device_key: ::String
+      SENSITIVE: [:username]
+    end
+
+    class AdminGetDeviceRequest
+      attr_accessor device_key: ::String
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      SENSITIVE: [:username]
+    end
+
+    class AdminGetDeviceResponse
+      attr_accessor device: Types::DeviceType
+      SENSITIVE: []
+    end
+
+    class AdminGetUserRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      SENSITIVE: [:username]
+    end
+
+    class AdminGetUserResponse
+      attr_accessor username: ::String
+      attr_accessor user_attributes: ::Array[Types::AttributeType]
+      attr_accessor user_create_date: ::Time
+      attr_accessor user_last_modified_date: ::Time
+      attr_accessor enabled: bool
+      attr_accessor user_status: ("UNCONFIRMED" | "CONFIRMED" | "ARCHIVED" | "COMPROMISED" | "UNKNOWN" | "RESET_REQUIRED" | "FORCE_CHANGE_PASSWORD")
+      attr_accessor mfa_options: ::Array[Types::MFAOptionType]
+      attr_accessor preferred_mfa_setting: ::String
+      attr_accessor user_mfa_setting_list: ::Array[::String]
+      SENSITIVE: [:username]
+    end
+
+    class AdminInitiateAuthRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor auth_flow: ("USER_SRP_AUTH" | "REFRESH_TOKEN_AUTH" | "REFRESH_TOKEN" | "CUSTOM_AUTH" | "ADMIN_NO_SRP_AUTH" | "USER_PASSWORD_AUTH" | "ADMIN_USER_PASSWORD_AUTH")
+      attr_accessor auth_parameters: ::Hash[::String, ::String]
+      attr_accessor client_metadata: ::Hash[::String, ::String]
+      attr_accessor analytics_metadata: Types::AnalyticsMetadataType
+      attr_accessor context_data: Types::ContextDataType
+      SENSITIVE: [:client_id, :auth_parameters]
+    end
+
+    class AdminInitiateAuthResponse
+      attr_accessor challenge_name: ("SMS_MFA" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
+      attr_accessor session: ::String
+      attr_accessor challenge_parameters: ::Hash[::String, ::String]
+      attr_accessor authentication_result: Types::AuthenticationResultType
+      SENSITIVE: [:session]
+    end
+
+    class AdminLinkProviderForUserRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor destination_user: Types::ProviderUserIdentifierType
+      attr_accessor source_user: Types::ProviderUserIdentifierType
+      SENSITIVE: []
+    end
+
+    class AdminLinkProviderForUserResponse < Aws::EmptyStructure
+    end
+
+    class AdminListDevicesRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor pagination_token: ::String
+      SENSITIVE: [:username]
+    end
+
+    class AdminListDevicesResponse
+      attr_accessor devices: ::Array[Types::DeviceType]
+      attr_accessor pagination_token: ::String
+      SENSITIVE: []
+    end
+
+    class AdminListGroupsForUserRequest
+      attr_accessor username: ::String
+      attr_accessor user_pool_id: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:username]
+    end
+
+    class AdminListGroupsForUserResponse
+      attr_accessor groups: ::Array[Types::GroupType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class AdminListUserAuthEventsRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:username]
+    end
+
+    class AdminListUserAuthEventsResponse
+      attr_accessor auth_events: ::Array[Types::AuthEventType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class AdminRemoveUserFromGroupRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor group_name: ::String
+      SENSITIVE: [:username]
+    end
+
+    class AdminResetUserPasswordRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor client_metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:username]
+    end
+
+    class AdminResetUserPasswordResponse < Aws::EmptyStructure
+    end
+
+    class AdminRespondToAuthChallengeRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor challenge_name: ("SMS_MFA" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
+      attr_accessor challenge_responses: ::Hash[::String, ::String]
+      attr_accessor session: ::String
+      attr_accessor analytics_metadata: Types::AnalyticsMetadataType
+      attr_accessor context_data: Types::ContextDataType
+      attr_accessor client_metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:client_id, :challenge_responses, :session]
+    end
+
+    class AdminRespondToAuthChallengeResponse
+      attr_accessor challenge_name: ("SMS_MFA" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
+      attr_accessor session: ::String
+      attr_accessor challenge_parameters: ::Hash[::String, ::String]
+      attr_accessor authentication_result: Types::AuthenticationResultType
+      SENSITIVE: [:session]
+    end
+
+    class AdminSetUserMFAPreferenceRequest
+      attr_accessor sms_mfa_settings: Types::SMSMfaSettingsType
+      attr_accessor software_token_mfa_settings: Types::SoftwareTokenMfaSettingsType
+      attr_accessor username: ::String
+      attr_accessor user_pool_id: ::String
+      SENSITIVE: [:username]
+    end
+
+    class AdminSetUserMFAPreferenceResponse < Aws::EmptyStructure
+    end
+
+    class AdminSetUserPasswordRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      attr_accessor permanent: bool
+      SENSITIVE: [:username, :password]
+    end
+
+    class AdminSetUserPasswordResponse < Aws::EmptyStructure
+    end
+
+    class AdminSetUserSettingsRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor mfa_options: ::Array[Types::MFAOptionType]
+      SENSITIVE: [:username]
+    end
+
+    class AdminSetUserSettingsResponse < Aws::EmptyStructure
+    end
+
+    class AdminUpdateAuthEventFeedbackRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor event_id: ::String
+      attr_accessor feedback_value: ("Valid" | "Invalid")
+      SENSITIVE: [:username]
+    end
+
+    class AdminUpdateAuthEventFeedbackResponse < Aws::EmptyStructure
+    end
+
+    class AdminUpdateDeviceStatusRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor device_key: ::String
+      attr_accessor device_remembered_status: ("remembered" | "not_remembered")
+      SENSITIVE: [:username]
+    end
+
+    class AdminUpdateDeviceStatusResponse < Aws::EmptyStructure
+    end
+
+    class AdminUpdateUserAttributesRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor user_attributes: ::Array[Types::AttributeType]
+      attr_accessor client_metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:username]
+    end
+
+    class AdminUpdateUserAttributesResponse < Aws::EmptyStructure
+    end
+
+    class AdminUserGlobalSignOutRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      SENSITIVE: [:username]
+    end
+
+    class AdminUserGlobalSignOutResponse < Aws::EmptyStructure
+    end
+
+    class AliasExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AnalyticsConfigurationType
+      attr_accessor application_id: ::String
+      attr_accessor application_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor external_id: ::String
+      attr_accessor user_data_shared: bool
+      SENSITIVE: []
+    end
+
+    class AnalyticsMetadataType
+      attr_accessor analytics_endpoint_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateSoftwareTokenRequest
+      attr_accessor access_token: ::String
+      attr_accessor session: ::String
+      SENSITIVE: [:access_token, :session]
+    end
+
+    class AssociateSoftwareTokenResponse
+      attr_accessor secret_code: ::String
+      attr_accessor session: ::String
+      SENSITIVE: [:secret_code, :session]
+    end
+
+    class AttributeType
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: [:value]
+    end
+
+    class AuthEventType
+      attr_accessor event_id: ::String
+      attr_accessor event_type: ("SignIn" | "SignUp" | "ForgotPassword" | "PasswordChange" | "ResendCode")
+      attr_accessor creation_date: ::Time
+      attr_accessor event_response: ("Pass" | "Fail" | "InProgress")
+      attr_accessor event_risk: Types::EventRiskType
+      attr_accessor challenge_responses: ::Array[Types::ChallengeResponseType]
+      attr_accessor event_context_data: Types::EventContextDataType
+      attr_accessor event_feedback: Types::EventFeedbackType
+      SENSITIVE: []
+    end
+
+    class AuthenticationResultType
+      attr_accessor access_token: ::String
+      attr_accessor expires_in: ::Integer
+      attr_accessor token_type: ::String
+      attr_accessor refresh_token: ::String
+      attr_accessor id_token: ::String
+      attr_accessor new_device_metadata: Types::NewDeviceMetadataType
+      SENSITIVE: [:access_token, :refresh_token, :id_token]
+    end
+
+    class ChallengeResponseType
+      attr_accessor challenge_name: ("Password" | "Mfa")
+      attr_accessor challenge_response: ("Success" | "Failure")
+      SENSITIVE: []
+    end
+
+    class ChangePasswordRequest
+      attr_accessor previous_password: ::String
+      attr_accessor proposed_password: ::String
+      attr_accessor access_token: ::String
+      SENSITIVE: [:previous_password, :proposed_password, :access_token]
+    end
+
+    class ChangePasswordResponse < Aws::EmptyStructure
+    end
+
+    class CloudWatchLogsConfigurationType
+      attr_accessor log_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CodeDeliveryDetailsType
+      attr_accessor destination: ::String
+      attr_accessor delivery_medium: ("SMS" | "EMAIL")
+      attr_accessor attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class CodeDeliveryFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CodeMismatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CompromisedCredentialsActionsType
+      attr_accessor event_action: ("BLOCK" | "NO_ACTION")
+      SENSITIVE: []
+    end
+
+    class CompromisedCredentialsRiskConfigurationType
+      attr_accessor event_filter: ::Array[("SIGN_IN" | "PASSWORD_CHANGE" | "SIGN_UP")]
+      attr_accessor actions: Types::CompromisedCredentialsActionsType
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConfirmDeviceRequest
+      attr_accessor access_token: ::String
+      attr_accessor device_key: ::String
+      attr_accessor device_secret_verifier_config: Types::DeviceSecretVerifierConfigType
+      attr_accessor device_name: ::String
+      SENSITIVE: [:access_token]
+    end
+
+    class ConfirmDeviceResponse
+      attr_accessor user_confirmation_necessary: bool
+      SENSITIVE: []
+    end
+
+    class ConfirmForgotPasswordRequest
+      attr_accessor client_id: ::String
+      attr_accessor secret_hash: ::String
+      attr_accessor username: ::String
+      attr_accessor confirmation_code: ::String
+      attr_accessor password: ::String
+      attr_accessor analytics_metadata: Types::AnalyticsMetadataType
+      attr_accessor user_context_data: Types::UserContextDataType
+      attr_accessor client_metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:client_id, :secret_hash, :username, :password, :user_context_data]
+    end
+
+    class ConfirmForgotPasswordResponse < Aws::EmptyStructure
+    end
+
+    class ConfirmSignUpRequest
+      attr_accessor client_id: ::String
+      attr_accessor secret_hash: ::String
+      attr_accessor username: ::String
+      attr_accessor confirmation_code: ::String
+      attr_accessor force_alias_creation: bool
+      attr_accessor analytics_metadata: Types::AnalyticsMetadataType
+      attr_accessor user_context_data: Types::UserContextDataType
+      attr_accessor client_metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:client_id, :secret_hash, :username, :user_context_data]
+    end
+
+    class ConfirmSignUpResponse < Aws::EmptyStructure
+    end
+
+    class ContextDataType
+      attr_accessor ip_address: ::String
+      attr_accessor server_name: ::String
+      attr_accessor server_path: ::String
+      attr_accessor http_headers: ::Array[Types::HttpHeader]
+      attr_accessor encoded_data: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGroupRequest
+      attr_accessor group_name: ::String
+      attr_accessor user_pool_id: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor precedence: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateGroupResponse
+      attr_accessor group: Types::GroupType
+      SENSITIVE: []
+    end
+
+    class CreateIdentityProviderRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor provider_name: ::String
+      attr_accessor provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC")
+      attr_accessor provider_details: ::Hash[::String, ::String]
+      attr_accessor attribute_mapping: ::Hash[::String, ::String]
+      attr_accessor idp_identifiers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateIdentityProviderResponse
+      attr_accessor identity_provider: Types::IdentityProviderType
+      SENSITIVE: []
+    end
+
+    class CreateResourceServerRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor scopes: ::Array[Types::ResourceServerScopeType]
+      SENSITIVE: []
+    end
+
+    class CreateResourceServerResponse
+      attr_accessor resource_server: Types::ResourceServerType
+      SENSITIVE: []
+    end
+
+    class CreateUserImportJobRequest
+      attr_accessor job_name: ::String
+      attr_accessor user_pool_id: ::String
+      attr_accessor cloud_watch_logs_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserImportJobResponse
+      attr_accessor user_import_job: Types::UserImportJobType
+      SENSITIVE: []
+    end
+
+    class CreateUserPoolClientRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_name: ::String
+      attr_accessor generate_secret: bool
+      attr_accessor refresh_token_validity: ::Integer
+      attr_accessor access_token_validity: ::Integer
+      attr_accessor id_token_validity: ::Integer
+      attr_accessor token_validity_units: Types::TokenValidityUnitsType
+      attr_accessor read_attributes: ::Array[::String]
+      attr_accessor write_attributes: ::Array[::String]
+      attr_accessor explicit_auth_flows: ::Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH")]
+      attr_accessor supported_identity_providers: ::Array[::String]
+      attr_accessor callback_urls: ::Array[::String]
+      attr_accessor logout_urls: ::Array[::String]
+      attr_accessor default_redirect_uri: ::String
+      attr_accessor allowed_o_auth_flows: ::Array[("code" | "implicit" | "client_credentials")]
+      attr_accessor allowed_o_auth_scopes: ::Array[::String]
+      attr_accessor allowed_o_auth_flows_user_pool_client: bool
+      attr_accessor analytics_configuration: Types::AnalyticsConfigurationType
+      attr_accessor prevent_user_existence_errors: ("LEGACY" | "ENABLED")
+      attr_accessor enable_token_revocation: bool
+      attr_accessor enable_propagate_additional_user_context_data: bool
+      attr_accessor auth_session_validity: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateUserPoolClientResponse
+      attr_accessor user_pool_client: Types::UserPoolClientType
+      SENSITIVE: []
+    end
+
+    class CreateUserPoolDomainRequest
+      attr_accessor domain: ::String
+      attr_accessor user_pool_id: ::String
+      attr_accessor custom_domain_config: Types::CustomDomainConfigType
+      SENSITIVE: []
+    end
+
+    class CreateUserPoolDomainResponse
+      attr_accessor cloud_front_domain: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserPoolRequest
+      attr_accessor pool_name: ::String
+      attr_accessor policies: Types::UserPoolPolicyType
+      attr_accessor deletion_protection: ("ACTIVE" | "INACTIVE")
+      attr_accessor lambda_config: Types::LambdaConfigType
+      attr_accessor auto_verified_attributes: ::Array[("phone_number" | "email")]
+      attr_accessor alias_attributes: ::Array[("phone_number" | "email" | "preferred_username")]
+      attr_accessor username_attributes: ::Array[("phone_number" | "email")]
+      attr_accessor sms_verification_message: ::String
+      attr_accessor email_verification_message: ::String
+      attr_accessor email_verification_subject: ::String
+      attr_accessor verification_message_template: Types::VerificationMessageTemplateType
+      attr_accessor sms_authentication_message: ::String
+      attr_accessor mfa_configuration: ("OFF" | "ON" | "OPTIONAL")
+      attr_accessor user_attribute_update_settings: Types::UserAttributeUpdateSettingsType
+      attr_accessor device_configuration: Types::DeviceConfigurationType
+      attr_accessor email_configuration: Types::EmailConfigurationType
+      attr_accessor sms_configuration: Types::SmsConfigurationType
+      attr_accessor user_pool_tags: ::Hash[::String, ::String]
+      attr_accessor admin_create_user_config: Types::AdminCreateUserConfigType
+      attr_accessor schema: ::Array[Types::SchemaAttributeType]
+      attr_accessor user_pool_add_ons: Types::UserPoolAddOnsType
+      attr_accessor username_configuration: Types::UsernameConfigurationType
+      attr_accessor account_recovery_setting: Types::AccountRecoverySettingType
+      SENSITIVE: []
+    end
+
+    class CreateUserPoolResponse
+      attr_accessor user_pool: Types::UserPoolType
+      SENSITIVE: []
+    end
+
+    class CustomDomainConfigType
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomEmailLambdaVersionConfigType
+      attr_accessor lambda_version: ("V1_0")
+      attr_accessor lambda_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CustomSMSLambdaVersionConfigType
+      attr_accessor lambda_version: ("V1_0")
+      attr_accessor lambda_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGroupRequest
+      attr_accessor group_name: ::String
+      attr_accessor user_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIdentityProviderRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor provider_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourceServerRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserAttributesRequest
+      attr_accessor user_attribute_names: ::Array[::String]
+      attr_accessor access_token: ::String
+      SENSITIVE: [:access_token]
+    end
+
+    class DeleteUserAttributesResponse < Aws::EmptyStructure
+    end
+
+    class DeleteUserPoolClientRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      SENSITIVE: [:client_id]
+    end
+
+    class DeleteUserPoolDomainRequest
+      attr_accessor domain: ::String
+      attr_accessor user_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserPoolDomainResponse < Aws::EmptyStructure
+    end
+
+    class DeleteUserPoolRequest
+      attr_accessor user_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserRequest
+      attr_accessor access_token: ::String
+      SENSITIVE: [:access_token]
+    end
+
+    class DescribeIdentityProviderRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor provider_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeIdentityProviderResponse
+      attr_accessor identity_provider: Types::IdentityProviderType
+      SENSITIVE: []
+    end
+
+    class DescribeResourceServerRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourceServerResponse
+      attr_accessor resource_server: Types::ResourceServerType
+      SENSITIVE: []
+    end
+
+    class DescribeRiskConfigurationRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      SENSITIVE: [:client_id]
+    end
+
+    class DescribeRiskConfigurationResponse
+      attr_accessor risk_configuration: Types::RiskConfigurationType
+      SENSITIVE: []
+    end
+
+    class DescribeUserImportJobRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUserImportJobResponse
+      attr_accessor user_import_job: Types::UserImportJobType
+      SENSITIVE: []
+    end
+
+    class DescribeUserPoolClientRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      SENSITIVE: [:client_id]
+    end
+
+    class DescribeUserPoolClientResponse
+      attr_accessor user_pool_client: Types::UserPoolClientType
+      SENSITIVE: []
+    end
+
+    class DescribeUserPoolDomainRequest
+      attr_accessor domain: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUserPoolDomainResponse
+      attr_accessor domain_description: Types::DomainDescriptionType
+      SENSITIVE: []
+    end
+
+    class DescribeUserPoolRequest
+      attr_accessor user_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUserPoolResponse
+      attr_accessor user_pool: Types::UserPoolType
+      SENSITIVE: []
+    end
+
+    class DeviceConfigurationType
+      attr_accessor challenge_required_on_new_device: bool
+      attr_accessor device_only_remembered_on_user_prompt: bool
+      SENSITIVE: []
+    end
+
+    class DeviceSecretVerifierConfigType
+      attr_accessor password_verifier: ::String
+      attr_accessor salt: ::String
+      SENSITIVE: []
+    end
+
+    class DeviceType
+      attr_accessor device_key: ::String
+      attr_accessor device_attributes: ::Array[Types::AttributeType]
+      attr_accessor device_create_date: ::Time
+      attr_accessor device_last_modified_date: ::Time
+      attr_accessor device_last_authenticated_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DomainDescriptionType
+      attr_accessor user_pool_id: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor domain: ::String
+      attr_accessor s3_bucket: ::String
+      attr_accessor cloud_front_distribution: ::String
+      attr_accessor version: ::String
+      attr_accessor status: ("CREATING" | "DELETING" | "UPDATING" | "ACTIVE" | "FAILED")
+      attr_accessor custom_domain_config: Types::CustomDomainConfigType
+      SENSITIVE: []
+    end
+
+    class DuplicateProviderException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EmailConfigurationType
+      attr_accessor source_arn: ::String
+      attr_accessor reply_to_email_address: ::String
+      attr_accessor email_sending_account: ("COGNITO_DEFAULT" | "DEVELOPER")
+      attr_accessor from: ::String
+      attr_accessor configuration_set: ::String
+      SENSITIVE: []
+    end
+
+    class EnableSoftwareTokenMFAException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EventContextDataType
+      attr_accessor ip_address: ::String
+      attr_accessor device_name: ::String
+      attr_accessor timezone: ::String
+      attr_accessor city: ::String
+      attr_accessor country: ::String
+      SENSITIVE: []
+    end
+
+    class EventFeedbackType
+      attr_accessor feedback_value: ("Valid" | "Invalid")
+      attr_accessor provider: ::String
+      attr_accessor feedback_date: ::Time
+      SENSITIVE: []
+    end
+
+    class EventRiskType
+      attr_accessor risk_decision: ("NoRisk" | "AccountTakeover" | "Block")
+      attr_accessor risk_level: ("Low" | "Medium" | "High")
+      attr_accessor compromised_credentials_detected: bool
+      SENSITIVE: []
+    end
+
+    class ExpiredCodeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ForgetDeviceRequest
+      attr_accessor access_token: ::String
+      attr_accessor device_key: ::String
+      SENSITIVE: [:access_token]
+    end
+
+    class ForgotPasswordRequest
+      attr_accessor client_id: ::String
+      attr_accessor secret_hash: ::String
+      attr_accessor user_context_data: Types::UserContextDataType
+      attr_accessor username: ::String
+      attr_accessor analytics_metadata: Types::AnalyticsMetadataType
+      attr_accessor client_metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:client_id, :secret_hash, :user_context_data, :username]
+    end
+
+    class ForgotPasswordResponse
+      attr_accessor code_delivery_details: Types::CodeDeliveryDetailsType
+      SENSITIVE: []
+    end
+
+    class GetCSVHeaderRequest
+      attr_accessor user_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCSVHeaderResponse
+      attr_accessor user_pool_id: ::String
+      attr_accessor csv_header: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetDeviceRequest
+      attr_accessor device_key: ::String
+      attr_accessor access_token: ::String
+      SENSITIVE: [:access_token]
+    end
+
+    class GetDeviceResponse
+      attr_accessor device: Types::DeviceType
+      SENSITIVE: []
+    end
+
+    class GetGroupRequest
+      attr_accessor group_name: ::String
+      attr_accessor user_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupResponse
+      attr_accessor group: Types::GroupType
+      SENSITIVE: []
+    end
+
+    class GetIdentityProviderByIdentifierRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor idp_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetIdentityProviderByIdentifierResponse
+      attr_accessor identity_provider: Types::IdentityProviderType
+      SENSITIVE: []
+    end
+
+    class GetLogDeliveryConfigurationRequest
+      attr_accessor user_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLogDeliveryConfigurationResponse
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfigurationType
+      SENSITIVE: []
+    end
+
+    class GetSigningCertificateRequest
+      attr_accessor user_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSigningCertificateResponse
+      attr_accessor certificate: ::String
+      SENSITIVE: []
+    end
+
+    class GetUICustomizationRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      SENSITIVE: [:client_id]
+    end
+
+    class GetUICustomizationResponse
+      attr_accessor ui_customization: Types::UICustomizationType
+      SENSITIVE: []
+    end
+
+    class GetUserAttributeVerificationCodeRequest
+      attr_accessor access_token: ::String
+      attr_accessor attribute_name: ::String
+      attr_accessor client_metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:access_token]
+    end
+
+    class GetUserAttributeVerificationCodeResponse
+      attr_accessor code_delivery_details: Types::CodeDeliveryDetailsType
+      SENSITIVE: []
+    end
+
+    class GetUserPoolMfaConfigRequest
+      attr_accessor user_pool_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetUserPoolMfaConfigResponse
+      attr_accessor sms_mfa_configuration: Types::SmsMfaConfigType
+      attr_accessor software_token_mfa_configuration: Types::SoftwareTokenMfaConfigType
+      attr_accessor mfa_configuration: ("OFF" | "ON" | "OPTIONAL")
+      SENSITIVE: []
+    end
+
+    class GetUserRequest
+      attr_accessor access_token: ::String
+      SENSITIVE: [:access_token]
+    end
+
+    class GetUserResponse
+      attr_accessor username: ::String
+      attr_accessor user_attributes: ::Array[Types::AttributeType]
+      attr_accessor mfa_options: ::Array[Types::MFAOptionType]
+      attr_accessor preferred_mfa_setting: ::String
+      attr_accessor user_mfa_setting_list: ::Array[::String]
+      SENSITIVE: [:username]
+    end
+
+    class GlobalSignOutRequest
+      attr_accessor access_token: ::String
+      SENSITIVE: [:access_token]
+    end
+
+    class GlobalSignOutResponse < Aws::EmptyStructure
+    end
+
+    class GroupExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GroupType
+      attr_accessor group_name: ::String
+      attr_accessor user_pool_id: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor precedence: ::Integer
+      attr_accessor last_modified_date: ::Time
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class HttpHeader
+      attr_accessor header_name: ::String
+      attr_accessor header_value: ::String
+      SENSITIVE: []
+    end
+
+    class IdentityProviderType
+      attr_accessor user_pool_id: ::String
+      attr_accessor provider_name: ::String
+      attr_accessor provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC")
+      attr_accessor provider_details: ::Hash[::String, ::String]
+      attr_accessor attribute_mapping: ::Hash[::String, ::String]
+      attr_accessor idp_identifiers: ::Array[::String]
+      attr_accessor last_modified_date: ::Time
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class InitiateAuthRequest
+      attr_accessor auth_flow: ("USER_SRP_AUTH" | "REFRESH_TOKEN_AUTH" | "REFRESH_TOKEN" | "CUSTOM_AUTH" | "ADMIN_NO_SRP_AUTH" | "USER_PASSWORD_AUTH" | "ADMIN_USER_PASSWORD_AUTH")
+      attr_accessor auth_parameters: ::Hash[::String, ::String]
+      attr_accessor client_metadata: ::Hash[::String, ::String]
+      attr_accessor client_id: ::String
+      attr_accessor analytics_metadata: Types::AnalyticsMetadataType
+      attr_accessor user_context_data: Types::UserContextDataType
+      SENSITIVE: [:auth_parameters, :client_id, :user_context_data]
+    end
+
+    class InitiateAuthResponse
+      attr_accessor challenge_name: ("SMS_MFA" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
+      attr_accessor session: ::String
+      attr_accessor challenge_parameters: ::Hash[::String, ::String]
+      attr_accessor authentication_result: Types::AuthenticationResultType
+      SENSITIVE: [:session]
+    end
+
+    class InternalErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidEmailRoleAccessPolicyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidLambdaResponseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidOAuthFlowException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPasswordException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSmsRoleAccessPolicyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSmsRoleTrustRelationshipException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidUserPoolConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaConfigType
+      attr_accessor pre_sign_up: ::String
+      attr_accessor custom_message: ::String
+      attr_accessor post_confirmation: ::String
+      attr_accessor pre_authentication: ::String
+      attr_accessor post_authentication: ::String
+      attr_accessor define_auth_challenge: ::String
+      attr_accessor create_auth_challenge: ::String
+      attr_accessor verify_auth_challenge_response: ::String
+      attr_accessor pre_token_generation: ::String
+      attr_accessor user_migration: ::String
+      attr_accessor pre_token_generation_config: Types::PreTokenGenerationVersionConfigType
+      attr_accessor custom_sms_sender: Types::CustomSMSLambdaVersionConfigType
+      attr_accessor custom_email_sender: Types::CustomEmailLambdaVersionConfigType
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDevicesRequest
+      attr_accessor access_token: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor pagination_token: ::String
+      SENSITIVE: [:access_token]
+    end
+
+    class ListDevicesResponse
+      attr_accessor devices: ::Array[Types::DeviceType]
+      attr_accessor pagination_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupsRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupsResponse
+      attr_accessor groups: ::Array[Types::GroupType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentityProvidersRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentityProvidersResponse
+      attr_accessor providers: ::Array[Types::ProviderDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceServersRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceServersResponse
+      attr_accessor resource_servers: ::Array[Types::ResourceServerType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListUserImportJobsRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor pagination_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUserImportJobsResponse
+      attr_accessor user_import_jobs: ::Array[Types::UserImportJobType]
+      attr_accessor pagination_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUserPoolClientsRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUserPoolClientsResponse
+      attr_accessor user_pool_clients: ::Array[Types::UserPoolClientDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUserPoolsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListUserPoolsResponse
+      attr_accessor user_pools: ::Array[Types::UserPoolDescriptionType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUsersInGroupRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor group_name: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUsersInGroupResponse
+      attr_accessor users: ::Array[Types::UserType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUsersRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor attributes_to_get: ::Array[::String]
+      attr_accessor limit: ::Integer
+      attr_accessor pagination_token: ::String
+      attr_accessor filter: ::String
+      SENSITIVE: []
+    end
+
+    class ListUsersResponse
+      attr_accessor users: ::Array[Types::UserType]
+      attr_accessor pagination_token: ::String
+      SENSITIVE: []
+    end
+
+    class LogConfigurationType
+      attr_accessor log_level: ("ERROR")
+      attr_accessor event_source: ("userNotification")
+      attr_accessor cloud_watch_logs_configuration: Types::CloudWatchLogsConfigurationType
+      SENSITIVE: []
+    end
+
+    class LogDeliveryConfigurationType
+      attr_accessor user_pool_id: ::String
+      attr_accessor log_configurations: ::Array[Types::LogConfigurationType]
+      SENSITIVE: []
+    end
+
+    class MFAMethodNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MFAOptionType
+      attr_accessor delivery_medium: ("SMS" | "EMAIL")
+      attr_accessor attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class MessageTemplateType
+      attr_accessor sms_message: ::String
+      attr_accessor email_message: ::String
+      attr_accessor email_subject: ::String
+      SENSITIVE: []
+    end
+
+    class NewDeviceMetadataType
+      attr_accessor device_key: ::String
+      attr_accessor device_group_key: ::String
+      SENSITIVE: []
+    end
+
+    class NotAuthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotifyConfigurationType
+      attr_accessor from: ::String
+      attr_accessor reply_to: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor block_email: Types::NotifyEmailType
+      attr_accessor no_action_email: Types::NotifyEmailType
+      attr_accessor mfa_email: Types::NotifyEmailType
+      SENSITIVE: []
+    end
+
+    class NotifyEmailType
+      attr_accessor subject: ::String
+      attr_accessor html_body: ::String
+      attr_accessor text_body: ::String
+      SENSITIVE: []
+    end
+
+    class NumberAttributeConstraintsType
+      attr_accessor min_value: ::String
+      attr_accessor max_value: ::String
+      SENSITIVE: []
+    end
+
+    class PasswordPolicyType
+      attr_accessor minimum_length: ::Integer
+      attr_accessor require_uppercase: bool
+      attr_accessor require_lowercase: bool
+      attr_accessor require_numbers: bool
+      attr_accessor require_symbols: bool
+      attr_accessor temporary_password_validity_days: ::Integer
+      SENSITIVE: []
+    end
+
+    class PasswordResetRequiredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PreTokenGenerationVersionConfigType
+      attr_accessor lambda_version: ("V1_0" | "V2_0")
+      attr_accessor lambda_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PreconditionNotMetException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ProviderDescription
+      attr_accessor provider_name: ::String
+      attr_accessor provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC")
+      attr_accessor last_modified_date: ::Time
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ProviderUserIdentifierType
+      attr_accessor provider_name: ::String
+      attr_accessor provider_attribute_name: ::String
+      attr_accessor provider_attribute_value: ::String
+      SENSITIVE: []
+    end
+
+    class RecoveryOptionType
+      attr_accessor priority: ::Integer
+      attr_accessor name: ("verified_email" | "verified_phone_number" | "admin_only")
+      SENSITIVE: []
+    end
+
+    class ResendConfirmationCodeRequest
+      attr_accessor client_id: ::String
+      attr_accessor secret_hash: ::String
+      attr_accessor user_context_data: Types::UserContextDataType
+      attr_accessor username: ::String
+      attr_accessor analytics_metadata: Types::AnalyticsMetadataType
+      attr_accessor client_metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:client_id, :secret_hash, :user_context_data, :username]
+    end
+
+    class ResendConfirmationCodeResponse
+      attr_accessor code_delivery_details: Types::CodeDeliveryDetailsType
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceServerScopeType
+      attr_accessor scope_name: ::String
+      attr_accessor scope_description: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceServerType
+      attr_accessor user_pool_id: ::String
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor scopes: ::Array[Types::ResourceServerScopeType]
+      SENSITIVE: []
+    end
+
+    class RespondToAuthChallengeRequest
+      attr_accessor client_id: ::String
+      attr_accessor challenge_name: ("SMS_MFA" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
+      attr_accessor session: ::String
+      attr_accessor challenge_responses: ::Hash[::String, ::String]
+      attr_accessor analytics_metadata: Types::AnalyticsMetadataType
+      attr_accessor user_context_data: Types::UserContextDataType
+      attr_accessor client_metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:client_id, :session, :challenge_responses, :user_context_data]
+    end
+
+    class RespondToAuthChallengeResponse
+      attr_accessor challenge_name: ("SMS_MFA" | "SOFTWARE_TOKEN_MFA" | "SELECT_MFA_TYPE" | "MFA_SETUP" | "PASSWORD_VERIFIER" | "CUSTOM_CHALLENGE" | "DEVICE_SRP_AUTH" | "DEVICE_PASSWORD_VERIFIER" | "ADMIN_NO_SRP_AUTH" | "NEW_PASSWORD_REQUIRED")
+      attr_accessor session: ::String
+      attr_accessor challenge_parameters: ::Hash[::String, ::String]
+      attr_accessor authentication_result: Types::AuthenticationResultType
+      SENSITIVE: [:session]
+    end
+
+    class RevokeTokenRequest
+      attr_accessor token: ::String
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      SENSITIVE: [:token, :client_id, :client_secret]
+    end
+
+    class RevokeTokenResponse < Aws::EmptyStructure
+    end
+
+    class RiskConfigurationType
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor compromised_credentials_risk_configuration: Types::CompromisedCredentialsRiskConfigurationType
+      attr_accessor account_takeover_risk_configuration: Types::AccountTakeoverRiskConfigurationType
+      attr_accessor risk_exception_configuration: Types::RiskExceptionConfigurationType
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: [:client_id]
+    end
+
+    class RiskExceptionConfigurationType
+      attr_accessor blocked_ip_range_list: ::Array[::String]
+      attr_accessor skipped_ip_range_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SMSMfaSettingsType
+      attr_accessor enabled: bool
+      attr_accessor preferred_mfa: bool
+      SENSITIVE: []
+    end
+
+    class SchemaAttributeType
+      attr_accessor name: ::String
+      attr_accessor attribute_data_type: ("String" | "Number" | "DateTime" | "Boolean")
+      attr_accessor developer_only_attribute: bool
+      attr_accessor mutable: bool
+      attr_accessor required: bool
+      attr_accessor number_attribute_constraints: Types::NumberAttributeConstraintsType
+      attr_accessor string_attribute_constraints: Types::StringAttributeConstraintsType
+      SENSITIVE: []
+    end
+
+    class ScopeDoesNotExistException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SetLogDeliveryConfigurationRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor log_configurations: ::Array[Types::LogConfigurationType]
+      SENSITIVE: []
+    end
+
+    class SetLogDeliveryConfigurationResponse
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfigurationType
+      SENSITIVE: []
+    end
+
+    class SetRiskConfigurationRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor compromised_credentials_risk_configuration: Types::CompromisedCredentialsRiskConfigurationType
+      attr_accessor account_takeover_risk_configuration: Types::AccountTakeoverRiskConfigurationType
+      attr_accessor risk_exception_configuration: Types::RiskExceptionConfigurationType
+      SENSITIVE: [:client_id]
+    end
+
+    class SetRiskConfigurationResponse
+      attr_accessor risk_configuration: Types::RiskConfigurationType
+      SENSITIVE: []
+    end
+
+    class SetUICustomizationRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor css: ::String
+      attr_accessor image_file: ::String
+      SENSITIVE: [:client_id]
+    end
+
+    class SetUICustomizationResponse
+      attr_accessor ui_customization: Types::UICustomizationType
+      SENSITIVE: []
+    end
+
+    class SetUserMFAPreferenceRequest
+      attr_accessor sms_mfa_settings: Types::SMSMfaSettingsType
+      attr_accessor software_token_mfa_settings: Types::SoftwareTokenMfaSettingsType
+      attr_accessor access_token: ::String
+      SENSITIVE: [:access_token]
+    end
+
+    class SetUserMFAPreferenceResponse < Aws::EmptyStructure
+    end
+
+    class SetUserPoolMfaConfigRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor sms_mfa_configuration: Types::SmsMfaConfigType
+      attr_accessor software_token_mfa_configuration: Types::SoftwareTokenMfaConfigType
+      attr_accessor mfa_configuration: ("OFF" | "ON" | "OPTIONAL")
+      SENSITIVE: []
+    end
+
+    class SetUserPoolMfaConfigResponse
+      attr_accessor sms_mfa_configuration: Types::SmsMfaConfigType
+      attr_accessor software_token_mfa_configuration: Types::SoftwareTokenMfaConfigType
+      attr_accessor mfa_configuration: ("OFF" | "ON" | "OPTIONAL")
+      SENSITIVE: []
+    end
+
+    class SetUserSettingsRequest
+      attr_accessor access_token: ::String
+      attr_accessor mfa_options: ::Array[Types::MFAOptionType]
+      SENSITIVE: [:access_token]
+    end
+
+    class SetUserSettingsResponse < Aws::EmptyStructure
+    end
+
+    class SignUpRequest
+      attr_accessor client_id: ::String
+      attr_accessor secret_hash: ::String
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      attr_accessor user_attributes: ::Array[Types::AttributeType]
+      attr_accessor validation_data: ::Array[Types::AttributeType]
+      attr_accessor analytics_metadata: Types::AnalyticsMetadataType
+      attr_accessor user_context_data: Types::UserContextDataType
+      attr_accessor client_metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:client_id, :secret_hash, :username, :password, :user_context_data]
+    end
+
+    class SignUpResponse
+      attr_accessor user_confirmed: bool
+      attr_accessor code_delivery_details: Types::CodeDeliveryDetailsType
+      attr_accessor user_sub: ::String
+      SENSITIVE: []
+    end
+
+    class SmsConfigurationType
+      attr_accessor sns_caller_arn: ::String
+      attr_accessor external_id: ::String
+      attr_accessor sns_region: ::String
+      SENSITIVE: []
+    end
+
+    class SmsMfaConfigType
+      attr_accessor sms_authentication_message: ::String
+      attr_accessor sms_configuration: Types::SmsConfigurationType
+      SENSITIVE: []
+    end
+
+    class SoftwareTokenMFANotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SoftwareTokenMfaConfigType
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class SoftwareTokenMfaSettingsType
+      attr_accessor enabled: bool
+      attr_accessor preferred_mfa: bool
+      SENSITIVE: []
+    end
+
+    class StartUserImportJobRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartUserImportJobResponse
+      attr_accessor user_import_job: Types::UserImportJobType
+      SENSITIVE: []
+    end
+
+    class StopUserImportJobRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopUserImportJobResponse
+      attr_accessor user_import_job: Types::UserImportJobType
+      SENSITIVE: []
+    end
+
+    class StringAttributeConstraintsType
+      attr_accessor min_length: ::String
+      attr_accessor max_length: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TokenValidityUnitsType
+      attr_accessor access_token: ("seconds" | "minutes" | "hours" | "days")
+      attr_accessor id_token: ("seconds" | "minutes" | "hours" | "days")
+      attr_accessor refresh_token: ("seconds" | "minutes" | "hours" | "days")
+      SENSITIVE: []
+    end
+
+    class TooManyFailedAttemptsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UICustomizationType
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor image_url: ::String
+      attr_accessor css: ::String
+      attr_accessor css_version: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor creation_date: ::Time
+      SENSITIVE: [:client_id]
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnexpectedLambdaException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedIdentityProviderException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedTokenTypeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedUserStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAuthEventFeedbackRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor username: ::String
+      attr_accessor event_id: ::String
+      attr_accessor feedback_token: ::String
+      attr_accessor feedback_value: ("Valid" | "Invalid")
+      SENSITIVE: [:username, :feedback_token]
+    end
+
+    class UpdateAuthEventFeedbackResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDeviceStatusRequest
+      attr_accessor access_token: ::String
+      attr_accessor device_key: ::String
+      attr_accessor device_remembered_status: ("remembered" | "not_remembered")
+      SENSITIVE: [:access_token]
+    end
+
+    class UpdateDeviceStatusResponse < Aws::EmptyStructure
+    end
+
+    class UpdateGroupRequest
+      attr_accessor group_name: ::String
+      attr_accessor user_pool_id: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor precedence: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateGroupResponse
+      attr_accessor group: Types::GroupType
+      SENSITIVE: []
+    end
+
+    class UpdateIdentityProviderRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor provider_name: ::String
+      attr_accessor provider_details: ::Hash[::String, ::String]
+      attr_accessor attribute_mapping: ::Hash[::String, ::String]
+      attr_accessor idp_identifiers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateIdentityProviderResponse
+      attr_accessor identity_provider: Types::IdentityProviderType
+      SENSITIVE: []
+    end
+
+    class UpdateResourceServerRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor scopes: ::Array[Types::ResourceServerScopeType]
+      SENSITIVE: []
+    end
+
+    class UpdateResourceServerResponse
+      attr_accessor resource_server: Types::ResourceServerType
+      SENSITIVE: []
+    end
+
+    class UpdateUserAttributesRequest
+      attr_accessor user_attributes: ::Array[Types::AttributeType]
+      attr_accessor access_token: ::String
+      attr_accessor client_metadata: ::Hash[::String, ::String]
+      SENSITIVE: [:access_token]
+    end
+
+    class UpdateUserAttributesResponse
+      attr_accessor code_delivery_details_list: ::Array[Types::CodeDeliveryDetailsType]
+      SENSITIVE: []
+    end
+
+    class UpdateUserPoolClientRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_id: ::String
+      attr_accessor client_name: ::String
+      attr_accessor refresh_token_validity: ::Integer
+      attr_accessor access_token_validity: ::Integer
+      attr_accessor id_token_validity: ::Integer
+      attr_accessor token_validity_units: Types::TokenValidityUnitsType
+      attr_accessor read_attributes: ::Array[::String]
+      attr_accessor write_attributes: ::Array[::String]
+      attr_accessor explicit_auth_flows: ::Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH")]
+      attr_accessor supported_identity_providers: ::Array[::String]
+      attr_accessor callback_urls: ::Array[::String]
+      attr_accessor logout_urls: ::Array[::String]
+      attr_accessor default_redirect_uri: ::String
+      attr_accessor allowed_o_auth_flows: ::Array[("code" | "implicit" | "client_credentials")]
+      attr_accessor allowed_o_auth_scopes: ::Array[::String]
+      attr_accessor allowed_o_auth_flows_user_pool_client: bool
+      attr_accessor analytics_configuration: Types::AnalyticsConfigurationType
+      attr_accessor prevent_user_existence_errors: ("LEGACY" | "ENABLED")
+      attr_accessor enable_token_revocation: bool
+      attr_accessor enable_propagate_additional_user_context_data: bool
+      attr_accessor auth_session_validity: ::Integer
+      SENSITIVE: [:client_id]
+    end
+
+    class UpdateUserPoolClientResponse
+      attr_accessor user_pool_client: Types::UserPoolClientType
+      SENSITIVE: []
+    end
+
+    class UpdateUserPoolDomainRequest
+      attr_accessor domain: ::String
+      attr_accessor user_pool_id: ::String
+      attr_accessor custom_domain_config: Types::CustomDomainConfigType
+      SENSITIVE: []
+    end
+
+    class UpdateUserPoolDomainResponse
+      attr_accessor cloud_front_domain: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateUserPoolRequest
+      attr_accessor user_pool_id: ::String
+      attr_accessor policies: Types::UserPoolPolicyType
+      attr_accessor deletion_protection: ("ACTIVE" | "INACTIVE")
+      attr_accessor lambda_config: Types::LambdaConfigType
+      attr_accessor auto_verified_attributes: ::Array[("phone_number" | "email")]
+      attr_accessor sms_verification_message: ::String
+      attr_accessor email_verification_message: ::String
+      attr_accessor email_verification_subject: ::String
+      attr_accessor verification_message_template: Types::VerificationMessageTemplateType
+      attr_accessor sms_authentication_message: ::String
+      attr_accessor user_attribute_update_settings: Types::UserAttributeUpdateSettingsType
+      attr_accessor mfa_configuration: ("OFF" | "ON" | "OPTIONAL")
+      attr_accessor device_configuration: Types::DeviceConfigurationType
+      attr_accessor email_configuration: Types::EmailConfigurationType
+      attr_accessor sms_configuration: Types::SmsConfigurationType
+      attr_accessor user_pool_tags: ::Hash[::String, ::String]
+      attr_accessor admin_create_user_config: Types::AdminCreateUserConfigType
+      attr_accessor user_pool_add_ons: Types::UserPoolAddOnsType
+      attr_accessor account_recovery_setting: Types::AccountRecoverySettingType
+      SENSITIVE: []
+    end
+
+    class UpdateUserPoolResponse < Aws::EmptyStructure
+    end
+
+    class UserAttributeUpdateSettingsType
+      attr_accessor attributes_require_verification_before_update: ::Array[("phone_number" | "email")]
+      SENSITIVE: []
+    end
+
+    class UserContextDataType
+      attr_accessor ip_address: ::String
+      attr_accessor encoded_data: ::String
+      SENSITIVE: []
+    end
+
+    class UserImportInProgressException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UserImportJobType
+      attr_accessor job_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor user_pool_id: ::String
+      attr_accessor pre_signed_url: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor start_date: ::Time
+      attr_accessor completion_date: ::Time
+      attr_accessor status: ("Created" | "Pending" | "InProgress" | "Stopping" | "Expired" | "Stopped" | "Failed" | "Succeeded")
+      attr_accessor cloud_watch_logs_role_arn: ::String
+      attr_accessor imported_users: ::Integer
+      attr_accessor skipped_users: ::Integer
+      attr_accessor failed_users: ::Integer
+      attr_accessor completion_message: ::String
+      SENSITIVE: []
+    end
+
+    class UserLambdaValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UserNotConfirmedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UserNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UserPoolAddOnNotEnabledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UserPoolAddOnsType
+      attr_accessor advanced_security_mode: ("OFF" | "AUDIT" | "ENFORCED")
+      SENSITIVE: []
+    end
+
+    class UserPoolClientDescription
+      attr_accessor client_id: ::String
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_name: ::String
+      SENSITIVE: [:client_id]
+    end
+
+    class UserPoolClientType
+      attr_accessor user_pool_id: ::String
+      attr_accessor client_name: ::String
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor last_modified_date: ::Time
+      attr_accessor creation_date: ::Time
+      attr_accessor refresh_token_validity: ::Integer
+      attr_accessor access_token_validity: ::Integer
+      attr_accessor id_token_validity: ::Integer
+      attr_accessor token_validity_units: Types::TokenValidityUnitsType
+      attr_accessor read_attributes: ::Array[::String]
+      attr_accessor write_attributes: ::Array[::String]
+      attr_accessor explicit_auth_flows: ::Array[("ADMIN_NO_SRP_AUTH" | "CUSTOM_AUTH_FLOW_ONLY" | "USER_PASSWORD_AUTH" | "ALLOW_ADMIN_USER_PASSWORD_AUTH" | "ALLOW_CUSTOM_AUTH" | "ALLOW_USER_PASSWORD_AUTH" | "ALLOW_USER_SRP_AUTH" | "ALLOW_REFRESH_TOKEN_AUTH")]
+      attr_accessor supported_identity_providers: ::Array[::String]
+      attr_accessor callback_urls: ::Array[::String]
+      attr_accessor logout_urls: ::Array[::String]
+      attr_accessor default_redirect_uri: ::String
+      attr_accessor allowed_o_auth_flows: ::Array[("code" | "implicit" | "client_credentials")]
+      attr_accessor allowed_o_auth_scopes: ::Array[::String]
+      attr_accessor allowed_o_auth_flows_user_pool_client: bool
+      attr_accessor analytics_configuration: Types::AnalyticsConfigurationType
+      attr_accessor prevent_user_existence_errors: ("LEGACY" | "ENABLED")
+      attr_accessor enable_token_revocation: bool
+      attr_accessor enable_propagate_additional_user_context_data: bool
+      attr_accessor auth_session_validity: ::Integer
+      SENSITIVE: [:client_id, :client_secret]
+    end
+
+    class UserPoolDescriptionType
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor lambda_config: Types::LambdaConfigType
+      attr_accessor status: ("Enabled" | "Disabled")
+      attr_accessor last_modified_date: ::Time
+      attr_accessor creation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class UserPoolPolicyType
+      attr_accessor password_policy: Types::PasswordPolicyType
+      SENSITIVE: []
+    end
+
+    class UserPoolTaggingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UserPoolType
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor policies: Types::UserPoolPolicyType
+      attr_accessor deletion_protection: ("ACTIVE" | "INACTIVE")
+      attr_accessor lambda_config: Types::LambdaConfigType
+      attr_accessor status: ("Enabled" | "Disabled")
+      attr_accessor last_modified_date: ::Time
+      attr_accessor creation_date: ::Time
+      attr_accessor schema_attributes: ::Array[Types::SchemaAttributeType]
+      attr_accessor auto_verified_attributes: ::Array[("phone_number" | "email")]
+      attr_accessor alias_attributes: ::Array[("phone_number" | "email" | "preferred_username")]
+      attr_accessor username_attributes: ::Array[("phone_number" | "email")]
+      attr_accessor sms_verification_message: ::String
+      attr_accessor email_verification_message: ::String
+      attr_accessor email_verification_subject: ::String
+      attr_accessor verification_message_template: Types::VerificationMessageTemplateType
+      attr_accessor sms_authentication_message: ::String
+      attr_accessor user_attribute_update_settings: Types::UserAttributeUpdateSettingsType
+      attr_accessor mfa_configuration: ("OFF" | "ON" | "OPTIONAL")
+      attr_accessor device_configuration: Types::DeviceConfigurationType
+      attr_accessor estimated_number_of_users: ::Integer
+      attr_accessor email_configuration: Types::EmailConfigurationType
+      attr_accessor sms_configuration: Types::SmsConfigurationType
+      attr_accessor user_pool_tags: ::Hash[::String, ::String]
+      attr_accessor sms_configuration_failure: ::String
+      attr_accessor email_configuration_failure: ::String
+      attr_accessor domain: ::String
+      attr_accessor custom_domain: ::String
+      attr_accessor admin_create_user_config: Types::AdminCreateUserConfigType
+      attr_accessor user_pool_add_ons: Types::UserPoolAddOnsType
+      attr_accessor username_configuration: Types::UsernameConfigurationType
+      attr_accessor arn: ::String
+      attr_accessor account_recovery_setting: Types::AccountRecoverySettingType
+      SENSITIVE: []
+    end
+
+    class UserType
+      attr_accessor username: ::String
+      attr_accessor attributes: ::Array[Types::AttributeType]
+      attr_accessor user_create_date: ::Time
+      attr_accessor user_last_modified_date: ::Time
+      attr_accessor enabled: bool
+      attr_accessor user_status: ("UNCONFIRMED" | "CONFIRMED" | "ARCHIVED" | "COMPROMISED" | "UNKNOWN" | "RESET_REQUIRED" | "FORCE_CHANGE_PASSWORD")
+      attr_accessor mfa_options: ::Array[Types::MFAOptionType]
+      SENSITIVE: [:username]
+    end
+
+    class UsernameConfigurationType
+      attr_accessor case_sensitive: bool
+      SENSITIVE: []
+    end
+
+    class UsernameExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VerificationMessageTemplateType
+      attr_accessor sms_message: ::String
+      attr_accessor email_message: ::String
+      attr_accessor email_subject: ::String
+      attr_accessor email_message_by_link: ::String
+      attr_accessor email_subject_by_link: ::String
+      attr_accessor default_email_option: ("CONFIRM_WITH_LINK" | "CONFIRM_WITH_CODE")
+      SENSITIVE: []
+    end
+
+    class VerifySoftwareTokenRequest
+      attr_accessor access_token: ::String
+      attr_accessor session: ::String
+      attr_accessor user_code: ::String
+      attr_accessor friendly_device_name: ::String
+      SENSITIVE: [:access_token, :session, :user_code]
+    end
+
+    class VerifySoftwareTokenResponse
+      attr_accessor status: ("SUCCESS" | "ERROR")
+      attr_accessor session: ::String
+      SENSITIVE: [:session]
+    end
+
+    class VerifyUserAttributeRequest
+      attr_accessor access_token: ::String
+      attr_accessor attribute_name: ::String
+      attr_accessor code: ::String
+      SENSITIVE: [:access_token]
+    end
+
+    class VerifyUserAttributeResponse < Aws::EmptyStructure
+    end
+  end
+end

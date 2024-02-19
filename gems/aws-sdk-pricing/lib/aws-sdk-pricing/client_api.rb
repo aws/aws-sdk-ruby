@@ -51,6 +51,7 @@ module Aws::Pricing
     ServiceList = Shapes::ListShape.new(name: 'ServiceList')
     String = Shapes::StringShape.new(name: 'String')
     SynthesizedJsonPriceListJsonItem = Shapes::StringShape.new(name: 'SynthesizedJsonPriceListJsonItem')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
@@ -155,6 +156,9 @@ module Aws::Pricing
 
     ServiceList.member = Shapes::ShapeRef.new(shape: Service)
 
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -185,6 +189,7 @@ module Aws::Pricing
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -204,6 +209,7 @@ module Aws::Pricing
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -223,6 +229,7 @@ module Aws::Pricing
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_products, Seahorse::Model::Operation.new.tap do |o|
@@ -235,6 +242,7 @@ module Aws::Pricing
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -255,6 +263,7 @@ module Aws::Pricing
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

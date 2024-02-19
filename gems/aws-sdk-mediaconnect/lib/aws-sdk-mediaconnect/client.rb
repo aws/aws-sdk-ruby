@@ -1935,6 +1935,57 @@ module Aws::MediaConnect
       req.send_request(options)
     end
 
+    # Displays details of the flow's source stream. The response contains
+    # information about the contents of the stream and its programs.
+    #
+    # @option params [required, String] :flow_arn
+    #
+    # @return [Types::DescribeFlowSourceMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFlowSourceMetadataResponse#flow_arn #flow_arn} => String
+    #   * {Types::DescribeFlowSourceMetadataResponse#messages #messages} => Array&lt;Types::MessageDetail&gt;
+    #   * {Types::DescribeFlowSourceMetadataResponse#timestamp #timestamp} => Time
+    #   * {Types::DescribeFlowSourceMetadataResponse#transport_media_info #transport_media_info} => Types::TransportMediaInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_flow_source_metadata({
+    #     flow_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.flow_arn #=> String
+    #   resp.messages #=> Array
+    #   resp.messages[0].code #=> String
+    #   resp.messages[0].message #=> String
+    #   resp.messages[0].resource_name #=> String
+    #   resp.timestamp #=> Time
+    #   resp.transport_media_info.programs #=> Array
+    #   resp.transport_media_info.programs[0].pcr_pid #=> Integer
+    #   resp.transport_media_info.programs[0].program_name #=> String
+    #   resp.transport_media_info.programs[0].program_number #=> Integer
+    #   resp.transport_media_info.programs[0].program_pid #=> Integer
+    #   resp.transport_media_info.programs[0].streams #=> Array
+    #   resp.transport_media_info.programs[0].streams[0].channels #=> Integer
+    #   resp.transport_media_info.programs[0].streams[0].codec #=> String
+    #   resp.transport_media_info.programs[0].streams[0].frame_rate #=> String
+    #   resp.transport_media_info.programs[0].streams[0].frame_resolution.frame_height #=> Integer
+    #   resp.transport_media_info.programs[0].streams[0].frame_resolution.frame_width #=> Integer
+    #   resp.transport_media_info.programs[0].streams[0].pid #=> Integer
+    #   resp.transport_media_info.programs[0].streams[0].sample_rate #=> Integer
+    #   resp.transport_media_info.programs[0].streams[0].sample_size #=> Integer
+    #   resp.transport_media_info.programs[0].streams[0].stream_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DescribeFlowSourceMetadata AWS API Documentation
+    #
+    # @overload describe_flow_source_metadata(params = {})
+    # @param [Hash] params ({})
+    def describe_flow_source_metadata(params = {}, options = {})
+      req = build_request(:describe_flow_source_metadata, params)
+      req.send_request(options)
+    end
+
     # Displays the details of a gateway. The response includes the gateway
     # ARN, name, and CIDR blocks, as well as details about the networks.
     #
@@ -3945,7 +3996,7 @@ module Aws::MediaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

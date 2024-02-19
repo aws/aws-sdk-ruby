@@ -1,0 +1,78 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EC2
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html
+    class PlacementGroup
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#name-instance_method
+      def name: () -> String
+      alias group_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#state-instance_method
+      def state: () -> ("pending" | "available" | "deleting" | "deleted")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#strategy-instance_method
+      def strategy: () -> ("cluster" | "spread" | "partition")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#partition_count-instance_method
+      def partition_count: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#group_id-instance_method
+      def group_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#tags-instance_method
+      def tags: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#group_arn-instance_method
+      def group_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#spread_level-instance_method
+      def spread_level: () -> ("host" | "rack")
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#data-instance_method
+      def data: () -> Types::PlacementGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#delete-instance_method
+      def delete: (
+                    ?dry_run: bool
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/PlacementGroup.html#instances-instance_method
+      def instances: (
+                       ?filters: Array[
+                         {
+                           name: ::String?,
+                           values: Array[::String]?
+                         },
+                       ],
+                       ?instance_ids: Array[::String],
+                       ?dry_run: bool
+                     ) -> Instance::Collection
+                   | (?Hash[Symbol, untyped]) -> Instance::Collection
+
+      class Collection < ::Aws::Resources::Collection[PlacementGroup]
+      end
+    end
+  end
+end

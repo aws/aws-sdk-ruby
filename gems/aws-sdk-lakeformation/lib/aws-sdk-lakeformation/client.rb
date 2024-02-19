@@ -939,6 +939,54 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
+    # Creates an IAM Identity Center connection with Lake Formation to allow
+    # IAM Identity Center users and groups to access Data Catalog resources.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, view definitions, and other control
+    #   information to manage your Lake Formation environment.
+    #
+    # @option params [String] :instance_arn
+    #   The ARN of the IAM Identity Center instance for which the operation
+    #   will be executed. For more information about ARNs, see Amazon Resource
+    #   Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon
+    #   Web Services General Reference.
+    #
+    # @option params [Types::ExternalFilteringConfiguration] :external_filtering
+    #   A list of the account IDs of Amazon Web Services accounts of
+    #   third-party applications that are allowed to access data managed by
+    #   Lake Formation.
+    #
+    # @return [Types::CreateLakeFormationIdentityCenterConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLakeFormationIdentityCenterConfigurationResponse#application_arn #application_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_lake_formation_identity_center_configuration({
+    #     catalog_id: "CatalogIdString",
+    #     instance_arn: "IdentityCenterInstanceArn",
+    #     external_filtering: {
+    #       status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       authorized_targets: ["ScopeTarget"], # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateLakeFormationIdentityCenterConfiguration AWS API Documentation
+    #
+    # @overload create_lake_formation_identity_center_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_lake_formation_identity_center_configuration(params = {}, options = {})
+      req = build_request(:create_lake_formation_identity_center_configuration, params)
+      req.send_request(options)
+    end
+
     # Enforce Lake Formation permissions for the given databases, tables,
     # and principals.
     #
@@ -1082,6 +1130,31 @@ module Aws::LakeFormation
     # @param [Hash] params ({})
     def delete_lf_tag(params = {}, options = {})
       req = build_request(:delete_lf_tag, params)
+      req.send_request(options)
+    end
+
+    # Deletes an IAM Identity Center connection with Lake Formation.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, view definition, and other control
+    #   information to manage your Lake Formation environment.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_lake_formation_identity_center_configuration({
+    #     catalog_id: "CatalogIdString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteLakeFormationIdentityCenterConfiguration AWS API Documentation
+    #
+    # @overload delete_lake_formation_identity_center_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_lake_formation_identity_center_configuration(params = {}, options = {})
+      req = build_request(:delete_lake_formation_identity_center_configuration, params)
       req.send_request(options)
     end
 
@@ -1244,6 +1317,45 @@ module Aws::LakeFormation
     # @param [Hash] params ({})
     def deregister_resource(params = {}, options = {})
       req = build_request(:deregister_resource, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the instance ARN and application ARN for the connection.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, and other control information to
+    #   manage your Lake Formation environment.
+    #
+    # @return [Types::DescribeLakeFormationIdentityCenterConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#catalog_id #catalog_id} => String
+    #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#instance_arn #instance_arn} => String
+    #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#application_arn #application_arn} => String
+    #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#external_filtering #external_filtering} => Types::ExternalFilteringConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_lake_formation_identity_center_configuration({
+    #     catalog_id: "CatalogIdString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.catalog_id #=> String
+    #   resp.instance_arn #=> String
+    #   resp.application_arn #=> String
+    #   resp.external_filtering.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.external_filtering.authorized_targets #=> Array
+    #   resp.external_filtering.authorized_targets[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DescribeLakeFormationIdentityCenterConfiguration AWS API Documentation
+    #
+    # @overload describe_lake_formation_identity_center_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_lake_formation_identity_center_configuration(params = {}, options = {})
+      req = build_request(:describe_lake_formation_identity_center_configuration, params)
       req.send_request(options)
     end
 
@@ -1921,12 +2033,22 @@ module Aws::LakeFormation
     #   A list of supported permission types for the table. Valid values are
     #   `COLUMN_PERMISSION` and `CELL_FILTER_PERMISSION`.
     #
+    # @option params [String] :s3_path
+    #   The Amazon S3 path for the table.
+    #
+    # @option params [Types::QuerySessionContext] :query_session_context
+    #   A structure used as a protocol between query engines and Lake
+    #   Formation or Glue. Contains both a Lake Formation generated
+    #   authorization identifier and information from the request's
+    #   authorization context.
+    #
     # @return [Types::GetTemporaryGlueTableCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTemporaryGlueTableCredentialsResponse#access_key_id #access_key_id} => String
     #   * {Types::GetTemporaryGlueTableCredentialsResponse#secret_access_key #secret_access_key} => String
     #   * {Types::GetTemporaryGlueTableCredentialsResponse#session_token #session_token} => String
     #   * {Types::GetTemporaryGlueTableCredentialsResponse#expiration #expiration} => Time
+    #   * {Types::GetTemporaryGlueTableCredentialsResponse#vended_s3_path #vended_s3_path} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1938,6 +2060,16 @@ module Aws::LakeFormation
     #       additional_audit_context: "AuditContextString",
     #     },
     #     supported_permission_types: ["COLUMN_PERMISSION"], # accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION, NESTED_PERMISSION, NESTED_CELL_PERMISSION
+    #     s3_path: "PathString",
+    #     query_session_context: {
+    #       query_id: "HashString",
+    #       query_start_time: Time.now,
+    #       cluster_id: "NullableString",
+    #       query_authorization_id: "HashString",
+    #       additional_context: {
+    #         "ContextKey" => "ContextValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1946,6 +2078,8 @@ module Aws::LakeFormation
     #   resp.secret_access_key #=> String
     #   resp.session_token #=> String
     #   resp.expiration #=> Time
+    #   resp.vended_s3_path #=> Array
+    #   resp.vended_s3_path[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTemporaryGlueTableCredentials AWS API Documentation
     #
@@ -3386,6 +3520,44 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
+    # Updates the IAM Identity Center connection parameters.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, view definitions, and other control
+    #   information to manage your Lake Formation environment.
+    #
+    # @option params [String] :application_status
+    #   Allows to enable or disable the IAM Identity Center connection.
+    #
+    # @option params [Types::ExternalFilteringConfiguration] :external_filtering
+    #   A list of the account IDs of Amazon Web Services accounts of
+    #   third-party applications that are allowed to access data managed by
+    #   Lake Formation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_lake_formation_identity_center_configuration({
+    #     catalog_id: "CatalogIdString",
+    #     application_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     external_filtering: {
+    #       status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       authorized_targets: ["ScopeTarget"], # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateLakeFormationIdentityCenterConfiguration AWS API Documentation
+    #
+    # @overload update_lake_formation_identity_center_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_lake_formation_identity_center_configuration(params = {}, options = {})
+      req = build_request(:update_lake_formation_identity_center_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates the data access role used for vending access to the given
     # (registered) resource in Lake Formation.
     #
@@ -3536,7 +3708,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

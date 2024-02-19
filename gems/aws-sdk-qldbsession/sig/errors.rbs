@@ -1,0 +1,36 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module QLDBSession
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class BadRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class CapacityExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidSessionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def code: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class OccConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RateExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2024-02-19)
+------------------
+
+* Feature - Documentation updates for Amazon Keyspaces
+
+1.17.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2024-01-17)
+------------------
+
+* Feature - This release adds support for Multi-Region Replication with provisioned tables, and Keyspaces auto scaling APIs
+
+1.15.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.13.0 (2023-09-27)
 ------------------
 

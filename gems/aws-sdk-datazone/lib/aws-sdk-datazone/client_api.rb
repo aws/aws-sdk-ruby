@@ -199,6 +199,7 @@ module Aws::DataZone
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExternalIdentifier = Shapes::StringShape.new(name: 'ExternalIdentifier')
     FailureCause = Shapes::StructureShape.new(name: 'FailureCause')
+    FailureReasons = Shapes::ListShape.new(name: 'FailureReasons')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterClause = Shapes::UnionShape.new(name: 'FilterClause')
     FilterExpression = Shapes::StructureShape.new(name: 'FilterExpression')
@@ -362,10 +363,12 @@ module Aws::DataZone
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PredictionChoices = Shapes::ListShape.new(name: 'PredictionChoices')
     PredictionConfiguration = Shapes::StructureShape.new(name: 'PredictionConfiguration')
+    ProjectDeletionError = Shapes::StructureShape.new(name: 'ProjectDeletionError')
     ProjectId = Shapes::StringShape.new(name: 'ProjectId')
     ProjectMember = Shapes::StructureShape.new(name: 'ProjectMember')
     ProjectMembers = Shapes::ListShape.new(name: 'ProjectMembers')
     ProjectName = Shapes::StringShape.new(name: 'ProjectName')
+    ProjectStatus = Shapes::StringShape.new(name: 'ProjectStatus')
     ProjectSummaries = Shapes::ListShape.new(name: 'ProjectSummaries')
     ProjectSummary = Shapes::StructureShape.new(name: 'ProjectSummary')
     ProvisioningProperties = Shapes::UnionShape.new(name: 'ProvisioningProperties')
@@ -1008,10 +1011,12 @@ module Aws::DataZone
     CreateProjectOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
     CreateProjectOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateProjectOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    CreateProjectOutput.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
     CreateProjectOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
     CreateProjectOutput.add_member(:id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "id"))
     CreateProjectOutput.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
     CreateProjectOutput.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "name"))
+    CreateProjectOutput.add_member(:project_status, Shapes::ShapeRef.new(shape: ProjectStatus, location_name: "projectStatus"))
     CreateProjectOutput.struct_class = Types::CreateProjectOutput
 
     CreateSubscriptionGrantInput.add_member(:asset_target_names, Shapes::ShapeRef.new(shape: AssetTargetNames, location_name: "assetTargetNames"))
@@ -1238,6 +1243,7 @@ module Aws::DataZone
 
     DeleteDomainInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     DeleteDomainInput.add_member(:identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "identifier"))
+    DeleteDomainInput.add_member(:skip_deletion_check, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "skipDeletionCheck"))
     DeleteDomainInput.struct_class = Types::DeleteDomainInput
 
     DeleteDomainOutput.add_member(:status, Shapes::ShapeRef.new(shape: DomainStatus, required: true, location_name: "status"))
@@ -1283,6 +1289,7 @@ module Aws::DataZone
 
     DeleteProjectInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     DeleteProjectInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location: "uri", location_name: "identifier"))
+    DeleteProjectInput.add_member(:skip_deletion_check, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "skipDeletionCheck"))
     DeleteProjectInput.struct_class = Types::DeleteProjectInput
 
     DeleteProjectMembershipInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -1424,6 +1431,8 @@ module Aws::DataZone
 
     FailureCause.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     FailureCause.struct_class = Types::FailureCause
+
+    FailureReasons.member = Shapes::ShapeRef.new(shape: ProjectDeletionError)
 
     Filter.add_member(:attribute, Shapes::ShapeRef.new(shape: Attribute, required: true, location_name: "attribute"))
     Filter.add_member(:value, Shapes::ShapeRef.new(shape: FilterValueString, required: true, location_name: "value"))
@@ -1770,10 +1779,12 @@ module Aws::DataZone
     GetProjectOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
     GetProjectOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     GetProjectOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    GetProjectOutput.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
     GetProjectOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
     GetProjectOutput.add_member(:id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "id"))
     GetProjectOutput.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
     GetProjectOutput.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "name"))
+    GetProjectOutput.add_member(:project_status, Shapes::ShapeRef.new(shape: ProjectStatus, location_name: "projectStatus"))
     GetProjectOutput.struct_class = Types::GetProjectOutput
 
     GetSubscriptionGrantInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
@@ -2213,6 +2224,10 @@ module Aws::DataZone
     PredictionConfiguration.add_member(:business_name_generation, Shapes::ShapeRef.new(shape: BusinessNameGenerationConfiguration, location_name: "businessNameGeneration"))
     PredictionConfiguration.struct_class = Types::PredictionConfiguration
 
+    ProjectDeletionError.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
+    ProjectDeletionError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ProjectDeletionError.struct_class = Types::ProjectDeletionError
+
     ProjectMember.add_member(:designation, Shapes::ShapeRef.new(shape: UserDesignation, required: true, location_name: "designation"))
     ProjectMember.add_member(:member_details, Shapes::ShapeRef.new(shape: MemberDetails, required: true, location_name: "memberDetails"))
     ProjectMember.struct_class = Types::ProjectMember
@@ -2225,8 +2240,10 @@ module Aws::DataZone
     ProjectSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
     ProjectSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     ProjectSummary.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    ProjectSummary.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
     ProjectSummary.add_member(:id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "id"))
     ProjectSummary.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "name"))
+    ProjectSummary.add_member(:project_status, Shapes::ShapeRef.new(shape: ProjectStatus, location_name: "projectStatus"))
     ProjectSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     ProjectSummary.struct_class = Types::ProjectSummary
 
@@ -2863,10 +2880,12 @@ module Aws::DataZone
     UpdateProjectOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, required: true, location_name: "createdBy"))
     UpdateProjectOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateProjectOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    UpdateProjectOutput.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
     UpdateProjectOutput.add_member(:glossary_terms, Shapes::ShapeRef.new(shape: GlossaryTerms, location_name: "glossaryTerms"))
     UpdateProjectOutput.add_member(:id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "id"))
     UpdateProjectOutput.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "lastUpdatedAt"))
     UpdateProjectOutput.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "name"))
+    UpdateProjectOutput.add_member(:project_status, Shapes::ShapeRef.new(shape: ProjectStatus, location_name: "projectStatus"))
     UpdateProjectOutput.struct_class = Types::UpdateProjectOutput
 
     UpdateSubscriptionGrantStatusInput.add_member(:asset_identifier, Shapes::ShapeRef.new(shape: AssetId, required: true, location: "uri", location_name: "assetIdentifier"))

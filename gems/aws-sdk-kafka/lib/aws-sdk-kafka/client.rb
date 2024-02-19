@@ -1148,6 +1148,7 @@ module Aws::Kafka
     #   resp.cluster_info.zookeeper_connect_string #=> String
     #   resp.cluster_info.zookeeper_connect_string_tls #=> String
     #   resp.cluster_info.storage_mode #=> String, one of "LOCAL", "TIERED"
+    #   resp.cluster_info.customer_action_status #=> String, one of "CRITICAL_ACTION_REQUIRED", "ACTION_RECOMMENDED", "NONE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeCluster AWS API Documentation
     #
@@ -1229,6 +1230,7 @@ module Aws::Kafka
     #   resp.cluster_info.provisioned.zookeeper_connect_string #=> String
     #   resp.cluster_info.provisioned.zookeeper_connect_string_tls #=> String
     #   resp.cluster_info.provisioned.storage_mode #=> String, one of "LOCAL", "TIERED"
+    #   resp.cluster_info.provisioned.customer_action_status #=> String, one of "CRITICAL_ACTION_REQUIRED", "ACTION_RECOMMENDED", "NONE"
     #   resp.cluster_info.serverless.vpc_configs #=> Array
     #   resp.cluster_info.serverless.vpc_configs[0].subnet_ids #=> Array
     #   resp.cluster_info.serverless.vpc_configs[0].subnet_ids[0] #=> String
@@ -2029,6 +2031,7 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].zookeeper_connect_string #=> String
     #   resp.cluster_info_list[0].zookeeper_connect_string_tls #=> String
     #   resp.cluster_info_list[0].storage_mode #=> String, one of "LOCAL", "TIERED"
+    #   resp.cluster_info_list[0].customer_action_status #=> String, one of "CRITICAL_ACTION_REQUIRED", "ACTION_RECOMMENDED", "NONE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusters AWS API Documentation
@@ -2129,6 +2132,7 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].provisioned.zookeeper_connect_string #=> String
     #   resp.cluster_info_list[0].provisioned.zookeeper_connect_string_tls #=> String
     #   resp.cluster_info_list[0].provisioned.storage_mode #=> String, one of "LOCAL", "TIERED"
+    #   resp.cluster_info_list[0].provisioned.customer_action_status #=> String, one of "CRITICAL_ACTION_REQUIRED", "ACTION_RECOMMENDED", "NONE"
     #   resp.cluster_info_list[0].serverless.vpc_configs #=> Array
     #   resp.cluster_info_list[0].serverless.vpc_configs[0].subnet_ids #=> Array
     #   resp.cluster_info_list[0].serverless.vpc_configs[0].subnet_ids[0] #=> String
@@ -3292,7 +3296,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

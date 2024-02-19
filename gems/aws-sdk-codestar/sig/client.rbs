@@ -1,0 +1,355 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodeStar
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateTeamMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateTeamMemberResult]
+        def client_request_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#associate_team_member-instance_method
+      def associate_team_member: (
+                                   project_id: ::String,
+                                   ?client_request_token: ::String,
+                                   user_arn: ::String,
+                                   project_role: ::String,
+                                   ?remote_access_allowed: bool
+                                 ) -> _AssociateTeamMemberResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateTeamMemberResponseSuccess
+
+      interface _CreateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProjectResult]
+        def id: () -> ::String
+        def arn: () -> ::String
+        def client_request_token: () -> ::String
+        def project_template_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#create_project-instance_method
+      def create_project: (
+                            name: ::String,
+                            id: ::String,
+                            ?description: ::String,
+                            ?client_request_token: ::String,
+                            ?source_code: Array[
+                              {
+                                source: {
+                                  s3: {
+                                    bucket_name: ::String?,
+                                    bucket_key: ::String?
+                                  }
+                                },
+                                destination: {
+                                  code_commit: {
+                                    name: ::String
+                                  }?,
+                                  git_hub: {
+                                    name: ::String,
+                                    description: ::String?,
+                                    type: ::String,
+                                    owner: ::String,
+                                    private_repository: bool,
+                                    issues_enabled: bool,
+                                    token: ::String
+                                  }?
+                                }
+                              },
+                            ],
+                            ?toolchain: {
+                              source: {
+                                s3: {
+                                  bucket_name: ::String?,
+                                  bucket_key: ::String?
+                                }
+                              },
+                              role_arn: ::String?,
+                              stack_parameters: Hash[::String, ::String]?
+                            },
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectResponseSuccess
+
+      interface _CreateUserProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateUserProfileResult]
+        def user_arn: () -> ::String
+        def display_name: () -> ::String
+        def email_address: () -> ::String
+        def ssh_public_key: () -> ::String
+        def created_timestamp: () -> ::Time
+        def last_modified_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#create_user_profile-instance_method
+      def create_user_profile: (
+                                 user_arn: ::String,
+                                 display_name: ::String,
+                                 email_address: ::String,
+                                 ?ssh_public_key: ::String
+                               ) -> _CreateUserProfileResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserProfileResponseSuccess
+
+      interface _DeleteProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectResult]
+        def stack_id: () -> ::String
+        def project_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#delete_project-instance_method
+      def delete_project: (
+                            id: ::String,
+                            ?client_request_token: ::String,
+                            ?delete_stack: bool
+                          ) -> _DeleteProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectResponseSuccess
+
+      interface _DeleteUserProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteUserProfileResult]
+        def user_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#delete_user_profile-instance_method
+      def delete_user_profile: (
+                                 user_arn: ::String
+                               ) -> _DeleteUserProfileResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteUserProfileResponseSuccess
+
+      interface _DescribeProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProjectResult]
+        def name: () -> ::String
+        def id: () -> ::String
+        def arn: () -> ::String
+        def description: () -> ::String
+        def client_request_token: () -> ::String
+        def created_time_stamp: () -> ::Time
+        def stack_id: () -> ::String
+        def project_template_id: () -> ::String
+        def status: () -> Types::ProjectStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#describe_project-instance_method
+      def describe_project: (
+                              id: ::String
+                            ) -> _DescribeProjectResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProjectResponseSuccess
+
+      interface _DescribeUserProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUserProfileResult]
+        def user_arn: () -> ::String
+        def display_name: () -> ::String
+        def email_address: () -> ::String
+        def ssh_public_key: () -> ::String
+        def created_timestamp: () -> ::Time
+        def last_modified_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#describe_user_profile-instance_method
+      def describe_user_profile: (
+                                   user_arn: ::String
+                                 ) -> _DescribeUserProfileResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUserProfileResponseSuccess
+
+      interface _DisassociateTeamMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateTeamMemberResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#disassociate_team_member-instance_method
+      def disassociate_team_member: (
+                                      project_id: ::String,
+                                      user_arn: ::String
+                                    ) -> _DisassociateTeamMemberResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateTeamMemberResponseSuccess
+
+      interface _ListProjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProjectsResult]
+        def projects: () -> ::Array[Types::ProjectSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#list_projects-instance_method
+      def list_projects: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListProjectsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProjectsResponseSuccess
+
+      interface _ListResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcesResult]
+        def resources: () -> ::Array[Types::Resource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#list_resources-instance_method
+      def list_resources: (
+                            project_id: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListResourcesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcesResponseSuccess
+
+      interface _ListTagsForProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForProjectResult]
+        def tags: () -> ::Hash[::String, ::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#list_tags_for_project-instance_method
+      def list_tags_for_project: (
+                                   id: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListTagsForProjectResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForProjectResponseSuccess
+
+      interface _ListTeamMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTeamMembersResult]
+        def team_members: () -> ::Array[Types::TeamMember]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#list_team_members-instance_method
+      def list_team_members: (
+                               project_id: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListTeamMembersResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTeamMembersResponseSuccess
+
+      interface _ListUserProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListUserProfilesResult]
+        def user_profiles: () -> ::Array[Types::UserProfileSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#list_user_profiles-instance_method
+      def list_user_profiles: (
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListUserProfilesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUserProfilesResponseSuccess
+
+      interface _TagProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagProjectResult]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#tag_project-instance_method
+      def tag_project: (
+                         id: ::String,
+                         tags: Hash[::String, ::String]
+                       ) -> _TagProjectResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagProjectResponseSuccess
+
+      interface _UntagProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagProjectResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#untag_project-instance_method
+      def untag_project: (
+                           id: ::String,
+                           tags: Array[::String]
+                         ) -> _UntagProjectResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagProjectResponseSuccess
+
+      interface _UpdateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProjectResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#update_project-instance_method
+      def update_project: (
+                            id: ::String,
+                            ?name: ::String,
+                            ?description: ::String
+                          ) -> _UpdateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectResponseSuccess
+
+      interface _UpdateTeamMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTeamMemberResult]
+        def user_arn: () -> ::String
+        def project_role: () -> ::String
+        def remote_access_allowed: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#update_team_member-instance_method
+      def update_team_member: (
+                                project_id: ::String,
+                                user_arn: ::String,
+                                ?project_role: ::String,
+                                ?remote_access_allowed: bool
+                              ) -> _UpdateTeamMemberResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTeamMemberResponseSuccess
+
+      interface _UpdateUserProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateUserProfileResult]
+        def user_arn: () -> ::String
+        def display_name: () -> ::String
+        def email_address: () -> ::String
+        def ssh_public_key: () -> ::String
+        def created_timestamp: () -> ::Time
+        def last_modified_timestamp: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeStar/Client.html#update_user_profile-instance_method
+      def update_user_profile: (
+                                 user_arn: ::String,
+                                 ?display_name: ::String,
+                                 ?email_address: ::String,
+                                 ?ssh_public_key: ::String
+                               ) -> _UpdateUserProfileResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserProfileResponseSuccess
+    end
+  end
+end
+

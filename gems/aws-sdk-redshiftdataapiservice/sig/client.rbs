@@ -1,0 +1,275 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RedshiftDataAPIService
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchExecuteStatementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchExecuteStatementOutput]
+        def cluster_identifier: () -> ::String
+        def created_at: () -> ::Time
+        def database: () -> ::String
+        def db_user: () -> ::String
+        def id: () -> ::String
+        def secret_arn: () -> ::String
+        def workgroup_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#batch_execute_statement-instance_method
+      def batch_execute_statement: (
+                                     ?client_token: ::String,
+                                     ?cluster_identifier: ::String,
+                                     database: ::String,
+                                     ?db_user: ::String,
+                                     ?secret_arn: ::String,
+                                     sqls: Array[::String],
+                                     ?statement_name: ::String,
+                                     ?with_event: bool,
+                                     ?workgroup_name: ::String
+                                   ) -> _BatchExecuteStatementResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchExecuteStatementResponseSuccess
+
+      interface _CancelStatementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelStatementResponse]
+        def status: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#cancel_statement-instance_method
+      def cancel_statement: (
+                              id: ::String
+                            ) -> _CancelStatementResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelStatementResponseSuccess
+
+      interface _DescribeStatementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStatementResponse]
+        def cluster_identifier: () -> ::String
+        def created_at: () -> ::Time
+        def database: () -> ::String
+        def db_user: () -> ::String
+        def duration: () -> ::Integer
+        def has_result_set: () -> bool
+        def id: () -> ::String
+        def query_parameters: () -> ::Array[Types::SqlParameter]
+        def query_string: () -> ::String
+        def redshift_pid: () -> ::Integer
+        def redshift_query_id: () -> ::Integer
+        def result_rows: () -> ::Integer
+        def result_size: () -> ::Integer
+        def secret_arn: () -> ::String
+        def status: () -> ("SUBMITTED" | "PICKED" | "STARTED" | "FINISHED" | "ABORTED" | "FAILED" | "ALL")
+        def sub_statements: () -> ::Array[Types::SubStatementData]
+        def updated_at: () -> ::Time
+        def workgroup_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#describe_statement-instance_method
+      def describe_statement: (
+                                id: ::String
+                              ) -> _DescribeStatementResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStatementResponseSuccess
+
+      interface _DescribeTableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTableResponse]
+        def column_list: () -> ::Array[Types::ColumnMetadata]
+        def next_token: () -> ::String
+        def table_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#describe_table-instance_method
+      def describe_table: (
+                            ?cluster_identifier: ::String,
+                            ?connected_database: ::String,
+                            database: ::String,
+                            ?db_user: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?schema: ::String,
+                            ?secret_arn: ::String,
+                            ?table: ::String,
+                            ?workgroup_name: ::String
+                          ) -> _DescribeTableResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTableResponseSuccess
+
+      interface _ExecuteStatementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteStatementOutput]
+        def cluster_identifier: () -> ::String
+        def created_at: () -> ::Time
+        def database: () -> ::String
+        def db_user: () -> ::String
+        def id: () -> ::String
+        def secret_arn: () -> ::String
+        def workgroup_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#execute_statement-instance_method
+      def execute_statement: (
+                               ?client_token: ::String,
+                               ?cluster_identifier: ::String,
+                               database: ::String,
+                               ?db_user: ::String,
+                               ?parameters: Array[
+                                 {
+                                   name: ::String,
+                                   value: ::String
+                                 },
+                               ],
+                               ?secret_arn: ::String,
+                               sql: ::String,
+                               ?statement_name: ::String,
+                               ?with_event: bool,
+                               ?workgroup_name: ::String
+                             ) -> _ExecuteStatementResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteStatementResponseSuccess
+
+      interface _GetStatementResultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStatementResultResponse]
+        def column_metadata: () -> ::Array[Types::ColumnMetadata]
+        def next_token: () -> ::String
+        def records: () -> ::Array[::Array[Types::Field]]
+        def total_num_rows: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#get_statement_result-instance_method
+      def get_statement_result: (
+                                  id: ::String,
+                                  ?next_token: ::String
+                                ) -> _GetStatementResultResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStatementResultResponseSuccess
+
+      interface _ListDatabasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatabasesResponse]
+        def databases: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#list_databases-instance_method
+      def list_databases: (
+                            ?cluster_identifier: ::String,
+                            database: ::String,
+                            ?db_user: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?secret_arn: ::String,
+                            ?workgroup_name: ::String
+                          ) -> _ListDatabasesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatabasesResponseSuccess
+
+      interface _ListSchemasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSchemasResponse]
+        def next_token: () -> ::String
+        def schemas: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#list_schemas-instance_method
+      def list_schemas: (
+                          ?cluster_identifier: ::String,
+                          ?connected_database: ::String,
+                          database: ::String,
+                          ?db_user: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?schema_pattern: ::String,
+                          ?secret_arn: ::String,
+                          ?workgroup_name: ::String
+                        ) -> _ListSchemasResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSchemasResponseSuccess
+
+      interface _ListStatementsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStatementsResponse]
+        def next_token: () -> ::String
+        def statements: () -> ::Array[Types::StatementData]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#list_statements-instance_method
+      def list_statements: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String,
+                             ?role_level: bool,
+                             ?statement_name: ::String,
+                             ?status: ("SUBMITTED" | "PICKED" | "STARTED" | "FINISHED" | "ABORTED" | "FAILED" | "ALL")
+                           ) -> _ListStatementsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStatementsResponseSuccess
+
+      interface _ListTablesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTablesResponse]
+        def next_token: () -> ::String
+        def tables: () -> ::Array[Types::TableMember]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RedshiftDataAPIService/Client.html#list_tables-instance_method
+      def list_tables: (
+                         ?cluster_identifier: ::String,
+                         ?connected_database: ::String,
+                         database: ::String,
+                         ?db_user: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         ?schema_pattern: ::String,
+                         ?secret_arn: ::String,
+                         ?table_pattern: ::String,
+                         ?workgroup_name: ::String
+                       ) -> _ListTablesResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTablesResponseSuccess
+    end
+  end
+end
+

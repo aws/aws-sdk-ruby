@@ -1,0 +1,62 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AlexaForBusiness
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DeviceNotRegisteredException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidCertificateAuthorityException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidDeviceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidSecretsManagerResourceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidServiceLinkedRoleStateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidUserStatusException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NameInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceAssociatedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def client_request_token: () -> ::String
+      end
+      class SkillNotLinkedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnauthorizedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

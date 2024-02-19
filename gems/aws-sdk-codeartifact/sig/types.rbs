@@ -1,0 +1,811 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CodeArtifact
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssetSummary
+      attr_accessor name: ::String
+      attr_accessor size: ::Integer
+      attr_accessor hashes: ::Hash[("MD5" | "SHA-1" | "SHA-256" | "SHA-512"), ::String]
+      SENSITIVE: []
+    end
+
+    class AssociateExternalConnectionRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor external_connection: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateExternalConnectionResult
+      attr_accessor repository: Types::RepositoryDescription
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("domain" | "repository" | "package" | "package-version" | "asset")
+      SENSITIVE: []
+    end
+
+    class CopyPackageVersionsRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor source_repository: ::String
+      attr_accessor destination_repository: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor versions: ::Array[::String]
+      attr_accessor version_revisions: ::Hash[::String, ::String]
+      attr_accessor allow_overwrite: bool
+      attr_accessor include_from_upstream: bool
+      SENSITIVE: []
+    end
+
+    class CopyPackageVersionsResult
+      attr_accessor successful_versions: ::Hash[::String, Types::SuccessfulPackageVersionInfo]
+      attr_accessor failed_versions: ::Hash[::String, Types::PackageVersionError]
+      SENSITIVE: []
+    end
+
+    class CreateDomainRequest
+      attr_accessor domain: ::String
+      attr_accessor encryption_key: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDomainResult
+      attr_accessor domain: Types::DomainDescription
+      SENSITIVE: []
+    end
+
+    class CreateRepositoryRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor description: ::String
+      attr_accessor upstreams: ::Array[Types::UpstreamRepository]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRepositoryResult
+      attr_accessor repository: Types::RepositoryDescription
+      SENSITIVE: []
+    end
+
+    class DeleteDomainPermissionsPolicyRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor policy_revision: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainPermissionsPolicyResult
+      attr_accessor policy: Types::ResourcePolicy
+      SENSITIVE: []
+    end
+
+    class DeleteDomainRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainResult
+      attr_accessor domain: Types::DomainDescription
+      SENSITIVE: []
+    end
+
+    class DeletePackageRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePackageResult
+      attr_accessor deleted_package: Types::PackageSummary
+      SENSITIVE: []
+    end
+
+    class DeletePackageVersionsRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor versions: ::Array[::String]
+      attr_accessor expected_status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted")
+      SENSITIVE: []
+    end
+
+    class DeletePackageVersionsResult
+      attr_accessor successful_versions: ::Hash[::String, Types::SuccessfulPackageVersionInfo]
+      attr_accessor failed_versions: ::Hash[::String, Types::PackageVersionError]
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryPermissionsPolicyRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor policy_revision: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryPermissionsPolicyResult
+      attr_accessor policy: Types::ResourcePolicy
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryResult
+      attr_accessor repository: Types::RepositoryDescription
+      SENSITIVE: []
+    end
+
+    class DescribeDomainRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDomainResult
+      attr_accessor domain: Types::DomainDescription
+      SENSITIVE: []
+    end
+
+    class DescribePackageRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePackageResult
+      attr_accessor package: Types::PackageDescription
+      SENSITIVE: []
+    end
+
+    class DescribePackageVersionRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor package_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePackageVersionResult
+      attr_accessor package_version: Types::PackageVersionDescription
+      SENSITIVE: []
+    end
+
+    class DescribeRepositoryRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRepositoryResult
+      attr_accessor repository: Types::RepositoryDescription
+      SENSITIVE: []
+    end
+
+    class DisassociateExternalConnectionRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor external_connection: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateExternalConnectionResult
+      attr_accessor repository: Types::RepositoryDescription
+      SENSITIVE: []
+    end
+
+    class DisposePackageVersionsRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor versions: ::Array[::String]
+      attr_accessor version_revisions: ::Hash[::String, ::String]
+      attr_accessor expected_status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted")
+      SENSITIVE: []
+    end
+
+    class DisposePackageVersionsResult
+      attr_accessor successful_versions: ::Hash[::String, Types::SuccessfulPackageVersionInfo]
+      attr_accessor failed_versions: ::Hash[::String, Types::PackageVersionError]
+      SENSITIVE: []
+    end
+
+    class DomainDescription
+      attr_accessor name: ::String
+      attr_accessor owner: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("Active" | "Deleted")
+      attr_accessor created_time: ::Time
+      attr_accessor encryption_key: ::String
+      attr_accessor repository_count: ::Integer
+      attr_accessor asset_size_bytes: ::Integer
+      attr_accessor s3_bucket_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DomainEntryPoint
+      attr_accessor repository_name: ::String
+      attr_accessor external_connection_name: ::String
+      SENSITIVE: []
+    end
+
+    class DomainSummary
+      attr_accessor name: ::String
+      attr_accessor owner: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("Active" | "Deleted")
+      attr_accessor created_time: ::Time
+      attr_accessor encryption_key: ::String
+      SENSITIVE: []
+    end
+
+    class GetAuthorizationTokenRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor duration_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAuthorizationTokenResult
+      attr_accessor authorization_token: ::String
+      attr_accessor expiration: ::Time
+      SENSITIVE: []
+    end
+
+    class GetDomainPermissionsPolicyRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainPermissionsPolicyResult
+      attr_accessor policy: Types::ResourcePolicy
+      SENSITIVE: []
+    end
+
+    class GetPackageVersionAssetRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor package_version: ::String
+      attr_accessor asset: ::String
+      attr_accessor package_version_revision: ::String
+      SENSITIVE: []
+    end
+
+    class GetPackageVersionAssetResult
+      attr_accessor asset: ::IO
+      attr_accessor asset_name: ::String
+      attr_accessor package_version: ::String
+      attr_accessor package_version_revision: ::String
+      SENSITIVE: []
+    end
+
+    class GetPackageVersionReadmeRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor package_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetPackageVersionReadmeResult
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor version: ::String
+      attr_accessor version_revision: ::String
+      attr_accessor readme: ::String
+      SENSITIVE: []
+    end
+
+    class GetRepositoryEndpointRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      SENSITIVE: []
+    end
+
+    class GetRepositoryEndpointResult
+      attr_accessor repository_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class GetRepositoryPermissionsPolicyRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      SENSITIVE: []
+    end
+
+    class GetRepositoryPermissionsPolicyResult
+      attr_accessor policy: Types::ResourcePolicy
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LicenseInfo
+      attr_accessor name: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainsResult
+      attr_accessor domains: ::Array[Types::DomainSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackageVersionAssetsRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor package_version: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackageVersionAssetsResult
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor version: ::String
+      attr_accessor version_revision: ::String
+      attr_accessor next_token: ::String
+      attr_accessor assets: ::Array[Types::AssetSummary]
+      SENSITIVE: []
+    end
+
+    class ListPackageVersionDependenciesRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor package_version: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackageVersionDependenciesResult
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor version: ::String
+      attr_accessor version_revision: ::String
+      attr_accessor next_token: ::String
+      attr_accessor dependencies: ::Array[Types::PackageDependency]
+      SENSITIVE: []
+    end
+
+    class ListPackageVersionsRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted")
+      attr_accessor sort_by: ("PUBLISHED_TIME")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor origin_type: ("INTERNAL" | "EXTERNAL" | "UNKNOWN")
+      SENSITIVE: []
+    end
+
+    class ListPackageVersionsResult
+      attr_accessor default_display_version: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor versions: ::Array[Types::PackageVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackagesRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package_prefix: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor publish: ("ALLOW" | "BLOCK")
+      attr_accessor upstream: ("ALLOW" | "BLOCK")
+      SENSITIVE: []
+    end
+
+    class ListPackagesResult
+      attr_accessor packages: ::Array[Types::PackageSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRepositoriesInDomainRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor administrator_account: ::String
+      attr_accessor repository_prefix: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRepositoriesInDomainResult
+      attr_accessor repositories: ::Array[Types::RepositorySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRepositoriesRequest
+      attr_accessor repository_prefix: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRepositoriesResult
+      attr_accessor repositories: ::Array[Types::RepositorySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResult
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PackageDependency
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor dependency_type: ::String
+      attr_accessor version_requirement: ::String
+      SENSITIVE: []
+    end
+
+    class PackageDescription
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor name: ::String
+      attr_accessor origin_configuration: Types::PackageOriginConfiguration
+      SENSITIVE: []
+    end
+
+    class PackageOriginConfiguration
+      attr_accessor restrictions: Types::PackageOriginRestrictions
+      SENSITIVE: []
+    end
+
+    class PackageOriginRestrictions
+      attr_accessor publish: ("ALLOW" | "BLOCK")
+      attr_accessor upstream: ("ALLOW" | "BLOCK")
+      SENSITIVE: []
+    end
+
+    class PackageSummary
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor origin_configuration: Types::PackageOriginConfiguration
+      SENSITIVE: []
+    end
+
+    class PackageVersionDescription
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor version: ::String
+      attr_accessor summary: ::String
+      attr_accessor home_page: ::String
+      attr_accessor source_code_repository: ::String
+      attr_accessor published_time: ::Time
+      attr_accessor licenses: ::Array[Types::LicenseInfo]
+      attr_accessor revision: ::String
+      attr_accessor status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted")
+      attr_accessor origin: Types::PackageVersionOrigin
+      SENSITIVE: []
+    end
+
+    class PackageVersionError
+      attr_accessor error_code: ("ALREADY_EXISTS" | "MISMATCHED_REVISION" | "MISMATCHED_STATUS" | "NOT_ALLOWED" | "NOT_FOUND" | "SKIPPED")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class PackageVersionOrigin
+      attr_accessor domain_entry_point: Types::DomainEntryPoint
+      attr_accessor origin_type: ("INTERNAL" | "EXTERNAL" | "UNKNOWN")
+      SENSITIVE: []
+    end
+
+    class PackageVersionSummary
+      attr_accessor version: ::String
+      attr_accessor revision: ::String
+      attr_accessor status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted")
+      attr_accessor origin: Types::PackageVersionOrigin
+      SENSITIVE: []
+    end
+
+    class PublishPackageVersionRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor package_version: ::String
+      attr_accessor asset_content: ::IO
+      attr_accessor asset_name: ::String
+      attr_accessor asset_sha256: ::String
+      attr_accessor unfinished: bool
+      SENSITIVE: []
+    end
+
+    class PublishPackageVersionResult
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor version: ::String
+      attr_accessor version_revision: ::String
+      attr_accessor status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted")
+      attr_accessor asset: Types::AssetSummary
+      SENSITIVE: []
+    end
+
+    class PutDomainPermissionsPolicyRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor policy_revision: ::String
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class PutDomainPermissionsPolicyResult
+      attr_accessor policy: Types::ResourcePolicy
+      SENSITIVE: []
+    end
+
+    class PutPackageOriginConfigurationRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor restrictions: Types::PackageOriginRestrictions
+      SENSITIVE: []
+    end
+
+    class PutPackageOriginConfigurationResult
+      attr_accessor origin_configuration: Types::PackageOriginConfiguration
+      SENSITIVE: []
+    end
+
+    class PutRepositoryPermissionsPolicyRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor policy_revision: ::String
+      attr_accessor policy_document: ::String
+      SENSITIVE: []
+    end
+
+    class PutRepositoryPermissionsPolicyResult
+      attr_accessor policy: Types::ResourcePolicy
+      SENSITIVE: []
+    end
+
+    class RepositoryDescription
+      attr_accessor name: ::String
+      attr_accessor administrator_account: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor upstreams: ::Array[Types::UpstreamRepositoryInfo]
+      attr_accessor external_connections: ::Array[Types::RepositoryExternalConnectionInfo]
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
+    class RepositoryExternalConnectionInfo
+      attr_accessor external_connection_name: ::String
+      attr_accessor package_format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor status: ("Available")
+      SENSITIVE: []
+    end
+
+    class RepositorySummary
+      attr_accessor name: ::String
+      attr_accessor administrator_account: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("domain" | "repository" | "package" | "package-version" | "asset")
+      SENSITIVE: []
+    end
+
+    class ResourcePolicy
+      attr_accessor resource_arn: ::String
+      attr_accessor revision: ::String
+      attr_accessor document: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("domain" | "repository" | "package" | "package-version" | "asset")
+      SENSITIVE: []
+    end
+
+    class SuccessfulPackageVersionInfo
+      attr_accessor revision: ::String
+      attr_accessor status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted")
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResult < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResult < Aws::EmptyStructure
+    end
+
+    class UpdatePackageVersionsStatusRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift")
+      attr_accessor namespace: ::String
+      attr_accessor package: ::String
+      attr_accessor versions: ::Array[::String]
+      attr_accessor version_revisions: ::Hash[::String, ::String]
+      attr_accessor expected_status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted")
+      attr_accessor target_status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted")
+      SENSITIVE: []
+    end
+
+    class UpdatePackageVersionsStatusResult
+      attr_accessor successful_versions: ::Hash[::String, Types::SuccessfulPackageVersionInfo]
+      attr_accessor failed_versions: ::Hash[::String, Types::PackageVersionError]
+      SENSITIVE: []
+    end
+
+    class UpdateRepositoryRequest
+      attr_accessor domain: ::String
+      attr_accessor domain_owner: ::String
+      attr_accessor repository: ::String
+      attr_accessor description: ::String
+      attr_accessor upstreams: ::Array[Types::UpstreamRepository]
+      SENSITIVE: []
+    end
+
+    class UpdateRepositoryResult
+      attr_accessor repository: Types::RepositoryDescription
+      SENSITIVE: []
+    end
+
+    class UpstreamRepository
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpstreamRepositoryInfo
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("CANNOT_PARSE" | "ENCRYPTION_KEY_ERROR" | "FIELD_VALIDATION_FAILED" | "UNKNOWN_OPERATION" | "OTHER")
+      SENSITIVE: []
+    end
+  end
+end

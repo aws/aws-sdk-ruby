@@ -596,6 +596,7 @@ module Aws::S3Outposts
     #
     #   resp.outposts #=> Array
     #   resp.outposts[0].outpost_arn #=> String
+    #   resp.outposts[0].s3_outpost_arn #=> String
     #   resp.outposts[0].outpost_id #=> String
     #   resp.outposts[0].owner_id #=> String
     #   resp.outposts[0].capacity_in_bytes #=> Integer
@@ -691,7 +692,7 @@ module Aws::S3Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3outposts'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

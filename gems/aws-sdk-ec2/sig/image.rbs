@@ -1,0 +1,213 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EC2
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html
+    class Image
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#initialize-instance_method
+      def initialize: (String id, Hash[Symbol, untyped] options) -> void
+                    | (id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#id-instance_method
+      def id: () -> String
+      alias image_id id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#architecture-instance_method
+      def architecture: () -> ("i386" | "x86_64" | "arm64" | "x86_64_mac" | "arm64_mac")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#creation_date-instance_method
+      def creation_date: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#image_location-instance_method
+      def image_location: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#image_type-instance_method
+      def image_type: () -> ("machine" | "kernel" | "ramdisk")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#public-instance_method
+      def public: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#kernel_id-instance_method
+      def kernel_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#owner_id-instance_method
+      def owner_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#platform-instance_method
+      def platform: () -> ("Windows")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#platform_details-instance_method
+      def platform_details: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#usage_operation-instance_method
+      def usage_operation: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#product_codes-instance_method
+      def product_codes: () -> ::Array[Types::ProductCode]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#ramdisk_id-instance_method
+      def ramdisk_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#state-instance_method
+      def state: () -> ("pending" | "available" | "invalid" | "deregistered" | "transient" | "failed" | "error" | "disabled")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#block_device_mappings-instance_method
+      def block_device_mappings: () -> ::Array[Types::BlockDeviceMapping]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#description-instance_method
+      def description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#ena_support-instance_method
+      def ena_support: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#hypervisor-instance_method
+      def hypervisor: () -> ("ovm" | "xen")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#image_owner_alias-instance_method
+      def image_owner_alias: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#name-instance_method
+      def name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#root_device_name-instance_method
+      def root_device_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#root_device_type-instance_method
+      def root_device_type: () -> ("ebs" | "instance-store")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#sriov_net_support-instance_method
+      def sriov_net_support: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#state_reason-instance_method
+      def state_reason: () -> Types::StateReason
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#tags-instance_method
+      def tags: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#virtualization_type-instance_method
+      def virtualization_type: () -> ("hvm" | "paravirtual")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#boot_mode-instance_method
+      def boot_mode: () -> ("legacy-bios" | "uefi" | "uefi-preferred")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#tpm_support-instance_method
+      def tpm_support: () -> ("v2.0")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#deprecation_time-instance_method
+      def deprecation_time: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#imds_support-instance_method
+      def imds_support: () -> ("v2.0")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#source_instance_id-instance_method
+      def source_instance_id: () -> ::String
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#data-instance_method
+      def data: () -> Types::Image
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#exists?-instance_method
+      def exists?: (?max_attempts: Integer, ?delay: Numeric, ?before_attempt: (^(Integer attempts) -> void), ?before_wait: (^(Integer attempts, untyped response) -> void)) -> bool
+                 | (?Hash[Symbol, untyped]) -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#wait_until_exists-instance_method
+      def wait_until_exists: (?max_attempts: Integer, ?delay: Numeric, ?before_attempt: (^(Integer attempts) -> void), ?before_wait: (^(Integer attempts, untyped response) -> void)) ?{ (untyped waiter) -> void } -> Image
+                           | (?Hash[Symbol, untyped]) ?{ (untyped waiter) -> void } -> Image
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#create_tags-instance_method
+      def create_tags: (
+                         ?dry_run: bool,
+                         tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> Tag::Collection
+                     | (?Hash[Symbol, untyped]) -> Tag::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#delete_tags-instance_method
+      def delete_tags: (
+                         ?dry_run: bool,
+                         ?tags: Array[
+                           {
+                             key: ::String?,
+                             value: ::String?
+                           },
+                         ]
+                       ) -> Tag::Collection
+                     | (?Hash[Symbol, untyped]) -> Tag::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#deregister-instance_method
+      def deregister: (
+                        ?dry_run: bool
+                      ) -> ::Aws::EmptyStructure
+                    | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#describe_attribute-instance_method
+      def describe_attribute: (
+                                attribute: ("description" | "kernel" | "ramdisk" | "launchPermission" | "productCodes" | "blockDeviceMapping" | "sriovNetSupport" | "bootMode" | "tpmSupport" | "uefiData" | "lastLaunchedTime" | "imdsSupport"),
+                                ?dry_run: bool
+                              ) -> Types::ImageAttribute
+                            | (?Hash[Symbol, untyped]) -> Types::ImageAttribute
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#modify_attribute-instance_method
+      def modify_attribute: (
+                              ?attribute: ::String,
+                              ?description: untyped,
+                              ?launch_permission: {
+                                add: Array[
+                                  {
+                                    group: ("all")?,
+                                    user_id: ::String?,
+                                    organization_arn: ::String?,
+                                    organizational_unit_arn: ::String?
+                                  },
+                                ]?,
+                                remove: Array[
+                                  {
+                                    group: ("all")?,
+                                    user_id: ::String?,
+                                    organization_arn: ::String?,
+                                    organizational_unit_arn: ::String?
+                                  },
+                                ]?
+                              },
+                              ?operation_type: ("add" | "remove"),
+                              ?product_codes: Array[::String],
+                              ?user_groups: Array[::String],
+                              ?user_ids: Array[::String],
+                              ?value: ::String,
+                              ?dry_run: bool,
+                              ?organization_arns: Array[::String],
+                              ?organizational_unit_arns: Array[::String],
+                              ?imds_support: untyped
+                            ) -> ::Aws::EmptyStructure
+                          | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Image.html#reset_attribute-instance_method
+      def reset_attribute: (
+                             attribute: ("launchPermission"),
+                             ?dry_run: bool
+                           ) -> ::Aws::EmptyStructure
+                         | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      class Collection < ::Aws::Resources::Collection[Image]
+      end
+    end
+  end
+end

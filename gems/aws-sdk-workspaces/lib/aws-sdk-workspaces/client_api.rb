@@ -103,6 +103,8 @@ module Aws::WorkSpaces
     CreateWorkspaceImageResult = Shapes::StructureShape.new(name: 'CreateWorkspaceImageResult')
     CreateWorkspacesRequest = Shapes::StructureShape.new(name: 'CreateWorkspacesRequest')
     CreateWorkspacesResult = Shapes::StructureShape.new(name: 'CreateWorkspacesResult')
+    DataReplication = Shapes::StringShape.new(name: 'DataReplication')
+    DataReplicationSettings = Shapes::StructureShape.new(name: 'DataReplicationSettings')
     DedicatedTenancyCidrRangeList = Shapes::ListShape.new(name: 'DedicatedTenancyCidrRangeList')
     DedicatedTenancyManagementCidrRange = Shapes::StringShape.new(name: 'DedicatedTenancyManagementCidrRange')
     DedicatedTenancyModificationStateEnum = Shapes::StringShape.new(name: 'DedicatedTenancyModificationStateEnum')
@@ -319,6 +321,8 @@ module Aws::WorkSpaces
     StandbyWorkspace = Shapes::StructureShape.new(name: 'StandbyWorkspace')
     StandbyWorkspaceRelationshipType = Shapes::StringShape.new(name: 'StandbyWorkspaceRelationshipType')
     StandbyWorkspacesList = Shapes::ListShape.new(name: 'StandbyWorkspacesList')
+    StandbyWorkspacesProperties = Shapes::StructureShape.new(name: 'StandbyWorkspacesProperties')
+    StandbyWorkspacesPropertiesList = Shapes::ListShape.new(name: 'StandbyWorkspacesPropertiesList')
     StartRequest = Shapes::StructureShape.new(name: 'StartRequest')
     StartWorkspaceRequests = Shapes::ListShape.new(name: 'StartWorkspaceRequests')
     StartWorkspacesRequest = Shapes::StructureShape.new(name: 'StartWorkspacesRequest')
@@ -397,6 +401,7 @@ module Aws::WorkSpaces
     WorkspaceImageRequiredTenancy = Shapes::StringShape.new(name: 'WorkspaceImageRequiredTenancy')
     WorkspaceImageState = Shapes::StringShape.new(name: 'WorkspaceImageState')
     WorkspaceList = Shapes::ListShape.new(name: 'WorkspaceList')
+    WorkspaceName = Shapes::StringShape.new(name: 'WorkspaceName')
     WorkspaceProperties = Shapes::StructureShape.new(name: 'WorkspaceProperties')
     WorkspaceRequest = Shapes::StructureShape.new(name: 'WorkspaceRequest')
     WorkspaceRequestList = Shapes::ListShape.new(name: 'WorkspaceRequestList')
@@ -631,6 +636,10 @@ module Aws::WorkSpaces
     CreateWorkspacesResult.add_member(:failed_requests, Shapes::ShapeRef.new(shape: FailedCreateWorkspaceRequests, location_name: "FailedRequests"))
     CreateWorkspacesResult.add_member(:pending_requests, Shapes::ShapeRef.new(shape: WorkspaceList, location_name: "PendingRequests"))
     CreateWorkspacesResult.struct_class = Types::CreateWorkspacesResult
+
+    DataReplicationSettings.add_member(:data_replication, Shapes::ShapeRef.new(shape: DataReplication, location_name: "DataReplication"))
+    DataReplicationSettings.add_member(:recovery_snapshot_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RecoverySnapshotTime"))
+    DataReplicationSettings.struct_class = Types::DataReplicationSettings
 
     DedicatedTenancyCidrRangeList.member = Shapes::ShapeRef.new(shape: DedicatedTenancyManagementCidrRange)
 
@@ -887,6 +896,7 @@ module Aws::WorkSpaces
     DescribeWorkspacesRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: BundleId, location_name: "BundleId"))
     DescribeWorkspacesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
     DescribeWorkspacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    DescribeWorkspacesRequest.add_member(:workspace_name, Shapes::ShapeRef.new(shape: WorkspaceName, location_name: "WorkspaceName"))
     DescribeWorkspacesRequest.struct_class = Types::DescribeWorkspacesRequest
 
     DescribeWorkspacesResult.add_member(:workspaces, Shapes::ShapeRef.new(shape: WorkspaceList, location_name: "Workspaces"))
@@ -1105,7 +1115,8 @@ module Aws::WorkSpaces
     ModifyWorkspaceCreationPropertiesResult.struct_class = Types::ModifyWorkspaceCreationPropertiesResult
 
     ModifyWorkspacePropertiesRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "WorkspaceId"))
-    ModifyWorkspacePropertiesRequest.add_member(:workspace_properties, Shapes::ShapeRef.new(shape: WorkspaceProperties, required: true, location_name: "WorkspaceProperties"))
+    ModifyWorkspacePropertiesRequest.add_member(:workspace_properties, Shapes::ShapeRef.new(shape: WorkspaceProperties, location_name: "WorkspaceProperties"))
+    ModifyWorkspacePropertiesRequest.add_member(:data_replication, Shapes::ShapeRef.new(shape: DataReplication, location_name: "DataReplication"))
     ModifyWorkspacePropertiesRequest.struct_class = Types::ModifyWorkspacePropertiesRequest
 
     ModifyWorkspacePropertiesResult.struct_class = Types::ModifyWorkspacePropertiesResult
@@ -1241,9 +1252,17 @@ module Aws::WorkSpaces
     StandbyWorkspace.add_member(:volume_encryption_key, Shapes::ShapeRef.new(shape: VolumeEncryptionKey, location_name: "VolumeEncryptionKey"))
     StandbyWorkspace.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     StandbyWorkspace.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    StandbyWorkspace.add_member(:data_replication, Shapes::ShapeRef.new(shape: DataReplication, location_name: "DataReplication"))
     StandbyWorkspace.struct_class = Types::StandbyWorkspace
 
     StandbyWorkspacesList.member = Shapes::ShapeRef.new(shape: StandbyWorkspace)
+
+    StandbyWorkspacesProperties.add_member(:standby_workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, location_name: "StandbyWorkspaceId"))
+    StandbyWorkspacesProperties.add_member(:data_replication, Shapes::ShapeRef.new(shape: DataReplication, location_name: "DataReplication"))
+    StandbyWorkspacesProperties.add_member(:recovery_snapshot_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RecoverySnapshotTime"))
+    StandbyWorkspacesProperties.struct_class = Types::StandbyWorkspacesProperties
+
+    StandbyWorkspacesPropertiesList.member = Shapes::ShapeRef.new(shape: StandbyWorkspacesProperties)
 
     StartRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, location_name: "WorkspaceId"))
     StartRequest.struct_class = Types::StartRequest
@@ -1367,9 +1386,12 @@ module Aws::WorkSpaces
     Workspace.add_member(:volume_encryption_key, Shapes::ShapeRef.new(shape: VolumeEncryptionKey, location_name: "VolumeEncryptionKey"))
     Workspace.add_member(:user_volume_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UserVolumeEncryptionEnabled"))
     Workspace.add_member(:root_volume_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "RootVolumeEncryptionEnabled"))
+    Workspace.add_member(:workspace_name, Shapes::ShapeRef.new(shape: WorkspaceName, location_name: "WorkspaceName"))
     Workspace.add_member(:workspace_properties, Shapes::ShapeRef.new(shape: WorkspaceProperties, location_name: "WorkspaceProperties"))
     Workspace.add_member(:modification_states, Shapes::ShapeRef.new(shape: ModificationStateList, location_name: "ModificationStates"))
     Workspace.add_member(:related_workspaces, Shapes::ShapeRef.new(shape: RelatedWorkspaces, location_name: "RelatedWorkspaces"))
+    Workspace.add_member(:data_replication_settings, Shapes::ShapeRef.new(shape: DataReplicationSettings, location_name: "DataReplicationSettings"))
+    Workspace.add_member(:standby_workspaces_properties, Shapes::ShapeRef.new(shape: StandbyWorkspacesPropertiesList, location_name: "StandbyWorkspacesProperties"))
     Workspace.struct_class = Types::Workspace
 
     WorkspaceAccessProperties.add_member(:device_type_windows, Shapes::ShapeRef.new(shape: AccessPropertyValue, location_name: "DeviceTypeWindows"))
@@ -1471,6 +1493,7 @@ module Aws::WorkSpaces
     WorkspaceRequest.add_member(:root_volume_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "RootVolumeEncryptionEnabled"))
     WorkspaceRequest.add_member(:workspace_properties, Shapes::ShapeRef.new(shape: WorkspaceProperties, location_name: "WorkspaceProperties"))
     WorkspaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    WorkspaceRequest.add_member(:workspace_name, Shapes::ShapeRef.new(shape: WorkspaceName, location_name: "WorkspaceName"))
     WorkspaceRequest.struct_class = Types::WorkspaceRequest
 
     WorkspaceRequestList.member = Shapes::ShapeRef.new(shape: WorkspaceRequest)

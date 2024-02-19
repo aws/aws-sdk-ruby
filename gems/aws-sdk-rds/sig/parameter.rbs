@@ -1,0 +1,65 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Parameter.html
+    class Parameter
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Parameter.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Parameter.html#name-instance_method
+      def name: () -> String
+      alias parameter_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Parameter.html#parameter_value-instance_method
+      def parameter_value: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Parameter.html#description-instance_method
+      def description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Parameter.html#source-instance_method
+      def source: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Parameter.html#apply_type-instance_method
+      def apply_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Parameter.html#data_type-instance_method
+      def data_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Parameter.html#allowed_values-instance_method
+      def allowed_values: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Parameter.html#is_modifiable-instance_method
+      def is_modifiable: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Parameter.html#minimum_engine_version-instance_method
+      def minimum_engine_version: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Parameter.html#apply_method-instance_method
+      def apply_method: () -> ("immediate" | "pending-reboot")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Parameter.html#supported_engine_modes-instance_method
+      def supported_engine_modes: () -> ::Array[::String]
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Parameter.html#data-instance_method
+      def data: () -> Types::Parameter
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Parameter.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      class Collection < ::Aws::Resources::Collection[Parameter]
+      end
+    end
+  end
+end

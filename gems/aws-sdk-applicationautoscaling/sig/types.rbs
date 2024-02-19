@@ -1,0 +1,393 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ApplicationAutoScaling
+  module Types
+
+    class Alarm
+      attr_accessor alarm_name: ::String
+      attr_accessor alarm_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentUpdateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CustomizedMetricSpecification
+      attr_accessor metric_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor dimensions: ::Array[Types::MetricDimension]
+      attr_accessor statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum")
+      attr_accessor unit: ::String
+      attr_accessor metrics: ::Array[Types::TargetTrackingMetricDataQuery]
+      SENSITIVE: []
+    end
+
+    class DeleteScalingPolicyRequest
+      attr_accessor policy_name: ::String
+      attr_accessor service_namespace: ("ecs" | "elasticmapreduce" | "ec2" | "appstream" | "dynamodb" | "rds" | "sagemaker" | "custom-resource" | "comprehend" | "lambda" | "cassandra" | "kafka" | "elasticache" | "neptune")
+      attr_accessor resource_id: ::String
+      attr_accessor scalable_dimension: ("ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "elasticmapreduce:instancegroup:InstanceCount" | "appstream:fleet:DesiredCapacity" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits" | "rds:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredInstanceCount" | "custom-resource:ResourceType:Property" | "comprehend:document-classifier-endpoint:DesiredInferenceUnits" | "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" | "lambda:function:ProvisionedConcurrency" | "cassandra:table:ReadCapacityUnits" | "cassandra:table:WriteCapacityUnits" | "kafka:broker-storage:VolumeSize" | "elasticache:replication-group:NodeGroups" | "elasticache:replication-group:Replicas" | "neptune:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredProvisionedConcurrency" | "sagemaker:inference-component:DesiredCopyCount")
+      SENSITIVE: []
+    end
+
+    class DeleteScalingPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteScheduledActionRequest
+      attr_accessor service_namespace: ("ecs" | "elasticmapreduce" | "ec2" | "appstream" | "dynamodb" | "rds" | "sagemaker" | "custom-resource" | "comprehend" | "lambda" | "cassandra" | "kafka" | "elasticache" | "neptune")
+      attr_accessor scheduled_action_name: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor scalable_dimension: ("ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "elasticmapreduce:instancegroup:InstanceCount" | "appstream:fleet:DesiredCapacity" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits" | "rds:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredInstanceCount" | "custom-resource:ResourceType:Property" | "comprehend:document-classifier-endpoint:DesiredInferenceUnits" | "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" | "lambda:function:ProvisionedConcurrency" | "cassandra:table:ReadCapacityUnits" | "cassandra:table:WriteCapacityUnits" | "kafka:broker-storage:VolumeSize" | "elasticache:replication-group:NodeGroups" | "elasticache:replication-group:Replicas" | "neptune:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredProvisionedConcurrency" | "sagemaker:inference-component:DesiredCopyCount")
+      SENSITIVE: []
+    end
+
+    class DeleteScheduledActionResponse < Aws::EmptyStructure
+    end
+
+    class DeregisterScalableTargetRequest
+      attr_accessor service_namespace: ("ecs" | "elasticmapreduce" | "ec2" | "appstream" | "dynamodb" | "rds" | "sagemaker" | "custom-resource" | "comprehend" | "lambda" | "cassandra" | "kafka" | "elasticache" | "neptune")
+      attr_accessor resource_id: ::String
+      attr_accessor scalable_dimension: ("ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "elasticmapreduce:instancegroup:InstanceCount" | "appstream:fleet:DesiredCapacity" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits" | "rds:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredInstanceCount" | "custom-resource:ResourceType:Property" | "comprehend:document-classifier-endpoint:DesiredInferenceUnits" | "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" | "lambda:function:ProvisionedConcurrency" | "cassandra:table:ReadCapacityUnits" | "cassandra:table:WriteCapacityUnits" | "kafka:broker-storage:VolumeSize" | "elasticache:replication-group:NodeGroups" | "elasticache:replication-group:Replicas" | "neptune:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredProvisionedConcurrency" | "sagemaker:inference-component:DesiredCopyCount")
+      SENSITIVE: []
+    end
+
+    class DeregisterScalableTargetResponse < Aws::EmptyStructure
+    end
+
+    class DescribeScalableTargetsRequest
+      attr_accessor service_namespace: ("ecs" | "elasticmapreduce" | "ec2" | "appstream" | "dynamodb" | "rds" | "sagemaker" | "custom-resource" | "comprehend" | "lambda" | "cassandra" | "kafka" | "elasticache" | "neptune")
+      attr_accessor resource_ids: ::Array[::String]
+      attr_accessor scalable_dimension: ("ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "elasticmapreduce:instancegroup:InstanceCount" | "appstream:fleet:DesiredCapacity" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits" | "rds:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredInstanceCount" | "custom-resource:ResourceType:Property" | "comprehend:document-classifier-endpoint:DesiredInferenceUnits" | "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" | "lambda:function:ProvisionedConcurrency" | "cassandra:table:ReadCapacityUnits" | "cassandra:table:WriteCapacityUnits" | "kafka:broker-storage:VolumeSize" | "elasticache:replication-group:NodeGroups" | "elasticache:replication-group:Replicas" | "neptune:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredProvisionedConcurrency" | "sagemaker:inference-component:DesiredCopyCount")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScalableTargetsResponse
+      attr_accessor scalable_targets: ::Array[Types::ScalableTarget]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScalingActivitiesRequest
+      attr_accessor service_namespace: ("ecs" | "elasticmapreduce" | "ec2" | "appstream" | "dynamodb" | "rds" | "sagemaker" | "custom-resource" | "comprehend" | "lambda" | "cassandra" | "kafka" | "elasticache" | "neptune")
+      attr_accessor resource_id: ::String
+      attr_accessor scalable_dimension: ("ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "elasticmapreduce:instancegroup:InstanceCount" | "appstream:fleet:DesiredCapacity" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits" | "rds:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredInstanceCount" | "custom-resource:ResourceType:Property" | "comprehend:document-classifier-endpoint:DesiredInferenceUnits" | "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" | "lambda:function:ProvisionedConcurrency" | "cassandra:table:ReadCapacityUnits" | "cassandra:table:WriteCapacityUnits" | "kafka:broker-storage:VolumeSize" | "elasticache:replication-group:NodeGroups" | "elasticache:replication-group:Replicas" | "neptune:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredProvisionedConcurrency" | "sagemaker:inference-component:DesiredCopyCount")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor include_not_scaled_activities: bool
+      SENSITIVE: []
+    end
+
+    class DescribeScalingActivitiesResponse
+      attr_accessor scaling_activities: ::Array[Types::ScalingActivity]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScalingPoliciesRequest
+      attr_accessor policy_names: ::Array[::String]
+      attr_accessor service_namespace: ("ecs" | "elasticmapreduce" | "ec2" | "appstream" | "dynamodb" | "rds" | "sagemaker" | "custom-resource" | "comprehend" | "lambda" | "cassandra" | "kafka" | "elasticache" | "neptune")
+      attr_accessor resource_id: ::String
+      attr_accessor scalable_dimension: ("ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "elasticmapreduce:instancegroup:InstanceCount" | "appstream:fleet:DesiredCapacity" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits" | "rds:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredInstanceCount" | "custom-resource:ResourceType:Property" | "comprehend:document-classifier-endpoint:DesiredInferenceUnits" | "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" | "lambda:function:ProvisionedConcurrency" | "cassandra:table:ReadCapacityUnits" | "cassandra:table:WriteCapacityUnits" | "kafka:broker-storage:VolumeSize" | "elasticache:replication-group:NodeGroups" | "elasticache:replication-group:Replicas" | "neptune:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredProvisionedConcurrency" | "sagemaker:inference-component:DesiredCopyCount")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScalingPoliciesResponse
+      attr_accessor scaling_policies: ::Array[Types::ScalingPolicy]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScheduledActionsRequest
+      attr_accessor scheduled_action_names: ::Array[::String]
+      attr_accessor service_namespace: ("ecs" | "elasticmapreduce" | "ec2" | "appstream" | "dynamodb" | "rds" | "sagemaker" | "custom-resource" | "comprehend" | "lambda" | "cassandra" | "kafka" | "elasticache" | "neptune")
+      attr_accessor resource_id: ::String
+      attr_accessor scalable_dimension: ("ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "elasticmapreduce:instancegroup:InstanceCount" | "appstream:fleet:DesiredCapacity" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits" | "rds:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredInstanceCount" | "custom-resource:ResourceType:Property" | "comprehend:document-classifier-endpoint:DesiredInferenceUnits" | "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" | "lambda:function:ProvisionedConcurrency" | "cassandra:table:ReadCapacityUnits" | "cassandra:table:WriteCapacityUnits" | "kafka:broker-storage:VolumeSize" | "elasticache:replication-group:NodeGroups" | "elasticache:replication-group:Replicas" | "neptune:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredProvisionedConcurrency" | "sagemaker:inference-component:DesiredCopyCount")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeScheduledActionsResponse
+      attr_accessor scheduled_actions: ::Array[Types::ScheduledAction]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class FailedResourceAccessException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MetricDimension
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class NotScaledReason
+      attr_accessor code: ::String
+      attr_accessor max_capacity: ::Integer
+      attr_accessor min_capacity: ::Integer
+      attr_accessor current_capacity: ::Integer
+      SENSITIVE: []
+    end
+
+    class ObjectNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PredefinedMetricSpecification
+      attr_accessor predefined_metric_type: ("DynamoDBReadCapacityUtilization" | "DynamoDBWriteCapacityUtilization" | "ALBRequestCountPerTarget" | "RDSReaderAverageCPUUtilization" | "RDSReaderAverageDatabaseConnections" | "EC2SpotFleetRequestAverageCPUUtilization" | "EC2SpotFleetRequestAverageNetworkIn" | "EC2SpotFleetRequestAverageNetworkOut" | "SageMakerVariantInvocationsPerInstance" | "ECSServiceAverageCPUUtilization" | "ECSServiceAverageMemoryUtilization" | "AppStreamAverageCapacityUtilization" | "ComprehendInferenceUtilization" | "LambdaProvisionedConcurrencyUtilization" | "CassandraReadCapacityUtilization" | "CassandraWriteCapacityUtilization" | "KafkaBrokerStorageUtilization" | "ElastiCachePrimaryEngineCPUUtilization" | "ElastiCacheReplicaEngineCPUUtilization" | "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage" | "NeptuneReaderAverageCPUUtilization" | "SageMakerVariantProvisionedConcurrencyUtilization" | "ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage" | "SageMakerInferenceComponentInvocationsPerCopy")
+      attr_accessor resource_label: ::String
+      SENSITIVE: []
+    end
+
+    class PutScalingPolicyRequest
+      attr_accessor policy_name: ::String
+      attr_accessor service_namespace: ("ecs" | "elasticmapreduce" | "ec2" | "appstream" | "dynamodb" | "rds" | "sagemaker" | "custom-resource" | "comprehend" | "lambda" | "cassandra" | "kafka" | "elasticache" | "neptune")
+      attr_accessor resource_id: ::String
+      attr_accessor scalable_dimension: ("ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "elasticmapreduce:instancegroup:InstanceCount" | "appstream:fleet:DesiredCapacity" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits" | "rds:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredInstanceCount" | "custom-resource:ResourceType:Property" | "comprehend:document-classifier-endpoint:DesiredInferenceUnits" | "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" | "lambda:function:ProvisionedConcurrency" | "cassandra:table:ReadCapacityUnits" | "cassandra:table:WriteCapacityUnits" | "kafka:broker-storage:VolumeSize" | "elasticache:replication-group:NodeGroups" | "elasticache:replication-group:Replicas" | "neptune:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredProvisionedConcurrency" | "sagemaker:inference-component:DesiredCopyCount")
+      attr_accessor policy_type: ("StepScaling" | "TargetTrackingScaling")
+      attr_accessor step_scaling_policy_configuration: Types::StepScalingPolicyConfiguration
+      attr_accessor target_tracking_scaling_policy_configuration: Types::TargetTrackingScalingPolicyConfiguration
+      SENSITIVE: []
+    end
+
+    class PutScalingPolicyResponse
+      attr_accessor policy_arn: ::String
+      attr_accessor alarms: ::Array[Types::Alarm]
+      SENSITIVE: []
+    end
+
+    class PutScheduledActionRequest
+      attr_accessor service_namespace: ("ecs" | "elasticmapreduce" | "ec2" | "appstream" | "dynamodb" | "rds" | "sagemaker" | "custom-resource" | "comprehend" | "lambda" | "cassandra" | "kafka" | "elasticache" | "neptune")
+      attr_accessor schedule: ::String
+      attr_accessor timezone: ::String
+      attr_accessor scheduled_action_name: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor scalable_dimension: ("ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "elasticmapreduce:instancegroup:InstanceCount" | "appstream:fleet:DesiredCapacity" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits" | "rds:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredInstanceCount" | "custom-resource:ResourceType:Property" | "comprehend:document-classifier-endpoint:DesiredInferenceUnits" | "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" | "lambda:function:ProvisionedConcurrency" | "cassandra:table:ReadCapacityUnits" | "cassandra:table:WriteCapacityUnits" | "kafka:broker-storage:VolumeSize" | "elasticache:replication-group:NodeGroups" | "elasticache:replication-group:Replicas" | "neptune:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredProvisionedConcurrency" | "sagemaker:inference-component:DesiredCopyCount")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor scalable_target_action: Types::ScalableTargetAction
+      SENSITIVE: []
+    end
+
+    class PutScheduledActionResponse < Aws::EmptyStructure
+    end
+
+    class RegisterScalableTargetRequest
+      attr_accessor service_namespace: ("ecs" | "elasticmapreduce" | "ec2" | "appstream" | "dynamodb" | "rds" | "sagemaker" | "custom-resource" | "comprehend" | "lambda" | "cassandra" | "kafka" | "elasticache" | "neptune")
+      attr_accessor resource_id: ::String
+      attr_accessor scalable_dimension: ("ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "elasticmapreduce:instancegroup:InstanceCount" | "appstream:fleet:DesiredCapacity" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits" | "rds:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredInstanceCount" | "custom-resource:ResourceType:Property" | "comprehend:document-classifier-endpoint:DesiredInferenceUnits" | "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" | "lambda:function:ProvisionedConcurrency" | "cassandra:table:ReadCapacityUnits" | "cassandra:table:WriteCapacityUnits" | "kafka:broker-storage:VolumeSize" | "elasticache:replication-group:NodeGroups" | "elasticache:replication-group:Replicas" | "neptune:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredProvisionedConcurrency" | "sagemaker:inference-component:DesiredCopyCount")
+      attr_accessor min_capacity: ::Integer
+      attr_accessor max_capacity: ::Integer
+      attr_accessor role_arn: ::String
+      attr_accessor suspended_state: Types::SuspendedState
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RegisterScalableTargetResponse
+      attr_accessor scalable_target_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ScalableTarget
+      attr_accessor service_namespace: ("ecs" | "elasticmapreduce" | "ec2" | "appstream" | "dynamodb" | "rds" | "sagemaker" | "custom-resource" | "comprehend" | "lambda" | "cassandra" | "kafka" | "elasticache" | "neptune")
+      attr_accessor resource_id: ::String
+      attr_accessor scalable_dimension: ("ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "elasticmapreduce:instancegroup:InstanceCount" | "appstream:fleet:DesiredCapacity" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits" | "rds:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredInstanceCount" | "custom-resource:ResourceType:Property" | "comprehend:document-classifier-endpoint:DesiredInferenceUnits" | "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" | "lambda:function:ProvisionedConcurrency" | "cassandra:table:ReadCapacityUnits" | "cassandra:table:WriteCapacityUnits" | "kafka:broker-storage:VolumeSize" | "elasticache:replication-group:NodeGroups" | "elasticache:replication-group:Replicas" | "neptune:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredProvisionedConcurrency" | "sagemaker:inference-component:DesiredCopyCount")
+      attr_accessor min_capacity: ::Integer
+      attr_accessor max_capacity: ::Integer
+      attr_accessor role_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor suspended_state: Types::SuspendedState
+      attr_accessor scalable_target_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ScalableTargetAction
+      attr_accessor min_capacity: ::Integer
+      attr_accessor max_capacity: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScalingActivity
+      attr_accessor activity_id: ::String
+      attr_accessor service_namespace: ("ecs" | "elasticmapreduce" | "ec2" | "appstream" | "dynamodb" | "rds" | "sagemaker" | "custom-resource" | "comprehend" | "lambda" | "cassandra" | "kafka" | "elasticache" | "neptune")
+      attr_accessor resource_id: ::String
+      attr_accessor scalable_dimension: ("ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "elasticmapreduce:instancegroup:InstanceCount" | "appstream:fleet:DesiredCapacity" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits" | "rds:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredInstanceCount" | "custom-resource:ResourceType:Property" | "comprehend:document-classifier-endpoint:DesiredInferenceUnits" | "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" | "lambda:function:ProvisionedConcurrency" | "cassandra:table:ReadCapacityUnits" | "cassandra:table:WriteCapacityUnits" | "kafka:broker-storage:VolumeSize" | "elasticache:replication-group:NodeGroups" | "elasticache:replication-group:Replicas" | "neptune:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredProvisionedConcurrency" | "sagemaker:inference-component:DesiredCopyCount")
+      attr_accessor description: ::String
+      attr_accessor cause: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor status_code: ("Pending" | "InProgress" | "Successful" | "Overridden" | "Unfulfilled" | "Failed")
+      attr_accessor status_message: ::String
+      attr_accessor details: ::String
+      attr_accessor not_scaled_reasons: ::Array[Types::NotScaledReason]
+      SENSITIVE: []
+    end
+
+    class ScalingPolicy
+      attr_accessor policy_arn: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor service_namespace: ("ecs" | "elasticmapreduce" | "ec2" | "appstream" | "dynamodb" | "rds" | "sagemaker" | "custom-resource" | "comprehend" | "lambda" | "cassandra" | "kafka" | "elasticache" | "neptune")
+      attr_accessor resource_id: ::String
+      attr_accessor scalable_dimension: ("ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "elasticmapreduce:instancegroup:InstanceCount" | "appstream:fleet:DesiredCapacity" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits" | "rds:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredInstanceCount" | "custom-resource:ResourceType:Property" | "comprehend:document-classifier-endpoint:DesiredInferenceUnits" | "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" | "lambda:function:ProvisionedConcurrency" | "cassandra:table:ReadCapacityUnits" | "cassandra:table:WriteCapacityUnits" | "kafka:broker-storage:VolumeSize" | "elasticache:replication-group:NodeGroups" | "elasticache:replication-group:Replicas" | "neptune:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredProvisionedConcurrency" | "sagemaker:inference-component:DesiredCopyCount")
+      attr_accessor policy_type: ("StepScaling" | "TargetTrackingScaling")
+      attr_accessor step_scaling_policy_configuration: Types::StepScalingPolicyConfiguration
+      attr_accessor target_tracking_scaling_policy_configuration: Types::TargetTrackingScalingPolicyConfiguration
+      attr_accessor alarms: ::Array[Types::Alarm]
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ScheduledAction
+      attr_accessor scheduled_action_name: ::String
+      attr_accessor scheduled_action_arn: ::String
+      attr_accessor service_namespace: ("ecs" | "elasticmapreduce" | "ec2" | "appstream" | "dynamodb" | "rds" | "sagemaker" | "custom-resource" | "comprehend" | "lambda" | "cassandra" | "kafka" | "elasticache" | "neptune")
+      attr_accessor schedule: ::String
+      attr_accessor timezone: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor scalable_dimension: ("ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "elasticmapreduce:instancegroup:InstanceCount" | "appstream:fleet:DesiredCapacity" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits" | "rds:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredInstanceCount" | "custom-resource:ResourceType:Property" | "comprehend:document-classifier-endpoint:DesiredInferenceUnits" | "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits" | "lambda:function:ProvisionedConcurrency" | "cassandra:table:ReadCapacityUnits" | "cassandra:table:WriteCapacityUnits" | "kafka:broker-storage:VolumeSize" | "elasticache:replication-group:NodeGroups" | "elasticache:replication-group:Replicas" | "neptune:cluster:ReadReplicaCount" | "sagemaker:variant:DesiredProvisionedConcurrency" | "sagemaker:inference-component:DesiredCopyCount")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor scalable_target_action: Types::ScalableTargetAction
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StepAdjustment
+      attr_accessor metric_interval_lower_bound: ::Float
+      attr_accessor metric_interval_upper_bound: ::Float
+      attr_accessor scaling_adjustment: ::Integer
+      SENSITIVE: []
+    end
+
+    class StepScalingPolicyConfiguration
+      attr_accessor adjustment_type: ("ChangeInCapacity" | "PercentChangeInCapacity" | "ExactCapacity")
+      attr_accessor step_adjustments: ::Array[Types::StepAdjustment]
+      attr_accessor min_adjustment_magnitude: ::Integer
+      attr_accessor cooldown: ::Integer
+      attr_accessor metric_aggregation_type: ("Average" | "Minimum" | "Maximum")
+      SENSITIVE: []
+    end
+
+    class SuspendedState
+      attr_accessor dynamic_scaling_in_suspended: bool
+      attr_accessor dynamic_scaling_out_suspended: bool
+      attr_accessor scheduled_scaling_suspended: bool
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TargetTrackingMetric
+      attr_accessor dimensions: ::Array[Types::TargetTrackingMetricDimension]
+      attr_accessor metric_name: ::String
+      attr_accessor namespace: ::String
+      SENSITIVE: []
+    end
+
+    class TargetTrackingMetricDataQuery
+      attr_accessor expression: ::String
+      attr_accessor id: ::String
+      attr_accessor label: ::String
+      attr_accessor metric_stat: Types::TargetTrackingMetricStat
+      attr_accessor return_data: bool
+      SENSITIVE: []
+    end
+
+    class TargetTrackingMetricDimension
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TargetTrackingMetricStat
+      attr_accessor metric: Types::TargetTrackingMetric
+      attr_accessor stat: ::String
+      attr_accessor unit: ::String
+      SENSITIVE: []
+    end
+
+    class TargetTrackingScalingPolicyConfiguration
+      attr_accessor target_value: ::Float
+      attr_accessor predefined_metric_specification: Types::PredefinedMetricSpecification
+      attr_accessor customized_metric_specification: Types::CustomizedMetricSpecification
+      attr_accessor scale_out_cooldown: ::Integer
+      attr_accessor scale_in_cooldown: ::Integer
+      attr_accessor disable_scale_in: bool
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

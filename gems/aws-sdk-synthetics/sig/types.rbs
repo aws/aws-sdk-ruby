@@ -1,0 +1,478 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Synthetics
+  module Types
+
+    class ArtifactConfigInput
+      attr_accessor s3_encryption: Types::S3EncryptionConfig
+      SENSITIVE: []
+    end
+
+    class ArtifactConfigOutput
+      attr_accessor s3_encryption: Types::S3EncryptionConfig
+      SENSITIVE: []
+    end
+
+    class AssociateResourceRequest
+      attr_accessor group_identifier: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateResourceResponse < Aws::EmptyStructure
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BaseScreenshot
+      attr_accessor screenshot_name: ::String
+      attr_accessor ignore_coordinates: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Canary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor code: Types::CanaryCodeOutput
+      attr_accessor execution_role_arn: ::String
+      attr_accessor schedule: Types::CanaryScheduleOutput
+      attr_accessor run_config: Types::CanaryRunConfigOutput
+      attr_accessor success_retention_period_in_days: ::Integer
+      attr_accessor failure_retention_period_in_days: ::Integer
+      attr_accessor status: Types::CanaryStatus
+      attr_accessor timeline: Types::CanaryTimeline
+      attr_accessor artifact_s3_location: ::String
+      attr_accessor engine_arn: ::String
+      attr_accessor runtime_version: ::String
+      attr_accessor vpc_config: Types::VpcConfigOutput
+      attr_accessor visual_reference: Types::VisualReferenceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor artifact_config: Types::ArtifactConfigOutput
+      SENSITIVE: []
+    end
+
+    class CanaryCodeInput
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key: ::String
+      attr_accessor s3_version: ::String
+      attr_accessor zip_file: ::String
+      attr_accessor handler: ::String
+      SENSITIVE: []
+    end
+
+    class CanaryCodeOutput
+      attr_accessor source_location_arn: ::String
+      attr_accessor handler: ::String
+      SENSITIVE: []
+    end
+
+    class CanaryLastRun
+      attr_accessor canary_name: ::String
+      attr_accessor last_run: Types::CanaryRun
+      SENSITIVE: []
+    end
+
+    class CanaryRun
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: Types::CanaryRunStatus
+      attr_accessor timeline: Types::CanaryRunTimeline
+      attr_accessor artifact_s3_location: ::String
+      SENSITIVE: []
+    end
+
+    class CanaryRunConfigInput
+      attr_accessor timeout_in_seconds: ::Integer
+      attr_accessor memory_in_mb: ::Integer
+      attr_accessor active_tracing: bool
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CanaryRunConfigOutput
+      attr_accessor timeout_in_seconds: ::Integer
+      attr_accessor memory_in_mb: ::Integer
+      attr_accessor active_tracing: bool
+      SENSITIVE: []
+    end
+
+    class CanaryRunStatus
+      attr_accessor state: ("RUNNING" | "PASSED" | "FAILED")
+      attr_accessor state_reason: ::String
+      attr_accessor state_reason_code: ("CANARY_FAILURE" | "EXECUTION_FAILURE")
+      SENSITIVE: []
+    end
+
+    class CanaryRunTimeline
+      attr_accessor started: ::Time
+      attr_accessor completed: ::Time
+      SENSITIVE: []
+    end
+
+    class CanaryScheduleInput
+      attr_accessor expression: ::String
+      attr_accessor duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class CanaryScheduleOutput
+      attr_accessor expression: ::String
+      attr_accessor duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class CanaryStatus
+      attr_accessor state: ("CREATING" | "READY" | "STARTING" | "RUNNING" | "UPDATING" | "STOPPING" | "STOPPED" | "ERROR" | "DELETING")
+      attr_accessor state_reason: ::String
+      attr_accessor state_reason_code: ("INVALID_PERMISSIONS" | "CREATE_PENDING" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_PENDING" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "SYNC_DELETE_IN_PROGRESS")
+      SENSITIVE: []
+    end
+
+    class CanaryTimeline
+      attr_accessor created: ::Time
+      attr_accessor last_modified: ::Time
+      attr_accessor last_started: ::Time
+      attr_accessor last_stopped: ::Time
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCanaryRequest
+      attr_accessor name: ::String
+      attr_accessor code: Types::CanaryCodeInput
+      attr_accessor artifact_s3_location: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor schedule: Types::CanaryScheduleInput
+      attr_accessor run_config: Types::CanaryRunConfigInput
+      attr_accessor success_retention_period_in_days: ::Integer
+      attr_accessor failure_retention_period_in_days: ::Integer
+      attr_accessor runtime_version: ::String
+      attr_accessor vpc_config: Types::VpcConfigInput
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor artifact_config: Types::ArtifactConfigInput
+      SENSITIVE: []
+    end
+
+    class CreateCanaryResponse
+      attr_accessor canary: Types::Canary
+      SENSITIVE: []
+    end
+
+    class CreateGroupRequest
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateGroupResponse
+      attr_accessor group: Types::Group
+      SENSITIVE: []
+    end
+
+    class DeleteCanaryRequest
+      attr_accessor name: ::String
+      attr_accessor delete_lambda: bool
+      SENSITIVE: []
+    end
+
+    class DeleteCanaryResponse < Aws::EmptyStructure
+    end
+
+    class DeleteGroupRequest
+      attr_accessor group_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGroupResponse < Aws::EmptyStructure
+    end
+
+    class DescribeCanariesLastRunRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeCanariesLastRunResponse
+      attr_accessor canaries_last_run: ::Array[Types::CanaryLastRun]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCanariesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeCanariesResponse
+      attr_accessor canaries: ::Array[Types::Canary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRuntimeVersionsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeRuntimeVersionsResponse
+      attr_accessor runtime_versions: ::Array[Types::RuntimeVersion]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateResourceRequest
+      attr_accessor group_identifier: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateResourceResponse < Aws::EmptyStructure
+    end
+
+    class GetCanaryRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCanaryResponse
+      attr_accessor canary: Types::Canary
+      SENSITIVE: []
+    end
+
+    class GetCanaryRunsRequest
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetCanaryRunsResponse
+      attr_accessor canary_runs: ::Array[Types::CanaryRun]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupRequest
+      attr_accessor group_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupResponse
+      attr_accessor group: Types::Group
+      SENSITIVE: []
+    end
+
+    class Group
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor created_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GroupSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociatedGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociatedGroupsResponse
+      attr_accessor groups: ::Array[Types::GroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupResourcesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor group_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupResourcesResponse
+      attr_accessor resources: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGroupsResponse
+      attr_accessor groups: ::Array[Types::GroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RequestEntityTooLargeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RuntimeVersion
+      attr_accessor version_name: ::String
+      attr_accessor description: ::String
+      attr_accessor release_date: ::Time
+      attr_accessor deprecation_date: ::Time
+      SENSITIVE: []
+    end
+
+    class S3EncryptionConfig
+      attr_accessor encryption_mode: ("SSE_S3" | "SSE_KMS")
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartCanaryRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StartCanaryResponse < Aws::EmptyStructure
+    end
+
+    class StopCanaryRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class StopCanaryResponse < Aws::EmptyStructure
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCanaryRequest
+      attr_accessor name: ::String
+      attr_accessor code: Types::CanaryCodeInput
+      attr_accessor execution_role_arn: ::String
+      attr_accessor runtime_version: ::String
+      attr_accessor schedule: Types::CanaryScheduleInput
+      attr_accessor run_config: Types::CanaryRunConfigInput
+      attr_accessor success_retention_period_in_days: ::Integer
+      attr_accessor failure_retention_period_in_days: ::Integer
+      attr_accessor vpc_config: Types::VpcConfigInput
+      attr_accessor visual_reference: Types::VisualReferenceInput
+      attr_accessor artifact_s3_location: ::String
+      attr_accessor artifact_config: Types::ArtifactConfigInput
+      SENSITIVE: []
+    end
+
+    class UpdateCanaryResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VisualReferenceInput
+      attr_accessor base_screenshots: ::Array[Types::BaseScreenshot]
+      attr_accessor base_canary_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class VisualReferenceOutput
+      attr_accessor base_screenshots: ::Array[Types::BaseScreenshot]
+      attr_accessor base_canary_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class VpcConfigInput
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class VpcConfigOutput
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,635 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module FMS
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#associate_admin_account-instance_method
+      def associate_admin_account: (
+                                     admin_account: ::String
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _AssociateThirdPartyFirewallResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateThirdPartyFirewallResponse]
+        def third_party_firewall_status: () -> ("ONBOARDING" | "ONBOARD_COMPLETE" | "OFFBOARDING" | "OFFBOARD_COMPLETE" | "NOT_EXIST")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#associate_third_party_firewall-instance_method
+      def associate_third_party_firewall: (
+                                            third_party_firewall: ("PALO_ALTO_NETWORKS_CLOUD_NGFW" | "FORTIGATE_CLOUD_NATIVE_FIREWALL")
+                                          ) -> _AssociateThirdPartyFirewallResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateThirdPartyFirewallResponseSuccess
+
+      interface _BatchAssociateResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchAssociateResourceResponse]
+        def resource_set_identifier: () -> ::String
+        def failed_items: () -> ::Array[Types::FailedItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#batch_associate_resource-instance_method
+      def batch_associate_resource: (
+                                      resource_set_identifier: ::String,
+                                      items: Array[::String]
+                                    ) -> _BatchAssociateResourceResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAssociateResourceResponseSuccess
+
+      interface _BatchDisassociateResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDisassociateResourceResponse]
+        def resource_set_identifier: () -> ::String
+        def failed_items: () -> ::Array[Types::FailedItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#batch_disassociate_resource-instance_method
+      def batch_disassociate_resource: (
+                                         resource_set_identifier: ::String,
+                                         items: Array[::String]
+                                       ) -> _BatchDisassociateResourceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisassociateResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#delete_apps_list-instance_method
+      def delete_apps_list: (
+                              list_id: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#delete_notification_channel-instance_method
+      def delete_notification_channel: (
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#delete_policy-instance_method
+      def delete_policy: (
+                           policy_id: ::String,
+                           ?delete_all_policy_resources: bool
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#delete_protocols_list-instance_method
+      def delete_protocols_list: (
+                                   list_id: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#delete_resource_set-instance_method
+      def delete_resource_set: (
+                                 identifier: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#disassociate_admin_account-instance_method
+      def disassociate_admin_account: (
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DisassociateThirdPartyFirewallResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateThirdPartyFirewallResponse]
+        def third_party_firewall_status: () -> ("ONBOARDING" | "ONBOARD_COMPLETE" | "OFFBOARDING" | "OFFBOARD_COMPLETE" | "NOT_EXIST")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#disassociate_third_party_firewall-instance_method
+      def disassociate_third_party_firewall: (
+                                               third_party_firewall: ("PALO_ALTO_NETWORKS_CLOUD_NGFW" | "FORTIGATE_CLOUD_NATIVE_FIREWALL")
+                                             ) -> _DisassociateThirdPartyFirewallResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateThirdPartyFirewallResponseSuccess
+
+      interface _GetAdminAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAdminAccountResponse]
+        def admin_account: () -> ::String
+        def role_status: () -> ("READY" | "CREATING" | "PENDING_DELETION" | "DELETING" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#get_admin_account-instance_method
+      def get_admin_account: (
+                             ) -> _GetAdminAccountResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAdminAccountResponseSuccess
+
+      interface _GetAdminScopeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAdminScopeResponse]
+        def admin_scope: () -> Types::AdminScope
+        def status: () -> ("ONBOARDING" | "ONBOARDING_COMPLETE" | "OFFBOARDING" | "OFFBOARDING_COMPLETE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#get_admin_scope-instance_method
+      def get_admin_scope: (
+                             admin_account: ::String
+                           ) -> _GetAdminScopeResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAdminScopeResponseSuccess
+
+      interface _GetAppsListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAppsListResponse]
+        def apps_list: () -> Types::AppsListData
+        def apps_list_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#get_apps_list-instance_method
+      def get_apps_list: (
+                           list_id: ::String,
+                           ?default_list: bool
+                         ) -> _GetAppsListResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAppsListResponseSuccess
+
+      interface _GetComplianceDetailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetComplianceDetailResponse]
+        def policy_compliance_detail: () -> Types::PolicyComplianceDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#get_compliance_detail-instance_method
+      def get_compliance_detail: (
+                                   policy_id: ::String,
+                                   member_account: ::String
+                                 ) -> _GetComplianceDetailResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetComplianceDetailResponseSuccess
+
+      interface _GetNotificationChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNotificationChannelResponse]
+        def sns_topic_arn: () -> ::String
+        def sns_role_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#get_notification_channel-instance_method
+      def get_notification_channel: (
+                                    ) -> _GetNotificationChannelResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNotificationChannelResponseSuccess
+
+      interface _GetPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyResponse]
+        def policy: () -> Types::Policy
+        def policy_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#get_policy-instance_method
+      def get_policy: (
+                        policy_id: ::String
+                      ) -> _GetPolicyResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyResponseSuccess
+
+      interface _GetProtectionStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProtectionStatusResponse]
+        def admin_account_id: () -> ::String
+        def service_type: () -> ("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL")
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#get_protection_status-instance_method
+      def get_protection_status: (
+                                   policy_id: ::String,
+                                   ?member_account_id: ::String,
+                                   ?start_time: ::Time,
+                                   ?end_time: ::Time,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _GetProtectionStatusResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProtectionStatusResponseSuccess
+
+      interface _GetProtocolsListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProtocolsListResponse]
+        def protocols_list: () -> Types::ProtocolsListData
+        def protocols_list_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#get_protocols_list-instance_method
+      def get_protocols_list: (
+                                list_id: ::String,
+                                ?default_list: bool
+                              ) -> _GetProtocolsListResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProtocolsListResponseSuccess
+
+      interface _GetResourceSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceSetResponse]
+        def resource_set: () -> Types::ResourceSet
+        def resource_set_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#get_resource_set-instance_method
+      def get_resource_set: (
+                              identifier: ::String
+                            ) -> _GetResourceSetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceSetResponseSuccess
+
+      interface _GetThirdPartyFirewallAssociationStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetThirdPartyFirewallAssociationStatusResponse]
+        def third_party_firewall_status: () -> ("ONBOARDING" | "ONBOARD_COMPLETE" | "OFFBOARDING" | "OFFBOARD_COMPLETE" | "NOT_EXIST")
+        def marketplace_onboarding_status: () -> ("NO_SUBSCRIPTION" | "NOT_COMPLETE" | "COMPLETE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#get_third_party_firewall_association_status-instance_method
+      def get_third_party_firewall_association_status: (
+                                                         third_party_firewall: ("PALO_ALTO_NETWORKS_CLOUD_NGFW" | "FORTIGATE_CLOUD_NATIVE_FIREWALL")
+                                                       ) -> _GetThirdPartyFirewallAssociationStatusResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetThirdPartyFirewallAssociationStatusResponseSuccess
+
+      interface _GetViolationDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetViolationDetailsResponse]
+        def violation_detail: () -> Types::ViolationDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#get_violation_details-instance_method
+      def get_violation_details: (
+                                   policy_id: ::String,
+                                   member_account: ::String,
+                                   resource_id: ::String,
+                                   resource_type: ::String
+                                 ) -> _GetViolationDetailsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetViolationDetailsResponseSuccess
+
+      interface _ListAdminAccountsForOrganizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAdminAccountsForOrganizationResponse]
+        def admin_accounts: () -> ::Array[Types::AdminAccountSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#list_admin_accounts_for_organization-instance_method
+      def list_admin_accounts_for_organization: (
+                                                  ?next_token: ::String,
+                                                  ?max_results: ::Integer
+                                                ) -> _ListAdminAccountsForOrganizationResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAdminAccountsForOrganizationResponseSuccess
+
+      interface _ListAdminsManagingAccountResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAdminsManagingAccountResponse]
+        def admin_accounts: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#list_admins_managing_account-instance_method
+      def list_admins_managing_account: (
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListAdminsManagingAccountResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAdminsManagingAccountResponseSuccess
+
+      interface _ListAppsListsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppsListsResponse]
+        def apps_lists: () -> ::Array[Types::AppsListDataSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#list_apps_lists-instance_method
+      def list_apps_lists: (
+                             ?default_lists: bool,
+                             ?next_token: ::String,
+                             max_results: ::Integer
+                           ) -> _ListAppsListsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppsListsResponseSuccess
+
+      interface _ListComplianceStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListComplianceStatusResponse]
+        def policy_compliance_status_list: () -> ::Array[Types::PolicyComplianceStatus]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#list_compliance_status-instance_method
+      def list_compliance_status: (
+                                    policy_id: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListComplianceStatusResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListComplianceStatusResponseSuccess
+
+      interface _ListDiscoveredResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDiscoveredResourcesResponse]
+        def items: () -> ::Array[Types::DiscoveredResource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#list_discovered_resources-instance_method
+      def list_discovered_resources: (
+                                       member_account_ids: Array[::String],
+                                       resource_type: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListDiscoveredResourcesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDiscoveredResourcesResponseSuccess
+
+      interface _ListMemberAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMemberAccountsResponse]
+        def member_accounts: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#list_member_accounts-instance_method
+      def list_member_accounts: (
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListMemberAccountsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMemberAccountsResponseSuccess
+
+      interface _ListPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPoliciesResponse]
+        def policy_list: () -> ::Array[Types::PolicySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#list_policies-instance_method
+      def list_policies: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListPoliciesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPoliciesResponseSuccess
+
+      interface _ListProtocolsListsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProtocolsListsResponse]
+        def protocols_lists: () -> ::Array[Types::ProtocolsListDataSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#list_protocols_lists-instance_method
+      def list_protocols_lists: (
+                                  ?default_lists: bool,
+                                  ?next_token: ::String,
+                                  max_results: ::Integer
+                                ) -> _ListProtocolsListsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProtocolsListsResponseSuccess
+
+      interface _ListResourceSetResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceSetResourcesResponse]
+        def items: () -> ::Array[Types::Resource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#list_resource_set_resources-instance_method
+      def list_resource_set_resources: (
+                                         identifier: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListResourceSetResourcesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceSetResourcesResponseSuccess
+
+      interface _ListResourceSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceSetsResponse]
+        def resource_sets: () -> ::Array[Types::ResourceSetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#list_resource_sets-instance_method
+      def list_resource_sets: (
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListResourceSetsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceSetsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tag_list: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListThirdPartyFirewallFirewallPoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListThirdPartyFirewallFirewallPoliciesResponse]
+        def third_party_firewall_firewall_policies: () -> ::Array[Types::ThirdPartyFirewallFirewallPolicy]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#list_third_party_firewall_firewall_policies-instance_method
+      def list_third_party_firewall_firewall_policies: (
+                                                         third_party_firewall: ("PALO_ALTO_NETWORKS_CLOUD_NGFW" | "FORTIGATE_CLOUD_NATIVE_FIREWALL"),
+                                                         ?next_token: ::String,
+                                                         max_results: ::Integer
+                                                       ) -> _ListThirdPartyFirewallFirewallPoliciesResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListThirdPartyFirewallFirewallPoliciesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#put_admin_account-instance_method
+      def put_admin_account: (
+                               admin_account: ::String,
+                               ?admin_scope: {
+                                 account_scope: {
+                                   accounts: Array[::String]?,
+                                   all_accounts_enabled: bool?,
+                                   exclude_specified_accounts: bool?
+                                 }?,
+                                 organizational_unit_scope: {
+                                   organizational_units: Array[::String]?,
+                                   all_organizational_units_enabled: bool?,
+                                   exclude_specified_organizational_units: bool?
+                                 }?,
+                                 region_scope: {
+                                   regions: Array[::String]?,
+                                   all_regions_enabled: bool?
+                                 }?,
+                                 policy_type_scope: {
+                                   policy_types: Array[("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL")]?,
+                                   all_policy_types_enabled: bool?
+                                 }?
+                               }
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutAppsListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAppsListResponse]
+        def apps_list: () -> Types::AppsListData
+        def apps_list_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#put_apps_list-instance_method
+      def put_apps_list: (
+                           apps_list: {
+                             list_id: ::String?,
+                             list_name: ::String,
+                             list_update_token: ::String?,
+                             create_time: ::Time?,
+                             last_update_time: ::Time?,
+                             apps_list: Array[
+                               {
+                                 app_name: ::String,
+                                 protocol: ::String,
+                                 port: ::Integer
+                               },
+                             ],
+                             previous_apps_list: Hash[::String, Array[
+                                 {
+                                   app_name: ::String,
+                                   protocol: ::String,
+                                   port: ::Integer
+                                 },
+                               ]]?
+                           },
+                           ?tag_list: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
+                           ]
+                         ) -> _PutAppsListResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAppsListResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#put_notification_channel-instance_method
+      def put_notification_channel: (
+                                      sns_topic_arn: ::String,
+                                      sns_role_name: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutPolicyResponse]
+        def policy: () -> Types::Policy
+        def policy_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#put_policy-instance_method
+      def put_policy: (
+                        policy: {
+                          policy_id: ::String?,
+                          policy_name: ::String,
+                          policy_update_token: ::String?,
+                          security_service_policy_data: {
+                            type: ("WAF" | "WAFV2" | "SHIELD_ADVANCED" | "SECURITY_GROUPS_COMMON" | "SECURITY_GROUPS_CONTENT_AUDIT" | "SECURITY_GROUPS_USAGE_AUDIT" | "NETWORK_FIREWALL" | "DNS_FIREWALL" | "THIRD_PARTY_FIREWALL" | "IMPORT_NETWORK_FIREWALL"),
+                            managed_service_data: ::String?,
+                            policy_option: {
+                              network_firewall_policy: {
+                                firewall_deployment_model: ("CENTRALIZED" | "DISTRIBUTED")?
+                              }?,
+                              third_party_firewall_policy: {
+                                firewall_deployment_model: ("CENTRALIZED" | "DISTRIBUTED")?
+                              }?
+                            }?
+                          },
+                          resource_type: ::String,
+                          resource_type_list: Array[::String]?,
+                          resource_tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String?
+                            },
+                          ]?,
+                          exclude_resource_tags: bool,
+                          remediation_enabled: bool,
+                          delete_unused_fm_managed_resources: bool?,
+                          include_map: Hash[("ACCOUNT" | "ORG_UNIT"), Array[::String]]?,
+                          exclude_map: Hash[("ACCOUNT" | "ORG_UNIT"), Array[::String]]?,
+                          resource_set_ids: Array[::String]?,
+                          policy_description: ::String?,
+                          policy_status: ("ACTIVE" | "OUT_OF_ADMIN_SCOPE")?
+                        },
+                        ?tag_list: Array[
+                          {
+                            key: ::String,
+                            value: ::String
+                          },
+                        ]
+                      ) -> _PutPolicyResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPolicyResponseSuccess
+
+      interface _PutProtocolsListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutProtocolsListResponse]
+        def protocols_list: () -> Types::ProtocolsListData
+        def protocols_list_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#put_protocols_list-instance_method
+      def put_protocols_list: (
+                                protocols_list: {
+                                  list_id: ::String?,
+                                  list_name: ::String,
+                                  list_update_token: ::String?,
+                                  create_time: ::Time?,
+                                  last_update_time: ::Time?,
+                                  protocols_list: Array[::String],
+                                  previous_protocols_list: Hash[::String, Array[::String]]?
+                                },
+                                ?tag_list: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ]
+                              ) -> _PutProtocolsListResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutProtocolsListResponseSuccess
+
+      interface _PutResourceSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourceSetResponse]
+        def resource_set: () -> Types::ResourceSet
+        def resource_set_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#put_resource_set-instance_method
+      def put_resource_set: (
+                              resource_set: {
+                                id: ::String?,
+                                name: ::String,
+                                description: ::String?,
+                                update_token: ::String?,
+                                resource_type_list: Array[::String],
+                                last_update_time: ::Time?,
+                                resource_set_status: ("ACTIVE" | "OUT_OF_ADMIN_SCOPE")?
+                              },
+                              ?tag_list: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ]
+                            ) -> _PutResourceSetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourceSetResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tag_list: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FMS/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+    end
+  end
+end
+

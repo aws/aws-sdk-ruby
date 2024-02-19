@@ -1,0 +1,157 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IoTDataPlane
+  module Types
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteThingShadowRequest
+      attr_accessor thing_name: ::String
+      attr_accessor shadow_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteThingShadowResponse
+      attr_accessor payload: ::String
+      SENSITIVE: []
+    end
+
+    class GetRetainedMessageRequest
+      attr_accessor topic: ::String
+      SENSITIVE: []
+    end
+
+    class GetRetainedMessageResponse
+      attr_accessor topic: ::String
+      attr_accessor payload: ::String
+      attr_accessor qos: ::Integer
+      attr_accessor last_modified_time: ::Integer
+      attr_accessor user_properties: ::String
+      SENSITIVE: []
+    end
+
+    class GetThingShadowRequest
+      attr_accessor thing_name: ::String
+      attr_accessor shadow_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetThingShadowResponse
+      attr_accessor payload: ::String
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListNamedShadowsForThingRequest
+      attr_accessor thing_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListNamedShadowsForThingResponse
+      attr_accessor results: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor timestamp: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRetainedMessagesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRetainedMessagesResponse
+      attr_accessor retained_topics: ::Array[Types::RetainedMessageSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MethodNotAllowedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PublishRequest
+      attr_accessor topic: ::String
+      attr_accessor qos: ::Integer
+      attr_accessor retain: bool
+      attr_accessor payload: ::String
+      attr_accessor user_properties: ::String
+      attr_accessor payload_format_indicator: ("UNSPECIFIED_BYTES" | "UTF8_DATA")
+      attr_accessor content_type: ::String
+      attr_accessor response_topic: ::String
+      attr_accessor correlation_data: ::String
+      attr_accessor message_expiry: ::Integer
+      SENSITIVE: []
+    end
+
+    class RequestEntityTooLargeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RetainedMessageSummary
+      attr_accessor topic: ::String
+      attr_accessor payload_size: ::Integer
+      attr_accessor qos: ::Integer
+      attr_accessor last_modified_time: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedDocumentEncodingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateThingShadowRequest
+      attr_accessor thing_name: ::String
+      attr_accessor shadow_name: ::String
+      attr_accessor payload: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateThingShadowResponse
+      attr_accessor payload: ::String
+      SENSITIVE: []
+    end
+  end
+end

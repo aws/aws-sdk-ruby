@@ -21,35 +21,32 @@ module Aws
       end
 
       describe 'empty result element' do
-        it 'returns a structure with all of the root members' do
-          if client.config.api.metadata['protocol'] == 'json'
-            client.handle(step: :send) do |context|
-              context.http_response.signal_done(
-                status_code: 200,
-                headers: {},
-                body: '{"Messages": []}'
-              )
-              Seahorse::Client::Response.new(context: context)
-            end
-          else
-            client.handle(step: :send) do |context|
-              context.http_response.signal_done(
-                status_code: 200,
-                headers: {},
-                body:<<-XML)
-                <ReceiveMessageResponse>
-                  <ReceiveMessageResult/>
-                  <ResponseMetadata>
-                    <RequestId>request-id</RequestId>
-                  </ResponseMetadata>
-                </ReceiveMessageResponse>
-              XML
-              Seahorse::Client::Response.new(context: context)
-            end
+        it 'defaults to an empty list' do
+          client.handle(step: :send) do |context|
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: {},
+              body: '{}'
+            )
+            Seahorse::Client::Response.new(context: context)
           end
           resp = client.receive_message(queue_url: 'https://foo.com')
           expect(resp.data.members).to eq([:messages])
           expect(resp.data.messages).to eq([])
+        end
+
+        it 'defaults to an empty map' do
+          client.handle(step: :send) do |context|
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: {},
+              body: '{}'
+            )
+            Seahorse::Client::Response.new(context: context)
+          end
+          resp = client.list_queue_tags(queue_url: 'https://foo.com')
+          expect(resp.data.members).to eq([:tags])
+          expect(resp.data.tags).to eq({})
         end
       end
 

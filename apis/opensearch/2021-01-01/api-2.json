@@ -24,6 +24,24 @@
         {"shape":"DisabledOperationException"}
       ]
     },
+    "AddDataSource":{
+      "name":"AddDataSource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/2021-01-01/opensearch/domain/{DomainName}/dataSource"
+      },
+      "input":{"shape":"AddDataSourceRequest"},
+      "output":{"shape":"AddDataSourceResponse"},
+      "errors":[
+        {"shape":"BaseException"},
+        {"shape":"InternalException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"DisabledOperationException"},
+        {"shape":"DependencyFailureException"},
+        {"shape":"LimitExceededException"}
+      ]
+    },
     "AddTags":{
       "name":"AddTags",
       "http":{
@@ -70,6 +88,22 @@
         {"shape":"ValidationException"},
         {"shape":"InternalException"},
         {"shape":"BaseException"}
+      ]
+    },
+    "CancelDomainConfigChange":{
+      "name":"CancelDomainConfigChange",
+      "http":{
+        "method":"POST",
+        "requestUri":"/2021-01-01/opensearch/domain/{DomainName}/config/cancel"
+      },
+      "input":{"shape":"CancelDomainConfigChangeRequest"},
+      "output":{"shape":"CancelDomainConfigChangeResponse"},
+      "errors":[
+        {"shape":"BaseException"},
+        {"shape":"InternalException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"DisabledOperationException"}
       ]
     },
     "CancelServiceSoftwareUpdate":{
@@ -153,6 +187,23 @@
         {"shape":"InternalException"},
         {"shape":"DisabledOperationException"},
         {"shape":"BaseException"}
+      ]
+    },
+    "DeleteDataSource":{
+      "name":"DeleteDataSource",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/2021-01-01/opensearch/domain/{DomainName}/dataSource/{DataSourceName}"
+      },
+      "input":{"shape":"DeleteDataSourceRequest"},
+      "output":{"shape":"DeleteDataSourceResponse"},
+      "errors":[
+        {"shape":"BaseException"},
+        {"shape":"InternalException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"DisabledOperationException"},
+        {"shape":"DependencyFailureException"}
       ]
     },
     "DeleteDomain":{
@@ -488,6 +539,23 @@
         {"shape":"InternalException"}
       ]
     },
+    "GetDataSource":{
+      "name":"GetDataSource",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2021-01-01/opensearch/domain/{DomainName}/dataSource/{DataSourceName}"
+      },
+      "input":{"shape":"GetDataSourceRequest"},
+      "output":{"shape":"GetDataSourceResponse"},
+      "errors":[
+        {"shape":"BaseException"},
+        {"shape":"InternalException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"DisabledOperationException"},
+        {"shape":"DependencyFailureException"}
+      ]
+    },
     "GetDomainMaintenanceStatus":{
       "name":"GetDomainMaintenanceStatus",
       "http":{
@@ -550,6 +618,23 @@
         {"shape":"DisabledOperationException"},
         {"shape":"ValidationException"},
         {"shape":"InternalException"}
+      ]
+    },
+    "ListDataSources":{
+      "name":"ListDataSources",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2021-01-01/opensearch/domain/{DomainName}/dataSource"
+      },
+      "input":{"shape":"ListDataSourcesRequest"},
+      "output":{"shape":"ListDataSourcesResponse"},
+      "errors":[
+        {"shape":"BaseException"},
+        {"shape":"InternalException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"DisabledOperationException"},
+        {"shape":"DependencyFailureException"}
       ]
     },
     "ListDomainMaintenances":{
@@ -808,6 +893,23 @@
         {"shape":"ValidationException"}
       ]
     },
+    "UpdateDataSource":{
+      "name":"UpdateDataSource",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/2021-01-01/opensearch/domain/{DomainName}/dataSource/{DataSourceName}"
+      },
+      "input":{"shape":"UpdateDataSourceRequest"},
+      "output":{"shape":"UpdateDataSourceResponse"},
+      "errors":[
+        {"shape":"BaseException"},
+        {"shape":"InternalException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"DisabledOperationException"},
+        {"shape":"DependencyFailureException"}
+      ]
+    },
     "UpdateDomainConfig":{
       "name":"UpdateDomainConfig",
       "http":{
@@ -976,6 +1078,30 @@
         "JVM_HEAP_SIZE_TUNING",
         "JVM_YOUNG_GEN_TUNING"
       ]
+    },
+    "AddDataSourceRequest":{
+      "type":"structure",
+      "required":[
+        "DomainName",
+        "Name",
+        "DataSourceType"
+      ],
+      "members":{
+        "DomainName":{
+          "shape":"DomainName",
+          "location":"uri",
+          "locationName":"DomainName"
+        },
+        "Name":{"shape":"DataSourceName"},
+        "DataSourceType":{"shape":"DataSourceType"},
+        "Description":{"shape":"DataSourceDescription"}
+      }
+    },
+    "AddDataSourceResponse":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      }
     },
     "AddTagsRequest":{
       "type":"structure",
@@ -1245,6 +1371,26 @@
       "exception":true
     },
     "Boolean":{"type":"boolean"},
+    "CancelDomainConfigChangeRequest":{
+      "type":"structure",
+      "required":["DomainName"],
+      "members":{
+        "DomainName":{
+          "shape":"DomainName",
+          "location":"uri",
+          "locationName":"DomainName"
+        },
+        "DryRun":{"shape":"DryRun"}
+      }
+    },
+    "CancelDomainConfigChangeResponse":{
+      "type":"structure",
+      "members":{
+        "CancelledChangeIds":{"shape":"GUIDList"},
+        "CancelledChangeProperties":{"shape":"CancelledChangePropertyList"},
+        "DryRun":{"shape":"DryRun"}
+      }
+    },
     "CancelServiceSoftwareUpdateRequest":{
       "type":"structure",
       "required":["DomainName"],
@@ -1258,11 +1404,27 @@
         "ServiceSoftwareOptions":{"shape":"ServiceSoftwareOptions"}
       }
     },
+    "CancelledChangeProperty":{
+      "type":"structure",
+      "members":{
+        "PropertyName":{"shape":"String"},
+        "CancelledValue":{"shape":"String"},
+        "ActiveValue":{"shape":"String"}
+      }
+    },
+    "CancelledChangePropertyList":{
+      "type":"list",
+      "member":{"shape":"CancelledChangeProperty"}
+    },
     "ChangeProgressDetails":{
       "type":"structure",
       "members":{
         "ChangeId":{"shape":"GUID"},
-        "Message":{"shape":"Message"}
+        "Message":{"shape":"Message"},
+        "ConfigChangeStatus":{"shape":"ConfigChangeStatus"},
+        "InitiatedBy":{"shape":"InitiatedBy"},
+        "StartTime":{"shape":"UpdateTimestamp"},
+        "LastUpdatedTime":{"shape":"UpdateTimestamp"}
       }
     },
     "ChangeProgressStage":{
@@ -1297,7 +1459,10 @@
         "PendingProperties":{"shape":"StringList"},
         "CompletedProperties":{"shape":"StringList"},
         "TotalNumberOfStages":{"shape":"TotalNumberOfStages"},
-        "ChangeProgressStages":{"shape":"ChangeProgressStageList"}
+        "ChangeProgressStages":{"shape":"ChangeProgressStageList"},
+        "LastUpdatedTime":{"shape":"UpdateTimestamp"},
+        "ConfigChangeStatus":{"shape":"ConfigChangeStatus"},
+        "InitiatedBy":{"shape":"InitiatedBy"}
       }
     },
     "ClientToken":{
@@ -1381,6 +1546,19 @@
         "TargetVersions":{"shape":"VersionList"}
       }
     },
+    "ConfigChangeStatus":{
+      "type":"string",
+      "enum":[
+        "Pending",
+        "Initializing",
+        "Validating",
+        "ValidationFailed",
+        "ApplyingChanges",
+        "Completed",
+        "PendingUserInput",
+        "Cancelled"
+      ]
+    },
     "ConflictException":{
       "type":"structure",
       "members":{
@@ -1424,6 +1602,7 @@
         "ClusterConfig":{"shape":"ClusterConfig"},
         "EBSOptions":{"shape":"EBSOptions"},
         "AccessPolicies":{"shape":"PolicyDocument"},
+        "IPAddressType":{"shape":"IPAddressType"},
         "SnapshotOptions":{"shape":"SnapshotOptions"},
         "VPCOptions":{"shape":"VPCOptions"},
         "CognitoOptions":{"shape":"CognitoOptions"},
@@ -1516,6 +1695,61 @@
       "type":"structure",
       "members":{
         "SkipUnavailable":{"shape":"SkipUnavailableStatus"}
+      }
+    },
+    "DataSourceDescription":{
+      "type":"string",
+      "max":1000,
+      "pattern":"^([a-zA-Z0-9_])*[\\\\a-zA-Z0-9_@#%*+=:?./!\\s-]*$"
+    },
+    "DataSourceDetails":{
+      "type":"structure",
+      "members":{
+        "DataSourceType":{"shape":"DataSourceType"},
+        "Name":{"shape":"DataSourceName"},
+        "Description":{"shape":"DataSourceDescription"}
+      }
+    },
+    "DataSourceList":{
+      "type":"list",
+      "member":{"shape":"DataSourceDetails"}
+    },
+    "DataSourceName":{
+      "type":"string",
+      "max":80,
+      "min":3,
+      "pattern":"[a-z][a-z0-9_]+"
+    },
+    "DataSourceType":{
+      "type":"structure",
+      "members":{
+        "S3GlueDataCatalog":{"shape":"S3GlueDataCatalog"}
+      },
+      "union":true
+    },
+    "DeleteDataSourceRequest":{
+      "type":"structure",
+      "required":[
+        "DomainName",
+        "Name"
+      ],
+      "members":{
+        "DomainName":{
+          "shape":"DomainName",
+          "location":"uri",
+          "locationName":"DomainName"
+        },
+        "Name":{
+          "shape":"DataSourceName",
+          "location":"uri",
+          "locationName":"DataSourceName"
+        }
+      }
+    },
+    "DeleteDataSourceResponse":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
       }
     },
     "DeleteDomainRequest":{
@@ -2018,6 +2252,7 @@
         "ClusterConfig":{"shape":"ClusterConfigStatus"},
         "EBSOptions":{"shape":"EBSOptionsStatus"},
         "AccessPolicies":{"shape":"AccessPoliciesStatus"},
+        "IPAddressType":{"shape":"IPAddressTypeStatus"},
         "SnapshotOptions":{"shape":"SnapshotOptionsStatus"},
         "VPCOptions":{"shape":"VPCDerivedInfoStatus"},
         "CognitoOptions":{"shape":"CognitoOptionsStatus"},
@@ -2030,7 +2265,8 @@
         "AutoTuneOptions":{"shape":"AutoTuneOptionsStatus"},
         "ChangeProgressDetails":{"shape":"ChangeProgressDetails"},
         "OffPeakWindowOptions":{"shape":"OffPeakWindowOptionsStatus"},
-        "SoftwareUpdateOptions":{"shape":"SoftwareUpdateOptionsStatus"}
+        "SoftwareUpdateOptions":{"shape":"SoftwareUpdateOptionsStatus"},
+        "ModifyingProperties":{"shape":"ModifyingPropertiesList"}
       }
     },
     "DomainEndpointOptions":{
@@ -2163,6 +2399,18 @@
         "DISSOCIATION_FAILED"
       ]
     },
+    "DomainProcessingStatusType":{
+      "type":"string",
+      "enum":[
+        "Creating",
+        "Active",
+        "Modifying",
+        "UpgradingEngineVersion",
+        "UpdatingServiceSoftware",
+        "Isolated",
+        "Deleting"
+      ]
+    },
     "DomainState":{
       "type":"string",
       "enum":[
@@ -2186,6 +2434,7 @@
         "Created":{"shape":"Boolean"},
         "Deleted":{"shape":"Boolean"},
         "Endpoint":{"shape":"ServiceUrl"},
+        "EndpointV2":{"shape":"ServiceUrl"},
         "Endpoints":{"shape":"EndpointsMap"},
         "Processing":{"shape":"Boolean"},
         "UpgradeProcessing":{"shape":"Boolean"},
@@ -2193,6 +2442,7 @@
         "ClusterConfig":{"shape":"ClusterConfig"},
         "EBSOptions":{"shape":"EBSOptions"},
         "AccessPolicies":{"shape":"PolicyDocument"},
+        "IPAddressType":{"shape":"IPAddressType"},
         "SnapshotOptions":{"shape":"SnapshotOptions"},
         "VPCOptions":{"shape":"VPCDerivedInfo"},
         "CognitoOptions":{"shape":"CognitoOptions"},
@@ -2206,7 +2456,9 @@
         "AutoTuneOptions":{"shape":"AutoTuneOptionsOutput"},
         "ChangeProgressDetails":{"shape":"ChangeProgressDetails"},
         "OffPeakWindowOptions":{"shape":"OffPeakWindowOptions"},
-        "SoftwareUpdateOptions":{"shape":"SoftwareUpdateOptions"}
+        "SoftwareUpdateOptions":{"shape":"SoftwareUpdateOptions"},
+        "DomainProcessingStatus":{"shape":"DomainProcessingStatusType"},
+        "ModifyingProperties":{"shape":"ModifyingPropertiesList"}
       }
     },
     "DomainStatusList":{
@@ -2352,6 +2604,10 @@
       "min":36,
       "pattern":"\\p{XDigit}{8}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{12}"
     },
+    "GUIDList":{
+      "type":"list",
+      "member":{"shape":"GUID"}
+    },
     "GetCompatibleVersionsRequest":{
       "type":"structure",
       "members":{
@@ -2366,6 +2622,33 @@
       "type":"structure",
       "members":{
         "CompatibleVersions":{"shape":"CompatibleVersionsList"}
+      }
+    },
+    "GetDataSourceRequest":{
+      "type":"structure",
+      "required":[
+        "DomainName",
+        "Name"
+      ],
+      "members":{
+        "DomainName":{
+          "shape":"DomainName",
+          "location":"uri",
+          "locationName":"DomainName"
+        },
+        "Name":{
+          "shape":"DataSourceName",
+          "location":"uri",
+          "locationName":"DataSourceName"
+        }
+      }
+    },
+    "GetDataSourceResponse":{
+      "type":"structure",
+      "members":{
+        "DataSourceType":{"shape":"DataSourceType"},
+        "Name":{"shape":"DataSourceName"},
+        "Description":{"shape":"DataSourceDescription"}
       }
     },
     "GetDomainMaintenanceStatusRequest":{
@@ -2474,6 +2757,24 @@
         "UpgradeName":{"shape":"UpgradeName"}
       }
     },
+    "IPAddressType":{
+      "type":"string",
+      "enum":[
+        "ipv4",
+        "dualstack"
+      ]
+    },
+    "IPAddressTypeStatus":{
+      "type":"structure",
+      "required":[
+        "Options",
+        "Status"
+      ],
+      "members":{
+        "Options":{"shape":"IPAddressType"},
+        "Status":{"shape":"OptionStatus"}
+      }
+    },
     "IdentityPoolId":{
       "type":"string",
       "max":55,
@@ -2513,6 +2814,13 @@
     "InboundConnections":{
       "type":"list",
       "member":{"shape":"InboundConnection"}
+    },
+    "InitiatedBy":{
+      "type":"string",
+      "enum":[
+        "CUSTOMER",
+        "SERVICE"
+      ]
     },
     "InstanceCount":{
       "type":"integer",
@@ -2619,6 +2927,23 @@
       "type":"map",
       "key":{"shape":"InstanceRole"},
       "value":{"shape":"Limits"}
+    },
+    "ListDataSourcesRequest":{
+      "type":"structure",
+      "required":["DomainName"],
+      "members":{
+        "DomainName":{
+          "shape":"DomainName",
+          "location":"uri",
+          "locationName":"DomainName"
+        }
+      }
+    },
+    "ListDataSourcesResponse":{
+      "type":"structure",
+      "members":{
+        "DataSources":{"shape":"DataSourceList"}
+      }
     },
     "ListDomainMaintenancesRequest":{
       "type":"structure",
@@ -2994,6 +3319,19 @@
       "min":0
     },
     "MinimumInstanceCount":{"type":"integer"},
+    "ModifyingProperties":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"String"},
+        "ActiveValue":{"shape":"String"},
+        "PendingValue":{"shape":"String"},
+        "ValueType":{"shape":"PropertyValueType"}
+      }
+    },
+    "ModifyingPropertiesList":{
+      "type":"list",
+      "member":{"shape":"ModifyingProperties"}
+    },
     "NextToken":{"type":"string"},
     "NodeId":{
       "type":"string",
@@ -3108,6 +3446,14 @@
         "t3.large.search",
         "t3.xlarge.search",
         "t3.2xlarge.search",
+        "or1.medium.search",
+        "or1.large.search",
+        "or1.xlarge.search",
+        "or1.2xlarge.search",
+        "or1.4xlarge.search",
+        "or1.8xlarge.search",
+        "or1.12xlarge.search",
+        "or1.16xlarge.search",
         "ultrawarm1.medium.search",
         "ultrawarm1.large.search",
         "ultrawarm1.xlarge.search",
@@ -3376,6 +3722,13 @@
         "AWS_SERVICE"
       ]
     },
+    "PropertyValueType":{
+      "type":"string",
+      "enum":[
+        "PLAIN_TEXT",
+        "STRINGIFIED_JSON"
+      ]
+    },
     "PurchaseReservedInstanceOfferingRequest":{
       "type":"structure",
       "required":[
@@ -3552,6 +3905,12 @@
       "type":"string",
       "max":63,
       "min":3
+    },
+    "S3GlueDataCatalog":{
+      "type":"structure",
+      "members":{
+        "RoleArn":{"shape":"RoleArn"}
+      }
     },
     "S3Key":{
       "type":"string",
@@ -3811,7 +4170,8 @@
       "type":"string",
       "enum":[
         "Policy-Min-TLS-1-0-2019-07",
-        "Policy-Min-TLS-1-2-2019-07"
+        "Policy-Min-TLS-1-2-2019-07",
+        "Policy-Min-TLS-1-2-PFS-2023-10"
       ]
     },
     "Tag":{
@@ -3851,6 +4211,34 @@
       "min":0
     },
     "UncompressedPluginSizeInBytes":{"type":"long"},
+    "UpdateDataSourceRequest":{
+      "type":"structure",
+      "required":[
+        "DomainName",
+        "Name",
+        "DataSourceType"
+      ],
+      "members":{
+        "DomainName":{
+          "shape":"DomainName",
+          "location":"uri",
+          "locationName":"DomainName"
+        },
+        "Name":{
+          "shape":"DataSourceName",
+          "location":"uri",
+          "locationName":"DataSourceName"
+        },
+        "DataSourceType":{"shape":"DataSourceType"},
+        "Description":{"shape":"DataSourceDescription"}
+      }
+    },
+    "UpdateDataSourceResponse":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      }
+    },
     "UpdateDomainConfigRequest":{
       "type":"structure",
       "required":["DomainName"],
@@ -3867,6 +4255,7 @@
         "CognitoOptions":{"shape":"CognitoOptions"},
         "AdvancedOptions":{"shape":"AdvancedOptions"},
         "AccessPolicies":{"shape":"PolicyDocument"},
+        "IPAddressType":{"shape":"IPAddressType"},
         "LogPublishingOptions":{"shape":"LogPublishingOptions"},
         "EncryptionAtRestOptions":{"shape":"EncryptionAtRestOptions"},
         "DomainEndpointOptions":{"shape":"DomainEndpointOptions"},

@@ -8,7 +8,6 @@
 # WARNING ABOUT GENERATED CODE
 
 
-require 'aws-sigv4'
 require 'aws-sdk-core'
 
 require_relative 'aws-sdk-s3control/types'
@@ -32,7 +31,7 @@ require_relative 'aws-sdk-s3control/customizations'
 # structure.
 #
 #     s3_control = Aws::S3Control::Client.new
-#     resp = s3_control.create_access_point(params)
+#     resp = s3_control.associate_access_grants_identity_center(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +51,6 @@ require_relative 'aws-sdk-s3control/customizations'
 # @!group service
 module Aws::S3Control
 
-  GEM_VERSION = '1.70.0'
+  GEM_VERSION = '1.78.0'
 
 end

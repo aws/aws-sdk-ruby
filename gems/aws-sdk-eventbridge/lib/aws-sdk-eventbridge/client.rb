@@ -457,6 +457,16 @@ module Aws::EventBridge
     # Creates an API destination, which is an HTTP invocation endpoint
     # configured as a target for events.
     #
+    # API destinations do not support private destinations, such as
+    # interface VPC endpoints.
+    #
+    # For more information, see [API destinations][1] in the *EventBridge
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html
+    #
     # @option params [required, String] :name
     #   The name for the API destination to create.
     #
@@ -848,14 +858,23 @@ module Aws::EventBridge
     #
     # ` partner_name/event_namespace/event_name `
     #
-    # *partner\_name* is determined during partner registration and
-    # identifies the partner to Amazon Web Services customers.
-    # *event\_namespace* is determined by the partner and is a way for the
-    # partner to categorize their events. *event\_name* is determined by the
-    # partner, and should uniquely identify an event-generating resource
-    # within the partner system. The combination of *event\_namespace* and
-    # *event\_name* should help Amazon Web Services customers decide whether
-    # to create an event bus to receive these events.
+    # * *partner\_name* is determined during partner registration, and
+    #   identifies the partner to Amazon Web Services customers.
+    #
+    # * *event\_namespace* is determined by the partner, and is a way for
+    #   the partner to categorize their events.
+    #
+    # * *event\_name* is determined by the partner, and should uniquely
+    #   identify an event-generating resource within the partner system.
+    #
+    #   The *event\_name* must be unique across all Amazon Web Services
+    #   customers. This is because the event source is a shared resource
+    #   between the partner and customer accounts, and each partner event
+    #   source unique in the partner account.
+    #
+    # The combination of *event\_namespace* and *event\_name* should help
+    # Amazon Web Services customers decide whether to create an event bus to
+    # receive these events.
     #
     # @option params [required, String] :name
     #   The name of the partner event source. This name must be unique and
@@ -1047,8 +1066,8 @@ module Aws::EventBridge
 
     # Delete an existing global endpoint. For more information about global
     # endpoints, see [Making applications Regional-fault tolerant with
-    # global endpoints and event replication][1] in the Amazon EventBridge
-    # User Guide.
+    # global endpoints and event replication][1] in the *Amazon EventBridge
+    # User Guide*.
     #
     #
     #
@@ -1360,7 +1379,7 @@ module Aws::EventBridge
     # Get the information about an existing global endpoint. For more
     # information about global endpoints, see [Making applications
     # Regional-fault tolerant with global endpoints and event
-    # replication][1] in the Amazon EventBridge User Guide..
+    # replication][1] in the *Amazon EventBridge User Guide*.
     #
     #
     #
@@ -1652,7 +1671,7 @@ module Aws::EventBridge
     #   resp.arn #=> String
     #   resp.event_pattern #=> String
     #   resp.schedule_expression #=> String
-    #   resp.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.state #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS"
     #   resp.description #=> String
     #   resp.role_arn #=> String
     #   resp.managed_by #=> String
@@ -1899,7 +1918,7 @@ module Aws::EventBridge
     # List the global endpoints associated with this account. For more
     # information about global endpoints, see [Making applications
     # Regional-fault tolerant with global endpoints and event
-    # replication][1] in the Amazon EventBridge User Guide..
+    # replication][1] in the *Amazon EventBridge User Guide*.
     #
     #
     #
@@ -2226,6 +2245,8 @@ module Aws::EventBridge
     # rules in Amazon EventBridge can invoke a specific target in your
     # account.
     #
+    # The maximum number of results per page for requests is 100.
+    #
     # @option params [required, String] :target_arn
     #   The Amazon Resource Name (ARN) of the target resource.
     #
@@ -2272,6 +2293,8 @@ module Aws::EventBridge
     # Lists your Amazon EventBridge rules. You can either list all the rules
     # or you can provide a prefix to match to the rule names.
     #
+    # The maximum number of results per page for requests is 100.
+    #
     # ListRules does not list the targets of a rule. To see the targets
     # associated with a rule, use [ListTargetsByRule][1].
     #
@@ -2313,7 +2336,7 @@ module Aws::EventBridge
     #   resp.rules[0].name #=> String
     #   resp.rules[0].arn #=> String
     #   resp.rules[0].event_pattern #=> String
-    #   resp.rules[0].state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.rules[0].state #=> String, one of "ENABLED", "DISABLED", "ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS"
     #   resp.rules[0].description #=> String
     #   resp.rules[0].schedule_expression #=> String
     #   resp.rules[0].role_arn #=> String
@@ -2362,6 +2385,8 @@ module Aws::EventBridge
     end
 
     # Lists the targets assigned to the specified rule.
+    #
+    # The maximum number of results per page for requests is 100.
     #
     # @option params [required, String] :rule
     #   The name of the rule.
@@ -2459,6 +2484,7 @@ module Aws::EventBridge
     #   resp.targets[0].dead_letter_config.arn #=> String
     #   resp.targets[0].retry_policy.maximum_retry_attempts #=> Integer
     #   resp.targets[0].retry_policy.maximum_event_age_in_seconds #=> Integer
+    #   resp.targets[0].app_sync_parameters.graph_ql_operation #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListTargetsByRule AWS API Documentation
@@ -2473,9 +2499,24 @@ module Aws::EventBridge
     # Sends custom events to Amazon EventBridge so that they can be matched
     # to rules.
     #
+    # The maximum size for a PutEvents event entry is 256 KB. Entry size is
+    # calculated including the event and any necessary characters and keys
+    # of the JSON representation of the event. To learn more, see
+    # [Calculating PutEvents event entry size][1] in the *Amazon EventBridge
+    # User Guide*
+    #
+    # PutEvents accepts the data in JSON format. For the JSON number
+    # (integer) data type, the constraints are: a minimum value of
+    # -9,223,372,036,854,775,808 and a maximum value of
+    # 9,223,372,036,854,775,807.
+    #
     # <note markdown="1"> PutEvents will only process nested JSON up to 1100 levels deep.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-putevent-size.html
     #
     # @option params [required, Array<Types::PutEventsRequestEntry>] :entries
     #   The entry that defines an event in your system. You can specify
@@ -2530,6 +2571,14 @@ module Aws::EventBridge
 
     # This is used by SaaS partners to write events to a customer's partner
     # event bus. Amazon Web Services customers do not use this operation.
+    #
+    # For information on calculating event batch size, see [Calculating
+    # EventBridge PutEvents event entry size][1] in the *EventBridge User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-putevent-size.html
     #
     # @option params [required, Array<Types::PutPartnerEventsRequestEntry>] :entries
     #   The list of events to write to the event bus.
@@ -2800,7 +2849,7 @@ module Aws::EventBridge
     #     name: "RuleName", # required
     #     schedule_expression: "ScheduleExpression",
     #     event_pattern: "EventPattern",
-    #     state: "ENABLED", # accepts ENABLED, DISABLED
+    #     state: "ENABLED", # accepts ENABLED, DISABLED, ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS
     #     description: "RuleDescription",
     #     role_arn: "RoleArn",
     #     tags: [
@@ -2830,75 +2879,26 @@ module Aws::EventBridge
     #
     # Targets are the resources that are invoked when a rule is triggered.
     #
+    # The maximum number of entries per request is 10.
+    #
     # <note markdown="1"> Each rule can have up to five (5) targets associated with it at one
     # time.
     #
     #  </note>
     #
-    # You can configure the following as targets for Events:
-    #
-    # * [API destination][1]
-    #
-    # * [API Gateway][2]
-    #
-    # * Batch job queue
-    #
-    # * CloudWatch group
-    #
-    # * CodeBuild project
-    #
-    # * CodePipeline
-    #
-    # * EC2 `CreateSnapshot` API call
-    #
-    # * EC2 Image Builder
-    #
-    # * EC2 `RebootInstances` API call
-    #
-    # * EC2 `StopInstances` API call
-    #
-    # * EC2 `TerminateInstances` API call
-    #
-    # * ECS task
-    #
-    # * [Event bus in a different account or Region][3]
-    #
-    # * [Event bus in the same account and Region][4]
-    #
-    # * Firehose delivery stream
-    #
-    # * Glue workflow
-    #
-    # * [Incident Manager response plan][5]
-    #
-    # * Inspector assessment template
-    #
-    # * Kinesis stream
-    #
-    # * Lambda function
-    #
-    # * Redshift cluster
-    #
-    # * Redshift Serverless workgroup
-    #
-    # * SageMaker Pipeline
-    #
-    # * SNS topic
-    #
-    # * SQS queue
-    #
-    # * Step Functions state machine
-    #
-    # * Systems Manager Automation
-    #
-    # * Systems Manager OpsItem
-    #
-    # * Systems Manager Run Command
+    # For a list of services you can configure as targets for events, see
+    # [EventBridge targets][1] in the *Amazon EventBridge User Guide*.
     #
     # Creating rules with built-in targets is supported only in the Amazon
-    # Web Services Management Console. The built-in targets are `EC2
-    # CreateSnapshot API call`, `EC2 RebootInstances API call`, `EC2
-    # StopInstances API call`, and `EC2 TerminateInstances API call`.
+    # Web Services Management Console. The built-in targets are:
+    #
+    # * `Amazon EBS CreateSnapshot API call`
+    #
+    # * `Amazon EC2 RebootInstances API call`
+    #
+    # * `Amazon EC2 StopInstances API call`
+    #
+    # * `Amazon EC2 TerminateInstances API call`
     #
     # For some target types, `PutTargets` provides target-specific
     # parameters. If the target is a Kinesis data stream, you can optionally
@@ -2907,13 +2907,17 @@ module Aws::EventBridge
     # you can use the `RunCommandParameters` field.
     #
     # To be able to make API calls against the resources that you own,
-    # Amazon EventBridge needs the appropriate permissions. For Lambda and
-    # Amazon SNS resources, EventBridge relies on resource-based policies.
-    # For EC2 instances, Kinesis Data Streams, Step Functions state machines
-    # and API Gateway APIs, EventBridge relies on IAM roles that you specify
-    # in the `RoleARN` argument in `PutTargets`. For more information, see
-    # [Authentication and Access Control][6] in the *Amazon EventBridge User
-    # Guide*.
+    # Amazon EventBridge needs the appropriate permissions:
+    #
+    # * For Lambda and Amazon SNS resources, EventBridge relies on
+    #   resource-based policies.
+    #
+    # * For EC2 instances, Kinesis Data Streams, Step Functions state
+    #   machines and API Gateway APIs, EventBridge relies on IAM roles that
+    #   you specify in the `RoleARN` argument in `PutTargets`.
+    #
+    # For more information, see [Authentication and Access Control][2] in
+    # the *Amazon EventBridge User Guide*.
     #
     # If another Amazon Web Services account is in the same region and has
     # granted you permission (using `PutPermission`), you can send events to
@@ -2924,7 +2928,7 @@ module Aws::EventBridge
     # account is charged for each sent event. Each event sent to another
     # account is charged as a custom event. The account receiving the event
     # is not charged. For more information, see [Amazon EventBridge
-    # Pricing][7].
+    # Pricing][3].
     #
     # <note markdown="1"> `Input`, `InputPath`, and `InputTransformer` are not available with
     # `PutTarget` if the target is an event bus of a different Amazon Web
@@ -2937,10 +2941,16 @@ module Aws::EventBridge
     # organization instead of directly by the account ID, then you must
     # specify a `RoleArn` with proper permissions in the `Target` structure.
     # For more information, see [Sending and Receiving Events Between Amazon
-    # Web Services Accounts][8] in the *Amazon EventBridge User Guide*.
+    # Web Services Accounts][4] in the *Amazon EventBridge User Guide*.
+    #
+    # <note markdown="1"> If you have an IAM role on a cross-account event bus target, a
+    # `PutTargets` call without a role on the same target (same `Id` and
+    # `Arn`) will not remove the role.
+    #
+    #  </note>
     #
     # For more information about enabling cross-account events, see
-    # [PutPermission][9].
+    # [PutPermission][5].
     #
     # **Input**, **InputPath**, and **InputTransformer** are mutually
     # exclusive and optional parameters of a target. When a rule is
@@ -2977,15 +2987,11 @@ module Aws::EventBridge
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html
-    # [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-gateway-target.html
-    # [3]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-cross-account.html
-    # [4]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-bus-to-bus.html
-    # [5]: https://docs.aws.amazon.com/incident-manager/latest/userguide/incident-creation.html#incident-tracking-auto-eventbridge
-    # [6]: https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html
-    # [7]: http://aws.amazon.com/eventbridge/pricing/
-    # [8]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html
-    # [9]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-targets.html
+    # [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html
+    # [3]: http://aws.amazon.com/eventbridge/pricing/
+    # [4]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html
+    # [5]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html
     #
     # @option params [required, String] :rule
     #   The name of the rule.
@@ -3120,6 +3126,9 @@ module Aws::EventBridge
     #           maximum_retry_attempts: 1,
     #           maximum_event_age_in_seconds: 1,
     #         },
+    #         app_sync_parameters: {
+    #           graph_ql_operation: "GraphQLOperation",
+    #         },
     #       },
     #     ],
     #   })
@@ -3198,6 +3207,8 @@ module Aws::EventBridge
     # same time. If that happens, `FailedEntryCount` is non-zero in the
     # response and each entry in `FailedEntries` provides the ID of the
     # failed target and the error code.
+    #
+    # The maximum number of entries per request is 10.
     #
     # @option params [required, String] :rule
     #   The name of the rule.
@@ -3667,8 +3678,8 @@ module Aws::EventBridge
 
     # Update an existing endpoint. For more information about global
     # endpoints, see [Making applications Regional-fault tolerant with
-    # global endpoints and event replication][1] in the Amazon EventBridge
-    # User Guide..
+    # global endpoints and event replication][1] in the *Amazon EventBridge
+    # User Guide*.
     #
     #
     #
@@ -3767,7 +3778,7 @@ module Aws::EventBridge
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eventbridge'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

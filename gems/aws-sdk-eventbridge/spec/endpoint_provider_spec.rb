@@ -770,7 +770,7 @@ module Aws::EventBridge
         expect_auth({"signingName"=>"events", "name"=>"sigv4a", "signingRegionSet"=>["*"]})
         resp = client.put_events(
           endpoint_id: 'abc123.456def',
-          entries: [{"detail_type"=>"detailType", "detail"=>"{ \"test\": [\"test\"] }", "event_bus_name"=>"my-sdk-app"}],
+          entries: [{:detail_type=>"detailType", :detail=>"{ \"test\": [\"test\"] }", :event_bus_name=>"my-sdk-app"}],
         )
         expected_uri = URI.parse(expected['endpoint']['url'])
         expect(resp.context.http_request.endpoint.to_s).to include(expected_uri.host)

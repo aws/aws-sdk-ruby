@@ -1,0 +1,526 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Detective
+  module Types
+
+    class AcceptInvitationRequest
+      attr_accessor graph_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor error_code: ("INVALID_GRAPH_ARN" | "INVALID_REQUEST_BODY" | "INTERNAL_ERROR")
+      attr_accessor error_code_reason: ::String
+      attr_accessor sub_error_code: ("INVALID_GRAPH_ARN" | "INVALID_REQUEST_BODY" | "INTERNAL_ERROR")
+      attr_accessor sub_error_code_reason: ::String
+      SENSITIVE: []
+    end
+
+    class Account
+      attr_accessor account_id: ::String
+      attr_accessor email_address: ::String
+      SENSITIVE: [:email_address]
+    end
+
+    class Administrator
+      attr_accessor account_id: ::String
+      attr_accessor graph_arn: ::String
+      attr_accessor delegation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class BatchGetGraphMemberDatasourcesRequest
+      attr_accessor graph_arn: ::String
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetGraphMemberDatasourcesResponse
+      attr_accessor member_datasources: ::Array[Types::MembershipDatasources]
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class BatchGetMembershipDatasourcesRequest
+      attr_accessor graph_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetMembershipDatasourcesResponse
+      attr_accessor membership_datasources: ::Array[Types::MembershipDatasources]
+      attr_accessor unprocessed_graphs: ::Array[Types::UnprocessedGraph]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGraphRequest
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateGraphResponse
+      attr_accessor graph_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMembersRequest
+      attr_accessor graph_arn: ::String
+      attr_accessor message: ::String
+      attr_accessor disable_email_notification: bool
+      attr_accessor accounts: ::Array[Types::Account]
+      SENSITIVE: [:message]
+    end
+
+    class CreateMembersResponse
+      attr_accessor members: ::Array[Types::MemberDetail]
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class DatasourcePackageIngestDetail
+      attr_accessor datasource_package_ingest_state: ("STARTED" | "STOPPED" | "DISABLED")
+      attr_accessor last_ingest_state_change: ::Hash[("STARTED" | "STOPPED" | "DISABLED"), Types::TimestampForCollection]
+      SENSITIVE: []
+    end
+
+    class DatasourcePackageUsageInfo
+      attr_accessor volume_usage_in_bytes: ::Integer
+      attr_accessor volume_usage_update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DateFilter
+      attr_accessor start_inclusive: ::Time
+      attr_accessor end_inclusive: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteGraphRequest
+      attr_accessor graph_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMembersRequest
+      attr_accessor graph_arn: ::String
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteMembersResponse
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationConfigurationRequest
+      attr_accessor graph_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationConfigurationResponse
+      attr_accessor auto_enable: bool
+      SENSITIVE: []
+    end
+
+    class DisassociateMembershipRequest
+      attr_accessor graph_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EnableOrganizationAdminAccountRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class FilterCriteria
+      attr_accessor severity: Types::StringFilter
+      attr_accessor status: Types::StringFilter
+      attr_accessor state: Types::StringFilter
+      attr_accessor entity_arn: Types::StringFilter
+      attr_accessor created_time: Types::DateFilter
+      SENSITIVE: []
+    end
+
+    class FlaggedIpAddressDetail
+      attr_accessor ip_address: ::String
+      attr_accessor reason: ("AWS_THREAT_INTELLIGENCE")
+      SENSITIVE: []
+    end
+
+    class GetInvestigationRequest
+      attr_accessor graph_arn: ::String
+      attr_accessor investigation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetInvestigationResponse
+      attr_accessor graph_arn: ::String
+      attr_accessor investigation_id: ::String
+      attr_accessor entity_arn: ::String
+      attr_accessor entity_type: ("IAM_ROLE" | "IAM_USER")
+      attr_accessor created_time: ::Time
+      attr_accessor scope_start_time: ::Time
+      attr_accessor scope_end_time: ::Time
+      attr_accessor status: ("RUNNING" | "FAILED" | "SUCCESSFUL")
+      attr_accessor severity: ("INFORMATIONAL" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL")
+      attr_accessor state: ("ACTIVE" | "ARCHIVED")
+      SENSITIVE: []
+    end
+
+    class GetMembersRequest
+      attr_accessor graph_arn: ::String
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetMembersResponse
+      attr_accessor member_details: ::Array[Types::MemberDetail]
+      attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class Graph
+      attr_accessor arn: ::String
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ImpossibleTravelDetail
+      attr_accessor starting_ip_address: ::String
+      attr_accessor ending_ip_address: ::String
+      attr_accessor starting_location: ::String
+      attr_accessor ending_location: ::String
+      attr_accessor hourly_time_delta: ::Integer
+      SENSITIVE: []
+    end
+
+    class Indicator
+      attr_accessor indicator_type: ("TTP_OBSERVED" | "IMPOSSIBLE_TRAVEL" | "FLAGGED_IP_ADDRESS" | "NEW_GEOLOCATION" | "NEW_ASO" | "NEW_USER_AGENT" | "RELATED_FINDING" | "RELATED_FINDING_GROUP")
+      attr_accessor indicator_detail: Types::IndicatorDetail
+      SENSITIVE: []
+    end
+
+    class IndicatorDetail
+      attr_accessor tt_ps_observed_detail: Types::TTPsObservedDetail
+      attr_accessor impossible_travel_detail: Types::ImpossibleTravelDetail
+      attr_accessor flagged_ip_address_detail: Types::FlaggedIpAddressDetail
+      attr_accessor new_geolocation_detail: Types::NewGeolocationDetail
+      attr_accessor new_aso_detail: Types::NewAsoDetail
+      attr_accessor new_user_agent_detail: Types::NewUserAgentDetail
+      attr_accessor related_finding_detail: Types::RelatedFindingDetail
+      attr_accessor related_finding_group_detail: Types::RelatedFindingGroupDetail
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvestigationDetail
+      attr_accessor investigation_id: ::String
+      attr_accessor severity: ("INFORMATIONAL" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL")
+      attr_accessor status: ("RUNNING" | "FAILED" | "SUCCESSFUL")
+      attr_accessor state: ("ACTIVE" | "ARCHIVED")
+      attr_accessor created_time: ::Time
+      attr_accessor entity_arn: ::String
+      attr_accessor entity_type: ("IAM_ROLE" | "IAM_USER")
+      SENSITIVE: []
+    end
+
+    class ListDatasourcePackagesRequest
+      attr_accessor graph_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatasourcePackagesResponse
+      attr_accessor datasource_packages: ::Hash[("DETECTIVE_CORE" | "EKS_AUDIT" | "ASFF_SECURITYHUB_FINDING"), Types::DatasourcePackageIngestDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGraphsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGraphsResponse
+      attr_accessor graph_list: ::Array[Types::Graph]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIndicatorsRequest
+      attr_accessor graph_arn: ::String
+      attr_accessor investigation_id: ::String
+      attr_accessor indicator_type: ("TTP_OBSERVED" | "IMPOSSIBLE_TRAVEL" | "FLAGGED_IP_ADDRESS" | "NEW_GEOLOCATION" | "NEW_ASO" | "NEW_USER_AGENT" | "RELATED_FINDING" | "RELATED_FINDING_GROUP")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIndicatorsResponse
+      attr_accessor graph_arn: ::String
+      attr_accessor investigation_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor indicators: ::Array[Types::Indicator]
+      SENSITIVE: []
+    end
+
+    class ListInvestigationsRequest
+      attr_accessor graph_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter_criteria: Types::FilterCriteria
+      attr_accessor sort_criteria: Types::SortCriteria
+      SENSITIVE: []
+    end
+
+    class ListInvestigationsResponse
+      attr_accessor investigation_details: ::Array[Types::InvestigationDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInvitationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListInvitationsResponse
+      attr_accessor invitations: ::Array[Types::MemberDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMembersRequest
+      attr_accessor graph_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMembersResponse
+      attr_accessor member_details: ::Array[Types::MemberDetail]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationAdminAccountsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOrganizationAdminAccountsResponse
+      attr_accessor administrators: ::Array[Types::Administrator]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MemberDetail
+      attr_accessor account_id: ::String
+      attr_accessor email_address: ::String
+      attr_accessor graph_arn: ::String
+      attr_accessor master_id: ::String
+      attr_accessor administrator_id: ::String
+      attr_accessor status: ("INVITED" | "VERIFICATION_IN_PROGRESS" | "VERIFICATION_FAILED" | "ENABLED" | "ACCEPTED_BUT_DISABLED")
+      attr_accessor disabled_reason: ("VOLUME_TOO_HIGH" | "VOLUME_UNKNOWN")
+      attr_accessor invited_time: ::Time
+      attr_accessor updated_time: ::Time
+      attr_accessor volume_usage_in_bytes: ::Integer
+      attr_accessor volume_usage_updated_time: ::Time
+      attr_accessor percent_of_graph_utilization: ::Float
+      attr_accessor percent_of_graph_utilization_updated_time: ::Time
+      attr_accessor invitation_type: ("INVITATION" | "ORGANIZATION")
+      attr_accessor volume_usage_by_datasource_package: ::Hash[("DETECTIVE_CORE" | "EKS_AUDIT" | "ASFF_SECURITYHUB_FINDING"), Types::DatasourcePackageUsageInfo]
+      attr_accessor datasource_package_ingest_states: ::Hash[("DETECTIVE_CORE" | "EKS_AUDIT" | "ASFF_SECURITYHUB_FINDING"), ("STARTED" | "STOPPED" | "DISABLED")]
+      SENSITIVE: [:email_address]
+    end
+
+    class MembershipDatasources
+      attr_accessor account_id: ::String
+      attr_accessor graph_arn: ::String
+      attr_accessor datasource_package_ingest_history: ::Hash[("DETECTIVE_CORE" | "EKS_AUDIT" | "ASFF_SECURITYHUB_FINDING"), ::Hash[("STARTED" | "STOPPED" | "DISABLED"), Types::TimestampForCollection]]
+      SENSITIVE: []
+    end
+
+    class NewAsoDetail
+      attr_accessor aso: ::String
+      attr_accessor is_new_for_entire_account: bool
+      SENSITIVE: []
+    end
+
+    class NewGeolocationDetail
+      attr_accessor location: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor is_new_for_entire_account: bool
+      SENSITIVE: []
+    end
+
+    class NewUserAgentDetail
+      attr_accessor user_agent: ::String
+      attr_accessor is_new_for_entire_account: bool
+      SENSITIVE: []
+    end
+
+    class RejectInvitationRequest
+      attr_accessor graph_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RelatedFindingDetail
+      attr_accessor arn: ::String
+      attr_accessor type: ::String
+      attr_accessor ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class RelatedFindingGroupDetail
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resources: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SortCriteria
+      attr_accessor field: ("SEVERITY" | "STATUS" | "CREATED_TIME")
+      attr_accessor sort_order: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class StartInvestigationRequest
+      attr_accessor graph_arn: ::String
+      attr_accessor entity_arn: ::String
+      attr_accessor scope_start_time: ::Time
+      attr_accessor scope_end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class StartInvestigationResponse
+      attr_accessor investigation_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartMonitoringMemberRequest
+      attr_accessor graph_arn: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class StringFilter
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TTPsObservedDetail
+      attr_accessor tactic: ::String
+      attr_accessor technique: ::String
+      attr_accessor procedure: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor api_name: ::String
+      attr_accessor api_success_count: ::Integer
+      attr_accessor api_failure_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TimestampForCollection
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnprocessedAccount
+      attr_accessor account_id: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class UnprocessedGraph
+      attr_accessor graph_arn: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDatasourcePackagesRequest
+      attr_accessor graph_arn: ::String
+      attr_accessor datasource_packages: ::Array[("DETECTIVE_CORE" | "EKS_AUDIT" | "ASFF_SECURITYHUB_FINDING")]
+      SENSITIVE: []
+    end
+
+    class UpdateInvestigationStateRequest
+      attr_accessor graph_arn: ::String
+      attr_accessor investigation_id: ::String
+      attr_accessor state: ("ACTIVE" | "ARCHIVED")
+      SENSITIVE: []
+    end
+
+    class UpdateOrganizationConfigurationRequest
+      attr_accessor graph_arn: ::String
+      attr_accessor auto_enable: bool
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor error_code: ("INVALID_GRAPH_ARN" | "INVALID_REQUEST_BODY" | "INTERNAL_ERROR")
+      attr_accessor error_code_reason: ::String
+      SENSITIVE: []
+    end
+  end
+end

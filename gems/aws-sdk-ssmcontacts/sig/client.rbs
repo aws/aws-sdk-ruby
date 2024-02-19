@@ -1,0 +1,767 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SSMContacts
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptPageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptPageResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#accept_page-instance_method
+      def accept_page: (
+                         page_id: ::String,
+                         ?contact_channel_id: ::String,
+                         accept_type: ("DELIVERED" | "READ"),
+                         ?note: ::String,
+                         accept_code: ::String,
+                         ?accept_code_validation: ("IGNORE" | "ENFORCE")
+                       ) -> _AcceptPageResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptPageResponseSuccess
+
+      interface _ActivateContactChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ActivateContactChannelResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#activate_contact_channel-instance_method
+      def activate_contact_channel: (
+                                      contact_channel_id: ::String,
+                                      activation_code: ::String
+                                    ) -> _ActivateContactChannelResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ActivateContactChannelResponseSuccess
+
+      interface _CreateContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContactResult]
+        def contact_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#create_contact-instance_method
+      def create_contact: (
+                            alias: ::String,
+                            ?display_name: ::String,
+                            type: ("PERSONAL" | "ESCALATION" | "ONCALL_SCHEDULE"),
+                            plan: {
+                              stages: Array[
+                                {
+                                  duration_in_minutes: ::Integer,
+                                  targets: Array[
+                                    {
+                                      channel_target_info: {
+                                        contact_channel_id: ::String,
+                                        retry_interval_in_minutes: ::Integer?
+                                      }?,
+                                      contact_target_info: {
+                                        contact_id: ::String?,
+                                        is_essential: bool
+                                      }?
+                                    },
+                                  ]
+                                },
+                              ]?,
+                              rotation_ids: Array[::String]?
+                            },
+                            ?tags: Array[
+                              {
+                                key: ::String?,
+                                value: ::String?
+                              },
+                            ],
+                            ?idempotency_token: ::String
+                          ) -> _CreateContactResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactResponseSuccess
+
+      interface _CreateContactChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContactChannelResult]
+        def contact_channel_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#create_contact_channel-instance_method
+      def create_contact_channel: (
+                                    contact_id: ::String,
+                                    name: ::String,
+                                    type: ("SMS" | "VOICE" | "EMAIL"),
+                                    delivery_address: {
+                                      simple_address: ::String?
+                                    },
+                                    ?defer_activation: bool,
+                                    ?idempotency_token: ::String
+                                  ) -> _CreateContactChannelResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactChannelResponseSuccess
+
+      interface _CreateRotationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRotationResult]
+        def rotation_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#create_rotation-instance_method
+      def create_rotation: (
+                             name: ::String,
+                             contact_ids: Array[::String],
+                             ?start_time: ::Time,
+                             time_zone_id: ::String,
+                             recurrence: {
+                               monthly_settings: Array[
+                                 {
+                                   day_of_month: ::Integer,
+                                   hand_off_time: {
+                                     hour_of_day: ::Integer,
+                                     minute_of_hour: ::Integer
+                                   }
+                                 },
+                               ]?,
+                               weekly_settings: Array[
+                                 {
+                                   day_of_week: ("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"),
+                                   hand_off_time: {
+                                     hour_of_day: ::Integer,
+                                     minute_of_hour: ::Integer
+                                   }
+                                 },
+                               ]?,
+                               daily_settings: Array[
+                                 {
+                                   hour_of_day: ::Integer,
+                                   minute_of_hour: ::Integer
+                                 },
+                               ]?,
+                               number_of_on_calls: ::Integer,
+                               shift_coverages: Hash[("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"), Array[
+                                   {
+                                     start: {
+                                       hour_of_day: ::Integer,
+                                       minute_of_hour: ::Integer
+                                     }?,
+                                     end: {
+                                       hour_of_day: ::Integer,
+                                       minute_of_hour: ::Integer
+                                     }?
+                                   },
+                                 ]]?,
+                               recurrence_multiplier: ::Integer
+                             },
+                             ?tags: Array[
+                               {
+                                 key: ::String?,
+                                 value: ::String?
+                               },
+                             ],
+                             ?idempotency_token: ::String
+                           ) -> _CreateRotationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRotationResponseSuccess
+
+      interface _CreateRotationOverrideResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRotationOverrideResult]
+        def rotation_override_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#create_rotation_override-instance_method
+      def create_rotation_override: (
+                                      rotation_id: ::String,
+                                      new_contact_ids: Array[::String],
+                                      start_time: ::Time,
+                                      end_time: ::Time,
+                                      ?idempotency_token: ::String
+                                    ) -> _CreateRotationOverrideResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRotationOverrideResponseSuccess
+
+      interface _DeactivateContactChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeactivateContactChannelResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#deactivate_contact_channel-instance_method
+      def deactivate_contact_channel: (
+                                        contact_channel_id: ::String
+                                      ) -> _DeactivateContactChannelResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeactivateContactChannelResponseSuccess
+
+      interface _DeleteContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContactResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#delete_contact-instance_method
+      def delete_contact: (
+                            contact_id: ::String
+                          ) -> _DeleteContactResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContactResponseSuccess
+
+      interface _DeleteContactChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContactChannelResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#delete_contact_channel-instance_method
+      def delete_contact_channel: (
+                                    contact_channel_id: ::String
+                                  ) -> _DeleteContactChannelResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContactChannelResponseSuccess
+
+      interface _DeleteRotationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRotationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#delete_rotation-instance_method
+      def delete_rotation: (
+                             rotation_id: ::String
+                           ) -> _DeleteRotationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRotationResponseSuccess
+
+      interface _DeleteRotationOverrideResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRotationOverrideResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#delete_rotation_override-instance_method
+      def delete_rotation_override: (
+                                      rotation_id: ::String,
+                                      rotation_override_id: ::String
+                                    ) -> _DeleteRotationOverrideResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRotationOverrideResponseSuccess
+
+      interface _DescribeEngagementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEngagementResult]
+        def contact_arn: () -> ::String
+        def engagement_arn: () -> ::String
+        def sender: () -> ::String
+        def subject: () -> ::String
+        def content: () -> ::String
+        def public_subject: () -> ::String
+        def public_content: () -> ::String
+        def incident_id: () -> ::String
+        def start_time: () -> ::Time
+        def stop_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#describe_engagement-instance_method
+      def describe_engagement: (
+                                 engagement_id: ::String
+                               ) -> _DescribeEngagementResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEngagementResponseSuccess
+
+      interface _DescribePageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePageResult]
+        def page_arn: () -> ::String
+        def engagement_arn: () -> ::String
+        def contact_arn: () -> ::String
+        def sender: () -> ::String
+        def subject: () -> ::String
+        def content: () -> ::String
+        def public_subject: () -> ::String
+        def public_content: () -> ::String
+        def incident_id: () -> ::String
+        def sent_time: () -> ::Time
+        def read_time: () -> ::Time
+        def delivery_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#describe_page-instance_method
+      def describe_page: (
+                           page_id: ::String
+                         ) -> _DescribePageResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePageResponseSuccess
+
+      interface _GetContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContactResult]
+        def contact_arn: () -> ::String
+        def alias: () -> ::String
+        def display_name: () -> ::String
+        def type: () -> ("PERSONAL" | "ESCALATION" | "ONCALL_SCHEDULE")
+        def plan: () -> Types::Plan
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#get_contact-instance_method
+      def get_contact: (
+                         contact_id: ::String
+                       ) -> _GetContactResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContactResponseSuccess
+
+      interface _GetContactChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContactChannelResult]
+        def contact_arn: () -> ::String
+        def contact_channel_arn: () -> ::String
+        def name: () -> ::String
+        def type: () -> ("SMS" | "VOICE" | "EMAIL")
+        def delivery_address: () -> Types::ContactChannelAddress
+        def activation_status: () -> ("ACTIVATED" | "NOT_ACTIVATED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#get_contact_channel-instance_method
+      def get_contact_channel: (
+                                 contact_channel_id: ::String
+                               ) -> _GetContactChannelResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContactChannelResponseSuccess
+
+      interface _GetContactPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContactPolicyResult]
+        def contact_arn: () -> ::String
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#get_contact_policy-instance_method
+      def get_contact_policy: (
+                                contact_arn: ::String
+                              ) -> _GetContactPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContactPolicyResponseSuccess
+
+      interface _GetRotationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRotationResult]
+        def rotation_arn: () -> ::String
+        def name: () -> ::String
+        def contact_ids: () -> ::Array[::String]
+        def start_time: () -> ::Time
+        def time_zone_id: () -> ::String
+        def recurrence: () -> Types::RecurrenceSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#get_rotation-instance_method
+      def get_rotation: (
+                          rotation_id: ::String
+                        ) -> _GetRotationResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRotationResponseSuccess
+
+      interface _GetRotationOverrideResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRotationOverrideResult]
+        def rotation_override_id: () -> ::String
+        def rotation_arn: () -> ::String
+        def new_contact_ids: () -> ::Array[::String]
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def create_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#get_rotation_override-instance_method
+      def get_rotation_override: (
+                                   rotation_id: ::String,
+                                   rotation_override_id: ::String
+                                 ) -> _GetRotationOverrideResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRotationOverrideResponseSuccess
+
+      interface _ListContactChannelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContactChannelsResult]
+        def next_token: () -> ::String
+        def contact_channels: () -> ::Array[Types::ContactChannel]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#list_contact_channels-instance_method
+      def list_contact_channels: (
+                                   contact_id: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListContactChannelsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContactChannelsResponseSuccess
+
+      interface _ListContactsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContactsResult]
+        def next_token: () -> ::String
+        def contacts: () -> ::Array[Types::Contact]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#list_contacts-instance_method
+      def list_contacts: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer,
+                           ?alias_prefix: ::String,
+                           ?type: ("PERSONAL" | "ESCALATION" | "ONCALL_SCHEDULE")
+                         ) -> _ListContactsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContactsResponseSuccess
+
+      interface _ListEngagementsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEngagementsResult]
+        def next_token: () -> ::String
+        def engagements: () -> ::Array[Types::Engagement]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#list_engagements-instance_method
+      def list_engagements: (
+                              ?next_token: ::String,
+                              ?max_results: ::Integer,
+                              ?incident_id: ::String,
+                              ?time_range_value: {
+                                start_time: ::Time?,
+                                end_time: ::Time?
+                              }
+                            ) -> _ListEngagementsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEngagementsResponseSuccess
+
+      interface _ListPageReceiptsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPageReceiptsResult]
+        def next_token: () -> ::String
+        def receipts: () -> ::Array[Types::Receipt]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#list_page_receipts-instance_method
+      def list_page_receipts: (
+                                page_id: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListPageReceiptsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPageReceiptsResponseSuccess
+
+      interface _ListPageResolutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPageResolutionsResult]
+        def next_token: () -> ::String
+        def page_resolutions: () -> ::Array[Types::ResolutionContact]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#list_page_resolutions-instance_method
+      def list_page_resolutions: (
+                                   ?next_token: ::String,
+                                   page_id: ::String
+                                 ) -> _ListPageResolutionsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPageResolutionsResponseSuccess
+
+      interface _ListPagesByContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPagesByContactResult]
+        def next_token: () -> ::String
+        def pages: () -> ::Array[Types::Page]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#list_pages_by_contact-instance_method
+      def list_pages_by_contact: (
+                                   contact_id: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListPagesByContactResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPagesByContactResponseSuccess
+
+      interface _ListPagesByEngagementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPagesByEngagementResult]
+        def next_token: () -> ::String
+        def pages: () -> ::Array[Types::Page]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#list_pages_by_engagement-instance_method
+      def list_pages_by_engagement: (
+                                      engagement_id: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListPagesByEngagementResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPagesByEngagementResponseSuccess
+
+      interface _ListPreviewRotationShiftsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPreviewRotationShiftsResult]
+        def rotation_shifts: () -> ::Array[Types::RotationShift]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#list_preview_rotation_shifts-instance_method
+      def list_preview_rotation_shifts: (
+                                          ?rotation_start_time: ::Time,
+                                          ?start_time: ::Time,
+                                          end_time: ::Time,
+                                          members: Array[::String],
+                                          time_zone_id: ::String,
+                                          recurrence: {
+                                            monthly_settings: Array[
+                                              {
+                                                day_of_month: ::Integer,
+                                                hand_off_time: {
+                                                  hour_of_day: ::Integer,
+                                                  minute_of_hour: ::Integer
+                                                }
+                                              },
+                                            ]?,
+                                            weekly_settings: Array[
+                                              {
+                                                day_of_week: ("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"),
+                                                hand_off_time: {
+                                                  hour_of_day: ::Integer,
+                                                  minute_of_hour: ::Integer
+                                                }
+                                              },
+                                            ]?,
+                                            daily_settings: Array[
+                                              {
+                                                hour_of_day: ::Integer,
+                                                minute_of_hour: ::Integer
+                                              },
+                                            ]?,
+                                            number_of_on_calls: ::Integer,
+                                            shift_coverages: Hash[("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"), Array[
+                                                {
+                                                  start: {
+                                                    hour_of_day: ::Integer,
+                                                    minute_of_hour: ::Integer
+                                                  }?,
+                                                  end: {
+                                                    hour_of_day: ::Integer,
+                                                    minute_of_hour: ::Integer
+                                                  }?
+                                                },
+                                              ]]?,
+                                            recurrence_multiplier: ::Integer
+                                          },
+                                          ?overrides: Array[
+                                            {
+                                              new_members: Array[::String]?,
+                                              start_time: ::Time?,
+                                              end_time: ::Time?
+                                            },
+                                          ],
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListPreviewRotationShiftsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPreviewRotationShiftsResponseSuccess
+
+      interface _ListRotationOverridesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRotationOverridesResult]
+        def rotation_overrides: () -> ::Array[Types::RotationOverride]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#list_rotation_overrides-instance_method
+      def list_rotation_overrides: (
+                                     rotation_id: ::String,
+                                     start_time: ::Time,
+                                     end_time: ::Time,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListRotationOverridesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRotationOverridesResponseSuccess
+
+      interface _ListRotationShiftsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRotationShiftsResult]
+        def rotation_shifts: () -> ::Array[Types::RotationShift]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#list_rotation_shifts-instance_method
+      def list_rotation_shifts: (
+                                  rotation_id: ::String,
+                                  ?start_time: ::Time,
+                                  end_time: ::Time,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListRotationShiftsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRotationShiftsResponseSuccess
+
+      interface _ListRotationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRotationsResult]
+        def next_token: () -> ::String
+        def rotations: () -> ::Array[Types::Rotation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#list_rotations-instance_method
+      def list_rotations: (
+                            ?rotation_name_prefix: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListRotationsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRotationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResult]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutContactPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutContactPolicyResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#put_contact_policy-instance_method
+      def put_contact_policy: (
+                                contact_arn: ::String,
+                                policy: ::String
+                              ) -> _PutContactPolicyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutContactPolicyResponseSuccess
+
+      interface _SendActivationCodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendActivationCodeResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#send_activation_code-instance_method
+      def send_activation_code: (
+                                  contact_channel_id: ::String
+                                ) -> _SendActivationCodeResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendActivationCodeResponseSuccess
+
+      interface _StartEngagementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartEngagementResult]
+        def engagement_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#start_engagement-instance_method
+      def start_engagement: (
+                              contact_id: ::String,
+                              sender: ::String,
+                              subject: ::String,
+                              content: ::String,
+                              ?public_subject: ::String,
+                              ?public_content: ::String,
+                              ?incident_id: ::String,
+                              ?idempotency_token: ::String
+                            ) -> _StartEngagementResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartEngagementResponseSuccess
+
+      interface _StopEngagementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopEngagementResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#stop_engagement-instance_method
+      def stop_engagement: (
+                             engagement_id: ::String,
+                             ?reason: ::String
+                           ) -> _StopEngagementResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopEngagementResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateContactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContactResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#update_contact-instance_method
+      def update_contact: (
+                            contact_id: ::String,
+                            ?display_name: ::String,
+                            ?plan: {
+                              stages: Array[
+                                {
+                                  duration_in_minutes: ::Integer,
+                                  targets: Array[
+                                    {
+                                      channel_target_info: {
+                                        contact_channel_id: ::String,
+                                        retry_interval_in_minutes: ::Integer?
+                                      }?,
+                                      contact_target_info: {
+                                        contact_id: ::String?,
+                                        is_essential: bool
+                                      }?
+                                    },
+                                  ]
+                                },
+                              ]?,
+                              rotation_ids: Array[::String]?
+                            }
+                          ) -> _UpdateContactResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactResponseSuccess
+
+      interface _UpdateContactChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContactChannelResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#update_contact_channel-instance_method
+      def update_contact_channel: (
+                                    contact_channel_id: ::String,
+                                    ?name: ::String,
+                                    ?delivery_address: {
+                                      simple_address: ::String?
+                                    }
+                                  ) -> _UpdateContactChannelResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactChannelResponseSuccess
+
+      interface _UpdateRotationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRotationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMContacts/Client.html#update_rotation-instance_method
+      def update_rotation: (
+                             rotation_id: ::String,
+                             ?contact_ids: Array[::String],
+                             ?start_time: ::Time,
+                             ?time_zone_id: ::String,
+                             recurrence: {
+                               monthly_settings: Array[
+                                 {
+                                   day_of_month: ::Integer,
+                                   hand_off_time: {
+                                     hour_of_day: ::Integer,
+                                     minute_of_hour: ::Integer
+                                   }
+                                 },
+                               ]?,
+                               weekly_settings: Array[
+                                 {
+                                   day_of_week: ("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"),
+                                   hand_off_time: {
+                                     hour_of_day: ::Integer,
+                                     minute_of_hour: ::Integer
+                                   }
+                                 },
+                               ]?,
+                               daily_settings: Array[
+                                 {
+                                   hour_of_day: ::Integer,
+                                   minute_of_hour: ::Integer
+                                 },
+                               ]?,
+                               number_of_on_calls: ::Integer,
+                               shift_coverages: Hash[("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"), Array[
+                                   {
+                                     start: {
+                                       hour_of_day: ::Integer,
+                                       minute_of_hour: ::Integer
+                                     }?,
+                                     end: {
+                                       hour_of_day: ::Integer,
+                                       minute_of_hour: ::Integer
+                                     }?
+                                   },
+                                 ]]?,
+                               recurrence_multiplier: ::Integer
+                             }
+                           ) -> _UpdateRotationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRotationResponseSuccess
+    end
+  end
+end
+

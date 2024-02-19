@@ -123,6 +123,7 @@ module Aws::EMR
     HadoopJarStepConfig = Shapes::StructureShape.new(name: 'HadoopJarStepConfig')
     HadoopStepConfig = Shapes::StructureShape.new(name: 'HadoopStepConfig')
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
+    IdcUserAssignment = Shapes::StringShape.new(name: 'IdcUserAssignment')
     IdentityType = Shapes::StringShape.new(name: 'IdentityType')
     Instance = Shapes::StructureShape.new(name: 'Instance')
     InstanceCollectionType = Shapes::StringShape.new(name: 'InstanceCollectionType')
@@ -283,7 +284,9 @@ module Aws::EMR
     SessionMappingDetail = Shapes::StructureShape.new(name: 'SessionMappingDetail')
     SessionMappingSummary = Shapes::StructureShape.new(name: 'SessionMappingSummary')
     SessionMappingSummaryList = Shapes::ListShape.new(name: 'SessionMappingSummaryList')
+    SetKeepJobFlowAliveWhenNoStepsInput = Shapes::StructureShape.new(name: 'SetKeepJobFlowAliveWhenNoStepsInput')
     SetTerminationProtectionInput = Shapes::StructureShape.new(name: 'SetTerminationProtectionInput')
+    SetUnhealthyNodeReplacementInput = Shapes::StructureShape.new(name: 'SetUnhealthyNodeReplacementInput')
     SetVisibleToAllUsersInput = Shapes::StructureShape.new(name: 'SetVisibleToAllUsersInput')
     ShrinkPolicy = Shapes::StructureShape.new(name: 'ShrinkPolicy')
     SimpleScalingPolicyConfiguration = Shapes::StructureShape.new(name: 'SimpleScalingPolicyConfiguration')
@@ -459,6 +462,7 @@ module Aws::EMR
     Cluster.add_member(:release_label, Shapes::ShapeRef.new(shape: String, location_name: "ReleaseLabel"))
     Cluster.add_member(:auto_terminate, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoTerminate"))
     Cluster.add_member(:termination_protected, Shapes::ShapeRef.new(shape: Boolean, location_name: "TerminationProtected"))
+    Cluster.add_member(:unhealthy_node_replacement, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UnhealthyNodeReplacement"))
     Cluster.add_member(:visible_to_all_users, Shapes::ShapeRef.new(shape: Boolean, location_name: "VisibleToAllUsers"))
     Cluster.add_member(:applications, Shapes::ShapeRef.new(shape: ApplicationList, location_name: "Applications"))
     Cluster.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -478,6 +482,8 @@ module Aws::EMR
     Cluster.add_member(:step_concurrency_level, Shapes::ShapeRef.new(shape: Integer, location_name: "StepConcurrencyLevel"))
     Cluster.add_member(:placement_groups, Shapes::ShapeRef.new(shape: PlacementGroupConfigList, location_name: "PlacementGroups"))
     Cluster.add_member(:os_release_label, Shapes::ShapeRef.new(shape: String, location_name: "OSReleaseLabel"))
+    Cluster.add_member(:ebs_root_volume_iops, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeIops"))
+    Cluster.add_member(:ebs_root_volume_throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeThroughput"))
     Cluster.struct_class = Types::Cluster
 
     ClusterStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ClusterStateChangeReasonCode, location_name: "Code"))
@@ -549,6 +555,10 @@ module Aws::EMR
     CreateStudioInput.add_member(:idp_auth_url, Shapes::ShapeRef.new(shape: XmlString, location_name: "IdpAuthUrl"))
     CreateStudioInput.add_member(:idp_relay_state_parameter_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "IdpRelayStateParameterName"))
     CreateStudioInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateStudioInput.add_member(:trusted_identity_propagation_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "TrustedIdentityPropagationEnabled"))
+    CreateStudioInput.add_member(:idc_user_assignment, Shapes::ShapeRef.new(shape: IdcUserAssignment, location_name: "IdcUserAssignment"))
+    CreateStudioInput.add_member(:idc_instance_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "IdcInstanceArn"))
+    CreateStudioInput.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: XmlString, location_name: "EncryptionKeyArn"))
     CreateStudioInput.struct_class = Types::CreateStudioInput
 
     CreateStudioOutput.add_member(:studio_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "StudioId"))
@@ -710,7 +720,7 @@ module Aws::EMR
     GetBlockPublicAccessConfigurationOutput.struct_class = Types::GetBlockPublicAccessConfigurationOutput
 
     GetClusterSessionCredentialsInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "ClusterId"))
-    GetClusterSessionCredentialsInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "ExecutionRoleArn"))
+    GetClusterSessionCredentialsInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "ExecutionRoleArn"))
     GetClusterSessionCredentialsInput.struct_class = Types::GetClusterSessionCredentialsInput
 
     GetClusterSessionCredentialsOutput.add_member(:credentials, Shapes::ShapeRef.new(shape: Credentials, location_name: "Credentials"))
@@ -988,6 +998,7 @@ module Aws::EMR
     JobFlowInstancesConfig.add_member(:placement, Shapes::ShapeRef.new(shape: PlacementType, location_name: "Placement"))
     JobFlowInstancesConfig.add_member(:keep_job_flow_alive_when_no_steps, Shapes::ShapeRef.new(shape: Boolean, location_name: "KeepJobFlowAliveWhenNoSteps"))
     JobFlowInstancesConfig.add_member(:termination_protected, Shapes::ShapeRef.new(shape: Boolean, location_name: "TerminationProtected"))
+    JobFlowInstancesConfig.add_member(:unhealthy_node_replacement, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UnhealthyNodeReplacement"))
     JobFlowInstancesConfig.add_member(:hadoop_version, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "HadoopVersion"))
     JobFlowInstancesConfig.add_member(:ec2_subnet_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Ec2SubnetId"))
     JobFlowInstancesConfig.add_member(:ec2_subnet_ids, Shapes::ShapeRef.new(shape: XmlStringMaxLen256List, location_name: "Ec2SubnetIds"))
@@ -1010,6 +1021,7 @@ module Aws::EMR
     JobFlowInstancesDetail.add_member(:placement, Shapes::ShapeRef.new(shape: PlacementType, location_name: "Placement"))
     JobFlowInstancesDetail.add_member(:keep_job_flow_alive_when_no_steps, Shapes::ShapeRef.new(shape: Boolean, location_name: "KeepJobFlowAliveWhenNoSteps"))
     JobFlowInstancesDetail.add_member(:termination_protected, Shapes::ShapeRef.new(shape: Boolean, location_name: "TerminationProtected"))
+    JobFlowInstancesDetail.add_member(:unhealthy_node_replacement, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UnhealthyNodeReplacement"))
     JobFlowInstancesDetail.add_member(:hadoop_version, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "HadoopVersion"))
     JobFlowInstancesDetail.struct_class = Types::JobFlowInstancesDetail
 
@@ -1324,6 +1336,8 @@ module Aws::EMR
     RunJobFlowInput.add_member(:placement_group_configs, Shapes::ShapeRef.new(shape: PlacementGroupConfigList, location_name: "PlacementGroupConfigs"))
     RunJobFlowInput.add_member(:auto_termination_policy, Shapes::ShapeRef.new(shape: AutoTerminationPolicy, location_name: "AutoTerminationPolicy"))
     RunJobFlowInput.add_member(:os_release_label, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "OSReleaseLabel"))
+    RunJobFlowInput.add_member(:ebs_root_volume_iops, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeIops"))
+    RunJobFlowInput.add_member(:ebs_root_volume_throughput, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeThroughput"))
     RunJobFlowInput.struct_class = Types::RunJobFlowInput
 
     RunJobFlowOutput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobFlowId"))
@@ -1380,9 +1394,17 @@ module Aws::EMR
 
     SessionMappingSummaryList.member = Shapes::ShapeRef.new(shape: SessionMappingSummary)
 
+    SetKeepJobFlowAliveWhenNoStepsInput.add_member(:job_flow_ids, Shapes::ShapeRef.new(shape: XmlStringList, required: true, location_name: "JobFlowIds"))
+    SetKeepJobFlowAliveWhenNoStepsInput.add_member(:keep_job_flow_alive_when_no_steps, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "KeepJobFlowAliveWhenNoSteps"))
+    SetKeepJobFlowAliveWhenNoStepsInput.struct_class = Types::SetKeepJobFlowAliveWhenNoStepsInput
+
     SetTerminationProtectionInput.add_member(:job_flow_ids, Shapes::ShapeRef.new(shape: XmlStringList, required: true, location_name: "JobFlowIds"))
     SetTerminationProtectionInput.add_member(:termination_protected, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "TerminationProtected"))
     SetTerminationProtectionInput.struct_class = Types::SetTerminationProtectionInput
+
+    SetUnhealthyNodeReplacementInput.add_member(:job_flow_ids, Shapes::ShapeRef.new(shape: XmlStringList, required: true, location_name: "JobFlowIds"))
+    SetUnhealthyNodeReplacementInput.add_member(:unhealthy_node_replacement, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "UnhealthyNodeReplacement"))
+    SetUnhealthyNodeReplacementInput.struct_class = Types::SetUnhealthyNodeReplacementInput
 
     SetVisibleToAllUsersInput.add_member(:job_flow_ids, Shapes::ShapeRef.new(shape: XmlStringList, required: true, location_name: "JobFlowIds"))
     SetVisibleToAllUsersInput.add_member(:visible_to_all_users, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "VisibleToAllUsers"))
@@ -1510,6 +1532,10 @@ module Aws::EMR
     Studio.add_member(:idp_auth_url, Shapes::ShapeRef.new(shape: XmlString, location_name: "IdpAuthUrl"))
     Studio.add_member(:idp_relay_state_parameter_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "IdpRelayStateParameterName"))
     Studio.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    Studio.add_member(:idc_instance_arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "IdcInstanceArn"))
+    Studio.add_member(:trusted_identity_propagation_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "TrustedIdentityPropagationEnabled"))
+    Studio.add_member(:idc_user_assignment, Shapes::ShapeRef.new(shape: IdcUserAssignment, location_name: "IdcUserAssignment"))
+    Studio.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: XmlString, location_name: "EncryptionKeyArn"))
     Studio.struct_class = Types::Studio
 
     StudioSummary.add_member(:studio_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "StudioId"))
@@ -1560,6 +1586,7 @@ module Aws::EMR
     UpdateStudioInput.add_member(:description, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Description"))
     UpdateStudioInput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "SubnetIds"))
     UpdateStudioInput.add_member(:default_s3_location, Shapes::ShapeRef.new(shape: XmlString, location_name: "DefaultS3Location"))
+    UpdateStudioInput.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: XmlString, location_name: "EncryptionKeyArn"))
     UpdateStudioInput.struct_class = Types::UpdateStudioInput
 
     UpdateStudioSessionMappingInput.add_member(:studio_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "StudioId"))
@@ -2113,11 +2140,29 @@ module Aws::EMR
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:set_keep_job_flow_alive_when_no_steps, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SetKeepJobFlowAliveWhenNoSteps"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SetKeepJobFlowAliveWhenNoStepsInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:set_termination_protection, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SetTerminationProtection"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: SetTerminationProtectionInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:set_unhealthy_node_replacement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SetUnhealthyNodeReplacement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SetUnhealthyNodeReplacementInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)

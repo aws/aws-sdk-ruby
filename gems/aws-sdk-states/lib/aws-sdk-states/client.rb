@@ -762,9 +762,11 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Deletes a state machine. This is an asynchronous operation: It sets
+    # Deletes a state machine. This is an asynchronous operation. It sets
     # the state machine's status to `DELETING` and begins the deletion
-    # process.
+    # process. A state machine is deleted only when all its executions are
+    # completed. On the next state transition, the state machine's
+    # executions are terminated.
     #
     # A qualified state machine ARN can either refer to a *Distributed Map
     # state* defined within a state machine, a version ARN, or an alias ARN.
@@ -948,9 +950,11 @@ module Aws::States
 
     # Provides information about a state machine execution, such as the
     # state machine associated with the execution, the execution input and
-    # output, and relevant execution metadata. Use this API action to return
-    # the Map Run Amazon Resource Name (ARN) if the execution was dispatched
-    # by a Map Run.
+    # output, and relevant execution metadata. If you've [redriven][1] an
+    # execution, you can use this API action to return information about the
+    # redrives of that execution. In addition, you can use this API action
+    # to return the Map Run Amazon Resource Name (ARN) if the execution was
+    # dispatched by a Map Run.
     #
     # If you specify a version or alias ARN when you call the StartExecution
     # API action, `DescribeExecution` returns that ARN.
@@ -960,8 +964,12 @@ module Aws::States
     #
     #  </note>
     #
-    # Executions of an `EXPRESS` state machinearen't supported by
+    # Executions of an `EXPRESS` state machine aren't supported by
     # `DescribeExecution` unless a Map Run dispatched them.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html
     #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution to describe.
@@ -984,6 +992,10 @@ module Aws::States
     #   * {Types::DescribeExecutionOutput#cause #cause} => String
     #   * {Types::DescribeExecutionOutput#state_machine_version_arn #state_machine_version_arn} => String
     #   * {Types::DescribeExecutionOutput#state_machine_alias_arn #state_machine_alias_arn} => String
+    #   * {Types::DescribeExecutionOutput#redrive_count #redrive_count} => Integer
+    #   * {Types::DescribeExecutionOutput#redrive_date #redrive_date} => Time
+    #   * {Types::DescribeExecutionOutput#redrive_status #redrive_status} => String
+    #   * {Types::DescribeExecutionOutput#redrive_status_reason #redrive_status_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -996,7 +1008,7 @@ module Aws::States
     #   resp.execution_arn #=> String
     #   resp.state_machine_arn #=> String
     #   resp.name #=> String
-    #   resp.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT", "ABORTED"
+    #   resp.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT", "ABORTED", "PENDING_REDRIVE"
     #   resp.start_date #=> Time
     #   resp.stop_date #=> Time
     #   resp.input #=> String
@@ -1009,6 +1021,10 @@ module Aws::States
     #   resp.cause #=> String
     #   resp.state_machine_version_arn #=> String
     #   resp.state_machine_alias_arn #=> String
+    #   resp.redrive_count #=> Integer
+    #   resp.redrive_date #=> Time
+    #   resp.redrive_status #=> String, one of "REDRIVABLE", "NOT_REDRIVABLE", "REDRIVABLE_BY_MAP_RUN"
+    #   resp.redrive_status_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecution AWS API Documentation
     #
@@ -1020,12 +1036,15 @@ module Aws::States
     end
 
     # Provides information about a Map Run's configuration, progress, and
-    # results. For more information, see [Examining Map Run][1] in the *Step
-    # Functions Developer Guide*.
+    # results. If you've [redriven][1] a Map Run, this API action also
+    # returns information about the redrives of that Map Run. For more
+    # information, see [Examining Map Run][2] in the *Step Functions
+    # Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html
+    # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html
     #
     # @option params [required, String] :map_run_arn
     #   The Amazon Resource Name (ARN) that identifies a Map Run.
@@ -1042,6 +1061,8 @@ module Aws::States
     #   * {Types::DescribeMapRunOutput#tolerated_failure_count #tolerated_failure_count} => Integer
     #   * {Types::DescribeMapRunOutput#item_counts #item_counts} => Types::MapRunItemCounts
     #   * {Types::DescribeMapRunOutput#execution_counts #execution_counts} => Types::MapRunExecutionCounts
+    #   * {Types::DescribeMapRunOutput#redrive_count #redrive_count} => Integer
+    #   * {Types::DescribeMapRunOutput#redrive_date #redrive_date} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1067,6 +1088,8 @@ module Aws::States
     #   resp.item_counts.aborted #=> Integer
     #   resp.item_counts.total #=> Integer
     #   resp.item_counts.results_written #=> Integer
+    #   resp.item_counts.failures_not_redrivable #=> Integer
+    #   resp.item_counts.pending_redrive #=> Integer
     #   resp.execution_counts.pending #=> Integer
     #   resp.execution_counts.running #=> Integer
     #   resp.execution_counts.succeeded #=> Integer
@@ -1075,6 +1098,10 @@ module Aws::States
     #   resp.execution_counts.aborted #=> Integer
     #   resp.execution_counts.total #=> Integer
     #   resp.execution_counts.results_written #=> Integer
+    #   resp.execution_counts.failures_not_redrivable #=> Integer
+    #   resp.execution_counts.pending_redrive #=> Integer
+    #   resp.redrive_count #=> Integer
+    #   resp.redrive_date #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeMapRun AWS API Documentation
     #
@@ -1423,7 +1450,7 @@ module Aws::States
     #
     #   resp.events #=> Array
     #   resp.events[0].timestamp #=> Time
-    #   resp.events[0].type #=> String, one of "ActivityFailed", "ActivityScheduled", "ActivityScheduleFailed", "ActivityStarted", "ActivitySucceeded", "ActivityTimedOut", "ChoiceStateEntered", "ChoiceStateExited", "ExecutionAborted", "ExecutionFailed", "ExecutionStarted", "ExecutionSucceeded", "ExecutionTimedOut", "FailStateEntered", "LambdaFunctionFailed", "LambdaFunctionScheduled", "LambdaFunctionScheduleFailed", "LambdaFunctionStarted", "LambdaFunctionStartFailed", "LambdaFunctionSucceeded", "LambdaFunctionTimedOut", "MapIterationAborted", "MapIterationFailed", "MapIterationStarted", "MapIterationSucceeded", "MapStateAborted", "MapStateEntered", "MapStateExited", "MapStateFailed", "MapStateStarted", "MapStateSucceeded", "ParallelStateAborted", "ParallelStateEntered", "ParallelStateExited", "ParallelStateFailed", "ParallelStateStarted", "ParallelStateSucceeded", "PassStateEntered", "PassStateExited", "SucceedStateEntered", "SucceedStateExited", "TaskFailed", "TaskScheduled", "TaskStarted", "TaskStartFailed", "TaskStateAborted", "TaskStateEntered", "TaskStateExited", "TaskSubmitFailed", "TaskSubmitted", "TaskSucceeded", "TaskTimedOut", "WaitStateAborted", "WaitStateEntered", "WaitStateExited", "MapRunAborted", "MapRunFailed", "MapRunStarted", "MapRunSucceeded"
+    #   resp.events[0].type #=> String, one of "ActivityFailed", "ActivityScheduled", "ActivityScheduleFailed", "ActivityStarted", "ActivitySucceeded", "ActivityTimedOut", "ChoiceStateEntered", "ChoiceStateExited", "ExecutionAborted", "ExecutionFailed", "ExecutionStarted", "ExecutionSucceeded", "ExecutionTimedOut", "FailStateEntered", "LambdaFunctionFailed", "LambdaFunctionScheduled", "LambdaFunctionScheduleFailed", "LambdaFunctionStarted", "LambdaFunctionStartFailed", "LambdaFunctionSucceeded", "LambdaFunctionTimedOut", "MapIterationAborted", "MapIterationFailed", "MapIterationStarted", "MapIterationSucceeded", "MapStateAborted", "MapStateEntered", "MapStateExited", "MapStateFailed", "MapStateStarted", "MapStateSucceeded", "ParallelStateAborted", "ParallelStateEntered", "ParallelStateExited", "ParallelStateFailed", "ParallelStateStarted", "ParallelStateSucceeded", "PassStateEntered", "PassStateExited", "SucceedStateEntered", "SucceedStateExited", "TaskFailed", "TaskScheduled", "TaskStarted", "TaskStartFailed", "TaskStateAborted", "TaskStateEntered", "TaskStateExited", "TaskSubmitFailed", "TaskSubmitted", "TaskSucceeded", "TaskTimedOut", "WaitStateAborted", "WaitStateEntered", "WaitStateExited", "MapRunAborted", "MapRunFailed", "MapRunStarted", "MapRunSucceeded", "ExecutionRedriven", "MapRunRedriven"
     #   resp.events[0].id #=> Integer
     #   resp.events[0].previous_event_id #=> Integer
     #   resp.events[0].activity_failed_event_details.error #=> String
@@ -1486,6 +1513,7 @@ module Aws::States
     #   resp.events[0].execution_aborted_event_details.cause #=> String
     #   resp.events[0].execution_timed_out_event_details.error #=> String
     #   resp.events[0].execution_timed_out_event_details.cause #=> String
+    #   resp.events[0].execution_redriven_event_details.redrive_count #=> Integer
     #   resp.events[0].map_state_started_event_details.length #=> Integer
     #   resp.events[0].map_iteration_started_event_details.name #=> String
     #   resp.events[0].map_iteration_started_event_details.index #=> Integer
@@ -1519,6 +1547,8 @@ module Aws::States
     #   resp.events[0].map_run_started_event_details.map_run_arn #=> String
     #   resp.events[0].map_run_failed_event_details.error #=> String
     #   resp.events[0].map_run_failed_event_details.cause #=> String
+    #   resp.events[0].map_run_redriven_event_details.map_run_arn #=> String
+    #   resp.events[0].map_run_redriven_event_details.redrive_count #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetExecutionHistory AWS API Documentation
@@ -1594,9 +1624,10 @@ module Aws::States
     # Lists all executions of a state machine or a Map Run. You can list all
     # executions related to a state machine by specifying a state machine
     # Amazon Resource Name (ARN), or those related to a Map Run by
-    # specifying a Map Run ARN.
+    # specifying a Map Run ARN. Using this API action, you can also list all
+    # [redriven][1] executions.
     #
-    # You can also provide a state machine [alias][1] ARN or [version][2]
+    # You can also provide a state machine [alias][2] ARN or [version][3]
     # ARN to list the executions associated with a specific alias or
     # version.
     #
@@ -1618,8 +1649,9 @@ module Aws::States
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
-    # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html
+    # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
+    # [3]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
     #
     # @option params [String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine whose executions
@@ -1671,6 +1703,19 @@ module Aws::States
     #
     #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html
     #
+    # @option params [String] :redrive_filter
+    #   Sets a filter to list executions based on whether or not they have
+    #   been redriven.
+    #
+    #   For a Distributed Map, `redriveFilter` sets a filter to list child
+    #   workflow executions based on whether or not they have been redriven.
+    #
+    #   If you do not provide a `redriveFilter`, Step Functions returns a list
+    #   of both redriven and non-redriven executions.
+    #
+    #   If you provide a state machine ARN in `redriveFilter`, the API returns
+    #   a validation exception.
+    #
     # @return [Types::ListExecutionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListExecutionsOutput#executions #executions} => Array&lt;Types::ExecutionListItem&gt;
@@ -1682,10 +1727,11 @@ module Aws::States
     #
     #   resp = client.list_executions({
     #     state_machine_arn: "Arn",
-    #     status_filter: "RUNNING", # accepts RUNNING, SUCCEEDED, FAILED, TIMED_OUT, ABORTED
+    #     status_filter: "RUNNING", # accepts RUNNING, SUCCEEDED, FAILED, TIMED_OUT, ABORTED, PENDING_REDRIVE
     #     max_results: 1,
     #     next_token: "ListExecutionsPageToken",
     #     map_run_arn: "LongArn",
+    #     redrive_filter: "REDRIVEN", # accepts REDRIVEN, NOT_REDRIVEN
     #   })
     #
     # @example Response structure
@@ -1694,13 +1740,15 @@ module Aws::States
     #   resp.executions[0].execution_arn #=> String
     #   resp.executions[0].state_machine_arn #=> String
     #   resp.executions[0].name #=> String
-    #   resp.executions[0].status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT", "ABORTED"
+    #   resp.executions[0].status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT", "ABORTED", "PENDING_REDRIVE"
     #   resp.executions[0].start_date #=> Time
     #   resp.executions[0].stop_date #=> Time
     #   resp.executions[0].map_run_arn #=> String
     #   resp.executions[0].item_count #=> Integer
     #   resp.executions[0].state_machine_version_arn #=> String
     #   resp.executions[0].state_machine_alias_arn #=> String
+    #   resp.executions[0].redrive_count #=> Integer
+    #   resp.executions[0].redrive_date #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListExecutions AWS API Documentation
@@ -2095,12 +2143,112 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Used by activity workers and task states using the [callback][1]
-    # pattern to report that the task identified by the `taskToken` failed.
+    # Restarts unsuccessful executions of Standard workflows that didn't
+    # complete successfully in the last 14 days. These include failed,
+    # aborted, or timed out executions. When you [redrive][1] an execution,
+    # it continues the failed execution from the unsuccessful step and uses
+    # the same input. Step Functions preserves the results and execution
+    # history of the successful steps, and doesn't rerun these steps when
+    # you redrive an execution. Redriven executions use the same state
+    # machine definition and execution ARN as the original execution
+    # attempt.
+    #
+    # For workflows that include an [Inline Map][2] or [Parallel][3] state,
+    # `RedriveExecution` API action reschedules and redrives only the
+    # iterations and branches that failed or aborted.
+    #
+    # To redrive a workflow that includes a Distributed Map state whose Map
+    # Run failed, you must redrive the [parent workflow][4]. The parent
+    # workflow redrives all the unsuccessful states, including a failed Map
+    # Run. If a Map Run was not started in the original execution attempt,
+    # the redriven parent workflow starts the Map Run.
+    #
+    # <note markdown="1"> This API action is not supported by `EXPRESS` state machines.
+    #
+    #  However, you can restart the unsuccessful executions of Express child
+    # workflows in a Distributed Map by redriving its Map Run. When you
+    # redrive a Map Run, the Express child workflows are rerun using the
+    # StartExecution API action. For more information, see [Redriving Map
+    # Runs][5].
+    #
+    #  </note>
+    #
+    # You can redrive executions if your original execution meets the
+    # following conditions:
+    #
+    # * The execution status isn't `SUCCEEDED`.
+    #
+    # * Your workflow execution has not exceeded the redrivable period of 14
+    #   days. Redrivable period refers to the time during which you can
+    #   redrive a given execution. This period starts from the day a state
+    #   machine completes its execution.
+    #
+    # * The workflow execution has not exceeded the maximum open time of one
+    #   year. For more information about state machine quotas, see [Quotas
+    #   related to state machine executions][6].
+    #
+    # * The execution event history count is less than 24,999. Redriven
+    #   executions append their event history to the existing event history.
+    #   Make sure your workflow execution contains less than 24,999 events
+    #   to accommodate the `ExecutionRedriven` history event and at least
+    #   one other history event.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html
+    # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-map-state.html
+    # [3]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-parallel-state.html
+    # [4]: https://docs.aws.amazon.com/step-functions/latest/dg/use-dist-map-orchestrate-large-scale-parallel-workloads.html#dist-map-orchestrate-parallel-workloads-key-terms
+    # [5]: https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html
+    # [6]: https://docs.aws.amazon.com/step-functions/latest/dg/limits-overview.html#service-limits-state-machine-executions
+    #
+    # @option params [required, String] :execution_arn
+    #   The Amazon Resource Name (ARN) of the execution to be redriven.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don’t specify a client token, the
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency. The API will return
+    #   idempotent responses for the last 10 client tokens used to
+    #   successfully redrive the execution. These client tokens are valid for
+    #   up to 15 minutes after they are first used.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::RedriveExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RedriveExecutionOutput#redrive_date #redrive_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.redrive_execution({
+    #     execution_arn: "Arn", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.redrive_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/RedriveExecution AWS API Documentation
+    #
+    # @overload redrive_execution(params = {})
+    # @param [Hash] params ({})
+    def redrive_execution(params = {}, options = {})
+      req = build_request(:redrive_execution, params)
+      req.send_request(options)
+    end
+
+    # Used by activity workers, Task states using the [callback][1] pattern,
+    # and optionally Task states using the [job run][2] pattern to report
+    # that the task identified by the `taskToken` failed.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token
+    # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync
     #
     # @option params [required, String] :task_token
     #   The token that represents this task. Task tokens are generated by Step
@@ -2137,16 +2285,17 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Used by activity workers and task states using the [callback][1]
-    # pattern to report to Step Functions that the task represented by the
-    # specified `taskToken` is still making progress. This action resets the
+    # Used by activity workers and Task states using the [callback][1]
+    # pattern, and optionally Task states using the [job run][2] pattern to
+    # report to Step Functions that the task represented by the specified
+    # `taskToken` is still making progress. This action resets the
     # `Heartbeat` clock. The `Heartbeat` threshold is specified in the state
     # machine's Amazon States Language definition (`HeartbeatSeconds`).
     # This action does not in itself create an event in the execution
     # history. However, if the task times out, the execution history
     # contains an `ActivityTimedOut` entry for activities, or a
-    # `TaskTimedOut` entry for for tasks using the [job run][2] or
-    # [callback][1] pattern.
+    # `TaskTimedOut` entry for tasks using the [job run][2] or [callback][1]
+    # pattern.
     #
     # <note markdown="1"> The `Timeout` of a task, defined in the state machine's Amazon States
     # Language definition, is its maximum allowed duration, regardless of
@@ -2187,13 +2336,14 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Used by activity workers and task states using the [callback][1]
-    # pattern to report that the task identified by the `taskToken`
-    # completed successfully.
+    # Used by activity workers, Task states using the [callback][1] pattern,
+    # and optionally Task states using the [job run][2] pattern to report
+    # that the task identified by the `taskToken` completed successfully.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token
+    # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync
     #
     # @option params [required, String] :task_token
     #   The token that represents this task. Task tokens are generated by Step
@@ -2328,6 +2478,10 @@ module Aws::States
     #   Amazon Web Services account, Region, and state machine for 90 days.
     #   For more information, see [ Limits Related to State Machine
     #   Executions][1] in the *Step Functions Developer Guide*.
+    #
+    #   If you don't provide a name for the execution, Step Functions
+    #   automatically generates a universally unique identifier (UUID) as the
+    #   execution name.
     #
     #   A name must *not* contain:
     #
@@ -2568,6 +2722,164 @@ module Aws::States
     # @param [Hash] params ({})
     def tag_resource(params = {}, options = {})
       req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Accepts the definition of a single state and executes it. You can test
+    # a state without creating a state machine or updating an existing state
+    # machine. Using this API, you can test the following:
+    #
+    # * A state's [input and output processing][1] data flow
+    #
+    # * An [Amazon Web Services service integration][2] request and response
+    #
+    # * An [HTTP Task][3] request and response
+    #
+    # You can call this API on only one state at a time. The states that you
+    # can test include the following:
+    #
+    # * [All Task types][4] except [Activity][5]
+    #
+    # * [Pass][6]
+    #
+    # * [Wait][7]
+    #
+    # * [Choice][8]
+    #
+    # * [Succeed][9]
+    #
+    # * [Fail][10]
+    #
+    # The `TestState` API assumes an IAM role which must contain the
+    # required IAM permissions for the resources your state is accessing.
+    # For information about the permissions a state might need, see [IAM
+    # permissions to test a state][11].
+    #
+    # The `TestState` API can run for up to five minutes. If the execution
+    # of a state exceeds this duration, it fails with the `States.Timeout`
+    # error.
+    #
+    # `TestState` doesn't support [Activity tasks][5], `.sync` or
+    # `.waitForTaskToken` [service integration patterns][12],
+    # [Parallel][13], or [Map][14] states.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-input-output-dataflow
+    # [2]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-services.html
+    # [3]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-third-party-apis.html
+    # [4]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-task-state.html#task-types
+    # [5]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-activities.html
+    # [6]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-pass-state.html
+    # [7]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-wait-state.html
+    # [8]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-choice-state.html
+    # [9]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-succeed-state.html
+    # [10]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-fail-state.html
+    # [11]: https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions
+    # [12]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html
+    # [13]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-parallel-state.html
+    # [14]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-map-state.html
+    #
+    # @option params [required, String] :definition
+    #   The [Amazon States Language][1] (ASL) definition of the state.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the execution role with the required
+    #   IAM permissions for the state.
+    #
+    # @option params [String] :input
+    #   A string that contains the JSON input data for the state.
+    #
+    # @option params [String] :inspection_level
+    #   Determines the values to return when a state is tested. You can
+    #   specify one of the following types:
+    #
+    #   * `INFO`: Shows the final state output. By default, Step Functions
+    #     sets `inspectionLevel` to `INFO` if you don't specify a level.
+    #
+    #   * `DEBUG`: Shows the final state output along with the input and
+    #     output data processing result.
+    #
+    #   * `TRACE`: Shows the HTTP request and response for an HTTP Task. This
+    #     level also shows the final state output along with the input and
+    #     output data processing result.
+    #
+    #   Each of these levels also provide information about the status of the
+    #   state execution and the next state to transition to.
+    #
+    # @option params [Boolean] :reveal_secrets
+    #   Specifies whether or not to include secret information in the test
+    #   result. For HTTP Tasks, a secret includes the data that an EventBridge
+    #   connection adds to modify the HTTP request headers, query parameters,
+    #   and body. Step Functions doesn't omit any information included in the
+    #   state definition or the HTTP response.
+    #
+    #   If you set `revealSecrets` to `true`, you must make sure that the IAM
+    #   user that calls the `TestState` API has permission for the
+    #   `states:RevealSecrets` action. For an example of IAM policy that sets
+    #   the `states:RevealSecrets` permission, see [IAM permissions to test a
+    #   state][1]. Without this permission, Step Functions throws an access
+    #   denied error.
+    #
+    #   By default, `revealSecrets` is set to `false`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions
+    #
+    # @return [Types::TestStateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TestStateOutput#output #output} => String
+    #   * {Types::TestStateOutput#error #error} => String
+    #   * {Types::TestStateOutput#cause #cause} => String
+    #   * {Types::TestStateOutput#inspection_data #inspection_data} => Types::InspectionData
+    #   * {Types::TestStateOutput#next_state #next_state} => String
+    #   * {Types::TestStateOutput#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.test_state({
+    #     definition: "Definition", # required
+    #     role_arn: "Arn", # required
+    #     input: "SensitiveData",
+    #     inspection_level: "INFO", # accepts INFO, DEBUG, TRACE
+    #     reveal_secrets: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.output #=> String
+    #   resp.error #=> String
+    #   resp.cause #=> String
+    #   resp.inspection_data.input #=> String
+    #   resp.inspection_data.after_input_path #=> String
+    #   resp.inspection_data.after_parameters #=> String
+    #   resp.inspection_data.result #=> String
+    #   resp.inspection_data.after_result_selector #=> String
+    #   resp.inspection_data.after_result_path #=> String
+    #   resp.inspection_data.request.protocol #=> String
+    #   resp.inspection_data.request.method #=> String
+    #   resp.inspection_data.request.url #=> String
+    #   resp.inspection_data.request.headers #=> String
+    #   resp.inspection_data.request.body #=> String
+    #   resp.inspection_data.response.protocol #=> String
+    #   resp.inspection_data.response.status_code #=> String
+    #   resp.inspection_data.response.status_message #=> String
+    #   resp.inspection_data.response.headers #=> String
+    #   resp.inspection_data.response.body #=> String
+    #   resp.next_state #=> String
+    #   resp.status #=> String, one of "SUCCEEDED", "FAILED", "RETRIABLE", "CAUGHT_ERROR"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TestState AWS API Documentation
+    #
+    # @overload test_state(params = {})
+    # @param [Hash] params ({})
+    def test_state(params = {}, options = {})
+      req = build_request(:test_state, params)
       req.send_request(options)
     end
 
@@ -2867,7 +3179,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

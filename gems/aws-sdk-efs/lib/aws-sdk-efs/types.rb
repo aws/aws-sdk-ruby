@@ -78,8 +78,8 @@ module Aws::EFS
     #   @return [Types::PosixUser]
     #
     # @!attribute [rw] root_directory
-    #   The directory on the Amazon EFS file system that the access point
-    #   exposes as the root directory to NFS clients using the access point.
+    #   The directory on the EFS file system that the access point exposes
+    #   as the root directory to NFS clients using the access point.
     #   @return [Types::RootDirectory]
     #
     # @!attribute [rw] owner_id
@@ -216,16 +216,16 @@ module Aws::EFS
     # @!attribute [rw] status
     #   Describes the status of the file system's backup policy.
     #
-    #   * <b> <code>ENABLED</code> </b> - EFS is automatically backing up
+    #   * <b> <code>ENABLED</code> </b> – EFS is automatically backing up
     #     the file system.
     #
-    #   * <b> <code>ENABLING</code> </b> - EFS is turning on automatic
+    #   * <b> <code>ENABLING</code> </b> – EFS is turning on automatic
     #     backups for the file system.
     #
-    #   * <b> <code>DISABLED</code> </b> - Automatic back ups are turned off
+    #   * <b> <code>DISABLED</code> </b> – Automatic back ups are turned off
     #     for the file system.
     #
-    #   * <b> <code>DISABLING</code> </b> - EFS is turning off automatic
+    #   * <b> <code>DISABLING</code> </b> – EFS is turning off automatic
     #     backups for the file system.
     #   @return [String]
     #
@@ -278,6 +278,34 @@ module Aws::EFS
       include Aws::Structure
     end
 
+    # Returned if the source file system in a replication is encrypted but
+    # the destination file system is unencrypted.
+    #
+    # @!attribute [rw] error_code
+    #   The error code is a string that uniquely identifies an error
+    #   condition. It is meant to be read and understood by programs that
+    #   detect and handle errors by type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message contains a generic description of the error
+    #   condition in English. It is intended for a human audience. Simple
+    #   programs display the message directly to the end user if they
+    #   encounter an error condition they don't know how or don't care to
+    #   handle. Sophisticated programs with more exhaustive error handling
+    #   and proper internationalization are more likely to ignore the error
+    #   message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   A string of up to 64 ASCII characters that Amazon EFS uses to ensure
     #   idempotent creation.
@@ -308,14 +336,14 @@ module Aws::EFS
     #   @return [Types::PosixUser]
     #
     # @!attribute [rw] root_directory
-    #   Specifies the directory on the Amazon EFS file system that the
-    #   access point exposes as the root directory of your file system to
-    #   NFS clients using the access point. The clients using the access
-    #   point can only access the root directory and below. If the
-    #   `RootDirectory` &gt; `Path` specified does not exist, EFS creates it
-    #   and applies the `CreationInfo` settings when a client connects to an
-    #   access point. When specifying a `RootDirectory`, you must provide
-    #   the `Path`, and the `CreationInfo`.
+    #   Specifies the directory on the EFS file system that the access point
+    #   exposes as the root directory of your file system to NFS clients
+    #   using the access point. The clients using the access point can only
+    #   access the root directory and below. If the `RootDirectory` &gt;
+    #   `Path` specified does not exist, Amazon EFS creates it and applies
+    #   the `CreationInfo` settings when a client connects to an access
+    #   point. When specifying a `RootDirectory`, you must provide the
+    #   `Path`, and the `CreationInfo`.
     #
     #   Amazon EFS creates a root directory only if you have provided the
     #   CreationInfo: OwnUid, OwnGID, and permissions for the directory. If
@@ -345,18 +373,16 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] performance_mode
-    #   The performance mode of the file system. We recommend
-    #   `generalPurpose` performance mode for most file systems. File
-    #   systems using the `maxIO` performance mode can scale to higher
-    #   levels of aggregate throughput and operations per second with a
-    #   tradeoff of slightly higher latencies for most file operations. The
-    #   performance mode can't be changed after the file system has been
-    #   created.
+    #   The Performance mode of the file system. We recommend
+    #   `generalPurpose` performance mode for all file systems. File systems
+    #   using the `maxIO` performance mode can scale to higher levels of
+    #   aggregate throughput and operations per second with a tradeoff of
+    #   slightly higher latencies for most file operations. The performance
+    #   mode can't be changed after the file system has been created. The
+    #   `maxIO` mode is not supported on One Zone file systems.
     #
-    #   <note markdown="1"> The `maxIO` mode is not supported on file systems using One Zone
-    #   storage classes.
-    #
-    #    </note>
+    #   Due to the higher per-operation latencies with Max I/O, we recommend
+    #   using General Purpose performance mode for all file systems.
     #
     #   Default is `generalPurpose`.
     #   @return [String]
@@ -401,10 +427,10 @@ module Aws::EFS
     #   `bursting`, `provisioned`, or `elastic`. If you set `ThroughputMode`
     #   to `provisioned`, you must also set a value for
     #   `ProvisionedThroughputInMibps`. After you create the file system,
-    #   you can decrease your file system's throughput in Provisioned
-    #   Throughput mode or change between the throughput modes, with certain
-    #   time restrictions. For more information, see [Specifying throughput
-    #   with provisioned mode][1] in the *Amazon EFS User Guide*.
+    #   you can decrease your file system's Provisioned throughput or
+    #   change between the throughput modes, with certain time restrictions.
+    #   For more information, see [Specifying throughput with provisioned
+    #   mode][1] in the *Amazon EFS User Guide*.
     #
     #   Default is `bursting`.
     #
@@ -428,15 +454,14 @@ module Aws::EFS
     #   @return [Float]
     #
     # @!attribute [rw] availability_zone_name
-    #   Used to create a file system that uses One Zone storage classes. It
-    #   specifies the Amazon Web Services Availability Zone in which to
-    #   create the file system. Use the format `us-east-1a` to specify the
-    #   Availability Zone. For more information about One Zone storage
-    #   classes, see [Using EFS storage classes][1] in the *Amazon EFS User
-    #   Guide*.
+    #   Used to create a One Zone file system. It specifies the Amazon Web
+    #   Services Availability Zone in which to create the file system. Use
+    #   the format `us-east-1a` to specify the Availability Zone. For more
+    #   information about One Zone file systems, see [Using EFS storage
+    #   classes][1] in the *Amazon EFS User Guide*.
     #
-    #   <note markdown="1"> One Zone storage classes are not available in all Availability Zones
-    #   in Amazon Web Services Regions where Amazon EFS is available.
+    #   <note markdown="1"> One Zone file systems are not available in all Availability Zones in
+    #   Amazon Web Services Regions where Amazon EFS is available.
     #
     #    </note>
     #
@@ -448,10 +473,9 @@ module Aws::EFS
     # @!attribute [rw] backup
     #   Specifies whether automatic backups are enabled on the file system
     #   that you are creating. Set the value to `true` to enable automatic
-    #   backups. If you are creating a file system that uses One Zone
-    #   storage classes, automatic backups are enabled by default. For more
-    #   information, see [Automatic backups][1] in the *Amazon EFS User
-    #   Guide*.
+    #   backups. If you are creating a One Zone file system, automatic
+    #   backups are enabled by default. For more information, see [Automatic
+    #   backups][1] in the *Amazon EFS User Guide*.
     #
     #   Default is `false`. However, if you specify an
     #   `AvailabilityZoneName`, the default is `true`.
@@ -500,9 +524,9 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
-    #   The ID of the subnet to add the mount target in. For file systems
-    #   that use One Zone storage classes, use the subnet that is associated
-    #   with the file system's Availability Zone.
+    #   The ID of the subnet to add the mount target in. For One Zone file
+    #   systems, use the subnet that is associated with the file system's
+    #   Availability Zone.
     #   @return [String]
     #
     # @!attribute [rw] ip_address
@@ -808,7 +832,8 @@ module Aws::EFS
     end
 
     # @!attribute [rw] file_system_id
-    #   Specifies which EFS file system to retrieve the `BackupPolicy` for.
+    #   Specifies which EFS file system for which to retrieve the
+    #   `BackupPolicy`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeBackupPolicyRequest AWS API Documentation
@@ -1103,7 +1128,7 @@ module Aws::EFS
     # configuration.
     #
     # @!attribute [rw] status
-    #   Describes the status of the destination Amazon EFS file system.
+    #   Describes the status of the destination EFS file system.
     #
     #   * The `Paused` state occurs as a result of opting out of the source
     #     or destination Region after the replication configuration was
@@ -1154,8 +1179,8 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # Describes the destination file system to create in the replication
-    # configuration.
+    # Describes the new or existing destination file system for the
+    # replication configuration.
     #
     # @!attribute [rw] region
     #   To create a file system that uses Regional storage, specify the
@@ -1164,14 +1189,14 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_name
-    #   To create a file system that uses EFS One Zone storage, specify the
-    #   name of the Availability Zone in which to create the destination
-    #   file system.
+    #   To create a file system that uses One Zone storage, specify the name
+    #   of the Availability Zone in which to create the destination file
+    #   system.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   Specifies the Key Management Service (KMS) key that you want to use
-    #   to encrypt the destination file system. If you do not specify a KMS
+    #   Specify the Key Management Service (KMS) key that you want to use to
+    #   encrypt the destination file system. If you do not specify a KMS
     #   key, Amazon EFS uses your default KMS key for Amazon EFS,
     #   `/aws/elasticfilesystem`. This ID can be in one of the following
     #   formats:
@@ -1189,12 +1214,20 @@ module Aws::EFS
     #     `arn:aws:kms:us-west-2:444455556666:alias/projectKey1`.
     #   @return [String]
     #
+    # @!attribute [rw] file_system_id
+    #   The ID of the file system to use for the destination. The file
+    #   system's replication overwrite replication must be disabled. If you
+    #   do not provide an ID, then EFS creates a new file system for the
+    #   replication destination.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DestinationToCreate AWS API Documentation
     #
     class DestinationToCreate < Struct.new(
       :region,
       :availability_zone_name,
-      :kms_key_id)
+      :kms_key_id,
+      :file_system_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1287,7 +1320,7 @@ module Aws::EFS
     #   @return [Types::FileSystemSize]
     #
     # @!attribute [rw] performance_mode
-    #   The performance mode of the file system.
+    #   The Performance mode of the file system.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -1316,9 +1349,9 @@ module Aws::EFS
     #
     # @!attribute [rw] availability_zone_name
     #   Describes the Amazon Web Services Availability Zone in which the
-    #   file system is located, and is valid only for file systems using One
-    #   Zone storage classes. For more information, see [Using EFS storage
-    #   classes][1] in the *Amazon EFS User Guide*.
+    #   file system is located, and is valid only for One Zone file systems.
+    #   For more information, see [Using EFS storage classes][1] in the
+    #   *Amazon EFS User Guide*.
     #
     #
     #
@@ -1327,16 +1360,20 @@ module Aws::EFS
     #
     # @!attribute [rw] availability_zone_id
     #   The unique and consistent identifier of the Availability Zone in
-    #   which the file system's One Zone storage classes exist. For
-    #   example, `use1-az1` is an Availability Zone ID for the us-east-1
-    #   Amazon Web Services Region, and it has the same location in every
-    #   Amazon Web Services account.
+    #   which the file system is located, and is valid only for One Zone
+    #   file systems. For example, `use1-az1` is an Availability Zone ID for
+    #   the us-east-1 Amazon Web Services Region, and it has the same
+    #   location in every Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   The tags associated with the file system, presented as an array of
     #   `Tag` objects.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] file_system_protection
+    #   Describes the protection on the file system.
+    #   @return [Types::FileSystemProtectionDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemDescription AWS API Documentation
     #
@@ -1357,7 +1394,8 @@ module Aws::EFS
       :provisioned_throughput_in_mibps,
       :availability_zone_name,
       :availability_zone_id,
-      :tags)
+      :tags,
+      :file_system_protection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1463,6 +1501,37 @@ module Aws::EFS
       include Aws::Structure
     end
 
+    # Describes the protection on a file system.
+    #
+    # @!attribute [rw] replication_overwrite_protection
+    #   The status of the file system's replication overwrite protection.
+    #
+    #   * `ENABLED` – The file system cannot be used as the destination file
+    #     system in a replication configuration. The file system is
+    #     writeable. Replication overwrite protection is `ENABLED` by
+    #     default.
+    #
+    #   * `DISABLED` – The file system can be used as the destination file
+    #     system in a replication configuration. The file system is
+    #     read-only and can only be modified by EFS replication.
+    #
+    #   * `REPLICATING` – The file system is being used as the destination
+    #     file system in a replication configuration. The file system is
+    #     read-only and is only modified only by EFS replication.
+    #
+    #   If the replication configuration is deleted, the file system's
+    #   replication overwrite protection is re-enabled, the file system
+    #   becomes writeable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemProtectionDescription AWS API Documentation
+    #
+    class FileSystemProtectionDescription < Struct.new(
+      :replication_overwrite_protection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The latest known metered size (in bytes) of data stored in the file
     # system, in its `Value` field, and the time at which that size was
     # determined in its `Timestamp` field. The value doesn't represent the
@@ -1494,13 +1563,19 @@ module Aws::EFS
     #   Standard storage class.
     #   @return [Integer]
     #
+    # @!attribute [rw] value_in_archive
+    #   The latest known metered size (in bytes) of data stored in the
+    #   Archive storage class.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemSize AWS API Documentation
     #
     class FileSystemSize < Struct.new(
       :value,
       :timestamp,
       :value_in_ia,
-      :value_in_standard)
+      :value_in_standard,
+      :value_in_archive)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1690,19 +1765,17 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # Describes a policy used by EFS lifecycle management and EFS
-    # Intelligent-Tiering that specifies when to transition files into and
-    # out of the file system's Infrequent Access (IA) storage class. For
-    # more information, see [EFS Intelligent‐Tiering and EFS Lifecycle
-    # Management][1].
+    # Describes a policy used by Lifecycle management that specifies when to
+    # transition files into and out of storage classes. For more
+    # information, see [Managing file system storage][1].
     #
     # <note markdown="1"> When using the `put-lifecycle-configuration` CLI command or the
     # `PutLifecycleConfiguration` API action, Amazon EFS requires that each
     # `LifecyclePolicy` object have only a single transition. This means
     # that in a request body, `LifecyclePolicies` must be structured as an
-    # array of `LifecyclePolicy` objects, one object for each transition,
-    # `TransitionToIA`, `TransitionToPrimaryStorageClass`. For more
-    # information, see the request examples in PutLifecycleConfiguration.
+    # array of `LifecyclePolicy` objects, one object for each transition.
+    # For more information, see the request examples in
+    # PutLifecycleConfiguration.
     #
     #  </note>
     #
@@ -1711,14 +1784,22 @@ module Aws::EFS
     # [1]: https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html
     #
     # @!attribute [rw] transition_to_ia
-    #   Describes the period of time that a file is not accessed, after
-    #   which it transitions to IA storage. Metadata operations such as
+    #   The number of days after files were last accessed in primary storage
+    #   (the Standard storage class) at which to move them to Infrequent
+    #   Access (IA) storage. Metadata operations such as listing the
+    #   contents of a directory don't count as file access events.
+    #   @return [String]
+    #
+    # @!attribute [rw] transition_to_primary_storage_class
+    #   Whether to move files back to primary (Standard) storage after they
+    #   are accessed in IA or Archive storage. Metadata operations such as
     #   listing the contents of a directory don't count as file access
     #   events.
     #   @return [String]
     #
-    # @!attribute [rw] transition_to_primary_storage_class
-    #   Describes when to transition a file from IA storage to primary
+    # @!attribute [rw] transition_to_archive
+    #   The number of days after files were last accessed in primary storage
+    #   (the Standard storage class) files at which to move them to Archive
     #   storage. Metadata operations such as listing the contents of a
     #   directory don't count as file access events.
     #   @return [String]
@@ -1727,7 +1808,8 @@ module Aws::EFS
     #
     class LifecyclePolicy < Struct.new(
       :transition_to_ia,
-      :transition_to_primary_storage_class)
+      :transition_to_primary_storage_class,
+      :transition_to_archive)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2141,21 +2223,37 @@ module Aws::EFS
     # @!attribute [rw] lifecycle_policies
     #   An array of `LifecyclePolicy` objects that define the file system's
     #   `LifecycleConfiguration` object. A `LifecycleConfiguration` object
-    #   informs EFS lifecycle management and EFS Intelligent-Tiering of the
-    #   following:
+    #   informs EFS Lifecycle management of the following:
     #
-    #   * When to move files in the file system from primary storage to the
-    #     IA storage class.
+    #   * <b> <code>TransitionToIA</code> </b> – When to move files in the
+    #     file system from primary storage (Standard storage class) into the
+    #     Infrequent Access (IA) storage.
     #
-    #   * When to move files that are in IA storage to primary storage.
+    #   * <b> <code>TransitionToArchive</code> </b> – When to move files in
+    #     the file system from their current storage class (either IA or
+    #     Standard storage) into the Archive storage.
+    #
+    #     File systems cannot transition into Archive storage before
+    #     transitioning into IA storage. Therefore, TransitionToArchive must
+    #     either not be set or must be later than TransitionToIA.
+    #
+    #     <note markdown="1"> The Archive storage class is available only for file systems that
+    #     use the Elastic Throughput mode and the General Purpose
+    #     Performance mode.
+    #
+    #      </note>
+    #
+    #   * <b> <code>TransitionToPrimaryStorageClass</code> </b> – Whether to
+    #     move files in the file system back to primary storage (Standard
+    #     storage class) after they are accessed in IA or Archive storage.
     #
     #   <note markdown="1"> When using the `put-lifecycle-configuration` CLI command or the
     #   `PutLifecycleConfiguration` API action, Amazon EFS requires that
     #   each `LifecyclePolicy` object have only a single transition. This
     #   means that in a request body, `LifecyclePolicies` must be structured
     #   as an array of `LifecyclePolicy` objects, one object for each
-    #   transition, `TransitionToIA`, `TransitionToPrimaryStorageClass`. See
-    #   the example requests in the following section for more information.
+    #   storage transition. See the example requests in the following
+    #   section for more information.
     #
     #    </note>
     #   @return [Array<Types::LifecyclePolicy>]
@@ -2169,6 +2267,34 @@ module Aws::EFS
       include Aws::Structure
     end
 
+    # Returned if the file system is already included in a replication
+    # configuration.&gt;
+    #
+    # @!attribute [rw] error_code
+    #   The error code is a string that uniquely identifies an error
+    #   condition. It is meant to be read and understood by programs that
+    #   detect and handle errors by type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message contains a generic description of the error
+    #   condition in English. It is intended for a human audience. Simple
+    #   programs display the message directly to the end user if they
+    #   encounter an error condition they don't know how or don't care to
+    #   handle. Sophisticated programs with more exhaustive error handling
+    #   and proper internationalization are more likely to ignore the error
+    #   message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ReplicationAlreadyExists AWS API Documentation
+    #
+    class ReplicationAlreadyExists < Struct.new(
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the replication configuration for a specific file system.
     #
     # @!attribute [rw] source_file_system_id
@@ -2177,8 +2303,8 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] source_file_system_region
-    #   The Amazon Web Services Region in which the source Amazon EFS file
-    #   system is located.
+    #   The Amazon Web Services Region in which the source EFS file system
+    #   is located.
     #   @return [String]
     #
     # @!attribute [rw] source_file_system_arn
@@ -2187,8 +2313,8 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] original_source_file_system_arn
-    #   The Amazon Resource Name (ARN) of the original source Amazon EFS
-    #   file system in the replication configuration.
+    #   The Amazon Resource Name (ARN) of the original source EFS file
+    #   system in the replication configuration.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -2555,6 +2681,40 @@ module Aws::EFS
     class UntagResourceRequest < Struct.new(
       :resource_id,
       :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_system_id
+    #   The ID of the file system to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_overwrite_protection
+    #   The status of the file system's replication overwrite protection.
+    #
+    #   * `ENABLED` – The file system cannot be used as the destination file
+    #     system in a replication configuration. The file system is
+    #     writeable. Replication overwrite protection is `ENABLED` by
+    #     default.
+    #
+    #   * `DISABLED` – The file system can be used as the destination file
+    #     system in a replication configuration. The file system is
+    #     read-only and can only be modified by EFS replication.
+    #
+    #   * `REPLICATING` – The file system is being used as the destination
+    #     file system in a replication configuration. The file system is
+    #     read-only and is only modified only by EFS replication.
+    #
+    #   If the replication configuration is deleted, the file system's
+    #   replication overwrite protection is re-enabled, the file system
+    #   becomes writeable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UpdateFileSystemProtectionRequest AWS API Documentation
+    #
+    class UpdateFileSystemProtectionRequest < Struct.new(
+      :file_system_id,
+      :replication_overwrite_protection)
       SENSITIVE = []
       include Aws::Structure
     end

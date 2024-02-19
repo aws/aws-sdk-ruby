@@ -31,16 +31,12 @@ module Aws::BedrockRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InternalServerException AWS API Documentation
     #
     class InternalServerException < Struct.new(
-      :message)
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] accept
-    #   The desired MIME type of the inference body in the response. The
-    #   default value is `application/json`.
-    #   @return [String]
-    #
     # @!attribute [rw] body
     #   Input data in the format specified in the content-type request
     #   header. To see the format and content of this field for different
@@ -56,6 +52,11 @@ module Aws::BedrockRuntime
     #   `application/json`.
     #   @return [String]
     #
+    # @!attribute [rw] accept
+    #   The desired MIME type of the inference body in the response. The
+    #   default value is `application/json`.
+    #   @return [String]
+    #
     # @!attribute [rw] model_id
     #   Identifier of the model.
     #   @return [String]
@@ -63,9 +64,9 @@ module Aws::BedrockRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelRequest AWS API Documentation
     #
     class InvokeModelRequest < Struct.new(
-      :accept,
       :body,
       :content_type,
+      :accept,
       :model_id)
       SENSITIVE = [:body]
       include Aws::Structure
@@ -94,11 +95,6 @@ module Aws::BedrockRuntime
       include Aws::Structure
     end
 
-    # @!attribute [rw] accept
-    #   The desired MIME type of the inference body in the response. The
-    #   default value is `application/json`.
-    #   @return [String]
-    #
     # @!attribute [rw] body
     #   Inference input in the format specified by the content-type. To see
     #   the format and content of this field for different models, refer to
@@ -114,6 +110,11 @@ module Aws::BedrockRuntime
     #   `application/json`.
     #   @return [String]
     #
+    # @!attribute [rw] accept
+    #   The desired MIME type of the inference body in the response. The
+    #   default value is `application/json`.
+    #   @return [String]
+    #
     # @!attribute [rw] model_id
     #   Id of the model to invoke using the streaming request.
     #   @return [String]
@@ -121,9 +122,9 @@ module Aws::BedrockRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelWithResponseStreamRequest AWS API Documentation
     #
     class InvokeModelWithResponseStreamRequest < Struct.new(
-      :accept,
       :body,
       :content_type,
+      :accept,
       :model_id)
       SENSITIVE = [:body]
       include Aws::Structure
@@ -194,20 +195,21 @@ module Aws::BedrockRuntime
     # @!attribute [rw] message
     #   @return [String]
     #
-    # @!attribute [rw] original_message
-    #   The original message.
-    #   @return [String]
-    #
     # @!attribute [rw] original_status_code
     #   The original status code.
     #   @return [Integer]
+    #
+    # @!attribute [rw] original_message
+    #   The original message.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ModelStreamErrorException AWS API Documentation
     #
     class ModelStreamErrorException < Struct.new(
       :message,
+      :original_status_code,
       :original_message,
-      :original_status_code)
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -221,7 +223,8 @@ module Aws::BedrockRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ModelTimeoutException AWS API Documentation
     #
     class ModelTimeoutException < Struct.new(
-      :message)
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -277,7 +280,8 @@ module Aws::BedrockRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
-      :message)
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -291,7 +295,8 @@ module Aws::BedrockRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :message)
+      :message,
+      :event_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -310,9 +315,9 @@ module Aws::BedrockRuntime
           :chunk,
           :internal_server_exception,
           :model_stream_error_exception,
-          :model_timeout_exception,
+          :validation_exception,
           :throttling_exception,
-          :validation_exception
+          :model_timeout_exception
         ]
       end
 
