@@ -390,7 +390,7 @@
   },
   "EC2": {
     "models": "ec2/2016-11-15",
-    "addPlugins": [ser
+    "addPlugins": [
       "Aws::EC2::Plugins::CopyEncryptedSnapshot",
       "Aws::EC2::Plugins::RegionValidation"
     ]

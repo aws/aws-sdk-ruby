@@ -165,6 +165,8 @@ module AwsSdkCodeGenerator
                 "Aws::Credentials.new('stubbed-akid', 'stubbed-secret', account_id: '#{value}')",
                 true
               )
+            when 'AWS::Auth::AccountIdEndpointMode'
+              Param.new('account_id_endpoint_mode', value)
             when 'AWS::STS::UseGlobalEndpoint'
               Param.new('sts_regional_endpoints', value ? 'legacy' : 'regional')
             when 'AWS::S3::UseGlobalEndpoint'

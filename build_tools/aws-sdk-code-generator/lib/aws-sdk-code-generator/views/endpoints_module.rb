@@ -131,7 +131,9 @@ module AwsSdkCodeGenerator
             'context.config.use_dualstack_endpoint'
           end
         when 'AWS::Auth::AccountId'
-          "context.config.account_id_endpoint_mode == 'disabled' ? nil : context.config.credentials.credentials.account_id"
+          'context.config.credentials.credentials.account_id'
+        when 'AWS::Auth::AccountIdEndpointMode'
+          'context.config.account_id_endpoint_mode'
         when 'AWS::STS::UseGlobalEndpoint'
           "context.config.sts_regional_endpoints == 'legacy'"
         when 'AWS::S3::UseGlobalEndpoint'
