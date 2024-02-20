@@ -717,17 +717,6 @@ module Aws
                                     ) -> _DescribeDeliveryStreamResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDeliveryStreamResponseSuccess
 
-      interface _GetKinesisStreamResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::GetKinesisStreamOutput]
-        def kinesis_stream_arn: () -> ::String
-        def credentials_for_reading_kinesis_stream: () -> Types::SessionCredentials
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Firehose/Client.html#get_kinesis_stream-instance_method
-      def get_kinesis_stream: (
-                                delivery_stream_arn: ::String
-                              ) -> _GetKinesisStreamResponseSuccess
-                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKinesisStreamResponseSuccess
-
       interface _ListDeliveryStreamsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDeliveryStreamsOutput]
         def delivery_stream_names: () -> ::Array[::String]
@@ -1410,23 +1399,6 @@ module Aws
                                 }
                               ) -> _UpdateDestinationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDestinationResponseSuccess
-
-      interface _VerifyResourcesExistForTagrisResponseSuccess
-        include ::Seahorse::Client::_ResponseSuccess[Types::TagrisVerifyResourcesExistOutput]
-        def tagris_sweep_list_result: () -> ::Hash[::String, ("ACTIVE" | "NOT_ACTIVE")]
-      end
-      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Firehose/Client.html#verify_resources_exist_for_tagris-instance_method
-      def verify_resources_exist_for_tagris: (
-                                               tagris_sweep_list: Array[
-                                                 {
-                                                   tagris_account_id: ::String?,
-                                                   tagris_amazon_resource_name: ::String?,
-                                                   tagris_internal_id: ::String?,
-                                                   tagris_version: ::Integer?
-                                                 },
-                                               ]
-                                             ) -> _VerifyResourcesExistForTagrisResponseSuccess
-                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyResourcesExistForTagrisResponseSuccess
     end
   end
 end

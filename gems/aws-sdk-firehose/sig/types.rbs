@@ -399,17 +399,6 @@ module Aws::Firehose
       SENSITIVE: []
     end
 
-    class GetKinesisStreamInput
-      attr_accessor delivery_stream_arn: ::String
-      SENSITIVE: []
-    end
-
-    class GetKinesisStreamOutput
-      attr_accessor kinesis_stream_arn: ::String
-      attr_accessor credentials_for_reading_kinesis_stream: Types::SessionCredentials
-      SENSITIVE: [:credentials_for_reading_kinesis_stream]
-    end
-
     class HiveJsonSerDe
       attr_accessor timestamp_formats: ::Array[::String]
       SENSITIVE: []
@@ -509,12 +498,6 @@ module Aws::Firehose
     class InvalidSourceException
       attr_accessor code: ::String
       attr_accessor message: ::String
-      SENSITIVE: []
-    end
-
-    class InvalidStreamTypeException
-      attr_accessor message: ::String
-      attr_accessor source: ::String
       SENSITIVE: []
     end
 
@@ -794,14 +777,6 @@ module Aws::Firehose
       SENSITIVE: []
     end
 
-    class SessionCredentials
-      attr_accessor access_key_id: ::String
-      attr_accessor secret_access_key: ::String
-      attr_accessor session_token: ::String
-      attr_accessor expiration: ::Time
-      SENSITIVE: [:access_key_id, :secret_access_key, :session_token]
-    end
-
     class SnowflakeDestinationConfiguration
       attr_accessor account_url: ::String
       attr_accessor private_key: ::String
@@ -970,56 +945,6 @@ module Aws::Firehose
     end
 
     class TagDeliveryStreamOutput < Aws::EmptyStructure
-    end
-
-    class TagrisAccessDeniedException
-      attr_accessor message: ::String
-      SENSITIVE: []
-    end
-
-    class TagrisInternalServiceException
-      attr_accessor message: ::String
-      SENSITIVE: []
-    end
-
-    class TagrisInvalidArnException
-      attr_accessor message: ::String
-      attr_accessor sweep_list_item: Types::TagrisSweepListItem
-      SENSITIVE: []
-    end
-
-    class TagrisInvalidParameterException
-      attr_accessor message: ::String
-      SENSITIVE: []
-    end
-
-    class TagrisPartialResourcesExistResultsException
-      attr_accessor message: ::String
-      attr_accessor resource_existence_information: ::Hash[::String, ("ACTIVE" | "NOT_ACTIVE")]
-      SENSITIVE: []
-    end
-
-    class TagrisSweepListItem
-      attr_accessor tagris_account_id: ::String
-      attr_accessor tagris_amazon_resource_name: ::String
-      attr_accessor tagris_internal_id: ::String
-      attr_accessor tagris_version: ::Integer
-      SENSITIVE: []
-    end
-
-    class TagrisThrottledException
-      attr_accessor message: ::String
-      SENSITIVE: []
-    end
-
-    class TagrisVerifyResourcesExistInput
-      attr_accessor tagris_sweep_list: ::Array[Types::TagrisSweepListItem]
-      SENSITIVE: []
-    end
-
-    class TagrisVerifyResourcesExistOutput
-      attr_accessor tagris_sweep_list_result: ::Hash[::String, ("ACTIVE" | "NOT_ACTIVE")]
-      SENSITIVE: []
     end
 
     class UntagDeliveryStreamInput

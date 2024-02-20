@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.191.3 (2024-02-20)
+------------------
+
 * Issue - Remove base64 as dependency.
 
 3.191.2 (2024-02-14)

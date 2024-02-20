@@ -7327,11 +7327,11 @@ module Aws::DynamoDB
     #   begins backfilling, you can use `UpdateTable` to perform other
     #   operations.
     #
-    # `UpdateTable` is an asynchronous operation; while it is executing, the
-    # table status changes from `ACTIVE` to `UPDATING`. While it is
-    # `UPDATING`, you cannot issue another `UpdateTable` request. When the
-    # table returns to the `ACTIVE` state, the `UpdateTable` operation is
-    # complete.
+    # `UpdateTable` is an asynchronous operation; while it's executing, the
+    # table status changes from `ACTIVE` to `UPDATING`. While it's
+    # `UPDATING`, you can't issue another `UpdateTable` request on the base
+    # table nor any replicas. When the table returns to the `ACTIVE` state,
+    # the `UpdateTable` operation is complete.
     #
     #
     #
@@ -7924,7 +7924,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
