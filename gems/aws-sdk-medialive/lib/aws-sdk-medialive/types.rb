@@ -1459,7 +1459,8 @@ module Aws::MediaLive
     # @!attribute [rw] accessibility
     #   Indicates whether the caption track implements accessibility
     #   features such as written descriptions of spoken dialog, music, and
-    #   sounds.
+    #   sounds. This signaling is added to HLS output group and MediaPackage
+    #   output group.
     #   @return [String]
     #
     # @!attribute [rw] caption_selector_name
@@ -2086,7 +2087,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   Unique request ID to be specified. This is needed to prevent retries from creating multiple resources. **A suitable default value is auto-generated.** You should normally
+    #   Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
@@ -2247,7 +2248,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   Unique identifier of the request to ensure the request is handled exactly once in case of retries. **A suitable default value is auto-generated.** You should normally
+    #   Unique identifier of the request to ensure the request is handled exactly once in case of retries.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
@@ -2430,7 +2431,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   Unique request ID. This prevents retries from creating multiple resources. **A suitable default value is auto-generated.** You should normally
+    #   Unique request ID. This prevents retries from creating multiple resources.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
@@ -2459,7 +2460,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   Unique request ID. This prevents retries from creating multiple resources. **A suitable default value is auto-generated.** You should normally
+    #   Unique request ID. This prevents retries from creating multiple resources.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
@@ -2578,7 +2579,7 @@ module Aws::MediaLive
     end
 
     # @!attribute [rw] request_id
-    #   Unique identifier of the request to ensure the request is handled exactly once in case of retries. **A suitable default value is auto-generated.** You should normally
+    #   Unique identifier of the request to ensure the request is handled exactly once in case of retries.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
@@ -3238,6 +3239,8 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] accept
+    #   The HTTP Accept header. Indicates the requested type fothe
+    #   thumbnail.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDeviceThumbnailRequest AWS API Documentation
@@ -3250,9 +3253,12 @@ module Aws::MediaLive
     end
 
     # @!attribute [rw] body
+    #   The binary data for the thumbnail that the Link device has most
+    #   recently sent to MediaLive.
     #   @return [IO]
     #
     # @!attribute [rw] content_type
+    #   Specifies the media type of the thumbnail.
     #   @return [String]
     #
     # @!attribute [rw] content_length
@@ -3262,6 +3268,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] last_modified
+    #   Placeholder documentation for \_\_timestamp
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDeviceThumbnailResponse AWS API Documentation
@@ -13247,6 +13254,111 @@ module Aws::MediaLive
     class InputDeviceUhdAudioChannelPairConfig < Struct.new(
       :id,
       :profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_ids
+    #   An array of pipelines to restart in this channel. Format PIPELINE\_0
+    #   or PIPELINE\_1.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RestartChannelPipelinesRequest AWS API Documentation
+    #
+    class RestartChannelPipelinesRequest < Struct.new(
+      :channel_id,
+      :pipeline_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] cdi_input_specification
+    #   @return [Types::CdiInputSpecification]
+    #
+    # @!attribute [rw] channel_class
+    #   A standard channel has two encoding pipelines and a single pipeline
+    #   channel only has one.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   @return [Array<Types::OutputDestination>]
+    #
+    # @!attribute [rw] egress_endpoints
+    #   @return [Array<Types::ChannelEgressEndpoint>]
+    #
+    # @!attribute [rw] encoder_settings
+    #   Encoder Settings
+    #   @return [Types::EncoderSettings]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] input_attachments
+    #   @return [Array<Types::InputAttachment>]
+    #
+    # @!attribute [rw] input_specification
+    #   @return [Types::InputSpecification]
+    #
+    # @!attribute [rw] log_level
+    #   The log level the user wants for their channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance
+    #   @return [Types::MaintenanceStatus]
+    #
+    # @!attribute [rw] maintenance_status
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_details
+    #   @return [Array<Types::PipelineDetail>]
+    #
+    # @!attribute [rw] pipelines_running_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] role_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] vpc
+    #   The properties for a private VPC Output
+    #   @return [Types::VpcOutputSettingsDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RestartChannelPipelinesResponse AWS API Documentation
+    #
+    class RestartChannelPipelinesResponse < Struct.new(
+      :arn,
+      :cdi_input_specification,
+      :channel_class,
+      :destinations,
+      :egress_endpoints,
+      :encoder_settings,
+      :id,
+      :input_attachments,
+      :input_specification,
+      :log_level,
+      :maintenance,
+      :maintenance_status,
+      :name,
+      :pipeline_details,
+      :pipelines_running_count,
+      :role_arn,
+      :state,
+      :tags,
+      :vpc)
       SENSITIVE = []
       include Aws::Structure
     end

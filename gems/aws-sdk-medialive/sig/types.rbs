@@ -3462,5 +3462,34 @@ module Aws::MediaLive
       attr_accessor profile: ("DISABLED" | "VBR-AAC_HHE-16000" | "VBR-AAC_HE-64000" | "VBR-AAC_LC-128000" | "CBR-AAC_HQ-192000" | "CBR-AAC_HQ-256000" | "CBR-AAC_HQ-384000" | "CBR-AAC_HQ-512000")
       SENSITIVE: []
     end
+
+    class RestartChannelPipelinesRequest
+      attr_accessor channel_id: ::String
+      attr_accessor pipeline_ids: ::Array[("PIPELINE_0" | "PIPELINE_1")]
+      SENSITIVE: []
+    end
+
+    class RestartChannelPipelinesResponse
+      attr_accessor arn: ::String
+      attr_accessor cdi_input_specification: Types::CdiInputSpecification
+      attr_accessor channel_class: ("STANDARD" | "SINGLE_PIPELINE")
+      attr_accessor destinations: ::Array[Types::OutputDestination]
+      attr_accessor egress_endpoints: ::Array[Types::ChannelEgressEndpoint]
+      attr_accessor encoder_settings: Types::EncoderSettings
+      attr_accessor id: ::String
+      attr_accessor input_attachments: ::Array[Types::InputAttachment]
+      attr_accessor input_specification: Types::InputSpecification
+      attr_accessor log_level: ("ERROR" | "WARNING" | "INFO" | "DEBUG" | "DISABLED")
+      attr_accessor maintenance: Types::MaintenanceStatus
+      attr_accessor maintenance_status: ::String
+      attr_accessor name: ::String
+      attr_accessor pipeline_details: ::Array[Types::PipelineDetail]
+      attr_accessor pipelines_running_count: ::Integer
+      attr_accessor role_arn: ::String
+      attr_accessor state: ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc: Types::VpcOutputSettingsDescription
+      SENSITIVE: []
+    end
   end
 end

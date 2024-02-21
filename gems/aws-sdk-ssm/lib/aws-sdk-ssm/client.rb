@@ -2501,6 +2501,11 @@ module Aws::SSM
     # @option params [required, String] :name
     #   The name of the parameter to delete.
     #
+    #   <note markdown="1"> You can't enter the Amazon Resource Name (ARN) for a parameter, only
+    #   the parameter name itself.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2524,6 +2529,11 @@ module Aws::SSM
     # @option params [required, Array<String>] :names
     #   The names of the parameters to delete. After deleting a parameter,
     #   wait for at least 30 seconds to create a parameter with the same name.
+    #
+    #   <note markdown="1"> You can't enter the Amazon Resource Name (ARN) for a parameter, only
+    #   the parameter name itself.
+    #
+    #    </note>
     #
     # @return [Types::DeleteParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2610,11 +2620,19 @@ module Aws::SSM
 
     # Deletes a Systems Manager resource policy. A resource policy helps you
     # to define the IAM entity (for example, an Amazon Web Services account)
-    # that can manage your Systems Manager resources. Currently,
-    # `OpsItemGroup` is the only resource that supports Systems Manager
-    # resource policies. The resource policy for `OpsItemGroup` enables
-    # Amazon Web Services accounts to view and interact with OpsCenter
-    # operational work items (OpsItems).
+    # that can manage your Systems Manager resources. The following
+    # resources support Systems Manager resource policies.
+    #
+    # * `OpsItemGroup` - The resource policy for `OpsItemGroup` enables
+    #   Amazon Web Services accounts to view and interact with OpsCenter
+    #   operational work items (OpsItems).
+    #
+    # * `Parameter` - The resource policy is used to share a parameter with
+    #   other accounts using Resource Access Manager (RAM). For more
+    #   information about cross-account sharing of parameters, see [Working
+    #   with shared
+    #   parameters](systems-manager/latest/userguide/parameter-store-shared-parameters.html)
+    #   in the *Amazon Web Services Systems Manager User Guide*.
     #
     # @option params [required, String] :resource_arn
     #   Amazon Resource Name (ARN) of the resource to which the policies are
@@ -4907,7 +4925,8 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Get information about a parameter.
+    # Lists the parameters in your Amazon Web Services account or the
+    # parameters shared with you when you enable the [Shared][1] option.
     #
     # Request results are returned on a best-effort basis. If you specify
     # `MaxResults` in the request, the response includes information up to
@@ -4923,6 +4942,10 @@ module Aws::SSM
     # to reference KMS. Otherwise, `DescribeParameters` retrieves whatever
     # the original key alias was referencing.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeParameters.html#systemsmanager-DescribeParameters-request-Shared
+    #
     # @option params [Array<Types::ParametersFilter>] :filters
     #   This data type is deprecated. Instead, use `ParameterFilters`.
     #
@@ -4937,6 +4960,28 @@ module Aws::SSM
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
+    #
+    # @option params [Boolean] :shared
+    #   Lists parameters that are shared with you.
+    #
+    #   <note markdown="1"> By default when using this option, the command returns parameters that
+    #   have been shared using a standard Resource Access Manager Resource
+    #   Share. In order for a parameter that was shared using the
+    #   PutResourcePolicy command to be returned, the associated `RAM Resource
+    #   Share Created From Policy` must have been promoted to a standard
+    #   Resource Share using the RAM
+    #   [PromoteResourceShareCreatedFromPolicy][1] API operation.
+    #
+    #    For more information about sharing parameters, see [Working with
+    #   shared
+    #   parameters](systems-manager/latest/userguide/parameter-store-shared-parameters.html)
+    #   in the *Amazon Web Services Systems Manager User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html
     #
     # @return [Types::DescribeParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4963,12 +5008,14 @@ module Aws::SSM
     #     ],
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     shared: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.parameters #=> Array
     #   resp.parameters[0].name #=> String
+    #   resp.parameters[0].arn #=> String
     #   resp.parameters[0].type #=> String, one of "String", "StringList", "SecureString"
     #   resp.parameters[0].key_id #=> String
     #   resp.parameters[0].last_modified_date #=> Time
@@ -6660,10 +6707,20 @@ module Aws::SSM
     #  </note>
     #
     # @option params [required, String] :name
-    #   The name of the parameter you want to query.
+    #   The name or Amazon Resource Name (ARN) of the parameter that you want
+    #   to query. For parameters shared with you from another account, you
+    #   must use the full ARN.
     #
     #   To query by parameter label, use `"Name": "name:label"`. To query by
     #   parameter version, use `"Name": "name:version"`.
+    #
+    #   For more information about shared parameters, see [Working with shared
+    #   parameters][1] in the *Amazon Web Services Systems Manager User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sharing.html
     #
     # @option params [Boolean] :with_decryption
     #   Return decrypted values for secure string parameters. This flag is
@@ -6709,7 +6766,9 @@ module Aws::SSM
     # the original key alias was referencing.
     #
     # @option params [required, String] :name
-    #   The name of the parameter for which you want to review history.
+    #   The name or Amazon Resource Name (ARN) of the parameter for which you
+    #   want to review history. For parameters shared with you from another
+    #   account, you must use the full ARN.
     #
     # @option params [Boolean] :with_decryption
     #   Return decrypted values for secure string parameters. This flag is
@@ -6780,10 +6839,20 @@ module Aws::SSM
     #  </note>
     #
     # @option params [required, Array<String>] :names
-    #   Names of the parameters for which you want to query information.
+    #   The names or Amazon Resource Names (ARNs) of the parameters that you
+    #   want to query. For parameters shared with you from another account,
+    #   you must use the full ARNs.
     #
     #   To query by parameter label, use `"Name": "name:label"`. To query by
     #   parameter version, use `"Name": "name:version"`.
+    #
+    #   For more information about shared parameters, see [Working with shared
+    #   parameters][1] in the *Amazon Web Services Systems Manager User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sharing.html
     #
     # @option params [Boolean] :with_decryption
     #   Return decrypted secure string value. Return decrypted values for
@@ -7196,6 +7265,11 @@ module Aws::SSM
     #
     # @option params [required, String] :name
     #   The parameter name on which you want to attach one or more labels.
+    #
+    #   <note markdown="1"> You can't enter the Amazon Resource Name (ARN) for a parameter, only
+    #   the parameter name itself.
+    #
+    #    </note>
     #
     # @option params [Integer] :parameter_version
     #   The specific version of the parameter on which you want to attach one
@@ -8625,8 +8699,15 @@ module Aws::SSM
     #
     # @option params [required, String] :name
     #   The fully qualified name of the parameter that you want to add to the
-    #   system. The fully qualified name includes the complete hierarchy of
-    #   the parameter path and name. For parameters in a hierarchy, you must
+    #   system.
+    #
+    #   <note markdown="1"> You can't enter the Amazon Resource Name (ARN) for a parameter, only
+    #   the parameter name itself.
+    #
+    #    </note>
+    #
+    #   The fully qualified name includes the complete hierarchy of the
+    #   parameter path and name. For parameters in a hierarchy, you must
     #   include a leading forward slash character (/) when you create or
     #   reference a parameter. For example: `/Dev/DBServer/MySQL/db-string13`
     #
@@ -8929,11 +9010,50 @@ module Aws::SSM
 
     # Creates or updates a Systems Manager resource policy. A resource
     # policy helps you to define the IAM entity (for example, an Amazon Web
-    # Services account) that can manage your Systems Manager resources.
-    # Currently, `OpsItemGroup` is the only resource that supports Systems
-    # Manager resource policies. The resource policy for `OpsItemGroup`
-    # enables Amazon Web Services accounts to view and interact with
-    # OpsCenter operational work items (OpsItems).
+    # Services account) that can manage your Systems Manager resources. The
+    # following resources support Systems Manager resource policies.
+    #
+    # * `OpsItemGroup` - The resource policy for `OpsItemGroup` enables
+    #   Amazon Web Services accounts to view and interact with OpsCenter
+    #   operational work items (OpsItems).
+    #
+    # * `Parameter` - The resource policy is used to share a parameter with
+    #   other accounts using Resource Access Manager (RAM).
+    #
+    #   To share a parameter, it must be in the advanced parameter tier. For
+    #   information about parameter tiers, see [Managing parameter
+    #   tiers][1]. For information about changing an existing standard
+    #   parameter to an advanced parameter, see [Changing a standard
+    #   parameter to an advanced parameter][2].
+    #
+    #   To share a `SecureString` parameter, it must be encrypted with a
+    #   customer managed key, and you must share the key separately through
+    #   Key Management Service. Amazon Web Services managed keys cannot be
+    #   shared. Parameters encrypted with the default Amazon Web Services
+    #   managed key can be updated to use a customer managed key instead.
+    #   For KMS key definitions, see [KMS concepts][3] in the *Key
+    #   Management Service Developer Guide*.
+    #
+    #   While you can share a parameter using the Systems Manager
+    #   `PutResourcePolicy` operation, we recommend using Resource Access
+    #   Manager (RAM) instead. This is because using `PutResourcePolicy`
+    #   requires the extra step of promoting the parameter to a standard RAM
+    #   Resource Share using the RAM
+    #   [PromoteResourceShareCreatedFromPolicy][4] API operation. Otherwise,
+    #   the parameter won't be returned by the Systems Manager
+    #   [DescribeParameters][5] API operation using the `--shared` option.
+    #
+    #    For more information, see [Sharing a parameter][6] in the *Amazon
+    #   Web Services Systems Manager User Guide*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/parameter-store- advanced-parameters.html
+    # [2]: https://docs.aws.amazon.com/parameter-store-advanced-parameters.html#parameter- store-advanced-parameters-enabling
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-mgmt
+    # [4]: https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html
+    # [5]: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeParameters.html
+    # [6]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html#share
     #
     # @option params [required, String] :resource_arn
     #   Amazon Resource Name (ARN) of the resource to which you want to attach
@@ -10393,6 +10513,11 @@ module Aws::SSM
     # @option params [required, String] :name
     #   The name of the parameter from which you want to delete one or more
     #   labels.
+    #
+    #   <note markdown="1"> You can't enter the Amazon Resource Name (ARN) for a parameter, only
+    #   the parameter name itself.
+    #
+    #    </note>
     #
     # @option params [required, Integer] :parameter_version
     #   The specific version of the parameter which you want to delete one or
@@ -12308,7 +12433,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.164.0'
+      context[:gem_version] = '1.165.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

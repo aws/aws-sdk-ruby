@@ -4231,6 +4231,11 @@ module Aws::SSM
 
     # @!attribute [rw] name
     #   The name of the parameter to delete.
+    #
+    #   <note markdown="1"> You can't enter the Amazon Resource Name (ARN) for a parameter,
+    #   only the parameter name itself.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParameterRequest AWS API Documentation
@@ -4249,6 +4254,11 @@ module Aws::SSM
     #   The names of the parameters to delete. After deleting a parameter,
     #   wait for at least 30 seconds to create a parameter with the same
     #   name.
+    #
+    #   <note markdown="1"> You can't enter the Amazon Resource Name (ARN) for a parameter,
+    #   only the parameter name itself.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParametersRequest AWS API Documentation
@@ -5992,13 +6002,37 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @!attribute [rw] shared
+    #   Lists parameters that are shared with you.
+    #
+    #   <note markdown="1"> By default when using this option, the command returns parameters
+    #   that have been shared using a standard Resource Access Manager
+    #   Resource Share. In order for a parameter that was shared using the
+    #   PutResourcePolicy command to be returned, the associated `RAM
+    #   Resource Share Created From Policy` must have been promoted to a
+    #   standard Resource Share using the RAM
+    #   [PromoteResourceShareCreatedFromPolicy][1] API operation.
+    #
+    #    For more information about sharing parameters, see [Working with
+    #   shared
+    #   parameters](systems-manager/latest/userguide/parameter-store-shared-parameters.html)
+    #   in the *Amazon Web Services Systems Manager User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeParametersRequest AWS API Documentation
     #
     class DescribeParametersRequest < Struct.new(
       :filters,
       :parameter_filters,
       :max_results,
-      :next_token)
+      :next_token,
+      :shared)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8566,7 +8600,9 @@ module Aws::SSM
     end
 
     # @!attribute [rw] name
-    #   The name of the parameter for which you want to review history.
+    #   The name or Amazon Resource Name (ARN) of the parameter for which
+    #   you want to review history. For parameters shared with you from
+    #   another account, you must use the full ARN.
     #   @return [String]
     #
     # @!attribute [rw] with_decryption
@@ -8615,10 +8651,20 @@ module Aws::SSM
     end
 
     # @!attribute [rw] name
-    #   The name of the parameter you want to query.
+    #   The name or Amazon Resource Name (ARN) of the parameter that you
+    #   want to query. For parameters shared with you from another account,
+    #   you must use the full ARN.
     #
     #   To query by parameter label, use `"Name": "name:label"`. To query by
     #   parameter version, use `"Name": "name:version"`.
+    #
+    #   For more information about shared parameters, see [Working with
+    #   shared parameters][1] in the *Amazon Web Services Systems Manager
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sharing.html
     #   @return [String]
     #
     # @!attribute [rw] with_decryption
@@ -8727,10 +8773,20 @@ module Aws::SSM
     end
 
     # @!attribute [rw] names
-    #   Names of the parameters for which you want to query information.
+    #   The names or Amazon Resource Names (ARNs) of the parameters that you
+    #   want to query. For parameters shared with you from another account,
+    #   you must use the full ARNs.
     #
     #   To query by parameter label, use `"Name": "name:label"`. To query by
     #   parameter version, use `"Name": "name:version"`.
+    #
+    #   For more information about shared parameters, see [Working with
+    #   shared parameters][1] in the *Amazon Web Services Systems Manager
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sharing.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] with_decryption
@@ -10807,6 +10863,11 @@ module Aws::SSM
 
     # @!attribute [rw] name
     #   The parameter name on which you want to attach one or more labels.
+    #
+    #   <note markdown="1"> You can't enter the Amazon Resource Name (ARN) for a parameter,
+    #   only the parameter name itself.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] parameter_version
@@ -12519,6 +12580,20 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The specified policy document is malformed or invalid, or excessive
+    # `PutResourcePolicy` or `DeleteResourcePolicy` calls have been made.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MalformedResourcePolicyDocumentException AWS API Documentation
+    #
+    class MalformedResourcePolicyDocumentException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The size limit of a document is 64 KB.
     #
     # @!attribute [rw] message
@@ -13882,11 +13957,16 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Metadata includes information like the ARN of the last user and the
-    # date/time the parameter was last used.
+    # Metadata includes information like the Amazon Resource Name (ARN) of
+    # the last user to update the parameter and the date and time the
+    # parameter was last used.
     #
     # @!attribute [rw] name
     #   The parameter name.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The (ARN) of the last user to update the parameter.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -13939,6 +14019,7 @@ module Aws::SSM
     #
     class ParameterMetadata < Struct.new(
       :name,
+      :arn,
       :type,
       :key_id,
       :last_modified_date,
@@ -14760,10 +14841,17 @@ module Aws::SSM
 
     # @!attribute [rw] name
     #   The fully qualified name of the parameter that you want to add to
-    #   the system. The fully qualified name includes the complete hierarchy
-    #   of the parameter path and name. For parameters in a hierarchy, you
-    #   must include a leading forward slash character (/) when you create
-    #   or reference a parameter. For example:
+    #   the system.
+    #
+    #   <note markdown="1"> You can't enter the Amazon Resource Name (ARN) for a parameter,
+    #   only the parameter name itself.
+    #
+    #    </note>
+    #
+    #   The fully qualified name includes the complete hierarchy of the
+    #   parameter path and name. For parameters in a hierarchy, you must
+    #   include a leading forward slash character (/) when you create or
+    #   reference a parameter. For example:
     #   `/Dev/DBServer/MySQL/db-string13`
     #
     #   Naming Constraints:
@@ -16131,6 +16219,19 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The specified parameter to be shared could not be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The hash provided in the call doesn't match the stored hash. This
     # exception is thrown when trying to update an obsolete policy version
     # or when multiple requests to update a policy are sent.
@@ -16182,6 +16283,19 @@ module Aws::SSM
     class ResourcePolicyLimitExceededException < Struct.new(
       :limit,
       :limit_type,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # No policies with the specified policy ID and hash could be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourcePolicyNotFoundException AWS API Documentation
+    #
+    class ResourcePolicyNotFoundException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -17774,6 +17888,11 @@ module Aws::SSM
     # @!attribute [rw] name
     #   The name of the parameter from which you want to delete one or more
     #   labels.
+    #
+    #   <note markdown="1"> You can't enter the Amazon Resource Name (ARN) for a parameter,
+    #   only the parameter name itself.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] parameter_version

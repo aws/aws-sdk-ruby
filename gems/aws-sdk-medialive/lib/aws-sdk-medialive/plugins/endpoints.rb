@@ -186,6 +186,8 @@ module Aws::MediaLive
             Aws::MediaLive::Endpoints::UpdateMultiplexProgram.build(context)
           when :update_reservation
             Aws::MediaLive::Endpoints::UpdateReservation.build(context)
+          when :restart_channel_pipelines
+            Aws::MediaLive::Endpoints::RestartChannelPipelines.build(context)
           end
         end
       end

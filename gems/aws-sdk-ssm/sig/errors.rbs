@@ -245,6 +245,9 @@ module Aws
         def type_name: () -> ::String
         def message: () -> ::String
       end
+      class MalformedResourcePolicyDocumentException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class MaxDocumentSizeExceeded < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -344,6 +347,9 @@ module Aws
       class ResourceLimitExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ResourcePolicyConflictException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
@@ -354,6 +360,9 @@ module Aws
       class ResourcePolicyLimitExceededException < ::Aws::Errors::ServiceError
         def limit: () -> ::String
         def limit_type: () -> ::String
+        def message: () -> ::String
+      end
+      class ResourcePolicyNotFoundException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
       class ServiceSettingNotFound < ::Aws::Errors::ServiceError

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2024-02-21)
+------------------
+
+* Feature - Increase the maximum length of descriptions for Inputs, Detector Models, and Alarm Models
+
 1.45.0 (2024-01-26)
 ------------------
 
