@@ -170,6 +170,7 @@ module Aws::InternetMonitor
       attr_accessor status: ("ACTIVE" | "RESOLVED")
       attr_accessor caused_by: Types::NetworkImpairment
       attr_accessor internet_health: Types::InternetHealth
+      attr_accessor ipv_4_prefixes: ::Array[::String]
       SENSITIVE: []
     end
 

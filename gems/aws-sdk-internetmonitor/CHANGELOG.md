@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2024-02-22)
+------------------
+
+* Feature - This release adds IPv4 prefixes to health events
+
 1.14.0 (2024-01-26)
 ------------------
 

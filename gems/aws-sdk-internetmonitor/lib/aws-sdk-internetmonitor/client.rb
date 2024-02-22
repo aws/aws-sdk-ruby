@@ -645,6 +645,8 @@ module Aws::InternetMonitor
     #   resp.impacted_locations[0].internet_health.performance.round_trip_time.p50 #=> Float
     #   resp.impacted_locations[0].internet_health.performance.round_trip_time.p90 #=> Float
     #   resp.impacted_locations[0].internet_health.performance.round_trip_time.p95 #=> Float
+    #   resp.impacted_locations[0].ipv_4_prefixes #=> Array
+    #   resp.impacted_locations[0].ipv_4_prefixes[0] #=> String
     #   resp.status #=> String, one of "ACTIVE", "RESOLVED"
     #   resp.percent_of_total_traffic_impacted #=> Float
     #   resp.impact_type #=> String, one of "AVAILABILITY", "PERFORMANCE", "LOCAL_AVAILABILITY", "LOCAL_PERFORMANCE"
@@ -919,6 +921,8 @@ module Aws::InternetMonitor
     #   resp.health_events[0].impacted_locations[0].internet_health.performance.round_trip_time.p50 #=> Float
     #   resp.health_events[0].impacted_locations[0].internet_health.performance.round_trip_time.p90 #=> Float
     #   resp.health_events[0].impacted_locations[0].internet_health.performance.round_trip_time.p95 #=> Float
+    #   resp.health_events[0].impacted_locations[0].ipv_4_prefixes #=> Array
+    #   resp.health_events[0].impacted_locations[0].ipv_4_prefixes[0] #=> String
     #   resp.health_events[0].status #=> String, one of "ACTIVE", "RESOLVED"
     #   resp.health_events[0].percent_of_total_traffic_impacted #=> Float
     #   resp.health_events[0].impact_type #=> String, one of "AVAILABILITY", "PERFORMANCE", "LOCAL_AVAILABILITY", "LOCAL_PERFORMANCE"
@@ -1047,11 +1051,17 @@ module Aws::InternetMonitor
     #   The type of query to run. The following are the three types of queries
     #   that you can run using the Internet Monitor query interface:
     #
-    #   * `MEASUREMENTS`: TBD definition
+    #   * `MEASUREMENTS`: Provides availability score, performance score,
+    #     total traffic, and round-trip times, at 5 minute intervals.
     #
-    #   * `TOP_LOCATIONS`: TBD definition
+    #   * `TOP_LOCATIONS`: Provides availability score, performance score,
+    #     total traffic, and time to first byte (TTFB) information, for the
+    #     top location and ASN combinations that you're monitoring, by
+    #     traffic volume.
     #
-    #   * `TOP_LOCATION_DETAILS`: TBD definition
+    #   * `TOP_LOCATION_DETAILS`: Provides TTFB for Amazon CloudFront, your
+    #     current configuration, and the best performing EC2 configuration, at
+    #     1 hour intervals.
     #
     #   For lists of the fields returned with each query type and more
     #   information about how each type of query is performed, see [ Using the
@@ -1352,7 +1362,7 @@ module Aws::InternetMonitor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-internetmonitor'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
