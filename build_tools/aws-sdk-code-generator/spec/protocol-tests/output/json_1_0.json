@@ -1,0 +1,1251 @@
+[
+    {
+        "description": "Test cases for EmptyInputAndEmptyOutput operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2020-07-14",
+            "jsonVersion": "1.0"
+        },
+        "shapes": {
+            "EmptyInputAndEmptyOutputOutput": {
+                "type": "structure",
+                "members": {}
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson10EmptyInputAndEmptyOutputSendJsonObject",
+                "given": {
+                    "name": "EmptyInputAndEmptyOutput",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "EmptyInputAndEmptyOutputOutput"
+                    },
+                    "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response payload because the operation has an empty input and empty output structure that reuses the same shape. While this should be rare, code generators must support this.</p>"
+                },
+                "description": "A service will always return a JSON object for operations with modeled output.",
+                "result": {},
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for JsonUnions operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2020-07-14",
+            "jsonVersion": "1.0"
+        },
+        "shapes": {
+            "JsonUnionsOutput": {
+                "type": "structure",
+                "members": {
+                    "contents": {
+                        "shape": "MyUnion"
+                    }
+                }
+            },
+            "MyUnion": {
+                "type": "structure",
+                "members": {
+                    "stringValue": {
+                        "shape": "String"
+                    },
+                    "booleanValue": {
+                        "shape": "Boolean"
+                    },
+                    "numberValue": {
+                        "shape": "Integer"
+                    },
+                    "blobValue": {
+                        "shape": "Blob"
+                    },
+                    "timestampValue": {
+                        "shape": "Timestamp"
+                    },
+                    "enumValue": {
+                        "shape": "FooEnum"
+                    },
+                    "intEnumValue": {
+                        "shape": "IntegerEnum"
+                    },
+                    "listValue": {
+                        "shape": "StringList"
+                    },
+                    "mapValue": {
+                        "shape": "StringMap"
+                    },
+                    "structureValue": {
+                        "shape": "GreetingStruct"
+                    }
+                },
+                "documentation": "<p>A union with a representative set of types for members.</p>",
+                "union": true
+            },
+            "String": {
+                "type": "string"
+            },
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "Blob": {
+                "type": "blob"
+            },
+            "Timestamp": {
+                "type": "timestamp"
+            },
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "IntegerEnum": {
+                "type": "integer",
+                "box": true
+            },
+            "StringList": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            },
+            "StringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                }
+            },
+            "GreetingStruct": {
+                "type": "structure",
+                "members": {
+                    "hi": {
+                        "shape": "String"
+                    }
+                }
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson10DeserializeStringUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "JsonUnionsOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes a string union value",
+                "result": {
+                    "contents": {
+                        "stringValue": "foo"
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"stringValue\": \"foo\"\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson10DeserializeBooleanUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "JsonUnionsOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes a boolean union value",
+                "result": {
+                    "contents": {
+                        "booleanValue": true
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"booleanValue\": true\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson10DeserializeNumberUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "JsonUnionsOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes a number union value",
+                "result": {
+                    "contents": {
+                        "numberValue": 1
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"numberValue\": 1\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson10DeserializeBlobUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "JsonUnionsOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes a blob union value",
+                "result": {
+                    "contents": {
+                        "blobValue": "foo"
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"blobValue\": \"Zm9v\"\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson10DeserializeTimestampUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "JsonUnionsOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes a timestamp union value",
+                "result": {
+                    "contents": {
+                        "timestampValue": 1398796238
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"timestampValue\": 1398796238\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson10DeserializeEnumUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "JsonUnionsOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes an enum union value",
+                "result": {
+                    "contents": {
+                        "enumValue": "Foo"
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"enumValue\": \"Foo\"\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson10DeserializeIntEnumUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "JsonUnionsOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes an intEnum union value",
+                "result": {
+                    "contents": {
+                        "intEnumValue": 1
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"intEnumValue\": 1\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson10DeserializeListUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "JsonUnionsOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes a list union value",
+                "result": {
+                    "contents": {
+                        "listValue": [
+                            "foo",
+                            "bar"
+                        ]
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"listValue\": [\"foo\", \"bar\"]\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson10DeserializeMapUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "JsonUnionsOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes a map union value",
+                "result": {
+                    "contents": {
+                        "mapValue": {
+                            "foo": "bar",
+                            "spam": "eggs"
+                        }
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"mapValue\": {\n            \"foo\": \"bar\",\n            \"spam\": \"eggs\"\n        }\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson10DeserializeStructureUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "JsonUnionsOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes a structure union value",
+                "result": {
+                    "contents": {
+                        "structureValue": {
+                            "hi": "hello"
+                        }
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"structureValue\": {\n            \"hi\": \"hello\"\n        }\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson10DeserializeIgnoreType",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "JsonUnionsOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Ignores an unrecognized __type property",
+                "result": {
+                    "contents": {
+                        "structureValue": {
+                            "hi": "hello"
+                        }
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"__type\": \"aws.protocoltests.json10#MyUnion\",\n        \"structureValue\": {\n            \"hi\": \"hello\"\n        }\n    }\n}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for NoInputAndNoOutput operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2020-07-14",
+            "jsonVersion": "1.0"
+        },
+        "shapes": {},
+        "cases": [
+            {
+                "id": "AwsJson10HandlesEmptyOutputShape",
+                "given": {
+                    "name": "NoInputAndNoOutput",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response payload because the operation has no input or output. While this should be rare, code generators must support this.</p>"
+                },
+                "description": "When no output is defined, the service is expected to return\nan empty payload, however, client must ignore a JSON payload\nif one is returned. This ensures that if output is added later,\nthen it will not break the client.",
+                "result": {},
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{}"
+                }
+            },
+            {
+                "id": "AwsJson10HandlesUnexpectedJsonOutput",
+                "given": {
+                    "name": "NoInputAndNoOutput",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response payload because the operation has no input or output. While this should be rare, code generators must support this.</p>"
+                },
+                "description": "This client-only test builds on handles_empty_output_shape,\nby including unexpected fields in the JSON. A client\nneeds to ignore JSON output that is empty or that contains\nJSON object data.",
+                "result": {},
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"foo\": true\n}"
+                }
+            },
+            {
+                "id": "AwsJson10ServiceRespondsWithNoPayload",
+                "given": {
+                    "name": "NoInputAndNoOutput",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response payload because the operation has no input or output. While this should be rare, code generators must support this.</p>"
+                },
+                "description": "When no output is defined, the service is expected to return\nan empty payload. Despite the lack of a payload, the service\nis expected to always send a Content-Type header. Clients must\nhandle cases where a service returns a JSON object and where\na service returns no JSON at all.",
+                "result": {},
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": ""
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for NoInputAndOutput operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2020-07-14",
+            "jsonVersion": "1.0"
+        },
+        "shapes": {
+            "NoInputAndOutputOutput": {
+                "type": "structure",
+                "members": {}
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson10NoInputAndOutput",
+                "given": {
+                    "name": "NoInputAndOutput",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "NoInputAndOutputOutput"
+                    },
+                    "documentation": "<p>The example tests how requests and responses are serialized when there's no request or response payload because the operation has no input and the output is empty. While this should be rare, code generators must support this.</p>"
+                },
+                "description": "Empty output always serializes an empty object payload.",
+                "result": {},
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for OperationWithDefaults operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2020-07-14",
+            "jsonVersion": "1.0"
+        },
+        "shapes": {
+            "OperationWithDefaultsOutput": {
+                "type": "structure",
+                "members": {
+                    "defaultString": {
+                        "shape": "String"
+                    },
+                    "defaultBoolean": {
+                        "shape": "Boolean"
+                    },
+                    "defaultList": {
+                        "shape": "TestStringList"
+                    },
+                    "defaultDocumentMap": {
+                        "shape": "Document"
+                    },
+                    "defaultDocumentString": {
+                        "shape": "Document"
+                    },
+                    "defaultDocumentBoolean": {
+                        "shape": "Document"
+                    },
+                    "defaultDocumentList": {
+                        "shape": "Document"
+                    },
+                    "defaultNullDocument": {
+                        "shape": "Document"
+                    },
+                    "defaultTimestamp": {
+                        "shape": "Timestamp"
+                    },
+                    "defaultBlob": {
+                        "shape": "Blob"
+                    },
+                    "defaultByte": {
+                        "shape": "Byte"
+                    },
+                    "defaultShort": {
+                        "shape": "Short"
+                    },
+                    "defaultInteger": {
+                        "shape": "Integer"
+                    },
+                    "defaultLong": {
+                        "shape": "Long"
+                    },
+                    "defaultFloat": {
+                        "shape": "Float"
+                    },
+                    "defaultDouble": {
+                        "shape": "Double"
+                    },
+                    "defaultMap": {
+                        "shape": "TestStringMap"
+                    },
+                    "defaultEnum": {
+                        "shape": "TestEnum"
+                    },
+                    "defaultIntEnum": {
+                        "shape": "TestIntEnum"
+                    },
+                    "emptyString": {
+                        "shape": "String"
+                    },
+                    "falseBoolean": {
+                        "shape": "Boolean"
+                    },
+                    "emptyBlob": {
+                        "shape": "Blob"
+                    },
+                    "zeroByte": {
+                        "shape": "Byte"
+                    },
+                    "zeroShort": {
+                        "shape": "Short"
+                    },
+                    "zeroInteger": {
+                        "shape": "Integer"
+                    },
+                    "zeroLong": {
+                        "shape": "Long"
+                    },
+                    "zeroFloat": {
+                        "shape": "Float"
+                    },
+                    "zeroDouble": {
+                        "shape": "Double"
+                    }
+                }
+            },
+            "String": {
+                "type": "string"
+            },
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "TestStringList": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            },
+            "Document": {
+                "type": "structure",
+                "members": {},
+                "document": true
+            },
+            "Timestamp": {
+                "type": "timestamp"
+            },
+            "Blob": {
+                "type": "blob"
+            },
+            "Byte": {
+                "type": "byte",
+                "box": true
+            },
+            "Short": {
+                "type": "short",
+                "box": true
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "Long": {
+                "type": "long",
+                "box": true
+            },
+            "Float": {
+                "type": "float",
+                "box": true
+            },
+            "Double": {
+                "type": "double",
+                "box": true
+            },
+            "TestStringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                }
+            },
+            "TestEnum": {
+                "type": "string",
+                "enum": [
+                    "FOO",
+                    "BAR",
+                    "BAZ"
+                ]
+            },
+            "TestIntEnum": {
+                "type": "integer",
+                "box": true
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson10ClientPopulatesDefaultsValuesWhenMissingInResponse",
+                "given": {
+                    "name": "OperationWithDefaults",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "OperationWithDefaultsOutput"
+                    }
+                },
+                "description": "Client populates default values when missing in response.",
+                "result": {
+                    "defaultString": "hi",
+                    "defaultBoolean": true,
+                    "defaultList": [],
+                    "defaultDocumentMap": {},
+                    "defaultDocumentString": "hi",
+                    "defaultDocumentBoolean": true,
+                    "defaultDocumentList": [],
+                    "defaultTimestamp": 0,
+                    "defaultBlob": "abc",
+                    "defaultByte": 1,
+                    "defaultShort": 1,
+                    "defaultInteger": 10,
+                    "defaultLong": 100,
+                    "defaultFloat": 1.0,
+                    "defaultDouble": 1.0,
+                    "defaultMap": {},
+                    "defaultEnum": "FOO",
+                    "defaultIntEnum": 1,
+                    "emptyString": "",
+                    "falseBoolean": false,
+                    "emptyBlob": "",
+                    "zeroByte": 0,
+                    "zeroShort": 0,
+                    "zeroInteger": 0,
+                    "zeroLong": 0,
+                    "zeroFloat": 0.0,
+                    "zeroDouble": 0.0
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{}"
+                }
+            },
+            {
+                "id": "AwsJson10ClientIgnoresDefaultValuesIfMemberValuesArePresentInResponse",
+                "given": {
+                    "name": "OperationWithDefaults",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "OperationWithDefaultsOutput"
+                    }
+                },
+                "description": "Client ignores default values if member values are present in the response.",
+                "result": {
+                    "defaultString": "bye",
+                    "defaultBoolean": false,
+                    "defaultList": [
+                        "a"
+                    ],
+                    "defaultDocumentMap": {
+                        "name": "Jack"
+                    },
+                    "defaultDocumentString": "bye",
+                    "defaultDocumentBoolean": false,
+                    "defaultDocumentList": [
+                        "b"
+                    ],
+                    "defaultNullDocument": "notNull",
+                    "defaultTimestamp": 2,
+                    "defaultBlob": "hi",
+                    "defaultByte": 2,
+                    "defaultShort": 2,
+                    "defaultInteger": 20,
+                    "defaultLong": 200,
+                    "defaultFloat": 2.0,
+                    "defaultDouble": 2.0,
+                    "defaultMap": {
+                        "name": "Jack"
+                    },
+                    "defaultEnum": "BAR",
+                    "defaultIntEnum": 2,
+                    "emptyString": "foo",
+                    "falseBoolean": true,
+                    "emptyBlob": "hi",
+                    "zeroByte": 1,
+                    "zeroShort": 1,
+                    "zeroInteger": 1,
+                    "zeroLong": 1,
+                    "zeroFloat": 1.0,
+                    "zeroDouble": 1.0
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"defaultString\": \"bye\",\n    \"defaultBoolean\": false,\n    \"defaultList\": [\"a\"],\n    \"defaultDocumentMap\": {\"name\": \"Jack\"},\n    \"defaultDocumentString\": \"bye\",\n    \"defaultDocumentBoolean\": false,\n    \"defaultDocumentList\": [\"b\"],\n    \"defaultNullDocument\": \"notNull\",\n    \"defaultTimestamp\": 2,\n    \"defaultBlob\": \"aGk=\",\n    \"defaultByte\": 2,\n    \"defaultShort\": 2,\n    \"defaultInteger\": 20,\n    \"defaultLong\": 200,\n    \"defaultFloat\": 2.0,\n    \"defaultDouble\": 2.0,\n    \"defaultMap\": {\"name\": \"Jack\"},\n    \"defaultEnum\": \"BAR\",\n    \"defaultIntEnum\": 2,\n    \"emptyString\": \"foo\",\n    \"falseBoolean\": true,\n    \"emptyBlob\": \"aGk=\",\n    \"zeroByte\": 1,\n    \"zeroShort\": 1,\n    \"zeroInteger\": 1,\n    \"zeroLong\": 1,\n    \"zeroFloat\": 1.0,\n    \"zeroDouble\": 1.0\n}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for OperationWithNestedStructure operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2020-07-14",
+            "jsonVersion": "1.0"
+        },
+        "shapes": {
+            "OperationWithNestedStructureOutput": {
+                "type": "structure",
+                "required": [
+                    "dialog"
+                ],
+                "members": {
+                    "dialog": {
+                        "shape": "Dialog"
+                    },
+                    "dialogList": {
+                        "shape": "DialogList"
+                    },
+                    "dialogMap": {
+                        "shape": "DialogMap"
+                    }
+                }
+            },
+            "Dialog": {
+                "type": "structure",
+                "members": {
+                    "language": {
+                        "shape": "String"
+                    },
+                    "greeting": {
+                        "shape": "String"
+                    },
+                    "farewell": {
+                        "shape": "Farewell"
+                    }
+                }
+            },
+            "DialogList": {
+                "type": "list",
+                "member": {
+                    "shape": "Dialog"
+                }
+            },
+            "DialogMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "Dialog"
+                }
+            },
+            "String": {
+                "type": "string"
+            },
+            "Farewell": {
+                "type": "structure",
+                "members": {
+                    "phrase": {
+                        "shape": "String"
+                    }
+                }
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson10ClientPopulatesNestedDefaultsWhenMissingInResponseBody",
+                "given": {
+                    "name": "OperationWithNestedStructure",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "OperationWithNestedStructureOutput"
+                    }
+                },
+                "description": "Client populates nested default values when missing in response body.",
+                "result": {
+                    "dialog": {
+                        "language": "en",
+                        "greeting": "hi"
+                    },
+                    "dialogList": [
+                        {
+                            "greeting": "hi"
+                        },
+                        {
+                            "greeting": "hi",
+                            "farewell": {
+                                "phrase": "bye"
+                            }
+                        },
+                        {
+                            "language": "it",
+                            "greeting": "ciao",
+                            "farewell": {
+                                "phrase": "arrivederci"
+                            }
+                        }
+                    ],
+                    "dialogMap": {
+                        "emptyDialog": {
+                            "greeting": "hi"
+                        },
+                        "partialEmptyDialog": {
+                            "language": "en",
+                            "greeting": "hi",
+                            "farewell": {
+                                "phrase": "bye"
+                            }
+                        },
+                        "nonEmptyDialog": {
+                            "greeting": "konnichiwa",
+                            "farewell": {
+                                "phrase": "sayonara"
+                            }
+                        }
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"dialog\": {\n        \"language\": \"en\"\n    },\n    \"dialogList\": [\n        {\n        },\n        {\n            \"farewell\": {}\n        },\n        {\n            \"language\": \"it\",\n            \"greeting\": \"ciao\",\n            \"farewell\": {\n                \"phrase\": \"arrivederci\"\n            }\n        }\n    ],\n    \"dialogMap\": {\n        \"emptyDialog\": {\n        },\n        \"partialEmptyDialog\": {\n            \"language\": \"en\",\n            \"farewell\": {}\n        },\n        \"nonEmptyDialog\": {\n            \"greeting\": \"konnichiwa\",\n            \"farewell\": {\n                \"phrase\": \"sayonara\"\n            }\n        }\n    }\n}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for OperationWithRequiredMembers operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2020-07-14",
+            "jsonVersion": "1.0"
+        },
+        "shapes": {
+            "OperationWithRequiredMembersOutput": {
+                "type": "structure",
+                "required": [
+                    "requiredString",
+                    "requiredBoolean",
+                    "requiredList",
+                    "requiredTimestamp",
+                    "requiredBlob",
+                    "requiredByte",
+                    "requiredShort",
+                    "requiredInteger",
+                    "requiredLong",
+                    "requiredFloat",
+                    "requiredDouble",
+                    "requiredMap"
+                ],
+                "members": {
+                    "requiredString": {
+                        "shape": "String"
+                    },
+                    "requiredBoolean": {
+                        "shape": "Boolean"
+                    },
+                    "requiredList": {
+                        "shape": "RequiredStringList"
+                    },
+                    "requiredTimestamp": {
+                        "shape": "Timestamp"
+                    },
+                    "requiredBlob": {
+                        "shape": "Blob"
+                    },
+                    "requiredByte": {
+                        "shape": "Byte"
+                    },
+                    "requiredShort": {
+                        "shape": "Short"
+                    },
+                    "requiredInteger": {
+                        "shape": "Integer"
+                    },
+                    "requiredLong": {
+                        "shape": "Long"
+                    },
+                    "requiredFloat": {
+                        "shape": "Float"
+                    },
+                    "requiredDouble": {
+                        "shape": "Double"
+                    },
+                    "requiredMap": {
+                        "shape": "RequiredStringMap"
+                    }
+                }
+            },
+            "String": {
+                "type": "string"
+            },
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "RequiredStringList": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            },
+            "Timestamp": {
+                "type": "timestamp"
+            },
+            "Blob": {
+                "type": "blob"
+            },
+            "Byte": {
+                "type": "byte",
+                "box": true
+            },
+            "Short": {
+                "type": "short",
+                "box": true
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "Long": {
+                "type": "long",
+                "box": true
+            },
+            "Float": {
+                "type": "float",
+                "box": true
+            },
+            "Double": {
+                "type": "double",
+                "box": true
+            },
+            "RequiredStringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                }
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson10ClientErrorCorrectsWhenServerFailsToSerializeRequiredValues",
+                "given": {
+                    "name": "OperationWithRequiredMembers",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "OperationWithRequiredMembersOutput"
+                    }
+                },
+                "description": "Client error corrects when server fails to serialize required values.",
+                "result": {
+                    "requiredString": "",
+                    "requiredBoolean": false,
+                    "requiredList": [],
+                    "requiredTimestamp": 0,
+                    "requiredBlob": "",
+                    "requiredByte": 0,
+                    "requiredShort": 0,
+                    "requiredInteger": 0,
+                    "requiredLong": 0,
+                    "requiredFloat": 0.0,
+                    "requiredDouble": 0.0,
+                    "requiredMap": {}
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for SimpleScalarProperties operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2020-07-14",
+            "jsonVersion": "1.0"
+        },
+        "shapes": {
+            "SimpleScalarPropertiesOutput": {
+                "type": "structure",
+                "members": {
+                    "floatValue": {
+                        "shape": "Float"
+                    },
+                    "doubleValue": {
+                        "shape": "Double"
+                    }
+                }
+            },
+            "Float": {
+                "type": "float",
+                "box": true
+            },
+            "Double": {
+                "type": "double",
+                "box": true
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson10SupportsNaNFloatInputs",
+                "given": {
+                    "name": "SimpleScalarProperties",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "SimpleScalarPropertiesOutput"
+                    }
+                },
+                "description": "Supports handling NaN float values.",
+                "result": {
+                    "floatValue": "NaN",
+                    "doubleValue": "NaN"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"floatValue\": \"NaN\",\n    \"doubleValue\": \"NaN\"\n}"
+                }
+            },
+            {
+                "id": "AwsJson10SupportsInfinityFloatInputs",
+                "given": {
+                    "name": "SimpleScalarProperties",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "SimpleScalarPropertiesOutput"
+                    }
+                },
+                "description": "Supports handling Infinity float values.",
+                "result": {
+                    "floatValue": "Infinity",
+                    "doubleValue": "Infinity"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"floatValue\": \"Infinity\",\n    \"doubleValue\": \"Infinity\"\n}"
+                }
+            },
+            {
+                "id": "AwsJson10SupportsNegativeInfinityFloatInputs",
+                "given": {
+                    "name": "SimpleScalarProperties",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "SimpleScalarPropertiesOutput"
+                    }
+                },
+                "description": "Supports handling -Infinity float values.",
+                "result": {
+                    "floatValue": "-Infinity",
+                    "doubleValue": "-Infinity"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"floatValue\": \"-Infinity\",\n    \"doubleValue\": \"-Infinity\"\n}"
+                }
+            }
+        ]
+    }
+]

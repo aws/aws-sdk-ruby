@@ -1,0 +1,2020 @@
+[
+    {
+        "description": "Test cases for DatetimeOffsets operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2018-01-01",
+            "jsonVersion": "1.1"
+        },
+        "shapes": {
+            "DatetimeOffsetsOutput": {
+                "type": "structure",
+                "members": {
+                    "datetime": {
+                        "shape": "DateTime"
+                    }
+                }
+            },
+            "DateTime": {
+                "type": "timestamp",
+                "timestampFormat": "iso8601"
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson11DateTimeWithNegativeOffset",
+                "given": {
+                    "name": "DatetimeOffsets",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "DatetimeOffsetsOutput"
+                    }
+                },
+                "description": "Ensures that clients can correctly parse datetime (timestamps) with offsets",
+                "result": {
+                    "datetime": 1576540098
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "      {\n          \"datetime\": \"2019-12-16T22:48:18-01:00\"\n      }\n"
+                }
+            },
+            {
+                "id": "AwsJson11DateTimeWithPositiveOffset",
+                "given": {
+                    "name": "DatetimeOffsets",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "DatetimeOffsetsOutput"
+                    }
+                },
+                "description": "Ensures that clients can correctly parse datetime (timestamps) with offsets",
+                "result": {
+                    "datetime": 1576540098
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "      {\n          \"datetime\": \"2019-12-17T00:48:18+01:00\"\n      }\n"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for EmptyOperation operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2018-01-01",
+            "jsonVersion": "1.1"
+        },
+        "shapes": {},
+        "cases": [
+            {
+                "id": "handles_empty_output_shape",
+                "given": {
+                    "name": "EmptyOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    }
+                },
+                "description": "When no output is defined, the service is expected to return\nan empty payload, however, client must ignore a JSON payload\nif one is returned. This ensures that if output is added later,\nthen it will not break the client.",
+                "result": {},
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{}"
+                }
+            },
+            {
+                "id": "handles_unexpected_json_output",
+                "given": {
+                    "name": "EmptyOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    }
+                },
+                "description": "This client-only test builds on handles_empty_output_shape,\nby including unexpected fields in the JSON. A client\nneeds to ignore JSON output that is empty or that contains\nJSON object data.",
+                "result": {},
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"foo\": true\n}"
+                }
+            },
+            {
+                "id": "json_1_1_service_responds_with_no_payload",
+                "given": {
+                    "name": "EmptyOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    }
+                },
+                "description": "When no output is defined, the service is expected to return\nan empty payload. Despite the lack of a payload, the service\nis expected to always send a Content-Type header. Clients must\nhandle cases where a service returns a JSON object and where\na service returns no JSON at all.",
+                "result": {},
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": ""
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for FractionalSeconds operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2018-01-01",
+            "jsonVersion": "1.1"
+        },
+        "shapes": {
+            "FractionalSecondsOutput": {
+                "type": "structure",
+                "members": {
+                    "datetime": {
+                        "shape": "DateTime"
+                    }
+                }
+            },
+            "DateTime": {
+                "type": "timestamp",
+                "timestampFormat": "iso8601"
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson11DateTimeWithFractionalSeconds",
+                "given": {
+                    "name": "FractionalSeconds",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "FractionalSecondsOutput"
+                    }
+                },
+                "description": "Ensures that clients can correctly parse datetime timestamps with fractional seconds",
+                "result": {
+                    "datetime": 9.46845296123E8
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "      {\n          \"datetime\": \"2000-01-02T20:34:56.123Z\"\n      }\n"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for JsonEnums operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2018-01-01",
+            "jsonVersion": "1.1"
+        },
+        "shapes": {
+            "JsonEnumsInputOutput": {
+                "type": "structure",
+                "members": {
+                    "fooEnum1": {
+                        "shape": "FooEnum"
+                    },
+                    "fooEnum2": {
+                        "shape": "FooEnum"
+                    },
+                    "fooEnum3": {
+                        "shape": "FooEnum"
+                    },
+                    "fooEnumList": {
+                        "shape": "FooEnumList"
+                    },
+                    "fooEnumSet": {
+                        "shape": "FooEnumSet"
+                    },
+                    "fooEnumMap": {
+                        "shape": "FooEnumMap"
+                    }
+                }
+            },
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "FooEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "FooEnum"
+                }
+            },
+            "FooEnumSet": {
+                "type": "list",
+                "member": {
+                    "shape": "FooEnum"
+                }
+            },
+            "FooEnumMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "FooEnum"
+                }
+            },
+            "String": {
+                "type": "string"
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson11Enums",
+                "given": {
+                    "name": "JsonEnums",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "JsonEnumsInputOutput"
+                    },
+                    "documentation": "<p>This example serializes enums as top level properties, in lists, sets, and maps.</p>",
+                    "idempotent": true
+                },
+                "description": "Serializes simple scalar properties",
+                "result": {
+                    "fooEnum1": "Foo",
+                    "fooEnum2": "0",
+                    "fooEnum3": "1",
+                    "fooEnumList": [
+                        "Foo",
+                        "0"
+                    ],
+                    "fooEnumSet": [
+                        "Foo",
+                        "0"
+                    ],
+                    "fooEnumMap": {
+                        "hi": "Foo",
+                        "zero": "0"
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"fooEnum1\": \"Foo\",\n    \"fooEnum2\": \"0\",\n    \"fooEnum3\": \"1\",\n    \"fooEnumList\": [\n        \"Foo\",\n        \"0\"\n    ],\n    \"fooEnumSet\": [\n        \"Foo\",\n        \"0\"\n    ],\n    \"fooEnumMap\": {\n        \"hi\": \"Foo\",\n        \"zero\": \"0\"\n    }\n}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for JsonUnions operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2018-01-01",
+            "jsonVersion": "1.1"
+        },
+        "shapes": {
+            "UnionInputOutput": {
+                "type": "structure",
+                "members": {
+                    "contents": {
+                        "shape": "MyUnion"
+                    }
+                },
+                "documentation": "<p>A shared structure that contains a single union member.</p>"
+            },
+            "MyUnion": {
+                "type": "structure",
+                "members": {
+                    "stringValue": {
+                        "shape": "String"
+                    },
+                    "booleanValue": {
+                        "shape": "Boolean"
+                    },
+                    "numberValue": {
+                        "shape": "Integer"
+                    },
+                    "blobValue": {
+                        "shape": "Blob"
+                    },
+                    "timestampValue": {
+                        "shape": "Timestamp"
+                    },
+                    "enumValue": {
+                        "shape": "FooEnum"
+                    },
+                    "listValue": {
+                        "shape": "StringList"
+                    },
+                    "mapValue": {
+                        "shape": "StringMap"
+                    },
+                    "structureValue": {
+                        "shape": "GreetingStruct"
+                    }
+                },
+                "documentation": "<p>A union with a representative set of types for members.</p>",
+                "union": true
+            },
+            "String": {
+                "type": "string"
+            },
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "Blob": {
+                "type": "blob"
+            },
+            "Timestamp": {
+                "type": "timestamp"
+            },
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "StringList": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            },
+            "StringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                }
+            },
+            "GreetingStruct": {
+                "type": "structure",
+                "members": {
+                    "hi": {
+                        "shape": "String"
+                    }
+                }
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson11DeserializeStringUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "UnionInputOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes a string union value",
+                "result": {
+                    "contents": {
+                        "stringValue": "foo"
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"stringValue\": \"foo\"\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson11DeserializeBooleanUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "UnionInputOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes a boolean union value",
+                "result": {
+                    "contents": {
+                        "booleanValue": true
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"booleanValue\": true\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson11DeserializeNumberUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "UnionInputOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes a number union value",
+                "result": {
+                    "contents": {
+                        "numberValue": 1
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"numberValue\": 1\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson11DeserializeBlobUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "UnionInputOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes a blob union value",
+                "result": {
+                    "contents": {
+                        "blobValue": "foo"
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"blobValue\": \"Zm9v\"\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson11DeserializeTimestampUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "UnionInputOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes a timestamp union value",
+                "result": {
+                    "contents": {
+                        "timestampValue": 1398796238
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"timestampValue\": 1398796238\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson11DeserializeEnumUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "UnionInputOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes an enum union value",
+                "result": {
+                    "contents": {
+                        "enumValue": "Foo"
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"enumValue\": \"Foo\"\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson11DeserializeListUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "UnionInputOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes a list union value",
+                "result": {
+                    "contents": {
+                        "listValue": [
+                            "foo",
+                            "bar"
+                        ]
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"listValue\": [\"foo\", \"bar\"]\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson11DeserializeMapUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "UnionInputOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes a map union value",
+                "result": {
+                    "contents": {
+                        "mapValue": {
+                            "foo": "bar",
+                            "spam": "eggs"
+                        }
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"mapValue\": {\n            \"foo\": \"bar\",\n            \"spam\": \"eggs\"\n        }\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson11DeserializeStructureUnionValue",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "UnionInputOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Deserializes a structure union value",
+                "result": {
+                    "contents": {
+                        "structureValue": {
+                            "hi": "hello"
+                        }
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"structureValue\": {\n            \"hi\": \"hello\"\n        }\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson11DeserializeIgnoreType",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "UnionInputOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Ignores an unrecognized __type property",
+                "result": {
+                    "contents": {
+                        "structureValue": {
+                            "hi": "hello"
+                        }
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"contents\": {\n        \"__type\": \"aws.protocoltests.json10#MyUnion\",\n        \"structureValue\": {\n            \"hi\": \"hello\"\n        }\n    }\n}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for KitchenSinkOperation operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2018-01-01",
+            "jsonVersion": "1.1"
+        },
+        "shapes": {
+            "KitchenSink": {
+                "type": "structure",
+                "members": {
+                    "Blob": {
+                        "shape": "Blob"
+                    },
+                    "Boolean": {
+                        "shape": "Boolean"
+                    },
+                    "Double": {
+                        "shape": "Double"
+                    },
+                    "EmptyStruct": {
+                        "shape": "EmptyStruct"
+                    },
+                    "Float": {
+                        "shape": "Float"
+                    },
+                    "HttpdateTimestamp": {
+                        "shape": "SyntheticTimestamp_http_date"
+                    },
+                    "Integer": {
+                        "shape": "Integer"
+                    },
+                    "Iso8601Timestamp": {
+                        "shape": "SyntheticTimestamp_date_time"
+                    },
+                    "JsonValue": {
+                        "shape": "JsonValue",
+                        "jsonvalue": true
+                    },
+                    "ListOfLists": {
+                        "shape": "ListOfListOfStrings"
+                    },
+                    "ListOfMapsOfStrings": {
+                        "shape": "ListOfMapsOfStrings"
+                    },
+                    "ListOfStrings": {
+                        "shape": "ListOfStrings"
+                    },
+                    "ListOfStructs": {
+                        "shape": "ListOfStructs"
+                    },
+                    "Long": {
+                        "shape": "Long"
+                    },
+                    "MapOfListsOfStrings": {
+                        "shape": "MapOfListsOfStrings"
+                    },
+                    "MapOfMaps": {
+                        "shape": "MapOfMapOfStrings"
+                    },
+                    "MapOfStrings": {
+                        "shape": "MapOfStrings"
+                    },
+                    "MapOfStructs": {
+                        "shape": "MapOfStructs"
+                    },
+                    "RecursiveList": {
+                        "shape": "ListOfKitchenSinks"
+                    },
+                    "RecursiveMap": {
+                        "shape": "MapOfKitchenSinks"
+                    },
+                    "RecursiveStruct": {
+                        "shape": "KitchenSink"
+                    },
+                    "SimpleStruct": {
+                        "shape": "SimpleStruct"
+                    },
+                    "String": {
+                        "shape": "String"
+                    },
+                    "StructWithJsonName": {
+                        "shape": "StructWithJsonName"
+                    },
+                    "Timestamp": {
+                        "shape": "Timestamp"
+                    },
+                    "UnixTimestamp": {
+                        "shape": "SyntheticTimestamp_epoch_seconds"
+                    }
+                }
+            },
+            "Blob": {
+                "type": "blob"
+            },
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "Double": {
+                "type": "double",
+                "box": true
+            },
+            "EmptyStruct": {
+                "type": "structure",
+                "members": {}
+            },
+            "Float": {
+                "type": "float",
+                "box": true
+            },
+            "SyntheticTimestamp_http_date": {
+                "type": "timestamp",
+                "timestampFormat": "rfc822"
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "SyntheticTimestamp_date_time": {
+                "type": "timestamp",
+                "timestampFormat": "iso8601"
+            },
+            "JsonValue": {
+                "type": "string"
+            },
+            "ListOfListOfStrings": {
+                "type": "list",
+                "member": {
+                    "shape": "ListOfStrings"
+                }
+            },
+            "ListOfMapsOfStrings": {
+                "type": "list",
+                "member": {
+                    "shape": "MapOfStrings"
+                }
+            },
+            "ListOfStrings": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            },
+            "ListOfStructs": {
+                "type": "list",
+                "member": {
+                    "shape": "SimpleStruct"
+                }
+            },
+            "Long": {
+                "type": "long",
+                "box": true
+            },
+            "MapOfListsOfStrings": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "ListOfStrings"
+                }
+            },
+            "MapOfMapOfStrings": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "MapOfStrings"
+                }
+            },
+            "MapOfStrings": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                }
+            },
+            "MapOfStructs": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "SimpleStruct"
+                }
+            },
+            "ListOfKitchenSinks": {
+                "type": "list",
+                "member": {
+                    "shape": "KitchenSink"
+                }
+            },
+            "MapOfKitchenSinks": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "KitchenSink"
+                }
+            },
+            "SimpleStruct": {
+                "type": "structure",
+                "members": {
+                    "Value": {
+                        "shape": "String"
+                    }
+                }
+            },
+            "String": {
+                "type": "string"
+            },
+            "StructWithJsonName": {
+                "type": "structure",
+                "members": {
+                    "Value": {
+                        "shape": "String",
+                        "locationName": "RenamedMember"
+                    }
+                }
+            },
+            "Timestamp": {
+                "type": "timestamp"
+            },
+            "SyntheticTimestamp_epoch_seconds": {
+                "type": "timestamp",
+                "timestampFormat": "unixTimestamp"
+            }
+        },
+        "cases": [
+            {
+                "id": "parses_operations_with_empty_json_bodies",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses operations with empty JSON bodies",
+                "result": {},
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{}"
+                }
+            },
+            {
+                "id": "parses_string_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses string shapes",
+                "result": {
+                    "String": "string-value"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"String\":\"string-value\"}"
+                }
+            },
+            {
+                "id": "parses_integer_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses integer shapes",
+                "result": {
+                    "Integer": 1234
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"Integer\":1234}"
+                }
+            },
+            {
+                "id": "parses_long_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses long shapes",
+                "result": {
+                    "Long": 1234567890123456789
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"Long\":1234567890123456789}"
+                }
+            },
+            {
+                "id": "parses_float_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses float shapes",
+                "result": {
+                    "Float": 1234.5
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"Float\":1234.5}"
+                }
+            },
+            {
+                "id": "parses_double_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses double shapes",
+                "result": {
+                    "Double": 1.2345678912345679E8
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"Double\":123456789.12345679}"
+                }
+            },
+            {
+                "id": "parses_boolean_shapes_true",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses boolean shapes (true)",
+                "result": {
+                    "Boolean": true
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"Boolean\":true}"
+                }
+            },
+            {
+                "id": "parses_boolean_false",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses boolean (false)",
+                "result": {
+                    "Boolean": false
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"Boolean\":false}"
+                }
+            },
+            {
+                "id": "parses_blob_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses blob shapes",
+                "result": {
+                    "Blob": "binary-value"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"Blob\":\"YmluYXJ5LXZhbHVl\"}"
+                }
+            },
+            {
+                "id": "parses_timestamp_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses timestamp shapes",
+                "result": {
+                    "Timestamp": 946845296
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"Timestamp\":946845296}"
+                }
+            },
+            {
+                "id": "parses_iso8601_timestamps",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses iso8601 timestamps",
+                "result": {
+                    "Iso8601Timestamp": 946845296
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"Iso8601Timestamp\":\"2000-01-02T20:34:56Z\"}"
+                }
+            },
+            {
+                "id": "parses_httpdate_timestamps",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses httpdate timestamps",
+                "result": {
+                    "HttpdateTimestamp": 946845296
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"HttpdateTimestamp\":\"Sun, 02 Jan 2000 20:34:56 GMT\"}"
+                }
+            },
+            {
+                "id": "parses_list_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses list shapes",
+                "result": {
+                    "ListOfStrings": [
+                        "abc",
+                        "mno",
+                        "xyz"
+                    ]
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"ListOfStrings\":[\"abc\",\"mno\",\"xyz\"]}"
+                }
+            },
+            {
+                "id": "parses_list_of_map_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses list of map shapes",
+                "result": {
+                    "ListOfMapsOfStrings": [
+                        {
+                            "size": "large"
+                        },
+                        {
+                            "color": "red"
+                        }
+                    ]
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"ListOfMapsOfStrings\":[{\"size\":\"large\"},{\"color\":\"red\"}]}"
+                }
+            },
+            {
+                "id": "parses_list_of_list_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses list of list shapes",
+                "result": {
+                    "ListOfLists": [
+                        [
+                            "abc",
+                            "mno",
+                            "xyz"
+                        ],
+                        [
+                            "hjk",
+                            "qrs",
+                            "tuv"
+                        ]
+                    ]
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"ListOfLists\":[[\"abc\",\"mno\",\"xyz\"],[\"hjk\",\"qrs\",\"tuv\"]]}"
+                }
+            },
+            {
+                "id": "parses_list_of_structure_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses list of structure shapes",
+                "result": {
+                    "ListOfStructs": [
+                        {
+                            "Value": "value-1"
+                        },
+                        {
+                            "Value": "value-2"
+                        }
+                    ]
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"ListOfStructs\":[{\"Value\":\"value-1\"},{\"Value\":\"value-2\"}]}"
+                }
+            },
+            {
+                "id": "parses_list_of_recursive_structure_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses list of recursive structure shapes",
+                "result": {
+                    "RecursiveList": [
+                        {
+                            "RecursiveList": [
+                                {
+                                    "RecursiveList": [
+                                        {
+                                            "String": "value"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"RecursiveList\":[{\"RecursiveList\":[{\"RecursiveList\":[{\"String\":\"value\"}]}]}]}"
+                }
+            },
+            {
+                "id": "parses_map_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses map shapes",
+                "result": {
+                    "MapOfStrings": {
+                        "size": "large",
+                        "color": "red"
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"MapOfStrings\":{\"size\":\"large\",\"color\":\"red\"}}"
+                }
+            },
+            {
+                "id": "parses_map_of_list_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses map of list shapes",
+                "result": {
+                    "MapOfListsOfStrings": {
+                        "sizes": [
+                            "large",
+                            "small"
+                        ],
+                        "colors": [
+                            "red",
+                            "green"
+                        ]
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"MapOfListsOfStrings\":{\"sizes\":[\"large\",\"small\"],\"colors\":[\"red\",\"green\"]}}"
+                }
+            },
+            {
+                "id": "parses_map_of_map_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses map of map shapes",
+                "result": {
+                    "MapOfMaps": {
+                        "sizes": {
+                            "large": "L",
+                            "medium": "M"
+                        },
+                        "colors": {
+                            "red": "R",
+                            "blue": "B"
+                        }
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"MapOfMaps\":{\"sizes\":{\"large\":\"L\",\"medium\":\"M\"},\"colors\":{\"red\":\"R\",\"blue\":\"B\"}}}"
+                }
+            },
+            {
+                "id": "parses_map_of_structure_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses map of structure shapes",
+                "result": {
+                    "MapOfStructs": {
+                        "size": {
+                            "Value": "small"
+                        },
+                        "color": {
+                            "Value": "red"
+                        }
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"MapOfStructs\":{\"size\":{\"Value\":\"small\"},\"color\":{\"Value\":\"red\"}}}"
+                }
+            },
+            {
+                "id": "parses_map_of_recursive_structure_shapes",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses map of recursive structure shapes",
+                "result": {
+                    "RecursiveMap": {
+                        "key-1": {
+                            "RecursiveMap": {
+                                "key-2": {
+                                    "RecursiveMap": {
+                                        "key-3": {
+                                            "String": "value"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\"RecursiveMap\":{\"key-1\":{\"RecursiveMap\":{\"key-2\":{\"RecursiveMap\":{\"key-3\":{\"String\":\"value\"}}}}}}}"
+                }
+            },
+            {
+                "id": "parses_the_request_id_from_the_response",
+                "given": {
+                    "name": "KitchenSinkOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "KitchenSink"
+                    },
+                    "errors": [
+                        {
+                            "shape": "ErrorWithMembers"
+                        },
+                        {
+                            "shape": "ErrorWithoutMembers"
+                        }
+                    ]
+                },
+                "description": "Parses the request id from the response",
+                "result": {},
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1",
+                        "X-Amzn-Requestid": "amazon-uniq-request-id"
+                    },
+                    "body": "{}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for NullOperation operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2018-01-01",
+            "jsonVersion": "1.1"
+        },
+        "shapes": {
+            "NullOperationInputOutput": {
+                "type": "structure",
+                "members": {
+                    "string": {
+                        "shape": "String"
+                    },
+                    "sparseStringList": {
+                        "shape": "SparseStringList"
+                    },
+                    "sparseStringMap": {
+                        "shape": "SparseStringMap"
+                    }
+                }
+            },
+            "String": {
+                "type": "string"
+            },
+            "SparseStringList": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            },
+            "SparseStringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                }
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson11StructuresDontDeserializeNullValues",
+                "given": {
+                    "name": "NullOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "NullOperationInputOutput"
+                    }
+                },
+                "description": "Null structure values are dropped",
+                "result": {},
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"string\": null\n}"
+                }
+            },
+            {
+                "id": "AwsJson11MapsDeserializeNullValues",
+                "given": {
+                    "name": "NullOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "NullOperationInputOutput"
+                    }
+                },
+                "description": "Deserializes null values in maps",
+                "result": {
+                    "sparseStringMap": {
+                        "foo": null
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"sparseStringMap\": {\n        \"foo\": null\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson11ListsDeserializeNull",
+                "given": {
+                    "name": "NullOperation",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "NullOperationInputOutput"
+                    }
+                },
+                "description": "Deserializes null values in lists",
+                "result": {
+                    "sparseStringList": [
+                        null
+                    ]
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"sparseStringList\": [\n        null\n    ]\n}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for PutAndGetInlineDocuments operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2018-01-01",
+            "jsonVersion": "1.1"
+        },
+        "shapes": {
+            "PutAndGetInlineDocumentsInputOutput": {
+                "type": "structure",
+                "members": {
+                    "inlineDocument": {
+                        "shape": "Document"
+                    }
+                }
+            },
+            "Document": {
+                "type": "structure",
+                "members": {},
+                "document": true
+            }
+        },
+        "cases": [
+            {
+                "id": "PutAndGetInlineDocumentsInput",
+                "given": {
+                    "name": "PutAndGetInlineDocuments",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "PutAndGetInlineDocumentsInputOutput"
+                    },
+                    "documentation": "<p>This example serializes an inline document as part of the payload.</p>"
+                },
+                "description": "Serializes inline documents in a JSON response.",
+                "result": {
+                    "inlineDocument": {
+                        "foo": "bar"
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"inlineDocument\": {\"foo\": \"bar\"}\n}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for SimpleScalarProperties operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2018-01-01",
+            "jsonVersion": "1.1"
+        },
+        "shapes": {
+            "SimpleScalarPropertiesInputOutput": {
+                "type": "structure",
+                "members": {
+                    "floatValue": {
+                        "shape": "Float"
+                    },
+                    "doubleValue": {
+                        "shape": "Double"
+                    }
+                }
+            },
+            "Float": {
+                "type": "float",
+                "box": true
+            },
+            "Double": {
+                "type": "double",
+                "box": true
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson11SupportsNaNFloatInputs",
+                "given": {
+                    "name": "SimpleScalarProperties",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "SimpleScalarPropertiesInputOutput"
+                    }
+                },
+                "description": "Supports handling NaN float values.",
+                "result": {
+                    "floatValue": "NaN",
+                    "doubleValue": "NaN"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"floatValue\": \"NaN\",\n    \"doubleValue\": \"NaN\"\n}"
+                }
+            },
+            {
+                "id": "AwsJson11SupportsInfinityFloatInputs",
+                "given": {
+                    "name": "SimpleScalarProperties",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "SimpleScalarPropertiesInputOutput"
+                    }
+                },
+                "description": "Supports handling Infinity float values.",
+                "result": {
+                    "floatValue": "Infinity",
+                    "doubleValue": "Infinity"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"floatValue\": \"Infinity\",\n    \"doubleValue\": \"Infinity\"\n}"
+                }
+            },
+            {
+                "id": "AwsJson11SupportsNegativeInfinityFloatInputs",
+                "given": {
+                    "name": "SimpleScalarProperties",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "SimpleScalarPropertiesInputOutput"
+                    }
+                },
+                "description": "Supports handling -Infinity float values.",
+                "result": {
+                    "floatValue": "-Infinity",
+                    "doubleValue": "-Infinity"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.1"
+                    },
+                    "body": "{\n    \"floatValue\": \"-Infinity\",\n    \"doubleValue\": \"-Infinity\"\n}"
+                }
+            }
+        ]
+    }
+]
