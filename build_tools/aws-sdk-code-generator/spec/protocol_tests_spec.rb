@@ -26,7 +26,7 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
           matcher.match_req_host(test_case, ctx.http_request, self)
           matcher.match_req_method(test_case, ctx.http_request, self)
           matcher.match_req_uri(test_case, ctx.http_request, self)
-          matcher.match_req_headers(test_case, ctx.http_request, self)
+          matcher.match_req_headers(suite, test_case, ctx.http_request, self)
           matcher.exclude_req_headers(test_case, ctx.http_request, self)
           matcher.match_req_body(suite, test_case, ctx.http_request, self)
         end
