@@ -161,7 +161,9 @@ module ProtocolTestsHelper
       protocol = suite['metadata']['protocol']
       if (expected_headers = test_case['serialized']['headers'])
         headers = normalize_headers(http_req.headers)
-        expected_headers['Content-Type'] += '; charset=utf-8' if %w[query ec2].include?(protocol)
+        if expected_headers['Content-Type'] && %w[query ec2].include?(protocol)
+          expected_headers['Content-Type'] += '; charset=utf-8'
+        end
         expected_headers = normalize_headers(expected_headers)
         it.expect(headers).to include(expected_headers)
       end
