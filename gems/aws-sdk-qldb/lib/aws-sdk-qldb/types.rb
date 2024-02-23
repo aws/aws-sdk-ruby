@@ -337,7 +337,9 @@ module Aws::QLDB
     # @!attribute [rw] encryption_description
     #   Information about the encryption of data at rest in the ledger. This
     #   includes the current status, the KMS key, and when the key became
-    #   inaccessible (in the case of an error).
+    #   inaccessible (in the case of an error). If this parameter is
+    #   undefined, the ledger uses an Amazon Web Services owned KMS key for
+    #   encryption.
     #   @return [Types::LedgerEncryptionDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/DescribeLedgerResponse AWS API Documentation
@@ -805,7 +807,9 @@ module Aws::QLDB
     #   The Amazon Resource Name (ARN) of the customer managed KMS key that
     #   the ledger uses for encryption at rest. If this parameter is
     #   undefined, the ledger uses an Amazon Web Services owned KMS key for
-    #   encryption.
+    #   encryption. It will display `AWS_OWNED_KMS_KEY` when updating the
+    #   ledger's encryption configuration to the Amazon Web Services owned
+    #   KMS key.
     #   @return [String]
     #
     # @!attribute [rw] encryption_status

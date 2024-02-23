@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.218.0 (2024-02-23)
+------------------
+
+* Feature - Add pattern and length based validations for DBShardGroupIdentifier
+
 1.217.0 (2024-02-16)
 ------------------
 

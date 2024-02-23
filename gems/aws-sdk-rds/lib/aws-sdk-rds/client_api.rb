@@ -249,6 +249,7 @@ module Aws::RDS
     DBSecurityGroups = Shapes::ListShape.new(name: 'DBSecurityGroups')
     DBShardGroup = Shapes::StructureShape.new(name: 'DBShardGroup')
     DBShardGroupAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBShardGroupAlreadyExistsFault')
+    DBShardGroupIdentifier = Shapes::StringShape.new(name: 'DBShardGroupIdentifier')
     DBShardGroupNotFoundFault = Shapes::StructureShape.new(name: 'DBShardGroupNotFoundFault')
     DBShardGroupsList = Shapes::ListShape.new(name: 'DBShardGroupsList')
     DBSnapshot = Shapes::StructureShape.new(name: 'DBSnapshot')
@@ -1996,7 +1997,7 @@ module Aws::RDS
     DBSecurityGroups.member = Shapes::ShapeRef.new(shape: DBSecurityGroup, location_name: "DBSecurityGroup")
 
     DBShardGroup.add_member(:db_shard_group_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "DBShardGroupResourceId"))
-    DBShardGroup.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBShardGroupIdentifier"))
+    DBShardGroup.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: DBShardGroupIdentifier, location_name: "DBShardGroupIdentifier"))
     DBShardGroup.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterIdentifier"))
     DBShardGroup.add_member(:max_acu, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxACU"))
     DBShardGroup.add_member(:compute_redundancy, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ComputeRedundancy"))
@@ -2193,7 +2194,7 @@ module Aws::RDS
     DeleteDBSecurityGroupMessage.add_member(:db_security_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBSecurityGroupName"))
     DeleteDBSecurityGroupMessage.struct_class = Types::DeleteDBSecurityGroupMessage
 
-    DeleteDBShardGroupMessage.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBShardGroupIdentifier"))
+    DeleteDBShardGroupMessage.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: DBShardGroupIdentifier, required: true, location_name: "DBShardGroupIdentifier"))
     DeleteDBShardGroupMessage.struct_class = Types::DeleteDBShardGroupMessage
 
     DeleteDBSnapshotMessage.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBSnapshotIdentifier"))
@@ -2432,7 +2433,7 @@ module Aws::RDS
     DescribeDBSecurityGroupsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeDBSecurityGroupsMessage.struct_class = Types::DescribeDBSecurityGroupsMessage
 
-    DescribeDBShardGroupsMessage.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBShardGroupIdentifier"))
+    DescribeDBShardGroupsMessage.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: DBShardGroupIdentifier, location_name: "DBShardGroupIdentifier"))
     DescribeDBShardGroupsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeDBShardGroupsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeDBShardGroupsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
@@ -3187,7 +3188,7 @@ module Aws::RDS
     ModifyDBRecommendationMessage.add_member(:recommended_action_updates, Shapes::ShapeRef.new(shape: RecommendedActionUpdateList, location_name: "RecommendedActionUpdates"))
     ModifyDBRecommendationMessage.struct_class = Types::ModifyDBRecommendationMessage
 
-    ModifyDBShardGroupMessage.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBShardGroupIdentifier"))
+    ModifyDBShardGroupMessage.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: DBShardGroupIdentifier, required: true, location_name: "DBShardGroupIdentifier"))
     ModifyDBShardGroupMessage.add_member(:max_acu, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "MaxACU"))
     ModifyDBShardGroupMessage.struct_class = Types::ModifyDBShardGroupMessage
 
@@ -3561,7 +3562,7 @@ module Aws::RDS
     RebootDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
     RebootDBInstanceResult.struct_class = Types::RebootDBInstanceResult
 
-    RebootDBShardGroupMessage.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBShardGroupIdentifier"))
+    RebootDBShardGroupMessage.add_member(:db_shard_group_identifier, Shapes::ShapeRef.new(shape: DBShardGroupIdentifier, required: true, location_name: "DBShardGroupIdentifier"))
     RebootDBShardGroupMessage.struct_class = Types::RebootDBShardGroupMessage
 
     RecommendedAction.add_member(:action_id, Shapes::ShapeRef.new(shape: String, location_name: "ActionId"))

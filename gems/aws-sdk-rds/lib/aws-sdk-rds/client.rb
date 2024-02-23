@@ -9739,7 +9739,7 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_db_shard_group({
-    #     db_shard_group_identifier: "String", # required
+    #     db_shard_group_identifier: "DBShardGroupIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -13992,7 +13992,7 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_shard_groups({
-    #     db_shard_group_identifier: "String",
+    #     db_shard_group_identifier: "DBShardGroupIdentifier",
     #     filters: [
     #       {
     #         name: "String", # required
@@ -21347,7 +21347,7 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_db_shard_group({
-    #     db_shard_group_identifier: "String", # required
+    #     db_shard_group_identifier: "DBShardGroupIdentifier", # required
     #     max_acu: 1.0,
     #   })
     #
@@ -23274,7 +23274,7 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.reboot_db_shard_group({
-    #     db_shard_group_identifier: "String", # required
+    #     db_shard_group_identifier: "DBShardGroupIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -30414,7 +30414,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.217.0'
+      context[:gem_version] = '1.218.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
