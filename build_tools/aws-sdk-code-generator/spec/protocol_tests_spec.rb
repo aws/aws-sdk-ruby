@@ -5,6 +5,8 @@ require_relative 'protocol_tests_spec_helper'
 require 'rexml/document'
 
 ProtocolTestsHelper.fixtures.each do |protocol, files|
+  # next if protocol == 'json_old'
+
   describe(protocol) do
     let(:matcher) { ProtocolTestsHelper::Matcher.new }
     describe 'input' do
@@ -38,7 +40,7 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
           client.handle(step: :send) do |context|
             context.http_response.signal_headers(
               test_case['response']['status_code'],
-              test_case['response']['headers']
+              test_case['response']['headers'] ||= {}
             )
 
             # temporary work-around for header case-sensitive test
