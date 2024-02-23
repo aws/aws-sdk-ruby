@@ -12,6 +12,10 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
     describe 'input' do
       ProtocolTestsHelper.each_test_case(self, files['input']) do |group, suite, test_case, id, description|
         group.it(description) do
+          if id.include?('IdempotencyToken')
+            allow(SecureRandom).to receive(:uuid).and_return('00000000-0000-4000-8000-000000000000')
+          end
+
           client = ProtocolTestsHelper.client_for(suite, test_case, "Input_#{id}")
           ctx = nil
           client.handle(step: :send) do |context|
