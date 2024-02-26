@@ -10,11 +10,9 @@ module AwsSdkCodeGenerator
         when 'boolean' then 'bool'
         when 'byte' then '::Integer'
         when 'character' then '::String'
-        when 'double' then '::Float'
-        when 'float' then '::Float'
-        when 'integer' then '::Integer'
+        when 'double', 'float' then '::Float'
+        when 'integer', 'long', 'short' then '::Integer'
         when 'list' then "::Array[#{to_type(shape['member'], api)}]"
-        when 'long' then '::Integer'
         when 'map' then "::Hash[#{to_type(shape['key'], api)}, #{to_type(shape['value'], api)}]"
         when 'string'
           if shape['enum']

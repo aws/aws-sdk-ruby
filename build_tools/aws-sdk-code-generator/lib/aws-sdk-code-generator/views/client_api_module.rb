@@ -6,7 +6,7 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      SKIP_TRAITS = Set.new(%w(shape deprecated location locationName documentation))
+      SKIP_TRAITS = Set.new(%w[shape deprecated location locationName documentation])
 
       SHAPE_CLASSES = {
         'blob' => 'BlobShape',
@@ -16,13 +16,14 @@ module AwsSdkCodeGenerator
         'double' => 'FloatShape',
         'float' => 'FloatShape',
         'integer' => 'IntegerShape',
-        'list' => 'ListShape',
         'long' => 'IntegerShape',
+        'short' => 'IntegerShape',
+        'list' => 'ListShape',
         'map' => 'MapShape',
         'string' => 'StringShape',
         'structure' => 'StructureShape',
         'timestamp' => 'TimestampShape'
-      }
+      }.freeze
 
       SHAPE_KEYS = {
         # keep
@@ -65,7 +66,7 @@ module AwsSdkCodeGenerator
         'wrapper' => false,
         'xmlOrder' => false,
         'retryable' => false,
-      }
+      }.freeze
 
       METADATA_KEYS = {
         # keep all
@@ -89,7 +90,7 @@ module AwsSdkCodeGenerator
         'awsQueryCompatible' => true, # AwsQuery migration
         # ignore
         'ripServiceName' => true
-      }
+      }.freeze
 
       # @option options [required, Service] :service
       def initialize(options)
@@ -217,7 +218,7 @@ module AwsSdkCodeGenerator
               end
             end
 
-            %w(input output).each do |key|
+            %w[input output].each do |key|
               if operation[key]
                 o.shape_references << "o.#{key} = #{operation_ref(operation[key])}"
               else

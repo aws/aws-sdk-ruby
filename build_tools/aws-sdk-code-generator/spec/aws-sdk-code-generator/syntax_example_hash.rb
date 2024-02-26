@@ -443,8 +443,9 @@ module AwsSdkCodeGenerator
                   'float' => { 'shape' => 'Float' },
                   'integer' => { 'shape' => 'Integer' },
                   'long' => { 'shape' => 'Long' },
+                  'short' => { 'shape' => 'Short' },
                   'string' => { 'shape' => 'StringShape' },
-                  'timestamp' => { 'shape' => 'Timestamp' },
+                  'timestamp' => { 'shape' => 'Timestamp' }
                 }
               },
               'Blob' => { 'type' => 'blob' },
@@ -454,7 +455,8 @@ module AwsSdkCodeGenerator
               'Double' => { 'type' => 'double' },
               'Float' => { 'type' => 'float' },
               'Long' => { 'type' => 'long' },
-              'Timestamp' => { 'type' => 'timestamp' },
+              'Short' => { 'type' => 'short' },
+              'Timestamp' => { 'type' => 'timestamp' }
             }
           }
         )
