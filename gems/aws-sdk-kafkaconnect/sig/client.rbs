@@ -142,6 +142,7 @@ module Aws
                                 },
                               ],
                               service_execution_role_arn: ::String,
+                              ?tags: Hash[::String, ::String],
                               ?worker_configuration: {
                                 revision: ::Integer,
                                 worker_configuration_arn: ::String
@@ -167,7 +168,8 @@ module Aws
                                       object_version: ::String?
                                     }
                                   },
-                                  name: ::String
+                                  name: ::String,
+                                  ?tags: Hash[::String, ::String]
                                 ) -> _CreateCustomPluginResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomPluginResponseSuccess
 
@@ -177,12 +179,14 @@ module Aws
         def latest_revision: () -> Types::WorkerConfigurationRevisionSummary
         def name: () -> ::String
         def worker_configuration_arn: () -> ::String
+        def worker_configuration_state: () -> ("ACTIVE" | "DELETING")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#create_worker_configuration-instance_method
       def create_worker_configuration: (
                                          ?description: ::String,
                                          name: ::String,
-                                         properties_file_content: ::String
+                                         properties_file_content: ::String,
+                                         ?tags: Hash[::String, ::String]
                                        ) -> _CreateWorkerConfigurationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkerConfigurationResponseSuccess
 
@@ -208,6 +212,17 @@ module Aws
                                   custom_plugin_arn: ::String
                                 ) -> _DeleteCustomPluginResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomPluginResponseSuccess
+
+      interface _DeleteWorkerConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkerConfigurationResponse]
+        def worker_configuration_arn: () -> ::String
+        def worker_configuration_state: () -> ("ACTIVE" | "DELETING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#delete_worker_configuration-instance_method
+      def delete_worker_configuration: (
+                                         worker_configuration_arn: ::String
+                                       ) -> _DeleteWorkerConfigurationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkerConfigurationResponseSuccess
 
       interface _DescribeConnectorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConnectorResponse]
@@ -258,6 +273,7 @@ module Aws
         def latest_revision: () -> Types::WorkerConfigurationRevisionDescription
         def name: () -> ::String
         def worker_configuration_arn: () -> ::String
+        def worker_configuration_state: () -> ("ACTIVE" | "DELETING")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#describe_worker_configuration-instance_method
       def describe_worker_configuration: (
@@ -286,9 +302,20 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#list_custom_plugins-instance_method
       def list_custom_plugins: (
                                  ?max_results: ::Integer,
+                                 ?name_prefix: ::String,
                                  ?next_token: ::String
                                ) -> _ListCustomPluginsResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomPluginsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
       interface _ListWorkerConfigurationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkerConfigurationsResponse]
@@ -298,9 +325,30 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#list_worker_configurations-instance_method
       def list_worker_configurations: (
                                         ?max_results: ::Integer,
+                                        ?name_prefix: ::String,
                                         ?next_token: ::String
                                       ) -> _ListWorkerConfigurationsResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkerConfigurationsResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KafkaConnect/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
 
       interface _UpdateConnectorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectorResponse]

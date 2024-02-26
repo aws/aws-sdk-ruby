@@ -498,6 +498,7 @@ module Aws::Drs
     #   resp.source_server.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
     #   resp.source_server.data_replication_info.staging_availability_zone #=> String
     #   resp.source_server.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.source_server.life_cycle.added_to_service_date_time #=> String
@@ -1013,6 +1014,10 @@ module Aws::Drs
     #   resp.items[0].event_data.conversion_properties.volume_to_conversion_map #=> Hash
     #   resp.items[0].event_data.conversion_properties.volume_to_conversion_map["LargeBoundedString"] #=> Hash
     #   resp.items[0].event_data.conversion_properties.volume_to_conversion_map["LargeBoundedString"]["EbsSnapshot"] #=> String
+    #   resp.items[0].event_data.conversion_properties.volume_to_product_codes #=> Hash
+    #   resp.items[0].event_data.conversion_properties.volume_to_product_codes["LargeBoundedString"] #=> Array
+    #   resp.items[0].event_data.conversion_properties.volume_to_product_codes["LargeBoundedString"][0].product_code_id #=> String
+    #   resp.items[0].event_data.conversion_properties.volume_to_product_codes["LargeBoundedString"][0].product_code_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.items[0].event_data.conversion_properties.volume_to_volume_size #=> Hash
     #   resp.items[0].event_data.conversion_properties.volume_to_volume_size["LargeBoundedString"] #=> Integer
     #   resp.items[0].event_data.conversion_server_id #=> String
@@ -1508,6 +1513,7 @@ module Aws::Drs
     #   resp.items[0].data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.items[0].data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
     #   resp.items[0].data_replication_info.staging_availability_zone #=> String
     #   resp.items[0].last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.items[0].life_cycle.added_to_service_date_time #=> String
@@ -1658,6 +1664,7 @@ module Aws::Drs
     #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
     #   resp.data_replication_info.staging_availability_zone #=> String
     #   resp.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.life_cycle.added_to_service_date_time #=> String
@@ -2234,6 +2241,7 @@ module Aws::Drs
     #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
     #   resp.data_replication_info.staging_availability_zone #=> String
     #   resp.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.life_cycle.added_to_service_date_time #=> String
@@ -2506,6 +2514,7 @@ module Aws::Drs
     #   resp.source_server.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
     #   resp.source_server.data_replication_info.staging_availability_zone #=> String
     #   resp.source_server.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.source_server.life_cycle.added_to_service_date_time #=> String
@@ -2742,6 +2751,7 @@ module Aws::Drs
     #   resp.source_server.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
     #   resp.source_server.data_replication_info.staging_availability_zone #=> String
     #   resp.source_server.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.source_server.life_cycle.added_to_service_date_time #=> String
@@ -3481,7 +3491,7 @@ module Aws::Drs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.219.0 (2024-02-26)
+------------------
+
+* Feature - This release adds support for gp3 data volumes for Multi-AZ DB Clusters.
+
 1.218.0 (2024-02-23)
 ------------------
 

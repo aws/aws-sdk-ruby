@@ -6869,6 +6869,14 @@ module Aws::RDS
     #   The details for Aurora Limitless Database.
     #   @return [Types::LimitlessDatabase]
     #
+    # @!attribute [rw] storage_throughput
+    #   The storage throughput for the DB cluster. The throughput is
+    #   automatically set based on the IOPS that you provision, and is not
+    #   configurable.
+    #
+    #   This setting is only for non-Aurora Multi-AZ DB clusters.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -6948,7 +6956,8 @@ module Aws::RDS
       :io_optimized_next_allowed_modification_time,
       :local_write_forwarding_status,
       :aws_backup_recovery_point_arn,
-      :limitless_database)
+      :limitless_database,
+      :storage_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7089,6 +7098,14 @@ module Aws::RDS
     #   Services Backup.
     #   @return [String]
     #
+    # @!attribute [rw] storage_throughput
+    #   The storage throughput for the automated backup. The throughput is
+    #   automatically set based on the IOPS that you provision, and is not
+    #   configurable.
+    #
+    #   This setting is only for non-Aurora Multi-AZ DB clusters.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterAutomatedBackup AWS API Documentation
     #
     class DBClusterAutomatedBackup < Struct.new(
@@ -7115,7 +7132,8 @@ module Aws::RDS
       :kms_key_id,
       :storage_type,
       :iops,
-      :aws_backup_recovery_point_arn)
+      :aws_backup_recovery_point_arn,
+      :storage_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7786,6 +7804,14 @@ module Aws::RDS
     #   created from.
     #   @return [String]
     #
+    # @!attribute [rw] storage_throughput
+    #   The storage throughput for the DB cluster snapshot. The throughput
+    #   is automatically set based on the IOPS that you provision, and is
+    #   not configurable.
+    #
+    #   This setting is only for non-Aurora Multi-AZ DB clusters.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshot AWS API Documentation
     #
     class DBClusterSnapshot < Struct.new(
@@ -7813,7 +7839,8 @@ module Aws::RDS
       :tag_list,
       :db_system_id,
       :storage_type,
-      :db_cluster_resource_id)
+      :db_cluster_resource_id,
+      :storage_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23872,8 +23899,7 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] db_cluster_snapshot_identifier
-    #   The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to
-    #   restore from.
+    #   The identifier for the Multi-AZ DB cluster snapshot to restore from.
     #
     #   For more information on Multi-AZ DB clusters, see [ Multi-AZ DB
     #   cluster deployments][1] in the *Amazon RDS User Guide*.
@@ -23892,9 +23918,6 @@ module Aws::RDS
     #     shared snapshot.
     #
     #   * Can't be the identifier of an Aurora DB cluster snapshot.
-    #
-    #   * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB
-    #     cluster snapshot.
     #
     #
     #
