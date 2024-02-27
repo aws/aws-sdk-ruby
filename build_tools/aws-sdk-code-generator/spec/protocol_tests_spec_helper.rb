@@ -98,7 +98,6 @@ module ProtocolTestsHelper
       case ref.shape
       when Seahorse::Model::Shapes::StructureShape
         return nil if src.nil?
-
         src.each.with_object({}) do |(key, value), params|
           member_ref = ref.shape.member(underscore(key).to_sym)
           params[underscore(key).to_sym] = format_data(member_ref, value)
@@ -141,7 +140,15 @@ module ProtocolTestsHelper
 
     def match_req_host(test_case, http_req, it)
       if (expected_host = test_case['serialized']['host'])
-        it.expect(http_req.endpoint.host).to eq(expected_host)
+        # create URI object to cover custom host paths
+        expected_host_uri = URI.parse(expected_host)
+        unless expected_host_uri.host
+          expected_host_uri = URI.parse(
+            "#{http_req.endpoint.scheme}://#{expected_host}"
+          )
+        end
+        it.expect(http_req.endpoint.host).to eq(expected_host_uri.host)
+        it.expect(http_req.endpoint.path).to start_with(expected_host_uri.path)
       end
     end
 
@@ -153,6 +160,8 @@ module ProtocolTestsHelper
 
     def match_req_uri(test_case, http_req, it)
       if (expected_uri = test_case['serialized']['uri'])
+        # normalize expected URI path
+        expected_uri = Pathname.new(expected_uri).cleanpath.to_s
         it.expect(http_req.endpoint.request_uri).to eq(expected_uri)
       end
     end
