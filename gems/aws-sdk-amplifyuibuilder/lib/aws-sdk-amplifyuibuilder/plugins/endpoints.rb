@@ -94,6 +94,8 @@ module Aws::AmplifyUIBuilder
             Aws::AmplifyUIBuilder::Endpoints::ListComponents.build(context)
           when :list_forms
             Aws::AmplifyUIBuilder::Endpoints::ListForms.build(context)
+          when :list_tags_for_resource
+            Aws::AmplifyUIBuilder::Endpoints::ListTagsForResource.build(context)
           when :list_themes
             Aws::AmplifyUIBuilder::Endpoints::ListThemes.build(context)
           when :put_metadata_flag
@@ -102,6 +104,10 @@ module Aws::AmplifyUIBuilder
             Aws::AmplifyUIBuilder::Endpoints::RefreshToken.build(context)
           when :start_codegen_job
             Aws::AmplifyUIBuilder::Endpoints::StartCodegenJob.build(context)
+          when :tag_resource
+            Aws::AmplifyUIBuilder::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::AmplifyUIBuilder::Endpoints::UntagResource.build(context)
           when :update_component
             Aws::AmplifyUIBuilder::Endpoints::UpdateComponent.build(context)
           when :update_form

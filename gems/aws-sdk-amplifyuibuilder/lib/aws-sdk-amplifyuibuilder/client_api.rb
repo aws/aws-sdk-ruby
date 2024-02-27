@@ -142,13 +142,13 @@ module Aws::AmplifyUIBuilder
     ListCodegenJobsLimit = Shapes::IntegerShape.new(name: 'ListCodegenJobsLimit')
     ListCodegenJobsRequest = Shapes::StructureShape.new(name: 'ListCodegenJobsRequest')
     ListCodegenJobsResponse = Shapes::StructureShape.new(name: 'ListCodegenJobsResponse')
-    ListComponentsLimit = Shapes::IntegerShape.new(name: 'ListComponentsLimit')
     ListComponentsRequest = Shapes::StructureShape.new(name: 'ListComponentsRequest')
     ListComponentsResponse = Shapes::StructureShape.new(name: 'ListComponentsResponse')
-    ListFormsLimit = Shapes::IntegerShape.new(name: 'ListFormsLimit')
+    ListEntityLimit = Shapes::IntegerShape.new(name: 'ListEntityLimit')
     ListFormsRequest = Shapes::StructureShape.new(name: 'ListFormsRequest')
     ListFormsResponse = Shapes::StructureShape.new(name: 'ListFormsResponse')
-    ListThemesLimit = Shapes::IntegerShape.new(name: 'ListThemesLimit')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListThemesRequest = Shapes::StructureShape.new(name: 'ListThemesRequest')
     ListThemesResponse = Shapes::StructureShape.new(name: 'ListThemesResponse')
     MutationActionSetStateParameter = Shapes::StructureShape.new(name: 'MutationActionSetStateParameter')
@@ -182,6 +182,9 @@ module Aws::AmplifyUIBuilder
     String = Shapes::StringShape.new(name: 'String')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
     Theme = Shapes::StructureShape.new(name: 'Theme')
@@ -195,6 +198,8 @@ module Aws::AmplifyUIBuilder
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TokenProviders = Shapes::StringShape.new(name: 'TokenProviders')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateComponentData = Shapes::StructureShape.new(name: 'UpdateComponentData')
     UpdateComponentRequest = Shapes::StructureShape.new(name: 'UpdateComponentRequest')
     UpdateComponentResponse = Shapes::StructureShape.new(name: 'UpdateComponentResponse')
@@ -803,7 +808,7 @@ module Aws::AmplifyUIBuilder
     ListComponentsRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     ListComponentsRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
     ListComponentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
-    ListComponentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListComponentsLimit, location: "querystring", location_name: "maxResults"))
+    ListComponentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEntityLimit, location: "querystring", location_name: "maxResults"))
     ListComponentsRequest.struct_class = Types::ListComponentsRequest
 
     ListComponentsResponse.add_member(:entities, Shapes::ShapeRef.new(shape: ComponentSummaryList, required: true, location_name: "entities"))
@@ -813,17 +818,23 @@ module Aws::AmplifyUIBuilder
     ListFormsRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     ListFormsRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
     ListFormsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
-    ListFormsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFormsLimit, location: "querystring", location_name: "maxResults"))
+    ListFormsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEntityLimit, location: "querystring", location_name: "maxResults"))
     ListFormsRequest.struct_class = Types::ListFormsRequest
 
     ListFormsResponse.add_member(:entities, Shapes::ShapeRef.new(shape: FormSummaryList, required: true, location_name: "entities"))
     ListFormsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListFormsResponse.struct_class = Types::ListFormsResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     ListThemesRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
     ListThemesRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "environmentName"))
     ListThemesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
-    ListThemesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListThemesLimit, location: "querystring", location_name: "maxResults"))
+    ListThemesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEntityLimit, location: "querystring", location_name: "maxResults"))
     ListThemesRequest.struct_class = Types::ListThemesRequest
 
     ListThemesResponse.add_member(:entities, Shapes::ShapeRef.new(shape: ThemeSummaryList, required: true, location_name: "entities"))
@@ -936,6 +947,14 @@ module Aws::AmplifyUIBuilder
 
     StrValues.member = Shapes::ShapeRef.new(shape: String)
 
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     Tags.key = Shapes::ShapeRef.new(shape: TagKey)
     Tags.value = Shapes::ShapeRef.new(shape: TagValue)
 
@@ -975,6 +994,12 @@ module Aws::AmplifyUIBuilder
 
     UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     UnauthorizedException.struct_class = Types::UnauthorizedException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateComponentData.add_member(:id, Shapes::ShapeRef.new(shape: Uuid, location_name: "id"))
     UpdateComponentData.add_member(:name, Shapes::ShapeRef.new(shape: ComponentName, location_name: "name"))
@@ -1306,6 +1331,19 @@ module Aws::AmplifyUIBuilder
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:list_themes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListThemes"
         o.http_method = "GET"
@@ -1350,6 +1388,32 @@ module Aws::AmplifyUIBuilder
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_component, Seahorse::Model::Operation.new.tap do |o|
