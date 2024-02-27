@@ -1892,8 +1892,9 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] destination_config
-    #   (Kinesis and DynamoDB Streams only) An Amazon SQS queue or Amazon
-    #   SNS topic destination for discarded records.
+    #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache
+    #   Kafka event sources only) A configuration object that specifies the
+    #   destination of an event after Lambda processes it.
     #   @return [Types::DestinationConfig]
     #
     # @!attribute [rw] topics
@@ -4676,8 +4677,8 @@ module Aws::Lambda
     #   SQS queue as the destination.
     #
     #   To retain records of failed invocations from [self-managed Kafka][3]
-    #   or [Amazon MSK][4], you can configure an Amazon SNS topic or Amazon
-    #   SQS queue as the destination.
+    #   or [Amazon MSK][4], you can configure an Amazon SNS topic, Amazon
+    #   SQS queue, or Amazon S3 bucket as the destination.
     #
     #
     #

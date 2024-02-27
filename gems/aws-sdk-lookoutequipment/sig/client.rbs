@@ -101,6 +101,7 @@ module Aws
         def inference_scheduler_arn: () -> ::String
         def inference_scheduler_name: () -> ::String
         def status: () -> ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
+        def model_quality: () -> ("QUALITY_THRESHOLD_MET" | "CANNOT_DETERMINE_QUALITY" | "POOR_QUALITY_DETECTED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#create_inference_scheduler-instance_method
       def create_inference_scheduler: (
@@ -426,6 +427,7 @@ module Aws
         def accumulated_inference_data_end_time: () -> ::Time
         def retraining_scheduler_status: () -> ("PENDING" | "RUNNING" | "STOPPING" | "STOPPED")
         def model_diagnostics_output_configuration: () -> Types::ModelDiagnosticsOutputConfiguration
+        def model_quality: () -> ("QUALITY_THRESHOLD_MET" | "CANNOT_DETERMINE_QUALITY" | "POOR_QUALITY_DETECTED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#describe_model-instance_method
       def describe_model: (
@@ -469,6 +471,7 @@ module Aws
         def auto_promotion_result_reason: () -> ::String
         def model_diagnostics_output_configuration: () -> Types::ModelDiagnosticsOutputConfiguration
         def model_diagnostics_results_object: () -> Types::S3Object
+        def model_quality: () -> ("QUALITY_THRESHOLD_MET" | "CANNOT_DETERMINE_QUALITY" | "POOR_QUALITY_DETECTED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LookoutEquipment/Client.html#describe_model_version-instance_method
       def describe_model_version: (

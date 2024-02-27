@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2024-02-20)
+------------------
+
+* Feature - This release updates a few Firehose related APIs.
+
 1.64.0 (2024-02-16)
 ------------------
 

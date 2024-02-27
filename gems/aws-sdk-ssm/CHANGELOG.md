@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.165.0 (2024-02-21)
+------------------
+
+* Feature - This release adds support for sharing Systems Manager parameters with other AWS accounts.
+
 1.164.0 (2024-01-31)
 ------------------
 

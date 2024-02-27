@@ -53,6 +53,6 @@ require_relative 'aws-sdk-medialive/customizations'
 # @!group service
 module Aws::MediaLive
 
-  GEM_VERSION = '1.115.0'
+  GEM_VERSION = '1.116.0'
 
 end

@@ -1254,6 +1254,7 @@ module Aws::SSM
       attr_accessor parameter_filters: ::Array[Types::ParameterStringFilter]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor shared: bool
       SENSITIVE: []
     end
 
@@ -2813,6 +2814,11 @@ module Aws::SSM
       SENSITIVE: [:values]
     end
 
+    class MalformedResourcePolicyDocumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class MaxDocumentSizeExceeded
       attr_accessor message: ::String
       SENSITIVE: []
@@ -3142,6 +3148,7 @@ module Aws::SSM
 
     class ParameterMetadata
       attr_accessor name: ::String
+      attr_accessor arn: ::String
       attr_accessor type: ("String" | "StringList" | "SecureString")
       attr_accessor key_id: ::String
       attr_accessor last_modified_date: ::Time
@@ -3577,6 +3584,11 @@ module Aws::SSM
       SENSITIVE: []
     end
 
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ResourcePolicyConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -3591,6 +3603,11 @@ module Aws::SSM
     class ResourcePolicyLimitExceededException
       attr_accessor limit: ::Integer
       attr_accessor limit_type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcePolicyNotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
     end

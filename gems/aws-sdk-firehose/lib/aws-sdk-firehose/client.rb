@@ -1651,36 +1651,6 @@ module Aws::Firehose
       req.send_request(options)
     end
 
-    # @option params [required, String] :delivery_stream_arn
-    #
-    # @return [Types::GetKinesisStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::GetKinesisStreamOutput#kinesis_stream_arn #kinesis_stream_arn} => String
-    #   * {Types::GetKinesisStreamOutput#credentials_for_reading_kinesis_stream #credentials_for_reading_kinesis_stream} => Types::SessionCredentials
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_kinesis_stream({
-    #     delivery_stream_arn: "DeliveryStreamARN", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.kinesis_stream_arn #=> String
-    #   resp.credentials_for_reading_kinesis_stream.access_key_id #=> String
-    #   resp.credentials_for_reading_kinesis_stream.secret_access_key #=> String
-    #   resp.credentials_for_reading_kinesis_stream.session_token #=> String
-    #   resp.credentials_for_reading_kinesis_stream.expiration #=> Time
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/GetKinesisStream AWS API Documentation
-    #
-    # @overload get_kinesis_stream(params = {})
-    # @param [Hash] params ({})
-    def get_kinesis_stream(params = {}, options = {})
-      req = build_request(:get_kinesis_stream, params)
-      req.send_request(options)
-    end
-
     # Lists your delivery streams in alphabetical order of their names.
     #
     # The number of delivery streams might be too large to return using a
@@ -2881,39 +2851,6 @@ module Aws::Firehose
       req.send_request(options)
     end
 
-    # @option params [required, Array<Types::TagrisSweepListItem>] :tagris_sweep_list
-    #
-    # @return [Types::TagrisVerifyResourcesExistOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::TagrisVerifyResourcesExistOutput#tagris_sweep_list_result #tagris_sweep_list_result} => Hash&lt;String,String&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.verify_resources_exist_for_tagris({
-    #     tagris_sweep_list: [ # required
-    #       {
-    #         tagris_account_id: "TagrisAccountId",
-    #         tagris_amazon_resource_name: "TagrisAmazonResourceName",
-    #         tagris_internal_id: "TagrisInternalId",
-    #         tagris_version: 1,
-    #       },
-    #     ],
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.tagris_sweep_list_result #=> Hash
-    #   resp.tagris_sweep_list_result["TagrisAmazonResourceName"] #=> String, one of "ACTIVE", "NOT_ACTIVE"
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/VerifyResourcesExistForTagris AWS API Documentation
-    #
-    # @overload verify_resources_exist_for_tagris(params = {})
-    # @param [Hash] params ({})
-    def verify_resources_exist_for_tagris(params = {}, options = {})
-      req = build_request(:verify_resources_exist_for_tagris, params)
-      req.send_request(options)
-    end
-
     # @!endgroup
 
     # @param params ({})
@@ -2927,7 +2864,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

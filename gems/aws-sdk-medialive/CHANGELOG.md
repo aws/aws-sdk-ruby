@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2024-02-21)
+------------------
+
+* Feature - MediaLive now supports the ability to restart pipelines in a running channel.
+
 1.115.0 (2024-01-26)
 ------------------
 

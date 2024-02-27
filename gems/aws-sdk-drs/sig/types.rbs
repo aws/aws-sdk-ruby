@@ -49,6 +49,7 @@ module Aws::Drs
       attr_accessor force_uefi: bool
       attr_accessor root_volume_name: ::String
       attr_accessor volume_to_conversion_map: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor volume_to_product_codes: ::Hash[::String, ::Array[Types::ProductCode]]
       attr_accessor volume_to_volume_size: ::Hash[::String, ::Integer]
       SENSITIVE: []
     end
@@ -137,6 +138,7 @@ module Aws::Drs
       attr_accessor replicated_storage_bytes: ::Integer
       attr_accessor rescanned_storage_bytes: ::Integer
       attr_accessor total_storage_bytes: ::Integer
+      attr_accessor volume_status: ("REGULAR" | "CONTAINS_MARKETPLACE_PRODUCT_CODES" | "MISSING_VOLUME_ATTRIBUTES" | "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE")
       SENSITIVE: []
     end
 
@@ -650,6 +652,12 @@ module Aws::Drs
       attr_accessor launch_status: ("PENDING" | "IN_PROGRESS" | "LAUNCHED" | "FAILED" | "TERMINATED")
       attr_accessor recovery_instance_id: ::String
       attr_accessor source_server_id: ::String
+      SENSITIVE: []
+    end
+
+    class ProductCode
+      attr_accessor product_code_id: ::String
+      attr_accessor product_code_mode: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 

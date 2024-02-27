@@ -14,7 +14,6 @@ module Aws::Firehose
     include Seahorse::Model
 
     AWSKMSKeyARN = Shapes::StringShape.new(name: 'AWSKMSKeyARN')
-    AccessKeyId = Shapes::StringShape.new(name: 'AccessKeyId')
     AmazonOpenSearchServerlessBufferingHints = Shapes::StructureShape.new(name: 'AmazonOpenSearchServerlessBufferingHints')
     AmazonOpenSearchServerlessBufferingIntervalInSeconds = Shapes::IntegerShape.new(name: 'AmazonOpenSearchServerlessBufferingIntervalInSeconds')
     AmazonOpenSearchServerlessBufferingSizeInMBs = Shapes::IntegerShape.new(name: 'AmazonOpenSearchServerlessBufferingSizeInMBs')
@@ -108,9 +107,6 @@ module Aws::Firehose
     ExtendedS3DestinationUpdate = Shapes::StructureShape.new(name: 'ExtendedS3DestinationUpdate')
     FailureDescription = Shapes::StructureShape.new(name: 'FailureDescription')
     FileExtension = Shapes::StringShape.new(name: 'FileExtension')
-    FirehoseSource = Shapes::StringShape.new(name: 'FirehoseSource')
-    GetKinesisStreamInput = Shapes::StructureShape.new(name: 'GetKinesisStreamInput')
-    GetKinesisStreamOutput = Shapes::StructureShape.new(name: 'GetKinesisStreamOutput')
     HECAcknowledgmentTimeoutInSeconds = Shapes::IntegerShape.new(name: 'HECAcknowledgmentTimeoutInSeconds')
     HECEndpoint = Shapes::StringShape.new(name: 'HECEndpoint')
     HECEndpointType = Shapes::StringShape.new(name: 'HECEndpointType')
@@ -140,7 +136,6 @@ module Aws::Firehose
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
     InvalidKMSResourceException = Shapes::StructureShape.new(name: 'InvalidKMSResourceException')
     InvalidSourceException = Shapes::StructureShape.new(name: 'InvalidSourceException')
-    InvalidStreamTypeException = Shapes::StructureShape.new(name: 'InvalidStreamTypeException')
     KMSEncryptionConfig = Shapes::StructureShape.new(name: 'KMSEncryptionConfig')
     KeyType = Shapes::StringShape.new(name: 'KeyType')
     KinesisStreamARN = Shapes::StringShape.new(name: 'KinesisStreamARN')
@@ -212,12 +207,9 @@ module Aws::Firehose
     S3DestinationDescription = Shapes::StructureShape.new(name: 'S3DestinationDescription')
     S3DestinationUpdate = Shapes::StructureShape.new(name: 'S3DestinationUpdate')
     SchemaConfiguration = Shapes::StructureShape.new(name: 'SchemaConfiguration')
-    SecretAccessKey = Shapes::StringShape.new(name: 'SecretAccessKey')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     Serializer = Shapes::StructureShape.new(name: 'Serializer')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
-    SessionCredentials = Shapes::StructureShape.new(name: 'SessionCredentials')
-    SessionToken = Shapes::StringShape.new(name: 'SessionToken')
     SizeInMBs = Shapes::IntegerShape.new(name: 'SizeInMBs')
     SnowflakeAccountUrl = Shapes::StringShape.new(name: 'SnowflakeAccountUrl')
     SnowflakeContentColumnName = Shapes::StringShape.new(name: 'SnowflakeContentColumnName')
@@ -261,23 +253,6 @@ module Aws::Firehose
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
-    TagrisAccessDeniedException = Shapes::StructureShape.new(name: 'TagrisAccessDeniedException')
-    TagrisAccountId = Shapes::StringShape.new(name: 'TagrisAccountId')
-    TagrisAmazonResourceName = Shapes::StringShape.new(name: 'TagrisAmazonResourceName')
-    TagrisExceptionMessage = Shapes::StringShape.new(name: 'TagrisExceptionMessage')
-    TagrisInternalId = Shapes::StringShape.new(name: 'TagrisInternalId')
-    TagrisInternalServiceException = Shapes::StructureShape.new(name: 'TagrisInternalServiceException')
-    TagrisInvalidArnException = Shapes::StructureShape.new(name: 'TagrisInvalidArnException')
-    TagrisInvalidParameterException = Shapes::StructureShape.new(name: 'TagrisInvalidParameterException')
-    TagrisPartialResourcesExistResultsException = Shapes::StructureShape.new(name: 'TagrisPartialResourcesExistResultsException')
-    TagrisStatus = Shapes::StringShape.new(name: 'TagrisStatus')
-    TagrisSweepList = Shapes::ListShape.new(name: 'TagrisSweepList')
-    TagrisSweepListItem = Shapes::StructureShape.new(name: 'TagrisSweepListItem')
-    TagrisSweepListResult = Shapes::MapShape.new(name: 'TagrisSweepListResult')
-    TagrisThrottledException = Shapes::StructureShape.new(name: 'TagrisThrottledException')
-    TagrisVerifyResourcesExistInput = Shapes::StructureShape.new(name: 'TagrisVerifyResourcesExistInput')
-    TagrisVerifyResourcesExistOutput = Shapes::StructureShape.new(name: 'TagrisVerifyResourcesExistOutput')
-    TagrisVersion = Shapes::IntegerShape.new(name: 'TagrisVersion')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TopicName = Shapes::StringShape.new(name: 'TopicName')
     UntagDeliveryStreamInput = Shapes::StructureShape.new(name: 'UntagDeliveryStreamInput')
@@ -609,13 +584,6 @@ module Aws::Firehose
     FailureDescription.add_member(:details, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Details"))
     FailureDescription.struct_class = Types::FailureDescription
 
-    GetKinesisStreamInput.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: DeliveryStreamARN, required: true, location_name: "DeliveryStreamARN"))
-    GetKinesisStreamInput.struct_class = Types::GetKinesisStreamInput
-
-    GetKinesisStreamOutput.add_member(:kinesis_stream_arn, Shapes::ShapeRef.new(shape: KinesisStreamARN, location_name: "KinesisStreamARN"))
-    GetKinesisStreamOutput.add_member(:credentials_for_reading_kinesis_stream, Shapes::ShapeRef.new(shape: SessionCredentials, location_name: "CredentialsForReadingKinesisStream"))
-    GetKinesisStreamOutput.struct_class = Types::GetKinesisStreamOutput
-
     HiveJsonSerDe.add_member(:timestamp_formats, Shapes::ShapeRef.new(shape: ListOfNonEmptyStrings, location_name: "TimestampFormats"))
     HiveJsonSerDe.struct_class = Types::HiveJsonSerDe
 
@@ -691,10 +659,6 @@ module Aws::Firehose
     InvalidSourceException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
     InvalidSourceException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidSourceException.struct_class = Types::InvalidSourceException
-
-    InvalidStreamTypeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
-    InvalidStreamTypeException.add_member(:source, Shapes::ShapeRef.new(shape: FirehoseSource, location_name: "source"))
-    InvalidStreamTypeException.struct_class = Types::InvalidStreamTypeException
 
     KMSEncryptionConfig.add_member(:awskms_key_arn, Shapes::ShapeRef.new(shape: AWSKMSKeyARN, required: true, location_name: "AWSKMSKeyARN"))
     KMSEncryptionConfig.struct_class = Types::KMSEncryptionConfig
@@ -916,12 +880,6 @@ module Aws::Firehose
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
-    SessionCredentials.add_member(:access_key_id, Shapes::ShapeRef.new(shape: AccessKeyId, required: true, location_name: "AccessKeyId"))
-    SessionCredentials.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: SecretAccessKey, required: true, location_name: "SecretAccessKey"))
-    SessionCredentials.add_member(:session_token, Shapes::ShapeRef.new(shape: SessionToken, required: true, location_name: "SessionToken"))
-    SessionCredentials.add_member(:expiration, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Expiration"))
-    SessionCredentials.struct_class = Types::SessionCredentials
-
     SnowflakeDestinationConfiguration.add_member(:account_url, Shapes::ShapeRef.new(shape: SnowflakeAccountUrl, required: true, location_name: "AccountUrl"))
     SnowflakeDestinationConfiguration.add_member(:private_key, Shapes::ShapeRef.new(shape: SnowflakePrivateKey, required: true, location_name: "PrivateKey"))
     SnowflakeDestinationConfiguration.add_member(:key_passphrase, Shapes::ShapeRef.new(shape: SnowflakeKeyPassphrase, location_name: "KeyPassphrase"))
@@ -1063,43 +1021,6 @@ module Aws::Firehose
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
-    TagrisAccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
-    TagrisAccessDeniedException.struct_class = Types::TagrisAccessDeniedException
-
-    TagrisInternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
-    TagrisInternalServiceException.struct_class = Types::TagrisInternalServiceException
-
-    TagrisInvalidArnException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
-    TagrisInvalidArnException.add_member(:sweep_list_item, Shapes::ShapeRef.new(shape: TagrisSweepListItem, location_name: "sweepListItem"))
-    TagrisInvalidArnException.struct_class = Types::TagrisInvalidArnException
-
-    TagrisInvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
-    TagrisInvalidParameterException.struct_class = Types::TagrisInvalidParameterException
-
-    TagrisPartialResourcesExistResultsException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
-    TagrisPartialResourcesExistResultsException.add_member(:resource_existence_information, Shapes::ShapeRef.new(shape: TagrisSweepListResult, location_name: "resourceExistenceInformation"))
-    TagrisPartialResourcesExistResultsException.struct_class = Types::TagrisPartialResourcesExistResultsException
-
-    TagrisSweepList.member = Shapes::ShapeRef.new(shape: TagrisSweepListItem)
-
-    TagrisSweepListItem.add_member(:tagris_account_id, Shapes::ShapeRef.new(shape: TagrisAccountId, location_name: "TagrisAccountId"))
-    TagrisSweepListItem.add_member(:tagris_amazon_resource_name, Shapes::ShapeRef.new(shape: TagrisAmazonResourceName, location_name: "TagrisAmazonResourceName"))
-    TagrisSweepListItem.add_member(:tagris_internal_id, Shapes::ShapeRef.new(shape: TagrisInternalId, location_name: "TagrisInternalId"))
-    TagrisSweepListItem.add_member(:tagris_version, Shapes::ShapeRef.new(shape: TagrisVersion, location_name: "TagrisVersion"))
-    TagrisSweepListItem.struct_class = Types::TagrisSweepListItem
-
-    TagrisSweepListResult.key = Shapes::ShapeRef.new(shape: TagrisAmazonResourceName)
-    TagrisSweepListResult.value = Shapes::ShapeRef.new(shape: TagrisStatus)
-
-    TagrisThrottledException.add_member(:message, Shapes::ShapeRef.new(shape: TagrisExceptionMessage, location_name: "message"))
-    TagrisThrottledException.struct_class = Types::TagrisThrottledException
-
-    TagrisVerifyResourcesExistInput.add_member(:tagris_sweep_list, Shapes::ShapeRef.new(shape: TagrisSweepList, required: true, location_name: "TagrisSweepList"))
-    TagrisVerifyResourcesExistInput.struct_class = Types::TagrisVerifyResourcesExistInput
-
-    TagrisVerifyResourcesExistOutput.add_member(:tagris_sweep_list_result, Shapes::ShapeRef.new(shape: TagrisSweepListResult, required: true, location_name: "TagrisSweepListResult"))
-    TagrisVerifyResourcesExistOutput.struct_class = Types::TagrisVerifyResourcesExistOutput
-
     UntagDeliveryStreamInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
     UntagDeliveryStreamInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     UntagDeliveryStreamInput.struct_class = Types::UntagDeliveryStreamInput
@@ -1181,18 +1102,6 @@ module Aws::Firehose
         o.input = Shapes::ShapeRef.new(shape: DescribeDeliveryStreamInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeDeliveryStreamOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-      end)
-
-      api.add_operation(:get_kinesis_stream, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetKinesisStream"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: GetKinesisStreamInput)
-        o.output = Shapes::ShapeRef.new(shape: GetKinesisStreamOutput)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidStreamTypeException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidKMSResourceException)
       end)
 
       api.add_operation(:list_delivery_streams, Seahorse::Model::Operation.new.tap do |o|
@@ -1299,20 +1208,6 @@ module Aws::Firehose
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
-      end)
-
-      api.add_operation(:verify_resources_exist_for_tagris, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "VerifyResourcesExistForTagris"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: TagrisVerifyResourcesExistInput)
-        o.output = Shapes::ShapeRef.new(shape: TagrisVerifyResourcesExistOutput)
-        o.errors << Shapes::ShapeRef.new(shape: TagrisAccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: TagrisInternalServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: TagrisInvalidArnException)
-        o.errors << Shapes::ShapeRef.new(shape: TagrisInvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: TagrisPartialResourcesExistResultsException)
-        o.errors << Shapes::ShapeRef.new(shape: TagrisThrottledException)
       end)
     end
 

@@ -415,7 +415,13 @@ module Aws::KafkaConnect
     #   @return [Types::LogDelivery]
     #
     # @!attribute [rw] plugins
-    #   Specifies which plugins to use for the connector.
+    #   Amazon MSK Connect does not currently support specifying multiple
+    #   plugins as a list. To use more than one plugin for your connector,
+    #   you can create a single custom plugin using a ZIP file that bundles
+    #   multiple plugins together.
+    #
+    #   Specifies which plugin to use for the connector. You must specify a
+    #   single-element list containing one `customPlugin` object.
     #   @return [Array<Types::Plugin>]
     #
     # @!attribute [rw] service_execution_role_arn
@@ -425,6 +431,10 @@ module Aws::KafkaConnect
     #   connector that has Amazon S3 as a destination must have permissions
     #   that allow it to write to the S3 destination bucket.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags you want to attach to the connector.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] worker_configuration
     #   Specifies which worker configuration to use with the connector.
@@ -444,6 +454,7 @@ module Aws::KafkaConnect
       :log_delivery,
       :plugins,
       :service_execution_role_arn,
+      :tags,
       :worker_configuration)
       SENSITIVE = [:connector_configuration]
       include Aws::Structure
@@ -488,13 +499,18 @@ module Aws::KafkaConnect
     #   The name of the custom plugin.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags you want to attach to the custom plugin.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/CreateCustomPluginRequest AWS API Documentation
     #
     class CreateCustomPluginRequest < Struct.new(
       :content_type,
       :description,
       :location,
-      :name)
+      :name,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -539,12 +555,17 @@ module Aws::KafkaConnect
     #   Base64 encoded contents of connect-distributed.properties file.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags you want to attach to the worker configuration.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/CreateWorkerConfigurationRequest AWS API Documentation
     #
     class CreateWorkerConfigurationRequest < Struct.new(
       :description,
       :name,
-      :properties_file_content)
+      :properties_file_content,
+      :tags)
       SENSITIVE = [:properties_file_content]
       include Aws::Structure
     end
@@ -566,19 +587,24 @@ module Aws::KafkaConnect
     #   configuration.
     #   @return [String]
     #
+    # @!attribute [rw] worker_configuration_state
+    #   The state of the worker configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/CreateWorkerConfigurationResponse AWS API Documentation
     #
     class CreateWorkerConfigurationResponse < Struct.new(
       :creation_time,
       :latest_revision,
       :name,
-      :worker_configuration_arn)
+      :worker_configuration_arn,
+      :worker_configuration_state)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # A plugin is an AWS resource that contains the code that defines a
-    # connector's logic.
+    # A plugin is an Amazon Web Services resource that contains the code
+    # that defines a connector's logic.
     #
     # @!attribute [rw] custom_plugin_arn
     #   The Amazon Resource Name (ARN) of the custom plugin.
@@ -812,6 +838,37 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] worker_configuration_arn
+    #   The Amazon Resource Name (ARN) of the worker configuration that you
+    #   want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/DeleteWorkerConfigurationRequest AWS API Documentation
+    #
+    class DeleteWorkerConfigurationRequest < Struct.new(
+      :worker_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] worker_configuration_arn
+    #   The Amazon Resource Name (ARN) of the worker configuration that you
+    #   requested to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] worker_configuration_state
+    #   The state of the worker configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/DeleteWorkerConfigurationResponse AWS API Documentation
+    #
+    class DeleteWorkerConfigurationResponse < Struct.new(
+      :worker_configuration_arn,
+      :worker_configuration_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] connector_arn
     #   The Amazon Resource Name (ARN) of the connector that you want to
     #   describe.
@@ -1012,6 +1069,10 @@ module Aws::KafkaConnect
     #   The Amazon Resource Name (ARN) of the custom configuration.
     #   @return [String]
     #
+    # @!attribute [rw] worker_configuration_state
+    #   The state of the worker configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/DescribeWorkerConfigurationResponse AWS API Documentation
     #
     class DescribeWorkerConfigurationResponse < Struct.new(
@@ -1019,7 +1080,8 @@ module Aws::KafkaConnect
       :description,
       :latest_revision,
       :name,
-      :worker_configuration_arn)
+      :worker_configuration_arn,
+      :worker_configuration_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1235,6 +1297,10 @@ module Aws::KafkaConnect
     #   The maximum number of custom plugins to list in one response.
     #   @return [Integer]
     #
+    # @!attribute [rw] name_prefix
+    #   Lists custom plugin names that start with the specified text string.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   If the response of a ListCustomPlugins operation is truncated, it
     #   will include a NextToken. Send this NextToken in a subsequent
@@ -1246,6 +1312,7 @@ module Aws::KafkaConnect
     #
     class ListCustomPluginsRequest < Struct.new(
       :max_results,
+      :name_prefix,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1271,9 +1338,40 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which you want to
+    #   list all attached tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   Lists the tags attached to the specified resource in the
+    #   corresponding request.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   The maximum number of worker configurations to list in one response.
     #   @return [Integer]
+    #
+    # @!attribute [rw] name_prefix
+    #   Lists worker configuration names that start with the specified text
+    #   string.
+    #   @return [String]
     #
     # @!attribute [rw] next_token
     #   If the response of a ListWorkerConfigurations operation is
@@ -1286,6 +1384,7 @@ module Aws::KafkaConnect
     #
     class ListWorkerConfigurationsRequest < Struct.new(
       :max_results,
+      :name_prefix,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1355,8 +1454,8 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
-    # A plugin is an AWS resource that contains the code that defines your
-    # connector logic.
+    # A plugin is an Amazon Web Services resource that contains the code
+    # that defines your connector logic.
     #
     # @!attribute [rw] custom_plugin
     #   Details about a custom plugin.
@@ -1665,6 +1764,28 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   attach tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags that you want to attach to the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # HTTP Status Code 429: Limit exceeded. Resource limit reached.
     #
     # @!attribute [rw] message
@@ -1691,6 +1812,28 @@ module Aws::KafkaConnect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which you want
+    #   to remove tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags that you want to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] capacity
     #   The target capacity.
@@ -1884,6 +2027,10 @@ module Aws::KafkaConnect
     #   The Amazon Resource Name (ARN) of the worker configuration.
     #   @return [String]
     #
+    # @!attribute [rw] worker_configuration_state
+    #   The state of the worker configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/WorkerConfigurationSummary AWS API Documentation
     #
     class WorkerConfigurationSummary < Struct.new(
@@ -1891,7 +2038,8 @@ module Aws::KafkaConnect
       :description,
       :latest_revision,
       :name,
-      :worker_configuration_arn)
+      :worker_configuration_arn,
+      :worker_configuration_state)
       SENSITIVE = []
       include Aws::Structure
     end

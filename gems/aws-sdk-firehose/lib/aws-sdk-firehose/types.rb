@@ -2095,32 +2095,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # @!attribute [rw] delivery_stream_arn
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/GetKinesisStreamInput AWS API Documentation
-    #
-    class GetKinesisStreamInput < Struct.new(
-      :delivery_stream_arn)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] kinesis_stream_arn
-    #   @return [String]
-    #
-    # @!attribute [rw] credentials_for_reading_kinesis_stream
-    #   @return [Types::SessionCredentials]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/GetKinesisStreamOutput AWS API Documentation
-    #
-    class GetKinesisStreamOutput < Struct.new(
-      :kinesis_stream_arn,
-      :credentials_for_reading_kinesis_stream)
-      SENSITIVE = [:credentials_for_reading_kinesis_stream]
-      include Aws::Structure
-    end
-
     # The native Hive / HCatalog JsonSerDe. Used by Firehose for
     # deserializing data, which means converting it from the JSON format in
     # preparation for serializing it to the Parquet or ORC format. This is
@@ -2575,21 +2549,6 @@ module Aws::Firehose
     class InvalidSourceException < Struct.new(
       :code,
       :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @!attribute [rw] source
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/InvalidStreamTypeException AWS API Documentation
-    #
-    class InvalidStreamTypeException < Struct.new(
-      :message,
-      :source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3896,29 +3855,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # @!attribute [rw] access_key_id
-    #   @return [String]
-    #
-    # @!attribute [rw] secret_access_key
-    #   @return [String]
-    #
-    # @!attribute [rw] session_token
-    #   @return [String]
-    #
-    # @!attribute [rw] expiration
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SessionCredentials AWS API Documentation
-    #
-    class SessionCredentials < Struct.new(
-      :access_key_id,
-      :secret_access_key,
-      :session_token,
-      :expiration)
-      SENSITIVE = [:access_key_id, :secret_access_key, :session_token]
-      include Aws::Structure
-    end
-
     # Configure Snowflake destination
     #
     # @!attribute [rw] account_url
@@ -4735,125 +4671,6 @@ module Aws::Firehose
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TagDeliveryStreamOutput AWS API Documentation
     #
     class TagDeliveryStreamOutput < Aws::EmptyStructure; end
-
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TagrisAccessDeniedException AWS API Documentation
-    #
-    class TagrisAccessDeniedException < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TagrisInternalServiceException AWS API Documentation
-    #
-    class TagrisInternalServiceException < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @!attribute [rw] sweep_list_item
-    #   @return [Types::TagrisSweepListItem]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TagrisInvalidArnException AWS API Documentation
-    #
-    class TagrisInvalidArnException < Struct.new(
-      :message,
-      :sweep_list_item)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TagrisInvalidParameterException AWS API Documentation
-    #
-    class TagrisInvalidParameterException < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @!attribute [rw] resource_existence_information
-    #   @return [Hash<String,String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TagrisPartialResourcesExistResultsException AWS API Documentation
-    #
-    class TagrisPartialResourcesExistResultsException < Struct.new(
-      :message,
-      :resource_existence_information)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] tagris_account_id
-    #   @return [String]
-    #
-    # @!attribute [rw] tagris_amazon_resource_name
-    #   @return [String]
-    #
-    # @!attribute [rw] tagris_internal_id
-    #   @return [String]
-    #
-    # @!attribute [rw] tagris_version
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TagrisSweepListItem AWS API Documentation
-    #
-    class TagrisSweepListItem < Struct.new(
-      :tagris_account_id,
-      :tagris_amazon_resource_name,
-      :tagris_internal_id,
-      :tagris_version)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TagrisThrottledException AWS API Documentation
-    #
-    class TagrisThrottledException < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] tagris_sweep_list
-    #   @return [Array<Types::TagrisSweepListItem>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TagrisVerifyResourcesExistInput AWS API Documentation
-    #
-    class TagrisVerifyResourcesExistInput < Struct.new(
-      :tagris_sweep_list)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] tagris_sweep_list_result
-    #   @return [Hash<String,String>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TagrisVerifyResourcesExistOutput AWS API Documentation
-    #
-    class TagrisVerifyResourcesExistOutput < Struct.new(
-      :tagris_sweep_list_result)
-      SENSITIVE = []
-      include Aws::Structure
-    end
 
     # @!attribute [rw] delivery_stream_name
     #   The name of the delivery stream.

@@ -3372,6 +3372,35 @@ module Aws
                               ) -> _UpdateReservationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReservationResponseSuccess
 
+      interface _RestartChannelPipelinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestartChannelPipelinesResponse]
+        def arn: () -> ::String
+        def cdi_input_specification: () -> Types::CdiInputSpecification
+        def channel_class: () -> ("STANDARD" | "SINGLE_PIPELINE")
+        def destinations: () -> ::Array[Types::OutputDestination]
+        def egress_endpoints: () -> ::Array[Types::ChannelEgressEndpoint]
+        def encoder_settings: () -> Types::EncoderSettings
+        def id: () -> ::String
+        def input_attachments: () -> ::Array[Types::InputAttachment]
+        def input_specification: () -> Types::InputSpecification
+        def log_level: () -> ("ERROR" | "WARNING" | "INFO" | "DEBUG" | "DISABLED")
+        def maintenance: () -> Types::MaintenanceStatus
+        def maintenance_status: () -> ::String
+        def name: () -> ::String
+        def pipeline_details: () -> ::Array[Types::PipelineDetail]
+        def pipelines_running_count: () -> ::Integer
+        def role_arn: () -> ::String
+        def state: () -> ("CREATING" | "CREATE_FAILED" | "IDLE" | "STARTING" | "RUNNING" | "RECOVERING" | "STOPPING" | "DELETING" | "DELETED" | "UPDATING" | "UPDATE_FAILED")
+        def tags: () -> ::Hash[::String, ::String]
+        def vpc: () -> Types::VpcOutputSettingsDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#restart_channel_pipelines-instance_method
+      def restart_channel_pipelines: (
+                                       channel_id: ::String,
+                                       ?pipeline_ids: Array[("PIPELINE_0" | "PIPELINE_1")]
+                                     ) -> _RestartChannelPipelinesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestartChannelPipelinesResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaLive/Client.html#wait_until-instance_method
       def wait_until: (:channel_created waiter_name, 
                     channel_id: ::String

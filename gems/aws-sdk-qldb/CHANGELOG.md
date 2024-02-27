@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2024-02-23)
+------------------
+
+* Feature - Clarify possible values for KmsKeyArn and EncryptionDescription.
+
 1.37.0 (2024-01-26)
 ------------------
 

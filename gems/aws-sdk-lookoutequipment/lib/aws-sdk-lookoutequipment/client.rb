@@ -541,6 +541,7 @@ module Aws::LookoutEquipment
     #   * {Types::CreateInferenceSchedulerResponse#inference_scheduler_arn #inference_scheduler_arn} => String
     #   * {Types::CreateInferenceSchedulerResponse#inference_scheduler_name #inference_scheduler_name} => String
     #   * {Types::CreateInferenceSchedulerResponse#status #status} => String
+    #   * {Types::CreateInferenceSchedulerResponse#model_quality #model_quality} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -583,6 +584,7 @@ module Aws::LookoutEquipment
     #   resp.inference_scheduler_arn #=> String
     #   resp.inference_scheduler_name #=> String
     #   resp.status #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED"
+    #   resp.model_quality #=> String, one of "QUALITY_THRESHOLD_MET", "CANNOT_DETERMINE_QUALITY", "POOR_QUALITY_DETECTED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/CreateInferenceScheduler AWS API Documentation
     #
@@ -1496,6 +1498,7 @@ module Aws::LookoutEquipment
     #   * {Types::DescribeModelResponse#accumulated_inference_data_end_time #accumulated_inference_data_end_time} => Time
     #   * {Types::DescribeModelResponse#retraining_scheduler_status #retraining_scheduler_status} => String
     #   * {Types::DescribeModelResponse#model_diagnostics_output_configuration #model_diagnostics_output_configuration} => Types::ModelDiagnosticsOutputConfiguration
+    #   * {Types::DescribeModelResponse#model_quality #model_quality} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1550,6 +1553,7 @@ module Aws::LookoutEquipment
     #   resp.model_diagnostics_output_configuration.s3_output_configuration.bucket #=> String
     #   resp.model_diagnostics_output_configuration.s3_output_configuration.prefix #=> String
     #   resp.model_diagnostics_output_configuration.kms_key_id #=> String
+    #   resp.model_quality #=> String, one of "QUALITY_THRESHOLD_MET", "CANNOT_DETERMINE_QUALITY", "POOR_QUALITY_DETECTED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeModel AWS API Documentation
     #
@@ -1604,6 +1608,7 @@ module Aws::LookoutEquipment
     #   * {Types::DescribeModelVersionResponse#auto_promotion_result_reason #auto_promotion_result_reason} => String
     #   * {Types::DescribeModelVersionResponse#model_diagnostics_output_configuration #model_diagnostics_output_configuration} => Types::ModelDiagnosticsOutputConfiguration
     #   * {Types::DescribeModelVersionResponse#model_diagnostics_results_object #model_diagnostics_results_object} => Types::S3Object
+    #   * {Types::DescribeModelVersionResponse#model_quality #model_quality} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1653,6 +1658,7 @@ module Aws::LookoutEquipment
     #   resp.model_diagnostics_output_configuration.kms_key_id #=> String
     #   resp.model_diagnostics_results_object.bucket #=> String
     #   resp.model_diagnostics_results_object.key #=> String
+    #   resp.model_quality #=> String, one of "QUALITY_THRESHOLD_MET", "CANNOT_DETERMINE_QUALITY", "POOR_QUALITY_DETECTED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeModelVersion AWS API Documentation
     #
@@ -2401,6 +2407,7 @@ module Aws::LookoutEquipment
     #   resp.model_version_summaries[0].created_at #=> Time
     #   resp.model_version_summaries[0].status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED", "IMPORT_IN_PROGRESS", "CANCELED"
     #   resp.model_version_summaries[0].source_type #=> String, one of "TRAINING", "RETRAINING", "IMPORT"
+    #   resp.model_version_summaries[0].model_quality #=> String, one of "QUALITY_THRESHOLD_MET", "CANNOT_DETERMINE_QUALITY", "POOR_QUALITY_DETECTED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListModelVersions AWS API Documentation
     #
@@ -2468,6 +2475,7 @@ module Aws::LookoutEquipment
     #   resp.model_summaries[0].model_diagnostics_output_configuration.s3_output_configuration.bucket #=> String
     #   resp.model_summaries[0].model_diagnostics_output_configuration.s3_output_configuration.prefix #=> String
     #   resp.model_summaries[0].model_diagnostics_output_configuration.kms_key_id #=> String
+    #   resp.model_summaries[0].model_quality #=> String, one of "QUALITY_THRESHOLD_MET", "CANNOT_DETERMINE_QUALITY", "POOR_QUALITY_DETECTED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListModels AWS API Documentation
     #
@@ -3294,7 +3302,7 @@ module Aws::LookoutEquipment
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutequipment'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

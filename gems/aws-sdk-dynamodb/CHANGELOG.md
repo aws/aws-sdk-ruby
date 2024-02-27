@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2024-02-20)
+------------------
+
+* Feature - Publishing quick fix for doc only update.
+
 1.103.0 (2024-02-14)
 ------------------
 

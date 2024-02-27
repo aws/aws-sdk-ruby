@@ -397,21 +397,21 @@ module Aws::CloudWatchRUM
     # with CloudWatch RUM][1].
     #
     # In addition to these default metrics, you can choose to send extended
-    # metrics or custom metrics or both.
+    # metrics, custom metrics, or both.
     #
-    # * Extended metrics enable you to send metrics with additional
-    #   dimensions not included in the default metrics. You can also send
-    #   extended metrics to Evidently as well as CloudWatch. The valid
+    # * Extended metrics let you send metrics with additional dimensions
+    #   that aren't included in the default metrics. You can also send
+    #   extended metrics to both Evidently and CloudWatch. The valid
     #   dimension names for the additional dimensions for extended metrics
     #   are `BrowserName`, `CountryCode`, `DeviceType`, `FileType`,
     #   `OSName`, and `PageId`. For more information, see [ Extended metrics
     #   that you can send to CloudWatch and CloudWatch Evidently][2].
     #
     # * Custom metrics are metrics that you define. You can send custom
-    #   metrics to CloudWatch or to CloudWatch Evidently or to both. With
-    #   custom metrics, you can use any metric name and namespace, and to
-    #   derive the metrics you can use any custom events, built-in events,
-    #   custom attributes, or default attributes.
+    #   metrics to CloudWatch. CloudWatch Evidently, or both. With custom
+    #   metrics, you can use any metric name and namespace. To derive the
+    #   metrics, you can use any custom events, built-in events, custom
+    #   attributes, or default attributes.
     #
     #   You can't send custom metrics to the `AWS/RUM` namespace. You must
     #   send custom metrics to a custom namespace that you define. The
@@ -453,9 +453,9 @@ module Aws::CloudWatchRUM
     # @option params [required, String] :destination
     #   The destination to send the metrics to. Valid values are `CloudWatch`
     #   and `Evidently`. If you specify `Evidently`, you must also specify the
-    #   ARN of the CloudWatchEvidently experiment that will receive the
-    #   metrics and an IAM role that has permission to write to the
-    #   experiment.
+    #   Amazon Resource Name (ARN) of the CloudWatchEvidently experiment that
+    #   will receive the metrics and an IAM role that has permission to write
+    #   to the experiment.
     #
     # @option params [String] :destination_arn
     #   This parameter is required if `Destination` is `Evidently`. If
@@ -694,7 +694,7 @@ module Aws::CloudWatchRUM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/monitoring/CloudWatch-RUM-get-started-authorization.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html
     #
     # @option params [Types::CustomEvents] :custom_events
     #   Specifies whether this app monitor allows the web client to define and
@@ -1177,11 +1177,21 @@ module Aws::CloudWatchRUM
     #
     # @option params [String] :iam_role_arn
     #   This parameter is required if `Destination` is `Evidently`. If
-    #   `Destination` is `CloudWatch`, do not use this parameter.
+    #   `Destination` is `CloudWatch`, don't use this parameter.
     #
     #   This parameter specifies the ARN of an IAM role that RUM will assume
     #   to write to the Evidently experiment that you are sending metrics to.
     #   This role must have permission to write to that experiment.
+    #
+    #   If you specify this parameter, you must be signed on to a role that
+    #   has [PassRole][1] permissions attached to it, to allow the role to be
+    #   passed. The [ CloudWatchAmazonCloudWatchRUMFullAccess][2] policy
+    #   doesn't include `PassRole` permissions.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/auth-and-access-control-cw.html#managed-policies-cloudwatch-RUM
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1314,7 +1324,7 @@ module Aws::CloudWatchRUM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/monitoring/CloudWatch-RUM-get-started-authorization.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html
     #
     # @option params [Types::CustomEvents] :custom_events
     #   Specifies whether this app monitor allows the web client to define and
@@ -1454,7 +1464,7 @@ module Aws::CloudWatchRUM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchrum'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2024-02-26)
+------------------
+
+* Feature - Added volume status to DescribeSourceServer replicated volumes.
+
 1.28.0 (2024-01-26)
 ------------------
 

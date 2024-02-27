@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2024-02-23)
+------------------
+
+* Feature - Documentation only updates for AppSync
+
 1.73.0 (2024-02-12)
 ------------------
 

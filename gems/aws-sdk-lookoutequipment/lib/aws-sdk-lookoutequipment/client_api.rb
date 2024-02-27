@@ -165,6 +165,7 @@ module Aws::LookoutEquipment
     ModelMetrics = Shapes::StringShape.new(name: 'ModelMetrics')
     ModelName = Shapes::StringShape.new(name: 'ModelName')
     ModelPromoteMode = Shapes::StringShape.new(name: 'ModelPromoteMode')
+    ModelQuality = Shapes::StringShape.new(name: 'ModelQuality')
     ModelStatus = Shapes::StringShape.new(name: 'ModelStatus')
     ModelSummaries = Shapes::ListShape.new(name: 'ModelSummaries')
     ModelSummary = Shapes::StructureShape.new(name: 'ModelSummary')
@@ -273,6 +274,7 @@ module Aws::LookoutEquipment
     CreateInferenceSchedulerResponse.add_member(:inference_scheduler_arn, Shapes::ShapeRef.new(shape: InferenceSchedulerArn, location_name: "InferenceSchedulerArn"))
     CreateInferenceSchedulerResponse.add_member(:inference_scheduler_name, Shapes::ShapeRef.new(shape: InferenceSchedulerName, location_name: "InferenceSchedulerName"))
     CreateInferenceSchedulerResponse.add_member(:status, Shapes::ShapeRef.new(shape: InferenceSchedulerStatus, location_name: "Status"))
+    CreateInferenceSchedulerResponse.add_member(:model_quality, Shapes::ShapeRef.new(shape: ModelQuality, location_name: "ModelQuality"))
     CreateInferenceSchedulerResponse.struct_class = Types::CreateInferenceSchedulerResponse
 
     CreateLabelGroupRequest.add_member(:label_group_name, Shapes::ShapeRef.new(shape: LabelGroupName, required: true, location_name: "LabelGroupName"))
@@ -511,6 +513,7 @@ module Aws::LookoutEquipment
     DescribeModelResponse.add_member(:accumulated_inference_data_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "AccumulatedInferenceDataEndTime"))
     DescribeModelResponse.add_member(:retraining_scheduler_status, Shapes::ShapeRef.new(shape: RetrainingSchedulerStatus, location_name: "RetrainingSchedulerStatus"))
     DescribeModelResponse.add_member(:model_diagnostics_output_configuration, Shapes::ShapeRef.new(shape: ModelDiagnosticsOutputConfiguration, location_name: "ModelDiagnosticsOutputConfiguration"))
+    DescribeModelResponse.add_member(:model_quality, Shapes::ShapeRef.new(shape: ModelQuality, location_name: "ModelQuality"))
     DescribeModelResponse.struct_class = Types::DescribeModelResponse
 
     DescribeModelVersionRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
@@ -551,6 +554,7 @@ module Aws::LookoutEquipment
     DescribeModelVersionResponse.add_member(:auto_promotion_result_reason, Shapes::ShapeRef.new(shape: AutoPromotionResultReason, location_name: "AutoPromotionResultReason"))
     DescribeModelVersionResponse.add_member(:model_diagnostics_output_configuration, Shapes::ShapeRef.new(shape: ModelDiagnosticsOutputConfiguration, location_name: "ModelDiagnosticsOutputConfiguration"))
     DescribeModelVersionResponse.add_member(:model_diagnostics_results_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "ModelDiagnosticsResultsObject"))
+    DescribeModelVersionResponse.add_member(:model_quality, Shapes::ShapeRef.new(shape: ModelQuality, location_name: "ModelQuality"))
     DescribeModelVersionResponse.struct_class = Types::DescribeModelVersionResponse
 
     DescribeResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
@@ -891,6 +895,7 @@ module Aws::LookoutEquipment
     ModelSummary.add_member(:next_scheduled_retraining_start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "NextScheduledRetrainingStartDate"))
     ModelSummary.add_member(:retraining_scheduler_status, Shapes::ShapeRef.new(shape: RetrainingSchedulerStatus, location_name: "RetrainingSchedulerStatus"))
     ModelSummary.add_member(:model_diagnostics_output_configuration, Shapes::ShapeRef.new(shape: ModelDiagnosticsOutputConfiguration, location_name: "ModelDiagnosticsOutputConfiguration"))
+    ModelSummary.add_member(:model_quality, Shapes::ShapeRef.new(shape: ModelQuality, location_name: "ModelQuality"))
     ModelSummary.struct_class = Types::ModelSummary
 
     ModelVersionSummaries.member = Shapes::ShapeRef.new(shape: ModelVersionSummary)
@@ -902,6 +907,7 @@ module Aws::LookoutEquipment
     ModelVersionSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     ModelVersionSummary.add_member(:status, Shapes::ShapeRef.new(shape: ModelVersionStatus, location_name: "Status"))
     ModelVersionSummary.add_member(:source_type, Shapes::ShapeRef.new(shape: ModelVersionSourceType, location_name: "SourceType"))
+    ModelVersionSummary.add_member(:model_quality, Shapes::ShapeRef.new(shape: ModelQuality, location_name: "ModelQuality"))
     ModelVersionSummary.struct_class = Types::ModelVersionSummary
 
     MonotonicValues.add_member(:status, Shapes::ShapeRef.new(shape: StatisticalIssueStatus, required: true, location_name: "Status"))

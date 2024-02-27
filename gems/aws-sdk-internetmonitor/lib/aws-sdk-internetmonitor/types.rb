@@ -840,6 +840,11 @@ module Aws::InternetMonitor
     #   The calculated health at a specific location.
     #   @return [Types::InternetHealth]
     #
+    # @!attribute [rw] ipv_4_prefixes
+    #   The IPv4 prefixes at the client location that was impacted by the
+    #   health event.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/ImpactedLocation AWS API Documentation
     #
     class ImpactedLocation < Struct.new(
@@ -856,7 +861,8 @@ module Aws::InternetMonitor
       :service_location,
       :status,
       :caused_by,
-      :internet_health)
+      :internet_health,
+      :ipv_4_prefixes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1143,7 +1149,7 @@ module Aws::InternetMonitor
     #   event when a threshold is crossed for a local health score.
     #
     #   If you don't set a minimum traffic impact threshold, the default
-    #   value is 0.01%.
+    #   value is 0.1%.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/internetmonitor-2021-06-03/LocalHealthEventsConfig AWS API Documentation
@@ -1463,11 +1469,17 @@ module Aws::InternetMonitor
     #   The type of query to run. The following are the three types of
     #   queries that you can run using the Internet Monitor query interface:
     #
-    #   * `MEASUREMENTS`: TBD definition
+    #   * `MEASUREMENTS`: Provides availability score, performance score,
+    #     total traffic, and round-trip times, at 5 minute intervals.
     #
-    #   * `TOP_LOCATIONS`: TBD definition
+    #   * `TOP_LOCATIONS`: Provides availability score, performance score,
+    #     total traffic, and time to first byte (TTFB) information, for the
+    #     top location and ASN combinations that you're monitoring, by
+    #     traffic volume.
     #
-    #   * `TOP_LOCATION_DETAILS`: TBD definition
+    #   * `TOP_LOCATION_DETAILS`: Provides TTFB for Amazon CloudFront, your
+    #     current configuration, and the best performing EC2 configuration,
+    #     at 1 hour intervals.
     #
     #   For lists of the fields returned with each query type and more
     #   information about how each type of query is performed, see [ Using

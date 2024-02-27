@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2024-02-20)
+------------------
+
+* Feature - Add .NET 8 (dotnet8) Runtime support to AWS Lambda.
+
 1.115.0 (2024-02-16)
 ------------------
 

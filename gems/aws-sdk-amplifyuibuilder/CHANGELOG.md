@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2024-02-27)
+------------------
+
+* Feature - We have added the ability to tag resources after they are created
+
 1.23.0 (2024-01-26)
 ------------------
 

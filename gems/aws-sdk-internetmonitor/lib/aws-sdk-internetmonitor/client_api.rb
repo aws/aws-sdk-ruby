@@ -46,6 +46,7 @@ module Aws::InternetMonitor
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InternetHealth = Shapes::StructureShape.new(name: 'InternetHealth')
     InternetMeasurementsLogDelivery = Shapes::StructureShape.new(name: 'InternetMeasurementsLogDelivery')
+    Ipv4PrefixList = Shapes::ListShape.new(name: 'Ipv4PrefixList')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListHealthEventsInput = Shapes::StructureShape.new(name: 'ListHealthEventsInput')
     ListHealthEventsOutput = Shapes::StructureShape.new(name: 'ListHealthEventsOutput')
@@ -236,6 +237,7 @@ module Aws::InternetMonitor
     ImpactedLocation.add_member(:status, Shapes::ShapeRef.new(shape: HealthEventStatus, required: true, location_name: "Status"))
     ImpactedLocation.add_member(:caused_by, Shapes::ShapeRef.new(shape: NetworkImpairment, location_name: "CausedBy"))
     ImpactedLocation.add_member(:internet_health, Shapes::ShapeRef.new(shape: InternetHealth, location_name: "InternetHealth"))
+    ImpactedLocation.add_member(:ipv_4_prefixes, Shapes::ShapeRef.new(shape: Ipv4PrefixList, location_name: "Ipv4Prefixes"))
     ImpactedLocation.struct_class = Types::ImpactedLocation
 
     ImpactedLocationsList.member = Shapes::ShapeRef.new(shape: ImpactedLocation)
@@ -252,6 +254,8 @@ module Aws::InternetMonitor
 
     InternetMeasurementsLogDelivery.add_member(:s3_config, Shapes::ShapeRef.new(shape: S3Config, location_name: "S3Config"))
     InternetMeasurementsLogDelivery.struct_class = Types::InternetMeasurementsLogDelivery
+
+    Ipv4PrefixList.member = Shapes::ShapeRef.new(shape: String)
 
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     LimitExceededException.struct_class = Types::LimitExceededException

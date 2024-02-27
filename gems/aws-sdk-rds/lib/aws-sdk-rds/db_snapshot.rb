@@ -1119,8 +1119,7 @@ module Aws::RDS
     #
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     # @option options [String] :db_cluster_snapshot_identifier
-    #   The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to
-    #   restore from.
+    #   The identifier for the Multi-AZ DB cluster snapshot to restore from.
     #
     #   For more information on Multi-AZ DB clusters, see [ Multi-AZ DB
     #   cluster deployments][1] in the *Amazon RDS User Guide*.
@@ -1139,9 +1138,6 @@ module Aws::RDS
     #     shared snapshot.
     #
     #   * Can't be the identifier of an Aurora DB cluster snapshot.
-    #
-    #   * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB
-    #     cluster snapshot.
     #
     #
     #

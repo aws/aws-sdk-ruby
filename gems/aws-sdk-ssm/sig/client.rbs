@@ -1158,7 +1158,8 @@ module Aws
                                    },
                                  ],
                                  ?max_results: ::Integer,
-                                 ?next_token: ::String
+                                 ?next_token: ::String,
+                                 ?shared: bool
                                ) -> _DescribeParametersResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeParametersResponseSuccess
 

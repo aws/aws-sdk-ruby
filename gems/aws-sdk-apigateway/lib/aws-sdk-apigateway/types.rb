@@ -890,7 +890,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] schema
     #   The schema for the model. For `application/json` models, this should
-    #   be JSON schema draft 4 model.
+    #   be JSON schema draft 4 model. The maximum size of the model is 400
+    #   KB.
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -4735,7 +4736,9 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] cache_cluster_enabled
-    #   Specifies whether a cache cluster is enabled for the stage.
+    #   Specifies whether a cache cluster is enabled for the stage. To
+    #   activate a method-level cache, set `CachingEnabled` to `true` for a
+    #   method.
     #   @return [Boolean]
     #
     # @!attribute [rw] cache_cluster_size

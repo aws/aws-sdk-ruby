@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2024-02-22)
+------------------
+
+* Feature - Increasing NextToken parameter length restriction for List APIs from 512 to 1024.
+
 1.59.0 (2024-01-26)
 ------------------
 

@@ -811,6 +811,7 @@ module Aws::RDS
       attr_accessor local_write_forwarding_status: ("enabled" | "disabled" | "enabling" | "disabling" | "requested")
       attr_accessor aws_backup_recovery_point_arn: ::String
       attr_accessor limitless_database: Types::LimitlessDatabase
+      attr_accessor storage_throughput: ::Integer
       SENSITIVE: []
     end
 
@@ -842,6 +843,7 @@ module Aws::RDS
       attr_accessor storage_type: ::String
       attr_accessor iops: ::Integer
       attr_accessor aws_backup_recovery_point_arn: ::String
+      attr_accessor storage_throughput: ::Integer
       SENSITIVE: []
     end
 
@@ -1010,6 +1012,7 @@ module Aws::RDS
       attr_accessor db_system_id: ::String
       attr_accessor storage_type: ::String
       attr_accessor db_cluster_resource_id: ::String
+      attr_accessor storage_throughput: ::Integer
       SENSITIVE: []
     end
 

@@ -5,6 +5,11 @@ Unreleased Changes
 
 * Feature - Support Account ID endpoint mode using `ENV['AWS_ACCOUNT_ID_ENDPOINT_MODE']`, `aws_account_id_endpoint_mode` shared config, or the `account_id_endpoint_mode` Client configuration option. Defaults to `preferred`, which will use the account id endpoint if available. Set to `disabled` to disable account id endpoints. Set to `required` to require account id endpoint usage; an error is raised if credentials do not have an account id.
 
+3.191.3 (2024-02-20)
+------------------
+
+* Issue - Remove base64 as dependency.
+
 3.191.2 (2024-02-14)
 ------------------
 
@@ -24,7 +29,7 @@ Unreleased Changes
 
 * Feature - Updated Aws::SSO::Client with the latest API changes.
 
-* Feature - Add RBS signature files to support static type checking.
+* Feature - Add RBS signature files to support static type checking
 
 3.190.3 (2024-01-16)
 ------------------

@@ -703,6 +703,7 @@ module Aws::SSM
     MaintenanceWindowTaskType = Shapes::StringShape.new(name: 'MaintenanceWindowTaskType')
     MaintenanceWindowTimezone = Shapes::StringShape.new(name: 'MaintenanceWindowTimezone')
     MaintenanceWindowsForTargetList = Shapes::ListShape.new(name: 'MaintenanceWindowsForTargetList')
+    MalformedResourcePolicyDocumentException = Shapes::StructureShape.new(name: 'MalformedResourcePolicyDocumentException')
     ManagedInstanceId = Shapes::StringShape.new(name: 'ManagedInstanceId')
     MaxConcurrency = Shapes::StringShape.new(name: 'MaxConcurrency')
     MaxDocumentSizeExceeded = Shapes::StructureShape.new(name: 'MaxDocumentSizeExceeded')
@@ -1040,10 +1041,12 @@ module Aws::SSM
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcePolicyConflictException = Shapes::StructureShape.new(name: 'ResourcePolicyConflictException')
     ResourcePolicyInvalidParameterException = Shapes::StructureShape.new(name: 'ResourcePolicyInvalidParameterException')
     ResourcePolicyLimitExceededException = Shapes::StructureShape.new(name: 'ResourcePolicyLimitExceededException')
     ResourcePolicyMaxResults = Shapes::IntegerShape.new(name: 'ResourcePolicyMaxResults')
+    ResourcePolicyNotFoundException = Shapes::StructureShape.new(name: 'ResourcePolicyNotFoundException')
     ResourcePolicyParameterNamesList = Shapes::ListShape.new(name: 'ResourcePolicyParameterNamesList')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceTypeForTagging = Shapes::StringShape.new(name: 'ResourceTypeForTagging')
@@ -2233,6 +2236,7 @@ module Aws::SSM
     DescribeParametersRequest.add_member(:parameter_filters, Shapes::ShapeRef.new(shape: ParameterStringFilterList, location_name: "ParameterFilters"))
     DescribeParametersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     DescribeParametersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeParametersRequest.add_member(:shared, Shapes::ShapeRef.new(shape: Boolean, location_name: "Shared", metadata: {"box"=>true}))
     DescribeParametersRequest.struct_class = Types::DescribeParametersRequest
 
     DescribeParametersResult.add_member(:parameters, Shapes::ShapeRef.new(shape: ParameterMetadataList, location_name: "Parameters"))
@@ -3480,6 +3484,9 @@ module Aws::SSM
 
     MaintenanceWindowsForTargetList.member = Shapes::ShapeRef.new(shape: MaintenanceWindowIdentityForTarget)
 
+    MalformedResourcePolicyDocumentException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    MalformedResourcePolicyDocumentException.struct_class = Types::MalformedResourcePolicyDocumentException
+
     MaxDocumentSizeExceeded.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     MaxDocumentSizeExceeded.struct_class = Types::MaxDocumentSizeExceeded
 
@@ -3791,6 +3798,7 @@ module Aws::SSM
     ParameterMaxVersionLimitExceeded.struct_class = Types::ParameterMaxVersionLimitExceeded
 
     ParameterMetadata.add_member(:name, Shapes::ShapeRef.new(shape: PSParameterName, location_name: "Name"))
+    ParameterMetadata.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "ARN"))
     ParameterMetadata.add_member(:type, Shapes::ShapeRef.new(shape: ParameterType, location_name: "Type"))
     ParameterMetadata.add_member(:key_id, Shapes::ShapeRef.new(shape: ParameterKeyId, location_name: "KeyId"))
     ParameterMetadata.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedDate"))
@@ -4183,6 +4191,9 @@ module Aws::SSM
     ResourceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceLimitExceededException.struct_class = Types::ResourceLimitExceededException
 
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     ResourcePolicyConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourcePolicyConflictException.struct_class = Types::ResourcePolicyConflictException
 
@@ -4194,6 +4205,9 @@ module Aws::SSM
     ResourcePolicyLimitExceededException.add_member(:limit_type, Shapes::ShapeRef.new(shape: String, location_name: "LimitType"))
     ResourcePolicyLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourcePolicyLimitExceededException.struct_class = Types::ResourcePolicyLimitExceededException
+
+    ResourcePolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ResourcePolicyNotFoundException.struct_class = Types::ResourcePolicyNotFoundException
 
     ResourcePolicyParameterNamesList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -5050,6 +5064,9 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MalformedResourcePolicyDocumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyNotFoundException)
       end)
 
       api.add_operation(:deregister_managed_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -5910,6 +5927,7 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: GetResourcePoliciesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -6283,6 +6301,9 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MalformedResourcePolicyDocumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyNotFoundException)
       end)
 
       api.add_operation(:register_default_patch_baseline, Seahorse::Model::Operation.new.tap do |o|

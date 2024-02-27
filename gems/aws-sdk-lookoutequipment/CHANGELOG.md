@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2024-02-21)
+------------------
+
+* Feature - This release adds a field exposing model quality to read APIs for models. It also adds a model quality field to the API response when creating an inference scheduler.
+
 1.28.0 (2024-02-14)
 ------------------
 

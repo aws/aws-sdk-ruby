@@ -120,6 +120,7 @@ module Aws::MediaLive
     ChannelClass = Shapes::StringShape.new(name: 'ChannelClass')
     ChannelConfigurationValidationError = Shapes::StructureShape.new(name: 'ChannelConfigurationValidationError')
     ChannelEgressEndpoint = Shapes::StructureShape.new(name: 'ChannelEgressEndpoint')
+    ChannelPipelineIdToRestart = Shapes::StringShape.new(name: 'ChannelPipelineIdToRestart')
     ChannelState = Shapes::StringShape.new(name: 'ChannelState')
     ChannelSummary = Shapes::StructureShape.new(name: 'ChannelSummary')
     ClaimDeviceRequest = Shapes::StructureShape.new(name: 'ClaimDeviceRequest')
@@ -591,6 +592,8 @@ module Aws::MediaLive
     ReservationVideoQuality = Shapes::StringShape.new(name: 'ReservationVideoQuality')
     ResourceConflict = Shapes::StructureShape.new(name: 'ResourceConflict')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
+    RestartChannelPipelinesRequest = Shapes::StructureShape.new(name: 'RestartChannelPipelinesRequest')
+    RestartChannelPipelinesResponse = Shapes::StructureShape.new(name: 'RestartChannelPipelinesResponse')
     RtmpAdMarkers = Shapes::StringShape.new(name: 'RtmpAdMarkers')
     RtmpCacheFullBehavior = Shapes::StringShape.new(name: 'RtmpCacheFullBehavior')
     RtmpCaptionData = Shapes::StringShape.new(name: 'RtmpCaptionData')
@@ -820,6 +823,7 @@ module Aws::MediaLive
     __listOfCaptionLanguageMapping = Shapes::ListShape.new(name: '__listOfCaptionLanguageMapping')
     __listOfCaptionSelector = Shapes::ListShape.new(name: '__listOfCaptionSelector')
     __listOfChannelEgressEndpoint = Shapes::ListShape.new(name: '__listOfChannelEgressEndpoint')
+    __listOfChannelPipelineIdToRestart = Shapes::ListShape.new(name: '__listOfChannelPipelineIdToRestart')
     __listOfChannelSummary = Shapes::ListShape.new(name: '__listOfChannelSummary')
     __listOfColorCorrection = Shapes::ListShape.new(name: '__listOfColorCorrection')
     __listOfFailoverCondition = Shapes::ListShape.new(name: '__listOfFailoverCondition')
@@ -2923,6 +2927,31 @@ module Aws::MediaLive
     ResourceNotFound.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ResourceNotFound.struct_class = Types::ResourceNotFound
 
+    RestartChannelPipelinesRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
+    RestartChannelPipelinesRequest.add_member(:pipeline_ids, Shapes::ShapeRef.new(shape: __listOfChannelPipelineIdToRestart, location_name: "pipelineIds"))
+    RestartChannelPipelinesRequest.struct_class = Types::RestartChannelPipelinesRequest
+
+    RestartChannelPipelinesResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    RestartChannelPipelinesResponse.add_member(:cdi_input_specification, Shapes::ShapeRef.new(shape: CdiInputSpecification, location_name: "cdiInputSpecification"))
+    RestartChannelPipelinesResponse.add_member(:channel_class, Shapes::ShapeRef.new(shape: ChannelClass, location_name: "channelClass"))
+    RestartChannelPipelinesResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
+    RestartChannelPipelinesResponse.add_member(:egress_endpoints, Shapes::ShapeRef.new(shape: __listOfChannelEgressEndpoint, location_name: "egressEndpoints"))
+    RestartChannelPipelinesResponse.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
+    RestartChannelPipelinesResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    RestartChannelPipelinesResponse.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
+    RestartChannelPipelinesResponse.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
+    RestartChannelPipelinesResponse.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
+    RestartChannelPipelinesResponse.add_member(:maintenance, Shapes::ShapeRef.new(shape: MaintenanceStatus, location_name: "maintenance"))
+    RestartChannelPipelinesResponse.add_member(:maintenance_status, Shapes::ShapeRef.new(shape: __string, location_name: "maintenanceStatus"))
+    RestartChannelPipelinesResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    RestartChannelPipelinesResponse.add_member(:pipeline_details, Shapes::ShapeRef.new(shape: __listOfPipelineDetail, location_name: "pipelineDetails"))
+    RestartChannelPipelinesResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
+    RestartChannelPipelinesResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
+    RestartChannelPipelinesResponse.add_member(:state, Shapes::ShapeRef.new(shape: ChannelState, location_name: "state"))
+    RestartChannelPipelinesResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    RestartChannelPipelinesResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VpcOutputSettingsDescription, location_name: "vpc"))
+    RestartChannelPipelinesResponse.struct_class = Types::RestartChannelPipelinesResponse
+
     RtmpCaptionInfoDestinationSettings.struct_class = Types::RtmpCaptionInfoDestinationSettings
 
     RtmpGroupSettings.add_member(:ad_markers, Shapes::ShapeRef.new(shape: __listOfRtmpAdMarkers, location_name: "adMarkers"))
@@ -3507,6 +3536,8 @@ module Aws::MediaLive
     __listOfCaptionSelector.member = Shapes::ShapeRef.new(shape: CaptionSelector)
 
     __listOfChannelEgressEndpoint.member = Shapes::ShapeRef.new(shape: ChannelEgressEndpoint)
+
+    __listOfChannelPipelineIdToRestart.member = Shapes::ShapeRef.new(shape: ChannelPipelineIdToRestart)
 
     __listOfChannelSummary.member = Shapes::ShapeRef.new(shape: ChannelSummary)
 
@@ -4642,6 +4673,22 @@ module Aws::MediaLive
         o.http_request_uri = "/prod/reservations/{reservationId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateReservationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateReservationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:restart_channel_pipelines, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestartChannelPipelines"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/channels/{channelId}/restartChannelPipelines"
+        o.input = Shapes::ShapeRef.new(shape: RestartChannelPipelinesRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestartChannelPipelinesResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

@@ -209,6 +209,16 @@ module Aws::RDS
       data[:db_cluster_resource_id]
     end
 
+    # The storage throughput for the DB cluster snapshot. The throughput is
+    # automatically set based on the IOPS that you provision, and is not
+    # configurable.
+    #
+    # This setting is only for non-Aurora Multi-AZ DB clusters.
+    # @return [Integer]
+    def storage_throughput
+      data[:storage_throughput]
+    end
+
     # @!endgroup
 
     # @return [Client]
