@@ -54,7 +54,7 @@ module Aws
           headers[ref.location_name] = value
             .compact
             .map { |s| Seahorse::Util.escape_header_list_string(s.to_s) }
-            .join(',')
+            .join(', ')
         end
 
         def apply_header_map(headers, ref, values)
