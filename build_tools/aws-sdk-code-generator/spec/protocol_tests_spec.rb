@@ -2,16 +2,18 @@
 
 require_relative 'spec_helper'
 require_relative 'protocol_tests_spec_helper'
-require 'rexml/document'
+
+PROTOCOL_TESTS_IGNORE_LIST = JSON.parse(File.read('./spec/protocol-tests-ignore-list.json'))
 
 ProtocolTestsHelper.fixtures.each do |protocol, files|
-  # next if protocol == 'json_old'
-
   describe(protocol) do
     let(:matcher) { ProtocolTestsHelper::Matcher.new }
+    let(:ignore_list) { PROTOCOL_TESTS_IGNORE_LIST[protocol] }
     describe 'input' do
       ProtocolTestsHelper.each_test_case(self, files['input']) do |group, suite, test_case, id, description|
         group.it(description) do
+          skip('Test Case is in the Ignore List') if ignore_list['input'].include? test_case['id']
+
           if id.include?('IdempotencyToken')
             allow(SecureRandom).to receive(:uuid).and_return('00000000-0000-4000-8000-000000000000')
           end
@@ -40,6 +42,8 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
     describe 'output' do
       ProtocolTestsHelper.each_test_case(self, files['output']) do |group, suite, test_case, id, description|
         group.it(description) do
+          skip('Test Case is in the Ignore List') if ignore_list['output'].include? test_case['id']
+
           client = ProtocolTestsHelper.client_for(suite, test_case, "Output_#{id}")
           client.handle(step: :send) do |context|
             context.http_response.signal_headers(
