@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.439.0 (2024-02-28)
+------------------
+
+* Feature - This release increases the range of MaxResults for GetNetworkInsightsAccessScopeAnalysisFindings to 1,000.
+
 1.438.0 (2024-02-14)
 ------------------
 

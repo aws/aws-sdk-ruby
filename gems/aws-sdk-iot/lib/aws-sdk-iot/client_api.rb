@@ -1077,6 +1077,7 @@ module Aws::IoT
     SchedulingConfig = Shapes::StructureShape.new(name: 'SchedulingConfig')
     SearchIndexRequest = Shapes::StructureShape.new(name: 'SearchIndexRequest')
     SearchIndexResponse = Shapes::StructureShape.new(name: 'SearchIndexResponse')
+    SearchQueryMaxResults = Shapes::IntegerShape.new(name: 'SearchQueryMaxResults')
     SearchableAttributes = Shapes::ListShape.new(name: 'SearchableAttributes')
     Seconds = Shapes::IntegerShape.new(name: 'Seconds')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
@@ -4458,7 +4459,7 @@ module Aws::IoT
     SearchIndexRequest.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "indexName"))
     SearchIndexRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "queryString"))
     SearchIndexRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
-    SearchIndexRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: QueryMaxResults, location_name: "maxResults"))
+    SearchIndexRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: SearchQueryMaxResults, location_name: "maxResults"))
     SearchIndexRequest.add_member(:query_version, Shapes::ShapeRef.new(shape: QueryVersion, location_name: "queryVersion"))
     SearchIndexRequest.struct_class = Types::SearchIndexRequest
 

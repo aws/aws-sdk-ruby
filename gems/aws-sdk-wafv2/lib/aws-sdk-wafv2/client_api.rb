@@ -110,6 +110,7 @@ module Aws::WAFV2
     EntityName = Shapes::StringShape.new(name: 'EntityName')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorReason = Shapes::StringShape.new(name: 'ErrorReason')
+    EvaluationWindowSec = Shapes::IntegerShape.new(name: 'EvaluationWindowSec')
     ExcludedRule = Shapes::StructureShape.new(name: 'ExcludedRule')
     ExcludedRules = Shapes::ListShape.new(name: 'ExcludedRules')
     FailureCode = Shapes::IntegerShape.new(name: 'FailureCode')
@@ -1215,6 +1216,7 @@ module Aws::WAFV2
     QueryString.struct_class = Types::QueryString
 
     RateBasedStatement.add_member(:limit, Shapes::ShapeRef.new(shape: RateLimit, required: true, location_name: "Limit"))
+    RateBasedStatement.add_member(:evaluation_window_sec, Shapes::ShapeRef.new(shape: EvaluationWindowSec, location_name: "EvaluationWindowSec"))
     RateBasedStatement.add_member(:aggregate_key_type, Shapes::ShapeRef.new(shape: RateBasedStatementAggregateKeyType, required: true, location_name: "AggregateKeyType"))
     RateBasedStatement.add_member(:scope_down_statement, Shapes::ShapeRef.new(shape: Statement, location_name: "ScopeDownStatement"))
     RateBasedStatement.add_member(:forwarded_ip_config, Shapes::ShapeRef.new(shape: ForwardedIPConfig, location_name: "ForwardedIPConfig"))

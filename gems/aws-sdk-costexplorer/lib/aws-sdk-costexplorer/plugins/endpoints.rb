@@ -78,6 +78,8 @@ module Aws::CostExplorer
             Aws::CostExplorer::Endpoints::GetAnomalyMonitors.build(context)
           when :get_anomaly_subscriptions
             Aws::CostExplorer::Endpoints::GetAnomalySubscriptions.build(context)
+          when :get_approximate_usage_records
+            Aws::CostExplorer::Endpoints::GetApproximateUsageRecords.build(context)
           when :get_cost_and_usage
             Aws::CostExplorer::Endpoints::GetCostAndUsage.build(context)
           when :get_cost_and_usage_with_resources

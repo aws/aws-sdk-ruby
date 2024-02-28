@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2024-02-28)
+------------------
+
+* Feature - This release reduces the maximum results returned per query invocation from 500 to 100 for the SearchIndex API. This change has no implications as long as the API is invoked until the nextToken is NULL.
+
 1.120.0 (2024-02-09)
 ------------------
 

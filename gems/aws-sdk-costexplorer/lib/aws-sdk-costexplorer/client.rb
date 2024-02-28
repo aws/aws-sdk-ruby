@@ -1149,6 +1149,53 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
+    # Retrieves estimated usage records for hourly granularity or
+    # resource-level data at daily granularity.
+    #
+    # @option params [required, String] :granularity
+    #   How granular you want the data to be. You can enable data at hourly or
+    #   daily granularity.
+    #
+    # @option params [Array<String>] :services
+    #   The service metadata for the service or services you want to query. If
+    #   not specified, all elements are returned.
+    #
+    # @option params [required, String] :approximation_dimension
+    #   The service to evaluate for the usage records. You can choose
+    #   resource-level data at daily granularity, or hourly granularity with
+    #   or without resource-level data.
+    #
+    # @return [Types::GetApproximateUsageRecordsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetApproximateUsageRecordsResponse#services #services} => Hash&lt;String,Integer&gt;
+    #   * {Types::GetApproximateUsageRecordsResponse#total_records #total_records} => Integer
+    #   * {Types::GetApproximateUsageRecordsResponse#lookback_period #lookback_period} => Types::DateInterval
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_approximate_usage_records({
+    #     granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
+    #     services: ["GenericString"],
+    #     approximation_dimension: "SERVICE", # required, accepts SERVICE, RESOURCE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.services #=> Hash
+    #   resp.services["GenericString"] #=> Integer
+    #   resp.total_records #=> Integer
+    #   resp.lookback_period.start #=> String
+    #   resp.lookback_period.end #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetApproximateUsageRecords AWS API Documentation
+    #
+    # @overload get_approximate_usage_records(params = {})
+    # @param [Hash] params ({})
+    def get_approximate_usage_records(params = {}, options = {})
+      req = build_request(:get_approximate_usage_records, params)
+      req.send_request(options)
+    end
+
     # Retrieves cost and usage metrics for your account. You can specify
     # which cost and usage-related metric that you want the request to
     # return. For example, you can specify `BlendedCosts` or
@@ -5157,7 +5204,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

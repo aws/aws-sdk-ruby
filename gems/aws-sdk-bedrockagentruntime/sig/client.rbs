@@ -109,7 +109,8 @@ module Aws
                       },
                       ?retrieval_configuration: {
                         vector_search_configuration: {
-                          number_of_results: ::Integer
+                          number_of_results: ::Integer?,
+                          override_search_type: ("HYBRID" | "SEMANTIC")?
                         }
                       },
                       ?next_token: ::String
@@ -132,7 +133,13 @@ module Aws
                                      type: ("KNOWLEDGE_BASE"),
                                      knowledge_base_configuration: {
                                        knowledge_base_id: ::String,
-                                       model_arn: ::String
+                                       model_arn: ::String,
+                                       retrieval_configuration: {
+                                         vector_search_configuration: {
+                                           number_of_results: ::Integer?,
+                                           override_search_type: ("HYBRID" | "SEMANTIC")?
+                                         }
+                                       }?
                                      }?
                                    },
                                    ?session_configuration: {

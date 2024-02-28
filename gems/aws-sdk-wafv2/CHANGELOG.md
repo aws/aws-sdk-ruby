@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2024-02-28)
+------------------
+
+* Feature - AWS WAF now supports configurable time windows for request aggregation with rate-based rules. Customers can now select time windows of 1 minute, 2 minutes or 10 minutes, in addition to the previously supported 5 minutes.
+
 1.76.0 (2024-02-06)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2024-02-28)
+------------------
+
+* Feature - This release adds Batch support for configuration of multicontainer jobs in ECS, Fargate, and EKS. This support is available for all types of jobs, including both array jobs and multi-node parallel jobs.
+
 1.81.0 (2024-02-09)
 ------------------
 

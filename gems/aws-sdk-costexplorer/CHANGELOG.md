@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2024-02-28)
+------------------
+
+* Feature - This release introduces the new API 'GetApproximateUsageRecords', which retrieves estimated usage records for hourly granularity or resource-level data at daily granularity.
+
 1.95.0 (2024-01-26)
 ------------------
 

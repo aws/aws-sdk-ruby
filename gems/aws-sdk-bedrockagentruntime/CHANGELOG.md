@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2024-02-28)
+------------------
+
+* Feature - This release adds support to override search strategy performed by the Retrieve and RetrieveAndGenerate APIs for Amazon Bedrock Agents
+
 1.1.0 (2024-01-26)
 ------------------
 

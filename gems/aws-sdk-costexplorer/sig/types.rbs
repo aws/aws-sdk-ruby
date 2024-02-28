@@ -445,6 +445,20 @@ module Aws::CostExplorer
       SENSITIVE: []
     end
 
+    class GetApproximateUsageRecordsRequest
+      attr_accessor granularity: ("DAILY" | "MONTHLY" | "HOURLY")
+      attr_accessor services: ::Array[::String]
+      attr_accessor approximation_dimension: ("SERVICE" | "RESOURCE")
+      SENSITIVE: []
+    end
+
+    class GetApproximateUsageRecordsResponse
+      attr_accessor services: ::Hash[::String, ::Integer]
+      attr_accessor total_records: ::Integer
+      attr_accessor lookback_period: Types::DateInterval
+      SENSITIVE: []
+    end
+
     class GetCostAndUsageRequest
       attr_accessor time_period: Types::DateInterval
       attr_accessor granularity: ("DAILY" | "MONTHLY" | "HOURLY")
