@@ -152,11 +152,11 @@ module Aws
       when MapShape then map(ref, value, errors, context)
       when DocumentShape then document(ref, value, errors, context)
       when StringShape
-        unless value.is_a?(String)
+        unless value.is_a?(String) || value.nil?
           errors << expected_got(context, "a String", value)
         end
       when IntegerShape
-        unless value.is_a?(Integer)
+        unless value.is_a?(Integer) || value.nil?
           errors << expected_got(context, "an Integer", value)
         end
       when FloatShape
@@ -168,7 +168,7 @@ module Aws
           errors << expected_got(context, "a Time object", value)
         end
       when BooleanShape
-        unless [true, false].include?(value)
+        unless [true, false].include?(value) || value.nil?
           errors << expected_got(context, "true or false", value)
         end
       when BlobShape
@@ -204,6 +204,7 @@ module Aws
       when Hash then true
       when ref.shape.struct_class then true
       when Enumerator then ref.eventstream && value.respond_to?(:event_types)
+      when nil then true
       else
         errors << expected_got(context, "a hash", value)
         false
