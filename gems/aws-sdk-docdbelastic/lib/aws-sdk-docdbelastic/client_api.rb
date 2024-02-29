@@ -16,6 +16,7 @@ module Aws::DocDBElastic
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Arn = Shapes::StringShape.new(name: 'Arn')
     Auth = Shapes::StringShape.new(name: 'Auth')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Cluster = Shapes::StructureShape.new(name: 'Cluster')
     ClusterInList = Shapes::StructureShape.new(name: 'ClusterInList')
     ClusterList = Shapes::ListShape.new(name: 'ClusterList')
@@ -23,6 +24,9 @@ module Aws::DocDBElastic
     ClusterSnapshotInList = Shapes::StructureShape.new(name: 'ClusterSnapshotInList')
     ClusterSnapshotList = Shapes::ListShape.new(name: 'ClusterSnapshotList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CopyClusterSnapshotInput = Shapes::StructureShape.new(name: 'CopyClusterSnapshotInput')
+    CopyClusterSnapshotInputTargetSnapshotNameString = Shapes::StringShape.new(name: 'CopyClusterSnapshotInputTargetSnapshotNameString')
+    CopyClusterSnapshotOutput = Shapes::StructureShape.new(name: 'CopyClusterSnapshotOutput')
     CreateClusterInput = Shapes::StructureShape.new(name: 'CreateClusterInput')
     CreateClusterOutput = Shapes::StructureShape.new(name: 'CreateClusterOutput')
     CreateClusterSnapshotInput = Shapes::StructureShape.new(name: 'CreateClusterSnapshotInput')
@@ -52,7 +56,14 @@ module Aws::DocDBElastic
     RestoreClusterFromSnapshotInput = Shapes::StructureShape.new(name: 'RestoreClusterFromSnapshotInput')
     RestoreClusterFromSnapshotOutput = Shapes::StructureShape.new(name: 'RestoreClusterFromSnapshotOutput')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    Shard = Shapes::StructureShape.new(name: 'Shard')
+    ShardList = Shapes::ListShape.new(name: 'ShardList')
+    SnapshotType = Shapes::StringShape.new(name: 'SnapshotType')
+    StartClusterInput = Shapes::StructureShape.new(name: 'StartClusterInput')
+    StartClusterOutput = Shapes::StructureShape.new(name: 'StartClusterOutput')
     Status = Shapes::StringShape.new(name: 'Status')
+    StopClusterInput = Shapes::StructureShape.new(name: 'StopClusterInput')
+    StopClusterOutput = Shapes::StructureShape.new(name: 'StopClusterOutput')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -76,14 +87,18 @@ module Aws::DocDBElastic
 
     Cluster.add_member(:admin_user_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "adminUserName"))
     Cluster.add_member(:auth_type, Shapes::ShapeRef.new(shape: Auth, required: true, location_name: "authType"))
+    Cluster.add_member(:backup_retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "backupRetentionPeriod"))
     Cluster.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clusterArn"))
     Cluster.add_member(:cluster_endpoint, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clusterEndpoint"))
     Cluster.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clusterName"))
     Cluster.add_member(:create_time, Shapes::ShapeRef.new(shape: String, required: true, location_name: "createTime"))
     Cluster.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "kmsKeyId"))
+    Cluster.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: String, location_name: "preferredBackupWindow"))
     Cluster.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String, required: true, location_name: "preferredMaintenanceWindow"))
     Cluster.add_member(:shard_capacity, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "shardCapacity"))
     Cluster.add_member(:shard_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "shardCount"))
+    Cluster.add_member(:shard_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "shardInstanceCount"))
+    Cluster.add_member(:shards, Shapes::ShapeRef.new(shape: ShardList, location_name: "shards"))
     Cluster.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
     Cluster.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "subnetIds"))
     Cluster.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "vpcSecurityGroupIds"))
@@ -103,6 +118,7 @@ module Aws::DocDBElastic
     ClusterSnapshot.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "snapshotArn"))
     ClusterSnapshot.add_member(:snapshot_creation_time, Shapes::ShapeRef.new(shape: String, required: true, location_name: "snapshotCreationTime"))
     ClusterSnapshot.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "snapshotName"))
+    ClusterSnapshot.add_member(:snapshot_type, Shapes::ShapeRef.new(shape: SnapshotType, location_name: "snapshotType"))
     ClusterSnapshot.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
     ClusterSnapshot.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "subnetIds"))
     ClusterSnapshot.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "vpcSecurityGroupIds"))
@@ -122,15 +138,28 @@ module Aws::DocDBElastic
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
+    CopyClusterSnapshotInput.add_member(:copy_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "copyTags"))
+    CopyClusterSnapshotInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    CopyClusterSnapshotInput.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "snapshotArn"))
+    CopyClusterSnapshotInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CopyClusterSnapshotInput.add_member(:target_snapshot_name, Shapes::ShapeRef.new(shape: CopyClusterSnapshotInputTargetSnapshotNameString, required: true, location_name: "targetSnapshotName"))
+    CopyClusterSnapshotInput.struct_class = Types::CopyClusterSnapshotInput
+
+    CopyClusterSnapshotOutput.add_member(:snapshot, Shapes::ShapeRef.new(shape: ClusterSnapshot, required: true, location_name: "snapshot"))
+    CopyClusterSnapshotOutput.struct_class = Types::CopyClusterSnapshotOutput
+
     CreateClusterInput.add_member(:admin_user_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "adminUserName"))
     CreateClusterInput.add_member(:admin_user_password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "adminUserPassword"))
     CreateClusterInput.add_member(:auth_type, Shapes::ShapeRef.new(shape: Auth, required: true, location_name: "authType"))
+    CreateClusterInput.add_member(:backup_retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "backupRetentionPeriod"))
     CreateClusterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateClusterInput.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clusterName"))
     CreateClusterInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    CreateClusterInput.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: String, location_name: "preferredBackupWindow"))
     CreateClusterInput.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String, location_name: "preferredMaintenanceWindow"))
     CreateClusterInput.add_member(:shard_capacity, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "shardCapacity"))
     CreateClusterInput.add_member(:shard_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "shardCount"))
+    CreateClusterInput.add_member(:shard_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "shardInstanceCount"))
     CreateClusterInput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "subnetIds"))
     CreateClusterInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateClusterInput.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "vpcSecurityGroupIds"))
@@ -177,6 +206,7 @@ module Aws::DocDBElastic
     ListClusterSnapshotsInput.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clusterArn"))
     ListClusterSnapshotsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListClusterSnapshotsInputMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListClusterSnapshotsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListClusterSnapshotsInput.add_member(:snapshot_type, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "snapshotType"))
     ListClusterSnapshotsInput.struct_class = Types::ListClusterSnapshotsInput
 
     ListClusterSnapshotsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -204,6 +234,8 @@ module Aws::DocDBElastic
 
     RestoreClusterFromSnapshotInput.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clusterName"))
     RestoreClusterFromSnapshotInput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    RestoreClusterFromSnapshotInput.add_member(:shard_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "shardCapacity"))
+    RestoreClusterFromSnapshotInput.add_member(:shard_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "shardInstanceCount"))
     RestoreClusterFromSnapshotInput.add_member(:snapshot_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "snapshotArn"))
     RestoreClusterFromSnapshotInput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "subnetIds"))
     RestoreClusterFromSnapshotInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -215,6 +247,25 @@ module Aws::DocDBElastic
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    Shard.add_member(:create_time, Shapes::ShapeRef.new(shape: String, required: true, location_name: "createTime"))
+    Shard.add_member(:shard_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "shardId"))
+    Shard.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
+    Shard.struct_class = Types::Shard
+
+    ShardList.member = Shapes::ShapeRef.new(shape: Shard)
+
+    StartClusterInput.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "clusterArn"))
+    StartClusterInput.struct_class = Types::StartClusterInput
+
+    StartClusterOutput.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, required: true, location_name: "cluster"))
+    StartClusterOutput.struct_class = Types::StartClusterOutput
+
+    StopClusterInput.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "clusterArn"))
+    StopClusterInput.struct_class = Types::StopClusterInput
+
+    StopClusterOutput.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, required: true, location_name: "cluster"))
+    StopClusterOutput.struct_class = Types::StopClusterOutput
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -241,11 +292,14 @@ module Aws::DocDBElastic
 
     UpdateClusterInput.add_member(:admin_user_password, Shapes::ShapeRef.new(shape: Password, location_name: "adminUserPassword"))
     UpdateClusterInput.add_member(:auth_type, Shapes::ShapeRef.new(shape: Auth, location_name: "authType"))
+    UpdateClusterInput.add_member(:backup_retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "backupRetentionPeriod"))
     UpdateClusterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateClusterInput.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "clusterArn"))
+    UpdateClusterInput.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: String, location_name: "preferredBackupWindow"))
     UpdateClusterInput.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String, location_name: "preferredMaintenanceWindow"))
     UpdateClusterInput.add_member(:shard_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "shardCapacity"))
     UpdateClusterInput.add_member(:shard_count, Shapes::ShapeRef.new(shape: Integer, location_name: "shardCount"))
+    UpdateClusterInput.add_member(:shard_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "shardInstanceCount"))
     UpdateClusterInput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "subnetIds"))
     UpdateClusterInput.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "vpcSecurityGroupIds"))
     UpdateClusterInput.struct_class = Types::UpdateClusterInput
@@ -282,6 +336,21 @@ module Aws::DocDBElastic
         "signingName" => "docdb-elastic",
         "uid" => "docdb-elastic-2022-11-28",
       }
+
+      api.add_operation(:copy_cluster_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CopyClusterSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/cluster-snapshot/{snapshotArn}/copy"
+        o.input = Shapes::ShapeRef.new(shape: CopyClusterSnapshotInput)
+        o.output = Shapes::ShapeRef.new(shape: CopyClusterSnapshotOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
 
       api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCluster"
@@ -424,6 +493,32 @@ module Aws::DocDBElastic
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:start_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/cluster/{clusterArn}/start"
+        o.input = Shapes::ShapeRef.new(shape: StartClusterInput)
+        o.output = Shapes::ShapeRef.new(shape: StartClusterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:stop_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/cluster/{clusterArn}/stop"
+        o.input = Shapes::ShapeRef.new(shape: StopClusterInput)
+        o.output = Shapes::ShapeRef.new(shape: StopClusterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

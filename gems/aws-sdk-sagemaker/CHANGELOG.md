@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.232.0 (2024-02-29)
+------------------
+
+* Feature - Adds support for ModelDataSource in Model Packages to support unzipped models. Adds support to specify SourceUri for models which allows registration of models without mandating a container for hosting. Using SourceUri, customers can decouple the model from hosting information during registration.
+
 1.231.0 (2024-02-02)
 ------------------
 

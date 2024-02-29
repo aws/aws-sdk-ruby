@@ -1586,6 +1586,7 @@ module Aws::QuickSight
     TooltipItem = Shapes::StructureShape.new(name: 'TooltipItem')
     TooltipItemList = Shapes::ListShape.new(name: 'TooltipItemList')
     TooltipOptions = Shapes::StructureShape.new(name: 'TooltipOptions')
+    TooltipTarget = Shapes::StringShape.new(name: 'TooltipTarget')
     TooltipTitleType = Shapes::StringShape.new(name: 'TooltipTitleType')
     TopBottomComputationType = Shapes::StringShape.new(name: 'TopBottomComputationType')
     TopBottomFilter = Shapes::StructureShape.new(name: 'TopBottomFilter')
@@ -2615,6 +2616,7 @@ module Aws::QuickSight
     ColumnTooltipItem.add_member(:label, Shapes::ShapeRef.new(shape: String, location_name: "Label"))
     ColumnTooltipItem.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     ColumnTooltipItem.add_member(:aggregation, Shapes::ShapeRef.new(shape: AggregationFunction, location_name: "Aggregation"))
+    ColumnTooltipItem.add_member(:tooltip_target, Shapes::ShapeRef.new(shape: TooltipTarget, location_name: "TooltipTarget"))
     ColumnTooltipItem.struct_class = Types::ColumnTooltipItem
 
     ComboChartAggregatedFieldWells.add_member(:category, Shapes::ShapeRef.new(shape: DimensionFieldList, location_name: "Category"))
@@ -4531,6 +4533,7 @@ module Aws::QuickSight
     FieldTooltipItem.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "FieldId"))
     FieldTooltipItem.add_member(:label, Shapes::ShapeRef.new(shape: String, location_name: "Label"))
     FieldTooltipItem.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
+    FieldTooltipItem.add_member(:tooltip_target, Shapes::ShapeRef.new(shape: TooltipTarget, location_name: "TooltipTarget"))
     FieldTooltipItem.struct_class = Types::FieldTooltipItem
 
     FilledMapAggregatedFieldWells.add_member(:geospatial, Shapes::ShapeRef.new(shape: FilledMapDimensionFieldList, location_name: "Geospatial"))

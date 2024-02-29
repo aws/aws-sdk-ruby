@@ -124,6 +124,7 @@ module Aws::LexModelsV2
     AnalyticsUtteranceResult = Shapes::StructureShape.new(name: 'AnalyticsUtteranceResult')
     AnalyticsUtteranceResults = Shapes::ListShape.new(name: 'AnalyticsUtteranceResults')
     AnalyticsUtteranceSortByName = Shapes::StringShape.new(name: 'AnalyticsUtteranceSortByName')
+    AnswerField = Shapes::StringShape.new(name: 'AnswerField')
     AssociatedTranscript = Shapes::StructureShape.new(name: 'AssociatedTranscript')
     AssociatedTranscriptFilter = Shapes::StructureShape.new(name: 'AssociatedTranscriptFilter')
     AssociatedTranscriptFilterName = Shapes::StringShape.new(name: 'AssociatedTranscriptFilterName')
@@ -144,6 +145,8 @@ module Aws::LexModelsV2
     BatchDeleteCustomVocabularyItemResponse = Shapes::StructureShape.new(name: 'BatchDeleteCustomVocabularyItemResponse')
     BatchUpdateCustomVocabularyItemRequest = Shapes::StructureShape.new(name: 'BatchUpdateCustomVocabularyItemRequest')
     BatchUpdateCustomVocabularyItemResponse = Shapes::StructureShape.new(name: 'BatchUpdateCustomVocabularyItemResponse')
+    BedrockKnowledgeBaseArn = Shapes::StringShape.new(name: 'BedrockKnowledgeBaseArn')
+    BedrockKnowledgeStoreConfiguration = Shapes::StructureShape.new(name: 'BedrockKnowledgeStoreConfiguration')
     BedrockModelArn = Shapes::StringShape.new(name: 'BedrockModelArn')
     BedrockModelSpecification = Shapes::StructureShape.new(name: 'BedrockModelSpecification')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -299,6 +302,7 @@ module Aws::LexModelsV2
     DTMFCharacter = Shapes::StringShape.new(name: 'DTMFCharacter')
     DTMFSpecification = Shapes::StructureShape.new(name: 'DTMFSpecification')
     DataPrivacy = Shapes::StructureShape.new(name: 'DataPrivacy')
+    DataSourceConfiguration = Shapes::StructureShape.new(name: 'DataSourceConfiguration')
     DateRangeFilter = Shapes::StructureShape.new(name: 'DateRangeFilter')
     DefaultConditionalBranch = Shapes::StructureShape.new(name: 'DefaultConditionalBranch')
     DeleteBotAliasRequest = Shapes::StructureShape.new(name: 'DeleteBotAliasRequest')
@@ -371,6 +375,7 @@ module Aws::LexModelsV2
     DialogCodeHookInvocationSetting = Shapes::StructureShape.new(name: 'DialogCodeHookInvocationSetting')
     DialogCodeHookSettings = Shapes::StructureShape.new(name: 'DialogCodeHookSettings')
     DialogState = Shapes::StructureShape.new(name: 'DialogState')
+    DomainEndpoint = Shapes::StringShape.new(name: 'DomainEndpoint')
     DraftBotVersion = Shapes::StringShape.new(name: 'DraftBotVersion')
     Effect = Shapes::StringShape.new(name: 'Effect')
     ElicitationCodeHookInvocationSetting = Shapes::StructureShape.new(name: 'ElicitationCodeHookInvocationSetting')
@@ -378,6 +383,7 @@ module Aws::LexModelsV2
     EncryptionSetting = Shapes::StructureShape.new(name: 'EncryptionSetting')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExactResponseFields = Shapes::StructureShape.new(name: 'ExactResponseFields')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExecutionErrorDetails = Shapes::StructureShape.new(name: 'ExecutionErrorDetails')
     ExportFilter = Shapes::StructureShape.new(name: 'ExportFilter')
@@ -435,6 +441,7 @@ module Aws::LexModelsV2
     ImportSummary = Shapes::StructureShape.new(name: 'ImportSummary')
     ImportSummaryList = Shapes::ListShape.new(name: 'ImportSummaryList')
     ImportedResourceId = Shapes::StringShape.new(name: 'ImportedResourceId')
+    IncludeField = Shapes::StringShape.new(name: 'IncludeField')
     InitialResponseSetting = Shapes::StructureShape.new(name: 'InitialResponseSetting')
     InputContext = Shapes::StructureShape.new(name: 'InputContext')
     InputContextsList = Shapes::ListShape.new(name: 'InputContextsList')
@@ -551,10 +558,13 @@ module Aws::LexModelsV2
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NumericalBotVersion = Shapes::StringShape.new(name: 'NumericalBotVersion')
+    OSIncludeFields = Shapes::ListShape.new(name: 'OSIncludeFields')
+    OSIndexName = Shapes::StringShape.new(name: 'OSIndexName')
     ObfuscationSetting = Shapes::StructureShape.new(name: 'ObfuscationSetting')
     ObfuscationSettingType = Shapes::StringShape.new(name: 'ObfuscationSettingType')
     ObjectPrefix = Shapes::StringShape.new(name: 'ObjectPrefix')
     ObjectPrefixes = Shapes::ListShape.new(name: 'ObjectPrefixes')
+    OpensearchConfiguration = Shapes::StructureShape.new(name: 'OpensearchConfiguration')
     Operation = Shapes::StringShape.new(name: 'Operation')
     OperationList = Shapes::ListShape.new(name: 'OperationList')
     OutputContext = Shapes::StructureShape.new(name: 'OutputContext')
@@ -582,7 +592,10 @@ module Aws::LexModelsV2
     PromptAttemptsSpecificationMap = Shapes::MapShape.new(name: 'PromptAttemptsSpecificationMap')
     PromptMaxRetries = Shapes::IntegerShape.new(name: 'PromptMaxRetries')
     PromptSpecification = Shapes::StructureShape.new(name: 'PromptSpecification')
+    QnAIntentConfiguration = Shapes::StructureShape.new(name: 'QnAIntentConfiguration')
+    QnAKendraConfiguration = Shapes::StructureShape.new(name: 'QnAKendraConfiguration')
     QueryFilterString = Shapes::StringShape.new(name: 'QueryFilterString')
+    QuestionField = Shapes::StringShape.new(name: 'QuestionField')
     RecommendedAction = Shapes::StringShape.new(name: 'RecommendedAction')
     RecommendedActions = Shapes::ListShape.new(name: 'RecommendedActions')
     RecommendedIntentSummary = Shapes::StructureShape.new(name: 'RecommendedIntentSummary')
@@ -1123,6 +1136,9 @@ module Aws::LexModelsV2
     BatchUpdateCustomVocabularyItemResponse.add_member(:resources, Shapes::ShapeRef.new(shape: CustomVocabularyItems, location_name: "resources"))
     BatchUpdateCustomVocabularyItemResponse.struct_class = Types::BatchUpdateCustomVocabularyItemResponse
 
+    BedrockKnowledgeStoreConfiguration.add_member(:bedrock_knowledge_base_arn, Shapes::ShapeRef.new(shape: BedrockKnowledgeBaseArn, required: true, location_name: "bedrockKnowledgeBaseArn"))
+    BedrockKnowledgeStoreConfiguration.struct_class = Types::BedrockKnowledgeStoreConfiguration
+
     BedrockModelSpecification.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockModelArn, required: true, location_name: "modelArn"))
     BedrockModelSpecification.struct_class = Types::BedrockModelSpecification
 
@@ -1550,6 +1566,7 @@ module Aws::LexModelsV2
     CreateIntentRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location: "uri", location_name: "botVersion"))
     CreateIntentRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
     CreateIntentRequest.add_member(:initial_response_setting, Shapes::ShapeRef.new(shape: InitialResponseSetting, location_name: "initialResponseSetting"))
+    CreateIntentRequest.add_member(:qn_a_intent_configuration, Shapes::ShapeRef.new(shape: QnAIntentConfiguration, location_name: "qnAIntentConfiguration"))
     CreateIntentRequest.struct_class = Types::CreateIntentRequest
 
     CreateIntentResponse.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, location_name: "intentId"))
@@ -1569,6 +1586,7 @@ module Aws::LexModelsV2
     CreateIntentResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
     CreateIntentResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     CreateIntentResponse.add_member(:initial_response_setting, Shapes::ShapeRef.new(shape: InitialResponseSetting, location_name: "initialResponseSetting"))
+    CreateIntentResponse.add_member(:qn_a_intent_configuration, Shapes::ShapeRef.new(shape: QnAIntentConfiguration, location_name: "qnAIntentConfiguration"))
     CreateIntentResponse.struct_class = Types::CreateIntentResponse
 
     CreateResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
@@ -1694,6 +1712,11 @@ module Aws::LexModelsV2
 
     DataPrivacy.add_member(:child_directed, Shapes::ShapeRef.new(shape: ChildDirected, required: true, location_name: "childDirected"))
     DataPrivacy.struct_class = Types::DataPrivacy
+
+    DataSourceConfiguration.add_member(:opensearch_configuration, Shapes::ShapeRef.new(shape: OpensearchConfiguration, location_name: "opensearchConfiguration"))
+    DataSourceConfiguration.add_member(:kendra_configuration, Shapes::ShapeRef.new(shape: QnAKendraConfiguration, location_name: "kendraConfiguration"))
+    DataSourceConfiguration.add_member(:bedrock_knowledge_store_configuration, Shapes::ShapeRef.new(shape: BedrockKnowledgeStoreConfiguration, location_name: "bedrockKnowledgeStoreConfiguration"))
+    DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
     DateRangeFilter.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDateTime"))
     DateRangeFilter.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endDateTime"))
@@ -2019,6 +2042,7 @@ module Aws::LexModelsV2
     DescribeIntentResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     DescribeIntentResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
     DescribeIntentResponse.add_member(:initial_response_setting, Shapes::ShapeRef.new(shape: InitialResponseSetting, location_name: "initialResponseSetting"))
+    DescribeIntentResponse.add_member(:qn_a_intent_configuration, Shapes::ShapeRef.new(shape: QnAIntentConfiguration, location_name: "qnAIntentConfiguration"))
     DescribeIntentResponse.struct_class = Types::DescribeIntentResponse
 
     DescribeResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
@@ -2164,6 +2188,10 @@ module Aws::LexModelsV2
     EncryptionSetting.add_member(:bot_locale_export_password, Shapes::ShapeRef.new(shape: FilePassword, location_name: "botLocaleExportPassword"))
     EncryptionSetting.add_member(:associated_transcripts_password, Shapes::ShapeRef.new(shape: FilePassword, location_name: "associatedTranscriptsPassword"))
     EncryptionSetting.struct_class = Types::EncryptionSetting
+
+    ExactResponseFields.add_member(:question_field, Shapes::ShapeRef.new(shape: QuestionField, required: true, location_name: "questionField"))
+    ExactResponseFields.add_member(:answer_field, Shapes::ShapeRef.new(shape: AnswerField, required: true, location_name: "answerField"))
+    ExactResponseFields.struct_class = Types::ExactResponseFields
 
     ExecutionErrorDetails.add_member(:error_code, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "errorCode"))
     ExecutionErrorDetails.add_member(:error_message, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "errorMessage"))
@@ -2856,10 +2884,19 @@ module Aws::LexModelsV2
     NewCustomVocabularyItem.add_member(:display_as, Shapes::ShapeRef.new(shape: Phrase, location_name: "displayAs"))
     NewCustomVocabularyItem.struct_class = Types::NewCustomVocabularyItem
 
+    OSIncludeFields.member = Shapes::ShapeRef.new(shape: IncludeField)
+
     ObfuscationSetting.add_member(:obfuscation_setting_type, Shapes::ShapeRef.new(shape: ObfuscationSettingType, required: true, location_name: "obfuscationSettingType"))
     ObfuscationSetting.struct_class = Types::ObfuscationSetting
 
     ObjectPrefixes.member = Shapes::ShapeRef.new(shape: ObjectPrefix)
+
+    OpensearchConfiguration.add_member(:domain_endpoint, Shapes::ShapeRef.new(shape: DomainEndpoint, required: true, location_name: "domainEndpoint"))
+    OpensearchConfiguration.add_member(:index_name, Shapes::ShapeRef.new(shape: OSIndexName, required: true, location_name: "indexName"))
+    OpensearchConfiguration.add_member(:exact_response, Shapes::ShapeRef.new(shape: Boolean, location_name: "exactResponse"))
+    OpensearchConfiguration.add_member(:exact_response_fields, Shapes::ShapeRef.new(shape: ExactResponseFields, location_name: "exactResponseFields"))
+    OpensearchConfiguration.add_member(:include_fields, Shapes::ShapeRef.new(shape: OSIncludeFields, location_name: "includeFields"))
+    OpensearchConfiguration.struct_class = Types::OpensearchConfiguration
 
     OperationList.member = Shapes::ShapeRef.new(shape: Operation)
 
@@ -2939,6 +2976,16 @@ module Aws::LexModelsV2
     PromptSpecification.add_member(:message_selection_strategy, Shapes::ShapeRef.new(shape: MessageSelectionStrategy, location_name: "messageSelectionStrategy"))
     PromptSpecification.add_member(:prompt_attempts_specification, Shapes::ShapeRef.new(shape: PromptAttemptsSpecificationMap, location_name: "promptAttemptsSpecification"))
     PromptSpecification.struct_class = Types::PromptSpecification
+
+    QnAIntentConfiguration.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, location_name: "dataSourceConfiguration"))
+    QnAIntentConfiguration.add_member(:bedrock_model_configuration, Shapes::ShapeRef.new(shape: BedrockModelSpecification, location_name: "bedrockModelConfiguration"))
+    QnAIntentConfiguration.struct_class = Types::QnAIntentConfiguration
+
+    QnAKendraConfiguration.add_member(:kendra_index, Shapes::ShapeRef.new(shape: KendraIndexArn, required: true, location_name: "kendraIndex"))
+    QnAKendraConfiguration.add_member(:query_filter_string_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "queryFilterStringEnabled"))
+    QnAKendraConfiguration.add_member(:query_filter_string, Shapes::ShapeRef.new(shape: QueryFilterString, location_name: "queryFilterString"))
+    QnAKendraConfiguration.add_member(:exact_response, Shapes::ShapeRef.new(shape: Boolean, location_name: "exactResponse"))
+    QnAKendraConfiguration.struct_class = Types::QnAKendraConfiguration
 
     RecommendedActions.member = Shapes::ShapeRef.new(shape: RecommendedAction)
 
@@ -3579,6 +3626,7 @@ module Aws::LexModelsV2
     UpdateIntentRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location: "uri", location_name: "botVersion"))
     UpdateIntentRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
     UpdateIntentRequest.add_member(:initial_response_setting, Shapes::ShapeRef.new(shape: InitialResponseSetting, location_name: "initialResponseSetting"))
+    UpdateIntentRequest.add_member(:qn_a_intent_configuration, Shapes::ShapeRef.new(shape: QnAIntentConfiguration, location_name: "qnAIntentConfiguration"))
     UpdateIntentRequest.struct_class = Types::UpdateIntentRequest
 
     UpdateIntentResponse.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, location_name: "intentId"))
@@ -3600,6 +3648,7 @@ module Aws::LexModelsV2
     UpdateIntentResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     UpdateIntentResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
     UpdateIntentResponse.add_member(:initial_response_setting, Shapes::ShapeRef.new(shape: InitialResponseSetting, location_name: "initialResponseSetting"))
+    UpdateIntentResponse.add_member(:qn_a_intent_configuration, Shapes::ShapeRef.new(shape: QnAIntentConfiguration, location_name: "qnAIntentConfiguration"))
     UpdateIntentResponse.struct_class = Types::UpdateIntentResponse
 
     UpdateResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))

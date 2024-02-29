@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2024-02-29)
+------------------
+
+* Feature - Launched Elastic Clusters Readable Secondaries, Start/Stop, Configurable Shard Instance count, Automatic Backups and Snapshot Copying
+
 1.11.0 (2024-01-26)
 ------------------
 

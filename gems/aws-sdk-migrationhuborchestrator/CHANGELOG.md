@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2024-02-29)
+------------------
+
+* Feature - Adds new CreateTemplate, UpdateTemplate and DeleteTemplate APIs.
+
 1.12.0 (2024-01-26)
 ------------------
 

@@ -58,12 +58,16 @@ module Aws::MigrationHubOrchestrator
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :create_template
+            Aws::MigrationHubOrchestrator::Endpoints::CreateTemplate.build(context)
           when :create_workflow
             Aws::MigrationHubOrchestrator::Endpoints::CreateWorkflow.build(context)
           when :create_workflow_step
             Aws::MigrationHubOrchestrator::Endpoints::CreateWorkflowStep.build(context)
           when :create_workflow_step_group
             Aws::MigrationHubOrchestrator::Endpoints::CreateWorkflowStepGroup.build(context)
+          when :delete_template
+            Aws::MigrationHubOrchestrator::Endpoints::DeleteTemplate.build(context)
           when :delete_workflow
             Aws::MigrationHubOrchestrator::Endpoints::DeleteWorkflow.build(context)
           when :delete_workflow_step
@@ -108,6 +112,8 @@ module Aws::MigrationHubOrchestrator
             Aws::MigrationHubOrchestrator::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::MigrationHubOrchestrator::Endpoints::UntagResource.build(context)
+          when :update_template
+            Aws::MigrationHubOrchestrator::Endpoints::UpdateTemplate.build(context)
           when :update_workflow
             Aws::MigrationHubOrchestrator::Endpoints::UpdateWorkflow.build(context)
           when :update_workflow_step

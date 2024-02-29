@@ -23,6 +23,20 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
+    # This exception is thrown when an attempt to update or delete a
+    # resource would cause an inconsistent state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the migration workflow.
     #   @return [String]
@@ -126,6 +140,77 @@ module Aws::MigrationHubOrchestrator
       :creation_time,
       :tags)
       SENSITIVE = [:workflow_inputs]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_name
+    #   The name of the migration workflow template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_description
+    #   A description of the migration workflow template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_source
+    #   The source of the migration workflow template.
+    #   @return [Types::TemplateSource]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see
+    #   [Idempotency][1] in the Smithy documentation.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://smithy.io/2.0/spec/behavior-traits.html#idempotencytoken-trait
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the migration workflow template.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/CreateTemplateRequest AWS API Documentation
+    #
+    class CreateTemplateRequest < Struct.new(
+      :template_name,
+      :template_description,
+      :template_source,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_id
+    #   The ID of the migration workflow template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_arn
+    #   The Amazon Resource Name (ARN) of the migration workflow template.
+    #   The format for an Migration Hub Orchestrator template ARN is
+    #   `arn:aws:migrationhub-orchestrator:region:account:template/template-abcd1234`.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags added to the migration workflow template.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/CreateTemplateResponse AWS API Documentation
+    #
+    class CreateTemplateResponse < Struct.new(
+      :template_id,
+      :template_arn,
+      :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -328,6 +413,22 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The ID of the request to delete a migration workflow template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/DeleteTemplateRequest AWS API Documentation
+    #
+    class DeleteTemplateRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/DeleteTemplateResponse AWS API Documentation
+    #
+    class DeleteTemplateResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] workflow_id
     #   The ID of the migration workflow.
     #   @return [String]
@@ -512,6 +613,19 @@ module Aws::MigrationHubOrchestrator
     #   The ID of the template.
     #   @return [String]
     #
+    # @!attribute [rw] template_arn
+    #   &gt;The Amazon Resource Name (ARN) of the migration workflow
+    #   template. The format for an Migration Hub Orchestrator template ARN
+    #   is
+    #   `arn:aws:migrationhub-orchestrator:region:account:template/template-abcd1234`.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the template.
     #   @return [String]
@@ -528,24 +642,58 @@ module Aws::MigrationHubOrchestrator
     #   List of AWS services utilized in a migration workflow.
     #   @return [Array<Types::Tool>]
     #
+    # @!attribute [rw] creation_time
+    #   The time at which the template was last created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] owner
+    #   The owner of the migration workflow template.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The status of the template.
     #   @return [String]
     #
-    # @!attribute [rw] creation_time
-    #   The time at which the template was last created.
-    #   @return [Time]
+    # @!attribute [rw] status_message
+    #   The status message of retrieving migration workflow templates.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_class
+    #   The class of the migration workflow template. The available template
+    #   classes are:
+    #
+    #   * A2C
+    #
+    #   * MGN
+    #
+    #   * SAP\_MULTI
+    #
+    #   * SQL\_EC2
+    #
+    #   * SQL\_RDS
+    #
+    #   * VMIE
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags added to the migration workflow template.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/GetMigrationWorkflowTemplateResponse AWS API Documentation
     #
     class GetMigrationWorkflowTemplateResponse < Struct.new(
       :id,
+      :template_arn,
       :name,
       :description,
       :inputs,
       :tools,
+      :creation_time,
+      :owner,
       :status,
-      :creation_time)
+      :status_message,
+      :template_class,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -799,7 +947,7 @@ module Aws::MigrationHubOrchestrator
     #   @return [String]
     #
     # @!attribute [rw] step_group_id
-    #   desThe ID of the step group.
+    #   The ID of the step group.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -1696,6 +1844,28 @@ module Aws::MigrationHubOrchestrator
       include Aws::Structure
     end
 
+    # The migration workflow template used as the source for the new
+    # template.
+    #
+    # @note TemplateSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] workflow_id
+    #   The ID of the workflow from the source migration workflow template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/TemplateSource AWS API Documentation
+    #
+    class TemplateSource < Struct.new(
+      :workflow_id,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class WorkflowId < TemplateSource; end
+      class Unknown < TemplateSource; end
+    end
+
     # The summary of the step group in the template.
     #
     # @!attribute [rw] id
@@ -1961,6 +2131,67 @@ module Aws::MigrationHubOrchestrator
       :last_modified_time,
       :tags)
       SENSITIVE = [:workflow_inputs]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the request to update a migration workflow template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the migration workflow template to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_description
+    #   The description of the migration workflow template to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/UpdateTemplateRequest AWS API Documentation
+    #
+    class UpdateTemplateRequest < Struct.new(
+      :id,
+      :template_name,
+      :template_description,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_id
+    #   The ID of the migration workflow template being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_arn
+    #   The ARN of the migration workflow template being updated. The format
+    #   for an Migration Hub Orchestrator template ARN is
+    #   `arn:aws:migrationhub-orchestrator:region:account:template/template-abcd1234`.
+    #   For more information about ARNs, see [Amazon Resource Names
+    #   (ARNs)][1] in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags added to the migration workflow template.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/UpdateTemplateResponse AWS API Documentation
+    #
+    class UpdateTemplateResponse < Struct.new(
+      :template_id,
+      :template_arn,
+      :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 

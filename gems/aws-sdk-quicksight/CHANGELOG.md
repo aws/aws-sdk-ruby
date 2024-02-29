@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2024-02-29)
+------------------
+
+* Feature - TooltipTarget for Combo chart visuals; ColumnConfiguration limit increase to 2000; Documentation Update
+
 1.104.0 (2024-02-08)
 ------------------
 

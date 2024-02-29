@@ -23,13 +23,13 @@ module Aws::SecurityLake
     class AwsLogSourceConfiguration
       attr_accessor accounts: ::Array[::String]
       attr_accessor regions: ::Array[::String]
-      attr_accessor source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA")
+      attr_accessor source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF")
       attr_accessor source_version: ::String
       SENSITIVE: []
     end
 
     class AwsLogSourceResource
-      attr_accessor source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA")
+      attr_accessor source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF")
       attr_accessor source_version: ::String
       SENSITIVE: []
     end
@@ -541,6 +541,7 @@ module Aws::SecurityLake
 
     class UpdateDataLakeRequest
       attr_accessor configurations: ::Array[Types::DataLakeConfiguration]
+      attr_accessor meta_store_manager_role_arn: ::String
       SENSITIVE: []
     end
 
