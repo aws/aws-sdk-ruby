@@ -3,7 +3,7 @@
 require_relative 'spec_helper'
 require_relative 'protocol_tests_spec_helper'
 
-PROTOCOL_TESTS_IGNORE_LIST = JSON.parse(File.read('./spec/protocol-tests-ignore-list.json'))
+PROTOCOL_TESTS_IGNORE_LIST = JSON.parse(File.read('./build_tools/aws-sdk-code-generator/spec/protocol-tests-ignore-list.json'))
 
 ProtocolTestsHelper.fixtures.each do |protocol, files|
   describe(protocol) do
