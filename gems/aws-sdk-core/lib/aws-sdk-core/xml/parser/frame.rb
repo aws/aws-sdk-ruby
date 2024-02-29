@@ -266,7 +266,7 @@ module Aws
 
       class BlobFrame < Frame
         def result
-          @text.empty? ? nil : Base64.decode64(@text.join)
+          @text.empty? ? '' : Base64.decode64(@text.join)
         end
       end
 
