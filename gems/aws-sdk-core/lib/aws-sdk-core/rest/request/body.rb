@@ -18,6 +18,17 @@ module Aws
         # @param [Hash] params
         def apply(http_req, params)
           body = build_body(params)
+
+          # temp location
+          if @rules[:payload_member]
+            case @rules[:payload_member].shape
+            when BlobShape
+              http_req.headers['Content-Type'] ||= 'application/octet-stream'
+            when StringShape
+              http_req.headers['Content-Type'] ||= 'text/plain'
+            end
+          end
+
           # for rest-json, ensure we send at least an empty object
           # don't send an empty object for streaming? case.
           if body.nil? && @serializer_class == Json::Builder &&
@@ -44,6 +55,8 @@ module Aws
           if streaming?
             params[@rules[:payload]]
           elsif @rules[:payload]
+            # if target shape is blob, set the content-type
+            # @rules[:payload_member].shape
             params = params[@rules[:payload]]
             serialize(@rules[:payload_member], params) if params
           else
