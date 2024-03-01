@@ -4,7 +4,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "EmptyInputAndEmptyOutputOutput": {
@@ -43,7 +44,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "JsonUnionsOutput": {
@@ -472,7 +474,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {},
         "cases": [
@@ -543,7 +546,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "NoInputAndOutputOutput": {
@@ -582,7 +586,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "OperationWithDefaultsOutput": {
@@ -861,7 +866,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "OperationWithNestedStructureOutput": {
@@ -993,7 +999,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "OperationWithRequiredMembersOutput": {
@@ -1147,7 +1154,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "SimpleScalarPropertiesOutput": {

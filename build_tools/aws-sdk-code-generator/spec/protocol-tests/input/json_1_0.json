@@ -4,7 +4,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "EmptyInputAndEmptyOutputInput": {
@@ -45,7 +46,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {},
         "cases": [
@@ -78,7 +80,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "EndpointWithHostLabelOperationInput": {
@@ -132,7 +135,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {},
         "cases": [
@@ -162,7 +166,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "JsonUnionsInput": {
@@ -581,7 +586,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {},
         "cases": [
@@ -614,7 +620,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {},
         "cases": [
@@ -647,7 +654,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "OperationWithDefaultsInput": {
@@ -1003,7 +1011,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "OperationWithNestedStructureInput": {
@@ -1138,7 +1147,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "PutWithContentEncodingInput": {
@@ -1223,7 +1233,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "SimpleScalarPropertiesInput": {

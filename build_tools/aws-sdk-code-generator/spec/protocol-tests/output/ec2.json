@@ -162,6 +162,40 @@
             "apiVersion": "2020-01-08"
         },
         "shapes": {
+            "InvalidGreeting": {
+                "type": "structure",
+                "members": {
+                    "Message": {
+                        "shape": "String"
+                    }
+                },
+                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
+                "exception": true
+            },
+            "String": {
+                "type": "string"
+            },
+            "ComplexError": {
+                "type": "structure",
+                "members": {
+                    "TopLevel": {
+                        "shape": "String"
+                    },
+                    "Nested": {
+                        "shape": "ComplexNestedErrorData"
+                    }
+                },
+                "documentation": "<p>This error is thrown when a request is invalid.</p>",
+                "exception": true
+            },
+            "ComplexNestedErrorData": {
+                "type": "structure",
+                "members": {
+                    "Foo": {
+                        "shape": "String"
+                    }
+                }
+            },
             "GreetingWithErrorsOutput": {
                 "type": "structure",
                 "members": {
@@ -169,9 +203,6 @@
                         "shape": "String"
                     }
                 }
-            },
-            "String": {
-                "type": "string"
             }
         },
         "cases": [

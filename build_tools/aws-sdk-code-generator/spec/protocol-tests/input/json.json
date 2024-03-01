@@ -4,7 +4,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1"
+            "jsonVersion": "1.1",
+            "targetPrefix": "JsonProtocol"
         },
         "shapes": {},
         "cases": [
@@ -76,7 +77,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1"
+            "jsonVersion": "1.1",
+            "targetPrefix": "JsonProtocol"
         },
         "shapes": {},
         "cases": [
@@ -113,7 +115,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1"
+            "jsonVersion": "1.1",
+            "targetPrefix": "JsonProtocol"
         },
         "shapes": {
             "HostLabelInput": {
@@ -171,7 +174,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1"
+            "jsonVersion": "1.1",
+            "targetPrefix": "JsonProtocol"
         },
         "shapes": {},
         "cases": [
@@ -205,7 +209,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1"
+            "jsonVersion": "1.1",
+            "targetPrefix": "JsonProtocol"
         },
         "shapes": {
             "JsonEnumsInputOutput": {
@@ -316,7 +321,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1"
+            "jsonVersion": "1.1",
+            "targetPrefix": "JsonProtocol"
         },
         "shapes": {
             "UnionInputOutput": {
@@ -699,9 +705,47 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1"
+            "jsonVersion": "1.1",
+            "targetPrefix": "JsonProtocol"
         },
         "shapes": {
+            "ErrorWithoutMembers": {
+                "type": "structure",
+                "members": {},
+                "exception": true,
+                "fault": true
+            },
+            "ErrorWithMembers": {
+                "type": "structure",
+                "members": {
+                    "Code": {
+                        "shape": "String"
+                    },
+                    "ComplexData": {
+                        "shape": "KitchenSink"
+                    },
+                    "IntegerField": {
+                        "shape": "Integer"
+                    },
+                    "ListField": {
+                        "shape": "ListOfStrings"
+                    },
+                    "MapField": {
+                        "shape": "MapOfStrings"
+                    },
+                    "Message": {
+                        "shape": "String"
+                    },
+                    "StringField": {
+                        "shape": "String",
+                        "documentation": "<p>abc</p>"
+                    }
+                },
+                "exception": true
+            },
+            "String": {
+                "type": "string"
+            },
             "KitchenSink": {
                 "type": "structure",
                 "members": {
@@ -786,6 +830,25 @@
                     }
                 }
             },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "ListOfStrings": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            },
+            "MapOfStrings": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                }
+            },
             "Blob": {
                 "type": "blob"
             },
@@ -809,10 +872,6 @@
                 "type": "timestamp",
                 "timestampFormat": "rfc822"
             },
-            "Integer": {
-                "type": "integer",
-                "box": true
-            },
             "SyntheticTimestamp_date_time": {
                 "type": "timestamp",
                 "timestampFormat": "iso8601"
@@ -830,12 +889,6 @@
                 "type": "list",
                 "member": {
                     "shape": "MapOfStrings"
-                }
-            },
-            "ListOfStrings": {
-                "type": "list",
-                "member": {
-                    "shape": "String"
                 }
             },
             "ListOfStructs": {
@@ -864,15 +917,6 @@
                 },
                 "value": {
                     "shape": "MapOfStrings"
-                }
-            },
-            "MapOfStrings": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "String"
                 }
             },
             "MapOfStructs": {
@@ -906,9 +950,6 @@
                         "shape": "String"
                     }
                 }
-            },
-            "String": {
-                "type": "string"
             },
             "StructWithJsonName": {
                 "type": "structure",
@@ -1976,7 +2017,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1"
+            "jsonVersion": "1.1",
+            "targetPrefix": "JsonProtocol"
         },
         "shapes": {
             "NullOperationInputOutput": {
@@ -2102,7 +2144,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1"
+            "jsonVersion": "1.1",
+            "targetPrefix": "JsonProtocol"
         },
         "shapes": {
             "OperationWithOptionalInputOutputInput": {
@@ -2175,7 +2218,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1"
+            "jsonVersion": "1.1",
+            "targetPrefix": "JsonProtocol"
         },
         "shapes": {
             "PutAndGetInlineDocumentsInputOutput": {
@@ -2229,7 +2273,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1"
+            "jsonVersion": "1.1",
+            "targetPrefix": "JsonProtocol"
         },
         "shapes": {
             "PutWithContentEncodingInput": {
@@ -2314,7 +2359,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2018-01-01",
-            "jsonVersion": "1.1"
+            "jsonVersion": "1.1",
+            "targetPrefix": "JsonProtocol"
         },
         "shapes": {
             "SimpleScalarPropertiesInputOutput": {

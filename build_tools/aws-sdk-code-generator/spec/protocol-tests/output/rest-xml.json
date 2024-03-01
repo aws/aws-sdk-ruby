@@ -426,6 +426,53 @@
             "apiVersion": "2019-12-16"
         },
         "shapes": {
+            "InvalidGreeting": {
+                "type": "structure",
+                "members": {
+                    "Message": {
+                        "shape": "String"
+                    }
+                },
+                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
+                "error": {
+                    "httpStatusCode": 400,
+                    "senderFault": true
+                },
+                "exception": true
+            },
+            "String": {
+                "type": "string"
+            },
+            "ComplexError": {
+                "type": "structure",
+                "members": {
+                    "Header": {
+                        "shape": "String",
+                        "location": "header",
+                        "locationName": "X-Header"
+                    },
+                    "TopLevel": {
+                        "shape": "String"
+                    },
+                    "Nested": {
+                        "shape": "ComplexNestedErrorData"
+                    }
+                },
+                "documentation": "<p>This error is thrown when a request is invalid.</p>",
+                "error": {
+                    "httpStatusCode": 403,
+                    "senderFault": true
+                },
+                "exception": true
+            },
+            "ComplexNestedErrorData": {
+                "type": "structure",
+                "members": {
+                    "Foo": {
+                        "shape": "String"
+                    }
+                }
+            },
             "GreetingWithErrorsOutput": {
                 "type": "structure",
                 "members": {
@@ -435,9 +482,6 @@
                         "locationName": "X-Greeting"
                     }
                 }
-            },
-            "String": {
-                "type": "string"
             }
         },
         "cases": [

@@ -508,6 +508,64 @@
             "apiVersion": "2019-12-16"
         },
         "shapes": {
+            "FooError": {
+                "type": "structure",
+                "members": {},
+                "documentation": "<p>This error has test cases that test some of the dark corners of Amazon service framework history. It should only be implemented by clients.</p>",
+                "error": {
+                    "httpStatusCode": 500
+                },
+                "exception": true,
+                "fault": true
+            },
+            "ComplexError": {
+                "type": "structure",
+                "members": {
+                    "Header": {
+                        "shape": "String",
+                        "location": "header",
+                        "locationName": "X-Header"
+                    },
+                    "TopLevel": {
+                        "shape": "String"
+                    },
+                    "Nested": {
+                        "shape": "ComplexNestedErrorData"
+                    }
+                },
+                "documentation": "<p>This error is thrown when a request is invalid.</p>",
+                "error": {
+                    "httpStatusCode": 403,
+                    "senderFault": true
+                },
+                "exception": true
+            },
+            "String": {
+                "type": "string"
+            },
+            "ComplexNestedErrorData": {
+                "type": "structure",
+                "members": {
+                    "Foo": {
+                        "shape": "String",
+                        "locationName": "Fooooo"
+                    }
+                }
+            },
+            "InvalidGreeting": {
+                "type": "structure",
+                "members": {
+                    "Message": {
+                        "shape": "String"
+                    }
+                },
+                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
+                "error": {
+                    "httpStatusCode": 400,
+                    "senderFault": true
+                },
+                "exception": true
+            },
             "GreetingWithErrorsOutput": {
                 "type": "structure",
                 "members": {
@@ -517,9 +575,6 @@
                         "locationName": "X-Greeting"
                     }
                 }
-            },
-            "String": {
-                "type": "string"
             }
         },
         "cases": [
