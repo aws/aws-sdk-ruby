@@ -900,11 +900,9 @@ module Aws::AutoScaling
     # information about updating this limit, see [Quotas for Amazon EC2 Auto
     # Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
-    # For introductory exercises for creating an Auto Scaling group, see
-    # [Getting started with Amazon EC2 Auto Scaling][2] and [Tutorial: Set
-    # up a scaled and load-balanced application][3] in the *Amazon EC2 Auto
-    # Scaling User Guide*. For more information, see [Auto Scaling
-    # groups][4] in the *Amazon EC2 Auto Scaling User Guide*.
+    # If you're new to Amazon EC2 Auto Scaling, see the introductory
+    # tutorials in [Get started with Amazon EC2 Auto Scaling][2] in the
+    # *Amazon EC2 Auto Scaling User Guide*.
     #
     # Every Auto Scaling group has three size properties (`DesiredCapacity`,
     # `MaxSize`, and `MinSize`). Usually, you set these sizes based on a
@@ -916,9 +914,7 @@ module Aws::AutoScaling
     #
     #
     # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-quotas.html
-    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/GettingStartedTutorial.html
-    # [3]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-register-lbs-with-asg.html
-    # [4]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html
+    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/get-started-with-ec2-auto-scaling.html
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group. This name must be unique per
@@ -7169,7 +7165,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

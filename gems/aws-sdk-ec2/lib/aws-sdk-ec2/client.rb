@@ -20172,9 +20172,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes Capacity Block offerings available for purchase. With
-    # Capacity Blocks, you purchase a specific instance type for a period of
-    # time.
+    # Describes Capacity Block offerings available for purchase in the
+    # Amazon Web Services Region that you're currently using. With Capacity
+    # Blocks, you purchase a specific instance type for a period of time.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -22073,7 +22073,13 @@ module Aws::EC2
 
     # Describes the running instances for the specified EC2 Fleet.
     #
-    # For more information, see [Monitor your EC2 Fleet][1] in the *Amazon
+    # <note markdown="1"> Currently, `DescribeFleetInstances` does not support fleets of type
+    # `instant`. Instead, use `DescribeFleets`, specifying the `instant`
+    # fleet ID in the request.
+    #
+    #  </note>
+    #
+    # For more information, see [Describe your EC2 Fleet][1] in the *Amazon
     # EC2 User Guide*.
     #
     #
@@ -22149,9 +22155,12 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the specified EC2 Fleets or all of your EC2 Fleets.
+    # Describes the specified EC2 Fleet or all of your EC2 Fleets.
     #
-    # For more information, see [Monitor your EC2 Fleet][1] in the *Amazon
+    # If a fleet is of type `instant`, you must specify the fleet ID in the
+    # request, otherwise the fleet does not appear in the response.
+    #
+    # For more information, see [Describe your EC2 Fleet][1] in the *Amazon
     # EC2 User Guide*.
     #
     #
@@ -24406,6 +24415,12 @@ module Aws::EC2
     #   you launch them through their termination. For more information, see
     #   [Instance lifecycle][4] in the *Amazon EC2 User Guide*.
     #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html
@@ -25147,6 +25162,12 @@ module Aws::EC2
     # are in the affected zone, or do not specify any instance IDs at all,
     # the call fails. If you describe instances and specify only instance
     # IDs that are in an unaffected zone, the call works normally.
+    #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -30468,6 +30489,12 @@ module Aws::EC2
     # For more information about Reserved Instances, see [Reserved
     # Instances][1] in the *Amazon EC2 User Guide*.
     #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts-on-demand-reserved-instances.html
@@ -30620,6 +30647,12 @@ module Aws::EC2
     # For more information, see [Reserved Instance Marketplace][1] in the
     # *Amazon EC2 User Guide*.
     #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
@@ -30698,6 +30731,12 @@ module Aws::EC2
     #
     # For more information, see [Modifying Reserved Instances][1] in the
     # *Amazon EC2 User Guide*.
+    #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
     #
     #
     #
@@ -30808,6 +30847,12 @@ module Aws::EC2
     #
     # For more information, see [Reserved Instance Marketplace][1] in the
     # *Amazon EC2 User Guide*.
+    #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
     #
     #
     #
@@ -47224,7 +47269,7 @@ module Aws::EC2
     # * Modify the affinity between an instance and a [Dedicated Host][1].
     #   When affinity is set to `host` and the instance is not associated
     #   with a specific Dedicated Host, the next time the instance is
-    #   launched, it is automatically associated with the host on which it
+    #   started, it is automatically associated with the host on which it
     #   lands. If the instance is restarted or rebooted, this relationship
     #   persists.
     #
@@ -47247,7 +47292,12 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
     #
     # @option params [String] :affinity
-    #   The affinity setting for the instance.
+    #   The affinity setting for the instance. For more information, see [Host
+    #   affinity][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-dedicated-hosts-work.html#dedicated-hosts-affinity
     #
     # @option params [String] :group_name
     #   The name of the placement group in which to place the instance. For
@@ -58776,7 +58826,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.439.0'
+      context[:gem_version] = '1.440.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

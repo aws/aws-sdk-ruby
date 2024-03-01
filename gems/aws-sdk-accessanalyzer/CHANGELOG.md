@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2024-03-01)
+------------------
+
+* Feature - Fixed a typo in description field.
+
 1.45.0 (2024-01-26)
 ------------------
 
