@@ -20,9 +20,9 @@ module Aws
       private
 
       def structure(ref, values)
-        shape = ref.shape
         return nil if values.nil?
 
+        shape = ref.shape
         values.each_pair.with_object({}) do |(key, value), data|
           if shape.member?(key) && !value.nil?
             member_ref = shape.member(key)
@@ -33,11 +33,15 @@ module Aws
       end
 
       def list(ref, values)
+        return nil if values.nil?
+
         member_ref = ref.shape.member
         values.collect { |value| format(member_ref, value) }
       end
 
       def map(ref, values)
+        return nil if values.nil?
+
         value_ref = ref.shape.value
         values.each.with_object({}) do |(key, value), data|
           data[key] = format(value_ref, value)
