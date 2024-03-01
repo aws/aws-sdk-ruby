@@ -85,6 +85,7 @@ module Aws
           when TimestampShape then time(value)
           when BlobShape then Base64.decode64(value)
           when BooleanShape then value.to_s == 'true'
+          when FloatShape then Util.deserialize_number(value)
           else value
           end
         end

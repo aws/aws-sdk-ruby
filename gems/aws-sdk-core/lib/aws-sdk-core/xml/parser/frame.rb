@@ -278,7 +278,7 @@ module Aws
 
       class FloatFrame < Frame
         def result
-          @text.empty? ? nil : @text.join.to_f
+          @text.empty? ? nil : Aws::Util.deserialize_number(@text.join)
         end
       end
 

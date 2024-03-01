@@ -38,7 +38,7 @@ module Aws
           case ref.shape
           when StringShape then value.to_s
           when IntegerShape then value.to_i
-          when FloatShape then value.to_f
+          when FloatShape then Util.deserialize_number(value)
           when BooleanShape then value == 'true'
           when ListShape then
             value.split(', ').map { |v| cast_value(ref.shape.member, v) }

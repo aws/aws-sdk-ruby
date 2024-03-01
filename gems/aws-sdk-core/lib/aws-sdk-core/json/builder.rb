@@ -55,6 +55,7 @@ module Aws
         when MapShape       then map(ref, value)
         when TimestampShape then timestamp(ref, value)
         when BlobShape      then encode(value)
+        when FloatShape     then Util.serialize_number(value)
         else value
         end
       end

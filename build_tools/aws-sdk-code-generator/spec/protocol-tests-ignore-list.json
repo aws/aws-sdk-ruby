@@ -2,93 +2,38 @@
   "ec2" :
     {
       "input" : [
-        "Ec2QuerySupportsNaNFloatInputs",
-        "Ec2QuerySupportsInfinityFloatInputs",
-        "Ec2QuerySupportsNegativeInfinityFloatInputs"
       ],
       "output" : [
-        "Ec2QuerySupportsNaNFloatOutputs",
-        "Ec2QuerySupportsInfinityFloatOutputs",
-        "Ec2QuerySupportsNegativeInfinityFloatOutputs"
       ]
     },
   "json" : {
     "input" : [
-      "AwsJson11SupportsNaNFloatInputs",
-      "AwsJson11SupportsInfinityFloatInputs",
-      "AwsJson11SupportsNegativeInfinityFloatInputs"
     ],
     "output" : [
-
     ]
   },
   "json_1_0" : {
     "input" : [
-      "AwsJson10SupportsNaNFloatInputs",
-      "AwsJson10SupportsInfinityFloatInputs",
-      "AwsJson10SupportsNegativeInfinityFloatInputs"
     ],
     "output" : [
-
     ]
   },
   "query" : {
     "input" : [
-      "AwsQuerySupportsNaNFloatInputs",
-      "AwsQuerySupportsInfinityFloatInputs",
-      "AwsQuerySupportsNegativeInfinityFloatInputs"
     ],
     "output" : [
-      "AwsQuerySupportsNaNFloatOutputs",
-      "AwsQuerySupportsInfinityFloatOutputs",
-      "AwsQuerySupportsNegativeInfinityFloatOutputs"
     ]
   },
   "rest-json" : {
     "input" : [
-      "RestJsonSupportsNaNFloatQueryValues",
-      "RestJsonSupportsInfinityFloatQueryValues",
-      "RestJsonSupportsNegativeInfinityFloatQueryValues",
-      "RestJsonHttpPayloadWithUnsetUnion",
-      "RestJsonSupportsNaNFloatLabels",
-      "RestJsonSupportsInfinityFloatLabels",
-      "RestJsonSupportsNegativeInfinityFloatLabels",
-      "RestJsonSupportsNaNFloatHeaderInputs",
-      "RestJsonSupportsInfinityFloatHeaderInputs",
-      "RestJsonSupportsNegativeInfinityFloatHeaderInputs",
-      "RestJsonSupportsNaNFloatInputs",
-      "RestJsonSupportsInfinityFloatInputs",
-      "RestJsonSupportsNegativeInfinityFloatInputs"
     ],
     "output" : [
-      "RestJsonInputAndOutputWithQuotedStringHeaders",
-      "RestJsonSupportsNaNFloatHeaderOutputs",
-      "RestJsonSupportsInfinityFloatHeaderOutputs",
-      "RestJsonSupportsNegativeInfinityFloatHeaderOutputs"
     ]
   },
   "rest-xml" : {
     "input" : [
-      "RestXmlSupportsNaNFloatQueryValues",
-      "RestXmlSupportsInfinityFloatQueryValues",
-      "RestXmlSupportsNegativeInfinityFloatQueryValues",
-      "RestXmlSupportsNaNFloatLabels",
-      "RestXmlSupportsInfinityFloatLabels",
-      "RestXmlSupportsNegativeInfinityFloatLabels",
-      "RestXmlSupportsNaNFloatHeaderInputs",
-      "RestXmlSupportsInfinityFloatHeaderInputs",
-      "RestXmlSupportsNegativeInfinityFloatHeaderInputs",
-      "RestXmlSupportsNaNFloatInputs",
-      "RestXmlSupportsInfinityFloatInputs",
-      "RestXmlSupportsNegativeInfinityFloatInputs"
     ],
     "output" : [
-      "RestXmlSupportsNaNFloatHeaderOutputs",
-      "RestXmlSupportsInfinityFloatHeaderOutputs",
-      "RestXmlSupportsNegativeInfinityFloatHeaderOutputs",
-      "RestXmlSupportsNaNFloatOutputs",
-      "RestXmlSupportsInfinityFloatOutputs",
-      "RestXmlSupportsNegativeInfinityFloatOutputs"
     ]
   },
   "api-gateway" : {

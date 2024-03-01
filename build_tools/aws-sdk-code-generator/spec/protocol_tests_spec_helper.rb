@@ -120,6 +120,13 @@ module ProtocolTestsHelper
         else
           Time.at(src)
         end
+      when Seahorse::Model::Shapes::FloatShape
+        case src
+        when String
+          Aws::Util.deserialize_number(src)
+        else
+          src
+        end
       else src
       end
     end
