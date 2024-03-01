@@ -94,7 +94,7 @@ module Aws
       # @param [String, Integer] value
       # @return [Time]
       def time(value)
-        value.is_a?(Numeric) ? Time.at(value) : Time.parse(value)
+        value.is_a?(Numeric) ? Time.at(value) : Time.at(Time.parse(value).to_f)
       end
 
       def flattened_list?(shape)

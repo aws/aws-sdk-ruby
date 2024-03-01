@@ -304,7 +304,8 @@ module Aws
           when /^\d+$/ then Time.at(value.to_i)
           else
             begin
-              Time.parse(value).utc
+              fractional_time = Time.parse(value).utc.to_f
+              Time.at(fractional_time)
             rescue ArgumentError
               raise "unhandled timestamp format `#{value}'"
             end
