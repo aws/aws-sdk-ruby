@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2024-03-04)
+------------------
+
+* Feature - Add DetailedStatus field to DescribeStackEvents and DescribeStacks APIs
+
 1.99.0 (2024-01-31)
 ------------------
 

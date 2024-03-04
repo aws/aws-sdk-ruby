@@ -141,6 +141,7 @@ module Aws::CloudFormation
     DescribeTypeRegistrationInput = Shapes::StructureShape.new(name: 'DescribeTypeRegistrationInput')
     DescribeTypeRegistrationOutput = Shapes::StructureShape.new(name: 'DescribeTypeRegistrationOutput')
     Description = Shapes::StringShape.new(name: 'Description')
+    DetailedStatus = Shapes::StringShape.new(name: 'DetailedStatus')
     DetectStackDriftInput = Shapes::StructureShape.new(name: 'DetectStackDriftInput')
     DetectStackDriftOutput = Shapes::StructureShape.new(name: 'DetectStackDriftOutput')
     DetectStackResourceDriftInput = Shapes::StructureShape.new(name: 'DetectStackResourceDriftInput')
@@ -1653,6 +1654,7 @@ module Aws::CloudFormation
     Stack.add_member(:root_id, Shapes::ShapeRef.new(shape: StackId, location_name: "RootId"))
     Stack.add_member(:drift_information, Shapes::ShapeRef.new(shape: StackDriftInformation, location_name: "DriftInformation"))
     Stack.add_member(:retain_except_on_create, Shapes::ShapeRef.new(shape: RetainExceptOnCreate, location_name: "RetainExceptOnCreate"))
+    Stack.add_member(:detailed_status, Shapes::ShapeRef.new(shape: DetailedStatus, location_name: "DetailedStatus"))
     Stack.struct_class = Types::Stack
 
     StackDriftInformation.add_member(:stack_drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, required: true, location_name: "StackDriftStatus"))
@@ -1679,6 +1681,7 @@ module Aws::CloudFormation
     StackEvent.add_member(:hook_status_reason, Shapes::ShapeRef.new(shape: HookStatusReason, location_name: "HookStatusReason"))
     StackEvent.add_member(:hook_invocation_point, Shapes::ShapeRef.new(shape: HookInvocationPoint, location_name: "HookInvocationPoint"))
     StackEvent.add_member(:hook_failure_mode, Shapes::ShapeRef.new(shape: HookFailureMode, location_name: "HookFailureMode"))
+    StackEvent.add_member(:detailed_status, Shapes::ShapeRef.new(shape: DetailedStatus, location_name: "DetailedStatus"))
     StackEvent.struct_class = Types::StackEvent
 
     StackEvents.member = Shapes::ShapeRef.new(shape: StackEvent)

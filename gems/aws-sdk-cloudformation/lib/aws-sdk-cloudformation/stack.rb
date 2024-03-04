@@ -218,6 +218,22 @@ module Aws::CloudFormation
       data[:retain_except_on_create]
     end
 
+    # The detailed status of the resource or stack. If
+    # `CONFIGURATION_COMPLETE` is present, the resource or resource
+    # configuration phase has completed and the stabilization of the
+    # resources is in progress. The stack sets `CONFIGURATION_COMPLETE` when
+    # all of the resources in the stack have reached that event. For more
+    # information, see [CloudFormation stack deployment][1] in the
+    # *CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html
+    # @return [String]
+    def detailed_status
+      data[:detailed_status]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -467,7 +483,8 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template (max size: 460,800 bytes) that's located in an Amazon S3
     #   bucket or a Systems Manager document. For more information, go to the
-    #   [Template anatomy][1] in the *CloudFormation User Guide*.
+    #   [Template anatomy][1] in the *CloudFormation User Guide*. The location
+    #   for an Amazon S3 bucket must start with `https://`.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
@@ -477,7 +494,7 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     # @option options [Array<Types::Parameter>] :parameters
     #   A list of `Parameter` structures that specify input parameters for the
-    #   stack. For more information, see the [Parameter][1] data type.
+    #   stack. For more information, see the [ `Parameter` ][1] data type.
     #
     #
     #
@@ -528,19 +545,19 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ AWS::IAM::AccessKey][1]
+    #     * [ `AWS::IAM::AccessKey` AWS::IAM::AccessKey][1]
     #
-    #     * [ AWS::IAM::Group][2]
+    #     * [ `AWS::IAM::Group` ][2]
     #
-    #     * [AWS::IAM::InstanceProfile][3]
+    #     * [ `AWS::IAM::InstanceProfile` ][3]
     #
-    #     * [ AWS::IAM::Policy][4]
+    #     * [ `AWS::IAM::Policy` ][4]
     #
-    #     * [ AWS::IAM::Role][5]
+    #     * [ `AWS::IAM::Role` ][5]
     #
-    #     * [ AWS::IAM::User][6]
+    #     * [ `AWS::IAM::User` ][6]
     #
-    #     * [AWS::IAM::UserToGroupAddition][7]
+    #     * [ `AWS::IAM::UserToGroupAddition` ][7]
     #
     #     For more information, see [Acknowledging IAM Resources in
     #     CloudFormation Templates][8].
@@ -556,8 +573,8 @@ module Aws::CloudFormation
     #     your stack template contains one or more macros, and you choose to
     #     create a stack directly from the processed template, without first
     #     reviewing the resulting changes in a change set, you must
-    #     acknowledge this capability. This includes the [AWS::Include][9] and
-    #     [AWS::Serverless][10] transforms, which are macros hosted by
+    #     acknowledge this capability. This includes the [ `AWS::Include` ][9]
+    #     and [ `AWS::Serverless` ][10] transforms, which are macros hosted by
     #     CloudFormation.
     #
     #     If you want to create a stack from a stack template that contains
@@ -650,8 +667,9 @@ module Aws::CloudFormation
     # @option options [String] :stack_policy_url
     #   Location of a file containing the stack policy. The URL must point to
     #   a policy (maximum size: 16 KB) located in an S3 bucket in the same
-    #   Region as the stack. You can specify either the `StackPolicyBody` or
-    #   the `StackPolicyURL` parameter, but not both.
+    #   Region as the stack. The location for an Amazon S3 bucket must start
+    #   with `https://`. You can specify either the `StackPolicyBody` or the
+    #   `StackPolicyURL` parameter, but not both.
     # @option options [Array<Types::Tag>] :tags
     #   Key-value pairs to associate with this stack. CloudFormation also
     #   propagates these tags to the resources created in the stack. A maximum
@@ -819,7 +837,8 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template that's located in an Amazon S3 bucket or a Systems Manager
     #   document. For more information, go to [Template Anatomy][1] in the
-    #   *CloudFormation User Guide*.
+    #   *CloudFormation User Guide*. The location for an Amazon S3 bucket must
+    #   start with `https://`.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
@@ -847,7 +866,8 @@ module Aws::CloudFormation
     # @option options [String] :stack_policy_during_update_url
     #   Location of a file containing the temporary overriding stack policy.
     #   The URL must point to a policy (max size: 16KB) located in an S3
-    #   bucket in the same Region as the stack. You can specify either the
+    #   bucket in the same Region as the stack. The location for an Amazon S3
+    #   bucket must start with `https://`. You can specify either the
     #   `StackPolicyDuringUpdateBody` or the `StackPolicyDuringUpdateURL`
     #   parameter, but not both.
     #
@@ -857,7 +877,7 @@ module Aws::CloudFormation
     #   will be used.
     # @option options [Array<Types::Parameter>] :parameters
     #   A list of `Parameter` structures that specify input parameters for the
-    #   stack. For more information, see the [Parameter][1] data type.
+    #   stack. For more information, see the [ `Parameter` ][1] data type.
     #
     #
     #
@@ -890,19 +910,19 @@ module Aws::CloudFormation
     #     review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ AWS::IAM::AccessKey][1]
+    #     * [ `AWS::IAM::AccessKey` ][1]
     #
-    #     * [ AWS::IAM::Group][2]
+    #     * [ `AWS::IAM::Group` ][2]
     #
-    #     * [AWS::IAM::InstanceProfile][3]
+    #     * [ `AWS::IAM::InstanceProfile` ][3]
     #
-    #     * [ AWS::IAM::Policy][4]
+    #     * [ ` AWS::IAM::Policy` ][4]
     #
-    #     * [ AWS::IAM::Role][5]
+    #     * [ `AWS::IAM::Role` ][5]
     #
-    #     * [ AWS::IAM::User][6]
+    #     * [ `AWS::IAM::User` ][6]
     #
-    #     * [AWS::IAM::UserToGroupAddition][7]
+    #     * [ `AWS::IAM::UserToGroupAddition` ][7]
     #
     #     For more information, see [Acknowledging IAM Resources in
     #     CloudFormation Templates][8].
@@ -918,8 +938,8 @@ module Aws::CloudFormation
     #     your stack template contains one or more macros, and you choose to
     #     update a stack directly from the processed template, without first
     #     reviewing the resulting changes in a change set, you must
-    #     acknowledge this capability. This includes the [AWS::Include][9] and
-    #     [AWS::Serverless][10] transforms, which are macros hosted by
+    #     acknowledge this capability. This includes the [ `AWS::Include` ][9]
+    #     and [ `AWS::Serverless` ][10] transforms, which are macros hosted by
     #     CloudFormation.
     #
     #     If you want to update a stack from a stack template that contains
@@ -1003,8 +1023,9 @@ module Aws::CloudFormation
     # @option options [String] :stack_policy_url
     #   Location of a file containing the updated stack policy. The URL must
     #   point to a policy (max size: 16KB) located in an S3 bucket in the same
-    #   Region as the stack. You can specify either the `StackPolicyBody` or
-    #   the `StackPolicyURL` parameter, but not both.
+    #   Region as the stack. The location for an Amazon S3 bucket must start
+    #   with `https://`. You can specify either the `StackPolicyBody` or the
+    #   `StackPolicyURL` parameter, but not both.
     #
     #   You might update the stack policy, for example, in order to protect a
     #   new resource that you created during a stack update. If you don't

@@ -84,6 +84,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#retain_except_on_create-instance_method
       def retain_except_on_create: () -> bool
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#detailed_status-instance_method
+      def detailed_status: () -> ("CONFIGURATION_COMPLETE" | "VALIDATION_FAILED")
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#load-instance_method

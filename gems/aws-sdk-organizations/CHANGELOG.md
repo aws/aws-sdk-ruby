@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2024-03-04)
+------------------
+
+* Feature - Documentation update for AWS Organizations
+
 1.85.0 (2024-01-26)
 ------------------
 
