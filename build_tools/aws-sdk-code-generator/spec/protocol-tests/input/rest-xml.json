@@ -1465,7 +1465,6 @@
                         "shape": "String"
                     }
                 },
-                "locationName": "",
                 "xmlNamespace": "http://foo.com"
             },
             "String": {
@@ -1529,7 +1528,6 @@
                         "shape": "String"
                     }
                 },
-                "locationName": "",
                 "xmlNamespace": "http://foo.com"
             },
             "String": {
@@ -4033,10 +4031,8 @@
                 "type": "list",
                 "member": {
                     "shape": "String",
-                    "locationName": "",
                     "xmlNamespace": "https://xml-member.example.com"
                 },
-                "locationName": "",
                 "xmlNamespace": "https://xml-list.example.com"
             },
             "ListWithNamespace": {
@@ -4044,7 +4040,6 @@
                 "member": {
                     "shape": "String"
                 },
-                "locationName": "",
                 "xmlNamespace": "https://xml-list.example.com"
             },
             "StructureList": {
@@ -4585,10 +4580,8 @@
                 "type": "list",
                 "member": {
                     "shape": "String",
-                    "locationName": "",
                     "xmlNamespace": "https://xml-member.example.com"
                 },
-                "locationName": "",
                 "xmlNamespace": "https://xml-list.example.com"
             },
             "ListWithNamespace": {
@@ -4596,7 +4589,6 @@
                 "member": {
                     "shape": "String"
                 },
-                "locationName": "",
                 "xmlNamespace": "https://xml-list.example.com"
             },
             "StructureList": {
@@ -4980,7 +4972,6 @@
                         "shape": "XmlNamespaceNested"
                     }
                 },
-                "locationName": "",
                 "xmlNamespace": "http://foo.com"
             },
             "XmlNamespaceNested": {
@@ -4988,16 +4979,13 @@
                 "members": {
                     "foo": {
                         "shape": "String",
-                        "locationName": "",
                         "xmlNamespace": "http://baz.com"
                     },
                     "values": {
                         "shape": "XmlNamespacedList",
-                        "locationName": "",
                         "xmlNamespace": "http://qux.com"
                     }
                 },
-                "locationName": "",
                 "xmlNamespace": "http://foo.com"
             },
             "String": {
@@ -5007,7 +4995,6 @@
                 "type": "list",
                 "member": {
                     "shape": "String",
-                    "locationName": "",
                     "xmlNamespace": "http://bux.com"
                 }
             }
