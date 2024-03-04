@@ -29,9 +29,7 @@
     ],
     "output" : [
       {
-        "Out of scope to support de-serializing HTTP header to list of strings": [
-          "RestJsonInputAndOutputWithQuotedStringHeaders"
-        ]
+        "RestJsonInputAndOutputWithQuotedStringHeaders": "Out of scope to support de-serializing HTTP header to list of strings"
       }
     ]
   },

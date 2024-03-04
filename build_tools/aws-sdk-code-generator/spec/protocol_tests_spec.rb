@@ -13,8 +13,8 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
       ProtocolTestsHelper.each_test_case(self, files['input']) do |group, suite, test_case, id, description|
         group.it(description) do
           # check if test case id is in the ignore list
-          ignore_result = ignore_list['input'].find { |i| i.values.flatten.include? test_case['id'] }
-          skip(ignore_result.keys.first) unless ignore_result.nil?
+          ignore_result = ignore_list['input'].find { |i| i.has_key?(test_case['id']) }
+          skip(ignore_result[test_case['id']]) unless ignore_result.nil?
 
           if id.include?('IdempotencyToken')
             allow(SecureRandom).to receive(:uuid).and_return('00000000-0000-4000-8000-000000000000')
@@ -45,8 +45,8 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
       ProtocolTestsHelper.each_test_case(self, files['output']) do |group, suite, test_case, id, description|
         group.it(description) do
           # check if test case id is in the ignore list
-          ignore_result = ignore_list['output'].find { |i| i.values.flatten.include? test_case['id'] }
-          skip(ignore_result.keys.first) unless ignore_result.nil?
+          ignore_result = ignore_list['output'].find { |i| i.has_key?(test_case['id']) }
+          skip(ignore_result[test_case['id']]) unless ignore_result.nil?
 
           client = ProtocolTestsHelper.client_for(suite, test_case, "Output_#{id}")
           client.handle(step: :send) do |context|
