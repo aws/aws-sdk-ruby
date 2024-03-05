@@ -86,7 +86,7 @@ module Seahorse
         def [](key)
           if @metadata.key?(key.to_s)
             @metadata[key.to_s]
-          else
+          elsif @shape
             @shape[key.to_s]
           end
         end
