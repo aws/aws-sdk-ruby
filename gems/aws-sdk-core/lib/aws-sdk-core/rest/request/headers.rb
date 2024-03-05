@@ -53,16 +53,14 @@ module Aws
           return if !values || values.empty?
 
           member_ref = ref.shape.member
-          values = values.collect { |value| timestamp(member_ref, value) } if member_ref.shape.is_a?(TimestampShape)
-          headers[ref.location_name] = values
-                                       .compact
-                                       .map { |s| escape_header_list_string(s) }
-                                       .join(', ')
-        end
-
-        def escape_header_list_string(string)
-          Seahorse::Util.escape_header_list_string(string.to_s) unless string.is_a?(String)
-          string
+          values = values.collect do |value|
+            if member_ref.shape.is_a?(TimestampShape)
+              timestamp(member_ref, value).to_s
+            else
+              Seahorse::Util.escape_header_list_string(value.to_s)
+            end
+          end
+          headers[ref.location_name] = values.compact.join(', ')
         end
 
         def apply_header_map(headers, ref, values)
