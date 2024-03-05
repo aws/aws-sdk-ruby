@@ -30,7 +30,7 @@ module Aws
         private
 
         def apply_path_params(uri, params)
-          path = uri.path.sub(/\/$/, '') + @path_pattern.split('?')[0]
+          path = uri.path.sub(%r{/$}, '') + @path_pattern.split('?')[0]
           uri.path = path.gsub(/{.+?}/) do |placeholder|
             param_value_for_placeholder(placeholder, params)
           end
@@ -38,20 +38,37 @@ module Aws
 
         def param_value_for_placeholder(placeholder, params)
           name = param_name(placeholder)
-          value = params[name].to_s
+          param_shape = @rules.shape.member(name).shape
+          value = case param_shape.is_a?(Seahorse::Model::Shapes::TimestampShape)
+                  when true
+                    timestamp(param_shape, params[name])
+                  else
+                    params[name].to_s
+                  end
+
           raise ArgumentError, ":#{name} must not be blank" if value.empty?
 
           if placeholder.include?('+')
-            value.gsub(/[^\/]+/) { |v| escape(v) }
+            value.gsub(%r{[^/]+}) { |v| escape(v) }
           else
             escape(value)
           end
         end
 
         def param_name(placeholder)
-          location_name = placeholder.gsub(/[{}+]/,'')
+          location_name = placeholder.gsub(/[{}+]/, '')
           param_name, _ = @rules.shape.member_by_location_name(location_name)
           param_name
+        end
+
+        def timestamp(ref, value)
+          case ref['timestampFormat']
+          when 'unixTimestamp' then value.to_i
+          when 'rfc822' then value.utc.httpdate
+          else
+            # serializing as RFC 3399 date-time is the default
+            value.utc.iso8601
+          end
         end
 
         def apply_querystring_params(uri, params)
