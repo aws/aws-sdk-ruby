@@ -2,41 +2,86 @@
   "ec2" :
     {
       "input" : [
+        {"Ec2Query": "Awaiting Smithy to resolve C2J translation"},
+        {"Ec2QueryIsPreferred":  "Awaiting Smithy to resolve C2J translation"}
       ],
       "output" : [
+        {"Ec2InvalidGreetingError": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+        {"Ec2ComplexError":  "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"}
       ]
     },
   "json" : {
     "input" : [
     ],
     "output" : [
+      {"AwsJson11InvalidGreetingError": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson11ComplexError": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson11EmptyComplexError": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson11FooErrorUsingXAmznErrorType": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson11FooErrorUsingXAmznErrorTypeWithUri": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson11FooErrorUsingXAmznErrorTypeWithUriAndNamespace": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson11FooErrorUsingCode": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson11FooErrorUsingCodeAndNamespace": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson11FooErrorUsingCodeUriAndNamespace": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson11FooErrorWithDunderType": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson11FooErrorWithDunderTypeAndNamespace": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson11FooErrorWithDunderTypeUriAndNamespace": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"}
     ]
   },
   "json_1_0" : {
     "input" : [
     ],
     "output" : [
+      {"AwsJson10InvalidGreetingError": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson10FooErrorUsingXAmznErrorType": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson10FooErrorUsingXAmznErrorTypeWithUri": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson10FooErrorUsingXAmznErrorTypeWithUriAndNamespace": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson10FooErrorUsingCode": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson10FooErrorUsingCodeAndNamespace": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson10FooErrorUsingCodeUriAndNamespace": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson10FooErrorWithDunderType": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson10FooErrorWithDunderTypeAndNamespace": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson10FooErrorWithDunderTypeUriAndNamespace": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson10ComplexError": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"AwsJson10EmptyComplexError": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"}
     ]
   },
   "query" : {
     "input" : [
     ],
     "output" : [
+      {"QueryInvalidGreetingError": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"QueryCustomizedError": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"QueryComplexError": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"}
     ]
   },
   "rest-json" : {
     "input" : [
+      {"RestJsonHttpPayloadTraitsWithMediaTypeWithBlob": "Awaiting smithy to resolve the C2J translation"},
+      {"RestJsonStreamingTraitsWithMediaTypeWithBlob": "Awaiting smithy to resolve the C2J translation"}
     ],
     "output" : [
-      {
-        "RestJsonInputAndOutputWithQuotedStringHeaders": "Out of scope to support de-serializing HTTP header to list of strings"
-      }
+      {"RestJsonInputAndOutputWithQuotedStringHeaders": "Out of scope to support de-serializing HTTP header to list of strings"},
+      {"RestJsonFooErrorUsingXAmznErrorType": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"RestJsonFooErrorUsingXAmznErrorTypeWithUri": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"RestJsonFooErrorUsingXAmznErrorTypeWithUriAndNamespace": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"RestJsonFooErrorUsingCode": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"RestJsonFooErrorUsingCodeAndNamespace": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"RestJsonFooErrorUsingCodeUriAndNamespace": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"RestJsonFooErrorWithDunderType": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"RestJsonFooErrorWithDunderTypeAndNamespace": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"RestJsonFooErrorWithDunderTypeUriAndNamespace": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"RestJsonComplexErrorWithNoMessage": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"RestJsonEmptyComplexErrorWithNoMessage": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"RestJsonInvalidGreetingError": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"}
     ]
   },
   "rest-xml" : {
     "input" : [
     ],
     "output" : [
+      {"InvalidGreetingError": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
+      {"ComplexError": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"}
     ]
   },
   "api-gateway" : {
