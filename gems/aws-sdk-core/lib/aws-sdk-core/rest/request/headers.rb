@@ -65,7 +65,6 @@ module Aws
           string
         end
 
-
         def apply_header_map(headers, ref, values)
           prefix = ref.location_name || ''
           values.each_pair do |name, value|
