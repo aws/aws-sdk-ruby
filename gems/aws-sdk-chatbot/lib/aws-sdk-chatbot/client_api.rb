@@ -470,7 +470,7 @@ module Aws::Chatbot
         "endpointPrefix" => "chatbot",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
-        "serviceFullName" => "chatbot",
+        "serviceFullName" => "AWS Chatbot",
         "serviceId" => "chatbot",
         "signatureVersion" => "v4",
         "uid" => "chatbot-2017-10-11",

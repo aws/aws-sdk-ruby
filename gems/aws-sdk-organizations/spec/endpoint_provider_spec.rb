@@ -252,6 +252,20 @@ module Aws::Organizations
       end
     end
 
+    context 'For region aws-iso-global with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"organizations", "signingRegion"=>"us-iso-east-1"}]}, "url"=>"https://organizations.us-iso-east-1.c2s.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"aws-iso-global", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
     context 'For region us-iso-east-1 with FIPS enabled and DualStack enabled' do
       let(:expected) do
         {"error"=>"FIPS and DualStack are enabled, but this partition does not support one or both"}
@@ -294,7 +308,7 @@ module Aws::Organizations
 
     context 'For region us-iso-east-1 with FIPS disabled and DualStack disabled' do
       let(:expected) do
-        {"endpoint"=>{"url"=>"https://organizations.us-iso-east-1.c2s.ic.gov"}}
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"organizations", "signingRegion"=>"us-iso-east-1"}]}, "url"=>"https://organizations.us-iso-east-1.c2s.ic.gov"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do

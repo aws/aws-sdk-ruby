@@ -2605,10 +2605,7 @@ module Aws::SESV2
     #
     #   If the value is `false`, then your account is in the *sandbox*. When
     #   your account is in the sandbox, you can only send email to verified
-    #   identities. Additionally, the maximum number of emails you can send
-    #   in a 24-hour period (your sending quota) is 200, and the maximum
-    #   number of emails you can send per second (your maximum sending rate)
-    #   is 1.
+    #   identities.
     #
     #   If the value is `true`, then your account has production access.
     #   When your account has production access, you can send email to any
@@ -4867,11 +4864,47 @@ module Aws::SESV2
     #   message, a text-only version of the message, or both.
     #   @return [Types::Body]
     #
+    # @!attribute [rw] headers
+    #   The list of message headers that will be added to the email message.
+    #   @return [Array<Types::MessageHeader>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/Message AWS API Documentation
     #
     class Message < Struct.new(
       :subject,
-      :body)
+      :body,
+      :headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the name and value of a message header that you add to an
+    # email.
+    #
+    # @!attribute [rw] name
+    #   The name of the message header. The message header name has to meet
+    #   the following criteria:
+    #
+    #   * Can contain any printable ASCII character (33 - 126) except for
+    #     colon (:).
+    #
+    #   * Can contain no more than 126 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the message header. The message header value has to
+    #   meet the following criteria:
+    #
+    #   * Can contain any printable ASCII character.
+    #
+    #   * Can contain no more than 870 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MessageHeader AWS API Documentation
+    #
+    class MessageHeader < Struct.new(
+      :name,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5256,10 +5289,7 @@ module Aws::SESV2
     #
     #   If the value is `false`, then your account is in the *sandbox*. When
     #   your account is in the sandbox, you can only send email to verified
-    #   identities. Additionally, the maximum number of emails you can send
-    #   in a 24-hour period (your sending quota) is 200, and the maximum
-    #   number of emails you can send per second (your maximum sending rate)
-    #   is 1.
+    #   identities.
     #
     #   If the value is `true`, then your account has production access.
     #   When your account has production access, you can send email to any
@@ -6408,7 +6438,7 @@ module Aws::SESV2
     #
     # @!attribute [rw] content
     #   An object that contains the body of the message. You can send either
-    #   a Simple message Raw message or a template Message.
+    #   a Simple message, Raw message, or a Templated message.
     #   @return [Types::EmailContent]
     #
     # @!attribute [rw] email_tags
@@ -6452,9 +6482,10 @@ module Aws::SESV2
     #   message is accepted.
     #
     #   <note markdown="1"> It's possible for Amazon SES to accept a message without sending
-    #   it. This can happen when the message that you're trying to send has
-    #   an attachment contains a virus, or when you send a templated email
-    #   that contains invalid personalization content, for example.
+    #   it. For example, this can happen when the message that you're
+    #   trying to send has an attachment that contains a virus, or when you
+    #   send a templated email that contains invalid personalization
+    #   content.
     #
     #    </note>
     #   @return [String]
@@ -6800,12 +6831,17 @@ module Aws::SESV2
     #   defines the value to use for that variable.
     #   @return [String]
     #
+    # @!attribute [rw] headers
+    #   The list of message headers that will be added to the email message.
+    #   @return [Array<Types::MessageHeader>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/Template AWS API Documentation
     #
     class Template < Struct.new(
       :template_name,
       :template_arn,
-      :template_data)
+      :template_data,
+      :headers)
       SENSITIVE = []
       include Aws::Structure
     end

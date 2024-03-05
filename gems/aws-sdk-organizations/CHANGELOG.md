@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2024-03-05)
+------------------
+
+* Feature - This release contains an endpoint addition
+
 1.86.0 (2024-03-04)
 ------------------
 
