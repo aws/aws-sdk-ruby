@@ -78,6 +78,7 @@
   },
   "rest-xml" : {
     "input" : [
+      {"HttpPayloadTraitsWithMediaTypeWithBlob": "Awaiting smithy to resolve the C2J translation"}
     ],
     "output" : [
       {"InvalidGreetingError": "Awaiting smithy to resolve C2J translation and need to update test runner to handle error cases"},
