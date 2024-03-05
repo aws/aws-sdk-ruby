@@ -138,11 +138,7 @@ module Aws
         end
 
         def xml_name(ref)
-          if flattened_list?(ref)
-            ref.shape.member.location_name || ref.location_name
-          else
-            ref.location_name
-          end
+          ref.location_name
         end
 
         def flattened_list?(ref)
