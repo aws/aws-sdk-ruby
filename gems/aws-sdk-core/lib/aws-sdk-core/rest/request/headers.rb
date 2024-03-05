@@ -49,13 +49,22 @@ module Aws
           end
         end
 
-        def list(headers, ref, value)
-          return if !value || value.empty?
-          headers[ref.location_name] = value
-            .compact
-            .map { |s| Seahorse::Util.escape_header_list_string(s.to_s) }
-            .join(', ')
+        def list(headers, ref, values)
+          return if !values || values.empty?
+
+          member_ref = ref.shape.member
+          values = values.collect { |value| timestamp(member_ref, value) } if member_ref.shape.is_a?(TimestampShape)
+          headers[ref.location_name] = values
+                                       .compact
+                                       .map { |s| escape_header_list_string(s) }
+                                       .join(', ')
         end
+
+        def escape_header_list_string(string)
+          Seahorse::Util.escape_header_list_string(string.to_s) unless string.is_a?(String)
+          string
+        end
+
 
         def apply_header_map(headers, ref, values)
           prefix = ref.location_name || ''
