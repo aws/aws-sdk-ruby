@@ -421,7 +421,13 @@ module Aws::KafkaConnect
     #   Details about log delivery.
     #
     # @option params [required, Array<Types::Plugin>] :plugins
-    #   Specifies which plugins to use for the connector.
+    #   Amazon MSK Connect does not currently support specifying multiple
+    #   plugins as a list. To use more than one plugin for your connector, you
+    #   can create a single custom plugin using a ZIP file that bundles
+    #   multiple plugins together.
+    #
+    #   Specifies which plugin to use for the connector. You must specify a
+    #   single-element list containing one `customPlugin` object.
     #
     # @option params [required, String] :service_execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role used by the connector
@@ -429,6 +435,9 @@ module Aws::KafkaConnect
     #   of resources depends on the logic of the connector. For example, a
     #   connector that has Amazon S3 as a destination must have permissions
     #   that allow it to write to the S3 destination bucket.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags you want to attach to the connector.
     #
     # @option params [Types::WorkerConfiguration] :worker_configuration
     #   Specifies which worker configuration to use with the connector.
@@ -506,6 +515,9 @@ module Aws::KafkaConnect
     #       },
     #     ],
     #     service_execution_role_arn: "__string", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #     worker_configuration: {
     #       revision: 1, # required
     #       worker_configuration_arn: "__string", # required
@@ -541,6 +553,9 @@ module Aws::KafkaConnect
     # @option params [required, String] :name
     #   The name of the custom plugin.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags you want to attach to the custom plugin.
+    #
     # @return [Types::CreateCustomPluginResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCustomPluginResponse#custom_plugin_arn #custom_plugin_arn} => String
@@ -561,6 +576,9 @@ module Aws::KafkaConnect
     #       },
     #     },
     #     name: "__stringMin1Max128", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -590,12 +608,16 @@ module Aws::KafkaConnect
     # @option params [required, String] :properties_file_content
     #   Base64 encoded contents of connect-distributed.properties file.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags you want to attach to the worker configuration.
+    #
     # @return [Types::CreateWorkerConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkerConfigurationResponse#creation_time #creation_time} => Time
     #   * {Types::CreateWorkerConfigurationResponse#latest_revision #latest_revision} => Types::WorkerConfigurationRevisionSummary
     #   * {Types::CreateWorkerConfigurationResponse#name #name} => String
     #   * {Types::CreateWorkerConfigurationResponse#worker_configuration_arn #worker_configuration_arn} => String
+    #   * {Types::CreateWorkerConfigurationResponse#worker_configuration_state #worker_configuration_state} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -603,6 +625,9 @@ module Aws::KafkaConnect
     #     description: "__stringMax1024",
     #     name: "__stringMin1Max128", # required
     #     properties_file_content: "__sensitiveString", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -613,6 +638,7 @@ module Aws::KafkaConnect
     #   resp.latest_revision.revision #=> Integer
     #   resp.name #=> String
     #   resp.worker_configuration_arn #=> String
+    #   resp.worker_configuration_state #=> String, one of "ACTIVE", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/CreateWorkerConfiguration AWS API Documentation
     #
@@ -686,6 +712,37 @@ module Aws::KafkaConnect
     # @param [Hash] params ({})
     def delete_custom_plugin(params = {}, options = {})
       req = build_request(:delete_custom_plugin, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified worker configuration.
+    #
+    # @option params [required, String] :worker_configuration_arn
+    #   The Amazon Resource Name (ARN) of the worker configuration that you
+    #   want to delete.
+    #
+    # @return [Types::DeleteWorkerConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteWorkerConfigurationResponse#worker_configuration_arn #worker_configuration_arn} => String
+    #   * {Types::DeleteWorkerConfigurationResponse#worker_configuration_state #worker_configuration_state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_worker_configuration({
+    #     worker_configuration_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.worker_configuration_arn #=> String
+    #   resp.worker_configuration_state #=> String, one of "ACTIVE", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/DeleteWorkerConfiguration AWS API Documentation
+    #
+    # @overload delete_worker_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_worker_configuration(params = {}, options = {})
+      req = build_request(:delete_worker_configuration, params)
       req.send_request(options)
     end
 
@@ -833,6 +890,7 @@ module Aws::KafkaConnect
     #   * {Types::DescribeWorkerConfigurationResponse#latest_revision #latest_revision} => Types::WorkerConfigurationRevisionDescription
     #   * {Types::DescribeWorkerConfigurationResponse#name #name} => String
     #   * {Types::DescribeWorkerConfigurationResponse#worker_configuration_arn #worker_configuration_arn} => String
+    #   * {Types::DescribeWorkerConfigurationResponse#worker_configuration_state #worker_configuration_state} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -850,6 +908,7 @@ module Aws::KafkaConnect
     #   resp.latest_revision.revision #=> Integer
     #   resp.name #=> String
     #   resp.worker_configuration_arn #=> String
+    #   resp.worker_configuration_state #=> String, one of "ACTIVE", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/DescribeWorkerConfiguration AWS API Documentation
     #
@@ -946,6 +1005,9 @@ module Aws::KafkaConnect
     # @option params [Integer] :max_results
     #   The maximum number of custom plugins to list in one response.
     #
+    # @option params [String] :name_prefix
+    #   Lists custom plugin names that start with the specified text string.
+    #
     # @option params [String] :next_token
     #   If the response of a ListCustomPlugins operation is truncated, it will
     #   include a NextToken. Send this NextToken in a subsequent request to
@@ -962,6 +1024,7 @@ module Aws::KafkaConnect
     #
     #   resp = client.list_custom_plugins({
     #     max_results: 1,
+    #     name_prefix: "__string",
     #     next_token: "__string",
     #   })
     #
@@ -993,11 +1056,45 @@ module Aws::KafkaConnect
       req.send_request(options)
     end
 
+    # Lists all the tags attached to the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource for which you want to
+    #   list all attached tags.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Returns a list of all of the worker configurations in this account and
     # Region.
     #
     # @option params [Integer] :max_results
     #   The maximum number of worker configurations to list in one response.
+    #
+    # @option params [String] :name_prefix
+    #   Lists worker configuration names that start with the specified text
+    #   string.
     #
     # @option params [String] :next_token
     #   If the response of a ListWorkerConfigurations operation is truncated,
@@ -1016,6 +1113,7 @@ module Aws::KafkaConnect
     #
     #   resp = client.list_worker_configurations({
     #     max_results: 1,
+    #     name_prefix: "__string",
     #     next_token: "__string",
     #   })
     #
@@ -1030,6 +1128,7 @@ module Aws::KafkaConnect
     #   resp.worker_configurations[0].latest_revision.revision #=> Integer
     #   resp.worker_configurations[0].name #=> String
     #   resp.worker_configurations[0].worker_configuration_arn #=> String
+    #   resp.worker_configurations[0].worker_configuration_state #=> String, one of "ACTIVE", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/ListWorkerConfigurations AWS API Documentation
     #
@@ -1037,6 +1136,62 @@ module Aws::KafkaConnect
     # @param [Hash] params ({})
     def list_worker_configurations(params = {}, options = {})
       req = build_request(:list_worker_configurations, params)
+      req.send_request(options)
+    end
+
+    # Attaches tags to the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which you want to
+    #   attach tags.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags that you want to attach to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "__string", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which you want to
+    #   remove tags.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the tags that you want to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "__string", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -1108,7 +1263,7 @@ module Aws::KafkaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafkaconnect'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

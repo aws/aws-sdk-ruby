@@ -246,6 +246,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#limitless_database-instance_method
       def limitless_database: () -> Types::LimitlessDatabase
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#storage_throughput-instance_method
+      def storage_throughput: () -> ::Integer
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBCluster.html#load-instance_method

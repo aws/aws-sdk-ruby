@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2024-02-29)
+------------------
+
+* Feature - Add capability to update the Data Lake's MetaStoreManager Role in order to perform required data lake updates to use Iceberg table format in their data lake or update the role for any other reason.
+
 1.16.0 (2024-02-13)
 ------------------
 

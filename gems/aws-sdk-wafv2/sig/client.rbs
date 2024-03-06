@@ -500,6 +500,7 @@ module Aws
                                   }?,
                                   rate_based_statement: {
                                     limit: ::Integer,
+                                    evaluation_window_sec: ::Integer?,
                                     aggregate_key_type: ("IP" | "FORWARDED_IP" | "CUSTOM_KEYS" | "CONSTANT"),
                                     scope_down_statement: untyped?,
                                     forwarded_ip_config: {
@@ -1378,6 +1379,7 @@ module Aws
                                      }?,
                                      rate_based_statement: {
                                        limit: ::Integer,
+                                       evaluation_window_sec: ::Integer?,
                                        aggregate_key_type: ("IP" | "FORWARDED_IP" | "CUSTOM_KEYS" | "CONSTANT"),
                                        scope_down_statement: untyped?,
                                        forwarded_ip_config: {
@@ -2240,6 +2242,7 @@ module Aws
                                   }?,
                                   rate_based_statement: {
                                     limit: ::Integer,
+                                    evaluation_window_sec: ::Integer?,
                                     aggregate_key_type: ("IP" | "FORWARDED_IP" | "CUSTOM_KEYS" | "CONSTANT"),
                                     scope_down_statement: untyped?,
                                     forwarded_ip_config: {
@@ -3748,6 +3751,7 @@ module Aws
                                      }?,
                                      rate_based_statement: {
                                        limit: ::Integer,
+                                       evaluation_window_sec: ::Integer?,
                                        aggregate_key_type: ("IP" | "FORWARDED_IP" | "CUSTOM_KEYS" | "CONSTANT"),
                                        scope_down_statement: untyped?,
                                        forwarded_ip_config: {
@@ -4606,6 +4610,7 @@ module Aws
                                   }?,
                                   rate_based_statement: {
                                     limit: ::Integer,
+                                    evaluation_window_sec: ::Integer?,
                                     aggregate_key_type: ("IP" | "FORWARDED_IP" | "CUSTOM_KEYS" | "CONSTANT"),
                                     scope_down_statement: untyped?,
                                     forwarded_ip_config: {

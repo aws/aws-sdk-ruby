@@ -611,6 +611,10 @@ module Aws::SageMaker
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].image #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].image_digest #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].model_data_url #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].model_data_source.s3_data_source.s3_uri #=> String
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].model_data_source.s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].product_id #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].environment #=> Hash
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].environment["EnvironmentKey"] #=> String
@@ -861,6 +865,16 @@ module Aws::SageMaker
     #           image: "ContainerImage", # required
     #           image_digest: "ImageDigest",
     #           model_data_url: "Url",
+    #           model_data_source: {
+    #             s3_data_source: {
+    #               s3_uri: "S3ModelUri", # required
+    #               s3_data_type: "S3Prefix", # required, accepts S3Prefix, S3Object
+    #               compression_type: "None", # required, accepts None, Gzip
+    #               model_access_config: {
+    #                 accept_eula: false, # required
+    #               },
+    #             },
+    #           },
     #           product_id: "ProductId",
     #           environment: {
     #             "EnvironmentKey" => "EnvironmentValue",
@@ -5299,10 +5313,6 @@ module Aws::SageMaker
     # `CreateEndpoint` API. SageMaker then deploys all of the containers
     # that you defined for the model in the hosting environment.
     #
-    # For an example that calls this method when deploying a model to
-    # SageMaker hosting services, see [Create a Model (Amazon Web Services
-    # SDK for Python (Boto 3)).][1]
-    #
     # To run a batch transform using your model, you start a job with the
     # `CreateTransformJob` API. SageMaker uses your model and your dataset
     # to get inferences which are then saved to a specified S3 location.
@@ -5313,10 +5323,6 @@ module Aws::SageMaker
     # you also use the IAM role to manage permissions the inference code
     # needs. For example, if the inference code access any other Amazon Web
     # Services resources, you grant necessary permissions via this role.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-deployment.html#realtime-endpoints-deployment-create-model
     #
     # @option params [required, String] :model_name
     #   The name of the new model.
@@ -5948,8 +5954,8 @@ module Aws::SageMaker
     #   A description of the model package.
     #
     # @option params [Types::InferenceSpecification] :inference_specification
-    #   Specifies details about inference jobs that can be run with models
-    #   based on this model package, including the following:
+    #   Specifies details about inference jobs that you can run with models
+    #   based on this model package, including the following information:
     #
     #   * The Amazon ECR paths of containers that contain the inference code
     #     and model artifacts.
@@ -6057,6 +6063,11 @@ module Aws::SageMaker
     # @option params [String] :skip_model_validation
     #   Indicates if you want to skip model validation.
     #
+    # @option params [String] :source_uri
+    #   The URI of the source for the model package. If you want to clone a
+    #   model package, set it to the model package Amazon Resource Name (ARN).
+    #   If you want to register a model, set it to the model ARN.
+    #
     # @return [Types::CreateModelPackageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateModelPackageOutput#model_package_arn #model_package_arn} => String
@@ -6074,6 +6085,16 @@ module Aws::SageMaker
     #           image: "ContainerImage", # required
     #           image_digest: "ImageDigest",
     #           model_data_url: "Url",
+    #           model_data_source: {
+    #             s3_data_source: {
+    #               s3_uri: "S3ModelUri", # required
+    #               s3_data_type: "S3Prefix", # required, accepts S3Prefix, S3Object
+    #               compression_type: "None", # required, accepts None, Gzip
+    #               model_access_config: {
+    #                 accept_eula: false, # required
+    #               },
+    #             },
+    #           },
     #           product_id: "ProductId",
     #           environment: {
     #             "EnvironmentKey" => "EnvironmentValue",
@@ -6138,6 +6159,16 @@ module Aws::SageMaker
     #       source_algorithms: [ # required
     #         {
     #           model_data_url: "Url",
+    #           model_data_source: {
+    #             s3_data_source: {
+    #               s3_uri: "S3ModelUri", # required
+    #               s3_data_type: "S3Prefix", # required, accepts S3Prefix, S3Object
+    #               compression_type: "None", # required, accepts None, Gzip
+    #               model_access_config: {
+    #                 accept_eula: false, # required
+    #               },
+    #             },
+    #           },
     #           algorithm_name: "ArnOrName", # required
     #         },
     #       ],
@@ -6278,6 +6309,16 @@ module Aws::SageMaker
     #             image: "ContainerImage", # required
     #             image_digest: "ImageDigest",
     #             model_data_url: "Url",
+    #             model_data_source: {
+    #               s3_data_source: {
+    #                 s3_uri: "S3ModelUri", # required
+    #                 s3_data_type: "S3Prefix", # required, accepts S3Prefix, S3Object
+    #                 compression_type: "None", # required, accepts None, Gzip
+    #                 model_access_config: {
+    #                   accept_eula: false, # required
+    #                 },
+    #               },
+    #             },
     #             product_id: "ProductId",
     #             environment: {
     #               "EnvironmentKey" => "EnvironmentValue",
@@ -6302,6 +6343,7 @@ module Aws::SageMaker
     #       },
     #     ],
     #     skip_model_validation: "All", # accepts All, None
+    #     source_uri: "ModelPackageSourceUri",
     #   })
     #
     # @example Response structure
@@ -10578,6 +10620,10 @@ module Aws::SageMaker
     #   resp.inference_specification.containers[0].image #=> String
     #   resp.inference_specification.containers[0].image_digest #=> String
     #   resp.inference_specification.containers[0].model_data_url #=> String
+    #   resp.inference_specification.containers[0].model_data_source.s3_data_source.s3_uri #=> String
+    #   resp.inference_specification.containers[0].model_data_source.s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
+    #   resp.inference_specification.containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
+    #   resp.inference_specification.containers[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.inference_specification.containers[0].product_id #=> String
     #   resp.inference_specification.containers[0].environment #=> Hash
     #   resp.inference_specification.containers[0].environment["EnvironmentKey"] #=> String
@@ -13983,6 +14029,7 @@ module Aws::SageMaker
     #   * {Types::DescribeModelPackageOutput#drift_check_baselines #drift_check_baselines} => Types::DriftCheckBaselines
     #   * {Types::DescribeModelPackageOutput#additional_inference_specifications #additional_inference_specifications} => Array&lt;Types::AdditionalInferenceSpecificationDefinition&gt;
     #   * {Types::DescribeModelPackageOutput#skip_model_validation #skip_model_validation} => String
+    #   * {Types::DescribeModelPackageOutput#source_uri #source_uri} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -14003,6 +14050,10 @@ module Aws::SageMaker
     #   resp.inference_specification.containers[0].image #=> String
     #   resp.inference_specification.containers[0].image_digest #=> String
     #   resp.inference_specification.containers[0].model_data_url #=> String
+    #   resp.inference_specification.containers[0].model_data_source.s3_data_source.s3_uri #=> String
+    #   resp.inference_specification.containers[0].model_data_source.s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
+    #   resp.inference_specification.containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
+    #   resp.inference_specification.containers[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.inference_specification.containers[0].product_id #=> String
     #   resp.inference_specification.containers[0].environment #=> Hash
     #   resp.inference_specification.containers[0].environment["EnvironmentKey"] #=> String
@@ -14023,6 +14074,10 @@ module Aws::SageMaker
     #   resp.inference_specification.supported_response_mime_types[0] #=> String
     #   resp.source_algorithm_specification.source_algorithms #=> Array
     #   resp.source_algorithm_specification.source_algorithms[0].model_data_url #=> String
+    #   resp.source_algorithm_specification.source_algorithms[0].model_data_source.s3_data_source.s3_uri #=> String
+    #   resp.source_algorithm_specification.source_algorithms[0].model_data_source.s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
+    #   resp.source_algorithm_specification.source_algorithms[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
+    #   resp.source_algorithm_specification.source_algorithms[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.source_algorithm_specification.source_algorithms[0].algorithm_name #=> String
     #   resp.validation_specification.validation_role #=> String
     #   resp.validation_specification.validation_profiles #=> Array
@@ -14137,6 +14192,10 @@ module Aws::SageMaker
     #   resp.additional_inference_specifications[0].containers[0].image #=> String
     #   resp.additional_inference_specifications[0].containers[0].image_digest #=> String
     #   resp.additional_inference_specifications[0].containers[0].model_data_url #=> String
+    #   resp.additional_inference_specifications[0].containers[0].model_data_source.s3_data_source.s3_uri #=> String
+    #   resp.additional_inference_specifications[0].containers[0].model_data_source.s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
+    #   resp.additional_inference_specifications[0].containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
+    #   resp.additional_inference_specifications[0].containers[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
     #   resp.additional_inference_specifications[0].containers[0].product_id #=> String
     #   resp.additional_inference_specifications[0].containers[0].environment #=> Hash
     #   resp.additional_inference_specifications[0].containers[0].environment["EnvironmentKey"] #=> String
@@ -14156,6 +14215,7 @@ module Aws::SageMaker
     #   resp.additional_inference_specifications[0].supported_response_mime_types #=> Array
     #   resp.additional_inference_specifications[0].supported_response_mime_types[0] #=> String
     #   resp.skip_model_validation #=> String, one of "All", "None"
+    #   resp.source_uri #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackage AWS API Documentation
     #
@@ -24026,7 +24086,9 @@ module Aws::SageMaker
     # the feature group *after the feature group is updated*. If a record
     # level `TtlDuration` exists from using the `PutRecord` API, the record
     # level `TtlDuration` applies to that record instead of the default
-    # `TtlDuration`.
+    # `TtlDuration`. To remove the default `TtlDuration` from an existing
+    # feature group, use the `UpdateFeatureGroup` API and set the
+    # `TtlDuration` `Unit` and `Value` to `null`.
     #
     # @option params [required, String] :feature_group_name
     #   The name or Amazon Resource Name (ARN) of the feature group that
@@ -24605,6 +24667,22 @@ module Aws::SageMaker
     #   package that can be used on inference endpoints. Generally used with
     #   SageMaker Neo to store the compiled artifacts.
     #
+    # @option params [Types::InferenceSpecification] :inference_specification
+    #   Specifies details about inference jobs that you can run with models
+    #   based on this model package, including the following information:
+    #
+    #   * The Amazon ECR paths of containers that contain the inference code
+    #     and model artifacts.
+    #
+    #   * The instance types that the model package supports for transform
+    #     jobs and real-time endpoints used for inference.
+    #
+    #   * The input and output content formats that the model package supports
+    #     for inference.
+    #
+    # @option params [String] :source_uri
+    #   The URI of the source for the model package.
+    #
     # @return [Types::UpdateModelPackageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateModelPackageOutput#model_package_arn #model_package_arn} => String
@@ -24629,6 +24707,16 @@ module Aws::SageMaker
     #             image: "ContainerImage", # required
     #             image_digest: "ImageDigest",
     #             model_data_url: "Url",
+    #             model_data_source: {
+    #               s3_data_source: {
+    #                 s3_uri: "S3ModelUri", # required
+    #                 s3_data_type: "S3Prefix", # required, accepts S3Prefix, S3Object
+    #                 compression_type: "None", # required, accepts None, Gzip
+    #                 model_access_config: {
+    #                   accept_eula: false, # required
+    #                 },
+    #               },
+    #             },
     #             product_id: "ProductId",
     #             environment: {
     #               "EnvironmentKey" => "EnvironmentValue",
@@ -24652,6 +24740,46 @@ module Aws::SageMaker
     #         supported_response_mime_types: ["ResponseMIMEType"],
     #       },
     #     ],
+    #     inference_specification: {
+    #       containers: [ # required
+    #         {
+    #           container_hostname: "ContainerHostname",
+    #           image: "ContainerImage", # required
+    #           image_digest: "ImageDigest",
+    #           model_data_url: "Url",
+    #           model_data_source: {
+    #             s3_data_source: {
+    #               s3_uri: "S3ModelUri", # required
+    #               s3_data_type: "S3Prefix", # required, accepts S3Prefix, S3Object
+    #               compression_type: "None", # required, accepts None, Gzip
+    #               model_access_config: {
+    #                 accept_eula: false, # required
+    #               },
+    #             },
+    #           },
+    #           product_id: "ProductId",
+    #           environment: {
+    #             "EnvironmentKey" => "EnvironmentValue",
+    #           },
+    #           model_input: {
+    #             data_input_config: "DataInputConfig", # required
+    #           },
+    #           framework: "String",
+    #           framework_version: "ModelPackageFrameworkVersion",
+    #           nearest_model_name: "String",
+    #           additional_s3_data_source: {
+    #             s3_data_type: "S3Object", # required, accepts S3Object, S3Prefix
+    #             s3_uri: "S3Uri", # required
+    #             compression_type: "None", # accepts None, Gzip
+    #           },
+    #         },
+    #       ],
+    #       supported_transform_instance_types: ["ml.m4.xlarge"], # accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge
+    #       supported_realtime_inference_instance_types: ["ml.t2.medium"], # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.12xlarge, ml.m5d.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge, ml.c5d.large, ml.c5d.xlarge, ml.c5d.2xlarge, ml.c5d.4xlarge, ml.c5d.9xlarge, ml.c5d.18xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.12xlarge, ml.r5.24xlarge, ml.r5d.large, ml.r5d.xlarge, ml.r5d.2xlarge, ml.r5d.4xlarge, ml.r5d.12xlarge, ml.r5d.24xlarge, ml.inf1.xlarge, ml.inf1.2xlarge, ml.inf1.6xlarge, ml.inf1.24xlarge, ml.dl1.24xlarge, ml.c6i.large, ml.c6i.xlarge, ml.c6i.2xlarge, ml.c6i.4xlarge, ml.c6i.8xlarge, ml.c6i.12xlarge, ml.c6i.16xlarge, ml.c6i.24xlarge, ml.c6i.32xlarge, ml.g5.xlarge, ml.g5.2xlarge, ml.g5.4xlarge, ml.g5.8xlarge, ml.g5.12xlarge, ml.g5.16xlarge, ml.g5.24xlarge, ml.g5.48xlarge, ml.p4d.24xlarge, ml.c7g.large, ml.c7g.xlarge, ml.c7g.2xlarge, ml.c7g.4xlarge, ml.c7g.8xlarge, ml.c7g.12xlarge, ml.c7g.16xlarge, ml.m6g.large, ml.m6g.xlarge, ml.m6g.2xlarge, ml.m6g.4xlarge, ml.m6g.8xlarge, ml.m6g.12xlarge, ml.m6g.16xlarge, ml.m6gd.large, ml.m6gd.xlarge, ml.m6gd.2xlarge, ml.m6gd.4xlarge, ml.m6gd.8xlarge, ml.m6gd.12xlarge, ml.m6gd.16xlarge, ml.c6g.large, ml.c6g.xlarge, ml.c6g.2xlarge, ml.c6g.4xlarge, ml.c6g.8xlarge, ml.c6g.12xlarge, ml.c6g.16xlarge, ml.c6gd.large, ml.c6gd.xlarge, ml.c6gd.2xlarge, ml.c6gd.4xlarge, ml.c6gd.8xlarge, ml.c6gd.12xlarge, ml.c6gd.16xlarge, ml.c6gn.large, ml.c6gn.xlarge, ml.c6gn.2xlarge, ml.c6gn.4xlarge, ml.c6gn.8xlarge, ml.c6gn.12xlarge, ml.c6gn.16xlarge, ml.r6g.large, ml.r6g.xlarge, ml.r6g.2xlarge, ml.r6g.4xlarge, ml.r6g.8xlarge, ml.r6g.12xlarge, ml.r6g.16xlarge, ml.r6gd.large, ml.r6gd.xlarge, ml.r6gd.2xlarge, ml.r6gd.4xlarge, ml.r6gd.8xlarge, ml.r6gd.12xlarge, ml.r6gd.16xlarge, ml.p4de.24xlarge, ml.trn1.2xlarge, ml.trn1.32xlarge, ml.trn1n.32xlarge, ml.inf2.xlarge, ml.inf2.8xlarge, ml.inf2.24xlarge, ml.inf2.48xlarge, ml.p5.48xlarge, ml.m7i.large, ml.m7i.xlarge, ml.m7i.2xlarge, ml.m7i.4xlarge, ml.m7i.8xlarge, ml.m7i.12xlarge, ml.m7i.16xlarge, ml.m7i.24xlarge, ml.m7i.48xlarge, ml.c7i.large, ml.c7i.xlarge, ml.c7i.2xlarge, ml.c7i.4xlarge, ml.c7i.8xlarge, ml.c7i.12xlarge, ml.c7i.16xlarge, ml.c7i.24xlarge, ml.c7i.48xlarge, ml.r7i.large, ml.r7i.xlarge, ml.r7i.2xlarge, ml.r7i.4xlarge, ml.r7i.8xlarge, ml.r7i.12xlarge, ml.r7i.16xlarge, ml.r7i.24xlarge, ml.r7i.48xlarge
+    #       supported_content_types: ["ContentType"],
+    #       supported_response_mime_types: ["ResponseMIMEType"],
+    #     },
+    #     source_uri: "ModelPackageSourceUri",
     #   })
     #
     # @example Response structure
@@ -25975,7 +26103,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.231.0'
+      context[:gem_version] = '1.232.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

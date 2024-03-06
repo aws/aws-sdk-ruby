@@ -3694,13 +3694,19 @@ module Aws::QuickSight
     #   The aggregation function of the column tooltip item.
     #   @return [Types::AggregationFunction]
     #
+    # @!attribute [rw] tooltip_target
+    #   Determines the target of the column tooltip item in a combo chart
+    #   visual.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColumnTooltipItem AWS API Documentation
     #
     class ColumnTooltipItem < Struct.new(
       :column,
       :label,
       :visibility,
-      :aggregation)
+      :aggregation,
+      :tooltip_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13383,12 +13389,18 @@ module Aws::QuickSight
     #   The visibility of the tooltip item.
     #   @return [String]
     #
+    # @!attribute [rw] tooltip_target
+    #   Determines the target of the field tooltip item in a combo chart
+    #   visual.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FieldTooltipItem AWS API Documentation
     #
     class FieldTooltipItem < Struct.new(
       :field_id,
       :label,
-      :visibility)
+      :visibility,
+      :tooltip_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15226,10 +15238,13 @@ module Aws::QuickSight
     # @!attribute [rw] authorized_resource_arns
     #   The Amazon Resource Names (ARNs) for the Amazon QuickSight resources
     #   that the user is authorized to access during the lifetime of the
-    #   session. If you choose `Dashboard` embedding experience, pass the
-    #   list of dashboard ARNs in the account that you want the user to be
-    #   able to view. Currently, you can pass up to 25 dashboard ARNs in
-    #   each API call.
+    #   session.
+    #
+    #   If you choose `Dashboard` embedding experience, pass the list of
+    #   dashboard ARNs in the account that you want the user to be able to
+    #   view.
+    #
+    #   Currently, you can pass up to 25 dashboard ARNs in each API call.
     #   @return [Array<String>]
     #
     # @!attribute [rw] experience_configuration

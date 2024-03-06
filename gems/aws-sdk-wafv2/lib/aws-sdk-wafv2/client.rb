@@ -950,6 +950,7 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
+    #             evaluation_window_sec: 1,
     #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
     #             scope_down_statement: {
     #               # recursive Statement
@@ -2128,6 +2129,7 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
+    #             evaluation_window_sec: 1,
     #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
     #             scope_down_statement: {
     #               # recursive Statement
@@ -3136,6 +3138,7 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
+    #             evaluation_window_sec: 1,
     #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
     #             scope_down_statement: {
     #               # recursive Statement
@@ -4998,6 +5001,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.rule_group.rules[0].statement.rate_based_statement.limit #=> Integer
+    #   resp.rule_group.rules[0].statement.rate_based_statement.evaluation_window_sec #=> Integer
     #   resp.rule_group.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP", "CUSTOM_KEYS", "CONSTANT"
     #   resp.rule_group.rules[0].statement.rate_based_statement.scope_down_statement #=> Types::Statement
     #   resp.rule_group.rules[0].statement.rate_based_statement.forwarded_ip_config.header_name #=> String
@@ -7545,6 +7549,7 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
+    #             evaluation_window_sec: 1,
     #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
     #             scope_down_statement: {
     #               # recursive Statement
@@ -8598,6 +8603,7 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
+    #             evaluation_window_sec: 1,
     #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
     #             scope_down_statement: {
     #               # recursive Statement
@@ -9067,7 +9073,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

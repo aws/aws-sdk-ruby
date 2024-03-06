@@ -13,6 +13,11 @@ module Aws::MigrationHubOrchestrator
       SENSITIVE: []
     end
 
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class CreateMigrationWorkflowRequest
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -37,6 +42,22 @@ module Aws::MigrationHubOrchestrator
       attr_accessor creation_time: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:workflow_inputs]
+    end
+
+    class CreateTemplateRequest
+      attr_accessor template_name: ::String
+      attr_accessor template_description: ::String
+      attr_accessor template_source: Types::TemplateSource
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateTemplateResponse
+      attr_accessor template_id: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
     end
 
     class CreateWorkflowStepGroupRequest
@@ -94,6 +115,14 @@ module Aws::MigrationHubOrchestrator
       SENSITIVE: []
     end
 
+    class DeleteTemplateRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTemplateResponse < Aws::EmptyStructure
+    end
+
     class DeleteWorkflowStepGroupRequest
       attr_accessor workflow_id: ::String
       attr_accessor id: ::String
@@ -149,12 +178,17 @@ module Aws::MigrationHubOrchestrator
 
     class GetMigrationWorkflowTemplateResponse
       attr_accessor id: ::String
+      attr_accessor template_arn: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor inputs: ::Array[Types::TemplateInput]
       attr_accessor tools: ::Array[Types::Tool]
-      attr_accessor status: ("CREATED")
       attr_accessor creation_time: ::Time
+      attr_accessor owner: ::String
+      attr_accessor status: ("CREATED" | "READY" | "PENDING_CREATION" | "CREATING" | "CREATION_FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor template_class: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -242,7 +276,7 @@ module Aws::MigrationHubOrchestrator
       attr_accessor outputs: ::Array[Types::WorkflowStepOutput]
       attr_accessor previous: ::Array[::String]
       attr_accessor next: ::Array[::String]
-      attr_accessor status: ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
+      attr_accessor status: ("AWAITING_DEPENDENCIES" | "SKIPPED" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
       attr_accessor status_message: ::String
       attr_accessor script_output_location: ::String
       attr_accessor creation_time: ::Time
@@ -416,7 +450,7 @@ module Aws::MigrationHubOrchestrator
       attr_accessor step_group_id: ::String
       attr_accessor workflow_id: ::String
       attr_accessor id: ::String
-      attr_accessor status: ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
+      attr_accessor status: ("AWAITING_DEPENDENCIES" | "SKIPPED" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
       SENSITIVE: []
     end
 
@@ -500,6 +534,17 @@ module Aws::MigrationHubOrchestrator
       SENSITIVE: []
     end
 
+    class TemplateSource
+      attr_accessor workflow_id: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class WorkflowId < TemplateSource
+      end
+      class Unknown < TemplateSource
+      end
+    end
+
     class TemplateStepGroupSummary
       attr_accessor id: ::String
       attr_accessor name: ::String
@@ -574,6 +619,21 @@ module Aws::MigrationHubOrchestrator
       SENSITIVE: [:workflow_inputs]
     end
 
+    class UpdateTemplateRequest
+      attr_accessor id: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_description: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTemplateResponse
+      attr_accessor template_id: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class UpdateWorkflowStepGroupRequest
       attr_accessor workflow_id: ::String
       attr_accessor id: ::String
@@ -608,7 +668,7 @@ module Aws::MigrationHubOrchestrator
       attr_accessor outputs: ::Array[Types::WorkflowStepOutput]
       attr_accessor previous: ::Array[::String]
       attr_accessor next: ::Array[::String]
-      attr_accessor status: ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
+      attr_accessor status: ("AWAITING_DEPENDENCIES" | "SKIPPED" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
       SENSITIVE: []
     end
 
@@ -676,7 +736,7 @@ module Aws::MigrationHubOrchestrator
       attr_accessor owner: ("AWS_MANAGED" | "CUSTOM")
       attr_accessor previous: ::Array[::String]
       attr_accessor next: ::Array[::String]
-      attr_accessor status: ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
+      attr_accessor status: ("AWAITING_DEPENDENCIES" | "SKIPPED" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
       attr_accessor status_message: ::String
       attr_accessor no_of_srv_completed: ::Integer
       attr_accessor no_of_srv_failed: ::Integer

@@ -7041,10 +7041,13 @@ module Aws::QuickSight
     # @option params [required, Array<String>] :authorized_resource_arns
     #   The Amazon Resource Names (ARNs) for the Amazon QuickSight resources
     #   that the user is authorized to access during the lifetime of the
-    #   session. If you choose `Dashboard` embedding experience, pass the list
-    #   of dashboard ARNs in the account that you want the user to be able to
-    #   view. Currently, you can pass up to 25 dashboard ARNs in each API
-    #   call.
+    #   session.
+    #
+    #   If you choose `Dashboard` embedding experience, pass the list of
+    #   dashboard ARNs in the account that you want the user to be able to
+    #   view.
+    #
+    #   Currently, you can pass up to 25 dashboard ARNs in each API call.
     #
     # @option params [required, Types::AnonymousUserEmbeddingExperienceConfiguration] :experience_configuration
     #   The configuration of the experience that you are embedding.
@@ -13536,7 +13539,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

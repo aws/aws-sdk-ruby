@@ -72,7 +72,7 @@ module Aws::BedrockAgentRuntime
 
     class GeneratedResponsePart
       attr_accessor text_response_part: Types::TextResponsePart
-      SENSITIVE: []
+      SENSITIVE: [:text_response_part]
     end
 
     class InferenceConfiguration
@@ -141,17 +141,19 @@ module Aws::BedrockAgentRuntime
       attr_accessor content: Types::RetrievalResultContent
       attr_accessor location: Types::RetrievalResultLocation
       attr_accessor score: ::Float
-      SENSITIVE: []
+      SENSITIVE: [:content, :location]
     end
 
     class KnowledgeBaseRetrieveAndGenerateConfiguration
       attr_accessor knowledge_base_id: ::String
       attr_accessor model_arn: ::String
+      attr_accessor retrieval_configuration: Types::KnowledgeBaseRetrievalConfiguration
       SENSITIVE: []
     end
 
     class KnowledgeBaseVectorSearchConfiguration
       attr_accessor number_of_results: ::Integer
+      attr_accessor override_search_type: ("HYBRID" | "SEMANTIC")
       SENSITIVE: []
     end
 
@@ -353,7 +355,7 @@ module Aws::BedrockAgentRuntime
     class RetrievedReference
       attr_accessor content: Types::RetrievalResultContent
       attr_accessor location: Types::RetrievalResultLocation
-      SENSITIVE: []
+      SENSITIVE: [:content, :location]
     end
 
     class ServiceQuotaExceededException

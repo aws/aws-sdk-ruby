@@ -388,6 +388,68 @@ module Aws::MigrationHubOrchestrator
 
     # @!group API Operations
 
+    # Creates a migration workflow template.
+    #
+    # @option params [required, String] :template_name
+    #   The name of the migration workflow template.
+    #
+    # @option params [String] :template_description
+    #   A description of the migration workflow template.
+    #
+    # @option params [required, Types::TemplateSource] :template_source
+    #   The source of the migration workflow template.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Idempotency][1]
+    #   in the Smithy documentation.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://smithy.io/2.0/spec/behavior-traits.html#idempotencytoken-trait
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to add to the migration workflow template.
+    #
+    # @return [Types::CreateTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTemplateResponse#template_id #template_id} => String
+    #   * {Types::CreateTemplateResponse#template_arn #template_arn} => String
+    #   * {Types::CreateTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_template({
+    #     template_name: "CreateTemplateRequestTemplateNameString", # required
+    #     template_description: "CreateTemplateRequestTemplateDescriptionString",
+    #     template_source: { # required
+    #       workflow_id: "MigrationWorkflowId",
+    #     },
+    #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_id #=> String
+    #   resp.template_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["StringMapKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/CreateTemplate AWS API Documentation
+    #
+    # @overload create_template(params = {})
+    # @param [Hash] params ({})
+    def create_template(params = {}, options = {})
+      req = build_request(:create_template, params)
+      req.send_request(options)
+    end
+
     # Create a workflow to orchestrate your migrations.
     #
     # @option params [required, String] :name
@@ -399,7 +461,7 @@ module Aws::MigrationHubOrchestrator
     # @option params [required, String] :template_id
     #   The ID of the template.
     #
-    # @option params [required, String] :application_configuration_id
+    # @option params [String] :application_configuration_id
     #   The configuration ID of the application configured in Application
     #   Discovery Service.
     #
@@ -432,7 +494,7 @@ module Aws::MigrationHubOrchestrator
     #     name: "CreateMigrationWorkflowRequestNameString", # required
     #     description: "CreateMigrationWorkflowRequestDescriptionString",
     #     template_id: "CreateMigrationWorkflowRequestTemplateIdString", # required
-    #     application_configuration_id: "CreateMigrationWorkflowRequestApplicationConfigurationIdString", # required
+    #     application_configuration_id: "CreateMigrationWorkflowRequestApplicationConfigurationIdString",
     #     input_parameters: { # required
     #       "StepInputParametersKey" => {
     #         integer_value: 1,
@@ -550,8 +612,8 @@ module Aws::MigrationHubOrchestrator
     #         required: false,
     #         value: {
     #           integer_value: 1,
-    #           string_value: "StringValue",
-    #           list_of_string_value: ["StringListMember"],
+    #           string_value: "MaxStringValue",
+    #           list_of_string_value: ["MaxStringValue"],
     #         },
     #       },
     #     ],
@@ -634,6 +696,28 @@ module Aws::MigrationHubOrchestrator
     # @param [Hash] params ({})
     def create_workflow_step_group(params = {}, options = {})
       req = build_request(:create_workflow_step_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes a migration workflow template.
+    #
+    # @option params [required, String] :id
+    #   The ID of the request to delete a migration workflow template.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_template({
+    #     id: "TemplateId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/DeleteTemplate AWS API Documentation
+    #
+    # @overload delete_template(params = {})
+    # @param [Hash] params ({})
+    def delete_template(params = {}, options = {})
+      req = build_request(:delete_template, params)
       req.send_request(options)
     end
 
@@ -735,12 +819,17 @@ module Aws::MigrationHubOrchestrator
     # @return [Types::GetMigrationWorkflowTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMigrationWorkflowTemplateResponse#id #id} => String
+    #   * {Types::GetMigrationWorkflowTemplateResponse#template_arn #template_arn} => String
     #   * {Types::GetMigrationWorkflowTemplateResponse#name #name} => String
     #   * {Types::GetMigrationWorkflowTemplateResponse#description #description} => String
     #   * {Types::GetMigrationWorkflowTemplateResponse#inputs #inputs} => Array&lt;Types::TemplateInput&gt;
     #   * {Types::GetMigrationWorkflowTemplateResponse#tools #tools} => Array&lt;Types::Tool&gt;
-    #   * {Types::GetMigrationWorkflowTemplateResponse#status #status} => String
     #   * {Types::GetMigrationWorkflowTemplateResponse#creation_time #creation_time} => Time
+    #   * {Types::GetMigrationWorkflowTemplateResponse#owner #owner} => String
+    #   * {Types::GetMigrationWorkflowTemplateResponse#status #status} => String
+    #   * {Types::GetMigrationWorkflowTemplateResponse#status_message #status_message} => String
+    #   * {Types::GetMigrationWorkflowTemplateResponse#template_class #template_class} => String
+    #   * {Types::GetMigrationWorkflowTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -751,6 +840,7 @@ module Aws::MigrationHubOrchestrator
     # @example Response structure
     #
     #   resp.id #=> String
+    #   resp.template_arn #=> String
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.inputs #=> Array
@@ -760,8 +850,13 @@ module Aws::MigrationHubOrchestrator
     #   resp.tools #=> Array
     #   resp.tools[0].name #=> String
     #   resp.tools[0].url #=> String
-    #   resp.status #=> String, one of "CREATED"
     #   resp.creation_time #=> Time
+    #   resp.owner #=> String
+    #   resp.status #=> String, one of "CREATED", "READY", "PENDING_CREATION", "CREATING", "CREATION_FAILED"
+    #   resp.status_message #=> String
+    #   resp.template_class #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["StringMapKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/GetTemplate AWS API Documentation
     #
@@ -974,7 +1069,7 @@ module Aws::MigrationHubOrchestrator
     #   The ID of the migration workflow.
     #
     # @option params [required, String] :step_group_id
-    #   desThe ID of the step group.
+    #   The ID of the step group.
     #
     # @option params [required, String] :id
     #   The ID of the step.
@@ -1041,7 +1136,7 @@ module Aws::MigrationHubOrchestrator
     #   resp.previous[0] #=> String
     #   resp.next #=> Array
     #   resp.next[0] #=> String
-    #   resp.status #=> String, one of "AWAITING_DEPENDENCIES", "READY", "IN_PROGRESS", "COMPLETED", "FAILED", "PAUSED", "USER_ATTENTION_REQUIRED"
+    #   resp.status #=> String, one of "AWAITING_DEPENDENCIES", "SKIPPED", "READY", "IN_PROGRESS", "COMPLETED", "FAILED", "PAUSED", "USER_ATTENTION_REQUIRED"
     #   resp.status_message #=> String
     #   resp.script_output_location #=> String
     #   resp.creation_time #=> Time
@@ -1425,7 +1520,7 @@ module Aws::MigrationHubOrchestrator
     #   resp.workflow_steps_summary[0].previous[0] #=> String
     #   resp.workflow_steps_summary[0].next #=> Array
     #   resp.workflow_steps_summary[0].next[0] #=> String
-    #   resp.workflow_steps_summary[0].status #=> String, one of "AWAITING_DEPENDENCIES", "READY", "IN_PROGRESS", "COMPLETED", "FAILED", "PAUSED", "USER_ATTENTION_REQUIRED"
+    #   resp.workflow_steps_summary[0].status #=> String, one of "AWAITING_DEPENDENCIES", "SKIPPED", "READY", "IN_PROGRESS", "COMPLETED", "FAILED", "PAUSED", "USER_ATTENTION_REQUIRED"
     #   resp.workflow_steps_summary[0].status_message #=> String
     #   resp.workflow_steps_summary[0].no_of_srv_completed #=> Integer
     #   resp.workflow_steps_summary[0].no_of_srv_failed #=> Integer
@@ -1536,7 +1631,7 @@ module Aws::MigrationHubOrchestrator
     #   resp.step_group_id #=> String
     #   resp.workflow_id #=> String
     #   resp.id #=> String
-    #   resp.status #=> String, one of "AWAITING_DEPENDENCIES", "READY", "IN_PROGRESS", "COMPLETED", "FAILED", "PAUSED", "USER_ATTENTION_REQUIRED"
+    #   resp.status #=> String, one of "AWAITING_DEPENDENCIES", "SKIPPED", "READY", "IN_PROGRESS", "COMPLETED", "FAILED", "PAUSED", "USER_ATTENTION_REQUIRED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/RetryWorkflowStep AWS API Documentation
     #
@@ -1673,6 +1768,55 @@ module Aws::MigrationHubOrchestrator
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates a migration workflow template.
+    #
+    # @option params [required, String] :id
+    #   The ID of the request to update a migration workflow template.
+    #
+    # @option params [String] :template_name
+    #   The name of the migration workflow template to update.
+    #
+    # @option params [String] :template_description
+    #   The description of the migration workflow template to update.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTemplateResponse#template_id #template_id} => String
+    #   * {Types::UpdateTemplateResponse#template_arn #template_arn} => String
+    #   * {Types::UpdateTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_template({
+    #     id: "TemplateId", # required
+    #     template_name: "UpdateTemplateRequestTemplateNameString",
+    #     template_description: "UpdateTemplateRequestTemplateDescriptionString",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_id #=> String
+    #   resp.template_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["StringMapKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/UpdateTemplate AWS API Documentation
+    #
+    # @overload update_template(params = {})
+    # @param [Hash] params ({})
+    def update_template(params = {}, options = {})
+      req = build_request(:update_template, params)
       req.send_request(options)
     end
 
@@ -1836,14 +1980,14 @@ module Aws::MigrationHubOrchestrator
     #         required: false,
     #         value: {
     #           integer_value: 1,
-    #           string_value: "StringValue",
-    #           list_of_string_value: ["StringListMember"],
+    #           string_value: "MaxStringValue",
+    #           list_of_string_value: ["MaxStringValue"],
     #         },
     #       },
     #     ],
     #     previous: ["StringListMember"],
     #     next: ["StringListMember"],
-    #     status: "AWAITING_DEPENDENCIES", # accepts AWAITING_DEPENDENCIES, READY, IN_PROGRESS, COMPLETED, FAILED, PAUSED, USER_ATTENTION_REQUIRED
+    #     status: "AWAITING_DEPENDENCIES", # accepts AWAITING_DEPENDENCIES, SKIPPED, READY, IN_PROGRESS, COMPLETED, FAILED, PAUSED, USER_ATTENTION_REQUIRED
     #   })
     #
     # @example Response structure
@@ -1941,7 +2085,7 @@ module Aws::MigrationHubOrchestrator
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhuborchestrator'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

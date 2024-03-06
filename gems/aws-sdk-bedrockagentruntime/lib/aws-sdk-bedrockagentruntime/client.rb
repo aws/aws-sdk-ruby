@@ -805,7 +805,8 @@ module Aws::BedrockAgentRuntime
     #     },
     #     retrieval_configuration: {
     #       vector_search_configuration: { # required
-    #         number_of_results: 1, # required
+    #         number_of_results: 1,
+    #         override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
     #       },
     #     },
     #     next_token: "NextToken",
@@ -861,6 +862,12 @@ module Aws::BedrockAgentRuntime
     #       knowledge_base_configuration: {
     #         knowledge_base_id: "KnowledgeBaseId", # required
     #         model_arn: "BedrockModelArn", # required
+    #         retrieval_configuration: {
+    #           vector_search_configuration: { # required
+    #             number_of_results: 1,
+    #             override_search_type: "HYBRID", # accepts HYBRID, SEMANTIC
+    #           },
+    #         },
     #       },
     #     },
     #     session_configuration: {
@@ -903,7 +910,7 @@ module Aws::BedrockAgentRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

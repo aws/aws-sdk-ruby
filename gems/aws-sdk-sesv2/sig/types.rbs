@@ -1137,6 +1137,13 @@ module Aws::SESV2
     class Message
       attr_accessor subject: Types::Content
       attr_accessor body: Types::Body
+      attr_accessor headers: ::Array[Types::MessageHeader]
+      SENSITIVE: []
+    end
+
+    class MessageHeader
+      attr_accessor name: ::String
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 
@@ -1579,6 +1586,7 @@ module Aws::SESV2
       attr_accessor template_name: ::String
       attr_accessor template_arn: ::String
       attr_accessor template_data: ::String
+      attr_accessor headers: ::Array[Types::MessageHeader]
       SENSITIVE: []
     end
 

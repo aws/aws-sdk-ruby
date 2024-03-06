@@ -2528,8 +2528,8 @@ module Aws::FSx
     #
     #   **FSx for ONTAP file systems** - The amount of storage capacity that
     #   you can configure depends on the value of the `HAPairs` property. The
-    #   minimum value is calculated as 1,024 * `HAPairs` and the maxium is
-    #   calculated as 524,288 * `HAPairs`..
+    #   minimum value is calculated as 1,024 * `HAPairs` and the maximum is
+    #   calculated as 524,288 * `HAPairs`.
     #
     #   **FSx for OpenZFS file systems** - The amount of storage capacity that
     #   you can configure is from 64 GiB up to 524,288 GiB (512 TiB).
@@ -2588,6 +2588,9 @@ module Aws::FSx
     #   A list of IDs specifying the security groups to apply to all network
     #   interfaces created for file system access. This list isn't returned
     #   in later requests to describe the file system.
+    #
+    #   You must specify a security group if you are creating a Multi-AZ FSx
+    #   for ONTAP file system in a VPC subnet that has been shared with you.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to apply to the file system that's being created. The key
@@ -3883,7 +3886,7 @@ module Aws::FSx
     #   Describes the self-managed Microsoft Active Directory to which you
     #   want to join the SVM. Joining an Active Directory provides user
     #   authentication and access control for SMB clients, including Microsoft
-    #   Windows and macOS client accessing the file system.
+    #   Windows and macOS clients accessing the file system.
     #
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
@@ -3916,12 +3919,15 @@ module Aws::FSx
     #     majority of users are NFS clients, and an application accessing the
     #     data uses a UNIX user as the service account.
     #
-    #   * `NTFS` if the file system is managed by a Windows administrator, the
-    #     majority of users are SMB clients, and an application accessing the
-    #     data uses a Windows user as the service account.
+    #   * `NTFS` if the file system is managed by a Microsoft Windows
+    #     administrator, the majority of users are SMB clients, and an
+    #     application accessing the data uses a Microsoft Windows user as the
+    #     service account.
     #
-    #   * `MIXED` if the file system is managed by both UNIX and Windows
-    #     administrators and users consist of both NFS and SMB clients.
+    #   * `MIXED` This is an advanced setting. For more information, see
+    #     [Volume security
+    #     style](fsx/latest/ONTAPGuide/volume-security-style.html) in the
+    #     Amazon FSx for NetApp ONTAP User Guide.
     #
     # @return [Types::CreateStorageVirtualMachineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6273,11 +6279,11 @@ module Aws::FSx
     # Indicates whether participant accounts in your organization can create
     # Amazon FSx for NetApp ONTAP Multi-AZ file systems in subnets that are
     # shared by a virtual private cloud (VPC) owner. For more information,
-    # see the [Amazon FSx for NetApp ONTAP User Guide][1].
+    # see [Creating FSx for ONTAP file systems in shared subnets][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/maz-shared-vpc.html
+    # [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/creating-file-systems.html#fsxn-vpc-shared-subnets
     #
     # @return [Types::DescribeSharedVpcConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6343,10 +6349,10 @@ module Aws::FSx
     #   left off.
     #
     # @option params [Boolean] :include_shared
-    #   Set to `false` (default) if you want to only see the snapshots in your
-    #   Amazon Web Services account. Set to `true` if you want to see the
-    #   snapshots in your account and the ones shared with you from another
-    #   account.
+    #   Set to `false` (default) if you want to only see the snapshots owned
+    #   by your Amazon Web Services account. Set to `true` if you want to see
+    #   the snapshots in your account and the ones shared with you from
+    #   another account.
     #
     # @return [Types::DescribeSnapshotsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9198,7 +9204,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

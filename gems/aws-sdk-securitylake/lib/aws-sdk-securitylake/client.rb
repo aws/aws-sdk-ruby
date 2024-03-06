@@ -415,7 +415,7 @@ module Aws::SecurityLake
     #       {
     #         accounts: ["AwsAccountId"],
     #         regions: ["Region"], # required
-    #         source_name: "ROUTE53", # required, accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA
+    #         source_name: "ROUTE53", # required, accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA, EKS_AUDIT, WAF
     #         source_version: "AwsLogSourceVersion",
     #       },
     #     ],
@@ -445,7 +445,7 @@ module Aws::SecurityLake
     # source. In addition, this operation also creates an associated Glue
     # table and an Glue crawler.
     #
-    # @option params [Types::CustomLogSourceConfiguration] :configuration
+    # @option params [required, Types::CustomLogSourceConfiguration] :configuration
     #   The configuration for the third-party custom source.
     #
     # @option params [Array<String>] :event_classes
@@ -526,7 +526,7 @@ module Aws::SecurityLake
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_custom_log_source({
-    #     configuration: {
+    #     configuration: { # required
     #       crawler_configuration: { # required
     #         role_arn: "RoleArn", # required
     #       },
@@ -700,7 +700,7 @@ module Aws::SecurityLake
     # your organization. Security Lake is not automatically enabled for any
     # existing member accounts in your organization.
     #
-    # @option params [required, Array<Types::DataLakeAutoEnableNewAccountConfiguration>] :auto_enable_new_account
+    # @option params [Array<Types::DataLakeAutoEnableNewAccountConfiguration>] :auto_enable_new_account
     #   Enable Security Lake with the specified configuration settings, to
     #   begin collecting security data for new accounts in your organization.
     #
@@ -709,12 +709,12 @@ module Aws::SecurityLake
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_data_lake_organization_configuration({
-    #     auto_enable_new_account: [ # required
+    #     auto_enable_new_account: [
     #       {
     #         region: "Region", # required
     #         sources: [ # required
     #           {
-    #             source_name: "ROUTE53", # accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA
+    #             source_name: "ROUTE53", # accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA, EKS_AUDIT, WAF
     #             source_version: "AwsLogSourceVersion",
     #           },
     #         ],
@@ -768,7 +768,7 @@ module Aws::SecurityLake
     #     sources: [ # required
     #       {
     #         aws_log_source: {
-    #           source_name: "ROUTE53", # accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA
+    #           source_name: "ROUTE53", # accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA, EKS_AUDIT, WAF
     #           source_version: "AwsLogSourceVersion",
     #         },
     #         custom_log_source: {
@@ -810,7 +810,7 @@ module Aws::SecurityLake
     #   resp.subscriber.role_arn #=> String
     #   resp.subscriber.s3_bucket_arn #=> String
     #   resp.subscriber.sources #=> Array
-    #   resp.subscriber.sources[0].aws_log_source.source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA"
+    #   resp.subscriber.sources[0].aws_log_source.source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA", "EKS_AUDIT", "WAF"
     #   resp.subscriber.sources[0].aws_log_source.source_version #=> String
     #   resp.subscriber.sources[0].custom_log_source.attributes.crawler_arn #=> String
     #   resp.subscriber.sources[0].custom_log_source.attributes.database_arn #=> String
@@ -910,7 +910,7 @@ module Aws::SecurityLake
     #       {
     #         accounts: ["AwsAccountId"],
     #         regions: ["Region"], # required
-    #         source_name: "ROUTE53", # required, accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA
+    #         source_name: "ROUTE53", # required, accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA, EKS_AUDIT, WAF
     #         source_version: "AwsLogSourceVersion",
     #       },
     #     ],
@@ -1016,7 +1016,7 @@ module Aws::SecurityLake
     # this operation, new member accounts won't automatically contribute
     # data to the data lake.
     #
-    # @option params [required, Array<Types::DataLakeAutoEnableNewAccountConfiguration>] :auto_enable_new_account
+    # @option params [Array<Types::DataLakeAutoEnableNewAccountConfiguration>] :auto_enable_new_account
     #   Turns off automatic enablement of Security Lake for member accounts
     #   that are added to an organization.
     #
@@ -1025,12 +1025,12 @@ module Aws::SecurityLake
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_data_lake_organization_configuration({
-    #     auto_enable_new_account: [ # required
+    #     auto_enable_new_account: [
     #       {
     #         region: "Region", # required
     #         sources: [ # required
     #           {
-    #             source_name: "ROUTE53", # accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA
+    #             source_name: "ROUTE53", # accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA, EKS_AUDIT, WAF
     #             source_version: "AwsLogSourceVersion",
     #           },
     #         ],
@@ -1152,7 +1152,7 @@ module Aws::SecurityLake
     #   resp.auto_enable_new_account #=> Array
     #   resp.auto_enable_new_account[0].region #=> String
     #   resp.auto_enable_new_account[0].sources #=> Array
-    #   resp.auto_enable_new_account[0].sources[0].source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA"
+    #   resp.auto_enable_new_account[0].sources[0].source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA", "EKS_AUDIT", "WAF"
     #   resp.auto_enable_new_account[0].sources[0].source_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/GetDataLakeOrganizationConfiguration AWS API Documentation
@@ -1252,7 +1252,7 @@ module Aws::SecurityLake
     #   resp.subscriber.role_arn #=> String
     #   resp.subscriber.s3_bucket_arn #=> String
     #   resp.subscriber.sources #=> Array
-    #   resp.subscriber.sources[0].aws_log_source.source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA"
+    #   resp.subscriber.sources[0].aws_log_source.source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA", "EKS_AUDIT", "WAF"
     #   resp.subscriber.sources[0].aws_log_source.source_version #=> String
     #   resp.subscriber.sources[0].custom_log_source.attributes.crawler_arn #=> String
     #   resp.subscriber.sources[0].custom_log_source.attributes.database_arn #=> String
@@ -1414,7 +1414,7 @@ module Aws::SecurityLake
     #     sources: [
     #       {
     #         aws_log_source: {
-    #           source_name: "ROUTE53", # accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA
+    #           source_name: "ROUTE53", # accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA, EKS_AUDIT, WAF
     #           source_version: "AwsLogSourceVersion",
     #         },
     #         custom_log_source: {
@@ -1441,7 +1441,7 @@ module Aws::SecurityLake
     #   resp.sources[0].account #=> String
     #   resp.sources[0].region #=> String
     #   resp.sources[0].sources #=> Array
-    #   resp.sources[0].sources[0].aws_log_source.source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA"
+    #   resp.sources[0].sources[0].aws_log_source.source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA", "EKS_AUDIT", "WAF"
     #   resp.sources[0].sources[0].aws_log_source.source_version #=> String
     #   resp.sources[0].sources[0].custom_log_source.attributes.crawler_arn #=> String
     #   resp.sources[0].sources[0].custom_log_source.attributes.database_arn #=> String
@@ -1498,7 +1498,7 @@ module Aws::SecurityLake
     #   resp.subscribers[0].role_arn #=> String
     #   resp.subscribers[0].s3_bucket_arn #=> String
     #   resp.subscribers[0].sources #=> Array
-    #   resp.subscribers[0].sources[0].aws_log_source.source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA"
+    #   resp.subscribers[0].sources[0].aws_log_source.source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA", "EKS_AUDIT", "WAF"
     #   resp.subscribers[0].sources[0].aws_log_source.source_version #=> String
     #   resp.subscribers[0].sources[0].custom_log_source.attributes.crawler_arn #=> String
     #   resp.subscribers[0].sources[0].custom_log_source.attributes.database_arn #=> String
@@ -1532,8 +1532,8 @@ module Aws::SecurityLake
     # Amazon Web Services Region.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Security Lake resource to
-    #   retrieve the tags for.
+    #   The Amazon Resource Name (ARN) of the Amazon Security Lake resource
+    #   for which you want to retrieve the tags.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1676,6 +1676,11 @@ module Aws::SecurityLake
     #   Specify the Region or Regions that will contribute data to the rollup
     #   region.
     #
+    # @option params [String] :meta_store_manager_role_arn
+    #   The Amazon Resource Name (ARN) used to create and update the Glue
+    #   table. This table contains partitions generated by the ingestion and
+    #   normalization of Amazon Web Services log sources and custom sources.
+    #
     # @return [Types::UpdateDataLakeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDataLakeResponse#data_lakes #data_lakes} => Array&lt;Types::DataLakeResource&gt;
@@ -1706,6 +1711,7 @@ module Aws::SecurityLake
     #         },
     #       },
     #     ],
+    #     meta_store_manager_role_arn: "RoleArn",
     #   })
     #
     # @example Response structure
@@ -1804,7 +1810,7 @@ module Aws::SecurityLake
     #     sources: [
     #       {
     #         aws_log_source: {
-    #           source_name: "ROUTE53", # accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA
+    #           source_name: "ROUTE53", # accepts ROUTE53, VPC_FLOW, SH_FINDINGS, CLOUD_TRAIL_MGMT, LAMBDA_EXECUTION, S3_DATA, EKS_AUDIT, WAF
     #           source_version: "AwsLogSourceVersion",
     #         },
     #         custom_log_source: {
@@ -1841,7 +1847,7 @@ module Aws::SecurityLake
     #   resp.subscriber.role_arn #=> String
     #   resp.subscriber.s3_bucket_arn #=> String
     #   resp.subscriber.sources #=> Array
-    #   resp.subscriber.sources[0].aws_log_source.source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA"
+    #   resp.subscriber.sources[0].aws_log_source.source_name #=> String, one of "ROUTE53", "VPC_FLOW", "SH_FINDINGS", "CLOUD_TRAIL_MGMT", "LAMBDA_EXECUTION", "S3_DATA", "EKS_AUDIT", "WAF"
     #   resp.subscriber.sources[0].aws_log_source.source_version #=> String
     #   resp.subscriber.sources[0].custom_log_source.attributes.crawler_arn #=> String
     #   resp.subscriber.sources[0].custom_log_source.attributes.database_arn #=> String
@@ -1927,7 +1933,7 @@ module Aws::SecurityLake
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securitylake'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

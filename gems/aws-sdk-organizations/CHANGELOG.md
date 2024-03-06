@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2024-03-05)
+------------------
+
+* Feature - This release contains an endpoint addition
+
+1.86.0 (2024-03-04)
+------------------
+
+* Feature - Documentation update for AWS Organizations
+
 1.85.0 (2024-01-26)
 ------------------
 

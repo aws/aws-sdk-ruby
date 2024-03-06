@@ -11,8 +11,8 @@ Gem::Specification.new do |spec|
 
   spec.name          = 'aws-sdk-chatbot'
   spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
-  spec.summary       = 'AWS SDK for Ruby - chatbot'
-  spec.description   = 'Official AWS Ruby gem for chatbot. This gem is part of the AWS SDK for Ruby.'
+  spec.summary       = 'AWS SDK for Ruby - AWS Chatbot'
+  spec.description   = 'Official AWS Ruby gem for AWS Chatbot. This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'

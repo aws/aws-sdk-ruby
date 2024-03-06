@@ -2079,6 +2079,55 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # @!attribute [rw] granularity
+    #   How granular you want the data to be. You can enable data at hourly
+    #   or daily granularity.
+    #   @return [String]
+    #
+    # @!attribute [rw] services
+    #   The service metadata for the service or services you want to query.
+    #   If not specified, all elements are returned.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] approximation_dimension
+    #   The service to evaluate for the usage records. You can choose
+    #   resource-level data at daily granularity, or hourly granularity with
+    #   or without resource-level data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetApproximateUsageRecordsRequest AWS API Documentation
+    #
+    class GetApproximateUsageRecordsRequest < Struct.new(
+      :granularity,
+      :services,
+      :approximation_dimension)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] services
+    #   The service metadata for the service or services in the response.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] total_records
+    #   The total number of usage records for all services in the services
+    #   list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lookback_period
+    #   The lookback period that's used for the estimation.
+    #   @return [Types::DateInterval]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetApproximateUsageRecordsResponse AWS API Documentation
+    #
+    class GetApproximateUsageRecordsResponse < Struct.new(
+      :services,
+      :total_records,
+      :lookback_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] time_period
     #   Sets the start date and end date for retrieving Amazon Web Services
     #   costs. The start date is inclusive, but the end date is exclusive.

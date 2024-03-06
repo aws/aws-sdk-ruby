@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.440.0 (2024-03-01)
+------------------
+
+* Feature - With this release, Amazon EC2 Auto Scaling groups, EC2 Fleet, and Spot Fleet improve the default price protection behavior of attribute-based instance type selection of Spot Instances, to consistently select from a wide range of instance types.
+
+1.439.0 (2024-02-28)
+------------------
+
+* Feature - This release increases the range of MaxResults for GetNetworkInsightsAccessScopeAnalysisFindings to 1,000.
+
 1.438.0 (2024-02-14)
 ------------------
 

@@ -26,6 +26,8 @@ module Aws::CostExplorer
     AnomalySubscription = Shapes::StructureShape.new(name: 'AnomalySubscription')
     AnomalySubscriptionFrequency = Shapes::StringShape.new(name: 'AnomalySubscriptionFrequency')
     AnomalySubscriptions = Shapes::ListShape.new(name: 'AnomalySubscriptions')
+    ApproximateUsageRecordsPerService = Shapes::MapShape.new(name: 'ApproximateUsageRecordsPerService')
+    ApproximationDimension = Shapes::StringShape.new(name: 'ApproximationDimension')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AttributeType = Shapes::StringShape.new(name: 'AttributeType')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
@@ -126,6 +128,8 @@ module Aws::CostExplorer
     GetAnomalyMonitorsResponse = Shapes::StructureShape.new(name: 'GetAnomalyMonitorsResponse')
     GetAnomalySubscriptionsRequest = Shapes::StructureShape.new(name: 'GetAnomalySubscriptionsRequest')
     GetAnomalySubscriptionsResponse = Shapes::StructureShape.new(name: 'GetAnomalySubscriptionsResponse')
+    GetApproximateUsageRecordsRequest = Shapes::StructureShape.new(name: 'GetApproximateUsageRecordsRequest')
+    GetApproximateUsageRecordsResponse = Shapes::StructureShape.new(name: 'GetApproximateUsageRecordsResponse')
     GetCostAndUsageRequest = Shapes::StructureShape.new(name: 'GetCostAndUsageRequest')
     GetCostAndUsageResponse = Shapes::StructureShape.new(name: 'GetCostAndUsageResponse')
     GetCostAndUsageWithResourcesRequest = Shapes::StructureShape.new(name: 'GetCostAndUsageWithResourcesRequest')
@@ -200,6 +204,7 @@ module Aws::CostExplorer
     NetworkResourceUtilization = Shapes::StructureShape.new(name: 'NetworkResourceUtilization')
     NextPageToken = Shapes::StringShape.new(name: 'NextPageToken')
     NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
+    NonNegativeLong = Shapes::IntegerShape.new(name: 'NonNegativeLong')
     NullableNonNegativeDouble = Shapes::FloatShape.new(name: 'NullableNonNegativeDouble')
     NumericOperator = Shapes::StringShape.new(name: 'NumericOperator')
     OfferingClass = Shapes::StringShape.new(name: 'OfferingClass')
@@ -331,6 +336,7 @@ module Aws::CostExplorer
     UpdateCostAllocationTagsStatusResponse = Shapes::StructureShape.new(name: 'UpdateCostAllocationTagsStatusResponse')
     UpdateCostCategoryDefinitionRequest = Shapes::StructureShape.new(name: 'UpdateCostCategoryDefinitionRequest')
     UpdateCostCategoryDefinitionResponse = Shapes::StructureShape.new(name: 'UpdateCostCategoryDefinitionResponse')
+    UsageServices = Shapes::ListShape.new(name: 'UsageServices')
     UtilizationByTime = Shapes::StructureShape.new(name: 'UtilizationByTime')
     UtilizationPercentage = Shapes::StringShape.new(name: 'UtilizationPercentage')
     UtilizationPercentageInUnits = Shapes::StringShape.new(name: 'UtilizationPercentageInUnits')
@@ -385,6 +391,9 @@ module Aws::CostExplorer
     AnomalySubscription.struct_class = Types::AnomalySubscription
 
     AnomalySubscriptions.member = Shapes::ShapeRef.new(shape: AnomalySubscription)
+
+    ApproximateUsageRecordsPerService.key = Shapes::ShapeRef.new(shape: GenericString)
+    ApproximateUsageRecordsPerService.value = Shapes::ShapeRef.new(shape: NonNegativeLong)
 
     Attributes.key = Shapes::ShapeRef.new(shape: AttributeType)
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
@@ -707,6 +716,16 @@ module Aws::CostExplorer
     GetAnomalySubscriptionsResponse.add_member(:anomaly_subscriptions, Shapes::ShapeRef.new(shape: AnomalySubscriptions, required: true, location_name: "AnomalySubscriptions"))
     GetAnomalySubscriptionsResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     GetAnomalySubscriptionsResponse.struct_class = Types::GetAnomalySubscriptionsResponse
+
+    GetApproximateUsageRecordsRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, required: true, location_name: "Granularity"))
+    GetApproximateUsageRecordsRequest.add_member(:services, Shapes::ShapeRef.new(shape: UsageServices, location_name: "Services"))
+    GetApproximateUsageRecordsRequest.add_member(:approximation_dimension, Shapes::ShapeRef.new(shape: ApproximationDimension, required: true, location_name: "ApproximationDimension"))
+    GetApproximateUsageRecordsRequest.struct_class = Types::GetApproximateUsageRecordsRequest
+
+    GetApproximateUsageRecordsResponse.add_member(:services, Shapes::ShapeRef.new(shape: ApproximateUsageRecordsPerService, location_name: "Services"))
+    GetApproximateUsageRecordsResponse.add_member(:total_records, Shapes::ShapeRef.new(shape: NonNegativeLong, location_name: "TotalRecords"))
+    GetApproximateUsageRecordsResponse.add_member(:lookback_period, Shapes::ShapeRef.new(shape: DateInterval, location_name: "LookbackPeriod"))
+    GetApproximateUsageRecordsResponse.struct_class = Types::GetApproximateUsageRecordsResponse
 
     GetCostAndUsageRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetCostAndUsageRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, required: true, location_name: "Granularity"))
@@ -1463,6 +1482,8 @@ module Aws::CostExplorer
     UpdateCostCategoryDefinitionResponse.add_member(:effective_start, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveStart"))
     UpdateCostCategoryDefinitionResponse.struct_class = Types::UpdateCostCategoryDefinitionResponse
 
+    UsageServices.member = Shapes::ShapeRef.new(shape: GenericString)
+
     UtilizationByTime.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, location_name: "TimePeriod"))
     UtilizationByTime.add_member(:groups, Shapes::ShapeRef.new(shape: ReservationUtilizationGroups, location_name: "Groups"))
     UtilizationByTime.add_member(:total, Shapes::ShapeRef.new(shape: ReservationAggregates, location_name: "Total"))
@@ -1591,6 +1612,16 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnknownSubscriptionException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+      end)
+
+      api.add_operation(:get_approximate_usage_records, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetApproximateUsageRecords"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetApproximateUsageRecordsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetApproximateUsageRecordsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
       end)
 
       api.add_operation(:get_cost_and_usage, Seahorse::Model::Operation.new.tap do |o|

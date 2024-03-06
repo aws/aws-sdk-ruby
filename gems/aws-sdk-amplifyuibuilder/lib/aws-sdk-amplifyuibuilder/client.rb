@@ -4210,6 +4210,35 @@ module Aws::AmplifyUIBuilder
       req.send_request(options)
     end
 
+    # Returns a list of tags for a specified Amazon Resource Name (ARN).
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) to use to list tags.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of themes for a specified Amplify app and backend
     # environment.
     #
@@ -4544,6 +4573,61 @@ module Aws::AmplifyUIBuilder
     # @param [Hash] params ({})
     def start_codegen_job(params = {}, options = {})
       req = build_request(:start_codegen_job, params)
+      req.send_request(options)
+    end
+
+    # Tags the resource with a tag key and value.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) to use to tag a resource.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   A list of tag key value pairs for a specified Amazon Resource Name
+    #   (ARN).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "String", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Untags a resource with a specified Amazon Resource Name (ARN).
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) to use to untag a resource.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys to use to untag a resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "String", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -6434,7 +6518,7 @@ module Aws::AmplifyUIBuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplifyuibuilder'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

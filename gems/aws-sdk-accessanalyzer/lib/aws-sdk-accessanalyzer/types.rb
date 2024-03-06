@@ -14,7 +14,9 @@ module Aws::AccessAnalyzer
     # against a policy.
     #
     # @!attribute [rw] actions
-    #   A list of actions for the access permissions.
+    #   A list of actions for the access permissions. Any strings that can
+    #   be used as an action in an IAM policy can be used in the list of
+    #   actions to check.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/Access AWS API Documentation
@@ -917,7 +919,7 @@ module Aws::AccessAnalyzer
     #
     # @!attribute [rw] type
     #   The type of analyzer to create. Only `ACCOUNT`, `ORGANIZATION`,
-    #   `ACCOUNT_UNUSED_ACCESS`, and `ORGANIZTAION_UNUSED_ACCESS` analyzers
+    #   `ACCOUNT_UNUSED_ACCESS`, and `ORGANIZATION_UNUSED_ACCESS` analyzers
     #   are supported. You can create only one analyzer per account per
     #   Region. You can create up to 5 analyzers per organization per
     #   Region.
@@ -3241,8 +3243,8 @@ module Aws::AccessAnalyzer
     # and you do not specify the Amazon S3 bucket policy, the access preview
     # assumes an directory bucket without a policy. To propose deletion of
     # an existing bucket policy, you can specify an empty string. For more
-    # information about bucket policy limits, see [Example bucket
-    # policies][1].
+    # information about Amazon S3 directory bucket policies, see [Example
+    # directory bucket policies for S3 Express One Zone][1].
     #
     #
     #

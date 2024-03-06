@@ -868,6 +868,12 @@ module Aws::SESV2
     #             charset: "Charset",
     #           },
     #         },
+    #         headers: [
+    #           {
+    #             name: "MessageHeaderName", # required
+    #             value: "MessageHeaderValue", # required
+    #           },
+    #         ],
     #       },
     #       raw: {
     #         data: "data", # required
@@ -876,6 +882,12 @@ module Aws::SESV2
     #         template_name: "EmailTemplateName",
     #         template_arn: "AmazonResourceName",
     #         template_data: "EmailTemplateData",
+    #         headers: [
+    #           {
+    #             name: "MessageHeaderName", # required
+    #             value: "MessageHeaderValue", # required
+    #           },
+    #         ],
     #       },
     #     },
     #     tags: [
@@ -3538,9 +3550,7 @@ module Aws::SESV2
     #
     #   If the value is `false`, then your account is in the *sandbox*. When
     #   your account is in the sandbox, you can only send email to verified
-    #   identities. Additionally, the maximum number of emails you can send in
-    #   a 24-hour period (your sending quota) is 200, and the maximum number
-    #   of emails you can send per second (your maximum sending rate) is 1.
+    #   identities.
     #
     #   If the value is `true`, then your account has production access. When
     #   your account has production access, you can send email to any address.
@@ -4372,6 +4382,12 @@ module Aws::SESV2
     #         template_name: "EmailTemplateName",
     #         template_arn: "AmazonResourceName",
     #         template_data: "EmailTemplateData",
+    #         headers: [
+    #           {
+    #             name: "MessageHeaderName", # required
+    #             value: "MessageHeaderValue", # required
+    #           },
+    #         ],
     #       },
     #     },
     #     bulk_email_entries: [ # required
@@ -4543,7 +4559,7 @@ module Aws::SESV2
     #
     # @option params [required, Types::EmailContent] :content
     #   An object that contains the body of the message. You can send either a
-    #   Simple message Raw message or a template Message.
+    #   Simple message, Raw message, or a Templated message.
     #
     # @option params [Array<Types::MessageTag>] :email_tags
     #   A list of tags, in the form of name/value pairs, to apply to an email
@@ -4591,6 +4607,12 @@ module Aws::SESV2
     #             charset: "Charset",
     #           },
     #         },
+    #         headers: [
+    #           {
+    #             name: "MessageHeaderName", # required
+    #             value: "MessageHeaderValue", # required
+    #           },
+    #         ],
     #       },
     #       raw: {
     #         data: "data", # required
@@ -4599,6 +4621,12 @@ module Aws::SESV2
     #         template_name: "EmailTemplateName",
     #         template_arn: "AmazonResourceName",
     #         template_data: "EmailTemplateData",
+    #         headers: [
+    #           {
+    #             name: "MessageHeaderName", # required
+    #             value: "MessageHeaderValue", # required
+    #           },
+    #         ],
     #       },
     #     },
     #     email_tags: [
@@ -4803,9 +4831,13 @@ module Aws::SESV2
       req.send_request(options)
     end
 
-    # Updates a contact's preferences for a list. It is not necessary to
-    # specify all existing topic preferences in the TopicPreferences object,
-    # just the ones that need updating.
+    # Updates a contact's preferences for a list.
+    #
+    # <note markdown="1"> You must specify all existing topic preferences in the
+    # `TopicPreferences` object, not just the ones that need updating;
+    # otherwise, all your existing preferences will be removed.
+    #
+    #  </note>
     #
     # @option params [required, String] :contact_list_name
     #   The name of the contact list.
@@ -5061,7 +5093,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

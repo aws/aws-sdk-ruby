@@ -992,7 +992,7 @@ module Aws::APIGateway
     #
     # @option params [String] :schema
     #   The schema for the model. For `application/json` models, this should
-    #   be JSON schema draft 4 model.
+    #   be JSON schema draft 4 model. The maximum size of the model is 400 KB.
     #
     # @option params [required, String] :content_type
     #   The content-type for the model.
@@ -6494,7 +6494,8 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
-    # Changes information about a model.
+    # Changes information about a model. The maximum size of the model is
+    # 400 KB.
     #
     # @option params [required, String] :rest_api_id
     #   The string identifier of the associated RestApi.
@@ -7060,7 +7061,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

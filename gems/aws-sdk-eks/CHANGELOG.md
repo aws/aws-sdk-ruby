@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2024-02-29)
+------------------
+
+* Feature - Added support for new AL2023 AMIs to the supported AMITypes.
+
 1.98.0 (2024-01-26)
 ------------------
 

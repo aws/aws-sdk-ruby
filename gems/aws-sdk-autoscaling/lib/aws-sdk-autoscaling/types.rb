@@ -3634,19 +3634,20 @@ module Aws::AutoScaling
     #   The parameter accepts an integer, which Amazon EC2 Auto Scaling
     #   interprets as a percentage.
     #
-    #   To turn off price protection, specify a high value, such as
-    #   `999999`.
-    #
     #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
     #   price protection threshold is based on the per-vCPU or per-memory
     #   price instead of the per instance price.
     #
     #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
     #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
+    #   If you don't specify either, Amazon EC2 Auto Scaling will
+    #   automatically apply optimal price protection to consistently select
+    #   from a wide range of instance types. To indicate no price protection
+    #   threshold for Spot Instances, meaning you want to consider all
+    #   instance types that match your attributes, include one of these
+    #   parameters and specify a high value, such as `999999`.
     #
     #    </note>
-    #
-    #   Default: `100`
     #   @return [Integer]
     #
     # @!attribute [rw] max_spot_price_as_percentage_of_optimal_on_demand_price
@@ -3665,18 +3666,18 @@ module Aws::AutoScaling
     #   The parameter accepts an integer, which Amazon EC2 Auto Scaling
     #   interprets as a percentage.
     #
-    #   To indicate no price protection threshold, specify a high value,
-    #   such as `999999`.
-    #
     #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
     #   price protection threshold is based on the per-vCPU or per-memory
     #   price instead of the per instance price.
     #
     #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
     #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
-    #   If you don't specify either, then
-    #   `SpotMaxPricePercentageOverLowestPrice` is used and the value for
-    #   that parameter defaults to `100`.
+    #   If you don't specify either, Amazon EC2 Auto Scaling will
+    #   automatically apply optimal price protection to consistently select
+    #   from a wide range of instance types. To indicate no price protection
+    #   threshold for Spot Instances, meaning you want to consider all
+    #   instance types that match your attributes, include one of these
+    #   parameters and specify a high value, such as `999999`.
     #
     #    </note>
     #   @return [Integer]

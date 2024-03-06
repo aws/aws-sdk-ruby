@@ -91,6 +91,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterSnapshot.html#db_cluster_resource_id-instance_method
       def db_cluster_resource_id: () -> ::String
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterSnapshot.html#storage_throughput-instance_method
+      def storage_throughput: () -> ::Integer
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBClusterSnapshot.html#load-instance_method

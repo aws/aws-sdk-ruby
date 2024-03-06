@@ -72,6 +72,24 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _CreateTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTemplateResponse]
+        def template_id: () -> ::String
+        def template_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#create_template-instance_method
+      def create_template: (
+                             template_name: ::String,
+                             ?template_description: ::String,
+                             template_source: {
+                               workflow_id: ::String?
+                             },
+                             ?client_token: ::String,
+                             ?tags: Hash[::String, ::String]
+                           ) -> _CreateTemplateResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTemplateResponseSuccess
+
       interface _CreateWorkflowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateMigrationWorkflowResponse]
         def id: () -> ::String
@@ -91,7 +109,7 @@ module Aws
                              name: ::String,
                              ?description: ::String,
                              template_id: ::String,
-                             application_configuration_id: ::String,
+                             ?application_configuration_id: ::String,
                              input_parameters: Hash[::String, {
                                  integer_value: ::Integer?,
                                  string_value: ::String?,
@@ -169,6 +187,15 @@ module Aws
                                       ) -> _CreateWorkflowStepGroupResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowStepGroupResponseSuccess
 
+      interface _DeleteTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#delete_template-instance_method
+      def delete_template: (
+                             id: ::String
+                           ) -> _DeleteTemplateResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTemplateResponseSuccess
+
       interface _DeleteWorkflowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMigrationWorkflowResponse]
         def id: () -> ::String
@@ -205,12 +232,17 @@ module Aws
       interface _GetTemplateResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMigrationWorkflowTemplateResponse]
         def id: () -> ::String
+        def template_arn: () -> ::String
         def name: () -> ::String
         def description: () -> ::String
         def inputs: () -> ::Array[Types::TemplateInput]
         def tools: () -> ::Array[Types::Tool]
-        def status: () -> ("CREATED")
         def creation_time: () -> ::Time
+        def owner: () -> ::String
+        def status: () -> ("CREATED" | "READY" | "PENDING_CREATION" | "CREATING" | "CREATION_FAILED")
+        def status_message: () -> ::String
+        def template_class: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#get_template-instance_method
       def get_template: (
@@ -303,7 +335,7 @@ module Aws
         def outputs: () -> ::Array[Types::WorkflowStepOutput]
         def previous: () -> ::Array[::String]
         def next: () -> ::Array[::String]
-        def status: () -> ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
+        def status: () -> ("AWAITING_DEPENDENCIES" | "SKIPPED" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
         def status_message: () -> ::String
         def script_output_location: () -> ::String
         def creation_time: () -> ::Time
@@ -453,7 +485,7 @@ module Aws
         def step_group_id: () -> ::String
         def workflow_id: () -> ::String
         def id: () -> ::String
-        def status: () -> ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
+        def status: () -> ("AWAITING_DEPENDENCIES" | "SKIPPED" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#retry_workflow_step-instance_method
       def retry_workflow_step: (
@@ -510,6 +542,21 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTemplateResponse]
+        def template_id: () -> ::String
+        def template_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MigrationHubOrchestrator/Client.html#update_template-instance_method
+      def update_template: (
+                             id: ::String,
+                             ?template_name: ::String,
+                             ?template_description: ::String,
+                             ?client_token: ::String
+                           ) -> _UpdateTemplateResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTemplateResponseSuccess
 
       interface _UpdateWorkflowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMigrationWorkflowResponse]
@@ -584,7 +631,7 @@ module Aws
                                   ],
                                   ?previous: Array[::String],
                                   ?next: Array[::String],
-                                  ?status: ("AWAITING_DEPENDENCIES" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
+                                  ?status: ("AWAITING_DEPENDENCIES" | "SKIPPED" | "READY" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "PAUSED" | "USER_ATTENTION_REQUIRED")
                                 ) -> _UpdateWorkflowStepResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkflowStepResponseSuccess
 

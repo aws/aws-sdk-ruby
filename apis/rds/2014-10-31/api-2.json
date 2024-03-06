@@ -4147,7 +4147,8 @@
         "IOOptimizedNextAllowedModificationTime":{"shape":"TStamp"},
         "LocalWriteForwardingStatus":{"shape":"LocalWriteForwardingStatus"},
         "AwsBackupRecoveryPointArn":{"shape":"String"},
-        "LimitlessDatabase":{"shape":"LimitlessDatabase"}
+        "LimitlessDatabase":{"shape":"LimitlessDatabase"},
+        "StorageThroughput":{"shape":"IntegerOptional"}
       },
       "wrapper":true
     },
@@ -4188,7 +4189,8 @@
         "KmsKeyId":{"shape":"String"},
         "StorageType":{"shape":"String"},
         "Iops":{"shape":"IntegerOptional"},
-        "AwsBackupRecoveryPointArn":{"shape":"String"}
+        "AwsBackupRecoveryPointArn":{"shape":"String"},
+        "StorageThroughput":{"shape":"IntegerOptional"}
       },
       "wrapper":true
     },
@@ -4532,7 +4534,8 @@
         "TagList":{"shape":"TagList"},
         "DBSystemId":{"shape":"String"},
         "StorageType":{"shape":"String"},
-        "DbClusterResourceId":{"shape":"String"}
+        "DbClusterResourceId":{"shape":"String"},
+        "StorageThroughput":{"shape":"IntegerOptional"}
       },
       "wrapper":true
     },
@@ -5385,7 +5388,7 @@
       "type":"structure",
       "members":{
         "DBShardGroupResourceId":{"shape":"String"},
-        "DBShardGroupIdentifier":{"shape":"String"},
+        "DBShardGroupIdentifier":{"shape":"DBShardGroupIdentifier"},
         "DBClusterIdentifier":{"shape":"String"},
         "MaxACU":{"shape":"DoubleOptional"},
         "ComputeRedundancy":{"shape":"IntegerOptional"},
@@ -5404,6 +5407,12 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "DBShardGroupIdentifier":{
+      "type":"string",
+      "max":63,
+      "min":1,
+      "pattern":"[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*"
     },
     "DBShardGroupNotFoundFault":{
       "type":"structure",
@@ -5832,7 +5841,7 @@
       "type":"structure",
       "required":["DBShardGroupIdentifier"],
       "members":{
-        "DBShardGroupIdentifier":{"shape":"String"}
+        "DBShardGroupIdentifier":{"shape":"DBShardGroupIdentifier"}
       }
     },
     "DeleteDBSnapshotMessage":{
@@ -6229,7 +6238,7 @@
     "DescribeDBShardGroupsMessage":{
       "type":"structure",
       "members":{
-        "DBShardGroupIdentifier":{"shape":"String"},
+        "DBShardGroupIdentifier":{"shape":"DBShardGroupIdentifier"},
         "Filters":{"shape":"FilterList"},
         "Marker":{"shape":"String"},
         "MaxRecords":{"shape":"MaxRecords"}
@@ -8000,7 +8009,7 @@
       "type":"structure",
       "required":["DBShardGroupIdentifier"],
       "members":{
-        "DBShardGroupIdentifier":{"shape":"String"},
+        "DBShardGroupIdentifier":{"shape":"DBShardGroupIdentifier"},
         "MaxACU":{"shape":"DoubleOptional"}
       }
     },
@@ -8703,7 +8712,7 @@
       "type":"structure",
       "required":["DBShardGroupIdentifier"],
       "members":{
-        "DBShardGroupIdentifier":{"shape":"String"}
+        "DBShardGroupIdentifier":{"shape":"DBShardGroupIdentifier"}
       }
     },
     "RecommendedAction":{

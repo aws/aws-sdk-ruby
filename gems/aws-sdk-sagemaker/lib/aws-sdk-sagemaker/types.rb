@@ -2313,14 +2313,13 @@ module Aws::SageMaker
     #
     #     * List of available metrics:
     #
-    #       * Regression: `InferenceLatency`, `MAE`, `MSE`, `R2`, `RMSE`
+    #       * Regression: `MAE`, `MSE`, `R2`, `RMSE`
     #
     #       * Binary classification: `Accuracy`, `AUC`, `BalancedAccuracy`,
-    #         `F1`, `InferenceLatency`, `LogLoss`, `Precision`, `Recall`
+    #         `F1`, `Precision`, `Recall`
     #
     #       * Multiclass classification: `Accuracy`, `BalancedAccuracy`,
-    #         `F1macro`, `InferenceLatency`, `LogLoss`, `PrecisionMacro`,
-    #         `RecallMacro`
+    #         `F1macro`, `PrecisionMacro`, `RecallMacro`
     #
     #       For a description of each metric, see [Autopilot metrics for
     #       classification and regression][1].
@@ -7778,8 +7777,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] inference_specification
-    #   Specifies details about inference jobs that can be run with models
-    #   based on this model package, including the following:
+    #   Specifies details about inference jobs that you can run with models
+    #   based on this model package, including the following information:
     #
     #   * The Amazon ECR paths of containers that contain the inference code
     #     and model artifacts.
@@ -7905,6 +7904,12 @@ module Aws::SageMaker
     #   Indicates if you want to skip model validation.
     #   @return [String]
     #
+    # @!attribute [rw] source_uri
+    #   The URI of the source for the model package. If you want to clone a
+    #   model package, set it to the model package Amazon Resource Name
+    #   (ARN). If you want to register a model, set it to the model ARN.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackageInput AWS API Documentation
     #
     class CreateModelPackageInput < Struct.new(
@@ -7926,7 +7931,8 @@ module Aws::SageMaker
       :customer_metadata_properties,
       :drift_check_baselines,
       :additional_inference_specifications,
-      :skip_model_validation)
+      :skip_model_validation,
+      :source_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11562,7 +11568,16 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] creation_time
-    #   The creation time.
+    #   The creation time of the application.
+    #
+    #   <note markdown="1"> After an application has been shut down for 24 hours, SageMaker
+    #   deletes all metadata for the application. To be considered an update
+    #   and retain application metadata, applications must be restarted
+    #   within 24 hours after the previous application has been shut down.
+    #   After this time window, creation of an application is considered a
+    #   new application rather than an update of the previous application.
+    #
+    #    </note>
     #   @return [Time]
     #
     # @!attribute [rw] failure_reason
@@ -15160,7 +15175,7 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] inference_specification
-    #   Details about inference jobs that can be run with models based on
+    #   Details about inference jobs that you can run with models based on
     #   this model package.
     #   @return [Types::InferenceSpecification]
     #
@@ -15262,6 +15277,10 @@ module Aws::SageMaker
     #   Indicates if you want to skip model validation.
     #   @return [String]
     #
+    # @!attribute [rw] source_uri
+    #   The URI of the source for the model package.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageOutput AWS API Documentation
     #
     class DescribeModelPackageOutput < Struct.new(
@@ -15290,7 +15309,8 @@ module Aws::SageMaker
       :customer_metadata_properties,
       :drift_check_baselines,
       :additional_inference_specifications,
-      :skip_model_validation)
+      :skip_model_validation,
+      :source_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23730,7 +23750,8 @@ module Aws::SageMaker
     end
 
     # The configuration for the file system and kernels in a SageMaker image
-    # running as a JupyterLab app.
+    # running as a JupyterLab app. The `FileSystemConfig` object is not
+    # supported.
     #
     # @!attribute [rw] file_system_config
     #   The Amazon Elastic File System storage configuration for a SageMaker
@@ -31268,7 +31289,7 @@ module Aws::SageMaker
     #   @return [Types::ModelDataQuality]
     #
     # @!attribute [rw] bias
-    #   Metrics that measure bais in a model.
+    #   Metrics that measure bias in a model.
     #   @return [Types::Bias]
     #
     # @!attribute [rw] explainability
@@ -31419,6 +31440,10 @@ module Aws::SageMaker
     #   An array of additional Inference Specification objects.
     #   @return [Array<Types::AdditionalInferenceSpecificationDefinition>]
     #
+    # @!attribute [rw] source_uri
+    #   The URI of the source for the model package.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of the tags associated with the model package. For more
     #   information, see [Tagging Amazon Web Services resources][1] in the
@@ -31468,6 +31493,7 @@ module Aws::SageMaker
       :task,
       :sample_payload_url,
       :additional_inference_specifications,
+      :source_uri,
       :tags,
       :customer_metadata_properties,
       :drift_check_baselines,
@@ -31514,6 +31540,11 @@ module Aws::SageMaker
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] model_data_source
+    #   Specifies the location of ML model data to deploy during endpoint
+    #   creation.
+    #   @return [Types::ModelDataSource]
+    #
     # @!attribute [rw] product_id
     #   The Amazon Web Services Marketplace product ID of the model package.
     #   @return [String]
@@ -31555,6 +31586,7 @@ module Aws::SageMaker
       :image,
       :image_digest,
       :model_data_url,
+      :model_data_source,
       :product_id,
       :environment,
       :model_input,
@@ -38913,6 +38945,11 @@ module Aws::SageMaker
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] model_data_source
+    #   Specifies the location of ML model data to deploy during endpoint
+    #   creation.
+    #   @return [Types::ModelDataSource]
+    #
     # @!attribute [rw] algorithm_name
     #   The name of an algorithm that was used to create the model package.
     #   The algorithm must be either an algorithm resource in your SageMaker
@@ -38924,6 +38961,7 @@ module Aws::SageMaker
     #
     class SourceAlgorithm < Struct.new(
       :model_data_url,
+      :model_data_source,
       :algorithm_name)
       SENSITIVE = []
       include Aws::Structure
@@ -43670,6 +43708,24 @@ module Aws::SageMaker
     #   Generally used with SageMaker Neo to store the compiled artifacts.
     #   @return [Array<Types::AdditionalInferenceSpecificationDefinition>]
     #
+    # @!attribute [rw] inference_specification
+    #   Specifies details about inference jobs that you can run with models
+    #   based on this model package, including the following information:
+    #
+    #   * The Amazon ECR paths of containers that contain the inference code
+    #     and model artifacts.
+    #
+    #   * The instance types that the model package supports for transform
+    #     jobs and real-time endpoints used for inference.
+    #
+    #   * The input and output content formats that the model package
+    #     supports for inference.
+    #   @return [Types::InferenceSpecification]
+    #
+    # @!attribute [rw] source_uri
+    #   The URI of the source for the model package.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateModelPackageInput AWS API Documentation
     #
     class UpdateModelPackageInput < Struct.new(
@@ -43678,7 +43734,9 @@ module Aws::SageMaker
       :approval_description,
       :customer_metadata_properties,
       :customer_metadata_properties_to_remove,
-      :additional_inference_specifications_to_add)
+      :additional_inference_specifications_to_add,
+      :inference_specification,
+      :source_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44750,12 +44808,17 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The list of key-value pairs that you specify for your resources.
+    # The list of key-value pairs used to filter your search results. If a
+    # search result contains a key from your list, it is included in the
+    # final search response if the value associated with the key in the
+    # result matches the value you specified. If the value doesn't match,
+    # the result is excluded from the search response. Any resources that
+    # don't have a key from the list that you've provided will also be
+    # included in the search response.
     #
     # @!attribute [rw] key
     #   The key that specifies the tag that you're using to filter the
-    #   search results. It must be in the following format:
-    #   `Tags.<key>/EqualsIfExists`.
+    #   search results. It must be in the following format: `Tags.<key>`.
     #   @return [String]
     #
     # @!attribute [rw] value

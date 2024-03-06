@@ -344,6 +344,11 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class BedrockKnowledgeStoreConfiguration
+      attr_accessor bedrock_knowledge_base_arn: ::String
+      SENSITIVE: []
+    end
+
     class BedrockModelSpecification
       attr_accessor model_arn: ::String
       SENSITIVE: []
@@ -844,6 +849,7 @@ module Aws::LexModelsV2
       attr_accessor bot_version: ::String
       attr_accessor locale_id: ::String
       attr_accessor initial_response_setting: Types::InitialResponseSetting
+      attr_accessor qn_a_intent_configuration: Types::QnAIntentConfiguration
       SENSITIVE: []
     end
 
@@ -865,6 +871,7 @@ module Aws::LexModelsV2
       attr_accessor locale_id: ::String
       attr_accessor creation_date_time: ::Time
       attr_accessor initial_response_setting: Types::InitialResponseSetting
+      attr_accessor qn_a_intent_configuration: Types::QnAIntentConfiguration
       SENSITIVE: []
     end
 
@@ -1024,6 +1031,13 @@ module Aws::LexModelsV2
 
     class DataPrivacy
       attr_accessor child_directed: bool
+      SENSITIVE: []
+    end
+
+    class DataSourceConfiguration
+      attr_accessor opensearch_configuration: Types::OpensearchConfiguration
+      attr_accessor kendra_configuration: Types::QnAKendraConfiguration
+      attr_accessor bedrock_knowledge_store_configuration: Types::BedrockKnowledgeStoreConfiguration
       SENSITIVE: []
     end
 
@@ -1447,6 +1461,7 @@ module Aws::LexModelsV2
       attr_accessor creation_date_time: ::Time
       attr_accessor last_updated_date_time: ::Time
       attr_accessor initial_response_setting: Types::InitialResponseSetting
+      attr_accessor qn_a_intent_configuration: Types::QnAIntentConfiguration
       SENSITIVE: []
     end
 
@@ -1634,6 +1649,12 @@ module Aws::LexModelsV2
       attr_accessor bot_locale_export_password: ::String
       attr_accessor associated_transcripts_password: ::String
       SENSITIVE: [:bot_locale_export_password, :associated_transcripts_password]
+    end
+
+    class ExactResponseFields
+      attr_accessor question_field: ::String
+      attr_accessor answer_field: ::String
+      SENSITIVE: []
     end
 
     class ExecutionErrorDetails
@@ -2522,6 +2543,15 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class OpensearchConfiguration
+      attr_accessor domain_endpoint: ::String
+      attr_accessor index_name: ::String
+      attr_accessor exact_response: bool
+      attr_accessor exact_response_fields: Types::ExactResponseFields
+      attr_accessor include_fields: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class OutputContext
       attr_accessor name: ::String
       attr_accessor time_to_live_in_seconds: ::Integer
@@ -2609,6 +2639,20 @@ module Aws::LexModelsV2
       attr_accessor allow_interrupt: bool
       attr_accessor message_selection_strategy: ("Random" | "Ordered")
       attr_accessor prompt_attempts_specification: ::Hash[("Initial" | "Retry1" | "Retry2" | "Retry3" | "Retry4" | "Retry5"), Types::PromptAttemptSpecification]
+      SENSITIVE: []
+    end
+
+    class QnAIntentConfiguration
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      attr_accessor bedrock_model_configuration: Types::BedrockModelSpecification
+      SENSITIVE: []
+    end
+
+    class QnAKendraConfiguration
+      attr_accessor kendra_index: ::String
+      attr_accessor query_filter_string_enabled: bool
+      attr_accessor query_filter_string: ::String
+      attr_accessor exact_response: bool
       SENSITIVE: []
     end
 
@@ -3377,6 +3421,7 @@ module Aws::LexModelsV2
       attr_accessor bot_version: ::String
       attr_accessor locale_id: ::String
       attr_accessor initial_response_setting: Types::InitialResponseSetting
+      attr_accessor qn_a_intent_configuration: Types::QnAIntentConfiguration
       SENSITIVE: []
     end
 
@@ -3400,6 +3445,7 @@ module Aws::LexModelsV2
       attr_accessor creation_date_time: ::Time
       attr_accessor last_updated_date_time: ::Time
       attr_accessor initial_response_setting: Types::InitialResponseSetting
+      attr_accessor qn_a_intent_configuration: Types::QnAIntentConfiguration
       SENSITIVE: []
     end
 

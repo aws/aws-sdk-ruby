@@ -1388,6 +1388,12 @@ module Aws::LexModelsV2
     #   Configuration settings for the response that is sent to the user at
     #   the beginning of a conversation, before eliciting slot values.
     #
+    # @option params [Types::QnAIntentConfiguration] :qn_a_intent_configuration
+    #   Specifies the configuration of the built-in `Amazon.QnAIntent`. The
+    #   `AMAZON.QnAIntent` intent is called when Amazon Lex can't determine
+    #   another intent to invoke. If you specify this field, you can't
+    #   specify the `kendraConfiguration` field.
+    #
     # @return [Types::CreateIntentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIntentResponse#intent_id #intent_id} => String
@@ -1407,6 +1413,7 @@ module Aws::LexModelsV2
     #   * {Types::CreateIntentResponse#locale_id #locale_id} => String
     #   * {Types::CreateIntentResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::CreateIntentResponse#initial_response_setting #initial_response_setting} => Types::InitialResponseSetting
+    #   * {Types::CreateIntentResponse#qn_a_intent_configuration #qn_a_intent_configuration} => Types::QnAIntentConfiguration
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateIntent AWS API Documentation
     #
@@ -3973,6 +3980,7 @@ module Aws::LexModelsV2
     #   * {Types::DescribeIntentResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::DescribeIntentResponse#last_updated_date_time #last_updated_date_time} => Time
     #   * {Types::DescribeIntentResponse#initial_response_setting #initial_response_setting} => Types::InitialResponseSetting
+    #   * {Types::DescribeIntentResponse#qn_a_intent_configuration #qn_a_intent_configuration} => Types::QnAIntentConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -9225,6 +9233,12 @@ module Aws::LexModelsV2
     #   Configuration settings for a response sent to the user before Amazon
     #   Lex starts eliciting slots.
     #
+    # @option params [Types::QnAIntentConfiguration] :qn_a_intent_configuration
+    #   Specifies the configuration of the built-in `Amazon.QnAIntent`. The
+    #   `AMAZON.QnAIntent` intent is called when Amazon Lex can't determine
+    #   another intent to invoke. If you specify this field, you can't
+    #   specify the `kendraConfiguration` field.
+    #
     # @return [Types::UpdateIntentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateIntentResponse#intent_id #intent_id} => String
@@ -9246,6 +9260,7 @@ module Aws::LexModelsV2
     #   * {Types::UpdateIntentResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::UpdateIntentResponse#last_updated_date_time #last_updated_date_time} => Time
     #   * {Types::UpdateIntentResponse#initial_response_setting #initial_response_setting} => Types::InitialResponseSetting
+    #   * {Types::UpdateIntentResponse#qn_a_intent_configuration #qn_a_intent_configuration} => Types::QnAIntentConfiguration
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateIntent AWS API Documentation
     #
@@ -10341,7 +10356,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

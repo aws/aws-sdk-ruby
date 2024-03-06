@@ -1484,6 +1484,7 @@ module Aws::EC2
     GetManagedPrefixListAssociationsResult = Shapes::StructureShape.new(name: 'GetManagedPrefixListAssociationsResult')
     GetManagedPrefixListEntriesRequest = Shapes::StructureShape.new(name: 'GetManagedPrefixListEntriesRequest')
     GetManagedPrefixListEntriesResult = Shapes::StructureShape.new(name: 'GetManagedPrefixListEntriesResult')
+    GetNetworkInsightsAccessScopeAnalysisFindingsMaxResults = Shapes::IntegerShape.new(name: 'GetNetworkInsightsAccessScopeAnalysisFindingsMaxResults')
     GetNetworkInsightsAccessScopeAnalysisFindingsRequest = Shapes::StructureShape.new(name: 'GetNetworkInsightsAccessScopeAnalysisFindingsRequest')
     GetNetworkInsightsAccessScopeAnalysisFindingsResult = Shapes::StructureShape.new(name: 'GetNetworkInsightsAccessScopeAnalysisFindingsResult')
     GetNetworkInsightsAccessScopeContentRequest = Shapes::StructureShape.new(name: 'GetNetworkInsightsAccessScopeContentRequest')
@@ -9161,7 +9162,7 @@ module Aws::EC2
     GetManagedPrefixListEntriesResult.struct_class = Types::GetManagedPrefixListEntriesResult
 
     GetNetworkInsightsAccessScopeAnalysisFindingsRequest.add_member(:network_insights_access_scope_analysis_id, Shapes::ShapeRef.new(shape: NetworkInsightsAccessScopeAnalysisId, required: true, location_name: "NetworkInsightsAccessScopeAnalysisId"))
-    GetNetworkInsightsAccessScopeAnalysisFindingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: NetworkInsightsMaxResults, location_name: "MaxResults"))
+    GetNetworkInsightsAccessScopeAnalysisFindingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetNetworkInsightsAccessScopeAnalysisFindingsMaxResults, location_name: "MaxResults"))
     GetNetworkInsightsAccessScopeAnalysisFindingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetNetworkInsightsAccessScopeAnalysisFindingsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     GetNetworkInsightsAccessScopeAnalysisFindingsRequest.struct_class = Types::GetNetworkInsightsAccessScopeAnalysisFindingsRequest

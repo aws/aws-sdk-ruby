@@ -1417,6 +1417,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.db_system_id #=> String
     #   resp.db_cluster_snapshot.storage_type #=> String
     #   resp.db_cluster_snapshot.db_cluster_resource_id #=> String
+    #   resp.db_cluster_snapshot.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshot AWS API Documentation
     #
@@ -3664,6 +3665,7 @@ module Aws::RDS
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
+    #   resp.db_cluster.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -4090,6 +4092,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.db_system_id #=> String
     #   resp.db_cluster_snapshot.storage_type #=> String
     #   resp.db_cluster_snapshot.db_cluster_resource_id #=> String
+    #   resp.db_cluster_snapshot.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshot AWS API Documentation
     #
@@ -8805,6 +8808,7 @@ module Aws::RDS
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
+    #   resp.db_cluster.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -8861,6 +8865,7 @@ module Aws::RDS
     #   resp.db_cluster_automated_backup.storage_type #=> String
     #   resp.db_cluster_automated_backup.iops #=> Integer
     #   resp.db_cluster_automated_backup.aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster_automated_backup.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterAutomatedBackup AWS API Documentation
     #
@@ -9106,6 +9111,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.db_system_id #=> String
     #   resp.db_cluster_snapshot.storage_type #=> String
     #   resp.db_cluster_snapshot.db_cluster_resource_id #=> String
+    #   resp.db_cluster_snapshot.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshot AWS API Documentation
     #
@@ -9739,7 +9745,7 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_db_shard_group({
-    #     db_shard_group_identifier: "String", # required
+    #     db_shard_group_identifier: "DBShardGroupIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -10972,6 +10978,7 @@ module Aws::RDS
     #   resp.db_cluster_automated_backups[0].storage_type #=> String
     #   resp.db_cluster_automated_backups[0].iops #=> Integer
     #   resp.db_cluster_automated_backups[0].aws_backup_recovery_point_arn #=> String
+    #   resp.db_cluster_automated_backups[0].storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterAutomatedBackups AWS API Documentation
     #
@@ -11876,6 +11883,7 @@ module Aws::RDS
     #   resp.db_cluster_snapshots[0].db_system_id #=> String
     #   resp.db_cluster_snapshots[0].storage_type #=> String
     #   resp.db_cluster_snapshots[0].db_cluster_resource_id #=> String
+    #   resp.db_cluster_snapshots[0].storage_throughput #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -12220,6 +12228,7 @@ module Aws::RDS
     #   resp.db_clusters[0].aws_backup_recovery_point_arn #=> String
     #   resp.db_clusters[0].limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_clusters[0].limitless_database.min_required_acu #=> Float
+    #   resp.db_clusters[0].storage_throughput #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -13992,7 +14001,7 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_db_shard_groups({
-    #     db_shard_group_identifier: "String",
+    #     db_shard_group_identifier: "DBShardGroupIdentifier",
     #     filters: [
     #       {
     #         name: "String", # required
@@ -17488,6 +17497,7 @@ module Aws::RDS
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
+    #   resp.db_cluster.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -19140,6 +19150,7 @@ module Aws::RDS
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
+    #   resp.db_cluster.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -21347,7 +21358,7 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_db_shard_group({
-    #     db_shard_group_identifier: "String", # required
+    #     db_shard_group_identifier: "DBShardGroupIdentifier", # required
     #     max_acu: 1.0,
     #   })
     #
@@ -22705,6 +22716,7 @@ module Aws::RDS
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
+    #   resp.db_cluster.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -22995,6 +23007,7 @@ module Aws::RDS
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
+    #   resp.db_cluster.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBCluster AWS API Documentation
     #
@@ -23274,7 +23287,7 @@ module Aws::RDS
     # @example Request syntax with placeholder values
     #
     #   resp = client.reboot_db_shard_group({
-    #     db_shard_group_identifier: "String", # required
+    #     db_shard_group_identifier: "DBShardGroupIdentifier", # required
     #   })
     #
     # @example Response structure
@@ -24518,6 +24531,7 @@ module Aws::RDS
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
+    #   resp.db_cluster.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -25232,6 +25246,7 @@ module Aws::RDS
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
+    #   resp.db_cluster.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -25921,6 +25936,7 @@ module Aws::RDS
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
+    #   resp.db_cluster.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -26420,8 +26436,7 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom or Amazon Aurora.
     #
     # @option params [String] :db_cluster_snapshot_identifier
-    #   The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to
-    #   restore from.
+    #   The identifier for the Multi-AZ DB cluster snapshot to restore from.
     #
     #   For more information on Multi-AZ DB clusters, see [ Multi-AZ DB
     #   cluster deployments][1] in the *Amazon RDS User Guide*.
@@ -26440,9 +26455,6 @@ module Aws::RDS
     #     shared snapshot.
     #
     #   * Can't be the identifier of an Aurora DB cluster snapshot.
-    #
-    #   * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB
-    #     cluster snapshot.
     #
     #
     #
@@ -28731,6 +28743,7 @@ module Aws::RDS
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
+    #   resp.db_cluster.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -29567,6 +29580,7 @@ module Aws::RDS
     #   resp.db_cluster.aws_backup_recovery_point_arn #=> String
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
+    #   resp.db_cluster.storage_throughput #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -30414,7 +30428,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.217.0'
+      context[:gem_version] = '1.219.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

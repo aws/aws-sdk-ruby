@@ -1463,6 +1463,7 @@ module Aws::SageMaker
       attr_accessor drift_check_baselines: Types::DriftCheckBaselines
       attr_accessor additional_inference_specifications: ::Array[Types::AdditionalInferenceSpecificationDefinition]
       attr_accessor skip_model_validation: ("All" | "None")
+      attr_accessor source_uri: ::String
       SENSITIVE: []
     end
 
@@ -3227,6 +3228,7 @@ module Aws::SageMaker
       attr_accessor drift_check_baselines: Types::DriftCheckBaselines
       attr_accessor additional_inference_specifications: ::Array[Types::AdditionalInferenceSpecificationDefinition]
       attr_accessor skip_model_validation: ("All" | "None")
+      attr_accessor source_uri: ::String
       SENSITIVE: []
     end
 
@@ -6642,6 +6644,7 @@ module Aws::SageMaker
       attr_accessor task: ::String
       attr_accessor sample_payload_url: ::String
       attr_accessor additional_inference_specifications: ::Array[Types::AdditionalInferenceSpecificationDefinition]
+      attr_accessor source_uri: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor customer_metadata_properties: ::Hash[::String, ::String]
       attr_accessor drift_check_baselines: Types::DriftCheckBaselines
@@ -6654,6 +6657,7 @@ module Aws::SageMaker
       attr_accessor image: ::String
       attr_accessor image_digest: ::String
       attr_accessor model_data_url: ::String
+      attr_accessor model_data_source: Types::ModelDataSource
       attr_accessor product_id: ::String
       attr_accessor environment: ::Hash[::String, ::String]
       attr_accessor model_input: Types::ModelInput
@@ -8099,6 +8103,7 @@ module Aws::SageMaker
 
     class SourceAlgorithm
       attr_accessor model_data_url: ::String
+      attr_accessor model_data_source: Types::ModelDataSource
       attr_accessor algorithm_name: ::String
       SENSITIVE: []
     end
@@ -9105,6 +9110,8 @@ module Aws::SageMaker
       attr_accessor customer_metadata_properties: ::Hash[::String, ::String]
       attr_accessor customer_metadata_properties_to_remove: ::Array[::String]
       attr_accessor additional_inference_specifications_to_add: ::Array[Types::AdditionalInferenceSpecificationDefinition]
+      attr_accessor inference_specification: Types::InferenceSpecification
+      attr_accessor source_uri: ::String
       SENSITIVE: []
     end
 

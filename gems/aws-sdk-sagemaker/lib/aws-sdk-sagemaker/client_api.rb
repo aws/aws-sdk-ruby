@@ -1433,6 +1433,7 @@ module Aws::SageMaker
     ModelPackageGroupSummary = Shapes::StructureShape.new(name: 'ModelPackageGroupSummary')
     ModelPackageGroupSummaryList = Shapes::ListShape.new(name: 'ModelPackageGroupSummaryList')
     ModelPackageSortBy = Shapes::StringShape.new(name: 'ModelPackageSortBy')
+    ModelPackageSourceUri = Shapes::StringShape.new(name: 'ModelPackageSourceUri')
     ModelPackageStatus = Shapes::StringShape.new(name: 'ModelPackageStatus')
     ModelPackageStatusDetails = Shapes::StructureShape.new(name: 'ModelPackageStatusDetails')
     ModelPackageStatusItem = Shapes::StructureShape.new(name: 'ModelPackageStatusItem')
@@ -3446,6 +3447,7 @@ module Aws::SageMaker
     CreateModelPackageInput.add_member(:drift_check_baselines, Shapes::ShapeRef.new(shape: DriftCheckBaselines, location_name: "DriftCheckBaselines"))
     CreateModelPackageInput.add_member(:additional_inference_specifications, Shapes::ShapeRef.new(shape: AdditionalInferenceSpecifications, location_name: "AdditionalInferenceSpecifications"))
     CreateModelPackageInput.add_member(:skip_model_validation, Shapes::ShapeRef.new(shape: SkipModelValidation, location_name: "SkipModelValidation"))
+    CreateModelPackageInput.add_member(:source_uri, Shapes::ShapeRef.new(shape: ModelPackageSourceUri, location_name: "SourceUri"))
     CreateModelPackageInput.struct_class = Types::CreateModelPackageInput
 
     CreateModelPackageOutput.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))
@@ -4812,6 +4814,7 @@ module Aws::SageMaker
     DescribeModelPackageOutput.add_member(:drift_check_baselines, Shapes::ShapeRef.new(shape: DriftCheckBaselines, location_name: "DriftCheckBaselines"))
     DescribeModelPackageOutput.add_member(:additional_inference_specifications, Shapes::ShapeRef.new(shape: AdditionalInferenceSpecifications, location_name: "AdditionalInferenceSpecifications"))
     DescribeModelPackageOutput.add_member(:skip_model_validation, Shapes::ShapeRef.new(shape: SkipModelValidation, location_name: "SkipModelValidation"))
+    DescribeModelPackageOutput.add_member(:source_uri, Shapes::ShapeRef.new(shape: ModelPackageSourceUri, location_name: "SourceUri"))
     DescribeModelPackageOutput.struct_class = Types::DescribeModelPackageOutput
 
     DescribeModelQualityJobDefinitionRequest.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: MonitoringJobDefinitionName, required: true, location_name: "JobDefinitionName"))
@@ -7615,6 +7618,7 @@ module Aws::SageMaker
     ModelPackage.add_member(:task, Shapes::ShapeRef.new(shape: String, location_name: "Task"))
     ModelPackage.add_member(:sample_payload_url, Shapes::ShapeRef.new(shape: String, location_name: "SamplePayloadUrl"))
     ModelPackage.add_member(:additional_inference_specifications, Shapes::ShapeRef.new(shape: AdditionalInferenceSpecifications, location_name: "AdditionalInferenceSpecifications"))
+    ModelPackage.add_member(:source_uri, Shapes::ShapeRef.new(shape: ModelPackageSourceUri, location_name: "SourceUri"))
     ModelPackage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ModelPackage.add_member(:customer_metadata_properties, Shapes::ShapeRef.new(shape: CustomerMetadataMap, location_name: "CustomerMetadataProperties"))
     ModelPackage.add_member(:drift_check_baselines, Shapes::ShapeRef.new(shape: DriftCheckBaselines, location_name: "DriftCheckBaselines"))
@@ -7627,6 +7631,7 @@ module Aws::SageMaker
     ModelPackageContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: ContainerImage, required: true, location_name: "Image"))
     ModelPackageContainerDefinition.add_member(:image_digest, Shapes::ShapeRef.new(shape: ImageDigest, location_name: "ImageDigest"))
     ModelPackageContainerDefinition.add_member(:model_data_url, Shapes::ShapeRef.new(shape: Url, location_name: "ModelDataUrl"))
+    ModelPackageContainerDefinition.add_member(:model_data_source, Shapes::ShapeRef.new(shape: ModelDataSource, location_name: "ModelDataSource"))
     ModelPackageContainerDefinition.add_member(:product_id, Shapes::ShapeRef.new(shape: ProductId, location_name: "ProductId"))
     ModelPackageContainerDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentMap, location_name: "Environment"))
     ModelPackageContainerDefinition.add_member(:model_input, Shapes::ShapeRef.new(shape: ModelInput, location_name: "ModelInput"))
@@ -8855,6 +8860,7 @@ module Aws::SageMaker
     ShuffleConfig.struct_class = Types::ShuffleConfig
 
     SourceAlgorithm.add_member(:model_data_url, Shapes::ShapeRef.new(shape: Url, location_name: "ModelDataUrl"))
+    SourceAlgorithm.add_member(:model_data_source, Shapes::ShapeRef.new(shape: ModelDataSource, location_name: "ModelDataSource"))
     SourceAlgorithm.add_member(:algorithm_name, Shapes::ShapeRef.new(shape: ArnOrName, required: true, location_name: "AlgorithmName"))
     SourceAlgorithm.struct_class = Types::SourceAlgorithm
 
@@ -9644,6 +9650,8 @@ module Aws::SageMaker
     UpdateModelPackageInput.add_member(:customer_metadata_properties, Shapes::ShapeRef.new(shape: CustomerMetadataMap, location_name: "CustomerMetadataProperties"))
     UpdateModelPackageInput.add_member(:customer_metadata_properties_to_remove, Shapes::ShapeRef.new(shape: CustomerMetadataKeyList, location_name: "CustomerMetadataPropertiesToRemove"))
     UpdateModelPackageInput.add_member(:additional_inference_specifications_to_add, Shapes::ShapeRef.new(shape: AdditionalInferenceSpecifications, location_name: "AdditionalInferenceSpecificationsToAdd"))
+    UpdateModelPackageInput.add_member(:inference_specification, Shapes::ShapeRef.new(shape: InferenceSpecification, location_name: "InferenceSpecification"))
+    UpdateModelPackageInput.add_member(:source_uri, Shapes::ShapeRef.new(shape: ModelPackageSourceUri, location_name: "SourceUri"))
     UpdateModelPackageInput.struct_class = Types::UpdateModelPackageInput
 
     UpdateModelPackageOutput.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))

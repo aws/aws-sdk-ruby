@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2024-03-05)
+------------------
+
+* Feature - Adds support for providing custom headers within SendEmail and SendBulkEmail for SESv2.
+
 1.44.0 (2024-01-26)
 ------------------
 

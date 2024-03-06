@@ -33,7 +33,7 @@ require_relative 'aws-sdk-migrationhuborchestrator/customizations'
 # structure.
 #
 #     migration_hub_orchestrator = Aws::MigrationHubOrchestrator::Client.new
-#     resp = migration_hub_orchestrator.create_workflow(params)
+#     resp = migration_hub_orchestrator.create_template(params)
 #
 # See {Client} for more information.
 #
@@ -53,6 +53,6 @@ require_relative 'aws-sdk-migrationhuborchestrator/customizations'
 # @!group service
 module Aws::MigrationHubOrchestrator
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end

@@ -962,6 +962,7 @@ module Aws::QuickSight
       attr_accessor label: ::String
       attr_accessor visibility: ("HIDDEN" | "VISIBLE")
       attr_accessor aggregation: Types::AggregationFunction
+      attr_accessor tooltip_target: ("BOTH" | "BAR" | "LINE")
       SENSITIVE: []
     end
 
@@ -3425,6 +3426,7 @@ module Aws::QuickSight
       attr_accessor field_id: ::String
       attr_accessor label: ::String
       attr_accessor visibility: ("HIDDEN" | "VISIBLE")
+      attr_accessor tooltip_target: ("BOTH" | "BAR" | "LINE")
       SENSITIVE: []
     end
 

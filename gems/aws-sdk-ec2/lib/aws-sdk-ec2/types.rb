@@ -25098,7 +25098,8 @@ module Aws::EC2
     #
     # @!attribute [rw] next_token
     #   The token to include in another request to get the next page of
-    #   items. This value is `null` when there are no more items to return.
+    #   items. This value is an empty string (`""`) or `null` when there are
+    #   no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] spot_price_history
@@ -33023,6 +33024,15 @@ module Aws::EC2
     #
     # @!attribute [rw] weighted_capacity
     #   The number of units provided by the specified instance type.
+    #
+    #   <note markdown="1"> When specifying weights, the price used in the `lowest-price` and
+    #   `price-capacity-optimized` allocation strategies is per *unit* hour
+    #   (where the instance price is divided by the specified weight).
+    #   However, if all the specified weights are above the requested
+    #   `TargetCapacity`, resulting in only 1 instance being launched, the
+    #   price used is per *instance* hour.
+    #
+    #    </note>
     #   @return [Float]
     #
     # @!attribute [rw] priority
@@ -33118,6 +33128,15 @@ module Aws::EC2
     #
     # @!attribute [rw] weighted_capacity
     #   The number of units provided by the specified instance type.
+    #
+    #   <note markdown="1"> When specifying weights, the price used in the `lowest-price` and
+    #   `price-capacity-optimized` allocation strategies is per *unit* hour
+    #   (where the instance price is divided by the specified weight).
+    #   However, if all the specified weights are above the requested
+    #   `TargetCapacity`, resulting in only 1 instance being launched, the
+    #   price used is per *instance* hour.
+    #
+    #    </note>
     #   @return [Float]
     #
     # @!attribute [rw] priority
@@ -40212,9 +40231,6 @@ module Aws::EC2
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
     #
-    #   To indicate no price protection threshold, specify a high value,
-    #   such as `999999`.
-    #
     #   If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
     #   price protection threshold is applied based on the per-vCPU or
     #   per-memory price instead of the per-instance price.
@@ -40224,9 +40240,12 @@ module Aws::EC2
     #
     #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
     #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
-    #   If you don't specify either, then
-    #   `SpotMaxPricePercentageOverLowestPrice` is used and the value for
-    #   that parameter defaults to `100`.
+    #   If you don't specify either, Amazon EC2 will automatically apply
+    #   optimal price protection to consistently select from a wide range of
+    #   instance types. To indicate no price protection threshold for Spot
+    #   Instances, meaning you want to consider all instance types that
+    #   match your attributes, include one of these parameters and specify a
+    #   high value, such as `999999`.
     #
     #    </note>
     #
@@ -40497,18 +40516,18 @@ module Aws::EC2
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
     #
-    #   To indicate no price protection threshold, specify a high value,
-    #   such as `999999`.
-    #
     #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
     #   price protection threshold is based on the per vCPU or per memory
     #   price instead of the per instance price.
     #
     #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
     #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
-    #   If you don't specify either, then
-    #   `SpotMaxPricePercentageOverLowestPrice` is used and the value for
-    #   that parameter defaults to `100`.
+    #   If you don't specify either, Amazon EC2 will automatically apply
+    #   optimal price protection to consistently select from a wide range of
+    #   instance types. To indicate no price protection threshold for Spot
+    #   Instances, meaning you want to consider all instance types that
+    #   match your attributes, include one of these parameters and specify a
+    #   high value, such as `999999`.
     #
     #    </note>
     #   @return [Integer]
@@ -40682,9 +40701,6 @@ module Aws::EC2
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
     #
-    #   To indicate no price protection threshold, specify a high value,
-    #   such as `999999`.
-    #
     #   If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
     #   price protection threshold is applied based on the per-vCPU or
     #   per-memory price instead of the per-instance price.
@@ -40694,9 +40710,12 @@ module Aws::EC2
     #
     #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
     #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
-    #   If you don't specify either, then
-    #   `SpotMaxPricePercentageOverLowestPrice` is used and the value for
-    #   that parameter defaults to `100`.
+    #   If you don't specify either, Amazon EC2 will automatically apply
+    #   optimal price protection to consistently select from a wide range of
+    #   instance types. To indicate no price protection threshold for Spot
+    #   Instances, meaning you want to consider all instance types that
+    #   match your attributes, include one of these parameters and specify a
+    #   high value, such as `999999`.
     #
     #    </note>
     #
@@ -40972,18 +40991,18 @@ module Aws::EC2
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
     #
-    #   To indicate no price protection threshold, specify a high value,
-    #   such as `999999`.
-    #
     #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
     #   price protection threshold is based on the per vCPU or per memory
     #   price instead of the per instance price.
     #
     #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
     #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
-    #   If you don't specify either, then
-    #   `SpotMaxPricePercentageOverLowestPrice` is used and the value for
-    #   that parameter defaults to `100`.
+    #   If you don't specify either, Amazon EC2 will automatically apply
+    #   optimal price protection to consistently select from a wide range of
+    #   instance types. To indicate no price protection threshold for Spot
+    #   Instances, meaning you want to consider all instance types that
+    #   match your attributes, include one of these parameters and specify a
+    #   high value, such as `999999`.
     #
     #    </note>
     #   @return [Integer]
@@ -41350,8 +41369,8 @@ module Aws::EC2
     #
     # @!attribute [rw] network_nodes
     #   The network nodes. The nodes are hashed based on your account.
-    #   Instances from different accounts running under the same droplet
-    #   will return a different hashed list of strings.
+    #   Instances from different accounts running under the same server will
+    #   return a different hashed list of strings.
     #   @return [Array<String>]
     #
     # @!attribute [rw] availability_zone
@@ -44857,6 +44876,15 @@ module Aws::EC2
     #
     # @!attribute [rw] weighted_capacity
     #   The number of units provided by the specified instance type.
+    #
+    #   <note markdown="1"> When specifying weights, the price used in the `lowest-price` and
+    #   `price-capacity-optimized` allocation strategies is per *unit* hour
+    #   (where the instance price is divided by the specified weight).
+    #   However, if all the specified weights are above the requested
+    #   `TargetCapacity`, resulting in only 1 instance being launched, the
+    #   price used is per *instance* hour.
+    #
+    #    </note>
     #   @return [Float]
     #
     # @!attribute [rw] priority
@@ -47742,7 +47770,12 @@ module Aws::EC2
     end
 
     # @!attribute [rw] affinity
-    #   The affinity setting for the instance.
+    #   The affinity setting for the instance. For more information, see
+    #   [Host affinity][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-dedicated-hosts-work.html#dedicated-hosts-affinity
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -59388,11 +59421,10 @@ module Aws::EC2
     #   one network interface in the request. If launching into a default
     #   subnet, the default value is `true`.
     #
-    #   Starting on February 1, 2024, Amazon Web Services will charge for
-    #   all public IPv4 addresses, including public IPv4 addresses
-    #   associated with running instances and Elastic IP addresses. For more
-    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
-    #   pricing page][1].
+    #   Amazon Web Services charges for all public IPv4 addresses, including
+    #   public IPv4 addresses associated with running instances and Elastic
+    #   IP addresses. For more information, see the *Public IPv4 Address*
+    #   tab on the [Amazon VPC pricing page][1].
     #
     #
     #

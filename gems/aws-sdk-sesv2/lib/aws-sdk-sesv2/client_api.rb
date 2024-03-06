@@ -319,6 +319,10 @@ module Aws::SESV2
     Message = Shapes::StructureShape.new(name: 'Message')
     MessageContent = Shapes::StringShape.new(name: 'MessageContent')
     MessageData = Shapes::StringShape.new(name: 'MessageData')
+    MessageHeader = Shapes::StructureShape.new(name: 'MessageHeader')
+    MessageHeaderList = Shapes::ListShape.new(name: 'MessageHeaderList')
+    MessageHeaderName = Shapes::StringShape.new(name: 'MessageHeaderName')
+    MessageHeaderValue = Shapes::StringShape.new(name: 'MessageHeaderValue')
     MessageInsightsDataSource = Shapes::StructureShape.new(name: 'MessageInsightsDataSource')
     MessageInsightsExportMaxResults = Shapes::IntegerShape.new(name: 'MessageInsightsExportMaxResults')
     MessageInsightsFilters = Shapes::StructureShape.new(name: 'MessageInsightsFilters')
@@ -1378,7 +1382,14 @@ module Aws::SESV2
 
     Message.add_member(:subject, Shapes::ShapeRef.new(shape: Content, required: true, location_name: "Subject"))
     Message.add_member(:body, Shapes::ShapeRef.new(shape: Body, required: true, location_name: "Body"))
+    Message.add_member(:headers, Shapes::ShapeRef.new(shape: MessageHeaderList, location_name: "Headers"))
     Message.struct_class = Types::Message
+
+    MessageHeader.add_member(:name, Shapes::ShapeRef.new(shape: MessageHeaderName, required: true, location_name: "Name"))
+    MessageHeader.add_member(:value, Shapes::ShapeRef.new(shape: MessageHeaderValue, required: true, location_name: "Value"))
+    MessageHeader.struct_class = Types::MessageHeader
+
+    MessageHeaderList.member = Shapes::ShapeRef.new(shape: MessageHeader)
 
     MessageInsightsDataSource.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartDate"))
     MessageInsightsDataSource.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndDate"))
@@ -1705,6 +1716,7 @@ module Aws::SESV2
     Template.add_member(:template_name, Shapes::ShapeRef.new(shape: EmailTemplateName, location_name: "TemplateName"))
     Template.add_member(:template_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TemplateArn"))
     Template.add_member(:template_data, Shapes::ShapeRef.new(shape: EmailTemplateData, location_name: "TemplateData"))
+    Template.add_member(:headers, Shapes::ShapeRef.new(shape: MessageHeaderList, location_name: "Headers"))
     Template.struct_class = Types::Template
 
     TestRenderEmailTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: EmailTemplateName, required: true, location: "uri", location_name: "TemplateName"))

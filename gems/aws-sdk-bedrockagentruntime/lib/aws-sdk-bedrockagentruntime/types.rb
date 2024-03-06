@@ -209,7 +209,7 @@ module Aws::BedrockAgentRuntime
     #
     class GeneratedResponsePart < Struct.new(
       :text_response_part)
-      SENSITIVE = []
+      SENSITIVE = [:text_response_part]
       include Aws::Structure
     end
 
@@ -446,7 +446,7 @@ module Aws::BedrockAgentRuntime
       :content,
       :location,
       :score)
-      SENSITIVE = []
+      SENSITIVE = [:content, :location]
       include Aws::Structure
     end
 
@@ -460,11 +460,16 @@ module Aws::BedrockAgentRuntime
     #   Arn of a Bedrock model.
     #   @return [String]
     #
+    # @!attribute [rw] retrieval_configuration
+    #   Search parameters for retrieving from knowledge base.
+    #   @return [Types::KnowledgeBaseRetrievalConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/KnowledgeBaseRetrieveAndGenerateConfiguration AWS API Documentation
     #
     class KnowledgeBaseRetrieveAndGenerateConfiguration < Struct.new(
       :knowledge_base_id,
-      :model_arn)
+      :model_arn,
+      :retrieval_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -475,10 +480,15 @@ module Aws::BedrockAgentRuntime
     #   Top-K results to retrieve from knowledge base.
     #   @return [Integer]
     #
+    # @!attribute [rw] override_search_type
+    #   Override the type of query to be performed on data store
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/KnowledgeBaseVectorSearchConfiguration AWS API Documentation
     #
     class KnowledgeBaseVectorSearchConfiguration < Struct.new(
-      :number_of_results)
+      :number_of_results,
+      :override_search_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1064,7 +1074,7 @@ module Aws::BedrockAgentRuntime
     class RetrievedReference < Struct.new(
       :content,
       :location)
-      SENSITIVE = []
+      SENSITIVE = [:content, :location]
       include Aws::Structure
     end
 

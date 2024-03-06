@@ -82,7 +82,7 @@ module Aws
                                      {
                                        accounts: Array[::String]?,
                                        regions: Array[::String],
-                                       source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA"),
+                                       source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF"),
                                        source_version: ::String?
                                      },
                                    ]
@@ -95,7 +95,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#create_custom_log_source-instance_method
       def create_custom_log_source: (
-                                      ?configuration: {
+                                      configuration: {
                                         crawler_configuration: {
                                           role_arn: ::String
                                         },
@@ -165,19 +165,19 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#create_data_lake_organization_configuration-instance_method
       def create_data_lake_organization_configuration: (
-                                                         auto_enable_new_account: Array[
+                                                         ?auto_enable_new_account: Array[
                                                            {
                                                              region: ::String,
                                                              sources: Array[
                                                                {
-                                                                 source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA")?,
+                                                                 source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF")?,
                                                                  source_version: ::String?
                                                                },
                                                              ]
                                                            },
                                                          ]
                                                        ) -> _CreateDataLakeOrganizationConfigurationResponseSuccess
-                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataLakeOrganizationConfigurationResponseSuccess
+                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataLakeOrganizationConfigurationResponseSuccess
 
       interface _CreateSubscriberResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubscriberResponse]
@@ -189,7 +189,7 @@ module Aws
                                sources: Array[
                                  {
                                    aws_log_source: {
-                                     source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA")?,
+                                     source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF")?,
                                      source_version: ::String?
                                    }?,
                                    custom_log_source: {
@@ -253,7 +253,7 @@ module Aws
                                      {
                                        accounts: Array[::String]?,
                                        regions: Array[::String],
-                                       source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA"),
+                                       source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF"),
                                        source_version: ::String?
                                      },
                                    ]
@@ -292,19 +292,19 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#delete_data_lake_organization_configuration-instance_method
       def delete_data_lake_organization_configuration: (
-                                                         auto_enable_new_account: Array[
+                                                         ?auto_enable_new_account: Array[
                                                            {
                                                              region: ::String,
                                                              sources: Array[
                                                                {
-                                                                 source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA")?,
+                                                                 source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF")?,
                                                                  source_version: ::String?
                                                                },
                                                              ]
                                                            },
                                                          ]
                                                        ) -> _DeleteDataLakeOrganizationConfigurationResponseSuccess
-                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataLakeOrganizationConfigurationResponseSuccess
+                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataLakeOrganizationConfigurationResponseSuccess
 
       interface _DeleteSubscriberResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSubscriberResponse]
@@ -413,7 +413,7 @@ module Aws
                               ?sources: Array[
                                 {
                                   aws_log_source: {
-                                    source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA")?,
+                                    source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF")?,
                                     source_version: ::String?
                                   }?,
                                   custom_log_source: {
@@ -518,7 +518,8 @@ module Aws
                                     role_arn: ::String?
                                   }?
                                 },
-                              ]
+                              ],
+                              ?meta_store_manager_role_arn: ::String
                             ) -> _UpdateDataLakeResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataLakeResponseSuccess
 
@@ -542,7 +543,7 @@ module Aws
                                ?sources: Array[
                                  {
                                    aws_log_source: {
-                                     source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA")?,
+                                     source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF")?,
                                      source_version: ::String?
                                    }?,
                                    custom_log_source: {

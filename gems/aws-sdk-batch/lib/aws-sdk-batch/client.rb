@@ -1601,11 +1601,151 @@ module Aws::Batch
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.runtime_platform.operating_system_family #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.runtime_platform.cpu_architecture #=> String
     #   resp.job_definitions[0].node_properties.node_range_properties[0].container.repository_credentials.credentials_parameter #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].instance_types #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].instance_types[0] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].command #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].command[0] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].depends_on #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].depends_on[0].container_name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].depends_on[0].condition #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].environment #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].environment[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].environment[0].value #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].essential #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].image #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].host_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].container_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].permissions #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.init_process_enabled #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.shared_memory_size #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.max_swap #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.swappiness #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.options #=> Hash
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.options["String"] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.secret_options #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.secret_options[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.secret_options[0].value_from #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].mount_points #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].mount_points[0].container_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].mount_points[0].read_only #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].mount_points[0].source_volume #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].privileged #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].readonly_root_filesystem #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].repository_credentials.credentials_parameter #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].resource_requirements #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].resource_requirements[0].value #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].resource_requirements[0].type #=> String, one of "GPU", "VCPU", "MEMORY"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].secrets #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].secrets[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].secrets[0].value_from #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].ulimits #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].ulimits[0].hard_limit #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].ulimits[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].ulimits[0].soft_limit #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].user #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].execution_role_arn #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].platform_version #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].ipc_mode #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].task_role_arn #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].pid_mode #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].runtime_platform.operating_system_family #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].runtime_platform.cpu_architecture #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].host.source_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.file_system_id #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.transit_encryption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_definitions[0].tags #=> Hash
     #   resp.job_definitions[0].tags["TagKey"] #=> String
     #   resp.job_definitions[0].propagate_tags #=> Boolean
     #   resp.job_definitions[0].platform_capabilities #=> Array
     #   resp.job_definitions[0].platform_capabilities[0] #=> String, one of "EC2", "FARGATE"
+    #   resp.job_definitions[0].ecs_properties.task_properties #=> Array
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers #=> Array
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].command #=> Array
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].command[0] #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].depends_on #=> Array
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].depends_on[0].container_name #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].depends_on[0].condition #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].environment #=> Array
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].environment[0].name #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].environment[0].value #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].essential #=> Boolean
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].image #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices #=> Array
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].host_path #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].container_path #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].permissions #=> Array
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.init_process_enabled #=> Boolean
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.shared_memory_size #=> Integer
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs #=> Array
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.max_swap #=> Integer
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].linux_parameters.swappiness #=> Integer
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].log_configuration.options #=> Hash
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].log_configuration.options["String"] #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].log_configuration.secret_options #=> Array
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].log_configuration.secret_options[0].name #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].log_configuration.secret_options[0].value_from #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].mount_points #=> Array
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].mount_points[0].container_path #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].mount_points[0].read_only #=> Boolean
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].mount_points[0].source_volume #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].name #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].privileged #=> Boolean
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].readonly_root_filesystem #=> Boolean
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].repository_credentials.credentials_parameter #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].resource_requirements #=> Array
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].resource_requirements[0].value #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].resource_requirements[0].type #=> String, one of "GPU", "VCPU", "MEMORY"
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].secrets #=> Array
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].secrets[0].name #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].secrets[0].value_from #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].ulimits #=> Array
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].ulimits[0].hard_limit #=> Integer
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].ulimits[0].name #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].ulimits[0].soft_limit #=> Integer
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].containers[0].user #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].execution_role_arn #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].platform_version #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].ipc_mode #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].task_role_arn #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].pid_mode #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].runtime_platform.operating_system_family #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].runtime_platform.cpu_architecture #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].volumes #=> Array
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].volumes[0].host.source_path #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].volumes[0].name #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.file_system_id #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.transit_encryption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.job_definitions[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_definitions[0].eks_properties.pod_properties.service_account_name #=> String
     #   resp.job_definitions[0].eks_properties.pod_properties.host_network #=> Boolean
     #   resp.job_definitions[0].eks_properties.pod_properties.dns_policy #=> String
@@ -1633,6 +1773,30 @@ module Aws::Batch
     #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.privileged #=> Boolean
     #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.read_only_root_filesystem #=> Boolean
     #   resp.job_definitions[0].eks_properties.pod_properties.containers[0].security_context.run_as_non_root #=> Boolean
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers #=> Array
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].name #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].image #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].image_pull_policy #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].command #=> Array
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].command[0] #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].args #=> Array
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].args[0] #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].env #=> Array
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].env[0].name #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].env[0].value #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].resources.limits #=> Hash
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].resources.limits["String"] #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].resources.requests #=> Hash
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].resources.requests["String"] #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].volume_mounts #=> Array
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].volume_mounts[0].name #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].volume_mounts[0].mount_path #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].volume_mounts[0].read_only #=> Boolean
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].security_context.run_as_user #=> Integer
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].security_context.run_as_group #=> Integer
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].security_context.privileged #=> Boolean
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].security_context.read_only_root_filesystem #=> Boolean
+    #   resp.job_definitions[0].eks_properties.pod_properties.init_containers[0].security_context.run_as_non_root #=> Boolean
     #   resp.job_definitions[0].eks_properties.pod_properties.volumes #=> Array
     #   resp.job_definitions[0].eks_properties.pod_properties.volumes[0].name #=> String
     #   resp.job_definitions[0].eks_properties.pod_properties.volumes[0].host_path.path #=> String
@@ -1642,6 +1806,7 @@ module Aws::Batch
     #   resp.job_definitions[0].eks_properties.pod_properties.volumes[0].secret.optional #=> Boolean
     #   resp.job_definitions[0].eks_properties.pod_properties.metadata.labels #=> Hash
     #   resp.job_definitions[0].eks_properties.pod_properties.metadata.labels["String"] #=> String
+    #   resp.job_definitions[0].eks_properties.pod_properties.share_process_namespace #=> Boolean
     #   resp.job_definitions[0].container_orchestration_type #=> String, one of "ECS", "EKS"
     #   resp.next_token #=> String
     #
@@ -1999,6 +2164,77 @@ module Aws::Batch
     #   resp.jobs[0].node_properties.node_range_properties[0].container.runtime_platform.operating_system_family #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.runtime_platform.cpu_architecture #=> String
     #   resp.jobs[0].node_properties.node_range_properties[0].container.repository_credentials.credentials_parameter #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].instance_types #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].instance_types[0] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].command #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].command[0] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].depends_on #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].depends_on[0].container_name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].depends_on[0].condition #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].environment #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].environment[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].environment[0].value #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].essential #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].image #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].host_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].container_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].permissions #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.init_process_enabled #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.shared_memory_size #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.max_swap #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].linux_parameters.swappiness #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.options #=> Hash
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.options["String"] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.secret_options #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.secret_options[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].log_configuration.secret_options[0].value_from #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].mount_points #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].mount_points[0].container_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].mount_points[0].read_only #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].mount_points[0].source_volume #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].privileged #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].readonly_root_filesystem #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].repository_credentials.credentials_parameter #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].resource_requirements #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].resource_requirements[0].value #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].resource_requirements[0].type #=> String, one of "GPU", "VCPU", "MEMORY"
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].secrets #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].secrets[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].secrets[0].value_from #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].ulimits #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].ulimits[0].hard_limit #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].ulimits[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].ulimits[0].soft_limit #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].containers[0].user #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].execution_role_arn #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].platform_version #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].ipc_mode #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].task_role_arn #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].pid_mode #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].runtime_platform.operating_system_family #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].runtime_platform.cpu_architecture #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].host.source_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.file_system_id #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.transit_encryption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].array_properties.status_summary #=> Hash
     #   resp.jobs[0].array_properties.status_summary["String"] #=> Integer
     #   resp.jobs[0].array_properties.size #=> Integer
@@ -2038,6 +2274,32 @@ module Aws::Batch
     #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.privileged #=> Boolean
     #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.read_only_root_filesystem #=> Boolean
     #   resp.jobs[0].eks_properties.pod_properties.containers[0].security_context.run_as_non_root #=> Boolean
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers #=> Array
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].name #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].image #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].image_pull_policy #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].command #=> Array
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].command[0] #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].args #=> Array
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].args[0] #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].env #=> Array
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].env[0].name #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].env[0].value #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].resources.limits #=> Hash
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].resources.limits["String"] #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].resources.requests #=> Hash
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].resources.requests["String"] #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].exit_code #=> Integer
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].reason #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].volume_mounts #=> Array
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].volume_mounts[0].name #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].volume_mounts[0].mount_path #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].volume_mounts[0].read_only #=> Boolean
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].security_context.run_as_user #=> Integer
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].security_context.run_as_group #=> Integer
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].security_context.privileged #=> Boolean
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].security_context.read_only_root_filesystem #=> Boolean
+    #   resp.jobs[0].eks_properties.pod_properties.init_containers[0].security_context.run_as_non_root #=> Boolean
     #   resp.jobs[0].eks_properties.pod_properties.volumes #=> Array
     #   resp.jobs[0].eks_properties.pod_properties.volumes[0].name #=> String
     #   resp.jobs[0].eks_properties.pod_properties.volumes[0].host_path.path #=> String
@@ -2049,15 +2311,97 @@ module Aws::Batch
     #   resp.jobs[0].eks_properties.pod_properties.node_name #=> String
     #   resp.jobs[0].eks_properties.pod_properties.metadata.labels #=> Hash
     #   resp.jobs[0].eks_properties.pod_properties.metadata.labels["String"] #=> String
+    #   resp.jobs[0].eks_properties.pod_properties.share_process_namespace #=> Boolean
     #   resp.jobs[0].eks_attempts #=> Array
     #   resp.jobs[0].eks_attempts[0].containers #=> Array
     #   resp.jobs[0].eks_attempts[0].containers[0].exit_code #=> Integer
     #   resp.jobs[0].eks_attempts[0].containers[0].reason #=> String
+    #   resp.jobs[0].eks_attempts[0].init_containers #=> Array
+    #   resp.jobs[0].eks_attempts[0].init_containers[0].exit_code #=> Integer
+    #   resp.jobs[0].eks_attempts[0].init_containers[0].reason #=> String
     #   resp.jobs[0].eks_attempts[0].pod_name #=> String
     #   resp.jobs[0].eks_attempts[0].node_name #=> String
     #   resp.jobs[0].eks_attempts[0].started_at #=> Integer
     #   resp.jobs[0].eks_attempts[0].stopped_at #=> Integer
     #   resp.jobs[0].eks_attempts[0].status_reason #=> String
+    #   resp.jobs[0].ecs_properties.task_properties #=> Array
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers #=> Array
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].command #=> Array
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].command[0] #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].depends_on #=> Array
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].depends_on[0].container_name #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].depends_on[0].condition #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].environment #=> Array
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].environment[0].name #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].environment[0].value #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].essential #=> Boolean
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].image #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices #=> Array
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].host_path #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].container_path #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].permissions #=> Array
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.init_process_enabled #=> Boolean
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.shared_memory_size #=> Integer
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs #=> Array
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.max_swap #=> Integer
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].linux_parameters.swappiness #=> Integer
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].log_configuration.options #=> Hash
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].log_configuration.options["String"] #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].log_configuration.secret_options #=> Array
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].log_configuration.secret_options[0].name #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].log_configuration.secret_options[0].value_from #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].mount_points #=> Array
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].mount_points[0].container_path #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].mount_points[0].read_only #=> Boolean
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].mount_points[0].source_volume #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].name #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].privileged #=> Boolean
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].readonly_root_filesystem #=> Boolean
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].repository_credentials.credentials_parameter #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].resource_requirements #=> Array
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].resource_requirements[0].value #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].resource_requirements[0].type #=> String, one of "GPU", "VCPU", "MEMORY"
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].secrets #=> Array
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].secrets[0].name #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].secrets[0].value_from #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].ulimits #=> Array
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].ulimits[0].hard_limit #=> Integer
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].ulimits[0].name #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].ulimits[0].soft_limit #=> Integer
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].user #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].exit_code #=> Integer
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].reason #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].log_stream_name #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].network_interfaces #=> Array
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].network_interfaces[0].attachment_id #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].network_interfaces[0].ipv6_address #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].container_instance_arn #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].task_arn #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.jobs[0].ecs_properties.task_properties[0].execution_role_arn #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].platform_version #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].ipc_mode #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].task_role_arn #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].pid_mode #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].network_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].ecs_properties.task_properties[0].runtime_platform.operating_system_family #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].runtime_platform.cpu_architecture #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].volumes #=> Array
+    #   resp.jobs[0].ecs_properties.task_properties[0].volumes[0].host.source_path #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].volumes[0].name #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.file_system_id #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.root_directory #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.transit_encryption #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.transit_encryption_port #=> Integer
+    #   resp.jobs[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.access_point_id #=> String
+    #   resp.jobs[0].ecs_properties.task_properties[0].volumes[0].efs_volume_configuration.authorization_config.iam #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].is_cancelled #=> Boolean
     #   resp.jobs[0].is_terminated #=> Boolean
     #
@@ -2423,6 +2767,11 @@ module Aws::Batch
     #   parallel jobs, see [Creating a multi-node parallel job definition][1]
     #   in the *Batch User Guide*.
     #
+    #   * If the value is `container`, then one of the following is required:
+    #     `containerProperties`, `ecsProperties`, or `eksProperties`.
+    #
+    #   * If the value is `multinode`, then `nodeProperties` is required.
+    #
     #   <note markdown="1"> If the job is run on Fargate resources, then `multinode` isn't
     #   supported.
     #
@@ -2448,11 +2797,11 @@ module Aws::Batch
     #   9999.
     #
     # @option params [Types::ContainerProperties] :container_properties
-    #   An object with various properties specific to Amazon ECS based
-    #   single-node container-based jobs. If the job definition's `type`
-    #   parameter is `container`, then you must specify either
-    #   `containerProperties` or `nodeProperties`. This must not be specified
-    #   for Amazon EKS based job definitions.
+    #   An object with properties specific to Amazon ECS-based single-node
+    #   container-based jobs. If the job definition's `type` parameter is
+    #   `container`, then you must specify either `containerProperties` or
+    #   `nodeProperties`. This must not be specified for Amazon EKS-based job
+    #   definitions.
     #
     #   <note markdown="1"> If the job runs on Fargate resources, then you must not specify
     #   `nodeProperties`; use only `containerProperties`.
@@ -2460,12 +2809,10 @@ module Aws::Batch
     #    </note>
     #
     # @option params [Types::NodeProperties] :node_properties
-    #   An object with various properties specific to multi-node parallel
-    #   jobs. If you specify node properties for a job, it becomes a
-    #   multi-node parallel job. For more information, see [Multi-node
-    #   Parallel Jobs][1] in the *Batch User Guide*. If the job definition's
-    #   `type` parameter is `container`, then you must specify either
-    #   `containerProperties` or `nodeProperties`.
+    #   An object with properties specific to multi-node parallel jobs. If you
+    #   specify node properties for a job, it becomes a multi-node parallel
+    #   job. For more information, see [Multi-node Parallel Jobs][1] in the
+    #   *Batch User Guide*.
     #
     #   <note markdown="1"> If the job runs on Fargate resources, then you must not specify
     #   `nodeProperties`; use `containerProperties` instead.
@@ -2535,9 +2882,12 @@ module Aws::Batch
     #    </note>
     #
     # @option params [Types::EksProperties] :eks_properties
-    #   An object with various properties that are specific to Amazon EKS
-    #   based jobs. This must not be specified for Amazon ECS based job
-    #   definitions.
+    #   An object with properties that are specific to Amazon EKS-based jobs.
+    #   This must not be specified for Amazon ECS based job definitions.
+    #
+    # @option params [Types::EcsProperties] :ecs_properties
+    #   An object with properties that are specific to Amazon ECS-based jobs.
+    #   This must not be specified for Amazon EKS-based job definitions.
     #
     # @return [Types::RegisterJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2851,6 +3201,130 @@ module Aws::Batch
     #               credentials_parameter: "String", # required
     #             },
     #           },
+    #           instance_types: ["String"],
+    #           ecs_properties: {
+    #             task_properties: [ # required
+    #               {
+    #                 containers: [ # required
+    #                   {
+    #                     command: ["String"],
+    #                     depends_on: [
+    #                       {
+    #                         container_name: "String",
+    #                         condition: "String",
+    #                       },
+    #                     ],
+    #                     environment: [
+    #                       {
+    #                         name: "String",
+    #                         value: "String",
+    #                       },
+    #                     ],
+    #                     essential: false,
+    #                     image: "String", # required
+    #                     linux_parameters: {
+    #                       devices: [
+    #                         {
+    #                           host_path: "String", # required
+    #                           container_path: "String",
+    #                           permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #                         },
+    #                       ],
+    #                       init_process_enabled: false,
+    #                       shared_memory_size: 1,
+    #                       tmpfs: [
+    #                         {
+    #                           container_path: "String", # required
+    #                           size: 1, # required
+    #                           mount_options: ["String"],
+    #                         },
+    #                       ],
+    #                       max_swap: 1,
+    #                       swappiness: 1,
+    #                     },
+    #                     log_configuration: {
+    #                       log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #                       options: {
+    #                         "String" => "String",
+    #                       },
+    #                       secret_options: [
+    #                         {
+    #                           name: "String", # required
+    #                           value_from: "String", # required
+    #                         },
+    #                       ],
+    #                     },
+    #                     mount_points: [
+    #                       {
+    #                         container_path: "String",
+    #                         read_only: false,
+    #                         source_volume: "String",
+    #                       },
+    #                     ],
+    #                     name: "String",
+    #                     privileged: false,
+    #                     readonly_root_filesystem: false,
+    #                     repository_credentials: {
+    #                       credentials_parameter: "String", # required
+    #                     },
+    #                     resource_requirements: [
+    #                       {
+    #                         value: "String", # required
+    #                         type: "GPU", # required, accepts GPU, VCPU, MEMORY
+    #                       },
+    #                     ],
+    #                     secrets: [
+    #                       {
+    #                         name: "String", # required
+    #                         value_from: "String", # required
+    #                       },
+    #                     ],
+    #                     ulimits: [
+    #                       {
+    #                         hard_limit: 1, # required
+    #                         name: "String", # required
+    #                         soft_limit: 1, # required
+    #                       },
+    #                     ],
+    #                     user: "String",
+    #                   },
+    #                 ],
+    #                 ephemeral_storage: {
+    #                   size_in_gi_b: 1, # required
+    #                 },
+    #                 execution_role_arn: "String",
+    #                 platform_version: "String",
+    #                 ipc_mode: "String",
+    #                 task_role_arn: "String",
+    #                 pid_mode: "String",
+    #                 network_configuration: {
+    #                   assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #                 },
+    #                 runtime_platform: {
+    #                   operating_system_family: "String",
+    #                   cpu_architecture: "String",
+    #                 },
+    #                 volumes: [
+    #                   {
+    #                     host: {
+    #                       source_path: "String",
+    #                     },
+    #                     name: "String",
+    #                     efs_volume_configuration: {
+    #                       file_system_id: "String", # required
+    #                       root_directory: "String",
+    #                       transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #                       transit_encryption_port: 1,
+    #                       authorization_config: {
+    #                         access_point_id: "String",
+    #                         iam: "ENABLED", # accepts ENABLED, DISABLED
+    #                       },
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
     #         },
     #       ],
     #     },
@@ -2915,6 +3389,43 @@ module Aws::Batch
     #             },
     #           },
     #         ],
+    #         init_containers: [
+    #           {
+    #             name: "String",
+    #             image: "String", # required
+    #             image_pull_policy: "String",
+    #             command: ["String"],
+    #             args: ["String"],
+    #             env: [
+    #               {
+    #                 name: "String", # required
+    #                 value: "String",
+    #               },
+    #             ],
+    #             resources: {
+    #               limits: {
+    #                 "String" => "Quantity",
+    #               },
+    #               requests: {
+    #                 "String" => "Quantity",
+    #               },
+    #             },
+    #             volume_mounts: [
+    #               {
+    #                 name: "String",
+    #                 mount_path: "String",
+    #                 read_only: false,
+    #               },
+    #             ],
+    #             security_context: {
+    #               run_as_user: 1,
+    #               run_as_group: 1,
+    #               privileged: false,
+    #               read_only_root_filesystem: false,
+    #               run_as_non_root: false,
+    #             },
+    #           },
+    #         ],
     #         volumes: [
     #           {
     #             name: "String", # required
@@ -2936,7 +3447,131 @@ module Aws::Batch
     #             "String" => "String",
     #           },
     #         },
+    #         share_process_namespace: false,
     #       },
+    #     },
+    #     ecs_properties: {
+    #       task_properties: [ # required
+    #         {
+    #           containers: [ # required
+    #             {
+    #               command: ["String"],
+    #               depends_on: [
+    #                 {
+    #                   container_name: "String",
+    #                   condition: "String",
+    #                 },
+    #               ],
+    #               environment: [
+    #                 {
+    #                   name: "String",
+    #                   value: "String",
+    #                 },
+    #               ],
+    #               essential: false,
+    #               image: "String", # required
+    #               linux_parameters: {
+    #                 devices: [
+    #                   {
+    #                     host_path: "String", # required
+    #                     container_path: "String",
+    #                     permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #                   },
+    #                 ],
+    #                 init_process_enabled: false,
+    #                 shared_memory_size: 1,
+    #                 tmpfs: [
+    #                   {
+    #                     container_path: "String", # required
+    #                     size: 1, # required
+    #                     mount_options: ["String"],
+    #                   },
+    #                 ],
+    #                 max_swap: 1,
+    #                 swappiness: 1,
+    #               },
+    #               log_configuration: {
+    #                 log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
+    #                 options: {
+    #                   "String" => "String",
+    #                 },
+    #                 secret_options: [
+    #                   {
+    #                     name: "String", # required
+    #                     value_from: "String", # required
+    #                   },
+    #                 ],
+    #               },
+    #               mount_points: [
+    #                 {
+    #                   container_path: "String",
+    #                   read_only: false,
+    #                   source_volume: "String",
+    #                 },
+    #               ],
+    #               name: "String",
+    #               privileged: false,
+    #               readonly_root_filesystem: false,
+    #               repository_credentials: {
+    #                 credentials_parameter: "String", # required
+    #               },
+    #               resource_requirements: [
+    #                 {
+    #                   value: "String", # required
+    #                   type: "GPU", # required, accepts GPU, VCPU, MEMORY
+    #                 },
+    #               ],
+    #               secrets: [
+    #                 {
+    #                   name: "String", # required
+    #                   value_from: "String", # required
+    #                 },
+    #               ],
+    #               ulimits: [
+    #                 {
+    #                   hard_limit: 1, # required
+    #                   name: "String", # required
+    #                   soft_limit: 1, # required
+    #                 },
+    #               ],
+    #               user: "String",
+    #             },
+    #           ],
+    #           ephemeral_storage: {
+    #             size_in_gi_b: 1, # required
+    #           },
+    #           execution_role_arn: "String",
+    #           platform_version: "String",
+    #           ipc_mode: "String",
+    #           task_role_arn: "String",
+    #           pid_mode: "String",
+    #           network_configuration: {
+    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #           runtime_platform: {
+    #             operating_system_family: "String",
+    #             cpu_architecture: "String",
+    #           },
+    #           volumes: [
+    #             {
+    #               host: {
+    #                 source_path: "String",
+    #               },
+    #               name: "String",
+    #               efs_volume_configuration: {
+    #                 file_system_id: "String", # required
+    #                 root_directory: "String",
+    #                 transit_encryption: "ENABLED", # accepts ENABLED, DISABLED
+    #                 transit_encryption_port: 1,
+    #                 authorization_config: {
+    #                   access_point_id: "String",
+    #                   iam: "ENABLED", # accepts ENABLED, DISABLED
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -3037,10 +3672,10 @@ module Aws::Batch
     #   from the job definition.
     #
     # @option params [Types::ContainerOverrides] :container_overrides
-    #   An object with various properties that override the defaults for the
-    #   job definition that specify the name of a container in the specified
-    #   job definition and the overrides it should receive. You can override
-    #   the default command for a container, which is specified in the job
+    #   An object with properties that override the defaults for the job
+    #   definition that specify the name of a container in the specified job
+    #   definition and the overrides it should receive. You can override the
+    #   default command for a container, which is specified in the job
     #   definition or the Docker image, with a `command` override. You can
     #   also override existing environment variables on a container or add new
     #   environment variables to it with an `environment` override.
@@ -3095,9 +3730,14 @@ module Aws::Batch
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
     # @option params [Types::EksPropertiesOverride] :eks_properties_override
-    #   An object that can only be specified for jobs that are run on Amazon
-    #   EKS resources with various properties that override defaults for the
-    #   job definition.
+    #   An object, with properties that override defaults for the job
+    #   definition, can only be specified for jobs that are run on Amazon EKS
+    #   resources.
+    #
+    # @option params [Types::EcsPropertiesOverride] :ecs_properties_override
+    #   An object, with properties that override defaults for the job
+    #   definition, can only be specified for jobs that are run on Amazon ECS
+    #   resources.
     #
     # @return [Types::SubmitJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3183,6 +3823,31 @@ module Aws::Batch
     #               },
     #             ],
     #           },
+    #           ecs_properties_override: {
+    #             task_properties: [
+    #               {
+    #                 containers: [
+    #                   {
+    #                     command: ["String"],
+    #                     environment: [
+    #                       {
+    #                         name: "String",
+    #                         value: "String",
+    #                       },
+    #                     ],
+    #                     name: "String",
+    #                     resource_requirements: [
+    #                       {
+    #                         value: "String", # required
+    #                         type: "GPU", # required, accepts GPU, VCPU, MEMORY
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           instance_types: ["String"],
     #         },
     #       ],
     #     },
@@ -3208,6 +3873,29 @@ module Aws::Batch
     #       pod_properties: {
     #         containers: [
     #           {
+    #             name: "String",
+    #             image: "String",
+    #             command: ["String"],
+    #             args: ["String"],
+    #             env: [
+    #               {
+    #                 name: "String", # required
+    #                 value: "String",
+    #               },
+    #             ],
+    #             resources: {
+    #               limits: {
+    #                 "String" => "Quantity",
+    #               },
+    #               requests: {
+    #                 "String" => "Quantity",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         init_containers: [
+    #           {
+    #             name: "String",
     #             image: "String",
     #             command: ["String"],
     #             args: ["String"],
@@ -3233,6 +3921,30 @@ module Aws::Batch
     #           },
     #         },
     #       },
+    #     },
+    #     ecs_properties_override: {
+    #       task_properties: [
+    #         {
+    #           containers: [
+    #             {
+    #               command: ["String"],
+    #               environment: [
+    #                 {
+    #                   name: "String",
+    #                   value: "String",
+    #                 },
+    #               ],
+    #               name: "String",
+    #               resource_requirements: [
+    #                 {
+    #                   value: "String", # required
+    #                   type: "GPU", # required, accepts GPU, VCPU, MEMORY
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -3722,7 +4434,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

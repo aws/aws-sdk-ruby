@@ -890,7 +890,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] schema
     #   The schema for the model. For `application/json` models, this should
-    #   be JSON schema draft 4 model.
+    #   be JSON schema draft 4 model. The maximum size of the model is 400
+    #   KB.
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -3670,7 +3671,10 @@ module Aws::APIGateway
     #
     # @!attribute [rw] data_trace_enabled
     #   Specifies whether data trace logging is enabled for this method,
-    #   which affects the log entries pushed to Amazon CloudWatch Logs.
+    #   which affects the log entries pushed to Amazon CloudWatch Logs. This
+    #   can be useful to troubleshoot APIs, but can result in logging
+    #   sensitive data. We recommend that you don't enable this option for
+    #   production APIs.
     #   @return [Boolean]
     #
     # @!attribute [rw] throttling_burst_limit
@@ -4735,7 +4739,9 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] cache_cluster_enabled
-    #   Specifies whether a cache cluster is enabled for the stage.
+    #   Specifies whether a cache cluster is enabled for the stage. To
+    #   activate a method-level cache, set `CachingEnabled` to `true` for a
+    #   method.
     #   @return [Boolean]
     #
     # @!attribute [rw] cache_cluster_size

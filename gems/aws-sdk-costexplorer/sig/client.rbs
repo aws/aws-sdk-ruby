@@ -333,6 +333,20 @@ module Aws
                                      ) -> _GetAnomalySubscriptionsResponseSuccess
                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAnomalySubscriptionsResponseSuccess
 
+      interface _GetApproximateUsageRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApproximateUsageRecordsResponse]
+        def services: () -> ::Hash[::String, ::Integer]
+        def total_records: () -> ::Integer
+        def lookback_period: () -> Types::DateInterval
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostExplorer/Client.html#get_approximate_usage_records-instance_method
+      def get_approximate_usage_records: (
+                                           granularity: ("DAILY" | "MONTHLY" | "HOURLY"),
+                                           ?services: Array[::String],
+                                           approximation_dimension: ("SERVICE" | "RESOURCE")
+                                         ) -> _GetApproximateUsageRecordsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApproximateUsageRecordsResponseSuccess
+
       interface _GetCostAndUsageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCostAndUsageResponse]
         def next_page_token: () -> ::String

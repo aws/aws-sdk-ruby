@@ -136,6 +136,11 @@ module Aws::Drs
     #   snapshot ids
     #   @return [Hash<String,Hash<String,String>>]
     #
+    # @!attribute [rw] volume_to_product_codes
+    #   A mapping between the volumes being converted and the product codes
+    #   associated with them
+    #   @return [Hash<String,Array<Types::ProductCode>>]
+    #
     # @!attribute [rw] volume_to_volume_size
     #   A mapping between the volumes and their sizes
     #   @return [Hash<String,Integer>]
@@ -147,6 +152,7 @@ module Aws::Drs
       :force_uefi,
       :root_volume_name,
       :volume_to_conversion_map,
+      :volume_to_product_codes,
       :volume_to_volume_size)
       SENSITIVE = []
       include Aws::Structure
@@ -463,6 +469,10 @@ module Aws::Drs
     #   The total amount of data to be replicated in bytes.
     #   @return [Integer]
     #
+    # @!attribute [rw] volume_status
+    #   The status of the volume.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DataReplicationInfoReplicatedDisk AWS API Documentation
     #
     class DataReplicationInfoReplicatedDisk < Struct.new(
@@ -470,7 +480,8 @@ module Aws::Drs
       :device_name,
       :replicated_storage_bytes,
       :rescanned_storage_bytes,
-      :total_storage_bytes)
+      :total_storage_bytes,
+      :volume_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2085,6 +2096,25 @@ module Aws::Drs
       :launch_status,
       :recovery_instance_id,
       :source_server_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Properties of a product code associated with a volume.
+    #
+    # @!attribute [rw] product_code_id
+    #   Id of a product code associated with a volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_code_mode
+    #   Mode of a product code associated with a volume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ProductCode AWS API Documentation
+    #
+    class ProductCode < Struct.new(
+      :product_code_id,
+      :product_code_mode)
       SENSITIVE = []
       include Aws::Structure
     end

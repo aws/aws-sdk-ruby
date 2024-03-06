@@ -370,6 +370,51 @@ module Aws::Batch
       SENSITIVE: []
     end
 
+    class EcsProperties
+      attr_accessor task_properties: ::Array[Types::EcsTaskProperties]
+      SENSITIVE: []
+    end
+
+    class EcsPropertiesDetail
+      attr_accessor task_properties: ::Array[Types::EcsTaskDetails]
+      SENSITIVE: []
+    end
+
+    class EcsPropertiesOverride
+      attr_accessor task_properties: ::Array[Types::TaskPropertiesOverride]
+      SENSITIVE: []
+    end
+
+    class EcsTaskDetails
+      attr_accessor containers: ::Array[Types::TaskContainerDetails]
+      attr_accessor container_instance_arn: ::String
+      attr_accessor task_arn: ::String
+      attr_accessor ephemeral_storage: Types::EphemeralStorage
+      attr_accessor execution_role_arn: ::String
+      attr_accessor platform_version: ::String
+      attr_accessor ipc_mode: ::String
+      attr_accessor task_role_arn: ::String
+      attr_accessor pid_mode: ::String
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor runtime_platform: Types::RuntimePlatform
+      attr_accessor volumes: ::Array[Types::Volume]
+      SENSITIVE: []
+    end
+
+    class EcsTaskProperties
+      attr_accessor containers: ::Array[Types::TaskContainerProperties]
+      attr_accessor ephemeral_storage: Types::EphemeralStorage
+      attr_accessor execution_role_arn: ::String
+      attr_accessor platform_version: ::String
+      attr_accessor ipc_mode: ::String
+      attr_accessor task_role_arn: ::String
+      attr_accessor pid_mode: ::String
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor runtime_platform: Types::RuntimePlatform
+      attr_accessor volumes: ::Array[Types::Volume]
+      SENSITIVE: []
+    end
+
     class EksAttemptContainerDetail
       attr_accessor exit_code: ::Integer
       attr_accessor reason: ::String
@@ -378,6 +423,7 @@ module Aws::Batch
 
     class EksAttemptDetail
       attr_accessor containers: ::Array[Types::EksAttemptContainerDetail]
+      attr_accessor init_containers: ::Array[Types::EksAttemptContainerDetail]
       attr_accessor pod_name: ::String
       attr_accessor node_name: ::String
       attr_accessor started_at: ::Integer
@@ -427,6 +473,7 @@ module Aws::Batch
     end
 
     class EksContainerOverride
+      attr_accessor name: ::String
       attr_accessor image: ::String
       attr_accessor command: ::Array[::String]
       attr_accessor args: ::Array[::String]
@@ -478,8 +525,10 @@ module Aws::Batch
       attr_accessor host_network: bool
       attr_accessor dns_policy: ::String
       attr_accessor containers: ::Array[Types::EksContainer]
+      attr_accessor init_containers: ::Array[Types::EksContainer]
       attr_accessor volumes: ::Array[Types::EksVolume]
       attr_accessor metadata: Types::EksMetadata
+      attr_accessor share_process_namespace: bool
       SENSITIVE: []
     end
 
@@ -488,15 +537,18 @@ module Aws::Batch
       attr_accessor host_network: bool
       attr_accessor dns_policy: ::String
       attr_accessor containers: ::Array[Types::EksContainerDetail]
+      attr_accessor init_containers: ::Array[Types::EksContainerDetail]
       attr_accessor volumes: ::Array[Types::EksVolume]
       attr_accessor pod_name: ::String
       attr_accessor node_name: ::String
       attr_accessor metadata: Types::EksMetadata
+      attr_accessor share_process_namespace: bool
       SENSITIVE: []
     end
 
     class EksPodPropertiesOverride
       attr_accessor containers: ::Array[Types::EksContainerOverride]
+      attr_accessor init_containers: ::Array[Types::EksContainerOverride]
       attr_accessor metadata: Types::EksMetadata
       SENSITIVE: []
     end
@@ -575,6 +627,7 @@ module Aws::Batch
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor propagate_tags: bool
       attr_accessor platform_capabilities: ::Array[("EC2" | "FARGATE")]
+      attr_accessor ecs_properties: Types::EcsProperties
       attr_accessor eks_properties: Types::EksProperties
       attr_accessor container_orchestration_type: ("ECS" | "EKS")
       SENSITIVE: []
@@ -613,6 +666,7 @@ module Aws::Batch
       attr_accessor platform_capabilities: ::Array[("EC2" | "FARGATE")]
       attr_accessor eks_properties: Types::EksPropertiesDetail
       attr_accessor eks_attempts: ::Array[Types::EksAttemptDetail]
+      attr_accessor ecs_properties: Types::EcsPropertiesDetail
       attr_accessor is_cancelled: bool
       attr_accessor is_terminated: bool
       SENSITIVE: []
@@ -775,12 +829,16 @@ module Aws::Batch
     class NodePropertyOverride
       attr_accessor target_nodes: ::String
       attr_accessor container_overrides: Types::ContainerOverrides
+      attr_accessor ecs_properties_override: Types::EcsPropertiesOverride
+      attr_accessor instance_types: ::Array[::String]
       SENSITIVE: []
     end
 
     class NodeRangeProperty
       attr_accessor target_nodes: ::String
       attr_accessor container: Types::ContainerProperties
+      attr_accessor instance_types: ::Array[::String]
+      attr_accessor ecs_properties: Types::EcsProperties
       SENSITIVE: []
     end
 
@@ -797,6 +855,7 @@ module Aws::Batch
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor platform_capabilities: ::Array[("EC2" | "FARGATE")]
       attr_accessor eks_properties: Types::EksProperties
+      attr_accessor ecs_properties: Types::EcsProperties
       SENSITIVE: []
     end
 
@@ -876,6 +935,7 @@ module Aws::Batch
       attr_accessor timeout: Types::JobTimeout
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor eks_properties_override: Types::EksPropertiesOverride
+      attr_accessor ecs_properties_override: Types::EcsPropertiesOverride
       SENSITIVE: []
     end
 
@@ -893,6 +953,69 @@ module Aws::Batch
     end
 
     class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TaskContainerDependency
+      attr_accessor container_name: ::String
+      attr_accessor condition: ::String
+      SENSITIVE: []
+    end
+
+    class TaskContainerDetails
+      attr_accessor command: ::Array[::String]
+      attr_accessor depends_on: ::Array[Types::TaskContainerDependency]
+      attr_accessor environment: ::Array[Types::KeyValuePair]
+      attr_accessor essential: bool
+      attr_accessor image: ::String
+      attr_accessor linux_parameters: Types::LinuxParameters
+      attr_accessor log_configuration: Types::LogConfiguration
+      attr_accessor mount_points: ::Array[Types::MountPoint]
+      attr_accessor name: ::String
+      attr_accessor privileged: bool
+      attr_accessor readonly_root_filesystem: bool
+      attr_accessor repository_credentials: Types::RepositoryCredentials
+      attr_accessor resource_requirements: ::Array[Types::ResourceRequirement]
+      attr_accessor secrets: ::Array[Types::Secret]
+      attr_accessor ulimits: ::Array[Types::Ulimit]
+      attr_accessor user: ::String
+      attr_accessor exit_code: ::Integer
+      attr_accessor reason: ::String
+      attr_accessor log_stream_name: ::String
+      attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
+      SENSITIVE: []
+    end
+
+    class TaskContainerOverrides
+      attr_accessor command: ::Array[::String]
+      attr_accessor environment: ::Array[Types::KeyValuePair]
+      attr_accessor name: ::String
+      attr_accessor resource_requirements: ::Array[Types::ResourceRequirement]
+      SENSITIVE: []
+    end
+
+    class TaskContainerProperties
+      attr_accessor command: ::Array[::String]
+      attr_accessor depends_on: ::Array[Types::TaskContainerDependency]
+      attr_accessor environment: ::Array[Types::KeyValuePair]
+      attr_accessor essential: bool
+      attr_accessor image: ::String
+      attr_accessor linux_parameters: Types::LinuxParameters
+      attr_accessor log_configuration: Types::LogConfiguration
+      attr_accessor mount_points: ::Array[Types::MountPoint]
+      attr_accessor name: ::String
+      attr_accessor privileged: bool
+      attr_accessor readonly_root_filesystem: bool
+      attr_accessor repository_credentials: Types::RepositoryCredentials
+      attr_accessor resource_requirements: ::Array[Types::ResourceRequirement]
+      attr_accessor secrets: ::Array[Types::Secret]
+      attr_accessor ulimits: ::Array[Types::Ulimit]
+      attr_accessor user: ::String
+      SENSITIVE: []
+    end
+
+    class TaskPropertiesOverride
+      attr_accessor containers: ::Array[Types::TaskContainerOverrides]
+      SENSITIVE: []
     end
 
     class TerminateJobRequest
