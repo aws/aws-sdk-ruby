@@ -3319,6 +3319,12 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters only
     #
+    # @option params [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB cluster's server
+    #   certificate.
+    #
+    #   Valid for Cluster Type: Multi-AZ DB clusters
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3529,6 +3535,7 @@ module Aws::RDS
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     enable_local_write_forwarding: false,
+    #     ca_certificate_identifier: "String",
     #     source_region: "String",
     #   })
     #
@@ -3643,6 +3650,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -3666,6 +3675,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -4285,7 +4296,7 @@ module Aws::RDS
     #       40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for
     #       SQL Server.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 40 to
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 40 to
     #       65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
     #       Server.
     #
@@ -4295,10 +4306,10 @@ module Aws::RDS
     #     following:
     #
     #     * General Purpose (SSD) storage (gp3): Must be an integer from 20 to
-    #       64000.
+    #       65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       64000.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #   RDS for MariaDB
     #
@@ -4308,8 +4319,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
     #       20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -4321,8 +4332,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
     #       20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -4334,8 +4345,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
     #       20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
@@ -4347,8 +4358,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer from
     #       20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -4364,7 +4375,7 @@ module Aws::RDS
     #
     #       * Web and Express editions: Must be an integer from 20 to 16384.
     #
-    #     * Provisioned IOPS storage (io1):
+    #     * Provisioned IOPS storage (io1, io2):
     #
     #       * Enterprise and Standard editions: Must be an integer from 100 to
     #         16384.
@@ -4857,13 +4868,13 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   The storage type to associate with the DB instance.
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
     #   This setting doesn't apply to Amazon Aurora DB instances. Storage is
     #   managed by the DB cluster.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
@@ -5929,10 +5940,10 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   The storage type to associate with the read replica.
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1` if the `Iops` parameter is specified. Otherwise, `gp2`.
     #
@@ -8786,6 +8797,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -8809,6 +8822,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -12206,6 +12221,8 @@ module Aws::RDS
     #   resp.db_clusters[0].pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_clusters[0].pending_modified_values.iops #=> Integer
     #   resp.db_clusters[0].pending_modified_values.storage_type #=> String
+    #   resp.db_clusters[0].pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_clusters[0].pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_clusters[0].db_cluster_instance_class #=> String
     #   resp.db_clusters[0].storage_type #=> String
     #   resp.db_clusters[0].iops #=> Integer
@@ -12229,6 +12246,8 @@ module Aws::RDS
     #   resp.db_clusters[0].limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_clusters[0].limitless_database.min_required_acu #=> Float
     #   resp.db_clusters[0].storage_throughput #=> Integer
+    #   resp.db_clusters[0].certificate_details.ca_identifier #=> String
+    #   resp.db_clusters[0].certificate_details.valid_till #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -17475,6 +17494,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -17498,6 +17519,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -18876,6 +18899,12 @@ module Aws::RDS
     #
     #   Valid for: Aurora DB clusters only
     #
+    # @option params [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB cluster's server
+    #   certificate.
+    #
+    #   Valid for Cluster Type: Multi-AZ DB clusters
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -19015,6 +19044,7 @@ module Aws::RDS
     #     enable_local_write_forwarding: false,
     #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #     enable_limitless_database: false,
+    #     ca_certificate_identifier: "String",
     #   })
     #
     # @example Response structure
@@ -19128,6 +19158,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -19151,6 +19183,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -19977,7 +20011,7 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   The storage type to associate with the DB instance.
     #
-    #   If you specify Provisioned IOPS (`io1`), you must also include a value
+    #   If you specify `io1`), `io2`, or `gp3` you must also include a value
     #   for the `Iops` parameter.
     #
     #   If you choose to migrate your DB instance from using standard storage
@@ -19995,7 +20029,7 @@ module Aws::RDS
     #   rebooting the instance, deleting the instance, creating a read replica
     #   for the instance, and creating a DB snapshot of the instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
@@ -22694,6 +22728,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -22717,6 +22753,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -22985,6 +23023,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -23008,6 +23048,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBCluster AWS API Documentation
     #
@@ -24509,6 +24551,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -24532,6 +24576,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -25224,6 +25270,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -25247,6 +25295,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -25914,6 +25964,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -25937,6 +25989,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -26170,10 +26224,10 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     #
@@ -26997,10 +27051,10 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified; otherwise `gp2`
     #
@@ -27731,15 +27785,15 @@ module Aws::RDS
     # @option params [String] :storage_type
     #   The storage type to associate with the DB instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
     #
     #   Constraints:
     #
-    #   * If you specify `io1` or `gp3`, you must also include a value for the
-    #     `Iops` parameter.
+    #   * If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #     for the `Iops` parameter.
     #
     #   ^
     #
@@ -28721,6 +28775,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -28744,6 +28800,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -29558,6 +29616,8 @@ module Aws::RDS
     #   resp.db_cluster.pending_modified_values.rds_custom_cluster_configuration.replica_mode #=> String, one of "open-read-only", "mounted"
     #   resp.db_cluster.pending_modified_values.iops #=> Integer
     #   resp.db_cluster.pending_modified_values.storage_type #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.pending_modified_values.certificate_details.valid_till #=> Time
     #   resp.db_cluster.db_cluster_instance_class #=> String
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.iops #=> Integer
@@ -29581,6 +29641,8 @@ module Aws::RDS
     #   resp.db_cluster.limitless_database.status #=> String, one of "active", "not-in-use", "enabled", "disabled", "enabling", "disabling", "modifying-max-capacity", "error"
     #   resp.db_cluster.limitless_database.min_required_acu #=> Float
     #   resp.db_cluster.storage_throughput #=> Integer
+    #   resp.db_cluster.certificate_details.ca_identifier #=> String
+    #   resp.db_cluster.certificate_details.valid_till #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -30428,7 +30490,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.219.0'
+      context[:gem_version] = '1.220.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

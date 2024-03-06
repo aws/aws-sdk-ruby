@@ -696,6 +696,22 @@ module Aws::RDS
       data[:storage_throughput]
     end
 
+    # Returns the details of the DB instance’s server certificate.
+    #
+    # For more information, see [Using SSL/TLS to encrypt a connection to a
+    # DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    # encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    # @return [Types::CertificateDetails]
+    def certificate_details
+      data[:certificate_details]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -907,6 +923,7 @@ module Aws::RDS
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     enable_local_write_forwarding: false,
+    #     ca_certificate_identifier: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -1659,6 +1676,11 @@ module Aws::RDS
     #   aren't allowed on reader DB instances.
     #
     #   Valid for: Aurora DB clusters only
+    # @option options [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB cluster's server
+    #   certificate.
+    #
+    #   Valid for Cluster Type: Multi-AZ DB clusters
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1857,6 +1879,7 @@ module Aws::RDS
     #     enable_local_write_forwarding: false,
     #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #     enable_limitless_database: false,
+    #     ca_certificate_identifier: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :new_db_cluster_identifier
@@ -2486,6 +2509,11 @@ module Aws::RDS
     #   Aurora Limitless Database to create a DB shard group.
     #
     #   Valid for: Aurora DB clusters only
+    # @option options [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB cluster's server
+    #   certificate.
+    #
+    #   Valid for Cluster Type: Multi-AZ DB clusters
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)

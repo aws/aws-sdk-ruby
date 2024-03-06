@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.220.0 (2024-03-06)
+------------------
+
+* Feature - Updated the input of CreateDBCluster and ModifyDBCluster to support setting CA certificates. Updated the output of DescribeDBCluster to show current CA certificate setting value.
+
 1.219.0 (2024-02-26)
 ------------------
 

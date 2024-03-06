@@ -133,7 +133,7 @@ module Aws::Redshift
 
     # @!attribute [rw] data_share_arn
     #   The Amazon Resource Name (ARN) of the datashare that the consumer is
-    #   to use with the account or the namespace.
+    #   to use.
     #   @return [String]
     #
     # @!attribute [rw] associate_entire_account
@@ -142,7 +142,7 @@ module Aws::Redshift
     #   @return [Boolean]
     #
     # @!attribute [rw] consumer_arn
-    #   The Amazon Resource Name (ARN) of the consumer that is associated
+    #   The Amazon Resource Name (ARN) of the consumer namespace associated
     #   with the datashare.
     #   @return [String]
     #
@@ -315,8 +315,8 @@ module Aws::Redshift
     end
 
     # @!attribute [rw] data_share_arn
-    #   The Amazon Resource Name (ARN) of the datashare that producers are
-    #   to authorize sharing for.
+    #   The Amazon Resource Name (ARN) of the datashare namespace that
+    #   producers are to authorize sharing for.
     #   @return [String]
     #
     # @!attribute [rw] consumer_identifier
@@ -371,10 +371,16 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] snapshot_cluster_identifier
-    #   The identifier of the cluster the snapshot was created from. This
-    #   parameter is required if your IAM user has a policy containing a
-    #   snapshot resource element that specifies anything other than * for
-    #   the cluster name.
+    #   The identifier of the cluster the snapshot was created from.
+    #
+    #   * *If the snapshot to access doesn't exist and the associated IAM
+    #     policy doesn't allow access to all (*) snapshots* - This
+    #     parameter is required. Otherwise, permissions aren't available to
+    #     check if the snapshot exists.
+    #
+    #   * *If the snapshot to access exists* - This parameter isn't
+    #     required. Redshift can retrieve the cluster identifier and use it
+    #     to validate snapshot authorization.
     #   @return [String]
     #
     # @!attribute [rw] account_with_restore_access
@@ -2132,7 +2138,15 @@ module Aws::Redshift
     #
     #   Default: `5439`
     #
-    #   Valid Values: `1150-65535`
+    #   Valid Values:
+    #
+    #   * For clusters with ra3 nodes - Select a port within the ranges
+    #     `5431-5455` or `8191-8215`. (If you have an existing cluster with
+    #     ra3 nodes, it isn't required that you change the port to these
+    #     ranges.)
+    #
+    #   * For clusters with ds2 or dc2 nodes - Select a port within the
+    #     range `1150-65535`.
     #   @return [Integer]
     #
     # @!attribute [rw] cluster_version
@@ -3229,15 +3243,12 @@ module Aws::Redshift
     end
 
     # @!attribute [rw] data_share_arn
-    #   An Amazon Resource Name (ARN) that references the datashare that is
-    #   owned by a specific namespace of the producer cluster. A datashare
-    #   ARN is in the
-    #   `arn:aws:redshift:\{region\}:\{account-id\}:\{datashare\}:\{namespace-guid\}/\{datashare-name\}`
-    #   format.
+    #   The Amazon Resource Name (ARN) of the datashare that the consumer is
+    #   to use.
     #   @return [String]
     #
     # @!attribute [rw] producer_arn
-    #   The Amazon Resource Name (ARN) of the producer.
+    #   The Amazon Resource Name (ARN) of the producer namespace.
     #   @return [String]
     #
     # @!attribute [rw] allow_publicly_accessible_consumers
@@ -3360,7 +3371,7 @@ module Aws::Redshift
     end
 
     # @!attribute [rw] data_share_arn
-    #   The Amazon Resource Name (ARN) of the datashare to remove
+    #   The namespace Amazon Resource Name (ARN) of the datashare to remove
     #   authorization from.
     #   @return [String]
     #
@@ -4425,8 +4436,8 @@ module Aws::Redshift
     end
 
     # @!attribute [rw] consumer_arn
-    #   The Amazon Resource Name (ARN) of the consumer that returns in the
-    #   list of datashares.
+    #   The Amazon Resource Name (ARN) of the consumer namespace that
+    #   returns in the list of datashares.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4488,8 +4499,8 @@ module Aws::Redshift
     end
 
     # @!attribute [rw] producer_arn
-    #   The Amazon Resource Name (ARN) of the producer that returns in the
-    #   list of datashares.
+    #   The Amazon Resource Name (ARN) of the producer namespace that
+    #   returns in the list of datashares.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4551,7 +4562,8 @@ module Aws::Redshift
     end
 
     # @!attribute [rw] data_share_arn
-    #   The identifier of the datashare to describe details of.
+    #   The Amazon resource name (ARN) of the datashare to describe details
+    #   of.
     #   @return [String]
     #
     # @!attribute [rw] max_records
@@ -5911,8 +5923,8 @@ module Aws::Redshift
     #   @return [Boolean]
     #
     # @!attribute [rw] consumer_arn
-    #   The Amazon Resource Name (ARN) of the consumer that association for
-    #   the datashare is removed from.
+    #   The Amazon Resource Name (ARN) of the consumer namespace that
+    #   association for the datashare is removed from.
     #   @return [String]
     #
     # @!attribute [rw] consumer_region
@@ -8151,6 +8163,16 @@ module Aws::Redshift
     #
     # @!attribute [rw] port
     #   The option to change the port of an Amazon Redshift cluster.
+    #
+    #   Valid Values:
+    #
+    #   * For clusters with ra3 nodes - Select a port within the ranges
+    #     `5431-5455` or `8191-8215`. (If you have an existing cluster with
+    #     ra3 nodes, it isn't required that you change the port to these
+    #     ranges.)
+    #
+    #   * For clusters with ds2 or dc2 nodes - Select a port within the
+    #     range `1150-65535`.
     #   @return [Integer]
     #
     # @!attribute [rw] manage_master_password
@@ -10146,7 +10168,9 @@ module Aws::Redshift
     #
     #   Default: The same port as the original cluster.
     #
-    #   Constraints: Must be between `1115` and `65535`.
+    #   Valid values: For clusters with ds2 or dc2 nodes, must be within the
+    #   range `1150`-`65535`. For clusters with ra3 nodes, must be within
+    #   the ranges `5431`-`5455` or `8191`-`8215`.
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone

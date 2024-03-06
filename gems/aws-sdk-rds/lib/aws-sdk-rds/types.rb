@@ -939,6 +939,20 @@ module Aws::RDS
     #   The storage type for the DB cluster.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_details
+    #   Returns the details of the DB instance’s server certificate.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to
+    #   a DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS
+    #   to encrypt a connection to a DB cluster][2] in the *Amazon Aurora
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #   @return [Types::CertificateDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ClusterPendingModifiedValues AWS API Documentation
     #
     class ClusterPendingModifiedValues < Struct.new(
@@ -951,7 +965,8 @@ module Aws::RDS
       :allocated_storage,
       :rds_custom_cluster_configuration,
       :iops,
-      :storage_type)
+      :storage_type,
+      :certificate_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2905,6 +2920,13 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters only
     #   @return [Boolean]
     #
+    # @!attribute [rw] ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB cluster's server
+    #   certificate.
+    #
+    #   Valid for Cluster Type: Multi-AZ DB clusters
+    #   @return [String]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2965,6 +2987,7 @@ module Aws::RDS
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       :enable_local_write_forwarding,
+      :ca_certificate_identifier,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -3331,8 +3354,8 @@ module Aws::RDS
     #       from 40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom
     #       for SQL Server.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 40 to
-    #       65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 40
+    #       to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
     #       Server.
     #
     #   RDS for Db2
@@ -3341,10 +3364,10 @@ module Aws::RDS
     #     following:
     #
     #     * General Purpose (SSD) storage (gp3): Must be an integer from 20
-    #       to 64000.
+    #       to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       64000.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #   RDS for MariaDB
     #
@@ -3354,8 +3377,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer
     #       from 20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -3367,8 +3390,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer
     #       from 20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -3380,8 +3403,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer
     #       from 20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
@@ -3393,8 +3416,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer
     #       from 20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -3410,7 +3433,7 @@ module Aws::RDS
     #
     #       * Web and Express editions: Must be an integer from 20 to 16384.
     #
-    #     * Provisioned IOPS storage (io1):
+    #     * Provisioned IOPS storage (io1, io2):
     #
     #       * Enterprise and Standard editions: Must be an integer from 100
     #         to 16384.
@@ -3933,13 +3956,13 @@ module Aws::RDS
     # @!attribute [rw] storage_type
     #   The storage type to associate with the DB instance.
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
     #   This setting doesn't apply to Amazon Aurora DB instances. Storage
     #   is managed by the DB cluster.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
@@ -4744,10 +4767,10 @@ module Aws::RDS
     # @!attribute [rw] storage_type
     #   The storage type to associate with the read replica.
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1` if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
@@ -6877,6 +6900,20 @@ module Aws::RDS
     #   This setting is only for non-Aurora Multi-AZ DB clusters.
     #   @return [Integer]
     #
+    # @!attribute [rw] certificate_details
+    #   Returns the details of the DB instance’s server certificate.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to
+    #   a DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS
+    #   to encrypt a connection to a DB cluster][2] in the *Amazon Aurora
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #   @return [Types::CertificateDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -6957,7 +6994,8 @@ module Aws::RDS
       :local_write_forwarding_status,
       :aws_backup_recovery_point_arn,
       :limitless_database,
-      :storage_throughput)
+      :storage_throughput,
+      :certificate_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17376,6 +17414,13 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters only
     #   @return [Boolean]
     #
+    # @!attribute [rw] ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB cluster's server
+    #   certificate.
+    #
+    #   Valid for Cluster Type: Multi-AZ DB clusters
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -17422,7 +17467,8 @@ module Aws::RDS
       :allow_engine_mode_change,
       :enable_local_write_forwarding,
       :aws_backup_recovery_point_arn,
-      :enable_limitless_database)
+      :enable_limitless_database,
+      :ca_certificate_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18061,8 +18107,8 @@ module Aws::RDS
     # @!attribute [rw] storage_type
     #   The storage type to associate with the DB instance.
     #
-    #   If you specify Provisioned IOPS (`io1`), you must also include a
-    #   value for the `Iops` parameter.
+    #   If you specify `io1`), `io2`, or `gp3` you must also include a value
+    #   for the `Iops` parameter.
     #
     #   If you choose to migrate your DB instance from using standard
     #   storage to using Provisioned IOPS, or from using Provisioned IOPS to
@@ -18080,7 +18126,7 @@ module Aws::RDS
     #   read replica for the instance, and creating a DB snapshot of the
     #   instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
@@ -23605,10 +23651,10 @@ module Aws::RDS
     # @!attribute [rw] storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     #   @return [String]
@@ -24277,10 +24323,10 @@ module Aws::RDS
     # @!attribute [rw] storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified; otherwise `gp2`
     #   @return [String]
@@ -24873,15 +24919,15 @@ module Aws::RDS
     # @!attribute [rw] storage_type
     #   The storage type to associate with the DB instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
     #
     #   Constraints:
     #
-    #   * If you specify `io1` or `gp3`, you must also include a value for
-    #     the `Iops` parameter.
+    #   * If you specify `io1`, `io2`, or `gp3`, you must also include a
+    #     value for the `Iops` parameter.
     #
     #   ^
     #   @return [String]
@@ -26953,7 +26999,7 @@ module Aws::RDS
     #
     # @!attribute [rw] storage_type
     #   The valid storage types for your DB instance. For example: gp2, gp3,
-    #   io1.
+    #   io1, io2.
     #   @return [String]
     #
     # @!attribute [rw] storage_size

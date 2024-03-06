@@ -45,8 +45,8 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # Represents an attribute for describing the key schema for the table
-    # and indexes.
+    # Represents an attribute for describing the schema for the table and
+    # indexes.
     #
     # @!attribute [rw] attribute_name
     #   A name for the attribute.
@@ -3628,6 +3628,11 @@ module Aws::DynamoDB
     # @!attribute [rw] s3_bucket_owner
     #   The ID of the Amazon Web Services account that owns the bucket the
     #   export will be stored in.
+    #
+    #   <note markdown="1"> S3BucketOwner is a required parameter when exporting to a S3 bucket
+    #   in another account.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] s3_prefix
@@ -5647,6 +5652,8 @@ module Aws::DynamoDB
     #     attributes that you specify.
     #
     #   * `ALL` - All of the table attributes are projected into the index.
+    #
+    #   When using the DynamoDB console, `ALL` is selected by default.
     #   @return [String]
     #
     # @!attribute [rw] non_key_attributes
@@ -6391,7 +6398,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.FilterExpression.html
     #   @return [String]
     #
     # @!attribute [rw] key_condition_expression

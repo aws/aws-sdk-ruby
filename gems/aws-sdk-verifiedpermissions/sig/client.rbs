@@ -254,6 +254,7 @@ module Aws
         def last_updated_date: () -> ::Time
         def policy_store_id: () -> ::String
         def principal_entity_type: () -> ::String
+        def configuration: () -> Types::ConfigurationDetail
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#get_identity_source-instance_method
       def get_identity_source: (

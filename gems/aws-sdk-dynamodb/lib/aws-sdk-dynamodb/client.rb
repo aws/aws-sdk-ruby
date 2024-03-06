@@ -3464,6 +3464,11 @@ module Aws::DynamoDB
     #   The ID of the Amazon Web Services account that owns the bucket the
     #   export will be stored in.
     #
+    #   <note markdown="1"> S3BucketOwner is a required parameter when exporting to a S3 bucket in
+    #   another account.
+    #
+    #    </note>
+    #
     # @option params [String] :s3_prefix
     #   The Amazon S3 bucket prefix to use as the file name and path of the
     #   exported snapshot.
@@ -4907,7 +4912,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.FilterExpression.html
     #
     # @option params [String] :key_condition_expression
     #   The condition that specifies the key values for items to be retrieved
@@ -6568,7 +6573,7 @@ module Aws::DynamoDB
     #
     # <note markdown="1"> This operation only applies to [Version 2017.11.29][1] of global
     # tables. If you are using global tables [Version 2019.11.21][2] you can
-    # use [DescribeTable][5] instead.
+    # use [UpdateTable][5] instead.
     #
     #  Although you can use `UpdateGlobalTable` to add replicas and remove
     # replicas in a single request, for simplicity we recommend that you
@@ -6593,7 +6598,7 @@ module Aws::DynamoDB
     # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
     # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
     # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
-    # [5]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeTable.html
+    # [5]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html
     #
     # @option params [required, String] :global_table_name
     #   The global table name.
@@ -7924,7 +7929,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

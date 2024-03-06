@@ -435,6 +435,7 @@ module Aws
                                ?manage_master_user_password: bool,
                                ?master_user_secret_kms_key_id: ::String,
                                ?enable_local_write_forwarding: bool,
+                               ?ca_certificate_identifier: ::String,
                                ?source_region: ::String
                              ) -> _CreateDBClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBClusterResponseSuccess
@@ -2274,7 +2275,8 @@ module Aws
                                ?allow_engine_mode_change: bool,
                                ?enable_local_write_forwarding: bool,
                                ?aws_backup_recovery_point_arn: ::String,
-                               ?enable_limitless_database: bool
+                               ?enable_limitless_database: bool,
+                               ?ca_certificate_identifier: ::String
                              ) -> _ModifyDBClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBClusterResponseSuccess
 

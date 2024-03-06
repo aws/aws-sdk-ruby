@@ -283,8 +283,8 @@ module Aws::VerifiedPermissions
     # Verified Permissions.
     #
     # This data type is used as a field that is part of an
-    # [Configuration][1] structure that is used as a parameter to the
-    # [Configuration][1].
+    # [Configuration][1] structure that is used as a parameter to
+    # [CreateIdentitySource][2].
     #
     # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
     # ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}`
@@ -292,6 +292,7 @@ module Aws::VerifiedPermissions
     #
     #
     # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
     #
     # @!attribute [rw] user_pool_arn
     #   The [Amazon Resource Name (ARN)][1] of the Amazon Cognito user pool
@@ -317,6 +318,112 @@ module Aws::VerifiedPermissions
     class CognitoUserPoolConfiguration < Struct.new(
       :user_pool_arn,
       :client_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an identity source that represents a connection
+    # to an Amazon Cognito user pool used as an identity provider for
+    # Verified Permissions.
+    #
+    # This data type is used as a field that is part of an
+    # [ConfigurationDetail][1] structure that is part of the response to
+    # [GetIdentitySource][2].
+    #
+    # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
+    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}`
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+    #
+    # @!attribute [rw] user_pool_arn
+    #   The [Amazon Resource Name (ARN)][1] of the Amazon Cognito user pool
+    #   that contains the identities to be authorized.
+    #
+    #   Example: `"userPoolArn":
+    #   "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5"`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] client_ids
+    #   The unique application client IDs that are associated with the
+    #   specified Amazon Cognito user pool.
+    #
+    #   Example: `"clientIds": ["&ExampleCogClientId;"]`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] issuer
+    #   The OpenID Connect (OIDC) `issuer` ID of the Amazon Cognito user
+    #   pool that contains the identities to be authorized.
+    #
+    #   Example: `"issuer":
+    #   "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1a2b3c4d5"`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CognitoUserPoolConfigurationDetail AWS API Documentation
+    #
+    class CognitoUserPoolConfigurationDetail < Struct.new(
+      :user_pool_arn,
+      :client_ids,
+      :issuer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an identity source that represents a connection
+    # to an Amazon Cognito user pool used as an identity provider for
+    # Verified Permissions.
+    #
+    # This data type is used as a field that is part of the
+    # [ConfigurationItem][1] structure that is part of the response to
+    # [ListIdentitySources][2].
+    #
+    # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
+    # ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}`
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationItem.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+    #
+    # @!attribute [rw] user_pool_arn
+    #   The [Amazon Resource Name (ARN)][1] of the Amazon Cognito user pool
+    #   that contains the identities to be authorized.
+    #
+    #   Example: `"userPoolArn":
+    #   "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5"`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] client_ids
+    #   The unique application client IDs that are associated with the
+    #   specified Amazon Cognito user pool.
+    #
+    #   Example: `"clientIds": ["&ExampleCogClientId;"]`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] issuer
+    #   The OpenID Connect (OIDC) `issuer` ID of the Amazon Cognito user
+    #   pool that contains the identities to be authorized.
+    #
+    #   Example: `"issuer":
+    #   "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1a2b3c4d5"`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CognitoUserPoolConfigurationItem AWS API Documentation
+    #
+    class CognitoUserPoolConfigurationItem < Struct.new(
+      :user_pool_arn,
+      :client_ids,
+      :issuer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -366,6 +473,84 @@ module Aws::VerifiedPermissions
 
       class CognitoUserPoolConfiguration < Configuration; end
       class Unknown < Configuration; end
+    end
+
+    # Contains configuration information about an identity source.
+    #
+    # This data type is a response parameter to the [GetIdentitySource][1]
+    # operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+    #
+    # @note ConfigurationDetail is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConfigurationDetail corresponding to the set member.
+    #
+    # @!attribute [rw] cognito_user_pool_configuration
+    #   Contains configuration details of a Amazon Cognito user pool that
+    #   Verified Permissions can use as a source of authenticated identities
+    #   as entities. It specifies the [Amazon Resource Name (ARN)][1] of a
+    #   Amazon Cognito user pool and one or more application client IDs.
+    #
+    #   Example:
+    #   `"configuration":\{"cognitoUserPoolConfiguration":\{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
+    #   ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}\}`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [Types::CognitoUserPoolConfigurationDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ConfigurationDetail AWS API Documentation
+    #
+    class ConfigurationDetail < Struct.new(
+      :cognito_user_pool_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CognitoUserPoolConfiguration < ConfigurationDetail; end
+      class Unknown < ConfigurationDetail; end
+    end
+
+    # Contains configuration information about an identity source.
+    #
+    # This data type is a response parameter to the [ListIdentitySources][1]
+    # operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+    #
+    # @note ConfigurationItem is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConfigurationItem corresponding to the set member.
+    #
+    # @!attribute [rw] cognito_user_pool_configuration
+    #   Contains configuration details of a Amazon Cognito user pool that
+    #   Verified Permissions can use as a source of authenticated identities
+    #   as entities. It specifies the [Amazon Resource Name (ARN)][1] of a
+    #   Amazon Cognito user pool and one or more application client IDs.
+    #
+    #   Example:
+    #   `"configuration":\{"cognitoUserPoolConfiguration":\{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
+    #   ["a1b2c3d4e5f6g7h8i9j0kalbmc"]\}\}`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [Types::CognitoUserPoolConfigurationItem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ConfigurationItem AWS API Documentation
+    #
+    class ConfigurationItem < Struct.new(
+      :cognito_user_pool_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CognitoUserPoolConfiguration < ConfigurationItem; end
+      class Unknown < ConfigurationItem; end
     end
 
     # The request failed because another request to modify a resource
@@ -442,8 +627,13 @@ module Aws::VerifiedPermissions
     #   a random one for you.
     #
     #   If you retry the operation with the same `ClientToken`, but with
-    #   different parameters, the retry fails with an
-    #   `IdempotentParameterMismatch` error.
+    #   different parameters, the retry fails with an `ConflictException`
+    #   error.
+    #
+    #   Verified Permissions recognizes a `ClientToken` for eight hours.
+    #   After eight hours, the next request with the same parameters
+    #   performs the operation again regardless of the value of
+    #   `ClientToken`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -527,8 +717,13 @@ module Aws::VerifiedPermissions
     #   a random one for you.
     #
     #   If you retry the operation with the same `ClientToken`, but with
-    #   different parameters, the retry fails with an
-    #   `IdempotentParameterMismatch` error.
+    #   different parameters, the retry fails with an `ConflictException`
+    #   error.
+    #
+    #   Verified Permissions recognizes a `ClientToken` for eight hours.
+    #   After eight hours, the next request with the same parameters
+    #   performs the operation again regardless of the value of
+    #   `ClientToken`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -618,8 +813,13 @@ module Aws::VerifiedPermissions
     #   a random one for you.
     #
     #   If you retry the operation with the same `ClientToken`, but with
-    #   different parameters, the retry fails with an
-    #   `IdempotentParameterMismatch` error.
+    #   different parameters, the retry fails with an `ConflictException`
+    #   error.
+    #
+    #   Verified Permissions recognizes a `ClientToken` for eight hours.
+    #   After eight hours, the next request with the same parameters
+    #   performs the operation again regardless of the value of
+    #   `ClientToken`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -700,8 +900,13 @@ module Aws::VerifiedPermissions
     #   a random one for you.
     #
     #   If you retry the operation with the same `ClientToken`, but with
-    #   different parameters, the retry fails with an
-    #   `IdempotentParameterMismatch` error.
+    #   different parameters, the retry fails with an `ConflictException`
+    #   error.
+    #
+    #   Verified Permissions recognizes a `ClientToken` for eight hours.
+    #   After eight hours, the next request with the same parameters
+    #   performs the operation again regardless of the value of
+    #   `ClientToken`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1086,6 +1291,10 @@ module Aws::VerifiedPermissions
     #   by this identity source.
     #   @return [String]
     #
+    # @!attribute [rw] configuration
+    #   Contains configuration information about an identity source.
+    #   @return [Types::ConfigurationDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetIdentitySourceOutput AWS API Documentation
     #
     class GetIdentitySourceOutput < Struct.new(
@@ -1094,7 +1303,8 @@ module Aws::VerifiedPermissions
       :identity_source_id,
       :last_updated_date,
       :policy_store_id,
-      :principal_entity_type)
+      :principal_entity_type,
+      :configuration)
       SENSITIVE = [:principal_entity_type]
       include Aws::Structure
     end
@@ -1324,12 +1534,13 @@ module Aws::VerifiedPermissions
 
     # A structure that contains configuration of the identity source.
     #
-    # This data type is used as a response parameter for the
-    # [CreateIdentitySource][1] operation.
+    # This data type was a response parameter for the [GetIdentitySource][1]
+    # operation. Replaced by [ConfigurationDetail][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html
     #
     # @!attribute [rw] client_ids
     #   The application client IDs associated with the specified Amazon
@@ -1377,8 +1588,8 @@ module Aws::VerifiedPermissions
     # A structure that defines characteristics of an identity source that
     # you can use to filter.
     #
-    # This data type is used as a request parameter for the
-    # [ListIdentityStores][1] operation.
+    # This data type is a request parameter for the [ListIdentityStores][1]
+    # operation.
     #
     #
     #
@@ -1399,12 +1610,12 @@ module Aws::VerifiedPermissions
 
     # A structure that defines an identity source.
     #
-    # This data type is used as a request parameter for the
-    # [ListIdentityStores][1] operation.
+    # This data type is a response parameter to the [ListIdentitySources][1]
+    # operation.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentityStores.html
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
     #
     # @!attribute [rw] created_date
     #   The date and time the identity source was originally created.
@@ -1433,6 +1644,10 @@ module Aws::VerifiedPermissions
     #   associated with this identity source.
     #   @return [String]
     #
+    # @!attribute [rw] configuration
+    #   Contains configuration information about an identity source.
+    #   @return [Types::ConfigurationItem]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/IdentitySourceItem AWS API Documentation
     #
     class IdentitySourceItem < Struct.new(
@@ -1441,19 +1656,22 @@ module Aws::VerifiedPermissions
       :identity_source_id,
       :last_updated_date,
       :policy_store_id,
-      :principal_entity_type)
+      :principal_entity_type,
+      :configuration)
       SENSITIVE = [:principal_entity_type]
       include Aws::Structure
     end
 
     # A structure that contains configuration of the identity source.
     #
-    # This data type is used as a response parameter for the
-    # [CreateIdentitySource][1] operation.
+    # This data type was a response parameter for the
+    # [ListIdentitySources][1] operation. Replaced by
+    # [ConfigurationItem][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationItem.html
     #
     # @!attribute [rw] client_ids
     #   The application client IDs associated with the specified Amazon
@@ -1597,14 +1815,20 @@ module Aws::VerifiedPermissions
     #   Specifies an identity token for the principal to be authorized. This
     #   token is provided to you by the identity provider (IdP) associated
     #   with the specified identity source. You must specify either an
-    #   `AccessToken` or an `IdentityToken`, or both.
+    #   `accessToken`, an `identityToken`, or both.
+    #
+    #   Must be an ID token. Verified Permissions returns an error if the
+    #   `token_use` claim in the submitted token isn't `id`.
     #   @return [String]
     #
     # @!attribute [rw] access_token
     #   Specifies an access token for the principal to be authorized. This
     #   token is provided to you by the identity provider (IdP) associated
     #   with the specified identity source. You must specify either an
-    #   `AccessToken`, or an `IdentityToken`, or both.
+    #   `accessToken`, an `identityToken`, or both.
+    #
+    #   Must be an access token. Verified Permissions returns an error if
+    #   the `token_use` claim in the submitted token isn't `access`.
     #   @return [String]
     #
     # @!attribute [rw] action
@@ -2509,13 +2733,8 @@ module Aws::VerifiedPermissions
       include Aws::Structure
     end
 
-    # Contains information about a policy that was
-    #
-    #
-    #
-    # created by instantiating a policy template.
-    #
-    # This
+    # Contains information about a policy that was created by instantiating
+    # a policy template.
     #
     # @!attribute [rw] policy_template_id
     #   The unique identifier of the policy template used to create this

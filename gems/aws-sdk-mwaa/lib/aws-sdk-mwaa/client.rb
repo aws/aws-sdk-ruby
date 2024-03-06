@@ -443,7 +443,7 @@ module Aws::MWAA
     #   Airflow (MWAA)][1].
     #
     #   Valid values: `1.10.12`, `2.0.2`, `2.2.2`, `2.4.3`, `2.5.1`, `2.6.3`,
-    #   `2.7.2`
+    #   `2.7.2` `2.8.1`
     #
     #
     #
@@ -1328,7 +1328,7 @@ module Aws::MWAA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mwaa'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

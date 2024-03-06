@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2024-03-06)
+------------------
+
+* Feature - Add PENDING status to Lifecycle Execution resource status. Add StartTime and EndTime to ListLifecycleExecutionResource API response.
+
 1.57.0 (2024-01-26)
 ------------------
 

@@ -555,8 +555,8 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
@@ -576,8 +576,12 @@ module Aws::VerifiedPermissions
     #   random one for you.
     #
     #   If you retry the operation with the same `ClientToken`, but with
-    #   different parameters, the retry fails with an
-    #   `IdempotentParameterMismatch` error.
+    #   different parameters, the retry fails with an `ConflictException`
+    #   error.
+    #
+    #   Verified Permissions recognizes a `ClientToken` for eight hours. After
+    #   eight hours, the next request with the same parameters performs the
+    #   operation again regardless of the value of `ClientToken`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -667,8 +671,8 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
@@ -684,8 +688,12 @@ module Aws::VerifiedPermissions
     #   random one for you.
     #
     #   If you retry the operation with the same `ClientToken`, but with
-    #   different parameters, the retry fails with an
-    #   `IdempotentParameterMismatch` error.
+    #   different parameters, the retry fails with an `ConflictException`
+    #   error.
+    #
+    #   Verified Permissions recognizes a `ClientToken` for eight hours. After
+    #   eight hours, the next request with the same parameters performs the
+    #   operation again regardless of the value of `ClientToken`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -770,8 +778,8 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
@@ -791,8 +799,12 @@ module Aws::VerifiedPermissions
     #   random one for you.
     #
     #   If you retry the operation with the same `ClientToken`, but with
-    #   different parameters, the retry fails with an
-    #   `IdempotentParameterMismatch` error.
+    #   different parameters, the retry fails with an `ConflictException`
+    #   error.
+    #
+    #   Verified Permissions recognizes a `ClientToken` for eight hours. After
+    #   eight hours, the next request with the same parameters performs the
+    #   operation again regardless of the value of `ClientToken`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -866,8 +878,8 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
@@ -883,8 +895,12 @@ module Aws::VerifiedPermissions
     #   random one for you.
     #
     #   If you retry the operation with the same `ClientToken`, but with
-    #   different parameters, the retry fails with an
-    #   `IdempotentParameterMismatch` error.
+    #   different parameters, the retry fails with an `ConflictException`
+    #   error.
+    #
+    #   Verified Permissions recognizes a `ClientToken` for eight hours. After
+    #   eight hours, the next request with the same parameters performs the
+    #   operation again regardless of the value of `ClientToken`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1076,6 +1092,7 @@ module Aws::VerifiedPermissions
     #   * {Types::GetIdentitySourceOutput#last_updated_date #last_updated_date} => Time
     #   * {Types::GetIdentitySourceOutput#policy_store_id #policy_store_id} => String
     #   * {Types::GetIdentitySourceOutput#principal_entity_type #principal_entity_type} => String
+    #   * {Types::GetIdentitySourceOutput#configuration #configuration} => Types::ConfigurationDetail
     #
     # @example Request syntax with placeholder values
     #
@@ -1096,6 +1113,10 @@ module Aws::VerifiedPermissions
     #   resp.last_updated_date #=> Time
     #   resp.policy_store_id #=> String
     #   resp.principal_entity_type #=> String
+    #   resp.configuration.cognito_user_pool_configuration.user_pool_arn #=> String
+    #   resp.configuration.cognito_user_pool_configuration.client_ids #=> Array
+    #   resp.configuration.cognito_user_pool_configuration.client_ids[0] #=> String
+    #   resp.configuration.cognito_user_pool_configuration.issuer #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetIdentitySource AWS API Documentation
     #
@@ -1426,13 +1447,19 @@ module Aws::VerifiedPermissions
     #   Specifies an identity token for the principal to be authorized. This
     #   token is provided to you by the identity provider (IdP) associated
     #   with the specified identity source. You must specify either an
-    #   `AccessToken` or an `IdentityToken`, or both.
+    #   `accessToken`, an `identityToken`, or both.
+    #
+    #   Must be an ID token. Verified Permissions returns an error if the
+    #   `token_use` claim in the submitted token isn't `id`.
     #
     # @option params [String] :access_token
     #   Specifies an access token for the principal to be authorized. This
     #   token is provided to you by the identity provider (IdP) associated
     #   with the specified identity source. You must specify either an
-    #   `AccessToken`, or an `IdentityToken`, or both.
+    #   `accessToken`, an `identityToken`, or both.
+    #
+    #   Must be an access token. Verified Permissions returns an error if the
+    #   `token_use` claim in the submitted token isn't `access`.
     #
     # @option params [Types::ActionIdentifier] :action
     #   Specifies the requested action to be authorized. Is the specified
@@ -1592,6 +1619,10 @@ module Aws::VerifiedPermissions
     #   resp.identity_sources[0].last_updated_date #=> Time
     #   resp.identity_sources[0].policy_store_id #=> String
     #   resp.identity_sources[0].principal_entity_type #=> String
+    #   resp.identity_sources[0].configuration.cognito_user_pool_configuration.user_pool_arn #=> String
+    #   resp.identity_sources[0].configuration.cognito_user_pool_configuration.client_ids #=> Array
+    #   resp.identity_sources[0].configuration.cognito_user_pool_configuration.client_ids[0] #=> String
+    #   resp.identity_sources[0].configuration.cognito_user_pool_configuration.issuer #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ListIdentitySources AWS API Documentation
     #
@@ -1826,8 +1857,8 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
@@ -1878,8 +1909,8 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
@@ -1954,7 +1985,7 @@ module Aws::VerifiedPermissions
     #   doesn't pass validation, the operation fails and the update isn't
     #   stored.
     #
-    # * When you edit a static policy, You can change only certain elements
+    # * When you edit a static policy, you can change only certain elements
     #   of a static policy:
     #
     #   * The action referenced by the policy.
@@ -1980,8 +2011,8 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
@@ -2072,8 +2103,8 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
@@ -2132,8 +2163,8 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
@@ -2214,7 +2245,7 @@ module Aws::VerifiedPermissions
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

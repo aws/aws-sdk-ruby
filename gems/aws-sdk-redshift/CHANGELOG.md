@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2024-03-06)
+------------------
+
+* Feature - Update for documentation only. Covers port ranges, definition updates for data sharing, and definition updates to cluster-snapshot documentation.
+
 1.109.0 (2024-02-07)
 ------------------
 

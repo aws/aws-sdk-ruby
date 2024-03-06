@@ -908,6 +908,7 @@ module Aws::RDS
     ClusterPendingModifiedValues.add_member(:rds_custom_cluster_configuration, Shapes::ShapeRef.new(shape: RdsCustomClusterConfiguration, location_name: "RdsCustomClusterConfiguration"))
     ClusterPendingModifiedValues.add_member(:iops, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Iops"))
     ClusterPendingModifiedValues.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
+    ClusterPendingModifiedValues.add_member(:certificate_details, Shapes::ShapeRef.new(shape: CertificateDetails, location_name: "CertificateDetails"))
     ClusterPendingModifiedValues.struct_class = Types::ClusterPendingModifiedValues
 
     ConnectionPoolConfiguration.add_member(:max_connections_percent, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxConnectionsPercent"))
@@ -1072,6 +1073,7 @@ module Aws::RDS
     CreateDBClusterMessage.add_member(:manage_master_user_password, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ManageMasterUserPassword"))
     CreateDBClusterMessage.add_member(:master_user_secret_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserSecretKmsKeyId"))
     CreateDBClusterMessage.add_member(:enable_local_write_forwarding, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableLocalWriteForwarding"))
+    CreateDBClusterMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     CreateDBClusterMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBClusterMessage.struct_class = Types::CreateDBClusterMessage
 
@@ -1423,6 +1425,7 @@ module Aws::RDS
     DBCluster.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: String, location_name: "AwsBackupRecoveryPointArn"))
     DBCluster.add_member(:limitless_database, Shapes::ShapeRef.new(shape: LimitlessDatabase, location_name: "LimitlessDatabase"))
     DBCluster.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "StorageThroughput"))
+    DBCluster.add_member(:certificate_details, Shapes::ShapeRef.new(shape: CertificateDetails, location_name: "CertificateDetails"))
     DBCluster.struct_class = Types::DBCluster
 
     DBClusterAlreadyExistsFault.struct_class = Types::DBClusterAlreadyExistsFault
@@ -3068,6 +3071,7 @@ module Aws::RDS
     ModifyDBClusterMessage.add_member(:enable_local_write_forwarding, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableLocalWriteForwarding"))
     ModifyDBClusterMessage.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: AwsBackupRecoveryPointArn, location_name: "AwsBackupRecoveryPointArn"))
     ModifyDBClusterMessage.add_member(:enable_limitless_database, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableLimitlessDatabase"))
+    ModifyDBClusterMessage.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     ModifyDBClusterMessage.struct_class = Types::ModifyDBClusterMessage
 
     ModifyDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterParameterGroupName"))
