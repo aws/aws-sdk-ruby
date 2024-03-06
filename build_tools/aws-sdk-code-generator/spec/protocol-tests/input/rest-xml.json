@@ -1528,10 +1528,7 @@
                         "shape": "String"
                     }
                 },
-                "xmlNamespace": {
-                    "prefix": "baz",
-                    "uri": "http://foo.com"
-                }
+                "xmlNamespace": "http://foo.com"
             },
             "String": {
                 "type": "string"
@@ -4982,10 +4979,7 @@
                 "members": {
                     "foo": {
                         "shape": "String",
-                        "xmlNamespace": {
-                            "prefix": "baz",
-                            "uri": "http://baz.com"
-                        }
+                        "xmlNamespace": "http://baz.com"
                     },
                     "values": {
                         "shape": "XmlNamespacedList",

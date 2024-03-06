@@ -357,54 +357,6 @@
             "apiVersion": "2020-01-08"
         },
         "shapes": {
-            "InvalidGreeting": {
-                "type": "structure",
-                "members": {
-                    "Message": {
-                        "shape": "String"
-                    }
-                },
-                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
-                "exception": true
-            },
-            "String": {
-                "type": "string"
-            },
-            "CustomCodeError": {
-                "type": "structure",
-                "members": {
-                    "Message": {
-                        "shape": "String"
-                    }
-                },
-                "error": {
-                    "code": "Customized",
-                    "httpStatusCode": 402,
-                    "senderFault": true
-                },
-                "exception": true
-            },
-            "ComplexError": {
-                "type": "structure",
-                "members": {
-                    "TopLevel": {
-                        "shape": "String"
-                    },
-                    "Nested": {
-                        "shape": "ComplexNestedErrorData"
-                    }
-                },
-                "documentation": "<p>This error is thrown when a request is invalid.</p>",
-                "exception": true
-            },
-            "ComplexNestedErrorData": {
-                "type": "structure",
-                "members": {
-                    "Foo": {
-                        "shape": "String"
-                    }
-                }
-            },
             "GreetingWithErrorsOutput": {
                 "type": "structure",
                 "members": {
@@ -412,6 +364,9 @@
                         "shape": "String"
                     }
                 }
+            },
+            "String": {
+                "type": "string"
             }
         },
         "cases": [
@@ -426,17 +381,6 @@
                     "output": {
                         "shape": "GreetingWithErrorsOutput"
                     },
-                    "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "CustomCodeError"
-                        },
-                        {
-                            "shape": "ComplexError"
-                        }
-                    ],
                     "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol>"
                 },
                 "description": "Ensures that operations with errors successfully know how to deserialize the successful response",
@@ -472,49 +416,6 @@
             },
             "String": {
                 "type": "string"
-            },
-            "CustomCodeError": {
-                "type": "structure",
-                "members": {
-                    "Message": {
-                        "shape": "String"
-                    }
-                },
-                "error": {
-                    "code": "Customized",
-                    "httpStatusCode": 402,
-                    "senderFault": true
-                },
-                "exception": true
-            },
-            "ComplexError": {
-                "type": "structure",
-                "members": {
-                    "TopLevel": {
-                        "shape": "String"
-                    },
-                    "Nested": {
-                        "shape": "ComplexNestedErrorData"
-                    }
-                },
-                "documentation": "<p>This error is thrown when a request is invalid.</p>",
-                "exception": true
-            },
-            "ComplexNestedErrorData": {
-                "type": "structure",
-                "members": {
-                    "Foo": {
-                        "shape": "String"
-                    }
-                }
-            },
-            "GreetingWithErrorsOutput": {
-                "type": "structure",
-                "members": {
-                    "greeting": {
-                        "shape": "String"
-                    }
-                }
             }
         },
         "cases": [
@@ -526,24 +427,17 @@
                         "method": "POST",
                         "requestUri": "/"
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol>",
                     "errors": [
                         {
                             "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "CustomCodeError"
-                        },
-                        {
-                            "shape": "ComplexError"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol>"
+                    ]
                 },
                 "description": "Parses simple XML errors",
-                "result": {
+                "errorCode": "InvalidGreeting",
+                "errorMessage": "Hi",
+                "error": {
                     "Message": "Hi"
                 },
                 "response": {
@@ -563,19 +457,6 @@
             "apiVersion": "2020-01-08"
         },
         "shapes": {
-            "InvalidGreeting": {
-                "type": "structure",
-                "members": {
-                    "Message": {
-                        "shape": "String"
-                    }
-                },
-                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
-                "exception": true
-            },
-            "String": {
-                "type": "string"
-            },
             "CustomCodeError": {
                 "type": "structure",
                 "members": {
@@ -590,34 +471,8 @@
                 },
                 "exception": true
             },
-            "ComplexError": {
-                "type": "structure",
-                "members": {
-                    "TopLevel": {
-                        "shape": "String"
-                    },
-                    "Nested": {
-                        "shape": "ComplexNestedErrorData"
-                    }
-                },
-                "documentation": "<p>This error is thrown when a request is invalid.</p>",
-                "exception": true
-            },
-            "ComplexNestedErrorData": {
-                "type": "structure",
-                "members": {
-                    "Foo": {
-                        "shape": "String"
-                    }
-                }
-            },
-            "GreetingWithErrorsOutput": {
-                "type": "structure",
-                "members": {
-                    "greeting": {
-                        "shape": "String"
-                    }
-                }
+            "String": {
+                "type": "string"
             }
         },
         "cases": [
@@ -629,24 +484,17 @@
                         "method": "POST",
                         "requestUri": "/"
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol>",
                     "errors": [
                         {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
                             "shape": "CustomCodeError"
-                        },
-                        {
-                            "shape": "ComplexError"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol>"
+                    ]
                 },
                 "description": "Parses customized XML errors",
-                "result": {
+                "errorCode": "CustomCodeError",
+                "errorMessage": "Hi",
+                "error": {
                     "Message": "Hi"
                 },
                 "response": {
@@ -666,33 +514,6 @@
             "apiVersion": "2020-01-08"
         },
         "shapes": {
-            "InvalidGreeting": {
-                "type": "structure",
-                "members": {
-                    "Message": {
-                        "shape": "String"
-                    }
-                },
-                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
-                "exception": true
-            },
-            "String": {
-                "type": "string"
-            },
-            "CustomCodeError": {
-                "type": "structure",
-                "members": {
-                    "Message": {
-                        "shape": "String"
-                    }
-                },
-                "error": {
-                    "code": "Customized",
-                    "httpStatusCode": 402,
-                    "senderFault": true
-                },
-                "exception": true
-            },
             "ComplexError": {
                 "type": "structure",
                 "members": {
@@ -706,18 +527,13 @@
                 "documentation": "<p>This error is thrown when a request is invalid.</p>",
                 "exception": true
             },
+            "String": {
+                "type": "string"
+            },
             "ComplexNestedErrorData": {
                 "type": "structure",
                 "members": {
                     "Foo": {
-                        "shape": "String"
-                    }
-                }
-            },
-            "GreetingWithErrorsOutput": {
-                "type": "structure",
-                "members": {
-                    "greeting": {
                         "shape": "String"
                     }
                 }
@@ -732,23 +548,15 @@
                         "method": "POST",
                         "requestUri": "/"
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol>",
                     "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "CustomCodeError"
-                        },
                         {
                             "shape": "ComplexError"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol>"
+                    ]
                 },
-                "result": {
+                "errorCode": "ComplexError",
+                "error": {
                     "TopLevel": "Top level",
                     "Nested": {
                         "Foo": "bar"
@@ -2191,10 +1999,7 @@
                 "members": {
                     "foo": {
                         "shape": "String",
-                        "xmlNamespace": {
-                            "prefix": "baz",
-                            "uri": "http://baz.com"
-                        }
+                        "xmlNamespace": "http://baz.com"
                     },
                     "values": {
                         "shape": "XmlNamespacedList",

@@ -426,53 +426,6 @@
             "apiVersion": "2019-12-16"
         },
         "shapes": {
-            "InvalidGreeting": {
-                "type": "structure",
-                "members": {
-                    "Message": {
-                        "shape": "String"
-                    }
-                },
-                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
-                "error": {
-                    "httpStatusCode": 400,
-                    "senderFault": true
-                },
-                "exception": true
-            },
-            "String": {
-                "type": "string"
-            },
-            "ComplexError": {
-                "type": "structure",
-                "members": {
-                    "Header": {
-                        "shape": "String",
-                        "location": "header",
-                        "locationName": "X-Header"
-                    },
-                    "TopLevel": {
-                        "shape": "String"
-                    },
-                    "Nested": {
-                        "shape": "ComplexNestedErrorData"
-                    }
-                },
-                "documentation": "<p>This error is thrown when a request is invalid.</p>",
-                "error": {
-                    "httpStatusCode": 403,
-                    "senderFault": true
-                },
-                "exception": true
-            },
-            "ComplexNestedErrorData": {
-                "type": "structure",
-                "members": {
-                    "Foo": {
-                        "shape": "String"
-                    }
-                }
-            },
             "GreetingWithErrorsOutput": {
                 "type": "structure",
                 "members": {
@@ -482,6 +435,9 @@
                         "locationName": "X-Greeting"
                     }
                 }
+            },
+            "String": {
+                "type": "string"
             }
         },
         "cases": [
@@ -497,14 +453,6 @@
                     "output": {
                         "shape": "GreetingWithErrorsOutput"
                     },
-                    "errors": [
-                        {
-                            "shape": "ComplexError"
-                        },
-                        {
-                            "shape": "InvalidGreeting"
-                        }
-                    ],
                     "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
                     "idempotent": true
                 },
@@ -545,46 +493,6 @@
             },
             "String": {
                 "type": "string"
-            },
-            "ComplexError": {
-                "type": "structure",
-                "members": {
-                    "Header": {
-                        "shape": "String",
-                        "location": "header",
-                        "locationName": "X-Header"
-                    },
-                    "TopLevel": {
-                        "shape": "String"
-                    },
-                    "Nested": {
-                        "shape": "ComplexNestedErrorData"
-                    }
-                },
-                "documentation": "<p>This error is thrown when a request is invalid.</p>",
-                "error": {
-                    "httpStatusCode": 403,
-                    "senderFault": true
-                },
-                "exception": true
-            },
-            "ComplexNestedErrorData": {
-                "type": "structure",
-                "members": {
-                    "Foo": {
-                        "shape": "String"
-                    }
-                }
-            },
-            "GreetingWithErrorsOutput": {
-                "type": "structure",
-                "members": {
-                    "greeting": {
-                        "shape": "String",
-                        "location": "header",
-                        "locationName": "X-Greeting"
-                    }
-                }
             }
         },
         "cases": [
@@ -597,22 +505,18 @@
                         "requestUri": "/GreetingWithErrors",
                         "responseCode": 200
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
                     "errors": [
-                        {
-                            "shape": "ComplexError"
-                        },
                         {
                             "shape": "InvalidGreeting"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Parses simple XML errors",
-                "result": {
+                "errorCode": "InvalidGreeting",
+                "errorMessage": "Hi",
+                "error": {
                     "Message": "Hi"
                 },
                 "response": {
@@ -632,23 +536,6 @@
             "apiVersion": "2019-12-16"
         },
         "shapes": {
-            "InvalidGreeting": {
-                "type": "structure",
-                "members": {
-                    "Message": {
-                        "shape": "String"
-                    }
-                },
-                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
-                "error": {
-                    "httpStatusCode": 400,
-                    "senderFault": true
-                },
-                "exception": true
-            },
-            "String": {
-                "type": "string"
-            },
             "ComplexError": {
                 "type": "structure",
                 "members": {
@@ -671,21 +558,14 @@
                 },
                 "exception": true
             },
+            "String": {
+                "type": "string"
+            },
             "ComplexNestedErrorData": {
                 "type": "structure",
                 "members": {
                     "Foo": {
                         "shape": "String"
-                    }
-                }
-            },
-            "GreetingWithErrorsOutput": {
-                "type": "structure",
-                "members": {
-                    "greeting": {
-                        "shape": "String",
-                        "location": "header",
-                        "locationName": "X-Greeting"
                     }
                 }
             }
@@ -700,21 +580,16 @@
                         "requestUri": "/GreetingWithErrors",
                         "responseCode": 200
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
                     "errors": [
                         {
                             "shape": "ComplexError"
-                        },
-                        {
-                            "shape": "InvalidGreeting"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true
+                    ]
                 },
-                "result": {
+                "errorCode": "ComplexError",
+                "error": {
                     "Header": "Header",
                     "TopLevel": "Top level",
                     "Nested": {
@@ -1284,10 +1159,7 @@
                         "shape": "String"
                     }
                 },
-                "xmlNamespace": {
-                    "prefix": "baz",
-                    "uri": "http://foo.com"
-                }
+                "xmlNamespace": "http://foo.com"
             },
             "String": {
                 "type": "string"
@@ -4061,10 +3933,7 @@
                 "members": {
                     "foo": {
                         "shape": "String",
-                        "xmlNamespace": {
-                            "prefix": "baz",
-                            "uri": "http://baz.com"
-                        }
+                        "xmlNamespace": "http://baz.com"
                     },
                     "values": {
                         "shape": "XmlNamespacedList",

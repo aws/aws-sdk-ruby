@@ -508,64 +508,6 @@
             "apiVersion": "2019-12-16"
         },
         "shapes": {
-            "FooError": {
-                "type": "structure",
-                "members": {},
-                "documentation": "<p>This error has test cases that test some of the dark corners of Amazon service framework history. It should only be implemented by clients.</p>",
-                "error": {
-                    "httpStatusCode": 500
-                },
-                "exception": true,
-                "fault": true
-            },
-            "ComplexError": {
-                "type": "structure",
-                "members": {
-                    "Header": {
-                        "shape": "String",
-                        "location": "header",
-                        "locationName": "X-Header"
-                    },
-                    "TopLevel": {
-                        "shape": "String"
-                    },
-                    "Nested": {
-                        "shape": "ComplexNestedErrorData"
-                    }
-                },
-                "documentation": "<p>This error is thrown when a request is invalid.</p>",
-                "error": {
-                    "httpStatusCode": 403,
-                    "senderFault": true
-                },
-                "exception": true
-            },
-            "String": {
-                "type": "string"
-            },
-            "ComplexNestedErrorData": {
-                "type": "structure",
-                "members": {
-                    "Foo": {
-                        "shape": "String",
-                        "locationName": "Fooooo"
-                    }
-                }
-            },
-            "InvalidGreeting": {
-                "type": "structure",
-                "members": {
-                    "Message": {
-                        "shape": "String"
-                    }
-                },
-                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
-                "error": {
-                    "httpStatusCode": 400,
-                    "senderFault": true
-                },
-                "exception": true
-            },
             "GreetingWithErrorsOutput": {
                 "type": "structure",
                 "members": {
@@ -575,6 +517,9 @@
                         "locationName": "X-Greeting"
                     }
                 }
+            },
+            "String": {
+                "type": "string"
             }
         },
         "cases": [
@@ -590,17 +535,6 @@
                     "output": {
                         "shape": "GreetingWithErrorsOutput"
                     },
-                    "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "ComplexError"
-                        },
-                        {
-                            "shape": "FooError"
-                        }
-                    ],
                     "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
                     "idempotent": true
                 },
@@ -628,17 +562,6 @@
                     "output": {
                         "shape": "GreetingWithErrorsOutput"
                     },
-                    "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "ComplexError"
-                        },
-                        {
-                            "shape": "FooError"
-                        }
-                    ],
                     "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
                     "idempotent": true
                 },
@@ -672,64 +595,6 @@
                 },
                 "exception": true,
                 "fault": true
-            },
-            "ComplexError": {
-                "type": "structure",
-                "members": {
-                    "Header": {
-                        "shape": "String",
-                        "location": "header",
-                        "locationName": "X-Header"
-                    },
-                    "TopLevel": {
-                        "shape": "String"
-                    },
-                    "Nested": {
-                        "shape": "ComplexNestedErrorData"
-                    }
-                },
-                "documentation": "<p>This error is thrown when a request is invalid.</p>",
-                "error": {
-                    "httpStatusCode": 403,
-                    "senderFault": true
-                },
-                "exception": true
-            },
-            "String": {
-                "type": "string"
-            },
-            "ComplexNestedErrorData": {
-                "type": "structure",
-                "members": {
-                    "Foo": {
-                        "shape": "String",
-                        "locationName": "Fooooo"
-                    }
-                }
-            },
-            "InvalidGreeting": {
-                "type": "structure",
-                "members": {
-                    "Message": {
-                        "shape": "String"
-                    }
-                },
-                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
-                "error": {
-                    "httpStatusCode": 400,
-                    "senderFault": true
-                },
-                "exception": true
-            },
-            "GreetingWithErrorsOutput": {
-                "type": "structure",
-                "members": {
-                    "greeting": {
-                        "shape": "String",
-                        "location": "header",
-                        "locationName": "X-Greeting"
-                    }
-                }
             }
         },
         "cases": [
@@ -742,25 +607,17 @@
                         "requestUri": "/GreetingWithErrors",
                         "responseCode": 200
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
                     "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "ComplexError"
-                        },
                         {
                             "shape": "FooError"
                         }
-                    ],
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Serializes the X-Amzn-ErrorType header. For an example service, see Amazon EKS.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -777,25 +634,17 @@
                         "requestUri": "/GreetingWithErrors",
                         "responseCode": 200
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
                     "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "ComplexError"
-                        },
                         {
                             "shape": "FooError"
                         }
-                    ],
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Some X-Amzn-Errortype headers contain URLs. Clients need to split the URL on ':' and take only the first half of the string. For example, 'ValidationException:http://internal.amazon.com/coral/com.amazon.coral.validate/'\nis to be interpreted as 'ValidationException'.\n\nFor an example service see Amazon Polly.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -812,25 +661,17 @@
                         "requestUri": "/GreetingWithErrors",
                         "responseCode": 200
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
                     "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "ComplexError"
-                        },
                         {
                             "shape": "FooError"
                         }
-                    ],
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "X-Amzn-Errortype might contain a URL and a namespace. Client should extract only the shape name. This is a pathalogical case that might not actually happen in any deployed AWS service.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -847,25 +688,17 @@
                         "requestUri": "/GreetingWithErrors",
                         "responseCode": 200
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
                     "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "ComplexError"
-                        },
                         {
                             "shape": "FooError"
                         }
-                    ],
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "This example uses the 'code' property in the output rather than X-Amzn-Errortype. Some services do this though it's preferable to send the X-Amzn-Errortype. Client implementations must first check for the X-Amzn-Errortype and then check for a top-level 'code' property.\n\nFor example service see Amazon S3 Glacier.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -883,25 +716,17 @@
                         "requestUri": "/GreetingWithErrors",
                         "responseCode": 200
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
                     "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "ComplexError"
-                        },
                         {
                             "shape": "FooError"
                         }
-                    ],
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Some services serialize errors using code, and it might contain a namespace. Clients should just take the last part of the string after '#'.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -919,25 +744,17 @@
                         "requestUri": "/GreetingWithErrors",
                         "responseCode": 200
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
                     "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "ComplexError"
-                        },
                         {
                             "shape": "FooError"
                         }
-                    ],
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Some services serialize errors using code, and it might contain a namespace. It also might contain a URI. Clients should just take the last part of the string after '#' and before \":\". This is a pathalogical case that might not occur in any deployed AWS service.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -955,25 +772,17 @@
                         "requestUri": "/GreetingWithErrors",
                         "responseCode": 200
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
                     "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "ComplexError"
-                        },
                         {
                             "shape": "FooError"
                         }
-                    ],
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Some services serialize errors using __type.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -991,25 +800,17 @@
                         "requestUri": "/GreetingWithErrors",
                         "responseCode": 200
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
                     "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "ComplexError"
-                        },
                         {
                             "shape": "FooError"
                         }
-                    ],
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Some services serialize errors using __type, and it might contain a namespace. Clients should just take the last part of the string after '#'.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -1027,25 +828,17 @@
                         "requestUri": "/GreetingWithErrors",
                         "responseCode": 200
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
                     "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "ComplexError"
-                        },
                         {
                             "shape": "FooError"
                         }
-                    ],
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Some services serialize errors using __type, and it might contain a namespace. It also might contain a URI. Clients should just take the last part of the string after '#' and before \":\". This is a pathalogical case that might not occur in any deployed AWS service.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -1063,16 +856,6 @@
             "apiVersion": "2019-12-16"
         },
         "shapes": {
-            "FooError": {
-                "type": "structure",
-                "members": {},
-                "documentation": "<p>This error has test cases that test some of the dark corners of Amazon service framework history. It should only be implemented by clients.</p>",
-                "error": {
-                    "httpStatusCode": 500
-                },
-                "exception": true,
-                "fault": true
-            },
             "ComplexError": {
                 "type": "structure",
                 "members": {
@@ -1106,30 +889,6 @@
                         "locationName": "Fooooo"
                     }
                 }
-            },
-            "InvalidGreeting": {
-                "type": "structure",
-                "members": {
-                    "Message": {
-                        "shape": "String"
-                    }
-                },
-                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
-                "error": {
-                    "httpStatusCode": 400,
-                    "senderFault": true
-                },
-                "exception": true
-            },
-            "GreetingWithErrorsOutput": {
-                "type": "structure",
-                "members": {
-                    "greeting": {
-                        "shape": "String",
-                        "location": "header",
-                        "locationName": "X-Greeting"
-                    }
-                }
             }
         },
         "cases": [
@@ -1142,25 +901,17 @@
                         "requestUri": "/GreetingWithErrors",
                         "responseCode": 200
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
                     "errors": [
                         {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
                             "shape": "ComplexError"
-                        },
-                        {
-                            "shape": "FooError"
                         }
-                    ],
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Serializes a complex error with no message member",
-                "result": {
+                "errorCode": "ComplexError",
+                "error": {
                     "Header": "Header",
                     "TopLevel": "Top level",
                     "Nested": {
@@ -1186,24 +937,16 @@
                         "requestUri": "/GreetingWithErrors",
                         "responseCode": 200
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
                     "errors": [
                         {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
                             "shape": "ComplexError"
-                        },
-                        {
-                            "shape": "FooError"
                         }
-                    ],
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true
+                    ]
                 },
-                "result": {},
+                "errorCode": "ComplexError",
+                "error": {},
                 "response": {
                     "status_code": 403,
                     "headers": {
@@ -1222,50 +965,6 @@
             "apiVersion": "2019-12-16"
         },
         "shapes": {
-            "FooError": {
-                "type": "structure",
-                "members": {},
-                "documentation": "<p>This error has test cases that test some of the dark corners of Amazon service framework history. It should only be implemented by clients.</p>",
-                "error": {
-                    "httpStatusCode": 500
-                },
-                "exception": true,
-                "fault": true
-            },
-            "ComplexError": {
-                "type": "structure",
-                "members": {
-                    "Header": {
-                        "shape": "String",
-                        "location": "header",
-                        "locationName": "X-Header"
-                    },
-                    "TopLevel": {
-                        "shape": "String"
-                    },
-                    "Nested": {
-                        "shape": "ComplexNestedErrorData"
-                    }
-                },
-                "documentation": "<p>This error is thrown when a request is invalid.</p>",
-                "error": {
-                    "httpStatusCode": 403,
-                    "senderFault": true
-                },
-                "exception": true
-            },
-            "String": {
-                "type": "string"
-            },
-            "ComplexNestedErrorData": {
-                "type": "structure",
-                "members": {
-                    "Foo": {
-                        "shape": "String",
-                        "locationName": "Fooooo"
-                    }
-                }
-            },
             "InvalidGreeting": {
                 "type": "structure",
                 "members": {
@@ -1280,15 +979,8 @@
                 },
                 "exception": true
             },
-            "GreetingWithErrorsOutput": {
-                "type": "structure",
-                "members": {
-                    "greeting": {
-                        "shape": "String",
-                        "location": "header",
-                        "locationName": "X-Greeting"
-                    }
-                }
+            "String": {
+                "type": "string"
             }
         },
         "cases": [
@@ -1301,25 +993,18 @@
                         "requestUri": "/GreetingWithErrors",
                         "responseCode": 200
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
                     "errors": [
                         {
                             "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "ComplexError"
-                        },
-                        {
-                            "shape": "FooError"
                         }
-                    ],
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Parses simple JSON errors",
-                "result": {
+                "errorCode": "InvalidGreeting",
+                "errorMessage": "Hi",
+                "error": {
                     "Message": "Hi"
                 },
                 "response": {

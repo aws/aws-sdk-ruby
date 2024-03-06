@@ -211,43 +211,6 @@
             },
             "String": {
                 "type": "string"
-            },
-            "ComplexError": {
-                "type": "structure",
-                "members": {
-                    "TopLevel": {
-                        "shape": "String"
-                    },
-                    "Nested": {
-                        "shape": "ComplexNestedErrorData"
-                    }
-                },
-                "documentation": "<p>This error is thrown when a request is invalid.</p>",
-                "exception": true
-            },
-            "ComplexNestedErrorData": {
-                "type": "structure",
-                "members": {
-                    "Foo": {
-                        "shape": "String",
-                        "locationName": "Fooooo"
-                    }
-                }
-            },
-            "FooError": {
-                "type": "structure",
-                "members": {},
-                "documentation": "<p>This error has test cases that test some of the dark corners of Amazon service framework history. It should only be implemented by clients.</p>",
-                "exception": true,
-                "fault": true
-            },
-            "GreetingWithErrorsOutput": {
-                "type": "structure",
-                "members": {
-                    "greeting": {
-                        "shape": "String"
-                    }
-                }
             }
         },
         "cases": [
@@ -259,25 +222,18 @@
                         "method": "POST",
                         "requestUri": "/"
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
                     "errors": [
                         {
                             "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "FooError"
-                        },
-                        {
-                            "shape": "ComplexError"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Parses simple JSON errors",
-                "result": {
+                "errorCode": "InvalidGreeting",
+                "errorMessage": "Hi",
+                "error": {
                     "Message": "Hi"
                 },
                 "response": {
@@ -299,19 +255,6 @@
             "targetPrefix": "JsonProtocol"
         },
         "shapes": {
-            "InvalidGreeting": {
-                "type": "structure",
-                "members": {
-                    "Message": {
-                        "shape": "String"
-                    }
-                },
-                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
-                "exception": true
-            },
-            "String": {
-                "type": "string"
-            },
             "ComplexError": {
                 "type": "structure",
                 "members": {
@@ -325,27 +268,15 @@
                 "documentation": "<p>This error is thrown when a request is invalid.</p>",
                 "exception": true
             },
+            "String": {
+                "type": "string"
+            },
             "ComplexNestedErrorData": {
                 "type": "structure",
                 "members": {
                     "Foo": {
                         "shape": "String",
                         "locationName": "Fooooo"
-                    }
-                }
-            },
-            "FooError": {
-                "type": "structure",
-                "members": {},
-                "documentation": "<p>This error has test cases that test some of the dark corners of Amazon service framework history. It should only be implemented by clients.</p>",
-                "exception": true,
-                "fault": true
-            },
-            "GreetingWithErrorsOutput": {
-                "type": "structure",
-                "members": {
-                    "greeting": {
-                        "shape": "String"
                     }
                 }
             }
@@ -359,25 +290,17 @@
                         "method": "POST",
                         "requestUri": "/"
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
                     "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "FooError"
-                        },
                         {
                             "shape": "ComplexError"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Parses a complex error with no message member",
-                "result": {
+                "errorCode": "ComplexError",
+                "error": {
                     "TopLevel": "Top level",
                     "Nested": {
                         "Foo": "bar"
@@ -399,24 +322,16 @@
                         "method": "POST",
                         "requestUri": "/"
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
                     "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
-                            "shape": "FooError"
-                        },
                         {
                             "shape": "ComplexError"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
-                    "idempotent": true
+                    ]
                 },
-                "result": {},
+                "errorCode": "ComplexError",
+                "error": {},
                 "response": {
                     "status_code": 400,
                     "headers": {
@@ -436,55 +351,12 @@
             "targetPrefix": "JsonProtocol"
         },
         "shapes": {
-            "InvalidGreeting": {
-                "type": "structure",
-                "members": {
-                    "Message": {
-                        "shape": "String"
-                    }
-                },
-                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
-                "exception": true
-            },
-            "String": {
-                "type": "string"
-            },
-            "ComplexError": {
-                "type": "structure",
-                "members": {
-                    "TopLevel": {
-                        "shape": "String"
-                    },
-                    "Nested": {
-                        "shape": "ComplexNestedErrorData"
-                    }
-                },
-                "documentation": "<p>This error is thrown when a request is invalid.</p>",
-                "exception": true
-            },
-            "ComplexNestedErrorData": {
-                "type": "structure",
-                "members": {
-                    "Foo": {
-                        "shape": "String",
-                        "locationName": "Fooooo"
-                    }
-                }
-            },
             "FooError": {
                 "type": "structure",
                 "members": {},
                 "documentation": "<p>This error has test cases that test some of the dark corners of Amazon service framework history. It should only be implemented by clients.</p>",
                 "exception": true,
                 "fault": true
-            },
-            "GreetingWithErrorsOutput": {
-                "type": "structure",
-                "members": {
-                    "greeting": {
-                        "shape": "String"
-                    }
-                }
             }
         },
         "cases": [
@@ -496,25 +368,17 @@
                         "method": "POST",
                         "requestUri": "/"
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
                     "errors": [
                         {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
                             "shape": "FooError"
-                        },
-                        {
-                            "shape": "ComplexError"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Serializes the X-Amzn-ErrorType header. For an example service, see Amazon EKS.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -530,25 +394,17 @@
                         "method": "POST",
                         "requestUri": "/"
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
                     "errors": [
                         {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
                             "shape": "FooError"
-                        },
-                        {
-                            "shape": "ComplexError"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Some X-Amzn-Errortype headers contain URLs. Clients need to split the URL on ':' and take only the first half of the string. For example, 'ValidationException:http://internal.amazon.com/coral/com.amazon.coral.validate/'\nis to be interpreted as 'ValidationException'.\n\nFor an example service see Amazon Polly.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -564,25 +420,17 @@
                         "method": "POST",
                         "requestUri": "/"
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
                     "errors": [
                         {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
                             "shape": "FooError"
-                        },
-                        {
-                            "shape": "ComplexError"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "X-Amzn-Errortype might contain a URL and a namespace. Client should extract only the shape name. This is a pathalogical case that might not actually happen in any deployed AWS service.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -598,25 +446,17 @@
                         "method": "POST",
                         "requestUri": "/"
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
                     "errors": [
                         {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
                             "shape": "FooError"
-                        },
-                        {
-                            "shape": "ComplexError"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "This example uses the 'code' property in the output rather than X-Amzn-Errortype. Some services do this though it's preferable to send the X-Amzn-Errortype. Client implementations must first check for the X-Amzn-Errortype and then check for a top-level 'code' property.\n\nFor example service see Amazon S3 Glacier.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -633,25 +473,17 @@
                         "method": "POST",
                         "requestUri": "/"
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
                     "errors": [
                         {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
                             "shape": "FooError"
-                        },
-                        {
-                            "shape": "ComplexError"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Some services serialize errors using code, and it might contain a namespace. Clients should just take the last part of the string after '#'.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -668,25 +500,17 @@
                         "method": "POST",
                         "requestUri": "/"
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
                     "errors": [
                         {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
                             "shape": "FooError"
-                        },
-                        {
-                            "shape": "ComplexError"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Some services serialize errors using code, and it might contain a namespace. It also might contain a URI. Clients should just take the last part of the string after '#' and before \":\". This is a pathalogical case that might not occur in any deployed AWS service.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -703,25 +527,17 @@
                         "method": "POST",
                         "requestUri": "/"
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
                     "errors": [
                         {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
                             "shape": "FooError"
-                        },
-                        {
-                            "shape": "ComplexError"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Some services serialize errors using __type.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -738,25 +554,17 @@
                         "method": "POST",
                         "requestUri": "/"
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
                     "errors": [
                         {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
                             "shape": "FooError"
-                        },
-                        {
-                            "shape": "ComplexError"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Some services serialize errors using __type, and it might contain a namespace. Clients should just take the last part of the string after '#'.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -773,25 +581,17 @@
                         "method": "POST",
                         "requestUri": "/"
                     },
-                    "output": {
-                        "shape": "GreetingWithErrorsOutput"
-                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
                     "errors": [
                         {
-                            "shape": "InvalidGreeting"
-                        },
-                        {
                             "shape": "FooError"
-                        },
-                        {
-                            "shape": "ComplexError"
                         }
-                    ],
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
-                    "idempotent": true
+                    ]
                 },
                 "description": "Some services serialize errors using __type, and it might contain a namespace. It also might contain a URI. Clients should just take the last part of the string after '#' and before \":\". This is a pathalogical case that might not occur in any deployed AWS service.",
-                "result": {},
+                "errorCode": "FooError",
+                "error": {},
                 "response": {
                     "status_code": 500,
                     "headers": {
@@ -1317,43 +1117,6 @@
             "targetPrefix": "JsonProtocol"
         },
         "shapes": {
-            "ErrorWithoutMembers": {
-                "type": "structure",
-                "members": {},
-                "exception": true,
-                "fault": true
-            },
-            "ErrorWithMembers": {
-                "type": "structure",
-                "members": {
-                    "Code": {
-                        "shape": "String"
-                    },
-                    "ComplexData": {
-                        "shape": "KitchenSink"
-                    },
-                    "IntegerField": {
-                        "shape": "Integer"
-                    },
-                    "ListField": {
-                        "shape": "ListOfStrings"
-                    },
-                    "MapField": {
-                        "shape": "MapOfStrings"
-                    },
-                    "Message": {
-                        "shape": "String"
-                    },
-                    "StringField": {
-                        "shape": "String",
-                        "documentation": "<p>abc</p>"
-                    }
-                },
-                "exception": true
-            },
-            "String": {
-                "type": "string"
-            },
             "KitchenSink": {
                 "type": "structure",
                 "members": {
@@ -1438,25 +1201,6 @@
                     }
                 }
             },
-            "Integer": {
-                "type": "integer",
-                "box": true
-            },
-            "ListOfStrings": {
-                "type": "list",
-                "member": {
-                    "shape": "String"
-                }
-            },
-            "MapOfStrings": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "String"
-                }
-            },
             "Blob": {
                 "type": "blob"
             },
@@ -1480,6 +1224,10 @@
                 "type": "timestamp",
                 "timestampFormat": "rfc822"
             },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
             "SyntheticTimestamp_date_time": {
                 "type": "timestamp",
                 "timestampFormat": "iso8601"
@@ -1497,6 +1245,12 @@
                 "type": "list",
                 "member": {
                     "shape": "MapOfStrings"
+                }
+            },
+            "ListOfStrings": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
                 }
             },
             "ListOfStructs": {
@@ -1525,6 +1279,15 @@
                 },
                 "value": {
                     "shape": "MapOfStrings"
+                }
+            },
+            "MapOfStrings": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
                 }
             },
             "MapOfStructs": {
@@ -1559,6 +1322,9 @@
                     }
                 }
             },
+            "String": {
+                "type": "string"
+            },
             "StructWithJsonName": {
                 "type": "structure",
                 "members": {
@@ -1587,15 +1353,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses operations with empty JSON bodies",
                 "result": {},
@@ -1617,15 +1375,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses string shapes",
                 "result": {
@@ -1649,15 +1399,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses integer shapes",
                 "result": {
@@ -1681,15 +1423,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses long shapes",
                 "result": {
@@ -1713,15 +1447,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses float shapes",
                 "result": {
@@ -1745,15 +1471,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses double shapes",
                 "result": {
@@ -1777,15 +1495,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses boolean shapes (true)",
                 "result": {
@@ -1809,15 +1519,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses boolean (false)",
                 "result": {
@@ -1841,15 +1543,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses blob shapes",
                 "result": {
@@ -1873,15 +1567,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses timestamp shapes",
                 "result": {
@@ -1905,15 +1591,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses iso8601 timestamps",
                 "result": {
@@ -1937,15 +1615,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses httpdate timestamps",
                 "result": {
@@ -1969,15 +1639,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses list shapes",
                 "result": {
@@ -2005,15 +1667,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses list of map shapes",
                 "result": {
@@ -2044,15 +1698,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses list of list shapes",
                 "result": {
@@ -2087,15 +1733,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses list of structure shapes",
                 "result": {
@@ -2126,15 +1764,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses list of recursive structure shapes",
                 "result": {
@@ -2170,15 +1800,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses map shapes",
                 "result": {
@@ -2205,15 +1827,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses map of list shapes",
                 "result": {
@@ -2246,15 +1860,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses map of map shapes",
                 "result": {
@@ -2287,15 +1893,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses map of structure shapes",
                 "result": {
@@ -2326,15 +1924,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses map of recursive structure shapes",
                 "result": {
@@ -2370,15 +1960,7 @@
                     },
                     "output": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Parses the request id from the response",
                 "result": {},

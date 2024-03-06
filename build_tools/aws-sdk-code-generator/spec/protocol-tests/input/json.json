@@ -709,43 +709,6 @@
             "targetPrefix": "JsonProtocol"
         },
         "shapes": {
-            "ErrorWithoutMembers": {
-                "type": "structure",
-                "members": {},
-                "exception": true,
-                "fault": true
-            },
-            "ErrorWithMembers": {
-                "type": "structure",
-                "members": {
-                    "Code": {
-                        "shape": "String"
-                    },
-                    "ComplexData": {
-                        "shape": "KitchenSink"
-                    },
-                    "IntegerField": {
-                        "shape": "Integer"
-                    },
-                    "ListField": {
-                        "shape": "ListOfStrings"
-                    },
-                    "MapField": {
-                        "shape": "MapOfStrings"
-                    },
-                    "Message": {
-                        "shape": "String"
-                    },
-                    "StringField": {
-                        "shape": "String",
-                        "documentation": "<p>abc</p>"
-                    }
-                },
-                "exception": true
-            },
-            "String": {
-                "type": "string"
-            },
             "KitchenSink": {
                 "type": "structure",
                 "members": {
@@ -830,25 +793,6 @@
                     }
                 }
             },
-            "Integer": {
-                "type": "integer",
-                "box": true
-            },
-            "ListOfStrings": {
-                "type": "list",
-                "member": {
-                    "shape": "String"
-                }
-            },
-            "MapOfStrings": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "String"
-                }
-            },
             "Blob": {
                 "type": "blob"
             },
@@ -872,6 +816,10 @@
                 "type": "timestamp",
                 "timestampFormat": "rfc822"
             },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
             "SyntheticTimestamp_date_time": {
                 "type": "timestamp",
                 "timestampFormat": "iso8601"
@@ -889,6 +837,12 @@
                 "type": "list",
                 "member": {
                     "shape": "MapOfStrings"
+                }
+            },
+            "ListOfStrings": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
                 }
             },
             "ListOfStructs": {
@@ -917,6 +871,15 @@
                 },
                 "value": {
                     "shape": "MapOfStrings"
+                }
+            },
+            "MapOfStrings": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
                 }
             },
             "MapOfStructs": {
@@ -951,6 +914,9 @@
                     }
                 }
             },
+            "String": {
+                "type": "string"
+            },
             "StructWithJsonName": {
                 "type": "structure",
                 "members": {
@@ -979,15 +945,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes string shapes",
                 "params": {
@@ -1013,15 +971,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes string shapes with jsonvalue trait",
                 "params": {
@@ -1047,15 +997,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes integer shapes",
                 "params": {
@@ -1081,15 +1023,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes long shapes",
                 "params": {
@@ -1115,15 +1049,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes float shapes",
                 "params": {
@@ -1149,15 +1075,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes double shapes",
                 "params": {
@@ -1183,15 +1101,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes blob shapes",
                 "params": {
@@ -1217,15 +1127,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes boolean shapes (true)",
                 "params": {
@@ -1251,15 +1153,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes boolean shapes (false)",
                 "params": {
@@ -1285,15 +1179,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes timestamp shapes",
                 "params": {
@@ -1319,15 +1205,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes timestamp shapes with iso8601 timestampFormat",
                 "params": {
@@ -1353,15 +1231,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes timestamp shapes with httpdate timestampFormat",
                 "params": {
@@ -1387,15 +1257,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes timestamp shapes with unixTimestamp timestampFormat",
                 "params": {
@@ -1421,15 +1283,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes list shapes",
                 "params": {
@@ -1459,15 +1313,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes empty list shapes",
                 "params": {
@@ -1493,15 +1339,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes list of map shapes",
                 "params": {
@@ -1537,15 +1375,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes list of structure shapes",
                 "params": {
@@ -1581,15 +1411,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes list of recursive structure shapes",
                 "params": {
@@ -1627,15 +1449,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes map shapes",
                 "params": {
@@ -1664,15 +1478,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes empty map shapes",
                 "params": {
@@ -1698,15 +1504,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes map of list shapes",
                 "params": {
@@ -1741,15 +1539,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes map of structure shapes",
                 "params": {
@@ -1782,15 +1572,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes map of recursive structure shapes",
                 "params": {
@@ -1828,15 +1610,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes structure shapes",
                 "params": {
@@ -1864,15 +1638,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes structure members with locationName traits",
                 "params": {
@@ -1900,15 +1666,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes empty structure shapes",
                 "params": {
@@ -1934,15 +1692,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes structure which have no members",
                 "params": {
@@ -1968,15 +1718,7 @@
                     },
                     "input": {
                         "shape": "KitchenSink"
-                    },
-                    "errors": [
-                        {
-                            "shape": "ErrorWithMembers"
-                        },
-                        {
-                            "shape": "ErrorWithoutMembers"
-                        }
-                    ]
+                    }
                 },
                 "description": "Serializes recursive structure shapes",
                 "params": {
