@@ -243,27 +243,32 @@ module Aws
               ])
             end
 
-            it 'supports flattened lists with member locationName trait' do
+            it 'does not support flattened lists with member locationName trait' do
               shapes['StructureList']['flattened'] = true
+              # locationName trait on targeted member is ignored when serializing
+              # serializing flattened lists in structures
               shapes['StructureList']['member']['locationName'] = 'ListMember'
+
               xml = <<-XML.strip
               <xml>
-                <ListMember>
+                <NestedList>
                   <String>v1</String>
-                </ListMember>
-                <ListMember>
+                </NestedList>
+                <NestedList>
                   <String>v2</String>
-                </ListMember>
-                <ListMember>
+                </NestedList>
+                <NestedList>
                   <String>v3</String>
-                </ListMember>
+                </NestedList>
               </xml>
               XML
-              expect(parse(xml)).to eq(nested_list: [
-                { string: 'v1' },
-                { string: 'v2' },
-                { string: 'v3' },
-              ])
+              expect(parse(xml)).to eq(
+                nested_list: [
+                  { string: 'v1' },
+                  { string: 'v2' },
+                  { string: 'v3' }
+                ]
+              )
             end
 
           end
