@@ -36,7 +36,7 @@ module Aws
           return
         end
         if flat?(ref)
-          if name = query_name(member_ref)
+          if (name = query_name(ref))
             parts = prefix.split('.')
             parts.pop
             parts.push(name)
