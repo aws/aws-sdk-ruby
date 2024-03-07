@@ -1101,66 +1101,6 @@
         ]
     },
     {
-        "description": "Test cases for HttpPayloadTraitsWithMediaType operation",
-        "metadata": {
-            "protocol": "rest-xml",
-            "apiVersion": "2019-12-16"
-        },
-        "shapes": {
-            "HttpPayloadTraitsWithMediaTypeInputOutput": {
-                "type": "structure",
-                "members": {
-                    "foo": {
-                        "shape": "String",
-                        "location": "header",
-                        "locationName": "X-Foo"
-                    },
-                    "blob": {
-                        "shape": "TextPlainBlob"
-                    }
-                },
-                "payload": "blob"
-            },
-            "String": {
-                "type": "string"
-            },
-            "TextPlainBlob": {
-                "type": "blob"
-            }
-        },
-        "cases": [
-            {
-                "id": "HttpPayloadTraitsWithMediaTypeWithBlob",
-                "given": {
-                    "name": "HttpPayloadTraitsWithMediaType",
-                    "http": {
-                        "method": "POST",
-                        "requestUri": "/HttpPayloadTraitsWithMediaType",
-                        "responseCode": 200
-                    },
-                    "input": {
-                        "shape": "HttpPayloadTraitsWithMediaTypeInputOutput"
-                    },
-                    "documentation": "<p>This example uses a <code>@mediaType</code> trait on the payload to force a custom content-type to be serialized.</p>"
-                },
-                "description": "Serializes a blob in the HTTP payload with a content-type",
-                "params": {
-                    "foo": "Foo",
-                    "blob": "blobby blob blob"
-                },
-                "serialized": {
-                    "method": "POST",
-                    "uri": "/HttpPayloadTraitsWithMediaType",
-                    "body": "blobby blob blob",
-                    "headers": {
-                        "Content-Type": "text/plain",
-                        "X-Foo": "Foo"
-                    }
-                }
-            }
-        ]
-    },
-    {
         "description": "Test cases for HttpPayloadWithMemberXmlName operation",
         "metadata": {
             "protocol": "rest-xml",
@@ -3314,10 +3254,10 @@
                         "shape": "Boolean"
                     },
                     "byteValue": {
-                        "shape": "Byte"
+                        "shape": "Integer"
                     },
                     "shortValue": {
-                        "shape": "Short"
+                        "shape": "Integer"
                     },
                     "integerValue": {
                         "shape": "Integer"
@@ -3339,14 +3279,6 @@
             },
             "Boolean": {
                 "type": "boolean",
-                "box": true
-            },
-            "Byte": {
-                "type": "byte",
-                "box": true
-            },
-            "Short": {
-                "type": "short",
                 "box": true
             },
             "Integer": {

@@ -1037,10 +1037,10 @@
                         "shape": "Blob"
                     },
                     "defaultByte": {
-                        "shape": "Byte"
+                        "shape": "Integer"
                     },
                     "defaultShort": {
-                        "shape": "Short"
+                        "shape": "Integer"
                     },
                     "defaultInteger": {
                         "shape": "Integer"
@@ -1073,10 +1073,10 @@
                         "shape": "Blob"
                     },
                     "zeroByte": {
-                        "shape": "Byte"
+                        "shape": "Integer"
                     },
                     "zeroShort": {
-                        "shape": "Short"
+                        "shape": "Integer"
                     },
                     "zeroInteger": {
                         "shape": "Integer"
@@ -1115,14 +1115,6 @@
             },
             "Blob": {
                 "type": "blob"
-            },
-            "Byte": {
-                "type": "byte",
-                "box": true
-            },
-            "Short": {
-                "type": "short",
-                "box": true
             },
             "Integer": {
                 "type": "integer",
@@ -1449,10 +1441,10 @@
                         "shape": "Blob"
                     },
                     "requiredByte": {
-                        "shape": "Byte"
+                        "shape": "Integer"
                     },
                     "requiredShort": {
-                        "shape": "Short"
+                        "shape": "Integer"
                     },
                     "requiredInteger": {
                         "shape": "Integer"
@@ -1489,14 +1481,6 @@
             },
             "Blob": {
                 "type": "blob"
-            },
-            "Byte": {
-                "type": "byte",
-                "box": true
-            },
-            "Short": {
-                "type": "short",
-                "box": true
             },
             "Integer": {
                 "type": "integer",

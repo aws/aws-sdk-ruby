@@ -1150,65 +1150,6 @@
         ]
     },
     {
-        "description": "Test cases for HttpPayloadTraitsWithMediaType operation",
-        "metadata": {
-            "protocol": "rest-json",
-            "apiVersion": "2019-12-16"
-        },
-        "shapes": {
-            "HttpPayloadTraitsWithMediaTypeInputOutput": {
-                "type": "structure",
-                "members": {
-                    "foo": {
-                        "shape": "String",
-                        "location": "header",
-                        "locationName": "X-Foo"
-                    },
-                    "blob": {
-                        "shape": "TextPlainBlob"
-                    }
-                },
-                "payload": "blob"
-            },
-            "String": {
-                "type": "string"
-            },
-            "TextPlainBlob": {
-                "type": "blob"
-            }
-        },
-        "cases": [
-            {
-                "id": "RestJsonHttpPayloadTraitsWithMediaTypeWithBlob",
-                "given": {
-                    "name": "HttpPayloadTraitsWithMediaType",
-                    "http": {
-                        "method": "POST",
-                        "requestUri": "/HttpPayloadTraitsWithMediaType",
-                        "responseCode": 200
-                    },
-                    "output": {
-                        "shape": "HttpPayloadTraitsWithMediaTypeInputOutput"
-                    },
-                    "documentation": "<p>This example uses a <code>@mediaType</code> trait on the payload to force a custom content-type to be serialized.</p>"
-                },
-                "description": "Serializes a blob in the HTTP payload with a content-type",
-                "result": {
-                    "foo": "Foo",
-                    "blob": "blobby blob blob"
-                },
-                "response": {
-                    "status_code": 200,
-                    "headers": {
-                        "Content-Type": "text/plain",
-                        "X-Foo": "Foo"
-                    },
-                    "body": "blobby blob blob"
-                }
-            }
-        ]
-    },
-    {
         "description": "Test cases for HttpPayloadWithStructure operation",
         "metadata": {
             "protocol": "rest-json",
@@ -4422,66 +4363,6 @@
                         "X-Foo": "Foo"
                     },
                     "body": ""
-                }
-            }
-        ]
-    },
-    {
-        "description": "Test cases for StreamingTraitsWithMediaType operation",
-        "metadata": {
-            "protocol": "rest-json",
-            "apiVersion": "2019-12-16"
-        },
-        "shapes": {
-            "StreamingTraitsWithMediaTypeInputOutput": {
-                "type": "structure",
-                "members": {
-                    "foo": {
-                        "shape": "String",
-                        "location": "header",
-                        "locationName": "X-Foo"
-                    },
-                    "blob": {
-                        "shape": "StreamingTextPlainBlob"
-                    }
-                },
-                "payload": "blob"
-            },
-            "String": {
-                "type": "string"
-            },
-            "StreamingTextPlainBlob": {
-                "type": "blob",
-                "streaming": true
-            }
-        },
-        "cases": [
-            {
-                "id": "RestJsonStreamingTraitsWithMediaTypeWithBlob",
-                "given": {
-                    "name": "StreamingTraitsWithMediaType",
-                    "http": {
-                        "method": "POST",
-                        "requestUri": "/StreamingTraitsWithMediaType",
-                        "responseCode": 200
-                    },
-                    "output": {
-                        "shape": "StreamingTraitsWithMediaTypeInputOutput"
-                    },
-                    "documentation": "<p>This examples serializes a streaming media-typed blob shape in the request body.</p> <p>This examples uses a <code>@mediaType</code> trait on the payload to force a custom content-type to be serialized.</p>"
-                },
-                "description": "Serializes a blob in the HTTP payload with a content-type",
-                "result": {
-                    "foo": "Foo",
-                    "blob": "blobby blob blob"
-                },
-                "response": {
-                    "status_code": 200,
-                    "headers": {
-                        "Content-Type": "text/plain",
-                        "X-Foo": "Foo"
-                    },
-                    "body": "blobby blob blob"
                 }
             }
         ]
