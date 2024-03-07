@@ -75,7 +75,7 @@ module Aws::WAFV2
     end
 
     class AssociationConfig
-      attr_accessor request_body: ::Hash[("CLOUDFRONT"), Types::RequestBodyAssociatedResourceTypeConfig]
+      attr_accessor request_body: ::Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE"), Types::RequestBodyAssociatedResourceTypeConfig]
       SENSITIVE: []
     end
 
@@ -1560,6 +1560,7 @@ module Aws::WAFV2
 
     class WAFLimitsExceededException
       attr_accessor message: ::String
+      attr_accessor source_type: ::String
       SENSITIVE: []
     end
 

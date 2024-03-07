@@ -78,6 +78,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedGrafana/Client.html#associate_license-instance_method
       def associate_license: (
+                               ?grafana_token: ::String,
                                license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL"),
                                workspace_id: ::String
                              ) -> _AssociateLicenseResponseSuccess

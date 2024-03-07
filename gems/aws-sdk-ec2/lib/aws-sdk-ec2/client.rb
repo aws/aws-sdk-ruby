@@ -3759,11 +3759,7 @@ module Aws::EC2
     # @option params [required, String] :instance_id
     #   The ID of the instance to bundle.
     #
-    #   Type: String
-    #
     #   Default: None
-    #
-    #   Required: Yes
     #
     # @option params [required, Types::Storage] :storage
     #   The bucket in which to store the AMI. You can specify a bucket that
@@ -4584,6 +4580,24 @@ module Aws::EC2
     #
     #   Default: Your user-defined AMI tags are not copied.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the new AMI and new snapshots. You can tag the
+    #   AMI, the snapshots, or both.
+    #
+    #   * To tag the new AMI, the value for `ResourceType` must be `image`.
+    #
+    #   * To tag the new snapshots, the value for `ResourceType` must be
+    #     `snapshot`. The same tag is applied to all the new snapshots.
+    #
+    #   If you specify other values for `ResourceType`, the request fails.
+    #
+    #   To tag an AMI or snapshot after it has been created, see
+    #   [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
+    #
     # @return [Types::CopyImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CopyImageResult#image_id #image_id} => String
@@ -4618,6 +4632,17 @@ module Aws::EC2
     #     destination_outpost_arn: "String",
     #     dry_run: false,
     #     copy_image_tags: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -20027,6 +20052,12 @@ module Aws::EC2
     #
     #  </note>
     #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
+    #
     # @option params [Array<String>] :bundle_ids
     #   The bundle task IDs.
     #
@@ -23268,6 +23299,12 @@ module Aws::EC2
     # Describes the specified attribute of the specified AMI. You can
     # specify only one attribute at a time.
     #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
+    #
     # @option params [required, String] :attribute
     #   The AMI attribute.
     #
@@ -23384,6 +23421,12 @@ module Aws::EC2
     # reference a deregistered AMI are terminated, specifying the ID of the
     # image will eventually return an error indicating that the AMI ID
     # cannot be found.
+    #
+    # <note markdown="1"> The order of the elements in the response, including those within
+    # nested structures, might vary. Applications should not assume the
+    # elements appear in a particular order.
+    #
+    #  </note>
     #
     # @option params [Array<String>] :executable_users
     #   Scopes the images by users with explicit launch permissions. Specify
@@ -52155,8 +52198,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Registers an AMI. When you're creating an AMI, this is the final step
-    # you must complete before you can launch an instance from the AMI. For
+    # Registers an AMI. When you're creating an instance-store backed AMI,
+    # registering the AMI is the final step in the creation process. For
     # more information about creating AMIs, see [Create your own AMI][1] in
     # the *Amazon Elastic Compute Cloud User Guide*.
     #
@@ -52369,6 +52412,18 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the AMI.
+    #
+    #   To tag the AMI, the value for `ResourceType` must be `image`. If you
+    #   specify another value for `ResourceType`, the request fails.
+    #
+    #   To tag an AMI after it has been registered, see [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
+    #
     # @return [Types::RegisterImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterImageResult#image_id #image_id} => String
@@ -52410,6 +52465,17 @@ module Aws::EC2
     #     tpm_support: "v2.0", # accepts v2.0
     #     uefi_data: "StringType",
     #     imds_support: "v2.0", # accepts v2.0
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -58826,7 +58892,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.440.0'
+      context[:gem_version] = '1.441.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

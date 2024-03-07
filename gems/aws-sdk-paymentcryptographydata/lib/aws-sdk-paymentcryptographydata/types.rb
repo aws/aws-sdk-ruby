@@ -376,15 +376,14 @@ module Aws::PaymentCryptographyData
     # @!attribute [rw] key_check_value
     #   The key check value (KCV) of the encryption key. The KCV is used to
     #   check if all parties holding a given key have the same key or to
-    #   detect that a key has changed. Amazon Web Services Payment
-    #   Cryptography calculates the KCV by using standard algorithms,
-    #   typically by encrypting 8 or 16 bytes or "00" or "01" and then
-    #   truncating the result to the first 3 bytes, or 6 hex digits, of the
-    #   resulting cryptogram.
+    #   detect that a key has changed.
+    #
+    #   Amazon Web Services Payment Cryptography computes the KCV according
+    #   to the CMAC specification.
     #   @return [String]
     #
     # @!attribute [rw] plain_text
-    #   The decrypted plaintext data.
+    #   The decrypted plaintext data in hexBinary format.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/DecryptDataOutput AWS API Documentation
@@ -494,11 +493,8 @@ module Aws::PaymentCryptographyData
     #   @return [String]
     #
     # @!attribute [rw] initialization_vector
-    #   An input to cryptographic primitive used to provide the intial
-    #   state. Typically the `InitializationVector` must have a random or
-    #   psuedo-random value, but sometimes it only needs to be unpredictable
-    #   or unique. If you don't provide a value, Amazon Web Services
-    #   Payment Cryptography generates a random value.
+    #   An input used to provide the intial state. If no value is provided,
+    #   Amazon Web Services Payment Cryptography defaults it to zero.
     #   @return [String]
     #
     # @!attribute [rw] key_serial_number
@@ -509,12 +505,7 @@ module Aws::PaymentCryptographyData
     #   @return [String]
     #
     # @!attribute [rw] mode
-    #   The block cipher mode of operation. Block ciphers are designed to
-    #   encrypt a block of data of fixed size, for example, 128 bits. The
-    #   size of the input block is usually same as the size of the encrypted
-    #   output block, while the key length can be different. A mode of
-    #   operation describes how to repeatedly apply a cipher's single-block
-    #   operation to securely transform amounts of data larger than a block.
+    #   The block cipher method to use for encryption.
     #
     #   The default is CBC.
     #   @return [String]
@@ -597,6 +588,53 @@ module Aws::PaymentCryptographyData
       include Aws::Structure
     end
 
+    # Parameters for plaintext encryption using EMV keys.
+    #
+    # @!attribute [rw] initialization_vector
+    #   An input used to provide the intial state. If no value is provided,
+    #   Amazon Web Services Payment Cryptography defaults it to zero.
+    #   @return [String]
+    #
+    # @!attribute [rw] major_key_derivation_mode
+    #   The EMV derivation mode to use for ICC master key derivation as per
+    #   EMV version 4.3 book 2.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The block cipher method to use for encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] pan_sequence_number
+    #   A number that identifies and differentiates payment cards with the
+    #   same Primary Account Number (PAN).
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_account_number
+    #   The Primary Account Number (PAN), a unique identifier for a payment
+    #   credit or debit card and associates the card to a specific account
+    #   holder.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_derivation_data
+    #   The derivation value used to derive the ICC session key. It is
+    #   typically the application transaction counter value padded with
+    #   zeros or previous ARQC value padded with zeros as per EMV version
+    #   4.3 book 2.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/EmvEncryptionAttributes AWS API Documentation
+    #
+    class EmvEncryptionAttributes < Struct.new(
+      :initialization_vector,
+      :major_key_derivation_mode,
+      :mode,
+      :pan_sequence_number,
+      :primary_account_number,
+      :session_derivation_data)
+      SENSITIVE = [:initialization_vector, :primary_account_number]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] encryption_attributes
     #   The encryption key type and attributes for plaintext encryption.
     #   @return [Types::EncryptionDecryptionAttributes]
@@ -608,6 +646,19 @@ module Aws::PaymentCryptographyData
     #
     # @!attribute [rw] plain_text
     #   The plaintext to be encrypted.
+    #
+    #   <note markdown="1"> For encryption using asymmetric keys, plaintext data length is
+    #   constrained by encryption key strength that you define in
+    #   `KeyAlgorithm` and padding type that you define in
+    #   `AsymmetricEncryptionAttributes`. For more information, see [Encrypt
+    #   data][1] in the *Amazon Web Services Payment Cryptography User
+    #   Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/encrypt-data.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/EncryptDataInput AWS API Documentation
@@ -632,11 +683,10 @@ module Aws::PaymentCryptographyData
     # @!attribute [rw] key_check_value
     #   The key check value (KCV) of the encryption key. The KCV is used to
     #   check if all parties holding a given key have the same key or to
-    #   detect that a key has changed. Amazon Web Services Payment
-    #   Cryptography calculates the KCV by using standard algorithms,
-    #   typically by encrypting 8 or 16 bytes or "00" or "01" and then
-    #   truncating the result to the first 3 bytes, or 6 hex digits, of the
-    #   resulting cryptogram.
+    #   detect that a key has changed.
+    #
+    #   Amazon Web Services Payment Cryptography computes the KCV according
+    #   to the CMAC specification.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/EncryptDataOutput AWS API Documentation
@@ -662,6 +712,10 @@ module Aws::PaymentCryptographyData
     #   Parameters that are required to encrypt plaintext data using DUKPT.
     #   @return [Types::DukptEncryptionAttributes]
     #
+    # @!attribute [rw] emv
+    #   Parameters for plaintext encryption using EMV keys.
+    #   @return [Types::EmvEncryptionAttributes]
+    #
     # @!attribute [rw] symmetric
     #   Parameters that are required to perform encryption and decryption
     #   using symmetric keys.
@@ -672,6 +726,7 @@ module Aws::PaymentCryptographyData
     class EncryptionDecryptionAttributes < Struct.new(
       :asymmetric,
       :dukpt,
+      :emv,
       :symmetric,
       :unknown)
       SENSITIVE = []
@@ -680,6 +735,7 @@ module Aws::PaymentCryptographyData
 
       class Asymmetric < EncryptionDecryptionAttributes; end
       class Dukpt < EncryptionDecryptionAttributes; end
+      class Emv < EncryptionDecryptionAttributes; end
       class Symmetric < EncryptionDecryptionAttributes; end
       class Unknown < EncryptionDecryptionAttributes; end
     end
@@ -724,11 +780,10 @@ module Aws::PaymentCryptographyData
     # @!attribute [rw] key_check_value
     #   The key check value (KCV) of the encryption key. The KCV is used to
     #   check if all parties holding a given key have the same key or to
-    #   detect that a key has changed. Amazon Web Services Payment
-    #   Cryptography calculates the KCV by using standard algorithms,
-    #   typically by encrypting 8 or 16 bytes or "00" or "01" and then
-    #   truncating the result to the first 3 bytes, or 6 hex digits, of the
-    #   resulting cryptogram.
+    #   detect that a key has changed.
+    #
+    #   Amazon Web Services Payment Cryptography computes the KCV according
+    #   to the CMAC specification.
     #   @return [String]
     #
     # @!attribute [rw] validation_data
@@ -760,7 +815,8 @@ module Aws::PaymentCryptographyData
     #   @return [Integer]
     #
     # @!attribute [rw] message_data
-    #   The data for which a MAC is under generation.
+    #   The data for which a MAC is under generation. This value must be
+    #   hexBinary.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/GenerateMacInput AWS API Documentation
@@ -782,11 +838,10 @@ module Aws::PaymentCryptographyData
     # @!attribute [rw] key_check_value
     #   The key check value (KCV) of the encryption key. The KCV is used to
     #   check if all parties holding a given key have the same key or to
-    #   detect that a key has changed. Amazon Web Services Payment
-    #   Cryptography calculates the KCV by using standard algorithms,
-    #   typically by encrypting 8 or 16 bytes or "00" or "01" and then
-    #   truncating the result to the first 3 bytes, or 6 hex digits, of the
-    #   resulting cryptogram.
+    #   detect that a key has changed.
+    #
+    #   Amazon Web Services Payment Cryptography computes the KCV according
+    #   to the CMAC specification.
     #   @return [String]
     #
     # @!attribute [rw] mac
@@ -870,11 +925,10 @@ module Aws::PaymentCryptographyData
     # @!attribute [rw] encryption_key_check_value
     #   The key check value (KCV) of the encryption key. The KCV is used to
     #   check if all parties holding a given key have the same key or to
-    #   detect that a key has changed. Amazon Web Services Payment
-    #   Cryptography calculates the KCV by using standard algorithms,
-    #   typically by encrypting 8 or 16 bytes or "00" or "01" and then
-    #   truncating the result to the first 3 bytes, or 6 hex digits, of the
-    #   resulting cryptogram.
+    #   detect that a key has changed.
+    #
+    #   Amazon Web Services Payment Cryptography computes the KCV according
+    #   to the CMAC specification.
     #   @return [String]
     #
     # @!attribute [rw] generation_key_arn
@@ -885,11 +939,10 @@ module Aws::PaymentCryptographyData
     # @!attribute [rw] generation_key_check_value
     #   The key check value (KCV) of the encryption key. The KCV is used to
     #   check if all parties holding a given key have the same key or to
-    #   detect that a key has changed. Amazon Web Services Payment
-    #   Cryptography calculates the KCV by using standard algorithms,
-    #   typically by encrypting 8 or 16 bytes or "00" or "01" and then
-    #   truncating the result to the first 3 bytes, or 6 hex digits, of the
-    #   resulting cryptogram.
+    #   detect that a key has changed.
+    #
+    #   Amazon Web Services Payment Cryptography computes the KCV according
+    #   to the CMAC specification.
     #   @return [String]
     #
     # @!attribute [rw] pin_data
@@ -1168,7 +1221,7 @@ module Aws::PaymentCryptographyData
     #
     # @!attribute [rw] dukpt_iso_9797_algorithm_3
     #   Parameters that are required for MAC generation or verification
-    #   using DUKPT ISO 9797 algorithm2.
+    #   using DUKPT ISO 9797 algorithm3.
     #   @return [Types::MacAlgorithmDukpt]
     #
     # @!attribute [rw] emv_mac
@@ -1357,11 +1410,10 @@ module Aws::PaymentCryptographyData
     # @!attribute [rw] key_check_value
     #   The key check value (KCV) of the encryption key. The KCV is used to
     #   check if all parties holding a given key have the same key or to
-    #   detect that a key has changed. Amazon Web Services Payment
-    #   Cryptography calculates the KCV by using standard algorithms,
-    #   typically by encrypting 8 or 16 bytes or "00" or "01" and then
-    #   truncating the result to the first 3 bytes, or 6 hex digits, of the
-    #   resulting cryptogram.
+    #   detect that a key has changed.
+    #
+    #   Amazon Web Services Payment Cryptography computes the KCV according
+    #   to the CMAC specification.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/ReEncryptDataOutput AWS API Documentation
@@ -1635,20 +1687,12 @@ module Aws::PaymentCryptographyData
     # Parameters requried to encrypt plaintext data using symmetric keys.
     #
     # @!attribute [rw] initialization_vector
-    #   An input to cryptographic primitive used to provide the intial
-    #   state. The `InitializationVector` is typically required have a
-    #   random or psuedo-random value, but sometimes it only needs to be
-    #   unpredictable or unique. If a value is not provided, Amazon Web
-    #   Services Payment Cryptography generates a random value.
+    #   An input used to provide the intial state. If no value is provided,
+    #   Amazon Web Services Payment Cryptography defaults it to zero.
     #   @return [String]
     #
     # @!attribute [rw] mode
-    #   The block cipher mode of operation. Block ciphers are designed to
-    #   encrypt a block of data of fixed size (for example, 128 bits). The
-    #   size of the input block is usually same as the size of the encrypted
-    #   output block, while the key length can be different. A mode of
-    #   operation describes how to repeatedly apply a cipher's single-block
-    #   operation to securely transform amounts of data larger than a block.
+    #   The block cipher method to use for encryption.
     #   @return [String]
     #
     # @!attribute [rw] padding_type
@@ -1685,7 +1729,7 @@ module Aws::PaymentCryptographyData
     #
     # @!attribute [rw] incoming_dukpt_attributes
     #   The attributes and values to use for incoming DUKPT encryption key
-    #   for PIN block tranlation.
+    #   for PIN block translation.
     #   @return [Types::DukptDerivationAttributes]
     #
     # @!attribute [rw] incoming_key_identifier
@@ -1694,7 +1738,7 @@ module Aws::PaymentCryptographyData
     #   @return [String]
     #
     # @!attribute [rw] incoming_translation_attributes
-    #   The format of the incoming PIN block data for tranlation within
+    #   The format of the incoming PIN block data for translation within
     #   Amazon Web Services Payment Cryptography.
     #   @return [Types::TranslationIsoFormats]
     #
@@ -1709,8 +1753,8 @@ module Aws::PaymentCryptographyData
     #   @return [String]
     #
     # @!attribute [rw] outgoing_translation_attributes
-    #   The format of the outgoing PIN block data after tranlation by Amazon
-    #   Web Services Payment Cryptography.
+    #   The format of the outgoing PIN block data after translation by
+    #   Amazon Web Services Payment Cryptography.
     #   @return [Types::TranslationIsoFormats]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/TranslatePinDataInput AWS API Documentation
@@ -1736,15 +1780,14 @@ module Aws::PaymentCryptographyData
     # @!attribute [rw] key_check_value
     #   The key check value (KCV) of the encryption key. The KCV is used to
     #   check if all parties holding a given key have the same key or to
-    #   detect that a key has changed. Amazon Web Services Payment
-    #   Cryptography calculates the KCV by using standard algorithms,
-    #   typically by encrypting 8 or 16 bytes or "00" or "01" and then
-    #   truncating the result to the first 3 bytes, or 6 hex digits, of the
-    #   resulting cryptogram.
+    #   detect that a key has changed.
+    #
+    #   Amazon Web Services Payment Cryptography computes the KCV according
+    #   to the CMAC specification.
     #   @return [String]
     #
     # @!attribute [rw] pin_block
-    #   The ougoing encrypted PIN block data after tranlation.
+    #   The outgoing encrypted PIN block data after translation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/TranslatePinDataOutput AWS API Documentation
@@ -1940,11 +1983,10 @@ module Aws::PaymentCryptographyData
     # @!attribute [rw] key_check_value
     #   The key check value (KCV) of the encryption key. The KCV is used to
     #   check if all parties holding a given key have the same key or to
-    #   detect that a key has changed. Amazon Web Services Payment
-    #   Cryptography calculates the KCV by using standard algorithms,
-    #   typically by encrypting 8 or 16 bytes or "00" or "01" and then
-    #   truncating the result to the first 3 bytes, or 6 hex digits, of the
-    #   resulting cryptogram.
+    #   detect that a key has changed.
+    #
+    #   Amazon Web Services Payment Cryptography computes the KCV according
+    #   to the CMAC specification.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/VerifyAuthRequestCryptogramOutput AWS API Documentation
@@ -1997,11 +2039,10 @@ module Aws::PaymentCryptographyData
     # @!attribute [rw] key_check_value
     #   The key check value (KCV) of the encryption key. The KCV is used to
     #   check if all parties holding a given key have the same key or to
-    #   detect that a key has changed. Amazon Web Services Payment
-    #   Cryptography calculates the KCV by using standard algorithms,
-    #   typically by encrypting 8 or 16 bytes or "00" or "01" and then
-    #   truncating the result to the first 3 bytes, or 6 hex digits, of the
-    #   resulting cryptogram.
+    #   detect that a key has changed.
+    #
+    #   Amazon Web Services Payment Cryptography computes the KCV according
+    #   to the CMAC specification.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/VerifyCardValidationDataOutput AWS API Documentation
@@ -2027,7 +2068,8 @@ module Aws::PaymentCryptographyData
     #   @return [Integer]
     #
     # @!attribute [rw] message_data
-    #   The data on for which MAC is under verification.
+    #   The data on for which MAC is under verification. This value must be
+    #   hexBinary.
     #   @return [String]
     #
     # @!attribute [rw] verification_attributes
@@ -2055,11 +2097,10 @@ module Aws::PaymentCryptographyData
     # @!attribute [rw] key_check_value
     #   The key check value (KCV) of the encryption key. The KCV is used to
     #   check if all parties holding a given key have the same key or to
-    #   detect that a key has changed. Amazon Web Services Payment
-    #   Cryptography calculates the KCV by using standard algorithms,
-    #   typically by encrypting 8 or 16 bytes or "00" or "01" and then
-    #   truncating the result to the first 3 bytes, or 6 hex digits, of the
-    #   resulting cryptogram.
+    #   detect that a key has changed.
+    #
+    #   Amazon Web Services Payment Cryptography computes the KCV according
+    #   to the CMAC specification.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/VerifyMacOutput AWS API Documentation
@@ -2139,11 +2180,10 @@ module Aws::PaymentCryptographyData
     # @!attribute [rw] encryption_key_check_value
     #   The key check value (KCV) of the encryption key. The KCV is used to
     #   check if all parties holding a given key have the same key or to
-    #   detect that a key has changed. Amazon Web Services Payment
-    #   Cryptography calculates the KCV by using standard algorithms,
-    #   typically by encrypting 8 or 16 bytes or "00" or "01" and then
-    #   truncating the result to the first 3 bytes, or 6 hex digits, of the
-    #   resulting cryptogram.
+    #   detect that a key has changed.
+    #
+    #   Amazon Web Services Payment Cryptography computes the KCV according
+    #   to the CMAC specification.
     #   @return [String]
     #
     # @!attribute [rw] verification_key_arn
@@ -2154,11 +2194,10 @@ module Aws::PaymentCryptographyData
     # @!attribute [rw] verification_key_check_value
     #   The key check value (KCV) of the encryption key. The KCV is used to
     #   check if all parties holding a given key have the same key or to
-    #   detect that a key has changed. Amazon Web Services Payment
-    #   Cryptography calculates the KCV by using standard algorithms,
-    #   typically by encrypting 8 or 16 bytes or "00" or "01" and then
-    #   truncating the result to the first 3 bytes, or 6 hex digits, of the
-    #   resulting cryptogram.
+    #   detect that a key has changed.
+    #
+    #   Amazon Web Services Payment Cryptography computes the KCV according
+    #   to the CMAC specification.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/VerifyPinDataOutput AWS API Documentation

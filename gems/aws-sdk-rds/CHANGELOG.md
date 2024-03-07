@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.221.0 (2024-03-07)
+------------------
+
+* Feature - Updates Amazon RDS documentation for io2 storage for Multi-AZ DB clusters
+
 1.220.0 (2024-03-06)
 ------------------
 

@@ -192,6 +192,16 @@ module Aws::PaymentCryptographyData
       SENSITIVE: []
     end
 
+    class EmvEncryptionAttributes
+      attr_accessor initialization_vector: ::String
+      attr_accessor major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B")
+      attr_accessor mode: ("ECB" | "CBC")
+      attr_accessor pan_sequence_number: ::String
+      attr_accessor primary_account_number: ::String
+      attr_accessor session_derivation_data: ::String
+      SENSITIVE: [:initialization_vector, :primary_account_number]
+    end
+
     class EncryptDataInput
       attr_accessor encryption_attributes: Types::EncryptionDecryptionAttributes
       attr_accessor key_identifier: ::String
@@ -209,6 +219,7 @@ module Aws::PaymentCryptographyData
     class EncryptionDecryptionAttributes
       attr_accessor asymmetric: Types::AsymmetricEncryptionAttributes
       attr_accessor dukpt: Types::DukptEncryptionAttributes
+      attr_accessor emv: Types::EmvEncryptionAttributes
       attr_accessor symmetric: Types::SymmetricEncryptionAttributes
       attr_accessor unknown: untyped
       SENSITIVE: []
@@ -216,6 +227,8 @@ module Aws::PaymentCryptographyData
       class Asymmetric < EncryptionDecryptionAttributes
       end
       class Dukpt < EncryptionDecryptionAttributes
+      end
+      class Emv < EncryptionDecryptionAttributes
       end
       class Symmetric < EncryptionDecryptionAttributes
       end

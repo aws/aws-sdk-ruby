@@ -3674,11 +3674,7 @@ module Aws::EC2
     # @!attribute [rw] instance_id
     #   The ID of the instance to bundle.
     #
-    #   Type: String
-    #
     #   Default: None
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] storage
@@ -6448,6 +6444,25 @@ module Aws::EC2
     #   Default: Your user-defined AMI tags are not copied.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the new AMI and new snapshots. You can tag the
+    #   AMI, the snapshots, or both.
+    #
+    #   * To tag the new AMI, the value for `ResourceType` must be `image`.
+    #
+    #   * To tag the new snapshots, the value for `ResourceType` must be
+    #     `snapshot`. The same tag is applied to all the new snapshots.
+    #
+    #   If you specify other values for `ResourceType`, the request fails.
+    #
+    #   To tag an AMI or snapshot after it has been created, see
+    #   [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyImageRequest AWS API Documentation
     #
     class CopyImageRequest < Struct.new(
@@ -6460,7 +6475,8 @@ module Aws::EC2
       :source_region,
       :destination_outpost_arn,
       :dry_run,
-      :copy_image_tags)
+      :copy_image_tags,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -54692,6 +54708,19 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the AMI.
+    #
+    #   To tag the AMI, the value for `ResourceType` must be `image`. If you
+    #   specify another value for `ResourceType`, the request fails.
+    #
+    #   To tag an AMI after it has been registered, see [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterImageRequest AWS API Documentation
     #
     class RegisterImageRequest < Struct.new(
@@ -54711,7 +54740,8 @@ module Aws::EC2
       :boot_mode,
       :tpm_support,
       :uefi_data,
-      :imds_support)
+      :imds_support,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end

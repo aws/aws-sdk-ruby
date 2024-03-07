@@ -2681,14 +2681,19 @@ module Aws::WAFV2
     #   ACL and protected resources.
     #
     #   Use this to customize the maximum size of the request body that your
-    #   protected CloudFront distributions forward to WAF for inspection. The
-    #   default is 16 KB (16,384 bytes).
+    #   protected resources forward to WAF for inspection. You can customize
+    #   this setting for CloudFront, API Gateway, Amazon Cognito, App Runner,
+    #   or Verified Access resources. The default setting is 16 KB (16,384
+    #   bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources forward
     #   body sizes that are larger than the default. For more information, see
     #   [WAF Pricing][1].
     #
     #    </note>
+    #
+    #   For Application Load Balancer and AppSync, the limit is fixed at 8 KB
+    #   (8,192 bytes).
     #
     #
     #
@@ -8145,14 +8150,19 @@ module Aws::WAFV2
     #   ACL and protected resources.
     #
     #   Use this to customize the maximum size of the request body that your
-    #   protected CloudFront distributions forward to WAF for inspection. The
-    #   default is 16 KB (16,384 bytes).
+    #   protected resources forward to WAF for inspection. You can customize
+    #   this setting for CloudFront, API Gateway, Amazon Cognito, App Runner,
+    #   or Verified Access resources. The default setting is 16 KB (16,384
+    #   bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources forward
     #   body sizes that are larger than the default. For more information, see
     #   [WAF Pricing][1].
     #
     #    </note>
+    #
+    #   For Application Load Balancer and AppSync, the limit is fixed at 8 KB
+    #   (8,192 bytes).
     #
     #
     #
@@ -9073,7 +9083,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

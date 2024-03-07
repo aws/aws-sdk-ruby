@@ -500,7 +500,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -617,7 +617,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -840,7 +840,7 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1200,7 +1200,7 @@ module Aws::Lambda
     # [6]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1563,7 +1563,7 @@ module Aws::Lambda
     # can use to invoke your function.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1677,7 +1677,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1845,7 +1845,7 @@ module Aws::Lambda
     # you originally configured it.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function or version.
+    #   The name or ARN of the Lambda function or version.
     #
     #   **Name formats**
     #
@@ -1886,7 +1886,7 @@ module Aws::Lambda
     # Removes the code signing configuration from the function.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1920,7 +1920,7 @@ module Aws::Lambda
     # Removes a concurrent execution limit from a function.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -1958,7 +1958,7 @@ module Aws::Lambda
     # PutFunctionEventInvokeConfig.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -2000,7 +2000,7 @@ module Aws::Lambda
     # URL address.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2070,7 +2070,7 @@ module Aws::Lambda
     # Deletes the provisioned concurrency configuration for a function.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2143,7 +2143,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2327,7 +2327,7 @@ module Aws::Lambda
     # that version are returned.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -2453,7 +2453,7 @@ module Aws::Lambda
     # Returns the code signing configuration for the specified function.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2497,7 +2497,7 @@ module Aws::Lambda
     # PutFunctionConcurrency.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2542,7 +2542,7 @@ module Aws::Lambda
     # settings, use GetFunction.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -2697,7 +2697,7 @@ module Aws::Lambda
     # PutFunctionEventInvokeConfig.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -2752,7 +2752,7 @@ module Aws::Lambda
     # Returns details about a Lambda function URL.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -2975,7 +2975,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -3024,7 +3024,7 @@ module Aws::Lambda
     # alias or version.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3087,7 +3087,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3191,7 +3191,7 @@ module Aws::Lambda
     # [9]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -3290,7 +3290,7 @@ module Aws::Lambda
     #  </note>
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3346,7 +3346,7 @@ module Aws::Lambda
     # [3]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3552,7 +3552,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3690,7 +3690,7 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc
     #
     # @option params [String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3790,7 +3790,7 @@ module Aws::Lambda
     # PutFunctionEventInvokeConfig.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -3849,7 +3849,7 @@ module Aws::Lambda
     # Returns a list of Lambda function URLs for the specified function.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4245,7 +4245,7 @@ module Aws::Lambda
     # function.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4345,7 +4345,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4585,7 +4585,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4746,7 +4746,7 @@ module Aws::Lambda
     #   The The Amazon Resource Name (ARN) of the code signing configuration.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4806,7 +4806,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -4873,7 +4873,7 @@ module Aws::Lambda
     # [2]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -4961,7 +4961,7 @@ module Aws::Lambda
     # version.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -5025,7 +5025,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -5157,7 +5157,7 @@ module Aws::Lambda
     # the output of GetPolicy.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -5274,7 +5274,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -5483,7 +5483,7 @@ module Aws::Lambda
     #   The identifier of the event source mapping.
     #
     # @option params [String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -5760,7 +5760,7 @@ module Aws::Lambda
     # [3]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -5970,7 +5970,7 @@ module Aws::Lambda
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -6298,7 +6298,7 @@ module Aws::Lambda
     # PutFunctionEventInvokeConfig.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function, version, or alias.
+    #   The name or ARN of the Lambda function, version, or alias.
     #
     #   **Name formats**
     #
@@ -6385,7 +6385,7 @@ module Aws::Lambda
     # Updates the configuration for a Lambda function URL.
     #
     # @option params [required, String] :function_name
-    #   The name of the Lambda function.
+    #   The name or ARN of the Lambda function.
     #
     #   **Name formats**
     #
@@ -6507,7 +6507,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1542,6 +1542,7 @@ module Aws::EC2
       attr_accessor destination_outpost_arn: ::String
       attr_accessor dry_run: bool
       attr_accessor copy_image_tags: bool
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       SENSITIVE: []
     end
 
@@ -12049,6 +12050,7 @@ module Aws::EC2
       attr_accessor tpm_support: ("v2.0")
       attr_accessor uefi_data: ::String
       attr_accessor imds_support: ("v2.0")
+      attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       SENSITIVE: []
     end
 

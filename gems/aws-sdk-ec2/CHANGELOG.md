@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.441.0 (2024-03-07)
+------------------
+
+* Feature - This release adds an optional parameter to RegisterImage and CopyImage APIs to support tagging AMIs at the time of creation.
+
 1.440.0 (2024-03-01)
 ------------------
 
