@@ -41,7 +41,7 @@ module Aws
           param_shape = @rules.shape.member(name).shape
           value = case param_shape.is_a?(Seahorse::Model::Shapes::TimestampShape)
                   when true
-                    timestamp(param_shape, params[name])
+                    timestamp(param_shape, params[name]).to_s
                   else
                     params[name].to_s
                   end
