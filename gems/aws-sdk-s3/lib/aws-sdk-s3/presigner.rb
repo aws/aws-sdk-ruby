@@ -15,6 +15,7 @@ module Aws
         'amz-sdk-request',
         'cache-control',
         'content-length', # due to a ELB bug
+        'content-type',
         'expect',
         'from',
         'if-match',
