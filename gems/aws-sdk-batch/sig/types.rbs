@@ -226,6 +226,7 @@ module Aws::Batch
       attr_accessor priority: ::Integer
       attr_accessor compute_environment_order: ::Array[Types::ComputeEnvironmentOrder]
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor job_state_time_limit_actions: ::Array[Types::JobStateTimeLimitAction]
       SENSITIVE: []
     end
 
@@ -682,6 +683,15 @@ module Aws::Batch
       attr_accessor priority: ::Integer
       attr_accessor compute_environment_order: ::Array[Types::ComputeEnvironmentOrder]
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor job_state_time_limit_actions: ::Array[Types::JobStateTimeLimitAction]
+      SENSITIVE: []
+    end
+
+    class JobStateTimeLimitAction
+      attr_accessor reason: ::String
+      attr_accessor state: ("RUNNABLE")
+      attr_accessor max_time_seconds: ::Integer
+      attr_accessor action: ("CANCEL")
       SENSITIVE: []
     end
 
@@ -1072,6 +1082,7 @@ module Aws::Batch
       attr_accessor scheduling_policy_arn: ::String
       attr_accessor priority: ::Integer
       attr_accessor compute_environment_order: ::Array[Types::ComputeEnvironmentOrder]
+      attr_accessor job_state_time_limit_actions: ::Array[Types::JobStateTimeLimitAction]
       SENSITIVE: []
     end
 

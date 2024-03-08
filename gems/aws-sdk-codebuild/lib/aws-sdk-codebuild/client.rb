@@ -3462,7 +3462,14 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # Starts running a build.
+    # Starts running a build with the settings defined in the project. These
+    # setting include: how to run a build, where to get the source code,
+    # which build environment to use, which build commands to run, and where
+    # to store the build output.
+    #
+    # You can also start a build run by overriding some of the build
+    # settings in the project. The overrides only apply for that specific
+    # start build request. The settings in the project are unaltered.
     #
     # @option params [required, String] :project_name
     #   The name of the CodeBuild build project to start running a build.
@@ -3549,8 +3556,9 @@ module Aws::CodeBuild
     #   an CodeBuild build project.
     #
     # @option params [String] :buildspec_override
-    #   A buildspec file declaration that overrides, for this build only, the
-    #   latest one already defined in the build project.
+    #   A buildspec file declaration that overrides the latest one defined in
+    #   the build project, for this build only. The buildspec defined on the
+    #   project is not changed.
     #
     #   If this value is set, it can be either an inline buildspec definition,
     #   the path to an alternate buildspec file relative to the value of the
@@ -3561,6 +3569,15 @@ module Aws::CodeBuild
     #   value is not provided or is set to an empty string, the source code
     #   must contain a buildspec file in its root directory. For more
     #   information, see [Buildspec File Name and Storage Location][1].
+    #
+    #   <note markdown="1"> Since this property allows you to change the build commands that will
+    #   run in the container, you should note that an IAM principal with the
+    #   ability to call this API and set this parameter can override the
+    #   default settings. Moreover, we encourage that you use a trustworthy
+    #   buildspec location like a file in your source repository or a Amazon
+    #   S3 bucket.
+    #
+    #    </note>
     #
     #
     #
@@ -5601,7 +5618,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

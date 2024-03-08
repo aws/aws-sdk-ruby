@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2024-03-08)
+------------------
+
+* Feature - This release adds support for a new webhook event: PULL_REQUEST_CLOSED.
+
 1.103.0 (2024-01-26)
 ------------------
 

@@ -5774,8 +5774,9 @@ module Aws::CodeBuild
     #   @return [Types::GitSubmodulesConfig]
     #
     # @!attribute [rw] buildspec_override
-    #   A buildspec file declaration that overrides, for this build only,
-    #   the latest one already defined in the build project.
+    #   A buildspec file declaration that overrides the latest one defined
+    #   in the build project, for this build only. The buildspec defined on
+    #   the project is not changed.
     #
     #   If this value is set, it can be either an inline buildspec
     #   definition, the path to an alternate buildspec file relative to the
@@ -5787,6 +5788,15 @@ module Aws::CodeBuild
     #   not provided or is set to an empty string, the source code must
     #   contain a buildspec file in its root directory. For more
     #   information, see [Buildspec File Name and Storage Location][1].
+    #
+    #   <note markdown="1"> Since this property allows you to change the build commands that
+    #   will run in the container, you should note that an IAM principal
+    #   with the ability to call this API and set this parameter can
+    #   override the default settings. Moreover, we encourage that you use a
+    #   trustworthy buildspec location like a file in your source repository
+    #   or a Amazon S3 bucket.
+    #
+    #    </note>
     #
     #
     #
@@ -6785,67 +6795,70 @@ module Aws::CodeBuild
     #   `EVENT`, `ACTOR_ACCOUNT_ID`, `HEAD_REF`, `BASE_REF`, `FILE_PATH`,
     #   and `COMMIT_MESSAGE`.
     #
-    #   EVENT
+    #   * EVENT
     #
-    #   : A webhook event triggers a build when the provided `pattern`
-    #     matches one of five event types: `PUSH`, `PULL_REQUEST_CREATED`,
-    #     `PULL_REQUEST_UPDATED`, `PULL_REQUEST_REOPENED`, and
-    #     `PULL_REQUEST_MERGED`. The `EVENT` patterns are specified as a
-    #     comma-separated string. For example, `PUSH, PULL_REQUEST_CREATED,
-    #     PULL_REQUEST_UPDATED` filters all push, pull request created, and
-    #     pull request updated events.
+    #     * A webhook event triggers a build when the provided `pattern`
+    #       matches one of six event types: `PUSH`, `PULL_REQUEST_CREATED`,
+    #       `PULL_REQUEST_UPDATED`, `PULL_REQUEST_CLOSED`,
+    #       `PULL_REQUEST_REOPENED`, and `PULL_REQUEST_MERGED`. The `EVENT`
+    #       patterns are specified as a comma-separated string. For example,
+    #       `PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED` filters all
+    #       push, pull request created, and pull request updated events.
     #
-    #     <note markdown="1"> The `PULL_REQUEST_REOPENED` works with GitHub and GitHub
-    #     Enterprise only.
+    #       <note markdown="1"> The `PULL_REQUEST_REOPENED` works with GitHub and GitHub
+    #       Enterprise only.
     #
-    #      </note>
+    #        </note>
     #
-    #   ACTOR\_ACCOUNT\_ID
+    #   * ACTOR\_ACCOUNT\_ID
     #
-    #   : A webhook event triggers a build when a GitHub, GitHub Enterprise,
-    #     or Bitbucket account ID matches the regular expression `pattern`.
+    #     * A webhook event triggers a build when a GitHub, GitHub
+    #       Enterprise, or Bitbucket account ID matches the regular
+    #       expression `pattern`.
     #
-    #   HEAD\_REF
+    #     ^
     #
-    #   : A webhook event triggers a build when the head reference matches
-    #     the regular expression `pattern`. For example,
-    #     `refs/heads/branch-name` and `refs/tags/tag-name`.
+    #   * HEAD\_REF
     #
-    #     Works with GitHub and GitHub Enterprise push, GitHub and GitHub
-    #     Enterprise pull request, Bitbucket push, and Bitbucket pull
-    #     request events.
+    #     * A webhook event triggers a build when the head reference matches
+    #       the regular expression `pattern`. For example,
+    #       `refs/heads/branch-name` and `refs/tags/tag-name`.
     #
-    #   BASE\_REF
+    #       Works with GitHub and GitHub Enterprise push, GitHub and GitHub
+    #       Enterprise pull request, Bitbucket push, and Bitbucket pull
+    #       request events.
     #
-    #   : A webhook event triggers a build when the base reference matches
-    #     the regular expression `pattern`. For example,
-    #     `refs/heads/branch-name`.
+    #   * BASE\_REF
     #
-    #     <note markdown="1"> Works with pull request events only.
+    #     * A webhook event triggers a build when the base reference matches
+    #       the regular expression `pattern`. For example,
+    #       `refs/heads/branch-name`.
     #
-    #      </note>
+    #       <note markdown="1"> Works with pull request events only.
     #
-    #   FILE\_PATH
+    #        </note>
     #
-    #   : A webhook triggers a build when the path of a changed file matches
-    #     the regular expression `pattern`.
+    #   * FILE\_PATH
     #
-    #     <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
-    #     events. Also works with GitHub Enterprise push events, but does
-    #     not work with GitHub Enterprise pull request events.
+    #     * A webhook triggers a build when the path of a changed file
+    #       matches the regular expression `pattern`.
     #
-    #      </note>
+    #       <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
+    #       events. Also works with GitHub Enterprise push events, but does
+    #       not work with GitHub Enterprise pull request events.
     #
-    #   COMMIT\_MESSAGE
+    #        </note>
     #
-    #   : A webhook triggers a build when the head commit message matches
-    #     the regular expression `pattern`.
+    #   * COMMIT\_MESSAGE
     #
-    #     <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
-    #     events. Also works with GitHub Enterprise push events, but does
-    #     not work with GitHub Enterprise pull request events.
+    #     * A webhook triggers a build when the head commit message matches
+    #       the regular expression `pattern`.
     #
-    #      </note>
+    #       <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
+    #       events. Also works with GitHub Enterprise push events, but does
+    #       not work with GitHub Enterprise pull request events.
+    #
+    #        </note>
     #   @return [String]
     #
     # @!attribute [rw] pattern

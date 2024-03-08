@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2024-03-08)
+------------------
+
+* Feature - Documentation update for Bedrock Runtime Agent
+
 1.2.0 (2024-02-28)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2024-03-08)
+------------------
+
+* Feature - Add RDS Provisioned and Serverless Usage types
+
 1.87.0 (2024-01-26)
 ------------------
 

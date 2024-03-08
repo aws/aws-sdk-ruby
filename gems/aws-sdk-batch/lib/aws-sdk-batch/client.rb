@@ -897,6 +897,11 @@ module Aws::Batch
     #
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html
     #
+    # @option params [Array<Types::JobStateTimeLimitAction>] :job_state_time_limit_actions
+    #   The set of actions that Batch performs on jobs that remain at the head
+    #   of the job queue in the specified state longer than specified times.
+    #   Batch will perform each action after `maxTimeSeconds` has passed.
+    #
     # @return [Types::CreateJobQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobQueueResponse#job_queue_name #job_queue_name} => String
@@ -968,6 +973,14 @@ module Aws::Batch
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     job_state_time_limit_actions: [
+    #       {
+    #         reason: "String", # required
+    #         state: "RUNNABLE", # required, accepts RUNNABLE
+    #         max_time_seconds: 1, # required
+    #         action: "CANCEL", # required, accepts CANCEL
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1908,6 +1921,11 @@ module Aws::Batch
     #   resp.job_queues[0].compute_environment_order[0].compute_environment #=> String
     #   resp.job_queues[0].tags #=> Hash
     #   resp.job_queues[0].tags["TagKey"] #=> String
+    #   resp.job_queues[0].job_state_time_limit_actions #=> Array
+    #   resp.job_queues[0].job_state_time_limit_actions[0].reason #=> String
+    #   resp.job_queues[0].job_state_time_limit_actions[0].state #=> String, one of "RUNNABLE"
+    #   resp.job_queues[0].job_state_time_limit_actions[0].max_time_seconds #=> Integer
+    #   resp.job_queues[0].job_state_time_limit_actions[0].action #=> String, one of "CANCEL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobQueues AWS API Documentation
@@ -4336,6 +4354,11 @@ module Aws::Batch
     #
     #    </note>
     #
+    # @option params [Array<Types::JobStateTimeLimitAction>] :job_state_time_limit_actions
+    #   The set of actions that Batch perform on jobs that remain at the head
+    #   of the job queue in the specified state longer than specified times.
+    #   Batch will perform each action after `maxTimeSeconds` has passed.
+    #
     # @return [Types::UpdateJobQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateJobQueueResponse#job_queue_name #job_queue_name} => String
@@ -4368,6 +4391,14 @@ module Aws::Batch
     #       {
     #         order: 1, # required
     #         compute_environment: "String", # required
+    #       },
+    #     ],
+    #     job_state_time_limit_actions: [
+    #       {
+    #         reason: "String", # required
+    #         state: "RUNNABLE", # required, accepts RUNNABLE
+    #         max_time_seconds: 1, # required
+    #         action: "CANCEL", # required, accepts CANCEL
     #       },
     #     ],
     #   })
@@ -4434,7 +4465,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
