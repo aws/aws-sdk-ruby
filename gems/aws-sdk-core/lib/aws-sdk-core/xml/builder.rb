@@ -50,7 +50,7 @@ module Aws
       def list(name, ref, values)
         if ref[:flattened] || ref.shape.flattened
           values.each do |value|
-            member(ref.shape.member.location_name || name, ref.shape.member, value)
+            member(name, ref.shape.member, value)
           end
         else
           node(name, ref) do
