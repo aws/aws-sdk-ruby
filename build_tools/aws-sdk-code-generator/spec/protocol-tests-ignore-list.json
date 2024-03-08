@@ -30,12 +30,8 @@
   },
   "json_1_0" : {
     "input" : [
-      {"AwsJson10ClientPopulatesDefaultValuesInInput": "Awaiting Smithy to resolve C2J translation"},
-      {"AwsJson10ClientPopulatesNestedDefaultValuesWhenMissing": "Awaiting Smithy to resolve C2J translation"}
     ],
     "output" : [
-      {"AwsJson10ClientPopulatesDefaultsValuesWhenMissingInResponse": "Awaiting Smithy to resolve C2J translation"},
-      {"AwsJson10ClientPopulatesNestedDefaultsWhenMissingInResponseBody": "Awaiting Smithy to resolve C2J translation"},
       {"AwsJson10InvalidGreetingError": "Need to update test runner to handle error cases"},
       {"AwsJson10FooErrorUsingXAmznErrorType": "Need to update test runner to handle error cases"},
       {"AwsJson10FooErrorUsingXAmznErrorTypeWithUri": "Need to update test runner to handle error cases"},
@@ -85,7 +81,8 @@
     ],
     "output" : [
       {"InvalidGreetingError": "Need to update test runner to handle error cases"},
-      {"ComplexError": "Need to update test runner to handle error cases"}
+      {"ComplexError": "Need to update test runner to handle error cases"},
+      {"InputAndOutputWithTimestampHeaders": "Out of scope to support de-serializing HTTP header to list of strings"}
     ]
   },
   "api-gateway" : {
