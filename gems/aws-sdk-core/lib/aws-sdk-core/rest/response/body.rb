@@ -20,7 +20,8 @@ module Aws
           if event_stream?
             data[@rules[:payload]] = parse_eventstream(body)
           elsif streaming?
-            data[@rules[:payload]] = body
+            # empty blob payloads are omitted
+            data[@rules[:payload]] = body unless empty_blob_body?(body)
           elsif @rules[:payload]
             data[@rules[:payload]] = parse(body.read, @rules[:payload_member])
           elsif !@rules.shape.member_names.empty?
@@ -29,6 +30,10 @@ module Aws
         end
 
         private
+
+        def empty_blob_body?(body)
+          @rules[:payload_member].shape.is_a?(BlobShape) && (body.size == 0)
+        end
 
         def event_stream?
           @rules[:payload] && @rules[:payload_member].eventstream
