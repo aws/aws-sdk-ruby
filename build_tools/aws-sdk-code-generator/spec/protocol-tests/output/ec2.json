@@ -1495,7 +1495,10 @@
                 "members": {
                     "foo": {
                         "shape": "String",
-                        "xmlNamespace": "http://baz.com"
+                        "xmlNamespace": {
+                            "prefix": "baz",
+                            "uri": "http://baz.com"
+                        }
                     },
                     "values": {
                         "shape": "XmlNamespacedList",
