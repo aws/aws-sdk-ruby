@@ -17,18 +17,18 @@ module Aws
       end
 
       def to_xml(params)
-        structure(@rules.location_name, @rules, params)
+        structure(@rules.location_name, @rules, params, top_level: true)
         @xml.join
       end
       alias serialize to_xml
 
       private
 
-      def structure(name, ref, values)
+      def structure(name, ref, values, top_level: false)
         if values.empty?
-          node(name, ref)
+          node(name, ref, top_level: top_level)
         else
-          node(name, ref, structure_attrs(ref, values)) do
+          node(name, ref, structure_attrs(ref, values), top_level: top_level) do
             ref.shape.members.each do |member_name, member_ref|
               next if values[member_name].nil?
               next if xml_attribute?(member_ref)
@@ -121,14 +121,16 @@ module Aws
       # Pass a block if you want to nest XML nodes inside.  When doing this,
       # you may *not* pass a value to the `args` list.
       #
-      def node(name, ref, *args, &block)
+      def node(name, ref, *args, top_level: false, &block)
         attrs = args.last.is_a?(Hash) ? args.pop : {}
-        attrs = shape_attrs(ref).merge(attrs)
+        attrs = shape_attrs(ref, top_level: top_level).merge(attrs)
         args << attrs
         @builder.node(name, *args, &block)
       end
 
-      def shape_attrs(ref)
+      def shape_attrs(ref, top_level: false)
+        return {} if ref.shape.is_a?(StructureShape) && !top_level
+
         if (xmlns = ref['xmlNamespace'])
           case xmlns
           when String
