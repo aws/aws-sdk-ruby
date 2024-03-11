@@ -75,7 +75,8 @@ module Aws
         else
           node(name, ref) do
             hash.each do |key, value|
-              node('entry', ref) do
+              # Pass in a new ShapeRef to create an entry node
+              node('entry', ShapeRef.new) do
                 member(key_ref.location_name || 'key', key_ref, key)
                 member(value_ref.location_name || 'value', value_ref, value)
               end
