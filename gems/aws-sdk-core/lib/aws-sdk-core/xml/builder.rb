@@ -129,9 +129,10 @@ module Aws
       end
 
       def shape_attrs(ref, top_level: false)
-        return {} if ref.shape.is_a?(StructureShape) && !top_level
+        # for non top level shapes, do NOT fall back to metadata key on shape
+        xmlns = top_level ? ref['xmlNamespace'] : ref.metadata['xmlNamespace']
 
-        if (xmlns = ref['xmlNamespace'])
+        if xmlns
           case xmlns
           when String
             { 'xmlns' => xmlns }
