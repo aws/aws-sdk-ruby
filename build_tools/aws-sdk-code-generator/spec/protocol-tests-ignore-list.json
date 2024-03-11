@@ -80,6 +80,7 @@
     "input" : [
     ],
     "output" : [
+      {"SimpleScalarPropertiesComplexEscapes": "OxEngine does not handle all escape cases but other engines supports it"},
       {"InvalidGreetingError": "Need to update test runner to handle error cases"},
       {"ComplexError": "Need to update test runner to handle error cases"},
       {"InputAndOutputWithTimestampHeaders": "Out of scope to support de-serializing HTTP header to list of strings"}
