@@ -129,11 +129,16 @@ module Aws
       end
 
       def shape_attrs(ref)
-        if xmlns = ref['xmlNamespace']
-          if prefix = xmlns['prefix']
-            { 'xmlns:' + prefix => xmlns['uri'] }
-          else
-            { 'xmlns' => xmlns['uri'] }
+        if (xmlns = ref['xmlNamespace'])
+          case xmlns
+          when String
+            { 'xmlns' => xmlns }
+          when Hash
+            if (prefix = xmlns['prefix'])
+              { "xmlns:#{prefix}" => xmlns['uri'] }
+            else
+              { 'xmlns' => xmlns['uri'] }
+            end
           end
         else
           {}
