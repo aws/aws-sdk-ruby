@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2024-03-11)
+------------------
+
+* Feature - Added a sync configuration enum to disable publishing of deployment status to source providers (PublishDeploymentStatus). Added a sync configuration enum (TriggerStackUpdateOn) to only trigger changes.
+
 1.40.0 (2024-01-26)
 ------------------
 

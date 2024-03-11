@@ -81,6 +81,7 @@ module Aws
         def modified_at: () -> ::Time
         def description: () -> ::String
         def ingest_endpoints: () -> ::Array[Types::IngestEndpoint]
+        def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#create_channel-instance_method
@@ -100,6 +101,7 @@ module Aws
         def egress_domain: () -> ::String
         def created_at: () -> ::Time
         def modified_at: () -> ::Time
+        def etag: () -> ::String
         def description: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
@@ -126,6 +128,7 @@ module Aws
         def startover_window_seconds: () -> ::Integer
         def hls_manifests: () -> ::Array[Types::GetHlsManifestConfiguration]
         def low_latency_hls_manifests: () -> ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+        def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#create_origin_endpoint-instance_method
@@ -263,6 +266,7 @@ module Aws
         def modified_at: () -> ::Time
         def description: () -> ::String
         def ingest_endpoints: () -> ::Array[Types::IngestEndpoint]
+        def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#get_channel-instance_method
@@ -280,6 +284,7 @@ module Aws
         def created_at: () -> ::Time
         def modified_at: () -> ::Time
         def description: () -> ::String
+        def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#get_channel_group-instance_method
@@ -315,6 +320,7 @@ module Aws
         def startover_window_seconds: () -> ::Integer
         def hls_manifests: () -> ::Array[Types::GetHlsManifestConfiguration]
         def low_latency_hls_manifests: () -> ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+        def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#get_origin_endpoint-instance_method
@@ -435,12 +441,14 @@ module Aws
         def modified_at: () -> ::Time
         def description: () -> ::String
         def ingest_endpoints: () -> ::Array[Types::IngestEndpoint]
+        def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#update_channel-instance_method
       def update_channel: (
                             channel_group_name: ::String,
                             channel_name: ::String,
+                            ?etag: ::String,
                             ?description: ::String
                           ) -> _UpdateChannelResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
@@ -453,11 +461,13 @@ module Aws
         def created_at: () -> ::Time
         def modified_at: () -> ::Time
         def description: () -> ::String
+        def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#update_channel_group-instance_method
       def update_channel_group: (
                                   channel_group_name: ::String,
+                                  ?etag: ::String,
                                   ?description: ::String
                                 ) -> _UpdateChannelGroupResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelGroupResponseSuccess
@@ -476,6 +486,7 @@ module Aws
         def startover_window_seconds: () -> ::Integer
         def hls_manifests: () -> ::Array[Types::GetHlsManifestConfiguration]
         def low_latency_hls_manifests: () -> ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+        def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#update_origin_endpoint-instance_method
@@ -547,7 +558,8 @@ module Aws
                                           time_delay_seconds: ::Integer?
                                         }?
                                       },
-                                    ]
+                                    ],
+                                    ?etag: ::String
                                   ) -> _UpdateOriginEndpointResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOriginEndpointResponseSuccess
     end

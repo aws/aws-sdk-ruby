@@ -2048,9 +2048,9 @@ module Aws::ElastiCache
     # or a secondary replication group associated with a Global datastore.
     #
     # A Redis (cluster mode disabled) replication group is a collection of
-    # clusters, where one of the clusters is a read/write primary and the
-    # others are read-only replicas. Writes to the primary are
-    # asynchronously propagated to the replicas.
+    # nodes, where one of the nodes is a read/write primary and the others
+    # are read-only replicas. Writes to the primary are asynchronously
+    # propagated to the replicas.
     #
     # A Redis cluster-mode enabled cluster is comprised of from 1 to 90
     # shards (API/CLI: node groups). Each shard has a primary node and up to
@@ -2394,11 +2394,6 @@ module Aws::ElastiCache
     #   the new replication group is being created.
     #
     # @option params [String] :preferred_maintenance_window
-    #   Specifies the weekly time range during which maintenance on the
-    #   cluster is performed. It is specified as a range in the format
-    #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-    #   window is a 60 minute period. Valid values for `ddd` are:
-    #
     #   Specifies the weekly time range during which maintenance on the
     #   cluster is performed. It is specified as a range in the format
     #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
@@ -11300,7 +11295,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

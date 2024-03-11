@@ -2618,11 +2618,6 @@ module Aws::ElastiCache
     #   Specifies the weekly time range during which maintenance on the
     #   cluster is performed. It is specified as a range in the format
     #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-    #   window is a 60 minute period. Valid values for `ddd` are:
-    #
-    #   Specifies the weekly time range during which maintenance on the
-    #   cluster is performed. It is specified as a range in the format
-    #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
     #   window is a 60 minute period.
     #
     #   Valid values for `ddd` are:
@@ -4965,7 +4960,7 @@ module Aws::ElastiCache
     end
 
     # Represents the information required for client programs to connect to
-    # a cache node.
+    # a cache node. This value is read-only.
     #
     # @!attribute [rw] address
     #   The DNS hostname of the cache node.
@@ -6836,7 +6831,8 @@ module Aws::ElastiCache
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] reader_endpoint
-    #   The endpoint of the replica nodes in this node group (shard).
+    #   The endpoint of the replica nodes in this node group (shard). This
+    #   value is read-only.
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] slots
@@ -8500,12 +8496,12 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] endpoint
     #   Represents the information required for client programs to connect
-    #   to a cache node.
+    #   to a cache node. This value is read-only.
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] reader_endpoint
     #   Represents the information required for client programs to connect
-    #   to a cache node.
+    #   to a cache node. This value is read-only.
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] arn
@@ -8518,10 +8514,10 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
-    #   If no subnet IDs are given and your VPC is in SFO, then ElastiCache
-    #   will select 2 default subnets across AZs in your VPC. For all other
-    #   Regions, if no subnet IDs are given then ElastiCache will select 3
-    #   default subnets across AZs in your default VPC.
+    #   If no subnet IDs are given and your VPC is in us-west-1, then
+    #   ElastiCache will select 2 default subnets across AZs in your VPC.
+    #   For all other Regions, if no subnet IDs are given then ElastiCache
+    #   will select 3 default subnets across AZs in your default VPC.
     #   @return [Array<String>]
     #
     # @!attribute [rw] snapshot_retention_limit

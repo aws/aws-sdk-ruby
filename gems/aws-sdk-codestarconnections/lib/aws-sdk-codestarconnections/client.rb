@@ -617,6 +617,13 @@ module Aws::CodeStarconnections
     # @option params [required, String] :sync_type
     #   The type of sync configuration.
     #
+    # @option params [String] :publish_deployment_status
+    #   Whether to enable or disable publishing of deployment status to source
+    #   providers.
+    #
+    # @option params [String] :trigger_resource_update_on
+    #   When to trigger Git sync to begin the stack update.
+    #
     # @return [Types::CreateSyncConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSyncConfigurationOutput#sync_configuration #sync_configuration} => Types::SyncConfiguration
@@ -630,6 +637,8 @@ module Aws::CodeStarconnections
     #     resource_name: "ResourceName", # required
     #     role_arn: "IamRoleArn", # required
     #     sync_type: "CFN_STACK_SYNC", # required, accepts CFN_STACK_SYNC
+    #     publish_deployment_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     trigger_resource_update_on: "ANY_CHANGE", # accepts ANY_CHANGE, FILE_CHANGE
     #   })
     #
     # @example Response structure
@@ -643,6 +652,8 @@ module Aws::CodeStarconnections
     #   resp.sync_configuration.resource_name #=> String
     #   resp.sync_configuration.role_arn #=> String
     #   resp.sync_configuration.sync_type #=> String, one of "CFN_STACK_SYNC"
+    #   resp.sync_configuration.publish_deployment_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.sync_configuration.trigger_resource_update_on #=> String, one of "ANY_CHANGE", "FILE_CHANGE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/CreateSyncConfiguration AWS API Documentation
     #
@@ -1076,6 +1087,8 @@ module Aws::CodeStarconnections
     #   resp.sync_configuration.resource_name #=> String
     #   resp.sync_configuration.role_arn #=> String
     #   resp.sync_configuration.sync_type #=> String, one of "CFN_STACK_SYNC"
+    #   resp.sync_configuration.publish_deployment_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.sync_configuration.trigger_resource_update_on #=> String, one of "ANY_CHANGE", "FILE_CHANGE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/GetSyncConfiguration AWS API Documentation
     #
@@ -1323,6 +1336,8 @@ module Aws::CodeStarconnections
     #   resp.sync_configurations[0].resource_name #=> String
     #   resp.sync_configurations[0].role_arn #=> String
     #   resp.sync_configurations[0].sync_type #=> String, one of "CFN_STACK_SYNC"
+    #   resp.sync_configurations[0].publish_deployment_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.sync_configurations[0].trigger_resource_update_on #=> String, one of "ANY_CHANGE", "FILE_CHANGE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/ListSyncConfigurations AWS API Documentation
@@ -1587,6 +1602,13 @@ module Aws::CodeStarconnections
     # @option params [required, String] :sync_type
     #   The sync type for the sync configuration to be updated.
     #
+    # @option params [String] :publish_deployment_status
+    #   Whether to enable or disable publishing of deployment status to source
+    #   providers.
+    #
+    # @option params [String] :trigger_resource_update_on
+    #   When to trigger Git sync to begin the stack update.
+    #
     # @return [Types::UpdateSyncConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSyncConfigurationOutput#sync_configuration #sync_configuration} => Types::SyncConfiguration
@@ -1600,6 +1622,8 @@ module Aws::CodeStarconnections
     #     resource_name: "ResourceName", # required
     #     role_arn: "IamRoleArn",
     #     sync_type: "CFN_STACK_SYNC", # required, accepts CFN_STACK_SYNC
+    #     publish_deployment_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     trigger_resource_update_on: "ANY_CHANGE", # accepts ANY_CHANGE, FILE_CHANGE
     #   })
     #
     # @example Response structure
@@ -1613,6 +1637,8 @@ module Aws::CodeStarconnections
     #   resp.sync_configuration.resource_name #=> String
     #   resp.sync_configuration.role_arn #=> String
     #   resp.sync_configuration.sync_type #=> String, one of "CFN_STACK_SYNC"
+    #   resp.sync_configuration.publish_deployment_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.sync_configuration.trigger_resource_update_on #=> String, one of "ANY_CHANGE", "FILE_CHANGE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/UpdateSyncConfiguration AWS API Documentation
     #
@@ -1636,7 +1662,7 @@ module Aws::CodeStarconnections
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codestarconnections'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

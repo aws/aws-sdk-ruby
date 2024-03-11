@@ -436,6 +436,7 @@ module Aws::MediaPackageV2
     #   * {Types::CreateChannelResponse#modified_at #modified_at} => Time
     #   * {Types::CreateChannelResponse#description #description} => String
     #   * {Types::CreateChannelResponse#ingest_endpoints #ingest_endpoints} => Array&lt;Types::IngestEndpoint&gt;
+    #   * {Types::CreateChannelResponse#etag #etag} => String
     #   * {Types::CreateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -461,6 +462,7 @@ module Aws::MediaPackageV2
     #   resp.ingest_endpoints #=> Array
     #   resp.ingest_endpoints[0].id #=> String
     #   resp.ingest_endpoints[0].url #=> String
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -512,6 +514,7 @@ module Aws::MediaPackageV2
     #   * {Types::CreateChannelGroupResponse#egress_domain #egress_domain} => String
     #   * {Types::CreateChannelGroupResponse#created_at #created_at} => Time
     #   * {Types::CreateChannelGroupResponse#modified_at #modified_at} => Time
+    #   * {Types::CreateChannelGroupResponse#etag #etag} => String
     #   * {Types::CreateChannelGroupResponse#description #description} => String
     #   * {Types::CreateChannelGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -533,6 +536,7 @@ module Aws::MediaPackageV2
     #   resp.egress_domain #=> String
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
+    #   resp.etag #=> String
     #   resp.description #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -624,6 +628,7 @@ module Aws::MediaPackageV2
     #   * {Types::CreateOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
     #   * {Types::CreateOriginEndpointResponse#hls_manifests #hls_manifests} => Array&lt;Types::GetHlsManifestConfiguration&gt;
     #   * {Types::CreateOriginEndpointResponse#low_latency_hls_manifests #low_latency_hls_manifests} => Array&lt;Types::GetLowLatencyHlsManifestConfiguration&gt;
+    #   * {Types::CreateOriginEndpointResponse#etag #etag} => String
     #   * {Types::CreateOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -754,6 +759,7 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -952,6 +958,7 @@ module Aws::MediaPackageV2
     #   * {Types::GetChannelResponse#modified_at #modified_at} => Time
     #   * {Types::GetChannelResponse#description #description} => String
     #   * {Types::GetChannelResponse#ingest_endpoints #ingest_endpoints} => Array&lt;Types::IngestEndpoint&gt;
+    #   * {Types::GetChannelResponse#etag #etag} => String
     #   * {Types::GetChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -972,6 +979,7 @@ module Aws::MediaPackageV2
     #   resp.ingest_endpoints #=> Array
     #   resp.ingest_endpoints[0].id #=> String
     #   resp.ingest_endpoints[0].url #=> String
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1001,6 +1009,7 @@ module Aws::MediaPackageV2
     #   * {Types::GetChannelGroupResponse#created_at #created_at} => Time
     #   * {Types::GetChannelGroupResponse#modified_at #modified_at} => Time
     #   * {Types::GetChannelGroupResponse#description #description} => String
+    #   * {Types::GetChannelGroupResponse#etag #etag} => String
     #   * {Types::GetChannelGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1017,6 +1026,7 @@ module Aws::MediaPackageV2
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
     #   resp.description #=> String
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1104,6 +1114,7 @@ module Aws::MediaPackageV2
     #   * {Types::GetOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
     #   * {Types::GetOriginEndpointResponse#hls_manifests #hls_manifests} => Array&lt;Types::GetHlsManifestConfiguration&gt;
     #   * {Types::GetOriginEndpointResponse#low_latency_hls_manifests #low_latency_hls_manifests} => Array&lt;Types::GetLowLatencyHlsManifestConfiguration&gt;
+    #   * {Types::GetOriginEndpointResponse#etag #etag} => String
     #   * {Types::GetOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1165,6 +1176,7 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1578,6 +1590,11 @@ module Aws::MediaPackageV2
     #   identifier for the channel, and must be unique for your account in the
     #   AWS Region and channel group.
     #
+    # @option params [String] :etag
+    #   The expected current Entity Tag (ETag) for the resource. If the
+    #   specified ETag does not match the resource's current entity tag, the
+    #   update request will be rejected.
+    #
     # @option params [String] :description
     #   Any descriptive information that you want to add to the channel for
     #   future identification purposes.
@@ -1591,6 +1608,7 @@ module Aws::MediaPackageV2
     #   * {Types::UpdateChannelResponse#modified_at #modified_at} => Time
     #   * {Types::UpdateChannelResponse#description #description} => String
     #   * {Types::UpdateChannelResponse#ingest_endpoints #ingest_endpoints} => Array&lt;Types::IngestEndpoint&gt;
+    #   * {Types::UpdateChannelResponse#etag #etag} => String
     #   * {Types::UpdateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1598,6 +1616,7 @@ module Aws::MediaPackageV2
     #   resp = client.update_channel({
     #     channel_group_name: "ResourceName", # required
     #     channel_name: "ResourceName", # required
+    #     etag: "EntityTag",
     #     description: "ResourceDescription",
     #   })
     #
@@ -1612,6 +1631,7 @@ module Aws::MediaPackageV2
     #   resp.ingest_endpoints #=> Array
     #   resp.ingest_endpoints[0].id #=> String
     #   resp.ingest_endpoints[0].url #=> String
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1636,6 +1656,11 @@ module Aws::MediaPackageV2
     #   identifier for the channel group, and must be unique for your account
     #   in the AWS Region.
     #
+    # @option params [String] :etag
+    #   The expected current Entity Tag (ETag) for the resource. If the
+    #   specified ETag does not match the resource's current entity tag, the
+    #   update request will be rejected.
+    #
     # @option params [String] :description
     #   Any descriptive information that you want to add to the channel group
     #   for future identification purposes.
@@ -1648,12 +1673,14 @@ module Aws::MediaPackageV2
     #   * {Types::UpdateChannelGroupResponse#created_at #created_at} => Time
     #   * {Types::UpdateChannelGroupResponse#modified_at #modified_at} => Time
     #   * {Types::UpdateChannelGroupResponse#description #description} => String
+    #   * {Types::UpdateChannelGroupResponse#etag #etag} => String
     #   * {Types::UpdateChannelGroupResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_channel_group({
     #     channel_group_name: "ResourceName", # required
+    #     etag: "EntityTag",
     #     description: "ResourceDescription",
     #   })
     #
@@ -1665,6 +1692,7 @@ module Aws::MediaPackageV2
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
     #   resp.description #=> String
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1724,6 +1752,11 @@ module Aws::MediaPackageV2
     # @option params [Array<Types::CreateLowLatencyHlsManifestConfiguration>] :low_latency_hls_manifests
     #   A low-latency HLS manifest configuration.
     #
+    # @option params [String] :etag
+    #   The expected current Entity Tag (ETag) for the resource. If the
+    #   specified ETag does not match the resource's current entity tag, the
+    #   update request will be rejected.
+    #
     # @return [Types::UpdateOriginEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateOriginEndpointResponse#arn #arn} => String
@@ -1738,6 +1771,7 @@ module Aws::MediaPackageV2
     #   * {Types::UpdateOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
     #   * {Types::UpdateOriginEndpointResponse#hls_manifests #hls_manifests} => Array&lt;Types::GetHlsManifestConfiguration&gt;
     #   * {Types::UpdateOriginEndpointResponse#low_latency_hls_manifests #low_latency_hls_manifests} => Array&lt;Types::GetLowLatencyHlsManifestConfiguration&gt;
+    #   * {Types::UpdateOriginEndpointResponse#etag #etag} => String
     #   * {Types::UpdateOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1811,6 +1845,7 @@ module Aws::MediaPackageV2
     #         },
     #       },
     #     ],
+    #     etag: "EntityTag",
     #   })
     #
     # @example Response structure
@@ -1864,6 +1899,7 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
     #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1889,7 +1925,7 @@ module Aws::MediaPackageV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

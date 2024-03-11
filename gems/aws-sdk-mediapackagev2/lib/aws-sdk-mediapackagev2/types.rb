@@ -189,6 +189,12 @@ module Aws::MediaPackageV2
     #   The date and time the channel group was modified.
     #   @return [Time]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description for your channel group.
     #   @return [String]
@@ -206,6 +212,7 @@ module Aws::MediaPackageV2
       :egress_domain,
       :created_at,
       :modified_at,
+      :etag,
       :description,
       :tags)
       SENSITIVE = []
@@ -290,6 +297,12 @@ module Aws::MediaPackageV2
     #   The list of ingest endpoints.
     #   @return [Array<Types::IngestEndpoint>]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The comma-separated list of tag key:value pairs assigned to the
     #   channel.
@@ -305,6 +318,7 @@ module Aws::MediaPackageV2
       :modified_at,
       :description,
       :ingest_endpoints,
+      :etag,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -577,6 +591,12 @@ module Aws::MediaPackageV2
     #   A low-latency HLS manifest configuration.
     #   @return [Array<Types::GetLowLatencyHlsManifestConfiguration>]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The comma-separated list of tag key:value pairs assigned to the
     #   origin endpoint.
@@ -597,6 +617,7 @@ module Aws::MediaPackageV2
       :startover_window_seconds,
       :hls_manifests,
       :low_latency_hls_manifests,
+      :etag,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -963,6 +984,12 @@ module Aws::MediaPackageV2
     #   The description for your channel group.
     #   @return [String]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The comma-separated list of tag key:value pairs assigned to the
     #   channel group.
@@ -977,6 +1004,7 @@ module Aws::MediaPackageV2
       :created_at,
       :modified_at,
       :description,
+      :etag,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1082,6 +1110,12 @@ module Aws::MediaPackageV2
     #   The list of ingest endpoints.
     #   @return [Array<Types::IngestEndpoint>]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The comma-separated list of tag key:value pairs assigned to the
     #   channel.
@@ -1097,6 +1131,7 @@ module Aws::MediaPackageV2
       :modified_at,
       :description,
       :ingest_endpoints,
+      :etag,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1381,6 +1416,12 @@ module Aws::MediaPackageV2
     #   A low-latency HLS manifest configuration.
     #   @return [Array<Types::GetLowLatencyHlsManifestConfiguration>]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The comma-separated list of tag key:value pairs assigned to the
     #   origin endpoint.
@@ -1401,6 +1442,7 @@ module Aws::MediaPackageV2
       :startover_window_seconds,
       :hls_manifests,
       :low_latency_hls_manifests,
+      :etag,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2051,6 +2093,12 @@ module Aws::MediaPackageV2
     #   account in the AWS Region.
     #   @return [String]
     #
+    # @!attribute [rw] etag
+    #   The expected current Entity Tag (ETag) for the resource. If the
+    #   specified ETag does not match the resource's current entity tag,
+    #   the update request will be rejected.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   Any descriptive information that you want to add to the channel
     #   group for future identification purposes.
@@ -2060,6 +2108,7 @@ module Aws::MediaPackageV2
     #
     class UpdateChannelGroupRequest < Struct.new(
       :channel_group_name,
+      :etag,
       :description)
       SENSITIVE = []
       include Aws::Structure
@@ -2093,6 +2142,12 @@ module Aws::MediaPackageV2
     #   The description for your channel group.
     #   @return [String]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The comma-separated list of tag key:value pairs assigned to the
     #   channel group.
@@ -2107,6 +2162,7 @@ module Aws::MediaPackageV2
       :created_at,
       :modified_at,
       :description,
+      :etag,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2124,6 +2180,12 @@ module Aws::MediaPackageV2
     #   the AWS Region and channel group.
     #   @return [String]
     #
+    # @!attribute [rw] etag
+    #   The expected current Entity Tag (ETag) for the resource. If the
+    #   specified ETag does not match the resource's current entity tag,
+    #   the update request will be rejected.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   Any descriptive information that you want to add to the channel for
     #   future identification purposes.
@@ -2134,6 +2196,7 @@ module Aws::MediaPackageV2
     class UpdateChannelRequest < Struct.new(
       :channel_group_name,
       :channel_name,
+      :etag,
       :description)
       SENSITIVE = []
       include Aws::Structure
@@ -2171,6 +2234,12 @@ module Aws::MediaPackageV2
     #   The list of ingest endpoints.
     #   @return [Array<Types::IngestEndpoint>]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The comma-separated list of tag key:value pairs assigned to the
     #   channel.
@@ -2186,6 +2255,7 @@ module Aws::MediaPackageV2
       :modified_at,
       :description,
       :ingest_endpoints,
+      :etag,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2240,6 +2310,12 @@ module Aws::MediaPackageV2
     #   A low-latency HLS manifest configuration.
     #   @return [Array<Types::CreateLowLatencyHlsManifestConfiguration>]
     #
+    # @!attribute [rw] etag
+    #   The expected current Entity Tag (ETag) for the resource. If the
+    #   specified ETag does not match the resource's current entity tag,
+    #   the update request will be rejected.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/UpdateOriginEndpointRequest AWS API Documentation
     #
     class UpdateOriginEndpointRequest < Struct.new(
@@ -2251,7 +2327,8 @@ module Aws::MediaPackageV2
       :description,
       :startover_window_seconds,
       :hls_manifests,
-      :low_latency_hls_manifests)
+      :low_latency_hls_manifests,
+      :etag)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2313,6 +2390,12 @@ module Aws::MediaPackageV2
     #   A low-latency HLS manifest configuration.
     #   @return [Array<Types::GetLowLatencyHlsManifestConfiguration>]
     #
+    # @!attribute [rw] etag
+    #   The current Entity Tag (ETag) associated with this resource. The
+    #   entity tag can be used to safely make concurrent updates to the
+    #   resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The comma-separated list of tag key:value pairs assigned to the
     #   origin endpoint.
@@ -2333,6 +2416,7 @@ module Aws::MediaPackageV2
       :startover_window_seconds,
       :hls_manifests,
       :low_latency_hls_manifests,
+      :etag,
       :tags)
       SENSITIVE = []
       include Aws::Structure
