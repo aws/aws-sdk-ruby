@@ -232,7 +232,7 @@ module Aws
             )
             expect { object.upload_file(one_hundred_seventeen_meg_file) }.to raise_error(
               S3::MultipartUploadError,
-              'failed to abort multipart upload: network-error'
+              /failed to abort multipart upload: network-error. Multipart upload failed: part failed/
             )
           end
         end
