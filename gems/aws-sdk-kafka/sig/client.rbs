@@ -374,6 +374,9 @@ module Aws
                                      copy_access_control_lists_for_topics: bool?,
                                      copy_topic_configurations: bool?,
                                      detect_and_copy_new_topics: bool?,
+                                     starting_position: {
+                                       type: ("LATEST" | "EARLIEST")?
+                                     }?,
                                      topics_to_exclude: Array[::String]?,
                                      topics_to_replicate: Array[::String]
                                    }

@@ -337,11 +337,11 @@ module Aws::EC2
     #     The snapshot must be created on the same Outpost as the volume.
     #
     #   For more information, see [Create local snapshots from volumes on an
-    #   Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Outpost][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-snapshot
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#create-snapshot
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the snapshot during creation.
     # @option options [Boolean] :dry_run

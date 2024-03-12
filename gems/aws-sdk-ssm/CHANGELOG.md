@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.166.0 (2024-03-12)
+------------------
+
+* Feature - March 2024 doc-only updates for Systems Manager.
+
 1.165.0 (2024-02-21)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.442.0 (2024-03-12)
+------------------
+
+* Feature - Documentation updates for Amazon EC2.
+
 1.441.0 (2024-03-07)
 ------------------
 

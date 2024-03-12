@@ -280,25 +280,21 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   The sets of IP permissions. You can't specify a destination security
-    #   group and a CIDR IP address range in the same set of permissions.
+    #   The permissions for the security group rules.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags applied to the security group rule.
     # @option options [String] :cidr_ip
-    #   Not supported. Use a set of IP permissions to specify the CIDR.
+    #   Not supported. Use IP permissions instead.
     # @option options [Integer] :from_port
-    #   Not supported. Use a set of IP permissions to specify the port.
+    #   Not supported. Use IP permissions instead.
     # @option options [String] :ip_protocol
-    #   Not supported. Use a set of IP permissions to specify the protocol
-    #   name or number.
+    #   Not supported. Use IP permissions instead.
     # @option options [Integer] :to_port
-    #   Not supported. Use a set of IP permissions to specify the port.
+    #   Not supported. Use IP permissions instead.
     # @option options [String] :source_security_group_name
-    #   Not supported. Use a set of IP permissions to specify a destination
-    #   security group.
+    #   Not supported. Use IP permissions instead.
     # @option options [String] :source_security_group_owner_id
-    #   Not supported. Use a set of IP permissions to specify a destination
-    #   security group.
+    #   Not supported. Use IP permissions instead.
     # @return [Types::AuthorizeSecurityGroupEgressResult]
     def authorize_egress(options = {})
       options = options.merge(group_id: @id)
@@ -369,73 +365,68 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [String] :cidr_ip
-    #   The IPv4 address range, in CIDR format. You can't specify this
-    #   parameter when specifying a source security group. To specify an IPv6
-    #   address range, use a set of IP permissions.
+    #   The IPv4 address range, in CIDR format.
     #
-    #   Alternatively, use a set of IP permissions to specify multiple rules
-    #   and a description for the rule.
+    #   To specify an IPv6 address range, use IP permissions instead.
+    #
+    #   To specify multiple rules and descriptions for the rules, use IP
+    #   permissions instead.
     # @option options [Integer] :from_port
     #   If the protocol is TCP or UDP, this is the start of the port range. If
-    #   the protocol is ICMP, this is the type number. A value of -1 indicates
-    #   all ICMP types. If you specify all ICMP types, you must specify all
-    #   ICMP codes.
+    #   the protocol is ICMP, this is the ICMP type or -1 (all ICMP types).
     #
-    #   Alternatively, use a set of IP permissions to specify multiple rules
-    #   and a description for the rule.
+    #   To specify multiple rules and descriptions for the rules, use IP
+    #   permissions instead.
     # @option options [String] :group_name
-    #   \[Default VPC\] The name of the security group. You must specify
-    #   either the security group ID or the security group name in the
-    #   request. For security groups in a nondefault VPC, you must specify the
-    #   security group ID.
+    #   \[Default VPC\] The name of the security group. For security groups
+    #   for a default VPC you can specify either the ID or the name of the
+    #   security group. For security groups for a nondefault VPC, you must
+    #   specify the ID of the security group.
     # @option options [Array<Types::IpPermission>] :ip_permissions
-    #   The sets of IP permissions.
+    #   The permissions for the security group rules.
     # @option options [String] :ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-    #   Numbers][1]). To specify `icmpv6`, use a set of IP permissions.
+    #   Numbers][1]). To specify all protocols, use `-1`.
     #
-    #   Use `-1` to specify all protocols. If you specify `-1` or a protocol
-    #   other than `tcp`, `udp`, or `icmp`, traffic on all ports is allowed,
-    #   regardless of any ports you specify.
+    #   To specify `icmpv6`, use IP permissions instead.
     #
-    #   Alternatively, use a set of IP permissions to specify multiple rules
-    #   and a description for the rule.
+    #   If you specify a protocol other than one of the supported values,
+    #   traffic is allowed on all ports, regardless of any ports that you
+    #   specify.
+    #
+    #   To specify multiple rules and descriptions for the rules, use IP
+    #   permissions instead.
     #
     #
     #
     #   [1]: http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
     # @option options [String] :source_security_group_name
-    #   \[Default VPC\] The name of the source security group. You can't
-    #   specify this parameter in combination with the following parameters:
-    #   the CIDR IP address range, the start of the port range, the IP
-    #   protocol, and the end of the port range. Creates rules that grant full
-    #   ICMP, UDP, and TCP access. To create a rule with a specific IP
-    #   protocol and port range, use a set of IP permissions instead. The
-    #   source security group must be in the same VPC.
-    # @option options [String] :source_security_group_owner_id
-    #   \[Nondefault VPC\] The Amazon Web Services account ID for the source
-    #   security group, if the source security group is in a different
-    #   account. You can't specify this parameter in combination with the
-    #   following parameters: the CIDR IP address range, the IP protocol, the
-    #   start of the port range, and the end of the port range. Creates rules
-    #   that grant full ICMP, UDP, and TCP access. To create a rule with a
-    #   specific IP protocol and port range, use a set of IP permissions
+    #   \[Default VPC\] The name of the source security group.
+    #
+    #   The rule grants full ICMP, UDP, and TCP access. To create a rule with
+    #   a specific protocol and port range, specify a set of IP permissions
     #   instead.
+    # @option options [String] :source_security_group_owner_id
+    #   The Amazon Web Services account ID for the source security group, if
+    #   the source security group is in a different account.
+    #
+    #   The rule grants full ICMP, UDP, and TCP access. To create a rule with
+    #   a specific protocol and port range, use IP permissions instead.
     # @option options [Integer] :to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
-    #   the protocol is ICMP, this is the code. A value of -1 indicates all
-    #   ICMP codes. If you specify all ICMP types, you must specify all ICMP
-    #   codes.
+    #   the protocol is ICMP, this is the ICMP code or -1 (all ICMP codes). If
+    #   the start port is -1 (all ICMP types), then the end port must be -1
+    #   (all ICMP codes).
     #
-    #   Alternatively, use a set of IP permissions to specify multiple rules
-    #   and a description for the rule.
+    #   To specify multiple rules and descriptions for the rules, use IP
+    #   permissions instead.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
-    #   \[VPC Only\] The tags applied to the security group rule.
+    #   The tags applied to the security group rule.
     # @return [Types::AuthorizeSecurityGroupIngressResult]
     def authorize_ingress(options = {})
       options = options.merge(group_id: @id)
@@ -694,8 +685,7 @@ module Aws::EC2
     #   specifying a source security group.
     # @option options [Integer] :from_port
     #   If the protocol is TCP or UDP, this is the start of the port range. If
-    #   the protocol is ICMP, this is the type number. A value of -1 indicates
-    #   all ICMP types.
+    #   the protocol is ICMP, this is the ICMP type or -1 (all ICMP types).
     # @option options [String] :group_name
     #   \[Default VPC\] The name of the security group. You must specify
     #   either the security group ID or the security group name in the
@@ -722,8 +712,7 @@ module Aws::EC2
     #   Not supported.
     # @option options [Integer] :to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
-    #   the protocol is ICMP, this is the code. A value of -1 indicates all
-    #   ICMP codes.
+    #   the protocol is ICMP, this is the ICMP code or -1 (all ICMP codes).
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

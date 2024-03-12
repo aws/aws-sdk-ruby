@@ -430,8 +430,8 @@ module Aws::SSM
     # meaning to and are interpreted strictly as a string of characters.
     #
     # For more information about using tags with Amazon Elastic Compute
-    # Cloud (Amazon EC2) instances, see [Tagging your Amazon EC2
-    # resources][1] in the *Amazon EC2 User Guide*.
+    # Cloud (Amazon EC2) instances, see [Tag your Amazon EC2 resources][1]
+    # in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -627,8 +627,8 @@ module Aws::SSM
     # Agent on machines in your hybrid environment. For more information
     # about requirements for managing on-premises machines using Systems
     # Manager, see [Setting up Amazon Web Services Systems Manager for
-    # hybrid environments][1] in the *Amazon Web Services Systems Manager
-    # User Guide*.
+    # hybrid and multicloud environments][1] in the *Amazon Web Services
+    # Systems Manager User Guide*.
     #
     # <note markdown="1"> Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and
     # on-premises servers and VMs that are configured for Systems Manager
@@ -658,8 +658,9 @@ module Aws::SSM
     #   want to assign to the managed node. This IAM role must provide
     #   AssumeRole permissions for the Amazon Web Services Systems Manager
     #   service principal `ssm.amazonaws.com`. For more information, see
-    #   [Create an IAM service role for a hybrid environment][1] in the
-    #   *Amazon Web Services Systems Manager User Guide*.
+    #   [Create an IAM service role for a hybrid and multicloud
+    #   environment][1] in the *Amazon Web Services Systems Manager User
+    #   Guide*.
     #
     #   <note markdown="1"> You can't specify an IAM service-linked role for this parameter. You
     #   must create a unique role.
@@ -789,8 +790,8 @@ module Aws::SSM
     #   For example, `AWS-ApplyPatchBaseline` or `My-Document`.
     #
     # @option params [String] :document_version
-    #   The document version you want to associate with the target(s). Can be
-    #   a specific version or the default version.
+    #   The document version you want to associate with the targets. Can be a
+    #   specific version or the default version.
     #
     #   State Manager doesn't support running associations that use a new
     #   version of a document if that document is shared from another account.
@@ -823,8 +824,8 @@ module Aws::SSM
     #   Amazon Web Services account, or individual managed node IDs. You can
     #   target all managed nodes in an Amazon Web Services account by
     #   specifying the `InstanceIds` key with a value of `*`. For more
-    #   information about choosing targets for an association, see [Using
-    #   targets and rate controls with State Manager associations][1] in the
+    #   information about choosing targets for an association, see [About
+    #   targets and rate controls in State Manager associations][1] in the
     #   *Amazon Web Services Systems Manager User Guide*.
     #
     #
@@ -832,8 +833,7 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html
     #
     # @option params [String] :schedule_expression
-    #   A cron expression when the association will be applied to the
-    #   target(s).
+    #   A cron expression when the association will be applied to the targets.
     #
     # @option params [Types::InstanceAssociationOutputLocation] :output_location
     #   An Amazon Simple Storage Service (Amazon S3) bucket where you want to
@@ -1346,16 +1346,17 @@ module Aws::SSM
     #   For examples, see the following topics in the *Amazon Web Services
     #   Systems Manager User Guide*.
     #
-    #   * [Create an SSM document (Amazon Web Services API)][1]
+    #   * [Create an SSM document (console)][1]
     #
-    #   * [Create an SSM document (Amazon Web Services CLI)][2]
+    #   * [Create an SSM document (command line)][2]
     #
-    #   * [Create an SSM document (API)][1]
+    #   * [Create an SSM document (API)][3]
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html
-    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-cli.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/documents-using.html#create-ssm-console
+    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/documents-using.html#create-ssm-document-cli
+    #   [3]: https://docs.aws.amazon.com/systems-manager/latest/userguide/documents-using.html#create-ssm-document-api
     #
     # @option params [Array<Types::DocumentRequires>] :requires
     #   A list of SSM documents required by a document. This parameter is used
@@ -1741,8 +1742,8 @@ module Aws::SSM
     #   resource in the request. Use the `/aws/automations` key in
     #   OperationalData to associate an Automation runbook with the OpsItem.
     #   To view Amazon Web Services CLI example commands that use these keys,
-    #   see [Creating OpsItems manually][1] in the *Amazon Web Services
-    #   Systems Manager User Guide*.
+    #   see [Create OpsItems manually][1] in the *Amazon Web Services Systems
+    #   Manager User Guide*.
     #
     #
     #
@@ -1997,12 +1998,13 @@ module Aws::SSM
     #     and its status is reported as `InstalledOther`. This is the default
     #     action if no option is specified.
     #
-    #   * <b> <code>BLOCK</code> </b>: Packages in the `RejectedPatches` list,
-    #     and packages that include them as dependencies, aren't installed
-    #     under any circumstances. If a package was installed before it was
-    #     added to the Rejected patches list, it is considered non-compliant
-    #     with the patch baseline, and its status is reported as
-    #     `InstalledRejected`.
+    #   * **BLOCK**: Packages in the **Rejected patches** list, and packages
+    #     that include them as dependencies, aren't installed by Patch
+    #     Manager under any circumstances. If a package was installed before
+    #     it was added to the **Rejected patches** list, or is installed
+    #     outside of Patch Manager afterward, it's considered noncompliant
+    #     with the patch baseline and its status is reported as
+    #     *InstalledRejected*.
     #
     # @option params [String] :description
     #   A description of the patch baseline.
@@ -2630,9 +2632,12 @@ module Aws::SSM
     # * `Parameter` - The resource policy is used to share a parameter with
     #   other accounts using Resource Access Manager (RAM). For more
     #   information about cross-account sharing of parameters, see [Working
-    #   with shared
-    #   parameters](systems-manager/latest/userguide/parameter-store-shared-parameters.html)
-    #   in the *Amazon Web Services Systems Manager User Guide*.
+    #   with shared parameters][1] in the *Amazon Web Services Systems
+    #   Manager User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html
     #
     # @option params [required, String] :resource_arn
     #   Amazon Resource Name (ARN) of the resource to which the policies are
@@ -3658,7 +3663,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # All associations for the managed node(s).
+    # All associations for the managed nodes.
     #
     # @option params [required, String] :instance_id
     #   The managed node ID for which you want to view all associations.
@@ -3777,7 +3782,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # The status of the associations for the managed node(s).
+    # The status of the associations for the managed nodes.
     #
     # @option params [required, String] :instance_id
     #   The managed node IDs for which you want association status
@@ -4786,9 +4791,9 @@ module Aws::SSM
     # Operations engineers and IT professionals use Amazon Web Services
     # Systems Manager OpsCenter to view, investigate, and remediate
     # operational issues impacting the performance and health of their
-    # Amazon Web Services resources. For more information, see
-    # [OpsCenter][2] in the *Amazon Web Services Systems Manager User
-    # Guide*.
+    # Amazon Web Services resources. For more information, see [Amazon Web
+    # Services Systems Manager OpsCenter][2] in the *Amazon Web Services
+    # Systems Manager User Guide*.
     #
     #
     #
@@ -4973,15 +4978,15 @@ module Aws::SSM
     #   [PromoteResourceShareCreatedFromPolicy][1] API operation.
     #
     #    For more information about sharing parameters, see [Working with
-    #   shared
-    #   parameters](systems-manager/latest/userguide/parameter-store-shared-parameters.html)
-    #   in the *Amazon Web Services Systems Manager User Guide*.
+    #   shared parameters][2] in the *Amazon Web Services Systems Manager User
+    #   Guide*.
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html
+    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html
     #
     # @return [Types::DescribeParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6493,9 +6498,9 @@ module Aws::SSM
     # Operations engineers and IT professionals use Amazon Web Services
     # Systems Manager OpsCenter to view, investigate, and remediate
     # operational issues impacting the performance and health of their
-    # Amazon Web Services resources. For more information, see
-    # [OpsCenter][2] in the *Amazon Web Services Systems Manager User
-    # Guide*.
+    # Amazon Web Services resources. For more information, see [Amazon Web
+    # Services Systems Manager OpsCenter][2] in the *Amazon Web Services
+    # Systems Manager User Guide*.
     #
     #
     #
@@ -6852,7 +6857,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sharing.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html
     #
     # @option params [Boolean] :with_decryption
     #   Return decrypted secure string value. Return decrypted values for
@@ -8492,7 +8497,7 @@ module Aws::SSM
     #   The Amazon Web Services users that should no longer have access to the
     #   document. The Amazon Web Services user can either be a group of
     #   account IDs or *All*. This action has a higher priority than
-    #   *AccountIdsToAdd*. If you specify an ID to add and the same ID to
+    #   `AccountIdsToAdd`. If you specify an ID to add and the same ID to
     #   remove, the system removes access to the document.
     #
     # @option params [String] :shared_document_version
@@ -8564,7 +8569,7 @@ module Aws::SSM
     #
     # * InstalledTime: The time the association, patch, or custom compliance
     #   item was applied to the resource. Specify the time by using the
-    #   following format: yyyy-MM-dd'T'HH:mm:ss'Z'
+    #   following format: `yyyy-MM-dd'T'HH:mm:ss'Z'`
     #
     # @option params [required, String] :resource_id
     #   Specify an ID for this resource. For a managed node, this is the node
@@ -8582,7 +8587,7 @@ module Aws::SSM
     #   A summary of the call execution that includes an execution ID, the
     #   type of execution (for example, `Command`), and the date/time of the
     #   execution using a datetime object that is saved in the following
-    #   format: yyyy-MM-dd'T'HH:mm:ss'Z'.
+    #   format: `yyyy-MM-dd'T'HH:mm:ss'Z'`
     #
     # @option params [required, Array<Types::ComplianceItemEntry>] :items
     #   Information about the compliance as defined by the resource type. For
@@ -8838,8 +8843,8 @@ module Aws::SSM
     #   configured to use parameter policies. You can create a maximum of
     #   100,000 advanced parameters for each Region in an Amazon Web Services
     #   account. Advanced parameters incur a charge. For more information, see
-    #   [Standard and advanced parameter tiers][1] in the *Amazon Web Services
-    #   Systems Manager User Guide*.
+    #   [Managing parameter tiers][1] in the *Amazon Web Services Systems
+    #   Manager User Guide*.
     #
     #   You can change a standard parameter to an advanced parameter any time.
     #   But you can't revert an advanced parameter to a standard parameter.
@@ -8898,7 +8903,7 @@ module Aws::SSM
     #
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html
-    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html
+    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html#ps-default-tier
     #
     # @option params [String] :policies
     #   One or more policies to apply to a parameter. This operation takes a
@@ -8959,7 +8964,7 @@ module Aws::SSM
     #   `aws:ec2:image` parameters are created successfully, see [Setting up
     #   notifications or trigger actions based on Parameter Store events][1].
     #   For more information about AMI format validation , see [Native
-    #   parameter support for Amazon Machine Image (AMI) IDs][2].
+    #   parameter support for Amazon Machine Image IDs][2].
     #
     #    </note>
     #
@@ -9048,9 +9053,9 @@ module Aws::SSM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/parameter-store- advanced-parameters.html
-    # [2]: https://docs.aws.amazon.com/parameter-store-advanced-parameters.html#parameter- store-advanced-parameters-enabling
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-mgmt
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html
+    # [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html#parameter-store-advanced-parameters-enabling
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html
     # [4]: https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html
     # [5]: https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_DescribeParameters.html
     # [6]: https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html#share
@@ -9317,18 +9322,13 @@ module Aws::SSM
     #   Systems Manager exists in your account, it is created when you run
     #   `RegisterTaskWithMaintenanceWindow`.
     #
-    #   For more information, see the following topics in the in the *Amazon
-    #   Web Services Systems Manager User Guide*:
-    #
-    #   * [Using service-linked roles for Systems Manager][1]
-    #
-    #   * [Should I use a service-linked role or a custom service role to run
-    #     maintenance window tasks? ][2]
+    #   For more information, see [Using service-linked roles for Systems
+    #   Manager][1] in the in the *Amazon Web Services Systems Manager User
+    #   Guide*:
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
-    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
     #
     # @option params [required, String] :task_type
     #   The type of task being registered.
@@ -9771,9 +9771,8 @@ module Aws::SSM
     #   identify the managed nodes to send commands to, you can a send command
     #   to tens, hundreds, or thousands of nodes at once.
     #
-    #   For more information about how to use targets, see [Using targets and
-    #   rate controls to send commands to a fleet][1] in the *Amazon Web
-    #   Services Systems Manager User Guide*.
+    #   For more information about how to use targets, see [Run commands at
+    #   scale][1] in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -9790,9 +9789,8 @@ module Aws::SSM
     #   To send a command to a smaller number of managed nodes, you can use
     #   the `InstanceIds` option instead.
     #
-    #   For more information about how to use targets, see [Sending commands
-    #   to a fleet][1] in the *Amazon Web Services Systems Manager User
-    #   Guide*.
+    #   For more information about how to use targets, see [Run commands at
+    #   scale][1] in the *Amazon Web Services Systems Manager User Guide*.
     #
     #
     #
@@ -9803,8 +9801,8 @@ module Aws::SSM
     #   document) to run. This can be a public document or a custom document.
     #   To run a shared document belonging to another account, specify the
     #   document Amazon Resource Name (ARN). For more information about how to
-    #   use shared documents, see [Using shared SSM documents][1] in the
-    #   *Amazon Web Services Systems Manager User Guide*.
+    #   use shared documents, see [Sharing SSM documents][1] in the *Amazon
+    #   Web Services Systems Manager User Guide*.
     #
     #   <note markdown="1"> If you specify a document name or ARN that hasn't been shared with
     #   your account, you receive an `InvalidDocument` error.
@@ -10049,12 +10047,12 @@ module Aws::SSM
     #   The name of the SSM document to run. This can be a public document or
     #   a custom document. To run a shared document belonging to another
     #   account, specify the document ARN. For more information about how to
-    #   use shared documents, see [Using shared SSM documents][1] in the
-    #   *Amazon Web Services Systems Manager User Guide*.
+    #   use shared documents, see [Sharing SSM documents][1] in the *Amazon
+    #   Web Services Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/documents-ssm-sharing.html
     #
     # @option params [String] :document_version
     #   The version of the Automation runbook to use for this execution.
@@ -11544,18 +11542,13 @@ module Aws::SSM
     #   Systems Manager exists in your account, it is created when you run
     #   `RegisterTaskWithMaintenanceWindow`.
     #
-    #   For more information, see the following topics in the in the *Amazon
-    #   Web Services Systems Manager User Guide*:
-    #
-    #   * [Using service-linked roles for Systems Manager][1]
-    #
-    #   * [Should I use a service-linked role or a custom service role to run
-    #     maintenance window tasks? ][2]
+    #   For more information, see [Using service-linked roles for Systems
+    #   Manager][1] in the in the *Amazon Web Services Systems Manager User
+    #   Guide*:
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions
-    #   [2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role
     #
     # @option params [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>] :task_parameters
     #   The parameters to modify.
@@ -11854,8 +11847,9 @@ module Aws::SSM
     #   want to assign to the managed node. This IAM role must provide
     #   AssumeRole permissions for the Amazon Web Services Systems Manager
     #   service principal `ssm.amazonaws.com`. For more information, see
-    #   [Create an IAM service role for a hybrid environment][1] in the
-    #   *Amazon Web Services Systems Manager User Guide*.
+    #   [Create an IAM service role for a hybrid and multicloud
+    #   environment][1] in the *Amazon Web Services Systems Manager User
+    #   Guide*.
     #
     #   <note markdown="1"> You can't specify an IAM service-linked role for this parameter. You
     #   must create a unique role.
@@ -11892,9 +11886,9 @@ module Aws::SSM
     # Operations engineers and IT professionals use Amazon Web Services
     # Systems Manager OpsCenter to view, investigate, and remediate
     # operational issues impacting the performance and health of their
-    # Amazon Web Services resources. For more information, see
-    # [OpsCenter][2] in the *Amazon Web Services Systems Manager User
-    # Guide*.
+    # Amazon Web Services resources. For more information, see [Amazon Web
+    # Services Systems Manager OpsCenter][2] in the *Amazon Web Services
+    # Systems Manager User Guide*.
     #
     #
     #
@@ -12144,12 +12138,13 @@ module Aws::SSM
     #     and its status is reported as `InstalledOther`. This is the default
     #     action if no option is specified.
     #
-    #   * <b> <code>BLOCK</code> </b>: Packages in the `RejectedPatches` list,
-    #     and packages that include them as dependencies, aren't installed
-    #     under any circumstances. If a package was installed before it was
-    #     added to the `Rejected` patches list, it is considered non-compliant
-    #     with the patch baseline, and its status is reported as
-    #     `InstalledRejected`.
+    #   * **BLOCK**: Packages in the **Rejected patches** list, and packages
+    #     that include them as dependencies, aren't installed by Patch
+    #     Manager under any circumstances. If a package was installed before
+    #     it was added to the **Rejected patches** list, or is installed
+    #     outside of Patch Manager afterward, it's considered noncompliant
+    #     with the patch baseline and its status is reported as
+    #     *InstalledRejected*.
     #
     # @option params [String] :description
     #   A description of the patch baseline.
@@ -12433,7 +12428,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.165.0'
+      context[:gem_version] = '1.166.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

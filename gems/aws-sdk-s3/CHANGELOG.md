@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.143.1 (2024-03-12)
+------------------
+
 * Issue - Include original part errors in message when aborting multipart upload fails (#2990).
 
 1.143.0 (2024-01-26)

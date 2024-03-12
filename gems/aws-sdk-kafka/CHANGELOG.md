@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2024-03-12)
+------------------
+
+* Feature - Added support for specifying the starting position of topic replication in MSK-Replicator.
+
 1.68.0 (2024-01-26)
 ------------------
 
