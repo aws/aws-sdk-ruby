@@ -588,7 +588,8 @@
     "models": "iot-jobs-data/2017-09-29"
   },
   "IoTRoboRunner": {
-    "models": "iot-roborunner/2018-05-10"
+    "models": "iot-roborunner/2018-05-10",
+    "deprecated": true
   },
   "IoTSecureTunneling": {
     "models": "iotsecuretunneling/2018-10-05"
