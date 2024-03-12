@@ -212,7 +212,12 @@ module ProtocolTestsHelper
         when 'rest-json'
           if body[0] == '{'
             body = Aws::Json.load(body)
-            expected_body = Aws::Json.load(expected_body)
+            expected_body = case expected_body
+                            when ''
+                              {}
+                            else
+                              Aws::Json.load(expected_body)
+                            end
           end
         when 'rest-xml'
           body = normalize_xml(body)
