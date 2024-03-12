@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2024-03-12)
+------------------
+
+* Feature - CloudFormation documentation update for March, 2024
+
 1.100.0 (2024-03-04)
 ------------------
 

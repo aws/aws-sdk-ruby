@@ -3235,9 +3235,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
-    #   The sets of IP permissions. You can't specify a destination
-    #   security group and a CIDR IP address range in the same set of
-    #   permissions.
+    #   The permissions for the security group rules.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] tag_specifications
@@ -3245,30 +3243,27 @@ module Aws::EC2
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] cidr_ip
-    #   Not supported. Use a set of IP permissions to specify the CIDR.
+    #   Not supported. Use IP permissions instead.
     #   @return [String]
     #
     # @!attribute [rw] from_port
-    #   Not supported. Use a set of IP permissions to specify the port.
+    #   Not supported. Use IP permissions instead.
     #   @return [Integer]
     #
     # @!attribute [rw] ip_protocol
-    #   Not supported. Use a set of IP permissions to specify the protocol
-    #   name or number.
+    #   Not supported. Use IP permissions instead.
     #   @return [String]
     #
     # @!attribute [rw] to_port
-    #   Not supported. Use a set of IP permissions to specify the port.
+    #   Not supported. Use IP permissions instead.
     #   @return [Integer]
     #
     # @!attribute [rw] source_security_group_name
-    #   Not supported. Use a set of IP permissions to specify a destination
-    #   security group.
+    #   Not supported. Use IP permissions instead.
     #   @return [String]
     #
     # @!attribute [rw] source_security_group_owner_id
-    #   Not supported. Use a set of IP permissions to specify a destination
-    #   security group.
+    #   Not supported. Use IP permissions instead.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupEgressRequest AWS API Documentation
@@ -3307,51 +3302,50 @@ module Aws::EC2
     end
 
     # @!attribute [rw] cidr_ip
-    #   The IPv4 address range, in CIDR format. You can't specify this
-    #   parameter when specifying a source security group. To specify an
-    #   IPv6 address range, use a set of IP permissions.
+    #   The IPv4 address range, in CIDR format.
     #
-    #   Alternatively, use a set of IP permissions to specify multiple rules
-    #   and a description for the rule.
+    #   To specify an IPv6 address range, use IP permissions instead.
+    #
+    #   To specify multiple rules and descriptions for the rules, use IP
+    #   permissions instead.
     #   @return [String]
     #
     # @!attribute [rw] from_port
     #   If the protocol is TCP or UDP, this is the start of the port range.
-    #   If the protocol is ICMP, this is the type number. A value of -1
-    #   indicates all ICMP types. If you specify all ICMP types, you must
-    #   specify all ICMP codes.
+    #   If the protocol is ICMP, this is the ICMP type or -1 (all ICMP
+    #   types).
     #
-    #   Alternatively, use a set of IP permissions to specify multiple rules
-    #   and a description for the rule.
+    #   To specify multiple rules and descriptions for the rules, use IP
+    #   permissions instead.
     #   @return [Integer]
     #
     # @!attribute [rw] group_id
-    #   The ID of the security group. You must specify either the security
-    #   group ID or the security group name in the request. For security
-    #   groups in a nondefault VPC, you must specify the security group ID.
+    #   The ID of the security group.
     #   @return [String]
     #
     # @!attribute [rw] group_name
-    #   \[Default VPC\] The name of the security group. You must specify
-    #   either the security group ID or the security group name in the
-    #   request. For security groups in a nondefault VPC, you must specify
-    #   the security group ID.
+    #   \[Default VPC\] The name of the security group. For security groups
+    #   for a default VPC you can specify either the ID or the name of the
+    #   security group. For security groups for a nondefault VPC, you must
+    #   specify the ID of the security group.
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
-    #   The sets of IP permissions.
+    #   The permissions for the security group rules.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-    #   Numbers][1]). To specify `icmpv6`, use a set of IP permissions.
+    #   Numbers][1]). To specify all protocols, use `-1`.
     #
-    #   Use `-1` to specify all protocols. If you specify `-1` or a protocol
-    #   other than `tcp`, `udp`, or `icmp`, traffic on all ports is allowed,
-    #   regardless of any ports you specify.
+    #   To specify `icmpv6`, use IP permissions instead.
     #
-    #   Alternatively, use a set of IP permissions to specify multiple rules
-    #   and a description for the rule.
+    #   If you specify a protocol other than one of the supported values,
+    #   traffic is allowed on all ports, regardless of any ports that you
+    #   specify.
+    #
+    #   To specify multiple rules and descriptions for the rules, use IP
+    #   permissions instead.
     #
     #
     #
@@ -3359,34 +3353,29 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] source_security_group_name
-    #   \[Default VPC\] The name of the source security group. You can't
-    #   specify this parameter in combination with the following parameters:
-    #   the CIDR IP address range, the start of the port range, the IP
-    #   protocol, and the end of the port range. Creates rules that grant
-    #   full ICMP, UDP, and TCP access. To create a rule with a specific IP
-    #   protocol and port range, use a set of IP permissions instead. The
-    #   source security group must be in the same VPC.
+    #   \[Default VPC\] The name of the source security group.
+    #
+    #   The rule grants full ICMP, UDP, and TCP access. To create a rule
+    #   with a specific protocol and port range, specify a set of IP
+    #   permissions instead.
     #   @return [String]
     #
     # @!attribute [rw] source_security_group_owner_id
-    #   \[Nondefault VPC\] The Amazon Web Services account ID for the source
-    #   security group, if the source security group is in a different
-    #   account. You can't specify this parameter in combination with the
-    #   following parameters: the CIDR IP address range, the IP protocol,
-    #   the start of the port range, and the end of the port range. Creates
-    #   rules that grant full ICMP, UDP, and TCP access. To create a rule
-    #   with a specific IP protocol and port range, use a set of IP
-    #   permissions instead.
+    #   The Amazon Web Services account ID for the source security group, if
+    #   the source security group is in a different account.
+    #
+    #   The rule grants full ICMP, UDP, and TCP access. To create a rule
+    #   with a specific protocol and port range, use IP permissions instead.
     #   @return [String]
     #
     # @!attribute [rw] to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
-    #   the protocol is ICMP, this is the code. A value of -1 indicates all
-    #   ICMP codes. If you specify all ICMP types, you must specify all ICMP
-    #   codes.
+    #   the protocol is ICMP, this is the ICMP code or -1 (all ICMP codes).
+    #   If the start port is -1 (all ICMP types), then the end port must be
+    #   -1 (all ICMP codes).
     #
-    #   Alternatively, use a set of IP permissions to specify multiple rules
-    #   and a description for the rule.
+    #   To specify multiple rules and descriptions for the rules, use IP
+    #   permissions instead.
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -3397,7 +3386,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] tag_specifications
-    #   \[VPC Only\] The tags applied to the security group rule.
+    #   The tags applied to the security group rule.
     #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupIngressRequest AWS API Documentation
@@ -6361,11 +6350,11 @@ module Aws::EC2
     #   snapshot. The default KMS key for Amazon EBS is used unless you
     #   specify a non-default Key Management Service (KMS) KMS key using
     #   `KmsKeyId`. For more information, see [Amazon EBS encryption][1] in
-    #   the *Amazon EC2 User Guide*.
+    #   the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
@@ -6415,12 +6404,12 @@ module Aws::EC2
     #   the destination Outpost. You cannot copy an AMI from an Outpost to a
     #   Region, from one Outpost to another, or within the same Outpost.
     #
-    #   For more information, see [ Copy AMIs from an Amazon Web Services
-    #   Region to an Outpost][1] in the *Amazon EC2 User Guide*.
+    #   For more information, see [Copy AMIs from an Amazon Web Services
+    #   Region to an Outpost][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-amis
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-amis
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -6508,12 +6497,11 @@ module Aws::EC2
     #   the same Outpost.
     #
     #   For more information, see [ Copy snapshots from an Amazon Web
-    #   Services Region to an Outpost][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   Services Region to an Outpost][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-snapshots
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-snapshots
     #   @return [String]
     #
     # @!attribute [rw] destination_region
@@ -6534,12 +6522,12 @@ module Aws::EC2
     #   Otherwise, omit this parameter. Encrypted snapshots are encrypted,
     #   even if you omit this parameter and encryption by default is not
     #   enabled. You cannot set this parameter to false. For more
-    #   information, see [Amazon EBS encryption][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   information, see [Amazon EBS encryption][1] in the *Amazon EBS User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
@@ -7938,10 +7926,12 @@ module Aws::EC2
     #
     # @!attribute [rw] deliver_logs_permission_arn
     #   The ARN of the IAM role that allows Amazon EC2 to publish flow logs
-    #   to a CloudWatch Logs log group in your account.
+    #   to the log destination.
     #
     #   This parameter is required if the destination type is
-    #   `cloud-watch-logs` and unsupported otherwise.
+    #   `cloud-watch-logs`, or if the destination type is
+    #   `kinesis-data-firehose` and the delivery stream and the resources to
+    #   monitor are in different accounts.
     #   @return [String]
     #
     # @!attribute [rw] deliver_cross_account_role
@@ -10533,11 +10523,11 @@ module Aws::EC2
     #     volume.
     #
     #   For more information, see [Create local snapshots from volumes on an
-    #   Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Outpost][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-snapshot
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#create-snapshot
     #   @return [String]
     #
     # @!attribute [rw] volume_id
@@ -10595,12 +10585,11 @@ module Aws::EC2
     #     instance.
     #
     #   For more information, see [ Create multi-volume local snapshots from
-    #   instances on an Outpost][1] in the *Amazon Elastic Compute Cloud
-    #   User Guide*.
+    #   instances on an Outpost][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-multivol-snapshot
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#create-multivol-snapshot
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -11873,8 +11862,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
     #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway (TGW). Use this option to simplify security group
+    #   transit gateway. Use this option to simplify security group
     #   management and control of instance-to-instance traffic across VPCs
     #   that are connected by transit gateway. You can also use this option
     #   to migrate from VPC peering (which was the only option that
@@ -11885,14 +11879,6 @@ module Aws::EC2
     #   If you don't enable or disable SecurityGroupReferencingSupport in
     #   the request, the attachment will inherit the security group
     #   referencing support setting on the transit gateway.
-    #
-    #   For important information about this feature, see [Create a transit
-    #   gateway attachment to a VPC][1] in the *Amazon Web Services Transit
-    #   Gateway Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#create-vpc-attachment
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_support
@@ -12431,8 +12417,7 @@ module Aws::EC2
     #   setting the encryption state to `true` depends on the volume origin
     #   (new or from a snapshot), starting encryption state, ownership, and
     #   whether encryption by default is enabled. For more information, see
-    #   [Encryption by default][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   [Encryption by default][1] in the *Amazon EBS User Guide*.
     #
     #   Encrypted Amazon EBS volumes must be attached to instances that
     #   support Amazon EBS encryption. For more information, see [Supported
@@ -12440,8 +12425,8 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/work-with-ebs-encr.html#encryption-by-default
+    #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
@@ -12540,13 +12525,13 @@ module Aws::EC2
     #   be used as boot volumes.
     #
     #   For more information, see [Amazon EBS volume types][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   *Amazon EBS User Guide*.
     #
     #   Default: `gp2`
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -12565,13 +12550,13 @@ module Aws::EC2
     #   Multi-Attach, you can attach the volume to up to 16 [Instances built
     #   on the Nitro System][1] in the same Availability Zone. This
     #   parameter is supported with `io1` and `io2` volumes only. For more
-    #   information, see [ Amazon EBS Multi-Attach][2] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   information, see [ Amazon EBS Multi-Attach][2] in the *Amazon EBS
+    #   User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html
+    #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html
     #   @return [Boolean]
     #
     # @!attribute [rw] throughput
@@ -16528,7 +16513,7 @@ module Aws::EC2
     #     Local Zones, use the name of the group associated with the Local
     #     Zone (for example, `us-west-2-lax-1`) For Wavelength Zones, use
     #     the name of the group associated with the Wavelength Zone (for
-    #     example, `us-east-1-wl1-bos-wlz-1`).
+    #     example, `us-east-1-wl1`).
     #
     #   * `message` - The Zone message.
     #
@@ -29975,11 +29960,11 @@ module Aws::EC2
     #
     # @!attribute [rw] volume_type
     #   The volume type. For more information, see [Amazon EBS volume
-    #   types][1] in the *Amazon EC2 User Guide*.
+    #   types][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -30021,7 +30006,7 @@ module Aws::EC2
     #   the encryption state to `true` depends on the volume origin (new or
     #   from a snapshot), starting encryption state, ownership, and whether
     #   encryption by default is enabled. For more information, see [Amazon
-    #   EBS encryption][1] in the *Amazon EC2 User Guide*.
+    #   EBS encryption][1] in the *Amazon EBS User Guide*.
     #
     #   In no case can you remove encryption from an encrypted volume.
     #
@@ -30059,8 +30044,8 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html#encryption-parameters
+    #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsBlockDevice AWS API Documentation
@@ -39537,6 +39522,8 @@ module Aws::EC2
     # @!attribute [rw] http_protocol_ipv_6
     #   Enables or disables the IPv6 endpoint for the instance metadata
     #   service.
+    #
+    #   Default: `disabled`
     #   @return [String]
     #
     # @!attribute [rw] instance_metadata_tags
@@ -39597,9 +39584,9 @@ module Aws::EC2
     #   requests. The larger the number, the further instance metadata
     #   requests can travel.
     #
-    #   Default: 1
+    #   Default: `1`
     #
-    #   Possible values: Integers from 1 to 64
+    #   Possible values: Integers from `1` to `64`
     #   @return [Integer]
     #
     # @!attribute [rw] http_endpoint
@@ -39613,6 +39600,8 @@ module Aws::EC2
     # @!attribute [rw] http_protocol_ipv_6
     #   Indicates whether the IPv6 endpoint for the instance metadata
     #   service is enabled or disabled.
+    #
+    #   Default: `disabled`
     #   @return [String]
     #
     # @!attribute [rw] instance_metadata_tags
@@ -39866,11 +39855,10 @@ module Aws::EC2
     #   one network interface in the request. If launching into a default
     #   subnet, the default value is `true`.
     #
-    #   Starting on February 1, 2024, Amazon Web Services will charge for
-    #   all public IPv4 addresses, including public IPv4 addresses
-    #   associated with running instances and Elastic IP addresses. For more
-    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
-    #   pricing page][1].
+    #   Amazon Web Services charges for all public IPv4 addresses, including
+    #   public IPv4 addresses associated with running instances and Elastic
+    #   IP addresses. For more information, see the *Public IPv4 Address*
+    #   tab on the [Amazon VPC pricing page][1].
     #
     #
     #
@@ -41707,13 +41695,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a set of permissions for a security group rule.
+    # Describes the permissions for a security group rule.
     #
     # @!attribute [rw] from_port
     #   If the protocol is TCP or UDP, this is the start of the port range.
-    #   If the protocol is ICMP or ICMPv6, this is the type number. A value
-    #   of -1 indicates all ICMP/ICMPv6 types. If you specify all
-    #   ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.
+    #   If the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all
+    #   ICMP types).
     #   @return [Integer]
     #
     # @!attribute [rw] ip_protocol
@@ -41733,11 +41720,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_ranges
-    #   The IPv4 ranges.
+    #   The IPv4 address ranges.
     #   @return [Array<Types::IpRange>]
     #
     # @!attribute [rw] ipv_6_ranges
-    #   The IPv6 ranges.
+    #   The IPv6 address ranges.
     #   @return [Array<Types::Ipv6Range>]
     #
     # @!attribute [rw] prefix_list_ids
@@ -41746,9 +41733,9 @@ module Aws::EC2
     #
     # @!attribute [rw] to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
-    #   the protocol is ICMP or ICMPv6, this is the code. A value of -1
-    #   indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
-    #   types, you must specify all ICMP/ICMPv6 codes.
+    #   the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all
+    #   ICMP codes). If the start port is -1 (all ICMP types), then the end
+    #   port must be -1 (all ICMP codes).
     #   @return [Integer]
     #
     # @!attribute [rw] user_id_group_pairs
@@ -41769,12 +41756,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an IPv4 range.
+    # Describes an IPv4 address range.
     #
     # @!attribute [rw] cidr_ip
-    #   The IPv4 CIDR range. You can either specify a CIDR range or a source
-    #   security group, not both. To specify a single IPv4 address, use the
-    #   /32 prefix length.
+    #   The IPv4 address range. You can either specify a CIDR block or a
+    #   source security group, not both. To specify a single IPv4 address,
+    #   use the /32 prefix length.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -43317,12 +43304,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an IPv6 range.
+    # Describes an IPv6 address range.
     #
     # @!attribute [rw] cidr_ipv_6
-    #   The IPv6 CIDR range. You can either specify a CIDR range or a source
-    #   security group, not both. To specify a single IPv6 address, use the
-    #   /128 prefix length.
+    #   The IPv6 address range. You can either specify a CIDR block or a
+    #   source security group, not both. To specify a single IPv6 address,
+    #   use the /128 prefix length.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -44016,11 +44003,11 @@ module Aws::EC2
     #
     # @!attribute [rw] volume_type
     #   The volume type. For more information, see [Amazon EBS volume
-    #   types][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   types][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html
     #   @return [String]
     #
     # @!attribute [rw] throughput
@@ -44517,11 +44504,10 @@ module Aws::EC2
     #   Indicates whether to associate a public IPv4 address with eth0 for a
     #   new network interface.
     #
-    #   Starting on February 1, 2024, Amazon Web Services will charge for
-    #   all public IPv4 addresses, including public IPv4 addresses
-    #   associated with running instances and Elastic IP addresses. For more
-    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
-    #   pricing page][1].
+    #   Amazon Web Services charges for all public IPv4 addresses, including
+    #   public IPv4 addresses associated with running instances and Elastic
+    #   IP addresses. For more information, see the *Public IPv4 Address*
+    #   tab on the [Amazon VPC pricing page][1].
     #
     #
     #
@@ -44677,11 +44663,10 @@ module Aws::EC2
     #   Associates a public IPv4 address with eth0 for a new network
     #   interface.
     #
-    #   Starting on February 1, 2024, Amazon Web Services will charge for
-    #   all public IPv4 addresses, including public IPv4 addresses
-    #   associated with running instances and Elastic IP addresses. For more
-    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
-    #   pricing page][1].
+    #   Amazon Web Services charges for all public IPv4 addresses, including
+    #   public IPv4 addresses associated with running instances and Elastic
+    #   IP addresses. For more information, see the *Public IPv4 Address*
+    #   tab on the [Amazon VPC pricing page][1].
     #
     #
     #
@@ -47747,8 +47732,6 @@ module Aws::EC2
     #   the instance metadata. For more information, see [Work with instance
     #   tags using the instance metadata][1].
     #
-    #   Default: `disabled`
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
@@ -48747,11 +48730,10 @@ module Aws::EC2
     #   instances created in the specified subnet should be assigned a
     #   public IPv4 address.
     #
-    #   Starting on February 1, 2024, Amazon Web Services will charge for
-    #   all public IPv4 addresses, including public IPv4 addresses
-    #   associated with running instances and Elastic IP addresses. For more
-    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
-    #   pricing page][1].
+    #   Amazon Web Services charges for all public IPv4 addresses, including
+    #   public IPv4 addresses associated with running instances and Elastic
+    #   IP addresses. For more information, see the *Public IPv4 Address*
+    #   tab on the [Amazon VPC pricing page][1].
     #
     #
     #
@@ -49073,21 +49055,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
     #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway (TGW). Use this option to simplify security group
+    #   transit gateway. Use this option to simplify security group
     #   management and control of instance-to-instance traffic across VPCs
     #   that are connected by transit gateway. You can also use this option
     #   to migrate from VPC peering (which was the only option that
     #   supported security group referencing) to transit gateways (which now
     #   also support security group referencing). This option is disabled by
     #   default and there are no additional costs to use this feature.
-    #
-    #   For important information about this feature, see [Create a transit
-    #   gateway][1] in the *Amazon Web Services Transit Gateway Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw
     #   @return [String]
     #
     # @!attribute [rw] auto_accept_shared_attachments
@@ -49273,22 +49253,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
     #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway (TGW). Use this option to simplify security group
+    #   transit gateway. Use this option to simplify security group
     #   management and control of instance-to-instance traffic across VPCs
     #   that are connected by transit gateway. You can also use this option
     #   to migrate from VPC peering (which was the only option that
     #   supported security group referencing) to transit gateways (which now
     #   also support security group referencing). This option is disabled by
     #   default and there are no additional costs to use this feature.
-    #
-    #   For important information about this feature, see [Create a transit
-    #   gateway attachment to a VPC][1] in the *Amazon Web Services Transit
-    #   Gateway Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#create-vpc-attachment
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_support
@@ -49925,14 +49902,13 @@ module Aws::EC2
     #
     # @!attribute [rw] volume_type
     #   The target EBS volume type of the volume. For more information, see
-    #   [Amazon EBS volume types][1] in the *Amazon Elastic Compute Cloud
-    #   User Guide*.
+    #   [Amazon EBS volume types][1] in the *Amazon EBS User Guide*.
     #
     #   Default: The existing type is retained.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -49975,13 +49951,12 @@ module Aws::EC2
     #   Multi-Attach, you can attach the volume to up to 16 [ Nitro-based
     #   instances][1] in the same Availability Zone. This parameter is
     #   supported with `io1` and `io2` volumes only. For more information,
-    #   see [ Amazon EBS Multi-Attach][2] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   see [ Amazon EBS Multi-Attach][2] in the *Amazon EBS User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html
+    #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVolumeRequest AWS API Documentation
@@ -53703,9 +53678,10 @@ module Aws::EC2
     # @!attribute [rw] cidr
     #   The public IPv4 or IPv6 address range, in CIDR notation. The most
     #   specific IPv4 prefix that you can specify is /24. The most specific
-    #   IPv6 prefix you can specify is /56. The address range cannot overlap
-    #   with another address range that you've brought to this or another
-    #   Region.
+    #   IPv6 address range that you can bring is /48 for CIDRs that are
+    #   publicly advertisable and /56 for CIDRs that are not publicly
+    #   advertisable. The address range cannot overlap with another address
+    #   range that you've brought to this or another Region.
     #   @return [String]
     #
     # @!attribute [rw] cidr_authorization_context
@@ -54568,11 +54544,11 @@ module Aws::EC2
     #   be on the same Outpost or in the Region of that Outpost. AMIs on an
     #   Outpost that include local snapshots can be used to launch instances
     #   on the same Outpost only. For more information, [Amazon EBS local
-    #   snapshots on Outposts][1] in the *Amazon EC2 User Guide*.
+    #   snapshots on Outposts][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#ami
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] description
@@ -57703,11 +57679,11 @@ module Aws::EC2
     # @!attribute [rw] outpost_arn
     #   The ARN of the Outpost on which the snapshot is stored. For more
     #   information, see [Amazon EBS local snapshots on Outposts][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -57973,8 +57949,8 @@ module Aws::EC2
     #
     # @!attribute [rw] from_port
     #   If the protocol is TCP or UDP, this is the start of the port range.
-    #   If the protocol is ICMP, this is the type number. A value of -1
-    #   indicates all ICMP types.
+    #   If the protocol is ICMP, this is the ICMP type or -1 (all ICMP
+    #   types).
     #   @return [Integer]
     #
     # @!attribute [rw] group_id
@@ -58017,8 +57993,7 @@ module Aws::EC2
     #
     # @!attribute [rw] to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
-    #   the protocol is ICMP, this is the code. A value of -1 indicates all
-    #   ICMP codes.
+    #   the protocol is ICMP, this is the ICMP code or -1 (all ICMP codes).
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -59926,18 +59901,16 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/peering/vpc-peering-security-groups.html
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-security-groups.html
     #   @return [String]
     #
     # @!attribute [rw] transit_gateway_id
-    #   The ID of the transit gateway (if applicable). For more information
-    #   about security group referencing for transit gateways, see [Create a
-    #   transit gateway attachment to a VPC][1] in the *Amazon Web Services
-    #   Transit Gateway Guide*.
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
     #
+    #    </note>
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/tgw/tgw-vpc-attachments.html#create-vpc-attachment
+    #   The ID of the transit gateway (if applicable).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroupReference AWS API Documentation
@@ -59983,16 +59956,15 @@ module Aws::EC2
     #
     # @!attribute [rw] from_port
     #   If the protocol is TCP or UDP, this is the start of the port range.
-    #   If the protocol is ICMP or ICMPv6, this is the type number. A value
-    #   of -1 indicates all ICMP/ICMPv6 types. If you specify all
-    #   ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.
+    #   If the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all
+    #   ICMP types).
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
-    #   the protocol is ICMP or ICMPv6, this is the type number. A value of
-    #   -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
-    #   types, you must specify all ICMP/ICMPv6 codes.
+    #   the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all
+    #   ICMP codes). If the start port is -1 (all ICMP types), then the end
+    #   port must be -1 (all ICMP codes).
     #   @return [Integer]
     #
     # @!attribute [rw] cidr_ipv_4
@@ -60091,16 +60063,15 @@ module Aws::EC2
     #
     # @!attribute [rw] from_port
     #   If the protocol is TCP or UDP, this is the start of the port range.
-    #   If the protocol is ICMP or ICMPv6, this is the type number. A value
-    #   of -1 indicates all ICMP/ICMPv6 types. If you specify all
-    #   ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.
+    #   If the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all
+    #   ICMP types).
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
-    #   the protocol is ICMP or ICMPv6, this is the code. A value of -1
-    #   indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
-    #   types, you must specify all ICMP/ICMPv6 codes.
+    #   the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all
+    #   ICMP codes). If the start port is -1 (all ICMP types), then the end
+    #   port must be -1 (all ICMP codes).
     #   @return [Integer]
     #
     # @!attribute [rw] cidr_ipv_4
@@ -60495,11 +60466,11 @@ module Aws::EC2
     # @!attribute [rw] outpost_arn
     #   The ARN of the Outpost on which the snapshot is stored. For more
     #   information, see [Amazon EBS local snapshots on Outposts][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -60687,11 +60658,11 @@ module Aws::EC2
     # @!attribute [rw] outpost_arn
     #   The ARN of the Outpost on which the snapshot is stored. For more
     #   information, see [Amazon EBS local snapshots on Outposts][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html
     #   @return [String]
     #
     # @!attribute [rw] sse_type
@@ -62264,12 +62235,13 @@ module Aws::EC2
     # Describes a stale rule in a security group.
     #
     # @!attribute [rw] from_port
-    #   The start of the port range for the TCP and UDP protocols, or an
-    #   ICMP type number. A value of -1 indicates all ICMP types.
+    #   If the protocol is TCP or UDP, this is the start of the port range.
+    #   If the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all
+    #   ICMP types).
     #   @return [Integer]
     #
     # @!attribute [rw] ip_protocol
-    #   The IP protocol name (for `tcp`, `udp`, and `icmp`) or number (see
+    #   The IP protocol name (`tcp`, `udp`, `icmp`, `icmpv6`) or number (see
     #   [Protocol Numbers)][1].
     #
     #
@@ -62286,8 +62258,9 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] to_port
-    #   The end of the port range for the TCP and UDP protocols, or an ICMP
-    #   type number. A value of `-1` indicates all ICMP types.
+    #   If the protocol is TCP or UDP, this is the end of the port range. If
+    #   the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all
+    #   ICMP codes).
     #   @return [Integer]
     #
     # @!attribute [rw] user_id_group_pairs
@@ -62763,11 +62736,10 @@ module Aws::EC2
     #   Indicates whether instances launched in this subnet receive a public
     #   IPv4 address.
     #
-    #   Starting on February 1, 2024, Amazon Web Services will charge for
-    #   all public IPv4 addresses, including public IPv4 addresses
-    #   associated with running instances and Elastic IP addresses. For more
-    #   information, see the *Public IPv4 Address* tab on the [Amazon VPC
-    #   pricing page][1].
+    #   Amazon Web Services charges for all public IPv4 addresses, including
+    #   public IPv4 addresses associated with running instances and Elastic
+    #   IP addresses. For more information, see the *Public IPv4 Address*
+    #   tab on the [Amazon VPC pricing page][1].
     #
     #
     #
@@ -64587,21 +64559,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
     #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway (TGW). Use this option to simplify security group
+    #   transit gateway. Use this option to simplify security group
     #   management and control of instance-to-instance traffic across VPCs
     #   that are connected by transit gateway. You can also use this option
     #   to migrate from VPC peering (which was the only option that
     #   supported security group referencing) to transit gateways (which now
     #   also support security group referencing). This option is disabled by
     #   default and there are no additional costs to use this feature.
-    #
-    #   For important information about this feature, see [Create a transit
-    #   gateway][1] in the *Amazon Web Services Transit Gateway Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw
     #   @return [String]
     #
     # @!attribute [rw] multicast_support
@@ -64987,21 +64957,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
     #   Enables you to reference a security group across VPCs attached to a
-    #   transit gateway (TGW). Use this option to simplify security group
+    #   transit gateway. Use this option to simplify security group
     #   management and control of instance-to-instance traffic across VPCs
     #   that are connected by transit gateway. You can also use this option
     #   to migrate from VPC peering (which was the only option that
     #   supported security group referencing) to transit gateways (which now
     #   also support security group referencing). This option is disabled by
     #   default and there are no additional costs to use this feature.
-    #
-    #   For important information about this feature, see [Create a transit
-    #   gateway][1] in the *Amazon Web Services Transit Gateway Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw
     #   @return [String]
     #
     # @!attribute [rw] multicast_support
@@ -65382,13 +65350,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] security_group_referencing_support
-    #   For important information about this feature, see [Create a transit
-    #   gateway attachment to a VPC][1] in the *Amazon Web Services Transit
-    #   Gateway Guide*.
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
     #
+    #    </note>
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#create-vpc-attachment
+    #   Enables you to reference a security group across VPCs attached to a
+    #   transit gateway. Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_support

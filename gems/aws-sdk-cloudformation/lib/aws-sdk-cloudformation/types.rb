@@ -1585,8 +1585,8 @@ module Aws::CloudFormation
     # @!attribute [rw] template_body
     #   The structure that contains the template body, with a minimum length
     #   of 1 byte and a maximum length of 51,200 bytes. For more
-    #   information, see [Template Anatomy][1] in the CloudFormation User
-    #   Guide.
+    #   information, see [Template Anatomy][1] in the *CloudFormation User
+    #   Guide*.
     #
     #   Conditional: You must specify either the TemplateBody or the
     #   TemplateURL parameter, but not both.
@@ -1600,8 +1600,8 @@ module Aws::CloudFormation
     #   The location of the file that contains the template body. The URL
     #   must point to a template (maximum size: 460,800 bytes) that's
     #   located in an Amazon S3 bucket or a Systems Manager document. For
-    #   more information, see [Template Anatomy][1] in the CloudFormation
-    #   User Guide.
+    #   more information, see [Template Anatomy][1] in the *CloudFormation
+    #   User Guide*.
     #
     #   Conditional: You must specify either the TemplateBody or the
     #   TemplateURL parameter, but not both.
@@ -6906,7 +6906,7 @@ module Aws::CloudFormation
     #   to this property causes the resource to be recreated. The value can
     #   be `Never`, `Always`, or `Conditionally`. To determine the
     #   conditions for a `Conditionally` recreation, see the update behavior
-    #   for that [property][1] in the CloudFormation User Guide.
+    #   for that [property][1] in the *CloudFormation User Guide*.
     #
     #
     #
@@ -6928,8 +6928,8 @@ module Aws::CloudFormation
     # @!attribute [rw] resource_type
     #   The type of resource to import into your stack, such as
     #   `AWS::S3::Bucket`. For a list of supported resource types, see
-    #   [Resources that support import operations][1] in the CloudFormation
-    #   User Guide.
+    #   [Resources that support import operations][1] in the *CloudFormation
+    #   User Guide*.
     #
     #
     #
@@ -7683,7 +7683,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] resource_type
     #   Type of resource. (For more information, go to [Amazon Web Services
-    #   Resource Types Reference][1] in the CloudFormation User Guide.)
+    #   Resource Types Reference][1] in the *CloudFormation User Guide*.)
     #
     #
     #
@@ -7939,13 +7939,6 @@ module Aws::CloudFormation
     #     a Region, the failure tolerance for the stack set operation as a
     #     whole might be exceeded.
     #
-    #   * `FAILED_IMPORT`: The import of the stack instance in the specified
-    #     account and Region failed and left the stack in an unstable state.
-    #     Once the issues causing the failure are fixed, the import
-    #     operation can be retried. If enough stack set operations fail in
-    #     enough accounts within a Region, the failure tolerance for the
-    #     stack set operation as a whole might be exceeded.
-    #
     #   * `INOPERABLE`: A `DeleteStackInstances` operation has failed and
     #     left the stack in an unstable state. Stacks in this state are
     #     excluded from further `UpdateStackSet` operations. You might need
@@ -8026,7 +8019,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] resource_type
     #   Type of resource. For more information, go to [Amazon Web Services
-    #   Resource Types Reference][1] in the CloudFormation User Guide.
+    #   Resource Types Reference][1] in the *CloudFormation User Guide*.
     #
     #
     #
@@ -8221,7 +8214,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] resource_type
     #   Type of resource. For more information, go to [Amazon Web Services
-    #   Resource Types Reference][1] in the CloudFormation User Guide.
+    #   Resource Types Reference][1] in the *CloudFormation User Guide*.
     #
     #
     #
@@ -8301,7 +8294,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] resource_type
     #   Type of resource. For more information, go to [Amazon Web Services
-    #   Resource Types Reference][1] in the CloudFormation User Guide.
+    #   Resource Types Reference][1] in the *CloudFormation User Guide*.
     #
     #
     #
@@ -8327,7 +8320,7 @@ module Aws::CloudFormation
     # @!attribute [rw] metadata
     #   The content of the `Metadata` attribute declared for the resource.
     #   For more information, see [Metadata Attribute][1] in the
-    #   CloudFormation User Guide.
+    #   *CloudFormation User Guide*.
     #
     #
     #
@@ -8589,7 +8582,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] resource_type
     #   Type of resource. (For more information, go to [Amazon Web Services
-    #   Resource Types Reference][1] in the CloudFormation User Guide.)
+    #   Resource Types Reference][1] in the *CloudFormation User Guide*.)
     #
     #
     #
@@ -8956,7 +8949,7 @@ module Aws::CloudFormation
     #   * `QUEUED`: \[Service-managed permissions\] For automatic
     #     deployments that require a sequence of operations, the operation
     #     is queued to be performed. For more information, see the [stack
-    #     set operation status codes][1] in the CloudFormation User Guide.
+    #     set operation status codes][1] in the *CloudFormation User Guide*.
     #
     #   * `RUNNING`: The operation is currently being performed.
     #
@@ -9038,7 +9031,7 @@ module Aws::CloudFormation
     #   `Action` type is `DETECT_DRIFT`.
     #
     #   For more information, see [Detecting Unmanaged Changes in Stack
-    #   Sets][1] in the CloudFormation User Guide.
+    #   Sets][1] in the *CloudFormation User Guide*.
     #
     #
     #
@@ -9314,7 +9307,7 @@ module Aws::CloudFormation
     #   * `QUEUED`: \[Service-managed permissions\] For automatic
     #     deployments that require a sequence of operations, the operation
     #     is queued to be performed. For more information, see the [stack
-    #     set operation status codes][1] in the CloudFormation User Guide.
+    #     set operation status codes][1] in the *CloudFormation User Guide*.
     #
     #   * `RUNNING`: The operation is currently being performed.
     #
@@ -10910,8 +10903,8 @@ module Aws::CloudFormation
     # @!attribute [rw] template_body
     #   The structure that contains the template body, with a minimum length
     #   of 1 byte and a maximum length of 51,200 bytes. For more
-    #   information, see [Template Anatomy][1] in the CloudFormation User
-    #   Guide.
+    #   information, see [Template Anatomy][1] in the *CloudFormation User
+    #   Guide*.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody` or `TemplateURL`—or set `UsePreviousTemplate` to
@@ -10926,8 +10919,8 @@ module Aws::CloudFormation
     #   The location of the file that contains the template body. The URL
     #   must point to a template (maximum size: 460,800 bytes) that is
     #   located in an Amazon S3 bucket or a Systems Manager document. For
-    #   more information, see [Template Anatomy][1] in the CloudFormation
-    #   User Guide.
+    #   more information, see [Template Anatomy][1] in the *CloudFormation
+    #   User Guide*.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody` or `TemplateURL`—or set `UsePreviousTemplate` to

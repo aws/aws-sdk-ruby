@@ -972,6 +972,11 @@ module Aws::Kafka
       SENSITIVE: []
     end
 
+    class ReplicationStartingPosition
+      attr_accessor type: ("LATEST" | "EARLIEST")
+      SENSITIVE: []
+    end
+
     class ReplicationStateInfo
       attr_accessor code: ::String
       attr_accessor message: ::String
@@ -1050,6 +1055,7 @@ module Aws::Kafka
       attr_accessor copy_access_control_lists_for_topics: bool
       attr_accessor copy_topic_configurations: bool
       attr_accessor detect_and_copy_new_topics: bool
+      attr_accessor starting_position: Types::ReplicationStartingPosition
       attr_accessor topics_to_exclude: ::Array[::String]
       attr_accessor topics_to_replicate: ::Array[::String]
       SENSITIVE: []

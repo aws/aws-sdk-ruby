@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2024-03-12)
+------------------
+
+* Feature - This release increases MaxResults limit to 500 in request for SearchUsers, SearchQueues and SearchRoutingProfiles APIs of Amazon Connect.
+
 1.150.0 (2024-01-26)
 ------------------
 

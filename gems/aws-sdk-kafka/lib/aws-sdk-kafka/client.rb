@@ -862,6 +862,9 @@ module Aws::Kafka
     #           copy_access_control_lists_for_topics: false,
     #           copy_topic_configurations: false,
     #           detect_and_copy_new_topics: false,
+    #           starting_position: {
+    #             type: "LATEST", # accepts LATEST, EARLIEST
+    #           },
     #           topics_to_exclude: ["__stringMax249"],
     #           topics_to_replicate: ["__stringMax249"], # required
     #         },
@@ -1604,6 +1607,7 @@ module Aws::Kafka
     #   resp.replication_info_list[0].topic_replication.copy_access_control_lists_for_topics #=> Boolean
     #   resp.replication_info_list[0].topic_replication.copy_topic_configurations #=> Boolean
     #   resp.replication_info_list[0].topic_replication.detect_and_copy_new_topics #=> Boolean
+    #   resp.replication_info_list[0].topic_replication.starting_position.type #=> String, one of "LATEST", "EARLIEST"
     #   resp.replication_info_list[0].topic_replication.topics_to_exclude #=> Array
     #   resp.replication_info_list[0].topic_replication.topics_to_exclude[0] #=> String
     #   resp.replication_info_list[0].topic_replication.topics_to_replicate #=> Array
@@ -3296,7 +3300,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
