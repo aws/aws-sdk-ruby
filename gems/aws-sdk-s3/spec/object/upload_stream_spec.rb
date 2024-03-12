@@ -276,7 +276,7 @@ module Aws
             end
           end.to raise_error(
             S3::MultipartUploadError,
-            'failed to abort multipart upload: network-error'
+            /failed to abort multipart upload: network-error/
           )
         end
 
@@ -460,7 +460,8 @@ module Aws
               end
             end.to raise_error(
               S3::MultipartUploadError,
-              'failed to abort multipart upload: network-error'
+              'failed to abort multipart upload: network-error. '\
+                'Multipart upload failed: part failed'
             )
           end
         end
