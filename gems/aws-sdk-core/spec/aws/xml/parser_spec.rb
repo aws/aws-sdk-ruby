@@ -243,7 +243,7 @@ module Aws
               ])
             end
 
-            it 'does not support flattened lists with member locationName trait' do
+            it 'does not support member locationName trait in flattened lists' do
               shapes['StructureList']['flattened'] = true
               # locationName trait on targeted member is ignored when serializing
               # serializing flattened lists in structures
