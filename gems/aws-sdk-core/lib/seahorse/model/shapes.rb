@@ -78,7 +78,7 @@ module Seahorse
 
         # @return [String, nil]
         def location_name
-          @location_name || (shape && shape[:location_name])
+          @location_name || (shape && shape['locationName'])
         end
 
         def location_name= location_name
