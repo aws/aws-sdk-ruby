@@ -53,7 +53,7 @@ module AwsSdkCodeGenerator
         'members' => false,
         'member' => false,
         'key' => false,
-        'locationName' => false,
+        'locationName' => true,
         'value' => false,
         'required' => false,
         'enum' => false,
