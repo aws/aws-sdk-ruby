@@ -12,6 +12,7 @@
     },
   "json" : {
     "input" : [
+      {"serializes_structure_members_with_locationname_traits": "Json protocol does not support jsonName trait so this test case needs to be culled"}
     ],
     "output" : [
       {"AwsJson11InvalidGreetingError": "Need to update test runner to handle error cases"},
