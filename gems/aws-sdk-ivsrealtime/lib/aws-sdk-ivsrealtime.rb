@@ -52,6 +52,6 @@ require_relative 'aws-sdk-ivsrealtime/customizations'
 # @!group service
 module Aws::IVSRealTime
 
-  GEM_VERSION = '1.15.0'
+  GEM_VERSION = '1.16.0'
 
 end

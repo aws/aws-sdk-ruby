@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2024-03-13)
+------------------
+
+* Feature - Support new RuntimeEnvironmentUpdate parameter within UpdateApplication API allowing callers to change the Flink version upon which their application runs.
+
 1.52.0 (2024-01-26)
 ------------------
 

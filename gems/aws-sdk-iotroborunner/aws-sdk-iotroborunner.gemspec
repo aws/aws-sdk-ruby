@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'aws-sdk-iotroborunner'
   spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
   spec.summary       = 'AWS SDK for Ruby - AWS IoT RoboRunner'
-  spec.description   = 'Official AWS Ruby gem for AWS IoT RoboRunner. This gem is part of the AWS SDK for Ruby.'
+  spec.description   = '[DEPRECATED] Official AWS Ruby gem for AWS IoT RoboRunner. This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'https://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
@@ -29,4 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sigv4', '~> 1.1')
 
   spec.required_ruby_version = '>= 2.5'
+  spec.post_install_message = '*** aws-sdk-iotroborunner is deprecated ***'
 end

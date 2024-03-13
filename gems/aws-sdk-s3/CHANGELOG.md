@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.144.0 (2024-03-13)
+------------------
+
+* Feature - This release makes the default option for S3 on Outposts request signing to use the SigV4A algorithm when using AWS Common Runtime (CRT).
+
 1.143.1 (2024-03-12)
 ------------------
 

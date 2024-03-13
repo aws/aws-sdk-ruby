@@ -128,10 +128,10 @@ module Aws::S3
                   raise ArgumentError, "Expected a endpoint to be specified but no endpoint was found"
                 end
                 if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
-                  return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.ec2.#{url['authority']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{region}"}]})
+                  return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.ec2.#{url['authority']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"]}, {"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{region}"}]})
                 end
               end
-              return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.ec2.s3-outposts.#{region}.#{region_partition['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{region}"}]})
+              return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.ec2.s3-outposts.#{region}.#{region_partition['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"]}, {"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{region}"}]})
             end
             if Aws::Endpoints::Matchers.string_equals?(hardware_type, "o")
               if Aws::Endpoints::Matchers.string_equals?(region_prefix, "beta")
@@ -139,10 +139,10 @@ module Aws::S3
                   raise ArgumentError, "Expected a endpoint to be specified but no endpoint was found"
                 end
                 if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
-                  return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.op-#{outpost_id}.#{url['authority']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{region}"}]})
+                  return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.op-#{outpost_id}.#{url['authority']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"]}, {"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{region}"}]})
                 end
               end
-              return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.op-#{outpost_id}.s3-outposts.#{region}.#{region_partition['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{region}"}]})
+              return Aws::Endpoints::Endpoint.new(url: "https://#{bucket}.op-#{outpost_id}.s3-outposts.#{region}.#{region_partition['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"]}, {"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{region}"}]})
             end
             raise ArgumentError, "Unrecognized hardware type: \"Expected hardware type o or e but got #{hardware_type}\""
           end
@@ -413,9 +413,9 @@ module Aws::S3
                                 if (access_point_name = Aws::Endpoints::Matchers.attr(bucket_arn, "resourceId[3]"))
                                   if Aws::Endpoints::Matchers.string_equals?(outpost_type, "accesspoint")
                                     if Aws::Endpoints::Matchers.set?(endpoint) && (url = Aws::Endpoints::Matchers.parse_url(endpoint))
-                                      return Aws::Endpoints::Endpoint.new(url: "https://#{access_point_name}-#{bucket_arn['accountId']}.#{outpost_id}.#{url['authority']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{bucket_arn['region']}"}]})
+                                      return Aws::Endpoints::Endpoint.new(url: "https://#{access_point_name}-#{bucket_arn['accountId']}.#{outpost_id}.#{url['authority']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"]}, {"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{bucket_arn['region']}"}]})
                                     end
-                                    return Aws::Endpoints::Endpoint.new(url: "https://#{access_point_name}-#{bucket_arn['accountId']}.#{outpost_id}.s3-outposts.#{bucket_arn['region']}.#{bucket_partition['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{bucket_arn['region']}"}]})
+                                    return Aws::Endpoints::Endpoint.new(url: "https://#{access_point_name}-#{bucket_arn['accountId']}.#{outpost_id}.s3-outposts.#{bucket_arn['region']}.#{bucket_partition['dnsSuffix']}", headers: {}, properties: {"authSchemes"=>[{"disableDoubleEncoding"=>true, "name"=>"sigv4a", "signingName"=>"s3-outposts", "signingRegionSet"=>["*"]}, {"disableDoubleEncoding"=>true, "name"=>"sigv4", "signingName"=>"s3-outposts", "signingRegion"=>"#{bucket_arn['region']}"}]})
                                   end
                                   raise ArgumentError, "Expected an outpost type `accesspoint`, found #{outpost_type}"
                                 end
