@@ -17,7 +17,10 @@ module Aws
       end
 
       def to_xml(params)
-        structure(@rules.location_name, @rules, params, top_level: true)
+        # checks the shape first to see if locationName is set
+        # if not, uses the locationName defined in shape ref
+        input_shape_name = @rules.shape['locationName'] || @rules.location_name
+        structure(input_shape_name, @rules, params, top_level: true)
         @xml.join
       end
       alias serialize to_xml
