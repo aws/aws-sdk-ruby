@@ -79,6 +79,13 @@
   },
   "rest-xml" : {
     "input" : [
+      {"HttpPayloadWithStructure": "Awaiting Smithy to resolve C2J translation"},
+      {"RestXmlHttpPayloadWithUnion": "Awaiting Smithy to resolve C2J translation"},
+      {"RestXmlHttpPayloadWithUnsetUnion": "Awaiting Smithy to resolve C2J translation"},
+      {"HttpPayloadWithXmlName": "Awaiting Smithy to resolve C2J translation"},
+      {"HttpPayloadWithXmlNamespace": "Awaiting Smithy to resolve C2J translation"},
+      {"HttpPayloadWithXmlNamespaceAndPrefix": "Awaiting Smithy to resolve C2J translation"},
+      {"XmlAttributesOnPayload": "Awaiting Smithy to resolve C2J translation"}
     ],
     "output" : [
       {"SimpleScalarPropertiesComplexEscapes": "OxEngine does not handle all escape cases but other engines supports it"},
