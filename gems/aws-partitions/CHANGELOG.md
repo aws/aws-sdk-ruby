@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.897.0 (2024-03-14)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::TimestreamInfluxDB`.
+
 1.896.0 (2024-03-08)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.188.0 (2024-03-14)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-timestreaminfluxdb` gem.
+
 3.187.0 (2024-02-19)
 ------------------
 

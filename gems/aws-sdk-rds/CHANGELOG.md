@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.222.0 (2024-03-14)
+------------------
+
+* Feature - Updates Amazon RDS documentation for EBCDIC collation for RDS for Db2.
+
 1.221.0 (2024-03-07)
 ------------------
 

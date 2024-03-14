@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2024-03-14)
+------------------
+
+* Feature - Documentation updates for Amplify. Identifies the APIs available only to apps created using Amplify Gen 1.
+
 1.55.0 (2024-01-26)
 ------------------
 

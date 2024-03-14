@@ -1,0 +1,1088 @@
+# frozen_string_literal: true
+
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+require 'seahorse/client/plugins/content_length.rb'
+require 'aws-sdk-core/plugins/credentials_configuration.rb'
+require 'aws-sdk-core/plugins/logging.rb'
+require 'aws-sdk-core/plugins/param_converter.rb'
+require 'aws-sdk-core/plugins/param_validator.rb'
+require 'aws-sdk-core/plugins/user_agent.rb'
+require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
+require 'aws-sdk-core/plugins/retry_errors.rb'
+require 'aws-sdk-core/plugins/global_configuration.rb'
+require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
+require 'aws-sdk-core/plugins/response_paging.rb'
+require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
+require 'aws-sdk-core/plugins/request_compression.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
+require 'aws-sdk-core/plugins/recursion_detection.rb'
+require 'aws-sdk-core/plugins/sign.rb'
+require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
+
+Aws::Plugins::GlobalConfiguration.add_identifier(:timestreaminfluxdb)
+
+module Aws::TimestreamInfluxDB
+  # An API client for TimestreamInfluxDB.  To construct a client, you need to configure a `:region` and `:credentials`.
+  #
+  #     client = Aws::TimestreamInfluxDB::Client.new(
+  #       region: region_name,
+  #       credentials: credentials,
+  #       # ...
+  #     )
+  #
+  # For details on configuring region and credentials see
+  # the [developer guide](/sdk-for-ruby/v3/developer-guide/setup-config.html).
+  #
+  # See {#initialize} for a full list of supported configuration options.
+  class Client < Seahorse::Client::Base
+
+    include Aws::ClientStubs
+
+    @identifier = :timestreaminfluxdb
+
+    set_api(ClientApi::API)
+
+    add_plugin(Seahorse::Client::Plugins::ContentLength)
+    add_plugin(Aws::Plugins::CredentialsConfiguration)
+    add_plugin(Aws::Plugins::Logging)
+    add_plugin(Aws::Plugins::ParamConverter)
+    add_plugin(Aws::Plugins::ParamValidator)
+    add_plugin(Aws::Plugins::UserAgent)
+    add_plugin(Aws::Plugins::HelpfulSocketErrors)
+    add_plugin(Aws::Plugins::RetryErrors)
+    add_plugin(Aws::Plugins::GlobalConfiguration)
+    add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
+    add_plugin(Aws::Plugins::ResponsePaging)
+    add_plugin(Aws::Plugins::StubResponses)
+    add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
+    add_plugin(Aws::Plugins::RequestCompression)
+    add_plugin(Aws::Plugins::DefaultsMode)
+    add_plugin(Aws::Plugins::RecursionDetection)
+    add_plugin(Aws::Plugins::Sign)
+    add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::TimestreamInfluxDB::Plugins::Endpoints)
+
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
+    #
+    #     * `Aws::SharedCredentials` - Used for loading static credentials from a
+    #       shared file, such as `~/.aws/config`.
+    #
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     * `Aws::AssumeRoleWebIdentityCredentials` - Used when you need to
+    #       assume a role after providing credentials via the web.
+    #
+    #     * `Aws::SSOCredentials` - Used for loading credentials from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     * `Aws::ProcessCredentials` - Used for loading credentials from a
+    #       process that outputs to stdout.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::ECSCredentials` - Used for loading credentials from
+    #       instances running in ECS.
+    #
+    #     * `Aws::CognitoIdentityCredentials` - Used for loading credentials
+    #       from the Cognito Identity service.
+    #
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
+    #
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
+    #       are very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
+    #
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is searched for in the following locations:
+    #
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #
+    #   @option options [String] :access_key_id
+    #
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :adaptive_retry_wait_to_fill (true)
+    #     Used only in `adaptive` retry mode.  When true, the request will sleep
+    #     until there is sufficent client side capacity to retry the request.
+    #     When false, the request will raise a `RetryCapacityNotAvailableError` and will
+    #     not retry instead of sleeping.
+    #
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
+    #
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
+    #
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
+    #
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
+    #
+    #   @option options [Boolean] :correct_clock_skew (true)
+    #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
+    #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
+    #
+    #   @option options [Boolean] :disable_request_compression (false)
+    #     When set to 'true' the request body will not be compressed
+    #     for supported operations.
+    #
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
+    #
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
+    #
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
+    #
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available.
+    #
+    #   @option options [Boolean] :ignore_configured_endpoint_urls
+    #     Setting to true disables use of endpoint URLs provided via environment
+    #     variables and the shared configuration file.
+    #
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
+    #
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
+    #
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
+    #
+    #   @option options [Integer] :max_attempts (3)
+    #     An integer representing the maximum number attempts that will be made for
+    #     a single request, including the initial attempt.  For example,
+    #     setting this value to 5 will result in a request being retried up to
+    #     4 times. Used in `standard` and `adaptive` retry modes.
+    #
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Integer] :request_min_compression_size_bytes (10240)
+    #     The minimum size in bytes that triggers compression for request
+    #     bodies. The value must be non-negative integer value between 0
+    #     and 10485780 bytes inclusive.
+    #
+    #   @option options [Proc] :retry_backoff
+    #     A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+    #     This option is only used in the `legacy` retry mode.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function. This option
+    #     is only used in the `legacy` retry mode.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function.
+    #     Some predefined functions can be referenced by name - :none, :equal, :full,
+    #     otherwise a Proc that takes and returns a number. This option is only used
+    #     in the `legacy` retry mode.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors, auth errors,
+    #     endpoint discovery, and errors from expired credentials.
+    #     This option is only used in the `legacy` retry mode.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit)
+    #     used by the default backoff function. This option is only used in the
+    #     `legacy` retry mode.
+    #
+    #   @option options [String] :retry_mode ("legacy")
+    #     Specifies which retry algorithm to use. Values are:
+    #
+    #     * `legacy` - The pre-existing retry behavior.  This is default value if
+    #       no retry mode is provided.
+    #
+    #     * `standard` - A standardized set of retry rules across the AWS SDKs.
+    #       This includes support for retry quotas, which limit the number of
+    #       unsuccessful retries a client can make.
+    #
+    #     * `adaptive` - An experimental retry mode that includes all the
+    #       functionality of `standard` mode along with automatic client side
+    #       throttling.  This is a provisional mode that may change behavior
+    #       in the future.
+    #
+    #
+    #   @option options [String] :sdk_ua_app_id
+    #     A unique and opaque application ID that is appended to the
+    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
+    #     maximum length of 50.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Aws::TokenProvider] :token_provider
+    #     A Bearer Token Provider. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::StaticTokenProvider` - Used for configuring static, non-refreshing
+    #       tokens.
+    #
+    #     * `Aws::SSOTokenProvider` - Used for loading tokens from AWS SSO using an
+    #       access token generated from `aws login`.
+    #
+    #     When `:token_provider` is not configured directly, the `Aws::TokenProviderChain`
+    #     will be used to search for tokens configured for your profile in shared configuration files.
+    #
+    #   @option options [Boolean] :use_dualstack_endpoint
+    #     When set to `true`, dualstack enabled endpoints (with `.aws` TLD)
+    #     will be used if available.
+    #
+    #   @option options [Boolean] :use_fips_endpoint
+    #     When set to `true`, fips compatible endpoints will be used if available.
+    #     When a `fips` region is used, the region is normalized and this config
+    #     is set to `true`.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [Aws::TimestreamInfluxDB::EndpointProvider] :endpoint_provider
+    #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::TimestreamInfluxDB::EndpointParameters`
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before raising a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Float] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set per-request on the session.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idle before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
+    def initialize(*args)
+      super
+    end
+
+    # @!group API Operations
+
+    # Creates a new Timestream for InfluxDB DB instance.
+    #
+    # @option params [required, String] :name
+    #   The name that uniquely identifies the DB instance when interacting
+    #   with the Amazon Timestream for InfluxDB API and CLI commands. This
+    #   name will also be a prefix included in the endpoint. DB instance names
+    #   must be unique per customer and per region.
+    #
+    # @option params [String] :username
+    #   The username of the initial admin user created in InfluxDB. Must start
+    #   with a letter and can't end with a hyphen or contain two consecutive
+    #   hyphens. For example, my-user1. This username will allow you to access
+    #   the InfluxDB UI to perform various administrative tasks and also use
+    #   the InfluxDB CLI to create an operator token. These attributes will be
+    #   stored in a Secret created in Amazon Secrets Manager in your account.
+    #
+    # @option params [required, String] :password
+    #   The password of the initial admin user created in InfluxDB. This
+    #   password will allow you to access the InfluxDB UI to perform various
+    #   administrative tasks and also use the InfluxDB CLI to create an
+    #   operator token. These attributes will be stored in a Secret created in
+    #   AWS SecretManager in your account.
+    #
+    # @option params [String] :organization
+    #   The name of the initial organization for the initial admin user in
+    #   InfluxDB. An InfluxDB organization is a workspace for a group of
+    #   users.
+    #
+    # @option params [String] :bucket
+    #   The name of the initial InfluxDB bucket. All InfluxDB data is stored
+    #   in a bucket. A bucket combines the concept of a database and a
+    #   retention period (the duration of time that each data point persists).
+    #   A bucket belongs to an organization.
+    #
+    # @option params [required, String] :db_instance_type
+    #   The Timestream for InfluxDB DB instance type to run InfluxDB on.
+    #
+    # @option params [required, Array<String>] :vpc_subnet_ids
+    #   A list of VPC subnet IDs to associate with the DB instance. Provide at
+    #   least two VPC subnet IDs in different availability zones when
+    #   deploying with a Multi-AZ standby.
+    #
+    # @option params [required, Array<String>] :vpc_security_group_ids
+    #   A list of VPC security group IDs to associate with the DB instance.
+    #
+    # @option params [Boolean] :publicly_accessible
+    #   Configures the DB instance with a public IP to facilitate access.
+    #
+    # @option params [String] :db_storage_type
+    #   The Timestream for InfluxDB DB storage type to read and write InfluxDB
+    #   data.
+    #
+    #   You can choose between 3 different types of provisioned Influx IOPS
+    #   included storage according to your workloads requirements:
+    #
+    #   * Influx IO Included 3000 IOPS
+    #
+    #   * Influx IO Included 12000 IOPS
+    #
+    #   * Influx IO Included 16000 IOPS
+    #
+    # @option params [required, Integer] :allocated_storage
+    #   The amount of storage to allocate for your DB storage type in GiB
+    #   (gibibytes).
+    #
+    # @option params [String] :db_parameter_group_identifier
+    #   The id of the DB parameter group to assign to your DB instance. DB
+    #   parameter groups specify how the database is configured. For example,
+    #   DB parameter groups can specify the limit for query concurrency.
+    #
+    # @option params [String] :deployment_type
+    #   Specifies whether the DB instance will be deployed as a standalone
+    #   instance or with a Multi-AZ standby for high availability.
+    #
+    # @option params [Types::LogDeliveryConfiguration] :log_delivery_configuration
+    #   Configuration for sending InfluxDB engine logs to a specified S3
+    #   bucket.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pairs to associate with the DB instance.
+    #
+    # @return [Types::CreateDbInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDbInstanceOutput#id #id} => String
+    #   * {Types::CreateDbInstanceOutput#name #name} => String
+    #   * {Types::CreateDbInstanceOutput#arn #arn} => String
+    #   * {Types::CreateDbInstanceOutput#status #status} => String
+    #   * {Types::CreateDbInstanceOutput#endpoint #endpoint} => String
+    #   * {Types::CreateDbInstanceOutput#db_instance_type #db_instance_type} => String
+    #   * {Types::CreateDbInstanceOutput#db_storage_type #db_storage_type} => String
+    #   * {Types::CreateDbInstanceOutput#allocated_storage #allocated_storage} => Integer
+    #   * {Types::CreateDbInstanceOutput#deployment_type #deployment_type} => String
+    #   * {Types::CreateDbInstanceOutput#vpc_subnet_ids #vpc_subnet_ids} => Array&lt;String&gt;
+    #   * {Types::CreateDbInstanceOutput#publicly_accessible #publicly_accessible} => Boolean
+    #   * {Types::CreateDbInstanceOutput#vpc_security_group_ids #vpc_security_group_ids} => Array&lt;String&gt;
+    #   * {Types::CreateDbInstanceOutput#db_parameter_group_identifier #db_parameter_group_identifier} => String
+    #   * {Types::CreateDbInstanceOutput#availability_zone #availability_zone} => String
+    #   * {Types::CreateDbInstanceOutput#secondary_availability_zone #secondary_availability_zone} => String
+    #   * {Types::CreateDbInstanceOutput#log_delivery_configuration #log_delivery_configuration} => Types::LogDeliveryConfiguration
+    #   * {Types::CreateDbInstanceOutput#influx_auth_parameters_secret_arn #influx_auth_parameters_secret_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_db_instance({
+    #     name: "DbInstanceName", # required
+    #     username: "Username",
+    #     password: "Password", # required
+    #     organization: "Organization",
+    #     bucket: "Bucket",
+    #     db_instance_type: "db.influx.medium", # required, accepts db.influx.medium, db.influx.large, db.influx.xlarge, db.influx.2xlarge, db.influx.4xlarge, db.influx.8xlarge, db.influx.12xlarge, db.influx.16xlarge
+    #     vpc_subnet_ids: ["VpcSubnetId"], # required
+    #     vpc_security_group_ids: ["VpcSecurityGroupId"], # required
+    #     publicly_accessible: false,
+    #     db_storage_type: "InfluxIOIncludedT1", # accepts InfluxIOIncludedT1, InfluxIOIncludedT2, InfluxIOIncludedT3
+    #     allocated_storage: 1, # required
+    #     db_parameter_group_identifier: "DbParameterGroupIdentifier",
+    #     deployment_type: "SINGLE_AZ", # accepts SINGLE_AZ, WITH_MULTIAZ_STANDBY
+    #     log_delivery_configuration: {
+    #       s3_configuration: { # required
+    #         bucket_name: "S3ConfigurationBucketNameString", # required
+    #         enabled: false, # required
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED"
+    #   resp.endpoint #=> String
+    #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge"
+    #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
+    #   resp.allocated_storage #=> Integer
+    #   resp.deployment_type #=> String, one of "SINGLE_AZ", "WITH_MULTIAZ_STANDBY"
+    #   resp.vpc_subnet_ids #=> Array
+    #   resp.vpc_subnet_ids[0] #=> String
+    #   resp.publicly_accessible #=> Boolean
+    #   resp.vpc_security_group_ids #=> Array
+    #   resp.vpc_security_group_ids[0] #=> String
+    #   resp.db_parameter_group_identifier #=> String
+    #   resp.availability_zone #=> String
+    #   resp.secondary_availability_zone #=> String
+    #   resp.log_delivery_configuration.s3_configuration.bucket_name #=> String
+    #   resp.log_delivery_configuration.s3_configuration.enabled #=> Boolean
+    #   resp.influx_auth_parameters_secret_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbInstance AWS API Documentation
+    #
+    # @overload create_db_instance(params = {})
+    # @param [Hash] params ({})
+    def create_db_instance(params = {}, options = {})
+      req = build_request(:create_db_instance, params)
+      req.send_request(options)
+    end
+
+    # Creates a new Timestream for InfluxDB DB parameter group to associate
+    # with DB instances.
+    #
+    # @option params [required, String] :name
+    #   The name of the DB parameter group. The name must be unique per
+    #   customer and per region.
+    #
+    # @option params [String] :description
+    #   A description of the DB parameter group.
+    #
+    # @option params [Types::Parameters] :parameters
+    #   A list of the parameters that comprise the DB parameter group.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of key-value pairs to associate with the DB parameter group.
+    #
+    # @return [Types::CreateDbParameterGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDbParameterGroupOutput#id #id} => String
+    #   * {Types::CreateDbParameterGroupOutput#name #name} => String
+    #   * {Types::CreateDbParameterGroupOutput#arn #arn} => String
+    #   * {Types::CreateDbParameterGroupOutput#description #description} => String
+    #   * {Types::CreateDbParameterGroupOutput#parameters #parameters} => Types::Parameters
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_db_parameter_group({
+    #     name: "DbParameterGroupName", # required
+    #     description: "CreateDbParameterGroupInputDescriptionString",
+    #     parameters: {
+    #       influx_d_bv_2: {
+    #         flux_log_enabled: false,
+    #         log_level: "debug", # accepts debug, info, error
+    #         no_tasks: false,
+    #         query_concurrency: 1,
+    #         query_queue_size: 1,
+    #         tracing_type: "log", # accepts log, jaeger
+    #         metrics_disabled: false,
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.description #=> String
+    #   resp.parameters.influx_d_bv_2.flux_log_enabled #=> Boolean
+    #   resp.parameters.influx_d_bv_2.log_level #=> String, one of "debug", "info", "error"
+    #   resp.parameters.influx_d_bv_2.no_tasks #=> Boolean
+    #   resp.parameters.influx_d_bv_2.query_concurrency #=> Integer
+    #   resp.parameters.influx_d_bv_2.query_queue_size #=> Integer
+    #   resp.parameters.influx_d_bv_2.tracing_type #=> String, one of "log", "jaeger"
+    #   resp.parameters.influx_d_bv_2.metrics_disabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/CreateDbParameterGroup AWS API Documentation
+    #
+    # @overload create_db_parameter_group(params = {})
+    # @param [Hash] params ({})
+    def create_db_parameter_group(params = {}, options = {})
+      req = build_request(:create_db_parameter_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes a Timestream for InfluxDB DB instance.
+    #
+    # @option params [required, String] :identifier
+    #   The id of the DB instance.
+    #
+    # @return [Types::DeleteDbInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDbInstanceOutput#id #id} => String
+    #   * {Types::DeleteDbInstanceOutput#name #name} => String
+    #   * {Types::DeleteDbInstanceOutput#arn #arn} => String
+    #   * {Types::DeleteDbInstanceOutput#status #status} => String
+    #   * {Types::DeleteDbInstanceOutput#endpoint #endpoint} => String
+    #   * {Types::DeleteDbInstanceOutput#db_instance_type #db_instance_type} => String
+    #   * {Types::DeleteDbInstanceOutput#db_storage_type #db_storage_type} => String
+    #   * {Types::DeleteDbInstanceOutput#allocated_storage #allocated_storage} => Integer
+    #   * {Types::DeleteDbInstanceOutput#deployment_type #deployment_type} => String
+    #   * {Types::DeleteDbInstanceOutput#vpc_subnet_ids #vpc_subnet_ids} => Array&lt;String&gt;
+    #   * {Types::DeleteDbInstanceOutput#publicly_accessible #publicly_accessible} => Boolean
+    #   * {Types::DeleteDbInstanceOutput#vpc_security_group_ids #vpc_security_group_ids} => Array&lt;String&gt;
+    #   * {Types::DeleteDbInstanceOutput#db_parameter_group_identifier #db_parameter_group_identifier} => String
+    #   * {Types::DeleteDbInstanceOutput#availability_zone #availability_zone} => String
+    #   * {Types::DeleteDbInstanceOutput#secondary_availability_zone #secondary_availability_zone} => String
+    #   * {Types::DeleteDbInstanceOutput#log_delivery_configuration #log_delivery_configuration} => Types::LogDeliveryConfiguration
+    #   * {Types::DeleteDbInstanceOutput#influx_auth_parameters_secret_arn #influx_auth_parameters_secret_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_db_instance({
+    #     identifier: "DbInstanceIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED"
+    #   resp.endpoint #=> String
+    #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge"
+    #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
+    #   resp.allocated_storage #=> Integer
+    #   resp.deployment_type #=> String, one of "SINGLE_AZ", "WITH_MULTIAZ_STANDBY"
+    #   resp.vpc_subnet_ids #=> Array
+    #   resp.vpc_subnet_ids[0] #=> String
+    #   resp.publicly_accessible #=> Boolean
+    #   resp.vpc_security_group_ids #=> Array
+    #   resp.vpc_security_group_ids[0] #=> String
+    #   resp.db_parameter_group_identifier #=> String
+    #   resp.availability_zone #=> String
+    #   resp.secondary_availability_zone #=> String
+    #   resp.log_delivery_configuration.s3_configuration.bucket_name #=> String
+    #   resp.log_delivery_configuration.s3_configuration.enabled #=> Boolean
+    #   resp.influx_auth_parameters_secret_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DeleteDbInstance AWS API Documentation
+    #
+    # @overload delete_db_instance(params = {})
+    # @param [Hash] params ({})
+    def delete_db_instance(params = {}, options = {})
+      req = build_request(:delete_db_instance, params)
+      req.send_request(options)
+    end
+
+    # Returns a Timestream for InfluxDB DB instance.
+    #
+    # @option params [required, String] :identifier
+    #   The id of the DB instance.
+    #
+    # @return [Types::GetDbInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDbInstanceOutput#id #id} => String
+    #   * {Types::GetDbInstanceOutput#name #name} => String
+    #   * {Types::GetDbInstanceOutput#arn #arn} => String
+    #   * {Types::GetDbInstanceOutput#status #status} => String
+    #   * {Types::GetDbInstanceOutput#endpoint #endpoint} => String
+    #   * {Types::GetDbInstanceOutput#db_instance_type #db_instance_type} => String
+    #   * {Types::GetDbInstanceOutput#db_storage_type #db_storage_type} => String
+    #   * {Types::GetDbInstanceOutput#allocated_storage #allocated_storage} => Integer
+    #   * {Types::GetDbInstanceOutput#deployment_type #deployment_type} => String
+    #   * {Types::GetDbInstanceOutput#vpc_subnet_ids #vpc_subnet_ids} => Array&lt;String&gt;
+    #   * {Types::GetDbInstanceOutput#publicly_accessible #publicly_accessible} => Boolean
+    #   * {Types::GetDbInstanceOutput#vpc_security_group_ids #vpc_security_group_ids} => Array&lt;String&gt;
+    #   * {Types::GetDbInstanceOutput#db_parameter_group_identifier #db_parameter_group_identifier} => String
+    #   * {Types::GetDbInstanceOutput#availability_zone #availability_zone} => String
+    #   * {Types::GetDbInstanceOutput#secondary_availability_zone #secondary_availability_zone} => String
+    #   * {Types::GetDbInstanceOutput#log_delivery_configuration #log_delivery_configuration} => Types::LogDeliveryConfiguration
+    #   * {Types::GetDbInstanceOutput#influx_auth_parameters_secret_arn #influx_auth_parameters_secret_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_db_instance({
+    #     identifier: "DbInstanceIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED"
+    #   resp.endpoint #=> String
+    #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge"
+    #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
+    #   resp.allocated_storage #=> Integer
+    #   resp.deployment_type #=> String, one of "SINGLE_AZ", "WITH_MULTIAZ_STANDBY"
+    #   resp.vpc_subnet_ids #=> Array
+    #   resp.vpc_subnet_ids[0] #=> String
+    #   resp.publicly_accessible #=> Boolean
+    #   resp.vpc_security_group_ids #=> Array
+    #   resp.vpc_security_group_ids[0] #=> String
+    #   resp.db_parameter_group_identifier #=> String
+    #   resp.availability_zone #=> String
+    #   resp.secondary_availability_zone #=> String
+    #   resp.log_delivery_configuration.s3_configuration.bucket_name #=> String
+    #   resp.log_delivery_configuration.s3_configuration.enabled #=> Boolean
+    #   resp.influx_auth_parameters_secret_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbInstance AWS API Documentation
+    #
+    # @overload get_db_instance(params = {})
+    # @param [Hash] params ({})
+    def get_db_instance(params = {}, options = {})
+      req = build_request(:get_db_instance, params)
+      req.send_request(options)
+    end
+
+    # Returns a Timestream for InfluxDB DB parameter group.
+    #
+    # @option params [required, String] :identifier
+    #   The id of the DB parameter group.
+    #
+    # @return [Types::GetDbParameterGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDbParameterGroupOutput#id #id} => String
+    #   * {Types::GetDbParameterGroupOutput#name #name} => String
+    #   * {Types::GetDbParameterGroupOutput#arn #arn} => String
+    #   * {Types::GetDbParameterGroupOutput#description #description} => String
+    #   * {Types::GetDbParameterGroupOutput#parameters #parameters} => Types::Parameters
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_db_parameter_group({
+    #     identifier: "DbParameterGroupIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.description #=> String
+    #   resp.parameters.influx_d_bv_2.flux_log_enabled #=> Boolean
+    #   resp.parameters.influx_d_bv_2.log_level #=> String, one of "debug", "info", "error"
+    #   resp.parameters.influx_d_bv_2.no_tasks #=> Boolean
+    #   resp.parameters.influx_d_bv_2.query_concurrency #=> Integer
+    #   resp.parameters.influx_d_bv_2.query_queue_size #=> Integer
+    #   resp.parameters.influx_d_bv_2.tracing_type #=> String, one of "log", "jaeger"
+    #   resp.parameters.influx_d_bv_2.metrics_disabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/GetDbParameterGroup AWS API Documentation
+    #
+    # @overload get_db_parameter_group(params = {})
+    # @param [Hash] params ({})
+    def get_db_parameter_group(params = {}, options = {})
+      req = build_request(:get_db_parameter_group, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of Timestream for InfluxDB DB instances.
+    #
+    # @option params [String] :next_token
+    #   The pagination token. To resume pagination, provide the NextToken
+    #   value as argument of a subsequent API invocation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in the output. If the total
+    #   number of items available is more than the value specified, a
+    #   NextToken is provided in the output. To resume pagination, provide the
+    #   NextToken value as argument of a subsequent API invocation.
+    #
+    # @return [Types::ListDbInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDbInstancesOutput#items #items} => Array&lt;Types::DbInstanceSummary&gt;
+    #   * {Types::ListDbInstancesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_db_instances({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED"
+    #   resp.items[0].endpoint #=> String
+    #   resp.items[0].db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge"
+    #   resp.items[0].db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
+    #   resp.items[0].allocated_storage #=> Integer
+    #   resp.items[0].deployment_type #=> String, one of "SINGLE_AZ", "WITH_MULTIAZ_STANDBY"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/ListDbInstances AWS API Documentation
+    #
+    # @overload list_db_instances(params = {})
+    # @param [Hash] params ({})
+    def list_db_instances(params = {}, options = {})
+      req = build_request(:list_db_instances, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of Timestream for InfluxDB DB parameter groups.
+    #
+    # @option params [String] :next_token
+    #   The pagination token. To resume pagination, provide the NextToken
+    #   value as argument of a subsequent API invocation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in the output. If the total
+    #   number of items available is more than the value specified, a
+    #   NextToken is provided in the output. To resume pagination, provide the
+    #   NextToken value as argument of a subsequent API invocation.
+    #
+    # @return [Types::ListDbParameterGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDbParameterGroupsOutput#items #items} => Array&lt;Types::DbParameterGroupSummary&gt;
+    #   * {Types::ListDbParameterGroupsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_db_parameter_groups({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/ListDbParameterGroups AWS API Documentation
+    #
+    # @overload list_db_parameter_groups(params = {})
+    # @param [Hash] params ({})
+    def list_db_parameter_groups(params = {}, options = {})
+      req = build_request(:list_db_parameter_groups, params)
+      req.send_request(options)
+    end
+
+    # A list of tags applied to the resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the tagged resource.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Tags are composed of a Key/Value pairs. You can use tags to categorize
+    # and track your Timestream for InfluxDB resources.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the tagged resource.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   A list of tags used to categorize and track resources.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes the tag from the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the tagged resource.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys used to identify the tags.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates a Timestream for InfluxDB DB instance.
+    #
+    # @option params [required, String] :identifier
+    #   The id of the DB instance.
+    #
+    # @option params [Types::LogDeliveryConfiguration] :log_delivery_configuration
+    #   Configuration for sending InfluxDB engine logs to send to specified S3
+    #   bucket.
+    #
+    # @option params [String] :db_parameter_group_identifier
+    #   The id of the DB parameter group to assign to your DB instance. DB
+    #   parameter groups specify how the database is configured. For example,
+    #   DB parameter groups can specify the limit for query concurrency.
+    #
+    # @return [Types::UpdateDbInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDbInstanceOutput#id #id} => String
+    #   * {Types::UpdateDbInstanceOutput#name #name} => String
+    #   * {Types::UpdateDbInstanceOutput#arn #arn} => String
+    #   * {Types::UpdateDbInstanceOutput#status #status} => String
+    #   * {Types::UpdateDbInstanceOutput#endpoint #endpoint} => String
+    #   * {Types::UpdateDbInstanceOutput#db_instance_type #db_instance_type} => String
+    #   * {Types::UpdateDbInstanceOutput#db_storage_type #db_storage_type} => String
+    #   * {Types::UpdateDbInstanceOutput#allocated_storage #allocated_storage} => Integer
+    #   * {Types::UpdateDbInstanceOutput#deployment_type #deployment_type} => String
+    #   * {Types::UpdateDbInstanceOutput#vpc_subnet_ids #vpc_subnet_ids} => Array&lt;String&gt;
+    #   * {Types::UpdateDbInstanceOutput#publicly_accessible #publicly_accessible} => Boolean
+    #   * {Types::UpdateDbInstanceOutput#vpc_security_group_ids #vpc_security_group_ids} => Array&lt;String&gt;
+    #   * {Types::UpdateDbInstanceOutput#db_parameter_group_identifier #db_parameter_group_identifier} => String
+    #   * {Types::UpdateDbInstanceOutput#availability_zone #availability_zone} => String
+    #   * {Types::UpdateDbInstanceOutput#secondary_availability_zone #secondary_availability_zone} => String
+    #   * {Types::UpdateDbInstanceOutput#log_delivery_configuration #log_delivery_configuration} => Types::LogDeliveryConfiguration
+    #   * {Types::UpdateDbInstanceOutput#influx_auth_parameters_secret_arn #influx_auth_parameters_secret_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_db_instance({
+    #     identifier: "DbInstanceIdentifier", # required
+    #     log_delivery_configuration: {
+    #       s3_configuration: { # required
+    #         bucket_name: "S3ConfigurationBucketNameString", # required
+    #         enabled: false, # required
+    #       },
+    #     },
+    #     db_parameter_group_identifier: "DbParameterGroupIdentifier",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "CREATING", "AVAILABLE", "DELETING", "MODIFYING", "UPDATING", "DELETED", "FAILED"
+    #   resp.endpoint #=> String
+    #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge"
+    #   resp.db_storage_type #=> String, one of "InfluxIOIncludedT1", "InfluxIOIncludedT2", "InfluxIOIncludedT3"
+    #   resp.allocated_storage #=> Integer
+    #   resp.deployment_type #=> String, one of "SINGLE_AZ", "WITH_MULTIAZ_STANDBY"
+    #   resp.vpc_subnet_ids #=> Array
+    #   resp.vpc_subnet_ids[0] #=> String
+    #   resp.publicly_accessible #=> Boolean
+    #   resp.vpc_security_group_ids #=> Array
+    #   resp.vpc_security_group_ids[0] #=> String
+    #   resp.db_parameter_group_identifier #=> String
+    #   resp.availability_zone #=> String
+    #   resp.secondary_availability_zone #=> String
+    #   resp.log_delivery_configuration.s3_configuration.bucket_name #=> String
+    #   resp.log_delivery_configuration.s3_configuration.enabled #=> Boolean
+    #   resp.influx_auth_parameters_secret_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/UpdateDbInstance AWS API Documentation
+    #
+    # @overload update_db_instance(params = {})
+    # @param [Hash] params ({})
+    def update_db_instance(params = {}, options = {})
+      req = build_request(:update_db_instance, params)
+      req.send_request(options)
+    end
+
+    # @!endgroup
+
+    # @param params ({})
+    # @api private
+    def build_request(operation_name, params = {})
+      handlers = @handlers.for(operation_name)
+      context = Seahorse::Client::RequestContext.new(
+        operation_name: operation_name,
+        operation: config.api.operation(operation_name),
+        client: self,
+        params: params,
+        config: config)
+      context[:gem_name] = 'aws-sdk-timestreaminfluxdb'
+      context[:gem_version] = '1.0.0'
+      Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # @api private
+    # @deprecated
+    def waiter_names
+      []
+    end
+
+    class << self
+
+      # @api private
+      attr_reader :identifier
+
+      # @api private
+      def errors_module
+        Errors
+      end
+
+    end
+  end
+end

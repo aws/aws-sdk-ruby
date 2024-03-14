@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2024-03-14)
+------------------
+
+* Feature - This release includes a new exception type "SerialConsoleSessionUnsupportedException" for SendSerialConsoleSSHPublicKey API.
+
 1.37.0 (2024-01-26)
 ------------------
 

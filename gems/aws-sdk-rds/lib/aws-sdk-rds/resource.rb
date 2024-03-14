@@ -1130,7 +1130,9 @@ module Aws::RDS
     #
     #   : The name of the database to create when the DB instance is created.
     #     If this parameter isn't specified, no database is created in the DB
-    #     instance.
+    #     instance. In some cases, we recommend that you don't add a database
+    #     name. For more information, see [Additional considerations][1] in
+    #     the *Amazon RDS User Guide*.
     #
     #     Constraints:
     #
@@ -1203,6 +1205,10 @@ module Aws::RDS
     #   RDS for SQL Server
     #
     #   : Not applicable. Must be null.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-db-instance-prereqs.html#db2-prereqs-additional-considerations
     # @option options [required, String] :db_instance_identifier
     #   The identifier for this DB instance. This parameter is stored as a
     #   lowercase string.

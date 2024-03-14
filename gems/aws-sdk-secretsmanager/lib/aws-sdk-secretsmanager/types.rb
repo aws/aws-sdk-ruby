@@ -54,7 +54,8 @@ module Aws::SecretsManager
     #
     #   If there are more results available, in the response, Secrets
     #   Manager includes `NextToken`. To get the next results, call
-    #   `BatchGetSecretValue` again with the value from `NextToken`.
+    #   `BatchGetSecretValue` again with the value from `NextToken`. To use
+    #   this parameter, you must also use the `Filters` parameter.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -577,6 +578,11 @@ module Aws::SecretsManager
     #   disabled, Secrets Manager returns null. If rotation fails, Secrets
     #   Manager retries the entire rotation process multiple times. If
     #   rotation is unsuccessful, this date may be in the past.
+    #
+    #   This date represents the latest date that rotation will occur, but
+    #   it is not an approximate rotation date. In some cases, for example
+    #   if you turn off automatic rotation and then turn it back on, the
+    #   next rotation may occur much sooner than this date.
     #   @return [Time]
     #
     # @!attribute [rw] tags

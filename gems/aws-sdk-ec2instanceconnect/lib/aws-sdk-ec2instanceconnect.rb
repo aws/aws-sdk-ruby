@@ -52,6 +52,6 @@ require_relative 'aws-sdk-ec2instanceconnect/customizations'
 # @!group service
 module Aws::EC2InstanceConnect
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.38.0'
 
 end

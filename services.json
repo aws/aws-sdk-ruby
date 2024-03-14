@@ -1168,6 +1168,9 @@
   "Textract": {
     "models": "textract/2018-06-27"
   },
+  "TimestreamInfluxDB": {
+    "models": "timestream-influxdb/2023-01-27"
+  },
   "TimestreamQuery": {
     "models": "timestream-query/2018-11-01"
   },
