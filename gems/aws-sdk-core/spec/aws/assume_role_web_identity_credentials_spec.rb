@@ -5,44 +5,49 @@ require_relative '../spec_helper'
 module Aws
   describe AssumeRoleWebIdentityCredentials do
 
-    let(:client) {
+    let(:client) do
       STS::Client.new(
         region: 'us-west-2',
         credentials: credentials,
         stub_responses: true
       )
-    }
+    end
 
     let(:in_one_hour) { Time.now + 60 * 60 }
 
     let(:expiration) { in_one_hour }
 
-    let(:credentials) {
-      double('credentials',
+    let(:credentials) do
+      double(
+        'credentials',
         access_key_id: 'akid',
         secret_access_key: 'secret',
         session_token: 'session',
-        expiration: expiration,
+        expiration: expiration
       )
-    }
+    end
 
-    let(:token_file) {
-      Tempfile.new("token.jwt")
-    }
+    let(:assumed_role_user) do
+      double(
+        'assumed_role_user',
+        arn: 'arn:aws:sts::123456789001:assumed-role/assume-role-test/Name',
+        assumed_role_id: 'role id'
+      )
+    end
 
-    let(:token_file_path) {
-      token_file.path
-    }
+    let(:token_file) { Tempfile.new('token.jwt') }
+    let(:token_file_path) { token_file.path }
+    let(:uuid) { '2d931510-d99f-494a-8c67-87feb05e1594' }
 
-    let(:uuid) {
-      "2d931510-d99f-494a-8c67-87feb05e1594"
-    }
+    let(:generate_name) { Base64.strict_encode64(uuid) }
 
-    let(:generate_name) {
-      Base64.strict_encode64(uuid)
-    }
-
-    let(:resp) {double('client-resp', credentials: credentials)}
+    let(:resp) do
+      double(
+        'client-resp',
+        credentials: credentials,
+        assumed_role_user: assumed_role_user
+      )
+    end
 
     before(:each) do
       allow(STS::Client).to receive(:new).and_return(client)
@@ -160,6 +165,7 @@ module Aws
       expect(c.credentials.access_key_id).to eq('akid')
       expect(c.credentials.secret_access_key).to eq('secret')
       expect(c.credentials.session_token).to eq('session')
+      expect(c.credentials.account_id).to eq('123456789001')
       expect(c.expiration).to eq(in_one_hour)
     end
 

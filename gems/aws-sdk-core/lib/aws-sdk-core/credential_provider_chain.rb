@@ -45,7 +45,8 @@ module Aws
         Credentials.new(
           options[:config].access_key_id,
           options[:config].secret_access_key,
-          options[:config].session_token
+          options[:config].session_token,
+          account_id: options[:config].account_id
         )
       end
     end
@@ -94,7 +95,13 @@ module Aws
       key =    %w[AWS_ACCESS_KEY_ID AMAZON_ACCESS_KEY_ID AWS_ACCESS_KEY]
       secret = %w[AWS_SECRET_ACCESS_KEY AMAZON_SECRET_ACCESS_KEY AWS_SECRET_KEY]
       token =  %w[AWS_SESSION_TOKEN AMAZON_SESSION_TOKEN]
-      Credentials.new(envar(key), envar(secret), envar(token))
+      account_id = %w[AWS_ACCOUNT_ID]
+      Credentials.new(
+        envar(key),
+        envar(secret),
+        envar(token),
+        account_id: envar(account_id)
+      )
     end
 
     def envar(keys)

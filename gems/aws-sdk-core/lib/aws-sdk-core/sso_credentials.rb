@@ -156,7 +156,8 @@ module Aws
       @credentials = Credentials.new(
         c.access_key_id,
         c.secret_access_key,
-        c.session_token
+        c.session_token,
+        account_id: @sso_account_id
       )
       @expiration = Time.at(c.expiration / 1000.0)
     end

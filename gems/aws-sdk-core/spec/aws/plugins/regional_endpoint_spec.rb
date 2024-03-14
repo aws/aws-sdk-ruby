@@ -341,6 +341,28 @@ module Aws
           expect(client.config.use_fips_endpoint).to eq false
         end
       end
+
+      describe 'account id endpoint mode option' do
+        it 'is configured to use preferred by default' do
+          client = client_class.new(region: region)
+          expect(client.config.account_id_endpoint_mode).to eq 'preferred'
+        end
+
+        it 'can be configured using shared config' do
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:account_id_endpoint_mode).and_return('disabled')
+          client = client_class.new(region: region)
+          expect(client.config.account_id_endpoint_mode).to eq 'disabled'
+        end
+
+        it 'can be configured using ENV with precedence over shared config' do
+          allow_any_instance_of(Aws::SharedConfig)
+            .to receive(:account_id_endpoint_mode).and_return('disabled')
+          ENV['AWS_ACCOUNT_ID_ENDPOINT_MODE'] = 'required'
+          client = client_class.new(region: region)
+          expect(client.config.account_id_endpoint_mode).to eq 'required'
+        end
+      end
     end
   end
 end

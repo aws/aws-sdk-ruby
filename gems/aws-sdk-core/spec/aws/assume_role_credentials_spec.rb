@@ -5,28 +5,43 @@ require_relative '../spec_helper'
 module Aws
   describe AssumeRoleCredentials do
 
-    let(:client) {
+    let(:client) do
       STS::Client.new(
         region: 'us-east-1',
         credentials: credentials,
         stub_responses: true
       )
-    }
+    end
 
     let(:in_one_hour) { Time.now + 60 * 60 }
 
     let(:expiration) { in_one_hour }
 
-    let(:credentials) {
-      double('credentials',
+    let(:credentials) do
+      double(
+        'credentials',
         access_key_id: 'akid',
         secret_access_key: 'secret',
         session_token: 'session',
-        expiration: expiration,
+        expiration: expiration
       )
-    }
+    end
 
-    let(:resp) { double('client-resp', credentials: credentials) }
+    let(:assumed_role_user) do
+      double(
+        'assumed_role_user',
+        arn: 'arn:aws:sts::123456789001:assumed-role/assume-role-test/Name',
+        assumed_role_id: 'role id'
+      )
+    end
+
+    let(:resp) do
+      double(
+        'client-resp',
+        credentials: credentials,
+        assumed_role_user: assumed_role_user
+      )
+    end
 
     before(:each) do
       allow(STS::Client).to receive(:new).and_return(client)
@@ -93,11 +108,13 @@ module Aws
     it 'extracts credentials from the assume role response' do
       c = AssumeRoleCredentials.new(
         role_arn: 'arn',
-        role_session_name: 'session')
+        role_session_name: 'session'
+      )
       expect(c).to be_set
       expect(c.credentials.access_key_id).to eq('akid')
       expect(c.credentials.secret_access_key).to eq('secret')
       expect(c.credentials.session_token).to eq('session')
+      expect(c.credentials.account_id).to eq('123456789001')
       expect(c.expiration).to eq(in_one_hour)
     end
 

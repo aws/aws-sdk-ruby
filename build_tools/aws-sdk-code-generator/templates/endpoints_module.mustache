@@ -11,11 +11,6 @@ module {{module_name}}
     {{#endpoint_classes}}
     class {{name}}
       def self.build(context)
-        {{#has_endpoint_built_in?}}
-        unless context.config.regional_endpoint
-          endpoint = context.config.endpoint.to_s
-        end
-        {{/has_endpoint_built_in?}}
         {{module_name}}::EndpointParameters.new(
           {{#parameters}}
           {{#static_string?}}

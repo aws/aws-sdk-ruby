@@ -7,13 +7,6 @@ module Aws
 
     include CredentialProvider
 
-    # @api private
-    KEY_MAP = {
-      'aws_access_key_id' => 'access_key_id',
-      'aws_secret_access_key' => 'secret_access_key',
-      'aws_session_token' => 'session_token',
-    }
-
     # Constructs a new SharedCredentials object. This will load static
     # (access_key_id, secret_access_key and session_token) AWS access
     # credentials from an ini file, which supports profiles. The default
