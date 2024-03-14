@@ -12,7 +12,7 @@
     },
   "json" : {
     "input" : [
-      {"serializes_structure_members_with_locationname_traits": "Json protocol does not support jsonName trait so this test case needs to be culled"}
+      {"serializes_structure_members_with_locationname_traits": "Awaiting Smithy to resolve C2J translation"}
     ],
     "output" : [
       {"AwsJson11InvalidGreetingError": "Need to update test runner to handle error cases"},
@@ -58,7 +58,7 @@
   },
   "rest-json" : {
     "input" : [
-      {"RestJsonZeroAndFalseQueryValues": "Awaiting smithy to resolve the C2J translation"}
+      {"RestJsonZeroAndFalseQueryValues": "Awaiting Smithy to resolve C2J translation"}
     ],
     "output" : [
       {"RestJsonInputAndOutputWithQuotedStringHeaders": "Out of scope to support de-serializing HTTP header to list of strings"},
