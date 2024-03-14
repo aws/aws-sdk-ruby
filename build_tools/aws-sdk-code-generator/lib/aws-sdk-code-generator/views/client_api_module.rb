@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+q# frozen_string_literal: true
 
 module AwsSdkCodeGenerator
   module Views
@@ -500,7 +500,12 @@ module AwsSdkCodeGenerator
           metadata.each_pair do |key, value|
             next if key == 'resultWrapper'
             if key == 'locationName'
-              options[:location_name] = value.inspect
+              # Use the locationName on the shape IF it is defined on the shape
+              if (shape_location_name = @service.api['shapes'][shape_name]['locationName'])
+                options[:location_name] = shape_location_name.inspect
+              else
+                options[:location_name] = value.inspect
+              end
             else
               options[:metadata] ||= {}
               options[:metadata][key] = value.inspect
