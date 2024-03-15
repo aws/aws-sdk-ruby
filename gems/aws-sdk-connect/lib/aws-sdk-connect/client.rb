@@ -2726,6 +2726,15 @@ module Aws::Connect
     #   A list of third-party applications that the security profile will give
     #   access to.
     #
+    # @option params [Array<String>] :hierarchy_restricted_resources
+    #   The list of resources that a security profile applies hierarchy
+    #   restrictions to in Amazon Connect. Following are acceptable
+    #   ResourceNames: `User`.
+    #
+    # @option params [String] :allowed_access_control_hierarchy_group_id
+    #   The identifier of the hierarchy group that a security profile uses to
+    #   restrict access to resources in Amazon Connect.
+    #
     # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSecurityProfileResponse#security_profile_id #security_profile_id} => String
@@ -2751,6 +2760,8 @@ module Aws::Connect
     #         application_permissions: ["Permission"],
     #       },
     #     ],
+    #     hierarchy_restricted_resources: ["HierarchyRestrictedResourceName"],
+    #     allowed_access_control_hierarchy_group_id: "HierarchyGroupId",
     #   })
     #
     # @example Response structure
@@ -5261,6 +5272,9 @@ module Aws::Connect
     #   resp.security_profile.tag_restricted_resources[0] #=> String
     #   resp.security_profile.last_modified_time #=> Time
     #   resp.security_profile.last_modified_region #=> String
+    #   resp.security_profile.hierarchy_restricted_resources #=> Array
+    #   resp.security_profile.hierarchy_restricted_resources[0] #=> String
+    #   resp.security_profile.allowed_access_control_hierarchy_group_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeSecurityProfile AWS API Documentation
     #
@@ -12484,6 +12498,42 @@ module Aws::Connect
     #           tag_value: "String",
     #         },
     #       },
+    #       user_attribute_filter: {
+    #         or_conditions: [
+    #           {
+    #             tag_conditions: [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #             hierarchy_group_condition: {
+    #               value: "String",
+    #               hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
+    #             },
+    #           },
+    #         ],
+    #         and_condition: {
+    #           tag_conditions: [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #           hierarchy_group_condition: {
+    #             value: "String",
+    #             hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
+    #           },
+    #         },
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #         hierarchy_group_condition: {
+    #           value: "String",
+    #           hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
+    #         },
+    #       },
     #     },
     #     search_criteria: {
     #       or_conditions: [
@@ -15905,6 +15955,15 @@ module Aws::Connect
     #
     #   A list of the third-party application's metadata.
     #
+    # @option params [Array<String>] :hierarchy_restricted_resources
+    #   The list of resources that a security profile applies hierarchy
+    #   restrictions to in Amazon Connect. Following are acceptable
+    #   ResourceNames: `User`.
+    #
+    # @option params [String] :allowed_access_control_hierarchy_group_id
+    #   The identifier of the hierarchy group that a security profile uses to
+    #   restrict access to resources in Amazon Connect.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -15924,6 +15983,8 @@ module Aws::Connect
     #         application_permissions: ["Permission"],
     #       },
     #     ],
+    #     hierarchy_restricted_resources: ["HierarchyRestrictedResourceName"],
+    #     allowed_access_control_hierarchy_group_id: "HierarchyGroupId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateSecurityProfile AWS API Documentation
@@ -16600,7 +16661,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.151.0'
+      context[:gem_version] = '1.152.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

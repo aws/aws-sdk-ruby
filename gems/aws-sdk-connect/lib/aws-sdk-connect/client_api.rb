@@ -86,7 +86,9 @@ module Aws::Connect
     Attendee = Shapes::StructureShape.new(name: 'Attendee')
     AttendeeId = Shapes::StringShape.new(name: 'AttendeeId')
     Attribute = Shapes::StructureShape.new(name: 'Attribute')
+    AttributeAndCondition = Shapes::StructureShape.new(name: 'AttributeAndCondition')
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
+    AttributeOrConditionList = Shapes::ListShape.new(name: 'AttributeOrConditionList')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     Attributes = Shapes::MapShape.new(name: 'Attributes')
     AttributesList = Shapes::ListShape.new(name: 'AttributesList')
@@ -174,6 +176,7 @@ module Aws::Connect
     Content = Shapes::StringShape.new(name: 'Content')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     ControlPlaneTagFilter = Shapes::StructureShape.new(name: 'ControlPlaneTagFilter')
+    ControlPlaneUserAttributeFilter = Shapes::StructureShape.new(name: 'ControlPlaneUserAttributeFilter')
     CreateAgentStatusRequest = Shapes::StructureShape.new(name: 'CreateAgentStatusRequest')
     CreateAgentStatusResponse = Shapes::StructureShape.new(name: 'CreateAgentStatusResponse')
     CreateCaseActionDefinition = Shapes::StructureShape.new(name: 'CreateCaseActionDefinition')
@@ -479,6 +482,8 @@ module Aws::Connect
     HierarchyLevelUpdate = Shapes::StructureShape.new(name: 'HierarchyLevelUpdate')
     HierarchyPath = Shapes::StructureShape.new(name: 'HierarchyPath')
     HierarchyPathReference = Shapes::StructureShape.new(name: 'HierarchyPathReference')
+    HierarchyRestrictedResourceList = Shapes::ListShape.new(name: 'HierarchyRestrictedResourceList')
+    HierarchyRestrictedResourceName = Shapes::StringShape.new(name: 'HierarchyRestrictedResourceName')
     HierarchyStructure = Shapes::StructureShape.new(name: 'HierarchyStructure')
     HierarchyStructureUpdate = Shapes::StructureShape.new(name: 'HierarchyStructureUpdate')
     HistoricalMetric = Shapes::StructureShape.new(name: 'HistoricalMetric')
@@ -1436,6 +1441,12 @@ module Aws::Connect
     Attribute.add_member(:value, Shapes::ShapeRef.new(shape: InstanceAttributeValue, location_name: "Value"))
     Attribute.struct_class = Types::Attribute
 
+    AttributeAndCondition.add_member(:tag_conditions, Shapes::ShapeRef.new(shape: TagAndConditionList, location_name: "TagConditions"))
+    AttributeAndCondition.add_member(:hierarchy_group_condition, Shapes::ShapeRef.new(shape: HierarchyGroupCondition, location_name: "HierarchyGroupCondition"))
+    AttributeAndCondition.struct_class = Types::AttributeAndCondition
+
+    AttributeOrConditionList.member = Shapes::ShapeRef.new(shape: AttributeAndCondition)
+
     Attributes.key = Shapes::ShapeRef.new(shape: AttributeName)
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
@@ -1667,6 +1678,12 @@ module Aws::Connect
     ControlPlaneTagFilter.add_member(:tag_condition, Shapes::ShapeRef.new(shape: TagCondition, location_name: "TagCondition"))
     ControlPlaneTagFilter.struct_class = Types::ControlPlaneTagFilter
 
+    ControlPlaneUserAttributeFilter.add_member(:or_conditions, Shapes::ShapeRef.new(shape: AttributeOrConditionList, location_name: "OrConditions"))
+    ControlPlaneUserAttributeFilter.add_member(:and_condition, Shapes::ShapeRef.new(shape: AttributeAndCondition, location_name: "AndCondition"))
+    ControlPlaneUserAttributeFilter.add_member(:tag_condition, Shapes::ShapeRef.new(shape: TagCondition, location_name: "TagCondition"))
+    ControlPlaneUserAttributeFilter.add_member(:hierarchy_group_condition, Shapes::ShapeRef.new(shape: HierarchyGroupCondition, location_name: "HierarchyGroupCondition"))
+    ControlPlaneUserAttributeFilter.struct_class = Types::ControlPlaneUserAttributeFilter
+
     CreateAgentStatusRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreateAgentStatusRequest.add_member(:name, Shapes::ShapeRef.new(shape: AgentStatusName, required: true, location_name: "Name"))
     CreateAgentStatusRequest.add_member(:description, Shapes::ShapeRef.new(shape: AgentStatusDescription, location_name: "Description"))
@@ -1853,6 +1870,8 @@ module Aws::Connect
     CreateSecurityProfileRequest.add_member(:allowed_access_control_tags, Shapes::ShapeRef.new(shape: AllowedAccessControlTags, location_name: "AllowedAccessControlTags"))
     CreateSecurityProfileRequest.add_member(:tag_restricted_resources, Shapes::ShapeRef.new(shape: TagRestrictedResourceList, location_name: "TagRestrictedResources"))
     CreateSecurityProfileRequest.add_member(:applications, Shapes::ShapeRef.new(shape: Applications, location_name: "Applications"))
+    CreateSecurityProfileRequest.add_member(:hierarchy_restricted_resources, Shapes::ShapeRef.new(shape: HierarchyRestrictedResourceList, location_name: "HierarchyRestrictedResources"))
+    CreateSecurityProfileRequest.add_member(:allowed_access_control_hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "AllowedAccessControlHierarchyGroupId"))
     CreateSecurityProfileRequest.struct_class = Types::CreateSecurityProfileRequest
 
     CreateSecurityProfileResponse.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, location_name: "SecurityProfileId"))
@@ -2828,6 +2847,8 @@ module Aws::Connect
     HierarchyPathReference.add_member(:level_four, Shapes::ShapeRef.new(shape: HierarchyGroupSummaryReference, location_name: "LevelFour"))
     HierarchyPathReference.add_member(:level_five, Shapes::ShapeRef.new(shape: HierarchyGroupSummaryReference, location_name: "LevelFive"))
     HierarchyPathReference.struct_class = Types::HierarchyPathReference
+
+    HierarchyRestrictedResourceList.member = Shapes::ShapeRef.new(shape: HierarchyRestrictedResourceName)
 
     HierarchyStructure.add_member(:level_one, Shapes::ShapeRef.new(shape: HierarchyLevel, location_name: "LevelOne"))
     HierarchyStructure.add_member(:level_two, Shapes::ShapeRef.new(shape: HierarchyLevel, location_name: "LevelTwo"))
@@ -4309,6 +4330,8 @@ module Aws::Connect
     SecurityProfile.add_member(:tag_restricted_resources, Shapes::ShapeRef.new(shape: TagRestrictedResourceList, location_name: "TagRestrictedResources"))
     SecurityProfile.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     SecurityProfile.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    SecurityProfile.add_member(:hierarchy_restricted_resources, Shapes::ShapeRef.new(shape: HierarchyRestrictedResourceList, location_name: "HierarchyRestrictedResources"))
+    SecurityProfile.add_member(:allowed_access_control_hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "AllowedAccessControlHierarchyGroupId"))
     SecurityProfile.struct_class = Types::SecurityProfile
 
     SecurityProfileIds.member = Shapes::ShapeRef.new(shape: SecurityProfileId)
@@ -4951,6 +4974,8 @@ module Aws::Connect
     UpdateSecurityProfileRequest.add_member(:allowed_access_control_tags, Shapes::ShapeRef.new(shape: AllowedAccessControlTags, location_name: "AllowedAccessControlTags"))
     UpdateSecurityProfileRequest.add_member(:tag_restricted_resources, Shapes::ShapeRef.new(shape: TagRestrictedResourceList, location_name: "TagRestrictedResources"))
     UpdateSecurityProfileRequest.add_member(:applications, Shapes::ShapeRef.new(shape: Applications, location_name: "Applications"))
+    UpdateSecurityProfileRequest.add_member(:hierarchy_restricted_resources, Shapes::ShapeRef.new(shape: HierarchyRestrictedResourceList, location_name: "HierarchyRestrictedResources"))
+    UpdateSecurityProfileRequest.add_member(:allowed_access_control_hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "AllowedAccessControlHierarchyGroupId"))
     UpdateSecurityProfileRequest.struct_class = Types::UpdateSecurityProfileRequest
 
     UpdateTaskTemplateRequest.add_member(:task_template_id, Shapes::ShapeRef.new(shape: TaskTemplateId, required: true, location: "uri", location_name: "TaskTemplateId"))
@@ -5141,6 +5166,7 @@ module Aws::Connect
     UserSearchCriteria.struct_class = Types::UserSearchCriteria
 
     UserSearchFilter.add_member(:tag_filter, Shapes::ShapeRef.new(shape: ControlPlaneTagFilter, location_name: "TagFilter"))
+    UserSearchFilter.add_member(:user_attribute_filter, Shapes::ShapeRef.new(shape: ControlPlaneUserAttributeFilter, location_name: "UserAttributeFilter"))
     UserSearchFilter.struct_class = Types::UserSearchFilter
 
     UserSearchSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))

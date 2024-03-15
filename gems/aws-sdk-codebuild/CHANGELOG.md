@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2024-03-15)
+------------------
+
+* Feature - AWS CodeBuild now supports overflow behavior on Reserved Capacity.
+
 1.104.0 (2024-03-08)
 ------------------
 

@@ -265,6 +265,12 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class AttributeAndCondition
+      attr_accessor tag_conditions: ::Array[Types::TagCondition]
+      attr_accessor hierarchy_group_condition: Types::HierarchyGroupCondition
+      SENSITIVE: []
+    end
+
     class AudioFeatures
       attr_accessor echo_reduction: ("AVAILABLE" | "UNAVAILABLE")
       SENSITIVE: []
@@ -530,6 +536,14 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ControlPlaneUserAttributeFilter
+      attr_accessor or_conditions: ::Array[Types::AttributeAndCondition]
+      attr_accessor and_condition: Types::AttributeAndCondition
+      attr_accessor tag_condition: Types::TagCondition
+      attr_accessor hierarchy_group_condition: Types::HierarchyGroupCondition
+      SENSITIVE: []
+    end
+
     class CreateAgentStatusRequest
       attr_accessor instance_id: ::String
       attr_accessor name: ::String
@@ -777,6 +791,8 @@ module Aws::Connect
       attr_accessor allowed_access_control_tags: ::Hash[::String, ::String]
       attr_accessor tag_restricted_resources: ::Array[::String]
       attr_accessor applications: ::Array[Types::Application]
+      attr_accessor hierarchy_restricted_resources: ::Array[::String]
+      attr_accessor allowed_access_control_hierarchy_group_id: ::String
       SENSITIVE: []
     end
 
@@ -3932,6 +3948,8 @@ module Aws::Connect
       attr_accessor tag_restricted_resources: ::Array[::String]
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_region: ::String
+      attr_accessor hierarchy_restricted_resources: ::Array[::String]
+      attr_accessor allowed_access_control_hierarchy_group_id: ::String
       SENSITIVE: []
     end
 
@@ -4750,6 +4768,8 @@ module Aws::Connect
       attr_accessor allowed_access_control_tags: ::Hash[::String, ::String]
       attr_accessor tag_restricted_resources: ::Array[::String]
       attr_accessor applications: ::Array[Types::Application]
+      attr_accessor hierarchy_restricted_resources: ::Array[::String]
+      attr_accessor allowed_access_control_hierarchy_group_id: ::String
       SENSITIVE: []
     end
 
@@ -4986,6 +5006,7 @@ module Aws::Connect
 
     class UserSearchFilter
       attr_accessor tag_filter: Types::ControlPlaneTagFilter
+      attr_accessor user_attribute_filter: Types::ControlPlaneUserAttributeFilter
       SENSITIVE: []
     end
 

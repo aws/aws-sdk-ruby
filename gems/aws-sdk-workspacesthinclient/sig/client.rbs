@@ -235,8 +235,7 @@ module Aws
                            id: ::String,
                            ?name: ::String,
                            ?desired_software_set_id: ::String,
-                           ?software_set_update_schedule: ("USE_MAINTENANCE_WINDOW" | "APPLY_IMMEDIATELY"),
-                           ?kms_key_arn: ::String
+                           ?software_set_update_schedule: ("USE_MAINTENANCE_WINDOW" | "APPLY_IMMEDIATELY")
                          ) -> _UpdateDeviceResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeviceResponseSuccess
 

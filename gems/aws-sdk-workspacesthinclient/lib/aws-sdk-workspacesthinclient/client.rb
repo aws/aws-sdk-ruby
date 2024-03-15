@@ -1068,10 +1068,6 @@ module Aws::WorkSpacesThinClient
     #   An option to define if software updates should be applied within a
     #   maintenance window.
     #
-    # @option params [String] :kms_key_arn
-    #   The Amazon Resource Name (ARN) of the Key Management Service key to
-    #   use for the update.
-    #
     # @return [Types::UpdateDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDeviceResponse#device #device} => Types::DeviceSummary
@@ -1083,7 +1079,6 @@ module Aws::WorkSpacesThinClient
     #     name: "DeviceName",
     #     desired_software_set_id: "SoftwareSetId",
     #     software_set_update_schedule: "USE_MAINTENANCE_WINDOW", # accepts USE_MAINTENANCE_WINDOW, APPLY_IMMEDIATELY
-    #     kms_key_arn: "KmsKeyArn",
     #   })
     #
     # @example Response structure
@@ -1243,7 +1238,7 @@ module Aws::WorkSpacesThinClient
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspacesthinclient'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

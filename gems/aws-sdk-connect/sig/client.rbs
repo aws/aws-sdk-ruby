@@ -779,7 +779,9 @@ module Aws
                                          namespace: ::String?,
                                          application_permissions: Array[::String]?
                                        },
-                                     ]
+                                     ],
+                                     ?hierarchy_restricted_resources: Array[::String],
+                                     ?allowed_access_control_hierarchy_group_id: ::String
                                    ) -> _CreateSecurityProfileResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSecurityProfileResponseSuccess
 
@@ -2935,6 +2937,42 @@ module Aws
                                 tag_key: ::String?,
                                 tag_value: ::String?
                               }?
+                            }?,
+                            user_attribute_filter: {
+                              or_conditions: Array[
+                                {
+                                  tag_conditions: Array[
+                                    {
+                                      tag_key: ::String?,
+                                      tag_value: ::String?
+                                    },
+                                  ]?,
+                                  hierarchy_group_condition: {
+                                    value: ::String?,
+                                    hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
+                                  }?
+                                },
+                              ]?,
+                              and_condition: {
+                                tag_conditions: Array[
+                                  {
+                                    tag_key: ::String?,
+                                    tag_value: ::String?
+                                  },
+                                ]?,
+                                hierarchy_group_condition: {
+                                  value: ::String?,
+                                  hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
+                                }?
+                              }?,
+                              tag_condition: {
+                                tag_key: ::String?,
+                                tag_value: ::String?
+                              }?,
+                              hierarchy_group_condition: {
+                                value: ::String?,
+                                hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
+                              }?
                             }?
                           },
                           ?search_criteria: {
@@ -3862,7 +3900,9 @@ module Aws
                                          namespace: ::String?,
                                          application_permissions: Array[::String]?
                                        },
-                                     ]
+                                     ],
+                                     ?hierarchy_restricted_resources: Array[::String],
+                                     ?allowed_access_control_hierarchy_group_id: ::String
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

@@ -118,6 +118,7 @@ module Aws::CodeBuild
     FleetContextCode = Shapes::StringShape.new(name: 'FleetContextCode')
     FleetName = Shapes::StringShape.new(name: 'FleetName')
     FleetNames = Shapes::ListShape.new(name: 'FleetNames')
+    FleetOverflowBehavior = Shapes::StringShape.new(name: 'FleetOverflowBehavior')
     FleetScalingMetricType = Shapes::StringShape.new(name: 'FleetScalingMetricType')
     FleetScalingType = Shapes::StringShape.new(name: 'FleetScalingType')
     FleetSortByType = Shapes::StringShape.new(name: 'FleetSortByType')
@@ -517,6 +518,7 @@ module Aws::CodeBuild
     CreateFleetInput.add_member(:environment_type, Shapes::ShapeRef.new(shape: EnvironmentType, required: true, location_name: "environmentType"))
     CreateFleetInput.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, required: true, location_name: "computeType"))
     CreateFleetInput.add_member(:scaling_configuration, Shapes::ShapeRef.new(shape: ScalingConfigurationInput, location_name: "scalingConfiguration"))
+    CreateFleetInput.add_member(:overflow_behavior, Shapes::ShapeRef.new(shape: FleetOverflowBehavior, location_name: "overflowBehavior"))
     CreateFleetInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateFleetInput.struct_class = Types::CreateFleetInput
 
@@ -685,6 +687,7 @@ module Aws::CodeBuild
     Fleet.add_member(:environment_type, Shapes::ShapeRef.new(shape: EnvironmentType, location_name: "environmentType"))
     Fleet.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, location_name: "computeType"))
     Fleet.add_member(:scaling_configuration, Shapes::ShapeRef.new(shape: ScalingConfigurationOutput, location_name: "scalingConfiguration"))
+    Fleet.add_member(:overflow_behavior, Shapes::ShapeRef.new(shape: FleetOverflowBehavior, location_name: "overflowBehavior"))
     Fleet.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     Fleet.struct_class = Types::Fleet
 
@@ -1246,6 +1249,7 @@ module Aws::CodeBuild
     UpdateFleetInput.add_member(:environment_type, Shapes::ShapeRef.new(shape: EnvironmentType, location_name: "environmentType"))
     UpdateFleetInput.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, location_name: "computeType"))
     UpdateFleetInput.add_member(:scaling_configuration, Shapes::ShapeRef.new(shape: ScalingConfigurationInput, location_name: "scalingConfiguration"))
+    UpdateFleetInput.add_member(:overflow_behavior, Shapes::ShapeRef.new(shape: FleetOverflowBehavior, location_name: "overflowBehavior"))
     UpdateFleetInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     UpdateFleetInput.struct_class = Types::UpdateFleetInput
 

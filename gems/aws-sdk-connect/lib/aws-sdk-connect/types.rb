@@ -965,6 +965,27 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # A list of conditions which would be applied together with an `AND`
+    # condition.
+    #
+    # @!attribute [rw] tag_conditions
+    #   A leaf node condition which can be used to specify a tag condition.
+    #   @return [Array<Types::TagCondition>]
+    #
+    # @!attribute [rw] hierarchy_group_condition
+    #   A leaf node condition which can be used to specify a hierarchy group
+    #   condition.
+    #   @return [Types::HierarchyGroupCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AttributeAndCondition AWS API Documentation
+    #
+    class AttributeAndCondition < Struct.new(
+      :tag_conditions,
+      :hierarchy_group_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Has audio-specific configurations as the operating parameter for Echo
     # Reduction.
     #
@@ -2148,6 +2169,54 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # An object that can be used to specify Tag conditions or Hierarchy
+    # Group conditions inside the `SearchFilter`.
+    #
+    # This accepts an `OR` of `AND` (List of List) input where:
+    #
+    # * The top level list specifies conditions that need to be applied with
+    #   `OR` operator
+    #
+    # * The inner list specifies conditions that need to be applied with
+    #   `AND` operator.
+    #
+    # <note markdown="1"> Only one field can be populated. Maximum number of allowed Tag
+    # conditions is 25. Maximum number of allowed Hierarchy Group conditions
+    # is 20.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an `OR`
+    #   condition.
+    #   @return [Array<Types::AttributeAndCondition>]
+    #
+    # @!attribute [rw] and_condition
+    #   A list of conditions which would be applied together with an `AND`
+    #   condition.
+    #   @return [Types::AttributeAndCondition]
+    #
+    # @!attribute [rw] tag_condition
+    #   A leaf node condition which can be used to specify a tag condition,
+    #   for example, `HAVE BPO = 123`.
+    #   @return [Types::TagCondition]
+    #
+    # @!attribute [rw] hierarchy_group_condition
+    #   A leaf node condition which can be used to specify a hierarchy group
+    #   condition.
+    #   @return [Types::HierarchyGroupCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ControlPlaneUserAttributeFilter AWS API Documentation
+    #
+    class ControlPlaneUserAttributeFilter < Struct.new(
+      :or_conditions,
+      :and_condition,
+      :tag_condition,
+      :hierarchy_group_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_id
     #   The identifier of the Amazon Connect instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
@@ -3256,6 +3325,17 @@ module Aws::Connect
     #   give access to.
     #   @return [Array<Types::Application>]
     #
+    # @!attribute [rw] hierarchy_restricted_resources
+    #   The list of resources that a security profile applies hierarchy
+    #   restrictions to in Amazon Connect. Following are acceptable
+    #   ResourceNames: `User`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_access_control_hierarchy_group_id
+    #   The identifier of the hierarchy group that a security profile uses
+    #   to restrict access to resources in Amazon Connect.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateSecurityProfileRequest AWS API Documentation
     #
     class CreateSecurityProfileRequest < Struct.new(
@@ -3266,7 +3346,9 @@ module Aws::Connect
       :tags,
       :allowed_access_control_tags,
       :tag_restricted_resources,
-      :applications)
+      :applications,
+      :hierarchy_restricted_resources,
+      :allowed_access_control_hierarchy_group_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16516,6 +16598,17 @@ module Aws::Connect
     #   modified.
     #   @return [String]
     #
+    # @!attribute [rw] hierarchy_restricted_resources
+    #   The list of resources that a security profile applies hierarchy
+    #   restrictions to in Amazon Connect. Following are acceptable
+    #   ResourceNames: `User`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_access_control_hierarchy_group_id
+    #   The identifier of the hierarchy group that a security profile uses
+    #   to restrict access to resources in Amazon Connect.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfile AWS API Documentation
     #
     class SecurityProfile < Struct.new(
@@ -16528,7 +16621,9 @@ module Aws::Connect
       :allowed_access_control_tags,
       :tag_restricted_resources,
       :last_modified_time,
-      :last_modified_region)
+      :last_modified_region,
+      :hierarchy_restricted_resources,
+      :allowed_access_control_hierarchy_group_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19929,6 +20024,17 @@ module Aws::Connect
     #   A list of the third-party application's metadata.
     #   @return [Array<Types::Application>]
     #
+    # @!attribute [rw] hierarchy_restricted_resources
+    #   The list of resources that a security profile applies hierarchy
+    #   restrictions to in Amazon Connect. Following are acceptable
+    #   ResourceNames: `User`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_access_control_hierarchy_group_id
+    #   The identifier of the hierarchy group that a security profile uses
+    #   to restrict access to resources in Amazon Connect.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateSecurityProfileRequest AWS API Documentation
     #
     class UpdateSecurityProfileRequest < Struct.new(
@@ -19938,7 +20044,9 @@ module Aws::Connect
       :instance_id,
       :allowed_access_control_tags,
       :tag_restricted_resources,
-      :applications)
+      :applications,
+      :hierarchy_restricted_resources,
+      :allowed_access_control_hierarchy_group_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20890,10 +20998,32 @@ module Aws::Connect
     #     operator.
     #   @return [Types::ControlPlaneTagFilter]
     #
+    # @!attribute [rw] user_attribute_filter
+    #   An object that can be used to specify Tag conditions or Hierarchy
+    #   Group conditions inside the SearchFilter.
+    #
+    #   This accepts an `OR` of `AND` (List of List) input where:
+    #
+    #   * The top level list specifies conditions that need to be applied
+    #     with `OR` operator.
+    #
+    #   * The inner list specifies conditions that need to be applied with
+    #     `AND` operator.
+    #
+    #   <note markdown="1"> Only one field can be populated. This object can’t be used along
+    #   with TagFilter. Request can either contain TagFilter or
+    #   UserAttributeFilter if SearchFilter is specified, combination of
+    #   both is not supported and such request will throw
+    #   AccessDeniedException.
+    #
+    #    </note>
+    #   @return [Types::ControlPlaneUserAttributeFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserSearchFilter AWS API Documentation
     #
     class UserSearchFilter < Struct.new(
-      :tag_filter)
+      :tag_filter,
+      :user_attribute_filter)
       SENSITIVE = []
       include Aws::Structure
     end

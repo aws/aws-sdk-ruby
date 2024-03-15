@@ -41529,6 +41529,14 @@ module Aws::EC2
     #   Describes the supported NitroTPM versions for the instance type.
     #   @return [Types::NitroTpmInfo]
     #
+    # @!attribute [rw] media_accelerator_info
+    #   Describes the media accelerator settings for the instance type.
+    #   @return [Types::MediaAcceleratorInfo]
+    #
+    # @!attribute [rw] neuron_info
+    #   Describes the Neuron accelerator settings for the instance type.
+    #   @return [Types::NeuronInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTypeInfo AWS API Documentation
     #
     class InstanceTypeInfo < Struct.new(
@@ -41558,7 +41566,9 @@ module Aws::EC2
       :supported_boot_modes,
       :nitro_enclaves_support,
       :nitro_tpm_support,
-      :nitro_tpm_info)
+      :nitro_tpm_info,
+      :media_accelerator_info,
+      :neuron_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46273,6 +46283,69 @@ module Aws::EC2
       :version,
       :tags,
       :owner_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the media accelerators for the instance type.
+    #
+    # @!attribute [rw] accelerators
+    #   Describes the media accelerators for the instance type.
+    #   @return [Array<Types::MediaDeviceInfo>]
+    #
+    # @!attribute [rw] total_media_memory_in_mi_b
+    #   The total size of the memory for the media accelerators for the
+    #   instance type, in MiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MediaAcceleratorInfo AWS API Documentation
+    #
+    class MediaAcceleratorInfo < Struct.new(
+      :accelerators,
+      :total_media_memory_in_mi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the media accelerators for the instance type.
+    #
+    # @!attribute [rw] count
+    #   The number of media accelerators for the instance type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the media accelerator.
+    #   @return [String]
+    #
+    # @!attribute [rw] manufacturer
+    #   The manufacturer of the media accelerator.
+    #   @return [String]
+    #
+    # @!attribute [rw] memory_info
+    #   Describes the memory available to the media accelerator.
+    #   @return [Types::MediaDeviceMemoryInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MediaDeviceInfo AWS API Documentation
+    #
+    class MediaDeviceInfo < Struct.new(
+      :count,
+      :name,
+      :manufacturer,
+      :memory_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the memory available to the media accelerator.
+    #
+    # @!attribute [rw] size_in_mi_b
+    #   The size of the memory available to each media accelerator, in MiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MediaDeviceMemoryInfo AWS API Documentation
+    #
+    class MediaDeviceMemoryInfo < Struct.new(
+      :size_in_mi_b)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52206,6 +52279,88 @@ module Aws::EC2
       :primary,
       :private_dns_name,
       :private_ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the cores available to the neuron accelerator.
+    #
+    # @!attribute [rw] count
+    #   The number of cores available to the neuron accelerator.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] version
+    #   The version of the neuron accelerator.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NeuronDeviceCoreInfo AWS API Documentation
+    #
+    class NeuronDeviceCoreInfo < Struct.new(
+      :count,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the neuron accelerators for the instance type.
+    #
+    # @!attribute [rw] count
+    #   The number of neuron accelerators for the instance type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the neuron accelerator.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_info
+    #   Describes the cores available to each neuron accelerator.
+    #   @return [Types::NeuronDeviceCoreInfo]
+    #
+    # @!attribute [rw] memory_info
+    #   Describes the memory available to each neuron accelerator.
+    #   @return [Types::NeuronDeviceMemoryInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NeuronDeviceInfo AWS API Documentation
+    #
+    class NeuronDeviceInfo < Struct.new(
+      :count,
+      :name,
+      :core_info,
+      :memory_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the memory available to the neuron accelerator.
+    #
+    # @!attribute [rw] size_in_mi_b
+    #   The size of the memory available to the neuron accelerator, in MiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NeuronDeviceMemoryInfo AWS API Documentation
+    #
+    class NeuronDeviceMemoryInfo < Struct.new(
+      :size_in_mi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the neuron accelerators for the instance type.
+    #
+    # @!attribute [rw] neuron_devices
+    #   Describes the neuron accelerators for the instance type.
+    #   @return [Array<Types::NeuronDeviceInfo>]
+    #
+    # @!attribute [rw] total_neuron_device_memory_in_mi_b
+    #   The total size of the memory for the neuron accelerators for the
+    #   instance type, in MiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NeuronInfo AWS API Documentation
+    #
+    class NeuronInfo < Struct.new(
+      :neuron_devices,
+      :total_neuron_device_memory_in_mi_b)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -61297,6 +61452,12 @@ module Aws::EC2
     #   `LaunchSpecifications`, you can't specify `LaunchTemplateConfigs`.
     #   If you include On-Demand capacity in your request, you must use
     #   `LaunchTemplateConfigs`.
+    #
+    #   <note markdown="1"> If an AMI specified in a launch specification is deregistered or
+    #   disabled, no new instances can be launched from the AMI. For fleets
+    #   of type `maintain`, the target capacity will not be maintained.
+    #
+    #    </note>
     #   @return [Array<Types::SpotFleetLaunchSpecification>]
     #
     # @!attribute [rw] launch_template_configs

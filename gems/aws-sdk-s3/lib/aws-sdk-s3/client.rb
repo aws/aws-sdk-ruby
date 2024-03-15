@@ -561,7 +561,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -699,8 +699,8 @@ module Aws::S3
     # error).
     #
     # Note that if `CompleteMultipartUpload` fails, applications should be
-    # prepared to retry the failed requests. For more information, see
-    # [Amazon S3 Error Best Practices][3].
+    # prepared to retry any failed requests (including 500 error responses).
+    # For more information, see [Amazon S3 Error Best Practices][3].
     #
     # You can't use `Content-Type: application/x-www-form-urlencoded` for
     # the CompleteMultipartUpload requests. Also, if you don't provide a
@@ -812,7 +812,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -1094,11 +1094,14 @@ module Aws::S3
     #
     # Both the Region that you want to copy the object from and the Region
     # that you want to copy the object to must be enabled for your account.
+    # For more information about how to enable a Region for your account,
+    # see [Enable or disable a Region for standalone accounts][3] in the
+    # *Amazon Web Services Account Management Guide*.
     #
     # Amazon S3 transfer acceleration does not support cross-Region copies.
     # If you request a cross-Region copy using a transfer acceleration
     # endpoint, you get a `400 Bad Request` error. For more information, see
-    # [Transfer Acceleration][3].
+    # [Transfer Acceleration][4].
     #
     # Authentication and authorization
     #
@@ -1106,7 +1109,7 @@ module Aws::S3
     #   IAM credentials (access key ID and secret access key for the IAM
     #   identities). All headers with the `x-amz-` prefix, including
     #   `x-amz-copy-source`, must be signed. For more information, see [REST
-    #   Authentication][4].
+    #   Authentication][5].
     #
     #   **Directory buckets** - You must use the IAM credentials to
     #   authenticate and authorize your access to the `CopyObject` API
@@ -1130,7 +1133,7 @@ module Aws::S3
     #       source object that is being copied.
     #
     #     * If the destination bucket is a general purpose bucket, you must
-    #       have <b> <code>s3:PubObject</code> </b> permission to write the
+    #       have <b> <code>s3:PutObject</code> </b> permission to write the
     #       object copy to the destination bucket.
     #
     #   * **Directory bucket permissions** - You must have permissions in a
@@ -1152,9 +1155,9 @@ module Aws::S3
     #       set to `ReadOnly` on the copy destination bucket.
     #
     #     For example policies, see [Example bucket policies for S3 Express
-    #     One Zone][5] and [Amazon Web Services Identity and Access
+    #     One Zone][6] and [Amazon Web Services Identity and Access
     #     Management (IAM) identity-based policies for S3 Express One
-    #     Zone][6] in the *Amazon S3 User Guide*.
+    #     Zone][7] in the *Amazon S3 User Guide*.
     #
     # Response and special errors
     #
@@ -1178,14 +1181,13 @@ module Aws::S3
     #       response is embedded in the `200 OK` response. For example, in a
     #       cross-region copy, you may encounter throttling and receive a
     #       `200 OK` response. For more information, see [Resolve the Error
-    #       200 response when copying objects to Amazon
-    #       S3](repost.aws/knowledge-center/s3-resolve-200-internalerror).
-    #       The `200 OK` status code means the copy was accepted, but it
-    #       doesn't mean the copy is complete. Another example is when you
-    #       disconnect from Amazon S3 before the copy is complete, Amazon S3
-    #       might cancel the copy and you may receive a `200 OK` response.
-    #       You must stay connected to Amazon S3 until the entire response
-    #       is successfully received and processed.
+    #       200 response when copying objects to Amazon S3][8]. The `200 OK`
+    #       status code means the copy was accepted, but it doesn't mean
+    #       the copy is complete. Another example is when you disconnect
+    #       from Amazon S3 before the copy is complete, Amazon S3 might
+    #       cancel the copy and you may receive a `200 OK` response. You
+    #       must stay connected to Amazon S3 until the entire response is
+    #       successfully received and processed.
     #
     #       If you call this API operation directly, make sure to design
     #       your application to parse the content of the response and handle
@@ -1201,8 +1203,9 @@ module Aws::S3
     # : The copy request charge is based on the storage class and Region
     #   that you specify for the destination object. The request can also
     #   result in a data retrieval charge for the source if the source
-    #   storage class bills for data retrieval. For pricing information, see
-    #   [Amazon S3 pricing][7].
+    #   storage class bills for data retrieval. If the copy source is in a
+    #   different region, the data transfer is billed to the copy source
+    #   account. For pricing information, see [Amazon S3 pricing][9].
     #
     # HTTP Host header syntax
     #
@@ -1211,21 +1214,23 @@ module Aws::S3
     #
     # The following operations are related to `CopyObject`:
     #
-    # * [PutObject][8]
+    # * [PutObject][10]
     #
-    # * [GetObject][9]
+    # * [GetObject][11]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjctsUsingRESTMPUapi.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-identity-policies.html
-    # [7]: http://aws.amazon.com/s3/pricing/
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
-    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
+    # [3]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html#manage-acct-regions-enable-standalone
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-example-bucket-policies.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam-identity-policies.html
+    # [8]: https://repost.aws/knowledge-center/s3-resolve-200-internalerror
+    # [9]: http://aws.amazon.com/s3/pricing/
+    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html
     #
     # @option params [String] :acl
     #   The canned access control list (ACL) to apply to the object.
@@ -1269,7 +1274,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -2092,22 +2097,31 @@ module Aws::S3
     #       includes the `x-amz-object-ownership` header, then the
     #       `s3:PutBucketOwnershipControls` permission is required.
     #
-    #       If your `CreateBucket` request sets `BucketOwnerEnforced` for
-    #       Amazon S3 Object Ownership and specifies a bucket ACL that
-    #       provides access to an external Amazon Web Services account, your
-    #       request fails with a `400` error and returns the
-    #       `InvalidBucketAcLWithObjectOwnership` error code. For more
-    #       information, see [Setting Object Ownership on an existing bucket
-    #       ][5] in the *Amazon S3 User Guide*.
+    #       To set an ACL on a bucket as part of a `CreateBucket` request,
+    #       you must explicitly set S3 Object Ownership for the bucket to a
+    #       different value than the default, `BucketOwnerEnforced`.
+    #       Additionally, if your desired bucket ACL grants public access,
+    #       you must first create the bucket (without the bucket ACL) and
+    #       then explicitly disable Block Public Access on the bucket before
+    #       using `PutBucketAcl` to set the ACL. If you try to create a
+    #       bucket with a public ACL, the request will fail.
+    #
+    #        For the majority of modern use cases in S3, we recommend that
+    #       you keep all Block Public Access settings enabled and keep ACLs
+    #       disabled. If you would like to share data with users outside of
+    #       your account, you can use bucket policies as needed. For more
+    #       information, see [Controlling ownership of objects and disabling
+    #       ACLs for your bucket ][5] and [Blocking public access to your
+    #       Amazon S3 storage ][6] in the *Amazon S3 User Guide*.
     #
     #     * **S3 Block Public Access** - If your specific use case requires
     #       granting public access to your S3 resources, you can disable
     #       Block Public Access. Specifically, you can create a new bucket
     #       with Block Public Access enabled, then separately call the [
-    #       `DeletePublicAccessBlock` ][6] API. To use this operation, you
+    #       `DeletePublicAccessBlock` ][7] API. To use this operation, you
     #       must have the `s3:PutBucketPublicAccessBlock` permission. For
     #       more information about S3 Block Public Access, see [Blocking
-    #       public access to your Amazon S3 storage ][7] in the *Amazon S3
+    #       public access to your Amazon S3 storage ][6] in the *Amazon S3
     #       User Guide*.
     #
     #   * **Directory bucket permissions** - You must have the
@@ -2149,9 +2163,9 @@ module Aws::S3
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-ownership-existing-bucket.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html
-    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html
     # [9]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html
     # [10]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-one-zone.html#s3-express-features
@@ -2178,7 +2192,7 @@ module Aws::S3
     #   Virtual-hosted-style requests aren't supported. Directory bucket
     #   names must be unique in the chosen Availability Zone. Bucket names
     #   must also follow the format ` bucket_base_name--az_id--x-s3` (for
-    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about
+    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about
     #   bucket naming restrictions, see [Directory bucket naming rules][2] in
     #   the *Amazon S3 User Guide*
     #
@@ -2588,7 +2602,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -3350,7 +3364,7 @@ module Aws::S3
     #   Virtual-hosted-style requests aren't supported. Directory bucket
     #   names must be unique in the chosen Availability Zone. Bucket names
     #   must also follow the format ` bucket_base_name--az_id--x-s3` (for
-    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about
+    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about
     #   bucket naming restrictions, see [Directory bucket naming rules][1] in
     #   the *Amazon S3 User Guide*
     #
@@ -3979,7 +3993,7 @@ module Aws::S3
     #   Virtual-hosted-style requests aren't supported. Directory bucket
     #   names must be unique in the chosen Availability Zone. Bucket names
     #   must also follow the format ` bucket_base_name--az_id--x-s3` (for
-    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about
+    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about
     #   bucket naming restrictions, see [Directory bucket naming rules][1] in
     #   the *Amazon S3 User Guide*
     #
@@ -4222,14 +4236,25 @@ module Aws::S3
     # Removes an object from a bucket. The behavior depends on the bucket's
     # versioning state:
     #
-    # * If versioning is enabled, the operation removes the null version (if
-    #   there is one) of an object and inserts a delete marker, which
-    #   becomes the latest version of the object. If there isn't a null
-    #   version, Amazon S3 does not remove any objects but will still
-    #   respond that the command was successful.
-    #
-    # * If versioning is suspended or not enabled, the operation permanently
+    # * If bucket versioning is not enabled, the operation permanently
     #   deletes the object.
+    #
+    # * If bucket versioning is enabled, the operation inserts a delete
+    #   marker, which becomes the current version of the object. To
+    #   permanently delete an object in a versioned bucket, you must include
+    #   the object’s `versionId` in the request. For more information about
+    #   versioning-enabled buckets, see [Deleting object versions from a
+    #   versioning-enabled bucket][1].
+    #
+    # * If bucket versioning is suspended, the operation removes the object
+    #   that has a null `versionId`, if there is one, and inserts a delete
+    #   marker that becomes the current version of the object. If there
+    #   isn't an object with a null `versionId`, and all versions of the
+    #   object have a `versionId`, Amazon S3 does not remove the object and
+    #   only inserts a delete marker. To permanently delete an object that
+    #   has a `versionId`, you must include the object’s `versionId` in the
+    #   request. For more information about versioning-suspended buckets,
+    #   see [Deleting objects from versioning-suspended buckets][2].
     #
     # <note markdown="1"> * **Directory buckets** - S3 Versioning isn't enabled and supported
     #   for directory buckets. For this API operation, only the `null` value
@@ -4241,7 +4266,7 @@ module Aws::S3
     #   endpoints support virtual-hosted-style requests in the format
     #   `https://bucket_name.s3express-az_id.region.amazonaws.com/key-name
     #   `. Path-style requests are not supported. For more information, see
-    #   [Regional and Zonal endpoints][1] in the *Amazon S3 User Guide*.
+    #   [Regional and Zonal endpoints][3] in the *Amazon S3 User Guide*.
     #
     #  </note>
     #
@@ -4254,8 +4279,8 @@ module Aws::S3
     # versioning configuration is MFA Delete enabled, you must include the
     # `x-amz-mfa` request header in the DELETE `versionId` request. Requests
     # that include `x-amz-mfa` must use HTTPS. For more information about
-    # MFA Delete, see [Using MFA Delete][2] in the *Amazon S3 User Guide*.
-    # To see sample requests that use versioning, see [Sample Request][3].
+    # MFA Delete, see [Using MFA Delete][4] in the *Amazon S3 User Guide*.
+    # To see sample requests that use versioning, see [Sample Request][5].
     #
     # <note markdown="1"> **Directory buckets** - MFA delete is not supported by directory
     # buckets.
@@ -4263,7 +4288,7 @@ module Aws::S3
     #  </note>
     #
     # You can delete objects by explicitly calling DELETE Object or calling
-    # ([PutBucketLifecycle][4]) to enable Amazon S3 to remove them for you.
+    # ([PutBucketLifecycle][6]) to enable Amazon S3 to remove them for you.
     # If you want to block users or accounts from removing or deleting
     # objects from your bucket, you must deny them the `s3:DeleteObject`,
     # `s3:DeleteObjectVersion`, and `s3:PutLifeCycleConfiguration` actions.
@@ -4282,12 +4307,12 @@ module Aws::S3
     #       a bucket, you must always have the `s3:DeleteObject` permission.
     #
     #     * <b> <code>s3:DeleteObjectVersion</code> </b> - To delete a
-    #       specific version of an object from a versiong-enabled bucket,
+    #       specific version of an object from a versioning-enabled bucket,
     #       you must have the `s3:DeleteObjectVersion` permission.
     #
     #   * **Directory bucket permissions** - To grant access to this API
     #     operation on a directory bucket, we recommend that you use the [
-    #     `CreateSession` ][5] API operation for session-based
+    #     `CreateSession` ][7] API operation for session-based
     #     authorization. Specifically, you grant the
     #     `s3express:CreateSession` permission to the directory bucket in a
     #     bucket policy or an IAM identity-based policy. Then, you make the
@@ -4298,7 +4323,7 @@ module Aws::S3
     #     token for use. Amazon Web Services CLI or SDKs create session and
     #     refresh the session token automatically to avoid service
     #     interruptions when a session expires. For more information about
-    #     authorization, see [ `CreateSession` ][5].
+    #     authorization, see [ `CreateSession` ][7].
     #
     # HTTP Host header syntax
     #
@@ -4307,18 +4332,20 @@ module Aws::S3
     #
     # The following action is related to `DeleteObject`:
     #
-    # * [PutObject][6]
+    # * [PutObject][8]
     #
     # ^
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMFADelete.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html#ExampleVersionObjectDelete
-    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/DeletingObjectVersions.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/DeletingObjectsfromVersioningSuspendedBuckets.html
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html
+    # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMFADelete.html
+    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html#ExampleVersionObjectDelete
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html
+    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html
     #
     # @option params [required, String] :bucket
     #   The bucket name of the bucket containing the object.
@@ -4329,7 +4356,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -4543,21 +4570,6 @@ module Aws::S3
     #   * {Types::DeleteObjectTaggingOutput#version_id #version_id} => String
     #
     #
-    # @example Example: To remove tag set from an object
-    #
-    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
-    #   # operation removes tag set from the latest object version.
-    #
-    #   resp = client.delete_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     version_id: "null", 
-    #   }
-    #
     # @example Example: To remove tag set from an object version
     #
     #   # The following example removes tag set associated with the specified object version. The request specifies both the
@@ -4572,6 +4584,21 @@ module Aws::S3
     #   resp.to_h outputs the following:
     #   {
     #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   }
+    #
+    # @example Example: To remove tag set from an object
+    #
+    #   # The following example removes tag set associated with the specified object. If the bucket is versioning enabled, the
+    #   # operation removes tag set from the latest object version.
+    #
+    #   resp = client.delete_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     version_id: "null", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -4720,7 +4747,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -5781,13 +5808,16 @@ module Aws::S3
     #  </note>
     #
     # <note markdown="1"> Bucket lifecycle configuration now supports specifying a lifecycle
-    # rule using an object key name prefix, one or more object tags, or a
-    # combination of both. Accordingly, this section describes the latest
-    # API. The response describes the new filter element that you can use to
-    # specify a filter to select a subset of objects to which the rule
-    # applies. If you are using a previous version of the lifecycle
-    # configuration, it still works. For the earlier action, see
-    # [GetBucketLifecycle][1].
+    # rule using an object key name prefix, one or more object tags, object
+    # size, or any combination of these. Accordingly, this section describes
+    # the latest API. The previous version of the API supported filtering
+    # based only on an object key name prefix, which is supported for
+    # backward compatibility. For the related API description, see
+    # [GetBucketLifecycle][1]. Accordingly, this section describes the
+    # latest API. The response describes the new filter element that you can
+    # use to specify a filter to select a subset of objects to which the
+    # rule applies. If you are using a previous version of the lifecycle
+    # configuration, it still works. For the earlier action,
     #
     #  </note>
     #
@@ -6547,7 +6577,7 @@ module Aws::S3
     #   Virtual-hosted-style requests aren't supported. Directory bucket
     #   names must be unique in the chosen Availability Zone. Bucket names
     #   must also follow the format ` bucket_base_name--az_id--x-s3` (for
-    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about
+    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about
     #   bucket naming restrictions, see [Directory bucket naming rules][1] in
     #   the *Amazon S3 User Guide*
     #
@@ -7302,7 +7332,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -7626,6 +7656,28 @@ module Aws::S3
     #   * {Types::GetObjectOutput#object_lock_legal_hold_status #object_lock_legal_hold_status} => String
     #
     #
+    # @example Example: To retrieve an object
+    #
+    #   # The following example retrieves an object for an S3 bucket.
+    #
+    #   resp = client.get_object({
+    #     bucket: "examplebucket", 
+    #     key: "HappyFace.jpg", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     accept_ranges: "bytes", 
+    #     content_length: 3191, 
+    #     content_type: "image/jpeg", 
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
+    #     metadata: {
+    #     }, 
+    #     tag_count: 2, 
+    #     version_id: "null", 
+    #   }
+    #
     # @example Example: To retrieve a byte range of an object 
     #
     #   # The following example retrieves an object for an S3 bucket. The request specifies the range header to retrieve a
@@ -7647,28 +7699,6 @@ module Aws::S3
     #     last_modified: Time.parse("Thu, 09 Oct 2014 22:57:28 GMT"), 
     #     metadata: {
     #     }, 
-    #     version_id: "null", 
-    #   }
-    #
-    # @example Example: To retrieve an object
-    #
-    #   # The following example retrieves an object for an S3 bucket.
-    #
-    #   resp = client.get_object({
-    #     bucket: "examplebucket", 
-    #     key: "HappyFace.jpg", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     accept_ranges: "bytes", 
-    #     content_length: 3191, 
-    #     content_type: "image/jpeg", 
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     last_modified: Time.parse("Thu, 15 Dec 2016 01:19:41 GMT"), 
-    #     metadata: {
-    #     }, 
-    #     tag_count: 2, 
     #     version_id: "null", 
     #   }
     #
@@ -8135,7 +8165,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -8668,27 +8698,6 @@ module Aws::S3
     #   * {Types::GetObjectTaggingOutput#tag_set #tag_set} => Array&lt;Types::Tag&gt;
     #
     #
-    # @example Example: To retrieve tag set of a specific object version
-    #
-    #   # The following example retrieves tag set of an object. The request specifies object version.
-    #
-    #   resp = client.get_object_tagging({
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     tag_set: [
-    #       {
-    #         key: "Key1", 
-    #         value: "Value1", 
-    #       }, 
-    #     ], 
-    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
-    #   }
-    #
     # @example Example: To retrieve tag set of an object
     #
     #   # The following example retrieves tag set of an object.
@@ -8711,6 +8720,27 @@ module Aws::S3
     #       }, 
     #     ], 
     #     version_id: "null", 
+    #   }
+    #
+    # @example Example: To retrieve tag set of a specific object version
+    #
+    #   # The following example retrieves tag set of an object. The request specifies object version.
+    #
+    #   resp = client.get_object_tagging({
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tag_set: [
+    #       {
+    #         key: "Key1", 
+    #         value: "Value1", 
+    #       }, 
+    #     ], 
+    #     version_id: "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -8922,7 +8952,7 @@ module Aws::S3
     # If the bucket does not exist or you do not have permission to access
     # it, the `HEAD` request returns a generic `400 Bad Request`, `403
     # Forbidden` or `404 Not Found` code. A message body is not included, so
-    # you cannot determine the exception beyond these error codes.
+    # you cannot determine the exception beyond these HTTP response codes.
     #
     # <note markdown="1"> <b>Directory buckets </b> - You must make requests for this API
     # operation to the Zonal endpoint. These endpoints support
@@ -8995,7 +9025,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -9236,7 +9266,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -10225,7 +10255,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -10650,9 +10680,7 @@ module Aws::S3
     #
     # @example Example: To list object versions
     #
-    #   # The following example return versions of an object with specific key name prefix. The request limits the number of items
-    #   # returned to two. If there are are more than two object version, S3 returns NextToken in the response. You can specify
-    #   # this token value in your next request to fetch next set of object versions.
+    #   # The following example returns versions of an object with specific key name prefix.
     #
     #   resp = client.list_object_versions({
     #     bucket: "examplebucket", 
@@ -10795,7 +10823,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -11060,7 +11088,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -11116,6 +11144,9 @@ module Aws::S3
     #
     # @option params [String] :encoding_type
     #   Encoding type used by Amazon S3 to encode object keys in the response.
+    #   If using `url`, non-ASCII characters used in an object's key name
+    #   will be URL encoded. For example, the object test\_file(3).png will
+    #   appear as test\_file%283%29.png.
     #
     # @option params [Integer] :max_keys
     #   Sets the maximum number of keys returned in the response. By default,
@@ -11382,7 +11413,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -12879,11 +12910,11 @@ module Aws::S3
     # configuration, see [Managing your storage lifecycle][1].
     #
     # <note markdown="1"> Bucket lifecycle configuration now supports specifying a lifecycle
-    # rule using an object key name prefix, one or more object tags, or a
-    # combination of both. Accordingly, this section describes the latest
-    # API. The previous version of the API supported filtering based only on
-    # an object key name prefix, which is supported for backward
-    # compatibility. For the related API description, see
+    # rule using an object key name prefix, one or more object tags, object
+    # size, or any combination of these. Accordingly, this section describes
+    # the latest API. The previous version of the API supported filtering
+    # based only on an object key name prefix, which is supported for
+    # backward compatibility. For the related API description, see
     # [PutBucketLifecycle][2].
     #
     #  </note>
@@ -12898,7 +12929,7 @@ module Aws::S3
     #
     #   * A filter identifying a subset of objects to which the rule
     #     applies. The filter can be based on a key name prefix, object
-    #     tags, or a combination of both.
+    #     tags, object size, or any combination of these.
     #
     #   * A status indicating whether the rule is in effect.
     #
@@ -13801,7 +13832,7 @@ module Aws::S3
     #   Virtual-hosted-style requests aren't supported. Directory bucket
     #   names must be unique in the chosen Availability Zone. Bucket names
     #   must also follow the format ` bucket_base_name--az_id--x-s3` (for
-    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about
+    #   example, ` DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about
     #   bucket naming restrictions, see [Directory bucket naming rules][1] in
     #   the *Amazon S3 User Guide*
     #
@@ -14880,7 +14911,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -15342,20 +15373,24 @@ module Aws::S3
     #   * {Types::PutObjectOutput#request_charged #request_charged} => String
     #
     #
-    # @example Example: To create an object.
+    # @example Example: To upload an object and specify server-side encryption and object tags
     #
-    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example uploads an object. The request specifies the optional server-side encryption option. The request
+    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
     #     body: "filetoupload", 
     #     bucket: "examplebucket", 
-    #     key: "objectkey", 
+    #     key: "exampleobject", 
+    #     server_side_encryption: "AES256", 
+    #     tagging: "key1=value1&key2=value2", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
+    #     server_side_encryption: "AES256", 
+    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
     #   }
     #
     # @example Example: To upload object and specify user-defined metadata
@@ -15379,6 +15414,24 @@ module Aws::S3
     #     version_id: "pSKidl4pHBiNwukdbcPXAIs.sshFFOc0", 
     #   }
     #
+    # @example Example: To upload an object and specify canned ACL.
+    #
+    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
+    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #
+    #   resp = client.put_object({
+    #     acl: "authenticated-read", 
+    #     body: "filetoupload", 
+    #     bucket: "examplebucket", 
+    #     key: "exampleobject", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
+    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
+    #   }
+    #
     # @example Example: To upload an object
     #
     #   # The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file
@@ -15396,22 +15449,20 @@ module Aws::S3
     #     version_id: "tpf3zF08nBplQK1XLOefGskR7mGDwcDk", 
     #   }
     #
-    # @example Example: To upload an object and specify canned ACL.
+    # @example Example: To create an object.
     #
-    #   # The following example uploads and object. The request specifies optional canned ACL (access control list) to all READ
-    #   # access to authenticated users. If the bucket is versioning enabled, S3 returns version ID in response.
+    #   # The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.
     #
     #   resp = client.put_object({
-    #     acl: "authenticated-read", 
     #     body: "filetoupload", 
     #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
+    #     key: "objectkey", 
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     version_id: "Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr", 
+    #     version_id: "Bvq0EDKxOcXLJXNo_Lkz37eM3R4pfzyQ", 
     #   }
     #
     # @example Example: To upload an object (specify optional headers)
@@ -15450,26 +15501,6 @@ module Aws::S3
     #   {
     #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
     #     version_id: "psM2sYY4.o1501dSx8wMvnkOzSBB.V4a", 
-    #   }
-    #
-    # @example Example: To upload an object and specify server-side encryption and object tags
-    #
-    #   # The following example uploads an object. The request specifies the optional server-side encryption option. The request
-    #   # also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.
-    #
-    #   resp = client.put_object({
-    #     body: "filetoupload", 
-    #     bucket: "examplebucket", 
-    #     key: "exampleobject", 
-    #     server_side_encryption: "AES256", 
-    #     tagging: "key1=value1&key2=value2", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     etag: "\"6805f2cfc46c0f04559748bb039d69ae\"", 
-    #     server_side_encryption: "AES256", 
-    #     version_id: "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt", 
     #   }
     #
     # @example Streaming a file from disk
@@ -16602,9 +16633,9 @@ module Aws::S3
     #
     # This action performs the following types of requests:
     #
-    # * `select` - Perform a select query on an archived object
-    #
     # * `restore an archive` - Restore an archived object
+    #
+    # ^
     #
     # For more information about the `S3` structure in the request body, see
     # the following:
@@ -16615,51 +16646,6 @@ module Aws::S3
     #
     # * [Protecting Data Using Server-Side Encryption][3] in the *Amazon S3
     #   User Guide*
-    #
-    # Define the SQL expression for the `SELECT` type of restoration for
-    # your query in the request body's `SelectParameters` structure. You
-    # can use expressions like the following examples.
-    #
-    # * The following expression returns all records from the specified
-    #   object.
-    #
-    #   `SELECT * FROM Object`
-    #
-    # * Assuming that you are not using any headers for data stored in the
-    #   object, you can specify columns with positional headers.
-    #
-    #   `SELECT s._1, s._2 FROM Object s WHERE s._3 > 100`
-    #
-    # * If you have headers and you set the `fileHeaderInfo` in the `CSV`
-    #   structure in the request body to `USE`, you can specify headers in
-    #   the query. (If you set the `fileHeaderInfo` field to `IGNORE`, the
-    #   first row is skipped for the query.) You cannot mix ordinal
-    #   positions with header column names.
-    #
-    #   `SELECT s.Id, s.FirstName, s.SSN FROM S3Object s`
-    #
-    # When making a select request, you can also do the following:
-    #
-    # * To expedite your queries, specify the `Expedited` tier. For more
-    #   information about tiers, see "Restoring Archives," later in this
-    #   topic.
-    #
-    # * Specify details about the data serialization format of both the
-    #   input object that is being queried and the serialization of the
-    #   CSV-encoded query results.
-    #
-    # The following are additional important facts about the select feature:
-    #
-    # * The output results are new Amazon S3 objects. Unlike archive
-    #   retrievals, they are stored until explicitly deleted-manually or
-    #   through a lifecycle configuration.
-    #
-    # * You can issue more than one select request on the same Amazon S3
-    #   object. Amazon S3 doesn't duplicate requests, so avoid issuing
-    #   duplicate requests.
-    #
-    # * Amazon S3 accepts a select request even if the object has already
-    #   been restored. A select request doesn’t return error response `409`.
     #
     # Permissions
     #
@@ -16778,8 +16764,7 @@ module Aws::S3
     #
     #     * *Code: RestoreAlreadyInProgress*
     #
-    #     * *Cause: Object restore is already in progress. (This error does
-    #       not apply to SELECT type requests.)*
+    #     * *Cause: Object restore is already in progress.*
     #
     #     * *HTTP Status Code: 409 Conflict*
     #
@@ -17619,7 +17604,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -17935,7 +17920,7 @@ module Aws::S3
     #       the source object that is being copied.
     #
     #     * If the destination bucket is a general purpose bucket, you must
-    #       have the <b> <code>s3:PubObject</code> </b> permission to write
+    #       have the <b> <code>s3:PutObject</code> </b> permission to write
     #       the object copy to the destination bucket.
     #
     #     For information about permissions required to use the multipart
@@ -18037,7 +18022,7 @@ module Aws::S3
     #   are not supported. Directory bucket names must be unique in the chosen
     #   Availability Zone. Bucket names must follow the format `
     #   bucket_base_name--az-id--x-s3` (for example, `
-    #   DOC-EXAMPLE-BUCKET--usw2-az2--x-s3`). For information about bucket
+    #   DOC-EXAMPLE-BUCKET--usw2-az1--x-s3`). For information about bucket
     #   naming restrictions, see [Directory bucket naming rules][1] in the
     #   *Amazon S3 User Guide*.
     #
@@ -18312,6 +18297,26 @@ module Aws::S3
     #   * {Types::UploadPartCopyOutput#request_charged #request_charged} => String
     #
     #
+    # @example Example: To upload a part by copying data from an existing object as data source
+    #
+    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
+    #
+    #   resp = client.upload_part_copy({
+    #     bucket: "examplebucket", 
+    #     copy_source: "/bucketname/sourceobjectkey", 
+    #     key: "examplelargeobject", 
+    #     part_number: 1, 
+    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     copy_part_result: {
+    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
+    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
+    #     }, 
+    #   }
+    #
     # @example Example: To upload a part by copying byte range from an existing object as data source
     #
     #   # The following example uploads a part of a multipart upload by copying a specified byte range from an existing object as
@@ -18331,26 +18336,6 @@ module Aws::S3
     #     copy_part_result: {
     #       etag: "\"65d16d19e65a7508a51f043180edcc36\"", 
     #       last_modified: Time.parse("2016-12-29T21:44:28.000Z"), 
-    #     }, 
-    #   }
-    #
-    # @example Example: To upload a part by copying data from an existing object as data source
-    #
-    #   # The following example uploads a part of a multipart upload by copying data from an existing object as data source.
-    #
-    #   resp = client.upload_part_copy({
-    #     bucket: "examplebucket", 
-    #     copy_source: "/bucketname/sourceobjectkey", 
-    #     key: "examplelargeobject", 
-    #     part_number: 1, 
-    #     upload_id: "exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--", 
-    #   })
-    #
-    #   resp.to_h outputs the following:
-    #   {
-    #     copy_part_result: {
-    #       etag: "\"b0c6f0e7e054ab8fa2536a2677f8734d\"", 
-    #       last_modified: Time.parse("2016-12-29T21:24:43.000Z"), 
     #     }, 
     #   }
     #
@@ -18807,7 +18792,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.144.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

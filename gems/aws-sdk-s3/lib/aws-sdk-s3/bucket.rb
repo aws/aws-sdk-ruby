@@ -1253,6 +1253,9 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html
     # @option options [String] :encoding_type
     #   Encoding type used by Amazon S3 to encode object keys in the response.
+    #   If using `url`, non-ASCII characters used in an object's key name
+    #   will be URL encoded. For example, the object test\_file(3).png will
+    #   appear as test\_file%283%29.png.
     # @option options [String] :prefix
     #   Limits the response to keys that begin with the specified prefix.
     #

@@ -333,7 +333,6 @@ module Aws::WorkSpacesThinClient
       attr_accessor name: ::String
       attr_accessor desired_software_set_id: ::String
       attr_accessor software_set_update_schedule: ("USE_MAINTENANCE_WINDOW" | "APPLY_IMMEDIATELY")
-      attr_accessor kms_key_arn: ::String
       SENSITIVE: [:name]
     end
 

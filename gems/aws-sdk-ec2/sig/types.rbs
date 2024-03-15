@@ -9136,6 +9136,8 @@ module Aws::EC2
       attr_accessor nitro_enclaves_support: ("unsupported" | "supported")
       attr_accessor nitro_tpm_support: ("unsupported" | "supported")
       attr_accessor nitro_tpm_info: Types::NitroTpmInfo
+      attr_accessor media_accelerator_info: Types::MediaAcceleratorInfo
+      attr_accessor neuron_info: Types::NeuronInfo
       SENSITIVE: []
     end
 
@@ -10115,6 +10117,25 @@ module Aws::EC2
       attr_accessor version: ::Integer
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor owner_id: ::String
+      SENSITIVE: []
+    end
+
+    class MediaAcceleratorInfo
+      attr_accessor accelerators: ::Array[Types::MediaDeviceInfo]
+      attr_accessor total_media_memory_in_mi_b: ::Integer
+      SENSITIVE: []
+    end
+
+    class MediaDeviceInfo
+      attr_accessor count: ::Integer
+      attr_accessor name: ::String
+      attr_accessor manufacturer: ::String
+      attr_accessor memory_info: Types::MediaDeviceMemoryInfo
+      SENSITIVE: []
+    end
+
+    class MediaDeviceMemoryInfo
+      attr_accessor size_in_mi_b: ::Integer
       SENSITIVE: []
     end
 
@@ -11462,6 +11483,31 @@ module Aws::EC2
       attr_accessor primary: bool
       attr_accessor private_dns_name: ::String
       attr_accessor private_ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class NeuronDeviceCoreInfo
+      attr_accessor count: ::Integer
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class NeuronDeviceInfo
+      attr_accessor count: ::Integer
+      attr_accessor name: ::String
+      attr_accessor core_info: Types::NeuronDeviceCoreInfo
+      attr_accessor memory_info: Types::NeuronDeviceMemoryInfo
+      SENSITIVE: []
+    end
+
+    class NeuronDeviceMemoryInfo
+      attr_accessor size_in_mi_b: ::Integer
+      SENSITIVE: []
+    end
+
+    class NeuronInfo
+      attr_accessor neuron_devices: ::Array[Types::NeuronDeviceInfo]
+      attr_accessor total_neuron_device_memory_in_mi_b: ::Integer
       SENSITIVE: []
     end
 

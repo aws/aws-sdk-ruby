@@ -785,6 +785,7 @@ module Aws::CodeBuild
     #   resp.fleets[0].scaling_configuration.target_tracking_scaling_configs[0].target_value #=> Float
     #   resp.fleets[0].scaling_configuration.max_capacity #=> Integer
     #   resp.fleets[0].scaling_configuration.desired_capacity #=> Integer
+    #   resp.fleets[0].overflow_behavior #=> String, one of "QUEUE", "ON_DEMAND"
     #   resp.fleets[0].tags #=> Array
     #   resp.fleets[0].tags[0].key #=> String
     #   resp.fleets[0].tags[0].value #=> String
@@ -1158,6 +1159,15 @@ module Aws::CodeBuild
     # @option params [Types::ScalingConfigurationInput] :scaling_configuration
     #   The scaling configuration of the compute fleet.
     #
+    # @option params [String] :overflow_behavior
+    #   The compute fleet overflow behavior.
+    #
+    #   * For overflow behavior `QUEUE`, your overflow builds need to wait on
+    #     the existing fleet instance to become available.
+    #
+    #   * For overflow behavior `ON_DEMAND`, your overflow builds run on
+    #     CodeBuild on-demand.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag key and value pairs associated with this compute fleet.
     #
@@ -1185,6 +1195,7 @@ module Aws::CodeBuild
     #       ],
     #       max_capacity: 1,
     #     },
+    #     overflow_behavior: "QUEUE", # accepts QUEUE, ON_DEMAND
     #     tags: [
     #       {
     #         key: "KeyInput",
@@ -1212,6 +1223,7 @@ module Aws::CodeBuild
     #   resp.fleet.scaling_configuration.target_tracking_scaling_configs[0].target_value #=> Float
     #   resp.fleet.scaling_configuration.max_capacity #=> Integer
     #   resp.fleet.scaling_configuration.desired_capacity #=> Integer
+    #   resp.fleet.overflow_behavior #=> String, one of "QUEUE", "ON_DEMAND"
     #   resp.fleet.tags #=> Array
     #   resp.fleet.tags[0].key #=> String
     #   resp.fleet.tags[0].value #=> String
@@ -4871,6 +4883,15 @@ module Aws::CodeBuild
     # @option params [Types::ScalingConfigurationInput] :scaling_configuration
     #   The scaling configuration of the compute fleet.
     #
+    # @option params [String] :overflow_behavior
+    #   The compute fleet overflow behavior.
+    #
+    #   * For overflow behavior `QUEUE`, your overflow builds need to wait on
+    #     the existing fleet instance to become available.
+    #
+    #   * For overflow behavior `ON_DEMAND`, your overflow builds run on
+    #     CodeBuild on-demand.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag key and value pairs associated with this compute fleet.
     #
@@ -4898,6 +4919,7 @@ module Aws::CodeBuild
     #       ],
     #       max_capacity: 1,
     #     },
+    #     overflow_behavior: "QUEUE", # accepts QUEUE, ON_DEMAND
     #     tags: [
     #       {
     #         key: "KeyInput",
@@ -4925,6 +4947,7 @@ module Aws::CodeBuild
     #   resp.fleet.scaling_configuration.target_tracking_scaling_configs[0].target_value #=> Float
     #   resp.fleet.scaling_configuration.max_capacity #=> Integer
     #   resp.fleet.scaling_configuration.desired_capacity #=> Integer
+    #   resp.fleet.overflow_behavior #=> String, one of "QUEUE", "ON_DEMAND"
     #   resp.fleet.tags #=> Array
     #   resp.fleet.tags[0].key #=> String
     #   resp.fleet.tags[0].value #=> String
@@ -5618,7 +5641,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

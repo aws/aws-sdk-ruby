@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.152.0 (2024-03-15)
+------------------
+
+* Feature - This release adds Hierarchy based Access Control fields to Security Profile public APIs and adds support for UserAttributeFilter to SearchUsers API.
+
 1.151.0 (2024-03-12)
 ------------------
 

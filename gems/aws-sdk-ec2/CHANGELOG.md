@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.443.0 (2024-03-15)
+------------------
+
+* Feature - Add media accelerator and neuron device information on the describe instance types API.
+
 1.442.0 (2024-03-12)
 ------------------
 

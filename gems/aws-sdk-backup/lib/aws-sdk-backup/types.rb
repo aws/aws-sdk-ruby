@@ -3587,6 +3587,12 @@ module Aws::Backup
     #   will evaluate. Three examples of control scopes are: a specific
     #   backup plan, all backup plans with a specific tag, or all backup
     #   plans.
+    #
+    #   For more information, see [ `ControlScope`.][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ControlScope.html
     #   @return [Types::ControlScope]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/FrameworkControl AWS API Documentation
@@ -4429,6 +4435,19 @@ module Aws::Backup
     #
     #   `AGGREGATE_ALL` aggregates job counts for all states and returns the
     #   sum.
+    #
+    #   `Completed with issues` is a status found only in the Backup
+    #   console. For API, this status refers to jobs with a state of
+    #   `COMPLETED` and a `MessageCategory` with a value other than
+    #   `SUCCESS`; that is, the status is completed but comes with a status
+    #   message. To obtain the job count for `Completed with issues`, run
+    #   two GET requests, and subtract the second, smaller number:
+    #
+    #   GET
+    #   /audit/backup-job-summaries?AggregationPeriod=FOURTEEN\_DAYS&amp;State=COMPLETED
+    #
+    #   GET
+    #   /audit/backup-job-summaries?AggregationPeriod=FOURTEEN\_DAYS&amp;MessageCategory=SUCCESS&amp;State=COMPLETED
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -4554,6 +4573,19 @@ module Aws::Backup
     #
     # @!attribute [rw] by_state
     #   Returns only backup jobs that are in the specified state.
+    #
+    #   `Completed with issues` is a status found only in the Backup
+    #   console. For API, this status refers to jobs with a state of
+    #   `COMPLETED` and a `MessageCategory` with a value other than
+    #   `SUCCESS`; that is, the status is completed but comes with a status
+    #   message.
+    #
+    #   To obtain the job count for `Completed with issues`, run two GET
+    #   requests, and subtract the second, smaller number:
+    #
+    #   GET /backup-jobs/?state=COMPLETED
+    #
+    #   GET /backup-jobs/?messageCategory=SUCCESS&amp;state=COMPLETED
     #   @return [String]
     #
     # @!attribute [rw] by_backup_vault_name
@@ -5567,12 +5599,25 @@ module Aws::Backup
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] managed_by_aws_backup_only
+    #   This attribute filters recovery points based on ownership.
+    #
+    #   If this is set to `TRUE`, the response will contain recovery points
+    #   associated with the selected resources that are managed by Backup.
+    #
+    #   If this is set to `FALSE`, the response will contain all recovery
+    #   points associated with the selected resource.
+    #
+    #   Type: Boolean
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListRecoveryPointsByResourceInput AWS API Documentation
     #
     class ListRecoveryPointsByResourceInput < Struct.new(
       :resource_arn,
       :next_token,
-      :max_results)
+      :max_results,
+      :managed_by_aws_backup_only)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6663,6 +6708,11 @@ module Aws::Backup
     #   specified backup.
     #   @return [String]
     #
+    # @!attribute [rw] vault_type
+    #   This is the type of vault in which the described recovery point is
+    #   stored.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/RecoveryPointByResource AWS API Documentation
     #
     class RecoveryPointByResource < Struct.new(
@@ -6675,7 +6725,8 @@ module Aws::Backup
       :backup_vault_name,
       :is_parent,
       :parent_recovery_point_arn,
-      :resource_name)
+      :resource_name,
+      :vault_type)
       SENSITIVE = []
       include Aws::Structure
     end

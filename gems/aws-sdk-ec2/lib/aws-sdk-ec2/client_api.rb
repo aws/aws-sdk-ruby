@@ -2040,6 +2040,14 @@ module Aws::EC2
     MaximumIops = Shapes::IntegerShape.new(name: 'MaximumIops')
     MaximumNetworkCards = Shapes::IntegerShape.new(name: 'MaximumNetworkCards')
     MaximumThroughputInMBps = Shapes::FloatShape.new(name: 'MaximumThroughputInMBps')
+    MediaAcceleratorInfo = Shapes::StructureShape.new(name: 'MediaAcceleratorInfo')
+    MediaDeviceCount = Shapes::IntegerShape.new(name: 'MediaDeviceCount')
+    MediaDeviceInfo = Shapes::StructureShape.new(name: 'MediaDeviceInfo')
+    MediaDeviceInfoList = Shapes::ListShape.new(name: 'MediaDeviceInfoList')
+    MediaDeviceManufacturerName = Shapes::StringShape.new(name: 'MediaDeviceManufacturerName')
+    MediaDeviceMemoryInfo = Shapes::StructureShape.new(name: 'MediaDeviceMemoryInfo')
+    MediaDeviceMemorySize = Shapes::IntegerShape.new(name: 'MediaDeviceMemorySize')
+    MediaDeviceName = Shapes::StringShape.new(name: 'MediaDeviceName')
     MembershipType = Shapes::StringShape.new(name: 'MembershipType')
     MemoryGiBPerVCpu = Shapes::StructureShape.new(name: 'MemoryGiBPerVCpu')
     MemoryGiBPerVCpuRequest = Shapes::StructureShape.new(name: 'MemoryGiBPerVCpuRequest')
@@ -2261,6 +2269,16 @@ module Aws::EC2
     NetworkInterfaceType = Shapes::StringShape.new(name: 'NetworkInterfaceType')
     NetworkNodesList = Shapes::ListShape.new(name: 'NetworkNodesList')
     NetworkPerformance = Shapes::StringShape.new(name: 'NetworkPerformance')
+    NeuronDeviceCoreCount = Shapes::IntegerShape.new(name: 'NeuronDeviceCoreCount')
+    NeuronDeviceCoreInfo = Shapes::StructureShape.new(name: 'NeuronDeviceCoreInfo')
+    NeuronDeviceCoreVersion = Shapes::IntegerShape.new(name: 'NeuronDeviceCoreVersion')
+    NeuronDeviceCount = Shapes::IntegerShape.new(name: 'NeuronDeviceCount')
+    NeuronDeviceInfo = Shapes::StructureShape.new(name: 'NeuronDeviceInfo')
+    NeuronDeviceInfoList = Shapes::ListShape.new(name: 'NeuronDeviceInfoList')
+    NeuronDeviceMemoryInfo = Shapes::StructureShape.new(name: 'NeuronDeviceMemoryInfo')
+    NeuronDeviceMemorySize = Shapes::IntegerShape.new(name: 'NeuronDeviceMemorySize')
+    NeuronDeviceName = Shapes::StringShape.new(name: 'NeuronDeviceName')
+    NeuronInfo = Shapes::StructureShape.new(name: 'NeuronInfo')
     NewDhcpConfiguration = Shapes::StructureShape.new(name: 'NewDhcpConfiguration')
     NewDhcpConfigurationList = Shapes::ListShape.new(name: 'NewDhcpConfigurationList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -2822,6 +2840,8 @@ module Aws::EC2
     TieringOperationStatus = Shapes::StringShape.new(name: 'TieringOperationStatus')
     TotalLocalStorageGB = Shapes::StructureShape.new(name: 'TotalLocalStorageGB')
     TotalLocalStorageGBRequest = Shapes::StructureShape.new(name: 'TotalLocalStorageGBRequest')
+    TotalMediaMemory = Shapes::IntegerShape.new(name: 'TotalMediaMemory')
+    TotalNeuronMemory = Shapes::IntegerShape.new(name: 'TotalNeuronMemory')
     TpmSupportValues = Shapes::StringShape.new(name: 'TpmSupportValues')
     TrafficDirection = Shapes::StringShape.new(name: 'TrafficDirection')
     TrafficMirrorFilter = Shapes::StructureShape.new(name: 'TrafficMirrorFilter')
@@ -10269,6 +10289,8 @@ module Aws::EC2
     InstanceTypeInfo.add_member(:nitro_enclaves_support, Shapes::ShapeRef.new(shape: NitroEnclavesSupport, location_name: "nitroEnclavesSupport"))
     InstanceTypeInfo.add_member(:nitro_tpm_support, Shapes::ShapeRef.new(shape: NitroTpmSupport, location_name: "nitroTpmSupport"))
     InstanceTypeInfo.add_member(:nitro_tpm_info, Shapes::ShapeRef.new(shape: NitroTpmInfo, location_name: "nitroTpmInfo"))
+    InstanceTypeInfo.add_member(:media_accelerator_info, Shapes::ShapeRef.new(shape: MediaAcceleratorInfo, location_name: "mediaAcceleratorInfo"))
+    InstanceTypeInfo.add_member(:neuron_info, Shapes::ShapeRef.new(shape: NeuronInfo, location_name: "neuronInfo"))
     InstanceTypeInfo.struct_class = Types::InstanceTypeInfo
 
     InstanceTypeInfoFromInstanceRequirements.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
@@ -11199,6 +11221,21 @@ module Aws::EC2
     ManagedPrefixList.struct_class = Types::ManagedPrefixList
 
     ManagedPrefixListSet.member = Shapes::ShapeRef.new(shape: ManagedPrefixList, location_name: "item")
+
+    MediaAcceleratorInfo.add_member(:accelerators, Shapes::ShapeRef.new(shape: MediaDeviceInfoList, location_name: "accelerators"))
+    MediaAcceleratorInfo.add_member(:total_media_memory_in_mi_b, Shapes::ShapeRef.new(shape: TotalMediaMemory, location_name: "totalMediaMemoryInMiB"))
+    MediaAcceleratorInfo.struct_class = Types::MediaAcceleratorInfo
+
+    MediaDeviceInfo.add_member(:count, Shapes::ShapeRef.new(shape: MediaDeviceCount, location_name: "count"))
+    MediaDeviceInfo.add_member(:name, Shapes::ShapeRef.new(shape: MediaDeviceName, location_name: "name"))
+    MediaDeviceInfo.add_member(:manufacturer, Shapes::ShapeRef.new(shape: MediaDeviceManufacturerName, location_name: "manufacturer"))
+    MediaDeviceInfo.add_member(:memory_info, Shapes::ShapeRef.new(shape: MediaDeviceMemoryInfo, location_name: "memoryInfo"))
+    MediaDeviceInfo.struct_class = Types::MediaDeviceInfo
+
+    MediaDeviceInfoList.member = Shapes::ShapeRef.new(shape: MediaDeviceInfo, location_name: "item")
+
+    MediaDeviceMemoryInfo.add_member(:size_in_mi_b, Shapes::ShapeRef.new(shape: MediaDeviceMemorySize, location_name: "sizeInMiB"))
+    MediaDeviceMemoryInfo.struct_class = Types::MediaDeviceMemoryInfo
 
     MemoryGiBPerVCpu.add_member(:min, Shapes::ShapeRef.new(shape: Double, location_name: "min"))
     MemoryGiBPerVCpu.add_member(:max, Shapes::ShapeRef.new(shape: Double, location_name: "max"))
@@ -12272,6 +12309,25 @@ module Aws::EC2
     NetworkInterfacePrivateIpAddressList.member = Shapes::ShapeRef.new(shape: NetworkInterfacePrivateIpAddress, location_name: "item")
 
     NetworkNodesList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
+    NeuronDeviceCoreInfo.add_member(:count, Shapes::ShapeRef.new(shape: NeuronDeviceCoreCount, location_name: "count"))
+    NeuronDeviceCoreInfo.add_member(:version, Shapes::ShapeRef.new(shape: NeuronDeviceCoreVersion, location_name: "version"))
+    NeuronDeviceCoreInfo.struct_class = Types::NeuronDeviceCoreInfo
+
+    NeuronDeviceInfo.add_member(:count, Shapes::ShapeRef.new(shape: NeuronDeviceCount, location_name: "count"))
+    NeuronDeviceInfo.add_member(:name, Shapes::ShapeRef.new(shape: NeuronDeviceName, location_name: "name"))
+    NeuronDeviceInfo.add_member(:core_info, Shapes::ShapeRef.new(shape: NeuronDeviceCoreInfo, location_name: "coreInfo"))
+    NeuronDeviceInfo.add_member(:memory_info, Shapes::ShapeRef.new(shape: NeuronDeviceMemoryInfo, location_name: "memoryInfo"))
+    NeuronDeviceInfo.struct_class = Types::NeuronDeviceInfo
+
+    NeuronDeviceInfoList.member = Shapes::ShapeRef.new(shape: NeuronDeviceInfo, location_name: "item")
+
+    NeuronDeviceMemoryInfo.add_member(:size_in_mi_b, Shapes::ShapeRef.new(shape: NeuronDeviceMemorySize, location_name: "sizeInMiB"))
+    NeuronDeviceMemoryInfo.struct_class = Types::NeuronDeviceMemoryInfo
+
+    NeuronInfo.add_member(:neuron_devices, Shapes::ShapeRef.new(shape: NeuronDeviceInfoList, location_name: "neuronDevices"))
+    NeuronInfo.add_member(:total_neuron_device_memory_in_mi_b, Shapes::ShapeRef.new(shape: TotalNeuronMemory, location_name: "totalNeuronDeviceMemoryInMiB"))
+    NeuronInfo.struct_class = Types::NeuronInfo
 
     NewDhcpConfiguration.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
     NewDhcpConfiguration.add_member(:values, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "Value"))

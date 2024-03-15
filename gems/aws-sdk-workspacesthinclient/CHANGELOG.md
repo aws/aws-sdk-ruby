@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2024-03-15)
+------------------
+
+* Feature - Removed unused parameter kmsKeyArn from UpdateDeviceRequest
+
 1.2.0 (2024-01-26)
 ------------------
 

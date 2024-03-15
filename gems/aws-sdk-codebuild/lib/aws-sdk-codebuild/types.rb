@@ -1498,6 +1498,16 @@ module Aws::CodeBuild
     #   The scaling configuration of the compute fleet.
     #   @return [Types::ScalingConfigurationInput]
     #
+    # @!attribute [rw] overflow_behavior
+    #   The compute fleet overflow behavior.
+    #
+    #   * For overflow behavior `QUEUE`, your overflow builds need to wait
+    #     on the existing fleet instance to become available.
+    #
+    #   * For overflow behavior `ON_DEMAND`, your overflow builds run on
+    #     CodeBuild on-demand.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of tag key and value pairs associated with this compute
     #   fleet.
@@ -1514,6 +1524,7 @@ module Aws::CodeBuild
       :environment_type,
       :compute_type,
       :scaling_configuration,
+      :overflow_behavior,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -2428,6 +2439,16 @@ module Aws::CodeBuild
     #   The scaling configuration of the compute fleet.
     #   @return [Types::ScalingConfigurationOutput]
     #
+    # @!attribute [rw] overflow_behavior
+    #   The compute fleet overflow behavior.
+    #
+    #   * For overflow behavior `QUEUE`, your overflow builds need to wait
+    #     on the existing fleet instance to become available.
+    #
+    #   * For overflow behavior `ON_DEMAND`, your overflow builds run on
+    #     CodeBuild on-demand.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of tag key and value pairs associated with this compute
     #   fleet.
@@ -2449,6 +2470,7 @@ module Aws::CodeBuild
       :environment_type,
       :compute_type,
       :scaling_configuration,
+      :overflow_behavior,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -6309,6 +6331,16 @@ module Aws::CodeBuild
     #   The scaling configuration of the compute fleet.
     #   @return [Types::ScalingConfigurationInput]
     #
+    # @!attribute [rw] overflow_behavior
+    #   The compute fleet overflow behavior.
+    #
+    #   * For overflow behavior `QUEUE`, your overflow builds need to wait
+    #     on the existing fleet instance to become available.
+    #
+    #   * For overflow behavior `ON_DEMAND`, your overflow builds run on
+    #     CodeBuild on-demand.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   A list of tag key and value pairs associated with this compute
     #   fleet.
@@ -6325,6 +6357,7 @@ module Aws::CodeBuild
       :environment_type,
       :compute_type,
       :scaling_configuration,
+      :overflow_behavior,
       :tags)
       SENSITIVE = []
       include Aws::Structure

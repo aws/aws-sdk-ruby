@@ -170,6 +170,7 @@ module Aws
                             ]?,
                             max_capacity: ::Integer?
                           },
+                          ?overflow_behavior: ("QUEUE" | "ON_DEMAND"),
                           ?tags: Array[
                             {
                               key: ::String?,
@@ -1054,6 +1055,7 @@ module Aws
                             ]?,
                             max_capacity: ::Integer?
                           },
+                          ?overflow_behavior: ("QUEUE" | "ON_DEMAND"),
                           ?tags: Array[
                             {
                               key: ::String?,

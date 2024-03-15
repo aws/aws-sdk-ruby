@@ -943,8 +943,8 @@ module Aws::KinesisAnalyticsV2
     #
     #
     #
-    # [1]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/concepts/programming-model.html#checkpoints-for-fault-tolerance
-    # [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/
+    # [1]: https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing
+    # [2]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
     #
     # @!attribute [rw] configuration_type
     #   Describes whether the application uses Managed Service for Apache
@@ -1005,8 +1005,8 @@ module Aws::KinesisAnalyticsV2
     #
     #
     #
-    #   [1]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/state/large_state_tuning.html#tuning-checkpointing
-    #   [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/
+    #   [1]: https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/ops/state/large_state_tuning/#tuning-checkpointing
+    #   [2]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/CheckpointConfiguration AWS API Documentation
@@ -2113,8 +2113,8 @@ module Aws::KinesisAnalyticsV2
     #
     #
     #
-    #   [1]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/concepts/programming-model.html#checkpoints-for-fault-tolerance
-    #   [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/
+    #   [1]: https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing
+    #   [2]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
     #   @return [Types::CheckpointConfiguration]
     #
     # @!attribute [rw] monitoring_configuration
@@ -2165,8 +2165,8 @@ module Aws::KinesisAnalyticsV2
     #
     #
     #
-    #   [1]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/internals/job_scheduling.html
-    #   [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/
+    #   [1]: https://nightlies.apache.org/flink/flink-docs-release-1.18/internals/job_scheduling.html
+    #   [2]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/FlinkApplicationConfigurationDescription AWS API Documentation
@@ -2229,8 +2229,8 @@ module Aws::KinesisAnalyticsV2
     #
     #
     #
-    #   [1]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/ops/state/savepoints.html#allowing-non-restored-state
-    #   [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/
+    #   [1]: https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/ops/state/savepoints/#allowing-non-restored-state
+    #   [2]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/FlinkRunConfiguration AWS API Documentation
@@ -3560,8 +3560,8 @@ module Aws::KinesisAnalyticsV2
     #
     #
     #
-    # [1]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/parallel.html
-    # [2]: https://ci.apache.org/projects/flink/flink-docs-release-1.8/
+    # [1]: https://nightlies.apache.org/flink/flink-docs-release-1.18/dev/parallel.html
+    # [2]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
     #
     # @!attribute [rw] configuration_type
     #   Describes whether the application uses the default parallelism for

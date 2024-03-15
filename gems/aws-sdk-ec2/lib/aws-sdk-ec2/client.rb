@@ -25178,6 +25178,19 @@ module Aws::EC2
     #   resp.instance_types[0].nitro_tpm_support #=> String, one of "unsupported", "supported"
     #   resp.instance_types[0].nitro_tpm_info.supported_versions #=> Array
     #   resp.instance_types[0].nitro_tpm_info.supported_versions[0] #=> String
+    #   resp.instance_types[0].media_accelerator_info.accelerators #=> Array
+    #   resp.instance_types[0].media_accelerator_info.accelerators[0].count #=> Integer
+    #   resp.instance_types[0].media_accelerator_info.accelerators[0].name #=> String
+    #   resp.instance_types[0].media_accelerator_info.accelerators[0].manufacturer #=> String
+    #   resp.instance_types[0].media_accelerator_info.accelerators[0].memory_info.size_in_mi_b #=> Integer
+    #   resp.instance_types[0].media_accelerator_info.total_media_memory_in_mi_b #=> Integer
+    #   resp.instance_types[0].neuron_info.neuron_devices #=> Array
+    #   resp.instance_types[0].neuron_info.neuron_devices[0].count #=> Integer
+    #   resp.instance_types[0].neuron_info.neuron_devices[0].name #=> String
+    #   resp.instance_types[0].neuron_info.neuron_devices[0].core_info.count #=> Integer
+    #   resp.instance_types[0].neuron_info.neuron_devices[0].core_info.version #=> Integer
+    #   resp.instance_types[0].neuron_info.neuron_devices[0].memory_info.size_in_mi_b #=> Integer
+    #   resp.instance_types[0].neuron_info.total_neuron_device_memory_in_mi_b #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTypes AWS API Documentation
@@ -58905,7 +58918,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.442.0'
+      context[:gem_version] = '1.443.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2024-03-15)
+------------------
+
+* Feature - Documentation updates for Amazon S3.
+
 1.144.0 (2024-03-13)
 ------------------
 

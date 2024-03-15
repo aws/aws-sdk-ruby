@@ -370,7 +370,6 @@ module Aws::WorkSpacesThinClient
     UpdateDeviceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DeviceName, location_name: "name"))
     UpdateDeviceRequest.add_member(:desired_software_set_id, Shapes::ShapeRef.new(shape: SoftwareSetId, location_name: "desiredSoftwareSetId"))
     UpdateDeviceRequest.add_member(:software_set_update_schedule, Shapes::ShapeRef.new(shape: SoftwareSetUpdateSchedule, location_name: "softwareSetUpdateSchedule"))
-    UpdateDeviceRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     UpdateDeviceRequest.struct_class = Types::UpdateDeviceRequest
 
     UpdateDeviceResponse.add_member(:device, Shapes::ShapeRef.new(shape: DeviceSummary, location_name: "device"))
