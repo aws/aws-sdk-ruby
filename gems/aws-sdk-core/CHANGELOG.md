@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Ensure output unions work correctly with stub_responses.
+
 3.191.3 (2024-02-20)
 ------------------
 
