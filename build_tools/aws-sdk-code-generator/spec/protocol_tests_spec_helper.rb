@@ -230,9 +230,22 @@ module ProtocolTestsHelper
 
     def match_resp_data(test_case, resp, it)
       data = ProtocolTestsHelper.data_to_hash(resp.data)
-      expected_data = ProtocolTestsHelper.format_data(
-        resp.context.operation.output, test_case['result'] || {}
-      )
+      expected_data = if error_case?(test_case)
+                        error_shape = resp.context.operation.errors.find do |err|
+                          err.shape.name == test_case['errorCode']
+                        end
+                        raise "Unable to find #{test_case['errorCode']} in error shapes" if error_shape.nil?
+
+                        ProtocolTestsHelper.format_data(
+                          error_shape,
+                          test_case['error'] || {}
+                        )
+                      else
+                        ProtocolTestsHelper.format_data(
+                          resp.context.operation.output,
+                          test_case['result'] || {}
+                        )
+                      end
       if test_case['response']['eventstream']
         data.each do |member_name, value|
           if value.respond_to?(:each)
@@ -249,6 +262,7 @@ module ProtocolTestsHelper
           end
         end
       else
+        puts data
         it.expect(data).to eq(expected_data)
         test_case['resultClass']&.each_pair do |member_name, expected_class|
           it.expect (resp.data[ProtocolTestsHelper.underscore(member_name).to_sym].class.to_s)
@@ -256,5 +270,10 @@ module ProtocolTestsHelper
         end
       end
     end
+
+    def error_case?(test_case)
+      !test_case['error'].nil? || false
+    end
+
   end
 end

@@ -68,7 +68,12 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
             context.http_response.signal_done
             Seahorse::Client::Response.new(context: context)
           end
-          resp = client.operation_name
+
+          resp = begin
+            client.operation_name
+          rescue => error
+            error
+                 end
           matcher.match_resp_data(test_case, resp, self)
         end
       end
