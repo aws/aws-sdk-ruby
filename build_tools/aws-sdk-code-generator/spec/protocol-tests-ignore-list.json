@@ -61,8 +61,6 @@
       {"RestJsonZeroAndFalseQueryValues": "Awaiting Smithy to resolve C2J translation"}
     ],
     "output" : [
-      {"RestJsonInputAndOutputWithQuotedStringHeaders": "Out of scope to support de-serializing HTTP header to list of strings"},
-      {"RestJsonInputAndOutputWithTimestampHeaders": "Out of scope to support de-serializing HTTP header to list of timestamp strings"},
       {"RestJsonFooErrorUsingXAmznErrorType": "Need to update test runner to handle error cases"},
       {"RestJsonFooErrorUsingXAmznErrorTypeWithUri": "Need to update test runner to handle error cases"},
       {"RestJsonFooErrorUsingXAmznErrorTypeWithUriAndNamespace": "Need to update test runner to handle error cases"},

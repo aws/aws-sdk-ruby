@@ -3,6 +3,8 @@
 require 'time'
 require 'base64'
 
+require_relative 'header_list_parser'
+
 module Aws
   module Rest
     module Response
@@ -41,7 +43,11 @@ module Aws
           when FloatShape then Util.deserialize_number(value)
           when BooleanShape then value == 'true'
           when ListShape then
-            value.split(', ').map { |v| cast_value(ref.shape.member, v) }
+            case ref.shape.member.shape
+            when StringShape then HeaderListParser.parse_string_list(value)
+            when TimestampShape then HeaderListParser.parse_timestamp_list(value, ref.shape.member)
+            else value.split(', ').map { |v| cast_value(ref.shape.member, v) }
+            end
           when TimestampShape
             if value =~ /^\d+(\.\d*)/
               Time.at(value.to_f)
