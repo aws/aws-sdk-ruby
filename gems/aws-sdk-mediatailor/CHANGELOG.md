@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2024-03-18)
+------------------
+
+* Feature - This release adds support to allow customers to show different content within a channel depending on metadata associated with the viewer.
+
 1.76.0 (2024-01-26)
 ------------------
 

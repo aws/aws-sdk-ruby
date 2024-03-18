@@ -1198,7 +1198,7 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ `AWS::IAM::AccessKey` AWS::IAM::AccessKey][1]
+    #     * [ `AWS::IAM::AccessKey` ][1]
     #
     #     * [ `AWS::IAM::Group` ][2]
     #
@@ -5187,6 +5187,82 @@ module Aws::CloudFormation
 
     # @!attribute [rw] stack_set_name
     #   The name or unique ID of the stack set that you want to get
+    #   automatic deployment targets for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A string that identifies the next page of stack set deployment
+    #   targets that you want to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] call_as
+    #   Specifies whether you are acting as an account administrator in the
+    #   organization's management account or as a delegated administrator
+    #   in a member account.
+    #
+    #   By default, `SELF` is specified. Use `SELF` for StackSets with
+    #   self-managed permissions.
+    #
+    #   * If you are signed in to the management account, specify `SELF`.
+    #
+    #   * If you are signed in to a delegated administrator account, specify
+    #     `DELEGATED_ADMIN`.
+    #
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetAutoDeploymentTargetsInput AWS API Documentation
+    #
+    class ListStackSetAutoDeploymentTargetsInput < Struct.new(
+      :stack_set_name,
+      :next_token,
+      :max_results,
+      :call_as)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] summaries
+    #   An array of summaries of the deployment targets for the stack set.
+    #   @return [Array<Types::StackSetAutoDeploymentTargetSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call [ `ListStackSetAutoDeploymentTargets` ][1] again and use that
+    #   value for the `NextToken` parameter. If the request returns all
+    #   results, `NextToken` is set to an empty string.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackSetAutoDeploymentTargets.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetAutoDeploymentTargetsOutput AWS API Documentation
+    #
+    class ListStackSetAutoDeploymentTargetsOutput < Struct.new(
+      :summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_set_name
+    #   The name or unique ID of the stack set that you want to get
     #   operation results for.
     #   @return [String]
     #
@@ -7939,6 +8015,13 @@ module Aws::CloudFormation
     #     a Region, the failure tolerance for the stack set operation as a
     #     whole might be exceeded.
     #
+    #   * `FAILED_IMPORT`: The import of the stack instance in the specified
+    #     account and Region failed and left the stack in an unstable state.
+    #     Once the issues causing the failure are fixed, the import
+    #     operation can be retried. If enough stack set operations fail in
+    #     enough accounts within a Region, the failure tolerance for the
+    #     stack set operation as a whole might be exceeded.
+    #
     #   * `INOPERABLE`: A `DeleteStackInstances` operation has failed and
     #     left the stack in an unstable state. Stacks in this state are
     #     excluded from further `UpdateStackSet` operations. You might need
@@ -8784,6 +8867,31 @@ module Aws::CloudFormation
       :permission_model,
       :organizational_unit_ids,
       :managed_execution,
+      :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One of the targets for the stack set. Returned by the [
+    # `ListStackSetAutoDeploymentTargets` ][1] API operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackSetAutoDeploymentTargets.html
+    #
+    # @!attribute [rw] organizational_unit_id
+    #   The organization root ID or organizational unit (OU) IDs where the
+    #   stack set is targeted.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   The list of Regions targeted for this organization or OU.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetAutoDeploymentTargetSummary AWS API Documentation
+    #
+    class StackSetAutoDeploymentTargetSummary < Struct.new(
+      :organizational_unit_id,
       :regions)
       SENSITIVE = []
       include Aws::Structure

@@ -514,10 +514,11 @@ module Aws::KMS
     GenerateRandomResponse.struct_class = Types::GenerateRandomResponse
 
     GetKeyPolicyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
-    GetKeyPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyNameType, required: true, location_name: "PolicyName"))
+    GetKeyPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyNameType, location_name: "PolicyName"))
     GetKeyPolicyRequest.struct_class = Types::GetKeyPolicyRequest
 
     GetKeyPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyType, location_name: "Policy"))
+    GetKeyPolicyResponse.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyNameType, location_name: "PolicyName"))
     GetKeyPolicyResponse.struct_class = Types::GetKeyPolicyResponse
 
     GetKeyRotationStatusRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
@@ -741,7 +742,7 @@ module Aws::KMS
     PolicyNameList.member = Shapes::ShapeRef.new(shape: PolicyNameType)
 
     PutKeyPolicyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
-    PutKeyPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyNameType, required: true, location_name: "PolicyName"))
+    PutKeyPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyNameType, location_name: "PolicyName"))
     PutKeyPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "Policy"))
     PutKeyPolicyRequest.add_member(:bypass_policy_lockout_safety_check, Shapes::ShapeRef.new(shape: BooleanType, location_name: "BypassPolicyLockoutSafetyCheck"))
     PutKeyPolicyRequest.struct_class = Types::PutKeyPolicyRequest

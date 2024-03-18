@@ -842,6 +842,8 @@ module Aws
         def tags: () -> ::Array[Types::Tag]
         def create_time: () -> ::Time
         def errors: () -> ::Array[Types::IntegrationError]
+        def data_filter: () -> ::String
+        def description: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#create_integration-instance_method
       def create_integration: (
@@ -855,7 +857,9 @@ module Aws
                                     key: ::String?,
                                     value: ::String?
                                   },
-                                ]
+                                ],
+                                ?data_filter: ::String,
+                                ?description: ::String
                               ) -> _CreateIntegrationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntegrationResponseSuccess
 
@@ -1132,6 +1136,8 @@ module Aws
         def tags: () -> ::Array[Types::Tag]
         def create_time: () -> ::Time
         def errors: () -> ::Array[Types::IntegrationError]
+        def data_filter: () -> ::String
+        def description: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#delete_integration-instance_method
       def delete_integration: (
@@ -2599,6 +2605,30 @@ module Aws
                                    ?allow_major_version_upgrade: bool
                                  ) -> _ModifyGlobalClusterResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyGlobalClusterResponseSuccess
+
+      interface _ModifyIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Integration]
+        def source_arn: () -> ::String
+        def target_arn: () -> ::String
+        def integration_name: () -> ::String
+        def integration_arn: () -> ::String
+        def kms_key_id: () -> ::String
+        def additional_encryption_context: () -> ::Hash[::String, ::String]
+        def status: () -> ("creating" | "active" | "modifying" | "failed" | "deleting" | "syncing" | "needs_attention")
+        def tags: () -> ::Array[Types::Tag]
+        def create_time: () -> ::Time
+        def errors: () -> ::Array[Types::IntegrationError]
+        def data_filter: () -> ::String
+        def description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/Client.html#modify_integration-instance_method
+      def modify_integration: (
+                                integration_identifier: ::String,
+                                ?integration_name: ::String,
+                                ?data_filter: ::String,
+                                ?description: ::String
+                              ) -> _ModifyIntegrationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyIntegrationResponseSuccess
 
       interface _ModifyOptionGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyOptionGroupResult]

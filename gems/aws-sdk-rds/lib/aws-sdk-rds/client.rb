@@ -7901,6 +7901,20 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #
+    # @option params [String] :data_filter
+    #   Data filtering options for the integration. For more information, see
+    #   [Data filtering for Aurora zero-ETL integrations with Amazon
+    #   Redshift][1].
+    #
+    #   Valid for: Integrations with Aurora MySQL source DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.filtering.html
+    #
+    # @option params [String] :description
+    #   A description of the integration.
+    #
     # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Integration#source_arn #source_arn} => String
@@ -7913,6 +7927,8 @@ module Aws::RDS
     #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Integration#create_time #create_time} => Time
     #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
+    #   * {Types::Integration#data_filter #data_filter} => String
+    #   * {Types::Integration#description #description} => String
     #
     #
     # @example Example: To create a zero-ETL integration
@@ -7928,6 +7944,7 @@ module Aws::RDS
     #   resp.to_h outputs the following:
     #   {
     #     create_time: Time.parse("2023-12-28T17:20:20.629Z"), 
+    #     integration_arn: "arn:aws:rds:us-east-1:123456789012:integration:5b9f3d79-7392-4a3e-896c-58eaa1b53231", 
     #     integration_name: "my-integration", 
     #     kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/a1b2c3d4-5678-90ab-cdef-EXAMPLEaaaaa", 
     #     source_arn: "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster", 
@@ -7953,6 +7970,8 @@ module Aws::RDS
     #         value: "String",
     #       },
     #     ],
+    #     data_filter: "DataFilter",
+    #     description: "IntegrationDescription",
     #   })
     #
     # @example Response structure
@@ -7972,6 +7991,8 @@ module Aws::RDS
     #   resp.errors #=> Array
     #   resp.errors[0].error_code #=> String
     #   resp.errors[0].error_message #=> String
+    #   resp.data_filter #=> String
+    #   resp.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateIntegration AWS API Documentation
     #
@@ -10120,6 +10141,8 @@ module Aws::RDS
     #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Integration#create_time #create_time} => Time
     #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
+    #   * {Types::Integration#data_filter #data_filter} => String
+    #   * {Types::Integration#description #description} => String
     #
     #
     # @example Example: To delete a zero-ETL integration
@@ -10133,6 +10156,7 @@ module Aws::RDS
     #   resp.to_h outputs the following:
     #   {
     #     create_time: Time.parse("2023-12-28T17:20:20.629Z"), 
+    #     integration_arn: "arn:aws:rds:us-east-1:123456789012:integration:5b9f3d79-7392-4a3e-896c-58eaa1b53231", 
     #     integration_name: "my-integration", 
     #     kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/a1b2c3d4-5678-90ab-cdef-EXAMPLEaaaaa", 
     #     source_arn: "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster", 
@@ -10165,6 +10189,8 @@ module Aws::RDS
     #   resp.errors #=> Array
     #   resp.errors[0].error_code #=> String
     #   resp.errors[0].error_message #=> String
+    #   resp.data_filter #=> String
+    #   resp.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteIntegration AWS API Documentation
     #
@@ -15710,6 +15736,7 @@ module Aws::RDS
     #     integrations: [
     #       {
     #         create_time: Time.parse("2023-12-28T17:20:20.629Z"), 
+    #         integration_arn: "arn:aws:rds:us-east-1:123456789012:integration:5b9f3d79-7392-4a3e-896c-58eaa1b53231", 
     #         integration_name: "my-integration", 
     #         kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/a1b2c3d4-5678-90ab-cdef-EXAMPLEaaaaa", 
     #         source_arn: "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster", 
@@ -15754,6 +15781,8 @@ module Aws::RDS
     #   resp.integrations[0].errors #=> Array
     #   resp.integrations[0].errors[0].error_code #=> String
     #   resp.integrations[0].errors[0].error_message #=> String
+    #   resp.integrations[0].data_filter #=> String
+    #   resp.integrations[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeIntegrations AWS API Documentation
     #
@@ -22124,6 +22153,108 @@ module Aws::RDS
     # @param [Hash] params ({})
     def modify_global_cluster(params = {}, options = {})
       req = build_request(:modify_global_cluster, params)
+      req.send_request(options)
+    end
+
+    # Modifies a zero-ETL integration with Amazon Redshift.
+    #
+    # <note markdown="1"> Currently, you can only modify integrations that have Aurora MySQL
+    # source DB clusters. Integrations with Aurora PostgreSQL and RDS
+    # sources currently don't support modifying the integration.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :integration_identifier
+    #   The unique identifier of the integration to modify.
+    #
+    # @option params [String] :integration_name
+    #   A new name for the integration.
+    #
+    # @option params [String] :data_filter
+    #   A new data filter for the integration. For more information, see [Data
+    #   filtering for Aurora zero-ETL integrations with Amazon Redshift][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Zero_ETL_Filtering.html
+    #
+    # @option params [String] :description
+    #   A new description for the integration.
+    #
+    # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Integration#source_arn #source_arn} => String
+    #   * {Types::Integration#target_arn #target_arn} => String
+    #   * {Types::Integration#integration_name #integration_name} => String
+    #   * {Types::Integration#integration_arn #integration_arn} => String
+    #   * {Types::Integration#kms_key_id #kms_key_id} => String
+    #   * {Types::Integration#additional_encryption_context #additional_encryption_context} => Hash&lt;String,String&gt;
+    #   * {Types::Integration#status #status} => String
+    #   * {Types::Integration#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::Integration#create_time #create_time} => Time
+    #   * {Types::Integration#errors #errors} => Array&lt;Types::IntegrationError&gt;
+    #   * {Types::Integration#data_filter #data_filter} => String
+    #   * {Types::Integration#description #description} => String
+    #
+    #
+    # @example Example: To modify a zero-ETL integration
+    #
+    #   # The following example modifies the name of an existing zero-ETL integration.
+    #
+    #   resp = client.modify_integration({
+    #     integration_identifier: "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111", 
+    #     integration_name: "my-renamed-integration", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     create_time: Time.parse("2023-12-28T17:20:20.629Z"), 
+    #     data_filter: "include: *.*", 
+    #     integration_arn: "arn:aws:rds:us-east-1:123456789012:integration:5b9f3d79-7392-4a3e-896c-58eaa1b53231", 
+    #     integration_name: "my-renamed-integration", 
+    #     kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/a1b2c3d4-5678-90ab-cdef-EXAMPLEaaaaa", 
+    #     source_arn: "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster", 
+    #     status: "active", 
+    #     tags: [
+    #     ], 
+    #     target_arn: "arn:aws:redshift-serverless:us-east-1:123456789012:namespace/62c70612-0302-4db7-8414-b5e3e049f0d8", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_integration({
+    #     integration_identifier: "IntegrationIdentifier", # required
+    #     integration_name: "IntegrationName",
+    #     data_filter: "DataFilter",
+    #     description: "IntegrationDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_arn #=> String
+    #   resp.target_arn #=> String
+    #   resp.integration_name #=> String
+    #   resp.integration_arn #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.additional_encryption_context #=> Hash
+    #   resp.additional_encryption_context["String"] #=> String
+    #   resp.status #=> String, one of "creating", "active", "modifying", "failed", "deleting", "syncing", "needs_attention"
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.create_time #=> Time
+    #   resp.errors #=> Array
+    #   resp.errors[0].error_code #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.data_filter #=> String
+    #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyIntegration AWS API Documentation
+    #
+    # @overload modify_integration(params = {})
+    # @param [Hash] params ({})
+    def modify_integration(params = {}, options = {})
+      req = build_request(:modify_integration, params)
       req.send_request(options)
     end
 
@@ -30517,7 +30648,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.222.0'
+      context[:gem_version] = '1.223.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

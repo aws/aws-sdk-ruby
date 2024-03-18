@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.223.0 (2024-03-18)
+------------------
+
+* Feature - This release launches the ModifyIntegration API and support for data filtering for zero-ETL Integrations.
+
 1.222.0 (2024-03-14)
 ------------------
 

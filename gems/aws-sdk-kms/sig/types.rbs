@@ -398,6 +398,7 @@ module Aws::KMS
 
     class GetKeyPolicyResponse
       attr_accessor policy: ::String
+      attr_accessor policy_name: ::String
       SENSITIVE: []
     end
 

@@ -6145,6 +6145,22 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] data_filter
+    #   Data filtering options for the integration. For more information,
+    #   see [Data filtering for Aurora zero-ETL integrations with Amazon
+    #   Redshift][1].
+    #
+    #   Valid for: Integrations with Aurora MySQL source DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.filtering.html
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the integration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateIntegrationMessage AWS API Documentation
     #
     class CreateIntegrationMessage < Struct.new(
@@ -6153,7 +6169,9 @@ module Aws::RDS
       :integration_name,
       :kms_key_id,
       :additional_encryption_context,
-      :tags)
+      :tags,
+      :data_filter,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15975,6 +15993,16 @@ module Aws::RDS
     #   Any errors associated with the integration.
     #   @return [Array<Types::IntegrationError>]
     #
+    # @!attribute [rw] data_filter
+    #   Data filters for the integration. These filters determine which
+    #   tables from the source database are sent to the target Amazon
+    #   Redshift data warehouse.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the integration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Integration AWS API Documentation
     #
     class Integration < Struct.new(
@@ -15987,7 +16015,9 @@ module Aws::RDS
       :status,
       :tags,
       :create_time,
-      :errors)
+      :errors,
+      :data_filter,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19472,6 +19502,39 @@ module Aws::RDS
     #
     class ModifyGlobalClusterResult < Struct.new(
       :global_cluster)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_identifier
+    #   The unique identifier of the integration to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_name
+    #   A new name for the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_filter
+    #   A new data filter for the integration. For more information, see
+    #   [Data filtering for Aurora zero-ETL integrations with Amazon
+    #   Redshift][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Zero_ETL_Filtering.html
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A new description for the integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyIntegrationMessage AWS API Documentation
+    #
+    class ModifyIntegrationMessage < Struct.new(
+      :integration_identifier,
+      :integration_name,
+      :data_filter,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end

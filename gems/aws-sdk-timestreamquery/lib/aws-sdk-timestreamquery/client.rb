@@ -875,8 +875,7 @@ module Aws::TimestreamQuery
 
     # A synchronous operation that allows you to submit a query with
     # parameters to be stored by Timestream for later running. Timestream
-    # only supports using this operation with the
-    # `PrepareQueryRequest$ValidateOnly` set to `true`.
+    # only supports using this operation with `ValidateOnly` set to `true`.
     #
     # @option params [required, String] :query_string
     #   The Timestream query string that you want to use as a prepared
@@ -1198,7 +1197,7 @@ module Aws::TimestreamQuery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-timestreamquery'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

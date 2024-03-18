@@ -1036,6 +1036,20 @@ module Aws
                                 ) -> _ListStackResourcesResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStackResourcesResponseSuccess
 
+      interface _ListStackSetAutoDeploymentTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStackSetAutoDeploymentTargetsOutput]
+        def summaries: () -> ::Array[Types::StackSetAutoDeploymentTargetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#list_stack_set_auto_deployment_targets-instance_method
+      def list_stack_set_auto_deployment_targets: (
+                                                    stack_set_name: ::String,
+                                                    ?next_token: ::String,
+                                                    ?max_results: ::Integer,
+                                                    ?call_as: ("SELF" | "DELEGATED_ADMIN")
+                                                  ) -> _ListStackSetAutoDeploymentTargetsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStackSetAutoDeploymentTargetsResponseSuccess
+
       interface _ListStackSetOperationResultsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListStackSetOperationResultsOutput]
         def summaries: () -> ::Array[Types::StackSetOperationResultSummary]

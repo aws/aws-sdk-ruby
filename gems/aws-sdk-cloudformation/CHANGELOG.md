@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2024-03-18)
+------------------
+
+* Feature - This release supports for a new API ListStackSetAutoDeploymentTargets, which provider auto-deployment configuration as a describable resource. Customers can now view the specific combinations of regions and OUs that are being auto-deployed.
+
 1.101.0 (2024-03-12)
 ------------------
 

@@ -476,6 +476,9 @@ module Aws::MediaTailor
     #
     # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html
     #
+    # @option params [Array<String>] :audiences
+    #   The list of audiences defined in channel.
+    #
     # @option params [required, String] :channel_name
     #   The name of the channel.
     #
@@ -518,6 +521,7 @@ module Aws::MediaTailor
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#arn #arn} => String
+    #   * {Types::CreateChannelResponse#audiences #audiences} => Array&lt;String&gt;
     #   * {Types::CreateChannelResponse#channel_name #channel_name} => String
     #   * {Types::CreateChannelResponse#channel_state #channel_state} => String
     #   * {Types::CreateChannelResponse#creation_time #creation_time} => Time
@@ -532,6 +536,7 @@ module Aws::MediaTailor
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_channel({
+    #     audiences: ["String"],
     #     channel_name: "__string", # required
     #     filler_slate: {
     #       source_location_name: "__string",
@@ -566,6 +571,8 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.audiences #=> Array
+    #   resp.audiences[0] #=> String
     #   resp.channel_name #=> String
     #   resp.channel_state #=> String, one of "RUNNING", "STOPPED"
     #   resp.creation_time #=> Time
@@ -774,6 +781,9 @@ module Aws::MediaTailor
     # @option params [Array<Types::AdBreak>] :ad_breaks
     #   The ad break configuration settings.
     #
+    # @option params [Array<Types::AudienceMedia>] :audience_media
+    #   The list of AudienceMedia defined in program.
+    #
     # @option params [required, String] :channel_name
     #   The name of the channel for this Program.
     #
@@ -796,6 +806,7 @@ module Aws::MediaTailor
     #
     #   * {Types::CreateProgramResponse#ad_breaks #ad_breaks} => Array&lt;Types::AdBreak&gt;
     #   * {Types::CreateProgramResponse#arn #arn} => String
+    #   * {Types::CreateProgramResponse#audience_media #audience_media} => Array&lt;Types::AudienceMedia&gt;
     #   * {Types::CreateProgramResponse#channel_name #channel_name} => String
     #   * {Types::CreateProgramResponse#clip_range #clip_range} => Types::ClipRange
     #   * {Types::CreateProgramResponse#creation_time #creation_time} => Time
@@ -845,12 +856,67 @@ module Aws::MediaTailor
     #         },
     #       },
     #     ],
+    #     audience_media: [
+    #       {
+    #         alternate_media: [
+    #           {
+    #             ad_breaks: [
+    #               {
+    #                 ad_break_metadata: [
+    #                   {
+    #                     key: "String", # required
+    #                     value: "String", # required
+    #                   },
+    #                 ],
+    #                 message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT, TIME_SIGNAL
+    #                 offset_millis: 1, # required
+    #                 slate: {
+    #                   source_location_name: "__string",
+    #                   vod_source_name: "__string",
+    #                 },
+    #                 splice_insert_message: {
+    #                   avail_num: 1,
+    #                   avails_expected: 1,
+    #                   splice_event_id: 1,
+    #                   unique_program_id: 1,
+    #                 },
+    #                 time_signal_message: {
+    #                   segmentation_descriptors: [
+    #                     {
+    #                       segment_num: 1,
+    #                       segmentation_event_id: 1,
+    #                       segmentation_type_id: 1,
+    #                       segmentation_upid: "String",
+    #                       segmentation_upid_type: 1,
+    #                       segments_expected: 1,
+    #                       sub_segment_num: 1,
+    #                       sub_segments_expected: 1,
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #             clip_range: {
+    #               end_offset_millis: 1,
+    #               start_offset_millis: 1,
+    #             },
+    #             duration_millis: 1,
+    #             live_source_name: "__string",
+    #             scheduled_start_time_millis: 1,
+    #             source_location_name: "__string",
+    #             vod_source_name: "__string",
+    #           },
+    #         ],
+    #         audience: "__string",
+    #       },
+    #     ],
     #     channel_name: "__string", # required
     #     live_source_name: "__string",
     #     program_name: "__string", # required
     #     schedule_configuration: { # required
     #       clip_range: {
-    #         end_offset_millis: 1, # required
+    #         end_offset_millis: 1,
+    #         start_offset_millis: 1,
     #       },
     #       transition: { # required
     #         duration_millis: 1,
@@ -888,8 +954,40 @@ module Aws::MediaTailor
     #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segment_num #=> Integer
     #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segments_expected #=> Integer
     #   resp.arn #=> String
+    #   resp.audience_media #=> Array
+    #   resp.audience_media[0].alternate_media #=> Array
+    #   resp.audience_media[0].alternate_media[0].ad_breaks #=> Array
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].ad_break_metadata #=> Array
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].ad_break_metadata[0].key #=> String
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].ad_break_metadata[0].value #=> String
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].message_type #=> String, one of "SPLICE_INSERT", "TIME_SIGNAL"
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].offset_millis #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].slate.source_location_name #=> String
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].slate.vod_source_name #=> String
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].splice_insert_message.avail_num #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].splice_insert_message.avails_expected #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].splice_insert_message.splice_event_id #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].splice_insert_message.unique_program_id #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors #=> Array
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segment_num #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_event_id #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_type_id #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_upid #=> String
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_upid_type #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segments_expected #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segment_num #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segments_expected #=> Integer
+    #   resp.audience_media[0].alternate_media[0].clip_range.end_offset_millis #=> Integer
+    #   resp.audience_media[0].alternate_media[0].clip_range.start_offset_millis #=> Integer
+    #   resp.audience_media[0].alternate_media[0].duration_millis #=> Integer
+    #   resp.audience_media[0].alternate_media[0].live_source_name #=> String
+    #   resp.audience_media[0].alternate_media[0].scheduled_start_time_millis #=> Integer
+    #   resp.audience_media[0].alternate_media[0].source_location_name #=> String
+    #   resp.audience_media[0].alternate_media[0].vod_source_name #=> String
+    #   resp.audience_media[0].audience #=> String
     #   resp.channel_name #=> String
     #   resp.clip_range.end_offset_millis #=> Integer
+    #   resp.clip_range.start_offset_millis #=> Integer
     #   resp.creation_time #=> Time
     #   resp.duration_millis #=> Integer
     #   resp.live_source_name #=> String
@@ -1317,6 +1415,7 @@ module Aws::MediaTailor
     # @return [Types::DescribeChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeChannelResponse#arn #arn} => String
+    #   * {Types::DescribeChannelResponse#audiences #audiences} => Array&lt;String&gt;
     #   * {Types::DescribeChannelResponse#channel_name #channel_name} => String
     #   * {Types::DescribeChannelResponse#channel_state #channel_state} => String
     #   * {Types::DescribeChannelResponse#creation_time #creation_time} => Time
@@ -1338,6 +1437,8 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.audiences #=> Array
+    #   resp.audiences[0] #=> String
     #   resp.channel_name #=> String
     #   resp.channel_state #=> String, one of "RUNNING", "STOPPED"
     #   resp.creation_time #=> Time
@@ -1437,6 +1538,7 @@ module Aws::MediaTailor
     #
     #   * {Types::DescribeProgramResponse#ad_breaks #ad_breaks} => Array&lt;Types::AdBreak&gt;
     #   * {Types::DescribeProgramResponse#arn #arn} => String
+    #   * {Types::DescribeProgramResponse#audience_media #audience_media} => Array&lt;Types::AudienceMedia&gt;
     #   * {Types::DescribeProgramResponse#channel_name #channel_name} => String
     #   * {Types::DescribeProgramResponse#clip_range #clip_range} => Types::ClipRange
     #   * {Types::DescribeProgramResponse#creation_time #creation_time} => Time
@@ -1478,8 +1580,40 @@ module Aws::MediaTailor
     #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segment_num #=> Integer
     #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segments_expected #=> Integer
     #   resp.arn #=> String
+    #   resp.audience_media #=> Array
+    #   resp.audience_media[0].alternate_media #=> Array
+    #   resp.audience_media[0].alternate_media[0].ad_breaks #=> Array
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].ad_break_metadata #=> Array
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].ad_break_metadata[0].key #=> String
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].ad_break_metadata[0].value #=> String
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].message_type #=> String, one of "SPLICE_INSERT", "TIME_SIGNAL"
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].offset_millis #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].slate.source_location_name #=> String
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].slate.vod_source_name #=> String
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].splice_insert_message.avail_num #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].splice_insert_message.avails_expected #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].splice_insert_message.splice_event_id #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].splice_insert_message.unique_program_id #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors #=> Array
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segment_num #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_event_id #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_type_id #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_upid #=> String
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_upid_type #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segments_expected #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segment_num #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segments_expected #=> Integer
+    #   resp.audience_media[0].alternate_media[0].clip_range.end_offset_millis #=> Integer
+    #   resp.audience_media[0].alternate_media[0].clip_range.start_offset_millis #=> Integer
+    #   resp.audience_media[0].alternate_media[0].duration_millis #=> Integer
+    #   resp.audience_media[0].alternate_media[0].live_source_name #=> String
+    #   resp.audience_media[0].alternate_media[0].scheduled_start_time_millis #=> Integer
+    #   resp.audience_media[0].alternate_media[0].source_location_name #=> String
+    #   resp.audience_media[0].alternate_media[0].vod_source_name #=> String
+    #   resp.audience_media[0].audience #=> String
     #   resp.channel_name #=> String
     #   resp.clip_range.end_offset_millis #=> Integer
+    #   resp.clip_range.start_offset_millis #=> Integer
     #   resp.creation_time #=> Time
     #   resp.duration_millis #=> Integer
     #   resp.live_source_name #=> String
@@ -1636,6 +1770,9 @@ module Aws::MediaTailor
 
     # Retrieves information about your channel's schedule.
     #
+    # @option params [String] :audience
+    #   The single audience for GetChannelScheduleRequest.
+    #
     # @option params [required, String] :channel_name
     #   The name of the channel associated with this Channel Schedule.
     #
@@ -1672,6 +1809,7 @@ module Aws::MediaTailor
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_channel_schedule({
+    #     audience: "__string",
     #     channel_name: "__string", # required
     #     duration_minutes: "__string",
     #     max_results: 1,
@@ -1684,6 +1822,8 @@ module Aws::MediaTailor
     #   resp.items[0].approximate_duration_seconds #=> Integer
     #   resp.items[0].approximate_start_time #=> Time
     #   resp.items[0].arn #=> String
+    #   resp.items[0].audiences #=> Array
+    #   resp.items[0].audiences[0] #=> String
     #   resp.items[0].channel_name #=> String
     #   resp.items[0].live_source_name #=> String
     #   resp.items[0].program_name #=> String
@@ -1692,7 +1832,7 @@ module Aws::MediaTailor
     #   resp.items[0].schedule_ad_breaks[0].approximate_start_time #=> Time
     #   resp.items[0].schedule_ad_breaks[0].source_location_name #=> String
     #   resp.items[0].schedule_ad_breaks[0].vod_source_name #=> String
-    #   resp.items[0].schedule_entry_type #=> String, one of "PROGRAM", "FILLER_SLATE"
+    #   resp.items[0].schedule_entry_type #=> String, one of "PROGRAM", "FILLER_SLATE", "ALTERNATE_MEDIA"
     #   resp.items[0].source_location_name #=> String
     #   resp.items[0].vod_source_name #=> String
     #   resp.next_token #=> String
@@ -1931,6 +2071,8 @@ module Aws::MediaTailor
     #
     #   resp.items #=> Array
     #   resp.items[0].arn #=> String
+    #   resp.items[0].audiences #=> Array
+    #   resp.items[0].audiences[0] #=> String
     #   resp.items[0].channel_name #=> String
     #   resp.items[0].channel_state #=> String
     #   resp.items[0].creation_time #=> Time
@@ -2685,6 +2827,9 @@ module Aws::MediaTailor
     #
     # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html
     #
+    # @option params [Array<String>] :audiences
+    #   The list of audiences defined in channel.
+    #
     # @option params [required, String] :channel_name
     #   The name of the channel.
     #
@@ -2704,6 +2849,7 @@ module Aws::MediaTailor
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateChannelResponse#arn #arn} => String
+    #   * {Types::UpdateChannelResponse#audiences #audiences} => Array&lt;String&gt;
     #   * {Types::UpdateChannelResponse#channel_name #channel_name} => String
     #   * {Types::UpdateChannelResponse#channel_state #channel_state} => String
     #   * {Types::UpdateChannelResponse#creation_time #creation_time} => Time
@@ -2718,6 +2864,7 @@ module Aws::MediaTailor
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_channel({
+    #     audiences: ["String"],
     #     channel_name: "__string", # required
     #     filler_slate: {
     #       source_location_name: "__string",
@@ -2747,6 +2894,8 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.audiences #=> Array
+    #   resp.audiences[0] #=> String
     #   resp.channel_name #=> String
     #   resp.channel_state #=> String, one of "RUNNING", "STOPPED"
     #   resp.creation_time #=> Time
@@ -2843,6 +2992,9 @@ module Aws::MediaTailor
     # @option params [Array<Types::AdBreak>] :ad_breaks
     #   The ad break configuration settings.
     #
+    # @option params [Array<Types::AudienceMedia>] :audience_media
+    #   The list of AudienceMedia defined in program.
+    #
     # @option params [required, String] :channel_name
     #   The name of the channel for this Program.
     #
@@ -2856,6 +3008,7 @@ module Aws::MediaTailor
     #
     #   * {Types::UpdateProgramResponse#ad_breaks #ad_breaks} => Array&lt;Types::AdBreak&gt;
     #   * {Types::UpdateProgramResponse#arn #arn} => String
+    #   * {Types::UpdateProgramResponse#audience_media #audience_media} => Array&lt;Types::AudienceMedia&gt;
     #   * {Types::UpdateProgramResponse#channel_name #channel_name} => String
     #   * {Types::UpdateProgramResponse#clip_range #clip_range} => Types::ClipRange
     #   * {Types::UpdateProgramResponse#creation_time #creation_time} => Time
@@ -2905,11 +3058,66 @@ module Aws::MediaTailor
     #         },
     #       },
     #     ],
+    #     audience_media: [
+    #       {
+    #         alternate_media: [
+    #           {
+    #             ad_breaks: [
+    #               {
+    #                 ad_break_metadata: [
+    #                   {
+    #                     key: "String", # required
+    #                     value: "String", # required
+    #                   },
+    #                 ],
+    #                 message_type: "SPLICE_INSERT", # accepts SPLICE_INSERT, TIME_SIGNAL
+    #                 offset_millis: 1, # required
+    #                 slate: {
+    #                   source_location_name: "__string",
+    #                   vod_source_name: "__string",
+    #                 },
+    #                 splice_insert_message: {
+    #                   avail_num: 1,
+    #                   avails_expected: 1,
+    #                   splice_event_id: 1,
+    #                   unique_program_id: 1,
+    #                 },
+    #                 time_signal_message: {
+    #                   segmentation_descriptors: [
+    #                     {
+    #                       segment_num: 1,
+    #                       segmentation_event_id: 1,
+    #                       segmentation_type_id: 1,
+    #                       segmentation_upid: "String",
+    #                       segmentation_upid_type: 1,
+    #                       segments_expected: 1,
+    #                       sub_segment_num: 1,
+    #                       sub_segments_expected: 1,
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #             clip_range: {
+    #               end_offset_millis: 1,
+    #               start_offset_millis: 1,
+    #             },
+    #             duration_millis: 1,
+    #             live_source_name: "__string",
+    #             scheduled_start_time_millis: 1,
+    #             source_location_name: "__string",
+    #             vod_source_name: "__string",
+    #           },
+    #         ],
+    #         audience: "__string",
+    #       },
+    #     ],
     #     channel_name: "__string", # required
     #     program_name: "__string", # required
     #     schedule_configuration: { # required
     #       clip_range: {
-    #         end_offset_millis: 1, # required
+    #         end_offset_millis: 1,
+    #         start_offset_millis: 1,
     #       },
     #       transition: {
     #         duration_millis: 1,
@@ -2942,8 +3150,40 @@ module Aws::MediaTailor
     #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segment_num #=> Integer
     #   resp.ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segments_expected #=> Integer
     #   resp.arn #=> String
+    #   resp.audience_media #=> Array
+    #   resp.audience_media[0].alternate_media #=> Array
+    #   resp.audience_media[0].alternate_media[0].ad_breaks #=> Array
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].ad_break_metadata #=> Array
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].ad_break_metadata[0].key #=> String
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].ad_break_metadata[0].value #=> String
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].message_type #=> String, one of "SPLICE_INSERT", "TIME_SIGNAL"
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].offset_millis #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].slate.source_location_name #=> String
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].slate.vod_source_name #=> String
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].splice_insert_message.avail_num #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].splice_insert_message.avails_expected #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].splice_insert_message.splice_event_id #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].splice_insert_message.unique_program_id #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors #=> Array
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segment_num #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_event_id #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_type_id #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_upid #=> String
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segmentation_upid_type #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].segments_expected #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segment_num #=> Integer
+    #   resp.audience_media[0].alternate_media[0].ad_breaks[0].time_signal_message.segmentation_descriptors[0].sub_segments_expected #=> Integer
+    #   resp.audience_media[0].alternate_media[0].clip_range.end_offset_millis #=> Integer
+    #   resp.audience_media[0].alternate_media[0].clip_range.start_offset_millis #=> Integer
+    #   resp.audience_media[0].alternate_media[0].duration_millis #=> Integer
+    #   resp.audience_media[0].alternate_media[0].live_source_name #=> String
+    #   resp.audience_media[0].alternate_media[0].scheduled_start_time_millis #=> Integer
+    #   resp.audience_media[0].alternate_media[0].source_location_name #=> String
+    #   resp.audience_media[0].alternate_media[0].vod_source_name #=> String
+    #   resp.audience_media[0].audience #=> String
     #   resp.channel_name #=> String
     #   resp.clip_range.end_offset_millis #=> Integer
+    #   resp.clip_range.start_offset_millis #=> Integer
     #   resp.creation_time #=> Time
     #   resp.duration_millis #=> Integer
     #   resp.live_source_name #=> String
@@ -3123,7 +3363,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

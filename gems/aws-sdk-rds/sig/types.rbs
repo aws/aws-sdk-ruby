@@ -684,6 +684,8 @@ module Aws::RDS
       attr_accessor kms_key_id: ::String
       attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor data_filter: ::String
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -2575,6 +2577,8 @@ module Aws::RDS
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor create_time: ::Time
       attr_accessor errors: ::Array[Types::IntegrationError]
+      attr_accessor data_filter: ::String
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -3061,6 +3065,14 @@ module Aws::RDS
 
     class ModifyGlobalClusterResult
       attr_accessor global_cluster: Types::GlobalCluster
+      SENSITIVE: []
+    end
+
+    class ModifyIntegrationMessage
+      attr_accessor integration_identifier: ::String
+      attr_accessor integration_name: ::String
+      attr_accessor data_filter: ::String
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 

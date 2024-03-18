@@ -3048,7 +3048,8 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] policy_name
-    #   Specifies the name of the key policy. The only valid name is
+    #   Specifies the name of the key policy. If no policy name is
+    #   specified, the default value is `default`. The only valid name is
     #   `default`. To get the names of key policies, use ListKeyPolicies.
     #   @return [String]
     #
@@ -3065,10 +3066,15 @@ module Aws::KMS
     #   A key policy document in JSON format.
     #   @return [String]
     #
+    # @!attribute [rw] policy_name
+    #   The name of the key policy. The only valid value is `default`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyPolicyResponse AWS API Documentation
     #
     class GetKeyPolicyResponse < Struct.new(
-      :policy)
+      :policy,
+      :policy_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4650,7 +4656,8 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] policy_name
-    #   The name of the key policy. The only valid value is `default`.
+    #   The name of the key policy. If no policy name is specified, the
+    #   default value is `default`. The only valid value is `default`.
     #   @return [String]
     #
     # @!attribute [rw] policy

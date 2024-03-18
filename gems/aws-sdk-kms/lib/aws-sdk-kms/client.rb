@@ -5583,13 +5583,15 @@ module Aws::KMS
     #   To get the key ID and key ARN for a KMS key, use ListKeys or
     #   DescribeKey.
     #
-    # @option params [required, String] :policy_name
-    #   Specifies the name of the key policy. The only valid name is
-    #   `default`. To get the names of key policies, use ListKeyPolicies.
+    # @option params [String] :policy_name
+    #   Specifies the name of the key policy. If no policy name is specified,
+    #   the default value is `default`. The only valid name is `default`. To
+    #   get the names of key policies, use ListKeyPolicies.
     #
     # @return [Types::GetKeyPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetKeyPolicyResponse#policy #policy} => String
+    #   * {Types::GetKeyPolicyResponse#policy_name #policy_name} => String
     #
     #
     # @example Example: To retrieve a key policy
@@ -5610,12 +5612,13 @@ module Aws::KMS
     #
     #   resp = client.get_key_policy({
     #     key_id: "KeyIdType", # required
-    #     policy_name: "PolicyNameType", # required
+    #     policy_name: "PolicyNameType",
     #   })
     #
     # @example Response structure
     #
     #   resp.policy #=> String
+    #   resp.policy_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyPolicy AWS API Documentation
     #
@@ -6196,9 +6199,7 @@ module Aws::KMS
     # import different key material. You might reimport key material to
     # replace key material that expired or key material that you deleted.
     # You might also reimport key material to change the expiration model or
-    # expiration date of the key material. Before reimporting key material,
-    # if necessary, call DeleteImportedKeyMaterial to delete the current
-    # imported key material.
+    # expiration date of the key material.
     #
     # Each time you import key material into KMS, you can determine whether
     # (`ExpirationModel`) and when (`ValidTo`) the key material expires. To
@@ -7333,8 +7334,9 @@ module Aws::KMS
     #   To get the key ID and key ARN for a KMS key, use ListKeys or
     #   DescribeKey.
     #
-    # @option params [required, String] :policy_name
-    #   The name of the key policy. The only valid value is `default`.
+    # @option params [String] :policy_name
+    #   The name of the key policy. If no policy name is specified, the
+    #   default value is `default`. The only valid value is `default`.
     #
     # @option params [required, String] :policy
     #   The key policy to attach to the KMS key.
@@ -7416,7 +7418,7 @@ module Aws::KMS
     #
     #   resp = client.put_key_policy({
     #     key_id: "KeyIdType", # required
-    #     policy_name: "PolicyNameType", # required
+    #     policy_name: "PolicyNameType",
     #     policy: "PolicyType", # required
     #     bypass_policy_lockout_safety_check: false,
     #   })
@@ -8302,7 +8304,7 @@ module Aws::KMS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/managing-grants.html#grant-delete
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#grant-delete
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-eventual-consistency
     # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-grants.html
@@ -10103,7 +10105,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

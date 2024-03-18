@@ -545,7 +545,7 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ `AWS::IAM::AccessKey` AWS::IAM::AccessKey][1]
+    #     * [ `AWS::IAM::AccessKey` ][1]
     #
     #     * [ `AWS::IAM::Group` ][2]
     #

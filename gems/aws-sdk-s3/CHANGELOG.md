@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.146.0 (2024-03-18)
+------------------
+
+* Feature - Fix two issues with response root node names.
+
 1.145.0 (2024-03-15)
 ------------------
 

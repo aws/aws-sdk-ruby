@@ -1305,7 +1305,7 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ `AWS::IAM::AccessKey` AWS::IAM::AccessKey][1]
+    #     * [ `AWS::IAM::AccessKey` ][1]
     #
     #     * [ `AWS::IAM::Group` ][2]
     #
@@ -5574,6 +5574,75 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
+    # Returns summary information about deployment targets for a stack set.
+    #
+    # @option params [required, String] :stack_set_name
+    #   The name or unique ID of the stack set that you want to get automatic
+    #   deployment targets for.
+    #
+    # @option params [String] :next_token
+    #   A string that identifies the next page of stack set deployment targets
+    #   that you want to retrieve.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #
+    # @option params [String] :call_as
+    #   Specifies whether you are acting as an account administrator in the
+    #   organization's management account or as a delegated administrator in
+    #   a member account.
+    #
+    #   By default, `SELF` is specified. Use `SELF` for StackSets with
+    #   self-managed permissions.
+    #
+    #   * If you are signed in to the management account, specify `SELF`.
+    #
+    #   * If you are signed in to a delegated administrator account, specify
+    #     `DELEGATED_ADMIN`.
+    #
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation User
+    #     Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
+    #
+    # @return [Types::ListStackSetAutoDeploymentTargetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStackSetAutoDeploymentTargetsOutput#summaries #summaries} => Array&lt;Types::StackSetAutoDeploymentTargetSummary&gt;
+    #   * {Types::ListStackSetAutoDeploymentTargetsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_stack_set_auto_deployment_targets({
+    #     stack_set_name: "StackSetNameOrId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     call_as: "SELF", # accepts SELF, DELEGATED_ADMIN
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.summaries #=> Array
+    #   resp.summaries[0].organizational_unit_id #=> String
+    #   resp.summaries[0].regions #=> Array
+    #   resp.summaries[0].regions[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetAutoDeploymentTargets AWS API Documentation
+    #
+    # @overload list_stack_set_auto_deployment_targets(params = {})
+    # @param [Hash] params ({})
+    def list_stack_set_auto_deployment_targets(params = {}, options = {})
+      req = build_request(:list_stack_set_auto_deployment_targets, params)
+      req.send_request(options)
+    end
+
     # Returns summary information about the results of a stack set
     # operation.
     #
@@ -8259,7 +8328,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
