@@ -49,13 +49,24 @@ module Aws
             error_shape_code = rule.shape['error']['code'] if rule.shape['error']
             match = (code == error_shape_code || code == rule.shape.name)
             if match && rule.shape.members.any?
-              data = Parser.new(rule).parse(context.http_response.body_contents)
+              data = parse_error_data(rule, context.http_response.body_contents)
             end
           end
         end
         data
       rescue Xml::Parser::ParsingError
         EmptyStructure.new
+      end
+
+      def parse_error_data(rule, body)
+        # errors may nested under <Errors><Error>structure_data</Error></Errors>
+        # Or may be flat and under <Error>structure_data</Error>
+        body = body.tr("\n", '')
+        if matches = body.match(/<Error>(.+?)<\/Error>/)
+          Parser.new(rule).parse("<#{rule.shape.name}>#{matches[1]}</#{rule.shape.name}>")
+        else
+          EmptyStructure.new
+        end
       end
 
       def error_code(body, context)
