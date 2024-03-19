@@ -569,7 +569,7 @@ module Aws::CloudWatchLogs
     # from Amazon Web Services services.][1]
     #
     # A delivery destination can represent a log group in CloudWatch Logs,
-    # an Amazon S3 bucket, or a delivery stream in Kinesis Data Firehose.
+    # an Amazon S3 bucket, or a delivery stream in Firehose.
     #
     # To configure logs delivery between a supported Amazon Web Services
     # service and a destination, you must do the following:
@@ -1526,10 +1526,9 @@ module Aws::CloudWatchLogs
     #
     # A delivery source represents an Amazon Web Services resource that
     # sends logs to an logs delivery destination. The destination can be
-    # CloudWatch Logs, Amazon S3, or Kinesis Data Firehose. Only some Amazon
-    # Web Services services support being configured as a delivery source.
-    # These services are listed in [Enable logging from Amazon Web Services
-    # services.][3]
+    # CloudWatch Logs, Amazon S3, or Firehose. Only some Amazon Web Services
+    # services support being configured as a delivery source. These services
+    # are listed in [Enable logging from Amazon Web Services services.][3]
     #
     #
     #
@@ -2573,10 +2572,9 @@ module Aws::CloudWatchLogs
     #
     # A delivery source represents an Amazon Web Services resource that
     # sends logs to an logs delivery destination. The destination can be
-    # CloudWatch Logs, Amazon S3, or Kinesis Data Firehose. Only some Amazon
-    # Web Services services support being configured as a delivery source.
-    # These services are listed in [Enable logging from Amazon Web Services
-    # services.][3]
+    # CloudWatch Logs, Amazon S3, or Firehose. Only some Amazon Web Services
+    # services support being configured as a delivery source. These services
+    # are listed in [Enable logging from Amazon Web Services services.][3]
     #
     # You need to specify the delivery `id` in this operation. You can find
     # the IDs of the deliveries in your account with the
@@ -3141,7 +3139,8 @@ module Aws::CloudWatchLogs
     #   resp.anomalies[0].histogram #=> Hash
     #   resp.anomalies[0].histogram["Time"] #=> Integer
     #   resp.anomalies[0].log_samples #=> Array
-    #   resp.anomalies[0].log_samples[0] #=> String
+    #   resp.anomalies[0].log_samples[0].timestamp #=> Integer
+    #   resp.anomalies[0].log_samples[0].message #=> String
     #   resp.anomalies[0].pattern_tokens #=> Array
     #   resp.anomalies[0].pattern_tokens[0].dynamic_token_position #=> Integer
     #   resp.anomalies[0].pattern_tokens[0].is_dynamic #=> Boolean
@@ -3348,25 +3347,24 @@ module Aws::CloudWatchLogs
     # from CloudWatch Logs to other Amazon Web Services services.
     # Account-level subscription filter policies apply to both existing log
     # groups and log groups that are created later in this account.
-    # Supported destinations are Kinesis Data Streams, Kinesis Data
-    # Firehose, and Lambda. When log events are sent to the receiving
-    # service, they are Base64 encoded and compressed with the GZIP format.
+    # Supported destinations are Kinesis Data Streams, Firehose, and Lambda.
+    # When log events are sent to the receiving service, they are Base64
+    # encoded and compressed with the GZIP format.
     #
     # The following destinations are supported for subscription filters:
     #
     # * An Kinesis Data Streams data stream in the same account as the
     #   subscription policy, for same-account delivery.
     #
-    # * An Kinesis Data Firehose data stream in the same account as the
-    #   subscription policy, for same-account delivery.
+    # * An Firehose data stream in the same account as the subscription
+    #   policy, for same-account delivery.
     #
     # * A Lambda function in the same account as the subscription policy,
     #   for same-account delivery.
     #
     # * A logical destination in a different account created with
     #   [PutDestination][5], for cross-account delivery. Kinesis Data
-    #   Streams and Kinesis Data Firehose are supported as logical
-    #   destinations.
+    #   Streams and Firehose are supported as logical destinations.
     #
     # Each account can have one account-level subscription filter policy. If
     # you are updating an existing filter, you must specify the correct name
@@ -3403,8 +3401,7 @@ module Aws::CloudWatchLogs
     #     `FindingsDestination` object. You can optionally use that
     #     `FindingsDestination` object to list one or more destinations to
     #     send audit findings to. If you specify destinations such as log
-    #     groups, Kinesis Data Firehose streams, and S3 buckets, they must
-    #     already exist.
+    #     groups, Firehose streams, and S3 buckets, they must already exist.
     #
     #   * The second block must include both a `DataIdentifer` array and an
     #     `Operation` property with an `Deidentify` action. The
@@ -3440,16 +3437,15 @@ module Aws::CloudWatchLogs
     #     * An Kinesis Data Streams data stream in the same account as the
     #       subscription policy, for same-account delivery.
     #
-    #     * An Kinesis Data Firehose data stream in the same account as the
-    #       subscription policy, for same-account delivery.
+    #     * An Firehose data stream in the same account as the subscription
+    #       policy, for same-account delivery.
     #
     #     * A Lambda function in the same account as the subscription policy,
     #       for same-account delivery.
     #
     #     * A logical destination in a different account created with
     #       [PutDestination][2], for cross-account delivery. Kinesis Data
-    #       Streams and Kinesis Data Firehose are supported as logical
-    #       destinations.
+    #       Streams and Firehose are supported as logical destinations.
     #
     #   * **RoleArn** The ARN of an IAM role that grants CloudWatch Logs
     #     permissions to deliver ingested log events to the destination
@@ -3582,8 +3578,7 @@ module Aws::CloudWatchLogs
     #     `FindingsDestination` object. You can optionally use that
     #     `FindingsDestination` object to list one or more destinations to
     #     send audit findings to. If you specify destinations such as log
-    #     groups, Kinesis Data Firehose streams, and S3 buckets, they must
-    #     already exist.
+    #     groups, Firehose streams, and S3 buckets, they must already exist.
     #
     #   * The second block must include both a `DataIdentifer` array and an
     #     `Operation` property with an `Deidentify` action. The
@@ -3641,8 +3636,7 @@ module Aws::CloudWatchLogs
     # Creates or updates a logical *delivery destination*. A delivery
     # destination is an Amazon Web Services resource that represents an
     # Amazon Web Services service that logs can be sent to. CloudWatch Logs,
-    # Amazon S3, and Kinesis Data Firehose are supported as logs delivery
-    # destinations.
+    # Amazon S3, and Firehose are supported as logs delivery destinations.
     #
     # To configure logs delivery between a supported Amazon Web Services
     # service and a destination, you must do the following:
@@ -3812,7 +3806,7 @@ module Aws::CloudWatchLogs
     # Creates or updates a logical *delivery source*. A delivery source
     # represents an Amazon Web Services resource that sends logs to an logs
     # delivery destination. The destination can be CloudWatch Logs, Amazon
-    # S3, or Kinesis Data Firehose.
+    # S3, or Firehose.
     #
     # To configure logs delivery between a delivery destination and an
     # Amazon Web Services service that is supported as a delivery source,
@@ -3866,8 +3860,15 @@ module Aws::CloudWatchLogs
     #   `arn:aws:workmail:us-east-1:123456789012:organization/m-1234EXAMPLEabcd1234abcd1234abcd1234`
     #
     # @option params [required, String] :log_type
-    #   Defines the type of log that the source is sending. For Amazon
-    #   CodeWhisperer, the valid value is `EVENT_LOGS`.
+    #   Defines the type of log that the source is sending.
+    #
+    #   * For Amazon CodeWhisperer, the valid value is `EVENT_LOGS`.
+    #
+    #   * For IAM Identity Centerr, the valid value is `ERROR_LOGS`.
+    #
+    #   * For Amazon WorkMail, the valid values are `ACCESS_CONTROL_LOGS`,
+    #     `AUTHENTICATION_LOGS`, `WORKMAIL_AVAILABILITY_PROVIDER_LOGS`, and
+    #     `WORKMAIL_MAILBOX_ACCESS_LOGS`.
     #
     # @option params [Hash<String,String>] :tags
     #   An optional list of key-value pairs to associate with the resource.
@@ -4450,8 +4451,7 @@ module Aws::CloudWatchLogs
     #
     # * A logical destination created with [PutDestination][2] that belongs
     #   to a different account, for cross-account delivery. We currently
-    #   support Kinesis Data Streams and Kinesis Data Firehose as logical
-    #   destinations.
+    #   support Kinesis Data Streams and Firehose as logical destinations.
     #
     # * An Amazon Kinesis Data Firehose delivery stream that belongs to the
     #   same account as the subscription filter, for same-account delivery.
@@ -5349,7 +5349,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

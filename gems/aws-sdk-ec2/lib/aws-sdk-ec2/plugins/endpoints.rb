@@ -642,6 +642,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DescribeLocalGateways.build(context)
           when :describe_locked_snapshots
             Aws::EC2::Endpoints::DescribeLockedSnapshots.build(context)
+          when :describe_mac_hosts
+            Aws::EC2::Endpoints::DescribeMacHosts.build(context)
           when :describe_managed_prefix_lists
             Aws::EC2::Endpoints::DescribeManagedPrefixLists.build(context)
           when :describe_moving_addresses

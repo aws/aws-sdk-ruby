@@ -27776,6 +27776,69 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes the specified EC2 Mac Dedicated Host or all of your EC2 Mac
+    # Dedicated Hosts.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters.
+    #
+    #   * `availability-zone` - The Availability Zone of the EC2 Mac Dedicated
+    #     Host.
+    #
+    #   * `instance-type` - The instance type size that the EC2 Mac Dedicated
+    #     Host is configured to support.
+    #
+    # @option params [Array<String>] :host_ids
+    #   The IDs of the EC2 Mac Dedicated Hosts.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned `nextToken` value. This value can be between 5 and
+    #   500. If `maxResults` is given a larger value than 500, you receive an
+    #   error.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results.
+    #
+    # @return [Types::DescribeMacHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMacHostsResult#mac_hosts #mac_hosts} => Array&lt;Types::MacHost&gt;
+    #   * {Types::DescribeMacHostsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_mac_hosts({
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     host_ids: ["DedicatedHostId"],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.mac_hosts #=> Array
+    #   resp.mac_hosts[0].host_id #=> String
+    #   resp.mac_hosts[0].mac_os_latest_supported_versions #=> Array
+    #   resp.mac_hosts[0].mac_os_latest_supported_versions[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMacHosts AWS API Documentation
+    #
+    # @overload describe_mac_hosts(params = {})
+    # @param [Hash] params ({})
+    def describe_mac_hosts(params = {}, options = {})
+      req = build_request(:describe_mac_hosts, params)
+      req.send_request(options)
+    end
+
     # Describes your managed prefix lists and any Amazon Web
     # Services-managed prefix lists.
     #
@@ -58918,7 +58981,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.443.0'
+      context[:gem_version] = '1.444.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

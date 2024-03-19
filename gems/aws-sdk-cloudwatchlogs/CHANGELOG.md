@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2024-03-19)
+------------------
+
+* Feature - Update LogSamples field in Anomaly model to be a list of LogEvent
+
 1.79.0 (2024-02-06)
 ------------------
 

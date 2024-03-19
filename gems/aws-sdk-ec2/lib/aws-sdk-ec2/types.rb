@@ -22086,6 +22086,60 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `availability-zone` - The Availability Zone of the EC2 Mac
+    #     Dedicated Host.
+    #
+    #   * `instance-type` - The instance type size that the EC2 Mac
+    #     Dedicated Host is configured to support.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] host_ids
+    #   The IDs of the EC2 Mac Dedicated Hosts.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned `nextToken` value. This value can be between 5 and
+    #   500. If `maxResults` is given a larger value than 500, you receive
+    #   an error.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMacHostsRequest AWS API Documentation
+    #
+    class DescribeMacHostsRequest < Struct.new(
+      :filters,
+      :host_ids,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mac_hosts
+    #   Information about the EC2 Mac Dedicated Hosts.
+    #   @return [Array<Types::MacHost>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMacHostsResult AWS API Documentation
+    #
+    class DescribeMacHostsResult < Struct.new(
+      :mac_hosts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -46199,6 +46253,26 @@ module Aws::EC2
       :lock_created_on,
       :lock_duration_start_time,
       :lock_expires_on)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the EC2 Mac Dedicated Host.
+    #
+    # @!attribute [rw] host_id
+    #   The EC2 Mac Dedicated Host ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_os_latest_supported_versions
+    #   The latest macOS versions that the EC2 Mac Dedicated Host can launch
+    #   without being upgraded.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MacHost AWS API Documentation
+    #
+    class MacHost < Struct.new(
+      :host_id,
+      :mac_os_latest_supported_versions)
       SENSITIVE = []
       include Aws::Structure
     end

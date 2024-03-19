@@ -893,12 +893,9 @@ module Aws::Finspace
     #   @return [String]
     #
     # @!attribute [rw] az_mode
-    #   The number of availability zones you want to assign per cluster.
-    #   This can be one of the following
-    #
-    #   * `SINGLE` – Assigns one availability zone per cluster.
-    #
-    #   * `MULTI` – Assigns all the availability zones per cluster.
+    #   The number of availability zones you want to assign per volume.
+    #   Currently, FinSpace only supports `SINGLE` for volumes. This places
+    #   dataview in a single AZ.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_id
@@ -922,6 +919,26 @@ module Aws::Finspace
     #   The option to specify whether you want to apply all the future
     #   additions and corrections automatically to the dataview, when you
     #   ingest new changesets. The default value is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] read_write
+    #   The option to specify whether you want to make the dataview writable
+    #   to perform database maintenance. The following are some
+    #   considerations related to writable dataviews.  
+    #
+    #   * You cannot create partial writable dataviews. When you create
+    #     writeable dataviews you must provide the entire database path.
+    #
+    #   * You cannot perform updates on a writeable dataview. Hence,
+    #     `autoUpdate` must be set as **False** if `readWrite` is **True**
+    #     for a dataview.
+    #
+    #   * You must also use a unique volume for creating a writeable
+    #     dataview. So, if you choose a volume that is already in use by
+    #     another dataview, the dataview creation fails.
+    #
+    #   * Once you create a dataview as writeable, you cannot change it to
+    #     read-only. So, you cannot update the `readWrite` parameter later.
     #   @return [Boolean]
     #
     # @!attribute [rw] description
@@ -951,6 +968,7 @@ module Aws::Finspace
       :changeset_id,
       :segment_configurations,
       :auto_update,
+      :read_write,
       :description,
       :tags,
       :client_token)
@@ -972,12 +990,9 @@ module Aws::Finspace
     #   @return [String]
     #
     # @!attribute [rw] az_mode
-    #   The number of availability zones you want to assign per cluster.
-    #   This can be one of the following
-    #
-    #   * `SINGLE` – Assigns one availability zone per cluster.
-    #
-    #   * `MULTI` – Assigns all the availability zones per cluster.
+    #   The number of availability zones you want to assign per volume.
+    #   Currently, FinSpace only supports `SINGLE` for volumes. This places
+    #   dataview in a single AZ.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_id
@@ -1004,6 +1019,11 @@ module Aws::Finspace
     #   The option to select whether you want to apply all the future
     #   additions and corrections automatically to the dataview when you
     #   ingest new changesets. The default value is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] read_write
+    #   Returns True if the dataview is created as writeable and False
+    #   otherwise.
     #   @return [Boolean]
     #
     # @!attribute [rw] created_timestamp
@@ -1042,6 +1062,7 @@ module Aws::Finspace
       :segment_configurations,
       :description,
       :auto_update,
+      :read_write,
       :created_timestamp,
       :last_modified_timestamp,
       :status)
@@ -1146,6 +1167,26 @@ module Aws::Finspace
     # @!attribute [rw] host_type
     #   The memory and CPU capabilities of the scaling group host on which
     #   FinSpace Managed kdb clusters will be placed.
+    #
+    #   You can add one of the following values:
+    #
+    #   * `kx.sg.4xlarge` – The host type with a configuration of 108 GiB
+    #     memory and 16 vCPUs.
+    #
+    #   * `kx.sg.8xlarge` – The host type with a configuration of 216 GiB
+    #     memory and 32 vCPUs.
+    #
+    #   * `kx.sg.16xlarge` – The host type with a configuration of 432 GiB
+    #     memory and 64 vCPUs.
+    #
+    #   * `kx.sg.32xlarge` – The host type with a configuration of 864 GiB
+    #     memory and 128 vCPUs.
+    #
+    #   * `kx.sg1.16xlarge` – The host type with a configuration of 1949 GiB
+    #     memory and 64 vCPUs.
+    #
+    #   * `kx.sg1.24xlarge` – The host type with a configuration of 2948 GiB
+    #     memory and 96 vCPUs.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_id
@@ -1339,8 +1380,9 @@ module Aws::Finspace
     #   @return [Types::KxNAS1Configuration]
     #
     # @!attribute [rw] az_mode
-    #   The number of availability zones you want to assign per cluster.
-    #   Currently, FinSpace only support `SINGLE` for volumes.
+    #   The number of availability zones you want to assign per volume.
+    #   Currently, FinSpace only supports `SINGLE` for volumes. This places
+    #   dataview in a single AZ.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_ids
@@ -1418,8 +1460,9 @@ module Aws::Finspace
     #   @return [String]
     #
     # @!attribute [rw] az_mode
-    #   The number of availability zones you want to assign per cluster.
-    #   Currently, FinSpace only support `SINGLE` for volumes.
+    #   The number of availability zones you want to assign per volume.
+    #   Currently, FinSpace only supports `SINGLE` for volumes. This places
+    #   dataview in a single AZ.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2324,12 +2367,9 @@ module Aws::Finspace
     #   @return [String]
     #
     # @!attribute [rw] az_mode
-    #   The number of availability zones you want to assign per cluster.
-    #   This can be one of the following
-    #
-    #   * `SINGLE` – Assigns one availability zone per cluster.
-    #
-    #   * `MULTI` – Assigns all the availability zones per cluster.
+    #   The number of availability zones you want to assign per volume.
+    #   Currently, FinSpace only supports `SINGLE` for volumes. This places
+    #   dataview in a single AZ.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_id
@@ -2362,6 +2402,11 @@ module Aws::Finspace
     #   The option to specify whether you want to apply all the future
     #   additions and corrections automatically to the dataview when new
     #   changesets are ingested. The default value is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] read_write
+    #   Returns True if the dataview is created as writeable and False
+    #   otherwise.
     #   @return [Boolean]
     #
     # @!attribute [rw] environment_id
@@ -2409,6 +2454,7 @@ module Aws::Finspace
       :active_versions,
       :description,
       :auto_update,
+      :read_write,
       :environment_id,
       :created_timestamp,
       :last_modified_timestamp,
@@ -2555,6 +2601,26 @@ module Aws::Finspace
     # @!attribute [rw] host_type
     #   The memory and CPU capabilities of the scaling group host on which
     #   FinSpace Managed kdb clusters will be placed.
+    #
+    #   It can have one of the following values:
+    #
+    #   * `kx.sg.4xlarge` – The host type with a configuration of 108 GiB
+    #     memory and 16 vCPUs.
+    #
+    #   * `kx.sg.8xlarge` – The host type with a configuration of 216 GiB
+    #     memory and 32 vCPUs.
+    #
+    #   * `kx.sg.16xlarge` – The host type with a configuration of 432 GiB
+    #     memory and 64 vCPUs.
+    #
+    #   * `kx.sg.32xlarge` – The host type with a configuration of 864 GiB
+    #     memory and 128 vCPUs.
+    #
+    #   * `kx.sg1.16xlarge` – The host type with a configuration of 1949 GiB
+    #     memory and 64 vCPUs.
+    #
+    #   * `kx.sg1.24xlarge` – The host type with a configuration of 2948 GiB
+    #     memory and 96 vCPUs.
     #   @return [String]
     #
     # @!attribute [rw] clusters
@@ -2749,8 +2815,9 @@ module Aws::Finspace
     #   @return [String]
     #
     # @!attribute [rw] az_mode
-    #   The number of availability zones you want to assign per cluster.
-    #   Currently, FinSpace only support `SINGLE` for volumes.
+    #   The number of availability zones you want to assign per volume.
+    #   Currently, FinSpace only supports `SINGLE` for volumes. This places
+    #   dataview in a single AZ.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_ids
@@ -3335,12 +3402,9 @@ module Aws::Finspace
     #   @return [String]
     #
     # @!attribute [rw] az_mode
-    #   The number of availability zones you want to assign per cluster.
-    #   This can be one of the following
-    #
-    #   * `SINGLE` – Assigns one availability zone per cluster.
-    #
-    #   * `MULTI` – Assigns all the availability zones per cluster.
+    #   The number of availability zones you want to assign per volume.
+    #   Currently, FinSpace only supports `SINGLE` for volumes. This places
+    #   dataview in a single AZ.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_id
@@ -3377,6 +3441,11 @@ module Aws::Finspace
     #   ingest new changesets. The default value is false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] read_write
+    #   Returns True if the dataview is created as writeable and False
+    #   otherwise.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] created_timestamp
     #   The timestamp at which the dataview list entry was created in
     #   FinSpace. The value is determined as epoch time in milliseconds. For
@@ -3409,6 +3478,7 @@ module Aws::Finspace
       :status,
       :description,
       :auto_update,
+      :read_write,
       :created_timestamp,
       :last_modified_timestamp,
       :status_reason)
@@ -3432,11 +3502,20 @@ module Aws::Finspace
     #   The name of the volume where you want to add data.
     #   @return [String]
     #
+    # @!attribute [rw] on_demand
+    #   Enables on-demand caching on the selected database path when a
+    #   particular file or a column of the database is accessed. When on
+    #   demand caching is **True**, dataviews perform minimal loading of
+    #   files on the filesystem as needed. When it is set to **False**,
+    #   everything is cached. The default value is **False**.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxDataviewSegmentConfiguration AWS API Documentation
     #
     class KxDataviewSegmentConfiguration < Struct.new(
       :db_paths,
-      :volume_name)
+      :volume_name,
+      :on_demand)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3680,6 +3759,26 @@ module Aws::Finspace
     # @!attribute [rw] host_type
     #   The memory and CPU capabilities of the scaling group host on which
     #   FinSpace Managed kdb clusters will be placed.
+    #
+    #   You can add one of the following values:
+    #
+    #   * `kx.sg.4xlarge` – The host type with a configuration of 108 GiB
+    #     memory and 16 vCPUs.
+    #
+    #   * `kx.sg.8xlarge` – The host type with a configuration of 216 GiB
+    #     memory and 32 vCPUs.
+    #
+    #   * `kx.sg.16xlarge` – The host type with a configuration of 432 GiB
+    #     memory and 64 vCPUs.
+    #
+    #   * `kx.sg.32xlarge` – The host type with a configuration of 864 GiB
+    #     memory and 128 vCPUs.
+    #
+    #   * `kx.sg1.16xlarge` – The host type with a configuration of 1949 GiB
+    #     memory and 64 vCPUs.
+    #
+    #   * `kx.sg1.24xlarge` – The host type with a configuration of 2948 GiB
+    #     memory and 96 vCPUs.
     #   @return [String]
     #
     # @!attribute [rw] clusters
@@ -3848,8 +3947,9 @@ module Aws::Finspace
     #   @return [String]
     #
     # @!attribute [rw] az_mode
-    #   The number of availability zones assigned to the volume. Currently,
-    #   only `SINGLE` is supported.
+    #   The number of availability zones you want to assign per volume.
+    #   Currently, FinSpace only supports `SINGLE` for volumes. This places
+    #   dataview in a single AZ.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_ids
@@ -4878,12 +4978,9 @@ module Aws::Finspace
     #   @return [String]
     #
     # @!attribute [rw] az_mode
-    #   The number of availability zones you want to assign per cluster.
-    #   This can be one of the following
-    #
-    #   * `SINGLE` – Assigns one availability zone per cluster.
-    #
-    #   * `MULTI` – Assigns all the availability zones per cluster.
+    #   The number of availability zones you want to assign per volume.
+    #   Currently, FinSpace only supports `SINGLE` for volumes. This places
+    #   dataview in a single AZ.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_id
@@ -4923,6 +5020,11 @@ module Aws::Finspace
     #   changesets are ingested. The default value is false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] read_write
+    #   Returns True if the dataview is created as writeable and False
+    #   otherwise.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] description
     #   A description of the dataview.
     #   @return [String]
@@ -4954,6 +5056,7 @@ module Aws::Finspace
       :active_versions,
       :status,
       :auto_update,
+      :read_write,
       :description,
       :created_timestamp,
       :last_modified_timestamp)
@@ -5366,8 +5469,9 @@ module Aws::Finspace
     #   @return [Time]
     #
     # @!attribute [rw] az_mode
-    #   The number of availability zones you want to assign per cluster.
-    #   Currently, FinSpace only support `SINGLE` for volumes.
+    #   The number of availability zones you want to assign per volume.
+    #   Currently, FinSpace only supports `SINGLE` for volumes. This places
+    #   dataview in a single AZ.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_ids

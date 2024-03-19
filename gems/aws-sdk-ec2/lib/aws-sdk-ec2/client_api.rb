@@ -938,6 +938,9 @@ module Aws::EC2
     DescribeLockedSnapshotsMaxResults = Shapes::IntegerShape.new(name: 'DescribeLockedSnapshotsMaxResults')
     DescribeLockedSnapshotsRequest = Shapes::StructureShape.new(name: 'DescribeLockedSnapshotsRequest')
     DescribeLockedSnapshotsResult = Shapes::StructureShape.new(name: 'DescribeLockedSnapshotsResult')
+    DescribeMacHostsRequest = Shapes::StructureShape.new(name: 'DescribeMacHostsRequest')
+    DescribeMacHostsRequestMaxResults = Shapes::IntegerShape.new(name: 'DescribeMacHostsRequestMaxResults')
+    DescribeMacHostsResult = Shapes::StructureShape.new(name: 'DescribeMacHostsResult')
     DescribeManagedPrefixListsRequest = Shapes::StructureShape.new(name: 'DescribeManagedPrefixListsRequest')
     DescribeManagedPrefixListsResult = Shapes::StructureShape.new(name: 'DescribeManagedPrefixListsResult')
     DescribeMovingAddressesMaxResults = Shapes::IntegerShape.new(name: 'DescribeMovingAddressesMaxResults')
@@ -2026,6 +2029,9 @@ module Aws::EC2
     LockedSnapshotsInfoList = Shapes::ListShape.new(name: 'LockedSnapshotsInfoList')
     LogDestinationType = Shapes::StringShape.new(name: 'LogDestinationType')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MacHost = Shapes::StructureShape.new(name: 'MacHost')
+    MacHostList = Shapes::ListShape.new(name: 'MacHostList')
+    MacOSVersionStringList = Shapes::ListShape.new(name: 'MacOSVersionStringList')
     MaintenanceDetails = Shapes::StructureShape.new(name: 'MaintenanceDetails')
     ManagedPrefixList = Shapes::StructureShape.new(name: 'ManagedPrefixList')
     ManagedPrefixListSet = Shapes::ListShape.new(name: 'ManagedPrefixListSet')
@@ -6990,6 +6996,16 @@ module Aws::EC2
     DescribeLockedSnapshotsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeLockedSnapshotsResult.struct_class = Types::DescribeLockedSnapshotsResult
 
+    DescribeMacHostsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeMacHostsRequest.add_member(:host_ids, Shapes::ShapeRef.new(shape: RequestHostIdList, location_name: "HostId"))
+    DescribeMacHostsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeMacHostsRequestMaxResults, location_name: "MaxResults"))
+    DescribeMacHostsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeMacHostsRequest.struct_class = Types::DescribeMacHostsRequest
+
+    DescribeMacHostsResult.add_member(:mac_hosts, Shapes::ShapeRef.new(shape: MacHostList, location_name: "macHostSet"))
+    DescribeMacHostsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeMacHostsResult.struct_class = Types::DescribeMacHostsResult
+
     DescribeManagedPrefixListsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeManagedPrefixListsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeManagedPrefixListsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PrefixListMaxResults, location_name: "MaxResults"))
@@ -11202,6 +11218,14 @@ module Aws::EC2
     LockedSnapshotsInfo.struct_class = Types::LockedSnapshotsInfo
 
     LockedSnapshotsInfoList.member = Shapes::ShapeRef.new(shape: LockedSnapshotsInfo, location_name: "item")
+
+    MacHost.add_member(:host_id, Shapes::ShapeRef.new(shape: DedicatedHostId, location_name: "hostId"))
+    MacHost.add_member(:mac_os_latest_supported_versions, Shapes::ShapeRef.new(shape: MacOSVersionStringList, location_name: "macOSLatestSupportedVersionSet"))
+    MacHost.struct_class = Types::MacHost
+
+    MacHostList.member = Shapes::ShapeRef.new(shape: MacHost, location_name: "item")
+
+    MacOSVersionStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
     MaintenanceDetails.add_member(:pending_maintenance, Shapes::ShapeRef.new(shape: String, location_name: "pendingMaintenance"))
     MaintenanceDetails.add_member(:maintenance_auto_applied_after, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "maintenanceAutoAppliedAfter"))
@@ -18276,6 +18300,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeLockedSnapshotsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLockedSnapshotsResult)
+      end)
+
+      api.add_operation(:describe_mac_hosts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMacHosts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMacHostsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMacHostsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_managed_prefix_lists, Seahorse::Model::Operation.new.tap do |o|

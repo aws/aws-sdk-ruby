@@ -183,7 +183,8 @@ module Aws
                                      segment_configurations: Array[
                                        {
                                          db_paths: Array[::String],
-                                         volume_name: ::String
+                                         volume_name: ::String,
+                                         on_demand: bool?
                                        },
                                      ]?
                                    }?
@@ -276,6 +277,7 @@ module Aws
         def segment_configurations: () -> ::Array[Types::KxDataviewSegmentConfiguration]
         def description: () -> ::String
         def auto_update: () -> bool
+        def read_write: () -> bool
         def created_timestamp: () -> ::Time
         def last_modified_timestamp: () -> ::Time
         def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "FAILED" | "DELETING")
@@ -291,10 +293,12 @@ module Aws
                                 ?segment_configurations: Array[
                                   {
                                     db_paths: Array[::String],
-                                    volume_name: ::String
+                                    volume_name: ::String,
+                                    on_demand: bool?
                                   },
                                 ],
                                 ?auto_update: bool,
+                                ?read_write: bool,
                                 ?description: ::String,
                                 ?tags: Hash[::String, ::String],
                                 client_token: ::String
@@ -582,6 +586,7 @@ module Aws
         def active_versions: () -> ::Array[Types::KxDataviewActiveVersion]
         def description: () -> ::String
         def auto_update: () -> bool
+        def read_write: () -> bool
         def environment_id: () -> ::String
         def created_timestamp: () -> ::Time
         def last_modified_timestamp: () -> ::Time
@@ -915,7 +920,8 @@ module Aws
                                                segment_configurations: Array[
                                                  {
                                                    db_paths: Array[::String],
-                                                   volume_name: ::String
+                                                   volume_name: ::String,
+                                                   on_demand: bool?
                                                  },
                                                ]?
                                              }?
@@ -955,6 +961,7 @@ module Aws
         def active_versions: () -> ::Array[Types::KxDataviewActiveVersion]
         def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "FAILED" | "DELETING")
         def auto_update: () -> bool
+        def read_write: () -> bool
         def description: () -> ::String
         def created_timestamp: () -> ::Time
         def last_modified_timestamp: () -> ::Time
@@ -969,7 +976,8 @@ module Aws
                                 ?segment_configurations: Array[
                                   {
                                     db_paths: Array[::String],
-                                    volume_name: ::String
+                                    volume_name: ::String,
+                                    on_demand: bool?
                                   },
                                 ],
                                 client_token: ::String

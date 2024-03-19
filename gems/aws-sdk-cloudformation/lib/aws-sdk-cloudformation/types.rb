@@ -781,19 +781,19 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ `AWS::IAM::AccessKey` ][1]
+    #     * [ AWS::IAM::AccessKey][1]
     #
-    #     * [ `AWS::IAM::Group` ][2]
+    #     * [ AWS::IAM::Group][2]
     #
-    #     * [ `AWS::IAM::InstanceProfile` ][3]
+    #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ `AWS::IAM::Policy` ][4]
+    #     * [ AWS::IAM::Policy][4]
     #
-    #     * [ `AWS::IAM::Role` ][5]
+    #     * [ AWS::IAM::Role][5]
     #
-    #     * [ `AWS::IAM::User` ][6]
+    #     * [ AWS::IAM::User][6]
     #
-    #     * [ `AWS::IAM::UserToGroupAddition` ][7]
+    #     * [AWS::IAM::UserToGroupAddition][7]
     #
     #     For more information, see [Acknowledging IAM resources in
     #     CloudFormation templates][8].
@@ -809,9 +809,9 @@ module Aws::CloudFormation
     #     your stack template contains one or more macros, and you choose to
     #     create a stack directly from the processed template, without first
     #     reviewing the resulting changes in a change set, you must
-    #     acknowledge this capability. This includes the [ `AWS::Include`
-    #     ][9] and [ `AWS::Serverless` ][10] transforms, which are macros
-    #     hosted by CloudFormation.
+    #     acknowledge this capability. This includes the [AWS::Include][9]
+    #     and [AWS::Serverless][10] transforms, which are macros hosted by
+    #     CloudFormation.
     #
     #     <note markdown="1"> This capacity doesn't apply to creating change sets, and
     #     specifying it when creating change sets has no effect.
@@ -957,8 +957,8 @@ module Aws::CloudFormation
     # @!attribute [rw] on_stack_failure
     #   Determines what action will be taken if stack creation fails. If
     #   this parameter is specified, the `DisableRollback` parameter to the
-    #   [ `ExecuteChangeSet` ][1] API operation must not be specified. This
-    #   must be one of these values:
+    #   [ExecuteChangeSet][1] API operation must not be specified. This must
+    #   be one of these values:
     #
     #   * `DELETE` - Deletes the change set if the stack creation fails.
     #     This is only valid when the `ChangeSetType` parameter is set to
@@ -967,11 +967,11 @@ module Aws::CloudFormation
     #
     #   * `DO_NOTHING` - if the stack creation fails, do nothing. This is
     #     equivalent to specifying `true` for the `DisableRollback`
-    #     parameter to the [ `ExecuteChangeSet` ][1] API operation.
+    #     parameter to the [ExecuteChangeSet][1] API operation.
     #
     #   * `ROLLBACK` - if the stack creation fails, roll back the stack.
     #     This is equivalent to specifying `false` for the `DisableRollback`
-    #     parameter to the [ `ExecuteChangeSet` ][1] API operation.
+    #     parameter to the [ExecuteChangeSet][1] API operation.
     #
     #   For nested stacks, when the `OnStackFailure` parameter is set to
     #   `DELETE` for the change set for the parent stack, any failure in a
@@ -1135,8 +1135,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] parameters
     #   A list of `Parameter` structures that specify input parameters for
-    #   the stack. For more information, see the [ `Parameter` ][1] data
-    #   type.
+    #   the stack. For more information, see the [Parameter][1] data type.
     #
     #
     #
@@ -1198,19 +1197,19 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ `AWS::IAM::AccessKey` ][1]
+    #     * [AWS::IAM::AccessKey][1]
     #
-    #     * [ `AWS::IAM::Group` ][2]
+    #     * [AWS::IAM::Group][2]
     #
-    #     * [ `AWS::IAM::InstanceProfile` ][3]
+    #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ `AWS::IAM::Policy` ][4]
+    #     * [AWS::IAM::Policy][4]
     #
-    #     * [ `AWS::IAM::Role` ][5]
+    #     * [AWS::IAM::Role][5]
     #
-    #     * [ `AWS::IAM::User` ][6]
+    #     * [AWS::IAM::User][6]
     #
-    #     * [ `AWS::IAM::UserToGroupAddition` ][7]
+    #     * [AWS::IAM::UserToGroupAddition][7]
     #
     #     For more information, see [Acknowledging IAM Resources in
     #     CloudFormation Templates][8].
@@ -1226,9 +1225,9 @@ module Aws::CloudFormation
     #     your stack template contains one or more macros, and you choose to
     #     create a stack directly from the processed template, without first
     #     reviewing the resulting changes in a change set, you must
-    #     acknowledge this capability. This includes the [ `AWS::Include`
-    #     ][9] and [ `AWS::Serverless` ][10] transforms, which are macros
-    #     hosted by CloudFormation.
+    #     acknowledge this capability. This includes the [AWS::Include][9]
+    #     and [AWS::Serverless][10] transforms, which are macros hosted by
+    #     CloudFormation.
     #
     #     If you want to create a stack from a stack template that contains
     #     macros *and* nested stacks, you must create the stack directly
@@ -1470,8 +1469,8 @@ module Aws::CloudFormation
     #   stack instance aren't updated, but retain their overridden value.
     #
     #   You can only override the parameter *values* that are specified in
-    #   the stack set; to add or delete a parameter itself, use [
-    #   `UpdateStackSet` ][1] to update the stack set template.
+    #   the stack set; to add or delete a parameter itself, use
+    #   [UpdateStackSet][1] to update the stack set template.
     #
     #
     #
@@ -1648,19 +1647,19 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ `AWS::IAM::AccessKey` ][1]
+    #     * [AWS::IAM::AccessKey][1]
     #
-    #     * [ `AWS::IAM::Group` ][2]
+    #     * [AWS::IAM::Group][2]
     #
-    #     * [ `AWS::IAM::InstanceProfile` ][3]
+    #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ `AWS::IAM::Policy` ][4]
+    #     * [AWS::IAM::Policy][4]
     #
-    #     * [ `AWS::IAM::Role` ][5]
+    #     * [AWS::IAM::Role][5]
     #
-    #     * [ `AWS::IAM::User` ][6]
+    #     * [AWS::IAM::User][6]
     #
-    #     * [ `AWS::IAM::UserToGroupAddition` ][7]
+    #     * [AWS::IAM::UserToGroupAddition][7]
     #
     #     For more information, see [Acknowledging IAM Resources in
     #     CloudFormation Templates][8].
@@ -1676,11 +1675,11 @@ module Aws::CloudFormation
     #     Processing on Templates][9].
     #
     #     Stack sets with service-managed permissions don't currently
-    #     support the use of macros in templates. (This includes the [
-    #     `AWS::Include` ][10] and [ `AWS::Serverless` ][11] transforms,
-    #     which are macros hosted by CloudFormation.) Even if you specify
-    #     this capability for a stack set with service-managed permissions,
-    #     if you reference a macro in your template the stack set operation
+    #     support the use of macros in templates. (This includes the
+    #     [AWS::Include][10] and [AWS::Serverless][11] transforms, which are
+    #     macros hosted by CloudFormation.) Even if you specify this
+    #     capability for a stack set with service-managed permissions, if
+    #     you reference a macro in your template the stack set operation
     #     will fail.
     #
     #
@@ -2416,7 +2415,7 @@ module Aws::CloudFormation
     # @!attribute [rw] parameters
     #   A list of `Parameter` structures that describes the input parameters
     #   and their values used to create the change set. For more
-    #   information, see the [ `Parameter` ][1] data type.
+    #   information, see the [Parameter][1] data type.
     #
     #
     #
@@ -2495,8 +2494,8 @@ module Aws::CloudFormation
     # @!attribute [rw] on_stack_failure
     #   Determines what action will be taken if stack creation fails. When
     #   this parameter is specified, the `DisableRollback` parameter to the
-    #   [ `ExecuteChangeSet` ][1] API operation must not be specified. This
-    #   must be one of these values:
+    #   [ExecuteChangeSet][1] API operation must not be specified. This must
+    #   be one of these values:
     #
     #   * `DELETE` - Deletes the change set if the stack creation fails.
     #     This is only valid when the `ChangeSetType` parameter is set to
@@ -2505,11 +2504,11 @@ module Aws::CloudFormation
     #
     #   * `DO_NOTHING` - if the stack creation fails, do nothing. This is
     #     equivalent to specifying `true` for the `DisableRollback`
-    #     parameter to the [ `ExecuteChangeSet` ][1] API operation.
+    #     parameter to the [ExecuteChangeSet][1] API operation.
     #
     #   * `ROLLBACK` - if the stack creation fails, roll back the stack.
     #     This is equivalent to specifying `false` for the `DisableRollback`
-    #     parameter to the [ `ExecuteChangeSet` ][1] API operation.
+    #     parameter to the [ExecuteChangeSet][1] API operation.
     #
     #
     #
@@ -3471,7 +3470,7 @@ module Aws::CloudFormation
     #
     #   If the extension is a public third-party type you have activated
     #   with a type name alias, CloudFormation returns the type name alias.
-    #   For more information, see [ `ActivateType` ][1].
+    #   For more information, see [ActivateType][1].
     #
     #
     #
@@ -3485,7 +3484,7 @@ module Aws::CloudFormation
     #   This applies only to private extensions you have registered in your
     #   account. For public extensions, both those provided by Amazon Web
     #   Services and published by third parties, CloudFormation returns
-    #   `null`. For more information, see [ `RegisterType` ][1].
+    #   `null`. For more information, see [RegisterType][1].
     #
     #   To set the default version of an extension, use
     #   SetTypeDefaultVersion.
@@ -3604,7 +3603,7 @@ module Aws::CloudFormation
     #   This applies only to private extensions you have registered in your
     #   account. For public extensions, both those provided by Amazon Web
     #   Services and published by third parties, CloudFormation returns
-    #   `null`. For more information, see [ `RegisterType` ][1].
+    #   `null`. For more information, see [RegisterType][1].
     #
     #
     #
@@ -3620,8 +3619,8 @@ module Aws::CloudFormation
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM execution role used to
     #   register the extension. This applies only to private extensions you
-    #   have registered in your account. For more information, see [
-    #   `RegisterType` ][1].
+    #   have registered in your account. For more information, see
+    #   [RegisterType][1].
     #
     #   If the registered extension calls any Amazon Web Services APIs, you
     #   must create an <i> <a
@@ -3664,11 +3663,11 @@ module Aws::CloudFormation
     #   only to:
     #
     #   * Private extensions you have registered in your account. For more
-    #     information, see [ `RegisterType` ][1].
+    #     information, see [RegisterType][1].
     #
     #   * Public extensions you have activated in your account with
-    #     auto-update specified. For more information, see [ `ActivateType`
-    #     ][2].
+    #     auto-update specified. For more information, see
+    #     [ActivateType][2].
     #
     #
     #
@@ -3685,8 +3684,8 @@ module Aws::CloudFormation
     #   A JSON string that represent the current configuration data for the
     #   extension in this account and Region.
     #
-    #   To set the configuration data for an extension, use [
-    #   `SetTypeConfiguration` ][1]. For more information, see [Configuring
+    #   To set the configuration data for an extension, use
+    #   [SetTypeConfiguration][1]. For more information, see [Configuring
     #   extensions at the account level][2] in the *CloudFormation User
     #   Guide*.
     #
@@ -4068,16 +4067,16 @@ module Aws::CloudFormation
     # @!attribute [rw] disable_rollback
     #   Preserves the state of previously provisioned resources when an
     #   operation fails. This parameter can't be specified when the
-    #   `OnStackFailure` parameter to the [ `CreateChangeSet` ][1] API
-    #   operation was specified.
+    #   `OnStackFailure` parameter to the [CreateChangeSet][1] API operation
+    #   was specified.
     #
     #   * `True` - if the stack creation fails, do nothing. This is
     #     equivalent to specifying `DO_NOTHING` for the `OnStackFailure`
-    #     parameter to the [ `CreateChangeSet` ][1] API operation.
+    #     parameter to the [CreateChangeSet][1] API operation.
     #
     #   * `False` - if the stack creation fails, roll back the stack. This
     #     is equivalent to specifying `ROLLBACK` for the `OnStackFailure`
-    #     parameter to the [ `CreateChangeSet` ][1] API operation.
+    #     parameter to the [CreateChangeSet][1] API operation.
     #
     #   Default: `True`
     #
@@ -5243,9 +5242,9 @@ module Aws::CloudFormation
     # @!attribute [rw] next_token
     #   If the request doesn't return all the remaining results,
     #   `NextToken` is set to a token. To retrieve the next set of results,
-    #   call [ `ListStackSetAutoDeploymentTargets` ][1] again and use that
-    #   value for the `NextToken` parameter. If the request returns all
-    #   results, `NextToken` is set to an empty string.
+    #   call [ListStackSetAutoDeploymentTargets][1] again and use that value
+    #   for the `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to an empty string.
     #
     #
     #
@@ -7084,8 +7083,8 @@ module Aws::CloudFormation
     #   triggers, CloudFormation still waits the specified period of time
     #   before cleaning up old resources after update operations. You can
     #   use this monitoring period to perform any manual stack validation
-    #   desired, and manually cancel the stack creation or update (using [
-    #   `CancelUpdateStack` ][1], for example) as necessary.
+    #   desired, and manually cancel the stack creation or update (using
+    #   [CancelUpdateStack][1], for example) as necessary.
     #
     #   If you specify 0 for this parameter, CloudFormation still monitors
     #   the specified rollback triggers during stack creation and update
@@ -7164,9 +7163,9 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The resource type of the rollback trigger. Specify either [
-    #   `AWS::CloudWatch::Alarm` ][1] or [ `AWS::CloudWatch::CompositeAlarm`
-    #   ][2] resource types.
+    #   The resource type of the rollback trigger. Specify either
+    #   [AWS::CloudWatch::Alarm][1] or [AWS::CloudWatch::CompositeAlarm][2]
+    #   resource types.
     #
     #
     #
@@ -7308,9 +7307,9 @@ module Aws::CloudFormation
     #   and Region.
     #
     #   For public extensions, this will be the ARN assigned when you call
-    #   the [ `ActivateType` ][1] API operation in this account and Region.
-    #   For private extensions, this will be the ARN assigned when you call
-    #   the [ `RegisterType` ][2] API operation in this account and Region.
+    #   the [ActivateType][1] API operation in this account and Region. For
+    #   private extensions, this will be the ARN assigned when you call the
+    #   [RegisterType][2] API operation in this account and Region.
     #
     #   Do not include the extension versions suffix at the end of the ARN.
     #   You can set the configuration for an extension, but not for a
@@ -7328,9 +7327,9 @@ module Aws::CloudFormation
     #
     #   The configuration data must be formatted as JSON, and validate
     #   against the schema returned in the `ConfigurationSchema` response
-    #   element of [ `DescribeType` ][1]. For more information, see
-    #   [Defining account-level configuration data for an extension][2] in
-    #   the *CloudFormation CLI User Guide*.
+    #   element of [DescribeType][1]. For more information, see [Defining
+    #   account-level configuration data for an extension][2] in the
+    #   *CloudFormation CLI User Guide*.
     #
     #
     #
@@ -7945,8 +7944,8 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] organizational_unit_id
     #   \[Service-managed permissions\] The organization root ID or
-    #   organizational unit (OU) IDs that you specified for [
-    #   `DeploymentTargets` ][1].
+    #   organizational unit (OU) IDs that you specified for
+    #   [DeploymentTargets][1].
     #
     #
     #
@@ -8213,8 +8212,8 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] organizational_unit_id
     #   \[Service-managed permissions\] The organization root ID or
-    #   organizational unit (OU) IDs that you specified for [
-    #   `DeploymentTargets` ][1].
+    #   organizational unit (OU) IDs that you specified for
+    #   [DeploymentTargets][1].
     #
     #
     #
@@ -8829,8 +8828,8 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] organizational_unit_ids
     #   \[Service-managed permissions\] The organization root ID or
-    #   organizational unit (OU) IDs that you specified for [
-    #   `DeploymentTargets` ][1].
+    #   organizational unit (OU) IDs that you specified for
+    #   [DeploymentTargets][1].
     #
     #
     #
@@ -8872,8 +8871,8 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
-    # One of the targets for the stack set. Returned by the [
-    # `ListStackSetAutoDeploymentTargets` ][1] API operation.
+    # One of the targets for the stack set. Returned by the
+    # [ListStackSetAutoDeploymentTargets][1] API operation.
     #
     #
     #
@@ -9350,8 +9349,8 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] organizational_unit_id
     #   \[Service-managed permissions\] The organization root ID or
-    #   organizational unit (OU) IDs that you specified for [
-    #   `DeploymentTargets` ][1].
+    #   organizational unit (OU) IDs that you specified for
+    #   [DeploymentTargets][1].
     #
     #
     #
@@ -9787,7 +9786,7 @@ module Aws::CloudFormation
     #
     #   * `RETAIN` - retain all resources when the stack is deleted.
     #
-    #   For more information, see [ `DeletionPolicy` attribute][1] in the
+    #   For more information, see [DeletionPolicy attribute][1] in the
     #   *CloudFormation User Guide*.
     #
     #
@@ -9805,8 +9804,8 @@ module Aws::CloudFormation
     #   * `RETAIN` - retain all resources when the resource is replaced
     #     during an update operation.
     #
-    #   For more information, see [ `UpdateReplacePolicy` attribute][1] in
-    #   the *CloudFormation User Guide*.
+    #   For more information, see [UpdateReplacePolicy attribute][1] in the
+    #   *CloudFormation User Guide*.
     #
     #
     #
@@ -10089,9 +10088,9 @@ module Aws::CloudFormation
     #   and Region.
     #
     #   For public extensions, this will be the ARN assigned when you call
-    #   the [ `ActivateType` ][1] API operation in this account and Region.
-    #   For private extensions, this will be the ARN assigned when you call
-    #   the [ `RegisterType` ][2] API operation in this account and Region.
+    #   the [ActivateType][1] API operation in this account and Region. For
+    #   private extensions, this will be the ARN assigned when you call the
+    #   [RegisterType][2] API operation in this account and Region.
     #
     #
     #
@@ -10130,9 +10129,9 @@ module Aws::CloudFormation
     #   and Region.
     #
     #   For public extensions, this will be the ARN assigned when you call
-    #   the [ `ActivateType` ][1] API operation in this account and Region.
-    #   For private extensions, this will be the ARN assigned when you call
-    #   the [ `RegisterType` ][2] API operation in this account and Region.
+    #   the [ActivateType][1] API operation in this account and Region. For
+    #   private extensions, this will be the ARN assigned when you call the
+    #   [RegisterType][2] API operation in this account and Region.
     #
     #
     #
@@ -10236,8 +10235,8 @@ module Aws::CloudFormation
     # @!attribute [rw] type_name
     #   The name of the extension.
     #
-    #   If you specified a `TypeNameAlias` when you call the [
-    #   `ActivateType` ][1] API operation in your account and Region,
+    #   If you specified a `TypeNameAlias` when you call the
+    #   [ActivateType][1] API operation in your account and Region,
     #   CloudFormation considers that alias as the type name.
     #
     #
@@ -10252,7 +10251,7 @@ module Aws::CloudFormation
     #   This applies only to private extensions you have registered in your
     #   account. For public extensions, both those provided by Amazon and
     #   published by third parties, CloudFormation returns `null`. For more
-    #   information, see [ `RegisterType` ][1].
+    #   information, see [RegisterType][1].
     #
     #   To set the default version of an extension, use
     #   SetTypeDefaultVersion.
@@ -10271,11 +10270,11 @@ module Aws::CloudFormation
     #   only to:
     #
     #   * Private extensions you have registered in your account. For more
-    #     information, see [ `RegisterType` ][1].
+    #     information, see [RegisterType][1].
     #
     #   * Public extensions you have activated in your account with
-    #     auto-update specified. For more information, see [ `ActivateType`
-    #     ][2].
+    #     auto-update specified. For more information, see
+    #     [ActivateType][2].
     #
     #   For all other extension types, CloudFormation returns `null`.
     #
@@ -10591,8 +10590,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] parameters
     #   A list of `Parameter` structures that specify input parameters for
-    #   the stack. For more information, see the [ `Parameter` ][1] data
-    #   type.
+    #   the stack. For more information, see the [Parameter][1] data type.
     #
     #
     #
@@ -10627,19 +10625,19 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ `AWS::IAM::AccessKey` ][1]
+    #     * [ AWS::IAM::AccessKey][1]
     #
-    #     * [ `AWS::IAM::Group` ][2]
+    #     * [ AWS::IAM::Group][2]
     #
-    #     * [ `AWS::IAM::InstanceProfile` ][3]
+    #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ ` AWS::IAM::Policy` ][4]
+    #     * [AWS::IAM::Policy][4]
     #
-    #     * [ `AWS::IAM::Role` ][5]
+    #     * [ AWS::IAM::Role][5]
     #
-    #     * [ `AWS::IAM::User` ][6]
+    #     * [ AWS::IAM::User][6]
     #
-    #     * [ `AWS::IAM::UserToGroupAddition` ][7]
+    #     * [AWS::IAM::UserToGroupAddition][7]
     #
     #     For more information, see [Acknowledging IAM Resources in
     #     CloudFormation Templates][8].
@@ -10655,9 +10653,9 @@ module Aws::CloudFormation
     #     your stack template contains one or more macros, and you choose to
     #     update a stack directly from the processed template, without first
     #     reviewing the resulting changes in a change set, you must
-    #     acknowledge this capability. This includes the [ `AWS::Include`
-    #     ][9] and [ `AWS::Serverless` ][10] transforms, which are macros
-    #     hosted by CloudFormation.
+    #     acknowledge this capability. This includes the [AWS::Include][9]
+    #     and [AWS::Serverless][10] transforms, which are macros hosted by
+    #     CloudFormation.
     #
     #     If you want to update a stack from a stack template that contains
     #     macros *and* nested stacks, you must update the stack directly
@@ -10904,11 +10902,11 @@ module Aws::CloudFormation
     #   the stack set; to add or delete a parameter itself, use
     #   `UpdateStackSet` to update the stack set template. If you add a
     #   parameter to a template, before you can override the parameter value
-    #   specified in the stack set you must first use [ `UpdateStackSet`
-    #   ][1] to update all stack instances with the updated template and
-    #   parameter value specified in the stack set. Once a stack instance
-    #   has been updated with the new parameter, you can then override the
-    #   parameter value using `UpdateStackInstances`.
+    #   specified in the stack set you must first use [UpdateStackSet][1] to
+    #   update all stack instances with the updated template and parameter
+    #   value specified in the stack set. Once a stack instance has been
+    #   updated with the new parameter, you can then override the parameter
+    #   value using `UpdateStackInstances`.
     #
     #
     #
@@ -11080,19 +11078,19 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ `AWS::IAM::AccessKey` ][1]
+    #     * [AWS::IAM::AccessKey][1]
     #
-    #     * [ `AWS::IAM::Group` ][2]
+    #     * [AWS::IAM::Group][2]
     #
-    #     * [ `AWS::IAM::InstanceProfile` ][3]
+    #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ `AWS::IAM::Policy` ][4]
+    #     * [AWS::IAM::Policy][4]
     #
-    #     * [ `AWS::IAM::Role` ][5]
+    #     * [AWS::IAM::Role][5]
     #
-    #     * [ `AWS::IAM::User` ][6]
+    #     * [AWS::IAM::User][6]
     #
-    #     * [ `AWS::IAM::UserToGroupAddition` ][7]
+    #     * [AWS::IAM::UserToGroupAddition][7]
     #
     #     For more information, see [Acknowledging IAM Resources in
     #     CloudFormation Templates][8].
@@ -11108,11 +11106,11 @@ module Aws::CloudFormation
     #     Processing on Templates][9].
     #
     #     Stack sets with service-managed permissions do not currently
-    #     support the use of macros in templates. (This includes the [
-    #     `AWS::Include` ][10] and [ `AWS::Serverless` ][11] transforms,
-    #     which are macros hosted by CloudFormation.) Even if you specify
-    #     this capability for a stack set with service-managed permissions,
-    #     if you reference a macro in your template the stack set operation
+    #     support the use of macros in templates. (This includes the
+    #     [AWS::Include][10] and [AWS::Serverless][11] transforms, which are
+    #     macros hosted by CloudFormation.) Even if you specify this
+    #     capability for a stack set with service-managed permissions, if
+    #     you reference a macro in your template the stack set operation
     #     will fail.
     #
     #

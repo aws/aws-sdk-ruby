@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2024-03-19)
+------------------
+
+* Feature - Adding new attributes readWrite and onDemand to dataview models for Database Maintenance operations.
+
 1.29.0 (2024-01-26)
 ------------------
 

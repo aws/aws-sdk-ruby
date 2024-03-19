@@ -408,7 +408,7 @@ module Aws::CloudFormation
     # extensions][1] in the *CloudFormation User Guide*.
     #
     # Once you have activated a public third-party extension in your account
-    # and Region, use [ `SetTypeConfiguration` ][2] to specify configuration
+    # and Region, use [SetTypeConfiguration][2] to specify configuration
     # properties for the extension. For more information, see [Configuring
     # extensions at the account level][3] in the *CloudFormation User
     # Guide*.
@@ -843,19 +843,19 @@ module Aws::CloudFormation
     #     review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ `AWS::IAM::AccessKey` ][1]
+    #     * [ AWS::IAM::AccessKey][1]
     #
-    #     * [ `AWS::IAM::Group` ][2]
+    #     * [ AWS::IAM::Group][2]
     #
-    #     * [ `AWS::IAM::InstanceProfile` ][3]
+    #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ `AWS::IAM::Policy` ][4]
+    #     * [ AWS::IAM::Policy][4]
     #
-    #     * [ `AWS::IAM::Role` ][5]
+    #     * [ AWS::IAM::Role][5]
     #
-    #     * [ `AWS::IAM::User` ][6]
+    #     * [ AWS::IAM::User][6]
     #
-    #     * [ `AWS::IAM::UserToGroupAddition` ][7]
+    #     * [AWS::IAM::UserToGroupAddition][7]
     #
     #     For more information, see [Acknowledging IAM resources in
     #     CloudFormation templates][8].
@@ -871,8 +871,8 @@ module Aws::CloudFormation
     #     your stack template contains one or more macros, and you choose to
     #     create a stack directly from the processed template, without first
     #     reviewing the resulting changes in a change set, you must
-    #     acknowledge this capability. This includes the [ `AWS::Include` ][9]
-    #     and [ `AWS::Serverless` ][10] transforms, which are macros hosted by
+    #     acknowledge this capability. This includes the [AWS::Include][9] and
+    #     [AWS::Serverless][10] transforms, which are macros hosted by
     #     CloudFormation.
     #
     #     <note markdown="1"> This capacity doesn't apply to creating change sets, and specifying
@@ -1005,8 +1005,8 @@ module Aws::CloudFormation
     #
     # @option params [String] :on_stack_failure
     #   Determines what action will be taken if stack creation fails. If this
-    #   parameter is specified, the `DisableRollback` parameter to the [
-    #   `ExecuteChangeSet` ][1] API operation must not be specified. This must
+    #   parameter is specified, the `DisableRollback` parameter to the
+    #   [ExecuteChangeSet][1] API operation must not be specified. This must
     #   be one of these values:
     #
     #   * `DELETE` - Deletes the change set if the stack creation fails. This
@@ -1016,11 +1016,11 @@ module Aws::CloudFormation
     #
     #   * `DO_NOTHING` - if the stack creation fails, do nothing. This is
     #     equivalent to specifying `true` for the `DisableRollback` parameter
-    #     to the [ `ExecuteChangeSet` ][1] API operation.
+    #     to the [ExecuteChangeSet][1] API operation.
     #
     #   * `ROLLBACK` - if the stack creation fails, roll back the stack. This
     #     is equivalent to specifying `false` for the `DisableRollback`
-    #     parameter to the [ `ExecuteChangeSet` ][1] API operation.
+    #     parameter to the [ExecuteChangeSet][1] API operation.
     #
     #   For nested stacks, when the `OnStackFailure` parameter is set to
     #   `DELETE` for the change set for the parent stack, any failure in a
@@ -1249,7 +1249,7 @@ module Aws::CloudFormation
     #
     # @option params [Array<Types::Parameter>] :parameters
     #   A list of `Parameter` structures that specify input parameters for the
-    #   stack. For more information, see the [ `Parameter` ][1] data type.
+    #   stack. For more information, see the [Parameter][1] data type.
     #
     #
     #
@@ -1305,19 +1305,19 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ `AWS::IAM::AccessKey` ][1]
+    #     * [AWS::IAM::AccessKey][1]
     #
-    #     * [ `AWS::IAM::Group` ][2]
+    #     * [AWS::IAM::Group][2]
     #
-    #     * [ `AWS::IAM::InstanceProfile` ][3]
+    #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ `AWS::IAM::Policy` ][4]
+    #     * [AWS::IAM::Policy][4]
     #
-    #     * [ `AWS::IAM::Role` ][5]
+    #     * [AWS::IAM::Role][5]
     #
-    #     * [ `AWS::IAM::User` ][6]
+    #     * [AWS::IAM::User][6]
     #
-    #     * [ `AWS::IAM::UserToGroupAddition` ][7]
+    #     * [AWS::IAM::UserToGroupAddition][7]
     #
     #     For more information, see [Acknowledging IAM Resources in
     #     CloudFormation Templates][8].
@@ -1333,8 +1333,8 @@ module Aws::CloudFormation
     #     your stack template contains one or more macros, and you choose to
     #     create a stack directly from the processed template, without first
     #     reviewing the resulting changes in a change set, you must
-    #     acknowledge this capability. This includes the [ `AWS::Include` ][9]
-    #     and [ `AWS::Serverless` ][10] transforms, which are macros hosted by
+    #     acknowledge this capability. This includes the [AWS::Include][9] and
+    #     [AWS::Serverless][10] transforms, which are macros hosted by
     #     CloudFormation.
     #
     #     If you want to create a stack from a stack template that contains
@@ -1601,8 +1601,8 @@ module Aws::CloudFormation
     #   instance aren't updated, but retain their overridden value.
     #
     #   You can only override the parameter *values* that are specified in the
-    #   stack set; to add or delete a parameter itself, use [ `UpdateStackSet`
-    #   ][1] to update the stack set template.
+    #   stack set; to add or delete a parameter itself, use
+    #   [UpdateStackSet][1] to update the stack set template.
     #
     #
     #
@@ -1778,19 +1778,19 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ `AWS::IAM::AccessKey` ][1]
+    #     * [AWS::IAM::AccessKey][1]
     #
-    #     * [ `AWS::IAM::Group` ][2]
+    #     * [AWS::IAM::Group][2]
     #
-    #     * [ `AWS::IAM::InstanceProfile` ][3]
+    #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ `AWS::IAM::Policy` ][4]
+    #     * [AWS::IAM::Policy][4]
     #
-    #     * [ `AWS::IAM::Role` ][5]
+    #     * [AWS::IAM::Role][5]
     #
-    #     * [ `AWS::IAM::User` ][6]
+    #     * [AWS::IAM::User][6]
     #
-    #     * [ `AWS::IAM::UserToGroupAddition` ][7]
+    #     * [AWS::IAM::UserToGroupAddition][7]
     #
     #     For more information, see [Acknowledging IAM Resources in
     #     CloudFormation Templates][8].
@@ -1806,11 +1806,12 @@ module Aws::CloudFormation
     #     Templates][9].
     #
     #     Stack sets with service-managed permissions don't currently support
-    #     the use of macros in templates. (This includes the [ `AWS::Include`
-    #     ][10] and [ `AWS::Serverless` ][11] transforms, which are macros
-    #     hosted by CloudFormation.) Even if you specify this capability for a
-    #     stack set with service-managed permissions, if you reference a macro
-    #     in your template the stack set operation will fail.
+    #     the use of macros in templates. (This includes the
+    #     [AWS::Include][10] and [AWS::Serverless][11] transforms, which are
+    #     macros hosted by CloudFormation.) Even if you specify this
+    #     capability for a stack set with service-managed permissions, if you
+    #     reference a macro in your template the stack set operation will
+    #     fail.
     #
     #
     #
@@ -2363,7 +2364,7 @@ module Aws::CloudFormation
     # deregistered as well and marked as deprecated.
     #
     # To view the deprecation status of an extension or extension version,
-    # use [ `DescribeType` ][1].
+    # use [DescribeType][1].
     #
     #
     #
@@ -2794,7 +2795,7 @@ module Aws::CloudFormation
     #
     # For more information about registering as a publisher, see:
     #
-    # * [ `RegisterPublisher` ][1]
+    # * [RegisterPublisher][1]
     #
     # * [Publishing extensions to make them available for public use][2] in
     #   the *CloudFormation CLI User Guide*
@@ -4280,16 +4281,16 @@ module Aws::CloudFormation
     # @option params [Boolean] :disable_rollback
     #   Preserves the state of previously provisioned resources when an
     #   operation fails. This parameter can't be specified when the
-    #   `OnStackFailure` parameter to the [ `CreateChangeSet` ][1] API
-    #   operation was specified.
+    #   `OnStackFailure` parameter to the [CreateChangeSet][1] API operation
+    #   was specified.
     #
     #   * `True` - if the stack creation fails, do nothing. This is equivalent
     #     to specifying `DO_NOTHING` for the `OnStackFailure` parameter to the
-    #     [ `CreateChangeSet` ][1] API operation.
+    #     [CreateChangeSet][1] API operation.
     #
     #   * `False` - if the stack creation fails, roll back the stack. This is
     #     equivalent to specifying `ROLLBACK` for the `OnStackFailure`
-    #     parameter to the [ `CreateChangeSet` ][1] API operation.
+    #     parameter to the [CreateChangeSet][1] API operation.
     #
     #   Default: `True`
     #
@@ -6280,7 +6281,7 @@ module Aws::CloudFormation
     # public use][1] in the *CloudFormation CLI User Guide*.
     #
     # To publish an extension, you must be registered as a publisher with
-    # CloudFormation. For more information, see [ `RegisterPublisher` ][2].
+    # CloudFormation. For more information, see [RegisterPublisher][2].
     #
     #
     #
@@ -6509,8 +6510,8 @@ module Aws::CloudFormation
     # *CloudFormation CLI User Guide*.
     #
     # You can have a maximum of 50 resource extension versions registered at
-    # a time. This maximum is per account and per Region. Use [
-    # `DeregisterType` ][2] to deregister specific extension versions if
+    # a time. This maximum is per account and per Region. Use
+    # [DeregisterType][2] to deregister specific extension versions if
     # necessary.
     #
     # Once you have initiated a registration request using RegisterType, you
@@ -6518,7 +6519,7 @@ module Aws::CloudFormation
     # registration request.
     #
     # Once you have registered a private extension in your account and
-    # Region, use [ `SetTypeConfiguration` ][3] to specify configuration
+    # Region, use [SetTypeConfiguration][3] to specify configuration
     # properties for the extension. For more information, see [Configuring
     # extensions at the account level][4] in the *CloudFormation User
     # Guide*.
@@ -6758,7 +6759,7 @@ module Aws::CloudFormation
     # extension, in the given account and Region.
     #
     # To view the current configuration data for an extension, refer to the
-    # `ConfigurationSchema` element of [ `DescribeType` ][1]. For more
+    # `ConfigurationSchema` element of [DescribeType][1]. For more
     # information, see [Configuring extensions at the account level][2] in
     # the *CloudFormation User Guide*.
     #
@@ -6778,9 +6779,9 @@ module Aws::CloudFormation
     #   Region.
     #
     #   For public extensions, this will be the ARN assigned when you call the
-    #   [ `ActivateType` ][1] API operation in this account and Region. For
-    #   private extensions, this will be the ARN assigned when you call the [
-    #   `RegisterType` ][2] API operation in this account and Region.
+    #   [ActivateType][1] API operation in this account and Region. For
+    #   private extensions, this will be the ARN assigned when you call the
+    #   [RegisterType][2] API operation in this account and Region.
     #
     #   Do not include the extension versions suffix at the end of the ARN.
     #   You can set the configuration for an extension, but not for a specific
@@ -6795,8 +6796,8 @@ module Aws::CloudFormation
     #   The configuration data for the extension, in this account and Region.
     #
     #   The configuration data must be formatted as JSON, and validate against
-    #   the schema returned in the `ConfigurationSchema` response element of [
-    #   `DescribeType` ][1]. For more information, see [Defining account-level
+    #   the schema returned in the `ConfigurationSchema` response element of
+    #   [DescribeType][1]. For more information, see [Defining account-level
     #   configuration data for an extension][2] in the *CloudFormation CLI
     #   User Guide*.
     #
@@ -7054,11 +7055,11 @@ module Aws::CloudFormation
     # version of the extension in your account and Region for testing.
     #
     # To perform testing, CloudFormation assumes the execution role
-    # specified when the type was registered. For more information, see [
-    # `RegisterType` ][2].
+    # specified when the type was registered. For more information, see
+    # [RegisterType][2].
     #
     # Once you've initiated testing on an extension using `TestType`, you
-    # can pass the returned `TypeVersionArn` into [ `DescribeType` ][3] to
+    # can pass the returned `TypeVersionArn` into [DescribeType][3] to
     # monitor the current test status and test status description for the
     # extension.
     #
@@ -7356,7 +7357,7 @@ module Aws::CloudFormation
     #
     # @option params [Array<Types::Parameter>] :parameters
     #   A list of `Parameter` structures that specify input parameters for the
-    #   stack. For more information, see the [ `Parameter` ][1] data type.
+    #   stack. For more information, see the [Parameter][1] data type.
     #
     #
     #
@@ -7390,19 +7391,19 @@ module Aws::CloudFormation
     #     review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ `AWS::IAM::AccessKey` ][1]
+    #     * [ AWS::IAM::AccessKey][1]
     #
-    #     * [ `AWS::IAM::Group` ][2]
+    #     * [ AWS::IAM::Group][2]
     #
-    #     * [ `AWS::IAM::InstanceProfile` ][3]
+    #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ ` AWS::IAM::Policy` ][4]
+    #     * [AWS::IAM::Policy][4]
     #
-    #     * [ `AWS::IAM::Role` ][5]
+    #     * [ AWS::IAM::Role][5]
     #
-    #     * [ `AWS::IAM::User` ][6]
+    #     * [ AWS::IAM::User][6]
     #
-    #     * [ `AWS::IAM::UserToGroupAddition` ][7]
+    #     * [AWS::IAM::UserToGroupAddition][7]
     #
     #     For more information, see [Acknowledging IAM Resources in
     #     CloudFormation Templates][8].
@@ -7418,8 +7419,8 @@ module Aws::CloudFormation
     #     your stack template contains one or more macros, and you choose to
     #     update a stack directly from the processed template, without first
     #     reviewing the resulting changes in a change set, you must
-    #     acknowledge this capability. This includes the [ `AWS::Include` ][9]
-    #     and [ `AWS::Serverless` ][10] transforms, which are macros hosted by
+    #     acknowledge this capability. This includes the [AWS::Include][9] and
+    #     [AWS::Serverless][10] transforms, which are macros hosted by
     #     CloudFormation.
     #
     #     If you want to update a stack from a stack template that contains
@@ -7631,20 +7632,20 @@ module Aws::CloudFormation
     #
     # You can only update stack instances in Amazon Web Services Regions and
     # accounts where they already exist; to create additional stack
-    # instances, use [ `CreateStackInstances` ][1].
+    # instances, use [CreateStackInstances][1].
     #
     # During stack set updates, any parameters overridden for a stack
     # instance aren't updated, but retain their overridden value.
     #
     # You can only update the parameter *values* that are specified in the
-    # stack set; to add or delete a parameter itself, use [ `UpdateStackSet`
-    # ][2] to update the stack set template. If you add a parameter to a
-    # template, before you can override the parameter value specified in the
-    # stack set you must first use [ `UpdateStackSet` ][2] to update all
-    # stack instances with the updated template and parameter value
-    # specified in the stack set. Once a stack instance has been updated
-    # with the new parameter, you can then override the parameter value
-    # using `UpdateStackInstances`.
+    # stack set; to add or delete a parameter itself, use
+    # [UpdateStackSet][2] to update the stack set template. If you add a
+    # parameter to a template, before you can override the parameter value
+    # specified in the stack set you must first use [UpdateStackSet][2] to
+    # update all stack instances with the updated template and parameter
+    # value specified in the stack set. Once a stack instance has been
+    # updated with the new parameter, you can then override the parameter
+    # value using `UpdateStackInstances`.
     #
     #
     #
@@ -7710,11 +7711,11 @@ module Aws::CloudFormation
     #   stack set; to add or delete a parameter itself, use `UpdateStackSet`
     #   to update the stack set template. If you add a parameter to a
     #   template, before you can override the parameter value specified in the
-    #   stack set you must first use [ `UpdateStackSet` ][1] to update all
-    #   stack instances with the updated template and parameter value
-    #   specified in the stack set. Once a stack instance has been updated
-    #   with the new parameter, you can then override the parameter value
-    #   using `UpdateStackInstances`.
+    #   stack set you must first use [UpdateStackSet][1] to update all stack
+    #   instances with the updated template and parameter value specified in
+    #   the stack set. Once a stack instance has been updated with the new
+    #   parameter, you can then override the parameter value using
+    #   `UpdateStackInstances`.
     #
     #
     #
@@ -7889,19 +7890,19 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ `AWS::IAM::AccessKey` ][1]
+    #     * [AWS::IAM::AccessKey][1]
     #
-    #     * [ `AWS::IAM::Group` ][2]
+    #     * [AWS::IAM::Group][2]
     #
-    #     * [ `AWS::IAM::InstanceProfile` ][3]
+    #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ `AWS::IAM::Policy` ][4]
+    #     * [AWS::IAM::Policy][4]
     #
-    #     * [ `AWS::IAM::Role` ][5]
+    #     * [AWS::IAM::Role][5]
     #
-    #     * [ `AWS::IAM::User` ][6]
+    #     * [AWS::IAM::User][6]
     #
-    #     * [ `AWS::IAM::UserToGroupAddition` ][7]
+    #     * [AWS::IAM::UserToGroupAddition][7]
     #
     #     For more information, see [Acknowledging IAM Resources in
     #     CloudFormation Templates][8].
@@ -7917,11 +7918,12 @@ module Aws::CloudFormation
     #     Templates][9].
     #
     #     Stack sets with service-managed permissions do not currently support
-    #     the use of macros in templates. (This includes the [ `AWS::Include`
-    #     ][10] and [ `AWS::Serverless` ][11] transforms, which are macros
-    #     hosted by CloudFormation.) Even if you specify this capability for a
-    #     stack set with service-managed permissions, if you reference a macro
-    #     in your template the stack set operation will fail.
+    #     the use of macros in templates. (This includes the
+    #     [AWS::Include][10] and [AWS::Serverless][11] transforms, which are
+    #     macros hosted by CloudFormation.) Even if you specify this
+    #     capability for a stack set with service-managed permissions, if you
+    #     reference a macro in your template the stack set operation will
+    #     fail.
     #
     #
     #
@@ -8328,7 +8330,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -6212,6 +6212,25 @@ module Aws
                                      ) -> _DescribeLockedSnapshotsResponseSuccess
                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLockedSnapshotsResponseSuccess
 
+      interface _DescribeMacHostsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMacHostsResult]
+        def mac_hosts: () -> ::Array[Types::MacHost]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#describe_mac_hosts-instance_method
+      def describe_mac_hosts: (
+                                ?filters: Array[
+                                  {
+                                    name: ::String?,
+                                    values: Array[::String]?
+                                  },
+                                ],
+                                ?host_ids: Array[::String],
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _DescribeMacHostsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMacHostsResponseSuccess
+
       interface _DescribeManagedPrefixListsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeManagedPrefixListsResult]
         def next_token: () -> ::String

@@ -14,6 +14,8 @@ module Aws::ManagedBlockchainQuery
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AddressIdentifierFilter = Shapes::StructureShape.new(name: 'AddressIdentifierFilter')
+    AddressIdentifierFilterTransactionEventToAddressList = Shapes::ListShape.new(name: 'AddressIdentifierFilterTransactionEventToAddressList')
     AssetContract = Shapes::StructureShape.new(name: 'AssetContract')
     AssetContractList = Shapes::ListShape.new(name: 'AssetContractList')
     BatchGetTokenBalanceErrorItem = Shapes::StructureShape.new(name: 'BatchGetTokenBalanceErrorItem')
@@ -25,6 +27,7 @@ module Aws::ManagedBlockchainQuery
     BatchGetTokenBalanceOutputList = Shapes::ListShape.new(name: 'BatchGetTokenBalanceOutputList')
     BlockHash = Shapes::StringShape.new(name: 'BlockHash')
     BlockchainInstant = Shapes::StructureShape.new(name: 'BlockchainInstant')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ChainAddress = Shapes::StringShape.new(name: 'ChainAddress')
     ConfirmationStatus = Shapes::StringShape.new(name: 'ConfirmationStatus')
     ConfirmationStatusFilter = Shapes::StructureShape.new(name: 'ConfirmationStatusFilter')
@@ -47,6 +50,11 @@ module Aws::ManagedBlockchainQuery
     ListAssetContractsInput = Shapes::StructureShape.new(name: 'ListAssetContractsInput')
     ListAssetContractsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListAssetContractsInputMaxResultsInteger')
     ListAssetContractsOutput = Shapes::StructureShape.new(name: 'ListAssetContractsOutput')
+    ListFilteredTransactionEventsInput = Shapes::StructureShape.new(name: 'ListFilteredTransactionEventsInput')
+    ListFilteredTransactionEventsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListFilteredTransactionEventsInputMaxResultsInteger')
+    ListFilteredTransactionEventsOutput = Shapes::StructureShape.new(name: 'ListFilteredTransactionEventsOutput')
+    ListFilteredTransactionEventsSort = Shapes::StructureShape.new(name: 'ListFilteredTransactionEventsSort')
+    ListFilteredTransactionEventsSortBy = Shapes::StringShape.new(name: 'ListFilteredTransactionEventsSortBy')
     ListTokenBalancesInput = Shapes::StructureShape.new(name: 'ListTokenBalancesInput')
     ListTokenBalancesInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListTokenBalancesInputMaxResultsInteger')
     ListTokenBalancesOutput = Shapes::StructureShape.new(name: 'ListTokenBalancesOutput')
@@ -67,6 +75,7 @@ module Aws::ManagedBlockchainQuery
     QueryTokenStandard = Shapes::StringShape.new(name: 'QueryTokenStandard')
     QueryTransactionEventType = Shapes::StringShape.new(name: 'QueryTransactionEventType')
     QueryTransactionHash = Shapes::StringShape.new(name: 'QueryTransactionHash')
+    QueryTransactionId = Shapes::StringShape.new(name: 'QueryTransactionId')
     QuotaCode = Shapes::StringShape.new(name: 'QuotaCode')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -76,6 +85,7 @@ module Aws::ManagedBlockchainQuery
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     String = Shapes::StringShape.new(name: 'String')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TimeFilter = Shapes::StructureShape.new(name: 'TimeFilter')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TokenBalance = Shapes::StructureShape.new(name: 'TokenBalance')
     TokenBalanceList = Shapes::ListShape.new(name: 'TokenBalanceList')
@@ -90,9 +100,15 @@ module Aws::ManagedBlockchainQuery
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VoutFilter = Shapes::StructureShape.new(name: 'VoutFilter')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AddressIdentifierFilter.add_member(:transaction_event_to_address, Shapes::ShapeRef.new(shape: AddressIdentifierFilterTransactionEventToAddressList, required: true, location_name: "transactionEventToAddress"))
+    AddressIdentifierFilter.struct_class = Types::AddressIdentifierFilter
+
+    AddressIdentifierFilterTransactionEventToAddressList.member = Shapes::ShapeRef.new(shape: ChainAddress)
 
     AssetContract.add_member(:contract_identifier, Shapes::ShapeRef.new(shape: ContractIdentifier, required: true, location_name: "contractIdentifier"))
     AssetContract.add_member(:token_standard, Shapes::ShapeRef.new(shape: QueryTokenStandard, required: true, location_name: "tokenStandard"))
@@ -197,6 +213,24 @@ module Aws::ManagedBlockchainQuery
     ListAssetContractsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAssetContractsOutput.struct_class = Types::ListAssetContractsOutput
 
+    ListFilteredTransactionEventsInput.add_member(:network, Shapes::ShapeRef.new(shape: String, required: true, location_name: "network"))
+    ListFilteredTransactionEventsInput.add_member(:address_identifier_filter, Shapes::ShapeRef.new(shape: AddressIdentifierFilter, required: true, location_name: "addressIdentifierFilter"))
+    ListFilteredTransactionEventsInput.add_member(:time_filter, Shapes::ShapeRef.new(shape: TimeFilter, location_name: "timeFilter"))
+    ListFilteredTransactionEventsInput.add_member(:vout_filter, Shapes::ShapeRef.new(shape: VoutFilter, location_name: "voutFilter"))
+    ListFilteredTransactionEventsInput.add_member(:confirmation_status_filter, Shapes::ShapeRef.new(shape: ConfirmationStatusFilter, location_name: "confirmationStatusFilter"))
+    ListFilteredTransactionEventsInput.add_member(:sort, Shapes::ShapeRef.new(shape: ListFilteredTransactionEventsSort, location_name: "sort"))
+    ListFilteredTransactionEventsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListFilteredTransactionEventsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListFilteredTransactionEventsInputMaxResultsInteger, location_name: "maxResults"))
+    ListFilteredTransactionEventsInput.struct_class = Types::ListFilteredTransactionEventsInput
+
+    ListFilteredTransactionEventsOutput.add_member(:events, Shapes::ShapeRef.new(shape: TransactionEventList, required: true, location_name: "events"))
+    ListFilteredTransactionEventsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListFilteredTransactionEventsOutput.struct_class = Types::ListFilteredTransactionEventsOutput
+
+    ListFilteredTransactionEventsSort.add_member(:sort_by, Shapes::ShapeRef.new(shape: ListFilteredTransactionEventsSortBy, location_name: "sortBy"))
+    ListFilteredTransactionEventsSort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "sortOrder"))
+    ListFilteredTransactionEventsSort.struct_class = Types::ListFilteredTransactionEventsSort
+
     ListTokenBalancesInput.add_member(:owner_filter, Shapes::ShapeRef.new(shape: OwnerFilter, location_name: "ownerFilter"))
     ListTokenBalancesInput.add_member(:token_filter, Shapes::ShapeRef.new(shape: TokenFilter, required: true, location_name: "tokenFilter"))
     ListTokenBalancesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -207,7 +241,8 @@ module Aws::ManagedBlockchainQuery
     ListTokenBalancesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListTokenBalancesOutput.struct_class = Types::ListTokenBalancesOutput
 
-    ListTransactionEventsInput.add_member(:transaction_hash, Shapes::ShapeRef.new(shape: QueryTransactionHash, required: true, location_name: "transactionHash"))
+    ListTransactionEventsInput.add_member(:transaction_hash, Shapes::ShapeRef.new(shape: QueryTransactionHash, location_name: "transactionHash"))
+    ListTransactionEventsInput.add_member(:transaction_id, Shapes::ShapeRef.new(shape: QueryTransactionId, location_name: "transactionId"))
     ListTransactionEventsInput.add_member(:network, Shapes::ShapeRef.new(shape: QueryNetwork, required: true, location_name: "network"))
     ListTransactionEventsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListTransactionEventsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListTransactionEventsInputMaxResultsInteger, location_name: "maxResults"))
@@ -258,6 +293,10 @@ module Aws::ManagedBlockchainQuery
     ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: QuotaCode, required: true, location_name: "quotaCode"))
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TimeFilter.add_member(:from, Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "from"))
+    TimeFilter.add_member(:to, Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "to"))
+    TimeFilter.struct_class = Types::TimeFilter
 
     TokenBalance.add_member(:owner_identifier, Shapes::ShapeRef.new(shape: OwnerIdentifier, location_name: "ownerIdentifier"))
     TokenBalance.add_member(:token_identifier, Shapes::ShapeRef.new(shape: TokenIdentifier, location_name: "tokenIdentifier"))
@@ -310,6 +349,12 @@ module Aws::ManagedBlockchainQuery
     TransactionEvent.add_member(:token_id, Shapes::ShapeRef.new(shape: QueryTokenId, location_name: "tokenId"))
     TransactionEvent.add_member(:transaction_id, Shapes::ShapeRef.new(shape: String, location_name: "transactionId"))
     TransactionEvent.add_member(:vout_index, Shapes::ShapeRef.new(shape: Integer, location_name: "voutIndex"))
+    TransactionEvent.add_member(:vout_spent, Shapes::ShapeRef.new(shape: Boolean, location_name: "voutSpent"))
+    TransactionEvent.add_member(:spent_vout_transaction_id, Shapes::ShapeRef.new(shape: String, location_name: "spentVoutTransactionId"))
+    TransactionEvent.add_member(:spent_vout_transaction_hash, Shapes::ShapeRef.new(shape: String, location_name: "spentVoutTransactionHash"))
+    TransactionEvent.add_member(:spent_vout_index, Shapes::ShapeRef.new(shape: Integer, location_name: "spentVoutIndex"))
+    TransactionEvent.add_member(:blockchain_instant, Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "blockchainInstant"))
+    TransactionEvent.add_member(:confirmation_status, Shapes::ShapeRef.new(shape: ConfirmationStatus, location_name: "confirmationStatus"))
     TransactionEvent.struct_class = Types::TransactionEvent
 
     TransactionEventList.member = Shapes::ShapeRef.new(shape: TransactionEvent)
@@ -332,6 +377,9 @@ module Aws::ManagedBlockchainQuery
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
+
+    VoutFilter.add_member(:vout_spent, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "voutSpent"))
+    VoutFilter.struct_class = Types::VoutFilter
 
 
     # @api private
@@ -414,6 +462,25 @@ module Aws::ManagedBlockchainQuery
         o.http_request_uri = "/list-asset-contracts"
         o.input = Shapes::ShapeRef.new(shape: ListAssetContractsInput)
         o.output = Shapes::ShapeRef.new(shape: ListAssetContractsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_filtered_transaction_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFilteredTransactionEvents"
+        o.http_method = "POST"
+        o.http_request_uri = "/list-filtered-transaction-events"
+        o.input = Shapes::ShapeRef.new(shape: ListFilteredTransactionEventsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListFilteredTransactionEventsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

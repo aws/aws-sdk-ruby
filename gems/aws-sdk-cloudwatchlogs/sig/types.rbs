@@ -35,7 +35,7 @@ module Aws::CloudWatchLogs
       attr_accessor active: bool
       attr_accessor state: ("Active" | "Suppressed" | "Baseline")
       attr_accessor histogram: ::Hash[::String, ::Integer]
-      attr_accessor log_samples: ::Array[::String]
+      attr_accessor log_samples: ::Array[Types::LogEvent]
       attr_accessor pattern_tokens: ::Array[Types::PatternToken]
       attr_accessor log_group_arn_list: ::Array[::String]
       attr_accessor suppressed: bool
@@ -728,6 +728,12 @@ module Aws::CloudWatchLogs
       attr_accessor session_metadata: Types::LiveTailSessionMetadata
       attr_accessor session_results: ::Array[Types::LiveTailSessionLogEvent]
       attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class LogEvent
+      attr_accessor timestamp: ::Integer
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 
