@@ -6,8 +6,6 @@
         {"Ec2QueryIsPreferred":  "Awaiting Smithy to resolve C2J translation"}
       ],
       "output" : [
-        {"Ec2InvalidGreetingError": "Need to update test runner to handle error cases"},
-        {"Ec2ComplexError":  "Need to update test runner to handle error cases"}
       ]
     },
   "json" : {
