@@ -12,39 +12,17 @@
     },
   "json" : {
     "input" : [
-      {"serializes_structure_members_with_locationname_traits": "Awaiting Smithy to resolve C2J translation"}
+      {"serializes_structure_members_with_locationname_traits": "Awaiting Smithy to resolve C2J translation due to jsonName trait"}
     ],
     "output" : [
-      {"AwsJson11InvalidGreetingError": "Need to update test runner to handle error cases"},
-      {"AwsJson11ComplexError": "Need to update test runner to handle error cases"},
-      {"AwsJson11EmptyComplexError": "Need to update test runner to handle error cases"},
-      {"AwsJson11FooErrorUsingXAmznErrorType": "Need to update test runner to handle error cases"},
-      {"AwsJson11FooErrorUsingXAmznErrorTypeWithUri": "Need to update test runner to handle error cases"},
-      {"AwsJson11FooErrorUsingXAmznErrorTypeWithUriAndNamespace": "Need to update test runner to handle error cases"},
-      {"AwsJson11FooErrorUsingCode": "Need to update test runner to handle error cases"},
-      {"AwsJson11FooErrorUsingCodeAndNamespace": "Need to update test runner to handle error cases"},
-      {"AwsJson11FooErrorUsingCodeUriAndNamespace": "Need to update test runner to handle error cases"},
-      {"AwsJson11FooErrorWithDunderType": "Need to update test runner to handle error cases"},
-      {"AwsJson11FooErrorWithDunderTypeAndNamespace": "Need to update test runner to handle error cases"},
-      {"AwsJson11FooErrorWithDunderTypeUriAndNamespace": "Need to update test runner to handle error cases"}
+      {"AwsJson11ComplexError": "Awaiting Smithy to resolve C2J translation due to jsonName trait"}
     ]
   },
   "json_1_0" : {
     "input" : [
     ],
     "output" : [
-      {"AwsJson10InvalidGreetingError": "Need to update test runner to handle error cases"},
-      {"AwsJson10FooErrorUsingXAmznErrorType": "Need to update test runner to handle error cases"},
-      {"AwsJson10FooErrorUsingXAmznErrorTypeWithUri": "Need to update test runner to handle error cases"},
-      {"AwsJson10FooErrorUsingXAmznErrorTypeWithUriAndNamespace": "Need to update test runner to handle error cases"},
-      {"AwsJson10FooErrorUsingCode": "Need to update test runner to handle error cases"},
-      {"AwsJson10FooErrorUsingCodeAndNamespace": "Need to update test runner to handle error cases"},
-      {"AwsJson10FooErrorUsingCodeUriAndNamespace": "Need to update test runner to handle error cases"},
-      {"AwsJson10FooErrorWithDunderType": "Need to update test runner to handle error cases"},
-      {"AwsJson10FooErrorWithDunderTypeAndNamespace": "Need to update test runner to handle error cases"},
-      {"AwsJson10FooErrorWithDunderTypeUriAndNamespace": "Need to update test runner to handle error cases"},
-      {"AwsJson10ComplexError": "Need to update test runner to handle error cases"},
-      {"AwsJson10EmptyComplexError": "Need to update test runner to handle error cases"}
+      {"AwsJson10ComplexError": "Awaiting Smithy to resolve C2J translation due to jsonName trait"}
     ]
   },
   "query" : {
@@ -61,18 +39,6 @@
       {"RestJsonZeroAndFalseQueryValues": "Awaiting Smithy to resolve C2J translation"}
     ],
     "output" : [
-      {"RestJsonFooErrorUsingXAmznErrorType": "Need to update test runner to handle error cases"},
-      {"RestJsonFooErrorUsingXAmznErrorTypeWithUri": "Need to update test runner to handle error cases"},
-      {"RestJsonFooErrorUsingXAmznErrorTypeWithUriAndNamespace": "Need to update test runner to handle error cases"},
-      {"RestJsonFooErrorUsingCode": "Need to update test runner to handle error cases"},
-      {"RestJsonFooErrorUsingCodeAndNamespace": "Need to update test runner to handle error cases"},
-      {"RestJsonFooErrorUsingCodeUriAndNamespace": "Need to update test runner to handle error cases"},
-      {"RestJsonFooErrorWithDunderType": "Need to update test runner to handle error cases"},
-      {"RestJsonFooErrorWithDunderTypeAndNamespace": "Need to update test runner to handle error cases"},
-      {"RestJsonFooErrorWithDunderTypeUriAndNamespace": "Need to update test runner to handle error cases"},
-      {"RestJsonComplexErrorWithNoMessage": "Need to update test runner to handle error cases"},
-      {"RestJsonEmptyComplexErrorWithNoMessage": "Need to update test runner to handle error cases"},
-      {"RestJsonInvalidGreetingError": "Need to update test runner to handle error cases"}
     ]
   },
   "rest-xml" : {
