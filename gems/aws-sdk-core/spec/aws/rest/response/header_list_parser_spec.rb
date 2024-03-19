@@ -27,6 +27,12 @@ module Aws
             expect(HeaderListParser.parse_string_list("\"b,c\", \"\\\"def\\\"\", a"))
               .to eq(["b,c", "\"def\"", "a"])
           end
+
+          it 'raises an error on invalid lists' do
+            expect do
+              HeaderListParser.parse_string_list('"a,b,c')
+            end.to raise_error(ArgumentError, /No closing quote found/)
+          end
         end
       end
     end
