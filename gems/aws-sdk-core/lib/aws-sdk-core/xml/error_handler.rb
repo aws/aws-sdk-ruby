@@ -50,6 +50,9 @@ module Aws
             match = (code == error_shape_code || code == rule.shape.name)
             if match && rule.shape.members.any?
               data = parse_error_data(rule, context.http_response.body_contents)
+              # supporting HTTP bindings
+              headers = Aws::Rest::Response::Headers.new(rule)
+              headers.apply(context.http_response, data)
             end
           end
         end
