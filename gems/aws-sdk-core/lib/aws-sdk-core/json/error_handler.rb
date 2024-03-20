@@ -26,6 +26,7 @@ module Aws
       end
 
       def error_code(json, context)
+
         code =
           if aws_query_error?(context)
             error = context.http_response.headers['x-amzn-query-error'].split(';')[0]
@@ -34,7 +35,7 @@ module Aws
             json['__type']
           end
         code ||= json['code']
-        code ||= context.http_response.headers['X-Amzn-Errortype']  # need to inspect if this is a breaking change
+        code ||= context.http_response.headers['x-amzn-errortype']
         if code
           code.split('#').last
         else
