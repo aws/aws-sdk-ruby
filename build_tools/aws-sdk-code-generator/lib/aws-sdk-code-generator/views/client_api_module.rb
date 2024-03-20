@@ -44,7 +44,7 @@ module AwsSdkCodeGenerator
         'synthetic' => false,
         'box' => false,
         'fault' => false,
-        'error' => false,
+        'error' => true, # to parse customized error
         'exception_event' => false, # internal, exceptions cannot be events
         'deprecated' => false,
         'deprecatedMessage' => false,
