@@ -74,6 +74,8 @@ module Aws::DynamoDB
             Aws::DynamoDB::Endpoints::DeleteBackup.build(context)
           when :delete_item
             Aws::DynamoDB::Endpoints::DeleteItem.build(context)
+          when :delete_resource_policy
+            Aws::DynamoDB::Endpoints::DeleteResourcePolicy.build(context)
           when :delete_table
             Aws::DynamoDB::Endpoints::DeleteTable.build(context)
           when :describe_backup
@@ -114,6 +116,8 @@ module Aws::DynamoDB
             Aws::DynamoDB::Endpoints::ExportTableToPointInTime.build(context)
           when :get_item
             Aws::DynamoDB::Endpoints::GetItem.build(context)
+          when :get_resource_policy
+            Aws::DynamoDB::Endpoints::GetResourcePolicy.build(context)
           when :import_table
             Aws::DynamoDB::Endpoints::ImportTable.build(context)
           when :list_backups
@@ -132,6 +136,8 @@ module Aws::DynamoDB
             Aws::DynamoDB::Endpoints::ListTagsOfResource.build(context)
           when :put_item
             Aws::DynamoDB::Endpoints::PutItem.build(context)
+          when :put_resource_policy
+            Aws::DynamoDB::Endpoints::PutResourcePolicy.build(context)
           when :query
             Aws::DynamoDB::Endpoints::Query.build(context)
           when :restore_table_from_backup

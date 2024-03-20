@@ -576,9 +576,9 @@ module Aws::DynamoDB
     # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#CapacityUnitCalculations
     #
     # @option params [required, Hash<String,Types::KeysAndAttributes>] :request_items
-    #   A map of one or more table names and, for each table, a map that
-    #   describes one or more items to retrieve from that table. Each table
-    #   name can be used only once per `BatchGetItem` request.
+    #   A map of one or more table names or table ARNs and, for each table, a
+    #   map that describes one or more items to retrieve from that table. Each
+    #   table name or ARN can be used only once per `BatchGetItem` request.
     #
     #   Each element in the map of items to retrieve consists of the
     #   following:
@@ -736,7 +736,7 @@ module Aws::DynamoDB
     #
     #   resp = client.batch_get_item({
     #     request_items: { # required
-    #       "TableName" => {
+    #       "TableArn" => {
     #         keys: [ # required
     #           {
     #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -756,19 +756,19 @@ module Aws::DynamoDB
     # @example Response structure
     #
     #   resp.responses #=> Hash
-    #   resp.responses["TableName"] #=> Array
-    #   resp.responses["TableName"][0] #=> Hash
-    #   resp.responses["TableName"][0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.responses["TableArn"] #=> Array
+    #   resp.responses["TableArn"][0] #=> Hash
+    #   resp.responses["TableArn"][0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.unprocessed_keys #=> Hash
-    #   resp.unprocessed_keys["TableName"].keys #=> Array
-    #   resp.unprocessed_keys["TableName"].keys[0] #=> Hash
-    #   resp.unprocessed_keys["TableName"].keys[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #   resp.unprocessed_keys["TableName"].attributes_to_get #=> Array
-    #   resp.unprocessed_keys["TableName"].attributes_to_get[0] #=> String
-    #   resp.unprocessed_keys["TableName"].consistent_read #=> Boolean
-    #   resp.unprocessed_keys["TableName"].projection_expression #=> String
-    #   resp.unprocessed_keys["TableName"].expression_attribute_names #=> Hash
-    #   resp.unprocessed_keys["TableName"].expression_attribute_names["ExpressionAttributeNameVariable"] #=> String
+    #   resp.unprocessed_keys["TableArn"].keys #=> Array
+    #   resp.unprocessed_keys["TableArn"].keys[0] #=> Hash
+    #   resp.unprocessed_keys["TableArn"].keys[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.unprocessed_keys["TableArn"].attributes_to_get #=> Array
+    #   resp.unprocessed_keys["TableArn"].attributes_to_get[0] #=> String
+    #   resp.unprocessed_keys["TableArn"].consistent_read #=> Boolean
+    #   resp.unprocessed_keys["TableArn"].projection_expression #=> String
+    #   resp.unprocessed_keys["TableArn"].expression_attribute_names #=> Hash
+    #   resp.unprocessed_keys["TableArn"].expression_attribute_names["ExpressionAttributeNameVariable"] #=> String
     #   resp.consumed_capacity #=> Array
     #   resp.consumed_capacity[0].table_name #=> String
     #   resp.consumed_capacity[0].capacity_units #=> Float
@@ -888,9 +888,9 @@ module Aws::DynamoDB
     # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#Programming.Errors.BatchOperations
     #
     # @option params [required, Hash<String,Array>] :request_items
-    #   A map of one or more table names and, for each table, a list of
-    #   operations to be performed (`DeleteRequest` or `PutRequest`). Each
-    #   element in the map consists of the following:
+    #   A map of one or more table names or table ARNs and, for each table, a
+    #   list of operations to be performed (`DeleteRequest` or `PutRequest`).
+    #   Each element in the map consists of the following:
     #
     #   * `DeleteRequest` - Perform a `DeleteItem` operation on the specified
     #     item. The item to be deleted is identified by a `Key` subelement:
@@ -995,7 +995,7 @@ module Aws::DynamoDB
     #
     #   resp = client.batch_write_item({
     #     request_items: { # required
-    #       "TableName" => [
+    #       "TableArn" => [
     #         {
     #           put_request: {
     #             item: { # required
@@ -1017,17 +1017,17 @@ module Aws::DynamoDB
     # @example Response structure
     #
     #   resp.unprocessed_items #=> Hash
-    #   resp.unprocessed_items["TableName"] #=> Array
-    #   resp.unprocessed_items["TableName"][0].put_request.item #=> Hash
-    #   resp.unprocessed_items["TableName"][0].put_request.item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #   resp.unprocessed_items["TableName"][0].delete_request.key #=> Hash
-    #   resp.unprocessed_items["TableName"][0].delete_request.key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.unprocessed_items["TableArn"] #=> Array
+    #   resp.unprocessed_items["TableArn"][0].put_request.item #=> Hash
+    #   resp.unprocessed_items["TableArn"][0].put_request.item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.unprocessed_items["TableArn"][0].delete_request.key #=> Hash
+    #   resp.unprocessed_items["TableArn"][0].delete_request.key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.item_collection_metrics #=> Hash
-    #   resp.item_collection_metrics["TableName"] #=> Array
-    #   resp.item_collection_metrics["TableName"][0].item_collection_key #=> Hash
-    #   resp.item_collection_metrics["TableName"][0].item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #   resp.item_collection_metrics["TableName"][0].size_estimate_range_gb #=> Array
-    #   resp.item_collection_metrics["TableName"][0].size_estimate_range_gb[0] #=> Float
+    #   resp.item_collection_metrics["TableArn"] #=> Array
+    #   resp.item_collection_metrics["TableArn"][0].item_collection_key #=> Hash
+    #   resp.item_collection_metrics["TableArn"][0].item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.item_collection_metrics["TableArn"][0].size_estimate_range_gb #=> Array
+    #   resp.item_collection_metrics["TableArn"][0].size_estimate_range_gb[0] #=> Float
     #   resp.consumed_capacity #=> Array
     #   resp.consumed_capacity[0].table_name #=> String
     #   resp.consumed_capacity[0].capacity_units #=> Float
@@ -1088,7 +1088,8 @@ module Aws::DynamoDB
     # * Provisioned read and write capacity
     #
     # @option params [required, String] :table_name
-    #   The name of the table.
+    #   The name of the table. You can also provide the Amazon Resource Name
+    #   (ARN) of the table in this parameter.
     #
     # @option params [required, String] :backup_name
     #   Specified name for the backup.
@@ -1100,7 +1101,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_backup({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     backup_name: "BackupName", # required
     #   })
     #
@@ -1256,7 +1257,8 @@ module Aws::DynamoDB
     #   indexes.
     #
     # @option params [required, String] :table_name
-    #   The name of the table to create.
+    #   The name of the table to create. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @option params [required, Array<Types::KeySchemaElement>] :key_schema
     #   Specifies the attributes that make up the primary key for a table or
@@ -1460,6 +1462,24 @@ module Aws::DynamoDB
     #   Indicates whether deletion protection is to be enabled (true) or
     #   disabled (false) on the table.
     #
+    # @option params [String] :resource_policy
+    #   An Amazon Web Services resource-based policy document in JSON format
+    #   that will be attached to the table.
+    #
+    #   When you attach a resource-based policy while creating a table, the
+    #   policy creation is *strongly consistent*.
+    #
+    #   The maximum size supported for a resource-based policy document is 20
+    #   KB. DynamoDB counts whitespaces when calculating the size of a policy
+    #   against this limit. You can’t request an increase for this limit. For
+    #   a full list of all considerations that you should keep in mind while
+    #   attaching a resource-based policy, see [Resource-based policy
+    #   considerations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html
+    #
     # @return [Types::CreateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTableOutput#table_description #table_description} => Types::TableDescription
@@ -1541,7 +1561,7 @@ module Aws::DynamoDB
     #         attribute_type: "S", # required, accepts S, N, B
     #       },
     #     ],
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     key_schema: [ # required
     #       {
     #         attribute_name: "KeySchemaAttributeName", # required
@@ -1604,6 +1624,7 @@ module Aws::DynamoDB
     #     ],
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #     deletion_protection_enabled: false,
+    #     resource_policy: "ResourcePolicy",
     #   })
     #
     # @example Response structure
@@ -1790,7 +1811,8 @@ module Aws::DynamoDB
     # delete. Otherwise, the item is not deleted.
     #
     # @option params [required, String] :table_name
-    #   The name of the table from which to delete the item.
+    #   The name of the table from which to delete the item. You can also
+    #   provide the Amazon Resource Name (ARN) of the table in this parameter.
     #
     # @option params [required, Hash<String,Types::AttributeValue>] :key
     #   A map of attribute names to `AttributeValue` objects, representing the
@@ -1999,7 +2021,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_item({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     key: { # required
     #       "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     },
@@ -2058,6 +2080,67 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # Deletes the resource-based policy attached to the resource, which can
+    # be a table or stream.
+    #
+    # `DeleteResourcePolicy` is an idempotent operation; running it multiple
+    # times on the same resource *doesn't* result in an error response,
+    # unless you specify an `ExpectedRevisionId`, which will then return a
+    # `PolicyNotFoundException`.
+    #
+    # To make sure that you don't inadvertently lock yourself out of your
+    # own resources, the root principal in your Amazon Web Services account
+    # can perform `DeleteResourcePolicy` requests, even if your
+    # resource-based policy explicitly denies the root principal's access.
+    #
+    # <note markdown="1"> `DeleteResourcePolicy` is an asynchronous operation. If you issue a
+    # `GetResourcePolicy` request immediately after running the
+    # `DeleteResourcePolicy` request, DynamoDB might still return the
+    # deleted policy. This is because the policy for your resource might not
+    # have been deleted yet. Wait for a few seconds, and then try the
+    # `GetResourcePolicy` request again.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the DynamoDB resource from which the
+    #   policy will be removed. The resources you can specify include tables
+    #   and streams. If you remove the policy of a table, it will also remove
+    #   the permissions for the table's indexes defined in that policy
+    #   document. This is because index permissions are defined in the
+    #   table's policy.
+    #
+    # @option params [String] :expected_revision_id
+    #   A string value that you can use to conditionally delete your policy.
+    #   When you provide an expected revision ID, if the revision ID of the
+    #   existing policy on the resource doesn't match or if there's no
+    #   policy attached to the resource, the request will fail and return a
+    #   `PolicyNotFoundException`.
+    #
+    # @return [Types::DeleteResourcePolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteResourcePolicyOutput#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "ResourceArnString", # required
+    #     expected_revision_id: "PolicyRevisionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
     # The `DeleteTable` operation deletes a table and all of its items.
     # After a `DeleteTable` request, the specified table is in the
     # `DELETING` state until DynamoDB completes the deletion. If the table
@@ -2089,7 +2172,8 @@ module Aws::DynamoDB
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
     #
     # @option params [required, String] :table_name
-    #   The name of the table to delete.
+    #   The name of the table to delete. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @return [Types::DeleteTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2122,7 +2206,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_table({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #   })
     #
     # @example Response structure
@@ -2313,6 +2397,9 @@ module Aws::DynamoDB
     #   Name of the table for which the customer wants to check the continuous
     #   backups and point in time recovery settings.
     #
+    #   You can also provide the Amazon Resource Name (ARN) of the table in
+    #   this parameter.
+    #
     # @return [Types::DescribeContinuousBackupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeContinuousBackupsOutput#continuous_backups_description #continuous_backups_description} => Types::ContinuousBackupsDescription
@@ -2320,7 +2407,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_continuous_backups({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #   })
     #
     # @example Response structure
@@ -2343,7 +2430,8 @@ module Aws::DynamoDB
     # global secondary index.
     #
     # @option params [required, String] :table_name
-    #   The name of the table to describe.
+    #   The name of the table to describe. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @option params [String] :index_name
     #   The name of the global secondary index to describe, if applicable.
@@ -2360,7 +2448,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_contributor_insights({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     index_name: "IndexName",
     #   })
     #
@@ -2695,7 +2783,8 @@ module Aws::DynamoDB
     # Returns information about the status of Kinesis streaming.
     #
     # @option params [required, String] :table_name
-    #   The name of the table being described.
+    #   The name of the table being described. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @return [Types::DescribeKinesisStreamingDestinationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2705,7 +2794,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_kinesis_streaming_destination({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #   })
     #
     # @example Response structure
@@ -2857,7 +2946,8 @@ module Aws::DynamoDB
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
     #
     # @option params [required, String] :table_name
-    #   The name of the table to describe.
+    #   The name of the table to describe. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @return [Types::DescribeTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2911,7 +3001,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_table({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #   })
     #
     # @example Response structure
@@ -3024,7 +3114,8 @@ module Aws::DynamoDB
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
     #
     # @option params [required, String] :table_name
-    #   The name of the table.
+    #   The name of the table. You can also provide the Amazon Resource Name
+    #   (ARN) of the table in this parameter.
     #
     # @return [Types::DescribeTableReplicaAutoScalingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3033,7 +3124,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_table_replica_auto_scaling({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #   })
     #
     # @example Response structure
@@ -3100,7 +3191,8 @@ module Aws::DynamoDB
     # table.
     #
     # @option params [required, String] :table_name
-    #   The name of the table to be described.
+    #   The name of the table to be described. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @return [Types::DescribeTimeToLiveOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3109,7 +3201,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_time_to_live({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #   })
     #
     # @example Response structure
@@ -3130,7 +3222,8 @@ module Aws::DynamoDB
     # This is done without deleting either of the resources.
     #
     # @option params [required, String] :table_name
-    #   The name of the DynamoDB table.
+    #   The name of the DynamoDB table. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @option params [required, String] :stream_arn
     #   The ARN for a Kinesis data stream.
@@ -3149,7 +3242,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.disable_kinesis_streaming_destination({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     stream_arn: "StreamArn", # required
     #     enable_kinesis_streaming_configuration: {
     #       approximate_creation_date_time_precision: "MILLISECOND", # accepts MILLISECOND, MICROSECOND
@@ -3179,7 +3272,8 @@ module Aws::DynamoDB
     # Kinesis data stream is ACTIVE.
     #
     # @option params [required, String] :table_name
-    #   The name of the DynamoDB table.
+    #   The name of the DynamoDB table. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @option params [required, String] :stream_arn
     #   The ARN for a Kinesis data stream.
@@ -3198,7 +3292,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_kinesis_streaming_destination({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     stream_arn: "StreamArn", # required
     #     enable_kinesis_streaming_configuration: {
     #       approximate_creation_date_time_precision: "MILLISECOND", # accepts MILLISECOND, MICROSECOND
@@ -3570,7 +3664,8 @@ module Aws::DynamoDB
     # value.
     #
     # @option params [required, String] :table_name
-    #   The name of the table containing the requested item.
+    #   The name of the table containing the requested item. You can also
+    #   provide the Amazon Resource Name (ARN) of the table in this parameter.
     #
     # @option params [required, Hash<String,Types::AttributeValue>] :key
     #   A map of attribute names to `AttributeValue` objects, representing the
@@ -3710,7 +3805,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_item({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     key: { # required
     #       "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     },
@@ -3749,6 +3844,73 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def get_item(params = {}, options = {})
       req = build_request(:get_item, params)
+      req.send_request(options)
+    end
+
+    # Returns the resource-based policy document attached to the resource,
+    # which can be a table or stream, in JSON format.
+    #
+    # `GetResourcePolicy` follows an [ *eventually consistent* ][1] model.
+    # The following list describes the outcomes when you issue the
+    # `GetResourcePolicy` request immediately after issuing another request:
+    #
+    # * If you issue a `GetResourcePolicy` request immediately after a
+    #   `PutResourcePolicy` request, DynamoDB might return a
+    #   `PolicyNotFoundException`.
+    #
+    # * If you issue a `GetResourcePolicy`request immediately after a
+    #   `DeleteResourcePolicy` request, DynamoDB might return the policy
+    #   that was present before the deletion request.
+    #
+    # * If you issue a `GetResourcePolicy` request immediately after a
+    #   `CreateTable` request, which includes a resource-based policy,
+    #   DynamoDB might return a `ResourceNotFoundException` or a
+    #   `PolicyNotFoundException`.
+    #
+    # Because `GetResourcePolicy` uses an *eventually consistent* query, the
+    # metadata for your policy or table might not be available at that
+    # moment. Wait for a few seconds, and then retry the `GetResourcePolicy`
+    # request.
+    #
+    # After a `GetResourcePolicy` request returns a policy created using the
+    # `PutResourcePolicy` request, you can assume the policy will start
+    # getting applied in the authorization of requests to the resource.
+    # Because this process is eventually consistent, it will take some time
+    # to apply the policy to all requests to a resource. Policies that you
+    # attach while creating a table using the `CreateTable` request will
+    # always be applied to all requests for that table.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the DynamoDB resource to which the
+    #   policy is attached. The resources you can specify include tables and
+    #   streams.
+    #
+    # @return [Types::GetResourcePolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyOutput#policy #policy} => String
+    #   * {Types::GetResourcePolicyOutput#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "ResourceArnString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
       req.send_request(options)
     end
 
@@ -3934,7 +4096,9 @@ module Aws::DynamoDB
     # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListBackupJobs.html
     #
     # @option params [String] :table_name
-    #   The backups from the table specified by `TableName` are listed.
+    #   Lists the backups from the table specified in `TableName`. You can
+    #   also provide the Amazon Resource Name (ARN) of the table in this
+    #   parameter.
     #
     # @option params [Integer] :limit
     #   Maximum number of backups to return at once.
@@ -3974,7 +4138,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_backups({
-    #     table_name: "TableName",
+    #     table_name: "TableArn",
     #     limit: 1,
     #     time_range_lower_bound: Time.now,
     #     time_range_upper_bound: Time.now,
@@ -4010,7 +4174,8 @@ module Aws::DynamoDB
     # global secondary indexes.
     #
     # @option params [String] :table_name
-    #   The name of the table.
+    #   The name of the table. You can also provide the Amazon Resource Name
+    #   (ARN) of the table in this parameter.
     #
     # @option params [String] :next_token
     #   A token to for the desired page, if there is one.
@@ -4028,7 +4193,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_contributor_insights({
-    #     table_name: "TableName",
+    #     table_name: "TableArn",
     #     next_token: "NextTokenString",
     #     max_results: 1,
     #   })
@@ -4356,7 +4521,8 @@ module Aws::DynamoDB
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html
     #
     # @option params [required, String] :table_name
-    #   The name of the table to contain the item.
+    #   The name of the table to contain the item. You can also provide the
+    #   Amazon Resource Name (ARN) of the table in this parameter.
     #
     # @option params [required, Hash<String,Types::AttributeValue>] :item
     #   A map of attribute name/value pairs, one for each attribute. Only the
@@ -4588,7 +4754,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_item({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     item: { # required
     #       "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     },
@@ -4644,6 +4810,98 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def put_item(params = {}, options = {})
       req = build_request(:put_item, params)
+      req.send_request(options)
+    end
+
+    # Attaches a resource-based policy document to the resource, which can
+    # be a table or stream. When you attach a resource-based policy using
+    # this API, the policy application is [ *eventually consistent* ][1].
+    #
+    # `PutResourcePolicy` is an idempotent operation; running it multiple
+    # times on the same resource using the same policy document will return
+    # the same revision ID. If you specify an `ExpectedRevisionId` which
+    # doesn't match the current policy's `RevisionId`, the
+    # `PolicyNotFoundException` will be returned.
+    #
+    # <note markdown="1"> `PutResourcePolicy` is an asynchronous operation. If you issue a
+    # `GetResourcePolicy` request immediately after a `PutResourcePolicy`
+    # request, DynamoDB might return your previous policy, if there was one,
+    # or return the `PolicyNotFoundException`. This is because
+    # `GetResourcePolicy` uses an eventually consistent query, and the
+    # metadata for your policy or table might not be available at that
+    # moment. Wait for a few seconds, and then try the `GetResourcePolicy`
+    # request again.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the DynamoDB resource to which the
+    #   policy will be attached. The resources you can specify include tables
+    #   and streams.
+    #
+    #   You can control index permissions using the base table's policy. To
+    #   specify the same permission level for your table and its indexes, you
+    #   can provide both the table and index Amazon Resource Name (ARN)s in
+    #   the `Resource` field of a given `Statement` in your policy document.
+    #   Alternatively, to specify different permissions for your table,
+    #   indexes, or both, you can define multiple `Statement` fields in your
+    #   policy document.
+    #
+    # @option params [required, String] :policy
+    #   An Amazon Web Services resource-based policy document in JSON format.
+    #
+    #   The maximum size supported for a resource-based policy document is 20
+    #   KB. DynamoDB counts whitespaces when calculating the size of a policy
+    #   against this limit. For a full list of all considerations that you
+    #   should keep in mind while attaching a resource-based policy, see
+    #   [Resource-based policy considerations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html
+    #
+    # @option params [String] :expected_revision_id
+    #   A string value that you can use to conditionally update your policy.
+    #   You can provide the revision ID of your existing policy to make
+    #   mutating requests against that policy. When you provide an expected
+    #   revision ID, if the revision ID of the existing policy on the resource
+    #   doesn't match or if there's no policy attached to the resource, your
+    #   request will be rejected with a `PolicyNotFoundException`.
+    #
+    #   To conditionally put a policy when no policy exists for the resource,
+    #   specify `NO_POLICY` for the revision ID.
+    #
+    # @option params [Boolean] :confirm_remove_self_resource_access
+    #   Set this parameter to `true` to confirm that you want to remove your
+    #   permissions to change the policy of this resource in the future.
+    #
+    # @return [Types::PutResourcePolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyOutput#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     resource_arn: "ResourceArnString", # required
+    #     policy: "ResourcePolicy", # required
+    #     expected_revision_id: "PolicyRevisionId",
+    #     confirm_remove_self_resource_access: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
       req.send_request(options)
     end
 
@@ -4712,7 +4970,8 @@ module Aws::DynamoDB
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html#Query.Pagination
     #
     # @option params [required, String] :table_name
-    #   The name of the table containing the requested items.
+    #   The name of the table containing the requested items. You can also
+    #   provide the Amazon Resource Name (ARN) of the table in this parameter.
     #
     # @option params [String] :index_name
     #   The name of an index to query. This index can be any local secondary
@@ -5115,7 +5374,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.query({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     index_name: "IndexName",
     #     select: "ALL_ATTRIBUTES", # accepts ALL_ATTRIBUTES, ALL_PROJECTED_ATTRIBUTES, SPECIFIC_ATTRIBUTES, COUNT
     #     attributes_to_get: ["AttributeName"],
@@ -5663,9 +5922,11 @@ module Aws::DynamoDB
     # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.ParallelScan
     #
     # @option params [required, String] :table_name
-    #   The name of the table containing the requested items; or, if you
-    #   provide `IndexName`, the name of the table to which that index
-    #   belongs.
+    #   The name of the table containing the requested items or if you provide
+    #   `IndexName`, the name of the table to which that index belongs.
+    #
+    #   You can also provide the Amazon Resource Name (ARN) of the table in
+    #   this parameter.
     #
     # @option params [String] :index_name
     #   The name of a secondary index to scan. This index can be any local
@@ -6009,7 +6270,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.scan({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     index_name: "IndexName",
     #     attributes_to_get: ["AttributeName"],
     #     limit: 1,
@@ -6159,7 +6420,7 @@ module Aws::DynamoDB
     #           key: { # required
     #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #           },
-    #           table_name: "TableName", # required
+    #           table_name: "TableArn", # required
     #           projection_expression: "ProjectionExpression",
     #           expression_attribute_names: {
     #             "ExpressionAttributeNameVariable" => "AttributeName",
@@ -6329,7 +6590,7 @@ module Aws::DynamoDB
     #           key: { # required
     #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #           },
-    #           table_name: "TableName", # required
+    #           table_name: "TableArn", # required
     #           condition_expression: "ConditionExpression", # required
     #           expression_attribute_names: {
     #             "ExpressionAttributeNameVariable" => "AttributeName",
@@ -6343,7 +6604,7 @@ module Aws::DynamoDB
     #           item: { # required
     #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #           },
-    #           table_name: "TableName", # required
+    #           table_name: "TableArn", # required
     #           condition_expression: "ConditionExpression",
     #           expression_attribute_names: {
     #             "ExpressionAttributeNameVariable" => "AttributeName",
@@ -6357,7 +6618,7 @@ module Aws::DynamoDB
     #           key: { # required
     #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #           },
-    #           table_name: "TableName", # required
+    #           table_name: "TableArn", # required
     #           condition_expression: "ConditionExpression",
     #           expression_attribute_names: {
     #             "ExpressionAttributeNameVariable" => "AttributeName",
@@ -6372,7 +6633,7 @@ module Aws::DynamoDB
     #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #           },
     #           update_expression: "UpdateExpression", # required
-    #           table_name: "TableName", # required
+    #           table_name: "TableArn", # required
     #           condition_expression: "ConditionExpression",
     #           expression_attribute_names: {
     #             "ExpressionAttributeNameVariable" => "AttributeName",
@@ -6408,11 +6669,11 @@ module Aws::DynamoDB
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.item_collection_metrics #=> Hash
-    #   resp.item_collection_metrics["TableName"] #=> Array
-    #   resp.item_collection_metrics["TableName"][0].item_collection_key #=> Hash
-    #   resp.item_collection_metrics["TableName"][0].item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #   resp.item_collection_metrics["TableName"][0].size_estimate_range_gb #=> Array
-    #   resp.item_collection_metrics["TableName"][0].size_estimate_range_gb[0] #=> Float
+    #   resp.item_collection_metrics["TableArn"] #=> Array
+    #   resp.item_collection_metrics["TableArn"][0].item_collection_key #=> Hash
+    #   resp.item_collection_metrics["TableArn"][0].item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.item_collection_metrics["TableArn"][0].size_estimate_range_gb #=> Array
+    #   resp.item_collection_metrics["TableArn"][0].size_estimate_range_gb[0] #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TransactWriteItems AWS API Documentation
     #
@@ -6475,7 +6736,8 @@ module Aws::DynamoDB
     # 35 days.
     #
     # @option params [required, String] :table_name
-    #   The name of the table.
+    #   The name of the table. You can also provide the Amazon Resource Name
+    #   (ARN) of the table in this parameter.
     #
     # @option params [required, Types::PointInTimeRecoverySpecification] :point_in_time_recovery_specification
     #   Represents the settings used to enable point in time recovery.
@@ -6487,7 +6749,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_continuous_backups({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     point_in_time_recovery_specification: { # required
     #       point_in_time_recovery_enabled: false, # required
     #     },
@@ -6519,7 +6781,8 @@ module Aws::DynamoDB
     # CloudWatch Contributor Insights for DynamoDB for this table.
     #
     # @option params [required, String] :table_name
-    #   The name of the table.
+    #   The name of the table. You can also provide the Amazon Resource Name
+    #   (ARN) of the table in this parameter.
     #
     # @option params [String] :index_name
     #   The global secondary index name, if applicable.
@@ -6536,7 +6799,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_contributor_insights({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     index_name: "IndexName",
     #     contributor_insights_action: "ENABLE", # required, accepts ENABLE, DISABLE
     #   })
@@ -6881,7 +7144,8 @@ module Aws::DynamoDB
     # `UpdateItem` operation using the `ReturnValues` parameter.
     #
     # @option params [required, String] :table_name
-    #   The name of the table containing the item to update.
+    #   The name of the table containing the item to update. You can also
+    #   provide the Amazon Resource Name (ARN) of the table in this parameter.
     #
     # @option params [required, Hash<String,Types::AttributeValue>] :key
     #   The primary key of the item to be updated. Each element consists of an
@@ -7206,7 +7470,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_item({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     key: { # required
     #       "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     },
@@ -7275,10 +7539,11 @@ module Aws::DynamoDB
     # The command to update the Kinesis stream destination.
     #
     # @option params [required, String] :table_name
-    #   The table name for the Kinesis streaming destination input.
+    #   The table name for the Kinesis streaming destination input. You can
+    #   also provide the ARN of the table in this parameter.
     #
     # @option params [required, String] :stream_arn
-    #   The ARN for the Kinesis stream input.
+    #   The Amazon Resource Name (ARN) for the Kinesis stream input.
     #
     # @option params [Types::UpdateKinesisStreamingConfiguration] :update_kinesis_streaming_configuration
     #   The command to update the Kinesis stream configuration.
@@ -7293,7 +7558,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_kinesis_streaming_destination({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     stream_arn: "StreamArn", # required
     #     update_kinesis_streaming_configuration: {
     #       approximate_creation_date_time_precision: "MILLISECOND", # accepts MILLISECOND, MICROSECOND
@@ -7334,9 +7599,9 @@ module Aws::DynamoDB
     #
     # `UpdateTable` is an asynchronous operation; while it's executing, the
     # table status changes from `ACTIVE` to `UPDATING`. While it's
-    # `UPDATING`, you can't issue another `UpdateTable` request on the base
-    # table nor any replicas. When the table returns to the `ACTIVE` state,
-    # the `UpdateTable` operation is complete.
+    # `UPDATING`, you can't issue another `UpdateTable` request. When the
+    # table returns to the `ACTIVE` state, the `UpdateTable` operation is
+    # complete.
     #
     #
     #
@@ -7349,7 +7614,8 @@ module Aws::DynamoDB
     #   index.
     #
     # @option params [required, String] :table_name
-    #   The name of the table to be updated.
+    #   The name of the table to be updated. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @option params [String] :billing_mode
     #   Controls how you are charged for read and write throughput and how you
@@ -7493,7 +7759,7 @@ module Aws::DynamoDB
     #         attribute_type: "S", # required, accepts S, N, B
     #       },
     #     ],
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
     #     provisioned_throughput: {
     #       read_capacity_units: 1, # required
@@ -7689,7 +7955,8 @@ module Aws::DynamoDB
     #   of the replica to be updated.
     #
     # @option params [required, String] :table_name
-    #   The name of the global table to be updated.
+    #   The name of the global table to be updated. You can also provide the
+    #   Amazon Resource Name (ARN) of the table in this parameter.
     #
     # @option params [Types::AutoScalingSettingsUpdate] :provisioned_write_capacity_auto_scaling_update
     #   Represents the auto scaling settings to be modified for a global table
@@ -7726,7 +7993,7 @@ module Aws::DynamoDB
     #         },
     #       },
     #     ],
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     provisioned_write_capacity_auto_scaling_update: {
     #       minimum_units: 1,
     #       maximum_units: 1,
@@ -7882,7 +8149,8 @@ module Aws::DynamoDB
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html
     #
     # @option params [required, String] :table_name
-    #   The name of the table to be configured.
+    #   The name of the table to be configured. You can also provide the
+    #   Amazon Resource Name (ARN) of the table in this parameter.
     #
     # @option params [required, Types::TimeToLiveSpecification] :time_to_live_specification
     #   Represents the settings used to enable or disable Time to Live for the
@@ -7895,7 +8163,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_time_to_live({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     time_to_live_specification: { # required
     #       enabled: false, # required
     #       attribute_name: "TimeToLiveAttributeName", # required
@@ -7929,7 +8197,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

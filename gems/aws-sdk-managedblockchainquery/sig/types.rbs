@@ -123,6 +123,7 @@ module Aws::ManagedBlockchainQuery
 
     class GetTransactionInput
       attr_accessor transaction_hash: ::String
+      attr_accessor transaction_id: ::String
       attr_accessor network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
       SENSITIVE: []
     end
@@ -337,6 +338,7 @@ module Aws::ManagedBlockchainQuery
 
     class TransactionOutputItem
       attr_accessor transaction_hash: ::String
+      attr_accessor transaction_id: ::String
       attr_accessor network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
       attr_accessor transaction_timestamp: ::Time
       attr_accessor confirmation_status: ("FINAL" | "NONFINAL")

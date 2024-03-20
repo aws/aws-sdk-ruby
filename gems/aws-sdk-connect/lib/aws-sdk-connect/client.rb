@@ -675,7 +675,27 @@ module Aws::Connect
     #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
     #
     # @option params [required, String] :resource_type
-    #   A valid resource type.
+    #   A valid resource type. To [enable streaming for real-time analysis of
+    #   contacts][1], use the following types:
+    #
+    #   * For chat contacts, use `REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS`.
+    #
+    #   * For voice contacts, use `REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS`.
+    #
+    #   <note markdown="1"> `REAL_TIME_CONTACT_ANALYSIS_SEGMENTS` is deprecated, but it is still
+    #   supported and will apply only to VOICE channel contacts. Use
+    #   `REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS` for voice contacts moving
+    #   forward.
+    #
+    #    If you have previously associated a stream with
+    #   `REAL_TIME_CONTACT_ANALYSIS_SEGMENTS`, no action is needed to update
+    #   the stream to `REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-contact-analysis-segment-streams.html
     #
     # @option params [required, Types::InstanceStorageConfig] :storage_config
     #   A valid storage type.
@@ -688,7 +708,7 @@ module Aws::Connect
     #
     #   resp = client.associate_instance_storage_config({
     #     instance_id: "InstanceId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS, REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS, REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
     #     storage_config: { # required
     #       association_id: "AssociationId",
     #       storage_type: "S3", # required, accepts S3, KINESIS_VIDEO_STREAM, KINESIS_STREAM, KINESIS_FIREHOSE
@@ -4840,7 +4860,7 @@ module Aws::Connect
     #   resp = client.describe_instance_storage_config({
     #     instance_id: "InstanceId", # required
     #     association_id: "AssociationId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS, REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS, REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
     #   })
     #
     # @example Response structure
@@ -5806,7 +5826,7 @@ module Aws::Connect
     #   resp = client.disassociate_instance_storage_config({
     #     instance_id: "InstanceId", # required
     #     association_id: "AssociationId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS, REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS, REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateInstanceStorageConfig AWS API Documentation
@@ -9266,7 +9286,7 @@ module Aws::Connect
     #
     #   resp = client.list_instance_storage_configs({
     #     instance_id: "InstanceId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS, REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS, REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -14953,7 +14973,7 @@ module Aws::Connect
     #   resp = client.update_instance_storage_config({
     #     instance_id: "InstanceId", # required
     #     association_id: "AssociationId", # required
-    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS
+    #     resource_type: "CHAT_TRANSCRIPTS", # required, accepts CHAT_TRANSCRIPTS, CALL_RECORDINGS, SCHEDULED_REPORTS, MEDIA_STREAMS, CONTACT_TRACE_RECORDS, AGENT_EVENTS, REAL_TIME_CONTACT_ANALYSIS_SEGMENTS, ATTACHMENTS, CONTACT_EVALUATIONS, SCREEN_RECORDINGS, REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS, REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
     #     storage_config: { # required
     #       association_id: "AssociationId",
     #       storage_type: "S3", # required, accepts S3, KINESIS_VIDEO_STREAM, KINESIS_STREAM, KINESIS_FIREHOSE
@@ -16661,7 +16681,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.152.0'
+      context[:gem_version] = '1.153.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

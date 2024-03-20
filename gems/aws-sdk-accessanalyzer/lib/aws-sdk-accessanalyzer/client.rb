@@ -698,6 +698,12 @@ module Aws::AccessAnalyzer
     #         s3_express_directory_bucket: {
     #           bucket_policy: "S3ExpressDirectoryBucketPolicy",
     #         },
+    #         dynamodb_stream: {
+    #           stream_policy: "DynamodbStreamPolicy",
+    #         },
+    #         dynamodb_table: {
+    #           table_policy: "DynamodbTablePolicy",
+    #         },
     #       },
     #     },
     #     client_token: "String",
@@ -986,6 +992,8 @@ module Aws::AccessAnalyzer
     #   resp.access_preview.configurations["ConfigurationsMapKey"].sns_topic.topic_policy #=> String
     #   resp.access_preview.configurations["ConfigurationsMapKey"].sqs_queue.queue_policy #=> String
     #   resp.access_preview.configurations["ConfigurationsMapKey"].s3_express_directory_bucket.bucket_policy #=> String
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].dynamodb_stream.stream_policy #=> String
+    #   resp.access_preview.configurations["ConfigurationsMapKey"].dynamodb_table.table_policy #=> String
     #   resp.access_preview.created_at #=> Time
     #   resp.access_preview.status #=> String, one of "COMPLETED", "CREATING", "FAILED"
     #   resp.access_preview.status_reason.code #=> String, one of "INTERNAL_ERROR", "INVALID_CONFIGURATION"
@@ -1025,7 +1033,7 @@ module Aws::AccessAnalyzer
     # @example Response structure
     #
     #   resp.resource.resource_arn #=> String
-    #   resp.resource.resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic", "AWS::S3Express::DirectoryBucket"
+    #   resp.resource.resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic", "AWS::S3Express::DirectoryBucket", "AWS::DynamoDB::Table", "AWS::DynamoDB::Stream"
     #   resp.resource.created_at #=> Time
     #   resp.resource.analyzed_at #=> Time
     #   resp.resource.updated_at #=> Time
@@ -1169,7 +1177,7 @@ module Aws::AccessAnalyzer
     #   resp.finding.action[0] #=> String
     #   resp.finding.resource #=> String
     #   resp.finding.is_public #=> Boolean
-    #   resp.finding.resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic", "AWS::S3Express::DirectoryBucket"
+    #   resp.finding.resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic", "AWS::S3Express::DirectoryBucket", "AWS::DynamoDB::Table", "AWS::DynamoDB::Stream"
     #   resp.finding.condition #=> Hash
     #   resp.finding.condition["String"] #=> String
     #   resp.finding.created_at #=> Time
@@ -1247,7 +1255,7 @@ module Aws::AccessAnalyzer
     #   resp.id #=> String
     #   resp.next_token #=> String
     #   resp.resource #=> String
-    #   resp.resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic", "AWS::S3Express::DirectoryBucket"
+    #   resp.resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic", "AWS::S3Express::DirectoryBucket", "AWS::DynamoDB::Table", "AWS::DynamoDB::Stream"
     #   resp.resource_owner_account #=> String
     #   resp.status #=> String, one of "ACTIVE", "ARCHIVED", "RESOLVED"
     #   resp.updated_at #=> Time
@@ -1410,7 +1418,7 @@ module Aws::AccessAnalyzer
     #   resp.findings[0].condition["String"] #=> String
     #   resp.findings[0].resource #=> String
     #   resp.findings[0].is_public #=> Boolean
-    #   resp.findings[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic", "AWS::S3Express::DirectoryBucket"
+    #   resp.findings[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic", "AWS::S3Express::DirectoryBucket", "AWS::DynamoDB::Table", "AWS::DynamoDB::Stream"
     #   resp.findings[0].created_at #=> Time
     #   resp.findings[0].change_type #=> String, one of "CHANGED", "NEW", "UNCHANGED"
     #   resp.findings[0].status #=> String, one of "ACTIVE", "ARCHIVED", "RESOLVED"
@@ -1512,7 +1520,7 @@ module Aws::AccessAnalyzer
     #
     #   resp = client.list_analyzed_resources({
     #     analyzer_arn: "AnalyzerArn", # required
-    #     resource_type: "AWS::S3::Bucket", # accepts AWS::S3::Bucket, AWS::IAM::Role, AWS::SQS::Queue, AWS::Lambda::Function, AWS::Lambda::LayerVersion, AWS::KMS::Key, AWS::SecretsManager::Secret, AWS::EFS::FileSystem, AWS::EC2::Snapshot, AWS::ECR::Repository, AWS::RDS::DBSnapshot, AWS::RDS::DBClusterSnapshot, AWS::SNS::Topic, AWS::S3Express::DirectoryBucket
+    #     resource_type: "AWS::S3::Bucket", # accepts AWS::S3::Bucket, AWS::IAM::Role, AWS::SQS::Queue, AWS::Lambda::Function, AWS::Lambda::LayerVersion, AWS::KMS::Key, AWS::SecretsManager::Secret, AWS::EFS::FileSystem, AWS::EC2::Snapshot, AWS::ECR::Repository, AWS::RDS::DBSnapshot, AWS::RDS::DBClusterSnapshot, AWS::SNS::Topic, AWS::S3Express::DirectoryBucket, AWS::DynamoDB::Table, AWS::DynamoDB::Stream
     #     next_token: "Token",
     #     max_results: 1,
     #   })
@@ -1522,7 +1530,7 @@ module Aws::AccessAnalyzer
     #   resp.analyzed_resources #=> Array
     #   resp.analyzed_resources[0].resource_arn #=> String
     #   resp.analyzed_resources[0].resource_owner_account #=> String
-    #   resp.analyzed_resources[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic", "AWS::S3Express::DirectoryBucket"
+    #   resp.analyzed_resources[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic", "AWS::S3Express::DirectoryBucket", "AWS::DynamoDB::Table", "AWS::DynamoDB::Stream"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ListAnalyzedResources AWS API Documentation
@@ -1706,7 +1714,7 @@ module Aws::AccessAnalyzer
     #   resp.findings[0].action[0] #=> String
     #   resp.findings[0].resource #=> String
     #   resp.findings[0].is_public #=> Boolean
-    #   resp.findings[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic", "AWS::S3Express::DirectoryBucket"
+    #   resp.findings[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic", "AWS::S3Express::DirectoryBucket", "AWS::DynamoDB::Table", "AWS::DynamoDB::Stream"
     #   resp.findings[0].condition #=> Hash
     #   resp.findings[0].condition["String"] #=> String
     #   resp.findings[0].created_at #=> Time
@@ -1798,7 +1806,7 @@ module Aws::AccessAnalyzer
     #   resp.findings[0].error #=> String
     #   resp.findings[0].id #=> String
     #   resp.findings[0].resource #=> String
-    #   resp.findings[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic", "AWS::S3Express::DirectoryBucket"
+    #   resp.findings[0].resource_type #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic", "AWS::S3Express::DirectoryBucket", "AWS::DynamoDB::Table", "AWS::DynamoDB::Stream"
     #   resp.findings[0].resource_owner_account #=> String
     #   resp.findings[0].status #=> String, one of "ACTIVE", "ARCHIVED", "RESOLVED"
     #   resp.findings[0].updated_at #=> Time
@@ -2196,7 +2204,7 @@ module Aws::AccessAnalyzer
     #     next_token: "Token",
     #     policy_document: "PolicyDocument", # required
     #     policy_type: "IDENTITY_POLICY", # required, accepts IDENTITY_POLICY, RESOURCE_POLICY, SERVICE_CONTROL_POLICY
-    #     validate_policy_resource_type: "AWS::S3::Bucket", # accepts AWS::S3::Bucket, AWS::S3::AccessPoint, AWS::S3::MultiRegionAccessPoint, AWS::S3ObjectLambda::AccessPoint, AWS::IAM::AssumeRolePolicyDocument
+    #     validate_policy_resource_type: "AWS::S3::Bucket", # accepts AWS::S3::Bucket, AWS::S3::AccessPoint, AWS::S3::MultiRegionAccessPoint, AWS::S3ObjectLambda::AccessPoint, AWS::IAM::AssumeRolePolicyDocument, AWS::DynamoDB::Table
     #   })
     #
     # @example Response structure
@@ -2243,7 +2251,7 @@ module Aws::AccessAnalyzer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-accessanalyzer'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

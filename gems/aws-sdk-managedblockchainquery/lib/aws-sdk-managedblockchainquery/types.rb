@@ -433,6 +433,15 @@ module Aws::ManagedBlockchainQuery
     #   created.
     #   @return [String]
     #
+    # @!attribute [rw] transaction_id
+    #   The identifier of a Bitcoin transaction. It is generated when a
+    #   transaction is created.
+    #
+    #   <note markdown="1"> `transactionId` is only supported on the Bitcoin networks.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @!attribute [rw] network
     #   The blockchain network where the transaction occurred.
     #   @return [String]
@@ -441,6 +450,7 @@ module Aws::ManagedBlockchainQuery
     #
     class GetTransactionInput < Struct.new(
       :transaction_hash,
+      :transaction_id,
       :network)
       SENSITIVE = []
       include Aws::Structure
@@ -1379,6 +1389,11 @@ module Aws::ManagedBlockchainQuery
     #   created.
     #   @return [String]
     #
+    # @!attribute [rw] transaction_id
+    #   The identifier of a Bitcoin transaction. It is generated when a
+    #   transaction is created.
+    #   @return [String]
+    #
     # @!attribute [rw] network
     #   The blockchain network where the transaction occurred.
     #   @return [String]
@@ -1396,6 +1411,7 @@ module Aws::ManagedBlockchainQuery
     #
     class TransactionOutputItem < Struct.new(
       :transaction_hash,
+      :transaction_id,
       :network,
       :transaction_timestamp,
       :confirmation_status)

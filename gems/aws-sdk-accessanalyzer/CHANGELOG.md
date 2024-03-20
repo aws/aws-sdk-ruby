@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2024-03-20)
+------------------
+
+* Feature - This release adds support for policy validation and external access findings for DynamoDB tables and streams. IAM Access Analyzer helps you author functional and secure resource-based policies and identify cross-account access. Updated service API, documentation, and paginators.
+
 1.46.0 (2024-03-01)
 ------------------
 

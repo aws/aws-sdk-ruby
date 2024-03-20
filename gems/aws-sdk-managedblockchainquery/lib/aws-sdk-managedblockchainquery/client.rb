@@ -581,9 +581,17 @@ module Aws::ManagedBlockchainQuery
     #
     # [1]: https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality
     #
-    # @option params [required, String] :transaction_hash
+    # @option params [String] :transaction_hash
     #   The hash of a transaction. It is generated when a transaction is
     #   created.
+    #
+    # @option params [String] :transaction_id
+    #   The identifier of a Bitcoin transaction. It is generated when a
+    #   transaction is created.
+    #
+    #   <note markdown="1"> `transactionId` is only supported on the Bitcoin networks.
+    #
+    #    </note>
     #
     # @option params [required, String] :network
     #   The blockchain network where the transaction occurred.
@@ -595,7 +603,8 @@ module Aws::ManagedBlockchainQuery
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_transaction({
-    #     transaction_hash: "QueryTransactionHash", # required
+    #     transaction_hash: "QueryTransactionHash",
+    #     transaction_id: "QueryTransactionId",
     #     network: "ETHEREUM_MAINNET", # required, accepts ETHEREUM_MAINNET, ETHEREUM_SEPOLIA_TESTNET, BITCOIN_MAINNET, BITCOIN_TESTNET
     #   })
     #
@@ -1072,6 +1081,7 @@ module Aws::ManagedBlockchainQuery
     #
     #   resp.transactions #=> Array
     #   resp.transactions[0].transaction_hash #=> String
+    #   resp.transactions[0].transaction_id #=> String
     #   resp.transactions[0].network #=> String, one of "ETHEREUM_MAINNET", "ETHEREUM_SEPOLIA_TESTNET", "BITCOIN_MAINNET", "BITCOIN_TESTNET"
     #   resp.transactions[0].transaction_timestamp #=> Time
     #   resp.transactions[0].confirmation_status #=> String, one of "FINAL", "NONFINAL"
@@ -1099,7 +1109,7 @@ module Aws::ManagedBlockchainQuery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedblockchainquery'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

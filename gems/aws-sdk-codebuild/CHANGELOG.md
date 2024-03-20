@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2024-03-20)
+------------------
+
+* Feature - This release adds support for new webhook events (RELEASED and PRERELEASED) and filter types (TAG_NAME and RELEASE_NAME).
+
 1.105.0 (2024-03-15)
 ------------------
 

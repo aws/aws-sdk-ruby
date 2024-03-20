@@ -193,7 +193,8 @@ module Aws::ManagedBlockchainQuery
     GetTokenBalanceOutput.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: BlockchainInstant, location_name: "lastUpdatedTime"))
     GetTokenBalanceOutput.struct_class = Types::GetTokenBalanceOutput
 
-    GetTransactionInput.add_member(:transaction_hash, Shapes::ShapeRef.new(shape: QueryTransactionHash, required: true, location_name: "transactionHash"))
+    GetTransactionInput.add_member(:transaction_hash, Shapes::ShapeRef.new(shape: QueryTransactionHash, location_name: "transactionHash"))
+    GetTransactionInput.add_member(:transaction_id, Shapes::ShapeRef.new(shape: QueryTransactionId, location_name: "transactionId"))
     GetTransactionInput.add_member(:network, Shapes::ShapeRef.new(shape: QueryNetwork, required: true, location_name: "network"))
     GetTransactionInput.struct_class = Types::GetTransactionInput
 
@@ -360,6 +361,7 @@ module Aws::ManagedBlockchainQuery
     TransactionEventList.member = Shapes::ShapeRef.new(shape: TransactionEvent)
 
     TransactionOutputItem.add_member(:transaction_hash, Shapes::ShapeRef.new(shape: QueryTransactionHash, required: true, location_name: "transactionHash"))
+    TransactionOutputItem.add_member(:transaction_id, Shapes::ShapeRef.new(shape: QueryTransactionId, location_name: "transactionId"))
     TransactionOutputItem.add_member(:network, Shapes::ShapeRef.new(shape: QueryNetwork, required: true, location_name: "network"))
     TransactionOutputItem.add_member(:transaction_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "transactionTimestamp"))
     TransactionOutputItem.add_member(:confirmation_status, Shapes::ShapeRef.new(shape: ConfirmationStatus, location_name: "confirmationStatus"))

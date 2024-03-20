@@ -143,7 +143,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchainQuery/Client.html#get_transaction-instance_method
       def get_transaction: (
-                             transaction_hash: ::String,
+                             ?transaction_hash: ::String,
+                             ?transaction_id: ::String,
                              network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
                            ) -> _GetTransactionResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTransactionResponseSuccess

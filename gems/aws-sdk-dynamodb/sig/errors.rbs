@@ -69,6 +69,9 @@ module Aws
       class PointInTimeRecoveryUnavailableException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class PolicyNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ProvisionedThroughputExceededException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

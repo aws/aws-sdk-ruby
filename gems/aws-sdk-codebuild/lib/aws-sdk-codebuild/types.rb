@@ -6824,22 +6824,25 @@ module Aws::CodeBuild
     # A filter used to determine which webhooks trigger a build.
     #
     # @!attribute [rw] type
-    #   The type of webhook filter. There are six webhook filter types:
+    #   The type of webhook filter. There are eight webhook filter types:
     #   `EVENT`, `ACTOR_ACCOUNT_ID`, `HEAD_REF`, `BASE_REF`, `FILE_PATH`,
-    #   and `COMMIT_MESSAGE`.
+    #   `COMMIT_MESSAGE`, `TAG_NAME`, and `RELEASE_NAME`.
     #
     #   * EVENT
     #
     #     * A webhook event triggers a build when the provided `pattern`
-    #       matches one of six event types: `PUSH`, `PULL_REQUEST_CREATED`,
-    #       `PULL_REQUEST_UPDATED`, `PULL_REQUEST_CLOSED`,
-    #       `PULL_REQUEST_REOPENED`, and `PULL_REQUEST_MERGED`. The `EVENT`
-    #       patterns are specified as a comma-separated string. For example,
-    #       `PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED` filters all
-    #       push, pull request created, and pull request updated events.
+    #       matches one of eight event types: `PUSH`,
+    #       `PULL_REQUEST_CREATED`, `PULL_REQUEST_UPDATED`,
+    #       `PULL_REQUEST_CLOSED`, `PULL_REQUEST_REOPENED`,
+    #       `PULL_REQUEST_MERGED`, `RELEASED`, and `PRERELEASED`. The
+    #       `EVENT` patterns are specified as a comma-separated string. For
+    #       example, `PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED`
+    #       filters all push, pull request created, and pull request updated
+    #       events.
     #
     #       <note markdown="1"> The `PULL_REQUEST_REOPENED` works with GitHub and GitHub
-    #       Enterprise only.
+    #       Enterprise only. The `RELEASED` and `PRERELEASED` work with
+    #       GitHub only.
     #
     #        </note>
     #
@@ -6857,9 +6860,11 @@ module Aws::CodeBuild
     #       the regular expression `pattern`. For example,
     #       `refs/heads/branch-name` and `refs/tags/tag-name`.
     #
-    #       Works with GitHub and GitHub Enterprise push, GitHub and GitHub
+    #       <note markdown="1"> Works with GitHub and GitHub Enterprise push, GitHub and GitHub
     #       Enterprise pull request, Bitbucket push, and Bitbucket pull
     #       request events.
+    #
+    #        </note>
     #
     #   * BASE\_REF
     #
@@ -6890,6 +6895,24 @@ module Aws::CodeBuild
     #       <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
     #       events. Also works with GitHub Enterprise push events, but does
     #       not work with GitHub Enterprise pull request events.
+    #
+    #        </note>
+    #
+    #   * TAG\_NAME
+    #
+    #     * A webhook triggers a build when the tag name of the release
+    #       matches the regular expression `pattern`.
+    #
+    #       <note markdown="1"> Works with `RELEASED` and `PRERELEASED` events only.
+    #
+    #        </note>
+    #
+    #   * RELEASE\_NAME
+    #
+    #     * A webhook triggers a build when the release name matches the
+    #       regular expression `pattern`.
+    #
+    #       <note markdown="1"> Works with `RELEASED` and `PRERELEASED` events only.
     #
     #        </note>
     #   @return [String]
