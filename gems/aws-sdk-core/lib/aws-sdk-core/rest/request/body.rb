@@ -26,6 +26,12 @@ module Aws
               http_req.headers['Content-Type'] ||= 'application/octet-stream'
             when StringShape
               http_req.headers['Content-Type'] ||= 'text/plain'
+            when UnionShape
+              http_req.headers['Content-Type'] ||= if xml_builder?
+                                                     'application/xml'
+                                                   else
+                                                     'application/json'
+                                                   end
             end
           end
 
@@ -55,9 +61,14 @@ module Aws
           if streaming?
             params[@rules[:payload]]
           elsif @rules[:payload]
-            # if target shape is blob, set the content-type
-            # @rules[:payload_member].shape
             params = params[@rules[:payload]]
+            if xml_builder? && @rules.shape.member?(@rules[:payload_member].location_name)
+              # serializing payload member for rest-xml is as follows:
+              # 1. Use the member locationName if the member value doesn't match the member's name (default)
+              # 2. Use the value of the locationName on the member's target if present
+              # 3. Use the shape name of the member's target
+              update_payload_location_name
+            end
             serialize(@rules[:payload_member], params) if params
           else
             params = body_params(params)
@@ -65,11 +76,21 @@ module Aws
           end
         end
 
+        def update_payload_location_name
+          @rules[:payload_member].location_name =
+            @rules[:payload_member].shape['locationName'] ||
+            @rules[:payload_member].shape.name
+        end
+
         def streaming?
           @rules[:payload] && (
             BlobShape === @rules[:payload_member].shape ||
             StringShape === @rules[:payload_member].shape
           )
+        end
+
+        def xml_builder?
+          @serializer_class == Xml::Builder
         end
 
         def serialize(rules, params)
