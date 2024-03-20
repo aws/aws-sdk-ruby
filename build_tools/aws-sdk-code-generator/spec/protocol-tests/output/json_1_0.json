@@ -384,8 +384,7 @@
                 "type": "structure",
                 "members": {
                     "Foo": {
-                        "shape": "String",
-                        "locationName": "Fooooo"
+                        "shape": "String"
                     }
                 }
             }

@@ -812,7 +812,7 @@
                 "members": {
                     "nested": {
                         "shape": "NestedPayload",
-                        "locationName": "nested"
+                        "locationName": "NestedPayload"
                     }
                 },
                 "payload": "nested"

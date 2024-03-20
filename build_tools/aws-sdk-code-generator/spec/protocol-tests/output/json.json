@@ -275,8 +275,7 @@
                 "type": "structure",
                 "members": {
                     "Foo": {
-                        "shape": "String",
-                        "locationName": "Fooooo"
+                        "shape": "String"
                     }
                 }
             }
@@ -1329,8 +1328,7 @@
                 "type": "structure",
                 "members": {
                     "Value": {
-                        "shape": "String",
-                        "locationName": "RenamedMember"
+                        "shape": "String"
                     }
                 }
             },
