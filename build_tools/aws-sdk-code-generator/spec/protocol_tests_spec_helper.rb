@@ -98,6 +98,7 @@ module ProtocolTestsHelper
       case ref.shape
       when Seahorse::Model::Shapes::StructureShape
         return nil if src.nil?
+
         src.each.with_object({}) do |(key, value), params|
           member_ref = ref.shape.member(underscore(key).to_sym)
           params[underscore(key).to_sym] = format_data(member_ref, value)
@@ -106,6 +107,8 @@ module ProtocolTestsHelper
         src.map { |value| format_data(ref.shape.member, value) }
       when Seahorse::Model::Shapes::MapShape
         src.each.with_object({}) do |(key, value), params|
+          # handle case-sensitive headers extracted from protocol-tests
+          key = key.downcase if ref.location == 'headers'
           params[key] = format_data(ref.shape.value, value)
         end
       when Seahorse::Model::Shapes::TimestampShape
@@ -262,7 +265,6 @@ module ProtocolTestsHelper
           end
         end
       else
-        puts data
         it.expect(data).to eq(expected_data)
         test_case['resultClass']&.each_pair do |member_name, expected_class|
           it.expect (resp.data[ProtocolTestsHelper.underscore(member_name).to_sym].class.to_s)

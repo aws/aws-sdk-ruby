@@ -55,9 +55,6 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
               test_case['response']['headers'] ||= {}
             )
 
-            # temporary work-around for header case-sensitive test
-            context.http_response.headers = test_case['response']['headers']
-
             # Base64 encoded binary body is provided for eventstream
             body = if test_case['response']['eventstream']
                      Base64.decode64(test_case['response']['body'])
@@ -73,7 +70,7 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
             client.operation_name
           rescue => error
             error
-                 end
+          end
           matcher.match_resp_data(test_case, resp, self)
         end
       end
