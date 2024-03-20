@@ -10,26 +10,20 @@
     },
   "json" : {
     "input" : [
-      {"serializes_structure_members_with_locationname_traits": "Awaiting Smithy to resolve C2J translation due to jsonName trait"}
     ],
     "output" : [
-      {"AwsJson11ComplexError": "Awaiting Smithy to resolve C2J translation due to jsonName trait"}
     ]
   },
   "json_1_0" : {
     "input" : [
     ],
     "output" : [
-      {"AwsJson10ComplexError": "Awaiting Smithy to resolve C2J translation due to jsonName trait"}
     ]
   },
   "query" : {
     "input" : [
     ],
     "output" : [
-      {"QueryInvalidGreetingError": "Need to update test runner to handle error cases"},
-      {"QueryCustomizedError": "Need to update test runner to handle error cases"},
-      {"QueryComplexError": "Need to update test runner to handle error cases"}
     ]
   },
   "rest-json" : {
@@ -41,19 +35,9 @@
   },
   "rest-xml" : {
     "input" : [
-      {"HttpPayloadWithStructure": "Awaiting Smithy to resolve C2J translation"},
-      {"RestXmlHttpPayloadWithUnion": "Awaiting Smithy to resolve C2J translation"},
-      {"RestXmlHttpPayloadWithUnsetUnion": "Awaiting Smithy to resolve C2J translation"},
-      {"HttpPayloadWithXmlName": "Awaiting Smithy to resolve C2J translation"},
-      {"HttpPayloadWithXmlNamespace": "Awaiting Smithy to resolve C2J translation"},
-      {"HttpPayloadWithXmlNamespaceAndPrefix": "Awaiting Smithy to resolve C2J translation"},
-      {"XmlAttributesOnPayload": "Awaiting Smithy to resolve C2J translation"}
     ],
     "output" : [
-      {"SimpleScalarPropertiesComplexEscapes": "OxEngine does not handle all escape cases but other engines supports it"},
-      {"InvalidGreetingError": "Need to update test runner to handle error cases"},
-      {"ComplexError": "Need to update test runner to handle error cases"},
-      {"InputAndOutputWithTimestampHeaders": "Out of scope to support de-serializing HTTP header to list of strings"}
+      {"SimpleScalarPropertiesComplexEscapes": "OxEngine does not handle all escape cases but other engines supports it"}
     ]
   },
   "api-gateway" : {
