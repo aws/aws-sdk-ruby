@@ -119,10 +119,11 @@ module Aws
 
         def envelope_from_instr_file(context)
           suffix = context[:encryption][:instruction_file_suffix]
-          possible_envelope = Json.load(context.client.get_object(
+          resp_body = context.client.get_object(
             bucket: context.params[:bucket],
             key: context.params[:key] + suffix
-          ).body.read)
+          ).body
+          possible_envelope = Json.load(resp_body) unless resp_body.nil?
           extract_envelope(possible_envelope)
         rescue S3::Errors::ServiceError, Json::ParseError
           nil
