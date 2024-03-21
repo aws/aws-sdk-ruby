@@ -123,6 +123,26 @@ module Aws
                          ) -> _CreateDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
 
+      interface _CreatePackageGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePackageGroupResult]
+        def package_group: () -> Types::PackageGroupDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#create_package_group-instance_method
+      def create_package_group: (
+                                  domain: ::String,
+                                  ?domain_owner: ::String,
+                                  package_group: ::String,
+                                  ?contact_info: ::String,
+                                  ?description: ::String,
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> _CreatePackageGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePackageGroupResponseSuccess
+
       interface _CreateRepositoryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateRepositoryResult]
         def repository: () -> Types::RepositoryDescription
@@ -184,6 +204,18 @@ module Aws
                             package: ::String
                           ) -> _DeletePackageResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePackageResponseSuccess
+
+      interface _DeletePackageGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePackageGroupResult]
+        def package_group: () -> Types::PackageGroupDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#delete_package_group-instance_method
+      def delete_package_group: (
+                                  domain: ::String,
+                                  ?domain_owner: ::String,
+                                  package_group: ::String
+                                ) -> _DeletePackageGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePackageGroupResponseSuccess
 
       interface _DeletePackageVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeletePackageVersionsResult]
@@ -254,6 +286,18 @@ module Aws
                             ) -> _DescribePackageResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePackageResponseSuccess
 
+      interface _DescribePackageGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePackageGroupResult]
+        def package_group: () -> Types::PackageGroupDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#describe_package_group-instance_method
+      def describe_package_group: (
+                                    domain: ::String,
+                                    ?domain_owner: ::String,
+                                    package_group: ::String
+                                  ) -> _DescribePackageGroupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePackageGroupResponseSuccess
+
       interface _DescribePackageVersionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribePackageVersionResult]
         def package_version: () -> Types::PackageVersionDescription
@@ -313,6 +357,21 @@ module Aws
                                       ?expected_status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted")
                                     ) -> _DisposePackageVersionsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisposePackageVersionsResponseSuccess
+
+      interface _GetAssociatedPackageGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAssociatedPackageGroupResult]
+        def package_group: () -> Types::PackageGroupDescription
+        def association_type: () -> ("STRONG" | "WEAK")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#get_associated_package_group-instance_method
+      def get_associated_package_group: (
+                                          domain: ::String,
+                                          ?domain_owner: ::String,
+                                          format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "swift"),
+                                          ?namespace: ::String,
+                                          package: ::String
+                                        ) -> _GetAssociatedPackageGroupResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAssociatedPackageGroupResponseSuccess
 
       interface _GetAuthorizationTokenResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAuthorizationTokenResult]
@@ -405,6 +464,38 @@ module Aws
                                              ) -> _GetRepositoryPermissionsPolicyResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRepositoryPermissionsPolicyResponseSuccess
 
+      interface _ListAllowedRepositoriesForGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAllowedRepositoriesForGroupResult]
+        def allowed_repositories: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#list_allowed_repositories_for_group-instance_method
+      def list_allowed_repositories_for_group: (
+                                                 domain: ::String,
+                                                 ?domain_owner: ::String,
+                                                 package_group: ::String,
+                                                 origin_restriction_type: ("EXTERNAL_UPSTREAM" | "INTERNAL_UPSTREAM" | "PUBLISH"),
+                                                 ?max_results: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _ListAllowedRepositoriesForGroupResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAllowedRepositoriesForGroupResponseSuccess
+
+      interface _ListAssociatedPackagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssociatedPackagesResult]
+        def packages: () -> ::Array[Types::AssociatedPackage]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#list_associated_packages-instance_method
+      def list_associated_packages: (
+                                      domain: ::String,
+                                      ?domain_owner: ::String,
+                                      package_group: ::String,
+                                      ?max_results: ::Integer,
+                                      ?next_token: ::String,
+                                      ?preview: bool
+                                    ) -> _ListAssociatedPackagesResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssociatedPackagesResponseSuccess
+
       interface _ListDomainsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsResult]
         def domains: () -> ::Array[Types::DomainSummary]
@@ -416,6 +507,21 @@ module Aws
                           ?next_token: ::String
                         ) -> _ListDomainsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainsResponseSuccess
+
+      interface _ListPackageGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPackageGroupsResult]
+        def package_groups: () -> ::Array[Types::PackageGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#list_package_groups-instance_method
+      def list_package_groups: (
+                                 domain: ::String,
+                                 ?domain_owner: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 ?prefix: ::String
+                               ) -> _ListPackageGroupsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPackageGroupsResponseSuccess
 
       interface _ListPackageVersionAssetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPackageVersionAssetsResult]
@@ -538,6 +644,21 @@ module Aws
                                        ) -> _ListRepositoriesInDomainResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRepositoriesInDomainResponseSuccess
 
+      interface _ListSubPackageGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSubPackageGroupsResult]
+        def package_groups: () -> ::Array[Types::PackageGroupSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#list_sub_package_groups-instance_method
+      def list_sub_package_groups: (
+                                     domain: ::String,
+                                     ?domain_owner: ::String,
+                                     package_group: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListSubPackageGroupsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSubPackageGroupsResponseSuccess
+
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResult]
         def tags: () -> ::Array[Types::Tag]
@@ -644,6 +765,46 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdatePackageGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePackageGroupResult]
+        def package_group: () -> Types::PackageGroupDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#update_package_group-instance_method
+      def update_package_group: (
+                                  domain: ::String,
+                                  ?domain_owner: ::String,
+                                  package_group: ::String,
+                                  ?contact_info: ::String,
+                                  ?description: ::String
+                                ) -> _UpdatePackageGroupResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePackageGroupResponseSuccess
+
+      interface _UpdatePackageGroupOriginConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePackageGroupOriginConfigurationResult]
+        def package_group: () -> Types::PackageGroupDescription
+        def allowed_repository_updates: () -> ::Hash[("EXTERNAL_UPSTREAM" | "INTERNAL_UPSTREAM" | "PUBLISH"), ::Hash[("ADDED" | "REMOVED"), ::Array[::String]]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeArtifact/Client.html#update_package_group_origin_configuration-instance_method
+      def update_package_group_origin_configuration: (
+                                                       domain: ::String,
+                                                       ?domain_owner: ::String,
+                                                       package_group: ::String,
+                                                       ?restrictions: Hash[("EXTERNAL_UPSTREAM" | "INTERNAL_UPSTREAM" | "PUBLISH"), ("ALLOW" | "ALLOW_SPECIFIC_REPOSITORIES" | "BLOCK" | "INHERIT")],
+                                                       ?add_allowed_repositories: Array[
+                                                         {
+                                                           repository_name: ::String?,
+                                                           origin_restriction_type: ("EXTERNAL_UPSTREAM" | "INTERNAL_UPSTREAM" | "PUBLISH")?
+                                                         },
+                                                       ],
+                                                       ?remove_allowed_repositories: Array[
+                                                         {
+                                                           repository_name: ::String?,
+                                                           origin_restriction_type: ("EXTERNAL_UPSTREAM" | "INTERNAL_UPSTREAM" | "PUBLISH")?
+                                                         },
+                                                       ]
+                                                     ) -> _UpdatePackageGroupOriginConfigurationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePackageGroupOriginConfigurationResponseSuccess
 
       interface _UpdatePackageVersionsStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePackageVersionsStatusResult]
