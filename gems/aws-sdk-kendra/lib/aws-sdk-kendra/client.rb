@@ -2251,7 +2251,9 @@ module Aws::Kendra
     #
     # @option params [Types::UserGroupResolutionConfiguration] :user_group_resolution_configuration
     #   Gets users and groups from IAM Identity Center identity source. To
-    #   configure this, see [UserGroupResolutionConfiguration][1].
+    #   configure this, see [UserGroupResolutionConfiguration][1]. This is
+    #   useful for user context filtering, where search results are filtered
+    #   based on the user or their group access to documents.
     #
     #
     #
@@ -2632,10 +2634,10 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Deletes an existing Amazon Kendra index. An exception is not thrown if
-    # the index is already being deleted. While the index is being deleted,
-    # the `Status` field returned by a call to the `DescribeIndex` API is
-    # set to `DELETING`.
+    # Deletes an Amazon Kendra index. An exception is not thrown if the
+    # index is already being deleted. While the index is being deleted, the
+    # `Status` field returned by a call to the `DescribeIndex` API is set to
+    # `DELETING`.
     #
     # @option params [required, String] :id
     #   The identifier of the index you want to delete.
@@ -2764,7 +2766,7 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Deletes an existing Amazon Kendra thesaurus.
+    # Deletes an Amazon Kendra thesaurus.
     #
     # @option params [required, String] :id
     #   The identifier of the thesaurus you want to delete.
@@ -3575,7 +3577,7 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Gets information about an existing Amazon Kendra index.
+    # Gets information about an Amazon Kendra index.
     #
     # @option params [required, String] :id
     #   The identifier of the index you want to get information on.
@@ -3833,7 +3835,7 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Gets information about an existing Amazon Kendra thesaurus.
+    # Gets information about an Amazon Kendra thesaurus.
     #
     # @option params [required, String] :id
     #   The identifier of the thesaurus you want to get information on.
@@ -5109,7 +5111,14 @@ module Aws::Kendra
     #   The input query text for the search. Amazon Kendra truncates queries
     #   at 30 token words, which excludes punctuation and stop words.
     #   Truncation still applies if you use Boolean or more advanced, complex
-    #   queries.
+    #   queries. For example, `Timeoff AND October AND Category:HR` is counted
+    #   as 3 tokens: `timeoff`, `october`, `hr`. For more information, see
+    #   [Searching with advanced query syntax][1] in the Amazon Kendra
+    #   Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax
     #
     # @option params [Types::AttributeFilter] :attribute_filter
     #   Filters search results by document fields/attributes. You can only
@@ -5552,7 +5561,14 @@ module Aws::Kendra
     #   The input query text to retrieve relevant passages for the search.
     #   Amazon Kendra truncates queries at 30 token words, which excludes
     #   punctuation and stop words. Truncation still applies if you use
-    #   Boolean or more advanced, complex queries.
+    #   Boolean or more advanced, complex queries. For example, `Timeoff AND
+    #   October AND Category:HR` is counted as 3 tokens: `timeoff`, `october`,
+    #   `hr`. For more information, see [Searching with advanced query
+    #   syntax][1] in the Amazon Kendra Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax
     #
     # @option params [Types::AttributeFilter] :attribute_filter
     #   Filters search results by document fields/attributes. You can only
@@ -6017,7 +6033,7 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Updates an existing Amazon Kendra data source connector.
+    # Updates an Amazon Kendra data source connector.
     #
     # @option params [required, String] :id
     #   The identifier of the data source connector you want to update.
@@ -6942,13 +6958,13 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Updates an existing Amazon Kendra index.
+    # Updates an Amazon Kendra index.
     #
     # @option params [required, String] :id
     #   The identifier of the index you want to update.
     #
     # @option params [String] :name
-    #   The name of the index you want to update.
+    #   A new name for the index.
     #
     # @option params [String] :role_arn
     #   An Identity and Access Management (IAM) role that gives Amazon Kendra
@@ -6979,9 +6995,10 @@ module Aws::Kendra
     #   The user context policy.
     #
     # @option params [Types::UserGroupResolutionConfiguration] :user_group_resolution_configuration
-    #   Enables fetching access levels of groups and users from an IAM
-    #   Identity Center identity source. To configure this, see
-    #   [UserGroupResolutionConfiguration][1].
+    #   Gets users and groups from IAM Identity Center identity source. To
+    #   configure this, see [UserGroupResolutionConfiguration][1]. This is
+    #   useful for user context filtering, where search results are filtered
+    #   based on the user or their group access to documents.
     #
     #
     #
@@ -7291,7 +7308,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

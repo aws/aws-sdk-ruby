@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2024-03-22)
+------------------
+
+* Feature - This release relaxes constraints on the durationSeconds request parameter for the *Profile APIs that support it. This parameter can now take on values that go up to 43200.
+
 1.12.0 (2024-01-26)
 ------------------
 

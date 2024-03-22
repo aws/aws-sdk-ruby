@@ -844,15 +844,15 @@ module Aws::SecurityHub
     #   resp.rules[0].criteria.confidence #=> Array
     #   resp.rules[0].criteria.confidence[0].gte #=> Float
     #   resp.rules[0].criteria.confidence[0].lte #=> Float
-    #   resp.rules[0].criteria.confidence[0].eq #=> Float
     #   resp.rules[0].criteria.confidence[0].gt #=> Float
     #   resp.rules[0].criteria.confidence[0].lt #=> Float
+    #   resp.rules[0].criteria.confidence[0].eq #=> Float
     #   resp.rules[0].criteria.criticality #=> Array
     #   resp.rules[0].criteria.criticality[0].gte #=> Float
     #   resp.rules[0].criteria.criticality[0].lte #=> Float
-    #   resp.rules[0].criteria.criticality[0].eq #=> Float
     #   resp.rules[0].criteria.criticality[0].gt #=> Float
     #   resp.rules[0].criteria.criticality[0].lt #=> Float
+    #   resp.rules[0].criteria.criticality[0].eq #=> Float
     #   resp.rules[0].criteria.title #=> Array
     #   resp.rules[0].criteria.title[0].value #=> String
     #   resp.rules[0].criteria.title[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -1552,18 +1552,18 @@ module Aws::SecurityHub
     #             {
     #               gte: 1.0,
     #               lte: 1.0,
-    #               eq: 1.0,
     #               gt: 1.0,
     #               lt: 1.0,
+    #               eq: 1.0,
     #             },
     #           ],
     #           criticality: [
     #             {
     #               gte: 1.0,
     #               lte: 1.0,
-    #               eq: 1.0,
     #               gt: 1.0,
     #               lt: 1.0,
+    #               eq: 1.0,
     #             },
     #           ],
     #           title: [
@@ -2363,18 +2363,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       title: [
@@ -3029,18 +3029,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -3053,18 +3053,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       title: [
@@ -3167,9 +3167,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -3198,9 +3198,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -3225,18 +3225,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -3540,18 +3540,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -5686,18 +5686,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -5710,18 +5710,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       title: [
@@ -5824,9 +5824,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -5855,9 +5855,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -5882,18 +5882,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -6197,18 +6197,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -6495,30 +6495,30 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.severity_product #=> Array
     #   resp.insights[0].filters.severity_product[0].gte #=> Float
     #   resp.insights[0].filters.severity_product[0].lte #=> Float
-    #   resp.insights[0].filters.severity_product[0].eq #=> Float
     #   resp.insights[0].filters.severity_product[0].gt #=> Float
     #   resp.insights[0].filters.severity_product[0].lt #=> Float
+    #   resp.insights[0].filters.severity_product[0].eq #=> Float
     #   resp.insights[0].filters.severity_normalized #=> Array
     #   resp.insights[0].filters.severity_normalized[0].gte #=> Float
     #   resp.insights[0].filters.severity_normalized[0].lte #=> Float
-    #   resp.insights[0].filters.severity_normalized[0].eq #=> Float
     #   resp.insights[0].filters.severity_normalized[0].gt #=> Float
     #   resp.insights[0].filters.severity_normalized[0].lt #=> Float
+    #   resp.insights[0].filters.severity_normalized[0].eq #=> Float
     #   resp.insights[0].filters.severity_label #=> Array
     #   resp.insights[0].filters.severity_label[0].value #=> String
     #   resp.insights[0].filters.severity_label[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
     #   resp.insights[0].filters.confidence #=> Array
     #   resp.insights[0].filters.confidence[0].gte #=> Float
     #   resp.insights[0].filters.confidence[0].lte #=> Float
-    #   resp.insights[0].filters.confidence[0].eq #=> Float
     #   resp.insights[0].filters.confidence[0].gt #=> Float
     #   resp.insights[0].filters.confidence[0].lt #=> Float
+    #   resp.insights[0].filters.confidence[0].eq #=> Float
     #   resp.insights[0].filters.criticality #=> Array
     #   resp.insights[0].filters.criticality[0].gte #=> Float
     #   resp.insights[0].filters.criticality[0].lte #=> Float
-    #   resp.insights[0].filters.criticality[0].eq #=> Float
     #   resp.insights[0].filters.criticality[0].gt #=> Float
     #   resp.insights[0].filters.criticality[0].lt #=> Float
+    #   resp.insights[0].filters.criticality[0].eq #=> Float
     #   resp.insights[0].filters.title #=> Array
     #   resp.insights[0].filters.title[0].value #=> String
     #   resp.insights[0].filters.title[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -6570,9 +6570,9 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.network_source_port #=> Array
     #   resp.insights[0].filters.network_source_port[0].gte #=> Float
     #   resp.insights[0].filters.network_source_port[0].lte #=> Float
-    #   resp.insights[0].filters.network_source_port[0].eq #=> Float
     #   resp.insights[0].filters.network_source_port[0].gt #=> Float
     #   resp.insights[0].filters.network_source_port[0].lt #=> Float
+    #   resp.insights[0].filters.network_source_port[0].eq #=> Float
     #   resp.insights[0].filters.network_source_domain #=> Array
     #   resp.insights[0].filters.network_source_domain[0].value #=> String
     #   resp.insights[0].filters.network_source_domain[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -6586,9 +6586,9 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.network_destination_port #=> Array
     #   resp.insights[0].filters.network_destination_port[0].gte #=> Float
     #   resp.insights[0].filters.network_destination_port[0].lte #=> Float
-    #   resp.insights[0].filters.network_destination_port[0].eq #=> Float
     #   resp.insights[0].filters.network_destination_port[0].gt #=> Float
     #   resp.insights[0].filters.network_destination_port[0].lt #=> Float
+    #   resp.insights[0].filters.network_destination_port[0].eq #=> Float
     #   resp.insights[0].filters.network_destination_domain #=> Array
     #   resp.insights[0].filters.network_destination_domain[0].value #=> String
     #   resp.insights[0].filters.network_destination_domain[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -6601,15 +6601,15 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.process_pid #=> Array
     #   resp.insights[0].filters.process_pid[0].gte #=> Float
     #   resp.insights[0].filters.process_pid[0].lte #=> Float
-    #   resp.insights[0].filters.process_pid[0].eq #=> Float
     #   resp.insights[0].filters.process_pid[0].gt #=> Float
     #   resp.insights[0].filters.process_pid[0].lt #=> Float
+    #   resp.insights[0].filters.process_pid[0].eq #=> Float
     #   resp.insights[0].filters.process_parent_pid #=> Array
     #   resp.insights[0].filters.process_parent_pid[0].gte #=> Float
     #   resp.insights[0].filters.process_parent_pid[0].lte #=> Float
-    #   resp.insights[0].filters.process_parent_pid[0].eq #=> Float
     #   resp.insights[0].filters.process_parent_pid[0].gt #=> Float
     #   resp.insights[0].filters.process_parent_pid[0].lt #=> Float
+    #   resp.insights[0].filters.process_parent_pid[0].eq #=> Float
     #   resp.insights[0].filters.process_launched_at #=> Array
     #   resp.insights[0].filters.process_launched_at[0].start #=> String
     #   resp.insights[0].filters.process_launched_at[0].end #=> String
@@ -6761,15 +6761,15 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.finding_provider_fields_confidence #=> Array
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].gte #=> Float
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].lte #=> Float
-    #   resp.insights[0].filters.finding_provider_fields_confidence[0].eq #=> Float
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].gt #=> Float
     #   resp.insights[0].filters.finding_provider_fields_confidence[0].lt #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_confidence[0].eq #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality #=> Array
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].gte #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].lte #=> Float
-    #   resp.insights[0].filters.finding_provider_fields_criticality[0].eq #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].gt #=> Float
     #   resp.insights[0].filters.finding_provider_fields_criticality[0].lt #=> Float
+    #   resp.insights[0].filters.finding_provider_fields_criticality[0].eq #=> Float
     #   resp.insights[0].filters.finding_provider_fields_related_findings_id #=> Array
     #   resp.insights[0].filters.finding_provider_fields_related_findings_id[0].value #=> String
     #   resp.insights[0].filters.finding_provider_fields_related_findings_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS"
@@ -8707,18 +8707,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -8731,18 +8731,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       title: [
@@ -8845,9 +8845,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -8876,9 +8876,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -8903,18 +8903,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -9218,18 +9218,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -9465,18 +9465,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       severity_normalized: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       severity_label: [
@@ -9489,18 +9489,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       title: [
@@ -9603,9 +9603,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       network_source_domain: [
@@ -9634,9 +9634,9 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       network_destination_domain: [
@@ -9661,18 +9661,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       process_parent_pid: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       process_launched_at: [
@@ -9976,18 +9976,18 @@ module Aws::SecurityHub
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_criticality: [
     #         {
     #           gte: 1.0,
     #           lte: 1.0,
-    #           eq: 1.0,
     #           gt: 1.0,
     #           lt: 1.0,
+    #           eq: 1.0,
     #         },
     #       ],
     #       finding_provider_fields_related_findings_id: [
@@ -10348,7 +10348,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.101.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

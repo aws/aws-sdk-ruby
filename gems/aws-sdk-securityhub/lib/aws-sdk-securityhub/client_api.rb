@@ -6012,9 +6012,9 @@ module Aws::SecurityHub
 
     NumberFilter.add_member(:gte, Shapes::ShapeRef.new(shape: Double, location_name: "Gte"))
     NumberFilter.add_member(:lte, Shapes::ShapeRef.new(shape: Double, location_name: "Lte"))
-    NumberFilter.add_member(:eq, Shapes::ShapeRef.new(shape: Double, location_name: "Eq"))
     NumberFilter.add_member(:gt, Shapes::ShapeRef.new(shape: Double, location_name: "Gt"))
     NumberFilter.add_member(:lt, Shapes::ShapeRef.new(shape: Double, location_name: "Lt"))
+    NumberFilter.add_member(:eq, Shapes::ShapeRef.new(shape: Double, location_name: "Eq"))
     NumberFilter.struct_class = Types::NumberFilter
 
     NumberFilterList.member = Shapes::ShapeRef.new(shape: NumberFilter)
@@ -6871,6 +6871,7 @@ module Aws::SecurityHub
     Vulnerability.add_member(:fix_available, Shapes::ShapeRef.new(shape: VulnerabilityFixAvailable, location_name: "FixAvailable"))
     Vulnerability.add_member(:epss_score, Shapes::ShapeRef.new(shape: Double, location_name: "EpssScore"))
     Vulnerability.add_member(:exploit_available, Shapes::ShapeRef.new(shape: VulnerabilityExploitAvailable, location_name: "ExploitAvailable"))
+    Vulnerability.add_member(:last_known_exploit_at, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LastKnownExploitAt"))
     Vulnerability.add_member(:code_vulnerabilities, Shapes::ShapeRef.new(shape: VulnerabilityCodeVulnerabilitiesList, location_name: "CodeVulnerabilities"))
     Vulnerability.struct_class = Types::Vulnerability
 

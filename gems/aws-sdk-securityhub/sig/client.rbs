@@ -4214,6 +4214,7 @@ module Aws
                                            fix_available: ("YES" | "NO" | "PARTIAL")?,
                                            epss_score: ::Float?,
                                            exploit_available: ("YES" | "NO")?,
+                                           last_known_exploit_at: ::String?,
                                            code_vulnerabilities: Array[
                                              {
                                                cwes: Array[::String]?,
@@ -4465,18 +4466,18 @@ module Aws
                                                    {
                                                      gte: ::Float?,
                                                      lte: ::Float?,
-                                                     eq: ::Float?,
                                                      gt: ::Float?,
-                                                     lt: ::Float?
+                                                     lt: ::Float?,
+                                                     eq: ::Float?
                                                    },
                                                  ]?,
                                                  criticality: Array[
                                                    {
                                                      gte: ::Float?,
                                                      lte: ::Float?,
-                                                     eq: ::Float?,
                                                      gt: ::Float?,
-                                                     lt: ::Float?
+                                                     lt: ::Float?,
+                                                     eq: ::Float?
                                                    },
                                                  ]?,
                                                  title: Array[
@@ -4839,18 +4840,18 @@ module Aws
                                         {
                                           gte: ::Float?,
                                           lte: ::Float?,
-                                          eq: ::Float?,
                                           gt: ::Float?,
-                                          lt: ::Float?
+                                          lt: ::Float?,
+                                          eq: ::Float?
                                         },
                                       ]?,
                                       criticality: Array[
                                         {
                                           gte: ::Float?,
                                           lte: ::Float?,
-                                          eq: ::Float?,
                                           gt: ::Float?,
-                                          lt: ::Float?
+                                          lt: ::Float?,
+                                          eq: ::Float?
                                         },
                                       ]?,
                                       title: Array[
@@ -5204,18 +5205,18 @@ module Aws
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               severity_normalized: Array[
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               severity_label: Array[
@@ -5228,18 +5229,18 @@ module Aws
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               criticality: Array[
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               title: Array[
@@ -5342,9 +5343,9 @@ module Aws
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               network_source_domain: Array[
@@ -5373,9 +5374,9 @@ module Aws
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               network_destination_domain: Array[
@@ -5400,18 +5401,18 @@ module Aws
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               process_parent_pid: Array[
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               process_launched_at: Array[
@@ -5715,18 +5716,18 @@ module Aws
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               finding_provider_fields_criticality: Array[
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               finding_provider_fields_related_findings_id: Array[
@@ -6240,18 +6241,18 @@ module Aws
                               {
                                 gte: ::Float?,
                                 lte: ::Float?,
-                                eq: ::Float?,
                                 gt: ::Float?,
-                                lt: ::Float?
+                                lt: ::Float?,
+                                eq: ::Float?
                               },
                             ]?,
                             severity_normalized: Array[
                               {
                                 gte: ::Float?,
                                 lte: ::Float?,
-                                eq: ::Float?,
                                 gt: ::Float?,
-                                lt: ::Float?
+                                lt: ::Float?,
+                                eq: ::Float?
                               },
                             ]?,
                             severity_label: Array[
@@ -6264,18 +6265,18 @@ module Aws
                               {
                                 gte: ::Float?,
                                 lte: ::Float?,
-                                eq: ::Float?,
                                 gt: ::Float?,
-                                lt: ::Float?
+                                lt: ::Float?,
+                                eq: ::Float?
                               },
                             ]?,
                             criticality: Array[
                               {
                                 gte: ::Float?,
                                 lte: ::Float?,
-                                eq: ::Float?,
                                 gt: ::Float?,
-                                lt: ::Float?
+                                lt: ::Float?,
+                                eq: ::Float?
                               },
                             ]?,
                             title: Array[
@@ -6378,9 +6379,9 @@ module Aws
                               {
                                 gte: ::Float?,
                                 lte: ::Float?,
-                                eq: ::Float?,
                                 gt: ::Float?,
-                                lt: ::Float?
+                                lt: ::Float?,
+                                eq: ::Float?
                               },
                             ]?,
                             network_source_domain: Array[
@@ -6409,9 +6410,9 @@ module Aws
                               {
                                 gte: ::Float?,
                                 lte: ::Float?,
-                                eq: ::Float?,
                                 gt: ::Float?,
-                                lt: ::Float?
+                                lt: ::Float?,
+                                eq: ::Float?
                               },
                             ]?,
                             network_destination_domain: Array[
@@ -6436,18 +6437,18 @@ module Aws
                               {
                                 gte: ::Float?,
                                 lte: ::Float?,
-                                eq: ::Float?,
                                 gt: ::Float?,
-                                lt: ::Float?
+                                lt: ::Float?,
+                                eq: ::Float?
                               },
                             ]?,
                             process_parent_pid: Array[
                               {
                                 gte: ::Float?,
                                 lte: ::Float?,
-                                eq: ::Float?,
                                 gt: ::Float?,
-                                lt: ::Float?
+                                lt: ::Float?,
+                                eq: ::Float?
                               },
                             ]?,
                             process_launched_at: Array[
@@ -6751,18 +6752,18 @@ module Aws
                               {
                                 gte: ::Float?,
                                 lte: ::Float?,
-                                eq: ::Float?,
                                 gt: ::Float?,
-                                lt: ::Float?
+                                lt: ::Float?,
+                                eq: ::Float?
                               },
                             ]?,
                             finding_provider_fields_criticality: Array[
                               {
                                 gte: ::Float?,
                                 lte: ::Float?,
-                                eq: ::Float?,
                                 gt: ::Float?,
-                                lt: ::Float?
+                                lt: ::Float?,
+                                eq: ::Float?
                               },
                             ]?,
                             finding_provider_fields_related_findings_id: Array[
@@ -7290,18 +7291,18 @@ module Aws
                                  {
                                    gte: ::Float?,
                                    lte: ::Float?,
-                                   eq: ::Float?,
                                    gt: ::Float?,
-                                   lt: ::Float?
+                                   lt: ::Float?,
+                                   eq: ::Float?
                                  },
                                ]?,
                                severity_normalized: Array[
                                  {
                                    gte: ::Float?,
                                    lte: ::Float?,
-                                   eq: ::Float?,
                                    gt: ::Float?,
-                                   lt: ::Float?
+                                   lt: ::Float?,
+                                   eq: ::Float?
                                  },
                                ]?,
                                severity_label: Array[
@@ -7314,18 +7315,18 @@ module Aws
                                  {
                                    gte: ::Float?,
                                    lte: ::Float?,
-                                   eq: ::Float?,
                                    gt: ::Float?,
-                                   lt: ::Float?
+                                   lt: ::Float?,
+                                   eq: ::Float?
                                  },
                                ]?,
                                criticality: Array[
                                  {
                                    gte: ::Float?,
                                    lte: ::Float?,
-                                   eq: ::Float?,
                                    gt: ::Float?,
-                                   lt: ::Float?
+                                   lt: ::Float?,
+                                   eq: ::Float?
                                  },
                                ]?,
                                title: Array[
@@ -7428,9 +7429,9 @@ module Aws
                                  {
                                    gte: ::Float?,
                                    lte: ::Float?,
-                                   eq: ::Float?,
                                    gt: ::Float?,
-                                   lt: ::Float?
+                                   lt: ::Float?,
+                                   eq: ::Float?
                                  },
                                ]?,
                                network_source_domain: Array[
@@ -7459,9 +7460,9 @@ module Aws
                                  {
                                    gte: ::Float?,
                                    lte: ::Float?,
-                                   eq: ::Float?,
                                    gt: ::Float?,
-                                   lt: ::Float?
+                                   lt: ::Float?,
+                                   eq: ::Float?
                                  },
                                ]?,
                                network_destination_domain: Array[
@@ -7486,18 +7487,18 @@ module Aws
                                  {
                                    gte: ::Float?,
                                    lte: ::Float?,
-                                   eq: ::Float?,
                                    gt: ::Float?,
-                                   lt: ::Float?
+                                   lt: ::Float?,
+                                   eq: ::Float?
                                  },
                                ]?,
                                process_parent_pid: Array[
                                  {
                                    gte: ::Float?,
                                    lte: ::Float?,
-                                   eq: ::Float?,
                                    gt: ::Float?,
-                                   lt: ::Float?
+                                   lt: ::Float?,
+                                   eq: ::Float?
                                  },
                                ]?,
                                process_launched_at: Array[
@@ -7801,18 +7802,18 @@ module Aws
                                  {
                                    gte: ::Float?,
                                    lte: ::Float?,
-                                   eq: ::Float?,
                                    gt: ::Float?,
-                                   lt: ::Float?
+                                   lt: ::Float?,
+                                   eq: ::Float?
                                  },
                                ]?,
                                finding_provider_fields_criticality: Array[
                                  {
                                    gte: ::Float?,
                                    lte: ::Float?,
-                                   eq: ::Float?,
                                    gt: ::Float?,
-                                   lt: ::Float?
+                                   lt: ::Float?,
+                                   eq: ::Float?
                                  },
                                ]?,
                                finding_provider_fields_related_findings_id: Array[
@@ -8001,18 +8002,18 @@ module Aws
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               severity_normalized: Array[
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               severity_label: Array[
@@ -8025,18 +8026,18 @@ module Aws
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               criticality: Array[
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               title: Array[
@@ -8139,9 +8140,9 @@ module Aws
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               network_source_domain: Array[
@@ -8170,9 +8171,9 @@ module Aws
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               network_destination_domain: Array[
@@ -8197,18 +8198,18 @@ module Aws
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               process_parent_pid: Array[
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               process_launched_at: Array[
@@ -8512,18 +8513,18 @@ module Aws
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               finding_provider_fields_criticality: Array[
                                 {
                                   gte: ::Float?,
                                   lte: ::Float?,
-                                  eq: ::Float?,
                                   gt: ::Float?,
-                                  lt: ::Float?
+                                  lt: ::Float?,
+                                  eq: ::Float?
                                 },
                               ]?,
                               finding_provider_fields_related_findings_id: Array[

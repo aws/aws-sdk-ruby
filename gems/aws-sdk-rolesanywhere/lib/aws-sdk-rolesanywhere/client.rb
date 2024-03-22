@@ -395,7 +395,13 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:CreateProfile`.
     #
     # @option params [Integer] :duration_seconds
-    #   The number of seconds the vended session credentials are valid for.
+    #   Used to determine how long sessions vended using this profile are
+    #   valid for. See the `Expiration` section of the [CreateSession API
+    #   documentation][1] page for more details.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object
     #
     # @option params [Boolean] :enabled
     #   Specifies whether the profile is enabled.
@@ -1108,8 +1114,9 @@ module Aws::RolesAnywhere
 
     # Imports the certificate revocation list (CRL). A CRL is a list of
     # certificates that have been revoked by the issuing certificate
-    # Authority (CA). IAM Roles Anywhere validates against the CRL before
-    # issuing credentials.
+    # Authority (CA).In order to be properly imported, a CRL must be in PEM
+    # format. IAM Roles Anywhere validates against the CRL before issuing
+    # credentials.
     #
     # <b>Required permissions: </b> `rolesanywhere:ImportCrl`.
     #
@@ -1639,7 +1646,13 @@ module Aws::RolesAnywhere
     # <b>Required permissions: </b> `rolesanywhere:UpdateProfile`.
     #
     # @option params [Integer] :duration_seconds
-    #   The number of seconds the vended session credentials are valid for.
+    #   Used to determine how long sessions vended using this profile are
+    #   valid for. See the `Expiration` section of the [CreateSession API
+    #   documentation][1] page for more details.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object
     #
     # @option params [Array<String>] :managed_policy_arns
     #   A list of managed policy ARNs that apply to the vended session
@@ -1777,7 +1790,7 @@ module Aws::RolesAnywhere
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rolesanywhere'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

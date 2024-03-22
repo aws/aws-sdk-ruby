@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2024-03-22)
+------------------
+
+* Feature - Add ResourceNotFoundException to ListPriceLists and GetPriceListFileUrl APIs
+
 1.55.0 (2024-02-09)
 ------------------
 

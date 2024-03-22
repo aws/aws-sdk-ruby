@@ -488,6 +488,19 @@ module Aws::Pricing
       include Aws::Structure
     end
 
+    # The requested resource can't be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The metadata for a service, such as the service code and available
     # attribute names.
     #

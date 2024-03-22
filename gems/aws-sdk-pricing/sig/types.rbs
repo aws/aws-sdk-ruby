@@ -130,6 +130,11 @@ module Aws::Pricing
       SENSITIVE: []
     end
 
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class Service
       attr_accessor service_code: ::String
       attr_accessor attribute_names: ::Array[::String]
