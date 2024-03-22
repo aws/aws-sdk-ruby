@@ -32,7 +32,10 @@ module Aws
         private
 
         def empty_blob_body?(body)
-          @rules[:payload_member].shape.is_a?(BlobShape) && (body.size == 0)
+          return false if !@rules[:payload_member].shape.is_a?(BlobShape) ||
+                          @rules[:payload_member]['streaming']
+
+          true if body.respond_to?(:size) && body.size.zero?
         end
 
         def event_stream?
@@ -45,7 +48,7 @@ module Aws
             StringShape === @rules[:payload_member].shape
           )
         end
-
+        
         def parse(body, rules, target = nil)
           @parser_class.new(rules).parse(body, target) if body.size > 0
         end
