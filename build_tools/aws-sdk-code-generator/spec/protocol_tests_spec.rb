@@ -3,24 +3,18 @@
 require_relative 'spec_helper'
 require_relative 'protocol_tests_spec_helper'
 
-PROTOCOL_TESTS_IGNORE_LIST_PATH = File.join(File.dirname(__FILE__), 'protocol-tests-ignore-list.json')
-
 ProtocolTestsHelper.fixtures.each do |protocol, files|
   describe(protocol) do
     let(:matcher) { ProtocolTestsHelper::Matcher.new }
-    let(:ignore_list) { JSON.parse(File.read(PROTOCOL_TESTS_IGNORE_LIST_PATH))[protocol] }
     describe 'input' do
-      ProtocolTestsHelper.each_test_case(self, files['input']) do |group, suite, test_case, id, description|
+      ProtocolTestsHelper.each_test_case(self, files['input']) do |group, suite, test_case, test_id, description|
         group.it(description) do
-          # check if test case id is in the ignore list
-          ignore_result = ignore_list['input'].find { |i| i.has_key?(test_case['id']) }
-          skip(ignore_result[test_case['id']]) unless ignore_result.nil?
-
-          if id.include?('IdempotencyToken')
-            allow(SecureRandom).to receive(:uuid).and_return('00000000-0000-4000-8000-000000000000')
+          if (ignore_result = ProtocolTestsHelper.check_ignore_list(protocol, test_id, 'input'))
+            skip(ignore_result[test_id])
           end
+          matcher.setup_matchers(test_id, self)
 
-          client = ProtocolTestsHelper.client_for(suite, test_case, "Input_#{id}")
+          client = ProtocolTestsHelper.client_for(suite, test_case, "Input_#{test_id}")
           ctx = nil
           client.handle(step: :send) do |context|
             ctx = context
@@ -42,13 +36,13 @@ ProtocolTestsHelper.fixtures.each do |protocol, files|
     end
 
     describe 'output' do
-      ProtocolTestsHelper.each_test_case(self, files['output']) do |group, suite, test_case, id, description|
+      ProtocolTestsHelper.each_test_case(self, files['output']) do |group, suite, test_case, test_id, description|
         group.it(description) do
-          # check if test case id is in the ignore list
-          ignore_result = ignore_list['output'].find { |i| i.has_key?(test_case['id']) }
-          skip(ignore_result[test_case['id']]) unless ignore_result.nil?
+          if (ignore_result = ProtocolTestsHelper.check_ignore_list(protocol, test_id, 'output'))
+            skip(ignore_result[test_id])
+          end
 
-          client = ProtocolTestsHelper.client_for(suite, test_case, "Output_#{id}")
+          client = ProtocolTestsHelper.client_for(suite, test_case, "Output_#{test_id}")
           client.handle(step: :send) do |context|
             context.http_response.signal_headers(
               test_case['response']['status_code'],

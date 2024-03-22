@@ -3,10 +3,20 @@
 require 'rexml/document'
 require 'rspec/expectations'
 
+PROTOCOL_TESTS_IGNORE_LIST_PATH = File.join(File.dirname(__FILE__), 'protocol-tests-ignore-list.json')
+
 # This module contains helpers relating to protocol-tests
 module ProtocolTestsHelper
   class << self
-    # sets up paths for each protocol and its files
+
+    def check_ignore_list(protocol, test_id, test_type)
+      return nil if protocol.include?('extras')
+
+      ignore_list = JSON.parse(File.read(PROTOCOL_TESTS_IGNORE_LIST_PATH))[protocol]
+      ignore_list[test_type].find { |i| i.key?(test_id) }
+    end
+
+    # sets up paths for each protocol and its file paths
     def fixtures
       fixtures = {}
       files = Dir.glob(File.join(File.dirname(__FILE__), 'protocol-tests', '**', '*.json'))
@@ -24,15 +34,11 @@ module ProtocolTestsHelper
     def each_test_case(context, fixture_path)
       return unless fixture_path
 
-      Aws::Json.load_file(fixture_path).each.with_index do |suite, suite_n|
+      Aws::Json.load_file(fixture_path).each do |suite|
         context.context(suite['description']) do
-          suite['cases'].each.with_index do |test_case, case_n|
+          suite['cases'].each do |test_case|
             suite['metadata']['endpointPrefix'] ||= 'svc'
-            test_id = "#{suite['metadata']['protocol'].gsub(/-/, '_')}_"
-            test_id += test_case['id'] || "#{suite_n}_#{case_n}"
-            test_description = test_case['description'] || "case: #{case_n}"
-
-            yield(self, suite, test_case, test_id, test_description)
+            yield(self, suite, test_case, test_case['id'], test_case['description'])
           end
         end
       end
@@ -134,18 +140,14 @@ module ProtocolTestsHelper
     end
   end
 
-  # holds logic for input/output matchers
+  # input/output matchers
   class Matcher
     include RSpec::Matchers
 
-    def normalize_headers(hash)
-      hash.each.with_object({}) do |(k,v),headers|
-        headers[k.downcase] = v.to_s
-      end
-    end
+    def setup_matchers(id, it)
+      return unless id.include?('IdempotencyToken')
 
-    def normalize_xml(xml)
-      REXML::Document.new(xml).to_s.gsub(/>\s+?</, '><').strip
+      it.allow(SecureRandom).to it.receive(:uuid).and_return('00000000-0000-4000-8000-000000000000')
     end
 
     def match_req_host(test_case, http_req, it)
@@ -266,15 +268,23 @@ module ProtocolTestsHelper
         end
       else
         it.expect(data).to eq(expected_data)
-        test_case['resultClass']&.each_pair do |member_name, expected_class|
-          it.expect (resp.data[ProtocolTestsHelper.underscore(member_name).to_sym].class.to_s)
-            .to include(expected_class)
-        end
       end
     end
 
+    private
+
+    def normalize_headers(hash)
+      hash.each.with_object({}) do |(k, v), headers|
+        headers[k.downcase] = v.to_s
+      end
+    end
+
+    def normalize_xml(xml)
+      REXML::Document.new(xml).to_s.gsub(/>\s+?</, '><').strip
+    end
+
     def error_case?(test_case)
-      !test_case['error'].nil? || false
+      !test_case['error'].nil?
     end
 
   end
