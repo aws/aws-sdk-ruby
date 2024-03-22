@@ -1,6 +1,6 @@
 [
   {
-    "description": "Scalar members in payload are unmarshalled correctly",
+    "description": "Test cases for Scalar Payload Members",
     "metadata": {
       "protocol": "api-gateway"
     },
@@ -46,12 +46,14 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayUnmarshallsScalarPayloadMembers",
         "given": {
           "output": {
             "shape": "OutputShape"
           },
           "name": "OperationName"
         },
+        "description": "Scalar members in payload are unmarshalled correctly",
         "result": {
           "PayloadMember": {
             "StringMember": "foo",
@@ -69,7 +71,7 @@
     ]
   },
   {
-    "description": "Boolean member with value in payload is unmarshalled correctly",
+    "description": "Test cases for Boolean Member",
     "metadata": {
       "protocol": "api-gateway"
     },
@@ -91,12 +93,14 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayUnmarshallsBooleanMember",
         "given": {
           "output": {
             "shape": "OutputShape"
           },
           "name": "OperationName"
         },
+        "description": "Boolean member with value in payload is unmarshalled correctly",
         "result": {
           "BooleanMemberA": true,
           "BooleanMemberB": false
@@ -110,7 +114,7 @@
     ]
   },
   {
-    "description": "Nested structure in payload is unmarshalled correctly",
+    "description": "Test cases for Struct Payload Member ",
     "metadata": {
       "protocol": "api-gateway"
     },
@@ -146,12 +150,14 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayUnmarshallsNestedStructPayload",
         "given": {
           "output": {
             "shape": "OutputShape"
           },
           "name": "OperationName"
         },
+        "description": "Nested structure in payload is unmarshalled correctly",
         "result": {
           "PayloadMember": {
             "NestedStructure": {
@@ -168,7 +174,7 @@
     ]
   },
   {
-    "description": "List of strings in payload is unmarshalled correctly",
+    "description": "Test cases for List of Strings Payload",
     "metadata": {
       "protocol": "api-gateway"
     },
@@ -202,12 +208,14 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayUnmarshallListofStringsPayload",
         "given": {
           "output": {
             "shape": "OutputShape"
           },
           "name": "OperationName"
         },
+        "description": "List of strings in payload is unmarshalled correctly",
         "result": {
           "PayloadMember": {
             "ListOfStrings": [
@@ -226,7 +234,7 @@
     ]
   },
   {
-    "description": "List of structs in payload is unmarshalled correctly",
+    "description": "Test cases for List of Structs Payload",
     "metadata": {
       "protocol": "api-gateway"
     },
@@ -268,12 +276,14 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayUnmarshallListofStructsPayload",
         "given": {
           "output": {
             "shape": "OutputShape"
           },
           "name": "OperationName"
         },
+        "description": "List of structs in payload is unmarshalled correctly",
         "result": {
           "PayloadMember": {
             "ListOfStructs": [
@@ -294,7 +304,7 @@
     ]
   },
   {
-    "description": "Recursive structure with no recursion used is unmarshalled correctly",
+    "description": "Test cases for Recursive structure with no recursion member",
     "metadata": {
       "protocol": "api-gateway"
     },
@@ -330,12 +340,14 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayUnmarshallRecursiveStructWithNoRecursionMember",
         "given": {
           "output": {
             "shape": "OutputShape"
           },
           "name": "OperationName"
         },
+        "description": "Recursive structure with no recursion used is unmarshalled correctly",
         "result": {
           "PayloadMember": {
             "RecursiveMember": {
@@ -352,7 +364,7 @@
     ]
   },
   {
-    "description": "Recursive structure with multiple levels of recursion is unmarshalled correctly",
+    "description": "Test cases for Recursive structure with recursion member",
     "metadata": {
       "protocol": "api-gateway"
     },
@@ -405,12 +417,14 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayUnmarshallRecrusiveStructwithRecursionMember",
         "given": {
           "output": {
             "shape": "OutputShape"
           },
           "name": "OperationName"
         },
+        "description": "Recursive structure with multiple levels of recursion is unmarshalled correctly",
         "result": {
           "PayloadMember": {
             "RecursiveStructure": {
@@ -431,7 +445,7 @@
     ]
   },
   {
-    "description": "Operation with no output defined ignores any content in body",
+    "description": "Test cases for No Output Defined",
     "metadata": {
       "protocol": "api-gateway"
     },
@@ -439,9 +453,11 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayNoOutput",
         "given": {
           "name": "OperationName"
         },
+        "description": "Operation with no output defined ignores any content in body",
         "result": {
         },
         "response": {
@@ -453,7 +469,7 @@
     ]
   },
   {
-    "description": "Unmodeled data is ignored",
+    "description": "Test cases for Unmodeled Data",
     "metadata": {
       "protocol": "api-gateway"
     },
@@ -481,12 +497,14 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayUnmodeledDataIsIgnored",
         "given": {
           "output": {
             "shape": "OutputShape"
           },
           "name": "OperationName"
         },
+        "description": "Unmodeled data is ignored",
         "result": {
           "PayloadMember": {}
         },
@@ -499,7 +517,7 @@
     ]
   },
   {
-    "description": "No headers present, does not set modeled header member",
+    "description": "Test cases for No Headers",
     "metadata": {
       "protocol": "api-gateway"
     },
@@ -520,12 +538,14 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayNoHeaders",
         "given": {
           "output": {
             "shape": "OutputShape"
           },
           "name": "OperationName"
         },
+        "description": "No headers present, does not set modeled header member",
         "result": {
         },
         "response": {
@@ -537,7 +557,7 @@
     ]
   },
   {
-    "description": "Multiple modeled headers in response, sets appropriate header members",
+    "description": "Test cases for Multiple Modeled Headers",
     "metadata": {
       "protocol": "api-gateway"
     },
@@ -563,12 +583,14 @@
     },
     "cases": [
       {
+        "id": "ApiGatewayMultipleHeaders",
         "given": {
           "output": {
             "shape": "OutputShape"
           },
           "name": "OperationName"
         },
+        "description": "Multiple modeled headers in response, sets appropriate header members",
         "result": {
           "HeaderMemberOne": "valueOne",
           "HeaderMemberTwo": "valueTwo"
