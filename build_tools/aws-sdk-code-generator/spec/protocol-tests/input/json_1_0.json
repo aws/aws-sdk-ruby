@@ -4,8 +4,7 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0",
-            "targetPrefix": "JsonRpc10"
+            "jsonVersion": "1.0"
         },
         "shapes": {
             "EmptyInputAndEmptyOutputInput": {
@@ -46,8 +45,7 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0",
-            "targetPrefix": "JsonRpc10"
+            "jsonVersion": "1.0"
         },
         "shapes": {},
         "cases": [
@@ -80,8 +78,7 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0",
-            "targetPrefix": "JsonRpc10"
+            "jsonVersion": "1.0"
         },
         "shapes": {
             "EndpointWithHostLabelOperationInput": {
@@ -135,8 +132,7 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0",
-            "targetPrefix": "JsonRpc10"
+            "jsonVersion": "1.0"
         },
         "shapes": {},
         "cases": [
@@ -166,8 +162,7 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0",
-            "targetPrefix": "JsonRpc10"
+            "jsonVersion": "1.0"
         },
         "shapes": {
             "JsonUnionsInput": {
@@ -586,8 +581,7 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0",
-            "targetPrefix": "JsonRpc10"
+            "jsonVersion": "1.0"
         },
         "shapes": {},
         "cases": [
@@ -620,8 +614,7 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0",
-            "targetPrefix": "JsonRpc10"
+            "jsonVersion": "1.0"
         },
         "shapes": {},
         "cases": [
@@ -650,12 +643,502 @@
         ]
     },
     {
+        "description": "Test cases for OperationWithDefaults operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2020-07-14",
+            "jsonVersion": "1.0"
+        },
+        "shapes": {
+            "OperationWithDefaultsInput": {
+                "type": "structure",
+                "members": {
+                    "defaults": {
+                        "shape": "Defaults"
+                    },
+                    "clientOptionalDefaults": {
+                        "shape": "ClientOptionalDefaults"
+                    },
+                    "topLevelDefault": {
+                        "shape": "String"
+                    },
+                    "otherTopLevelDefault": {
+                        "shape": "Integer"
+                    }
+                }
+            },
+            "Defaults": {
+                "type": "structure",
+                "members": {
+                    "defaultString": {
+                        "shape": "String"
+                    },
+                    "defaultBoolean": {
+                        "shape": "Boolean"
+                    },
+                    "defaultList": {
+                        "shape": "TestStringList"
+                    },
+                    "defaultDocumentMap": {
+                        "shape": "Document"
+                    },
+                    "defaultDocumentString": {
+                        "shape": "Document"
+                    },
+                    "defaultDocumentBoolean": {
+                        "shape": "Document"
+                    },
+                    "defaultDocumentList": {
+                        "shape": "Document"
+                    },
+                    "defaultNullDocument": {
+                        "shape": "Document"
+                    },
+                    "defaultTimestamp": {
+                        "shape": "Timestamp"
+                    },
+                    "defaultBlob": {
+                        "shape": "Blob"
+                    },
+                    "defaultByte": {
+                        "shape": "Byte"
+                    },
+                    "defaultShort": {
+                        "shape": "Short"
+                    },
+                    "defaultInteger": {
+                        "shape": "Integer"
+                    },
+                    "defaultLong": {
+                        "shape": "Long"
+                    },
+                    "defaultFloat": {
+                        "shape": "Float"
+                    },
+                    "defaultDouble": {
+                        "shape": "Double"
+                    },
+                    "defaultMap": {
+                        "shape": "TestStringMap"
+                    },
+                    "defaultEnum": {
+                        "shape": "TestEnum"
+                    },
+                    "defaultIntEnum": {
+                        "shape": "TestIntEnum"
+                    },
+                    "emptyString": {
+                        "shape": "String"
+                    },
+                    "falseBoolean": {
+                        "shape": "Boolean"
+                    },
+                    "emptyBlob": {
+                        "shape": "Blob"
+                    },
+                    "zeroByte": {
+                        "shape": "Byte"
+                    },
+                    "zeroShort": {
+                        "shape": "Short"
+                    },
+                    "zeroInteger": {
+                        "shape": "Integer"
+                    },
+                    "zeroLong": {
+                        "shape": "Long"
+                    },
+                    "zeroFloat": {
+                        "shape": "Float"
+                    },
+                    "zeroDouble": {
+                        "shape": "Double"
+                    }
+                }
+            },
+            "ClientOptionalDefaults": {
+                "type": "structure",
+                "members": {
+                    "member": {
+                        "shape": "Integer"
+                    }
+                }
+            },
+            "String": {
+                "type": "string"
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "TestStringList": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            },
+            "Document": {
+                "type": "structure",
+                "members": {},
+                "document": true
+            },
+            "Timestamp": {
+                "type": "timestamp"
+            },
+            "Blob": {
+                "type": "blob"
+            },
+            "Byte": {
+                "type": "byte",
+                "box": true
+            },
+            "Short": {
+                "type": "short",
+                "box": true
+            },
+            "Long": {
+                "type": "long",
+                "box": true
+            },
+            "Float": {
+                "type": "float",
+                "box": true
+            },
+            "Double": {
+                "type": "double",
+                "box": true
+            },
+            "TestStringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                }
+            },
+            "TestEnum": {
+                "type": "string",
+                "enum": [
+                    "FOO",
+                    "BAR",
+                    "BAZ"
+                ]
+            },
+            "TestIntEnum": {
+                "type": "integer",
+                "box": true
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson10ClientPopulatesDefaultValuesInInput",
+                "given": {
+                    "name": "OperationWithDefaults",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "input": {
+                        "shape": "OperationWithDefaultsInput"
+                    }
+                },
+                "description": "Client populates default values in input.",
+                "params": {
+                    "defaults": {}
+                },
+                "serialized": {
+                    "method": "POST",
+                    "uri": "/",
+                    "body": "{\n    \"defaults\": {\n        \"defaultString\": \"hi\",\n        \"defaultBoolean\": true,\n        \"defaultList\": [],\n        \"defaultDocumentMap\": {},\n        \"defaultDocumentString\": \"hi\",\n        \"defaultDocumentBoolean\": true,\n        \"defaultDocumentList\": [],\n        \"defaultTimestamp\": 0,\n        \"defaultBlob\": \"YWJj\",\n        \"defaultByte\": 1,\n        \"defaultShort\": 1,\n        \"defaultInteger\": 10,\n        \"defaultLong\": 100,\n        \"defaultFloat\": 1.0,\n        \"defaultDouble\": 1.0,\n        \"defaultMap\": {},\n        \"defaultEnum\": \"FOO\",\n        \"defaultIntEnum\": 1,\n        \"emptyString\": \"\",\n        \"falseBoolean\": false,\n        \"emptyBlob\": \"\",\n        \"zeroByte\": 0,\n        \"zeroShort\": 0,\n        \"zeroInteger\": 0,\n        \"zeroLong\": 0,\n        \"zeroFloat\": 0.0,\n        \"zeroDouble\": 0.0\n    }\n}",
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    }
+                }
+            },
+            {
+                "id": "AwsJson10ClientSkipsTopLevelDefaultValuesInInput",
+                "given": {
+                    "name": "OperationWithDefaults",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "input": {
+                        "shape": "OperationWithDefaultsInput"
+                    }
+                },
+                "description": "Client skips top level default values in input.",
+                "params": {},
+                "serialized": {
+                    "method": "POST",
+                    "uri": "/",
+                    "body": "{\n}",
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    }
+                }
+            },
+            {
+                "id": "AwsJson10ClientUsesExplicitlyProvidedMemberValuesOverDefaults",
+                "given": {
+                    "name": "OperationWithDefaults",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "input": {
+                        "shape": "OperationWithDefaultsInput"
+                    }
+                },
+                "description": "Client uses explicitly provided member values over defaults",
+                "params": {
+                    "defaults": {
+                        "defaultString": "bye",
+                        "defaultBoolean": true,
+                        "defaultList": [
+                            "a"
+                        ],
+                        "defaultDocumentMap": {
+                            "name": "Jack"
+                        },
+                        "defaultDocumentString": "bye",
+                        "defaultDocumentBoolean": true,
+                        "defaultDocumentList": [
+                            "b"
+                        ],
+                        "defaultNullDocument": "notNull",
+                        "defaultTimestamp": 1,
+                        "defaultBlob": "hi",
+                        "defaultByte": 2,
+                        "defaultShort": 2,
+                        "defaultInteger": 20,
+                        "defaultLong": 200,
+                        "defaultFloat": 2.0,
+                        "defaultDouble": 2.0,
+                        "defaultMap": {
+                            "name": "Jack"
+                        },
+                        "defaultEnum": "BAR",
+                        "defaultIntEnum": 2,
+                        "emptyString": "foo",
+                        "falseBoolean": true,
+                        "emptyBlob": "hi",
+                        "zeroByte": 1,
+                        "zeroShort": 1,
+                        "zeroInteger": 1,
+                        "zeroLong": 1,
+                        "zeroFloat": 1.0,
+                        "zeroDouble": 1.0
+                    }
+                },
+                "serialized": {
+                    "method": "POST",
+                    "uri": "/",
+                    "body": "{\n    \"defaults\": {\n        \"defaultString\": \"bye\",\n        \"defaultBoolean\": true,\n        \"defaultList\": [\"a\"],\n        \"defaultDocumentMap\": {\"name\": \"Jack\"},\n        \"defaultDocumentString\": \"bye\",\n        \"defaultDocumentBoolean\": true,\n        \"defaultDocumentList\": [\"b\"],\n        \"defaultNullDocument\": \"notNull\",\n        \"defaultTimestamp\": 1,\n        \"defaultBlob\": \"aGk=\",\n        \"defaultByte\": 2,\n        \"defaultShort\": 2,\n        \"defaultInteger\": 20,\n        \"defaultLong\": 200,\n        \"defaultFloat\": 2.0,\n        \"defaultDouble\": 2.0,\n        \"defaultMap\": {\"name\": \"Jack\"},\n        \"defaultEnum\": \"BAR\",\n        \"defaultIntEnum\": 2,\n        \"emptyString\": \"foo\",\n        \"falseBoolean\": true,\n        \"emptyBlob\": \"aGk=\",\n        \"zeroByte\": 1,\n        \"zeroShort\": 1,\n        \"zeroInteger\": 1,\n        \"zeroLong\": 1,\n        \"zeroFloat\": 1.0,\n        \"zeroDouble\": 1.0\n    }\n}",
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    }
+                }
+            },
+            {
+                "id": "AwsJson10ClientUsesExplicitlyProvidedValuesInTopLevel",
+                "given": {
+                    "name": "OperationWithDefaults",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "input": {
+                        "shape": "OperationWithDefaultsInput"
+                    }
+                },
+                "description": "Any time a value is provided for a member in the top level of input, it is used, regardless of if its the default.",
+                "params": {
+                    "topLevelDefault": "hi",
+                    "otherTopLevelDefault": 0
+                },
+                "serialized": {
+                    "method": "POST",
+                    "uri": "/",
+                    "body": "{\n    \"topLevelDefault\": \"hi\",\n    \"otherTopLevelDefault\": 0\n}",
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    }
+                }
+            },
+            {
+                "id": "AwsJson10ClientIgnoresNonTopLevelDefaultsOnMembersWithClientOptional",
+                "given": {
+                    "name": "OperationWithDefaults",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "input": {
+                        "shape": "OperationWithDefaultsInput"
+                    }
+                },
+                "description": "Typically, non top-level members would have defaults filled in, but if they have the clientOptional trait, the defaults should be ignored.",
+                "params": {
+                    "clientOptionalDefaults": {}
+                },
+                "serialized": {
+                    "method": "POST",
+                    "uri": "/",
+                    "body": "{\n    \"clientOptionalDefaults\": {}\n}",
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for OperationWithNestedStructure operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2020-07-14",
+            "jsonVersion": "1.0"
+        },
+        "shapes": {
+            "OperationWithNestedStructureInput": {
+                "type": "structure",
+                "required": [
+                    "topLevel"
+                ],
+                "members": {
+                    "topLevel": {
+                        "shape": "TopLevel"
+                    }
+                }
+            },
+            "TopLevel": {
+                "type": "structure",
+                "required": [
+                    "dialog"
+                ],
+                "members": {
+                    "dialog": {
+                        "shape": "Dialog"
+                    },
+                    "dialogList": {
+                        "shape": "DialogList"
+                    },
+                    "dialogMap": {
+                        "shape": "DialogMap"
+                    }
+                }
+            },
+            "Dialog": {
+                "type": "structure",
+                "members": {
+                    "language": {
+                        "shape": "String"
+                    },
+                    "greeting": {
+                        "shape": "String"
+                    },
+                    "farewell": {
+                        "shape": "Farewell"
+                    }
+                }
+            },
+            "DialogList": {
+                "type": "list",
+                "member": {
+                    "shape": "Dialog"
+                }
+            },
+            "DialogMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "Dialog"
+                }
+            },
+            "String": {
+                "type": "string"
+            },
+            "Farewell": {
+                "type": "structure",
+                "members": {
+                    "phrase": {
+                        "shape": "String"
+                    }
+                }
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson10ClientPopulatesNestedDefaultValuesWhenMissing",
+                "given": {
+                    "name": "OperationWithNestedStructure",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "input": {
+                        "shape": "OperationWithNestedStructureInput"
+                    }
+                },
+                "description": "Client populates nested default values when missing.",
+                "params": {
+                    "topLevel": {
+                        "dialog": {
+                            "language": "en"
+                        },
+                        "dialogList": [
+                            {},
+                            {
+                                "farewell": {}
+                            },
+                            {
+                                "language": "it",
+                                "greeting": "ciao",
+                                "farewell": {
+                                    "phrase": "arrivederci"
+                                }
+                            }
+                        ],
+                        "dialogMap": {
+                            "emptyDialog": {},
+                            "partialEmptyDialog": {
+                                "language": "en",
+                                "farewell": {}
+                            },
+                            "nonEmptyDialog": {
+                                "greeting": "konnichiwa",
+                                "farewell": {
+                                    "phrase": "sayonara"
+                                }
+                            }
+                        }
+                    }
+                },
+                "serialized": {
+                    "method": "POST",
+                    "uri": "/",
+                    "body": "{\n    \"topLevel\": {\n        \"dialog\": {\n            \"language\": \"en\",\n            \"greeting\": \"hi\"\n        },\n        \"dialogList\": [\n            {\n                \"greeting\": \"hi\"\n            },\n            {\n                \"greeting\": \"hi\",\n                \"farewell\": {\n                    \"phrase\": \"bye\"\n                }\n            },\n            {\n                \"language\": \"it\",\n                \"greeting\": \"ciao\",\n                \"farewell\": {\n                    \"phrase\": \"arrivederci\"\n                }\n            }\n        ],\n        \"dialogMap\": {\n            \"emptyDialog\": {\n                \"greeting\": \"hi\"\n            },\n            \"partialEmptyDialog\": {\n                \"language\": \"en\",\n                \"greeting\": \"hi\",\n                \"farewell\": {\n                    \"phrase\": \"bye\"\n                }\n            },\n            \"nonEmptyDialog\": {\n                \"greeting\": \"konnichiwa\",\n                \"farewell\": {\n                    \"phrase\": \"sayonara\"\n                }\n            }\n        }\n    }\n}",
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    }
+                }
+            }
+        ]
+    },
+    {
         "description": "Test cases for PutWithContentEncoding operation",
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0",
-            "targetPrefix": "JsonRpc10"
+            "jsonVersion": "1.0"
         },
         "shapes": {
             "PutWithContentEncodingInput": {
@@ -740,8 +1223,7 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0",
-            "targetPrefix": "JsonRpc10"
+            "jsonVersion": "1.0"
         },
         "shapes": {
             "SimpleScalarPropertiesInput": {

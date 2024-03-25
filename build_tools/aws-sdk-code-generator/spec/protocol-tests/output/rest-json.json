@@ -242,80 +242,6 @@
         ]
     },
     {
-        "description": "Test cases for DocumentTypeAsMapValue operation",
-        "metadata": {
-            "protocol": "rest-json",
-            "apiVersion": "2019-12-16"
-        },
-        "shapes": {
-            "DocumentTypeAsMapValueInputOutput": {
-                "type": "structure",
-                "members": {
-                    "docValuedMap": {
-                        "shape": "DocumentValuedMap"
-                    }
-                }
-            },
-            "DocumentValuedMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "Document"
-                }
-            },
-            "Document": {
-                "type": "structure",
-                "members": {},
-                "document": true
-            },
-            "String": {
-                "type": "string"
-            }
-        },
-        "cases": [
-            {
-                "id": "DocumentTypeAsMapValueOutput",
-                "given": {
-                    "name": "DocumentTypeAsMapValue",
-                    "http": {
-                        "method": "PUT",
-                        "requestUri": "/DocumentTypeAsMapValue",
-                        "responseCode": 200
-                    },
-                    "output": {
-                        "shape": "DocumentTypeAsMapValueInputOutput"
-                    },
-                    "documentation": "<p>This example serializes documents as the value of maps.</p>",
-                    "idempotent": true
-                },
-                "description": "Serializes a map that uses documents as the value.",
-                "result": {
-                    "docValuedMap": {
-                        "foo": {
-                            "f": 1,
-                            "o": 2
-                        },
-                        "bar": [
-                            "b",
-                            "a",
-                            "r"
-                        ],
-                        "baz": "BAZ"
-                    }
-                },
-                "response": {
-                    "status_code": 200,
-                    "headers": {
-                        "Content-Type": "application/json"
-                    },
-                    "body": "{\n    \"docValuedMap\": {\n        \"foo\": { \"f\": 1, \"o\": 2 },\n        \"bar\": [ \"b\", \"a\", \"r\" ],\n        \"baz\": \"BAZ\"\n    }\n}"
-                }
-            }
-        ]
-    },
-    {
         "description": "Test cases for DocumentTypeAsPayload operation",
         "metadata": {
             "protocol": "rest-json",
@@ -535,6 +461,17 @@
                     "output": {
                         "shape": "GreetingWithErrorsOutput"
                     },
+                    "errors": [
+                        {
+                            "shape": "InvalidGreeting"
+                        },
+                        {
+                            "shape": "ComplexError"
+                        },
+                        {
+                            "shape": "FooError"
+                        }
+                    ],
                     "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
                     "idempotent": true
                 },
@@ -562,6 +499,17 @@
                     "output": {
                         "shape": "GreetingWithErrorsOutput"
                     },
+                    "errors": [
+                        {
+                            "shape": "InvalidGreeting"
+                        },
+                        {
+                            "shape": "ComplexError"
+                        },
+                        {
+                            "shape": "FooError"
+                        }
+                    ],
                     "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
                     "idempotent": true
                 },
@@ -575,445 +523,6 @@
                         "X-Greeting": "Hello"
                     },
                     "body": ""
-                }
-            }
-        ]
-    },
-    {
-        "description": "Test cases for GreetingWithErrors operation",
-        "metadata": {
-            "protocol": "rest-json",
-            "apiVersion": "2019-12-16"
-        },
-        "shapes": {
-            "FooError": {
-                "type": "structure",
-                "members": {},
-                "documentation": "<p>This error has test cases that test some of the dark corners of Amazon service framework history. It should only be implemented by clients.</p>",
-                "error": {
-                    "httpStatusCode": 500
-                },
-                "exception": true,
-                "fault": true
-            }
-        },
-        "cases": [
-            {
-                "id": "RestJsonFooErrorUsingXAmznErrorType",
-                "given": {
-                    "name": "GreetingWithErrors",
-                    "http": {
-                        "method": "PUT",
-                        "requestUri": "/GreetingWithErrors",
-                        "responseCode": 200
-                    },
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true,
-                    "errors": [
-                        {
-                            "shape": "FooError"
-                        }
-                    ]
-                },
-                "description": "Serializes the X-Amzn-ErrorType header. For an example service, see Amazon EKS.",
-                "errorCode": "FooError",
-                "error": {},
-                "response": {
-                    "status_code": 500,
-                    "headers": {
-                        "X-Amzn-Errortype": "FooError"
-                    }
-                }
-            },
-            {
-                "id": "RestJsonFooErrorUsingXAmznErrorTypeWithUri",
-                "given": {
-                    "name": "GreetingWithErrors",
-                    "http": {
-                        "method": "PUT",
-                        "requestUri": "/GreetingWithErrors",
-                        "responseCode": 200
-                    },
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true,
-                    "errors": [
-                        {
-                            "shape": "FooError"
-                        }
-                    ]
-                },
-                "description": "Some X-Amzn-Errortype headers contain URLs. Clients need to split the URL on ':' and take only the first half of the string. For example, 'ValidationException:http://internal.amazon.com/coral/com.amazon.coral.validate/'\nis to be interpreted as 'ValidationException'.\n\nFor an example service see Amazon Polly.",
-                "errorCode": "FooError",
-                "error": {},
-                "response": {
-                    "status_code": 500,
-                    "headers": {
-                        "X-Amzn-Errortype": "FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
-                    }
-                }
-            },
-            {
-                "id": "RestJsonFooErrorUsingXAmznErrorTypeWithUriAndNamespace",
-                "given": {
-                    "name": "GreetingWithErrors",
-                    "http": {
-                        "method": "PUT",
-                        "requestUri": "/GreetingWithErrors",
-                        "responseCode": 200
-                    },
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true,
-                    "errors": [
-                        {
-                            "shape": "FooError"
-                        }
-                    ]
-                },
-                "description": "X-Amzn-Errortype might contain a URL and a namespace. Client should extract only the shape name. This is a pathalogical case that might not actually happen in any deployed AWS service.",
-                "errorCode": "FooError",
-                "error": {},
-                "response": {
-                    "status_code": 500,
-                    "headers": {
-                        "X-Amzn-Errortype": "aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
-                    }
-                }
-            },
-            {
-                "id": "RestJsonFooErrorUsingCode",
-                "given": {
-                    "name": "GreetingWithErrors",
-                    "http": {
-                        "method": "PUT",
-                        "requestUri": "/GreetingWithErrors",
-                        "responseCode": 200
-                    },
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true,
-                    "errors": [
-                        {
-                            "shape": "FooError"
-                        }
-                    ]
-                },
-                "description": "This example uses the 'code' property in the output rather than X-Amzn-Errortype. Some services do this though it's preferable to send the X-Amzn-Errortype. Client implementations must first check for the X-Amzn-Errortype and then check for a top-level 'code' property.\n\nFor example service see Amazon S3 Glacier.",
-                "errorCode": "FooError",
-                "error": {},
-                "response": {
-                    "status_code": 500,
-                    "headers": {
-                        "Content-Type": "application/json"
-                    },
-                    "body": "{\n    \"code\": \"FooError\"\n}"
-                }
-            },
-            {
-                "id": "RestJsonFooErrorUsingCodeAndNamespace",
-                "given": {
-                    "name": "GreetingWithErrors",
-                    "http": {
-                        "method": "PUT",
-                        "requestUri": "/GreetingWithErrors",
-                        "responseCode": 200
-                    },
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true,
-                    "errors": [
-                        {
-                            "shape": "FooError"
-                        }
-                    ]
-                },
-                "description": "Some services serialize errors using code, and it might contain a namespace. Clients should just take the last part of the string after '#'.",
-                "errorCode": "FooError",
-                "error": {},
-                "response": {
-                    "status_code": 500,
-                    "headers": {
-                        "Content-Type": "application/json"
-                    },
-                    "body": "{\n    \"code\": \"aws.protocoltests.restjson#FooError\"\n}"
-                }
-            },
-            {
-                "id": "RestJsonFooErrorUsingCodeUriAndNamespace",
-                "given": {
-                    "name": "GreetingWithErrors",
-                    "http": {
-                        "method": "PUT",
-                        "requestUri": "/GreetingWithErrors",
-                        "responseCode": 200
-                    },
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true,
-                    "errors": [
-                        {
-                            "shape": "FooError"
-                        }
-                    ]
-                },
-                "description": "Some services serialize errors using code, and it might contain a namespace. It also might contain a URI. Clients should just take the last part of the string after '#' and before \":\". This is a pathalogical case that might not occur in any deployed AWS service.",
-                "errorCode": "FooError",
-                "error": {},
-                "response": {
-                    "status_code": 500,
-                    "headers": {
-                        "Content-Type": "application/json"
-                    },
-                    "body": "{\n    \"code\": \"aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/\"\n}"
-                }
-            },
-            {
-                "id": "RestJsonFooErrorWithDunderType",
-                "given": {
-                    "name": "GreetingWithErrors",
-                    "http": {
-                        "method": "PUT",
-                        "requestUri": "/GreetingWithErrors",
-                        "responseCode": 200
-                    },
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true,
-                    "errors": [
-                        {
-                            "shape": "FooError"
-                        }
-                    ]
-                },
-                "description": "Some services serialize errors using __type.",
-                "errorCode": "FooError",
-                "error": {},
-                "response": {
-                    "status_code": 500,
-                    "headers": {
-                        "Content-Type": "application/json"
-                    },
-                    "body": "{\n    \"__type\": \"FooError\"\n}"
-                }
-            },
-            {
-                "id": "RestJsonFooErrorWithDunderTypeAndNamespace",
-                "given": {
-                    "name": "GreetingWithErrors",
-                    "http": {
-                        "method": "PUT",
-                        "requestUri": "/GreetingWithErrors",
-                        "responseCode": 200
-                    },
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true,
-                    "errors": [
-                        {
-                            "shape": "FooError"
-                        }
-                    ]
-                },
-                "description": "Some services serialize errors using __type, and it might contain a namespace. Clients should just take the last part of the string after '#'.",
-                "errorCode": "FooError",
-                "error": {},
-                "response": {
-                    "status_code": 500,
-                    "headers": {
-                        "Content-Type": "application/json"
-                    },
-                    "body": "{\n    \"__type\": \"aws.protocoltests.restjson#FooError\"\n}"
-                }
-            },
-            {
-                "id": "RestJsonFooErrorWithDunderTypeUriAndNamespace",
-                "given": {
-                    "name": "GreetingWithErrors",
-                    "http": {
-                        "method": "PUT",
-                        "requestUri": "/GreetingWithErrors",
-                        "responseCode": 200
-                    },
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true,
-                    "errors": [
-                        {
-                            "shape": "FooError"
-                        }
-                    ]
-                },
-                "description": "Some services serialize errors using __type, and it might contain a namespace. It also might contain a URI. Clients should just take the last part of the string after '#' and before \":\". This is a pathalogical case that might not occur in any deployed AWS service.",
-                "errorCode": "FooError",
-                "error": {},
-                "response": {
-                    "status_code": 500,
-                    "headers": {
-                        "Content-Type": "application/json"
-                    },
-                    "body": "{\n    \"__type\": \"aws.protocoltests.restjson#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/\"\n}"
-                }
-            }
-        ]
-    },
-    {
-        "description": "Test cases for GreetingWithErrors operation",
-        "metadata": {
-            "protocol": "rest-json",
-            "apiVersion": "2019-12-16"
-        },
-        "shapes": {
-            "ComplexError": {
-                "type": "structure",
-                "members": {
-                    "Header": {
-                        "shape": "String",
-                        "location": "header",
-                        "locationName": "X-Header"
-                    },
-                    "TopLevel": {
-                        "shape": "String"
-                    },
-                    "Nested": {
-                        "shape": "ComplexNestedErrorData"
-                    }
-                },
-                "documentation": "<p>This error is thrown when a request is invalid.</p>",
-                "error": {
-                    "httpStatusCode": 403,
-                    "senderFault": true
-                },
-                "exception": true
-            },
-            "String": {
-                "type": "string"
-            },
-            "ComplexNestedErrorData": {
-                "type": "structure",
-                "members": {
-                    "Foo": {
-                        "shape": "String",
-                        "locationName": "Fooooo"
-                    }
-                }
-            }
-        },
-        "cases": [
-            {
-                "id": "RestJsonComplexErrorWithNoMessage",
-                "given": {
-                    "name": "GreetingWithErrors",
-                    "http": {
-                        "method": "PUT",
-                        "requestUri": "/GreetingWithErrors",
-                        "responseCode": 200
-                    },
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true,
-                    "errors": [
-                        {
-                            "shape": "ComplexError"
-                        }
-                    ]
-                },
-                "description": "Serializes a complex error with no message member",
-                "errorCode": "ComplexError",
-                "error": {
-                    "Header": "Header",
-                    "TopLevel": "Top level",
-                    "Nested": {
-                        "Foo": "bar"
-                    }
-                },
-                "response": {
-                    "status_code": 403,
-                    "headers": {
-                        "Content-Type": "application/json",
-                        "X-Amzn-Errortype": "ComplexError",
-                        "X-Header": "Header"
-                    },
-                    "body": "{\n    \"TopLevel\": \"Top level\",\n    \"Nested\": {\n        \"Fooooo\": \"bar\"\n    }\n}"
-                }
-            },
-            {
-                "id": "RestJsonEmptyComplexErrorWithNoMessage",
-                "given": {
-                    "name": "GreetingWithErrors",
-                    "http": {
-                        "method": "PUT",
-                        "requestUri": "/GreetingWithErrors",
-                        "responseCode": 200
-                    },
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true,
-                    "errors": [
-                        {
-                            "shape": "ComplexError"
-                        }
-                    ]
-                },
-                "errorCode": "ComplexError",
-                "error": {},
-                "response": {
-                    "status_code": 403,
-                    "headers": {
-                        "Content-Type": "application/json",
-                        "X-Amzn-Errortype": "ComplexError"
-                    },
-                    "body": "{}"
-                }
-            }
-        ]
-    },
-    {
-        "description": "Test cases for GreetingWithErrors operation",
-        "metadata": {
-            "protocol": "rest-json",
-            "apiVersion": "2019-12-16"
-        },
-        "shapes": {
-            "InvalidGreeting": {
-                "type": "structure",
-                "members": {
-                    "Message": {
-                        "shape": "String"
-                    }
-                },
-                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
-                "error": {
-                    "httpStatusCode": 400,
-                    "senderFault": true
-                },
-                "exception": true
-            },
-            "String": {
-                "type": "string"
-            }
-        },
-        "cases": [
-            {
-                "id": "RestJsonInvalidGreetingError",
-                "given": {
-                    "name": "GreetingWithErrors",
-                    "http": {
-                        "method": "PUT",
-                        "requestUri": "/GreetingWithErrors",
-                        "responseCode": 200
-                    },
-                    "documentation": "<p>This operation has four possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> <li>A FooError.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
-                    "idempotent": true,
-                    "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        }
-                    ]
-                },
-                "description": "Parses simple JSON errors",
-                "errorCode": "InvalidGreeting",
-                "errorMessage": "Hi",
-                "error": {
-                    "Message": "Hi"
-                },
-                "response": {
-                    "status_code": 400,
-                    "headers": {
-                        "Content-Type": "application/json",
-                        "X-Amzn-Errortype": "InvalidGreeting"
-                    },
-                    "body": "{\n    \"Message\": \"Hi\"\n}"
                 }
             }
         ]
@@ -1145,6 +654,65 @@
                         "X-Foo": "Foo"
                     },
                     "body": ""
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for HttpPayloadTraitsWithMediaType operation",
+        "metadata": {
+            "protocol": "rest-json",
+            "apiVersion": "2019-12-16"
+        },
+        "shapes": {
+            "HttpPayloadTraitsWithMediaTypeInputOutput": {
+                "type": "structure",
+                "members": {
+                    "foo": {
+                        "shape": "String",
+                        "location": "header",
+                        "locationName": "X-Foo"
+                    },
+                    "blob": {
+                        "shape": "TextPlainBlob"
+                    }
+                },
+                "payload": "blob"
+            },
+            "String": {
+                "type": "string"
+            },
+            "TextPlainBlob": {
+                "type": "blob"
+            }
+        },
+        "cases": [
+            {
+                "id": "RestJsonHttpPayloadTraitsWithMediaTypeWithBlob",
+                "given": {
+                    "name": "HttpPayloadTraitsWithMediaType",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/HttpPayloadTraitsWithMediaType",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "HttpPayloadTraitsWithMediaTypeInputOutput"
+                    },
+                    "documentation": "<p>This example uses a <code>@mediaType</code> trait on the payload to force a custom content-type to be serialized.</p>"
+                },
+                "description": "Serializes a blob in the HTTP payload with a content-type",
+                "result": {
+                    "foo": "Foo",
+                    "blob": "blobby blob blob"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "text/plain",
+                        "X-Foo": "Foo"
+                    },
+                    "body": "blobby blob blob"
                 }
             }
         ]
@@ -1632,7 +1200,7 @@
                         "locationName": "X-String"
                     },
                     "headerByte": {
-                        "shape": "Integer",
+                        "shape": "Byte",
                         "location": "header",
                         "locationName": "X-Byte"
                     },
@@ -1720,6 +1288,10 @@
             },
             "String": {
                 "type": "string"
+            },
+            "Byte": {
+                "type": "byte",
+                "box": true
             },
             "Integer": {
                 "type": "integer",
@@ -2372,6 +1944,691 @@
                         "Content-Type": "application/json"
                     },
                     "body": "{\n    \"integerEnum1\": 1,\n    \"integerEnum2\": 2,\n    \"integerEnum3\": 3,\n    \"integerEnumList\": [\n        1,\n        2,\n        3\n    ],\n    \"integerEnumSet\": [\n        1,\n        2\n    ],\n    \"integerEnumMap\": {\n        \"abc\": 1,\n        \"def\": 2\n    }\n}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for JsonLists operation",
+        "metadata": {
+            "protocol": "rest-json",
+            "apiVersion": "2019-12-16"
+        },
+        "shapes": {
+            "JsonListsInputOutput": {
+                "type": "structure",
+                "members": {
+                    "stringList": {
+                        "shape": "StringList"
+                    },
+                    "sparseStringList": {
+                        "shape": "SparseStringList"
+                    },
+                    "stringSet": {
+                        "shape": "StringSet"
+                    },
+                    "integerList": {
+                        "shape": "IntegerList"
+                    },
+                    "booleanList": {
+                        "shape": "BooleanList"
+                    },
+                    "timestampList": {
+                        "shape": "TimestampList"
+                    },
+                    "enumList": {
+                        "shape": "FooEnumList"
+                    },
+                    "intEnumList": {
+                        "shape": "IntegerEnumList"
+                    },
+                    "nestedStringList": {
+                        "shape": "NestedStringList"
+                    },
+                    "structureList": {
+                        "shape": "StructureList",
+                        "locationName": "myStructureList"
+                    }
+                }
+            },
+            "StringList": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            },
+            "SparseStringList": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            },
+            "StringSet": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            },
+            "IntegerList": {
+                "type": "list",
+                "member": {
+                    "shape": "Integer"
+                }
+            },
+            "BooleanList": {
+                "type": "list",
+                "member": {
+                    "shape": "Boolean"
+                }
+            },
+            "TimestampList": {
+                "type": "list",
+                "member": {
+                    "shape": "Timestamp"
+                }
+            },
+            "FooEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "FooEnum"
+                }
+            },
+            "IntegerEnumList": {
+                "type": "list",
+                "member": {
+                    "shape": "IntegerEnum"
+                }
+            },
+            "NestedStringList": {
+                "type": "list",
+                "member": {
+                    "shape": "StringList"
+                },
+                "documentation": "<p>A list of lists of strings.</p>"
+            },
+            "StructureList": {
+                "type": "list",
+                "member": {
+                    "shape": "StructureListMember"
+                }
+            },
+            "StructureListMember": {
+                "type": "structure",
+                "members": {
+                    "a": {
+                        "shape": "String",
+                        "locationName": "value"
+                    },
+                    "b": {
+                        "shape": "String",
+                        "locationName": "other"
+                    }
+                }
+            },
+            "String": {
+                "type": "string"
+            },
+            "IntegerEnum": {
+                "type": "integer",
+                "box": true
+            },
+            "FooEnum": {
+                "type": "string",
+                "enum": [
+                    "Foo",
+                    "Baz",
+                    "Bar",
+                    "1",
+                    "0"
+                ]
+            },
+            "Timestamp": {
+                "type": "timestamp"
+            },
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            }
+        },
+        "cases": [
+            {
+                "id": "RestJsonLists",
+                "given": {
+                    "name": "JsonLists",
+                    "http": {
+                        "method": "PUT",
+                        "requestUri": "/JsonLists",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "JsonListsInputOutput"
+                    },
+                    "documentation": "<p>This test case serializes JSON lists for the following cases for both input and output:</p> <ol> <li>Normal JSON lists.</li> <li>Normal JSON sets.</li> <li>JSON lists of lists.</li> <li>Lists of structures.</li> </ol>",
+                    "idempotent": true
+                },
+                "description": "Serializes JSON lists",
+                "result": {
+                    "stringList": [
+                        "foo",
+                        "bar"
+                    ],
+                    "stringSet": [
+                        "foo",
+                        "bar"
+                    ],
+                    "integerList": [
+                        1,
+                        2
+                    ],
+                    "booleanList": [
+                        true,
+                        false
+                    ],
+                    "timestampList": [
+                        1398796238,
+                        1398796238
+                    ],
+                    "enumList": [
+                        "Foo",
+                        "0"
+                    ],
+                    "intEnumList": [
+                        1,
+                        2
+                    ],
+                    "nestedStringList": [
+                        [
+                            "foo",
+                            "bar"
+                        ],
+                        [
+                            "baz",
+                            "qux"
+                        ]
+                    ],
+                    "structureList": [
+                        {
+                            "a": "1",
+                            "b": "2"
+                        },
+                        {
+                            "a": "3",
+                            "b": "4"
+                        }
+                    ]
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"stringList\": [\n        \"foo\",\n        \"bar\"\n    ],\n    \"stringSet\": [\n        \"foo\",\n        \"bar\"\n    ],\n    \"integerList\": [\n        1,\n        2\n    ],\n    \"booleanList\": [\n        true,\n        false\n    ],\n    \"timestampList\": [\n        1398796238,\n        1398796238\n    ],\n    \"enumList\": [\n        \"Foo\",\n        \"0\"\n    ],\n    \"intEnumList\": [\n        1,\n        2\n    ],\n    \"nestedStringList\": [\n        [\n            \"foo\",\n            \"bar\"\n        ],\n        [\n            \"baz\",\n            \"qux\"\n        ]\n    ],\n    \"myStructureList\": [\n        {\n            \"value\": \"1\",\n            \"other\": \"2\"\n        },\n        {\n            \"value\": \"3\",\n            \"other\": \"4\"\n        }\n    ]\n}"
+                }
+            },
+            {
+                "id": "RestJsonListsEmpty",
+                "given": {
+                    "name": "JsonLists",
+                    "http": {
+                        "method": "PUT",
+                        "requestUri": "/JsonLists",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "JsonListsInputOutput"
+                    },
+                    "documentation": "<p>This test case serializes JSON lists for the following cases for both input and output:</p> <ol> <li>Normal JSON lists.</li> <li>Normal JSON sets.</li> <li>JSON lists of lists.</li> <li>Lists of structures.</li> </ol>",
+                    "idempotent": true
+                },
+                "description": "Serializes empty JSON lists",
+                "result": {
+                    "stringList": []
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"stringList\": []\n}"
+                }
+            },
+            {
+                "id": "RestJsonListsSerializeNull",
+                "given": {
+                    "name": "JsonLists",
+                    "http": {
+                        "method": "PUT",
+                        "requestUri": "/JsonLists",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "JsonListsInputOutput"
+                    },
+                    "documentation": "<p>This test case serializes JSON lists for the following cases for both input and output:</p> <ol> <li>Normal JSON lists.</li> <li>Normal JSON sets.</li> <li>JSON lists of lists.</li> <li>Lists of structures.</li> </ol>",
+                    "idempotent": true
+                },
+                "description": "Serializes null values in sparse lists",
+                "result": {
+                    "sparseStringList": [
+                        null,
+                        "hi"
+                    ]
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"sparseStringList\": [\n        null,\n        \"hi\"\n    ]\n}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for JsonMaps operation",
+        "metadata": {
+            "protocol": "rest-json",
+            "apiVersion": "2019-12-16"
+        },
+        "shapes": {
+            "JsonMapsInputOutput": {
+                "type": "structure",
+                "members": {
+                    "denseStructMap": {
+                        "shape": "DenseStructMap"
+                    },
+                    "sparseStructMap": {
+                        "shape": "SparseStructMap"
+                    },
+                    "denseNumberMap": {
+                        "shape": "DenseNumberMap"
+                    },
+                    "denseBooleanMap": {
+                        "shape": "DenseBooleanMap"
+                    },
+                    "denseStringMap": {
+                        "shape": "DenseStringMap"
+                    },
+                    "sparseNumberMap": {
+                        "shape": "SparseNumberMap"
+                    },
+                    "sparseBooleanMap": {
+                        "shape": "SparseBooleanMap"
+                    },
+                    "sparseStringMap": {
+                        "shape": "SparseStringMap"
+                    },
+                    "denseSetMap": {
+                        "shape": "DenseSetMap"
+                    },
+                    "sparseSetMap": {
+                        "shape": "SparseSetMap"
+                    }
+                }
+            },
+            "DenseStructMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "GreetingStruct"
+                }
+            },
+            "SparseStructMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "GreetingStruct"
+                }
+            },
+            "DenseNumberMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "Integer"
+                }
+            },
+            "DenseBooleanMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "Boolean"
+                }
+            },
+            "DenseStringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                }
+            },
+            "SparseNumberMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "Integer"
+                }
+            },
+            "SparseBooleanMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "Boolean"
+                }
+            },
+            "SparseStringMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "String"
+                }
+            },
+            "DenseSetMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "StringSet"
+                }
+            },
+            "SparseSetMap": {
+                "type": "map",
+                "key": {
+                    "shape": "String"
+                },
+                "value": {
+                    "shape": "StringSet"
+                }
+            },
+            "StringSet": {
+                "type": "list",
+                "member": {
+                    "shape": "String"
+                }
+            },
+            "String": {
+                "type": "string"
+            },
+            "Boolean": {
+                "type": "boolean",
+                "box": true
+            },
+            "Integer": {
+                "type": "integer",
+                "box": true
+            },
+            "GreetingStruct": {
+                "type": "structure",
+                "members": {
+                    "hi": {
+                        "shape": "String"
+                    }
+                }
+            }
+        },
+        "cases": [
+            {
+                "id": "RestJsonJsonMaps",
+                "given": {
+                    "name": "JsonMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/JsonMaps",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "JsonMapsInputOutput"
+                    },
+                    "documentation": "<p>The example tests basic map serialization.</p>"
+                },
+                "description": "Deserializes JSON maps",
+                "result": {
+                    "denseStructMap": {
+                        "foo": {
+                            "hi": "there"
+                        },
+                        "baz": {
+                            "hi": "bye"
+                        }
+                    },
+                    "sparseStructMap": {
+                        "foo": {
+                            "hi": "there"
+                        },
+                        "baz": {
+                            "hi": "bye"
+                        }
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"denseStructMap\": {\n        \"foo\": {\n            \"hi\": \"there\"\n        },\n        \"baz\": {\n            \"hi\": \"bye\"\n        }\n    },\n    \"sparseStructMap\": {\n        \"foo\": {\n            \"hi\": \"there\"\n        },\n        \"baz\": {\n            \"hi\": \"bye\"\n        }\n   }\n}"
+                }
+            },
+            {
+                "id": "RestJsonDeserializesNullMapValues",
+                "given": {
+                    "name": "JsonMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/JsonMaps",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "JsonMapsInputOutput"
+                    },
+                    "documentation": "<p>The example tests basic map serialization.</p>"
+                },
+                "description": "Deserializes null JSON map values",
+                "result": {
+                    "sparseBooleanMap": {
+                        "x": null
+                    },
+                    "sparseNumberMap": {
+                        "x": null
+                    },
+                    "sparseStringMap": {
+                        "x": null
+                    },
+                    "sparseStructMap": {
+                        "x": null
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"sparseBooleanMap\": {\n        \"x\": null\n    },\n    \"sparseNumberMap\": {\n        \"x\": null\n    },\n    \"sparseStringMap\": {\n        \"x\": null\n    },\n    \"sparseStructMap\": {\n        \"x\": null\n    }\n}"
+                }
+            },
+            {
+                "id": "RestJsonDeserializesZeroValuesInMaps",
+                "given": {
+                    "name": "JsonMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/JsonMaps",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "JsonMapsInputOutput"
+                    },
+                    "documentation": "<p>The example tests basic map serialization.</p>"
+                },
+                "description": "Ensure that 0 and false are sent over the wire in all maps and lists",
+                "result": {
+                    "denseNumberMap": {
+                        "x": 0
+                    },
+                    "sparseNumberMap": {
+                        "x": 0
+                    },
+                    "denseBooleanMap": {
+                        "x": false
+                    },
+                    "sparseBooleanMap": {
+                        "x": false
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"denseNumberMap\": {\n        \"x\": 0\n    },\n    \"sparseNumberMap\": {\n        \"x\": 0\n    },\n    \"denseBooleanMap\": {\n        \"x\": false\n    },\n    \"sparseBooleanMap\": {\n        \"x\": false\n    }\n}"
+                }
+            },
+            {
+                "id": "RestJsonDeserializesSparseSetMap",
+                "given": {
+                    "name": "JsonMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/JsonMaps",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "JsonMapsInputOutput"
+                    },
+                    "documentation": "<p>The example tests basic map serialization.</p>"
+                },
+                "description": "A response that contains a sparse map of sets",
+                "result": {
+                    "sparseSetMap": {
+                        "x": [],
+                        "y": [
+                            "a",
+                            "b"
+                        ]
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"sparseSetMap\": {\n        \"x\": [],\n        \"y\": [\"a\", \"b\"]\n    }\n}"
+                }
+            },
+            {
+                "id": "RestJsonDeserializesDenseSetMap",
+                "given": {
+                    "name": "JsonMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/JsonMaps",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "JsonMapsInputOutput"
+                    },
+                    "documentation": "<p>The example tests basic map serialization.</p>"
+                },
+                "description": "A response that contains a dense map of sets.",
+                "result": {
+                    "denseSetMap": {
+                        "x": [],
+                        "y": [
+                            "a",
+                            "b"
+                        ]
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"denseSetMap\": {\n        \"x\": [],\n        \"y\": [\"a\", \"b\"]\n    }\n}"
+                }
+            },
+            {
+                "id": "RestJsonDeserializesSparseSetMapAndRetainsNull",
+                "given": {
+                    "name": "JsonMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/JsonMaps",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "JsonMapsInputOutput"
+                    },
+                    "documentation": "<p>The example tests basic map serialization.</p>"
+                },
+                "description": "A response that contains a sparse map of sets.",
+                "result": {
+                    "sparseSetMap": {
+                        "x": [],
+                        "y": [
+                            "a",
+                            "b"
+                        ],
+                        "z": null
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"sparseSetMap\": {\n        \"x\": [],\n        \"y\": [\"a\", \"b\"],\n        \"z\": null\n    }\n}"
+                }
+            },
+            {
+                "id": "RestJsonDeserializesDenseSetMapAndSkipsNull",
+                "given": {
+                    "name": "JsonMaps",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/JsonMaps",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "JsonMapsInputOutput"
+                    },
+                    "documentation": "<p>The example tests basic map serialization.</p>"
+                },
+                "description": "Clients SHOULD tolerate seeing a null value in a dense map, and they SHOULD\ndrop the null key-value pair.",
+                "result": {
+                    "denseSetMap": {
+                        "x": [],
+                        "y": [
+                            "a",
+                            "b"
+                        ]
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "{\n    \"denseSetMap\": {\n        \"x\": [],\n        \"y\": [\"a\", \"b\"],\n        \"z\": null\n    }\n}"
                 }
             }
         ]
@@ -3408,7 +3665,7 @@
                         "shape": "Boolean"
                     },
                     "byteValue": {
-                        "shape": "Integer"
+                        "shape": "Byte"
                     },
                     "shortValue": {
                         "shape": "Integer"
@@ -3433,6 +3690,10 @@
             },
             "Boolean": {
                 "type": "boolean",
+                "box": true
+            },
+            "Byte": {
+                "type": "byte",
                 "box": true
             },
             "Integer": {
@@ -3592,6 +3853,152 @@
                         "Content-Type": "application/json"
                     },
                     "body": "{\n    \"floatValue\": \"-Infinity\",\n    \"DoubleDribble\": \"-Infinity\"\n}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for StreamingTraits operation",
+        "metadata": {
+            "protocol": "rest-json",
+            "apiVersion": "2019-12-16"
+        },
+        "shapes": {
+            "StreamingTraitsInputOutput": {
+                "type": "structure",
+                "members": {
+                    "foo": {
+                        "shape": "String",
+                        "location": "header",
+                        "locationName": "X-Foo"
+                    },
+                    "blob": {
+                        "shape": "StreamingBlob"
+                    }
+                },
+                "payload": "blob"
+            },
+            "String": {
+                "type": "string"
+            },
+            "StreamingBlob": {
+                "type": "blob",
+                "streaming": true
+            }
+        },
+        "cases": [
+            {
+                "id": "RestJsonStreamingTraitsWithBlob",
+                "given": {
+                    "name": "StreamingTraits",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/StreamingTraits",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "StreamingTraitsInputOutput"
+                    },
+                    "documentation": "<p>This examples serializes a streaming blob shape in the request body.</p> <p>In this example, no JSON document is synthesized because the payload is not a structure or a union type.</p>"
+                },
+                "description": "Serializes a blob in the HTTP payload",
+                "result": {
+                    "foo": "Foo",
+                    "blob": "blobby blob blob"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/octet-stream",
+                        "X-Foo": "Foo"
+                    },
+                    "body": "blobby blob blob"
+                }
+            },
+            {
+                "id": "RestJsonStreamingTraitsWithNoBlobBody",
+                "given": {
+                    "name": "StreamingTraits",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/StreamingTraits",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "StreamingTraitsInputOutput"
+                    },
+                    "documentation": "<p>This examples serializes a streaming blob shape in the request body.</p> <p>In this example, no JSON document is synthesized because the payload is not a structure or a union type.</p>"
+                },
+                "description": "Serializes an empty blob in the HTTP payload",
+                "result": {
+                    "foo": "Foo"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "X-Foo": "Foo"
+                    },
+                    "body": ""
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for StreamingTraitsWithMediaType operation",
+        "metadata": {
+            "protocol": "rest-json",
+            "apiVersion": "2019-12-16"
+        },
+        "shapes": {
+            "StreamingTraitsWithMediaTypeInputOutput": {
+                "type": "structure",
+                "members": {
+                    "foo": {
+                        "shape": "String",
+                        "location": "header",
+                        "locationName": "X-Foo"
+                    },
+                    "blob": {
+                        "shape": "StreamingTextPlainBlob"
+                    }
+                },
+                "payload": "blob"
+            },
+            "String": {
+                "type": "string"
+            },
+            "StreamingTextPlainBlob": {
+                "type": "blob",
+                "streaming": true
+            }
+        },
+        "cases": [
+            {
+                "id": "RestJsonStreamingTraitsWithMediaTypeWithBlob",
+                "given": {
+                    "name": "StreamingTraitsWithMediaType",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/StreamingTraitsWithMediaType",
+                        "responseCode": 200
+                    },
+                    "output": {
+                        "shape": "StreamingTraitsWithMediaTypeInputOutput"
+                    },
+                    "documentation": "<p>This examples serializes a streaming media-typed blob shape in the request body.</p> <p>This examples uses a <code>@mediaType</code> trait on the payload to force a custom content-type to be serialized.</p>"
+                },
+                "description": "Serializes a blob in the HTTP payload with a content-type",
+                "result": {
+                    "foo": "Foo",
+                    "blob": "blobby blob blob"
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "text/plain",
+                        "X-Foo": "Foo"
+                    },
+                    "body": "blobby blob blob"
                 }
             }
         ]
