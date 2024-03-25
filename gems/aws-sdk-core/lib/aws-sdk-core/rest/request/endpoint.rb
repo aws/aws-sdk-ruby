@@ -39,8 +39,8 @@ module Aws
         def param_value_for_placeholder(placeholder, params)
           name = param_name(placeholder)
           param_shape = @rules.shape.member(name).shape
-          value = case param_shape.is_a?(Seahorse::Model::Shapes::TimestampShape)
-                  when true
+          value = case param_shape
+                  when Seahorse::Model::Shapes::TimestampShape
                     timestamp(param_shape, params[name]).to_s
                   else
                     params[name].to_s
