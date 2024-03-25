@@ -20,7 +20,7 @@ module Aws
         def apply(http_req, params)
           @rules.shape.members.each do |name, ref|
             value = params[name]
-            next if value.nil? || (ref.shape).is_a?(StringShape) && value.empty?
+            next if value.nil? || ((ref.shape).is_a?(StringShape) && value.empty?)
 
             case ref.location
             when 'header' then apply_header_value(http_req.headers, ref, value)
@@ -55,7 +55,8 @@ module Aws
 
           member_ref = ref.shape.member
           values = values.collect do |value|
-            if member_ref.shape.is_a?(TimestampShape)
+            case member_ref.shape
+            when TimestampShape
               timestamp(member_ref, value).to_s
             else
               Seahorse::Util.escape_header_list_string(value.to_s)
