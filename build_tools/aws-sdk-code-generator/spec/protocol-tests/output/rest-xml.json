@@ -453,14 +453,6 @@
                     "output": {
                         "shape": "GreetingWithErrorsOutput"
                     },
-                    "errors": [
-                        {
-                            "shape": "ComplexError"
-                        },
-                        {
-                            "shape": "InvalidGreeting"
-                        }
-                    ],
                     "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
                     "idempotent": true
                 },
@@ -474,6 +466,143 @@
                         "X-Greeting": "Hello"
                     },
                     "body": ""
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for GreetingWithErrors operation",
+        "metadata": {
+            "protocol": "rest-xml",
+            "apiVersion": "2019-12-16"
+        },
+        "shapes": {
+            "InvalidGreeting": {
+                "type": "structure",
+                "members": {
+                    "Message": {
+                        "shape": "String"
+                    }
+                },
+                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
+                "error": {
+                    "httpStatusCode": 400,
+                    "senderFault": true
+                },
+                "exception": true
+            },
+            "String": {
+                "type": "string"
+            }
+        },
+        "cases": [
+            {
+                "id": "InvalidGreetingError",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "PUT",
+                        "requestUri": "/GreetingWithErrors",
+                        "responseCode": 200
+                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "InvalidGreeting"
+                        }
+                    ]
+                },
+                "description": "Parses simple XML errors",
+                "errorCode": "InvalidGreeting",
+                "errorMessage": "Hi",
+                "error": {
+                    "Message": "Hi"
+                },
+                "response": {
+                    "status_code": 400,
+                    "headers": {
+                        "Content-Type": "application/xml"
+                    },
+                    "body": "<ErrorResponse>\n   <Error>\n      <Type>Sender</Type>\n      <Code>InvalidGreeting</Code>\n      <Message>Hi</Message>\n      <AnotherSetting>setting</AnotherSetting>\n   </Error>\n   <RequestId>foo-id</RequestId>\n</ErrorResponse>\n"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for GreetingWithErrors operation",
+        "metadata": {
+            "protocol": "rest-xml",
+            "apiVersion": "2019-12-16"
+        },
+        "shapes": {
+            "ComplexError": {
+                "type": "structure",
+                "members": {
+                    "Header": {
+                        "shape": "String",
+                        "location": "header",
+                        "locationName": "X-Header"
+                    },
+                    "TopLevel": {
+                        "shape": "String"
+                    },
+                    "Nested": {
+                        "shape": "ComplexNestedErrorData"
+                    }
+                },
+                "documentation": "<p>This error is thrown when a request is invalid.</p>",
+                "error": {
+                    "httpStatusCode": 403,
+                    "senderFault": true
+                },
+                "exception": true
+            },
+            "String": {
+                "type": "string"
+            },
+            "ComplexNestedErrorData": {
+                "type": "structure",
+                "members": {
+                    "Foo": {
+                        "shape": "String"
+                    }
+                }
+            }
+        },
+        "cases": [
+            {
+                "id": "ComplexError",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "PUT",
+                        "requestUri": "/GreetingWithErrors",
+                        "responseCode": 200
+                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol> <p>Implementations must be able to successfully take a response and properly (de)serialize successful and error responses based on the the presence of the</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "ComplexError"
+                        }
+                    ]
+                },
+                "errorCode": "ComplexError",
+                "error": {
+                    "Header": "Header",
+                    "TopLevel": "Top level",
+                    "Nested": {
+                        "Foo": "bar"
+                    }
+                },
+                "response": {
+                    "status_code": 400,
+                    "headers": {
+                        "Content-Type": "application/xml",
+                        "X-Header": "Header"
+                    },
+                    "body": "<ErrorResponse>\n   <Error>\n      <Type>Sender</Type>\n      <Code>ComplexError</Code>\n      <Message>Hi</Message>\n      <TopLevel>Top level</TopLevel>\n      <Nested>\n          <Foo>bar</Foo>\n      </Nested>\n   </Error>\n   <RequestId>foo-id</RequestId>\n</ErrorResponse>\n"
                 }
             }
         ]
@@ -605,65 +734,6 @@
                         "X-Foo": "Foo"
                     },
                     "body": ""
-                }
-            }
-        ]
-    },
-    {
-        "description": "Test cases for HttpPayloadTraitsWithMediaType operation",
-        "metadata": {
-            "protocol": "rest-xml",
-            "apiVersion": "2019-12-16"
-        },
-        "shapes": {
-            "HttpPayloadTraitsWithMediaTypeInputOutput": {
-                "type": "structure",
-                "members": {
-                    "foo": {
-                        "shape": "String",
-                        "location": "header",
-                        "locationName": "X-Foo"
-                    },
-                    "blob": {
-                        "shape": "TextPlainBlob"
-                    }
-                },
-                "payload": "blob"
-            },
-            "String": {
-                "type": "string"
-            },
-            "TextPlainBlob": {
-                "type": "blob"
-            }
-        },
-        "cases": [
-            {
-                "id": "HttpPayloadTraitsWithMediaTypeWithBlob",
-                "given": {
-                    "name": "HttpPayloadTraitsWithMediaType",
-                    "http": {
-                        "method": "POST",
-                        "requestUri": "/HttpPayloadTraitsWithMediaType",
-                        "responseCode": 200
-                    },
-                    "output": {
-                        "shape": "HttpPayloadTraitsWithMediaTypeInputOutput"
-                    },
-                    "documentation": "<p>This example uses a <code>@mediaType</code> trait on the payload to force a custom content-type to be serialized.</p>"
-                },
-                "description": "Serializes a blob in the HTTP payload with a content-type",
-                "result": {
-                    "foo": "Foo",
-                    "blob": "blobby blob blob"
-                },
-                "response": {
-                    "status_code": 200,
-                    "headers": {
-                        "Content-Type": "text/plain",
-                        "X-Foo": "Foo"
-                    },
-                    "body": "blobby blob blob"
                 }
             }
         ]
@@ -968,7 +1038,6 @@
                         "shape": "String"
                     }
                 },
-                "locationName": "",
                 "xmlNamespace": "http://foo.com"
             },
             "String": {
@@ -1031,8 +1100,10 @@
                         "shape": "String"
                     }
                 },
-                "locationName": "",
-                "xmlNamespace": "http://foo.com"
+                "xmlNamespace": {
+                    "prefix": "baz",
+                    "uri": "http://foo.com"
+                }
             },
             "String": {
                 "type": "string"
@@ -1327,7 +1398,7 @@
                         "locationName": "X-String"
                     },
                     "headerByte": {
-                        "shape": "Byte",
+                        "shape": "Integer",
                         "location": "header",
                         "locationName": "X-Byte"
                     },
@@ -1405,10 +1476,6 @@
             },
             "String": {
                 "type": "string"
-            },
-            "Byte": {
-                "type": "byte",
-                "box": true
             },
             "Integer": {
                 "type": "integer",
@@ -2025,10 +2092,10 @@
                         "shape": "Boolean"
                     },
                     "byteValue": {
-                        "shape": "Byte"
+                        "shape": "Integer"
                     },
                     "shortValue": {
-                        "shape": "Short"
+                        "shape": "Integer"
                     },
                     "integerValue": {
                         "shape": "Integer"
@@ -2050,14 +2117,6 @@
             },
             "Boolean": {
                 "type": "boolean",
-                "box": true
-            },
-            "Byte": {
-                "type": "byte",
-                "box": true
-            },
-            "Short": {
-                "type": "short",
                 "box": true
             },
             "Integer": {
@@ -2821,10 +2880,8 @@
                 "type": "list",
                 "member": {
                     "shape": "String",
-                    "locationName": "",
                     "xmlNamespace": "https://xml-member.example.com"
                 },
-                "locationName": "",
                 "xmlNamespace": "https://xml-list.example.com"
             },
             "ListWithNamespace": {
@@ -2832,7 +2889,6 @@
                 "member": {
                     "shape": "String"
                 },
-                "locationName": "",
                 "xmlNamespace": "https://xml-list.example.com"
             },
             "StructureList": {
@@ -3414,10 +3470,8 @@
                 "type": "list",
                 "member": {
                     "shape": "String",
-                    "locationName": "",
                     "xmlNamespace": "https://xml-member.example.com"
                 },
-                "locationName": "",
                 "xmlNamespace": "https://xml-list.example.com"
             },
             "ListWithNamespace": {
@@ -3425,7 +3479,6 @@
                 "member": {
                     "shape": "String"
                 },
-                "locationName": "",
                 "xmlNamespace": "https://xml-list.example.com"
             },
             "StructureList": {
@@ -3809,7 +3862,6 @@
                         "shape": "XmlNamespaceNested"
                     }
                 },
-                "locationName": "",
                 "xmlNamespace": "http://foo.com"
             },
             "XmlNamespaceNested": {
@@ -3817,16 +3869,16 @@
                 "members": {
                     "foo": {
                         "shape": "String",
-                        "locationName": "",
-                        "xmlNamespace": "http://baz.com"
+                        "xmlNamespace": {
+                            "prefix": "baz",
+                            "uri": "http://baz.com"
+                        }
                     },
                     "values": {
                         "shape": "XmlNamespacedList",
-                        "locationName": "",
                         "xmlNamespace": "http://qux.com"
                     }
                 },
-                "locationName": "",
                 "xmlNamespace": "http://foo.com"
             },
             "String": {
@@ -3836,7 +3888,6 @@
                 "type": "list",
                 "member": {
                     "shape": "String",
-                    "locationName": "",
                     "xmlNamespace": "http://bux.com"
                 }
             }
@@ -4146,7 +4197,7 @@
                         "shape": "Boolean"
                     },
                     "byteValue": {
-                        "shape": "Byte"
+                        "shape": "Integer"
                     },
                     "shortValue": {
                         "shape": "Integer"
@@ -4179,10 +4230,6 @@
                 "type": "boolean",
                 "box": true
             },
-            "Byte": {
-                "type": "byte",
-                "box": true
-            },
             "Integer": {
                 "type": "integer",
                 "box": true
@@ -4209,7 +4256,7 @@
                         "shape": "Boolean"
                     },
                     "byteValue": {
-                        "shape": "Byte"
+                        "shape": "Integer"
                     },
                     "shortValue": {
                         "shape": "Integer"

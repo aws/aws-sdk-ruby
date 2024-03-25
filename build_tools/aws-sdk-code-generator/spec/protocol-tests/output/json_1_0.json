@@ -4,7 +4,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "EmptyInputAndEmptyOutputOutput": {
@@ -39,11 +40,424 @@
         ]
     },
     {
+        "description": "Test cases for GreetingWithErrors operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2020-07-14",
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
+        },
+        "shapes": {
+            "InvalidGreeting": {
+                "type": "structure",
+                "members": {
+                    "Message": {
+                        "shape": "String"
+                    }
+                },
+                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
+                "exception": true
+            },
+            "String": {
+                "type": "string"
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson10InvalidGreetingError",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "InvalidGreeting"
+                        }
+                    ]
+                },
+                "description": "Parses simple JSON errors",
+                "errorCode": "InvalidGreeting",
+                "errorMessage": "Hi",
+                "error": {
+                    "Message": "Hi"
+                },
+                "response": {
+                    "status_code": 400,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"__type\": \"aws.protocoltests.json10#InvalidGreeting\",\n    \"Message\": \"Hi\"\n}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for GreetingWithErrors operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2020-07-14",
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
+        },
+        "shapes": {
+            "FooError": {
+                "type": "structure",
+                "members": {},
+                "documentation": "<p>This error has test cases that test some of the dark corners of Amazon service framework history. It should only be implemented by clients.</p>",
+                "exception": true,
+                "fault": true
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson10FooErrorUsingXAmznErrorType",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "FooError"
+                        }
+                    ]
+                },
+                "description": "Serializes the X-Amzn-ErrorType header. For an example service, see Amazon EKS.",
+                "errorCode": "FooError",
+                "error": {},
+                "response": {
+                    "status_code": 500,
+                    "headers": {
+                        "X-Amzn-Errortype": "FooError"
+                    }
+                }
+            },
+            {
+                "id": "AwsJson10FooErrorUsingXAmznErrorTypeWithUri",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "FooError"
+                        }
+                    ]
+                },
+                "description": "Some X-Amzn-Errortype headers contain URLs. Clients need to split the URL on ':' and take only the first half of the string. For example, 'ValidationException:http://internal.amazon.com/coral/com.amazon.coral.validate/'\nis to be interpreted as 'ValidationException'.\n\nFor an example service see Amazon Polly.",
+                "errorCode": "FooError",
+                "error": {},
+                "response": {
+                    "status_code": 500,
+                    "headers": {
+                        "X-Amzn-Errortype": "FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
+                    }
+                }
+            },
+            {
+                "id": "AwsJson10FooErrorUsingXAmznErrorTypeWithUriAndNamespace",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "FooError"
+                        }
+                    ]
+                },
+                "description": "X-Amzn-Errortype might contain a URL and a namespace. Client should extract only the shape name. This is a pathalogical case that might not actually happen in any deployed AWS service.",
+                "errorCode": "FooError",
+                "error": {},
+                "response": {
+                    "status_code": 500,
+                    "headers": {
+                        "X-Amzn-Errortype": "aws.protocoltests.json10#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/"
+                    }
+                }
+            },
+            {
+                "id": "AwsJson10FooErrorUsingCode",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "FooError"
+                        }
+                    ]
+                },
+                "description": "This example uses the 'code' property in the output rather than X-Amzn-Errortype. Some services do this though it's preferable to send the X-Amzn-Errortype. Client implementations must first check for the X-Amzn-Errortype and then check for a top-level 'code' property.\n\nFor example service see Amazon S3 Glacier.",
+                "errorCode": "FooError",
+                "error": {},
+                "response": {
+                    "status_code": 500,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"code\": \"FooError\"\n}"
+                }
+            },
+            {
+                "id": "AwsJson10FooErrorUsingCodeAndNamespace",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "FooError"
+                        }
+                    ]
+                },
+                "description": "Some services serialize errors using code, and it might contain a namespace. Clients should just take the last part of the string after '#'.",
+                "errorCode": "FooError",
+                "error": {},
+                "response": {
+                    "status_code": 500,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"code\": \"aws.protocoltests.json10#FooError\"\n}"
+                }
+            },
+            {
+                "id": "AwsJson10FooErrorUsingCodeUriAndNamespace",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "FooError"
+                        }
+                    ]
+                },
+                "description": "Some services serialize errors using code, and it might contain a namespace. It also might contain a URI. Clients should just take the last part of the string after '#' and before \":\". This is a pathalogical case that might not occur in any deployed AWS service.",
+                "errorCode": "FooError",
+                "error": {},
+                "response": {
+                    "status_code": 500,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"code\": \"aws.protocoltests.json10#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/\"\n}"
+                }
+            },
+            {
+                "id": "AwsJson10FooErrorWithDunderType",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "FooError"
+                        }
+                    ]
+                },
+                "description": "Some services serialize errors using __type.",
+                "errorCode": "FooError",
+                "error": {},
+                "response": {
+                    "status_code": 500,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"__type\": \"FooError\"\n}"
+                }
+            },
+            {
+                "id": "AwsJson10FooErrorWithDunderTypeAndNamespace",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "FooError"
+                        }
+                    ]
+                },
+                "description": "Some services serialize errors using __type, and it might contain a namespace. Clients should just take the last part of the string after '#'.",
+                "errorCode": "FooError",
+                "error": {},
+                "response": {
+                    "status_code": 500,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"__type\": \"aws.protocoltests.json10#FooError\"\n}"
+                }
+            },
+            {
+                "id": "AwsJson10FooErrorWithDunderTypeUriAndNamespace",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "FooError"
+                        }
+                    ]
+                },
+                "description": "Some services serialize errors using __type, and it might contain a namespace. It also might contain a URI. Clients should just take the last part of the string after '#' and before \":\". This is a pathalogical case that might not occur in any deployed AWS service.",
+                "errorCode": "FooError",
+                "error": {},
+                "response": {
+                    "status_code": 500,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"__type\": \"aws.protocoltests.json10#FooError:http://internal.amazon.com/coral/com.amazon.coral.validate/\"\n}"
+                }
+            }
+        ]
+    },
+    {
+        "description": "Test cases for GreetingWithErrors operation",
+        "metadata": {
+            "protocol": "json",
+            "apiVersion": "2020-07-14",
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
+        },
+        "shapes": {
+            "ComplexError": {
+                "type": "structure",
+                "members": {
+                    "TopLevel": {
+                        "shape": "String"
+                    },
+                    "Nested": {
+                        "shape": "ComplexNestedErrorData"
+                    }
+                },
+                "documentation": "<p>This error is thrown when a request is invalid.</p>",
+                "exception": true
+            },
+            "String": {
+                "type": "string"
+            },
+            "ComplexNestedErrorData": {
+                "type": "structure",
+                "members": {
+                    "Foo": {
+                        "shape": "String"
+                    }
+                }
+            }
+        },
+        "cases": [
+            {
+                "id": "AwsJson10ComplexError",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "ComplexError"
+                        }
+                    ]
+                },
+                "description": "Parses a complex error with no message member",
+                "errorCode": "ComplexError",
+                "error": {
+                    "TopLevel": "Top level",
+                    "Nested": {
+                        "Foo": "bar"
+                    }
+                },
+                "response": {
+                    "status_code": 400,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"__type\": \"aws.protocoltests.json10#ComplexError\",\n    \"TopLevel\": \"Top level\",\n    \"Nested\": {\n        \"Foo\": \"bar\"\n    }\n}"
+                }
+            },
+            {
+                "id": "AwsJson10EmptyComplexError",
+                "given": {
+                    "name": "GreetingWithErrors",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A ComplexError error.</li> </ol> <p>Implementations must be able to successfully take a response and properly deserialize successful and error responses.</p>",
+                    "idempotent": true,
+                    "errors": [
+                        {
+                            "shape": "ComplexError"
+                        }
+                    ]
+                },
+                "description": "Parses a complex error with an empty body",
+                "errorCode": "ComplexError",
+                "error": {},
+                "response": {
+                    "status_code": 400,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"__type\": \"aws.protocoltests.json10#ComplexError\"\n}"
+                }
+            }
+        ]
+    },
+    {
         "description": "Test cases for JsonUnions operation",
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "JsonUnionsOutput": {
@@ -464,6 +878,36 @@
                     },
                     "body": "{\n    \"contents\": {\n        \"__type\": \"aws.protocoltests.json10#MyUnion\",\n        \"structureValue\": {\n            \"hi\": \"hello\"\n        }\n    }\n}"
                 }
+            },
+            {
+                "id": "AwsJson10DeserializeAllowNulls",
+                "given": {
+                    "name": "JsonUnions",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/"
+                    },
+                    "output": {
+                        "shape": "JsonUnionsOutput"
+                    },
+                    "documentation": "<p>This operation uses unions for inputs and outputs.</p>",
+                    "idempotent": true
+                },
+                "description": "Allows for `: null` to be set for all unset fields",
+                "result": {
+                    "contents": {
+                        "structureValue": {
+                            "hi": "hello"
+                        }
+                    }
+                },
+                "response": {
+                    "status_code": 200,
+                    "headers": {
+                        "Content-Type": "application/x-amz-json-1.0"
+                    },
+                    "body": "{\n    \"contents\": {\n      \"stringValue\": null,\n      \"booleanValue\": null,\n      \"numberValue\": null,\n      \"blobValue\": null,\n      \"timestampValue\": null,\n      \"enumValue\": null,\n      \"intEnumValue\": null,\n      \"listValue\": null,\n      \"mapValue\": null,\n      \"structureValue\": {\n          \"hi\": \"hello\"\n      }\n    }\n}"
+                }
             }
         ]
     },
@@ -472,7 +916,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {},
         "cases": [
@@ -543,7 +988,8 @@
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "NoInputAndOutputOutput": {
@@ -578,576 +1024,12 @@
         ]
     },
     {
-        "description": "Test cases for OperationWithDefaults operation",
-        "metadata": {
-            "protocol": "json",
-            "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
-        },
-        "shapes": {
-            "OperationWithDefaultsOutput": {
-                "type": "structure",
-                "members": {
-                    "defaultString": {
-                        "shape": "String"
-                    },
-                    "defaultBoolean": {
-                        "shape": "Boolean"
-                    },
-                    "defaultList": {
-                        "shape": "TestStringList"
-                    },
-                    "defaultDocumentMap": {
-                        "shape": "Document"
-                    },
-                    "defaultDocumentString": {
-                        "shape": "Document"
-                    },
-                    "defaultDocumentBoolean": {
-                        "shape": "Document"
-                    },
-                    "defaultDocumentList": {
-                        "shape": "Document"
-                    },
-                    "defaultNullDocument": {
-                        "shape": "Document"
-                    },
-                    "defaultTimestamp": {
-                        "shape": "Timestamp"
-                    },
-                    "defaultBlob": {
-                        "shape": "Blob"
-                    },
-                    "defaultByte": {
-                        "shape": "Byte"
-                    },
-                    "defaultShort": {
-                        "shape": "Short"
-                    },
-                    "defaultInteger": {
-                        "shape": "Integer"
-                    },
-                    "defaultLong": {
-                        "shape": "Long"
-                    },
-                    "defaultFloat": {
-                        "shape": "Float"
-                    },
-                    "defaultDouble": {
-                        "shape": "Double"
-                    },
-                    "defaultMap": {
-                        "shape": "TestStringMap"
-                    },
-                    "defaultEnum": {
-                        "shape": "TestEnum"
-                    },
-                    "defaultIntEnum": {
-                        "shape": "TestIntEnum"
-                    },
-                    "emptyString": {
-                        "shape": "String"
-                    },
-                    "falseBoolean": {
-                        "shape": "Boolean"
-                    },
-                    "emptyBlob": {
-                        "shape": "Blob"
-                    },
-                    "zeroByte": {
-                        "shape": "Byte"
-                    },
-                    "zeroShort": {
-                        "shape": "Short"
-                    },
-                    "zeroInteger": {
-                        "shape": "Integer"
-                    },
-                    "zeroLong": {
-                        "shape": "Long"
-                    },
-                    "zeroFloat": {
-                        "shape": "Float"
-                    },
-                    "zeroDouble": {
-                        "shape": "Double"
-                    }
-                }
-            },
-            "String": {
-                "type": "string"
-            },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "TestStringList": {
-                "type": "list",
-                "member": {
-                    "shape": "String"
-                }
-            },
-            "Document": {
-                "type": "structure",
-                "members": {},
-                "document": true
-            },
-            "Timestamp": {
-                "type": "timestamp"
-            },
-            "Blob": {
-                "type": "blob"
-            },
-            "Byte": {
-                "type": "byte",
-                "box": true
-            },
-            "Short": {
-                "type": "short",
-                "box": true
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
-            },
-            "Long": {
-                "type": "long",
-                "box": true
-            },
-            "Float": {
-                "type": "float",
-                "box": true
-            },
-            "Double": {
-                "type": "double",
-                "box": true
-            },
-            "TestStringMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "String"
-                }
-            },
-            "TestEnum": {
-                "type": "string",
-                "enum": [
-                    "FOO",
-                    "BAR",
-                    "BAZ"
-                ]
-            },
-            "TestIntEnum": {
-                "type": "integer",
-                "box": true
-            }
-        },
-        "cases": [
-            {
-                "id": "AwsJson10ClientPopulatesDefaultsValuesWhenMissingInResponse",
-                "given": {
-                    "name": "OperationWithDefaults",
-                    "http": {
-                        "method": "POST",
-                        "requestUri": "/"
-                    },
-                    "output": {
-                        "shape": "OperationWithDefaultsOutput"
-                    }
-                },
-                "description": "Client populates default values when missing in response.",
-                "result": {
-                    "defaultString": "hi",
-                    "defaultBoolean": true,
-                    "defaultList": [],
-                    "defaultDocumentMap": {},
-                    "defaultDocumentString": "hi",
-                    "defaultDocumentBoolean": true,
-                    "defaultDocumentList": [],
-                    "defaultTimestamp": 0,
-                    "defaultBlob": "abc",
-                    "defaultByte": 1,
-                    "defaultShort": 1,
-                    "defaultInteger": 10,
-                    "defaultLong": 100,
-                    "defaultFloat": 1.0,
-                    "defaultDouble": 1.0,
-                    "defaultMap": {},
-                    "defaultEnum": "FOO",
-                    "defaultIntEnum": 1,
-                    "emptyString": "",
-                    "falseBoolean": false,
-                    "emptyBlob": "",
-                    "zeroByte": 0,
-                    "zeroShort": 0,
-                    "zeroInteger": 0,
-                    "zeroLong": 0,
-                    "zeroFloat": 0.0,
-                    "zeroDouble": 0.0
-                },
-                "response": {
-                    "status_code": 200,
-                    "headers": {
-                        "Content-Type": "application/x-amz-json-1.0"
-                    },
-                    "body": "{}"
-                }
-            },
-            {
-                "id": "AwsJson10ClientIgnoresDefaultValuesIfMemberValuesArePresentInResponse",
-                "given": {
-                    "name": "OperationWithDefaults",
-                    "http": {
-                        "method": "POST",
-                        "requestUri": "/"
-                    },
-                    "output": {
-                        "shape": "OperationWithDefaultsOutput"
-                    }
-                },
-                "description": "Client ignores default values if member values are present in the response.",
-                "result": {
-                    "defaultString": "bye",
-                    "defaultBoolean": false,
-                    "defaultList": [
-                        "a"
-                    ],
-                    "defaultDocumentMap": {
-                        "name": "Jack"
-                    },
-                    "defaultDocumentString": "bye",
-                    "defaultDocumentBoolean": false,
-                    "defaultDocumentList": [
-                        "b"
-                    ],
-                    "defaultNullDocument": "notNull",
-                    "defaultTimestamp": 2,
-                    "defaultBlob": "hi",
-                    "defaultByte": 2,
-                    "defaultShort": 2,
-                    "defaultInteger": 20,
-                    "defaultLong": 200,
-                    "defaultFloat": 2.0,
-                    "defaultDouble": 2.0,
-                    "defaultMap": {
-                        "name": "Jack"
-                    },
-                    "defaultEnum": "BAR",
-                    "defaultIntEnum": 2,
-                    "emptyString": "foo",
-                    "falseBoolean": true,
-                    "emptyBlob": "hi",
-                    "zeroByte": 1,
-                    "zeroShort": 1,
-                    "zeroInteger": 1,
-                    "zeroLong": 1,
-                    "zeroFloat": 1.0,
-                    "zeroDouble": 1.0
-                },
-                "response": {
-                    "status_code": 200,
-                    "headers": {
-                        "Content-Type": "application/x-amz-json-1.0"
-                    },
-                    "body": "{\n    \"defaultString\": \"bye\",\n    \"defaultBoolean\": false,\n    \"defaultList\": [\"a\"],\n    \"defaultDocumentMap\": {\"name\": \"Jack\"},\n    \"defaultDocumentString\": \"bye\",\n    \"defaultDocumentBoolean\": false,\n    \"defaultDocumentList\": [\"b\"],\n    \"defaultNullDocument\": \"notNull\",\n    \"defaultTimestamp\": 2,\n    \"defaultBlob\": \"aGk=\",\n    \"defaultByte\": 2,\n    \"defaultShort\": 2,\n    \"defaultInteger\": 20,\n    \"defaultLong\": 200,\n    \"defaultFloat\": 2.0,\n    \"defaultDouble\": 2.0,\n    \"defaultMap\": {\"name\": \"Jack\"},\n    \"defaultEnum\": \"BAR\",\n    \"defaultIntEnum\": 2,\n    \"emptyString\": \"foo\",\n    \"falseBoolean\": true,\n    \"emptyBlob\": \"aGk=\",\n    \"zeroByte\": 1,\n    \"zeroShort\": 1,\n    \"zeroInteger\": 1,\n    \"zeroLong\": 1,\n    \"zeroFloat\": 1.0,\n    \"zeroDouble\": 1.0\n}"
-                }
-            }
-        ]
-    },
-    {
-        "description": "Test cases for OperationWithNestedStructure operation",
-        "metadata": {
-            "protocol": "json",
-            "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
-        },
-        "shapes": {
-            "OperationWithNestedStructureOutput": {
-                "type": "structure",
-                "required": [
-                    "dialog"
-                ],
-                "members": {
-                    "dialog": {
-                        "shape": "Dialog"
-                    },
-                    "dialogList": {
-                        "shape": "DialogList"
-                    },
-                    "dialogMap": {
-                        "shape": "DialogMap"
-                    }
-                }
-            },
-            "Dialog": {
-                "type": "structure",
-                "members": {
-                    "language": {
-                        "shape": "String"
-                    },
-                    "greeting": {
-                        "shape": "String"
-                    },
-                    "farewell": {
-                        "shape": "Farewell"
-                    }
-                }
-            },
-            "DialogList": {
-                "type": "list",
-                "member": {
-                    "shape": "Dialog"
-                }
-            },
-            "DialogMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "Dialog"
-                }
-            },
-            "String": {
-                "type": "string"
-            },
-            "Farewell": {
-                "type": "structure",
-                "members": {
-                    "phrase": {
-                        "shape": "String"
-                    }
-                }
-            }
-        },
-        "cases": [
-            {
-                "id": "AwsJson10ClientPopulatesNestedDefaultsWhenMissingInResponseBody",
-                "given": {
-                    "name": "OperationWithNestedStructure",
-                    "http": {
-                        "method": "POST",
-                        "requestUri": "/"
-                    },
-                    "output": {
-                        "shape": "OperationWithNestedStructureOutput"
-                    }
-                },
-                "description": "Client populates nested default values when missing in response body.",
-                "result": {
-                    "dialog": {
-                        "language": "en",
-                        "greeting": "hi"
-                    },
-                    "dialogList": [
-                        {
-                            "greeting": "hi"
-                        },
-                        {
-                            "greeting": "hi",
-                            "farewell": {
-                                "phrase": "bye"
-                            }
-                        },
-                        {
-                            "language": "it",
-                            "greeting": "ciao",
-                            "farewell": {
-                                "phrase": "arrivederci"
-                            }
-                        }
-                    ],
-                    "dialogMap": {
-                        "emptyDialog": {
-                            "greeting": "hi"
-                        },
-                        "partialEmptyDialog": {
-                            "language": "en",
-                            "greeting": "hi",
-                            "farewell": {
-                                "phrase": "bye"
-                            }
-                        },
-                        "nonEmptyDialog": {
-                            "greeting": "konnichiwa",
-                            "farewell": {
-                                "phrase": "sayonara"
-                            }
-                        }
-                    }
-                },
-                "response": {
-                    "status_code": 200,
-                    "headers": {
-                        "Content-Type": "application/x-amz-json-1.0"
-                    },
-                    "body": "{\n    \"dialog\": {\n        \"language\": \"en\"\n    },\n    \"dialogList\": [\n        {\n        },\n        {\n            \"farewell\": {}\n        },\n        {\n            \"language\": \"it\",\n            \"greeting\": \"ciao\",\n            \"farewell\": {\n                \"phrase\": \"arrivederci\"\n            }\n        }\n    ],\n    \"dialogMap\": {\n        \"emptyDialog\": {\n        },\n        \"partialEmptyDialog\": {\n            \"language\": \"en\",\n            \"farewell\": {}\n        },\n        \"nonEmptyDialog\": {\n            \"greeting\": \"konnichiwa\",\n            \"farewell\": {\n                \"phrase\": \"sayonara\"\n            }\n        }\n    }\n}"
-                }
-            }
-        ]
-    },
-    {
-        "description": "Test cases for OperationWithRequiredMembers operation",
-        "metadata": {
-            "protocol": "json",
-            "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
-        },
-        "shapes": {
-            "OperationWithRequiredMembersOutput": {
-                "type": "structure",
-                "required": [
-                    "requiredString",
-                    "requiredBoolean",
-                    "requiredList",
-                    "requiredTimestamp",
-                    "requiredBlob",
-                    "requiredByte",
-                    "requiredShort",
-                    "requiredInteger",
-                    "requiredLong",
-                    "requiredFloat",
-                    "requiredDouble",
-                    "requiredMap"
-                ],
-                "members": {
-                    "requiredString": {
-                        "shape": "String"
-                    },
-                    "requiredBoolean": {
-                        "shape": "Boolean"
-                    },
-                    "requiredList": {
-                        "shape": "RequiredStringList"
-                    },
-                    "requiredTimestamp": {
-                        "shape": "Timestamp"
-                    },
-                    "requiredBlob": {
-                        "shape": "Blob"
-                    },
-                    "requiredByte": {
-                        "shape": "Byte"
-                    },
-                    "requiredShort": {
-                        "shape": "Short"
-                    },
-                    "requiredInteger": {
-                        "shape": "Integer"
-                    },
-                    "requiredLong": {
-                        "shape": "Long"
-                    },
-                    "requiredFloat": {
-                        "shape": "Float"
-                    },
-                    "requiredDouble": {
-                        "shape": "Double"
-                    },
-                    "requiredMap": {
-                        "shape": "RequiredStringMap"
-                    }
-                }
-            },
-            "String": {
-                "type": "string"
-            },
-            "Boolean": {
-                "type": "boolean",
-                "box": true
-            },
-            "RequiredStringList": {
-                "type": "list",
-                "member": {
-                    "shape": "String"
-                }
-            },
-            "Timestamp": {
-                "type": "timestamp"
-            },
-            "Blob": {
-                "type": "blob"
-            },
-            "Byte": {
-                "type": "byte",
-                "box": true
-            },
-            "Short": {
-                "type": "short",
-                "box": true
-            },
-            "Integer": {
-                "type": "integer",
-                "box": true
-            },
-            "Long": {
-                "type": "long",
-                "box": true
-            },
-            "Float": {
-                "type": "float",
-                "box": true
-            },
-            "Double": {
-                "type": "double",
-                "box": true
-            },
-            "RequiredStringMap": {
-                "type": "map",
-                "key": {
-                    "shape": "String"
-                },
-                "value": {
-                    "shape": "String"
-                }
-            }
-        },
-        "cases": [
-            {
-                "id": "AwsJson10ClientErrorCorrectsWhenServerFailsToSerializeRequiredValues",
-                "given": {
-                    "name": "OperationWithRequiredMembers",
-                    "http": {
-                        "method": "POST",
-                        "requestUri": "/"
-                    },
-                    "output": {
-                        "shape": "OperationWithRequiredMembersOutput"
-                    }
-                },
-                "description": "Client error corrects when server fails to serialize required values.",
-                "result": {
-                    "requiredString": "",
-                    "requiredBoolean": false,
-                    "requiredList": [],
-                    "requiredTimestamp": 0,
-                    "requiredBlob": "",
-                    "requiredByte": 0,
-                    "requiredShort": 0,
-                    "requiredInteger": 0,
-                    "requiredLong": 0,
-                    "requiredFloat": 0.0,
-                    "requiredDouble": 0.0,
-                    "requiredMap": {}
-                },
-                "response": {
-                    "status_code": 200,
-                    "headers": {
-                        "Content-Type": "application/x-amz-json-1.0"
-                    },
-                    "body": "{}"
-                }
-            }
-        ]
-    },
-    {
         "description": "Test cases for SimpleScalarProperties operation",
         "metadata": {
             "protocol": "json",
             "apiVersion": "2020-07-14",
-            "jsonVersion": "1.0"
+            "jsonVersion": "1.0",
+            "targetPrefix": "JsonRpc10"
         },
         "shapes": {
             "SimpleScalarPropertiesOutput": {
