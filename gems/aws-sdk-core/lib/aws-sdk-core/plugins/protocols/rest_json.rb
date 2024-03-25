@@ -4,8 +4,12 @@ module Aws
   module Plugins
     module Protocols
       class RestJson < Seahorse::Client::Plugin
+
+        class ContentTypeHandler < Seahorse::Client::Handler
         handler(Rest::Handler)
-        handler(Rest::ContentTypeHandler)
+        # Rest::Handler will set a default JSON body, so size can be checked
+        # if this handler is run after serialization.
+        handler(Rest::ContentTypeHandler, priority: 30)
         handler(Json::ErrorHandler, step: :sign)
       end
 
