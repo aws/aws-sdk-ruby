@@ -25,7 +25,7 @@
                         "locationName": "StringSet"
                     },
                     "queryByte": {
-                        "shape": "Integer",
+                        "shape": "Byte",
                         "location": "querystring",
                         "locationName": "Byte"
                     },
@@ -129,6 +129,10 @@
                 "member": {
                     "shape": "String"
                 }
+            },
+            "Byte": {
+                "type": "byte",
+                "box": true
             },
             "Integer": {
                 "type": "integer",
@@ -1101,6 +1105,66 @@
         ]
     },
     {
+        "description": "Test cases for HttpPayloadTraitsWithMediaType operation",
+        "metadata": {
+            "protocol": "rest-xml",
+            "apiVersion": "2019-12-16"
+        },
+        "shapes": {
+            "HttpPayloadTraitsWithMediaTypeInputOutput": {
+                "type": "structure",
+                "members": {
+                    "foo": {
+                        "shape": "String",
+                        "location": "header",
+                        "locationName": "X-Foo"
+                    },
+                    "blob": {
+                        "shape": "TextPlainBlob"
+                    }
+                },
+                "payload": "blob"
+            },
+            "String": {
+                "type": "string"
+            },
+            "TextPlainBlob": {
+                "type": "blob"
+            }
+        },
+        "cases": [
+            {
+                "id": "HttpPayloadTraitsWithMediaTypeWithBlob",
+                "given": {
+                    "name": "HttpPayloadTraitsWithMediaType",
+                    "http": {
+                        "method": "POST",
+                        "requestUri": "/HttpPayloadTraitsWithMediaType",
+                        "responseCode": 200
+                    },
+                    "input": {
+                        "shape": "HttpPayloadTraitsWithMediaTypeInputOutput"
+                    },
+                    "documentation": "<p>This example uses a <code>@mediaType</code> trait on the payload to force a custom content-type to be serialized.</p>"
+                },
+                "description": "Serializes a blob in the HTTP payload with a content-type",
+                "params": {
+                    "foo": "Foo",
+                    "blob": "blobby blob blob"
+                },
+                "serialized": {
+                    "method": "POST",
+                    "uri": "/HttpPayloadTraitsWithMediaType",
+                    "body": "blobby blob blob",
+                    "headers": {
+                        "Content-Type": "text/plain",
+                        "X-Foo": "Foo"
+                    }
+                }
+            }
+        ]
+    },
+    {
         "description": "Test cases for HttpPayloadWithMemberXmlName operation",
         "metadata": {
             "protocol": "rest-xml",
@@ -1175,7 +1239,7 @@
                 "members": {
                     "nested": {
                         "shape": "NestedPayload",
-                        "locationName": "NestedPayload"
+                        "locationName": "nested"
                     }
                 },
                 "payload": "nested"
@@ -1405,6 +1469,7 @@
                         "shape": "String"
                     }
                 },
+                "locationName": "",
                 "xmlNamespace": "http://foo.com"
             },
             "String": {
@@ -1468,10 +1533,8 @@
                         "shape": "String"
                     }
                 },
-                "xmlNamespace": {
-                    "prefix": "baz",
-                    "uri": "http://foo.com"
-                }
+                "locationName": "",
+                "xmlNamespace": "http://foo.com"
             },
             "String": {
                 "type": "string"
@@ -2110,7 +2173,7 @@
                         "locationName": "X-String"
                     },
                     "headerByte": {
-                        "shape": "Integer",
+                        "shape": "Byte",
                         "location": "header",
                         "locationName": "X-Byte"
                     },
@@ -2188,6 +2251,10 @@
             },
             "String": {
                 "type": "string"
+            },
+            "Byte": {
+                "type": "byte",
+                "box": true
             },
             "Integer": {
                 "type": "integer",
@@ -3257,10 +3324,10 @@
                         "shape": "Boolean"
                     },
                     "byteValue": {
-                        "shape": "Integer"
+                        "shape": "Byte"
                     },
                     "shortValue": {
-                        "shape": "Integer"
+                        "shape": "Short"
                     },
                     "integerValue": {
                         "shape": "Integer"
@@ -3282,6 +3349,14 @@
             },
             "Boolean": {
                 "type": "boolean",
+                "box": true
+            },
+            "Byte": {
+                "type": "byte",
+                "box": true
+            },
+            "Short": {
+                "type": "short",
                 "box": true
             },
             "Integer": {
@@ -3966,8 +4041,10 @@
                 "type": "list",
                 "member": {
                     "shape": "String",
+                    "locationName": "",
                     "xmlNamespace": "https://xml-member.example.com"
                 },
+                "locationName": "",
                 "xmlNamespace": "https://xml-list.example.com"
             },
             "ListWithNamespace": {
@@ -3975,6 +4052,7 @@
                 "member": {
                     "shape": "String"
                 },
+                "locationName": "",
                 "xmlNamespace": "https://xml-list.example.com"
             },
             "StructureList": {
@@ -4515,8 +4593,10 @@
                 "type": "list",
                 "member": {
                     "shape": "String",
+                    "locationName": "",
                     "xmlNamespace": "https://xml-member.example.com"
                 },
+                "locationName": "",
                 "xmlNamespace": "https://xml-list.example.com"
             },
             "ListWithNamespace": {
@@ -4524,6 +4604,7 @@
                 "member": {
                     "shape": "String"
                 },
+                "locationName": "",
                 "xmlNamespace": "https://xml-list.example.com"
             },
             "StructureList": {
@@ -4907,6 +4988,7 @@
                         "shape": "XmlNamespaceNested"
                     }
                 },
+                "locationName": "",
                 "xmlNamespace": "http://foo.com"
             },
             "XmlNamespaceNested": {
@@ -4914,16 +4996,16 @@
                 "members": {
                     "foo": {
                         "shape": "String",
-                        "xmlNamespace": {
-                            "prefix": "baz",
-                            "uri": "http://baz.com"
-                        }
+                        "locationName": "",
+                        "xmlNamespace": "http://baz.com"
                     },
                     "values": {
                         "shape": "XmlNamespacedList",
+                        "locationName": "",
                         "xmlNamespace": "http://qux.com"
                     }
                 },
+                "locationName": "",
                 "xmlNamespace": "http://foo.com"
             },
             "String": {
@@ -4933,6 +5015,7 @@
                 "type": "list",
                 "member": {
                     "shape": "String",
+                    "locationName": "",
                     "xmlNamespace": "http://bux.com"
                 }
             }
@@ -5258,7 +5341,7 @@
                         "shape": "Boolean"
                     },
                     "byteValue": {
-                        "shape": "Integer"
+                        "shape": "Byte"
                     },
                     "shortValue": {
                         "shape": "Integer"
@@ -5291,6 +5374,10 @@
                 "type": "boolean",
                 "box": true
             },
+            "Byte": {
+                "type": "byte",
+                "box": true
+            },
             "Integer": {
                 "type": "integer",
                 "box": true
@@ -5317,7 +5404,7 @@
                         "shape": "Boolean"
                     },
                     "byteValue": {
-                        "shape": "Integer"
+                        "shape": "Byte"
                     },
                     "shortValue": {
                         "shape": "Integer"

@@ -186,6 +186,14 @@
                     "output": {
                         "shape": "GreetingWithErrorsOutput"
                     },
+                    "errors": [
+                        {
+                            "shape": "ComplexError"
+                        },
+                        {
+                            "shape": "InvalidGreeting"
+                        }
+                    ],
                     "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol>"
                 },
                 "description": "Ensures that operations with errors successfully know how to deserialize the successful response",
@@ -198,124 +206,6 @@
                         "Content-Type": "text/xml;charset=UTF-8"
                     },
                     "body": "<GreetingWithErrorsResponse xmlns=\"https://example.com/\">\n    <greeting>Hello</greeting>\n    <RequestId>requestid</RequestId>\n</GreetingWithErrorsResponse>\n"
-                }
-            }
-        ]
-    },
-    {
-        "description": "Test cases for GreetingWithErrors operation",
-        "metadata": {
-            "protocol": "ec2",
-            "apiVersion": "2020-01-08"
-        },
-        "shapes": {
-            "InvalidGreeting": {
-                "type": "structure",
-                "members": {
-                    "Message": {
-                        "shape": "String"
-                    }
-                },
-                "documentation": "<p>This error is thrown when an invalid greeting value is provided.</p>",
-                "exception": true
-            },
-            "String": {
-                "type": "string"
-            }
-        },
-        "cases": [
-            {
-                "id": "Ec2InvalidGreetingError",
-                "given": {
-                    "name": "GreetingWithErrors",
-                    "http": {
-                        "method": "POST",
-                        "requestUri": "/"
-                    },
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol>",
-                    "errors": [
-                        {
-                            "shape": "InvalidGreeting"
-                        }
-                    ]
-                },
-                "description": "Parses simple XML errors",
-                "errorCode": "InvalidGreeting",
-                "errorMessage": "Hi",
-                "error": {
-                    "Message": "Hi"
-                },
-                "response": {
-                    "status_code": 400,
-                    "headers": {
-                        "Content-Type": "text/xml;charset=UTF-8"
-                    },
-                    "body": "<Response>\n    <Errors>\n        <Error>\n            <Code>InvalidGreeting</Code>\n            <Message>Hi</Message>\n        </Error>\n    </Errors>\n    <RequestId>foo-id</RequestId>\n</Response>\n"
-                }
-            }
-        ]
-    },
-    {
-        "description": "Test cases for GreetingWithErrors operation",
-        "metadata": {
-            "protocol": "ec2",
-            "apiVersion": "2020-01-08"
-        },
-        "shapes": {
-            "ComplexError": {
-                "type": "structure",
-                "members": {
-                    "TopLevel": {
-                        "shape": "String"
-                    },
-                    "Nested": {
-                        "shape": "ComplexNestedErrorData"
-                    }
-                },
-                "documentation": "<p>This error is thrown when a request is invalid.</p>",
-                "exception": true
-            },
-            "String": {
-                "type": "string"
-            },
-            "ComplexNestedErrorData": {
-                "type": "structure",
-                "members": {
-                    "Foo": {
-                        "shape": "String"
-                    }
-                }
-            }
-        },
-        "cases": [
-            {
-                "id": "Ec2ComplexError",
-                "given": {
-                    "name": "GreetingWithErrors",
-                    "http": {
-                        "method": "POST",
-                        "requestUri": "/"
-                    },
-                    "documentation": "<p>This operation has three possible return values:</p> <ol> <li>A successful response in the form of GreetingWithErrorsOutput</li> <li>An InvalidGreeting error.</li> <li>A BadRequest error.</li> </ol>",
-                    "errors": [
-                        {
-                            "shape": "ComplexError"
-                        }
-                    ]
-                },
-                "errorCode": "ComplexError",
-                "error": {
-                    "TopLevel": "Top level",
-                    "Nested": {
-                        "Foo": "bar"
-                    }
-                },
-                "response": {
-                    "status_code": 400,
-                    "headers": {
-                        "Content-Type": "text/xml;charset=UTF-8"
-                    },
-                    "body": "<Response>\n    <Errors>\n        <Error>\n            <Code>ComplexError</Code>\n            <Message>Hi</Message>\n            <TopLevel>Top level</TopLevel>\n            <Nested>\n                <Foo>bar</Foo>\n            </Nested>\n        </Error>\n    </Errors>\n    <RequestId>foo-id</RequestId>\n</Response>\n"
                 }
             }
         ]
@@ -509,7 +399,7 @@
                         "shape": "Boolean"
                     },
                     "byteValue": {
-                        "shape": "Integer"
+                        "shape": "Byte"
                     },
                     "shortValue": {
                         "shape": "Integer"
@@ -534,6 +424,10 @@
             },
             "Boolean": {
                 "type": "boolean",
+                "box": true
+            },
+            "Byte": {
+                "type": "byte",
                 "box": true
             },
             "Integer": {
@@ -902,8 +796,10 @@
                 "type": "list",
                 "member": {
                     "shape": "String",
+                    "locationName": "",
                     "xmlNamespace": "https://xml-member.example.com"
                 },
+                "locationName": "",
                 "xmlNamespace": "https://xml-list.example.com"
             },
             "ListWithNamespace": {
@@ -911,6 +807,7 @@
                 "member": {
                     "shape": "String"
                 },
+                "locationName": "",
                 "xmlNamespace": "https://xml-list.example.com"
             },
             "StructureList": {
@@ -1319,8 +1216,10 @@
                 "type": "list",
                 "member": {
                     "shape": "String",
+                    "locationName": "",
                     "xmlNamespace": "https://xml-member.example.com"
                 },
+                "locationName": "",
                 "xmlNamespace": "https://xml-list.example.com"
             },
             "ListWithNamespace": {
@@ -1328,6 +1227,7 @@
                 "member": {
                     "shape": "String"
                 },
+                "locationName": "",
                 "xmlNamespace": "https://xml-list.example.com"
             },
             "StructureList": {
@@ -1488,6 +1388,7 @@
                         "shape": "XmlNamespaceNested"
                     }
                 },
+                "locationName": "",
                 "xmlNamespace": "http://foo.com"
             },
             "XmlNamespaceNested": {
@@ -1495,16 +1396,16 @@
                 "members": {
                     "foo": {
                         "shape": "String",
-                        "xmlNamespace": {
-                            "prefix": "baz",
-                            "uri": "http://baz.com"
-                        }
+                        "locationName": "",
+                        "xmlNamespace": "http://baz.com"
                     },
                     "values": {
                         "shape": "XmlNamespacedList",
+                        "locationName": "",
                         "xmlNamespace": "http://qux.com"
                     }
                 },
+                "locationName": "",
                 "xmlNamespace": "http://foo.com"
             },
             "String": {
@@ -1514,6 +1415,7 @@
                 "type": "list",
                 "member": {
                     "shape": "String",
+                    "locationName": "",
                     "xmlNamespace": "http://bux.com"
                 }
             }
