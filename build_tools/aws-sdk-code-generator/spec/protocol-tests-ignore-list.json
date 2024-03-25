@@ -1,41 +1,27 @@
 {
   "ec2" :
     {
-      "input" : [
-        {"Ec2Query": "Awaiting Smithy to resolve C2J translation"},
-        {"Ec2QueryIsPreferred":  "Awaiting Smithy to resolve C2J translation"}
-      ],
-      "output" : [
-      ]
+      "input" : [],
+      "output" : []
     },
   "json" : {
-    "input" : [
-    ],
-    "output" : [
-    ]
+    "input" : [],
+    "output" : []
   },
   "json_1_0" : {
-    "input" : [
-    ],
-    "output" : [
-    ]
+    "input" : [],
+    "output" : []
   },
   "query" : {
-    "input" : [
-    ],
-    "output" : [
-    ]
+    "input" : [],
+    "output" : []
   },
   "rest-json" : {
-    "input" : [
-      {"RestJsonZeroAndFalseQueryValues": "Awaiting Smithy to resolve C2J translation"}
-    ],
-    "output" : [
-    ]
+    "input" : [],
+    "output" : []
   },
   "rest-xml" : {
-    "input" : [
-    ],
+    "input" : [],
     "output" : [
       {"SimpleScalarPropertiesComplexEscapes": "OxEngine does not handle all escape cases but other engines supports it"}
     ]
