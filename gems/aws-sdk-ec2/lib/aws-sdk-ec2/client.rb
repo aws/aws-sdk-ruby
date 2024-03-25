@@ -41544,6 +41544,48 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Gets the default instance metadata service (IMDS) settings that are
+    # set at the account level in the specified Amazon Web Services  Region.
+    #
+    # For more information, see [Order of precedence for instance metadata
+    # options][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#instance-metadata-options-order-of-precedence
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetInstanceMetadataDefaultsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInstanceMetadataDefaultsResult#account_level #account_level} => Types::InstanceMetadataDefaultsResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_instance_metadata_defaults({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_level.http_tokens #=> String, one of "optional", "required"
+    #   resp.account_level.http_put_response_hop_limit #=> Integer
+    #   resp.account_level.http_endpoint #=> String, one of "disabled", "enabled"
+    #   resp.account_level.instance_metadata_tags #=> String, one of "disabled", "enabled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceMetadataDefaults AWS API Documentation
+    #
+    # @overload get_instance_metadata_defaults(params = {})
+    # @param [Hash] params ({})
+    def get_instance_metadata_defaults(params = {}, options = {})
+      req = build_request(:get_instance_metadata_defaults, params)
+      req.send_request(options)
+    end
+
     # Returns a list of instance types with the specified instance
     # attributes. You can use the response to preview the instance types
     # without launching instances. Note that the response does not consider
@@ -47296,6 +47338,83 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Modifies the default instance metadata service (IMDS) settings at the
+    # account level in the specified Amazon Web Services  Region.
+    #
+    # <note markdown="1"> To remove a parameter's account-level default setting, specify
+    # `no-preference`. At instance launch, the value will come from the AMI,
+    # or from the launch parameter if specified. For more information, see
+    # [Order of precedence for instance metadata options][1] in the *Amazon
+    # EC2 User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#instance-metadata-options-order-of-precedence
+    #
+    # @option params [String] :http_tokens
+    #   Indicates whether IMDSv2 is required.
+    #
+    #   * `optional` – IMDSv2 is optional, which means that you can use either
+    #     IMDSv2 or IMDSv1.
+    #
+    #   * `required` – IMDSv2 is required, which means that IMDSv1 is
+    #     disabled, and you must use IMDSv2.
+    #
+    # @option params [Integer] :http_put_response_hop_limit
+    #   The maximum number of hops that the metadata token can travel.
+    #
+    #   Minimum: `1`
+    #
+    #   Maximum: `64`
+    #
+    # @option params [String] :http_endpoint
+    #   Enables or disables the IMDS endpoint on an instance. When disabled,
+    #   the instance metadata can't be accessed.
+    #
+    # @option params [String] :instance_metadata_tags
+    #   Enables or disables access to an instance's tags from the instance
+    #   metadata. For more information, see [Work with instance tags using the
+    #   instance metadata][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyInstanceMetadataDefaultsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyInstanceMetadataDefaultsResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_instance_metadata_defaults({
+    #     http_tokens: "optional", # accepts optional, required, no-preference
+    #     http_put_response_hop_limit: 1,
+    #     http_endpoint: "disabled", # accepts disabled, enabled, no-preference
+    #     instance_metadata_tags: "disabled", # accepts disabled, enabled, no-preference
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMetadataDefaults AWS API Documentation
+    #
+    # @overload modify_instance_metadata_defaults(params = {})
+    # @param [Hash] params ({})
+    def modify_instance_metadata_defaults(params = {}, options = {})
+      req = build_request(:modify_instance_metadata_defaults, params)
+      req.send_request(options)
+    end
+
     # Modify the instance metadata parameters on a running or stopped
     # instance. When you modify the parameters on a stopped instance, they
     # are applied when the instance is started. When you modify the
@@ -47328,8 +47447,23 @@ module Aws::EC2
     #     retrieving the IAM role credentials always returns IMDSv2
     #     credentials; IMDSv1 credentials are not available.
     #
-    #   Default: If the value of `ImdsSupport` for the Amazon Machine Image
-    #   (AMI) for your instance is `v2.0`, the default is `required`.
+    #   Default:
+    #
+    #   * If the value of `ImdsSupport` for the Amazon Machine Image (AMI) for
+    #     your instance is `v2.0` and the account level default is set to
+    #     `no-preference`, the default is `required`.
+    #
+    #   * If the value of `ImdsSupport` for the Amazon Machine Image (AMI) for
+    #     your instance is `v2.0`, but the account level default is set to `V1
+    #     or V2`, the default is `optional`.
+    #
+    #   The default value can also be affected by other combinations of
+    #   parameters. For more information, see [Order of precedence for
+    #   instance metadata options][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#instance-metadata-options-order-of-precedence
     #
     # @option params [Integer] :http_put_response_hop_limit
     #   The desired HTTP PUT response hop limit for instance metadata
@@ -56860,7 +56994,8 @@ module Aws::EC2
     #   * `type` - The type of route (`propagated` \| `static`).
     #
     # @option params [Integer] :max_results
-    #   The maximum number of routes to return.
+    #   The maximum number of routes to return. If a value is not provided,
+    #   the default is 1000.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -58981,7 +59116,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.444.0'
+      context[:gem_version] = '1.445.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

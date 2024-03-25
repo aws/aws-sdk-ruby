@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2024-03-25)
+------------------
+
+* Feature - Supporting GitLab and GitLab Self Managed as source types in AWS CodeBuild.
+
 1.106.0 (2024-03-20)
 ------------------
 

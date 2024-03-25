@@ -527,8 +527,8 @@ module Aws::CodeBuild
     class ImportSourceCredentialsInput
       attr_accessor username: ::String
       attr_accessor token: ::String
-      attr_accessor server_type: ("GITHUB" | "BITBUCKET" | "GITHUB_ENTERPRISE")
-      attr_accessor auth_type: ("OAUTH" | "BASIC_AUTH" | "PERSONAL_ACCESS_TOKEN")
+      attr_accessor server_type: ("GITHUB" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "GITLAB" | "GITLAB_SELF_MANAGED")
+      attr_accessor auth_type: ("OAUTH" | "BASIC_AUTH" | "PERSONAL_ACCESS_TOKEN" | "CODECONNECTIONS")
       attr_accessor should_overwrite: bool
       SENSITIVE: [:token]
     end
@@ -846,7 +846,7 @@ module Aws::CodeBuild
     end
 
     class ProjectSource
-      attr_accessor type: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE")
+      attr_accessor type: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "GITLAB" | "GITLAB_SELF_MANAGED" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE")
       attr_accessor location: ::String
       attr_accessor git_clone_depth: ::Integer
       attr_accessor git_submodules_config: Types::GitSubmodulesConfig
@@ -1004,15 +1004,16 @@ module Aws::CodeBuild
     end
 
     class SourceAuth
-      attr_accessor type: ("OAUTH")
+      attr_accessor type: ("OAUTH" | "CODECONNECTIONS")
       attr_accessor resource: ::String
       SENSITIVE: []
     end
 
     class SourceCredentialsInfo
       attr_accessor arn: ::String
-      attr_accessor server_type: ("GITHUB" | "BITBUCKET" | "GITHUB_ENTERPRISE")
-      attr_accessor auth_type: ("OAUTH" | "BASIC_AUTH" | "PERSONAL_ACCESS_TOKEN")
+      attr_accessor server_type: ("GITHUB" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "GITLAB" | "GITLAB_SELF_MANAGED")
+      attr_accessor auth_type: ("OAUTH" | "BASIC_AUTH" | "PERSONAL_ACCESS_TOKEN" | "CODECONNECTIONS")
+      attr_accessor resource: ::String
       SENSITIVE: []
     end
 
@@ -1024,7 +1025,7 @@ module Aws::CodeBuild
       attr_accessor artifacts_override: Types::ProjectArtifacts
       attr_accessor secondary_artifacts_override: ::Array[Types::ProjectArtifacts]
       attr_accessor environment_variables_override: ::Array[Types::EnvironmentVariable]
-      attr_accessor source_type_override: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE")
+      attr_accessor source_type_override: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "GITLAB" | "GITLAB_SELF_MANAGED" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE")
       attr_accessor source_location_override: ::String
       attr_accessor source_auth_override: Types::SourceAuth
       attr_accessor git_clone_depth_override: ::Integer
@@ -1064,7 +1065,7 @@ module Aws::CodeBuild
       attr_accessor artifacts_override: Types::ProjectArtifacts
       attr_accessor secondary_artifacts_override: ::Array[Types::ProjectArtifacts]
       attr_accessor environment_variables_override: ::Array[Types::EnvironmentVariable]
-      attr_accessor source_type_override: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE")
+      attr_accessor source_type_override: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "GITLAB" | "GITLAB_SELF_MANAGED" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE")
       attr_accessor source_location_override: ::String
       attr_accessor source_auth_override: Types::SourceAuth
       attr_accessor git_clone_depth_override: ::Integer

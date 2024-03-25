@@ -42,9 +42,9 @@ module Aws::ECS
     #   For Service Connect services, this includes `portName`,
     #   `clientAliases`, `discoveryName`, and `ingressPortOverride`.
     #
-    #   For elastic block storage, this includes `roleArn`, `encrypted`,
-    #   `filesystemType`, `iops`, `kmsKeyId`, `sizeInGiB`, `snapshotId`,
-    #   `tagSpecifications`, `throughput`, and `volumeType`.
+    #   For Elastic Block Storage, this includes `roleArn`,
+    #   `deleteOnTermination`, `volumeName`, `volumeId`, and `statusReason`
+    #   (only when the attachment fails to create or attach).
     #   @return [Array<Types::KeyValuePair>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Attachment AWS API Documentation
@@ -2728,7 +2728,7 @@ module Aws::ECS
     #
     #   <note markdown="1"> Fargate Spot infrastructure is available for use but a capacity
     #   provider strategy must be used. For more information, see [Fargate
-    #   capacity providers][2] in the *Amazon ECS User Guide for Fargate*.
+    #   capacity providers][2] in the *Amazon ECS Developer Guide*.
     #
     #    </note>
     #
@@ -2952,11 +2952,16 @@ module Aws::ECS
     #   tags to a task after task creation, use the [TagResource][1] API
     #   action.
     #
+    #   You must set this to a value other than `NONE` when you use Cost
+    #   Explorer. For more information, see [Amazon ECS usage reports][2] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
+    #
     #   The default is `NONE`.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/usage-reports.html
     #   @return [String]
     #
     # @!attribute [rw] enable_execute_command
@@ -4668,9 +4673,12 @@ module Aws::ECS
     # variables contained within an environment file. If multiple
     # environment files are specified that contain the same variable,
     # they're processed from the top down. We recommend that you use unique
-    # variable names. For more information, see [Specifying environment
-    # variables][1] in the *Amazon Elastic Container Service Developer
-    # Guide*.
+    # variable names. For more information, see [Use a file to pass
+    # environment variables to a container][1] in the *Amazon Elastic
+    # Container Service Developer Guide*.
+    #
+    # Environment variable files are objects in Amazon S3 and all Amazon S3
+    # security considerations apply.
     #
     # You must use the following platforms for the Fargate launch type:
     #
@@ -4688,7 +4696,7 @@ module Aws::ECS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/use-environment-file.html
     #
     # @!attribute [rw] value
     #   The Amazon Resource Name (ARN) of the Amazon S3 object containing
@@ -4696,7 +4704,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The file type to use. The only supported value is `s3`.
+    #   The file type to use. Environment files are objects in Amazon S3.
+    #   The only supported value is `s3`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/EnvironmentFile AWS API Documentation
@@ -4729,7 +4738,7 @@ module Aws::ECS
     #
     # @!attribute [rw] size_in_gi_b
     #   The total amount, in GiB, of ephemeral storage to set for the task.
-    #   The minimum supported value is `21` GiB and the maximum supported
+    #   The minimum supported value is `20` GiB and the maximum supported
     #   value is `200` GiB.
     #   @return [Integer]
     #
@@ -5118,6 +5127,9 @@ module Aws::ECS
     # The health check is designed to make sure that your containers survive
     # agent restarts, upgrades, or temporary unavailability.
     #
+    # Amazon ECS performs health checks on containers with the default that
+    # launched the container instance or the task.
+    #
     # The following describes the possible `healthStatus` values for a
     # container:
     #
@@ -5423,8 +5435,8 @@ module Aws::ECS
     #
     class InvalidParameterException < Aws::EmptyStructure; end
 
-    # The Linux capabilities for the container that are added to or dropped
-    # from the default configuration provided by Docker. For more
+    # The Linux capabilities to add or remove from the default Docker
+    # configuration for a container defined in the task definition. For more
     # information about the default capabilities and the non-default
     # available capabilities, see [Runtime privilege and Linux
     # capabilities][1] in the *Docker run reference*. For more detailed

@@ -2487,6 +2487,8 @@ module Aws::CodeBuild
     #
     #   * `ROTATING`: The compute fleet is being rotated.
     #
+    #   * `PENDING_DELETION`: The compute fleet is pending deletion.
+    #
     #   * `DELETING`: The compute fleet is being deleted.
     #
     #   * `CREATE_FAILED`: The compute fleet has failed to create.
@@ -4516,11 +4518,15 @@ module Aws::CodeBuild
     #   * `CODEPIPELINE`: The source code settings are specified in the
     #     source action of a pipeline in CodePipeline.
     #
-    #   * `GITHUB`: The source code is in a GitHub or GitHub Enterprise
-    #     Cloud repository.
+    #   * `GITHUB`: The source code is in a GitHub repository.
     #
     #   * `GITHUB_ENTERPRISE`: The source code is in a GitHub Enterprise
     #     Server repository.
+    #
+    #   * `GITLAB`: The source code is in a GitLab repository.
+    #
+    #   * `GITLAB_SELF_MANAGED`: The source code is in a self-managed GitLab
+    #     repository.
     #
     #   * `NO_SOURCE`: The project does not have input source code.
     #
@@ -4564,6 +4570,21 @@ module Aws::CodeBuild
     #     project. You can leave the CodeBuild console.) To instruct
     #     CodeBuild to use this connection, in the `source` object, set the
     #     `auth` object's `type` value to `OAUTH`.
+    #
+    #   * For source code in an GitLab or self-managed GitLab repository,
+    #     the HTTPS clone URL to the repository that contains the source and
+    #     the buildspec file. You must connect your Amazon Web Services
+    #     account to your GitLab account. Use the CodeBuild console to start
+    #     creating a build project. When you use the console to connect (or
+    #     reconnect) with GitLab, on the Connections **Authorize
+    #     application** page, choose **Authorize**. Then on the CodeStar
+    #     Connections **Create GitLab connection** page, choose **Connect to
+    #     GitLab**. (After you have connected to your GitLab account, you do
+    #     not need to finish creating the build project. You can leave the
+    #     CodeBuild console.) To instruct CodeBuild to override the default
+    #     connection and use this connection instead, set the `auth`
+    #     object's `type` value to `CODECONNECTIONS` in the `source`
+    #     object.
     #
     #   * For source code in a Bitbucket repository, the HTTPS clone URL to
     #     the repository that contains the source and the buildspec file.
@@ -4622,9 +4643,9 @@ module Aws::CodeBuild
     # @!attribute [rw] report_build_status
     #   Set to true to report the status of a build's start and finish to
     #   your source provider. This option is valid only when your source
-    #   provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set
-    #   and you use a different source provider, an `invalidInputException`
-    #   is thrown.
+    #   provider is GitHub, GitHub Enterprise, GitLab, GitLab Self Managed,
+    #   or Bitbucket. If this is set and you use a different source
+    #   provider, an `invalidInputException` is thrown.
     #
     #   To be able to report the build status to the source provider, the
     #   user associated with the source provider must have write access to
@@ -4693,9 +4714,9 @@ module Aws::CodeBuild
     #
     #   * For CodeCommit: the commit ID, branch, or Git tag to use.
     #
-    #   * For GitHub: the commit ID, pull request ID, branch name, or tag
-    #     name that corresponds to the version of the source code you want
-    #     to build. If a pull request ID is specified, it must use the
+    #   * For GitHub or GitLab: the commit ID, pull request ID, branch name,
+    #     or tag name that corresponds to the version of the source code you
+    #     want to build. If a pull request ID is specified, it must use the
     #     format `pr/pull-request-ID` (for example, `pr/25`). If a branch
     #     name is specified, the branch's HEAD commit ID is used. If not
     #     specified, the default branch's HEAD commit ID is used.
@@ -5352,12 +5373,8 @@ module Aws::CodeBuild
     # should not get or set this information directly.
     #
     # @!attribute [rw] type
-    #   <note markdown="1"> This data type is deprecated and is no longer accurate or used.
-    #
-    #    </note>
-    #
-    #   The authorization type to use. The only valid value is `OAUTH`,
-    #   which represents the OAuth authorization type.
+    #   The authorization type to use. Valid options are OAUTH or
+    #   CODECONNECTIONS.
     #   @return [String]
     #
     # @!attribute [rw] resource
@@ -5373,8 +5390,8 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # Information about the credentials for a GitHub, GitHub Enterprise, or
-    # Bitbucket repository.
+    # Information about the credentials for a GitHub, GitHub Enterprise,
+    # GitLab, GitLab Self Managed, or Bitbucket repository.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the token.
@@ -5382,12 +5399,17 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] server_type
     #   The type of source provider. The valid options are GITHUB,
-    #   GITHUB\_ENTERPRISE, or BITBUCKET.
+    #   GITHUB\_ENTERPRISE, GITLAB, GITLAB\_SELF\_MANAGED, or BITBUCKET.
     #   @return [String]
     #
     # @!attribute [rw] auth_type
     #   The type of authentication used by the credentials. Valid options
-    #   are OAUTH, BASIC\_AUTH, or PERSONAL\_ACCESS\_TOKEN.
+    #   are OAUTH, BASIC\_AUTH, PERSONAL\_ACCESS\_TOKEN, or CODECONNECTIONS.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The connection ARN if your serverType type is GITLAB or
+    #   GITLAB\_SELF\_MANAGED and your authType is CODECONNECTIONS.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/SourceCredentialsInfo AWS API Documentation
@@ -5395,7 +5417,8 @@ module Aws::CodeBuild
     class SourceCredentialsInfo < Struct.new(
       :arn,
       :server_type,
-      :auth_type)
+      :auth_type,
+      :resource)
       SENSITIVE = []
       include Aws::Structure
     end

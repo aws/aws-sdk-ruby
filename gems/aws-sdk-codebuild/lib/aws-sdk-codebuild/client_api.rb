@@ -1120,6 +1120,7 @@ module Aws::CodeBuild
     SourceCredentialsInfo.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
     SourceCredentialsInfo.add_member(:server_type, Shapes::ShapeRef.new(shape: ServerType, location_name: "serverType"))
     SourceCredentialsInfo.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, location_name: "authType"))
+    SourceCredentialsInfo.add_member(:resource, Shapes::ShapeRef.new(shape: String, location_name: "resource"))
     SourceCredentialsInfo.struct_class = Types::SourceCredentialsInfo
 
     SourceCredentialsInfos.member = Shapes::ShapeRef.new(shape: SourceCredentialsInfo)

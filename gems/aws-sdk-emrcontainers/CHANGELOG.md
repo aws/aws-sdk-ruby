@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2024-03-25)
+------------------
+
+* Feature - This release increases the number of supported job template parameters from 20 to 100.
+
 1.30.0 (2024-01-26)
 ------------------
 

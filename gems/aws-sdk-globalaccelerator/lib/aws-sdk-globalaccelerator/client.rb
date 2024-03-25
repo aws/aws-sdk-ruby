@@ -552,6 +552,13 @@ module Aws::GlobalAccelerator
     #   you provisioned. You can't advertise only a portion of the
     #   provisioned range.
     #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1] in
+    #   the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+    #
     # @return [Types::AdvertiseByoipCidrResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AdvertiseByoipCidrResponse#byoip_cidr #byoip_cidr} => Types::ByoipCidr
@@ -773,31 +780,49 @@ module Aws::GlobalAccelerator
 
     # Create a cross-account attachment in Global Accelerator. You create a
     # cross-account attachment to specify the *principals* who have
-    # permission to add to accelerators in their own account the resources
-    # in your account that you also list in the attachment.
+    # permission to work with *resources* in accelerators in their own
+    # account. You specify, in the same attachment, the resources that are
+    # shared.
     #
     # A principal can be an Amazon Web Services account number or the Amazon
     # Resource Name (ARN) for an accelerator. For account numbers that are
-    # listed as principals, to add a resource listed in the attachment to an
-    # accelerator, you must sign in to an account specified as a principal.
-    # Then you can add the resources that are listed to any of your
+    # listed as principals, to work with a resource listed in the
+    # attachment, you must sign in to an account specified as a principal.
+    # Then, you can work with resources that are listed, with any of your
     # accelerators. If an accelerator ARN is listed in the cross-account
     # attachment as a principal, anyone with permission to make updates to
-    # the accelerator can add as endpoints resources that are listed in the
+    # the accelerator can work with resources that are listed in the
     # attachment.
+    #
+    # Specify each principal and resource separately. To specify two CIDR
+    # address pools, list them individually under `Resources`, and so on.
+    # For a command line operation, for example, you might use a statement
+    # like the following:
+    #
+    # ` "Resources": [\{"Cidr": "169.254.60.0/24"\},\{"Cidr":
+    # "169.254.59.0/24"\}]`
+    #
+    # For more information, see [ Working with cross-account attachments and
+    # resources in Global Accelerator][1] in the <i> Global Accelerator
+    # Developer Guide</i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html
     #
     # @option params [required, String] :name
     #   The name of the cross-account attachment.
     #
     # @option params [Array<String>] :principals
-    #   The principals to list in the cross-account attachment. A principal
+    #   The principals to include in the cross-account attachment. A principal
     #   can be an Amazon Web Services account number or the Amazon Resource
     #   Name (ARN) for an accelerator.
     #
     # @option params [Array<Types::Resource>] :resources
-    #   The Amazon Resource Names (ARNs) for the resources to list in the
+    #   The Amazon Resource Names (ARNs) for the resources to include in the
     #   cross-account attachment. A resource can be any supported Amazon Web
-    #   Services resource type for Global Accelerator.
+    #   Services resource type for Global Accelerator or a CIDR range for a
+    #   bring your own IP address (BYOIP) address pool.
     #
     # @option params [required, String] :idempotency_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -807,7 +832,7 @@ module Aws::GlobalAccelerator
     #   not need to pass this option.**
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Create tags for cross-account attachment.
+    #   Add tags for a cross-account attachment.
     #
     #   For more information, see [Tagging in Global Accelerator][1] in the
     #   *Global Accelerator Developer Guide*.
@@ -827,7 +852,8 @@ module Aws::GlobalAccelerator
     #     principals: ["Principal"],
     #     resources: [
     #       {
-    #         endpoint_id: "GenericString", # required
+    #         endpoint_id: "GenericString",
+    #         cidr: "GenericString",
     #         region: "GenericString",
     #       },
     #     ],
@@ -848,6 +874,7 @@ module Aws::GlobalAccelerator
     #   resp.cross_account_attachment.principals[0] #=> String
     #   resp.cross_account_attachment.resources #=> Array
     #   resp.cross_account_attachment.resources[0].endpoint_id #=> String
+    #   resp.cross_account_attachment.resources[0].cidr #=> String
     #   resp.cross_account_attachment.resources[0].region #=> String
     #   resp.cross_account_attachment.last_modified_time #=> Time
     #   resp.cross_account_attachment.created_time #=> Time
@@ -1381,23 +1408,15 @@ module Aws::GlobalAccelerator
     # Delete a cross-account attachment. When you delete an attachment,
     # Global Accelerator revokes the permission to use the resources in the
     # attachment from all principals in the list of principals. Global
-    # Accelerator revokes the permission for specific resources by doing the
-    # following:
+    # Accelerator revokes the permission for specific resources.
     #
-    # * If the principal is an account ID, Global Accelerator reviews every
-    #   accelerator in the account and removes cross-account endpoints from
-    #   all accelerators.
+    # For more information, see [ Working with cross-account attachments and
+    # resources in Global Accelerator][1] in the <i> Global Accelerator
+    # Developer Guide</i>.
     #
-    # * If the principal is an accelerator, Global Accelerator reviews just
-    #   that accelerator and removes cross-account endpoints from it.
     #
-    # If there are overlapping permissions provided by multiple
-    # cross-account attachments, Global Accelerator only removes endpoints
-    # if there are no current cross-account attachments that provide access
-    # permission. For example, if you delete a cross-account attachment that
-    # lists an accelerator as a principal, but another cross-account
-    # attachment includes the account ID that owns that accelerator,
-    # endpoints will not be removed from the accelerator.
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html
     #
     # @option params [required, String] :attachment_arn
     #   The Amazon Resource Name (ARN) for the cross-account attachment to
@@ -1639,6 +1658,13 @@ module Aws::GlobalAccelerator
     #   The address range, in CIDR notation. The prefix must be the same
     #   prefix that you specified when you provisioned the address range.
     #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1] in
+    #   the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+    #
     # @return [Types::DeprovisionByoipCidrResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeprovisionByoipCidrResponse#byoip_cidr #byoip_cidr} => Types::ByoipCidr
@@ -1765,6 +1791,7 @@ module Aws::GlobalAccelerator
     #   resp.cross_account_attachment.principals[0] #=> String
     #   resp.cross_account_attachment.resources #=> Array
     #   resp.cross_account_attachment.resources[0].endpoint_id #=> String
+    #   resp.cross_account_attachment.resources[0].cidr #=> String
     #   resp.cross_account_attachment.resources[0].region #=> String
     #   resp.cross_account_attachment.last_modified_time #=> Time
     #   resp.cross_account_attachment.created_time #=> Time
@@ -2131,6 +2158,7 @@ module Aws::GlobalAccelerator
     #   resp.cross_account_attachments[0].principals[0] #=> String
     #   resp.cross_account_attachments[0].resources #=> Array
     #   resp.cross_account_attachments[0].resources[0].endpoint_id #=> String
+    #   resp.cross_account_attachments[0].resources[0].cidr #=> String
     #   resp.cross_account_attachments[0].resources[0].region #=> String
     #   resp.cross_account_attachments[0].last_modified_time #=> Time
     #   resp.cross_account_attachments[0].created_time #=> Time
@@ -2145,7 +2173,15 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # List the accounts that have cross-account endpoints.
+    # List the accounts that have cross-account resources.
+    #
+    # For more information, see [ Working with cross-account attachments and
+    # resources in Global Accelerator][1] in the <i> Global Accelerator
+    # Developer Guide</i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html
     #
     # @return [Types::ListCrossAccountResourceAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2165,7 +2201,7 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # List the cross-account endpoints available to add to an accelerator.
+    # List the cross-account resources available to work with.
     #
     # @option params [String] :accelerator_arn
     #   The Amazon Resource Name (ARN) of an accelerator in a cross-account
@@ -2175,7 +2211,7 @@ module Aws::GlobalAccelerator
     #   The account ID of a resource owner in a cross-account attachment.
     #
     # @option params [Integer] :max_results
-    #   The number of cross-account endpoints objects that you want to return
+    #   The number of cross-account resource objects that you want to return
     #   with this call. The default value is 10.
     #
     # @option params [String] :next_token
@@ -2202,6 +2238,7 @@ module Aws::GlobalAccelerator
     #
     #   resp.cross_account_resources #=> Array
     #   resp.cross_account_resources[0].endpoint_id #=> String
+    #   resp.cross_account_resources[0].cidr #=> String
     #   resp.cross_account_resources[0].attachment_arn #=> String
     #   resp.next_token #=> String
     #
@@ -2663,8 +2700,15 @@ module Aws::GlobalAccelerator
     # @option params [required, String] :cidr
     #   The public IPv4 address range, in CIDR notation. The most specific IP
     #   prefix that you can specify is /24. The address range cannot overlap
-    #   with another address range that you've brought to this or another
-    #   Region.
+    #   with another address range that you've brought to this Amazon Web
+    #   Services Region or another Region.
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1] in
+    #   the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #
     # @option params [required, Types::CidrAuthorizationContext] :cidr_authorization_context
     #   A signed document that proves that you are authorized to bring the
@@ -3007,22 +3051,15 @@ module Aws::GlobalAccelerator
     # Update a cross-account attachment to add or remove principals or
     # resources. When you update an attachment to remove a principal
     # (account ID or accelerator) or a resource, Global Accelerator revokes
-    # the permission for specific resources by doing the following:
+    # the permission for specific resources.
     #
-    # * If the principal is an account ID, Global Accelerator reviews every
-    #   accelerator in the account and removes cross-account endpoints from
-    #   all accelerators.
+    # For more information, see [ Working with cross-account attachments and
+    # resources in Global Accelerator][1] in the <i> Global Accelerator
+    # Developer Guide</i>.
     #
-    # * If the principal is an accelerator, Global Accelerator reviews just
-    #   that accelerator and removes cross-account endpoints from it.
     #
-    # If there are overlapping permissions provided by multiple
-    # cross-account attachments, Global Accelerator only removes endpoints
-    # if there are no current cross-account attachments that provide access
-    # permission. For example, if you delete a cross-account attachment that
-    # lists an accelerator as a principal, but another cross-account
-    # attachment includes the account ID that owns that accelerator,
-    # endpoints will not be removed from the accelerator.
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html
     #
     # @option params [required, String] :attachment_arn
     #   The Amazon Resource Name (ARN) of the cross-account attachment to
@@ -3034,8 +3071,8 @@ module Aws::GlobalAccelerator
     # @option params [Array<String>] :add_principals
     #   The principals to add to the cross-account attachment. A principal is
     #   an account or the Amazon Resource Name (ARN) of an accelerator that
-    #   the attachment gives permission to add the resources from another
-    #   account, listed in the attachment.
+    #   the attachment gives permission to work with resources from another
+    #   account. The resources are also listed in the attachment.
     #
     #   To add more than one principal, separate the account numbers or
     #   accelerator ARNs, or both, with commas.
@@ -3043,23 +3080,24 @@ module Aws::GlobalAccelerator
     # @option params [Array<String>] :remove_principals
     #   The principals to remove from the cross-account attachment. A
     #   principal is an account or the Amazon Resource Name (ARN) of an
-    #   accelerator that is given permission to add the resources from another
-    #   account, listed in the cross-account attachment.
+    #   accelerator that the attachment gives permission to work with
+    #   resources from another account. The resources are also listed in the
+    #   attachment.
     #
     #   To remove more than one principal, separate the account numbers or
     #   accelerator ARNs, or both, with commas.
     #
     # @option params [Array<Types::Resource>] :add_resources
     #   The resources to add to the cross-account attachment. A resource
-    #   listed in a cross-account attachment can be added to an accelerator by
-    #   the principals that are listed in the attachment.
+    #   listed in a cross-account attachment can be used with an accelerator
+    #   by the principals that are listed in the attachment.
     #
     #   To add more than one resource, separate the resource ARNs with commas.
     #
     # @option params [Array<Types::Resource>] :remove_resources
     #   The resources to remove from the cross-account attachment. A resource
-    #   listed in a cross-account attachment can be added to an accelerator fy
-    #   principals that are listed in the cross-account attachment.
+    #   listed in a cross-account attachment can be used with an accelerator
+    #   by the principals that are listed in the attachment.
     #
     #   To remove more than one resource, separate the resource ARNs with
     #   commas.
@@ -3077,13 +3115,15 @@ module Aws::GlobalAccelerator
     #     remove_principals: ["Principal"],
     #     add_resources: [
     #       {
-    #         endpoint_id: "GenericString", # required
+    #         endpoint_id: "GenericString",
+    #         cidr: "GenericString",
     #         region: "GenericString",
     #       },
     #     ],
     #     remove_resources: [
     #       {
-    #         endpoint_id: "GenericString", # required
+    #         endpoint_id: "GenericString",
+    #         cidr: "GenericString",
     #         region: "GenericString",
     #       },
     #     ],
@@ -3097,6 +3137,7 @@ module Aws::GlobalAccelerator
     #   resp.cross_account_attachment.principals[0] #=> String
     #   resp.cross_account_attachment.resources #=> Array
     #   resp.cross_account_attachment.resources[0].endpoint_id #=> String
+    #   resp.cross_account_attachment.resources[0].cidr #=> String
     #   resp.cross_account_attachment.resources[0].region #=> String
     #   resp.cross_account_attachment.last_modified_time #=> Time
     #   resp.cross_account_attachment.created_time #=> Time
@@ -3491,6 +3532,13 @@ module Aws::GlobalAccelerator
     # @option params [required, String] :cidr
     #   The address range, in CIDR notation.
     #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1] in
+    #   the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+    #
     # @return [Types::WithdrawByoipCidrResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::WithdrawByoipCidrResponse#byoip_cidr #byoip_cidr} => Types::ByoipCidr
@@ -3531,7 +3579,7 @@ module Aws::GlobalAccelerator
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

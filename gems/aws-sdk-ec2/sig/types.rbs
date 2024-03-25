@@ -7706,6 +7706,16 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class GetInstanceMetadataDefaultsRequest
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class GetInstanceMetadataDefaultsResult
+      attr_accessor account_level: Types::InstanceMetadataDefaultsResponse
+      SENSITIVE: []
+    end
+
     class GetInstanceTypesFromInstanceRequirementsRequest
       attr_accessor dry_run: bool
       attr_accessor architecture_types: ::Array[("i386" | "x86_64" | "arm64" | "x86_64_mac" | "arm64_mac")]
@@ -8876,6 +8886,14 @@ module Aws::EC2
     class InstanceMarketOptionsRequest
       attr_accessor market_type: ("spot" | "capacity-block")
       attr_accessor spot_options: Types::SpotMarketOptions
+      SENSITIVE: []
+    end
+
+    class InstanceMetadataDefaultsResponse
+      attr_accessor http_tokens: ("optional" | "required")
+      attr_accessor http_put_response_hop_limit: ::Integer
+      attr_accessor http_endpoint: ("disabled" | "enabled")
+      attr_accessor instance_metadata_tags: ("disabled" | "enabled")
       SENSITIVE: []
     end
 
@@ -10459,6 +10477,20 @@ module Aws::EC2
     class ModifyInstanceMaintenanceOptionsResult
       attr_accessor instance_id: ::String
       attr_accessor auto_recovery: ("disabled" | "default")
+      SENSITIVE: []
+    end
+
+    class ModifyInstanceMetadataDefaultsRequest
+      attr_accessor http_tokens: ("optional" | "required" | "no-preference")
+      attr_accessor http_put_response_hop_limit: ::Integer
+      attr_accessor http_endpoint: ("disabled" | "enabled" | "no-preference")
+      attr_accessor instance_metadata_tags: ("disabled" | "enabled" | "no-preference")
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class ModifyInstanceMetadataDefaultsResult
+      attr_accessor return: bool
       SENSITIVE: []
     end
 

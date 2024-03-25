@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.445.0 (2024-03-25)
+------------------
+
+* Feature - Added support for ModifyInstanceMetadataDefaults and GetInstanceMetadataDefaults to set Instance Metadata Service account defaults
+
 1.444.0 (2024-03-19)
 ------------------
 

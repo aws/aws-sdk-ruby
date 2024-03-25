@@ -468,12 +468,12 @@ module Aws::CodeBuild
     #   resp.build_batches[0].phases[0].contexts #=> Array
     #   resp.build_batches[0].phases[0].contexts[0].status_code #=> String
     #   resp.build_batches[0].phases[0].contexts[0].message #=> String
-    #   resp.build_batches[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build_batches[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build_batches[0].source.location #=> String
     #   resp.build_batches[0].source.git_clone_depth #=> Integer
     #   resp.build_batches[0].source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batches[0].source.buildspec #=> String
-    #   resp.build_batches[0].source.auth.type #=> String, one of "OAUTH"
+    #   resp.build_batches[0].source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.build_batches[0].source.auth.resource #=> String
     #   resp.build_batches[0].source.report_build_status #=> Boolean
     #   resp.build_batches[0].source.build_status_config.context #=> String
@@ -481,12 +481,12 @@ module Aws::CodeBuild
     #   resp.build_batches[0].source.insecure_ssl #=> Boolean
     #   resp.build_batches[0].source.source_identifier #=> String
     #   resp.build_batches[0].secondary_sources #=> Array
-    #   resp.build_batches[0].secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build_batches[0].secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build_batches[0].secondary_sources[0].location #=> String
     #   resp.build_batches[0].secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build_batches[0].secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batches[0].secondary_sources[0].buildspec #=> String
-    #   resp.build_batches[0].secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.build_batches[0].secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.build_batches[0].secondary_sources[0].auth.resource #=> String
     #   resp.build_batches[0].secondary_sources[0].report_build_status #=> Boolean
     #   resp.build_batches[0].secondary_sources[0].build_status_config.context #=> String
@@ -637,12 +637,12 @@ module Aws::CodeBuild
     #   resp.builds[0].phases[0].contexts #=> Array
     #   resp.builds[0].phases[0].contexts[0].status_code #=> String
     #   resp.builds[0].phases[0].contexts[0].message #=> String
-    #   resp.builds[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.builds[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.builds[0].source.location #=> String
     #   resp.builds[0].source.git_clone_depth #=> Integer
     #   resp.builds[0].source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.builds[0].source.buildspec #=> String
-    #   resp.builds[0].source.auth.type #=> String, one of "OAUTH"
+    #   resp.builds[0].source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.builds[0].source.auth.resource #=> String
     #   resp.builds[0].source.report_build_status #=> Boolean
     #   resp.builds[0].source.build_status_config.context #=> String
@@ -650,12 +650,12 @@ module Aws::CodeBuild
     #   resp.builds[0].source.insecure_ssl #=> Boolean
     #   resp.builds[0].source.source_identifier #=> String
     #   resp.builds[0].secondary_sources #=> Array
-    #   resp.builds[0].secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.builds[0].secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.builds[0].secondary_sources[0].location #=> String
     #   resp.builds[0].secondary_sources[0].git_clone_depth #=> Integer
     #   resp.builds[0].secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.builds[0].secondary_sources[0].buildspec #=> String
-    #   resp.builds[0].secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.builds[0].secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.builds[0].secondary_sources[0].auth.resource #=> String
     #   resp.builds[0].secondary_sources[0].report_build_status #=> Boolean
     #   resp.builds[0].secondary_sources[0].build_status_config.context #=> String
@@ -825,12 +825,12 @@ module Aws::CodeBuild
     #   resp.projects[0].name #=> String
     #   resp.projects[0].arn #=> String
     #   resp.projects[0].description #=> String
-    #   resp.projects[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.projects[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.projects[0].source.location #=> String
     #   resp.projects[0].source.git_clone_depth #=> Integer
     #   resp.projects[0].source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.projects[0].source.buildspec #=> String
-    #   resp.projects[0].source.auth.type #=> String, one of "OAUTH"
+    #   resp.projects[0].source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.projects[0].source.auth.resource #=> String
     #   resp.projects[0].source.report_build_status #=> Boolean
     #   resp.projects[0].source.build_status_config.context #=> String
@@ -838,12 +838,12 @@ module Aws::CodeBuild
     #   resp.projects[0].source.insecure_ssl #=> Boolean
     #   resp.projects[0].source.source_identifier #=> String
     #   resp.projects[0].secondary_sources #=> Array
-    #   resp.projects[0].secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.projects[0].secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.projects[0].secondary_sources[0].location #=> String
     #   resp.projects[0].secondary_sources[0].git_clone_depth #=> Integer
     #   resp.projects[0].secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.projects[0].secondary_sources[0].buildspec #=> String
-    #   resp.projects[0].secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.projects[0].secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.projects[0].secondary_sources[0].auth.resource #=> String
     #   resp.projects[0].secondary_sources[0].report_build_status #=> Boolean
     #   resp.projects[0].secondary_sources[0].build_status_config.context #=> String
@@ -1374,7 +1374,7 @@ module Aws::CodeBuild
     #     name: "ProjectName", # required
     #     description: "ProjectDescription",
     #     source: { # required
-    #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, GITLAB, GITLAB_SELF_MANAGED, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #       location: "String",
     #       git_clone_depth: 1,
     #       git_submodules_config: {
@@ -1382,7 +1382,7 @@ module Aws::CodeBuild
     #       },
     #       buildspec: "String",
     #       auth: {
-    #         type: "OAUTH", # required, accepts OAUTH
+    #         type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
     #         resource: "String",
     #       },
     #       report_build_status: false,
@@ -1395,7 +1395,7 @@ module Aws::CodeBuild
     #     },
     #     secondary_sources: [
     #       {
-    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, GITLAB, GITLAB_SELF_MANAGED, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #         location: "String",
     #         git_clone_depth: 1,
     #         git_submodules_config: {
@@ -1403,7 +1403,7 @@ module Aws::CodeBuild
     #         },
     #         buildspec: "String",
     #         auth: {
-    #           type: "OAUTH", # required, accepts OAUTH
+    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
     #           resource: "String",
     #         },
     #         report_build_status: false,
@@ -1531,12 +1531,12 @@ module Aws::CodeBuild
     #   resp.project.name #=> String
     #   resp.project.arn #=> String
     #   resp.project.description #=> String
-    #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.project.source.location #=> String
     #   resp.project.source.git_clone_depth #=> Integer
     #   resp.project.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.source.buildspec #=> String
-    #   resp.project.source.auth.type #=> String, one of "OAUTH"
+    #   resp.project.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.project.source.auth.resource #=> String
     #   resp.project.source.report_build_status #=> Boolean
     #   resp.project.source.build_status_config.context #=> String
@@ -1544,12 +1544,12 @@ module Aws::CodeBuild
     #   resp.project.source.insecure_ssl #=> Boolean
     #   resp.project.source.source_identifier #=> String
     #   resp.project.secondary_sources #=> Array
-    #   resp.project.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.project.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.project.secondary_sources[0].location #=> String
     #   resp.project.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.project.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.secondary_sources[0].buildspec #=> String
-    #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.project.secondary_sources[0].auth.resource #=> String
     #   resp.project.secondary_sources[0].report_build_status #=> Boolean
     #   resp.project.secondary_sources[0].build_status_config.context #=> String
@@ -2337,8 +2337,8 @@ module Aws::CodeBuild
     #   resp = client.import_source_credentials({
     #     username: "NonEmptyString",
     #     token: "SensitiveNonEmptyString", # required
-    #     server_type: "GITHUB", # required, accepts GITHUB, BITBUCKET, GITHUB_ENTERPRISE
-    #     auth_type: "OAUTH", # required, accepts OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN
+    #     server_type: "GITHUB", # required, accepts GITHUB, BITBUCKET, GITHUB_ENTERPRISE, GITLAB, GITLAB_SELF_MANAGED
+    #     auth_type: "OAUTH", # required, accepts OAUTH, BASIC_AUTH, PERSONAL_ACCESS_TOKEN, CODECONNECTIONS
     #     should_overwrite: false,
     #   })
     #
@@ -3090,8 +3090,9 @@ module Aws::CodeBuild
     #
     #   resp.source_credentials_infos #=> Array
     #   resp.source_credentials_infos[0].arn #=> String
-    #   resp.source_credentials_infos[0].server_type #=> String, one of "GITHUB", "BITBUCKET", "GITHUB_ENTERPRISE"
-    #   resp.source_credentials_infos[0].auth_type #=> String, one of "OAUTH", "BASIC_AUTH", "PERSONAL_ACCESS_TOKEN"
+    #   resp.source_credentials_infos[0].server_type #=> String, one of "GITHUB", "BITBUCKET", "GITHUB_ENTERPRISE", "GITLAB", "GITLAB_SELF_MANAGED"
+    #   resp.source_credentials_infos[0].auth_type #=> String, one of "OAUTH", "BASIC_AUTH", "PERSONAL_ACCESS_TOKEN", "CODECONNECTIONS"
+    #   resp.source_credentials_infos[0].resource #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSourceCredentials AWS API Documentation
     #
@@ -3187,12 +3188,12 @@ module Aws::CodeBuild
     #   resp.build.phases[0].contexts #=> Array
     #   resp.build.phases[0].contexts[0].status_code #=> String
     #   resp.build.phases[0].contexts[0].message #=> String
-    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.source.location #=> String
     #   resp.build.source.git_clone_depth #=> Integer
     #   resp.build.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.source.buildspec #=> String
-    #   resp.build.source.auth.type #=> String, one of "OAUTH"
+    #   resp.build.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.build.source.auth.resource #=> String
     #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.build_status_config.context #=> String
@@ -3200,12 +3201,12 @@ module Aws::CodeBuild
     #   resp.build.source.insecure_ssl #=> Boolean
     #   resp.build.source.source_identifier #=> String
     #   resp.build.secondary_sources #=> Array
-    #   resp.build.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.secondary_sources[0].location #=> String
     #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.secondary_sources[0].buildspec #=> String
-    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.build.secondary_sources[0].auth.resource #=> String
     #   resp.build.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build.secondary_sources[0].build_status_config.context #=> String
@@ -3345,12 +3346,12 @@ module Aws::CodeBuild
     #   resp.build_batch.phases[0].contexts #=> Array
     #   resp.build_batch.phases[0].contexts[0].status_code #=> String
     #   resp.build_batch.phases[0].contexts[0].message #=> String
-    #   resp.build_batch.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build_batch.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build_batch.source.location #=> String
     #   resp.build_batch.source.git_clone_depth #=> Integer
     #   resp.build_batch.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.source.buildspec #=> String
-    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH"
+    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.build_batch.source.auth.resource #=> String
     #   resp.build_batch.source.report_build_status #=> Boolean
     #   resp.build_batch.source.build_status_config.context #=> String
@@ -3358,12 +3359,12 @@ module Aws::CodeBuild
     #   resp.build_batch.source.insecure_ssl #=> Boolean
     #   resp.build_batch.source.source_identifier #=> String
     #   resp.build_batch.secondary_sources #=> Array
-    #   resp.build_batch.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build_batch.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build_batch.secondary_sources[0].location #=> String
     #   resp.build_batch.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build_batch.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.secondary_sources[0].buildspec #=> String
-    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.build_batch.secondary_sources[0].auth.resource #=> String
     #   resp.build_batch.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build_batch.secondary_sources[0].build_status_config.context #=> String
@@ -3732,7 +3733,7 @@ module Aws::CodeBuild
     #     project_name: "NonEmptyString", # required
     #     secondary_sources_override: [
     #       {
-    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, GITLAB, GITLAB_SELF_MANAGED, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #         location: "String",
     #         git_clone_depth: 1,
     #         git_submodules_config: {
@@ -3740,7 +3741,7 @@ module Aws::CodeBuild
     #         },
     #         buildspec: "String",
     #         auth: {
-    #           type: "OAUTH", # required, accepts OAUTH
+    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
     #           resource: "String",
     #         },
     #         report_build_status: false,
@@ -3792,10 +3793,10 @@ module Aws::CodeBuild
     #         type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
     #       },
     #     ],
-    #     source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #     source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, GITLAB, GITLAB_SELF_MANAGED, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #     source_location_override: "String",
     #     source_auth_override: {
-    #       type: "OAUTH", # required, accepts OAUTH
+    #       type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
     #       resource: "String",
     #     },
     #     git_clone_depth_override: 1,
@@ -3869,12 +3870,12 @@ module Aws::CodeBuild
     #   resp.build.phases[0].contexts #=> Array
     #   resp.build.phases[0].contexts[0].status_code #=> String
     #   resp.build.phases[0].contexts[0].message #=> String
-    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.source.location #=> String
     #   resp.build.source.git_clone_depth #=> Integer
     #   resp.build.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.source.buildspec #=> String
-    #   resp.build.source.auth.type #=> String, one of "OAUTH"
+    #   resp.build.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.build.source.auth.resource #=> String
     #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.build_status_config.context #=> String
@@ -3882,12 +3883,12 @@ module Aws::CodeBuild
     #   resp.build.source.insecure_ssl #=> Boolean
     #   resp.build.source.source_identifier #=> String
     #   resp.build.secondary_sources #=> Array
-    #   resp.build.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.secondary_sources[0].location #=> String
     #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.secondary_sources[0].buildspec #=> String
-    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.build.secondary_sources[0].auth.resource #=> String
     #   resp.build.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build.secondary_sources[0].build_status_config.context #=> String
@@ -4206,7 +4207,7 @@ module Aws::CodeBuild
     #     project_name: "NonEmptyString", # required
     #     secondary_sources_override: [
     #       {
-    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, GITLAB, GITLAB_SELF_MANAGED, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #         location: "String",
     #         git_clone_depth: 1,
     #         git_submodules_config: {
@@ -4214,7 +4215,7 @@ module Aws::CodeBuild
     #         },
     #         buildspec: "String",
     #         auth: {
-    #           type: "OAUTH", # required, accepts OAUTH
+    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
     #           resource: "String",
     #         },
     #         report_build_status: false,
@@ -4266,10 +4267,10 @@ module Aws::CodeBuild
     #         type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE, SECRETS_MANAGER
     #       },
     #     ],
-    #     source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #     source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, GITLAB, GITLAB_SELF_MANAGED, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #     source_location_override: "String",
     #     source_auth_override: {
-    #       type: "OAUTH", # required, accepts OAUTH
+    #       type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
     #       resource: "String",
     #     },
     #     git_clone_depth_override: 1,
@@ -4345,12 +4346,12 @@ module Aws::CodeBuild
     #   resp.build_batch.phases[0].contexts #=> Array
     #   resp.build_batch.phases[0].contexts[0].status_code #=> String
     #   resp.build_batch.phases[0].contexts[0].message #=> String
-    #   resp.build_batch.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build_batch.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build_batch.source.location #=> String
     #   resp.build_batch.source.git_clone_depth #=> Integer
     #   resp.build_batch.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.source.buildspec #=> String
-    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH"
+    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.build_batch.source.auth.resource #=> String
     #   resp.build_batch.source.report_build_status #=> Boolean
     #   resp.build_batch.source.build_status_config.context #=> String
@@ -4358,12 +4359,12 @@ module Aws::CodeBuild
     #   resp.build_batch.source.insecure_ssl #=> Boolean
     #   resp.build_batch.source.source_identifier #=> String
     #   resp.build_batch.secondary_sources #=> Array
-    #   resp.build_batch.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build_batch.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build_batch.secondary_sources[0].location #=> String
     #   resp.build_batch.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build_batch.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.secondary_sources[0].buildspec #=> String
-    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.build_batch.secondary_sources[0].auth.resource #=> String
     #   resp.build_batch.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build_batch.secondary_sources[0].build_status_config.context #=> String
@@ -4510,12 +4511,12 @@ module Aws::CodeBuild
     #   resp.build.phases[0].contexts #=> Array
     #   resp.build.phases[0].contexts[0].status_code #=> String
     #   resp.build.phases[0].contexts[0].message #=> String
-    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.source.location #=> String
     #   resp.build.source.git_clone_depth #=> Integer
     #   resp.build.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.source.buildspec #=> String
-    #   resp.build.source.auth.type #=> String, one of "OAUTH"
+    #   resp.build.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.build.source.auth.resource #=> String
     #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.build_status_config.context #=> String
@@ -4523,12 +4524,12 @@ module Aws::CodeBuild
     #   resp.build.source.insecure_ssl #=> Boolean
     #   resp.build.source.source_identifier #=> String
     #   resp.build.secondary_sources #=> Array
-    #   resp.build.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build.secondary_sources[0].location #=> String
     #   resp.build.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build.secondary_sources[0].buildspec #=> String
-    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.build.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.build.secondary_sources[0].auth.resource #=> String
     #   resp.build.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build.secondary_sources[0].build_status_config.context #=> String
@@ -4655,12 +4656,12 @@ module Aws::CodeBuild
     #   resp.build_batch.phases[0].contexts #=> Array
     #   resp.build_batch.phases[0].contexts[0].status_code #=> String
     #   resp.build_batch.phases[0].contexts[0].message #=> String
-    #   resp.build_batch.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build_batch.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build_batch.source.location #=> String
     #   resp.build_batch.source.git_clone_depth #=> Integer
     #   resp.build_batch.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.source.buildspec #=> String
-    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH"
+    #   resp.build_batch.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.build_batch.source.auth.resource #=> String
     #   resp.build_batch.source.report_build_status #=> Boolean
     #   resp.build_batch.source.build_status_config.context #=> String
@@ -4668,12 +4669,12 @@ module Aws::CodeBuild
     #   resp.build_batch.source.insecure_ssl #=> Boolean
     #   resp.build_batch.source.source_identifier #=> String
     #   resp.build_batch.secondary_sources #=> Array
-    #   resp.build_batch.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.build_batch.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.build_batch.secondary_sources[0].location #=> String
     #   resp.build_batch.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.build_batch.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.build_batch.secondary_sources[0].buildspec #=> String
-    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.build_batch.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.build_batch.secondary_sources[0].auth.resource #=> String
     #   resp.build_batch.secondary_sources[0].report_build_status #=> Boolean
     #   resp.build_batch.secondary_sources[0].build_status_config.context #=> String
@@ -5106,7 +5107,7 @@ module Aws::CodeBuild
     #     name: "NonEmptyString", # required
     #     description: "ProjectDescription",
     #     source: {
-    #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, GITLAB, GITLAB_SELF_MANAGED, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #       location: "String",
     #       git_clone_depth: 1,
     #       git_submodules_config: {
@@ -5114,7 +5115,7 @@ module Aws::CodeBuild
     #       },
     #       buildspec: "String",
     #       auth: {
-    #         type: "OAUTH", # required, accepts OAUTH
+    #         type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
     #         resource: "String",
     #       },
     #       report_build_status: false,
@@ -5127,7 +5128,7 @@ module Aws::CodeBuild
     #     },
     #     secondary_sources: [
     #       {
-    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
+    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, GITLAB, GITLAB_SELF_MANAGED, S3, BITBUCKET, GITHUB_ENTERPRISE, NO_SOURCE
     #         location: "String",
     #         git_clone_depth: 1,
     #         git_submodules_config: {
@@ -5135,7 +5136,7 @@ module Aws::CodeBuild
     #         },
     #         buildspec: "String",
     #         auth: {
-    #           type: "OAUTH", # required, accepts OAUTH
+    #           type: "OAUTH", # required, accepts OAUTH, CODECONNECTIONS
     #           resource: "String",
     #         },
     #         report_build_status: false,
@@ -5263,12 +5264,12 @@ module Aws::CodeBuild
     #   resp.project.name #=> String
     #   resp.project.arn #=> String
     #   resp.project.description #=> String
-    #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.project.source.location #=> String
     #   resp.project.source.git_clone_depth #=> Integer
     #   resp.project.source.git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.source.buildspec #=> String
-    #   resp.project.source.auth.type #=> String, one of "OAUTH"
+    #   resp.project.source.auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.project.source.auth.resource #=> String
     #   resp.project.source.report_build_status #=> Boolean
     #   resp.project.source.build_status_config.context #=> String
@@ -5276,12 +5277,12 @@ module Aws::CodeBuild
     #   resp.project.source.insecure_ssl #=> Boolean
     #   resp.project.source.source_identifier #=> String
     #   resp.project.secondary_sources #=> Array
-    #   resp.project.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
+    #   resp.project.secondary_sources[0].type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "GITLAB", "GITLAB_SELF_MANAGED", "S3", "BITBUCKET", "GITHUB_ENTERPRISE", "NO_SOURCE"
     #   resp.project.secondary_sources[0].location #=> String
     #   resp.project.secondary_sources[0].git_clone_depth #=> Integer
     #   resp.project.secondary_sources[0].git_submodules_config.fetch_submodules #=> Boolean
     #   resp.project.secondary_sources[0].buildspec #=> String
-    #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH"
+    #   resp.project.secondary_sources[0].auth.type #=> String, one of "OAUTH", "CODECONNECTIONS"
     #   resp.project.secondary_sources[0].auth.resource #=> String
     #   resp.project.secondary_sources[0].report_build_status #=> Boolean
     #   resp.project.secondary_sources[0].build_status_config.context #=> String
@@ -5641,7 +5642,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

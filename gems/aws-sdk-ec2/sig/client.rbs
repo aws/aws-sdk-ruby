@@ -8617,6 +8617,16 @@ module Aws
                                                ) -> _GetImageBlockPublicAccessStateResponseSuccess
                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImageBlockPublicAccessStateResponseSuccess
 
+      interface _GetInstanceMetadataDefaultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceMetadataDefaultsResult]
+        def account_level: () -> Types::InstanceMetadataDefaultsResponse
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#get_instance_metadata_defaults-instance_method
+      def get_instance_metadata_defaults: (
+                                            ?dry_run: bool
+                                          ) -> _GetInstanceMetadataDefaultsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceMetadataDefaultsResponseSuccess
+
       interface _GetInstanceTypesFromInstanceRequirementsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceTypesFromInstanceRequirementsResult]
         def instance_types: () -> ::Array[Types::InstanceTypeInfoFromInstanceRequirements]
@@ -10009,6 +10019,20 @@ module Aws
                                                  ?dry_run: bool
                                                ) -> _ModifyInstanceMaintenanceOptionsResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyInstanceMaintenanceOptionsResponseSuccess
+
+      interface _ModifyInstanceMetadataDefaultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyInstanceMetadataDefaultsResult]
+        def return: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#modify_instance_metadata_defaults-instance_method
+      def modify_instance_metadata_defaults: (
+                                               ?http_tokens: ("optional" | "required" | "no-preference"),
+                                               ?http_put_response_hop_limit: ::Integer,
+                                               ?http_endpoint: ("disabled" | "enabled" | "no-preference"),
+                                               ?instance_metadata_tags: ("disabled" | "enabled" | "no-preference"),
+                                               ?dry_run: bool
+                                             ) -> _ModifyInstanceMetadataDefaultsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyInstanceMetadataDefaultsResponseSuccess
 
       interface _ModifyInstanceMetadataOptionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyInstanceMetadataOptionsResult]

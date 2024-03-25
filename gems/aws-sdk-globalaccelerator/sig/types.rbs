@@ -253,6 +253,7 @@ module Aws::GlobalAccelerator
 
     class CrossAccountResource
       attr_accessor endpoint_id: ::String
+      attr_accessor cidr: ::String
       attr_accessor attachment_arn: ::String
       SENSITIVE: []
     end
@@ -786,6 +787,7 @@ module Aws::GlobalAccelerator
 
     class Resource
       attr_accessor endpoint_id: ::String
+      attr_accessor cidr: ::String
       attr_accessor region: ::String
       SENSITIVE: []
     end

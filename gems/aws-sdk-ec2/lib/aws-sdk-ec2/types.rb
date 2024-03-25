@@ -34493,6 +34493,33 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceMetadataDefaultsRequest AWS API Documentation
+    #
+    class GetInstanceMetadataDefaultsRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_level
+    #   The account-level default IMDS settings.
+    #   @return [Types::InstanceMetadataDefaultsResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceMetadataDefaultsResult AWS API Documentation
+    #
+    class GetInstanceMetadataDefaultsResult < Struct.new(
+      :account_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] architecture_types
     #   The processor architecture type.
     #   @return [Array<String>]
@@ -37197,8 +37224,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] image_owner_alias
-    #   The Amazon Web Services account alias (for example, `amazon`,
-    #   `self`) or the Amazon Web Services account ID of the AMI owner.
+    #   The owner alias (`amazon` \| `aws-marketplace`).
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -39533,33 +39559,82 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The default instance metadata service (IMDS) settings that were set at
+    # the account level in the specified Amazon Web Services  Region.
+    #
+    # @!attribute [rw] http_tokens
+    #   Indicates whether IMDSv2 is required.
+    #
+    #   * `optional` – IMDSv2 is optional, which means that you can use
+    #     either IMDSv2 or IMDSv1.
+    #
+    #   * `required` – IMDSv2 is required, which means that IMDSv1 is
+    #     disabled, and you must use IMDSv2.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_put_response_hop_limit
+    #   The maximum number of hops that the metadata token can travel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] http_endpoint
+    #   Indicates whether the IMDS endpoint for an instance is enabled or
+    #   disabled. When disabled, the instance metadata can't be accessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_metadata_tags
+    #   Indicates whether access to instance tags from the instance metadata
+    #   is enabled or disabled. For more information, see [Work with
+    #   instance tags using the instance metadata][1] in the *Amazon EC2
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMetadataDefaultsResponse AWS API Documentation
+    #
+    class InstanceMetadataDefaultsResponse < Struct.new(
+      :http_tokens,
+      :http_put_response_hop_limit,
+      :http_endpoint,
+      :instance_metadata_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The metadata options for the instance.
     #
     # @!attribute [rw] http_tokens
     #   Indicates whether IMDSv2 is required.
     #
-    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
-    #     session token in your instance metadata retrieval requests. If you
-    #     retrieve IAM role credentials without a session token, you receive
-    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
-    #     using a valid session token, you receive the IMDSv2 role
-    #     credentials.
+    #   * `optional` - IMDSv2 is optional, which means that you can use
+    #     either IMDSv2 or IMDSv1.
     #
-    #   * `required` - IMDSv2 is required. You must send a session token in
-    #     your instance metadata retrieval requests. With this option,
-    #     retrieving the IAM role credentials always returns IMDSv2
-    #     credentials; IMDSv1 credentials are not available.
+    #   * `required` - IMDSv2 is required, which means that IMDSv1 is
+    #     disabled, and you must use IMDSv2.
     #
-    #   Default: If the value of `ImdsSupport` for the Amazon Machine Image
-    #   (AMI) for your instance is `v2.0`, the default is `required`.
+    #   Default:
+    #
+    #   * If the value of `ImdsSupport` for the Amazon Machine Image (AMI)
+    #     for your instance is `v2.0` and the account level default is set
+    #     to `no-preference`, the default is `required`.
+    #
+    #   * If the value of `ImdsSupport` for the Amazon Machine Image (AMI)
+    #     for your instance is `v2.0`, but the account level default is set
+    #     to `V1 or V2`, the default is `optional`.
+    #
+    #   The default value can also be affected by other combinations of
+    #   parameters. For more information, see [Order of precedence for
+    #   instance metadata options][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#instance-metadata-options-order-of-precedence
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
-    #   The desired HTTP PUT response hop limit for instance metadata
-    #   requests. The larger the number, the further instance metadata
-    #   requests can travel.
-    #
-    #   Default: 1
+    #   The maximum number of hops that the metadata token can travel.
     #
     #   Possible values: Integers from 1 to 64
     #   @return [Integer]
@@ -39620,25 +39695,15 @@ module Aws::EC2
     # @!attribute [rw] http_tokens
     #   Indicates whether IMDSv2 is required.
     #
-    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
-    #     session token in your instance metadata retrieval requests. If you
-    #     retrieve IAM role credentials without a session token, you receive
-    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
-    #     using a valid session token, you receive the IMDSv2 role
-    #     credentials.
+    #   * `optional` - IMDSv2 is optional, which means that you can use
+    #     either IMDSv2 or IMDSv1.
     #
-    #   * `required` - IMDSv2 is required. You must send a session token in
-    #     your instance metadata retrieval requests. With this option,
-    #     retrieving the IAM role credentials always returns IMDSv2
-    #     credentials; IMDSv1 credentials are not available.
+    #   * `required` - IMDSv2 is required, which means that IMDSv1 is
+    #     disabled, and you must use IMDSv2.
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
-    #   The desired HTTP PUT response hop limit for instance metadata
-    #   requests. The larger the number, the further instance metadata
-    #   requests can travel.
-    #
-    #   Default: `1`
+    #   The maximum number of hops that the metadata token can travel.
     #
     #   Possible values: Integers from `1` to `64`
     #   @return [Integer]
@@ -47821,6 +47886,72 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] http_tokens
+    #   Indicates whether IMDSv2 is required.
+    #
+    #   * `optional` – IMDSv2 is optional, which means that you can use
+    #     either IMDSv2 or IMDSv1.
+    #
+    #   * `required` – IMDSv2 is required, which means that IMDSv1 is
+    #     disabled, and you must use IMDSv2.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_put_response_hop_limit
+    #   The maximum number of hops that the metadata token can travel.
+    #
+    #   Minimum: `1`
+    #
+    #   Maximum: `64`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] http_endpoint
+    #   Enables or disables the IMDS endpoint on an instance. When disabled,
+    #   the instance metadata can't be accessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_metadata_tags
+    #   Enables or disables access to an instance's tags from the instance
+    #   metadata. For more information, see [Work with instance tags using
+    #   the instance metadata][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMetadataDefaultsRequest AWS API Documentation
+    #
+    class ModifyInstanceMetadataDefaultsRequest < Struct.new(
+      :http_tokens,
+      :http_put_response_hop_limit,
+      :http_endpoint,
+      :instance_metadata_tags,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   If the request succeeds, the response returns `true`. If the request
+    #   fails, no response is returned, and instead an error message is
+    #   returned.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMetadataDefaultsResult AWS API Documentation
+    #
+    class ModifyInstanceMetadataDefaultsResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #   @return [String]
@@ -47840,8 +47971,23 @@ module Aws::EC2
     #     retrieving the IAM role credentials always returns IMDSv2
     #     credentials; IMDSv1 credentials are not available.
     #
-    #   Default: If the value of `ImdsSupport` for the Amazon Machine Image
-    #   (AMI) for your instance is `v2.0`, the default is `required`.
+    #   Default:
+    #
+    #   * If the value of `ImdsSupport` for the Amazon Machine Image (AMI)
+    #     for your instance is `v2.0` and the account level default is set
+    #     to `no-preference`, the default is `required`.
+    #
+    #   * If the value of `ImdsSupport` for the Amazon Machine Image (AMI)
+    #     for your instance is `v2.0`, but the account level default is set
+    #     to `V1 or V2`, the default is `optional`.
+    #
+    #   The default value can also be affected by other combinations of
+    #   parameters. For more information, see [Order of precedence for
+    #   instance metadata options][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#instance-metadata-options-order-of-precedence
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -59965,7 +60111,8 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of routes to return.
+    #   The maximum number of routes to return. If a value is not provided,
+    #   the default is 1000.
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run

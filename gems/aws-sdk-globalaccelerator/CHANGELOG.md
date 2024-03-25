@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2024-03-25)
+------------------
+
+* Feature - AWS Global Accelerator now supports cross-account sharing for bring your own IP addresses.
+
 1.56.0 (2024-01-26)
 ------------------
 

@@ -1135,7 +1135,13 @@ module Aws
                                         font_size: ("EXTRA_SMALL_10" | "LARGE_48" | "MEDIUM_32" | "SMALL_16"),
                                         position: ("BOTTOM_CENTER" | "BOTTOM_LEFT" | "BOTTOM_RIGHT" | "MIDDLE_CENTER" | "MIDDLE_LEFT" | "MIDDLE_RIGHT" | "TOP_CENTER" | "TOP_LEFT" | "TOP_RIGHT"),
                                         prefix: ::String?
-                                      }?
+                                      }?,
+                                      mv_over_picture_boundaries: ("DISABLED" | "ENABLED")?,
+                                      mv_temporal_predictor: ("DISABLED" | "ENABLED")?,
+                                      tile_height: ::Integer?,
+                                      tile_padding: ("NONE" | "PADDED")?,
+                                      tile_width: ::Integer?,
+                                      treeblock_size: ("AUTO" | "TREE_SIZE_32X32")?
                                     }?,
                                     mpeg_2_settings: {
                                       adaptive_quantization: ("AUTO" | "HIGH" | "LOW" | "MEDIUM" | "OFF")?,
@@ -2965,7 +2971,13 @@ module Aws
                                         font_size: ("EXTRA_SMALL_10" | "LARGE_48" | "MEDIUM_32" | "SMALL_16"),
                                         position: ("BOTTOM_CENTER" | "BOTTOM_LEFT" | "BOTTOM_RIGHT" | "MIDDLE_CENTER" | "MIDDLE_LEFT" | "MIDDLE_RIGHT" | "TOP_CENTER" | "TOP_LEFT" | "TOP_RIGHT"),
                                         prefix: ::String?
-                                      }?
+                                      }?,
+                                      mv_over_picture_boundaries: ("DISABLED" | "ENABLED")?,
+                                      mv_temporal_predictor: ("DISABLED" | "ENABLED")?,
+                                      tile_height: ::Integer?,
+                                      tile_padding: ("NONE" | "PADDED")?,
+                                      tile_width: ::Integer?,
+                                      treeblock_size: ("AUTO" | "TREE_SIZE_32X32")?
                                     }?,
                                     mpeg_2_settings: {
                                       adaptive_quantization: ("AUTO" | "HIGH" | "LOW" | "MEDIUM" | "OFF")?,

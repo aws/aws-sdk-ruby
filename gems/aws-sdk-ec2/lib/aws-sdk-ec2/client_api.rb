@@ -225,6 +225,7 @@ module Aws::EC2
     BootModeTypeList = Shapes::ListShape.new(name: 'BootModeTypeList')
     BootModeValues = Shapes::StringShape.new(name: 'BootModeValues')
     BoxedDouble = Shapes::FloatShape.new(name: 'BoxedDouble')
+    BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
     BundleId = Shapes::StringShape.new(name: 'BundleId')
     BundleIdStringList = Shapes::ListShape.new(name: 'BundleIdStringList')
     BundleInstanceRequest = Shapes::StructureShape.new(name: 'BundleInstanceRequest')
@@ -593,6 +594,8 @@ module Aws::EC2
     DedicatedHostFlag = Shapes::BooleanShape.new(name: 'DedicatedHostFlag')
     DedicatedHostId = Shapes::StringShape.new(name: 'DedicatedHostId')
     DedicatedHostIdList = Shapes::ListShape.new(name: 'DedicatedHostIdList')
+    DefaultInstanceMetadataEndpointState = Shapes::StringShape.new(name: 'DefaultInstanceMetadataEndpointState')
+    DefaultInstanceMetadataTagsState = Shapes::StringShape.new(name: 'DefaultInstanceMetadataTagsState')
     DefaultNetworkCardIndex = Shapes::IntegerShape.new(name: 'DefaultNetworkCardIndex')
     DefaultRouteTableAssociationValue = Shapes::StringShape.new(name: 'DefaultRouteTableAssociationValue')
     DefaultRouteTablePropagationValue = Shapes::StringShape.new(name: 'DefaultRouteTablePropagationValue')
@@ -1461,6 +1464,8 @@ module Aws::EC2
     GetHostReservationPurchasePreviewResult = Shapes::StructureShape.new(name: 'GetHostReservationPurchasePreviewResult')
     GetImageBlockPublicAccessStateRequest = Shapes::StructureShape.new(name: 'GetImageBlockPublicAccessStateRequest')
     GetImageBlockPublicAccessStateResult = Shapes::StructureShape.new(name: 'GetImageBlockPublicAccessStateResult')
+    GetInstanceMetadataDefaultsRequest = Shapes::StructureShape.new(name: 'GetInstanceMetadataDefaultsRequest')
+    GetInstanceMetadataDefaultsResult = Shapes::StructureShape.new(name: 'GetInstanceMetadataDefaultsResult')
     GetInstanceTypesFromInstanceRequirementsRequest = Shapes::StructureShape.new(name: 'GetInstanceTypesFromInstanceRequirementsRequest')
     GetInstanceTypesFromInstanceRequirementsResult = Shapes::StructureShape.new(name: 'GetInstanceTypesFromInstanceRequirementsResult')
     GetInstanceUefiDataRequest = Shapes::StructureShape.new(name: 'GetInstanceUefiDataRequest')
@@ -1705,6 +1710,7 @@ module Aws::EC2
     InstanceMaintenanceOptionsRequest = Shapes::StructureShape.new(name: 'InstanceMaintenanceOptionsRequest')
     InstanceMarketOptionsRequest = Shapes::StructureShape.new(name: 'InstanceMarketOptionsRequest')
     InstanceMatchCriteria = Shapes::StringShape.new(name: 'InstanceMatchCriteria')
+    InstanceMetadataDefaultsResponse = Shapes::StructureShape.new(name: 'InstanceMetadataDefaultsResponse')
     InstanceMetadataEndpointState = Shapes::StringShape.new(name: 'InstanceMetadataEndpointState')
     InstanceMetadataOptionsRequest = Shapes::StructureShape.new(name: 'InstanceMetadataOptionsRequest')
     InstanceMetadataOptionsResponse = Shapes::StructureShape.new(name: 'InstanceMetadataOptionsResponse')
@@ -2061,6 +2067,7 @@ module Aws::EC2
     MemoryMiB = Shapes::StructureShape.new(name: 'MemoryMiB')
     MemoryMiBRequest = Shapes::StructureShape.new(name: 'MemoryMiBRequest')
     MemorySize = Shapes::IntegerShape.new(name: 'MemorySize')
+    MetadataDefaultHttpTokensState = Shapes::StringShape.new(name: 'MetadataDefaultHttpTokensState')
     MetricPoint = Shapes::StructureShape.new(name: 'MetricPoint')
     MetricPoints = Shapes::ListShape.new(name: 'MetricPoints')
     MetricType = Shapes::StringShape.new(name: 'MetricType')
@@ -2100,6 +2107,8 @@ module Aws::EC2
     ModifyInstanceEventWindowResult = Shapes::StructureShape.new(name: 'ModifyInstanceEventWindowResult')
     ModifyInstanceMaintenanceOptionsRequest = Shapes::StructureShape.new(name: 'ModifyInstanceMaintenanceOptionsRequest')
     ModifyInstanceMaintenanceOptionsResult = Shapes::StructureShape.new(name: 'ModifyInstanceMaintenanceOptionsResult')
+    ModifyInstanceMetadataDefaultsRequest = Shapes::StructureShape.new(name: 'ModifyInstanceMetadataDefaultsRequest')
+    ModifyInstanceMetadataDefaultsResult = Shapes::StructureShape.new(name: 'ModifyInstanceMetadataDefaultsResult')
     ModifyInstanceMetadataOptionsRequest = Shapes::StructureShape.new(name: 'ModifyInstanceMetadataOptionsRequest')
     ModifyInstanceMetadataOptionsResult = Shapes::StructureShape.new(name: 'ModifyInstanceMetadataOptionsResult')
     ModifyInstancePlacementRequest = Shapes::StructureShape.new(name: 'ModifyInstancePlacementRequest')
@@ -9060,6 +9069,12 @@ module Aws::EC2
     GetImageBlockPublicAccessStateResult.add_member(:image_block_public_access_state, Shapes::ShapeRef.new(shape: String, location_name: "imageBlockPublicAccessState"))
     GetImageBlockPublicAccessStateResult.struct_class = Types::GetImageBlockPublicAccessStateResult
 
+    GetInstanceMetadataDefaultsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetInstanceMetadataDefaultsRequest.struct_class = Types::GetInstanceMetadataDefaultsRequest
+
+    GetInstanceMetadataDefaultsResult.add_member(:account_level, Shapes::ShapeRef.new(shape: InstanceMetadataDefaultsResponse, location_name: "accountLevel"))
+    GetInstanceMetadataDefaultsResult.struct_class = Types::GetInstanceMetadataDefaultsResult
+
     GetInstanceTypesFromInstanceRequirementsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     GetInstanceTypesFromInstanceRequirementsRequest.add_member(:architecture_types, Shapes::ShapeRef.new(shape: ArchitectureTypeSet, required: true, location_name: "ArchitectureType"))
     GetInstanceTypesFromInstanceRequirementsRequest.add_member(:virtualization_types, Shapes::ShapeRef.new(shape: VirtualizationTypeSet, required: true, location_name: "VirtualizationType"))
@@ -10056,6 +10071,12 @@ module Aws::EC2
     InstanceMarketOptionsRequest.add_member(:market_type, Shapes::ShapeRef.new(shape: MarketType, location_name: "MarketType"))
     InstanceMarketOptionsRequest.add_member(:spot_options, Shapes::ShapeRef.new(shape: SpotMarketOptions, location_name: "SpotOptions"))
     InstanceMarketOptionsRequest.struct_class = Types::InstanceMarketOptionsRequest
+
+    InstanceMetadataDefaultsResponse.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokensState, location_name: "httpTokens"))
+    InstanceMetadataDefaultsResponse.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "httpPutResponseHopLimit"))
+    InstanceMetadataDefaultsResponse.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: InstanceMetadataEndpointState, location_name: "httpEndpoint"))
+    InstanceMetadataDefaultsResponse.add_member(:instance_metadata_tags, Shapes::ShapeRef.new(shape: InstanceMetadataTagsState, location_name: "instanceMetadataTags"))
+    InstanceMetadataDefaultsResponse.struct_class = Types::InstanceMetadataDefaultsResponse
 
     InstanceMetadataOptionsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokensState, location_name: "HttpTokens"))
     InstanceMetadataOptionsRequest.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpPutResponseHopLimit"))
@@ -11485,6 +11506,16 @@ module Aws::EC2
     ModifyInstanceMaintenanceOptionsResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     ModifyInstanceMaintenanceOptionsResult.add_member(:auto_recovery, Shapes::ShapeRef.new(shape: InstanceAutoRecoveryState, location_name: "autoRecovery"))
     ModifyInstanceMaintenanceOptionsResult.struct_class = Types::ModifyInstanceMaintenanceOptionsResult
+
+    ModifyInstanceMetadataDefaultsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: MetadataDefaultHttpTokensState, location_name: "HttpTokens"))
+    ModifyInstanceMetadataDefaultsRequest.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "HttpPutResponseHopLimit"))
+    ModifyInstanceMetadataDefaultsRequest.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: DefaultInstanceMetadataEndpointState, location_name: "HttpEndpoint"))
+    ModifyInstanceMetadataDefaultsRequest.add_member(:instance_metadata_tags, Shapes::ShapeRef.new(shape: DefaultInstanceMetadataTagsState, location_name: "InstanceMetadataTags"))
+    ModifyInstanceMetadataDefaultsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyInstanceMetadataDefaultsRequest.struct_class = Types::ModifyInstanceMetadataDefaultsRequest
+
+    ModifyInstanceMetadataDefaultsResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    ModifyInstanceMetadataDefaultsResult.struct_class = Types::ModifyInstanceMetadataDefaultsResult
 
     ModifyInstanceMetadataOptionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     ModifyInstanceMetadataOptionsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokensState, location_name: "HttpTokens"))
@@ -19869,6 +19900,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: GetImageBlockPublicAccessStateResult)
       end)
 
+      api.add_operation(:get_instance_metadata_defaults, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInstanceMetadataDefaults"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetInstanceMetadataDefaultsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInstanceMetadataDefaultsResult)
+      end)
+
       api.add_operation(:get_instance_types_from_instance_requirements, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetInstanceTypesFromInstanceRequirements"
         o.http_method = "POST"
@@ -20481,6 +20520,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyInstanceMaintenanceOptionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyInstanceMaintenanceOptionsResult)
+      end)
+
+      api.add_operation(:modify_instance_metadata_defaults, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyInstanceMetadataDefaults"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyInstanceMetadataDefaultsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyInstanceMetadataDefaultsResult)
       end)
 
       api.add_operation(:modify_instance_metadata_options, Seahorse::Model::Operation.new.tap do |o|
