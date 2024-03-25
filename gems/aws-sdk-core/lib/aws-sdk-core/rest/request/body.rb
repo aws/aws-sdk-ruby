@@ -18,27 +18,14 @@ module Aws
         # @param [Hash] params
         def apply(http_req, params)
           body = build_body(params)
-
-          # temp location
-          if @rules[:payload_member]
-            case @rules[:payload_member].shape
-            when BlobShape
-              http_req.headers['Content-Type'] ||= 'application/octet-stream'
-            when StringShape
-              http_req.headers['Content-Type'] ||= 'text/plain'
-            when UnionShape
-              http_req.headers['Content-Type'] ||= if xml_builder?
-                                                     'application/xml'
-                                                   else
-                                                     'application/json'
-                                                   end
-            end
-          end
+          update_payload_content_type(http_req) if @rules[:payload_member]
 
           # for rest-json, ensure we send at least an empty object
           # don't send an empty object for streaming? case.
-          if body.nil? && @serializer_class == Json::Builder &&
-             modeled_body? && !streaming?
+          if body.nil? &&
+             json_builder? &&
+             modeled_body? &&
+             !streaming?
             body = '{}'
           end
           http_req.body = body
@@ -62,7 +49,8 @@ module Aws
             params[@rules[:payload]]
           elsif @rules[:payload]
             params = params[@rules[:payload]]
-            if xml_builder? && @rules.shape.member?(@rules[:payload_member].location_name)
+            if xml_builder? &&
+               @rules.shape.member?(@rules[:payload_member].location_name)
               # serializing payload member for rest-xml is as follows:
               # 1. Use the member locationName if the member value doesn't match the member's name (default)
               # 2. Use the value of the locationName on the member's target if present
@@ -82,6 +70,21 @@ module Aws
             @rules[:payload_member].shape.name
         end
 
+        def update_payload_content_type(req)
+          case @rules[:payload_member].shape
+          when BlobShape
+            req.headers['Content-Type'] ||= 'application/octet-stream'
+          when StringShape
+            req.headers['Content-Type'] ||= 'text/plain'
+          when UnionShape
+            req.headers['Content-Type'] ||= if xml_builder?
+                                              'application/xml'
+                                            elsif json_builder?
+                                              'application/json'
+                                            end
+          end
+        end
+
         def streaming?
           @rules[:payload] && (
             BlobShape === @rules[:payload_member].shape ||
@@ -91,6 +94,10 @@ module Aws
 
         def xml_builder?
           @serializer_class == Xml::Builder
+        end
+
+        def json_builder?
+          @serializer_class == Json::Builder
         end
 
         def serialize(rules, params)
