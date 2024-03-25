@@ -35,6 +35,8 @@ module AwsSdkCodeGenerator
         'union' => false, # should remain false
         'document' => true,
         'jsonvalue' => true,
+        'error' => true, # parsing customized error
+        'locationName' => true, # to recognize xmlName defined on shape
         # event stream modeling
         'event' => false,
         'eventstream' => false,
@@ -44,7 +46,6 @@ module AwsSdkCodeGenerator
         'synthetic' => false,
         'box' => false,
         'fault' => false,
-        'error' => true, # to parse customized error
         'exception_event' => false, # internal, exceptions cannot be events
         'deprecated' => false,
         'deprecatedMessage' => false,
@@ -53,7 +54,6 @@ module AwsSdkCodeGenerator
         'members' => false,
         'member' => false,
         'key' => false,
-        'locationName' => true,
         'value' => false,
         'required' => false,
         'enum' => false,
@@ -218,7 +218,7 @@ module AwsSdkCodeGenerator
               end
             end
 
-            %w[input output].each do |key|
+            %w(input output).each do |key|
               if operation[key]
                 o.shape_references << "o.#{key} = #{operation_ref(operation[key])}"
               else
@@ -251,7 +251,7 @@ module AwsSdkCodeGenerator
             o.require_apikey = operation['requiresApiKey'] if operation.key?('requiresApiKey')
             o.pager = pager(operation_name)
             o.async = @service.protocol_settings['h2'] == 'eventstream' &&
-              AwsSdkCodeGenerator::Helper.operation_eventstreaming?(operation, @service.api)
+                      AwsSdkCodeGenerator::Helper.operation_eventstreaming?(operation, @service.api)
           end
         end
       end
@@ -293,7 +293,7 @@ module AwsSdkCodeGenerator
         if document_struct?(shape)
           ["Shapes::DocumentShape", shape]
 	      elsif shape['union']
-          ["Shapes::UnionShape", shape]
+         ["Shapes::UnionShape", shape]
         elsif SHAPE_CLASSES.key?(type)
           ["Shapes::#{SHAPE_CLASSES[type]}", shape]
         else
@@ -500,12 +500,14 @@ module AwsSdkCodeGenerator
           metadata.each_pair do |key, value|
             next if key == 'resultWrapper'
             if key == 'locationName'
-              # Use the locationName on the shape IF it is defined on the shape
-              if (shape_location_name = @service.api['shapes'][shape_name]['locationName'])
-                options[:location_name] = shape_location_name.inspect
-              else
-                options[:location_name] = value.inspect
-              end
+              options[:location_name] =
+                # use the xmlName on shape if defined
+                if (@service.protocol == 'rest-xml') &&
+                   (shape_location_name = @service.api['shapes'][shape_name]['locationName'])
+                  shape_location_name.inspect
+                else
+                  value.inspect
+                end
             else
               options[:metadata] ||= {}
               options[:metadata][key] = value.inspect
@@ -515,11 +517,11 @@ module AwsSdkCodeGenerator
             options = ''
           else
             opts = HashFormatter.new(wrap:false).format(options)
-            if opts[0] == "\n"
-              options = ",#{opts}"
+            options = if opts[0] == "\n"
+                        ",#{opts}"
             else
-              options = ", #{opts}"
-            end
+              ", #{opts}"
+                      end
           end
         end
         "Shapes::ShapeRef.new(shape: #{shape_name}#{options})"
