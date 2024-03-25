@@ -16,9 +16,7 @@ module Aws
             buffer = StringScanner.new(value)
             parsed = []
 
-            until buffer.eos?
-              parsed << read_value(buffer)
-            end
+            parsed << read_value(buffer) until buffer.eos?
 
             parsed
           end
@@ -29,8 +27,7 @@ module Aws
             case ref['timestampFormat'] || ref.shape['timestampFormat']
             when 'unixTimestamp'
               value.split(', ').map { |v| Time.at(v.to_f) }
-            when 'iso8601' then
-              value.split(', ').map { |v| Time.parse(v) }
+            when 'iso8601' then value.split(', ').map { |v| Time.parse(v) }
             else
               # header default to rfc822/http-date, which has a comma after day
               value.split(',').each_slice(2).map { |v| Time.parse(v[0] + v[1])}
@@ -67,12 +64,13 @@ module Aws
           def read_quoted_value(buffer)
             # scan until we have an unescaped double quote
             value = buffer.scan_until(/[^\\]"/)
-            raise ArgumentError, "Invalid String list: No closing quote found" unless value
-            # drop any remaining whitespapce/commas
+            raise ArgumentError, 'Invalid String list: No closing quote found' unless value
+
+            # drop any remaining whitespace/commas
             buffer.scan_until(/[\s,]*/)
             # the last character will always be the closing quote.
             # Add a starting quote  and then unescape (undump)
-            ('"' + value).undump
+            "\"#{value}".undump
           end
         end
       end
