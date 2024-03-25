@@ -26,8 +26,7 @@ module Aws
         end
         context[:request_id] = request_id(body)
         errors_module = context.client.class.errors_module
-        error_class = errors_module.error_class(code).new(context, message, data)
-        error_class
+        errors_module.error_class(code).new(context, message, data)
       end
 
       def extract_error(body, context)
@@ -48,12 +47,11 @@ module Aws
             # match modeled shape name
             error_shape_code = rule.shape['error']['code'] if rule.shape['error']
             match = (code == error_shape_code || code == rule.shape.name)
-            if match && rule.shape.members.any?
-              data = parse_error_data(rule, context.http_response.body_contents)
-              # supporting HTTP bindings
-              headers = Aws::Rest::Response::Headers.new(rule)
-              headers.apply(context.http_response, data)
-            end
+            next unless match && rule.shape.members.any?
+
+            data = parse_error_data(rule, context.http_response.body_contents)
+            # supporting HTTP bindings
+            apply_error_headers(rule, context, data)
           end
         end
         data
@@ -70,6 +68,11 @@ module Aws
         else
           EmptyStructure.new
         end
+      end
+
+      def apply_error_headers(rule, context, data)
+        headers = Aws::Rest::Response::Headers.new(rule)
+        headers.apply(context.http_response, data)
       end
 
       def error_code(body, context)
