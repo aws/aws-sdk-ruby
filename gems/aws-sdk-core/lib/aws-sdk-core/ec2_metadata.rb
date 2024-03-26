@@ -183,7 +183,7 @@ module Aws
 
     def open_connection
       uri = URI.parse(@endpoint)
-      http = Net::HTTP.new(uri.hostname || @endpoint, @port || uri.port)
+      http = Net::HTTP.new(uri.hostname || @endpoint, uri.port || @port)
       http.open_timeout = @http_open_timeout
       http.read_timeout = @http_read_timeout
       http.set_debug_output(@http_debug_output) if @http_debug_output
