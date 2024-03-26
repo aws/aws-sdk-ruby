@@ -388,6 +388,20 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # A request to backfill is already in progress. Once the previous
+    # request is complete, you can create another request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/BackfillLimitExceededException AWS API Documentation
+    #
+    class BackfillLimitExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested report expired. Update the date interval and try again.
     #
     # @!attribute [rw] message
@@ -437,6 +451,41 @@ module Aws::CostExplorer
       :status,
       :last_updated_date,
       :last_used_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The cost allocation tag backfill request structure that contains
+    # metadata and details of a certain backfill.
+    #
+    # @!attribute [rw] backfill_from
+    #   The date the backfill starts from.
+    #   @return [String]
+    #
+    # @!attribute [rw] requested_at
+    #   The time when the backfill was requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] completed_at
+    #   The backfill completion time.
+    #   @return [String]
+    #
+    # @!attribute [rw] backfill_status
+    #   The status of the cost allocation tag backfill request.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The time when the backfill status was last updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostAllocationTagBackfillRequest AWS API Documentation
+    #
+    class CostAllocationTagBackfillRequest < Struct.new(
+      :backfill_from,
+      :requested_at,
+      :completed_at,
+      :backfill_status,
+      :last_updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4774,6 +4823,44 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of objects that are returned for this request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostAllocationTagBackfillHistoryRequest AWS API Documentation
+    #
+    class ListCostAllocationTagBackfillHistoryRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backfill_requests
+    #   The list of historical cost allocation tag backfill requests.
+    #   @return [Array<Types::CostAllocationTagBackfillRequest>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostAllocationTagBackfillHistoryResponse AWS API Documentation
+    #
+    class ListCostAllocationTagBackfillHistoryResponse < Struct.new(
+      :backfill_requests,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] status
     #   The status of cost allocation tag keys that are returned for this
     #   request.
@@ -6658,6 +6745,32 @@ module Aws::CostExplorer
     class SortDefinition < Struct.new(
       :key,
       :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backfill_from
+    #   The date you want the backfill to start from. The date can only be a
+    #   first day of the month (a billing start date). Dates can't precede
+    #   the previous twelve months, or in the future.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/StartCostAllocationTagBackfillRequest AWS API Documentation
+    #
+    class StartCostAllocationTagBackfillRequest < Struct.new(
+      :backfill_from)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backfill_request
+    #   An object containing detailed metadata of your new backfill request.
+    #   @return [Types::CostAllocationTagBackfillRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/StartCostAllocationTagBackfillResponse AWS API Documentation
+    #
+    class StartCostAllocationTagBackfillResponse < Struct.new(
+      :backfill_request)
       SENSITIVE = []
       include Aws::Structure
     end

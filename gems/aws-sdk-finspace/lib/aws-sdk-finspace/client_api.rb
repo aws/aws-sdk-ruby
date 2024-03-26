@@ -63,6 +63,8 @@ module Aws::Finspace
     DbPaths = Shapes::ListShape.new(name: 'DbPaths')
     DeleteEnvironmentRequest = Shapes::StructureShape.new(name: 'DeleteEnvironmentRequest')
     DeleteEnvironmentResponse = Shapes::StructureShape.new(name: 'DeleteEnvironmentResponse')
+    DeleteKxClusterNodeRequest = Shapes::StructureShape.new(name: 'DeleteKxClusterNodeRequest')
+    DeleteKxClusterNodeResponse = Shapes::StructureShape.new(name: 'DeleteKxClusterNodeResponse')
     DeleteKxClusterRequest = Shapes::StructureShape.new(name: 'DeleteKxClusterRequest')
     DeleteKxClusterResponse = Shapes::StructureShape.new(name: 'DeleteKxClusterResponse')
     DeleteKxDatabaseRequest = Shapes::StructureShape.new(name: 'DeleteKxDatabaseRequest')
@@ -176,6 +178,7 @@ module Aws::Finspace
     KxNAS1Size = Shapes::IntegerShape.new(name: 'KxNAS1Size')
     KxNAS1Type = Shapes::StringShape.new(name: 'KxNAS1Type')
     KxNode = Shapes::StructureShape.new(name: 'KxNode')
+    KxNodeStatus = Shapes::StringShape.new(name: 'KxNodeStatus')
     KxNodeSummaries = Shapes::ListShape.new(name: 'KxNodeSummaries')
     KxSavedownStorageConfiguration = Shapes::StructureShape.new(name: 'KxSavedownStorageConfiguration')
     KxSavedownStorageSize = Shapes::IntegerShape.new(name: 'KxSavedownStorageSize')
@@ -553,6 +556,13 @@ module Aws::Finspace
     DeleteEnvironmentRequest.struct_class = Types::DeleteEnvironmentRequest
 
     DeleteEnvironmentResponse.struct_class = Types::DeleteEnvironmentResponse
+
+    DeleteKxClusterNodeRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
+    DeleteKxClusterNodeRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, required: true, location: "uri", location_name: "clusterName"))
+    DeleteKxClusterNodeRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: KxClusterNodeIdString, required: true, location: "uri", location_name: "nodeId"))
+    DeleteKxClusterNodeRequest.struct_class = Types::DeleteKxClusterNodeRequest
+
+    DeleteKxClusterNodeResponse.struct_class = Types::DeleteKxClusterNodeResponse
 
     DeleteKxClusterRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: KxEnvironmentId, required: true, location: "uri", location_name: "environmentId"))
     DeleteKxClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: KxClusterName, required: true, location: "uri", location_name: "clusterName"))
@@ -949,6 +959,7 @@ module Aws::Finspace
     KxNode.add_member(:node_id, Shapes::ShapeRef.new(shape: KxClusterNodeIdString, location_name: "nodeId"))
     KxNode.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
     KxNode.add_member(:launch_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "launchTime"))
+    KxNode.add_member(:status, Shapes::ShapeRef.new(shape: KxNodeStatus, location_name: "status"))
     KxNode.struct_class = Types::KxNode
 
     KxNodeSummaries.member = Shapes::ShapeRef.new(shape: KxNode)
@@ -1516,6 +1527,19 @@ module Aws::Finspace
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_kx_cluster_node, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteKxClusterNode"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/kx/environments/{environmentId}/clusters/{clusterName}/nodes/{nodeId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteKxClusterNodeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteKxClusterNodeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.191.5 (2024-03-26)
+------------------
+
 * Issue - Fix `EC2Metadata` and `InstanceProfileCredentials` to respect the port from a configured endpoint from code, ENV, or shared config.
 
 3.191.4 (2024-03-15)

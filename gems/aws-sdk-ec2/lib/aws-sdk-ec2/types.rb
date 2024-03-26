@@ -52585,10 +52585,14 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a DHCP configuration option.
+    #
     # @!attribute [rw] key
+    #   The name of a DHCP option.
     #   @return [String]
     #
     # @!attribute [rw] values
+    #   The values for the DHCP option.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NewDhcpConfiguration AWS API Documentation
@@ -60111,8 +60115,7 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of routes to return. If a value is not provided,
-    #   the default is 1000.
+    #   The maximum number of routes to return.
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run

@@ -459,6 +459,11 @@ module Aws::BedrockAgentRuntime
     #
     # @option params [Types::SessionState] :session_state
     #   Contains parameters that specify various attributes of the session.
+    #   For more information, see [Control session context][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
     #
     # @return [Types::InvokeAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -822,10 +827,15 @@ module Aws::BedrockAgentRuntime
     #   another request to retrieve the next batch of results.
     #
     # @option params [Types::KnowledgeBaseRetrievalConfiguration] :retrieval_configuration
-    #   Contains details about how the results should be returned.
+    #   Contains configurations for the knowledge base query and retrieval
+    #   process. For more information, see [Query configurations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
     #
     # @option params [required, Types::KnowledgeBaseQuery] :retrieval_query
-    #   The query to send the knowledge base.
+    #   Contains the query to send the knowledge base.
     #
     # @return [Types::RetrieveResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -872,22 +882,16 @@ module Aws::BedrockAgentRuntime
     # retrieved results. The response cites up to five sources but only
     # selects the ones that are relevant to the query.
     #
-    # <note markdown="1"> The `numberOfResults` field is currently unsupported for
-    # `RetrieveAndGenerate`. Don't include it in the
-    # [vectorSearchConfiguration][1] object.
-    #
-    #  </note>
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_KnowledgeBaseVectorSearchConfiguration.html
-    #
     # @option params [required, Types::RetrieveAndGenerateInput] :input
-    #   Contains the query made to the knowledge base.
+    #   Contains the query to be made to the knowledge base.
     #
     # @option params [Types::RetrieveAndGenerateConfiguration] :retrieve_and_generate_configuration
-    #   Contains details about the resource being queried and the foundation
-    #   model used for generation.
+    #   Contains configurations for the knowledge base query and retrieval
+    #   process. For more information, see [Query configurations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
     #
     # @option params [Types::RetrieveAndGenerateSessionConfiguration] :session_configuration
     #   Contains details about the session with the knowledge base.
@@ -910,6 +914,11 @@ module Aws::BedrockAgentRuntime
     #     },
     #     retrieve_and_generate_configuration: {
     #       knowledge_base_configuration: {
+    #         generation_configuration: {
+    #           prompt_template: {
+    #             text_prompt_template: "TextPromptTemplate",
+    #           },
+    #         },
     #         knowledge_base_id: "KnowledgeBaseId", # required
     #         model_arn: "BedrockModelArn", # required
     #         retrieval_configuration: {
@@ -962,7 +971,7 @@ module Aws::BedrockAgentRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

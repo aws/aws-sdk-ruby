@@ -80,6 +80,8 @@ module Aws::Finspace
             Aws::Finspace::Endpoints::DeleteEnvironment.build(context)
           when :delete_kx_cluster
             Aws::Finspace::Endpoints::DeleteKxCluster.build(context)
+          when :delete_kx_cluster_node
+            Aws::Finspace::Endpoints::DeleteKxClusterNode.build(context)
           when :delete_kx_database
             Aws::Finspace::Endpoints::DeleteKxDatabase.build(context)
           when :delete_kx_dataview

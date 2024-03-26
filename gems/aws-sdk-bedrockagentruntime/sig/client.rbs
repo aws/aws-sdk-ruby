@@ -130,6 +130,11 @@ module Aws
                                    },
                                    ?retrieve_and_generate_configuration: {
                                      knowledge_base_configuration: {
+                                       generation_configuration: {
+                                         prompt_template: {
+                                           text_prompt_template: ::String?
+                                         }?
+                                       }?,
                                        knowledge_base_id: ::String,
                                        model_arn: ::String,
                                        retrieval_configuration: {

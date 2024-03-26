@@ -75,6 +75,11 @@ module Aws::BedrockAgentRuntime
       SENSITIVE: [:text_response_part]
     end
 
+    class GenerationConfiguration
+      attr_accessor prompt_template: Types::PromptTemplate
+      SENSITIVE: []
+    end
+
     class InferenceConfiguration
       attr_accessor maximum_length: ::Integer
       attr_accessor stop_sequences: ::Array[::String]
@@ -145,6 +150,7 @@ module Aws::BedrockAgentRuntime
     end
 
     class KnowledgeBaseRetrieveAndGenerateConfiguration
+      attr_accessor generation_configuration: Types::GenerationConfiguration
       attr_accessor knowledge_base_id: ::String
       attr_accessor model_arn: ::String
       attr_accessor retrieval_configuration: Types::KnowledgeBaseRetrievalConfiguration
@@ -261,6 +267,11 @@ module Aws::BedrockAgentRuntime
       end
       class Unknown < PreProcessingTrace
       end
+    end
+
+    class PromptTemplate
+      attr_accessor text_prompt_template: ::String
+      SENSITIVE: [:text_prompt_template]
     end
 
     class Rationale

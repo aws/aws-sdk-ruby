@@ -12384,7 +12384,7 @@ module Aws::EC2
     NeuronInfo.add_member(:total_neuron_device_memory_in_mi_b, Shapes::ShapeRef.new(shape: TotalNeuronMemory, location_name: "totalNeuronDeviceMemoryInMiB"))
     NeuronInfo.struct_class = Types::NeuronInfo
 
-    NewDhcpConfiguration.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
+    NewDhcpConfiguration.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
     NewDhcpConfiguration.add_member(:values, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "Value"))
     NewDhcpConfiguration.struct_class = Types::NewDhcpConfiguration
 

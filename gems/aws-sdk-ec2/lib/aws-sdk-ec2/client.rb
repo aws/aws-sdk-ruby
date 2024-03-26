@@ -56994,8 +56994,7 @@ module Aws::EC2
     #   * `type` - The type of route (`propagated` \| `static`).
     #
     # @option params [Integer] :max_results
-    #   The maximum number of routes to return. If a value is not provided,
-    #   the default is 1000.
+    #   The maximum number of routes to return.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -59116,7 +59115,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.445.0'
+      context[:gem_version] = '1.446.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -293,6 +293,16 @@ module Aws::Finspace
     class DeleteEnvironmentResponse < Aws::EmptyStructure
     end
 
+    class DeleteKxClusterNodeRequest
+      attr_accessor environment_id: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor node_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKxClusterNodeResponse < Aws::EmptyStructure
+    end
+
     class DeleteKxClusterRequest
       attr_accessor environment_id: ::String
       attr_accessor cluster_name: ::String
@@ -766,6 +776,7 @@ module Aws::Finspace
       attr_accessor node_id: ::String
       attr_accessor availability_zone_id: ::String
       attr_accessor launch_time: ::Time
+      attr_accessor status: ("RUNNING" | "PROVISIONING")
       SENSITIVE: []
     end
 

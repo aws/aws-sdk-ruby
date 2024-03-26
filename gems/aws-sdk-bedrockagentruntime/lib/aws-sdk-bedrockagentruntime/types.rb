@@ -115,6 +115,17 @@ module Aws::BedrockAgentRuntime
     # on a source in the knowledge base, alongside information about the
     # source.
     #
+    # This data type is used in the following API operations:
+    #
+    # * [Retrieve response][1] – in the `citations` field
+    #
+    # * [RetrieveAndGenerate response][2] – in the `citations` field
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+    #
     # @!attribute [rw] generated_response_part
     #   Contains the generated response and metadata
     #   @return [Types::GeneratedResponsePart]
@@ -205,6 +216,18 @@ module Aws::BedrockAgentRuntime
     # Contains metadata about a part of the generated response that is
     # accompanied by a citation.
     #
+    # This data type is used in the following API operations:
+    #
+    # * [Retrieve response][1] – in the `generatedResponsePart` field
+    #
+    # * [RetrieveAndGenerate response][2] – in the `generatedResponsePart`
+    #   field
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+    #
     # @!attribute [rw] text_response_part
     #   Contains metadata about a textual part of the generated response
     #   that is accompanied by a citation.
@@ -215,6 +238,32 @@ module Aws::BedrockAgentRuntime
     class GeneratedResponsePart < Struct.new(
       :text_response_part)
       SENSITIVE = [:text_response_part]
+      include Aws::Structure
+    end
+
+    # Contains configurations for response generation based on the knowledge
+    # base query results.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [RetrieveAndGenerate request][1]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
+    #
+    # @!attribute [rw] prompt_template
+    #   Contains the template for the prompt that's sent to the model for
+    #   response generation.
+    #   @return [Types::PromptTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/GenerationConfiguration AWS API Documentation
+    #
+    class GenerationConfiguration < Struct.new(
+      :prompt_template)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -353,6 +402,11 @@ module Aws::BedrockAgentRuntime
     #
     # @!attribute [rw] session_state
     #   Contains parameters that specify various attributes of the session.
+    #   For more information, see [Control session context][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
     #   @return [Types::SessionState]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/InvokeAgentRequest AWS API Documentation
@@ -429,6 +483,16 @@ module Aws::BedrockAgentRuntime
 
     # Contains the query made to the knowledge base.
     #
+    # This data type is used in the following API operations:
+    #
+    # * [Retrieve request][1] – in the `retrievalQuery` field
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    #
     # @!attribute [rw] text
     #   The text of the query made to the knowledge base.
     #   @return [String]
@@ -441,22 +505,29 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
-    # Contains details about how the results should be returned.
+    # Contains configurations for the knowledge base query and retrieval
+    # process. For more information, see [Query configurations][1].
     #
     # This data type is used in the following API operations:
     #
-    # * [Retrieve request body][1]
+    # * [Retrieve request][2] – in the `retrievalConfiguration` field
     #
-    # * [RetrieveAndGenerate request body][2]
+    # * [RetrieveAndGenerate request][3] – in the `retrievalConfiguration`
+    #   field
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
     #
     # @!attribute [rw] vector_search_configuration
     #   Contains details about how the results from the vector search should
-    #   be returned.
+    #   be returned. For more information, see [Query configurations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
     #   @return [Types::KnowledgeBaseVectorSearchConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/KnowledgeBaseRetrievalConfiguration AWS API Documentation
@@ -468,6 +539,16 @@ module Aws::BedrockAgentRuntime
     end
 
     # Details about a result from querying the knowledge base.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [Retrieve response][1] – in the `retrievalResults` field
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
     #
     # @!attribute [rw] content
     #   Contains a chunk of text from a data source in the knowledge base.
@@ -493,6 +574,23 @@ module Aws::BedrockAgentRuntime
 
     # Contains details about the resource being queried.
     #
+    # This data type is used in the following API operations:
+    #
+    # * [Retrieve request][1] – in the `knowledgeBaseConfiguration` field
+    #
+    # * [RetrieveAndGenerate request][2] – in the
+    #   `knowledgeBaseConfiguration` field
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
+    #
+    # @!attribute [rw] generation_configuration
+    #   Contains configurations for response generation based on the
+    #   knowwledge base query results.
+    #   @return [Types::GenerationConfiguration]
+    #
     # @!attribute [rw] knowledge_base_id
     #   The unique identifier of the knowledge base that is queried and the
     #   foundation model used for generation.
@@ -510,6 +608,7 @@ module Aws::BedrockAgentRuntime
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/KnowledgeBaseRetrieveAndGenerateConfiguration AWS API Documentation
     #
     class KnowledgeBaseRetrieveAndGenerateConfiguration < Struct.new(
+      :generation_configuration,
       :knowledge_base_id,
       :model_arn,
       :retrieval_configuration)
@@ -517,16 +616,24 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
-    # Configurations for how to carry out the search.
+    # Configurations for how to perform the search query and return results.
+    # For more information, see [Query configurations][1].
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [Retrieve request][2] – in the `vectorSearchConfiguration` field
+    #
+    # * [RetrieveAndGenerate request][3] – in the
+    #   `vectorSearchConfiguration` field
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
     #
     # @!attribute [rw] number_of_results
-    #   The number of results to return.
-    #
-    #   <note markdown="1"> The `numberOfResults` field is currently unsupported for
-    #   `RetrieveAndGenerate`. Don't include it in this field if you are
-    #   sending a `RetrieveAndGenerate` request.
-    #
-    #    </note>
+    #   The number of source chunks to retrieve.
     #   @return [Integer]
     #
     # @!attribute [rw] override_search_type
@@ -943,6 +1050,48 @@ module Aws::BedrockAgentRuntime
       class Unknown < PreProcessingTrace; end
     end
 
+    # Contains the template for the prompt that's sent to the model for
+    # response generation. For more information, see [Knowledge base prompt
+    # templates][1].
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [RetrieveAndGenerate request][2]
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
+    #
+    # @!attribute [rw] text_prompt_template
+    #   The template for the prompt that's sent to the model for response
+    #   generation. You can include prompt placeholders, which become
+    #   replaced before the prompt is sent to the model to provide
+    #   instructions and context to the model. In addition, you can include
+    #   XML tags to delineate meaningful sections of the prompt template.
+    #
+    #   For more information, see the following resources:
+    #
+    #   * [Knowledge base prompt templates][1]
+    #
+    #   * [Use XML tags with Anthropic Claude models][2]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt
+    #   [2]: https://docs.anthropic.com/claude/docs/use-xml-tags
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/PromptTemplate AWS API Documentation
+    #
+    class PromptTemplate < Struct.new(
+      :text_prompt_template)
+      SENSITIVE = [:text_prompt_template]
+      include Aws::Structure
+    end
+
     # Contains the reasoning, based on the input, that the agent uses to
     # justify carrying out an action group or getting information from a
     # knowledge base.
@@ -1014,6 +1163,19 @@ module Aws::BedrockAgentRuntime
 
     # Contains the cited text from the data source.
     #
+    # This data type is used in the following API operations:
+    #
+    # * [Retrieve response][1] – in the `content` field
+    #
+    # * [RetrieveAndGenerate response][2] – in the `content` field
+    #
+    # * [Retrieve response][1] – in the `content` field
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+    #
     # @!attribute [rw] text
     #   The cited text from the data source.
     #   @return [String]
@@ -1027,6 +1189,19 @@ module Aws::BedrockAgentRuntime
     end
 
     # Contains information about the location of the data source.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [Retrieve response][1] – in the `location` field
+    #
+    # * [RetrieveAndGenerate response][2] – in the `location` field
+    #
+    # * [Retrieve response][1] – in the `locatino` field
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
     #
     # @!attribute [rw] s3_location
     #   Contains the S3 location of the data source.
@@ -1047,6 +1222,19 @@ module Aws::BedrockAgentRuntime
 
     # Contains the S3 location of the data source.
     #
+    # This data type is used in the following API operations:
+    #
+    # * [Retrieve response][1] – in the `s3Location` field
+    #
+    # * [RetrieveAndGenerate response][2] – in the `s3Location` field
+    #
+    # * [Retrieve response][1] – in the `s3Location` field
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+    #
     # @!attribute [rw] uri
     #   The S3 URI of the data source.
     #   @return [String]
@@ -1060,6 +1248,17 @@ module Aws::BedrockAgentRuntime
     end
 
     # Contains details about the resource being queried.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [RetrieveAndGenerate request][1] – in the
+    #   `retrieveAndGenerateConfiguration` field
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
     #
     # @!attribute [rw] knowledge_base_configuration
     #   Contains details about the resource being queried.
@@ -1080,6 +1279,16 @@ module Aws::BedrockAgentRuntime
 
     # Contains the query made to the knowledge base.
     #
+    # This data type is used in the following API operations:
+    #
+    # * [RetrieveAndGenerate request][1] – in the `input` field
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
+    #
     # @!attribute [rw] text
     #   The query made to the knowledge base.
     #   @return [String]
@@ -1094,6 +1303,16 @@ module Aws::BedrockAgentRuntime
 
     # Contains the response generated from querying the knowledge base.
     #
+    # This data type is used in the following API operations:
+    #
+    # * [RetrieveAndGenerate response][1] – in the `output` field
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+    #
     # @!attribute [rw] text
     #   The response generated from querying the knowledge base.
     #   @return [String]
@@ -1107,12 +1326,16 @@ module Aws::BedrockAgentRuntime
     end
 
     # @!attribute [rw] input
-    #   Contains the query made to the knowledge base.
+    #   Contains the query to be made to the knowledge base.
     #   @return [Types::RetrieveAndGenerateInput]
     #
     # @!attribute [rw] retrieve_and_generate_configuration
-    #   Contains details about the resource being queried and the foundation
-    #   model used for generation.
+    #   Contains configurations for the knowledge base query and retrieval
+    #   process. For more information, see [Query configurations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
     #   @return [Types::RetrieveAndGenerateConfiguration]
     #
     # @!attribute [rw] session_configuration
@@ -1162,6 +1385,17 @@ module Aws::BedrockAgentRuntime
 
     # Contains configuration about the session with the knowledge base.
     #
+    # This data type is used in the following API operations:
+    #
+    # * [RetrieveAndGenerate request][1] – in the `sessionConfiguration`
+    #   field
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
+    #
     # @!attribute [rw] kms_key_arn
     #   The ARN of the KMS key encrypting the session.
     #   @return [String]
@@ -1185,11 +1419,16 @@ module Aws::BedrockAgentRuntime
     #   @return [String]
     #
     # @!attribute [rw] retrieval_configuration
-    #   Contains details about how the results should be returned.
+    #   Contains configurations for the knowledge base query and retrieval
+    #   process. For more information, see [Query configurations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
     #   @return [Types::KnowledgeBaseRetrievalConfiguration]
     #
     # @!attribute [rw] retrieval_query
-    #   The query to send the knowledge base.
+    #   Contains the query to send the knowledge base.
     #   @return [Types::KnowledgeBaseQuery]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-runtime-2023-07-26/RetrieveRequest AWS API Documentation
@@ -1222,7 +1461,19 @@ module Aws::BedrockAgentRuntime
       include Aws::Structure
     end
 
-    # Contains metadata about a sources cited for the generated response.
+    # Contains metadata about a source cited for the generated response.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [RetrieveAndGenerate response][1] – in the `retrievedReferences`
+    #   field
+    #
+    # * [Retrieve response][2] – in the `retrievedReferences` field
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
     #
     # @!attribute [rw] content
     #   Contains the cited text from the data source.
@@ -1262,13 +1513,13 @@ module Aws::BedrockAgentRuntime
     # group or pass them when making an [InvokeAgent][2] request. Use
     # session state attributes to control and provide conversational context
     # for your agent and to help customize your agent's behavior. For more
-    # information, see [Session context][3].
+    # information, see [Control session context][3].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-lambda.html
     # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
-    # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/sessionstate.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
     #
     # @!attribute [rw] prompt_session_attributes
     #   Contains attributes that persist across a prompt and the values of
@@ -1299,6 +1550,17 @@ module Aws::BedrockAgentRuntime
     # Contains information about where the text with a citation begins and
     # ends in the generated output.
     #
+    # This data type is used in the following API operations:
+    #
+    # * [RetrieveAndGenerate response][1] – in the `span` field
+    #
+    # * [Retrieve response][2] – in the `span` field
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+    #
     # @!attribute [rw] end
     #   Where the text with a citation ends in the generated output.
     #   @return [Integer]
@@ -1318,6 +1580,17 @@ module Aws::BedrockAgentRuntime
 
     # Contains the part of the generated text that contains a citation,
     # alongside where it begins and ends.
+    #
+    # This data type is used in the following API operations:
+    #
+    # * [RetrieveAndGenerate response][1] – in the `textResponsePart` field
+    #
+    # * [Retrieve response][2] – in the `textResponsePart` field
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
     #
     # @!attribute [rw] span
     #   Contains information about where the text with a citation begins and

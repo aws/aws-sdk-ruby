@@ -37,6 +37,7 @@ module Aws::BedrockAgentRuntime
     FinalResponse = Shapes::StructureShape.new(name: 'FinalResponse')
     FinalResponseString = Shapes::StringShape.new(name: 'FinalResponseString')
     GeneratedResponsePart = Shapes::StructureShape.new(name: 'GeneratedResponsePart')
+    GenerationConfiguration = Shapes::StructureShape.new(name: 'GenerationConfiguration')
     InferenceConfiguration = Shapes::StructureShape.new(name: 'InferenceConfiguration')
     InputText = Shapes::StringShape.new(name: 'InputText')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -77,6 +78,7 @@ module Aws::BedrockAgentRuntime
     PreProcessingParsedResponse = Shapes::StructureShape.new(name: 'PreProcessingParsedResponse')
     PreProcessingTrace = Shapes::UnionShape.new(name: 'PreProcessingTrace')
     PromptSessionAttributesMap = Shapes::MapShape.new(name: 'PromptSessionAttributesMap')
+    PromptTemplate = Shapes::StructureShape.new(name: 'PromptTemplate')
     PromptText = Shapes::StringShape.new(name: 'PromptText')
     PromptType = Shapes::StringShape.new(name: 'PromptType')
     Rationale = Shapes::StructureShape.new(name: 'Rationale')
@@ -113,6 +115,7 @@ module Aws::BedrockAgentRuntime
     StopSequences = Shapes::ListShape.new(name: 'StopSequences')
     String = Shapes::StringShape.new(name: 'String')
     Temperature = Shapes::FloatShape.new(name: 'Temperature')
+    TextPromptTemplate = Shapes::StringShape.new(name: 'TextPromptTemplate')
     TextResponsePart = Shapes::StructureShape.new(name: 'TextResponsePart')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TopK = Shapes::IntegerShape.new(name: 'TopK')
@@ -171,6 +174,9 @@ module Aws::BedrockAgentRuntime
     GeneratedResponsePart.add_member(:text_response_part, Shapes::ShapeRef.new(shape: TextResponsePart, location_name: "textResponsePart"))
     GeneratedResponsePart.struct_class = Types::GeneratedResponsePart
 
+    GenerationConfiguration.add_member(:prompt_template, Shapes::ShapeRef.new(shape: PromptTemplate, location_name: "promptTemplate"))
+    GenerationConfiguration.struct_class = Types::GenerationConfiguration
+
     InferenceConfiguration.add_member(:maximum_length, Shapes::ShapeRef.new(shape: MaximumLength, location_name: "maximumLength"))
     InferenceConfiguration.add_member(:stop_sequences, Shapes::ShapeRef.new(shape: StopSequences, location_name: "stopSequences"))
     InferenceConfiguration.add_member(:temperature, Shapes::ShapeRef.new(shape: Temperature, location_name: "temperature"))
@@ -223,6 +229,7 @@ module Aws::BedrockAgentRuntime
 
     KnowledgeBaseRetrievalResults.member = Shapes::ShapeRef.new(shape: KnowledgeBaseRetrievalResult)
 
+    KnowledgeBaseRetrieveAndGenerateConfiguration.add_member(:generation_configuration, Shapes::ShapeRef.new(shape: GenerationConfiguration, location_name: "generationConfiguration"))
     KnowledgeBaseRetrieveAndGenerateConfiguration.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseId, required: true, location_name: "knowledgeBaseId"))
     KnowledgeBaseRetrieveAndGenerateConfiguration.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockModelArn, required: true, location_name: "modelArn"))
     KnowledgeBaseRetrieveAndGenerateConfiguration.add_member(:retrieval_configuration, Shapes::ShapeRef.new(shape: KnowledgeBaseRetrievalConfiguration, location_name: "retrievalConfiguration"))
@@ -305,6 +312,9 @@ module Aws::BedrockAgentRuntime
 
     PromptSessionAttributesMap.key = Shapes::ShapeRef.new(shape: String)
     PromptSessionAttributesMap.value = Shapes::ShapeRef.new(shape: String)
+
+    PromptTemplate.add_member(:text_prompt_template, Shapes::ShapeRef.new(shape: TextPromptTemplate, location_name: "textPromptTemplate"))
+    PromptTemplate.struct_class = Types::PromptTemplate
 
     Rationale.add_member(:text, Shapes::ShapeRef.new(shape: RationaleString, location_name: "text"))
     Rationale.add_member(:trace_id, Shapes::ShapeRef.new(shape: TraceId, location_name: "traceId"))

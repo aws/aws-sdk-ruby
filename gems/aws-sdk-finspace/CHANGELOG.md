@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2024-03-26)
+------------------
+
+* Feature - Add new operation delete-kx-cluster-node and add status parameter to list-kx-cluster-node operation.
+
 1.30.0 (2024-03-19)
 ------------------
 

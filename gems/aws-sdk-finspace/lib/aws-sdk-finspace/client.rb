@@ -491,7 +491,7 @@ module Aws::Finspace
     # @option params [required, Array<Types::ChangeRequest>] :change_requests
     #   A list of change request objects that are run in order. A change
     #   request object consists of `changeType` , `s3Path`, and `dbPath`. A
-    #   changeType can has the following values:
+    #   changeType can have the following values:
     #
     #   * PUT – Adds or updates files in a database.
     #
@@ -1479,6 +1479,36 @@ module Aws::Finspace
       req.send_request(options)
     end
 
+    # Deletes the specified nodes from a cluster.
+    #
+    # @option params [required, String] :environment_id
+    #   A unique identifier for the kdb environment.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the cluster, for which you want to delete the nodes.
+    #
+    # @option params [required, String] :node_id
+    #   A unique identifier for the node that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_kx_cluster_node({
+    #     environment_id: "KxEnvironmentId", # required
+    #     cluster_name: "KxClusterName", # required
+    #     node_id: "KxClusterNodeIdString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxClusterNode AWS API Documentation
+    #
+    # @overload delete_kx_cluster_node(params = {})
+    # @param [Hash] params ({})
+    def delete_kx_cluster_node(params = {}, options = {})
+      req = build_request(:delete_kx_cluster_node, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified database and all of its associated data. This
     # action is irreversible. You must copy any data out of the database
     # before deleting it if the data is to be retained.
@@ -2444,6 +2474,7 @@ module Aws::Finspace
     #   resp.nodes[0].node_id #=> String
     #   resp.nodes[0].availability_zone_id #=> String
     #   resp.nodes[0].launch_time #=> Time
+    #   resp.nodes[0].status #=> String, one of "RUNNING", "PROVISIONING"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListKxClusterNodes AWS API Documentation
@@ -3691,7 +3722,7 @@ module Aws::Finspace
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-finspace'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

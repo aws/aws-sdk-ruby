@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2024-03-26)
+------------------
+
+* Feature - Adds support for backfill of cost allocation tags, with new StartCostAllocationTagBackfill and ListCostAllocationTagBackfillHistory API.
+
 1.96.0 (2024-02-28)
 ------------------
 

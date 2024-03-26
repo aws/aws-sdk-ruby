@@ -293,7 +293,7 @@ module Aws::Finspace
     # @!attribute [rw] change_requests
     #   A list of change request objects that are run in order. A change
     #   request object consists of `changeType` , `s3Path`, and `dbPath`. A
-    #   changeType can has the following values:
+    #   changeType can have the following values:
     #
     #   * PUT – Adds or updates files in a database.
     #
@@ -1533,6 +1533,32 @@ module Aws::Finspace
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteEnvironmentResponse AWS API Documentation
     #
     class DeleteEnvironmentResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] environment_id
+    #   A unique identifier for the kdb environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster, for which you want to delete the nodes.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   A unique identifier for the node that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxClusterNodeRequest AWS API Documentation
+    #
+    class DeleteKxClusterNodeRequest < Struct.new(
+      :environment_id,
+      :cluster_name,
+      :node_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteKxClusterNodeResponse AWS API Documentation
+    #
+    class DeleteKxClusterNodeResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] environment_id
     #   A unique identifier for the kdb environment.
@@ -3679,7 +3705,10 @@ module Aws::Finspace
     #   @return [String]
     #
     # @!attribute [rw] size
-    #   The size of the network attached storage.
+    #   The size of the network attached storage. For storage type
+    #   `SSD_1000` and `SSD_250` you can select the minimum size as 1200 GB
+    #   or increments of 2400 GB. For storage type `HDD_12` you can select
+    #   the minimum size as 6000 GB or increments of 6000 GB.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxNAS1Configuration AWS API Documentation
@@ -3708,12 +3737,21 @@ module Aws::Finspace
     #   November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
     #   @return [Time]
     #
+    # @!attribute [rw] status
+    #   Specifies the status of the cluster nodes.
+    #
+    #   * `RUNNING` – The node is actively serving.
+    #
+    #   * `PROVISIONING` – The node is being prepared.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/KxNode AWS API Documentation
     #
     class KxNode < Struct.new(
       :node_id,
       :availability_zone_id,
-      :launch_time)
+      :launch_time,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

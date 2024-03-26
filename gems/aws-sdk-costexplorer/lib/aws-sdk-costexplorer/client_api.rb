@@ -32,9 +32,13 @@ module Aws::CostExplorer
     AttributeType = Shapes::StringShape.new(name: 'AttributeType')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     Attributes = Shapes::MapShape.new(name: 'Attributes')
+    BackfillLimitExceededException = Shapes::StructureShape.new(name: 'BackfillLimitExceededException')
     BillExpirationException = Shapes::StructureShape.new(name: 'BillExpirationException')
     Context = Shapes::StringShape.new(name: 'Context')
     CostAllocationTag = Shapes::StructureShape.new(name: 'CostAllocationTag')
+    CostAllocationTagBackfillRequest = Shapes::StructureShape.new(name: 'CostAllocationTagBackfillRequest')
+    CostAllocationTagBackfillRequestList = Shapes::ListShape.new(name: 'CostAllocationTagBackfillRequestList')
+    CostAllocationTagBackfillStatus = Shapes::StringShape.new(name: 'CostAllocationTagBackfillStatus')
     CostAllocationTagKeyList = Shapes::ListShape.new(name: 'CostAllocationTagKeyList')
     CostAllocationTagList = Shapes::ListShape.new(name: 'CostAllocationTagList')
     CostAllocationTagStatus = Shapes::StringShape.new(name: 'CostAllocationTagStatus')
@@ -175,6 +179,8 @@ module Aws::CostExplorer
     Key = Shapes::StringShape.new(name: 'Key')
     Keys = Shapes::ListShape.new(name: 'Keys')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListCostAllocationTagBackfillHistoryRequest = Shapes::StructureShape.new(name: 'ListCostAllocationTagBackfillHistoryRequest')
+    ListCostAllocationTagBackfillHistoryResponse = Shapes::StructureShape.new(name: 'ListCostAllocationTagBackfillHistoryResponse')
     ListCostAllocationTagsRequest = Shapes::StructureShape.new(name: 'ListCostAllocationTagsRequest')
     ListCostAllocationTagsResponse = Shapes::StructureShape.new(name: 'ListCostAllocationTagsResponse')
     ListCostCategoryDefinitionsRequest = Shapes::StructureShape.new(name: 'ListCostCategoryDefinitionsRequest')
@@ -292,6 +298,8 @@ module Aws::CostExplorer
     SortDefinitionKey = Shapes::StringShape.new(name: 'SortDefinitionKey')
     SortDefinitions = Shapes::ListShape.new(name: 'SortDefinitions')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    StartCostAllocationTagBackfillRequest = Shapes::StructureShape.new(name: 'StartCostAllocationTagBackfillRequest')
+    StartCostAllocationTagBackfillResponse = Shapes::StructureShape.new(name: 'StartCostAllocationTagBackfillResponse')
     StartSavingsPlansPurchaseRecommendationGenerationRequest = Shapes::StructureShape.new(name: 'StartSavingsPlansPurchaseRecommendationGenerationRequest')
     StartSavingsPlansPurchaseRecommendationGenerationResponse = Shapes::StructureShape.new(name: 'StartSavingsPlansPurchaseRecommendationGenerationResponse')
     Subscriber = Shapes::StructureShape.new(name: 'Subscriber')
@@ -398,6 +406,9 @@ module Aws::CostExplorer
     Attributes.key = Shapes::ShapeRef.new(shape: AttributeType)
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
+    BackfillLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    BackfillLimitExceededException.struct_class = Types::BackfillLimitExceededException
+
     BillExpirationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     BillExpirationException.struct_class = Types::BillExpirationException
 
@@ -407,6 +418,15 @@ module Aws::CostExplorer
     CostAllocationTag.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "LastUpdatedDate"))
     CostAllocationTag.add_member(:last_used_date, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "LastUsedDate"))
     CostAllocationTag.struct_class = Types::CostAllocationTag
+
+    CostAllocationTagBackfillRequest.add_member(:backfill_from, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "BackfillFrom"))
+    CostAllocationTagBackfillRequest.add_member(:requested_at, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "RequestedAt"))
+    CostAllocationTagBackfillRequest.add_member(:completed_at, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "CompletedAt"))
+    CostAllocationTagBackfillRequest.add_member(:backfill_status, Shapes::ShapeRef.new(shape: CostAllocationTagBackfillStatus, location_name: "BackfillStatus"))
+    CostAllocationTagBackfillRequest.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "LastUpdatedAt"))
+    CostAllocationTagBackfillRequest.struct_class = Types::CostAllocationTagBackfillRequest
+
+    CostAllocationTagBackfillRequestList.member = Shapes::ShapeRef.new(shape: CostAllocationTagBackfillRequest)
 
     CostAllocationTagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -979,6 +999,14 @@ module Aws::CostExplorer
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    ListCostAllocationTagBackfillHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
+    ListCostAllocationTagBackfillHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CostAllocationTagsMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListCostAllocationTagBackfillHistoryRequest.struct_class = Types::ListCostAllocationTagBackfillHistoryRequest
+
+    ListCostAllocationTagBackfillHistoryResponse.add_member(:backfill_requests, Shapes::ShapeRef.new(shape: CostAllocationTagBackfillRequestList, location_name: "BackfillRequests"))
+    ListCostAllocationTagBackfillHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
+    ListCostAllocationTagBackfillHistoryResponse.struct_class = Types::ListCostAllocationTagBackfillHistoryResponse
+
     ListCostAllocationTagsRequest.add_member(:status, Shapes::ShapeRef.new(shape: CostAllocationTagStatus, location_name: "Status"))
     ListCostAllocationTagsRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: CostAllocationTagKeyList, location_name: "TagKeys"))
     ListCostAllocationTagsRequest.add_member(:type, Shapes::ShapeRef.new(shape: CostAllocationTagType, location_name: "Type"))
@@ -1369,6 +1397,12 @@ module Aws::CostExplorer
     SortDefinition.struct_class = Types::SortDefinition
 
     SortDefinitions.member = Shapes::ShapeRef.new(shape: SortDefinition)
+
+    StartCostAllocationTagBackfillRequest.add_member(:backfill_from, Shapes::ShapeRef.new(shape: ZonedDateTime, required: true, location_name: "BackfillFrom"))
+    StartCostAllocationTagBackfillRequest.struct_class = Types::StartCostAllocationTagBackfillRequest
+
+    StartCostAllocationTagBackfillResponse.add_member(:backfill_request, Shapes::ShapeRef.new(shape: CostAllocationTagBackfillRequest, location_name: "BackfillRequest"))
+    StartCostAllocationTagBackfillResponse.struct_class = Types::StartCostAllocationTagBackfillResponse
 
     StartSavingsPlansPurchaseRecommendationGenerationRequest.struct_class = Types::StartSavingsPlansPurchaseRecommendationGenerationRequest
 
@@ -1817,6 +1851,22 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: UnresolvableUsageUnitException)
       end)
 
+      api.add_operation(:list_cost_allocation_tag_backfill_history, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCostAllocationTagBackfillHistory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCostAllocationTagBackfillHistoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCostAllocationTagBackfillHistoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_cost_allocation_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListCostAllocationTags"
         o.http_method = "POST"
@@ -1876,6 +1926,16 @@ module Aws::CostExplorer
         o.input = Shapes::ShapeRef.new(shape: ProvideAnomalyFeedbackRequest)
         o.output = Shapes::ShapeRef.new(shape: ProvideAnomalyFeedbackResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:start_cost_allocation_tag_backfill, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartCostAllocationTagBackfill"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartCostAllocationTagBackfillRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartCostAllocationTagBackfillResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: BackfillLimitExceededException)
       end)
 
       api.add_operation(:start_savings_plans_purchase_recommendation_generation, Seahorse::Model::Operation.new.tap do |o|

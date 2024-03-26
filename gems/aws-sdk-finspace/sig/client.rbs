@@ -414,6 +414,17 @@ module Aws
                              ) -> _DeleteKxClusterResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKxClusterResponseSuccess
 
+      interface _DeleteKxClusterNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKxClusterNodeResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Finspace/Client.html#delete_kx_cluster_node-instance_method
+      def delete_kx_cluster_node: (
+                                    environment_id: ::String,
+                                    cluster_name: ::String,
+                                    node_id: ::String
+                                  ) -> _DeleteKxClusterNodeResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteKxClusterNodeResponseSuccess
+
       interface _DeleteKxDatabaseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteKxDatabaseResponse]
       end
